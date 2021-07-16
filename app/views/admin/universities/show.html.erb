@@ -1,0 +1,30 @@
+<% content_for :title, @university %>
+
+<p>
+  <strong>Address:</strong>
+  <%= @university.address %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @university.zipcode %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @university.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @university.country %>
+</p>
+
+<p>
+  <strong>Private:</strong>
+  <%= @university.private %>
+</p>
+
+<% content_for :buttons do %>
+  <%= edit_link @university %>
+<% end %>

@@ -1,0 +1,17 @@
+<%= simple_form_for [:admin, user] do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :email %>
+      <%= f.input :role %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :first_name %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :last_name %>
+    </div>
+  </div>
+  <% content_for :buttons do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

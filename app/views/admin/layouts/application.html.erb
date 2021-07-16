@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= content_for?(:title) ? raw("#{yield(:title)} - Admin - Osuny")
+                                    : 'Admin - Osuny' %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+  	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag 'admin', media: 'all' %>
+    <%= javascript_include_tag 'admin' %>
+    <%= favicon_link_tag 'favicon.ico' %>
+  </head>
+
+  <body data-theme="light" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
+    <div class="wrapper">
+      <%= render 'admin/application/nav' %>
+      <div class="main">
+        <%= render 'admin/application/top' %>
+        <main class="content">
+          <div class="container-fluid p-0">
+            <div class="float-end">
+              <%= yield :buttons %>
+            </div>
+            <h1><%= yield :title %></h1>
+            <%= yield %>
+          </div>
+        </main>
+        <%= render 'admin/application/footer' %>
+      </div>
+    </div>
+  </body>
+</html>

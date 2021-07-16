@@ -1,0 +1,10 @@
+<% content_for :title, Qualiopi.model_name %>
+
+<% @criterions.each do |criterion| %>
+  <h2 class="mt-5"><%= link_to criterion, [:admin, criterion] %></h2>
+  <p><%= criterion.name %></p>
+  <% criterion.indicators.each do |indicator| %>
+    <h3 class="h4"><%= link_to indicator, [:admin, indicator] %></h3>
+    <p><%= indicator.name %></p>
+  <% end %>
+<% end %>

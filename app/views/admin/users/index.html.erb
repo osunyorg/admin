@@ -1,0 +1,31 @@
+<% content_for :title, User.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= User.human_attribute_name('email') %></th>
+      <th><%= User.human_attribute_name('first_name') %></th>
+      <th><%= User.human_attribute_name('last_name') %></th>
+      <th><%= User.human_attribute_name('role') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.email, [:admin, user] %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.role %></td>
+        <td class="text-end">
+          <%= edit_link user %>
+          <%= destroy_link user %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link User %>
+<% end %>

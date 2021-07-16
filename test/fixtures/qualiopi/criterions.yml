@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: qualiopi_criterions
+#
+#  id          :uuid             not null, primary key
+#  description :text
+#  name        :text
+#  number      :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  name: MyText
+  description: MyText
+
+two:
+  number: 1
+  name: MyText
+  description: MyText

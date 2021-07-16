@@ -1,0 +1,10 @@
+<% content_for :title, @criterion %>
+
+<p class="lead">
+  <%= @criterion.name %>
+</p>
+
+<% @criterion.indicators.each do |indicator| %>
+  <h2><%= link_to indicator, [:admin, indicator] %></h2>
+  <p><%= indicator.name %></p>
+<% end %>
