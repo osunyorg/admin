@@ -67,6 +67,6 @@ class Admin::UniversitiesController < Admin::ApplicationController
   end
 
   def university_params
-    params.require(:university).permit(:name, :address, :zipcode, :city, :country, :private)
+    params.require(:university).permit(:name, :address, :zipcode, :city, :country, :private, :identifier)
   end
 end

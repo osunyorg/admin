@@ -6,6 +6,7 @@
 #  address    :string
 #  city       :string
 #  country    :string
+#  identifier :string
 #  name       :string
 #  private    :boolean
 #  zipcode    :string

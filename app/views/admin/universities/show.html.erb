@@ -1,6 +1,10 @@
 <% content_for :title, @university %>
 
 <p>
+  <%= link_to @university.domain_url, @university.domain_url, target: :_blank %>
+</p>
+
+<p>
   <strong>Address:</strong>
   <%= @university.address %>
 </p>

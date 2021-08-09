@@ -6,6 +6,7 @@
 #  address    :string
 #  city       :string
 #  country    :string
+#  identifier :string
 #  name       :string
 #  private    :boolean
 #  zipcode    :string
@@ -15,6 +16,8 @@
 #
 class University < ApplicationRecord
   validates_presence_of :name
+
+  include WithIdentifier
 
   def to_s
     "#{name}"

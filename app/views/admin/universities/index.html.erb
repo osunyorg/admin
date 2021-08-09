@@ -4,10 +4,7 @@
   <thead>
     <tr>
       <th><%= University.human_attribute_name('name') %></th>
-      <th><%= University.human_attribute_name('address') %></th>
-      <th><%= University.human_attribute_name('zipcode') %></th>
-      <th><%= University.human_attribute_name('city') %></th>
-      <th><%= University.human_attribute_name('country') %></th>
+      <th><%= University.human_attribute_name('url') %></th>
       <th><%= University.human_attribute_name('private') %></th>
       <th></th>
     </tr>
@@ -16,10 +13,7 @@
     <% @universities.each do |university| %>
       <tr>
         <td><%= link_to university, [:admin, university] %></td>
-        <td><%= university.address %></td>
-        <td><%= university.zipcode %></td>
-        <td><%= university.city %></td>
-        <td><%= university.country %></td>
+        <td><%= link_to university.domain_url, university.domain_url, target: :_blank %></td>
         <td><%= university.private %></td>
         <td class="text-end">
           <%= edit_link university %>

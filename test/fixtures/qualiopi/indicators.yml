@@ -21,7 +21,6 @@
 #
 #  fk_rails_...  (criterion_id => qualiopi_criterions.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   criterion: one
