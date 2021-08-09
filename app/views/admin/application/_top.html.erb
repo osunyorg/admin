@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light navbar-bg">
+<nav id="topbar" class="navbar navbar-expand navbar-light navbar-bg">
   <div class="navbar-collapse collapse">
     <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
     <ul class="navbar-nav navbar-align">
@@ -14,11 +14,11 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Settings & Privacy</a>
           <a class="dropdown-item" href="#">Help</a>
-          <a class="dropdown-item" href="#">Sign out</a>
+          <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
         </div>
       </li>
       <li>
-        <a class="nav-link" href="#">
+        <a class="nav-link avatar" href="#">
           <%= image_tag 'avatar.jpg', class: 'avatar img-fluid rounded-circle' %>
         </a>
       </li>
