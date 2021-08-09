@@ -12,34 +12,26 @@ class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
   protected
 
   def make(item)
-    options = item.send :options
-    icon = options[:icon]
-    classes = item.html_options[:class]
-    include_sub_navigation = consider_sub_navigation?(item)
-    container = item.send :container
-    level = container.send :level
-    content = "
-      <li class=\"sidebar-item #{ classes }\">"
-    content += "<a href=\"#{ item.url }\" class=\"sidebar-link#{ ' collapsed' unless item.selected? }\""
-    content += " data-bs-target=\"##{ item.key }\" data-bs-toggle=\"collapse\"" if include_sub_navigation
-    content += ">"
-    content += "<i class=\"fas fa-#{ options[:icon].to_s }\"></i>" if icon
-    content += '<span class="align-middle">' if level == 1
-    content += item.name
-    content += '</span>' if level == 1
-    content += '</a>'
-    content += make_subnavigation(item, level) if include_sub_navigation
-    content += '</li>'
-    content
+    li = "<li class=\"sidebar-item #{ item.html_options[:class] }\">"
+    li += make_a(item)
+    li += make_subnavigation(item) if consider_sub_navigation?(item)
+    li += '</li>'
+    li
   end
 
-  def make_subnavigation(item, level)
-    content = "
-      <ul id=\"#{ item.key }\" class=\"sidebar-dropdown list-unstyled #{item.selected? ? 'show' : 'collapse'}\">"
-    content += render_sub_navigation_for(item)
-    content += '
-      </ul>'
-    content
+  def make_a(item)
+    icon = item.send(:options)[:icon]
+    a = "<a href=\"#{ item.url }\" class=\"sidebar-link#{ item.selected? ? '' : ' collapsed' }\""
+    a += " data-bs-target=\"##{ item.key }\" data-bs-toggle=\"collapse\"" if consider_sub_navigation?(item)
+    a += ">"
+    a += "<i class=\"fas fa-#{ icon }\"></i>" if icon
+    a += "<span class=\"align-middle\">#{ item.name }</span></a>"
+    a
   end
 
+  def make_subnavigation(item)
+    "<ul id=\"#{ item.key }\" class=\"sidebar-dropdown list-unstyled #{ item.selected? ? 'show' : 'collapse' }\">
+      #{ render_sub_navigation_for item }
+    </ul>"
+  end
 end
