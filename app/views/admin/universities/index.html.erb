@@ -5,7 +5,7 @@
     <tr>
       <th><%= University.human_attribute_name('name') %></th>
       <th><%= University.human_attribute_name('url') %></th>
-      <th><%= University.human_attribute_name('private') %></th>
+      <th><%= University.human_attribute_name('public_or_private') %></th>
       <th></th>
     </tr>
   </thead>
@@ -14,7 +14,7 @@
       <tr>
         <td><%= link_to university, [:admin, university] %></td>
         <td><%= link_to university.domain_url, university.domain_url, target: :_blank %></td>
-        <td><%= university.private %></td>
+        <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
         <td class="text-end">
           <%= edit_link university %>
           <%= destroy_link university %>

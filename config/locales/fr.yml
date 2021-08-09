@@ -1,4 +1,6 @@
 fr:
+  true: Oui
+  false: Non
   activerecord:
     models:
       program:
@@ -51,6 +53,10 @@ fr:
         zipcode: Code postal
         city: Ville
         country: Pays
+        private: Etablissement privé
+        public_or_private: Public/privé
+        public: Public
+        private: Privé
       user:
         email: Email
         first_name: Prénom
