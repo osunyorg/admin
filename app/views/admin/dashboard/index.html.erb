@@ -50,8 +50,8 @@
           <div class="card illustration flex-fill">
             <div class="card-body p-0 d-flex flex-fill">
               <div class="p-3">
-                <h4>Bonjour
-                  <%= current_user.first_name %>&nbsp;!</h4>
+                <h4>Bonjour <%= current_user.first_name %>&nbsp;!</h4>
+                <p><%= current_university %></p>
               </div>
             </div>
           </div>
@@ -2656,6 +2656,11 @@
           maintainAspectRatio: false,
           legend: {
             display: false
+          },
+          scale: {
+            gridLines: {
+              color: "rgba(0, 123, 255, 0.2)"
+            }
           }
         }
       });

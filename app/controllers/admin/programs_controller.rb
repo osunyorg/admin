@@ -2,6 +2,7 @@ class Admin::ProgramsController < Admin::ApplicationController
   load_and_authorize_resource
 
   def index
+    @programs = current_university.programs
     breadcrumb
   end
 

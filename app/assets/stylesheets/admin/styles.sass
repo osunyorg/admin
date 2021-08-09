@@ -4,8 +4,19 @@ h1
 .sidebar-nav .fas
   min-width: 20px
 
+body[data-theme=dark]
+    .sidebar-content
+        background-color: black
+        background-image: asset-url('sun.svg')
+        background-repeat: no-repeat
+        background-position-x: center
+        background-position-y: -420px
+        background-size: 400%
+    .sidebar-brand
+        padding: 90px 80px 120px
+
 #topbar
     padding-left: 2.5rem
     padding-right: 2.5rem
-    .nav-link.avatar
+    .nav-link--last
         padding-right: 0

@@ -19,6 +19,8 @@ class University < ApplicationRecord
 
   include WithIdentifier
 
+  has_many :programs
+
   def to_s
     "#{name}"
   end
