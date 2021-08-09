@@ -11,8 +11,12 @@
   </head>
   <body>
     <nav>
-      <%= current_university %>
+      <div class="container-fluid">
+        <%= current_university %>
+      </div>
     </nav>
-    <%= yield %>
+    <main class="container-fluid">
+      <%= yield %>
+    </main>
   </body>
 </html>
