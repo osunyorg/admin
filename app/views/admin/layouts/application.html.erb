@@ -3,13 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><%= content_for?(:title) ? raw("#{yield(:title)} - Admin - Osuny")
-                                    : 'Admin - Osuny' %></title>
+    <title><%= content_for?(:title) ? raw("#{yield(:title)} | Osuny")
+                                    : 'Osuny' %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
   	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag 'admin', media: 'all' %>
-    <%= javascript_include_tag 'admin' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
 
@@ -30,5 +29,6 @@
         <%= render 'admin/application/footer' %>
       </div>
     </div>
+    <%= javascript_include_tag 'admin' %>
   </body>
 </html>
