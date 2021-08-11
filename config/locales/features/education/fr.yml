@@ -43,6 +43,7 @@ fr:
         proof: Éléments de preuve
         requirement: Obligations spécifiques
         non_conformity: Non-conformité
+        glossary: Glossaire
   enums:
     features/education/program:
       level:

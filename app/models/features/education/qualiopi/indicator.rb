@@ -3,6 +3,7 @@
 # Table name: features_education_qualiopi_indicators
 #
 #  id             :uuid             not null, primary key
+#  glossary       :text
 #  level_expected :text
 #  name           :text
 #  non_conformity :text
@@ -23,6 +24,8 @@
 #
 class Features::Education::Qualiopi::Indicator < ApplicationRecord
   belongs_to :criterion
+
+  validates :number, uniqueness: true
 
   def to_s
     "Indicateur #{number}"

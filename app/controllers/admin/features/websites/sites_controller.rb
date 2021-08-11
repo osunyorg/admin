@@ -20,37 +20,26 @@ class Admin::Features::Websites::SitesController < Admin::Features::Websites::Ap
 
   def create
     @site.university = current_university
-    respond_to do |format|
-      if @site.save
-        format.html { redirect_to [:admin, @site], notice: "Site was successfully created." }
-        format.json { render :show, status: :created, location: [:admin, @site] }
-      else
-        breadcrumb
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @site.errors, status: :unprocessable_entity }
-      end
+    if @site.save
+      redirect_to [:admin, @site], notice: "Site was successfully created."
+    else
+      breadcrumb
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @site.update(site_params)
-        format.html { redirect_to [:admin, @site], notice: "Site was successfully updated." }
-        format.json { render :show, status: :ok, location: [:admin, @site] }
-      else
-        breadcrumb
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @site.errors, status: :unprocessable_entity }
-      end
+    if @site.update(site_params)
+      redirect_to [:admin, @site], notice: "Site was successfully updated."
+    else
+      breadcrumb
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @site.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_features_websites_sites_url, notice: "Site was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to admin_features_websites_sites_url, notice: "Site was successfully destroyed."
   end
 
   protected
@@ -59,11 +48,8 @@ class Admin::Features::Websites::SitesController < Admin::Features::Websites::Ap
     super
     add_breadcrumb Features::Websites::Site.model_name.human(count: 2), admin_features_websites_sites_path
     if @site
-      if @site.persisted?
-        add_breadcrumb @site, [:admin, @site]
-      else
-        add_breadcrumb 'Créer'
-      end
+      @site.persisted?  ? add_breadcrumb(@site, [:admin, @site])
+                        : add_breadcrumb('Créer')
     end
   end
 

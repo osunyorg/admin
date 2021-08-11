@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_102819) do
+ActiveRecord::Schema.define(version: 2021_08_11_171021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_102819) do
     t.text "non_conformity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "glossary"
     t.index ["criterion_id"], name: "index_features_education_qualiopi_indicators_on_criterion_id"
   end
 

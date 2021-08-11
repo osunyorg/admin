@@ -1,0 +1,40 @@
+<%
+@programs = current_university.features_education_programs
+@checks = [
+  :prerequisites,
+  :objectives,
+  :duration,
+  :pricing,
+  :registration,
+  :pedagogy,
+  :evaluation,
+  :accessibility
+]
+%>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th><%= Features::Education::Program.model_name.human %></th>
+      <% @checks.each do |check| %>
+        <th><%= Features::Education::Program.human_attribute_name(check) %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @programs.each do |program| %>
+      <tr>
+        <td><%= link_to program, [:admin, program] %></td>
+        <% @checks.each do |check| %>
+          <% valid = !program.send(check).blank? %>
+          <th>
+            <% if valid %>
+              <span class="fas fa-check text-success"></span>
+            <% else %>
+              <span class="fas fa-times text-danger"></span>
+            <% end %>
+          </th>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -10,7 +10,9 @@
 #  updated_at  :datetime         not null
 #
 class Features::Education::Qualiopi::Criterion < ApplicationRecord
-  has_many :indicators
+  has_many :indicators, dependent: :destroy
+
+  validates :number, uniqueness: true
 
   def to_s
     "Critère #{number}"

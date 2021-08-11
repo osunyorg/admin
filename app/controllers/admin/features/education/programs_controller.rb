@@ -21,35 +21,24 @@ class Admin::Features::Education::ProgramsController < Admin::Features::Educatio
 
   def create
     @program.university = current_university
-    respond_to do |format|
-      if @program.save
-        format.html { redirect_to [:admin, @program], notice: "Program was successfully created." }
-        format.json { render :show, status: :created, location: @program }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @program.errors, status: :unprocessable_entity }
-      end
+    if @program.save
+      redirect_to [:admin, @program], notice: "Program was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @program.update(program_params)
-        format.html { redirect_to [:admin, @program], notice: "Program was successfully updated." }
-        format.json { render :show, status: :ok, location: @program }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @program.errors, status: :unprocessable_entity }
-      end
+    if @program.update(program_params)
+      redirect_to [:admin, @program], notice: "Program was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @program.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_features_education_programs_url, notice: "Program was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to admin_features_education_programs_url, notice: "Program was successfully destroyed."
   end
 
   protected
@@ -58,11 +47,8 @@ class Admin::Features::Education::ProgramsController < Admin::Features::Educatio
     super
     add_breadcrumb Features::Education::Program.model_name.human(count: 2), admin_features_education_programs_path
     if @program
-      if @program.persisted?
-        add_breadcrumb @program, [:admin, @program]
-      else
-        add_breadcrumb 'Créer'
-      end
+      @program.persisted? ? add_breadcrumb(@program, [:admin, @program])
+                          : add_breadcrumb('Créer')
     end
   end
 

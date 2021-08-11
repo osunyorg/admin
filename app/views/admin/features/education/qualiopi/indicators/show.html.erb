@@ -3,38 +3,20 @@
 <p class="lead"><%= @indicator.name %></p>
 
 <div class="row">
-  <% [:level_expected, :proof, :requirement, :non_conformity].each do |attribute| %>
-    <div class="col-md-3">
-      <h2 class="h4 mt-4"><%= Features::Education::Qualiopi::Indicator.human_attribute_name(attribute) %></h2>
-      <p><%= @indicator.send attribute %></p>
+  <% [:level_expected, :proof, :requirement, :non_conformity, :glossary].each do |attribute| %>
+    <%
+    name = Features::Education::Qualiopi::Indicator.human_attribute_name(attribute)
+    value = @indicator.send attribute
+    next if value.blank?
+    %>
+    <div class="col-md-4">
+      <h2 class="h4 mt-4"><%= name %></h2>
+      <%= simple_format value %>
     </div>
   <% end %>
 </div>
 
-<table class="table mt-5">
-  <thead>
-    <tr>
-      <th><%= Features::Education::Program.model_name.human %></th>
-      <% @checks.each do |check| %>
-        <th><%= Features::Education::Program.human_attribute_name(check) %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @programs.each do |program| %>
-      <tr>
-        <td><%= link_to program, [:admin, program] %></td>
-        <% @checks.each do |check| %>
-          <% valid = !program.send(check).blank? %>
-          <th>
-            <% if valid %>
-              <span class="fas fa-check text-success"></span>
-            <% else %>
-              <span class="fas fa-times text-danger"></span>
-            <% end %>
-          </th>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% begin %>
+<%= render "admin/features/education/qualiopi/evaluations/criterion_#{@indicator.number}" %>
+<% rescue %>
+<% end %>
