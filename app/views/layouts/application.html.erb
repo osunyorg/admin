@@ -10,17 +10,11 @@
     <%= javascript_include_tag 'application' %>
   </head>
   <body>
-    <nav>
-      <div class="container-fluid text-center">
-        <% if current_website %>
-        Site: <%= current_website %><br>
-        <% end %>
-        University: <%= current_university %>
-      </div>
-    </nav>
-    <main class="container-fluid">
+    <%= render 'nav' %>
+    <main class="container">
       <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
       <%= yield %>
     </main>
+    <%= render 'footer' %>
   </body>
 </html>

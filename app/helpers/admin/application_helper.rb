@@ -7,21 +7,21 @@ module Admin::ApplicationHelper
 
   def show_link(object, **options)
     link_to_if  can?(:read, object),
-                options.delete(:label) || 'Voir',
+                options.delete(:label) || t('show'),
                 polymorphic_url_param(object, **options),
                 class: button_classes
   end
 
   def edit_link(object, **options)
     return unless can?(:update, object)
-    link_to options.delete(:label) || 'Modifier',
+    link_to options.delete(:label) || t('edit'),
             polymorphic_url_param(object, prefix: :edit, **options),
             class: button_classes
   end
 
   def destroy_link(object, **options)
     return unless can?(:destroy, object)
-    link_to options.delete(:label) || 'Supprimer',
+    link_to options.delete(:label) || t('delete'),
             polymorphic_url_param(object, **options),
             method: :delete,
             data: { confirm: 'Êtes-vous certain ?' },
@@ -32,7 +32,7 @@ module Admin::ApplicationHelper
     return unless can?(:create, object_class)
     object_class_sym = object_class.name.underscore.gsub('/', '_').to_sym
 
-    link_to options.delete(:label) || 'Créer',
+    link_to options.delete(:label) || t('create'),
             polymorphic_url_param(object_class_sym, prefix: :new, **options),
             class: button_classes
   end

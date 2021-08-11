@@ -2,6 +2,8 @@ fr:
   true: Oui
   false: Non
   dashboard: Tableau de bord
+  show: Voir
+  create: Créer
   edit: Modifier
   delete: Supprimer
   activerecord:
