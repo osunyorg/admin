@@ -12,7 +12,7 @@
     <% @sites.each do |site| %>
       <tr>
         <td><%= link_to site, [:admin, site] %></td>
-        <td><%= site.domain %></td>
+        <td><%= link_to site.domain_url, site.domain_url, target: :_blank %></td>
         <td class="text-end">
           <%= edit_link site %>
           <%= destroy_link site %>

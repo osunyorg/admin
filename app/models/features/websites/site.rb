@@ -20,12 +20,27 @@
 class Features::Websites::Site < ApplicationRecord
   belongs_to :university
 
+  def self.with_host(host)
+    find_by domain: extract_domain_from(host)
+  end
+
+  # Website domain
+  # Production with domain    www.iut.u-bordeaux-montaigne.fr
+  # Production without        www.iut.u-bordeaux-montaigne.fr.websites.osuny.org
+  # Staging                   www.iut.u-bordeaux-montaigne.fr.websites.osuny.dev
+  # Dev                       www.iut.u-bordeaux-montaigne.fr.websites.osuny
+  def self.extract_domain_from(host)
+    host.remove('.websites.osuny.org')
+        .remove('.websites.osuny.dev')
+        .remove('.websites.osuny')
+  end
+
   def domain_url
     case Rails.env
     when 'development'
-      "http://#{domain}.#{university.identifier}.osuny:3000"
+      "http://#{domain}.websites.osuny:3000"
     when 'staging'
-      "https://#{domain}.#{university.identifier}.osuny.dev"
+      "https://#{domain}.websites.osuny.dev"
     when 'production'
       "https://#{domain}"
     end

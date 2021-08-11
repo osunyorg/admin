@@ -1,6 +1,12 @@
 # Benchmark
 
+## Excellent websites
+
 - https://www.harvard.edu/
+- https://www.mit.edu/
+
+## Other websites
+
 - https://www.stanford.edu/
 - https://www.brown.edu/
 - https://www.columbia.edu/
@@ -8,7 +14,6 @@
 - https://www.upenn.edu/
 - https://www.princeton.edu/
 - https://www.yale.edu/
-- https://www.mit.edu/
 - https://www.ox.ac.uk/
 - https://www.cam.ac.uk/
 - https://www.caltech.edu/
