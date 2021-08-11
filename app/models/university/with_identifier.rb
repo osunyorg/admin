@@ -2,7 +2,7 @@ module University::WithIdentifier
   extend ActiveSupport::Concern
 
   included do
-    # todo lower case, numbers, -, _
+    # TODO restrict to lower case, numbers, -, _
     validates :identifier, presence: true, uniqueness: true
   end
 

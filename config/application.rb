@@ -33,6 +33,7 @@ module Osuny
 
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr
+    config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.yml"]
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

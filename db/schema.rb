@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_084645) do
+ActiveRecord::Schema.define(version: 2021_08_11_082802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "features_education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
     t.integer "level"
@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 2021_08_09_084645) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "pricing"
     t.text "contacts"
-    t.index ["university_id"], name: "index_programs_on_university_id"
+    t.index ["university_id"], name: "index_features_education_programs_on_university_id"
   end
 
-  create_table "qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "features_education_qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number"
     t.text "name"
     t.text "description"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_084645) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "qualiopi_indicators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "features_education_qualiopi_indicators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "criterion_id", null: false
     t.integer "number"
     t.text "name"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_084645) do
     t.text "non_conformity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["criterion_id"], name: "index_qualiopi_indicators_on_criterion_id"
+    t.index ["criterion_id"], name: "index_features_education_qualiopi_indicators_on_criterion_id"
   end
 
   create_table "universities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -101,6 +101,6 @@ ActiveRecord::Schema.define(version: 2021_08_09_084645) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "programs", "universities"
-  add_foreign_key "qualiopi_indicators", "qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "features_education_programs", "universities"
+  add_foreign_key "features_education_qualiopi_indicators", "features_education_qualiopi_criterions", column: "criterion_id"
 end

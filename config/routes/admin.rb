@@ -1,12 +1,11 @@
 namespace :admin do
   resources :universities
   resources :users
-  resources :programs
 
-  namespace :qualiopi do
-    resources :criterions
-    resources :indicators
-    root to: 'criterions#index'
+  namespace :features, path: '' do
+    Feature.all.each do |feature|
+      draw "admin/features/#{feature}"
+    end
   end
 
   root to: 'dashboard#index'

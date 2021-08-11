@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   resources :programs, only: [:index, :show]
 
-  root to: 'programs#index'
+  root to: 'home#index'
 end

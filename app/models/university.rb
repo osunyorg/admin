@@ -18,8 +18,7 @@ class University < ApplicationRecord
   validates_presence_of :name
 
   include WithIdentifier
-
-  has_many :programs
+  include WithFeatureEducation
 
   def to_s
     "#{name}"
