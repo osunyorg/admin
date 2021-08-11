@@ -1,0 +1,13 @@
+fr:
+  activemodel:
+    models:
+      features/websites: Sites Web
+  activerecord:
+    models:
+      features/websites/site:
+        one: Site
+        other: Sites
+    attributes:
+      features/websites/site:
+        name: Nom
+        domain: Domaine

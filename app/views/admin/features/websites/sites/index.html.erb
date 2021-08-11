@@ -1,0 +1,27 @@
+<% content_for :title, Features::Websites::Site.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Features::Websites::Site.human_attribute_name('name') %></th>
+      <th><%= Features::Websites::Site.human_attribute_name('domain') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sites.each do |site| %>
+      <tr>
+        <td><%= link_to site, [:admin, site] %></td>
+        <td><%= site.domain %></td>
+        <td class="text-end">
+          <%= edit_link site %>
+          <%= destroy_link site %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link Features::Websites::Site %>
+<% end %>

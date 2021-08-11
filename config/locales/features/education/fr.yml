@@ -1,16 +1,13 @@
 fr:
-  features:
-    education:
-      title: Education
-      qualiopi: Qualiopi
+  activemodel:
+    models:
+      features/education: Éducation
+      features/education/qualiopi: Qualiopi
   activerecord:
     models:
       features/education/program:
         one: Formation
         other: Formations
-      features/education/qualiopi:
-        one: Qualiopi
-        other: Qualiopi
       features/education/qualiopi/criterion:
         one: Critère
         other: Critères

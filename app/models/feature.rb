@@ -1,7 +1,8 @@
 class Feature
   def self.all
     [
-      :education
+      :education,
+      :websites
     ]
   end
 end

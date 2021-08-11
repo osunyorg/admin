@@ -1,0 +1,20 @@
+<%= content_for :title, Features::Websites::Site.model_name.human(count: 2) %>
+
+<h1><%= Features::Websites::Site.model_name.human(count: 2) %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Domain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sites.each do |site| %>
+      <tr>
+        <td><%= site.name %></td>
+        <td><%= link_to site.domain_url, site.domain_url, target: :_blank %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

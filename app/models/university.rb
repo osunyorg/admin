@@ -19,7 +19,7 @@ class University < ApplicationRecord
   scope :ordered, -> { order(:name) }
 
   include WithIdentifier
-  include WithFeatureEducation
+  include WithFeatures
 
   def to_s
     "#{name}"

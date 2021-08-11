@@ -1,0 +1,13 @@
+<%= simple_form_for [:admin, @site] do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :name %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :domain %>
+    </div>
+  </div>
+  <% content_for :buttons do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

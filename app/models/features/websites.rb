@@ -1,8 +1,8 @@
-module Features::Education::Qualiopi
+module Features::Websites
   extend ActiveModel::Naming
   extend ActiveModel::Translation
 
   def self.table_name_prefix
-    'features_education_qualiopi_'
+    'features_websites_'
   end
 end
