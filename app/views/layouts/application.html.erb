@@ -16,6 +16,7 @@
       </div>
     </nav>
     <main class="container-fluid">
+      <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
       <%= yield %>
     </main>
   </body>

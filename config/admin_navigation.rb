@@ -4,7 +4,6 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
   navigation.items do |primary|
     primary.item :dashboard, t('dashboard'), admin_root_path, { icon: 'tachometer-alt' }
-    primary.item :universities, University.model_name.human(count: 2), admin_universities_path, { icon: 'university' }
     primary.item :users, User.model_name.human(count: 2), admin_users_path, { icon: 'user' }
     primary.item :education, I18n.t('features.education.title'), nil, { icon: 'graduation-cap' } do |secondary|
       secondary.item :dashboard, t('dashboard'), admin_features_education_dashboard_path

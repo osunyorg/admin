@@ -1,0 +1,28 @@
+<% content_for :title, University.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= University.human_attribute_name('name') %></th>
+      <th><%= University.human_attribute_name('url') %></th>
+      <th><%= University.human_attribute_name('public_or_private') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @universities.each do |university| %>
+      <tr>
+        <td><%= link_to university, [:adminserver, university] %></td>
+        <td><%= link_to university.domain_url, university.domain_url, target: :_blank %></td>
+        <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
+        <td class="text-end">
+          <%= link_to t('edit'), edit_adminserver_university_path(university), class: button_classes %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link University %>
+<% end %>

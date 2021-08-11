@@ -1,5 +1,5 @@
 class Features::Education::ProgramsController < ApplicationController
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   add_breadcrumb 'Programmes', :features_education_programs_path
 

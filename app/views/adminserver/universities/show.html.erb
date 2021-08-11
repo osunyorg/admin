@@ -1,0 +1,34 @@
+<% content_for :title, @university %>
+
+<p>
+  <%= link_to @university.domain_url, @university.domain_url, target: :_blank %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @university.address %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @university.zipcode %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @university.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @university.country %>
+</p>
+
+<p>
+  <strong>Private:</strong>
+  <%= @university.private %>
+</p>
+
+<% content_for :buttons do %>
+  <%= link_to t('edit'), edit_adminserver_university_path(@university), class: button_classes %>
+<% end %>

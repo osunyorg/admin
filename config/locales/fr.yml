@@ -2,6 +2,8 @@ fr:
   true: Oui
   false: Non
   dashboard: Tableau de bord
+  edit: Modifier
+  delete: Supprimer
   activerecord:
     models:
       university:

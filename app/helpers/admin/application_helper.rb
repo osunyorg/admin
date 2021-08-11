@@ -52,7 +52,7 @@ module Admin::ApplicationHelper
   def submit(form)
     form.button :submit,
                 'Enregistrer',
-                class: button_classes('mt-3'),
+                class: button_classes,
                 form: form.options.dig(:html, :id)
   end
 

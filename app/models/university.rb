@@ -16,6 +16,7 @@
 #
 class University < ApplicationRecord
   validates_presence_of :name
+  scope :ordered, -> { order(:name) }
 
   include WithIdentifier
   include WithFeatureEducation

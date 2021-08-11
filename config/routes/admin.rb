@@ -1,5 +1,4 @@
 namespace :admin do
-  resources :universities
   resources :users
 
   namespace :features, path: '' do
