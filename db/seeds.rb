@@ -159,19 +159,40 @@ Features::Education::Qualiopi::Indicator.create [
     id: '961639a6-4049-45ad-b1e0-f51017926458',
     criterion_id: '4207cf14-b32f-4ee3-a0e9-5a472801e4d3',
     number: 20,
-    name: 'Le prestataire dispose d’un personnel dédié à l’appui à la mobilité nationale et internationale, d’un référent handicap et d’un conseil de perfectionnement.'
+    name: 'Le prestataire dispose d’un personnel dédié à l’appui à la mobilité nationale et internationale, d’un référent handicap et d’un conseil de perfectionnement.',
+    level_expected: 'Le prestataire présente :
+    - la liste des membres du conseil de perfectionnement, le dernier compterendu et/ou procès-verbal ;
+    - la liste des personnes dédiées à la mobilité (nationale et internationale) ;
+    - le nom et le contact du référent handicap.',
+    proof: 'Nom et qualité des membres du conseil de perfectionnement (dernier compte-rendu et/ou procès-verbal, preuve de constitution en cours du conseil de perfectionnement pour le nouveau CFA) ;
+    nom et qualité des personnes dédiées à la mobilité (nationale et internationale) ;
+    nom du référent handicap et procès-verbal de sa nomination.',
+    non_conformity: 'Dans l’échantillon audité, le non-respect (même partiel) de cet indicateur entraîne une non-conformité majeure.'
   },
   {
     id: '5f4cbf53-d044-4783-a7a7-ccaadb6cadb1',
     criterion_id: '79185ec5-4249-48ce-994f-6ca3750139e6',
     number: 21,
-    name: 'Le prestataire détermine, mobilise et évalue les compétences des différents intervenants internes et/ou externes, adaptées aux prestations.'
+    name: 'Le prestataire détermine, mobilise et évalue les compétences des différents intervenants internes et/ou externes, adaptées aux prestations.',
+    level_expected: 'Démontrer que les compétences requises pour réaliser les prestations ont été définies en amont et sont adaptées aux prestations.
+    La maîtrise de ces compétences fait par ailleurs l’objet d’une évaluation par le prestataire.',
+    proof: 'Analyse des besoins de compétences et modalités de recrutement, modalité d’intégration des personnels, entretiens professionnels, curriculum vitae des formateurs, formations initiales et continues des formateurs, sensibilisation des personnels à l’accueil du public en situation de handicap, processus d’accueil des nouveaux professionnels, échanges de pratiques, plan de développement des compétences, pluridisciplinarité des intervenants (par la composition des équipes ou la capacité de mobilisation de personnes ressources).
+
+    NB : Cet indicateur concerne également les sous-traitants du prestataire.',
+    non_conformity: 'Dans l’échantillon audité, le non-respect (même partiel) de cet indicateur entraîne une non-conformité majeure.',
+    requirement: 'VAE : les accompagnateurs sont formés à l’analyse des référentiels métiers et certifications dont ils ont la charge et à la méthodologie d’accompagnement.'
   },
   {
     id: 'd4844442-7492-4417-b172-ea661e069dfc',
     criterion_id: '79185ec5-4249-48ce-994f-6ca3750139e6',
     number: 22,
-    name: 'Le prestataire entretient et développe les compétences de ses salariés, adaptées aux prestations qu’il délivre.'
+    name: 'Le prestataire entretient et développe les compétences de ses salariés, adaptées aux prestations qu’il délivre.',
+    level_expected: 'Démontrer l’existence d’un plan de développement des compétences pour l’ensemble de son personnel.',
+    proof: 'Mobilisation de différents leviers de formation/professionnalisation, qualification des personnels, recherche-action, plan de développement des compétences, entretien professionnel, communauté de pairs, groupe d’analyse et d’échange de pratiques, diffusion de documents d’information sur les possibilités de formation et de qualification tout au long de la vie (CPF, VAE, etc.).
+
+    NB : Les prestataires indépendants démontrent leur démarche de formation continue.',
+    non_conformity: 'Dans l’échantillon audité, le non-respect (même partiel) de cet indicateur entraîne une non-conformité majeure.',
+    requirement: 'Nouveaux entrants : cet indicateur sera audité lors de l’audit de surveillance.'
   },
   {
     id: 'cf646004-4064-4907-8859-daf73c9196bf',
