@@ -12,13 +12,13 @@
 #  zipcode    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  integer_id :bigint
 #
 class University < ApplicationRecord
   validates_presence_of :name
   scope :ordered, -> { order(:name) }
 
   include WithIdentifier
+  include WithUsers
   include WithFeatures
 
   def to_s

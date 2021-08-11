@@ -4,10 +4,8 @@ module University::WithIdentifier
   included do
     # TODO restrict to lower case, numbers, -, _
     validates :identifier, presence: true, uniqueness: true
-  end
 
-  class_methods do
-    def with_host(host)
+    def self.with_host(host)
       find_by(identifier: extract_identifier_from(host)) || first
     end
 
@@ -17,7 +15,7 @@ module University::WithIdentifier
     # Production  osuny.osuny.org   -> osuny
     # Staging     osuny.osuny.dev   -> osuny
     # Dev         osuny.osuny       -> osuny
-    def extract_identifier_from(host)
+    def self.extract_identifier_from(host)
       host.remove('.osuny.org')
           .remove('.osuny.dev')
           .remove('.osuny')

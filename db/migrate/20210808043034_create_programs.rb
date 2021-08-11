@@ -1,6 +1,6 @@
 class CreatePrograms < ActiveRecord::Migration[6.1]
   def change
-    create_table :programs, id: :uuid do |t|
+    create_table :features_education_programs, id: :uuid do |t|
       t.references :university, null: false, foreign_key: true, type: :uuid
       t.string :name
       t.integer :level
@@ -14,6 +14,8 @@ class CreatePrograms < ActiveRecord::Migration[6.1]
       t.text :pedagogy
       t.text :evaluation
       t.text :accessibility
+      t.text :pricing
+      t.text :contacts
 
       t.timestamps
     end

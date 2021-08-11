@@ -25,20 +25,24 @@
 #  unlock_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  integer_id             :bigint
+#  university_id          :uuid             not null
 #
 # Indexes
 #
-#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_unlock_token          (unlock_token) UNIQUE
+#  index_users_on_confirmation_token       (confirmation_token) UNIQUE
+#  index_users_on_email_and_university_id  (email,university_id) UNIQUE
+#  index_users_on_reset_password_token     (reset_password_token) UNIQUE
+#  index_users_on_university_id            (university_id)
+#  index_users_on_unlock_token             (unlock_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (university_id => universities.id)
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  include WithDevise
+
+  belongs_to :university
 
   def to_s
     first_name || last_name ? "#{first_name} #{last_name}"

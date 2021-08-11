@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 2021_08_11_102819) do
     t.text "pedagogy"
     t.text "evaluation"
     t.text "accessibility"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.text "pricing"
     t.text "contacts"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_features_education_programs_on_university_id"
   end
 
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2021_08_11_102819) do
   end
 
   create_table "universities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "integer_id"
     t.string "name"
+    t.string "identifier"
     t.string "address"
     t.string "zipcode"
     t.string "city"
@@ -77,11 +77,10 @@ ActiveRecord::Schema.define(version: 2021_08_11_102819) do
     t.boolean "private"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "identifier"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "integer_id"
+    t.uuid "university_id", null: false
     t.string "first_name"
     t.string "last_name"
     t.integer "role"
@@ -105,12 +104,14 @@ ActiveRecord::Schema.define(version: 2021_08_11_102819) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["university_id"], name: "index_users_on_university_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "features_education_programs", "universities"
   add_foreign_key "features_education_qualiopi_indicators", "features_education_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "features_websites_sites", "universities"
+  add_foreign_key "users", "universities"
 end
