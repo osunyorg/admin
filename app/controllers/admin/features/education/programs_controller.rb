@@ -46,10 +46,7 @@ class Admin::Features::Education::ProgramsController < Admin::Features::Educatio
   def breadcrumb
     super
     add_breadcrumb Features::Education::Program.model_name.human(count: 2), admin_features_education_programs_path
-    if @program
-      @program.persisted? ? add_breadcrumb(@program, [:admin, @program])
-                          : add_breadcrumb('Créer')
-    end
+    breadcrumb_for @program
   end
 
   def program_params

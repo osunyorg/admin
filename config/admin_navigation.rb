@@ -4,14 +4,10 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
   navigation.items do |primary|
-    primary.item :dashboard, t('dashboard'), admin_root_path, { icon: 'tachometer-alt' }
+    primary.item :dashboard, t('dashboard'), admin_root_path, { icon: 'tachometer-alt', highlights_on: /admin$/ }
 
     primary.item :teaching, 'Enseignement', nil, { kind: :header }
-    primary.item :education, 'Formations', nil, { icon: 'graduation-cap' } do |secondary|
-      secondary.item :dashboard, t('dashboard'), admin_features_education_dashboard_path
-      secondary.item :programs, Features::Education::Program.model_name.human(count: 2), admin_features_education_programs_path
-      secondary.item :qualiopi, Features::Education::Qualiopi.model_name.human, admin_features_education_qualiopi_criterions_path
-    end
+    primary.item :education, 'Formations', admin_features_education_programs_path, { icon: 'graduation-cap' }
     primary.item :teaching, 'Ecoles', nil, { icon: 'university' }
     primary.item :teaching, 'Enseignants', nil, { icon: 'user-graduate' }
     primary.item :teaching, 'Feedbacks', nil, { icon: 'comments' }
@@ -24,10 +20,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :teaching, 'Veille', nil, { icon: 'eye' }
 
     primary.item :teaching, 'Communication', nil, { kind: :header }
-    primary.item :websites, Features::Websites.model_name.human, nil, { icon: 'sitemap' } do |secondary|
-      secondary.item :dashboard, t('dashboard'), admin_features_websites_dashboard_path
-      secondary.item :sites, Features::Websites::Site.model_name.human(count: 2), admin_features_websites_sites_path
-    end
+    primary.item :websites, 'Sites Web', admin_features_websites_sites_path, { icon: 'sitemap' }
     primary.item :teaching, 'Lettres d\'information', nil, { icon: 'envelope' }
     primary.item :teaching, 'Alumni', nil, { icon: 'users' }
 

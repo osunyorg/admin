@@ -47,10 +47,7 @@ class Admin::Features::Websites::SitesController < Admin::Features::Websites::Ap
   def breadcrumb
     super
     add_breadcrumb Features::Websites::Site.model_name.human(count: 2), admin_features_websites_sites_path
-    if @site
-      @site.persisted?  ? add_breadcrumb(@site, [:admin, @site])
-                        : add_breadcrumb('Créer')
-    end
+    breadcrumb_for @site
   end
 
   def site_params
