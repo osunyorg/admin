@@ -1,19 +1,20 @@
 <% content_for :title, @indicator %>
 
-<p class="lead"><%= @indicator.name %></p>
-
 <div class="row">
-  <% [:level_expected, :proof, :requirement, :non_conformity, :glossary].each do |attribute| %>
-    <%
-    name = Features::Education::Qualiopi::Indicator.human_attribute_name(attribute)
-    value = @indicator.send attribute
-    next if value.blank?
-    %>
-    <div class="col-md-4">
-      <h2 class="h4 mt-4"><%= name %></h2>
+  <div class="col-md-5">
+    <p class="lead mt-5"><%= @indicator.name %></p>
+  </div>
+  <div class="offset-md-1 col-md-6">
+    <% [:level_expected, :proof, :requirement, :non_conformity, :glossary].each do |attribute| %>
+      <%
+      name = Features::Education::Qualiopi::Indicator.human_attribute_name(attribute)
+      value = @indicator.send attribute
+      next if value.blank?
+      %>
+      <h2 class="h4 mt-5"><%= name %></h2>
       <%= simple_format value %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <% begin %>
