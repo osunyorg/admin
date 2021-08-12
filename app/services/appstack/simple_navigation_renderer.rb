@@ -17,7 +17,7 @@ class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
   end
 
   def make_item(item)
-    li = "<li class=\"sidebar-item #{ item.html_options[:class] }\">"
+    li = "<li class=\"sidebar-item #{ item.html_options[:class] } #{ ' disabled' unless item.url }\">"
     li += make_a(item)
     li += make_subnavigation(item) if consider_sub_navigation?(item)
     li += '</li>'
