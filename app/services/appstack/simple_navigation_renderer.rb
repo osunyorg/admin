@@ -1,6 +1,5 @@
 class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
   def render(item_container)
-    SimpleNavigation.config.selected_class = 'active'
     content = '<ul class="sidebar-nav">'
     item_container.items.each do |item|
       content << make(item)
@@ -12,11 +11,21 @@ class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
   protected
 
   def make(item)
+    kind = item.send(:options)[:kind]
+    kind == :header ? make_header(item)
+                    : make_item(item)
+  end
+
+  def make_item(item)
     li = "<li class=\"sidebar-item #{ item.html_options[:class] }\">"
     li += make_a(item)
     li += make_subnavigation(item) if consider_sub_navigation?(item)
     li += '</li>'
     li
+  end
+
+  def make_header(item)
+    "<li class=\"sidebar-header\">#{ item.name }</li>"
   end
 
   def make_a(item)
