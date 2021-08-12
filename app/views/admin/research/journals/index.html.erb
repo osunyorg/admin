@@ -1,0 +1,26 @@
+<% content_for :title, Research::Journal.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @journals.each do |journal| %>
+      <tr>
+        <td><%= link_to journal, [:admin, journal] %></td>
+        <td class="text-end">
+          <%= edit_link journal %>
+          <%= destroy_link journal %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link Research::Journal %>
+<% end %>

@@ -7,5 +7,9 @@ namespace :admin do
     end
   end
 
+  namespace :research do
+    resources :journals
+  end
+
   root to: 'dashboard#index'
 end

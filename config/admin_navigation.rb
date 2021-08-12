@@ -7,17 +7,17 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :dashboard, t('dashboard'), admin_root_path, { icon: 'tachometer-alt', highlights_on: /admin$/ }
 
     primary.item :teaching, 'Enseignement', nil, { kind: :header }
-    primary.item :education, 'Formations', admin_features_education_programs_path, { icon: 'graduation-cap' }
-    primary.item :teaching, 'Ecoles', nil, { icon: 'university' }
     primary.item :teaching, 'Enseignants', nil, { icon: 'user-graduate' }
-    primary.item :teaching, 'Feedbacks', nil, { icon: 'comments' }
+    primary.item :teaching, 'Ecoles', nil, { icon: 'university' }
+    primary.item :education, 'Formations', admin_features_education_programs_path, { icon: 'graduation-cap' }
     primary.item :teaching, 'Ressources éducatives', nil, { icon: 'laptop' }
+    primary.item :teaching, 'Feedbacks', nil, { icon: 'comments' }
 
     primary.item :teaching, 'Recherche', nil, { kind: :header }
-    primary.item :teaching, 'Laboratoires', nil, { icon: 'flask' }
     primary.item :teaching, 'Chercheurs', nil, { icon: 'microscope' }
-    primary.item :teaching, 'Journaux', nil, { icon: 'newspaper' }
+    primary.item :teaching, 'Laboratoires', nil, { icon: 'flask' }
     primary.item :teaching, 'Veille', nil, { icon: 'eye' }
+    primary.item :journals, Research::Journal.model_name.human(count: 2), admin_research_journals_path, { icon: 'newspaper' }
 
     primary.item :teaching, 'Communication', nil, { kind: :header }
     primary.item :websites, 'Sites Web', admin_features_websites_sites_path, { icon: 'sitemap' }

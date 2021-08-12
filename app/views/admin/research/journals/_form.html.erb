@@ -1,0 +1,13 @@
+<%= simple_form_for [:admin, journal] do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :title %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :description %>
+    </div>
+  </div>
+  <% content_for :buttons do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

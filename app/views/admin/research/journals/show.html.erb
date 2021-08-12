@@ -1,0 +1,9 @@
+<% content_for :title, @journal %>
+
+<p>
+  <%= @journal.description %>
+</p>
+
+<% content_for :buttons do %>
+  <%= edit_link @journal %>
+<% end %>

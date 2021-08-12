@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :research do
+    resources :journals, only: [:index, :show]
+  end
+
   root to: 'home#index'
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_171021) do
+ActiveRecord::Schema.define(version: 2021_08_12_085608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -68,6 +68,15 @@ ActiveRecord::Schema.define(version: 2021_08_11_171021) do
     t.index ["university_id"], name: "index_features_websites_sites_on_university_id"
   end
 
+  create_table "research_journals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_research_journals_on_university_id"
+  end
+
   create_table "universities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "identifier"
@@ -114,5 +123,6 @@ ActiveRecord::Schema.define(version: 2021_08_11_171021) do
   add_foreign_key "features_education_programs", "universities"
   add_foreign_key "features_education_qualiopi_indicators", "features_education_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "features_websites_sites", "universities"
+  add_foreign_key "research_journals", "universities"
   add_foreign_key "users", "universities"
 end

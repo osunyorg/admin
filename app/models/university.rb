@@ -20,6 +20,7 @@ class University < ApplicationRecord
   include WithIdentifier
   include WithUsers
   include WithFeatures
+  include WithResearch
 
   def to_s
     "#{name}"
