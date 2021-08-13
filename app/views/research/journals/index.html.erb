@@ -10,7 +10,7 @@
       <%= link_to 'Lire', journal, class: 'btn btn-primary stretched-link' %>
     </div>
     <div class="offset-md-1 col-md-3">
-      <%= render journal.volumes.first, journal: journal if journal.volumes.any? %>
+      <%= render journal.volumes.first if journal.volumes.any? %>
     </div>
   </div>
 <% end %>
