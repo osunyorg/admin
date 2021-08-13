@@ -24,8 +24,9 @@
 class Research::Journal::Volume < ApplicationRecord
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
+  has_many :articles, foreign_key: :research_journal_volume_id
 
   def to_s
-    "##{number} #{title}"
+    "##{ number } #{ title }"
   end
 end

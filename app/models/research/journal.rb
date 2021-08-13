@@ -20,6 +20,7 @@
 class Research::Journal < ApplicationRecord
   belongs_to :university
   has_many :volumes, foreign_key: :research_journal_id
+  has_many :articles, foreign_key: :research_journal_id
 
   def to_s
     "#{title}"

@@ -7,6 +7,7 @@
   </div>
 </div>
 
+<h2><%= Research::Journal::Volume.model_name.human(count: 2) %></h2>
 <div class="row">
   <% @journal.volumes.each do |volume| %>
     <div class="col-md-3">
@@ -14,3 +15,14 @@
     </div>
   <% end %>
 </div>
+
+<h2><%= Research::Journal::Article.model_name.human(count: 2) %></h2>
+<table class="table">
+  <tbody>
+    <% @journal.articles.each do |article| %>
+      <tr>
+        <td><%= link_to article, research_journal_article_path(journal_id: @journal.id, id: article.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

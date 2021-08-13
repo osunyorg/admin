@@ -9,9 +9,9 @@ class Admin::ApplicationController < ApplicationController
     add_breadcrumb 'Tableau de bord', :admin_root_path
   end
 
-  def breadcrumb_for(object)
+  def breadcrumb_for(object, **options)
     return unless object
-    object.persisted? ? add_breadcrumb(object, [:admin, object])
+    object.persisted? ? add_breadcrumb(object, [:admin, object, options])
                       : add_breadcrumb('Créer')
   end
 end

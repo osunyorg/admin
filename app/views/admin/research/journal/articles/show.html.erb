@@ -1,0 +1,12 @@
+<% content_for :title, @article %>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @article.published_at&.to_date %>
+</p>
+
+<%= @article.text %>
+
+<% content_for :buttons do %>
+  <%= edit_link @article %>
+<% end %>

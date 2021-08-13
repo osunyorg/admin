@@ -11,11 +11,11 @@
   <tbody>
     <% @volumes.each do |volume| %>
       <tr>
-        <td><%= link_to volume, [:admin, volume] %></td>
+        <td><%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume) %></td>
         <td><%= volume.published_at %></td>
         <td class="text-end">
-          <%= edit_link volume %>
-          <%= destroy_link volume %>
+          <%= edit_link volume, { journal_id: @journal.id } %>
+          <%#= destroy_link volume, journal_id: @journal.id %>
         </td>
       </tr>
     <% end %>

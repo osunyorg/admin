@@ -5,16 +5,16 @@
 <h2 class="mt-5"><%= Research::Journal::Volume.model_name.human(count: 2) %></h2>
 
 <%= link_to t('create'),
-            new_admin_research_journal_volume_path,
+            new_admin_research_journal_volume_path(journal_id: @journal),
             class: button_classes %>
 
 <%= link_to 'Tous les volumes',
-            admin_research_journal_volumes_path %>
+            admin_research_journal_volumes_path(journal_id: @journal) %>
 
 <div class="row">
   <% @journal.volumes.each do |volume| %>
     <div class="col-md-3 mt-4">
-      <%= link_to volume, [:admin, volume] %>
+      <%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume) %>
     </div>
   <% end %>
 </div>

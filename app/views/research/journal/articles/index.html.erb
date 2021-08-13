@@ -1,14 +1,7 @@
-<% content_for :title, @volume %>
+<% content_for :title, Research::Journal::Article.model_name.human(count: 2) %>
 
-<h1><%= @volume.title %></h1>
+<h1><%= Research::Journal::Article.model_name.human(count: 2) %></h1>
 
-<p>#<%= @volume.number %></p>
-
-<p>
-  <%= @volume.published_at&.to_date %>
-</p>
-
-<h2><%= Research::Journal::Article.model_name.human(count: 2) %></h2>
 <table class="table">
   <tbody>
     <% @articles.each do |article| %>

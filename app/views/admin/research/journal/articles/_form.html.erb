@@ -1,0 +1,15 @@
+<%= simple_form_for [:admin, article] do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :title %>
+      <%= f.association :volume, collection: @journal.volumes %>
+      <%= f.input :published_at, html5: true %>
+    </div>
+    <div class="col-md-8">
+      <%= f.input :text, input_html: { rows: 100 } %>
+    </div>
+  </div>
+  <% content_for :buttons do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

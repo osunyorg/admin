@@ -5,12 +5,12 @@ class Admin::Research::Journal::ApplicationController < Admin::Research::Applica
 
   def breadcrumb
     super
-    add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path
-    breadcrumb_for @journal
+    add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path(journal_id: nil)
+    breadcrumb_for @journal, journal_id: nil
   end
 
   def default_url_options
-    return unless params.has_key? :journal_id
+    return {} unless params.has_key? :journal_id
     {
       journal_id: params[:journal_id]
     }
