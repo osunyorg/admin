@@ -1,1 +1,4 @@
-json.array! @research_journal_volumes, partial: "research_journal_volumes/research_journal_volume", as: :research_journal_volume
+json.array! @volumes do |volume|
+  json.extract! volume, :id, :title, :number, :published_at
+  json.url research_journal_volume_url(journal_id: volume.journal, id: volume, format: :json)
+end
