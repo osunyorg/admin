@@ -15,6 +15,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
 
   def edit
     breadcrumb
+    add_breadcrumb t('edit')
   end
 
   def create

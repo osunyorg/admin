@@ -16,7 +16,7 @@ class Admin::Features::Education::ProgramsController < Admin::Features::Educatio
 
   def edit
     breadcrumb
-    add_breadcrumb 'Modifier'
+    add_breadcrumb t('edit')
   end
 
   def create

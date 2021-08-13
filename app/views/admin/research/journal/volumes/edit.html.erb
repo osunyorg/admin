@@ -1,6 +1,3 @@
-<h1>Editing Research Journal Volume</h1>
+<% content_for :title, @volume %>
 
-<%= render 'form', research_journal_volume: @research_journal_volume %>
-
-<%= link_to 'Show', @research_journal_volume %> |
-<%= link_to 'Back', research_journal_volumes_path %>
+<%= render 'form', volume: @volume %>

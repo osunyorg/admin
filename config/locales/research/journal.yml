@@ -7,3 +7,6 @@ fr:
       research/journal/volume:
         one: Volume
         other: Volumes
+    attributes:
+      research/journal:
+        title: Titre

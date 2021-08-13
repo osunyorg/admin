@@ -10,6 +10,7 @@ class Admin::Research::Journal::ApplicationController < Admin::Research::Applica
   end
 
   def default_url_options
+    return unless params.has_key? :journal_id
     {
       journal_id: params[:journal_id]
     }

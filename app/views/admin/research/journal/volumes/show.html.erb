@@ -7,5 +7,9 @@
 
 <p>
   <strong>Published at:</strong>
-  <%= @volume.published_at %>
+  <%= @volume.published_at&.to_date %>
 </p>
+
+<% content_for :buttons do %>
+  <%= edit_link @volume %>
+<% end %>

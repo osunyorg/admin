@@ -3,7 +3,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Title</th>
+      <th><%= Research::Journal.human_attribute_name('title') %></th>
+      <th><%= Research::Journal::Volume.model_name.human(count: 2) %></th>
+      <th>Articles</th>
       <th></th>
     </tr>
   </thead>
@@ -12,6 +14,8 @@
     <% @journals.each do |journal| %>
       <tr>
         <td><%= link_to journal, [:admin, journal] %></td>
+        <td><%= link_to "#{journal.volumes.count}", admin_research_journal_volumes_path(journal_id: journal) %></td>
+        <td></td>
         <td class="text-end">
           <%= edit_link journal %>
           <%= destroy_link journal %>
