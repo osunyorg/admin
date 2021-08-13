@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_085608) do
+ActiveRecord::Schema.define(version: 2021_08_12_094327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(version: 2021_08_12_085608) do
     t.index ["university_id"], name: "index_features_websites_sites_on_university_id"
   end
 
+  create_table "research_journal_volumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "research_journal_id", null: false
+    t.string "title"
+    t.integer "number"
+    t.datetime "published_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
+    t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
+  end
+
   create_table "research_journals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "title"
@@ -123,6 +135,8 @@ ActiveRecord::Schema.define(version: 2021_08_12_085608) do
   add_foreign_key "features_education_programs", "universities"
   add_foreign_key "features_education_qualiopi_indicators", "features_education_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "features_websites_sites", "universities"
+  add_foreign_key "research_journal_volumes", "research_journals"
+  add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
   add_foreign_key "users", "universities"
 end

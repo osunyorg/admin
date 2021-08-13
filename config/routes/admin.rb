@@ -8,7 +8,9 @@ namespace :admin do
   end
 
   namespace :research do
-    resources :journals
+    resources :journals do
+      resources :volumes, controller: 'journal/volumes'
+    end
   end
 
   root to: 'dashboard#index'

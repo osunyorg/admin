@@ -4,6 +4,25 @@
   <%= @journal.description %>
 </p>
 
+
+<h2 class="mt-5"><%= Research::Journal::Volume.model_name.human(count: 2) %></h2>
+
+<%= link_to t('create'),
+            new_admin_research_journal_volume_path,
+            class: button_classes %>
+
+<%= link_to 'Tous les volumes',
+            admin_research_journal_volumes_path %>
+
+<div class="row">
+  <% @journal.volumes.each do |volume| %>
+    <div class="col-md-3 mt-4">
+      <%= link_to volume, [:admin, volume] %>
+    </div>
+  <% end %>
+</div>
+
+
 <% content_for :buttons do %>
   <%= edit_link @journal %>
 <% end %>

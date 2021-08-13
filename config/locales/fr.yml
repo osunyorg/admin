@@ -14,9 +14,6 @@ fr:
       user:
         one: Utilisateur
         other: Utilisateurs
-      research/journal:
-        one: Revue scientifique
-        other: Revues scientifiques
     attributes:
       university:
         name: Nom

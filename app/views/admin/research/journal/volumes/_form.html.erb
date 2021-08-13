@@ -1,0 +1,8 @@
+<%= simple_form_for [:admin, volume] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :number %>
+  <%= f.input :published_at, html5: true %>
+  <% content_for :buttons do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

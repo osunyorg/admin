@@ -1,0 +1,9 @@
+fr:
+  activerecord:
+    models:
+      research/journal:
+        one: Revue scientifique
+        other: Revues scientifiques
+      research/journal/volume:
+        one: Volume
+        other: Volumes
