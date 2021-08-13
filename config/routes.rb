@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  namespace :research do
-    namespace :journal do
-      resources :volumes
-    end
-  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -20,7 +15,8 @@ Rails.application.routes.draw do
 
   namespace :research do
     resources :journals, only: [:index, :show] do
-      resources :volumes, only: [:index, :show]
+      resources :volumes, only: [:index, :show], controller: 'journal/volumes'
+      resources :articles, only: [:index, :show], controller: 'journal/articles'
     end
   end
 

@@ -1,31 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, Research::Journal::Volume.model_name.human(count: 2) %>
 
-<h1>Research Journal Volumes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Number</th>
-      <th>Published at</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @research_journal_volumes.each do |research_journal_volume| %>
-      <tr>
-        <td><%= research_journal_volume.title %></td>
-        <td><%= research_journal_volume.number %></td>
-        <td><%= research_journal_volume.published_at %></td>
-        <td><%= link_to 'Show', research_journal_volume %></td>
-        <td><%= link_to 'Edit', edit_research_journal_volume_path(research_journal_volume) %></td>
-        <td><%= link_to 'Destroy', research_journal_volume, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Research Journal Volume', new_research_journal_volume_path %>
+<div class="row">
+  <% @journal.volumes.each do |volume| %>
+    <div class="col-md-3">
+      <%= render volume, journal: @journal %>
+    </div>
+  <% end %>
+</div>

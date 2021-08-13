@@ -6,3 +6,11 @@
     <p><%= @journal.description %></p>
   </div>
 </div>
+
+<div class="row">
+  <% @journal.volumes.each do |volume| %>
+    <div class="col-md-3">
+      <%= render volume, journal: @journal %>
+    </div>
+  <% end %>
+</div>

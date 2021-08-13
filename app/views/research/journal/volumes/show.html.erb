@@ -1,19 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @research_journal_volume.title %>
-</p>
+<% content_for :title, @volume %>
 
 <p>
   <strong>Number:</strong>
-  <%= @research_journal_volume.number %>
+  <%= @volume.number %>
 </p>
 
 <p>
   <strong>Published at:</strong>
-  <%= @research_journal_volume.published_at %>
+  <%= @volume.published_at %>
 </p>
-
-<%= link_to 'Edit', edit_research_journal_volume_path(@research_journal_volume) %> |
-<%= link_to 'Back', research_journal_volumes_path %>

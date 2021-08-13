@@ -1,6 +1,7 @@
 fr:
   true: Oui
   false: Non
+  home: Accueil
   dashboard: Tableau de bord
   show: Voir
   create: Créer

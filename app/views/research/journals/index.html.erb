@@ -2,12 +2,15 @@
 
 <h1><%= Research::Journal.model_name.human(count: 2) %></h1>
 
-<div class="row">
-  <% @journals.each do |journal| %>
-    <div class="col-md-6">
+<% @journals.each do |journal| %>
+  <div class="row">
+    <div class="col-md-8">
       <h2 class="mt-5"><%= journal %></h2>
       <p><%= journal.description %></p>
       <%= link_to 'Lire', journal, class: 'btn btn-primary stretched-link' %>
     </div>
-  <% end %>
-</div>
+    <div class="offset-md-1 col-md-3">
+      <%= render journal.volumes.first, journal: journal if journal.volumes.any? %>
+    </div>
+  </div>
+<% end %>
