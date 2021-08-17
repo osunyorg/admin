@@ -12,11 +12,11 @@
   <tbody>
     <% @universities.each do |university| %>
       <tr>
-        <td><%= link_to university, [:adminserver, university] %></td>
+        <td><%= link_to university, [:server, university] %></td>
         <td><%= link_to university.domain_url, university.domain_url, target: :_blank %></td>
         <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
         <td class="text-end">
-          <%= link_to t('edit'), edit_adminserver_university_path(university), class: button_classes %>
+          <%= link_to t('edit'), edit_server_university_path(university), class: button_classes %>
         </td>
       </tr>
     <% end %>
@@ -24,5 +24,5 @@
 </table>
 
 <% content_for :buttons do %>
-  <%= link_to t('create'), new_adminserver_university_path, class: button_classes %>
+  <%= link_to t('create'), new_server_university_path, class: button_classes %>
 <% end %>

@@ -1,4 +1,4 @@
-class Adminserver::UniversitiesController < Adminserver::ApplicationController
+class Server::UniversitiesController < Server::ApplicationController
   load_and_authorize_resource
 
   def index
@@ -22,8 +22,8 @@ class Adminserver::UniversitiesController < Adminserver::ApplicationController
     breadcrumb
     respond_to do |format|
       if @university.save
-        format.html { redirect_to [:adminserver, @university], notice: "University was successfully created." }
-        format.json { render :show, status: :created, location: [:adminserver, @university] }
+        format.html { redirect_to [:server, @university], notice: "University was successfully created." }
+        format.json { render :show, status: :created, location: [:server, @university] }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @university.errors, status: :unprocessable_entity }
@@ -35,8 +35,8 @@ class Adminserver::UniversitiesController < Adminserver::ApplicationController
     breadcrumb
     respond_to do |format|
       if @university.update(university_params)
-        format.html { redirect_to [:adminserver, @university], notice: "University was successfully updated." }
-        format.json { render :show, status: :ok, location: [:adminserver, @university] }
+        format.html { redirect_to [:server, @university], notice: "University was successfully updated." }
+        format.json { render :show, status: :ok, location: [:server, @university] }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @university.errors, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class Adminserver::UniversitiesController < Adminserver::ApplicationController
   def destroy
     @university.destroy
     respond_to do |format|
-      format.html { redirect_to adminserver_universities_url, notice: "University was successfully destroyed." }
+      format.html { redirect_to server_universities_url, notice: "University was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -56,10 +56,10 @@ class Adminserver::UniversitiesController < Adminserver::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb University.model_name.human(count: 2), adminserver_universities_path
+    add_breadcrumb University.model_name.human(count: 2), server_universities_path
     if @university
       if @university.persisted?
-        add_breadcrumb @university, [:adminserver, @university]
+        add_breadcrumb @university, [:server, @university]
       else
         add_breadcrumb 'Créer'
       end

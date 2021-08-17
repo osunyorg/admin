@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  draw 'adminserver'
   draw 'admin'
+  draw 'server'
 
   namespace :features, path: '' do
     Feature.all.each do |feature|

@@ -16,10 +16,10 @@
     <div class="wrapper">
       <nav id="sidebar" class="sidebar">
         <div class="sidebar-content js-simplebar">
-          <%= link_to admin_root_path, class: 'sidebar-brand' do %>
+          <%= link_to server_root_path, class: 'sidebar-brand' do %>
             <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
           <% end %>
-          <%= render_navigation context: :adminserver %>
+          <%= render_navigation context: :server %>
         </div>
       </nav>
       <div class="main">
