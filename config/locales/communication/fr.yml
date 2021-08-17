@@ -1,0 +1,13 @@
+fr:
+  activemodel:
+    models:
+      communication: Communication
+  activerecord:
+    models:
+      communication/website:
+        one: Site Web
+        other: Sites Web
+    attributes:
+      communication/website:
+        name: Nom
+        domain: Domaine

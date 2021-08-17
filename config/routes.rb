@@ -7,18 +7,10 @@ Rails.application.routes.draw do
   draw 'admin'
   draw 'server'
 
-  namespace :features, path: '' do
-    Feature.all.each do |feature|
-      draw "features/#{feature}"
-    end
-  end
-
-  namespace :research do
-    resources :journals, only: [:index, :show] do
-      resources :volumes, only: [:index, :show], controller: 'journal/volumes'
-      resources :articles, only: [:index, :show], controller: 'journal/articles'
-    end
-  end
+  draw 'education'
+  draw 'research'
+  draw 'communication'
+  draw 'administration'
 
   root to: 'home#index'
 end

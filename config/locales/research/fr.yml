@@ -1,0 +1,18 @@
+fr:
+  activemodel:
+    models:
+      research: Recherche
+  activerecord:
+    models:
+      research/journal:
+        one: Revue scientifique
+        other: Revues scientifiques
+      research/journal/volume:
+        one: Volume
+        other: Volumes
+      research/journal/article:
+        one: Article
+        other: Articles
+    attributes:
+      research/journal:
+        title: Titre

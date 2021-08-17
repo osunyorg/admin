@@ -1,0 +1,44 @@
+fr:
+  activemodel:
+    models:
+      education: Enseignement
+  activerecord:
+    models:
+      education/program:
+        one: Formation
+        other: Formations
+    attributes:
+      education/program:
+        name: Nom
+        level: Niveau
+        capacity: Capacité
+        ects: Crédits ECTS
+        continuing: Formation continue
+        prerequisites: Prérequis
+        objectives: Objectifs
+        duration: Durée
+        registration: Modalités et délais d’accès
+        pricing: Tarifs
+        contacts: Contacts
+        pedagogy: Méthodes mobilisées
+        evaluation: Modalités d’évaluation
+        accessibility: Accessibilité
+  enums:
+    education/program:
+      level:
+        bachelor: Licence / bachelor
+        master: Master
+        doctor: Doctorat
+  simple_form:
+    hints:
+      education/program:
+        capacity: Nombre de places disponibles par promotion
+        ects: European Credits Transfer System
+        prerequisites: Préalables nécessaires ou indispensables pour bénéficier d'une prestation déterminée. L'absence de prérequis doit être mentionnée.
+        objectives: "Énoncé des aptitudes et compétences, visées et évaluables, qui seront acquises au cours de la prestation. Aptitude : capacité d'appliquer un savoir et d'utiliser un savoir-faire pour réaliser des tâches et résoudre des problèmes. Compétences : capacité avérée de mettre en œuvre des savoirs, des savoir-faire et des dispositions personnelles, sociales ou méthodologiques dans des situations de travail ou d’études/formations, pour le développement professionnel ou personnel."
+        duration: La durée peut être exprimée en heure ou en jour. Elle peut également être forfaitisée ou estimée.
+        registration: "Délai d’accès : durée estimée entre la demande du bénéficiaire et le début de la prestation."
+        pricing: Prix de la prestation ou conditions tarifaires.
+        pedagogy: Modalités pédagogiques et/ou moyens et/ou outils utilisés pour mener à bien la prestation dispensée.
+        evaluation: Moyens mobilisés pour me- surer à l'aide de critères objectifs les acquis du bénéficiaire en cours et/ou à la fin de la prestation.
+        accessibility: Conditions d'accueil et d’accès des publics en situation de handicap (locaux, adaptation des moyens de la prestation).

@@ -10,13 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_13_101246) do
+ActiveRecord::Schema.define(version: 2021_08_17_125119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "features_education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "number"
+    t.text "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "administration_qualiopi_indicators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "criterion_id", null: false
+    t.integer "number"
+    t.text "name"
+    t.text "level_expected"
+    t.text "proof"
+    t.text "requirement"
+    t.text "non_conformity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "glossary"
+    t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
+  end
+
+  create_table "communication_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "domain"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_communication_websites_on_university_id"
+  end
+
+  create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
     t.integer "level"
@@ -34,38 +65,7 @@ ActiveRecord::Schema.define(version: 2021_08_13_101246) do
     t.text "contacts"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_features_education_programs_on_university_id"
-  end
-
-  create_table "features_education_qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "number"
-    t.text "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "features_education_qualiopi_indicators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "criterion_id", null: false
-    t.integer "number"
-    t.text "name"
-    t.text "level_expected"
-    t.text "proof"
-    t.text "requirement"
-    t.text "non_conformity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "glossary"
-    t.index ["criterion_id"], name: "index_features_education_qualiopi_indicators_on_criterion_id"
-  end
-
-  create_table "features_websites_sites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "name"
-    t.string "domain"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_features_websites_sites_on_university_id"
+    t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
 
   create_table "research_journal_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -146,9 +146,9 @@ ActiveRecord::Schema.define(version: 2021_08_13_101246) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "features_education_programs", "universities"
-  add_foreign_key "features_education_qualiopi_indicators", "features_education_qualiopi_criterions", column: "criterion_id"
-  add_foreign_key "features_websites_sites", "universities"
+  add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_websites", "universities"
+  add_foreign_key "education_programs", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"

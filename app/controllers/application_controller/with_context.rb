@@ -10,7 +10,7 @@ module ApplicationController::WithContext
     helper_method :current_university
 
     def current_website
-      @current_website ||= Features::Websites::Site.with_host(request.host)
+      @current_website ||= Communication::Website.with_host(request.host)
     end
     helper_method :current_website
 
@@ -20,7 +20,7 @@ module ApplicationController::WithContext
     helper_method :is_university?
 
     def is_website?
-      @is_website ||= !Features::Websites::Site.with_host(request.host).nil?
+      @is_website ||= !Communication::Website.with_host(request.host).nil?
     end
     helper_method :is_website?
 

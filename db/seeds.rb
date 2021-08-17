@@ -1,7 +1,7 @@
 University.create name: 'Osuny', identifier: 'osuny'
 
-Features::Education::Qualiopi::Criterion.destroy_all
-Features::Education::Qualiopi::Criterion.create [
+Administration::Qualiopi::Criterion.destroy_all
+Administration::Qualiopi::Criterion.create [
   {
     id: '0285619c-cfc8-4858-bef6-74adc0aac055',
     number: 1,
@@ -39,8 +39,8 @@ Features::Education::Qualiopi::Criterion.create [
   }
 ]
 
-Features::Education::Qualiopi::Indicator.destroy_all
-Features::Education::Qualiopi::Indicator.create [
+Administration::Qualiopi::Indicator.destroy_all
+Administration::Qualiopi::Indicator.create [
   {
     id: 'f5632d1a-09f1-4cd1-98d1-c6de4b7728d6',
     criterion_id: '0285619c-cfc8-4858-bef6-74adc0aac055',

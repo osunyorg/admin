@@ -1,9 +1,0 @@
-<% content_for :title, @site %>
-
-<p>
-  <%= link_to @site.domain_url, @site.domain_url, target: :_blank %>
-</p>
-
-<% content_for :buttons do %>
-  <%= edit_link @site %>
-<% end %>

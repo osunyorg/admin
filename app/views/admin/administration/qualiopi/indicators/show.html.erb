@@ -1,0 +1,27 @@
+<% content_for :title, @indicator %>
+
+<div class="row">
+  <div class="col-md-5">
+    <p class="lead mt-5"><%= @indicator.name %></p>
+  </div>
+  <div class="offset-md-1 col-md-6">
+    <% [:level_expected, :proof, :requirement, :non_conformity, :glossary].each do |attribute| %>
+      <%
+      name = Administration::Qualiopi::Indicator.human_attribute_name(attribute)
+      value = @indicator.send attribute
+      next if value.blank?
+      %>
+      <h2 class="h4 mt-5"><%= name %></h2>
+      <%= simple_format value %>
+    <% end %>
+  </div>
+</div>
+
+<%
+partial = "admin/administration/qualiopi/evaluations/criterion_#{@indicator.number}"
+# TODO render only if file exists, so we can have errors
+%>
+<% begin %>
+<%= render "admin/administration/qualiopi/evaluations/criterion_#{@indicator.number}" %>
+<% rescue %>
+<% end %>

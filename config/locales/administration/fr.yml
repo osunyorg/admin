@@ -1,0 +1,27 @@
+fr:
+  activemodel:
+    models:
+      administration/qualiopi: Qualiopi
+  activerecord:
+    models:
+      administration/qualiopi/criterion:
+        one: Critère
+        other: Critères
+      administration/qualiopi/indicator:
+        one: Indicateur
+        other: Indicateurs
+    attributes:
+      administration/qualiopi/criterion:
+        number: Numéro
+        name: Nom
+        description: Description
+      administration/qualiopi/indicator:
+        number: Numéro
+        name: Nom
+        criterion: Critère
+        description: Description
+        level_expected: Niveau attendu
+        proof: Éléments de preuve
+        requirement: Obligations spécifiques
+        non_conformity: Non-conformité
+        glossary: Glossaire

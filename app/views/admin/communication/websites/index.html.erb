@@ -1,0 +1,27 @@
+<% content_for :title, Communication::Website.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Communication::Website.human_attribute_name('name') %></th>
+      <th><%= Communication::Website.human_attribute_name('domain') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @websites.each do |website| %>
+      <tr>
+        <td><%= link_to website, [:admin, website] %></td>
+        <td><%= link_to website.domain_url, website.domain_url, target: :_blank %></td>
+        <td class="text-end">
+          <%= edit_link website %>
+          <%= destroy_link website %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link Communication::Website %>
+<% end %>

@@ -1,0 +1,27 @@
+<% content_for :title, Education::Program.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Education::Program.human_attribute_name('name') %></th>
+      <th><%= Education::Program.human_attribute_name('level') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @programs.each do |program| %>
+      <tr>
+        <td><%= link_to program, [:admin, program] %></td>
+        <td><%= program.level %></td>
+        <td class="text-end">
+          <%= edit_link program %>
+          <%= destroy_link program %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link Education::Program %>
+<% end %>

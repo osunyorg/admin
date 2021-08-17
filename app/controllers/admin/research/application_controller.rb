@@ -4,6 +4,6 @@ class Admin::Research::ApplicationController < Admin::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb 'Recherche'
+    add_breadcrumb Research.model_name.human
   end
 end
