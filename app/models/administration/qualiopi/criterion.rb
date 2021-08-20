@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: features_education_qualiopi_criterions
+# Table name: administration_qualiopi_criterions
 #
 #  id          :uuid             not null, primary key
 #  description :text

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: features_education_programs
+# Table name: education_programs
 #
 #  id            :uuid             not null, primary key
 #  accessibility :text
@@ -23,7 +23,7 @@
 #
 # Indexes
 #
-#  index_features_education_programs_on_university_id  (university_id)
+#  index_education_programs_on_university_id  (university_id)
 #
 # Foreign Keys
 #

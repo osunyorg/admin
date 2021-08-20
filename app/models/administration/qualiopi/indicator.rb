@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: features_education_qualiopi_indicators
+# Table name: administration_qualiopi_indicators
 #
 #  id             :uuid             not null, primary key
 #  glossary       :text
@@ -16,11 +16,11 @@
 #
 # Indexes
 #
-#  index_features_education_qualiopi_indicators_on_criterion_id  (criterion_id)
+#  index_administration_qualiopi_indicators_on_criterion_id  (criterion_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (criterion_id => features_education_qualiopi_criterions.id)
+#  fk_rails_...  (criterion_id => administration_qualiopi_criterions.id)
 #
 class Administration::Qualiopi::Indicator < ApplicationRecord
   belongs_to :criterion

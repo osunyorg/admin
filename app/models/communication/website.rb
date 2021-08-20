@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: features_websites_sites
+# Table name: communication_websites
 #
 #  id            :uuid             not null, primary key
 #  domain        :string
@@ -11,7 +11,7 @@
 #
 # Indexes
 #
-#  index_features_websites_sites_on_university_id  (university_id)
+#  index_communication_websites_on_university_id  (university_id)
 #
 # Foreign Keys
 #
