@@ -5,6 +5,7 @@
     <tr>
       <th><%= Communication::Website.human_attribute_name('name') %></th>
       <th><%= Communication::Website.human_attribute_name('domain') %></th>
+      <th><%= Communication::Website.human_attribute_name('pages') %></th>
       <th></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
       <tr>
         <td><%= link_to website, [:admin, website] %></td>
         <td><%= link_to website.domain_url, website.domain_url, target: :_blank %></td>
+        <td><%= website.pages.count %></td>
         <td class="text-end">
           <%= edit_link website %>
           <%= destroy_link website %>

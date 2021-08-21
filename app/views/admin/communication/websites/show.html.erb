@@ -7,3 +7,12 @@
 <% content_for :buttons do %>
   <%= edit_link @website %>
 <% end %>
+
+<h2 class="mt-5"><%= Communication::Website::Page.model_name.human(count: 2) %></h2>
+
+<%= link_to t('create'),
+            new_admin_communication_website_page_path(website_id: @website),
+            class: button_classes %>
+
+<%= link_to 'Toutes les pages',
+            admin_communication_website_pages_path(website_id: @website) %>

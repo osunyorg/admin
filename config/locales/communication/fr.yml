@@ -7,6 +7,9 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/page:
+        one: Page
+        other: Pages
     attributes:
       communication/website:
         name: Nom

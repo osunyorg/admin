@@ -1,4 +1,5 @@
 namespace :communication do
-  resources :websites
-  root to: 'websites#index'
+  namespace :website do
+    resources :pages, only: [:index, :show]
+  end
 end

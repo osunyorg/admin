@@ -1,0 +1,27 @@
+<% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
+      <th><%= Communication::Website::Page.human_attribute_name('parent') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= link_to page, [:admin, page] %></td>
+        <td><%= link_to page.parent, [:admin, page.parent] if page.parent %></td>
+        <td class="text-end">
+          <%= edit_link page %>
+          <%= destroy_link page %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= create_link Communication::Website::Page %>
+<% end %>

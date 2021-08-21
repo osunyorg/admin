@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   draw 'communication'
   draw 'administration'
 
-  root to: 'home#index'
+  root to: 'communication/website/pages#index'
 end
