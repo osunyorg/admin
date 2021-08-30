@@ -2,8 +2,9 @@
 
 ## Domaines
 
-https://bordeauxmontaigne.osuny.org/alumni -> webservice des alumni, accessible en iframe
 https://bordeauxmontaigne.osuny.org/admin -> admin
+https://bordeauxmontaigne.osuny.org/alumni -> webservice des alumni, accessible en iframe
+https://bordeauxmontaigne.osuny.org/journal -> workflow publication et review revue scientifique
 https://bordeauxmontaigne.osuny.org/profile -> gestion de son propre profil
 
 
