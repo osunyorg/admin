@@ -1,0 +1,20 @@
+<% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= link_to page, page %></td>
+        <td><%= page.description %></td>
+        <td><%= page.path %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,4 +1,3 @@
 namespace :education do
-  resources :programs
-  root to: 'programs#index'
+  resources :programs, only: [:index, :show]
 end

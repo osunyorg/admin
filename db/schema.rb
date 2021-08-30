@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_125119) do
+ActiveRecord::Schema.define(version: 2021_08_21_121439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,26 @@ ActiveRecord::Schema.define(version: 2021_08_17_125119) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
+  end
+
+  create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "title"
+    t.text "description"
+    t.string "slug"
+    t.text "path"
+    t.datetime "published_at"
+    t.uuid "parent_id"
+    t.integer "position", default: 0, null: false
+    t.string "about_type"
+    t.uuid "about_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
+    t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
+    t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
+    t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
   create_table "communication_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -147,6 +167,9 @@ ActiveRecord::Schema.define(version: 2021_08_17_125119) do
   end
 
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
+  add_foreign_key "communication_website_pages", "communication_websites"
+  add_foreign_key "communication_website_pages", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"

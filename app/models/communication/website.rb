@@ -19,6 +19,7 @@
 #
 class Communication::Website < ApplicationRecord
   belongs_to :university
+  has_many :pages, foreign_key: :communication_website_id
 
   def self.with_host(host)
     find_by domain: extract_domain_from(host)

@@ -1,0 +1,20 @@
+<% content_for :title, @page %>
+
+<p>
+  <strong>Description</strong>
+  <%= @page.description %>
+</p>
+
+<p>
+  <strong>Slug</strong>
+  <%= @page.slug %>
+</p>
+
+<p>
+  <strong>Path</strong>
+  <%= @page.path %>
+</p>
+
+<% content_for :buttons do %>
+  <%= edit_link @page %>
+<% end %>
