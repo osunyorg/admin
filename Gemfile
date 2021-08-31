@@ -25,6 +25,7 @@ gem 'country_select'
 gem 'breadcrumbs_on_rails'
 gem 'simple-navigation'
 gem 'kaminari'
+gem 'octokit'
 
 # Front
 gem 'jquery-rails'

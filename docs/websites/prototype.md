@@ -17,7 +17,8 @@
 
 ### Points à vérifier
 
-- [ ] Lecture écriture github
-- [ ] Performance avec un backend github
+- [ ] Lecture écriture Github
+- [ ] Performance avec un backend Github
 - [ ] Relations avec les auteurs et les droits (doublon DB, autre...)
 - [ ] Articulation avec les objets en DB (volumes et articles par ex.)
+- [x] Gestion des mises à jour des templates -> utiliser un template Github

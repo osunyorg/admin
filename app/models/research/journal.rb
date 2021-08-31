@@ -3,7 +3,9 @@
 # Table name: research_journals
 #
 #  id            :uuid             not null, primary key
+#  access_token  :string
 #  description   :text
+#  repository    :string
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
