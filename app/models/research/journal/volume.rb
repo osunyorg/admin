@@ -26,7 +26,7 @@ class Research::Journal::Volume < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id
 
-  after_save :publish
+  after_save :publish_to_github
 
   def to_s
     "##{ number } #{ title }"
@@ -34,25 +34,8 @@ class Research::Journal::Volume < ApplicationRecord
 
   protected
 
-  def publish
+  def publish_to_github
     return if journal.repository.blank?
-    data = "---\ntitle: #{ title }\nnumber: #{number}\n---"
-    directory = "tmp/volumes"
-    FileUtils.mkdir_p directory
-    local_file = "#{directory}/#{id}.md"
-    File.write local_file, data
-    remote_file = "_volumes/#{id}.md"
-    client = Octokit::Client.new access_token: journal.access_token
-    begin
-      content = client.content journal.repository, path: remote_file
-      sha = content[:sha]
-    rescue
-      sha = nil
-    end
-    client.create_contents  journal.repository,
-                            remote_file,
-                            "Save volume #{ title }",
-                            file: local_file,
-                            sha: sha
+    Github.publish_volume self
   end
 end

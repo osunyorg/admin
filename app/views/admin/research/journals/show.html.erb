@@ -19,6 +19,23 @@
   <% end %>
 </div>
 
+<h2 class="mt-5"><%= Research::Journal::Article.model_name.human(count: 2) %></h2>
+
+<%= link_to t('create'),
+            new_admin_research_journal_article_path(journal_id: @journal),
+            class: button_classes %>
+
+<%= link_to 'Tous les articles',
+            admin_research_journal_articles_path(journal_id: @journal) %>
+
+<div class="row">
+  <% @journal.articles.each do |article| %>
+    <div class="col-md-3 mt-4">
+      <%= link_to article, admin_research_journal_article_path(journal_id: @journal, id: article) %>
+    </div>
+  <% end %>
+</div>
+
 <% content_for :buttons do %>
   <%= edit_link @journal %>
 <% end %>

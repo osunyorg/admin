@@ -29,7 +29,16 @@ class Research::Journal::Article < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
 
+  after_save :publish_to_github
+
   def to_s
     "#{ title }"
+  end
+
+  protected
+
+  def publish_to_github
+    return if journal.repository.blank?
+    Github.publish_article self
   end
 end
