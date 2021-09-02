@@ -19,17 +19,27 @@ class Github
   end
 
   def publish_article(article)
+    data = ApplicationController.render(
+      template: 'admin/research/journal/articles/jekyll',
+      layout: false,
+      assigns: { article: article }
+    )
     publish local_directory: "tmp/articles",
             local_file: "#{article.id}.md",
-            data: "---\ntitle: #{ article.title }\n\n---\n#{ article.text }",
+            data: data,
             remote_file: "_articles/#{article.id}.md",
             commit_message: "Save article #{ article.title }"
   end
 
   def publish_volume(volume)
+    data = ApplicationController.render(
+      template: 'admin/research/journal/volumes/jekyll',
+      layout: false,
+      assigns: { volume: volume }
+    )
     publish local_directory: "tmp/volumes",
             local_file: "#{volume.id}.md",
-            data: "---\ntitle: #{ volume.title }\nnumber: #{ volume.number }\n---",
+            data: data,
             remote_file: "_volumes/#{volume.id}.md",
             commit_message: "Save volume #{ volume.title }"
   end
