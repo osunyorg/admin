@@ -12,7 +12,15 @@ And as each university is multi-website, we need ways to:
 
 ## Production
 
+https://demo.osuny.org
+https://bordeauxmontaigne.osuny.org
+https://clermontferrand.osuny.org
+
 ## Staging
+
+https://demo.osuny.dev
+https://bordeauxmontaigne.osuny.dev
+https://clermontferrand.osuny.dev
 
 ## Dev
 
