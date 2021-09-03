@@ -10,6 +10,28 @@
   <%= @volume.published_at&.to_date %>
 </p>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Research::Journal::Article.model_name.human %></th>
+      <th>Published at</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @volume.articles.each do |article| %>
+      <tr>
+        <td><%= link_to article, [:admin, article] %></td>
+        <td><%= article.published_at %></td>
+        <td class="text-end">
+          <%= edit_link article %>
+          <%= destroy_link article %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <% content_for :buttons do %>
   <%= edit_link @volume %>
 <% end %>
