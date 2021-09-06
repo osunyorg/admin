@@ -2,6 +2,12 @@
   <div class="row">
     <div class="col-md-4">
       <%= f.input :name %>
+      <%= f.input :about_type,
+                  collection: Communication::Website.about_types,
+                  label_method: lambda { |object|
+                    I18n.t("activerecord.attributes.communication/website.about_#{object}")
+                  },
+                  include_blank: false %>
     </div>
     <div class="col-md-4">
       <%= f.input :domain %>

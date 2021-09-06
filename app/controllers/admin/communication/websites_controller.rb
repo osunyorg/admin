@@ -51,6 +51,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def website_params
-    params.require(:communication_website).permit(:name, :domain, :repository, :access_token)
+    params.require(:communication_website).permit(:name, :domain, :repository, :access_token, :about_type, :about_id)
   end
 end

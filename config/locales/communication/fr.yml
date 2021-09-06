@@ -14,3 +14,7 @@ fr:
       communication/website:
         name: Nom
         domain: Domaine
+        about_type: Sujet du site
+        about_: Aucun sujet (site indépendant)
+        about_research_journal: Site de revue scientifique
+        about_school: Site d'école

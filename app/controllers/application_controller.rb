@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include WithContext
+  include WithUniversity
 
   def breadcrumb
     add_breadcrumb t('home'), root_path

@@ -4,13 +4,19 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  draw 'admin'
-  draw 'server'
+  namespace :admin do
+    resources :users
+    draw 'education'
+    draw 'research'
+    draw 'communication'
+    draw 'administration'
+    root to: 'dashboard#index'
+  end
 
-  draw 'education'
-  draw 'research'
-  draw 'communication'
-  draw 'administration'
+  namespace :server do
+    resources :universities
+    root to: 'dashboard#index'
+  end
 
-  root to: 'communication/website/pages#index'
+  root to: 'admin/dashboard#index'
 end

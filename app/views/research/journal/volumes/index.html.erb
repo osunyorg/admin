@@ -1,9 +1,0 @@
-<% content_for :title, Research::Journal::Volume.model_name.human(count: 2) %>
-
-<div class="row">
-  <% @journal.volumes.each do |volume| %>
-    <div class="col-md-3">
-      <%= render volume %>
-    </div>
-  <% end %>
-</div>

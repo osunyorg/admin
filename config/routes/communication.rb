@@ -1,5 +1,5 @@
 namespace :communication do
-  namespace :website do
-    resources :pages, only: [:index, :show]
+  resources :websites do
+    resources :pages, controller: 'website/pages'
   end
 end

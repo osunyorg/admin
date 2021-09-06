@@ -1,3 +1,3 @@
 namespace :education do
-  resources :programs, only: [:index, :show]
+  resources :programs
 end

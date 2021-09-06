@@ -5,7 +5,8 @@
     <tr>
       <th><%= Communication::Website.human_attribute_name('name') %></th>
       <th><%= Communication::Website.human_attribute_name('domain') %></th>
-      <th><%= Communication::Website.human_attribute_name('pages') %></th>
+      <th><%= Communication::Website.human_attribute_name('about_type') %></th>
+      <th><%= Communication::Website.human_attribute_name('about') %></th>
       <th></th>
     </tr>
   </thead>
@@ -14,7 +15,8 @@
       <tr>
         <td><%= link_to website, [:admin, website] %></td>
         <td><%= link_to website.domain_url, website.domain_url, target: :_blank %></td>
-        <td><%= website.pages.count %></td>
+        <td><%= I18n.t("activerecord.attributes.communication/website.about_#{website.about_type}") %></td>
+        <td><%= website.about %></td>
         <td class="text-end">
           <%= edit_link website %>
           <%= destroy_link website %>

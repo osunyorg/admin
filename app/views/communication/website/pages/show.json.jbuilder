@@ -1,1 +1,0 @@
-json.partial! "communication_website_pages/communication_website_page", communication_website_page: @communication_website_page
