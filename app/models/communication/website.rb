@@ -25,14 +25,10 @@
 class Communication::Website < ApplicationRecord
   belongs_to :university
   belongs_to :about, polymorphic: true, optional: true
-  # has_many :pages, foreign_key: :communication_website_id
+  has_many :pages, foreign_key: :communication_website_id
 
   def self.about_types
     [nil, Research::Journal.name]
-  end
-
-  def pages
-    Communication::Website::Page.for_website self
   end
 
   def domain_url

@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Page.human_attribute_name('permalink') %></th>
+      <th><%= Communication::Website::Page.human_attribute_name('path') %></th>
       <th></th>
     </tr>
   </thead>
@@ -12,8 +12,10 @@
     <% @pages.each do |page| %>
       <tr>
         <td><%= link_to page, admin_communication_website_page_path(page.id) %></td>
-        <td><%= page.permalink %></td>
+        <td><%= page.path %></td>
         <td class="text-end">
+          <%= edit_link page %>
+          <%= destroy_link page %>
         </td>
       </tr>
     <% end %>

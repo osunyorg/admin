@@ -1,6 +1,10 @@
 class Github
   attr_reader :access_token, :repository
 
+  def self.with_site(site)
+    new site.access_token, site.repository
+  end
+
   def initialize(access_token, repository)
     @access_token = access_token
     @repository = repository
@@ -22,6 +26,13 @@ class Github
                             file: local_path,
                             sha: sha
 
+  end
+
+  def read_file_at(path)
+    data = client.content repository, path: path
+    Base64.decode64 data.content
+  rescue
+    ''
   end
 
   def pages

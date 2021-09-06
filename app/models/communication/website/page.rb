@@ -31,63 +31,53 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 
-# class Communication::Website::Page < ApplicationRecord
-#   belongs_to :university
-#   belongs_to :website, foreign_key: :communication_website_id
-#   belongs_to :parent, class_name: 'Communication::Website::Page', optional: true
-#   belongs_to :about, polymorphic: true, optional: true
-#
-#   validates :title, presence: true
-#
-#   before_save :make_path
-#
-#   def to_s
-#     "#{ title }"
-#   end
-#
-#   protected
-#
-#   def make_path
-#     self.path = "#{parent&.path}/#{slug}"
-#   end
-# end
+class Communication::Website::Page < ApplicationRecord
+  belongs_to :university
+  belongs_to :website, foreign_key: :communication_website_id
+  belongs_to :parent, class_name: 'Communication::Website::Page', optional: true
 
+  validates :title, presence: true
 
-class Communication::Website::Page
-  extend ActiveModel::Naming
-  extend ActiveModel::Translation
+  before_save :make_path
+  after_save :publish_to_github
 
-  attr_accessor :id, :title, :permalink, :content, :raw
-
-  def self.for_website(website)
-    return [] if website.repository.blank?
-    github = Github.new website.access_token, website.repository
-    github.pages
+  def content
+    @content ||= github.read_file_at "_pages/#{id}.html"
   end
 
-  def self.find(id, website)
-    return [] if website.repository.blank?
-    github = Github.new website.access_token, website.repository
-    github.page_with_id(id)
-  end
-
-  def description
-    ""
-  end
-
-  def slug
-    ""
-  end
-
-  def path
-    permalink
-  end
-
-  def persisted?
-    true
+  def content_without_frontmatter
+    frontmatter.content
   end
 
   def to_s
     "#{ title }"
+  end
+
+  protected
+
+  def github
+    @github ||= Github.with_site(website)
+  end
+
+  def frontmatter
+    @frontmatter ||= FrontMatterParser::Parser.new(:md).call(content)
+  end
+
+  def make_path
+    self.path = "#{parent&.path}/#{slug}"
+  end
+
+  def publish_to_github
+    return if website&.repository.blank?
+    data = ApplicationController.render(
+      template: 'admin/communication/website/pages/jekyll',
+      layout: false,
+      assigns: { page: self }
+    )
+    github.publish  local_directory: "tmp/pages",
+                    local_file: "#{id}.md",
+                    data: data,
+                    remote_file: "_pages/#{id}.html",
+                    commit_message: "Save page #{ title }"
   end
 end

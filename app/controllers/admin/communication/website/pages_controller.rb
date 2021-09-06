@@ -1,14 +1,13 @@
 class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
+  load_and_authorize_resource class: Communication::Website::Page
+
   def index
-    @pages = @website.pages
+    @pages = @website.pages.order(:path)
     breadcrumb
   end
 
   def show
-    id = "#{params[:id]}.html"
-    @page = Communication::Website::Page.find(id, @website)
     breadcrumb
-    add_breadcrumb @page
   end
 
   def new
@@ -48,8 +47,9 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def breadcrumb
     super
-    add_breadcrumb Communication::Website::Page.model_name.human(count: 2), admin_communication_website_pages_path
-    # breadcrumb_for @page
+    add_breadcrumb  Communication::Website::Page.model_name.human(count: 2), 
+                    admin_communication_website_pages_path
+    breadcrumb_for @page
   end
 
   def page_params
