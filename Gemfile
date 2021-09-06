@@ -26,6 +26,7 @@ gem 'breadcrumbs_on_rails'
 gem 'simple-navigation'
 gem 'kaminari'
 gem 'octokit'
+gem 'front_matter_parser'
 
 # Front
 gem 'jquery-rails'

@@ -30,23 +30,42 @@
 #  fk_rails_...  (parent_id => communication_website_pages.id)
 #  fk_rails_...  (university_id => universities.id)
 #
-class Communication::Website::Page < ApplicationRecord
-  belongs_to :university
-  belongs_to :website, foreign_key: :communication_website_id
-  belongs_to :parent, class_name: 'Communication::Website::Page', optional: true
-  belongs_to :about, polymorphic: true, optional: true
 
-  validates :title, presence: true
+# class Communication::Website::Page < ApplicationRecord
+#   belongs_to :university
+#   belongs_to :website, foreign_key: :communication_website_id
+#   belongs_to :parent, class_name: 'Communication::Website::Page', optional: true
+#   belongs_to :about, polymorphic: true, optional: true
+#
+#   validates :title, presence: true
+#
+#   before_save :make_path
+#
+#   def to_s
+#     "#{ title }"
+#   end
+#
+#   protected
+#
+#   def make_path
+#     self.path = "#{parent&.path}/#{slug}"
+#   end
+# end
 
-  before_save :make_path
+
+class Communication::Website::Page
+  extend ActiveModel::Naming
+  extend ActiveModel::Translation
+
+  attr_accessor :id, :title, :permalink, :content, :raw
+
+  def self.for_website(website)
+    return [] if website.repository.blank?
+    github = Github.new website.access_token, website.repository
+    github.pages
+  end
 
   def to_s
     "#{ title }"
-  end
-
-  protected
-
-  def make_path
-    self.path = "#{parent&.path}/#{slug}"
   end
 end

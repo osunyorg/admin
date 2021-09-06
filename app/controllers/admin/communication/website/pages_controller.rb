@@ -1,6 +1,4 @@
 class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Page
-
   def index
     @pages = @website.pages
     breadcrumb

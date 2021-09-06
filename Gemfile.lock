@@ -157,6 +157,7 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     ffi (1.15.3)
+    front_matter_parser (1.0.1)
     globalid (0.5.2)
       activesupport (>= 5.0)
     i18n (1.8.10)
@@ -344,6 +345,7 @@ DEPENDENCIES
   devise-i18n
   enum-i18n
   enum_help
+  front_matter_parser
   image_processing
   jbuilder
   jquery-rails

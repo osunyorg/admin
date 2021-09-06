@@ -4,18 +4,16 @@
   <thead>
     <tr>
       <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Page.human_attribute_name('parent') %></th>
+      <th><%= Communication::Website::Page.human_attribute_name('permalink') %></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @pages.each do |page| %>
       <tr>
-        <td><%= link_to page, [:admin, page] %></td>
-        <td><%= link_to page.parent, [:admin, page.parent] if page.parent %></td>
+        <td><%= link_to page, admin_communication_website_page_path(page.id) %></td>
+        <td><%= page.permalink %></td>
         <td class="text-end">
-          <%= edit_link page %>
-          <%= destroy_link page %>
         </td>
       </tr>
     <% end %>
