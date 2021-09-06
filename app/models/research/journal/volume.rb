@@ -3,6 +3,7 @@
 # Table name: research_journal_volumes
 #
 #  id                  :uuid             not null, primary key
+#  description         :text
 #  number              :integer
 #  published_at        :datetime
 #  title               :string
@@ -27,6 +28,8 @@ class Research::Journal::Volume < ApplicationRecord
   has_many :articles, foreign_key: :research_journal_volume_id
 
   after_save :publish_to_github
+
+  scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
   def to_s
     "##{ number } #{ title }"

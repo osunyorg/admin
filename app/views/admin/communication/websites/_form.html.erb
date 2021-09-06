@@ -1,10 +1,14 @@
 <%= simple_form_for [:admin, website] do |f| %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.input :name %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.input :domain %>
+      <%= f.input :repository %>
+      <%= f.input :access_token %>
+    </div>
+    <div class="col-md-4">
     </div>
   </div>
   <% content_for :buttons do %>

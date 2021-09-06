@@ -1,7 +1,14 @@
 <%= simple_form_for [:admin, volume] do |f| %>
-  <%= f.input :title %>
-  <%= f.input :number %>
-  <%= f.input :published_at, html5: true %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :title %>
+      <%= f.input :number %>
+      <%= f.input :published_at, html5: true %>
+    </div>
+    <div class="col-md-8">
+      <%= f.input :description, input_html: { rows: 5 } %>
+    </div>
+  </div>
   <% content_for :buttons do %>
     <%= submit f %>
   <% end %>

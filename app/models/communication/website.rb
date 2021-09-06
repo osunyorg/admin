@@ -3,8 +3,10 @@
 # Table name: communication_websites
 #
 #  id            :uuid             not null, primary key
+#  access_token  :string
 #  domain        :string
 #  name          :string
+#  repository    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null

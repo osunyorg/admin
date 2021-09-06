@@ -3,6 +3,7 @@
 # Table name: research_journal_volumes
 #
 #  id                  :uuid             not null, primary key
+#  description         :text
 #  number              :integer
 #  published_at        :datetime
 #  title               :string

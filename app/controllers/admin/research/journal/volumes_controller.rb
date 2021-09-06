@@ -2,6 +2,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   load_and_authorize_resource class: Research::Journal::Volume
 
   def index
+    @volumes = @volumes.ordered
     breadcrumb
   end
 
@@ -54,6 +55,6 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def volume_params
-    params.require(:research_journal_volume).permit(:title, :number, :published_at)
+    params.require(:research_journal_volume).permit(:title, :number, :published_at, :description)
   end
 end
