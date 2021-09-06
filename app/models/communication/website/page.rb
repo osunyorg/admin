@@ -65,6 +65,28 @@ class Communication::Website::Page
     github.pages
   end
 
+  def self.find(id, website)
+    return [] if website.repository.blank?
+    github = Github.new website.access_token, website.repository
+    github.page_with_id(id)
+  end
+
+  def description
+    ""
+  end
+
+  def slug
+    ""
+  end
+
+  def path
+    permalink
+  end
+
+  def persisted?
+    true
+  end
+
   def to_s
     "#{ title }"
   end

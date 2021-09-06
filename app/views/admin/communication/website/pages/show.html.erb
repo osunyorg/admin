@@ -16,5 +16,5 @@
 </p>
 
 <% content_for :buttons do %>
-  <%= edit_link @page %>
+  <%= link_to 'Modifier', edit_admin_communication_website_page_path(@page.id), class: button_classes %>
 <% end %>

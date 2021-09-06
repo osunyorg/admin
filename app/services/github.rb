@@ -27,17 +27,22 @@ class Github
   def pages
     list = client.contents repository, path: '_pages'
     list.map do |hash|
-      data = client.content repository, path: hash[:path]
-      raw = Base64.decode64 data.content
-      parsed = FrontMatterParser::Parser.new(:md).call(raw)
-      page = Communication::Website::Page.new
-      page.id = hash[:name]
-      page.title = parsed.front_matter['title']
-      page.permalink = parsed.front_matter['permalink']
-      page.content = parsed.content
-      page.raw = raw
-      page
+      page_with_id(hash[:name])
     end
+  end
+
+  def page_with_id(id)
+    path = "_pages/#{id}"
+    data = client.content repository, path: path
+    raw = Base64.decode64 data.content
+    parsed = FrontMatterParser::Parser.new(:md).call(raw)
+    page = Communication::Website::Page.new
+    page.id = id
+    page.title = parsed.front_matter['title']
+    page.permalink = parsed.front_matter['permalink']
+    page.content = parsed.content
+    page.raw = raw
+    page
   end
 
   def client
