@@ -38,7 +38,17 @@ class Research::Journal::Volume < ApplicationRecord
   protected
 
   def publish_to_github
-    return if journal.repository.blank?
-    Github.publish_volume self
+    return if journal.website&.repository.blank?
+    github = Github.new journal.website.access_token, journal.website.repository
+    data = ApplicationController.render(
+      template: 'admin/research/journal/volumes/jekyll',
+      layout: false,
+      assigns: { volume: self }
+    )
+    github.publish  local_directory: "tmp/volumes",
+                    local_file: "#{id}.md",
+                    data: data,
+                    remote_file: "_volumes/#{id}.md",
+                    commit_message: "Save volume #{ title }"
   end
 end

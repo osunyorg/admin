@@ -1,6 +1,11 @@
 <% content_for :title, @journal %>
 
-<p><%= @journal.description %></p>
+<% if @journal.website %>
+  <p>
+    Site : 
+    <%= link_to @journal.website, [:admin, @journal.website] %>
+  </p>
+<% end %>
 
 <h2 class="mt-5"><%= Research::Journal::Volume.model_name.human(count: 2) %></h2>
 

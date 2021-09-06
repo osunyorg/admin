@@ -16,5 +16,5 @@ fr:
         domain: Domaine
         about_type: Sujet du site
         about_: Aucun sujet (site indépendant)
-        about_research_journal: Site de revue scientifique
-        about_school: Site d'école
+        about_Research::Journal: Site de revue scientifique
+        about_School: Site d'école

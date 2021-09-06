@@ -4,6 +4,11 @@
   <%= link_to @website.domain_url, @website.domain_url, target: :_blank %>
 </p>
 
+<p>
+  <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
+  <%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>
+</p>
+
 <% content_for :buttons do %>
   <%= edit_link @website %>
 <% end %>

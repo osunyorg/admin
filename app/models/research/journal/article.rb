@@ -38,7 +38,17 @@ class Research::Journal::Article < ApplicationRecord
   protected
 
   def publish_to_github
-    return if journal.repository.blank?
-    Github.publish_article self
+    return if journal.website&.repository.blank?
+    github = Github.new journal.website.access_token, journal.website.repository
+    data = ApplicationController.render(
+      template: 'admin/research/journal/articles/jekyll',
+      layout: false,
+      assigns: { article: self }
+    )
+    github.publish  local_directory: "tmp/articles",
+                    local_file: "#{id}.md",
+                    data: data,
+                    remote_file: "_articles/#{id}.md",
+                    commit_message: "Save volume #{ title }"
   end
 end

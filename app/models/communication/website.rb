@@ -28,8 +28,9 @@ class Communication::Website < ApplicationRecord
   has_many :pages, foreign_key: :communication_website_id
 
   def self.about_types
-    [nil, :research_journal, :school]
+    [nil, Research::Journal.name]
   end
+
 
   def domain_url
     "https://#{ domain }"
