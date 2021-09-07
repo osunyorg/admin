@@ -33,6 +33,7 @@ class Admin::Research::JournalsController < Admin::Research::Journal::Applicatio
       redirect_to [:admin, @journal], notice: "Journal was successfully updated."
     else
       breadcrumb
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end

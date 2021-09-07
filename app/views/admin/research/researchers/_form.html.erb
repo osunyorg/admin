@@ -1,0 +1,15 @@
+<%= simple_form_for [:admin, researcher] do |f| %>
+<div class="row">
+  <div class="col-md-4">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.association :user %>
+  </div>
+  <div class="col-md-8">
+    <%= f.input :biography, input_html: { rows: 5 } %>
+  </div>
+</div>
+  <% content_for :buttons do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

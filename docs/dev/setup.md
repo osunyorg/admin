@@ -14,13 +14,13 @@ And as each university is multi-website, we need ways to:
 
 - https://demo.osuny.org
 - https://bordeauxmontaigne.osuny.org
-- https://clermontferrand.osuny.org
+- https://clermontauvergne.osuny.org
 
 ## Staging
 
 - https://demo.osuny.dev
 - https://bordeauxmontaigne.osuny.dev
-- https://clermontferrand.osuny.dev
+- https://clermontauvergne.osuny.dev
 
 ## Dev
 
@@ -28,12 +28,12 @@ The solution is to set up a host.
 
 /etc/hosts
 ```
-127.0.0.1       osuny.osuny
+127.0.0.1       demo.osuny
 127.0.0.1       bordeauxmontaigne.osuny
-127.0.0.1       clermontferrand.osuny
+127.0.0.1       clermontauvergne.osuny
 ```
 
 Then we have access on:
-- http://osuny.osuny:3000
+- http://demo.osuny:3000
 - http://bordeauxmontaigne.osuny:3000
-- http://clermontferrand.osuny:3000
+- http://clermontauvergne.osuny:3000

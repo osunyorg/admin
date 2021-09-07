@@ -4,6 +4,9 @@ fr:
       research: Recherche
   activerecord:
     models:
+      research/researcher:
+        one: Chercheu·r·se
+        other: Chercheu·rs·ses
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -16,3 +19,8 @@ fr:
     attributes:
       research/journal:
         title: Titre
+      research/researcher:
+        first_name: Prénom
+        last_name: Nom
+        biography: Biographie
+        user: Utilisateur

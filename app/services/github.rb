@@ -25,7 +25,7 @@ class Github
                             commit_message,
                             file: local_path,
                             sha: sha
-
+  rescue
   end
 
   def read_file_at(path)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_121013) do
+ActiveRecord::Schema.define(version: 2021_09_07_152734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -96,15 +96,17 @@ ActiveRecord::Schema.define(version: 2021_09_06_121013) do
   create_table "research_journal_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "text"
-    t.datetime "published_at"
+    t.date "published_at"
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.date "updated_at", null: false
+    t.uuid "updated_by_id"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
+    t.index ["updated_by_id"], name: "index_research_journal_articles_on_updated_by_id"
   end
 
   create_table "research_journal_volumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -129,6 +131,16 @@ ActiveRecord::Schema.define(version: 2021_09_06_121013) do
     t.string "access_token"
     t.string "repository"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
+  end
+
+  create_table "research_researchers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.text "biography"
+    t.uuid "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end
 
   create_table "universities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -183,8 +195,10 @@ ActiveRecord::Schema.define(version: 2021_09_06_121013) do
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"
+  add_foreign_key "research_journal_articles", "users", column: "updated_by_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
+  add_foreign_key "research_researchers", "users"
   add_foreign_key "users", "universities"
 end

@@ -15,6 +15,14 @@
   <%= @user.role %>
 </p>
 
+<% if @user.researcher %>
+  <p>
+    <strong><%= User.human_attribute_name('researcher') %></strong>
+    <%= link_to @user.researcher, [:admin, @user.researcher] %>
+  </p>
+<% end %>
+
+
 <% content_for :buttons do %>
   <%= edit_link @user %>
 <% end %>

@@ -43,6 +43,7 @@ class User < ApplicationRecord
   include WithDevise
 
   belongs_to :university
+  has_one :researcher, class_name: 'Research::Researcher'
 
   def to_s
     first_name || last_name ? "#{first_name} #{last_name}"

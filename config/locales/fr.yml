@@ -31,5 +31,6 @@ fr:
         first_name: Prénom
         last_name: Nom
         role: Rôle
+        researcher: Profil de chercheur
   simple_form:
     hints:

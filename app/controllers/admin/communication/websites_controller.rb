@@ -16,6 +16,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
 
   def edit
     breadcrumb
+    add_breadcrumb t('edit')
   end
 
   def create

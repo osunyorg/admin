@@ -1,4 +1,4 @@
-University.create name: 'Osuny', identifier: 'osuny'
+University.create name: 'Osuny', identifier: 'demo'
 
 Administration::Qualiopi::Criterion.destroy_all
 Administration::Qualiopi::Criterion.create [

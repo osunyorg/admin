@@ -1,0 +1,27 @@
+<% content_for :title, @researcher %>
+
+<p>
+  <strong><%= Research::Researcher.human_attribute_name('first_name') %></strong>
+  <%= @researcher.first_name %>
+</p>
+
+<p>
+  <strong><%= Research::Researcher.human_attribute_name('last_name') %></strong>
+  <%= @researcher.last_name %>
+</p>
+
+<p>
+  <strong><%= Research::Researcher.human_attribute_name('biography') %></strong>
+  <%= @researcher.biography %>
+</p>
+
+<% if @researcher.user %>
+<p>
+  <strong><%= Research::Researcher.human_attribute_name('user') %></strong>
+  <%= link_to @researcher.user, [:admin, @researcher.user] %>
+</p>
+<% end %>
+
+<% content_for :buttons do %>
+  <%= edit_link @researcher %>
+<% end %>

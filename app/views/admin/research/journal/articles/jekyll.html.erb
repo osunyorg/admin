@@ -1,5 +1,9 @@
 ---
-title: <%= @article.title %>
+title: "<%= @article.title %>"
 volume: <%= @article.volume.id %>
+publication: "<%= @article.published_at %>"
+description: ""
+authors:
+tags:
 ---
 <%= simple_format @article.text %>

@@ -14,7 +14,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :teaching, 'Feedbacks', nil, { icon: 'comments' }
 
     primary.item :teaching, Research.model_name.human, nil, { kind: :header }
-    primary.item :teaching, 'Chercheurs', nil, { icon: 'microscope' }
+    primary.item :teaching, Research::Researcher.model_name.human(count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' }
     primary.item :teaching, 'Laboratoires', nil, { icon: 'flask' }
     primary.item :teaching, 'Veille', nil, { icon: 'eye' }
     primary.item :journals, Research::Journal.model_name.human(count: 2), admin_research_journals_path, { icon: 'newspaper' }
