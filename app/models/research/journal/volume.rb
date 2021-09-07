@@ -5,7 +5,7 @@
 #  id                  :uuid             not null, primary key
 #  description         :text
 #  number              :integer
-#  published_at        :datetime
+#  published_at        :date
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -45,10 +45,13 @@ class Research::Journal::Volume < ApplicationRecord
       layout: false,
       assigns: { volume: self }
     )
-    github.publish  local_directory: "tmp/volumes",
-                    local_file: "#{id}.md",
-                    data: data,
-                    remote_file: "_volumes/#{id}.md",
-                    commit_message: "Save volume #{ title }"
+    github.publish  kind: :volumes,
+                    file: "#{id}.md",
+                    title: title,
+                    data: ApplicationController.render(
+                      template: 'admin/research/journal/volumes/jekyll',
+                      layout: false,
+                      assigns: { volume: self }
+                    )
   end
 end

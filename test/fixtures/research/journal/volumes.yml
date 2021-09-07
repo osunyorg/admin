@@ -5,7 +5,7 @@
 #  id                  :uuid             not null, primary key
 #  description         :text
 #  number              :integer
-#  published_at        :datetime
+#  published_at        :date
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

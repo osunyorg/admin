@@ -45,27 +45,23 @@ class Research::Journal::Article < ApplicationRecord
   def publish_to_github
     return if journal.website&.repository.blank?
     github = Github.new journal.website.access_token, journal.website.repository
-    data = ApplicationController.render(
-      template: 'admin/research/journal/articles/jekyll',
-      layout: false,
-      assigns: { article: self }
-    )
-    github.publish  local_directory: "tmp/articles",
-                    local_file: "#{id}.md",
-                    data: data,
-                    remote_file: "_articles/#{id}.md",
-                    commit_message: "Save volume #{ title }"
+    github.publish  kind: :articles,
+                    file: "#{id}.md",
+                    title: title,
+                    data: ApplicationController.render(
+                      template: 'admin/research/journal/articles/jekyll',
+                      layout: false,
+                      assigns: { article: self }
+                    )
     researchers.each do |researcher|
-      github.publish  local_directory: "tmp/researchers",
-                      local_file: "#{researcher.id}.md",
+      github.publish  kind: :researchers,
+                      file: "#{ researcher.id }.md",
+                      title: researcher.to_s,
                       data: ApplicationController.render(
                         template: 'admin/research/researchers/jekyll',
                         layout: false,
                         assigns: { researcher: researcher }
-                      ),
-                      remote_file: "_researchers/#{ researcher.id }.md",
-                      commit_message: "Save researcher #{ researcher }"
-
+                      )
     end
   end
 end

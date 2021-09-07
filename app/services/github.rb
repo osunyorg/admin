@@ -10,16 +10,19 @@ class Github
     @repository = repository
   end
 
-  def publish(local_directory:, local_file:, data:, remote_file:, commit_message:)
+  def publish(kind:, file:, title:, data:)
+    local_directory = "tmp/jekyll/#{ kind }"
     FileUtils.mkdir_p local_directory
-    local_path = "#{local_directory}/#{ local_file }"
+    local_path = "#{ local_directory }/#{ file }"
     File.write local_path, data
+    remote_file = "_#{ kind }/#{ file }"
     begin
       content = client.content repository, path: remote_file
       sha = content[:sha]
     rescue
       sha = nil
     end
+    commit_message ||= "[#{kind}] Save #{ title }"
     client.create_contents  repository,
                             remote_file,
                             commit_message,
