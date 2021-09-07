@@ -1,8 +1,17 @@
 <% content_for :title, @article %>
 
 <p>
-  <strong>Published at:</strong>
+  <strong><%= Research::Journal::Article.human_attribute_name('published_at') %></strong>
   <%= @article.published_at&.to_date %>
+</p>
+
+<p>
+  <strong><%= Research::Journal::Article.human_attribute_name('researchers') %></strong>
+  <ul>
+    <% @article.researchers.each do |researcher| %>
+      <li><%= link_to researcher, [:admin, researcher] %></li>
+    <% end %>
+  </ul>
 </p>
 
 <%= @article.text %>

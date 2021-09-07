@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_152734) do
+ActiveRecord::Schema.define(version: 2021_09_07_155328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -109,6 +109,13 @@ ActiveRecord::Schema.define(version: 2021_09_07_152734) do
     t.index ["updated_by_id"], name: "index_research_journal_articles_on_updated_by_id"
   end
 
+  create_table "research_journal_articles_researchers", force: :cascade do |t|
+    t.uuid "researcher_id", null: false
+    t.uuid "article_id", null: false
+    t.index ["article_id"], name: "index_research_journal_articles_researchers_on_article_id"
+    t.index ["researcher_id"], name: "index_research_journal_articles_researchers_on_researcher_id"
+  end
+
   create_table "research_journal_volumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
@@ -196,6 +203,8 @@ ActiveRecord::Schema.define(version: 2021_09_07_152734) do
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"
   add_foreign_key "research_journal_articles", "users", column: "updated_by_id"
+  add_foreign_key "research_journal_articles_researchers", "research_journal_articles", column: "article_id"
+  add_foreign_key "research_journal_articles_researchers", "research_researchers", column: "researcher_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"

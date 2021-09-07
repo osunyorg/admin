@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th><%= Research::Journal::Article.model_name.human %></th>
-      <th>Published at</th>
+      <th><%= Research::Journal::Article.human_attribute_name('published_at') %></th>
       <th></th>
     </tr>
   </thead>

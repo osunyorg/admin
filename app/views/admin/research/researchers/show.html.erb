@@ -16,11 +16,20 @@
 </p>
 
 <% if @researcher.user %>
-<p>
-  <strong><%= Research::Researcher.human_attribute_name('user') %></strong>
-  <%= link_to @researcher.user, [:admin, @researcher.user] %>
-</p>
+  <p>
+    <strong><%= Research::Researcher.human_attribute_name('user') %></strong>
+    <%= link_to @researcher.user, [:admin, @researcher.user] %>
+  </p>
 <% end %>
+
+<p>
+  <strong><%= Research::Researcher.human_attribute_name('articles') %></strong>
+  <ul>
+    <% @researcher.articles.each do |article| %>
+      <li><%= link_to article, admin_research_journal_article_path(journal_id: article.journal.id, id: article) %></li>
+    <% end %>
+  </ul>
+</p>
 
 <% content_for :buttons do %>
   <%= edit_link @researcher %>

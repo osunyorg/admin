@@ -32,6 +32,7 @@ class Research::Journal::Article < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
   belongs_to :updated_by, class_name: 'User'
+  has_and_belongs_to_many :researchers, class_name: 'Research::Researcher'
 
   after_save :publish_to_github
 
@@ -54,5 +55,17 @@ class Research::Journal::Article < ApplicationRecord
                     data: data,
                     remote_file: "_articles/#{id}.md",
                     commit_message: "Save volume #{ title }"
+    researchers.each do |researcher|
+      github.publish  local_directory: "tmp/researchers",
+                      local_file: "#{researcher.id}.md",
+                      data: ApplicationController.render(
+                        template: 'admin/research/researchers/jekyll',
+                        layout: false,
+                        assigns: { researcher: researcher }
+                      ),
+                      remote_file: "_researchers/#{ researcher.id }.md",
+                      commit_message: "Save researcher #{ researcher }"
+
+    end
   end
 end

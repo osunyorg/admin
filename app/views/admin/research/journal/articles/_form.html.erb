@@ -4,6 +4,7 @@
       <%= f.input :title %>
       <%= f.association :volume, collection: @journal.volumes %>
       <%= f.input :published_at, html5: true %>
+      <%= f.association :researchers %>
     </div>
     <div class="col-md-8">
       <%= f.input :text, input_html: { rows: 30 } %>

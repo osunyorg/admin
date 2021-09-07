@@ -19,6 +19,9 @@ fr:
     attributes:
       research/journal:
         title: Titre
+      research/journal/article:
+        title: Titre
+        researchers: Auteu·rs·rices
       research/researcher:
         first_name: Prénom
         last_name: Nom
