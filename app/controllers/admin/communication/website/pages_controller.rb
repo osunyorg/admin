@@ -2,7 +2,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   load_and_authorize_resource class: Communication::Website::Page
 
   def index
-    @pages = @website.pages.order(:path)
+    @pages = @website.pages.ordered
     breadcrumb
   end
 
@@ -47,7 +47,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Page.model_name.human(count: 2), 
+    add_breadcrumb  Communication::Website::Page.model_name.human(count: 2),
                     admin_communication_website_pages_path
     breadcrumb_for @page
   end

@@ -41,6 +41,8 @@ class Communication::Website::Page < ApplicationRecord
   before_save :make_path
   after_save :publish_to_github
 
+  scope :ordered, -> { order(:path) }
+
   def content
     @content ||= github.read_file_at "_pages/#{id}.html"
   end
