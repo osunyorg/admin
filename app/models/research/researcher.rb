@@ -22,7 +22,15 @@ class Research::Researcher < ApplicationRecord
   belongs_to :user, optional: true
   has_and_belongs_to_many :articles, class_name: 'Research::Journal::Article'
 
+  after_save :update_articles
+
   def to_s
     "#{ first_name } #{ last_name }"
+  end
+
+  protected
+
+  def update_articles
+    articles.find_each &:save
   end
 end
