@@ -1,9 +1,12 @@
 ---
 title: "<%= @article.title %>"
-volume: <%= @article.volume.id %>
+volume: "<%= @article.volume.id %>"
 publication: "<%= @article.published_at %>"
 description: ""
 authors:
+<% @article.researchers.each do |researcher| %>
+- "<%= researcher.id %>"
+<% end %>
 tags:
 ---
 <%= simple_format @article.text %>
