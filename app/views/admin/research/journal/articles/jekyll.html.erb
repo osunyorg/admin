@@ -2,7 +2,9 @@
 title: "<%= @article.title %>"
 volume: "<%= @article.volume.id %>"
 publication: "<%= @article.published_at %>"
-description: ""
+abstract: "<%= @article.abstract %>"
+description: "<%= @article.abstract %>"
+references: "<%= @article.references %>"
 authors:
 <% @article.researchers.each do |researcher| %>
 - "<%= researcher.id %>"

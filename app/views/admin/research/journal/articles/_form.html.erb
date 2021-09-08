@@ -1,13 +1,15 @@
 <%= simple_form_for [:admin, article] do |f| %>
   <div class="row">
     <div class="col-md-4">
-      <%= f.input :title %>
+      <%= f.input :title, as: :text, input_html: { rows: 3 } %>
       <%= f.association :volume, collection: @journal.volumes %>
       <%= f.input :published_at, html5: true %>
       <%= f.association :researchers %>
     </div>
     <div class="col-md-8">
-      <%= f.input :text, input_html: { rows: 30 } %>
+      <%= f.input :abstract, as: :text, input_html: { rows: 6 } %>
+      <%= f.input :text, input_html: { rows: 20 } %>
+      <%= f.input :references, as: :text, input_html: { rows: 10 } %>
     </div>
   </div>
   <% content_for :buttons do %>

@@ -3,7 +3,9 @@
 # Table name: research_journal_articles
 #
 #  id                         :uuid             not null, primary key
+#  abstract                   :text
 #  published_at               :date
+#  references                 :text
 #  text                       :text
 #  title                      :string
 #  created_at                 :datetime         not null

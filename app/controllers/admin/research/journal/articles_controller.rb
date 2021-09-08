@@ -56,6 +56,6 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   end
 
   def article_params
-    params.require(:research_journal_article).permit(:title, :text, :published_at, :research_journal_volume_id, researcher_ids: [])
+    params.require(:research_journal_article).permit(:title, :text, :published_at, :abstract, :references, :research_journal_volume_id, researcher_ids: [])
   end
 end

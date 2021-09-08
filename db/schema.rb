@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_162252) do
+ActiveRecord::Schema.define(version: 2021_09_08_094427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(version: 2021_09_07_162252) do
     t.datetime "created_at", precision: 6, null: false
     t.date "updated_at", null: false
     t.uuid "updated_by_id"
+    t.text "abstract"
+    t.text "references"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
