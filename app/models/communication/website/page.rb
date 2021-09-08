@@ -71,15 +71,13 @@ class Communication::Website::Page < ApplicationRecord
 
   def publish_to_github
     return if website&.repository.blank?
-    data = ApplicationController.render(
-      template: 'admin/communication/website/pages/jekyll',
-      layout: false,
-      assigns: { page: self }
-    )
-    github.publish  local_directory: "tmp/pages",
-                    local_file: "#{id}.md",
-                    data: data,
-                    remote_file: "_pages/#{id}.html",
-                    commit_message: "Save page #{ title }"
+    github.publish  kind: :pages,
+                    file: "#{ id }.html",
+                    title: to_s,
+                    data: ApplicationController.render(
+                      template: 'admin/communication/website/pages/jekyll',
+                      layout: false,
+                      assigns: { page: self }
+                    )
   end
 end
