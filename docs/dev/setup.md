@@ -12,11 +12,17 @@ And as each university is multi-website, we need ways to:
 
 ## Production
 
+```
+git remote add production git@ssh.osc-fr1.scalingo.com:osuny-production.git
+```
+
 - https://demo.osuny.org
 - https://bordeauxmontaigne.osuny.org
 - https://clermontauvergne.osuny.org
 
 ## Staging
+
+No setup to do, it's auto-deployed from Github.
 
 - https://demo.osuny.dev
 - https://bordeauxmontaigne.osuny.dev
