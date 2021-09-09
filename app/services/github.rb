@@ -23,6 +23,7 @@ class Github
       sha = nil
     end
     commit_message ||= "[#{kind}] Save #{ title }"
+    return unless repository?
     client.create_contents  repository,
                             remote_file,
                             commit_message,

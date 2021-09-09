@@ -6,7 +6,7 @@ class Admin::ApplicationController < ApplicationController
   protected
 
   def breadcrumb
-    add_breadcrumb 'Tableau de bord', :admin_root_path
+    add_breadcrumb t('dashboard'), :admin_root_path
   end
 
   def breadcrumb_for(object, **options)

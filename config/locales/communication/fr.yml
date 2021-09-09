@@ -18,3 +18,11 @@ fr:
         about_: Aucun sujet (site indépendant)
         about_Research::Journal: Site de revue scientifique
         about_School: Site d'école
+      communication/website/page:
+        published: Publié ?
+        parent: Page parente
+        website: Site Web
+  simple_form:
+    hints:
+      communication/website/page:
+        slug: test

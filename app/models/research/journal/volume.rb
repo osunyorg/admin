@@ -38,13 +38,6 @@ class Research::Journal::Volume < ApplicationRecord
   protected
 
   def publish_to_github
-    return if journal.website&.repository.blank?
-    github = Github.new journal.website.access_token, journal.website.repository
-    data = ApplicationController.render(
-      template: 'admin/research/journal/volumes/jekyll',
-      layout: false,
-      assigns: { volume: self }
-    )
     github.publish  kind: :volumes,
                     file: "#{id}.md",
                     title: title,
@@ -53,5 +46,9 @@ class Research::Journal::Volume < ApplicationRecord
                       layout: false,
                       assigns: { volume: self }
                     )
+  end
+
+  def github
+    @github ||= Github.with_site(journal.website)
   end
 end

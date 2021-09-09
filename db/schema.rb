@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_094427) do
+ActiveRecord::Schema.define(version: 2021_09_09_072507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,13 +45,14 @@ ActiveRecord::Schema.define(version: 2021_09_08_094427) do
     t.text "description"
     t.string "slug"
     t.text "path"
-    t.datetime "published_at"
     t.uuid "parent_id"
     t.integer "position", default: 0, null: false
     t.string "about_type"
     t.uuid "about_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "text"
+    t.boolean "published", default: false
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_094427) do
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
+    t.text "keywords"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"

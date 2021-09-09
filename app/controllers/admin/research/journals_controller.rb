@@ -1,4 +1,4 @@
-class Admin::Research::JournalsController < Admin::Research::Journal::ApplicationController
+class Admin::Research::JournalsController < Admin::Research::ApplicationController
   load_and_authorize_resource class: Research::Journal
 
   def index
@@ -44,6 +44,12 @@ class Admin::Research::JournalsController < Admin::Research::Journal::Applicatio
   end
 
   protected
+
+  def breadcrumb
+    super
+    add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path(journal_id: nil)
+    breadcrumb_for @journal
+  end
 
   def journal_params
     params.require(:research_journal).permit(:title, :description, :access_token, :repository)

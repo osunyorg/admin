@@ -4,8 +4,8 @@ class Admin::Communication::Website::ApplicationController < Admin::Communicatio
   protected
 
   def breadcrumb
-    super
-    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path(journal_id: nil)
+    add_breadcrumb t('dashboard'), :admin_root_path
+    add_breadcrumb '...'
     breadcrumb_for @website, website_id: nil
   end
 

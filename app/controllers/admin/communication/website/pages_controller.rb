@@ -55,7 +55,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   def page_params
     params.require(:communication_website_page)
           .permit(:university_id, :communication_website_id, :title,
-            :description, :about_type, :about_id, :slug, :published_at,
+            :description, :text, :about_type, :about_id, :slug, :published,
             :parent_id)
   end
 end

@@ -1,17 +1,25 @@
 <%= simple_form_for [:admin, page] do |f| %>
-  <div class="row">
-    <div class="col-md-8">
-      <%= f.input :title %>
-      <%= f.input :slug %>
-      <%= f.input :description %>
-    </div>
-    <div class="col-md-4">
-      <%= f.input :published_at, html5: true %>
-      <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
-      <%= f.association :website, include_blank: false %>
+<div class="row">
+  <div class="col-md-8">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :text, input_html: { rows: 20 } %>
+  </div>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Metadata</h5>
+      </div>
+      <div class="card-body">
+        <%= f.input :slug %>
+        <%= f.input :published %>
+        <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
+        <%= f.association :website, include_blank: false %>
+      </div>
     </div>
   </div>
-  <% content_for :buttons do %>
-    <%= submit f %>
-  <% end %>
+</div>
+<% content_for :buttons do %>
+  <%= submit f %>
+<% end %>
 <% end %>

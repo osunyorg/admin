@@ -70,7 +70,6 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def publish_to_github
-    return if website&.repository.blank?
     github.publish  kind: :pages,
                     file: "#{ id }.html",
                     title: to_s,

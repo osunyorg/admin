@@ -21,8 +21,25 @@
 class Research::Researcher < ApplicationRecord
   belongs_to :user, optional: true
   has_and_belongs_to_many :articles, class_name: 'Research::Journal::Article'
+  has_many :journals, through: :articles
 
-  after_save :update_articles
+  after_save :publish_to_github
+
+  def websites
+    @websites ||= journals.collect(&:website).uniq.compact
+  end
+
+  def publish_to_website(website)
+    github = Github.new website.access_token, website.repository
+    github.publish  kind: :researchers,
+                    file: "#{ id }.md",
+                    title: to_s,
+                    data: ApplicationController.render(
+                      template: 'admin/research/researchers/jekyll',
+                      layout: false,
+                      assigns: { researcher: self }
+                    )
+  end
 
   def to_s
     "#{ first_name } #{ last_name }"
@@ -30,7 +47,7 @@ class Research::Researcher < ApplicationRecord
 
   protected
 
-  def update_articles
-    articles.find_each &:save
+  def publish_to_github
+    websites.each { |website| publish_to_website(website) }
   end
 end

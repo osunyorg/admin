@@ -45,8 +45,6 @@ class Research::Journal::Article < ApplicationRecord
   protected
 
   def publish_to_github
-    return if journal.website&.repository.blank?
-    github = Github.new journal.website.access_token, journal.website.repository
     github.publish  kind: :articles,
                     file: "#{id}.md",
                     title: title,
@@ -56,14 +54,11 @@ class Research::Journal::Article < ApplicationRecord
                       assigns: { article: self }
                     )
     researchers.each do |researcher|
-      github.publish  kind: :researchers,
-                      file: "#{ researcher.id }.md",
-                      title: researcher.to_s,
-                      data: ApplicationController.render(
-                        template: 'admin/research/researchers/jekyll',
-                        layout: false,
-                        assigns: { researcher: researcher }
-                      )
+      researcher.publish_to_website(journal.website)
     end
+  end
+
+  def github
+    @github ||= Github.with_site(journal.website)
   end
 end
