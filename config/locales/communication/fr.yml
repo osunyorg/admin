@@ -19,10 +19,13 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_School: Site d'école
       communication/website/page:
+        title: Titre
+        description: Description (SEO)
+        text: Textet
         published: Publié ?
         parent: Page parente
         website: Site Web
   simple_form:
     hints:
-      communication/website/page:
-        slug: test
+      communication_website_page:
+        slug: Laisser vide pour la page d'accueil du site

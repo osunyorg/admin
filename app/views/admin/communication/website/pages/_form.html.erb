@@ -1,9 +1,16 @@
 <%= simple_form_for [:admin, page] do |f| %>
 <div class="row">
   <div class="col-md-8">
-    <%= f.input :title %>
-    <%= f.input :description %>
-    <%= f.input :text, input_html: { rows: 20 } %>
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Content</h5>
+      </div>
+      <div class="card-body">
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :text, input_html: { rows: 20 } %>
+      </div>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="card flex-fill w-100">

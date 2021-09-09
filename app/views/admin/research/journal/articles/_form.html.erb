@@ -1,16 +1,30 @@
 <%= simple_form_for [:admin, article] do |f| %>
   <div class="row">
-    <div class="col-md-4">
-      <%= f.input :title, as: :text, input_html: { rows: 3 } %>
-      <%= f.association :volume, collection: @journal.volumes %>
-      <%= f.input :published_at, html5: true %>
-      <%= f.association :researchers %>
-    </div>
     <div class="col-md-8">
-      <%= f.input :abstract, as: :text, input_html: { rows: 6 } %>
-      <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
-      <%= f.input :text, input_html: { rows: 20 } %>
-      <%= f.input :references, as: :text, input_html: { rows: 10 } %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Content</h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :title, as: :text, input_html: { rows: 3 } %>
+          <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
+          <%= f.input :text, input_html: { rows: 20 } %>
+          <%= f.input :references, as: :text, input_html: { rows: 10 } %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Metadata</h5>
+        </div>
+        <div class="card-body">
+          <%= f.association :volume, collection: @journal.volumes %>
+          <%= f.input :published_at, html5: true %>
+          <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
+          <%= f.association :researchers %>
+        </div>
+      </div>
     </div>
   </div>
   <% content_for :buttons do %>
