@@ -32,6 +32,26 @@ class Github
   rescue
   end
 
+  def send_file(attachment, path)
+    begin
+      content = client.content repository, path: path
+      sha = content[:sha]
+    rescue
+      sha = nil
+    end
+    commit_message ||= "[file] Save #{ path }"
+    return if repository.blank?
+    path_without_slash = path[1..-1]
+    # local_path = attachment.download_blob_to_tempfile
+    client.create_contents  repository,
+                            path_without_slash,
+                            commit_message,
+                            attachment.download,
+                            # file: local_path,
+                            sha: sha
+  rescue
+  end
+
   def read_file_at(path)
     data = client.content repository, path: path
     Base64.decode64 data.content

@@ -10,7 +10,7 @@ tags:
   - "economic growth"
 lang: Français
 date: "<%= @volume.published_at %>"
-image: /assets/img/volume-1.png
+image: "<%= @volume.cover_path %>"
 articles:
 <% @volume.articles.each do |article| %>
   - <%= article.id %>

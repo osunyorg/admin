@@ -33,6 +33,10 @@ class Research::Journal::Volume < ApplicationRecord
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
+  def cover_path
+    "/assets/img/volumes/#{id}#{cover.filename.extension_with_delimiter}"
+  end
+
   def to_s
     "##{ number } #{ title }"
   end
@@ -48,6 +52,7 @@ class Research::Journal::Volume < ApplicationRecord
                       layout: false,
                       assigns: { volume: self }
                     )
+    github.send_file cover, cover_path if cover.attached?
   end
 
   def github
