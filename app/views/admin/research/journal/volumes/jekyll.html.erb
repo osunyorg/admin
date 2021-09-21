@@ -1,19 +1,13 @@
 ---
 title: "<%= @volume.title %>"
 number: <%= @volume.number %>
-issn: "-"
-tags:
-  - "Andy Stirling"
-  - "anti-imperialism"
-  - "de colonial degrowth"
-  - "degrowth"
-  - "economic growth"
-lang: Français
+issn: "<%= @volume.journal.issn %>"
+keywords: "<%= @volume.keywords %>"
 date: "<%= @volume.published_at %>"
 image: "<%= @volume.cover_path %>"
 articles:
 <% @volume.articles.each do |article| %>
-  - <%= article.id %>
+- <%= article.id %>
 <% end %>
 ---
 <%= @volume.description %>

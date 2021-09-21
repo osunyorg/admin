@@ -52,6 +52,6 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   end
 
   def journal_params
-    params.require(:research_journal).permit(:title, :description, :access_token, :repository)
+    params.require(:research_journal).permit(:title, :description, :issn, :access_token, :repository)
   end
 end

@@ -4,6 +4,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  description         :text
+#  keywords            :text
 #  number              :integer
 #  published_at        :date
 #  title               :string

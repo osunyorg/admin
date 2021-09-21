@@ -5,6 +5,7 @@
 #  id            :uuid             not null, primary key
 #  access_token  :string
 #  description   :text
+#  issn          :string
 #  repository    :string
 #  title         :string
 #  created_at    :datetime         not null
