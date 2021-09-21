@@ -4,8 +4,7 @@ class Admin::Research::Journal::ApplicationController < Admin::Research::Applica
   protected
 
   def breadcrumb
-    add_breadcrumb t('dashboard'), :admin_root_path
-    add_breadcrumb '...'
+    short_breadcrumb
     breadcrumb_for @journal, journal_id: nil
   end
 

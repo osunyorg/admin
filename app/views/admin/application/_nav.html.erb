@@ -1,4 +1,4 @@
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar<%= ' collapsed' if @menu_collapsed %>">
   <div class="sidebar-content js-simplebar">
     <%= link_to admin_root_path, class: 'sidebar-brand' do %>
       <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>

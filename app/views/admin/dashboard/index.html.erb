@@ -10,3 +10,37 @@
     </div>
   </div>
 </div>
+
+<% if current_university.research_journals.any? %>
+  <h2 class="h4 my-4"><%= Research::Journal.model_name.human(count: 2) %></h2>
+  <div class="row">
+    <% current_university.research_journals.each do |journal| %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <span class="float-end"><i class="fas fa-newspaper fa-2x"></i></span>
+            <h4><%= journal %></h4>
+            <p><%= link_to 'Voir', [:admin, journal], class: 'stretched-link' %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_university.communication_websites.any? %>
+  <h2 class="h4 my-4"><%= Communication::Website.model_name.human(count: 2) %></h2>
+  <div class="row">
+    <% current_university.communication_websites.each do |website| %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <span class="float-end"><i class="fas fa-sitemap fa-2x"></i></span>
+            <h4><%= website %></h4>
+            <p><%= link_to 'Voir', [:admin, website], class: 'stretched-link' %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

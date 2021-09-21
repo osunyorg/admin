@@ -9,6 +9,12 @@ class Admin::ApplicationController < ApplicationController
     add_breadcrumb t('dashboard'), :admin_root_path
   end
 
+  def short_breadcrumb
+    @menu_collapsed = true
+    add_breadcrumb t('dashboard'), :admin_root_path
+    add_breadcrumb '...'
+  end
+
   def breadcrumb_for(object, **options)
     return unless object
     object.persisted? ? add_breadcrumb(object, [:admin, object, options])

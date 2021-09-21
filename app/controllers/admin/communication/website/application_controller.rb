@@ -4,8 +4,7 @@ class Admin::Communication::Website::ApplicationController < Admin::Communicatio
   protected
 
   def breadcrumb
-    add_breadcrumb t('dashboard'), :admin_root_path
-    add_breadcrumb '...'
+    short_breadcrumb
     breadcrumb_for @website, website_id: nil
   end
 

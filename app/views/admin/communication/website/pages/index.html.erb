@@ -1,26 +1,6 @@
 <% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Page.human_attribute_name('path') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @pages.each do |page| %>
-      <tr>
-        <td><%= link_to page, admin_communication_website_page_path(page.id) %></td>
-        <td><%= page.path %></td>
-        <td class="text-end">
-          <%= edit_link page %>
-          <%= destroy_link page %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'admin/communication/website/pages/list', pages: @pages %>
 
 <% content_for :buttons do %>
   <%= create_link Communication::Website::Page %>

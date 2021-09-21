@@ -13,18 +13,12 @@
 
 <%= link_to t('create'),
             new_admin_communication_website_page_path(website_id: @website),
-            class: button_classes %>
+            class: button_classes('me-3') %>
 
 <%= link_to 'Toutes les pages',
             admin_communication_website_pages_path(website_id: @website) %>
 
-<div class="row">
-  <% @website.pages.ordered.limit(5).each do |page| %>
-    <div class="col-md-3 mt-4">
-      <%= link_to page, admin_communication_website_page_path(website_id: @website, id: page) %>
-    </div>
-  <% end %>
-</div>
+<%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
 
 <% content_for :buttons do %>
   <%= edit_link @website %>
