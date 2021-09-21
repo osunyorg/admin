@@ -42,12 +42,10 @@ class Github
     commit_message ||= "[file] Save #{ path }"
     return if repository.blank?
     path_without_slash = path[1..-1]
-    # local_path = attachment.download_blob_to_tempfile
     client.create_contents  repository,
                             path_without_slash,
                             commit_message,
                             attachment.download,
-                            # file: local_path,
                             sha: sha
   rescue
   end
