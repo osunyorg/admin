@@ -1,26 +1,6 @@
 <% content_for :title, Research::Journal::Article.model_name.human(count: 2) %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Research::Journal::Article.model_name.human %></th>
-      <th><%= Research::Journal::Article.human_attribute_name('published_at') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= link_to article, [:admin, article] %></td>
-        <td><%= article.published_at %></td>
-        <td class="text-end">
-          <%= edit_link article %>
-          <%= destroy_link article %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'admin/research/journal/articles/list', articles: @articles %>
 
 <% content_for :buttons do %>
   <%= create_link Research::Journal::Article %>

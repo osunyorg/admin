@@ -7,8 +7,9 @@
 #  description              :text
 #  path                     :text
 #  position                 :integer          default(0), not null
-#  published_at             :datetime
+#  published                :boolean          default(FALSE)
 #  slug                     :string
+#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

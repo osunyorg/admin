@@ -37,7 +37,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
     else
       breadcrumb
       render :edit, status: :unprocessable_entity
-  end
+    end
   end
 
   def destroy
@@ -55,6 +55,6 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def volume_params
-    params.require(:research_journal_volume).permit(:title, :number, :published_at, :description)
+    params.require(:research_journal_volume).permit(:title, :number, :cover, :published_at, :description)
   end
 end

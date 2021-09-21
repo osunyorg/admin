@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  keywords                   :text
 #  published_at               :date
 #  references                 :text
 #  text                       :text
@@ -37,6 +38,10 @@ class Research::Journal::Article < ApplicationRecord
   has_and_belongs_to_many :researchers, class_name: 'Research::Researcher'
 
   after_save :publish_to_github
+
+  has_one_attached :pdf
+
+  scope :ordered, -> { order(:published_at, :created_at) }
 
   def to_s
     "#{ title }"

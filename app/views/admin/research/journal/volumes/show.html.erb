@@ -1,36 +1,31 @@
 <% content_for :title, @volume %>
 
-<p>
-  <strong>Number:</strong>
-  <%= @volume.number %>
-</p>
-
-<p>
-  <strong>Published at:</strong>
-  <%= @volume.published_at&.to_date %>
-</p>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Research::Journal::Article.model_name.human %></th>
-      <th>Published at</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @volume.articles.each do |article| %>
-      <tr>
-        <td><%= link_to article, [:admin, article] %></td>
-        <td><%= article.published_at %></td>
-        <td class="text-end">
-          <%= edit_link article %>
-          <%= destroy_link article %>
-        </td>
-      </tr>
+<div class="row">
+  <div class="col-md-3">
+    <% if @volume.cover.attached? %>
+      <%= image_tag @volume.cover, class: 'img-fluid img-thumbnail bg-light mb-4' %>
     <% end %>
-  </tbody>
-</table>
+    <p>
+      <span class="badge bg-secondary">
+        <%= @volume.number %>
+      </span>
+      <span class="float-end">
+        <%= @volume.published_at&.to_date %>
+      </span>
+    </p>
+    <%= @volume.description %>
+  </div>
+  <div class="col-md-9">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5">Articles</h2>
+      </div>
+      <div class="card-body">
+        <%= render 'admin/research/journal/articles/list', articles: @volume.articles %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% content_for :buttons do %>
   <%= edit_link @volume %>

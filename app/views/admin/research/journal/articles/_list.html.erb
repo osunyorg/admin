@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="ps-0"><%= Research::Journal::Article.model_name.human %></th>
+      <th><%= Research::Journal::Article.human_attribute_name('published_at') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% articles.each do |article| %>
+      <tr>
+        <td class="ps-0"><%= link_to article, [:admin, article] %></td>
+        <td><%= article.published_at %></td>
+        <td class="text-end pe-0">
+          <%= edit_link article %>
+          <%= destroy_link article %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

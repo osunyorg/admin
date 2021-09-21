@@ -29,6 +29,8 @@ class Research::Journal::Volume < ApplicationRecord
 
   after_save :publish_to_github
 
+  has_one_attached :cover
+
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
   def to_s

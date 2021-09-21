@@ -1,20 +1,48 @@
 <% content_for :title, @article %>
 
-<p>
-  <strong><%= Research::Journal::Article.human_attribute_name('published_at') %></strong>
-  <%= @article.published_at&.to_date %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5">Content</h2>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('abstract') %></h3>
+        <p><%= @article.abstract %></p>
+        <% if @article.pdf.attached? %>
+          <h3 class="h5 mt-4">PDF</h3>
+          <%= link_to @article.pdf.filename, url_for(@article.pdf) %>
+        <% end %>
+        <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('text') %></h3>
+        <p><%= @article.text %></p>
+        <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('references') %></h3>
+        <p><%= @article.references %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Metadata</h5>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('published_at') %></h3>
+        <p><%= @article.published_at&.to_date %></p>
+        <% if @article.volume %>
+          <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('researchers') %></h3>
+          <%= link_to @article.volume, [:admin, @article.volume] %>
+        <% end %>
+        <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('researchers') %></h3>
+        <ul class="list-unstyled">
+          <% @article.researchers.each do |researcher| %>
+            <li><%= link_to researcher, [:admin, researcher] %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
-<p>
-  <strong><%= Research::Journal::Article.human_attribute_name('researchers') %></strong>
-  <ul>
-    <% @article.researchers.each do |researcher| %>
-      <li><%= link_to researcher, [:admin, researcher] %></li>
-    <% end %>
-  </ul>
-</p>
-
-<%= @article.abstract %>
+  </div>
+</div>
 
 <% content_for :buttons do %>
   <%= edit_link @article %>

@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  keywords                   :text
 #  published_at               :date
 #  references                 :text
 #  text                       :text
