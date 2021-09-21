@@ -20,7 +20,8 @@
           <div class="card-body">
             <span class="float-end"><i class="fas fa-newspaper fa-2x"></i></span>
             <h4><%= journal %></h4>
-            <p><%= link_to 'Voir', [:admin, journal], class: 'stretched-link' %></p>
+            <p>&nbsp;</p>
+            <%= link_to 'Voir', [:admin, journal], class: button_classes('stretched-link') %>
           </div>
         </div>
       </div>
@@ -37,8 +38,8 @@
           <div class="card-body">
             <span class="float-end"><i class="fas fa-sitemap fa-2x"></i></span>
             <h4><%= website %></h4>
-            <p><%= website.domain %></p>
-            <p><%= link_to 'Voir', [:admin, website], class: 'stretched-link' %></p>
+            <p class="small"><%= website.domain %></p>
+            <%= link_to 'Voir', [:admin, website], class: button_classes('stretched-link') %>
           </div>
         </div>
       </div>
