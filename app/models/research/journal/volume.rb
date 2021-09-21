@@ -28,7 +28,7 @@ class Research::Journal::Volume < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id
 
-  after_save :publish_to_github
+  after_commit :publish_to_github
 
   has_one_attached :cover
 
