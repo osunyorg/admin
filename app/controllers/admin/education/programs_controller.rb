@@ -24,6 +24,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if @program.save
       redirect_to [:admin, @program], notice: "Program was successfully created."
     else
+      breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,6 +33,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if @program.update(program_params)
       redirect_to [:admin, @program], notice: "Program was successfully updated."
     else
+      breadcrumb
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end

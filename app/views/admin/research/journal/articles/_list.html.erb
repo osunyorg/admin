@@ -9,7 +9,7 @@
   <tbody>
     <% articles.each do |article| %>
       <tr>
-        <td class="ps-0"><%= link_to article, [:admin, article] %></td>
+        <td class="ps-0"><%= link_to article, admin_research_journal_article_path(journal_id: @journal, id: article) %></td>
         <td><%= article.published_at %></td>
         <td class="text-end pe-0">
           <%= edit_link article %>
