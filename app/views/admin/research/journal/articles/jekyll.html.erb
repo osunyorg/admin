@@ -2,13 +2,14 @@
 title: "<%= @article.title %>"
 volume: "<%= @article.volume.id %>"
 publication: "<%= @article.published_at %>"
-abstract: "<%= @article.abstract %>"
+pdf: "<%= @article.pdf_path %>"
 keywords: "<%= @article.keywords %>"
-description: "<%= @article.abstract %>"
-references: "<%= @article.references %>"
 authors:
 <% @article.researchers.each do |researcher| %>
 - "<%= researcher.id %>"
 <% end %>
+abstract: "<%= @article.abstract %>"
+description: "<%= @article.abstract %>"
+references: "<%= @article.references %>"
 ---
 <%= simple_format @article.text %>

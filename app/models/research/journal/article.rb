@@ -43,6 +43,10 @@ class Research::Journal::Article < ApplicationRecord
 
   scope :ordered, -> { order(:published_at, :created_at) }
 
+  def pdf_path
+    "/assets/articles/#{id}/#{pdf.filename}"
+  end
+
   def to_s
     "#{ title }"
   end
@@ -61,6 +65,7 @@ class Research::Journal::Article < ApplicationRecord
     researchers.each do |researcher|
       researcher.publish_to_website(journal.website)
     end
+    github.send_file pdf, pdf_path if pdf.attached?
   end
 
   def github
