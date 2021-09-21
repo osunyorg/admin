@@ -1,5 +1,6 @@
 ---
 title: "<%= @article.title %>"
+description: "<%= @article.abstract %>"
 volume: "<%= @article.volume.id %>"
 publication: "<%= @article.published_at %>"
 pdf: "<%= @article.pdf_path %>"
@@ -9,7 +10,6 @@ authors:
 - "<%= researcher.id %>"
 <% end %>
 abstract: "<%= @article.abstract %>"
-description: "<%= @article.abstract %>"
 references: "<%= @article.references %>"
 ---
 <%= simple_format @article.text %>
