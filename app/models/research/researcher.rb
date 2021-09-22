@@ -31,7 +31,7 @@ class Research::Researcher < ApplicationRecord
 
   def publish_to_website(website)
     github = Github.new website.access_token, website.repository
-    github.publish  kind: :researchers,
+    github.publish  kind: :authors,
                     file: "#{ id }.md",
                     title: to_s,
                     data: ApplicationController.render(
