@@ -19,27 +19,27 @@ class Server::LanguagesController < Server::ApplicationController
   end
 
   def create
-    breadcrumb
     if @language.save
-      redirect_to @language, notice: "Language was successfully created."
+      redirect_to [:server, @language], notice: "Language was successfully created."
     else
+      breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    breadcrumb
-    add_breadcrumb 'Modifier'
     if @language.update(language_params)
-      redirect_to @language, notice: "Language was successfully updated."
+      redirect_to [:server, @language], notice: "Language was successfully updated."
     else
+      breadcrumb
+      add_breadcrumb 'Modifier'
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @language.destroy
-    redirect_to languages_url, notice: "Language was successfully destroyed."
+    redirect_to server_languages_url, notice: "Language was successfully destroyed."
   end
 
   protected

@@ -19,38 +19,27 @@ class Server::UniversitiesController < Server::ApplicationController
   end
 
   def create
-    breadcrumb
-    respond_to do |format|
-      if @university.save
-        format.html { redirect_to [:server, @university], notice: "University was successfully created." }
-        format.json { render :show, status: :created, location: [:server, @university] }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @university.errors, status: :unprocessable_entity }
-      end
+    if @university.save
+      redirect_to [:server, @university], notice: "University was successfully created."
+    else
+      breadcrumb
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    breadcrumb
-    add_breadcrumb 'Modifier'
-    respond_to do |format|
-      if @university.update(university_params)
-        format.html { redirect_to [:server, @university], notice: "University was successfully updated." }
-        format.json { render :show, status: :ok, location: [:server, @university] }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @university.errors, status: :unprocessable_entity }
-      end
+    if @university.update(university_params)
+      redirect_to [:server, @university], notice: "University was successfully updated."
+    else
+      breadcrumb
+      add_breadcrumb 'Modifier'
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @university.destroy
-    respond_to do |format|
-      format.html { redirect_to server_universities_url, notice: "University was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to server_universities_url, notice: "University was successfully destroyed."
   end
 
   protected
