@@ -25,18 +25,21 @@
 #  unlock_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  language_id            :uuid
 #  university_id          :uuid             not null
 #
 # Indexes
 #
 #  index_users_on_confirmation_token       (confirmation_token) UNIQUE
 #  index_users_on_email_and_university_id  (email,university_id) UNIQUE
+#  index_users_on_language_id              (language_id)
 #  index_users_on_reset_password_token     (reset_password_token) UNIQUE
 #  index_users_on_university_id            (university_id)
 #  index_users_on_unlock_token             (unlock_token) UNIQUE
 #
 # Foreign Keys
 #
+#  fk_rails_...  (language_id => languages.id)
 #  fk_rails_...  (university_id => universities.id)
 #
 require "test_helper"

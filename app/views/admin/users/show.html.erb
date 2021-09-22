@@ -15,6 +15,11 @@
   <%= @user.role %>
 </p>
 
+<p>
+  <strong>Language:</strong>
+  <%= @user.language %>
+</p>
+
 <% if @user.researcher %>
   <p>
     <strong><%= User.human_attribute_name('researcher') %></strong>

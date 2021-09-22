@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_091537) do
+ActiveRecord::Schema.define(version: 2021_09_22_095252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -242,8 +242,10 @@ ActiveRecord::Schema.define(version: 2021_09_22_091537) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "language_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
+    t.index ["language_id"], name: "index_users_on_language_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["university_id"], name: "index_users_on_university_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -267,5 +269,6 @@ ActiveRecord::Schema.define(version: 2021_09_22_091537) do
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
   add_foreign_key "research_researchers", "users"
+  add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end
