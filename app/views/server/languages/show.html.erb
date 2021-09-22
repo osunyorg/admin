@@ -1,0 +1,10 @@
+<% content_for :title, @language %>
+
+<p>
+  <strong>Iso code:</strong>
+  <%= @language.iso_code %>
+</p>
+
+<% content_for :buttons do %>
+  <%= link_to t('edit'), edit_server_language_path(@language), class: button_classes %>
+<% end %>

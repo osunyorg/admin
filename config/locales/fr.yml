@@ -13,6 +13,9 @@ fr:
       university:
         one: Université
         other: Universités
+      language:
+        one: Langue
+        other: Langues
       user:
         one: Utilisateur
         other: Utilisateurs

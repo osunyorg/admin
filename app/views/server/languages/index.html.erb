@@ -1,0 +1,27 @@
+<% content_for :title, Language.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Iso code</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @languages.each do |language| %>
+      <tr>
+        <td><%= link_to language, [:server, language] %></td>
+        <td><%= language.iso_code %></td>
+        <td class="text-end">
+          <%= link_to t('edit'), edit_server_language_path(language), class: button_classes %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :buttons do %>
+  <%= link_to t('create'), new_server_language_path, class: button_classes %>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :languages
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :server do
     resources :universities
+    resources :languages
     root to: 'dashboard#index'
   end
 

@@ -1,5 +1,8 @@
 University.create name: 'Osuny', identifier: 'demo'
 
+Language.where(name: 'French', iso_code: 'fr').first_or_create
+Language.where(name: 'English', iso_code: 'en').first_or_create
+
 Administration::Qualiopi::Criterion.destroy_all
 Administration::Qualiopi::Criterion.create [
   {

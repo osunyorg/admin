@@ -33,6 +33,7 @@ class Server::UniversitiesController < Server::ApplicationController
 
   def update
     breadcrumb
+    add_breadcrumb 'Modifier'
     respond_to do |format|
       if @university.update(university_params)
         format.html { redirect_to [:server, @university], notice: "University was successfully updated." }

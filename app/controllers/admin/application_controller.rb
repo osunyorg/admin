@@ -2,6 +2,7 @@ class Admin::ApplicationController < ApplicationController
   layout 'admin/layouts/application'
 
   before_action :authenticate_user!
+  before_action :set_locale
 
   protected
 
@@ -19,5 +20,10 @@ class Admin::ApplicationController < ApplicationController
     return unless object
     object.persisted? ? add_breadcrumb(object, [:admin, object, options])
                       : add_breadcrumb('Créer')
+  end
+
+  def set_locale
+    return unless current_user
+    # I18n.locale = current_user.locale
   end
 end
