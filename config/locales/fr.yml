@@ -36,5 +36,6 @@ fr:
         last_name: Nom
         role: Rôle
         researcher: Profil de chercheur
+        language: Langue préférée
   simple_form:
     hints:

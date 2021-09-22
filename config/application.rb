@@ -31,7 +31,7 @@ module Osuny
 
     config.sass.preferred_syntax = :sass
 
-    config.i18n.available_locales = [:fr]
+    config.i18n.available_locales = [:fr, :en]
     config.i18n.default_locale = :fr
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.yml"]
 

@@ -24,6 +24,7 @@ class Admin::ApplicationController < ApplicationController
 
   def set_locale
     return unless current_user
-    # I18n.locale = current_user.locale
+    return unless current_user.language
+    I18n.locale = current_user.language.iso_code
   end
 end

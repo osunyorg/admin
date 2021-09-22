@@ -1,0 +1,41 @@
+en:
+  true: Yes
+  false: No
+  home: Home
+  dashboard: Dashboard
+  show: Show
+  create: Create
+  edit: Edit
+  delete: Delete
+  please-confirm: Are you sure?
+  activerecord:
+    models:
+      university:
+        one: University
+        other: Universities
+      language:
+        one: Language
+        other: Languages
+      user:
+        one: User
+        other: Users
+    attributes:
+      university:
+        name: Name
+        address: Address
+        zipcode: Zipcode
+        city: City
+        country: Country
+        private: Private
+        public_or_private: Public/private
+        public: Public
+        private: Private
+      user:
+        email: Email
+        first_name: First name
+        last_name: Last name
+        role: Role
+        researcher: Researcher profile
+        language: Favourite language
+  simple_form:
+    hints:
