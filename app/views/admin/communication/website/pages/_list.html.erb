@@ -9,7 +9,7 @@
   <tbody>
     <% pages.each do |page| %>
       <tr>
-        <td><%= link_to page, admin_communication_website_page_path(page.id) %></td>
+        <td><%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %></td>
         <td><%= page.path %></td>
         <td class="text-end">
           <%= edit_link page %>
