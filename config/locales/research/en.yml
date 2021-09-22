@@ -1,0 +1,29 @@
+fr:
+  activemodel:
+    models:
+      research: Research
+  activerecord:
+    models:
+      research/researcher:
+        one: Researcher
+        other: Researchers
+      research/journal:
+        one: Journal
+        other: Journals
+      research/journal/volume:
+        one: Volume
+        other: Volumes
+      research/journal/article:
+        one: Article
+        other: Articles
+    attributes:
+      research/journal:
+        title: Title
+      research/journal/article:
+        title: Title
+        researchers: Authors
+      research/researcher:
+        first_name: First name
+        last_name: Last name
+        biography: Biography
+        user: User

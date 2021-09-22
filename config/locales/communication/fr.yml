@@ -21,7 +21,7 @@ fr:
       communication/website/page:
         title: Titre
         description: Description (SEO)
-        text: Textet
+        text: Text
         published: Publié ?
         parent: Page parente
         website: Site Web
