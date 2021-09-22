@@ -12,8 +12,14 @@
         <td class="ps-0"><%= link_to article, admin_research_journal_article_path(journal_id: @journal, id: article) %></td>
         <td><%= article.published_at %></td>
         <td class="text-end pe-0">
-          <%= edit_link article %>
-          <%= destroy_link article %>
+          <%= link_to t('edit'),
+                      edit_admin_research_journal_article_path(journal_id: @journal, id: article),
+                      class: button_classes %>
+          <%= link_to t('delete'),
+                      admin_research_journal_article_path(journal_id: @journal, id: article),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
         </td>
       </tr>
     <% end %>

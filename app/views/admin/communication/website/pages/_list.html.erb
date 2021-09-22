@@ -12,8 +12,14 @@
         <td><%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %></td>
         <td><%= page.path %></td>
         <td class="text-end">
-          <%= edit_link page %>
-          <%= destroy_link page %>
+          <%= link_to t('edit'),
+                      edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                      class: button_classes %>
+          <%= link_to t('delete'),
+                      admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
         </td>
       </tr>
     <% end %>
