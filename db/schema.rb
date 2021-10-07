@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_095252) do
+ActiveRecord::Schema.define(version: 2021_10_07_144729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -64,6 +64,28 @@ ActiveRecord::Schema.define(version: 2021_09_22_095252) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
+  end
+
+  create_table "communication_website_imported_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.uuid "page_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
+    t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
+  end
+
+  create_table "communication_website_imported_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_communication_website_imported_websites_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
   end
 
   create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -254,6 +276,11 @@ ActiveRecord::Schema.define(version: 2021_09_22_095252) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_imported_pages", "communication_website_imported_websites", column: "website_id"
+  add_foreign_key "communication_website_imported_pages", "communication_website_pages", column: "page_id"
+  add_foreign_key "communication_website_imported_pages", "universities"
+  add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_imported_websites", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
