@@ -15,6 +15,9 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
+    <%= f.association :language,
+                      required: true,
+                      include_blank: 'Select a language' %>
   </div>
 
   <div class="form-actions">
