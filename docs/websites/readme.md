@@ -7,7 +7,7 @@ Attributes:
 - name:string
 - domain:string
 
-## websites/Article
+## websites/Post
 
 Attributes:
 - university:references

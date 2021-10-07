@@ -28,7 +28,6 @@ Plugin, connexion à la BDD, export JSON ou connexion API.
 Communication::Website::Imported::Website
 - university:references
 - website:references (has_one Communication::Website)
-- page:references (has_one Communication::Website::Page)
 - status:integer (enum)
 
 Communication::Website::Imported::Page
