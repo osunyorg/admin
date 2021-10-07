@@ -60,8 +60,7 @@ Etapes :
 - https://www.iut.u-bordeaux-montaigne.fr/wp-json/wp/v2/posts
 - https://www.iut.u-bordeaux-montaigne.fr/wp-json/wp/v2/pages
 
-
 ## Recherches
 
-https://kinsta.com/fr/blog/api-rest-wordpress/
-https://getshifter.io/
+- https://kinsta.com/fr/blog/api-rest-wordpress/
+- https://getshifter.io/
