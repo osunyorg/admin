@@ -5,6 +5,14 @@ module University::WithIdentifier
     # TODO restrict to lower case, numbers, -, _
     validates :identifier, presence: true, uniqueness: true
 
+    def host
+      @host ||= [identifier, self.class.send("#{ENV['APPLICATION_ENV']}_domain")].join
+    end
+
+    def url
+      @url ||= Rails.env.development? ? "http://#{host}:3000" : "https://#{host}"
+    end
+
     def self.with_host(host)
       find_by(identifier: extract_identifier_from(host))
     end
@@ -16,9 +24,7 @@ module University::WithIdentifier
     # Staging     osuny.osuny.dev   -> osuny
     # Dev         osuny.osuny       -> osuny
     def self.extract_identifier_from(host)
-      host.remove(production_domain)
-          .remove(staging_domain)
-          .remove(dev_domain)
+      host.remove self.send("#{ENV['APPLICATION_ENV']}_domain")
     end
 
     def self.production_domain
@@ -29,19 +35,8 @@ module University::WithIdentifier
       ENV['OSUNY_STAGING'] || '.osuny.dev'
     end
 
-    def self.dev_domain
+    def self.development_domain
       ENV['OSUNY_DEV'] || '.osuny'
-    end
-  end
-
-  def domain_url
-    case Rails.env
-    when 'development'
-      "http://#{identifier}#{University.dev_domain}:3000"
-    when 'staging'
-      "https://#{identifier}#{University.staging_domain}"
-    when 'production'
-      "https://#{identifier}#{University.production_domain}"
     end
   end
 end

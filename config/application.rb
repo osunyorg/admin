@@ -33,7 +33,20 @@ module Osuny
 
     config.i18n.available_locales = [:fr, :en]
     config.i18n.default_locale = :fr
+    config.i18n.fallbacks = [::I18n.default_locale]
+    config.i18n.enforce_available_locales = false
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.yml"]
+
+    config.internal_domains = ['@noesya.coop'].freeze
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        address: "smtp-relay.sendinblue.com",
+        port: 587,
+        user_name: ENV['SMTP_USER'],
+        password: ENV['SMTP_PASSWORD'],
+        authentication: :plain
+    }
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

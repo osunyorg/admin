@@ -19,7 +19,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :integer
+#  role                   :integer          default("visitor")
 #  sign_in_count          :integer          default(0), not null
 #  unconfirmed_email      :string
 #  unlock_token           :string
@@ -45,12 +45,12 @@
 class User < ApplicationRecord
   include WithDevise
 
-  # has_one_attached_resizable :picture
-  has_one_attached :picture
+  enum role: { visitor: 0, admin: 20, superadmin: 30 }
 
   belongs_to :university
   belongs_to :language
   has_one :researcher, class_name: 'Research::Researcher'
+  has_one_attached :picture
 
   def to_s
     (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}"
