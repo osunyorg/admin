@@ -51,10 +51,10 @@ class Communication::Website::Imported::Page < ApplicationRecord
       self.page.save
     end
     # TODO only if not modified since import
-    page.title = title.to_s
+    page.title = Wordpress.clean title.to_s
     # TODO add that
     # page.description = description.to_s
-    page.text = content.to_s
+    page.text = Wordpress.clean content.to_s
     page.save
   end
 end

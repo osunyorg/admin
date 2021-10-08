@@ -289,6 +289,9 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sanitize (6.0.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.12.0)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -386,6 +389,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails
   rails-i18n
+  sanitize
   sassc-rails
   selenium-webdriver
   sib-api-v3-sdk

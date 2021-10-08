@@ -35,9 +35,12 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   protected
 
+  def wordpress
+    @wordpress ||= Wordpress.new website.domain_url
+  end
+
   def sync_pages
-    # TODO paginate
-    load("#{website.domain_url}/wp-json/wp/v2/pages?per_page=100").each do |hash|
+    wordpress.pages.each do |hash|
       url = hash['link']
       path = URI(url).path
       # TODO id
@@ -50,10 +53,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_posts
-    # TODO paginate
-    # Communication::Website::Imported::Post.destroy_all
-    # Communication::Website::Post.destroy_all
-    load("#{website.domain_url}/wp-json/wp/v2/posts?per_page=100").each do |hash|
+    wordpress.posts.each do |hash|
       identifier = hash['id']
       post = posts.where(university: university, identifier: identifier).first_or_create
       post.url = hash['link']
@@ -65,16 +65,5 @@ class Communication::Website::Imported::Website < ApplicationRecord
       post.published_at = hash['date']
       post.save
     end
-  end
-
-  def load(url)
-    uri = URI(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    # IUT Bordeaux Montaigne pb with certificate
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    JSON.parse(response.body)
   end
 end

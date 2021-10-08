@@ -37,6 +37,7 @@ gem 'sassc-rails'
 gem 'jbuilder'
 gem 'kamifusen'
 gem 'bootstrap'
+gem 'sanitize'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
