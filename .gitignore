@@ -41,4 +41,4 @@ yarn-debug.log*
 .DS_Store
 
 # Ignore environment variables
-.env
+/config/application.yml
