@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_124136) do
+ActiveRecord::Schema.define(version: 2021_10_08_124637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -84,6 +84,25 @@ ActiveRecord::Schema.define(version: 2021_10_08_124136) do
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
   end
 
+  create_table "communication_website_imported_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.uuid "post_id", null: false
+    t.integer "status", default: 0
+    t.string "title"
+    t.text "description"
+    t.text "content"
+    t.text "path"
+    t.text "url"
+    t.datetime "published_at"
+    t.string "identifier"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_communication_website_imported_posts_on_post_id"
+    t.index ["university_id"], name: "index_communication_website_imported_posts_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_imported_posts_on_website_id"
+  end
+
   create_table "communication_website_imported_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
@@ -113,6 +132,20 @@ ActiveRecord::Schema.define(version: 2021_10_08_124136) do
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
+  end
+
+  create_table "communication_website_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "title"
+    t.text "description"
+    t.text "text"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
 
   create_table "communication_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -285,11 +318,16 @@ ActiveRecord::Schema.define(version: 2021_10_08_124136) do
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_pages", "communication_website_pages", column: "page_id"
   add_foreign_key "communication_website_imported_pages", "universities"
+  add_foreign_key "communication_website_imported_posts", "communication_website_imported_websites", column: "website_id"
+  add_foreign_key "communication_website_imported_posts", "communication_website_posts", column: "post_id"
+  add_foreign_key "communication_website_imported_posts", "universities"
   add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_websites", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
+  add_foreign_key "communication_website_posts", "communication_websites"
+  add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"

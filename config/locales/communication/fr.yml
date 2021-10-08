@@ -17,6 +17,11 @@ fr:
       communication/website/page:
         one: Page
         other: Pages
+        all: Toutes les pages
+      communication/website/post:
+        one: Actualité
+        other: Actualités
+        all: Toutes les actualités
       communication/website/imported/website:
         one: Site importé
         other: Sites importés

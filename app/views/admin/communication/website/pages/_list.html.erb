@@ -1,17 +1,17 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
+      <th class="ps-0"><%= Communication::Website::Page.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Page.human_attribute_name('path') %></th>
-      <th></th>
+      <th width="150"></th>
     </tr>
   </thead>
   <tbody>
     <% pages.each do |page| %>
       <tr>
-        <td><%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %></td>
+        <td class="ps-0"><%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %></td>
         <td><%= page.path %></td>
-        <td class="text-end">
+        <td class="text-end pe-0">
           <%= link_to t('edit'),
                       edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                       class: button_classes %>

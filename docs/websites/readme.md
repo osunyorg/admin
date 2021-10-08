@@ -11,19 +11,23 @@ Attributes:
 
 Attributes:
 - university:references
+- website:references
 - title:string
 - description:text
-- data:json
+- text:text
+- published:boolean
 - published_at:datetime
 
 ## websites/Page
 
 Attributes:
 - university:references
+- website:references
 - title:string
 - description:text
-- data:json
+- text:text
 - parent:references
+- published:boolean
 
 ## websites/Document
 

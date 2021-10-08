@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :languages
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+
+  resources :languages
 
   namespace :admin do
     resources :users

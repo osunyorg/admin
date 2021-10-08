@@ -21,6 +21,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
     end
     @imported_website = @website.imported_website
     @imported_pages = @imported_website.pages
+    @imported_posts = @imported_website.posts
     breadcrumb
     add_breadcrumb Communication::Website::Imported::Website.model_name.human
   end

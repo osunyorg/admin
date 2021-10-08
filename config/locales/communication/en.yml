@@ -17,6 +17,11 @@ en:
       communication/website/page:
         one: Page
         other: Pages
+        all: All pages
+      communication/website/post:
+        one: Post
+        other: Posts
+        all: All posts
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
