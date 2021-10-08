@@ -3,7 +3,10 @@
 # Table name: communication_website_imported_pages
 #
 #  id            :uuid             not null, primary key
+#  content       :text
+#  path          :text
 #  status        :integer          default(0)
+#  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  page_id       :uuid             not null
@@ -22,7 +25,6 @@
 #  fk_rails_...  (university_id => universities.id)
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   university: one

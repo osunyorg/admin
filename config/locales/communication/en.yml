@@ -1,4 +1,11 @@
 en:
+  communication:
+    website:
+      imported:
+        launch: Launch import
+        refresh: Refresh import
+        show: Show import
+        pending: Import in progress
   activemodel:
     models:
       communication: Communication
@@ -10,6 +17,9 @@ en:
       communication/website/page:
         one: Page
         other: Pages
+      communication/website/imported/website:
+        one: Imported website
+        other: Imported websites
     attributes:
       communication/website:
         name: Name

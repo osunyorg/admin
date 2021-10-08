@@ -34,8 +34,11 @@
 
 class Communication::Website::Page < ApplicationRecord
   belongs_to :university
-  belongs_to :website, foreign_key: :communication_website_id
-  belongs_to :parent, class_name: 'Communication::Website::Page', optional: true
+  belongs_to :website,
+             foreign_key: :communication_website_id
+  belongs_to :parent,
+             class_name: 'Communication::Website::Page',
+             optional: true
 
   validates :title, presence: true
 
@@ -68,7 +71,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def make_path
-    self.path = "#{parent&.path}/#{slug}"
+    self.path = "#{parent&.path}/#{slug}".gsub('//', '/')
   end
 
   def publish_to_github

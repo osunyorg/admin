@@ -3,7 +3,10 @@
 # Table name: communication_website_imported_pages
 #
 #  id            :uuid             not null, primary key
+#  content       :text
+#  path          :text
 #  status        :integer          default(0)
+#  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  page_id       :uuid             not null
@@ -24,6 +27,31 @@
 #
 class Communication::Website::Imported::Page < ApplicationRecord
   belongs_to :university
-  belongs_to :website, class_name: 'Communication::Website::Imported::Website'
-  belongs_to :page, class_name: 'Communication::Website::Page'
+  belongs_to :website,
+             class_name: 'Communication::Website::Imported::Website'
+  belongs_to :page,
+             class_name: 'Communication::Website::Page',
+             optional: true
+
+  before_validation :sync_page
+
+  def to_s
+    "#{title}"
+  end
+
+  protected
+
+  def sync_page
+    if page.nil?
+      self.page = Communication::Website::Page.new university: university,
+                                                      website: website.website, # Real website, not imported website
+                                                      slug: path
+      self.page.title = "TMP"
+      self.page.save
+    end
+    # TODO only if not modified
+    page.title = title.to_s
+    page.text = content.to_s
+    page.save
+  end
 end

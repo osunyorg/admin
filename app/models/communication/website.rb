@@ -38,6 +38,20 @@ class Communication::Website < ApplicationRecord
     "https://#{ domain }"
   end
 
+  def import!
+    unless imported?
+      self.imported_website = Communication::Website::Imported::Website.where(website: self, university: university)
+                                                                        .first_or_create
+
+    end
+    imported_website.run!
+    imported_website
+  end
+
+  def imported?
+    !imported_website.nil?
+  end
+
   def to_s
     "#{name}"
   end

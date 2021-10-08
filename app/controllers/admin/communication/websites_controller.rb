@@ -14,6 +14,17 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
     breadcrumb
   end
 
+  def import
+    if request.post?
+      @website.import!
+      flash[:notice] = t('communication.website.imported.launched')
+    end
+    @imported_website = @website.imported_website
+    @imported_pages = @imported_website.pages
+    breadcrumb
+    add_breadcrumb Communication::Website::Imported::Website.model_name.human
+  end
+
   def edit
     breadcrumb
     add_breadcrumb t('edit')

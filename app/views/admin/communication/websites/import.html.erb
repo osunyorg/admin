@@ -1,0 +1,11 @@
+<% content_for :title, @website %>
+<% content_for :buttons do %>
+  <%= link_to t('communication.website.imported.refresh'),
+              import_admin_communication_website_path,
+              method: :post,
+              class: button_classes %>
+<% end %>
+
+<% @imported_pages.each do |page| %>
+  <%= page %>
+<% end %>
