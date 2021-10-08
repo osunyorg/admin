@@ -19,7 +19,7 @@
       <tr>
         <td><%= page %></td>
         <td><%= link_to page.path, page.url, target: :_blank %></td>
-        <td><%= link_to 'Imported page', admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id), class: button_classes %></td>
+        <td><%= link_to 'Imported page', admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id) %></td>
       </tr>
     <% end %>
   </tbody>
