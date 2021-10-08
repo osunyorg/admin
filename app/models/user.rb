@@ -60,9 +60,10 @@ class User < ApplicationRecord
   belongs_to :university
   belongs_to :language
   has_one :researcher, class_name: 'Research::Researcher'
+  has_one_attached :picture
 
   def to_s
-    first_name || last_name ? "#{first_name} #{last_name}"
+    (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}"
                             : "#{email}"
   end
 end
