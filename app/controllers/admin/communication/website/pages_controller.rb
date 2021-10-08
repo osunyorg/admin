@@ -11,7 +11,6 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def new
-    @page.website = @website
     breadcrumb
   end
 
@@ -22,6 +21,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def create
     @page.university = current_university
+    @page.website = @website
     if @page.save
       redirect_to admin_communication_website_page_path(@page), notice: "Page was successfully created."
     else

@@ -26,6 +26,7 @@ class Communication::Website < ApplicationRecord
   belongs_to :university
   belongs_to :about, polymorphic: true, optional: true
   has_many :pages, foreign_key: :communication_website_id
+  has_many :posts, foreign_key: :communication_website_id
   has_one :imported_website,
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy

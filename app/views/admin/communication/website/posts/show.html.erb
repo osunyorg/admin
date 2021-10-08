@@ -1,4 +1,4 @@
-<% content_for :title, @page %>
+<% content_for :title, @post %>
 
 <div class="row">
   <div class="col-md-8">
@@ -9,13 +9,13 @@
       <div class="card-body">
         <p>
           <strong>Description</strong>
-          <%= @page.description %>
+          <%= @post.description %>
         </p>
 
         <p>
           <strong>Text</strong>
         </p>
-        <%= raw @page.text %>
+        <%= raw @post.text %>
       </div>
     </div>
   </div>
@@ -26,18 +26,13 @@
       </div>
       <div class="card-body">
         <p>
-          <strong>Slug</strong>
-          <%= @page.slug %>
+          <strong>Published</strong>
+          <%= @post.published %>
         </p>
-        <p>
-          <strong>Path</strong>
-          <%= @page.path %>
-        </p>
-
-        <% if @page.imported_page %>
+        <% if @post.imported_post %>
           <p>
-            <strong>Imported from</strong><br>
-            <a href="<%= @page.imported_page.url %>" target="_blank"><%= @page.imported_page.url %></a>
+            <strong>Imported from</strong> 
+            <a href="<%= @post.imported_post.url %>" target="_blank"><%= @post.imported_post.url %></a>
           </p>
         <% end %>
       </div>
@@ -46,5 +41,5 @@
 </div>
 
 <% content_for :buttons do %>
-  <%= edit_link @page %>
+  <%= edit_link @post %>
 <% end %>

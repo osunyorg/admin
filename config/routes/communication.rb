@@ -1,9 +1,10 @@
 namespace :communication do
   resources :websites do
-    resources :pages, controller: 'website/pages'
     member do
       get :import
       post :import
     end
+    resources :pages, controller: 'website/pages'
+    resources :posts, controller: 'website/posts'
   end
 end

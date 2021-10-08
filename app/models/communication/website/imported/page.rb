@@ -34,7 +34,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              optional: true
 
-  before_validation :sync_page
+  before_validation :sync
 
   def to_s
     "#{title}"
@@ -42,7 +42,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
 
   protected
 
-  def sync_page
+  def sync
     if page.nil?
       self.page = Communication::Website::Page.new university: university,
                                                       website: website.website, # Real website, not imported website
@@ -50,8 +50,10 @@ class Communication::Website::Imported::Page < ApplicationRecord
       self.page.title = "TMP"
       self.page.save
     end
-    # TODO only if not modified
+    # TODO only if not modified since import
     page.title = title.to_s
+    # TODO add that
+    # page.description = description.to_s
     page.text = content.to_s
     page.save
   end

@@ -21,7 +21,6 @@
         <%= f.input :slug %>
         <%= f.input :published %>
         <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
-        <%= f.association :website, include_blank: false %>
       </div>
     </div>
   </div>

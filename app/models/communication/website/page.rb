@@ -49,7 +49,7 @@ class Communication::Website::Page < ApplicationRecord
   after_save :publish_to_github
 
   scope :ordered, -> { order(:path) }
-  scope :recent, -> { order(updated_at: :desc).limit(10) }
+  scope :recent, -> { order(updated_at: :desc).limit(5) }
 
   def content
     @content ||= github.read_file_at "_pages/#{id}.html"
