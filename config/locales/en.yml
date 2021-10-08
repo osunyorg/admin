@@ -34,6 +34,7 @@ en:
         email: Email
         first_name: First name
         last_name: Last name
+        mobile_phone: Mobile phone
         role: Role
         researcher: Researcher profile
         language: Favourite language
@@ -43,3 +44,5 @@ en:
         subject: "Two-factor authentication code"
   simple_form:
     hints:
+      user:
+        mobile_phone: "International format (+XX)"

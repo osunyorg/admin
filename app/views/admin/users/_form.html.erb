@@ -3,13 +3,18 @@
     <div class="col-md-4">
       <%= f.input :email %>
       <%#= f.input :role %>
-      <%= f.association :language, include_blank: false %>
     </div>
     <div class="col-md-4">
       <%= f.input :first_name %>
     </div>
     <div class="col-md-4">
       <%= f.input :last_name %>
+    </div>
+    <div class="col-md-4">
+      <%= f.association :language, include_blank: false %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :mobile_phone %>
     </div>
   </div>
   <% content_for :buttons do %>

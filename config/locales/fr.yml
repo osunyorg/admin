@@ -34,6 +34,7 @@ fr:
         email: Email
         first_name: Prénom
         last_name: Nom
+        mobile_phone: Téléphone portable
         role: Rôle
         researcher: Profil de chercheur
         language: Langue préférée
@@ -43,3 +44,5 @@ fr:
         subject: "Code d'authentification à deux facteurs"
   simple_form:
     hints:
+      user:
+        mobile_phone: "Format international (+XX)"
