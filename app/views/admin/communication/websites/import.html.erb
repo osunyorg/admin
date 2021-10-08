@@ -6,6 +6,21 @@
               class: button_classes %>
 <% end %>
 
-<% @imported_pages.each do |page| %>
-  <%= page %>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Communication::Website::Imported::Page.human_attribute_name('title') %></th>
+      <th><%= Communication::Website::Imported::Page.human_attribute_name('original_page') %></th>
+      <th><%= Communication::Website::Imported::Page.human_attribute_name('imported_page') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @imported_pages.each do |page| %>
+      <tr>
+        <td><%= page %></td>
+        <td><%= link_to page.path, page.url, target: :_blank %></td>
+        <td><%= link_to 'Imported page', admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id), class: button_classes %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

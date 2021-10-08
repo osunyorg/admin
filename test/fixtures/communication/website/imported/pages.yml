@@ -7,6 +7,7 @@
 #  path          :text
 #  status        :integer          default(0)
 #  title         :string
+#  url           :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  page_id       :uuid             not null

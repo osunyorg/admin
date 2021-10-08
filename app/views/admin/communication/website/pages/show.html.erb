@@ -1,19 +1,49 @@
 <% content_for :title, @page %>
 
-<p>
-  <strong>Description</strong>
-  <%= @page.description %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Content</h5>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Description</strong>
+          <%= @page.description %>
+        </p>
 
-<p>
-  <strong>Slug</strong>
-  <%= @page.slug %>
-</p>
+        <p>
+          <strong>Text</strong>
+        </p>
+        <%= raw @page.text %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Metadata</h5>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Slug</strong>
+          <%= @page.slug %>
+        </p>
+        <p>
+          <strong>Path</strong>
+          <%= @page.path %>
+        </p>
 
-<p>
-  <strong>Path</strong>
-  <%= @page.path %>
-</p>
+        <% if @page.imported_page %>
+          <p>
+            <strong>Imported from</strong><br>
+            <a href="<%= @page.imported_page.url %>" target="_blank"><%= @page.imported_page.url %></a>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% content_for :buttons do %>
   <%= link_to 'Modifier', edit_admin_communication_website_page_path(@page.id), class: button_classes %>

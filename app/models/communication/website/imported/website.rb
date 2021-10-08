@@ -31,6 +31,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
       title = hash['title']['rendered']
       content = hash['content']['rendered']
       page = pages.where(university: university, path: path).first_or_create
+      page.url = url
       page.title = title
       page.content = content
       page.save
