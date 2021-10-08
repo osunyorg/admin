@@ -45,12 +45,15 @@
 class User < ApplicationRecord
   include WithDevise
 
+  # has_one_attached_resizable :picture
+  has_one_attached :picture
+
   belongs_to :university
   belongs_to :language
   has_one :researcher, class_name: 'Research::Researcher'
 
   def to_s
-    first_name || last_name ? "#{first_name} #{last_name}"
+    (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}"
                             : "#{email}"
   end
 end

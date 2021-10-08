@@ -27,6 +27,13 @@
   </p>
 <% end %>
 
+<% if @user.picture.attached? && @user.picture.variable? %>
+  <p>
+    <strong>Picture:</strong>
+    <%= image_tag @user.picture.variant(resize: '200x') %>
+  </p>
+<% end %>
+
 
 <% content_for :buttons do %>
   <%= edit_link @user %>
