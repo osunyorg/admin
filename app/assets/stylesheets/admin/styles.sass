@@ -4,21 +4,24 @@ h1
 .sidebar-nav .fas
     min-width: 20px
 
-body, body[data-theme=dark]
-    .sidebar
-        background: black
-    .sidebar-content
-        background-color: black
-        background-image: asset-url('sun.svg')
-        background-repeat: no-repeat
-        background-position-x: center
-        background-position-y: -420px
-        background-size: 400%
-    .sidebar-brand
-        padding: 90px 80px 120px
-    .disabled
-        opacity: 0.6
-        pointer-events: none
+.sidebar
+    background: black
+.sidebar-content
+    background-color: black
+    background-image: asset-url('sun.svg')
+    background-repeat: no-repeat
+    background-position-x: center
+    background-position-y: -420px
+    background-size: 400%
+.sidebar-brand
+    padding: 90px 80px 120px
+.disabled
+    opacity: 0.6
+    pointer-events: none
+.sidebar-link, a.sidebar-link
+    color: rgba(255, 255, 255, 0.8)
+.sidebar-item.active .sidebar-link:hover, .sidebar-item.active > .sidebar-link
+    color: white
 
 #topbar
     padding-left: 2.5rem
