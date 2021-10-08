@@ -1,0 +1,66 @@
+module User::WithAuthentication
+  extend ActiveSupport::Concern
+
+  included do
+    devise  :database_authenticatable, :registerable, :recoverable, :rememberable,
+            :timeoutable, :validatable, :confirmable, :trackable, :lockable, :two_factor_authenticatable
+
+    has_one_time_password(encrypted: true)
+
+    validates_presence_of :email
+    validates :role, presence: true
+    validates :mobile_phone, format: { with: /\A\+[0-9]+\z/ }, allow_blank: true
+
+    before_validation :adjust_mobile_phone, :sanitize_fields
+
+    def self.find_for_authentication(warden_conditions)
+      where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+    end
+
+    # Inject a session_token in user salt to prevent Cookie session hijacking
+    # https://makandracards.com/makandra/53562-devise-invalidating-all-sessions-for-a-user
+    def authenticatable_salt
+      "#{super}#{session_token}"
+    end
+
+    def invalidate_all_sessions!
+      self.session_token = SecureRandom.hex
+    end
+
+    def need_two_factor_authentication?(request)
+      true
+    end
+
+    def send_two_factor_authentication_code(code, options)
+      if mobile_phone.blank? || options.dig(:delivery_method) == :email
+        send_devise_notification(:two_factor_authentication_code, code, {})
+      else
+        Sendinblue::SmsService.send_mfa_code(self, code)
+      end
+    end
+
+    def unlock_mfa!
+      self.update_column(:second_factor_attempts_count, 0)
+    end
+
+    private
+
+    def adjust_mobile_phone
+      return if self.mobile_phone.nil?
+      self.mobile_phone = self.mobile_phone.delete(' ')
+      if self.mobile_phone.start_with?('06', '07')
+        self.mobile_phone = "+33#{self.mobile_phone[1..-1]}"
+      end
+    end
+
+    def sanitize_fields
+      full_sanitizer = Rails::Html::FullSanitizer.new
+
+      # Only text allowed, and remove '=' to prevent excel formulas
+      self.email = full_sanitizer.sanitize(self.email)&.gsub('=', '')
+      self.first_name = full_sanitizer.sanitize(self.first_name)&.gsub('=', '')
+      self.last_name = full_sanitizer.sanitize(self.last_name)&.gsub('=', '')
+      self.mobile_phone = full_sanitizer.sanitize(self.mobile_phone)&.gsub('=', '')
+    end
+  end
+end

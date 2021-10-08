@@ -37,5 +37,9 @@ en:
         role: Role
         researcher: Researcher profile
         language: Favourite language
+  devise:
+    mailer:
+      two_factor_authentication_code:
+        subject: "Two-factor authentication code"
   simple_form:
     hints:

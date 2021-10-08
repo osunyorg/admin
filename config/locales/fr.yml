@@ -37,5 +37,9 @@ fr:
         role: Rôle
         researcher: Profil de chercheur
         language: Langue préférée
+  devise:
+    mailer:
+      two_factor_authentication_code:
+        subject: "Code d'authentification à deux facteurs"
   simple_form:
     hints:
