@@ -30,8 +30,15 @@
 
 /public/packs
 /public/packs-test
+
+# Ignore some JS stuff
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore macOS stuff
 .DS_Store
+
+# Ignore environment variables
+.env

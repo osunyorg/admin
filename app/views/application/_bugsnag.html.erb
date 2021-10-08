@@ -1,0 +1,12 @@
+<% unless Rails.env.development? %>
+  <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
+  <script type="text/javascript">
+    Bugsnag.start({
+      apiKey: "<%= j ENV['BUGSNAG_JAVASCRIPT_KEY'] %>",
+      releaseStage: "<%= j ENV['APPLICATION_ENV'] %>"
+    });
+    <% if user_signed_in? %>
+    Bugsnag.setUser("<%= j current_user.id %>", "<%= j current_user.email %>", "<%= j current_user.to_s %>");
+    <% end %>
+  </script>
+<% end %>
