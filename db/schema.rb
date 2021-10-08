@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_090117) do
+ActiveRecord::Schema.define(version: 2021_10_08_124136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 2021_10_08_090117) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+    t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
   end
 
   create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -178,7 +180,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_090117) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.date "updated_at", null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
