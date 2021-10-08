@@ -13,7 +13,7 @@
     <% @universities.each do |university| %>
       <tr>
         <td><%= link_to university, [:admin, university] %></td>
-        <td><%= link_to university.domain_url, university.domain_url, target: :_blank %></td>
+        <td><%= link_to university.url, university.url, target: :_blank %></td>
         <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
         <td class="text-end">
           <%= edit_link university %>

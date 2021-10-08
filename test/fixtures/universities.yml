@@ -2,16 +2,18 @@
 #
 # Table name: universities
 #
-#  id         :uuid             not null, primary key
-#  address    :string
-#  city       :string
-#  country    :string
-#  identifier :string
-#  name       :string
-#  private    :boolean
-#  zipcode    :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :uuid             not null, primary key
+#  address           :string
+#  city              :string
+#  country           :string
+#  identifier        :string
+#  mail_from_address :string
+#  mail_from_name    :string
+#  name              :string
+#  private           :boolean
+#  zipcode           :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 one:
