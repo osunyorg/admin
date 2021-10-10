@@ -10,6 +10,9 @@
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
+    <%= f.input :mobile_phone %>
+    <%= f.association :language, include_blank: false %>
+
     <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
                 required: false,
