@@ -62,8 +62,6 @@ class User < ApplicationRecord
   has_one :researcher, class_name: 'Research::Researcher'
   has_one_attached :picture
 
-  valida
-
   scope :ordered, -> { order(:last_name, :first_name) }
 
 
