@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:language_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:language_id, :first_name, :last_name])
   end
 
   def configure_account_update_params
