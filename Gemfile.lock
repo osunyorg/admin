@@ -314,6 +314,9 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simple_form_password_with_hints (0.0.2)
+      rails
+      simple_form
     sinatra (2.1.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
@@ -395,6 +398,7 @@ DEPENDENCIES
   sib-api-v3-sdk
   simple-navigation
   simple_form
+  simple_form_password_with_hints
   spring
   two_factor_authentication!
   tzinfo-data
@@ -405,4 +409,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.24
+   2.2.27
