@@ -1,0 +1,44 @@
+<div class="text-center">
+  <p class="mb-4">
+    <% if resource.direct_otp %>
+    <%= t('devise.two_factor_authentication.enter_code_direct_otp') %>
+    <% else %>
+    <%= t('devise.two_factor_authentication.enter_code_totp') %>
+    <% end %>
+  </p>
+
+  <%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put, class: 'my-3' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs mb-3">
+    <div class="form-group required">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <%= text_field_tag :code, '',
+          type: 'tel',
+          pattern: '\d*',
+          required: true,
+          autofocus: true,
+          autocomplete: 'off',
+          class: 'form-control string text-center required'%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions form-actions--center mb-4">
+    <%= f.button :submit, t('validate'), class: "btn btn-lg btn-primary" %>
+  </div>
+  <% end %>
+
+  <% if resource.direct_otp %>
+  <p><%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %></p>
+  <% else %>
+  <p><%= link_to t('devise.two_factor_authentication.send_code_instead'), [:resend_code, resource_name, :two_factor_authentication] %></p>
+  <% end %>
+  <% unless resource.mobile_phone.blank? # when phone is blank default code method is already :email so we don't need another link %>
+  <p><%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %></p>
+  <% end %>
+
+  <p><%= link_to t('devise.shared.links.sign_out'), destroy_user_session_path, class: "btn btn-lg btn-danger" %></p>
+</div>

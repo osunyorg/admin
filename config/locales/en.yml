@@ -8,6 +8,7 @@ en:
   edit: Edit
   delete: Delete
   please-confirm: Are you sure?
+  validate: Validate
   activerecord:
     models:
       university:
@@ -40,8 +41,22 @@ en:
         language: Favourite language
   devise:
     mailer:
-      two_factor_authentication_code:
+      two_factor_authentication:
         subject: "Two-factor authentication code"
+        text_html: "Your two-factor authentication code for %{university} is %{code}<br>It will expire in 5 minutes."
+    shared:
+      links:
+        sign_out: "Sign out"
+    two_factor_authentication:
+      attempt_failed: "Invalid Code"
+      code_has_been_sent: "Your authentication code has been sent."
+      enter_code_direct_otp: "Enter the code that was sent to you"
+      enter_code_totp: "Enter the code from your authentication application"
+      max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
+      resend_code: "Resend Code"
+      send_code_instead: "Send me a code instead"
+      send_email_code: 'Send me a code via email'
+      success: ""
   simple_form:
     hints:
       user:

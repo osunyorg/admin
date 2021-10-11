@@ -8,6 +8,7 @@ fr:
   edit: Modifier
   delete: Supprimer
   please-confirm: Est-ce que vous confirmez ?
+  validate: Valider
   activerecord:
     models:
       university:
@@ -42,6 +43,20 @@ fr:
     mailer:
       two_factor_authentication_code:
         subject: "Code d'authentification à deux facteurs"
+        text_html: "Votre code d'authentification pour %{university} est %{code}<br>Il expirera dans 5 minutes."
+    shared:
+      links:
+        sign_out: "Se déconnecter"
+    two_factor_authentication:
+      attempt_failed: "Code invalide"
+      code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
+      enter_code_direct_otp: "Entrez le code qui vous a été envoyé"
+      enter_code_totp: "Entrez le code de votre application d'authentification"
+      max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
+      resend_code: "Renvoyer le code"
+      send_code_instead: "Envoyez-moi plutôt un code"
+      send_email_code: 'Envoyer le code par email'
+      success: ""
   simple_form:
     hints:
       user:
