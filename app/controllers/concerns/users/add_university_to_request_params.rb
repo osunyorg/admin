@@ -7,7 +7,7 @@ module Users::AddUniversityToRequestParams
 
   protected
 
-  def add_brand_to_request_params
+  def add_university_to_request_params
     # inject university_id in users params submitted
     request.params[:user][:university_id] = current_university.id unless request.params[:user].nil?
   end
