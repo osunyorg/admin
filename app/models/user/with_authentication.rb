@@ -7,8 +7,9 @@ module User::WithAuthentication
 
     has_one_time_password(encrypted: true)
 
-    validates_presence_of :email
+    validates_presence_of :first_name, :last_name, :email
     validates :role, presence: true
+    validate :password_complexity
     validates :mobile_phone, format: { with: /\A\+[0-9]+\z/ }, allow_blank: true
 
     before_validation :adjust_mobile_phone, :sanitize_fields
@@ -61,6 +62,12 @@ module User::WithAuthentication
       self.first_name = full_sanitizer.sanitize(self.first_name)&.gsub('=', '')
       self.last_name = full_sanitizer.sanitize(self.last_name)&.gsub('=', '')
       self.mobile_phone = full_sanitizer.sanitize(self.mobile_phone)&.gsub('=', '')
+    end
+
+    def password_complexity
+      # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+      return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#{Rails.application.config.allowed_special_chars}]).{#{Devise.password_length.first},#{Devise.password_length.last}}$/
+      errors.add :password, I18n.t('activerecord.errors.models.user.password.password_strength')
     end
   end
 end
