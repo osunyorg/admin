@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2><%= t(".sign_up") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
@@ -7,16 +7,16 @@
     <%= f.input :first_name,
                 required: true,
                 autofocus: true,
-                input_html: { autocomplete: "first_name" }%>
+                input_html: { autocomplete: "first_name" } %>
     <%= f.input :last_name,
                 required: true,
-                input_html: { autocomplete: "last_name" }%>
+                input_html: { autocomplete: "last_name" } %>
     <%= f.input :email,
                 required: true,
-                input_html: { autocomplete: "email" }%>
+                input_html: { autocomplete: "email" } %>
     <%= f.input :password,
                 required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
                 required: true,
@@ -27,7 +27,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up", class: 'btn btn-lg btn-primary' %>
+    <%= f.button :submit, t(".sign_up"), class: 'btn btn-lg btn-primary' %>
   </div>
 <% end %>
 

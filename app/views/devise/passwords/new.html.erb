@@ -1,4 +1,4 @@
-<h2>Forgot your password?</h2>
+<h2><%= t(".forgot_your_password") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
+    <%= f.button :submit, t(".send_me_reset_password_instructions"), class: 'btn btn-lg btn-primary' %>
   </div>
 <% end %>
 
