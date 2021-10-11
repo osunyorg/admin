@@ -1,20 +1,32 @@
-<h2><%= t(".sign_in") %></h2>
+<h2 class="text-center"><%= t('login.not_registered_yet') %></h2>
+<div class="form-actions text-center mt-3">
+  <%= link_to t("devise.registrations.new.sign_up"), new_registration_path(resource_name), class: 'btn btn btn-lg btn-primary' %><br />
+</div>
 
+<hr class="mt-4 mb-4">
+
+<h2 class="text-center"><%= t('login.already_registered') %></h2>
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
     <%= f.input :email,
                 required: false,
                 autofocus: true,
                 input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                as: :password_with_hints,
-                allow_password_uncloaking: true,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
+    <div class="mb-3 password optional user_password">
+      <%= f.input :password,
+                  as: :password_with_hints,
+                  allow_password_uncloaking: true,
+                  required: false,
+                  wrapper: false,
+                  input_html: { autocomplete: "current-password" } %>
+      <small>
+        <%= link_to t("devise.passwords.new.forgot_your_password"), new_password_path(resource_name) %>
+      </small>
+    </div>
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
-  <div class="form-actions">
+  <div class="form-actions text-center mt-3">
     <%= f.button :submit, t(".sign_in"), class: 'btn btn-lg btn-primary' %>
   </div>
 <% end %>

@@ -1,63 +1,66 @@
 en:
-  true: Yes
-  false: No
-  home: Home
-  dashboard: Dashboard
-  show: Show
-  create: Create
-  edit: Edit
-  delete: Delete
-  please-confirm: Are you sure?
-  validate: Validate
   activerecord:
     models:
       university:
+        language:
+          one: Language
+          other: Languages
+          user:
+            attributes:
+              university:
+                address: Address
+                city: City
+                country: Country
+                name: Name
+                private: Private
+                public: Public
+                public_or_private: Public/private
+                zipcode: Zipcode
+                user:
+                  email: Email
+                  first_name: First name
+                  language: Favourite language
+                  last_name: Last name
+                  mobile_phone: Mobile phone
+                  researcher: Researcher profile
+                  role: Role
+            one: User
+            other: Users
         one: University
         other: Universities
-      language:
-        one: Language
-        other: Languages
-      user:
-        one: User
-        other: Users
-    attributes:
-      university:
-        name: Name
-        address: Address
-        zipcode: Zipcode
-        city: City
-        country: Country
-        private: Private
-        public_or_private: Public/private
-        public: Public
-        private: Private
-      user:
-        email: Email
-        first_name: First name
-        last_name: Last name
-        mobile_phone: Mobile phone
-        role: Role
-        researcher: Researcher profile
-        language: Favourite language
+  create: Create
+  dashboard: Dashboard
+  delete: Delete
   devise:
     mailer:
       two_factor_authentication:
         subject: "Two-factor authentication code"
+        shared:
+          links:
+            sign_out: "Sign out"
+            two_factor_authentication:
+              attempt_failed: "Invalid Code"
+              code_has_been_sent: "Your authentication code has been sent."
+              enter_code_direct_otp: "Enter the code that was sent to you"
+              enter_code_totp: "Enter the code from your authentication application"
+              max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
+              resend_code: "Resend Code"
+              send_code_instead: "Send me a code instead"
+              send_email_code: 'Send me a code via email'
+              success: ""
         text_html: "Your two-factor authentication code for %{university} is %{code}<br>It will expire in 5 minutes."
-    shared:
-      links:
-        sign_out: "Sign out"
-    two_factor_authentication:
-      attempt_failed: "Invalid Code"
-      code_has_been_sent: "Your authentication code has been sent."
-      enter_code_direct_otp: "Enter the code that was sent to you"
-      enter_code_totp: "Enter the code from your authentication application"
-      max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
-      resend_code: "Resend Code"
-      send_code_instead: "Send me a code instead"
-      send_email_code: 'Send me a code via email'
-      success: ""
+  edit: Edit
+  false: No
+  home: Home
+  login:
+    already_registered: Already registered?
+    not_registered_yet: Not registered yet?
+    subtitle: Sign in to your account to continue
+  please-confirm: Are you sure?
   simple_form:
     hints:
       user:
         mobile_phone: "International format (+XX)"
+  show: Show
+  true: Yes
+  validate: Validate

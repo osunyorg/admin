@@ -1,63 +1,66 @@
 fr:
-  true: Oui
-  false: Non
-  home: Accueil
-  dashboard: Tableau de bord
-  show: Voir
-  create: Créer
-  edit: Modifier
-  delete: Supprimer
-  please-confirm: Est-ce que vous confirmez ?
-  validate: Valider
   activerecord:
     models:
       university:
+        language:
+          one: Langue
+          other: Langues
+          user:
+            attributes:
+              university:
+                address: Adresse
+                city: Ville
+                country: Pays
+                name: Nom
+                private: Etablissement privé
+                public: Public
+                public_or_private: Public/privé
+                user:
+                  email: Email
+                  first_name: Prénom
+                  language: Langue préférée
+                  last_name: Nom
+                  mobile_phone: Téléphone portable
+                  researcher: Profil de chercheur
+                  role: Rôle
+                zipcode: Code postal
+            one: Utilisateur
+            other: Utilisateurs
         one: Université
         other: Universités
-      language:
-        one: Langue
-        other: Langues
-      user:
-        one: Utilisateur
-        other: Utilisateurs
-    attributes:
-      university:
-        name: Nom
-        address: Adresse
-        zipcode: Code postal
-        city: Ville
-        country: Pays
-        private: Etablissement privé
-        public_or_private: Public/privé
-        public: Public
-        private: Privé
-      user:
-        email: Email
-        first_name: Prénom
-        last_name: Nom
-        mobile_phone: Téléphone portable
-        role: Rôle
-        researcher: Profil de chercheur
-        language: Langue préférée
+  create: Créer
+  dashboard: Tableau de bord
+  delete: Supprimer
   devise:
     mailer:
       two_factor_authentication_code:
         subject: "Code d'authentification à deux facteurs"
+        shared:
+          links:
+            sign_out: "Se déconnecter"
+            two_factor_authentication:
+              attempt_failed: "Code invalide"
+              code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
+              enter_code_direct_otp: "Entrez le code qui vous a été envoyé"
+              enter_code_totp: "Entrez le code de votre application d'authentification"
+              max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
+              resend_code: "Renvoyer le code"
+              send_code_instead: "Envoyez-moi plutôt un code"
+              send_email_code: 'Envoyer le code par email'
+              success: ""
         text_html: "Votre code d'authentification pour %{university} est %{code}<br>Il expirera dans 5 minutes."
-    shared:
-      links:
-        sign_out: "Se déconnecter"
-    two_factor_authentication:
-      attempt_failed: "Code invalide"
-      code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
-      enter_code_direct_otp: "Entrez le code qui vous a été envoyé"
-      enter_code_totp: "Entrez le code de votre application d'authentification"
-      max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
-      resend_code: "Renvoyer le code"
-      send_code_instead: "Envoyez-moi plutôt un code"
-      send_email_code: 'Envoyer le code par email'
-      success: ""
+  edit: Modifier
+  false: Non
+  home: Accueil
+  login:
+    already_registered: Déjà inscrit ?
+    not_registered_yet: Pas encore inscrit ?
+    subtitle: Vous devez être authentifié pour continuer
+  please-confirm: Est-ce que vous confirmez ?
   simple_form:
     hints:
       user:
         mobile_phone: "Format international (+XX)"
+  show: Voir
+  true: Oui
+  validate: Valider
