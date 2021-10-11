@@ -2,7 +2,7 @@ class Admin::ApplicationController < ApplicationController
   layout 'admin/layouts/application'
 
   before_action :authenticate_user!
-  before_action :set_locale
+  around_action :switch_locale
 
   protected
 
@@ -22,9 +22,8 @@ class Admin::ApplicationController < ApplicationController
                       : add_breadcrumb('Créer')
   end
 
-  def set_locale
-    return unless current_user
-    return unless current_user.language
-    I18n.locale = current_user.language.iso_code
+  def switch_locale(&action)
+    locale = LocaleService.locale(current_user, request.env['HTTP_ACCEPT_LANGUAGE'])
+    I18n.with_locale(locale, &action)
   end
 end

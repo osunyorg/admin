@@ -23,6 +23,8 @@ module Osuny
   class Application < Rails::Application
     config.load_defaults 6.1
 
+    config.middleware.insert_before Warden::Manager, Rack::Locale
+
     config.time_zone = 'Europe/Paris'
 
     config.active_job.queue_adapter = :delayed_job
