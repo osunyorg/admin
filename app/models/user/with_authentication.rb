@@ -3,14 +3,23 @@ module User::WithAuthentication
 
   included do
     devise  :database_authenticatable, :registerable, :recoverable, :rememberable,
-            :timeoutable, :validatable, :confirmable, :trackable, :lockable, :two_factor_authenticatable
+            :timeoutable, :confirmable, :trackable, :lockable, :two_factor_authenticatable
+            # note : i do not use :validatable because of the non-uniqueness of the email. :validatable is replaced by the validation sequences below
+
 
     has_one_time_password(encrypted: true)
 
-    validates_presence_of :first_name, :last_name, :email
     validates :role, presence: true
+
+    validates_presence_of :first_name, :last_name, :email
+    validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
+    validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
+    validates_presence_of :password, if: :password_required?
+    validates_confirmation_of :password, if: :password_required?
     validate :password_complexity
     validates :mobile_phone, format: { with: /\A\+[0-9]+\z/ }, allow_blank: true
+
+
 
     before_validation :adjust_mobile_phone, :sanitize_fields
 
@@ -62,6 +71,10 @@ module User::WithAuthentication
       self.first_name = full_sanitizer.sanitize(self.first_name)&.gsub('=', '')
       self.last_name = full_sanitizer.sanitize(self.last_name)&.gsub('=', '')
       self.mobile_phone = full_sanitizer.sanitize(self.mobile_phone)&.gsub('=', '')
+    end
+
+    def password_required?
+      !persisted? || !password.nil? || !password_confirmation.nil?
     end
 
     def password_complexity

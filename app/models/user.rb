@@ -54,8 +54,7 @@
 #
 class User < ApplicationRecord
   include WithAuthentication
-
-  enum role: { visitor: 0, admin: 20, superadmin: 30 }
+  include WithRoles
 
   belongs_to :university
   belongs_to :language
