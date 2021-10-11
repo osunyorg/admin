@@ -62,8 +62,12 @@ class User < ApplicationRecord
   has_one :researcher, class_name: 'Research::Researcher'
   has_one_attached :picture
 
+  valida
+
+  scope :ordered, -> { order(:last_name, :first_name) }
+
+
   def to_s
-    (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}"
-                            : "#{email}"
+    "#{first_name} #{last_name}"
   end
 end
