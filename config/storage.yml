@@ -20,6 +20,14 @@ outscale:
   region: <%= ENV['OUTSCALE_OOS_REGION'] %>
   bucket: <%= ENV['OUTSCALE_OOS_BUCKET'] %>
 
+scaleway:
+  service: S3
+  access_key_id: <%= ENV['SCALEWAY_OS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['SCALEWAY_OS_SECRET_ACCESS_KEY'] %>
+  region: <%= ENV['SCALEWAY_OS_REGION'] %>
+  bucket: <%= ENV['SCALEWAY_OS_BUCKET'] %>
+  endpoint: <%= ENV['SCALEWAY_OS_ENDPOINT'] %>
+
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
