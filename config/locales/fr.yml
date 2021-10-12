@@ -1,5 +1,14 @@
 fr:
   activerecord:
+    attributes:
+      user:
+        email: Email
+        first_name: Prénom
+        language: Langue préférée
+        last_name: Nom
+        mobile_phone: Téléphone portable
+        researcher: Profil de chercheur
+        role: Rôle
     models:
       university:
         language:
@@ -15,14 +24,6 @@ fr:
                 private: Etablissement privé
                 public: Public
                 public_or_private: Public/privé
-                user:
-                  email: Email
-                  first_name: Prénom
-                  language: Langue préférée
-                  last_name: Nom
-                  mobile_phone: Téléphone portable
-                  researcher: Profil de chercheur
-                  role: Rôle
                 zipcode: Code postal
             one: Utilisateur
             other: Utilisateurs
@@ -32,6 +33,9 @@ fr:
   dashboard: Tableau de bord
   delete: Supprimer
   devise:
+    failure:
+      invalid: "Email ou mot de passe incorrect."
+      not_found_in_database: "Email ou mot de passe incorrect."
     mailer:
       two_factor_authentication_code:
         subject: "Code d'authentification à deux facteurs"
@@ -49,6 +53,18 @@ fr:
               send_email_code: 'Envoyer le code par email'
               success: ""
         text_html: "Votre code d'authentification pour %{university} est %{code}<br>Il expirera dans 5 minutes."
+    sessions:
+      signed_in: ''
+    two_factor_authentication:
+      attempt_failed: "Code invalide"
+      code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
+      enter_code_direct_otp: "Entrez le code qui vous a été envoyé"
+      enter_code_totp: "Entrez le code de votre appli Google Authenticator"
+      max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
+      resend_code: "Renvoyer le code"
+      send_code_instead: "Envoyez-moi plutôt un code"
+      send_email_code: 'Envoyer le code par email'
+      success: ""
   edit: Modifier
   false: Non
   home: Accueil

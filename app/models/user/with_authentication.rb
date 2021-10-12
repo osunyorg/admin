@@ -19,8 +19,6 @@ module User::WithAuthentication
     validate :password_complexity
     validates :mobile_phone, format: { with: /\A\+[0-9]+\z/ }, allow_blank: true
 
-
-
     before_validation :adjust_mobile_phone, :sanitize_fields
 
     def self.find_for_authentication(warden_conditions)

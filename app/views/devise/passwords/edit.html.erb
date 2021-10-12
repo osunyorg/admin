@@ -1,4 +1,4 @@
-<h2><%= t(".change_your_password") %></h2>
+<h2 class="text-center"><%= t(".change_your_password") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -8,18 +8,29 @@
 
   <div class="form-inputs">
     <%= f.input :password,
+                as: :password_with_hints,
                 label: t(".new_password"),
                 required: true,
                 autofocus: true,
-                hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length),
+                allow_password_uncloaking: true,
+                validators: {
+                  length: Devise.password_length.first,
+                  uppercase_char: true,
+                  lowercase_char: true,
+                  numeric_char: true,
+                  special_char: Rails.application.config.allowed_special_chars
+                },
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
+                as: :password_with_sync,
                 label: t(".confirm_new_password"),
                 required: true,
+                allow_password_uncloaking: true,
+                compare_with_field: :password,
                 input_html: { autocomplete: "new-password" } %>
   </div>
 
-  <div class="form-actions">
+  <div class="form-actions text-center mt-3">
     <%= f.button :submit, t(".change_my_password"), class: 'btn btn-lg btn-primary' %>
   </div>
 <% end %>

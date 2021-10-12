@@ -1,5 +1,14 @@
 en:
   activerecord:
+    attributes:
+      user:
+        email: Email
+        first_name: First name
+        language: Favourite language
+        last_name: Last name
+        mobile_phone: Mobile phone
+        researcher: Researcher profile
+        role: Role
     models:
       university:
         language:
@@ -16,14 +25,6 @@ en:
                 public: Public
                 public_or_private: Public/private
                 zipcode: Zipcode
-                user:
-                  email: Email
-                  first_name: First name
-                  language: Favourite language
-                  last_name: Last name
-                  mobile_phone: Mobile phone
-                  researcher: Researcher profile
-                  role: Role
             one: User
             other: Users
         one: University
@@ -32,6 +33,9 @@ en:
   dashboard: Dashboard
   delete: Delete
   devise:
+    failure:
+      invalid: "Invalid email or password."
+      not_found_in_database: "Invalid email or password."
     mailer:
       two_factor_authentication:
         subject: "Two-factor authentication code"
@@ -49,6 +53,18 @@ en:
               send_email_code: 'Send me a code via email'
               success: ""
         text_html: "Your two-factor authentication code for %{university} is %{code}<br>It will expire in 5 minutes."
+    sessions:
+      signed_in: ''
+    two_factor_authentication:
+      attempt_failed: "Invalid Code"
+      code_has_been_sent: "Your authentication code has been sent."
+      enter_code_direct_otp: "Enter the code that was sent to you"
+      enter_code_totp: "Enter the code from your Google Authenticator app"
+      max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
+      resend_code: "Resend Code"
+      send_code_instead: "Send me a code instead"
+      send_email_code: 'Send me a code via email'
+      success: ""
   edit: Edit
   false: No
   home: Home

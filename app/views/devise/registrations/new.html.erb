@@ -1,4 +1,4 @@
-<h2><%= t(".sign_up") %></h2>
+<h2 class="text-center"><%= t(".sign_up") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
@@ -23,10 +23,11 @@
                 input_html: { autocomplete: "new-password" } %>
     <%= f.association :language,
                       required: true,
+                      label_method: lambda { |l| I18nData.languages(I18n.locale.to_s.upcase)[l.iso_code.to_s.upcase].capitalize },
                       include_blank: 'Sélectionnez une langue' %>
   </div>
 
-  <div class="form-actions">
+  <div class="form-actions text-center mt-3">
     <%= f.button :submit, t(".sign_up"), class: 'btn btn-lg btn-primary' %>
   </div>
 <% end %>

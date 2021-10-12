@@ -382,6 +382,7 @@ DEPENDENCIES
   enum_help
   figaro
   front_matter_parser
+  i18n_data
   image_processing
   jbuilder
   jquery-rails
@@ -402,6 +403,7 @@ DEPENDENCIES
   simple-navigation
   simple_form
   simple_form_password_with_hints
+  sort_alphabetical
   spring
   two_factor_authentication!
   tzinfo-data
