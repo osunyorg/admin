@@ -59,7 +59,7 @@ class User < ApplicationRecord
   belongs_to :university
   belongs_to :language
   has_one :researcher, class_name: 'Research::Researcher'
-  has_one_attached :picture
+  has_one_attached_deletable :picture
 
   scope :ordered, -> { order(:last_name, :first_name) }
 

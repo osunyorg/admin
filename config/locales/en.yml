@@ -74,6 +74,8 @@ en:
     subtitle: Sign in to your account to continue
   please-confirm: Are you sure?
   simple_form:
+    error_notification:
+      default_message: "Please review the problems below:"
     hints:
       user:
         mobile_phone: "International format (+XX)"

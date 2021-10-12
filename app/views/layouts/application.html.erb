@@ -13,6 +13,7 @@
   <body>
     <%= render 'nav' %>
     <main class="container">
+      
       <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
       <%= yield %>
     </main>

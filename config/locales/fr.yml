@@ -74,6 +74,8 @@ fr:
     subtitle: Vous devez être authentifié pour continuer
   please-confirm: Est-ce que vous confirmez ?
   simple_form:
+    error_notification:
+      default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
       user:
         mobile_phone: "Format international (+XX)"

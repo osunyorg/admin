@@ -12,6 +12,18 @@
     <%= favicon_link_tag 'favicon.png' %>
   </head>
   <body data-layout="fluid" data-sidebar-position="left">
+    <div class="toasts-container" style="position: fixed; top: 20px; right: 20px; z-index: 100000;">
+      <% unless notice.nil? %>
+        <div class="js-notyf-notice d-none">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% unless alert.nil? %>
+        <div class="js-notyf-alert d-none">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
     <div class="wrapper">
       <%= render 'admin/application/nav' %>
       <div class="main">
