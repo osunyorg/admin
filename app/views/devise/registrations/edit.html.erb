@@ -24,7 +24,8 @@
 
     <%= f.input :picture,
                 as: :single_deletable_file,
-                input_html: { accept: '.png,.jpg' } %>
+                input_html: { accept: '.png,.jpg' },
+                preview: '200x200' %>
 
     <%= f.input :password,
                 hint: t(".leave_blank_if_you_don_t_want_to_change_it"),
