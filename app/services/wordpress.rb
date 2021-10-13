@@ -9,6 +9,7 @@ class Wordpress
   # https://github.com/rgrove/sanitize
   def self.clean(html)
     Sanitize.fragment html, Sanitize::Config::RELAXED
+    # html
   end
 
   def initialize(domain)

@@ -1,49 +1,50 @@
-<h2><%= t(".sign_up") %></h2>
+<h2 class="mb-4"><%= t(".sign_up") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "first_name" } %>
-    <%= f.input :last_name,
-                required: true,
-                input_html: { autocomplete: "last_name" } %>
-    <%= f.input :email,
-                required: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                as: :password_with_hints,
-                required: true,
-                allow_password_uncloaking: true,
-                validators: {
-                  length: Devise.password_length.first,
-                  uppercase_char: true,
-                  lowercase_char: true,
-                  numeric_char: true,
-                  special_char: Rails.application.config.allowed_special_chars
-                },
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                as: :password_with_sync,
-                required: true,
-                allow_password_uncloaking: true,
-                compare_with_field: :password,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.association :language,
-                      required: true,
-                      label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") },
-                      include_blank: 'Sélectionnez une langue' %>
-    <%= f.input :picture,
-                      as: :single_deletable_file,
-                      input_html: { accept: '.png' } %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :email,
+                  required: true,
+                  input_html: { autocomplete: "email" } %>
+      <%= f.input :first_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "first_name" } %>
+      <%= f.input :last_name,
+                  required: true,
+                  input_html: { autocomplete: "last_name" } %>
+      <%= f.association :language,
+                        required: true,
+                        label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") },
+                        include_blank: 'Sélectionnez une langue' %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :password,
+                  as: :password_with_hints,
+                  required: true,
+                  allow_password_uncloaking: true,
+                  validators: {
+                    length: Devise.password_length.first,
+                    uppercase_char: true,
+                    lowercase_char: true,
+                    numeric_char: true,
+                    special_char: Rails.application.config.allowed_special_chars
+                  },
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  as: :password_with_sync,
+                  required: true,
+                  allow_password_uncloaking: true,
+                  compare_with_field: :password,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :picture,
+                        as: :single_deletable_file,
+                        input_html: { accept: '.png' } %>
+    </div>
   </div>
-
-  <div class="form-actions text-center mt-3">
-    <%= f.button :submit, t(".sign_up"), class: 'btn btn-primary' %>
-  </div>
+  <%= f.button :submit, t(".sign_up"), class: 'btn btn-primary' %>
 <% end %>
 
 <%= render "devise/shared/links" %>

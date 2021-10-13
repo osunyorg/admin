@@ -13,13 +13,10 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto">
+        <div class="col-sm-10 mx-auto">
           <h1 class="my-5 py-5 text-center"><%= current_university %></h1>
           <div class="card">
             <div class="card-body text-start">
-              <p class="lead mb-5">
-                <%= t('login.subtitle') %>
-              </p>
               <% unless notice.blank? %>
                 <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
               <% end %>
