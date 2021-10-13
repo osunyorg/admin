@@ -1,4 +1,4 @@
-<h2 class="text-center">
+<h2>
   <% if resource.direct_otp %>
     <%= t('devise.two_factor_authentication.enter_code_direct_otp') %>
   <% else %>
@@ -8,30 +8,24 @@
 
 
   <%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put, class: 'my-3' }) do |f| %>
-  <%= f.error_notification %>
-
   <div class="form-inputs">
     <div class="form-group required">
-      <div class="row">
-        <div class="col-md-4 offset-md-4">
-          <%= text_field_tag :code, '',
-                              type: 'tel',
-                              pattern: '\d*',
-                              required: true,
-                              autofocus: true,
-                              autocomplete: 'off',
-                              class: 'form-control string text-center required'%>
-        </div>
-      </div>
+      <%= text_field_tag :code, '',
+                          type: 'tel',
+                          pattern: '\d*',
+                          required: true,
+                          autofocus: true,
+                          autocomplete: 'off',
+                          class: 'form-control text-center string required'%>
     </div>
   </div>
 
-  <div class="form-actions text-center mt-3">
-    <%= f.button :submit, t('validate'), class: "btn btn-lg btn-primary" %>
+  <div class="form-actions text-end mt-3">
+    <%= f.button :submit, t('validate'), class: "btn btn-primary" %>
   </div>
   <% end %>
 
-<div class="text-center mt-2">
+<div class="text-end mt-2">
   <% if resource.direct_otp %>
     <p><%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %></p>
   <% else %>
@@ -41,5 +35,8 @@
     <p><%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %></p>
   <% end %>
 
-  <p><%= link_to t('devise.shared.links.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger" %></p>
 </div>
+<%= link_to t('devise.shared.links.sign_out'),
+            destroy_user_session_path,
+            method: :delete,
+            class: "btn btn-danger" %>

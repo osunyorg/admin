@@ -10,34 +10,28 @@
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-  <body data-theme="default" data-layout="fluid">
-    <div class="main d-flex justify-content-center w-100">
-      <main class="content d-flex p-0">
-        <div class="container d-flex flex-column">
-          <% unless notice.blank? %><div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div><% end %>
-          <% unless alert.blank? %><div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div><% end %>
-
-          <div class="row h-100">
-            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-              <div class="d-table-cell align-middle">
-                <div class="text-center mt-4">
-                  <h1 class="h2"><%= current_university %></h1>
-                  <p class="lead">
-  									<%= t('login.subtitle') %>
-  								</p>
-                </div>
-                <div class="card">
-                  <div class="card-body text-start">
-                    <div class="m-sm-4">
-                      <%= yield %>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto">
+          <h1 class="my-5 py-5 text-center"><%= current_university %></h1>
+          <div class="card">
+            <div class="card-body text-start">
+              <p class="lead mb-5">
+                <%= t('login.subtitle') %>
+              </p>
+              <% unless notice.blank? %>
+                <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
+              <% end %>
+              <% unless alert.blank? %>
+                <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
+              <% end %>
+              <%= yield %>
             </div>
           </div>
-        </main>
+        </div>
       </div>
-      <%= render 'bugsnag' %>
-    </body>
-  </html>
+    </div>
+    <%= render 'bugsnag' %>
+  </body>
+</html>
