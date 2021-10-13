@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    
+    User.find_each(&:confirm)
   end
 
   namespace :db do
