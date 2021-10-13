@@ -32,7 +32,6 @@ gem 'kaminari'
 gem 'octokit'
 gem 'front_matter_parser'
 gem 'two_factor_authentication', git: 'https://github.com/lespoupeesrusses/two_factor_authentication.git'
-gem 'rack-contrib'
 
 # Front
 gem 'jquery-rails'

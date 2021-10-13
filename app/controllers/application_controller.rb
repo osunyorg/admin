@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include WithLocale
   include WithUniversity
 
   def breadcrumb
