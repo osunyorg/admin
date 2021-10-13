@@ -71,6 +71,7 @@ en:
   login:
     already_registered: Already registered?
     not_registered_yet: Not registered yet?
+    not_registered_yet_details: Register if you have no account yet.
     subtitle: Sign in to your account to continue
   please-confirm: Are you sure?
   simple_form:

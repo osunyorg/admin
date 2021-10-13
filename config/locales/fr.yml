@@ -71,6 +71,7 @@ fr:
   login:
     already_registered: Déjà inscrit ?
     not_registered_yet: Pas encore inscrit ?
+    not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     subtitle: Vous devez être authentifié pour continuer
   please-confirm: Est-ce que vous confirmez ?
   simple_form:
