@@ -389,7 +389,6 @@ DEPENDENCIES
   enum_help
   figaro
   front_matter_parser
-  i18n_data
   image_processing
   jbuilder
   jquery-rails
