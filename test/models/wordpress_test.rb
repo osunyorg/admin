@@ -12,4 +12,8 @@ class WordpressTest < ActiveSupport::TestCase
   test "convert double quotation marks" do
     assert_equal Wordpress.clean('Conférence Joëlle Zask : &#8220;Ecologie de la participation&#8221;'), 'Conférence Joëlle Zask : “Ecologie de la participation”'
   end
+
+  test "convert " do
+    assert_equal Wordpress.clean('TRAVAILLER DEMAIN, Débat &#8211; le 10 mai à 18h30'), 'TRAVAILLER DEMAIN, Débat – le 10 mai à 18h30'
+  end
 end

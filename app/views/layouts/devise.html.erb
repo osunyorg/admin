@@ -17,9 +17,6 @@
           <h1 class="my-5 py-5 text-center"><%= current_university %></h1>
           <div class="card">
             <div class="card-body text-start">
-              <p class="lead mb-5">
-                <%= t('login.subtitle') %>
-              </p>
               <% unless notice.blank? %>
                 <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
               <% end %>
