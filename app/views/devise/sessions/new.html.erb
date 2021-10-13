@@ -1,11 +1,14 @@
-<h2 class="text-center"><%= t('login.not_registered_yet') %></h2>
-<div class="form-actions text-center mt-3">
-  <%= link_to t("devise.registrations.new.sign_up"), new_registration_path(resource_name), class: 'btn btn btn-lg btn-primary' %><br />
+<h2><%= t('login.not_registered_yet') %></h2>
+<p class="float-start"><%= t('login.not_registered_yet_details') %></p>
+<div class="form-actions text-end">
+  <%= link_to t("devise.registrations.new.sign_up"),
+              new_registration_path(resource_name),
+              class: 'btn btn-primary' %>
 </div>
 
-<hr class="mt-4 mb-4">
+<hr class="my-5">
 
-<h2 class="text-center"><%= t('login.already_registered') %></h2>
+<h2 class="mb-4"><%= t('login.already_registered') %></h2>
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
     <%= f.input :email,
@@ -26,9 +29,8 @@
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
-  <div class="form-actions text-center mt-3">
-    <%= f.button :submit, t(".sign_in"), class: 'btn btn-lg btn-primary' %>
+  <div class="form-actions text-end">
+    <%= f.button :submit, t(".sign_in"), class: 'btn btn-primary align-end' %>
+    <%= render "devise/shared/links" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

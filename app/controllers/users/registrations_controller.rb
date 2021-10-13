@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include WithLocale
   include Users::AddUniversityToRequestParams
 
   before_action :configure_sign_up_params, only: :create
@@ -15,7 +16,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.reset_password(params[:user][:password], params[:user][:password])
     end
 
-    super
+    super do |resource|
+      # Re-set I18n.locale in case of language change.
+      I18n.locale = resource.language.iso_code.to_sym
+    end
   end
 
   protected

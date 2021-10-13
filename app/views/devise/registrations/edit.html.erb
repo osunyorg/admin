@@ -18,15 +18,13 @@
     <% end %>
 
     <%= f.input :mobile_phone %>
-
     <%= f.association :language,
-                      required: true,
-                      label_method: lambda { |l| I18nData.languages(I18n.locale.to_s.upcase)[l.iso_code.to_s.upcase].capitalize },
-                      include_blank: 'Sélectionnez une langue' %>
+                      include_blank: false,
+                      label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>
 
     <%= f.input :picture,
-                      as: :single_deletable_file,
-                      input_html: { accept: '.png,.jpg' } %>
+                as: :single_deletable_file,
+                input_html: { accept: '.png,.jpg' } %>
 
     <%= f.input :password,
                 hint: t(".leave_blank_if_you_don_t_want_to_change_it"),
@@ -37,7 +35,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, t(".update"), class: 'btn btn-lg btn-primary' %>
+    <%= f.button :submit, t(".update"), class: 'btn btn-primary' %>
   </div>
 <% end %>
 

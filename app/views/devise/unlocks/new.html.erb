@@ -1,4 +1,4 @@
-<h2 class="text-center"><%= t(".resend_unlock_instructions") %></h2>
+<h2><%= t(".resend_unlock_instructions") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="form-actions text-center mt-3">
-    <%= f.button :submit, t(".resend_unlock_instructions"), class: 'btn btn-lg btn-primary' %>
+    <%= f.button :submit, t(".resend_unlock_instructions"), class: 'btn btn-primary' %>
   </div>
 <% end %>
 

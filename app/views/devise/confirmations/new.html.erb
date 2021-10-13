@@ -1,4 +1,4 @@
-<h2 class="text-center"><%= t(".resend_confirmation_instructions") %></h2>
+<h2><%= t(".resend_confirmation_instructions") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
@@ -12,9 +12,8 @@
                 input_html: { autocomplete: "email" } %>
   </div>
 
-  <div class="form-actions text-center mt-3">
-    <%= f.button :submit, t(".resend_confirmation_instructions"), class: 'btn btn-lg btn-primary' %>
+  <div class="form-actions text-end mt-3">
+    <%= f.button :submit, t(".resend_confirmation_instructions"), class: 'btn btn-primary' %>
+    <%= render "devise/shared/links" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
