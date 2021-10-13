@@ -1,36 +1,39 @@
-<h2><%= t('login.not_registered_yet') %></h2>
-<p><%= t('login.not_registered_yet_details') %></p>
-<div class="form-actions text-end">
-  <%= link_to t("devise.registrations.new.sign_up"),
-              new_registration_path(resource_name),
-              class: 'btn btn-primary' %>
-</div>
-
-<hr class="my-5">
-
-<h2 class="mb-4"><%= t('login.already_registered') %></h2>
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <div class="mb-3 password optional user_password">
-      <%= f.input :password,
-                  as: :password_with_hints,
-                  allow_password_uncloaking: true,
-                  required: false,
-                  wrapper: false,
-                  input_html: { autocomplete: "current-password" } %>
-      <small>
-        <%= link_to t("devise.passwords.new.forgot_your_password"), new_password_path(resource_name) %>
-      </small>
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="mb-4"><%= t('login.not_registered_yet') %></h2>
+    <p><%= t('login.not_registered_yet_details') %></p>
+    <div class="form-actions">
+      <%= link_to t("devise.registrations.new.sign_up"),
+                  new_registration_path(resource_name),
+                  class: 'btn btn-primary' %>
     </div>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
+  <div class="col-md-6">
+    <h2 class="mb-4"><%= t('login.already_registered') %></h2>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: false,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" } %>
+        <div class="mb-3 password optional user_password">
+          <%= f.input :password,
+                      as: :password_with_hints,
+                      allow_password_uncloaking: true,
+                      required: false,
+                      wrapper: false,
+                      input_html: { autocomplete: "current-password" } %>
+          <small>
+            <%= link_to t("devise.passwords.new.forgot_your_password"), new_password_path(resource_name) %>
+          </small>
+        </div>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
 
-  <div class="form-actions text-end">
-    <%= f.button :submit, t(".sign_in"), class: 'btn btn-primary align-end' %>
-    <%= render "devise/shared/links" %>
+      <div class="form-actions">
+        <%= f.button :submit, t(".sign_in"), class: 'btn btn-primary' %>
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

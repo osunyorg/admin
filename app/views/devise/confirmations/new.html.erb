@@ -1,19 +1,20 @@
-<h2><%= t(".resend_confirmation_instructions") %></h2>
+<h2 class="mb-4"><%= t(".resend_confirmation_instructions") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
   <%= f.full_error :confirmation_token %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
-                input_html: { autocomplete: "email" } %>
-  </div>
-
-  <div class="form-actions text-end mt-3">
-    <%= f.button :submit, t(".resend_confirmation_instructions"), class: 'btn btn-primary' %>
-    <%= render "devise/shared/links" %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+                  input_html: { autocomplete: "email" } %>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">&nbsp;</label><br>
+      <%= f.button :submit, t(".resend_confirmation_instructions"), class: 'btn btn-primary' %>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 <% end %>
