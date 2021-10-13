@@ -18,17 +18,19 @@
     <% end %>
 
     <%= f.input :mobile_phone %>
-    <%= f.association :language, include_blank: false %>
+    <%= f.association :language,
+                      include_blank: false,
+                      label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>
 
     <%= f.input :picture,
-                      as: :single_deletable_file,
-                      input_html: { accept: '.png' } %>
+                as: :single_deletable_file,
+                input_html: { accept: '.png' } %>
 
     <%= f.input :password,
                 hint: t(".leave_blank_if_you_don_t_want_to_change_it"),
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
-  
+
 
   </div>
 

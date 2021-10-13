@@ -68,6 +68,9 @@ fr:
   edit: Modifier
   false: Non
   home: Accueil
+  languages:
+    en: Anglais
+    fr: Français
   login:
     already_registered: Déjà inscrit ?
     not_registered_yet: Pas encore inscrit ?
