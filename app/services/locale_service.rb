@@ -5,7 +5,7 @@ class LocaleService
     user&.language.nil? ? self.preferred_language(accept_language_header) : user.language.iso_code.to_sym
   end
 
-  def self.preferred_language(brand_languages, accept_language_header)
+  def self.preferred_language(accept_language_header)
     # browser_language > french
     browser_languages = accept_language_header&.scan(/\*|([a-z]{1,8}(?:-[A-Z0-9]{1,8})*)/i)&.flatten&.compact&.reject { |v| v == "q" }
 
