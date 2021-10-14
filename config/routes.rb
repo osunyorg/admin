@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :languages
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        patch 'unlock' => 'users#unlock'
+      end
+    end
     draw 'education'
     draw 'research'
     draw 'communication'

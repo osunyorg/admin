@@ -37,6 +37,16 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
+  def unlock
+    if @user.access_locked? || @user.max_login_attempts?
+      @user.unlock_access!
+      @user.unlock_mfa!
+      redirect_back(fallback_location: [:admin, @user], notice: 'User account was successfully unlocked.')
+    else
+      redirect_back(fallback_location: [:admin, @user], alert: 'User account was not locked.')
+    end
+  end
+
   def destroy
     @user.destroy
     redirect_to admin_users_url, notice: "User was successfully destroyed."
