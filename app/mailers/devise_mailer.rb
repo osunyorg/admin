@@ -5,33 +5,45 @@ class DeviseMailer < Devise::Mailer
 
   def confirmation_instructions(record, token, opts={})
     opts = merge_with_university_infos(record.university, opts)
-    super
+    I18n.with_locale(record.language.iso_code.to_sym) do
+      super
+    end
   end
 
   def reset_password_instructions(record, token, opts={})
     opts = merge_with_university_infos(record.university, opts)
-    super
+    I18n.with_locale(record.language.iso_code.to_sym) do
+      super
+    end
   end
 
   def unlock_instructions(record, token, opts={})
     opts = merge_with_university_infos(record.university, opts)
-    super
+    I18n.with_locale(record.language.iso_code.to_sym) do
+      super
+    end
   end
 
   def email_changed(record, opts={})
     opts = merge_with_university_infos(record.university, opts)
-    super
+    I18n.with_locale(record.language.iso_code.to_sym) do
+      super
+    end
   end
 
   def password_change(record, opts={})
     opts = merge_with_university_infos(record.university, opts)
-    super
+    I18n.with_locale(record.language.iso_code.to_sym) do
+      super
+    end
   end
 
   def two_factor_authentication_code(record, code, opts = {})
     opts = merge_with_university_infos(record.university, opts)
     @code = code
-    devise_mail(record, :two_factor_authentication_code, opts)
+    I18n.with_locale(record.language.iso_code.to_sym) do
+      devise_mail(record, :two_factor_authentication_code, opts)
+    end
   end
 
   def default_url_options
