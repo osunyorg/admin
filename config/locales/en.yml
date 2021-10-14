@@ -38,7 +38,7 @@ en:
       invalid: "Invalid email or password."
       not_found_in_database: "Invalid email or password."
     mailer:
-      two_factor_authentication:
+      two_factor_authentication_code:
         subject: "Two-factor authentication code"
         text_html: "Your two-factor authentication code for %{university} is %{code}<br>It will expire in 5 minutes."
     sessions:
