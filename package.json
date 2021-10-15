@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "cropperjs": "^1.5.12",
+    "jquery-cropper": "^1.0.1",
     "notyf": "^3.10.0"
   }
 }
