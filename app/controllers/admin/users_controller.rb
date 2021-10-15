@@ -20,19 +20,21 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def create
-    breadcrumb
     if @user.save
       redirect_to [:admin, @user], notice: "User was successfully created."
     else
+      breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    breadcrumb
+    @user.modified_by = current_user
     if @user.update(user_params)
       redirect_to [:admin, @user], notice: "User was successfully updated."
     else
+      breadcrumb
+      add_breadcrumb 'Modifier'
       render :edit, status: :unprocessable_entity
     end
   end

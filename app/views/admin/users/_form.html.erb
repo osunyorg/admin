@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-4">
       <%= f.input :email %>
-      <%#= f.input :role %>
+      <%= f.input :role, include_blank: false, collection: current_user.managed_roles %>
     </div>
     <div class="col-md-4">
       <%= f.input :first_name %>

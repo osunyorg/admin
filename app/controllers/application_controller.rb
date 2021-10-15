@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include WithErrors
   include WithLocale
   include WithUniversity
 
