@@ -9,13 +9,6 @@ GIT
       randexp
       rotp (>= 4.0.0)
 
-PATH
-  remote: ../simple_form_bs5_file_input
-  specs:
-    simple_form_bs5_file_input (0.0.1)
-      rails
-      simple_form
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -323,6 +316,9 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simple_form_bs5_file_input (0.0.1)
+      rails
+      simple_form
     simple_form_password_with_hints (0.0.2)
       rails
       simple_form
@@ -406,7 +402,7 @@ DEPENDENCIES
   sib-api-v3-sdk
   simple-navigation
   simple_form
-  simple_form_bs5_file_input!
+  simple_form_bs5_file_input
   simple_form_password_with_hints
   spring
   two_factor_authentication!
