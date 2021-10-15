@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.selected_class = 'active'
   navigation.items do |primary|
     primary.item :dashboard, t('dashboard'), server_root_path, { icon: 'tachometer-alt', highlights_on: %r{adminserver$} }
-    primary.item :universities, University.model_name.human(count: 2), server_universities_path, { icon: 'university' }
-    primary.item :languages, Language.model_name.human(count: 2), server_languages_path, { icon: 'flag' }
+    primary.item :universities, University.model_name.human(count: 2), server_universities_path, { icon: 'university' } if can?(:read, University)
+    primary.item :languages, Language.model_name.human(count: 2), server_languages_path, { icon: 'flag' } if can?(:read, Language)
   end
 end

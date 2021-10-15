@@ -6,6 +6,7 @@
       <th><%= User.human_attribute_name('email') %></th>
       <th><%= User.human_attribute_name('first_name') %></th>
       <th><%= User.human_attribute_name('last_name') %></th>
+      <th><%= User.human_attribute_name('role') %></th>
       <th><%= User.human_attribute_name('language') %></th>
       <th></th>
     </tr>
@@ -16,6 +17,7 @@
         <td><%= link_to user.email, [:admin, user] %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
+        <td><%= user.role.humanize %></td>
         <td><%= user.language %></td>
         <td class="text-end">
           <%= edit_link user %>

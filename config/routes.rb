@@ -7,18 +7,14 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks'
   }
 
-  resources :languages
-
   namespace :admin do
     resources :users do
-      member do
-        patch 'unlock' => 'users#unlock'
-      end
+      patch 'unlock' => 'users#unlock', on: :member
     end
-    draw 'education'
-    draw 'research'
-    draw 'communication'
-    draw 'administration'
+    draw 'admin/administration'
+    draw 'admin/communication'
+    draw 'admin/education'
+    draw 'admin/research'
     root to: 'dashboard#index'
   end
 
