@@ -31,7 +31,7 @@ gem 'simple-navigation'
 gem 'kaminari'
 gem 'octokit'
 gem 'front_matter_parser'
-gem 'two_factor_authentication', git: 'https://github.com/lespoupeesrusses/two_factor_authentication.git'
+gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_authentication.git'
 
 # Front
 gem 'jquery-rails'

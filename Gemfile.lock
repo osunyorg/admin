@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/lespoupeesrusses/two_factor_authentication.git
-  revision: 0e236b44bfeefcd097433670a05842998892072b
+  remote: https://github.com/noesya/two_factor_authentication.git
+  revision: 16b0a2120aed476c2321c074be553edd9c7dc4c0
   specs:
-    two_factor_authentication (2.2.1)
+    two_factor_authentication (2.2.3)
       devise
       encryptor
       rails (>= 3.1.1)
@@ -414,4 +414,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.27
+   2.2.29
