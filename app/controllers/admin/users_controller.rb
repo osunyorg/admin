@@ -69,6 +69,6 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :role, :language_id, :picture, :picture_delete, :mobile_phone)
+    params.require(:user).permit(:first_name, :last_name, :role, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone)
   end
 end

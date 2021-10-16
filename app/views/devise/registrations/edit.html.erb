@@ -29,6 +29,7 @@
                   as: :single_deletable_file,
                   input_html: { accept: '.jpg,.jpeg,.png' },
                   preview: 200,
+                  resize: 1,
                   direct_upload: true %>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p><%= t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email) %></p>
