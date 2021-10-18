@@ -2,6 +2,6 @@
 
 <%= render 'admin/communication/website/pages/list', pages: @pages %>
 
-<% content_for :buttons do %>
+<% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Page %>
 <% end %>

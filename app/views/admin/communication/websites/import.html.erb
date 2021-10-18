@@ -1,5 +1,5 @@
 <% content_for :title, @website %>
-<% content_for :buttons do %>
+<% content_for :action_bar_right do %>
   <%= link_to t('communication.website.imported.refresh'),
               import_admin_communication_website_path,
               method: :post,
