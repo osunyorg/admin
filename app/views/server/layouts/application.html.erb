@@ -11,7 +11,7 @@
     <%= stylesheet_link_tag 'admin', media: 'all' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-  <body data-layout="fluid" data-sidebar-position="left">
+  <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="toasts-container" style="position: fixed; top: 20px; right: 20px; z-index: 100000;">
       <% unless notice.nil? %>
         <div class="js-notyf-notice d-none">
@@ -25,7 +25,14 @@
       <% end %>
     </div>
     <div class="wrapper">
-      <%= render 'admin/application/nav' %>
+      <nav id="sidebar" class="sidebar">
+        <div class="sidebar-content js-simplebar">
+          <%= link_to server_root_path, class: 'sidebar-brand' do %>
+            <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
+          <% end %>
+          <%= render_navigation context: :server %>
+        </div>
+      </nav>
       <%= render 'admin/application/footer' %>
       <div class="main">
         <%= render 'admin/application/top' %>

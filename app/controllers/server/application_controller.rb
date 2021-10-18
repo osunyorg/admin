@@ -1,5 +1,5 @@
 class Server::ApplicationController < ApplicationController
-  layout 'admin/layouts/application'
+  layout 'server/layouts/application'
 
   before_action :authenticate_user!, :ensure_user_if_server_admin
 
