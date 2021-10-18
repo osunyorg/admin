@@ -41,7 +41,10 @@
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :picture,
                         as: :single_deletable_file,
-                        input_html: { accept: '.png' } %>
+                        input_html: { accept: '.jpg,.jpeg,.png' },
+                        preview: 200,
+                        resize: 1,
+                        direct_upload: true %>
     </div>
   </div>
   <%= f.button :submit, t(".sign_up"), class: 'btn btn-primary' %>
