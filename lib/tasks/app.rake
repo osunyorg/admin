@@ -8,9 +8,12 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
+    language = Language.first
     User.find_each { |u|
       u.confirm
-      u.update(role: :visitor) if u.role.nil?
+      u.role ||= :visitor
+      u.language ||= language
+      u.save
     }
   end
 
