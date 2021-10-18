@@ -73,6 +73,7 @@ fr:
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     subtitle: Vous devez être authentifié pour continuer
   menu:
+    admin: Admin
     profile: Profil
     server_admin: Admin serveur
     sign_out: Déconnexion
