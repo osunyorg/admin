@@ -1,34 +1,42 @@
 <% content_for :title, @university %>
 
-<p>
-  <%= link_to @university.url, @university.url, target: :_blank %>
-</p>
+<div class="row">
+  <div class="col-md-9">
+    <p>
+      <%= link_to @university.url, @university.url, target: :_blank %>
+    </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @university.address %>
-</p>
+    <p>
+      <strong><%= University.human_attribute_name('address') %>:</strong>
+      <%= @university.address %>
+    </p>
 
-<p>
-  <strong>Zipcode:</strong>
-  <%= @university.zipcode %>
-</p>
+    <p>
+      <strong><%= University.human_attribute_name('zipcode') %>:</strong>
+      <%= @university.zipcode %>
+    </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @university.city %>
-</p>
+    <p>
+      <strong><%= University.human_attribute_name('city') %>:</strong>
+      <%= @university.city %>
+    </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @university.country %>
-</p>
+    <p>
+      <strong><%= University.human_attribute_name('country') %>:</strong>
+      <%= @university.country %>
+    </p>
 
-<p>
-  <strong>Private:</strong>
-  <%= @university.private %>
-</p>
+    <p>
+      <strong><%= University.human_attribute_name('private') %>:</strong>
+      <%= @university.private %>
+    </p>
+  </div>
+  <div class="col-md-3">
+    <%= kamifusen_tag @university.logo, class: 'img-fluid' %>
+  </div>
+</div>
 
-<% content_for :buttons do %>
+
+<% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>
 <% end %>

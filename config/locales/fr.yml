@@ -1,6 +1,20 @@
 fr:
   activerecord:
     attributes:
+      language:
+        iso_code: Code Iso
+        name: Nom
+      university:
+        address: Adresse
+        city: Ville
+        country: Pays
+        identifier: Identifiant
+        logo: Logo
+        name: Nom
+        private: Etablissement privé
+        public: Public
+        public_or_private: Public/privé
+        zipcode: Code postal
       user:
         email: Email
         first_name: Prénom
@@ -11,25 +25,15 @@ fr:
         researcher: Profil de chercheur
         role: Rôle
     models:
+      language:
+        one: Langue
+        other: Langues
       university:
-        language:
-          one: Langue
-          other: Langues
-          user:
-            attributes:
-              university:
-                address: Adresse
-                city: Ville
-                country: Pays
-                name: Nom
-                private: Etablissement privé
-                public: Public
-                public_or_private: Public/privé
-                zipcode: Code postal
-            one: Utilisateur
-            other: Utilisateurs
         one: Université
         other: Universités
+      user:
+        one: Utilisateur
+        other: Utilisateurs
   create: Créer
   dashboard: Tableau de bord
   delete: Supprimer
@@ -68,8 +72,13 @@ fr:
     not_registered_yet: Pas encore inscrit ?
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     subtitle: Vous devez être authentifié pour continuer
+  menu:
+    profile: Profil
+    server_admin: Admin serveur
+    sign_out: Déconnexion
   please-confirm: Est-ce que vous confirmez ?
   privacy_policy: Politique de confidentialité
+  save: Enregistrer
   simple_form:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"

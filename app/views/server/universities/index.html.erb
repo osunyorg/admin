@@ -1,6 +1,6 @@
 <% content_for :title, University.model_name.human(count: 2) %>
 
-<table class="table">
+<table class="<%= table_classes %>">
   <thead>
     <tr>
       <th><%= University.human_attribute_name('name') %></th>
