@@ -8,6 +8,7 @@ module User::WithRoles
 
     scope :for_role, -> (role) { where(role: role) }
 
+    before_validation :set_default_role, on: :create
     before_validation :check_modifier_role
 
     def managed_roles
@@ -21,6 +22,14 @@ module User::WithRoles
 
     def check_modifier_role
       errors.add(:role, 'cannot be set to this role') if modified_by && !modified_by.managed_roles.include?(self.role)
+    end
+
+    def set_default_role
+      if User.all.empty?
+        self.role = :server_admin
+      elsif university.users.not_server_admin.empty?
+        self.role = :admin
+      end
     end
 
   end
