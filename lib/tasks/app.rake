@@ -8,7 +8,10 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    User.find_each(&:confirm)
+    User.find_each { |u|
+      u.confirm
+      u.update(role: :visitor) if u.role.nil?
+    }
   end
 
   namespace :db do
