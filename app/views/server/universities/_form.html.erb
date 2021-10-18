@@ -5,7 +5,7 @@
       <%= f.input :identifier %>
       <%= f.input :private %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
       <%= f.input :address %>
       <div class="row">
         <div class="col-md-4">
@@ -16,6 +16,13 @@
         </div>
       </div>
       <%= f.input :country %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :logo,
+                  as: :single_deletable_file,
+                  input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                  preview: 200,
+                  direct_upload: true %>
     </div>
   </div>
   <% content_for :buttons do %>
