@@ -73,6 +73,7 @@ en:
     not_registered_yet_details: Register if you have no account yet.
     subtitle: Sign in to your account to continue
   menu:
+    admin: Admin
     profile: Profil
     server_admin: Admin server
     sign_out: Log out

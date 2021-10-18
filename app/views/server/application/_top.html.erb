@@ -1,0 +1,29 @@
+<nav id="topbar" class="navbar navbar-expand navbar-light navbar-bg">
+  <div class="navbar-collapse collapse">
+    <a class="sidebar-toggle">
+      <i class="hamburger align-self-center"></i>
+    </a>
+    <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
+    <ul class="navbar-nav navbar-align">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle d-none d-sm-inline-block js-user-dropdown-toggle" href="#" data-bs-toggle="dropdown">
+          <span class="text-dark"><%= current_user %></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <%= link_to t('menu.profile'), edit_user_registration_path, class: 'dropdown-item' %>
+          <%= link_to t('menu.admin'), admin_root_path, class: 'dropdown-item' %>
+          <%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+        </div>
+      </li>
+      <li>
+        <a class="nav-link nav-link--last js-user-button" href="#">
+          <% if current_user.picture.attached? && current_user.picture.variable? %>
+            <%= image_tag current_user.picture.variant(resize: '40x40'), class: 'avatar img-fluid rounded-circle' %>
+          <% else %>
+            <%= image_tag 'avatar.jpg', class: 'avatar img-fluid rounded-circle' %>
+          <% end %>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
