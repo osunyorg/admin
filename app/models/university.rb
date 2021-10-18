@@ -19,11 +19,13 @@ class University < ApplicationRecord
   validates_presence_of :name
   scope :ordered, -> { order(:name) }
 
-  include WithIdentifier
-  include WithUsers
-  include WithEducation
-  include WithResearch
   include WithCommunication
+  include WithEducation
+  include WithIdentifier
+  include WithResearch
+  include WithUsers
+
+  has_one_attached_deletable :logo
 
   def to_s
     "#{name}"

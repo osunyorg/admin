@@ -4,7 +4,7 @@ module User::WithRoles
   included do
     attr_accessor :modified_by
 
-    enum role: { visitor: 0, admin: 20, superadmin: 30 }
+    enum role: { visitor: 0, admin: 20, server_admin: 30 }
 
     scope :for_role, -> (role) { where(role: role) }
 
