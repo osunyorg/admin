@@ -21,6 +21,7 @@ namespace :app do
     desc 'Get database from Scalingo'
     task :staging do
       Bundler.with_unbundled_env do
+        Figaro.load # Load ENV variables
         # Get a new backup archive from Scalingo
         # PG Addon ID from `scalingo addons` CLI command.
         sh "scalingo --app #{ENV['OSUNY_STAGING_APP_NAME']} backups-create --addon #{ENV['OSUNY_STAGING_PG_ADDON_ID']}"

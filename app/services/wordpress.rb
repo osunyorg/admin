@@ -1,15 +1,16 @@
 class Wordpress
   attr_reader :domain
 
-  # Test in console with:
-  # reload! && Communication::Website::Imported::Post.first.save && Communication::Website::Imported::Post.first.post.text
-  # R&D:
-  # https://github.com/rails/rails-html-sanitizer
-  # https://github.com/gjtorikian/html-pipeline
-  # https://github.com/rgrove/sanitize
   def self.clean(html)
-    Sanitize.fragment html, Sanitize::Config::RELAXED
-    # html
+    fragment = Sanitize.fragment(html, Sanitize::Config::RELAXED)
+    fragment = Nokogiri::HTML5.fragment(fragment)
+    if fragment.css('h1').any?
+      # h1 => h2 ; h2 => h3 ; ...
+      (1..5).to_a.reverse.each do |i|
+        fragment.css("h#{i}").each { |element| element.name = "h#{i+1}" }
+      end
+    end
+    fragment.to_html(preserve_newline: true)
   end
 
   def initialize(domain)
