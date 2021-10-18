@@ -39,7 +39,7 @@
 </div>
 
 
-<% content_for :buttons do %>
+<% content_for :action_bar_right do %>
   <% if @website.imported? %>
     <%= link_to t('communication.website.imported.show'),
                 import_admin_communication_website_path,

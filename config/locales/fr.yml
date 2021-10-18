@@ -52,6 +52,10 @@ fr:
       links:
         sign_out: "Se déconnecter"
     two_factor_authentication:
+      admin_locked_html: Ce compte utilisateur est actuellement <i>verrouillé</i>.
+      admin_locked_mfa_html: Ce compte utilisateur est actuellement <i>verrouillé</i> à cause de tentatives de MFA excessives.
+      admin_unlock_in_html: Il se débloquera automatiquement dans <i>%{distance}</i>.
+      admin_unlock: Le débloquer !
       attempt_failed: "Code invalide"
       code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
       enter_code_direct_otp: "Entrez le code qui vous a été envoyé"
