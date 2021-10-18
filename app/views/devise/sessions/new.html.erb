@@ -16,7 +16,7 @@
                     required: false,
                     autofocus: true,
                     input_html: { autocomplete: "email" } %>
-        <div class="mb-3 password optional user_password">
+        <div class="mb-3 password optional user_password password_with_hints">
           <%= f.input :password,
                       as: :password_with_hints,
                       allow_password_uncloaking: true,
