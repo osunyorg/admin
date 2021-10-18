@@ -69,6 +69,7 @@ en:
     not_registered_yet_details: Register if you have no account yet.
     subtitle: Sign in to your account to continue
   please-confirm: Are you sure?
+  privacy_policy: Privacy policy
   simple_form:
     error_notification:
       default_message: "Please review the problems below:"
@@ -78,5 +79,6 @@ en:
   simple_form_password_with_hints:
       test_chars: "%{min_length} characters min."
   show: Show
+  terms_of_service: Terms of service
   true: Yes
   validate: Validate
