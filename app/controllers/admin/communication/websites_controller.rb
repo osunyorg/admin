@@ -20,8 +20,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
       flash[:notice] = t('communication.website.imported.launched')
     end
     @imported_website = @website.imported_website
-    @imported_pages = @imported_website.pages
-    @imported_posts = @imported_website.posts
+    @imported_pages = @imported_website.pages.page params[:pages_page]
+    @imported_posts = @imported_website.posts.page params[:posts_page]
     breadcrumb
     add_breadcrumb Communication::Website::Imported::Website.model_name.human
   end

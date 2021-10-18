@@ -102,6 +102,9 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.9.3, < 3)
       sassc-rails (>= 2.0.0)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     breadcrumbs_on_rails (4.1.0)
       railties (>= 5.0)
     bugsnag (6.24.0)
@@ -370,6 +373,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap (>= 1.4.4)
   bootstrap
+  bootstrap5-kaminari-views
   breadcrumbs_on_rails
   bugsnag
   byebug

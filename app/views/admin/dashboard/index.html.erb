@@ -5,7 +5,11 @@
     <div class="card">
       <div class="card-body">
         <h4>Bonjour <%= current_user.first_name %>&nbsp;!</h4>
-        <p><%= current_university %></p>
+        <% if current_university.logo.attached? %>
+          <%= image_tag current_university.logo, width: 120, class: 'float-end' %>
+        <% else %>
+          <p><%= current_university %></p>
+        <% end %>
       </div>
     </div>
   </div>

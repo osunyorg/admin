@@ -39,6 +39,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
 
   before_validation :sync
 
+  default_scope { order(path: :desc) }
+
   def to_s
     "#{title}"
   end
