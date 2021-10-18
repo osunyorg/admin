@@ -20,16 +20,18 @@
       </table>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title"><%= t('activerecord.attributes.university.logo') %></h2>
-      </div>
-      <div class="card-body">
-        <%= kamifusen_tag @university.logo, class: 'img-fluid p-5' %>
+  <% if @university.logo.attached? %>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><%= t('activerecord.attributes.university.logo') %></h2>
+        </div>
+        <div class="card-body">
+          <%= kamifusen_tag @university.logo, class: 'img-fluid p-5' %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <% content_for :action_bar_right do %>

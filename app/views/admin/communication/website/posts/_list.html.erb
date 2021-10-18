@@ -1,7 +1,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="ps-0"><%= Communication::Website::Post.human_attribute_name('title') %></th>
+      <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
       <th width="150"></th>
     </tr>
@@ -9,9 +9,9 @@
   <tbody>
     <% posts.each do |post| %>
       <tr>
-        <td class="ps-0"><%= link_to post, admin_communication_website_post_path(website_id: post.website.id, id: post.id) %></td>
+        <td><%= link_to post, admin_communication_website_post_path(website_id: post.website.id, id: post.id) %></td>
         <td><%= l post.published_at, format: :long if post.published_at %></td>
-        <td class="text-end pe-0">
+        <td class="text-end">
           <%= link_to t('edit'),
                       edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                       class: button_classes %>

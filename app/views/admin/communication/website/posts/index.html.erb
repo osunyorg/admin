@@ -1,6 +1,11 @@
 <% content_for :title, Communication::Website::Post.model_name.human(count: 2) %>
 
-<%= render 'admin/communication/website/posts/list', posts: @posts %>
+<div class="card">
+  <%= render 'admin/communication/website/posts/list', posts: @posts %>
+  <div class="card-footer">
+    <%= paginate @posts, theme: 'bootstrap-5' %>
+  </div>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Post %>
