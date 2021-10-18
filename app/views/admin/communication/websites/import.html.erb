@@ -6,46 +6,64 @@
               class: button_classes %>
 <% end %>
 
-<h2><%= @imported_posts.count %> posts</h2>
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Communication::Website::Imported::Post.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Imported::Post.human_attribute_name('original') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @imported_posts.each do |post| %>
+<div class="card">
+  <div class="card-header">
+    <h2><%= @imported_posts.count %> posts</h2>
+  </div>
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to post, admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id) %></td>
-        <td class="small"><%= link_to post.path, post.url, target: :_blank %></td>
-        <td>
-          <%= link_to t('show'),
-                        admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id),
-                        class: button_classes %>
-        </td>
+        <th><%= Communication::Website::Imported::Post.human_attribute_name('title') %></th>
+        <th><%= Communication::Website::Imported::Post.human_attribute_name('original') %></th>
+        <th class="text-end" width="150">Generated post</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @imported_posts, param_name: :posts_page, theme: 'bootstrap-5' %>
+    </thead>
+    <tbody>
+      <% @imported_posts.each do |post| %>
+        <tr>
+          <td><%= post %></td>
+          <td class="small"><%= link_to post.path, post.url, target: :_blank %></td>
+          <td class="text-end">
+            <%= link_to t('show'),
+                          admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id),
+                          class: button_classes %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="card-footer">
+    <%= paginate @imported_posts, param_name: :posts_page, theme: 'bootstrap-5' %>
+  </div>
+</div>
 
-<h2 class="mt-5"><%= @imported_pages.count %> pages</h2>
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th class="ps-0"><%= Communication::Website::Imported::Page.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Imported::Page.human_attribute_name('original') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @imported_pages.each do |page| %>
+<div class="card mt-5">
+  <div class="card-header">
+    <h2><%= @imported_pages.count %> pages</h2>
+  </div>
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to page, admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id) %></td>
-        <td class="small"><%= link_to page.path, page.url, target: :_blank %></td>
+        <th><%= Communication::Website::Imported::Page.human_attribute_name('title') %></th>
+        <th><%= Communication::Website::Imported::Page.human_attribute_name('original') %></th>
+        <th class="text-end" width="150">Generated page</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @imported_pages, param_name: :pages_page, theme: 'bootstrap-5' %>
+    </thead>
+    <tbody>
+      <% @imported_pages.each do |page| %>
+        <tr>
+          <td><%= page %></td>
+          <td class="small"><%= link_to page.path, page.url, target: :_blank %></td>
+          <td class="text-end">
+            <%= link_to t('show'),
+                          admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id),
+                          class: button_classes %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="card-footer">
+    <%= paginate @imported_pages, param_name: :pages_page, theme: 'bootstrap-5' %>
+  </div>
+</div>
