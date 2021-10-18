@@ -19,6 +19,16 @@
                               autofocus: true,
                               autocomplete: 'off',
                               class: 'form-control string required'%>
+          <p class="mt-2 mb-0">
+            <% if resource.direct_otp %>
+              <%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %>
+            <% else %>
+              <%= link_to t('devise.two_factor_authentication.send_code_instead'), [:resend_code, resource_name, :two_factor_authentication] %>
+            <% end %>
+            <% unless resource.mobile_phone.blank? # when phone is blank default code method is already :email so we don't need another link %>
+              <%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>
@@ -30,16 +40,6 @@
       <%= f.button  :submit,
                     t('validate'),
                     class: "btn btn-primary" %>
-      <p class="mt-2 mb-0">
-        <% if resource.direct_otp %>
-          <%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %>
-        <% else %>
-          <%= link_to t('devise.two_factor_authentication.send_code_instead'), [:resend_code, resource_name, :two_factor_authentication] %>
-        <% end %>
-        <% unless resource.mobile_phone.blank? # when phone is blank default code method is already :email so we don't need another link %>
-          <%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %>
-        <% end %>
-      </p>
     </div>
   </div>
 <% end %>

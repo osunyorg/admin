@@ -49,9 +49,13 @@ module Admin::ApplicationHelper
     classes
   end
 
+  def table_classes
+    'table table-striped'
+  end
+
   def submit(form)
     form.button :submit,
-                'Enregistrer',
+                t('save'),
                 class: button_classes,
                 form: form.options.dig(:html, :id)
   end

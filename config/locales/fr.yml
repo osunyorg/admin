@@ -68,8 +68,13 @@ fr:
     not_registered_yet: Pas encore inscrit ?
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     subtitle: Vous devez être authentifié pour continuer
+  menu:
+    profile: Profil
+    server_admin: Admin serveur
+    sign_out: Déconnexion
   please-confirm: Est-ce que vous confirmez ?
   privacy_policy: Politique de confidentialité
+  save: Enregistrer
   simple_form:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"

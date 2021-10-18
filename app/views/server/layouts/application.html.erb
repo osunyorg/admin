@@ -26,13 +26,11 @@
         <%= render 'admin/application/top' %>
         <main class="content">
           <div class="container-fluid p-0">
-            <div class="float-end">
-              <%= yield :buttons %>
-            </div>
             <h1><%= yield :title %></h1>
             <%= yield %>
           </div>
         </main>
+        <%= render 'admin/application/footer' %>
       </div>
     </div>
     <%= javascript_include_tag 'admin' %>
