@@ -5,6 +5,6 @@
   <%= @language.iso_code %>
 </p>
 
-<% content_for :buttons do %>
+<% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_language_path(@language), class: button_classes %>
 <% end %>
