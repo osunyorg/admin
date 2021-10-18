@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_152623) do
+ActiveRecord::Schema.define(version: 2021_10_18_154621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(version: 2021_10_08_152623) do
     t.text "content"
     t.text "path"
     t.text "url"
+    t.string "identifier"
+    t.text "excerpt"
+    t.string "parent"
     t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
     t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
@@ -90,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_152623) do
     t.uuid "post_id", null: false
     t.integer "status", default: 0
     t.string "title"
-    t.text "description"
+    t.text "excerpt"
     t.text "content"
     t.text "path"
     t.text "url"
@@ -213,7 +216,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_152623) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.date "updated_at", null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
