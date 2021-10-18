@@ -12,15 +12,15 @@
     <tr>
       <th><%= Communication::Website::Imported::Post.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Imported::Post.human_attribute_name('original') %></th>
-      <th></th>
+      <th class="text-end" width="150">Generated post</th>
     </tr>
   </thead>
   <tbody>
     <% @imported_posts.each do |post| %>
       <tr>
-        <td><%= link_to post, admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id) %></td>
+        <td><%= post %></td>
         <td class="small"><%= link_to post.path, post.url, target: :_blank %></td>
-        <td>
+        <td class="text-end">
           <%= link_to t('show'),
                         admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id),
                         class: button_classes %>
@@ -37,13 +37,19 @@
     <tr>
       <th class="ps-0"><%= Communication::Website::Imported::Page.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Imported::Page.human_attribute_name('original') %></th>
+      <th class="text-end" width="150">Generated page</th>
     </tr>
   </thead>
   <tbody>
     <% @imported_pages.each do |page| %>
       <tr>
-        <td><%= link_to page, admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id) %></td>
+        <td><%= page %></td>
         <td class="small"><%= link_to page.path, page.url, target: :_blank %></td>
+        <td class="text-end">
+          <%= link_to t('show'),
+                        admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id),
+                        class: button_classes %>
+        </td>
       </tr>
     <% end %>
   </tbody>
