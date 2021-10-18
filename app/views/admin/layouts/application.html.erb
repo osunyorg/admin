@@ -26,6 +26,7 @@
     </div>
     <div class="wrapper">
       <%= render 'admin/application/nav' %>
+      <%= render 'admin/application/footer' %>
       <div class="main">
         <%= render 'admin/application/top' %>
         <main class="content">
@@ -37,7 +38,6 @@
             <%= yield %>
           </div>
         </main>
-        <%= render 'admin/application/footer' %>
       </div>
     </div>
     <%= javascript_include_tag 'admin' %>

@@ -1,12 +1,17 @@
 main.content
     padding-bottom: 65px
 
+.sidebar.collapsed + .footer.fixed
+    left: 0
+    transition: left .35s ease-in-out
+
 .footer.fixed
     bottom: 0
     left: 260px
     padding: .5rem
     position: fixed
     right: 0
+    z-index: 1
 
 table.table-striped
     tbody
