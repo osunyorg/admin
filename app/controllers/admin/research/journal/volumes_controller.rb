@@ -24,7 +24,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
     @volume.journal = @journal
     @volume.university = @journal.university
     if @volume.save
-      redirect_to admin_research_journal_volume_path(@volume), notice: "Volume was successfully created."
+      redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -33,17 +33,18 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
 
   def update
     if @volume.update(volume_params)
-      redirect_to admin_research_journal_volume_path(@volume), notice: "Volume was successfully updated."
+      redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
     else
       breadcrumb
       render :edit, status: :unprocessable_entity
+      add_breadcrumb t('edit')
     end
   end
 
   def destroy
     @journal = @volume.journal
     @volume.destroy
-    redirect_to admin_research_journal_path(@journal), notice: "Volume was successfully destroyed."
+    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s)
   end
 
   private

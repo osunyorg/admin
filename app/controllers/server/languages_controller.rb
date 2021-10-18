@@ -15,12 +15,12 @@ class Server::LanguagesController < Server::ApplicationController
 
   def edit
     breadcrumb
-    add_breadcrumb 'Modifier'
+    add_breadcrumb t('edit')
   end
 
   def create
     if @language.save
-      redirect_to [:server, @language], notice: "Language was successfully created."
+      redirect_to [:server, @language], notice: t('admin.successfully_created_html', model: @language.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -29,17 +29,17 @@ class Server::LanguagesController < Server::ApplicationController
 
   def update
     if @language.update(language_params)
-      redirect_to [:server, @language], notice: "Language was successfully updated."
+      redirect_to [:server, @language], notice: t('admin.successfully_updated_html', model: @language.to_s)
     else
       breadcrumb
-      add_breadcrumb 'Modifier'
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @language.destroy
-    redirect_to server_languages_url, notice: "Language was successfully destroyed."
+    redirect_to server_languages_url, notice: t('admin.successfully_destroyed_html', model: @language.to_s)
   end
 
   protected
@@ -51,7 +51,7 @@ class Server::LanguagesController < Server::ApplicationController
       if @language.persisted?
         add_breadcrumb @language, [:server, @language]
       else
-        add_breadcrumb 'Créer'
+        add_breadcrumb t('create')
       end
     end
   end

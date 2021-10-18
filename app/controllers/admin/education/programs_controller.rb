@@ -22,7 +22,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def create
     @program.university = current_university
     if @program.save
-      redirect_to [:admin, @program], notice: "Program was successfully created."
+      redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -31,7 +31,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def update
     if @program.update(program_params)
-      redirect_to [:admin, @program], notice: "Program was successfully updated."
+      redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -41,7 +41,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def destroy
     @program.destroy
-    redirect_to admin_education_programs_url, notice: "Program was successfully destroyed."
+    redirect_to admin_education_programs_url, notice: t('admin.successfully_destroyed_html', model: @program.to_s)
   end
 
   protected

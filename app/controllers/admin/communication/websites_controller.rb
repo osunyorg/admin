@@ -34,7 +34,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   def create
     @website.university = current_university
     if @website.save
-      redirect_to [:admin, @website], notice: "Site was successfully created."
+      redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -43,16 +43,17 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
 
   def update
     if @website.update(website_params)
-      redirect_to [:admin, @website], notice: "Site was successfully updated."
+      redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s)
     else
       breadcrumb
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @website.destroy
-    redirect_to admin_communication_websites_url, notice: "Site was successfully destroyed."
+    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s)
   end
 
   protected

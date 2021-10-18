@@ -21,7 +21,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   def create
     @journal.university = current_university
     if @journal.save
-      redirect_to [:admin, @journal], notice: "Journal was successfully created."
+      redirect_to [:admin, @journal], notice: t('admin.successfully_created_html', model: @journal.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -30,7 +30,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
 
   def update
     if @journal.update(journal_params)
-      redirect_to [:admin, @journal], notice: "Journal was successfully updated."
+      redirect_to [:admin, @journal], notice: t('admin.successfully_updated_html', model: @journal.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -40,7 +40,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
 
   def destroy
     @journal.destroy
-    redirect_to admin_research_journals_url, notice: "Journal was successfully destroyed."
+    redirect_to admin_research_journals_url, notice: t('admin.successfully_destroyed_html', model: @journal.to_s)
   end
 
   protected

@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::ApplicationController
   load_and_authorize_resource
 
   def index
-    @users = current_university.users
+    @users = current_university.users.ordered
     breadcrumb
   end
 
@@ -16,12 +16,12 @@ class Admin::UsersController < Admin::ApplicationController
 
   def edit
     breadcrumb
-    add_breadcrumb 'Modifier'
+    add_breadcrumb t('edit')
   end
 
   def create
     if @user.save
-      redirect_to [:admin, @user], notice: "User was successfully created."
+      redirect_to [:admin, @user], notice: t('admin.successfully_created_html', model: @user.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -31,10 +31,10 @@ class Admin::UsersController < Admin::ApplicationController
   def update
     @user.modified_by = current_user
     if @user.update(user_params)
-      redirect_to [:admin, @user], notice: "User was successfully updated."
+      redirect_to [:admin, @user], notice: t('admin.successfully_updated_html', model: @user.to_s)
     else
       breadcrumb
-      add_breadcrumb 'Modifier'
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -43,15 +43,15 @@ class Admin::UsersController < Admin::ApplicationController
     if @user.access_locked? || @user.max_login_attempts?
       @user.unlock_access!
       @user.unlock_mfa!
-      redirect_back(fallback_location: [:admin, @user], notice: 'User account was successfully unlocked.')
+      redirect_back(fallback_location: [:admin, @user], notice: t('admin.users_alerts.successfully_unlocked_html', model: @user.to_s))
     else
-      redirect_back(fallback_location: [:admin, @user], alert: 'User account was not locked.')
+      redirect_back(fallback_location: [:admin, @user], alert: t('admin.users_alerts.not_locked_html', model: @user.to_s))
     end
   end
 
   def destroy
     @user.destroy
-    redirect_to admin_users_url, notice: "User was successfully destroyed."
+    redirect_to admin_users_url, notice: t('admin.successfully_destroyed_html', model: @user.to_s)
   end
 
   protected
@@ -63,7 +63,7 @@ class Admin::UsersController < Admin::ApplicationController
       if @user.persisted?
         add_breadcrumb @user, [:admin, @user]
       else
-        add_breadcrumb 'Créer'
+        add_breadcrumb t('create')
       end
     end
   end
