@@ -20,6 +20,7 @@ module User::WithAuthentication
     validates :mobile_phone, format: { with: /\A\+[0-9]+\z/ }, allow_blank: true
 
     before_validation :adjust_mobile_phone, :sanitize_fields
+    before_validation :set_default_role, on: :create
 
     def self.find_for_authentication(warden_conditions)
       where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
@@ -69,6 +70,16 @@ module User::WithAuthentication
       self.first_name = full_sanitizer.sanitize(self.first_name)&.gsub('=', '')
       self.last_name = full_sanitizer.sanitize(self.last_name)&.gsub('=', '')
       self.mobile_phone = full_sanitizer.sanitize(self.mobile_phone)&.gsub('=', '')
+    end
+
+    def set_default_role
+      if User.all.empty?
+        role = :superadmin
+      elsif university.users.empty?
+        role = :admin
+      else
+        role = :visitor
+      end
     end
 
     def password_required?
