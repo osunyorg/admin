@@ -6,20 +6,6 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-amazon:
-  service: S3
-  access_key_id: <%= ENV['AWS_S3_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_S3_SECRET_ACCESS_KEY'] %>
-  region: <%= ENV['AWS_S3_REGION'] %>
-  bucket: <%= ENV['AWS_S3_BUCKET'] %>
-
-outscale:
-  service: S3
-  access_key_id: <%= ENV['OUTSCALE_OOS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['OUTSCALE_OOS_SECRET_ACCESS_KEY'] %>
-  region: <%= ENV['OUTSCALE_OOS_REGION'] %>
-  bucket: <%= ENV['OUTSCALE_OOS_BUCKET'] %>
-
 scaleway:
   service: S3
   access_key_id: <%= ENV['SCALEWAY_OS_ACCESS_KEY_ID'] %>

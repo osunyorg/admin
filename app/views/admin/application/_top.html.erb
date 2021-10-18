@@ -10,8 +10,9 @@
           <span class="text-dark"><%= current_user %></span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
-          <%= link_to 'Profil', edit_user_registration_path, class: 'dropdown-item' %>
-          <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+          <%= link_to t('menu.profile'), edit_user_registration_path, class: 'dropdown-item' %>
+          <%= link_to t('menu.server_admin'), server_root_path, class: 'dropdown-item' if current_user.server_admin? %>
+          <%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
         </div>
       </li>
       <li>
