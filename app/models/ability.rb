@@ -45,7 +45,7 @@ class Ability
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
   end
 
-  def superadmin
+  def server_admin
     can :manage, :all
   end
 end

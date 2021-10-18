@@ -1,8 +1,8 @@
-<footer>
-  <div class="container small">
-    <%= current_university %>
-
-    <p>Is University? <%= is_university? %></p>
-    <p>Is website? <%= is_website? %></p>
+<footer class="text-center small">
+  <div class="mb-5">
+    <%= image_tag 'osuny-black.svg', width: 80 %>
   </div>
+  <%= current_university %> |
+  <%= link_to t('terms_of_service'), '' %> |
+  <%= link_to t('privacy_policy'), '' %>
 </footer>

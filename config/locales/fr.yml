@@ -69,6 +69,7 @@ fr:
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     subtitle: Vous devez être authentifié pour continuer
   please-confirm: Est-ce que vous confirmez ?
+  privacy_policy: Politique de confidentialité
   simple_form:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
@@ -78,5 +79,6 @@ fr:
   simple_form_password_with_hints:
       test_chars: "%{min_length} caractères min."
   show: Voir
+  terms_of_service: Conditions d'utilisation
   true: Oui
   validate: Valider
