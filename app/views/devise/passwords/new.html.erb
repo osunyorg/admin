@@ -9,11 +9,11 @@
                   required: true,
                   autofocus: true,
                   input_html: { autocomplete: "email" } %>
+      <%= render "devise/shared/links" %>
     </div>
     <div class="col-md-6">
       <label class="form-label">&nbsp;</label><br>
       <%= f.button :submit, t(".send_me_reset_password_instructions"), class: 'btn btn-primary' %>
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 <% end %>

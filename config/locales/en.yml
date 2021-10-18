@@ -37,6 +37,7 @@ en:
     failure:
       invalid: "Invalid email or password."
       not_found_in_database: "Invalid email or password."
+      unauthenticated: ''
     mailer:
       two_factor_authentication_code:
         subject: "Two-factor authentication code"

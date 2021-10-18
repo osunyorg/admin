@@ -32,7 +32,17 @@
 
       <div class="form-actions">
         <%= f.button :submit, t(".sign_in"), class: 'btn btn-primary' %>
-        <%= render "devise/shared/links" %>
+
+        <div class="mt-3">
+
+          <% if devise_mapping.confirmable? %>
+            <%= link_to t('devise.shared.links.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name) %><br />
+          <% end %>
+
+          <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) %>
+            <%= link_to t('devise.shared.links.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name) %><br />
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
