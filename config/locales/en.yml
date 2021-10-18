@@ -1,6 +1,20 @@
 en:
   activerecord:
     attributes:
+      language:
+        iso_code: Iso code
+        name: Name
+      university:
+        address: Address
+        city: City
+        country: Country
+        identifier: Identifier
+        logo: Logo
+        name: Name
+        private: Private
+        public: Public
+        public_or_private: Public/private
+        zipcode: Zipcode
       user:
         email: Email
         first_name: First name
@@ -11,25 +25,15 @@ en:
         researcher: Researcher profile
         role: Role
     models:
+      language:
+        one: Language
+        other: Languages
       university:
-        language:
-          one: Language
-          other: Languages
-          user:
-            attributes:
-              university:
-                address: Address
-                city: City
-                country: Country
-                name: Name
-                private: Private
-                public: Public
-                public_or_private: Public/private
-                zipcode: Zipcode
-            one: User
-            other: Users
         one: University
         other: Universities
+      user:
+        one: User
+        other: Users
   create: Create
   dashboard: Dashboard
   delete: Delete

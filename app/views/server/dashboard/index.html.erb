@@ -1,14 +1,1 @@
 <% content_for :title, "Bonjour #{ current_user.first_name }!" %>
-
-<div class="row">
-  <% @universities.each do |university| %>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <h4><%= university %></h4>
-          <%= link_to 'Voir', [:server, university], class: button_classes('stretched-link') %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
