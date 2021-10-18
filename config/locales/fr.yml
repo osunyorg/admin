@@ -14,6 +14,7 @@ fr:
         private: Etablissement privé
         public: Public
         public_or_private: Public/privé
+        url: 'URL'
         zipcode: Code postal
       user:
         email: Email
@@ -34,6 +35,8 @@ fr:
       user:
         one: Utilisateur
         other: Utilisateurs
+  admin:
+    infos: Infos
   create: Créer
   dashboard: Tableau de bord
   delete: Supprimer
