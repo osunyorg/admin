@@ -74,7 +74,7 @@ module User::WithAuthentication
 
     def set_default_role
       if User.all.empty?
-        role = :superadmin
+        role = :server_admin
       elsif university.users.empty?
         role = :admin
       else
