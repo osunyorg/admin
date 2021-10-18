@@ -8,7 +8,7 @@
 
 <div class="card">
   <div class="card-header">
-    <h2><%= @imported_posts.count %> posts</h2>
+    <h2><%= @imported_posts.total_count %> posts</h2>
   </div>
   <table class="<%= table_classes %>">
     <thead>
@@ -39,7 +39,7 @@
 
 <div class="card mt-5">
   <div class="card-header">
-    <h2><%= @imported_pages.count %> pages</h2>
+    <h2><%= @imported_pages.total_count %> pages</h2>
   </div>
   <table class="<%= table_classes %>">
     <thead>
