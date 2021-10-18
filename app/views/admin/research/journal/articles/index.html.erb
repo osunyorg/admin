@@ -2,6 +2,6 @@
 
 <%= render 'admin/research/journal/articles/list', articles: @articles %>
 
-<% content_for :buttons do %>
+<% content_for :action_bar_right do %>
   <%= create_link Research::Journal::Article %>
 <% end %>

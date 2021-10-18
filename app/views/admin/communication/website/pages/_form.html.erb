@@ -1,31 +1,31 @@
 <%= simple_form_for [:admin, page] do |f| %>
-<div class="row">
-  <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0">Content</h5>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title">Content</h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :title %>
+          <%= f.input :description %>
+          <%= f.input :text, input_html: { rows: 20 } %>
+        </div>
       </div>
-      <div class="card-body">
-        <%= f.input :title %>
-        <%= f.input :description %>
-        <%= f.input :text, input_html: { rows: 20 } %>
+    </div>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title">Metadata</h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :slug %>
+          <%= f.input :published %>
+          <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0">Metadata</h5>
-      </div>
-      <div class="card-body">
-        <%= f.input :slug %>
-        <%= f.input :published %>
-        <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
-      </div>
-    </div>
-  </div>
-</div>
-<% content_for :buttons do %>
-  <%= submit f %>
-<% end %>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
 <% end %>

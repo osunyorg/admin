@@ -1,17 +1,21 @@
 <% if @user.max_login_attempts? %>
   <div class="alert alert-danger">
-    This user account is currently <i>locked</i> due to too many MFA attempts.
-    <%= link_to  'Unlock it now!', unlock_admin_user_path(@user), method: :patch, class: 'alert-link' if can?(:update, @user) %>
+    <div class="alert-message">
+      <%= t('devise.two_factor_authentication.admin_locked_mfa_html') %>
+      <%= link_to t('devise.two_factor_authentication.admin_unlock'), unlock_admin_user_path(@user), method: :patch, class: 'alert-link' if can?(:update, @user) %>
+    </div>
   </div>
 <% end %>
 
 <% if @user.access_locked? %>
   <div class="alert alert-danger">
-    This user account is currently <i>locked</i>.
-    <% if [:time, :both].include?(Rails.configuration.devise.unlock_strategy) %>
-      <% distance = distance_of_time_in_words(@user.locked_at + Rails.configuration.devise.unlock_in - Time.now.utc) %>
-      <%= "It will unlock automatically in <i>#{distance}</i>.".html_safe %>
-    <% end %>
-    <%= link_to  'Unlock it now!', unlock_admin_user_path(@user), method: :patch, class: 'alert-link' if can?(:update, @user) %>
+    <div class="alert-message">
+      <%= t('devise.two_factor_authentication.admin_locked_html') %>
+      <% if [:time, :both].include?(Rails.configuration.devise.unlock_strategy) %>
+        <% distance = distance_of_time_in_words(@user.locked_at + Rails.configuration.devise.unlock_in - Time.now.utc) %>
+        <%= t('devise.two_factor_authentication.admin_unlock_in_html', distance: distance) %>
+      <% end %>
+      <%= link_to t('devise.two_factor_authentication.admin_unlock'), unlock_admin_user_path(@user), method: :patch, class: 'alert-link' if can?(:update, @user) %>
+    </div>
   </div>
 <% end %>

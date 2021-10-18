@@ -11,8 +11,19 @@
     <%= stylesheet_link_tag 'admin', media: 'all' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-
   <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
+    <div class="toasts-container" style="position: fixed; top: 20px; right: 20px; z-index: 100000;">
+      <% unless notice.nil? %>
+        <div class="js-notyf-notice d-none">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% unless alert.nil? %>
+        <div class="js-notyf-alert d-none">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
     <div class="wrapper">
       <nav id="sidebar" class="sidebar">
         <div class="sidebar-content js-simplebar">
@@ -22,17 +33,18 @@
           <%= render_navigation context: :server %>
         </div>
       </nav>
+      <%= render 'admin/application/footer' %>
       <div class="main">
-        <%= render 'admin/application/top' %>
+        <%= render 'server/application/top' %>
         <main class="content">
           <div class="container-fluid p-0">
             <h1><%= yield :title %></h1>
             <%= yield %>
           </div>
         </main>
-        <%= render 'admin/application/footer' %>
       </div>
     </div>
     <%= javascript_include_tag 'admin' %>
+    <%= render 'bugsnag' %>
   </body>
 </html>

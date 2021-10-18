@@ -52,6 +52,10 @@ en:
       links:
         sign_out: "Sign out"
     two_factor_authentication:
+      admin_locked_html: This user account is currently <i>locked</i>.
+      admin_locked_mfa_html: This user account is currently <i>locked</i> due to too many MFA attempts.
+      admin_unlock_in_html: It will unlock automatically in <i>%{distance}</i>.
+      admin_unlock: Unlock it now!
       attempt_failed: "Invalid Code"
       code_has_been_sent: "Your authentication code has been sent."
       enter_code_direct_otp: "Enter the code that was sent to you"
@@ -73,6 +77,7 @@ en:
     not_registered_yet_details: Register if you have no account yet.
     subtitle: Sign in to your account to continue
   menu:
+    admin: Admin
     profile: Profil
     server_admin: Admin server
     sign_out: Log out

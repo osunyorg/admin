@@ -42,6 +42,6 @@
 
 <%= render 'admin/research/journal/articles/list', articles: @journal.articles.ordered.limit(10) %>
 
-<% content_for :buttons do %>
+<% content_for :action_bar_right do %>
   <%= edit_link @journal %>
 <% end %>
