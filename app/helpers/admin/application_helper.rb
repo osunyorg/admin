@@ -50,7 +50,7 @@ module Admin::ApplicationHelper
   end
 
   def table_classes
-    'table table-striped'
+    'table table-striped table-hover'
   end
 
   def submit(form)
