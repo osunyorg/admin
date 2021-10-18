@@ -1,9 +1,22 @@
 <% content_for :title, @language %>
 
-<p>
-  <strong>Iso code:</strong>
-  <%= @language.iso_code %>
-</p>
+<div class="row">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title"><%= t('admin.infos') %></h2>
+      </div>
+      <table class="table">
+        <% ['iso_code'].each do |variable| %>
+          <tr>
+            <td><%= Language.human_attribute_name(variable) %></td>
+            <td class="text-end"><%= @language.send variable %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_language_path(@language), class: button_classes %>

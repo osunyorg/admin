@@ -4,23 +4,19 @@
   <div class="col-md-5">
     <div class="card">
       <div class="card-header">
-        <h2 class="card-title">Infos</h2>
+        <h2 class="card-title"><%= t('activerecord.attributes.university.url') %></h2>
       </div>
       <table class="table">
         <tr>
           <td>URL</td>
           <td class="text-end"><%= link_to @university.url, @university.url, target: :_blank %></td>
         </tr>
-        <% ['address', 'zipcode', 'city', 'country'].each do |variable| %>
+        <% ['address', 'zipcode', 'city', 'country', 'private'].each do |variable| %>
           <tr>
             <td><%= University.human_attribute_name(variable) %></td>
             <td class="text-end"><%= @university.send variable %></td>
           </tr>
         <% end %>
-        <tr>
-          <td><%= University.human_attribute_name('private') %></td>
-          <td class="text-end"><%= @university.private %></td>
-        </tr>
       </table>
     </div>
   </div>
@@ -28,7 +24,7 @@
     <div class="col-md-3">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">Logo</h2>
+          <h2 class="card-title"><%= t('activerecord.attributes.university.logo') %></h2>
         </div>
         <div class="card-body">
           <%= kamifusen_tag @university.logo, class: 'img-fluid p-5' %>
