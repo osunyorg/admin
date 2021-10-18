@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  content       :text
-#  description   :text
+#  excerpt       :text
 #  identifier    :string
 #  path          :text
 #  published_at  :datetime
@@ -56,7 +56,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     end
     # TODO only if not modified since import
     post.title = Wordpress.clean title.to_s
-    post.description = Wordpress.clean description.to_s
+    post.description = Wordpress.clean excerpt.to_s
     post.text = Wordpress.clean content.to_s
     post.published_at = published_at if published_at
     post.save

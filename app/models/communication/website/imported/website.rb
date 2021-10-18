@@ -40,14 +40,13 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_pages
-    wordpress.pages.each do |hash|
-      url = hash['link']
-      path = URI(url).path
-      # TODO id
-      page = pages.where(university: university, path: path).first_or_create
-      page.url = url
+    wordpress.pages.find_each do |hash|
+      page = pages.where(university: university, identifier: hash['id']).first_or_create
+      page.url = hash['link']
       page.title = hash['title']['rendered']
+      page.excerpt = hash['excerpt']['rendered']
       page.content = hash['content']['rendered']
+      page.parent = hash['parent']
       page.save
     end
   end
@@ -59,8 +58,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
       post.url = hash['link']
       post.path = URI(post.url).path
       post.title = hash['title']['rendered']
-      # TODO excerpt
-      post.description = hash['content']['excerpt']
+      post.excerpt = hash['excerpt']['rendered']
       post.content = hash['content']['rendered']
       post.published_at = hash['date']
       post.save

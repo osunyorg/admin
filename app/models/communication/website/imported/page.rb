@@ -4,6 +4,9 @@
 #
 #  id            :uuid             not null, primary key
 #  content       :text
+#  excerpt       :text
+#  identifier    :string
+#  parent        :string
 #  path          :text
 #  status        :integer          default(0)
 #  title         :string
@@ -54,8 +57,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     end
     # TODO only if not modified since import
     page.title = Wordpress.clean title.to_s
-    # TODO add that
-    # page.description = description.to_s
+    post.description = Wordpress.clean excerpt.to_s
     page.text = Wordpress.clean content.to_s
     page.save
   end
