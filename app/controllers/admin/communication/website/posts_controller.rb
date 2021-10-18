@@ -2,7 +2,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   load_and_authorize_resource class: Communication::Website::Post
 
   def index
-    @posts = @website.posts.ordered
+    @posts = @website.posts.ordered.page params[:page]
     breadcrumb
   end
 
@@ -11,6 +11,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def new
+    @post.website = @website
     breadcrumb
   end
 
