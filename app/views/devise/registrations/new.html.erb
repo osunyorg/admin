@@ -39,6 +39,7 @@
                   allow_password_uncloaking: true,
                   compare_with_field: :password,
                   input_html: { autocomplete: "new-password" } %>
+      <%= f.input :mobile_phone %>
       <%= f.input :picture,
                         as: :single_deletable_file,
                         input_html: { accept: '.jpg,.jpeg,.png' },
