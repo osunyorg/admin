@@ -55,6 +55,7 @@
 class User < ApplicationRecord
   include WithAuthentication
   include WithRoles
+  include WithSyncBetweenUniversities
 
   belongs_to :university
   belongs_to :language
