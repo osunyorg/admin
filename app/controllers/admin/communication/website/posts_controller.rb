@@ -24,7 +24,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
     @post.university = current_university
     @post.website = @website
     if @post.save
-      redirect_to admin_communication_website_post_path(@post), notice: "Post was successfully created."
+      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -33,16 +33,17 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def update
     if @post.update(post_params)
-      redirect_to admin_communication_website_post_path(@post), notice: "Post was successfully updated."
+      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
       breadcrumb
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @communication_website_post.destroy
-    redirect_to admin_communication_website_posts_url, notice: "Post was successfully destroyed."
+    redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)
   end
 
   protected

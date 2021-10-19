@@ -24,7 +24,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     @page.university = current_university
     @page.website = @website
     if @page.save
-      redirect_to admin_communication_website_page_path(@page), notice: "Page was successfully created."
+      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -33,15 +33,16 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def update
     if @page.update(page_params)
-      redirect_to admin_communication_website_page_path(@page), notice: "Page was successfully updated."
+      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
     else
       breadcrumb
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    redirect_to admin_communication_website_url, notice: "Page was successfully destroyed."
+    redirect_to admin_communication_website_url, notice: t('admin.successfully_destroyed_html', model: @page.to_s)
   end
 
   protected

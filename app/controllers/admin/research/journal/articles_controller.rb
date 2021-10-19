@@ -24,7 +24,7 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
     @article.university = @journal.university
     @article.updated_by = current_user
     if @article.save
-      redirect_to admin_research_journal_article_path(@article), notice: "Article was successfully created."
+      redirect_to admin_research_journal_article_path(@article), notice: t('admin.successfully_created_html', model: @article.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -34,9 +34,10 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   def update
     @article.updated_by = current_user
     if @article.update(article_params)
-      redirect_to admin_research_journal_article_path(@article), notice: "Article was successfully updated."
+      redirect_to admin_research_journal_article_path(@article), notice: t('admin.successfully_updated_html', model: @article.to_s)
     else
       breadcrumb
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
   end
   end
@@ -44,7 +45,7 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   def destroy
     @journal = @article.journal
     @article.destroy
-    redirect_to admin_research_journal_path(@journal), notice: "Article was successfully destroyed."
+    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @article.to_s)
   end
 
   private

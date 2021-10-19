@@ -6,7 +6,7 @@ class Server::ApplicationController < ApplicationController
   protected
 
   def breadcrumb
-    add_breadcrumb 'Tableau de bord', :server_root_path
+    add_breadcrumb t('admin.dashboard'), :server_root_path
   end
 
   def ensure_user_if_server_admin

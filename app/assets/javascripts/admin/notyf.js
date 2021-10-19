@@ -10,7 +10,7 @@ if (notyfAlerts.length > 0) {
             x: 'right',
             y: 'top'
         },
-        message: notyfAlerts[0].innerHTML,
+        message: notyfAlerts[0].innerText,
         duration: 9000,
         ripple: true,
         dismissible: true
@@ -23,7 +23,7 @@ if (notyfNotices.length > 0) {
             x: 'right',
             y: 'top'
         },
-        message: notyfNotices[0].innerHTML,
+        message: notyfNotices[0].innerText,
         duration: 9000,
         ripple: true,
         dismissible: true

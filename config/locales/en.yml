@@ -36,9 +36,15 @@ en:
         one: User
         other: Users
   admin:
+    dashboard: Dashboard
     infos: Infos
+    successfully_created_html: "<i>%{model}</i> was successfully created."
+    successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
+    successfully_updated_html: "<i>%{model}</i> was successfully updated."
+    users_alerts:
+      not_locked_html: '<i>%{model}</i> was not locked.'
+      successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
   create: Create
-  dashboard: Dashboard
   delete: Delete
   devise:
     failure:

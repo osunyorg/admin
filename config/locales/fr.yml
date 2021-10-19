@@ -36,9 +36,15 @@ fr:
         one: Utilisateur
         other: Utilisateurs
   admin:
+    dashboard: Tableau de bord
     infos: Infos
+    successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
+    successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
+    successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
+    users_alerts:
+      not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
+      successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
   create: Créer
-  dashboard: Tableau de bord
   delete: Supprimer
   devise:
     failure:

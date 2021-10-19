@@ -20,7 +20,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def create
     if @researcher.save
-      redirect_to [:admin, @researcher], notice: "Researcher was successfully created."
+      redirect_to [:admin, @researcher], notice: t('admin.successfully_created_html', model: @researcher.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -29,7 +29,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def update
     if @researcher.update(researcher_params)
-      redirect_to [:admin, @researcher], notice: "Researcher was successfully updated."
+      redirect_to [:admin, @researcher], notice: t('admin.successfully_updated_html', model: @researcher.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -39,7 +39,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def destroy
     @researcher.destroy
-    redirect_to admin_research_researchers_url, notice: "Researcher was successfully destroyed."
+    redirect_to admin_research_researchers_url, notice: t('admin.successfully_destroyed_html', model: @researcher.to_s)
   end
 
   protected

@@ -15,12 +15,12 @@ class Server::UniversitiesController < Server::ApplicationController
 
   def edit
     breadcrumb
-    add_breadcrumb 'Modifier'
+    add_breadcrumb t('edit')
   end
 
   def create
     if @university.save
-      redirect_to [:server, @university], notice: "University was successfully created."
+      redirect_to [:server, @university], notice: t('admin.successfully_created_html', model: @university.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -29,17 +29,17 @@ class Server::UniversitiesController < Server::ApplicationController
 
   def update
     if @university.update(university_params)
-      redirect_to [:server, @university], notice: "University was successfully updated."
+      redirect_to [:server, @university], notice: t('admin.successfully_updated_html', model: @university.to_s)
     else
       breadcrumb
-      add_breadcrumb 'Modifier'
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @university.destroy
-    redirect_to server_universities_url, notice: "University was successfully destroyed."
+    redirect_to server_universities_url, notice: t('admin.successfully_destroyed_html', model: @university.to_s)
   end
 
   protected
@@ -51,7 +51,7 @@ class Server::UniversitiesController < Server::ApplicationController
       if @university.persisted?
         add_breadcrumb @university, [:server, @university]
       else
-        add_breadcrumb 'Créer'
+        add_breadcrumb t('create')
       end
     end
   end
