@@ -8,8 +8,9 @@
     <footer class="text-center">
       <%= current_university %>
       <br>
-      <%= link_to t('terms_of_service'), '', class: 'sidebar-link' %>
-      <%= link_to t('privacy_policy'), '', class: 'sidebar-link' %>
+      <%= link_to t('terms_of_service'), t('terms_of_service_url'), target: '_blank', rel: 'noreferrer', class: 'sidebar-link' %>
+      <%= link_to t('privacy_policy'), t('privacy_policy_url'), target: '_blank', rel: 'noreferrer', class: 'sidebar-link' %>
+      <%= link_to t('cookies_policy'), t('cookies_policy_url'), target: '_blank', rel: 'noreferrer', class: 'sidebar-link' %>
       <%= link_to t('cookies_consent_choice'), '', class: 'sidebar-link js-gdpr__cookie_consent__display_again' %>
     </footer>
   </div>

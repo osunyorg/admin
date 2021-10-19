@@ -64,10 +64,11 @@ class Communication::Website::Imported::Page < ApplicationRecord
       self.page = Communication::Website::Page.new  university: university,
                                                     website: website.website, # Real website, not imported website
                                                     slug: path
-      self.page.title = "TMP"
+      self.page.title = "Untitled"
       self.page.save
     end
     # TODO only if not modified since import
+    page.slug = slug
     page.title = Wordpress.clean title.to_s
     page.description = Wordpress.clean excerpt.to_s
     page.text = Wordpress.clean content.to_s

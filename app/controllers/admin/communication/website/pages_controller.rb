@@ -42,7 +42,8 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def destroy
-    redirect_to admin_communication_website_url, notice: t('admin.successfully_destroyed_html', model: @page.to_s)
+    @page.destroy
+    redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
   end
 
   protected

@@ -5,6 +5,7 @@
 #  id                :uuid             not null, primary key
 #  data              :jsonb
 #  file_url          :text
+#  filename          :string
 #  identifier        :string
 #  remote_created_at :datetime
 #  remote_updated_at :datetime

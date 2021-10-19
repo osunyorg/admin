@@ -39,9 +39,13 @@ class Communication::Website::Page < ApplicationRecord
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true
+  has_many   :children,
+             class_name: 'Communication::Website::Page',
+             foreign_key: :parent_id
   has_one    :imported_page,
              class_name: 'Communication::Website::Imported::Page',
-             foreign_key: :page_id
+             foreign_key: :page_id,
+             dependent: :nullify
 
   validates :title, presence: true
 

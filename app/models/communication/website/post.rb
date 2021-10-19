@@ -6,6 +6,7 @@
 #  description              :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
+#  slug                     :text
 #  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
@@ -29,7 +30,8 @@ class Communication::Website::Post < ApplicationRecord
              foreign_key: :communication_website_id
   has_one    :imported_post,
              class_name: 'Communication::Website::Imported::Post',
-             foreign_key: :post_id
+             foreign_key: :post_id,
+             dependent: :nullify
 
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }

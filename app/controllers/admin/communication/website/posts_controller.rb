@@ -42,7 +42,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def destroy
-    @communication_website_post.destroy
+    @post.destroy
     redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)
   end
 
