@@ -3,6 +3,9 @@ fr:
     website:
       imported:
         launch: Importer le site
+        media:
+          file_size: Taille du fichier
+          not_imported_yet: Non importé pour le moment
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
@@ -33,6 +36,8 @@ fr:
         about_: Aucun sujet (site indépendant)
         about_Research::Journal: Site de revue scientifique
         about_School: Site d'école
+      communication/website/imported/medium:
+        filename: Nom du fichier
       communication/website/page:
         title: Titre
         description: Description (SEO)

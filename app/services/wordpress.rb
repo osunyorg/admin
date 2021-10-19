@@ -25,6 +25,10 @@ class Wordpress
     load "#{domain}/wp-json/wp/v2/pages"
   end
 
+  def media
+    load "#{domain}/wp-json/wp/v2/media"
+  end
+
   protected
 
   def load(url)

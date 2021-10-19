@@ -67,3 +67,39 @@
     <%= paginate @imported_pages, param_name: :pages_page, theme: 'bootstrap-5' %>
   </div>
 </div>
+
+<div class="card mt-5">
+  <div class="card-header">
+    <h2><%= @imported_media.total_count %> media (<%= number_to_human_size(@imported_media_total_size) %>)</h2>
+  </div>
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Imported::Medium.human_attribute_name('filename') %></th>
+        <th><%= t('communication.website.imported.media.file_size') %></th>
+        <th class="text-end" width="150">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @imported_media.each do |medium| %>
+        <tr>
+          <td><%= medium.filename %></td>
+          <td><%= number_to_human_size(medium.file.blob.byte_size) if medium.file.attached? %></td>
+          <td class="text-end">
+            <% if medium.file.attached? %>
+              <%= link_to t('show'),
+                            url_for(medium.file),
+                            class: button_classes,
+                            target: :blank %>
+            <% else %>
+              <%= t('communication.website.imported.media.not_imported_yet') %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="card-footer">
+    <%= paginate @imported_media, param_name: :media_page, theme: 'bootstrap-5' %>
+  </div>
+</div>

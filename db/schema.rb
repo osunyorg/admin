@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_092503) do
+ActiveRecord::Schema.define(version: 2021_10_19_102112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -66,6 +66,21 @@ ActiveRecord::Schema.define(version: 2021_10_19_092503) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
+  end
+
+  create_table "communication_website_imported_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "identifier"
+    t.jsonb "data"
+    t.text "file_url"
+    t.datetime "remote_created_at"
+    t.datetime "remote_updated_at"
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "filename"
+    t.index ["university_id"], name: "index_communication_website_imported_media_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_imported_media_on_website_id"
   end
 
   create_table "communication_website_imported_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -220,7 +235,7 @@ ActiveRecord::Schema.define(version: 2021_10_19_092503) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.date "updated_at", null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
@@ -335,6 +350,8 @@ ActiveRecord::Schema.define(version: 2021_10_19_092503) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
+  add_foreign_key "communication_website_imported_media", "universities"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_pages", "communication_website_pages", column: "page_id"
   add_foreign_key "communication_website_imported_pages", "universities"
