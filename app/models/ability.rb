@@ -30,7 +30,7 @@ class Ability
   def admin
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
-    can :manage, Communication::Website, university_id: @user.university_id
+    can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Website, university_id: @user.university_id
