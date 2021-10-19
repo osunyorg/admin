@@ -44,6 +44,9 @@ en:
     users_alerts:
       not_locked_html: '<i>%{model}</i> was not locked.'
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
+  cookies_consent_choice: Cookies consent choice
+  cookies_policy: Cookies policy
+  cookies_policy_url: https://osuny.org/politique-de-cookies
   create: Create
   delete: Delete
   devise:
@@ -76,6 +79,8 @@ en:
       success: ""
   edit: Edit
   false: No
+  gdpr:
+    privacy_policy: https://osuny.org/politique-de-confidentialite
   home: Home
   languages:
     en: English
@@ -92,6 +97,7 @@ en:
     sign_out: Log out
   please-confirm: Are you sure?
   privacy_policy: Privacy policy
+  privacy_policy_url: https://osuny.org/politique-de-confidentialite
   save: Save
   simple_form:
     error_notification:
@@ -103,5 +109,6 @@ en:
       test_chars: "%{min_length} characters min."
   show: Show
   terms_of_service: Terms of service
+  terms_of_service_url: https://osuny.org/conditions-d-utilisation
   true: Yes
   validate: Validate
