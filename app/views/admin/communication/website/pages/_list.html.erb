@@ -3,6 +3,7 @@
     <tr>
       <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Page.human_attribute_name('path') %></th>
+      <th><%= Communication::Website::Page.human_attribute_name('parent') %></th>
       <th width="150"></th>
     </tr>
   </thead>
@@ -11,6 +12,7 @@
       <tr>
         <td><%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %></td>
         <td><%= page.path %></td>
+        <td><%= link_to page.parent, admin_communication_website_page_path(website_id: page.website.id, id: page.parent.id) if page.parent %></td>
         <td class="text-end">
           <%= link_to t('edit'),
                       edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),

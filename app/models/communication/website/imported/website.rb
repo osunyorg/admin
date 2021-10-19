@@ -45,7 +45,15 @@ class Communication::Website::Imported::Website < ApplicationRecord
       page.data = data
       page.save
     end
-    # TODO parents
+    pages.find_each do |page|
+      next if page.parent.blank?
+      parent = pages.where(identifier: page.parent).first
+      next if parent.nil?
+      generated_page = page.page
+      generated_page.parent = parent.page
+      generated_page.save
+      # TODO save children
+    end
   end
 
   def sync_posts

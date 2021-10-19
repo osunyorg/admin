@@ -24,23 +24,50 @@
       <div class="card-header">
         <h5 class="card-title mb-0">Metadata</h5>
       </div>
-      <div class="card-body">
-        <p>
-          <strong>Slug</strong>
-          <%= @page.slug %>
-        </p>
-        <p>
-          <strong>Path</strong>
-          <%= @page.path %>
-        </p>
-
-        <% if @page.imported_page %>
-          <p>
-            <strong>Imported from</strong><br>
-            <a href="<%= @page.imported_page.url %>" target="_blank"><%= @page.imported_page.url %></a>
-          </p>
-        <% end %>
-      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td><%= Communication::Website::Page.human_attribute_name('slug') %></td>
+            <td><%= @page.slug %></td>
+          </tr>
+          <tr>
+            <td><%= Communication::Website::Page.human_attribute_name('path') %></td>
+            <td><%= @page.path %></td>
+          </tr>
+          <% if @page.imported_page %>
+            <tr>
+              <td>Imported from</td>
+              <td><a href="<%= @page.imported_page.url %>" target="_blank">Original URL</a></td>
+            </tr>
+          <% end %>
+          <% if @page.parent %>
+            <tr>
+              <td><%= Communication::Website::Page.human_attribute_name('parent') %></td>
+              <td><%= link_to @page.parent,
+                              admin_communication_website_page_path(
+                                website_id: @website.id,
+                                id: @page.parent.id
+                              ) %></td>
+            </tr>
+          <% end %>
+          <% if @page.children.any? %>
+            <tr>
+              <td><%= Communication::Website::Page.human_attribute_name('children') %></td>
+              <td>
+                <ul class="list-unstyled mb-0">
+                  <% @page.children.each do |child| %>
+                    <li><%= link_to child,
+                                    admin_communication_website_page_path(
+                                      website_id: @website.id,
+                                      id: child.id
+                                    ) %></li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

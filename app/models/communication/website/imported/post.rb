@@ -64,11 +64,12 @@ class Communication::Website::Imported::Post < ApplicationRecord
     if post.nil?
       self.post = Communication::Website::Post.new university: university,
                                                    website: website.website # Real website, not imported website
-      self.post.title = "TMP" # No title yet
+      self.post.title = "Untitled" # No title yet
       self.post.save
     end
     # TODO only if not modified since import
     post.title = Wordpress.clean title.to_s
+    post.slug = slug
     post.description = Wordpress.clean excerpt.to_s
     post.text = Wordpress.clean content.to_s
     post.published_at = published_at if published_at
