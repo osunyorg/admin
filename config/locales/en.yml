@@ -44,6 +44,7 @@ en:
     users_alerts:
       not_locked_html: '<i>%{model}</i> was not locked.'
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
+  cookies_consent_choice: Cookies consent choice
   create: Create
   delete: Delete
   devise:

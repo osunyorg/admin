@@ -45,6 +45,7 @@ fr:
     users_alerts:
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
+  cookies_consent_choice: Choix en matière de cookies
   create: Créer
   delete: Supprimer
   devise:

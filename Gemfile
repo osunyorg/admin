@@ -13,6 +13,7 @@ gem 'delayed_job_web'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bugsnag'
 gem 'sib-api-v3-sdk'
+gem 'gdpr'
 
 # Back
 gem 'rails'
