@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_154621) do
+ActiveRecord::Schema.define(version: 2021_10_19_092503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 2021_10_18_154621) do
     t.string "identifier"
     t.text "excerpt"
     t.string "parent"
+    t.text "slug"
+    t.jsonb "data"
     t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
     t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
@@ -101,6 +103,8 @@ ActiveRecord::Schema.define(version: 2021_10_18_154621) do
     t.string "identifier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "slug"
+    t.jsonb "data"
     t.index ["post_id"], name: "index_communication_website_imported_posts_on_post_id"
     t.index ["university_id"], name: "index_communication_website_imported_posts_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_posts_on_website_id"
@@ -216,7 +220,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_154621) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.date "updated_at", null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"

@@ -29,8 +29,8 @@ class Communication::Website::Imported::Website < ApplicationRecord
              class_name: 'Communication::Website::Imported::Post'
 
   def run!
-    sync_posts
     sync_pages
+    sync_posts
   end
 
   protected
@@ -40,27 +40,18 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_pages
-    wordpress.pages.find_each do |hash|
-      page = pages.where(university: university, identifier: hash['id']).first_or_create
-      page.url = hash['link']
-      page.title = hash['title']['rendered']
-      page.excerpt = hash['excerpt']['rendered']
-      page.content = hash['content']['rendered']
-      page.parent = hash['parent']
+    wordpress.pages.each do |data|
+      page = pages.where(university: university, identifier: data['id']).first_or_create
+      page.data = data
       page.save
     end
+    # TODO parents
   end
 
   def sync_posts
-    wordpress.posts.each do |hash|
-      identifier = hash['id']
-      post = posts.where(university: university, identifier: identifier).first_or_create
-      post.url = hash['link']
-      post.path = URI(post.url).path
-      post.title = hash['title']['rendered']
-      post.excerpt = hash['excerpt']['rendered']
-      post.content = hash['content']['rendered']
-      post.published_at = hash['date']
+    wordpress.posts.each do |data|
+      post = posts.where(university: university, identifier: data['id']).first_or_create
+      post.data = data
       post.save
     end
   end
