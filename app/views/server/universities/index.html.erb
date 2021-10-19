@@ -16,7 +16,14 @@
         <td><%= link_to university.url, university.url, target: :_blank %></td>
         <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
         <td class="text-end">
-          <%= link_to t('edit'), edit_server_university_path(university), class: button_classes %>
+          <%= link_to t('edit'),
+                      edit_server_university_path(university),
+                      class: button_classes %>
+          <%= link_to t('delete'),
+                      server_university_path(university),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
         </td>
       </tr>
     <% end %>

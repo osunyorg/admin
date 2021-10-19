@@ -15,7 +15,14 @@
         <td><%= link_to language, [:server, language] %></td>
         <td><%= language.iso_code %></td>
         <td class="text-end">
-          <%= link_to t('edit'), edit_server_language_path(language), class: button_classes %>
+          <%= link_to t('edit'),
+                      edit_server_language_path(language),
+                      class: button_classes %>
+          <%= link_to t('delete'),
+                      server_language_path(language),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
         </td>
       </tr>
     <% end %>
