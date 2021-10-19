@@ -3,6 +3,9 @@ en:
     website:
       imported:
         launch: Launch import
+        media:
+          file_size: File size
+          not_imported_yet: Not imported yet
         refresh: Refresh import
         show: Show import
         pending: Import in progress
@@ -33,6 +36,8 @@ en:
         about_: Nothing (independent website)
         about_Research::Journal: Journal website
         about_School: School website
+      communication/website/imported/medium:
+        filename: Filename
       communication/website/page:
         title: Title
         description: Description (SEO)

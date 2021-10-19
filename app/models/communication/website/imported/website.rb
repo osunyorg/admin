@@ -23,12 +23,15 @@ class Communication::Website::Imported::Website < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website'
+  has_many   :media,
+             class_name: 'Communication::Website::Imported::Medium'
   has_many   :pages,
              class_name: 'Communication::Website::Imported::Page'
   has_many   :posts,
              class_name: 'Communication::Website::Imported::Post'
 
   def run!
+    sync_media
     sync_pages
     sync_posts
   end
@@ -39,13 +42,29 @@ class Communication::Website::Imported::Website < ApplicationRecord
     @wordpress ||= Wordpress.new website.domain_url
   end
 
+  def sync_media
+    wordpress.media.each do |data|
+      medium = media.where(university: university, identifier: data['id']).first_or_create
+      medium.data = data
+      medium.save
+    end
+  end
+
   def sync_pages
     wordpress.pages.each do |data|
       page = pages.where(university: university, identifier: data['id']).first_or_create
       page.data = data
       page.save
     end
-    # TODO parents
+    pages.find_each do |page|
+      next if page.parent.blank?
+      parent = pages.where(identifier: page.parent).first
+      next if parent.nil?
+      generated_page = page.page
+      generated_page.parent = parent.page
+      generated_page.save
+      # TODO save children
+    end
   end
 
   def sync_posts

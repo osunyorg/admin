@@ -8,6 +8,7 @@ gem 'pg', '~> 1.1'
 gem 'aws-sdk-s3'
 gem 'puma'
 gem 'image_processing'
+gem 'mini_magick'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 gem 'bootsnap', '>= 1.4.4', require: false

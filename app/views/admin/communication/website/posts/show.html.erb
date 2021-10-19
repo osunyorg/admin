@@ -24,18 +24,24 @@
       <div class="card-header">
         <h5 class="card-title mb-0">Metadata</h5>
       </div>
-      <div class="card-body">
-        <p>
-          <strong>Published</strong>
-          <%= @post.published %>
-        </p>
-        <% if @post.imported_post %>
-          <p>
-            <strong>Imported from</strong> 
-            <a href="<%= @post.imported_post.url %>" target="_blank"><%= @post.imported_post.url %></a>
-          </p>
-        <% end %>
-      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td><%= Communication::Website::Page.human_attribute_name('slug') %></td>
+            <td><%= @post.slug %></td>
+          </tr>
+          <tr>
+            <td><%= Communication::Website::Page.human_attribute_name('published') %></td>
+            <td><%= @post.published %></td>
+          </tr>
+          <% if @post.imported_post %>
+            <tr>
+              <td>Imported from</td>
+              <td><a href="<%= @post.imported_post.url %>" target="_blank">Original URL</a></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
