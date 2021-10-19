@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_154621) do
+ActiveRecord::Schema.define(version: 2021_10_19_083328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_154621) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "mail_from_name"
     t.string "mail_from_address"
+    t.string "sms_sender_name"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -11,7 +11,7 @@ module Sendinblue
     def self.send_message(user, message)
       api_instance = SibApiV3Sdk::TransactionalSMSApi.new
       send_transac_sms = SibApiV3Sdk::SendTransacSms.new(
-        sender: user.university.name,
+        sender: user.university.sms_sender_name,
         recipient: user.mobile_phone,
         content: message
       )

@@ -14,6 +14,7 @@ fr:
         private: Etablissement privé
         public: Public
         public_or_private: Public/privé
+        sms_sender_name: Nom de l'expéditeur SMS
         url: 'URL'
         zipcode: Code postal
       user:
@@ -97,6 +98,8 @@ fr:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
+      university:
+        sms_sender_name: "11 caractères maximum."
       user:
         mobile_phone: "Format international (+XX). En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
   simple_form_password_with_hints:
