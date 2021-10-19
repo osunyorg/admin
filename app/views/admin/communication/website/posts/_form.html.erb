@@ -7,8 +7,8 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :description %>
-          <%= f.input :text, input_html: { rows: 20 } %>
+          <%= f.input :description, as: :trix_editor %>
+          <%= f.input :text, as: :trix_editor %>
         </div>
       </div>
     </div>

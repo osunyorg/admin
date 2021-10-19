@@ -8,4 +8,5 @@
 //= require jquery-cropper/dist/jquery-cropper
 //= require appstack/app
 //= require gdpr/cookie_consent
+//= require trix
 //= require_tree ./admin
