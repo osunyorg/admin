@@ -4,10 +4,12 @@
 #
 #  id            :uuid             not null, primary key
 #  content       :text
+#  data          :jsonb
 #  excerpt       :text
 #  identifier    :string
 #  parent        :string
 #  path          :text
+#  slug          :text
 #  status        :integer          default(0)
 #  title         :string
 #  url           :text
@@ -41,6 +43,16 @@ class Communication::Website::Imported::Page < ApplicationRecord
 
   default_scope { order(:path) }
 
+  def data=(value)
+    super value
+    self.url = value['link']
+    self.slug = value['slug']
+    self.title = value['title']['rendered']
+    self.excerpt = value['excerpt']['rendered']
+    self.content = value['content']['rendered']
+    self.parent = value['parent']
+  end
+
   def to_s
     "#{title}"
   end
@@ -49,15 +61,15 @@ class Communication::Website::Imported::Page < ApplicationRecord
 
   def sync
     if page.nil?
-      self.page = Communication::Website::Page.new university: university,
-                                                      website: website.website, # Real website, not imported website
-                                                      slug: path
+      self.page = Communication::Website::Page.new  university: university,
+                                                    website: website.website, # Real website, not imported website
+                                                    slug: path
       self.page.title = "TMP"
       self.page.save
     end
     # TODO only if not modified since import
     page.title = Wordpress.clean title.to_s
-    post.description = Wordpress.clean excerpt.to_s
+    page.description = Wordpress.clean excerpt.to_s
     page.text = Wordpress.clean content.to_s
     page.save
   end

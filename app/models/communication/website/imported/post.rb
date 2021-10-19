@@ -4,10 +4,12 @@
 #
 #  id            :uuid             not null, primary key
 #  content       :text
+#  data          :jsonb
 #  excerpt       :text
 #  identifier    :string
 #  path          :text
 #  published_at  :datetime
+#  slug          :text
 #  status        :integer          default(0)
 #  title         :string
 #  url           :text
@@ -40,6 +42,17 @@ class Communication::Website::Imported::Post < ApplicationRecord
   before_validation :sync
 
   default_scope { order(path: :desc) }
+
+  def data=(value)
+    super value
+    self.url = value['link']
+    self.slug = value['slug']
+    self.path = URI(self.url).path
+    self.title = value['title']['rendered']
+    self.excerpt = value['excerpt']['rendered']
+    self.content = value['content']['rendered']
+    self.published_at = value['date']
+  end
 
   def to_s
     "#{title}"
