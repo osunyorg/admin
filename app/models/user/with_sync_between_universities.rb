@@ -20,7 +20,7 @@ module User::WithSyncBetweenUniversities
           first_name: self.first_name,
           last_name: self.last_name,
           mobile_phone: self.mobile_phone,
-          role: self.role
+          role: :server_admin
         )
       end
     end
@@ -34,7 +34,8 @@ module User::WithSyncBetweenUniversities
     user.assign_attributes(university_id: university.id, picture_infos: nil,
                             password: "MyNewPasswordIs2Strong!", password_confirmation: "MyNewPasswordIs2Strong!",
                             reset_password_token: nil, unlock_token: nil, encrypted_otp_secret_key: nil,
-                            confirmation_token: Devise.friendly_token, confirmed_at: Time.now)
+                            confirmation_token: Devise.friendly_token, confirmed_at: Time.now,
+                            role: :server_admin)
     # as a new user must have a password and we can't access previous user password
     user.save
     user.update_column(:encrypted_password, self.encrypted_password) if user.valid?

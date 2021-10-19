@@ -25,6 +25,7 @@ module User::WithRoles
     end
 
     def set_default_role
+      return if server_admin?
       if User.all.empty?
         self.role = :server_admin
       elsif university.users.not_server_admin.empty?
