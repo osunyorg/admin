@@ -20,6 +20,9 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def create
+    # we don't want the confirmation mail to be send when the user is created from admin!
+    @user.skip_confirmation!
+    @user.modified_by = current_user
     if @user.save
       redirect_to [:admin, @user], notice: t('admin.successfully_created_html', model: @user.to_s)
     else
@@ -30,6 +33,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def update
     @user.modified_by = current_user
+    manage_password
     if @user.update(user_params)
       redirect_to [:admin, @user], notice: t('admin.successfully_updated_html', model: @user.to_s)
     else
@@ -70,7 +74,19 @@ class Admin::UsersController < Admin::ApplicationController
 
   def user_params
     params.require(:user)
-          .permit(:email, :first_name, :last_name, :role, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone)
+          .permit(:email, :first_name, :last_name, :role, :password, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone)
           .merge(university_id: current_university.id)
+  end
+
+  def manage_password
+    # to prevent cognitive complexity (the bottom block should be in an if condition where password present)
+    # Password not provided when user from sso
+    params[:user][:password] ||= ''
+
+    if params[:user][:password].empty?
+      params[:user].delete(:password)
+    else
+      @user.reset_password(params[:user][:password], params[:user][:password])
+    end
   end
 end

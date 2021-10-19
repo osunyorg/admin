@@ -14,6 +14,7 @@ en:
         private: Private
         public: Public
         public_or_private: Public/private
+        sms_sender_name: SMS sender name
         url: 'URL'
         zipcode: Zipcode
       user:
@@ -36,8 +37,10 @@ en:
         one: User
         other: Users
   admin:
+    attachment_not_available: Attachment not available
     dashboard: Dashboard
     infos: Infos
+    password_hint: Leave blank if you do not wish to change the password.
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
@@ -99,10 +102,13 @@ en:
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   save: Save
+  select_language: Select language
   simple_form:
     error_notification:
       default_message: "Please review the problems below:"
     hints:
+      university:
+        sms_sender_name: "11 characters max."
       user:
         mobile_phone: "International format (+XX). By filling this field, you accept to receive your two-factor authentication codes via SMS."
   simple_form_password_with_hints:

@@ -2,21 +2,38 @@
   <div class="row">
     <div class="col-md-4">
       <%= f.input :email %>
-      <%= f.input :role, include_blank: false, collection: current_user.managed_roles %>
-    </div>
-    <div class="col-md-4">
       <%= f.input :first_name %>
       <%= f.input :last_name %>
+      <%= f.association :language,
+                        include_blank: false,
+                        label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>
     </div>
     <div class="col-md-4">
-      <%= f.input :picture %>
+      <%= f.input :password,
+                  as: :password_with_hints,
+                  required: user.new_record?,
+                  hint: user.new_record? ? nil : t('admin.password_hint'),
+                  allow_password_uncloaking: true,
+                  validators: {
+                    length: Devise.password_length.first,
+                    uppercase_char: true,
+                    lowercase_char: true,
+                    numeric_char: true,
+                    special_char: Rails.application.config.allowed_special_chars
+                  },
+                  input_html: { autocomplete: "new-password" } %>
+        <%= f.input :mobile_phone %>
+        <%= f.input :role, include_blank: false, collection: current_user.managed_roles %>
     </div>
     <div class="col-md-4">
-      <%= f.association :language, include_blank: false %>
+      <%= f.input :picture,
+                  as: :single_deletable_file,
+                  input_html: { accept: '.jpg,.jpeg,.png' },
+                  preview: 200,
+                  resize: 1,
+                  direct_upload: true %>
     </div>
-    <div class="col-md-4">
-      <%= f.input :mobile_phone %>
-    </div>
+
   </div>
   <% content_for :action_bar_right do %>
     <%= submit f %>

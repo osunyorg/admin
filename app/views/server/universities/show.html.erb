@@ -14,7 +14,7 @@
         <% ['address', 'zipcode', 'city', 'country', 'private'].each do |variable| %>
           <tr>
             <td><%= University.human_attribute_name(variable) %></td>
-            <td class="text-end"><%= @university.send variable %></td>
+            <td class="text-end"><%= @university.public_send variable %></td>
           </tr>
         <% end %>
       </table>
@@ -27,7 +27,11 @@
           <h2 class="card-title"><%= t('activerecord.attributes.university.logo') %></h2>
         </div>
         <div class="card-body">
-          <%= kamifusen_tag @university.logo, class: 'img-fluid p-5' %>
+          <% if @university.id == current_university.id %>
+            <%= kamifusen_tag @university.logo, class: 'img-fluid p-5' %>
+          <% else %>
+            <%= t('admin.attachment_not_available') %>
+          <% end %>
         </div>
       </div>
     </div>

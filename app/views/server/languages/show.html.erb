@@ -10,7 +10,7 @@
         <% ['iso_code'].each do |variable| %>
           <tr>
             <td><%= Language.human_attribute_name(variable) %></td>
-            <td class="text-end"><%= @language.send variable %></td>
+            <td class="text-end"><%= @language.public_send variable %></td>
           </tr>
         <% end %>
       </table>

@@ -2,29 +2,44 @@
 
 <%= render 'lock' %>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+<div class="row">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title"><%= t('admin.infos') %></h2>
+      </div>
+      <table class="table">
+        <tr>
+          <td><%= User.human_attribute_name('email') %></td>
+          <td class="text-end"><%= link_to @user.email, "mailto:#{@user.email}" %></td>
+        </tr>
+        <% ['first_name', 'last_name', 'role', 'mobile_phone'].each do |variable| %>
+          <tr>
+            <td><%= User.human_attribute_name(variable) %></td>
+            <td class="text-end"><%= @user.public_send variable %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><%= User.human_attribute_name('language') %></td>
+          <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% if @user.picture.attached? %>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><%= t('activerecord.attributes.user.picture') %></h2>
+        </div>
+        <div class="card-body">
+          <%= kamifusen_tag @user.picture, class: 'img-fluid' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
-
-<p>
-  <strong>Language:</strong>
-  <%= @user.language %>
-</p>
-<p>
-  <strong>Mobile phone:</strong>
-  <%= @user.mobile_phone %>
-</p>
 
 <% if @user.researcher %>
   <p>
@@ -33,12 +48,6 @@
   </p>
 <% end %>
 
-<% if @user.picture.attached? && @user.picture.variable? %>
-  <p>
-    <strong>Picture:</strong>
-    <%= image_tag @user.picture.variant(resize: '200x') %>
-  </p>
-<% end %>
 
 
 <% content_for :action_bar_right do %>
