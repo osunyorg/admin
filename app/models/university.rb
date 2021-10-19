@@ -11,14 +11,12 @@
 #  mail_from_name    :string
 #  name              :string
 #  private           :boolean
+#  sms_sender_name   :string
 #  zipcode           :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
 class University < ApplicationRecord
-  validates_presence_of :name
-  scope :ordered, -> { order(:name) }
-
   include WithCommunication
   include WithEducation
   include WithIdentifier
@@ -26,6 +24,11 @@ class University < ApplicationRecord
   include WithUsers
 
   has_one_attached_deletable :logo
+
+  validates_presence_of :name
+  validates :sms_sender_name, presence: true, length: { maximum: 11 }
+
+  scope :ordered, -> { order(:name) }
 
   def to_s
     "#{name}"
