@@ -286,6 +286,7 @@ ActiveRecord::Schema.define(version: 2021_10_19_092503) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "mail_from_name"
     t.string "mail_from_address"
+    t.string "sms_sender_name"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

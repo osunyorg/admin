@@ -9,11 +9,15 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     language = Language.first
-    User.find_each { |u|
-      u.confirm
-      u.role ||= :visitor
-      u.language ||= language
-      u.save
+    User.find_each { |user|
+      user.confirm
+      user.role ||= :visitor
+      user.language ||= language
+      user.save
+    }
+    University.find_each { |university|
+      university.sms_sender_name ||= 'Osuny'
+      university.save
     }
   end
 
