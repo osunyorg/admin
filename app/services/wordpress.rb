@@ -2,7 +2,16 @@ class Wordpress
   attr_reader :domain
 
   def self.clean(html)
-    fragment = Sanitize.fragment(html, Sanitize::Config::RELAXED)
+    fragment = Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RELAXED,
+      attributes: Sanitize::Config::RELAXED[:attributes].merge({
+        all: Sanitize::Config::RELAXED[:attributes][:all].dup.delete('class'),
+        'a' => Sanitize::Config::RELAXED[:attributes]['a'].dup.delete('rel')
+      }),
+      elements: Set.new(Sanitize::Config::RELAXED[:elements]).delete('div'),
+      whitespace_elements: {
+        'div' => { :before => "", :after => "" }
+      }
+    ))
     fragment = Nokogiri::HTML5.fragment(fragment)
     if fragment.css('h1').any?
       # h1 => h2 ; h2 => h3 ; ...
