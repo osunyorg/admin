@@ -28,6 +28,8 @@ class Communication::Website::Imported::Medium < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
+  has_many :pages, class_name: 'Communication::Website::Imported::Page', foreign_key: :featured_medium_id
+  has_many :posts, class_name: 'Communication::Website::Imported::Post', foreign_key: :featured_medium_id
 
   has_one_attached :file
 

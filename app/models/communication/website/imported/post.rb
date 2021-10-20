@@ -2,31 +2,34 @@
 #
 # Table name: communication_website_imported_posts
 #
-#  id            :uuid             not null, primary key
-#  content       :text
-#  data          :jsonb
-#  excerpt       :text
-#  identifier    :string
-#  path          :text
-#  published_at  :datetime
-#  slug          :text
-#  status        :integer          default(0)
-#  title         :string
-#  url           :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  post_id       :uuid             not null
-#  university_id :uuid             not null
-#  website_id    :uuid             not null
+#  id                 :uuid             not null, primary key
+#  content            :text
+#  data               :jsonb
+#  excerpt            :text
+#  identifier         :string
+#  path               :text
+#  published_at       :datetime
+#  slug               :text
+#  status             :integer          default(0)
+#  title              :string
+#  url                :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  featured_medium_id :uuid
+#  post_id            :uuid             not null
+#  university_id      :uuid             not null
+#  website_id         :uuid             not null
 #
 # Indexes
 #
-#  index_communication_website_imported_posts_on_post_id        (post_id)
-#  index_communication_website_imported_posts_on_university_id  (university_id)
-#  index_communication_website_imported_posts_on_website_id     (website_id)
+#  idx_communication_website_imported_posts_on_featured_medium_id  (featured_medium_id)
+#  index_communication_website_imported_posts_on_post_id           (post_id)
+#  index_communication_website_imported_posts_on_university_id     (university_id)
+#  index_communication_website_imported_posts_on_website_id        (website_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (featured_medium_id => communication_website_imported_media.id)
 #  fk_rails_...  (post_id => communication_website_posts.id)
 #  fk_rails_...  (university_id => universities.id)
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
@@ -37,6 +40,9 @@ class Communication::Website::Imported::Post < ApplicationRecord
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :post,
              class_name: 'Communication::Website::Post',
+             optional: true
+  belongs_to :featured_medium,
+             class_name: 'Communication::Website::Imported::Medium',
              optional: true
 
   before_validation :sync
@@ -52,6 +58,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     self.excerpt = value['excerpt']['rendered']
     self.content = value['content']['rendered']
     self.published_at = value['date']
+    self.featured_medium = website.media.find_by(identifier: value['featured_medium'])
   end
 
   def to_s

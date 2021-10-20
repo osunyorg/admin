@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_102112) do
+ActiveRecord::Schema.define(version: 2021_10_20_090658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 2021_10_19_102112) do
     t.string "parent"
     t.text "slug"
     t.jsonb "data"
+    t.uuid "featured_medium_id"
+    t.index ["featured_medium_id"], name: "idx_communication_website_imported_pages_on_featured_medium_id"
     t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
     t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
@@ -120,6 +122,8 @@ ActiveRecord::Schema.define(version: 2021_10_19_102112) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "slug"
     t.jsonb "data"
+    t.uuid "featured_medium_id"
+    t.index ["featured_medium_id"], name: "idx_communication_website_imported_posts_on_featured_medium_id"
     t.index ["post_id"], name: "index_communication_website_imported_posts_on_post_id"
     t.index ["university_id"], name: "index_communication_website_imported_posts_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_posts_on_website_id"
@@ -353,9 +357,11 @@ ActiveRecord::Schema.define(version: 2021_10_19_102112) do
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_media", "universities"
+  add_foreign_key "communication_website_imported_pages", "communication_website_imported_media", column: "featured_medium_id"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_pages", "communication_website_pages", column: "page_id"
   add_foreign_key "communication_website_imported_pages", "universities"
+  add_foreign_key "communication_website_imported_posts", "communication_website_imported_media", column: "featured_medium_id"
   add_foreign_key "communication_website_imported_posts", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_posts", "communication_website_posts", column: "post_id"
   add_foreign_key "communication_website_imported_posts", "universities"
