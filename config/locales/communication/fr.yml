@@ -1,7 +1,9 @@
 fr:
   communication:
     website:
+      content: Contenu
       imported:
+        from: Importé depuis
         launch: Importer le site
         media:
           file_size: Taille du fichier
@@ -9,6 +11,7 @@ fr:
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
+      metadata: Informations
   activemodel:
     models:
       communication: Communication
@@ -39,11 +42,18 @@ fr:
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/page:
-        title: Titre
         description: Description (SEO)
-        text: Text
-        published: Publié ?
         parent: Page parente
+        published: Publié ?
+        text: Texte
+        title: Titre
+        website: Site Web
+      communication/website/post:
+        description: Description (SEO)
+        published: Publié ?
+        published_at: Date de publication
+        text: Texte
+        title: Titre
         website: Site Web
   simple_form:
     hints:

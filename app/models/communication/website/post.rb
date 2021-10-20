@@ -25,13 +25,15 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  include WithSlug
+
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
   has_one    :imported_post,
              class_name: 'Communication::Website::Imported::Post',
              foreign_key: :post_id,
-             dependent: :nullify
+             dependent: :destroy
 
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }

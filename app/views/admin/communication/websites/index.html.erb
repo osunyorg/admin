@@ -18,8 +18,10 @@
       <td><%= I18n.t("activerecord.attributes.communication/website.about_#{website.about_type}") %></td>
       <td><%= website.about %></td>
       <td class="text-end">
-        <%= edit_link website %>
-        <%= destroy_link website %>
+        <div class="btn-group" role="group">
+          <%= edit_link website %>
+          <%= destroy_link website %>
+        </div>
       </td>
     </tr>
     <% end %>

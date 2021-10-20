@@ -14,14 +14,16 @@
         <td><%= page.path %></td>
         <td><%= link_to page.parent, admin_communication_website_page_path(website_id: page.website.id, id: page.parent.id) if page.parent %></td>
         <td class="text-end">
-          <%= link_to t('edit'),
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
                       edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                       class: button_classes %>
-          <%= link_to t('delete'),
+            <%= link_to t('delete'),
                       admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                       method: :delete,
                       data: { confirm: t('please-confirm') },
                       class: button_classes_danger %>
+          </div>
         </td>
       </tr>
     <% end %>

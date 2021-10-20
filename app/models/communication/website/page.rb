@@ -33,6 +33,8 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  include WithSlug
+  
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
@@ -45,7 +47,7 @@ class Communication::Website::Page < ApplicationRecord
   has_one    :imported_page,
              class_name: 'Communication::Website::Imported::Page',
              foreign_key: :page_id,
-             dependent: :nullify
+             dependent: :destroy
 
   validates :title, presence: true
 
