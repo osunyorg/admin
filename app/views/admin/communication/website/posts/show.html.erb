@@ -4,25 +4,25 @@
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0">Content</h5>
+        <h5 class="card-title mb-0"><%= t('communication.website.content') %></h5>
       </div>
       <div class="card-body">
         <p>
-          <strong>Description</strong>
-          <%= @post.description %>
+          <strong><%= Communication::Website::Post.human_attribute_name('description') %></strong>
+          <%= sanitize @post.description %>
         </p>
 
         <p>
-          <strong>Text</strong>
+          <strong><%= Communication::Website::Post.human_attribute_name('text') %></strong>
         </p>
-        <%= raw @post.text %>
+        <%= sanitize @post.text %>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0">Metadata</h5>
+        <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
       </div>
       <table class="<%= table_classes %>">
         <tbody>
@@ -32,12 +32,12 @@
           </tr>
           <tr>
             <td><%= Communication::Website::Page.human_attribute_name('published') %></td>
-            <td><%= @post.published %></td>
+            <td><%= t @post.published %></td>
           </tr>
           <% if @post.imported_post %>
             <tr>
-              <td>Imported from</td>
-              <td><a href="<%= @post.imported_post.url %>" target="_blank">Original URL</a></td>
+              <td><%= t('communication.website.imported.from') %></td>
+              <td><a href="<%= @post.imported_post.url %>" target="_blank"><%= @post.imported_post.url %></a></td>
             </tr>
           <% end %>
         </tbody>

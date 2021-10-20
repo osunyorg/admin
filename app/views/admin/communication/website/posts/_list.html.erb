@@ -3,7 +3,7 @@
     <tr>
       <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
-      <th width="150"></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,14 +12,16 @@
         <td><%= link_to post, admin_communication_website_post_path(website_id: post.website.id, id: post.id) %></td>
         <td><%= l post.published_at, format: :long if post.published_at %></td>
         <td class="text-end">
-          <%= link_to t('edit'),
-                      edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                      class: button_classes %>
-          <%= link_to t('delete'),
-                      admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                      method: :delete,
-                      data: { confirm: t('please-confirm') },
-                      class: button_classes_danger %>
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                        edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                        class: button_classes %>
+            <%= link_to t('delete'),
+                        admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                        method: :delete,
+                        data: { confirm: t('please-confirm') },
+                        class: button_classes_danger %>
+          </div>
         </td>
       </tr>
     <% end %>

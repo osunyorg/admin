@@ -27,10 +27,16 @@ class TrixEditorInput < SimpleForm::Inputs::Base
   end
 
   def id
-    "#{@builder.object.class.to_s.downcase}_#{attribute_name}"
+    "#{object_name}_#{attribute_name}"
   end
 
   def name
-    "#{@builder.object.class.to_s.downcase}[#{attribute_name}]"
+    "#{object_name}[#{attribute_name}]"
+  end
+
+  private
+
+  def object_name
+    @builder.object.class.to_s.downcase.gsub('::', '_')
   end
 end

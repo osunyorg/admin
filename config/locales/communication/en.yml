@@ -1,7 +1,9 @@
 en:
   communication:
     website:
+      content: Content
       imported:
+        from: Imported from
         launch: Launch import
         media:
           file_size: File size
@@ -9,6 +11,7 @@ en:
         refresh: Refresh import
         show: Show import
         pending: Import in progress
+      metadata: Metadata
   activemodel:
     models:
       communication: Communication
@@ -44,6 +47,13 @@ en:
         text: Text
         published: Published ?
         parent: Parent page
+        website: Website
+      communication/website/post:
+        title: Title
+        description: Description (SEO)
+        text: Text
+        published: Published ?
+        published_at: Publication date
         website: Website
   simple_form:
     hints:
