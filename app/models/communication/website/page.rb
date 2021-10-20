@@ -34,7 +34,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include WithSlug
-  
+
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
@@ -54,8 +54,9 @@ class Communication::Website::Page < ApplicationRecord
   before_save :make_path
   after_save :publish_to_github
 
-  scope :ordered, -> { order(:path) }
+  scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
+  scope :root, -> { where(parent_id: nil) }
 
   def content
     @content ||= github.read_file_at "_pages/#{id}.html"
@@ -63,6 +64,10 @@ class Communication::Website::Page < ApplicationRecord
 
   def content_without_frontmatter
     frontmatter.content
+  end
+
+  def has_children?
+    children.any?
   end
 
   def to_s

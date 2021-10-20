@@ -1,7 +1,26 @@
 <% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
 
-<%= render 'admin/communication/website/pages/list', pages: @pages %>
-<%= paginate @pages, theme: 'bootstrap-5' %>
+<ul class="list-unstyled treeview js-treeview">
+  <% @pages.each do |page| %>
+    <li class="branch <%= 'with-children' if page.has_children? %> js-treeview-element js-treeview-element-<%= page.id %>">
+      <div class="d-flex align-items-center">
+        <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                    class: 'js-tree-element' do %>
+          <span class="open_btn">+</span>
+          <span class="close_btn">-</span>
+          <%= page %>
+        <% end %>
+        <%= link_to 'Voir', admin_communication_website_page_path(website_id: page.website.id, id: page.id), class: button_classes %>
+      </div>
+      <ul class="list-unstyled children">
+        <li>loading...</li>
+      </ul>
+
+    </li>
+  <% end %>
+</ul>
+<%#= render 'admin/communication/website/pages/list', pages: @pages %>
+<%#= paginate @pages, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Page %>

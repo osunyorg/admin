@@ -2,8 +2,14 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   load_and_authorize_resource class: Communication::Website::Page
 
   def index
-    @pages = @website.pages.ordered.page params[:page]
+    @pages = @website.pages.root.ordered
     breadcrumb
+  end
+
+  def children
+    return unless request.xhr?
+    page = @website.pages.find(params[:id])
+    @children = page.children.ordered
   end
 
   def show
