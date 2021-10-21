@@ -75,7 +75,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
       self.post.save
     end
     # TODO only if not modified since import
-    post.title = Wordpress.clean title.to_s
+    title = Wordpress.clean title.to_s
+    post.title = title unless title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
     post.description = Wordpress.clean excerpt.to_s
     post.text = Wordpress.clean content.to_s
