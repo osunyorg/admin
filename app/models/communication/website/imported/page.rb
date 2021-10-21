@@ -79,7 +79,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     # Don't touch if there are local changes (this would destroy some nice work)
     return if page.updated_at > updated_at
     # Don't touch if there are no remote changes (this would do useless server workload)
-    return if page.updated_at == updated_at
+    # return if page.updated_at == updated_at
     puts "Update page #{page.id}"
     page.slug = slug
     page.title = Wordpress.clean title.to_s
