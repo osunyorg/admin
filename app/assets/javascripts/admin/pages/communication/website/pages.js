@@ -12,14 +12,14 @@ window.osuny.pagesTree = {
         var $target = $(e.currentTarget),
             $branch = $target.closest('.js-treeview-branch');
 
-        e.preventDefault();
-        e.stopPropagation();
+        // e.preventDefault();
+        // e.stopPropagation();
 
         $branch.toggleClass('treeview__branch--opened');
 
-        if ($branch.hasClass('treeview__branch--opened') && !$branch.hasClass('treeview__branch--loaded')) {
-            this.loadBranch($branch, $target.attr('href'));
-        }
+        // if ($branch.hasClass('treeview__branch--opened') && !$branch.hasClass('treeview__branch--loaded')) {
+        //     this.loadBranch($branch, $target.attr('href'));
+        // }
     },
 
     loadBranch: function ($branch, url) {

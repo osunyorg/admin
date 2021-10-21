@@ -8,11 +8,11 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def children
     return unless request.xhr?
-    page = @website.pages.find(params[:id])
-    @children = page.children.ordered
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
+    @page = @website.pages.find(params[:id])
+    @children = @page.children.ordered
+    # respond_to do |format|
+    #   format.html { render :layout => false }
+    # end
   end
 
   def show

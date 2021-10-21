@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center treeview__label">
       <% if page.has_children? %>
         <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                    class: 'js-treeview-element' do %>
+                    class: 'js-treeview-element', remote: true do %>
           <span class="open_btn">+</span>
           <span class="close_btn">-</span>
           <%= page %>
