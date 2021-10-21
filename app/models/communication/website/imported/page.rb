@@ -85,6 +85,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     page.title = Wordpress.clean title.to_s
     page.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
     page.text = Wordpress.clean content.to_s
+    page.published = true
     page.save
   end
 end
