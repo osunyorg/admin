@@ -1,10 +1,8 @@
 <% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
 
-<ul class="list-unstyled treeview js-treeview js-treeview-sortable">
+<ul class="list-unstyled treeview js-treeview js-treeview-sortable" data-id="">
   <%= render 'treebranch', pages: @pages %>
 </ul>
-<%#= render 'admin/communication/website/pages/list', pages: @pages %>
-<%#= paginate @pages, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Page %>

@@ -4,7 +4,7 @@ window.osuny.treeView = {
 
     init: function () {
         'use strict';
-        $('.js-treeview').on('click', '.js-treeview-element', this.branchClicked.bind(this));
+        $('.js-treeview').on('click', '.js-treeview-openzone', this.branchClicked.bind(this));
         this.initSortable();
     },
 
@@ -20,18 +20,18 @@ window.osuny.treeView = {
                 animation: 150,
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
-                onEnd: function (/**Event*/evt) {
-                    console.log(evt);
-            		var itemEl = evt.item;  // dragged HTMLElement
-            		evt.to;    // target list
-            		evt.from;  // previous list
-            		evt.oldIndex;  // element's old index within old parent
-            		evt.newIndex;  // element's new index within new parent
-            		evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
-            		evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
-            		evt.clone // the clone element
-            		evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
-            	},
+                onEnd: function (evt) {
+                    var from = evt.from,
+                        to = evt.to,
+                        ids = [],
+                        parentId;
+                    $('> .js-treeview-element', to).each(function () {
+                        ids.push($(this).attr('data-id'));
+                    });
+                    parentId = to.dataset.id;
+                    console.log(parentId, ids, from === to);
+                    // TODO
+                }
             });
         }
     },
