@@ -61,9 +61,10 @@ module Admin::ApplicationHelper
   end
 
   def prepare_for_github(html)
-    sanitize  html.to_s,
-              tags: %w(table a figure img figcaption i em b strong h2 h3 h4 h5 h6 blockquote),
-              attributes: %w(href alt title target rel src srcset width height)
+    text = sanitize html.to_s,
+                    tags: %w(table a figure img figcaption i em b strong h2 h3 h4 h5 h6 blockquote),
+                    attributes: %w(href alt title target rel src srcset width height)
+    CGI.escapeHTML text
   end
 
   private
