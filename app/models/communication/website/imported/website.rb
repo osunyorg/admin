@@ -57,14 +57,14 @@ class Communication::Website::Imported::Website < ApplicationRecord
       page.data = data
       page.save
     end
-    pages.find_each do |page|
+    # The order will treat parents before children
+    pages.order(:url).find_each do |page|
       next if page.parent.blank?
       parent = pages.where(identifier: page.parent).first
       next if parent.nil?
       generated_page = page.page
       generated_page.parent = parent.page
       generated_page.save
-      # TODO save children
     end
   end
 

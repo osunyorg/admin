@@ -58,6 +58,8 @@ class Communication::Website::Imported::Page < ApplicationRecord
     self.content = value['content']['rendered']
     self.parent = value['parent']
     self.featured_medium = value['featured_media'] == 0 ? nil : website.media.find_by(identifier: value['featured_media'])
+    self.created_at = value['date_gmt']
+    self.updated_at = value['modified_gmt']
   end
 
   def to_s
@@ -74,10 +76,14 @@ class Communication::Website::Imported::Page < ApplicationRecord
       self.page.title = "Untitled"
       self.page.save
     end
-    # TODO only if not modified since import
+    # Don't touch if there are local changes (this would destroy some nice work)
+    return if page.updated_at > updated_at
+    # Don't touch if there are no remote changes (this would do useless server workload)
+    return if page.updated_at == updated_at
+    puts "Update page #{page.id}"
     page.slug = slug
     page.title = Wordpress.clean title.to_s
-    page.description = Wordpress.clean excerpt.to_s
+    page.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
     page.text = Wordpress.clean content.to_s
     page.save
   end

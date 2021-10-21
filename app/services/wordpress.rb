@@ -45,7 +45,6 @@ class Wordpress
     posts = []
     loop do
       batch = load_paged url, page
-      puts "Load page #{page}"
       break if batch.is_a?(Hash) || batch.empty?
       posts += batch
       page += 1
@@ -54,6 +53,7 @@ class Wordpress
   end
 
   def load_paged(url, page)
+    puts "Load #{url } on page #{page}"
     load_url "#{url}?page=#{page}&per_page=100"
   end
 

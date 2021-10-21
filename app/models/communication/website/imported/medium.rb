@@ -40,6 +40,7 @@ class Communication::Website::Imported::Medium < ApplicationRecord
     escaped_source_url = Addressable::URI.parse(value['source_url']).display_uri.to_s
     self.file_url = escaped_source_url
     self.filename = File.basename(URI(escaped_source_url).path)
+    # TODO unify with page and post?
     self.remote_created_at = DateTime.parse(value['date_gmt'])
     self.remote_updated_at = DateTime.parse(value['modified_gmt'])
   end

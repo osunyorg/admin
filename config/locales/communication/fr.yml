@@ -5,6 +5,7 @@ fr:
       imported:
         from: Importé depuis
         launch: Importer le site
+        launched: Importation en cours
         media:
           file_size: Taille du fichier
           not_imported_yet: Non importé pour le moment
