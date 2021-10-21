@@ -2,11 +2,12 @@
     &__branch, &__leaf
         & > .treeview__label
             & > .move_btn
-                display: none
+                transition: opacity 0.1s
+                opacity: 0
         &:hover
             & > .treeview__label
                 & > .move_btn
-                    display: inline
+                    opacity: 1
 
     &__branch
         & > .treeview__label
