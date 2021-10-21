@@ -4,29 +4,20 @@ window.osuny.pagesTree = {
 
     init: function () {
         'use strict';
-        $('.js-tree-element').click(this.branchClicked.bind(this));
+        $('.js-treeview').on('click', '.js-treeview-element', this.branchClicked.bind(this));
     },
 
     branchClicked: function (e) {
         'use strict';
         var $target = $(e.currentTarget),
-            $branch = $target.parents('.js-treeview-element');
+            $branch = $target.closest('.js-treeview-branch');
 
-        e.preventDefault();
-        e.stopPropagation();
+        $branch.toggleClass('treeview__branch--opened');
 
-        $branch.toggleClass('opened');
-
-        if ($branch.hasClass('opened') && !$branch.hasClass('loaded')) {
-            this.loadBranch($branch, $target.attr('href'));
+        if ($branch.hasClass('treeview__branch--loaded')) {
+            e.preventDefault();
+            e.stopPropagation();
         }
-    },
-
-    loadBranch: function ($branch, url) {
-        'use strict';
-        // TODO
-        console.log('ok');
-        $branch.addClass('loaded');
     },
 
     invoke: function () {

@@ -1,0 +1,22 @@
+<% pages.each do |page| %>
+  <li class="<%= page.has_children? ? 'treeview__branch js-treeview-branch' : 'treeview__leaf' %>" data-id="<%= page.id %>">
+    <div class="d-flex align-items-center treeview__label">
+      <% if page.has_children? %>
+        <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                    class: 'js-treeview-element', remote: true do %>
+          <span class="open_btn">+</span>
+          <span class="close_btn">-</span>
+          <%= page %>
+        <% end %>
+      <% else %>
+        <%= page %>
+      <% end %>
+      <%= link_to 'Voir', admin_communication_website_page_path(website_id: page.website.id, id: page.id), class: button_classes %>
+    </div>
+    <% if page.has_children? %>
+      <ul class="list-unstyled treeview__children js-treeview-children">
+        <li>loading...</li>
+      </ul>
+    <% end %>
+  </li>
+<% end %>

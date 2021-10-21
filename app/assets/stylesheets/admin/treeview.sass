@@ -1,17 +1,29 @@
 .treeview
-    .branch
-        .close_btn
-            display: none
-        .open_btn
-            display: inline
-        .children
+    &__branch
+        & > .treeview__label
+            & > a .close_btn
+                display: none
+            & > a .open_btn
+                display: inline
+        & > .treeview__children
             display: none
             margin-left: 15px
 
-        &.opened
-            .close_btn
-                display: inline
-            .open_btn
-                display: none
-            .children
+        &--opened
+            & > .treeview__label
+                & > a .close_btn
+                    display: inline
+                & > a .open_btn
+                    display: none
+            & > .treeview__children
                 display: block
+
+    &__leaf
+        & > .treeview__label
+            & > a .close_btn
+                display: none
+            & > a .open_btn
+                display: none
+
+        & > .treeview__children
+            display: none
