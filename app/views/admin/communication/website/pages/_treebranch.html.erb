@@ -1,20 +1,18 @@
 <% pages.each do |page| %>
   <li class="<%= page.has_children? ? 'treeview__branch js-treeview-branch' : 'treeview__leaf' %>" data-id="<%= page.id %>">
-    <div class="d-flex align-items-center treeview__label">
+    <div class="d-flex align-items-center treeview__label border-bottom p-1">
       <% if page.has_children? %>
         <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                    class: 'js-treeview-element', remote: true do %>
-          <span class="open_btn">+</span>
-          <span class="close_btn">-</span>
-          <%= page %>
+                    class: 'js-treeview-element d-inline-block p-1 ps-0', style: 'width: 22px', remote: true do %>
+          <span class="open_btn"><i class="fas fa-folder"></i></span>
+          <span class="close_btn"><i class="fas fa-folder-open"></i></span>
         <% end %>
-      <% else %>
-        <%= page %>
       <% end %>
-      <%= link_to 'Voir', admin_communication_website_page_path(website_id: page.website.id, id: page.id), class: button_classes %>
+      <%= page %>
+      <%= link_to 'Voir', admin_communication_website_page_path(website_id: page.website.id, id: page.id), class: button_classes('btn-sm ms-3') %>
     </div>
     <% if page.has_children? %>
-      <ul class="list-unstyled treeview__children js-treeview-children">
+      <ul class="list-unstyled treeview__children js-treeview-children ms-4">
         <li>loading...</li>
       </ul>
     <% end %>
