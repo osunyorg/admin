@@ -89,6 +89,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.created_at = created_at
     post.updated_at = updated_at
     post.published_at = published_at if published_at
+    post.published = true
     post.save
   end
 end
