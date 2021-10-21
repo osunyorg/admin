@@ -1,4 +1,14 @@
 .treeview
+    &__branch, &__leaf
+        & > .treeview__label
+            & > .move_btn
+                opacity: 0
+                transition: opacity 0.1s
+        &:hover
+            & > .treeview__label
+                & > .move_btn
+                    opacity: 1
+
     &__branch
         & > .treeview__label
             & > a .close_btn
@@ -7,7 +17,6 @@
                 display: inline
         & > .treeview__children
             display: none
-            margin-left: 15px
 
         &--opened
             & > .treeview__label

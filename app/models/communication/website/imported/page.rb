@@ -79,13 +79,14 @@ class Communication::Website::Imported::Page < ApplicationRecord
       # Continue only if there are remote changes
       # Don't touch if there are local changes (page.updated_at > updated_at)
       # Don't touch if there are no remote changes (page.updated_at == updated_at)
-      return unless updated_at > page.updated_at
+      # return unless updated_at > page.updated_at
     end
     puts "Update page #{page.id}"
     page.slug = slug
     page.title = Wordpress.clean title.to_s
     page.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
     page.text = Wordpress.clean content.to_s
+    page.published = true
     page.save
   end
 end

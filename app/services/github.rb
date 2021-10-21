@@ -15,6 +15,7 @@ class Github
     local_path = "#{ local_directory }/#{ file }"
     Pathname(local_path).dirname.mkpath
     File.write local_path, data
+    return if repository.blank?
     remote_file = "_#{ kind }/#{ file }"
     begin
       content = client.content repository, path: remote_file
@@ -23,7 +24,6 @@ class Github
       sha = nil
     end
     commit_message ||= "[#{kind}] Save #{ title }"
-    return if repository.blank?
     client.create_contents  repository,
                             remote_file,
                             commit_message,

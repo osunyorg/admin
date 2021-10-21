@@ -30,6 +30,10 @@
             <td><%= @post.slug %></td>
           </tr>
           <tr>
+            <td><%= Communication::Website::Page.human_attribute_name('published_at') %></td>
+            <td><%= l @post.published_at, format: :long if @post.published_at %></td>
+          </tr>
+          <tr>
             <td><%= Communication::Website::Page.human_attribute_name('published') %></td>
             <td><%= t @post.published %></td>
           </tr>
