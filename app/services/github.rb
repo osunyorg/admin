@@ -30,6 +30,7 @@ class Github
                             file: local_path,
                             sha: sha
   rescue
+    # byebug
   end
 
   def send_file(attachment, path)
@@ -48,6 +49,7 @@ class Github
                             attachment.download,
                             sha: sha
   rescue
+    # byebug
   end
 
   def read_file_at(path)
