@@ -52,7 +52,8 @@ window.osuny.treeView = {
     invoke: function () {
         'use strict';
         return {
-            init: this.init.bind(this)
+            init: this.init.bind(this),
+            initSortable: this.initSortable.bind(this)
         };
     }
 }.invoke();
