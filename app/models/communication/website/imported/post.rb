@@ -77,7 +77,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
       self.post.save
     end
     # Don't touch if there are local changes (this would destroy some nice work)
-    # return if post.updated_at > updated_at
+    return if post.updated_at > updated_at
     # Don't touch if there are no remote changes (this would do useless server workload)
     return if post.updated_at == updated_at
     title = Wordpress.clean title.to_s
