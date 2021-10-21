@@ -20,8 +20,8 @@ if (notyfNotices.length > 0) {
     notyf.open({
         type: 'success',
         position: {
-            x: 'right',
-            y: 'top'
+            x: 'center',
+            y: 'bottom'
         },
         message: notyfNotices[0].innerText,
         duration: 9000,
