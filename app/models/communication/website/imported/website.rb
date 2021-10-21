@@ -35,6 +35,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
     sync_pages
     sync_posts
   end
+  handle_asynchronously :run!, queue: 'default'
 
   protected
 
