@@ -1,5 +1,3 @@
-<%#= render 'treebranch', format: :js, pages: @children %>
-
 $branch = $('.js-treeview-branch[data-id=<%= @page.id %>]');
 $('.js-treeview-children', $branch).html("<%= escape_javascript(render 'treebranch', pages: @children) %>");
 $branch.addClass('treeview__branch--loaded');

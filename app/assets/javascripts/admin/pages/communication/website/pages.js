@@ -1,10 +1,27 @@
-/* global $ */
+/* global $, Sortable */
 window.osuny = window.osuny || {};
-window.osuny.pagesTree = {
+window.osuny.treeView = {
 
     init: function () {
         'use strict';
         $('.js-treeview').on('click', '.js-treeview-element', this.branchClicked.bind(this));
+        this.initSortable();
+    },
+
+    initSortable: function () {
+        'use strict';
+        var nestedSortables,
+            i;
+
+        nestedSortables = [].slice.call(document.querySelectorAll('.js-treeview-sortable'));
+        for (i = 0; i < nestedSortables.length; i += 1) {
+            new Sortable(nestedSortables[i], {
+                group: 'nested',
+                animation: 150,
+                fallbackOnBody: true,
+                swapThreshold: 0.65
+            });
+        }
     },
 
     branchClicked: function (e) {
@@ -30,5 +47,5 @@ window.osuny.pagesTree = {
 
 document.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    window.osuny.pagesTree.init();
+    window.osuny.treeView.init();
 });
