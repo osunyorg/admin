@@ -9,9 +9,8 @@
       <div class="card-body">
         <p>
           <strong><%= Communication::Website::Post.human_attribute_name('description') %></strong>
-          <%= sanitize @post.description %>
         </p>
-
+        <%= sanitize @post.description %>
         <p>
           <strong><%= Communication::Website::Post.human_attribute_name('text') %></strong>
         </p>
@@ -27,7 +26,7 @@
       <table class="<%= table_classes %>">
         <tbody>
           <tr>
-            <td><%= Communication::Website::Page.human_attribute_name('slug') %></td>
+            <td width="150"><%= Communication::Website::Page.human_attribute_name('slug') %></td>
             <td><%= @post.slug %></td>
           </tr>
           <tr>
@@ -37,7 +36,7 @@
           <% if @post.imported_post %>
             <tr>
               <td><%= t('communication.website.imported.from') %></td>
-              <td><a href="<%= @post.imported_post.url %>" target="_blank"><%= @post.imported_post.url %></a></td>
+              <td><a href="<%= @post.imported_post.url %>" target="_blank">Original URL</a></td>
             </tr>
           <% end %>
         </tbody>

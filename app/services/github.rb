@@ -12,8 +12,8 @@ class Github
 
   def publish(kind:, file:, title:, data:)
     local_directory = "tmp/jekyll/#{ kind }"
-    FileUtils.mkdir_p local_directory
     local_path = "#{ local_directory }/#{ file }"
+    Pathname(local_path).dirname.mkpath
     File.write local_path, data
     remote_file = "_#{ kind }/#{ file }"
     begin

@@ -9,13 +9,13 @@
       <div class="card-body">
         <p>
           <strong>Description</strong>
-          <%= @page.description %>
         </p>
+        <%= sanitize @page.description %>
 
         <p>
           <strong>Text</strong>
         </p>
-        <%= raw @page.text %>
+        <%= sanitize @page.text %>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
       <table class="<%= table_classes %>">
         <tbody>
           <tr>
-            <td><%= Communication::Website::Page.human_attribute_name('slug') %></td>
+            <td width="150"><%= Communication::Website::Page.human_attribute_name('slug') %></td>
             <td><%= @page.slug %></td>
           </tr>
           <tr>
