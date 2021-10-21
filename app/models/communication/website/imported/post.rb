@@ -89,6 +89,9 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.created_at = created_at
     post.updated_at = updated_at
     post.published_at = published_at if published_at
+    if featured_medium.nil?
+      # Use first image in text as featured medium
+    end
     post.save
   end
 end

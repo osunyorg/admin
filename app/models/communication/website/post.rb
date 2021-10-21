@@ -29,6 +29,7 @@ class Communication::Website::Post < ApplicationRecord
   include Communication::Website::WithGithub
 
   has_rich_text :text
+  has_one_attached_deletable :featured_image
 
   belongs_to :university
   belongs_to :website,
