@@ -5,6 +5,7 @@ en:
       imported:
         from: Imported from
         launch: Launch import
+        launched: Import in progress
         media:
           file_size: File size
           not_imported_yet: Not imported yet

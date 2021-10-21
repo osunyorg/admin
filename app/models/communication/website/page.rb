@@ -34,6 +34,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include WithSlug
+  include Communication::Website::WithGithub
 
   belongs_to :university
   belongs_to :website,
@@ -52,19 +53,10 @@ class Communication::Website::Page < ApplicationRecord
   validates :title, presence: true
 
   before_save :make_path
-  after_save :publish_to_github
 
   scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :root, -> { where(parent_id: nil) }
-
-  def content
-    @content ||= github.read_file_at "_pages/#{id}.html"
-  end
-
-  def content_without_frontmatter
-    frontmatter.content
-  end
 
   def has_children?
     children.any?
@@ -76,16 +68,12 @@ class Communication::Website::Page < ApplicationRecord
 
   protected
 
-  def github
-    @github ||= Github.with_site(website)
-  end
-
-  def frontmatter
-    @frontmatter ||= FrontMatterParser::Parser.new(:md).call(content)
-  end
-
   def make_path
     self.path = "#{parent&.path}/#{slug}".gsub('//', '/')
+  end
+
+  def github_path
+    "_pages/#{github_file}"
   end
 
   def publish_to_github

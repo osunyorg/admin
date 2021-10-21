@@ -4,10 +4,10 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
+#  old_text                 :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
-#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -26,6 +26,9 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include WithSlug
+  include Communication::Website::WithGithub
+
+  has_rich_text :text
 
   belongs_to :university
   belongs_to :website,
@@ -42,5 +45,26 @@ class Communication::Website::Post < ApplicationRecord
 
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def github_file
+    "#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{id}.html"
+  end
+
+  def github_path
+    "_posts/#{github_file}"
+  end
+
+  def publish_to_github
+    github.publish  kind: :posts,
+                    file: github_file,
+                    title: to_s,
+                    data: ApplicationController.render(
+                      template: 'admin/communication/website/posts/jekyll',
+                      layout: false,
+                      assigns: { post: self }
+                    )
   end
 end

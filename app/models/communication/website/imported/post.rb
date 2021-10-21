@@ -57,7 +57,9 @@ class Communication::Website::Imported::Post < ApplicationRecord
     self.title = value['title']['rendered']
     self.excerpt = value['excerpt']['rendered']
     self.content = value['content']['rendered']
-    self.published_at = value['date']
+    self.created_at = value['date_gmt']
+    self.updated_at = value['modified_gmt']
+    self.published_at = value['date_gmt']
     self.featured_medium = website.media.find_by(identifier: value['featured_medium'])
   end
 
@@ -74,12 +76,18 @@ class Communication::Website::Imported::Post < ApplicationRecord
       self.post.title = "Untitled" # No title yet
       self.post.save
     end
-    # TODO only if not modified since import
+    # Don't touch if there are local changes (this would destroy some nice work)
+    # return if post.updated_at > updated_at
+    # Don't touch if there are no remote changes (this would do useless server workload)
+    return if post.updated_at == updated_at
     title = Wordpress.clean title.to_s
+    puts "Update post #{post.id}"
     post.title = title unless title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
-    post.description = Wordpress.clean excerpt.to_s
+    post.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
     post.text = Wordpress.clean content.to_s
+    post.created_at = created_at
+    post.updated_at = updated_at
     post.published_at = published_at if published_at
     post.save
   end
