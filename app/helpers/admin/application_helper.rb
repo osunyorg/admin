@@ -64,7 +64,9 @@ module Admin::ApplicationHelper
     text = sanitize html.to_s,
                     tags: %w(table a figure img figcaption i em b strong h2 h3 h4 h5 h6 blockquote),
                     attributes: %w(href alt title target rel src srcset width height)
-    CGI.escapeHTML text
+    text = CGI.escapeHTML text
+    text = text.strip
+    text
   end
 
   private
