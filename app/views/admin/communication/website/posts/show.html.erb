@@ -15,7 +15,7 @@
         <p>
           <strong><%= Communication::Website::Post.human_attribute_name('text') %></strong>
         </p>
-        <%= sanitize @post.text %>
+        <%= @post.text %>
       </div>
     </div>
   </div>
