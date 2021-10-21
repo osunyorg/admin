@@ -3,6 +3,6 @@ title: "<%= @post.title %>"
 date: <%= @post.published_at %> UTC
 slug: "<%= @post.slug %>"
 description: "<%= @post.description %>"
-text: "<%= @post.text %>"
+text: "<%= prepare_for_github @post.text %>"
 ---
 <%= @post.content_without_frontmatter.html_safe %>

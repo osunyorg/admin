@@ -58,6 +58,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def publish_to_github
+    return if published_at.nil?
     github.publish  kind: :posts,
                     file: github_file,
                     title: to_s,
