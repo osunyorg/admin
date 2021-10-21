@@ -1,6 +1,6 @@
 <% pages.each do |page| %>
-  <li class="<%= page.has_children? ? 'treeview__branch js-treeview-branch' : 'treeview__leaf' %>" data-id="<%= page.id %>">
-    <div class="d-flex align-items-center treeview__label">
+  <li class="list-group-item <%= page.has_children? ? 'treeview__branch js-treeview-branch' : 'treeview__leaf' %>" data-id="<%= page.id %>">
+    <div class="d-flex align-items-center justify-content-between treeview__label">
       <% if page.has_children? %>
         <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                     class: 'js-treeview-element', remote: true do %>
