@@ -1,4 +1,13 @@
 .treeview
+    &__branch, &__leaf
+        & > .treeview__label
+            & > .move_btn
+                display: none
+        &:hover
+            & > .treeview__label
+                & > .move_btn
+                    display: inline
+
     &__branch
         & > .treeview__label
             & > a .close_btn
