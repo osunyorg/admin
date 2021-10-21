@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_093238) do
+ActiveRecord::Schema.define(version: 2021_10_21_095157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_093238) do
     t.uuid "communication_website_id", null: false
     t.string "title"
     t.text "description"
-    t.text "text"
+    t.text "old_text"
     t.boolean "published", default: false
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
