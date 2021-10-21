@@ -19,6 +19,9 @@ namespace :app do
       university.sms_sender_name ||= 'Osuny'
       university.save
     }
+    Communication::Website::Post.find_each { |post|
+      post.update(text: post.old_text)
+    }
   end
 
   namespace :db do
