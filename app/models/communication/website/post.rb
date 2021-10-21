@@ -4,10 +4,10 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
+#  old_text                 :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
-#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -27,6 +27,8 @@
 class Communication::Website::Post < ApplicationRecord
   include WithSlug
   include Communication::Website::WithGithub
+
+  has_rich_text :text
 
   belongs_to :university
   belongs_to :website,
