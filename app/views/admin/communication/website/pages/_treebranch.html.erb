@@ -14,7 +14,7 @@
       <%= link_to 'Voir', admin_communication_website_page_path(website_id: page.website.id, id: page.id), class: button_classes %>
     </div>
     <% if page.has_children? %>
-      <ul class="list-unstyled treeview__children js-treeview-children">
+      <ul class="list-unstyled treeview__children js-treeview-children nested-sortable">
         <li>loading...</li>
       </ul>
     <% end %>
