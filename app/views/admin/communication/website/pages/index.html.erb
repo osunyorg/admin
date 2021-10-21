@@ -1,6 +1,6 @@
 <% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
 
-<ul class="list-unstyled treeview js-treeview">
+<ul id="test" class="list-unstyled treeview js-treeview js-treeview-sortable">
   <%= render 'treebranch', pages: @pages %>
 </ul>
 <%#= render 'admin/communication/website/pages/list', pages: @pages %>

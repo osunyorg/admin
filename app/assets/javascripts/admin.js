@@ -9,4 +9,5 @@
 //= require appstack/app
 //= require gdpr/cookie_consent
 //= require trix
+//= require sortablejs/Sortable
 //= require_tree ./admin
