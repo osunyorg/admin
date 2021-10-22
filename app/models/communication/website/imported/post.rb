@@ -60,7 +60,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
     self.published_at = value['date_gmt']
-    self.featured_medium = website.media.find_by(identifier: value['featured_medium'])
+    self.featured_medium = website.media.find_by(identifier: value['featured_media']) unless value['featured_media'] == 0
   end
 
   def to_s
@@ -75,11 +75,12 @@ class Communication::Website::Imported::Post < ApplicationRecord
                                                    website: website.website # Real website, not imported website
       self.post.title = "Untitled" # No title yet
       self.post.save
+    else
+      # Don't touch if there are local changes (this would destroy some nice work)
+      # return if post.updated_at > updated_at
+      # Don't touch if there are no remote changes (this would do useless server workload)
+      # return if post.updated_at == updated_at
     end
-    # Don't touch if there are local changes (this would destroy some nice work)
-    # return if post.updated_at > updated_at
-    # Don't touch if there are no remote changes (this would do useless server workload)
-    # return if post.updated_at == updated_at
     title = Wordpress.clean title.to_s
     puts "Update post #{post.id}"
     post.title = title unless title.blank? # If there is no title, leave it with "Untitled"

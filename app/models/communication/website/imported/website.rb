@@ -45,7 +45,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def sync_media
     wordpress.media.each do |data|
-      medium = media.where(university: university, identifier: data['id']).first_or_create
+      medium = media.where(university: university, identifier: data['id']).first_or_initialize
       medium.data = data
       medium.save
     end
@@ -53,7 +53,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def sync_pages
     wordpress.pages.each do |data|
-      page = pages.where(university: university, identifier: data['id']).first_or_create
+      page = pages.where(university: university, identifier: data['id']).first_or_initialize
       page.data = data
       page.save
     end
@@ -70,7 +70,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def sync_posts
     wordpress.posts.each do |data|
-      post = posts.where(university: university, identifier: data['id']).first_or_create
+      post = posts.where(university: university, identifier: data['id']).first_or_initialize
       post.data = data
       post.save
     end
