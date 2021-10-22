@@ -60,7 +60,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
     self.published_at = value['date_gmt']
-    self.featured_medium = website.media.find_by(identifier: value['featured_medium'])
+    self.featured_medium = website.media.find_by(identifier: value['featured_media']) unless value['featured_media'] == 0
   end
 
   def to_s
