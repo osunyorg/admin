@@ -52,6 +52,7 @@ en:
       communication/website/post:
         title: Title
         description: Description (SEO)
+        featured_image: Featured image
         text: Text
         published: Published ?
         published_at: Publication date
