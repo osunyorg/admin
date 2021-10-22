@@ -120,3 +120,10 @@ fr:
   terms_of_service_url: https://osuny.org/conditions-d-utilisation
   true: Oui
   validate: Valider
+  views:
+    pagination:
+      first: "&laquo; Premier"
+      last: "Dernier &raquo;"
+      previous: "&lsaquo; Précédent"
+      next: "Suivant &rsaquo;"
+      truncate: "&hellip;"
