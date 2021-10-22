@@ -91,9 +91,28 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.updated_at = updated_at
     post.published_at = published_at if published_at
     post.published = true
-    if featured_medium.nil?
-      # Use first image in text as featured medium
-    end
     post.save
+    download_first_image_as_featured_image if featured_medium.nil?
+  end
+
+  # Please refactor me i'm ugly
+  def download_first_image_as_featured_image
+    doc = Nokogiri::HTML(post.text.to_s)
+    images = doc.css('img')
+    if images.any?
+      url = images.first.attr('src')
+      uri = URI(url)
+      filename = File.basename url
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Get.new(uri.request_uri)
+      response = http.request(request)
+      begin
+        post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: 'image/jpeg')
+      ensure
+        tempfile.close!
+      end
+    end
   end
 end
