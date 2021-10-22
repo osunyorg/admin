@@ -38,9 +38,11 @@ window.osuny.treeView = {
                     parentId = to.dataset.id;
 
                     // manage emptyness
-                    $(to).closest('.js-treeview-element').removeClass('treeview__element--empty');
+                    $(to).closest('.js-treeview-element')
+                        .removeClass('treeview__element--empty');
                     if ($('> .js-treeview-element', from).length === 0) {
-                        $(from).closest('.js-treeview-element').addClass('treeview__element--empty');
+                        $(from).closest('.js-treeview-element')
+                            .addClass('treeview__element--empty');
                     }
 
                     // call to application
