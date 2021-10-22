@@ -51,6 +51,7 @@ fr:
         website: Site Web
       communication/website/post:
         description: Description (SEO)
+        featured_image: Image à la une
         published: Publié ?
         published_at: Date de publication
         text: Texte
