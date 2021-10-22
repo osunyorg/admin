@@ -1,6 +1,13 @@
 .treeview
-    &__branch, &__leaf
+    &__element
+        & > .treeview__children .treeview__empty
+            display: none
+
         & > .treeview__label
+            & > a .close_btn
+                display: none
+            & > a .open_btn
+                display: inline
             & > .move_btn
                 opacity: 0
                 transition: opacity 0.1s
@@ -9,12 +16,6 @@
                 & > .move_btn
                     opacity: 1
 
-    &__branch
-        & > .treeview__label
-            & > a .close_btn
-                display: none
-            & > a .open_btn
-                display: inline
         & > .treeview__children
             display: none
 
@@ -27,12 +28,10 @@
             & > .treeview__children
                 display: block
 
-    &__leaf
-        & > .treeview__label
-            & > a .close_btn
-                display: none
-            & > a .open_btn
+        &--loaded
+            & > .treeview__children .treeview__loading
                 display: none
 
-        & > .treeview__children
-            display: none
+        &--empty
+            & > .treeview__children .treeview__empty
+                display: inline
