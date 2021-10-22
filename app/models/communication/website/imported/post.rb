@@ -81,9 +81,9 @@ class Communication::Website::Imported::Post < ApplicationRecord
       # Don't touch if there are no remote changes (this would do useless server workload)
       # return if post.updated_at == updated_at
     end
-    title = Wordpress.clean title.to_s
     puts "Update post #{post.id}"
-    post.title = title unless title.blank? # If there is no title, leave it with "Untitled"
+    sanitized_title = Wordpress.clean self.title.to_s
+    post.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
     post.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
     post.text = Wordpress.clean content.to_s
