@@ -26,16 +26,17 @@
       <table class="<%= table_classes %>">
         <tbody>
           <tr>
-            <td width="150"><%= Communication::Website::Page.human_attribute_name('slug') %></td>
+            <td width="150"><%= Communication::Website::Post.human_attribute_name('slug') %></td>
             <td><%= @post.slug %></td>
           </tr>
           <tr>
-            <td><%= Communication::Website::Page.human_attribute_name('published_at') %></td>
-            <td><%= l @post.published_at, format: :long if @post.published_at %></td>
-          </tr>
-          <tr>
-            <td><%= Communication::Website::Page.human_attribute_name('published') %></td>
-            <td><%= t @post.published %></td>
+            <td><%= Communication::Website::Post.human_attribute_name('published') %></td>
+            <td>
+              <%= t @post.published %>
+              <% if @post.published & @post.published_at %>
+                <p><small><%= l @post.published_at, format: :long if @post.published_at %></small></p>
+              <% end %>
+            </td>
           </tr>
           <% if @post.imported_post %>
             <tr>
@@ -43,15 +44,19 @@
               <td><a href="<%= @post.imported_post.url %>" target="_blank">Original URL</a></td>
             </tr>
           <% end %>
-          <% if @post.featured_image.attached? %>
-            <tr>
-              <td><%= t('communication.website.imported.featured_image') %></td>
-              <td><%= image_tag @post.featured_image.variant(resize: '400'), class: 'img-responsive' %></td>
-            </tr>
-            <% end %>
         </tbody>
       </table>
     </div>
+    <% if @post.featured_image.attached? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= image_tag @post.featured_image.variant(resize: '400'), class: 'img-fluid' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
