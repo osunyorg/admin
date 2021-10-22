@@ -12,7 +12,7 @@
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
     </div>
     <% if page.has_children? %>
-      <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable ms-4" data-id="<%= page.id %>">
+      <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= page.id %>">
         <li>loading...</li>
       </ul>
     <% end %>

@@ -6,6 +6,18 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     breadcrumb
   end
 
+  def reorder
+    parent_id = params['parentId'].blank? ? nil : params['parentId']
+    ids = params['ids']
+    ids.each.with_index do |id, index|
+      page = @website.pages.find(id)
+      page.update(
+        parent_id: parent_id,
+        position: index + 1
+      )
+    end
+  end
+
   def children
     return unless request.xhr?
     @page = @website.pages.find(params[:id])
