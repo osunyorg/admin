@@ -91,4 +91,5 @@ class Communication::Website::Page < ApplicationRecord
                       assigns: { page: self }
                     )
   end
+  handle_asynchronously :publish_to_github
 end

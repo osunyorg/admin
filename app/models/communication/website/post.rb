@@ -69,4 +69,5 @@ class Communication::Website::Post < ApplicationRecord
                       assigns: { post: self }
                     )
   end
+  handle_asynchronously :publish_to_github
 end

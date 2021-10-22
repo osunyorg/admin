@@ -36,4 +36,6 @@ module Communication::Website::WithGithub
   def publish_to_github
     ''
   end
+  handle_asynchronously :publish_to_github
+  
 end
