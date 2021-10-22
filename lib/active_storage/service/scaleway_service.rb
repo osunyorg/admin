@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# cf https://github.com/rails/rails/issues/41070
+
 require 'active_storage/service/s3_service.rb'
 
 module ActiveStorage
