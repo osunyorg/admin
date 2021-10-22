@@ -60,7 +60,7 @@ en:
     mailer:
       two_factor_authentication_code:
         subject: "Two-factor authentication code"
-        text_html: "Your two-factor authentication code for %{university} is %{code}<br>It will expire in 5 minutes."
+        text_html: "Your two-factor authentication code for %{university} is: <br><br><b>%{code}</b><br><br>It will expire in 5 minutes."
     sessions:
       signed_in: ''
     shared:
