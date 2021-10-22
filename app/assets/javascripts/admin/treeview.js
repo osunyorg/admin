@@ -13,7 +13,7 @@ window.osuny.treeView = {
         var nestedSortables,
             i;
 
-        nestedSortables = [].slice.call(document.querySelectorAll('.js-treeview-sortable'));
+        nestedSortables = [].slice.call(document.querySelectorAll('.js-treeview-sortable-container'));
         for (i = 0; i < nestedSortables.length; i += 1) {
             new Sortable(nestedSortables[i], {
                 group: 'nested',
@@ -21,16 +21,22 @@ window.osuny.treeView = {
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
                 onEnd: function (evt) {
-                    var from = evt.from,
-                        to = evt.to,
+                    var to = evt.to,
                         ids = [],
-                        parentId;
+                        parentId,
+                        url;
                     $('> .js-treeview-element', to).each(function () {
                         ids.push($(this).attr('data-id'));
                     });
+                    // as the "to" can be the root object where the data-sort-url is set we use "closest" and not "parents"
+                    url = $(to).closest('.js-treeview-sortable')
+                        .attr('data-sort-url');
                     parentId = to.dataset.id;
-                    console.log(parentId, ids, from === to);
-                    // TODO
+
+                    $.post(url, {
+                        parentId: parentId,
+                        ids: ids
+                    });
                 }
             });
         }
