@@ -43,6 +43,12 @@
               <td><a href="<%= @post.imported_post.url %>" target="_blank">Original URL</a></td>
             </tr>
           <% end %>
+          <% if @post.featured_image.attached? %>
+            <tr>
+              <td><%= t('communication.website.imported.featured_image') %></td>
+              <td><%= image_tag @post.featured_image.variant(resize: '400'), class: 'img-responsive' %></td>
+            </tr>
+            <% end %>
         </tbody>
       </table>
     </div>

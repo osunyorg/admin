@@ -2,6 +2,9 @@
 title: "<%= @post.title %>"
 date: <%= @post.published_at %> UTC
 slug: "<%= @post.slug %>"
+<% if @post.featured_image.attached? %>
+image: "<%= url_for @post.featured_image %>"
+<% end %>
 description: >
   <%= prepare_for_github @post.description %>
 text: >
