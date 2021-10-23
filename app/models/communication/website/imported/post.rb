@@ -110,8 +110,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
       response = http.request(request)
       begin
         post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: 'image/jpeg')
-      ensure
-        tempfile.close!
+      rescue
       end
     end
   end
