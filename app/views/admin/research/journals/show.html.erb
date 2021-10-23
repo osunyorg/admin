@@ -9,38 +9,46 @@
   </p>
 <% end %>
 
-<h2 class="mt-5"><%= Research::Journal::Volume.model_name.human(count: 2) %></h2>
-
-<%= link_to t('create'),
-            new_admin_research_journal_volume_path(journal_id: @journal),
-            class: button_classes('me-3') %>
-
-<%= link_to 'Tous les volumes',
-            admin_research_journal_volumes_path(journal_id: @journal) %>
-
-<div class="row">
-  <% @journal.volumes.ordered.limit(4).each do |volume| %>
-    <div class="col-md-3 mt-4">
-      <div class="card">
-        <%= image_tag volume.cover, class: 'img-fluid' if volume.cover.attached? %>
-        <div class="card-body">
-          <%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume), class: 'stretched-link' %>
-        </div>
-      </div>
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('create'),
+                  new_admin_research_journal_volume_path(journal_id: @journal),
+                  class: button_classes %>
     </div>
-  <% end %>
+    <h2 class="card-title">
+      <%= link_to Research::Journal::Volume.model_name.human(count: 2),
+                  admin_research_journal_volumes_path(journal_id: @journal) %></h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <% @journal.volumes.ordered.limit(4).each do |volume| %>
+        <div class="col-md-3 mt-4">
+          <div class="card">
+            <%= image_tag volume.cover, class: 'img-fluid' if volume.cover.attached? %>
+            <div class="card-body">
+              <%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume), class: 'stretched-link' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<h2 class="mt-5"><%= Research::Journal::Article.model_name.human(count: 2) %></h2>
-
-<%= link_to t('create'),
-            new_admin_research_journal_article_path(journal_id: @journal),
-            class: button_classes('me-3') %>
-
-<%= link_to 'Tous les articles',
-            admin_research_journal_articles_path(journal_id: @journal) %>
-
-<%= render 'admin/research/journal/articles/list', articles: @journal.articles.ordered.limit(10) %>
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('create'),
+                  new_admin_research_journal_article_path(journal_id: @journal),
+                  class: button_classes %>
+    </div>
+    <h2 class="card-title">
+      <%= link_to Research::Journal::Article.model_name.human(count: 2),
+                  admin_research_journal_articles_path(journal_id: @journal) %></h2>
+  </div>
+  <%= render 'admin/research/journal/articles/list', articles: @journal.articles.ordered.limit(10) %>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @journal %>

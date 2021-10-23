@@ -3,11 +3,6 @@ class Admin::Research::Journal::ApplicationController < Admin::Research::Applica
 
   protected
 
-  def breadcrumb
-    short_breadcrumb
-    breadcrumb_for @journal, journal_id: nil
-  end
-
   def default_url_options
     return {} unless params.has_key? :journal_id
     {

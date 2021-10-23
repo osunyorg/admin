@@ -4,7 +4,8 @@
   <thead>
     <tr>
       <th><%= Research::Journal::Volume.model_name.human %></th>
-      <th>Published at</th>
+      <th><%= Research::Journal::Volume.human_attribute_name('cover') %></th>
+      <th><%= Research::Journal::Volume.human_attribute_name('published_at') %></th>
       <th></th>
     </tr>
   </thead>
@@ -12,6 +13,8 @@
     <% @volumes.each do |volume| %>
       <tr>
         <td><%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume) %></td>
+        <td><%= image_tag volume.cover.variant(resize: 'x200'),
+                          height: 100 if volume.cover.attached? %></td>
         <td><%= volume.published_at %></td>
         <td class="text-end">
           <%= edit_link volume, { journal_id: @journal.id } %>

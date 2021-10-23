@@ -1,4 +1,7 @@
 class Admin::Communication::ApplicationController < Admin::ApplicationController
+
+  protected
+
   def breadcrumb
     if @website
       short_breadcrumb
