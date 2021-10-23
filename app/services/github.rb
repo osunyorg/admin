@@ -10,44 +10,46 @@ class Github
     @repository = repository
   end
 
-  def publish(kind:, file:, title:, data:)
-    local_directory = "tmp/jekyll/#{ kind }"
-    local_path = "#{ local_directory }/#{ file }"
+  def publish(kind: nil, # Deprecated
+              file: nil, # Deprecated
+              title: nil, # Deprecated
+              path: nil,
+              previous_path: nil,
+              commit: nil,
+              data:)
+    if path
+      local_path = "#{ tmp_directory }/#{ path }"
+      remote_file = path
+    else
+      # Deprecated
+      local_path = "#{ tmp_directory }/#{ file }"
+      remote_file = "_#{ kind }/#{ file }"
+    end
     Pathname(local_path).dirname.mkpath
     File.write local_path, data
     return if repository.blank?
-    remote_file = "_#{ kind }/#{ file }"
-    begin
-      content = client.content repository, path: remote_file
-      sha = content[:sha]
-    rescue
-      sha = nil
+    if !previous_path.blank? && path != previous_path
+      move_file previous_path, path
     end
-    commit_message ||= "[#{kind}] Save #{ title }"
+    commit ||= "Save #{ title }"
     client.create_contents  repository,
                             remote_file,
-                            commit_message,
+                            commit,
                             file: local_path,
-                            sha: sha
+                            sha: file_sha(remote_file)
   rescue
     # byebug
   end
 
   def send_file(attachment, path)
-    begin
-      content = client.content repository, path: path
-      sha = content[:sha]
-    rescue
-      sha = nil
-    end
-    commit_message ||= "[file] Save #{ path }"
     return if repository.blank?
+    commit_message = "[file] Save #{ path }"
     path_without_slash = path[1..-1]
     client.create_contents  repository,
                             path_without_slash,
                             commit_message,
                             attachment.download,
-                            sha: sha
+                            sha: file_sha(path)
   rescue
     # byebug
   end
@@ -82,5 +84,67 @@ class Github
 
   def client
     @client ||= Octokit::Client.new access_token: access_token
+  end
+
+  protected
+
+  # https://medium.com/@obodley/renaming-a-file-using-the-git-api-fed1e6f04188
+  def move_file(from, to)
+    file = find_in_tree from
+    return if file.nil?
+    content = [{
+      path: to,
+      mode: file[:mode],
+      type: file[:type],
+      sha: file[:sha]
+    }]
+    begin
+    new_tree = client.create_tree repository, content, base_tree: tree[:sha]
+    message = "Move #{from} to #{to}"
+    commit = client.create_commit repository, message, new_tree[:sha], branch_sha
+    [:main, :master].each do |branch|
+      client.update_branch repository, branch, commit[:sha]
+    end
+    rescue
+    end
+  end
+
+  def file_sha(path)
+    begin
+      content = client.content repository, path: path
+      sha = content[:sha]
+    rescue
+      sha = nil
+    end
+    sha
+  end
+
+  def branch_sha
+    unless @branch_sha
+      [:main, :master].each do |branch|
+        begin
+          # Crashes if branch does not exist
+          response = client.branch repository, branch
+          @branch_sha = response['commit']['sha']
+        end
+        break if @branch_sha
+      end
+    end
+    @branch_sha
+  end
+
+  def tree
+    @tree ||= client.tree repository, branch_sha, recursive: true
+  end
+
+  def find_in_tree(path)
+    tree[:tree].each do |file|
+      return file if path == file[:path]
+    end
+    nil
+  end
+
+  def tmp_directory
+    "tmp/github/#{repository}"
   end
 end

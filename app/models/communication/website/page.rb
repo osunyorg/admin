@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  about_type               :string
 #  description              :text
+#  github_path              :text
 #  path                     :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_152728) do
+ActiveRecord::Schema.define(version: 2021_10_23_063050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "text"
     t.boolean "published", default: false
+    t.text "github_path"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -195,6 +196,8 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "slug"
+    t.text "path"
+    t.text "github_path"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end

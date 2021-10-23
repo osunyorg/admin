@@ -5,16 +5,12 @@ module Communication::Website::WithGithub
     after_save :publish_to_github
   end
 
-  def content
+  def github_content
     @content ||= github.read_file_at github_path
   end
 
-  def frontmatter
-    @frontmatter ||= FrontMatterParser::Parser.new(:md).call(content)
-  end
-
-  def content_without_frontmatter
-    frontmatter.content
+  def github_frontmatter
+    @frontmatter ||= FrontMatterParser::Parser.new(:md).call(github_content)
   end
 
   def github_file
@@ -22,7 +18,7 @@ module Communication::Website::WithGithub
   end
 
   # Needs override
-  def github_path
+  def github_path_generated
     ''
   end
 
@@ -37,5 +33,5 @@ module Communication::Website::WithGithub
     ''
   end
   handle_asynchronously :publish_to_github
-  
+
 end

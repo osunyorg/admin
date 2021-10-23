@@ -4,7 +4,9 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
+#  github_path              :text
 #  old_text                 :text
+#  path                     :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
@@ -51,23 +53,28 @@ class Communication::Website::Post < ApplicationRecord
   protected
 
   def github_file
-    "#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{id}.html"
+    "#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
-  def github_path
-    "_posts/#{github_file}"
+  def github_path_generated
+    "_posts/#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+  end
+
+  def jekyll
+    ApplicationController.render(
+      template: 'admin/communication/website/posts/jekyll',
+      layout: false,
+      assigns: { post: self }
+    )
   end
 
   def publish_to_github
     return if published_at.nil?
-    github.publish  kind: :posts,
-                    file: github_file,
-                    title: to_s,
-                    data: ApplicationController.render(
-                      template: 'admin/communication/website/posts/jekyll',
-                      layout: false,
-                      assigns: { post: self }
-                    )
+    github.publish  path: github_path_generated,
+                    previous_path: github_path,
+                    commit: "[post] Save #{title}",
+                    data: jekyll
+    update_column :github_path, github_path_generated
   end
-  handle_asynchronously :publish_to_github
+  # handle_asynchronously :publish_to_github
 end
