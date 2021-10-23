@@ -32,14 +32,9 @@ class Research::Researcher < ApplicationRecord
 
   def publish_to_website(website)
     github = Github.new website.access_token, website.repository
-    github.publish  kind: :authors,
-                    file: "#{ id }.md",
-                    title: to_s,
-                    data: ApplicationController.render(
-                      template: 'admin/research/researchers/jekyll',
-                      layout: false,
-                      assigns: { researcher: self }
-                    )
+    github.publish  path: "_authors/#{ id }.md",
+                    data: to_jekyll,
+                    commit: "[Researcher] Save #{to_s}"
   end
 
   def to_s
@@ -47,6 +42,14 @@ class Research::Researcher < ApplicationRecord
   end
 
   protected
+
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/research/researchers/jekyll',
+      layout: false,
+      assigns: { researcher: self }
+    )
+  end
 
   def publish_to_github
     websites.each { |website| publish_to_website(website) }

@@ -10,22 +10,11 @@ class Github
     @repository = repository
   end
 
-  def publish(kind: nil, # Deprecated
-              file: nil, # Deprecated
-              title: nil, # Deprecated
-              path: nil,
+  def publish(path: nil,
               previous_path: nil,
               commit: nil,
               data:)
-    if path
-      local_path = "#{ tmp_directory }/#{ path }"
-      remote_file = path
-    else
-      # Deprecated
-      local_path = "#{ tmp_directory }/#{ file }"
-      remote_file = "_#{ kind }/#{ file }"
-      commit = "Save #{ title }"
-    end
+    local_path = "#{ tmp_directory }/#{ path }"
     Pathname(local_path).dirname.mkpath
     File.write local_path, data
     return if repository.blank?
@@ -33,10 +22,10 @@ class Github
       move_file previous_path, path
     end
     client.create_contents  repository,
-                            remote_file,
+                            path,
                             commit,
                             file: local_path,
-                            sha: file_sha(remote_file)
+                            sha: file_sha(path)
   rescue
     # byebug
   end
