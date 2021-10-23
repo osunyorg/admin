@@ -78,19 +78,15 @@ class Communication::Website::Page < ApplicationRecord
     children.each(&:save)
   end
 
-  def github_path
-    "_pages/#{github_file}"
+  def github_path_generated
+    "_pages/#{path}/index.html".gsub('//', '/')
   end
 
-  def publish_to_github
-    github.publish  kind: :pages,
-                    file: "#{ id }.html",
-                    title: to_s,
-                    data: ApplicationController.render(
-                      template: 'admin/communication/website/pages/jekyll',
-                      layout: false,
-                      assigns: { page: self }
-                    )
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/communication/website/pages/jekyll',
+      layout: false,
+      assigns: { page: self }
+    )
   end
-  handle_asynchronously :publish_to_github
 end

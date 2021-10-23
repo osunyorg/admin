@@ -13,13 +13,8 @@ module Communication::Website::WithGithub
     @frontmatter ||= FrontMatterParser::Parser.new(:md).call(github_content)
   end
 
-  def github_file
-    "#{ id }.html"
-  end
-
-  # Needs override
   def github_path_generated
-    ''
+    '' # Needs override
   end
 
   protected
@@ -28,10 +23,16 @@ module Communication::Website::WithGithub
     @github ||= Github.with_site(website)
   end
 
-  # Needs override
+  def github_commit_message
+    "[#{self.class.name.demodulize}] Save #{ to_s }"
+  end
+
   def publish_to_github
-    ''
+    github.publish  path: github_path_generated,
+                    previous_path: github_path,
+                    commit: github_commit_message,
+                    data: to_jekyll
+    update_column :github_path, github_path_generated
   end
   handle_asynchronously :publish_to_github
-
 end

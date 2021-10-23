@@ -52,29 +52,15 @@ class Communication::Website::Post < ApplicationRecord
 
   protected
 
-  def github_file
-    "#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
-  end
-
   def github_path_generated
-    "_posts/#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+    "_posts/#{published_at.strftime "%Y/%m"}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
-  def jekyll
+  def to_jekyll
     ApplicationController.render(
       template: 'admin/communication/website/posts/jekyll',
       layout: false,
       assigns: { post: self }
     )
   end
-
-  def publish_to_github
-    return if published_at.nil?
-    github.publish  path: github_path_generated,
-                    previous_path: github_path,
-                    commit: "[post] Save #{title}",
-                    data: jekyll
-    update_column :github_path, github_path_generated
-  end
-  # handle_asynchronously :publish_to_github
 end

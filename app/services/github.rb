@@ -24,6 +24,7 @@ class Github
       # Deprecated
       local_path = "#{ tmp_directory }/#{ file }"
       remote_file = "_#{ kind }/#{ file }"
+      commit = "Save #{ title }"
     end
     Pathname(local_path).dirname.mkpath
     File.write local_path, data
@@ -31,7 +32,6 @@ class Github
     if !previous_path.blank? && path != previous_path
       move_file previous_path, path
     end
-    commit ||= "Save #{ title }"
     client.create_contents  repository,
                             remote_file,
                             commit,
@@ -93,20 +93,25 @@ class Github
     file = find_in_tree from
     return if file.nil?
     content = [{
+      path: from,
+      mode: file[:mode],
+      type: file[:type],
+      sha: nil
+    },
+    {
       path: to,
       mode: file[:mode],
       type: file[:type],
       sha: file[:sha]
     }]
-    begin
     new_tree = client.create_tree repository, content, base_tree: tree[:sha]
     message = "Move #{from} to #{to}"
     commit = client.create_commit repository, message, new_tree[:sha], branch_sha
     [:main, :master].each do |branch|
       client.update_branch repository, branch, commit[:sha]
     end
-    rescue
-    end
+  rescue
+    ''
   end
 
   def file_sha(path)
