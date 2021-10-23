@@ -31,6 +31,7 @@
         <%= render 'admin/application/top' %>
         <main class="content">
           <div class="container-fluid p-0">
+            <p class="float-end pt-2"><%= yield :title_right %></p>
             <h1><%= yield :title %></h1>
             <%= yield %>
           </div>

@@ -1,8 +1,9 @@
 <% content_for :title, @website %>
 
-<p>
+<% content_for :title_right do %>
   <%= link_to @website.domain_url, @website.domain_url, target: :_blank %>
-</p>
+<% end %>
+
 
 <p>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
