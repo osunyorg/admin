@@ -1,4 +1,4 @@
-module Communication::Website::WithGithub
+module WithGithub
   extend ActiveSupport::Concern
 
   included do
@@ -34,5 +34,5 @@ module Communication::Website::WithGithub
                     data: to_jekyll
     update_column :github_path, github_path_generated
   end
-  handle_asynchronously :publish_to_github
+  # handle_asynchronously :publish_to_github
 end

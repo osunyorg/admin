@@ -35,7 +35,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include WithSlug
-  include Communication::Website::WithGithub
+  include WithGithub
 
   belongs_to :university
   belongs_to :website,

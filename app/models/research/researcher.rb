@@ -2,13 +2,14 @@
 #
 # Table name: research_researchers
 #
-#  id         :uuid             not null, primary key
-#  biography  :text
-#  first_name :string
-#  last_name  :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :uuid
+#  id          :uuid             not null, primary key
+#  biography   :text
+#  first_name  :string
+#  github_path :text
+#  last_name   :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :uuid
 #
 # Indexes
 #

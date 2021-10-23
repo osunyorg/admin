@@ -28,7 +28,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include WithSlug
-  include Communication::Website::WithGithub
+  include WithGithub
 
   has_rich_text :text
   has_one_attached_deletable :featured_image

@@ -2,7 +2,7 @@ class Github
   attr_reader :access_token, :repository
 
   def self.with_site(site)
-    new site.access_token, site.repository
+    new site&.access_token, site&.repository
   end
 
   def initialize(access_token, repository)

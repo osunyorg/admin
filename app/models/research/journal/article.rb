@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  github_path                :text
 #  keywords                   :text
 #  published_at               :date
 #  references                 :text
@@ -45,6 +46,10 @@ class Research::Journal::Article < ApplicationRecord
 
   def pdf_path
     "/assets/articles/#{id}/#{pdf.filename}"
+  end
+
+  def website
+    journal.website
   end
 
   def to_s
