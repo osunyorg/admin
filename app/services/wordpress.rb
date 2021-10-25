@@ -1,7 +1,15 @@
 class Wordpress
   attr_reader :domain
 
-  def self.clean(html)
+
+  def self.clean_string(string)
+    string = string.gsub('&nbsp;', ' ')
+    string = string.gsub('&amp;', '&')
+    string = ActionView::Base.full_sanitizer.sanitize string
+    string
+  end
+
+  def self.clean_html(html)
     # Relaxed config : https://github.com/rgrove/sanitize/blob/main/lib/sanitize/config/relaxed.rb
     fragment = Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RELAXED,
       attributes: Sanitize::Config::RELAXED[:attributes].merge({

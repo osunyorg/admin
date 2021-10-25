@@ -57,7 +57,7 @@ class WordpressTest < ActiveSupport::TestCase
 
   test "convert &nbsp; in titles" do
     assert_equal  ' ',
-                  Wordpress.clean_string '&nbsp;'
+                  Wordpress.clean_string('&nbsp;')
   end
 
   test "authorize iframes" do
