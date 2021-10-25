@@ -4,7 +4,9 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
+#  github_path              :text
 #  old_text                 :text
+#  path                     :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
@@ -26,7 +28,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include WithSlug
-  include Communication::Website::WithGithub
+  include WithGithub
 
   has_rich_text :text
   has_one_attached_deletable :featured_image
@@ -44,30 +46,19 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
+  def github_path_generated
+    "_posts/#{published_at.strftime "%Y/%m"}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+  end
+
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/communication/website/posts/jekyll',
+      layout: false,
+      assigns: { post: self }
+    )
+  end
+
   def to_s
     "#{title}"
   end
-
-  protected
-
-  def github_file
-    "#{published_at.year}/#{published_at.month}/#{published_at.strftime "%Y-%m-%d"}-#{id}.html"
-  end
-
-  def github_path
-    "_posts/#{github_file}"
-  end
-
-  def publish_to_github
-    return if published_at.nil?
-    github.publish  kind: :posts,
-                    file: github_file,
-                    title: to_s,
-                    data: ApplicationController.render(
-                      template: 'admin/communication/website/posts/jekyll',
-                      layout: false,
-                      assigns: { post: self }
-                    )
-  end
-  handle_asynchronously :publish_to_github
 end

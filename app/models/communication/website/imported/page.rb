@@ -23,6 +23,7 @@
 # Indexes
 #
 #  idx_communication_website_imported_pages_on_featured_medium_id  (featured_medium_id)
+#  index_communication_website_imported_pages_on_identifier        (identifier)
 #  index_communication_website_imported_pages_on_page_id           (page_id)
 #  index_communication_website_imported_pages_on_university_id     (university_id)
 #  index_communication_website_imported_pages_on_website_id        (website_id)

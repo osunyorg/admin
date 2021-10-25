@@ -1,7 +1,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="ps-0"><%= Research::Journal::Article.model_name.human %></th>
+      <th><%= Research::Journal::Article.model_name.human %></th>
       <th><%= Research::Journal::Article.human_attribute_name('published_at') %></th>
       <th></th>
     </tr>
@@ -9,17 +9,19 @@
   <tbody>
     <% articles.each do |article| %>
       <tr>
-        <td class="ps-0"><%= link_to article, admin_research_journal_article_path(journal_id: @journal, id: article) %></td>
+        <td><%= link_to article, admin_research_journal_article_path(journal_id: @journal, id: article) %></td>
         <td><%= article.published_at %></td>
-        <td class="text-end pe-0">
-          <%= link_to t('edit'),
-                      edit_admin_research_journal_article_path(journal_id: @journal, id: article),
-                      class: button_classes %>
-          <%= link_to t('delete'),
-                      admin_research_journal_article_path(journal_id: @journal, id: article),
-                      method: :delete,
-                      data: { confirm: t('please-confirm') },
-                      class: button_classes_danger %>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                        edit_admin_research_journal_article_path(journal_id: @journal, id: article),
+                        class: button_classes %>
+            <%= link_to t('delete'),
+                        admin_research_journal_article_path(journal_id: @journal, id: article),
+                        method: :delete,
+                        data: { confirm: t('please-confirm') },
+                        class: button_classes_danger %>
+          </div>
         </td>
       </tr>
     <% end %>

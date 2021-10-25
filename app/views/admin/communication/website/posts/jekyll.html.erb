@@ -10,4 +10,4 @@ description: >
 text: >
   <%= prepare_for_github @post.text %>
 ---
-<%= @post.content_without_frontmatter.html_safe %>
+<%= @post.github_frontmatter.content.html_safe %>

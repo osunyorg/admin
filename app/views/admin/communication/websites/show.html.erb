@@ -1,39 +1,35 @@
 <% content_for :title, @website %>
 
-<p>
-  <%= link_to @website.domain_url, @website.domain_url, target: :_blank %>
-</p>
-
-<p>
+<% content_for :title_right do %>
+  <%= link_to @website.domain_url, @website.domain_url, target: :_blank %><br>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
   <%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>
-</p>
+<% end %>
 
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
-      <%= link_to t('activerecord.models.communication/website/post.all'),
-                  admin_communication_website_posts_path(website_id: @website),
-                  class: 'me-3' %>
       <%= link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
                   class: button_classes %>
     </div>
-    <h2 class="card-title"><%= Communication::Website::Post.model_name.human(count: 2) %></h2>
+    <h2 class="card-title">
+      <%= link_to Communication::Website::Post.model_name.human(count: 2),
+                  admin_communication_website_posts_path(website_id: @website) %></h2>
   </div>
   <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent %>
 </div>
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
-      <%= link_to t('activerecord.models.communication/website/page.all'),
-                  admin_communication_website_pages_path(website_id: @website),
-                  class: 'me-3' %>
       <%= link_to t('create'),
                   new_admin_communication_website_page_path(website_id: @website),
                   class: button_classes %>
     </div>
-    <h2 class="card-title"><%= Communication::Website::Page.model_name.human(count: 2) %></h2>
+    <h2 class="card-title">
+      <%= link_to Communication::Website::Page.model_name.human(count: 2),
+                  admin_communication_website_pages_path(website_id: @website) %>
+    </h2>
   </div>
   <%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
 </div>

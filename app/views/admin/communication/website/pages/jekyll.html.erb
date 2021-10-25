@@ -7,4 +7,4 @@ description: >
 text: >
   <%= prepare_for_github @page.text %>
 ---
-<%= @page.content_without_frontmatter.html_safe %>
+<%= @page.github_frontmatter.content.html_safe %>

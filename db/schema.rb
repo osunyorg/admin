@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_152728) do
+ActiveRecord::Schema.define(version: 2021_10_25_062028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.jsonb "data"
     t.uuid "featured_medium_id"
     t.index ["featured_medium_id"], name: "idx_communication_website_imported_pages_on_featured_medium_id"
+    t.index ["identifier"], name: "index_communication_website_imported_pages_on_identifier"
     t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
     t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "text"
     t.boolean "published", default: false
+    t.text "github_path"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -195,6 +197,8 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "slug"
+    t.text "path"
+    t.text "github_path"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
@@ -269,6 +273,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.text "abstract"
     t.text "references"
     t.text "keywords"
+    t.text "github_path"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
@@ -292,6 +297,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.text "keywords"
+    t.text "github_path"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -315,6 +321,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_152728) do
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "github_path"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end
 
