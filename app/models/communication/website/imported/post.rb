@@ -100,6 +100,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     doc = Nokogiri::HTML(post.text.to_s)
     images = doc.css('img')
     if images.any?
+      begin
       url = images.first.attr('src')
       uri = URI(url)
       filename = File.basename url
@@ -107,9 +108,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Get.new(uri.request_uri)
-      begin
-        response = http.request(request)
-        post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: 'image/jpeg')
+      response = http.request(request)
+      post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: 'image/jpeg')
       rescue
       end
     end

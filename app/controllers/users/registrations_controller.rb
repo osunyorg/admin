@@ -26,6 +26,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def sign_up(resource_name, resource)
+    sign_in(resource, event: :authentication)
+  end
+
   def update_resource(resource, params)
     resource.update(params)
   end
