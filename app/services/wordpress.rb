@@ -19,7 +19,11 @@ class Wordpress
         fragment.css("h#{i}").each { |element| element.name = "h#{i+1}" }
       end
     end
-    fragment.to_html(preserve_newline: true)
+    html = fragment.to_html(preserve_newline: true)
+    # LSEP is invisible!
+    html = html.delete(" ", "&#8232;", "&#x2028;")
+    html = html.gsub /\u2028/, ''
+    html
   end
 
   def initialize(domain)
