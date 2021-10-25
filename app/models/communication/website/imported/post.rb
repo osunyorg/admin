@@ -107,8 +107,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request = Net::HTTP::Get.new(uri.request_uri)
-      response = http.request(request)
       begin
+        response = http.request(request)
         post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: 'image/jpeg')
       rescue
       end

@@ -79,10 +79,18 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_posts
+    Communication::Website::Post.skip_callback(:save, :after, :publish_to_github)
+    github = Github.with_site website
     wordpress.posts.each do |data|
       post = posts.where(university: university, identifier: data['id']).first_or_initialize
       post.data = data
       post.save
+      generated_post = post.post
+      github.add_to_batch path: generated_post.github_path_generated,
+                          previous_path: generated_post.github_path,
+                          data: generated_post.to_jekyll
     end
+    github.commit_batch '[Post] Batch update from import'
+    Communication::Website::Post.set_callback(:save, :after, :publish_to_github)
   end
 end
