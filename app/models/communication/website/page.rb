@@ -49,10 +49,6 @@ class Communication::Website::Page < ApplicationRecord
   has_many   :children,
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id
-  has_one    :imported_page,
-             class_name: 'Communication::Website::Imported::Page',
-             foreign_key: :page_id,
-             dependent: :destroy
 
   validates :title, presence: true
 
