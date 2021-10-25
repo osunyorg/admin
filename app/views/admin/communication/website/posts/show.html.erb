@@ -54,8 +54,6 @@
         </div>
         <div class="card-body">
           <%= image_tag @post.featured_image.variant(resize: '400'), class: 'img-fluid' %>
-          <%= @post.featured_image.url %>
-          <%= @post.featured_image.variant(resize: '400').url %>
         </div>
       </div>
     <% end %>
