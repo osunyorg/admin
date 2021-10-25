@@ -1,14 +1,10 @@
 <% content_for :title, @website %>
 
 <% content_for :title_right do %>
-  <%= link_to @website.domain_url, @website.domain_url, target: :_blank %>
-<% end %>
-
-
-<p>
+  <%= link_to @website.domain_url, @website.domain_url, target: :_blank %><br>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
   <%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>
-</p>
+<% end %>
 
 <div class="card mt-5">
   <div class="card-header">

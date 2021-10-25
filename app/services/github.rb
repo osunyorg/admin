@@ -26,8 +26,9 @@ class Github
                             commit,
                             file: local_path,
                             sha: file_sha(path)
+    true
   rescue
-    # byebug
+    false
   end
 
   def send_file(attachment, path)
@@ -39,8 +40,44 @@ class Github
                             commit_message,
                             attachment.download,
                             sha: file_sha(path)
+    true
   rescue
-    # byebug
+    false
+  end
+
+  def add_to_batch( path: nil,
+                    previous_path: nil,
+                    data:)
+    @batch ||= []
+    file = find_in_tree previous_path
+    if file.nil? # New file
+      @batch << {
+        path: path,
+        mode: '100644', # https://docs.github.com/en/rest/reference/git#create-a-tree
+        type: 'blob',
+        content: data
+      }
+    else # Existing file
+      @batch << {
+        path: previous_path,
+        mode: file[:mode],
+        type: file[:type],
+        sha: nil
+      }
+      @batch << {
+        path: path,
+        mode: file[:mode],
+        type: file[:type],
+        content: data
+      }
+    end
+  end
+
+  def commit_batch(commit_message)
+    new_tree = client.create_tree repository, @batch, base_tree: tree[:sha]
+    commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
+    client.update_branch repository, default_branch, commit[:sha]
+    @tree = nil
   end
 
   def read_file_at(path)
@@ -49,6 +86,8 @@ class Github
   rescue
     ''
   end
+
+  protected
 
   def pages
     list = client.contents repository, path: '_pages'
@@ -75,8 +114,6 @@ class Github
     @client ||= Octokit::Client.new access_token: access_token
   end
 
-  protected
-
   # https://medium.com/@obodley/renaming-a-file-using-the-git-api-fed1e6f04188
   def move_file(from, to)
     file = find_in_tree from
@@ -96,11 +133,11 @@ class Github
     new_tree = client.create_tree repository, content, base_tree: tree[:sha]
     message = "Move #{from} to #{to}"
     commit = client.create_commit repository, message, new_tree[:sha], branch_sha
-    [:main, :master].each do |branch|
-      client.update_branch repository, branch, commit[:sha]
-    end
+    client.update_branch repository, default_branch, commit[:sha]
+    @tree = nil
+    true
   rescue
-    ''
+    false
   end
 
   def file_sha(path)
@@ -113,18 +150,12 @@ class Github
     sha
   end
 
+  def default_branch
+    @default_branch ||= client.repo(repository)[:default_branch]
+  end
+
   def branch_sha
-    unless @branch_sha
-      [:main, :master].each do |branch|
-        begin
-          # Crashes if branch does not exist
-          response = client.branch repository, branch
-          @branch_sha = response['commit']['sha']
-        end
-        break if @branch_sha
-      end
-    end
-    @branch_sha
+    @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
   end
 
   def tree

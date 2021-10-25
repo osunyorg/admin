@@ -46,12 +46,6 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
-  def to_s
-    "#{title}"
-  end
-
-  protected
-
   def github_path_generated
     "_posts/#{published_at.strftime "%Y/%m"}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
@@ -62,5 +56,9 @@ class Communication::Website::Post < ApplicationRecord
       layout: false,
       assigns: { post: self }
     )
+  end
+
+  def to_s
+    "#{title}"
   end
 end

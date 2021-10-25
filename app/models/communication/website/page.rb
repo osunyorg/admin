@@ -64,6 +64,18 @@ class Communication::Website::Page < ApplicationRecord
     children.any?
   end
 
+  def github_path_generated
+    "_pages/#{path}/index.html".gsub('//', '/')
+  end
+
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/communication/website/pages/jekyll',
+      layout: false,
+      assigns: { page: self }
+    )
+  end
+
   def to_s
     "#{ title }"
   end
@@ -76,17 +88,5 @@ class Communication::Website::Page < ApplicationRecord
 
   def update_children_paths
     children.each(&:save)
-  end
-
-  def github_path_generated
-    "_pages/#{path}/index.html".gsub('//', '/')
-  end
-
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/communication/website/pages/jekyll',
-      layout: false,
-      assigns: { page: self }
-    )
   end
 end

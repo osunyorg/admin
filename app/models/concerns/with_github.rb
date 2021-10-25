@@ -28,11 +28,12 @@ module WithGithub
   end
 
   def publish_to_github
-    github.publish  path: github_path_generated,
-                    previous_path: github_path,
-                    commit: github_commit_message,
-                    data: to_jekyll
-    update_column :github_path, github_path_generated
+    if github.publish(path: github_path_generated,
+                      previous_path: github_path,
+                      commit: github_commit_message,
+                      data: to_jekyll)
+      update_column :github_path, github_path_generated
+    end
   end
-  handle_asynchronously :publish_to_github
+  handle_asynchronously :publish_to_github, queue: 'default'
 end
