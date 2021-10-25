@@ -43,7 +43,7 @@ class Communication::Website::Post < ApplicationRecord
   validates :title, presence: true
 
   def github_path_generated
-    "_posts/#{published_at.strftime "%Y/%m"}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+    "_posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
   def to_jekyll
