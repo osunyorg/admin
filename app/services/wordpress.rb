@@ -2,6 +2,7 @@ class Wordpress
   attr_reader :domain
 
   def self.clean(html)
+    # Relaxed config : https://github.com/rgrove/sanitize/blob/main/lib/sanitize/config/relaxed.rb
     fragment = Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RELAXED,
       attributes: Sanitize::Config::RELAXED[:attributes].merge({
         all: Sanitize::Config::RELAXED[:attributes][:all].dup.delete('class'),

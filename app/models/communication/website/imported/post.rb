@@ -97,19 +97,22 @@ class Communication::Website::Imported::Post < ApplicationRecord
 
   # Please refactor me i'm ugly
   def download_first_image_as_featured_image
-    doc = Nokogiri::HTML(post.text.to_s)
-    images = doc.css('img')
+    fragment = Nokogiri::HTML.fragment(post.text.to_s)
+    images = fragment.css('img')
     if images.any?
       begin
-      url = images.first.attr('src')
-      uri = URI(url)
-      filename = File.basename url
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Get.new(uri.request_uri)
-      response = http.request(request)
-      post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: 'image/jpeg')
+        image = images.first
+        url = image.attr('src')
+        uri = URI(url)
+        filename = File.basename url
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        request = Net::HTTP::Get.new(uri.request_uri)
+        response = http.request(request)
+        post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: response['Content-Type'])
+        image.remove
+        post.update(text: fragment.to_html)
       rescue
       end
     end

@@ -10,6 +10,10 @@ class Github
     @repository = repository
   end
 
+  def valid?
+    repository.present? && access_token.present?
+  end
+
   def publish(path: nil,
               previous_path: nil,
               commit: nil,

@@ -69,12 +69,14 @@ class Communication::Website::Imported::Website < ApplicationRecord
     end
     # Batch update all changes (1 query only, good for github API limits)
     github = Github.with_site website
-    website.pages.find_each do |page|
-      github.add_to_batch path: page.github_path_generated,
-                          previous_path: page.github_path,
-                          data: page.to_jekyll
+    if github.valid?
+      website.pages.find_each do |page|
+        github.add_to_batch path: page.github_path_generated,
+                            previous_path: page.github_path,
+                            data: page.to_jekyll
+      end
+      github.commit_batch '[Page] Batch update from import'
     end
-    github.commit_batch '[Page] Batch update from import'
     Communication::Website::Page.set_callback(:save, :after, :publish_to_github)
   end
 
@@ -86,11 +88,13 @@ class Communication::Website::Imported::Website < ApplicationRecord
       post.data = data
       post.save
       generated_post = post.post
-      github.add_to_batch path: generated_post.github_path_generated,
-                          previous_path: generated_post.github_path,
-                          data: generated_post.to_jekyll
+      if github.valid?
+        github.add_to_batch path: generated_post.github_path_generated,
+                            previous_path: generated_post.github_path,
+                            data: generated_post.to_jekyll
+      end
     end
-    github.commit_batch '[Post] Batch update from import'
+    github.commit_batch '[Post] Batch update from import' if github.valid?
     Communication::Website::Post.set_callback(:save, :after, :publish_to_github)
   end
 end
