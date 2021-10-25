@@ -36,10 +36,6 @@ class Communication::Website::Post < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
-  has_one    :imported_post,
-             class_name: 'Communication::Website::Imported::Post',
-             foreign_key: :post_id,
-             dependent: :destroy
 
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
