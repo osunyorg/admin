@@ -57,6 +57,6 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def post_params
     params.require(:communication_website_post)
-          .permit(:university_id, :website_id, :title, :description, :text, :published, :published_at, :featured_image, :featured_image_delete, :slug)
+          .permit(:university_id, :website_id, :title, :description, :text, :published, :published_at, :featured_image, :featured_image_delete, :featured_image_infos, :slug)
   end
 end
