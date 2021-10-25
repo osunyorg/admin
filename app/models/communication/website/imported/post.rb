@@ -76,10 +76,10 @@ class Communication::Website::Imported::Post < ApplicationRecord
       self.post.title = "Untitled" # No title yet
       self.post.save
     else
-      # Don't touch if there are local changes (this would destroy some nice work)
-      # return if post.updated_at > updated_at
-      # Don't touch if there are no remote changes (this would do useless server workload)
-      # return if post.updated_at == updated_at
+      # Continue only if there are remote changes
+      # Don't touch if there are local changes (post.updated_at > updated_at)
+      # Don't touch if there are no remote changes (post.updated_at == updated_at)
+      # return unless updated_at > post.updated_at
     end
     puts "Update post #{post.id}"
     sanitized_title = Wordpress.clean self.title.to_s
