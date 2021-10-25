@@ -25,9 +25,9 @@ namespace :app do
     Communication::Website::Page.find_each { |page|
       page.update(text: page.old_text)
     }
-     Communication::Website::Medium.find_each { |medium|
-       medium.send(:set_featured_images)
-     }
+    Communication::Website::Medium.find_each { |medium|
+      medium.send(:set_featured_images)
+    }
   end
 
   namespace :db do
