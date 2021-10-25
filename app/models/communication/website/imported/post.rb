@@ -82,11 +82,11 @@ class Communication::Website::Imported::Post < ApplicationRecord
       # return unless updated_at > post.updated_at
     end
     puts "Update post #{post.id}"
-    sanitized_title = Wordpress.clean self.title.to_s
+    sanitized_title = Wordpress.clean_string self.title.to_s
     post.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
     post.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
-    post.text = Wordpress.clean content.to_s
+    post.text = Wordpress.clean_html content.to_s
     post.created_at = created_at
     post.updated_at = updated_at
     post.published_at = published_at if published_at
