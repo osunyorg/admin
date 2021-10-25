@@ -53,6 +53,8 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class User < ApplicationRecord
+  # In this order, "resize avatar" callback will be fired after the others.
+  include WithAvatar
   include WithAuthentication
   include WithRoles
   include WithSyncBetweenUniversities
@@ -60,10 +62,8 @@ class User < ApplicationRecord
   belongs_to :university
   belongs_to :language
   has_one :researcher, class_name: 'Research::Researcher'
-  has_one_attached_deletable :picture
 
   scope :ordered, -> { order(:last_name, :first_name) }
-
 
   def to_s
     "#{first_name} #{last_name}"
