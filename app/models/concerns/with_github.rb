@@ -28,6 +28,7 @@ module WithGithub
   end
 
   def publish_to_github
+    return unless github.valid?
     if github.publish(path: github_path_generated,
                       previous_path: github_path,
                       commit: github_commit_message,

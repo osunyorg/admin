@@ -32,6 +32,7 @@ class Research::Researcher < ApplicationRecord
 
   def publish_to_website(website)
     github = Github.new website.access_token, website.repository
+    return unless github.valid?
     github.publish  path: "_authors/#{ id }.md",
                     data: to_jekyll,
                     commit: "[Researcher] Save #{to_s}"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_102046) do
+ActiveRecord::Schema.define(version: 2021_10_25_124617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -87,9 +87,7 @@ ActiveRecord::Schema.define(version: 2021_10_25_102046) do
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "filename"
-    t.uuid "medium_id"
     t.string "mime_type"
-    t.index ["medium_id"], name: "index_communication_website_imported_media_on_medium_id"
     t.index ["university_id"], name: "index_communication_website_imported_media_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_media_on_website_id"
   end
@@ -149,19 +147,6 @@ ActiveRecord::Schema.define(version: 2021_10_25_102046) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_communication_website_imported_websites_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
-  end
-
-  create_table "communication_website_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "identifier"
-    t.string "filename"
-    t.string "mime_type"
-    t.text "file_url"
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_communication_website_media_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_media_on_website_id"
   end
 
   create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -387,7 +372,6 @@ ActiveRecord::Schema.define(version: 2021_10_25_102046) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_media", "communication_website_media", column: "medium_id"
   add_foreign_key "communication_website_imported_media", "universities"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_media", column: "featured_medium_id"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_websites", column: "website_id"
@@ -399,8 +383,6 @@ ActiveRecord::Schema.define(version: 2021_10_25_102046) do
   add_foreign_key "communication_website_imported_posts", "universities"
   add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_websites", "universities"
-  add_foreign_key "communication_website_media", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_media", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
