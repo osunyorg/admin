@@ -77,6 +77,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     params.require(:communication_website_page)
           .permit(:university_id, :communication_website_id, :title,
             :description, :text, :about_type, :about_id, :slug, :published,
+            :featured_image, :featured_image_delete, :featured_image_infos,
             :parent_id)
   end
 end

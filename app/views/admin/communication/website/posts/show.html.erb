@@ -41,7 +41,7 @@
           <% if @post.imported_post %>
             <tr>
               <td><%= t('communication.website.imported.from') %></td>
-              <td><a href="<%= @post.imported_post.url %>" target="_blank">Original URL</a></td>
+              <td><a href="<%= @post.imported_post.url %>" target="_blank"><%= t('communication.website.imported.original_url') %></a></td>
             </tr>
           <% end %>
         </tbody>

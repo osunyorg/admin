@@ -6,6 +6,7 @@ fr:
         from: Importé depuis
         launch: Importer le site
         launched: Importation en cours
+        original_url: URL originale
         media:
           file_size: Taille du fichier
           not_imported_yet: Non importé pour le moment
@@ -44,6 +45,7 @@ fr:
         filename: Nom du fichier
       communication/website/page:
         description: Description (SEO)
+        featured_image: Image à la une
         parent: Page parente
         published: Publié ?
         text: Texte

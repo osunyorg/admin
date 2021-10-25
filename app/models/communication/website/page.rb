@@ -6,11 +6,11 @@
 #  about_type               :string
 #  description              :text
 #  github_path              :text
+#  old_text                 :text
 #  path                     :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
-#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -36,6 +36,9 @@
 class Communication::Website::Page < ApplicationRecord
   include WithSlug
   include WithGithub
+
+  has_rich_text :text
+  has_one_attached_deletable :featured_image
 
   belongs_to :university
   belongs_to :website,
