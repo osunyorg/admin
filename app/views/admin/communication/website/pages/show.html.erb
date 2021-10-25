@@ -40,12 +40,6 @@
               <%= t @page.published %>
             </td>
           </tr>
-          <% if @page.imported_page %>
-            <tr>
-              <td><%= t('communication.website.imported.from') %></td>
-              <td><a href="<%= @page.imported_page.url %>" target="_blank"><%= t('communication.website.imported.original_url') %></a></td>
-            </tr>
-          <% end %>
           <% if @page.parent %>
             <tr>
               <td><%= Communication::Website::Page.human_attribute_name('parent') %></td>
