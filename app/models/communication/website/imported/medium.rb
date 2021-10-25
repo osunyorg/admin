@@ -33,8 +33,12 @@ class Communication::Website::Imported::Medium < ApplicationRecord
   belongs_to :medium,
              class_name: 'Communication::Website::Medium',
              optional: true
-  has_many :pages, class_name: 'Communication::Website::Imported::Page', foreign_key: :featured_medium_id
-  has_many :posts, class_name: 'Communication::Website::Imported::Post', foreign_key: :featured_medium_id
+  has_many   :pages,
+             class_name: 'Communication::Website::Imported::Page',
+             foreign_key: :featured_medium_id
+  has_many   :posts,
+             class_name: 'Communication::Website::Imported::Post',
+             foreign_key: :featured_medium_id
 
   before_validation :sync
 

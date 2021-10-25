@@ -43,6 +43,35 @@ Etapes :
 4. Import du contenu brut des pages importées
 5. Analyse du contenu des pages importées et création / mise à jour des pages
 
+## Import depuis WordPress
+
+### Media
+1. On importe les media depuis l'API
+2. On crée des objets en DB (Communication::Website::Imported::Medium)
+
+### Pages
+1. On importe les pages depuis l'API
+2. On crée des objets en DB (Communication::Website::Imported::Page)
+3. Les objets importés créent ou mettent à jour les objets réels (Communication::Website::Page)
+    3.1 sans écraser de modifs locales
+    3.2 uniquement si l'import a bougé
+    3.3 Le contenu de l'html est filtré
+        3.3.1 enlever les balises problématiques
+        3.3.2 supprimer les classes
+        3.3.3 supprimer les ids
+        3.3.4 décaler les titres si h1
+    3.4 la featured image est transformée en attachment
+    3.5 si pas de featured image, la première image est enlevée du texte et devient featured
+    3.6 les medias dans le texte html sont transformés en action text attachments
+        3.6.1 lister les files dans le domaine
+        3.6.2 identifier le media master correspondant (via data:jsonb)
+        3.6.3 s'il n'existe pas, le créer (le cas se produit il ?)
+        3.6.4 crée l'attachment
+        3.6.5 on remplace le code du media par l'action text attachement
+
+### Posts
+Idem pages
+
 ## Exemples
 
 ### Condé
