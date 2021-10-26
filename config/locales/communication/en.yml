@@ -13,7 +13,10 @@ en:
         refresh: Refresh import
         show: Show import
         pending: Import in progress
+      last_pages: Last pages
+      last_posts: Last posts
       metadata: Metadata
+      see_all: See the full list (%{number} elements)
   activemodel:
     models:
       communication: Communication

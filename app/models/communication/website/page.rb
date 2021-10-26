@@ -76,6 +76,7 @@ class Communication::Website::Page < ApplicationRecord
     website.pages.where.not(id: id).root.ordered.each do |page|
       pages.concat(page.self_and_children(0))
     end
+    pages.reject! { |p| p[:id] == id }
     pages
   end
 

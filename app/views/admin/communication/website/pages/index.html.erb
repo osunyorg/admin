@@ -1,4 +1,5 @@
-<% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
+<% content_for :title, "#{Communication::Website::Page.model_name.human(count: 2)} (#{@website.pages.count})" %>
+
 
 <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container" data-id="" data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
   <%= render 'treebranch', pages: @root_pages %>
