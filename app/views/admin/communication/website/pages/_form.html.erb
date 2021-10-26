@@ -20,7 +20,9 @@
         <div class="card-body">
           <%= f.input :slug, as: :string %>
           <%= f.input :published %>
-          <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
+          <%= f.association :parent, collection: page.list_of_other_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <ul>
+          </ul>
         </div>
       </div>
       <div class="card flex-fill w-100">

@@ -1,8 +1,10 @@
 class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
   load_and_authorize_resource class: Communication::Website::Page
 
+  before_action :get_root_pages, only: [:index, :new, :create, :edit, :update]
+
   def index
-    @pages = @website.pages.root.ordered
+
     breadcrumb
   end
 
@@ -65,6 +67,10 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   protected
+
+  def get_root_pages
+    @root_pages = @website.pages.root.ordered
+  end
 
   def breadcrumb
     super

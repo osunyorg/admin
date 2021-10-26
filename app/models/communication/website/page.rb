@@ -34,8 +34,9 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
-  include WithSlug
   include WithGithub
+  include WithSlug
+  include WithTree
 
   has_rich_text :text
   has_one_attached_deletable :featured_image
@@ -57,11 +58,6 @@ class Communication::Website::Page < ApplicationRecord
 
   scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
-  scope :root, -> { where(parent_id: nil) }
-
-  def has_children?
-    children.any?
-  end
 
   def github_path_generated
     "_pages/#{path}/index.html".gsub('//', '/')
@@ -73,6 +69,14 @@ class Communication::Website::Page < ApplicationRecord
       layout: false,
       assigns: { page: self }
     )
+  end
+
+  def list_of_other_pages
+    pages = []
+    website.pages.where.not(id: id).root.ordered.each do |page|
+      pages.concat(page.self_and_children(0))
+    end
+    pages
   end
 
   def to_s

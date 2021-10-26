@@ -1,7 +1,7 @@
 <% content_for :title, Communication::Website::Page.model_name.human(count: 2) %>
 
-<ul class="list-unstyled treeview js-treeview js-treeview-sortable js-treeview-sortable-container" data-id="" data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
-  <%= render 'treebranch', pages: @pages %>
+<ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container" data-id="" data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
+  <%= render 'treebranch', pages: @root_pages %>
 </ul>
 
 <% content_for :action_bar_right do %>

@@ -1,4 +1,5 @@
 //= require activestorage
+//= require bootstrap-sprockets
 //= require jquery3
 //= require jquery_ujs
 //= require notyf/notyf.min
