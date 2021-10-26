@@ -8,6 +8,7 @@
 #  filename      :string
 #  identifier    :string
 #  mime_type     :string
+#  variant_urls  :text             default([]), is an Array
 #  created_at    :datetime
 #  updated_at    :datetime
 #  university_id :uuid             not null
@@ -36,7 +37,7 @@ class Communication::Website::Imported::Medium < ApplicationRecord
 
   has_one_attached_deletable :file
 
-  after_commit :download_file_from_file_url, on: [:create, :update], if: :saved_change_to_file_url
+  scope :for_variant_url, -> (variant_url) { where('? = ANY(variant_urls)', variant_url) }
 
   def data=(value)
     super value
@@ -46,11 +47,12 @@ class Communication::Website::Imported::Medium < ApplicationRecord
     self.mime_type = value['mime_type']
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
+    self.variant_urls = (value['media_details']['sizes'] || {}).values.map { |variant|
+      Addressable::URI.parse(variant['source_url']).display_uri.to_s
+    }
   end
 
-  protected
-
-  def download_file_from_file_url
+  def load_remote_file!
     uri = URI(file_url)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -60,5 +62,4 @@ class Communication::Website::Imported::Medium < ApplicationRecord
     response = http.request(request)
     file.attach(io: StringIO.new(response.body), filename: filename, content_type: mime_type)
   end
-  handle_asynchronously :download_file_from_file_url, queue: 'default'
 end
