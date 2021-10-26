@@ -19,6 +19,7 @@ en:
     attributes:
       research/journal:
         title: Title
+        issn: ISSN
       research/journal/article:
         title: Title
         researchers: Authors

@@ -40,7 +40,7 @@ fr:
         about_type: Sujet du site
         about_: Aucun sujet (site indépendant)
         about_Research::Journal: Site de revue scientifique
-        about_School: Site d'école
+        about_Education::School: Site d'école
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/page:

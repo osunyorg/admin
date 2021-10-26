@@ -1,13 +1,14 @@
 <% content_for :title, @journal %>
 
-<p>ISSN : <%= @journal.issn %></p>
-
-<% if @journal.website %>
-  <p>
-    Site :
-    <%= link_to @journal.website, [:admin, @journal.website] %>
-  </p>
+<% content_for :title_right do %>
+  <% if @journal.website %>
+    <%= Communication::Website.model_name.human %>
+    <i class="fas fa-arrow-right small"></i>
+    <%= link_to @journal.website, [:admin, @journal.website] %><br>
+  <% end %>
+  <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
 <% end %>
+
 
 <div class="card mt-5">
   <div class="card-header">

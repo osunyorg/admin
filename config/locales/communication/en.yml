@@ -40,7 +40,7 @@ en:
         about_type: About
         about_: Nothing (independent website)
         about_Research::Journal: Journal website
-        about_School: School website
+        about_Education::School: School website
       communication/website/imported/medium:
         filename: Filename
       communication/website/page:

@@ -13,6 +13,8 @@
         case website.about_type
         when Research::Journal.name
           collection = current_university.research_journals
+        when Education::School.name
+          collection = current_university.education_schools
         end
       %>
         <%= f.input :about_id,

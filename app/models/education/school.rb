@@ -24,6 +24,7 @@
 #
 class Education::School < ApplicationRecord
   belongs_to :university
+  has_one :website, class_name: 'Communication::Website', foreign_key: :about
 
   def to_s
     "#{name}"

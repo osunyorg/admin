@@ -32,7 +32,7 @@ class Communication::Website < ApplicationRecord
           dependent: :destroy
 
   def self.about_types
-    [nil, Research::Journal.name]
+    [nil, Education::School.name, Research::Journal.name]
   end
 
   def domain_url
