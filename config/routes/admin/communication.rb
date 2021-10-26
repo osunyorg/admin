@@ -12,6 +12,11 @@ namespace :communication do
         get :children
       end
     end
+    resources :categories, controller: 'website/categories' do
+      collection do
+        post :reorder
+      end
+    end
     resources :posts, controller: 'website/posts'
   end
 end

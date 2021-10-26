@@ -1,0 +1,18 @@
+<%= simple_form_for [:admin, category] do |f| %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('communication.website.content') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :name %>
+          <%= f.input :description %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_094556) do
+ActiveRecord::Schema.define(version: 2021_10_26_124139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,6 +76,18 @@ ActiveRecord::Schema.define(version: 2021_10_26_094556) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
+  end
+
+  create_table "communication_website_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
   end
 
   create_table "communication_website_imported_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -386,6 +398,8 @@ ActiveRecord::Schema.define(version: 2021_10_26_094556) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_categories", "communication_websites"
+  add_foreign_key "communication_website_categories", "universities"
   add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_media", "universities"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_media", column: "featured_medium_id"

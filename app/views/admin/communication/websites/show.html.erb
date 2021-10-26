@@ -30,6 +30,7 @@
   </div>
   <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent %>
 </div>
+
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
@@ -48,6 +49,21 @@
     </h2>
   </div>
   <%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
+</div>
+
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('create'),
+                  new_admin_communication_website_category_path(website_id: @website),
+                  class: button_classes %>
+    </div>
+    <h2 class="card-title">
+      <%= Communication::Website::Category.model_name.human(count: 2) %>
+      <%= "(#{@website.categories.count})" %>
+    </h2>
+  </div>
+  <%= render 'admin/communication/website/categories/list', categories: @website.categories.ordered %>
 </div>
 
 

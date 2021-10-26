@@ -1,0 +1,27 @@
+<table class="<%= table_classes %> table-sortable">
+  <thead>
+    <tr>
+      <% if can? :reorder, Communication::Website::Category %>
+        <th width="20">&nbsp;</th>
+      <% end %>
+      <th><%= Communication::Website::Category.human_attribute_name('title') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody data-reorder-url="<%= reorder_admin_communication_website_categories_path(@website) %>">
+    <% categories.each do |category| %>
+      <tr data-id="<%= category.id %>">
+        <% if can? :reorder, Communication::Website::Category %>
+          <td><i class="fa fa-bars handle"></i></td>
+        <% end %>
+        <td><%= link_to category, admin_communication_website_category_path(website_id: category.website.id, id: category.id) %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link category %>
+            <%= destroy_link category %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

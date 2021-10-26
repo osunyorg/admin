@@ -25,6 +25,13 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/category:
+        one: Catégorie
+        other: Catégories
+        all: Toutes les catégories
+      communication/website/imported/website:
+        one: Site importé
+        other: Sites importés
       communication/website/page:
         one: Page
         other: Pages
@@ -33,9 +40,6 @@ fr:
         one: Actualité
         other: Actualités
         all: Toutes les actualités
-      communication/website/imported/website:
-        one: Site importé
-        other: Sites importés
     attributes:
       communication/website:
         name: Nom
@@ -44,6 +48,9 @@ fr:
         about_: Site indépendant (aucun sujet)
         about_Research::Journal: Site de revue scientifique
         about_Education::School: Site d'école
+      communication/website/category:
+        description: Description
+        title: Titre
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/page:
