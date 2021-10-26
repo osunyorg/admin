@@ -35,6 +35,8 @@
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Post < ApplicationRecord
+  include Communication::Website::Imported::WithRichText
+
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
@@ -93,28 +95,21 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.published = true
     post.save
     download_first_image_as_featured_image if featured_medium.nil?
+    post.update(text: rich_text_with_attachments(post.text.to_s))
   end
 
-  # Please refactor me i'm ugly
   def download_first_image_as_featured_image
     fragment = Nokogiri::HTML.fragment(post.text.to_s)
-    images = fragment.css('img')
-    if images.any?
-      begin
-        image = images.first
-        url = image.attr('src')
-        uri = URI(url)
-        filename = File.basename url
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        request = Net::HTTP::Get.new(uri.request_uri)
-        response = http.request(request)
-        post.featured_image.attach(io: StringIO.new(response.body), filename: filename, content_type: response['Content-Type'])
-        image.remove
-        post.update(text: fragment.to_html)
-      rescue
-      end
+    image = fragment.css('img').first
+    return unless image.present?
+    begin
+      url = image.attr('src')
+      puts "Set featured image: #{url}"
+      download_service = DownloadService.download(url)
+      post.featured_image.attach(download_service.attachable_data)
+      image.remove
+      post.update(text: fragment.to_html)
+    rescue
     end
   end
 end

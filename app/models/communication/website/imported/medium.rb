@@ -53,13 +53,7 @@ class Communication::Website::Imported::Medium < ApplicationRecord
   end
 
   def load_remote_file!
-    uri = URI(file_url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    # IUT Bordeaux Montaigne pb with certificate
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    file.attach(io: StringIO.new(response.body), filename: filename, content_type: mime_type)
+    download_service = DownloadService.download(file_url)
+    file.attach(download_service.attachable_data)
   end
 end
