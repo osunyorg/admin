@@ -94,17 +94,33 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.published_at = published_at if published_at
     post.published = true
     post.save
-    download_first_image_as_featured_image if featured_medium.nil?
+    if featured_medium.present?
+      download_featured_medium_file_as_featured_image
+    else
+      download_first_image_in_text_as_featured_image
+    end
     post.update(text: rich_text_with_attachments(post.text.to_s))
   end
 
-  def download_first_image_as_featured_image
+  def download_featured_medium_file_as_featured_image
+    featured_medium.load_remote_file! unless featured_medium.file.attached?
+    featured_medium.file.blob.open do |tempfile|
+      puts "Set featured image from featured medium #{featured_medium_id}"
+      post.featured_image.attach(
+        io: tempfile,
+        filename: featured_medium.file.blob.filename,
+        content_type: featured_medium.file.blob.content_type
+      )
+    end
+  end
+
+  def download_first_image_in_text_as_featured_image
     fragment = Nokogiri::HTML.fragment(post.text.to_s)
     image = fragment.css('img').first
     return unless image.present?
     begin
       url = image.attr('src')
-      puts "Set featured image: #{url}"
+      puts "Set featured image from text: #{url}"
       download_service = DownloadService.download(url)
       post.featured_image.attach(download_service.attachable_data)
       image.remove
