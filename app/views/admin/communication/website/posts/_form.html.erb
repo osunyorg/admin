@@ -21,6 +21,7 @@
           <%= f.input :slug, as: :string %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
+          <%= f.association :categories, as: :check_boxes if @website.categories.any? %>
         </div>
       </div>
       <div class="card flex-fill w-100">

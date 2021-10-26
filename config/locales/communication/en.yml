@@ -25,6 +25,13 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/category:
+        one: Category
+        other: Categories
+        all: All categories
+      communication/website/imported/website:
+        one: Imported website
+        other: Imported websites
       communication/website/page:
         one: Page
         other: Pages
@@ -33,17 +40,18 @@ en:
         one: Post
         other: Posts
         all: All posts
-      communication/website/imported/website:
-        one: Imported website
-        other: Imported websites
     attributes:
       communication/website:
+        categories: Categories
         name: Name
         domain: Domain
         about_type: About
         about_: Independent website (no specific subject)
         about_Research::Journal: Journal website
         about_Education::School: School website
+      communication/website/category:
+        description: Description
+        title: Title
       communication/website/imported/medium:
         filename: Filename
       communication/website/page:

@@ -7,8 +7,8 @@ if (notyfAlerts.length > 0) {
     notyf.open({
         type: 'error',
         position: {
-            x: 'right',
-            y: 'top'
+            x: 'center',
+            y: 'bottom'
         },
         message: notyfAlerts[0].innerText,
         duration: 9000,
