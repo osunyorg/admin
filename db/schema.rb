@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_124139) do
+ActiveRecord::Schema.define(version: 2021_10_26_142142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -88,6 +88,13 @@ ActiveRecord::Schema.define(version: 2021_10_26_124139) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
+  end
+
+  create_table "communication_website_categories_posts", id: false, force: :cascade do |t|
+    t.uuid "communication_website_post_id", null: false
+    t.uuid "communication_website_category_id", null: false
+    t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
+    t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
   end
 
   create_table "communication_website_imported_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

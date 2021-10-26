@@ -36,6 +36,11 @@ class Communication::Website::Post < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
+  has_and_belongs_to_many :categories,
+                          class_name: 'Communication::Website::Category',
+                          join_table: 'communication_website_categories_posts',
+                          foreign_key: 'communication_website_post_id',
+                          association_foreign_key: 'communication_website_category_id'
 
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }

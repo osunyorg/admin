@@ -42,6 +42,7 @@ en:
         all: All posts
     attributes:
       communication/website:
+        categories: Categories
         name: Name
         domain: Domain
         about_type: About

@@ -38,6 +38,18 @@
               <% end %>
             </td>
           </tr>
+          <% if @post.categories.any? %>
+            <tr>
+              <td><%= Communication::Website::Post.human_attribute_name('categories') %></td>
+              <td>
+                <ul class="list-unstyled mb-0">
+                  <% @post.categories.each do |category| %>
+                    <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

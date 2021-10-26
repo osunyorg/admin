@@ -62,6 +62,7 @@ fr:
         title: Titre
         website: Site Web
       communication/website/post:
+        categories: Categories
         description: Description (SEO)
         featured_image: Image à la une
         published: Publié ?
