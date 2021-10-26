@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::ApplicationController
   load_and_authorize_resource
 
   def index
-    @users = current_university.users.ordered
+    @users = current_university.users.ordered.page(params[:page])
     breadcrumb
   end
 
