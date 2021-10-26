@@ -1,4 +1,4 @@
-University.create name: 'Osuny', identifier: 'demo'
+University.create name: 'Osuny', identifier: 'demo', sms_sender_name: 'Osuny'
 
 Language.where(name: 'French', iso_code: 'fr').first_or_create
 Language.where(name: 'English', iso_code: 'en').first_or_create

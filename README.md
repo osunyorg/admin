@@ -4,9 +4,8 @@ Open Source University, la plateforme numérique en source ouverte des Universit
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/beb68a199e248e3edc65/maintainability)](https://codeclimate.com/github/noesya/osuny/maintainability)
 
-Démarrer l'app en dev :
+## Setup
 
-```
-bundle install
-rails app:start
-```
+- Lancer `bin/setup`
+- Paramétrer les variables d'environnement dans `config/application.yml`
+- Démarrer le serveur avec `rails app:start`
