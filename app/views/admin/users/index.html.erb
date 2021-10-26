@@ -1,4 +1,5 @@
-<% content_for :title, User.model_name.human(count: 2) %>
+<% content_for :title, "#{User.model_name.human(count: 2)} (#{@users.total_count})" %>
+
 
 <table class="table">
   <thead>
@@ -29,6 +30,7 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @users, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link User %>
