@@ -85,7 +85,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     puts "Update page #{page.id}"
     page.slug = slug
     page.title = Wordpress.clean_string title.to_s
-    page.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
+    page.description = Wordpress.clean_string excerpt.to_s
     page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save

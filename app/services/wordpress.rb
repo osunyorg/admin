@@ -6,6 +6,7 @@ class Wordpress
     string = string.gsub('&nbsp;', ' ')
     string = string.gsub('&amp;', '&')
     string = ActionView::Base.full_sanitizer.sanitize string
+    string = remove_lsep string
     string
   end
 
@@ -29,10 +30,15 @@ class Wordpress
       end
     end
     html = fragment.to_html(preserve_newline: true)
-    # LSEP is invisible!
-    html = html.delete(" ", "&#8232;", "&#x2028;")
-    html = html.gsub /\u2028/, ''
+    html = remove_lsep html
     html
+  end
+
+  def self.remove_lsep(string)
+    # LSEP is invisible!
+    string = string.delete(" ", "&#8232;", "&#x2028;")
+    string = string.gsub /\u2028/, ''
+    string
   end
 
   def initialize(domain)
