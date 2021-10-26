@@ -77,13 +77,7 @@ class Wordpress
   end
 
   def load_url(url)
-    uri = URI(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    # IUT Bordeaux Montaigne pb with certificate
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    JSON.parse(response.body)
+    download_service = DownloadService.download(url)
+    JSON.parse(download_service.response.body)
   end
 end
