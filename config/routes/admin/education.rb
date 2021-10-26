@@ -1,3 +1,3 @@
 namespace :education do
-  resources :programs
+  resources :programs, :schools
 end

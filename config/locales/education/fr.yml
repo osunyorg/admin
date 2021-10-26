@@ -7,6 +7,9 @@ fr:
       education/program:
         one: Formation
         other: Formations
+      education/school:
+        one: École
+        other: Écoles
     attributes:
       education/program:
         name: Nom

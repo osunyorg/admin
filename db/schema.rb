@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_124617) do
+ActiveRecord::Schema.define(version: 2021_10_26_035253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -238,6 +238,20 @@ ActiveRecord::Schema.define(version: 2021_10_25_124617) do
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
 
+  create_table "education_schools", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
@@ -390,6 +404,7 @@ ActiveRecord::Schema.define(version: 2021_10_25_124617) do
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_schools", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"

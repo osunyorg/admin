@@ -17,8 +17,10 @@
                           height: 100 if volume.cover.attached? %></td>
         <td><%= volume.published_at %></td>
         <td class="text-end">
-          <%= edit_link volume, { journal_id: @journal.id } %>
-          <%#= destroy_link volume, journal_id: @journal.id %>
+          <div class="btn-group" role="group">
+            <%= edit_link volume, { journal_id: @journal.id } %>
+            <%#= destroy_link volume, journal_id: @journal.id %>
+          </div>
         </td>
       </tr>
     <% end %>

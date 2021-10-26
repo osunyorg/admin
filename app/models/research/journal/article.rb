@@ -11,7 +11,7 @@
 #  text                       :text
 #  title                      :string
 #  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
+#  updated_at                 :date             not null
 #  research_journal_id        :uuid             not null
 #  research_journal_volume_id :uuid
 #  university_id              :uuid             not null

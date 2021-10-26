@@ -7,6 +7,9 @@ en:
       education/program:
         one: Program
         other: Programs
+      education/school:
+        one: School
+        other: Schools
     attributes:
       education/program:
         name: Name

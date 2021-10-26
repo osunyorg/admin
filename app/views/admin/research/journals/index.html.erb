@@ -17,8 +17,10 @@
         <td><%= link_to "#{journal.volumes.count}", admin_research_journal_volumes_path(journal_id: journal) %></td>
         <td><%= link_to "#{journal.articles.count}", admin_research_journal_articles_path(journal_id: journal) %></td>
         <td class="text-end">
-          <%= edit_link journal %>
-          <%= destroy_link journal %>
+          <div class="btn-group" role="group">
+            <%= edit_link journal %>
+            <%= destroy_link journal %>
+          </div>
         </td>
       </tr>
     <% end %>

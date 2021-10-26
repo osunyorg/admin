@@ -14,8 +14,10 @@
         <td><%= link_to program, [:admin, program] %></td>
         <td><%= program.level %></td>
         <td class="text-end">
-          <%= edit_link program %>
-          <%= destroy_link program %>
+          <div class="btn-group" role="group">
+            <%= edit_link program %>
+            <%= destroy_link program %>
+          </div>
         </td>
       </tr>
     <% end %>

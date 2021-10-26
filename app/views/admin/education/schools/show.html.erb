@@ -1,0 +1,11 @@
+<% content_for :title, @school %>
+
+<p>
+  <%= @school.address %><br>
+  <%= @school.zipcode %> <%= @school.city %><br>
+  <%= @school.country %>
+</p>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @school %>
+<% end %>
