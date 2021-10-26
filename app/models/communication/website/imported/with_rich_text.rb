@@ -9,7 +9,6 @@ module Communication::Website::Imported::WithRichText
     images.each do |image|
       begin
         url = image.attr('src')
-        puts "Replacing #{url}"
         blob = load_blob_from_url(url)
         image.replace ActionText::Attachment.from_attachable(blob).node.to_s
       rescue

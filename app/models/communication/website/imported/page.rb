@@ -36,6 +36,9 @@
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Page < ApplicationRecord
+  include Communication::Website::Imported::WithFeaturedImage
+  include Communication::Website::Imported::WithRichText
+
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
@@ -58,7 +61,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     self.excerpt = value['excerpt']['rendered']
     self.content = value['content']['rendered']
     self.parent = value['parent']
-    self.featured_medium = value['featured_media'] == 0 ? nil : website.media.find_by(identifier: value['featured_media'])
+    self.featured_medium = website.media.find_by(identifier: value['featured_media']) unless value['featured_media'] == 0
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
   end
@@ -83,11 +86,18 @@ class Communication::Website::Imported::Page < ApplicationRecord
       # return unless updated_at > page.updated_at
     end
     puts "Update page #{page.id}"
+    sanitized_title = Wordpress.clean_string self.title.to_s
+    page.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     page.slug = slug
-    page.title = Wordpress.clean_string title.to_s
     page.description = Wordpress.clean_string excerpt.to_s
     page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save
+    if featured_medium.present?
+      download_featured_medium_file_as_featured_image(page)
+    else
+      download_first_image_in_text_as_featured_image(page)
+    end
+    page.update(text: rich_text_with_attachments(page.text.to_s))
   end
 end
