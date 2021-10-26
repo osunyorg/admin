@@ -38,7 +38,7 @@ en:
         name: Name
         domain: Domain
         about_type: About
-        about_: Nothing (independent website)
+        about_: Independent website (no specific subject)
         about_Research::Journal: Journal website
         about_Education::School: School website
       communication/website/imported/medium:

@@ -5,7 +5,9 @@
     <%= link_to @website.domain_url, @website.domain_url, target: :_blank %><br>
   <% end %>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
-  (<%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>)
+  <% if @website.about %>
+    (<%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>)
+  <% end %>
 <% end %>
 
 <div class="card mt-5">

@@ -38,7 +38,7 @@ fr:
         name: Nom
         domain: Domaine
         about_type: Sujet du site
-        about_: Aucun sujet (site indépendant)
+        about_: Site indépendant (aucun sujet)
         about_Research::Journal: Site de revue scientifique
         about_Education::School: Site d'école
       communication/website/imported/medium:
