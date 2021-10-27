@@ -49,6 +49,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
              optional: true
 
   before_validation :sync
+  after_save :sync_attachments
 
   default_scope { order(:path) }
 
@@ -92,8 +93,11 @@ class Communication::Website::Imported::Page < ApplicationRecord
     page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save
+  end
+
+  def sync_attachments
     if featured_medium.present?
-      unless featured_medium.file.attached?
+      unless featured_medium.file.attached? && featured_medium.file.blob.persisted?
         featured_medium.load_remote_file!
         featured_medium.save
       end
@@ -118,4 +122,5 @@ class Communication::Website::Imported::Page < ApplicationRecord
     end
     page.update(text: rich_text_with_attachments(page.text.to_s))
   end
+  handle_asynchronously :sync_attachments, queue: 'default'
 end

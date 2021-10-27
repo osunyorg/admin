@@ -48,6 +48,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
              optional: true
 
   before_validation :sync
+  after_save :sync_attachments
 
   default_scope { order(path: :desc) }
 
@@ -94,8 +95,11 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.published_at = published_at if published_at
     post.published = true
     post.save
+  end
+
+  def sync_attachments
     if featured_medium.present?
-      unless featured_medium.file.attached?
+      unless featured_medium.file.attached? && featured_medium.file.blob.persisted?
         featured_medium.load_remote_file!
         featured_medium.save
       end
@@ -120,4 +124,5 @@ class Communication::Website::Imported::Post < ApplicationRecord
     end
     post.update(text: rich_text_with_attachments(post.text.to_s))
   end
+  handle_asynchronously :sync_attachments, queue: 'default'
 end
