@@ -52,13 +52,15 @@ en:
       communication/website/category:
         children: Children categories
         description: Description
+        name: Name
         parent: Parent category
         slug: slug
-        title: Title
+      communication/website/imported/category:
+        original: Original
       communication/website/imported/medium:
         filename: Filename
       communication/website/page:
-        children: Children pages 
+        children: Children pages
         title: Title
         description: Description (SEO)
         featured_image: Featured image

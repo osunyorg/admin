@@ -51,9 +51,11 @@ fr:
       communication/website/category:
         children: Catégories enfantes
         description: Description
+        name: Nom
         parent: Catégorie parente
         slug: slug
-        title: Titre
+      communication/website/imported/category:
+        original: Original
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/page:
