@@ -93,7 +93,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     page.published = true
     page.save
     if featured_medium.present?
-      featured_medium.load_remote_file! unless featured_medium.file.attached?
+      featured_medium.load_remote_file!
       page.featured_image.attach(
         io: URI.open(featured_medium.file.blob.url),
         filename: featured_medium.file.blob.filename,
