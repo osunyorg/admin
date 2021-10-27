@@ -4,7 +4,6 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   before_action :get_root_pages, only: [:index, :new, :create, :edit, :update]
 
   def index
-
     breadcrumb
   end
 

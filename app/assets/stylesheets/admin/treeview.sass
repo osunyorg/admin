@@ -52,8 +52,9 @@
                     .open_btn--without_children
                         display: inline
 
-            & > .treeview__children .treeview__empty
-                display: inline
+            &.treeview__element--loaded
+                & > .treeview__children .treeview__empty
+                    display: inline
 
     &--sortable
         .treeview__element

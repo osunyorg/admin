@@ -27,6 +27,7 @@
 #
 class Communication::Website::Category < ApplicationRecord
   include WithSlug
+  include WithTree
 
   belongs_to :university
   belongs_to :website,
@@ -54,6 +55,14 @@ class Communication::Website::Category < ApplicationRecord
 
   before_create :set_position
 
+  def list_of_other_categories
+    categories = []
+    website.categories.where.not(id: id).root.ordered.each do |category|
+      categories.concat(category.self_and_children(0))
+    end
+    categories.reject! { |p| p[:id] == id }
+    categories
+  end
 
   def to_s
     "#{name}"
