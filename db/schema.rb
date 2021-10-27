@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_142142) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.date "updated_at", null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
