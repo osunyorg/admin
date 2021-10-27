@@ -124,5 +124,4 @@ class Communication::Website::Imported::Post < ApplicationRecord
     end
     post.update(text: rich_text_with_attachments(post.text.to_s))
   end
-  handle_asynchronously :sync_attachments, queue: 'default'
 end

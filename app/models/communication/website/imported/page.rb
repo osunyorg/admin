@@ -122,5 +122,4 @@ class Communication::Website::Imported::Page < ApplicationRecord
     end
     page.update(text: rich_text_with_attachments(page.text.to_s))
   end
-  handle_asynchronously :sync_attachments, queue: 'default'
 end
