@@ -37,7 +37,11 @@ class Communication::Website < ApplicationRecord
   end
 
   def domain_url
-    "https://#{ domain }"
+    "https://#{domain}"
+  end
+
+  def uploads_url
+    "#{domain_url}/wp-content/uploads"
   end
 
   def import!

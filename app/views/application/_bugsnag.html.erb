@@ -5,6 +5,11 @@
       apiKey: "<%= j ENV['BUGSNAG_JAVASCRIPT_KEY'] %>",
       releaseStage: "<%= j ENV['APPLICATION_ENV'] %>"
     });
+    Bugsnag.addOnError(function (event) {
+      if (event.originalError === 'ResizeObserver loop limit exceeded') {
+        return false;
+      }
+    });
     <% if user_signed_in? %>
     Bugsnag.setUser("<%= j current_user.id %>", "<%= j current_user.email %>", "<%= j current_user.to_s %>");
     <% end %>
