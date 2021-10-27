@@ -51,6 +51,10 @@ class Wordpress
     @domain = domain
   end
 
+  def categories
+    load "#{domain}/wp-json/wp/v2/categories"
+  end
+
   def posts
     load "#{domain}/wp-json/wp/v2/posts"
   end

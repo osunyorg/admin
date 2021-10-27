@@ -330,11 +330,7 @@ GEM
     simple_form_bs5_file_input (0.0.3)
       rails
       simple_form
-<<<<<<< HEAD
-    simple_form_password_with_hints (0.0.4)
-=======
-    simple_form_password_with_hints (0.0.3)
->>>>>>> 353f910894520e230e8ba00dd407158a1901b980
+    simple_form_password_with_hints (0.0.5)
       rails
       simple_form
     sinatra (2.1.0)

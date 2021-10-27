@@ -17,8 +17,14 @@
         <td><%= link_to category, admin_communication_website_category_path(website_id: category.website.id, id: category.id) %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
-            <%= edit_link category %>
-            <%= destroy_link category %>
+            <%= link_to t('edit'),
+                      edit_admin_communication_website_category_path(website_id: category.website.id, id: category.id),
+                      class: button_classes %>
+            <%= link_to t('delete'),
+                      admin_communication_website_category_path(website_id: category.website.id, id: category.id),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
           </div>
         </td>
       </tr>

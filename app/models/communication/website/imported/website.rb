@@ -23,6 +23,8 @@ class Communication::Website::Imported::Website < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website'
+  has_many   :categories,
+             class_name: 'Communication::Website::Imported::Category'
   has_many   :media,
              class_name: 'Communication::Website::Imported::Medium'
   has_many   :pages,
@@ -31,9 +33,10 @@ class Communication::Website::Imported::Website < ApplicationRecord
              class_name: 'Communication::Website::Imported::Post'
 
   def run!
-    sync_media
-    sync_pages
-    sync_posts
+    sync_categories
+    # sync_media
+    # sync_pages
+    # sync_posts
   end
   handle_asynchronously :run!, queue: 'default'
 
@@ -41,6 +44,14 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def wordpress
     @wordpress ||= Wordpress.new website.domain_url
+  end
+
+  def sync_categories
+    wordpress.categories.each do |data|
+      category = categories.where(university: university, identifier: data['id']).first_or_initialize
+      category.data = data
+      category.save
+    end
   end
 
   def sync_media

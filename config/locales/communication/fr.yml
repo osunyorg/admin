@@ -49,15 +49,20 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_Education::School: Site d'école
       communication/website/category:
+        children: Catégories enfantes
         description: Description
+        parent: Catégorie parente
+        slug: slug
         title: Titre
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/page:
+        children: Pages enfantes
         description: Description (SEO)
         featured_image: Image à la une
         parent: Page parente
         published: Publié ?
+        slug: slug
         text: Texte
         title: Titre
         website: Site Web
@@ -67,6 +72,7 @@ fr:
         featured_image: Image à la une
         published: Publié ?
         published_at: Date de publication
+        slug: slug
         text: Texte
         title: Titre
         website: Site Web
