@@ -55,6 +55,5 @@ class Communication::Website::Imported::Medium < ApplicationRecord
   def load_remote_file!
     download_service = DownloadService.download(file_url)
     file.attach(download_service.attachable_data)
-    save
   end
 end
