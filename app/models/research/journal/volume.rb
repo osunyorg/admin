@@ -4,6 +4,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  description         :text
+#  github_path         :text
 #  keywords            :text
 #  number              :integer
 #  published_at        :date
@@ -24,11 +25,11 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
+  include WithGithub
+
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id
-
-  after_commit :publish_to_github
 
   has_one_attached :cover
 
@@ -38,25 +39,25 @@ class Research::Journal::Volume < ApplicationRecord
     "/assets/img/volumes/#{id}#{cover.filename.extension_with_delimiter}"
   end
 
+  def website
+    journal.website
+  end
+
   def to_s
     "##{ number } #{ title }"
   end
 
   protected
 
-  def publish_to_github
-    github.publish  kind: :volumes,
-                    file: "#{id}.md",
-                    title: title,
-                    data: ApplicationController.render(
-                      template: 'admin/research/journal/volumes/jekyll',
-                      layout: false,
-                      assigns: { volume: self }
-                    )
-    github.send_file cover, cover_path if cover.attached?
+  def github_path_generated
+    "_volumes/#{id}.html"
   end
 
-  def github
-    @github ||= Github.with_site(journal.website)
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/research/journal/volumes/jekyll',
+      layout: false,
+      assigns: { volume: self }
+    )
   end
 end

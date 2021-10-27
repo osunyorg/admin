@@ -20,6 +20,7 @@ class Ability
     can :read, Communication::Website::Imported::Page, university_id: @user.university_id
     can :read, Communication::Website::Imported::Post, university_id: @user.university_id
     can :read, Education::Program, university_id: @user.university_id
+    can :read, Education::School, university_id: @user.university_id
     can :read, Research::Researcher
     can :read, Research::Journal, university_id: @user.university_id
     can :read, Research::Journal::Article, university_id: @user.university_id

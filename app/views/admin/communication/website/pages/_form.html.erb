@@ -3,24 +3,40 @@
     <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title">Content</h5>
+          <h5 class="card-title mb-0"><%= t('communication.website.content') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :description %>
-          <%= f.input :text, input_html: { rows: 20 } %>
+          <%= f.input :text, as: :rich_text_area %>
         </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title">Metadata</h5>
+          <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :slug %>
+          <%= f.input :slug, as: :string %>
           <%= f.input :published %>
-          <%= f.association :parent, collection: page.website.pages.where.not(id: page) %>
+          <%= f.association :parent, collection: page.list_of_other_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <ul>
+          </ul>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/page.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :featured_image,
+                      as: :single_deletable_file,
+                      direct_upload: true,
+                      label: false,
+                      input_html: { accept: '.jpg,.jpeg,.png' },
+                      preview: true
+           %>
         </div>
       </div>
     </div>

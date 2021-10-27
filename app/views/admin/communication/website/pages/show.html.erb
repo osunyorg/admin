@@ -4,25 +4,25 @@
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0">Content</h5>
+        <h5 class="card-title mb-0"><%= t('communication.website.content') %></h5>
       </div>
       <div class="card-body">
         <p>
-          <strong>Description</strong>
+          <strong><%= Communication::Website::Page.human_attribute_name('description') %></strong>
         </p>
         <%= sanitize @page.description %>
 
         <p>
-          <strong>Text</strong>
+          <strong><%= Communication::Website::Page.human_attribute_name('text') %></strong>
         </p>
-        <%= sanitize @page.text %>
+        <%= @page.text %>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0">Metadata</h5>
+        <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
       </div>
       <table class="<%= table_classes %>">
         <tbody>
@@ -34,16 +34,17 @@
             <td><%= Communication::Website::Page.human_attribute_name('path') %></td>
             <td><%= @page.path %></td>
           </tr>
-          <% if @page.imported_page %>
-            <tr>
-              <td>Imported from</td>
-              <td><a href="<%= @page.imported_page.url %>" target="_blank">Original URL</a></td>
-            </tr>
-          <% end %>
+          <tr>
+            <td><%= Communication::Website::Page.human_attribute_name('published') %></td>
+            <td>
+              <%= t @page.published %>
+            </td>
+          </tr>
           <% if @page.parent %>
             <tr>
               <td><%= Communication::Website::Page.human_attribute_name('parent') %></td>
-              <td><%= link_to @page.parent,
+              <td><%= link_to_if can?(:read, @page.parent),
+                              @page.parent,
                               admin_communication_website_page_path(
                                 website_id: @website.id,
                                 id: @page.parent.id
@@ -56,7 +57,8 @@
               <td>
                 <ul class="list-unstyled mb-0">
                   <% @page.children.each do |child| %>
-                    <li><%= link_to child,
+                    <li><%= link_to_if can?(:read, child),
+                                    child,
                                     admin_communication_website_page_path(
                                       website_id: @website.id,
                                       id: child.id
@@ -69,6 +71,16 @@
         </tbody>
       </table>
     </div>
+    <% if @page.featured_image.attached? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/page.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= image_tag @page.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

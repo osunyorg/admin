@@ -1,0 +1,19 @@
+<% content_for :title, @school %>
+
+<% content_for :title_right do %>
+  <% if @school.website %>
+    <%= Communication::Website.model_name.human %>
+    <i class="fas fa-arrow-right small"></i>
+    <%= link_to @school.website, [:admin, @school.website] %><br>
+  <% end %>
+<% end %>
+
+<p>
+  <%= @school.address %><br>
+  <%= @school.zipcode %> <%= @school.city %><br>
+  <%= @school.country %>
+</p>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @school %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_095157) do
+ActiveRecord::Schema.define(version: 2021_10_26_142142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -78,17 +78,36 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
   end
 
+  create_table "communication_website_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
+  end
+
+  create_table "communication_website_categories_posts", id: false, force: :cascade do |t|
+    t.uuid "communication_website_post_id", null: false
+    t.uuid "communication_website_category_id", null: false
+    t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
+    t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
   create_table "communication_website_imported_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "identifier"
     t.jsonb "data"
     t.text "file_url"
-    t.datetime "remote_created_at"
-    t.datetime "remote_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "filename"
+    t.string "mime_type"
+    t.text "variant_urls", default: [], array: true
     t.index ["university_id"], name: "index_communication_website_imported_media_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_media_on_website_id"
   end
@@ -111,6 +130,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.jsonb "data"
     t.uuid "featured_medium_id"
     t.index ["featured_medium_id"], name: "idx_communication_website_imported_pages_on_featured_medium_id"
+    t.index ["identifier"], name: "index_communication_website_imported_pages_on_identifier"
     t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
     t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
@@ -162,8 +182,9 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.uuid "about_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "text"
+    t.text "old_text"
     t.boolean "published", default: false
+    t.text "github_path"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -181,6 +202,8 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "slug"
+    t.text "path"
+    t.text "github_path"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
@@ -235,6 +258,20 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
 
+  create_table "education_schools", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
@@ -255,6 +292,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.text "abstract"
     t.text "references"
     t.text "keywords"
+    t.text "github_path"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
@@ -278,6 +316,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.text "keywords"
+    t.text "github_path"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -301,6 +340,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "github_path"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end
 
@@ -365,6 +405,8 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_categories", "communication_websites"
+  add_foreign_key "communication_website_categories", "universities"
   add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_media", "universities"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_media", column: "featured_medium_id"
@@ -384,6 +426,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_095157) do
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_schools", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"

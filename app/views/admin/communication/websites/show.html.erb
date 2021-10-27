@@ -1,43 +1,80 @@
 <% content_for :title, @website %>
 
-<p>
-  <%= link_to @website.domain_url, @website.domain_url, target: :_blank %>
-</p>
-
-<p>
+<% content_for :title_right do %>
+  <% unless @website.domain.blank? %>
+    <%= link_to @website.domain_url, @website.domain_url, target: :_blank %><br>
+  <% end %>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
-  <%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>
-</p>
+  <% if @website.about %>
+    (<%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>)
+  <% end %>
+<% end %>
 
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
-      <%= link_to t('activerecord.models.communication/website/post.all'),
-                  admin_communication_website_posts_path(website_id: @website),
-                  class: 'me-3' %>
-      <%= link_to t('create'),
+      <%= link_to_if can?(:create, Communication::Website::Post),
+                  t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
                   class: button_classes %>
     </div>
-    <h2 class="card-title"><%= Communication::Website::Post.model_name.human(count: 2) %></h2>
+    <h2 class="card-title">
+      <%= link_to admin_communication_website_posts_path(website_id: @website) do %>
+        <%= t('communication.website.last_posts') %>
+        <small>
+          -
+          <%= t('communication.website.see_all', number: @website.posts.count) %>
+        </small>
+      <% end %>
+    </h2>
   </div>
   <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent %>
 </div>
-<div class="card mt-5">
-  <div class="card-header">
-    <div class="float-end">
-      <%= link_to t('activerecord.models.communication/website/page.all'),
-                  admin_communication_website_pages_path(website_id: @website),
-                  class: 'me-3' %>
-      <%= link_to t('create'),
-                  new_admin_communication_website_page_path(website_id: @website),
-                  class: button_classes %>
-    </div>
-    <h2 class="card-title"><%= Communication::Website::Page.model_name.human(count: 2) %></h2>
-  </div>
-  <%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
-</div>
 
+<div class="row">
+  <div class="col-md-7">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-end">
+          <%= link_to t('create'),
+                      new_admin_communication_website_page_path(website_id: @website),
+                      class: button_classes %>
+        </div>
+        <h2 class="card-title">
+          <%= link_to admin_communication_website_pages_path(website_id: @website) do %>
+            <%= t('communication.website.last_pages') %>
+            <small>
+              -
+              <%= t('communication.website.see_all', number: @website.pages.count) %>
+            </small>
+          <% end %>
+        </h2>
+      </div>
+      <%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-end">
+          <%= link_to t('create'),
+                      new_admin_communication_website_category_path(website_id: @website),
+                      class: button_classes %>
+        </div>
+        <h2 class="card-title">
+          <%= link_to admin_communication_website_categories_path(website_id: @website) do %>
+            <%= Communication::Website::Category.model_name.human(count: 2) %>
+            <small>
+              -
+              <%= t('communication.website.see_all', number: @website.categories.count) %>
+            </small>
+          <% end %>
+        </h2>
+      </div>
+      <%= render 'admin/communication/website/categories/list', categories: @website.categories.ordered %>
+    </div>
+  </div>
+</div>
 
 <% content_for :action_bar_right do %>
   <% if @website.imported? %>

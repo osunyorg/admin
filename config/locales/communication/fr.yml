@@ -6,13 +6,17 @@ fr:
         from: Importé depuis
         launch: Importer le site
         launched: Importation en cours
+        original_url: URL originale
         media:
           file_size: Taille du fichier
           not_imported_yet: Non importé pour le moment
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
+      last_pages: Dernières pages
+      last_posts: Dernières actualités
       metadata: Informations
+      see_all: Voir la liste complète (%{number} éléments)
   activemodel:
     models:
       communication: Communication
@@ -21,6 +25,13 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/category:
+        one: Catégorie
+        other: Catégories
+        all: Toutes les catégories
+      communication/website/imported/website:
+        one: Site importé
+        other: Sites importés
       communication/website/page:
         one: Page
         other: Pages
@@ -29,28 +40,31 @@ fr:
         one: Actualité
         other: Actualités
         all: Toutes les actualités
-      communication/website/imported/website:
-        one: Site importé
-        other: Sites importés
     attributes:
       communication/website:
         name: Nom
         domain: Domaine
         about_type: Sujet du site
-        about_: Aucun sujet (site indépendant)
+        about_: Site indépendant (aucun sujet)
         about_Research::Journal: Site de revue scientifique
-        about_School: Site d'école
+        about_Education::School: Site d'école
+      communication/website/category:
+        description: Description
+        title: Titre
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/page:
         description: Description (SEO)
+        featured_image: Image à la une
         parent: Page parente
         published: Publié ?
         text: Texte
         title: Titre
         website: Site Web
       communication/website/post:
+        categories: Categories
         description: Description (SEO)
+        featured_image: Image à la une
         published: Publié ?
         published_at: Date de publication
         text: Texte

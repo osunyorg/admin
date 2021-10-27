@@ -1,9 +1,23 @@
 class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
   load_and_authorize_resource class: Communication::Website::Page
 
+  before_action :get_root_pages, only: [:index, :new, :create, :edit, :update]
+
   def index
-    @pages = @website.pages.root.ordered
+
     breadcrumb
+  end
+
+  def reorder
+    parent_id = params['parentId'].blank? ? nil : params['parentId']
+    ids = params['ids']
+    ids.each.with_index do |id, index|
+      page = @website.pages.find(id)
+      page.update(
+        parent_id: parent_id,
+        position: index + 1
+      )
+    end
   end
 
   def children
@@ -54,6 +68,10 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   protected
 
+  def get_root_pages
+    @root_pages = @website.pages.root.ordered
+  end
+
   def breadcrumb
     super
     add_breadcrumb  Communication::Website::Page.model_name.human(count: 2),
@@ -65,6 +83,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     params.require(:communication_website_page)
           .permit(:university_id, :communication_website_id, :title,
             :description, :text, :about_type, :about_id, :slug, :published,
+            :featured_image, :featured_image_delete, :featured_image_infos,
             :parent_id)
   end
 end

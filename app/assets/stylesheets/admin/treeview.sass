@@ -1,20 +1,27 @@
 .treeview
-    &__branch, &__leaf
-        & > .treeview__label
-            & > .move_btn
-                opacity: 0
-                transition: opacity 0.1s
-        &:hover
-            & > .treeview__label
-                & > .move_btn
-                    opacity: 1
+    &__element
+        & > .treeview__children .treeview__empty
+            display: none
 
-    &__branch
         & > .treeview__label
             & > a .close_btn
                 display: none
+                .close_btn--with_children
+                    display: inline
+                .close_btn--without_children
+                    display: none
+
             & > a .open_btn
                 display: inline
+                .open_btn--with_children
+                    display: inline
+                .open_btn--without_children
+                    display: none
+
+            & > .move_btn
+                opacity: 0
+                transition: opacity 0.1s
+
         & > .treeview__children
             display: none
 
@@ -27,12 +34,30 @@
             & > .treeview__children
                 display: block
 
-    &__leaf
-        & > .treeview__label
-            & > a .close_btn
-                display: none
-            & > a .open_btn
+        &--loaded
+            & > .treeview__children .treeview__loading
                 display: none
 
-        & > .treeview__children
-            display: none
+        &--empty
+            & > .treeview__label
+                & > a .close_btn
+                    .close_btn--with_children
+                        display: none
+                    .close_btn--without_children
+                        display: inline
+
+                & > a .open_btn
+                    .open_btn--with_children
+                        display: none
+                    .open_btn--without_children
+                        display: inline
+
+            & > .treeview__children .treeview__empty
+                display: inline
+
+    &--sortable
+        .treeview__element
+            &:hover
+                & > .treeview__label
+                    & > .move_btn
+                        opacity: 1

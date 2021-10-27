@@ -1,13 +1,29 @@
 class Wordpress
   attr_reader :domain
 
-  def self.clean(html)
+
+  def self.clean_string(string)
+    string = string.gsub('&nbsp;', ' ')
+    string = string.gsub('&amp;', '&')
+    string = ActionView::Base.full_sanitizer.sanitize string
+    string = remove_lsep string
+    string
+  end
+
+  def self.clean_html(html)
+    # Relaxed config : https://github.com/rgrove/sanitize/blob/main/lib/sanitize/config/relaxed.rb
+    # iframe attributes from MDN : https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe
     fragment = Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RELAXED,
       attributes: Sanitize::Config::RELAXED[:attributes].merge({
         all: Sanitize::Config::RELAXED[:attributes][:all].dup.delete('class'),
-        'a' => Sanitize::Config::RELAXED[:attributes]['a'].dup.delete('rel')
+        'a' => Sanitize::Config::RELAXED[:attributes]['a'].dup.delete('rel'),
+        'iframe' => [
+          'allow', 'allowfullscreen', 'allowpaymentrequest', 'csp', 'height', 'loading',
+          'name', 'referrerpolicy', 'sandbox', 'src', 'srcdoc', 'width', 'align',
+          'frameborder', 'longdesc', 'marginheight', 'marginwidth', 'scrolling'
+        ]
       }),
-      elements: Set.new(Sanitize::Config::RELAXED[:elements]).delete('div'),
+      elements: Set.new(Sanitize::Config::RELAXED[:elements]).delete('div') + ['iframe'],
       whitespace_elements: {
         'div' => { :before => "", :after => "" }
       }
@@ -19,7 +35,16 @@ class Wordpress
         fragment.css("h#{i}").each { |element| element.name = "h#{i+1}" }
       end
     end
-    fragment.to_html(preserve_newline: true)
+    html = fragment.to_html(preserve_newline: true)
+    html = remove_lsep html
+    html
+  end
+
+  def self.remove_lsep(string)
+    # LSEP is invisible!
+    string = string.delete(" ", "&#8232;", "&#x2028;")
+    string = string.gsub /\u2028/, ''
+    string
   end
 
   def initialize(domain)
@@ -58,13 +83,7 @@ class Wordpress
   end
 
   def load_url(url)
-    uri = URI(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    # IUT Bordeaux Montaigne pb with certificate
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    JSON.parse(response.body)
+    download_service = DownloadService.download(url)
+    JSON.parse(download_service.response.body)
   end
 end

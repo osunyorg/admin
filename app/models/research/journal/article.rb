@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  github_path                :text
 #  keywords                   :text
 #  published_at               :date
 #  references                 :text
@@ -31,13 +32,15 @@
 #  fk_rails_...  (updated_by_id => users.id)
 #
 class Research::Journal::Article < ApplicationRecord
+  include WithGithub
+
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
   belongs_to :updated_by, class_name: 'User'
   has_and_belongs_to_many :researchers, class_name: 'Research::Researcher'
 
-  after_commit :publish_to_github
+  after_commit :update_researchers
 
   has_one_attached :pdf
 
@@ -47,28 +50,31 @@ class Research::Journal::Article < ApplicationRecord
     "/assets/articles/#{id}/#{pdf.filename}"
   end
 
+  def website
+    journal.website
+  end
+
   def to_s
     "#{ title }"
   end
 
   protected
 
-  def publish_to_github
-    github.publish  kind: :articles,
-                    file: "#{id}.md",
-                    title: title,
-                    data: ApplicationController.render(
-                      template: 'admin/research/journal/articles/jekyll',
-                      layout: false,
-                      assigns: { article: self }
-                    )
+  def github_path_generated
+    "_articles/#{id}.html"
+  end
+
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/research/journal/articles/jekyll',
+      layout: false,
+      assigns: { article: self }
+    )
+  end
+
+  def update_researchers
     researchers.each do |researcher|
       researcher.publish_to_website(journal.website)
     end
-    github.send_file pdf, pdf_path if pdf.attached?
-  end
-
-  def github
-    @github ||= Github.with_site(journal.website)
   end
 end

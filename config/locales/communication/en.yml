@@ -6,13 +6,17 @@ en:
         from: Imported from
         launch: Launch import
         launched: Import in progress
+        original_url: Original URL
         media:
           file_size: File size
           not_imported_yet: Not imported yet
         refresh: Refresh import
         show: Show import
         pending: Import in progress
+      last_pages: Last pages
+      last_posts: Last posts
       metadata: Metadata
+      see_all: See the full list (%{number} elements)
   activemodel:
     models:
       communication: Communication
@@ -21,6 +25,13 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/category:
+        one: Category
+        other: Categories
+        all: All categories
+      communication/website/imported/website:
+        one: Imported website
+        other: Imported websites
       communication/website/page:
         one: Page
         other: Pages
@@ -29,22 +40,24 @@ en:
         one: Post
         other: Posts
         all: All posts
-      communication/website/imported/website:
-        one: Imported website
-        other: Imported websites
     attributes:
       communication/website:
+        categories: Categories
         name: Name
         domain: Domain
         about_type: About
-        about_: Nothing (independent website)
+        about_: Independent website (no specific subject)
         about_Research::Journal: Journal website
-        about_School: School website
+        about_Education::School: School website
+      communication/website/category:
+        description: Description
+        title: Title
       communication/website/imported/medium:
         filename: Filename
       communication/website/page:
         title: Title
         description: Description (SEO)
+        featured_image: Featured image
         text: Text
         published: Published ?
         parent: Parent page
@@ -52,6 +65,7 @@ en:
       communication/website/post:
         title: Title
         description: Description (SEO)
+        featured_image: Featured image
         text: Text
         published: Published ?
         published_at: Publication date

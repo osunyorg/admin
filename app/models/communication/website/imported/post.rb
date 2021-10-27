@@ -35,6 +35,9 @@
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Post < ApplicationRecord
+  include Communication::Website::Imported::WithFeaturedImage
+  include Communication::Website::Imported::WithRichText
+
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
@@ -60,7 +63,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
     self.published_at = value['date_gmt']
-    self.featured_medium = website.media.find_by(identifier: value['featured_medium'])
+    self.featured_medium = website.media.find_by(identifier: value['featured_media']) unless value['featured_media'] == 0
   end
 
   def to_s
@@ -75,21 +78,28 @@ class Communication::Website::Imported::Post < ApplicationRecord
                                                    website: website.website # Real website, not imported website
       self.post.title = "Untitled" # No title yet
       self.post.save
+    else
+      # Continue only if there are remote changes
+      # Don't touch if there are local changes (post.updated_at > updated_at)
+      # Don't touch if there are no remote changes (post.updated_at == updated_at)
+      # return unless updated_at > post.updated_at
     end
-    # Don't touch if there are local changes (this would destroy some nice work)
-    # return if post.updated_at > updated_at
-    # Don't touch if there are no remote changes (this would do useless server workload)
-    # return if post.updated_at == updated_at
-    title = Wordpress.clean title.to_s
     puts "Update post #{post.id}"
-    post.title = title unless title.blank? # If there is no title, leave it with "Untitled"
+    sanitized_title = Wordpress.clean_string self.title.to_s
+    post.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
-    post.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
-    post.text = Wordpress.clean content.to_s
+    post.description = Wordpress.clean_string excerpt.to_s
+    post.text = Wordpress.clean_html content.to_s
     post.created_at = created_at
     post.updated_at = updated_at
     post.published_at = published_at if published_at
     post.published = true
     post.save
+    if featured_medium.present?
+      download_featured_medium_file_as_featured_image(post)
+    else
+      download_first_image_in_text_as_featured_image(post)
+    end
+    post.update(text: rich_text_with_attachments(post.text.to_s))
   end
 end

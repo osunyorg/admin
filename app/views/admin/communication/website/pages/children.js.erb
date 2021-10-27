@@ -1,4 +1,8 @@
-$branch = $('.js-treeview-branch[data-id=<%= @page.id %>]');
-$('.js-treeview-children', $branch).html("<%= escape_javascript(render 'treebranch', pages: @children) %>");
-$branch.addClass('treeview__branch--loaded');
+$branch = $('.js-treeview-element[data-id=<%= @page.id %>]');
+<% if @children.any? %>
+    $('.js-treeview-children', $branch).append("<%= escape_javascript(render 'treebranch', pages: @children) %>");
+<% else %>
+    $branch.addClass('treeview__element--empty');
+<% end %>
+$branch.addClass('treeview__element--loaded');
 window.osuny.treeView.initSortable();

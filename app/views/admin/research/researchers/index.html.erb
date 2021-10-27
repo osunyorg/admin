@@ -17,8 +17,10 @@
         <td><%= link_to researcher.last_name, [:admin, researcher] %></td>
         <td><%= link_to researcher.user, [:admin, researcher.user] if researcher.user %></td>
         <td class="text-end">
-          <%= edit_link researcher %>
-          <%= destroy_link researcher %>
+          <div class="btn-group" role="group">
+            <%= edit_link researcher %>
+            <%= destroy_link researcher %>
+          </div>
         </td>
       </tr>
     <% end %>

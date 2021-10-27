@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
+      <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
       <th><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
       <th></th>
     </tr>
@@ -10,6 +11,8 @@
     <% posts.each do |post| %>
       <tr>
         <td><%= link_to post, admin_communication_website_post_path(website_id: post.website.id, id: post.id) %></td>
+        <td><%= image_tag post.featured_image.representation(resize: 'x100'),
+                          height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
         <td><%= l post.published_at, format: :long if post.published_at %></td>
         <td class="text-end">
           <div class="btn-group" role="group">

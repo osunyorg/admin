@@ -2,13 +2,14 @@
 #
 # Table name: research_researchers
 #
-#  id         :uuid             not null, primary key
-#  biography  :text
-#  first_name :string
-#  last_name  :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :uuid
+#  id          :uuid             not null, primary key
+#  biography   :text
+#  first_name  :string
+#  github_path :text
+#  last_name   :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :uuid
 #
 # Indexes
 #
@@ -31,14 +32,10 @@ class Research::Researcher < ApplicationRecord
 
   def publish_to_website(website)
     github = Github.new website.access_token, website.repository
-    github.publish  kind: :authors,
-                    file: "#{ id }.md",
-                    title: to_s,
-                    data: ApplicationController.render(
-                      template: 'admin/research/researchers/jekyll',
-                      layout: false,
-                      assigns: { researcher: self }
-                    )
+    return unless github.valid?
+    github.publish  path: "_authors/#{ id }.md",
+                    data: to_jekyll,
+                    commit: "[Researcher] Save #{to_s}"
   end
 
   def to_s
@@ -46,6 +43,14 @@ class Research::Researcher < ApplicationRecord
   end
 
   protected
+
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/research/researchers/jekyll',
+      layout: false,
+      assigns: { researcher: self }
+    )
+  end
 
   def publish_to_github
     websites.each { |website| publish_to_website(website) }

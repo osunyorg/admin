@@ -7,7 +7,7 @@ local:
   root: <%= Rails.root.join("storage") %>
 
 scaleway:
-  service: S3
+  service: Scaleway
   access_key_id: <%= ENV['SCALEWAY_OS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['SCALEWAY_OS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['SCALEWAY_OS_REGION'] %>

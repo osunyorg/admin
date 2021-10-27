@@ -2,17 +2,17 @@
 #
 # Table name: communication_website_imported_media
 #
-#  id                :uuid             not null, primary key
-#  data              :jsonb
-#  file_url          :text
-#  filename          :string
-#  identifier        :string
-#  remote_created_at :datetime
-#  remote_updated_at :datetime
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  university_id     :uuid             not null
-#  website_id        :uuid             not null
+#  id            :uuid             not null, primary key
+#  data          :jsonb
+#  file_url      :text
+#  filename      :string
+#  identifier    :string
+#  mime_type     :string
+#  variant_urls  :text             default([]), is an Array
+#  created_at    :datetime
+#  updated_at    :datetime
+#  university_id :uuid             not null
+#  website_id    :uuid             not null
 #
 # Indexes
 #
@@ -28,43 +28,32 @@ class Communication::Website::Imported::Medium < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
-  has_many :pages, class_name: 'Communication::Website::Imported::Page', foreign_key: :featured_medium_id
-  has_many :posts, class_name: 'Communication::Website::Imported::Post', foreign_key: :featured_medium_id
+  has_many   :pages,
+             class_name: 'Communication::Website::Imported::Page',
+             foreign_key: :featured_medium_id
+  has_many   :posts,
+             class_name: 'Communication::Website::Imported::Post',
+             foreign_key: :featured_medium_id
 
-  has_one_attached :file
+  has_one_attached_deletable :file
 
-  after_commit :download_file_from_file_url, on: [:create, :update], if: :saved_change_to_file_url
+  scope :for_variant_url, -> (variant_url) { where('? = ANY(variant_urls)', variant_url) }
 
   def data=(value)
     super value
-    escaped_source_url = Addressable::URI.parse(value['source_url']).display_uri.to_s
-    self.file_url = escaped_source_url
-    self.filename = File.basename(URI(escaped_source_url).path)
-    # TODO unify with page and post?
-    self.remote_created_at = DateTime.parse(value['date_gmt'])
-    self.remote_updated_at = DateTime.parse(value['modified_gmt'])
+    sanitized_file_url = Addressable::URI.parse(value['source_url']).display_uri.to_s # ASCII-only for URI
+    self.file_url = sanitized_file_url
+    self.filename = File.basename(URI(file_url).path)
+    self.mime_type = value['mime_type']
+    self.created_at = value['date_gmt']
+    self.updated_at = value['modified_gmt']
+    self.variant_urls = (value['media_details']['sizes'] || {}).values.map { |variant|
+      Addressable::URI.parse(variant['source_url']).display_uri.to_s
+    }
   end
 
-  protected
-
-  def download_file_from_file_url
-    uri = URI(file_url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    # IUT Bordeaux Montaigne pb with certificate
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    tempfile = Tempfile.open("Osuny-ImportedMedium-#{SecureRandom.hex}", Dir.tmpdir)
-    begin
-      tempfile.binmode
-      tempfile.write(response.body)
-      tempfile.flush
-      tempfile.rewind
-      file.attach(io: tempfile, filename: filename, content_type: data['mime_type'])
-    ensure
-      tempfile.close!
-    end
+  def load_remote_file!
+    download_service = DownloadService.download(file_url)
+    file.attach(download_service.attachable_data)
   end
-  handle_asynchronously :download_file_from_file_url, queue: 'default'
 end

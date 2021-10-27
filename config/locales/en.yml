@@ -60,7 +60,7 @@ en:
     mailer:
       two_factor_authentication_code:
         subject: "Two-factor authentication code"
-        text_html: "Your two-factor authentication code for %{university} is %{code}<br>It will expire in 5 minutes."
+        text_html: "Your two-factor authentication code for %{university} is: <br><br><b>%{code}</b><br><br>It will expire in 5 minutes."
     sessions:
       signed_in: ''
     shared:
@@ -81,6 +81,7 @@ en:
       send_email_code: 'Send me a code via email'
       success: ""
   edit: Edit
+  empty_folder: Empty folder
   false: No
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
@@ -88,6 +89,7 @@ en:
   languages:
     en: English
     fr: French
+  loading: Loading...
   login:
     already_registered: Already registered?
     not_registered_yet: Not registered yet?

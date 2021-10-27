@@ -17,6 +17,8 @@
 - zipcode:string
 - city:string
 - country:string
+- latitude:float
+- longitude:float
 
 ## university/Campus
 

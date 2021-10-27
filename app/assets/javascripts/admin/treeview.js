@@ -13,7 +13,7 @@ window.osuny.treeView = {
         var nestedSortables,
             i;
 
-        nestedSortables = [].slice.call(document.querySelectorAll('.js-treeview-sortable'));
+        nestedSortables = [].slice.call(document.querySelectorAll('.js-treeview-sortable-container'));
         for (i = 0; i < nestedSortables.length; i += 1) {
             new Sortable(nestedSortables[i], {
                 group: 'nested',
@@ -24,13 +24,32 @@ window.osuny.treeView = {
                     var from = evt.from,
                         to = evt.to,
                         ids = [],
-                        parentId;
+                        parentId,
+                        url;
+
+                    // get list of ids
                     $('> .js-treeview-element', to).each(function () {
                         ids.push($(this).attr('data-id'));
                     });
+
+                    // as the "to" can be the root object where the data-sort-url is set we use "closest" and not "parents"
+                    url = $(to).closest('.js-treeview-sortable')
+                        .attr('data-sort-url');
                     parentId = to.dataset.id;
-                    console.log(parentId, ids, from === to);
-                    // TODO
+
+                    // manage emptyness
+                    $(to).closest('.js-treeview-element')
+                        .removeClass('treeview__element--empty');
+                    if ($('> .js-treeview-element', from).length === 0) {
+                        $(from).closest('.js-treeview-element')
+                            .addClass('treeview__element--empty');
+                    }
+
+                    // call to application
+                    $.post(url, {
+                        parentId: parentId,
+                        ids: ids
+                    });
                 }
             });
         }
@@ -39,11 +58,11 @@ window.osuny.treeView = {
     branchClicked: function (e) {
         'use strict';
         var $target = $(e.currentTarget),
-            $branch = $target.closest('.js-treeview-branch');
+            $branch = $target.closest('.js-treeview-element');
 
-        $branch.toggleClass('treeview__branch--opened');
+        $branch.toggleClass('treeview__element--opened');
 
-        if ($branch.hasClass('treeview__branch--loaded')) {
+        if ($branch.hasClass('treeview__element--loaded')) {
             e.preventDefault();
             e.stopPropagation();
         }

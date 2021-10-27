@@ -35,6 +35,7 @@ gem 'bootstrap5-kaminari-views'
 gem 'octokit'
 gem 'front_matter_parser'
 gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_authentication.git'
+# gem 'two_factor_authentication', path: '../two_factor_authentication'
 
 # Front
 gem 'jquery-rails'

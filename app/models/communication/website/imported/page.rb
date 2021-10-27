@@ -23,6 +23,7 @@
 # Indexes
 #
 #  idx_communication_website_imported_pages_on_featured_medium_id  (featured_medium_id)
+#  index_communication_website_imported_pages_on_identifier        (identifier)
 #  index_communication_website_imported_pages_on_page_id           (page_id)
 #  index_communication_website_imported_pages_on_university_id     (university_id)
 #  index_communication_website_imported_pages_on_website_id        (website_id)
@@ -35,6 +36,9 @@
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Page < ApplicationRecord
+  include Communication::Website::Imported::WithFeaturedImage
+  include Communication::Website::Imported::WithRichText
+
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
@@ -57,7 +61,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     self.excerpt = value['excerpt']['rendered']
     self.content = value['content']['rendered']
     self.parent = value['parent']
-    self.featured_medium = value['featured_media'] == 0 ? nil : website.media.find_by(identifier: value['featured_media'])
+    self.featured_medium = website.media.find_by(identifier: value['featured_media']) unless value['featured_media'] == 0
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
   end
@@ -75,17 +79,25 @@ class Communication::Website::Imported::Page < ApplicationRecord
                                                     slug: path
       self.page.title = "Untitled"
       self.page.save
+    else
+      # Continue only if there are remote changes
+      # Don't touch if there are local changes (page.updated_at > updated_at)
+      # Don't touch if there are no remote changes (page.updated_at == updated_at)
+      # return unless updated_at > page.updated_at
     end
-    # Don't touch if there are local changes (this would destroy some nice work)
-    # return if page.updated_at > updated_at
-    # Don't touch if there are no remote changes (this would do useless server workload)
-    # return if page.updated_at == updated_at
     puts "Update page #{page.id}"
+    sanitized_title = Wordpress.clean_string self.title.to_s
+    page.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     page.slug = slug
-    page.title = Wordpress.clean title.to_s
-    page.description = ActionView::Base.full_sanitizer.sanitize excerpt.to_s
-    page.text = Wordpress.clean content.to_s
+    page.description = Wordpress.clean_string excerpt.to_s
+    page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save
+    if featured_medium.present?
+      download_featured_medium_file_as_featured_image(page)
+    else
+      download_first_image_in_text_as_featured_image(page)
+    end
+    page.update(text: rich_text_with_attachments(page.text.to_s))
   end
 end

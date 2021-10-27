@@ -18,8 +18,24 @@
           <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
         </div>
         <div class="card-body">
+          <%= f.input :slug, as: :string %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
+          <%= f.association :categories, as: :check_boxes if @website.categories.any? %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :featured_image,
+                      as: :single_deletable_file,
+                      direct_upload: true,
+                      label: false,
+                      input_html: { accept: '.jpg,.jpeg,.png' },
+                      preview: true
+           %>
         </div>
       </div>
     </div>

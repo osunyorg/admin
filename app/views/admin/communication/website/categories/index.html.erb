@@ -1,0 +1,7 @@
+<% content_for :title, "#{Communication::Website::Category.model_name.human(count: 2)} (#{@categories.count})" %>
+
+<%= render 'list', categories: @categories %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Category %>
+<% end %>

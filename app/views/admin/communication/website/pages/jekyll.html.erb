@@ -2,7 +2,9 @@
 title: "<%= @page.title %>"
 permalink: "<%= @page.path %>"
 parent: "<%= @page.parent_id %>"
-description: "<%= prepare_for_github @page.description %>"
-text: "<%= prepare_for_github @page.text %>"
+description: >
+  <%= prepare_for_github @page.description %>
+text: >
+  <%= prepare_for_github @page.text %>
 ---
-<%= @page.content_without_frontmatter.html_safe %>
+<%= @page.github_frontmatter.content.html_safe %>

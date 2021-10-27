@@ -19,6 +19,7 @@ fr:
     attributes:
       research/journal:
         title: Titre
+        issn: ISSN
       research/journal/article:
         title: Titre
         researchers: Auteu·rs·rices
