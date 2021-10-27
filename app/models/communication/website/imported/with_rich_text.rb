@@ -5,16 +5,22 @@ module Communication::Website::Imported::WithRichText
 
   def rich_text_with_attachments(text)
     fragment = Nokogiri::HTML.fragment(text)
-    images = fragment.css("img[src*=\"#{website.website.uploads_url}\"]")
-    images.each do |image|
+    fragment = replace_tags_with_attachments(fragment, 'a', 'href')
+    fragment = replace_tags_with_attachments(fragment, 'img', 'src')
+    fragment.to_html
+  end
+
+  def replace_tags_with_attachments(fragment, tag_name, attribute_name)
+    nodes = fragment.css("#{tag_name}[#{attribute_name}*=\"#{website.website.uploads_url}\"]")
+    nodes.each do |node|
       begin
-        url = image.attr('src')
+        url = node.attr(attribute_name)
         blob = load_blob_from_url(url)
-        image.replace ActionText::Attachment.from_attachable(blob).node.to_s
+        node.replace ActionText::Attachment.from_attachable(blob).node.to_s
       rescue
       end
     end
-    fragment.to_html
+    fragment
   end
 
   def load_blob_from_url(url)
