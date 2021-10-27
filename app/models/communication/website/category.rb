@@ -34,10 +34,13 @@ class Communication::Website::Category < ApplicationRecord
   belongs_to :parent,
             class_name: 'Communication::Website::Category',
             optional: true
-  has_many   :children,
-            class_name: 'Communication::Website::Category',
-            foreign_key: :parent_id,
-            dependent: :destroy
+  has_one :imported_category,
+          class_name: 'Communication::Website::Imported::Category',
+          dependent: :destroy
+  has_many :children,
+           class_name: 'Communication::Website::Category',
+           foreign_key: :parent_id,
+           dependent: :destroy
   has_and_belongs_to_many :posts,
                           class_name: 'Communication::Website::Post',
                           join_table: 'communication_website_categories_posts',
