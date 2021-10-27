@@ -61,6 +61,7 @@ class WordpressTest < ActiveSupport::TestCase
   end
 
   test "authorize iframes" do
-
+    assert_equal "<figure><iframe loading=\"lazy\" title=\"Le Bachelor Universitaire de Technologie, qu'est-ce que c'est ? - LES IUT\" width=\"640\" height=\"360\" src=\"https://www.youtube.com/embed/5xbeKHi0txk?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe></figure>",
+                 Wordpress.clean_html('<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper"><iframe loading="lazy" title="Le Bachelor Universitaire de Technologie, qu&#039;est-ce que c&#039;est ? - LES IUT" width="640" height="360" src="https://www.youtube.com/embed/5xbeKHi0txk?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></figure>')
   end
 end
