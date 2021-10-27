@@ -50,22 +50,30 @@ en:
         about_Research::Journal: Journal website
         about_Education::School: School website
       communication/website/category:
+        children: Children categories
         description: Description
-        title: Title
+        name: Name
+        parent: Parent category
+        slug: slug
+      communication/website/imported/category:
+        original: Original
       communication/website/imported/medium:
         filename: Filename
       communication/website/page:
+        children: Children pages
         title: Title
         description: Description (SEO)
         featured_image: Featured image
         text: Text
         published: Published ?
         parent: Parent page
+        slug: slug
         website: Website
       communication/website/post:
         title: Title
         description: Description (SEO)
         featured_image: Featured image
+        slug: slug
         text: Text
         published: Published ?
         published_at: Publication date

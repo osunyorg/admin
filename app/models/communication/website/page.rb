@@ -49,7 +49,8 @@ class Communication::Website::Page < ApplicationRecord
              optional: true
   has_many   :children,
              class_name: 'Communication::Website::Page',
-             foreign_key: :parent_id
+             foreign_key: :parent_id,
+             dependent: :nullify
 
   validates :title, presence: true
 

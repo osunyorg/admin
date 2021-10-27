@@ -11,6 +11,19 @@
         </div>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :slug, as: :string %>
+          <%= f.association :parent, collection: category.list_of_other_categories, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <ul>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
   <% content_for :action_bar_right do %>
     <%= submit f %>

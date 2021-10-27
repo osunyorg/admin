@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_142142) do
+ActiveRecord::Schema.define(version: 2021_10_27_131939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -86,7 +86,10 @@ ActiveRecord::Schema.define(version: 2021_10_26_142142) do
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.uuid "parent_id"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
+    t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
   end
 
@@ -95,6 +98,24 @@ ActiveRecord::Schema.define(version: 2021_10_26_142142) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_imported_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.uuid "category_id", null: false
+    t.string "name"
+    t.text "description"
+    t.string "identifier"
+    t.string "slug"
+    t.string "url"
+    t.string "parent"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.jsonb "data"
+    t.index ["category_id"], name: "idx_communication_website_imported_cat_on_category"
+    t.index ["university_id"], name: "idx_communication_website_imported_cat_on_university"
+    t.index ["website_id"], name: "idx_communication_website_imported_cat_on_website"
   end
 
   create_table "communication_website_imported_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -405,8 +426,12 @@ ActiveRecord::Schema.define(version: 2021_10_26_142142) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_imported_categories", "communication_website_categories", column: "category_id"
+  add_foreign_key "communication_website_imported_categories", "communication_website_imported_websites", column: "website_id"
+  add_foreign_key "communication_website_imported_categories", "universities"
   add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_media", "universities"
   add_foreign_key "communication_website_imported_pages", "communication_website_imported_media", column: "featured_medium_id"

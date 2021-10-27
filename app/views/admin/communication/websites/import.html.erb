@@ -103,3 +103,31 @@
     <%= paginate @imported_media, param_name: :media_page, theme: 'bootstrap-5' %>
   </div>
 </div>
+
+<div class="card mt-5">
+  <div class="card-header">
+    <h2><%= @imported_categories.count %> categories</h2>
+  </div>
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Category.human_attribute_name('name') %></th>
+        <th><%= Communication::Website::Imported::Category.human_attribute_name('original') %></th>
+        <th class="text-end" width="150">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @imported_categories.each do |category| %>
+        <tr>
+          <td><%= category.name %></td>
+          <td class="small"><%= link_to category.url, category.url, target: :_blank %></td>
+          <td class="text-end">
+            <%= link_to t('show'),
+                          admin_communication_website_category_path(website_id: category.category.website.id, id: category.category.id),
+                          class: button_classes %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

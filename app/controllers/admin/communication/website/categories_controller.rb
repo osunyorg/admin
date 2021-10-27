@@ -1,11 +1,28 @@
 class Admin::Communication::Website::CategoriesController < Admin::Communication::Website::ApplicationController
   load_and_authorize_resource class: Communication::Website::Category
 
-  include Admin::Reorderable
+  before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
-    @categories = @website.categories.ordered
     breadcrumb
+  end
+
+  def reorder
+    parent_id = params['parentId'].blank? ? nil : params['parentId']
+    ids = params['ids']
+    ids.each.with_index do |id, index|
+      category = @website.categories.find(id)
+      category.update(
+        parent_id: parent_id,
+        position: index + 1
+      )
+    end
+  end
+
+  def children
+    return unless request.xhr?
+    @category = @website.categories.find(params[:id])
+    @children = @category.children.ordered
   end
 
   def show
@@ -50,6 +67,10 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
 
   protected
 
+  def get_root_categories
+    @root_categories = @website.categories.root.ordered
+  end
+
   def breadcrumb
     super
     add_breadcrumb  Communication::Website::Category.model_name.human(count: 2),
@@ -59,6 +80,6 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
 
   def category_params
     params.require(:communication_website_category)
-          .permit(:university_id, :website_id, :name, :description)
+          .permit(:university_id, :website_id, :name, :description, :slug, :parent_id)
   end
 end

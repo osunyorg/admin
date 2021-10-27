@@ -1,6 +1,7 @@
 <% content_for :title, @category %>
 
 <div class="row">
+
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-header">
@@ -14,6 +15,52 @@
       </div>
     </div>
   </div>
+
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
+      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td width="150"><%= Communication::Website::Category.human_attribute_name('slug') %></td>
+            <td><%= @category.slug %></td>
+          </tr>
+          <% if @category.parent %>
+            <tr>
+              <td><%= Communication::Website::Category.human_attribute_name('parent') %></td>
+              <td><%= link_to_if can?(:read, @category.parent),
+                              @category.parent,
+                              admin_communication_website_category_path(
+                                website_id: @website.id,
+                                id: @category.parent.id
+                              ) %></td>
+            </tr>
+          <% end %>
+          <% if @category.children.any? %>
+            <tr>
+              <td><%= Communication::Website::Category.human_attribute_name('children') %></td>
+              <td>
+                <ul class="list-unstyled mb-0">
+                  <% @category.children.each do |child| %>
+                    <li><%= link_to_if can?(:read, child),
+                                    child,
+                                    admin_communication_website_category_path(
+                                      website_id: @website.id,
+                                      id: child.id
+                                    ) %></li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+
 </div>
 
 <% content_for :action_bar_right do %>
