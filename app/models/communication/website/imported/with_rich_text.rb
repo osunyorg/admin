@@ -5,7 +5,7 @@ module Communication::Website::Imported::WithRichText
 
   def rich_text_with_attachments(text)
     fragment = Nokogiri::HTML.fragment(text)
-    images = fragment.css("img[src*=\"#{website.website.domain_url}\"]")
+    images = fragment.css("img[src*=\"#{website.website.uploads_url}\"]")
     images.each do |image|
       begin
         url = image.attr('src')
