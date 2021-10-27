@@ -35,7 +35,6 @@
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Post < ApplicationRecord
-  include Communication::Website::Imported::WithFeaturedImage
   include Communication::Website::Imported::WithRichText
 
   belongs_to :university
@@ -96,9 +95,25 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.published = true
     post.save
     if featured_medium.present?
-      download_featured_medium_file_as_featured_image(post)
+      featured_medium.load_remote_file! unless featured_medium.file.attached?
+      post.featured_image.attach(
+        io: URI.open(featured_medium.file.blob.url),
+        filename: featured_medium.file.blob.filename,
+        content_type: featured_medium.file.blob.content_type
+      )
     else
-      download_first_image_in_text_as_featured_image(post)
+      fragment = Nokogiri::HTML.fragment(post.text.to_s)
+      image = fragment.css('img').first
+      if image.present?
+        begin
+          url = image.attr('src')
+          download_service = DownloadService.download(url)
+          post.featured_image.attach(download_service.attachable_data)
+          image.remove
+          post.update(text: fragment.to_html)
+        rescue
+        end
+      end
     end
     post.update(text: rich_text_with_attachments(post.text.to_s))
   end
