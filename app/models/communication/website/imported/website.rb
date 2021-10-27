@@ -34,9 +34,9 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def run!
     sync_categories
-    # sync_media
-    # sync_pages
-    # sync_posts
+    sync_media
+    sync_pages
+    sync_posts
   end
   handle_asynchronously :run!, queue: 'default'
 
