@@ -45,13 +45,12 @@ en:
         all: All posts
     attributes:
       communication/website:
-        categories: Categories
-        name: Name
-        domain: Domain
-        about_type: About
         about_: Independent website (no specific subject)
-        about_Research::Journal: Journal website
         about_Education::School: School website
+        about_Research::Journal: Journal website
+        about_type: About
+        domain: Domain
+        name: Name
       communication/website/author:
         biography: Biography
         first_name: First name
@@ -71,20 +70,23 @@ en:
         filename: Filename
       communication/website/page:
         children: Children pages
-        title: Title
         description: Description (SEO)
         featured_image: Featured image
-        text: Text
-        published: Published ?
         parent: Parent page
+        published: Published ?
         slug: Slug
+        text: Text
+        title: Title
         website: Website
       communication/website/post:
-        title: Title
+        author: Author
+        category: Category
+        categories: Categories
         description: Description (SEO)
         featured_image: Featured image
         slug: Slug
         text: Text
+        title: Title
         published: Published ?
         published_at: Publication date
         website: Website

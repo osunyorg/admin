@@ -3,6 +3,8 @@
 # Table name: communication_website_imported_posts
 #
 #  id                 :uuid             not null, primary key
+#  author             :string
+#  categories         :jsonb
 #  content            :text
 #  data               :jsonb
 #  excerpt            :text
@@ -60,6 +62,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
     self.title = value['title']['rendered']
     self.excerpt = value['excerpt']['rendered']
     self.content = value['content']['rendered']
+    self.author = value['author']
+    self.categories = value['categories']
     self.created_at = value['date_gmt']
     self.updated_at = value['modified_gmt']
     self.published_at = value['date_gmt']
@@ -82,7 +86,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
       # Continue only if there are remote changes
       # Don't touch if there are local changes (post.updated_at > updated_at)
       # Don't touch if there are no remote changes (post.updated_at == updated_at)
-      return unless updated_at > post.updated_at
+      # return unless updated_at > post.updated_at
     end
     puts "Update post #{post.id}"
     sanitized_title = Wordpress.clean_string self.title.to_s
@@ -94,6 +98,13 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.updated_at = updated_at
     post.published_at = published_at if published_at
     post.published = true
+
+    imported_author = website.authors.where(identifier: author).first
+    post.author = imported_author.author if imported_author.author
+    imported_categories = website.categories.where(identifier: categories)
+    imported_categories.each do |imported_category|
+      post.categories << imported_category.category unless post.categories.pluck(:id).include?(imported_category.category_id)
+    end
     post.save
   end
 

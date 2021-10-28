@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_100510) do
+ActiveRecord::Schema.define(version: 2021_10_28_123841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -114,6 +114,22 @@ ActiveRecord::Schema.define(version: 2021_10_28_100510) do
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
   end
 
+  create_table "communication_website_imported_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.uuid "author_id", null: false
+    t.string "name"
+    t.text "description"
+    t.string "slug"
+    t.string "identifier"
+    t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "idx_communication_website_imported_auth_on_author"
+    t.index ["university_id"], name: "idx_communication_website_imported_auth_on_university"
+    t.index ["website_id"], name: "idx_communication_website_imported_auth_on_website"
+  end
+
   create_table "communication_website_imported_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
@@ -188,6 +204,8 @@ ActiveRecord::Schema.define(version: 2021_10_28_100510) do
     t.text "slug"
     t.jsonb "data"
     t.uuid "featured_medium_id"
+    t.string "author"
+    t.jsonb "categories"
     t.index ["featured_medium_id"], name: "idx_communication_website_imported_posts_on_featured_medium_id"
     t.index ["post_id"], name: "index_communication_website_imported_posts_on_post_id"
     t.index ["university_id"], name: "index_communication_website_imported_posts_on_university_id"
@@ -448,6 +466,9 @@ ActiveRecord::Schema.define(version: 2021_10_28_100510) do
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_imported_authors", "communication_website_authors", column: "author_id"
+  add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
+  add_foreign_key "communication_website_imported_authors", "universities"
   add_foreign_key "communication_website_imported_categories", "communication_website_categories", column: "category_id"
   add_foreign_key "communication_website_imported_categories", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_categories", "universities"

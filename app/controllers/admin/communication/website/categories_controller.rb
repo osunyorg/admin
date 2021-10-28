@@ -26,6 +26,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   end
 
   def show
+    @posts = @category.posts.ordered.page(params[:page])
     breadcrumb
   end
 

@@ -45,12 +45,12 @@ fr:
         all: Toutes les actualités
     attributes:
       communication/website:
-        name: Nom
-        domain: Domaine
-        about_type: Sujet du site
         about_: Site indépendant (aucun sujet)
-        about_Research::Journal: Site de revue scientifique
         about_Education::School: Site d'école
+        about_Research::Journal: Site de revue scientifique
+        about_type: Sujet du site
+        domain: Domaine
+        name: Nom
       communication/website/author:
         biography: Biographie
         first_name: Prénom
@@ -79,7 +79,9 @@ fr:
         title: Titre
         website: Site Web
       communication/website/post:
-        categories: Categories
+        author: Auteur·rice
+        category: Catégorie
+        categories: Catégories
         description: Description (SEO)
         featured_image: Image à la une
         published: Publié ?
