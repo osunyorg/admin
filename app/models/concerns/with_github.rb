@@ -12,7 +12,7 @@ module WithGithub
   def github_frontmatter
     @frontmatter ||= FrontMatterParser::Parser.new(:md).call(github_content)
   rescue
-    FrontMatterParser::Parser.new(:md)
+    FrontMatterParser::Parser.new(:md).call('')
   end
 
   def github_path_generated
