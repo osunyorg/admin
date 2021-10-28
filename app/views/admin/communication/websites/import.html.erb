@@ -106,6 +106,35 @@
 
 <div class="card mt-5">
   <div class="card-header">
+    <h2><%= @imported_authors.total_count %> authors</h2>
+  </div>
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Author.human_attribute_name('name') %></th>
+        <th class="text-end" width="150">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @imported_authors.each do |author| %>
+        <tr>
+          <td><%= author.name %></td>
+          <td class="text-end">
+            <%= link_to t('show'),
+                          admin_communication_website_author_path(website_id: author.author.website.id, id: author.author.id),
+                          class: button_classes %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="card-footer">
+    <%= paginate @imported_authors, param_name: :authors_page, theme: 'bootstrap-5' %>
+  </div>
+</div>
+
+<div class="card mt-5">
+  <div class="card-header">
     <h2><%= @imported_categories.count %> categories</h2>
   </div>
   <table class="<%= table_classes %>">

@@ -7,6 +7,7 @@ class Admin::Communication::Website::AuthorsController < Admin::Communication::W
   end
 
   def show
+    @posts = @author.posts.ordered.page(params[:page])
     breadcrumb
   end
 

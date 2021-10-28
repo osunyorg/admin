@@ -84,7 +84,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
       # Continue only if there are remote changes
       # Don't touch if there are local changes (page.updated_at > updated_at)
       # Don't touch if there are no remote changes (page.updated_at == updated_at)
-      return unless updated_at > page.updated_at
+      # return unless updated_at > page.updated_at
     end
     puts "Update page #{page.id}"
     sanitized_title = Wordpress.clean_string self.title.to_s
@@ -99,7 +99,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
   def sync_attachments
     return unless updated_at > page.updated_at
     if featured_medium.present?
-      unless featured_medium.file.attached? && featured_medium.file.blob.persisted?
+      unless featured_medium.file.attached?
         featured_medium.load_remote_file!
         featured_medium.save
       end

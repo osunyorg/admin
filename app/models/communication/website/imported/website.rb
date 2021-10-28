@@ -24,15 +24,20 @@ class Communication::Website::Imported::Website < ApplicationRecord
   belongs_to :website,
              class_name: 'Communication::Website'
   has_many   :authors,
-             class_name: 'Communication::Website::Imported::Author'
+             class_name: 'Communication::Website::Imported::Author',
+             dependent: :destroy
   has_many   :categories,
-             class_name: 'Communication::Website::Imported::Category'
+             class_name: 'Communication::Website::Imported::Category',
+             dependent: :destroy
   has_many   :media,
-             class_name: 'Communication::Website::Imported::Medium'
+             class_name: 'Communication::Website::Imported::Medium',
+             dependent: :destroy
   has_many   :pages,
-             class_name: 'Communication::Website::Imported::Page'
+             class_name: 'Communication::Website::Imported::Page',
+             dependent: :destroy
   has_many   :posts,
-             class_name: 'Communication::Website::Imported::Post'
+             class_name: 'Communication::Website::Imported::Post',
+             dependent: :destroy
 
   def run!
     sync_authors

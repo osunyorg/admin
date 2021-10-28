@@ -58,10 +58,16 @@
         </tbody>
       </table>
     </div>
-  
   </div>
 
 </div>
+
+<% if @posts.total_count > 0 %>
+  <h2><%= "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %></h2>
+
+  <%= render 'admin/communication/website/posts/list', posts: @posts, hide_category: true %>
+  <%= paginate @posts, theme: 'bootstrap-5' %>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @category %>

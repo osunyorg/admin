@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_120556) do
+ActiveRecord::Schema.define(version: 2021_10_28_123841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -204,6 +204,8 @@ ActiveRecord::Schema.define(version: 2021_10_28_120556) do
     t.text "slug"
     t.jsonb "data"
     t.uuid "featured_medium_id"
+    t.string "author"
+    t.jsonb "categories"
     t.index ["featured_medium_id"], name: "idx_communication_website_imported_posts_on_featured_medium_id"
     t.index ["post_id"], name: "index_communication_website_imported_posts_on_post_id"
     t.index ["university_id"], name: "index_communication_website_imported_posts_on_university_id"
@@ -340,7 +342,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_120556) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.date "updated_at", null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
