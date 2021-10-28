@@ -83,7 +83,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
       self.post.title = "Untitled" # No title yet
       self.post.save
     else
-      # Continue only if there are remote changes
+      # Continue only if there are remote changes, and no recent local changes
+      # updated_at reflects last update on wordpress, based on the last import
       # Don't touch if there are local changes (post.updated_at > updated_at)
       # Don't touch if there are no remote changes (post.updated_at == updated_at)
       return unless updated_at > post.updated_at
