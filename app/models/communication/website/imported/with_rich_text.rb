@@ -26,7 +26,10 @@ module Communication::Website::Imported::WithRichText
   def load_blob_from_url(url)
     medium = website.media.for_variant_url(url).first
     if medium.present?
-      medium.load_remote_file! unless medium.file.attached?
+      unless medium.file.attached?
+        medium.load_remote_file!
+        medium.save
+      end
       # Currently a copy, should we link the medium blob instead?
       blob = medium.file.blob.open do |tempfile|
         ActiveStorage::Blob.create_and_upload!(

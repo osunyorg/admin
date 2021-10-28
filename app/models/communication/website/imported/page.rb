@@ -99,7 +99,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
   def sync_attachments
     return unless updated_at > page.updated_at
     if featured_medium.present?
-      unless featured_medium.file.attached? && featured_medium.file.blob.persisted?
+      unless featured_medium.file.attached?
         featured_medium.load_remote_file!
         featured_medium.save
       end
