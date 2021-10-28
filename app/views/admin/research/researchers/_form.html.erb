@@ -3,7 +3,7 @@
   <div class="col-md-4">
     <%= f.input :first_name %>
     <%= f.input :last_name %>
-    <%= f.association :user %>
+    <%= f.association :user, collection: current_university.users.ordered %>
   </div>
   <div class="col-md-8">
     <%= f.input :biography, input_html: { rows: 5 } %>

@@ -66,6 +66,7 @@ class User < ApplicationRecord
   scope :ordered, -> { order(:last_name, :first_name) }
 
   def to_s
-    "#{first_name} #{last_name}"
+    "#{last_name} #{first_name}"
   end
+
 end
