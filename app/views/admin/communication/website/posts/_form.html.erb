@@ -21,6 +21,7 @@
           <%= f.input :slug, as: :string if post.persisted? %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
+          <%= f.association :author, collection: @website.authors.ordered if @website.authors.any? %>
           <%= f.association :categories, as: :check_boxes if @website.categories.any? %>
         </div>
       </div>

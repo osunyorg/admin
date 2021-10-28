@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_090402) do
+ActiveRecord::Schema.define(version: 2021_10_28_100510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -239,6 +239,8 @@ ActiveRecord::Schema.define(version: 2021_10_28_090402) do
     t.text "slug"
     t.text "path"
     t.text "github_path"
+    t.uuid "author_id"
+    t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
@@ -464,6 +466,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_090402) do
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
+  add_foreign_key "communication_website_posts", "communication_website_authors", column: "author_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"

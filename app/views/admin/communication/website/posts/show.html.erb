@@ -25,6 +25,12 @@
       </div>
       <table class="<%= table_classes %>">
         <tbody>
+          <% if @post.author %>
+            <tr>
+              <td width="150"><%= Communication::Website::Post.human_attribute_name('author') %></td>
+              <td><%= link_to_if can?(:read, @post.author), @post.author, admin_communication_website_author_path(@post.author) %></td>
+            </tr>
+          <% end %>
           <tr>
             <td width="150"><%= Communication::Website::Post.human_attribute_name('slug') %></td>
             <td><%= @post.slug %></td>

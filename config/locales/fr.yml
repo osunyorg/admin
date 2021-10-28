@@ -34,8 +34,8 @@ fr:
         one: Université
         other: Universités
       user:
-        one: Utilisateur
-        other: Utilisateurs
+        one: Utilisateur·rice
+        other: Utilisateur·rice·s
   admin:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
