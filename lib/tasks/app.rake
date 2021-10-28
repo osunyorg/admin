@@ -8,26 +8,8 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    language = Language.first
-    User.find_each { |user|
-      user.confirm
-      user.role ||= :visitor
-      user.language ||= language
-      user.save
-    }
-    University.find_each { |university|
-      university.sms_sender_name ||= 'Osuny'
-      university.save
-    }
-    Communication::Website::Post.find_each { |post|
-      post.update(text: post.old_text)
-    }
-    Communication::Website::Page.find_each { |page|
-      page.update(text: page.old_text)
-    }
-    Communication::Website::Medium.find_each { |medium|
-      medium.send(:set_featured_images)
-    }
+    Communication::Website::Post.find_each { |post| post.update(text: post.old_text) }
+    Communication::Website::Page.find_each { |page| page.update(text: page.old_text) }
   end
 
   namespace :db do
