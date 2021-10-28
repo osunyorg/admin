@@ -13,7 +13,7 @@
         <td><%= link_to post, admin_communication_website_post_path(website_id: post.website.id, id: post.id) %></td>
         <td><%= image_tag post.featured_image.representation(resize: 'x100'),
                           height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
-        <td><%= l post.published_at, format: :long if post.published_at %></td>
+        <td><small><%= l post.published_at, format: :date_with_hour if post.published_at %></small></td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),

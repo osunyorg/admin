@@ -118,6 +118,11 @@ fr:
   show: Voir
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://osuny.org/conditions-d-utilisation
+  time:
+    formats:
+      date_only: "%d/%m/%Y"
+      date_with_explicit_month: "%d %B %Y"
+      date_with_hour: "%d %B %Y %H:%M"
   true: Oui
   validate: Valider
   views:
