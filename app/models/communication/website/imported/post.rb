@@ -48,7 +48,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
              optional: true
 
   before_validation :sync
-  after_save :sync_attachments
+  after_commit :sync_attachments, on: [:create, :update]
 
   default_scope { order(path: :desc) }
 
@@ -82,7 +82,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
       # Continue only if there are remote changes
       # Don't touch if there are local changes (post.updated_at > updated_at)
       # Don't touch if there are no remote changes (post.updated_at == updated_at)
-      # return unless updated_at > post.updated_at
+      return unless updated_at > post.updated_at
     end
     puts "Update post #{post.id}"
     sanitized_title = Wordpress.clean_string self.title.to_s
@@ -98,6 +98,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
   end
 
   def sync_attachments
+    return unless updated_at > post.updated_at
     if featured_medium.present?
       unless featured_medium.file.attached? && featured_medium.file.blob.persisted?
         featured_medium.load_remote_file!
