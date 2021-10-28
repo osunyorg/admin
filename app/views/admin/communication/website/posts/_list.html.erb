@@ -30,7 +30,7 @@
           <td>
             <ul class="list-unstyled mb-0">
               <% post.categories.each do |category| %>
-                <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+                <li><%= link_to_if can?(:read, category), category, admin_communication_website_category_path(website_id: post.website.id, id: category.id) %></li>
               <% end %>
             </ul>
           </td>

@@ -11,7 +11,7 @@
           <strong><%= Communication::Website::Post.human_attribute_name('description') %></strong>
         </p>
         <%= sanitize @post.description %>
-        <p>
+        <p class="mt-4">
           <strong><%= Communication::Website::Post.human_attribute_name('text') %></strong>
         </p>
         <%= @post.text %>
