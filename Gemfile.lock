@@ -79,7 +79,7 @@ GEM
     autoprefixer-rails (10.3.3.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.519.0)
+    aws-partitions (1.520.0)
     aws-sdk-core (3.121.3)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -330,7 +330,7 @@ GEM
     simple_form_bs5_file_input (0.0.3)
       rails
       simple_form
-    simple_form_password_with_hints (0.0.5)
+    simple_form_password_with_hints (0.0.6)
       rails
       simple_form
     sinatra (2.1.0)
@@ -429,4 +429,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.29
+   2.2.30
