@@ -87,7 +87,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
       # updated_at reflects last update on wordpress, based on the last import
       # Don't touch if there are local changes (post.updated_at > updated_at)
       # Don't touch if there are no remote changes (post.updated_at == updated_at)
-      # return unless updated_at > post.updated_at
+      return unless updated_at > post.updated_at
     end
     puts "Update post #{post.id}"
     sanitized_title = Wordpress.clean_string self.title.to_s
