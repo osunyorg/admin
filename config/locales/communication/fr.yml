@@ -79,6 +79,7 @@ fr:
         title: Titre
         website: Site Web
       communication/website/post:
+        author: Auteur·rice
         categories: Categories
         description: Description (SEO)
         featured_image: Image à la une

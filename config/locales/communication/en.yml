@@ -80,11 +80,12 @@ en:
         slug: Slug
         website: Website
       communication/website/post:
-        title: Title
+        author: Author
         description: Description (SEO)
         featured_image: Featured image
         slug: Slug
         text: Text
+        title: Title
         published: Published ?
         published_at: Publication date
         website: Website

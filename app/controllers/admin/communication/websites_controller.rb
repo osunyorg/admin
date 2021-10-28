@@ -22,6 +22,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
     @imported_website = @website.imported_website
     @imported_pages = @imported_website.pages.page params[:pages_page]
     @imported_posts = @imported_website.posts.page params[:posts_page]
+    @imported_authors = @imported_website.authors.page params[:authors_page]
     @imported_categories = @imported_website.categories
     @imported_media = @imported_website.media.includes(file_attachment: :blob ).page params[:media_page]
     @imported_media_total_size = @imported_website.media.joins(file_attachment: :blob).sum(:byte_size)
