@@ -23,6 +23,8 @@ class Communication::Website::Imported::Website < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website'
+  has_many   :authors,
+             class_name: 'Communication::Website::Imported::Author'
   has_many   :categories,
              class_name: 'Communication::Website::Imported::Category'
   has_many   :media,
@@ -33,6 +35,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
              class_name: 'Communication::Website::Imported::Post'
 
   def run!
+    sync_authors
     sync_categories
     sync_media
     sync_pages
@@ -44,6 +47,14 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def wordpress
     @wordpress ||= Wordpress.new website.domain_url
+  end
+
+  def sync_authors
+    wordpress.authors.each do |data|
+      author = authors.where(university: university, identifier: data['id']).first_or_initialize
+      author.data = data
+      author.save
+    end
   end
 
   def sync_categories
