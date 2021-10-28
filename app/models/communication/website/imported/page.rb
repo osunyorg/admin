@@ -44,7 +44,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
   belongs_to :page,
              class_name: 'Communication::Website::Page',
              optional: true
-  alias_attribute :generated_object, :category
+  alias_attribute :generated_object, :page
   belongs_to :featured_medium,
              class_name: 'Communication::Website::Imported::Medium',
              optional: true
