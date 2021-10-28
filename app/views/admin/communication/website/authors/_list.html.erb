@@ -1,0 +1,27 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Communication::Website::Author.human_attribute_name('name') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% authors.each do |author| %>
+      <tr>
+        <td><%= link_to author, admin_communication_website_author_path(website_id: author.website.id, id: author.id) %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                      edit_admin_communication_website_author_path(website_id: author.website.id, id: author.id),
+                      class: button_classes %>
+            <%= link_to t('delete'),
+                      admin_communication_website_author_path(website_id: author.website.id, id: author.id),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

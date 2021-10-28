@@ -25,6 +25,9 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/author:
+        one: Author
+        other: Authors
       communication/website/category:
         one: Category
         other: Categories
@@ -49,12 +52,19 @@ en:
         about_: Independent website (no specific subject)
         about_Research::Journal: Journal website
         about_Education::School: School website
+      communication/website/author:
+        biography: Biography
+        first_name: First name
+        last_name: Last name
+        name: Name
+        slug: Slug
+        user: User
       communication/website/category:
         children: Children categories
         description: Description
         name: Name
         parent: Parent category
-        slug: slug
+        slug: Slug
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -67,13 +77,13 @@ en:
         text: Text
         published: Published ?
         parent: Parent page
-        slug: slug
+        slug: Slug
         website: Website
       communication/website/post:
         title: Title
         description: Description (SEO)
         featured_image: Featured image
-        slug: slug
+        slug: Slug
         text: Text
         published: Published ?
         published_at: Publication date

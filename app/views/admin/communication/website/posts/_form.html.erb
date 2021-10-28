@@ -18,7 +18,7 @@
           <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :slug, as: :string %>
+          <%= f.input :slug, as: :string if post.persisted? %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
           <%= f.association :categories, as: :check_boxes if @website.categories.any? %>

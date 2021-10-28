@@ -20,6 +20,7 @@ namespace :communication do
         get :children
       end
     end
+    resources :authors, controller: 'website/authors'
     resources :posts, controller: 'website/posts'
   end
 end

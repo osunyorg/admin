@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, category] do |f| %>
+<%= simple_form_for [:admin, author] do |f| %>
   <div class="row">
     <div class="col-md-8">
       <div class="card flex-fill w-100">
@@ -6,8 +6,9 @@
           <h5 class="card-title mb-0"><%= t('communication.website.content') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :name %>
-          <%= f.input :description %>
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+          <%= f.input :biography, as: :rich_text_area %>
         </div>
       </div>
     </div>
@@ -17,8 +18,8 @@
           <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :slug, as: :string if category.persisted? %>
-          <%= f.association :parent, collection: category.list_of_other_categories, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <%= f.input :slug, as: :string if author.persisted? %>
+          <%= f.association :user, collection: current_university.users.ordered %>
           <ul>
           </ul>
         </div>

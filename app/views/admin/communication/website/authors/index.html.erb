@@ -1,0 +1,9 @@
+<% content_for :title, "#{Communication::Website::Author.model_name.human(count: 2)} (#{@authors.total_count})" %>
+
+<%= render 'admin/communication/website/authors/list', authors: @authors %>
+<%= paginate @authors, theme: 'bootstrap-5' %>
+
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Author %>
+<% end %>

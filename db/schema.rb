@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_131939) do
+ActiveRecord::Schema.define(version: 2021_10_28_090402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,6 +76,20 @@ ActiveRecord::Schema.define(version: 2021_10_27_131939) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
+  end
+
+  create_table "communication_website_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "user_id"
+    t.uuid "communication_website_id", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "idx_comm_website_authors_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_authors_on_university_id"
+    t.index ["user_id"], name: "index_communication_website_authors_on_user_id"
   end
 
   create_table "communication_website_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -426,6 +440,9 @@ ActiveRecord::Schema.define(version: 2021_10_27_131939) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_authors", "communication_websites"
+  add_foreign_key "communication_website_authors", "universities"
+  add_foreign_key "communication_website_authors", "users"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "universities"
