@@ -36,6 +36,7 @@ class Communication::Website::Imported::Category < ApplicationRecord
   belongs_to :category,
              class_name: 'Communication::Website::Category',
              optional: true
+  alias_attribute :generated_object, :category
 
   before_validation :sync
 

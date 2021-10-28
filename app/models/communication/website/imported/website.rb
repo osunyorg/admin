@@ -52,6 +52,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
       category.data = data
       category.save
     end
+    sync_tree(categories)
   end
 
   def sync_media
@@ -70,15 +71,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
         page.data = data
         page.save
       end
-      # The order will treat parents before children
-      pages.order(:url).find_each do |page|
-        next if page.parent.blank?
-        parent = pages.where(identifier: page.parent).first
-        next if parent.nil?
-        generated_page = page.page
-        generated_page.parent = parent.page
-        generated_page.save
-      end
+      sync_tree(pages)
       # Batch update all changes (1 query only, good for github API limits)
       github = Github.with_site website
       if github.valid?
@@ -112,6 +105,18 @@ class Communication::Website::Imported::Website < ApplicationRecord
       github.commit_batch '[Post] Batch update from import' if github.valid?
     ensure
       Communication::Website::Post.set_callback(:save, :after, :publish_to_github)
+    end
+  end
+
+  def sync_tree(elements)
+    # The order will treat parents before children
+    elements.order(:url).find_each do |element|
+      next if element.parent.blank?
+      parent = elements.where(identifier: element.parent).first
+      next if parent.nil?
+      generated_element = element.generated_object
+      generated_element.parent = parent.generated_object
+      generated_element.save
     end
   end
 end

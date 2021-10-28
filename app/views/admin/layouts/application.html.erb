@@ -31,8 +31,10 @@
         <%= render 'admin/application/top' %>
         <main class="content">
           <div class="container-fluid p-0">
-            <p class="float-end text-end pt-1"><%= yield :title_right %></p>
-            <h1><%= yield :title %></h1>
+            <div class="d-flex justify-content-between">
+              <h1><%= yield :title %></h1>
+              <p class="text-end pt-1"><%= yield :title_right %></p>
+            </div>
             <%= yield %>
           </div>
         </main>
