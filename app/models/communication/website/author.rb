@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  first_name               :string
+#  github_path              :text
 #  last_name                :string
 #  slug                     :string
 #  created_at               :datetime         not null
@@ -25,6 +26,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Communication::Website::Author < ApplicationRecord
+  include WithGithub
   include WithSlug
 
   has_rich_text :biography
@@ -41,6 +43,18 @@ class Communication::Website::Author < ApplicationRecord
 
   def to_s
     "#{last_name} #{first_name}"
+  end
+
+  def github_path_generated
+    "_authors/#{slug}.html"
+  end
+
+  def to_jekyll
+    ApplicationController.render(
+      template: 'admin/communication/website/authors/jekyll',
+      layout: false,
+      assigns: { author: self }
+    )
   end
 
 end

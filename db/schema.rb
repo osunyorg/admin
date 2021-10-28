@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_123841) do
+ActiveRecord::Schema.define(version: 2021_10_28_155138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_123841) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "github_path"
     t.index ["communication_website_id"], name: "idx_comm_website_authors_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_authors_on_university_id"
     t.index ["user_id"], name: "index_communication_website_authors_on_user_id"
@@ -102,6 +103,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_123841) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.uuid "parent_id"
+    t.text "github_path"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
