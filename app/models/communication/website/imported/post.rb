@@ -101,7 +101,10 @@ class Communication::Website::Imported::Post < ApplicationRecord
 
     imported_author = website.authors.where(identifier: author).first
     post.author = imported_author.author if imported_author.author
-
+    imported_categories = website.categories.where(identifier: categories)
+    imported_categories.each do |imported_category|
+      post.categories << imported_category.category unless post.categories.pluck(:id).include?(imported_category.category_id)
+    end
     post.save
   end
 

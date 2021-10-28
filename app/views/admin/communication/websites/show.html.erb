@@ -10,31 +10,49 @@
   <% end %>
 <% end %>
 
-<div class="row">
-  <div class="col-md-7">
-    <div class="card mt-5">
-      <div class="card-header">
-        <div class="float-end">
-          <%= link_to_if can?(:create, Communication::Website::Post),
-                      t('create'),
-                      new_admin_communication_website_post_path(website_id: @website),
-                      class: button_classes %>
-        </div>
-        <h2 class="card-title">
-          <%= link_to admin_communication_website_posts_path(website_id: @website) do %>
-            <%= t('communication.website.last_posts') %>
-            <small>
-              -
-              <%= t('communication.website.see_all', number: @website.posts.count) %>
-            </small>
-          <% end %>
-        </h2>
-      </div>
-      <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent %>
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to_if can?(:create, Communication::Website::Post),
+                  t('create'),
+                  new_admin_communication_website_post_path(website_id: @website),
+                  class: button_classes %>
     </div>
+    <h2 class="card-title">
+      <%= link_to admin_communication_website_posts_path(website_id: @website) do %>
+        <%= t('communication.website.last_posts') %>
+        <small>
+          -
+          <%= t('communication.website.see_all', number: @website.posts.count) %>
+        </small>
+      <% end %>
+    </h2>
   </div>
+  <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent %>
+</div>
 
-  <div class="col-md-5">
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('create'),
+                  new_admin_communication_website_page_path(website_id: @website),
+                  class: button_classes %>
+    </div>
+    <h2 class="card-title">
+      <%= link_to admin_communication_website_pages_path(website_id: @website) do %>
+        <%= t('communication.website.last_pages') %>
+        <small>
+          -
+          <%= t('communication.website.see_all', number: @website.pages.count) %>
+        </small>
+      <% end %>
+    </h2>
+  </div>
+  <%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
     <div class="card mt-5">
       <div class="card-header">
         <div class="float-end">
@@ -55,33 +73,28 @@
       <%= render 'admin/communication/website/categories/list', categories: @website.categories.root.ordered %>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="card mt-5">
       <div class="card-header">
         <div class="float-end">
           <%= link_to t('create'),
-                      new_admin_communication_website_page_path(website_id: @website),
+                      new_admin_communication_website_author_path(website_id: @website),
                       class: button_classes %>
         </div>
         <h2 class="card-title">
-          <%= link_to admin_communication_website_pages_path(website_id: @website) do %>
-            <%= t('communication.website.last_pages') %>
+          <%= link_to admin_communication_website_authors_path(website_id: @website) do %>
+            <%= Communication::Website::Author.model_name.human(count: 2) %>
             <small>
               -
-              <%= t('communication.website.see_all', number: @website.pages.count) %>
+              <%= t('communication.website.see_all', number: @website.authors.count) %>
             </small>
           <% end %>
         </h2>
       </div>
-      <%= render 'admin/communication/website/pages/list', pages: @website.pages.recent %>
+      <%= render 'admin/communication/website/authors/list', authors: @website.authors.ordered %>
     </div>
   </div>
 </div>
-
-
 
 <% content_for :action_bar_right do %>
   <% if @website.imported? %>
