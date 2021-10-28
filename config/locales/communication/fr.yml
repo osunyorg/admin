@@ -25,6 +25,9 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/author:
+        one: Auteur
+        other: Auteurs
       communication/website/category:
         one: Catégorie
         other: Catégories
@@ -48,12 +51,19 @@ fr:
         about_: Site indépendant (aucun sujet)
         about_Research::Journal: Site de revue scientifique
         about_Education::School: Site d'école
+      communication/website/author:
+        biography: Biographie
+        first_name: Prénom
+        last_name: Nom de famille
+        name: Nom
+        slug: Slug
+        user: Utilisateur
       communication/website/category:
         children: Catégories enfantes
         description: Description
         name: Nom
         parent: Catégorie parente
-        slug: slug
+        slug: Slug
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -64,7 +74,7 @@ fr:
         featured_image: Image à la une
         parent: Page parente
         published: Publié ?
-        slug: slug
+        slug: Slug
         text: Texte
         title: Titre
         website: Site Web
@@ -74,7 +84,7 @@ fr:
         featured_image: Image à la une
         published: Publié ?
         published_at: Date de publication
-        slug: slug
+        slug: Slug
         text: Texte
         title: Titre
         website: Site Web

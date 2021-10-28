@@ -1,0 +1,46 @@
+<% content_for :title, @author %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('communication.website.content') %></h5>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong><%= Communication::Website::Author.human_attribute_name('biography') %></strong>
+        </p>
+        <%= sanitize @author.biography %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('communication.website.metadata') %></h5>
+      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td width="150"><%= Communication::Website::Author.human_attribute_name('slug') %></td>
+            <td><%= @author.slug %></td>
+          </tr>
+          <% if @author.user %>
+            <tr>
+              <td width="150"><%= Communication::Website::Author.human_attribute_name('user') %></td>
+              <td><%= link_to_if can?(:read, @author.user), @author.user, admin_user_path(@author.user) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @author %>
+<% end %>
