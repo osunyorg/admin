@@ -1,10 +1,18 @@
+<%
+  hide_author |= false
+  hide_category |= false
+%>
 <table class="<%= table_classes %>">
   <thead>
     <tr>
       <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
-      <th><%= Communication::Website::Post.human_attribute_name('author') %></th>
-      <th><%= Communication::Website::Post.human_attribute_name('categories') %></th>
+      <% unless hide_author %>
+        <th><%= Communication::Website::Post.human_attribute_name('author') %></th>
+      <% end %>
+      <% unless hide_category %>
+        <th><%= Communication::Website::Post.human_attribute_name('categories') %></th>
+      <% end %>
       <th><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
       <th></th>
     </tr>
@@ -15,14 +23,18 @@
         <td><%= link_to post, admin_communication_website_post_path(website_id: post.website.id, id: post.id) %></td>
         <td><%= image_tag post.featured_image.representation(resize: 'x100'),
                           height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
-        <td><%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) if post.author %></td>
-        <td>
-          <ul class="list-unstyled mb-0">
-            <% post.categories.each do |category| %>
-              <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
-            <% end %>
-          </ul>
-        </td>
+        <% unless hide_author %>
+          <td><%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) if post.author %></td>
+        <% end %>
+        <% unless hide_category %>
+          <td>
+            <ul class="list-unstyled mb-0">
+              <% post.categories.each do |category| %>
+                <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+              <% end %>
+            </ul>
+          </td>
+        <% end %>
         <td><small><%= l post.published_at, format: :date_with_hour if post.published_at %></small></td>
         <td class="text-end">
           <div class="btn-group" role="group">

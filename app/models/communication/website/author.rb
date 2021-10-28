@@ -33,6 +33,9 @@ class Communication::Website::Author < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :website,
              foreign_key: :communication_website_id
+  has_many :posts,
+           class_name: 'Communication::Website::Post',
+           dependent: :nullify
 
   scope :ordered, -> { order(:last_name, :first_name) }
 
