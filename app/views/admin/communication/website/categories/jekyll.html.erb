@@ -1,0 +1,9 @@
+---
+name: "<%= @category.name %>"
+slug: "<%= @category.slug %>"
+identifier: "<%= @category.id %>"
+parent: "<%= @category.parent_id %>"
+description: >
+  <%= prepare_for_github @category.description %>
+---
+<%= @category.github_frontmatter.content.html_safe %>
