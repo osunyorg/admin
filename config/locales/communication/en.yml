@@ -1,7 +1,6 @@
 en:
   communication:
     website:
-      content: Content
       imported:
         from: Imported from
         launch: Launch import
@@ -15,7 +14,6 @@ en:
         pending: Import in progress
       last_pages: Last pages
       last_posts: Last posts
-      metadata: Metadata
       see_all: See the full list (%{number} elements)
   activemodel:
     models:

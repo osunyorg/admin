@@ -3,8 +3,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= Research::Researcher.human_attribute_name('first_name') %></th>
       <th><%= Research::Researcher.human_attribute_name('last_name') %></th>
+      <th><%= Research::Researcher.human_attribute_name('first_name') %></th>
       <th><%= Research::Researcher.human_attribute_name('user') %></th>
       <th></th>
     </tr>
@@ -13,8 +13,8 @@
   <tbody>
     <% @researchers.each do |researcher| %>
       <tr>
-        <td><%= link_to researcher.first_name, [:admin, researcher] %></td>
         <td><%= link_to researcher.last_name, [:admin, researcher] %></td>
+        <td><%= link_to researcher.first_name, [:admin, researcher] %></td>
         <td><%= link_to researcher.user, [:admin, researcher.user] if researcher.user %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
@@ -26,6 +26,8 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @researchers, theme: 'bootstrap-5' %>
+
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Researcher %>

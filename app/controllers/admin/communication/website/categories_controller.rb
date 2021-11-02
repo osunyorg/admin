@@ -41,7 +41,6 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   end
 
   def create
-    @category.university = current_university
     @category.website = @website
     if @category.save
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
@@ -81,6 +80,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
 
   def category_params
     params.require(:communication_website_category)
-          .permit(:university_id, :website_id, :name, :description, :slug, :parent_id)
+          .permit(:website_id, :name, :description, :slug, :parent_id)
+          .merge(university_id: current_university.id)
   end
 end

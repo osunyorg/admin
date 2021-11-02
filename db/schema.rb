@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_155138) do
+ActiveRecord::Schema.define(version: 2021_11_02_160400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -398,6 +398,8 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "github_path"
+    t.uuid "university_id"
+    t.index ["university_id"], name: "idx_researcher_university"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end
 
@@ -504,6 +506,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
+  add_foreign_key "research_researchers", "universities"
   add_foreign_key "research_researchers", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"

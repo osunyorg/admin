@@ -4,6 +4,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   def index
     @websites = current_university.communication_websites
     breadcrumb
+    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
   end
 
   def show

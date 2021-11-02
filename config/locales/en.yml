@@ -47,6 +47,7 @@ en:
     users_alerts:
       not_locked_html: '<i>%{model}</i> was not locked.'
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
+  content: Content
   cookies_consent_choice: Cookies consent choice
   cookies_policy: Cookies policy
   cookies_policy_url: https://osuny.org/politique-de-cookies
@@ -100,6 +101,7 @@ en:
     profile: Profil
     server_admin: Admin server
     sign_out: Log out
+  metadata: Metadata
   please-confirm: Are you sure?
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
