@@ -4,9 +4,9 @@
 
 <div class="row">
   <div class="col-md-5">
-    <div class="card">
+    <div class="card flex-fill w-100">
       <div class="card-header">
-        <h2 class="card-title"><%= t('admin.infos') %></h2>
+        <h2 class="card-title mb-0 h5"><%= t('admin.infos') %></h2>
       </div>
       <table class="table">
         <tr>
@@ -23,14 +23,20 @@
           <td><%= User.human_attribute_name('language') %></td>
           <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
         </tr>
+        <% if @user.researcher %>
+          <tr>
+            <td><%= User.human_attribute_name('researcher') %></td>
+            <td class="text-end"><%= link_to @user.researcher, [:admin, @user.researcher] %></td>
+          </tr>
+        <% end %>
       </table>
     </div>
   </div>
   <% if @user.picture.attached? %>
     <div class="col-md-3">
-      <div class="card">
+      <div class="card flex-fill w-100">
         <div class="card-header">
-          <h2 class="card-title"><%= t('activerecord.attributes.user.picture') %></h2>
+          <h2 class="card-title mb-0 h5"><%= t('activerecord.attributes.user.picture') %></h2>
         </div>
         <div class="card-body">
           <%= kamifusen_tag @user.picture, class: 'img-fluid' %>
@@ -39,15 +45,6 @@
     </div>
   <% end %>
 </div>
-
-
-<% if @user.researcher %>
-  <p>
-    <strong><%= User.human_attribute_name('researcher') %></strong>
-    <%= link_to @user.researcher, [:admin, @user.researcher] %>
-  </p>
-<% end %>
-
 
 
 <% content_for :action_bar_right do %>

@@ -2,5 +2,6 @@
 title: "<%= "#{ @researcher }"%>"
 first_name: "<%= @researcher.first_name %>"
 last_name: "<%= @researcher.last_name %>"
-biography: "<%= @researcher.biography %>"
+biography: >
+  <%= prepare_for_github @researcher.biography %>
 ---

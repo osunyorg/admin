@@ -3,10 +3,10 @@
 # Table name: research_researchers
 #
 #  id            :uuid             not null, primary key
-#  biography     :text
 #  first_name    :string
 #  github_path   :text
 #  last_name     :string
+#  old_biography :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid
@@ -23,6 +23,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Research::Researcher < ApplicationRecord
+  has_rich_text :biography
+
   belongs_to :university
   belongs_to :user, optional: true
   has_and_belongs_to_many :articles, class_name: 'Research::Journal::Article'

@@ -11,7 +11,7 @@ fr:
         one: Article
         other: Articles
       research/journal/volume:
-        one: Volume
+        one: Volumes
         other: Volumes
       research/researcher:
         one: Chercheu·r·se
@@ -29,8 +29,19 @@ fr:
         researchers: Auteu·rs·rices
         text: Texte
         title: Titre
+      research/journal/volume:
+        cover: Couverture
+        description: Description
+        keywords: Mots clés
+        number: Numéro
+        published_at: Publié le
+        title: Titre
       research/researcher:
         biography: Biographie
         first_name: Prénom
         last_name: Nom
         user: Utilisateur
+  simple_form:
+    hints:
+      research_journal_volume:
+        cover: Fichier JPG ou PNG

@@ -5,12 +5,10 @@
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0"><%= t('content') %></h5>
+        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
       </div>
       <div class="card-body">
-        <p>
-          <strong><%= Communication::Website::Category.human_attribute_name('description') %></strong>
-        </p>
+        <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('description') %></h3>
         <%= sanitize @category.description %>
       </div>
     </div>
@@ -19,7 +17,7 @@
   <div class="col-md-4">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
       </div>
       <table class="<%= table_classes %>">
         <tbody>
