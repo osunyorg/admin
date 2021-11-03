@@ -1,0 +1,8 @@
+<% content_for :title, "#{Communication::Website::Menu.model_name.human(count: 2)} (#{@menus.count})" %>
+
+<%= render 'admin/communication/website/menus/list', menus: @menus %>
+<%= paginate @menus, theme: 'bootstrap-5' %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Menu %>
+<% end %>

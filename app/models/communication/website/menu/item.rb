@@ -31,11 +31,48 @@
 #  fk_rails_...  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
+  include WithTree
+
   belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :menu, class_name: 'Communication::Website::Menu'
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
   belongs_to :about, polymorphic: true, optional: true
+  has_many :children,
+           class_name: 'Communication::Website::Menu::Item',
+           foreign_key: :parent_id,
+           dependent: :destroy
 
-  enum kind: { url: 0, page: 1 }
+  enum kind: { url: 0, page: 1 }, _prefix: :kind
+
+  validates :title, presence: true
+
+  before_create :set_position
+
+  scope :ordered, -> { order(position: :asc) }
+
+  def to_s
+    "#{title}"
+  end
+
+  def list_of_other_items
+    items = []
+    menu.items.where.not(id: id).root.ordered.each do |item|
+      items.concat(item.self_and_children(0))
+    end
+    items.reject! { |p| p[:id] == id }
+    items
+  end
+
+  protected
+
+  def set_position
+    last_element = menu.items.where(parent_id: parent_id).ordered.last
+
+    unless last_element.nil?
+      self.position = last_element.position + 1
+    else
+      self.position = 1
+    end
+  end
 end

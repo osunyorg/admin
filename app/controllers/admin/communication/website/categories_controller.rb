@@ -4,6 +4,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
+    @categories = @website.categories.ordered
     breadcrumb
   end
 

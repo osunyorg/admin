@@ -9,6 +9,15 @@ module WithTree
       children.any?
     end
 
+    def has_parent?
+      parent_id.present?
+    end
+
+    def ancestors
+      has_parent? ? parent.ancestors.push(parent)
+                  : []
+    end
+
     def self_and_children(level)
       pages = []
       label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s

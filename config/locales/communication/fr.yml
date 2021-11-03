@@ -33,6 +33,13 @@ fr:
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
+      communication/website/menu:
+        one: Menu
+        other: Menus
+        all: Tous les menus
+      communication/website/menu/item:
+        one: Élément
+        other: Éléments
       communication/website/page:
         one: Page
         other: Pages
@@ -66,6 +73,13 @@ fr:
         original: Original
       communication/website/imported/medium:
         filename: Nom du fichier
+      communication/website/menu:
+        identifier: Identifiant
+        title: Titre
+      communication/website/menu/item:
+        kind: Type
+        parent: Élément parent
+        title: Titre
       communication/website/page:
         children: Pages enfantes
         description: Description (SEO)

@@ -1,0 +1,27 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Communication::Website::Menu.human_attribute_name('title') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% menus.each do |menu| %>
+      <tr>
+        <td><%= link_to menu, admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id) %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                      edit_admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
+                      class: button_classes %>
+            <%= link_to t('delete'),
+                      admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

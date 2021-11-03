@@ -245,13 +245,13 @@ ActiveRecord::Schema.define(version: 2021_11_03_103742) do
 
   create_table "communication_website_menus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
+    t.uuid "communication_website_id", null: false
     t.string "title"
     t.string "identifier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "idx_comm_website_menus_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_menus_on_website_id"
   end
 
   create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -522,7 +522,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_103742) do
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_menu_items", "universities"
-  add_foreign_key "communication_website_menus", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_menus", "communication_websites"
   add_foreign_key "communication_website_menus", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
