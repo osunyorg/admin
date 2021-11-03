@@ -36,7 +36,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
-  belongs_to :menu, class_name: 'Communication::Website::Menu'
+  belongs_to :menu, class_name: 'Communication::Website::Menu', touch: true
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
   belongs_to :about, polymorphic: true, optional: true
   has_many :children,
@@ -56,6 +56,12 @@ class Communication::Website::Menu::Item < ApplicationRecord
     "#{title}"
   end
 
+  def jekyll_target
+    return url if kind_url?
+    return about&.path if kind_page?
+    return nil if kind_blank?
+  end
+
   def list_of_other_items
     items = []
     menu.items.where.not(id: id).root.ordered.each do |item|
@@ -63,6 +69,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
     end
     items.reject! { |p| p[:id] == id }
     items
+  end
+
+  def to_jekyll_hash
+    {
+      'title' => title,
+      'target' => jekyll_target,
+      'children' => children.ordered.map(&:to_jekyll_hash)
+    }
   end
 
   protected

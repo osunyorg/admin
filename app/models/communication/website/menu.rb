@@ -21,6 +21,8 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Menu < ApplicationRecord
+  include WithGithub
+
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
@@ -28,9 +30,23 @@ class Communication::Website::Menu < ApplicationRecord
   validates :title, :identifier, presence: true
   validates :identifier, uniqueness: { scope: :communication_website_id }
 
+  after_touch :publish_to_github
+
   scope :ordered, -> { order(created_at: :asc) }
 
   def to_s
     "#{title}"
+  end
+
+  def github_path_generated
+    "_data/menu.yml"
+  end
+
+  def to_jekyll
+    website.menus.map { |menu|
+      {
+        menu.identifier => menu.items.root.ordered.map(&:to_jekyll_hash)
+      }
+    }.to_yaml
   end
 end
