@@ -8,7 +8,10 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :kind, include_blank: false %>
+          <%= f.input :kind, include_blank: false, class: 'js-kind-input' %>
+          <div class="kind-url">
+            <%= f.input :url, as: :string %>
+          </div>
         </div>
       </div>
     </div>

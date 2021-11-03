@@ -10,4 +10,9 @@
 //= require gdpr/cookie_consent
 //= require trix
 //= require sortablejs/Sortable
-//= require_tree ./admin
+//= require_self
+//= require_tree ./admin/commons
+//= require_tree ./admin/plugins
+//= require ./admin/communication/init
+
+window.osuny = {};

@@ -7,6 +7,7 @@
 #  kind          :integer          default("url")
 #  position      :integer
 #  title         :string
+#  url           :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid

@@ -80,6 +80,7 @@ fr:
         kind: Type
         parent: Élément parent
         title: Titre
+        url: URL
       communication/website/page:
         children: Pages enfantes
         description: Description (SEO)
