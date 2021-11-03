@@ -71,6 +71,7 @@ Attributes:
 ## Export du menu
 
 /data/menu.yml
+
 ```yaml
 primary:
     - title: Accueil
