@@ -78,7 +78,7 @@ class Admin::Communication::Website::Menu::ItemsController < Admin::Communicatio
 
   def item_params
     params.require(:communication_website_menu_item)
-          .permit(:title, :kind, :url, :parent_id)
+          .permit(:title, :kind, :url, :parent_id, :about_type, :about_id)
           .merge(university_id: current_university.id)
   end
 end

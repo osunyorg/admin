@@ -12,6 +12,17 @@
             <td width="150"><%= Communication::Website::Menu::Item.human_attribute_name('kind') %></td>
             <td><%= @item.kind %></td>
           </tr>
+          <% if @item.kind_url? %>
+            <tr>
+              <td width="150"><%= Communication::Website::Menu::Item.human_attribute_name('url') %></td>
+              <td><%= link_to @item.url, @item.url, target: :blank unless @item.url.blank? %></td>
+            </tr>
+          <% else %>
+            <tr>
+              <td width="150"><%= Communication::Website::Menu::Item.human_attribute_name('about') %></td>
+              <td><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about] %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
