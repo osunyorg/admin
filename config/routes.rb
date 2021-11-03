@@ -26,5 +26,7 @@ Rails.application.routes.draw do
     root to: 'dashboard#index'
   end
 
+  get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
+
   root to: 'admin/dashboard#index'
 end
