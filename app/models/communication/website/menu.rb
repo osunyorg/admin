@@ -3,6 +3,7 @@
 # Table name: communication_website_menus
 #
 #  id                       :uuid             not null, primary key
+#  github_path              :text
 #  identifier               :string
 #  title                    :string
 #  created_at               :datetime         not null
