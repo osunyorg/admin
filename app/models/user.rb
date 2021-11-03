@@ -53,8 +53,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class User < ApplicationRecord
-  # In this order, "resize avatar" callback will be fired after the others.
-  include WithAvatar
+  has_one_attached_deletable :picture  # In this order, "resize avatar" callback will be fired after the others.
   include WithAuthentication
   include WithRoles
   include WithSyncBetweenUniversities

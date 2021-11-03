@@ -369,7 +369,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_141506) do
 
   create_table "research_journal_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.text "text"
+    t.text "old_text"
     t.date "published_at"
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
@@ -424,7 +424,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_141506) do
   create_table "research_researchers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.text "biography"
+    t.text "old_biography"
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -29,8 +29,19 @@ en:
         researchers: Authors
         text: Text
         title: Title
+      research/journal/volume:
+        cover: Cover
+        description: Description
+        keywords: Keywords
+        number: Number
+        published_at: Published at
+        title: Title
       research/researcher:
         biography: Biography
         first_name: First name
         last_name: Last name
         user: User
+  simple_form:
+    hints:
+      research_journal_volume:
+        cover: JPG or PNG file

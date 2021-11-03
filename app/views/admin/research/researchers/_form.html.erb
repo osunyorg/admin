@@ -6,7 +6,7 @@
     <%= f.association :user, collection: current_university.users.ordered %>
   </div>
   <div class="col-md-8">
-    <%= f.input :biography, input_html: { rows: 5 } %>
+    <%= f.input :biography, as: :rich_text_area %>
   </div>
 </div>
   <% content_for :action_bar_right do %>
