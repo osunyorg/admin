@@ -21,7 +21,6 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def create
-    @post.university = current_university
     @post.website = @website
     if @post.save
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
@@ -58,5 +57,6 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   def post_params
     params.require(:communication_website_post)
           .permit(:university_id, :website_id, :title, :description, :text, :published, :published_at, :featured_image, :featured_image_delete, :featured_image_infos, :slug, :author_id, category_ids: [])
+          .merge(university_id: current_university.id)
   end
 end

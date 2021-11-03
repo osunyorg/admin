@@ -26,6 +26,8 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @journals, theme: 'bootstrap-5' %>
+
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Journal %>

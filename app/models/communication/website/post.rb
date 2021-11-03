@@ -30,8 +30,8 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Post < ApplicationRecord
-  include WithSlug
   include WithGithub
+  include WithSlug
 
   has_rich_text :text
   has_one_attached_deletable :featured_image

@@ -47,6 +47,7 @@ fr:
     users_alerts:
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
+  content: Contenu
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
   cookies_policy_url: https://osuny.org/politique-de-cookies
@@ -100,6 +101,7 @@ fr:
     profile: Profil
     server_admin: Admin serveur
     sign_out: Déconnexion
+  metadata: Informations
   please-confirm: Est-ce que vous confirmez ?
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite

@@ -57,6 +57,8 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   end
 
   def article_params
-    params.require(:research_journal_article).permit(:title, :text, :published_at, :abstract, :pdf, :references, :keywords, :research_journal_volume_id, researcher_ids: [])
+    params.require(:research_journal_article)
+          .permit(:title, :text, :published_at, :abstract, :pdf, :references, :keywords, :research_journal_volume_id, researcher_ids: [])
+          .merge(university_id: current_university.id)
   end
 end

@@ -22,7 +22,6 @@ class Admin::Communication::Website::AuthorsController < Admin::Communication::W
   end
 
   def create
-    @author.university = current_university
     @author.website = @website
     if @author.save
       redirect_to admin_communication_website_author_path(@author), notice: t('admin.successfully_created_html', model: @author.to_s)
@@ -58,6 +57,7 @@ class Admin::Communication::Website::AuthorsController < Admin::Communication::W
 
   def author_params
     params.require(:communication_website_author)
-          .permit(:university_id, :website_id, :first_name, :last_name, :biography, :slug, :user_id)
+          .permit(:website_id, :first_name, :last_name, :biography, :slug, :user_id)
+          .merge(university_id: current_university.id)
   end
 end
