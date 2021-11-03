@@ -45,9 +45,7 @@ class Communication::Website::Menu < ApplicationRecord
 
   def to_jekyll
     website.menus.map { |menu|
-      {
-        menu.identifier => menu.items.root.ordered.map(&:to_jekyll_hash)
-      }
-    }.to_yaml
+      [menu.identifier, menu.items.root.ordered.map(&:to_jekyll_hash)]
+    }.to_h.to_yaml
   end
 end
