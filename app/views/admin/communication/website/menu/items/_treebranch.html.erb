@@ -1,0 +1,28 @@
+<% items.each do |item| %>
+  <li class="treeview__element js-treeview-element <%= 'treeview__element--empty' unless item.has_children? %>" data-id="<%= item.id %>" data-parent="<%= item.parent_id %>">
+    <div class="d-flex align-items-center treeview__label border-bottom p-1">
+      <%= link_to children_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
+                  class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
+        <% icon_style = item.has_children? ? 'fas' : 'far' %>
+        <span class="open_btn">
+          <i class="open_btn--with_children fas fa-folder"></i>
+          <i class="open_btn--without_children far fa-folder"></i>
+        </span>
+        <span class="close_btn">
+          <i class="close_btn--with_children fas fa-folder-open"></i>
+          <i class="close_btn--without_children far fa-folder-open"></i>
+        </span>
+      <% end %>
+      <%= link_to item, admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id) %>
+      <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
+    </div>
+    <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= item.id %>">
+      <li class="treeview__empty">
+        <div class="d-flex align-items-center treeview__label border-bottom p-1">
+          <span class="p-2 ps-0"><%= t('empty_folder') %></span>
+        </div>
+      </li>
+      <li class="treeview__loading border-bottom p-1"><%= t('loading') %></li>
+    </ul>
+  </li>
+<% end %>

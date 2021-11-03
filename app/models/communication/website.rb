@@ -39,6 +39,10 @@ class Communication::Website < ApplicationRecord
            class_name: 'Communication::Website::Author',
            foreign_key: :communication_website_id,
            dependent: :destroy
+  has_many :menus,
+           class_name: 'Communication::Website::Menu',
+           foreign_key: :communication_website_id,
+           dependent: :destroy
   has_one :imported_website,
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy

@@ -1,0 +1,30 @@
+<% content_for :title, @menu %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td width="150"><%= Communication::Website::Menu.human_attribute_name('identifier') %></td>
+            <td><%= @menu.identifier %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h2><%= "#{Communication::Website::Menu::Item.model_name.human(count: 2)} (#{@items.size})" %></h2>
+<%= link_to t('create'),
+            new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
+            class: button_classes %>
+
+<%= render 'admin/communication/website/menu/items/list', items: @root_items if @items.any? %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @menu %>
+<% end %>
