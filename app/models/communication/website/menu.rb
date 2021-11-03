@@ -40,7 +40,7 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def github_path_generated
-    "_data/menu.yml"
+    "_data/menus.yml"
   end
 
   def to_jekyll

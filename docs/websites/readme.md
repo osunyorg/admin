@@ -70,7 +70,7 @@ Attributes:
 
 ## Export du menu
 
-/data/menu.yml
+/_data/menus.yml
 
 ```yaml
 primary:
