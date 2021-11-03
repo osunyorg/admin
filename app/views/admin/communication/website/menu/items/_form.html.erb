@@ -8,7 +8,10 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :kind, include_blank: false, class: 'js-kind-input' %>
+          <%= f.input :kind,
+                      include_blank: false,
+                      label_method: -> (p) { I18n.t(p[1], scope: 'enums.communication/website/menu/item.kind') },
+                      class: 'js-kind-input' %>
           <div class="kind-url">
             <%= f.input :url, as: :string %>
           </div>

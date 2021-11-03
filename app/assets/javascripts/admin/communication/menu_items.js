@@ -23,8 +23,11 @@ window.osuny.communication.menuItems = {
         if (kind === 'url') {
             this.showElements(this.elementsForKindUrl, this.requiredInputsForKindUrl);
             this.hideElements(this.elementsForKindPage, this.requiredInputsForKindPage);
-        } else {
+        } else if (kind === 'page') {
             this.showElements(this.elementsForKindPage, this.requiredInputsForKindPage);
+            this.hideElements(this.elementsForKindUrl, this.requiredInputsForKindUrl);
+        } else if (kind === 'blank') {
+            this.hideElements(this.elementsForKindPage, this.requiredInputsForKindPage);
             this.hideElements(this.elementsForKindUrl, this.requiredInputsForKindUrl);
         }
     },

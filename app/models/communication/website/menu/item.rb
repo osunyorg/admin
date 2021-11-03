@@ -44,7 +44,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
 
-  enum kind: { url: 0, page: 1 }, _prefix: :kind
+  enum kind: { url: 0, page: 1, blank: 2 }, _prefix: :kind
 
   validates :title, presence: true
 

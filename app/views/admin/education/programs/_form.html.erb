@@ -3,7 +3,7 @@
     <div class="col-md-4">
       <h2 class="h4">Informations essentielles</h2>
       <%= f.input :name %>
-      <%= f.input :level, include_blank: false %>
+      <%= f.input :level, include_blank: false, label_method: -> (p) { I18n.t(p[1], scope: 'enums.education/program.level') } %>
       <%= f.input :capacity %>
       <%= f.input :ects %>
       <%= f.input :continuing %>

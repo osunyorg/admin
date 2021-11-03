@@ -104,6 +104,12 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+  enums:
+    communication/website/menu/item:
+      kind:
+        blank: Vide
+        page: Page
+        url: URL
   simple_form:
     hints:
       communication_website_page:
