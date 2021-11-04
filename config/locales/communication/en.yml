@@ -107,7 +107,7 @@ en:
   enums:
     communication/website/menu/item:
       kind:
-        blank: Blank
+        blank: Title
         page: Page
         url: URL
   simple_form:

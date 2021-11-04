@@ -107,7 +107,7 @@ fr:
   enums:
     communication/website/menu/item:
       kind:
-        blank: Vide
+        blank: Titre intermédiaire
         page: Page
         url: URL
   simple_form:
