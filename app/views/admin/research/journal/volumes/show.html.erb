@@ -4,26 +4,46 @@
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h2 class="card-title mb-0 h5">Articles</h2>
+        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
       </div>
       <div class="card-body">
-        <%= render 'admin/research/journal/articles/list', articles: @volume.articles %>
+        <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('description') %></h3>
+        <p><%= @volume.description %></p>
+        <% if @volume.articles.any? %>
+          <h3 class="h5 mt-4"><%= Research::Journal::Volume.human_attribute_name('articles') %></h3>
+          <%= render 'admin/research/journal/articles/list', articles: @volume.articles %>
+        <% end %>
       </div>
     </div>
   </div>
   <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
+      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td width="150"><%= Research::Journal::Volume.human_attribute_name('number') %></td>
+            <td><%= @volume.number %></td>
+          </tr>
+          <tr>
+            <td width="150"><%= Research::Journal::Volume.human_attribute_name('published_at') %></td>
+            <td><%=l @volume.published_at.to_time, format: :date_with_explicit_month %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <% if @volume.cover.attached? %>
-      <%= image_tag @volume.cover, class: 'img-fluid img-thumbnail bg-light mb-4' %>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><%= Research::Journal::Volume.human_attribute_name('cover') %></h2>
+        </div>
+        <div class="card-body">
+          <%= kamifusen_tag @volume.cover, class: 'img-fluid' %>
+        </div>
+      </div>
     <% end %>
-    <p>
-      <span class="badge bg-secondary">
-        <%= @volume.number %>
-      </span>
-      <span class="float-end">
-        <%= @volume.published_at&.to_date %>
-      </span>
-    </p>
-    <%= @volume.description %>
   </div>
 </div>
 

@@ -47,3 +47,43 @@ Attributes:
 - campus:references (optional)
 - program:references (optional)
 - session:references (optional)
+
+## websites/Menu
+
+Attributes:
+- university:references
+- website:references
+- title:string
+- identifier:string
+
+## websites/menu/Item
+
+Attributes:
+- university:references
+- website:references
+- menu:references
+- title:string
+- parent:references
+- position:integer
+- kind:integer (enum: page, url)
+- about:references (polymorphic)
+
+## Export du menu
+
+/_data/menus.yml
+
+```yaml
+primary:
+    - title: Accueil
+      target: /
+    - title: Formations
+      target: /formations
+      children:
+          - title: DUT
+            target: /formations/dut
+    - title: ENT
+      target: https://ent.u-bordeaux3.fr
+legal:
+    - title: Mentions légales
+      target: /mentions-legales
+```

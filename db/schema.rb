@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_155138) do
+ActiveRecord::Schema.define(version: 2021_11_03_161133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -224,6 +224,38 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
     t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
   end
 
+  create_table "communication_website_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.uuid "menu_id", null: false
+    t.string "title"
+    t.integer "position"
+    t.integer "kind", default: 0
+    t.uuid "parent_id"
+    t.string "about_type"
+    t.uuid "about_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "url"
+    t.index ["about_type", "about_id"], name: "index_communication_website_menu_items_on_about"
+    t.index ["menu_id"], name: "index_communication_website_menu_items_on_menu_id"
+    t.index ["parent_id"], name: "index_communication_website_menu_items_on_parent_id"
+    t.index ["university_id"], name: "index_communication_website_menu_items_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_menu_items_on_website_id"
+  end
+
+  create_table "communication_website_menus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "title"
+    t.string "identifier"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "github_path"
+    t.index ["communication_website_id"], name: "idx_comm_website_menus_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
+  end
+
   create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
@@ -338,7 +370,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
 
   create_table "research_journal_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.text "text"
+    t.text "old_text"
     t.date "published_at"
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
@@ -393,11 +425,13 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
   create_table "research_researchers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.text "biography"
+    t.text "old_biography"
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "github_path"
+    t.uuid "university_id"
+    t.index ["university_id"], name: "idx_researcher_university"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end
 
@@ -486,6 +520,12 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
   add_foreign_key "communication_website_imported_posts", "universities"
   add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_websites", "universities"
+  add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
+  add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
+  add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_menu_items", "universities"
+  add_foreign_key "communication_website_menus", "communication_websites"
+  add_foreign_key "communication_website_menus", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
@@ -504,6 +544,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_155138) do
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
+  add_foreign_key "research_researchers", "universities"
   add_foreign_key "research_researchers", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"

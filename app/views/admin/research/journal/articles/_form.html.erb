@@ -3,13 +3,13 @@
     <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0">Content</h5>
+          <h5 class="card-title mb-0"><%= t('content') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :title, as: :text, input_html: { rows: 3 } %>
           <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
           <%= f.input :pdf %>
-          <%= f.input :text, input_html: { rows: 20 } %>
+          <%= f.input :text, as: :rich_text_area %>
           <%= f.input :references, as: :text, input_html: { rows: 10 } %>
         </div>
       </div>
@@ -17,13 +17,13 @@
     <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0">Metadata</h5>
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.association :volume, collection: @journal.volumes %>
+          <%= f.association :volume, collection: @journal.volumes, label: Research::Journal::Volume.model_name.human %>
           <%= f.input :published_at, html5: true %>
           <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
-          <%= f.association :researchers %>
+          <%= f.association :researchers, collection: current_university.researchers.ordered , multiple: true %>
         </div>
       </div>
     </div>

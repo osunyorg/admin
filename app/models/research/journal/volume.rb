@@ -25,13 +25,13 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
+  has_one_attached_deletable :cover
+
   include WithGithub
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id
-
-  has_one_attached :cover
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 

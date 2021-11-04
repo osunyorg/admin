@@ -2,6 +2,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   load_and_authorize_resource class: Research::Researcher
 
   def index
+    @researchers = current_university.researchers.ordered.page(params[:page])
     breadcrumb
   end
 
@@ -51,6 +52,8 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def researcher_params
-    params.require(:research_researcher).permit(:first_name, :last_name, :biography, :user_id)
+    params.require(:research_researcher)
+          .permit(:first_name, :last_name, :biography, :user_id)
+          .merge(university_id: current_university.id)
   end
 end

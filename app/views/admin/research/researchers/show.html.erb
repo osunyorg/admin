@@ -1,35 +1,44 @@
 <% content_for :title, @researcher %>
 
-<p>
-  <strong><%= Research::Researcher.human_attribute_name('first_name') %></strong>
-  <%= @researcher.first_name %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= Research::Researcher.human_attribute_name('biography') %></h3>
+        <%= @researcher.biography %>
+        <% if @researcher.articles.any? %>
+          <h3 class="h5 mt-4"><%= Research::Researcher.human_attribute_name('articles') %></h3>
+          <ul>
+            <% @researcher.articles.each do |article| %>
+              <li><%= link_to article, admin_research_journal_article_path(journal_id: article.journal.id, id: article) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
+      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <% if @researcher.user %>
+            <tr>
+              <td width="150"><%= Research::Researcher.human_attribute_name('user') %></td>
+              <td><%= link_to @researcher.user, [:admin, @researcher.user] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong><%= Research::Researcher.human_attribute_name('last_name') %></strong>
-  <%= @researcher.last_name %>
-</p>
-
-<p>
-  <strong><%= Research::Researcher.human_attribute_name('biography') %></strong>
-  <%= @researcher.biography %>
-</p>
-
-<% if @researcher.user %>
-  <p>
-    <strong><%= Research::Researcher.human_attribute_name('user') %></strong>
-    <%= link_to @researcher.user, [:admin, @researcher.user] %>
-  </p>
-<% end %>
-
-<p>
-  <strong><%= Research::Researcher.human_attribute_name('articles') %></strong>
-  <ul>
-    <% @researcher.articles.each do |article| %>
-      <li><%= link_to article, admin_research_journal_article_path(journal_id: article.journal.id, id: article) %></li>
-    <% end %>
-  </ul>
-</p>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @researcher %>

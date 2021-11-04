@@ -4,13 +4,13 @@
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h2 class="card-title mb-0 h5">Content</h2>
+        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
       </div>
       <div class="card-body">
         <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('abstract') %></h3>
         <p><%= @article.abstract %></p>
         <% if @article.pdf.attached? %>
-          <h3 class="h5 mt-4">PDF</h3>
+          <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('pdf') %></h3>
           <%= link_to @article.pdf.filename, url_for(@article.pdf) %>
         <% end %>
         <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('text') %></h3>
@@ -23,22 +23,40 @@
   <div class="col-md-4">
     <div class="card flex-fill w-100">
       <div class="card-header">
-        <h5 class="card-title mb-0">Metadata</h5>
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
       </div>
-      <div class="card-body">
-        <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('volume') %></h3>
-        <%= link_to @article.volume, [:admin, @article.volume] if @article.volume %>
-        <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('published_at') %></h3>
-        <p><%= @article.published_at&.to_date %></p>
-        <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('keywords') %></h3>
-        <p><%= @article.keywords %></p>
-        <h3 class="h5 mt-4"><%= Research::Journal::Article.human_attribute_name('researchers') %></h3>
-        <ul class="list-unstyled">
-          <% @article.researchers.each do |researcher| %>
-            <li><%= link_to researcher, [:admin, researcher] %></li>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <% if @article.volume %>
+            <tr>
+              <td width="150"><%= Research::Journal::Article.human_attribute_name('volume') %></td>
+              <td><%= link_to @article.volume, [:admin, @article.volume] %></td>
+            </tr>
           <% end %>
-        </ul>
-      </div>
+          <tr>
+            <td width="150"><%= Research::Journal::Article.human_attribute_name('published_at') %></td>
+            <td><%=l @article.published_at.to_time, format: :date_with_explicit_month %></td>
+          </tr>
+          <% unless @article.keywords.blank? %>
+            <tr>
+              <td width="150"><%= Research::Journal::Article.human_attribute_name('keywords') %></td>
+              <td><%= @article.keywords %></td>
+            </tr>
+          <% end %>
+          <% if @article.researchers.any? %>
+            <tr>
+              <td width="150"><%= Research::Journal::Article.human_attribute_name('researchers') %></td>
+              <td>
+                <ul class="list-unstyled">
+                  <% @article.researchers.each do |researcher| %>
+                    <li><%= link_to researcher, [:admin, researcher] %></li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
 
   </div>

@@ -4,27 +4,44 @@ fr:
       research: Recherche
   activerecord:
     models:
-      research/researcher:
-        one: Chercheu·r·se
-        other: Chercheu·rs·ses
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
-      research/journal/volume:
-        one: Volume
-        other: Volumes
       research/journal/article:
         one: Article
         other: Articles
+      research/journal/volume:
+        one: Volumes
+        other: Volumes
+      research/researcher:
+        one: Chercheu·r·se
+        other: Chercheu·rs·ses
     attributes:
       research/journal:
-        title: Titre
         issn: ISSN
-      research/journal/article:
         title: Titre
+      research/journal/article:
+        abstract: Extrait
+        keywords: Mots clés
+        pdf: PDF de l'article
+        published_at: Publié le
+        references: Références
         researchers: Auteu·rs·rices
+        text: Texte
+        title: Titre
+      research/journal/volume:
+        cover: Couverture
+        description: Description
+        keywords: Mots clés
+        number: Numéro
+        published_at: Publié le
+        title: Titre
       research/researcher:
+        biography: Biographie
         first_name: Prénom
         last_name: Nom
-        biography: Biographie
         user: Utilisateur
+  simple_form:
+    hints:
+      research_journal_volume:
+        cover: Fichier JPG ou PNG

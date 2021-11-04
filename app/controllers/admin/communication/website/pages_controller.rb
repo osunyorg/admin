@@ -40,7 +40,6 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def create
-    @page.university = current_university
     @page.website = @website
     if @page.save
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
@@ -80,9 +79,10 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def page_params
     params.require(:communication_website_page)
-          .permit(:university_id, :communication_website_id, :title,
+          .permit(:communication_website_id, :title,
             :description, :text, :about_type, :about_id, :slug, :published,
             :featured_image, :featured_image_delete, :featured_image_infos,
             :parent_id)
+          .merge(university_id: current_university.id)
   end
 end

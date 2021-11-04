@@ -26,6 +26,9 @@ class Research::Journal < ApplicationRecord
   has_many :volumes, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_id
 
+  scope :ordered, -> { order(:title) }
+
+
   def to_s
     "#{title}"
   end

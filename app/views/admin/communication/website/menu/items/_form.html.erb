@@ -1,0 +1,42 @@
+<%= simple_form_for item, url: item.persisted?  ? [:admin, item, { menu_id: @menu.id }]
+                                                : admin_communication_website_menu_items_path(@menu) do |f| %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('content') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :title %>
+          <%= f.input :kind,
+                      include_blank: false,
+                      label_method: -> (p) { I18n.t(p[1], scope: 'enums.communication/website/menu/item.kind') },
+                      class: 'js-kind-input' %>
+          <div class="kind-url">
+            <%= f.input :url, as: :string %>
+          </div>
+          <div class="kind-page">
+            <%= f.input :about_type, as: :hidden, input_html: { value: 'Communication::Website::Page' } %>
+            <%= f.association :about, collection: @website.pages.ordered %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.association :parent,
+                            collection: item.list_of_other_items,
+                            label_method: -> (p) { sanitize p[:label] },
+                            value_method: -> (p) { p[:id] } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

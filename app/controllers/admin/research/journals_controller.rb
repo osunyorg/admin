@@ -2,7 +2,9 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   load_and_authorize_resource class: Research::Journal
 
   def index
+    @journals = current_university.research_journals.ordered.page(params[:page])
     breadcrumb
+    add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path
   end
 
   def show
@@ -19,7 +21,6 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   end
 
   def create
-    @journal.university = current_university
     if @journal.save
       redirect_to [:admin, @journal], notice: t('admin.successfully_created_html', model: @journal.to_s)
     else
@@ -46,6 +47,8 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   protected
 
   def journal_params
-    params.require(:research_journal).permit(:title, :description, :issn, :access_token, :repository)
+    params.require(:research_journal)
+          .permit(:title, :description, :issn, :access_token, :repository)
+          .merge(university_id: current_university.id)
   end
 end

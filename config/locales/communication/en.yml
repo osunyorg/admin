@@ -1,7 +1,6 @@
 en:
   communication:
     website:
-      content: Content
       imported:
         from: Imported from
         launch: Launch import
@@ -15,7 +14,6 @@ en:
         pending: Import in progress
       last_pages: Last pages
       last_posts: Last posts
-      metadata: Metadata
       see_all: See the full list (%{number} elements)
   activemodel:
     models:
@@ -35,6 +33,13 @@ en:
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
+      communication/website/menu:
+        one: Menu
+        other: Menus
+        all: All menus
+      communication/website/menu/item:
+        one: Item
+        other: Items
       communication/website/page:
         one: Page
         other: Pages
@@ -68,6 +73,15 @@ en:
         original: Original
       communication/website/imported/medium:
         filename: Filename
+      communication/website/menu:
+        identifier: Identifier
+        title: Title
+      communication/website/menu/item:
+        about: Target
+        kind: Kind
+        parent: Parent item
+        title: Title
+        url: URL
       communication/website/page:
         children: Children pages
         description: Description (SEO)
@@ -84,12 +98,18 @@ en:
         categories: Categories
         description: Description (SEO)
         featured_image: Featured image
+        published: Published ?
+        published_at: Publication date
         slug: Slug
         text: Text
         title: Title
-        published: Published ?
-        published_at: Publication date
         website: Website
+  enums:
+    communication/website/menu/item:
+      kind:
+        blank: Blank
+        page: Page
+        url: URL
   simple_form:
     hints:
       communication_website_page:

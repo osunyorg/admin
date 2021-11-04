@@ -6,9 +6,9 @@
 #  abstract                   :text
 #  github_path                :text
 #  keywords                   :text
+#  old_text                   :text
 #  published_at               :date
 #  references                 :text
-#  text                       :text
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
@@ -34,12 +34,15 @@
 class Research::Journal::Article < ApplicationRecord
   include WithGithub
 
+  has_rich_text :text
+
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
   belongs_to :updated_by, class_name: 'User'
   has_and_belongs_to_many :researchers, class_name: 'Research::Researcher'
 
+  validates :title, :published_at, presence: true
   after_commit :update_researchers
 
   has_one_attached :pdf
@@ -73,8 +76,9 @@ class Research::Journal::Article < ApplicationRecord
   end
 
   def update_researchers
+    return unless website
     researchers.each do |researcher|
-      researcher.publish_to_website(journal.website)
+      researcher.publish_to_website(website)
     end
   end
 end

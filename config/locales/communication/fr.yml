@@ -1,7 +1,6 @@
 fr:
   communication:
     website:
-      content: Contenu
       imported:
         from: Importé depuis
         launch: Importer le site
@@ -15,7 +14,6 @@ fr:
         pending: Import en cours
       last_pages: Dernières pages
       last_posts: Dernières actualités
-      metadata: Informations
       see_all: Voir la liste complète (%{number} éléments)
   activemodel:
     models:
@@ -35,6 +33,13 @@ fr:
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
+      communication/website/menu:
+        one: Menu
+        other: Menus
+        all: Tous les menus
+      communication/website/menu/item:
+        one: Élément
+        other: Éléments
       communication/website/page:
         one: Page
         other: Pages
@@ -68,6 +73,15 @@ fr:
         original: Original
       communication/website/imported/medium:
         filename: Nom du fichier
+      communication/website/menu:
+        identifier: Identifiant
+        title: Titre
+      communication/website/menu/item:
+        about: Cible
+        kind: Type
+        parent: Élément parent
+        title: Titre
+        url: URL
       communication/website/page:
         children: Pages enfantes
         description: Description (SEO)
@@ -90,6 +104,12 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+  enums:
+    communication/website/menu/item:
+      kind:
+        blank: Vide
+        page: Page
+        url: URL
   simple_form:
     hints:
       communication_website_page:
