@@ -17,7 +17,7 @@
           </div>
           <div class="kind-page">
             <%= f.input :about_type, as: :hidden, input_html: { value: 'Communication::Website::Page' } %>
-            <%= f.association :about, collection: @website.pages.ordered %>
+            <%= f.association :about, collection: @website.list_of_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
           </div>
         </div>
       </div>

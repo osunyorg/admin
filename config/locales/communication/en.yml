@@ -78,6 +78,7 @@ en:
         title: Title
       communication/website/menu/item:
         about: Target
+        children: Children items
         kind: Kind
         parent: Parent item
         title: Title

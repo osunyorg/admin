@@ -78,6 +78,7 @@ fr:
         title: Titre
       communication/website/menu/item:
         about: Cible
+        children: Sous-éléments
         kind: Type
         parent: Élément parent
         title: Titre
