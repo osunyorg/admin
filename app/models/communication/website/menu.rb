@@ -3,6 +3,7 @@
 # Table name: communication_website_menus
 #
 #  id                       :uuid             not null, primary key
+#  github_path              :text
 #  identifier               :string
 #  title                    :string
 #  created_at               :datetime         not null
@@ -39,14 +40,12 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def github_path_generated
-    "_data/menu.yml"
+    "_data/menus.yml"
   end
 
   def to_jekyll
     website.menus.map { |menu|
-      {
-        menu.identifier => menu.items.root.ordered.map(&:to_jekyll_hash)
-      }
-    }.to_yaml
+      [menu.identifier, menu.items.root.ordered.map(&:to_jekyll_hash)]
+    }.to_h.to_yaml
   end
 end
