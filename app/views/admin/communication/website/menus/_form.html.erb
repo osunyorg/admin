@@ -16,7 +16,7 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :identifier %>
+          <%= f.input :identifier if can?(:create, menu) %>
         </div>
       </div>
     </div>

@@ -34,6 +34,8 @@ class Ability
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
+    can :manage, Communication::Website::Category, university_id: @user.university_id
+    can [:read, :update], Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Website, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Page, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
