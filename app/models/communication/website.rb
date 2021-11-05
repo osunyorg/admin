@@ -86,10 +86,10 @@ class Communication::Website < ApplicationRecord
   end
 
   def force_publish!
-    publish_authors
-    publish_categories
-    publish_pages
-    publish_posts
+    publish_authors!
+    publish_categories!
+    publish_pages!
+    publish_posts!
   end
   handle_asynchronously :force_publish!, queue: 'default'
 
