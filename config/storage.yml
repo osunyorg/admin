@@ -1,10 +1,14 @@
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
 test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-local:
+test_fixtures:
   service: Disk
-  root: <%= Rails.root.join("storage") %>
+  root: <%= Rails.root.join("tmp/storage_fixtures") %>
 
 scaleway:
   service: Scaleway
