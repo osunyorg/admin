@@ -1,20 +1,20 @@
 class MediaController < ApplicationController
   def show
     @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
-    filename_with_transformations = params[:filename_with_transformations]
-    parts = filename_with_transformations.split('_')
-    transformations = { format: params[:format] }
-    dimensions = nil
-    loop do
-      key, value = parts.pop(2)
-      if ['crop', 'scale'].include?(key)
-        transformations[key.to_sym] = value
-      else
-        dimensions = (value || key).split('x')
-        dimensions << '' if dimensions.one?
-        break
-      end
-    end
+    # filename_with_transformations = params[:filename_with_transformations]
+    # parts = filename_with_transformations.split('_')
+    # transformations = { format: params[:format] }
+    # dimensions = nil
+    # loop do
+    #   key, value = parts.pop(2)
+    #   if ['crop', 'scale'].include?(key)
+    #     transformations[key.to_sym] = value
+    #   else
+    #     dimensions = (value || key).split('x')
+    #     dimensions << '' if dimensions.one?
+    #     break
+    #   end
+    # end
 
     dimensions.map! { |dimension| dimension.to_i.to_s == dimension ? dimension.to_i : nil }
     dimensions = [
