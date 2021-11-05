@@ -6,6 +6,10 @@ module Communication::Website::WithMedia
     university.active_storage_blobs.where(id: blob_ids)
   end
 
+  def blob_github_path_generated(blob)
+    "_media/#{blob.id}.md"
+  end
+
   def blob_to_jekyll(blob)
     ApplicationController.render(
       template: 'active_storage/blobs/jekyll',
