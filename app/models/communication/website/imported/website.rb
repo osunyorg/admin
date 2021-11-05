@@ -95,6 +95,11 @@ class Communication::Website::Imported::Website < ApplicationRecord
           github.add_to_batch path: page.github_path_generated,
                               previous_path: page.github_path,
                               data: page.to_jekyll
+          page.active_storage_blobs.each do |blob|
+            blob.analyze unless blob.analyzed?
+            github.add_to_batch path: page.blob_github_path_generated(blob),
+                                data: page.blob_to_jekyll(blob)
+          end
         end
         github.commit_batch '[Page] Batch update from import'
       end
@@ -116,6 +121,11 @@ class Communication::Website::Imported::Website < ApplicationRecord
           github.add_to_batch path: generated_post.github_path_generated,
                               previous_path: generated_post.github_path,
                               data: generated_post.to_jekyll
+          generated_post.active_storage_blobs.each do |blob|
+            blob.analyze unless blob.analyzed?
+            github.add_to_batch path: generated_post.blob_github_path_generated(blob),
+                                data: generated_post.blob_to_jekyll(blob)
+          end
         end
       end
       github.commit_batch '[Post] Batch update from import' if github.valid?

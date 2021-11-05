@@ -1,6 +1,7 @@
 fr:
   communication:
     website:
+      force_publication: 'Forcer la publication'
       imported:
         from: Importé depuis
         launch: Importer le site

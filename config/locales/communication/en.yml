@@ -1,6 +1,7 @@
 en:
   communication:
     website:
+      force_publication: 'Force publication'
       imported:
         from: Imported from
         launch: Launch import

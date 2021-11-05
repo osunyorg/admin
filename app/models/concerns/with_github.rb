@@ -5,6 +5,10 @@ module WithGithub
     after_save :publish_to_github
   end
 
+  def force_publish!
+    publish_to_github
+  end
+
   def github_content
     @content ||= github.read_file_at github_path
   end
