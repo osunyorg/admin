@@ -31,6 +31,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include WithGithub
+  include Communication::Website::WithMedia
   include WithSlug
 
   has_rich_text :text

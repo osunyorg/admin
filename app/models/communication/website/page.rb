@@ -35,6 +35,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include WithGithub
+  include Communication::Website::WithMedia
   include WithSlug
   include WithTree
 

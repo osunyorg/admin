@@ -25,8 +25,14 @@ class University < ApplicationRecord
 
   has_one_attached_deletable :logo
 
+  # Can't use dependent: :destroy because of attachments
+  # We use after_destroy to let the attachment go first
+  has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
+
   validates_presence_of :name
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
+
+  after_destroy :destroy_remaining_blobs
 
   scope :ordered, -> { order(:name) }
 
@@ -42,5 +48,11 @@ class University < ApplicationRecord
       name: name,
       full: "#{name} <#{address}>"
     }
+  end
+
+  private
+
+  def destroy_remaining_blobs
+    active_storage_blobs.delete_all
   end
 end
