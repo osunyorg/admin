@@ -31,6 +31,11 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
     add_breadcrumb Communication::Website::Imported::Website.model_name.human
   end
 
+  def publish
+    @website.force_publish!
+    redirect_to admin_communication_website_path(@website), notice: t('admin.will_be_published_html', model: @website.to_s)
+  end
+
   def edit
     breadcrumb
     add_breadcrumb t('edit')

@@ -3,6 +3,7 @@ namespace :communication do
     member do
       get :import
       post :import
+      post :publish
     end
     resources :pages, controller: 'website/pages' do
       collection do
