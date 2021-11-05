@@ -31,7 +31,12 @@ class VariantService
   def transformations
     @transformations ||= begin
       transformations = { format: @format }
-      transformations[]
+      if params[:size].present?
+        split_size = params[:size].split('x')
+        dimensions = Array.new(2) { |i| split_size[i].to_i || nil }
+      else
+        dimensions = blob_size
+      end
     end
   end
 
