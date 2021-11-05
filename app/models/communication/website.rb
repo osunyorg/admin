@@ -73,6 +73,14 @@ class Communication::Website < ApplicationRecord
     !imported_website.nil?
   end
 
+  def list_of_pages
+    all_pages = []
+    pages.where.not(id: id).root.ordered.each do |page|
+      all_pages.concat(page.self_and_children(0))
+    end
+    all_pages
+  end
+
   def to_s
     "#{name}"
   end

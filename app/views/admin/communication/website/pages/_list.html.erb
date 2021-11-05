@@ -13,12 +13,12 @@
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
                       edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                      class: button_classes %>
+                      class: button_classes if can?(:update, page) %>
             <%= link_to t('delete'),
                       admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                       method: :delete,
                       data: { confirm: t('please-confirm') },
-                      class: button_classes_danger %>
+                      class: button_classes_danger if can?(:destroy, page) %>
           </div>
         </td>
       </tr>
