@@ -7,7 +7,7 @@ module Communication::Website::WithMedia
   end
 
   def blob_github_path_generated(blob)
-    "_media/#{blob.id}.md"
+    "_media/#{blob.id[0..1]}/#{blob.id}.md"
   end
 
   def blob_to_jekyll(blob)
@@ -25,7 +25,7 @@ module Communication::Website::WithMedia
     active_storage_blobs.each do |blob|
       blob.analyze unless blob.analyzed?
       github.publish(path: "_media/#{blob.id}.md",
-                    commit: "[Medium] Save ##{ blob.id }",
+                    commit: "[Medium] Save ##{blob.id}",
                     data: blob_to_jekyll(blob))
     end
   end
