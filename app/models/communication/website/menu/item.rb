@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  about_type    :string
-#  kind          :integer          default("url")
+#  kind          :integer          default("blank")
 #  position      :integer
 #  title         :string
 #  url           :text
