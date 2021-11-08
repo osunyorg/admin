@@ -3,6 +3,7 @@ namespace :communication do
     member do
       get :import
       post :import
+      post :publish
     end
     resources :pages, controller: 'website/pages' do
       collection do
@@ -10,6 +11,7 @@ namespace :communication do
       end
       member do
         get :children
+        post :publish
       end
     end
     resources :categories, controller: 'website/categories' do
@@ -21,7 +23,11 @@ namespace :communication do
       end
     end
     resources :authors, controller: 'website/authors'
-    resources :posts, controller: 'website/posts'
+    resources :posts, controller: 'website/posts' do
+      member do
+        post :publish
+      end
+    end
     resources :menus, controller: 'website/menus' do
       resources :items, controller: 'website/menu/items', except: :index do
         collection do

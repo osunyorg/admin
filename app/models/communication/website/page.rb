@@ -35,6 +35,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include WithGithub
+  include Communication::Website::WithMedia
   include WithSlug
   include WithTree
 
@@ -73,12 +74,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def list_of_other_pages
-    pages = []
-    website.pages.where.not(id: id).root.ordered.each do |page|
-      pages.concat(page.self_and_children(0))
-    end
-    pages.reject! { |p| p[:id] == id }
-    pages
+    website.list_of_pages.reject! { |p| p[:id] == id }
   end
 
   def to_s

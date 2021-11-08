@@ -1,6 +1,7 @@
 en:
   communication:
     website:
+      force_publication: 'Force publication'
       imported:
         from: Imported from
         launch: Launch import
@@ -78,6 +79,7 @@ en:
         title: Title
       communication/website/menu/item:
         about: Target
+        children: Children items
         kind: Kind
         parent: Parent item
         title: Title
@@ -107,7 +109,7 @@ en:
   enums:
     communication/website/menu/item:
       kind:
-        blank: Blank
+        blank: Title
         page: Page
         url: URL
   simple_form:

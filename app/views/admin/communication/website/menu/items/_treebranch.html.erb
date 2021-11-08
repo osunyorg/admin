@@ -13,8 +13,9 @@
           <i class="close_btn--without_children far fa-folder-open"></i>
         </span>
       <% end %>
-      <%= link_to item, admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id) %>
+      <%= link_to_if can?(:read, item), item, admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id) %>
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
+      <%= link_to t('edit'), edit_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id), class: "#{button_classes} ms-auto" if can?(:edit, item) %>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= item.id %>">
       <li class="treeview__empty">

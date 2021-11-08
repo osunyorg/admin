@@ -29,6 +29,11 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     breadcrumb
   end
 
+  def publish
+    @page.force_publish!
+    redirect_to admin_communication_website_page_path(@page), notice: t('admin.will_be_published_html', model: @page.to_s)
+  end
+
   def new
     @page.website = @website
     breadcrumb

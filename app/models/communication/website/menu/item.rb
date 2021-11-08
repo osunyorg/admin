@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  about_type    :string
-#  kind          :integer          default("url")
+#  kind          :integer          default("blank")
 #  position      :integer
 #  title         :string
 #  url           :text
@@ -44,7 +44,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
 
-  enum kind: { url: 0, page: 1, blank: 2 }, _prefix: :kind
+  enum kind: { blank: 0, url: 10, page: 20 }, _prefix: :kind
 
   validates :title, presence: true
 

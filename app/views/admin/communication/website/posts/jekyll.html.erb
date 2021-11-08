@@ -3,7 +3,7 @@ title: "<%= @post.title %>"
 date: <%= @post.published_at %> UTC
 slug: "<%= @post.slug %>"
 <% if @post.featured_image.attached? %>
-image: "<%= @post.featured_image.blob.url %>"
+image: "<%= @post.featured_image.blob.id %>"
 <% end %>
 description: >
   <%= prepare_for_github @post.description %>

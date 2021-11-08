@@ -40,12 +40,12 @@
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
                         edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                        class: button_classes %>
+                        class: button_classes if can?(:update, post) %>
             <%= link_to t('delete'),
                         admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                         method: :delete,
                         data: { confirm: t('please-confirm') },
-                        class: button_classes_danger %>
+                        class: button_classes_danger if can?(:destroy, post) %>
           </div>
         </td>
       </tr>

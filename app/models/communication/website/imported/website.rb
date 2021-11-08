@@ -55,20 +55,34 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_authors
-    wordpress.authors.each do |data|
-      author = authors.where(university: university, identifier: data['id']).first_or_initialize
-      author.data = data
-      author.save
+    begin
+      Communication::Website::Author.skip_callback(:save, :after, :publish_to_github)
+      wordpress.authors.each do |data|
+        author = authors.where(university: university, identifier: data['id']).first_or_initialize
+        author.data = data
+        author.save
+      end
+      # Batch update all changes (1 query only, good for github API limits)
+      website.publish_authors!
+    ensure
+      Communication::Website::Author.set_callback(:save, :after, :publish_to_github)
     end
   end
 
   def sync_categories
-    wordpress.categories.each do |data|
-      category = categories.where(university: university, identifier: data['id']).first_or_initialize
-      category.data = data
-      category.save
+    begin
+      Communication::Website::Category.skip_callback(:save, :after, :publish_to_github)
+      wordpress.categories.each do |data|
+        category = categories.where(university: university, identifier: data['id']).first_or_initialize
+        category.data = data
+        category.save
+      end
+      sync_tree(categories)
+      # Batch update all changes (1 query only, good for github API limits)
+      website.publish_categories!
+    ensure
+      Communication::Website::Category.set_callback(:save, :after, :publish_to_github)
     end
-    sync_tree(categories)
   end
 
   def sync_media
@@ -89,15 +103,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
       end
       sync_tree(pages)
       # Batch update all changes (1 query only, good for github API limits)
-      github = Github.with_site website
-      if github.valid?
-        website.pages.find_each do |page|
-          github.add_to_batch path: page.github_path_generated,
-                              previous_path: page.github_path,
-                              data: page.to_jekyll
-        end
-        github.commit_batch '[Page] Batch update from import'
-      end
+      website.publish_pages!
     ensure
       Communication::Website::Page.set_callback(:save, :after, :publish_to_github)
     end
@@ -106,19 +112,13 @@ class Communication::Website::Imported::Website < ApplicationRecord
   def sync_posts
     begin
       Communication::Website::Post.skip_callback(:save, :after, :publish_to_github)
-      github = Github.with_site website
       wordpress.posts.each do |data|
         post = posts.where(university: university, identifier: data['id']).first_or_initialize
         post.data = data
         post.save
-        generated_post = post.post
-        if github.valid?
-          github.add_to_batch path: generated_post.github_path_generated,
-                              previous_path: generated_post.github_path,
-                              data: generated_post.to_jekyll
-        end
       end
-      github.commit_batch '[Post] Batch update from import' if github.valid?
+      # Batch update all changes (1 query only, good for github API limits)
+      website.publish_posts!
     ensure
       Communication::Website::Post.set_callback(:save, :after, :publish_to_github)
     end

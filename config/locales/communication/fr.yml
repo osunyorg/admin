@@ -1,6 +1,7 @@
 fr:
   communication:
     website:
+      force_publication: 'Forcer la publication'
       imported:
         from: Importé depuis
         launch: Importer le site
@@ -78,6 +79,7 @@ fr:
         title: Titre
       communication/website/menu/item:
         about: Cible
+        children: Sous-éléments
         kind: Type
         parent: Élément parent
         title: Titre
@@ -107,7 +109,7 @@ fr:
   enums:
     communication/website/menu/item:
       kind:
-        blank: Vide
+        blank: Titre intermédiaire
         page: Page
         url: URL
   simple_form:
