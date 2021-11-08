@@ -28,15 +28,34 @@ class VariantService
   #   crop: '1000x+0+0',
   #   format: 'webp'
   # }
+  # {
+  #   resize_to_limit: [1000, 2000],
+  #   format: 'webp'
+  # }
   def transformations
     @transformations ||= begin
-      transformations = { format: @format }
+      transformations = {}
       if params[:size].present?
         split_size = params[:size].split('x')
-        dimensions = Array.new(2) { |i| split_size[i].to_i || nil }
+        dimensions = Array.new(2) { |i| split_size[i].blank? ? nil : split_size[i].to_i }
       else
         dimensions = blob_size
       end
+      dimensions.map! { |dimension| dimension * params[:scale].to_i if dimension.is_a?(Integer) } if params[:scale].present?
+      2.times { |i| dimensions[i] = [dimensions[i], blob_size[i]].min unless dimensions[i].nil? }
+
+      # Resize and/or crop unless original size
+      unless dimensions == blob_size
+        if params[:gravity].present?
+          transformations[:resize_to_fill] = [*dimensions, { gravity: params[:gravity] }]
+          transformations[:crop] = "#{dimensions.join('x')}+0+0"
+        else
+          transformations[:resize_to_limit] = dimensions
+        end
+      end
+
+      transformations[:format] = @format if @format != @blob.filename.extension_without_delimiter
+      transformations
     end
   end
 
@@ -53,8 +72,12 @@ class VariantService
       params[:scale], filename_dup = extract_scale_from_filename(filename_dup)
       params[:gravity], filename_dup = extract_gravity_from_filename(filename_dup)
       params[:size], filename_dup = extract_size_from_filename(filename_dup)
-      params
+      params.compact
     end
+  end
+
+  def format
+    @format
   end
 
   protected
