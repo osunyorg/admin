@@ -202,7 +202,7 @@ GEM
     js_cookie_rails (2.2.0)
       railties (>= 3.1)
     json (2.6.1)
-    kamifusen (1.10)
+    kamifusen (1.10.1)
       image_processing
       rails
     kaminari (1.2.1)
