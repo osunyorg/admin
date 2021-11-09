@@ -11,6 +11,11 @@ class Admin::Communication::Website::AuthorsController < Admin::Communication::W
     breadcrumb
   end
 
+  def publish
+    @author.force_publish!
+    redirect_to admin_communication_website_author_path(@author), notice: t('admin.will_be_published_html', model: @author.to_s)
+  end
+
   def new
     @author.website = @website
     breadcrumb

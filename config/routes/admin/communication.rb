@@ -20,9 +20,14 @@ namespace :communication do
       end
       member do
         get :children
+        post :publish
       end
     end
-    resources :authors, controller: 'website/authors'
+    resources :authors, controller: 'website/authors' do
+      member do
+        post :publish
+      end
+    end
     resources :posts, controller: 'website/posts' do
       member do
         post :publish
