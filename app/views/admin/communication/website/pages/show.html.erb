@@ -44,7 +44,8 @@
                               admin_communication_website_page_path(
                                 website_id: @website.id,
                                 id: @page.parent.id
-                              ) %></td>
+                              ),
+                              class: "#{'opacity-50' unless @page.parent.published?}" %></td>
             </tr>
           <% end %>
           <% if @page.children.any? %>
@@ -53,12 +54,12 @@
               <td>
                 <ul class="list-unstyled mb-0">
                   <% @page.children.each do |child| %>
-                    <li><%= link_to_if can?(:read, child),
+                    <li>
+                      <%= link_to_if can?(:read, child),
                                     child,
-                                    admin_communication_website_page_path(
-                                      website_id: @website.id,
-                                      id: child.id
-                                    ) %></li>
+                                    admin_communication_website_page_path( website_id: @website.id, id: child.id),
+                                    class: "#{'opacity-50' unless child.published?}" %>
+                    </li>
                   <% end %>
                 </ul>
               </td>
@@ -89,4 +90,5 @@
 
 <% content_for :action_bar_right do %>
   <%= edit_link @page %>
+  <%= destroy_link @page %>
 <% end %>

@@ -12,7 +12,7 @@
 #  url           :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  category_id   :uuid             not null
+#  category_id   :uuid
 #  university_id :uuid             not null
 #  website_id    :uuid             not null
 #

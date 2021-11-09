@@ -8,7 +8,11 @@
   <tbody>
     <% pages.each do |page| %>
       <tr>
-        <td><%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %></td>
+        <td>
+          <%= link_to page,
+                      admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                      class: "#{'opacity-50' unless page.published?}" %>
+        </td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),

@@ -10,7 +10,7 @@
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  author_id     :uuid             not null
+#  author_id     :uuid
 #  university_id :uuid             not null
 #  website_id    :uuid             not null
 #

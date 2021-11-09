@@ -26,7 +26,7 @@
           <td class="text-end">
             <%= link_to t('show'),
                           admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id),
-                          class: button_classes %>
+                          class: button_classes if post.post.present? %>
           </td>
         </tr>
       <% end %>
@@ -57,7 +57,7 @@
           <td class="text-end">
             <%= link_to t('show'),
                           admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id),
-                          class: button_classes %>
+                          class: button_classes if page.page.present? %>
           </td>
         </tr>
       <% end %>

@@ -18,7 +18,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  featured_medium_id :uuid
-#  post_id            :uuid             not null
+#  post_id            :uuid
 #  university_id      :uuid             not null
 #  website_id         :uuid             not null
 #

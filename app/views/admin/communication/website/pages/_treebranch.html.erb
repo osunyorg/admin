@@ -13,8 +13,14 @@
           <i class="close_btn--without_children far fa-folder-open"></i>
         </span>
       <% end %>
-      <%= link_to page, admin_communication_website_page_path(website_id: page.website.id, id: page.id) %>
+      <%= link_to page,
+                  admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                  class: "#{'opacity-50' unless page.published?}" %>
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
+      <div class="ms-auto">
+        <%= edit_link page %>
+        <%= destroy_link page %>
+      </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= page.id %>">
       <li class="treeview__empty">

@@ -52,6 +52,9 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :nullify
+  has_one    :imported_page,
+             class_name: 'Communication::Website::Imported::Page',
+             dependent: :nullify
 
   validates :title, presence: true
 
