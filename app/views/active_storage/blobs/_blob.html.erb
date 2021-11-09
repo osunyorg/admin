@@ -1,6 +1,6 @@
 <figure class="attachment attachment--<%= blob.variable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
   <% if blob.image? %>
-    <%= kamifusen_tag blob, width: 800 %>
+    <%= kamifusen_tag blob, width: 800, active_storage_direct_url: true %>
   <% elsif blob.video? %>
     <video>
       <source src="<%= rails_blob_path(blob) %>" type="<%= blob.content_type %>">
