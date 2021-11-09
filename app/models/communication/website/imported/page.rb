@@ -16,7 +16,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  featured_medium_id :uuid
-#  page_id            :uuid             not null
+#  page_id            :uuid
 #  university_id      :uuid             not null
 #  website_id         :uuid             not null
 #

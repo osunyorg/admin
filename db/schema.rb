@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_161133) do
+ActiveRecord::Schema.define(version: 2021_11_09_093030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_161133) do
   create_table "communication_website_imported_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
-    t.uuid "author_id", null: false
+    t.uuid "author_id"
     t.string "name"
     t.text "description"
     t.string "slug"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_161133) do
   create_table "communication_website_imported_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
-    t.uuid "category_id", null: false
+    t.uuid "category_id"
     t.string "name"
     t.text "description"
     t.string "identifier"
@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_161133) do
   create_table "communication_website_imported_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
-    t.uuid "page_id", null: false
+    t.uuid "page_id"
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_161133) do
   create_table "communication_website_imported_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
-    t.uuid "post_id", null: false
+    t.uuid "post_id"
     t.integer "status", default: 0
     t.string "title"
     t.text "excerpt"
