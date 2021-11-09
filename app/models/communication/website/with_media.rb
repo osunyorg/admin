@@ -7,7 +7,7 @@ module Communication::Website::WithMedia
   end
 
   def blob_github_path_generated(blob)
-    "_media/#{blob.id[0..1]}/#{blob.id}.md"
+    "_data/media/#{blob.id[0..1]}/#{blob.id}.yml"
   end
 
   def blob_to_jekyll(blob)
