@@ -42,7 +42,7 @@ class VariantService
         dimensions = blob_size
       end
       dimensions.map! { |dimension| dimension * params[:scale].to_i if dimension.is_a?(Integer) } if params[:scale].present?
-      2.times { |i| dimensions[i] = [dimensions[i], blob_size[i]].min unless dimensions[i].nil? }
+      # 2.times { |i| dimensions[i] = [dimensions[i], blob_size[i]].min unless dimensions[i].nil? }
 
       # Resize and/or crop unless original size
       unless dimensions == blob_size
