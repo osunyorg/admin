@@ -24,7 +24,7 @@ module Communication::Website::WithMedia
     super
     active_storage_blobs.each do |blob|
       blob.analyze unless blob.analyzed?
-      github.publish(path: "_media/#{blob.id}.md",
+      github.publish(path: blob_github_path_generated(blob),
                     commit: "[Medium] Save ##{blob.id}",
                     data: blob_to_jekyll(blob))
     end
