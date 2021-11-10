@@ -2,7 +2,7 @@ module WithGithub
   extend ActiveSupport::Concern
 
   included do
-    after_save :publish_to_github
+    after_save_commit :publish_to_github
   end
 
   def force_publish!

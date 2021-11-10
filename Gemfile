@@ -41,7 +41,7 @@ gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_auth
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'jbuilder'
-gem 'kamifusen'
+gem 'kamifusen'#, path: '../kamifusen'
 gem 'bootstrap'
 gem 'sanitize'
 
