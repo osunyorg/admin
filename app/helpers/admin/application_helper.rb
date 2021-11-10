@@ -60,13 +60,14 @@ module Admin::ApplicationHelper
                 form: form.options.dig(:html, :id)
   end
 
-  def prepare_for_github(html)
+  def prepare_for_github(html, university)
     text = html.to_s
     text = sanitize text,
                     tags: %w(table a figure img figcaption i em b strong p h2 h3 h4 h5 h6 blockquote),
                     attributes: %w(href alt title target rel src srcset width height)
     text.gsub! "\r", ''
     text.gsub! "\n", ' '
+    text.gsub! "/rails/active_storage", "#{university.url}/rails/active_storage"
     sanitize text
   end
 

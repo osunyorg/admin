@@ -7,8 +7,8 @@ parent: "<%= @page.parent_id %>"
 image: "<%= @page.featured_image.blob.id %>"
 <% end %>
 description: >
-  <%= prepare_for_github @page.description %>
+  <%= prepare_for_github @page.description, @page.university %>
 text: >
-  <%= prepare_for_github @page.text %>
+  <%= prepare_for_github @page.text, @page.university %>
 ---
 <%= @page.github_frontmatter.content.html_safe %>

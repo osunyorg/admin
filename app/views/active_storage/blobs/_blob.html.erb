@@ -1,12 +1,12 @@
 <figure class="attachment attachment--<%= blob.variable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
   <% if blob.image? %>
-    <%= kamifusen_tag blob, width: 800, active_storage_direct_url: true %>
+    <%= kamifusen_tag blob, width: 800 %>
   <% elsif blob.video? %>
     <video>
       <source src="<%= rails_blob_path(blob) %>" type="<%= blob.content_type %>">
     </video>
   <% else %>
-    <%= link_to polymorphic_url(blob), target: :blank do %>
+    <%= link_to polymorphic_path(blob), target: :blank do %>
       <p>
         <span class="attachment__name"><%= blob.filename %></span>
         <span class="attachment__size"><%= number_to_human_size blob.byte_size %></span>

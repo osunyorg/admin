@@ -5,6 +5,6 @@ first_name: "<%= @author.first_name %>"
 last_name: "<%= @author.last_name %>"
 slug: "<%= @author.slug %>"
 biography: >
-  <%= prepare_for_github @author.biography %>
+  <%= prepare_for_github @author.biography, @author.university %>
 ---
 <%= @author.github_frontmatter.content.html_safe %>

@@ -13,8 +13,8 @@ categories:
 image: "<%= @post.featured_image.blob.id %>"
 <% end %>
 description: >
-  <%= prepare_for_github @post.description %>
+  <%= prepare_for_github @post.description, @post.university %>
 text: >
-  <%= prepare_for_github @post.text %>
+  <%= prepare_for_github @post.text, @post.university %>
 ---
 <%= @post.github_frontmatter.content.html_safe %>
