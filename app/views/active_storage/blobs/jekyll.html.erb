@@ -3,7 +3,7 @@ width, height = @blob.metadata.values_at('width', 'height')
 ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
 %>
 <%# TODO: Replace @blob.url with the media endpoint when it's ready %>
-<%= {
+<%= raw {
   "name" => @blob.filename.to_s,
   "size" => @blob.byte_size,
   "width" => width,
