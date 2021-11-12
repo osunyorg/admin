@@ -6,12 +6,10 @@ class VariantServiceTest < ActiveSupport::TestCase
   include ActiveRecord::TestFixtures
 
   setup do
-    ActiveStorage::Current.host = "https://example.com"
     @was_tracking, ActiveStorage.track_variants = ActiveStorage.track_variants, false
   end
 
   teardown do
-    ActiveStorage::Current.reset
     ActiveStorage.track_variants = @was_tracking
   end
 

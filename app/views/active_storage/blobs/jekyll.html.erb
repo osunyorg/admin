@@ -1,6 +1,9 @@
 <%
 width, height = @blob.metadata.values_at('width', 'height')
 ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
+university = University.find_by(id: @blob.university_id)
+base_url = university&.url || ""
+media_endpoint_path = medium_path(signed_id: @blob.signed_id, filename_with_transformations: @blob.filename)
 %>
 <%# TODO: Replace @blob.url with the media endpoint when it's ready %>
 <%= raw({
@@ -9,5 +12,5 @@ ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
   "width" => width,
   "height" => height,
   "ratio" => ratio,
-  "url" => @blob.url
+  "url" => "#{base_url}#{media_endpoint_path}"
 }.compact.to_yaml) %>

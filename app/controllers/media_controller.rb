@@ -6,6 +6,6 @@ class MediaController < ApplicationController
     blob_or_variant_url = transformations.empty?  ? url_for(@blob)
                                                   : url_for(@blob.variant(transformations))
 
-    render json: { transformations: transformations, url: blob_or_variant_url }
+    redirect_to blob_or_variant_url
   end
 end
