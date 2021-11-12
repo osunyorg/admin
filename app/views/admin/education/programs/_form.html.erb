@@ -10,22 +10,22 @@
     </div>
     <div class="col-md-8">
       <h2 class="h4">Informations pratiques</h2>
-      <%= f.input :registration %>
-      <%= f.input :pricing %>
-      <%= f.input :duration %>
-      <%= f.input :contacts %>
-      <%= f.input :accessibility %>
+      <%= f.input :registration, as: :rich_text_area %>
+      <%= f.input :pricing, as: :rich_text_area %>
+      <%= f.input :duration, as: :rich_text_area %>
+      <%= f.input :contacts, as: :rich_text_area %>
+      <%= f.input :accessibility, as: :rich_text_area %>
     </div>
     <div class="col-md-12">
       <h2 class="mt-5 h4">Informations pédagogiques</h2>
     </div>
     <div class="col-md-6">
-      <%= f.input :prerequisites, input_html: { rows: 5 } %>
-      <%= f.input :objectives, input_html: { rows: 5 } %>
+      <%= f.input :prerequisites, as: :rich_text_area %>
+      <%= f.input :objectives, as: :rich_text_area %>
     </div>
     <div class="col-md-6">
-      <%= f.input :pedagogy, input_html: { rows: 5 } %>
-      <%= f.input :evaluation, input_html: { rows: 5 } %>
+      <%= f.input :pedagogy, as: :rich_text_area %>
+      <%= f.input :evaluation, as: :rich_text_area %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

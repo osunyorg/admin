@@ -21,6 +21,16 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::Program < ApplicationRecord
+  has_rich_text :accessibility
+  has_rich_text :contacts
+  has_rich_text :duration
+  has_rich_text :evaluation
+  has_rich_text :objectives
+  has_rich_text :pedagogy
+  has_rich_text :prerequisites
+  has_rich_text :pricing
+  has_rich_text :registration
+  
   belongs_to :university
 
   enum level: {
