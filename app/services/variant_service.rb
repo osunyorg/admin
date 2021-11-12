@@ -42,11 +42,12 @@ class VariantService
         dimensions = blob_size
       end
       dimensions.map! { |dimension| dimension * params[:scale].to_i if dimension.is_a?(Integer) } if params[:scale].present?
-      # 2.times { |i| dimensions[i] = [dimensions[i], blob_size[i]].min unless dimensions[i].nil? }
+      # If one of the dimensions is greater than the original one, no crop and resize to limit
+      crop_dimensions_are_valid = dimensions.all?(&:present?) && dimensions[0] <= blob_size[0] && dimensions[1] <= blob_size[1]
 
       # Resize and/or crop unless original size
       unless dimensions == blob_size
-        if params[:gravity].present?
+        if params[:gravity].present? && crop_dimensions_are_valid
           transformations[:resize_to_fill] = [*dimensions, { gravity: params[:gravity] }]
           transformations[:crop] = "#{dimensions.join('x')}+0+0"
         else

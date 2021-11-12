@@ -31,7 +31,8 @@ class VariantServiceTest < ActiveSupport::TestCase
   # dan-gold_200x300_crop_top.jpeg
   # dan-gold_300x200_crop_right@2x.jpeg
   # dan-gold_1000x500_crop_left.jpeg
-  # dan-gold_500x500_crop_left@2x.jpeg
+  # dan-gold_1500x500_crop_left.jpeg
+  # dan-gold_800x840_crop_left.jpeg
 
   # Params tests
 
@@ -142,10 +143,17 @@ class VariantServiceTest < ActiveSupport::TestCase
     assert_equal expected_params, variant_service.params
   end
 
-  test "params for dan-gold_500x500_crop_left@2x.jpeg" do
+  test "params for dan-gold_1500x500_crop_left.jpeg" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: '500x500', gravity: 'West', scale: 2 }
-    variant_service = VariantService.compute(blob, 'dan-gold_500x500_crop_left@2x', 'jpeg')
+    expected_params = { size: '1500x500', gravity: 'West' }
+    variant_service = VariantService.compute(blob, 'dan-gold_1500x500_crop_left', 'jpeg')
+    assert_equal expected_params, variant_service.params
+  end
+
+  test "params for dan-gold_800x840_crop_left.jpeg" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_params = { size: '800x840', gravity: 'West' }
+    variant_service = VariantService.compute(blob, 'dan-gold_800x840_crop_left', 'jpeg')
     assert_equal expected_params, variant_service.params
   end
 
@@ -271,15 +279,19 @@ class VariantServiceTest < ActiveSupport::TestCase
     assert_equal expected_transformations, variant_service.transformations
   end
 
-  # test "transformations for dan-gold_500x500_crop_left@2x.jpeg" do
-  #   blob = create_file_blob(filename: "dan-gold.jpeg")
-  #   expected_transformations = {
-  #     resize_to_fill: [1000, 1000, { gravity: 'West' }, scale: 2],
-  #     crop: '1000x1000+0+0'
-  #   }
-  #   variant_service = VariantService.compute(blob, 'dan-gold_500x500_crop_left@2x', 'jpeg')
-  #   assert_equal expected_transformations, variant_service.transformations
-  # end
+  test "transformations for dan-gold_1500x500_crop_left.jpeg" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_transformations = { resize_to_limit: [1500, 500] }
+    variant_service = VariantService.compute(blob, 'dan-gold_1500x500_crop_left', 'jpeg')
+    assert_equal expected_transformations, variant_service.transformations
+  end
+
+  test "transformations for dan-gold_800x840_crop_left.jpeg" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_transformations = { resize_to_limit: [800, 840] }
+    variant_service = VariantService.compute(blob, 'dan-gold_800x840_crop_left', 'jpeg')
+    assert_equal expected_transformations, variant_service.transformations
+  end
 
   # Variants tests
 
@@ -368,11 +380,17 @@ class VariantServiceTest < ActiveSupport::TestCase
     assert_equal expected_blob.checksum, image_checksum(image)
   end
 
-  # test "variant for dan-gold_500x500_crop_left@2x.jpeg" do
-  #   expected_blob = create_file_blob(filename: "dan-gold_500x500_crop_left@2x.jpeg")
-  #   image = load_image_from_variant_name(expected_blob.filename.base)
-  #   assert_equal expected_blob.checksum, image_checksum(image)
-  # end
+  test "variant for dan-gold_1500x500_crop_left.jpeg" do
+    expected_blob = create_file_blob(filename: "dan-gold_1500x500_crop_left.jpeg")
+    image = load_image_from_variant_name(expected_blob.filename.base)
+    assert_equal expected_blob.checksum, image_checksum(image)
+  end
+
+  test "variant for dan-gold_800x840_crop_left.jpeg" do
+    expected_blob = create_file_blob(filename: "dan-gold_800x840_crop_left.jpeg")
+    image = load_image_from_variant_name(expected_blob.filename.base)
+    assert_equal expected_blob.checksum, image_checksum(image)
+  end
 
   private
 
