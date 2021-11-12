@@ -66,7 +66,7 @@ class Communication::Website::Page < ApplicationRecord
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
   def github_path_generated
-    "_pages/#{path}/index.html".gsub('//', '/')
+    "_pages/#{path}/index.html".gsub('///', '/').gsub('//', '/')
   end
 
   def to_jekyll
