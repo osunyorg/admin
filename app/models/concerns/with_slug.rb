@@ -2,7 +2,7 @@ module WithSlug
   extend ActiveSupport::Concern
 
   included do
-    before_validation :generate_slug, if: Proc.new { |o| o.slug.blank? }
+    before_validation :generate_slug, if: Proc.new { |o| o.slug.nil? }
   end
 
   protected
