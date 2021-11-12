@@ -106,6 +106,12 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+    errors:
+      models:
+        communication/website/page:
+          attributes:
+            published:
+              home_not_published: doit être coché. La page d'accueil doit être publiée.
   enums:
     communication/website/menu/item:
       kind:
