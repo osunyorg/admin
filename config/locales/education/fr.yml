@@ -26,6 +26,12 @@ fr:
         pedagogy: Méthodes mobilisées
         evaluation: Modalités d’évaluation
         accessibility: Accessibilité
+      education/school:
+        address: Adresse
+        city: Ville
+        country: Pays
+        name: Nom
+        zipcode: Code postal
   enums:
     education/program:
       level:

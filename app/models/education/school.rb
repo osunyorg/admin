@@ -26,6 +26,8 @@ class Education::School < ApplicationRecord
   belongs_to :university
   has_one :website, class_name: 'Communication::Website', foreign_key: :about
 
+  validates :name, :address, :city, :zipcode, :country, presence: true
+
   def to_s
     "#{name}"
   end
