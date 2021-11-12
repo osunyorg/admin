@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_09_093030) do
+ActiveRecord::Schema.define(version: 2021_11_12_153208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -333,15 +333,6 @@ ActiveRecord::Schema.define(version: 2021_11_09_093030) do
     t.integer "capacity"
     t.integer "ects"
     t.boolean "continuing"
-    t.text "prerequisites"
-    t.text "objectives"
-    t.text "duration"
-    t.text "registration"
-    t.text "pedagogy"
-    t.text "evaluation"
-    t.text "accessibility"
-    t.text "pricing"
-    t.text "contacts"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_education_programs_on_university_id"
