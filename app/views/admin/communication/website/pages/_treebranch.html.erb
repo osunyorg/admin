@@ -22,7 +22,7 @@
         <%= destroy_link page %>
       </div>
     </div>
-    <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= page.id %>">
+    <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, page) %> ms-4" data-id="<%= page.id %>">
       <li class="treeview__empty">
         <div class="d-flex align-items-center treeview__label border-bottom p-1">
           <span class="p-2 ps-0"><%= t('empty_folder') %></span>

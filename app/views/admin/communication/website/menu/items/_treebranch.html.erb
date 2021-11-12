@@ -17,7 +17,7 @@
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
       <%= link_to t('edit'), edit_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id), class: "#{button_classes} ms-auto" if can?(:edit, item) %>
     </div>
-    <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= item.id %>">
+    <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, item) %> ms-4" data-id="<%= item.id %>">
       <li class="treeview__empty">
         <div class="d-flex align-items-center treeview__label border-bottom p-1">
           <span class="p-2 ps-0"><%= t('empty_folder') %></span>
