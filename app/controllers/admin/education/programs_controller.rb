@@ -30,7 +30,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def update
-    byebug
     if @program.update(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else
