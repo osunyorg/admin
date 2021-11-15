@@ -39,6 +39,11 @@ class Education::Program < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
+  has_and_belongs_to_many :teachers,
+                          class_name: 'Education::Teacher',
+                          join_table: 'education_programs_teachers',
+                          foreign_key: 'education_program_id',
+                          association_foreign_key: 'education_teacher_id'
 
   enum level: {
     bachelor: 300,

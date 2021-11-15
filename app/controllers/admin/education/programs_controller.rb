@@ -56,6 +56,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     params.require(:education_program)
           .permit(:name, :level, :capacity, :ects, :continuing,
             :prerequisites, :objectives, :duration, :registration, :pedagogy,
-            :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other, school_ids: [])
+            :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other, school_ids: [], teacher_ids: [])
   end
 end

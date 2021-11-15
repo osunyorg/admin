@@ -9,8 +9,7 @@
       <%= f.input :continuing %>
       <%= f.association :schools,
                         as: :check_boxes,
-                        collection: current_university.education_schools.ordered
-                             %>
+                        collection: current_university.education_schools.ordered %>
     </div>
     <div class="col-md-8">
       <h2 class="h4"><%= t('education.program.useful_informations') %></h2>
@@ -32,6 +31,9 @@
     <div class="col-md-6">
       <%= f.input :pedagogy, as: :rich_text_area %>
       <%= f.input :evaluation, as: :rich_text_area %>
+      <%= f.association :teachers,
+                        as: :check_boxes,
+                        collection: current_university.teachers.ordered %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

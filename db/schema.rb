@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_134945) do
+ActiveRecord::Schema.define(version: 2021_11_15_162245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -345,6 +345,13 @@ ActiveRecord::Schema.define(version: 2021_11_15_134945) do
     t.index ["education_school_id", "education_program_id"], name: "school_program"
   end
 
+  create_table "education_programs_teachers", id: false, force: :cascade do |t|
+    t.uuid "education_program_id", null: false
+    t.uuid "education_teacher_id", null: false
+    t.index ["education_program_id", "education_teacher_id"], name: "program_teacher"
+    t.index ["education_teacher_id", "education_program_id"], name: "teacher_program"
+  end
+
   create_table "education_schools", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -357,6 +364,19 @@ ActiveRecord::Schema.define(version: 2021_11_15_134945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
+  create_table "education_teachers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "slug"
+    t.text "github_path"
+    t.uuid "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_education_teachers_on_university_id"
+    t.index ["user_id"], name: "index_education_teachers_on_user_id"
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -533,6 +553,8 @@ ActiveRecord::Schema.define(version: 2021_11_15_134945) do
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
+  add_foreign_key "education_teachers", "universities"
+  add_foreign_key "education_teachers", "users"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"

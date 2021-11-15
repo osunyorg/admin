@@ -10,6 +10,9 @@ fr:
       education/school:
         one: École
         other: Écoles
+      education/teacher:
+        one: Enseignant·e
+        other: Enseignants·es
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -28,12 +31,21 @@ fr:
         prerequisites: Prérequis
         pricing: Tarifs
         registration: Modalités et délais d’accès
+        schools: Écoles
+        teachers: Enseignants·es
       education/school:
         address: Adresse
         city: Ville
         country: Pays
         name: Nom
         zipcode: Code postal
+      education/teacher:
+        biography: Biographie
+        first_name: Prénom
+        last_name: Nom de famille
+        name: Nom
+        slug: Slug
+        user: Utilisateur
   education:
     program:
       main_informations: Informations essentielles

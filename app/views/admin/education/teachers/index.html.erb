@@ -1,0 +1,9 @@
+<% content_for :title, "#{Education::Teacher.model_name.human(count: 2)} (#{@teachers.total_count})" %>
+
+<%= render 'admin/education/teachers/list', teachers: @teachers %>
+<%= paginate @teachers, theme: 'bootstrap-5' %>
+
+
+<% content_for :action_bar_right do %>
+  <%= create_link Education::Teacher %>
+<% end %>

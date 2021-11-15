@@ -1,0 +1,44 @@
+<% content_for :title, @teacher %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= Education::Teacher.human_attribute_name('biography') %></h3>
+        <%= @teacher.biography %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
+      </div>
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <td width="150"><%= Education::Teacher.human_attribute_name('slug') %></td>
+            <td><%= @teacher.slug %></td>
+          </tr>
+          <% if @teacher.user %>
+            <tr>
+              <td width="150"><%= Education::Teacher.human_attribute_name('user') %></td>
+              <td><%= link_to_if can?(:read, @teacher.user), @teacher.user, admin_user_path(@teacher.user) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @teacher %>
+<% end %>
