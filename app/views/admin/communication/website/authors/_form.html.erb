@@ -18,7 +18,12 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :slug, as: :string if author.persisted? %>
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: author.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#communication_website_author_first_name, #communication_website_author_last_name' }
+                      } %>
           <%= f.association :user, collection: current_university.users.ordered %>
           <ul>
           </ul>

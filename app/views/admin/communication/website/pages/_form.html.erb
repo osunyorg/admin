@@ -18,7 +18,12 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :slug, as: :string if page.persisted? %>
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: page.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#communication_website_page_title' }
+                      } %>
           <%= f.input :published %>
           <%= f.association :parent, collection: page.persisted? ? page.list_of_other_pages : @website.list_of_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
           <ul>

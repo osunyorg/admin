@@ -11,6 +11,7 @@
 //= require gdpr/cookie_consent
 //= require trix
 //= require sortablejs/Sortable
+//= require slug/slug
 //= require_self
 //= require_tree ./admin/commons
 //= require_tree ./admin/plugins

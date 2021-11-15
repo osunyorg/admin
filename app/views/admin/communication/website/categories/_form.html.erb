@@ -17,7 +17,12 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :slug, as: :string if category.persisted? %>
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: category.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#communication_website_category_name' }
+                      } %>
           <%= f.association :parent, collection: category.list_of_other_categories, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
           <ul>
           </ul>
