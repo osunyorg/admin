@@ -30,6 +30,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def update
+    byebug
     if @program.update(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else
@@ -56,6 +57,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     params.require(:education_program)
           .permit(:name, :level, :capacity, :ects, :continuing,
             :prerequisites, :objectives, :duration, :registration, :pedagogy,
-            :evaluation, :accessibility, :pricing, :contacts)
+            :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other, school_ids: [])
   end
 end

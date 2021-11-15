@@ -85,6 +85,10 @@ class Communication::Website::Page < ApplicationRecord
     "#{ title }"
   end
 
+  def is_homepage?
+    path == '/'
+  end
+
   protected
 
   def make_path
@@ -96,7 +100,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def homepage_is_published?
-     if path == '/' and !published
+     if is_homepage? and !published
         errors.add(:published, :home_not_published)
      end
   end

@@ -12,26 +12,33 @@ fr:
         other: Écoles
     attributes:
       education/program:
-        name: Nom
-        level: Niveau
-        capacity: Capacité
-        ects: Crédits ECTS
-        continuing: Formation continue
-        prerequisites: Prérequis
-        objectives: Objectifs
-        duration: Durée
-        registration: Modalités et délais d’accès
-        pricing: Tarifs
-        contacts: Contacts
-        pedagogy: Méthodes mobilisées
-        evaluation: Modalités d’évaluation
         accessibility: Accessibilité
+        capacity: Capacité
+        contacts: Contacts
+        continuing: Formation continue
+        duration: Durée
+        ects: Crédits ECTS
+        evaluation: Modalités d’évaluation
+        level: Niveau
+        name: Nom
+        objectives: Objectifs
+        opportunities: Débouchés
+        other: Autre
+        pedagogy: Méthodes mobilisées
+        prerequisites: Prérequis
+        pricing: Tarifs
+        registration: Modalités et délais d’accès
       education/school:
         address: Adresse
         city: Ville
         country: Pays
         name: Nom
         zipcode: Code postal
+  education:
+    program:
+      main_informations: Informations essentielles
+      useful_informations: Informations pratiques
+      educational_informations: Informations pédagogiques
   enums:
     education/program:
       level:
