@@ -8,18 +8,18 @@
                     I18n.t("activerecord.attributes.communication/website.about_#{object}")
                   },
                   include_blank: false %>
-      <%
-      unless website.about_type.blank?
-        case website.about_type
-        when Research::Journal.name
-          collection = current_university.research_journals
-        when Education::School.name
-          collection = current_university.education_schools
-        end
-      %>
+      <div class="type-school">
         <%= f.input :about_id,
-                    collection: collection %>
-      <% end %>
+                    collection: current_university.education_schools,
+                    label: Education::School.model_name.human,
+                    required: true %>
+      </div>
+      <div class="type-journal">
+        <%= f.input :about_id,
+                    collection: current_university.research_journals,
+                    label: Research::Journal.model_name.human,
+                    required: true %>
+      </div>
     </div>
     <div class="col-md-4">
       <%= f.input :domain %>

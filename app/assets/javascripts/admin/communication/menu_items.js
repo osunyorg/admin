@@ -7,10 +7,10 @@ window.osuny.communication.menuItems = {
         }
 
         this.elementsForKindUrl = document.querySelectorAll('.kind-url');
-        this.requiredInputsForKindUrl = document.querySelectorAll('.kind-url .form-group.required select, .kind-url .form-group.required input');
+        this.requiredInputsForKindUrl = document.querySelectorAll('.kind-url .required select, .kind-url .required input');
 
         this.elementsForKindPage = document.querySelectorAll('.kind-page');
-        this.requiredInputsForKindPage = document.querySelectorAll('.kind-page .form-group.required select, .kind-page .form-group.required input');
+        this.requiredInputsForKindPage = document.querySelectorAll('.kind-page .required select, .kind-page .required input');
 
         this.kindInput.addEventListener('change', this.onKindChange.bind(this));
         this.onKindChange();
