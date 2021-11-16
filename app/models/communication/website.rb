@@ -79,7 +79,7 @@ class Communication::Website < ApplicationRecord
 
   def list_of_pages
     all_pages = []
-    pages.where.not(id: id).root.ordered.each do |page|
+    pages.root.ordered.each do |page|
       all_pages.concat(page.self_and_children(0))
     end
     all_pages

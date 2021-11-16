@@ -1,3 +1,11 @@
 namespace :education do
-  resources :programs, :schools, :teachers
+  resources :teachers, :schools
+  resources :programs do
+    collection do
+      post :reorder
+    end
+    member do
+      get :children
+    end
+  end
 end

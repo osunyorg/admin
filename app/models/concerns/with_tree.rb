@@ -19,13 +19,13 @@ module WithTree
     end
 
     def self_and_children(level)
-      pages = []
+      elements = []
       label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s
-      pages << { label: label, id: self.id }
+      elements << { label: label, id: self.id }
       children.each do |child|
-        pages.concat(child.self_and_children(level + 1))
+        elements.concat(child.self_and_children(level + 1))
       end
-      pages
+      elements
     end
 
   end
