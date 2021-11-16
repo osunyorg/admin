@@ -1,10 +1,10 @@
 ---
-title: "<%= @author.to_s %>"
-identifier: "<%= @author.id %>"
-first_name: "<%= @author.first_name %>"
-last_name: "<%= @author.last_name %>"
-slug: "<%= @author.slug %>"
+title: "<%= @object.to_s %>"
+identifier: "<%= @object.id %>"
+first_name: "<%= @object.first_name %>"
+last_name: "<%= @object.last_name %>"
+slug: "<%= @object.slug %>"
 biography: >
-  <%= prepare_for_github @author.biography, @author.university %>
+  <%= prepare_for_github @object.biography, @object.university %>
 ---
-<%= @author.github_frontmatter.content.html_safe %>
+<%= @object.github_frontmatter.content.html_safe %>

@@ -25,6 +25,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::Program < ApplicationRecord
+  include WithPublicationToWebsites
   include WithTree
 
   has_rich_text :accessibility
@@ -57,6 +58,7 @@ class Education::Program < ApplicationRecord
                           join_table: 'education_programs_teachers',
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_teacher_id'
+  has_many :websites, -> { distinct }, through: :schools
 
   enum level: {
     bachelor: 300,
@@ -75,4 +77,5 @@ class Education::Program < ApplicationRecord
   def list_of_other_programs
     university.list_of_programs.reject! { |p| p[:id] == id }
   end
+
 end

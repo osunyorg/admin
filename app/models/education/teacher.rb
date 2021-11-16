@@ -23,7 +23,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Education::Teacher < ApplicationRecord
-  include WithGithub
+  include WithPublicationToWebsites
   include WithSlug
 
   has_rich_text :biography
@@ -35,7 +35,7 @@ class Education::Teacher < ApplicationRecord
                           join_table: 'education_programs_teachers',
                           foreign_key: 'education_teacher_id',
                           association_foreign_key: 'education_program_id'
-
+  has_many :websites, -> { distinct }, through: :programs
 
   scope :ordered, -> { order(:last_name, :first_name) }
 
@@ -43,15 +43,4 @@ class Education::Teacher < ApplicationRecord
     "#{last_name} #{first_name}"
   end
 
-  def github_path_generated
-    "_teachers/#{slug}.html"
-  end
-
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/education/teachers/jekyll',
-      layout: false,
-      assigns: { teacher: self }
-    )
-  end
 end
