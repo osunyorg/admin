@@ -43,7 +43,7 @@ class VariantService
       end
       dimensions.map! { |dimension| dimension * params[:scale].to_i if dimension.is_a?(Integer) } if params[:scale].present?
       # If one of the dimensions is greater than the original one, no crop and resize to limit
-      crop_dimensions_are_valid = dimensions.all?(&:present?) && dimensions[0] <= blob_size[0] && dimensions[1] <= blob_size[1]
+      crop_dimensions_are_valid = dimensions.all?(&:present?) && dimensions[0] <= blob_size[0].to_i && dimensions[1] <= blob_size[1].to_i
 
       # Resize and/or crop unless original size
       unless dimensions == blob_size

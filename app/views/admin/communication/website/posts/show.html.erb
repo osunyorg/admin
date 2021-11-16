@@ -56,7 +56,7 @@
         </tbody>
       </table>
     </div>
-    <% if @post.featured_image.attached? %>
+    <% if @post.featured_image.attached? && @post.featured_image.variable? %>
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.featured_image') %></h5>
