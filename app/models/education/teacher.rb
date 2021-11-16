@@ -4,7 +4,6 @@
 #
 #  id            :uuid             not null, primary key
 #  first_name    :string
-#  github_path   :text
 #  last_name     :string
 #  slug          :string
 #  created_at    :datetime         not null

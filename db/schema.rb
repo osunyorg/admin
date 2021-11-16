@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_100253) do
+ActiveRecord::Schema.define(version: 2021_11_16_154220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -374,7 +374,6 @@ ActiveRecord::Schema.define(version: 2021_11_16_100253) do
     t.string "first_name"
     t.string "last_name"
     t.string "slug"
-    t.text "github_path"
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -450,7 +449,6 @@ ActiveRecord::Schema.define(version: 2021_11_16_100253) do
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "github_path"
     t.uuid "university_id"
     t.index ["university_id"], name: "idx_researcher_university"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
