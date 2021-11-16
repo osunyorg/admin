@@ -25,8 +25,15 @@
 class Education::School < ApplicationRecord
   belongs_to :university
   has_one :website, class_name: 'Communication::Website', foreign_key: :about
+  has_and_belongs_to_many :programs,
+                          class_name: 'Education::Program',
+                          join_table: 'education_programs_schools',
+                          foreign_key: 'education_school_id',
+                          association_foreign_key: 'education_program_id'
 
   validates :name, :address, :city, :zipcode, :country, presence: true
+
+  scope :ordered, -> { order(:name) }
 
   def to_s
     "#{name}"

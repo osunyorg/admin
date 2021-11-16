@@ -26,12 +26,24 @@ class Education::Program < ApplicationRecord
   has_rich_text :duration
   has_rich_text :evaluation
   has_rich_text :objectives
+  has_rich_text :opportunities
+  has_rich_text :other
   has_rich_text :pedagogy
   has_rich_text :prerequisites
   has_rich_text :pricing
   has_rich_text :registration
-  
+
   belongs_to :university
+  has_and_belongs_to_many :schools,
+                          class_name: 'Education::School',
+                          join_table: 'education_programs_schools',
+                          foreign_key: 'education_program_id',
+                          association_foreign_key: 'education_school_id'
+  has_and_belongs_to_many :teachers,
+                          class_name: 'Education::Teacher',
+                          join_table: 'education_programs_teachers',
+                          foreign_key: 'education_program_id',
+                          association_foreign_key: 'education_teacher_id'
 
   enum level: {
     bachelor: 300,

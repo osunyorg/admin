@@ -1,6 +1,11 @@
 class Admin::Education::ApplicationController < Admin::ApplicationController
   def breadcrumb
-    super
-    add_breadcrumb Education.model_name.human
+    if @program
+      short_breadcrumb
+    else
+      super
+      add_breadcrumb Education.model_name.human
+    end
+
   end
 end

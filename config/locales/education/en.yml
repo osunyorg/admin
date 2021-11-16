@@ -10,28 +10,47 @@ en:
       education/school:
         one: School
         other: Schools
+      education/teacher:
+        one: Teacher
+        other: Teachers
     attributes:
       education/program:
-        name: Name
-        level: Level
-        capacity: Capacity
-        ects: Crédits ECTS
-        continuing: Formation continue
-        prerequisites: Prérequis
-        objectives: Objectifs
-        duration: Durée
-        registration: Modalités et délais d’accès
-        pricing: Tarifs
-        contacts: Contacts
-        pedagogy: Méthodes mobilisées
-        evaluation: Modalités d’évaluation
         accessibility: Accessibilité
+        capacity: Capacity
+        contacts: Contacts
+        continuing: Formation continue
+        duration: Durée
+        ects: Crédits ECTS
+        evaluation: Modalités d’évaluation
+        level: Level
+        name: Name
+        objectives: Objectifs
+        opportunities: Opportunities
+        other: Other
+        pedagogy: Méthodes mobilisées
+        prerequisites: Prérequis
+        pricing: Tarifs
+        registration: Modalités et délais d’accès
+        schools: Schools
+        teachers: Teachers
       education/school:
-        address:: Address
+        address: Address
         city: City
         country: Country
         name: Name
         zipcode: Zipcode
+      education/teacher:
+        biography: Biography
+        first_name: First name
+        last_name: Last name
+        name: Name
+        slug: Slug
+        user: User
+  education:
+    program:
+      main_informations: Main informations
+      useful_informations: Useful informations
+      educational_informations: Educational informations
   enums:
     education/program:
       level:

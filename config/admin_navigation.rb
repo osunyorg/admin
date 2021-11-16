@@ -8,7 +8,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, Education::Program)
       primary.item :education, Education.model_name.human, nil, { kind: :header }
-      primary.item :education, 'Enseignants', nil, { icon: 'user-graduate' }
+      primary.item :education, Education::Teacher.model_name.human(count: 2), admin_education_teachers_path, { icon: 'user-graduate' }
       primary.item :education, Education::School.model_name.human(count: 2), admin_education_schools_path, { icon: 'university' } if can?(:read, Education::School)
       primary.item :education_programs, Education::Program.model_name.human(count: 2), admin_education_programs_path, { icon: 'graduation-cap' } if can?(:read, Education::Program)
       primary.item :education, 'Ressources éducatives', nil, { icon: 'laptop' }
