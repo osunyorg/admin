@@ -63,7 +63,7 @@ module Admin::ApplicationHelper
   def prepare_for_github(html, university)
     text = html.to_s
     text = sanitize text,
-                    tags: %w(table a figure img figcaption i em b strong p h2 h3 h4 h5 h6 blockquote),
+                    tags: %w(table a figure img figcaption i em b strong p h2 h3 h4 h5 h6 blockquote br),
                     attributes: %w(href alt title target rel src srcset width height)
     text.gsub! "\r", ''
     text.gsub! "\n", ' '
