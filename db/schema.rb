@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_162245) do
+ActiveRecord::Schema.define(version: 2021_11_16_154220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -335,6 +335,9 @@ ActiveRecord::Schema.define(version: 2021_11_15_162245) do
     t.boolean "continuing"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "parent_id"
+    t.integer "position", default: 0
+    t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
 
@@ -371,7 +374,6 @@ ActiveRecord::Schema.define(version: 2021_11_15_162245) do
     t.string "first_name"
     t.string "last_name"
     t.string "slug"
-    t.text "github_path"
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -447,7 +449,6 @@ ActiveRecord::Schema.define(version: 2021_11_15_162245) do
     t.uuid "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "github_path"
     t.uuid "university_id"
     t.index ["university_id"], name: "idx_researcher_university"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
@@ -551,6 +552,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_162245) do
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
+  add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "education_teachers", "universities"

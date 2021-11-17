@@ -4,7 +4,6 @@
 #
 #  id            :uuid             not null, primary key
 #  first_name    :string
-#  github_path   :text
 #  last_name     :string
 #  old_biography :text
 #  created_at    :datetime         not null
@@ -23,28 +22,17 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Research::Researcher < ApplicationRecord
+  include WithPublicationToWebsites
+
   has_rich_text :biography
 
   belongs_to :university
   belongs_to :user, optional: true
   has_and_belongs_to_many :articles, class_name: 'Research::Journal::Article'
   has_many :journals, through: :articles
-
-  after_save :publish_to_github
+  has_many :websites, -> { distinct }, through: :journals
 
   scope :ordered, -> { order(:last_name, :first_name) }
-
-  def websites
-    @websites ||= journals.collect(&:website).uniq.compact
-  end
-
-  def publish_to_website(website)
-    github = Github.new website.access_token, website.repository
-    return unless github.valid?
-    github.publish  path: "_authors/#{ id }.md",
-                    data: to_jekyll,
-                    commit: "[Researcher] Save #{to_s}"
-  end
 
   def to_s
     "#{ first_name } #{ last_name }"
@@ -52,15 +40,9 @@ class Research::Researcher < ApplicationRecord
 
   protected
 
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/research/researchers/jekyll',
-      layout: false,
-      assigns: { researcher: self }
-    )
+  # overwrite from WithPublicationToWebsites
+  def path_root
+    'authors'
   end
 
-  def publish_to_github
-    websites.each { |website| publish_to_website(website) }
-  end
 end

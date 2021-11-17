@@ -1,28 +1,8 @@
 <% content_for :title, Education::Program.model_name.human(count: 2) %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Education::Program.human_attribute_name('name') %></th>
-      <th><%= Education::Program.human_attribute_name('level') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @programs.each do |program| %>
-      <tr>
-        <td><%= link_to program, [:admin, program] %></td>
-        <td><%= program.level %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link program %>
-            <%= destroy_link program %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul class="list-unstyled treeview js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @programs.first) %>" data-id="" data-sort-url="<%= reorder_admin_education_programs_path %>">
+  <%= render 'treebranch', programs: @programs %>
+</ul>
 
 <% content_for :action_bar_right do %>
   <%= create_link Education::Program %>

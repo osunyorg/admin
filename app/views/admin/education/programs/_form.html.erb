@@ -10,6 +10,7 @@
       <%= f.association :schools,
                         as: :check_boxes,
                         collection: current_university.education_schools.ordered %>
+      <%= f.association :parent, collection: program.persisted? ? program.list_of_other_programs : current_university.list_of_programs, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
     </div>
     <div class="col-md-8">
       <h2 class="h4"><%= t('education.program.useful_informations') %></h2>

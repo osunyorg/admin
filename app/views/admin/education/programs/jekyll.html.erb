@@ -1,0 +1,32 @@
+---
+title: "<%= @object.name %>"
+identifier: "<%= @object.id %>"
+parent: "<%= @object.parent_id %>"
+continuing: <%= @object.continuing %>
+level: <%= @object.level %>
+ects: <%= @object.ects %>
+position: <%= @object.position %>
+accessibility: >
+  <%= prepare_for_github @object.accessibility, @object.university %>
+contacts: >
+  <%= prepare_for_github @object.contacts, @object.university %>
+duration: >
+  <%= prepare_for_github @object.duration, @object.university %>
+evaluation: >
+  <%= prepare_for_github @object.evaluation, @object.university %>
+objectives: >
+  <%= prepare_for_github @object.objectives, @object.university %>
+opportunities: >
+  <%= prepare_for_github @object.opportunities, @object.university %>
+other: >
+  <%= prepare_for_github @object.other, @object.university %>
+pedagogy: >
+  <%= prepare_for_github @object.pedagogy, @object.university %>
+prerequisites: >
+  <%= prepare_for_github @object.prerequisites, @object.university %>
+pricing: >
+  <%= prepare_for_github @object.pricing, @object.university %>
+registration: >
+  <%= prepare_for_github @object.registration, @object.university %>
+---
+<%= @object.github_frontmatter.content.html_safe %>

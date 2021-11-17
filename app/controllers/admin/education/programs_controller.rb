@@ -2,8 +2,26 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   load_and_authorize_resource class: Education::Program
 
   def index
-    @programs = current_university.education_programs
+    @programs = current_university.education_programs.root.ordered
     breadcrumb
+  end
+
+  def reorder
+    parent_id = params['parentId'].blank? ? nil : params['parentId']
+    ids = params['ids']
+    ids.each.with_index do |id, index|
+      program = current_university.education_programs.find(id)
+      program.update(
+        parent_id: parent_id,
+        position: index + 1
+      )
+    end
+  end
+
+  def children
+    return unless request.xhr?
+    @program = current_university.education_programs.find(params[:id])
+    @children = @program.children.ordered
   end
 
   def show
@@ -56,6 +74,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     params.require(:education_program)
           .permit(:name, :level, :capacity, :ects, :continuing,
             :prerequisites, :objectives, :duration, :registration, :pedagogy,
-            :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other, school_ids: [], teacher_ids: [])
+            :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other, :parent_id, school_ids: [], teacher_ids: [])
   end
 end
