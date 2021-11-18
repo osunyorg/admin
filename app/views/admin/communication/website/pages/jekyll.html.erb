@@ -6,6 +6,7 @@ title: "<%= @page.title %>"
 permalink: "<%= @page.path %>"
 identifier: "<%= @page.id %>"
 parent: "<%= @page.parent_id %>"
+category: "<%= @page.category_id %>"
 <% if @page.featured_image.attached? %>
 image: "<%= @page.featured_image.blob.id %>"
 <% end %>

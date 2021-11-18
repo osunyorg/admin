@@ -85,6 +85,7 @@ fr:
         title: Titre
         url: URL
       communication/website/page:
+        category: Catégorie
         children: Pages enfantes
         description: Description (SEO)
         featured_image: Image à la une

@@ -26,6 +26,7 @@
                       } %>
           <%= f.input :published %>
           <%= f.association :parent, collection: page.persisted? ? page.list_of_other_pages : @website.list_of_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <%= f.association :category, collection: page.website.categories.ordered %>
           <ul>
           </ul>
         </div>

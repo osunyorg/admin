@@ -48,6 +48,17 @@
                               class: "#{'opacity-50' unless @page.parent.published?}" %></td>
             </tr>
           <% end %>
+          <% if @page.category %>
+            <tr>
+              <td><%= Communication::Website::Page.human_attribute_name('category') %></td>
+              <td><%= link_to_if can?(:read, @page.category),
+                              @page.category,
+                              admin_communication_website_category_path(
+                                website_id: @website.id,
+                                id: @page.category.id
+                              ) %></td>
+            </tr>
+          <% end %>
           <% if @page.children.any? %>
             <tr>
               <td><%= Communication::Website::Page.human_attribute_name('children') %></td>
