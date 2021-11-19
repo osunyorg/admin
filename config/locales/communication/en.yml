@@ -31,6 +31,8 @@ en:
         one: Category
         other: Categories
         all: All categories
+      communication/website/home:
+        one: Homepage
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
@@ -71,6 +73,9 @@ en:
         name: Name
         parent: Parent category
         slug: Slug
+      communication/website/home:
+        text: Text
+        featured_image: Featured image
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:

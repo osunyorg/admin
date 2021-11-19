@@ -55,6 +55,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def update
+    byebug
     if @page.update(page_params)
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
     else
