@@ -62,9 +62,10 @@ module Admin::ApplicationHelper
 
   def prepare_for_github(html, university)
     text = html.to_s
+
     text = sanitize text,
-                    tags: %w(table a figure img figcaption i em b strong p h2 h3 h4 h5 h6 blockquote br),
-                    attributes: %w(href alt title target rel src srcset width height)
+                    tags: %w(table figure figcaption strong em b i u p code pre tt samp kbd var sub sup dfn cite big small address hr br span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins),
+                    attributes: %w(rel  href src srcset width height alt cite datetime title class name xml:lang abbr style target)
     text.gsub! "\r", ''
     text.gsub! "\n", ' '
     text.gsub! "/rails/active_storage", "#{university.url}/rails/active_storage"

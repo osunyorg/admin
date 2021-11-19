@@ -51,6 +51,7 @@ en:
         all: All posts
     attributes:
       communication/website:
+        about: About
         about_: Independent website (no specific subject)
         about_Education::School: School website
         about_Research::Journal: Journal website

@@ -31,7 +31,7 @@ class Github
                             file: local_path,
                             sha: file_sha(path)
     true
-  rescue
+  rescue => e
     false
   end
 
