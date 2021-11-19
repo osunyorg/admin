@@ -9,12 +9,18 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def reorder
     parent_id = params['parentId'].blank? ? nil : params['parentId']
     ids = params['ids']
+    website_ids = []
     ids.each.with_index do |id, index|
       program = current_university.education_programs.find(id)
       program.update(
         parent_id: parent_id,
-        position: index + 1
+        position: index + 1,
+        skip_websites_categories_callback: true
       )
+      website_ids.concat(program.website_ids)
+    end
+    current_university.communication_websites.where(id: website_ids.uniq).each do |website|
+      website.set_programs_categories!
     end
   end
 

@@ -47,6 +47,8 @@ class Communication::Website < ApplicationRecord
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy
 
+  after_save_commit :set_programs_categories!, if: -> (website) { website.about_type == 'Education::School' }
+
   def self.about_types
     [nil, Education::School.name, Research::Journal.name]
   end
@@ -109,6 +111,16 @@ class Communication::Website < ApplicationRecord
     publish_objects_with_blobs(Communication::Website::Post, posts)
   end
 
+  def set_programs_categories!
+    programs_root_category = categories.where(is_programs_root: true).first_or_create(
+      name: 'Offre de formation',
+      slug: 'offre-de-formation',
+      is_programs_root: true,
+      university_id: university.id
+    )
+    create_programs_categories_level(programs_root_category, about.programs.root.ordered)
+  end
+
   protected
 
   def publish_objects(model, objects)
@@ -137,5 +149,20 @@ class Communication::Website < ApplicationRecord
                             data: object.blob_to_jekyll(blob)
       end
     }
+  end
+
+  def create_programs_categories_level(parent_category, programs)
+    programs.each_with_index do |program, index|
+      program_category = categories.where(program_id: program.id).first_or_initialize(
+        name: program.name,
+        slug: program.name.parameterize,
+        university_id: university.id
+      )
+      program_category.parent = parent_category
+      program_category.position = index + 1
+      program_category.save
+      program_children = about.programs.where(parent_id: program.id).ordered
+      create_programs_categories_level(program_category, program_children)
+    end
   end
 end

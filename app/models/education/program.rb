@@ -28,6 +28,8 @@ class Education::Program < ApplicationRecord
   include WithPublicationToWebsites
   include WithTree
 
+  attr_accessor :skip_websites_categories_callback
+
   has_rich_text :accessibility
   has_rich_text :contacts
   has_rich_text :duration
@@ -68,6 +70,8 @@ class Education::Program < ApplicationRecord
 
   validates_presence_of :name
 
+  after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
+
   scope :ordered, -> { order(:position) }
 
   def to_s
@@ -78,4 +82,7 @@ class Education::Program < ApplicationRecord
     university.list_of_programs.reject! { |p| p[:id] == id }
   end
 
+  def set_websites_categories
+    websites.find_each(&:set_programs_categories!)
+  end
 end
