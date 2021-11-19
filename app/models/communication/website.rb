@@ -25,6 +25,10 @@
 class Communication::Website < ApplicationRecord
   belongs_to :university
   belongs_to :about, polymorphic: true, optional: true
+  has_one :home,
+          class_name: 'Communication::Website::Home',
+          foreign_key: :communication_website_id,
+          dependent: :destroy
   has_many :pages,
            foreign_key: :communication_website_id,
            dependent: :destroy
@@ -47,6 +51,7 @@ class Communication::Website < ApplicationRecord
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy
 
+  after_create :create_home
   after_save :send_infos_to_github
 
   def self.about_types
@@ -151,5 +156,8 @@ class Communication::Website < ApplicationRecord
     }
   end
 
+  def create_home
+    build_home(university_id: university_id).save
+  end
 
 end

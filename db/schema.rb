@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_19_104156) do
+ActiveRecord::Schema.define(version: 2021_11_19_111703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(version: 2021_11_19_104156) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_homes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "idx_comm_website_homes_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_homes_on_university_id"
   end
 
   create_table "communication_website_imported_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -524,6 +533,8 @@ ActiveRecord::Schema.define(version: 2021_11_19_104156) do
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_homes", "communication_websites"
+  add_foreign_key "communication_website_homes", "universities"
   add_foreign_key "communication_website_imported_authors", "communication_website_authors", column: "author_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"
