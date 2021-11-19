@@ -21,6 +21,7 @@
 #
 class Communication::Website::Home < ApplicationRecord
   include WithGithub
+  include Communication::Website::WithMedia
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
