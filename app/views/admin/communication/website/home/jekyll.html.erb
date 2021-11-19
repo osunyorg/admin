@@ -1,0 +1,10 @@
+---
+layout: home
+permalink: "/"
+<% if @home.featured_image.attached? %>
+image: "<%= @home.featured_image.blob.id %>"
+<% end %>
+description: >
+  <%= prepare_for_github @home.text, @home.university %>
+---
+<%= @home.github_frontmatter.content.html_safe %>

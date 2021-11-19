@@ -38,6 +38,7 @@ fr:
         city: Ville
         country: Pays
         name: Nom
+        phone: Téléphone
         zipcode: Code postal
       education/teacher:
         biography: Biographie

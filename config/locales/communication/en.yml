@@ -31,6 +31,8 @@ en:
         one: Category
         other: Categories
         all: All categories
+      communication/website/home:
+        one: Homepage
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
@@ -51,6 +53,7 @@ en:
         all: All posts
     attributes:
       communication/website:
+        about: About
         about_: Independent website (no specific subject)
         about_Education::School: School website
         about_Research::Journal: Journal website
@@ -70,6 +73,9 @@ en:
         name: Name
         parent: Parent category
         slug: Slug
+      communication/website/home:
+        text: Text
+        featured_image: Featured image
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -107,19 +113,9 @@ en:
         text: Text
         title: Title
         website: Website
-    errors:
-      models:
-        communication/website/page:
-          attributes:
-            published:
-              home_not_published: must be checked. Homepage has to be published.
   enums:
     communication/website/menu/item:
       kind:
         blank: Title
         page: Page
         url: URL
-  simple_form:
-    hints:
-      communication_website_page:
-        slug: Leave empty for home page

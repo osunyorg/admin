@@ -1,5 +1,7 @@
 namespace :communication do
   resources :websites do
+    get 'home' => 'website/home#edit'
+    patch 'home' => 'website/home#update'
     member do
       get :import
       post :import

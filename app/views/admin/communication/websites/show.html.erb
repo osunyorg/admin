@@ -10,6 +10,58 @@
   <% end %>
 <% end %>
 
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-end">
+          <%= link_to t('edit'),
+                      admin_communication_website_home_path(website_id: @website),
+                      class: button_classes if can?(:update, Communication::Website::Home) %>
+        </div>
+        <h2 class="card-title">
+          <%= Communication::Website::Home.model_name.human %>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <% unless @website.home.text.blank? %>
+            <div class="col-md-6">
+              <%= @website.home.text %>
+            </div>
+          <% end %>
+          <% if @website.home.featured_image.attached? %>
+            <div class="col-md-6">
+              <%= image_tag @website.home.featured_image.variant(resize: '300x^'), class: 'img-fluid' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-end">
+          <%= link_to t('create'),
+                      new_admin_communication_website_menu_path(website_id: @website),
+                      class: button_classes if can?(:create, Communication::Website::Menu) %>
+        </div>
+        <h2 class="card-title">
+          <%= link_to admin_communication_website_menus_path(website_id: @website) do %>
+            <%= Communication::Website::Menu.model_name.human(count: 2) %>
+            <small>
+              -
+              <%= t('communication.website.see_all', number: @website.menus.count) %>
+            </small>
+          <% end %>
+        </h2>
+      </div>
+      <%= render 'admin/communication/website/menus/list', menus: @website.menus.ordered %>
+    </div>
+  </div>
+</div>
+
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
@@ -72,27 +124,7 @@
       <%= render 'admin/communication/website/categories/list', categories: @website.categories.root.ordered %>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card mt-5">
-      <div class="card-header">
-        <div class="float-end">
-          <%= link_to t('create'),
-                      new_admin_communication_website_menu_path(website_id: @website),
-                      class: button_classes if can?(:create, Communication::Website::Menu) %>
-        </div>
-        <h2 class="card-title">
-          <%= link_to admin_communication_website_menus_path(website_id: @website) do %>
-            <%= Communication::Website::Menu.model_name.human(count: 2) %>
-            <small>
-              -
-              <%= t('communication.website.see_all', number: @website.menus.count) %>
-            </small>
-          <% end %>
-        </h2>
-      </div>
-      <%= render 'admin/communication/website/menus/list', menus: @website.menus.ordered %>
-    </div>
-  </div>
+
   <div class="col-md-4">
     <div class="card mt-5">
       <div class="card-header">

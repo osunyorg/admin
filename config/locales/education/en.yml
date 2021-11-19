@@ -38,6 +38,7 @@ en:
         city: City
         country: Country
         name: Name
+        phone: Phone
         zipcode: Zipcode
       education/teacher:
         biography: Biography

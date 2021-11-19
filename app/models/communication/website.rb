@@ -25,6 +25,10 @@
 class Communication::Website < ApplicationRecord
   belongs_to :university
   belongs_to :about, polymorphic: true, optional: true
+  has_one :home,
+          class_name: 'Communication::Website::Home',
+          foreign_key: :communication_website_id,
+          dependent: :destroy
   has_many :pages,
            foreign_key: :communication_website_id,
            dependent: :destroy
@@ -47,6 +51,8 @@ class Communication::Website < ApplicationRecord
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy
 
+  after_create :create_home
+  after_save :send_infos_to_github
   after_save_commit :set_programs_categories!, if: -> (website) { website.about_type == 'Education::School' }
 
   def self.about_types
@@ -121,6 +127,16 @@ class Communication::Website < ApplicationRecord
     create_programs_categories_level(programs_root_category, about.programs.root.ordered)
   end
 
+  def send_infos_to_github
+    if self.about_type == "Education::School"
+      github = Github.with_site self
+      return unless github.valid?
+      github.publish  path: "_data/school.yml",
+                      data: about.to_yml,
+                      commit: "[School infos] Save"
+    end
+  end
+
   protected
 
   def publish_objects(model, objects)
@@ -164,5 +180,9 @@ class Communication::Website < ApplicationRecord
       program_children = about.programs.where(parent_id: program.id).ordered
       create_programs_categories_level(program_category, program_children)
     end
+  end
+
+  def create_home
+    build_home(university_id: university_id).save
   end
 end
