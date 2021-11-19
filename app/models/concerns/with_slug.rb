@@ -5,7 +5,6 @@ module WithSlug
     validates :slug,
               uniqueness: { scope: :university_id }
     validates :slug,
-              format: { with: /\A[a-z0-9\-]+\z/, message: "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union." },
-              allow_blank: true
+              format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }
   end
 end

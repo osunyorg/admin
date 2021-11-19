@@ -113,19 +113,9 @@ en:
         text: Text
         title: Title
         website: Website
-    errors:
-      models:
-        communication/website/page:
-          attributes:
-            published:
-              home_not_published: must be checked. Homepage has to be published.
   enums:
     communication/website/menu/item:
       kind:
         blank: Title
         page: Page
         url: URL
-  simple_form:
-    hints:
-      communication_website_page:
-        slug: Leave empty for home page

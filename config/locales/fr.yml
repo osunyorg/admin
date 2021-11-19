@@ -119,6 +119,7 @@ fr:
   simple_form_password_with_hints:
       test_chars: "%{min_length} caractères min."
   show: Voir
+  slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://osuny.org/conditions-d-utilisation
   time:

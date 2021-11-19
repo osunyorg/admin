@@ -63,7 +63,6 @@ class Communication::Website::Page < ApplicationRecord
              dependent: :nullify
 
   validates :title, presence: true
-  validate :homepage_is_published?
 
   before_validation :make_path
   after_save :update_children_paths if :saved_change_to_path?
@@ -91,10 +90,6 @@ class Communication::Website::Page < ApplicationRecord
     "#{ title }"
   end
 
-  def is_homepage?
-    path == '/'
-  end
-
   protected
 
   def make_path
@@ -105,9 +100,5 @@ class Communication::Website::Page < ApplicationRecord
     children.each(&:save)
   end
 
-  def homepage_is_published?
-     if is_homepage? and !published
-        errors.add(:published, :home_not_published)
-     end
-  end
+
 end

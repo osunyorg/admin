@@ -113,19 +113,9 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
-    errors:
-      models:
-        communication/website/page:
-          attributes:
-            published:
-              home_not_published: doit être coché. La page d'accueil doit être publiée.
   enums:
     communication/website/menu/item:
       kind:
         blank: Titre intermédiaire
         page: Page
         url: URL
-  simple_form:
-    hints:
-      communication_website_page:
-        slug: Laisser vide pour la page d'accueil du site
