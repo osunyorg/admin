@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  description              :text
 #  github_path              :text
+#  is_programs_root         :boolean          default(FALSE)
 #  name                     :string
 #  position                 :integer
 #  slug                     :string
@@ -12,18 +13,21 @@
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null
 #  parent_id                :uuid
+#  program_id               :uuid
 #  university_id            :uuid             not null
 #
 # Indexes
 #
 #  idx_communication_website_post_cats_on_communication_website_id  (communication_website_id)
 #  index_communication_website_categories_on_parent_id              (parent_id)
+#  index_communication_website_categories_on_program_id             (program_id)
 #  index_communication_website_categories_on_university_id          (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (communication_website_id => communication_websites.id)
 #  fk_rails_...  (parent_id => communication_website_categories.id)
+#  fk_rails_...  (program_id => education_programs.id)
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Category < ApplicationRecord
@@ -36,6 +40,9 @@ class Communication::Website::Category < ApplicationRecord
              foreign_key: :communication_website_id
   belongs_to :parent,
             class_name: 'Communication::Website::Category',
+            optional: true
+  belongs_to :program,
+            class_name: 'Education::Program',
             optional: true
   has_one :imported_category,
           class_name: 'Communication::Website::Imported::Category',
@@ -85,7 +92,7 @@ class Communication::Website::Category < ApplicationRecord
   protected
 
   def set_position
-    last_element = website.categories.ordered.last
+    last_element = website.categories.where(parent_id: parent_id).ordered.last
 
     unless last_element.nil?
       self.position = last_element.position + 1
