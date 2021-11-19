@@ -44,7 +44,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
 
-  enum kind: { blank: 0, url: 10, page: 20 }, _prefix: :kind
+  enum kind: { blank: 0, url: 10, page: 20, programs: 30 }, _prefix: :kind
 
   validates :title, presence: true
 
@@ -59,6 +59,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   def jekyll_target
     return url if kind_url?
     return about&.path if kind_page?
+    return '/programs' if kind_programs?
     return nil if kind_blank?
   end
 
