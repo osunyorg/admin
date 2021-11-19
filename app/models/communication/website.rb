@@ -47,6 +47,8 @@ class Communication::Website < ApplicationRecord
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy
 
+  after_save :send_infos_to_github
+
   def self.about_types
     [nil, Education::School.name, Research::Journal.name]
   end
@@ -109,6 +111,16 @@ class Communication::Website < ApplicationRecord
     publish_objects_with_blobs(Communication::Website::Post, posts)
   end
 
+  def send_infos_to_github
+    if self.about_type == Education::School.name
+      github = Github.with_site self
+      return unless github.valid?
+      github.publish  path: "_data/school.yml",
+                      data: about.to_yml,
+                      commit: "[School infos] Save"
+    end
+  end
+
   protected
 
   def publish_objects(model, objects)
@@ -138,4 +150,6 @@ class Communication::Website < ApplicationRecord
       end
     }
   end
+
+
 end

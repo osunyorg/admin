@@ -1,10 +1,12 @@
 <% content_for :title, @school %>
 
 <% content_for :title_right do %>
-  <% if @school.website %>
+  <% if @school.websites.any? %>
     <%= Communication::Website.model_name.human %>
     <i class="fas fa-arrow-right small"></i>
-    <%= link_to @school.website, [:admin, @school.website] %><br>
+    <% @school.websites.each do |website| %>
+      <%= link_to website, [:admin, website] %><br>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -12,6 +14,7 @@
   <%= @school.address %><br>
   <%= @school.zipcode %> <%= @school.city %><br>
   <%= @school.country %>
+  <%= @school.phone %>
 </p>
 
 <% content_for :action_bar_right do %>

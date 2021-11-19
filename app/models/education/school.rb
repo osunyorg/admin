@@ -9,6 +9,7 @@
 #  latitude      :float
 #  longitude     :float
 #  name          :string
+#  phone         :string
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,7 +25,7 @@
 #
 class Education::School < ApplicationRecord
   belongs_to :university
-  has_one :website, class_name: 'Communication::Website', as: :about
+  has_many :websites, class_name: 'Communication::Website', as: :about
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
                           join_table: 'education_programs_schools',
@@ -35,7 +36,26 @@ class Education::School < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
 
+  after_save_commit :publish_to_github
+
   def to_s
     "#{name}"
+  end
+
+  def to_yml
+    {
+      name: name,
+      address: address,
+      zipcode: zipcode,
+      city: city,
+      country: ISO3166::Country[country].translations[country.downcase],
+      phone: phone
+    }.deep_stringify_keys.to_yaml.lines[1..-1].join
+  end
+
+  private
+
+  def publish_to_github
+    websites.each(&:send_infos_to_github)
   end
 end

@@ -54,6 +54,6 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def school_params
     params.require(:education_school)
-          .permit(:university_id, :name, :address, :zipcode, :city, :country, :latitude, :longitude)
+          .permit(:university_id, :name, :address, :zipcode, :city, :country, :phone)
   end
 end
