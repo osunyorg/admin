@@ -1,33 +1,46 @@
 <%= simple_form_for [:admin, website] do |f| %>
   <div class="row">
     <div class="col-md-4">
-      <%= f.input :name %>
-      <%= f.input :about_type,
-                  collection: Communication::Website.about_types,
-                  label_method: lambda { |object|
-                    I18n.t("activerecord.attributes.communication/website.about_#{object}")
-                  },
-                  include_blank: false %>
-      <div class="type-school">
-        <%= f.input :about_id,
-                    collection: current_university.education_schools,
-                    label: Education::School.model_name.human,
-                    required: true %>
-      </div>
-      <div class="type-journal">
-        <%= f.input :about_id,
-                    collection: current_university.research_journals,
-                    label: Research::Journal.model_name.human,
-                    required: true %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('content') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :name %>
+          <%= f.input :about_type,
+                      collection: Communication::Website.about_types,
+                      label_method: lambda { |object|
+                        I18n.t("activerecord.attributes.communication/website.about_#{object}")
+                      },
+                      include_blank: false %>
+          <div class="type-school">
+            <%= f.input :about_id,
+                        collection: current_university.education_schools,
+                        label: Education::School.model_name.human,
+                        required: true %>
+          </div>
+          <div class="type-journal">
+            <%= f.input :about_id,
+                        collection: current_university.research_journals,
+                        label: Research::Journal.model_name.human,
+                        required: true %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
-      <%= f.input :domain %>
-      <%= f.input :repository %>
-      <%= f.input :access_token %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :domain %>
+          <%= f.input :repository %>
+          <%= f.input :access_token %>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-    </div>
+
   </div>
   <% content_for :action_bar_right do %>
     <%= submit f %>
