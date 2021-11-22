@@ -4,7 +4,7 @@
       <%= f.input :name %>
       <%= f.input :phone %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
       <%= f.input :address %>
       <div class="row">
         <div class="col-md-4">
@@ -15,6 +15,11 @@
         </div>
       </div>
       <%= f.input :country %>
+    </div>
+    <div class="col-md-4">
+      <%= f.association :programs,
+                        as: :check_boxes,
+                        collection: current_university.education_programs.ordered %>
     </div>
   </div>
   <% content_for :action_bar_right do %>
