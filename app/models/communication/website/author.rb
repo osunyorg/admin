@@ -59,4 +59,9 @@ class Communication::Website::Author < ApplicationRecord
     )
   end
 
+  protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+  end
 end
