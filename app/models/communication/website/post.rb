@@ -49,11 +49,10 @@ class Communication::Website::Post < ApplicationRecord
                           foreign_key: 'communication_website_post_id',
                           association_foreign_key: 'communication_website_category_id'
 
-  validates :title, presence: true
-  validates :slug, uniqueness: { scope: :website_id }
-
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
+
+  validates :title, presence: true
 
   def github_path_generated
     "_posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"

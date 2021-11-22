@@ -39,8 +39,6 @@ class Communication::Website::Author < ApplicationRecord
            class_name: 'Communication::Website::Post',
            dependent: :nullify
 
-  validates :slug, uniqueness: { scope: :website_id }
-
   scope :ordered, -> { order(:last_name, :first_name) }
 
   def to_s

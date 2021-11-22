@@ -36,8 +36,6 @@ class Education::Teacher < ApplicationRecord
                           association_foreign_key: 'education_program_id'
   has_many :websites, -> { distinct }, through: :programs
 
-  validates :slug, uniqueness: { scope: :university_id }
-
   scope :ordered, -> { order(:last_name, :first_name) }
 
   def to_s
