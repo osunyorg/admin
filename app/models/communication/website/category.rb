@@ -57,8 +57,8 @@ class Communication::Website::Category < ApplicationRecord
                           foreign_key: 'communication_website_category_id',
                           association_foreign_key: 'communication_website_post_id'
 
-
   validates :name, presence: true
+  validates :slug, uniqueness: { scope: :communication_website_id }
 
   scope :ordered, -> { order(:position) }
 
@@ -101,4 +101,7 @@ class Communication::Website::Category < ApplicationRecord
     end
   end
 
+  def slug_unavailable?(slug)
+    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+  end
 end

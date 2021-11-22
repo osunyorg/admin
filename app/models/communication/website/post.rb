@@ -53,6 +53,7 @@ class Communication::Website::Post < ApplicationRecord
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
   validates :title, presence: true
+  validates :slug, uniqueness: { scope: :communication_website_id }
 
   def github_path_generated
     "_posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
@@ -68,5 +69,11 @@ class Communication::Website::Post < ApplicationRecord
 
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
   end
 end

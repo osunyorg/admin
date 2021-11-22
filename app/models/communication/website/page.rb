@@ -15,24 +15,24 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid
-#  category_id              :uuid
 #  communication_website_id :uuid             not null
 #  parent_id                :uuid
+#  related_category_id      :uuid
 #  university_id            :uuid             not null
 #
 # Indexes
 #
 #  index_communication_website_pages_on_about                     (about_type,about_id)
-#  index_communication_website_pages_on_category_id               (category_id)
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
+#  index_communication_website_pages_on_related_category_id       (related_category_id)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (category_id => communication_website_categories.id)
 #  fk_rails_...  (communication_website_id => communication_websites.id)
 #  fk_rails_...  (parent_id => communication_website_pages.id)
+#  fk_rails_...  (related_category_id => communication_website_categories.id)
 #  fk_rails_...  (university_id => universities.id)
 #
 
@@ -48,7 +48,7 @@ class Communication::Website::Page < ApplicationRecord
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
-  belongs_to :category,
+  belongs_to :related_category,
              class_name: 'Communication::Website::Category',
              optional: true
   belongs_to :parent,
@@ -63,6 +63,7 @@ class Communication::Website::Page < ApplicationRecord
              dependent: :nullify
 
   validates :title, presence: true
+  validates :slug, uniqueness: { scope: :communication_website_id }
 
   before_validation :make_path
   after_save :update_children_paths if :saved_change_to_path?
@@ -91,6 +92,10 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+  end
 
   def make_path
     self.path = "#{parent&.path}/#{slug}".gsub('//', '/')

@@ -87,7 +87,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
           .permit(:communication_website_id, :title,
             :description, :text, :about_type, :about_id, :slug, :published,
             :featured_image, :featured_image_delete, :featured_image_infos,
-            :parent_id, :category_id)
+            :parent_id, :related_category_id)
           .merge(university_id: current_university.id)
   end
 end

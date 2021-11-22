@@ -39,6 +39,8 @@ class Communication::Website::Author < ApplicationRecord
            class_name: 'Communication::Website::Post',
            dependent: :nullify
 
+  validates :slug, uniqueness: { scope: :communication_website_id }
+
   scope :ordered, -> { order(:last_name, :first_name) }
 
   def to_s
@@ -57,4 +59,9 @@ class Communication::Website::Author < ApplicationRecord
     )
   end
 
+  protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+  end
 end

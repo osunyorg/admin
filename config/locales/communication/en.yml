@@ -91,7 +91,7 @@ en:
         title: Title
         url: URL
       communication/website/page:
-        category: Category
+        related_category: Related category
         children: Children pages
         description: Description (SEO)
         featured_image: Featured image
