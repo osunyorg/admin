@@ -1,25 +1,39 @@
 <%= simple_form_for [:admin, school] do |f| %>
   <div class="row">
-    <div class="col-md-4">
-      <%= f.input :name %>
-      <%= f.input :phone %>
-    </div>
-    <div class="col-md-4">
-      <%= f.input :address %>
-      <div class="row">
-        <div class="col-md-4">
-          <%= f.input :zipcode %>
+    <div class="col-md-6">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
-        <div class="col-md-8">
-          <%= f.input :city %>
+        <div class="card-body">
+          <%= f.input :name %>
+          <%= f.input :phone %>
+          <%= f.input :address %>
+          <div class="row">
+            <div class="col-md-4">
+              <%= f.input :zipcode %>
+            </div>
+            <div class="col-md-8">
+              <%= f.input :city %>
+            </div>
+          </div>
+          <%= f.input :country %>
         </div>
       </div>
-      <%= f.input :country %>
     </div>
-    <div class="col-md-4">
-      <%= f.association :programs,
-                        as: :check_boxes,
-                        collection: current_university.education_programs.ordered %>
+    <div class="col-md-6">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.association :programs,
+                            as: :check_boxes,
+                            collection: current_university.list_of_programs,
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] }  %>
+        </div>
+      </div>
     </div>
   </div>
   <% content_for :action_bar_right do %>

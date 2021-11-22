@@ -1,8 +1,12 @@
 <%= simple_form_for [:admin, journal] do |f| %>
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :title %>
-      <%= f.input :issn %>
+      <div class="card flex-fill w-100">
+        <div class="card-body">
+          <%= f.input :title %>
+          <%= f.input :issn %>
+        </div>
+      </div>
     </div>
   </div>
   <% content_for :action_bar_right do %>
