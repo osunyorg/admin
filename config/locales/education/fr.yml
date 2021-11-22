@@ -40,6 +40,7 @@ fr:
         name: Nom
         phone: Téléphone
         programs: Formations dispensées
+        websites: Sites webs associés
         zipcode: Code postal
       education/teacher:
         biography: Biographie

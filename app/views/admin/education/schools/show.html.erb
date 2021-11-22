@@ -1,21 +1,60 @@
 <% content_for :title, @school %>
 
-<% content_for :title_right do %>
-  <% if @school.websites.any? %>
-    <%= Communication::Website.model_name.human %>
-    <i class="fas fa-arrow-right small"></i>
-    <% @school.websites.each do |website| %>
-      <%= link_to website, [:admin, website] %><br>
-    <% end %>
-  <% end %>
-<% end %>
+<div class="row">
 
-<p>
-  <%= @school.address %><br>
-  <%= @school.zipcode %> <%= @school.city %><br>
-  <%= @school.country %>
-  <%= @school.phone %>
-</p>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= Education::School.human_attribute_name('address') %></h3>
+        <%= @school.address %><br>
+        <%= @school.zipcode %> <%= @school.city %><br>
+        <%= @school.country %>
+        <h3 class="h5 mt-4"><%= Education::School.human_attribute_name('phone') %></h3>
+        <%= @school.phone %>
+      </div>
+    </div>
+  </div>
+
+  <% if @school.programs.any? %>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h2 class="card-title mb-0 h5"><%= Education::School.human_attribute_name('programs') %></h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <% @school.programs.ordered.each do |program| %>
+              <li><%= link_to_if can?(:read, program), program, [:admin, program] %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @school.websites.any? %>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h2 class="card-title mb-0 h5"><%= Education::School.human_attribute_name('websites') %></h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <% @school.websites.each do |website| %>
+              <%= link_to website, [:admin, website] %><br>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+
 
 <% content_for :action_bar_right do %>
   <%= edit_link @school %>
