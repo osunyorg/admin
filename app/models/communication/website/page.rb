@@ -63,6 +63,7 @@ class Communication::Website::Page < ApplicationRecord
              dependent: :nullify
 
   validates :title, presence: true
+  validates :path, uniqueness: { scope: :website_id }
 
   before_validation :make_path
   after_save :update_children_paths if :saved_change_to_path?

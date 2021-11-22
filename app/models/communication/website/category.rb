@@ -59,6 +59,7 @@ class Communication::Website::Category < ApplicationRecord
 
 
   validates :name, presence: true
+  validates :slug, uniqueness: { scope: :website_id }
 
   scope :ordered, -> { order(:position) }
 
