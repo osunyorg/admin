@@ -63,8 +63,9 @@ class Communication::Website::Page < ApplicationRecord
              dependent: :nullify
 
   validates :title, presence: true
+  validates :slug, uniqueness: { scope: :communication_website_id }
 
-  before_validation :make_path
+  before_validation :regenerate_slug, :make_path
   after_save :update_children_paths if :saved_change_to_path?
 
   scope :ordered, -> { order(:position) }
@@ -91,6 +92,15 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def regenerate_slug
+    current_slug = self.slug
+    n = 0
+    while self.class.unscoped.where(communication_website_id: communication_website_id, slug: self.slug).where.not(id: id).exists?
+      n += 1
+      self.slug = [current_slug, n].join('-')
+    end
+  end
 
   def make_path
     self.path = "#{parent&.path}/#{slug}".gsub('//', '/')

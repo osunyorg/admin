@@ -57,8 +57,8 @@ class Communication::Website::Category < ApplicationRecord
                           foreign_key: 'communication_website_category_id',
                           association_foreign_key: 'communication_website_post_id'
 
-
   validates :name, presence: true
+  validates :slug, uniqueness: { scope: :communication_website_id }
 
   scope :ordered, -> { order(:position) }
 
