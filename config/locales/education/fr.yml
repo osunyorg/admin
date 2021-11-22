@@ -52,15 +52,18 @@ fr:
         user: Utilisateur
   education:
     program:
+      educational_informations: Informations pédagogiques
       main_informations: Informations essentielles
       useful_informations: Informations pratiques
-      educational_informations: Informations pédagogiques
   enums:
     education/program:
       level:
         bachelor: Licence / bachelor
-        master: Master
         doctor: Doctorat
+        dut: DUT
+        first_year: Bac + 1
+        master: Master
+        second_year: Bac + 2
   simple_form:
     hints:
       education/program:

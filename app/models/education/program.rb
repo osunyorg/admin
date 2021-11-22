@@ -63,6 +63,9 @@ class Education::Program < ApplicationRecord
   has_many :websites, -> { distinct }, through: :schools
 
   enum level: {
+    first_year: 100,
+    second_year: 200,
+    dut: 210,
     bachelor: 300,
     master: 500,
     doctor: 800

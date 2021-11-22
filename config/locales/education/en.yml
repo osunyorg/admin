@@ -52,15 +52,18 @@ en:
         user: User
   education:
     program:
+      educational_informations: Educational informations
       main_informations: Main informations
       useful_informations: Useful informations
-      educational_informations: Educational informations
   enums:
     education/program:
       level:
         bachelor: Licence / bachelor
-        master: Master
         doctor: Doctorat
+        dut: DUT
+        first_year: First year
+        second_year: Second year
+        master: Master
   simple_form:
     hints:
       education/program:
