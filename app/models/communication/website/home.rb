@@ -34,6 +34,14 @@ class Communication::Website::Home < ApplicationRecord
     ''
   end
 
+  def to_jekyll
+    ApplicationController.render(
+      template: "admin/communication/website/home/jekyll",
+      layout: false,
+      assigns: { home: self }
+    )
+  end
+
   def github_path_generated
     '_pages/index.html'
   end
