@@ -5,9 +5,9 @@
 #  id            :uuid             not null, primary key
 #  about_type    :string
 #  access_token  :string
-#  domain        :string
 #  name          :string
 #  repository    :string
+#  url           :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid
@@ -65,10 +65,6 @@ class Communication::Website < ApplicationRecord
 
   def to_s
     "#{name}"
-  end
-
-  def domain_url
-    @domain_url ||= "https://#{domain}"
   end
 
   def import!

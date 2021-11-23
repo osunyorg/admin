@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_132213) do
   create_table "communication_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
-    t.string "domain"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "access_token"

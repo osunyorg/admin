@@ -1,5 +1,5 @@
 class Wordpress
-  attr_reader :domain
+  attr_reader :url
 
 
   def self.clean_string(string)
@@ -47,28 +47,28 @@ class Wordpress
     string
   end
 
-  def initialize(domain)
-    @domain = domain
+  def initialize(url)
+    @url = url
   end
 
   def authors
-    load "#{domain}/wp-json/wp/v2/users"
+    load "#{url}/wp-json/wp/v2/users"
   end
 
   def categories
-    load "#{domain}/wp-json/wp/v2/categories"
+    load "#{url}/wp-json/wp/v2/categories"
   end
 
   def posts
-    load "#{domain}/wp-json/wp/v2/posts"
+    load "#{url}/wp-json/wp/v2/posts"
   end
 
   def pages
-    load "#{domain}/wp-json/wp/v2/pages"
+    load "#{url}/wp-json/wp/v2/pages"
   end
 
   def media
-    load "#{domain}/wp-json/wp/v2/media"
+    load "#{url}/wp-json/wp/v2/media"
   end
 
   protected

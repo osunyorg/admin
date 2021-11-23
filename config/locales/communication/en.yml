@@ -58,8 +58,8 @@ en:
         about_Education::School: School website
         about_Research::Journal: Journal website
         about_type: About
-        domain: Domain
         name: Name
+        url: URL
       communication/website/author:
         biography: Biography
         first_name: First name
