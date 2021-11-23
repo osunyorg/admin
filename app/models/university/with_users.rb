@@ -11,7 +11,7 @@ module University::WithUsers
     def synchronize_server_admin_users
       User.synchronize_server_admin_users(id)
     end
-    handle_asynchronously :synchronize_server_admin_users
+    handle_asynchronously :synchronize_server_admin_users, queue: 'default'
 
   end
 end

@@ -11,7 +11,7 @@ module Communication::Website::Imported::WithRichText
   end
 
   def replace_tags_with_attachments(fragment, tag_name, attribute_name)
-    nodes = fragment.css("#{tag_name}[#{attribute_name}*=\"#{website.website.uploads_url}\"]")
+    nodes = fragment.css("#{tag_name}[#{attribute_name}*=\"#{website.uploads_url}\"]")
     nodes.each do |node|
       begin
         url = node.attr(attribute_name)

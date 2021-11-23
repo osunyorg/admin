@@ -25,6 +25,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::Program < ApplicationRecord
+  include WithJekyll
   include WithPublicationToWebsites
   include WithTree
 

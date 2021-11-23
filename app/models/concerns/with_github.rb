@@ -3,24 +3,24 @@ module WithGithub
 
   included do
     after_save_commit :publish_to_github
+    after_touch :publish_to_github
   end
 
   def force_publish!
     publish_to_github
   end
 
-  def github_content
-    @content ||= github.read_file_at github_path
-  end
-
   def github_frontmatter
-    @frontmatter ||= FrontMatterParser::Parser.new(:md).call(github_content)
-  rescue
-    FrontMatterParser::Parser.new(:md).call('')
+    @github_frontmatter ||= begin
+      github_content = github.read_file_at(github_path)
+      FrontMatterParser::Parser.new(:md).call(github_content)
+    rescue
+      FrontMatterParser::Parser.new(:md).call('')
+    end
   end
 
   def github_path_generated
-    '' # Needs override
+    raise NotImplementedError
   end
 
   protected

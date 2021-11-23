@@ -48,6 +48,10 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
   handle_asynchronously :run!, queue: 'default'
 
+  def uploads_url
+    @uploads_url ||= "#{website.domain_url}/wp-content/uploads"
+  end
+
   protected
 
   def wordpress

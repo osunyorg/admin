@@ -10,27 +10,9 @@ module Communication::Website::WithMedia
     university.active_storage_blobs.where(id: blob_ids)
   end
 
-  def blob_github_path_generated(blob)
-    "_data/media/#{blob.id[0..1]}/#{blob.id}.yml"
-  end
-
-  def blob_to_jekyll(blob)
-    ApplicationController.render(
-      template: 'active_storage/blobs/jekyll',
-      layout: false,
-      assigns: { blob: blob }
-    )
-  end
-
   protected
 
   def publish_media_to_github
-    active_storage_blobs.each do |blob|
-      blob.analyze unless blob.analyzed?
-      github.publish(path: blob_github_path_generated(blob),
-                    commit: "[Medium] Save ##{blob.id}",
-                    data: blob_to_jekyll(blob))
-    end
+    active_storage_blobs.each { |blob| website.publish_blob(blob) }
   end
-  handle_asynchronously :publish_media_to_github, queue: 'default'
 end

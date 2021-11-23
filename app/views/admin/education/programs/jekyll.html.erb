@@ -1,32 +1,31 @@
 ---
-title: "<%= @object.name %>"
-identifier: "<%= @object.id %>"
-parent: "<%= @object.parent_id %>"
-continuing: <%= @object.continuing %>
-level: <%= @object.level %>
-ects: <%= @object.ects %>
-position: <%= @object.position %>
+title: "<%= @program.name %>"
+identifier: "<%= @program.id %>"
+parent: "<%= @program.parent_id %>"
+continuing: <%= @program.continuing %>
+level: <%= @program.level %>
+ects: <%= @program.ects %>
+position: <%= @program.position %>
 accessibility: >
-  <%= prepare_for_github @object.accessibility, @object.university %>
+  <%= prepare_for_github @program.accessibility, @program.university %>
 contacts: >
-  <%= prepare_for_github @object.contacts, @object.university %>
+  <%= prepare_for_github @program.contacts, @program.university %>
 duration: >
-  <%= prepare_for_github @object.duration, @object.university %>
+  <%= prepare_for_github @program.duration, @program.university %>
 evaluation: >
-  <%= prepare_for_github @object.evaluation, @object.university %>
+  <%= prepare_for_github @program.evaluation, @program.university %>
 objectives: >
-  <%= prepare_for_github @object.objectives, @object.university %>
+  <%= prepare_for_github @program.objectives, @program.university %>
 opportunities: >
-  <%= prepare_for_github @object.opportunities, @object.university %>
+  <%= prepare_for_github @program.opportunities, @program.university %>
 other: >
-  <%= prepare_for_github @object.other, @object.university %>
+  <%= prepare_for_github @program.other, @program.university %>
 pedagogy: >
-  <%= prepare_for_github @object.pedagogy, @object.university %>
+  <%= prepare_for_github @program.pedagogy, @program.university %>
 prerequisites: >
-  <%= prepare_for_github @object.prerequisites, @object.university %>
+  <%= prepare_for_github @program.prerequisites, @program.university %>
 pricing: >
-  <%= prepare_for_github @object.pricing, @object.university %>
+  <%= prepare_for_github @program.pricing, @program.university %>
 registration: >
-  <%= prepare_for_github @object.registration, @object.university %>
+  <%= prepare_for_github @program.registration, @program.university %>
 ---
-<%= @object.github_frontmatter.content.html_safe %>

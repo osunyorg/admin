@@ -23,6 +23,7 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   include WithGithub
+  # no WithJekyll include as this model has a custom jekyll
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
@@ -30,8 +31,6 @@ class Communication::Website::Menu < ApplicationRecord
 
   validates :title, :identifier, presence: true
   validates :identifier, uniqueness: { scope: :communication_website_id }
-
-  after_touch :publish_to_github
 
   scope :ordered, -> { order(created_at: :asc) }
 

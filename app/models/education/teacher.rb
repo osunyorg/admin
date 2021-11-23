@@ -22,6 +22,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Education::Teacher < ApplicationRecord
+  include WithJekyll
   include WithPublicationToWebsites
   include WithSlug
 

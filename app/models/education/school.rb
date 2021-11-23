@@ -24,6 +24,8 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
+  include WithPublicationToWebsites
+
   belongs_to :university
   has_many :websites, class_name: 'Communication::Website', as: :about
   has_and_belongs_to_many :programs,
@@ -36,13 +38,15 @@ class Education::School < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
 
-  after_save_commit :publish_to_github
-
   def to_s
     "#{name}"
   end
 
-  def to_yml
+  def github_path
+    "_data/school.yml"
+  end
+
+  def to_jekyll
     {
       name: name,
       address: address,
@@ -53,9 +57,4 @@ class Education::School < ApplicationRecord
     }.deep_stringify_keys.to_yaml.lines[1..-1].join
   end
 
-  private
-
-  def publish_to_github
-    websites.each(&:send_infos_to_github)
-  end
 end

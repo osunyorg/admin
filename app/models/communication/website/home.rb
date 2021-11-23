@@ -20,8 +20,9 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Home < ApplicationRecord
-  include WithGithub
   include Communication::Website::WithMedia
+  include WithGithub
+  include WithJekyll
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
@@ -29,21 +30,12 @@ class Communication::Website::Home < ApplicationRecord
   has_rich_text :text
   has_one_attached_deletable :featured_image
 
-  def github_path_generated
-    '_pages/index.html'
-  end
-
   def to_s
     ''
   end
 
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/communication/website/home/jekyll',
-      layout: false,
-      assigns: { home: self }
-    )
+  def github_path_generated
+    '_pages/index.html'
   end
-
 
 end

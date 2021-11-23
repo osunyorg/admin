@@ -30,8 +30,9 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Post < ApplicationRecord
-  include WithGithub
   include Communication::Website::WithMedia
+  include WithGithub
+  include WithJekyll
   include WithSlug
 
   has_rich_text :text
@@ -57,14 +58,6 @@ class Communication::Website::Post < ApplicationRecord
 
   def github_path_generated
     "_posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
-  end
-
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/communication/website/posts/jekyll',
-      layout: false,
-      assigns: { post: self }
-    )
   end
 
   def to_s

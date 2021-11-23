@@ -37,8 +37,9 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
-  include WithGithub
   include Communication::Website::WithMedia
+  include WithGithub
+  include WithJekyll
   include WithSlug
   include WithTree
 
@@ -73,14 +74,6 @@ class Communication::Website::Page < ApplicationRecord
 
   def github_path_generated
     "_pages/#{path}/index.html".gsub('///', '/').gsub('//', '/')
-  end
-
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/communication/website/pages/jekyll',
-      layout: false,
-      assigns: { page: self }
-    )
   end
 
   def list_of_other_pages

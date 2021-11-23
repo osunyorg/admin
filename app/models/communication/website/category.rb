@@ -32,6 +32,7 @@
 #
 class Communication::Website::Category < ApplicationRecord
   include WithGithub
+  include WithJekyll
   include WithSlug
   include WithTree
 
@@ -79,14 +80,6 @@ class Communication::Website::Category < ApplicationRecord
 
   def github_path_generated
     "_categories/#{slug}.html"
-  end
-
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/communication/website/categories/jekyll',
-      layout: false,
-      assigns: { category: self }
-    )
   end
 
   protected

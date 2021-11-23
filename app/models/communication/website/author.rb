@@ -27,6 +27,7 @@
 #
 class Communication::Website::Author < ApplicationRecord
   include WithGithub
+  include WithJekyll
   include WithSlug
 
   has_rich_text :biography
@@ -49,14 +50,6 @@ class Communication::Website::Author < ApplicationRecord
 
   def github_path_generated
     "_authors/#{slug}.html"
-  end
-
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/communication/website/authors/jekyll',
-      layout: false,
-      assigns: { author: self }
-    )
   end
 
   protected

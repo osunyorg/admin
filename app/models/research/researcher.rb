@@ -38,11 +38,7 @@ class Research::Researcher < ApplicationRecord
     "#{ first_name } #{ last_name }"
   end
 
-  protected
-
-  # overwrite from WithPublicationToWebsites
-  def path_root
-    'authors'
+  def github_path
+    "_authors/#{self.id}.md"
   end
-
 end

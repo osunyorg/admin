@@ -23,6 +23,10 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
+  include Communication::Website::WithBatchPublication
+  include Communication::Website::WithCategories
+  include Communication::Website::WithPublishableObjects
+
   belongs_to :university
   belongs_to :about, polymorphic: true, optional: true
   has_one :home,
@@ -52,7 +56,7 @@ class Communication::Website < ApplicationRecord
           dependent: :destroy
 
   after_create :create_home
-  after_save :send_infos_to_github
+  after_save :publish_about_object, if: :saved_change_to_about_id?
   after_save_commit :set_programs_categories!, if: -> (website) { website.about_type == 'Education::School' }
 
   def self.about_types
@@ -64,11 +68,7 @@ class Communication::Website < ApplicationRecord
   end
 
   def domain_url
-    "https://#{domain}"
-  end
-
-  def uploads_url
-    "#{domain_url}/wp-content/uploads"
+    @domain_url ||= "https://#{domain}"
   end
 
   def import!
@@ -93,96 +93,13 @@ class Communication::Website < ApplicationRecord
     all_pages
   end
 
-  def force_publish!
-    publish_authors!
-    publish_categories!
-    publish_pages!
-    publish_posts!
-  end
-  handle_asynchronously :force_publish!, queue: 'default'
-
-  def publish_authors!
-    publish_objects(Communication::Website::Author, authors)
-  end
-
-  def publish_categories!
-    publish_objects(Communication::Website::Category, categories)
-  end
-
-  def publish_pages!
-    publish_objects_with_blobs(Communication::Website::Page, pages)
-  end
-
-  def publish_posts!
-    publish_objects_with_blobs(Communication::Website::Post, posts)
-  end
-
-  def set_programs_categories!
-    programs_root_category = categories.where(is_programs_root: true).first_or_create(
-      name: 'Offre de formation',
-      slug: 'offre-de-formation',
-      is_programs_root: true,
-      university_id: university.id
-    )
-    create_programs_categories_level(programs_root_category, about.programs.root.ordered)
-  end
-
-  def send_infos_to_github
-    if self.about_type == "Education::School"
-      github = Github.with_site self
-      return unless github.valid?
-      github.publish  path: "_data/school.yml",
-                      data: about.to_yml,
-                      commit: "[School infos] Save"
-    end
-  end
-
   protected
-
-  def publish_objects(model, objects)
-    begin
-      had_callback = model.__callbacks[:save].find { |c| c.matches?(:after, :publish_to_github) }
-      model.skip_callback(:save, :after, :publish_to_github) if had_callback
-      github = Github.with_site self
-      return unless github.valid?
-      objects.each do |object|
-        github.add_to_batch path: object.github_path_generated,
-                            previous_path: object.github_path,
-                            data: object.to_jekyll
-        yield(github, object) if block_given?
-      end
-      github.commit_batch "[#{model.name.demodulize}] Batch update from import"
-    ensure
-      model.set_callback(:save, :after, :publish_to_github) if had_callback
-    end
-  end
-
-  def publish_objects_with_blobs(model, objects)
-    publish_objects(model, objects) { |github, object|
-      object.active_storage_blobs.each do |blob|
-        blob.analyze unless blob.analyzed?
-        github.add_to_batch path: object.blob_github_path_generated(blob),
-                            data: object.blob_to_jekyll(blob)
-      end
-    }
-  end
-
-  def create_programs_categories_level(parent_category, programs)
-    programs.each_with_index do |program, index|
-      program_category = categories.where(program_id: program.id).first_or_initialize(
-        name: program.name,
-        slug: program.name.parameterize,
-        university_id: university.id
-      )
-      program_category.parent = parent_category
-      program_category.position = index + 1
-      program_category.save
-      program_children = about.programs.where(parent_id: program.id).ordered
-      create_programs_categories_level(program_category, program_children)
-    end
-  end
 
   def create_home
     build_home(university_id: university_id).save
+  end
+
+  def github
+    @github ||= Github.with_site self
   end
 end
