@@ -49,13 +49,13 @@ class Communication::Website::Imported::Website < ApplicationRecord
   handle_asynchronously :run!, queue: 'default'
 
   def uploads_url
-    @uploads_url ||= "#{website.domain_url}/wp-content/uploads"
+    @uploads_url ||= "#{website.url}/wp-content/uploads"
   end
 
   protected
 
   def wordpress
-    @wordpress ||= Wordpress.new website.domain_url
+    @wordpress ||= Wordpress.new website.url
   end
 
   def sync_authors

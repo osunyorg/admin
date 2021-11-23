@@ -1,8 +1,8 @@
 <% content_for :title, @website %>
 
 <% content_for :title_right do %>
-  <% unless @website.domain.blank? %>
-    <%= link_to @website.domain_url, @website.domain_url, target: :_blank %><br>
+  <% unless @website.url.blank? %>
+    <%= link_to @website.url, @website.url, target: :_blank %><br>
   <% end %>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
   <% if @website.about %>

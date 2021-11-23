@@ -58,8 +58,8 @@ fr:
         about_Education::School: Site d'école
         about_Research::Journal: Site de revue scientifique
         about_type: Sujet du site
-        domain: Domaine
         name: Nom
+        url: URL
       communication/website/author:
         biography: Biographie
         first_name: Prénom

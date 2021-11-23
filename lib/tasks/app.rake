@@ -12,7 +12,11 @@ namespace :app do
     # Communication::Website::Page.find_each { |page| page.update(text: page.old_text) }
     Research::Researcher.find_each { |researcher| researcher.update(biography: researcher.old_biography) if researcher.biography.blank? }
     Research::Journal::Article.find_each { |article| article.update(text: article.old_text) if article.text.blank? }
-    Communication::Website.find_each { |website| website.build_home(university_id: website.university_id).save if website.home.nil? }
+    Communication::Website.find_each { |website|
+      website.build_home(university_id: website.university_id).save if website.home.nil?
+      website.update_column(:url, "https://#{website.url}") unless website.url.blank? || website.url.starts_with?('https://')
+    }
+
   end
 
   namespace :db do
