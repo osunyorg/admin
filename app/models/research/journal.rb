@@ -22,7 +22,7 @@
 #
 class Research::Journal < ApplicationRecord
   belongs_to :university
-  has_one :website, class_name: 'Communication::Website', as: :about
+  has_many :websites, class_name: 'Communication::Website', as: :about
   has_many :volumes, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_id
 

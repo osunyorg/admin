@@ -1,7 +1,7 @@
 ---
-title: "<%= "#{ @object }"%>"
-first_name: "<%= @object.first_name %>"
-last_name: "<%= @object.last_name %>"
+title: "<%= "#{ @researcher }"%>"
+first_name: "<%= @researcher.first_name %>"
+last_name: "<%= @researcher.last_name %>"
 biography: >
-  <%= prepare_for_github @object.biography, @object.university %>
+  <%= prepare_for_github @researcher.biography, @researcher.university %>
 ---

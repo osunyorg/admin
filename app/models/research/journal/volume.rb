@@ -4,7 +4,6 @@
 #
 #  id                  :uuid             not null, primary key
 #  description         :text
-#  github_path         :text
 #  keywords            :text
 #  number              :integer
 #  published_at        :date
@@ -25,13 +24,15 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
-  has_one_attached_deletable :cover
+  include WithJekyll
+  include WithPublicationToWebsites
 
-  include WithGithub
+  has_one_attached_deletable :cover
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id
+  has_many :websites, -> { distinct }, through: :journal
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
@@ -47,17 +48,8 @@ class Research::Journal::Volume < ApplicationRecord
     "##{ number } #{ title }"
   end
 
-  protected
-
-  def github_path_generated
+  def github_path
     "_volumes/#{id}.html"
   end
 
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/research/journal/volumes/jekyll',
-      layout: false,
-      assigns: { volume: self }
-    )
-  end
 end

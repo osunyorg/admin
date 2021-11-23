@@ -4,7 +4,6 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
-#  github_path                :text
 #  keywords                   :text
 #  old_text                   :text
 #  published_at               :date
@@ -32,20 +31,21 @@
 #  fk_rails_...  (updated_by_id => users.id)
 #
 class Research::Journal::Article < ApplicationRecord
-  include WithGithub
+  include WithJekyll
+  include WithPublicationToWebsites
 
   has_rich_text :text
+  has_one_attached :pdf
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
   belongs_to :updated_by, class_name: 'User'
   has_and_belongs_to_many :researchers, class_name: 'Research::Researcher'
+  has_many :websites, -> { distinct }, through: :journal
 
   validates :title, :published_at, presence: true
   after_commit :update_researchers
-
-  has_one_attached :pdf
 
   scope :ordered, -> { order(:published_at, :created_at) }
 
@@ -53,32 +53,20 @@ class Research::Journal::Article < ApplicationRecord
     "/assets/articles/#{id}/#{pdf.filename}"
   end
 
-  def website
-    journal.website
-  end
-
   def to_s
     "#{ title }"
   end
 
-  protected
-
-  def github_path_generated
+  def github_path
     "_articles/#{id}.html"
   end
 
-  def to_jekyll
-    ApplicationController.render(
-      template: 'admin/research/journal/articles/jekyll',
-      layout: false,
-      assigns: { article: self }
-    )
-  end
+  private
 
   def update_researchers
-    return unless website
+    return unless websites.any?
     researchers.each do |researcher|
-      researcher.publish_to_website(website)
+      websites.each { |website| website.publish_object(researcher) }
     end
   end
 end

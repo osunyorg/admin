@@ -5,7 +5,6 @@
 #  id            :uuid             not null, primary key
 #  first_name    :string
 #  last_name     :string
-#  old_biography :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid
@@ -22,6 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Research::Researcher < ApplicationRecord
+  include WithJekyll
   include WithPublicationToWebsites
 
   has_rich_text :biography

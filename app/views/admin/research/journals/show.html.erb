@@ -1,10 +1,12 @@
 <% content_for :title, @journal %>
 
 <% content_for :title_right do %>
-  <% if @journal.website %>
-    <%= Communication::Website.model_name.human %>
+  <% if @journal.websites.any? %>
+    <%= Communication::Website.model_name.human(count: 2) %>
     <i class="fas fa-arrow-right small"></i>
-    <%= link_to @journal.website, [:admin, @journal.website] %><br>
+    <% @journal.websites.each do |website| %>
+      <%= link_to website, [:admin, website] %><br>
+    <% end %>
   <% end %>
   <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
 <% end %>
