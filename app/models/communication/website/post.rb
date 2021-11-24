@@ -38,6 +38,9 @@ class Communication::Website::Post < ApplicationRecord
   has_rich_text :text
   has_one_attached_deletable :featured_image
 
+  has_one :imported_post,
+          class_name: 'Communication::Website::Imported::Post',
+          dependent: :destroy
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id

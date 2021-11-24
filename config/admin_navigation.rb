@@ -32,11 +32,16 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, User) || can?(:read, Administration::Qualiopi::Criterion)
       primary.item :administration, 'Administration', nil, { kind: :header }
-      primary.item :administration_users, User.model_name.human(count: 2), admin_users_path, { icon: 'user' } if can?(:read, User)
+      primary.item :administration, 'Équipe administrative', nil, { icon: 'users-cog' }
       primary.item :administration, 'Campus', nil, { icon: 'map-marker-alt' }
       primary.item :administration, 'Admissions', nil, { icon: 'door-open' }
       primary.item :administration, 'Statistiques', nil, { icon: 'cog' }
       primary.item :administration_qualiopi, 'Qualité', admin_administration_qualiopi_criterions_path, { icon: 'tasks' } if can?(:read, Administration::Qualiopi::Criterion)
+    end
+
+    if can?(:read, User)
+      primary.item :administration, 'Osuny', nil, { kind: :header }
+      primary.item :administration_users, User.model_name.human(count: 2), admin_users_path, { icon: 'user' } if can?(:read, User)
     end
   end
 end

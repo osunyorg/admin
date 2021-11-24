@@ -36,6 +36,9 @@ class Communication::Website::Category < ApplicationRecord
   include WithSlug
   include WithTree
 
+  has_one :imported_category,
+          class_name: 'Communication::Website::Imported::Category',
+          dependent: :destroy
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
