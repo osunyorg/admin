@@ -1,0 +1,19 @@
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('create'),
+                  new_admin_communication_website_menu_path(website_id: @website),
+                  class: button_classes if can?(:create, Communication::Website::Menu) %>
+    </div>
+    <h2 class="card-title">
+      <%= link_to admin_communication_website_menus_path(website_id: @website) do %>
+        <%= Communication::Website::Menu.model_name.human(count: 2) %>
+        <small>
+          -
+          <%= t('communication.website.see_all', number: @website.menus.count) %>
+        </small>
+      <% end %>
+    </h2>
+  </div>
+  <%= render 'admin/communication/website/menus/list', menus: @website.menus.ordered %>
+</div>
