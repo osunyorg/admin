@@ -59,6 +59,8 @@ class Communication::Website < ApplicationRecord
   after_save :publish_about_object, if: :saved_change_to_about_id?
   after_save_commit :set_programs_categories!, if: -> (website) { website.about_type == 'Education::School' }
 
+  scope :ordered, -> { order(:name) }
+
   def self.about_types
     [nil, Education::School.name, Research::Journal.name]
   end
@@ -87,6 +89,14 @@ class Communication::Website < ApplicationRecord
       all_pages.concat(page.self_and_children(0))
     end
     all_pages
+  end
+
+  def list_of_categories
+    all_categories = []
+    categories.root.ordered.each do |category|
+      all_categories.concat(category.self_and_children(0))
+    end
+    all_categories
   end
 
   protected

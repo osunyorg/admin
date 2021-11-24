@@ -9,6 +9,10 @@
           <%= f.input :title %>
           <%= f.input :description %>
           <%= f.input :text, as: :rich_text_area %>
+          <%= f.association :related_category,
+                            collection: @website.list_of_categories,
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] } if @website.categories.any? %>
         </div>
       </div>
     </div>
@@ -25,8 +29,10 @@
                         data: { source: '#communication_website_page_title' }
                       } %>
           <%= f.input :published %>
-          <%= f.association :parent, collection: page.persisted? ? page.list_of_other_pages : @website.list_of_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
-          <%= f.association :related_category, collection: page.website.categories.ordered %>
+          <%= f.association :parent,
+                            collection: page.persisted? ? page.list_of_other_pages : page.website.list_of_pages,
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] } %>
           <ul>
           </ul>
         </div>

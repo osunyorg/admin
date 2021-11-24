@@ -69,12 +69,7 @@ class Communication::Website::Category < ApplicationRecord
   before_create :set_position
 
   def list_of_other_categories
-    categories = []
-    website.categories.where.not(id: id).root.ordered.each do |category|
-      categories.concat(category.self_and_children(0))
-    end
-    categories.reject! { |p| p[:id] == id }
-    categories
+    website.list_of_categories.reject! { |p| p[:id] == id }
   end
 
   def to_s

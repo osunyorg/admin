@@ -2,7 +2,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   load_and_authorize_resource class: Communication::Website
 
   def index
-    @websites = current_university.communication_websites
+    @websites = current_university.communication_websites.ordered
     breadcrumb
     add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
   end
