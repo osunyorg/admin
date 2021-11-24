@@ -9,7 +9,6 @@ class Admin::Communication::Website::Posts::CurationsController < Admin::Communi
       redirect_to [:edit, :admin, @curator.post], notice: t('admin.successfully_created_html', model: @curator.post.to_s)
     else
       breadcrumb
-      byebug
       flash[:alert] = "Erreur lors de la curation"
       render :new, status: :unprocessable_entity
     end
