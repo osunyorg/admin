@@ -35,6 +35,7 @@ namespace :communication do
         post :publish
       end
     end
+    resources :curations, path: 'posts/curations', as: :post_curations, controller: 'website/posts/curations', only: [:new, :create]
     resources :menus, controller: 'website/menus' do
       resources :items, controller: 'website/menu/items', except: :index do
         collection do
