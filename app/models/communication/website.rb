@@ -106,6 +106,6 @@ class Communication::Website < ApplicationRecord
   end
 
   def github
-    @github ||= Github.with_site self
+    @github ||= Github.with_website self
   end
 end

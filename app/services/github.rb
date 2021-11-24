@@ -1,8 +1,8 @@
 class Github
   attr_reader :access_token, :repository
 
-  def self.with_site(site)
-    new site&.access_token, site&.repository
+  def self.with_website(website)
+    new website&.access_token, website&.repository
   end
 
   def initialize(access_token, repository)
@@ -32,20 +32,6 @@ class Github
                             sha: file_sha(path)
     true
   rescue => e
-    false
-  end
-
-  def send_file(attachment, path)
-    return if repository.blank?
-    commit_message = "[file] Save #{ path }"
-    path_without_slash = path[1..-1]
-    client.create_contents  repository,
-                            path_without_slash,
-                            commit_message,
-                            attachment.download,
-                            sha: file_sha(path)
-    true
-  rescue
     false
   end
 
@@ -82,6 +68,13 @@ class Github
     commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
     client.update_branch repository, default_branch, commit[:sha]
     @tree = nil
+  end
+
+  def remove(path, commit_message)
+    client.delete_contents repository, path, commit_message, file_sha(path)
+    true
+  rescue
+    false
   end
 
   def read_file_at(path)

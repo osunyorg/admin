@@ -38,5 +38,23 @@ module Communication::Website::WithPublishableObjects
     end
     handle_asynchronously :publish_blob, queue: 'default'
 
+    def remove_object(object)
+      return unless github.valid?
+      if object.respond_to?(:github_path)
+        github_path = object.github_path
+      else
+        root_folder = "_#{object_model_name.pluralize.underscore}"
+        github_path = "#{root_folder}/#{object.id}.md"
+      end
+      github_commit_message = "[#{object_model_name}] Remove #{object.to_s}"
+      github.remove(github_path, github_commit_message)
+    end
+
+    def remove_blob(blob)
+      return unless github.valid?
+      github_path = "_data/media/#{blob.id[0..1]}/#{blob.id}.yml"
+      github_commit_message = "[Medium] Remove ##{blob.id}"
+      github.remove(github_path, github_commit_message)
+    end
   end
 end
