@@ -55,7 +55,7 @@ class VariantService
         end
       end
 
-      transformations[:format] = @format if @format != @blob.filename.extension_without_delimiter
+      transformations[:format] = @format if @format.present? && @format != @blob.filename.extension_without_delimiter
       transformations
     end
   end

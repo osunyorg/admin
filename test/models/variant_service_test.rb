@@ -31,6 +31,8 @@ class VariantServiceTest < ActiveSupport::TestCase
   # dan-gold_1000x500_crop_left.jpeg
   # dan-gold_1500x500_crop_left.jpeg
   # dan-gold_800x840_crop_left.jpeg
+  # dan-gold
+  # dan-gold_500x500
 
   # Params tests
 
@@ -152,6 +154,21 @@ class VariantServiceTest < ActiveSupport::TestCase
     blob = create_file_blob(filename: "dan-gold.jpeg")
     expected_params = { size: '800x840', gravity: 'West' }
     variant_service = VariantService.compute(blob, 'dan-gold_800x840_crop_left', 'jpeg')
+    assert_equal expected_params, variant_service.params
+  end
+
+  test "params for dan-gold" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_params = {}
+    variant_service = VariantService.compute(blob, 'dan-gold', nil)
+    assert_equal expected_params, variant_service.params
+    assert_nil variant_service.format
+  end
+
+  test "params for dan-gold_500x500" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_params = { size: '500x500' }
+    variant_service = VariantService.compute(blob, 'dan-gold_500x500', nil)
     assert_equal expected_params, variant_service.params
   end
 
@@ -291,6 +308,20 @@ class VariantServiceTest < ActiveSupport::TestCase
     assert_equal expected_transformations, variant_service.transformations
   end
 
+  test "transformations for dan-gold" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_transformations = {}
+    variant_service = VariantService.compute(blob, 'dan-gold', nil)
+    assert_equal expected_transformations, variant_service.transformations
+  end
+
+  test "transformations for dan-gold_500x500" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    expected_transformations = { resize_to_limit: [500, 500] }
+    variant_service = VariantService.compute(blob, 'dan-gold_500x500', nil)
+    assert_equal expected_transformations, variant_service.transformations
+  end
+
   # Variants tests
 
   test "variant for dan-gold.webp" do
@@ -387,6 +418,19 @@ class VariantServiceTest < ActiveSupport::TestCase
   test "variant for dan-gold_800x840_crop_left.jpeg" do
     expected_blob = create_file_blob(filename: "dan-gold_800x840_crop_left.jpeg")
     image = load_image_from_variant_name(expected_blob.filename.base)
+    assert_equal expected_blob.checksum, image_checksum(image)
+  end
+
+  test "variant for dan-gold" do
+    expected_blob = create_file_blob(filename: "dan-gold.jpeg")
+    image = load_image_from_variant_name(expected_blob.filename.base, format: nil)
+    assert_equal "JPEG", image.type
+    assert_equal expected_blob.checksum, image_checksum(image)
+  end
+
+  test "variant for dan-gold_500x500" do
+    expected_blob = create_file_blob(filename: "dan-gold_500x500.jpeg")
+    image = load_image_from_variant_name(expected_blob.filename.base, format: nil)
     assert_equal expected_blob.checksum, image_checksum(image)
   end
 
