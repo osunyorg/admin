@@ -9,8 +9,8 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   end
 
   def reorder
-    parent_id = params['parentId'].blank? ? nil : params['parentId']
-    ids = params['ids']
+    parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    ids = params[:ids] || []
     ids.each.with_index do |id, index|
       category = @website.categories.find(id)
       category.update(

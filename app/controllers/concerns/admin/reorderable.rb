@@ -3,7 +3,7 @@ module Admin::Reorderable
 
   included do
     def reorder
-      ids = params[:ids]
+      ids = params[:ids] || []
       ids.each.with_index do |id, index|
         object = model.find_by(id: id)
         object.update_column(:position, index + 1) unless object.nil?

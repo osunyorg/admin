@@ -8,8 +8,8 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def reorder
-    parent_id = params['parentId'].blank? ? nil : params['parentId']
-    ids = params['ids']
+    parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    ids = params[:ids] || []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
       page.update(

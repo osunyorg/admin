@@ -7,8 +7,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def reorder
-    parent_id = params['parentId'].blank? ? nil : params['parentId']
-    ids = params['ids']
+    parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    ids = params[:ids] || []
     website_ids = []
     ids.each.with_index do |id, index|
       program = current_university.education_programs.find(id)
