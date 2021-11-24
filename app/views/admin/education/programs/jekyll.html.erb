@@ -6,6 +6,12 @@ continuing: <%= @program.continuing %>
 level: <%= @program.level %>
 ects: <%= @program.ects %>
 position: <%= @program.position %>
+<% if @program.teachers.any? %>
+teachers:
+  <% @program.teachers.each do |teacher| %>
+  - "<%= teacher.id %>"
+  <% end %>
+<% end %>
 accessibility: >
   <%= prepare_for_github @program.accessibility, @program.university %>
 contacts: >
