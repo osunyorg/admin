@@ -1,6 +1,9 @@
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
+      <%= link_to t('communication.website.posts.new_curation'),
+                  new_admin_communication_website_post_curation_path(website_id: @website.id),
+                  class: button_classes if can?(:create, Communication::Website::Post) %>
       <%= link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
                   class: button_classes if can?(:create, Communication::Website::Post) %>
