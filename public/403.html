@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>You do not have access to this page (403)</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <style>
+
+<head>
+  <title>You do not have access to this page (403)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body {
+      padding: 15px;
+    }
 
     .error-page {
-      font-family: arial, sans-serif;
+      font-family: sans-serif;
       margin: 0;
+      text-align: center;
     }
 
     .error-page div.dialog {
@@ -17,8 +22,8 @@
       margin: calc(50vh - 140px) auto 0;
     }
 
-    .error-page div.dialog span{
-      font-size: 200px;
+    .error-page div.dialog span {
+      font-size: 150px;
       font-weight: 900;
       letter-spacing: -0.04em;
       display: block;
@@ -27,24 +32,24 @@
     }
 
     .error-page h1 {
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.5em;
     }
 
     .error-page h1 em {
       font-weight: 400;
     }
+  </style>
+</head>
 
-    </style>
-  </head>
 <body class="error-page">
-  <!-- This file lives in public/500.html -->
   <div class="dialog">
     <span>
-      403.
+      403
     </span>
     <div>
       <h1>You do not have access to this page.</h1>
     </div>
-  </body>
+</body>
+
 </html>
