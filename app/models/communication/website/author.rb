@@ -32,6 +32,9 @@ class Communication::Website::Author < ApplicationRecord
 
   has_rich_text :biography
 
+  has_one :imported_author,
+          class_name: 'Communication::Website::Imported::Author',
+          dependent: :destroy
   belongs_to :university
   belongs_to :user, optional: true
   belongs_to :website,
