@@ -15,6 +15,8 @@ fr:
         pending: Import en cours
       last_pages: Dernières pages
       last_posts: Dernières actualités
+      posts:
+        new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)
   activemodel:
     models:
