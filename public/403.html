@@ -10,19 +10,20 @@
       padding: 15px;
     }
 
-    .error-page {
+    * {
       font-family: sans-serif;
+      font-size: 14px;
       margin: 0;
       text-align: center;
     }
 
-    .error-page div.dialog {
+    .dialog {
       width: 95%;
       max-width: 22em;
       margin: calc(50vh - 140px) auto 0;
     }
 
-    .error-page div.dialog span {
+    .dialog span {
       font-size: 150px;
       font-weight: 900;
       letter-spacing: -0.04em;
@@ -31,12 +32,17 @@
       line-height: 0.9;
     }
 
-    .error-page h1 {
-      font-size: 14px;
-      line-height: 1.5em;
+    img {
+      margin-bottom: 30px;
     }
 
-    .error-page h1 em {
+    h1 {
+      font-size: 14px;
+      line-height: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    h1 em {
       font-weight: 400;
     }
   </style>
@@ -49,7 +55,9 @@
     </span>
     <div>
       <h1>You do not have access to this page.</h1>
+      <a href="/"><img src="/logo.svg" alt="Osuny" width="100"></a>
     </div>
+  </div>
 </body>
 
 </html>

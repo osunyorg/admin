@@ -11,19 +11,20 @@
       padding: 15px;
     }
 
-    .error-page {
+    * {
       font-family: sans-serif;
+      font-size: 14px;
       margin: 0;
       text-align: center;
     }
 
-    .error-page div.dialog {
+    .dialog {
       width: 95%;
       max-width: 22em;
       margin: calc(50vh - 140px) auto 0;
     }
 
-    .error-page div.dialog span {
+    .dialog span {
       font-size: 150px;
       font-weight: 900;
       letter-spacing: -0.04em;
@@ -32,24 +33,30 @@
       line-height: 0.9;
     }
 
-    .error-page h1 {
-      font-size: 14px;
-      line-height: 1.5em;
+    img {
+        margin-bottom: 30px;
     }
 
-    .error-page h1 em {
+    h1 {
+      font-size: 14px;
+      line-height: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    h1 em {
       font-weight: 400;
     }
   </style>
 </head>
 
-<body class="error-page">
+<body>
   <div class="dialog">
     <span>
       500
     </span>
     <div>
       <h1>We're sorry, but something went wrong.</h1>
+      <a href="/"><img src="/logo.svg" alt="Osuny" width="100"></a>
     </div>
   </div>
 </body>
