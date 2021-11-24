@@ -28,8 +28,19 @@ class Research::Journal < ApplicationRecord
 
   scope :ordered, -> { order(:title) }
 
-
   def to_s
     "#{title}"
+  end
+
+  def github_path
+    "_data/journal.yml"
+  end
+
+  def to_jekyll
+    {
+      title: title,
+      description: description,
+      issn: issn
+    }.deep_stringify_keys.to_yaml.lines[1..-1].join
   end
 end

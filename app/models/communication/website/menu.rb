@@ -39,12 +39,10 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def github_path_generated
-    "_data/menus.yml"
+    "_data/menus/#{identifier}.yml"
   end
 
   def to_jekyll
-    website.menus.map { |menu|
-      [menu.identifier, menu.items.root.ordered.map(&:to_jekyll_hash)]
-    }.to_h.to_yaml
+    items.root.ordered.map(&:to_jekyll_hash).to_yaml
   end
 end

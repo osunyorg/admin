@@ -33,6 +33,7 @@ class Education::School < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_school_id',
                           association_foreign_key: 'education_program_id'
+  has_many :teachers, -> { distinct }, through: :programs
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
