@@ -59,6 +59,8 @@ class Communication::Website < ApplicationRecord
   after_save :publish_about_object, if: :saved_change_to_about_id?
   after_save_commit :set_programs_categories!, if: -> (website) { website.about_type == 'Education::School' }
 
+  scope :ordered, -> { order(:name) }
+
   def self.about_types
     [nil, Education::School.name, Research::Journal.name]
   end
