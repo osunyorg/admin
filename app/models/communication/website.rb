@@ -89,6 +89,14 @@ class Communication::Website < ApplicationRecord
     all_pages
   end
 
+  def list_of_categories
+    all_categories = []
+    categories.root.ordered.each do |category|
+      all_categories.concat(category.self_and_children(0))
+    end
+    all_categories
+  end
+
   protected
 
   def create_home

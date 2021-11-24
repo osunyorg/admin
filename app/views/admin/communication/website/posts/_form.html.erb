@@ -27,7 +27,11 @@
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
           <%= f.association :author, collection: @website.authors.ordered if @website.authors.any? %>
-          <%= f.association :categories, as: :check_boxes if @website.categories.any? %>
+          <%= f.association :categories,
+                            as: :check_boxes,
+                            collection: @website.list_of_categories,
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] } if @website.categories.any? %>
         </div>
       </div>
       <div class="card flex-fill w-100">
