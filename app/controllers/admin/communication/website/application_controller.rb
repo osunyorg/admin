@@ -1,5 +1,8 @@
 class Admin::Communication::Website::ApplicationController < Admin::Communication::ApplicationController
-  load_and_authorize_resource :website, class: Communication::Website
+  load_and_authorize_resource :website,
+                              class: Communication::Website,
+                              through: :current_university,
+                              through_association: :communication_websites
 
   protected
 

@@ -1,8 +1,9 @@
 class Admin::Education::SchoolsController < Admin::Education::ApplicationController
-  load_and_authorize_resource class: Education::School
+  load_and_authorize_resource class: Education::School,
+                              through: :current_university,
+                              through_association: :education_schools
 
   def index
-    @schools = current_university.education_schools
     breadcrumb
   end
 

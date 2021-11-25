@@ -1,8 +1,10 @@
 class Admin::Education::TeachersController < Admin::Education::ApplicationController
-  load_and_authorize_resource class: Education::Teacher
+  load_and_authorize_resource class: Education::Teacher,
+                              through: :current_university,
+                              through_association: :education_teachers
 
   def index
-    @teachers = current_university.teachers.ordered.page(params[:page])
+    @teachers = @teachers.ordered.page(params[:page])
     breadcrumb
   end
 

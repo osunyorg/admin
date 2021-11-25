@@ -1,5 +1,5 @@
 class Admin::Research::Journal::VolumesController < Admin::Research::Journal::ApplicationController
-  load_and_authorize_resource class: Research::Journal::Volume
+  load_and_authorize_resource class: Research::Journal::Volume, through: :journal
 
   def index
     @volumes = @volumes.ordered
@@ -20,9 +20,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def create
-    @journal = current_university.research_journals.find params[:journal_id]
-    @volume.journal = @journal
-    @volume.university = @journal.university
+    @volume.assign_attributes(journal: @journal, university: current_university)
     if @volume.save
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
     else
@@ -42,7 +40,6 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def destroy
-    @journal = @volume.journal
     @volume.destroy
     redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s)
   end

@@ -1,8 +1,10 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
-  load_and_authorize_resource class: Research::Researcher
+  load_and_authorize_resource class: Research::Researcher,
+                              through: :current_university,
+                              through_association: :research_researchers
 
   def index
-    @researchers = current_university.researchers.ordered.page(params[:page])
+    @researchers = @researchers.ordered.page(params[:page])
     breadcrumb
   end
 

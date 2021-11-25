@@ -1,5 +1,5 @@
 class Admin::Communication::Website::CategoriesController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Category
+  load_and_authorize_resource class: Communication::Website::Category, through: :website
 
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 

@@ -1,8 +1,8 @@
 class Admin::Communication::Website::MenusController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Menu
+  load_and_authorize_resource class: Communication::Website::Menu, through: :website
 
   def index
-    @menus = @website.menus.ordered.page(params[:page])
+    @menus = @menus.ordered.page(params[:page])
     breadcrumb
   end
 

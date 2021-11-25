@@ -1,8 +1,10 @@
 class Admin::Education::ProgramsController < Admin::Education::ApplicationController
-  load_and_authorize_resource class: Education::Program
+  load_and_authorize_resource class: Education::Program,
+                              through: :current_university,
+                              through_association: :education_programs
 
   def index
-    @programs = current_university.education_programs.root.ordered
+    @programs = @programs.root.ordered
     breadcrumb
   end
 
@@ -26,7 +28,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def children
     return unless request.xhr?
-    @program = current_university.education_programs.find(params[:id])
     @children = @program.children.ordered
   end
 

@@ -1,5 +1,5 @@
 class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Page
+  load_and_authorize_resource class: Communication::Website::Page, through: :website
 
   before_action :get_root_pages, only: [:index, :new, :create, :edit, :update]
 
@@ -21,7 +21,6 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def children
     return unless request.xhr?
-    @page = @website.pages.find(params[:id])
     @children = @page.children.ordered
   end
 

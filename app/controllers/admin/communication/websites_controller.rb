@@ -1,8 +1,10 @@
 class Admin::Communication::WebsitesController < Admin::Communication::ApplicationController
-  load_and_authorize_resource class: Communication::Website
+  load_and_authorize_resource class: Communication::Website,
+                              through: :current_university,
+                              through_association: :communication_websites
 
   def index
-    @websites = current_university.communication_websites.ordered
+    @websites = @websites.ordered
     breadcrumb
     add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
   end

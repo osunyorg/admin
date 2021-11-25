@@ -1,8 +1,8 @@
 class Admin::Communication::Website::PostsController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Post
+  load_and_authorize_resource class: Communication::Website::Post, through: :website
 
   def index
-    @posts = @website.posts.ordered.page params[:page]
+    @posts = @posts.ordered.page params[:page]
     breadcrumb
   end
 

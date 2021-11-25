@@ -1,5 +1,5 @@
 class Admin::Communication::Website::Menu::ItemsController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource :menu, class: Communication::Website::Menu, id_param: :menu_id
+  load_and_authorize_resource :menu, class: Communication::Website::Menu, id_param: :menu_id, through: :website
   load_and_authorize_resource class: Communication::Website::Menu::Item, through: :menu
 
   def reorder

@@ -1,5 +1,5 @@
 class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::ApplicationController
-  load_and_authorize_resource class: Research::Journal::Article
+  load_and_authorize_resource class: Research::Journal::Article, through: :journal
 
   def index
     breadcrumb
@@ -19,10 +19,11 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   end
 
   def create
-    @journal = current_university.research_journals.find params[:journal_id]
-    @article.journal = @journal
-    @article.university = @journal.university
-    @article.updated_by = current_user
+    @article.assign_attributes(
+      journal: @journal,
+      university: current_university,
+      updated_by: current_user
+    )
     if @article.save
       redirect_to admin_research_journal_article_path(@article), notice: t('admin.successfully_created_html', model: @article.to_s)
     else
@@ -43,7 +44,6 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   end
 
   def destroy
-    @journal = @article.journal
     @article.destroy
     redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @article.to_s)
   end

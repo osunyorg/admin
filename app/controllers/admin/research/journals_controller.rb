@@ -1,8 +1,10 @@
 class Admin::Research::JournalsController < Admin::Research::ApplicationController
-  load_and_authorize_resource class: Research::Journal
+  load_and_authorize_resource class: Research::Journal,
+                              through: :current_university,
+                              through_association: :research_journals
 
   def index
-    @journals = current_university.research_journals.ordered.page(params[:page])
+    @journals = @journals.ordered.page(params[:page])
     breadcrumb
     add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path
   end

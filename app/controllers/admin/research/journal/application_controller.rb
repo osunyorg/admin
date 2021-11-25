@@ -1,5 +1,8 @@
 class Admin::Research::Journal::ApplicationController < Admin::Research::ApplicationController
-  load_and_authorize_resource :journal, class: Research::Journal
+  load_and_authorize_resource :journal,
+                              class: Research::Journal,
+                              through: :current_university,
+                              through_association: :research_journals
 
   protected
 

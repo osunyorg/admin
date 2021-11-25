@@ -1,5 +1,5 @@
 class Admin::Communication::Website::AuthorsController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Author
+  load_and_authorize_resource class: Communication::Website::Author, through: :website
 
   def index
     @authors = @website.authors.ordered.page(params[:page])

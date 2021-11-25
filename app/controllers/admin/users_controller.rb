@@ -1,8 +1,8 @@
 class Admin::UsersController < Admin::ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource through: :current_university
 
   def index
-    @users = current_university.users.ordered.page(params[:page])
+    @users = @users.ordered.page(params[:page])
     breadcrumb
   end
 
