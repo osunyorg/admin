@@ -23,9 +23,8 @@
                         class: 'js-slug-input',
                         data: { source: '#communication_website_category_name' }
                       } %>
-          <% categories = category.new_record? ? @website.categories : category.list_of_other_categories %>
           <%= f.association :parent,
-                            collection: categories,
+                            collection: category.list_of_other_categories,
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
           <ul>

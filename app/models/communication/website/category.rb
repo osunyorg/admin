@@ -69,7 +69,8 @@ class Communication::Website::Category < ApplicationRecord
   before_create :set_position
 
   def list_of_other_categories
-    website.list_of_categories.reject! { |p| p[:id] == id }
+    new_record? ? website.list_of_categories
+                : website.list_of_categories.reject! { |p| p[:id] == id }
   end
 
   def to_s
