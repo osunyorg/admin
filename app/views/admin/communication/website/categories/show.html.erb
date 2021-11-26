@@ -13,58 +13,51 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
-        <table class="<%= table_classes %>">
-          <tbody>
-            <tr>
-              <td width="150"><%= Communication::Website::Category.human_attribute_name('slug') %></td>
-              <td><%= @category.slug %></td>
-            </tr>
-            <% if @category.parent %>
-              <tr>
-                <td><%= Communication::Website::Category.human_attribute_name('parent') %></td>
-                <td><%= link_to_if can?(:read, @category.parent),
-                                @category.parent,
+        <div class="card-body">
+          <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('slug') %></h3>
+          <p><%= @category.slug %></p>
+          <% if @category.parent %>
+            <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('parent') %></h3>
+            <p><%= link_to_if can?(:read, @category.parent),
+                            @category.parent,
+                            admin_communication_website_category_path(
+                              website_id: @website.id,
+                              id: @category.parent.id
+                            ) %></p>
+          <% end %>
+          <% if @category.children.any? %>
+            <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('children') %></h3>
+            <ul class="list-unstyled mb-0">
+              <% @category.children.each do |child| %>
+                <li><%= link_to_if can?(:read, child),
+                                child,
                                 admin_communication_website_category_path(
                                   website_id: @website.id,
-                                  id: @category.parent.id
-                                ) %></td>
-              </tr>
-            <% end %>
-            <% if @category.children.any? %>
-              <tr>
-                <td><%= Communication::Website::Category.human_attribute_name('children') %></td>
-                <td>
-                  <ul class="list-unstyled mb-0">
-                    <% @category.children.each do |child| %>
-                      <li><%= link_to_if can?(:read, child),
-                                      child,
-                                      admin_communication_website_category_path(
-                                        website_id: @website.id,
-                                        id: child.id
-                                      ) %></li>
-                    <% end %>
-                  </ul>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+                                  id: child.id
+                                ) %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-<% end %>
-
-<% if @posts.total_count > 0 %>
-  <h2><%= "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %></h2>
-
-  <%= render 'admin/communication/website/posts/list', posts: @posts, hide_category: true %>
-  <%= paginate @posts, theme: 'bootstrap-5' %>
+  <% if @posts.total_count > 0 %>
+    <div class="card">
+      <div class="card-header">
+        <h5><%= "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %></h5>
+      </div>
+      <%= render 'admin/communication/website/posts/list', posts: @posts, hide_category: true %>
+      <div class="card-footer">
+        <%= paginate @posts, theme: 'bootstrap-5' %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>

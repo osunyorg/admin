@@ -22,64 +22,46 @@
         <div class="card-header">
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
-        <table class="<%= table_classes %>">
-          <tbody>
-            <tr>
-              <td width="150"><%= Communication::Website::Page.human_attribute_name('slug') %></td>
-              <td><%= @page.slug %></td>
-            </tr>
-            <tr>
-              <td><%= Communication::Website::Page.human_attribute_name('path') %></td>
-              <td><%= @page.path %></td>
-            </tr>
-            <tr>
-              <td><%= Communication::Website::Page.human_attribute_name('published') %></td>
-              <td>
-                <%= t @page.published %>
-              </td>
-            </tr>
-            <% if @page.parent %>
-              <tr>
-                <td><%= Communication::Website::Page.human_attribute_name('parent') %></td>
-                <td><%= link_to_if can?(:read, @page.parent),
-                                @page.parent,
-                                admin_communication_website_page_path(
-                                  website_id: @website.id,
-                                  id: @page.parent.id
-                                ),
-                                class: "#{'opacity-50' unless @page.parent.published?}" %></td>
-              </tr>
-            <% end %>
-            <% if @page.related_category %>
-              <tr>
-                <td><%= Communication::Website::Page.human_attribute_name('related_category') %></td>
-                <td><%= link_to_if can?(:read, @page.related_category),
-                                @page.related_category,
-                                admin_communication_website_category_path(
-                                  website_id: @website.id,
-                                  id: @page.related_category.id
-                                ) %></td>
-              </tr>
-            <% end %>
-            <% if @page.children.any? %>
-              <tr>
-                <td><%= Communication::Website::Page.human_attribute_name('children') %></td>
-                <td>
-                  <ul class="list-unstyled mb-0">
-                    <% @page.children.each do |child| %>
-                      <li>
-                        <%= link_to_if can?(:read, child),
-                                      child,
-                                      admin_communication_website_page_path( website_id: @website.id, id: child.id),
-                                      class: "#{'opacity-50' unless child.published?}" %>
-                      </li>
-                    <% end %>
-                  </ul>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="card-body">
+          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
+          <p><%= @page.slug %></p>
+          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
+          <p><%= @page.path %></p>
+          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
+          <p><%= t @page.published %></p>
+          <% if @page.parent %>
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('parent') %></h3>
+            <p><%= link_to_if can?(:read, @page.parent),
+                              @page.parent,
+                              admin_communication_website_page_path(
+                                website_id: @website.id,
+                                id: @page.parent.id
+                              ),
+                              class: "#{'opacity-50' unless @page.parent.published?}" %></p>
+          <% end %>
+          <% if @page.related_category %>
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('related_category') %></h3>
+            <p><%= link_to_if can?(:read, @page.related_category),
+                              @page.related_category,
+                              admin_communication_website_category_path(
+                                website_id: @website.id,
+                                id: @page.related_category.id
+                              ) %></p>
+          <% end %>
+          <% if @page.children.any? %>
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('children') %></h3>
+            <ul class="list-unstyled mb-0">
+              <% @page.children.each do |child| %>
+                <li>
+                  <%= link_to_if can?(:read, child),
+                                child,
+                                admin_communication_website_page_path( website_id: @website.id, id: child.id),
+                                class: "#{'opacity-50' unless child.published?}" %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
       </div>
       <% if @page.featured_image.attached? && @page.featured_image.variable? %>
         <div class="card flex-fill w-100">

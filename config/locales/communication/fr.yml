@@ -70,7 +70,7 @@ fr:
         slug: Slug
         user: Utilisateur
       communication/website/category:
-        children: Catégories enfantes
+        children: Catégories enfants
         description: Description
         name: Nom
         parent: Catégorie parente
@@ -94,7 +94,7 @@ fr:
         url: URL
       communication/website/page:
         related_category: Catégorie liée
-        children: Pages enfantes
+        children: Pages enfants
         description: Description (SEO)
         featured_image: Image à la une
         parent: Page parente
