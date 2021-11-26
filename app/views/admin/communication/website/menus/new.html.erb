@@ -1,3 +1,5 @@
 <% content_for :title, Communication::Website::Menu.model_name.human %>
 
-<%= render 'form', menu: @menu %>
+<%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'form', menu: @menu %>
+<% end %>

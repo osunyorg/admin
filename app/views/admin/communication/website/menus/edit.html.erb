@@ -1,3 +1,5 @@
 <% content_for :title, @menu %>
 
-<%= render 'form', menu: @menu %>
+<%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'form', menu: @menu %>
+<% end %>

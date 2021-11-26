@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<div class="card mb-5">
   <div class="card-header">
     <div class="float-end">
       <%= link_to t('create'),
@@ -15,5 +15,5 @@
       <% end %>
     </h2>
   </div>
-  <%= render 'admin/communication/website/authors/list', authors: @website.authors.ordered %>
+  <%= render 'admin/communication/website/authors/list', authors: @website.authors.ordered.limit(10) %>
 </div>

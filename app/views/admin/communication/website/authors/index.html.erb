@@ -1,8 +1,13 @@
 <% content_for :title, "#{Communication::Website::Author.model_name.human(count: 2)} (#{@authors.total_count})" %>
 
-<%= render 'admin/communication/website/authors/list', authors: @authors %>
-<%= paginate @authors, theme: 'bootstrap-5' %>
-
+<%= render 'admin/communication/websites/sidebar' do %>
+  <div class="card">
+    <%= render 'admin/communication/website/authors/list', authors: @authors %>
+    <div class="card-body">
+      <%= paginate @authors, theme: 'bootstrap-5' %>
+    </div>
+  </div>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Author %>

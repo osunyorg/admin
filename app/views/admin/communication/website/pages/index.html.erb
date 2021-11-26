@@ -1,8 +1,16 @@
 <% content_for :title, "#{Communication::Website::Page.model_name.human(count: 2)} (#{@website.pages.count})" %>
 
-<ul class="list-unstyled treeview js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @root_pages.first) %>" data-id="" data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
-  <%= render 'treebranch', pages: @root_pages %>
-</ul>
+<%= render 'admin/communication/websites/sidebar' do %>
+  <div class="card">
+    <div class="card-body">
+      <ul class="list-unstyled treeview js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @root_pages.first) %>"
+          data-id=""
+          data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
+        <%= render 'treebranch', pages: @root_pages %>
+      </ul>
+    </div>
+  </div>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Page %>

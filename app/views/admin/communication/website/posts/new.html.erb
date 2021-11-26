@@ -1,3 +1,5 @@
 <% content_for :title, Communication::Website::Post.model_name.human %>
 
-<%= render 'form', post: @post %>
+<%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'form', post: @post %>
+<% end %>

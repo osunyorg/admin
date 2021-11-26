@@ -1,0 +1,48 @@
+<div class="row mt-2">
+  <div class="col-md-3 col-lg-2">
+    <div class="card">
+      <div class="list-group list-group-flush" role="tablist">
+        <%
+        [
+          {
+            title: @website.to_s,
+            path: admin_communication_website_path(id: @website)
+          },
+          {
+            title: Communication::Website::Post.model_name.human(count: 2),
+            path: admin_communication_website_posts_path(website_id: @website)
+          },
+          {
+            title: Communication::Website::Home.model_name.human,
+            path: admin_communication_website_home_path(website_id: @website)
+          },
+          {
+            title: Communication::Website::Page.model_name.human(count: 2),
+            path: admin_communication_website_pages_path(website_id: @website)
+          },
+          {
+            title: Communication::Website::Category.model_name.human(count: 2),
+            path: admin_communication_website_categories_path(website_id: @website)
+          },
+          {
+            title: Communication::Website::Author.model_name.human(count: 2),
+            path: admin_communication_website_authors_path(website_id: @website)
+          },
+          {
+            title: Communication::Website::Menu.model_name.human(count: 2),
+            path: admin_communication_website_menus_path(website_id: @website)
+          },
+        ].each do |object|
+          active = object[:path].in? request.path
+        %>
+        <a class="list-group-item list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
+          <%= object[:title] %>
+        </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 col-lg-10">
+    <%= yield %>
+  </div>
+</div>

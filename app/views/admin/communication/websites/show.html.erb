@@ -10,27 +10,17 @@
   <% end %>
 <% end %>
 
-<%= render 'admin/communication/websites/show/posts' %>
-
-<div class="row">
-  <div class="col-md-4">
-    <%= render 'admin/communication/websites/show/home' %>
+<%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'admin/communication/websites/show/posts' %>
+  <div class="row">
+    <div class="col-md-8">
+      <%= render 'admin/communication/websites/show/pages' %>
+    </div>
+    <div class="col-md-4">
+      <%= render 'admin/communication/websites/show/home' %>
+    </div>
   </div>
-  <div class="col-md-8">
-    <%= render 'admin/communication/websites/show/pages' %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <%= render 'admin/communication/websites/show/authors' %>
-  </div>
-  <div class="col-md-4">
-    <%= render 'admin/communication/websites/show/menus' %>
-  </div>
-  <div class="col-md-4">
-    <%= render 'admin/communication/websites/show/categories' %>
-  </div>
-</div>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('communication.website.force_publication'),
