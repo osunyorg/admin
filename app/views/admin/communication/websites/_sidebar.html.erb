@@ -5,7 +5,7 @@
         <%
         [
           {
-            title: @website.to_s,
+            title: Communication::Website.model_name.human,
             path: admin_communication_website_path(id: @website)
           },
           {
