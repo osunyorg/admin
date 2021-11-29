@@ -50,7 +50,7 @@
           <%= f.input :evaluation, as: :rich_text_area %>
           <%= f.association :teachers,
                             as: :check_boxes,
-                            collection: current_university.teachers.ordered %>
+                            collection: current_university.education_teachers.ordered %>
         </div>
       </div>
     </div>
