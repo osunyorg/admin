@@ -7,7 +7,7 @@
     <ul class="navbar-nav navbar-align">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block js-user-dropdown-toggle" href="#" data-bs-toggle="dropdown">
-          <span class="text-dark"><%= current_user %></span>
+          <span class="text-dark"><%= current_user.human_name %></span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <%= link_to t('menu.profile'), edit_user_registration_path, class: 'dropdown-item' %>
