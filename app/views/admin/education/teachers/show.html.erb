@@ -9,12 +9,12 @@
       </div>
       <div class="card-body">
         <h3 class="h5"><%= Education::Teacher.human_attribute_name('biography') %></h3>
-        <%= @teacher.biography %>
-        <h3 class="h5 mt-4"><%= Education::Teacher.human_attribute_name('slug') %></h3>
-        <%= @teacher.slug %>
+        <p><%= @teacher.biography %></p>
+        <h3 class="h5"><%= Education::Teacher.human_attribute_name('slug') %></h3>
+        <p><%= @teacher.slug %></p>
         <% if @teacher.user %>
-          <h3 class="h5 mt-4"><%= Education::Teacher.human_attribute_name('user') %></h3>
-          <%= link_to_if can?(:read, @teacher.user), @teacher.user, admin_user_path(@teacher.user) %>
+          <h3 class="h5"><%= Education::Teacher.human_attribute_name('user') %></h3>
+          <p><%= link_to_if can?(:read, @teacher.user), @teacher.user, admin_user_path(@teacher.user) %></p>
         <% end %>
       </div>
     </div>

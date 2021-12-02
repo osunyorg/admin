@@ -9,11 +9,13 @@
       </div>
       <div class="card-body">
         <h3 class="h5"><%= Education::School.human_attribute_name('address') %></h3>
-        <%= @school.address %><br>
-        <%= @school.zipcode %> <%= @school.city %><br>
-        <%= @school.country %>
-        <h3 class="h5 mt-4"><%= Education::School.human_attribute_name('phone') %></h3>
-        <%= @school.phone %>
+        <p>
+          <%= @school.address %><br>
+          <%= @school.zipcode %> <%= @school.city %><br>
+          <%= @school.country %>
+        </p>
+        <h3 class="h5"><%= Education::School.human_attribute_name('phone') %></h3>
+        <p><%= @school.phone %></p>
       </div>
     </div>
   </div>

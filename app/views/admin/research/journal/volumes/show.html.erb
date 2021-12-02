@@ -21,18 +21,12 @@
       <div class="card-header">
         <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
       </div>
-      <table class="<%= table_classes %>">
-        <tbody>
-          <tr>
-            <td width="150"><%= Research::Journal::Volume.human_attribute_name('number') %></td>
-            <td><%= @volume.number %></td>
-          </tr>
-          <tr>
-            <td width="150"><%= Research::Journal::Volume.human_attribute_name('published_at') %></td>
-            <td><%=l @volume.published_at.to_time, format: :date_with_explicit_month %></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="card-body">
+        <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('number') %></h3>
+        <p><%= @volume.number %></p>
+        <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('published_at') %></h3>
+        <p><%=l @volume.published_at.to_time, format: :date_with_explicit_month %></p>
+      </div>
     </div>
     <% if @volume.cover.attached? %>
       <div class="card">

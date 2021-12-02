@@ -20,25 +20,17 @@
         <div class="card-header">
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
-        <table class="<%= table_classes %>">
-          <tbody>
-            <tr>
-              <td width="150"><%= Communication::Website::Menu::Item.human_attribute_name('kind') %></td>
-              <td><%= @item.kind %></td>
-            </tr>
-            <% if @item.kind_url? %>
-              <tr>
-                <td width="150"><%= Communication::Website::Menu::Item.human_attribute_name('url') %></td>
-                <td><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></td>
-              </tr>
-            <% elsif @item.kind_page? %>
-              <tr>
-                <td width="150"><%= Communication::Website::Menu::Item.human_attribute_name('about') %></td>
-                <td><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about] %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="card-body">
+          <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('kind') %></h3>
+          <p><%= I18n.t(@item.kind, scope: 'enums.communication/website/menu/item.kind') %></p>
+          <% if @item.kind_url? %>
+            <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('url') %></h3>
+            <p><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></p>
+          <% elsif @item.kind_page? %>
+            <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('about') %></h3>
+            <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about] %></p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

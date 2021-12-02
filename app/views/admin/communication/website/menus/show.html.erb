@@ -20,14 +20,10 @@
         <div class="card-header">
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
-        <table class="<%= table_classes %>">
-          <tbody>
-            <tr>
-              <td width="150"><%= Communication::Website::Menu.human_attribute_name('identifier') %></td>
-              <td><%= @menu.identifier %></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="card-body">
+          <h3 class="h5"><%= Communication::Website::Menu.human_attribute_name('identifier') %></h3>
+          <p><%= @menu.identifier %></p>
+        </div>
       </div>
     </div>
   </div>

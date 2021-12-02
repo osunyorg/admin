@@ -25,16 +25,12 @@
       <div class="card-header">
         <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
       </div>
-      <table class="<%= table_classes %>">
-        <tbody>
-          <% if @researcher.user %>
-            <tr>
-              <td width="150"><%= Research::Researcher.human_attribute_name('user') %></td>
-              <td><%= link_to @researcher.user, [:admin, @researcher.user] %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="card-body">
+        <% if @researcher.user %>
+          <h3 class="h5"><%= Research::Researcher.human_attribute_name('user') %></h3>
+          <p><%= link_to @researcher.user, [:admin, @researcher.user] %></p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
