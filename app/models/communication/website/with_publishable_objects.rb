@@ -5,24 +5,9 @@ module Communication::Website::WithPublishableObjects
 
     def publish_about_object
       # TODO: Handle Research::Journal then use the commented version.
-      # publish_object(about) unless about.nil?
-      publish_object(about) if about.is_a?(Education::School)
+      # about.force_publish! unless about.nil?
+      about.force_publish! if about.is_a?(Education::School)
     end
-
-    def publish_object(object)
-      # "object" can be an Education::Program, ...
-      return unless github.valid?
-      object_model_name = object.class.name.demodulize
-      if object.respond_to?(:github_path)
-        github_path = object.github_path
-      else
-        root_folder = "_#{object_model_name.pluralize.underscore}"
-        github_path = "#{root_folder}/#{object.id}.md"
-      end
-      github_commit_message = "[#{object_model_name}] Save #{object.to_s}"
-      github.publish(path: github_path, commit: github_commit_message, data: object.to_jekyll)
-    end
-    handle_asynchronously :publish_object, queue: 'default'
 
     def publish_blob(blob)
       return unless github.valid?
@@ -37,18 +22,6 @@ module Communication::Website::WithPublishableObjects
       github.publish(path: github_path, commit: github_commit_message, data: data)
     end
     handle_asynchronously :publish_blob, queue: 'default'
-
-    def remove_object(object)
-      return unless github.valid?
-      if object.respond_to?(:github_path)
-        github_path = object.github_path
-      else
-        root_folder = "_#{object_model_name.pluralize.underscore}"
-        github_path = "#{root_folder}/#{object.id}.md"
-      end
-      github_commit_message = "[#{object_model_name}] Remove #{object.to_s}"
-      github.remove(github_path, github_commit_message)
-    end
 
     def remove_blob(blob)
       return unless github.valid?

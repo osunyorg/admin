@@ -63,9 +63,6 @@ class Research::Journal::Article < ApplicationRecord
   private
 
   def update_researchers
-    return unless websites.any?
-    researchers.each do |researcher|
-      websites.each { |website| website.publish_object(researcher) }
-    end
+    researchers.each(&:force_publish!)
   end
 end
