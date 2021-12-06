@@ -8,4 +8,4 @@ image: "<%= @home.featured_image.blob.id %>"
 description: >
   <%= prepare_for_github @home.text, @home.university %>
 ---
-<%= @home.github_frontmatter.content.html_safe %>
+<%= @github_file.github_frontmatter.content.html_safe %>

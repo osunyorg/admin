@@ -31,8 +31,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include Communication::Website::WithMedia
-  include WithGithub
-  include WithJekyll
+  include WithGithubFiles
   include WithSlug
 
   has_rich_text :text
@@ -59,6 +58,7 @@ class Communication::Website::Post < ApplicationRecord
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
+  # Override from WithGithubFiles
   def github_path_generated
     "_posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end

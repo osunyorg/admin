@@ -26,8 +26,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Communication::Website::Author < ApplicationRecord
-  include WithGithub
-  include WithJekyll
+  include WithGithubFiles
   include WithSlug
 
   has_rich_text :biography
@@ -51,6 +50,7 @@ class Communication::Website::Author < ApplicationRecord
     "#{last_name} #{first_name}"
   end
 
+  # Override from WithGithubFiles
   def github_path_generated
     "_authors/#{slug}.html"
   end

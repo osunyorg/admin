@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_132213) do
+ActiveRecord::Schema.define(version: 2021_12_06_102444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -117,6 +117,17 @@ ActiveRecord::Schema.define(version: 2021_11_23_132213) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_github_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "github_path"
+    t.string "about_type", null: false
+    t.uuid "about_id", null: false
+    t.uuid "website_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
+    t.index ["website_id"], name: "index_communication_website_github_files_on_website_id"
   end
 
   create_table "communication_website_homes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -412,7 +423,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_132213) do
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
     t.datetime "created_at", precision: 6, null: false
-    t.date "updated_at", null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
@@ -535,6 +546,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_132213) do
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_github_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_homes", "communication_websites"
   add_foreign_key "communication_website_homes", "universities"
   add_foreign_key "communication_website_imported_authors", "communication_website_authors", column: "author_id"

@@ -6,4 +6,4 @@ parent: "<%= @category.parent_id %>"
 description: >
   <%= prepare_for_github @category.description, @category.university %>
 ---
-<%= @category.github_frontmatter.content.html_safe %>
+<%= @github_file.github_frontmatter.content.html_safe %>

@@ -7,4 +7,4 @@ slug: "<%= @author.slug %>"
 biography: >
   <%= prepare_for_github @author.biography, @author.university %>
 ---
-<%= @author.github_frontmatter.content.html_safe %>
+<%= @github_file.github_frontmatter.content.html_safe %>

@@ -24,7 +24,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
-  include WithPublicationToWebsites
+  include WithGithubFiles
 
   belongs_to :university
   has_many :websites, class_name: 'Communication::Website', as: :about
@@ -43,11 +43,12 @@ class Education::School < ApplicationRecord
     "#{name}"
   end
 
-  def github_path
+  def github_path_generated
+    # Override from WithGithubFiles
     "_data/school.yml"
   end
 
-  def to_jekyll
+  def to_jekyll(github_file)
     {
       name: name,
       address: address,

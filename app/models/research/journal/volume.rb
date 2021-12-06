@@ -24,8 +24,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
-  include WithJekyll
-  include WithPublicationToWebsites
+  include WithGithubFiles
 
   has_one_attached_deletable :cover
 

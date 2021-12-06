@@ -31,8 +31,7 @@
 #  fk_rails_...  (updated_by_id => users.id)
 #
 class Research::Journal::Article < ApplicationRecord
-  include WithJekyll
-  include WithPublicationToWebsites
+  include WithGithubFiles
 
   has_rich_text :text
   has_one_attached :pdf

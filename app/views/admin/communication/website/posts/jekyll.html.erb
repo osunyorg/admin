@@ -17,4 +17,4 @@ description: >
 text: >
   <%= prepare_for_github @post.text, @post.university %>
 ---
-<%= @post.github_frontmatter.content.html_safe %>
+<%= @github_file.github_frontmatter.content.html_safe %>

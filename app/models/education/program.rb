@@ -25,8 +25,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::Program < ApplicationRecord
-  include WithJekyll
-  include WithPublicationToWebsites
+  include WithGithubFiles
   include WithTree
 
   attr_accessor :skip_websites_categories_callback

@@ -38,8 +38,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include Communication::Website::WithMedia
-  include WithGithub
-  include WithJekyll
+  include WithGithubFiles
   include WithSlug
   include WithTree
 
@@ -75,6 +74,7 @@ class Communication::Website::Page < ApplicationRecord
   scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
+  # Override from WithGithubFiles
   def github_path_generated
     "_pages/#{path}/index.html".gsub('///', '/').gsub('//', '/')
   end

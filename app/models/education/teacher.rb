@@ -22,8 +22,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Education::Teacher < ApplicationRecord
-  include WithJekyll
-  include WithPublicationToWebsites
+  include WithGithubFiles
   include WithSlug
 
   has_rich_text :biography

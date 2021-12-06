@@ -22,8 +22,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Menu < ApplicationRecord
-  include WithGithub
-  # no WithJekyll include as this model has a custom jekyll
+  include WithGithubFiles
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
@@ -38,11 +37,12 @@ class Communication::Website::Menu < ApplicationRecord
     "#{title}"
   end
 
+  # Override from WithGithubFiles
   def github_path_generated
     "_data/menus/#{identifier}.yml"
   end
 
-  def to_jekyll
+  def to_jekyll(github_file)
     items.root.ordered.map(&:to_jekyll_hash).to_yaml
   end
 end

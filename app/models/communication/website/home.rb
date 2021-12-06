@@ -21,8 +21,7 @@
 #
 class Communication::Website::Home < ApplicationRecord
   include Communication::Website::WithMedia
-  include WithGithub
-  include WithJekyll
+  include WithGithubFiles
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
@@ -34,14 +33,15 @@ class Communication::Website::Home < ApplicationRecord
     ''
   end
 
-  def to_jekyll
+  def to_jekyll(github_file)
     ApplicationController.render(
       template: "admin/communication/website/home/jekyll",
       layout: false,
-      assigns: { home: self }
+      assigns: { home: self, github_file: github_file }
     )
   end
 
+  # Override from WithGithubFiles
   def github_path_generated
     '_pages/index.html'
   end

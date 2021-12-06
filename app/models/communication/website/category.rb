@@ -31,8 +31,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Category < ApplicationRecord
-  include WithGithub
-  include WithJekyll
+  include WithGithubFiles
   include WithSlug
   include WithTree
 
@@ -77,6 +76,7 @@ class Communication::Website::Category < ApplicationRecord
     "#{name}"
   end
 
+  # Override from WithGithubFiles
   def github_path_generated
     "_categories/#{slug}.html"
   end
