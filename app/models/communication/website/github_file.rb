@@ -78,7 +78,17 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def remove_from_github
     return unless github.valid?
-    github.remove(github_path, github_remove_commit_message)
+    github.remove github_path, github_remove_commit_message
+    remove_media_from_github
+  end
+
+  def remove_media_from_github
+    return unless about.respond_to?(:active_storage_blobs)
+    about.active_storage_blobs.each { |blob| remove_blob_from_github(blob) }
+  end
+
+  def remove_blob_from_github(blob)
+    github.remove github_blob_path(blob), github_blob_remove_commit_message
   end
 
   def github
@@ -96,13 +106,17 @@ class Communication::Website::GithubFile < ApplicationRecord
   def github_blob_params(blob)
     blob.analyze unless blob.analyzed?
     {
-      path: "_data/media/#{blob.id[0..1]}/#{blob.id}.yml",
+      path: github_blob_path(blob),
       data: ApplicationController.render(
         template: 'active_storage/blobs/jekyll',
         layout: false,
         assigns: { blob: blob }
       )
     }
+  end
+
+  def github_blob_path(blob)
+    "_data/media/#{blob.id[0..1]}/#{blob.id}.yml"
   end
 
   def github_commit_message
@@ -115,5 +129,9 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def github_remove_commit_message
     "[#{about.class.name.demodulize}] Remove #{about.to_s}"
+  end
+
+  def github_blob_remove_commit_message(blob)
+    "[Medium] Remove ##{blob.id}"
   end
 end
