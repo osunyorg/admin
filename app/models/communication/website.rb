@@ -54,6 +54,9 @@ class Communication::Website < ApplicationRecord
   has_one :imported_website,
           class_name: 'Communication::Website::Imported::Website',
           dependent: :destroy
+  has_many :github_files,
+           class_name: 'Communication::Website::GithubFile',
+           dependent: :destroy
 
   after_create :create_home
   after_save :publish_about_object, if: :saved_change_to_about_id?

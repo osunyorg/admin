@@ -27,17 +27,42 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def publish
     return unless github.valid?
-    if github.publish(path: about.github_path_generated,
-                      previous_path: github_path,
-                      commit: github_commit_message,
-                      data: about.to_jekyll(self))
+    params = github_params.merge({
+      commit: github_commit_message
+    })
+    if github.publish(params)
       update_column :github_path, about.github_path_generated
+      publish_media
     end
   end
   handle_asynchronously :publish, queue: 'default'
 
-  def add_to_batch(github)
+  def publish_media
+    return unless about.respond_to?(:active_storage_blobs)
+    about.active_storage_blobs.each { |blob| publish_blob(blob) }
+  end
 
+  def publish_blob(blob)
+    return unless github.valid?
+    params = github_blob_params(blob).merge({
+      commit: github_blob_commit_message(blob)
+    })
+    github.publish(params)
+  end
+  handle_asynchronously :publish_blob, queue: 'default'
+
+  def add_to_batch(github)
+    github.add_to_batch github_params
+    add_media_to_batch(github)
+  end
+
+  def add_media_to_batch(github)
+    return unless about.respond_to?(:active_storage_blobs)
+    about.active_storage_blobs.each { |blob| add_blob_to_batch(github, blob) }
+  end
+
+  def add_blob_to_batch(github, blob)
+    github.add_to_batch github_blob_params(blob)
   end
 
   def github_frontmatter
@@ -60,8 +85,32 @@ class Communication::Website::GithubFile < ApplicationRecord
     @github ||= Github.with_website(website)
   end
 
+  def github_params
+    {
+      path: about.github_path_generated,
+      previous_path: github_path,
+      data: about.to_jekyll(self)
+    }
+  end
+
+  def github_blob_params(blob)
+    blob.analyze unless blob.analyzed?
+    {
+      path: "_data/media/#{blob.id[0..1]}/#{blob.id}.yml",
+      data: ApplicationController.render(
+        template: 'active_storage/blobs/jekyll',
+        layout: false,
+        assigns: { blob: blob }
+      )
+    }
+  end
+
   def github_commit_message
     "[#{about.class.name.demodulize}] Save #{about.to_s}"
+  end
+
+  def github_blob_commit_message(blob)
+    "[Medium] Save ##{blob.id}"
   end
 
   def github_remove_commit_message
