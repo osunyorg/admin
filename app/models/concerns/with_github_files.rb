@@ -4,6 +4,7 @@ module WithGithubFiles
   included do
     has_many :github_files, class_name: "Communication::Website::GithubFile", as: :about, dependent: :destroy
 
+    after_save :create_github_files
     after_save_commit :publish_github_files
     after_touch :publish_github_files
   end
@@ -26,11 +27,20 @@ module WithGithubFiles
 
   protected
 
-  def publish_github_files
-    list_of_websites = respond_to?(:websites) ? websites : [website]
+  def create_github_files
     list_of_websites.each do |website|
-      github_file = github_files.where(website: website).first_or_create
+      github_files.find_or_create_by(website: website)
+    end
+  end
+
+  def publish_github_files
+    list_of_websites.each do |website|
+      github_file = github_files.find_or_create_by(website: website)
       github_file.publish
     end
+  end
+
+  def list_of_websites
+    respond_to?(:websites) ? websites : [website]
   end
 end

@@ -27,42 +27,16 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def publish
     return unless github.valid?
-    params = github_params.merge({
-      commit: github_commit_message
-    })
-    if github.publish(params)
+    add_to_batch(github)
+    if github.commit_batch(github_commit_message)
       update_column :github_path, about.github_path_generated
-      publish_media
     end
   end
   handle_asynchronously :publish, queue: 'default'
 
-  def publish_media
-    return unless about.respond_to?(:active_storage_blobs)
-    about.active_storage_blobs.each { |blob| publish_blob(blob) }
-  end
-
-  def publish_blob(blob)
-    return unless github.valid?
-    params = github_blob_params(blob).merge({
-      commit: github_blob_commit_message(blob)
-    })
-    github.publish(params)
-  end
-  handle_asynchronously :publish_blob, queue: 'default'
-
   def add_to_batch(github)
     github.add_to_batch github_params
     add_media_to_batch(github)
-  end
-
-  def add_media_to_batch(github)
-    return unless about.respond_to?(:active_storage_blobs)
-    about.active_storage_blobs.each { |blob| add_blob_to_batch(github, blob) }
-  end
-
-  def add_blob_to_batch(github, blob)
-    github.add_to_batch github_blob_params(blob)
   end
 
   def github_frontmatter
@@ -75,6 +49,15 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
 
   protected
+
+  def add_media_to_batch(github)
+    return unless about.respond_to?(:active_storage_blobs)
+    about.active_storage_blobs.each { |blob| add_blob_to_batch(github, blob) }
+  end
+
+  def add_blob_to_batch(github, blob)
+    github.add_to_batch github_blob_params(blob)
+  end
 
   def remove_from_github
     return unless github.valid?
