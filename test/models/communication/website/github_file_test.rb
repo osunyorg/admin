@@ -2,13 +2,14 @@
 #
 # Table name: communication_website_github_files
 #
-#  id          :uuid             not null, primary key
-#  about_type  :string           not null
-#  github_path :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  about_id    :uuid             not null
-#  website_id  :uuid             not null
+#  id                  :uuid             not null, primary key
+#  about_type          :string           not null
+#  github_path         :string
+#  manifest_identifier :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  about_id            :uuid             not null
+#  website_id          :uuid             not null
 #
 # Indexes
 #

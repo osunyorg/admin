@@ -25,18 +25,32 @@ module WithGithubFiles
     )
   end
 
+  def github_manifest
+    [
+      {
+        identifier: "primary",
+        generated_path: github_path_generated,
+        data: -> (github_file) { to_jekyll(github_file) }
+      }
+    ]
+  end
+
   protected
 
   def create_github_files
     list_of_websites.each do |website|
-      github_files.find_or_create_by(website: website)
+      github_manifest.each do |manifest_item|
+        github_files.find_or_create_by(website: website, manifest_identifier: manifest_item[:identifier])
+      end
     end
   end
 
   def publish_github_files
     list_of_websites.each do |website|
-      github_file = github_files.find_or_create_by(website: website)
-      github_file.publish
+      github_manifest.each do |manifest_item|
+        github_file = github_files.find_or_create_by(website: website, manifest_identifier: manifest_item[:identifier])
+        github_file.publish
+      end
     end
   end
 

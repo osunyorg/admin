@@ -2,13 +2,14 @@
 #
 # Table name: communication_website_github_files
 #
-#  id          :uuid             not null, primary key
-#  about_type  :string           not null
-#  github_path :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  about_id    :uuid             not null
-#  website_id  :uuid             not null
+#  id                  :uuid             not null, primary key
+#  about_type          :string           not null
+#  github_path         :string
+#  manifest_identifier :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  about_id            :uuid             not null
+#  website_id          :uuid             not null
 #
 # Indexes
 #
@@ -80,9 +81,9 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def github_params
     {
-      path: about.github_path_generated,
+      path: manifest_data[:generated_path],
       previous_path: github_path,
-      data: about.to_jekyll(self)
+      data: manifest_data[:data].call(self)
     }
   end
 
@@ -106,15 +107,17 @@ class Communication::Website::GithubFile < ApplicationRecord
     "[#{about.class.name.demodulize}] Save #{about.to_s}"
   end
 
-  def github_blob_commit_message(blob)
-    "[Medium] Save ##{blob.id}"
-  end
-
   def github_remove_commit_message
     "[#{about.class.name.demodulize}] Remove #{about.to_s}"
   end
 
   def github_blob_remove_commit_message(blob)
     "[Medium] Remove ##{blob.id}"
+  end
+
+  def manifest_data
+    @manifest_data ||= about.github_manifest.detect { |item|
+      item[:identifier] == manifest_identifier
+    }
   end
 end
