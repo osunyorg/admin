@@ -17,6 +17,34 @@ namespace :app do
       website.update_column(:url, "https://#{website.url}") unless website.url.blank? || website.url.starts_with?('https://')
     }
 
+    [
+      Communication::Website::Author, Communication::Website::Category,
+      Communication::Website::Home, Communication::Website::Menu,
+      Communication::Website::Page, Communication::Website::Post
+    ].each do |model|
+      model.includes(:website).find_each do |object|
+        object.github_manifest.each do |manifest_item|
+          Communication::Website::GithubFile.where(website: object.website, about: object, manifest_identifier: manifest_item[:identifier]).first_or_create do |github_file|
+            github_file.github_path = object.github_path if manifest_item[:identifier] == 'primary'
+          end
+        end
+      end
+    end
+
+    [
+      Education::Program, Education::School, Education::Teacher,
+      Research::Journal::Article, Research::Journal::Volume, Research::Researcher
+    ].each do |model|
+      model.includes(:websites).find_each do |object|
+        object.websites.each do |website|
+          object.github_manifest.each do |manifest_item|
+            Communication::Website::GithubFile.where(website: website, about: object, manifest_identifier: manifest_item[:identifier]).first_or_create do |github_file|
+              github_file.github_path = object.github_path_generated if manifest_item[:identifier] == 'primary'
+            end
+          end
+        end
+      end
+    end
   end
 
   namespace :db do

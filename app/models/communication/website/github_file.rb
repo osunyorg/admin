@@ -104,11 +104,11 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
 
   def github_commit_message
-    "[#{about.class.name.demodulize}] Save #{about.to_s}"
+    "[#{about.class.name.demodulize} - #{manifest_identifier}] Save #{about.to_s}"
   end
 
   def github_remove_commit_message
-    "[#{about.class.name.demodulize}] Remove #{about.to_s}"
+    "[#{about.class.name.demodulize} - #{manifest_identifier}] Remove #{about.to_s}"
   end
 
   def github_blob_remove_commit_message(blob)
