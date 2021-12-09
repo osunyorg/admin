@@ -37,7 +37,8 @@ class Research::Researcher < ApplicationRecord
     "#{ first_name } #{ last_name }"
   end
 
-  def github_path
+  def github_path_generated
+    # Override from WithGithubFiles
     "_authors/#{self.id}.md"
   end
 end

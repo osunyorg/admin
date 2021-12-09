@@ -76,7 +76,7 @@ class Communication::Website::Page < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    "_pages/#{path}/index.html".gsub('///', '/').gsub('//', '/')
+    "_pages/#{path}/index.html".gsub(/\/+/, '/')
   end
 
   def list_of_other_pages

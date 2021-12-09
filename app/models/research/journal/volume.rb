@@ -46,9 +46,4 @@ class Research::Journal::Volume < ApplicationRecord
   def to_s
     "##{ number } #{ title }"
   end
-
-  def github_path
-    "_volumes/#{id}.html"
-  end
-
 end

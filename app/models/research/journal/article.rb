@@ -56,10 +56,6 @@ class Research::Journal::Article < ApplicationRecord
     "#{ title }"
   end
 
-  def github_path
-    "_articles/#{id}.html"
-  end
-
   private
 
   def update_researchers
