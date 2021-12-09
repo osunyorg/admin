@@ -30,7 +30,8 @@ module WithGithubFiles
       {
         identifier: "primary",
         generated_path: github_path_generated,
-        data: -> (github_file) { to_jekyll(github_file) }
+        data: -> (github_file) { to_jekyll(github_file) },
+        has_media: true
       }
     ]
   end

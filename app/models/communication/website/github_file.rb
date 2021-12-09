@@ -30,7 +30,7 @@ class Communication::Website::GithubFile < ApplicationRecord
     return unless github.valid?
     add_to_batch(github)
     if github.commit_batch(github_commit_message)
-      update_column :github_path, about.github_path_generated
+      update_column :github_path, manifest_data[:generated_path]
     end
   end
   handle_asynchronously :publish, queue: 'default'
@@ -52,7 +52,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   protected
 
   def add_media_to_batch(github)
-    return unless about.respond_to?(:active_storage_blobs)
+    return unless manifest_data[:with_media] && about.respond_to?(:active_storage_blobs)
     about.active_storage_blobs.each { |blob| add_blob_to_batch(github, blob) }
   end
 
@@ -67,7 +67,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
 
   def remove_media_from_github
-    return unless about.respond_to?(:active_storage_blobs)
+    return unless manifest_data[:with_media] && about.respond_to?(:active_storage_blobs)
     about.active_storage_blobs.each { |blob| remove_blob_from_github(blob) }
   end
 

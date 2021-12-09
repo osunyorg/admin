@@ -68,6 +68,7 @@ class Github
     commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
     client.update_branch repository, default_branch, commit[:sha]
     @tree = nil
+    true
   end
 
   def remove(path, commit_message)
