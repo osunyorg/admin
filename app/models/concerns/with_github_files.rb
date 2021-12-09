@@ -14,7 +14,7 @@ module WithGithubFiles
   end
 
   def github_path_generated
-    "_#{self.class.name.demodulize.pluralize.underscore}/#{self.id}.html"
+    "_#{self.class.name.demodulize.pluralize.underscore}/#{self.slug}.html"
   end
 
   def to_jekyll(github_file)
