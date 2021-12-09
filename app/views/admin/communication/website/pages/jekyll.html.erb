@@ -4,6 +4,7 @@ permalink: "<%= @page.path %>"
 identifier: "<%= @page.id %>"
 parent: "<%= @page.parent_id %>"
 related_category: "<%= @page.related_category_id %>"
+position: <%= @page.position %>
 <% if @page.featured_image.attached? %>
 image: "<%= @page.featured_image.blob.id %>"
 <% end %>
