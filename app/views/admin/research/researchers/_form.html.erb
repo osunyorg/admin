@@ -5,6 +5,12 @@
       <div class="card-body">
         <%= f.input :first_name %>
         <%= f.input :last_name %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: researcher.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#research_researcher_first_name, #research_researcher_last_name' }
+                    } %>
         <%= f.association :user, collection: current_university.users.ordered %>
       </div>
     </div>

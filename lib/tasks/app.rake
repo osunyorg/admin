@@ -17,12 +17,18 @@ namespace :app do
       website.update_column(:url, "https://#{website.url}") unless website.url.blank? || website.url.starts_with?('https://')
     }
 
+    Education::Program.where(slug: [nil, '']).find_each { |program| program.update_column(:slug, program.name.parameterize) }
+    Research::Journal::Article.where(slug: [nil, '']).find_each { |article| article.update_column(:slug, article.title.parameterize) }
+    Research::Journal::Volume.where(slug: [nil, '']).find_each { |volume| volume.update_column(:slug, volume.title.parameterize) }
+    Research::Researcher.where(slug: [nil, '']).find_each { |researcher| researcher.update_column(:slug, "#{researcher.first_name} #{researcher.last_name}".parameterize) }
+
     [
       Communication::Website::Author, Communication::Website::Category,
       Communication::Website::Home, Communication::Website::Menu,
       Communication::Website::Page, Communication::Website::Post
     ].each do |model|
       model.includes(:website).find_each do |object|
+        next unless Github.with_website(object.website).valid?
         object.github_manifest.each do |manifest_item|
           Communication::Website::GithubFile.where(website: object.website, about: object, manifest_identifier: manifest_item[:identifier]).first_or_create do |github_file|
             github_file.github_path = object.github_path if manifest_item[:identifier] == 'primary'
@@ -37,6 +43,7 @@ namespace :app do
     ].each do |model|
       model.includes(:websites).find_each do |object|
         object.websites.each do |website|
+          next unless Github.with_website(website).valid?
           object.github_manifest.each do |manifest_item|
             Communication::Website::GithubFile.where(website: website, about: object, manifest_identifier: manifest_item[:identifier]).first_or_create do |github_file|
               github_file.github_path = object.github_path_generated if manifest_item[:identifier] == 'primary'

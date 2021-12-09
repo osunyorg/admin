@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_110929) do
+ActiveRecord::Schema.define(version: 2021_12_09_144737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -364,6 +364,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_110929) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "parent_id"
     t.integer "position", default: 0
+    t.string "slug"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -429,6 +430,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_110929) do
     t.text "abstract"
     t.text "references"
     t.text "keywords"
+    t.string "slug"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
@@ -452,6 +454,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_110929) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.text "keywords"
+    t.string "slug"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -475,6 +478,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_110929) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "university_id"
+    t.string "slug"
     t.index ["university_id"], name: "idx_researcher_university"
     t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end

@@ -79,7 +79,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def program_params
     params.require(:education_program)
-          .permit(:name, :level, :capacity, :ects, :continuing,
+          .permit(:name, :slug, :level, :capacity, :ects, :continuing,
             :prerequisites, :objectives, :duration, :registration, :pedagogy,
             :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other, :parent_id, school_ids: [], teacher_ids: [])
   end

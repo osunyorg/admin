@@ -7,6 +7,12 @@
         </div>
         <div class="card-body">
           <%= f.input :name %>
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: program.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#education_program_name' }
+                      } %>
           <%= f.input :level, include_blank: false, label_method: -> (p) { I18n.t(p[1], scope: 'enums.education/program.level') } %>
           <%= f.input :capacity %>
           <%= f.input :ects %>

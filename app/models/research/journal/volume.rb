@@ -7,6 +7,7 @@
 #  keywords            :text
 #  number              :integer
 #  published_at        :date
+#  slug                :string
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

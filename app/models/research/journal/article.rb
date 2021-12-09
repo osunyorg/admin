@@ -8,6 +8,7 @@
 #  old_text                   :text
 #  published_at               :date
 #  references                 :text
+#  slug                       :string
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null

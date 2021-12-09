@@ -7,6 +7,12 @@
         </div>
         <div class="card-body">
           <%= f.input :title, as: :text, input_html: { rows: 3 } %>
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: article.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#research_journal_article_title' }
+                      } %>
           <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
           <%= f.input :pdf %>
           <%= f.input :text, as: :rich_text_area %>

@@ -55,7 +55,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def researcher_params
     params.require(:research_researcher)
-          .permit(:first_name, :last_name, :biography, :user_id)
+          .permit(:first_name, :last_name, :slug, :biography, :user_id)
           .merge(university_id: current_university.id)
   end
 end
