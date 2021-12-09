@@ -1,10 +1,15 @@
 ---
 title: "<%= @author.to_s %>"
+slug: "<%= @author.slug %>"
 identifier: "<%= @author.id %>"
+permalink: "/auteurs/<%= @author.slug %>"
 first_name: "<%= @author.first_name %>"
 last_name: "<%= @author.last_name %>"
-slug: "<%= @author.slug %>"
 biography: >
   <%= prepare_for_github @author.biography, @author.university %>
+pagination:
+  enabled: true
+  tag: <%= @author.id %>
+  permalink: /:num/
 ---
 <%= @github_file.github_frontmatter.content.html_safe %>

@@ -52,7 +52,20 @@ class Communication::Website::Author < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    "_authors/#{slug}.html"
+    "auteurs/#{slug}.html"
+  end
+
+  def github_manifest
+    super << {
+      identifier: "collection_item",
+      generated_path: "_data/authors/#{slug}.yml",
+      data: -> (github_file) { ApplicationController.render(
+        template: "admin/communication/website/authors/jekyll_collection",
+        formats: [:yml],
+        layout: false,
+        assigns: { author: self, github_file: github_file }
+      ) }
+    }
   end
 
   protected

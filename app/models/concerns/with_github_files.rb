@@ -6,7 +6,6 @@ module WithGithubFiles
 
     after_save :create_github_files
     after_save_commit :publish_github_files
-    after_touch :publish_github_files
   end
 
   def force_publish!
@@ -41,7 +40,7 @@ module WithGithubFiles
   def create_github_files
     list_of_websites.each do |website|
       github_manifest.each do |manifest_item|
-        github_files.find_or_create_by(website: website, manifest_identifier: manifest_item[:identifier])
+        github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
       end
     end
   end
@@ -49,7 +48,7 @@ module WithGithubFiles
   def publish_github_files
     list_of_websites.each do |website|
       github_manifest.each do |manifest_item|
-        github_file = github_files.find_or_create_by(website: website, manifest_identifier: manifest_item[:identifier])
+        github_file = github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
         github_file.publish
       end
     end

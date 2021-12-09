@@ -81,24 +81,15 @@ class Communication::Website::Category < ApplicationRecord
     "actualites/#{slug}.html"
   end
 
-  # Override from WithGithubFiles
-  def to_jekyll(github_file)
-    ApplicationController.render(
-      template: "admin/communication/website/categories/jekyll",
-      layout: false,
-      assigns: { category: self, github_file: github_file }
-    )
-  end
-
   def github_manifest
     super << {
       identifier: "collection_item",
-      generated_path: "_data/categories/#{slug}.yml",
+      generated_path: "_data/authors/#{slug}.yml",
       data: -> (github_file) { ApplicationController.render(
-        template: "admin/communication/website/categories/jekyll_collection",
+        template: "admin/communication/website/authors/jekyll_collection",
         formats: [:yml],
         layout: false,
-        assigns: { category: self, github_file: github_file }
+        assigns: { author: self, github_file: github_file }
       ) }
     }
   end

@@ -31,6 +31,8 @@ class Communication::Website::Menu < ApplicationRecord
   validates :title, :identifier, presence: true
   validates :identifier, uniqueness: { scope: :communication_website_id }
 
+  after_touch :publish_github_files
+
   scope :ordered, -> { order(created_at: :asc) }
 
   def to_s
