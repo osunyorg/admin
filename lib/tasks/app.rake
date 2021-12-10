@@ -52,6 +52,10 @@ namespace :app do
         end
       end
     end
+
+    10.times do
+      Education::Program.find_each { |p| p.update_column :path, "#{p.parent&.path}/#{p.slug}".gsub(/\/+/, '/') }
+    end
   end
 
   namespace :db do

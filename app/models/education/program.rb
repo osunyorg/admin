@@ -8,6 +8,7 @@
 #  ects          :integer
 #  level         :integer
 #  name          :string
+#  path          :string
 #  position      :integer          default(0)
 #  slug          :string
 #  created_at    :datetime         not null
@@ -74,12 +75,23 @@ class Education::Program < ApplicationRecord
 
   validates_presence_of :name
 
+  before_validation :make_path
+  after_save :update_children_paths, if: :saved_change_to_path?
   after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
   scope :ordered, -> { order(:position) }
 
   def to_s
     "#{name}"
+  end
+
+  # Override from WithGithubFiles
+  def github_path_generated
+    "_programs/#{path}/index.html".gsub(/\/+/, '/')
+  end
+
+  def make_path
+    self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
   end
 
   def list_of_other_programs

@@ -69,7 +69,7 @@ class Communication::Website::Page < ApplicationRecord
   validates :slug, uniqueness: { scope: :communication_website_id }
 
   before_validation :make_path
-  after_save :update_children_paths if :saved_change_to_path?
+  after_save :update_children_paths, if: :saved_change_to_path?
 
   scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
@@ -94,7 +94,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def make_path
-    self.path = "#{parent&.path}/#{slug}".gsub('//', '/')
+    self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
   end
 
   def update_children_paths
