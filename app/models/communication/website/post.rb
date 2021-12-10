@@ -55,6 +55,8 @@ class Communication::Website::Post < ApplicationRecord
   validates :title, presence: true
   validates :slug, uniqueness: { scope: :communication_website_id }
 
+  before_validation :set_published_at, if: :published_changed?
+
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
@@ -71,5 +73,9 @@ class Communication::Website::Post < ApplicationRecord
 
   def slug_unavailable?(slug)
     self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+  end
+
+  def set_published_at
+    self.published_at = published? ? Time.zone.now : nil
   end
 end
