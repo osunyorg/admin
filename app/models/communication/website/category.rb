@@ -78,7 +78,7 @@ class Communication::Website::Category < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    "actualites/#{slug}.html"
+    "#{website.posts_github_directory}/#{slug}.html"
   end
 
   def github_manifest

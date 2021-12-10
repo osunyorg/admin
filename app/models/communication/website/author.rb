@@ -52,7 +52,7 @@ class Communication::Website::Author < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    "auteurs/#{slug}.html"
+    "#{website.authors_github_directory}/#{slug}.html"
   end
 
   def github_manifest

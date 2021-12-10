@@ -29,9 +29,11 @@
           <%= f.association :author, collection: @website.authors.ordered if @website.authors.any? %>
           <%= f.association :categories,
                             as: :check_boxes,
-                            collection: @website.list_of_categories,
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } if @website.categories.any? %>
+                            collection: @website.list_of_categories.map { |category| [
+                              sanitize(category[:label]),
+                              category[:id],
+                              { data: { parent: category[:parent_id] } }
+                            ] } if @website.categories.any? %>
         </div>
       </div>
       <div class="card flex-fill w-100">
