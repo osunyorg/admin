@@ -58,7 +58,7 @@ class Communication::Website::Author < ApplicationRecord
   def github_manifest
     super << {
       identifier: "collection_item",
-      generated_path: "_data/authors/#{slug}.yml",
+      generated_path: -> { "_data/authors/#{slug}.yml" },
       data: -> (github_file) { ApplicationController.render(
         template: "admin/communication/website/authors/jekyll_collection",
         formats: [:yml],

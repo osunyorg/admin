@@ -27,16 +27,16 @@ class Communication::Website::GithubFile < ApplicationRecord
   after_destroy :remove_from_github
 
   def publish
-    return unless valid? && github.valid?
+    return unless valid_for_publication? && github.valid?
     add_to_batch(github)
     if github.commit_batch(github_commit_message)
-      update_column :github_path, manifest_data[:generated_path]
+      update_column :github_path, manifest_data[:generated_path].call
     end
   end
   handle_asynchronously :publish, queue: 'default'
 
   def add_to_batch(github)
-    return unless valid?
+    return unless valid_for_publication?
     github.add_to_batch github_params
     add_media_to_batch(github)
   end
@@ -82,7 +82,7 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def github_params
     {
-      path: manifest_data[:generated_path],
+      path: manifest_data[:generated_path].call,
       previous_path: github_path,
       data: manifest_data[:data].call(self)
     }
@@ -122,7 +122,7 @@ class Communication::Website::GithubFile < ApplicationRecord
     }
   end
 
-  def valid?
+  def valid_for_publication?
     return about.published? if about_type == 'Communication::Website::Post'
     true
   end
