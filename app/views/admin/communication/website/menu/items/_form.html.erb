@@ -11,13 +11,16 @@
           <%= f.input :kind,
                       include_blank: false,
                       label_method: -> (p) { I18n.t(p[1], scope: 'enums.communication/website/menu/item.kind') },
-                      class: 'js-kind-input' %>
-          <div class="kind-url">
+                      input_html: {
+                        class: 'js-kind-input',
+                        data: { url: kind_switch_admin_communication_website_menu_items_path }
+                       } %>
+          <div class="d-none js-url-field">
             <%= f.input :url, as: :string %>
           </div>
-          <div class="kind-page">
-            <%= f.input :about_type, as: :hidden, input_html: { value: 'Communication::Website::Page' } %>
-            <%= f.association :about, collection: @website.list_of_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <div class="d-none js-about-fields">
+            <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-id' } %>
+            <%= f.association :about, collection: @website.list_of_pages, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] }, input_html: { class: 'js-about-id' } %>
           </div>
         </div>
       </div>

@@ -39,6 +39,7 @@ namespace :communication do
     resources :menus, controller: 'website/menus' do
       resources :items, controller: 'website/menu/items', except: :index do
         collection do
+          get :kind_switch
           post :reorder
         end
         member do
