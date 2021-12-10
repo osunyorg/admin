@@ -27,7 +27,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   after_destroy :remove_from_github
 
   def publish
-    return unless github.valid?
+    return unless valid? && github.valid?
     add_to_batch(github)
     if github.commit_batch(github_commit_message)
       update_column :github_path, manifest_data[:generated_path]
@@ -36,6 +36,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   handle_asynchronously :publish, queue: 'default'
 
   def add_to_batch(github)
+    return unless valid?
     github.add_to_batch github_params
     add_media_to_batch(github)
   end
@@ -119,5 +120,10 @@ class Communication::Website::GithubFile < ApplicationRecord
     @manifest_data ||= about.github_manifest.detect { |item|
       item[:identifier] == manifest_identifier
     }
+  end
+
+  def valid?
+    return about.published? if about_type == 'Communication::Website::Post'
+    true
   end
 end
