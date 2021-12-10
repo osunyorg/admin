@@ -119,6 +119,11 @@ en:
     communication/website/menu/item:
       kind:
         blank: Title
-        page: Page
-        programs: Programs
+        news: News index
+        news_article: Specific news
+        news_category: News category
+        page: Specific Page
+        program: Specific program
+        programs: Programs index
+        staff: Staff
         url: URL

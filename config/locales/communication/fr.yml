@@ -119,6 +119,11 @@ fr:
     communication/website/menu/item:
       kind:
         blank: Titre intermédiaire
-        page: Page
-        programs: Formations
+        news: Index des actualités
+        news_article: Actualité spécifique
+        news_category: Catégorie d'actualités
+        page: Page spécifique
+        program: Formation spécifique
+        programs: Index des formations
+        staff: Équipe
         url: URL
