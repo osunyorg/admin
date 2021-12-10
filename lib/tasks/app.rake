@@ -56,6 +56,11 @@ namespace :app do
     10.times do
       Education::Program.find_each { |p| p.update_column :path, "#{p.parent&.path}/#{p.slug}".gsub(/\/+/, '/') }
     end
+
+    Communication::Website.all.find_each { |website|
+      website.update_column(:authors_github_directory, "auteurs") if website.authors_github_directory.blank?
+      website.update_column(:posts_github_directory, "actualites") if website.posts_github_directory.blank?
+    }
   end
 
   namespace :db do

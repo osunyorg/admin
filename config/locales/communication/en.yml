@@ -60,7 +60,9 @@ en:
         about_Education::School: School website
         about_Research::Journal: Journal website
         about_type: About
+        authors_github_directory: Authors' GitHub directory
         name: Name
+        posts_github_directory: Posts' GitHub directory
         url: URL
       communication/website/author:
         biography: Biography
