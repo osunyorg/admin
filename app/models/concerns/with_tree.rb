@@ -21,7 +21,7 @@ module WithTree
     def self_and_children(level)
       elements = []
       label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s
-      elements << { label: label, id: self.id }
+      elements << { label: label, id: self.id, parent_id: self.parent_id }
       children.each do |child|
         elements.concat(child.self_and_children(level + 1))
       end
