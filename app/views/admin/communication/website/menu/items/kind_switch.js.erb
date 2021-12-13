@@ -1,6 +1,7 @@
-function displayAbout(options) {
+function displayAbout(kind, options) {
     $('.js-url-field').addClass('d-none');
     $('.js-about-fields').removeClass('d-none');
+    $('.js-about-type').val(kind);
     $('.js-about-id').html(options);
 }
 
@@ -18,7 +19,7 @@ function hideAbout() {
             options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
         end
     %>
-    displayAbout("<%= j(raw(options.join(''))) %>");
+    displayAbout('Communication::Website::Page', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'program' %>
     displayAbout();
 <% elsif @kind == 'news_category' %>

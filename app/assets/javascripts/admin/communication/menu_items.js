@@ -10,7 +10,6 @@ window.osuny.communication.menuItems = {
         this.switchUrl = this.kindInput.dataset.url;
 
         this.kindInput.addEventListener('change', this.onKindChange.bind(this));
-        this.onKindChange();
     },
 
     onKindChange: function () {
