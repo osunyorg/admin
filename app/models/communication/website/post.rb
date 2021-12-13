@@ -61,7 +61,7 @@ class Communication::Website::Post < ApplicationRecord
 
   def path
     # used in menu_item#jekyll_target
-    "/#{website.posts_github_directory}/#{slug}/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
+    "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
   end
 
   # Override from WithGithubFiles
