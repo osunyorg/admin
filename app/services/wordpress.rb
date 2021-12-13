@@ -15,7 +15,7 @@ class Wordpress
     # iframe attributes from MDN : https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe
     fragment = Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RELAXED,
       attributes: Sanitize::Config::RELAXED[:attributes].merge({
-        all: Sanitize::Config::RELAXED[:attributes][:all].dup.delete('class'),
+        all: Sanitize::Config::RELAXED[:attributes][:all].dup - ['class', 'style'],
         'a' => Sanitize::Config::RELAXED[:attributes]['a'].dup.delete('rel'),
         'iframe' => [
           'allow', 'allowfullscreen', 'allowpaymentrequest', 'csp', 'height', 'loading',
@@ -23,7 +23,7 @@ class Wordpress
           'frameborder', 'longdesc', 'marginheight', 'marginwidth', 'scrolling'
         ]
       }),
-      elements: Set.new(Sanitize::Config::RELAXED[:elements]).delete('div') + ['iframe'],
+      elements: Set.new(Sanitize::Config::RELAXED[:elements]) - ['div', 'style'] + ['iframe'],
       whitespace_elements: {
         'div' => { :before => "", :after => "" }
       }
