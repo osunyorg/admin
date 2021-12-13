@@ -62,7 +62,7 @@ class Communication::Website < ApplicationRecord
 
   after_create :create_home
   after_save :publish_about_object, if: :saved_change_to_about_id?
-  after_save_commit :set_programs_categories!, if: -> (website) { website.about_type == 'Education::School' }
+  after_save_commit :set_programs_categories!, if: -> (website) { website.about_school? }
 
   scope :ordered, -> { order(:name) }
 
@@ -74,12 +74,15 @@ class Communication::Website < ApplicationRecord
     "#{name}"
   end
 
-  def import!
-    unless imported?
-      self.imported_website = Communication::Website::Imported::Website.where(website: self, university: university)
-                                                                        .first_or_create
+  def programs
+    about_school? ? about.programs : Education::Program.none
+  end
 
-    end
+  def import!
+    imported_website = Communication::Website::Imported::Website.where(
+      website: self, university: university
+    ).first_or_create unless imported?
+
     imported_website.run!
     imported_website
   end
@@ -104,6 +107,14 @@ class Communication::Website < ApplicationRecord
     all_categories
   end
 
+  def list_of_programs
+    all_programs = []
+    programs.root.ordered.each do |program|
+      all_programs.concat(program.self_and_children(0))
+    end
+    all_programs
+  end
+
   protected
 
   def create_home
@@ -112,5 +123,9 @@ class Communication::Website < ApplicationRecord
 
   def github
     @github ||= Github.with_website self
+  end
+
+  def about_school?
+    about_type == 'Education::School'
   end
 end

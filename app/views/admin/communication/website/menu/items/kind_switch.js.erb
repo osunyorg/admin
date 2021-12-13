@@ -21,11 +21,29 @@ function hideAbout() {
     %>
     displayAbout('Communication::Website::Page', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'program' %>
-    displayAbout();
+    <%
+    options = ['<option value="" label=" "></option>']
+    @website.list_of_programs.each do |page|
+        options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
+    end
+    %>
+    displayAbout('Education::Program', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'news_category' %>
-    displayAbout();
+    <%
+        options = ['<option value="" label=" "></option>']
+        @website.list_of_categories.each do |category|
+            options << "<option value=\"#{category[:id]}\">#{category[:label]}</option>"
+        end
+    %>
+    displayAbout('Communication::Website::Category', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'news_article' %>
-    displayAbout();
+    <%
+        options = ['<option value="" label=" "></option>']
+        @website.posts.ordered.each do |post|
+            options << "<option value=\"#{post.id}\">#{post.to_s}</option>"
+        end
+    %>
+    displayAbout('Communication::Website::Post', "<%= j(raw(options.join(''))) %>");
 <% else %>
     $('.js-url-field').addClass('d-none');
     hideAbout();

@@ -81,7 +81,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def has_about?
-    kind_page? || kind_program? || kind_news_category? || kind_news_article
+    kind_page? || kind_program? || kind_news_category? || kind_news_article?
   end
 
   protected

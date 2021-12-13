@@ -24,11 +24,14 @@
                 if item.kind_page?
                   about_collection = @website.list_of_pages
                 elsif item.kind_program?
+                  about_collection = @website.list_of_programs
                 elsif item.kind_news_category?
+                  about_collection = @website.list_of_categories
                 elsif item.kind_news_article?
+                  about_collection = @website.posts.ordered.map { |e| { label: e.to_s, id: e.id } }
                 end
               else
-                about_collection = nil
+                about_collection = []
               end
             %>
             <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-type' } %>
