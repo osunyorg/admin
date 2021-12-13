@@ -1,0 +1,32 @@
+function displayAbout(kind, options) {
+    $('.js-url-field').addClass('d-none');
+    $('.js-about-fields').removeClass('d-none');
+    $('.js-about-type').val(kind);
+    $('.js-about-id').html(options);
+}
+
+function hideAbout() {
+    $('.js-about-fields').addClass('d-none');
+}
+
+<% if @kind == 'url' %>
+    $('.js-url-field').removeClass('d-none');
+    hideAbout();
+<% elsif @kind == 'page' %>
+    <%
+        options = ['<option value="" label=" "></option>']
+        @website.list_of_pages.each do |page|
+            options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
+        end
+    %>
+    displayAbout('Communication::Website::Page', "<%= j(raw(options.join(''))) %>");
+<% elsif @kind == 'program' %>
+    displayAbout();
+<% elsif @kind == 'news_category' %>
+    displayAbout();
+<% elsif @kind == 'news_article' %>
+    displayAbout();
+<% else %>
+    $('.js-url-field').addClass('d-none');
+    hideAbout();
+<% end %>

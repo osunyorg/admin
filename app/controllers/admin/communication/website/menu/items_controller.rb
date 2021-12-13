@@ -25,6 +25,12 @@ class Admin::Communication::Website::Menu::ItemsController < Admin::Communicatio
     @children = @item.children.ordered
   end
 
+  def kind_switch
+    return unless request.xhr?
+    @kind = params[:kind]
+    return if @kind.blank?
+  end
+
   def new
     @item.menu = @menu
     @item.website = @website
