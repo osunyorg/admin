@@ -63,6 +63,8 @@ fr:
         authors_github_directory: Dossier GitHub des auteurs
         name: Nom
         posts_github_directory: Dossier GitHub des actualités
+        programs_github_directory: Dossier GitHub des formations
+        staff_github_directory: Dossier GitHub de l'équipe
         url: URL
       communication/website/author:
         biography: Biographie

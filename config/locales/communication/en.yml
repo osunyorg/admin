@@ -63,6 +63,8 @@ en:
         authors_github_directory: Authors' GitHub directory
         name: Name
         posts_github_directory: Posts' GitHub directory
+        programs_github_directory: Programs' GitHub directory
+        staff_github_directory: Staff's GitHub directory
         url: URL
       communication/website/author:
         biography: Biography

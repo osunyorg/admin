@@ -47,6 +47,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   enum kind: { blank: 0, url: 10, page: 20, programs: 30, program: 31, news: 40, news_category: 41, news_article: 42, staff: 50 }, _prefix: :kind
 
   validates :title, presence: true
+  validates :about, presence: true, if: :has_about?
 
   before_create :set_position
 
@@ -57,10 +58,22 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def jekyll_target
-    return url if kind_url?
-    return about&.path if kind_page?
-    return '/programs' if kind_programs?
-    return nil if kind_blank?
+    case self.kind
+    when 'url'
+      url
+    when 'programs'
+      "/#{website.programs_github_directory}"
+    when 'program'
+      "/#{website.programs_github_directory}#{about.path}"
+    when 'news'
+      "/#{website.posts_github_directory}"
+    when 'staff'
+      "/#{website.staff_github_directory}"
+    when 'blank'
+      nil
+    else
+      about&.path
+    end
   end
 
   def list_of_other_items
@@ -73,9 +86,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def to_jekyll_hash
+    return {} if kind_news_article? && !about.published
     {
       'title' => title,
       'target' => jekyll_target,
+      'kind' => kind,
       'children' => children.ordered.map(&:to_jekyll_hash)
     }
   end

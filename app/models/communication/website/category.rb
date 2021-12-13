@@ -76,6 +76,11 @@ class Communication::Website::Category < ApplicationRecord
     "#{name}"
   end
 
+  def path
+    # used in menu_item#jekyll_target
+    "/#{website.posts_github_directory}/#{slug}"
+  end
+
   # Override from WithGithubFiles
   def github_path_generated
     "#{website.posts_github_directory}/#{slug}.html"

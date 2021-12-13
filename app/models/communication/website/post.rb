@@ -6,7 +6,6 @@
 #  description              :text
 #  github_path              :text
 #  old_text                 :text
-#  path                     :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
@@ -59,6 +58,11 @@ class Communication::Website::Post < ApplicationRecord
 
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
+
+  def path
+    # used in menu_item#jekyll_target
+    "/#{website.posts_github_directory}/#{slug}/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
+  end
 
   # Override from WithGithubFiles
   def github_path_generated

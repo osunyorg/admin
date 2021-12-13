@@ -73,7 +73,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   def website_params
     params.require(:communication_website).permit(
       :name, :url, :repository, :access_token, :about_type, :about_id,
-      :authors_github_directory, :posts_github_directory
+      :authors_github_directory, :posts_github_directory, :programs_github_directory, :staff_github_directory
     )
   end
 end
