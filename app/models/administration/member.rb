@@ -26,6 +26,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Administration::Member < ApplicationRecord
+  include WithGithubFiles
   include WithSlug
 
   has_rich_text :biography
@@ -38,5 +39,10 @@ class Administration::Member < ApplicationRecord
   def to_s
     "#{last_name} #{first_name}"
   end
-  
+
+  def websites
+    []
+    # TODO
+  end
+
 end
