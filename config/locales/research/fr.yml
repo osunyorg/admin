@@ -1,4 +1,7 @@
 fr:
+  research:
+    manage_researchers: Gérer les Chercheu·rs·ses
+    number_of_articles: Nombre d'articles
   activemodel:
     models:
       research: Recherche

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_101323) do
+ActiveRecord::Schema.define(version: 2021_12_14_163501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -604,7 +604,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
-  add_foreign_key "communication_website_posts", "communication_website_authors", column: "author_id"
+  add_foreign_key "communication_website_posts", "administration_members", column: "author_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
@@ -617,8 +617,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"
   add_foreign_key "research_journal_articles", "users", column: "updated_by_id"
+  add_foreign_key "research_journal_articles_researchers", "administration_members", column: "researcher_id"
   add_foreign_key "research_journal_articles_researchers", "research_journal_articles", column: "article_id"
-  add_foreign_key "research_journal_articles_researchers", "research_researchers", column: "researcher_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"

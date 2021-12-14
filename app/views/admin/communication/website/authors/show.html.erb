@@ -1,54 +1,22 @@
 <% content_for :title, @author %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Author.human_attribute_name('biography') %></h3>
-          <%= @author.biography %>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Author.human_attribute_name('slug') %></h3>
-          <p><%= @author.slug %></p>
-          <% if @author.user.present? %>
-            <h3 class="h5"><%= Communication::Website::Author.human_attribute_name('user') %></h3>
-            <p><%= link_to_if can?(:read, @author.user), @author.user, admin_user_path(@author.user) %></p>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'admin/administration/members/main_infos', member: @author %>
+
   <% if @posts.total_count > 0 %>
     <div class="card">
       <div class="card-header">
         <h5><%= "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %></h5>
       </div>
       <%= render 'admin/communication/website/posts/list', posts: @posts, hide_author: true %>
-      <div class="card-footer">
-        <%= paginate @posts, theme: 'bootstrap-5' %>
-      </div>
+      <% if @posts.total_pages > 1 %>
+        <div class="card-footer">
+          <%= paginate @posts, theme: 'bootstrap-5' %>
+        </div>
+      <% end %>
     </div>
 
   <% end %>
-<% end %>
-
-
-<% content_for :action_bar_left do %>
-  <%= link_to t('communication.website.force_publication'),
-              publish_admin_communication_website_author_path(@author),
-              method: :post,
-              class: button_classes %>
 <% end %>
 
 <% content_for :action_bar_right do %>

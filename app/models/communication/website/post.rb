@@ -24,7 +24,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (author_id => communication_website_authors.id)
+#  fk_rails_...  (author_id => administration_members.id)
 #  fk_rails_...  (communication_website_id => communication_websites.id)
 #  fk_rails_...  (university_id => universities.id)
 #
@@ -43,7 +43,7 @@ class Communication::Website::Post < ApplicationRecord
   belongs_to :website,
              foreign_key: :communication_website_id
   belongs_to :author,
-             class_name: 'Communication::Website::Author',
+             class_name: 'Administration::Member',
              optional: true
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Category',

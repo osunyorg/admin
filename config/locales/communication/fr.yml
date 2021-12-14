@@ -1,5 +1,7 @@
 fr:
   communication:
+    manage_authors: Gérer les auteurs
+    number_of_posts: Nombre d'actualités
     website:
       force_publication: 'Forcer la publication'
       imported:

@@ -3,9 +3,11 @@
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">
     <%= render 'admin/communication/website/menus/list', menus: @menus %>
-    <div class="card-footer">
-      <%= paginate @menus, theme: 'bootstrap-5' %>
-    </div>
+    <% if @menus.total_pages > 1 %>
+      <div class="card-footer">
+        <%= paginate @menus, theme: 'bootstrap-5' %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

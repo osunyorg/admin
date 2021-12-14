@@ -34,7 +34,21 @@ class Administration::Member < ApplicationRecord
   belongs_to :university
   belongs_to :user, optional: true
 
+  has_many :communication_website_posts,
+           class_name: 'Communication::Website::Post',
+           foreign_key: :author_id,
+           dependent: :nullify
+
+  has_and_belongs_to_many :research_journal_articles,
+                          class_name: 'Research::Journal::Article',
+                          join_table: :research_journal_articles_researchers,
+                          foreign_key: :researcher_id
+
   scope :ordered, -> { order(:last_name, :first_name) }
+  scope :administratives, -> { where(is_administrative: true) }
+  scope :authors, -> { where(is_author: true) }
+  scope :teachers, -> { where(is_teacher: true) }
+  scope :researchers, -> { where(is_researcher: true) }
 
   def to_s
     "#{last_name} #{first_name}"

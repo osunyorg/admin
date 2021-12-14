@@ -1,4 +1,7 @@
 en:
+  research:
+    manage_researchers: Managege researchers
+    number_of_articles: Number of articles
   activemodel:
     models:
       research: Research

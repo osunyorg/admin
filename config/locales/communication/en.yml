@@ -1,5 +1,7 @@
 en:
   communication:
+    manage_authors: Manage authors
+    number_of_posts: Nunber of posts
     website:
       force_publication: 'Force publication'
       imported:

@@ -40,7 +40,7 @@
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('researchers') %></h3>
           <ul class="list-unstyled mb-0">
             <% @article.researchers.each do |researcher| %>
-              <li><%= link_to researcher, [:admin, researcher] %></li>
+              <li><%= link_to researcher, admin_research_researcher_path(researcher) %></li>
             <% end %>
           </ul>
         <% end %>
