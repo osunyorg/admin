@@ -10,7 +10,22 @@ en:
       administration/qualiopi/indicator:
         one: Indicator
         other: Indicators
+      administration/member:
+        one: Staff
+        other: Staff
     attributes:
+      administration/member:
+        abilities: Abilities
+        biography: Biography
+        first_name: First name
+        is_administrative: Administrative staff
+        is_author: Author
+        is_researcher: Researcher
+        is_teacher: Teacher
+        last_name: Last name
+        name: Name
+        slug: Slug
+        user: User
       administration/qualiopi/criterion:
         number: Number
         name: Name

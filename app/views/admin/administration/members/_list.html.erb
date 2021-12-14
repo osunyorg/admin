@@ -1,0 +1,27 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Administration::Member.human_attribute_name('name') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% members.each do |member| %>
+      <tr>
+        <td><%= link_to member, admin_administration_member_path(member) %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                      edit_admin_administration_member_path(member),
+                      class: button_classes %>
+            <%= link_to t('delete'),
+                      admin_administration_member_path(member),
+                      method: :delete,
+                      data: { confirm: t('please-confirm') },
+                      class: button_classes_danger %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

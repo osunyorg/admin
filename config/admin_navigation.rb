@@ -32,7 +32,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, User) || can?(:read, Administration::Qualiopi::Criterion)
       primary.item :administration, 'Administration', nil, { kind: :header }
-      primary.item :administration, 'Équipe administrative', nil, { icon: 'users-cog' }
+      primary.item :administration, Administration::Member.model_name.human(count: 2), admin_administration_members_path, { icon: 'users-cog' }
       primary.item :administration, 'Campus', nil, { icon: 'map-marker-alt' }
       primary.item :administration, 'Admissions', nil, { icon: 'door-open' }
       primary.item :administration, 'Statistiques', nil, { icon: 'cog' }

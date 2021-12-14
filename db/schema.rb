@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_140240) do
+ActiveRecord::Schema.define(version: 2021_12_14_101323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -54,6 +54,22 @@ ActiveRecord::Schema.define(version: 2021_12_13_140240) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "administration_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "user_id"
+    t.string "last_name"
+    t.string "first_name"
+    t.string "slug"
+    t.boolean "is_author"
+    t.boolean "is_researcher"
+    t.boolean "is_teacher"
+    t.boolean "is_administrative"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_administration_members_on_university_id"
+    t.index ["user_id"], name: "index_administration_members_on_user_id"
   end
 
   create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -547,6 +563,8 @@ ActiveRecord::Schema.define(version: 2021_12_13_140240) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "administration_members", "universities"
+  add_foreign_key "administration_members", "users"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_website_authors", "communication_websites"
   add_foreign_key "communication_website_authors", "universities"
