@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_163501) do
+ActiveRecord::Schema.define(version: 2021_12_15_104346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_163501) do
     t.boolean "is_administrative"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "phone"
+    t.string "email"
     t.index ["university_id"], name: "index_administration_members_on_university_id"
     t.index ["user_id"], name: "index_administration_members_on_user_id"
   end

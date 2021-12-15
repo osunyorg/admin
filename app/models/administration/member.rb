@@ -3,12 +3,14 @@
 # Table name: administration_members
 #
 #  id                :uuid             not null, primary key
+#  email             :string
 #  first_name        :string
 #  is_administrative :boolean
 #  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
+#  phone             :string
 #  slug              :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -43,6 +45,11 @@ class Administration::Member < ApplicationRecord
                           class_name: 'Research::Journal::Article',
                           join_table: :research_journal_articles_researchers,
                           foreign_key: :researcher_id
+
+  validates_presence_of :first_name, :last_name
+  validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
+  validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
+
 
   scope :ordered, -> { order(:last_name, :first_name) }
   scope :administratives, -> { where(is_administrative: true) }

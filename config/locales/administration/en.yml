@@ -17,6 +17,7 @@ en:
       administration/member:
         abilities: Abilities
         biography: Biography
+        email: Email
         first_name: First name
         is_administrative: Administrative staff
         is_author: Author
@@ -24,6 +25,7 @@ en:
         is_teacher: Teacher
         last_name: Last name
         name: Name
+        phone: Phone
         slug: Slug
         user: User
       administration/qualiopi/criterion:

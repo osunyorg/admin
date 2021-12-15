@@ -8,6 +8,14 @@
         <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
       </div>
       <div class="card-body">
+        <% unless @member.email.blank? %>
+          <h3 class="h5"><%= Administration::Member.human_attribute_name('email') %></h3>
+          <p><%= link_to @member.email, "mailto:#{@member.email}", target: '_blank' %></p>
+        <% end %>
+        <% unless @member.phone.blank? %>
+          <h3 class="h5"><%= Administration::Member.human_attribute_name('phone') %></h3>
+          <p><%= link_to @member.phone, "tel:#{@member.phone}", target: '_blank' %></p>
+        <% end %>
         <h3 class="h5"><%= Administration::Member.human_attribute_name('biography') %></h3>
         <p><%= @member.biography %></p>
         <h3 class="h5"><%= Administration::Member.human_attribute_name('slug') %></h3>
