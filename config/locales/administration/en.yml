@@ -40,3 +40,10 @@ en:
         requirement: Requirement
         non_conformity: Non-conformity
         glossary: Glossary
+  simple_form:
+    hints:
+      administration_member:
+        is_administrative: "Is part of administrative staff for a school."
+        is_author: "Writes posts for websites."
+        is_researcher: "Writes articles for journals."
+        is_teacher: "Teaches in Schools."

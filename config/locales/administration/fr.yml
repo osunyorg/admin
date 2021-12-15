@@ -40,3 +40,10 @@ fr:
         requirement: Obligations spécifiques
         non_conformity: Non-conformité
         glossary: Glossaire
+  simple_form:
+    hints:
+      administration_member:
+        is_administrative: "Fait partie du personnel administratif d'une école."
+        is_author: "Écrit des articles pour les sites."
+        is_researcher: "Écrit des articles dans des revues scientifiques."
+        is_teacher: "Enseigne dans des formations."
