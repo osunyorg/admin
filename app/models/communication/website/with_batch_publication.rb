@@ -8,9 +8,9 @@ module Communication::Website::WithBatchPublication
     end
     handle_asynchronously :force_publish!, queue: 'default'
 
-    def publish_authors!
-      commit_files_in_batch github_files.where(about_type: "Communication::Website::Author"),
-                            "[Author] Batch update from import"
+    def publish_members!
+      commit_files_in_batch github_files.where(about_type: "Administration::Member"),
+                            "[Member] Batch update from import"
     end
 
     def publish_categories!
@@ -37,7 +37,7 @@ module Communication::Website::WithBatchPublication
       commit_files_in_batch github_files.where(about_type: [
                               "Education::School",
                               "Education::Program",
-                              "Education::Teacher"
+                              "Administration::Member"
                             ]),
                             "[Education School/Program/Teacher] Batch update from import"
     end
@@ -46,9 +46,10 @@ module Communication::Website::WithBatchPublication
       commit_files_in_batch github_files.where(about_type: [
                               "Research::Journal",
                               "Research::Journal::Article",
-                              "Research::Journal::Volume"
+                              "Research::Journal::Volume",
+                              "Administration::Member"
                             ]),
-                            "[Research Journal/Article/Volume] Batch update from import"
+                            "[Research Journal/Article/Volume/Researcher] Batch update from import"
     end
 
     protected
