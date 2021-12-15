@@ -15,7 +15,7 @@ class Admin::Communication::Website::AuthorsController < Admin::Communication::W
 
   def breadcrumb
     super
-    add_breadcrumb Communication::Website::Author.model_name.human(count: 2),
+    add_breadcrumb t('communication.authors', count: 2),
                    admin_communication_website_authors_path
     breadcrumb_for @author
   end

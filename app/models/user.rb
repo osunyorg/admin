@@ -60,8 +60,7 @@ class User < ApplicationRecord
 
   belongs_to :university
   belongs_to :language
-  has_one :researcher, class_name: 'Research::Researcher', dependent: :nullify
-  has_one :author, class_name: 'Communication::Website::Author', dependent: :nullify
+  has_one :member, class_name: 'Administration::Member', dependent: :nullify
 
   scope :ordered, -> { order(:last_name, :first_name) }
 

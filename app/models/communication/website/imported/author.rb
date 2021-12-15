@@ -22,7 +22,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (author_id => communication_website_authors.id)
+#  fk_rails_...  (author_id => administration_members.id)
 #  fk_rails_...  (university_id => universities.id)
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
@@ -32,7 +32,7 @@ class Communication::Website::Imported::Author < ApplicationRecord
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :author,
-             class_name: 'Communication::Website::Author',
+             class_name: 'Administration::Member',
              optional: true
 
   before_validation :sync

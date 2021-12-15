@@ -34,7 +34,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
 
   def breadcrumb
     super
-    add_breadcrumb  Education::Teacher.model_name.human(count: 2),
+    add_breadcrumb  t('education.teachers', count: 2),
                     admin_education_teachers_path
     breadcrumb_for @teacher
   end

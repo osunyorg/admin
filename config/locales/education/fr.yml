@@ -10,9 +10,6 @@ fr:
       education/school:
         one: École
         other: Écoles
-      education/teacher:
-        one: Enseignant·e
-        other: Enseignants·es
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -42,14 +39,6 @@ fr:
         programs: Formations dispensées
         websites: Sites webs associés
         zipcode: Code postal
-      education/teacher:
-        biography: Biographie
-        first_name: Prénom
-        last_name: Nom de famille
-        name: Nom
-        programs: Formations assurées
-        slug: Slug
-        user: Utilisateur
   education:
     manage_teachers: Gérer les Enseignants·es
     number_of_programs: Nombre de formations
@@ -57,7 +46,9 @@ fr:
       educational_informations: Informations pédagogiques
       main_informations: Informations essentielles
       useful_informations: Informations pratiques
-
+    teachers:
+      one: Enseignant·e
+      other: Enseignants·es
   enums:
     education/program:
       level:

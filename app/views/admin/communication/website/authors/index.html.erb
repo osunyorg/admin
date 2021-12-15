@@ -1,4 +1,4 @@
-<% content_for :title, "#{Communication::Website::Author.model_name.human(count: 2)} (#{@authors.total_count})" %>
+<% content_for :title, "#{t('communication.authors', count: 2)} (#{@authors.total_count})" %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">

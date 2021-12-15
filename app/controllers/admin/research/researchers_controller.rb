@@ -15,7 +15,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def breadcrumb
     super
-    add_breadcrumb Research::Researcher.model_name.human(count: 2),
+    add_breadcrumb t('researcher.researchers', count: 2),
                    admin_research_researchers_path
     breadcrumb_for @researcher
   end

@@ -8,16 +8,16 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, Education::Program)
       primary.item :education, Education.model_name.human, nil, { kind: :header }
-      primary.item :education, Education::Teacher.model_name.human(count: 2), admin_education_teachers_path, { icon: 'user-graduate' }
+      primary.item :education, t('education.teachers', count: 2), admin_education_teachers_path, { icon: 'user-graduate' } if can?(:read, Administration::Member)
       primary.item :education, Education::School.model_name.human(count: 2), admin_education_schools_path, { icon: 'university' } if can?(:read, Education::School)
       primary.item :education_programs, Education::Program.model_name.human(count: 2), admin_education_programs_path, { icon: 'graduation-cap' } if can?(:read, Education::Program)
       primary.item :education, 'Ressources éducatives', nil, { icon: 'laptop' }
       primary.item :education, 'Feedbacks', nil, { icon: 'comments' }
     end
 
-    if can?(:read, Research::Researcher) || can?(:read, Research::Journal)
+    if can?(:read, Research::Journal)
       primary.item :research, Research.model_name.human, nil, { kind: :header }
-      primary.item :research_researchers, Research::Researcher.model_name.human(count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' } if can?(:read, Research::Researcher)
+      primary.item :research_researchers, t('research.researchers', count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' } if can?(:read, Administration::Member)
       primary.item :research, 'Laboratoires', nil, { icon: 'flask' }
       primary.item :research, 'Veille', nil, { icon: 'eye' }
       primary.item :research_journals, Research::Journal.model_name.human(count: 2), admin_research_journals_path, { icon: 'newspaper' } if can?(:read, Research::Journal)

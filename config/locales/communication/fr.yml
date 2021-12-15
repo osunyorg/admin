@@ -1,25 +1,4 @@
 fr:
-  communication:
-    manage_authors: Gérer les auteurs
-    number_of_posts: Nombre d'actualités
-    website:
-      force_publication: 'Forcer la publication'
-      imported:
-        from: Importé depuis
-        launch: Importer le site
-        launched: Importation en cours
-        original_url: URL originale
-        media:
-          file_size: Taille du fichier
-          not_imported_yet: Non importé pour le moment
-        refresh: Relancer l'import
-        show: Voir l'import
-        pending: Import en cours
-      last_pages: Dernières pages
-      last_posts: Dernières actualités
-      posts:
-        new_curation: Nouvelle curation
-      see_all: Voir la liste complète (%{number} éléments)
   activemodel:
     models:
       communication: Communication
@@ -28,9 +7,6 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
-      communication/website/author:
-        one: Auteur·rice
-        other: Auteur·rice·s
       communication/website/category:
         one: Catégorie
         other: Catégories
@@ -68,13 +44,6 @@ fr:
         programs_github_directory: Dossier GitHub des formations
         staff_github_directory: Dossier GitHub de l'équipe
         url: URL
-      communication/website/author:
-        biography: Biographie
-        first_name: Prénom
-        last_name: Nom de famille
-        name: Nom
-        slug: Slug
-        user: Utilisateur
       communication/website/category:
         children: Catégories enfants
         description: Description
@@ -121,6 +90,30 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+  communication:
+    authors:
+      one: Auteur·rice
+      other: Auteur·rice·s
+    manage_authors: Gérer les auteur·rice·s
+    number_of_posts: Nombre d'actualités
+    website:
+      force_publication: 'Forcer la publication'
+      imported:
+        from: Importé depuis
+        launch: Importer le site
+        launched: Importation en cours
+        original_url: URL originale
+        media:
+          file_size: Taille du fichier
+          not_imported_yet: Non importé pour le moment
+        refresh: Relancer l'import
+        show: Voir l'import
+        pending: Import en cours
+      last_pages: Dernières pages
+      last_posts: Dernières actualités
+      posts:
+        new_curation: Nouvelle curation
+      see_all: Voir la liste complète (%{number} éléments)
   enums:
     communication/website/menu/item:
       kind:
