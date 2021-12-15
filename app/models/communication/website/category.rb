@@ -89,7 +89,7 @@ class Communication::Website::Category < ApplicationRecord
   def github_manifest
     super << {
       identifier: "collection_item",
-      generated_path: -> { "_data/categories/#{slug}.yml" },
+      generated_path: -> (github_file) { "_data/categories/#{slug}.yml" },
       data: -> (github_file) { ApplicationController.render(
         template: "admin/communication/website/categories/jekyll_collection",
         formats: [:yml],

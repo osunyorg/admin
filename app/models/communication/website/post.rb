@@ -41,6 +41,7 @@ class Communication::Website::Post < ApplicationRecord
           dependent: :destroy
   belongs_to :university
   belongs_to :website,
+             class_name: 'Communication::Website',
              foreign_key: :communication_website_id
   belongs_to :author,
              class_name: 'Administration::Member',

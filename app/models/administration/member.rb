@@ -52,6 +52,19 @@ class Administration::Member < ApplicationRecord
                           foreign_key: :education_teacher_id,
                           association_foreign_key: :education_program_id
 
+  has_many :communication_websites,
+           -> { distinct },
+           through: :communication_website_posts,
+           source: :website
+  has_many :research_websites,
+           -> { distinct },
+           through: :research_journal_articles,
+           source: :websites
+  has_many :education_websites,
+           -> { distinct },
+           through: :education_programs,
+           source: :websites
+
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
   validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
@@ -68,8 +81,73 @@ class Administration::Member < ApplicationRecord
   end
 
   def websites
-    []
-    # TODO
+    Communication::Website.where(id: [
+      communication_website_ids,
+      research_website_ids,
+      education_website_ids
+    ].flatten.uniq)
+  end
+
+  def github_manifest
+    manifest = []
+    manifest.concat(author_github_manifest_items) if is_author?
+    manifest.concat(researcher_github_manifest_items) if is_researcher?
+    manifest.concat(teacher_github_manifest_items) if is_teacher?
+    manifest
+  end
+
+  def author_github_manifest_items
+    [
+      {
+        identifier: "author",
+        generated_path: -> (github_file) { "#{github_file.website.authors_github_directory}/#{slug}.yml" },
+        data: -> (github_file) { ApplicationController.render(
+          template: "admin/communication/website/authors/jekyll",
+          layout: false,
+          assigns: { author: self, github_file: github_file }
+        ) }
+      },
+      {
+        identifier: "author_collection_item",
+        generated_path: -> (github_file) { "_data/authors/#{slug}.yml" },
+        data: -> (github_file) { ApplicationController.render(
+          template: "admin/communication/website/authors/jekyll_collection",
+          formats: [:yml],
+          layout: false,
+          assigns: { author: self, github_file: github_file }
+        ) }
+      }
+    ]
+  end
+
+  def researcher_github_manifest_items
+    [
+      {
+        identifier: "researcher_collection_item",
+        generated_path: -> (github_file) { "_data/researchers/#{slug}.yml" },
+        data: -> (github_file) { ApplicationController.render(
+          template: "admin/research/researchers/jekyll_collection",
+          formats: [:yml],
+          layout: false,
+          assigns: { researcher: self, github_file: github_file }
+        ) }
+      }
+    ]
+  end
+
+  def teacher_github_manifest_items
+    [
+      {
+        identifier: "teacher_collection_item",
+        generated_path: -> (github_file) { "_data/teachers/#{slug}.yml" },
+        data: -> (github_file) { ApplicationController.render(
+          template: "admin/education/teachers/jekyll_collection",
+          formats: [:yml],
+          layout: false,
+          assigns: { teacher: self, github_file: github_file }
+        ) }
+      }
+    ]
   end
 
 end

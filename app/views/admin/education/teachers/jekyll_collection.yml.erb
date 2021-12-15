@@ -1,15 +1,15 @@
----
 title: "<%= @teacher.to_s %>"
 identifier: "<%= @teacher.id %>"
 first_name: "<%= @teacher.first_name %>"
 last_name: "<%= @teacher.last_name %>"
+phone: "<%= @teacher.phone %>"
+email: "<%= @teacher.email %>"
 slug: "<%= @teacher.slug %>"
-<% if @teacher.programs.any? %>
+<% if @teacher.education_programs.any? %>
 programs:
-  <% @teacher.programs.each do |program| %>
+  <% @teacher.education_programs.each do |program| %>
   - "<%= program.id %>"
   <% end %>
 <% end %>
 biography: >
   <%= prepare_for_github @teacher.biography, @teacher.university %>
----
