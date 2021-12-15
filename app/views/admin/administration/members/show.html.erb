@@ -1,35 +1,6 @@
 <% content_for :title, @member %>
 
-<div class="row">
-
-  <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-      </div>
-      <div class="card-body">
-        <% unless @member.email.blank? %>
-          <h3 class="h5"><%= Administration::Member.human_attribute_name('email') %></h3>
-          <p><%= link_to @member.email, "mailto:#{@member.email}", target: '_blank' %></p>
-        <% end %>
-        <% unless @member.phone.blank? %>
-          <h3 class="h5"><%= Administration::Member.human_attribute_name('phone') %></h3>
-          <p><%= link_to @member.phone, "tel:#{@member.phone}", target: '_blank' %></p>
-        <% end %>
-        <h3 class="h5"><%= Administration::Member.human_attribute_name('biography') %></h3>
-        <p><%= @member.biography %></p>
-        <h3 class="h5"><%= Administration::Member.human_attribute_name('slug') %></h3>
-        <p><%= @member.slug %></p>
-        <% if @member.user %>
-          <h3 class="h5"><%= Administration::Member.human_attribute_name('user') %></h3>
-          <p><%= link_to_if can?(:read, @member.user), @member.user, admin_user_path(@member.user) %></p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-</div>
-
+<%= render 'main_infos', member: @member %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @member %>

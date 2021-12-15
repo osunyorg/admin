@@ -14,11 +14,6 @@
             <%= link_to t('edit'),
                       edit_admin_education_teacher_path(teacher),
                       class: button_classes %>
-            <%= link_to t('delete'),
-                      admin_education_teacher_path(teacher),
-                      method: :delete,
-                      data: { confirm: t('please-confirm') },
-                      class: button_classes_danger %>
           </div>
         </td>
       </tr>

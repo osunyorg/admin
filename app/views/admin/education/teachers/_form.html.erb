@@ -1,54 +1,18 @@
-<%= simple_form_for [:admin, teacher] do |f| %>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :first_name %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :last_name %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :slug,
-                      as: :string,
-                      input_html: teacher.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#education_teacher_first_name, #education_teacher_last_name' }
-                      } %>
-            </div>
-            <div class="col-md-6">
-              <%= f.association :user, collection: current_university.users.ordered %>
-            </div>
-          </div>
-          <%= f.input :biography, as: :rich_text_area %>
-        </div>
-      </div>
+<%= simple_form_for teacher, url: admin_education_teacher_path(teacher) do |f| %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
     </div>
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.association :programs,
-                            as: :check_boxes,
-                            collection: current_university.list_of_programs,
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] }  %>
-
-          <ul>
-          </ul>
-        </div>
-      </div>
+    <div class="card-body">
+      <%= f.association :education_programs,
+                        as: :check_boxes,
+                        legend_tag: false,
+                        collection: current_university.list_of_programs,
+                        label_method: ->(p) { sanitize p[:label] },
+                        value_method: ->(p) { p[:id] }  %>
     </div>
   </div>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

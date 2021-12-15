@@ -1,38 +1,19 @@
 class Admin::Education::TeachersController < Admin::Education::ApplicationController
-  load_and_authorize_resource class: Education::Teacher,
-                              through: :current_university,
-                              through_association: :education_teachers
+  before_action :get_teacher, except: :index
 
   def index
-    @teachers = @teachers.ordered.page(params[:page])
+    @teachers = current_university.members.teachers.accessible_by(current_ability).ordered.page(params[:page])
     breadcrumb
   end
 
   def show
     breadcrumb
-  end
-
-  def publish
-    @teacher.force_publish!
-    redirect_to admin_education_teacher_path(@teacher), notice: t('admin.will_be_published_html', model: @teacher.to_s)
-  end
-
-  def new
-    breadcrumb
+    @programs = @teacher.education_programs.ordered.page(params[:page])
   end
 
   def edit
     breadcrumb
     add_breadcrumb t('edit')
-  end
-
-  def create
-    if @teacher.save
-      redirect_to admin_education_teacher_path(@teacher), notice: t('admin.successfully_created_html', model: @teacher.to_s)
-    else
-      breadcrumb
-      render :new, status: :unprocessable_entity
-    end
   end
 
   def update
@@ -45,12 +26,11 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
     end
   end
 
-  def destroy
-    @teacher.destroy
-    redirect_to admin_education_teachers_url, notice: t('admin.successfully_destroyed_html', model: @teacher.to_s)
-  end
-
   protected
+
+  def get_teacher
+    @teacher = current_university.members.teachers.accessible_by(current_ability).find(params[:id])
+  end
 
   def breadcrumb
     super
@@ -60,8 +40,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   end
 
   def teacher_params
-    params.require(:education_teacher)
-          .permit(:first_name, :last_name, :biography, :slug, :user_id)
-          .merge(university_id: current_university.id)
+    params.require(:administration_member)
+          .permit(education_program_ids: [])
   end
 end

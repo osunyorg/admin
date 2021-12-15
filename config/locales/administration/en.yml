@@ -17,6 +17,8 @@ en:
       administration/member:
         abilities: Abilities
         biography: Biography
+        communication_website_posts: Posts
+        education_programs: Programs
         email: Email
         first_name: First name
         is_administrative: Administrative staff
@@ -26,6 +28,7 @@ en:
         last_name: Last name
         name: Name
         phone: Phone
+        research_journal_articles: Articles
         slug: Slug
         user: User
       administration/qualiopi/criterion:

@@ -46,6 +46,12 @@ class Administration::Member < ApplicationRecord
                           join_table: :research_journal_articles_researchers,
                           foreign_key: :researcher_id
 
+  has_and_belongs_to_many :education_programs,
+                          class_name: 'Education::Program',
+                          join_table: :education_programs_teachers,
+                          foreign_key: :education_teacher_id,
+                          association_foreign_key: :education_program_id
+
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
   validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_104346) do
+ActiveRecord::Schema.define(version: 2021_12_15_110752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -612,6 +612,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_104346) do
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_programs_teachers", "administration_members", column: "education_teacher_id"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "education_teachers", "universities"
   add_foreign_key "education_teachers", "users"

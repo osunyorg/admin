@@ -5,7 +5,7 @@
 <% if @articles.total_count > 0 %>
   <div class="card">
     <div class="card-header">
-      <h5><%= "#{Research::Journal::Article.model_name.human(count: 2)} (#{@articles.total_count})" %></h5>
+      <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Article.model_name.human(count: 2)} (#{@articles.total_count})" %></h2>
     </div>
     <%= render 'admin/research/journal/articles/list', articles: @articles %>
     <% if @articles.total_pages > 1 %>

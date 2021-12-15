@@ -51,6 +51,8 @@ en:
         slug: Slug
         user: User
   education:
+    manage_teachers: Manage teachers
+    number_of_programs: Number of programs
     program:
       educational_informations: Educational informations
       main_informations: Main informations

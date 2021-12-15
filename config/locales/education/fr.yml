@@ -51,10 +51,13 @@ fr:
         slug: Slug
         user: Utilisateur
   education:
+    manage_teachers: Gérer les Enseignants·es
+    number_of_programs: Nombre de formations
     program:
       educational_informations: Informations pédagogiques
       main_informations: Informations essentielles
       useful_informations: Informations pratiques
+
   enums:
     education/program:
       level:
