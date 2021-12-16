@@ -1,6 +1,9 @@
 module Communication::Website::Imported::WithRichText
   extend ActiveSupport::Concern
 
+  # https://github.com/basecamp/trix/blob/7940a9a3b7129f8190ef37e086809260d7ccfe32/src/trix/models/attachment.coffee#L4
+  TRIX_PREVIEWABLE_PATTERN = /^image(\/(gif|png|jpe?g)|$)/
+
   protected
 
   def rich_text_with_attachments(text)
@@ -16,7 +19,14 @@ module Communication::Website::Imported::WithRichText
       begin
         url = node.attr(attribute_name)
         blob = load_blob_from_url(url)
-        node.replace ActionText::Attachment.from_attachable(blob).node.to_s
+        blob.analyze
+        blob_path = Rails.application.routes.url_helpers.rails_blob_path(blob, only_path: true)
+        attachment_node = ActionText::Attachment.from_attachable(blob).node
+        attachment_node['url'] = "#{university.url}#{blob_path}"
+        attachment_node['width'] = blob.metadata['width']
+        attachment_node['height'] = blob.metadata['height']
+        attachment_node['presentation'] = TRIX_PREVIEWABLE_PATTERN.match?(blob.content_type) ? 'gallery' : nil
+        node.replace attachment_node.to_s
       rescue
       end
     end
