@@ -54,10 +54,10 @@ class Communication::Website::Imported::Author < ApplicationRecord
 
   def sync
     if author.nil?
-      self.author = Communication::Website::Author.new university: university,
-                                                   website: website.website # Real website, not imported website
+      self.author = Administration::Member.new university: university
       self.author.last_name = "Doe" # No title yet
       self.author.first_name = "John" # No title yet
+      self.is_author = true
       self.author.save
     end
     puts "Update author #{author.id}"

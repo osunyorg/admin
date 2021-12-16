@@ -60,16 +60,16 @@ class Communication::Website::Imported::Website < ApplicationRecord
 
   def sync_authors
     begin
-      skip_publish_callback(Communication::Website::Author)
+      skip_publish_callback(Administration::Member)
       wordpress.authors.each do |data|
         author = authors.where(university: university, identifier: data['id']).first_or_initialize
         author.data = data
         author.save
       end
       # Batch update all changes (1 query only, good for github API limits)
-      website.publish_authors!
+      website.publish_members!
     ensure
-      set_publish_callback(Communication::Website::Author)
+      set_publish_callback(Administration::Member)
     end
   end
 
