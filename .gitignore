@@ -42,3 +42,6 @@ yarn-debug.log*
 
 # Ignore environment variables
 /config/application.yml
+
+# Ignore db dump
+/db/latest.dump
