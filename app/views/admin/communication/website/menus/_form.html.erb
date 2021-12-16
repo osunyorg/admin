@@ -16,7 +16,11 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :identifier if can?(:create, menu) %>
+          <%= f.input :identifier,
+              input_html: menu.persisted? ? {} : {
+                class: 'js-slug-input',
+                data: { source: '#communication_website_menu_title' }
+              } if can?(:create, menu) %>
         </div>
       </div>
     </div>

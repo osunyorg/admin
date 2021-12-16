@@ -32,6 +32,7 @@
 #
 class Communication::Website::Category < ApplicationRecord
   include WithGithubFiles
+  include WithMenuItemTarget
   include WithSlug
   include WithTree
 

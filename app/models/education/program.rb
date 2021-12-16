@@ -28,6 +28,7 @@
 #
 class Education::Program < ApplicationRecord
   include WithGithubFiles
+  include WithMenuItemTarget
   include WithTree
 
   attr_accessor :skip_websites_categories_callback

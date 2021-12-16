@@ -39,15 +39,13 @@
 class Communication::Website::Page < ApplicationRecord
   include Communication::Website::WithMedia
   include WithGithubFiles
+  include WithMenuItemTarget
   include WithSlug
   include WithTree
 
   has_rich_text :text
   has_one_attached_deletable :featured_image
 
-  has_one :imported_page,
-          class_name: 'Communication::Website::Imported::Page',
-          dependent: :destroy
   belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
@@ -57,13 +55,14 @@ class Communication::Website::Page < ApplicationRecord
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true
+  has_one    :imported_page,
+             class_name: 'Communication::Website::Imported::Page',
+             dependent: :nullify
   has_many   :children,
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :nullify
-  has_one    :imported_page,
-             class_name: 'Communication::Website::Imported::Page',
-             dependent: :nullify
+
 
   validates :title, presence: true
   validates :slug, uniqueness: { scope: :communication_website_id }
