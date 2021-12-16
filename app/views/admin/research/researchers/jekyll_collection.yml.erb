@@ -1,0 +1,7 @@
+title: "<%= @researcher.to_s %>"
+first_name: "<%= @researcher.first_name %>"
+last_name: "<%= @researcher.last_name %>"
+phone: "<%= @researcher.phone %>"
+email: "<%= @researcher.email %>"
+biography: >
+  <%= prepare_for_github @researcher.biography, @researcher.university %>

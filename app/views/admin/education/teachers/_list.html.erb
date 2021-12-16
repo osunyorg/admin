@@ -1,7 +1,7 @@
 <table class="<%= table_classes %>">
   <thead>
     <tr>
-      <th><%= Education::Teacher.human_attribute_name('name') %></th>
+      <th><%= Administration::Member.human_attribute_name('name') %></th>
       <th></th>
     </tr>
   </thead>
@@ -14,11 +14,6 @@
             <%= link_to t('edit'),
                       edit_admin_education_teacher_path(teacher),
                       class: button_classes %>
-            <%= link_to t('delete'),
-                      admin_education_teacher_path(teacher),
-                      method: :delete,
-                      data: { confirm: t('please-confirm') },
-                      class: button_classes_danger %>
           </div>
         </td>
       </tr>

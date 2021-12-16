@@ -13,9 +13,6 @@ en:
       research/journal/volume:
         one: Volume
         other: Volumes
-      research/researcher:
-        one: Researcher
-        other: Researchers
     attributes:
       research/journal:
         issn: ISSN
@@ -36,11 +33,12 @@ en:
         number: Number
         published_at: Published at
         title: Title
-      research/researcher:
-        biography: Biography
-        first_name: First name
-        last_name: Last name
-        user: User
+  research:
+    manage_researchers: Managege researchers
+    number_of_articles: Number of articles
+    researchers:
+      one: Researcher
+      other: Researchers
   simple_form:
     hints:
       research_journal_volume:

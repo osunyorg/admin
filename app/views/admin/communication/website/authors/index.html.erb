@@ -1,14 +1,16 @@
-<% content_for :title, "#{Communication::Website::Author.model_name.human(count: 2)} (#{@authors.total_count})" %>
+<% content_for :title, "#{t('communication.authors', count: 2)} (#{@authors.total_count})" %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">
     <%= render 'admin/communication/website/authors/list', authors: @authors %>
-    <div class="card-body">
-      <%= paginate @authors, theme: 'bootstrap-5' %>
-    </div>
+    <% if @authors.total_pages > 1 %>
+      <div class="card-footer">
+        <%= paginate @authors, theme: 'bootstrap-5' %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Author %>
+  <%= link_to t('communication.manage_authors'), admin_administration_members_path, class: button_classes if can?(:read, Administration::Member) %>
 <% end %>

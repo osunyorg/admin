@@ -1,40 +1,20 @@
 <% content_for :title, @researcher %>
 
-<div class="row">
-  <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
-      </div>
-      <div class="card-body">
-        <h3 class="h5"><%= Research::Researcher.human_attribute_name('biography') %></h3>
-        <%= @researcher.biography %>
-        <% if @researcher.articles.any? %>
-          <h3 class="h5 mt-4"><%= Research::Researcher.human_attribute_name('articles') %></h3>
-          <ul>
-            <% @researcher.articles.each do |article| %>
-              <li><%= link_to article, admin_research_journal_article_path(journal_id: article.journal.id, id: article) %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-      </div>
-      <div class="card-body">
-        <% if @researcher.user %>
-          <h3 class="h5"><%= Research::Researcher.human_attribute_name('user') %></h3>
-          <p><%= link_to @researcher.user, [:admin, @researcher.user] %></p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'admin/administration/members/main_infos', member: @researcher %>
 
+<% if @articles.total_count > 0 %>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Article.model_name.human(count: 2)} (#{@articles.total_count})" %></h2>
+    </div>
+    <%= render 'admin/research/journal/articles/list', articles: @articles %>
+    <% if @articles.total_pages > 1 %>
+      <div class="card-footer">
+        <%= paginate @articles, theme: 'bootstrap-5' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @researcher %>

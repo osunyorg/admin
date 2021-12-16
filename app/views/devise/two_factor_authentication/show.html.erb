@@ -26,7 +26,7 @@
               <%= link_to t('devise.two_factor_authentication.send_code_instead'), [:resend_code, resource_name, :two_factor_authentication] %>
             <% end %>
             <% unless resource.mobile_phone.blank? # when phone is blank default code method is already :email so we don't need another link %>
-              <%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %>
+              • <%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %>
             <% end %>
           </p>
         </div>

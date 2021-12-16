@@ -1,23 +1,4 @@
 en:
-  communication:
-    website:
-      force_publication: 'Force publication'
-      imported:
-        from: Imported from
-        launch: Launch import
-        launched: Import in progress
-        original_url: Original URL
-        media:
-          file_size: File size
-          not_imported_yet: Not imported yet
-        refresh: Refresh import
-        show: Show import
-        pending: Import in progress
-      last_pages: Last pages
-      last_posts: Last posts
-      posts:
-        new_curation: New curation
-      see_all: See the full list (%{number} elements)
   activemodel:
     models:
       communication: Communication
@@ -119,6 +100,30 @@ en:
         text: Text
         title: Title
         website: Website
+  communication:
+    authors:
+      one: Author
+      other: Authors
+    manage_authors: Manage authors
+    number_of_posts: Nunber of posts
+    website:
+      force_publication: 'Force publication'
+      imported:
+        from: Imported from
+        launch: Launch import
+        launched: Import in progress
+        original_url: Original URL
+        media:
+          file_size: File size
+          not_imported_yet: Not imported yet
+        refresh: Refresh import
+        show: Show import
+        pending: Import in progress
+      last_pages: Last pages
+      last_posts: Last posts
+      posts:
+        new_curation: New curation
+      see_all: See the full list (%{number} elements)
   enums:
     communication/website/menu/item:
       kind:

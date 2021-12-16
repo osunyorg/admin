@@ -25,11 +25,7 @@ namespace :communication do
         post :publish
       end
     end
-    resources :authors, controller: 'website/authors' do
-      member do
-        post :publish
-      end
-    end
+    resources :authors, controller: 'website/authors', only: [:index, :show]
     resources :posts, controller: 'website/posts' do
       member do
         post :publish

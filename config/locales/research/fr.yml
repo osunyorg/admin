@@ -13,9 +13,6 @@ fr:
       research/journal/volume:
         one: Volumes
         other: Volumes
-      research/researcher:
-        one: Chercheu·r·se
-        other: Chercheu·rs·ses
     attributes:
       research/journal:
         issn: ISSN
@@ -36,11 +33,12 @@ fr:
         number: Numéro
         published_at: Publié le
         title: Titre
-      research/researcher:
-        biography: Biographie
-        first_name: Prénom
-        last_name: Nom
-        user: Utilisateur
+  research:
+    manage_researchers: Gérer les Chercheu·rs·ses
+    number_of_articles: Nombre d'articles
+    researchers:
+      one: Chercheu·r·se
+      other: Chercheu·rs·ses
   simple_form:
     hints:
       research_journal_volume:

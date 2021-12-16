@@ -56,7 +56,7 @@ class Admin::Administration::MembersController < Admin::Administration::Applicat
 
   def member_params
     params.require(:administration_member)
-          .permit(:first_name, :last_name, :biography, :slug, :user_id,
+          .permit(:first_name, :last_name, :email, :phone, :biography, :slug, :user_id,
           :is_author, :is_researcher, :is_teacher, :is_administrative)
           .merge(university_id: current_university.id)
   end

@@ -1,9 +1,11 @@
-<% content_for :title, "#{Education::Teacher.model_name.human(count: 2)} (#{@teachers.total_count})" %>
+<% content_for :title, "#{t('education.teachers', count: 2)} (#{@teachers.total_count})" %>
 
 <%= render 'admin/education/teachers/list', teachers: @teachers %>
-<%= paginate @teachers, theme: 'bootstrap-5' %>
 
+<% if @teachers.total_pages > 1 %>
+  <%= paginate @teachers, theme: 'bootstrap-5' %>
+<% end %>
 
 <% content_for :action_bar_right do %>
-  <%= create_link Education::Teacher %>
+  <%= link_to t('education.manage_teachers'), admin_administration_members_path, class: button_classes if can?(:read, Administration::Member) %>
 <% end %>

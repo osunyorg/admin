@@ -1,5 +1,6 @@
 namespace :education do
-  resources :teachers, :schools
+  resources :teachers, except: [:create, :destroy]
+  resources :schools
   resources :programs do
     collection do
       post :reorder

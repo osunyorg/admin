@@ -25,7 +25,7 @@
             path: admin_communication_website_categories_path(website_id: @website)
           },
           {
-            title: Communication::Website::Author.model_name.human(count: 2),
+            title: t('communication.authors', count: 2),
             path: admin_communication_website_authors_path(website_id: @website)
           },
           {

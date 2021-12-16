@@ -26,7 +26,7 @@
                       } %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
-          <%= f.association :author, collection: @website.authors.ordered if @website.authors.any? %>
+          <%= f.association :author, collection: current_university.members.authors.ordered %>
           <%= f.association :categories,
                             as: :check_boxes,
                             collection: @website.list_of_categories.map { |category| [

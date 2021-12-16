@@ -13,6 +13,7 @@ class Ability
   def visitor
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
+    can :read, Administration::Member
     can :read, Communication::Website, university_id: @user.university_id
     can :read, Communication::Website::Page, university_id: @user.university_id
     can :read, Communication::Website::Post, university_id: @user.university_id
@@ -22,7 +23,6 @@ class Ability
     can :read, Communication::Website::Imported::Post, university_id: @user.university_id
     can :read, Education::Program, university_id: @user.university_id
     can :read, Education::School, university_id: @user.university_id
-    can :read, Research::Researcher
     can :read, Research::Journal, university_id: @user.university_id
     can :read, Research::Journal::Article, university_id: @user.university_id
     can :read, Research::Journal::Volume, university_id: @user.university_id
@@ -32,6 +32,7 @@ class Ability
   def admin
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
+    can :manage, Administration::Member
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
@@ -43,7 +44,6 @@ class Ability
     can :manage, Communication::Website::Imported::Page, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
-    can :manage, Research::Researcher
     can :manage, Research::Journal, university_id: @user.university_id
     can :manage, Research::Journal::Article, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id

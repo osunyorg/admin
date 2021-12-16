@@ -30,7 +30,7 @@ class Communication::Website::GithubFile < ApplicationRecord
     return unless valid_for_publication? && github.valid?
     add_to_batch(github)
     if github.commit_batch(github_commit_message)
-      update_column :github_path, manifest_data[:generated_path].call
+      update_column :github_path, manifest_data[:generated_path].call(self)
     end
   end
   handle_asynchronously :publish, queue: 'default'
@@ -82,7 +82,7 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def github_params
     {
-      path: manifest_data[:generated_path].call,
+      path: manifest_data[:generated_path].call(self),
       previous_path: github_path,
       data: manifest_data[:data].call(self)
     }

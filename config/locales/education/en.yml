@@ -10,9 +10,6 @@ en:
       education/school:
         one: School
         other: Schools
-      education/teacher:
-        one: Teacher
-        other: Teachers
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -42,19 +39,16 @@ en:
         programs: Programs provided
         websites: Associated websites
         zipcode: Zipcode
-      education/teacher:
-        biography: Biography
-        first_name: First name
-        last_name: Last name
-        name: Name
-        programs: Programs done
-        slug: Slug
-        user: User
   education:
+    manage_teachers: Manage teachers
+    number_of_programs: Number of programs
     program:
       educational_informations: Educational informations
       main_informations: Main informations
       useful_informations: Useful informations
+    teachers:
+      one: Teacher
+      other: Teachers
   enums:
     education/program:
       level:

@@ -58,7 +58,7 @@ class Education::Program < ApplicationRecord
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
   has_and_belongs_to_many :teachers,
-                          class_name: 'Education::Teacher',
+                          class_name: 'Administration::Member',
                           join_table: 'education_programs_teachers',
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_teacher_id'

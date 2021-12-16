@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_101323) do
+ActiveRecord::Schema.define(version: 2021_12_15_133833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
     t.boolean "is_administrative"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "phone"
+    t.string "email"
     t.index ["university_id"], name: "index_administration_members_on_university_id"
     t.index ["user_id"], name: "index_administration_members_on_user_id"
   end
@@ -92,21 +94,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
-  end
-
-  create_table "communication_website_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "user_id"
-    t.uuid "communication_website_id", null: false
-    t.string "last_name"
-    t.string "first_name"
-    t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "github_path"
-    t.index ["communication_website_id"], name: "idx_comm_website_authors_on_communication_website_id"
-    t.index ["university_id"], name: "index_communication_website_authors_on_university_id"
-    t.index ["user_id"], name: "index_communication_website_authors_on_user_id"
   end
 
   create_table "communication_website_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -418,18 +405,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "education_teachers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "slug"
-    t.uuid "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_education_teachers_on_university_id"
-    t.index ["user_id"], name: "index_education_teachers_on_user_id"
-  end
-
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
@@ -489,18 +464,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
     t.string "repository"
     t.string "issn"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
-  end
-
-  create_table "research_researchers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.uuid "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.uuid "university_id"
-    t.string "slug"
-    t.index ["university_id"], name: "idx_researcher_university"
-    t.index ["user_id"], name: "index_research_researchers_on_user_id"
   end
 
   create_table "universities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -566,9 +529,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
   add_foreign_key "administration_members", "universities"
   add_foreign_key "administration_members", "users"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
-  add_foreign_key "communication_website_authors", "communication_websites"
-  add_foreign_key "communication_website_authors", "universities"
-  add_foreign_key "communication_website_authors", "users"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
@@ -576,7 +536,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
   add_foreign_key "communication_website_github_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_homes", "communication_websites"
   add_foreign_key "communication_website_homes", "universities"
-  add_foreign_key "communication_website_imported_authors", "communication_website_authors", column: "author_id"
+  add_foreign_key "communication_website_imported_authors", "administration_members", column: "author_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"
   add_foreign_key "communication_website_imported_categories", "communication_website_categories", column: "category_id"
@@ -604,26 +564,23 @@ ActiveRecord::Schema.define(version: 2021_12_14_101323) do
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
-  add_foreign_key "communication_website_posts", "communication_website_authors", column: "author_id"
+  add_foreign_key "communication_website_posts", "administration_members", column: "author_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_programs_teachers", "administration_members", column: "education_teacher_id"
   add_foreign_key "education_schools", "universities"
-  add_foreign_key "education_teachers", "universities"
-  add_foreign_key "education_teachers", "users"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"
   add_foreign_key "research_journal_articles", "users", column: "updated_by_id"
+  add_foreign_key "research_journal_articles_researchers", "administration_members", column: "researcher_id"
   add_foreign_key "research_journal_articles_researchers", "research_journal_articles", column: "article_id"
-  add_foreign_key "research_journal_articles_researchers", "research_researchers", column: "researcher_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
-  add_foreign_key "research_researchers", "universities"
-  add_foreign_key "research_researchers", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end

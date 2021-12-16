@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Education::Program.model_name.human %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% programs.each do |program| %>
+      <tr>
+        <td><%= link_to_if can?(:read, program), program, [:admin, program] %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                        edit_admin_education_program_path(program),
+                        class: button_classes %>
+            <%= link_to t('delete'),
+                        admin_research_journal_article_path(program),
+                        method: :delete,
+                        data: { confirm: t('please-confirm') },
+                        class: button_classes_danger %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

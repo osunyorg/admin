@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin, member] do |f| %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('content') %></h5>
@@ -14,20 +14,15 @@
               <%= f.input :last_name %>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :email %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :phone %>
+            </div>
+          </div>
           <%= f.input :biography, as: :rich_text_area %>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= Administration::Member.human_attribute_name('abilities') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :is_author %>
-          <%= f.input :is_teacher %>
-          <%= f.input :is_researcher %>
-          <%= f.input :is_administrative %>
         </div>
       </div>
     </div>
@@ -44,6 +39,17 @@
             data: { source: '#administration_member_first_name, #administration_member_last_name' }
           } %>
           <%= f.association :user, collection: current_university.users.ordered %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= Administration::Member.human_attribute_name('abilities') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :is_author %>
+          <%= f.input :is_teacher %>
+          <%= f.input :is_researcher %>
+          <%= f.input :is_administrative %>
         </div>
       </div>
     </div>

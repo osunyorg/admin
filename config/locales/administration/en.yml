@@ -17,6 +17,9 @@ en:
       administration/member:
         abilities: Abilities
         biography: Biography
+        communication_website_posts: Posts
+        education_programs: Programs
+        email: Email
         first_name: First name
         is_administrative: Administrative staff
         is_author: Author
@@ -24,6 +27,8 @@ en:
         is_teacher: Teacher
         last_name: Last name
         name: Name
+        phone: Phone
+        research_journal_articles: Articles
         slug: Slug
         user: User
       administration/qualiopi/criterion:
@@ -40,3 +45,10 @@ en:
         requirement: Requirement
         non_conformity: Non-conformity
         glossary: Glossary
+  simple_form:
+    hints:
+      administration_member:
+        is_administrative: "Is part of administrative staff for a school."
+        is_author: "Writes posts for websites."
+        is_researcher: "Writes articles for journals."
+        is_teacher: "Teaches in Schools."

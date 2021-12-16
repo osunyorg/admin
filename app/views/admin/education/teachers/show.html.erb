@@ -1,45 +1,22 @@
 <% content_for :title, @teacher %>
 
-<div class="row">
+<%= render 'admin/administration/members/main_infos', member: @teacher %>
 
-  <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-      </div>
-      <div class="card-body">
-        <h3 class="h5"><%= Education::Teacher.human_attribute_name('biography') %></h3>
-        <p><%= @teacher.biography %></p>
-        <h3 class="h5"><%= Education::Teacher.human_attribute_name('slug') %></h3>
-        <p><%= @teacher.slug %></p>
-        <% if @teacher.user %>
-          <h3 class="h5"><%= Education::Teacher.human_attribute_name('user') %></h3>
-          <p><%= link_to_if can?(:read, @teacher.user), @teacher.user, admin_user_path(@teacher.user) %></p>
-        <% end %>
-      </div>
+
+<% if @programs.total_count > 0 %>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title mb-0 h5"><%= "#{Education::Program.model_name.human(count: 2)} (#{@programs.total_count})" %></h2>
     </div>
+    <%= render 'admin/education/programs/list', programs: @programs %>
+    <% if @programs.total_pages > 1 %>
+      <div class="card-footer">
+        <%= paginate @programs, theme: 'bootstrap-5' %>
+      </div>
+    <% end %>
   </div>
-
-  <% if @teacher.programs.any? %>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= Education::Teacher.human_attribute_name('programs') %></h2>
-        </div>
-        <div class="card-body">
-          <ul class="list-unstyled">
-            <% @teacher.programs.ordered.each do |program| %>
-              <li><%= link_to_if can?(:read, program), program, [:admin, program] %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-</div>
-
+<% end %>
 
 <% content_for :action_bar_right do %>
-  <%= edit_link @teacher %>
+  <%= link_to t('edit'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:edit, Education::Program) %>
 <% end %>
