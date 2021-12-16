@@ -31,6 +31,7 @@
 class Communication::Website::Post < ApplicationRecord
   include Communication::Website::WithMedia
   include WithGithubFiles
+  include WithMenuItemTarget
   include WithSlug
 
   has_rich_text :text
