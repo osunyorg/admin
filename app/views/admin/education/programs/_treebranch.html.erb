@@ -17,7 +17,7 @@
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
       <div class="btn-group ms-auto" role="group">
         <%= edit_link program %>
-        <%= destroy_link program %>
+        <%= destroy_link program, confirm_message: program.children.any? ? t('please_confirm_with_children') : t('please_confirm') %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, program) %> ms-4" data-id="<%= program.id %>">

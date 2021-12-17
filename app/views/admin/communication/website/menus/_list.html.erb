@@ -17,7 +17,7 @@
             <%= link_to t('delete'),
                       admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
                       method: :delete,
-                      data: { confirm: t('please-confirm') },
+                      data: { confirm: t('please_confirm') },
                       class: button_classes_danger if can?(:destroy, menu) %>
           </div>
         </td>

@@ -24,7 +24,7 @@ module Admin::ApplicationHelper
     link_to options.delete(:label) || t('delete'),
             polymorphic_url_param(object, **options),
             method: :delete,
-            data: { confirm: t('please-confirm') },
+            data: { confirm: options.delete(:confirm_message) || t('please_confirm') },
             class: button_classes_danger
   end
 

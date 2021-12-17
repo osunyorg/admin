@@ -61,7 +61,7 @@ class Communication::Website::Page < ApplicationRecord
   has_many   :children,
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
-             dependent: :nullify
+             dependent: :destroy
 
 
   validates :title, presence: true

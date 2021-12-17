@@ -26,6 +26,12 @@ en:
         mobile_phone: Mobile phone
         picture: Profile picture
         role: Role
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              password_strength: doesn't match the security policy
     models:
       language:
         one: Language
@@ -103,7 +109,8 @@ en:
     server_admin: Admin server
     sign_out: Log out
   metadata: Metadata
-  please-confirm: Are you sure?
+  please_confirm: Are you sure?
+  please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   save: Save

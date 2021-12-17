@@ -22,6 +22,15 @@
     </div>
     <div class="col-md-4">
       <%= f.input :password,
+                  as: :password_with_hints,
+                  allow_password_uncloaking: true,
+                  validators: {
+                    length: Devise.password_length.first,
+                    uppercase_char: true,
+                    lowercase_char: true,
+                    numeric_char: true,
+                    special_char: Rails.application.config.allowed_special_chars
+                  },
                   hint: t(".leave_blank_if_you_don_t_want_to_change_it"),
                   required: false,
                   input_html: { autocomplete: "new-password" } %>

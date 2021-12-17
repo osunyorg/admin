@@ -78,7 +78,7 @@ module User::WithAuthentication
     def password_complexity
       # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
       return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#{Rails.application.config.allowed_special_chars}]).{#{Devise.password_length.first},#{Devise.password_length.last}}$/
-      errors.add :password, I18n.t('activerecord.errors.models.user.password.password_strength')
+      errors.add :password, :password_strength
     end
   end
 end
