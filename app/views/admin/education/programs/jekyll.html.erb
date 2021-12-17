@@ -7,6 +7,9 @@ continuing: <%= @program.continuing %>
 level: <%= @program.level %>
 ects: <%= @program.ects %>
 position: <%= @program.position %>
+<% if @program.best_featured_image.attached? %>
+image: "<%= @program.best_featured_image.blob.id %>"
+<% end %>
 <% if @program.teachers.any? %>
 teachers:
   <% @program.teachers.each do |teacher| %>

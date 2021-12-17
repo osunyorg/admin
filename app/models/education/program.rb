@@ -85,6 +85,13 @@ class Education::Program < ApplicationRecord
     description.blank? ? parent&.best_description : description
   end
 
+  def best_featured_image(fallback: true)
+    return featured_image if featured_image.attached?
+    best_image = parent&.best_featured_image(fallback: false)
+    best_image ||= featured_image if fallback
+    best_image
+  end
+
   # Override from WithGithubFiles
   def github_path_generated
     "_programs/#{path}/index.html".gsub(/\/+/, '/')
