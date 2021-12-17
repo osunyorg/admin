@@ -11,6 +11,7 @@
 #  name          :string
 #  path          :string
 #  position      :integer          default(0)
+#  published     :boolean          default(FALSE)
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -81,6 +82,7 @@ class Education::Program < ApplicationRecord
   after_save :update_children_paths, if: :saved_change_to_path?
   after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
+  scope :published, -> { where(published: true) }
   scope :ordered, -> { order(:position) }
 
   def to_s

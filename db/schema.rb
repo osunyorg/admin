@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_17_115125) do
+ActiveRecord::Schema.define(version: 2021_12_17_115802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(version: 2021_12_17_115125) do
     t.string "slug"
     t.string "path"
     t.text "description"
+    t.boolean "published", default: false
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end

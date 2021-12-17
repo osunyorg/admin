@@ -83,7 +83,7 @@ en:
         description: Description (SEO)
         featured_image: Featured image
         parent: Parent page
-        published: Published ?
+        published: Published?
         slug: Slug
         text: Text
         title: Title
@@ -95,7 +95,7 @@ en:
         description: Description (SEO)
         featured_image: Featured image
         pinned: Pinned?
-        published: Published ?
+        published: Published?
         published_at: Publication date
         slug: Slug
         text: Text
