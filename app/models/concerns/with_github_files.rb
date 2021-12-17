@@ -6,6 +6,7 @@ module WithGithubFiles
 
     after_save :create_github_files
     after_save_commit :publish_github_files
+    after_save_commit :unpublish_github_files, if: :should_unpublish_github_files?
   end
 
   def force_publish!
@@ -52,6 +53,18 @@ module WithGithubFiles
         github_file.publish
       end
     end
+  end
+
+  def unpublish_github_files
+    list_of_websites.each do |website|
+      github_manifest.each do |manifest_item|
+        github_files.find_by(website: website, manifest_identifier: manifest_item[:identifier])&.unpublish
+      end
+    end
+  end
+
+  def should_unpublish_github_files?
+    respond_to?(:published?) && saved_change_to_published? && !published?
   end
 
   def list_of_websites
