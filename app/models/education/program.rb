@@ -32,21 +32,11 @@ class Education::Program < ApplicationRecord
   include WithGithubFiles
   include WithMenuItemTarget
   include WithTree
+  include WithRichTexts
   include Communication::Website::WithMedia
 
   attr_accessor :skip_websites_categories_callback
 
-  has_rich_text :accessibility
-  has_rich_text :contacts
-  has_rich_text :duration
-  has_rich_text :evaluation
-  has_rich_text :objectives
-  has_rich_text :opportunities
-  has_rich_text :other
-  has_rich_text :pedagogy
-  has_rich_text :prerequisites
-  has_rich_text :pricing
-  has_rich_text :registration
   has_one_attached_deletable :featured_image
 
   belongs_to :university
@@ -89,6 +79,10 @@ class Education::Program < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  def inherited_description
+    description.blank? ? parent&.inherited_description : description
   end
 
   # Override from WithGithubFiles
