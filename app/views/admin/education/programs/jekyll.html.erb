@@ -7,6 +7,7 @@ continuing: <%= @program.continuing %>
 level: <%= @program.level %>
 ects: <%= @program.ects %>
 position: <%= @program.position %>
+related_category: "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
 <% if @program.best_featured_image.attached? %>
 image: "<%= @program.best_featured_image.blob.id %>"
 <% end %>
