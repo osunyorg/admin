@@ -24,6 +24,7 @@ class Wordpress
         ]
       }),
       elements: Set.new(Sanitize::Config::RELAXED[:elements]) - ['div', 'style'] + ['iframe'],
+      remove_contents: ['math', 'noembed', 'noframes', 'noscript', 'plaintext', 'script', 'style', 'svg', 'xmp'],
       whitespace_elements: {
         'div' => { :before => "", :after => "" }
       }
