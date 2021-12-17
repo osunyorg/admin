@@ -59,7 +59,7 @@ module Osuny
       "name", "sizes", "src", "srcset", "style", "target", "title", "type", "width", "xml:lang"
     ]
 
-    config.allowed_special_chars = '#?!,@$%^&*+£µ-'
+    config.allowed_special_chars = '#?!,@$%^&*+£µ-:;'
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
