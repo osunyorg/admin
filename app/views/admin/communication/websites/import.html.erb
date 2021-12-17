@@ -25,7 +25,7 @@
           <td class="small"><%= link_to post.path, post.url, target: :_blank %></td>
           <td class="text-end">
             <%= link_to t('show'),
-                          admin_communication_website_post_path(website_id: post.post.website.id, id: post.post.id),
+                          admin_communication_website_post_path(website_id: @website.id, id: post.post.id),
                           class: button_classes if post.post.present? %>
           </td>
         </tr>
@@ -56,7 +56,7 @@
           <td class="small"><%= link_to page.path, page.url, target: :_blank %></td>
           <td class="text-end">
             <%= link_to t('show'),
-                          admin_communication_website_page_path(website_id: page.page.website.id, id: page.page.id),
+                          admin_communication_website_page_path(website_id: @website.id, id: page.page.id),
                           class: button_classes if page.page.present? %>
           </td>
         </tr>
@@ -121,7 +121,7 @@
           <td><%= author.name %></td>
           <td class="text-end">
             <%= link_to t('show'),
-                          admin_communication_website_author_path(website_id: author.author.website.id, id: author.author.id),
+                          admin_communication_website_author_path(website_id: @website.id, id: author.author.id),
                           class: button_classes %>
           </td>
         </tr>
@@ -152,7 +152,7 @@
           <td class="small"><%= link_to category.url, category.url, target: :_blank %></td>
           <td class="text-end">
             <%= link_to t('show'),
-                          admin_communication_website_category_path(website_id: category.category.website.id, id: category.category.id),
+                          admin_communication_website_category_path(website_id: @website.id, id: category.category.id),
                           class: button_classes %>
           </td>
         </tr>
