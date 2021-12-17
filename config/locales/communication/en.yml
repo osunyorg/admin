@@ -94,6 +94,7 @@ en:
         categories: Categories
         description: Description (SEO)
         featured_image: Featured image
+        pinned: Pinned?
         published: Published ?
         published_at: Publication date
         slug: Slug

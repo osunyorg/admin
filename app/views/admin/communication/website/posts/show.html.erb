@@ -34,6 +34,8 @@
               <%= l @post.published_at, format: :long if @post.published_at %>
             <% end %>
           </p>
+          <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('pinned') %></h3>
+          <p><%= t @post.pinned %></p>
           <% if @post.categories.any? %>
             <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('categories') %></h3>
             <ul class="list-unstyled mb-0">
