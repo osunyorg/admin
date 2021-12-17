@@ -58,7 +58,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   protected
 
   def add_media_to_batch(github)
-    return unless manifest_data[:with_media] && about.respond_to?(:active_storage_blobs)
+    return unless manifest_data[:has_media] && about.respond_to?(:active_storage_blobs)
     about.active_storage_blobs.each { |blob| add_blob_to_batch(github, blob) }
   end
 
