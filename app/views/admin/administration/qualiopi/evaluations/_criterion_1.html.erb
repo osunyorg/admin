@@ -25,7 +25,7 @@
       <tr>
         <td><%= link_to program, [:admin, program] %></td>
         <% @checks.each do |check| %>
-          <% valid = !program.send(check).blank? %>
+          <% valid = !program.public_send("best_#{check}").blank? %>
           <th>
             <% if valid %>
               <span class="fas fa-check text-success"></span>

@@ -14,48 +14,48 @@ module Education::Program::WithRichTexts
     has_rich_text :pricing
     has_rich_text :registration
 
-    def inherited_accessibility
-      accessibility.blank? ? parent&.inherited_accessibility : accessibility
+    def best_accessibility
+      accessibility.blank? ? parent&.best_accessibility : accessibility
     end
 
-    def inherited_contacts
-      contacts.blank? ? parent&.inherited_contacts : contacts
+    def best_contacts
+      contacts.blank? ? parent&.best_contacts : contacts
     end
 
-    def inherited_duration
-      duration.blank? ? parent&.inherited_duration : duration
+    def best_duration
+      duration.blank? ? parent&.best_duration : duration
     end
 
-    def inherited_evaluation
-      evaluation.blank? ? parent&.inherited_evaluation : evaluation
+    def best_evaluation
+      evaluation.blank? ? parent&.best_evaluation : evaluation
     end
 
-    def inherited_objectives
-      objectives.blank? ? parent&.inherited_objectives : objectives
+    def best_objectives
+      objectives.blank? ? parent&.best_objectives : objectives
     end
 
-    def inherited_opportunities
-      opportunities.blank? ? parent&.inherited_opportunities : opportunities
+    def best_opportunities
+      opportunities.blank? ? parent&.best_opportunities : opportunities
     end
 
-    def inherited_other
-      other.blank? ? parent&.inherited_other : other
+    def best_other
+      other.blank? ? parent&.best_other : other
     end
 
-    def inherited_pedagogy
-      pedagogy.blank? ? parent&.inherited_pedagogy : pedagogy
+    def best_pedagogy
+      pedagogy.blank? ? parent&.best_pedagogy : pedagogy
     end
 
-    def inherited_prerequisites
-      prerequisites.blank? ? parent&.inherited_prerequisites : prerequisites
+    def best_prerequisites
+      prerequisites.blank? ? parent&.best_prerequisites : prerequisites
     end
 
-    def inherited_pricing
-      pricing.blank? ? parent&.inherited_pricing : pricing
+    def best_pricing
+      pricing.blank? ? parent&.best_pricing : pricing
     end
 
-    def inherited_registration
-      registration.blank? ? parent&.inherited_registration : registration
+    def best_registration
+      registration.blank? ? parent&.best_registration : registration
     end
 
   end

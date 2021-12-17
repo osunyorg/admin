@@ -81,8 +81,8 @@ class Education::Program < ApplicationRecord
     "#{name}"
   end
 
-  def inherited_description
-    description.blank? ? parent&.inherited_description : description
+  def best_description
+    description.blank? ? parent&.best_description : description
   end
 
   # Override from WithGithubFiles

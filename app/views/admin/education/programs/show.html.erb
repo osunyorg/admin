@@ -47,9 +47,25 @@
       <div class="card-body">
         <% i = 0 %>
         <% ['description', 'registration', 'pricing', 'duration', 'contacts', 'accessibility', 'other'].each do |prop| %>
-          <% next if @program.public_send(prop).blank? %>
+          <%
+          best_prop_value = @program.public_send("best_#{prop}")
+          prop_value = @program.public_send(prop)
+          %>
+          <% next if best_prop_value.blank? %>
           <h3 class="h5 <%= 'mt-4' if i > 0 %>"><%= Education::Program.human_attribute_name(prop) %></h3>
-          <%= @program.public_send prop %>
+          <% if prop_value != best_prop_value %>
+            <%
+            if best_prop_value.is_a?(ActionText::RichText)
+              best_prop_source = best_prop_value.record
+            else
+              best_prop_source = @program.ancestors.detect { |ancestor| ancestor.public_send(prop) == best_prop_value }
+            end
+            %>
+            <h4 class="small text-muted">
+              Par héritage (<%= link_to best_prop_source, [:admin, best_prop_source] %>)
+            </h4>
+          <% end %>
+          <%= best_prop_value %>
           <% i += 1 %>
         <% end %>
       </div>
