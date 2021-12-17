@@ -32,6 +32,7 @@ class Education::Program < ApplicationRecord
   include WithGithubFiles
   include WithMenuItemTarget
   include WithTree
+  include Communication::Website::WithMedia
 
   attr_accessor :skip_websites_categories_callback
 
@@ -46,6 +47,7 @@ class Education::Program < ApplicationRecord
   has_rich_text :prerequisites
   has_rich_text :pricing
   has_rich_text :registration
+  has_one_attached_deletable :featured_image
 
   belongs_to :university
   belongs_to :parent,

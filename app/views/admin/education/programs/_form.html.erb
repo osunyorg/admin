@@ -24,6 +24,20 @@
           <%= f.association :parent, collection: program.persisted? ? program.list_of_other_programs : current_university.list_of_programs, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
         </div>
       </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :featured_image,
+                      as: :single_deletable_file,
+                      direct_upload: true,
+                      label: false,
+                      input_html: { accept: '.jpg,.jpeg,.png' },
+                      preview: true
+           %>
+        </div>
+      </div>
     </div>
     <div class="col-md-8">
       <div class="card flex-fill w-100">

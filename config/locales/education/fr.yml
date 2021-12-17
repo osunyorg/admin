@@ -20,6 +20,7 @@ fr:
         duration: Durée
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
+        featured_image: Image à la une
         level: Niveau
         name: Nom
         objectives: Objectifs

@@ -80,6 +80,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def program_params
     params.require(:education_program).permit(
       :name, :slug, :level, :capacity, :ects, :continuing, :description, :published,
+      :featured_image, :featured_image_delete, :featured_image_infos,
       :prerequisites, :objectives, :duration, :registration, :pedagogy,
       :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other,
       :parent_id, school_ids: [], teacher_ids: []
