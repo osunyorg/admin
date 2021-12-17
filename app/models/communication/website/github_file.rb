@@ -35,6 +35,11 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
   handle_asynchronously :publish, queue: 'default'
 
+  def unpublish
+    remove_from_github
+  end
+  handle_asynchronously :unpublish, queue: 'default'
+
   def add_to_batch(github)
     return unless valid_for_publication?
     github.add_to_batch github_params
