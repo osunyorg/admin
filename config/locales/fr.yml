@@ -22,9 +22,9 @@ fr:
         first_name: Prénom
         language: Langue préférée
         last_name: Nom
+        member: Personnel
         mobile_phone: Téléphone portable
         picture: Photo de profil
-        researcher: Profil de chercheur
         role: Rôle
     models:
       language:

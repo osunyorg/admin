@@ -22,9 +22,9 @@ en:
         first_name: First name
         language: Favourite language
         last_name: Last name
+        member: Member
         mobile_phone: Mobile phone
         picture: Profile picture
-        researcher: Researcher profile
         role: Role
     models:
       language:
