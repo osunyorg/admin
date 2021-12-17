@@ -123,8 +123,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
 
   def valid_for_publication?
-    case about_type
-    when 'Communication::Website::Page', 'Communication::Website::Post'
+    if about.respond_to?(:published)
       about.published?
     else
       true
