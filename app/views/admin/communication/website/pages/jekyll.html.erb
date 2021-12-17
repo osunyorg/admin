@@ -5,8 +5,8 @@ identifier: "<%= @page.id %>"
 parent: "<%= @page.parent_id %>"
 related_category: "<%= @page.related_category_id %>"
 position: <%= @page.position %>
-<% if @page.featured_image.attached? %>
-image: "<%= @page.featured_image.blob.id %>"
+<% if @page.best_featured_image.attached? %>
+image: "<%= @page.best_featured_image.blob.id %>"
 <% end %>
 description: >
   <%= prepare_for_github @page.description, @page.university %>

@@ -86,6 +86,13 @@ class Communication::Website::Page < ApplicationRecord
     "#{ title }"
   end
 
+  def best_featured_image(fallback: true)
+    return featured_image if featured_image.attached?
+    best_image = parent&.best_featured_image(fallback: false)
+    best_image ||= featured_image if fallback
+    best_image
+  end
+
   protected
 
   def slug_unavailable?(slug)
