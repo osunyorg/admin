@@ -30,6 +30,7 @@
           <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
         </div>
         <div class="card-body">
+          <%= f.input :description %>
           <%= f.input :registration, as: :rich_text_area %>
           <%= f.input :pricing, as: :rich_text_area %>
           <%= f.input :duration, as: :rich_text_area %>

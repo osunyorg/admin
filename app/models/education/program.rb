@@ -5,6 +5,7 @@
 #  id            :uuid             not null, primary key
 #  capacity      :integer
 #  continuing    :boolean
+#  description   :text
 #  ects          :integer
 #  level         :integer
 #  name          :string

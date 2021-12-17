@@ -16,6 +16,7 @@ en:
         capacity: Capacity
         contacts: Contacts
         continuing: Formation continue
+        description: Description
         duration: Durée
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
