@@ -52,7 +52,7 @@ class Education::Program < ApplicationRecord
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id,
-             dependent: :nullify
+             dependent: :destroy
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           join_table: 'education_programs_schools',
@@ -93,6 +93,10 @@ class Education::Program < ApplicationRecord
 
   def make_path
     self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+  end
+
+  def update_children_paths
+    children.each(&:save)
   end
 
   def list_of_other_programs

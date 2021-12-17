@@ -22,7 +22,7 @@
         <%= link_to t('delete'),
                     admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
                     method: :delete,
-                    data: { confirm: t('please-confirm') },
+                    data: { confirm: t('please_confirm') },
                     class: button_classes_danger if can?(:destroy, item) %>
       </div>
     </div>
