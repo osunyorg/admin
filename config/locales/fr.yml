@@ -26,6 +26,12 @@ fr:
         mobile_phone: Téléphone portable
         picture: Photo de profil
         role: Rôle
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              password_strength: ne répond pas aux critères de sécurité
     models:
       language:
         one: Langue

@@ -26,6 +26,12 @@ en:
         mobile_phone: Mobile phone
         picture: Profile picture
         role: Role
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              password_strength: doesn't match the security policy
     models:
       language:
         one: Language
