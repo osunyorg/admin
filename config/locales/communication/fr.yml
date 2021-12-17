@@ -84,6 +84,7 @@ fr:
         categories: Catégories
         description: Description (SEO)
         featured_image: Image à la une
+        pinned: Mis en avant ?
         published: Publié ?
         published_at: Date de publication
         slug: Slug

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_133833) do
+ActiveRecord::Schema.define(version: 2021_12_17_112923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -321,6 +321,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_133833) do
     t.text "slug"
     t.text "github_path"
     t.uuid "author_id"
+    t.boolean "pinned", default: false
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
