@@ -49,7 +49,6 @@
           <%
           best_prop_value = @program.public_send("best_#{prop}")
           best_prop_source = @program.public_send("best_#{prop}_source")
-          # prop_value = @program.public_send(prop)
           %>
           <% next if best_prop_value.blank? # No value at all%>
           <h3 class="h5<%= ' mt-4' if index > 0 %>">
