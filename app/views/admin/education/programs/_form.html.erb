@@ -14,7 +14,7 @@
                         data: { source: '#education_program_name' }
                       } %>
           <%= f.input :published %>
-          <%= f.input :level, include_blank: false, label_method: -> (p) { I18n.t(p[1], scope: 'enums.education/program.level') } %>
+          <%= f.input :level, include_blank: false %>
           <%= f.input :capacity %>
           <%= f.input :ects %>
           <%= f.input :continuing %>
@@ -49,7 +49,30 @@
         </div>
         <div class="card-body">
           <%= f.input :description %>
-          <%= f.input :registration, as: :rich_text_area %>
+          <%
+          prop = :registration
+          best_prop_value = program.public_send("best_#{prop}")
+          best_prop_source = program.public_send("best_#{prop}_source")
+          %>
+          <% if best_prop_source %>
+            <div class="accordion mb-3">
+              <div class="accordion-item">
+                <a href="#registrationCollapse" class="accordion-button collapsed" data-bs-toggle="collapse" aria-expanded="false" aria-controls="registrationCollapse">
+                  <%= Education::Program.human_attribute_name(prop) %>
+                  (<%= t 'admin.inheritance.status' %>)
+                </a>
+              </div>
+              <div class="collapse" id="registrationCollapse">
+                <%= f.input :registration, as: :rich_text_area, label: false %>
+                <div class="bg-light p-2 mt-n2">
+                  <b><%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %></b><br>
+                  <%= program.best_registration %>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <%= f.input :registration, as: :rich_text_area %>
+          <% end %>
           <%= f.input :pricing, as: :rich_text_area %>
           <%= f.input :duration, as: :rich_text_area %>
           <%= f.input :accessibility, as: :rich_text_area %>

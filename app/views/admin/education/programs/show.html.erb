@@ -55,7 +55,7 @@
             <%= Education::Program.human_attribute_name(prop) %>
             <% if best_prop_source %>
               <span class="small text-muted">
-                (valeur héritée de <%= link_to best_prop_source, [:admin, best_prop_source] %>)
+                <%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %>
               </span>
             <% end %>
           </h3>
