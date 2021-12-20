@@ -43,12 +43,12 @@ fr:
         one: Utilisateur·rice
         other: Utilisateur·rice·s
   admin:
-    inheritance:
-      status: Valeur héritée
-      sentence_html: Valeur héritée de %{link}
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
     infos: Infos
+    inheritance:
+      sentence_html: Valeur héritée de %{link}
+      status: Valeur héritée
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."

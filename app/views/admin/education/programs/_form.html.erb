@@ -48,12 +48,12 @@
           <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :description %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :registration %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :pricing %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :duration %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :accessibility %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :other %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :description %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :duration %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
         </div>
         <div class="card-body">
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :contacts %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
         </div>
         <div class="card-body">
           <%= f.association :teachers,
@@ -107,15 +107,15 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-4">
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :objectives %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
         </div>
         <div class="col-md-4">
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :opportunities %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
         </div>
         <div class="col-md-4">
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :prerequisites %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :pedagogy %>
-          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :evaluation %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
         </div>
       </div>
     </div>

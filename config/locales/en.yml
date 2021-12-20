@@ -46,6 +46,9 @@ en:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
     infos: Infos
+    inheritance:
+      sentence_html: Value inherited from %{link}
+      status: Inherited value
     password_hint: Leave blank if you do not wish to change the password.
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
