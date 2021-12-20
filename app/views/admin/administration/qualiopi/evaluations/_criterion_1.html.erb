@@ -23,7 +23,12 @@
   <tbody>
     <% @programs.each do |program| %>
       <tr>
-        <td><%= link_to program, [:admin, program] %></td>
+        <td>
+          <% if program.ancestors.any? %>
+            <small><% program.ancestors.each do |program| %><%= program %> / </small><br><% end %>
+          <% end %>
+          <%= link_to program, [:admin, program] %>
+        </td>
         <% @checks.each do |check| %>
           <% valid = !program.public_send("best_#{check}").blank? %>
           <th>
