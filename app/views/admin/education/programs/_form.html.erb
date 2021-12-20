@@ -21,7 +21,18 @@
           <%= f.association :schools,
                             as: :check_boxes,
                             collection: current_university.education_schools.ordered %>
-          <%= f.association :parent, collection: program.persisted? ? program.list_of_other_programs : current_university.list_of_programs, label_method: ->(p) { sanitize p[:label] }, value_method: ->(p) { p[:id] } %>
+          <%= f.association :parent,
+                            collection: program.persisted? ? program.list_of_other_programs : current_university.list_of_programs,
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] } %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.contacts') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :contacts, as: :rich_text_area %>
         </div>
       </div>
       <div class="card flex-fill w-100">
@@ -49,7 +60,6 @@
           <%= f.input :registration, as: :rich_text_area %>
           <%= f.input :pricing, as: :rich_text_area %>
           <%= f.input :duration, as: :rich_text_area %>
-          <%= f.input :contacts, as: :rich_text_area %>
           <%= f.input :accessibility, as: :rich_text_area %>
           <%= f.input :other, as: :rich_text_area %>
         </div>

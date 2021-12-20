@@ -7,6 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: :create
   before_action :configure_account_update_params, only: :update
 
+  def edit
+    add_breadcrumb t('admin.dashboard'), :admin_root_path
+    add_breadcrumb User.model_name.human(count: 2), admin_users_path
+    add_breadcrumb @user, [:admin, @user]
+    add_breadcrumb t('edit')
+  end
+
   def update
     # to prevent cognitive complexity (the bottom block should be in an if condition where password present)
     # Password not provided when user from sso

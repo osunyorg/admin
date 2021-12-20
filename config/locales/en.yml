@@ -105,7 +105,7 @@ en:
     subtitle: Sign in to your account to continue
   menu:
     admin: Admin
-    profile: Profil
+    profile: Profile
     server_admin: Admin server
     sign_out: Log out
   metadata: Metadata
