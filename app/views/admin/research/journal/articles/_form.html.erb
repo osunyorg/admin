@@ -29,7 +29,7 @@
           <%= f.association :volume, collection: @journal.volumes, label: Research::Journal::Volume.model_name.human %>
           <%= f.input :published_at, html5: true %>
           <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
-          <%= f.association :researchers, collection: current_university.members.researchers.ordered, as: :check_boxes %>
+          <%= f.association :researchers, collection: current_university.administration_members.researchers.ordered, as: :check_boxes %>
         </div>
       </div>
     </div>

@@ -33,6 +33,8 @@ fr:
         registration: Modalités et délais d’accès
         schools: Écoles proposant cette formation
         teachers: Enseignants·es
+      education/program/member:
+        role: Rôle
       education/school:
         address: Adresse
         city: Ville
