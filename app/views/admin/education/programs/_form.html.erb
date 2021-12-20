@@ -1,6 +1,6 @@
-<%= simple_form_for [:admin, program] do |f| %>
+<%= simple_nested_form_for [:admin, program] do |f| %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('education.program.main_informations') %></h5>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
@@ -52,6 +52,39 @@
           <%= f.input :contacts, as: :rich_text_area %>
           <%= f.input :accessibility, as: :rich_text_area %>
           <%= f.input :other, as: :rich_text_area %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Members</h5>
+        </div>
+        <div class="card-body">
+          <div id="js-program-members">
+            <%= f.fields_for :members, program.members, wrapper: false do |member_form| %>
+              <div class="row js-program-member fields">
+                <div class="col-md-4">
+                  <%= member_form.input :role, label: false, required: true, placeholder: t('activerecord.attributes.education/program/member.role') %>
+                </div>
+                <div class="col-md-5">
+                  <%
+                  base_members = current_university.administration_members
+                  list_of_members = base_members.administratives.or(base_members.teachers).ordered
+                  %>
+                  <%= member_form.association :member,
+                                              collection: list_of_members,
+                                              include_blank: "Sélectionnez un membre",
+                                              label: false,
+                                              required: true %>
+                </div>
+                <div class="col-md-3">
+                  <%= member_form.link_to_remove "Supprimer", class: button_classes_danger %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <p><%= f.link_to_add "Ajouter un membre", :members, class: 'btn btn-xs btn-primary', data: { target: "#js-program-members" } %></p>
         </div>
       </div>
     </div>
@@ -72,7 +105,7 @@
           <%= f.input :evaluation, as: :rich_text_area %>
           <%= f.association :teachers,
                             as: :check_boxes,
-                            collection: current_university.members.teachers.ordered %>
+                            collection: current_university.administration_members.teachers.ordered %>
         </div>
       </div>
     </div>

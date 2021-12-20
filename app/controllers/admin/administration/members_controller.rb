@@ -1,7 +1,7 @@
 class Admin::Administration::MembersController < Admin::Administration::ApplicationController
   load_and_authorize_resource class: Administration::Member,
                               through: :current_university,
-                              through_association: :members
+                              through_association: :administration_members
 
   def index
     @members = @members.ordered.page(params[:page])

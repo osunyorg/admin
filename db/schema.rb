@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_17_115802) do
+ActiveRecord::Schema.define(version: 2021_12_20_085352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -360,6 +360,16 @@ ActiveRecord::Schema.define(version: 2021_12_17_115802) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "education_program_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "role"
+    t.uuid "member_id", null: false
+    t.uuid "program_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_education_program_members_on_member_id"
+    t.index ["program_id"], name: "index_education_program_members_on_program_id"
+  end
+
   create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -571,6 +581,8 @@ ActiveRecord::Schema.define(version: 2021_12_17_115802) do
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "universities"
+  add_foreign_key "education_program_members", "administration_members", column: "member_id"
+  add_foreign_key "education_program_members", "education_programs", column: "program_id"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_programs_teachers", "administration_members", column: "education_teacher_id"

@@ -83,7 +83,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :featured_image, :featured_image_delete, :featured_image_infos,
       :prerequisites, :objectives, :duration, :registration, :pedagogy,
       :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other,
-      :parent_id, school_ids: [], teacher_ids: []
+      :parent_id, school_ids: [], teacher_ids: [],
+      members_attributes: [:id, :role, :member_id, :_destroy]
     )
   end
 end
