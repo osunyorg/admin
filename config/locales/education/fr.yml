@@ -56,14 +56,15 @@ fr:
       one: Enseignant·e
       other: Enseignants·es
   enums:
-    education/program:
-      level:
-        bachelor: Licence / bachelor
-        doctor: Doctorat
-        dut: DUT
-        first_year: Bac + 1
-        master: Master
-        second_year: Bac + 2
+    education:
+      program:
+        level:
+          bachelor: Licence / bachelor
+          doctor: Doctorat
+          dut: DUT
+          first_year: Bac + 1
+          master: Master
+          second_year: Bac + 2
   simple_form:
     hints:
       education_program:

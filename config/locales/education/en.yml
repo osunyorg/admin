@@ -56,14 +56,15 @@ en:
       one: Teacher
       other: Teachers
   enums:
-    education/program:
-      level:
-        bachelor: Licence / bachelor
-        doctor: Doctorat
-        dut: DUT
-        first_year: First year
-        second_year: Second year
-        master: Master
+    education:
+      program:
+        level:
+          bachelor: Licence / bachelor
+          doctor: Doctorat
+          dut: DUT
+          first_year: First year
+          second_year: Second year
+          master: Master
   simple_form:
     hints:
       education_program:

@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Education::Program.model_name.human %></th>
+      <th><%= Education::Program.human_attribute_name('level') %></th>
       <th></th>
     </tr>
   </thead>
@@ -9,7 +10,8 @@
     <% programs.each do |program| %>
       <tr>
         <td><%= link_to_if can?(:read, program), program, [:admin, program] %></td>
-        <td class="text-end">
+        <td><%= program.level_i18n %></td>
+        <td class="text-end pe-0">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
                         edit_admin_education_program_path(program),

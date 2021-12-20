@@ -11,7 +11,7 @@
         <h3 class="h5"><%= Education::Program.human_attribute_name('name') %></h3>
         <%= @program.name %>
         <h3 class="h5 mt-4"><%= Education::Program.human_attribute_name('level') %></h3>
-        <%= @program.level %>
+        <%= @program.level_i18n %>
         <h3 class="h5 mt-4"><%= Education::Program.human_attribute_name('capacity') %></h3>
         <%= @program.capacity %>
         <h3 class="h5 mt-4"><%= Education::Program.human_attribute_name('ects') %></h3>
@@ -101,6 +101,17 @@
     </div>
   </div>
 </div>
+
+<% if @program.children.any? %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
+    </div>
+    <div class="card-body">
+      <%= render 'admin/education/programs/list', programs: @program.children %>
+    </div>
+  </div>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @program %>
