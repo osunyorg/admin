@@ -2,8 +2,6 @@
 program = f.object
 best_prop_value = program.public_send("best_#{property}")
 best_prop_source = program.public_send("best_#{property}_source")
-is_rich_text = best_prop_value.is_a?(ActionText::RichText)
-as = is_rich_text ? :rich_text_area : :text
 id = "#{property}Collapse"
 %>
 <% if best_prop_source %>
@@ -19,7 +17,7 @@ id = "#{property}Collapse"
       </a>
     </div>
     <div class="collapse" id="<%= id %>">
-      <%= f.input property, as: as, label: false %>
+      <%= f.input property, as: :rich_text_area, label: false %>
       <div class="bg-light p-2 mt-n2">
         <b><%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %></b><br>
         <%= best_prop_value %>
@@ -27,5 +25,5 @@ id = "#{property}Collapse"
     </div>
   </div>
 <% else %>
-  <%= f.input property, as: as %>
+  <%= f.input property, as: :rich_text_area %>
 <% end %>

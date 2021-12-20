@@ -47,8 +47,6 @@ class Education::Program < ApplicationRecord
                                     :pricing,
                                     :registration
 
-  values_with_inheritance           :description
-
   attr_accessor :skip_websites_categories_callback
 
   has_one_attached_deletable :featured_image
