@@ -29,14 +29,6 @@
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.contacts') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :contacts, as: :rich_text_area %>
-        </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.featured_image') %></h5>
         </div>
         <div class="card-body">
@@ -50,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
@@ -65,10 +57,10 @@
         </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0">Members</h5>
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
         </div>
         <div class="card-body">
           <div id="js-program-members">
@@ -96,6 +88,14 @@
           </div>
           <p><%= f.link_to_add "Ajouter un membre", :members, class: 'btn btn-xs btn-primary', data: { target: "#js-program-members" } %></p>
         </div>
+        <div class="card-body">
+          <%= f.association :teachers,
+                            as: :check_boxes,
+                            collection: current_university.administration_members.teachers.ordered %>
+        </div>
+        <div class="card-body">
+          <%= f.input :contacts, as: :rich_text_area %>
+        </div>
       </div>
     </div>
   </div>
@@ -105,17 +105,16 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-md-6">
-          <%= f.input :prerequisites, as: :rich_text_area %>
+        <div class="col-md-4">
           <%= f.input :objectives, as: :rich_text_area %>
+        </div>
+        <div class="col-md-4">
           <%= f.input :opportunities, as: :rich_text_area %>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
+          <%= f.input :prerequisites, as: :rich_text_area %>
           <%= f.input :pedagogy, as: :rich_text_area %>
           <%= f.input :evaluation, as: :rich_text_area %>
-          <%= f.association :teachers,
-                            as: :check_boxes,
-                            collection: current_university.administration_members.teachers.ordered %>
         </div>
       </div>
     </div>
