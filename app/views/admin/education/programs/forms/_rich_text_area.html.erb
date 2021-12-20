@@ -1,0 +1,29 @@
+<%
+program = f.object
+best_prop_value = program.public_send("best_#{property}")
+best_prop_source = program.public_send("best_#{property}_source")
+id = "#{property}Collapse"
+%>
+<% if best_prop_source %>
+  <div class="accordion mb-3">
+    <div class="accordion-item">
+      <a  href="#<%= id %>"
+          class="accordion-button collapsed"
+          data-bs-toggle="collapse"
+          aria-expanded="false"
+          aria-controls="<%= id %>">
+        <%= Education::Program.human_attribute_name(property) %>
+        (<%= t 'admin.inheritance.status' %>)
+      </a>
+    </div>
+    <div class="collapse" id="<%= id %>">
+      <%= f.input property, as: :rich_text_area, label: false %>
+      <div class="bg-light p-2 mt-n2">
+        <b><%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %></b><br>
+        <%= best_prop_value %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= f.input property, as: :rich_text_area %>
+<% end %>

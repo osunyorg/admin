@@ -49,34 +49,11 @@
         </div>
         <div class="card-body">
           <%= f.input :description %>
-          <%
-          prop = :registration
-          best_prop_value = program.public_send("best_#{prop}")
-          best_prop_source = program.public_send("best_#{prop}_source")
-          %>
-          <% if best_prop_source %>
-            <div class="accordion mb-3">
-              <div class="accordion-item">
-                <a href="#registrationCollapse" class="accordion-button collapsed" data-bs-toggle="collapse" aria-expanded="false" aria-controls="registrationCollapse">
-                  <%= Education::Program.human_attribute_name(prop) %>
-                  (<%= t 'admin.inheritance.status' %>)
-                </a>
-              </div>
-              <div class="collapse" id="registrationCollapse">
-                <%= f.input :registration, as: :rich_text_area, label: false %>
-                <div class="bg-light p-2 mt-n2">
-                  <b><%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %></b><br>
-                  <%= program.best_registration %>
-                </div>
-              </div>
-            </div>
-          <% else %>
-            <%= f.input :registration, as: :rich_text_area %>
-          <% end %>
-          <%= f.input :pricing, as: :rich_text_area %>
-          <%= f.input :duration, as: :rich_text_area %>
-          <%= f.input :accessibility, as: :rich_text_area %>
-          <%= f.input :other, as: :rich_text_area %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :registration %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :pricing %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :duration %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :accessibility %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :other %>
         </div>
       </div>
     </div>
@@ -86,7 +63,7 @@
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :contacts, as: :rich_text_area %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :contacts %>
         </div>
         <div class="card-body">
           <%= f.association :teachers,
@@ -130,15 +107,15 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-4">
-          <%= f.input :objectives, as: :rich_text_area %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :objectives %>
         </div>
         <div class="col-md-4">
-          <%= f.input :opportunities, as: :rich_text_area %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :opportunities %>
         </div>
         <div class="col-md-4">
-          <%= f.input :prerequisites, as: :rich_text_area %>
-          <%= f.input :pedagogy, as: :rich_text_area %>
-          <%= f.input :evaluation, as: :rich_text_area %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :prerequisites %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :pedagogy %>
+          <%= render 'admin/education/programs/forms/rich_text_area', f: f, property: :evaluation %>
         </div>
       </div>
     </div>
