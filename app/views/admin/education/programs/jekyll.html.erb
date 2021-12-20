@@ -17,6 +17,13 @@ teachers:
   - "<%= teacher.id %>"
   <% end %>
 <% end %>
+<% if @program.members.any? %>
+members:
+  <% @program.members.each do |member| %>
+  - member: "<%= member.member_id %>"
+    role: "<%= member.role %>"
+  <% end %>
+<% end %>
 accessibility: >
   <%= prepare_for_github @program.best_accessibility, @program.university %>
 contacts: >
