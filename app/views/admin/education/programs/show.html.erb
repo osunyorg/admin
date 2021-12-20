@@ -45,28 +45,22 @@
         <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
       </div>
       <div class="card-body">
-        <% i = 0 %>
-        <% ['description', 'registration', 'pricing', 'duration', 'contacts', 'accessibility', 'other'].each do |prop| %>
+        <% ['description', 'registration', 'pricing', 'duration', 'contacts', 'accessibility', 'other'].each_with_index do |prop, index| %>
           <%
           best_prop_value = @program.public_send("best_#{prop}")
-          prop_value = @program.public_send(prop)
+          best_prop_source = @program.public_send("best_#{prop}_source")
+          # prop_value = @program.public_send(prop)
           %>
-          <% next if best_prop_value.blank? %>
-          <h3 class="h5 <%= 'mt-4' if i > 0 %>"><%= Education::Program.human_attribute_name(prop) %></h3>
-          <% if prop_value != best_prop_value %>
-            <%
-            if best_prop_value.is_a?(ActionText::RichText)
-              best_prop_source = best_prop_value.record
-            else
-              best_prop_source = @program.ancestors.detect { |ancestor| ancestor.public_send(prop) == best_prop_value }
-            end
-            %>
-            <h4 class="small text-muted">
-              Par héritage (<%= link_to best_prop_source, [:admin, best_prop_source] %>)
-            </h4>
-          <% end %>
+          <% next if best_prop_value.blank? # No value at all%>
+          <h3 class="h5<%= ' mt-4' if index > 0 %>">
+            <%= Education::Program.human_attribute_name(prop) %>
+            <% if best_prop_source %>
+              <span class="small text-muted">
+                (valeur héritée de <%= link_to best_prop_source, [:admin, best_prop_source] %>)
+              </span>
+            <% end %>
+          </h3>
           <%= best_prop_value %>
-          <% i += 1 %>
         <% end %>
       </div>
     </div>

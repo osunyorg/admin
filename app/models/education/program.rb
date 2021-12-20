@@ -32,8 +32,22 @@ class Education::Program < ApplicationRecord
   include WithGithubFiles
   include WithMenuItemTarget
   include WithTree
-  include WithRichTexts
+  include WithInheritance
   include Communication::Website::WithMedia
+
+  rich_text_areas_with_inheritance  :accessibility,
+                                    :contacts,
+                                    :duration,
+                                    :evaluation,
+                                    :objectives,
+                                    :opportunities,
+                                    :other,
+                                    :pedagogy,
+                                    :prerequisites,
+                                    :pricing,
+                                    :registration
+
+  values_with_inheritance           :description
 
   attr_accessor :skip_websites_categories_callback
 
@@ -85,10 +99,6 @@ class Education::Program < ApplicationRecord
 
   def to_s
     "#{name}"
-  end
-
-  def best_description
-    description.blank? ? parent&.best_description : description
   end
 
   def best_featured_image(fallback: true)
