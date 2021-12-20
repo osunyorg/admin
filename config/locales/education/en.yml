@@ -65,7 +65,7 @@ en:
         master: Master
   simple_form:
     hints:
-      education/program:
+      education_program:
         capacity: Nombre de places disponibles par promotion
         ects: European Credits Transfer System
         prerequisites: Préalables nécessaires ou indispensables pour bénéficier d'une prestation déterminée. L'absence de prérequis doit être mentionnée.
