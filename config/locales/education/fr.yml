@@ -21,6 +21,7 @@ fr:
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
+        featured_image_alt: Texte alternatif
         level: Niveau
         name: Nom
         objectives: Objectifs

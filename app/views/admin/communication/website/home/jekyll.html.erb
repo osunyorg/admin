@@ -4,6 +4,7 @@ permalink: "/"
 title: ""
 <% if @home.featured_image.attached? %>
 image: "<%= @home.featured_image.blob.id %>"
+image_alt: "<%= @home.featured_image_alt %>"
 <% end %>
 description: >
   <%= prepare_for_github @home.text, @home.university %>

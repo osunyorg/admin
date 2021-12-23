@@ -16,6 +16,7 @@ tags:
 <% end %>
 <% if @post.featured_image.attached? %>
 image: "<%= @post.featured_image.blob.id %>"
+image_alt: "<%= @post.featured_image_alt %>"
 <% end %>
 description: >
   <%= prepare_for_github @post.description, @post.university %>

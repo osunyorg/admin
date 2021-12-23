@@ -19,7 +19,6 @@
 #  fk_rails_...  (member_id => administration_members.id)
 #  fk_rails_...  (program_id => education_programs.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   role: MyString

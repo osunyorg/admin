@@ -61,7 +61,12 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def post_params
     params.require(:communication_website_post)
-          .permit(:university_id, :website_id, :title, :description, :text, :published, :published_at, :featured_image, :featured_image_delete, :featured_image_infos, :slug, :author_id, :pinned, category_ids: [])
+          .permit(
+            :university_id, :website_id, :title, :description, :text,
+            :published, :published_at, :featured_image, :featured_image_delete,
+            :featured_image_infos, :featured_image_alt, :slug, :pinned,
+            :author_id, category_ids: []
+          )
           .merge(university_id: current_university.id)
   end
 end

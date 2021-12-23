@@ -3,6 +3,7 @@
 # Table name: communication_website_homes
 #
 #  id                       :uuid             not null, primary key
+#  featured_image_alt       :string
 #  github_path              :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

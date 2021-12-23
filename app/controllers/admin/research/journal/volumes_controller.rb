@@ -54,7 +54,10 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
 
   def volume_params
     params.require(:research_journal_volume)
-          .permit(:title, :slug, :number, :cover, :cover_infos, :cover_delete, :keywords, :published_at, :description)
+          .permit(
+            :title, :slug, :number, :keywords, :published_at, :description,
+            :cover, :cover_infos, :cover_delete, :cover_alt
+          )
           .merge(university_id: current_university.id)
   end
 end

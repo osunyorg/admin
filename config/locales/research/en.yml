@@ -28,6 +28,7 @@ en:
         title: Title
       research/journal/volume:
         cover: Cover
+        featured_image_alt: Alt text
         description: Description
         keywords: Keywords
         number: Number

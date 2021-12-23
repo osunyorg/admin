@@ -53,6 +53,7 @@ fr:
       communication/website/home:
         text: Texte
         featured_image: Image à la une
+        featured_image_alt: Texte alternatif
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -72,6 +73,7 @@ fr:
         children: Pages enfants
         description: Description (SEO)
         featured_image: Image à la une
+        featured_image_alt: Texte alternatif
         parent: Page parente
         published: Publié ?
         slug: Slug
@@ -84,6 +86,7 @@ fr:
         categories: Catégories
         description: Description (SEO)
         featured_image: Image à la une
+        featured_image_alt: Texte alternatif
         pinned: Mis en avant ?
         published: Publié ?
         published_at: Date de publication

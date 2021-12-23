@@ -3,6 +3,7 @@
 # Table name: research_journal_volumes
 #
 #  id                  :uuid             not null, primary key
+#  cover_alt           :string
 #  description         :text
 #  keywords            :text
 #  number              :integer

@@ -63,6 +63,7 @@ en:
       communication/website/home:
         text: Text
         featured_image: Featured image
+        featured_image_alt: Alt text
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -82,6 +83,7 @@ en:
         children: Children pages
         description: Description (SEO)
         featured_image: Featured image
+        featured_image_alt: Alt text
         parent: Parent page
         published: Published?
         slug: Slug
@@ -94,6 +96,7 @@ en:
         categories: Categories
         description: Description (SEO)
         featured_image: Featured image
+        featured_image_alt: Alt text
         pinned: Pinned?
         published: Published?
         published_at: Publication date

@@ -10,6 +10,7 @@ position: <%= @program.position %>
 related_category: "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
 <% if @program.best_featured_image.attached? %>
 image: "<%= @program.best_featured_image.blob.id %>"
+image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
 <% if @program.teachers.any? %>
 teachers:

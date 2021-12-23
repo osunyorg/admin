@@ -2,21 +2,22 @@
 #
 # Table name: education_programs
 #
-#  id            :uuid             not null, primary key
-#  capacity      :integer
-#  continuing    :boolean
-#  description   :text
-#  ects          :integer
-#  level         :integer
-#  name          :string
-#  path          :string
-#  position      :integer          default(0)
-#  published     :boolean          default(FALSE)
-#  slug          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  parent_id     :uuid
-#  university_id :uuid             not null
+#  id                 :uuid             not null, primary key
+#  capacity           :integer
+#  continuing         :boolean
+#  description        :text
+#  ects               :integer
+#  featured_image_alt :string
+#  level              :integer
+#  name               :string
+#  path               :string
+#  position           :integer          default(0)
+#  published          :boolean          default(FALSE)
+#  slug               :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  parent_id          :uuid
+#  university_id      :uuid             not null
 #
 # Indexes
 #

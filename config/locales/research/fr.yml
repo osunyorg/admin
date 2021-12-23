@@ -28,6 +28,7 @@ fr:
         title: Titre
       research/journal/volume:
         cover: Couverture
+        cover_alt: Texte alternatif
         description: Description
         keywords: Mots clés
         number: Numéro
