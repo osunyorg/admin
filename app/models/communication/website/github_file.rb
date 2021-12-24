@@ -28,7 +28,7 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def publish
     return unless valid_for_publication? && github.valid?
-    add_to_batch(github)
+    add_to_batch(github, github_path)
     if github.commit_batch(github_commit_message)
       update_column :github_path, manifest_data[:generated_path].call(self)
     end
