@@ -45,7 +45,11 @@
         <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
       </div>
       <div class="card-body">
-        <% ['description', 'registration', 'pricing', 'duration', 'contacts', 'accessibility', 'other'].each_with_index do |prop, index| %>
+        <h3 class="h5 mt-4">
+          <%= Education::Program.human_attribute_name('description') %>
+        </h3>
+        <p><% @program.description %></p>
+        <% ['registration', 'pricing', 'duration', 'contacts', 'accessibility', 'other'].each_with_index do |prop, index| %>
           <%
           best_prop_value = @program.public_send("best_#{prop}")
           best_prop_source = @program.public_send("best_#{prop}_source")

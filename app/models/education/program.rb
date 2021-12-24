@@ -32,6 +32,7 @@
 class Education::Program < ApplicationRecord
   include WithGithubFiles
   include WithMenuItemTarget
+  include WithSlug
   include WithTree
   include WithInheritance
   include Communication::Website::WithMedia
@@ -109,11 +110,7 @@ class Education::Program < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    "_programs/#{path}/index.html".gsub(/\/+/, '/')
-  end
-
-  def make_path
-    self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+    "content/programs/#{path}/_index.html".gsub(/\/+/, '/')
   end
 
   def update_children_paths
