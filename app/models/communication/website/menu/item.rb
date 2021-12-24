@@ -44,7 +44,17 @@ class Communication::Website::Menu::Item < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
 
-  enum kind: { blank: 0, url: 10, page: 20, programs: 30, program: 31, news: 40, news_category: 41, news_article: 42, staff: 50 }, _prefix: :kind
+  enum kind: {
+    blank: 0,
+    url: 10,
+    page: 20,
+    programs: 30,
+    program: 31,
+    news: 40,
+    news_category: 41,
+    news_article: 42,
+    staff: 50
+  }, _prefix: :kind
 
   validates :title, presence: true
   validates :about, presence: true, if: :has_about?
@@ -58,7 +68,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def static_target
-    target =
+    target = ''
     case self.kind
     when 'url'
       target = url
@@ -75,7 +85,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     else
       target = about&.path
     end
-    target.end_with? "/"  ? target
+    target.end_with?('/') ? target
                           : "#{target}/"
   end
 

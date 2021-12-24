@@ -10,7 +10,6 @@
           <%= f.input :title %>
           <%= f.input :kind,
                       include_blank: false,
-                      label_method: -> (p) { I18n.t(p[1], scope: 'enums.communication/website/menu/item.kind') },
                       input_html: {
                         class: 'js-kind-input',
                         data: { url: kind_switch_admin_communication_website_menu_items_path }

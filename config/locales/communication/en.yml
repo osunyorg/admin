@@ -129,14 +129,17 @@ en:
         new_curation: New curation
       see_all: See the full list (%{number} elements)
   enums:
-    communication/website/menu/item:
-      kind:
-        blank: Title
-        news: News index
-        news_article: Specific news
-        news_category: News category
-        page: Specific Page
-        program: Specific program
-        programs: Programs index
-        staff: Staff
-        url: URL
+    communication:
+      website:
+        menu:
+          item:
+            kind:
+              blank: Title
+              news: News index
+              news_article: Specific news
+              news_category: News category
+              page: Specific Page
+              program: Specific program
+              programs: Programs index
+              staff: Staff
+              url: URL
