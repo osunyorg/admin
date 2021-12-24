@@ -46,15 +46,6 @@ class Communication::Website::GithubFile < ApplicationRecord
     add_media_to_batch(github)
   end
 
-  def github_frontmatter
-    @github_frontmatter ||= begin
-      github_content = github.read_file_at(github_path)
-      FrontMatterParser::Parser.new(:md).call(github_content)
-    rescue
-      FrontMatterParser::Parser.new(:md).call('')
-    end
-  end
-
   protected
 
   def add_media_to_batch(github)

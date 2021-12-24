@@ -58,22 +58,25 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def static_target
+    target =
     case self.kind
     when 'url'
-      url
+      target = url
     when 'programs'
-      "/#{website.programs_github_directory}"
+      target = "/#{website.programs_github_directory}"
     when 'program'
-      "/#{website.programs_github_directory}#{about.path}"
+      target = "/#{website.programs_github_directory}#{about.path}"
     when 'news'
-      "/#{website.posts_github_directory}"
+      target = "/#{website.posts_github_directory}"
     when 'staff'
-      "/#{website.staff_github_directory}"
+      target = "/#{website.staff_github_directory}"
     when 'blank'
-      nil
+      target = nil
     else
-      about&.path
+      target = about&.path
     end
+    target.end_with? "/"  ? target
+                          : "#{target}/"
   end
 
   def list_of_other_items
