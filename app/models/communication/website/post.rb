@@ -65,12 +65,12 @@ class Communication::Website::Post < ApplicationRecord
 
   def path
     # used in menu_item#static_target
-    "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
+    "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}/"
   end
 
   # Override from WithGithubFiles
   def github_path_generated
-    "_posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+    "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
   def to_s

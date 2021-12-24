@@ -106,7 +106,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
 
   def github_blob_path(blob)
-    "_data/media/#{blob.id[0..1]}/#{blob.id}.yml"
+    "data/media/#{blob.id[0..1]}/#{blob.id}.yml"
   end
 
   def github_commit_message

@@ -28,7 +28,7 @@ module WithSlug
     end
 
     def make_path
-      return unless respond_to? :path
+      return unless respond_to?(:path) && respond_to?(:parent)
       self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
     end
   end
