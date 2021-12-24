@@ -12,18 +12,20 @@ image_alt: "<%= @program.featured_image_alt %>"
 categories:
   - "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
 <% if @program.teachers.any? %>
-teachers:
-  <% @program.teachers.each do |teacher| %>
-  - "<%= teacher.id %>"
-  <% end %>
-<% end %>
-<% if @program.members.any? %>
 members:
-  <% @program.members.each do |member| %>
-  - member: "<%= member.member_id %>"
-    role: "<%= member.role %>"
-  <% end %>
-<% end %>
+  - "marlene-dulaurans"
+  - "arnaud-levy"
+  - "quentin-bessiere"
+contact_list:
+  - title: "Cheffe de département"
+    persons:
+      - "marlene-dulaurans"
+  - title: "Directeur des études"
+    persons:
+      - "arnaud-levy"
+  - title: "Secrétariat"
+    persons:
+      - "quentin-bessiere"
 continuing: <%= @program.continuing %>
 level: <%= @program.level %>
 ects: <%= @program.ects %>
