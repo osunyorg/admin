@@ -12,10 +12,10 @@ image_alt: "<%= @program.featured_image_alt %>"
 categories:
   - "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
 <% if @program.teachers.any? %>
-persons:
-  - "marlene-dulaurans"
-  - "arnaud-levy"
-  - "quentin-bessiere"
+teachers:
+  - marlene-dulaurans
+administrators:
+  - quentin-bessiere
 contact_list:
   - title: "Cheffe de département"
     persons:
