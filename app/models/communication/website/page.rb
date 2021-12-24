@@ -64,11 +64,9 @@ class Communication::Website::Page < ApplicationRecord
              foreign_key: :parent_id,
              dependent: :destroy
 
-
   validates :title, presence: true
   validates :slug, uniqueness: { scope: :communication_website_id }
 
-  before_validation :make_path
   after_save :update_children_paths, if: :saved_change_to_path?
 
   scope :ordered, -> { order(:position) }
@@ -76,7 +74,7 @@ class Communication::Website::Page < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    "_pages/#{path}/index.html".gsub(/\/+/, '/')
+    "content/pages/#{path}/_index.html".gsub(/\/+/, '/')
   end
 
   def list_of_other_pages
@@ -97,16 +95,13 @@ class Communication::Website::Page < ApplicationRecord
   protected
 
   def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
-  end
-
-  def make_path
-    self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, slug: slug)
+              .where.not(id: self.id)
+              .exists?
   end
 
   def update_children_paths
     children.each(&:save)
   end
-
-
 end

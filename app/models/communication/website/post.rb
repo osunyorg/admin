@@ -64,7 +64,7 @@ class Communication::Website::Post < ApplicationRecord
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
   def path
-    # used in menu_item#jekyll_target
+    # used in menu_item#static_target
     "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
   end
 
@@ -80,7 +80,10 @@ class Communication::Website::Post < ApplicationRecord
   protected
 
   def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, slug: slug)
+              .where.not(id: self.id)
+              .exists?
   end
 
   def set_published_at

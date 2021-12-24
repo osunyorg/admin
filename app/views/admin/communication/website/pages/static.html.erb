@@ -1,0 +1,13 @@
+---
+title: >
+  <%= @page.title %>
+url: "<%= @page.path %>"
+position: <%= @page.position %>
+<% if @page.best_featured_image.attached? %>
+image: "<%= @page.best_featured_image.blob.id %>"
+image_alt: "<%= @page.featured_image_alt %>"
+<% end %>
+description: >
+  <%= prepare_for_github @page.description, @page.university %>
+---
+<%= prepare_for_github @page.text, @page.university %>

@@ -57,7 +57,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     "#{title}"
   end
 
-  def jekyll_target
+  def static_target
     case self.kind
     when 'url'
       url
@@ -85,13 +85,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
     items
   end
 
-  def to_jekyll_hash
+  def to_static_hash
     return {} if kind_news_article? && !about.published
     {
       'title' => title,
-      'target' => jekyll_target,
+      'target' => static_target,
       'kind' => kind,
-      'children' => children.ordered.map(&:to_jekyll_hash)
+      'children' => children.ordered.map(&:to_static_hash)
     }
   end
 

@@ -7,6 +7,7 @@
 #  github_path              :text
 #  is_programs_root         :boolean          default(FALSE)
 #  name                     :string
+#  path                     :string
 #  position                 :integer
 #  slug                     :string
 #  created_at               :datetime         not null
@@ -77,27 +78,9 @@ class Communication::Website::Category < ApplicationRecord
     "#{name}"
   end
 
-  def path
-    # used in menu_item#jekyll_target
-    "/#{website.posts_github_directory}/#{slug}"
-  end
-
   # Override from WithGithubFiles
   def github_path_generated
-    "#{website.posts_github_directory}/#{slug}.html"
-  end
-
-  def github_manifest
-    super << {
-      identifier: "collection_item",
-      generated_path: -> (github_file) { "_data/categories/#{slug}.yml" },
-      data: -> (github_file) { ApplicationController.render(
-        template: "admin/communication/website/categories/jekyll_collection",
-        formats: [:yml],
-        layout: false,
-        assigns: { category: self, github_file: github_file }
-      ) }
-    }
+    "content/categories/#{path}/_index.html".gsub(/\/+/, '/')
   end
 
   protected

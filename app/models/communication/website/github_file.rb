@@ -98,7 +98,7 @@ class Communication::Website::GithubFile < ApplicationRecord
     {
       path: github_blob_path(blob),
       data: ApplicationController.render(
-        template: 'active_storage/blobs/jekyll',
+        template: 'active_storage/blobs/static',
         layout: false,
         assigns: { blob: blob }
       )

@@ -44,7 +44,7 @@ class Communication::Website::Menu < ApplicationRecord
     "_data/menus/#{identifier}.yml"
   end
 
-  def to_jekyll(github_file)
-    items.root.ordered.map(&:to_jekyll_hash).to_yaml
+  def to_static(github_file)
+    items.root.ordered.map(&:to_static_hash).to_yaml
   end
 end

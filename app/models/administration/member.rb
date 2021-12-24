@@ -102,7 +102,7 @@ class Administration::Member < ApplicationRecord
         identifier: "author",
         generated_path: -> (github_file) { "#{github_file.website.authors_github_directory}/#{slug}.yml" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/communication/website/authors/jekyll",
+          template: "admin/communication/website/authors/static",
           layout: false,
           assigns: { author: self, github_file: github_file }
         ) }
@@ -111,7 +111,7 @@ class Administration::Member < ApplicationRecord
         identifier: "author_collection_item",
         generated_path: -> (github_file) { "_data/authors/#{slug}.yml" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/communication/website/authors/jekyll_collection",
+          template: "admin/communication/website/authors/static_collection",
           formats: [:yml],
           layout: false,
           assigns: { author: self, github_file: github_file }
@@ -126,7 +126,7 @@ class Administration::Member < ApplicationRecord
         identifier: "researcher_collection_item",
         generated_path: -> (github_file) { "_data/researchers/#{slug}.yml" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/research/researchers/jekyll_collection",
+          template: "admin/research/researchers/static_collection",
           formats: [:yml],
           layout: false,
           assigns: { researcher: self, github_file: github_file }
@@ -141,7 +141,7 @@ class Administration::Member < ApplicationRecord
         identifier: "teacher_collection_item",
         generated_path: -> (github_file) { "_data/teachers/#{slug}.yml" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/education/teachers/jekyll_collection",
+          template: "admin/education/teachers/static_collection",
           formats: [:yml],
           layout: false,
           assigns: { teacher: self, github_file: github_file }
