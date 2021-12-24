@@ -44,7 +44,7 @@ class Communication::Website::Home < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    '_pages/index.html'
+    'content/_index.html'
   end
 
 end

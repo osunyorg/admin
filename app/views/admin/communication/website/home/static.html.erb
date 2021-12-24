@@ -1,11 +1,12 @@
 ---
-layout: home
-permalink: "/"
 title: >
-  <%= @website.title %>
+  <%= @home.website.name %>
+breadcrumb_title: "Accueil"
 <% if @home.featured_image.attached? %>
 image: "<%= @home.featured_image.blob.id %>"
 image_alt: "<%= @home.featured_image_alt %>"
 <% end %>
+description: >
+  <%= strip_tags(@home.text.to_s).chomp %>
 ---
 <%= prepare_for_github @home.text, @home.university %>
