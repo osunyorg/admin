@@ -1,0 +1,10 @@
+---
+title: >
+  <%= @member.to_s %>
+slug: "<%= @member.slug %>"
+first_name: "<%= @member.first_name %>"
+last_name: "<%= @member.last_name %>"
+phone: "<%= @member.phone %>"
+email: "<%= @member.email %>"
+---
+<%= prepare_for_github @member.biography, @member.university %>

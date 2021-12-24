@@ -44,7 +44,17 @@ class Communication::Website::Menu::Item < ApplicationRecord
            foreign_key: :parent_id,
            dependent: :destroy
 
-  enum kind: { blank: 0, url: 10, page: 20, programs: 30, program: 31, news: 40, news_category: 41, news_article: 42, staff: 50 }, _prefix: :kind
+  enum kind: {
+    blank: 0,
+    url: 10,
+    page: 20,
+    programs: 30,
+    program: 31,
+    news: 40,
+    news_category: 41,
+    news_article: 42,
+    staff: 50
+  }, _prefix: :kind
 
   validates :title, presence: true
   validates :about, presence: true, if: :has_about?
@@ -57,23 +67,26 @@ class Communication::Website::Menu::Item < ApplicationRecord
     "#{title}"
   end
 
-  def jekyll_target
+  def static_target
+    target = ''
     case self.kind
     when 'url'
-      url
+      target = url
     when 'programs'
-      "/#{website.programs_github_directory}"
+      target = "/#{website.programs_github_directory}"
     when 'program'
-      "/#{website.programs_github_directory}#{about.path}"
+      target = "/#{website.programs_github_directory}#{about.path}"
     when 'news'
-      "/#{website.posts_github_directory}"
+      target = "/#{website.posts_github_directory}"
     when 'staff'
-      "/#{website.staff_github_directory}"
+      target = "/#{website.staff_github_directory}"
     when 'blank'
-      nil
+      target = nil
     else
-      about&.path
+      target = about&.path
     end
+    target.end_with?('/') ? target
+                          : "#{target}/"
   end
 
   def list_of_other_items
@@ -85,13 +98,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
     items
   end
 
-  def to_jekyll_hash
+  def to_static_hash
     return {} if kind_news_article? && !about.published
     {
       'title' => title,
-      'target' => jekyll_target,
+      'target' => static_target,
       'kind' => kind,
-      'children' => children.ordered.map(&:to_jekyll_hash)
+      'children' => children.ordered.map(&:to_static_hash)
     }
   end
 

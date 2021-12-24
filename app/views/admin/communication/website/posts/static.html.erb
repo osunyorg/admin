@@ -2,25 +2,22 @@
 title: "<%= @post.title %>"
 date: <%= @post.published_at %> UTC
 slug: "<%= @post.slug %>"
-pinned: <%= @post.pinned %>
-author: "<%= @post.author_id %>"
+<% if @post.pinned %>
+weight: 1
+<% end %>
+authors:
+  - "<%= @post.author.slug %>"
 <% if @post.categories.any? %>
 categories:
   <% @post.categories.each do |category| %>
-  - "<%= category.id %>"
+  - "<%= category.path %>"
   <% end %>
-<% end %>
-<% if @post.author_id.present? %>
-tags:
-  - "<%= @post.author_id %>"
 <% end %>
 <% if @post.featured_image.attached? %>
 image: "<%= @post.featured_image.blob.id %>"
 image_alt: "<%= @post.featured_image_alt %>"
 <% end %>
 description: >
-  <%= prepare_for_github @post.description, @post.university %>
-text: >
-  <%= prepare_for_github @post.text, @post.university %>
+  <%= @post.description.chomp %>
 ---
-<%= @github_file.github_frontmatter.content.html_safe %>
+<%= prepare_for_github @post.text, @post.university %>

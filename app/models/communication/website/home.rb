@@ -34,9 +34,9 @@ class Communication::Website::Home < ApplicationRecord
     ''
   end
 
-  def to_jekyll(github_file)
+  def to_static(github_file)
     ApplicationController.render(
-      template: "admin/communication/website/home/jekyll",
+      template: "admin/communication/website/home/static",
       layout: false,
       assigns: { home: self, github_file: github_file }
     )
@@ -44,7 +44,7 @@ class Communication::Website::Home < ApplicationRecord
 
   # Override from WithGithubFiles
   def github_path_generated
-    '_pages/index.html'
+    'content/_index.html'
   end
 
 end

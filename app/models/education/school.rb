@@ -48,7 +48,7 @@ class Education::School < ApplicationRecord
     "_data/school.yml"
   end
 
-  def to_jekyll(github_file)
+  def to_static(github_file)
     {
       name: name,
       address: address,

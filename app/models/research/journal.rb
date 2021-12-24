@@ -39,7 +39,7 @@ class Research::Journal < ApplicationRecord
     "_data/journal.yml"
   end
 
-  def to_jekyll(github_file)
+  def to_static(github_file)
     {
       title: title,
       description: description,

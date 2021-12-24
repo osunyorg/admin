@@ -119,14 +119,17 @@ fr:
         new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)
   enums:
-    communication/website/menu/item:
-      kind:
-        blank: Titre intermédiaire
-        news: Index des actualités
-        news_article: Actualité spécifique
-        news_category: Catégorie d'actualités
-        page: Page spécifique
-        program: Formation spécifique
-        programs: Index des formations
-        staff: Équipe
-        url: URL
+    communication:
+      website:
+        menu:
+          item:
+            kind:
+              blank: Titre intermédiaire
+              news: Index des actualités
+              news_article: Actualité spécifique
+              news_category: Catégorie d'actualités
+              page: Page spécifique
+              program: Formation spécifique
+              programs: Index des formations
+          staff: Équipe
+          url: URL

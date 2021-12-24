@@ -77,7 +77,7 @@ class Administration::Member < ApplicationRecord
   scope :researchers, -> { where(is_researcher: true) }
 
   def to_s
-    "#{last_name} #{first_name}"
+    "#{first_name} #{last_name}"
   end
 
   def websites
@@ -93,6 +93,7 @@ class Administration::Member < ApplicationRecord
     manifest.concat(author_github_manifest_items) if is_author?
     manifest.concat(researcher_github_manifest_items) if is_researcher?
     manifest.concat(teacher_github_manifest_items) if is_teacher?
+    manifest.concat(administrator_github_manifest_items) if is_administrative?
     manifest
   end
 
@@ -100,19 +101,9 @@ class Administration::Member < ApplicationRecord
     [
       {
         identifier: "author",
-        generated_path: -> (github_file) { "#{github_file.website.authors_github_directory}/#{slug}.yml" },
+        generated_path: -> (github_file) { "content/authors/#{slug}/_index.html" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/communication/website/authors/jekyll",
-          layout: false,
-          assigns: { author: self, github_file: github_file }
-        ) }
-      },
-      {
-        identifier: "author_collection_item",
-        generated_path: -> (github_file) { "_data/authors/#{slug}.yml" },
-        data: -> (github_file) { ApplicationController.render(
-          template: "admin/communication/website/authors/jekyll_collection",
-          formats: [:yml],
+          template: "admin/communication/website/authors/static",
           layout: false,
           assigns: { author: self, github_file: github_file }
         ) }
@@ -123,11 +114,10 @@ class Administration::Member < ApplicationRecord
   def researcher_github_manifest_items
     [
       {
-        identifier: "researcher_collection_item",
-        generated_path: -> (github_file) { "_data/researchers/#{slug}.yml" },
+        identifier: "researcher",
+        generated_path: -> (github_file) { "content/researchers/#{slug}/_index.html" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/research/researchers/jekyll_collection",
-          formats: [:yml],
+          template: "admin/research/researchers/static",
           layout: false,
           assigns: { researcher: self, github_file: github_file }
         ) }
@@ -138,11 +128,10 @@ class Administration::Member < ApplicationRecord
   def teacher_github_manifest_items
     [
       {
-        identifier: "teacher_collection_item",
-        generated_path: -> (github_file) { "_data/teachers/#{slug}.yml" },
+        identifier: "teacher",
+        generated_path: -> (github_file) { "content/teachers/#{slug}/_index.html" },
         data: -> (github_file) { ApplicationController.render(
-          template: "admin/education/teachers/jekyll_collection",
-          formats: [:yml],
+          template: "admin/education/teachers/static",
           layout: false,
           assigns: { teacher: self, github_file: github_file }
         ) }
@@ -150,4 +139,17 @@ class Administration::Member < ApplicationRecord
     ]
   end
 
+  def administrator_github_manifest_items
+    [
+      {
+        identifier: "administrator",
+        generated_path: -> (github_file) { "content/administrators/#{slug}/_index.html" },
+        data: -> (github_file) { ApplicationController.render(
+          template: "admin/administration/members/static",
+          layout: false,
+          assigns: { member: self, github_file: github_file }
+        ) }
+      }
+    ]
+  end
 end

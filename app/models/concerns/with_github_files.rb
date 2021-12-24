@@ -2,7 +2,10 @@ module WithGithubFiles
   extend ActiveSupport::Concern
 
   included do
-    has_many :github_files, class_name: "Communication::Website::GithubFile", as: :about, dependent: :destroy
+    has_many  :github_files,
+              class_name: "Communication::Website::GithubFile",
+              as: :about,
+              dependent: :destroy
 
     after_save :create_github_files
     after_save_commit :publish_github_files
@@ -14,12 +17,12 @@ module WithGithubFiles
   end
 
   def github_path_generated
-    "_#{self.class.name.demodulize.pluralize.underscore}/#{self.slug}.html"
+    "content/#{self.class.name.demodulize.pluralize.underscore}/#{self.slug}/_index.html"
   end
 
-  def to_jekyll(github_file)
+  def to_static(github_file)
     ApplicationController.render(
-      template: "admin/#{self.class.name.underscore.pluralize}/jekyll",
+      template: "admin/#{self.class.name.underscore.pluralize}/static",
       layout: false,
       assigns: { self.class.name.demodulize.underscore => self, github_file: github_file }
     )
@@ -30,7 +33,7 @@ module WithGithubFiles
       {
         identifier: "primary",
         generated_path: -> (github_file) { github_path_generated },
-        data: -> (github_file) { to_jekyll(github_file) },
+        data: -> (github_file) { to_static(github_file) },
         has_media: true
       }
     ]

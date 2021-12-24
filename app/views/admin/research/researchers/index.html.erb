@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th><%= Administration::Member.human_attribute_name('name') %></th>
+      <th><%= Administration::Member.human_attribute_name('first_name') %></th>
       <th><%= t('research.number_of_articles') %></th>
     </tr>
   </thead>
@@ -11,7 +12,8 @@
   <tbody>
     <% @researchers.each do |researcher| %>
       <tr>
-        <td><%= link_to researcher, admin_research_researcher_path(researcher) %></td>
+        <td><%= link_to researcher.last_name, admin_research_researcher_path(researcher) %></td>
+        <td><%= link_to researcher.first_name, admin_research_researcher_path(researcher) %></td>
         <td><%= researcher.research_journal_articles.count %></td>
       </tr>
     <% end %>

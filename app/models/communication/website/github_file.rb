@@ -46,15 +46,6 @@ class Communication::Website::GithubFile < ApplicationRecord
     add_media_to_batch(github)
   end
 
-  def github_frontmatter
-    @github_frontmatter ||= begin
-      github_content = github.read_file_at(github_path)
-      FrontMatterParser::Parser.new(:md).call(github_content)
-    rescue
-      FrontMatterParser::Parser.new(:md).call('')
-    end
-  end
-
   protected
 
   def add_media_to_batch(github)
@@ -98,7 +89,7 @@ class Communication::Website::GithubFile < ApplicationRecord
     {
       path: github_blob_path(blob),
       data: ApplicationController.render(
-        template: 'active_storage/blobs/jekyll',
+        template: 'active_storage/blobs/static',
         layout: false,
         assigns: { blob: blob }
       )
@@ -106,7 +97,7 @@ class Communication::Website::GithubFile < ApplicationRecord
   end
 
   def github_blob_path(blob)
-    "_data/media/#{blob.id[0..1]}/#{blob.id}.yml"
+    "data/media/#{blob.id[0..1]}/#{blob.id}.yml"
   end
 
   def github_commit_message
