@@ -81,7 +81,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when 'staff'
       target = "/#{website.staff_github_directory}"
     when 'blank'
-      target = nil
+      target = ''
     else
       target = about&.path
     end
