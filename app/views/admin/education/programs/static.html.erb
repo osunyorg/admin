@@ -2,15 +2,15 @@
 title: >
   <%= @program.name %>
 url: /<%= @github_file.website.programs_github_directory %><%= @program.path %>
-continuing: <%= @program.continuing %>
-level: <%= @program.level %>
-ects: <%= @program.ects %>
+description: >
+  <%= prepare_for_github @program.description, @program.university %>
 position: <%= @program.position %>
-related_category: "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
 <% if @program.best_featured_image.attached? %>
 image: "<%= @program.best_featured_image.blob.id %>"
 image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
+categories:
+  - "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
 <% if @program.teachers.any? %>
 teachers:
   <% @program.teachers.each do |teacher| %>
@@ -24,12 +24,13 @@ members:
     role: "<%= member.role %>"
   <% end %>
 <% end %>
+continuing: <%= @program.continuing %>
+level: <%= @program.level %>
+ects: <%= @program.ects %>
 accessibility: >
   <%= prepare_for_github @program.best_accessibility, @program.university %>
 contacts: >
   <%= prepare_for_github @program.best_contacts, @program.university %>
-description: >
-  <%= prepare_for_github @program.description, @program.university %>
 duration: >
   <%= prepare_for_github @program.best_duration, @program.university %>
 evaluation: >
