@@ -11,18 +11,22 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
+    programs = []
     website_ids = []
     ids.each.with_index do |id, index|
       program = current_university.education_programs.find(id)
+      programs << program
+      website_ids.concat(program.list_of_websites.map(&:id))
+      programs.concat(program.descendents) if parent_id != program.parent_id
       program.update(
         parent_id: parent_id,
         position: index + 1,
-        skip_websites_categories_callback: true
+        skip_github_publication: true
       )
-      website_ids.concat(program.website_ids)
     end
-    current_university.communication_websites.where(id: website_ids.uniq).each do |website|
-      website.set_programs_categories!
+    website_ids.uniq.each do |website_id|
+      github = Github.with_website current_university.communication_websites.find(website_id)
+      github.send_batch_to_website(programs, message: '[Program] Reorder programs.')
     end
   end
 
