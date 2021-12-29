@@ -11,7 +11,6 @@ image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
 categories:
   - "<%= @github_file.website.categories.find_by(program_id: @program.id)&.id %>"
-<% if @program.teachers.any? %>
 teachers:
   - "marlene-dulaurans"
   - "arnaud-levy"
