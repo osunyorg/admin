@@ -34,7 +34,7 @@
 class Communication::Website::Category < ApplicationRecord
   include WithGithubFiles
   include WithMenuItemTarget
-  include WithSlug
+  include WithSlug # We override slug_unavailable? method
   include WithTree
 
   has_one :imported_category,
@@ -63,7 +63,6 @@ class Communication::Website::Category < ApplicationRecord
                           association_foreign_key: 'communication_website_post_id'
 
   validates :name, presence: true
-  validates :slug, uniqueness: { scope: :communication_website_id }
 
   after_save :update_children_paths, if: :saved_change_to_path?
 

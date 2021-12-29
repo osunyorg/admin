@@ -34,7 +34,7 @@ class Communication::Website::Post < ApplicationRecord
   include Communication::Website::WithMedia
   include WithGithubFiles
   include WithMenuItemTarget
-  include WithSlug
+  include WithSlug # We override slug_unavailable? method
 
   has_rich_text :text
   has_one_attached_deletable :featured_image
@@ -56,7 +56,6 @@ class Communication::Website::Post < ApplicationRecord
                           association_foreign_key: 'communication_website_category_id'
 
   validates :title, presence: true
-  validates :slug, uniqueness: { scope: :communication_website_id }
 
   before_validation :set_published_at, if: :published_changed?
 

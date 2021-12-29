@@ -41,7 +41,7 @@ class Communication::Website::Page < ApplicationRecord
   include Communication::Website::WithMedia
   include WithGithubFiles
   include WithMenuItemTarget
-  include WithSlug
+  include WithSlug # We override slug_unavailable? method
   include WithTree
 
   has_rich_text :text
@@ -65,7 +65,6 @@ class Communication::Website::Page < ApplicationRecord
              dependent: :destroy
 
   validates :title, presence: true
-  validates :slug, uniqueness: { scope: :communication_website_id }
 
   after_save :update_children_paths, if: :saved_change_to_path?
 

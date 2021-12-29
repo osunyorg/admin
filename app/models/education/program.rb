@@ -124,6 +124,6 @@ class Education::Program < ApplicationRecord
   end
 
   def set_websites_categories
-    # websites.find_each(&:set_programs_categories!)
+    websites.find_each(&:set_programs_categories!)
   end
 end

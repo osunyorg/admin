@@ -8,15 +8,17 @@ module Communication::Website::WithCategories
         name: 'Offre de formation',
         slug: 'offre-de-formation',
         is_programs_root: true,
-        university_id: university.id
+        university_id: university.id,
+        skip_github_publication: true
       )
-      create_programs_categories_level(programs_root_category, about.programs.root.ordered)
+      programs_categories = [programs_root_category, programs_categories_level(programs_root_category, about.programs.root.ordered)].flatten
+      github.send_batch_to_website(programs_categories, message: '[Category] Set programs categories.')
     end
 
     protected
 
-    def create_programs_categories_level(parent_category, programs)
-      programs.each_with_index do |program, index|
+    def programs_categories_level(parent_category, programs)
+      programs.map.with_index do |program, index|
         program_category = categories.where(program_id: program.id).first_or_initialize(
           name: program.name,
           slug: program.name.parameterize,
@@ -24,11 +26,12 @@ module Communication::Website::WithCategories
         )
         program_category.parent = parent_category
         program_category.position = index + 1
+        program_category.skip_github_publication = true
         program_category.save
         program_children = about.programs.where(parent_id: program.id).ordered
-        create_programs_categories_level(program_category, program_children)
+        [program_category, programs_categories_level(program_category, program_children)].flatten
       end
     end
-    
+
   end
 end

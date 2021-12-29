@@ -2,10 +2,8 @@ module WithSlug
   extend ActiveSupport::Concern
 
   included do
-    validates :slug,
-              uniqueness: { scope: :university_id }
-    validates :slug,
-              format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }
+    validate :slug_must_be_unique
+    validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }
 
     before_validation :regenerate_slug, :make_path
 
@@ -34,6 +32,10 @@ module WithSlug
     def make_path
       return unless respond_to?(:path) && respond_to?(:parent)
       self.path = generated_path
+    end
+
+    def slug_must_be_unique
+      errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
     end
   end
 end

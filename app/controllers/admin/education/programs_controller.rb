@@ -21,12 +21,15 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       program.update(
         parent_id: parent_id,
         position: index + 1,
-        skip_github_publication: true
+        skip_github_publication: true,
+        skip_websites_categories_callback: true
       )
     end
     website_ids.uniq.each do |website_id|
-      github = Github.with_website current_university.communication_websites.find(website_id)
+      website = current_university.communication_websites.find(website_id)
+      github = Github.with_website website
       github.send_batch_to_website(programs, message: '[Program] Reorder programs.')
+      website.set_programs_categories!
     end
   end
 
