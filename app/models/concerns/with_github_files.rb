@@ -2,13 +2,15 @@ module WithGithubFiles
   extend ActiveSupport::Concern
 
   included do
+    attr_accessor :skip_github_publication
+
     has_many  :github_files,
               class_name: "Communication::Website::GithubFile",
               as: :about,
               dependent: :destroy
 
     after_save :create_github_files
-    after_save_commit :publish_github_files
+    after_save_commit :publish_github_files, unless: :skip_github_publication
     after_save_commit :unpublish_github_files, if: :should_unpublish_github_files?
   end
 
@@ -39,6 +41,10 @@ module WithGithubFiles
     ]
   end
 
+  def list_of_websites
+    respond_to?(:websites) ? websites : [website]
+  end
+
   protected
 
   def create_github_files
@@ -63,26 +69,10 @@ module WithGithubFiles
   end
 
   def publish_github_files_with_descendents
+    target_objects = [self, descendents].flatten
     list_of_websites.each do |current_website|
-      website_github = Github.with_website current_website
-      next unless website_github.valid?
-      target_github_files = []
-      github_manifest.each do |manifest_item|
-        github_file = github_files.where(website: current_website, manifest_identifier: manifest_item[:identifier]).first_or_create
-        target_github_files << github_file
-        github_file.add_to_batch(website_github)
-        descendents.each do |descendent|
-          next unless descendent.list_of_websites.include? current_website
-          descendent_github_file = descendent.github_files.where(website: current_website, manifest_identifier: manifest_item[:identifier]).first_or_create
-          target_github_files << descendent_github_file
-          descendent_github_file.add_to_batch(website_github)
-        end
-      end
-      if website_github.commit_batch("[#{self.class.name.demodulize}] Save #{to_s} & descendents")
-        target_github_files.each { |file|
-          file.update_column :github_path, file.manifest_data[:generated_path].call(file)
-        }
-      end
+      github = Github.with_website current_website
+      github.send_batch_to_website(target_objects, message: "[#{self.class.name.demodulize}] Save #{to_s} & descendents")
     end
   end
 
@@ -96,9 +86,5 @@ module WithGithubFiles
 
   def should_unpublish_github_files?
     respond_to?(:published?) && saved_change_to_published? && !published?
-  end
-
-  def list_of_websites
-    respond_to?(:websites) ? websites : [website]
   end
 end

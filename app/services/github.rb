@@ -1,13 +1,14 @@
 class Github
-  attr_reader :access_token, :repository
+  attr_reader :website, :access_token, :repository
 
   def self.with_website(website)
-    new website&.access_token, website&.repository
+    new website
   end
 
-  def initialize(access_token, repository)
-    @access_token = access_token
-    @repository = repository
+  def initialize(website)
+    @website = website
+    @access_token = website&.access_token
+    @repository = website&.repository
   end
 
   def valid?
@@ -84,6 +85,27 @@ class Github
   rescue
     ''
   end
+
+  def send_batch_to_website(objects, message: 'Batch objects')
+    return unless valid?
+
+    github_files = []
+    objects.each do |object|
+      next unless object.list_of_websites.include? website
+      object.github_manifest.each do |manifest_item|
+        github_file = object.github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
+        github_files << github_file
+        github_file.add_to_batch(self)
+      end
+    end
+
+    if commit_batch(message)
+      github_files.each do |github_file|
+        github_file.update_column :github_path, github_file.manifest_data[:generated_path].call(github_file)
+      end
+    end
+  end
+  handle_asynchronously :send_batch_to_website, queue: 'default'
 
   protected
 
