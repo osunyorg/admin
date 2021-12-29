@@ -56,7 +56,11 @@ module Communication::Website::WithBatchPublication
 
     def commit_files_in_batch(files, commit_message)
       files.find_each { |file| file.add_to_batch(github) }
-      github.commit_batch commit_message
+      if github.commit_batch(commit_message)
+        files.find_each { |file|
+          file.update_column :github_path, file.manifest_data[:generated_path].call(file)
+        }
+      end
     end
   end
 

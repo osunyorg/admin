@@ -18,6 +18,11 @@ module WithTree
                   : []
     end
 
+    def descendents
+      has_children? ? children.map { |child| [child, child.descendents].flatten }.flatten
+                    : []
+    end
+
     def self_and_children(level)
       elements = []
       label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s

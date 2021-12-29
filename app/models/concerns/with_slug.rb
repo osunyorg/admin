@@ -18,6 +18,10 @@ module WithSlug
       end
     end
 
+    def generated_path
+      "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+    end
+
     protected
 
     def slug_unavailable?(slug)
@@ -29,7 +33,7 @@ module WithSlug
 
     def make_path
       return unless respond_to?(:path) && respond_to?(:parent)
-      self.path = "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+      self.path = generated_path
     end
   end
 end

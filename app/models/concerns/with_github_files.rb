@@ -50,10 +50,36 @@ module WithGithubFiles
   end
 
   def publish_github_files
+    if respond_to?(:descendents)
+      publish_github_files_with_descendents
+    else
+      list_of_websites.each do |website|
+        github_manifest.each do |manifest_item|
+          github_file = github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
+          github_file.publish
+        end
+      end
+    end
+  end
+
+  def publish_github_files_with_descendents
     list_of_websites.each do |website|
+      website_github = Github.with_website website
+      target_github_files = []
       github_manifest.each do |manifest_item|
         github_file = github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
-        github_file.publish
+        target_github_files << github_file
+        github_file.add_to_batch(website_github)
+        descendents.each do |descendent|
+          descendent_github_file = descendent.github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
+          target_github_files << descendent_github_file
+          descendent_github_file.add_to_batch(website_github)
+        end
+      end
+      if website_github.commit_batch("[#{self.class.name.demodulize}] Save #{to_s} & descendents")
+        target_github_files.each { |file|
+          file.update_column :github_path, file.manifest_data[:generated_path].call(file)
+        }
       end
     end
   end

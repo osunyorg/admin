@@ -46,6 +46,12 @@ class Communication::Website::GithubFile < ApplicationRecord
     add_media_to_batch(github)
   end
 
+  def manifest_data
+    @manifest_data ||= about.github_manifest.detect { |item|
+      item[:identifier] == manifest_identifier
+    }
+  end
+
   protected
 
   def add_media_to_batch(github)
@@ -110,12 +116,6 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   def github_blob_remove_commit_message(blob)
     "[Medium] Remove ##{blob.id}"
-  end
-
-  def manifest_data
-    @manifest_data ||= about.github_manifest.detect { |item|
-      item[:identifier] == manifest_identifier
-    }
   end
 
   def valid_for_publication?

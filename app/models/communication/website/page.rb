@@ -92,6 +92,13 @@ class Communication::Website::Page < ApplicationRecord
     best_image
   end
 
+  def update_children_paths
+    children.each do |child|
+      child.update_column :path, child.generated_path
+      child.update_children_paths
+    end
+  end
+
   protected
 
   def slug_unavailable?(slug)
@@ -99,9 +106,5 @@ class Communication::Website::Page < ApplicationRecord
               .where(communication_website_id: self.communication_website_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def update_children_paths
-    children.each(&:save)
   end
 end
