@@ -63,15 +63,17 @@ module WithGithubFiles
   end
 
   def publish_github_files_with_descendents
-    list_of_websites.each do |website|
-      website_github = Github.with_website website
+    list_of_websites.each do |current_website|
+      website_github = Github.with_website current_website
+      next unless website_github.valid?
       target_github_files = []
       github_manifest.each do |manifest_item|
-        github_file = github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
+        github_file = github_files.where(website: current_website, manifest_identifier: manifest_item[:identifier]).first_or_create
         target_github_files << github_file
         github_file.add_to_batch(website_github)
         descendents.each do |descendent|
-          descendent_github_file = descendent.github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
+          next unless descendent.list_of_websites.include? current_website
+          descendent_github_file = descendent.github_files.where(website: current_website, manifest_identifier: manifest_item[:identifier]).first_or_create
           target_github_files << descendent_github_file
           descendent_github_file.add_to_batch(website_github)
         end
@@ -85,9 +87,9 @@ module WithGithubFiles
   end
 
   def unpublish_github_files
-    list_of_websites.each do |website|
+    list_of_websites.each do |current_website|
       github_manifest.each do |manifest_item|
-        github_files.find_by(website: website, manifest_identifier: manifest_item[:identifier])&.unpublish
+        github_files.find_by(website: current_website, manifest_identifier: manifest_item[:identifier])&.unpublish
       end
     end
   end

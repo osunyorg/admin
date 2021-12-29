@@ -114,7 +114,10 @@ class Education::Program < ApplicationRecord
   end
 
   def update_children_paths
-    children.each(&:save)
+    children.each do |child|
+      child.update_column :path, child.generated_path
+      child.update_children_paths
+    end
   end
 
   def list_of_other_programs
