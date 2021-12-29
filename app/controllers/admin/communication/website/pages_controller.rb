@@ -11,7 +11,6 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
     pages = []
-    github_files = []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
       pages << page

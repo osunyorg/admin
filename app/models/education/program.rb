@@ -90,7 +90,6 @@ class Education::Program < ApplicationRecord
 
   validates_presence_of :name
 
-  before_validation :make_path
   after_save :update_children_paths, if: :saved_change_to_path?
   after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
@@ -125,6 +124,6 @@ class Education::Program < ApplicationRecord
   end
 
   def set_websites_categories
-    websites.find_each(&:set_programs_categories!)
+    # websites.find_each(&:set_programs_categories!)
   end
 end

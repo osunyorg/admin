@@ -65,6 +65,8 @@ class Communication::Website::Category < ApplicationRecord
   validates :name, presence: true
   validates :slug, uniqueness: { scope: :communication_website_id }
 
+  after_save :update_children_paths, if: :saved_change_to_path?
+
   scope :ordered, -> { order(:position) }
 
   before_create :set_position
@@ -81,6 +83,13 @@ class Communication::Website::Category < ApplicationRecord
   # Override from WithGithubFiles
   def github_path_generated
     "content/categories/#{path}/_index.html".gsub(/\/+/, '/')
+  end
+
+  def update_children_paths
+    children.each do |child|
+      child.update_column :path, child.generated_path
+      child.update_children_paths
+    end
   end
 
   protected

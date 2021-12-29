@@ -11,13 +11,19 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
+    categories = []
     ids.each.with_index do |id, index|
       category = @website.categories.find(id)
+      categories << category
+      categories.concat(category.descendents) if parent_id != category.parent_id
       category.update(
         parent_id: parent_id,
-        position: index + 1
+        position: index + 1,
+        skip_github_publication: true
       )
     end
+    github = Github.with_website @website
+    github.send_batch_to_website(categories, message: '[Category] Reorder categories.')
   end
 
   def children
