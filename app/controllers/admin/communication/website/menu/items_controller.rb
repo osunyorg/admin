@@ -6,12 +6,14 @@ class Admin::Communication::Website::Menu::ItemsController < Admin::Communicatio
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      category = @menu.items.find(id)
-      category.update(
+      item = @menu.items.find(id)
+      item.update(
         parent_id: parent_id,
-        position: index + 1
+        position: index + 1,
+        skip_publication_callback: true
       )
     end
+    @menu.force_publish!
   end
 
   def show

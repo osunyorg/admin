@@ -34,9 +34,11 @@
 class Communication::Website::Menu::Item < ApplicationRecord
   include WithTree
 
+  attr_accessor :skip_publication_callback
+
   belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
-  belongs_to :menu, class_name: 'Communication::Website::Menu', touch: true
+  belongs_to :menu, class_name: 'Communication::Website::Menu'
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
   belongs_to :about, polymorphic: true, optional: true
   has_many :children,
@@ -60,6 +62,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   validates :about, presence: true, if: :has_about?
 
   before_create :set_position
+  after_commit :force_publish_menu, unless: :skip_publication_callback
 
   scope :ordered, -> { order(position: :asc) }
 
@@ -110,6 +113,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def has_about?
     kind_page? || kind_program? || kind_news_category? || kind_news_article?
+  end
+
+  def force_publish_menu
+    menu.force_publish!
   end
 
   protected
