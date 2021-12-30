@@ -48,7 +48,8 @@ class Github
         type: 'blob',
         content: data
       }
-    else # Existing file
+    elsif previous_path != path || file_sha(previous_path) != local_file_sha(data)
+      # Different path or content
       @batch << {
         path: previous_path,
         mode: file[:mode],
@@ -65,9 +66,11 @@ class Github
   end
 
   def commit_batch(commit_message)
-    new_tree = client.create_tree repository, @batch, base_tree: tree[:sha]
-    commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
-    client.update_branch repository, default_branch, commit[:sha]
+    unless @batch.empty?
+      new_tree = client.create_tree repository, @batch, base_tree: tree[:sha]
+      commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
+      client.update_branch repository, default_branch, commit[:sha]
+    end
     @tree = nil
     true
   end
@@ -168,6 +171,12 @@ class Github
       sha = nil
     end
     sha
+  end
+
+  def local_file_sha(data)
+    # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
+    # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
+    OpenSSL::Digest::SHA1.hexdigest "blob #{data.bytesize}\x00#{data}"
   end
 
   def default_branch
