@@ -5,8 +5,10 @@ slug: "<%= @post.slug %>"
 <% if @post.pinned %>
 weight: 1
 <% end %>
+<% if @post.author %>
 persons:
   - "<%= @post.author.slug %>"
+<% end %>
 <% if @post.categories.any? %>
 categories:
   <% @post.categories.each do |category| %>

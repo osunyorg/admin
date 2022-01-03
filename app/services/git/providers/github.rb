@@ -53,13 +53,8 @@ class Git::Providers::Github
     @client ||= Octokit::Client.new access_token: access_token
   end
 
-  def access_token
-    @access_token ||= website&.access_token
-  end
-
-  # Path of the repo
-  def repository
-    @repository ||= website&.repository
+  def batch
+    @batch ||= []
   end
 
   def default_branch
@@ -72,10 +67,6 @@ class Git::Providers::Github
 
   def tree
     @tree ||= client.tree repository, branch_sha, recursive: true
-  end
-
-  def batch
-    @batch ||= []
   end
 
   def git_sha(path)

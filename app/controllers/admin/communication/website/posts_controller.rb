@@ -28,6 +28,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   def create
     @post.website = @website
     if @post.save
+      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
       breadcrumb
@@ -37,6 +38,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def update
     if @post.update(post_params)
+      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
       breadcrumb
