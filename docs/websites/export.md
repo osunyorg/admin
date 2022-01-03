@@ -67,6 +67,8 @@ def update
 end
 ```
 
+TODO gérer la suppression correctement
+
 ## Code
 
 ### Website::WithRepository

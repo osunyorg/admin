@@ -21,7 +21,6 @@ module WithGit
   end
   handle_asynchronously :sync_with_git
 
-
   def git_path_static
     ''
   end
