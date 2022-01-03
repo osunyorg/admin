@@ -27,38 +27,37 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  include Communication::Website::WithGit
-  include Communication::Website::WithCategories
+  include WithGitRepository
+  include WithCategories
 
-#  include Communication::Website::WithBatchPublication
-#  include Communication::Website::WithPublishableObjects
-
-  belongs_to :university
-  belongs_to :about, polymorphic: true, optional: true
-  has_one :home,
-          class_name: 'Communication::Website::Home',
-          foreign_key: :communication_website_id,
-          dependent: :destroy
-  has_many :pages,
-           foreign_key: :communication_website_id,
-           dependent: :destroy
-  has_many :posts,
-           foreign_key: :communication_website_id,
-           dependent: :destroy
-  has_many :categories,
-           class_name: 'Communication::Website::Category',
-           foreign_key: :communication_website_id,
-           dependent: :destroy
-  has_many :menus,
-           class_name: 'Communication::Website::Menu',
-           foreign_key: :communication_website_id,
-           dependent: :destroy
-  has_one :imported_website,
-          class_name: 'Communication::Website::Imported::Website',
-          dependent: :destroy
-  has_many :github_files,
-           class_name: 'Communication::Website::GithubFile',
-           dependent: :destroy
+  belongs_to  :university
+  belongs_to  :about,
+              polymorphic: true,
+              optional: true
+  has_one     :home,
+              class_name: 'Communication::Website::Home',
+              foreign_key: :communication_website_id,
+              dependent: :destroy
+  has_many    :pages,
+              foreign_key: :communication_website_id,
+              dependent: :destroy
+  has_many    :posts,
+              foreign_key: :communication_website_id,
+              dependent: :destroy
+  has_many    :categories,
+              class_name: 'Communication::Website::Category',
+              foreign_key: :communication_website_id,
+              dependent: :destroy
+  has_many    :menus,
+              class_name: 'Communication::Website::Menu',
+              foreign_key: :communication_website_id,
+              dependent: :destroy
+  has_one     :imported_website,
+              class_name: 'Communication::Website::Imported::Website',
+              dependent: :destroy
+  has_many    :git_files,
+              class_name: 'Communication::Website::GitFile',
+              dependent: :destroy
 
   after_create :create_home
   after_save :publish_about_object, if: :saved_change_to_about_id?
@@ -119,10 +118,6 @@ class Communication::Website < ApplicationRecord
 
   def create_home
     build_home(university_id: university_id).save
-  end
-
-  def github
-    @github ||= Github.with_website self
   end
 
   def about_school?

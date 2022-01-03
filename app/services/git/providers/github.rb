@@ -59,32 +59,6 @@ class Git::Providers::Github
     @client ||= Octokit::Client.new access_token: access_token
   end
 
-  # https://medium.com/@obodley/renaming-a-file-using-the-git-api-fed1e6f04188
-  def move_file(from, to)
-    file = find_in_tree from
-    return if file.nil?
-    content = [{
-      path: from,
-      mode: file[:mode],
-      type: file[:type],
-      sha: nil
-    },
-    {
-      path: to,
-      mode: file[:mode],
-      type: file[:type],
-      sha: file[:sha]
-    }]
-    new_tree = client.create_tree repository, content, base_tree: tree[:sha]
-    message = "Move #{from} to #{to}"
-    commit = client.create_commit repository, message, new_tree[:sha], branch_sha
-    client.update_branch repository, default_branch, commit[:sha]
-    @tree = nil
-    true
-  rescue
-    false
-  end
-
   def file_sha(path)
     begin
       content = client.content repository, path: path

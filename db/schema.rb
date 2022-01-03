@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_090935) do
+ActiveRecord::Schema.define(version: 2022_01_03_174641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -123,16 +123,17 @@ ActiveRecord::Schema.define(version: 2021_12_24_090935) do
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
   end
 
-  create_table "communication_website_github_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "github_path"
+  create_table "communication_website_git_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "previous_path"
     t.string "about_type", null: false
     t.uuid "about_id", null: false
     t.uuid "website_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "manifest_identifier"
+    t.string "previous_sha"
+    t.string "identifier", default: "static"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
-    t.index ["website_id"], name: "index_communication_website_github_files_on_website_id"
+    t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
   create_table "communication_website_homes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -552,7 +553,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_090935) do
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "universities"
-  add_foreign_key "communication_website_github_files", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_homes", "communication_websites"
   add_foreign_key "communication_website_homes", "universities"
   add_foreign_key "communication_website_imported_authors", "administration_members", column: "author_id"

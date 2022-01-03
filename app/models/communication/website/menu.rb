@@ -22,7 +22,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Menu < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
@@ -37,8 +37,7 @@ class Communication::Website::Menu < ApplicationRecord
     "#{title}"
   end
 
-  # Override from WithGithubFiles
-  def github_path_generated
+  def git_path_static
     "data/menus/#{identifier}.yml"
   end
 

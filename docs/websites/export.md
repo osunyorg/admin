@@ -25,9 +25,11 @@ Chaque objet publiable utilise un objet active record Communication::Website::Gi
 
 ## Flux
 
-Lors de l'enregistrement d'un objet, il faut :
-- créer éventuellement ses git_files (1 pour chaque website)
-- envoyer les git_files aux repositories (add_to_batch)
+### Version 1
+
+Lors de l'enregistrement d'un objet, il faut, pour chaque website :
+- créer éventuellement le git_file (1 pour chaque website)
+- envoyer le git_file (add_to_batch)
 - modifier ses dépendances, qui créent leur git_files pour chaque repository
 - envoyer les git_files des dépendances aux repositories respectifs (add_to_batch)
 - pour chaque website, si au moins un fichier a été ajouté :
@@ -42,16 +44,59 @@ Lors de l'enregistrement d'un objet, il faut :
             - push
             - mettre à jour les previous_path et les SHA des git_files
 
+Ce flux cause un problème majeur : tout ce qui est analysé disparaît en asynchrone
+
+### Version 2
+
+Après l'enregistrement d'un objet, il faut, pour chaque website, lancer une tâche asynchrone de synchronisation.
+Cette tâche est lancée par les controllers, et intégrée dans le partial `WithGit`.
+```
+def create
+  @page.website = @website
+  if @page.save
+    @page.sync_with_git
+    ...
+  end
+end
+
+def update
+  if @page.update(page_params)
+    @page.sync_with_git
+    ...
+  end
+end
+```
+
 ## Code
 
-Tout objet qui doit être exporté sur un ou plusieurs websites doit :
-  - avoir une méthode `website` ou `websites`
-  - inclure le concern `WithGithubFiles`
+### Website::WithRepository
 
-S'il possède des médias (`featured_image` et/ou images dans des rich texts), il doit inclure le concern `Communication::Website::WithMedia`
+Le website a un trait WithRepository qui gère son rapport avec le repository Git, quel que soit le provider (Github, Gitlab...).
 
-Le concern `WithGithubFiles` ajoute un manifest à l'objet qui permet de définir les fichiers exportés côté GitHub pour celui-ci.
+### Objets exportables vers Git
 
-Quand l'objet est sauvegardé, on se base sur le(s) websites et ce manifest pour créer et publier des objets `Communication::Website::GithubFile`. Ces derniers permettent de garder la trace du chemin actuel d'un fichier distant dans le cas où celui-ci viendrait à être déplacé (changement de slug, etc.).
+Tous les objets qui doivent être exportés vers Git :
+- doivent utiliser le partial `WithGit`, qui gère l'export vers les repositories des objets et de leurs dépendances
+- doivent présenter une méthode `websites`, éventuellement avec un seul website dans un tableau
+- peuvent intégrer le concern `WithMedia` s'il utilise des médias (`featured_image` et/ou images dans des rich texts)
+- peuvent présenter une méthode `static_files` qui liste les identifiants des git_files à générer, pour les objets qui créent plusieurs fichiers
 
-Ces fichiers servent également dans le cas où on souhaite republier manuellement une partie d'un site (exemple : tous les posts), la méthode `Communication::Website#publish_posts!` peut tout grouper en un batch.
+### GitFile
+La responsabilité de la synchronisation repose sur Communication::Website::GitFile, notamment :
+- le fichier doit-il être synchronisé ?
+- le fichier doit-il être créé ?
+- le fichier doit-il être déplacé ?
+- le fichier doit-il être supprimé ?
+
+
+Pour cela, le git_file dispose des propriétés suivantes :
+- previous_path (le chemin à la dernière sauvegarde, nil si pas encore créé, ou détruit)
+- previous_sha (le hash de la précédente version, utile pour savoir si le fichier a changé)
+- identifier (l'identifiant du fichier à créer, `static` par défaut, pour les objets créant plusieurs fichiers)
+
+
+Et pour générer les fichiers, il dispose des méthodes :
+- to_s (pour générer le fichier statique à jour)
+- sha (pour calculer le hash du fichier à jour)
+- path (pour générer le chemin à jour)
+- synced? (pour savoir s'il faut regénérer ou pas)

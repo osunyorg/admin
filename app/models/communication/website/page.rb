@@ -38,9 +38,8 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
-  include Communication::Website::WithMedia
-  include WithGithubFiles
-  include WithGitSync
+  include WithGit
+  include WithMedia
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
@@ -72,8 +71,7 @@ class Communication::Website::Page < ApplicationRecord
   scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
-  # Override from WithGithubFiles
-  def github_path_generated
+  def git_path_static
     "content/pages/#{path}/_index.html".gsub(/\/+/, '/')
   end
 

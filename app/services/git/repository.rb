@@ -1,8 +1,26 @@
 class Git::Repository
-  attr_reader :website
+  attr_reader :website, :commit_message
 
   def initialize(website)
     @website = website
+  end
+
+  def add_git_file(git_file)
+    @commit_message = "[#{ git_file.about.class.name }] Save #{ git_file.about }" if git_files.empty?
+    git_files << git_file
+  end
+
+  def sync!
+    return unless valid?
+    return if git_files.empty?
+    sync_git_files
+    mark_as_synced if commit_batch
+  end
+
+  protected
+
+  def client
+    @client ||= Octokit::Client.new access_token: access_token
   end
 
   def access_token
@@ -17,160 +35,12 @@ class Git::Repository
     @provider ||= Git::Providers::Github.new
   end
 
-  def files
-    @files ||= []
+  def git_files
+    @git_files ||= []
   end
 
-  def valid?
-    repository.present? && access_token.present?
-  end
-
-  def push(commit_message: nil)
-    return unless files.any?
-    # TODO add files to batch and commit
-  end
-
-  def add_to_batch( path: nil,
-                    previous_path: nil,
-                    data:)
+  def batch
     @batch ||= []
-    file = find_in_tree previous_path
-    if file.nil? # New file
-      @batch << {
-        path: path,
-        mode: '100644', # https://docs.github.com/en/rest/reference/git#create-a-tree
-        type: 'blob',
-        content: data
-      }
-    elsif previous_path != path || file_sha(previous_path) != local_file_sha(data)
-      # Different path or content
-      @batch << {
-        path: previous_path,
-        mode: file[:mode],
-        type: file[:type],
-        sha: nil
-      }
-      @batch << {
-        path: path,
-        mode: file[:mode],
-        type: file[:type],
-        content: data
-      }
-    end
-  end
-
-  def commit_batch(commit_message)
-    unless @batch.empty?
-      new_tree = client.create_tree repository, @batch, base_tree: tree[:sha]
-      commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
-      client.update_branch repository, default_branch, commit[:sha]
-    end
-    @tree = nil
-    true
-  end
-
-  def remove(path, commit_message)
-    client.delete_contents repository, path, commit_message, file_sha(path)
-    true
-  rescue
-    false
-  end
-
-  def read_file_at(path)
-    data = client.content repository, path: path
-    Base64.decode64 data.content
-  rescue
-    ''
-  end
-
-  def send_batch_to_website(objects, message: 'Batch objects')
-    return unless valid?
-
-    github_files = []
-    objects.each do |object|
-      next unless object.list_of_websites.include? website
-      object.github_manifest.each do |manifest_item|
-        github_file = object.github_files.where(website: website, manifest_identifier: manifest_item[:identifier]).first_or_create
-        github_files << github_file
-        github_file.add_to_batch(self)
-      end
-    end
-
-    if commit_batch(message)
-      github_files.each do |github_file|
-        github_file.update_column :github_path, github_file.manifest_data[:generated_path].call(github_file)
-      end
-    end
-  end
-  handle_asynchronously :send_batch_to_website, queue: 'default'
-
-  protected
-
-  def pages
-    list = client.contents repository, path: '_pages'
-    list.map do |hash|
-      page_with_id(hash[:name])
-    end
-  end
-
-  def page_with_id(id)
-    path = "_pages/#{id}"
-    data = client.content repository, path: path
-    raw = Base64.decode64 data.content
-    parsed = FrontMatterParser::Parser.new(:md).call(raw)
-    page = Communication::Website::Page.new
-    page.id = id
-    page.title = parsed.front_matter['title']
-    page.permalink = parsed.front_matter['permalink']
-    page.content = parsed.content
-    page.raw = raw
-    page
-  end
-
-  def client
-    @client ||= Octokit::Client.new access_token: access_token
-  end
-
-  # https://medium.com/@obodley/renaming-a-file-using-the-git-api-fed1e6f04188
-  def move_file(from, to)
-    file = find_in_tree from
-    return if file.nil?
-    content = [{
-      path: from,
-      mode: file[:mode],
-      type: file[:type],
-      sha: nil
-    },
-    {
-      path: to,
-      mode: file[:mode],
-      type: file[:type],
-      sha: file[:sha]
-    }]
-    new_tree = client.create_tree repository, content, base_tree: tree[:sha]
-    message = "Move #{from} to #{to}"
-    commit = client.create_commit repository, message, new_tree[:sha], branch_sha
-    client.update_branch repository, default_branch, commit[:sha]
-    @tree = nil
-    true
-  rescue
-    false
-  end
-
-  def file_sha(path)
-    begin
-      content = client.content repository, path: path
-      sha = content[:sha]
-    rescue
-      sha = nil
-    end
-    sha
-  end
-
-  def local_file_sha(data)
-    # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
-    # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
-    OpenSSL::Digest::SHA1.hexdigest "blob #{data.bytesize}\x00#{data}"
   end
 
   def default_branch
@@ -185,14 +55,81 @@ class Git::Repository
     @tree ||= client.tree repository, branch_sha, recursive: true
   end
 
+  def valid?
+    repository.present? && access_token.present?
+  end
+
+  def sync_git_files
+    git_files.each do |git_file|
+      next if git_file.synced?
+      add_to_batch  path: git_file.path,
+                    previous_path: git_file.previous_path,
+                    data: git_file.to_s
+    end
+  end
+
+  def add_to_batch( path: nil,
+                    previous_path: nil,
+                    data:)
+    file = find_in_tree previous_path
+    if file.nil? # New file
+      batch << {
+        path: path,
+        mode: '100644', # https://docs.github.com/en/rest/reference/git#create-a-tree
+        type: 'blob',
+        content: data
+      }
+    elsif previous_path != path || git_sha(previous_path) != sha(data)
+      # Different path or content
+      batch << {
+        path: previous_path,
+        mode: file[:mode],
+        type: file[:type],
+        sha: nil
+      }
+      batch << {
+        path: path,
+        mode: file[:mode],
+        type: file[:type],
+        content: data
+      }
+    end
+  end
+
+  def commit_batch
+    return if batch.empty?
+    new_tree = client.create_tree repository, batch, base_tree: tree[:sha]
+    commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
+    client.update_branch repository, default_branch, commit[:sha]
+    true
+  end
+
+  def mark_as_synced
+    git_files.each do |git_file|
+      git_file.update_columns previous_path: git_file.path, previous_sha: git_file.sha
+    end
+  end
+
+  def git_sha(path)
+    begin
+      content = client.content repository, path: path
+      sha = content[:sha]
+    rescue
+      sha = nil
+    end
+    sha
+  end
+
+  def sha(data)
+    # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
+    # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
+    OpenSSL::Digest::SHA1.hexdigest "blob #{data.bytesize}\x00#{data}"
+  end
+
   def find_in_tree(path)
     tree[:tree].each do |file|
       return file if path == file[:path]
     end
     nil
-  end
-
-  def tmp_directory
-    "tmp/github/#{repository}"
   end
 end

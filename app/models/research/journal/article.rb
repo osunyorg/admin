@@ -32,7 +32,7 @@
 #  fk_rails_...  (updated_by_id => users.id)
 #
 class Research::Journal::Article < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
 
   has_rich_text :text
   has_one_attached :pdf

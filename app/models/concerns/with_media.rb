@@ -1,4 +1,4 @@
-module Communication::Website::WithMedia
+module WithMedia
   extend ActiveSupport::Concern
 
   def active_storage_blobs

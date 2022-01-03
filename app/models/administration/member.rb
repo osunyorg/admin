@@ -28,7 +28,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Administration::Member < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
   include WithSlug
 
   has_rich_text :biography

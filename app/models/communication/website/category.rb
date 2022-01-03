@@ -32,7 +32,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Category < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
@@ -79,8 +79,7 @@ class Communication::Website::Category < ApplicationRecord
     "#{name}"
   end
 
-  # Override from WithGithubFiles
-  def github_path_generated
+  def git_path_static
     "content/categories/#{path}/_index.html".gsub(/\/+/, '/')
   end
 

@@ -24,7 +24,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
 
   belongs_to :university
   has_many :websites, class_name: 'Communication::Website', as: :about
@@ -43,9 +43,8 @@ class Education::School < ApplicationRecord
     "#{name}"
   end
 
-  def github_path_generated
-    # Override from WithGithubFiles
-    "_data/school.yml"
+  def git_path_static
+    "data/school.yml"
   end
 
   def to_static(github_file)

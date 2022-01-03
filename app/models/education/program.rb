@@ -30,12 +30,12 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Education::Program < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
+  include WithMedia
   include WithMenuItemTarget
   include WithSlug
   include WithTree
   include WithInheritance
-  include Communication::Website::WithMedia
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
@@ -107,8 +107,7 @@ class Education::Program < ApplicationRecord
     best_image
   end
 
-  # Override from WithGithubFiles
-  def github_path_generated
+  def git_path_static
     "content/programs/#{path}/_index.html".gsub(/\/+/, '/')
   end
 

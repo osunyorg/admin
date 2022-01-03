@@ -31,8 +31,8 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website::Post < ApplicationRecord
-  include Communication::Website::WithMedia
-  include WithGithubFiles
+  include WithGit
+  include WithMedia
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
 
@@ -67,8 +67,7 @@ class Communication::Website::Post < ApplicationRecord
     "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}/"
   end
 
-  # Override from WithGithubFiles
-  def github_path_generated
+  def git_path_static
     "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 

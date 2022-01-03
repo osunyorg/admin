@@ -26,7 +26,7 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
-  include WithGithubFiles
+  include WithGit
 
   has_one_attached_deletable :cover
 

@@ -78,6 +78,7 @@
 <% end %>
 
 <% content_for :action_bar_left do %>
+  <%= destroy_link @page %>
   <%= link_to t('communication.website.force_publication'),
               publish_admin_communication_website_page_path(@page),
               method: :post,
@@ -86,5 +87,4 @@
 
 <% content_for :action_bar_right do %>
   <%= edit_link @page %>
-  <%= destroy_link @page %>
 <% end %>
