@@ -10,23 +10,23 @@ module WithGithubFiles
               dependent: :destroy
 
     after_save :create_github_files
-    after_save_commit :publish_github_files, unless: :skip_github_publication
-    after_save_commit :unpublish_github_files, if: :should_unpublish_github_files?
+    # after_save_commit :publish_github_files, unless: :skip_github_publication
+    # after_save_commit :unpublish_github_files, if: :should_unpublish_github_files?
   end
 
-  def force_publish!
-    publish_github_files
-  end
+  # def force_publish!
+  #   publish_github_files
+  # end
 
   def github_path_generated
     "content/#{self.class.name.demodulize.pluralize.underscore}/#{self.slug}/_index.html"
   end
 
-  def to_static(github_file)
+  def to_static
     ApplicationController.render(
       template: "admin/#{self.class.name.underscore.pluralize}/static",
       layout: false,
-      assigns: { self.class.name.demodulize.underscore => self, github_file: github_file }
+      assigns: { self.class.name.demodulize.underscore => self }
     )
   end
 

@@ -40,6 +40,7 @@
 class Communication::Website::Page < ApplicationRecord
   include Communication::Website::WithMedia
   include WithGithubFiles
+  include WithGitSync
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree

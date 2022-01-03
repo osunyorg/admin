@@ -1,39 +1,33 @@
-class Github
-  attr_reader :website, :access_token, :repository
-
-  def self.with_website(website)
-    new website
-  end
+class Git::Repository
+  attr_reader :website
 
   def initialize(website)
     @website = website
-    @access_token = website&.access_token
-    @repository = website&.repository
+  end
+
+  def access_token
+    @access_token ||= website&.access_token
+  end
+
+  def repository
+    @repository ||= website&.repository
+  end
+
+  def provider
+    @provider ||= Git::Providers::Github.new
+  end
+
+  def files
+    @files ||= []
   end
 
   def valid?
     repository.present? && access_token.present?
   end
 
-  def publish(path: nil,
-              previous_path: nil,
-              commit: nil,
-              data:)
-    local_path = "#{ tmp_directory }/#{ path }"
-    Pathname(local_path).dirname.mkpath
-    File.write local_path, data
-    return if repository.blank?
-    if !previous_path.blank? && path != previous_path
-      move_file previous_path, path
-    end
-    client.create_contents  repository,
-                            path,
-                            commit,
-                            file: local_path,
-                            sha: file_sha(path)
-    true
-  rescue => e
-    false
+  def push(commit_message: nil)
+    return unless files.any?
+    # TODO add files to batch and commit
   end
 
   def add_to_batch( path: nil,

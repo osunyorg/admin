@@ -3,6 +3,7 @@ class Admin::ApplicationController < ApplicationController
 
   before_action :authenticate_user!
   around_action :switch_locale
+  after_action :push_to_github
 
   protected
 

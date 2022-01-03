@@ -27,9 +27,11 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  include Communication::Website::WithBatchPublication
+  include Communication::Website::WithGit
   include Communication::Website::WithCategories
-  include Communication::Website::WithPublishableObjects
+
+#  include Communication::Website::WithBatchPublication
+#  include Communication::Website::WithPublishableObjects
 
   belongs_to :university
   belongs_to :about, polymorphic: true, optional: true

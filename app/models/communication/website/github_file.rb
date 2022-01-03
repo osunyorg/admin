@@ -26,6 +26,10 @@ class Communication::Website::GithubFile < ApplicationRecord
 
   after_destroy :remove_from_github
 
+  def needs_sync?
+    false
+  end
+
   def publish
     return unless valid_for_publication? && github.valid?
     add_to_batch(github)
