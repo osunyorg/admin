@@ -11,8 +11,10 @@ module WithGit
   def sync_with_git
     websites.each do |website|
       identifiers.each do |identifier|
-        git_file = git_files.where(website: website, about: self, identifier: identifier).first_or_create
-        website.git_repository.add_git_file git_file
+        Communication::Website::GitFile.sync website, self, identifier
+        git_dependencies(identifier).each do |object|
+          Communication::Website::GitFile.sync website, object, identifier
+        end
       end
       website.git_repository.sync!
     end
@@ -21,7 +23,11 @@ module WithGit
 
 
   def git_path_static
-    ""
+    ''
+  end
+
+  def git_dependencies(identifier)
+    []
   end
 
   # Overridden for multiple files generation
@@ -32,16 +38,5 @@ module WithGit
   # Overridden if websites relation exists
   def websites
     [website]
-  end
-
-  protected
-
-  def sync_git_files
-    websites.each do |website|
-      identifiers.each do |identifier|
-        git_file = git_files.where(website: website, about: self, identifier: identifier).first_or_create
-        website.sync_file git_file
-      end
-    end
   end
 end

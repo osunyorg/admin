@@ -75,6 +75,10 @@ class Communication::Website::Page < ApplicationRecord
     "content/pages/#{path}/_index.html".gsub(/\/+/, '/')
   end
 
+  def git_dependencies(identifier)
+    descendents
+  end
+
   def list_of_other_pages
     website.list_of_pages.reject! { |p| p[:id] == id }
   end

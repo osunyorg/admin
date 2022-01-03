@@ -25,6 +25,11 @@ class Communication::Website::GitFile < ApplicationRecord
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 
+  def self.sync(website, object, identifier)
+    git_file = where(website: website, about: object, identifier: identifier).first_or_create
+    website.git_repository.add_git_file git_file
+  end
+
   def synced?
     previous_path == path && previous_sha == sha
   end
