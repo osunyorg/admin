@@ -30,7 +30,7 @@
                       } %>
           <%= f.input :published %>
           <%= f.association :parent,
-                            collection: page.persisted? ? page.list_of_other_pages : page.website.list_of_pages,
+                            collection: collection_tree(page.website.pages, page),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
           <ul>

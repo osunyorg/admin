@@ -41,14 +41,6 @@ class Communication::Website < ApplicationRecord
     "#{name}"
   end
 
-  def list_of_pages
-    all_pages = []
-    pages.root.ordered.each do |page|
-      all_pages.concat(page.self_and_children(0))
-    end
-    all_pages
-  end
-
   def list_of_categories
     all_categories = []
     categories.root.ordered.each do |category|

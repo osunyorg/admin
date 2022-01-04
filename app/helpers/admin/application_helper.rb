@@ -72,6 +72,14 @@ module Admin::ApplicationHelper
     sanitize text
   end
 
+  def collection_tree(list, except)
+    collection = []
+    list.root.ordered.each do |object|
+      collection.concat(object.self_and_children(0))
+    end
+    collection.reject { |o| o[:id] == except.id }
+  end
+
   private
 
   def polymorphic_url_param(object_or_class, **options)

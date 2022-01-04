@@ -79,10 +79,6 @@ class Communication::Website::Page < ApplicationRecord
     descendents + siblings
   end
 
-  def list_of_other_pages
-    website.list_of_pages.reject! { |p| p[:id] == id }
-  end
-
   def to_s
     "#{ title }"
   end
