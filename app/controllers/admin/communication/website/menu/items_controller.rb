@@ -13,7 +13,7 @@ class Admin::Communication::Website::Menu::ItemsController < Admin::Communicatio
         skip_publication_callback: true
       )
     end
-    @menu.force_publish!
+    @menu.sync_with_git
   end
 
   def show
