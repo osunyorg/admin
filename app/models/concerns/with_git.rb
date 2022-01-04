@@ -8,8 +8,9 @@ module WithGit
               dependent: :destroy
   end
 
+  # Needs override
   def git_path_static
-    ''
+    raise NotImplementedError
   end
 
   # Overridden if websites relation exists

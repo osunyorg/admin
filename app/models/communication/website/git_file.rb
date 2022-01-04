@@ -39,7 +39,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def should_update?
-    !synchronized_with_git? || previous_path != path || previous_sha != sha
+    previous_path != path || previous_sha != sha
   end
 
   def should_destroy?
@@ -54,12 +54,11 @@ class Communication::Website::GitFile < ApplicationRecord
   def sha
     # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
     # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
-    data = to_s
-    OpenSSL::Digest::SHA1.hexdigest "blob #{data.bytesize}\x00#{data}"
+    OpenSSL::Digest::SHA1.hexdigest "blob #{to_s.bytesize}\x00#{to_s}"
   end
 
   def to_s
-    ApplicationController.render(
+    @to_s ||= ApplicationController.render(
       template: "admin/#{about.class.name.underscore.pluralize}/#{identifier}",
       layout: false,
       assigns: { about.class.name.demodulize.downcase => about }

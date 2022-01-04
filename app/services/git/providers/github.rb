@@ -17,6 +17,7 @@ class Git::Providers::Github
 
   def update_file(path, previous_path, content)
     file = find_in_tree previous_path
+    return if file.nil?
     batch << {
       path: previous_path,
       mode: file[:mode],
@@ -43,8 +44,7 @@ class Git::Providers::Github
   end
 
   def push(commit_message)
-    return unless valid?
-    return if batch.empty?
+    return if !valid? || batch.empty?
     new_tree = client.create_tree repository, batch, base_tree: tree[:sha]
     commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
     client.update_branch repository, default_branch, commit[:sha]

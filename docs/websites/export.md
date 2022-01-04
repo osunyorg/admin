@@ -8,12 +8,12 @@ Les publications doivent se font en asynchrone parce qu'elles peuvent être long
 
 
 Certains objets peuvent appartenir à plusieurs websites, donc plusieurs repositories, comme par exemple les programs.
-Certains objets ont des dépendances, par exemple les pages enfants, les auteurs ou les catégories.
+Certains objets ont des dépendances, par exemple les pages enfants, les auteurs, les catégories ou les médias.
 
 
 Les fichiers renommés doivent être déplacés sur git.
 Les fichiers supprimés ou dépubliés doivent être supprimés sur git.
-Il faut veiller à limiter le nombre de commits, et éviter les commits vides.
+Il faut veiller à limiter le nombre de commits et à éviter les commits vides.
 
 ## Architecture
 
@@ -48,7 +48,7 @@ Ce flux cause un problème majeur : tout ce qui est analysé disparaît en async
 
 ### Version 2
 
-Après l'enregistrement d'un objet, il faut, pour chaque website, lancer une tâche asynchrone de synchronisation.
+Après l'enregistrement d'un objet, il faut lancer une tâche asynchrone de synchronisation.
 Cette tâche est lancée par les controllers, et intégrée dans le partial `WithGit`.
 ```
 def create
@@ -64,7 +64,7 @@ def update
 end
 
 def destroy
-  @page.save_and_sync
+  @page.destroy_and_sync
 end
 ```
 
@@ -76,8 +76,8 @@ def reorder
   pages.first.sync_with_git
 end
 ```
-
-TODO gérer la suppression correctement
+TODO vérifier que tous les cas de déplacement sont correctement gérés.
+TODO gérer la suppression correctement.
 
 ## Code
 
@@ -88,7 +88,7 @@ Le website a un trait WithRepository qui gère son rapport avec le repository Gi
 ### Objets exportables vers Git
 
 Tous les objets qui doivent être exportés vers Git :
-- doivent utiliser le partial `WithGit`, qui gère l'export vers les repositories des objets et de leurs dépendances
+- doivent utiliser le concern `WithGit`, qui gère l'export vers les repositories des objets et de leurs dépendances
 - doivent présenter une méthode `websites`, éventuellement avec un seul website dans un tableau
 - peuvent intégrer le concern `WithMedia` s'il utilise des médias (`featured_image` et/ou images dans des rich texts)
 - peuvent présenter une méthode `static_files` qui liste les identifiants des git_files à générer, pour les objets qui créent plusieurs fichiers
@@ -110,8 +110,8 @@ Pour cela, le git_file dispose des propriétés suivantes :
 
 Pour informer sur les actions à mener, il dispose des méthodes interrogatives suivantes :
 - synchronized_with_git? (pour évaluer l'intégrité vs le repository)
-- should_create? (pour savoir s'il faut regénérer ou pas)
-- should_update? (pour savoir s'il faut regénérer ou pas)
+- should_create? (pour savoir s'il faut créer ou pas)
+- should_update? (pour savoir s'il faut régénérer ou pas)
 - should_destroy? (pour savoir s'il faut supprimer)
 
 
