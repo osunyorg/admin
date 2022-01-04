@@ -32,3 +32,13 @@ ActiveStorage::Filename.class_eval do
     [base_filename, extension_with_delimiter].join('')
   end
 end
+
+module ActiveStorageGitPathStatic
+  def git_path_static
+    "data/media/#{id[0..1]}/#{id}.yml"
+  end
+end
+
+ActiveSupport::Reloader.to_prepare do
+  ActiveStorage::Blob.include ActiveStorageGitPathStatic
+end

@@ -37,4 +37,9 @@ class Communication::Website::Home < ApplicationRecord
   def git_path_static
     'content/_index.html'
   end
+
+  def git_dependencies_static
+    active_storage_blobs
+  end
+
 end

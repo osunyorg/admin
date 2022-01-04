@@ -76,7 +76,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_dependencies_static
-    descendents + siblings
+    descendents + siblings + active_storage_blobs
   end
 
   def to_s
@@ -95,6 +95,10 @@ class Communication::Website::Page < ApplicationRecord
       child.update_column :path, child.generated_path
       child.update_children_paths
     end
+  end
+
+  def siblings
+    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
   protected

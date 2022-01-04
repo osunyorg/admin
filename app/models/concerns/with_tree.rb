@@ -24,7 +24,7 @@ module WithTree
     end
 
     def siblings
-      self.class.where(parent: parent, university: university, website: website).where.not(id: id)
+      self.class.unscoped.where(parent: parent, university: university).where.not(id: id)
     end
 
     def self_and_children(level)
