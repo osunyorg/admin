@@ -119,6 +119,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
     menu.sync_with_git
   end
 
+  def siblings
+    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+  end
+
   protected
 
   def set_position

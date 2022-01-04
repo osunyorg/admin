@@ -72,7 +72,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def git_dependencies_static
-    [author] + categories
+    [author] + categories + active_storage_blobs
   end
 
   def to_s

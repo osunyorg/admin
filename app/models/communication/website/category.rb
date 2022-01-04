@@ -89,6 +89,10 @@ class Communication::Website::Category < ApplicationRecord
     end
   end
 
+  def siblings
+    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+  end
+
   protected
 
   def set_position
