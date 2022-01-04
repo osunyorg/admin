@@ -34,6 +34,12 @@ ActiveStorage::Filename.class_eval do
 end
 
 module ActiveStorageGitPathStatic
+  extend ActiveSupport::Concern
+
+  included do
+    has_many :git_files, class_name: "Communication::Website::GitFile", as: :about, dependent: :destroy
+  end
+
   def git_path_static
     "data/media/#{id[0..1]}/#{id}.yml"
   end
