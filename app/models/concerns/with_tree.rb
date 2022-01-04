@@ -23,6 +23,10 @@ module WithTree
                     : []
     end
 
+    def siblings
+      self.class.where(parent: parent).where.not(id: id)
+    end
+
     def self_and_children(level)
       elements = []
       label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s

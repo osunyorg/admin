@@ -17,12 +17,10 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
       pages.concat(page.descendents) if parent_id != page.parent_id
       page.update(
         parent_id: parent_id,
-        position: index + 1,
-        skip_github_publication: true
+        position: index + 1
       )
     end
-    github = Github.with_website @website
-    github.send_batch_to_website(pages, message: '[Page] Reorder pages.')
+    pages.first.sync_with_git
   end
 
   def children

@@ -40,17 +40,6 @@ module WithGit
     destroy
   end
 
-  protected
-
-  # Overridden for multiple files generation
-  def identifiers
-    [:static]
-  end
-
-  def git_dependencies(identifier)
-    []
-  end
-
   def sync_with_git
     websites.each do |website|
       identifiers.each do |identifier|
@@ -63,4 +52,15 @@ module WithGit
     end
   end
   handle_asynchronously :sync_with_git
+
+  protected
+
+  # Overridden for multiple files generation
+  def identifiers
+    [:static]
+  end
+
+  def git_dependencies(identifier)
+    []
+  end
 end

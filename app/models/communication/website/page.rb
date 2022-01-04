@@ -76,7 +76,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_dependencies(identifier)
-    descendents
+    descendents + siblings
   end
 
   def list_of_other_pages

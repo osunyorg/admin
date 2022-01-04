@@ -69,8 +69,12 @@ end
 ```
 
 
-Pour les reorder :
+Pour les reorder, chaque objet doit avoir ses siblings en dépendance, donc il suffit de synchroniser un objet déplacé pour qu'il gère l'ensemble :
 ```
+def reorder
+  ...
+  pages.first.sync_with_git
+end
 ```
 
 TODO gérer la suppression correctement
