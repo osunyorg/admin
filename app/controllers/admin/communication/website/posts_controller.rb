@@ -27,8 +27,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def create
     @post.website = @website
-    if @post.save
-      @post.sync_with_git
+    if @post.save_and_sync
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
       breadcrumb
@@ -37,8 +36,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def update
-    if @post.update(post_params)
-      @post.sync_with_git
+    if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
       breadcrumb
@@ -48,7 +46,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def destroy
-    @post.destroy
+    @post.destroy_and_sync
     redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)
   end
 

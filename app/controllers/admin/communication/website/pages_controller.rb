@@ -51,8 +51,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def create
     @page.website = @website
-    if @page.save
-      @page.sync_with_git
+    if @page.save_and_sync
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
     else
       breadcrumb
@@ -61,8 +60,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def update
-    if @page.update(page_params)
-      @page.sync_with_git
+    if @page.update_and_sync(page_params)
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
     else
       breadcrumb
@@ -72,7 +70,7 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def destroy
-    @page.destroy
+    @page.destroy_and_sync
     redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
   end
 

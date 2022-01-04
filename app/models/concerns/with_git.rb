@@ -8,6 +8,49 @@ module WithGit
               dependent: :destroy
   end
 
+  def git_path_static
+    ''
+  end
+
+  # Overridden if websites relation exists
+  def websites
+    [website]
+  end
+
+  def save_and_sync
+    if save
+      sync_with_git
+      true
+    else
+      false
+    end
+  end
+
+  def update_and_sync(params)
+    if update(params)
+      sync_with_git
+      true
+    else
+      false
+    end
+  end
+
+  def destroy_and_sync
+    # TODO
+    destroy
+  end
+
+  protected
+
+  # Overridden for multiple files generation
+  def identifiers
+    [:static]
+  end
+
+  def git_dependencies(identifier)
+    []
+  end
+
   def sync_with_git
     websites.each do |website|
       identifiers.each do |identifier|
@@ -20,22 +63,4 @@ module WithGit
     end
   end
   handle_asynchronously :sync_with_git
-
-  def git_path_static
-    ''
-  end
-
-  def git_dependencies(identifier)
-    []
-  end
-
-  # Overridden for multiple files generation
-  def identifiers
-    [:static]
-  end
-
-  # Overridden if websites relation exists
-  def websites
-    [website]
-  end
 end

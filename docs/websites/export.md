@@ -52,18 +52,19 @@ Après l'enregistrement d'un objet, il faut, pour chaque website, lancer une tâ
 Cette tâche est lancée par les controllers, et intégrée dans le partial `WithGit`.
 ```
 def create
-  @page.website = @website
-  if @page.save
-    @page.sync_with_git
+  if @page.save_and_sync
     ...
   end
 end
 
 def update
-  if @page.update(page_params)
-    @page.sync_with_git
+  if @page.update_and_sync(page_params)
     ...
   end
+end
+
+def destroy
+
 end
 ```
 
