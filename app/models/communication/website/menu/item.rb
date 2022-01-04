@@ -62,7 +62,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   validates :about, presence: true, if: :has_about?
 
   before_create :set_position
-  after_commit :force_publish_menu, unless: :skip_publication_callback
+  after_commit :sync_menu
 
   scope :ordered, -> { order(position: :asc) }
 
@@ -115,19 +115,15 @@ class Communication::Website::Menu::Item < ApplicationRecord
     kind_page? || kind_program? || kind_news_category? || kind_news_article?
   end
 
-  def force_publish_menu
-    menu.force_publish!
+  def sync_menu
+    menu.sync_with_git
   end
 
   protected
 
   def set_position
     last_element = menu.items.where(parent_id: parent_id).ordered.last
-
-    unless last_element.nil?
-      self.position = last_element.position + 1
-    else
-      self.position = 1
-    end
+    self.position = last_element.nil? ? 1
+                                      : last_element.position + 1
   end
 end

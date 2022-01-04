@@ -10,7 +10,7 @@
           <%= f.input :description %>
           <%= f.input :text, as: :rich_text_area %>
           <%= f.association :related_category,
-                            collection: @website.list_of_categories,
+                            collection: collection_tree(@website.categories),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } if @website.categories.any? %>
         </div>
@@ -30,7 +30,7 @@
                       } %>
           <%= f.input :published %>
           <%= f.association :parent,
-                            collection: collection_tree(page.website.pages, page),
+                            collection: collection_tree(@website.pages, page),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
           <ul>

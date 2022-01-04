@@ -72,12 +72,13 @@ module Admin::ApplicationHelper
     sanitize text
   end
 
-  def collection_tree(list, except)
+  def collection_tree(list, except = nil)
     collection = []
     list.root.ordered.each do |object|
       collection.concat(object.self_and_children(0))
     end
-    collection.reject { |o| o[:id] == except.id }
+    collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
+    collection
   end
 
   private
