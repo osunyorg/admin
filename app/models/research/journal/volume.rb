@@ -34,6 +34,7 @@ class Research::Journal::Volume < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id
   has_many :websites, -> { distinct }, through: :journal
+  has_many :researchers, through: :articles
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
@@ -43,6 +44,18 @@ class Research::Journal::Volume < ApplicationRecord
 
   def website
     journal.website
+  end
+
+  def git_path_static
+    if published_at
+      "content/volumes/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+    else
+      nil
+    end
+  end
+
+  def git_dependencies_static
+    articles + researchers
   end
 
   def to_s

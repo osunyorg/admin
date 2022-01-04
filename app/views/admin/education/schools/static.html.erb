@@ -1,0 +1,14 @@
+---
+name: >
+  <%= @school.name %>
+address: >
+  <%= @school.address %>
+zipcode: >
+  <%= @school.zipcode %>
+city: >
+  <%= @school.city %>
+country: >
+  <%= ISO3166::Country[@school.country].translations[@school.country.downcase] %>
+phone: >
+  <%= @school.phone %>
+---

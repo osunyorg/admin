@@ -38,7 +38,7 @@ class Git::Repository
       elsif file.should_update?
         provider.update_file file.path, file.previous_path, file.to_s
       elsif file.should_destroy?
-        provider.destroy_file file.path
+        provider.destroy_file file.previous_path
       end
     end
   end

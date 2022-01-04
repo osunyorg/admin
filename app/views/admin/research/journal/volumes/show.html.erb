@@ -25,7 +25,7 @@
         <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('number') %></h3>
         <p><%= @volume.number %></p>
         <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('published_at') %></h3>
-        <p><%=l @volume.published_at.to_time, format: :date_with_explicit_month %></p>
+        <p><%= l @volume.published_at.to_time, format: :date_with_explicit_month if @volume.published_at %></p>
       </div>
     </div>
     <% if @volume.cover.attached? %>

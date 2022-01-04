@@ -23,7 +23,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   end
 
   def create
-    if @journal.save
+    if @journal.save_and_sync
       redirect_to [:admin, @journal], notice: t('admin.successfully_created_html', model: @journal.to_s)
     else
       breadcrumb
@@ -32,7 +32,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   end
 
   def update
-    if @journal.update(journal_params)
+    if @journal.update_and_sync(journal_params)
       redirect_to [:admin, @journal], notice: t('admin.successfully_updated_html', model: @journal.to_s)
     else
       breadcrumb
@@ -42,7 +42,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   end
 
   def destroy
-    @journal.destroy
+    @journal.destroy_and_sync
     redirect_to admin_research_journals_url, notice: t('admin.successfully_destroyed_html', model: @journal.to_s)
   end
 

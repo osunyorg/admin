@@ -39,12 +39,11 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def should_update?
-    previous_path != path || previous_sha != sha
+    !path.nil? && (previous_path != path || previous_sha != sha)
   end
 
   def should_destroy?
-    # TODO
-    false
+    path.nil?
   end
 
   def path

@@ -21,7 +21,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
 
   def create
     @volume.assign_attributes(journal: @journal, university: current_university)
-    if @volume.save
+    if @volume.save_and_sync
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
     else
       breadcrumb
@@ -30,7 +30,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def update
-    if @volume.update(volume_params)
+    if @volume.update_and_sync(volume_params)
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
     else
       breadcrumb
@@ -40,7 +40,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def destroy
-    @volume.destroy
+    @volume.destroy_and_sync
     redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s)
   end
 

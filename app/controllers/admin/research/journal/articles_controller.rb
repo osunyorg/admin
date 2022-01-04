@@ -24,7 +24,7 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
       university: current_university,
       updated_by: current_user
     )
-    if @article.save
+    if @article.save_and_sync
       redirect_to admin_research_journal_article_path(@article), notice: t('admin.successfully_created_html', model: @article.to_s)
     else
       breadcrumb
@@ -34,7 +34,7 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
 
   def update
     @article.updated_by = current_user
-    if @article.update(article_params)
+    if @article.update_and_sync(article_params)
       redirect_to admin_research_journal_article_path(@article), notice: t('admin.successfully_updated_html', model: @article.to_s)
     else
       breadcrumb
@@ -44,7 +44,7 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
   end
 
   def destroy
-    @article.destroy
+    @article.destroy_and_sync
     redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @article.to_s)
   end
 

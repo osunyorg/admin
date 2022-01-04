@@ -27,6 +27,7 @@ class Research::Journal < ApplicationRecord
   has_many :websites, class_name: 'Communication::Website', as: :about
   has_many :volumes, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_id
+  has_many :researchers, through: :articles
 
   scope :ordered, -> { order(:title) }
 
@@ -34,15 +35,11 @@ class Research::Journal < ApplicationRecord
     "#{title}"
   end
 
-  def git_path_static
-    "data/journal.yml"
+  def git_dependencies_static
+    articles + volumes + researchers
   end
 
-  def to_static(github_file)
-    {
-      title: title,
-      description: description,
-      issn: issn
-    }.deep_stringify_keys.to_yaml.lines[1..-1].join
+  def git_path_static
+    "data/journal.yml"
   end
 end

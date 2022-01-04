@@ -33,7 +33,7 @@ class Communication::Website < ApplicationRecord
   include WithAbouts
   include WithImport
 
-  belongs_to  :university
+  belongs_to :university
 
   scope :ordered, -> { order(:name) }
 
@@ -46,6 +46,6 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies_static
-    pages + posts + categories + menus + members + [home]
+    (pages + posts + categories + menus + members + [home] + [about]).compact
   end
 end

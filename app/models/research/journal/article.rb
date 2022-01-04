@@ -48,12 +48,23 @@ class Research::Journal::Article < ApplicationRecord
   has_many :websites, -> { distinct }, through: :journal
 
   validates :title, :published_at, presence: true
-  after_commit :update_researchers
 
   scope :ordered, -> { order(:published_at, :created_at) }
 
   def pdf_path
     "/assets/articles/#{id}/#{pdf.filename}"
+  end
+
+  def git_path_static
+    if published_at
+      "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+    else
+      nil
+    end
+  end
+
+  def git_dependencies_static
+    researchers
   end
 
   def to_s

@@ -2,7 +2,7 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
-    has_many :git_files,
+    has_many :website_git_files,
              class_name: 'Communication::Website::GitFile',
              dependent: :destroy
   end
