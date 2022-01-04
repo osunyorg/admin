@@ -64,8 +64,13 @@ def update
 end
 
 def destroy
-
+  @page.save_and_sync
 end
+```
+
+
+Pour les reorder :
+```
 ```
 
 TODO gérer la suppression correctement
@@ -85,11 +90,12 @@ Tous les objets qui doivent être exportés vers Git :
 - peuvent présenter une méthode `static_files` qui liste les identifiants des git_files à générer, pour les objets qui créent plusieurs fichiers
 
 ### GitFile
+
 La responsabilité de la synchronisation repose sur Communication::Website::GitFile, notamment :
-- le fichier doit-il être synchronisé ?
-- le fichier doit-il être créé ?
-- le fichier doit-il être déplacé ?
-- le fichier doit-il être supprimé ?
+- l'information est-elle intègre, synchronisée avec le repo ? (previous_sha et previous_path cohérents avec le repo git)
+- le fichier doit-il être créé ? (non intègre, ou pas de previous_sha/previous_path)
+- le fichier doit-il être mis à jour ? (non intègre, ou previous_sha/previous_path différent du sha/path)
+- le fichier doit-il être supprimé ? (TODO)
 
 
 Pour cela, le git_file dispose des propriétés suivantes :
@@ -98,8 +104,14 @@ Pour cela, le git_file dispose des propriétés suivantes :
 - identifier (l'identifiant du fichier à créer, `static` par défaut, pour les objets créant plusieurs fichiers)
 
 
-Et pour générer les fichiers, il dispose des méthodes :
+Pour informer sur les actions à mener, il dispose des méthodes interrogatives suivantes :
+- synchronized_with_git? (pour évaluer l'intégrité vs le repository)
+- should_create? (pour savoir s'il faut regénérer ou pas)
+- should_update? (pour savoir s'il faut regénérer ou pas)
+- should_destroy? (pour savoir s'il faut supprimer)
+
+
+Pour générer les fichiers, il dispose des méthodes :
 - to_s (pour générer le fichier statique à jour)
 - sha (pour calculer le hash du fichier à jour)
 - path (pour générer le chemin à jour)
-- synced? (pour savoir s'il faut regénérer ou pas)

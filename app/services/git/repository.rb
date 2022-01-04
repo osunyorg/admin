@@ -16,6 +16,10 @@ class Git::Repository
     mark_as_synced if provider.push(commit_message)
   end
 
+  def git_sha(path)
+    provider.git_sha path
+  end
+
   protected
 
   def provider
@@ -27,11 +31,14 @@ class Git::Repository
   end
 
   def sync_git_files
-    git_files.each do |git_file|
-      next if git_file.synced?
-      provider.add_to_batch path: git_file.path,
-                            previous_path: git_file.previous_path,
-                            data: git_file.to_s
+    git_files.each do |file|
+      if file.should_create?
+        provider.create_file file.path, file.to_s
+      elsif file.should_update?
+        provider.update_file file.path, file.previous_path, file.to_s
+      elsif file.should_destroy?
+        provider.destroy_file file.path
+      end
     end
   end
 

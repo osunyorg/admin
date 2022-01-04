@@ -6,32 +6,40 @@ class Git::Providers::Github
     @repository = repository
   end
 
-  def add_to_batch( path: nil,
-                    previous_path: nil,
-                    data:)
+  def create_file(path, content)
+    batch << {
+      path: path,
+      mode: '100644', # https://docs.github.com/en/rest/reference/git#create-a-tree
+      type: 'blob',
+      content: content
+    }
+  end
+
+  def update_file(path, previous_path, content)
     file = find_in_tree previous_path
-    if file.nil? # New file
-      batch << {
-        path: path,
-        mode: '100644', # https://docs.github.com/en/rest/reference/git#create-a-tree
-        type: 'blob',
-        content: data
-      }
-    elsif previous_path != path || git_sha(previous_path) != sha(data)
-      # Different path or content
-      batch << {
-        path: previous_path,
-        mode: file[:mode],
-        type: file[:type],
-        sha: nil
-      }
-      batch << {
-        path: path,
-        mode: file[:mode],
-        type: file[:type],
-        content: data
-      }
-    end
+    batch << {
+      path: previous_path,
+      mode: file[:mode],
+      type: file[:type],
+      sha: nil
+    }
+    batch << {
+      path: path,
+      mode: file[:mode],
+      type: file[:type],
+      content: content
+    }
+  end
+
+  def destroy_file(path)
+    file = find_in_tree path
+    return if file.nil?
+    batch << {
+      path: path,
+      mode: file[:mode],
+      type: file[:type],
+      sha: nil
+    }
   end
 
   def push(commit_message)
@@ -41,6 +49,16 @@ class Git::Providers::Github
     commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
     client.update_branch repository, default_branch, commit[:sha]
     true
+  end
+
+  def git_sha(path)
+    begin
+      content = client.content repository, path: path
+      sha = content[:sha]
+    rescue
+      sha = nil
+    end
+    sha
   end
 
   protected
@@ -67,22 +85,6 @@ class Git::Providers::Github
 
   def tree
     @tree ||= client.tree repository, branch_sha, recursive: true
-  end
-
-  def git_sha(path)
-    begin
-      content = client.content repository, path: path
-      sha = content[:sha]
-    rescue
-      sha = nil
-    end
-    sha
-  end
-
-  def sha(data)
-    # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
-    # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
-    OpenSSL::Digest::SHA1.hexdigest "blob #{data.bytesize}\x00#{data}"
   end
 
   def find_in_tree(path)

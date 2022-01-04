@@ -30,8 +30,21 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
-  def synced?
-    previous_path == path && previous_sha == sha
+  def synchronized_with_git?
+    git_sha == previous_sha
+  end
+
+  def should_create?
+    !synchronized_with_git? || previous_path.nil? || previous_sha.nil?
+  end
+
+  def should_update?
+    !synchronized_with_git? || previous_path != path || previous_sha != sha
+  end
+
+  def should_destroy?
+    # TODO
+    false
   end
 
   def path
@@ -54,6 +67,10 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
+
+  def git_sha
+    @git_sha ||= website.git_repository.git_sha previous_path
+  end
 
   # def add_media_to_batch(github)
   #   return unless manifest_data[:has_media] && about.respond_to?(:active_storage_blobs)
