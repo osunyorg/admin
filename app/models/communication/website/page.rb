@@ -75,7 +75,7 @@ class Communication::Website::Page < ApplicationRecord
     "content/pages/#{path}/_index.html".gsub(/\/+/, '/')
   end
 
-  def git_dependencies(identifier)
+  def git_dependencies_static
     descendents + siblings
   end
 

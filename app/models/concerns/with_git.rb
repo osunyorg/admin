@@ -45,7 +45,8 @@ module WithGit
     websites.each do |website|
       identifiers.each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier
-        git_dependencies(identifier).each do |object|
+        dependencies = send "git_dependencies_#{identifier}"
+        dependencies.each do |object|
           Communication::Website::GitFile.sync website, object, identifier
         end
       end
@@ -61,7 +62,7 @@ module WithGit
     [:static]
   end
 
-  def git_dependencies(identifier)
+  def git_dependencies_static
     []
   end
 end

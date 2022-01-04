@@ -71,6 +71,10 @@ class Communication::Website::Post < ApplicationRecord
     "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
+  def git_dependencies_static
+    [author] + categories
+  end
+
   def to_s
     "#{title}"
   end

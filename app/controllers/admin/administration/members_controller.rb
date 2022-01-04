@@ -22,7 +22,7 @@ class Admin::Administration::MembersController < Admin::Administration::Applicat
   end
 
   def create
-    if @member.save
+    if @member.save_and_sync
       redirect_to admin_administration_member_path(@member), notice: t('admin.successfully_created_html', model: @member.to_s)
     else
       breadcrumb
@@ -31,7 +31,7 @@ class Admin::Administration::MembersController < Admin::Administration::Applicat
   end
 
   def update
-    if @member.update(member_params)
+    if @member.update_and_sync(member_params)
       redirect_to admin_administration_member_path(@member), notice: t('admin.successfully_updated_html', model: @member.to_s)
     else
       breadcrumb
@@ -41,7 +41,7 @@ class Admin::Administration::MembersController < Admin::Administration::Applicat
   end
 
   def destroy
-    @member.destroy
+    @member.destroy_and_sync
     redirect_to admin_administration_members_url, notice: t('admin.successfully_destroyed_html', model: @member.to_s)
   end
 

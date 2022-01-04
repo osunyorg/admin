@@ -36,11 +36,6 @@ class Administration::Member < ApplicationRecord
   belongs_to :university
   belongs_to :user, optional: true
 
-  has_many :communication_website_posts,
-           class_name: 'Communication::Website::Post',
-           foreign_key: :author_id,
-           dependent: :nullify
-
   has_and_belongs_to_many :research_journal_articles,
                           class_name: 'Research::Journal::Article',
                           join_table: :research_journal_articles_researchers,
@@ -52,29 +47,42 @@ class Administration::Member < ApplicationRecord
                           foreign_key: :education_teacher_id,
                           association_foreign_key: :education_program_id
 
-  has_many :communication_websites,
-           -> { distinct },
-           through: :communication_website_posts,
-           source: :website
-  has_many :research_websites,
-           -> { distinct },
-           through: :research_journal_articles,
-           source: :websites
-  has_many :education_websites,
-           -> { distinct },
-           through: :education_programs,
-           source: :websites
+  has_many                :communication_website_posts,
+                          class_name: 'Communication::Website::Post',
+                          foreign_key: :author_id,
+                          dependent: :nullify
 
-  validates_presence_of :first_name, :last_name
-  validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
-  validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
+  has_many                :communication_websites,
+                          -> { distinct },
+                          through: :communication_website_posts,
+                          source: :website
+
+  has_many                :research_websites,
+                          -> { distinct },
+                          through: :research_journal_articles,
+                          source: :websites
+
+  has_many                :education_websites,
+                          -> { distinct },
+                          through: :education_programs,
+                          source: :websites
+
+  validates_presence_of   :first_name, :last_name
+  validates_uniqueness_of :email,
+                          scope: :university_id,
+                          allow_blank: true,
+                          if: :will_save_change_to_email?
+  validates_format_of     :email,
+                          with: Devise::email_regexp,
+                          allow_blank: true,
+                          if: :will_save_change_to_email?
 
 
-  scope :ordered, -> { order(:last_name, :first_name) }
+  scope :ordered,         -> { order(:last_name, :first_name) }
   scope :administratives, -> { where(is_administrative: true) }
-  scope :authors, -> { where(is_author: true) }
-  scope :teachers, -> { where(is_teacher: true) }
-  scope :researchers, -> { where(is_researcher: true) }
+  scope :authors,         -> { where(is_author: true) }
+  scope :teachers,        -> { where(is_teacher: true) }
+  scope :researchers,     -> { where(is_researcher: true) }
 
   def to_s
     "#{first_name} #{last_name}"
@@ -88,68 +96,47 @@ class Administration::Member < ApplicationRecord
     ].flatten.uniq)
   end
 
-  def github_manifest
-    manifest = []
-    manifest.concat(author_github_manifest_items) if is_author?
-    manifest.concat(researcher_github_manifest_items) if is_researcher?
-    manifest.concat(teacher_github_manifest_items) if is_teacher?
-    manifest.concat(administrator_github_manifest_items) if is_administrative?
-    manifest
+  def identifiers
+    [:static, :author, :researcher, :teacher, :administrator]
   end
 
-  def author_github_manifest_items
-    [
-      {
-        identifier: "author",
-        generated_path: -> (github_file) { "content/authors/#{slug}/_index.html" },
-        data: -> (github_file) { ApplicationController.render(
-          template: "admin/communication/website/authors/static",
-          layout: false,
-          assigns: { author: self, github_file: github_file }
-        ) }
-      }
-    ]
+  def git_path_static
+    "content/persons/#{slug}.html"
   end
 
-  def researcher_github_manifest_items
-    [
-      {
-        identifier: "researcher",
-        generated_path: -> (github_file) { "content/researchers/#{slug}/_index.html" },
-        data: -> (github_file) { ApplicationController.render(
-          template: "admin/research/researchers/static",
-          layout: false,
-          assigns: { researcher: self, github_file: github_file }
-        ) }
-      }
-    ]
+  def git_path_author
+    "content/authors/#{slug}/_index.html"
   end
 
-  def teacher_github_manifest_items
-    [
-      {
-        identifier: "teacher",
-        generated_path: -> (github_file) { "content/teachers/#{slug}/_index.html" },
-        data: -> (github_file) { ApplicationController.render(
-          template: "admin/education/teachers/static",
-          layout: false,
-          assigns: { teacher: self, github_file: github_file }
-        ) }
-      }
-    ]
+  def git_path_researcher
+    "content/researchers/#{slug}/_index.html"
   end
 
-  def administrator_github_manifest_items
-    [
-      {
-        identifier: "administrator",
-        generated_path: -> (github_file) { "content/administrators/#{slug}/_index.html" },
-        data: -> (github_file) { ApplicationController.render(
-          template: "admin/administration/members/static",
-          layout: false,
-          assigns: { member: self, github_file: github_file }
-        ) }
-      }
-    ]
+  def git_path_teacher
+    "content/teachers/#{slug}/_index.html"
+  end
+
+  def git_path_administrator
+    "content/administrators/#{slug}/_index.html"
+  end
+
+  def git_dependencies_static
+    []
+  end
+
+  def git_dependencies_author
+    []
+  end
+
+  def git_dependencies_researcher
+    []
+  end
+
+  def git_dependencies_teacher
+    []
+  end
+
+  def git_dependencies_administrator
+    []
   end
 end
