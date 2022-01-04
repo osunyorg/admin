@@ -45,7 +45,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
 
   def create
     @website.university = current_university
-    if @website.save
+    if @website.save_and_sync
       redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s)
     else
       breadcrumb
@@ -54,7 +54,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def update
-    if @website.update(website_params)
+    if @website.update_and_sync(website_params)
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s)
     else
       breadcrumb

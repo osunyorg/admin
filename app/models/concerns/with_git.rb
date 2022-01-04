@@ -13,11 +13,6 @@ module WithGit
     raise NotImplementedError
   end
 
-  # Overridden if websites relation exists
-  def websites
-    [website]
-  end
-
   def save_and_sync
     if save
       sync_with_git
@@ -42,7 +37,7 @@ module WithGit
   end
 
   def sync_with_git
-    websites.each do |website|
+    websites_with_fallback.each do |website|
       identifiers.each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier
         dependencies = send "git_dependencies_#{identifier}"
@@ -56,6 +51,18 @@ module WithGit
   handle_asynchronously :sync_with_git
 
   protected
+
+  def websites_with_fallback
+    if is_a? Communication::Website
+      [self]
+    elsif respond_to?(:websites)
+      websites
+    elsif respond_to?(:website)
+      [website]
+    else
+      []
+    end
+  end
 
   # Overridden for multiple files generation
   def identifiers

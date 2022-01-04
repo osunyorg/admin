@@ -28,66 +28,17 @@
 #
 class Communication::Website < ApplicationRecord
   include WithGitRepository
-  include WithCategories
+  include WithGit
+  include WithHome
+  include WithAbouts
+  include WithImport
 
   belongs_to  :university
-  belongs_to  :about,
-              polymorphic: true,
-              optional: true
-  has_one     :home,
-              class_name: 'Communication::Website::Home',
-              foreign_key: :communication_website_id,
-              dependent: :destroy
-  has_many    :pages,
-              foreign_key: :communication_website_id,
-              dependent: :destroy
-  has_many    :posts,
-              foreign_key: :communication_website_id,
-              dependent: :destroy
-  has_many    :categories,
-              class_name: 'Communication::Website::Category',
-              foreign_key: :communication_website_id,
-              dependent: :destroy
-  has_many    :menus,
-              class_name: 'Communication::Website::Menu',
-              foreign_key: :communication_website_id,
-              dependent: :destroy
-  has_one     :imported_website,
-              class_name: 'Communication::Website::Imported::Website',
-              dependent: :destroy
-  has_many    :git_files,
-              class_name: 'Communication::Website::GitFile',
-              dependent: :destroy
-
-  after_create :create_home
-  after_save :publish_about_object, if: :saved_change_to_about_id?
-  after_save_commit :set_programs_categories!, if: -> (website) { website.about_school? }
 
   scope :ordered, -> { order(:name) }
 
-  def self.about_types
-    [nil, Education::School.name, Research::Journal.name]
-  end
-
   def to_s
     "#{name}"
-  end
-
-  def programs
-    about_school? ? about.programs : Education::Program.none
-  end
-
-  def import!
-    imported_website = Communication::Website::Imported::Website.where(
-      website: self, university: university
-    ).first_or_create unless imported?
-
-    imported_website.run!
-    imported_website
-  end
-
-  def imported?
-    !imported_website.nil?
   end
 
   def list_of_pages
@@ -114,13 +65,11 @@ class Communication::Website < ApplicationRecord
     all_programs
   end
 
-  protected
-
-  def create_home
-    build_home(university_id: university_id).save
+  def git_path_static
+    "data/website.yml"
   end
 
-  def about_school?
-    about_type == 'Education::School'
+  def git_dependencies_static
+    pages + posts + categories + menus + members + [home]
   end
 end

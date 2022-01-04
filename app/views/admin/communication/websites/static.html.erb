@@ -1,0 +1,17 @@
+title: >
+  <%= @website.to_s %>
+<% if @website.about_school? %>
+school:
+  name: >
+    <%= @website.about.to_s %>
+  address: >
+    <%= @website.about.address %>
+  zipcode: >
+    <%= @website.about.zipcode %>
+  city: >
+    <%= @website.about.city %>
+  country: >
+    <%= @website.about.country %>
+  phone: >
+    <%= @website.about.phone %>
+<% end %>

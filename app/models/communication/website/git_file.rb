@@ -61,7 +61,10 @@ class Communication::Website::GitFile < ApplicationRecord
     @to_s ||= ApplicationController.render(
       template: "admin/#{about.class.name.underscore.pluralize}/#{identifier}",
       layout: false,
-      assigns: { about.class.name.demodulize.downcase => about }
+      assigns: {
+        about.class.name.demodulize.downcase => about,
+        website: website
+      }
     )
   end
 
@@ -70,72 +73,4 @@ class Communication::Website::GitFile < ApplicationRecord
   def git_sha
     @git_sha ||= website.git_repository.git_sha previous_path
   end
-
-  # def add_media_to_batch(github)
-  #   return unless manifest_data[:has_media] && about.respond_to?(:active_storage_blobs)
-  #   about.active_storage_blobs.each { |blob| add_blob_to_batch(github, blob) }
-  # end
-  #
-  # def add_blob_to_batch(github, blob)
-  #   github.add_to_batch github_blob_params(blob)
-  # end
-  #
-  # def remove_from_github
-  #   return unless github.valid?
-  #   github.remove github_path, github_remove_commit_message
-  #   remove_media_from_github
-  # end
-  #
-  # def remove_media_from_github
-  #   return unless manifest_data[:with_media] && about.respond_to?(:active_storage_blobs)
-  #   about.active_storage_blobs.each { |blob| remove_blob_from_github(blob) }
-  # end
-  #
-  # def remove_blob_from_github(blob)
-  #   github.remove github_blob_path(blob), github_blob_remove_commit_message
-  # end
-  #
-  # def github_params
-  #   {
-  #     path: manifest_data[:generated_path].call(self),
-  #     previous_path: github_path,
-  #     data: manifest_data[:data].call(self)
-  #   }
-  # end
-  #
-  # def github_blob_params(blob)
-  #   blob.analyze unless blob.analyzed?
-  #   {
-  #     path: github_blob_path(blob),
-  #     data: ApplicationController.render(
-  #       template: 'active_storage/blobs/static',
-  #       layout: false,
-  #       assigns: { blob: blob }
-  #     )
-  #   }
-  # end
-  #
-  # def github_blob_path(blob)
-  #   "data/media/#{blob.id[0..1]}/#{blob.id}.yml"
-  # end
-  #
-  # def github_commit_message
-  #   "[#{about.class.name.demodulize} - #{manifest_identifier}] Save #{about.to_s}"
-  # end
-  #
-  # def github_remove_commit_message
-  #   "[#{about.class.name.demodulize} - #{manifest_identifier}] Remove #{about.to_s}"
-  # end
-  #
-  # def github_blob_remove_commit_message(blob)
-  #   "[Medium] Remove ##{blob.id}"
-  # end
-  #
-  # def valid_for_publication?
-  #   if about.respond_to?(:published)
-  #     about.published?
-  #   else
-  #     true
-  #   end
-  # end
 end

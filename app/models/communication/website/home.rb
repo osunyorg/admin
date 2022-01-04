@@ -31,19 +31,10 @@ class Communication::Website::Home < ApplicationRecord
   has_one_attached_deletable :featured_image
 
   def to_s
-    ''
-  end
-
-  def to_static(github_file)
-    ApplicationController.render(
-      template: "admin/communication/website/home/static",
-      layout: false,
-      assigns: { home: self, github_file: github_file }
-    )
+    website.to_s
   end
 
   def git_path_static
     'content/_index.html'
   end
-
 end
