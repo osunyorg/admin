@@ -41,22 +41,6 @@ class Communication::Website < ApplicationRecord
     "#{name}"
   end
 
-  def list_of_categories
-    all_categories = []
-    categories.root.ordered.each do |category|
-      all_categories.concat(category.self_and_children(0))
-    end
-    all_categories
-  end
-
-  def list_of_programs
-    all_programs = []
-    programs.root.ordered.each do |program|
-      all_programs.concat(program.self_and_children(0))
-    end
-    all_programs
-  end
-
   def git_path_static
     "data/website.yml"
   end

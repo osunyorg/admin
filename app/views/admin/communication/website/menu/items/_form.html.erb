@@ -21,11 +21,11 @@
             <%
               if item.has_about?
                 if item.kind_page?
-                  about_collection = @website.list_of_pages
+                  about_collection = collection_tree(@website.pages)
                 elsif item.kind_program?
-                  about_collection = @website.list_of_programs
+                  about_collection = collection_tree(@website.programs)
                 elsif item.kind_news_category?
-                  about_collection = @website.list_of_categories
+                  about_collection = collection_tree(@website.categories)
                 elsif item.kind_news_article?
                   about_collection = @website.posts.ordered.map { |e| { label: e.to_s, id: e.id } }
                 end

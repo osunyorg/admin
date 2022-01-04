@@ -1,0 +1,5 @@
+<%= raw @menu.items
+             .root
+             .ordered
+             .map(&:to_static_hash)
+             .to_yaml %>

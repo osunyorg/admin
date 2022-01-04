@@ -40,8 +40,4 @@ class Communication::Website::Menu < ApplicationRecord
   def git_path_static
     "data/menus/#{identifier}.yml"
   end
-
-  def to_static(github_file)
-    items.root.ordered.map(&:to_static_hash).to_yaml
-  end
 end

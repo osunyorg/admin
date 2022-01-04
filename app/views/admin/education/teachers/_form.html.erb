@@ -7,7 +7,7 @@
       <%= f.association :education_programs,
                         as: :check_boxes,
                         legend_tag: false,
-                        collection: current_university.list_of_programs,
+                        collection: collection_tree(current_university.education_programs),
                         label_method: ->(p) { sanitize p[:label] },
                         value_method: ->(p) { p[:id] }  %>
     </div>

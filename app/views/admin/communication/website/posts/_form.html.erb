@@ -30,7 +30,7 @@
           <%= f.association :author, collection: current_university.administration_members.authors.ordered %>
           <%= f.association :categories,
                             as: :check_boxes,
-                            collection: @website.list_of_categories.map { |category| [
+                            collection: collection_tree(@website.categories).map { |category| [
                               sanitize(category[:label]),
                               category[:id],
                               { data: { parent: category[:parent_id] } }

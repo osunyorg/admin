@@ -14,16 +14,16 @@ function hideAbout() {
     hideAbout();
 <% elsif @kind == 'page' %>
     <%
-        options = ['<option value="" label=" "></option>']
-        @website.list_of_pages.each do |page|
-            options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
-        end
+    options = ['<option value="" label=" "></option>']
+    collection_tree(@website.pages).each do |page|
+        options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
+    end
     %>
     displayAbout('Communication::Website::Page', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'program' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.list_of_programs.each do |page|
+    collection_tree(@website.programs).each do |page|
         options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
     end
     %>
@@ -31,17 +31,17 @@ function hideAbout() {
 <% elsif @kind == 'news_category' %>
     <%
         options = ['<option value="" label=" "></option>']
-        @website.list_of_categories.each do |category|
+        collection_tree(@website.categories).each do |category|
             options << "<option value=\"#{category[:id]}\">#{category[:label]}</option>"
         end
     %>
     displayAbout('Communication::Website::Category', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'news_article' %>
     <%
-        options = ['<option value="" label=" "></option>']
-        @website.posts.ordered.each do |post|
-            options << "<option value=\"#{post.id}\">#{post.to_s}</option>"
-        end
+    options = ['<option value="" label=" "></option>']
+    @website.posts.ordered.each do |post|
+        options << "<option value=\"#{post.id}\">#{post.to_s}</option>"
+    end
     %>
     displayAbout('Communication::Website::Post', "<%= j(raw(options.join(''))) %>");
 <% else %>

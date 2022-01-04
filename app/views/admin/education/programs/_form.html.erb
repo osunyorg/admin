@@ -22,7 +22,7 @@
                             as: :check_boxes,
                             collection: current_university.education_schools.ordered %>
           <%= f.association :parent,
-                            collection: program.persisted? ? program.list_of_other_programs : current_university.list_of_programs,
+                            collection: collection_tree(current_university.programs, program),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
         </div>

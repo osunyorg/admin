@@ -122,10 +122,6 @@ class Education::Program < ApplicationRecord
     end
   end
 
-  def list_of_other_programs
-    university.list_of_programs.reject! { |p| p[:id] == id }
-  end
-
   def set_websites_categories
     websites.find_each(&:set_programs_categories!)
   end
