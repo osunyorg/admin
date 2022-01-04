@@ -37,25 +37,25 @@ class Communication::Website::Category < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
   include WithTree
 
-  has_one :imported_category,
-          class_name: 'Communication::Website::Imported::Category',
-          dependent: :destroy
-  belongs_to :university
-  belongs_to :website,
-             foreign_key: :communication_website_id
-  belongs_to :parent,
-            class_name: 'Communication::Website::Category',
-            optional: true
-  belongs_to :program,
-            class_name: 'Education::Program',
-            optional: true
-  has_one :imported_category,
-          class_name: 'Communication::Website::Imported::Category',
-          dependent: :destroy
-  has_many :children,
-           class_name: 'Communication::Website::Category',
-           foreign_key: :parent_id,
-           dependent: :destroy
+  has_one                 :imported_category,
+                          class_name: 'Communication::Website::Imported::Category',
+                          dependent: :destroy
+  belongs_to              :university
+  belongs_to              :website,
+                          foreign_key: :communication_website_id
+  belongs_to              :parent,
+                          class_name: 'Communication::Website::Category',
+                          optional: true
+  belongs_to              :program,
+                          class_name: 'Education::Program',
+                          optional: true
+  has_one                 :imported_category,
+                          class_name: 'Communication::Website::Imported::Category',
+                          dependent: :destroy
+  has_many                :children,
+                          class_name: 'Communication::Website::Category',
+                          foreign_key: :parent_id,
+                          dependent: :destroy
   has_and_belongs_to_many :posts,
                           class_name: 'Communication::Website::Post',
                           join_table: 'communication_website_categories_posts',
@@ -81,6 +81,10 @@ class Communication::Website::Category < ApplicationRecord
 
   def git_path_static
     "content/categories/#{path}/_index.html".gsub(/\/+/, '/')
+  end
+
+  def git_dependencies(identifier)
+    posts
   end
 
   def update_children_paths

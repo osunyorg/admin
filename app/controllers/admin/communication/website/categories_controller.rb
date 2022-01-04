@@ -22,8 +22,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
         skip_github_publication: true
       )
     end
-    github = Github.with_website @website
-    github.send_batch_to_website(categories, message: '[Category] Reorder categories.')
+    categories.first.sync_with_git
   end
 
   def children
@@ -54,7 +53,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
 
   def create
     @category.website = @website
-    if @category.save
+    if @category.save_and_sync
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
     else
       breadcrumb
@@ -63,7 +62,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   end
 
   def update
-    if @category.update(category_params)
+    if @category.update_and_sync(category_params)
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
     else
       breadcrumb
@@ -73,7 +72,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   end
 
   def destroy
-    @category.destroy
+    @category.destroy_and_sync
     redirect_to admin_communication_website_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
   end
 
