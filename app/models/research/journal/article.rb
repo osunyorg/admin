@@ -59,10 +59,4 @@ class Research::Journal::Article < ApplicationRecord
   def to_s
     "#{ title }"
   end
-
-  private
-
-  def update_researchers
-    researchers.each(&:force_publish!)
-  end
 end

@@ -34,7 +34,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def publish
-    @website.force_publish!
+    @website.sync_with_git
     redirect_to admin_communication_website_path(@website), notice: t('admin.will_be_published_html', model: @website.to_s)
   end
 

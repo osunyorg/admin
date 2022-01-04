@@ -11,7 +11,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def publish
-    @post.force_publish!
+    @post.sync_with_git
     redirect_to admin_communication_website_post_path(@post), notice: t('admin.will_be_published_html', model: @post.to_s)
   end
 
