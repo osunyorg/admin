@@ -39,7 +39,7 @@ module WithGit
 
   def destroy_from_git
     websites_with_fallback.each do |website|
-      identifiers.each do |identifier|
+      identifiers(website: website).each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier, destroy: true
         dependencies = send "git_destroy_dependencies_#{identifier}"
         dependencies.each do |object|
@@ -52,7 +52,7 @@ module WithGit
 
   def sync_with_git
     websites_with_fallback.each do |website|
-      identifiers.each do |identifier|
+      identifiers(website: website).each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier
         dependencies = send "git_dependencies_#{identifier}"
         dependencies.each do |object|
@@ -79,7 +79,7 @@ module WithGit
   end
 
   # Overridden for multiple files generation
-  def identifiers
+  def identifiers(website: nil)
     [:static]
   end
 
