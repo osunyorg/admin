@@ -47,7 +47,8 @@ class University::Person < ApplicationRecord
                           dependent: :destroy
 
   has_many                :education_programs,
-                          through: :education_program_teachers
+                          through: :education_program_teachers,
+                          source: :program
 
   has_many                :communication_website_posts,
                           class_name: 'Communication::Website::Post',
