@@ -45,6 +45,7 @@ class Communication::Website::Imported::Website < ApplicationRecord
     sync_media
     sync_pages
     sync_posts
+    website.save_and_sync
   end
   handle_asynchronously :run!, queue: 'default'
 
@@ -59,34 +60,20 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_authors
-    begin
-      skip_publish_callback(University::Person)
-      wordpress.authors.each do |data|
-        author = authors.where(university: university, identifier: data['id']).first_or_initialize
-        author.data = data
-        author.save
-      end
-      # Batch update all changes (1 query only, good for github API limits)
-      website.publish_people!
-    ensure
-      set_publish_callback(University::Person)
+    wordpress.authors.each do |data|
+      author = authors.where(university: university, identifier: data['id']).first_or_initialize
+      author.data = data
+      author.save
     end
   end
 
   def sync_categories
-    begin
-      skip_publish_callback(Communication::Website::Category)
-      wordpress.categories.each do |data|
-        category = categories.where(university: university, identifier: data['id']).first_or_initialize
-        category.data = data
-        category.save
-      end
-      sync_tree(categories)
-      # Batch update all changes (1 query only, good for github API limits)
-      website.publish_categories!
-    ensure
-      set_publish_callback(Communication::Website::Category)
+    wordpress.categories.each do |data|
+      category = categories.where(university: university, identifier: data['id']).first_or_initialize
+      category.data = data
+      category.save
     end
+    sync_tree(categories)
   end
 
   def sync_media
@@ -98,33 +85,19 @@ class Communication::Website::Imported::Website < ApplicationRecord
   end
 
   def sync_pages
-    begin
-      skip_publish_callback(Communication::Website::Page)
-      wordpress.pages.each do |data|
-        page = pages.where(university: university, identifier: data['id']).first_or_initialize
-        page.data = data
-        page.save
-      end
-      sync_tree(pages)
-      # Batch update all changes (1 query only, good for github API limits)
-      website.publish_pages!
-    ensure
-      set_publish_callback(Communication::Website::Page)
+    wordpress.pages.each do |data|
+      page = pages.where(university: university, identifier: data['id']).first_or_initialize
+      page.data = data
+      page.save
     end
+    sync_tree(pages)
   end
 
   def sync_posts
-    begin
-      skip_publish_callback(Communication::Website::Post)
-      wordpress.posts.each do |data|
-        post = posts.where(university: university, identifier: data['id']).first_or_initialize
-        post.data = data
-        post.save
-      end
-      # Batch update all changes (1 query only, good for github API limits)
-      website.publish_posts!
-    ensure
-      set_publish_callback(Communication::Website::Post)
+    wordpress.posts.each do |data|
+      post = posts.where(university: university, identifier: data['id']).first_or_initialize
+      post.data = data
+      post.save
     end
   end
 
@@ -138,14 +111,5 @@ class Communication::Website::Imported::Website < ApplicationRecord
       generated_element.parent = parent.generated_object
       generated_element.save
     end
-  end
-
-  def skip_publish_callback(model)
-    model.skip_callback(:commit, :after, :publish_github_files, on: [:create, :update])
-  end
-
-
-  def set_publish_callback(model)
-    model.set_callback(:commit, :after, :publish_github_files, on: [:create, :update])
   end
 end
