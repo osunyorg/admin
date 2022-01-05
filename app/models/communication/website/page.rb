@@ -72,7 +72,7 @@ class Communication::Website::Page < ApplicationRecord
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
   def git_path_static
-    "content/pages/#{path}/_index.html".gsub(/\/+/, '/')
+    "content/pages/#{path}/_index.html".gsub(/\/+/, '/') if published
   end
 
   def git_dependencies_static

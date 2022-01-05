@@ -25,8 +25,11 @@ class Communication::Website::GitFile < ApplicationRecord
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 
-  def self.sync(website, object, identifier)
+  attr_accessor :will_be_destroyed
+
+  def self.sync(website, object, identifier, destroy: false)
     git_file = where(website: website, about: object, identifier: identifier).first_or_create
+    git_file.will_be_destroyed = destroy
     website.git_repository.add_git_file git_file
   end
 
@@ -43,7 +46,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def should_destroy?
-    path.nil?
+    will_be_destroyed || path.nil?
   end
 
   def path

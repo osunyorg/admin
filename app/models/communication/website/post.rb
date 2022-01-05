@@ -68,7 +68,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def git_path_static
-    "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
+    "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
   end
 
   def git_dependencies_static

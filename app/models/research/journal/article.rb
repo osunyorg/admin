@@ -56,11 +56,7 @@ class Research::Journal::Article < ApplicationRecord
   end
 
   def git_path_static
-    if published_at
-      "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
-    else
-      nil
-    end
+    "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
   end
 
   def git_dependencies_static

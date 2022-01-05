@@ -6,7 +6,10 @@ class Git::Repository
   end
 
   def add_git_file(git_file)
-    @commit_message = "[#{ git_file.about.class.name }] Save #{ git_file.about }" if git_files.empty?
+    if git_files.empty?
+      action = git_file.should_destroy? ? "Destroy" : "Save"
+      @commit_message = "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
+    end
     git_files << git_file
   end
 

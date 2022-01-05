@@ -32,8 +32,18 @@ module WithGit
   end
 
   def destroy_and_sync
-    # TODO
+    destroy_from_git
     destroy
+    true
+  end
+
+  def destroy_from_git
+    websites_with_fallback.each do |website|
+      identifiers.each do |identifier|
+        Communication::Website::GitFile.sync website, self, identifier, destroy: true
+      end
+      website.git_repository.sync!
+    end
   end
 
   def sync_with_git
