@@ -38,11 +38,20 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def should_create?
-    !synchronized_with_git? || previous_path.nil? || previous_sha.nil?
+    !should_destroy? &&
+    (
+      !synchronized_with_git? ||
+      previous_path.nil? ||
+      previous_sha.nil?
+    )
   end
 
   def should_update?
-    !path.nil? && (previous_path != path || previous_sha != sha)
+    !should_destroy? &&
+    (
+      previous_path != path ||
+      previous_sha != sha
+    )
   end
 
   def should_destroy?

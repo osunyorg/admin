@@ -46,16 +46,4 @@ class Education::School < ApplicationRecord
   def git_path_static
     "data/school.yml"
   end
-
-  def to_static(github_file)
-    {
-      name: name,
-      address: address,
-      zipcode: zipcode,
-      city: city,
-      country: ISO3166::Country[country].translations[country.downcase],
-      phone: phone
-    }.deep_stringify_keys.to_yaml.lines[1..-1].join
-  end
-
 end
