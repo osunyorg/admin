@@ -24,4 +24,10 @@ class Education::Program::Teacher < ApplicationRecord
   belongs_to :person, class_name: 'University::Person'
 
   validates :person_id, uniqueness: { scope: :program_id }
+
+  scope :ordered, -> { joins(:person).order('university_people.last_name, university_people.first_name') }
+
+  def to_s
+    person.to_s
+  end
 end

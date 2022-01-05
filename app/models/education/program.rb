@@ -64,6 +64,9 @@ class Education::Program < ApplicationRecord
   has_many   :teachers,
              class_name: 'Education::Program::Teacher',
              dependent: :destroy
+  has_many   :people,
+             through: :teachers,
+             dependent: :destroy
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           join_table: 'education_programs_schools',
