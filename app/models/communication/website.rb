@@ -50,7 +50,7 @@ class Communication::Website < ApplicationRecord
       pages + pages.map(&:explicit_active_storage_blobs) +
       posts + posts.map(&:explicit_active_storage_blobs) +
       categories + menus + people +
-      [home] + home.explicit_active_storage_blobs
+      [home] + home.explicit_active_storage_blobs +
       [about]
     ).uniq.compact
   end
