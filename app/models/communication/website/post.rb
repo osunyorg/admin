@@ -75,6 +75,10 @@ class Communication::Website::Post < ApplicationRecord
     [author] + categories + active_storage_blobs
   end
 
+  def git_destroy_dependencies_static
+    explicit_active_storage_blobs
+  end
+
   def to_s
     "#{title}"
   end

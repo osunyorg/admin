@@ -32,7 +32,7 @@ class Research::Journal::Volume < ApplicationRecord
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
-  has_many :articles, foreign_key: :research_journal_volume_id
+  has_many :articles, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal
   has_many :researchers, through: :articles
 

@@ -79,7 +79,11 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def git_dependencies_static
-    posts
+    descendents + posts
+  end
+
+  def git_destroy_dependencies_static
+    descendents
   end
 
   def update_children_paths

@@ -76,7 +76,11 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_dependencies_static
-    descendents + siblings + active_storage_blobs
+    descendents + active_storage_blobs + siblings
+  end
+
+  def git_destroy_dependencies_static
+    descendents + active_storage_blobs
   end
 
   def to_s

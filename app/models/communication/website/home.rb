@@ -42,4 +42,7 @@ class Communication::Website::Home < ApplicationRecord
     active_storage_blobs
   end
 
+  def git_destroy_dependencies_static
+    active_storage_blobs
+  end
 end

@@ -25,8 +25,8 @@ class Research::Journal < ApplicationRecord
 
   belongs_to :university
   has_many :websites, class_name: 'Communication::Website', as: :about
-  has_many :volumes, foreign_key: :research_journal_id
-  has_many :articles, foreign_key: :research_journal_id
+  has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
+  has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
   has_many :researchers, through: :articles
 
   scope :ordered, -> { order(:title) }
@@ -41,5 +41,9 @@ class Research::Journal < ApplicationRecord
 
   def git_dependencies_static
     articles + volumes + researchers
+  end
+
+  def git_destroy_dependencies_static
+    articles + volumes
   end
 end

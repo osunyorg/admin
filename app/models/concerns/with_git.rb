@@ -41,6 +41,10 @@ module WithGit
     websites_with_fallback.each do |website|
       identifiers.each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier, destroy: true
+        dependencies = send "git_destroy_dependencies_#{identifier}"
+        dependencies.each do |object|
+          Communication::Website::GitFile.sync website, object, identifier, destroy: true
+        end
       end
       website.git_repository.sync!
     end
@@ -80,6 +84,10 @@ module WithGit
   end
 
   def git_dependencies_static
+    []
+  end
+
+  def git_destroy_dependencies_static
     []
   end
 end
