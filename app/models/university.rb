@@ -17,7 +17,7 @@
 #  updated_at        :datetime         not null
 #
 class University < ApplicationRecord
-  include WithAdministration
+  include WithPeople
   include WithCommunication
   include WithEducation
   include WithIdentifier

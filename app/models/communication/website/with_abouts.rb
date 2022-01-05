@@ -39,10 +39,10 @@ module Communication::Website::WithAbouts
     about_school? ? about.programs : Education::Program.none
   end
 
-  def members
-    @members ||= (
+  def people
+    @people ||= (
       posts.collect(&:author) +
-      programs.collect(&:members).flatten
+      programs.collect(&:teachers).flatten
       # TODO researchers via articles
     ).uniq.compact
   end

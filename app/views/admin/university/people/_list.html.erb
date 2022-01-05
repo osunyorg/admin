@@ -1,23 +1,23 @@
 <table class="<%= table_classes %>">
   <thead>
     <tr>
-      <th><%= Administration::Member.human_attribute_name('last_name') %></th>
-      <th><%= Administration::Member.human_attribute_name('first_name') %></th>
+      <th><%= University::Person.human_attribute_name('last_name') %></th>
+      <th><%= University::Person.human_attribute_name('first_name') %></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <% members.each do |member| %>
+    <% people.each do |person| %>
       <tr>
-        <td><%= link_to member.last_name, admin_administration_member_path(member) %></td>
-        <td><%= link_to member.first_name, admin_administration_member_path(member) %></td>
+        <td><%= link_to person.last_name, admin_university_person_path(person) %></td>
+        <td><%= link_to person.first_name, admin_university_person_path(person) %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
-                      edit_admin_administration_member_path(member),
+                      edit_admin_university_person_path(person),
                       class: button_classes %>
             <%= link_to t('delete'),
-                      admin_administration_member_path(member),
+                      admin_university_person_path(person),
                       method: :delete,
                       data: { confirm: t('please_confirm') },
                       class: button_classes_danger %>

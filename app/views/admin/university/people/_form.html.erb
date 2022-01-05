@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, member] do |f| %>
+<%= simple_form_for [:admin, person] do |f| %>
   <div class="row">
     <div class="col-md-8">
       <div class="card flex-fill w-100">
@@ -34,16 +34,16 @@
         <div class="card-body">
           <%= f.input :slug,
           as: :string,
-          input_html: member.persisted? ? {} : {
+          input_html: person.persisted? ? {} : {
             class: 'js-slug-input',
-            data: { source: '#administration_member_first_name, #administration_member_last_name' }
+            data: { source: '#university_person_first_name, #university_person_last_name' }
           } %>
           <%= f.association :user, collection: current_university.users.ordered %>
         </div>
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= Administration::Member.human_attribute_name('abilities') %></h5>
+          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('abilities') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :is_author %>

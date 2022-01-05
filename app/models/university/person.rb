@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: administration_members
+# Table name: university_people
 #
 #  id                :uuid             not null, primary key
 #  email             :string
@@ -19,15 +19,15 @@
 #
 # Indexes
 #
-#  index_administration_members_on_university_id  (university_id)
-#  index_administration_members_on_user_id        (user_id)
+#  index_university_people_on_university_id  (university_id)
+#  index_university_people_on_user_id        (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (university_id => universities.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class Administration::Member < ApplicationRecord
+class University::Person < ApplicationRecord
   include WithGit
   include WithSlug
 

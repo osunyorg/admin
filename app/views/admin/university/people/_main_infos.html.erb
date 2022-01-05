@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
+      </div>
+      <div class="card-body">
+        <% unless person.email.blank? %>
+          <h3 class="h5"><%= University::Person.human_attribute_name('email') %></h3>
+          <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
+        <% end %>
+        <% unless person.phone.blank? %>
+          <h3 class="h5"><%= University::Person.human_attribute_name('phone') %></h3>
+          <p><%= link_to person.phone, "tel:#{person.phone}", target: '_blank' %></p>
+        <% end %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
+        <%= person.biography %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= University::Person.human_attribute_name('slug') %></h3>
+        <p><%= person.slug %></p>
+        <% if person.user.present? %>
+          <h3 class="h5"><%= University::Person.human_attribute_name('user') %></h3>
+          <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

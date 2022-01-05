@@ -22,7 +22,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (author_id => administration_members.id)
+#  fk_rails_...  (author_id => university_people.id)
 #  fk_rails_...  (university_id => universities.id)
 #  fk_rails_...  (website_id => communication_website_imported_websites.id)
 #
@@ -32,7 +32,7 @@ class Communication::Website::Imported::Author < ApplicationRecord
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :author,
-             class_name: 'Administration::Member',
+             class_name: 'University::Person',
              optional: true
 
   before_validation :sync
@@ -54,7 +54,7 @@ class Communication::Website::Imported::Author < ApplicationRecord
 
   def sync
     if author.nil?
-      self.author = Administration::Member.new university: university
+      self.author = University::Person.new university: university
       self.author.last_name = "Doe" # No title yet
       self.author.first_name = "John" # No title yet
       self.is_author = true

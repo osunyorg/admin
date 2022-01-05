@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (member_id => administration_members.id)
+#  fk_rails_...  (member_id => university_people.id)
 #  fk_rails_...  (program_id => education_programs.id)
 #
 

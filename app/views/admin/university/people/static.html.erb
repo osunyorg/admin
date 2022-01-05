@@ -1,0 +1,23 @@
+---
+title: >
+  <%= @person.to_s %>
+slug: "<%= @person.slug %>"
+first_name: "<%= @person.first_name %>"
+last_name: "<%= @person.last_name %>"
+phone: "<%= @person.phone %>"
+email: "<%= @person.email %>"
+roles:
+<% if @person.is_author %>
+  - author
+<% end %>
+<% if @person.is_teacher %>
+  - teacher
+<% end %>
+<% if @person.is_researcher %>
+  - researcher
+<% end %>
+<% if @person.is_administrative %>
+  - administrator
+<% end %>
+---
+<%= prepare_for_github @person.biography, @person.university %>

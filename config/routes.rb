@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     draw 'admin/communication'
     draw 'admin/education'
     draw 'admin/research'
+    draw 'admin/university'
     root to: 'dashboard#index'
   end
 

@@ -2,7 +2,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   before_action :get_teacher, except: :index
 
   def index
-    @teachers = current_university.administration_members.teachers.accessible_by(current_ability).ordered.page(params[:page])
+    @teachers = current_university.people.teachers.accessible_by(current_ability).ordered.page(params[:page])
     breadcrumb
   end
 
@@ -29,7 +29,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   protected
 
   def get_teacher
-    @teacher = current_university.administration_members.teachers.accessible_by(current_ability).find(params[:id])
+    @teacher = current_university.people.teachers.accessible_by(current_ability).find(params[:id])
   end
 
   def breadcrumb
@@ -40,7 +40,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   end
 
   def teacher_params
-    params.require(:administration_member)
+    params.require(:university_person)
           .permit(education_program_ids: [])
   end
 end

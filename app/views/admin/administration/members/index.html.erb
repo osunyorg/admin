@@ -1,8 +1,0 @@
-<% content_for :title, "#{Administration::Member.model_name.human(count: 2)} (#{@members.total_count})" %>
-
-<%= render 'admin/administration/members/list', members: @members %>
-<%= paginate @members, theme: 'bootstrap-5' %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Administration::Member %>
-<% end %>

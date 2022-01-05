@@ -1,0 +1,49 @@
+en:
+  activerecord:
+    attributes:
+      university:
+        address: Address
+        city: City
+        country: Country
+        identifier: Identifier
+        logo: Logo
+        name: Name
+        private: Private
+        public: Public
+        public_or_private: Public/private
+        sms_sender_name: SMS sender name
+        url: 'URL'
+        zipcode: Zipcode
+      university/person:
+        abilities: Abilities
+        biography: Biography
+        communication_website_posts: Posts
+        education_programs: Programs
+        email: Email
+        first_name: First name
+        is_administrative: Administrative staff
+        is_author: Author
+        is_researcher: Researcher
+        is_teacher: Teacher
+        last_name: Last name
+        name: Name
+        phone: Phone
+        research_journal_articles: Articles
+        slug: Slug
+        user: User
+    models:
+      university:
+        one: University
+        other: Universities
+      university/person:
+        one: Person
+        other: People
+  simple_form:
+    hints:
+      university:
+        sms_sender_name: "11 characters max."
+      university_person:
+        is_administrative: "Is part of administrative staff for a school."
+        is_author: "Writes posts for websites."
+        is_researcher: "Writes articles for journals."
+        is_teacher: "Teaches in Schools."

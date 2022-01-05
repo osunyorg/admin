@@ -6,9 +6,14 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :dashboard, t('dashboard'), admin_root_path, { icon: 'tachometer-alt', highlights_on: /admin$/ }
 
+    if can?(:read, User) || can?(:read, University::Person)
+      primary.item :university, University.model_name.human, nil, { kind: :header }
+      primary.item :university, University::Person.model_name.human(count: 2), admin_university_people_path, { icon: 'users-cog' }
+    end
+
     if can?(:read, Education::Program)
       primary.item :education, Education.model_name.human, nil, { kind: :header }
-      primary.item :education, t('education.teachers', count: 2), admin_education_teachers_path, { icon: 'user-graduate' } if can?(:read, Administration::Member)
+      primary.item :education, t('education.teachers', count: 2), admin_education_teachers_path, { icon: 'user-graduate' } if can?(:read, University::Person)
       primary.item :education, Education::School.model_name.human(count: 2), admin_education_schools_path, { icon: 'university' } if can?(:read, Education::School)
       primary.item :education_programs, Education::Program.model_name.human(count: 2), admin_education_programs_path, { icon: 'graduation-cap' } if can?(:read, Education::Program)
       primary.item :education, 'Ressources éducatives', nil, { icon: 'laptop' }
@@ -17,7 +22,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, Research::Journal)
       primary.item :research, Research.model_name.human, nil, { kind: :header }
-      primary.item :research_researchers, t('research.researchers', count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' } if can?(:read, Administration::Member)
+      primary.item :research_researchers, t('research.researchers', count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' } if can?(:read, University::Person)
       primary.item :research, 'Laboratoires', nil, { icon: 'flask' }
       primary.item :research, 'Veille', nil, { icon: 'eye' }
       primary.item :research_journals, Research::Journal.model_name.human(count: 2), admin_research_journals_path, { icon: 'newspaper' } if can?(:read, Research::Journal)
@@ -30,9 +35,8 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :communication, 'Alumni', nil, { icon: 'users' }
     end
 
-    if can?(:read, User) || can?(:read, Administration::Qualiopi::Criterion)
+    if can?(:read, Administration::Qualiopi::Criterion)
       primary.item :administration, 'Administration', nil, { kind: :header }
-      primary.item :administration, Administration::Member.model_name.human(count: 2), admin_administration_members_path, { icon: 'users-cog' }
       primary.item :administration, 'Campus', nil, { icon: 'map-marker-alt' }
       primary.item :administration, 'Admissions', nil, { icon: 'door-open' }
       primary.item :administration, 'Statistiques', nil, { icon: 'cog' }
