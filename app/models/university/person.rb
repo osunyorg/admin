@@ -99,7 +99,7 @@ class University::Person < ApplicationRecord
     ].flatten.uniq)
   end
 
-  def identifiers
+  def identifiers(website: nil)
     [:static, :author, :researcher, :teacher, :administrator]
   end
 
