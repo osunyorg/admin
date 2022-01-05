@@ -23,10 +23,10 @@
           <td><%= User.human_attribute_name('language') %></td>
           <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
         </tr>
-        <% if @user.member %>
+        <% if @user.person %>
           <tr>
-            <td><%= User.human_attribute_name('member') %></td>
-            <td class="text-end"><%= link_to @user.member, [:admin, @user.member] %></td>
+            <td><%= User.human_attribute_name('person') %></td>
+            <td class="text-end"><%= link_to @user.person, [:admin, @user.person] %></td>
           </tr>
         <% end %>
       </table>

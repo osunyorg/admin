@@ -16,10 +16,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (member_id => administration_members.id)
+#  fk_rails_...  (member_id => university_people.id)
 #  fk_rails_...  (program_id => education_programs.id)
 #
 class Education::Program::Member < ApplicationRecord
   belongs_to :program, class_name: 'Education::Program', inverse_of: :members
-  belongs_to :member, class_name: 'Administration::Member'
+  belongs_to :member, class_name: 'University::Person'
 end

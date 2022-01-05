@@ -1,12 +1,12 @@
 class Admin::Communication::Website::AuthorsController < Admin::Communication::Website::ApplicationController
 
   def index
-    @authors = current_university.administration_members.authors.accessible_by(current_ability).ordered.page(params[:page])
+    @authors = current_university.people.authors.accessible_by(current_ability).ordered.page(params[:page])
     breadcrumb
   end
 
   def show
-    @author = current_university.administration_members.authors.accessible_by(current_ability).find(params[:id])
+    @author = current_university.people.authors.accessible_by(current_ability).find(params[:id])
     @posts = @author.communication_website_posts.ordered.page(params[:page])
     breadcrumb
   end

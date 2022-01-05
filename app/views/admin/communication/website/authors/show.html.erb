@@ -1,7 +1,7 @@
 <% content_for :title, @author %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'admin/administration/members/main_infos', member: @author %>
+  <%= render 'admin/university/people/main_infos', person: @author %>
 
   <% if @posts.total_count > 0 %>
     <div class="card">

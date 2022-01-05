@@ -22,7 +22,7 @@
                             as: :check_boxes,
                             collection: current_university.education_schools.ordered %>
           <%= f.association :parent,
-                            collection: collection_tree(current_university.programs, program),
+                            collection: collection_tree(current_university.education_programs, program),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
         </div>
@@ -69,7 +69,7 @@
         <div class="card-body">
           <%= f.association :teachers,
                             as: :check_boxes,
-                            collection: current_university.administration_members.teachers.ordered %>
+                            collection: current_university.people.teachers.ordered %>
         </div>
         <div class="card-body">
           <div id="js-program-members">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-md-5">
                   <%
-                  base_members = current_university.administration_members
+                  base_members = current_university.people
                   list_of_members = base_members.administratives.or(base_members.teachers).ordered
                   %>
                   <%= member_form.association :member,

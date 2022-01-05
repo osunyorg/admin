@@ -3,8 +3,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= Administration::Member.human_attribute_name('name') %></th>
-      <th><%= Administration::Member.human_attribute_name('first_name') %></th>
+      <th><%= University::Person.human_attribute_name('name') %></th>
+      <th><%= University::Person.human_attribute_name('first_name') %></th>
       <th><%= t('research.number_of_articles') %></th>
     </tr>
   </thead>
@@ -25,5 +25,5 @@
 
 
 <% content_for :action_bar_right do %>
-  <%= link_to t('research.manage_researchers'), admin_administration_members_path, class: button_classes if can?(:read, Administration::Member) %>
+  <%= link_to t('research.manage_researchers'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
 <% end %>

@@ -13,7 +13,7 @@ class Ability
   def visitor
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
-    can :read, Administration::Member
+    can :read, University::Person
     can :read, Communication::Website, university_id: @user.university_id
     can :read, Communication::Website::Page, university_id: @user.university_id
     can :read, Communication::Website::Post, university_id: @user.university_id
@@ -32,7 +32,7 @@ class Ability
   def admin
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
-    can :manage, Administration::Member
+    can :manage, University::Person
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id

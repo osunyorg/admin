@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_174641) do
+ActiveRecord::Schema.define(version: 2022_01_05_135913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -54,24 +54,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_174641) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "administration_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "user_id"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "slug"
-    t.boolean "is_author"
-    t.boolean "is_researcher"
-    t.boolean "is_teacher"
-    t.boolean "is_administrative"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "phone"
-    t.string "email"
-    t.index ["university_id"], name: "index_administration_members_on_university_id"
-    t.index ["user_id"], name: "index_administration_members_on_user_id"
   end
 
   create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -501,6 +483,24 @@ ActiveRecord::Schema.define(version: 2022_01_03_174641) do
     t.string "sms_sender_name"
   end
 
+  create_table "university_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "user_id"
+    t.string "last_name"
+    t.string "first_name"
+    t.string "slug"
+    t.boolean "is_author"
+    t.boolean "is_researcher"
+    t.boolean "is_teacher"
+    t.boolean "is_administrative"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "phone"
+    t.string "email"
+    t.index ["university_id"], name: "index_university_people_on_university_id"
+    t.index ["user_id"], name: "index_university_people_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "first_name"
@@ -546,8 +546,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_174641) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "administration_members", "universities"
-  add_foreign_key "administration_members", "users"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
@@ -556,9 +554,9 @@ ActiveRecord::Schema.define(version: 2022_01_03_174641) do
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_homes", "communication_websites"
   add_foreign_key "communication_website_homes", "universities"
-  add_foreign_key "communication_website_imported_authors", "administration_members", column: "author_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"
+  add_foreign_key "communication_website_imported_authors", "university_people", column: "author_id"
   add_foreign_key "communication_website_imported_categories", "communication_website_categories", column: "category_id"
   add_foreign_key "communication_website_imported_categories", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_categories", "universities"
@@ -584,25 +582,27 @@ ActiveRecord::Schema.define(version: 2022_01_03_174641) do
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
-  add_foreign_key "communication_website_posts", "administration_members", column: "author_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
+  add_foreign_key "communication_website_posts", "university_people", column: "author_id"
   add_foreign_key "communication_websites", "universities"
-  add_foreign_key "education_program_members", "administration_members", column: "member_id"
   add_foreign_key "education_program_members", "education_programs", column: "program_id"
+  add_foreign_key "education_program_members", "university_people", column: "member_id"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
-  add_foreign_key "education_programs_teachers", "administration_members", column: "education_teacher_id"
+  add_foreign_key "education_programs_teachers", "university_people", column: "education_teacher_id"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"
   add_foreign_key "research_journal_articles", "users", column: "updated_by_id"
-  add_foreign_key "research_journal_articles_researchers", "administration_members", column: "researcher_id"
   add_foreign_key "research_journal_articles_researchers", "research_journal_articles", column: "article_id"
+  add_foreign_key "research_journal_articles_researchers", "university_people", column: "researcher_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"
+  add_foreign_key "university_people", "universities"
+  add_foreign_key "university_people", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end

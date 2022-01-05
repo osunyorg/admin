@@ -46,6 +46,6 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies_static
-    (pages + posts + categories + menus + members + [home] + [about]).compact
+    (pages + posts + categories + menus + people + [home] + [about]).compact
   end
 end

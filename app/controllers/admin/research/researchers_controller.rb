@@ -1,12 +1,12 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
 
   def index
-    @researchers = current_university.administration_members.researchers.accessible_by(current_ability).ordered.page(params[:page])
+    @researchers = current_university.people.researchers.accessible_by(current_ability).ordered.page(params[:page])
     breadcrumb
   end
 
   def show
-    @researcher = current_university.administration_members.authors.accessible_by(current_ability).find(params[:id])
+    @researcher = current_university.people.authors.accessible_by(current_ability).find(params[:id])
     @articles = @researcher.research_journal_articles.ordered.page(params[:page])
     breadcrumb
   end

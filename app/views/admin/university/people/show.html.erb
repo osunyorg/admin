@@ -1,0 +1,7 @@
+<% content_for :title, @person %>
+
+<%= render 'main_infos', person: @person %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @person %>
+<% end %>
