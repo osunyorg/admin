@@ -61,10 +61,6 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_many   :members,
-             class_name: 'Education::Program::Member',
-             dependent: :destroy,
-             inverse_of: :program
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           join_table: 'education_programs_schools',
@@ -76,8 +72,6 @@ class Education::Program < ApplicationRecord
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_teacher_id'
   has_many :websites, -> { distinct }, through: :schools
-
-  accepts_nested_attributes_for :members, allow_destroy: true
 
   enum level: {
     first_year: 100,

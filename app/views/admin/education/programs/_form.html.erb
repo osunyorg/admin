@@ -71,33 +71,6 @@
                             as: :check_boxes,
                             collection: current_university.people.teachers.ordered %>
         </div>
-        <div class="card-body">
-          <div id="js-program-members">
-            <p>Membres</p>
-            <%= f.fields_for :members, program.members, wrapper: false do |member_form| %>
-              <div class="row js-program-member fields">
-                <div class="col-md-4">
-                  <%= member_form.input :role, label: false, required: true, placeholder: t('activerecord.attributes.education/program/member.role') %>
-                </div>
-                <div class="col-md-5">
-                  <%
-                  base_members = current_university.people
-                  list_of_members = base_members.administratives.or(base_members.teachers).ordered
-                  %>
-                  <%= member_form.association :member,
-                                              collection: list_of_members,
-                                              include_blank: "Sélectionnez un membre",
-                                              label: false,
-                                              required: true %>
-                </div>
-                <div class="col-md-3">
-                  <%= member_form.link_to_remove "Supprimer", class: button_classes_danger %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <p><%= f.link_to_add "Ajouter un membre", :members, class: 'btn btn-xs btn-primary', data: { target: "#js-program-members" } %></p>
-        </div>
       </div>
     </div>
   </div>
