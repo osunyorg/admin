@@ -96,8 +96,12 @@
         <% if @program.teachers.any? %>
           <h3 class="h5 <%= 'mt-4' if i > 0 %>"><%= Education::Program.human_attribute_name('teachers') %></h3>
           <ul class="list-unstyled">
-            <% @program.teachers.ordered.each do |teacher| %>
-              <li><%= link_to_if can?(:read, teacher), teacher, admin_education_teacher_path(teacher) %></li>
+            <% @program.teachers.includes(:person).ordered.each do |teacher| %>
+              <li>
+                <%= link_to_if  can?(:read, teacher.person),
+                                teacher.person,
+                                admin_education_teacher_path(teacher.person) %>
+              </li>
             <% end %>
           </ul>
         <% end %>

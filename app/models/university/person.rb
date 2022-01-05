@@ -41,11 +41,13 @@ class University::Person < ApplicationRecord
                           join_table: :research_journal_articles_researchers,
                           foreign_key: :researcher_id
 
-  has_and_belongs_to_many :education_programs,
-                          class_name: 'Education::Program',
-                          join_table: :education_programs_teachers,
-                          foreign_key: :education_teacher_id,
-                          association_foreign_key: :education_program_id
+  has_many                :education_program_teachers,
+                          class_name: 'Education::Program::Teacher',
+                          foreign_key: :person_id,
+                          dependent: :destroy
+
+  has_many                :education_programs,
+                          through: :education_program_teachers
 
   has_many                :communication_website_posts,
                           class_name: 'Communication::Website::Post',
