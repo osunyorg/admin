@@ -1,0 +1,30 @@
+<% if people.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Education::Program::Role::Person.model_name.human %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% people.each do |person| %>
+        <tr>
+          <td>
+            <%= link_to_if  can?(:read, person.person),
+                            person.person,
+                            admin_university_person_path(person.person) %>
+          </td>
+          <td class="text-end pe-0">
+            <div class="btn-group" role="group">
+              <%= link_to t('delete'),
+                          admin_education_program_role_person_path(person, { role_id: @role.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

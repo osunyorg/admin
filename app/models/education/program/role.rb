@@ -25,6 +25,8 @@ class Education::Program::Role < ApplicationRecord
 
   belongs_to :university
   belongs_to :program, class_name: 'Education::Program'
+  has_many :people, class_name: 'Education::Program::Role::Person'
+  has_many :university_people, through: :people, source: :person
 
   def to_s
     "#{title}"

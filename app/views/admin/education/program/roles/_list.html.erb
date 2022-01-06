@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Education::Program::Role.model_name.human %></th>
+      <th><%= Education::Program::Role.human_attribute_name('people') %></th>
       <th></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
                           role,
                           admin_education_program_role_path(role, { program_id: @program.id }) %>
         </td>
+        <td><%= role.people.includes(:person).ordered.map { |person| person.person.to_s }.to_sentence %></td>
         <td class="text-end pe-0">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
