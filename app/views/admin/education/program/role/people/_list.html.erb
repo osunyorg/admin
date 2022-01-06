@@ -1,14 +1,14 @@
 <% if people.any? %>
-  <table class="table">
+  <table class="table table-sortable">
     <thead>
       <tr>
         <th><%= Education::Program::Role::Person.model_name.human %></th>
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody data-reorder-url="<%= reorder_admin_education_program_role_people_path(program_id: @program.id, role_id: @role.id) %>">
       <% people.each do |person| %>
-        <tr>
+        <tr class="handle" data-id="<%= person.id %>">
           <td>
             <%= link_to_if  can?(:read, person.person),
                             person.person,

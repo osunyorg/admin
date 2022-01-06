@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-sortable">
   <thead>
     <tr>
       <th><%= Education::Program::Role.model_name.human %></th>
@@ -6,9 +6,9 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody data-reorder-url="<%= reorder_admin_education_program_roles_path(program_id: @program.id) %>">
     <% roles.each do |role| %>
-      <tr>
+      <tr class="handle" data-id="<%= role.id %>">
         <td>
           <%= link_to_if  can?(:read, role),
                           role,

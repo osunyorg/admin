@@ -2,6 +2,8 @@ class Admin::Education::Program::Role::PeopleController < Admin::Education::Prog
   load_and_authorize_resource :role, class: Education::Program::Role, through: :program
   load_and_authorize_resource class: Education::Program::Role::Person, through: :role
 
+  include Admin::Reorderable 
+
   def new
     breadcrumb
   end
