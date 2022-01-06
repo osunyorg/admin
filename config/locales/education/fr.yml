@@ -38,6 +38,8 @@ fr:
         schools: Écoles proposant cette formation
         teachers: Enseignants·es
         team: Équipe
+        content: Contenus de la formation
+        results: Indicateurs de résultats
       education/program/teacher:
         description: Description
         person: Personne
