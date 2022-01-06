@@ -47,8 +47,6 @@ module Communication::Website::WithAbouts
     ).uniq.compact
   end
 
-  protected
-
   def set_programs_categories!
     programs_root_category = categories.where(is_programs_root: true).first_or_create(
       name: 'Offre de formation',
@@ -58,6 +56,8 @@ module Communication::Website::WithAbouts
     )
     set_programs_categories_at_level! programs_root_category, about.programs.root.ordered
   end
+
+  protected
 
   def set_programs_categories_at_level!(parent_category, programs)
     programs.map.with_index do |program, index|
