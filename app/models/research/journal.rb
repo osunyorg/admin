@@ -24,7 +24,7 @@ class Research::Journal < ApplicationRecord
   include WithGit
 
   belongs_to :university
-  has_many :websites, class_name: 'Communication::Website', as: :about
+  has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
   has_many :researchers, through: :articles
