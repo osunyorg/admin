@@ -27,10 +27,10 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  include WithGitRepository
-  include WithGit
-  include WithHome
   include WithAbouts
+  include WithGit
+  include WithGitRepository
+  include WithHome
   include WithImport
 
   belongs_to :university
