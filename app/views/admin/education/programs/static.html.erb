@@ -29,26 +29,22 @@ contact_list:
 continuing: <%= @program.continuing %>
 level: <%= @program.level %>
 ects: <%= @program.ects %>
-accessibility: >
-  <%= prepare_for_github @program.best_accessibility, @program.university %>
-contacts: >
-  <%= prepare_for_github @program.best_contacts, @program.university %>
-duration: >
-  <%= prepare_for_github @program.best_duration, @program.university %>
-evaluation: >
-  <%= prepare_for_github @program.best_evaluation, @program.university %>
-objectives: >
-  <%= prepare_for_github @program.best_objectives, @program.university %>
-opportunities: >
-  <%= prepare_for_github @program.best_opportunities, @program.university %>
-other: >
-  <%= prepare_for_github @program.best_other, @program.university %>
-pedagogy: >
-  <%= prepare_for_github @program.best_pedagogy, @program.university %>
-prerequisites: >
-  <%= prepare_for_github @program.best_prerequisites, @program.university %>
-pricing: >
-  <%= prepare_for_github @program.best_pricing, @program.university %>
-registration: >
-  <%= prepare_for_github @program.best_registration, @program.university %>
+<%
+[
+  :accessibility,
+  :contacts,
+  :duration,
+  :evaluation,
+  :objectives,
+  :opportunities,
+  :other,
+  :prerequisites,
+  :pricing,
+  :registration,
+  :results,
+  :content
+].each do |property| %>
+<%= property.to_s %>: >
+  <%= prepare_for_github @program.send "best_#{property}", @program.university %>
+<% end %>
 ---
