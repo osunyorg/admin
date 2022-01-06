@@ -73,6 +73,9 @@ class Education::Program < ApplicationRecord
   has_many   :roles,
              class_name: 'Education::Program::Role',
              dependent: :destroy
+  has_many   :website_categories,
+             class_name: 'Communication::Website::Category',
+             dependent: :destroy
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           join_table: 'education_programs_schools',
