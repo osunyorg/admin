@@ -1,7 +1,8 @@
 namespace :education do
-  resources :teachers, except: [:create, :destroy]
+  resources :teachers, only: [:index, :show]
   resources :schools
   resources :programs do
+    resources :teachers, controller: 'program/teachers', except: [:index, :show]
     collection do
       post :reorder
     end

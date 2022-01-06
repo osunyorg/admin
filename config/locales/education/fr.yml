@@ -7,6 +7,9 @@ fr:
       education/program:
         one: Formation
         other: Formations
+      education/program/teacher:
+        one: Enseignant
+        other: Enseignants
       education/school:
         one: École
         other: Écoles
@@ -35,8 +38,9 @@ fr:
         schools: Écoles proposant cette formation
         teachers: Enseignants·es
         team: Équipe
-      education/program/member:
-        role: Rôle
+      education/program/teacher:
+        description: Description
+        person: Personne
       education/school:
         address: Adresse
         city: Ville

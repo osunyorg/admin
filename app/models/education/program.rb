@@ -103,10 +103,11 @@ class Education::Program < ApplicationRecord
   end
 
   def git_path_static
-    "content/programs/#{path}/_index.html".gsub(/\/+/, '/')
+    "content/programs/#{path}/_index.html"
   end
 
   def git_dependencies_static
+    # TODO: Add Teacher & Role::Person
     active_storage_blobs
   end
 

@@ -75,7 +75,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def git_path_static
-    "content/categories/#{path}/_index.html".gsub(/\/+/, '/')
+    "content/categories/#{path}/_index.html"
   end
 
   def git_dependencies_static

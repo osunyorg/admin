@@ -37,9 +37,9 @@ class Git::Repository
   def sync_git_files
     git_files.each do |file|
       if file.should_create?
-        provider.create_file file.path, file.to_s
+        provider.create_file sanitized_path(file.path), file.to_s
       elsif file.should_update?
-        provider.update_file file.path, file.previous_path, file.to_s
+        provider.update_file sanitized_path(file.path), file.previous_path, file.to_s
       elsif file.should_destroy?
         provider.destroy_file file.previous_path
       end
@@ -48,7 +48,11 @@ class Git::Repository
 
   def mark_as_synced
     git_files.each do |git_file|
-      git_file.update_columns previous_path: git_file.path, previous_sha: git_file.sha
+      git_file.update_columns previous_path: sanitized_path(git_file.path), previous_sha: git_file.sha
     end
+  end
+
+  def sanitized_path(git_file)
+    git_file.path&.gsub(/\/+/, '/')
   end
 end
