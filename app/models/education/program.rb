@@ -48,7 +48,9 @@ class Education::Program < ApplicationRecord
                                     :pedagogy,
                                     :prerequisites,
                                     :pricing,
-                                    :registration
+                                    :registration,
+                                    :content,
+                                    :results
 
   attr_accessor :skip_websites_categories_callback
 
@@ -132,6 +134,6 @@ class Education::Program < ApplicationRecord
   protected
 
   def last_ordered_element
-    university.programs.where(parent_id: parent_id).ordered.last
+    university.education_programs.where(parent_id: parent_id).ordered.last
   end
 end
