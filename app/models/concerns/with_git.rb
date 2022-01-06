@@ -8,7 +8,6 @@ module WithGit
               dependent: :destroy
   end
 
-  # Needs override
   def git_path_static
     raise NotImplementedError
   end
@@ -34,24 +33,10 @@ module WithGit
   def destroy_and_sync
     destroy_from_git
     destroy
-    true
-  end
-
-  def destroy_from_git
-    websites_with_fallback.each do |website|
-      identifiers(website: website).each do |identifier|
-        Communication::Website::GitFile.sync website, self, identifier, destroy: true
-        dependencies = send "git_destroy_dependencies_#{identifier}"
-        dependencies.each do |object|
-          Communication::Website::GitFile.sync website, object, identifier, destroy: true
-        end
-      end
-      website.git_repository.sync!
-    end
   end
 
   def sync_with_git
-    websites_with_fallback.each do |website|
+    websites_for_self.each do |website|
       identifiers(website: website).each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier
         dependencies = send "git_dependencies_#{identifier}"
@@ -64,9 +49,22 @@ module WithGit
   end
   handle_asynchronously :sync_with_git
 
+  def destroy_from_git
+    websites_for_self.each do |website|
+      identifiers(website: website).each do |identifier|
+        Communication::Website::GitFile.sync website, self, identifier, destroy: true
+        dependencies = send "git_destroy_dependencies_#{identifier}"
+        dependencies.each do |object|
+          Communication::Website::GitFile.sync website, object, identifier, destroy: true
+        end
+      end
+      website.git_repository.sync!
+    end
+  end
+
   protected
 
-  def websites_with_fallback
+  def websites_for_self
     if is_a? Communication::Website
       [self]
     elsif respond_to?(:websites)

@@ -44,7 +44,7 @@ Lors de l'enregistrement d'un objet, il faut, pour chaque website :
             - push
             - mettre à jour les previous_path et les SHA des git_files
 
-Ce flux cause un problème majeur : tout ce qui est analysé disparaît en asynchrone
+Ce flux cause un problème majeur : tout ce qui est analysé disparaît en asynchrone.
 
 ### Version 2
 
@@ -76,8 +76,6 @@ def reorder
   pages.first.sync_with_git
 end
 ```
-TODO vérifier que tous les cas de déplacement sont correctement gérés.
-TODO gérer la suppression correctement.
 
 ## Code
 
@@ -89,17 +87,19 @@ Le website a un trait WithRepository qui gère son rapport avec le repository Gi
 
 Tous les objets qui doivent être exportés vers Git :
 - doivent utiliser le concern `WithGit`, qui gère l'export vers les repositories des objets et de leurs dépendances
-- doivent présenter une méthode `websites`, éventuellement avec un seul website dans un tableau
 - peuvent intégrer le concern `WithMedia` s'il utilise des médias (`featured_image` et/ou images dans des rich texts)
-- peuvent présenter une méthode `static_files` qui liste les identifiants des git_files à générer, pour les objets qui créent plusieurs fichiers
+- peuvent présenter une méthode `identifiers` qui liste les identifiants des git_files à générer, pour les objets qui créent plusieurs fichiers (le fichier par défaut s'appelle `static`)
+- peuvent présenter une méthode `git_dependencies_static` qui liste les dépendances de l'identifiant par défaut `static`
+- peuvent présenter une méthode `git_destroy_dependencies_static` qui liste les dépendances à supprimer en cascade de l'identifiant par défaut `static`
+- peuvent présenter des méthodes `git_dependencies_author` et/ou `git_destroy_dependencies_author` qui liste les dépendances de l'identifiant `author`
 
-### GitFile
+### Modèle Communication::Website::GitFile
 
 La responsabilité de la synchronisation repose sur Communication::Website::GitFile, notamment :
 - l'information est-elle intègre, synchronisée avec le repo ? (previous_sha et previous_path cohérents avec le repo git)
-- le fichier doit-il être créé ? (non intègre, ou pas de previous_sha/previous_path)
-- le fichier doit-il être mis à jour ? (non intègre, ou previous_sha/previous_path différent du sha/path)
-- le fichier doit-il être supprimé ? (TODO)
+- le fichier doit-il être créé ? (pas à supprimer et (non intègre, ou pas de previous_sha/previous_path))
+- le fichier doit-il être mis à jour ? (pas à supprimer et (non intègre, ou previous_sha/previous_path différent du sha/path))
+- le fichier doit-il être supprimé ? (path nil ou marquage à détruire)
 
 
 Pour cela, le git_file dispose des propriétés suivantes :
