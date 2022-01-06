@@ -46,6 +46,11 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies_static
-    (pages + posts + categories + menus + people + [home] + [about]).compact
+    [
+      pages, pages.map(&:explicit_active_storage_blobs).flatten,
+      posts, posts.map(&:explicit_active_storage_blobs).flatten,
+      home, home.explicit_active_storage_blobs,
+      categories, menus, people, about
+    ].flatten.uniq.compact
   end
 end

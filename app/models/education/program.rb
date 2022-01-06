@@ -61,16 +61,17 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
+  has_many   :teachers,
+             class_name: 'Education::Program::Teacher',
+             dependent: :destroy
+  has_many   :people,
+             through: :teachers,
+             dependent: :destroy
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
-  has_and_belongs_to_many :teachers,
-                          class_name: 'University::Person',
-                          join_table: 'education_programs_teachers',
-                          foreign_key: 'education_program_id',
-                          association_foreign_key: 'education_teacher_id'
   has_many :websites, -> { distinct }, through: :schools
 
   enum level: {

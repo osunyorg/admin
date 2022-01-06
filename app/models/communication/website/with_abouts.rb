@@ -42,7 +42,7 @@ module Communication::Website::WithAbouts
   def people
     @people ||= (
       posts.collect(&:author) +
-      programs.collect(&:teachers).flatten
+      programs.collect(&:people).flatten
       # TODO researchers via articles
     ).uniq.compact
   end
