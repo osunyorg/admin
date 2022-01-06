@@ -55,17 +55,17 @@ class University::Person < ApplicationRecord
                           foreign_key: :author_id,
                           dependent: :nullify
 
-  has_many                :communication_websites,
+  has_many                :author_websites,
                           -> { distinct },
                           through: :communication_website_posts,
                           source: :website
 
-  has_many                :research_websites,
+  has_many                :researcher_websites,
                           -> { distinct },
                           through: :research_journal_articles,
                           source: :websites
 
-  has_many                :education_websites,
+  has_many                :teacher_websites,
                           -> { distinct },
                           through: :education_programs,
                           source: :websites
@@ -93,19 +93,19 @@ class University::Person < ApplicationRecord
 
   def websites
     Communication::Website.where(id: [
-      communication_website_ids,
-      research_website_ids,
-      education_website_ids
+      author_website_ids,
+      researcher_website_ids,
+      teacher_website_ids
     ].flatten.uniq)
   end
 
   def identifiers(website: nil)
     website_id = website&.id
     list = []
-    list << :author if communication_websites.pluck(:id).include?(website_id)
-    list << :researcher if research_websites.pluck(:id).include?(website_id)
-    list << :teacher if education_websites.pluck(:id).include?(website_id)
     # TODO :administrator
+    [:author, :researcher, :teacher].each do |role|
+      list << role if send("#{role.to_s}_websites").pluck(:id).include?(website_id)
+    end
     list << :static unless list.empty?
     list
   end
