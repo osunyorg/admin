@@ -10,17 +10,16 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
-    pages = []
+    first_page = nil
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
-      pages << page
-      pages.concat(page.descendents) if parent_id != page.parent_id
+      first_page = page if index == 0
       page.update(
         parent_id: parent_id,
         position: index + 1
       )
     end
-    pages.first.sync_with_git
+    first_page.sync_with_git if first_page
   end
 
   def children
