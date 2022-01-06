@@ -109,6 +109,10 @@ class Education::Program < ApplicationRecord
     active_storage_blobs
   end
 
+  def git_destroy_dependencies_static
+    explicit_active_storage_blobs
+  end
+
   def update_children_paths
     children.each do |child|
       child.update_column :path, child.generated_path
