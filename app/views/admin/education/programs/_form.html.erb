@@ -27,21 +27,6 @@
                             value_method: ->(p) { p[:id] } %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.featured_image') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :featured_image,
-                      as: :single_deletable_file,
-                      direct_upload: true,
-                      label: false,
-                      input_html: { accept: '.jpg,.jpeg,.png' },
-                      preview: true
-           %>
-           <%= f.input :featured_image_alt %>
-        </div>
-      </div>
     </div>
     <div class="col-md-5">
       <div class="card flex-fill w-100">
@@ -61,6 +46,21 @@
     <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :featured_image,
+                      as: :single_deletable_file,
+                      direct_upload: true,
+                      label: false,
+                      input_html: { accept: '.jpg,.jpeg,.png' },
+                      preview: true
+           %>
+           <%= f.input :featured_image_alt %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
         </div>
         <div class="card-body">
@@ -77,13 +77,15 @@
       <div class="row">
         <div class="col-md-4">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
         </div>
         <div class="col-md-4">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
         </div>
         <div class="col-md-4">
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
         </div>
       </div>
