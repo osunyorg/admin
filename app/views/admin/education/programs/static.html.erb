@@ -9,8 +9,7 @@ position: <%= @program.position %>
 image: "<%= @program.best_featured_image.blob.id %>"
 image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
-categories:
-  - "<%= @website.categories.find_by(program_id: @program.id)&.id %>"
+category: "<%= @website.categories.find_by(program_id: @program.id)&.id %>"
 teachers:
   - "marlene-dulaurans"
   - "arnaud-levy"
