@@ -22,7 +22,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def create
     @school.university = current_university
-    if @school.save
+    if @school.save_and_sync
       redirect_to [:admin, @school], notice: t('admin.successfully_created_html', model: @school.to_s)
     else
       breadcrumb
@@ -31,7 +31,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   end
 
   def update
-    if @school.update(school_params)
+    if @school.update_and_sync(school_params)
       redirect_to [:admin, @school], notice: t('admin.successfully_updated_html', model: @school.to_s)
     else
       breadcrumb
@@ -41,7 +41,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   end
 
   def destroy
-    @school.destroy
+    @school.destroy_and_sync
     redirect_to admin_university_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s)
   end
 

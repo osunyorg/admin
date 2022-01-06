@@ -29,9 +29,9 @@
         <div class="card-body">
           <%= f.association :programs,
                             as: :check_boxes,
-                            collection: collection_tree(current_university.education_programs,
+                            collection: collection_tree(current_university.education_programs),
                             label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] }  %>
+                            value_method: ->(p) { p[:id] } %>
         </div>
       </div>
     </div>
