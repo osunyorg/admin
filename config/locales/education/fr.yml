@@ -7,9 +7,12 @@ fr:
       education/program:
         one: Formation
         other: Formations
+      education/program/role:
+        one: Rôle
+        other: Rôles
       education/program/teacher:
-        one: Enseignant
-        other: Enseignants
+        one: Enseignant·e
+        other: Enseignants·es
       education/school:
         one: École
         other: Écoles
@@ -35,9 +38,13 @@ fr:
         pricing: Tarifs
         published: Publiée ?
         registration: Modalités et délais d’accès
+        roles: Rôles
         schools: Écoles proposant cette formation
         teachers: Enseignants·es
         team: Équipe
+      education/program/role:
+        people: Personnes
+        title: Titre
       education/program/teacher:
         description: Description
         person: Personne
@@ -57,6 +64,9 @@ fr:
       educational_informations: Informations pédagogiques
       main_informations: Informations essentielles
       useful_informations: Informations pratiques
+    roles:
+      one: Rôle
+      other: Rôles
     teachers:
       one: Enseignant·e
       other: Enseignants·es

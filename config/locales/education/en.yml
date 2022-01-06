@@ -7,6 +7,9 @@ en:
       education/program:
         one: Program
         other: Programs
+      education/program/role:
+        one: Role
+        other: Roles
       education/program/teacher:
         one: Teacher
         other: Teachers
@@ -35,9 +38,13 @@ en:
         pricing: Tarifs
         published: Published?
         registration: Modalités et délais d’accès
+        roles: Roles
         schools: Schools with this formation
         teachers: Teachers
         team: Team
+      education/program/role:
+        people: People
+        title: Title
       education/program/teacher:
         description: Description
         person: Person

@@ -1,0 +1,17 @@
+<%= simple_form_for [:admin, role] do |f| %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :title %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>
