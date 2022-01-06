@@ -52,7 +52,7 @@ class Git::Repository
     end
   end
 
-  def sanitized_path(git_file)
-    git_file.path&.gsub(/\/+/, '/')
+  def sanitized_path(path)
+    path&.gsub(/\/+/, '/')
   end
 end
