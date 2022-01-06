@@ -7,16 +7,16 @@ last_name: "<%= @person.last_name %>"
 phone: "<%= @person.phone %>"
 email: "<%= @person.email %>"
 roles:
-<% if @person.is_author %>
+<% if @person.is_author_for_website(@website) %>
   - author
 <% end %>
-<% if @person.is_teacher %>
+<% if @person.is_teacher_for_website(@website) %>
   - teacher
 <% end %>
-<% if @person.is_researcher %>
+<% if @person.is_researcher_for_website(@website) %>
   - researcher
 <% end %>
-<% if @person.is_administrative %>
+<% if @person.is_administrator_for_website(@website) %>
   - administrator
 <% end %>
 ---

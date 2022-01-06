@@ -10,6 +10,9 @@ fr:
       education/program/role:
         one: Rôle
         other: Rôles
+      education/program/role/person:
+        one: Personne
+        other: Personnes
       education/program/teacher:
         one: Enseignant·e
         other: Enseignants·es
@@ -47,6 +50,8 @@ fr:
       education/program/role:
         people: Personnes
         title: Titre
+      education/program/role/person:
+        person: Personne
       education/program/teacher:
         description: Description
         person: Personne

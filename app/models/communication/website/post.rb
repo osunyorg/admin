@@ -59,6 +59,7 @@ class Communication::Website::Post < ApplicationRecord
 
   before_validation :set_published_at, if: :published_changed?
 
+  scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
 

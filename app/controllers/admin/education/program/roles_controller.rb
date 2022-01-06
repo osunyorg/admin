@@ -1,6 +1,8 @@
 class Admin::Education::Program::RolesController < Admin::Education::Program::ApplicationController
   load_and_authorize_resource class: Education::Program::Role, through: :program
 
+  include Admin::Reorderable
+
   def show
     breadcrumb
   end

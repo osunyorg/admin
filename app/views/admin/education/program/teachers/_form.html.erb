@@ -6,8 +6,8 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <% teacher_ids = @program.teachers.where.not(id: teacher.id).pluck(:person_id) %>
-          <%= f.association :person, collection: current_university.people.teachers.where.not(id: teacher_ids).ordered %>
+          <% used_teacher_ids = @program.teachers.where.not(id: teacher.id).pluck(:person_id) %>
+          <%= f.association :person, collection: current_university.people.teachers.where.not(id: used_teacher_ids).ordered %>
         </div>
         <div class="col-md-6">
           <%= f.input :description, as: :string %>

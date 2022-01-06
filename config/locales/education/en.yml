@@ -10,6 +10,9 @@ en:
       education/program/role:
         one: Role
         other: Roles
+      education/program/role/person:
+        one: Person
+        other: People
       education/program/teacher:
         one: Teacher
         other: Teachers
@@ -45,6 +48,8 @@ en:
       education/program/role:
         people: People
         title: Title
+      education/program/role/person:
+        person: Person
       education/program/teacher:
         description: Description
         person: Person
