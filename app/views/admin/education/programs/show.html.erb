@@ -102,45 +102,22 @@
           <%= @program.public_send prop %>
           <% i += 1 %>
         <% end %>
+
         <h3 class="h5 <%= 'mt-4' if i > 0 %>"><%= Education::Program.human_attribute_name('teachers') %></h3>
         <p><%= link_to t('create'), new_admin_education_program_teacher_path(program_id: @program.id), class: 'btn btn-primary' %></p>
-        <% if @program.teachers.any? %>
-          <table class="table">
-            <thead>
-              <tr>
-                <th><%= Education::Program::Teacher.model_name.human %></th>
-                <th><%= Education::Program::Teacher.human_attribute_name('description') %></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @program.teachers.includes(:person).ordered.each do |teacher| %>
-                <tr>
-                  <td>
-                    <%= link_to_if  can?(:read, teacher.person),
-                                    teacher.person,
-                                    admin_education_teacher_path(teacher.person) %>
-                  </td>
-                  <td><%= teacher.description %></td>
-                  <td class="text-end pe-0">
-                    <div class="btn-group" role="group">
-                      <%= link_to t('edit'),
-                                  edit_admin_education_program_teacher_path(teacher, { program_id: @program.id }),
-                                  class: button_classes %>
-                      <%= link_to t('delete'),
-                                  admin_education_program_teacher_path(teacher, { program_id: @program.id }),
-                                  method: :delete,
-                                  data: { confirm: t('please_confirm') },
-                                  class: button_classes_danger %>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        <% end %>
+        <%= render 'admin/education/program/teachers/list', teachers: @program.teachers.includes(:person).ordered %>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="card flex-fill w-100">
+  <div class="card-header">
+    <h5 class="card-title mb-0"><%= Education::Program.human_attribute_name('roles') %></h5>
+  </div>
+  <div class="card-body">
+    <p><%= link_to t('create'), new_admin_education_program_role_path(program_id: @program.id), class: 'btn btn-primary' %></p>
+    <%= render 'admin/education/program/roles/list', roles: @program.roles.ordered %>
   </div>
 </div>
 

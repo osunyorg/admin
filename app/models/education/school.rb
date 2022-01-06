@@ -27,7 +27,7 @@ class Education::School < ApplicationRecord
   include WithGit
 
   belongs_to :university
-  has_many :websites, class_name: 'Communication::Website', as: :about
+  has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
                           join_table: 'education_programs_schools',

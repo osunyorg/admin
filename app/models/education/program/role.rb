@@ -26,6 +26,10 @@ class Education::Program::Role < ApplicationRecord
   belongs_to :university
   belongs_to :program, class_name: 'Education::Program'
 
+  def to_s
+    "#{title}"
+  end
+
   protected
 
   def last_ordered_element
