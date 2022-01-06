@@ -13,6 +13,13 @@ module WithMedia
     blobs_with_ids [best_featured_image]
   end
 
+  # Can be overwrite to get featured_image from associated objects (ex: parents)
+  def best_featured_image(fallback: true)
+    featured_image
+  end
+
+  protected
+
   def rich_text_reflection_names
     @rich_text_reflection_names ||= _reflections.select { |name, reflection| reflection.class_name == "ActionText::RichText" }.keys
   end
@@ -22,13 +29,6 @@ module WithMedia
       public_send(rich_text_reflection_name).embeds.blobs.pluck(:id)
     }.flatten
   end
-
-  # Can be overwrite to get featured_image from associated objects (ex: parents)
-  def best_featured_image(fallback: true)
-    featured_image
-  end
-
-  protected
 
   def blobs_with_ids(ids)
     university.active_storage_blobs.where(id: ids.flatten.compact)
