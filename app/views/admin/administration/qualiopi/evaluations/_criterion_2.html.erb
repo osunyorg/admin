@@ -1,38 +1,5 @@
-<%
-@programs = current_university.education_programs.ordered
-@checks = [
-  :results
-]
-%>
-<table class="table mt-5">
-  <thead>
-    <tr>
-      <th><%= Education::Program.model_name.human %></th>
-      <% @checks.each do |check| %>
-        <th><%= Education::Program.human_attribute_name(check) %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @programs.each do |program| %>
-      <tr>
-        <td>
-          <% if program.ancestors.any? %>
-            <small><% program.ancestors.each do |program| %><%= program %> / </small><br><% end %>
-          <% end %>
-          <%= link_to program, [:admin, program] %>
-        </td>
-        <% @checks.each do |check| %>
-          <% valid = !program.public_send("best_#{check}").blank? %>
-          <th>
-            <% if valid %>
-              <span class="fas fa-check text-success"></span>
-            <% else %>
-              <span class="fas fa-times text-danger"></span>
-            <% end %>
-          </th>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render  'admin/administration/qualiopi/evaluations/list',
+            programs: current_university.education_programs.ordered,
+            checks: [
+              :results
+            ] %>
