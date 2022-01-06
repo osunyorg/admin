@@ -26,7 +26,8 @@ module WithMedia
 
   def rich_text_blob_ids
     rich_text_reflection_names.map { |rich_text_reflection_name|
-      public_send(rich_text_reflection_name).embeds.blobs.pluck(:id)
+      rich_text = public_send(rich_text_reflection_name)
+      rich_text.present? ? rich_text.embeds.blobs.pluck(:id) : []
     }.flatten
   end
 
