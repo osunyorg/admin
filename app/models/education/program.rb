@@ -36,6 +36,7 @@ class Education::Program < ApplicationRecord
   include WithSlug
   include WithTree
   include WithInheritance
+  include WithPosition
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
@@ -67,6 +68,9 @@ class Education::Program < ApplicationRecord
   has_many   :people,
              through: :teachers,
              dependent: :destroy
+  has_many   :roles,
+             class_name: 'Education::Program::Role',
+             dependent: :destroy
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           join_table: 'education_programs_schools',
@@ -89,7 +93,6 @@ class Education::Program < ApplicationRecord
   after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
   scope :published, -> { where(published: true) }
-  scope :ordered, -> { order(:position) }
 
   def to_s
     "#{name}"
@@ -124,5 +127,11 @@ class Education::Program < ApplicationRecord
 
   def set_websites_categories
     websites.find_each(&:set_programs_categories!)
+  end
+
+  protected
+
+  def last_ordered_element
+    university.programs.where(parent_id: parent_id).ordered.last
   end
 end

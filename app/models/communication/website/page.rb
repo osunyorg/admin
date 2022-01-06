@@ -43,6 +43,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
+  include WithPosition
 
   has_rich_text :text
   has_one_attached_deletable :featured_image
@@ -68,7 +69,6 @@ class Communication::Website::Page < ApplicationRecord
 
   after_save :update_children_paths, if: :saved_change_to_path?
 
-  scope :ordered, -> { order(:position) }
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
   def git_path_static
@@ -106,6 +106,10 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def last_ordered_element
+    website.pages.where(parent_id: parent_id).ordered.last
+  end
 
   def slug_unavailable?(slug)
     self.class.unscoped

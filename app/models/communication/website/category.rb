@@ -36,6 +36,7 @@ class Communication::Website::Category < ApplicationRecord
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
+  include WithPosition
 
   has_one                 :imported_category,
                           class_name: 'Communication::Website::Imported::Category',
@@ -66,10 +67,6 @@ class Communication::Website::Category < ApplicationRecord
 
   after_save :update_children_paths, if: :saved_change_to_path?
 
-  scope :ordered, -> { order(:position) }
-
-  before_create :set_position
-
   def to_s
     "#{name}"
   end
@@ -99,14 +96,8 @@ class Communication::Website::Category < ApplicationRecord
 
   protected
 
-  def set_position
-    last_element = website.categories.where(parent_id: parent_id).ordered.last
-
-    unless last_element.nil?
-      self.position = last_element.position + 1
-    else
-      self.position = 1
-    end
+  def last_ordered_element
+    website.categories.where(parent_id: parent_id).ordered.last
   end
 
   def slug_unavailable?(slug)

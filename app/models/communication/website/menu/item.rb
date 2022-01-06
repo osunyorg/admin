@@ -33,6 +33,7 @@
 #
 class Communication::Website::Menu::Item < ApplicationRecord
   include WithTree
+  include WithPosition
 
   attr_accessor :skip_publication_callback
 
@@ -61,10 +62,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   validates :title, presence: true
   validates :about, presence: true, if: :has_about?
 
-  before_create :set_position
   after_commit :sync_menu
-
-  scope :ordered, -> { order(position: :asc) }
 
   def to_s
     "#{title}"
@@ -125,9 +123,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   protected
 
-  def set_position
-    last_element = menu.items.where(parent_id: parent_id).ordered.last
-    self.position = last_element.nil? ? 1
-                                      : last_element.position + 1
+  def last_ordered_element
+    menu.items.where(parent_id: parent_id).ordered.last
   end
 end
