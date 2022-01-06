@@ -100,7 +100,14 @@ class University::Person < ApplicationRecord
   end
 
   def identifiers(website: nil)
-    [:static, :author, :researcher, :teacher, :administrator]
+    website_id = website&.id
+    list = []
+    list << :author if communication_websites.pluck(:id).include?(website_id)
+    list << :researcher if research_websites.pluck(:id).include?(website_id)
+    list << :teacher if education_websites.pluck(:id).include?(website_id)
+    # TODO :administrator
+    list << :static unless list.empty?
+    list
   end
 
   def git_path_static
