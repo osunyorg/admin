@@ -59,13 +59,13 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def path
-    about.send "git_path_#{identifier}"
+    @path ||= about.send "git_path_#{identifier}"
   end
 
   def sha
     # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
     # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
-    OpenSSL::Digest::SHA1.hexdigest "blob #{to_s.bytesize}\x00#{to_s}"
+    @sha ||= OpenSSL::Digest::SHA1.hexdigest "blob #{to_s.bytesize}\x00#{to_s}"
   end
 
   def to_s

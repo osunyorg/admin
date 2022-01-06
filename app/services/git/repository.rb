@@ -25,7 +25,7 @@ class Git::Repository
 
   protected
 
-  # TODO add gitlab
+  # Enhancement add gitlab
   def provider
     @provider ||= Git::Providers::Github.new(website&.access_token, website&.repository)
   end
@@ -48,7 +48,7 @@ class Git::Repository
 
   def mark_as_synced
     git_files.each do |git_file|
-      git_file.update_columns previous_path: git_file.path, previous_sha: git_file.sha
+      git_file.update previous_path: git_file.path, previous_sha: git_file.sha
     end
   end
 end
