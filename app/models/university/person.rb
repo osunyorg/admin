@@ -101,25 +101,28 @@ class University::Person < ApplicationRecord
 
   def identifiers(website: nil)
     list = []
-    # TODO :administrator
-    [:author, :researcher, :teacher].each do |role|
-      list << role if public_send("#{role.to_s}_for_website", website)
+    [:author, :researcher, :teacher, :administrator].each do |role|
+      list << role if public_send("is_#{role.to_s}_for_website", website)
     end
     list << :static unless list.empty?
     list
   end
 
-  def author_for_website(website)
+  def is_author_for_website(website)
     is_author && communication_website_posts.published.where(communication_website_id: website&.id).any?
   end
 
-  def researcher_for_website(website)
+  def is_researcher_for_website(website)
     is_researcher
   end
 
-  def teacher_for_website(website)
-    # a des formations publiées pour ce website
+  def is_teacher_for_website(website)
     is_teacher && website.programs.published.joins(:teachers).where(education_program_teachers: { person_id: id }).any?
+  end
+
+  def is_administrator_for_website(website)
+    # TODO
+    is_administrative
   end
 
   def git_path_static

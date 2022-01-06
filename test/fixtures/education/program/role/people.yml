@@ -19,7 +19,6 @@
 #  fk_rails_...  (person_id => university_people.id)
 #  fk_rails_...  (role_id => education_program_roles.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   position: 1
