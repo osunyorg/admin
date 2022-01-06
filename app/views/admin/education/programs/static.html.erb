@@ -45,6 +45,6 @@ ects: <%= @program.ects %>
   :content
 ].each do |property| %>
 <%= property.to_s %>: >
-  <%= prepare_for_github @program.send "best_#{property}", @program.university %>
+  <%= prepare_for_github @program.send("best_#{property}"), @program.university %>
 <% end %>
 ---

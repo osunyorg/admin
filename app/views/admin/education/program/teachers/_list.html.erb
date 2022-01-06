@@ -1,33 +1,35 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Education::Program::Teacher.model_name.human %></th>
-      <th><%= Education::Program::Teacher.human_attribute_name('description') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% teachers.each do |teacher| %>
+<% if teachers.any? %>
+  <table class="table">
+    <thead>
       <tr>
-        <td>
-          <%= link_to_if  can?(:read, teacher.person),
-                          teacher.person,
-                          admin_education_teacher_path(teacher.person) %>
-        </td>
-        <td><%= teacher.description %></td>
-        <td class="text-end pe-0">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                        edit_admin_education_program_teacher_path(teacher, { program_id: @program.id }),
-                        class: button_classes %>
-            <%= link_to t('delete'),
-                        admin_education_program_teacher_path(teacher, { program_id: @program.id }),
-                        method: :delete,
-                        data: { confirm: t('please_confirm') },
-                        class: button_classes_danger %>
-          </div>
-        </td>
+        <th><%= Education::Program::Teacher.model_name.human %></th>
+        <th><%= Education::Program::Teacher.human_attribute_name('description') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% teachers.each do |teacher| %>
+        <tr>
+          <td>
+            <%= link_to_if  can?(:read, teacher.person),
+                            teacher.person,
+                            admin_education_teacher_path(teacher.person) %>
+          </td>
+          <td><%= teacher.description %></td>
+          <td class="text-end pe-0">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_education_program_teacher_path(teacher, { program_id: @program.id }),
+                          class: button_classes %>
+              <%= link_to t('delete'),
+                          admin_education_program_teacher_path(teacher, { program_id: @program.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
