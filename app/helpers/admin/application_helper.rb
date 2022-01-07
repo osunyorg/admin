@@ -81,6 +81,21 @@ module Admin::ApplicationHelper
     collection
   end
 
+  def collection_tree_for_checkboxes(list, except = nil)
+    collection = collection_tree(list, except)
+    collection.map { |object|
+      [
+        sanitize(object[:label]),
+        object[:id],
+        {
+          data: {
+            parent: object[:parent_id]
+          }
+        }
+      ]
+    }
+  end
+
   private
 
   def polymorphic_url_param(object_or_class, **options)
