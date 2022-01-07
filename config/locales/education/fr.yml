@@ -20,8 +20,8 @@ fr:
         one: École
         other: Écoles
       education/school/administrator:
-        one: Administrateur·trice
-        other: Administrateurs·trices
+        one: Équipe administrative
+        other: Équipe administrative
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -60,7 +60,7 @@ fr:
         person: Personne
       education/school:
         address: Adresse
-        administrators: Administrateurs·trices
+        administrators: Équipe administrative
         city: Ville
         country: Pays
         name: Nom
