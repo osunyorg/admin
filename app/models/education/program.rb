@@ -67,12 +67,18 @@ class Education::Program < ApplicationRecord
   has_many   :teachers,
              class_name: 'Education::Program::Teacher',
              dependent: :destroy
-  has_many   :people,
+  has_many   :university_people_through_teachers,
              through: :teachers,
-             dependent: :destroy
+             source: :person
   has_many   :roles,
              class_name: 'Education::Program::Role',
              dependent: :destroy
+  has_many   :role_people,
+             through: :roles,
+             source: :person
+  has_many   :university_people_through_roles,
+             through: :role_people,
+             source: :person
   has_many   :website_categories,
              class_name: 'Communication::Website::Category',
              dependent: :destroy
@@ -115,8 +121,11 @@ class Education::Program < ApplicationRecord
   end
 
   def git_dependencies_static
-    # TODO: Add Teacher & Role::Person
-    active_storage_blobs
+    [
+      active_storage_blobs,
+      university_people_through_teachers,
+      university_people_through_roles
+    ].flatten.uniq.compact
   end
 
   def git_destroy_dependencies_static
