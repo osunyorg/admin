@@ -43,7 +43,10 @@ class University::Person < ApplicationRecord
 
   has_many                :education_program_teachers,
                           class_name: 'Education::Program::Teacher',
-                          foreign_key: :person_id,
+                          dependent: :destroy
+
+  has_many                :education_program_role_people,
+                          class_name: 'Education::Program::Role::Person',
                           dependent: :destroy
 
   has_many                :education_programs,
