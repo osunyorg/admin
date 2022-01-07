@@ -80,6 +80,7 @@ class University::Person < ApplicationRecord
                           allow_blank: true,
                           if: :will_save_change_to_email?
 
+  before_validation :sanitize_email
 
   scope :ordered,         -> { order(:last_name, :first_name) }
   scope :administratives, -> { where(is_administrative: true) }
@@ -148,5 +149,11 @@ class University::Person < ApplicationRecord
 
   def git_dependencies_administrator
     []
+  end
+
+  protected
+
+  def sanitize_email
+    self.email = self.email.downcase.strip
   end
 end
