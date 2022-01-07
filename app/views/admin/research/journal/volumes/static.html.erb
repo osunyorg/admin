@@ -5,7 +5,7 @@ issn: "<%= @volume.journal.issn %>"
 keywords: "<%= @volume.keywords %>"
 date: "<%= @volume.published_at %>"
 <% if @volume.cover.attached? %>
-image: "<%= @volume.cover_path %>"
+image: "<%= @volume.cover.blob.id %>"
 image_alt: "<%= @volume.cover_alt %>"
 <% end %>
 articles:
