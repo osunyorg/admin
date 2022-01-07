@@ -27,6 +27,7 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include WithGit
+  include WithMedia
 
   has_one_attached_deletable :cover
 
