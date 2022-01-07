@@ -9,23 +9,22 @@ position: <%= @program.position %>
 image: "<%= @program.best_featured_image.blob.id %>"
 image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
-categories:
-  - "<%= @website.categories.find_by(program_id: @program.id)&.id %>"
+category: "<%= @website.categories.find_by(program_id: @program.id)&.id %>"
 teachers:
-  - "marlene-dulaurans"
-  - "arnaud-levy"
-administrators:
-  - "quentin-bessiere"
-contact_list:
-  - title: "Cheffe de département"
+<% @program.teachers.includes(:person).ordered.each do |teacher| %>
+  - person: "<%= teacher.person.slug %>"
+    description: >
+      <%= teacher.description %>
+<% end %>
+roles:
+<% @program.roles.ordered.each do |role| %>
+  - title: >
+      <%= role.to_s %>
     persons:
-      - "marlene-dulaurans"
-  - title: "Directeur des études"
-    persons:
-      - "arnaud-levy"
-  - title: "Secrétariat"
-    persons:
-      - "quentin-bessiere"
+    <% role.people.includes(:person).ordered.each do |role_person| %>
+      - "<%= role_person.person.slug %>"
+    <% end %>
+<% end %>
 continuing: <%= @program.continuing %>
 level: <%= @program.level %>
 ects: <%= @program.ects %>

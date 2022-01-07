@@ -1,33 +1,35 @@
-<table class="table table-sortable">
-  <thead>
-    <tr>
-      <th><%= Education::Program::Role.model_name.human %></th>
-      <th><%= Education::Program::Role.human_attribute_name('people') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody data-reorder-url="<%= reorder_admin_education_program_roles_path(program_id: @program.id) %>">
-    <% roles.each do |role| %>
-      <tr class="handle" data-id="<%= role.id %>">
-        <td>
-          <%= link_to_if  can?(:read, role),
-                          role,
-                          admin_education_program_role_path(role, { program_id: @program.id }) %>
-        </td>
-        <td><%= role.people.includes(:person).ordered.map { |person| person.person.to_s }.to_sentence %></td>
-        <td class="text-end pe-0">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                        edit_admin_education_program_role_path(role, { program_id: @program.id }),
-                        class: button_classes %>
-            <%= link_to t('delete'),
-                        admin_education_program_role_path(role, { program_id: @program.id }),
-                        method: :delete,
-                        data: { confirm: t('please_confirm') },
-                        class: button_classes_danger %>
-          </div>
-        </td>
+<% if roles.any? %>
+  <table class="table table-sortable">
+    <thead>
+      <tr>
+        <th class="ps-0"><%= Education::Program::Role.model_name.human %></th>
+        <th><%= Education::Program::Role.human_attribute_name('people') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody data-reorder-url="<%= reorder_admin_education_program_roles_path(program_id: @program.id) %>">
+      <% roles.each do |role| %>
+        <tr class="handle" data-id="<%= role.id %>">
+          <td class="ps-0">
+            <%= link_to_if  can?(:read, role),
+                            role,
+                            admin_education_program_role_path(role, { program_id: @program.id }) %>
+          </td>
+          <td><%= role.people.includes(:person).ordered.map { |person| person.person.to_s }.to_sentence %></td>
+          <td class="text-end pe-0">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_education_program_role_path(role, { program_id: @program.id }),
+                          class: button_classes %>
+              <%= link_to t('delete'),
+                          admin_education_program_role_path(role, { program_id: @program.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

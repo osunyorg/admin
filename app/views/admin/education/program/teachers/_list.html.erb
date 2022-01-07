@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th><%= Education::Program::Teacher.model_name.human %></th>
+        <th class="ps-0"><%= Education::Program::Teacher.model_name.human %></th>
         <th><%= Education::Program::Teacher.human_attribute_name('description') %></th>
         <th></th>
       </tr>
@@ -10,7 +10,7 @@
     <tbody>
       <% teachers.each do |teacher| %>
         <tr>
-          <td>
+          <td class="ps-0">
             <%= link_to_if  can?(:read, teacher.person),
                             teacher.person,
                             admin_education_teacher_path(teacher.person) %>

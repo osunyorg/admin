@@ -51,7 +51,11 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def git_dependencies_static
-    articles + researchers
+    articles + researchers + active_storage_blobs
+  end
+
+  def git_destroy_dependencies_static
+    active_storage_blobs
   end
 
   def to_s

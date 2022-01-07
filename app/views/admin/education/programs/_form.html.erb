@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.featured_image') %></h5>
@@ -75,18 +75,16 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
-        </div>
-        <div class="col-md-4">
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
         </div>
-        <div class="col-md-4">
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
+        <div class="col-md-6">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
         </div>
       </div>
     </div>
