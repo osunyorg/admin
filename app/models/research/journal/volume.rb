@@ -3,8 +3,8 @@
 # Table name: research_journal_volumes
 #
 #  id                  :uuid             not null, primary key
-#  cover_alt           :string
 #  description         :text
+#  featured_image_alt  :string
 #  keywords            :text
 #  number              :integer
 #  published_at        :date
@@ -29,7 +29,7 @@ class Research::Journal::Volume < ApplicationRecord
   include WithGit
   include WithMedia
 
-  has_one_attached_deletable :cover
+  has_one_attached_deletable :featured_image
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
@@ -38,10 +38,6 @@ class Research::Journal::Volume < ApplicationRecord
   has_many :researchers, through: :articles
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
-
-  def cover_path
-    "/assets/img/volumes/#{id}#{cover.filename.extension_with_delimiter}"
-  end
 
   def website
     journal.website

@@ -27,8 +27,8 @@ fr:
         text: Texte
         title: Titre
       research/journal/volume:
-        cover: Couverture
-        cover_alt: Texte alternatif
+        featured_image: Couverture
+        featured_image_alt: Texte alternatif
         description: Description
         keywords: Mots clés
         number: Numéro

@@ -13,12 +13,12 @@
                         class: 'js-slug-input',
                         data: { source: '#research_journal_volume_title' }
                       } %>
-          <%= f.input :cover,
+          <%= f.input :featured_image,
                       as: :single_deletable_file,
                       input_html: { accept: '.jpg,.jpeg,.png' },
                       preview: 200,
                       direct_upload: true %>
-          <%= f.input :cover_alt %>
+          <%= f.input :featured_image_alt %>
           <%= f.input :description, input_html: { rows: 10 } %>
         </div>
       </div>

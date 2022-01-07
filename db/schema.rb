@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_134525) do
+ActiveRecord::Schema.define(version: 2022_01_07_094053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -465,7 +465,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_134525) do
     t.text "description"
     t.text "keywords"
     t.string "slug"
-    t.string "cover_alt"
+    t.string "featured_image_alt"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end

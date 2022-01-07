@@ -4,9 +4,9 @@ number: <%= @volume.number %>
 issn: "<%= @volume.journal.issn %>"
 keywords: "<%= @volume.keywords %>"
 date: "<%= @volume.published_at %>"
-<% if @volume.cover.attached? %>
-image: "<%= @volume.cover.blob.id %>"
-image_alt: "<%= @volume.cover_alt %>"
+<% if @volume.featured_image.attached? %>
+image: "<%= @volume.featured_image.blob.id %>"
+image_alt: "<%= @volume.featured_image_alt %>"
 <% end %>
 articles:
 <% @volume.articles.each do |article| %>
