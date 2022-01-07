@@ -1,14 +1,14 @@
 ---
 title: >
   <%= @page.title %>
-url: "<%= @page.path %>"
+url: "<%= @page.path %>/"
 position: <%= @page.position %>
 <% if @page.best_featured_image.attached? %>
 image: "<%= @page.best_featured_image.blob.id %>"
 image_alt: "<%= @page.featured_image_alt %>"
 <% end %>
-<% if @page.category %>
-category: "<%= @page.category.path %>"
+<% if @page.related_category %>
+category: "<%= @page.related_category.path %>/"
 <% end %>
 description: >
   <%= prepare_for_github @page.description, @page.university %>

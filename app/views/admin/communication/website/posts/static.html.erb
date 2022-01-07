@@ -12,7 +12,7 @@ authors:
 <% if @post.categories.any? %>
 categories:
   <% @post.categories.each do |category| %>
-  - "<%= category.path %>"
+  - "<%= category.path %>/"
   <% end %>
 <% end %>
 <% if @post.featured_image.attached? %>

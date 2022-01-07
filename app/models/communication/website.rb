@@ -46,15 +46,15 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies_static
-    dependencies = [
-      pages, pages.map(&:explicit_active_storage_blobs).flatten,
-      posts, posts.map(&:explicit_active_storage_blobs).flatten,
-      home, home.explicit_active_storage_blobs,
-      categories, menus, people, about
-    ]
+    dependencies = (
+      pages + pages.map(&:active_storage_blobs).flatten +
+      posts + posts.map(&:active_storage_blobs).flatten +
+      [home] + home.explicit_active_storage_blobs +
+      categories + menus + people + [about]
+    )
 
     if about.is_a? Education::School
-      dependencies << about.programs
+      dependencies += about.programs
     elsif about.is_a? Research::Journal
       dependencies.concat [about.articles, about.volumes]
     end

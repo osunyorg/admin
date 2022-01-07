@@ -1,7 +1,7 @@
 ---
 title: >
   <%= @program.name %>
-url: /<%= @website.programs_github_directory %><%= @program.path %>
+url: /<%= @website.programs_github_directory %><%= @program.path %>/
 description: >
   <%= prepare_for_github @program.description, @program.university %>
 position: <%= @program.position %>
@@ -9,7 +9,7 @@ position: <%= @program.position %>
 image: "<%= @program.best_featured_image.blob.id %>"
 image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
-category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>"
+category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>/"
 teachers:
 <% @program.teachers.includes(:person).ordered.each do |teacher| %>
   - person: "<%= teacher.person.slug %>"
