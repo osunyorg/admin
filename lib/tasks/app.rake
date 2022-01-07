@@ -8,10 +8,6 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    # Communication::Website::Post.find_each { |post| post.update(text: post.old_text) }
-    # Communication::Website::Page.find_each { |page| page.update(text: page.old_text) }
-    # Research::Researcher.find_each { |researcher| researcher.update(biography: researcher.old_biography) if researcher.biography.blank? }
-    Research::Journal::Article.find_each { |article| article.update(text: article.old_text) if article.text.blank? }
     Communication::Website.find_each { |website|
       website.build_home(university_id: website.university_id).save if website.home.nil?
       website.update_column(:url, "https://#{website.url}") unless website.url.blank? || website.url.starts_with?('https://')
@@ -20,38 +16,6 @@ namespace :app do
     Education::Program.where(slug: [nil, '']).find_each { |program| program.update_column(:slug, program.name.parameterize) }
     Research::Journal::Article.where(slug: [nil, '']).find_each { |article| article.update_column(:slug, article.title.parameterize) }
     Research::Journal::Volume.where(slug: [nil, '']).find_each { |volume| volume.update_column(:slug, volume.title.parameterize) }
-    Research::Researcher.where(slug: [nil, '']).find_each { |researcher| researcher.update_column(:slug, "#{researcher.first_name} #{researcher.last_name}".parameterize) }
-
-    [
-      Communication::Website::Author, Communication::Website::Category,
-      Communication::Website::Home, Communication::Website::Menu,
-      Communication::Website::Page, Communication::Website::Post
-    ].each do |model|
-      model.includes(:website).find_each do |object|
-        next unless Github.with_website(object.website).valid?
-        object.github_manifest.each do |manifest_item|
-          Communication::Website::GithubFile.where(website: object.website, about: object, manifest_identifier: manifest_item[:identifier]).first_or_create do |github_file|
-            github_file.github_path = object.github_path if manifest_item[:identifier] == 'primary'
-          end
-        end
-      end
-    end
-
-    [
-      Education::Program, Education::School, Education::Teacher,
-      Research::Journal::Article, Research::Journal::Volume, Research::Researcher
-    ].each do |model|
-      model.includes(:websites).find_each do |object|
-        object.websites.each do |website|
-          next unless Github.with_website(website).valid?
-          object.github_manifest.each do |manifest_item|
-            Communication::Website::GithubFile.where(website: website, about: object, manifest_identifier: manifest_item[:identifier]).first_or_create do |github_file|
-              github_file.github_path = object.github_path_generated if manifest_item[:identifier] == 'primary'
-            end
-          end
-        end
-      end
-    end
 
     10.times do
       Education::Program.find_each { |p| p.update_column :path, "#{p.parent&.path}/#{p.slug}".gsub(/\/+/, '/') }
@@ -61,6 +25,10 @@ namespace :app do
       website.update_column(:authors_github_directory, "auteurs") if website.authors_github_directory.blank?
       website.update_column(:posts_github_directory, "actualites") if website.posts_github_directory.blank?
     }
+
+    Communication::Website::Post.find_each do |post|
+      post.categories = post.categories.select { |category| category.children.none? { |child| post.categories.include?(child) } }
+    end
   end
 
   namespace :db do
