@@ -1,0 +1,35 @@
+<% if administrators.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="ps-0"><%= Education::School::Administrator.model_name.human %></th>
+        <th><%= Education::School::Administrator.human_attribute_name('description') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% administrators.each do |administrator| %>
+        <tr>
+          <td class="ps-0">
+            <%= link_to_if  can?(:read, administrator.person),
+                            administrator.person,
+                            admin_university_person_path(administrator.person) %>
+          </td>
+          <td><%= administrator.description %></td>
+          <td class="text-end pe-0">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_education_school_administrator_path(administrator, { school_id: @school.id }),
+                          class: button_classes %>
+              <%= link_to t('delete'),
+                          admin_education_school_administrator_path(administrator, { school_id: @school.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

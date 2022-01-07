@@ -19,6 +19,9 @@ en:
       education/school:
         one: School
         other: Schools
+      education/school/administrator:
+        one: Administrator
+        other: Administrators
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -55,6 +58,7 @@ en:
         person: Person
       education/school:
         address: Address
+        administrators: Administrators
         city: City
         country: Country
         name: Name
@@ -62,6 +66,9 @@ en:
         programs: Programs provided
         websites: Associated websites
         zipcode: Zipcode
+      education/school/administrator:
+        description: Description
+        person: Person
   education:
     manage_teachers: Manage teachers
     number_of_programs: Number of programs

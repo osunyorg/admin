@@ -39,7 +39,7 @@ module WithGit
     websites_for_self.each do |website|
       identifiers(website: website).each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier
-        dependencies = send "git_dependencies_#{identifier}"
+        dependencies = send("git_dependencies_#{identifier}").flatten.uniq.compact
         dependencies.each do |object|
           Communication::Website::GitFile.sync website, object, identifier
         end
@@ -53,7 +53,7 @@ module WithGit
     websites_for_self.each do |website|
       identifiers(website: website).each do |identifier|
         Communication::Website::GitFile.sync website, self, identifier, destroy: true
-        dependencies = send "git_destroy_dependencies_#{identifier}"
+        dependencies = send("git_destroy_dependencies_#{identifier}").flatten.uniq.compact
         dependencies.each do |object|
           Communication::Website::GitFile.sync website, object, identifier, destroy: true
         end

@@ -28,6 +28,7 @@ class Education::School < ApplicationRecord
 
   belongs_to :university
   has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
+  has_many :administrators, dependent: :destroy
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
                           join_table: 'education_programs_schools',

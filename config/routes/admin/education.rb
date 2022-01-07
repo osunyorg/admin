@@ -1,6 +1,8 @@
 namespace :education do
   resources :teachers, only: [:index, :show]
-  resources :schools
+  resources :schools do
+    resources :administrators, controller: 'school/administrators', except: [:index, :show]
+  end
   resources :programs do
     resources :roles, controller: 'program/roles', except: :index do
       resources :people, controller: 'program/role/people', except: [:index, :show, :edit, :update] do

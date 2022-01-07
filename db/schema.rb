@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_07_094053) do
+ActiveRecord::Schema.define(version: 2022_01_07_111002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -405,6 +405,16 @@ ActiveRecord::Schema.define(version: 2022_01_07_094053) do
     t.index ["education_school_id", "education_program_id"], name: "school_program"
   end
 
+  create_table "education_school_administrators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "description"
+    t.uuid "school_id", null: false
+    t.uuid "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_education_school_administrators_on_person_id"
+    t.index ["school_id"], name: "index_education_school_administrators_on_school_id"
+  end
+
   create_table "education_schools", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -608,6 +618,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_094053) do
   add_foreign_key "education_program_teachers", "university_people", column: "person_id"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_school_administrators", "education_schools", column: "school_id"
+  add_foreign_key "education_school_administrators", "university_people", column: "person_id"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"

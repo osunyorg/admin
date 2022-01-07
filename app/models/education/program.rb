@@ -121,11 +121,11 @@ class Education::Program < ApplicationRecord
   end
 
   def git_dependencies_static
-    [
-      active_storage_blobs,
-      university_people_through_teachers,
+    (
+      active_storage_blobs +
+      university_people_through_teachers +
       university_people_through_roles
-    ].flatten.uniq.compact
+    )
   end
 
   def git_destroy_dependencies_static

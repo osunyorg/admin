@@ -19,6 +19,9 @@ fr:
       education/school:
         one: École
         other: Écoles
+      education/school/administrator:
+        one: Administrateur·trice
+        other: Administrateurs·trices
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -57,6 +60,7 @@ fr:
         person: Personne
       education/school:
         address: Adresse
+        administrators: Administrateurs·trices
         city: Ville
         country: Pays
         name: Nom
@@ -64,6 +68,9 @@ fr:
         programs: Formations dispensées
         websites: Sites webs associés
         zipcode: Code postal
+      education/school/administrator:
+        description: Description
+        person: Personne
   education:
     manage_teachers: Gérer les Enseignants·es
     number_of_programs: Nombre de formations

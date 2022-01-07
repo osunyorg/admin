@@ -59,6 +59,6 @@ class Communication::Website < ApplicationRecord
       dependencies.concat [about.articles, about.volumes]
     end
 
-    dependencies.flatten.uniq.compact
+    dependencies
   end
 end
