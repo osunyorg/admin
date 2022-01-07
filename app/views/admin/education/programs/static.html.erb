@@ -9,7 +9,7 @@ position: <%= @program.position %>
 image: "<%= @program.best_featured_image.blob.id %>"
 image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
-category: "<%= @website.categories.find_by(program_id: @program.id)&.id %>"
+category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>"
 teachers:
 <% @program.teachers.includes(:person).ordered.each do |teacher| %>
   - person: "<%= teacher.person.slug %>"

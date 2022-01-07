@@ -7,6 +7,9 @@ position: <%= @page.position %>
 image: "<%= @page.best_featured_image.blob.id %>"
 image_alt: "<%= @page.featured_image_alt %>"
 <% end %>
+<% if @page.category %>
+category: "<%= @page.category.path %>"
+<% end %>
 description: >
   <%= prepare_for_github @page.description, @page.university %>
 ---
