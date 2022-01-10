@@ -55,6 +55,10 @@ class Research::Journal::Volume < ApplicationRecord
     [self] + active_storage_blobs
   end
 
+  def path
+    "#{published_at&.year}/#{slug}" if published_at
+  end
+
   def to_s
     "##{ number } #{ title }"
   end
