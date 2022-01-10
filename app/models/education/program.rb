@@ -75,7 +75,7 @@ class Education::Program < ApplicationRecord
              dependent: :destroy
   has_many   :role_people,
              through: :roles,
-             source: :person
+             source: :people
   has_many   :university_people_through_roles,
              through: :role_people,
              source: :person

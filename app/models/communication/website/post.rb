@@ -76,7 +76,7 @@ class Communication::Website::Post < ApplicationRecord
     [self] + [author] + categories + active_storage_blobs
   end
 
-  def git_destroy_dependencies
+  def git_destroy_dependencies(website)
     explicit_active_storage_blobs
   end
 

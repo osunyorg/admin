@@ -69,7 +69,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def to_s
     @to_s ||= ApplicationController.render(
-      template: "admin/#{about.class.name.underscore.pluralize}/#{identifier}",
+      template: "admin/#{about.class.name.underscore.pluralize}/static",
       layout: false,
       assigns: {
         about.class.name.demodulize.downcase => about,
