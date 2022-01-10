@@ -126,6 +126,7 @@ class Education::Program < ApplicationRecord
     university_people_through_teachers +
     university_people_through_teachers.map(&:teacher) +
     university_people_through_roles
+    # TODO: les administrative via roles
   end
 
   def git_destroy_dependencies(website)
