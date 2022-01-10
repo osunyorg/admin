@@ -68,15 +68,15 @@ class Communication::Website::Post < ApplicationRecord
     "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}/"
   end
 
-  def git_path_static
+  def git_path(website)
     "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
   end
 
-  def git_dependencies_static
-    [author] + categories + active_storage_blobs
+  def git_dependencies(website)
+    [self] + [author] + categories + active_storage_blobs
   end
 
-  def git_destroy_dependencies_static
+  def git_destroy_dependencies
     explicit_active_storage_blobs
   end
 

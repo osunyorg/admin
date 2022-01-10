@@ -27,20 +27,17 @@
 #  fk_rails_...  (university_id => universities.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class University::Person::Teacher < University::Person
+class University::Person::Administrator < University::Person
   def self.polymorphic_name
-    'University::Person::Teacher'
+    'University::Person::Administrator'
   end
 
   def git_path(website)
-    "content/teachers/#{slug}/_index.html" if for_website?(website)
+    "content/administrators/#{slug}/_index.html" if for_website?(website)
   end
 
   def for_website?(website)
-    is_teacher &&  website.programs
-                          .published
-                          .joins(:teachers)
-                          .where(education_program_teachers: { person_id: id })
-                          .any?
+    # TODO
+    is_administrative
   end
 end

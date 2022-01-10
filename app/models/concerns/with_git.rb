@@ -8,7 +8,7 @@ module WithGit
               dependent: :destroy
   end
 
-  def git_path_static
+  def git_path(website)
     raise NotImplementedError
   end
 
@@ -37,12 +37,9 @@ module WithGit
 
   def sync_with_git
     websites_for_self.each do |website|
-      identifiers(website: website).each do |identifier|
-        Communication::Website::GitFile.sync website, self, identifier
-        dependencies = send("git_dependencies_#{identifier}").flatten.uniq.compact
-        dependencies.each do |object|
-          Communication::Website::GitFile.sync website, object, identifier
-        end
+      dependencies = git_dependencies(website).flatten.uniq.compact
+      dependencies.each do |object|
+        Communication::Website::GitFile.sync website, object
       end
       website.git_repository.sync!
     end
@@ -51,12 +48,9 @@ module WithGit
 
   def destroy_from_git
     websites_for_self.each do |website|
-      identifiers(website: website).each do |identifier|
-        Communication::Website::GitFile.sync website, self, identifier, destroy: true
-        dependencies = send("git_destroy_dependencies_#{identifier}").flatten.uniq.compact
-        dependencies.each do |object|
-          Communication::Website::GitFile.sync website, object, identifier, destroy: true
-        end
+      dependencies = git_destroy_dependencies(website).flatten.uniq.compact
+      dependencies.each do |object|
+        Communication::Website::GitFile.sync website, object, destroy: true
       end
       website.git_repository.sync!
     end
@@ -76,16 +70,11 @@ module WithGit
     end
   end
 
-  # Overridden for multiple files generation
-  def identifiers(website: nil)
-    [:static]
+  def git_dependencies(website = nil)
+    [self]
   end
 
-  def git_dependencies_static
-    []
-  end
-
-  def git_destroy_dependencies_static
-    []
+  def git_destroy_dependencies(website = nil)
+    [self]
   end
 end

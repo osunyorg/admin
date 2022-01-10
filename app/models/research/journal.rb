@@ -35,15 +35,15 @@ class Research::Journal < ApplicationRecord
     "#{title}"
   end
 
-  def git_path_static
+  def git_path(website)
     "data/journal.yml"
   end
 
-  def git_dependencies_static
-    articles + volumes + researchers
+  def git_dependencies(website)
+    [self] + articles + volumes + researchers
   end
 
-  def git_destroy_dependencies_static
-    articles + volumes
+  def git_destroy_dependencies(website)
+    [self] + articles + volumes
   end
 end
