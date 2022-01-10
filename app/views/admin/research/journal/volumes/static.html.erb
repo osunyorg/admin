@@ -10,7 +10,7 @@ image_alt: "<%= @volume.featured_image_alt %>"
 <% end %>
 articles:
 <% @volume.articles.each do |article| %>
-- <%= article.id %>
+- <%= article.path %>
 <% end %>
 ---
 <%= @volume.description %>

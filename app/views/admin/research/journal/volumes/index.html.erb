@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th><%= Research::Journal::Volume.model_name.human %></th>
-      <th><%= Research::Journal::Volume.human_attribute_name('cover') %></th>
+      <th><%= Research::Journal::Volume.human_attribute_name('featured_image') %></th>
       <th><%= Research::Journal::Volume.human_attribute_name('published_at') %></th>
       <th></th>
     </tr>
@@ -13,8 +13,8 @@
     <% @volumes.each do |volume| %>
       <tr>
         <td><%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume) %></td>
-        <td><%= image_tag volume.cover.variant(resize: 'x200'),
-                          height: 100 if volume.cover.attached? %></td>
+        <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
+                          height: 100 if volume.featured_image.attached? %></td>
         <td><%= volume.published_at %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
