@@ -27,8 +27,8 @@ class Communication::Website::GitFile < ApplicationRecord
 
   attr_accessor :will_be_destroyed
 
-  def self.sync(website, object, identifier, destroy: false)
-    git_file = where(website: website, about: object, identifier: identifier).first_or_create
+  def self.sync(website, object, destroy: false)
+    git_file = where(website: website, about: object).first_or_create
     git_file.will_be_destroyed = destroy
     website.git_repository.add_git_file git_file
   end
@@ -59,7 +59,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def path
-    @path ||= about.send "git_path_#{identifier}"
+    @path ||= about.git_path(website)
   end
 
   def sha

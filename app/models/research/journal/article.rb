@@ -55,11 +55,11 @@ class Research::Journal::Article < ApplicationRecord
     "/assets/articles/#{id}/#{pdf.filename}"
   end
 
-  def git_path_static
+  def git_path
     "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
   end
 
-  def git_dependencies_static
+  def git_dependencies
     researchers
   end
 

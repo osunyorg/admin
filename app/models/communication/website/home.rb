@@ -34,15 +34,15 @@ class Communication::Website::Home < ApplicationRecord
     website.to_s
   end
 
-  def git_path_static
+  def git_path(website)
     'content/_index.html'
   end
 
-  def git_dependencies_static
-    active_storage_blobs
+  def git_dependencies(website)
+    [self] + active_storage_blobs
   end
 
-  def git_destroy_dependencies_static
-    active_storage_blobs
+  def git_destroy_dependencies(website)
+    [self] + active_storage_blobs
   end
 end

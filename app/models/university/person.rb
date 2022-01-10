@@ -96,77 +96,44 @@ class University::Person < ApplicationRecord
   end
 
   def websites
-    Communication::Website.where(id: [
-      author_website_ids,
-      researcher_website_ids,
-      teacher_website_ids
-    ].flatten.uniq)
+    university.communication_websites
   end
 
-  def identifiers(website: nil)
-    list = []
-    [:author, :researcher, :teacher, :administrator].each do |role|
-      list << role if public_send("is_#{role.to_s}_for_website", website)
-    end
-    list << :static unless list.empty?
-    list
+  def git_path(website)
+    "content/persons/#{slug}.html" if for_website?(website)
   end
 
-  def is_author_for_website(website)
-    is_author && communication_website_posts.published.where(communication_website_id: website&.id).any?
+  def git_dependencies(website)
+    dependencies = []
+    dependencies << self if for_website?(website)
+    dependencies << administrator if administrator.for_website?(website)
+    dependencies << author if author.for_website?(website)
+    dependencies << researcher if researcher.for_website?(website)
+    dependencies << teacher if teacher.for_website?(website)
+    dependencies
   end
 
-  def is_researcher_for_website(website)
-    is_researcher
+  def administrator
+    @administrator ||= University::Person::Administrator.find(id)
   end
 
-  def is_teacher_for_website(website)
-    is_teacher && website.programs.published.joins(:teachers).where(education_program_teachers: { person_id: id }).any?
+  def author
+    @author ||= University::Person::Author.find(id)
   end
 
-  def is_administrator_for_website(website)
-    # TODO
-    is_administrative
+  def researcher
+    @researcher ||= University::Person::Researcher.find(id)
   end
 
-  def git_path_static
-    "content/persons/#{slug}.html"
+  def teacher
+    @teacher ||= University::Person::Teacher.find(id)
   end
 
-  def git_path_author
-    "content/authors/#{slug}/_index.html"
-  end
-
-  def git_path_researcher
-    "content/researchers/#{slug}/_index.html"
-  end
-
-  def git_path_teacher
-    "content/teachers/#{slug}/_index.html"
-  end
-
-  def git_path_administrator
-    "content/administrators/#{slug}/_index.html"
-  end
-
-  def git_dependencies_static
-    []
-  end
-
-  def git_dependencies_author
-    []
-  end
-
-  def git_dependencies_researcher
-    []
-  end
-
-  def git_dependencies_teacher
-    []
-  end
-
-  def git_dependencies_administrator
-    []
+  def for_website?(website)
+    administrator.for_website?(website) ||
+    author.for_website?(website) ||
+    researcher.for_website?(website) ||
+    teacher.for_website?(website)
   end
 
   protected

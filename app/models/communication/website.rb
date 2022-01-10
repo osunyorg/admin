@@ -41,12 +41,13 @@ class Communication::Website < ApplicationRecord
     "#{name}"
   end
 
-  def git_path_static
+  def git_path(website)
     "data/website.yml"
   end
 
-  def git_dependencies_static
+  def git_dependencies(website)
     dependencies = (
+      [self] +
       pages + pages.map(&:active_storage_blobs).flatten +
       posts + posts.map(&:active_storage_blobs).flatten +
       [home] + home.explicit_active_storage_blobs +

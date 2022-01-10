@@ -71,16 +71,16 @@ class Communication::Website::Category < ApplicationRecord
     "#{name}"
   end
 
-  def git_path_static
+  def git_path(website)
     "content/categories/#{path}/_index.html"
   end
 
-  def git_dependencies_static
-    descendents + posts
+  def git_dependencies(website)
+    [self] + descendents + posts
   end
 
-  def git_destroy_dependencies_static
-    descendents
+  def git_destroy_dependencies(website)
+    [self] + descendents
   end
 
   def update_children_paths

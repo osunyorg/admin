@@ -71,16 +71,16 @@ class Communication::Website::Page < ApplicationRecord
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
-  def git_path_static
+  def git_path(website)
     "content/pages/#{path}/_index.html" if published
   end
 
-  def git_dependencies_static
-    descendents + active_storage_blobs + siblings
+  def git_dependencies(website)
+    [self] + descendents + active_storage_blobs + siblings
   end
 
-  def git_destroy_dependencies_static
-    descendents + active_storage_blobs
+  def git_destroy_dependencies(website)
+    [self] + descendents + active_storage_blobs
   end
 
   def to_s

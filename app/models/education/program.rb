@@ -116,11 +116,11 @@ class Education::Program < ApplicationRecord
     best_image
   end
 
-  def git_path_static
+  def git_path
     "content/programs/#{path}/_index.html"
   end
 
-  def git_dependencies_static
+  def git_dependencies
     (
       active_storage_blobs +
       university_people_through_teachers +
@@ -128,7 +128,7 @@ class Education::Program < ApplicationRecord
     )
   end
 
-  def git_destroy_dependencies_static
+  def git_destroy_dependencies
     explicit_active_storage_blobs
   end
 

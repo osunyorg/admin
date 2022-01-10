@@ -43,15 +43,15 @@ class Research::Journal::Volume < ApplicationRecord
     journal.website
   end
 
-  def git_path_static
+  def git_path
     "content/volumes/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
   end
 
-  def git_dependencies_static
+  def git_dependencies
     articles + researchers + active_storage_blobs
   end
 
-  def git_destroy_dependencies_static
+  def git_destroy_dependencies
     active_storage_blobs
   end
 
