@@ -1,16 +1,14 @@
 ---
 title: "<%= @volume.title %>"
+slug: "<%= @volume.slug %>"
 number: <%= @volume.number %>
 issn: "<%= @volume.journal.issn %>"
-keywords: "<%= @volume.keywords %>"
-date: "<%= @volume.published_at %>"
+keywords: >
+  <%= @volume.keywords %>
+date: <%= @volume.published_at %> UTC
 <% if @volume.featured_image.attached? %>
 image: "<%= @volume.featured_image.blob.id %>"
 image_alt: "<%= @volume.featured_image_alt %>"
-<% end %>
-articles:
-<% @volume.articles.each do |article| %>
-- <%= article.path %>
 <% end %>
 ---
 <%= @volume.description %>

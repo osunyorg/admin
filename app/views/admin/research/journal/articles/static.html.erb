@@ -1,10 +1,15 @@
 ---
 title: "<%= @article.title %>"
-description: "<%= @article.abstract %>"
-volume: "<%= @article.volume.id %>"
-publication: "<%= @article.published_at %>"
-pdf: "<%= @article.pdf_path %>/"
-keywords: "<%= @article.keywords %>"
+description: >
+  <%= @article.abstract %>
+<% if @article.volume && @article.volume.path %>
+volumes:
+  - "<%= @article.volume.path %>"
+<% end %>
+weight: 1
+date: <%= @article.published_at %> UTC
+keywords: >
+  <%= @article.keywords %>
 researchers:
 <% @article.researchers.each do |researcher| %>
 - "<%= researcher.id %>"
