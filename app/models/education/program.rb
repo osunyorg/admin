@@ -124,6 +124,7 @@ class Education::Program < ApplicationRecord
     [self] +
     active_storage_blobs +
     university_people_through_teachers +
+    university_people_through_teachers.map(&:teacher) +
     university_people_through_roles
   end
 
