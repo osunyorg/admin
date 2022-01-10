@@ -12,9 +12,12 @@ image_alt: "<%= @program.featured_image_alt %>"
 category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>/"
 teachers:
 <% @program.teachers.includes(:person).ordered.each do |teacher| %>
-  - person: "<%= teacher.person.slug %>"
-    description: >
-      <%= teacher.description %>
+  - "<%= teacher.person.slug %>"
+<% end %>
+teachers_description:
+<% @program.teachers.includes(:person).ordered.each do |teacher| %>
+  "<%= teacher.person.slug %>": >
+    <%= teacher.description %>
 <% end %>
 roles:
 <% @program.roles.ordered.each do |role| %>

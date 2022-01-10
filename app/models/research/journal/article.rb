@@ -56,7 +56,7 @@ class Research::Journal::Article < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + researchers
+    [self] + researchers + researchers.map(&:researcher)
   end
 
   def to_s

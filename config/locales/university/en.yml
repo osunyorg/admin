@@ -21,7 +21,7 @@ en:
         education_programs: Programs
         email: Email
         first_name: First name
-        is_administrative: Administrative staff
+        is_administration: Administrative staff
         is_author: Author
         is_researcher: Researcher
         is_teacher: Teacher
@@ -43,7 +43,7 @@ en:
       university:
         sms_sender_name: "11 characters max."
       university_person:
-        is_administrative: "Is part of administrative staff for a school."
+        is_administration: "Is part of administrative staff for a school."
         is_author: "Writes posts for websites."
         is_researcher: "Writes articles for journals."
         is_teacher: "Teaches in Schools."

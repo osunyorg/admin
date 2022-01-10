@@ -42,7 +42,10 @@ module Communication::Website::WithAbouts
   def people
     @people ||= (
       posts.collect(&:author) +
-      programs.collect(&:university_people_through_teachers).flatten
+      posts.collect(&:author).map(&:author) +
+      programs.collect(&:university_people_through_teachers).flatten +
+      programs.collect(&:university_people_through_teachers).flatten.map(&:teacher)
+      # TODO administrative via roles
       # TODO researchers via articles
     ).uniq.compact
   end

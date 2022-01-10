@@ -5,7 +5,7 @@
 #  id                :uuid             not null, primary key
 #  email             :string
 #  first_name        :string
-#  is_administrative :boolean
+#  is_administration :boolean
 #  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
