@@ -5,7 +5,7 @@
 #  id                :uuid             not null, primary key
 #  email             :string
 #  first_name        :string
-#  is_administrative :boolean
+#  is_administration :boolean
 #  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
@@ -86,7 +86,7 @@ class University::Person < ApplicationRecord
   before_validation :sanitize_email
 
   scope :ordered,         -> { order(:last_name, :first_name) }
-  scope :administratives, -> { where(is_administrative: true) }
+  scope :administration, -> { where(is_administration: true) }
   scope :authors,         -> { where(is_author: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
