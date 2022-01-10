@@ -58,7 +58,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def path
-    @path ||= about.git_path(website)
+    @path ||= about.git_path(website)&.gsub(/\/+/, '/')
   end
 
   def sha
