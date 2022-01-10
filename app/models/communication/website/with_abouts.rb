@@ -45,7 +45,7 @@ module Communication::Website::WithAbouts
       posts.collect(&:author).map(&:author) +
       programs.collect(&:university_people_through_teachers).flatten +
       programs.collect(&:university_people_through_teachers).flatten.map(&:teacher)
-      # TODO amdinistrative via roles
+      # TODO administrative via roles
       # TODO researchers via articles
     ).uniq.compact
   end
