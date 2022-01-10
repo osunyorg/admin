@@ -37,10 +37,10 @@ class University::Person::Teacher < University::Person
   end
 
   def for_website?(website)
-    is_teacher &&  website.programs
-                          .published
-                          .joins(:teachers)
-                          .where(education_program_teachers: { person_id: id })
-                          .any?
+    is_teacher && website.about_school? && website.programs
+                                                  .published
+                                                  .joins(:teachers)
+                                                  .where(education_program_teachers: { person_id: id })
+                                                  .any?
   end
 end

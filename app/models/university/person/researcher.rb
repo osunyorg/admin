@@ -37,7 +37,9 @@ class University::Person::Researcher < University::Person
   end
 
   def for_website?(website)
-    # TODO
-    is_researcher
+    is_researcher && website.about_journal? && website.articles
+                                                      .joins(:researchers)
+                                                      .where(university_people: { id: id })
+                                                      .any?
   end
 end

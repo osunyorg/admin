@@ -43,6 +43,10 @@ module Communication::Website::WithAbouts
     about_school? ? about.programs : Education::Program.none
   end
 
+  def articles
+    about_journal? ? about.articles : Research::Journal::Article.none
+  end
+
   def people
     @people ||= begin
       people = posts.collect(&:author) + posts.collect(&:author).compact.map(&:author)
@@ -52,7 +56,8 @@ module Communication::Website::WithAbouts
         people += about.university_people_through_administrators
         people += about.university_people_through_administrators.map(&:administrator)
       elsif about_journal?
-        # TODO researchers via articles
+        people += articles.collect(&:researchers).flatten
+        people += articles.collect(&:researchers).flatten.map(&:researcher)
       end
     end
     people.uniq.compact
