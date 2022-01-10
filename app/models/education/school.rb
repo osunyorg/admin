@@ -44,7 +44,7 @@ class Education::School < ApplicationRecord
     "#{name}"
   end
 
-  def git_path
+  def git_path(website)
     "data/school.yml"
   end
 end
