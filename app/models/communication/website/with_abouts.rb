@@ -35,19 +35,27 @@ module Communication::Website::WithAbouts
     about_type == 'Education::School'
   end
 
+  def about_journal?
+    about_type == 'Research::Journal'
+  end
+
   def programs
     about_school? ? about.programs : Education::Program.none
   end
 
   def people
-    @people ||= (
-      posts.collect(&:author) +
-      posts.collect(&:author).map(&:author) +
-      programs.collect(&:university_people_through_teachers).flatten +
-      programs.collect(&:university_people_through_teachers).flatten.map(&:teacher)
-      # TODO administrative via roles
-      # TODO researchers via articles
-    ).uniq.compact
+    @people ||= begin
+      people = posts.collect(&:author) + posts.collect(&:author).compact.map(&:author)
+      if about_school?
+        people += programs.collect(&:university_people_through_teachers).flatten
+        people += programs.collect(&:university_people_through_teachers).flatten.map(&:teacher)
+        people += about.university_people_through_administrators
+        people += about.university_people_through_administrators.map(&:administrator)
+      elsif about_journal?
+        # TODO researchers via articles
+      end
+    end
+    people.uniq.compact
   end
 
   def set_programs_categories!

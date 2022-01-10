@@ -53,6 +53,10 @@ class University::Person < ApplicationRecord
                           through: :education_program_teachers,
                           source: :program
 
+  has_many                :education_school_administrators,
+                          class_name: 'Education::School::Administrator',
+                          dependent: :destroy
+
   has_many                :communication_website_posts,
                           class_name: 'Communication::Website::Post',
                           foreign_key: :author_id,

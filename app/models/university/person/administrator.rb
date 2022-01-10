@@ -37,7 +37,6 @@ class University::Person::Administrator < University::Person
   end
 
   def for_website?(website)
-    # TODO
-    is_administration
+    is_administration && website.about_school? && Education::School::Administrator.where(school_id: website.about_id, person_id: id).any?
   end
 end
