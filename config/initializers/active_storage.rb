@@ -40,7 +40,7 @@ module ActiveStorageGitPathStatic
     has_many :git_files, class_name: "Communication::Website::GitFile", as: :about, dependent: :destroy
   end
 
-  def git_path_static
+  def git_path(website)
     "data/media/#{id[0..1]}/#{id}.yml"
   end
 end
