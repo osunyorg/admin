@@ -50,7 +50,7 @@
       <%= link_to Research::Journal::Article.model_name.human(count: 2),
                   admin_research_journal_articles_path(journal_id: @journal) %></h2>
   </div>
-  <%= render 'admin/research/journal/articles/list', articles: @journal.articles.ordered.limit(10) %>
+  <%= render 'admin/research/journal/articles/list', articles: @articles %>
 </div>
 
 <% content_for :action_bar_right do %>

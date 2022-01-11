@@ -30,8 +30,12 @@
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('volume') %></h3>
           <p><%= link_to @article.volume, [:admin, @article.volume] %></p>
         <% end %>
+        <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('published') %></h3>
+        <p><%= t @article.published %></p>
+        <% if @article.published? && @article.published_at.present? %>
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('published_at') %></h3>
-          <p><%=l @article.published_at.to_time, format: :date_with_explicit_month %></p>
+          <p><%= l @article.published_at.to_time, format: :date_with_explicit_month %></p>
+        <% end %>
         <% unless @article.keywords.blank? %>
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('keywords') %></h3>
           <p><%= @article.keywords %></p>

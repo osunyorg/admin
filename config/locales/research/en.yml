@@ -21,6 +21,7 @@ en:
         abstract: Abstract
         keywords: Keywords
         pdf: Article PDF
+        published: Published?
         published_at: Published at
         references: References
         researchers: Authors

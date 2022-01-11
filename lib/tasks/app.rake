@@ -29,6 +29,15 @@ namespace :app do
     Communication::Website::Post.find_each do |post|
       post.categories = post.categories.select { |category| category.children.none? { |child| post.categories.include?(child) } }
     end
+
+    Research::Journal::Article.where(position: nil).order(:published_at, :created_at).group_by(&:research_journal_volume_id).each do |_, articles|
+      articles.each_with_index do |article, index|
+        article.update_columns({
+          published: article.published_at.present?,
+          position: index + 1
+        })
+      end
+    end
   end
 
   namespace :db do

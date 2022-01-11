@@ -9,7 +9,11 @@
   <tbody>
     <% articles.each do |article| %>
       <tr>
-        <td><%= link_to article, admin_research_journal_article_path(journal_id: article.journal, id: article) %></td>
+        <td>
+          <%= link_to article,
+                      admin_research_journal_article_path(journal_id: article.journal, id: article),
+                      class: "#{'opacity-50' unless article.published?}" %>
+        </td>
         <td><%= article.published_at %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
