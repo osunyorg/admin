@@ -28,7 +28,7 @@
       <div class="card-body">
         <% if @article.volume %>
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('volume') %></h3>
-          <p><%= link_to @article.volume, [:admin, @article.volume] %></p>
+          <p><%= link_to @article.volume, [:admin, @article.volume], class: "#{'opacity-50' unless @article.volume.published?}" %></p>
         <% end %>
         <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('published') %></h3>
         <p><%= t @article.published %></p>

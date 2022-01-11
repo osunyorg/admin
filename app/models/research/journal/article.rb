@@ -57,7 +57,7 @@ class Research::Journal::Article < ApplicationRecord
   scope :published, -> { where(published: true) }
 
   def git_path(website)
-    "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
+    "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
   end
 
   def git_dependencies(website)

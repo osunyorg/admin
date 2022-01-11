@@ -30,7 +30,9 @@
           <div class="card">
             <%= image_tag volume.featured_image, class: 'img-fluid' if volume.featured_image.attached? %>
             <div class="card-body">
-              <%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume), class: 'stretched-link' %>
+              <%= link_to volume,
+                          admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                          class: "stretched-link #{'opacity-50' unless volume.published?}" %>
             </div>
           </div>
         </div>

@@ -38,6 +38,9 @@ namespace :app do
         })
       end
     end
+    Research::Journal::Volume.find_each do |volume|
+      volume.update_column :published, volume.published_at.present?
+    end
   end
 
   namespace :db do

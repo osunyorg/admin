@@ -7,6 +7,7 @@
 #  featured_image_alt  :string
 #  keywords            :text
 #  number              :integer
+#  published           :boolean          default(FALSE)
 #  published_at        :date
 #  slug                :string
 #  title               :string
@@ -37,6 +38,9 @@ class Research::Journal::Volume < ApplicationRecord
   has_many :websites, -> { distinct }, through: :journal
   has_many :researchers, through: :articles
 
+  before_validation :set_published_at, if: :published_changed?
+
+  scope :published, -> { where(published: true) }
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
   def website
@@ -61,5 +65,11 @@ class Research::Journal::Volume < ApplicationRecord
 
   def to_s
     "##{ number } #{ title }"
+  end
+
+  protected
+
+  def set_published_at
+    self.published_at = published? ? Time.zone.now : nil
   end
 end

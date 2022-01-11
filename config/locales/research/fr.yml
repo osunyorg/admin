@@ -33,6 +33,7 @@ fr:
         description: Description
         keywords: Mots clés
         number: Numéro
+        published: Publié ?
         published_at: Publié le
         title: Titre
   research:
