@@ -13,7 +13,7 @@ module Communication::Website::WithImport
     ).first_or_create unless imported?
 
     imported_website.run!
-    imported_website
+    reload
   end
 
   def imported?
