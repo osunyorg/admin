@@ -27,7 +27,15 @@ class Education::Program::Teacher < ApplicationRecord
 
   scope :ordered, -> { joins(:person).order('university_people.last_name, university_people.first_name') }
 
+  after_commit :sync_program
+
   def to_s
     person.to_s
+  end
+
+  protected
+
+  def sync_program
+    program.sync_with_git
   end
 end

@@ -28,6 +28,8 @@ class Education::Program::Role < ApplicationRecord
   has_many :people, class_name: 'Education::Program::Role::Person', dependent: :destroy
   has_many :university_people, through: :people, source: :person
 
+  after_commit :sync_program
+
   def to_s
     "#{title}"
   end
@@ -36,5 +38,9 @@ class Education::Program::Role < ApplicationRecord
 
   def last_ordered_element
     program.roles.ordered.last
+  end
+
+  def sync_program
+    program.sync_with_git
   end
 end
