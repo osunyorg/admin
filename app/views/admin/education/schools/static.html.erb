@@ -11,4 +11,13 @@ country: >
   <%= ISO3166::Country[@school.country].translations[@school.country.downcase] %>
 phone: >
   <%= @school.phone %>
+administrators:
+<% @school.administrators.includes(:person).ordered.each do |administrator| %>
+  - "<%= administrator.person.slug %>"
+<% end %>
+administrators_description:
+<% @school.administrators.includes(:person).ordered.each do |administrator| %>
+  "<%= administrator.person.slug %>": >
+    <%= administrator.description %>
+<% end %>
 ---
