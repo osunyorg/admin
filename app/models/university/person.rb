@@ -29,6 +29,7 @@
 class University::Person < ApplicationRecord
   include WithGit
   include WithSlug
+  include WithPicture
 
   has_rich_text :biography
 
@@ -107,7 +108,10 @@ class University::Person < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = []
-    dependencies << self if for_website?(website)
+    if for_website?(website)
+      dependencies << self
+      dependencies << best_picture.blob
+    end
     dependencies << administrator if administrator.for_website?(website)
     dependencies << author if author.for_website?(website)
     dependencies << researcher if researcher.for_website?(website)

@@ -25,6 +25,24 @@
           <%= f.input :biography, as: :rich_text_area %>
         </div>
       </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('abilities') %></h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :is_teacher %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :is_researcher %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :is_administration %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <div class="card flex-fill w-100">
@@ -43,12 +61,16 @@
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('abilities') %></h5>
+          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('picture') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :is_teacher %>
-          <%= f.input :is_researcher %>
-          <%= f.input :is_administration %>
+          <%= f.input :picture,
+                  as: :single_deletable_file,
+                  label: false,
+                  input_html: { accept: '.jpg,.jpeg,.png' },
+                  preview: 200,
+                  resize: 1,
+                  direct_upload: true %>
         </div>
       </div>
     </div>

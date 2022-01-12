@@ -28,6 +28,7 @@ fr:
         last_name: Nom de famille
         name: Nom
         phone: Téléphone
+        picture: Photo de profil
         research_journal_articles: Articles
         slug: Slug
         user: Utilisateur
