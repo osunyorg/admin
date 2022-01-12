@@ -6,7 +6,6 @@
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean
-#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
@@ -91,7 +90,6 @@ class University::Person < ApplicationRecord
 
   scope :ordered,         -> { order(:last_name, :first_name) }
   scope :administration, -> { where(is_administration: true) }
-  scope :authors,         -> { where(is_author: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
 

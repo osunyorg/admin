@@ -55,9 +55,9 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def person_params
-    params.require(:university_person)
-          .permit(:first_name, :last_name, :email, :phone, :biography, :slug, :user_id,
-          :is_author, :is_researcher, :is_teacher, :is_administration)
-          .merge(university_id: current_university.id)
+    params.require(:university_person).permit(
+      :first_name, :last_name, :email, :phone, :biography, :slug, :user_id,
+      :is_researcher, :is_teacher, :is_administration
+    ).merge(university_id: current_university.id)
   end
 end

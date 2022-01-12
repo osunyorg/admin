@@ -19,6 +19,8 @@ module Communication::Website::WithAbouts
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
+    has_many    :authors, -> { distinct }, through: :posts
+
     has_many    :categories,
                 class_name: 'Communication::Website::Category',
                 foreign_key: :communication_website_id,
@@ -49,7 +51,7 @@ module Communication::Website::WithAbouts
 
   def people
     @people ||= begin
-      people = posts.collect(&:author) + posts.collect(&:author).compact.map(&:author)
+      people = authors + authors.compact.map(&:author)
       if about_school?
         people += programs.collect(&:university_people_through_teachers).flatten
         people += programs.collect(&:university_people_through_teachers).flatten.map(&:teacher)

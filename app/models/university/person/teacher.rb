@@ -6,7 +6,6 @@
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean
-#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
