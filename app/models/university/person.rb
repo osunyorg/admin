@@ -62,6 +62,11 @@ class University::Person < ApplicationRecord
                           foreign_key: :author_id,
                           dependent: :nullify
 
+  has_many                :communication_website_imported_authors,
+                          class_name: "Communiation::Website::Imported::Author",
+                          foreign_key: :author_id,
+                          dependent: :destroy
+
   has_many                :author_websites,
                           -> { distinct },
                           through: :communication_website_posts,
@@ -76,6 +81,7 @@ class University::Person < ApplicationRecord
                           -> { distinct },
                           through: :education_programs,
                           source: :websites
+
 
   validates_presence_of   :first_name, :last_name
   validates_uniqueness_of :email,
