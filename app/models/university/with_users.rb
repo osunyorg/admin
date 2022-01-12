@@ -2,6 +2,8 @@ module University::WithUsers
   extend ActiveSupport::Concern
 
   included do
+    attr_accessor :source_university_id
+
     has_many :users, dependent: :destroy
 
     after_commit :synchronize_server_admin_users, on: :create
@@ -9,9 +11,8 @@ module University::WithUsers
     private
 
     def synchronize_server_admin_users
-      User.synchronize_server_admin_users(id)
+      return unless source_university_id.present?
+      SyncServerAdminUsersJob.perform_later(source_university_id, id)
     end
-    handle_asynchronously :synchronize_server_admin_users, queue: 'default'
-
   end
 end
