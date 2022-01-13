@@ -1,6 +1,8 @@
 class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::ApplicationController
   load_and_authorize_resource class: Research::Journal::Article, through: :journal
 
+  include Admin::Reorderable
+
   def index
     breadcrumb
   end
@@ -58,7 +60,7 @@ class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::A
 
   def article_params
     params.require(:research_journal_article)
-          .permit(:title, :slug, :text, :published_at, :abstract, :pdf, :references, :keywords, :research_journal_volume_id, researcher_ids: [])
+          .permit(:title, :slug, :text, :published, :published_at, :abstract, :pdf, :references, :keywords, :research_journal_volume_id, researcher_ids: [])
           .merge(university_id: current_university.id)
   end
 end

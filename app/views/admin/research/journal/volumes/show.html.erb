@@ -9,9 +9,41 @@
       <div class="card-body">
         <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('description') %></h3>
         <p><%= @volume.description %></p>
-        <% if @volume.articles.any? %>
+        <% if @articles.any? %>
           <h3 class="h5 mt-4"><%= Research::Journal::Volume.human_attribute_name('articles') %></h3>
-          <%= render 'admin/research/journal/articles/list', articles: @volume.articles %>
+          <table class="table table-sortable">
+            <thead>
+              <tr>
+                <th><%= Research::Journal::Article.model_name.human %></th>
+                <th><%= Research::Journal::Article.human_attribute_name('published_at') %></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody data-reorder-url="<%= reorder_admin_research_journal_articles_path(journal_id: @journal.id) %>">
+              <% @articles.each do |article| %>
+                <tr class="handle" data-id="<%= article.id %>">
+                  <td>
+                    <%= link_to article,
+                                admin_research_journal_article_path(journal_id: article.journal, id: article),
+                                class: "#{'opacity-50' unless article.published?}" %>
+                  </td>
+                  <td><%= article.published_at %></td>
+                  <td class="text-end">
+                    <div class="btn-group" role="group">
+                      <%= link_to t('edit'),
+                                  edit_admin_research_journal_article_path(journal_id: article.journal, id: article),
+                                  class: button_classes %>
+                      <%= link_to t('delete'),
+                                  admin_research_journal_article_path(journal_id: article.journal, id: article),
+                                  method: :delete,
+                                  data: { confirm: t('please_confirm') },
+                                  class: button_classes_danger %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         <% end %>
       </div>
     </div>

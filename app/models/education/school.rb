@@ -50,4 +50,10 @@ class Education::School < ApplicationRecord
   def git_path(website)
     "data/school.yml"
   end
+
+  def git_dependencies(website)
+    [self] +
+    university_people_through_administrators +
+    university_people_through_administrators.map(&:administrator)
+  end
 end

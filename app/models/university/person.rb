@@ -6,7 +6,6 @@
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean
-#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
@@ -30,6 +29,7 @@
 class University::Person < ApplicationRecord
   include WithGit
   include WithSlug
+  include WithPicture
 
   has_rich_text :biography
 
@@ -62,6 +62,11 @@ class University::Person < ApplicationRecord
                           foreign_key: :author_id,
                           dependent: :nullify
 
+  has_many                :communication_website_imported_authors,
+                          class_name: "Communiation::Website::Imported::Author",
+                          foreign_key: :author_id,
+                          dependent: :destroy
+
   has_many                :author_websites,
                           -> { distinct },
                           through: :communication_website_posts,
@@ -77,6 +82,7 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
+
   validates_presence_of   :first_name, :last_name
   validates_uniqueness_of :email,
                           scope: :university_id,
@@ -91,7 +97,6 @@ class University::Person < ApplicationRecord
 
   scope :ordered,         -> { order(:last_name, :first_name) }
   scope :administration, -> { where(is_administration: true) }
-  scope :authors,         -> { where(is_author: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
 
@@ -109,7 +114,10 @@ class University::Person < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = []
-    dependencies << self if for_website?(website)
+    if for_website?(website)
+      dependencies << self
+      dependencies << best_picture.blob
+    end
     dependencies << administrator if administrator.for_website?(website)
     dependencies << author if author.for_website?(website)
     dependencies << researcher if researcher.for_website?(website)

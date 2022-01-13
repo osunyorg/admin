@@ -32,5 +32,22 @@
         <% end %>
       </div>
     </div>
+    <% if person.best_picture.attached? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h2 class="card-title mb-0 h5"><%= t('activerecord.attributes.university/person.picture') %></h2>
+        </div>
+        <div class="card-body">
+          <% if person.best_picture_inherits_from_user? %>
+            <p>
+              <span class="small text-muted">
+                <%= t 'admin.inheritance.sentence_html', link: link_to(person.user, [:admin, person.user]) %>
+              </span>
+            </p>
+          <% end %>
+          <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

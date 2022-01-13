@@ -6,6 +6,9 @@ first_name: "<%= @person.first_name %>"
 last_name: "<%= @person.last_name %>"
 phone: "<%= @person.phone %>"
 email: "<%= @person.email %>"
+<% if @person.best_picture.attached? %>
+image: "<%= @person.best_picture.blob.id %>"
+<% end %>
 roles:
 <% if @person.author.for_website?(@website) %>
   - author

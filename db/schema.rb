@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_162001) do
+ActiveRecord::Schema.define(version: 2022_01_12_085221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -450,6 +450,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_162001) do
     t.text "references"
     t.text "keywords"
     t.string "slug"
+    t.boolean "published", default: false
+    t.integer "position"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
@@ -475,6 +477,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_162001) do
     t.text "keywords"
     t.string "slug"
     t.string "featured_image_alt"
+    t.boolean "published", default: false
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -512,7 +515,6 @@ ActiveRecord::Schema.define(version: 2022_01_10_162001) do
     t.string "last_name"
     t.string "first_name"
     t.string "slug"
-    t.boolean "is_author"
     t.boolean "is_researcher"
     t.boolean "is_teacher"
     t.boolean "is_administration"

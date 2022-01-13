@@ -19,6 +19,7 @@ class Server::UniversitiesController < Server::ApplicationController
   end
 
   def create
+    @university.source_university_id = current_university.id
     if @university.save
       redirect_to [:server, @university], notice: t('admin.successfully_created_html', model: @university.to_s)
     else

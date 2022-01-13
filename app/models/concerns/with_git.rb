@@ -37,7 +37,7 @@ module WithGit
 
   def sync_with_git
     websites_for_self.each do |website|
-      dependencies = git_dependencies(website).flatten.uniq.compact
+      dependencies = git_dependencies(website).to_a.flatten.uniq.compact
       dependencies.each do |object|
         Communication::Website::GitFile.sync website, object
       end
@@ -48,7 +48,7 @@ module WithGit
 
   def destroy_from_git
     websites_for_self.each do |website|
-      dependencies = git_destroy_dependencies(website).flatten.uniq.compact
+      dependencies = git_destroy_dependencies(website).to_a.flatten.uniq.compact
       dependencies.each do |object|
         Communication::Website::GitFile.sync website, object, destroy: true
       end

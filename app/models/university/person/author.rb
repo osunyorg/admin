@@ -6,7 +6,6 @@
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean
-#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
@@ -37,8 +36,8 @@ class University::Person::Author < University::Person
   end
 
   def for_website?(website)
-    is_author && communication_website_posts.published
-                                            .where(communication_website_id: website&.id)
-                                            .any?
+    communication_website_posts.published
+                              .where(communication_website_id: website&.id)
+                              .any?
   end
 end

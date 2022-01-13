@@ -6,6 +6,8 @@
 #  abstract                   :text
 #  keywords                   :text
 #  old_text                   :text
+#  position                   :integer
+#  published                  :boolean          default(FALSE)
 #  published_at               :date
 #  references                 :text
 #  slug                       :string
@@ -33,6 +35,7 @@
 #
 class Research::Journal::Article < ApplicationRecord
   include WithGit
+  include WithPosition
 
   has_rich_text :text
   has_one_attached :pdf
@@ -47,12 +50,14 @@ class Research::Journal::Article < ApplicationRecord
                           association_foreign_key: :researcher_id
   has_many :websites, -> { distinct }, through: :journal
 
-  validates :title, :published_at, presence: true
+  validates :title, presence: true
 
-  scope :ordered, -> { order(:published_at, :created_at) }
+  before_validation :set_published_at, if: :published_changed?
+
+  scope :published, -> { where(published: true) }
 
   def git_path(website)
-    "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
+    "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
   end
 
   def git_dependencies(website)
@@ -61,5 +66,18 @@ class Research::Journal::Article < ApplicationRecord
 
   def to_s
     "#{ title }"
+  end
+
+  protected
+
+  def last_ordered_element
+    Research::Journal::Article.where(
+      university_id: university_id,
+      research_journal_volume_id: research_journal_volume_id
+    ).ordered.last
+  end
+
+  def set_published_at
+    self.published_at = published? ? Time.zone.now : nil
   end
 end

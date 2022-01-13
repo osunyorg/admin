@@ -24,6 +24,9 @@ class Education::Program::Role::Person < ApplicationRecord
 
   belongs_to :person, class_name: 'University::Person'
   belongs_to :role, class_name: 'Education::Program::Role'
+  delegate :program, to: :role
+
+  after_commit :sync_program
 
   def to_s
     person.to_s
@@ -33,5 +36,9 @@ class Education::Program::Role::Person < ApplicationRecord
 
   def last_ordered_element
     role.people.ordered.last
+  end
+
+  def sync_program
+    program.sync_with_git
   end
 end

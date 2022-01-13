@@ -12,7 +12,11 @@
   <tbody>
     <% @volumes.each do |volume| %>
       <tr>
-        <td><%= link_to volume, admin_research_journal_volume_path(journal_id: @journal, id: volume) %></td>
+        <td>
+          <%= link_to volume,
+                      admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                      class: "#{'opacity-50' unless volume.published?}" %>
+        </td>
         <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
                           height: 100 if volume.featured_image.attached? %></td>
         <td><%= volume.published_at %></td>

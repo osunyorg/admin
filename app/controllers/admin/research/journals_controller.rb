@@ -10,6 +10,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
   end
 
   def show
+    @articles = @journal.articles.order(published_at: :desc, created_at: :desc).limit(10)
     breadcrumb
   end
 

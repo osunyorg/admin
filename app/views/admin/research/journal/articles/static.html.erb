@@ -6,7 +6,7 @@ description: >
 volumes:
   - "<%= @article.volume.path %>"
 <% end %>
-weight: 1
+weight: <%= @article.position %>
 date: <%= @article.published_at %> UTC
 keywords: >
   <%= @article.keywords %>

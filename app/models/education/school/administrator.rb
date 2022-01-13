@@ -25,9 +25,17 @@ class Education::School::Administrator < ApplicationRecord
 
   validates :person_id, uniqueness: { scope: :school_id }
 
+  after_commit :sync_school
+
   scope :ordered, -> { joins(:person).order('university_people.last_name, university_people.first_name') }
 
   def to_s
     person.to_s
+  end
+
+  protected
+
+  def sync_school
+    school.sync_with_git
   end
 end
