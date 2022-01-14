@@ -2,4 +2,5 @@
              .root
              .ordered
              .map(&:to_static_hash)
+             .compact
              .to_yaml %>

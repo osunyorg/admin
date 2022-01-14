@@ -73,31 +73,34 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def static_target
-    target = ''
+    target = nil
     case self.kind
     when 'url'
       target = url
+    when 'page', 'news_article'
+      target = about.path if about&.published_at
     when 'programs'
-      target = "/#{website.programs_github_directory}"
+      target = "/#{website.programs_github_directory}" if website.programs.any?
     when 'program'
-      target = "/#{website.programs_github_directory}#{about.path}"
+      target = "/#{website.programs_github_directory}#{about.path}" if website.about_school?
     when 'news'
-      target = "/#{website.posts_github_directory}"
+      target = "/#{website.posts_github_directory}" if website.posts.published.any?
     when 'staff'
-      target = "/#{website.staff_github_directory}"
+      target = "/#{website.staff_github_directory}" if website.people.any?
     when 'research_volumes'
-      target = "/#{website.research_volumes_github_directory}"
+      target = "/#{website.research_volumes_github_directory}" if website.research_volumes.published.any?
     when 'research_volume'
-      target = "/#{website.research_volumes_github_directory}#{about.path}"
+      target = "/#{website.research_volumes_github_directory}#{about.path}" if about&.published_at
     when 'research_articles'
-      target = "/#{website.research_articles_github_directory}"
+      target = "/#{website.research_articles_github_directory}" if website.research_articles.published.any?
     when 'research_article'
-      target = "/#{website.research_articles_github_directory}#{about.path}"
+      target = "/#{website.research_articles_github_directory}#{about.path}" if about&.published_at
     when 'blank'
       target = ''
     else
       target = about&.path
     end
+    return nil if target.nil?
     target.end_with?('/') ? target
                           : "#{target}/"
   end
@@ -112,12 +115,12 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def to_static_hash
-    return {} if kind_news_article? && !about.published
+    return nil if static_target.nil?
     {
       'title' => title,
       'target' => static_target,
       'kind' => kind,
-      'children' => children.ordered.map(&:to_static_hash)
+      'children' => children.ordered.map(&:to_static_hash).compact
     }
   end
 
