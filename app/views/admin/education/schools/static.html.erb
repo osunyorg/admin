@@ -18,6 +18,6 @@ administrators:
 administrators_description:
 <% @school.administrators.includes(:person).ordered.each do |administrator| %>
   "<%= administrator.person.slug %>": >
-    <%= administrator.description.blank? ? administrator.person.biography.to_plain_text : administrator.description %>
+    <%= administrator.best_description %>
 <% end %>
 ---

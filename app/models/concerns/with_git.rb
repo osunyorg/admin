@@ -44,7 +44,7 @@ module WithGit
       website.git_repository.sync!
     end
   end
-  handle_asynchronously :sync_with_git
+  handle_asynchronously :sync_with_git, queue: 'default'
 
   def destroy_from_git
     websites_for_self.each do |website|
