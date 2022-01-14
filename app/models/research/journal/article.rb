@@ -68,6 +68,10 @@ class Research::Journal::Article < ApplicationRecord
     "#{ title }"
   end
 
+  def path
+    "/#{slug}"
+  end
+
   protected
 
   def last_ordered_element

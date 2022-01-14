@@ -45,7 +45,11 @@ module Communication::Website::WithAbouts
     about_school? ? about.programs : Education::Program.none
   end
 
-  def articles
+  def research_volumes
+    about_journal? ? about.volumes : Research::Journal::Volume.none
+  end
+
+  def research_articles
     about_journal? ? about.articles : Research::Journal::Article.none
   end
 
@@ -58,8 +62,8 @@ module Communication::Website::WithAbouts
         people += about.university_people_through_administrators
         people += about.university_people_through_administrators.map(&:administrator)
       elsif about_journal?
-        people += articles.collect(&:researchers).flatten
-        people += articles.collect(&:researchers).flatten.map(&:researcher)
+        people += research_articles.collect(&:researchers).flatten
+        people += research_articles.collect(&:researchers).flatten.map(&:researcher)
       end
     end
     people.uniq.compact

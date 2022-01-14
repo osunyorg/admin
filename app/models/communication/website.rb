@@ -2,20 +2,22 @@
 #
 # Table name: communication_websites
 #
-#  id                        :uuid             not null, primary key
-#  about_type                :string
-#  access_token              :string
-#  authors_github_directory  :string           default("authors")
-#  name                      :string
-#  posts_github_directory    :string           default("posts")
-#  programs_github_directory :string           default("programs")
-#  repository                :string
-#  staff_github_directory    :string           default("staff")
-#  url                       :string
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  about_id                  :uuid
-#  university_id             :uuid             not null
+#  id                                 :uuid             not null, primary key
+#  about_type                         :string
+#  access_token                       :string
+#  authors_github_directory           :string           default("authors")
+#  name                               :string
+#  posts_github_directory             :string           default("posts")
+#  programs_github_directory          :string           default("programs")
+#  repository                         :string
+#  research_articles_github_directory :string           default("articles")
+#  research_volumes_github_directory  :string           default("volumes")
+#  staff_github_directory             :string           default("staff")
+#  url                                :string
+#  created_at                         :datetime         not null
+#  updated_at                         :datetime         not null
+#  about_id                           :uuid
+#  university_id                      :uuid             not null
 #
 # Indexes
 #

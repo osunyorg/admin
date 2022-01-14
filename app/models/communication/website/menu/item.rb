@@ -56,7 +56,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
     news: 40,
     news_category: 41,
     news_article: 42,
-    staff: 50
+    staff: 50,
+    research_volumes: 60,
+    research_volume: 61,
+    research_articles: 62,
+    research_article: 63
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -81,6 +85,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
       target = "/#{website.posts_github_directory}"
     when 'staff'
       target = "/#{website.staff_github_directory}"
+    when 'research_volumes'
+      target = "/#{website.research_volumes_github_directory}"
+    when 'research_volume'
+      target = "/#{website.research_volumes_github_directory}#{about.path}"
+    when 'research_articles'
+      target = "/#{website.research_articles_github_directory}"
+    when 'research_article'
+      target = "/#{website.research_articles_github_directory}#{about.path}"
     when 'blank'
       target = ''
     else
@@ -110,7 +122,9 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def has_about?
-    kind_page? || kind_program? || kind_news_category? || kind_news_article?
+    kind_page? || kind_program? ||
+    kind_news_category? || kind_news_article? ||
+    kind_research_volume? || kind_research_article?
   end
 
   def sync_menu
