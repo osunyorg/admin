@@ -20,6 +20,6 @@ image: "<%= @post.featured_image.blob.id %>"
 image_alt: "<%= @post.featured_image_alt %>"
 <% end %>
 description: >
-  <%= @post.description.chomp %>
+  <%= prepare_text_for_static @post.description %>
 ---
-<%= prepare_for_github @post.text, @post.university %>
+<%= prepare_html_for_static @post.text, @post.university %>

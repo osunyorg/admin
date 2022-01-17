@@ -3,4 +3,4 @@ title: "<%= @category.name %>"
 slug: "<%= @category.slug %>"
 position: <%= @category.position %>
 ---
-<%= prepare_for_github @category.description, @category.university %>
+<%= prepare_html_for_static @category.description, @category.university %>

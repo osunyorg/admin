@@ -7,6 +7,6 @@ image: "<%= @home.featured_image.blob.id %>"
 image_alt: "<%= @home.featured_image_alt %>"
 <% end %>
 description: >
-  <%= strip_tags(@home.text.to_s).chomp %>
+  <%= prepare_text_for_static @home.text %>
 ---
-<%= prepare_for_github @home.text, @home.university %>
+<%= prepare_html_for_static @home.text, @home.university %>

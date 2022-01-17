@@ -2,7 +2,7 @@
 title: >
   <%= @journal.title %>
 description: >
-  <%= @journal.description %>
+  <%= prepare_text_for_static @journal.description %>
 issn: >
   <%= @journal.issn %>
 ---

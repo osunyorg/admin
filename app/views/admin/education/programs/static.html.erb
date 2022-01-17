@@ -3,7 +3,7 @@ title: >
   <%= @program.name %>
 url: /<%= @website.programs_github_directory %><%= @program.path %>/
 description: >
-  <%= prepare_for_github @program.description, @program.university %>
+  <%= prepare_text_for_static @program.description %>
 position: <%= @program.position %>
 <% if @program.best_featured_image.attached? %>
 image: "<%= @program.best_featured_image.blob.id %>"
@@ -47,6 +47,6 @@ ects: <%= @program.ects %>
   :content
 ].each do |property| %>
 <%= property.to_s %>: >
-  <%= prepare_for_github @program.send("best_#{property}"), @program.university %>
+  <%= prepare_html_for_static @program.send("best_#{property}"), @program.university %>
 <% end %>
 ---
