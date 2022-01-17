@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_085221) do
+ActiveRecord::Schema.define(version: 2022_01_14_130021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -327,6 +327,8 @@ ActiveRecord::Schema.define(version: 2022_01_12_085221) do
     t.string "posts_github_directory", default: "posts"
     t.string "programs_github_directory", default: "programs"
     t.string "staff_github_directory", default: "staff"
+    t.string "research_volumes_github_directory", default: "volumes"
+    t.string "research_articles_github_directory", default: "articles"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
   end
@@ -522,6 +524,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_085221) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.string "email"
+    t.text "description"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end

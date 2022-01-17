@@ -3,6 +3,7 @@
 # Table name: university_people
 #
 #  id                :uuid             not null, primary key
+#  description       :text
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean
@@ -36,7 +37,7 @@ class University::Person::Researcher < University::Person
   end
 
   def for_website?(website)
-    is_researcher && website.about_journal? && website.articles
+    is_researcher && website.about_journal? && website.research_articles
                                                       .joins(:researchers)
                                                       .where(university_people: { id: id })
                                                       .any?

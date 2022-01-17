@@ -44,6 +44,22 @@ function hideAbout() {
     end
     %>
     displayAbout('Communication::Website::Post', "<%= j(raw(options.join(''))) %>");
+<% elsif @kind == 'research_volume' %>
+    <%
+    options = ['<option value="" label=" "></option>']
+    @website.research_volumes.ordered.each do |volume|
+        options << "<option value=\"#{volume.id}\">#{volume.to_s}</option>"
+    end
+    %>
+    displayAbout('Research::Journal::Volume', "<%= j(raw(options.join(''))) %>");
+<% elsif @kind == 'research_article' %>
+    <%
+    options = ['<option value="" label=" "></option>']
+    @website.research_articles.ordered.each do |article|
+        options << "<option value=\"#{article.id}\">#{article.to_s}</option>"
+    end
+    %>
+    displayAbout('Research::Journal::Article', "<%= j(raw(options.join(''))) %>");
 <% else %>
     $('.js-url-field').addClass('d-none');
     hideAbout();

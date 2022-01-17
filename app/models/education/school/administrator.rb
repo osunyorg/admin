@@ -33,6 +33,10 @@ class Education::School::Administrator < ApplicationRecord
     person.to_s
   end
 
+  def best_description
+    description.blank? ? person.description : description
+  end
+
   protected
 
   def sync_school

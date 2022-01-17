@@ -3,6 +3,7 @@
 # Table name: university_people
 #
 #  id                :uuid             not null, primary key
+#  description       :text
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean
@@ -63,7 +64,7 @@ class University::Person < ApplicationRecord
                           dependent: :nullify
 
   has_many                :communication_website_imported_authors,
-                          class_name: "Communiation::Website::Imported::Author",
+                          class_name: "Communication::Website::Imported::Author",
                           foreign_key: :author_id,
                           dependent: :destroy
 

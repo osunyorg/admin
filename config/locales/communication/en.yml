@@ -45,6 +45,8 @@ en:
         name: Name
         posts_github_directory: Posts' GitHub directory
         programs_github_directory: Programs' GitHub directory
+        research_articles_github_directory: Research articles' GitHub directory
+        research_volumes_github_directory: Research volumes' GitHub directory
         staff_github_directory: Staff's GitHub directory
         url: URL
       communication/website/author:
@@ -141,5 +143,9 @@ en:
               page: Specific Page
               program: Specific program
               programs: Programs index
+              research_article: Specific research article
+              research_articles: Research articles index
+              research_volume: Specific research volume
+              research_volumes: Research volumes index
               staff: Staff
               url: URL

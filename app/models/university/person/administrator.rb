@@ -3,6 +3,7 @@
 # Table name: university_people
 #
 #  id                :uuid             not null, primary key
+#  description       :text
 #  email             :string
 #  first_name        :string
 #  is_administration :boolean

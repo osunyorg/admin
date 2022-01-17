@@ -28,6 +28,10 @@
                   about_collection = collection_tree(@website.categories)
                 elsif item.kind_news_article?
                   about_collection = @website.posts.ordered.map { |e| { label: e.to_s, id: e.id } }
+                elsif item.kind_research_volume?
+                  about_collection = @website.research_volumes.ordered.map { |e| { label: e.to_s, id: e.id } }
+                elsif item.kind_research_article?
+                  about_collection = @website.research_articles.ordered.map { |e| { label: e.to_s, id: e.id } }
                 end
               else
                 about_collection = []

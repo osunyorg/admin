@@ -17,7 +17,7 @@ teachers:
 teachers_description:
 <% @program.teachers.includes(:person).ordered.each do |teacher| %>
   "<%= teacher.person.slug %>": >
-    <%= teacher.description.blank? ? teacher.person.biography.to_plain_text : teacher.description %>
+    <%= teacher.best_description %>
 <% end %>
 roles:
 <% @program.roles.ordered.each do |role| %>

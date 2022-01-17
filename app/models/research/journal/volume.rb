@@ -60,7 +60,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def path
-    "#{published_at&.year}/#{slug}" if published_at
+    "/#{published_at&.year}/#{slug}" if published_at
   end
 
   def to_s
