@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_14_130021) do
+ActiveRecord::Schema.define(version: 2022_01_17_134401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -323,12 +323,15 @@ ActiveRecord::Schema.define(version: 2022_01_14_130021) do
     t.string "repository"
     t.string "about_type"
     t.uuid "about_id"
-    t.string "authors_github_directory", default: "authors"
-    t.string "posts_github_directory", default: "posts"
-    t.string "programs_github_directory", default: "programs"
-    t.string "staff_github_directory", default: "staff"
-    t.string "research_volumes_github_directory", default: "volumes"
-    t.string "research_articles_github_directory", default: "articles"
+    t.string "static_pathname_authors", default: "authors"
+    t.string "static_pathname_posts", default: "posts"
+    t.string "static_pathname_programs", default: "programs"
+    t.string "static_pathname_staff", default: "staff"
+    t.string "static_pathname_research_volumes", default: "volumes"
+    t.string "static_pathname_research_articles", default: "articles"
+    t.string "static_pathname_administrators", default: "administrators"
+    t.string "static_pathname_researchers", default: "researchers"
+    t.string "static_pathname_teachers", default: "teachers"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
   end

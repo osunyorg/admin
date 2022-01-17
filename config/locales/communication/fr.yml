@@ -38,13 +38,16 @@ fr:
         about_Education::School: Site d'école
         about_Research::Journal: Site de revue scientifique
         about_type: Sujet du site
-        authors_github_directory: Dossier GitHub des auteurs
         name: Nom
-        posts_github_directory: Dossier GitHub des actualités
-        programs_github_directory: Dossier GitHub des formations
-        research_articles_github_directory: Dossier GitHub des articles de recherche
-        research_volumes_github_directory: Dossier GitHub des volumes de recherche
-        staff_github_directory: Dossier GitHub de l'équipe
+        static_pathname_administrators: Chemin statique de l'équipe administrative
+        static_pathname_authors: Chemin statique de l'équipe éditoriale
+        static_pathname_posts: Chemin statique des actualités
+        static_pathname_programs: Chemin statique des formations
+        static_pathname_research_articles: Chemin statique des articles de recherche
+        static_pathname_research_volumes: Chemin statique des volumes de recherche
+        static_pathname_researchers: Chemin statique de l'équipe de recherche
+        static_pathname_staff: Chemin statique de l'équipe
+        static_pathname_teachers: Chemin statique de l'équipe pédagogique
         url: URL
       communication/website/category:
         children: Catégories enfants
@@ -104,6 +107,7 @@ fr:
     number_of_posts: Nombre d'actualités
     website:
       force_publication: 'Forcer la publication'
+      git: Git
       imported:
         from: Importé depuis
         launch: Importer le site
@@ -120,12 +124,15 @@ fr:
       posts:
         new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)
+      static_pathnames: Chemins statiques
   enums:
     communication:
       website:
         menu:
           item:
             kind:
+              administrators: Équipe administrative
+              authors: Équipe éditoriale
               blank: Titre intermédiaire
               news: Index des actualités
               news_article: Actualité spécifique
@@ -137,5 +144,7 @@ fr:
               research_articles: Index des articles de recherche
               research_volume: Volume de recherche spécifique
               research_volumes: Index des volumes de recherche
+              researchers: Équipe de recherche
               staff: Équipe
+              teachers: Équipe pédagogique
               url: URL
