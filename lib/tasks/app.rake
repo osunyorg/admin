@@ -21,11 +21,6 @@ namespace :app do
       Education::Program.find_each { |p| p.update_column :path, "#{p.parent&.path}/#{p.slug}".gsub(/\/+/, '/') }
     end
 
-    Communication::Website.all.find_each { |website|
-      website.update_column(:authors_github_directory, "auteurs") if website.authors_github_directory.blank?
-      website.update_column(:posts_github_directory, "actualites") if website.posts_github_directory.blank?
-    }
-
     Communication::Website::Post.find_each do |post|
       post.categories = post.categories.select { |category| category.children.none? { |child| post.categories.include?(child) } }
     end
@@ -38,8 +33,12 @@ namespace :app do
         })
       end
     end
-    Research::Journal::Volume.find_each do |volume|
-      volume.update_column :published, volume.published_at.present?
+
+    # MICA & Class'Code
+    Communication::Website.where(id: ["6dfb358c-21bc-440f-9156-e09b72671c32", "1bb0f013-4d3d-49be-84bc-087c8cff3c77"]).each do |website|
+      website.imported_website.posts.find_each do |imported_post|
+        imported_post.post&.update_column :published_at, imported_post.published_at
+      end
     end
   end
 
