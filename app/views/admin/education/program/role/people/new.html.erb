@@ -8,8 +8,7 @@
           <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
         </div>
         <div class="card-body">
-          <% used_person_ids = @role.people.where.not(id: @person.id).pluck(:person_id) %>
-          <%= f.association :person, collection: current_university.people.where.not(id: used_person_ids).ordered %>
+          <%= f.association :person, collection: @available_people %>
         </div>
       </div>
     </div>

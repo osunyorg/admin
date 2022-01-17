@@ -65,7 +65,7 @@ class Communication::Website::Post < ApplicationRecord
 
   def path
     # used in menu_item#static_target
-    "/#{website.posts_github_directory}/#{published_at.strftime "%Y/%m/%d"}/#{slug}/"
+    "/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
   end
 
   def git_path(website)

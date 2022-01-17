@@ -18,8 +18,10 @@
         <h2 class="card-title mb-0 h5"><%= Education::Program::Role.human_attribute_name('people') %></h2>
       </div>
       <div class="card-body">
-        <p><%= link_to t('create'), new_admin_education_program_role_person_path(role_id: @role.id), class: 'btn btn-primary' %></p>
         <%= render 'admin/education/program/role/people/list', people: @role.people.includes(:person).ordered %>
+        <% if can? :create, Education::Program::Role::Person %>
+          <p><%= link_to t('create'), new_admin_education_program_role_person_path(role_id: @role.id), class: 'btn btn-primary' %></p>
+        <% end %>
       </div>
     </div>
   </div>

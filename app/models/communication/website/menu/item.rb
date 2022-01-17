@@ -57,6 +57,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
     news_category: 41,
     news_article: 42,
     staff: 50,
+    administrators: 51,
+    authors: 52,
+    researchers: 53,
+    teachers: 54,
     research_volumes: 60,
     research_volume: 61,
     research_articles: 62,
@@ -77,24 +81,34 @@ class Communication::Website::Menu::Item < ApplicationRecord
     case self.kind
     when 'url'
       target = url
-    when 'page', 'news_article'
-      target = about.path if about&.published_at
+    when 'page'
+      target = about.path if about&.published
     when 'programs'
-      target = "/#{website.programs_github_directory}" if website.programs.any?
+      target = "/#{website.static_pathname_programs}" if website.programs.any?
     when 'program'
-      target = "/#{website.programs_github_directory}#{about.path}" if website.about_school?
+      target = "/#{website.static_pathname_programs}#{about.path}" if website.about_school?
     when 'news'
-      target = "/#{website.posts_github_directory}" if website.posts.published.any?
+      target = "/#{website.static_pathname_posts}" if website.posts.published.any?
+    when 'news_article'
+      target = "/#{website.static_pathname_posts}#{about.path}" if about&.published_at
     when 'staff'
-      target = "/#{website.staff_github_directory}" if website.people.any?
+      target = "/#{website.static_pathname_staff}" if website.people.any?
+    when 'administrators'
+      target = "/#{website.static_pathname_administrators}" if website.university_people_through_administrators.any?
+    when 'authors'
+      target = "/#{website.static_pathname_authors}" if website.authors.compact.any?
+    when 'researchers'
+      target = "/#{website.static_pathname_researchers}" if website.research_articles.collect(&:researchers).flatten.any?
+    when 'teachers'
+      target = "/#{website.static_pathname_teachers}" if website.programs.collect(&:university_people_through_teachers).flatten.any?
     when 'research_volumes'
-      target = "/#{website.research_volumes_github_directory}" if website.research_volumes.published.any?
+      target = "/#{website.static_pathname_research_volumes}" if website.research_volumes.published.any?
     when 'research_volume'
-      target = "/#{website.research_volumes_github_directory}#{about.path}" if about&.published_at
+      target = "/#{website.static_pathname_research_volumes}#{about.path}" if about&.published_at
     when 'research_articles'
-      target = "/#{website.research_articles_github_directory}" if website.research_articles.published.any?
+      target = "/#{website.static_pathname_research_articles}" if website.research_articles.published.any?
     when 'research_article'
-      target = "/#{website.research_articles_github_directory}#{about.path}" if about&.published_at
+      target = "/#{website.static_pathname_research_articles}#{about.path}" if about&.published_at
     when 'blank'
       target = ''
     else

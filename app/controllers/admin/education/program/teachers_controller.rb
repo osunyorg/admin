@@ -1,6 +1,8 @@
 class Admin::Education::Program::TeachersController < Admin::Education::Program::ApplicationController
   load_and_authorize_resource class: Education::Program::Teacher, through: :program
 
+  before_action :get_teachers, except: :destroy
+
   def new
     breadcrumb
   end
@@ -35,6 +37,11 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
   end
 
   protected
+
+  def get_teachers
+    used_teacher_ids = @program.teachers.where.not(id: @teacher.id).pluck(:person_id)
+    @teachers = current_university.people.teachers.where.not(id: used_teacher_ids).accessible_by(current_ability).ordered
+  end
 
   def breadcrumb
     super
