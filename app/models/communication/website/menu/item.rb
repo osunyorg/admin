@@ -77,7 +77,9 @@ class Communication::Website::Menu::Item < ApplicationRecord
     case self.kind
     when 'url'
       target = url
-    when 'page', 'news_article'
+    when 'page'
+      target = about.path if about&.published
+    when 'news_article'
       target = about.path if about&.published_at
     when 'programs'
       target = "/#{website.programs_github_directory}" if website.programs.any?
