@@ -61,7 +61,7 @@ class Research::Journal::Article < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + researchers + researchers.map(&:researcher)
+    [self] + other_articles_in_the_volume + researchers + researchers.map(&:researcher)
   end
 
   def to_s
@@ -73,6 +73,11 @@ class Research::Journal::Article < ApplicationRecord
   end
 
   protected
+
+  def other_articles_in_the_volume
+    return [] if volume.nil?
+    volume.articles.where.not(id: self)
+  end
 
   def last_ordered_element
     Research::Journal::Article.where(
