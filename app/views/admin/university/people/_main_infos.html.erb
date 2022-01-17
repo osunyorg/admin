@@ -43,7 +43,7 @@
           <% if person.best_picture_inherits_from_user? %>
             <p>
               <span class="small text-muted">
-                <%= t 'admin.inheritance.sentence_html', link: link_to(person.user, [:admin, person.user]) %>
+                <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
               </span>
             </p>
           <% end %>

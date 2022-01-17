@@ -13,6 +13,12 @@ en:
         mobile_phone: Mobile phone
         picture: Profile picture
         role: Role
+        roles:
+          admin: Administrator
+          program_manager: Program manager
+          server_admin: Server admin
+          teacher: Teacher
+          visitor: Visitor
     errors:
       models:
         user:
