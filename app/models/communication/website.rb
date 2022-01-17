@@ -2,22 +2,25 @@
 #
 # Table name: communication_websites
 #
-#  id                                 :uuid             not null, primary key
-#  about_type                         :string
-#  access_token                       :string
-#  authors_github_directory           :string           default("authors")
-#  name                               :string
-#  posts_github_directory             :string           default("posts")
-#  programs_github_directory          :string           default("programs")
-#  repository                         :string
-#  research_articles_github_directory :string           default("articles")
-#  research_volumes_github_directory  :string           default("volumes")
-#  staff_github_directory             :string           default("staff")
-#  url                                :string
-#  created_at                         :datetime         not null
-#  updated_at                         :datetime         not null
-#  about_id                           :uuid
-#  university_id                      :uuid             not null
+#  id                                :uuid             not null, primary key
+#  about_type                        :string
+#  access_token                      :string
+#  name                              :string
+#  repository                        :string
+#  static_pathname_administrators    :string           default("administrators")
+#  static_pathname_authors           :string           default("authors")
+#  static_pathname_posts             :string           default("posts")
+#  static_pathname_programs          :string           default("programs")
+#  static_pathname_research_articles :string           default("articles")
+#  static_pathname_research_volumes  :string           default("volumes")
+#  static_pathname_researchers       :string           default("researchers")
+#  static_pathname_staff             :string           default("staff")
+#  static_pathname_teachers          :string           default("teachers")
+#  url                               :string
+#  created_at                        :datetime         not null
+#  updated_at                        :datetime         not null
+#  about_id                          :uuid
+#  university_id                     :uuid             not null
 #
 # Indexes
 #

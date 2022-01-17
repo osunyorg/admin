@@ -28,21 +28,54 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :url %>
-          <%= f.input :repository %>
-          <%= f.input :access_token %>
-          <%= f.input :authors_github_directory %>
-          <%= f.input :posts_github_directory %>
-          <%= f.input :programs_github_directory %>
-          <%= f.input :research_articles_github_directory %>
-          <%= f.input :research_volumes_github_directory %>
-          <%= f.input :staff_github_directory %>
+
+          <p><strong><%= t('communication.website.git') %></strong></p>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :repository %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :access_token %>
+            </div>
+          </div>
+
+          <p><strong><%= t('communication.website.static_pathnames') %></strong></p>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :static_pathname_posts %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_programs %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_research_articles %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_research_volumes %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_staff %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_administrators %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_authors %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_researchers %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :static_pathname_teachers %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

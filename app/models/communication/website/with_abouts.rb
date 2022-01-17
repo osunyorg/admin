@@ -65,8 +65,8 @@ module Communication::Website::WithAbouts
         people += research_articles.collect(&:researchers).flatten
         people += research_articles.collect(&:researchers).flatten.map(&:researcher)
       end
+      people.uniq.compact
     end
-    people.uniq.compact
   end
 
   def set_programs_categories!
