@@ -12,7 +12,7 @@ keywords: >
   <%= @article.keywords %>
 researchers:
 <% @article.researchers.each do |researcher| %>
-- "<%= researcher.id %>"
+- "<%= researcher.slug %>"
 <% end %>
 abstract: "<%= @article.abstract %>"
 references: "<%= @article.references %>"
