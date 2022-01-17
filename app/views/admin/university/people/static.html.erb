@@ -23,4 +23,4 @@ roles:
   - administrator
 <% end %>
 ---
-<%= prepare_for_github @person.biography, @person.university %>
+<%= prepare_html_for_static @person.biography, @person.university %>

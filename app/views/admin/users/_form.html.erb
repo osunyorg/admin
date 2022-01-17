@@ -29,7 +29,7 @@
                       },
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :mobile_phone %>
-          <%= f.input :role, include_blank: false, collection: current_user.managed_roles %>
+          <%= f.input :role, include_blank: false, collection: current_user.managed_roles, label_method: lambda { |k| t("activerecord.attributes.user.roles.#{k[1]}")} %>
         </div>
       </div>
     </div>

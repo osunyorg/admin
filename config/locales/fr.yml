@@ -13,6 +13,12 @@ fr:
         mobile_phone: Téléphone portable
         picture: Photo de profil
         role: Rôle
+        roles:
+          admin: Administrateur
+          program_manager: Responsable de formation
+          server_admin: Administrateur du serveur
+          teacher: Enseignant·e
+          visitor: Visiteur
     errors:
       models:
         user:

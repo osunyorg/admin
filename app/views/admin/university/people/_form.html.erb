@@ -57,7 +57,7 @@
             class: 'js-slug-input',
             data: { source: '#university_person_first_name, #university_person_last_name' }
           } %>
-          <%= f.association :user, collection: current_university.users.ordered %>
+          <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
         </div>
       </div>
       <div class="card flex-fill w-100">

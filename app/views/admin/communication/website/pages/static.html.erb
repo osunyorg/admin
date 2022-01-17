@@ -11,6 +11,6 @@ image_alt: "<%= @page.featured_image_alt %>"
 category: "<%= @page.related_category.path %>/"
 <% end %>
 description: >
-  <%= prepare_for_github @page.description, @page.university %>
+  <%= prepare_text_for_static @page.description %>
 ---
-<%= prepare_for_github @page.text, @page.university %>
+<%= prepare_html_for_static @page.text, @page.university %>

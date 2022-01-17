@@ -2,7 +2,9 @@ class Admin::Education::Program::Role::PeopleController < Admin::Education::Prog
   load_and_authorize_resource :role, class: Education::Program::Role, through: :program
   load_and_authorize_resource class: Education::Program::Role::Person, through: :role
 
-  include Admin::Reorderable 
+  before_action :get_available_people, except: :destroy
+
+  include Admin::Reorderable
 
   def new
     breadcrumb
@@ -23,6 +25,11 @@ class Admin::Education::Program::Role::PeopleController < Admin::Education::Prog
   end
 
   protected
+
+  def get_available_people
+    used_person_ids = @role.people.where.not(id: @person.id).pluck(:person_id)
+    @available_people = current_university.people.where.not(id: used_person_ids).accessible_by(current_ability).ordered
+  end
 
   def breadcrumb
     super

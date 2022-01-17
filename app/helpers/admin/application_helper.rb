@@ -60,9 +60,8 @@ module Admin::ApplicationHelper
                 form: form.options.dig(:html, :id)
   end
 
-  def prepare_for_github(html, university)
+  def prepare_html_for_static(html, university)
     text = html.to_s
-
     text = sanitize text,
                     tags: %w(table figure figcaption strong em b i u p code pre tt samp kbd var sub sup dfn cite big small address hr br span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr acronym a img blockquote del ins),
                     attributes: %w(rel  href src srcset width height alt cite datetime title class name xml:lang abbr style target)
@@ -70,6 +69,15 @@ module Admin::ApplicationHelper
     text.gsub! "\n", ' '
     text.gsub! "/rails/active_storage", "#{university.url}/rails/active_storage"
     sanitize text
+  end
+
+  def prepare_text_for_static(text)
+    # Beware, it works only at level one, with 2 spaces
+    indentation = '  '
+    text = strip_tags text.to_s
+    text.gsub! "\r\n", "\n" # Remove useless \r
+    text.gsub! "\n", "\n#{indentation}" # Indent properly to avoid broken frontmatter
+    text.chomp
   end
 
   def collection_tree(list, except = nil)
