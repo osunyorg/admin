@@ -2,7 +2,7 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">
-    <%= render 'admin/communication/website/posts/list', posts: @posts, hide_author: true, hide_category: true %>
+    <%= render 'admin/communication/website/posts/list', posts: @posts, hide_author: true %>
     <% if @posts.total_pages > 1 %>
       <div class="card-footer">
         <%= paginate @posts, theme: 'bootstrap-5' %>
