@@ -94,6 +94,6 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def set_published_at
-    self.published_at = published? ? Time.zone.now : nil
+    self.published_at = Time.zone.now if published? && published_at.nil?
   end
 end
