@@ -72,12 +72,12 @@ module Admin::ApplicationHelper
   end
 
   def prepare_text_for_static(text)
-    # Beware, it works only at level one, with 2 spaces
-    indentation = '  '
-    text = strip_tags text.to_s
-    text.gsub! "\r\n", "\n" # Remove useless \r
-    text.gsub! "\n", "\n#{indentation}" # Indent properly to avoid broken frontmatter
-    text.chomp
+    indentation = '  ' # Beware, it works only at level one, with 2 spaces
+    strip_tags  text.to_s
+                    .dup
+                    .gsub("\r\n", "\n") # Remove useless \r
+                    .gsub("\n", "\n#{indentation}") # Indent properly to avoid broken frontmatter
+                    .chomp
   end
 
   def collection_tree(list, except = nil)
