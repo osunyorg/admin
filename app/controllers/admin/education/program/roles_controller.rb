@@ -3,6 +3,10 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   include Admin::Reorderable
 
+  def reorder
+    super { |first_role| first_role.sync_program }
+  end
+
   def show
     breadcrumb
   end

@@ -34,13 +34,13 @@ class Education::Program::Role < ApplicationRecord
     "#{title}"
   end
 
+  def sync_program
+    program.sync_with_git
+  end
+
   protected
 
   def last_ordered_element
     program.roles.ordered.last
-  end
-
-  def sync_program
-    program.sync_with_git
   end
 end

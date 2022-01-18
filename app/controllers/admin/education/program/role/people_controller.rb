@@ -6,6 +6,10 @@ class Admin::Education::Program::Role::PeopleController < Admin::Education::Prog
 
   include Admin::Reorderable
 
+  def reorder
+    super { |first_person| first_person.sync_program }
+  end
+
   def new
     breadcrumb
   end
