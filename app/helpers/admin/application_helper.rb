@@ -77,7 +77,7 @@ module Admin::ApplicationHelper
       .dup
       .gsub("\r\n", "\n") # Remove useless \r
       .gsub("\n", "\n#{indentation}") # Indent properly to avoid broken frontmatter
-      .chomp
+      .chomp # Remove extra newlines
   end
 
   def collection_tree(list, except = nil)
