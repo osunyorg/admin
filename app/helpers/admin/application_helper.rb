@@ -75,6 +75,7 @@ module Admin::ApplicationHelper
     indentation = '  ' # Beware, it works only at level one, with 2 spaces
     strip_tags(text)
       .dup
+      .strip
       .gsub("\r\n", "\n") # Remove useless \r
       .gsub("\n", "\n#{indentation}") # Indent properly to avoid broken frontmatter
       .chomp # Remove extra newlines
