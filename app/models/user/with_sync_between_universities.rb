@@ -44,7 +44,6 @@ module User::WithSyncBetweenUniversities
                             confirmation_token: Devise.friendly_token, confirmed_at: Time.now,
                             role: :server_admin, skip_server_admin_sync: true)
     # as a new user must have a password and we can't access previous user password
-    byebug
     user.save
     user.update_column(:encrypted_password, self.encrypted_password) if user.valid?
   end
