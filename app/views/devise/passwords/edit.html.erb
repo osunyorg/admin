@@ -22,7 +22,6 @@
                     special_char: Rails.application.config.allowed_special_chars
                   },
                   input_html: { autocomplete: "new-password" } %>
-      <%= f.button :submit, t(".change_my_password"), class: 'btn btn-primary' %>
     </div>
     <div class="col-md-6">
       <%= f.input :password_confirmation,
@@ -32,6 +31,9 @@
                   allow_password_uncloaking: true,
                   compare_with_field: :password,
                   input_html: { autocomplete: "new-password" } %>
+    </div>
+    <div class="col-md-6">
+      <%= f.button :submit, t(".change_my_password"), class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
