@@ -11,10 +11,10 @@ date: <%= @article.published_at %> UTC
 keywords: >
   <%= @article.keywords %>
 researchers:
-<% @article.researchers.each do |researcher| %>
-- "<%= researcher.slug %>"
+<% @article.persons.each do |person| %>
+- "<%= person.slug %>"
 <% end %>
 abstract: "<%= @article.abstract %>"
 references: "<%= @article.references %>"
 ---
-<%= @article.text %>
+<%= prepare_html_for_static @article.text, @article.university %>

@@ -40,11 +40,11 @@
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('keywords') %></h3>
           <p><%= @article.keywords %></p>
         <% end %>
-        <% if @article.researchers.any? %>
+        <% if @article.persons.any? %>
           <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('researchers') %></h3>
           <ul class="list-unstyled mb-0">
-            <% @article.researchers.each do |researcher| %>
-              <li><%= link_to researcher, admin_research_researcher_path(researcher) %></li>
+            <% @article.persons.each do |person| %>
+              <li><%= link_to person, admin_research_researcher_path(person) %></li>
             <% end %>
           </ul>
         <% end %>
