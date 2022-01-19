@@ -8,6 +8,9 @@ volumes:
 <% end %>
 weight: <%= @article.position %>
 date: <%= @article.published_at %> UTC
+<% if @article.pdf.attached? %>
+pdf: "<%= @article.pdf.blob_id %>"
+<% end %>
 keywords: >
   <%= @article.keywords %>
 researchers:
