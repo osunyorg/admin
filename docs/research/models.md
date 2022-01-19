@@ -3,11 +3,8 @@
 ## university/person/Researcher (extends university/Person)
 
 ... ajouté à university/Person
-- situation:string
 - habilitation:boolean
-- axis:references
-- status:enum (statutaire, doctorant, associé)
-- research_themes:html
+- tenure:boolean
 
 ## research/Laboratory
 
@@ -17,7 +14,6 @@
 - zipcode:string
 - city:string
 - country:string
-- private:boolean
 
 ## research/laboratory/Axis
 
@@ -28,6 +24,16 @@
 - description:text
 - text:html
 
+## research/laboratory/Involvement
+
+- university:references
+- research_laboratory:references
+- university_person:references
+- research_axis:references
+- status:enum (statutaire, doctorant, associé)
+- description:string
+- themes:html
+
 ## research/Thesis
 
 - university:references
@@ -35,6 +41,7 @@
 - author:references (person)
 - director:references (person)
 - title:string
+- abstract:text
 - started_at:date
-- presented_at:date
+- completed:boolean
 - completed_at:date
