@@ -5,6 +5,7 @@
 Projet scientifique sur plusieurs années, avec des thèmes (ou thématiques) de recherche
 
 ## Personnes
+
 - Prénom
 - Nom
 - Photo
@@ -38,6 +39,7 @@ Pour le MICA, autour d'une dizaine par mois, avec un pic en novembre
 ### Séminaires
 
 ### Soutenances
+
 Thèses et HDR
 
 Import depuis theses.fr ?
@@ -64,6 +66,7 @@ Import depuis theses.fr ?
 Alphabétique parfois, classé parfois
 
 ## Bibliographies
+
 DOI, HAL, researchgate
 
 
@@ -89,3 +92,7 @@ Collecte de mails, gestion avec Sendinblue
 ## Don
 
 Fonctionnalité nouvelle au MICA, page d'explication (pas de don en ligne)
+
+## SEO
+
+Plan de redirection

@@ -29,6 +29,12 @@
 - city:string
 - country:string
 
+## university/Section
+cf https://conseil-national-des-universites.fr/cnu/
+
+- name:string
+- number:integer
+
 ## User
 
 - university:references
@@ -36,27 +42,6 @@
 - last_name:string
 - role:integer (enum: superadmin, admin, visitor)
 
-## user/Teacher
+## university/Person
 
-- user:references
-- program:references
-- title:string
-- biography:text
-
-## user/Student
-
-- user:references
-- program:references
-- year:references
-- session:references
-
-## user/Alumnus
-
-- user:references
-- program:references
-- session:references
-
-## user/Application
-
-- user:references
-- program:references
+## university/person/Teacher
