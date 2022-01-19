@@ -50,6 +50,10 @@ class Communication::Website < ApplicationRecord
     "data/website.yml"
   end
 
+  def menu_item_kinds
+    Communication::Website::Menu::Item.kinds_for_website(self)
+  end
+
   def git_dependencies(website)
     dependencies = (
       [self] +
