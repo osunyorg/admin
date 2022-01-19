@@ -63,6 +63,7 @@ class Research::Journal::Article < ApplicationRecord
 
   def git_dependencies(website)
     [self] +
+    active_storage_blobs +
     other_articles_in_the_volume +
     persons +
     persons.map(&:researcher)
