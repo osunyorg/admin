@@ -35,7 +35,7 @@
 #
 class Research::Journal::Article < ApplicationRecord
   include WithGit
-  include WithMedia
+  include WithBlobs
   include WithPosition
 
   has_rich_text :text

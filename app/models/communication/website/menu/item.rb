@@ -32,6 +32,9 @@
 #  fk_rails_...  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
+  KINDS_FOR_SCHOOL = ['programs', 'program', 'administrators', 'teachers']
+  KINDS_FOR_JOURNAL = ['researchers', 'research_volumes', 'research_volume', 'research_articles', 'research_article']
+
   include WithTree
   include WithPosition
 
@@ -71,6 +74,19 @@ class Communication::Website::Menu::Item < ApplicationRecord
   validates :about, presence: true, if: :has_about?
 
   after_commit :sync_menu
+
+  def self.kinds_for_website(website)
+    whitelisted_kinds = self.kinds.dup
+
+    KINDS_FOR_SCHOOL.each { |school_kind|
+      whitelisted_kinds.delete(school_kind)
+    } unless website.about_school?
+    KINDS_FOR_JOURNAL.each { |journal_kind|
+      whitelisted_kinds.delete(journal_kind)
+    } unless website.about_journal?
+
+    whitelisted_kinds
+  end
 
   def to_s
     "#{title}"

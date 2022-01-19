@@ -9,6 +9,7 @@
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :kind,
+                      collection: Communication::Website::Menu::Item.kinds_for_website(@website),
                       include_blank: false,
                       input_html: {
                         class: 'js-kind-input',

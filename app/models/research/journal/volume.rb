@@ -28,9 +28,8 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include WithGit
-  include WithMedia
-
-  has_one_attached_deletable :featured_image
+  include WithFeaturedImage
+  include WithBlobs
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
@@ -71,5 +70,13 @@ class Research::Journal::Volume < ApplicationRecord
 
   def set_published_at
     self.published_at = published? ? Time.zone.now : nil
+  end
+
+  def explicit_blob_ids
+    [featured_image&.blob_id, rich_text_blob_ids]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end
