@@ -31,7 +31,8 @@
 #
 class Education::Program < ApplicationRecord
   include WithGit
-  include WithMedia
+  include WithFeaturedImage
+  include WithBlobs
   include WithMenuItemTarget
   include WithSlug
   include WithTree
@@ -53,8 +54,6 @@ class Education::Program < ApplicationRecord
                                     :results
 
   attr_accessor :skip_websites_categories_callback
-
-  has_one_attached_deletable :featured_image
 
   belongs_to :university
   belongs_to :parent,
@@ -149,5 +148,13 @@ class Education::Program < ApplicationRecord
 
   def last_ordered_element
     university.education_programs.where(parent_id: parent_id).ordered.last
+  end
+
+  def explicit_blob_ids
+    [featured_image&.blob_id, rich_text_blob_ids]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end

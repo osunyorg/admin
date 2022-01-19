@@ -32,12 +32,12 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include WithGit
-  include WithMedia
+  include WithFeaturedImage
+  include WithBlobs
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
 
   has_rich_text :text
-  has_one_attached_deletable :featured_image
 
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
@@ -95,5 +95,13 @@ class Communication::Website::Post < ApplicationRecord
 
   def set_published_at
     self.published_at = Time.zone.now if published? && published_at.nil?
+  end
+
+  def explicit_blob_ids
+    [featured_image&.blob_id, rich_text_blob_ids]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end

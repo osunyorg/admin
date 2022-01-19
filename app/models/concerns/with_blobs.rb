@@ -1,4 +1,4 @@
-module WithMedia
+module WithBlobs
   extend ActiveSupport::Concern
 
   def active_storage_blobs
@@ -6,22 +6,21 @@ module WithMedia
   end
 
   def explicit_active_storage_blobs
-    blobs_with_ids [featured_image&.blob_id, rich_text_blob_ids]
+    blobs_with_ids explicit_blob_ids
   end
 
   def inherited_active_storage_blobs
-    blobs_with_ids [best_featured_image]
-  end
-
-  # Can be overwrite to get featured_image from associated objects (ex: parents)
-  def best_featured_image(fallback: true)
-    featured_image
+    blobs_with_ids inherited_blob_ids
   end
 
   protected
 
-  def rich_text_reflection_names
-    @rich_text_reflection_names ||= _reflections.select { |name, reflection| reflection.class_name == "ActionText::RichText" }.keys
+  def explicit_blob_ids
+    [rich_text_blob_ids]
+  end
+
+  def inherited_blob_ids
+    []
   end
 
   def rich_text_blob_ids
@@ -33,5 +32,9 @@ module WithMedia
 
   def blobs_with_ids(ids)
     university.active_storage_blobs.where(id: ids.flatten.compact)
+  end
+
+  def rich_text_reflection_names
+    @rich_text_reflection_names ||= _reflections.select { |name, reflection| reflection.class_name == "ActionText::RichText" }.keys
   end
 end

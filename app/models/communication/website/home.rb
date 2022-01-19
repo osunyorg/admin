@@ -22,13 +22,13 @@
 #
 class Communication::Website::Home < ApplicationRecord
   include WithGit
-  include WithMedia
+  include WithFeaturedImage
+  include WithBlobs
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
 
   has_rich_text :text
-  has_one_attached_deletable :featured_image
 
   def to_s
     website.to_s
@@ -44,5 +44,15 @@ class Communication::Website::Home < ApplicationRecord
 
   def git_destroy_dependencies(website)
     [self] + active_storage_blobs
+  end
+
+  protected
+
+  def explicit_blob_ids
+    [featured_image&.blob_id, rich_text_blob_ids]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end

@@ -39,14 +39,14 @@
 
 class Communication::Website::Page < ApplicationRecord
   include WithGit
-  include WithMedia
+  include WithFeaturedImage
+  include WithBlobs
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
   include WithPosition
 
   has_rich_text :text
-  has_one_attached_deletable :featured_image
 
   belongs_to :university
   belongs_to :website,
@@ -116,5 +116,13 @@ class Communication::Website::Page < ApplicationRecord
               .where(communication_website_id: self.communication_website_id, slug: slug)
               .where.not(id: self.id)
               .exists?
+  end
+
+  def explicit_blob_ids
+    [featured_image&.blob_id, rich_text_blob_ids]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end
