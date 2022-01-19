@@ -98,7 +98,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def explicit_blob_ids
-    [featured_image&.blob_id, rich_text_blob_ids]
+    super.concat [featured_image&.blob_id]
   end
 
   def inherited_blob_ids
