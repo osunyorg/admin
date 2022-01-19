@@ -90,8 +90,8 @@ class Research::Journal::Article < ApplicationRecord
     ).ordered.last
   end
 
-  def blob_ids
-    [pdf&.blob_id]
+  def explicit_blob_ids
+    super.concat [pdf&.blob_id]
   end
 
   def set_published_at
