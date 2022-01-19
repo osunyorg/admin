@@ -26,6 +26,7 @@ class Ability
     can :read, Research::Journal, university_id: @user.university_id
     can :read, Research::Journal::Article, university_id: @user.university_id
     can :read, Research::Journal::Volume, university_id: @user.university_id
+    can :read, Research::Laboratory, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
   end
 
@@ -61,6 +62,7 @@ class Ability
     can :manage, Research::Journal, university_id: @user.university_id
     can :manage, Research::Journal::Article, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id
+    can :manage, Research::Laboratory, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
   end

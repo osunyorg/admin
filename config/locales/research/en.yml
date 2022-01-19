@@ -13,6 +13,9 @@ en:
       research/journal/volume:
         one: Volume
         other: Volumes
+      research/laboratory:
+        one: Laboratory
+        other: Laboratories
     attributes:
       research/journal:
         issn: ISSN
@@ -36,6 +39,12 @@ en:
         published: Published?
         published_at: Published at
         title: Title
+      research/laboratory:
+        address: Address
+        country: Country
+        city: City
+        name: Name
+        zipcode: Zipcode
   research:
     manage_researchers: Managege researchers
     number_of_articles: Number of articles

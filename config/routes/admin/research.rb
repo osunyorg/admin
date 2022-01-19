@@ -8,4 +8,5 @@ namespace :research do
       end
     end
   end
+  resources :laboratories
 end

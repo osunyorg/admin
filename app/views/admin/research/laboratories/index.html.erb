@@ -1,0 +1,32 @@
+<% content_for :title, Research::Laboratory.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Research::Laboratory.human_attribute_name('name') %></th>
+      <th><%= Research::Laboratory.human_attribute_name('address') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @laboratories.each do |laboratory| %>
+      <tr>
+        <td><%= link_to laboratory, [:admin, laboratory] %></td>
+        <td><%= laboratory.full_address %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link laboratory %>
+            <%= destroy_link laboratory %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @laboratories, theme: 'bootstrap-5' %>
+
+
+<% content_for :action_bar_right do %>
+  <%= create_link Research::Laboratory %>
+<% end %>

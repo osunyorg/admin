@@ -20,10 +20,10 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :education, 'Feedbacks', nil, { icon: 'comments' }
     end
 
-    if can?(:read, Research::Journal)
+    if can?(:read, Research::Journal) || can?(:read, Research::Laboratory)
       primary.item :research, Research.model_name.human, nil, { kind: :header }
       primary.item :research_researchers, t('research.researchers', count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' } if can?(:read, University::Person)
-      primary.item :research, 'Laboratoires', nil, { icon: 'flask' }
+      primary.item :research_laboratories, Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path, { icon: 'flask' } if can?(:read, Research::Laboratory)
       primary.item :research, 'Veille', nil, { icon: 'eye' }
       primary.item :research_journals, Research::Journal.model_name.human(count: 2), admin_research_journals_path, { icon: 'newspaper' } if can?(:read, Research::Journal)
     end
