@@ -16,6 +16,9 @@ fr:
       research/laboratory:
         one: Laboratoire
         other: Laboratoires
+      research/laboratory/axis:
+        one: Axe
+        other: Axes
     attributes:
       research/journal:
         issn: ISSN
@@ -45,6 +48,10 @@ fr:
         city: Ville
         name: Nom
         zipcode: Code postal
+      research/laboratory/axis:
+        description: Description
+        name: Nom
+        text: Texte
   research:
     manage_researchers: Gérer les Chercheu·rs·ses
     number_of_articles: Nombre d'articles

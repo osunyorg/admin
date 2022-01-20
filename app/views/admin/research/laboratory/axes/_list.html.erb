@@ -1,0 +1,29 @@
+<table class="table table-sortable">
+  <thead>
+    <tr>
+      <th><%= Research::Laboratory::Axis.model_name.human %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody data-reorder-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
+    <% axes.each do |axis| %>
+      <tr class="handle" data-id="<%= axis.id %>">
+        <td>
+          <%= link_to axis, admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
+        </td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                        edit_admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
+                        class: button_classes %>
+            <%= link_to t('delete'),
+                        admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -9,6 +9,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   end
 
   def show
+    @axes = @laboratory.axes.ordered
     breadcrumb
   end
 
