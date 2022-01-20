@@ -1,6 +1,8 @@
-# Models
+# Communication
 
-## communication/website/Event
+## Models
+
+### communication/website/Event
 
 - university:references
 - communication_website:references
@@ -11,7 +13,7 @@
 - published:boolean
 - published_at:datetime
 
-## communication/website/event/Kind
+### communication/website/event/Kind
 
 - university:references
 - communication_website:references

@@ -1,11 +1,13 @@
 # Benchmark
 
-## Excellent websites
+## Ecoles
+
+### Excellent websites
 
 - https://www.harvard.edu/
 - https://www.mit.edu/
 
-## Other websites
+### Other websites
 
 - https://www.stanford.edu/
 - https://www.brown.edu/

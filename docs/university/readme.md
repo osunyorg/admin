@@ -1,6 +1,12 @@
-# Models
+# University
 
-## University
+## Models
+
+### university/Person
+
+### university/person/Teacher
+
+### University
 
 - name:string
 - address:string
@@ -9,7 +15,7 @@
 - country:string
 - private:boolean
 
-## university/School
+### university/School
 
 - university:references
 - name:string
@@ -20,7 +26,7 @@
 - latitude:float
 - longitude:float
 
-## university/Campus
+### university/Campus
 
 - university:references
 - name:string
@@ -29,19 +35,8 @@
 - city:string
 - country:string
 
-## university/Section
+### university/Section
 cf https://conseil-national-des-universites.fr/cnu/
 
 - name:string
 - number:integer
-
-## User
-
-- university:references
-- first_name:string
-- last_name:string
-- role:integer (enum: superadmin, admin, visitor)
-
-## university/Person
-
-## university/person/Teacher
