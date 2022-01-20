@@ -35,16 +35,18 @@ window.osuny.conditional = {
 
     hide: function (target) {
         'use strict';
+        var input = target.querySelector('select');
         target.classList.add('d-none');
-        target.removeAttribute('required');
-        target.setAttribute('disabled', 'disabled');
+        input.removeAttribute('required');
+        input.setAttribute('disabled', 'disabled');
     },
 
     show: function (target) {
         'use strict';
+        var input = target.querySelector('select');
         target.classList.remove('d-none');
-        target.removeAttribute('disabled');
-        target.setAttribute('required', 'required');
+        input.removeAttribute('disabled');
+        input.setAttribute('required', 'required');
     },
 
     invoke: function () {
