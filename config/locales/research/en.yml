@@ -16,6 +16,12 @@ en:
       research/laboratory:
         one: Laboratory
         other: Laboratories
+      research/laboratory/axis:
+        one: Axis
+        other: Axes
+      research/thesis:
+        one: Thesis
+        other: Theses
     attributes:
       research/journal:
         issn: ISSN
@@ -45,6 +51,19 @@ en:
         city: City
         name: Name
         zipcode: Zipcode
+      research/laboratory/axis:
+        description: Description
+        name: Name
+        text: Text
+      research/thesis:
+        abstract: Abstract
+        author: Author
+        completed: Completed?
+        completed_at: Completed at
+        director: Director
+        laboratory: Laboratory
+        started_at: Started at
+        title: Title
   research:
     manage_researchers: Managege researchers
     number_of_articles: Number of articles

@@ -8,5 +8,12 @@ namespace :research do
       end
     end
   end
-  resources :laboratories
+  resources :laboratories do
+    resources :axes, controller: 'laboratory/axes' do
+      collection do
+        post :reorder
+      end
+    end
+  end
+  resources :theses
 end

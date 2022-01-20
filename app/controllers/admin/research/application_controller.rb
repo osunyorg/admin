@@ -6,6 +6,9 @@ class Admin::Research::ApplicationController < Admin::ApplicationController
     if @journal
       short_breadcrumb
       breadcrumb_for @journal
+    elsif @laboratory
+      short_breadcrumb
+      breadcrumb_for @laboratory
     else
       super
       add_breadcrumb Research.model_name.human
