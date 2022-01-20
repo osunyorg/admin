@@ -21,7 +21,6 @@
 #  fk_rails_...  (research_laboratory_id => research_laboratories.id)
 #  fk_rails_...  (university_id => universities.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   university: one

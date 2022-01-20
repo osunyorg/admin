@@ -1,0 +1,30 @@
+<% content_for :title, Research::Thesis.model_name.human(count: 2) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Research::Thesis.human_attribute_name('title') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @theses.each do |thesis| %>
+      <tr>
+        <td><%= link_to thesis, [:admin, thesis] %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link thesis %>
+            <%= destroy_link thesis %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @theses, theme: 'bootstrap-5' %>
+
+
+<% content_for :action_bar_right do %>
+  <%= create_link Research::Thesis %>
+<% end %>

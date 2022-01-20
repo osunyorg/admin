@@ -6,6 +6,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   def index
     @laboratories = @laboratories.ordered.page(params[:page])
     breadcrumb
+    add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
   end
 
   def show

@@ -19,6 +19,9 @@ fr:
       research/laboratory/axis:
         one: Axe
         other: Axes
+      research/thesis:
+        one: Thèse
+        other: Thèses
     attributes:
       research/journal:
         issn: ISSN
@@ -52,6 +55,15 @@ fr:
         description: Description
         name: Nom
         text: Texte
+      research/thesis:
+        abstract: Résumé
+        author: Auteur·rice
+        completed: Complétée ?
+        completed_at: Complétée le
+        director: Directeur·rice
+        laboratory: Laboratoire
+        started_at: Commencée le
+        title: Titre
   research:
     manage_researchers: Gérer les Chercheu·rs·ses
     number_of_articles: Nombre d'articles

@@ -15,4 +15,5 @@ namespace :research do
       end
     end
   end
+  resources :theses
 end

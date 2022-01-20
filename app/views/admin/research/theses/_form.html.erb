@@ -1,0 +1,24 @@
+<%= simple_form_for [:admin, thesis] do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card flex-fill w-100">
+        <div class="card-body">
+          <%= f.input :title %>
+          <%= f.input :abstract %>
+          <%= f.input :started_at, html5: true %>
+          <%= f.input :completed %>
+          <%= f.input :completed_at, html5: true %>
+          <%= f.association :laboratory,
+                            collection: current_university.research_laboratories.ordered %>
+          <%= f.association :author,
+                            collection: current_university.people.researchers.ordered %>
+          <%= f.association :director,
+                            collection: current_university.people.researchers.ordered %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>
