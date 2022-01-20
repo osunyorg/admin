@@ -37,6 +37,7 @@ fr:
         about_: Site indépendant (aucun sujet)
         about_Education::School: Site d'école
         about_Research::Journal: Site de revue scientifique
+        about_Research::Laboratory: Site de laboratoire
         about_type: Sujet du site
         name: Nom
         static_pathname_administrators: Chemin statique de l'équipe administrative

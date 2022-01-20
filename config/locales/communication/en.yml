@@ -37,6 +37,7 @@ en:
         about_: Independent website (no specific subject)
         about_Education::School: School website
         about_Research::Journal: Journal website
+        about_Research::Laboratory: Laboratory website
         about_type: About
         name: Name
         static_pathname_administrators: Administration staff's static pathname

@@ -27,7 +27,7 @@ module Communication::Website::WithAbouts
                 dependent: :destroy
 
     def self.about_types
-      [nil, Education::School.name, Research::Journal.name]
+      [nil, Education::School.name, Research::Laboratory.name, Research::Journal.name]
     end
 
     after_save_commit :set_programs_categories!, if: -> (website) { website.about_school? }
@@ -39,6 +39,10 @@ module Communication::Website::WithAbouts
 
   def about_journal?
     about_type == 'Research::Journal'
+  end
+
+  def about_laboratory?
+    about_type == 'Research::Laboratory'
   end
 
   def programs
@@ -77,6 +81,7 @@ module Communication::Website::WithAbouts
       university_id: university.id
     )
     set_programs_categories_at_level! programs_root_category, about.programs.root.ordered
+  rescue
   end
 
   protected

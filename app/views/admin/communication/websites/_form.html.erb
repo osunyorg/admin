@@ -9,21 +9,34 @@
           <%= f.input :name %>
           <%= f.input :about_type,
                       collection: Communication::Website.about_types,
+                      input_html: { data: { conditional: true } },
                       label_method: lambda { |object|
                         I18n.t("activerecord.attributes.communication/website.about_#{object}")
                       },
                       include_blank: false %>
-          <div class="type-school">
+          <div  class="d-none"
+                data-conditional-source="communication_website_about_type"
+                data-conditional-value="Education::School">
             <%= f.input :about_id,
                         collection: current_university.education_schools,
                         label: Education::School.model_name.human,
-                        required: true %>
+                        include_blank: false %>
           </div>
-          <div class="type-journal">
+          <div  class="d-none"
+                data-conditional-source="communication_website_about_type"
+                data-conditional-value="Research::Journal">
             <%= f.input :about_id,
                         collection: current_university.research_journals,
                         label: Research::Journal.model_name.human,
-                        required: true %>
+                        include_blank: false %>
+          </div>
+          <div  class="d-none"
+                data-conditional-source="communication_website_about_type"
+                data-conditional-value="Research::Laboratory">
+            <%= f.input :about_id,
+                        collection: current_university.research_laboratories,
+                        label: Research::Laboratory.model_name.human,
+                        include_blank: false %>
           </div>
         </div>
       </div>
