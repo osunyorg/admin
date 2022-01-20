@@ -1,5 +1,19 @@
 <% content_for :title, @laboratory %>
 
+<div class="card mt-5">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('create'),
+                  new_admin_research_laboratory_axis_path(laboratory_id: @laboratory),
+                  class: button_classes %>
+    </div>
+    <h2 class="card-title">
+      <%= link_to Research::Laboratory::Axis.model_name.human(count: 2),
+                  admin_research_laboratory_axes_path(laboratory_id: @laboratory) %></h2>
+  </div>
+  <%= render 'admin/research/laboratory/axes/list', axes: @axes %>
+</div>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @laboratory %>
 <% end %>

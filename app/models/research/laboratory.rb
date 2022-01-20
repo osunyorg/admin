@@ -23,7 +23,11 @@
 class Research::Laboratory < ApplicationRecord
   include WithGit
 
-  belongs_to :university
+  belongs_to  :university
+  has_many    :axes,
+              class_name: "Research::Laboratory::Axis",
+              foreign_key: :research_laboratory_id,
+              dependent: :destroy
 
   scope :ordered, -> { order(:name) }
 

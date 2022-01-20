@@ -16,6 +16,9 @@ en:
       research/laboratory:
         one: Laboratory
         other: Laboratories
+      research/laboratory/axis:
+        one: Axis
+        other: Axes
     attributes:
       research/journal:
         issn: ISSN
@@ -45,6 +48,10 @@ en:
         city: City
         name: Name
         zipcode: Zipcode
+      research/laboratory/axis:
+        description: Description
+        name: Name
+        text: Text
   research:
     manage_researchers: Managege researchers
     number_of_articles: Number of articles
