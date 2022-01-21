@@ -9,16 +9,16 @@
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :kind,
-                      collection: @website.menu_item_kinds,
-                      include_blank: false,
+                      as: :hidden,
                       input_html: {
-                        class: 'js-kind-input',
-                        data: { url: kind_switch_admin_communication_website_menu_items_path }
-                       } %>
+                        data: {
+                          url: kind_switch_admin_communication_website_menu_items_path
+                        }
+                      } %>
           <div class="row">
             <% @website.menu_item_kinds.keys.each do |kind| %>
               <div class="col-6 col-lg-4 col-xl-3">
-                <div class="card item<%= " item--selected" if kind == item.kind %>" data-kind="<%= kind %>">
+                <div class="card kind" data-kind="<%= kind %>">
                   <div class="card-body">
                     <p class="text-end mb-0">
                       <i class="<%= icon_for "communication.website.menu.item.kind.#{kind}" %> fa-2x"></i><br>
@@ -26,12 +26,13 @@
                     <p class="mb-0">
                       <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
                     </p>
+                    <a class="stretched-link" data-tmp="<%= kind %>"></a>
                   </div>
                 </div>
               </div>
             <% end %>
           </div>
-          <div class="<%= 'd-none' unless item.url? %> js-url-field">
+          <div data-kind-if="url">
             <%= f.input :url, as: :string %>
           </div>
           <div class="<%= 'd-none' unless item.has_about? %> js-about-fields">
