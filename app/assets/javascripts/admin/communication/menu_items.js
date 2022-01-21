@@ -8,16 +8,20 @@ window.osuny.communication.menuItems = {
         this.kinds = document.querySelectorAll('[data-kind]');
         this.url = document.querySelector('.communication_website_menu_item_url');
         this.switchUrl = this.kindInput.dataset.url;
+        this.about = document.querySelector('#communication_website_menu_item_about_id');
+        this.title = document.querySelector('#communication_website_menu_item_title');
         for (i = 0; i < this.kinds.length; i += 1) {
             kind = this.kinds[i];
             kind.addEventListener('click', this.onKindChange.bind(this));
         }
+        this.about.addEventListener('change', this.onAboutChange.bind(this));
         this.chooseKind(this.kindInput.value);
     },
 
     onKindChange: function (event) {
         'use strict';
         var target = event.target,
+            // Not working on IE, FIXME
             div = target.closest('[data-kind]'),
             kind = div.dataset.kind;
         this.chooseKind(kind);
@@ -48,6 +52,15 @@ window.osuny.communication.menuItems = {
             processData: false,
             contentType: false
         });
+    },
+
+    onAboutChange: function () {
+        'use strict';
+        var option = this.about.options[this.about.selectedIndex],
+            name = option.text;
+        if (this.title.value === '') {
+            this.title.value = name.trim();
+        }
     },
 
     invoke: function () {
