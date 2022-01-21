@@ -37,6 +37,7 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithHome
   include WithImport
+  include WithMenuItems
 
   belongs_to :university
 
@@ -48,10 +49,6 @@ class Communication::Website < ApplicationRecord
 
   def git_path(website)
     "data/website.yml"
-  end
-
-  def menu_item_kinds
-    Communication::Website::Menu::Item.kinds_for_website(self)
   end
 
   def git_dependencies(website)

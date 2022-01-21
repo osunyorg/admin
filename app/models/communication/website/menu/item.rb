@@ -32,9 +32,6 @@
 #  fk_rails_...  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
-  KINDS_FOR_SCHOOL = ['programs', 'program', 'administrators', 'teachers']
-  KINDS_FOR_JOURNAL = ['researchers', 'research_volumes', 'research_volume', 'research_articles', 'research_article']
-
   include WithTree
   include WithPosition
 
@@ -45,10 +42,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
   belongs_to :menu, class_name: 'Communication::Website::Menu'
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
   belongs_to :about, polymorphic: true, optional: true
-  has_many :children,
-           class_name: 'Communication::Website::Menu::Item',
-           foreign_key: :parent_id,
-           dependent: :destroy
+  has_many   :children,
+             class_name: 'Communication::Website::Menu::Item',
+             foreign_key: :parent_id,
+             dependent: :destroy
 
   enum kind: {
     blank: 0,
@@ -75,58 +72,48 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   after_commit :sync_menu
 
-  def self.kinds_for_website(website)
-    whitelisted_kinds = self.kinds.dup
-
-    KINDS_FOR_SCHOOL.each { |school_kind|
-      whitelisted_kinds.delete(school_kind)
-    } unless website.about_school?
-    KINDS_FOR_JOURNAL.each { |journal_kind|
-      whitelisted_kinds.delete(journal_kind)
-    } unless website.about_journal?
-
-    whitelisted_kinds
-  end
-
   def to_s
     "#{title}"
   end
 
   def static_target
     target = nil
+    active = website.send "menu_item_kind_#{kind}?"
+    return nil unless active
+    published = about&.published && about&.published_at
     case self.kind
+    when 'blank'
+      target = ''
     when 'url'
       target = url
     when 'page'
       target = about.path if about&.published
     when 'programs'
-      target = "/#{website.static_pathname_programs}" if website.programs.any?
+      target = "/#{website.static_pathname_programs}"
     when 'program'
-      target = "/#{website.static_pathname_programs}#{about.path}" if website.about_school?
+      target = "/#{website.static_pathname_programs}#{about.path}"
     when 'news'
-      target = "/#{website.static_pathname_posts}" if website.posts.published.any?
+      target = "/#{website.static_pathname_posts}"
     when 'news_article'
-      target = "/#{website.static_pathname_posts}#{about.path}" if about&.published_at
+      target = "/#{website.static_pathname_posts}#{about.path}" if published
     when 'staff'
-      target = "/#{website.static_pathname_staff}" if website.people.any?
+      target = "/#{website.static_pathname_staff}"
     when 'administrators'
-      target = "/#{website.static_pathname_administrators}" if website.university_people_through_administrators.any?
+      target = "/#{website.static_pathname_administrators}"
     when 'authors'
-      target = "/#{website.static_pathname_authors}" if website.authors.compact.any?
+      target = "/#{website.static_pathname_authors}"
     when 'researchers'
-      target = "/#{website.static_pathname_researchers}" if website.research_articles.collect(&:researchers).flatten.any?
+      target = "/#{website.static_pathname_researchers}"
     when 'teachers'
-      target = "/#{website.static_pathname_teachers}" if website.programs.collect(&:university_people_through_teachers).flatten.any?
+      target = "/#{website.static_pathname_teachers}"
     when 'research_volumes'
-      target = "/#{website.static_pathname_research_volumes}" if website.research_volumes.published.any?
+      target = "/#{website.static_pathname_research_volumes}"
     when 'research_volume'
-      target = "/#{website.static_pathname_research_volumes}#{about.path}" if about&.published_at
+      target = "/#{website.static_pathname_research_volumes}#{about.path}" if published
     when 'research_articles'
-      target = "/#{website.static_pathname_research_articles}" if website.research_articles.published.any?
+      target = "/#{website.static_pathname_research_articles}"
     when 'research_article'
-      target = "/#{website.static_pathname_research_articles}#{about.path}" if about&.published_at
-    when 'blank'
-      target = ''
+      target = "/#{website.static_pathname_research_articles}#{about.path}" if published
     else
       target = about&.path
     end

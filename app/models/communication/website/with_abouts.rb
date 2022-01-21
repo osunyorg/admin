@@ -27,7 +27,12 @@ module Communication::Website::WithAbouts
                 dependent: :destroy
 
     def self.about_types
-      [nil, Education::School.name, Research::Laboratory.name, Research::Journal.name]
+      [
+        nil,
+        Education::School.name,
+        Research::Laboratory.name,
+        Research::Journal.name
+      ]
     end
 
     after_save_commit :set_programs_categories!, if: -> (website) { website.about_school? }
@@ -66,8 +71,8 @@ module Communication::Website::WithAbouts
         people += about.university_people_through_administrators
         people += about.university_people_through_administrators.map(&:administrator)
       elsif about_journal?
-        people += research_articles.collect(&:researchers).flatten
-        people += research_articles.collect(&:researchers).flatten.map(&:researcher)
+        people += research_articles.collect(&:persons).flatten
+        people += research_articles.collect(&:persons).flatten.map(&:researcher)
       end
       people.uniq.compact
     end
