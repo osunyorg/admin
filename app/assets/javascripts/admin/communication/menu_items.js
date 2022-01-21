@@ -18,8 +18,8 @@ window.osuny.communication.menuItems = {
     onKindChange: function (event) {
         'use strict';
         var target = event.target,
-            // TODO get value from parent class="kind"
-            kind = target.dataset.tmp;
+            div = target.closest('[data-kind]'),
+            kind = div.dataset.kind;
         this.chooseKind(kind);
         this.loadData(kind);
     },

@@ -15,22 +15,28 @@
                           url: kind_switch_admin_communication_website_menu_items_path
                         }
                       } %>
-          <div class="row">
-            <% @website.menu_item_kinds.keys.each do |kind| %>
-              <div class="col-6 col-lg-4 col-xl-3">
-                <div class="card kind" data-kind="<%= kind %>">
-                  <div class="card-body">
-                    <p class="text-end mb-0">
-                      <i class="<%= icon_for "communication.website.menu.item.kind.#{kind}" %> fa-2x"></i><br>
-                    </p>
-                    <p class="mb-0">
-                      <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
-                    </p>
-                    <a class="stretched-link" data-tmp="<%= kind %>"></a>
+          <div class="mb-3">
+            <label class="form-label required">
+              <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
+              <abbr title="required">*</abbr>
+            </label>
+            <div class="row">
+              <% @website.menu_item_kinds.keys.each do |kind| %>
+                <div class="col-6 col-lg-4 col-xl-3">
+                  <div class="card kind" data-kind="<%= kind %>">
+                    <div class="card-body">
+                      <p class="text-end mb-0">
+                        <i class="<%= icon_for "communication.website.menu.item.kind.#{kind}" %> fa-2x"></i><br>
+                      </p>
+                      <p class="mb-0">
+                        <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
+                      </p>
+                      <a class="stretched-link"></a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
           <div data-kind-if="url">
             <%= f.input :url, as: :string %>
