@@ -55,7 +55,7 @@ class Admin::Research::Laboratory::AxesController < Admin::Research::Laboratory:
 
   def axis_params
     params.require(:research_laboratory_axis)
-          .permit(:name, :description, :text)
+          .permit(:name, :short_name, :description, :text)
           .merge(university_id: current_university.id)
   end
 end

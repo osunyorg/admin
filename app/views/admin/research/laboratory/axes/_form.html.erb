@@ -6,8 +6,15 @@
           <h5 class="card-title mb-0"><%= t('content') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :name %>
-          <%= f.input :description, as: :text, input_html: { rows: 8 } %>
+          <div class="row">
+            <div class="col-lg-8 col-xxl-9">
+              <%= f.input :name %>
+            </div>
+            <div class="col-lg-4 col-xxl-3">
+              <%= f.input :short_name %>
+            </div>
+          </div>
+          <%= f.input :description, as: :text, input_html: { rows: 2 } %>
           <%= f.input :text, as: :rich_text_area %>
         </div>
       </div>

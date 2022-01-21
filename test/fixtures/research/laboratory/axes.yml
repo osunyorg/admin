@@ -6,6 +6,7 @@
 #  description            :text
 #  name                   :string
 #  position               :integer
+#  short_name             :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  research_laboratory_id :uuid             not null

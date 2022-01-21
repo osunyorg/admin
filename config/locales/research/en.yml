@@ -54,6 +54,7 @@ en:
       research/laboratory/axis:
         description: Description
         name: Name
+        short_name: Short name
         text: Text
       research/thesis:
         abstract: Abstract

@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Research::Laboratory::Axis.model_name.human %></th>
+      <th><%= Research::Laboratory::Axis.human_attribute_name('short_name') %></th>
       <th></th>
     </tr>
   </thead>
@@ -11,6 +12,7 @@
         <td>
           <%= link_to axis, admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
         </td>
+        <td><%= axis.short_name %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),

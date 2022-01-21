@@ -20,6 +20,7 @@
 - university:references
 - research_laboratory:references
 - name:string
+- short_name:string
 - position:integer
 - description:text
 - text:html

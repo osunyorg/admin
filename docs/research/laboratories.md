@@ -1,4 +1,4 @@
-# Labs
+# Laboratories
 
 ## Axes (research axis/axes) ou équipes
 

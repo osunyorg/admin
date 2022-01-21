@@ -54,6 +54,7 @@ fr:
       research/laboratory/axis:
         description: Description
         name: Nom
+        short_name: Nom court
         text: Texte
       research/thesis:
         abstract: Résumé
