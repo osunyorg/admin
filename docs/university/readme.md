@@ -27,14 +27,25 @@
 - habilitation:boolean
 - tenure:boolean
 
-### university/Role
-
-### university/role/Person
+### university/person/Involvement
 
 - university:references
 - university_person:references
-- university_role:references
+- kind (administrator, teacher, researcher)
+- target:references (poly)
+  - "Education::Program" if teacher
+  - "Research::Laboratory" if researcher
+  - "University::Role" if administrator
+- description:text
 - position:integer
+
+### university/Role
+
+- university:references
+- target:references (poly)
+- description:text
+- position:integer
+- (parent:references => role) ?
 
 ### university/School
 
