@@ -74,6 +74,7 @@ module Admin::ApplicationHelper
   def prepare_text_for_static(text)
     indentation = '  ' # Beware, it works only at level one, with 2 spaces
     strip_tags(text)
+      .to_s
       .dup
       .strip
       .gsub("\r\n", "\n") # Remove useless \r
