@@ -58,6 +58,7 @@ en:
         slug: Slug
       communication/website/home:
         text: Text
+        title: Title
         featured_image: Featured image
         featured_image_alt: Alt text
       communication/website/imported/category:
@@ -149,3 +150,7 @@ en:
               staff: Staff
               teachers: Educational staff
               url: URL
+  simple_form:
+    hints:
+      communication_website_home:
+        title: Will be used in the breadcrumbs

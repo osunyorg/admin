@@ -1,7 +1,7 @@
 ---
 title: >
   <%= @home.website.name %>
-breadcrumb_title: "Accueil"
+breadcrumb_title: "<%= @home.title %>"
 <% if @home.featured_image.attached? %>
 image: "<%= @home.featured_image.blob.id %>"
 image_alt: "<%= @home.featured_image_alt %>"

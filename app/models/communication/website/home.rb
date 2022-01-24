@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  featured_image_alt       :string
 #  github_path              :text
+#  title                    :string           default("Home")
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null
