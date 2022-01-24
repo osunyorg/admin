@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_110004) do
+ActiveRecord::Schema.define(version: 2022_01_24_143037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -578,6 +578,21 @@ ActiveRecord::Schema.define(version: 2022_01_24_110004) do
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
 
+  create_table "university_person_involvements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "person_id", null: false
+    t.integer "kind"
+    t.string "target_type", null: false
+    t.uuid "target_id", null: false
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
+    t.index ["target_type", "target_id"], name: "index_university_person_involvements_on_target"
+    t.index ["university_id"], name: "index_university_person_involvements_on_university_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "first_name"
@@ -692,6 +707,8 @@ ActiveRecord::Schema.define(version: 2022_01_24_110004) do
   add_foreign_key "research_theses", "university_people", column: "director_id"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "users"
+  add_foreign_key "university_person_involvements", "universities"
+  add_foreign_key "university_person_involvements", "university_people", column: "person_id"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end
