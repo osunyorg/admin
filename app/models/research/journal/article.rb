@@ -8,7 +8,7 @@
 #  old_text                   :text
 #  position                   :integer
 #  published                  :boolean          default(FALSE)
-#  published_at               :date
+#  published_at               :datetime
 #  references                 :text
 #  slug                       :string
 #  title                      :string

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_150627) do
+ActiveRecord::Schema.define(version: 2022_01_24_165229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -445,7 +445,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_150627) do
   create_table "research_journal_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "old_text"
-    t.date "published_at"
+    t.datetime "published_at"
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
