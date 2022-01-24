@@ -58,6 +58,7 @@ fr:
         slug: Slug
       communication/website/home:
         text: Texte
+        title: Titre
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
       communication/website/imported/category:
@@ -149,3 +150,7 @@ fr:
               staff: Équipe
               teachers: Équipe pédagogique
               url: URL
+  simple_form:
+    hints:
+      communication_website_home:
+        title: Sera utilisé notamment dans le fil d'Ariane
