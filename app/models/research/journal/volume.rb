@@ -63,7 +63,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def to_s
-    "##{ number } #{ title }"
+    "#{ title }"
   end
 
   protected
