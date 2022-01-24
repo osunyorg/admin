@@ -4,7 +4,8 @@ module ActiveStorage::CheckAbilities
   private
 
   def check_abilities
-    render(file: Rails.root.join('public/403.html'), formats: [:html], status: 403, layout: false) and return if current_university.present? && @blob.university_id != current_university.id
+    # TEMP: Warning, we disable university check (TO REMOVE)
+    # render(file: Rails.root.join('public/403.html'), formats: [:html], status: 403, layout: false) and return if current_university.present? && @blob.university_id != current_university.id
   end
 
   def current_university
