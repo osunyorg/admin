@@ -17,3 +17,44 @@ Ce modèle permet de lier une personne à une cible polymorphique. On définit a
 Ce modèle sert pour les liens non intrinsèques. On crée un rôle au niveau d'une cible polymorphique, description et position, et possiblement un rôle parent pour définir la hiérarchie au sein d'un organigramme.
 
 Ensuite, on connecte une personne à ce rôle en utilisant le modèle Involvement avec pour target, le rôle en question.
+
+### Exemples
+
+Soient :
+- `mmi_program` : l'objet `Education::Program` représentant le BUT MMI
+- `teacher` : l'objet `University::Person` représentant un enseignant
+- `director` : l'objet `University::Person` représentant la cheffe de département
+- `program_manager` : l'objet `University::Person` représentant le directeur des études
+- `secretary` : l'objet `University::Person` représentant le secrétaire
+
+Pour l'enseignant on crée un objet `University::Person::Involvement`:
+- target: `mmi_program`
+- person: `teacher`
+- kind: teacher
+
+Pour la cheffe de département on crée :
+- Un objet `University::Role`, qu'on nomme `director_role`
+  - target: `mmi_program`
+  - description: "Cheffe de département"
+- Un objet `University::Person::Involvement`
+  - target: `director_role`
+  - person: `director`
+  - kind: administrator
+
+Pour le directeur des études on crée :
+- Un objet `University::Role`, qu'on nomme `program_manager_role`
+  - target: `mmi_program`
+  - description: "Directeur des études"
+- Un objet `University::Person::Involvement`
+  - target: `program_manager_role`
+  - person: `program_manager`
+  - kind: administrator
+
+Pour le secrétaire on crée :
+- Un objet `University::Role`, qu'on nomme `secretary_role`
+  - target: `mmi_program`
+  - description: "Secrétaire"
+- Un objet `University::Person::Involvement`
+  - target: `secretary_role`
+  - person: `secretary`
+  - kind: administrator
