@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  university: one
+  person: one
+  kind: 1
+  target: one
+  description: MyText
+  position: 1
+
+two:
+  university: two
+  person: two
+  kind: 1
+  target: two
+  description: MyText
+  position: 1

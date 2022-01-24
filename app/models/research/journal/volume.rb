@@ -35,7 +35,7 @@ class Research::Journal::Volume < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal
-  has_many :researchers, through: :articles
+  has_many :people, -> { distinct }, through: :articles
 
   before_validation :set_published_at, if: :published_changed?
 

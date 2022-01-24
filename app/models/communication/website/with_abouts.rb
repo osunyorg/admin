@@ -71,8 +71,8 @@ module Communication::Website::WithAbouts
         people += about.university_people_through_administrators
         people += about.university_people_through_administrators.map(&:administrator)
       elsif about_journal?
-        people += research_articles.collect(&:persons).flatten
-        people += research_articles.collect(&:persons).flatten.map(&:researcher)
+        people += research_articles.collect(&:people).flatten
+        people += research_articles.collect(&:people).flatten.map(&:researcher)
       end
       people.uniq.compact
     end

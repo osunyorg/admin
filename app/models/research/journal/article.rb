@@ -45,7 +45,7 @@ class Research::Journal::Article < ApplicationRecord
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
   belongs_to :updated_by, class_name: 'User'
-  has_and_belongs_to_many :persons,
+  has_and_belongs_to_many :people,
                           class_name: 'University::Person',
                           join_table: :research_journal_articles_researchers,
                           association_foreign_key: :researcher_id
@@ -65,8 +65,8 @@ class Research::Journal::Article < ApplicationRecord
     [self] +
     active_storage_blobs +
     other_articles_in_the_volume +
-    persons +
-    persons.map(&:researcher)
+    people +
+    people.map(&:researcher)
   end
 
   def to_s

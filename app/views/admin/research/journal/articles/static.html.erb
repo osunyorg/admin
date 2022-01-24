@@ -14,7 +14,7 @@ pdf: "<%= @article.pdf.blob_id %>"
 keywords: >
   <%= @article.keywords %>
 researchers:
-<% @article.persons.each do |person| %>
+<% @article.people.each do |person| %>
 - "<%= person.slug %>"
 <% end %>
 abstract: "<%= @article.abstract %>"

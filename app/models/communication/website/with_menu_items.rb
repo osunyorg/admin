@@ -53,7 +53,7 @@ module Communication::Website::WithMenuItems
   end
 
   def menu_item_kind_researchers?
-    research_articles.collect(&:persons).flatten.any?
+    research_articles.collect(&:people).flatten.any?
   end
 
   def menu_item_kind_teachers?
