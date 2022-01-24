@@ -33,7 +33,7 @@ en:
         published: Published?
         published_at: Published at
         references: References
-        persons: Authors
+        people: Authors
         text: Text
         title: Title
       research/journal/volume:

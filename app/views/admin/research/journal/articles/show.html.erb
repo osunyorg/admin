@@ -41,7 +41,7 @@
           <p><%= @article.keywords %></p>
         <% end %>
         <% if @article.people.any? %>
-          <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('researchers') %></h3>
+          <h3 class="h5"><%= Research::Journal::Article.human_attribute_name('people') %></h3>
           <ul class="list-unstyled mb-0">
             <% @article.people.each do |person| %>
               <li><%= link_to person, admin_research_researcher_path(person) %></li>
