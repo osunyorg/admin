@@ -24,7 +24,6 @@
 #  fk_rails_...  (person_id => university_people.id)
 #  fk_rails_...  (university_id => universities.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   university: one
