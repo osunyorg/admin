@@ -21,6 +21,14 @@
 #  fk_rails_...  (university_id => universities.id)
 #
 class University::Role < ApplicationRecord
+  include WithPosition
+
   belongs_to :university
   belongs_to :target, polymorphic: true, optional: true
+
+  protected
+
+  def last_ordered_element
+    self.class.unscoped.where(university_id: university_id, target: target).ordered.last
+  end
 end
