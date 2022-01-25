@@ -80,7 +80,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
     target = nil
     active = website.send "menu_item_kind_#{kind}?"
     return nil unless active
-    published = about&.published && about&.published_at
     case self.kind
     when 'blank'
       target = ''
@@ -95,7 +94,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when 'news'
       target = "/#{website.static_pathname_posts}"
     when 'news_article'
-      target = "/#{website.static_pathname_posts}#{about.path}" if published
+      target = "/#{website.static_pathname_posts}#{about.path}" if about&.published && about&.published_at
     when 'staff'
       target = "/#{website.static_pathname_staff}"
     when 'administrators'
@@ -109,11 +108,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when 'research_volumes'
       target = "/#{website.static_pathname_research_volumes}"
     when 'research_volume'
-      target = "/#{website.static_pathname_research_volumes}#{about.path}" if published
+      target = "/#{website.static_pathname_research_volumes}#{about.path}" if about&.published && about&.published_at
     when 'research_articles'
       target = "/#{website.static_pathname_research_articles}"
     when 'research_article'
-      target = "/#{website.static_pathname_research_articles}#{about.path}" if published
+      target = "/#{website.static_pathname_research_articles}#{about.path}" if about&.published && about&.published_at
     else
       target = about&.path
     end
