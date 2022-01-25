@@ -5,7 +5,13 @@ class MediaController < ApplicationController
     if @blob.variable?
       variant_service = VariantService.compute(@blob, params[:filename_with_transformations], params[:format])
       transformations = variant_service.transformations
-      blob_or_variant_url = transformations.empty? ? url_for(@blob) : url_for(@blob.variant(transformations))
+      if transformations.empty?
+        blob_or_variant_url = url_for @blob
+      else
+        variant = @blob.variant transformations
+        @size = variant.processed.image.byte_size
+        blob_or_variant_url = url_for variant
+      end
     else
       blob_or_variant_url = url_for(@blob)
     end
