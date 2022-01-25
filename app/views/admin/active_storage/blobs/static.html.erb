@@ -12,5 +12,6 @@ media_endpoint_path = medium_path(signed_id: @blob.signed_id, filename_with_tran
   "width" => width,
   "height" => height,
   "ratio" => ratio,
-  "url" => "#{base_url}#{media_endpoint_path}"
+  "url" => "#{base_url}#{media_endpoint_path}",
+  "direct_url" => @blob.url
 }.compact.to_yaml) %>
