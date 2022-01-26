@@ -32,6 +32,10 @@ class Education::School < ApplicationRecord
   has_many  :university_people_through_administrators,
             through: :administrators,
             source: :person
+  has_many  :university_roles, class_name: 'University::Role', as: :target, dependent: :destroy
+  has_many  :university_people_through_roles,
+            through: :university_roles,
+            source: :person
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
                           join_table: 'education_programs_schools',

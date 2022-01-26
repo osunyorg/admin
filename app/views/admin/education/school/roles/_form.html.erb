@@ -1,0 +1,17 @@
+<%= simple_form_for [:admin, role],
+                    url: role.new_record? ? admin_education_school_roles_path(@school)
+                                          : admin_education_school_role_path(role, { school_id: @school.id }) do |f| %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <%= f.input :description %>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

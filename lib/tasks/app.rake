@@ -53,7 +53,7 @@ namespace :app do
 
     Education::Program::Role.find_each { |program_role|
       university_role = University::Role.where(
-        description: program_role.description,
+        description: program_role.title,
         target: program_role.program,
         position: program_role.position,
         university_id: program_role.university_id

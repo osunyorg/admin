@@ -25,6 +25,15 @@ class University::Role < ApplicationRecord
 
   belongs_to :university
   belongs_to :target, polymorphic: true, optional: true
+  has_many :involvements, class_name: 'University::Person::Involvement', as: :target
+
+  def to_s
+    "#{description}"
+  end
+
+  def sync_with_git
+    target.sync_with_git
+  end
 
   protected
 

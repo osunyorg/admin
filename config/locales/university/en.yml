@@ -42,6 +42,12 @@ en:
       university/person:
         one: Person
         other: People
+      university/person/involvement:
+        one: Involvement
+        other: Involvements
+      university/role:
+        one: Role
+        other: Roles
   simple_form:
     hints:
       university:

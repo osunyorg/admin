@@ -1,0 +1,23 @@
+<%= simple_form_for [:admin, involvement],
+                    url: involvement.new_record? ? admin_education_school_role_people_path(@role, { school_id: @school.id })
+                                                 : admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }) do |f| %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <% used_person_ids = @role.involvements.where.not(id: involvement.id).pluck(:person_id) %>
+          <%= f.association :person, collection: current_university.people.administration.where.not(id: used_person_ids).ordered %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :description %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

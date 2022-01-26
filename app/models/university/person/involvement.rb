@@ -27,15 +27,25 @@
 class University::Person::Involvement < ApplicationRecord
   include WithPosition
 
+  enum kind: { administrator: 10, researcher: 20, teacher: 30 }
+
   belongs_to :university
   belongs_to :person
   belongs_to :target, polymorphic: true
 
-  enum kind: { administrator: 10, researcher: 20, teacher: 30 }
+  after_commit :sync_target
+
+  def to_s
+    "#{person}"
+  end
 
   protected
 
   def last_ordered_element
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
+  end
+
+  def sync_target
+    target.sync_with_git
   end
 end

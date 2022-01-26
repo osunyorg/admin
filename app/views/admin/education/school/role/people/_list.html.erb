@@ -1,0 +1,33 @@
+<% if involvements.any? %>
+  <table class="table table-sortable">
+    <thead>
+      <tr>
+        <th class="ps-0"><%= University::Person.model_name.human %></th>
+        <th><%= University::Person::Involvement.human_attribute_name("description") %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody data-reorder-url="<%= reorder_admin_education_school_role_people_path(@role, { school_id: @school.id }) %>">
+      <% involvements.each do |involvement| %>
+        <tr class="handle" data-id="<%= involvement.id %>">
+          <td class="ps-0">
+            <%= involvement %>
+          </td>
+          <td><%= involvement.description %></td>
+          <td class="text-end pe-0">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }),
+                          class: button_classes if can?(:edit, involvement) %>
+              <%= link_to t('delete'),
+                          admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, involvement) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -36,6 +36,8 @@ class Ability
     can :manage, Education::Program::Teacher, person_id: @user.person&.id
     can :read, Education::Program::Role, university_id: @user.university_id
     can :manage, Education::Program::Role::Person, person_id: @user.person&.id
+    can :read, University::Role, university_id: @user.university_id
+    can :manage, University::Person::Involvement, person_id: @user.person&.id
   end
 
   def program_manager
@@ -66,6 +68,8 @@ class Ability
     can :manage, Research::Journal::Article, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id
     can :manage, Research::Laboratory, university_id: @user.university_id
+    can :manage, University::Role, university_id: @user.university_id
+    can :manage, University::Person::Involvement, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
   end

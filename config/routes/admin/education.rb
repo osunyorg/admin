@@ -1,6 +1,16 @@
 namespace :education do
   resources :teachers, only: [:index, :show]
   resources :schools do
+    resources :roles, controller: 'school/roles' do
+      resources :people, controller: 'school/role/people', except: [:index, :show] do
+        collection do
+          post :reorder
+        end
+      end
+      collection do
+        post :reorder
+      end
+    end
     resources :administrators, controller: 'school/administrators', except: [:index, :show]
   end
   resources :programs do

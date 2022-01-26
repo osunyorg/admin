@@ -1,0 +1,4 @@
+<% content_for :title, @role %>
+
+<%= link_to t('create'), new_admin_education_school_role_person_path(school_id: @school.id, role_id: @role.id), class: button_classes %>
+<%= render 'admin/education/school/role/people/list', involvements: @involvements %>
