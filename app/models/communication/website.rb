@@ -62,8 +62,12 @@ class Communication::Website < ApplicationRecord
 
     if about.is_a? Education::School
       dependencies += about.programs
+      dependencies += about.programs.map(&:active_storage_blobs).flatten
     elsif about.is_a? Research::Journal
-      dependencies.concat [about.articles, about.volumes]
+      dependencies += about.articles
+      dependencies += about.articles.map(&:active_storage_blobs).flatten
+      dependencies += about.volumes
+      dependencies += about.volumes.map(&:active_storage_blobs).flatten
     end
 
     dependencies
