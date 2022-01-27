@@ -30,6 +30,7 @@ class Education::School < ApplicationRecord
   has_many  :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many  :administrators, dependent: :destroy
   has_many  :university_people_through_administrators,
+            -> { distinct },
             through: :administrators,
             source: :person
   has_and_belongs_to_many :programs,
@@ -37,7 +38,11 @@ class Education::School < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_school_id',
                           association_foreign_key: 'education_program_id'
-  has_many :teachers, -> { distinct }, through: :programs
+  has_many  :teachers, through: :programs
+  has_many  :university_people_through_teachers,
+            -> { distinct },
+            through: :teachers,
+            source: :person
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
