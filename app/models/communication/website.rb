@@ -57,7 +57,8 @@ class Communication::Website < ApplicationRecord
       pages + pages.map(&:active_storage_blobs).flatten +
       posts + posts.map(&:active_storage_blobs).flatten +
       [home] + home.explicit_active_storage_blobs +
-      categories + menus + people + [about]
+      people_with_facets + people.map(&:active_storage_blobs).flatten +
+      categories + menus + [about]
     )
 
     if about.is_a? Education::School

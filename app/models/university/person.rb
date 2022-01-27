@@ -31,6 +31,7 @@
 #
 class University::Person < ApplicationRecord
   include WithGit
+  include WithBlobs
   include WithSlug
   include WithPicture
 
@@ -152,6 +153,14 @@ class University::Person < ApplicationRecord
   end
 
   protected
+
+  def explicit_blob_ids
+    [picture&.blob_id]
+  end
+
+  def inherited_blob_ids
+    [best_picture&.blob_id]
+  end
 
   def sanitize_email
     self.email = self.email.downcase.strip

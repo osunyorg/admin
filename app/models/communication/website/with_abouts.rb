@@ -64,15 +64,28 @@ module Communication::Website::WithAbouts
 
   def people
     @people ||= begin
+      people = authors
+      if about_school?
+        people += about.university_people_through_teachers
+        people += about.university_people_through_administrators
+      elsif about_journal?
+        people += about.people
+      end
+      people.uniq.compact
+    end
+  end
+
+  def people_with_facets
+    @people_with_facets ||= begin
       people = authors + authors.compact.map(&:author)
       if about_school?
-        people += programs.collect(&:university_people_through_teachers).flatten
-        people += programs.collect(&:university_people_through_teachers).flatten.map(&:teacher)
+        people += about.university_people_through_teachers
+        people += about.university_people_through_teachers.map(&:teacher)
         people += about.university_people_through_administrators
         people += about.university_people_through_administrators.map(&:administrator)
       elsif about_journal?
-        people += research_articles.collect(&:people).flatten
-        people += research_articles.collect(&:people).flatten.map(&:researcher)
+        people += about.people
+        people += about.people.map(&:researcher)
       end
       people.uniq.compact
     end

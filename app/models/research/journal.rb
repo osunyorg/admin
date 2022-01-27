@@ -27,7 +27,7 @@ class Research::Journal < ApplicationRecord
   has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
-  has_many :people, through: :articles
+  has_many :people, -> { distinct }, through: :articles
 
   scope :ordered, -> { order(:title) }
 
