@@ -3,6 +3,11 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   include Admin::Reorderable
 
+  def index
+    @roles = @roles.ordered
+    breadcrumb
+  end
+
   def show
     @involvements = @role.involvements.ordered
     breadcrumb
@@ -45,7 +50,7 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   def breadcrumb
     super
-    add_breadcrumb University::Role.model_name.human(count: 2)
+    add_breadcrumb University::Role.model_name.human(count: 2), admin_education_program_roles_path(@program)
     if @role
       @role.persisted?  ? add_breadcrumb(@role, admin_education_program_role_path(@role, { program_id: @program.id }))
                         : add_breadcrumb(t('create'))

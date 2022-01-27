@@ -7,7 +7,12 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
 
   include Admin::Reorderable
 
-  before_action :get_available_people, except: [:reorder, :destroy]
+  before_action :get_available_people, except: [:index, :reorder, :destroy]
+
+  def index
+    @involvements = @involvements.ordered
+    breadcrumb
+  end
 
   def new
     breadcrumb
@@ -51,7 +56,7 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
 
   def breadcrumb
     super
-    add_breadcrumb Education::Program.human_attribute_name("teachers")
+    add_breadcrumb Education::Program.human_attribute_name("teachers"), admin_education_program_teachers_path(@program)
     if @involvement
       @involvement.persisted?  ? add_breadcrumb(@involvement)
                                : add_breadcrumb(t('create'))

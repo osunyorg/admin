@@ -31,6 +31,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def show
+    @roles = @program.university_roles.ordered
+    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered
     breadcrumb
   end
 
