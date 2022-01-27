@@ -2,6 +2,8 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
   load_and_authorize_resource :role, class: University::Role, through: :school, param: :role_id, through_association: :university_roles
   load_and_authorize_resource :involvement, class: University::Person::Involvement, through: :role, parent: false
 
+  before_action :get_available_people, except: :destroy
+
   def new
     breadcrumb
   end
@@ -37,11 +39,15 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
 
   protected
 
+  def get_available_people
+    used_person_ids = @role.involvements.where.not(id: @involvement.id).pluck(:person_id)
+    @available_people = current_university.people.administrator.where.not(id: used_person_ids).accessible_by(current_ability).ordered
+  end
+
   def breadcrumb
     super
     add_breadcrumb University::Role.model_name.human(count: 2), admin_education_school_roles_path(@school)
-    @role.persisted?  ? add_breadcrumb(@role, admin_education_school_role_path(@role, { school_id: @school.id }))
-                      : add_breadcrumb(t('create'))
+    add_breadcrumb(@role, admin_education_school_role_path(@role, { school_id: @school.id }))
     if @involvement
       @involvement.persisted?  ? add_breadcrumb(@involvement, admin_education_school_role_person_path(@involvement, { school_id: @school.id, role_id: @role.id }))
                                : add_breadcrumb(t('create'))
@@ -51,6 +57,6 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
   def involvement_params
     params.require(:university_person_involvement)
           .permit(:description, :position, :person_id)
-          .merge(university_id: @school.university_id)
+          .merge(university_id: @school.university_id, kind: :administrator)
   end
 end

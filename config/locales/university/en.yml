@@ -35,6 +35,9 @@ en:
         slug: Slug
         tenure: Have tenure?
         user: User
+      university/role:
+        description: Description
+        people: People
     models:
       university:
         one: University

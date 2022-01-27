@@ -1,32 +1,4 @@
 <% content_for :title, @role %>
 
-<div class="row">
-  <div class="col-md-4">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('admin.infos') %></h2>
-      </div>
-      <div class="card-body">
-        <h3 class="h5"><%= Education::Program::Role.human_attribute_name('title') %></h3>
-        <%= @role.title %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= Education::Program::Role.human_attribute_name('people') %></h2>
-      </div>
-      <div class="card-body">
-        <%= render 'admin/education/program/role/people/list', people: @role.people.includes(:person).ordered %>
-        <% if can? :create, Education::Program::Role::Person %>
-          <p><%= link_to t('create'), new_admin_education_program_role_person_path(role_id: @role.id), class: 'btn btn-primary' %></p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @role %>
-<% end %>
+<%= link_to t('create'), new_admin_education_program_role_person_path(program_id: @program.id, role_id: @role.id), class: button_classes %>
+<%= render 'admin/education/program/role/people/list', involvements: @involvements %>

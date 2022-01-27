@@ -40,7 +40,7 @@ class Admin::Education::School::RolesController < Admin::Education::School::Appl
 
   def destroy
     @role.destroy
-    redirect_to admin_education_school_role_path(@role), notice: t('admin.successfully_destroyed_html', model: @role.to_s)
+    redirect_to admin_education_school_roles_path(@school), notice: t('admin.successfully_destroyed_html', model: @role.to_s)
   end
 
   protected

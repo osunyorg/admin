@@ -78,6 +78,18 @@ class Education::Program < ApplicationRecord
   has_many   :university_people_through_roles,
              through: :role_people,
              source: :person
+  has_many   :university_roles,
+             class_name: 'University::Role',
+             as: :target,
+             dependent: :destroy
+  has_many   :involvements_through_roles,
+             class_name: 'University::Person::Involvement',
+             through: :university_roles,
+             source: :involvements
+  has_many   :university_person_involvements,
+             class_name: 'University::Person::Involvement',
+             as: :target,
+             dependent: :destroy
   has_many   :website_categories,
              class_name: 'Communication::Website::Category',
              dependent: :destroy

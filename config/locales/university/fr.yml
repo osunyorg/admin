@@ -35,6 +35,9 @@ fr:
         slug: Slug
         tenure: Titulaire ?
         user: Utilisateur
+      university/role:
+        description: Description
+        people: Personnes
     models:
       university:
         one: Université

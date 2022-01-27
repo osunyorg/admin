@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin, involvement],
-                    url: involvement.new_record? ? admin_education_school_role_people_path(@role, { school_id: @school.id })
-                                                 : admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }) do |f| %>
+                    url: involvement.new_record? ? admin_education_program_role_people_path(@role, { program_id: @program.id })
+                                                 : admin_education_program_role_person_path(involvement, { program_id: @program.id, role_id: @role.id }) do |f| %>
   <div class="card flex-fill w-100">
     <div class="card-header">
       <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>

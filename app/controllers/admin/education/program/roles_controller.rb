@@ -1,5 +1,5 @@
 class Admin::Education::Program::RolesController < Admin::Education::Program::ApplicationController
-  load_and_authorize_resource class: Education::Program::Role, through: :program
+  load_and_authorize_resource class: University::Role, through: :program, through_association: :university_roles
 
   include Admin::Reorderable
 
@@ -8,6 +8,7 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
   end
 
   def show
+    @involvements = @role.involvements.ordered
     breadcrumb
   end
 
@@ -48,13 +49,16 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   def breadcrumb
     super
-    add_breadcrumb Education::Program::Role.model_name.human(count: 2)
-    breadcrumb_for @role
+    add_breadcrumb University::Role.model_name.human(count: 2)
+    if @role
+      @role.persisted?  ? add_breadcrumb(@role, admin_education_program_role_path(@role, { program_id: @program.id }))
+                        : add_breadcrumb(t('create'))
+    end
   end
 
   def role_params
-    params.require(:education_program_role)
-          .permit(:title)
-          .merge(program_id: @program.id, university_id: current_university.id)
+    params.require(:university_role)
+          .permit(:description, :position)
+          .merge(target: @program, university_id: current_university.id)
   end
 end

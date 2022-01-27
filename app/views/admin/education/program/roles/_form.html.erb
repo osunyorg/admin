@@ -1,14 +1,12 @@
-<%= simple_form_for [:admin, role] do |f| %>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :title %>
-        </div>
-      </div>
+<%= simple_form_for [:admin, role],
+                    url: role.new_record? ? admin_education_program_roles_path(@program)
+                                          : admin_education_program_role_path(role, { program_id: @program.id }) do |f| %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+    </div>
+    <div class="card-body">
+      <%= f.input :description %>
     </div>
   </div>
   <% content_for :action_bar_right do %>
