@@ -8,7 +8,6 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <% used_person_ids = @role.involvements.where.not(id: involvement.id).pluck(:person_id) %>
           <%= f.association :person, collection: @available_people %>
         </div>
         <div class="col-md-6">

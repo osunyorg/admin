@@ -25,7 +25,11 @@ namespace :education do
         post :reorder
       end
     end
-    resources :teachers, controller: 'program/teachers', except: [:index, :show]
+    resources :teachers, controller: 'program/teachers', except: [:index, :show] do
+      collection do
+        post :reorder
+      end
+    end
     collection do
       post :reorder
     end

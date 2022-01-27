@@ -1,7 +1,11 @@
 class Admin::Education::Program::TeachersController < Admin::Education::Program::ApplicationController
-  load_and_authorize_resource class: Education::Program::Teacher, through: :program
+  load_and_authorize_resource :involvement,
+                              class: University::Person::Involvement,
+                              through: :program,
+                              through_association: :university_person_involvements,
+                              parent: false
 
-  before_action :get_teachers, except: :destroy
+  before_action :get_available_people, except: :destroy
 
   def new
     breadcrumb
@@ -13,8 +17,8 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
   end
 
   def create
-    if @teacher.save
-      redirect_to admin_education_program_path(@program), notice: t('admin.successfully_created_html', model: @teacher.to_s)
+    if @involvement.save
+      redirect_to admin_education_program_path(@program), notice: t('admin.successfully_created_html', model: @involvement.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -22,8 +26,8 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
   end
 
   def update
-    if @teacher.update(teacher_params)
-      redirect_to admin_education_program_path(@program), notice: t('admin.successfully_updated_html', model: @teacher.to_s)
+    if @involvement.update(involvement_params)
+      redirect_to admin_education_program_path(@program), notice: t('admin.successfully_updated_html', model: @involvement.to_s)
     else
       breadcrumb
       render :edit, status: :unprocessable_entity
@@ -32,26 +36,29 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
   end
 
   def destroy
-    @teacher.destroy
-    redirect_to admin_education_program_path(@program), notice: t('admin.successfully_destroyed_html', model: @teacher.to_s)
+    @involvement.destroy
+    redirect_to admin_education_program_path(@program), notice: t('admin.successfully_destroyed_html', model: @involvement.to_s)
   end
 
   protected
 
-  def get_teachers
-    used_teacher_ids = @program.teachers.where.not(id: @teacher.id).pluck(:person_id)
-    @teachers = current_university.people.teachers.where.not(id: used_teacher_ids).accessible_by(current_ability).ordered
+  def get_available_people
+    used_person_ids = @program.university_person_involvements.where.not(id: @involvement.id).pluck(:person_id)
+    @available_people = current_university.people.teachers.where.not(id: used_person_ids).accessible_by(current_ability).ordered
   end
 
   def breadcrumb
     super
-    add_breadcrumb Education::Program::Teacher.model_name.human(count: 2)
-    breadcrumb_for @teacher
+    add_breadcrumb Education::Program.human_attribute_name("teachers")
+    if @involvement
+      @involvement.persisted?  ? add_breadcrumb(@involvement)
+                               : add_breadcrumb(t('create'))
+    end
   end
 
-  def teacher_params
-    params.require(:education_program_teacher)
-          .permit(:description, :person_id)
-          .merge(program_id: @program.id)
+  def involvement_params
+    params.require(:university_person_involvement)
+          .permit(:description, :position, :person_id)
+          .merge(university_id: @program.university_id, kind: :teacher)
   end
 end
