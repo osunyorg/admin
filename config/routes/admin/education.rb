@@ -14,7 +14,7 @@ namespace :education do
     resources :administrators, controller: 'school/administrators', except: [:index, :show]
   end
   resources :programs do
-    resources :roles, controller: 'program/roles', except: :index do
+    resources :roles, controller: 'program/roles' do
       resources :people, controller: 'program/role/people', except: [:index, :show] do
         collection do
           post :reorder
@@ -25,7 +25,7 @@ namespace :education do
         post :reorder
       end
     end
-    resources :teachers, controller: 'program/teachers', except: [:index, :show] do
+    resources :teachers, controller: 'program/teachers', except: :show do
       collection do
         post :reorder
       end
