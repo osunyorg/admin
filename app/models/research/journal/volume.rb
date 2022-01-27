@@ -51,7 +51,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + articles + people + people.map(&:researcher) + active_storage_blobs
+    [self] + articles + people + people.map(&:active_storage_blobs).flatten + people.map(&:researcher) + active_storage_blobs
   end
 
   def git_destroy_dependencies(website)

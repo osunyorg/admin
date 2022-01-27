@@ -83,13 +83,18 @@ class Education::Program < ApplicationRecord
              as: :target,
              dependent: :destroy
   has_many   :involvements_through_roles,
-             class_name: 'University::Person::Involvement',
              through: :university_roles,
              source: :involvements
+  has_many   :university_people_through_role_involvements,
+             through: :involvements_through_roles,
+             source: :person
   has_many   :university_person_involvements,
              class_name: 'University::Person::Involvement',
              as: :target,
              dependent: :destroy
+  has_many   :university_people_through_involvements,
+             through: :university_person_involvements,
+             source: :person
   has_many   :website_categories,
              class_name: 'Communication::Website::Category',
              dependent: :destroy
@@ -134,10 +139,12 @@ class Education::Program < ApplicationRecord
   def git_dependencies(website)
     [self] +
     active_storage_blobs +
-    university_people_through_teachers +
-    university_people_through_teachers.map(&:teacher) +
-    university_people_through_roles
-    # TODO: les administrative via roles
+    university_people_through_involvements +
+    university_people_through_involvements.map(&:active_storage_blobs) +
+    university_people_through_involvements.map(&:teacher) +
+    university_people_through_role_involvements +
+    university_people_through_role_involvements.map(&:active_storage_blobs) +
+    university_people_through_role_involvements.map(&:administrator)
   end
 
   def git_destroy_dependencies(website)

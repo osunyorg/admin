@@ -120,7 +120,7 @@ class University::Person < ApplicationRecord
     dependencies = []
     if for_website?(website)
       dependencies << self
-      dependencies << best_picture.blob
+      dependencies.concat active_storage_blobs
     end
     dependencies << administrator if administrator.for_website?(website)
     dependencies << author if author.for_website?(website)

@@ -25,7 +25,8 @@ class University::Role < ApplicationRecord
 
   belongs_to :university
   belongs_to :target, polymorphic: true, optional: true
-  has_many :involvements, class_name: 'University::Person::Involvement', as: :target
+  has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy
+  has_many :people, through: :involvements
 
   def to_s
     "#{description}"

@@ -30,7 +30,7 @@ class University::Person::Involvement < ApplicationRecord
   enum kind: { administrator: 10, researcher: 20, teacher: 30 }
 
   belongs_to :university
-  belongs_to :person
+  belongs_to :person, class_name: 'University::Person'
   belongs_to :target, polymorphic: true
 
   after_commit :sync_with_git

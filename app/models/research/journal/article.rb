@@ -66,6 +66,7 @@ class Research::Journal::Article < ApplicationRecord
     active_storage_blobs +
     other_articles_in_the_volume +
     people +
+    people.map(&:active_storage_blobs).flatten +
     people.map(&:researcher)
   end
 

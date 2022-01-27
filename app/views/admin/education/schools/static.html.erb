@@ -12,12 +12,12 @@ country: >
 phone: >
   <%= @school.phone %>
 administrators:
-<% @school.administrators.includes(:person).ordered.each do |administrator| %>
-  - "<%= administrator.person.slug %>"
+<% @school.involvements_through_roles.includes(:person).ordered.each do |involvement| %>
+  - "<%= involvement.person.slug %>"
 <% end %>
 administrators_description:
-<% @school.administrators.includes(:person).ordered.each do |administrator| %>
-  "<%= administrator.person.slug %>": >
-    <%= administrator.best_description %>
+<% @school.involvements_through_roles.includes(:person).ordered.each do |involvement| %>
+  "<%= involvement.person.slug %>": >
+    <%= involvement.best_description %>
 <% end %>
 ---
