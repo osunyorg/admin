@@ -46,9 +46,15 @@ class Education::School < ApplicationRecord
 
   has_many  :university_roles, class_name: 'University::Role', as: :target, dependent: :destroy
   has_many  :involvements_through_roles, through: :university_roles, source: :involvements
-  has_many  :university_people_through_involvements,
+  has_many  :university_people_through_role_involvements,
             through: :involvements_through_roles,
             source: :person
+  has_many  :university_people_through_program_involvements,
+            through: :programs,
+            source: :university_people_through_involvements
+  has_many  :university_people_through_program_role_involvements,
+            through: :programs,
+            source: :university_people_through_role_involvements
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
@@ -64,7 +70,7 @@ class Education::School < ApplicationRecord
 
   def git_dependencies(website)
     [self] +
-    university_people_through_involvements +
-    university_people_through_involvements.map(&:administrator)
+    university_people_through_role_involvements +
+    university_people_through_role_involvements.map(&:administrator)
   end
 end

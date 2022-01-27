@@ -18,6 +18,6 @@ administrators:
 administrators_description:
 <% @school.involvements_through_roles.includes(:person).ordered.each do |involvement| %>
   "<%= involvement.person.slug %>": >
-    <%= involvement.best_description %>
+    <%= involvement.description %>
 <% end %>
 ---

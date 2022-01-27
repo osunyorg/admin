@@ -66,8 +66,9 @@ module Communication::Website::WithAbouts
     @people ||= begin
       people = authors
       if about_school?
-        people += about.university_people_through_involvements
-        people += about.university_people_through_roles
+        people += about.university_people_through_role_involvements
+        people += about.university_people_through_program_involvements
+        people += about.university_people_through_program_role_involvements
       elsif about_journal?
         people += about.people
       end
@@ -79,10 +80,12 @@ module Communication::Website::WithAbouts
     @people_with_facets ||= begin
       people = authors + authors.compact.map(&:author)
       if about_school?
-        people += about.university_people_through_involvements
-        people += about.university_people_through_involvements.map(&:teacher)
-        people += about.university_people_through_roles
-        people += about.university_people_through_roles.map(&:administrator)
+        people += about.university_people_through_role_involvements
+        people += about.university_people_through_role_involvements.map(&:administrator)
+        people += about.university_people_through_program_involvements
+        people += about.university_people_through_program_involvements.map(&:teacher)
+        people += about.university_people_through_program_role_involvements
+        people += about.university_people_through_program_role_involvements.map(&:administrator)
       elsif about_journal?
         people += about.people
         people += about.people.map(&:researcher)
