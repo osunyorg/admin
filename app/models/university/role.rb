@@ -32,7 +32,7 @@ class University::Role < ApplicationRecord
   end
 
   def sync_with_git
-    target.sync_with_git
+    target.sync_with_git if target&.respond_to? :sync_with_git
   end
 
   protected

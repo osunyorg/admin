@@ -2,7 +2,9 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
   load_and_authorize_resource :role, class: University::Role, through: :school, param: :role_id, through_association: :university_roles
   load_and_authorize_resource :involvement, class: University::Person::Involvement, through: :role, parent: false
 
-  before_action :get_available_people, except: :destroy
+  include Admin::Reorderable
+
+  before_action :get_available_people, except: [:reorder, :destroy]
 
   def new
     breadcrumb
@@ -58,5 +60,9 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
     params.require(:university_person_involvement)
           .permit(:description, :position, :person_id)
           .merge(university_id: @school.university_id, kind: :administrator)
+  end
+
+  def model
+    University::Person::Involvement
   end
 end

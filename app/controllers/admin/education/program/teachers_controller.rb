@@ -5,7 +5,9 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
                               through_association: :university_person_involvements,
                               parent: false
 
-  before_action :get_available_people, except: :destroy
+  include Admin::Reorderable
+
+  before_action :get_available_people, except: [:reorder, :destroy]
 
   def new
     breadcrumb
@@ -60,5 +62,9 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
     params.require(:university_person_involvement)
           .permit(:description, :position, :person_id)
           .merge(university_id: @program.university_id, kind: :teacher)
+  end
+
+  def model
+    University::Person::Involvement
   end
 end

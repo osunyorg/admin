@@ -33,19 +33,19 @@ class University::Person::Involvement < ApplicationRecord
   belongs_to :person
   belongs_to :target, polymorphic: true
 
-  after_commit :sync_target
+  after_commit :sync_with_git
 
   def to_s
     "#{person}"
+  end
+
+  def sync_with_git
+    target.sync_with_git if target.respond_to? :sync_with_git
   end
 
   protected
 
   def last_ordered_element
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
-  end
-
-  def sync_target
-    target.sync_with_git
   end
 end

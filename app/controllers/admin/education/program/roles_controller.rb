@@ -3,10 +3,6 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   include Admin::Reorderable
 
-  def reorder
-    super { |first_role| first_role.sync_program }
-  end
-
   def show
     @involvements = @role.involvements.ordered
     breadcrumb
@@ -60,5 +56,9 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
     params.require(:university_role)
           .permit(:description, :position)
           .merge(target: @program, university_id: current_university.id)
+  end
+
+  def model
+    University::Role
   end
 end

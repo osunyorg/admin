@@ -1,7 +1,10 @@
 class Admin::Education::School::RolesController < Admin::Education::School::ApplicationController
   load_and_authorize_resource class: University::Role, through: :school, through_association: :university_roles
 
+  include Admin::Reorderable
+
   def index
+    @roles = @roles.ordered
     breadcrumb
   end
 
@@ -58,5 +61,9 @@ class Admin::Education::School::RolesController < Admin::Education::School::Appl
     params.require(:university_role)
           .permit(:description, :position)
           .merge(target: @school, university_id: @school.university_id)
+  end
+
+  def model
+    University::Role
   end
 end
