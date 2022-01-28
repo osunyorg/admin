@@ -40,50 +40,6 @@ namespace :app do
         imported_post.post&.update_column :published_at, imported_post.published_at
       end
     end
-
-    Education::Program::Teacher.find_each { |teacher|
-      involvement = University::Person::Involvement.where(
-        kind: 'teacher',
-        target: teacher.program,
-        person_id: teacher.person_id,
-        university_id: teacher.person.university_id
-      ).first_or_create
-      involvement.update_column(:description, teacher.description)
-    }
-
-    Education::Program::Role.find_each { |program_role|
-      university_role = University::Role.where(
-        description: program_role.title,
-        target: program_role.program,
-        position: program_role.position,
-        university_id: program_role.university_id
-      ).first_or_create
-
-      program_role.people.find_each { |role_person|
-        University::Person::Involvement.where(
-          kind: 'administrator',
-          target: university_role,
-          person_id: role_person.person_id,
-          position: role_person.position,
-          university_id: program_role.university_id
-        ).first_or_create
-      }
-    }
-
-    Education::School::Administrator.find_each { |administrator|
-      university_role = University::Role.where(
-        description: administrator.description,
-        target: administrator.school,
-        university_id: administrator.person.university_id
-      ).first_or_create
-
-      University::Person::Involvement.where(
-        kind: 'administrator',
-        target: university_role,
-        person_id: administrator.person_id,
-        university_id: administrator.person.university_id
-      ).first_or_create
-    }
   end
 
   namespace :db do
