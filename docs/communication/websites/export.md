@@ -30,9 +30,11 @@ Il faut veiller à limiter le nombre de commits et à éviter les commits vides.
 
 ### Déploiement (Netlify)
 
-La récupération du thème se fait via SSH par défaut. Pour que le déploiement fonctionne correctement, vous pouvez changer le remote du submodule pour qu'il utilise HTTPS.
-
-Sinon il faut ajouter la deploy key du site Netlify (récupérable dans "Site settings", "Build & deploy" puis "Deploy key") dans la section "Deploy keys" du repository contenant le thème (ici : https://github.com/noesya/osuny-hugo-theme/settings/keys).
+La récupération du thème se fait via SSH par défaut. Pour que le déploiement fonctionne correctement, vous pouvez :
+- Changer le remote du submodule pour qu'il utilise HTTPS.
+- Garder le SSH, cependant il faut :
+  - Générer et copier la deploy key du site sur Netlify (dans "Site settings", "Build & deploy" puis "Deploy key").
+  - L'ajouter dans la section "Deploy keys" du repository contenant le thème (ici : https://github.com/noesya/osuny-hugo-theme/settings/keys).
 
 ## Architecture
 
