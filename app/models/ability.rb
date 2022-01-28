@@ -33,9 +33,6 @@ class Ability
   def teacher
     can :manage, University::Person, user_id: @user.id
     can :read, Education::Program, university_id: @user.university_id
-    can :manage, Education::Program::Teacher, person_id: @user.person&.id
-    can :read, Education::Program::Role, university_id: @user.university_id
-    can :manage, Education::Program::Role::Person, person_id: @user.person&.id
     can :read, University::Role, university_id: @user.university_id
     can :manage, University::Person::Involvement, person_id: @user.person&.id
   end
@@ -59,11 +56,7 @@ class Ability
     can :manage, Communication::Website::Imported::Page, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
-    can :manage, Education::School::Administrator, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
-    can :manage, Education::Program::Teacher, university_id: @user.university_id
-    can :manage, Education::Program::Role, university_id: @user.university_id
-    can :manage, Education::Program::Role::Person, university_id: @user.university_id
     can :manage, Research::Journal, university_id: @user.university_id
     can :manage, Research::Journal::Article, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id

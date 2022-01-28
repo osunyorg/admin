@@ -34,6 +34,7 @@ class University::Person < ApplicationRecord
   include WithBlobs
   include WithSlug
   include WithPicture
+  include WithEducation
 
   has_rich_text :biography
 
@@ -44,22 +45,6 @@ class University::Person < ApplicationRecord
                           class_name: 'Research::Journal::Article',
                           join_table: :research_journal_articles_researchers,
                           foreign_key: :researcher_id
-
-  has_many                :education_program_teachers,
-                          class_name: 'Education::Program::Teacher',
-                          dependent: :destroy
-
-  has_many                :education_program_role_people,
-                          class_name: 'Education::Program::Role::Person',
-                          dependent: :destroy
-
-  has_many                :education_programs,
-                          through: :education_program_teachers,
-                          source: :program
-
-  has_many                :education_school_administrators,
-                          class_name: 'Education::School::Administrator',
-                          dependent: :destroy
 
   has_many                :communication_website_posts,
                           class_name: 'Communication::Website::Post',

@@ -7,21 +7,9 @@ fr:
       education/program:
         one: Formation
         other: Formations
-      education/program/role:
-        one: Rôle
-        other: Rôles
-      education/program/role/person:
-        one: Personne
-        other: Personnes
-      education/program/teacher:
-        one: Enseignant·e
-        other: Enseignants·es
       education/school:
         one: École
         other: Écoles
-      education/school/administrator:
-        one: Équipe administrative
-        other: Équipe administrative
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -50,14 +38,6 @@ fr:
         team: Équipe
         content: Contenus de la formation
         results: Indicateurs de résultats
-      education/program/role:
-        people: Personnes
-        title: Titre
-      education/program/role/person:
-        person: Personne
-      education/program/teacher:
-        description: Description
-        person: Personne
       education/school:
         address: Adresse
         administrators: Équipe administrative
@@ -68,9 +48,6 @@ fr:
         programs: Formations dispensées
         websites: Sites webs associés
         zipcode: Code postal
-      education/school/administrator:
-        description: Description
-        person: Personne
   education:
     manage_teachers: Gérer les Enseignants·es
     number_of_programs: Nombre de formations

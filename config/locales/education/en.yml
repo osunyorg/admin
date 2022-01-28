@@ -7,21 +7,9 @@ en:
       education/program:
         one: Program
         other: Programs
-      education/program/role:
-        one: Role
-        other: Roles
-      education/program/role/person:
-        one: Person
-        other: People
-      education/program/teacher:
-        one: Teacher
-        other: Teachers
       education/school:
         one: School
         other: Schools
-      education/school/administrator:
-        one: Administrator
-        other: Administrators
     attributes:
       education/program:
         accessibility: Accessibilité
@@ -48,14 +36,8 @@ en:
         schools: Schools with this formation
         teachers: Teachers
         team: Team
-      education/program/role:
-        people: People
-        title: Title
-      education/program/role/person:
-        person: Person
-      education/program/teacher:
-        description: Description
-        person: Person
+        content: Program's content
+        results: Results' indicator
       education/school:
         address: Address
         administrators: Administrators
@@ -66,9 +48,6 @@ en:
         programs: Programs provided
         websites: Associated websites
         zipcode: Zipcode
-      education/school/administrator:
-        description: Description
-        person: Person
   education:
     manage_teachers: Manage teachers
     number_of_programs: Number of programs
@@ -76,6 +55,9 @@ en:
       educational_informations: Educational informations
       main_informations: Main informations
       useful_informations: Useful informations
+    roles:
+      one: Role
+      other: Roles
     teachers:
       one: Teacher
       other: Teachers

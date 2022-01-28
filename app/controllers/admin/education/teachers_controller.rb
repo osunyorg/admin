@@ -7,7 +7,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   def show
     @teacher = current_university.people.teachers.accessible_by(current_ability).find(params[:id])
     breadcrumb
-    @programs = @teacher.education_programs.ordered.page(params[:page])
+    @programs = @teacher.education_programs_as_teacher.ordered.page(params[:page])
   end
 
   protected
