@@ -11,7 +11,9 @@
       <% involvements.each do |involvement| %>
         <tr class="handle" data-id="<%= involvement.id %>">
           <td class="ps-0">
-            <%= involvement %>
+            <%= link_to_if  can?(:read, involvement.person),
+                            involvement.person,
+                            [:admin, involvement.person] %>
           </td>
           <td><%= involvement.description %></td>
           <td class="text-end pe-0">
