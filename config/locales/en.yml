@@ -32,6 +32,7 @@ en:
       user:
         one: User
         other: Users
+  add: Add
   admin:
     attachment_not_available: Attachment not available
     dashboard: Dashboard

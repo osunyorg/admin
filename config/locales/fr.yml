@@ -32,6 +32,7 @@ fr:
       user:
         one: Utilisateur·rice
         other: Utilisateur·rice·s
+  add: Ajouter
   admin:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
