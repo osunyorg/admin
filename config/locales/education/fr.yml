@@ -46,6 +46,7 @@ fr:
         name: Nom
         phone: Téléphone
         programs: Formations dispensées
+        roles: Membres de l'équipe
         websites: Sites webs associés
         zipcode: Code postal
   education:
@@ -58,6 +59,8 @@ fr:
     roles:
       one: Rôle
       other: Rôles
+    schools:
+      manage_roles: Gérer l'équipe
     teachers:
       one: Enseignant·e
       other: Enseignants·es

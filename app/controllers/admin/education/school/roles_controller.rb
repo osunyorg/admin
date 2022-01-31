@@ -50,7 +50,7 @@ class Admin::Education::School::RolesController < Admin::Education::School::Appl
 
   def breadcrumb
     super
-    add_breadcrumb University::Role.model_name.human(count: 2), admin_education_school_roles_path(@school)
+    add_breadcrumb Education::School.human_attribute_name('roles'), admin_education_school_roles_path(@school)
     if @role
       @role.persisted?  ? add_breadcrumb(@role, admin_education_school_role_path(@role, { school_id: @school.id }))
                         : add_breadcrumb(t('create'))

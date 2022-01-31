@@ -1,11 +1,11 @@
 <div class="card flex-fill w-100">
   <div class="card-header">
     <div class="float-end">
-      <%= link_to "Gérer les rôles",
+      <%= link_to t('education.schools.manage_roles'),
                   admin_education_school_roles_path(school_id: @school.id),
                   class: button_classes if can?(:update, University::Role) %>
     </div>
-    <h2 class="card-title mb-0 h5">Rôles</h2>
+    <h2 class="card-title mb-0 h5"><%= Education::School.human_attribute_name('roles') %></h2>
   </div>
   <div class="card-body">
     <% if @roles.any? %>
@@ -24,7 +24,13 @@
                                 role,
                                 admin_education_school_role_path(role, { school_id: @school.id }) %>
               </td>
-              <td><%= role.involvements.includes(:person).ordered.map { |involvement| involvement.person.to_s }.to_sentence %></td>
+              <td>
+                <ul>
+                  <% role.involvements.includes(:person).ordered.each do |involvement| %>
+                    <li><%= link_to_if can?(:read, involvement.person), involvement.person.to_s, admin_university_person_path(involvement.person) %></li>
+                  <% end %>
+                </ul>
+              </td>
             </tr>
           <% end %>
         </tbody>

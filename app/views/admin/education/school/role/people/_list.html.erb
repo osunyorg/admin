@@ -2,6 +2,9 @@
   <table class="table table-sortable">
     <thead>
       <tr>
+        <% if can? :reorder, University::Person::Involvement %>
+          <th width="20" class="ps-0">&nbsp;</th>
+        <% end %>
         <th class="ps-0"><%= University::Person.model_name.human %></th>
         <th><%= University::Person::Involvement.human_attribute_name("description") %></th>
         <th></th>
@@ -9,7 +12,10 @@
     </thead>
     <tbody data-reorder-url="<%= reorder_admin_education_school_role_people_path(@role, { school_id: @school.id }) %>">
       <% involvements.each do |involvement| %>
-        <tr class="handle" data-id="<%= involvement.id %>">
+        <tr data-id="<%= involvement.id %>">
+          <% if can? :reorder, University::Person::Involvement %>
+            <td><i class="fa fa-bars handle"></i></td>
+          <% end %>
           <td class="ps-0">
             <%= link_to_if  can?(:read, involvement.person),
                             involvement.person,

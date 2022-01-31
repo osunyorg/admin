@@ -46,6 +46,7 @@ en:
         name: Name
         phone: Phone
         programs: Programs provided
+        roles: Team Members
         websites: Associated websites
         zipcode: Zipcode
   education:
