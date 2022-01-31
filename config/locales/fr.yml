@@ -107,6 +107,7 @@ fr:
   please_confirm_with_children: "ATTENTION : effacer cet élément supprimera aussi tous ses enfants. Est-ce que vous confirmez ?"
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  quit: Quitter
   save: Enregistrer
   select_language: Sélectionnez une langue
   simple_form:
