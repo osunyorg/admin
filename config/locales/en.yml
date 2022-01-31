@@ -129,3 +129,10 @@ en:
       date_with_hour: "%B %d, %Y %H:%M"
   true: Yes
   validate: Validate
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Previous"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"
