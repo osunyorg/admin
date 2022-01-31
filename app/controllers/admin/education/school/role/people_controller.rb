@@ -43,7 +43,7 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
 
   def get_available_people
     used_person_ids = @role.involvements.where.not(id: @involvement.id).pluck(:person_id)
-    @available_people = current_university.people.administrator.where.not(id: used_person_ids).accessible_by(current_ability).ordered
+    @available_people = current_university.people.administration.where.not(id: used_person_ids).accessible_by(current_ability).ordered
   end
 
   def breadcrumb
