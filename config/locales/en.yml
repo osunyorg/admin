@@ -106,6 +106,7 @@ en:
   please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  quit: Quit
   save: Save
   select_language: Select language
   simple_form:
