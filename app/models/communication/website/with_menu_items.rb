@@ -57,7 +57,7 @@ module Communication::Website::WithMenuItems
   end
 
   def menu_item_kind_teachers?
-    about_school? && about.university_people_through_teachers.any?
+    about_school? && about.university_people_through_program_involvements.any?
   end
 
   def menu_item_kind_research_volumes?

@@ -63,12 +63,6 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_many   :teachers,
-             class_name: 'Education::Program::Teacher',
-             dependent: :destroy
-  has_many   :university_people_through_teachers,
-             through: :teachers,
-             source: :person
   has_many   :roles,
              class_name: 'Education::Program::Role',
              dependent: :destroy
