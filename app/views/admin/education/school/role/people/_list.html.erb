@@ -1,5 +1,5 @@
 <% if involvements.any? %>
-  <table class="table table-sortable">
+  <table class="table">
     <thead>
       <tr>
         <% if can? :reorder, University::Person::Involvement %>
@@ -10,7 +10,7 @@
         <th></th>
       </tr>
     </thead>
-    <tbody data-reorder-url="<%= reorder_admin_education_school_role_people_path(@role, { school_id: @school.id }) %>">
+    <tbody data-sortable data-sort-url="<%= reorder_admin_education_school_role_people_path(@role, { school_id: @school.id }) %>">
       <% involvements.each do |involvement| %>
         <tr data-id="<%= involvement.id %>">
           <% if can? :reorder, University::Person::Involvement %>

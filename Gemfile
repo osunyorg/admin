@@ -36,6 +36,7 @@ gem 'front_matter_parser'
 gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_authentication.git'
 # gem 'two_factor_authentication', path: '../two_factor_authentication'
 gem 'curation'#, path: '../../arnaudlevy/curation'
+gem "cocoon", "~> 1.2"
 
 # Front
 gem 'jquery-rails'

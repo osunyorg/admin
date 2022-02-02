@@ -11,7 +11,7 @@
         <p><%= @volume.description %></p>
         <% if @articles.any? %>
           <h3 class="h5 mt-4"><%= Research::Journal::Volume.human_attribute_name('articles') %></h3>
-          <table class="table table-sortable">
+          <table class="table">
             <thead>
               <tr>
                 <% if can? :reorder, Research::Journal::Article %>
@@ -22,7 +22,7 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody data-reorder-url="<%= reorder_admin_research_journal_articles_path(journal_id: @journal.id) %>">
+            <tbody data-sortable data-sort-url="<%= reorder_admin_research_journal_articles_path(journal_id: @journal.id) %>">
               <% @articles.each do |article| %>
                 <tr data-id="<%= article.id %>">
                   <% if can? :reorder, Research::Journal::Article %>

@@ -1,4 +1,4 @@
-<table class="table table-sortable">
+<table class="table">
   <thead>
     <tr>
       <% if can? :reorder, Research::Laboratory::Axis %>
@@ -9,7 +9,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody data-reorder-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
+  <tbody data-sortable data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
     <% axes.each do |axis| %>
       <tr data-id="<%= axis.id %>">
         <% if can? :reorder, Research::Laboratory::Axis %>
