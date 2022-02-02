@@ -6,7 +6,6 @@
           <th width="20" class="ps-0">&nbsp;</th>
         <% end %>
         <th class="ps-0"><%= University::Person.model_name.human %></th>
-        <th><%= University::Person::Involvement.human_attribute_name("description") %></th>
         <th></th>
       </tr>
     </thead>
@@ -21,7 +20,6 @@
                             involvement.person,
                             [:admin, involvement.person] %>
           </td>
-          <td><%= involvement.description %></td>
           <td class="text-end pe-0">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),

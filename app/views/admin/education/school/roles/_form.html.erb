@@ -1,14 +1,39 @@
 <%= simple_form_for [:admin, role],
                     url: role.new_record? ? admin_education_school_roles_path(@school)
                                           : admin_education_school_role_path(role, { school_id: @school.id }) do |f| %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :description %>
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-      <%= f.input :description %>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= University::Person.model_name.human(count: 2) %></h5>
+        </div>
+        <div class="card-body">
+          <%= link_to_add_association t('add'), f, :involvements, class: "btn btn-primary mb-3", data: {
+                'association-insertion-method': 'append',
+                'association-insertion-node':   '#involvements'
+              } %>
+
+          <div class="mb-3" id="involvements" data-sortable="inputs">
+            <%= f.simple_fields_for :involvements, include_id: false do |involvement_f| %>
+              <%= render 'admin/education/school/roles/involvement_fields', f: involvement_f, include_id: true %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

@@ -2,3 +2,9 @@
 
 <%= link_to t('create'), new_admin_education_school_role_person_path(school_id: @school.id, role_id: @role.id), class: button_classes %>
 <%= render 'admin/education/school/role/people/list', involvements: @involvements %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('edit'),
+              edit_admin_education_school_role_path(@role, { school_id: @school.id }),
+              class: button_classes if can?(:update, @role) %>
+<% end %>

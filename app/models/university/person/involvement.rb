@@ -33,6 +33,10 @@ class University::Person::Involvement < ApplicationRecord
   belongs_to :person, class_name: 'University::Person'
   belongs_to :target, polymorphic: true
 
+  validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
+
+  before_validation :set_kind, on: :create
+  before_validation :set_university_id, on: :create
   after_commit :sync_with_git
 
   def to_s
@@ -47,5 +51,20 @@ class University::Person::Involvement < ApplicationRecord
 
   def last_ordered_element
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
+  end
+
+  def set_kind
+    case target_type
+    when "Education::Program"
+      self.kind = :teacher
+    when "Research::Laboratory"
+      self.kind = :researcher
+    else
+      self.kind = :administrator
+    end
+  end
+
+  def set_university_id
+    self.university_id = self.person.university_id
   end
 end

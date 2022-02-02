@@ -57,9 +57,7 @@ class Admin::Education::School::Role::PeopleController < Admin::Education::Schoo
   end
 
   def involvement_params
-    params.require(:university_person_involvement)
-          .permit(:description, :position, :person_id)
-          .merge(university_id: @school.university_id, kind: :administrator)
+    params.require(:university_person_involvement).permit(:position, :person_id)
   end
 
   def model

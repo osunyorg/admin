@@ -25,8 +25,10 @@ class University::Role < ApplicationRecord
 
   belongs_to :university
   belongs_to :target, polymorphic: true, optional: true
-  has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy
+  has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy, inverse_of: :target
   has_many :people, through: :involvements
+
+  accepts_nested_attributes_for :involvements, reject_if: :all_blank, allow_destroy: true
 
   def to_s
     "#{description}"
