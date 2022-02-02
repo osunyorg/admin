@@ -25,7 +25,7 @@
               } %>
 
           <div class="mb-3" id="involvements" data-sortable="inputs">
-            <%= f.simple_fields_for :involvements, include_id: false do |involvement_f| %>
+            <%= f.simple_fields_for :involvements, role.involvements.ordered, include_id: false do |involvement_f| %>
               <%= render 'admin/education/school/roles/involvement_fields', f: involvement_f, include_id: true %>
             <% end %>
           </div>

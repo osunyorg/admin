@@ -3,6 +3,8 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   include Admin::Reorderable
 
+  before_action :load_people, only: [:new, :edit, :create, :update]
+
   def index
     @roles = @roles.ordered
     breadcrumb
@@ -59,11 +61,15 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   def role_params
     params.require(:university_role)
-          .permit(:description, :position)
+          .permit(:description, involvements_attributes: [:id, :person_id, :position, :_destroy])
           .merge(target: @program, university_id: current_university.id)
   end
 
   def model
     University::Role
+  end
+
+  def load_people
+    @people = current_university.people.accessible_by(current_ability).ordered
   end
 end
