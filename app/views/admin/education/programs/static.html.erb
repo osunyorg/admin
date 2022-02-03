@@ -1,4 +1,5 @@
 ---
+<% teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name %>
 title: >
   <%= @program.name %>
 url: /<%= @website.static_pathname_programs %><%= @program.path %>/
@@ -11,11 +12,11 @@ image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
 category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>/"
 teachers:
-<% @program.university_person_involvements.includes(:person).ordered.each do |involvement| %>
+<% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
 <% end %>
 teachers_description:
-<% @program.university_person_involvements.includes(:person).ordered.each do |involvement| %>
+<% teacher_involvements.each do |involvement| %>
   "<%= involvement.person.slug %>": >
     <%= involvement.description %>
 <% end %>

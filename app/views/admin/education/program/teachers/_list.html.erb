@@ -2,20 +2,14 @@
   <table class="table">
     <thead>
       <tr>
-        <% if can? :reorder, University::Person::Involvement %>
-          <th width="20" class="ps-0">&nbsp;</th>
-        <% end %>
         <th class="ps-0"><%= University::Person.model_name.human %></th>
         <th><%= University::Person::Involvement.human_attribute_name('description') %></th>
         <th></th>
       </tr>
     </thead>
-    <tbody data-sortable data-sort-url="<%= reorder_admin_education_program_teachers_path(@program) %>">
+    <tbody>
       <% involvements.each do |involvement| %>
-        <tr data-id="<%= involvement.id %>">
-          <% if can? :reorder, University::Person::Involvement %>
-            <td><i class="fa fa-bars handle"></i></td>
-          <% end %>
+        <tr>
           <td class="ps-0">
             <%= involvement %>
           </td>

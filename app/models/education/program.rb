@@ -63,15 +63,6 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_many   :roles,
-             class_name: 'Education::Program::Role',
-             dependent: :destroy
-  has_many   :role_people,
-             through: :roles,
-             source: :people
-  has_many   :university_people_through_roles,
-             through: :role_people,
-             source: :person
   has_many   :university_roles,
              class_name: 'University::Role',
              as: :target,
@@ -85,6 +76,7 @@ class Education::Program < ApplicationRecord
   has_many   :university_person_involvements,
              class_name: 'University::Person::Involvement',
              as: :target,
+             inverse_of: :target,
              dependent: :destroy
   has_many   :university_people_through_involvements,
              through: :university_person_involvements,
@@ -98,6 +90,8 @@ class Education::Program < ApplicationRecord
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
   has_many :websites, -> { distinct }, through: :schools
+
+  accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 
   enum level: {
     first_year: 100,

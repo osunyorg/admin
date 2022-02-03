@@ -39,6 +39,11 @@ class University::Person::Involvement < ApplicationRecord
   before_validation :set_university_id, on: :create
   after_commit :sync_with_git
 
+  scope :ordered_by_name, -> {
+    joins(:person).select('university_person_involvements.*')
+                  .order('university_people.last_name', 'university_people.first_name')
+  }
+
   def to_s
     "#{person}"
   end
