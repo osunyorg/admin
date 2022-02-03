@@ -19,7 +19,7 @@
               <%= link_to t('edit'),
                           edit_admin_education_program_teacher_path(involvement, { program_id: @program.id }),
                           class: button_classes if can?(:edit, involvement) %>
-              <%= link_to t('delete'),
+              <%= link_to t('remove'),
                           admin_education_program_teacher_path(involvement, { program_id: @program.id }),
                           method: :delete,
                           data: { confirm: t('please_confirm') },

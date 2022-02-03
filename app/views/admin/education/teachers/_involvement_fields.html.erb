@@ -1,0 +1,24 @@
+<% include_id ||= false %>
+<div class="nested-fields col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-10">
+          <%= f.hidden_field :target_type, value: "Education::Program" %>
+          <%= f.association :target,
+                            collection: collection_tree(current_university.education_programs),
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] },
+                            label: false,
+                            include_blank: "Sélectionnez une formation",
+                            required: true %>
+          <%= f.input :description, label: false, placeholder: University::Person::Involvement.human_attribute_name('description'), wrapper: false %>
+        </div>
+        <div class="col-2">
+          <%= link_to_remove_association '<i class="fas fa-trash"></i>'.html_safe, f, class: 'btn btn-sm btn-danger' %>
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :id if include_id %>
+  </div>
+</div>

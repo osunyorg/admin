@@ -56,6 +56,10 @@ class University::Person < ApplicationRecord
                           foreign_key: :author_id,
                           dependent: :destroy
 
+  has_many                :involvements,
+                          class_name: 'University::Person::Involvement',
+                          dependent: :destroy
+
   has_many                :author_websites,
                           -> { distinct },
                           through: :communication_website_posts,
@@ -71,6 +75,7 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
+  accepts_nested_attributes_for :involvements
 
   validates_presence_of   :first_name, :last_name
   validates_uniqueness_of :email,

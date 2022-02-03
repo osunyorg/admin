@@ -43,6 +43,7 @@ fr:
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
+    successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     users_alerts:
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
@@ -108,6 +109,7 @@ fr:
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   quit: Quitter
+  remove: Retirer
   save: Enregistrer
   select_language: Sélectionnez une langue
   simple_form:

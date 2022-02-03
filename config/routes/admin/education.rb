@@ -1,5 +1,5 @@
 namespace :education do
-  resources :teachers, only: [:index, :show]
+  resources :teachers, only: [:index, :show, :edit, :update]
   resources :schools do
     resources :roles, controller: 'school/roles' do
       resources :people, controller: 'school/role/people', only: [] do

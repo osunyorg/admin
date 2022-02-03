@@ -1,0 +1,26 @@
+<%= simple_form_for [:admin, @teacher], url: admin_education_teacher_path(@teacher) do |f| %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
+    </div>
+    <div class="card-body">
+      <%= link_to_add_association t('add'), f, :involvements,
+                                  class: "btn btn-primary mb-3",
+                                  data: {
+                                    'association-insertion-method': 'append',
+                                    'association-insertion-node':   '#involvements',
+                                  } %>
+
+      <div class="row mb-3" id="involvements">
+        <% sorted_teacher_involvements = @teacher.involvements.select(&:teacher?).sort_by(&:created_at) %>
+        <%= f.simple_fields_for :involvements, sorted_teacher_involvements, include_id: false do |involvement_f| %>
+          <%= render 'admin/education/teachers/involvement_fields', f: involvement_f, include_id: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

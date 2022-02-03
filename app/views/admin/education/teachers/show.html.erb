@@ -44,5 +44,5 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%#= link_to t('edit'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:edit, Education::Program) %>
+  <%= link_to t('edit'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:manage, University::Person::Involvement) %>
 <% end %>

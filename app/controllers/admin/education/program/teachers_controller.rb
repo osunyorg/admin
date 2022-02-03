@@ -44,7 +44,7 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
 
   def destroy
     @involvement.destroy
-    redirect_back fallback_location: admin_education_program_path(@program), notice: t('admin.successfully_destroyed_html', model: @involvement.to_s)
+    redirect_back fallback_location: admin_education_program_path(@program), notice: t('admin.successfully_quit_html', model: @involvement.to_s, target: @involvement.target.to_s)
   end
 
   protected
