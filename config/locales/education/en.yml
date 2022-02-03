@@ -50,6 +50,8 @@ en:
         websites: Associated websites
         zipcode: Zipcode
   education:
+    manage_programs: Manage programs
+    manage_roles: Manage roles
     manage_teachers: Manage teachers
     number_of_programs: Number of programs
     program:
@@ -59,6 +61,8 @@ en:
     roles:
       one: Role
       other: Roles
+    schools:
+      manage_roles: Manage the team
     teachers:
       one: Teacher
       other: Teachers

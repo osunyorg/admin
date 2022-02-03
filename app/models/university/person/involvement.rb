@@ -34,6 +34,7 @@ class University::Person::Involvement < ApplicationRecord
   belongs_to :target, polymorphic: true
 
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
+  validates :target_id, uniqueness: { scope: [:person_id, :target_type] }
 
   before_validation :set_kind, on: :create
   before_validation :set_university_id, on: :create

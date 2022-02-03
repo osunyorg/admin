@@ -1,3 +1,5 @@
+<% content_for :title, @teacher %>
+
 <%= simple_form_for [:admin, @teacher], url: admin_education_teacher_path(@teacher) do |f| %>
   <div class="card flex-fill w-100">
     <div class="card-header">
