@@ -8,4 +8,6 @@ first_name: >
 last_name: >
   <%= @administrator.last_name %>
 slug: "<%= @administrator.slug %>"
+description: >
+  <%= prepare_text_for_static @administrator.description %>
 ---

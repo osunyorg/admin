@@ -9,6 +9,8 @@ email: "<%= @person.email %>"
 <% if @person.best_picture.attached? %>
 image: "<%= @person.best_picture.blob.id %>"
 <% end %>
+description: >
+  <%= prepare_text_for_static @person.description %>
 roles:
 <% if @person.author.for_website?(@website) %>
   - author
