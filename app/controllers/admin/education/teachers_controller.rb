@@ -12,11 +12,13 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   end
 
   def edit
+    authorize!(:manage, :all)
     breadcrumb
     add_breadcrumb t('edit')
   end
 
   def update
+    authorize!(:manage, :all)
     if @teacher.update(teacher_params)
       redirect_to admin_education_teacher_path(@teacher), notice: t('admin.successfully_updated_html', model: @teacher.to_s)
     else
