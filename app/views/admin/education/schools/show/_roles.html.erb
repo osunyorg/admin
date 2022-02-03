@@ -22,7 +22,7 @@
               <td class="ps-0">
                 <%= link_to_if  can?(:read, role),
                                 role,
-                                admin_education_school_role_path(role, { school_id: @school.id }) %>
+                                edit_admin_education_school_role_path(role, { school_id: @school.id }) %>
               </td>
               <td>
                 <ul>

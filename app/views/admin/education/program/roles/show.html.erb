@@ -1,7 +1,32 @@
 <% content_for :title, @role %>
 
-<%= link_to t('create'), new_admin_education_program_role_person_path(program_id: @program.id, role_id: @role.id), class: button_classes %>
-<%= render 'admin/education/program/role/people/list', involvements: @involvements %>
+<% if @involvements.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <% if can? :reorder, University::Role %>
+          <th width="20" class="ps-0">&nbsp;</th>
+        <% end %>
+        <th class="ps-0"><%= University::Person.model_name.human %></th>
+      </tr>
+    </thead>
+    <tbody data-sortable data-sort-url="<%= reorder_admin_education_program_role_people_path(@role, { program_id: @program.id }) %>">
+      <% @involvements.each do |involvement| %>
+        <tr data-id="<%= involvement.id %>">
+          <% if can? :reorder, University::Role %>
+            <td><i class="fa fa-bars handle"></i></td>
+          <% end %>
+          <td class="ps-0">
+            <%= link_to_if  can?(:read, involvement.person),
+                            involvement.person,
+                            [:admin, involvement.person] %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'),

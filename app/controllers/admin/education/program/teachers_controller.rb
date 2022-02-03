@@ -25,7 +25,7 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
 
   def create
     if @involvement.save
-      redirect_to admin_education_program_path(@program), notice: t('admin.successfully_created_html', model: @involvement.to_s)
+      redirect_to admin_education_program_teachers_path(@program), notice: t('admin.successfully_created_html', model: @involvement.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -34,7 +34,7 @@ class Admin::Education::Program::TeachersController < Admin::Education::Program:
 
   def update
     if @involvement.update(involvement_params)
-      redirect_to admin_education_program_path(@program), notice: t('admin.successfully_updated_html', model: @involvement.to_s)
+      redirect_to admin_education_program_teachers_path(@program), notice: t('admin.successfully_updated_html', model: @involvement.to_s)
     else
       breadcrumb
       render :edit, status: :unprocessable_entity
