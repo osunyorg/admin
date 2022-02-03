@@ -16,9 +16,9 @@
       <% @roles.each do |role| %>
         <tr>
           <td class="ps-0">
-            <%= link_to_if  can?(:read, role),
+            <%= link_to_if  can?(:update, role),
                             role,
-                            admin_education_program_role_path(role, { program_id: @program.id }) %>
+                            edit_admin_education_program_role_path(role, { program_id: @program.id }) %>
           </td>
           <td><%= role.involvements.includes(:person).ordered.map { |involvement| link_to_if can?(:read, involvement.person), involvement.person.to_s, admin_university_person_path(involvement.person) }.to_sentence.html_safe %></td>
         </tr>

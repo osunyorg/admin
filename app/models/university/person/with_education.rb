@@ -4,7 +4,8 @@ module University::Person::WithEducation
   included do
     has_many  :involvements_as_teacher,
               -> { where(kind: 'teacher') },
-              class_name: 'University::Person::Involvement'
+              class_name: 'University::Person::Involvement',
+              dependent: :destroy
 
     has_many  :education_programs_as_teacher,
               through: :involvements_as_teacher,

@@ -44,6 +44,7 @@ class University::Person::Involvement < ApplicationRecord
     joins(:person).select('university_person_involvements.*')
                   .order('university_people.last_name', 'university_people.first_name')
   }
+  scope :ordered_by_date, -> { order(:created_at) }
 
   def to_s
     "#{person}"

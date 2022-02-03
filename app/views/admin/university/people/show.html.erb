@@ -2,6 +2,23 @@
 
 <%= render 'main_infos', person: @person %>
 
+<% if @teacher_involvements.total_count > 0 || @administrator_involvements.total_count > 0 %>
+  <h2 class="mb-3"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= render  'admin/education/teachers/show/programs',
+                  involvements: @teacher_involvements,
+                  param_name: :programs_page if @person.is_teacher? %>
+    </div>
+    <div class="col-md-6">
+      <%= render  'admin/university/people/show/roles',
+                  involvements: @administrator_involvements,
+                  param_name: :roles_page %>
+    </div>
+  </div>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @person %>
 <% end %>

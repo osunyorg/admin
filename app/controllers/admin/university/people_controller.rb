@@ -9,6 +9,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def show
+    @teacher_involvements = @person.involvements_as_teacher.includes(:target).ordered_by_date.page(params[:programs_page])
+    @administrator_involvements = @person.involvements_as_administrator.includes(:target).ordered_by_date.page(params[:roles_page])
     breadcrumb
   end
 

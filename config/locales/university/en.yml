@@ -65,3 +65,7 @@ en:
         is_researcher: "Writes articles for journals."
         is_teacher: "Teaches in Schools."
         tenure: "To differ from temporary lecturer."
+  university:
+    person:
+      administrator_roles: Administrator roles
+      taught_programs: Taught programs

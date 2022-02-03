@@ -60,6 +60,11 @@ class University::Person < ApplicationRecord
                           class_name: 'University::Person::Involvement',
                           dependent: :destroy
 
+  has_many                :involvements_as_administrator,
+                          -> { where(kind: 'administrator') },
+                          class_name: 'University::Person::Involvement',
+                          dependent: :destroy
+
   has_many                :author_websites,
                           -> { distinct },
                           through: :communication_website_posts,

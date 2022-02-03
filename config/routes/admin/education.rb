@@ -2,7 +2,7 @@ namespace :education do
   resources :teachers, only: [:index, :show, :edit, :update]
   resources :schools do
     resources :roles, controller: 'school/roles' do
-      resources :people, controller: 'school/role/people', only: [] do
+      resources :people, controller: 'school/role/people', only: [:destroy] do
         post :reorder, on: :collection
       end
       collection do
@@ -12,7 +12,7 @@ namespace :education do
   end
   resources :programs do
     resources :roles, controller: 'program/roles' do
-      resources :people, controller: 'program/role/people', only: [] do
+      resources :people, controller: 'program/role/people', only: [:destroy] do
         post :reorder, on: :collection
       end
       collection do

@@ -7,7 +7,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   end
 
   def show
-    @involvements = @teacher.involvements_as_teacher.includes(:target).order(:created_at).page(params[:page])
+    @involvements = @teacher.involvements_as_teacher.includes(:target).ordered_by_date.page(params[:page])
     breadcrumb
   end
 

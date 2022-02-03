@@ -44,6 +44,7 @@ fr:
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
+    successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     users_alerts:
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."

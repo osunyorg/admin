@@ -49,8 +49,8 @@ fr:
         one: Personne
         other: Personnes
       university/person/involvement:
-        one: Involvement
-        other: Involvements
+        one: Implication
+        other: Implications
       university/role:
         one: Rôle
         other: Rôles
@@ -65,3 +65,7 @@ fr:
         is_researcher: "Écrit des articles dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
         tenure: "A différencier d'une personne vacataire."
+  university:
+    person:
+      administrator_roles: Rôles administratifs
+      taught_programs: Formations enseignées

@@ -44,6 +44,7 @@ en:
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
+    successfully_removed_html: "<i>%{model}</i> was successfully removed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     users_alerts:
       not_locked_html: '<i>%{model}</i> was not locked.'
