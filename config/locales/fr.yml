@@ -12,6 +12,7 @@ fr:
         person: Personne
         mobile_phone: Téléphone portable
         picture: Photo de profil
+        programs_to_manage: Formation(s) gérée(s)
         role: Rôle
         roles:
           admin: Administrateur

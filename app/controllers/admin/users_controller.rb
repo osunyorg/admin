@@ -74,7 +74,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def user_params
     params.require(:user)
-          .permit(:email, :first_name, :last_name, :role, :password, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone)
+          .permit(:email, :first_name, :last_name, :role, :password, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone, programs_to_manage_ids: [])
           .merge(university_id: current_university.id)
   end
 

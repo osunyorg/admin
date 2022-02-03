@@ -6,6 +6,11 @@ module User::WithRoles
 
     enum role: { visitor: 0, teacher: 10, program_manager: 12, admin: 20, server_admin: 30 }
 
+    has_and_belongs_to_many :programs_to_manage,
+                            class_name: 'Education::Program',
+                            join_table: 'education_programs_users',
+                            association_foreign_key: 'education_program_id'
+
     scope :for_role, -> (role) { where(role: role) }
 
     before_validation :set_default_role, on: :create
