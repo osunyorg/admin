@@ -48,7 +48,7 @@ class Admin::Education::Program::Role::PeopleController < Admin::Education::Prog
 
   def breadcrumb
     super
-    add_breadcrumb Education::Program::Role.model_name.human(count: 2)
+    add_breadcrumb University::Role.model_name.human(count: 2)
     add_breadcrumb(@role, admin_education_program_role_path(@role, { program_id: @program.id }))
     if @involvement
       @involvement.persisted?  ? add_breadcrumb(@involvement, admin_education_program_role_person_path(@involvement, { program_id: @program.id, role_id: @role.id }))

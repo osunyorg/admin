@@ -78,7 +78,12 @@
                                   } %>
 
       <div class="row mb-3" id="involvements">
-        <%= f.simple_fields_for :university_person_involvements, program.university_person_involvements.ordered_by_name, include_id: false do |involvement_f| %>
+        <%
+        sorted_involvements = program.university_person_involvements.sort_by { |involvement|
+          [involvement.person&.last_name, involvement.person&.first_name]
+        }
+        %>
+        <%= f.simple_fields_for :university_person_involvements, sorted_involvements, include_id: false do |involvement_f| %>
           <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
         <% end %>
       </div>
