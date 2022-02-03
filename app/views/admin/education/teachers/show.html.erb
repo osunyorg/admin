@@ -5,5 +5,5 @@
 <%= render 'admin/education/teachers/show/programs', involvements: @involvements %>
 
 <% content_for :action_bar_right do %>
-  <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:manage, University::Person::Involvement) %>
+  <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:manage, :all) %>
 <% end %>

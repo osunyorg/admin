@@ -12,6 +12,7 @@ en:
         person: Person
         mobile_phone: Mobile phone
         picture: Profile picture
+        programs_to_manage: Program(s) managed
         role: Role
         roles:
           admin: Administrator

@@ -15,7 +15,9 @@
           <%= f.input :description, label: false, placeholder: University::Person::Involvement.human_attribute_name('description'), wrapper: false %>
         </div>
         <div class="col-2">
-          <%= link_to_remove_association '<i class="fas fa-trash"></i>'.html_safe, f, class: 'btn btn-sm btn-danger' %>
+          <%= link_to_remove_association '<i class="fas fa-trash"></i>'.html_safe,
+                                         f,
+                                         class: 'btn btn-sm btn-danger' %>
         </div>
       </div>
     </div>

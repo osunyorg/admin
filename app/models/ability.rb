@@ -33,20 +33,22 @@ class Ability
   def teacher
     can :manage, University::Person, user_id: @user.id
     cannot :create, University::Person
-    can :read, Education::Program, university_id: @user.university_id
+    can [:read, :children], Education::Program, university_id: @user.university_id
     can :read, University::Role, university_id: @user.university_id
     can :manage, University::Person::Involvement, person_id: @user.person&.id
     can :read, University::Person::Involvement, university_id: @user.university_id
   end
 
   def program_manager
+    managed_programs_ids = @user.programs_to_manage.pluck(:education_program_id)
     can :manage, University::Person, university_id: @user.university_id
-    can :manage, Education::Program, university_id: @user.university_id
-    can :manage, University::Role, university_id: @user.university_id
-    can :manage, University::Person::Involvement, university_id: @user.university_id
+    can :manage, Education::Program, id: managed_programs_ids
+    can [:read, :children], Education::Program, university_id: @user.university_id
+    cannot :create, Education::Program
+    can :manage, University::Role, target_type: "Education::Program", target_id: managed_programs_ids
+    can :manage, University::Person::Involvement, target_type: "Education::Program", target_id: managed_programs_ids
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
-
   end
 
   def admin
@@ -65,6 +67,7 @@ class Ability
     can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
+    can :manage, :all_programs # needed to prevent program_manager to access specific global screens
     can :manage, Research::Journal, university_id: @user.university_id
     can :manage, Research::Journal::Article, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id

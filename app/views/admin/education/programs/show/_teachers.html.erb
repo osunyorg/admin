@@ -1,7 +1,9 @@
 <div class="float-end">
-  <%= link_to t('education.manage_teachers'),
+  <% if !current_user.program_manager? || current_user.programs_to_manage.pluck(:education_program_id).include?(@program.id) %>
+    <%= link_to t('education.manage_teachers'),
               admin_education_program_teachers_path(program_id: @program.id),
               class: button_classes if can?(:update, University::Person::Involvement) %>
+  <% end %>
 </div>
 <h3 class="h5"><%= Education::Program.human_attribute_name('teachers') %></h3>
 <% if @teacher_involvements.any? %>
