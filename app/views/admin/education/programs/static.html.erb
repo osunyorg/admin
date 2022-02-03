@@ -20,6 +20,7 @@ teachers_description:
   "<%= involvement.person.slug %>": >
     <%= involvement.description %>
 <% end %>
+<% if @program.university_roles.any? %>
 roles:
 <% @program.university_roles.ordered.each do |role| %>
   - title: >
@@ -28,6 +29,9 @@ roles:
     <% role.involvements.includes(:person).ordered.each do |involvement| %>
       - "<%= involvement.person.slug %>"
     <% end %>
+<% end %>
+<% else %>
+roles: []
 <% end %>
 continuing: <%= @program.continuing %>
 level: <%= @program.level %>
