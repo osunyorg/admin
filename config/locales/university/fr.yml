@@ -35,6 +35,12 @@ fr:
         slug: Slug
         tenure: Titulaire ?
         user: Utilisateur
+      university/person/involvement:
+        person: Personne
+        target_id: ''
+      university/role:
+        description: Description
+        people: Personnes
     models:
       university:
         one: Université
@@ -42,6 +48,12 @@ fr:
       university/person:
         one: Personne
         other: Personnes
+      university/person/involvement:
+        one: Involvement
+        other: Involvements
+      university/role:
+        one: Rôle
+        other: Rôles
   simple_form:
     hints:
       university:

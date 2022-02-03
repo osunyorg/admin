@@ -2,21 +2,47 @@
 
 <%= render 'admin/university/people/main_infos', person: @teacher %>
 
-
-<% if @programs.total_count > 0 %>
+<% if @involvements.total_count > 0 %>
   <div class="card">
     <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= "#{Education::Program.model_name.human(count: 2)} (#{@programs.total_count})" %></h2>
+      <h2 class="card-title mb-0 h5"><%= "#{Education::Program.model_name.human(count: 2)} (#{@involvements.total_count})" %></h2>
     </div>
-    <%= render 'admin/education/programs/list', programs: @programs %>
-    <% if @programs.total_pages > 1 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= Education::Program.model_name.human %></th>
+          <th><%= Education::Program.human_attribute_name('level') %></th>
+          <th><%= University::Person::Involvement.human_attribute_name('description') %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @involvements.each do |involvement| %>
+          <% program = involvement.target %>
+          <tr>
+            <td><%= link_to_if can?(:read, program), program, [:admin, program] %></td>
+            <td><%= program.level_i18n %></td>
+            <td><%= involvement.description %></td>
+            <td class="text-end">
+              <%= link_to t('quit'),
+                          admin_education_program_teacher_path(involvement, { program_id: program.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, involvement) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% if @involvements.total_pages > 1 %>
       <div class="card-footer">
-        <%= paginate @programs, theme: 'bootstrap-5' %>
+        <%= paginate @involvements, theme: 'bootstrap-5' %>
       </div>
     <% end %>
   </div>
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%#= link_to t('edit'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:edit, Education::Program) %>
+  <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:manage, University::Person::Involvement) %>
 <% end %>

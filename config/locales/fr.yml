@@ -32,6 +32,7 @@ fr:
       user:
         one: Utilisateur·rice
         other: Utilisateur·rice·s
+  add: Ajouter
   admin:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
@@ -42,6 +43,7 @@ fr:
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
+    successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     users_alerts:
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
@@ -86,6 +88,7 @@ fr:
   false: Non
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
+  hello: "Bonjour %{name} !"
   home: Accueil
   languages:
     en: Anglais
@@ -106,6 +109,8 @@ fr:
   please_confirm_with_children: "ATTENTION : effacer cet élément supprimera aussi tous ses enfants. Est-ce que vous confirmez ?"
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  quit: Quitter
+  remove: Retirer
   save: Enregistrer
   select_language: Sélectionnez une langue
   simple_form:
@@ -114,6 +119,11 @@ fr:
     hints:
       user:
         mobile_phone: "Format international (+XX). En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
+    include_blanks:
+      defaults:
+        language: "Sélectionnez une langue"
+        person: "Sélectionnez une personne"
+        program: "Sélectionnez une formation"
   simple_form_password_with_hints:
       test_chars: "%{min_length} caractères min."
   show: Voir

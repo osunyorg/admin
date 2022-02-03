@@ -1,14 +1,20 @@
-<table class="table table-sortable">
+<table class="table">
   <thead>
     <tr>
+      <% if can? :reorder, Research::Laboratory::Axis %>
+        <th width="20" class="ps-0">&nbsp;</th>
+      <% end %>
       <th><%= Research::Laboratory::Axis.model_name.human %></th>
       <th><%= Research::Laboratory::Axis.human_attribute_name('short_name') %></th>
       <th></th>
     </tr>
   </thead>
-  <tbody data-reorder-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
+  <tbody data-sortable data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
     <% axes.each do |axis| %>
-      <tr class="handle" data-id="<%= axis.id %>">
+      <tr data-id="<%= axis.id %>">
+        <% if can? :reorder, Research::Laboratory::Axis %>
+          <td><i class="fa fa-bars handle"></i></td>
+        <% end %>
         <td>
           <%= link_to axis, admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
         </td>

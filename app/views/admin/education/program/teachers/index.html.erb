@@ -1,0 +1,6 @@
+<% content_for :title, Education::Program.human_attribute_name("teachers") %>
+<%= render 'admin/education/program/teachers/list', involvements: @involvements %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('add'), new_admin_education_program_teacher_path(program_id: @program.id), class: button_classes %>
+<% end %>

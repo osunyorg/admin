@@ -11,13 +11,17 @@ country: >
   <%= ISO3166::Country[@school.country].translations[@school.country.downcase] %>
 phone: >
   <%= @school.phone %>
-administrators:
-<% @school.administrators.includes(:person).ordered.each do |administrator| %>
-  - "<%= administrator.person.slug %>"
+<% if @school.university_roles.any? %>
+roles:
+<% @school.university_roles.ordered.each do |role| %>
+  - title: >
+      <%= role.to_s %>
+    persons:
+    <% role.involvements.includes(:person).ordered.each do |involvement| %>
+      - "<%= involvement.person.slug %>"
+    <% end %>
 <% end %>
-administrators_description:
-<% @school.administrators.includes(:person).ordered.each do |administrator| %>
-  "<%= administrator.person.slug %>": >
-    <%= administrator.best_description %>
+<% else %>
+roles: []
 <% end %>
 ---

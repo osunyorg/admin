@@ -1,51 +1,68 @@
 class Admin::Education::Program::Role::PeopleController < Admin::Education::Program::ApplicationController
-  load_and_authorize_resource :role, class: Education::Program::Role, through: :program
-  load_and_authorize_resource class: Education::Program::Role::Person, through: :role
-
-  before_action :get_available_people, except: :destroy
+  load_and_authorize_resource :role, class: University::Role, through: :program, param: :role_id, through_association: :university_roles
+  load_and_authorize_resource :involvement, class: University::Person::Involvement, through: :role, parent: false
 
   include Admin::Reorderable
 
-  def reorder
-    super { |first_person| first_person.sync_program }
-  end
+  before_action :get_available_people, except: [:reorder, :destroy]
 
   def new
     breadcrumb
   end
 
+  def edit
+    breadcrumb
+    add_breadcrumb t('edit')
+  end
+
   def create
-    if @person.save
-      redirect_to admin_education_program_role_path(@role), notice: t('admin.successfully_created_html', model: @person.to_s)
+    if @involvement.save
+      redirect_to admin_education_program_role_path(@role, { program_id: @program.id }), notice: t('admin.successfully_created_html', model: @person.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
 
+  def update
+    if @involvement.update(involvement_params)
+      redirect_to admin_education_program_role_path(@role, { program_id: @program.id }), notice: t('admin.successfully_updated_html', model: @involvement.to_s)
+    else
+      breadcrumb
+      render :edit, status: :unprocessable_entity
+      add_breadcrumb t('edit')
+    end
+  end
+
   def destroy
-    @person.destroy
-    redirect_to admin_education_program_role_path(@role), notice: t('admin.successfully_destroyed_html', model: @person.to_s)
+    @involvement.destroy
+    redirect_to admin_education_program_role_path(@role, { program_id: @program.id }), notice: t('admin.successfully_destroyed_html', model: @person.to_s)
   end
 
   protected
 
   def get_available_people
-    used_person_ids = @role.people.where.not(id: @person.id).pluck(:person_id)
+    used_person_ids = @role.involvements.where.not(id: @involvement.id).pluck(:person_id)
     @available_people = current_university.people.where.not(id: used_person_ids).accessible_by(current_ability).ordered
   end
 
   def breadcrumb
     super
-    add_breadcrumb Education::Program::Role.model_name.human(count: 2)
-    breadcrumb_for @role
-    add_breadcrumb Education::Program::Role::Person.model_name.human(count: 2)
-    breadcrumb_for @person
+    add_breadcrumb University::Role.model_name.human(count: 2)
+    add_breadcrumb(@role, admin_education_program_role_path(@role, { program_id: @program.id }))
+    if @involvement
+      @involvement.persisted?  ? add_breadcrumb(@involvement, admin_education_program_role_person_path(@involvement, { program_id: @program.id, role_id: @role.id }))
+                               : add_breadcrumb(t('create'))
+    end
   end
 
-  def person_params
-    params.require(:education_program_role_person)
-          .permit(:person_id)
-          .merge(role_id: @role.id)
+  def involvement_params
+    params.require(:university_person_involvement)
+          .permit(:description, :position, :person_id)
+          .merge(university_id: @program.university_id, kind: :administrator)
+  end
+
+  def model
+    University::Person::Involvement
   end
 end

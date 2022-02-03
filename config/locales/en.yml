@@ -32,6 +32,7 @@ en:
       user:
         one: User
         other: Users
+  add: Add
   admin:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
@@ -42,6 +43,7 @@ en:
     password_hint: Leave blank if you do not wish to change the password.
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
+    successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     users_alerts:
       not_locked_html: '<i>%{model}</i> was not locked.'
@@ -86,6 +88,7 @@ en:
   false: No
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
+  hello: "Hello %{name}!"
   home: Home
   languages:
     en: English
@@ -106,6 +109,8 @@ en:
   please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  quit: Quit
+  remove: Remove
   save: Save
   select_language: Select language
   simple_form:
@@ -114,6 +119,11 @@ en:
     hints:
       user:
         mobile_phone: "International format (+XX). By filling this field, you accept to receive your two-factor authentication codes via SMS."
+    include_blanks:
+      defaults:
+        language: "Select a language"
+        person: "Select a person"
+        program: "Select a program"
   simple_form_password_with_hints:
       test_chars: "%{min_length} characters min."
   show: Show
@@ -127,3 +137,10 @@ en:
       date_with_hour: "%B %d, %Y %H:%M"
   true: Yes
   validate: Validate
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Previous"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"

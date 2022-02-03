@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<% if current_university.research_journals.any? %>
+<% if current_university.research_journals.any? && can?(:read, Research::Journal) %>
   <h2 class="h4 my-4"><%= Research::Journal.model_name.human(count: 2) %></h2>
   <div class="row">
     <% current_university.research_journals.each do |journal| %>
@@ -33,7 +33,7 @@
   </div>
 <% end %>
 
-<% if current_university.communication_websites.any? %>
+<% if current_university.communication_websites.any? && can?(:read, Communication::Website) %>
   <h2 class="h4 my-4"><%= Communication::Website.model_name.human(count: 2) %></h2>
   <div class="row">
     <% current_university.communication_websites.each do |website| %>

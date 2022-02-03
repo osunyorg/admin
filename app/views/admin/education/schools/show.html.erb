@@ -56,15 +56,7 @@
 
 </div>
 
-<div class="card flex-fill w-100">
-  <div class="card-header">
-    <h2 class="card-title mb-0 h5"><%= Education::School.human_attribute_name('administrators') %></h2>
-  </div>
-  <div class="card-body">
-    <%= render 'admin/education/school/administrators/list', administrators: @school.administrators.includes(:person).ordered %>
-    <%= link_to t('create'), new_admin_education_school_administrator_path(school_id: @school.id), class: button_classes %>
-  </div>
-</div>
+<%= render 'admin/education/schools/show/roles', roles: @roles %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @school %>

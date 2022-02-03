@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_165229) do
+ActiveRecord::Schema.define(version: 2022_01_31_163458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -352,37 +352,6 @@ ActiveRecord::Schema.define(version: 2022_01_24_165229) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "education_program_role_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "position"
-    t.uuid "person_id", null: false
-    t.uuid "role_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["person_id"], name: "index_education_program_role_people_on_person_id"
-    t.index ["role_id"], name: "index_education_program_role_people_on_role_id"
-  end
-
-  create_table "education_program_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.integer "position"
-    t.uuid "program_id", null: false
-    t.uuid "university_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["program_id"], name: "index_education_program_roles_on_program_id"
-    t.index ["university_id"], name: "index_education_program_roles_on_university_id"
-  end
-
-  create_table "education_program_teachers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "description"
-    t.uuid "program_id", null: false
-    t.uuid "person_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["person_id"], name: "index_education_program_teachers_on_person_id"
-    t.index ["program_id"], name: "index_education_program_teachers_on_program_id"
-  end
-
   create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -408,16 +377,6 @@ ActiveRecord::Schema.define(version: 2022_01_24_165229) do
     t.uuid "education_school_id", null: false
     t.index ["education_program_id", "education_school_id"], name: "program_school"
     t.index ["education_school_id", "education_program_id"], name: "school_program"
-  end
-
-  create_table "education_school_administrators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "description"
-    t.uuid "school_id", null: false
-    t.uuid "person_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["person_id"], name: "index_education_school_administrators_on_person_id"
-    t.index ["school_id"], name: "index_education_school_administrators_on_school_id"
   end
 
   create_table "education_schools", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -476,7 +435,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_165229) do
     t.uuid "research_journal_id", null: false
     t.string "title"
     t.integer "number"
-    t.date "published_at"
+    t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
@@ -690,16 +649,8 @@ ActiveRecord::Schema.define(version: 2022_01_24_165229) do
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_website_posts", "university_people", column: "author_id"
   add_foreign_key "communication_websites", "universities"
-  add_foreign_key "education_program_role_people", "education_program_roles", column: "role_id"
-  add_foreign_key "education_program_role_people", "university_people", column: "person_id"
-  add_foreign_key "education_program_roles", "education_programs", column: "program_id"
-  add_foreign_key "education_program_roles", "universities"
-  add_foreign_key "education_program_teachers", "education_programs", column: "program_id"
-  add_foreign_key "education_program_teachers", "university_people", column: "person_id"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
-  add_foreign_key "education_school_administrators", "education_schools", column: "school_id"
-  add_foreign_key "education_school_administrators", "university_people", column: "person_id"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"

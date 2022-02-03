@@ -53,11 +53,11 @@ module Communication::Website::WithMenuItems
   end
 
   def menu_item_kind_researchers?
-    research_articles.collect(&:people).flatten.any?
+    about_journal? && about.people.any?
   end
 
   def menu_item_kind_teachers?
-    programs.collect(&:university_people_through_teachers).flatten.any?
+    about_school? && about.university_people_through_program_involvements.any?
   end
 
   def menu_item_kind_research_volumes?

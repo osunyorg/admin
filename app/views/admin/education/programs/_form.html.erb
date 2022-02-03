@@ -1,4 +1,4 @@
-<%= simple_nested_form_for [:admin, program] do |f| %>
+<%= simple_form_for [:admin, program] do |f| %>
   <div class="row">
     <div class="col-md-3">
       <div class="card flex-fill w-100">
@@ -59,13 +59,33 @@
            <%= f.input :featured_image_alt %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
-        </div>
-        <div class="card-body">
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
-        </div>
+    </div>
+  </div>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
+    </div>
+    <div class="card-body">
+      <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
+
+      <p><%= Education::Program.human_attribute_name('teachers') %></p>
+      <%= link_to_add_association t('add'), f, :university_person_involvements,
+                                  class: "btn btn-primary mb-3",
+                                  partial: 'admin/education/programs/involvement_fields',
+                                  data: {
+                                    'association-insertion-method': 'append',
+                                    'association-insertion-node':   '#involvements',
+                                  } %>
+
+      <div class="row mb-3" id="involvements">
+        <%
+        sorted_involvements = program.university_person_involvements.sort_by { |involvement|
+          [involvement.person&.last_name, involvement.person&.first_name]
+        }
+        %>
+        <%= f.simple_fields_for :university_person_involvements, sorted_involvements, include_id: false do |involvement_f| %>
+          <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
+        <% end %>
       </div>
     </div>
   </div>

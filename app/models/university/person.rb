@@ -31,8 +31,10 @@
 #
 class University::Person < ApplicationRecord
   include WithGit
+  include WithBlobs
   include WithSlug
   include WithPicture
+  include WithEducation
 
   has_rich_text :biography
 
@@ -44,22 +46,6 @@ class University::Person < ApplicationRecord
                           join_table: :research_journal_articles_researchers,
                           foreign_key: :researcher_id
 
-  has_many                :education_program_teachers,
-                          class_name: 'Education::Program::Teacher',
-                          dependent: :destroy
-
-  has_many                :education_program_role_people,
-                          class_name: 'Education::Program::Role::Person',
-                          dependent: :destroy
-
-  has_many                :education_programs,
-                          through: :education_program_teachers,
-                          source: :program
-
-  has_many                :education_school_administrators,
-                          class_name: 'Education::School::Administrator',
-                          dependent: :destroy
-
   has_many                :communication_website_posts,
                           class_name: 'Communication::Website::Post',
                           foreign_key: :author_id,
@@ -68,6 +54,10 @@ class University::Person < ApplicationRecord
   has_many                :communication_website_imported_authors,
                           class_name: "Communication::Website::Imported::Author",
                           foreign_key: :author_id,
+                          dependent: :destroy
+
+  has_many                :involvements,
+                          class_name: 'University::Person::Involvement',
                           dependent: :destroy
 
   has_many                :author_websites,
@@ -85,6 +75,7 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
+  accepts_nested_attributes_for :involvements
 
   validates_presence_of   :first_name, :last_name
   validates_uniqueness_of :email,
@@ -119,7 +110,7 @@ class University::Person < ApplicationRecord
     dependencies = []
     if for_website?(website)
       dependencies << self
-      dependencies << best_picture.blob
+      dependencies.concat active_storage_blobs
     end
     dependencies << administrator if administrator.for_website?(website)
     dependencies << author if author.for_website?(website)
@@ -152,6 +143,14 @@ class University::Person < ApplicationRecord
   end
 
   protected
+
+  def explicit_blob_ids
+    [picture&.blob_id]
+  end
+
+  def inherited_blob_ids
+    [best_picture&.blob_id]
+  end
 
   def sanitize_email
     self.email = self.email.downcase.strip

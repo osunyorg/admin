@@ -3,6 +3,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
                               through: :current_university,
                               through_association: :education_programs
 
+  before_action :load_teacher_people, only: [:new, :edit, :create, :update]
+
   def index
     @programs = @programs.root.ordered
     breadcrumb
@@ -31,6 +33,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def show
+    @roles = @program.university_roles.ordered
+    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name
     breadcrumb
   end
 
@@ -82,7 +86,11 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt,
       :prerequisites, :objectives, :duration, :registration, :pedagogy,
       :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other,
-      :parent_id, school_ids: []
+      :parent_id, school_ids: [], university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
     )
+  end
+
+  def load_teacher_people
+    @teacher_people = current_university.people.teachers.accessible_by(current_ability).ordered
   end
 end

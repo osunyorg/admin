@@ -18,7 +18,7 @@
       <%= f.association :language,
                         required: true,
                         label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") },
-                        include_blank: t('select_language') %>
+                        include_blank: :translate %>
     </div>
     <div class="col-md-6">
       <%= f.input :password,

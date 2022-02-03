@@ -11,17 +11,23 @@
         <p><%= @volume.description %></p>
         <% if @articles.any? %>
           <h3 class="h5 mt-4"><%= Research::Journal::Volume.human_attribute_name('articles') %></h3>
-          <table class="table table-sortable">
+          <table class="table">
             <thead>
               <tr>
-                <th><%= Research::Journal::Article.model_name.human %></th>
+                <% if can? :reorder, Research::Journal::Article %>
+                  <th width="20" class="ps-0">&nbsp;</th>
+                <% end %>
+                <th class="ps-0"><%= Research::Journal::Article.model_name.human %></th>
                 <th><%= Research::Journal::Article.human_attribute_name('published_at') %></th>
                 <th></th>
               </tr>
             </thead>
-            <tbody data-reorder-url="<%= reorder_admin_research_journal_articles_path(journal_id: @journal.id) %>">
+            <tbody data-sortable data-sort-url="<%= reorder_admin_research_journal_articles_path(journal_id: @journal.id) %>">
               <% @articles.each do |article| %>
-                <tr class="handle" data-id="<%= article.id %>">
+                <tr data-id="<%= article.id %>">
+                  <% if can? :reorder, Research::Journal::Article %>
+                    <td><i class="fa fa-bars handle"></i></td>
+                  <% end %>
                   <td>
                     <%= link_to article,
                                 admin_research_journal_article_path(journal_id: article.journal, id: article),

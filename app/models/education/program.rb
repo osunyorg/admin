@@ -63,20 +63,23 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_many   :teachers,
-             class_name: 'Education::Program::Teacher',
+  has_many   :university_roles,
+             class_name: 'University::Role',
+             as: :target,
              dependent: :destroy
-  has_many   :university_people_through_teachers,
-             through: :teachers,
+  has_many   :involvements_through_roles,
+             through: :university_roles,
+             source: :involvements
+  has_many   :university_people_through_role_involvements,
+             through: :involvements_through_roles,
              source: :person
-  has_many   :roles,
-             class_name: 'Education::Program::Role',
+  has_many   :university_person_involvements,
+             class_name: 'University::Person::Involvement',
+             as: :target,
+             inverse_of: :target,
              dependent: :destroy
-  has_many   :role_people,
-             through: :roles,
-             source: :people
-  has_many   :university_people_through_roles,
-             through: :role_people,
+  has_many   :university_people_through_involvements,
+             through: :university_person_involvements,
              source: :person
   has_many   :website_categories,
              class_name: 'Communication::Website::Category',
@@ -87,6 +90,8 @@ class Education::Program < ApplicationRecord
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
   has_many :websites, -> { distinct }, through: :schools
+
+  accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 
   enum level: {
     first_year: 100,
@@ -122,10 +127,12 @@ class Education::Program < ApplicationRecord
   def git_dependencies(website)
     [self] +
     active_storage_blobs +
-    university_people_through_teachers +
-    university_people_through_teachers.map(&:teacher) +
-    university_people_through_roles
-    # TODO: les administrative via roles
+    university_people_through_involvements +
+    university_people_through_involvements.map(&:active_storage_blobs) +
+    university_people_through_involvements.map(&:teacher) +
+    university_people_through_role_involvements +
+    university_people_through_role_involvements.map(&:active_storage_blobs) +
+    university_people_through_role_involvements.map(&:administrator)
   end
 
   def git_destroy_dependencies(website)

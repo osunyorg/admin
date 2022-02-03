@@ -8,7 +8,7 @@
 #  keywords            :text
 #  number              :integer
 #  published           :boolean          default(FALSE)
-#  published_at        :date
+#  published_at        :datetime
 #  slug                :string
 #  title               :string
 #  created_at          :datetime         not null
@@ -47,11 +47,11 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def git_path(website)
-    "content/volumes/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published_at
+    "content/volumes/#{published_at.year}/#{slug}/_index.html" if published_at
   end
 
   def git_dependencies(website)
-    [self] + articles + people + people.map(&:researcher) + active_storage_blobs
+    [self] + articles + people + people.map(&:active_storage_blobs).flatten + people.map(&:researcher) + active_storage_blobs
   end
 
   def git_destroy_dependencies(website)

@@ -41,8 +41,8 @@ class University::Person::Teacher < University::Person
   def for_website?(website)
     is_teacher && website.about_school? && website.programs
                                                   .published
-                                                  .joins(:teachers)
-                                                  .where(education_program_teachers: { person_id: id })
+                                                  .joins(:university_person_involvements)
+                                                  .where(university_person_involvements: { person_id: id })
                                                   .any?
   end
 end

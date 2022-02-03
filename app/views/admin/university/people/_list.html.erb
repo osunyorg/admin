@@ -15,12 +15,12 @@
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
                       edit_admin_university_person_path(person),
-                      class: button_classes %>
+                      class: button_classes if can?(:update, person) %>
             <%= link_to t('delete'),
                       admin_university_person_path(person),
                       method: :delete,
                       data: { confirm: t('please_confirm') },
-                      class: button_classes_danger %>
+                      class: button_classes_danger if can?(:destroy, person) %>
           </div>
         </td>
       </tr>

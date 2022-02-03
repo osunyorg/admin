@@ -12,7 +12,7 @@
 //= require trix
 //= require sortablejs/Sortable
 //= require slug/slug
-//= require jquery_nested_form
+//= require cocoon
 //= require_self
 //= require_tree ./admin/commons
 //= require_tree ./admin/plugins

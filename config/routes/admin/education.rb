@@ -1,21 +1,29 @@
 namespace :education do
-  resources :teachers, only: [:index, :show]
+  resources :teachers, only: [:index, :show, :edit, :update]
   resources :schools do
-    resources :administrators, controller: 'school/administrators', except: [:index, :show]
-  end
-  resources :programs do
-    resources :roles, controller: 'program/roles', except: :index do
-      resources :people, controller: 'program/role/people', except: [:index, :show, :edit, :update] do
-        collection do
-          post :reorder
-        end
+    resources :roles, controller: 'school/roles' do
+      resources :people, controller: 'school/role/people', only: [] do
+        post :reorder, on: :collection
       end
-
       collection do
         post :reorder
       end
     end
-    resources :teachers, controller: 'program/teachers', except: [:index, :show]
+  end
+  resources :programs do
+    resources :roles, controller: 'program/roles' do
+      resources :people, controller: 'program/role/people', only: [] do
+        post :reorder, on: :collection
+      end
+      collection do
+        post :reorder
+      end
+    end
+    resources :teachers, controller: 'program/teachers', except: :show do
+      collection do
+        post :reorder
+      end
+    end
     collection do
       post :reorder
     end

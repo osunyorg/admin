@@ -1,4 +1,5 @@
 ---
+<% teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name %>
 title: >
   <%= @program.name %>
 url: /<%= @website.static_pathname_programs %><%= @program.path %>/
@@ -11,22 +12,26 @@ image_alt: "<%= @program.featured_image_alt %>"
 <% end %>
 category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>/"
 teachers:
-<% @program.teachers.includes(:person).ordered.each do |teacher| %>
-  - "<%= teacher.person.slug %>"
+<% teacher_involvements.each do |involvement| %>
+  - "<%= involvement.person.slug %>"
 <% end %>
 teachers_description:
-<% @program.teachers.includes(:person).ordered.each do |teacher| %>
-  "<%= teacher.person.slug %>": >
-    <%= teacher.best_description %>
+<% teacher_involvements.each do |involvement| %>
+  "<%= involvement.person.slug %>": >
+    <%= involvement.description %>
 <% end %>
+<% if @program.university_roles.any? %>
 roles:
-<% @program.roles.ordered.each do |role| %>
+<% @program.university_roles.ordered.each do |role| %>
   - title: >
       <%= role.to_s %>
     persons:
-    <% role.people.includes(:person).ordered.each do |role_person| %>
-      - "<%= role_person.person.slug %>"
+    <% role.involvements.includes(:person).ordered.each do |involvement| %>
+      - "<%= involvement.person.slug %>"
     <% end %>
+<% end %>
+<% else %>
+roles: []
 <% end %>
 continuing: <%= @program.continuing %>
 level: <%= @program.level %>
