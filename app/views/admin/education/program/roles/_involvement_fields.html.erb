@@ -6,7 +6,7 @@
         <i class="fa fa-bars handle"></i>
       </div>
       <div class="col-9">
-        <%= f.association :person, collection: @people, label: false, include_blank: "Sélectionnez une personne", wrapper: false, required: true %>
+        <%= f.association :person, collection: @people, label: false, include_blank: :translate, wrapper: false, required: true %>
       </div>
       <div class="col-2">
         <%= link_to_remove_association '<i class="fas fa-trash"></i>'.html_safe, f, class: 'btn btn-sm btn-danger' %>

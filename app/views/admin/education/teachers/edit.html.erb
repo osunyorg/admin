@@ -12,7 +12,7 @@
                                   } %>
 
       <div class="row mb-3" id="involvements">
-        <% sorted_teacher_involvements = @teacher.involvements.select(&:teacher?).sort_by(&:created_at) %>
+        <% sorted_teacher_involvements = @teacher.involvements.select(&:teacher?).sort_by { |involvement| involvement.created_at || Time.zone.now } %>
         <%= f.simple_fields_for :involvements, sorted_teacher_involvements, include_id: false do |involvement_f| %>
           <%= render 'admin/education/teachers/involvement_fields', f: involvement_f, include_id: true %>
         <% end %>

@@ -88,6 +88,7 @@ en:
   false: No
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
+  hello: "Hello %{name}!"
   home: Home
   languages:
     en: English
@@ -118,6 +119,11 @@ en:
     hints:
       user:
         mobile_phone: "International format (+XX). By filling this field, you accept to receive your two-factor authentication codes via SMS."
+    include_blanks:
+      defaults:
+        language: "Select a language"
+        person: "Select a person"
+        program: "Select a program"
   simple_form_password_with_hints:
       test_chars: "%{min_length} characters min."
   show: Show

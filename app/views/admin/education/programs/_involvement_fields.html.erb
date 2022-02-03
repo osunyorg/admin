@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="row align-items-center">
         <div class="col-10">
-          <%= f.association :person, collection: @teacher_people, label: false, include_blank: "Sélectionnez une personne", required: true %>
+          <%= f.association :person, collection: @teacher_people, label: false, include_blank: :translate, required: true %>
           <%= f.input :description, label: false, placeholder: University::Person::Involvement.human_attribute_name('description'), wrapper: false %>
         </div>
         <div class="col-2">

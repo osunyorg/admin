@@ -1,1 +1,1 @@
-<% content_for :title, "Bonjour #{ current_user.first_name }!" %>
+<% content_for :title, t('hello', name: current_user.first_name) %>

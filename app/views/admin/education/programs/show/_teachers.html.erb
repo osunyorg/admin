@@ -1,5 +1,5 @@
 <div class="float-end">
-  <%= link_to "Gérer les enseignants·es",
+  <%= link_to t('education.manage_teachers'),
               admin_education_program_teachers_path(program_id: @program.id),
               class: button_classes if can?(:update, University::Person::Involvement) %>
 </div>

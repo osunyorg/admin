@@ -10,7 +10,7 @@
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] },
                             label: false,
-                            include_blank: "Sélectionnez une formation",
+                            include_blank: t('simple_form.include_blanks.defaults.program'),
                             required: true %>
           <%= f.input :description, label: false, placeholder: University::Person::Involvement.human_attribute_name('description'), wrapper: false %>
         </div>

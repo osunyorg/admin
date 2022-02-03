@@ -50,7 +50,8 @@ fr:
         websites: Sites webs associés
         zipcode: Code postal
   education:
-    manage_teachers: Gérer les Enseignants·es
+    manage_roles: Gérer les rôles
+    manage_teachers: Gérer les enseignants·es
     number_of_programs: Nombre de formations
     program:
       educational_informations: Informations pédagogiques

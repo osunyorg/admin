@@ -1,5 +1,5 @@
 <div class="float-end">
-  <%= link_to "Gérer les rôles",
+  <%= link_to t('education.manage_roles'),
               admin_education_program_roles_path(program_id: @program.id),
               class: button_classes if can?(:update, University::Role) %>
 </div>
