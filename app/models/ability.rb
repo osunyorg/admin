@@ -32,7 +32,6 @@ class Ability
 
   def teacher
     can :manage, University::Person, user_id: @user.id
-    # can :read, University::Person, university_id: @user.university_id
     cannot :create, University::Person
     can :read, Education::Program, university_id: @user.university_id
     can :read, University::Role, university_id: @user.university_id
@@ -41,6 +40,12 @@ class Ability
   end
 
   def program_manager
+    can :manage, University::Person, university_id: @user.university_id
+    can :manage, Education::Program, university_id: @user.university_id
+    can :manage, University::Role, university_id: @user.university_id
+    can :manage, University::Person::Involvement, university_id: @user.university_id
+    can :read, Communication::Website, university_id: @user.university_id
+    can :manage, Communication::Website::Post, university_id: @user.university_id
 
   end
 

@@ -11,14 +11,18 @@
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'admin/communication/websites/show/posts' %>
+  <%= render 'admin/communication/websites/show/posts' if can? :read, Communication::Website::Post %>
   <div class="row">
-    <div class="col-md-8">
-      <%= render 'admin/communication/websites/show/pages' %>
-    </div>
-    <div class="col-md-4">
-      <%= render 'admin/communication/websites/show/home' %>
-    </div>
+    <% if can? :read, Communication::Website::Page %>
+      <div class="col-md-8">
+        <%= render 'admin/communication/websites/show/pages' %>
+      </div>
+    <% end %>
+    <% if can? :read, Communication::Website::Home %>
+      <div class="col-md-4">
+        <%= render 'admin/communication/websites/show/home' %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
@@ -30,15 +34,17 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <% if @website.imported? %>
-    <%= link_to t('communication.website.imported.show'),
-                import_admin_communication_website_path,
-                class: button_classes %>
-  <% else %>
-    <%= link_to t('communication.website.imported.launch'),
-                import_admin_communication_website_path,
-                method: :post,
-                class: button_classes %>
+  <% if can? :read, Communication::Website::Imported::Website %>
+    <% if @website.imported? %>
+      <%= link_to t('communication.website.imported.show'),
+                  import_admin_communication_website_path,
+                  class: button_classes %>
+    <% else %>
+      <%= link_to t('communication.website.imported.launch'),
+                  import_admin_communication_website_path,
+                  method: :post,
+                  class: button_classes %>
+    <% end %>
   <% end %>
   <%= edit_link @website %>
 <% end %>

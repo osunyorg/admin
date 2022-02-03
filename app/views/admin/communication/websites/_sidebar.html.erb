@@ -6,33 +6,41 @@
         [
           {
             title: Communication::Website.model_name.human,
-            path: admin_communication_website_path(id: @website)
+            path: admin_communication_website_path(id: @website),
+            ability: can?(:read, @website)
           },
           {
             title: Communication::Website::Post.model_name.human(count: 2),
-            path: admin_communication_website_posts_path(website_id: @website)
+            path: admin_communication_website_posts_path(website_id: @website),
+            ability: can?(:read, Communication::Website::Post)
           },
           {
             title: Communication::Website::Home.model_name.human,
-            path: admin_communication_website_home_path(website_id: @website)
+            path: admin_communication_website_home_path(website_id: @website),
+            ability: can?(:read, Communication::Website::Home)
           },
           {
             title: Communication::Website::Page.model_name.human(count: 2),
-            path: admin_communication_website_pages_path(website_id: @website)
+            path: admin_communication_website_pages_path(website_id: @website),
+            ability: can?(:read, Communication::Website::Page)
           },
           {
             title: Communication::Website::Category.model_name.human(count: 2),
-            path: admin_communication_website_categories_path(website_id: @website)
+            path: admin_communication_website_categories_path(website_id: @website),
+            ability: can?(:read, Communication::Website::Category)
           },
           {
             title: t('communication.authors', count: 2),
-            path: admin_communication_website_authors_path(website_id: @website)
+            path: admin_communication_website_authors_path(website_id: @website),
+            ability: can?(:read, University::Person)
           },
           {
             title: Communication::Website::Menu.model_name.human(count: 2),
-            path: admin_communication_website_menus_path(website_id: @website)
+            path: admin_communication_website_menus_path(website_id: @website),
+            ability: can?(:read, Communication::Website::Category)
           },
         ].each do |object|
+          next unless object[:ability]
           active = object[:path].in? request.path
         %>
         <a class="list-group-item list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
