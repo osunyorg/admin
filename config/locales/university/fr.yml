@@ -60,7 +60,7 @@ fr:
         sms_sender_name: "11 caractères maximum."
       university_person:
         habilitation: "Possède une Habilitation à Diriger des Recherches."
-        is_administration: "Fait partie du personnel administratif d'une école."
+        is_administration: "Remplit des missions administratives."
         is_author: "Écrit des articles pour les sites."
         is_researcher: "Écrit des articles dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."

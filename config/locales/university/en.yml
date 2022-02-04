@@ -60,7 +60,7 @@ en:
         sms_sender_name: "11 characters max."
       university_person:
         habilitation: "Possesses an accreditation to supervise research."
-        is_administration: "Is part of administrative staff for a school."
+        is_administration: "Fulfill administrative missions."
         is_author: "Writes posts for websites."
         is_researcher: "Writes articles for journals."
         is_teacher: "Teaches in Schools."
