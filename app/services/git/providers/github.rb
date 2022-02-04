@@ -61,11 +61,11 @@ class Git::Providers::Github
     sha
   end
 
-  protected
-
   def valid?
     repository.present? && access_token.present?
   end
+
+  protected
 
   def client
     @client ||= Octokit::Client.new access_token: access_token

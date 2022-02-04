@@ -23,6 +23,10 @@ class Git::Repository
     provider.git_sha path
   end
 
+  def valid?
+    provider.valid?
+  end
+
   protected
 
   # Enhancement add gitlab

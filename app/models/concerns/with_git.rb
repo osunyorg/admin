@@ -37,6 +37,7 @@ module WithGit
 
   def sync_with_git
     websites_for_self.each do |website|
+      next unless website.git_repository.valid?
       dependencies = git_dependencies(website).to_a.flatten.uniq.compact
       dependencies.each do |object|
         Communication::Website::GitFile.sync website, object
@@ -48,6 +49,7 @@ module WithGit
 
   def destroy_from_git
     websites_for_self.each do |website|
+      next unless website.git_repository.valid?
       dependencies = git_destroy_dependencies(website).to_a.flatten.uniq.compact
       dependencies.each do |object|
         Communication::Website::GitFile.sync website, object, destroy: true

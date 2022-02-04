@@ -1,5 +1,6 @@
 ---
 <% teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name %>
+<% administrator_involvements = @program.involvements_through_roles.includes(:person).ordered_by_name %>
 title: >
   <%= @program.name %>
 url: /<%= @website.static_pathname_programs %><%= @program.path %>/
@@ -20,7 +21,16 @@ teachers_description:
   "<%= involvement.person.slug %>": >
     <%= involvement.description %>
 <% end %>
-<% if @program.university_roles.any? %>
+<% if @program.involvements_through_roles.any? %>
+administrators:
+<% administrator_involvements.each do |involvement| %>
+  - "<%= involvement.person.slug %>"
+<% end %>
+administrators_description:
+<% administrator_involvements.each do |involvement| %>
+  "<%= involvement.person.slug %>": >
+    <%= involvement.target.to_s %>
+<% end %>
 roles:
 <% @program.university_roles.ordered.each do |role| %>
   - title: >
