@@ -1,4 +1,5 @@
 ---
+<% administrator_involvements = @school.involvements_through_roles.includes(:person).ordered_by_name %>
 name: >
   <%= @school.name %>
 address: >
@@ -11,7 +12,16 @@ country: >
   <%= ISO3166::Country[@school.country].translations[@school.country.downcase] %>
 phone: >
   <%= @school.phone %>
-<% if @school.university_roles.any? %>
+<% if administrator_involvements.any? %>
+administrators:
+<% administrator_involvements.each do |involvement| %>
+  - "<%= involvement.person.slug %>"
+<% end %>
+administrators_description:
+<% administrator_involvements.each do |involvement| %>
+  "<%= involvement.person.slug %>": >
+    <%= involvement.target.to_s %>
+<% end %>
 roles:
 <% @school.university_roles.ordered.each do |role| %>
   - title: >

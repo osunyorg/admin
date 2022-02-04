@@ -21,7 +21,7 @@ teachers_description:
   "<%= involvement.person.slug %>": >
     <%= involvement.description %>
 <% end %>
-<% if @program.involvements_through_roles.any? %>
+<% if administrator_involvements.any? %>
 administrators:
 <% administrator_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
