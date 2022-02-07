@@ -88,31 +88,31 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when 'page'
       target = about.path if about&.published
     when 'programs'
-      target = "/#{website.static_pathname_programs}"
+      target = "/#{website.structure.education_programs_path}"
     when 'program'
-      target = "/#{website.static_pathname_programs}#{about.path}"
+      target = "/#{website.structure.education_programs_path}#{about.path}"
     when 'news'
-      target = "/#{website.static_pathname_posts}"
+      target = "/#{website.structure.communication_posts_path}"
     when 'news_article'
-      target = "/#{website.static_pathname_posts}#{about.path}" if about&.published && about&.published_at
+      target = "/#{website.structure.communication_posts_path}#{about.path}" if about&.published && about&.published_at
     when 'staff'
-      target = "/#{website.static_pathname_staff}"
+      target = "/#{website.structure.persons_path}"
     when 'administrators'
-      target = "/#{website.static_pathname_administrators}"
+      target = "/#{website.structure.administrators_path}"
     when 'authors'
-      target = "/#{website.static_pathname_authors}"
+      target = "/#{website.structure.authors_path}"
     when 'researchers'
-      target = "/#{website.static_pathname_researchers}"
+      target = "/#{website.structure.researchers_path}"
     when 'teachers'
-      target = "/#{website.static_pathname_teachers}"
+      target = "/#{website.structure.teachers_path}"
     when 'research_volumes'
-      target = "/#{website.static_pathname_research_volumes}"
+      target = "/#{website.structure.research_volumes_path}"
     when 'research_volume'
-      target = "/#{website.static_pathname_research_volumes}#{about.path}" if about&.published && about&.published_at
+      target = "/#{website.structure.research_volumes_path}#{about.path}" if about&.published && about&.published_at
     when 'research_articles'
-      target = "/#{website.static_pathname_research_articles}"
+      target = "/#{website.structure.research_articles_path}"
     when 'research_article'
-      target = "/#{website.static_pathname_research_articles}#{about.path}" if about&.published && about&.published_at
+      target = "/#{website.structure.research_articles_path}#{about.path}" if about&.published && about&.published_at
     else
       target = about&.path
     end

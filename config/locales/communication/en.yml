@@ -42,15 +42,6 @@ en:
         about_Research::Laboratory: Laboratory website
         about_type: About
         name: Name
-        static_pathname_administrators: Administration staff's static pathname
-        static_pathname_authors: Editorial staff's static pathname
-        static_pathname_posts: Posts' static pathname
-        static_pathname_programs: Programs' static pathname
-        static_pathname_research_articles: Research articles' static pathname
-        static_pathname_research_volumes: Research volumes' static pathname
-        static_pathname_researchers: Research staff's static pathname
-        static_pathname_staff: Staff's static pathname
-        static_pathname_teachers: Educational staff's static pathname
         url: URL
       communication/website/category:
         children: Children categories
@@ -157,7 +148,6 @@ en:
       posts:
         new_curation: New curation
       see_all: See the full list (%{number} elements)
-      static_pathnames: Static pathnames
   enums:
     communication:
       website:

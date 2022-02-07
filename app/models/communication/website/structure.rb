@@ -68,9 +68,27 @@ class Communication::Website::Structure < ApplicationRecord
     website.to_s
   end
 
-  # def git_path(website)
-  #   'content/_index.html'
-  # end
+  def git_path(website)
+    nil
+  end
+
+  def git_dependencies(website)
+    dependencies = []
+    dependencies << Communication::Website::Structure::Administrators.find(id)
+    dependencies << Communication::Website::Structure::Persons.find(id)
+    dependencies << Communication::Website::Structure::Authors.find(id) if website.authors.any?
+    dependencies << Communication::Website::Structure::Posts.find(id) if website.posts.published.any?
+
+    if website.about.is_a? Education::School
+      dependencies << Communication::Website::Structure::EducationPrograms.find(id)
+      dependencies << Communication::Website::Structure::Teachers.find(id)
+    elsif about.is_a? Research::Journal
+      dependencies << Communication::Website::Structure::Researchers.find(id)
+      dependencies << Communication::Website::Structure::ResearchVolumes.find(id)
+      dependencies << Communication::Website::Structure::ResearchArticles.find(id)
+    end
+    dependencies
+  end
 
 
 end

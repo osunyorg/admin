@@ -42,15 +42,6 @@ fr:
         about_Research::Laboratory: Site de laboratoire
         about_type: Sujet du site
         name: Nom
-        static_pathname_administrators: Chemin statique de l'équipe administrative
-        static_pathname_authors: Chemin statique de l'équipe éditoriale
-        static_pathname_posts: Chemin statique des actualités
-        static_pathname_programs: Chemin statique des formations
-        static_pathname_research_articles: Chemin statique des articles de recherche
-        static_pathname_research_volumes: Chemin statique des volumes de recherche
-        static_pathname_researchers: Chemin statique de l'équipe de recherche
-        static_pathname_staff: Chemin statique de l'équipe
-        static_pathname_teachers: Chemin statique de l'équipe pédagogique
         url: URL
       communication/website/category:
         children: Catégories enfants
@@ -157,7 +148,6 @@ fr:
       posts:
         new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)
-      static_pathnames: Chemins statiques
   enums:
     communication:
       website:
