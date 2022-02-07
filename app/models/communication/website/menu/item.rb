@@ -147,7 +147,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def sync_menu
-    menu.sync_with_git
+    menu.sync_with_git if menu
   end
 
   def siblings
