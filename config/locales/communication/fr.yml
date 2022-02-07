@@ -12,7 +12,7 @@ fr:
         other: Catégories
         all: Toutes les catégories
       communication/website/home:
-        one: Homepage
+        one: Page d'accueil
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
@@ -31,6 +31,8 @@ fr:
         one: Actualité
         other: Actualités
         all: Toutes les actualités
+      communication/website/structure:
+        one: Structure
     attributes:
       communication/website:
         about: Sujet du site
@@ -101,6 +103,35 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+      communication/website/structure:
+        administrators_description: Équipe administrative - description
+        administrators_path: Équipe administrative - url
+        administrators_title: Équipe administrative - titre
+        authors_description: Équipe éditoriale - description
+        authors_path: Équipe éditoriale - url
+        authors_title: Équipe éditoriale - titre
+        communication_posts_description: Actualités - description
+        communication_posts_path: Actualités - url
+        communication_posts_title: Actualités - titre
+        education_programs_description: Offre de formation - description
+        education_programs_path: Offre de formation - url
+        education_programs_title: Offre de formation - titre
+        home_title: Accueil - titre
+        persons_description: Équipe - description
+        persons_path: Équipe - url
+        persons_title: Équipe - titre
+        research_articles_description: Articles de recherche - description
+        research_articles_path: Articles de recherche - url
+        research_articles_title: Articles de recherche - titre
+        research_volumes_description: Volumes de recherche - description
+        research_volumes_path: Volumes de recherche - url
+        research_volumes_title: Volumes de recherche - titre
+        researchers_description: Équipe de recherche - description
+        researchers_path: Équipe de recherche - url
+        researchers_title: Équipe de recherche - titre
+        teachers_description: Équipe pédagogique - description
+        teachers_path: Équipe pédagogique - url
+        teachers_title: Équipe pédagogique - titre
   communication:
     authors:
       one: Auteur·rice

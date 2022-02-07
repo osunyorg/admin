@@ -38,6 +38,7 @@ class Communication::Website < ApplicationRecord
   include WithHome
   include WithImport
   include WithMenuItems
+  include WithStructure
 
   belongs_to :university
 

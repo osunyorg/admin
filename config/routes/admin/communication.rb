@@ -43,5 +43,7 @@ namespace :communication do
         end
       end
     end
+    get 'structure' => 'website/structure#edit'
+    patch 'structure' => 'website/structure#update'
   end
 end

@@ -39,6 +39,11 @@
             path: admin_communication_website_menus_path(website_id: @website),
             ability: can?(:read, Communication::Website::Category)
           },
+          {
+            title: Communication::Website::Structure.model_name.human,
+            path: admin_communication_website_structure_path(website_id: @website),
+            ability: can?(:update, Communication::Website::Structure)
+          },
         ].each do |object|
           next unless object[:ability]
           active = object[:path].in? request.path

@@ -40,6 +40,9 @@ namespace :app do
         imported_post.post&.update_column :published_at, imported_post.published_at
       end
     end
+
+    # Website structures
+    Communication::Website.all.each { |w| w.build_structure(university_id: w.university_id).save }
   end
 
   namespace :db do

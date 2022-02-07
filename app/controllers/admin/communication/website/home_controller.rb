@@ -1,5 +1,5 @@
 class Admin::Communication::Website::HomeController < Admin::Communication::Website::ApplicationController
-  before_action :get_home
+  before_action :get_home, :ensure_abilities
 
   def edit
     breadcrumb
@@ -21,6 +21,10 @@ class Admin::Communication::Website::HomeController < Admin::Communication::Webs
 
   def get_home
     @home = @website.home
+  end
+
+  def ensure_abilities
+    authorize! :update, @home
   end
 
   def home_params

@@ -60,6 +60,7 @@ class Ability
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Website::Category, university_id: @user.university_id
     can :manage, Communication::Website::Home, university_id: @user.university_id
+    can :manage, Communication::Website::Structure, university_id: @user.university_id
     can [:read, :update, :reorder], Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Website, university_id: @user.university_id

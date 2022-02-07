@@ -31,6 +31,8 @@ en:
         one: Post
         other: Posts
         all: All posts
+      communication/website/structure:
+        one: Structure
     attributes:
       communication/website:
         about: About
@@ -101,6 +103,35 @@ en:
         text: Text
         title: Title
         website: Website
+      communication/website/structure:
+        administrators_description: Administrative team - description
+        administrators_path: Administrative team - url
+        administrators_title: Administrative team - title
+        authors_description: Editorial team - description
+        authors_path: Editorial team - url
+        authors_title: Editorial team - title
+        communication_posts_description: News - description
+        communication_posts_path: News - url
+        communication_posts_title: News - title
+        education_programs_description: Programs - description
+        education_programs_path: Programs - url
+        education_programs_title: Programs - title
+        home_title: Home - title
+        persons_description: Team - description
+        persons_path: Team - url
+        persons_title: Team - title
+        research_articles_description: Research articles - description
+        research_articles_path: Research articles - url
+        research_articles_title: Research articles - title
+        research_volumes_description: Research volumes - description
+        research_volumes_path: Research volumes - url
+        research_volumes_title: Research volumes - title
+        researchers_description: Research team - description
+        researchers_path: Research team - url
+        researchers_title: Research team - title
+        teachers_description: Teachers - description
+        teachers_path: Teachers - url
+        teachers_title: Teachers - title
   communication:
     authors:
       one: Author

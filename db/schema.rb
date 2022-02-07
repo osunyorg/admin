@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_093702) do
+ActiveRecord::Schema.define(version: 2022_02_07_152152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -313,6 +313,43 @@ ActiveRecord::Schema.define(version: 2022_02_07_093702) do
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
+  end
+
+  create_table "communication_website_structures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "persons_title", default: "Équipe"
+    t.text "persons_description", default: "Liste des membres de l'équipe"
+    t.string "persons_path", default: "equipe"
+    t.string "authors_title", default: "Équipe éditoriale"
+    t.text "authors_description", default: "Liste des membres de l'équipe éditoriale"
+    t.string "authors_path", default: "equipe-editoriale"
+    t.string "researchers_title", default: "Équipe de recherche"
+    t.text "researchers_description", default: "Liste des membres de l'équipe de recherche"
+    t.string "researchers_path", default: "equipe-de-recherche"
+    t.string "administrators_title", default: "Équipe administrative"
+    t.text "administrators_description", default: "Liste des membres de l'équipe administrative"
+    t.string "administrators_path", default: "equipe-administrative"
+    t.string "teachers_title", default: "Équipe pédagogique"
+    t.text "teachers_description", default: "Liste des membres de l'équipe pédagogique"
+    t.string "teachers_path", default: "equipe-pedagogique"
+    t.string "communication_posts_title", default: "Actualités"
+    t.text "communication_posts_description", default: "Liste des actualités"
+    t.string "communication_posts_path", default: "actualites"
+    t.string "education_programs_title", default: "L'offre de formation"
+    t.text "education_programs_description", default: "Liste des formations proposées"
+    t.string "education_programs_path", default: "offre-de-formation"
+    t.string "research_volumes_title", default: "Volumes"
+    t.text "research_volumes_description", default: "Liste des volumes"
+    t.string "research_volumes_path", default: "volumes"
+    t.string "research_articles_title", default: "Articles"
+    t.text "research_articles_description", default: "Liste des articles"
+    t.string "research_articles_path", default: "articles"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "home_title", default: "Accueil"
+    t.index ["communication_website_id"], name: "idx_comm_website_structures_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_structures_on_university_id"
   end
 
   create_table "communication_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -655,6 +692,8 @@ ActiveRecord::Schema.define(version: 2022_02_07_093702) do
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_website_posts", "university_people", column: "author_id"
+  add_foreign_key "communication_website_structures", "communication_websites"
+  add_foreign_key "communication_website_structures", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
