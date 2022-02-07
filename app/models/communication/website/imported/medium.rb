@@ -30,10 +30,12 @@ class Communication::Website::Imported::Medium < ApplicationRecord
              class_name: 'Communication::Website::Imported::Website'
   has_many   :pages,
              class_name: 'Communication::Website::Imported::Page',
-             foreign_key: :featured_medium_id
+             foreign_key: :featured_medium_id,
+             dependent: :destroy
   has_many   :posts,
              class_name: 'Communication::Website::Imported::Post',
-             foreign_key: :featured_medium_id
+             foreign_key: :featured_medium_id,
+             dependent: :destroy
 
   has_one_attached_deletable :file
 
