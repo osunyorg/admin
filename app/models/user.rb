@@ -63,6 +63,16 @@ class User < ApplicationRecord
   belongs_to :language
 
   scope :ordered, -> { order(:last_name, :first_name) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(concat(users.first_name, ' ', users.last_name)) ILIKE unaccent(:term) OR
+      unaccent(concat(users.last_name, ' ', users.first_name)) ILIKE unaccent(:term) OR
+      unaccent(users.first_name) ILIKE unaccent(:term) OR
+      unaccent(users.last_name) ILIKE unaccent(:term) OR
+      unaccent(users.email) ILIKE unaccent(:term) OR
+      unaccent(users.mobile_phone) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def to_s
     "#{first_name} #{last_name}"

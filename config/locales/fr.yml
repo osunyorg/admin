@@ -88,6 +88,13 @@ fr:
   edit: Modifier
   empty_folder: Dossier vide
   false: Non
+  filters:
+    attributes:
+      date: Filtrer par Date
+      role: Filtrer par Rôle
+    buttons:
+      expand: Filtrer le tableau
+      submit: Filtrer
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Bonjour %{name} !"
@@ -113,7 +120,9 @@ fr:
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   quit: Quitter
   remove: Retirer
+  reset: Réinitialiser
   save: Enregistrer
+  search: Rechercher
   select_language: Sélectionnez une langue
   simple_form:
     error_notification:

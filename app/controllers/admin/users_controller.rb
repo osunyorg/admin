@@ -1,8 +1,12 @@
 class Admin::UsersController < Admin::ApplicationController
   load_and_authorize_resource through: :current_university
 
+  has_scope :for_role
+  has_scope :for_search_term
+
   def index
-    @users = @users.ordered.page(params[:page])
+    @filters = ::Filters::User.new(current_user).list
+    @users = apply_scopes(@users).ordered.page(params[:page])
     breadcrumb
   end
 
