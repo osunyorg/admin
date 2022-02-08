@@ -13,6 +13,7 @@ module User::WithPerson
     person = university.people.where(email: email).first_or_initialize do |person|
       person.first_name = first_name
       person.last_name = last_name
+      person.slug = person.to_s.parameterize
       person.phone = mobile_phone
     end
     person.user = self

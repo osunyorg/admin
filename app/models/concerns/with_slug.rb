@@ -8,7 +8,7 @@ module WithSlug
     before_validation :regenerate_slug, :make_path
 
     def regenerate_slug
-      current_slug = self.slug || default_slug
+      current_slug = self.slug
       n = 0
       while slug_unavailable?(self.slug)
         n += 1
@@ -21,10 +21,6 @@ module WithSlug
     end
 
     protected
-
-    def default_slug
-      to_s.parameterize
-    end
 
     def slug_unavailable?(slug)
       self.class.unscoped
