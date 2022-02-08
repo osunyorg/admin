@@ -24,7 +24,7 @@
                         data: { source: '#communication_website_category_name' }
                       } %>
           <%= f.association :parent,
-                            collection: category.list_of_other_categories,
+                            collection: collection_tree(@website.categories, category),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
           <ul>
