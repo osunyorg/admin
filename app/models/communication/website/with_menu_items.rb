@@ -41,7 +41,7 @@ module Communication::Website::WithMenuItems
   end
 
   def menu_item_kind_staff?
-    authors.any?
+    true
   end
 
   def menu_item_kind_administrators?
