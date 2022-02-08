@@ -17,6 +17,5 @@ module User::WithPerson
     end
     person.user = self
     person.save
-    byebug
   end
 end
