@@ -77,7 +77,7 @@ class Communication::Website::Structure < ApplicationRecord
     dependencies << Communication::Website::Structure::Administrators.find(id)
     dependencies << Communication::Website::Structure::Persons.find(id)
     dependencies << Communication::Website::Structure::Authors.find(id) if website.authors.any?
-    dependencies << Communication::Website::Structure::Posts.find(id) if website.posts.published.any?
+    dependencies << Communication::Website::Structure::CommunicationPosts.find(id) if website.posts.published.any?
 
     if website.about.is_a? Education::School
       dependencies << Communication::Website::Structure::EducationPrograms.find(id)

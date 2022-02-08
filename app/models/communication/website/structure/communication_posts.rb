@@ -46,10 +46,10 @@
 #  fk_rails_...  (communication_website_id => communication_websites.id)
 #  fk_rails_...  (university_id => universities.id)
 #
-class Communication::Website::Structure::Posts < Communication::Website::Structure
+class Communication::Website::Structure::CommunicationPosts < Communication::Website::Structure
 
   def self.polymorphic_name
-    'Communication::Website::Structure::Posts'
+    'Communication::Website::Structure::CommunicationPosts'
   end
 
   def git_path(website)

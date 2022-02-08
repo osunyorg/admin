@@ -22,7 +22,7 @@ class Curator
       title: page.title,
       text: text,
       slug: page.title.parameterize,
-      author: @user.author,
+      author: @user.person,
       published_at: Time.now
     )
   end
