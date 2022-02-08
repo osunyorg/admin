@@ -71,11 +71,14 @@ en:
       program:
         level:
           bachelor: Licence / bachelor
-          doctor: Doctorat
+          doctor: Doctorate
           dut: DUT
           first_year: First year
+          high: High School
+          secondary: Secondary school
           second_year: Second year
           master: Master
+          primary: Primary school
   simple_form:
     hints:
       education_program:

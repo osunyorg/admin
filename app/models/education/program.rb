@@ -94,6 +94,9 @@ class Education::Program < ApplicationRecord
   accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 
   enum level: {
+    primary: 40,
+    secondary: 60,
+    high: 80,
     first_year: 100,
     second_year: 200,
     dut: 210,

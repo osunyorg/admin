@@ -74,7 +74,10 @@ fr:
           doctor: Doctorat
           dut: DUT
           first_year: Bac + 1
+          high: Lycée
           master: Master
+          primary: École primaire
+          secondary: Collège
           second_year: Bac + 2
   simple_form:
     hints:
