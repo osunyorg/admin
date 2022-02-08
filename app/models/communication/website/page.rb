@@ -84,7 +84,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def to_s
-    "#{ title }"
+    "#{title}"
   end
 
   def best_featured_image(fallback: true)
