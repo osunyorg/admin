@@ -22,13 +22,17 @@ Il faut veiller à limiter le nombre de commits et à éviter les commits vides.
 - Créer un repository à partir du template suivant : https://github.com/noesya/osuny-hugo-template
 - Une fois le repository créé, générer un personal access token ici : https://github.com/settings/tokens
   - Permission à accorder : `repo`
-  - Durée : pour une bonne sécurité, il n'est pas recommandé de créer un token permanent, notez simplement qu'il faut le régénérer réguilièrement.
+  - Durée : pour une bonne sécurité, il n'est pas recommandé de créer un token permanent, notez simplement qu'il faut le régénérer régulièrement.
 - Copier le personnal access token
 - Dans le back-office d'Osuny, créer ou modifier un website et renseignez les 2 champs relatifs à Git :
   - Repository : `username/repo`
   - Access token : `ghp_xxxxxxxxxxxxxxxxxxxx`
 
 ### Déploiement (Netlify)
+
+- Créer un site sur Netlify lié au repository du site
+- Dans "Site settings", "Build & deploy", "Environment", "Environment variables", ajouter :
+  - `HUGO_VERSION` avec pour valeur la dernière version (ex: `0.92.1`)
 
 La récupération du thème se fait via SSH par défaut. Pour que le déploiement fonctionne correctement, vous pouvez :
 - Changer le remote du submodule pour qu'il utilise HTTPS.
