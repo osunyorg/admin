@@ -3,7 +3,7 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
 
   include Admin::Reorderable
 
-  before_action :load_people, only: [:new, :edit, :create, :update]
+  before_action :load_administration_people, only: [:new, :edit, :create, :update]
 
   def index
     @roles = @roles.ordered
@@ -69,7 +69,7 @@ class Admin::Education::Program::RolesController < Admin::Education::Program::Ap
     University::Role
   end
 
-  def load_people
-    @people = current_university.people.accessible_by(current_ability).ordered
+  def load_administration_people
+    @administration_people = current_university.people.administration.accessible_by(current_ability).ordered
   end
 end
