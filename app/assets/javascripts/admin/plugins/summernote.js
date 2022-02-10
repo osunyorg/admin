@@ -99,7 +99,7 @@ $(function () {
         $(this).summernote({
             toolbar: [
                 ['style', ['style']],
-                ['font', ['bold', 'italic', 'clear']],
+                ['font', ['bold', 'italic']],
                 ['para', ['ul', 'ol']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],

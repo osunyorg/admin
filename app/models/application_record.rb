@@ -11,7 +11,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def summernote
     @@summernote_fields.each do |field|
-      self["#{field}_new"] = send(field).to_s
+      self["#{field}_new"] = send(field).body.to_html
                                         .gsub('<div>', '<p>')
                                         .gsub('</div>', '</p>')
                                         .gsub('<strong>', '<b>')

@@ -66,7 +66,46 @@ Inconvénients :
 [Locomotive CMS](https://www.locomotivecms.com/)
 
 
-## Code HTML cible
+## Méthode
+
+### action-text-attachment
+
+Dans la BDD, on stocke cette balise :
+```
+<action-text-attachment sgid="BAh[...]1df3"
+                        content-type="image/jpeg"
+                        url="http://demo.osuny:3000/rails/active_storage/blobs/redirect/eyJf[...]0f4a1/domenico_bruno_de_lobkowitz_watchingwindows_com_08.jpg" filename="domenico_bruno_de_lobkowitz_watchingwindows_com_08.jpg"
+                        filesize="352931"
+                        width="588"
+                        height="746"
+                        previewable="true"
+                        presentation="gallery">
+</action-text-attachment>
+```
+
+A l'édition, la balise est "remplie" avant affichage, pour avoir une preview.
+A l'enregistrement, la balise est vidée.
+
+Etapes normales :
+1. A l'import d'une image, ajouter l'action-text-attachement autour
+2. A l'enregistrement, déshydrater les action-text-attachements
+3. A l'édition, réhydrater les action-text-attachements
+4. Après l'enregistrement mettre à jour les blobs attachés à l'objet parent (le post, par exemple)
+
+Etapes de migration :
+1. Sauvegarder tous les objets à migrer (rails app:fix)
+2. A la sauvegarde, transformer le markup Trix en markup Summernote (application_record)
+3. Enlever les scripts de l'application_record
+4. Supprimer les champs ActionText dans les modèles
+5. Supprimer la table d'ActionText
+6. Renommer les champs en enlevant _new
+
+Si un programme a 5 champs summernote avec 3 images dans chaque champ, cela fait 15 attachments à lier au programme.
+Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
+
+### Le pdf
+
+### Code HTML cible
 
 ```
 <h2>Titre</h2>
@@ -82,18 +121,5 @@ Inconvénients :
     </figure>
   </action-text-attachment>
   <a href="https://www.u-bordeaux-montaigne.fr/fr/actualites/vie-etudiante/soutenir-les-etudiant-e-s-les-aides-de-l-universite.html">Lien</a>
-</p>
-<h2>Titre</h2>
-<p>
-  <action-text-attachment sgid="BAh7CEkiCGdpZAY6BkVUSSJUZ2lkOi8vb3N1bnkvQWN0aXZlU3RvcmFnZTo6QmxvYi80ODI1ODU4My1lN2E3LTQ3Y2ItYTlhMS1jNTE4ZDgxZTFkZTE_ZXhwaXJlc19pbgY7AFRJIgxwdXJwb3NlBjsAVEkiD2F0dGFjaGFibGUGOwBUSSIPZXhwaXJlc19hdAY7AFQw--8ff20c20edee51745b946b42ab3219a51279b961" content-type="application/pdf" url="http://demo.osuny:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaWswT0RJMU9EVTRNeTFsTjJFM0xUUTNZMkl0WVRsaE1TMWpOVEU0WkRneFpURmtaVEVHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6ImJsb2JfaWQifX0=--fb529f51a1c0d2e03c9af6d28b4dfc47b11d86bd/Les-Lumieres-a-l-ere-numerique.pdf?website_id=6d8fb0bb-0445-46f0-8954-0e25143e7a58" filename="Les-Lumieres-a-l-ere-numerique.pdf" filesize="3928100" previewable="true">
-    <figure class="attachment attachment--file attachment--pdf">
-      <a target="blank" href="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaWswT0RJMU9EVTRNeTFsTjJFM0xUUTNZMkl0WVRsaE1TMWpOVEU0WkRneFpURmtaVEVHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6ImJsb2JfaWQifX0=--fb529f51a1c0d2e03c9af6d28b4dfc47b11d86bd/Les-Lumieres-a-l-ere-numerique.pdf?website_id=6d8fb0bb-0445-46f0-8954-0e25143e7a58">
-        <p>
-          <span class="attachment__name">Les-Lumieres-a-l-ere-numerique.pdf</span>
-          <span class="attachment__size">3,75 Mo</span>
-        </p>
-      </a>
-    </figure>
-  </action-text-attachment>
 </p>
 ```
