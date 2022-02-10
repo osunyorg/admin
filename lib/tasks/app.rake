@@ -9,7 +9,7 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     Communication::Website::Post.find_each do |post|
-      post.text_new = clean_for_summernote post.text
+      post.update text_new: clean_for_summernote(post.text)
     end
   end
 
