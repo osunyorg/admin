@@ -92,6 +92,9 @@ Etapes normales :
 -[x] A l'édition, réhydrater les action-text-attachements
 -[ ] Après l'enregistrement mettre à jour les blobs attachés à l'objet parent (le post, par exemple)
 
+Si un programme a 5 champs summernote avec 3 images dans chaque champ, cela fait 15 attachments à lier au programme.
+Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
+
 Etapes de migration :
 -[x] A la sauvegarde, transformer le markup Trix en markup Summernote (application_record)
 -[ ] Sauvegarder tous les objets à migrer (rails app:fix)
@@ -99,9 +102,6 @@ Etapes de migration :
 -[ ] Supprimer les champs ActionText dans les modèles
 -[ ] Supprimer la table d'ActionText
 -[ ] Renommer les champs en enlevant _new
-
-Si un programme a 5 champs summernote avec 3 images dans chaque champ, cela fait 15 attachments à lier au programme.
-Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
 
 ### Le pdf
 
