@@ -14,6 +14,10 @@ class ApplicationRecord < ActiveRecord::Base
       self["#{field}_new"] = send(field).to_s
                                         .gsub('<div>', '<p>')
                                         .gsub('</div>', '</p>')
+                                        .gsub('<strong>', '<b>')
+                                        .gsub('</strong>', '</b>')
+                                        .gsub('<em>', '<i>')
+                                        .gsub('</em>', '</i>')
                                         .gsub('<p><br></p>', '')
     end
   end
