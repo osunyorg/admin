@@ -11,7 +11,8 @@
 //= require gdpr/cookie_consent
 //= require trix
 //= require sortablejs/Sortable
-//= require summernote/summernote-bs5
+//= require popper
+//= require summernote/summernote-lite
 //= require slug/slug
 //= require cocoon
 //= require_self
