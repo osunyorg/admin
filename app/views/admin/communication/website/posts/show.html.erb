@@ -13,8 +13,7 @@
 
           <h3 class="h5 mt-4"><%= Communication::Website::Post.human_attribute_name('text') %></h3>
           <%= @post.text %>
-        </div>
-        <div class="card-body">
+          <hr>
           <pre><%= @post.text_new %></pre>
         </div>
       </div>
