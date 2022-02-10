@@ -87,18 +87,18 @@ A l'édition, la balise est "remplie" avant affichage, pour avoir une preview.
 A l'enregistrement, la balise est vidée.
 
 Etapes normales :
-1. A l'import d'une image, ajouter l'action-text-attachement autour
-2. A l'enregistrement, déshydrater les action-text-attachements
-3. A l'édition, réhydrater les action-text-attachements
-4. Après l'enregistrement mettre à jour les blobs attachés à l'objet parent (le post, par exemple)
+-[ ] A l'import d'une image, ajouter l'action-text-attachement autour
+-[x] A l'enregistrement, déshydrater les action-text-attachements
+-[x] A l'édition, réhydrater les action-text-attachements
+-[ ] Après l'enregistrement mettre à jour les blobs attachés à l'objet parent (le post, par exemple)
 
 Etapes de migration :
-1. Sauvegarder tous les objets à migrer (rails app:fix)
-2. A la sauvegarde, transformer le markup Trix en markup Summernote (application_record)
-3. Enlever les scripts de l'application_record
-4. Supprimer les champs ActionText dans les modèles
-5. Supprimer la table d'ActionText
-6. Renommer les champs en enlevant _new
+-[x] A la sauvegarde, transformer le markup Trix en markup Summernote (application_record)
+-[ ] Sauvegarder tous les objets à migrer (rails app:fix)
+-[ ] Enlever les scripts de l'application_record
+-[ ] Supprimer les champs ActionText dans les modèles
+-[ ] Supprimer la table d'ActionText
+-[ ] Renommer les champs en enlevant _new
 
 Si un programme a 5 champs summernote avec 3 images dans chaque champ, cela fait 15 attachments à lier au programme.
 Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
