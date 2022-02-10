@@ -36,9 +36,10 @@ class Communication::Website::Post < ApplicationRecord
   include WithFeaturedImage
   include WithBlobs
   include WithMenuItemTarget
-  include WithSlug # We override slug_unavailable? method
+  include WithSlug # We override slug_unavailable? method`
 
   has_rich_text :text
+  has_summernote :text_new
 
   summernote :text
 
@@ -66,15 +67,6 @@ class Communication::Website::Post < ApplicationRecord
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
-  def text_new
-    # TODO hydrate action-text-attachment
-    attributes['text_new'].gsub('</action', 'coucou</action')
-  end
-
-  def text_new=(value)
-    # TODO dehydrate action-text-attachment
-    attributes['text_new'] = value
-  end
 
   def path
     # used in menu_item#static_target
