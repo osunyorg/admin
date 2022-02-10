@@ -116,6 +116,9 @@ fr:
   metadata: Informations
   please_confirm: Est-ce que vous confirmez ?
   please_confirm_with_children: "ATTENTION : effacer cet élément supprimera aussi tous ses enfants. Est-ce que vous confirmez ?"
+  preview:
+    button: Prévisualiser
+    title: Prévisualisation mobile
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   quit: Quitter
