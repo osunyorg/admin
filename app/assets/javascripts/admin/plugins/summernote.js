@@ -96,6 +96,23 @@ $(function () {
     'use strict';
 
     $('[data-provider="summernote"]').each(function () {
-        $(this).summernote();
+        $(this).summernote({
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'clear']],
+                ['para', ['ul', 'ol']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['codeview', 'help']]
+            ],
+            styleTags: [
+                'p',
+                { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+                'pre',
+                'h2',
+                'h3',
+                'h4'
+            ]
+        });
     });
 });
