@@ -1,6 +1,6 @@
 /* eslint no-alert: 'off' */
 /*global $, FormData */
-// window.b2bylon.summernote.sendFile = function (file, toSummernote) {
+// window.osuny.summernote.sendFile = function (file, toSummernote) {
 //     'use strict';
 //     var data = new FormData();
 //     data.append('file', file);
@@ -25,7 +25,7 @@
 //     });
 // };
 //
-// window.b2bylon.summernote.addConfig('pico', {
+// window.osuny.summernote.addConfig('pico', {
 //     toolbar: [
 //         ['style', ['bold', 'italic']],
 //         ['font', ['superscript', 'subscript']],
@@ -33,7 +33,7 @@
 //     ]
 // });
 //
-// window.b2bylon.summernote.addConfig('newsletters', {
+// window.osuny.summernote.addConfig('newsletters', {
 //     toolbar: [
 //         ['style', ['bold', 'italic']],
 //         ['link', ['linkDialogShow', 'unlink']],
@@ -41,7 +41,7 @@
 //     ]
 // });
 //
-// window.b2bylon.summernote.addConfig('nano', {
+// window.osuny.summernote.addConfig('nano', {
 //     toolbar: [
 //         ['style', ['bold', 'italic']],
 //         ['font', ['superscript', 'subscript']],
@@ -50,7 +50,7 @@
 //     ]
 // });
 //
-// window.b2bylon.summernote.addConfig('mini', {
+// window.osuny.summernote.addConfig('mini', {
 //     toolbar: [
 //         ['headline', ['style']],
 //         ['style', ['bold', 'italic']],
@@ -63,7 +63,7 @@
 //     styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 // });
 //
-// window.b2bylon.summernote.addConfig('full', {
+// window.osuny.summernote.addConfig('full', {
 //     disableDragAndDrop: false,
 //     toolbar: [
 //         ['headline', ['style']],
@@ -82,9 +82,9 @@
 //     }
 // }, 'mini');
 //
-// window.b2bylon.summernote.configs.full.callbacks.onImageUpload = function (files) {
+// window.osuny.summernote.configs.full.callbacks.onImageUpload = function (files) {
 //     'use strict';
-//     window.b2bylon.summernote.sendFile(files[0], $(this));
+//     window.osuny.summernote.sendFile(files[0], $(this));
 // };
 //
 // $.extend($.summernote.lang['en-US'].image, {
