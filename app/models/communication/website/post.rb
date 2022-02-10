@@ -66,6 +66,16 @@ class Communication::Website::Post < ApplicationRecord
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
+  def text_summernote
+    # TODO hydrate action-text-attachment
+    self.text
+  end
+
+  def text_summernote=(value)
+    # TODO dehydrate action-text-attachment
+    self.text = value
+  end
+
   def path
     # used in menu_item#static_target
     "/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
