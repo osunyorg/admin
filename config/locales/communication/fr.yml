@@ -50,8 +50,8 @@ fr:
         parent: Catégorie parente
         slug: Slug
       communication/website/home:
+        description: Description (SEO)
         text: Texte
-        title: Titre
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
       communication/website/imported/category:
@@ -130,7 +130,6 @@ fr:
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
     website:
-      force_publication: 'Forcer la publication'
       git: Git
       imported:
         from: Importé depuis
@@ -173,5 +172,5 @@ fr:
               url: URL
   simple_form:
     hints:
-      communication_website_home:
-        title: Sera utilisé notamment dans le fil d'Ariane
+      communication_website_structure:
+        home_title: Sera utilisé notamment dans le fil d'Ariane

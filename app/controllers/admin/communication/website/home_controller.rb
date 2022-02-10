@@ -30,7 +30,7 @@ class Admin::Communication::Website::HomeController < Admin::Communication::Webs
   def home_params
     params.require(:communication_website_home)
           .permit(
-            :title, :text, :featured_image, :featured_image_delete,
+            :description, :text, :featured_image, :featured_image_delete,
             :featured_image_infos, :featured_image_alt
           )
   end

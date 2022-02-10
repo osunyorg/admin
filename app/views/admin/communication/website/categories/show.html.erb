@@ -60,13 +60,6 @@
   <% end %>
 <% end %>
 
-<% content_for :action_bar_left do %>
-  <%= link_to t('communication.website.force_publication'),
-              publish_admin_communication_website_category_path(@category),
-              method: :post,
-              class: button_classes %>
-<% end %>
-
 <% content_for :action_bar_right do %>
   <%= edit_link @category %>
 <% end %>

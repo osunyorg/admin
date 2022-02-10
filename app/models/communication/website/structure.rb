@@ -74,8 +74,8 @@ class Communication::Website::Structure < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = []
-    dependencies << Communication::Website::Structure::Administrators.find(id)
     dependencies << Communication::Website::Structure::Persons.find(id)
+    dependencies << Communication::Website::Structure::Administrators.find(id)
     dependencies << Communication::Website::Structure::Authors.find(id) if website.authors.any?
     dependencies << Communication::Website::Structure::CommunicationPosts.find(id) if website.posts.published.any?
 

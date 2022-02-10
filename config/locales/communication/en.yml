@@ -50,8 +50,8 @@ en:
         parent: Parent category
         slug: Slug
       communication/website/home:
+        description: Description (SEO)
         text: Text
-        title: Title
         featured_image: Featured image
         featured_image_alt: Alt text
       communication/website/imported/category:
@@ -130,7 +130,6 @@ en:
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
     website:
-      force_publication: 'Force publication'
       git: Git
       imported:
         from: Imported from
@@ -173,5 +172,5 @@ en:
               url: URL
   simple_form:
     hints:
-      communication_website_home:
-        title: Will be used in the breadcrumbs
+      communication_website_structure:
+        home_title: Will be used in the breadcrumbs
