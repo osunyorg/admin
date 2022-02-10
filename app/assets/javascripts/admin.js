@@ -12,6 +12,7 @@
 //= require trix
 //= require summernote/summernote-bs5.min
 //= require sortablejs/Sortable
+//= require summernote/summernote-bs5
 //= require slug/slug
 //= require cocoon
 //= require_self
