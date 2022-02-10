@@ -7,26 +7,27 @@ class ApplicationRecord < ActiveRecord::Base
   def self.has_summernote(name)
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{name}
-        # TODO hydrate action-text-attachment
-        attributes['#{name}'].gsub('</action', 'coucou</action')
+        value = attributes['#{name}']
+        actiontext = ActionText::Content.new value
+        actiontext.to_s
       end
 
       def #{name}=(value)
-        # TODO dehydrate action-text-attachment
-        attributes['#{name}'] = value
+        actiontext = ActionText::Content.new value
+        self.attributes['#{name}'] = actiontext.to_html
       end
     CODE
   end
 
   # TODO Remove everything below after migration, please
 
-  def self.summernote(*args)
+  def self.convert_fields_to_summernote(*args)
     @@summernote_fields = args
   end
 
-  before_validation :summernote
+  # before_validation :convert_to_summernote
 
-  def summernote
+  def convert_to_summernote
     @@summernote_fields.each do |field|
       self["#{field}_new"] = send(field).body.to_html
                                         .gsub('<div>', '<p>')
