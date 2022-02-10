@@ -75,10 +75,11 @@ en:
           dut: DUT
           first_year: First year
           high: High School
+          master: Master
+          not_applicable: Not applicable
+          primary: Primary school
           secondary: Secondary school
           second_year: Second year
-          master: Master
-          primary: Primary school
   simple_form:
     hints:
       education_program:

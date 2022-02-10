@@ -76,6 +76,7 @@ fr:
           first_year: Bac + 1
           high: Lycée
           master: Master
+          not_applicable: Non applicable
           primary: École primaire
           secondary: Collège
           second_year: Bac + 2
