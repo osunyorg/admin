@@ -10,25 +10,4 @@ class ApplicationRecord < ActiveRecord::Base
       serialize :#{name}, ActionText::Content
     CODE
   end
-
-  # TODO Remove everything below after migration, please
-
-  def self.convert_fields_to_summernote(*args)
-    @@summernote_fields = args
-  end
-
-  # before_validation :convert_to_summernote
-
-  def convert_to_summernote
-    @@summernote_fields.each do |field|
-      self.attributes["#{field}_new"] = send(field).body.to_html
-                                        .gsub('<div>', '<p>')
-                                        .gsub('</div>', '</p>')
-                                        .gsub('<strong>', '<b>')
-                                        .gsub('</strong>', '</b>')
-                                        .gsub('<em>', '<i>')
-                                        .gsub('</em>', '</i>')
-                                        .gsub('<p><br></p>', '')
-    end
-  end
 end

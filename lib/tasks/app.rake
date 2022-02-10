@@ -8,41 +8,21 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Communication::Website.find_each { |website|
-      website.build_home(university_id: website.university_id).save if website.home.nil?
-      website.update_column(:url, "https://#{website.url}") unless website.url.blank? || website.url.starts_with?('https://')
-    }
-
-    Education::Program.where(slug: [nil, '']).find_each { |program| program.update_column(:slug, program.name.parameterize) }
-    Research::Journal::Article.where(slug: [nil, '']).find_each { |article| article.update_column(:slug, article.title.parameterize) }
-    Research::Journal::Volume.where(slug: [nil, '']).find_each { |volume| volume.update_column(:slug, volume.title.parameterize) }
-
-    10.times do
-      Education::Program.find_each { |p| p.update_column :path, "#{p.parent&.path}/#{p.slug}".gsub(/\/+/, '/') }
-    end
-
     Communication::Website::Post.find_each do |post|
-      post.categories = post.categories.select { |category| category.children.none? { |child| post.categories.include?(child) } }
+      post.text_new = clean_for_summernote post.text
     end
+  end
 
-    Research::Journal::Article.where(position: nil).order(:published_at, :created_at).group_by(&:research_journal_volume_id).each do |_, articles|
-      articles.each_with_index do |article, index|
-        article.update_columns({
-          published: article.published_at.present?,
-          position: index + 1
-        })
-      end
-    end
-
-    # MICA & Class'Code
-    Communication::Website.where(id: ["6dfb358c-21bc-440f-9156-e09b72671c32", "1bb0f013-4d3d-49be-84bc-087c8cff3c77"]).each do |website|
-      website.imported_website.posts.find_each do |imported_post|
-        imported_post.post&.update_column :published_at, imported_post.published_at
-      end
-    end
-
-    # Website structures
-    Communication::Website.all.each { |w| w.build_structure(university_id: w.university_id).save }
+  def clean_for_summernote(actiontext)
+    actiontext.body
+              .to_html
+              .gsub('<div>', '<p>')
+              .gsub('</div>', '</p>')
+              .gsub('<strong>', '<b>')
+              .gsub('</strong>', '</b>')
+              .gsub('<em>', '<i>')
+              .gsub('</em>', '</i>')
+              .gsub('<p><br></p>', '')
   end
 
   namespace :db do

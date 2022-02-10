@@ -41,8 +41,6 @@ class Communication::Website::Post < ApplicationRecord
   has_rich_text :text
   has_summernote :text_new
 
-  convert_fields_to_summernote :text
-
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
           dependent: :destroy

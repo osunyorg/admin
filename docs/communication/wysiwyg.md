@@ -105,6 +105,8 @@ Etapes de migration :
 
 ### Le pdf
 
+Autoriser dans summernote
+
 ### Code HTML cible
 
 ```
