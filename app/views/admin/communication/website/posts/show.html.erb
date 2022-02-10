@@ -62,17 +62,11 @@
   </div>
 <% end %>
 
-<div class="offcanvas offcanvas-start preview" tabindex="-1" id="preview" aria-labelledby="offcanvasRightLabel" aria-modal="true" role="dialog">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel"><%= t 'preview.title' %></h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <%= @post.text.to_s %>
-  </div>
-</div>
+<% content_for :preview do %>
+  <%= @post.text.to_s %>
+<% end %>
 
 <% content_for :action_bar_right do %>
-  <button class="btn btn-primary my-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#preview" aria-controls="preview"><%= t 'preview.button' %></button>
+  <%= preview_link %>
   <%= edit_link @post %>
 <% end %>
