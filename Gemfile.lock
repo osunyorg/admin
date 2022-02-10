@@ -205,7 +205,7 @@ GEM
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     front_matter_parser (1.0.1)
-    gdpr (1.2.2)
+    gdpr (1.2.3)
       js_cookie_rails
       rails
       sassc-rails
