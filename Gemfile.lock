@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: 0543165914c4996df00bcd46b77a558819443778
+  revision: 6dcff6c2a0e56492dbbcaf0a91ccc5898e6be922
   specs:
-    summernote-rails (0.8.20.0)
+    summernote-rails (0.8.20.1)
       railties (>= 3.1)
 
 GIT
@@ -205,7 +205,7 @@ GEM
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     front_matter_parser (1.0.1)
-    gdpr (1.2.2)
+    gdpr (1.2.3)
       js_cookie_rails
       rails
       sassc-rails
