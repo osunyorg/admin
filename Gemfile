@@ -46,6 +46,7 @@ gem 'jbuilder'
 gem 'kamifusen'#, path: '../kamifusen'
 gem 'bootstrap'
 gem 'sanitize'
+gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/noesya/summernote-rails.git
+  revision: dd92b3cd21cfa573daf5d510b08b96698bd0e295
+  specs:
+    summernote-rails (0.8.17.0)
+      railties (>= 3.1)
+
+GIT
   remote: https://github.com/noesya/two_factor_authentication.git
   revision: 16b0a2120aed476c2321c074be553edd9c7dc4c0
   specs:
@@ -463,6 +470,7 @@ DEPENDENCIES
   simple_form_bs5_file_input
   simple_form_password_with_hints
   spring
+  summernote-rails!
   two_factor_authentication!
   tzinfo-data
   web-console (>= 4.1.0)
