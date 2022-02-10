@@ -25,75 +25,18 @@
 //     });
 // };
 //
-// window.osuny.summernote.addConfig('pico', {
-//     toolbar: [
-//         ['style', ['bold', 'italic']],
-//         ['font', ['superscript', 'subscript']],
-//         ['code', ['codeview']]
-//     ]
-// });
+
 //
-// window.osuny.summernote.addConfig('newsletters', {
-//     toolbar: [
-//         ['style', ['bold', 'italic']],
-//         ['link', ['linkDialogShow', 'unlink']],
-//         ['code', ['codeview']]
-//     ]
-// });
-//
-// window.osuny.summernote.addConfig('nano', {
-//     toolbar: [
-//         ['style', ['bold', 'italic']],
-//         ['font', ['superscript', 'subscript']],
-//         ['alignment', ['ul']],
-//         ['code', ['codeview']]
-//     ]
-// });
-//
-// window.osuny.summernote.addConfig('mini', {
-//     toolbar: [
-//         ['headline', ['style']],
-//         ['style', ['bold', 'italic']],
-//         ['font', ['superscript', 'subscript']],
-//         ['alignment', ['ul', 'ol', 'paragraph']],
-//         ['insert', ['hr']],
-//         ['link', ['linkDialogShow', 'unlink']],
-//         ['code', ['codeview']]
-//     ],
-//     styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-// });
-//
-// window.osuny.summernote.addConfig('full', {
-//     disableDragAndDrop: false,
-//     toolbar: [
-//         ['headline', ['style']],
-//         ['style', ['bold', 'italic']],
-//         ['font', ['superscript', 'subscript']],
-//         ['alignment', ['ul', 'ol', 'paragraph']],
-//         ['insert', ['hr']],
-//         ['link', ['linkDialogShow', 'unlink']],
-//         ['media', ['picture']],
-//         ['code', ['codeview']]
-//     ],
-//     popover: {
-//         image: [
-//             ['remove', ['removeMedia']]
-//         ]
-//     }
-// }, 'mini');
-//
-// window.osuny.summernote.configs.full.callbacks.onImageUpload = function (files) {
-//     'use strict';
-//     window.osuny.summernote.sendFile(files[0], $(this));
-// };
-//
-// $.extend($.summernote.lang['en-US'].image, {
-//     dragImageHere: 'Drag file here',
-//     dropImage: 'Drop file'
-// });
+
+
 
 $(function () {
     'use strict';
+
+    $.extend($.summernote.lang['en-US'].image, {
+        dragImageHere: 'Drag file here',
+        dropImage: 'Drop file'
+    });
 
     $('[data-provider="summernote"]').each(function () {
         $(this).summernote({
@@ -107,12 +50,20 @@ $(function () {
             ],
             styleTags: [
                 'p',
-                { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+                'blockquote',
                 'pre',
                 'h2',
                 'h3',
                 'h4'
-            ]
+            ],
+            callbacks: {
+                onImageUpload: function (files) {
+                    var blob = uploadFile(files[0]);
+                    console.log(blob);
+                //     'use strict';
+                //     window.osuny.summernote.sendFile(files[0], $(this));
+                }
+            }
         });
     });
 });
