@@ -17,7 +17,7 @@ gem 'sib-api-v3-sdk'
 gem 'gdpr'
 
 # Back
-gem 'rails'
+gem 'rails', '~> 6.1'
 gem 'rails-i18n'
 gem 'devise'
 gem 'devise-i18n'
