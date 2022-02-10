@@ -5,7 +5,6 @@ namespace :communication do
     member do
       get :import
       post :import
-      post :publish
     end
     resources :pages, controller: 'website/pages' do
       collection do
@@ -13,7 +12,6 @@ namespace :communication do
       end
       member do
         get :children
-        post :publish
       end
     end
     resources :categories, controller: 'website/categories' do
@@ -22,15 +20,10 @@ namespace :communication do
       end
       member do
         get :children
-        post :publish
       end
     end
     resources :authors, controller: 'website/authors', only: [:index, :show]
-    resources :posts, controller: 'website/posts' do
-      member do
-        post :publish
-      end
-    end
+    resources :posts, controller: 'website/posts'
     resources :curations, path: 'posts/curations', as: :post_curations, controller: 'website/posts/curations', only: [:new, :create]
     resources :menus, controller: 'website/menus' do
       resources :items, controller: 'website/menu/items', except: :index do

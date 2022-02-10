@@ -12,7 +12,7 @@
 #  requirement    :text
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  criterion_id   :uuid             not null
+#  criterion_id   :uuid             not null, indexed
 #
 # Indexes
 #
@@ -20,7 +20,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (criterion_id => administration_qualiopi_criterions.id)
+#  fk_rails_eed87f7acf  (criterion_id => administration_qualiopi_criterions.id)
 #
 class Administration::Qualiopi::Indicator < ApplicationRecord
   belongs_to :criterion

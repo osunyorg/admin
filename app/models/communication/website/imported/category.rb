@@ -12,9 +12,9 @@
 #  url           :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  category_id   :uuid
-#  university_id :uuid             not null
-#  website_id    :uuid             not null
+#  category_id   :uuid             indexed
+#  university_id :uuid             not null, indexed
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -24,9 +24,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (category_id => communication_website_categories.id)
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (website_id => communication_website_imported_websites.id)
+#  fk_rails_409ee93de2  (website_id => communication_website_imported_websites.id)
+#  fk_rails_43df612943  (category_id => communication_website_categories.id)
+#  fk_rails_f6070ca53d  (university_id => universities.id)
 #
 class Communication::Website::Imported::Category < ApplicationRecord
 

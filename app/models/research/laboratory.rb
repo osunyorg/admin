@@ -10,7 +10,7 @@
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  university_id :uuid             not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
   include WithGit

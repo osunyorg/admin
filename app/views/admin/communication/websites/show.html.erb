@@ -26,13 +26,6 @@
   </div>
 <% end %>
 
-<% content_for :action_bar_left do %>
-  <%= link_to t('communication.website.force_publication'),
-              publish_admin_communication_website_path(@website),
-              method: :post,
-              class: button_classes %>
-<% end %>
-
 <% content_for :action_bar_right do %>
   <% if can? :read, Communication::Website::Imported::Website %>
     <% if @website.imported? %>

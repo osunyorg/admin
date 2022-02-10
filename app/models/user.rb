@@ -4,14 +4,14 @@
 #
 #  id                            :uuid             not null, primary key
 #  confirmation_sent_at          :datetime
-#  confirmation_token            :string
+#  confirmation_token            :string           indexed
 #  confirmed_at                  :datetime
 #  current_sign_in_at            :datetime
 #  current_sign_in_ip            :string
 #  direct_otp                    :string
 #  direct_otp_sent_at            :datetime
-#  email                         :string           default(""), not null
-#  encrypted_otp_secret_key      :string
+#  email                         :string           default(""), not null, indexed => [university_id]
+#  encrypted_otp_secret_key      :string           indexed
 #  encrypted_otp_secret_key_iv   :string
 #  encrypted_otp_secret_key_salt :string
 #  encrypted_password            :string           default(""), not null
@@ -24,18 +24,18 @@
 #  mobile_phone                  :string
 #  remember_created_at           :datetime
 #  reset_password_sent_at        :datetime
-#  reset_password_token          :string
+#  reset_password_token          :string           indexed
 #  role                          :integer          default("visitor")
 #  second_factor_attempts_count  :integer          default(0)
 #  session_token                 :string
 #  sign_in_count                 :integer          default(0), not null
 #  totp_timestamp                :datetime
 #  unconfirmed_email             :string
-#  unlock_token                  :string
+#  unlock_token                  :string           indexed
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
-#  language_id                   :uuid
-#  university_id                 :uuid             not null
+#  language_id                   :uuid             indexed
+#  university_id                 :uuid             not null, indexed => [email], indexed
 #
 # Indexes
 #
@@ -49,8 +49,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (language_id => languages.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_45f4f12508  (language_id => languages.id)
+#  fk_rails_bd6f7212a9  (university_id => universities.id)
 #
 class User < ApplicationRecord
   has_one_attached_deletable :picture  # In this order, "resize avatar" callback will be fired after the others.

@@ -5,11 +5,11 @@
 #  id            :uuid             not null, primary key
 #  description   :text
 #  position      :integer
-#  target_type   :string
+#  target_type   :string           indexed => [target_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  target_id     :uuid
-#  university_id :uuid             not null
+#  target_id     :uuid             indexed => [target_type]
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_8e52293a38  (university_id => universities.id)
 #
 
 one:

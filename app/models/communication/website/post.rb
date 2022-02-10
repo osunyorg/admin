@@ -11,12 +11,13 @@
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
+#  text_new                 :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  author_id                :uuid
-#  communication_website_id :uuid             not null
-#  university_id            :uuid             not null
+#  author_id                :uuid             indexed
+#  communication_website_id :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
@@ -26,9 +27,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (author_id => university_people.id)
-#  fk_rails_...  (communication_website_id => communication_websites.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_1e0d058a25  (university_id => universities.id)
+#  fk_rails_d1c1a10946  (communication_website_id => communication_websites.id)
+#  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
 class Communication::Website::Post < ApplicationRecord
   include WithGit

@@ -6,12 +6,12 @@
 #  description   :text
 #  kind          :integer
 #  position      :integer
-#  target_type   :string           not null
+#  target_type   :string           not null, indexed => [target_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  person_id     :uuid             not null
-#  target_id     :uuid             not null
-#  university_id :uuid             not null
+#  person_id     :uuid             not null, indexed
+#  target_id     :uuid             not null, indexed => [target_type]
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
@@ -21,8 +21,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (person_id => university_people.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_407e2a671c  (person_id => university_people.id)
+#  fk_rails_5c704f6338  (university_id => universities.id)
 #
 require "test_helper"
 

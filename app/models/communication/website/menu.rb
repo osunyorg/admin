@@ -8,8 +8,8 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null
-#  university_id            :uuid             not null
+#  communication_website_id :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
@@ -18,8 +18,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (communication_website_id => communication_websites.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_8d6227916e  (university_id => universities.id)
+#  fk_rails_dcc7198fc5  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Menu < ApplicationRecord
   include WithGit

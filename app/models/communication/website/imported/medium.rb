@@ -11,8 +11,8 @@
 #  variant_urls  :text             default([]), is an Array
 #  created_at    :datetime
 #  updated_at    :datetime
-#  university_id :uuid             not null
-#  website_id    :uuid             not null
+#  university_id :uuid             not null, indexed
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -21,8 +21,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (website_id => communication_website_imported_websites.id)
+#  fk_rails_acbe85119e  (university_id => universities.id)
+#  fk_rails_c54ac5a28b  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Medium < ApplicationRecord
   belongs_to :university

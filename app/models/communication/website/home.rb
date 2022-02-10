@@ -3,13 +3,13 @@
 # Table name: communication_website_homes
 #
 #  id                       :uuid             not null, primary key
+#  description              :text
 #  featured_image_alt       :string
 #  github_path              :text
-#  title                    :string           default("Home")
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null
-#  university_id            :uuid             not null
+#  communication_website_id :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
@@ -18,8 +18,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (communication_website_id => communication_websites.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_263a15f387  (communication_website_id => communication_websites.id)
+#  fk_rails_328fa48682  (university_id => universities.id)
 #
 class Communication::Website::Home < ApplicationRecord
   include WithGit

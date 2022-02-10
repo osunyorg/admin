@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_152152) do
+ActiveRecord::Schema.define(version: 2022_02_10_105040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_152152) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "github_path"
     t.string "featured_image_alt"
-    t.string "title", default: "Home"
+    t.text "description"
     t.index ["communication_website_id"], name: "idx_comm_website_homes_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_homes_on_university_id"
   end
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_152152) do
     t.uuid "author_id"
     t.boolean "pinned", default: false
     t.string "featured_image_alt"
+    t.text "text_new"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"

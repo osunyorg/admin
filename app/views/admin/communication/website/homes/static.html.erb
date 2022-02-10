@@ -1,12 +1,12 @@
 ---
 title: >
   <%= @home.website.name %>
-breadcrumb_title: "<%= @home.title %>"
+breadcrumb_title: "<%= @website.structure.home_title %>"
 <% if @home.featured_image.attached? %>
 image: "<%= @home.featured_image.blob.id %>"
 image_alt: "<%= @home.featured_image_alt %>"
 <% end %>
 description: >
-  <%= strip_tags prepare_html_for_static(@home.text, @home.university) %>
+  <%= @home.description %>
 ---
 <%= prepare_html_for_static @home.text, @home.university %>

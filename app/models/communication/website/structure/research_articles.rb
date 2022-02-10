@@ -33,8 +33,8 @@
 #  teachers_title                  :string           default("Équipe pédagogique")
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
-#  communication_website_id        :uuid             not null
-#  university_id                   :uuid             not null
+#  communication_website_id        :uuid             not null, indexed
+#  university_id                   :uuid             not null, indexed
 #
 # Indexes
 #
@@ -43,8 +43,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (communication_website_id => communication_websites.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_06c815ee8c  (communication_website_id => communication_websites.id)
+#  fk_rails_167390416d  (university_id => universities.id)
 #
 class Communication::Website::Structure::ResearchArticles < Communication::Website::Structure
 

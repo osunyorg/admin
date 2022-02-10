@@ -3,18 +3,18 @@
 # Table name: communication_website_menu_items
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string
+#  about_type    :string           indexed => [about_id]
 #  kind          :integer          default("blank")
 #  position      :integer
 #  title         :string
 #  url           :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid
-#  menu_id       :uuid             not null
-#  parent_id     :uuid
-#  university_id :uuid             not null
-#  website_id    :uuid             not null
+#  about_id      :uuid             indexed => [about_type]
+#  menu_id       :uuid             not null, indexed
+#  parent_id     :uuid             indexed
+#  university_id :uuid             not null, indexed
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -26,10 +26,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (menu_id => communication_website_menus.id)
-#  fk_rails_...  (parent_id => communication_website_menu_items.id)
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (website_id => communication_websites.id)
+#  fk_rails_419ae3ca67  (menu_id => communication_website_menus.id)
+#  fk_rails_7747922950  (university_id => universities.id)
+#  fk_rails_d5e6210547  (parent_id => communication_website_menu_items.id)
+#  fk_rails_fa4f4585e4  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
   include WithTree

@@ -9,8 +9,8 @@
 #  short_name             :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  research_laboratory_id :uuid             not null
-#  university_id          :uuid             not null
+#  research_laboratory_id :uuid             not null, indexed
+#  university_id          :uuid             not null, indexed
 #
 # Indexes
 #
@@ -19,8 +19,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (research_laboratory_id => research_laboratories.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_ad2cb9a562  (research_laboratory_id => research_laboratories.id)
+#  fk_rails_d334f832b4  (university_id => universities.id)
 #
 class Research::Laboratory::Axis < ApplicationRecord
   include WithPosition

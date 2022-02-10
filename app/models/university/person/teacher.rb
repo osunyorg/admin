@@ -16,8 +16,8 @@
 #  tenure            :boolean          default(FALSE)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  university_id     :uuid             not null
-#  user_id           :uuid
+#  university_id     :uuid             not null, indexed
+#  user_id           :uuid             indexed
 #
 # Indexes
 #
@@ -26,8 +26,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_b47a769440  (user_id => users.id)
+#  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person::Teacher < University::Person
   def self.polymorphic_name

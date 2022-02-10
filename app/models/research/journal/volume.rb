@@ -13,8 +13,8 @@
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  research_journal_id :uuid             not null
-#  university_id       :uuid             not null
+#  research_journal_id :uuid             not null, indexed
+#  university_id       :uuid             not null, indexed
 #
 # Indexes
 #
@@ -23,8 +23,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (research_journal_id => research_journals.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_814e97604b  (research_journal_id => research_journals.id)
+#  fk_rails_c83d5e9068  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
   include WithGit

@@ -33,12 +33,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
     @posts = @category.posts.ordered.page(params[:page])
     breadcrumb
   end
-
-  def publish
-    @category.sync_with_git
-    redirect_to admin_communication_website_category_path(@category), notice: t('admin.will_be_published_html', model: @category.to_s)
-  end
-
+  
   def new
     @category.website = @website
     breadcrumb
