@@ -66,14 +66,14 @@ class Communication::Website::Post < ApplicationRecord
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
-  def text_summernote
+  def text_new
     # TODO hydrate action-text-attachment
-    self.text
+    attributes['text_new'].gsub('</action', 'coucou</action')
   end
 
-  def text_summernote=(value)
+  def text_new=(value)
     # TODO dehydrate action-text-attachment
-    self.text = value
+    attributes['text_new'] = value
   end
 
   def path
