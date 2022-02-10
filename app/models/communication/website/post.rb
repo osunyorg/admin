@@ -40,6 +40,8 @@ class Communication::Website::Post < ApplicationRecord
 
   has_rich_text :text
 
+  summernote :text
+
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
           dependent: :destroy
@@ -59,8 +61,6 @@ class Communication::Website::Post < ApplicationRecord
   validates :title, presence: true
 
   before_validation :set_published_at, if: :published_changed?
-
-  before_validation :summernote
 
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
@@ -106,9 +106,5 @@ class Communication::Website::Post < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
-  end
-
-  def summernote
-    self.text_new = self.text.to_s.gsub('<div>', '<p>').gsub('</div>', '</p>').gsub('<p><br></p>', '')
   end
 end
