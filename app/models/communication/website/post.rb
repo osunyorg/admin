@@ -60,6 +60,8 @@ class Communication::Website::Post < ApplicationRecord
 
   before_validation :set_published_at, if: :published_changed?
 
+  before_validation :summernote
+
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
@@ -104,5 +106,9 @@ class Communication::Website::Post < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def summernote
+    self.text_new = self.text.to_s.gsub('<div>', '<p>').gsub('</div>', '</p>').gsub('<p><br></p>', '')
   end
 end
