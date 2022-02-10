@@ -103,7 +103,7 @@ $(function () {
                 ['para', ['ul', 'ol']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
-                ['view', ['codeview', 'help']]
+                ['view', ['codeview']]
             ],
             styleTags: [
                 'p',
