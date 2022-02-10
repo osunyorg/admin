@@ -3,7 +3,7 @@
 # Table name: communication_website_pages
 #
 #  id                       :uuid             not null, primary key
-#  about_type               :string
+#  about_type               :string           indexed => [about_id]
 #  description              :text
 #  featured_image_alt       :string
 #  github_path              :text
@@ -15,11 +15,11 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid
-#  communication_website_id :uuid             not null
-#  parent_id                :uuid
-#  related_category_id      :uuid
-#  university_id            :uuid             not null
+#  about_id                 :uuid             indexed => [about_type]
+#  communication_website_id :uuid             not null, indexed
+#  parent_id                :uuid             indexed
+#  related_category_id      :uuid             indexed
+#  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
@@ -31,10 +31,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (communication_website_id => communication_websites.id)
-#  fk_rails_...  (parent_id => communication_website_pages.id)
-#  fk_rails_...  (related_category_id => communication_website_categories.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_1a42003f06  (parent_id => communication_website_pages.id)
+#  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
+#  fk_rails_47b37cf8b2  (related_category_id => communication_website_categories.id)
+#  fk_rails_d208d15a73  (university_id => universities.id)
 #
 
 class Communication::Website::Page < ApplicationRecord

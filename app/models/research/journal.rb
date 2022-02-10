@@ -10,7 +10,7 @@
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  university_id :uuid             not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
   include WithGit

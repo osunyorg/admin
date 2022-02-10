@@ -10,9 +10,9 @@
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  author_id     :uuid
-#  university_id :uuid             not null
-#  website_id    :uuid             not null
+#  author_id     :uuid             indexed
+#  university_id :uuid             not null, indexed
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -22,9 +22,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (author_id => university_people.id)
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (website_id => communication_website_imported_websites.id)
+#  fk_rails_71485b09cb  (website_id => communication_website_imported_websites.id)
+#  fk_rails_902ba99cba  (university_id => universities.id)
+#  fk_rails_e37b63f880  (author_id => university_people.id)
 #
 class Communication::Website::Imported::Author < ApplicationRecord
 

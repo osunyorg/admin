@@ -12,10 +12,10 @@
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null
-#  parent_id                :uuid
-#  program_id               :uuid
-#  university_id            :uuid             not null
+#  communication_website_id :uuid             not null, indexed
+#  parent_id                :uuid             indexed
+#  program_id               :uuid             indexed
+#  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
@@ -26,10 +26,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (communication_website_id => communication_websites.id)
-#  fk_rails_...  (parent_id => communication_website_categories.id)
-#  fk_rails_...  (program_id => education_programs.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_86a9ce3cea  (parent_id => communication_website_categories.id)
+#  fk_rails_9d4210dc43  (university_id => universities.id)
+#  fk_rails_c7c9f7ddc7  (communication_website_id => communication_websites.id)
+#  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Category < ApplicationRecord
   include WithGit

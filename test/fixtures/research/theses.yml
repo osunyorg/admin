@@ -10,10 +10,10 @@
 #  title                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  author_id              :uuid             not null
-#  director_id            :uuid             not null
-#  research_laboratory_id :uuid             not null
-#  university_id          :uuid             not null
+#  author_id              :uuid             not null, indexed
+#  director_id            :uuid             not null, indexed
+#  research_laboratory_id :uuid             not null, indexed
+#  university_id          :uuid             not null, indexed
 #
 # Indexes
 #
@@ -24,10 +24,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (author_id => university_people.id)
-#  fk_rails_...  (director_id => university_people.id)
-#  fk_rails_...  (research_laboratory_id => research_laboratories.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_1e42972d90  (author_id => university_people.id)
+#  fk_rails_44b431f9e5  (university_id => universities.id)
+#  fk_rails_8d223fdbaf  (director_id => university_people.id)
+#  fk_rails_b3380066dc  (research_laboratory_id => research_laboratories.id)
 #
 
 one:

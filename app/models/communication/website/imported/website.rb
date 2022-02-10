@@ -6,8 +6,8 @@
 #  status        :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  university_id :uuid             not null
-#  website_id    :uuid             not null
+#  university_id :uuid             not null, indexed
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (website_id => communication_websites.id)
+#  fk_rails_32d782a604  (university_id => universities.id)
+#  fk_rails_3dbdb9cb2d  (website_id => communication_websites.id)
 #
 class Communication::Website::Imported::Website < ApplicationRecord
   belongs_to :university

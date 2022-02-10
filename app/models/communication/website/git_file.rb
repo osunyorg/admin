@@ -3,13 +3,13 @@
 # Table name: communication_website_git_files
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null
+#  about_type    :string           not null, indexed => [about_id]
 #  previous_path :string
 #  previous_sha  :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null
-#  website_id    :uuid             not null
+#  about_id      :uuid             not null, indexed => [about_type]
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (website_id => communication_websites.id)
+#  fk_rails_8505d649e8  (website_id => communication_websites.id)
 #
 class Communication::Website::GitFile < ApplicationRecord
   belongs_to :website, class_name: 'Communication::Website'

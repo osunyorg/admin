@@ -16,8 +16,8 @@
 #  slug               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  parent_id          :uuid
-#  university_id      :uuid             not null
+#  parent_id          :uuid             indexed
+#  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
@@ -26,8 +26,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (parent_id => education_programs.id)
-#  fk_rails_...  (university_id => universities.id)
+#  fk_rails_08b351087c  (university_id => universities.id)
+#  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
   include WithGit

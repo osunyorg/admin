@@ -17,10 +17,10 @@
 #  url                :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  featured_medium_id :uuid
-#  post_id            :uuid
-#  university_id      :uuid             not null
-#  website_id         :uuid             not null
+#  featured_medium_id :uuid             indexed
+#  post_id            :uuid             indexed
+#  university_id      :uuid             not null, indexed
+#  website_id         :uuid             not null, indexed
 #
 # Indexes
 #
@@ -31,10 +31,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (featured_medium_id => communication_website_imported_media.id)
-#  fk_rails_...  (post_id => communication_website_posts.id)
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (website_id => communication_website_imported_websites.id)
+#  fk_rails_78380969b3  (featured_medium_id => communication_website_imported_media.id)
+#  fk_rails_a5bc137386  (university_id => universities.id)
+#  fk_rails_de8b4a9cfe  (website_id => communication_website_imported_websites.id)
+#  fk_rails_f9a08c7c77  (post_id => communication_website_posts.id)
 #
 class Communication::Website::Imported::Post < ApplicationRecord
   include Communication::Website::Imported::WithRichText

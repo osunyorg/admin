@@ -14,10 +14,10 @@
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  research_journal_id        :uuid             not null
-#  research_journal_volume_id :uuid
-#  university_id              :uuid             not null
-#  updated_by_id              :uuid
+#  research_journal_id        :uuid             not null, indexed
+#  research_journal_volume_id :uuid             indexed
+#  university_id              :uuid             not null, indexed
+#  updated_by_id              :uuid             indexed
 #
 # Indexes
 #
@@ -28,10 +28,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (research_journal_id => research_journals.id)
-#  fk_rails_...  (research_journal_volume_id => research_journal_volumes.id)
-#  fk_rails_...  (university_id => universities.id)
-#  fk_rails_...  (updated_by_id => users.id)
+#  fk_rails_05213f4f24  (research_journal_id => research_journals.id)
+#  fk_rails_22f161a6a7  (research_journal_volume_id => research_journal_volumes.id)
+#  fk_rails_2713063b85  (updated_by_id => users.id)
+#  fk_rails_935541e014  (university_id => universities.id)
 #
 class Research::Journal::Article < ApplicationRecord
   include WithGit
