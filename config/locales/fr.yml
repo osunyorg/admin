@@ -85,6 +85,7 @@ fr:
       send_code_instead: "Envoyez-moi plutôt un code"
       send_email_code: 'Envoyer le code par email'
       success: ""
+  download: Télécharger
   edit: Modifier
   empty_folder: Dossier vide
   false: Non
