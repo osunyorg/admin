@@ -37,7 +37,7 @@
                   <%= number_to_human_size embed.metadata['filesize'] %>
                 </p>
                 <%= link_to t('download'),
-                            rails_blob_url(embed.blob, disposition: 'attachment', filename: embed.filename),
+                            embed.blob.url(disposition: 'attachment', filename: embed.filename),
                             class: 'btn btn-xs btn-light' %>
               </div>
             </div>
