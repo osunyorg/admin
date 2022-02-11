@@ -80,45 +80,82 @@ class Communication::Website::Menu::Item < ApplicationRecord
     target = nil
     active = website.send "menu_item_kind_#{kind}?"
     return nil unless active
-    case self.kind
-    when 'blank'
-      target = ''
-    when 'url'
-      target = url
-    when 'page'
-      target = about.path if about&.published
-    when 'programs'
-      target = "/#{website.structure.education_programs_path}"
-    when 'program'
-      target = "/#{website.structure.education_programs_path}#{about.path}"
-    when 'news'
-      target = "/#{website.structure.communication_posts_path}"
-    when 'news_article'
-      target = "/#{website.structure.communication_posts_path}#{about.path}" if about&.published && about&.published_at
-    when 'staff'
-      target = "/#{website.structure.persons_path}"
-    when 'administrators'
-      target = "/#{website.structure.administrators_path}"
-    when 'authors'
-      target = "/#{website.structure.authors_path}"
-    when 'researchers'
-      target = "/#{website.structure.researchers_path}"
-    when 'teachers'
-      target = "/#{website.structure.teachers_path}"
-    when 'research_volumes'
-      target = "/#{website.structure.research_volumes_path}"
-    when 'research_volume'
-      target = "/#{website.structure.research_volumes_path}#{about.path}" if about&.published && about&.published_at
-    when 'research_articles'
-      target = "/#{website.structure.research_articles_path}"
-    when 'research_article'
-      target = "/#{website.structure.research_articles_path}#{about.path}" if about&.published && about&.published_at
-    else
-      target = about&.path
-    end
+    method = "target_for_#{kind}"
+    target = respond_to?(method) ? send(method)
+                                 : about&.path
+    byebug
     return nil if target.nil?
     target.end_with?('/') ? target
                           : "#{target}/"
+  end
+
+  def target_for_blank
+    ''
+  end
+
+  def target_for_url
+    url
+  end
+
+  def target_for_page
+    about.path if about&.published
+  end
+
+  def target_for_programs
+    "/#{website.structure.education_programs_path}"
+  end
+
+  def target_for_program
+    "/#{website.structure.education_programs_path}#{about.path}"
+  end
+
+  def target_for_news
+    "/#{website.structure.communication_posts_path}"
+  end
+
+  def target_for_news_article
+    "/#{website.structure.communication_posts_path}#{about.path}" if about&.published && about&.published_at
+  end
+
+  def target_for_news_category
+    # TODO use communication_categories_path
+    "/#{website.structure.communication_posts_path}/categories#{about.path}" if about
+  end
+
+  def target_for_staff
+    "/#{website.structure.persons_path}"
+  end
+
+  def target_for_administrators
+    "/#{website.structure.administrators_path}"
+  end
+
+  def target_for_authors
+    "/#{website.structure.authors_path}"
+  end
+
+  def target_for_researchers
+    "/#{website.structure.researchers_path}"
+  end
+
+  def target_for_teachers
+    "/#{website.structure.teachers_path}"
+  end
+
+  def target_for_research_volumes
+    "/#{website.structure.research_volumes_path}"
+  end
+
+  def target_for_research_volume
+    "/#{website.structure.research_volumes_path}#{about.path}" if about&.published && about&.published_at
+  end
+
+  def target_for_research_articles
+    "/#{website.structure.research_articles_path}"
+  end
+
+  def target_for_research_article
+    "/#{website.structure.research_articles_path}#{about.path}" if about&.published && about&.published_at
   end
 
   def list_of_other_items
