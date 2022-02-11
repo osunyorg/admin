@@ -36,6 +36,11 @@ $(function () {
 
     $('[data-provider="summernote"]').each(function () {
         $(this).summernote({
+            popover: {
+                image: [
+                    ['remove', ['removeMedia']]
+                ]
+            },
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic']],
