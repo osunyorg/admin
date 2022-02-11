@@ -1,5 +1,6 @@
 ---
 title: "<%= @article.title %>"
+slug: "<%= @article.slug %>"
 description: >
   <%= prepare_text_for_static @article.abstract %>
 <% if @article.volume && @article.volume.path %>

@@ -34,6 +34,7 @@
 class Communication::Website::Menu::Item < ApplicationRecord
   include WithTree
   include WithPosition
+  include WithTargets
 
   attr_accessor :skip_publication_callback
 
@@ -80,42 +81,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
     target = nil
     active = website.send "menu_item_kind_#{kind}?"
     return nil unless active
-    case self.kind
-    when 'blank'
-      target = ''
-    when 'url'
-      target = url
-    when 'page'
-      target = about.path if about&.published
-    when 'programs'
-      target = "/#{website.structure.education_programs_path}"
-    when 'program'
-      target = "/#{website.structure.education_programs_path}#{about.path}"
-    when 'news'
-      target = "/#{website.structure.communication_posts_path}"
-    when 'news_article'
-      target = "/#{website.structure.communication_posts_path}#{about.path}" if about&.published && about&.published_at
-    when 'staff'
-      target = "/#{website.structure.persons_path}"
-    when 'administrators'
-      target = "/#{website.structure.administrators_path}"
-    when 'authors'
-      target = "/#{website.structure.authors_path}"
-    when 'researchers'
-      target = "/#{website.structure.researchers_path}"
-    when 'teachers'
-      target = "/#{website.structure.teachers_path}"
-    when 'research_volumes'
-      target = "/#{website.structure.research_volumes_path}"
-    when 'research_volume'
-      target = "/#{website.structure.research_volumes_path}#{about.path}" if about&.published && about&.published_at
-    when 'research_articles'
-      target = "/#{website.structure.research_articles_path}"
-    when 'research_article'
-      target = "/#{website.structure.research_articles_path}#{about.path}" if about&.published && about&.published_at
-    else
-      target = about&.path
-    end
+    # Les méthodes target_for_ sont définies dans le concern WithTarget
+    method = "target_for_#{kind}"
+    target = respond_to?(method) ? send(method)
+                                 : about&.path
     return nil if target.nil?
     target.end_with?('/') ? target
                           : "#{target}/"
@@ -141,9 +110,12 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def has_about?
-    kind_page? || kind_program? ||
-    kind_news_category? || kind_news_article? ||
-    kind_research_volume? || kind_research_article?
+    kind_page? ||
+    kind_program? ||
+    kind_news_category? ||
+    kind_news_article? ||
+    kind_research_volume? ||
+    kind_research_article?
   end
 
   def sync_menu
