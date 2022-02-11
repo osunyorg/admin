@@ -1,4 +1,4 @@
-/*global $, ActiveStorage */
+/*global $, ActiveStorage, SummernoteAttachment */
 var SummernoteAttachmentUpload = function (element, file) {
     'use strict';
     this.element = element;
@@ -55,22 +55,14 @@ SummernoteAttachmentUpload.prototype.preloadAndInsertAttachment = function () {
 SummernoteAttachmentUpload.prototype.insertAttachment = function () {
     'use strict';
     var attachmentElement = document.createElement('figure'),
-        imageElement;
+        attachment;
 
     attachmentElement.className = this.getClassName();
     attachmentElement.setAttribute('data-trix-attachment', JSON.stringify(this.trixAttributes));
 
-    if (this.trixAttributes.previewable) {
-        imageElement = document.createElement('img');
-        imageElement.src = this.trixAttributes.url;
-        imageElement.width = this.trixAttributes.width;
-        imageElement.height = this.trixAttributes.height;
-        attachmentElement.appendChild(imageElement);
-    } else {
-        attachmentElement.textContent = this.trixAttributes.filename;
-    }
+    attachment = new SummernoteAttachment(attachmentElement);
 
-    $(this.element).summernote('insertNode', attachmentElement);
+    $(this.element).summernote('insertNode', attachment.element);
 };
 
 SummernoteAttachmentUpload.prototype.createBlobUrl = function (signedId, filename) {
