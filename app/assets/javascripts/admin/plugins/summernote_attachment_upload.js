@@ -5,6 +5,7 @@ var SummernoteAttachmentUpload = function (element, file) {
     this.file = file;
     this.directUpload = new ActiveStorage.DirectUpload(file, this.getDirectUploadUrl(), this);
     this.previewablePattern = /^image(\/(gif|png|jpe?g)|$)/;
+    this.blobAttributes = {};
     this.trixAttributes = {};
 };
 
@@ -19,11 +20,12 @@ SummernoteAttachmentUpload.prototype.directUploadDidComplete = function (error, 
         throw new Error('Direct upload failed: ' + error);
     }
 
+    this.blobAttributes = attributes;
     this.trixAttributes = {
         contentType: attributes.content_type,
         filename: attributes.filename,
         filesize: attributes.byte_size,
-        previewable: this.isPreviewable(attributes.content_type),
+        previewable: this.isPreviewable(),
         sgid: attributes.attachable_sgid,
         url: this.createBlobUrl(attributes.signed_id, attributes.filename)
     };
@@ -52,11 +54,21 @@ SummernoteAttachmentUpload.prototype.preloadAndInsertAttachment = function () {
 
 SummernoteAttachmentUpload.prototype.insertAttachment = function () {
     'use strict';
-    var attachmentElement = document.createElement('figure');
+    var attachmentElement = document.createElement('figure'),
+        imageElement;
+
+    attachmentElement.className = this.getClassName();
     attachmentElement.setAttribute('data-trix-attachment', JSON.stringify(this.trixAttributes));
 
-    // TODO <img> or text
-    attachmentElement.textContent = this.trixAttributes.filename;
+    if (this.trixAttributes.previewable) {
+        imageElement = document.createElement('img');
+        imageElement.src = this.trixAttributes.url;
+        imageElement.width = this.trixAttributes.width;
+        imageElement.height = this.trixAttributes.height;
+        attachmentElement.appendChild(imageElement);
+    } else {
+        attachmentElement.textContent = this.trixAttributes.filename;
+    }
 
     $(this.element).summernote('insertNode', attachmentElement);
 };
@@ -68,9 +80,33 @@ SummernoteAttachmentUpload.prototype.createBlobUrl = function (signedId, filenam
         .replace(':filename', encodeURIComponent(filename));
 };
 
-SummernoteAttachmentUpload.prototype.isPreviewable = function (contentType) {
+SummernoteAttachmentUpload.prototype.isPreviewable = function () {
     'use strict';
-    return this.previewablePattern.test(contentType);
+    return this.previewablePattern.test(this.blobAttributes.content_type);
+};
+
+SummernoteAttachmentUpload.prototype.getClassName = function () {
+    'use strict';
+    var type = this.isPreviewable() ? 'preview' : 'file',
+        extension = this.getFileExtension(),
+        classList = [];
+
+    classList.push('attachment');
+    classList.push('attachment--' + type);
+    if (extension !== null) {
+        classList.push('attachment--' + extension);
+    }
+
+    return classList.join(' ');
+};
+
+SummernoteAttachmentUpload.prototype.getFileExtension = function () {
+    'use strict';
+    var matchResults = this.blobAttributes.filename.match(/\.(\w+)$/);
+    if (matchResults !== null) {
+        return matchResults[1].toLowerCase();
+    }
+    return null;
 };
 
 SummernoteAttachmentUpload.prototype.getDirectUploadUrl = function () {
