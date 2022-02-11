@@ -34,6 +34,7 @@
 class Communication::Website::Menu::Item < ApplicationRecord
   include WithTree
   include WithPosition
+  include WithTargets
 
   attr_accessor :skip_publication_callback
 
@@ -80,81 +81,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
     target = nil
     active = website.send "menu_item_kind_#{kind}?"
     return nil unless active
+    # Les méthodes target_for_ sont définies dans le concern WithTarget
     method = "target_for_#{kind}"
     target = respond_to?(method) ? send(method)
                                  : about&.path
     return nil if target.nil?
     target.end_with?('/') ? target
                           : "#{target}/"
-  end
-
-  def target_for_blank
-    ''
-  end
-
-  def target_for_url
-    url
-  end
-
-  def target_for_page
-    about.path if about&.published
-  end
-
-  def target_for_programs
-    "/#{website.structure.education_programs_path}"
-  end
-
-  def target_for_program
-    "/#{website.structure.education_programs_path}#{about.path}"
-  end
-
-  def target_for_news
-    "/#{website.structure.communication_posts_path}"
-  end
-
-  def target_for_news_article
-    "/#{website.structure.communication_posts_path}#{about.path}" if about&.published && about&.published_at
-  end
-
-  def target_for_news_category
-    # TODO use communication_categories_path
-    "/#{website.structure.communication_posts_path}/categories#{about.path}" if about
-  end
-
-  def target_for_staff
-    "/#{website.structure.persons_path}"
-  end
-
-  def target_for_administrators
-    "/#{website.structure.administrators_path}"
-  end
-
-  def target_for_authors
-    "/#{website.structure.authors_path}"
-  end
-
-  def target_for_researchers
-    "/#{website.structure.researchers_path}"
-  end
-
-  def target_for_teachers
-    "/#{website.structure.teachers_path}"
-  end
-
-  def target_for_research_volumes
-    "/#{website.structure.research_volumes_path}"
-  end
-
-  def target_for_research_volume
-    "/#{website.structure.research_volumes_path}#{about.path}" if about&.published && about&.published_at
-  end
-
-  def target_for_research_articles
-    "/#{website.structure.research_articles_path}"
-  end
-
-  def target_for_research_article
-    "/#{website.structure.research_articles_path}#{about.path}" if about&.published && about&.published_at
   end
 
   def list_of_other_items
@@ -177,9 +110,12 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def has_about?
-    kind_page? || kind_program? ||
-    kind_news_category? || kind_news_article? ||
-    kind_research_volume? || kind_research_article?
+    kind_page? ||
+    kind_program? ||
+    kind_news_category? ||
+    kind_news_article? ||
+    kind_research_volume? ||
+    kind_research_article?
   end
 
   def sync_menu
