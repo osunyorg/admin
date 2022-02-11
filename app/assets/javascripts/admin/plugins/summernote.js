@@ -1,5 +1,5 @@
 /* eslint no-alert: 'off' */
-/*global $, FormData */
+/*global $, SummernoteAttachmentUpload */
 // window.osuny.summernote.sendFile = function (file, toSummernote) {
 //     'use strict';
 //     var data = new FormData();
@@ -25,10 +25,6 @@
 //     });
 // };
 //
-
-//
-
-
 
 $(function () {
     'use strict';
@@ -58,10 +54,8 @@ $(function () {
             ],
             callbacks: {
                 onImageUpload: function (files) {
-                    var blob = uploadFile(files[0]);
-                    console.log(blob);
-                //     'use strict';
-                //     window.osuny.summernote.sendFile(files[0], $(this));
+                    var attachmentUpload = new SummernoteAttachmentUpload(this, files[0]);
+                    attachmentUpload.start();
                 }
             }
         });
