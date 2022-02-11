@@ -83,8 +83,9 @@ class Communication::Website::Menu::Item < ApplicationRecord
     return nil unless active
     # Les méthodes target_for_ sont définies dans le concern WithTarget
     method = "target_for_#{kind}"
-    target = respond_to?(method) ? send(method)
-                                 : about&.path
+    # Le true sert à examiner les méthodes protected
+    target = respond_to?(method, true)  ? send(method)
+                                        : about&.path
     return nil if target.nil?
     target.end_with?('/') ? target
                           : "#{target}/"
