@@ -8,43 +8,10 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('description') %></h3>
-          <% if @post.description.blank? %>
-            <i class="fa fa-exclamation-circle text-danger"></i>
-          <% else %>
-            <%= sanitize @post.description %>
-          <% end %>
-
-          <h3 class="h5 mt-4"><%= Communication::Website::Post.human_attribute_name('text') %></h3>
-          <%= strip_tags(@post.text.to_s).truncate 300 %>
-
-          <h3 class="h5 mt-4"><%= Communication::Website::Post.human_attribute_name('medias') %></h3>
-
-          <% @post.summernote_embeds.each do |embed| %>
-            <div class="row mb-3">
-              <div class="col-md-2">
-                <div class="img-thumbnail text-center">
-                  <% if embed.variable? %>
-                    <%= kamifusen_tag embed, class: 'img-fluid' %>
-                  <% else %>
-                    <i class="fas fa-file p-3 fa-2x"></i>
-                  <% end %>
-                </div>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-1">
-                  <%= embed.filename %>
-                  <%= number_to_human_size embed.metadata['filesize'] %>
-                </p>
-                <%= link_to t('download'),
-                            embed.blob.url(disposition: 'attachment', filename: embed.filename),
-                            class: 'btn btn-xs btn-light' %>
-              </div>
-            </div>
-          <% end %>
-
+          <%= render 'admin/application/property/text', object: @post, property: :description %>
+          <%= render 'admin/application/property/text', object: @post, property: :text %>
+          <%= render 'admin/application/property/summernote_embeds', object: @post, property: :medias %>
           <hr>
-
           <pre><%= @post.text_new.to_html %></pre>
         </div>
       </div>

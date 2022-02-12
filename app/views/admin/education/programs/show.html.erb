@@ -2,7 +2,7 @@
 
 <div class="row">
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h2 class="card-title mb-0 h5"><%= t('education.program.main_informations') %></h2>
@@ -39,15 +39,13 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-4">
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
       </div>
       <div class="card-body">
-        <h3 class="h5 mt-4">
-          <%= Education::Program.human_attribute_name('description') %>
-        </h3>
+        <%= render 'admin/application/property/text', object: @program, property: :description %>
         <p><%= @program.description %></p>
         <% [
               :registration,
@@ -57,58 +55,34 @@
               :accessibility,
               :other
             ].each_with_index do |prop, index| %>
-          <%
-          best_prop_value = @program.public_send("best_#{prop}")
-          best_prop_source = @program.public_send("best_#{prop}_source")
-          %>
-          <% next if best_prop_value.blank? # No value at all%>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name(prop) %>
-            <% if best_prop_source %>
-              <span class="small text-muted">
-                <%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %>
-              </span>
-            <% end %>
-          </h3>
-          <%= best_prop_value %>
+            <%= render 'admin/application/property/text', object: @program, property: prop %>
         <% end %>
       </div>
     </div>
   </div>
-</div>
+  <div class="col-md-5">
 
-<div class="card flex-fill w-100">
-  <div class="card-header">
-    <h5 class="card-title mb-0"><%= t('education.program.educational_informations') %></h5>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6">
-        <% i = 0 %>
-        <%  [
-              :objectives,
-              :content,
-              :prerequisites
-            ].each do |prop| %>
-          <% next if @program.public_send(prop).blank? %>
-          <h3 class="h5 <%= 'mt-4' if i > 0 %>"><%= Education::Program.human_attribute_name(prop) %></h3>
-          <%= @program.public_send prop %>
-          <% i += 1 %>
-        <% end %>
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('education.program.educational_informations') %></h5>
       </div>
-      <div class="col-md-6">
-        <% i = 0 %>
-        <%  [
-              :pedagogy,
-              :evaluation,
-              :opportunities,
-              :results
-            ].each do |prop| %>
-          <% next if @program.public_send(prop).blank? %>
-          <h3 class="h5 <%= 'mt-4' if i > 0 %>"><%= Education::Program.human_attribute_name(prop) %></h3>
-          <%= @program.public_send prop %>
-          <% i += 1 %>
-        <% end %>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <% i = 0 %>
+            <%  [
+                  :objectives,
+                  :content,
+                  :prerequisites,
+                  :pedagogy,
+                  :evaluation,
+                  :opportunities,
+                  :results
+                ].each do |prop| %>
+              <%= render 'admin/application/property/text', object: @program, property: prop %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
