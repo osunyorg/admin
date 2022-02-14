@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: 48b08102ad6cd9f425c116cfc7e14ea7a9c4d238
+  revision: d5a27a426351ef4c73ae7bd5ee3335fdd38b51a0
   branch: activestorage
   specs:
     summernote-rails (0.8.20.1)

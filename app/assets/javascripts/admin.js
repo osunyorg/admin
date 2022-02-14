@@ -10,7 +10,6 @@
 //= require appstack/app
 //= require gdpr/cookie_consent
 //= require trix
-//= require summernote/summernote-bs5.min
 //= require sortablejs/Sortable
 //= require popper
 //= require summernote/summernote-lite
