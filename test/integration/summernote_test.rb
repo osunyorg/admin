@@ -13,6 +13,10 @@ class SummernoteTest < ActiveSupport::TestCase
   end
 
   test "rehydrate actiontext" do
+    post = communication_website_post(:test)
+    post.text_new = HTML_DEHYDRATED
+    post.save
+    post.reload
     assert_equal HTML_HYDRATED, communication_website_post(:test).text_new.to_s
   end
  end
