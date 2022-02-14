@@ -54,7 +54,7 @@ $(function () {
                 onMediaDelete: function (_, $editable) {
                     cleanupTest($editable);
                 },
-                onKeyup: function(e) {
+                onKeyup: function (e) {
                     // Delete
                     var $editable = $(e.currentTarget);
                     if (e.keyCode === 8) {
