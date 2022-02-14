@@ -86,7 +86,7 @@ Dans la BDD, on stocke cette balise :
 A l'édition, la balise est "remplie" avant affichage, pour avoir une preview.
 A l'enregistrement, la balise est vidée.
 
-Etapes normales :
+Etapes normales
 -[x] A l'import d'une image, ajouter l'action-text-attachement autour de l'img
 -[ ] A la suppression d'une image dans l'éditeur, supprimer l'action-text-attachement autour de l'img
 -[x] A l'enregistrement, déshydrater les action-text-attachements
@@ -96,17 +96,18 @@ Etapes normales :
 Si un programme a 5 champs Summernote avec 3 images dans chaque champ, cela fait 15 attachments à lier au programme.
 Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
 
-Etapes de migration :
--[x] Au rails app:fix, transformer le markup Trix en markup Summernote (application_record) dans les propriétés _new
--[ ] Enlever les scripts de l'application_record
--[ ] Supprimer les champs ActionText dans les modèles
--[ ] Supprimer la table d'ActionText
--[ ] Renommer les champs en enlevant _new
-
-Actions de dev :
+Actions de dev
 -[ ] Coder les ajouts aux modèles dans Osuny
 -[ ] Coder le JS dans Osuny
 -[ ] Une fois que c'est fait, déplacer le Ruby et le JS dans summernote-rails
+
+Migration phase 1
+-[x] Ajouter des champs _new
+-[x] Au rails app:fix, transformer le markup Trix en markup Summernote (application_record) dans les propriétés _new
+Migration phase 2
+-[ ] Supprimer les champs ActionText dans les modèles
+-[ ] Supprimer la table d'ActionText
+-[ ] Renommer les champs en enlevant _new
 
 ### Le pdf
 

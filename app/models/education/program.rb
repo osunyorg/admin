@@ -3,16 +3,29 @@
 # Table name: education_programs
 #
 #  id                 :uuid             not null, primary key
+#  accessibility_new  :text
 #  capacity           :integer
+#  contacts_new       :text
+#  content_new        :text
 #  continuing         :boolean
 #  description        :text
+#  duration_new       :text
 #  ects               :integer
+#  evaluation_new     :text
 #  featured_image_alt :string
 #  level              :integer
 #  name               :string
+#  objectives_new     :text
+#  opportunities_new  :text
+#  other_new          :text
 #  path               :string
+#  pedagogy_new       :text
 #  position           :integer          default(0)
+#  prerequisites_new  :text
+#  pricing_new        :text
 #  published          :boolean          default(FALSE)
+#  registration_new   :text
+#  results_new        :text
 #  slug               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

@@ -3,6 +3,7 @@
 # Table name: university_people
 #
 #  id                :uuid             not null, primary key
+#  biography_new     :text
 #  description       :text
 #  email             :string
 #  first_name        :string
@@ -158,6 +159,6 @@ class University::Person < ApplicationRecord
   end
 
   def sanitize_email
-    self.email = self.email.downcase.strip
+    self.email = self.email.to_s.downcase.strip
   end
 end
