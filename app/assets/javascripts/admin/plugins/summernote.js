@@ -1,31 +1,5 @@
 /* eslint no-alert: 'off' */
-/*global $, SummernoteAttachment, SummernoteAttachmentUpload */
-// window.osuny.summernote.sendFile = function (file, toSummernote) {
-//     'use strict';
-//     var data = new FormData();
-//     data.append('file', file);
-//     $.ajax({
-//         data: data,
-//         type: 'POST',
-//         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-//         url: '/admin/summernote_blobs',
-//         cache: false,
-//         contentType: false,
-//         processData: false,
-//         success: function (successData) {
-//             if (typeof successData.errors !== 'undefined' && successData.errors !== null) {
-//                 return $.each(successData.errors, function (errorKey, messages) {
-//                     return $.each(messages, function (messageKey, message) {
-//                         return window.alert(message);
-//                     });
-//                 });
-//             }
-//             return toSummernote.summernote('pasteHTML', successData.node);
-//         }
-//     });
-// };
-//
-
+/*global $, SummernoteAttachmentUpload */
 $(function () {
     'use strict';
 
@@ -33,6 +7,21 @@ $(function () {
         dragImageHere: 'Drag file here',
         dropImage: 'Drop file'
     });
+
+    $.summernote.dom.isAttachment = function (node) {
+        return node && (/^ACTION-TEXT-ATTACHMENT/).test(node.nodeName.toUpperCase());
+    };
+
+    $.summernote.dom.isInline = function (node) {
+        return !this.isBodyContainer(node) &&
+         !this.isList(node) &&
+         !this.makePredByNodeName('HR')(node) &&
+         !this.isPara(node) &&
+         !this.makePredByNodeName('TABLE')(node) &&
+         !this.makePredByNodeName('BLOCKQUOTE')(node) &&
+         !this.makePredByNodeName('DATA')(node) &&
+         !this.isAttachment(node);
+    };
 
     $('[data-provider="summernote"]').each(function () {
         $(this).summernote({

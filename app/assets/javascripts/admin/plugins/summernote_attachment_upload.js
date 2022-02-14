@@ -1,4 +1,4 @@
-    /*global $, ActiveStorage, SummernoteAttachment */
+/*global $, ActiveStorage */
 var SummernoteAttachmentUpload = function (element, file) {
     'use strict';
     this.element = element;
