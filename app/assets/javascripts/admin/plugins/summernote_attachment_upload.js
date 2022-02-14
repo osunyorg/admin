@@ -1,4 +1,4 @@
-/*global $, ActiveStorage, SummernoteAttachment */
+    /*global $, ActiveStorage, SummernoteAttachment */
 var SummernoteAttachmentUpload = function (element, file) {
     'use strict';
     this.element = element;
@@ -22,12 +22,12 @@ SummernoteAttachmentUpload.prototype.directUploadDidComplete = function (error, 
 
     this.blobAttributes = attributes;
     this.trixAttributes = {
-        contentType: attributes.content_type,
-        filename: attributes.filename,
-        filesize: attributes.byte_size,
-        previewable: this.isPreviewable(),
-        sgid: attributes.attachable_sgid,
-        url: this.createBlobUrl(attributes.signed_id, attributes.filename)
+        'content-type': attributes.content_type,
+        'filename': attributes.filename,
+        'filesize': attributes.byte_size,
+        'previewable': this.isPreviewable(),
+        'sgid': attributes.attachable_sgid,
+        'url': this.createBlobUrl(attributes.signed_id, attributes.filename)
     };
 
     if (this.trixAttributes.previewable) {
@@ -54,15 +54,26 @@ SummernoteAttachmentUpload.prototype.preloadAndInsertAttachment = function () {
 
 SummernoteAttachmentUpload.prototype.insertAttachment = function () {
     'use strict';
-    var attachmentElement = document.createElement('figure'),
-        attachment;
+    var attachmentElement = document.createElement('action-text-attachment'),
+        imageElement,
+        keys = Object.keys(this.trixAttributes),
+        i;
 
-    attachmentElement.className = this.getClassName();
-    attachmentElement.setAttribute('data-trix-attachment', JSON.stringify(this.trixAttributes));
+    for (i = 0; i < keys.length; i += 1) {
+        attachmentElement.setAttribute(keys[i], this.trixAttributes[keys[i]]);
+    }
 
-    attachment = new SummernoteAttachment(attachmentElement);
+    if (this.trixAttributes.previewable) {
+        imageElement = document.createElement('img');
+        imageElement.src = this.trixAttributes.url;
+        imageElement.width = this.trixAttributes.width;
+        imageElement.height = this.trixAttributes.height;
+        attachmentElement.appendChild(imageElement);
+    } else {
+        attachmentElement.textContent = this.trixAttributes.filename;
+    }
 
-    $(this.element).summernote('insertNode', attachment.element);
+    $(this.element).summernote('insertNode', attachmentElement);
 };
 
 SummernoteAttachmentUpload.prototype.createBlobUrl = function (signedId, filename) {

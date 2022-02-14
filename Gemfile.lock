@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/noesya/summernote-rails.git
-  revision: 48b08102ad6cd9f425c116cfc7e14ea7a9c4d238
-  branch: activestorage
-  specs:
-    summernote-rails (0.8.20.1)
-      railties (>= 3.1)
-
-GIT
   remote: https://github.com/noesya/two_factor_authentication.git
   revision: 16b0a2120aed476c2321c074be553edd9c7dc4c0
   specs:
@@ -16,6 +8,12 @@ GIT
       rails (>= 3.1.1)
       randexp
       rotp (>= 4.0.0)
+
+PATH
+  remote: ../summernote-rails
+  specs:
+    summernote-rails (0.8.20.1)
+      railties (>= 3.1)
 
 GEM
   remote: https://rubygems.org/
