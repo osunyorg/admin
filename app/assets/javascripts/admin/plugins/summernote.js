@@ -3,7 +3,7 @@
 $(function () {
     'use strict';
 
-    var cleanupTest = function ($field) {
+    var cleanEmptyAttachments = function ($field) {
         $('action-text-attachment', $field).each(function (_, attachment) {
             var hasImage = $('img', attachment).length > 0,
                 hasVideo = $('video', attachment).length > 0,
@@ -65,13 +65,13 @@ $(function () {
                     attachmentUpload.start();
                 },
                 onMediaDelete: function (_, $editable) {
-                    cleanupTest($editable);
+                    cleanEmptyAttachments($editable);
                 },
                 onKeyup: function (e) {
                     // Delete
                     var $editable = $(e.currentTarget);
                     if (e.keyCode === 8) {
-                        cleanupTest($editable);
+                        cleanEmptyAttachments($editable);
                     }
                 }
             }
