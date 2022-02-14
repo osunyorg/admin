@@ -6,7 +6,7 @@ var SummernoteAttachmentUpload = function (element, file) {
     this.directUpload = new ActiveStorage.DirectUpload(file, this.getDirectUploadUrl(), this);
     this.previewablePattern = /^image(\/(gif|png|jpe?g)|$)/;
     this.blobAttributes = {};
-    this.trixAttributes = {};
+    this.attachmentAttributes = {};
 };
 
 SummernoteAttachmentUpload.prototype.start = function () {
@@ -21,7 +21,7 @@ SummernoteAttachmentUpload.prototype.directUploadDidComplete = function (error, 
     }
 
     this.blobAttributes = attributes;
-    this.trixAttributes = {
+    this.attachmentAttributes = {
         'content-type': attributes.content_type,
         'filename': attributes.filename,
         'filesize': attributes.byte_size,
@@ -30,7 +30,7 @@ SummernoteAttachmentUpload.prototype.directUploadDidComplete = function (error, 
         'url': this.createBlobUrl(attributes.signed_id, attributes.filename)
     };
 
-    if (this.trixAttributes.previewable) {
+    if (this.attachmentAttributes.previewable) {
         this.preloadAndInsertAttachment();
     } else {
         this.insertAttachment();
@@ -44,8 +44,8 @@ SummernoteAttachmentUpload.prototype.preloadAndInsertAttachment = function () {
         that = this;
 
     img.onload = function () {
-        that.trixAttributes.width = this.width;
-        that.trixAttributes.height = this.height;
+        that.attachmentAttributes.width = this.width;
+        that.attachmentAttributes.height = this.height;
         URL.revokeObjectURL(objectUrl);
         that.insertAttachment();
     };
@@ -56,21 +56,21 @@ SummernoteAttachmentUpload.prototype.insertAttachment = function () {
     'use strict';
     var attachmentElement = document.createElement('action-text-attachment'),
         imageElement,
-        keys = Object.keys(this.trixAttributes),
+        keys = Object.keys(this.attachmentAttributes),
         i;
 
     for (i = 0; i < keys.length; i += 1) {
-        attachmentElement.setAttribute(keys[i], this.trixAttributes[keys[i]]);
+        attachmentElement.setAttribute(keys[i], this.attachmentAttributes[keys[i]]);
     }
 
-    if (this.trixAttributes.previewable) {
+    if (this.attachmentAttributes.previewable) {
         imageElement = document.createElement('img');
-        imageElement.src = this.trixAttributes.url;
-        imageElement.width = this.trixAttributes.width;
-        imageElement.height = this.trixAttributes.height;
+        imageElement.src = this.attachmentAttributes.url;
+        imageElement.width = this.attachmentAttributes.width;
+        imageElement.height = this.attachmentAttributes.height;
         attachmentElement.appendChild(imageElement);
     } else {
-        attachmentElement.textContent = this.trixAttributes.filename;
+        attachmentElement.textContent = this.attachmentAttributes.filename;
     }
 
     $(this.element).summernote('insertNode', attachmentElement);
