@@ -11,7 +11,7 @@
           <%= f.association :person, collection: @available_people %>
         </div>
         <div class="col-md-6">
-          <%= f.input :description %>
+          <%= f.input :description, as: :string %>
         </div>
       </div>
     </div>
