@@ -1,0 +1,11 @@
+<% content_for :title, t('activerecord.models.communication/website/index_page.other') %>
+
+<%= render 'admin/communication/websites/sidebar' do %>
+
+  <ul>
+  <% @kinds.each do |key, value| %>
+    <li><%= link_to Communication::Website::IndexPage.human_attribute_name("kind_#{key}"), admin_communication_website_index_path(website_id: @website.id, kind: key) %></li>
+  <% end %>
+  </ul>
+
+<% end %>

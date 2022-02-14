@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_105040) do
+ActiveRecord::Schema.define(version: 2022_02_14_144924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.text "github_path"
     t.string "featured_image_alt"
     t.text "description"
+    t.text "text_new"
     t.index ["communication_website_id"], name: "idx_comm_website_homes_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_homes_on_university_id"
   end
@@ -238,6 +239,21 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
   end
 
+  create_table "communication_website_index_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "title"
+    t.string "path"
+    t.text "description"
+    t.text "text"
+    t.string "featured_image_alt"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["communication_website_id"], name: "idx_comm_website_index_page_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_index_pages_on_university_id"
+  end
+
   create_table "communication_website_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
@@ -288,6 +304,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.text "github_path"
     t.uuid "related_category_id"
     t.string "featured_image_alt"
+    t.text "text_new"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -407,6 +424,19 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.text "description"
     t.boolean "published", default: false
     t.string "featured_image_alt"
+    t.text "accessibility_new"
+    t.text "contacts_new"
+    t.text "duration_new"
+    t.text "evaluation_new"
+    t.text "objectives_new"
+    t.text "opportunities_new"
+    t.text "other_new"
+    t.text "pedagogy_new"
+    t.text "prerequisites_new"
+    t.text "pricing_new"
+    t.text "registration_new"
+    t.text "content_new"
+    t.text "results_new"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -448,7 +478,6 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
 
   create_table "research_journal_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.text "old_text"
     t.datetime "published_at"
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
@@ -462,6 +491,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.string "slug"
     t.boolean "published", default: false
     t.integer "position"
+    t.text "text_new"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
@@ -525,6 +555,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "short_name"
+    t.text "text_new"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
@@ -578,6 +609,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
     t.text "description"
     t.boolean "habilitation", default: false
     t.boolean "tenure", default: false
+    t.text "biography_new"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -680,6 +712,8 @@ ActiveRecord::Schema.define(version: 2022_02_10_105040) do
   add_foreign_key "communication_website_imported_posts", "universities"
   add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_websites", "universities"
+  add_foreign_key "communication_website_index_pages", "communication_websites"
+  add_foreign_key "communication_website_index_pages", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"

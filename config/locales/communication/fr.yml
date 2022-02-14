@@ -16,6 +16,9 @@ fr:
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
+      communication/website/index_page:
+        one: Page d'index
+        other: Pages d'index
       communication/website/menu:
         one: Menu
         other: Menus
@@ -54,6 +57,23 @@ fr:
         text: Texte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
+      communication/website/index_page:
+        description: Description (SEO)
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        kind_home: Accueil
+        kind_communication_posts: Actualités
+        kind_education_programs: Formations
+        kind_research_articles: Articles
+        kind_research_volumes: Volumes
+        kind_persons: Équipe
+        kind_administrators: Équipe administrative
+        kind_authors: Équipe éditoriale
+        kind_researchers: Équipe de recherche
+        kind_teachers: Équipe pédagogique
+        slug: Slug
+        text: Texte
+        title: Titre
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:

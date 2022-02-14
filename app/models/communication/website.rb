@@ -37,6 +37,7 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithHome
   include WithImport
+  include WithIndexPages
   include WithMenuItems
   include WithStructure
 

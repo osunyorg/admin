@@ -7,6 +7,7 @@
 #  name                   :string
 #  position               :integer
 #  short_name             :string
+#  text_new               :text
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  research_laboratory_id :uuid             not null, indexed

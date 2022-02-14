@@ -12,6 +12,7 @@
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
+#  text_new                 :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

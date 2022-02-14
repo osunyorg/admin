@@ -6,6 +6,7 @@
 #  description              :text
 #  featured_image_alt       :string
 #  github_path              :text
+#  text_new                 :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
