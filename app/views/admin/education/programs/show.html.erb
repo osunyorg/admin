@@ -54,8 +54,8 @@
               :contacts,
               :accessibility,
               :other
-            ].each_with_index do |prop, index| %>
-            <%= render 'admin/application/property/text', object: @program, property: prop %>
+            ].each_with_index do |property, index| %>
+            <%= render 'admin/application/property/text', object: @program, property: property %>
         <% end %>
       </div>
     </div>
@@ -78,8 +78,8 @@
                   :evaluation,
                   :opportunities,
                   :results
-                ].each do |prop| %>
-              <%= render 'admin/application/property/text', object: @program, property: prop %>
+                ].each do |property| %>
+              <%= render 'admin/application/property/text', object: @program, property: property %>
             <% end %>
           </div>
         </div>
@@ -115,6 +115,27 @@
   </div>
 <% end %>
 
+<% content_for :preview do %>
+  <%  [
+        :registration,
+        :pricing,
+        :duration,
+        :contacts,
+        :accessibility,
+        :other,
+        :objectives,
+        :content,
+        :prerequisites,
+        :pedagogy,
+        :evaluation,
+        :opportunities,
+        :results
+      ].each do |property| %>
+    <%= @program.send(property).to_s %>
+  <% end %>
+<% end %>
+
 <% content_for :action_bar_right do %>
+  <%= preview_link %>
   <%= edit_link @program %>
 <% end %>
