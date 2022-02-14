@@ -75,6 +75,11 @@
   </div>
 <% end %>
 
+<% content_for :preview do %>
+  <%= @page.text.to_s %>
+<% end %>
+
 <% content_for :action_bar_right do %>
+  <%= preview_link %>
   <%= edit_link @page %>
 <% end %>

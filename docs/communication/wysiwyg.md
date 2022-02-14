@@ -88,10 +88,10 @@ A l'enregistrement, la balise est vidée.
 
 Etapes normales :
 -[x] A l'import d'une image, ajouter l'action-text-attachement autour
+-[x] A la suppression d'une image dans l'éditeur, supprimer l'action-text-attachement autour
 -[x] A l'enregistrement, déshydrater les action-text-attachements
 -[x] A l'édition, réhydrater les action-text-attachements
 -[x] Après l'enregistrement mettre à jour les blobs attachés à l'objet parent (le post, par exemple)
--[x] A la suppression d'une image dans l'éditeur, bien supprimer l'élément <figure data-trix-attachment="..."></figure>
 
 Si un programme a 5 champs summernote avec 3 images dans chaque champ, cela fait 15 attachments à lier au programme.
 Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
