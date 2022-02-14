@@ -27,12 +27,7 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   protected
 
   def get_index_page
-    kind = params[:kind]
-    @index_page = @website.index_pages.where(kind: kind).first_or_initialize(
-      title: t("communication.website.index_pages.default.#{kind}.title"),
-      path: t("communication.website.index_pages.default.#{kind}.path"),
-      description: t("communication.website.index_pages.default.#{kind}.description")
-    )
+    @index_page = @website.index_for(params[:kind])
   end
 
   def ensure_abilities
@@ -48,8 +43,9 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   def index_page_params
     params.require(:communication_website_index_page)
           .permit(
-            :title, :description, :text, :featured_image, :featured_image_delete,
+            :title, :description, :text, :path, :featured_image, :featured_image_delete,
             :featured_image_infos, :featured_image_alt
           )
+          .merge(university_id: current_university.id)
   end
 end

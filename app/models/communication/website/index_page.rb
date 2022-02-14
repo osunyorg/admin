@@ -40,9 +40,4 @@ class Communication::Website::IndexPage < ApplicationRecord
 
   validates :title, :path, presence: true
 
-  def to_s
-    Communication::Website::IndexPage.human_attribute_name("kind_#{kind}")
-  end
-
-
 end
