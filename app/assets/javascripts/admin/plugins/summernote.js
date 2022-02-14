@@ -3,6 +3,19 @@
 $(function () {
     'use strict';
 
+    var cleanupTest = function ($field) {
+        $('action-text-attachment', $field).each(function (_, attachment) {
+            var hasImage = $('img', attachment).length > 0,
+                hasVideo = $('video', attachment).length > 0,
+                hasText = attachment.innerText.trim() !== '';
+
+            if (!hasImage && !hasVideo && !hasText) {
+                $(attachment).remove();
+                $field.trigger('input');
+            }
+        });
+    };
+
     $.extend($.summernote.lang['en-US'].image, {
         dragImageHere: 'Drag file here',
         dropImage: 'Drop file'
@@ -65,8 +78,3 @@ $(function () {
         });
     });
 });
-
-function cleanupTest($field) {
-    // $field.children
-    console.log($field.children());
-}
