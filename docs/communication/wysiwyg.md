@@ -97,6 +97,7 @@ Si un programme a 5 champs Summernote avec 3 images dans chaque champ, cela fait
 Si on enlève une image d'un champ, il faut mettre à jour la liste pour avoir les 14 bons attachments.
 
 Etapes de migration :
+-[x] Ajouter des champs _new
 -[x] Au rails app:fix, transformer le markup Trix en markup Summernote (application_record) dans les propriétés _new
 -[ ] Enlever les scripts de l'application_record
 -[ ] Supprimer les champs ActionText dans les modèles
