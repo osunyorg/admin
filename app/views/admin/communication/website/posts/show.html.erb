@@ -10,7 +10,7 @@
         <div class="card-body">
           <%= render 'admin/application/property/text', object: @post, property: :description %>
           <%= render 'admin/application/property/text', object: @post, property: :text %>
-          <%= render 'admin/application/property/summernote_embeds', object: @post, property: :medias %>
+          <%#= render 'admin/application/property/summernote_embeds', object: @post, property: :medias %>
           <hr>
           <pre><%= @post.text_new.to_html %></pre>
         </div>

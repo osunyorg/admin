@@ -13,6 +13,7 @@
 //= require sortablejs/Sortable
 //= require popper
 //= require summernote/summernote-lite
+//= require summernote-rails
 //= require slug/slug
 //= require cocoon
 //= require_self
