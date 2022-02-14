@@ -9,16 +9,17 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
 
   def edit
     breadcrumb
-    add_breadcrumb @index_page
+    add_breadcrumb t("communication.website.index_pages.default.#{@index_page.kind}.title")
   end
 
   def update
+    # TODO: sync
     # if @index_page.update_and_sync(index_page_params)
     if @index_page.update(index_page_params)
       redirect_to admin_communication_website_indexes_path(@website), notice: t('admin.successfully_updated_html', model: Communication::Website::IndexPage.model_name.human)
     else
       breadcrumb
-      add_breadcrumb @index_page
+      add_breadcrumb t("communication.website.index_pages.default.#{@index_page.kind}.title")
       render :edit, status: :unprocessable_entity
     end
   end
@@ -26,7 +27,12 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   protected
 
   def get_index_page
-    @index_page = @website.index_pages.where(kind: params[:kind]).first_or_initialize
+    kind = params[:kind]
+    @index_page = @website.index_pages.where(kind: kind).first_or_initialize(
+      title: t("communication.website.index_pages.default.#{kind}.title"),
+      path: t("communication.website.index_pages.default.#{kind}.path"),
+      description: t("communication.website.index_pages.default.#{kind}.description")
+    )
   end
 
   def ensure_abilities

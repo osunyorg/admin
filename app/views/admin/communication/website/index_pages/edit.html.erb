@@ -1,4 +1,4 @@
-<% content_for :title, Communication::Website::IndexPage.human_attribute_name("kind_#{@index_page.kind}") %>
+<% content_for :title, t("communication.website.index_pages.default.#{@index_page.kind}.title") %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
 

@@ -61,16 +61,6 @@ fr:
         description: Description (SEO)
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        kind_home: Accueil
-        kind_communication_posts: Actualités
-        kind_education_programs: Formations
-        kind_research_articles: Articles
-        kind_research_volumes: Volumes
-        kind_persons: Équipe
-        kind_administrators: Équipe administrative
-        kind_authors: Équipe éditoriale
-        kind_researchers: Équipe de recherche
-        kind_teachers: Équipe pédagogique
         slug: Slug
         text: Texte
         title: Titre
@@ -162,6 +152,48 @@ fr:
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
+      index_pages:
+        default:
+          administrators:
+            description: Liste des membres de l'équipe administrative
+            path: equipe-administrative
+            title: Équipe administrative
+          authors:
+            description: Liste des membres de l'équipe éditoriale
+            path: equipe-editoriale
+            title: Équipe éditoriale
+          communication_posts:
+            description: Liste des actualités
+            path: actualites
+            title: Actualités
+          education_programs:
+            description: Liste des formations proposées
+            path: offre-de-formation
+            title: L'offre de formation
+          home:
+            description: ''
+            path: accueil
+            title: Accueil
+          persons:
+            description: Liste des membres de l'équipe
+            path: equipe
+            title: Équipe
+          research_articles:
+            description: Liste des articles
+            path: articles
+            title: Articles
+          research_volumes:
+            description: Liste des volumes
+            path: volumes
+            title: Volumes
+          researchers:
+            description: Liste des membres de l'équipe de recherche
+            path: equipe-de-recherche
+            title: Équipe de recherche
+          teachers:
+            description: Liste des membres de l'équipe pédagogique
+            path: equipe-pedagogique
+            title: Équipe pédagogique
       last_pages: Dernières pages
       last_posts: Dernières actualités
       posts:

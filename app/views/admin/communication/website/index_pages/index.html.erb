@@ -4,7 +4,8 @@
 
   <ul>
   <% @kinds.each do |key, value| %>
-    <li><%= link_to Communication::Website::IndexPage.human_attribute_name("kind_#{key}"), admin_communication_website_index_path(website_id: @website.id, kind: key) %></li>
+    <li><%= link_to t("communication.website.index_pages.default.#{key}.title"), 
+                    admin_communication_website_index_path(website_id: @website.id, kind: key) %></li>
   <% end %>
   </ul>
 
