@@ -50,8 +50,23 @@ $(function () {
                 onImageUpload: function (files) {
                     var attachmentUpload = new SummernoteAttachmentUpload(this, files[0]);
                     attachmentUpload.start();
+                },
+                onMediaDelete: function (_, $editable) {
+                    cleanupTest($editable);
+                },
+                onKeyup: function(e) {
+                    // Delete
+                    var $editable = $(e.currentTarget);
+                    if (e.keyCode === 8) {
+                        cleanupTest($editable);
+                    }
                 }
             }
         });
     });
 });
+
+function cleanupTest($field) {
+    // $field.children
+    console.log($field.children());
+}
