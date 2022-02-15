@@ -63,7 +63,9 @@ class Communication::Website::Block < ApplicationRecord
         slug = person['slug']
         next if slug.blank?
         person = university.people.find_by slug: slug
-        dependencies << person unless person.nil?
+        next if person.nil?
+        dependencies += [person]
+        dependencies += person.active_storage_blobs
       end
     end
     dependencies.uniq
