@@ -25,7 +25,7 @@ Pour commencer, les valeurs de l'enum seront :
 ### Partial about
 Un partial que l'on peut ajouter à un show d'objet, avec :
 - la liste des blocs utilisés (avec boutons show et edit)
-- la possibilité de les sort
+- la possibilité de les ordonner (position)
 - un bouton pour ajouter un bloc
 
 ```
@@ -45,7 +45,7 @@ views/admin/communication/website/blocks/templates/partners/_edit.html.erb
 ```
 
 ### Concern
-Tous les objets ayant des blocs utilisent le concern `WithBlocks`, qui ajoute la méthode suivante `blocks` (la liste des blocs, dans l'ordre).
+Tous les objets ayant des blocs utilisent le concern `WithBlocks`, qui ajoute la méthode `blocks` (la liste des blocs, dans l'ordre).
 
 ### Export statique
 Les blocs sont exportés dans le frontmatter grâce au partial

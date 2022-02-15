@@ -1,4 +1,4 @@
-# Import
+# Import WordPress
 
 ## Contexte
 
