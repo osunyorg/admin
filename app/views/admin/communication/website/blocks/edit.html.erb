@@ -1,0 +1,14 @@
+<% content_for :title, @block %>
+<%
+@block.data = {} if @block.data.nil? || @block.data.blank?
+@block.data['elements'] ||= []
+%>
+<div ng-app ng-init="data = <%= @block.data.is_a?(String) ? @block.data : @block.data.to_json %>">
+  <%= simple_form_for [:admin, @block] do |f| %>
+    <%= render "admin/communication/website/blocks/templates/#{@block.template}/edit", f: f %>
+    <textarea name="communication_website_block[data]" rows="20" cols="200" class="d-none">{{ data | json}}</textarea>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_144924) do
+ActiveRecord::Schema.define(version: 2022_02_15_142845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -79,6 +79,21 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
   end
 
+  create_table "communication_website_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "about_type"
+    t.uuid "about_id"
+    t.integer "template", default: 0, null: false
+    t.jsonb "data"
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
+    t.index ["communication_website_id"], name: "index_communication_website_blocks_on_communication_website_id"
+    t.index ["university_id"], name: "index_communication_website_blocks_on_university_id"
+  end
+
   create_table "communication_website_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
@@ -126,7 +141,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.text "github_path"
     t.string "featured_image_alt"
     t.text "description"
-    t.text "text_new"
+    t.text "text"
     t.index ["communication_website_id"], name: "idx_comm_website_homes_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_homes_on_university_id"
   end
@@ -304,7 +319,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.text "github_path"
     t.uuid "related_category_id"
     t.string "featured_image_alt"
-    t.text "text_new"
+    t.text "text"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -327,7 +342,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.uuid "author_id"
     t.boolean "pinned", default: false
     t.string "featured_image_alt"
-    t.text "text_new"
+    t.text "text"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
@@ -424,19 +439,19 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.text "description"
     t.boolean "published", default: false
     t.string "featured_image_alt"
-    t.text "accessibility_new"
-    t.text "contacts_new"
-    t.text "duration_new"
-    t.text "evaluation_new"
-    t.text "objectives_new"
-    t.text "opportunities_new"
-    t.text "other_new"
-    t.text "pedagogy_new"
-    t.text "prerequisites_new"
-    t.text "pricing_new"
-    t.text "registration_new"
-    t.text "content_new"
-    t.text "results_new"
+    t.text "accessibility"
+    t.text "contacts"
+    t.text "duration"
+    t.text "evaluation"
+    t.text "objectives"
+    t.text "opportunities"
+    t.text "other"
+    t.text "pedagogy"
+    t.text "prerequisites"
+    t.text "pricing"
+    t.text "registration"
+    t.text "content"
+    t.text "results"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -491,7 +506,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.string "slug"
     t.boolean "published", default: false
     t.integer "position"
-    t.text "text_new"
+    t.text "text"
     t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
@@ -555,7 +570,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "short_name"
-    t.text "text_new"
+    t.text "text"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
@@ -609,7 +624,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
     t.text "description"
     t.boolean "habilitation", default: false
     t.boolean "tenure", default: false
-    t.text "biography_new"
+    t.text "biography"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -687,6 +702,8 @@ ActiveRecord::Schema.define(version: 2022_02_14_144924) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
+  add_foreign_key "communication_website_blocks", "communication_websites"
+  add_foreign_key "communication_website_blocks", "universities"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"

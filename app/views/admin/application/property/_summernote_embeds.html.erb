@@ -1,0 +1,27 @@
+<h3 class="h5"><%= object.class.human_attribute_name(property) %></h3>
+<% if object.summernote_embeds.any? %>
+  <% object.summernote_embeds.each do |embed| %>
+    <div class="row mb-3">
+      <div class="col-md-2">
+        <div class="img-thumbnail text-center">
+          <% if embed.variable? %>
+            <%= kamifusen_tag embed, class: 'img-fluid' %>
+          <% else %>
+            <i class="fas fa-file p-3 fa-2x"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <p class="mb-1">
+          <%= embed.filename %>
+          <%= number_to_human_size embed.metadata['filesize'] %>
+        </p>
+        <%= link_to t('download'),
+                    embed.blob.url(disposition: 'attachment', filename: embed.filename),
+                    class: 'btn btn-xs btn-light' %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>0</p>
+<% end %>

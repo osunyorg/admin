@@ -1,17 +1,17 @@
 # Templates
 
-## Template de tous les sites
+## Thème
 
-https://github.com/osuny-org/template
+https://github.com/noesya/osuny-hugo-theme
 
-## Templates de tous les journaux
+## Template
 
-https://github.com/osuny-org/template-journal
+https://github.com/noesya/osuny-hugo-template
 
 Pour faire la mise à jour :
 
 ```
-git remote add template git@github.com:osuny-org/template.git
+git remote add template git@github.com:noesya/osuny-hugo-template.git
 git fetch --all
 git merge template/master --allow-unrelated-histories
 ```
@@ -23,7 +23,7 @@ https://github.com/osuny-org/clermontauvergne-journal-degrowth
 Pour faire la mise à jour :
 
 ```
-git remote add template git@github.com:osuny-org/template-journal.git
+git remote add template git@github.com:noesya/osuny-hugo-template.git
 git fetch --all
 git merge template/master --allow-unrelated-histories
 ```

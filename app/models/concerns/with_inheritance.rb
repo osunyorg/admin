@@ -4,13 +4,17 @@ module WithInheritance
   included do
     def self.rich_text_areas_with_inheritance(*properties)
       properties.each do |property|
-        has_rich_text property
-        define_method :"best_#{property}" do
-          best(property)
-        end
-        define_method :"best_#{property}_source" do
-          best_source(property)
-        end
+        has_summernote property
+
+        class_eval <<-CODE, __FILE__, __LINE__ + 1
+          def best_#{property}
+            best("#{property}")
+          end
+
+          def best_#{property}_source
+            best_source("#{property}")
+          end
+        CODE
       end
     end
   end
@@ -22,9 +26,9 @@ module WithInheritance
     value.blank? ? parent&.send("best_#{property}") : value
   end
 
-  def best_source(property)
+  def best_source(property, is_ancestor: false)
     value = send(property)
-    return nil if !value.blank? # There is a value, no inheritance needed
-    best(property)&.record
+    return (is_ancestor ? self : nil) if value.present?
+    parent&.send(:best_source, property, is_ancestor: true)
   end
 end

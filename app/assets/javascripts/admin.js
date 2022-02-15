@@ -5,12 +5,15 @@
 //= require notyf/notyf.min
 //= require simple_form_password_with_hints
 //= require simple_form_bs5_file_input
+//= require angular
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
 //= require appstack/app
 //= require gdpr/cookie_consent
 //= require trix
 //= require sortablejs/Sortable
+//= require summernote/summernote-lite
+//= require summernote-rails
 //= require slug/slug
 //= require cocoon
 //= require_self

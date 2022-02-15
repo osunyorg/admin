@@ -66,26 +66,40 @@
       <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
     </div>
     <div class="card-body">
-      <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
+        </div>
+        <div class="col-md-8 clearfix">
+          <div class="row mb-2">
+            <div class="col-md-8">
+              <label class="form-label"><%= Education::Program.human_attribute_name('teachers') %></label>
+            </div>
+            <div class="col-md-4 text-end">
+              <%= link_to_add_association t('add'),
+                                          f,
+                                          :university_person_involvements,
+                                          class: button_classes,
+                                          partial: 'admin/education/programs/involvement_fields',
+                                          data: {
+                                            'association-insertion-method': 'append',
+                                            'association-insertion-node':   '#involvements',
+                                          } %>
+            </div>
+          </div>
 
-      <p><%= Education::Program.human_attribute_name('teachers') %></p>
-      <%= link_to_add_association t('add'), f, :university_person_involvements,
-                                  class: "btn btn-primary mb-3",
-                                  partial: 'admin/education/programs/involvement_fields',
-                                  data: {
-                                    'association-insertion-method': 'append',
-                                    'association-insertion-node':   '#involvements',
-                                  } %>
+          <div id="involvements">
+            <%
+            sorted_involvements = program.university_person_involvements.sort_by { |involvement|
+              [involvement.person&.last_name, involvement.person&.first_name]
+            }
+            %>
+            <%= f.simple_fields_for :university_person_involvements, sorted_involvements, include_id: false do |involvement_f| %>
+              <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
+            <% end %>
+          </div>
 
-      <div class="row mb-3" id="involvements">
-        <%
-        sorted_involvements = program.university_person_involvements.sort_by { |involvement|
-          [involvement.person&.last_name, involvement.person&.first_name]
-        }
-        %>
-        <%= f.simple_fields_for :university_person_involvements, sorted_involvements, include_id: false do |involvement_f| %>
-          <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

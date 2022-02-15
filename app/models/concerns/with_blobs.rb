@@ -13,20 +13,25 @@ module WithBlobs
     blobs_with_ids inherited_blob_ids
   end
 
+  def summernote_embeds
+    summernote_embeds_reflection_names.map { |summernote_reflection_name|
+      public_send(summernote_reflection_name)
+    }.flatten
+  end
+
   protected
 
   def explicit_blob_ids
-    [rich_text_blob_ids]
+    [summernote_blob_ids]
   end
 
   def inherited_blob_ids
     []
   end
 
-  def rich_text_blob_ids
-    rich_text_reflection_names.map { |rich_text_reflection_name|
-      rich_text = public_send(rich_text_reflection_name)
-      rich_text.present? ? rich_text.embeds.blobs.pluck(:id) : []
+  def summernote_blob_ids
+    summernote_embeds_reflection_names.map { |summernote_reflection_name|
+      public_send(summernote_reflection_name).pluck(:blob_id)
     }.flatten
   end
 
@@ -34,7 +39,7 @@ module WithBlobs
     university.active_storage_blobs.where(id: ids.flatten.compact)
   end
 
-  def rich_text_reflection_names
-    @rich_text_reflection_names ||= _reflections.select { |name, reflection| reflection.class_name == "ActionText::RichText" }.keys
+  def summernote_embeds_reflection_names
+    @summernote_embeds_reflection_names ||= _reflections.keys.select { |name| name.ends_with?('_summernote_embeds_attachments') }
   end
 end

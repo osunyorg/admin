@@ -12,7 +12,7 @@
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
-#  text_new                 :text
+#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -46,8 +46,9 @@ class Communication::Website::Page < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
   include WithTree
   include WithPosition
+  include WithBlocks
 
-  has_rich_text :text
+  has_summernote :text
 
   belongs_to :university
   belongs_to :website,
@@ -77,7 +78,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + descendents + active_storage_blobs + siblings
+    [self] + descendents + active_storage_blobs + siblings + git_block_dependencies
   end
 
   def git_destroy_dependencies(website)

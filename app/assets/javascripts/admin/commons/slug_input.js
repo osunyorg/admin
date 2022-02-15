@@ -1,10 +1,7 @@
-/*global $ */
 window.osuny.slugInput = {
     init: function () {
         'use strict';
-        var sourceInput,
-            slugInput,
-            i;
+        var i;
         this.slugInputs = document.querySelectorAll('.js-slug-input');
 
         if (this.slugInputs.length === 0) {

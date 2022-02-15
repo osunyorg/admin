@@ -85,8 +85,8 @@ en:
       send_code_instead: "Send me a code instead"
       send_email_code: 'Send me a code via email'
       success: ""
+  download: Download
   edit: Edit
-  empty_folder: Empty folder
   false: No
   filters:
     attributes:
@@ -95,6 +95,10 @@ en:
     buttons:
       expand: Filter table
       submit: Filter
+  folder:
+    empty: Folder is empty
+    open: Open folder
+    close: Close folder
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Hello %{name}!"
@@ -116,6 +120,9 @@ en:
   metadata: Metadata
   please_confirm: Are you sure?
   please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
+  preview:
+    button: Preview
+    title: Mobile preview
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   quit: Quit

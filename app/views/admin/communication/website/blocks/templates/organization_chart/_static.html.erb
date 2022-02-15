@@ -1,0 +1,12 @@
+<% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
+<% block.data['elements'].each do |element| %>
+      - title: >
+          <%= element['title'] %>
+        persons:
+<% element['persons'].each do |person| %>
+          - slug: "<%= person['slug'] %>"
+            role: >
+              <%= person['role'] %>
+<% end %>
+<% end %>
+<% end %>

@@ -41,12 +41,14 @@ gem 'has_scope', '~> 0.8.0'
 
 # Front
 gem 'jquery-rails'
+gem 'angularjs-rails'
 gem 'sassc-rails'
 gem 'jbuilder'
 gem 'kamifusen'#, path: '../kamifusen'
 gem 'bootstrap'
 gem 'sanitize'
-gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git'
+gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git', branch: 'activestorage'
+# gem 'summernote-rails', path: '../summernote-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

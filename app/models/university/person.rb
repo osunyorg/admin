@@ -3,7 +3,7 @@
 # Table name: university_people
 #
 #  id                :uuid             not null, primary key
-#  biography_new     :text
+#  biography         :text
 #  description       :text
 #  email             :string
 #  first_name        :string
@@ -37,7 +37,7 @@ class University::Person < ApplicationRecord
   include WithPicture
   include WithEducation
 
-  has_rich_text :biography
+  has_summernote :biography
 
   belongs_to :university
   belongs_to :user, optional: true
@@ -141,7 +141,14 @@ class University::Person < ApplicationRecord
     @teacher ||= University::Person::Teacher.find(id)
   end
 
+  def in_block_dependencies?(website)
+    website.blocks.find_each do |block|
+      return true if in? block.git_dependencies
+    end
+  end
+
   def for_website?(website)
+    in_block_dependencies?(website) ||
     administrator.for_website?(website) ||
     author.for_website?(website) ||
     researcher.for_website?(website) ||
@@ -159,6 +166,6 @@ class University::Person < ApplicationRecord
   end
 
   def sanitize_email
-    self.email = self.email.downcase.strip
+    self.email = self.email.to_s.downcase.strip
   end
 end

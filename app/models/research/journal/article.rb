@@ -10,7 +10,7 @@
 #  published_at               :datetime
 #  references                 :text
 #  slug                       :string
-#  text_new                   :text
+#  text                       :text
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
@@ -38,7 +38,7 @@ class Research::Journal::Article < ApplicationRecord
   include WithBlobs
   include WithPosition
 
-  has_rich_text :text
+  has_summernote :text
   has_one_attached :pdf
 
   belongs_to :university

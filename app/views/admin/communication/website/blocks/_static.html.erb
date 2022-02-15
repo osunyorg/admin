@@ -1,0 +1,7 @@
+<% if about.blocks.any? %>
+blocks:
+<% about.blocks.each do |block| %>
+  - template: <%= block.template %>
+    data:
+<%= render "admin/communication/website/blocks/templates/#{block.template}/static", block: block if block.data %><% end %>
+<% end %>
