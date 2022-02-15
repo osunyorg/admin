@@ -11,7 +11,7 @@
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
-#  text_new                 :text
+#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -38,8 +38,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
 
-  has_rich_text :text
-  has_summernote :text_new
+  has_summernote :text
 
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',

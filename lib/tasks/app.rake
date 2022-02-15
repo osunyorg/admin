@@ -8,38 +8,12 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Communication::Website::Home.find_each do |object|
-      object.update text_new: clean_for_summernote(object.text)
-    end
-    Communication::Website::Post.find_each do |object|
-      object.update text_new: clean_for_summernote(object.text)
-    end
-    Communication::Website::Page.find_each do |object|
-      object.update text_new: clean_for_summernote(object.text)
-    end
-    Research::Journal::Article.find_each do |object|
-      object.update text_new: clean_for_summernote(object.text)
-    end
-    Research::Laboratory::Axis.find_each do |object|
-      object.update text_new: clean_for_summernote(object.text)
-    end
-    University::Person.find_each do |object|
-      object.update biography_new: clean_for_summernote(object.biography)
-    end
-    Education::Program.find_each do |object|
-      object.update accessibility_new: clean_for_summernote(object.accessibility),
-                    contacts_new: clean_for_summernote(object.contacts),
-                    duration_new: clean_for_summernote(object.duration),
-                    evaluation_new: clean_for_summernote(object.evaluation),
-                    objectives_new: clean_for_summernote(object.objectives),
-                    opportunities_new: clean_for_summernote(object.opportunities),
-                    other_new: clean_for_summernote(object.other),
-                    pedagogy_new: clean_for_summernote(object.pedagogy),
-                    prerequisites_new: clean_for_summernote(object.prerequisites),
-                    pricing_new: clean_for_summernote(object.pricing),
-                    registration_new: clean_for_summernote(object.registration),
-                    content_new: clean_for_summernote(object.content),
-                    results_new: clean_for_summernote(object.results)
+    [
+      "text", "biography", "accessibility", "contacts", "duration",
+      "evaluation", "objectives", "opportunities", "other", "pedagogy",
+      "prerequisites", "pricing", "registration", "content", "results"
+    ].each do |attribute|
+      ActiveStorage::Attachment.where(name: "#{attribute}_new_summernote_embeds").find_each { _1.update_column :name, "#{attribute}_summernote_embeds" }
     end
   end
 
