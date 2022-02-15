@@ -28,7 +28,7 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
     @block.university = @website.university
     @block.website = @website
     if @block.save
-      redirect_to [:admin, @block.about], notice: t('admin.successfully_created_html', model: @block.to_s)
+      redirect_to [:edit, :admin, @block], notice: t('admin.successfully_created_html', model: @block.to_s)
     else
       render :new, status: :unprocessable_entity
     end
