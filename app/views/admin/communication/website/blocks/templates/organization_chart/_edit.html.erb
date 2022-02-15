@@ -2,7 +2,7 @@
 <div class="card" ng-repeat="element in data.elements">
   <div class="card-body">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="row">
           <div class="col-md-11">
             <input class="form-control" type="text" ng-model="element.title">
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="offset-md-1 col-md-6">
+      <div class="offset-md-1 col-md-7">
         <div class="row">
           <div class="col-md-8">
             <p>People</p>
@@ -23,12 +23,15 @@
         </div>
         <div ng-repeat="person in element.persons" class="mb-2">
           <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-5">
               <select class="form-select select" ng-model="person.slug">
                 <% @website.university.people.each_with_index do |person, index| %>
                 <option value="<%= person.slug %>"><%= person %></option>
                 <% end %>
               </select>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" type="text" ng-model="person.role" placeholder="Type role here">
             </div>
             <div class="col-md-1 text-end">
               <a class="btn btn-sm btn-danger mt-1" ng-click="element.persons.splice(element.persons.indexOf(person))"><i class="fas fa-trash"></i></a>
