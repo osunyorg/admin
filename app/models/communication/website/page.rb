@@ -48,6 +48,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPosition
 
   has_rich_text :text
+  has_summernote :text_new
 
   belongs_to :university
   belongs_to :website,

@@ -55,7 +55,6 @@
               :other
             ].each_with_index do |property, index| %>
             <%= render 'admin/application/property/text', object: @program, property: property %>
-            <%= render 'admin/application/property/text_new', object: @program, property: property %>
         <% end %>
       </div>
     </div>
@@ -77,7 +76,6 @@
               :results
             ].each do |property| %>
           <%= render 'admin/application/property/text', object: @program, property: property %>
-          <%= render 'admin/application/property/text_new', object: @program, property: property %>
         <% end %>
       </div>
     </div>

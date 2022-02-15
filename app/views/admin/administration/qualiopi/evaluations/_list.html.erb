@@ -4,7 +4,6 @@
       <th><%= Education::Program.model_name.human %></th>
       <% checks.each do |check| %>
         <th><%= Education::Program.human_attribute_name(check) %></th>
-        <th><%= Education::Program.human_attribute_name(check) %> (new)</th>
       <% end %>
     </tr>
   </thead>
@@ -23,16 +22,8 @@
         </td>
         <% checks.each do |check| %>
           <% valid = !program.public_send("best_#{check}").blank? %>
-          <% valid_new = !program.public_send("best_#{check}_new").blank? %>
           <td>
             <% if valid %>
-              <span class="fas fa-check text-success"></span>
-            <% else %>
-              <span class="fas fa-times text-danger"></span>
-            <% end %>
-          </td>
-          <td>
-            <% if valid_new %>
               <span class="fas fa-check text-success"></span>
             <% else %>
               <span class="fas fa-times text-danger"></span>

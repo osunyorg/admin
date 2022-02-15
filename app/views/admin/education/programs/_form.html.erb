@@ -36,15 +36,10 @@
         <div class="card-body">
           <%= f.input :description %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :registration %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :pricing %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :duration %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :duration %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :accessibility %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :other %>
         </div>
       </div>
     </div>
@@ -72,7 +67,6 @@
     </div>
     <div class="card-body">
       <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
-      <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :contacts %>
 
       <p><%= Education::Program.human_attribute_name('teachers') %></p>
       <%= link_to_add_association t('add'), f, :university_person_involvements,
@@ -103,21 +97,14 @@
       <div class="row">
         <div class="col-md-6">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :objectives %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :content %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :prerequisites %>
         </div>
         <div class="col-md-6">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :pedagogy %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :evaluation %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :opportunities %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance_new', f: f, property: :results %>
         </div>
       </div>
     </div>

@@ -38,6 +38,7 @@ class University::Person < ApplicationRecord
   include WithEducation
 
   has_rich_text :biography
+  has_summernote :biography_new
 
   belongs_to :university
   belongs_to :user, optional: true
