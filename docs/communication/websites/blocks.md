@@ -15,6 +15,7 @@ communication/website/Block
 - website:references
 - about:references (polymorphic)
 - template:integer (enum)
+- position:integer
 - data:jsonb
 ```
 

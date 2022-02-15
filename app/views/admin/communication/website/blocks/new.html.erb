@@ -1,0 +1,20 @@
+<% content_for :title, t('communication.website.block.choose_template') %>
+
+<div class="row">
+  <% Communication::Website::Block.templates.keys.each do |template| %>
+    <% @block.template = template %>
+    <div class="col-lg-3 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t "enums.communication.website.block.template.#{template}" %></h5>
+          <%= simple_form_for [:admin, @block] do |f| %>
+            <%= f.input :about_type, as: :hidden %>
+            <%= f.input :about_id, as: :hidden %>
+            <%= f.input :template, as: :hidden %>
+            <%= f.submit t('communication.website.block.choose'), class: button_classes %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

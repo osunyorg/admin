@@ -5,12 +5,12 @@
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
 #  keywords                   :text
-#  old_text                   :text
 #  position                   :integer
 #  published                  :boolean          default(FALSE)
 #  published_at               :datetime
 #  references                 :text
 #  slug                       :string
+#  text_new                   :text
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null

@@ -7,6 +7,9 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/block:
+        one: Content block
+        other: Content blocks
       communication/website/category:
         one: Category
         other: Categories
@@ -43,6 +46,9 @@ en:
         about_type: About
         name: Name
         url: URL
+      communication/website/block:
+        name: Name
+        template: Kind of block
       communication/website/category:
         children: Children categories
         description: Description
@@ -130,6 +136,9 @@ en:
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
     website:
+      block:
+        choose_template: Choose the kind of block to add
+        choose: Choose
       git: Git
       imported:
         from: Imported from
@@ -150,6 +159,10 @@ en:
   enums:
     communication:
       website:
+        block:
+          template:
+            organization_chart: Organization chart
+            partners: Partners
         menu:
           item:
             kind:

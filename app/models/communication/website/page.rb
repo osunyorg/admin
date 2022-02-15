@@ -12,6 +12,7 @@
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
+#  text_new                 :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -45,6 +46,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
   include WithTree
   include WithPosition
+  include WithBlocks
 
   has_rich_text :text
 

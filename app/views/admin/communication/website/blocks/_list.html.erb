@@ -1,0 +1,28 @@
+<div class="card flex-fill w-100">
+  <div class="card-header">
+    <div class="float-end">
+      <%= link_to t('add'),
+                  new_admin_communication_website_block_path(about_id: about.id, about_type: about.class.name),
+                  class: button_classes %>
+    </div>
+    <h2 class="card-title mb-0 h5">
+      <%= Communication::Website::Block.model_name.human(count: 2) %>
+    </h2>
+  </div>
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
+          <th><%= Communication::Website::Block.human_attribute_name('name') %></th>
+          <th><%= Communication::Website::Block.human_attribute_name('template') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% about.blocks.each do |block| %>
+          <tr>
+            <td><%= link_to block, edit_admin_communication_website_block_path(block) %></td>
+            <td><%= block.template_i18n  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
