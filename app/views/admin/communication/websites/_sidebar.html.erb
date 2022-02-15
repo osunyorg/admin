@@ -10,11 +10,6 @@
             ability: can?(:read, @website)
           },
           {
-            title: Communication::Website::Post.model_name.human(count: 2),
-            path: admin_communication_website_posts_path(website_id: @website),
-            ability: can?(:read, Communication::Website::Post)
-          },
-          {
             title: Communication::Website::Home.model_name.human,
             path: admin_communication_website_home_path(website_id: @website),
             ability: can?(:read, Communication::Website::Home)
@@ -23,6 +18,11 @@
             title: Communication::Website::Page.model_name.human(count: 2),
             path: admin_communication_website_pages_path(website_id: @website),
             ability: can?(:read, Communication::Website::Page)
+          },
+          {
+            title: Communication::Website::Post.model_name.human(count: 2),
+            path: admin_communication_website_posts_path(website_id: @website),
+            ability: can?(:read, Communication::Website::Post)
           },
           {
             title: Communication::Website::Category.model_name.human(count: 2),
