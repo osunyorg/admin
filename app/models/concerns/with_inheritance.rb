@@ -5,12 +5,28 @@ module WithInheritance
     def self.rich_text_areas_with_inheritance(*properties)
       properties.each do |property|
         has_rich_text property
-        define_method :"best_#{property}" do
-          best(property)
-        end
-        define_method :"best_#{property}_source" do
-          best_source(property)
-        end
+        has_summernote :"#{property}_new"
+
+        class_eval <<-CODE, __FILE__, __LINE__ + 1
+          def best_#{property}
+            best("#{property}")
+          end
+
+          def best_#{property}_source
+            best_source("#{property}")
+          end
+
+          def best_#{property}_new
+            value = send("#{property}_new")
+            value.blank? ? parent&.best_#{property}_new : value
+          end
+
+          def best_#{property}_new_source(is_ancestor: false)
+            value = send("#{property}_new")
+            return (is_ancestor ? self : nil) if value.present?
+            parent&.best_#{property}_new_source(is_ancestor: true)
+          end
+        CODE
       end
     end
   end

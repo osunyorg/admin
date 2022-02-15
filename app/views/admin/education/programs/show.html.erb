@@ -46,7 +46,6 @@
       </div>
       <div class="card-body">
         <%= render 'admin/application/property/text', object: @program, property: :description %>
-        <p><%= @program.description %></p>
         <% [
               :registration,
               :pricing,
@@ -56,6 +55,7 @@
               :other
             ].each_with_index do |property, index| %>
             <%= render 'admin/application/property/text', object: @program, property: property %>
+            <%= render 'admin/application/property/text_new', object: @program, property: property %>
         <% end %>
       </div>
     </div>
@@ -67,22 +67,18 @@
         <h5 class="card-title mb-0"><%= t('education.program.educational_informations') %></h5>
       </div>
       <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <% i = 0 %>
-            <%  [
-                  :objectives,
-                  :content,
-                  :prerequisites,
-                  :pedagogy,
-                  :evaluation,
-                  :opportunities,
-                  :results
-                ].each do |property| %>
-              <%= render 'admin/application/property/text', object: @program, property: property %>
-            <% end %>
-          </div>
-        </div>
+        <%  [
+              :objectives,
+              :content,
+              :prerequisites,
+              :pedagogy,
+              :evaluation,
+              :opportunities,
+              :results
+            ].each do |property| %>
+          <%= render 'admin/application/property/text', object: @program, property: property %>
+          <%= render 'admin/application/property/text_new', object: @program, property: property %>
+        <% end %>
       </div>
     </div>
   </div>
