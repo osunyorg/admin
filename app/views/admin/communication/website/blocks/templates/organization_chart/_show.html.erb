@@ -1,0 +1,6 @@
+<% @block.data['elements'].each do |element| %>
+  <h2><%= element['title'] %></h2>
+  <% element['persons'].each do |person| %>
+    <p><%= person['slug'] %></p>
+  <% end %>
+<% end %>

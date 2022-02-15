@@ -10,6 +10,10 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
     end
   end
 
+  def show
+    breadcrumb
+  end
+
   def new
     @block.about_type = params[:about_type]
     @block.about_id = params[:about_id]
@@ -24,7 +28,7 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
     @block.university = @website.university
     @block.website = @website
     if @block.save
-      redirect_to [:admin, @block.about], notice: t('admin.successfully_created_html', model: @block.to_s)
+      redirect_to [:edit, :admin, @block], notice: t('admin.successfully_created_html', model: @block.to_s)
     else
       render :new, status: :unprocessable_entity
     end
@@ -50,7 +54,11 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
     super
     add_breadcrumb @block.about.model_name.human(count: 2), [:admin, @block.about.class]
     add_breadcrumb @block.about, [:admin, @block.about]
-    add_breadcrumb t('communication.website.block.choose_template')
+    if @block.new_record?
+      add_breadcrumb t('communication.website.block.choose_template')
+    else
+      add_breadcrumb @block
+    end
   end
 
 

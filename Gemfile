@@ -41,6 +41,7 @@ gem 'has_scope', '~> 0.8.0'
 
 # Front
 gem 'jquery-rails'
+gem 'angularjs-rails'
 gem 'sassc-rails'
 gem 'jbuilder'
 gem 'kamifusen'#, path: '../kamifusen'
