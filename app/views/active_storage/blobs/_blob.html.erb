@@ -2,7 +2,7 @@
   <% if blob.image? %>
     <%= kamifusen_tag blob, width: 800 %>
   <% elsif blob.video? %>
-    <video>
+    <video controls>
       <source src="<%= rails_blob_path(blob) %>" type="<%= blob.content_type %>">
     </video>
   <% else %>

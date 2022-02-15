@@ -39,6 +39,7 @@ class Research::Journal::Article < ApplicationRecord
   include WithPosition
 
   has_rich_text :text
+  has_summernote :text_new
   has_one_attached :pdf
 
   belongs_to :university

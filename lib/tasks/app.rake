@@ -8,41 +8,52 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Communication::Website.find_each { |website|
-      website.build_home(university_id: website.university_id).save if website.home.nil?
-      website.update_column(:url, "https://#{website.url}") unless website.url.blank? || website.url.starts_with?('https://')
-    }
-
-    Education::Program.where(slug: [nil, '']).find_each { |program| program.update_column(:slug, program.name.parameterize) }
-    Research::Journal::Article.where(slug: [nil, '']).find_each { |article| article.update_column(:slug, article.title.parameterize) }
-    Research::Journal::Volume.where(slug: [nil, '']).find_each { |volume| volume.update_column(:slug, volume.title.parameterize) }
-
-    10.times do
-      Education::Program.find_each { |p| p.update_column :path, "#{p.parent&.path}/#{p.slug}".gsub(/\/+/, '/') }
+    Communication::Website::Home.find_each do |object|
+      object.update text_new: clean_for_summernote(object.text)
     end
-
-    Communication::Website::Post.find_each do |post|
-      post.categories = post.categories.select { |category| category.children.none? { |child| post.categories.include?(child) } }
+    Communication::Website::Post.find_each do |object|
+      object.update text_new: clean_for_summernote(object.text)
     end
-
-    Research::Journal::Article.where(position: nil).order(:published_at, :created_at).group_by(&:research_journal_volume_id).each do |_, articles|
-      articles.each_with_index do |article, index|
-        article.update_columns({
-          published: article.published_at.present?,
-          position: index + 1
-        })
-      end
+    Communication::Website::Page.find_each do |object|
+      object.update text_new: clean_for_summernote(object.text)
     end
-
-    # MICA & Class'Code
-    Communication::Website.where(id: ["6dfb358c-21bc-440f-9156-e09b72671c32", "1bb0f013-4d3d-49be-84bc-087c8cff3c77"]).each do |website|
-      website.imported_website.posts.find_each do |imported_post|
-        imported_post.post&.update_column :published_at, imported_post.published_at
-      end
+    Research::Journal::Article.find_each do |object|
+      object.update text_new: clean_for_summernote(object.text)
     end
+    Research::Laboratory::Axis.find_each do |object|
+      object.update text_new: clean_for_summernote(object.text)
+    end
+    University::Person.find_each do |object|
+      object.update biography_new: clean_for_summernote(object.biography)
+    end
+    Education::Program.find_each do |object|
+      object.update accessibility_new: clean_for_summernote(object.accessibility),
+                    contacts_new: clean_for_summernote(object.contacts),
+                    duration_new: clean_for_summernote(object.duration),
+                    evaluation_new: clean_for_summernote(object.evaluation),
+                    objectives_new: clean_for_summernote(object.objectives),
+                    opportunities_new: clean_for_summernote(object.opportunities),
+                    other_new: clean_for_summernote(object.other),
+                    pedagogy_new: clean_for_summernote(object.pedagogy),
+                    prerequisites_new: clean_for_summernote(object.prerequisites),
+                    pricing_new: clean_for_summernote(object.pricing),
+                    registration_new: clean_for_summernote(object.registration),
+                    content_new: clean_for_summernote(object.content),
+                    results_new: clean_for_summernote(object.results)
+    end
+  end
 
-    # Website structures
-    Communication::Website.all.each { |w| w.build_structure(university_id: w.university_id).save }
+  def clean_for_summernote(actiontext)
+    return '' if actiontext.nil?
+    actiontext.body
+              .to_html
+              .gsub('<div>', '<p>')
+              .gsub('</div>', '</p>')
+              .gsub('<strong>', '<b>')
+              .gsub('</strong>', '</b>')
+              .gsub('<em>', '<i>')
+              .gsub('</em>', '</i>')
+              .gsub('<p><br></p>', '')
   end
 
   namespace :db do

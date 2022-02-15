@@ -6,7 +6,7 @@
 #  about_type               :string           indexed => [about_id]
 #  data                     :jsonb
 #  position                 :integer          default(0), not null
-#  template                 :integer          default(0), not null
+#  template                 :integer          default(NULL), not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed => [about_type]

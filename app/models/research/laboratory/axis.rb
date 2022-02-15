@@ -27,6 +27,7 @@ class Research::Laboratory::Axis < ApplicationRecord
   include WithPosition
 
   has_rich_text :text
+  has_summernote :text_new
 
   belongs_to :university
   belongs_to :laboratory, foreign_key: :research_laboratory_id

@@ -52,10 +52,10 @@ module Osuny
       "a", "abbr", "acronym", "address", "b", "big", "blockquote", "br",
       "cite", "code", "dd", "del", "dfn", "div", "dl", "dt", "em",
       "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li", "ol",
-      "p", "picture", "pre", "samp", "small", "source", "span", "strong", "sub", "sup", "tt", "u", "ul", "var"
+      "p", "picture", "pre", "samp", "small", "source", "span", "strong", "sub", "sup", "tt", "u", "ul", "var", "video"
     ]
     config.action_view.sanitized_allowed_attributes = [
-      "abbr", "alt", "cite", "class", "datetime", "decoding", "height", "href", "loading",
+      "abbr", "alt", "cite", "class", "controls", "datetime", "decoding", "height", "href", "loading",
       "name", "sizes", "src", "srcset", "style", "target", "title", "type", "width", "xml:lang"
     ]
 

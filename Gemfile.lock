@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: 6dcff6c2a0e56492dbbcaf0a91ccc5898e6be922
+  revision: 7463656df2b81ff434c8fa8786453b55be129054
+  branch: activestorage
   specs:
     summernote-rails (0.8.20.1)
-      railties (>= 3.1)
+      rails (>= 6.0)
 
 GIT
   remote: https://github.com/noesya/two_factor_authentication.git
@@ -88,7 +89,7 @@ GEM
       execjs (~> 2)
     aws-eventstream (1.2.0)
     aws-partitions (1.554.0)
-    aws-sdk-core (3.126.1)
+    aws-sdk-core (3.126.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -217,7 +218,7 @@ GEM
       activesupport (>= 5.2)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
-    i18n (1.10.0)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.15.0)
       simple_po_parser (~> 1.1)
@@ -227,7 +228,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jmespath (1.6.0)
+    jmespath (1.5.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)

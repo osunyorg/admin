@@ -38,6 +38,7 @@ class University::Person < ApplicationRecord
   include WithEducation
 
   has_rich_text :biography
+  has_summernote :biography_new
 
   belongs_to :university
   belongs_to :user, optional: true
@@ -159,6 +160,6 @@ class University::Person < ApplicationRecord
   end
 
   def sanitize_email
-    self.email = self.email.downcase.strip
+    self.email = self.email.to_s.downcase.strip
   end
 end

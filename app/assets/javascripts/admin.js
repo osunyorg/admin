@@ -12,6 +12,8 @@
 //= require gdpr/cookie_consent
 //= require trix
 //= require sortablejs/Sortable
+//= require summernote/summernote-lite
+//= require summernote-rails
 //= require slug/slug
 //= require cocoon
 //= require_self

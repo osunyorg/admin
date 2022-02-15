@@ -49,6 +49,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithBlocks
 
   has_rich_text :text
+  has_summernote :text_new
 
   belongs_to :university
   belongs_to :website,

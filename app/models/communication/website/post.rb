@@ -39,6 +39,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
 
   has_rich_text :text
+  has_summernote :text_new
 
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
@@ -63,6 +64,7 @@ class Communication::Website::Post < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
+
 
   def path
     # used in menu_item#static_target

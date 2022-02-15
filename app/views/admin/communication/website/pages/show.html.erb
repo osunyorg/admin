@@ -9,11 +9,8 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('description') %></h3>
-          <%= sanitize @page.description %>
-
-          <h3 class="h5 mt-4"><%= Communication::Website::Page.human_attribute_name('text') %></h3>
-          <%= @page.text %>
+          <%= render 'admin/application/property/text', object: @page, property: :description %>
+          <%= render 'admin/application/property/text', object: @page, property: :text %>
         </div>
       </div>
       <%= render 'admin/communication/website/blocks/list', about: @page %>
@@ -78,6 +75,11 @@
   </div>
 <% end %>
 
+<% content_for :preview do %>
+  <%= @page.text.to_s %>
+<% end %>
+
 <% content_for :action_bar_right do %>
+  <%= preview_link %>
   <%= edit_link @page %>
 <% end %>

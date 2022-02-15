@@ -31,6 +31,7 @@ class Communication::Website::Home < ApplicationRecord
   belongs_to :website, foreign_key: :communication_website_id
 
   has_rich_text :text
+  has_summernote :text_new
 
   def to_s
     website.to_s

@@ -37,6 +37,10 @@ module Admin::ApplicationHelper
             class: button_classes
   end
 
+  def preview_link
+    raw "<button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#preview\" aria-controls=\"preview\">#{ t 'preview.button'}</button>"
+  end
+
   def button_classes(additional = '', **options)
     classes = "btn btn-primary btn-xs #{additional}"
     classes += ' disabled' if options[:disabled]
