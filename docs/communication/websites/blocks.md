@@ -56,7 +56,7 @@ views/admin/communication/website/blocks/_static.html.erb
 qui donne ce type de résultat
 ```
 blocks:
-  - kind: partners
+  - template: partners
     data:
       - name: Partner 1
         url: https://partner1.com
@@ -65,4 +65,10 @@ blocks:
 Les générateurs de chaque type suivent l'organisation :
 ```
 views/admin/communication/website/blocks/templates/partners/_static.html.erb
+```
+Attention, il faut 6 espaces pour respecter l'indentation du front-matter :
+```
+      - name: Partner 1
+        url: https://partner1.com
+        logo: "e09f3794-44e5-4b51-be02-0e384616e791"
 ```
