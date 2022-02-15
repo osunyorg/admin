@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-md-5">
               <select class="form-select select" ng-model="person.slug">
-                <% @website.university.people.each_with_index do |person, index| %>
+                <% @website.university.people.ordered.each_with_index do |person, index| %>
                 <option value="<%= person.slug %>"><%= person %></option>
                 <% end %>
               </select>

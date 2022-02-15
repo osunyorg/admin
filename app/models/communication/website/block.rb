@@ -41,11 +41,31 @@ class Communication::Website::Block < ApplicationRecord
     super(value)
   end
 
-  def to_s
-    "Bloc #{position}"
+  def git_dependencies
+    m = "git_dependencies_for_#{template}"
+    respond_to?(m, true) ? send(m) : []
   end
 
   def last_ordered_element
     about.blocks.ordered.last
+  end
+
+  def to_s
+    "Bloc #{position}"
+  end
+
+  protected
+
+  def git_dependencies_for_organization_chart
+    dependencies = []
+    data['elements'].each do |element|
+      element['persons'].each do |person|
+        slug = person['slug']
+        next if slug.blank?
+        person = university.people.find_by slug: slug
+        dependencies << person unless person.nil?
+      end
+    end
+    dependencies.uniq
   end
 end

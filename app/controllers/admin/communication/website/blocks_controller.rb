@@ -36,6 +36,7 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
 
   def update
     if @block.update(block_params)
+      @block.about.save_and_sync
       redirect_to [:admin, @block.about], notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
       render :edit, status: :unprocessable_entity
