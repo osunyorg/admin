@@ -25,7 +25,11 @@ namespace :communication do
     resources :authors, controller: 'website/authors', only: [:index, :show]
     resources :posts, controller: 'website/posts'
     resources :curations, path: 'posts/curations', as: :post_curations, controller: 'website/posts/curations', only: [:new, :create]
-    resources :blocks, controller: 'website/blocks', except: [:index, :show]
+    resources :blocks, controller: 'website/blocks', except: [:index, :show] do
+      collection do
+        post :reorder
+      end
+    end
     resources :menus, controller: 'website/menus' do
       resources :items, controller: 'website/menu/items', except: :index do
         collection do

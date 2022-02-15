@@ -12,13 +12,15 @@
     <table class="<%= table_classes %>">
       <thead>
         <tr>
+          <th width="20" class="ps-0">&nbsp;</th>
           <th><%= Communication::Website::Block.human_attribute_name('name') %></th>
           <th><%= Communication::Website::Block.human_attribute_name('template') %></th>
         </tr>
       </thead>
-      <tbody>
-        <% about.blocks.each do |block| %>
-          <tr>
+      <tbody data-sortable data-sort-url="<%= reorder_admin_communication_website_blocks_path %>">
+        <% about.blocks.ordered.each do |block| %>
+          <tr data-id="<%= block.id %>">
+            <td><i class="fa fa-bars handle"></i></td>
             <td><%= link_to block, edit_admin_communication_website_block_path(block) %></td>
             <td><%= block.template_i18n  %></td>
           </tr>
