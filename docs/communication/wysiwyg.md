@@ -103,12 +103,12 @@ Actions de dev
 
 Migration phase 1
 -[x] Ajouter des champs _new
--[ ] Au rails app:fix, transformer le markup Trix en markup Summernote (application_record) dans les propriétés _new
--[ ] Vérifier les paramètres du sanitizer d'Action Text (ActionText::ContentHelper : allowed_tags & allowed_attributes)
+-[x] Au rails app:fix, transformer le markup Trix en markup Summernote (application_record) dans les propriétés _new
+-[x] Vérifier les paramètres du sanitizer d'Action Text (ActionText::ContentHelper : allowed_tags & allowed_attributes)
 Migration phase 2
--[ ] Supprimer les champs ActionText dans les modèles
+-[x] Supprimer les associations ActionText dans les modèles
+-[x] Renommer les champs en enlevant _new
 -[ ] Supprimer la table d'ActionText
--[ ] Renommer les champs en enlevant _new
 
 ### Le pdf
 
