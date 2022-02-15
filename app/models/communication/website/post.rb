@@ -36,7 +36,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithFeaturedImage
   include WithBlobs
   include WithMenuItemTarget
-  include WithSlug # We override slug_unavailable? method`
+  include WithSlug # We override slug_unavailable? method
 
   has_rich_text :text
   has_summernote :text_new
