@@ -3,7 +3,7 @@
 # Table name: university_people
 #
 #  id                :uuid             not null, primary key
-#  biography_new     :text
+#  biography         :text
 #  description       :text
 #  email             :string
 #  first_name        :string
@@ -37,8 +37,7 @@ class University::Person < ApplicationRecord
   include WithPicture
   include WithEducation
 
-  has_rich_text :biography
-  has_summernote :biography_new
+  has_summernote :biography
 
   belongs_to :university
   belongs_to :user, optional: true

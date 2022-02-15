@@ -7,7 +7,7 @@
 #  name                   :string
 #  position               :integer
 #  short_name             :string
-#  text_new               :text
+#  text                   :text
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  research_laboratory_id :uuid             not null, indexed
@@ -26,8 +26,7 @@
 class Research::Laboratory::Axis < ApplicationRecord
   include WithPosition
 
-  has_rich_text :text
-  has_summernote :text_new
+  has_summernote :text
 
   belongs_to :university
   belongs_to :laboratory, foreign_key: :research_laboratory_id

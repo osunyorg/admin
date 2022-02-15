@@ -8,7 +8,7 @@
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :description %>
-          <%= f.input :text, as: :rich_text_area %>
+          <%= f.input :text, as: :summernote %>
           <%= f.association :related_category,
                             collection: collection_tree(@website.categories),
                             label_method: ->(p) { sanitize p[:label] },

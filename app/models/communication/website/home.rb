@@ -6,7 +6,7 @@
 #  description              :text
 #  featured_image_alt       :string
 #  github_path              :text
-#  text_new                 :text
+#  text                     :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -30,8 +30,7 @@ class Communication::Website::Home < ApplicationRecord
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
 
-  has_rich_text :text
-  has_summernote :text_new
+  has_summernote :text
 
   def to_s
     website.to_s

@@ -12,7 +12,7 @@
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
-#  text_new                 :text
+#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -48,8 +48,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPosition
   include WithBlocks
 
-  has_rich_text :text
-  has_summernote :text_new
+  has_summernote :text
 
   belongs_to :university
   belongs_to :website,
