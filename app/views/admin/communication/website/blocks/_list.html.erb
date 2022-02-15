@@ -15,14 +15,19 @@
           <th width="20" class="ps-0">&nbsp;</th>
           <th><%= Communication::Website::Block.human_attribute_name('name') %></th>
           <th><%= Communication::Website::Block.human_attribute_name('template') %></th>
+          <th></th>
         </tr>
       </thead>
       <tbody data-sortable data-sort-url="<%= reorder_admin_communication_website_blocks_path %>">
         <% about.blocks.ordered.each do |block| %>
           <tr data-id="<%= block.id %>">
             <td><i class="fa fa-bars handle"></i></td>
-            <td><%= link_to block, edit_admin_communication_website_block_path(block) %></td>
+            <td><%= link_to block, admin_communication_website_block_path(block) %></td>
             <td><%= block.template_i18n  %></td>
+            <td class="text-end">
+              <%= edit_link block %>
+              <%= destroy_link block %>
+            </td>
           </tr>
         <% end %>
       </tbody>

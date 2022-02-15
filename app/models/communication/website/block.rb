@@ -36,6 +36,11 @@ class Communication::Website::Block < ApplicationRecord
     partners: 200
   }
 
+  def data=(value)
+    value = JSON.parse value if value.is_a? String
+    super(value)
+  end
+
   def to_s
     "Bloc #{position}"
   end

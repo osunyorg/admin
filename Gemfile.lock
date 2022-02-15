@@ -80,6 +80,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    angularjs-rails (1.8.0)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -426,6 +427,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angularjs-rails
   annotate
   aws-sdk-s3
   bootsnap (>= 1.4.4)

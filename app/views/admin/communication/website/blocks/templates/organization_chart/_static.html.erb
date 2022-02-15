@@ -1,4 +1,10 @@
-      - title: Leadership
+<% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
+<% block.data['elements'].each do |element| %>
+      - title: >
+          <%= element['title'] %>
         persons:
-          - amah-edoh
-          - liliane-umubyeyi
+<% element['persons'].each do |person| %>
+          - "<%= person['slug'] %>"
+<% end %>
+<% end %>
+<% end %>
