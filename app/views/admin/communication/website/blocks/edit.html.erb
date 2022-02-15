@@ -1,0 +1,8 @@
+<% content_for :title, @block %>
+
+<%= simple_form_for [:admin, @block] do |f| %>
+  <%= render "admin/communication/website/blocks/templates/#{@block.template}/edit", f: f %>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

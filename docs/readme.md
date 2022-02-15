@@ -2,10 +2,10 @@
 
 ## Domaines
 
-https://bordeauxmontaigne.osuny.org/admin -> admin
-https://bordeauxmontaigne.osuny.org/alumni -> webservice des alumni, accessible en iframe
-https://bordeauxmontaigne.osuny.org/journal -> workflow publication et review revue scientifique
-https://bordeauxmontaigne.osuny.org/profile -> gestion de son propre profil
+- https://bordeauxmontaigne.osuny.org/admin -> admin
+- https://bordeauxmontaigne.osuny.org/alumni -> webservice des alumni, accessible en iframe
+- https://bordeauxmontaigne.osuny.org/journal -> workflow publication et review revue scientifique
+- https://bordeauxmontaigne.osuny.org/profile -> gestion de son propre profil
 
 
 Attention, il ne faut pas coder de couplage fort avec osuny.org (utiliser des variables d'env dans models/university/with_idenfier.rb).

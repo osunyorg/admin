@@ -87,7 +87,6 @@ fr:
       success: ""
   download: Télécharger
   edit: Modifier
-  empty_folder: Dossier vide
   false: Non
   filters:
     attributes:
@@ -96,6 +95,10 @@ fr:
     buttons:
       expand: Filtrer le tableau
       submit: Filtrer
+  folder:
+    empty: Le dossier est vide
+    open: Ouvrir le dossier
+    close: Fermer le dossier
   gdpr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Bonjour %{name} !"

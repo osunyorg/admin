@@ -46,6 +46,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
   include WithTree
   include WithPosition
+  include WithBlocks
 
   has_rich_text :text
   has_summernote :text_new
