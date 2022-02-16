@@ -26,6 +26,11 @@
 class Education::School < ApplicationRecord
   include WithGit
 
+  has_and_belongs_to_many :programs,
+                          class_name: 'Education::Program',
+                          join_table: 'education_programs_schools',
+                          foreign_key: 'education_school_id',
+                          association_foreign_key: 'education_program_id'
   belongs_to  :university
   has_many    :websites,
               class_name: 'Communication::Website',
@@ -47,11 +52,6 @@ class Education::School < ApplicationRecord
   has_many    :university_people_through_program_role_involvements,
               through: :programs,
               source: :university_people_through_role_involvements
-  has_and_belongs_to_many :programs,
-                          class_name: 'Education::Program',
-                          join_table: 'education_programs_schools',
-                          foreign_key: 'education_school_id',
-                          association_foreign_key: 'education_program_id'
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 

@@ -70,9 +70,9 @@ module Communication::Website::WithAbouts
     @people ||= begin
       people = authors
       if about_school?
-        people += about&.university_people_through_role_involvements
-        people += about&.university_people_through_program_involvements
-        people += about&.university_people_through_program_role_involvements
+        people += about.university_people_through_role_involvements
+        people += about.university_people_through_program_involvements
+        people += about.university_people_through_program_role_involvements
       elsif about_journal?
         people += about.people
       end
