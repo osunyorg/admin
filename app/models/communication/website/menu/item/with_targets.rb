@@ -32,8 +32,7 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_news_category
-    # TODO use communication_categories_path
-    "/#{website.structure.communication_posts_path}/categories#{about.path}" if about
+    "/#{website.structure.communication_posts_path}#{about.path}" if about
   end
 
   def target_for_staff
