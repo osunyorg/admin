@@ -1,4 +1,4 @@
-<a class="<%= button_classes('mb-2') %>" ng-click="data.elements.push({title: 'Role name', persons: []})">Add role</a>
+<a class="<%= button_classes('mb-4') %>" ng-click="data.elements.push({title: 'Role name', persons: []})">Add role</a>
 <div class="card" ng-repeat="element in data.elements">
   <div class="card-body">
     <div class="row">
@@ -8,7 +8,9 @@
             <input class="form-control" type="text" ng-model="element.title">
           </div>
           <div class="col-md-1 text-end">
-            <a class="btn btn-sm btn-danger mt-1" ng-click="data.elements.splice(data.elements.indexOf(element))"><i class="fas fa-trash"></i></a>
+            <a class="btn btn-sm btn-danger mt-1" ng-click="data.elements.splice(data.elements.indexOf(element))">
+              <i class="fas fa-times"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -18,7 +20,7 @@
             <p>People</p>
           </div>
           <div class="col-md-4 text-end">
-            <a class="<%= button_classes %>" ng-click="element.persons.push({id: '', role: ''})">Add person</a>
+            <a class="<%= button_classes('mt-n1') %>" ng-click="element.persons.push({id: '', role: ''})">Add person</a>
           </div>
         </div>
         <div ng-repeat="person in element.persons" class="mb-2">
@@ -26,7 +28,7 @@
             <div class="col-md-5">
               <select class="form-select select" ng-model="person.id">
                 <% @website.university.people.ordered.each_with_index do |person, index| %>
-                <option value="<%= person.id %>"><%= person %></option>
+                <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
                 <% end %>
               </select>
             </div>
@@ -34,7 +36,7 @@
               <input class="form-control" type="text" ng-model="person.role" placeholder="Type role here">
             </div>
             <div class="col-md-1 text-end">
-              <a class="btn btn-sm btn-danger mt-1" ng-click="element.persons.splice(element.persons.indexOf(person))"><i class="fas fa-trash"></i></a>
+              <a class="btn btn-sm btn-danger mt-1" ng-click="element.persons.splice(element.persons.indexOf(person))"><i class="fas fa-times"></i></a>
             </div>
           </div>
         </div>
