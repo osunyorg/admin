@@ -60,9 +60,9 @@ class Communication::Website::Block < ApplicationRecord
     dependencies = []
     data['elements'].each do |element|
       element['persons'].each do |person|
-        slug = person['slug']
-        next if slug.blank?
-        person = university.people.find_by slug: slug
+        id = person['id']
+        next if id.blank?
+        person = university.people.find id
         next if person.nil?
         dependencies += [person]
         dependencies += person.active_storage_blobs

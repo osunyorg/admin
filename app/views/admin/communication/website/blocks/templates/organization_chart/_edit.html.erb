@@ -18,15 +18,15 @@
             <p>People</p>
           </div>
           <div class="col-md-4 text-end">
-            <a class="<%= button_classes %>" ng-click="element.persons.push({slug: ''})">Add person</a>
+            <a class="<%= button_classes %>" ng-click="element.persons.push({id: '', role: ''})">Add person</a>
           </div>
         </div>
         <div ng-repeat="person in element.persons" class="mb-2">
           <div class="row">
             <div class="col-md-5">
-              <select class="form-select select" ng-model="person.slug">
+              <select class="form-select select" ng-model="person.id">
                 <% @website.university.people.ordered.each_with_index do |person, index| %>
-                <option value="<%= person.slug %>"><%= person %></option>
+                <option value="<%= person.id %>"><%= person %></option>
                 <% end %>
               </select>
             </div>

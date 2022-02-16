@@ -3,8 +3,11 @@
       - title: >
           <%= element['title'] %>
         persons:
-<% element['persons'].each do |person| %>
-          - slug: "<%= person['slug'] %>"
+<%
+element['persons'].each do |person|
+  p = block.university.people.find person['id']
+%>
+          - slug: "<%= p.slug %>"
             role: >
               <%= person['role'] %>
 <% end %>

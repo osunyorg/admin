@@ -3,7 +3,7 @@
   <div class="row">
     <% element['persons'].each do |person| %>
       <%
-      p = current_university.people.find_by slug: person['slug']
+      p = current_university.people.find person['id']
       next if p.nil?
       %>
       <div class="col-md-3">
