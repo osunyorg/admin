@@ -26,25 +26,32 @@
 class Education::School < ApplicationRecord
   include WithGit
 
-  belongs_to :university
-  has_many  :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
+  belongs_to  :university
+  has_many    :websites,
+              class_name: 'Communication::Website',
+              as: :about,
+              dependent: :nullify
+  has_many    :university_roles,
+              class_name: 'University::Role',
+              as: :target,
+              dependent: :destroy
+  has_many    :involvements_through_roles,
+              through: :university_roles,
+              source: :involvements
+  has_many    :university_people_through_role_involvements,
+              through: :involvements_through_roles,
+              source: :person
+  has_many    :university_people_through_program_involvements,
+              through: :programs,
+              source: :university_people_through_involvements
+  has_many    :university_people_through_program_role_involvements,
+              through: :programs,
+              source: :university_people_through_role_involvements
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_school_id',
                           association_foreign_key: 'education_program_id'
-
-  has_many  :university_roles, class_name: 'University::Role', as: :target, dependent: :destroy
-  has_many  :involvements_through_roles, through: :university_roles, source: :involvements
-  has_many  :university_people_through_role_involvements,
-            through: :involvements_through_roles,
-            source: :person
-  has_many  :university_people_through_program_involvements,
-            through: :programs,
-            source: :university_people_through_involvements
-  has_many  :university_people_through_program_role_involvements,
-            through: :programs,
-            source: :university_people_through_role_involvements
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 

@@ -24,8 +24,12 @@ class Research::Laboratory < ApplicationRecord
   include WithGit
 
   belongs_to  :university
+  has_many    :websites,
+              class_name: 'Communication::Website',
+              as: :about,
+              dependent: :nullify
   has_many    :axes,
-              class_name: "Research::Laboratory::Axis",
+              class_name: 'Research::Laboratory::Axis',
               foreign_key: :research_laboratory_id,
               dependent: :destroy
 
