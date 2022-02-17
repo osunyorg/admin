@@ -55,11 +55,13 @@ fr:
         parent: Catégorie parente
         slug: Slug
       communication/website/index_page:
+        breadcrumb_title: Nom affiché dans le fil d'ariane
         description: Description (SEO)
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
+        header_text: Texte affiché dans le header
         slug: Slug
-        text: Texte
+        text: Texte de la page
         title: Titre
       communication/website/imported/category:
         original: Original
@@ -197,3 +199,7 @@ fr:
               staff: Équipe
               teachers: Équipe pédagogique
               url: URL
+  simple_form:
+    hints:
+      communication_website_index_page:
+        breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
