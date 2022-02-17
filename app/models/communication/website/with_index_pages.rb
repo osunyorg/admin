@@ -13,7 +13,8 @@ module Communication::Website::WithIndexPages
       klass.where(communication_website_id: id, kind: kind).first_or_create(
         title: I18n.t("#{key}.title"),
         path: I18n.t("#{key}.path"),
-        description: I18n.t("#{key}.description")
+        description: I18n.t("#{key}.description"),
+        university_id: university_id
       )
     end
   end
