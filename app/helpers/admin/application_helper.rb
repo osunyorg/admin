@@ -78,8 +78,8 @@ module Admin::ApplicationHelper
     text = text.to_s.dup
     text = strip_tags text
     text = text.strip
-    text = text.gsub("\r\n", "\n") # Remove useless \r
-    text = text.gsub("\n", "\n#{indentation}") # Indent properly to avoid broken frontmatter
+    text = text.gsub "\r\n", "\n" # Remove useless \r
+    text = text.gsub "\n", "\n#{indentation}" # Indent properly to avoid broken frontmatter
     text = text.chomp # Remove extra newlines
     CGI.unescapeHTML text
   end
