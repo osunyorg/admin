@@ -75,13 +75,13 @@ module Admin::ApplicationHelper
 
   def prepare_text_for_static(text)
     indentation = '  ' # Beware, it works only at level one, with 2 spaces
-    strip_tags(text)
-      .to_s
-      .dup
-      .strip
-      .gsub("\r\n", "\n") # Remove useless \r
-      .gsub("\n", "\n#{indentation}") # Indent properly to avoid broken frontmatter
-      .chomp # Remove extra newlines
+    text = text.to_s.dup
+    text = strip_tags text
+    text = text.strip
+    text = text.gsub("\r\n", "\n") # Remove useless \r
+    text = text.gsub("\n", "\n#{indentation}") # Indent properly to avoid broken frontmatter
+    text = text.chomp # Remove extra newlines
+    CGI.unescapeHTML text
   end
 
   def collection_tree(list, except = nil)

@@ -11,6 +11,7 @@
           <%= render 'admin/application/property/text', object: @post, property: :description %>
           <%= render 'admin/application/property/text', object: @post, property: :text %>
           <%= render 'admin/application/property/summernote_embeds', object: @post, property: :medias %>
+          <p><%= prepare_text_for_static @post.description %></p>
         </div>
       </div>
     </div>
