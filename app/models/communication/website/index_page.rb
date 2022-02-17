@@ -26,6 +26,8 @@
 #
 class Communication::Website::IndexPage < ApplicationRecord
 
+  has_summernote :text
+  
   enum kind: { home: 0,
                communication_posts: 10,
                education_programs: 20,
