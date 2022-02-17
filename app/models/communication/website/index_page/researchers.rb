@@ -3,8 +3,10 @@
 # Table name: communication_website_index_pages
 #
 #  id                       :uuid             not null, primary key
+#  breadcrumb_title         :string
 #  description              :text
 #  featured_image_alt       :string
+#  header_text              :string
 #  kind                     :integer
 #  path                     :string
 #  text                     :text

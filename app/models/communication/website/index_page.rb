@@ -3,8 +3,10 @@
 # Table name: communication_website_index_pages
 #
 #  id                       :uuid             not null, primary key
+#  breadcrumb_title         :string
 #  description              :text
 #  featured_image_alt       :string
+#  header_text              :string
 #  kind                     :integer
 #  path                     :string
 #  text                     :text
@@ -29,8 +31,6 @@ class Communication::Website::IndexPage < ApplicationRecord
   include WithFeaturedImage
   include WithBlobs
 
-  has_summernote :text
-
   enum kind: {
     home: 0,
     communication_posts: 10,
@@ -47,9 +47,11 @@ class Communication::Website::IndexPage < ApplicationRecord
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
 
+  has_summernote :header_text
   has_summernote :text
 
-  validates :title, :path, presence: true
+  validates :title, presence: true
+  validates :path, presence: true, unless: Proc.new { |p| p.home? }
 
   def to_s
     "#{title}"

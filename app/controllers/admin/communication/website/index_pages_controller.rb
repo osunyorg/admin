@@ -41,7 +41,7 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   def index_page_params
     params.require(:communication_website_index_page)
           .permit(
-            :title, :description, :text, :path, :featured_image, :featured_image_delete,
+            :title, :breadcrumb_title, :description, :header_text, :text, :path, :featured_image, :featured_image_delete,
             :featured_image_infos, :featured_image_alt
           )
           .merge(university_id: current_university.id)

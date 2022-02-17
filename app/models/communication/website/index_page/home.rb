@@ -3,8 +3,10 @@
 # Table name: communication_website_index_pages
 #
 #  id                       :uuid             not null, primary key
+#  breadcrumb_title         :string
 #  description              :text
 #  featured_image_alt       :string
+#  header_text              :string
 #  kind                     :integer
 #  path                     :string
 #  text                     :text
@@ -31,6 +33,10 @@ class Communication::Website::IndexPage::Home < Communication::Website::IndexPag
 
   def git_path(website)
     'content/_index.html'
+  end
+
+  def url
+    '/'
   end
 
 end
