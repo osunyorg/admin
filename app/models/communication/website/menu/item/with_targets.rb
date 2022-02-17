@@ -16,58 +16,58 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_programs
-    "/#{website.structure.education_programs_path}"
+    "/#{website.index_for(:education_programs).path}"
   end
 
   def target_for_program
-    "/#{website.structure.education_programs_path}#{about.path}"
+    "/#{website.index_for(:education_programs).path}#{about.path}"
   end
 
   def target_for_news
-    "/#{website.structure.communication_posts_path}"
+    "/#{website.index_for(:communication_posts).path}"
   end
 
   def target_for_news_article
-    "/#{website.structure.communication_posts_path}#{about.path}" if about&.published && about&.published_at
+    "/#{website.index_for(:communication_posts).path}#{about.path}" if about&.published && about&.published_at
   end
 
   def target_for_news_category
-    "/#{website.structure.communication_posts_path}#{about.path}" if about
+    "/#{website.index_for(:communication_posts).path}#{about.path}" if about
   end
 
   def target_for_staff
-    "/#{website.structure.persons_path}"
+    "/#{website.index_for(:persons).path}"
   end
 
   def target_for_administrators
-    "/#{website.structure.administrators_path}"
+    "/#{website.index_for(:administrators).path}"
   end
 
   def target_for_authors
-    "/#{website.structure.authors_path}"
+    "/#{website.index_for(:authors).path}"
   end
 
   def target_for_researchers
-    "/#{website.structure.researchers_path}"
+    "/#{website.index_for(:researchers).path}"
   end
 
   def target_for_teachers
-    "/#{website.structure.teachers_path}"
+    "/#{website.index_for(:teachers).path}"
   end
 
   def target_for_research_volumes
-    "/#{website.structure.research_volumes_path}"
+    "/#{website.index_for(:research_volumes).path}"
   end
 
   def target_for_research_volume
-    "/#{website.structure.research_volumes_path}#{about.path}" if about&.published && about&.published_at
+    "/#{website.index_for(:research_volumes).path}#{about.path}" if about&.published && about&.published_at
   end
 
   def target_for_research_articles
-    "/#{website.structure.research_articles_path}"
+    "/#{website.index_for(:research_articles).path}"
   end
 
   def target_for_research_article
-    "/#{website.structure.research_articles_path}#{about.path}" if about&.published && about&.published_at
+    "/#{website.index_for(:research_articles).path}#{about.path}" if about&.published && about&.published_at
   end
 end

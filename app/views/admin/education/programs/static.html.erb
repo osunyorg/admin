@@ -1,17 +1,17 @@
 ---
-<% teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name %>
-<% administrator_involvements = @program.involvements_through_roles.includes(:person).ordered_by_name %>
+<% teacher_involvements = @about.university_person_involvements.includes(:person).ordered_by_name %>
+<% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
 title: >
-  <%= @program.name %>
-url: /<%= @website.structure.education_programs_path %><%= @program.path %>/
+  <%= @about.name %>
+url: /<%= @website.index_for(:education_programs).path %><%= @about.path %>/
 description: >
-  <%= prepare_text_for_static @program.description %>
-position: <%= @program.position %>
-<% if @program.best_featured_image.attached? %>
-image: "<%= @program.best_featured_image.blob.id %>"
-image_alt: "<%= @program.featured_image_alt %>"
+  <%= prepare_text_for_static @about.description %>
+position: <%= @about.position %>
+<% if @about.best_featured_image.attached? %>
+image: "<%= @about.best_featured_image.blob.id %>"
+image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
-category: "<%= @website.categories.find_by(program_id: @program.id)&.path %>/"
+category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>/"
 teachers:
 <% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
@@ -32,7 +32,7 @@ administrators_description:
     <%= involvement.target.to_s %>
 <% end %>
 roles:
-<% @program.university_roles.ordered.each do |role| %>
+<% @about.university_roles.ordered.each do |role| %>
   - title: >
       <%= role.to_s %>
     persons:
@@ -43,9 +43,9 @@ roles:
 <% else %>
 roles: []
 <% end %>
-continuing: <%= @program.continuing %>
-level: <%= @program.level %>
-ects: <%= @program.ects %>
+continuing: <%= @about.continuing %>
+level: <%= @about.level %>
+ects: <%= @about.ects %>
 <%
 [
   :accessibility,
@@ -62,6 +62,6 @@ ects: <%= @program.ects %>
   :content
 ].each do |property| %>
 <%= property.to_s %>: >
-  <%= prepare_html_for_static @program.send("best_#{property}"), @program.university %>
+  <%= prepare_html_for_static @about.send("best_#{property}"), @about.university %>
 <% end %>
 ---

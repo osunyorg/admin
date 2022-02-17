@@ -1,8 +1,8 @@
 class Admin::Communication::Website::IndexPagesController < Admin::Communication::Website::ApplicationController
-  before_action :get_index_page, :ensure_abilities, only: [:edit, :update]
+  before_action :ensure_abilities
+  before_action :get_index_page, only: [:edit, :update]
 
   def index
-    authorize! :read, Communication::Website::IndexPage
     breadcrumb
     @kinds = Communication::Website::IndexPage.kinds
   end
@@ -13,9 +13,7 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   end
 
   def update
-    # TODO: sync
-    # if @index_page.update_and_sync(index_page_params)
-    if @index_page.update(index_page_params)
+    if @index_page.update_and_sync(index_page_params)
       redirect_to admin_communication_website_indexes_path(@website), notice: t('admin.successfully_updated_html', model: Communication::Website::IndexPage.model_name.human)
     else
       breadcrumb
@@ -31,7 +29,7 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   end
 
   def ensure_abilities
-    authorize! :update, @index_page
+    authorize! :update, @website
   end
 
   def breadcrumb

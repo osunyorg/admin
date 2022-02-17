@@ -1,28 +1,28 @@
 ---
 title: >
-  <%= @person.to_s %>
-slug: "<%= @person.slug %>"
-first_name: "<%= @person.first_name %>"
-last_name: "<%= @person.last_name %>"
-phone: "<%= @person.phone %>"
-email: "<%= @person.email %>"
-<% if @person.best_picture.attached? %>
-image: "<%= @person.best_picture.blob.id %>"
+  <%= @about.to_s %>
+slug: "<%= @about.slug %>"
+first_name: "<%= @about.first_name %>"
+last_name: "<%= @about.last_name %>"
+phone: "<%= @about.phone %>"
+email: "<%= @about.email %>"
+<% if @about.best_picture.attached? %>
+image: "<%= @about.best_picture.blob.id %>"
 <% end %>
 description: >
-  <%= prepare_text_for_static @person.description %>
+  <%= prepare_text_for_static @about.description %>
 roles:
-<% if @person.author.for_website?(@website) %>
+<% if @about.author.for_website?(@website) %>
   - author
 <% end %>
-<% if @person.teacher.for_website?(@website) %>
+<% if @about.teacher.for_website?(@website) %>
   - teacher
 <% end %>
-<% if @person.researcher.for_website?(@website) %>
+<% if @about.researcher.for_website?(@website) %>
   - researcher
 <% end %>
-<% if @person.administrator.for_website?(@website) %>
+<% if @about.administrator.for_website?(@website) %>
   - administrator
 <% end %>
 ---
-<%= prepare_html_for_static @person.biography, @person.university %>
+<%= prepare_html_for_static @about.biography, @about.university %>

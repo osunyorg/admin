@@ -72,7 +72,7 @@ class Communication::Website::GitFile < ApplicationRecord
       template: "admin/#{about.class.name.underscore.pluralize}/static",
       layout: false,
       assigns: {
-        about.class.name.demodulize.downcase => about,
+        about: about,
         website: website
       }
     )

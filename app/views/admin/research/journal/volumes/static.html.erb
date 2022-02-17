@@ -1,14 +1,14 @@
 ---
-title: "<%= @volume.title %>"
-slug: "<%= @volume.slug %>"
-number: <%= @volume.number %>
-issn: "<%= @volume.journal.issn %>"
+title: "<%= @about.title %>"
+slug: "<%= @about.slug %>"
+number: <%= @about.number %>
+issn: "<%= @about.journal.issn %>"
 keywords: >
-  <%= @volume.keywords %>
-date: <%= @volume.published_at %> UTC
-<% if @volume.featured_image.attached? %>
-image: "<%= @volume.featured_image.blob.id %>"
-image_alt: "<%= @volume.featured_image_alt %>"
+  <%= @about.keywords %>
+date: <%= @about.published_at %> UTC
+<% if @about.featured_image.attached? %>
+image: "<%= @about.featured_image.blob.id %>"
+image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
 ---
-<%= @volume.description %>
+<%= @about.description %>

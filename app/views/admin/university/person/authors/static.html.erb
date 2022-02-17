@@ -1,13 +1,13 @@
 ---
 title: >
-  Actualités de <%= @author.to_s %>
+  Actualités de <%= @about.to_s %>
 person: >
-  <%= @author.to_s %>
+  <%= @about.to_s %>
 first_name: >
-  <%= @author.first_name %>
+  <%= @about.first_name %>
 last_name: >
-  <%= @author.last_name %>
-slug: "<%= @author.slug %>"
+  <%= @about.last_name %>
+slug: "<%= @about.slug %>"
 description: >
-  <%= prepare_text_for_static @author.description %>
+  <%= prepare_text_for_static @about.description %>
 ---

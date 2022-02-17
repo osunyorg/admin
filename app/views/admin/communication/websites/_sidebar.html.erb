@@ -10,11 +10,6 @@
             ability: can?(:read, @website)
           },
           {
-            title: Communication::Website::Home.model_name.human,
-            path: admin_communication_website_home_path(website_id: @website),
-            ability: can?(:read, Communication::Website::Home)
-          },
-          {
             title: Communication::Website::Page.model_name.human(count: 2),
             path: admin_communication_website_pages_path(website_id: @website),
             ability: can?(:read, Communication::Website::Page)
@@ -43,11 +38,6 @@
             title: Communication::Website::IndexPage.model_name.human(count: 2),
             path: admin_communication_website_indexes_path(website_id: @website),
             ability: can?(:read, Communication::Website::IndexPage)
-          },
-          {
-            title: Communication::Website::Structure.model_name.human,
-            path: admin_communication_website_structure_path(website_id: @website),
-            ability: can?(:update, Communication::Website::Structure)
           },
         ].each do |object|
           next unless object[:ability]

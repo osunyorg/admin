@@ -1,17 +1,17 @@
 ---
-<% administrator_involvements = @school.involvements_through_roles.includes(:person).ordered_by_name %>
+<% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
 name: >
-  <%= @school.name %>
+  <%= @about.name %>
 address: >
-  <%= @school.address %>
+  <%= @about.address %>
 zipcode: >
-  <%= @school.zipcode %>
+  <%= @about.zipcode %>
 city: >
-  <%= @school.city %>
+  <%= @about.city %>
 country: >
-  <%= ISO3166::Country[@school.country].translations[@school.country.downcase] %>
+  <%= ISO3166::Country[@about.country].translations[@about.country.downcase] %>
 phone: >
-  <%= @school.phone %>
+  <%= @about.phone %>
 <% if administrator_involvements.any? %>
 administrators:
 <% administrator_involvements.each do |involvement| %>
@@ -23,7 +23,7 @@ administrators_description:
     <%= involvement.target.to_s %>
 <% end %>
 roles:
-<% @school.university_roles.ordered.each do |role| %>
+<% @about.university_roles.ordered.each do |role| %>
   - title: >
       <%= role.to_s %>
     persons:

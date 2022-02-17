@@ -1,12 +1,12 @@
 ---
 name: >
-  <%= @laboratory.name %>
+  <%= @about.name %>
 address: >
-  <%= @laboratory.address %>
+  <%= @about.address %>
 zipcode: >
-  <%= @laboratory.zipcode %>
+  <%= @about.zipcode %>
 city: >
-  <%= @laboratory.city %>
+  <%= @about.city %>
 country: >
-  <%= ISO3166::Country[@laboratory.country].translations[@laboratory.country.downcase] %>
+  <%= ISO3166::Country[@about.country].translations[@about.country.downcase] %>
 ---

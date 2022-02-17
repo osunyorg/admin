@@ -12,18 +12,7 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <%= render 'admin/communication/websites/show/posts' if can? :read, Communication::Website::Post %>
-  <div class="row">
-    <% if can? :read, Communication::Website::Page %>
-      <div class="col-md-8">
-        <%= render 'admin/communication/websites/show/pages' %>
-      </div>
-    <% end %>
-    <% if can? :read, Communication::Website::Home %>
-      <div class="col-md-4">
-        <%= render 'admin/communication/websites/show/home' %>
-      </div>
-    <% end %>
-  </div>
+  <%= render 'admin/communication/websites/show/pages' if can? :read, Communication::Website::Page %>
 <% end %>
 
 <% content_for :action_bar_right do %>
