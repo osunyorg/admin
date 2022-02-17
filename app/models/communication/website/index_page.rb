@@ -25,6 +25,9 @@
 #  fk_rails_7eb45227ae  (university_id => universities.id)
 #
 class Communication::Website::IndexPage < ApplicationRecord
+  include WithGit
+  include WithFeaturedImage
+  include WithBlobs
 
   has_summernote :text
 
@@ -33,7 +36,7 @@ class Communication::Website::IndexPage < ApplicationRecord
     communication_posts: 10,
     education_programs: 20,
     research_articles: 30,
-      research_volumes: 32,
+    research_volumes: 32,
     persons: 100,
       administrators: 110,
       authors: 120,
@@ -44,8 +47,38 @@ class Communication::Website::IndexPage < ApplicationRecord
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
 
-  has_one_attached_deletable :featured_image
+  has_summernote :text
 
   validates :title, :path, presence: true
+
+  def to_s
+    "#{title}"
+  end
+
+  def git_dependencies(website)
+    [self] + active_storage_blobs
+  end
+
+  def git_destroy_dependencies(website)
+    [self] + active_storage_blobs
+  end
+
+  def home
+    @home ||= Communication::Website::IndexPage::Home.find(id)
+  end
+
+  def education_programs
+    @education_programs ||= Communication::Website::IndexPage::EducationPrograms.find(id)
+  end
+
+  protected
+
+  def explicit_blob_ids
+    super.concat [featured_image&.blob_id]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
+  end
 
 end

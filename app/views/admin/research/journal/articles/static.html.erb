@@ -1,24 +1,24 @@
 ---
-title: "<%= @article.title %>"
-slug: "<%= @article.slug %>"
+title: "<%= @about.title %>"
+slug: "<%= @about.slug %>"
 description: >
-  <%= prepare_text_for_static @article.abstract %>
-<% if @article.volume && @article.volume.path %>
+  <%= prepare_text_for_static @about.abstract %>
+<% if @about.volume && @about.volume.path %>
 volumes:
-  - "<%= @article.volume.path %>"
+  - "<%= @about.volume.path %>"
 <% end %>
-weight: <%= @article.position %>
-date: <%= @article.published_at %> UTC
-<% if @article.pdf.attached? %>
-pdf: "<%= @article.pdf.blob_id %>"
+weight: <%= @about.position %>
+date: <%= @about.published_at %> UTC
+<% if @about.pdf.attached? %>
+pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
 keywords: >
-  <%= @article.keywords %>
+  <%= @about.keywords %>
 researchers:
-<% @article.people.each do |person| %>
+<% @about.people.each do |person| %>
 - "<%= person.slug %>"
 <% end %>
-abstract: "<%= @article.abstract %>"
-references: "<%= @article.references %>"
+abstract: "<%= @about.abstract %>"
+references: "<%= @about.references %>"
 ---
-<%= prepare_html_for_static @article.text, @article.university %>
+<%= prepare_html_for_static @about.text, @about.university %>

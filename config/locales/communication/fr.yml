@@ -14,8 +14,6 @@ fr:
         one: Catégorie
         other: Catégories
         all: Toutes les catégories
-      communication/website/home:
-        one: Page d'accueil
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
@@ -37,8 +35,6 @@ fr:
         one: Actualité
         other: Actualités
         all: Toutes les actualités
-      communication/website/structure:
-        one: Structure
     attributes:
       communication/website:
         about: Sujet du site
@@ -58,11 +54,6 @@ fr:
         name: Nom
         parent: Catégorie parente
         slug: Slug
-      communication/website/home:
-        description: Description (SEO)
-        text: Texte
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
       communication/website/index_page:
         description: Description (SEO)
         featured_image: Image à la une
@@ -110,35 +101,6 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
-      communication/website/structure:
-        administrators_description: Description (SEO)
-        administrators_path: Chemin (slug)
-        administrators_title: Titre
-        authors_description: Description (SEO)
-        authors_path: Chemin (slug)
-        authors_title: Titre
-        communication_posts_description: Description (SEO)
-        communication_posts_path: Chemin (slug)
-        communication_posts_title: Titre
-        education_programs_description: Description (SEO)
-        education_programs_path: Chemin (slug)
-        education_programs_title: Titre
-        home_title: Titre
-        persons_description: Description (SEO)
-        persons_path: Chemin (slug)
-        persons_title: Titre
-        research_articles_description: Description (SEO)
-        research_articles_path: Chemin (slug)
-        research_articles_title: Titre
-        research_volumes_description: Description (SEO)
-        research_volumes_path: Chemin (slug)
-        research_volumes_title: Titre
-        researchers_description: Description (SEO)
-        researchers_path: Chemin (slug)
-        researchers_title: Titre
-        teachers_description: Description (SEO)
-        teachers_path: Chemin (slug)
-        teachers_title: Titre
   communication:
     authors:
       one: Auteur·rice
@@ -235,7 +197,3 @@ fr:
               staff: Équipe
               teachers: Équipe pédagogique
               url: URL
-  simple_form:
-    hints:
-      communication_website_structure:
-        home_title: Sera utilisé notamment dans le fil d'Ariane

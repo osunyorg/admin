@@ -1,25 +1,25 @@
 ---
-title: "<%= @post.title %>"
-date: <%= @post.published_at %> UTC
-slug: "<%= @post.slug %>"
-<% if @post.pinned %>
+title: "<%= @about.title %>"
+date: <%= @about.published_at %> UTC
+slug: "<%= @about.slug %>"
+<% if @about.pinned %>
 weight: 1
 <% end %>
-<% if @post.author %>
+<% if @about.author %>
 authors:
-  - "<%= @post.author.slug %>"
+  - "<%= @about.author.slug %>"
 <% end %>
-<% if @post.categories.any? %>
+<% if @about.categories.any? %>
 categories:
-  <% @post.categories.each do |category| %>
+  <% @about.categories.each do |category| %>
   - "<%= category.path %>/"
   <% end %>
 <% end %>
-<% if @post.featured_image.attached? %>
-image: "<%= @post.featured_image.blob.id %>"
-image_alt: "<%= @post.featured_image_alt %>"
+<% if @about.featured_image.attached? %>
+image: "<%= @about.featured_image.blob.id %>"
+image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
 description: >
-  <%= prepare_text_for_static @post.description %>
+  <%= prepare_text_for_static @about.description %>
 ---
-<%= prepare_html_for_static @post.text, @post.university %>
+<%= prepare_html_for_static @about.text, @about.university %>

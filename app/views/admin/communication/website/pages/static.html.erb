@@ -1,17 +1,17 @@
 ---
 title: >
-  <%= @page.title %>
-url: "<%= @page.path %>/"
-position: <%= @page.position %>
-<% if @page.best_featured_image.attached? %>
-image: "<%= @page.best_featured_image.blob.id %>"
-image_alt: "<%= @page.featured_image_alt %>"
+  <%= @about.title %>
+url: "<%= @about.path %>/"
+position: <%= @about.position %>
+<% if @about.best_featured_image.attached? %>
+image: "<%= @about.best_featured_image.blob.id %>"
+image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
-<% if @page.related_category %>
-category: "<%= @page.related_category.path %>/"
+<% if @about.related_category %>
+category: "<%= @about.related_category.path %>/"
 <% end %>
 description: >
-  <%= prepare_text_for_static @page.description %>
-<%= render 'admin/communication/website/blocks/static', about: @page %>
+  <%= prepare_text_for_static @about.description %>
+<%= render 'admin/communication/website/blocks/static', about: @about %>
 ---
-<%= prepare_html_for_static @page.text, @page.university %>
+<%= prepare_html_for_static @about.text, @about.university %>

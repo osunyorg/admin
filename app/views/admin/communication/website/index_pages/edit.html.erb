@@ -10,14 +10,15 @@
             <h5 class="card-title mb-0"><%= t('content') %></h5>
           </div>
           <div class="card-body">
-            <%= f.input :title %>
+            <%= f.input :title, input_html: { name: 'communication_website_index_page[title]', id: 'communication_website_index_page_title' }  %>
             <%= f.input :path,
                         input_html: {
+                          name: 'communication_website_index_page[path]',
                           class: 'js-slug-input',
                           data: { source: '#communication_website_index_page_title' }
                         } %>
-            <%= f.input :description %>
-            <%= f.input :text, as: :summernote %>
+            <%= f.input :description, input_html: { name: 'communication_website_index_page[description]' } %>
+            <%= f.input :text, as: :summernote, input_html: { name: 'communication_website_index_page[text]' } %>
           </div>
         </div>
       </div>
@@ -31,10 +32,13 @@
                         as: :single_deletable_file,
                         direct_upload: true,
                         label: false,
-                        input_html: { accept: '.jpg,.jpeg,.png' },
+                        input_html: {
+                          accept: '.jpg,.jpeg,.png',
+                          name: 'communication_website_index_page[featured_image]'
+                        },
                         preview: true
              %>
-             <%= f.input :featured_image_alt %>
+             <%= f.input :featured_image_alt, input_html: { name: 'communication_website_index_page[featured_image_alt]' } %>
           </div>
         </div>
       </div>

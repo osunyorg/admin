@@ -1,0 +1,12 @@
+---
+title: >
+  <%= @website.name %>
+breadcrumb_title: "<%= @about.title %>"
+<% if @about.featured_image.attached? %>
+image: "<%= @about.featured_image.blob.id %>"
+image_alt: "<%= @about.featured_image_alt %>"
+<% end %>
+description: >
+  <%= @about.description %>
+---
+<%= prepare_html_for_static @about.text, @website.university %>
