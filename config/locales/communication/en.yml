@@ -51,7 +51,7 @@ en:
         template: Kind of block
       communication/website/category:
         children: Children categories
-        description: Description
+        description: Description (SEO)
         name: Name
         parent: Parent category
         slug: Slug

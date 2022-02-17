@@ -118,6 +118,7 @@ fr:
     server_admin: Admin serveur
     sign_out: Déconnexion
   metadata: Informations
+  open: Ouvrir
   please_confirm: Est-ce que vous confirmez ?
   please_confirm_with_children: "ATTENTION : effacer cet élément supprimera aussi tous ses enfants. Est-ce que vous confirmez ?"
   preview:

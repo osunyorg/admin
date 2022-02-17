@@ -39,7 +39,7 @@ fr:
       research/journal/volume:
         featured_image: Couverture
         featured_image_alt: Texte alternatif
-        description: Description
+        description: Description (SEO)
         keywords: Mots clés
         number: Numéro
         published: Publié ?
@@ -52,7 +52,7 @@ fr:
         name: Nom
         zipcode: Code postal
       research/laboratory/axis:
-        description: Description
+        description: Description (SEO)
         name: Nom
         short_name: Nom court
         text: Texte

@@ -18,6 +18,14 @@
     <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
+          <div class="float-end">
+            <% if @page.url %>
+              <%= link_to t('open'),
+                          @page.url,
+                          target: :_blank,
+                          class: 'btn btn-light' %>
+            <% end %>
+          </div>
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
         <div class="card-body">

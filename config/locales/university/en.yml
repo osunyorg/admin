@@ -18,7 +18,7 @@ en:
         abilities: Abilities
         biography: Biography
         communication_website_posts: Posts
-        description: Description
+        description: Description (SEO)
         education_programs: Programs
         email: Email
         first_name: First name
@@ -39,7 +39,7 @@ en:
         person: Person
         target_id: ''
       university/role:
-        description: Description
+        description: Description (SEO)
         people: People
     models:
       university:

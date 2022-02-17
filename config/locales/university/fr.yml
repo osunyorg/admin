@@ -18,7 +18,7 @@ fr:
         abilities: Responsabilités
         biography: Biographie
         communication_website_posts: Actualités
-        description: Description
+        description: Description (SEO)
         education_programs: Formations
         email: Email
         first_name: Prénom
@@ -39,7 +39,7 @@ fr:
         person: Personne
         target_id: ''
       university/role:
-        description: Description
+        description: Description (SEO)
         people: Personnes
     models:
       university:

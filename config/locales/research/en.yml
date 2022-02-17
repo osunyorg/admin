@@ -39,7 +39,7 @@ en:
       research/journal/volume:
         featured_image: Cover
         featured_image_alt: Alt text
-        description: Description
+        description: Description (SEO)
         keywords: Keywords
         number: Number
         published: Published?
@@ -52,7 +52,7 @@ en:
         name: Name
         zipcode: Zipcode
       research/laboratory/axis:
-        description: Description
+        description: Description (SEO)
         name: Name
         short_name: Short name
         text: Text

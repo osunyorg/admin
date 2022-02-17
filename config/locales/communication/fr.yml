@@ -54,7 +54,7 @@ fr:
         template: Type de bloc
       communication/website/category:
         children: Catégories enfants
-        description: Description
+        description: Description (SEO)
         name: Nom
         parent: Catégorie parente
         slug: Slug

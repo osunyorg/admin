@@ -85,6 +85,12 @@ class Communication::Website::Page < ApplicationRecord
     [self] + descendents + active_storage_blobs
   end
 
+  def url
+    return unless published
+    return if website.url.blank?
+    "#{website.url}#{path}"
+  end
+
   def to_s
     "#{title}"
   end
