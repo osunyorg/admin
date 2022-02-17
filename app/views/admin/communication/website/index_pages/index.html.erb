@@ -2,11 +2,21 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
 
-  <ul>
-  <% @kinds.each do |key, value| %>
-    <li><%= link_to t("communication.website.index_pages.default.#{key}.title"), 
-                    admin_communication_website_index_path(website_id: @website.id, kind: key) %></li>
-  <% end %>
-  </ul>
+  <div class="row">
+    <% @kinds.each do |key, value| %>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title"><%= t("communication.website.index_pages.default.#{key}.title") %></h5>
+          </div>
+          <div class="card-body">
+            <%= link_to t("edit"),
+                        admin_communication_website_index_path(website_id: @website.id, kind: key),
+                        class: button_classes('stretched-link') %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
 <% end %>
