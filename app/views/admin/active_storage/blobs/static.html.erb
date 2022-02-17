@@ -1,17 +1,17 @@
 <%
-width, height = @blob.metadata.values_at('width', 'height')
+width, height = @about.metadata.values_at('width', 'height')
 ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
-university = University.find_by(id: @blob.university_id)
+university = University.find_by(id: @about.university_id)
 base_url = university&.url || ""
-media_endpoint_path = medium_path(signed_id: @blob.signed_id, filename_with_transformations: @blob.filename)
+media_endpoint_path = medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)
 %>
-<%# TODO: Replace @blob.url with the media endpoint when it's ready %>
+<%# TODO: Replace @about.url with the media endpoint when it's ready %>
 <%= raw({
-  "name" => @blob.filename.to_s,
-  "size" => @blob.byte_size,
+  "name" => @about.filename.to_s,
+  "size" => @about.byte_size,
   "width" => width,
   "height" => height,
   "ratio" => ratio,
   "url" => "#{base_url}#{media_endpoint_path}",
-  "direct_url" => @blob.url
+  "direct_url" => @about.url
 }.compact.to_yaml) %>

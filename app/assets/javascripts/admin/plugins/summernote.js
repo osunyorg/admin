@@ -44,20 +44,6 @@ $(function () {
                     if (e.keyCode === 8) {
                         $.summernote.rails.cleanEmptyAttachments($editable);
                     }
-                },
-                // Remove text styles on paste
-                onPaste: function (event) {
-                    var paragraph;
-                    event.preventDefault();
-                    // Get and trim clipboard content as paragraph
-                    paragraph = document.createElement('p');
-                    paragraph.textContent = ((event.originalEvent || event).clipboardData || window.clipboardData).getData('Text').trim();
-                    // Delete selection if anything is selected (expected behaviour on paste)
-                    if ((window.getSelection !== undefined ? window.getSelection() : document.selection.createRange()).toString().length > 0) {
-                        document.execCommand('delete', false);
-                    }
-                    // Insert trimmed clipboard content as paragraph
-                    document.execCommand('insertHTML', false, paragraph.outerHTML);
                 }
             }
         });
