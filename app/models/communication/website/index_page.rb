@@ -29,12 +29,20 @@ class Communication::Website::IndexPage < ApplicationRecord
   include WithFeaturedImage
   include WithBlobs
 
-  enum kind: { home: 0,
-               communication_posts: 10,
-               education_programs: 20,
-               research_articles: 30, research_volumes: 32,
-               persons: 100, administrators: 110, authors: 120, researchers: 130, teachers: 140
-              }
+  has_summernote :text
+
+  enum kind: {
+    home: 0,
+    communication_posts: 10,
+    education_programs: 20,
+    research_articles: 30,
+    research_volumes: 32,
+    persons: 100,
+      administrators: 110,
+      authors: 120,
+      researchers: 130,
+      teachers: 140
+  }
 
   belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id

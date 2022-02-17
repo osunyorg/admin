@@ -30,6 +30,7 @@ $(function () {
                 'h3',
                 'h4'
             ],
+            followingToolbar: true,
             callbacks: {
                 onImageUpload: function (files) {
                     var attachmentUpload = new SummernoteAttachmentUpload(this, files[0]);
