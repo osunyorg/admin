@@ -43,5 +43,11 @@ namespace :communication do
     end
     get 'structure' => 'website/structure#edit'
     patch 'structure' => 'website/structure#update'
+
+    get 'indexes' => 'website/index_pages#index'
+    get 'indexes/:kind' => 'website/index_pages#edit', as: :index
+    post 'indexes/:kind' => 'website/index_pages#update'
+    patch 'indexes/:kind' => 'website/index_pages#update'
+    put 'indexes/:kind' => 'website/index_pages#update'
   end
 end
