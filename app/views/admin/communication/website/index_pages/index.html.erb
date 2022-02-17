@@ -8,9 +8,11 @@
         <div class="card">
           <div class="card-body">
             <h2 class="card-title"><%= t("communication.website.index_pages.default.#{key}.title") %></h2>
-            <p class="text-muted mb-0">
-              <%= @website.index_for(key).title %>
-            </p>
+            <% if t("communication.website.index_pages.default.#{key}.title") != @website.index_for(key).title %>
+              <p class="text-muted mb-0 fst-italic">
+                <%= @website.index_for(key).title %>
+              </p>
+            <% end %>
             <p class="text-muted small">
               <%= @website.index_for(key).description %>&nbsp;
             </p>
