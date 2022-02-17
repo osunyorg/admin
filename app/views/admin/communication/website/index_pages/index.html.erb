@@ -6,13 +6,19 @@
     <% @kinds.each do |key, value| %>
       <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="card">
-          <div class="card-header">
-            <h5 class="card-title"><%= t("communication.website.index_pages.default.#{key}.title") %></h5>
-          </div>
           <div class="card-body">
-            <%= link_to t("edit"),
-                        admin_communication_website_index_path(website_id: @website.id, kind: key),
-                        class: button_classes('stretched-link') %>
+            <h2 class="card-title"><%= t("communication.website.index_pages.default.#{key}.title") %></h2>
+            <p class="text-muted mb-0">
+              <%= @website.index_for(key).title %>
+            </p>
+            <p class="text-muted small">
+              <%= @website.index_for(key).description %>&nbsp;
+            </p>
+            <div class="text-end">
+              <%= link_to t("edit"),
+                          admin_communication_website_index_path(website_id: @website.id, kind: key),
+                          class: button_classes('stretched-link') %>
+            </div>
           </div>
         </div>
       </div>
