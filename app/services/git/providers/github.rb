@@ -60,10 +60,6 @@ class Git::Providers::Github < Git::Providers::Abstract
     @client ||= Octokit::Client.new access_token: access_token
   end
 
-  def batch
-    @batch ||= []
-  end
-
   def default_branch
     @default_branch ||= client.repo(repository)[:default_branch]
   end
