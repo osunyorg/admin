@@ -1,36 +1,73 @@
-<a class="<%= button_classes('mb-4') %>" v-on:click="data.elements.push({name: '', url: '', logo: ''})">Add partner</a>
-
-
-<div class="row">
-    <div class="col-md-4">
-        <draggable :list="data.elements">
-            <div class="card" v-for="element in data.elements">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-11">
-                            <div class="mb-3">
-                                <label class="form-label">Partner's name</label>
-                                <input class="form-control" type="text" v-model="element.name" placeholder="Type partner's name here">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Partner's url</label>
-                                <input class="form-control" type="text" v-model="element.url"  placeholder="Type partner's url here">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Partner's logo</label>
-                                <input class="form-control" type="file" v-model="element.logo">
-                            </div>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </draggable>
+<a  class="<%= button_classes('mb-4') %>"
+    v-on:click="data.elements.push({title: '', partners: [] })">
+    Add category
+</a>
+<draggable :list="data.elements">
+  <div class="card" v-for="element in data.elements">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-1">
+          <a class="btn ps-0">
+            <i class="fa fa-bars handle"></i>
+          </a>
+        </div>
+        <div class="col-10">
+          <input  class="form-control form-control-lg"
+                  type="text"
+                  v-model="element.title"
+                  placeholder="Type category name here">
+        </div>
+        <div class="col-1 text-end">
+          <a  class="btn btn-sm btn-danger mt-1"
+              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+              <i class="fas fa-times"></i>
+          </a>
+        </div>
+      </div>
     </div>
-</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="offset-md-1 col-md-11">
+          <a  class="<%= button_classes('mb-3') %>"
+              v-on:click="element.partners.push({name: '', url: '', logo: ''})">
+              Add partner
+          </a>
+          <draggable :list="element.partners">
+            <div v-for="partner in element.partners">
+              <div class="row">
+                <div class="col-1">
+                  <a class="btn ps-0">
+                    <i class="fa fa-bars handle"></i>
+                  </a>
+                </div>
+                <div class="col-lg-3 col-sm-10">
+                  <input class="form-control mb-2"
+                         type="text"
+                         v-model="partner.name"
+                         placeholder="Type partner's name here">
+                </div>
+                <div class="offset-lg-0 col-lg-3 offset-sm-1 col-sm-10">
+                  <input class="form-control mb-2"
+                         type="text"
+                         v-model="partner.url"
+                         placeholder="Type partner's url here">
+                </div>
+                <div class="offset-lg-0 col-lg-4 offset-sm-1 col-sm-10">
+                  <input class="form-control mb-2"
+                         type="file"
+                         v-model="partner.logo">
+                </div>
+                <div class="col-1 text-end">
+                  <a  class="btn btn-sm btn-danger mt-1"
+                      v-on:click="element.persons.splice(element.persons.indexOf(person), 1)">
+                      <i class="fas fa-times"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </draggable>
+        </div>
+      </div>
+    </div>
+  </div>
+</draggable>
