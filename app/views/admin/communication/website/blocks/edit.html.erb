@@ -25,6 +25,25 @@
     },
     data() {
       return { data: <%= @block.data.to_json.html_safe %> }
+    },
+    methods: {
+      // TODO : replace by real image upload
+      onFileImageChange(event, object, key) {
+        var files = event.target.files || event.dataTransfer.files;
+        if (!files.length)
+          return;
+        this.assignImage(files[0], object, key);
+      },
+      assignImage(file, object, key) {
+        var image = new Image();
+        var reader = new FileReader();
+
+        reader.onload = function(event){
+          object[key] = event.target.result;
+        }.bind(this);
+
+        reader.readAsDataURL(file);
+      }
     }
   });
   app.mount('#app')

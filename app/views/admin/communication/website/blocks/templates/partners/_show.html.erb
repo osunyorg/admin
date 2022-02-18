@@ -1,12 +1,19 @@
 <% @block.data['elements'].each do |element| %>
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title"><%= element['name'] %></h2>
-        <p><%= element['url'] %></p>
-        <% if element['logo'] %>
-          <%#= kamifusen_tag element['logo'], class: 'img-fluid' %>
-        <% end %>
+  <h2><%= element['title'] %></h2>
+  <div class="row">
+    <% element['partners'].each do |partner| %>
+      <div class="col-md-3">
+        <article class="card">
+          <div class="card-body">
+            <%# TODO : Replace by kamifusen %>
+            <% if partner['logo'] %>
+              <img src="<%= partner['logo'] %>" class="img-fluid mb-2" />
+            <% end %>
+            <h3 class="card-title h5"><%= partner['name'] %></h3>
+            <p class="mb-0"><%= partner['url'] %></p>
+          </div>
+        </article>
       </div>
-    </div>
+    <% end %>
   </div>
 <% end %>

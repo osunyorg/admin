@@ -1,37 +1,99 @@
-<a  class="<%= button_classes('mb-4') %>" 
-    v-on:click="data.elements.push({name: '', url: '', logo: ''})">
-    Add partner
+<a  class="<%= button_classes('mb-4') %>"
+    v-on:click="data.elements.push({title: '', partners: [] })">
+    Add category
 </a>
-
-<div class="row">
-  <draggable class="col-md-6" :list="data.elements">
-    <div class="card" v-for="element in data.elements">
-      <div class="card-header pb-0 nav justify-content-between">
-          <a class="btn ps-0">
-            <i class="fa fa-bars handle"></i>
-          </a>
-          <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-            <i class="fas fa-times"></i>
-          </a>
+<draggable :list="data.elements">
+  <div class="card" v-for="element in data.elements">
+    <div class="card-header pb-0 nav justify-content-between">
+      <div class="d-flex">
+        <a class="btn ps-0">
+          <i class="fa fa-bars handle"></i>
+        </a>
+        <h3>{{ element.title }}</h3>
       </div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label class="form-label">Partner's name</label>
-          <input class="form-control" type="text" v-model="element.name" placeholder="Type partner's name here">
+      <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+        <i class="fas fa-times"></i>
+      </a>
+    </div>
+    <div class="card-header">
+      <div class="row">
+        <div class="col-10">
+          <label class="form-label" for="">Title</label>
+          <input  class="form-control form-control-lg"
+                  type="text"
+                  v-model="element.title"
+                  placeholder="Type category name here">
         </div>
-
-        <div class="mb-3">
-          <label class="form-label">Partner's url</label>
-          <input class="form-control" type="url" v-model="element.url"  placeholder="Type partner's url here">
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Partner's logo</label>
-          <input class="form-control" type="file" v-model="element.logo">
-        </div>
-
       </div>
     </div>
-  </draggable>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <p>Partner for {{ element.title  }}</p>
+        </div>
+        <div class="col-md-4 text-end">
+          <a  class="<%= button_classes('mt-n1') %>"
+              v-on:click="element.partners.push({name: '', url: '', logo: ''})">
+              Add partner
+          </a>
+        </div>
+      </div>
+          
+      <draggable :list="element.partners" class="list-group">
+        <div v-for="partner in element.partners" class="list-group-item">
+          <div class="row">
+            <div class="col-1">
+              <a class="btn ps-0">
+                <i class="fa fa-bars handle"></i>
+              </a>
+            </div>
+            <div class="col-lg-3 col-sm-10">
+              <label class="form-label">
+                Name : 
+                <input class="form-control mb-2"
+                      type="text"
+                      v-model="partner.name"
+                      placeholder="Type partner's name here">
+              </label>
+            </div>
+            <div class="offset-lg-0 col-lg-3 offset-sm-1 col-sm-10">
+              <label class="form-label">
+                Url <small>(starting with http:// )</small>: 
+                <input class="form-control mb-2"
+                      type="text"
+                      v-model="partner.url"
+                      placeholder="Type partner's url here">
+              </label>
+            </div>
+            <div class="offset-lg-0 col-lg-4 offset-sm-1 col-sm-10">
+              <%# TODO : Replace by real image upload %>
+              <label class="form-label">
+                Logo :
+                <input  class="form-control mb-2"
+                        type="file"
+                        accept="image/*"
+                        @change="onFileImageChange( $event, partner, 'logo' )">
 
-</div>
+                <div v-if="partner.logo">
+                  <img :src="partner.logo" class="img-fluid" />
+                  <a  class="btn btn-sm btn-danger mt-1"
+                      v-on:click="partner.logo=''">
+                      Remove
+                      <i class="fas fa-times"></i>
+                  </a>
+                </div>
+
+              </label>
+            </div>
+            <div class="col-1 text-end">
+              <a  class="btn btn-sm btn-danger mt-1"
+                  v-on:click="element.partners.splice(element.partners.indexOf(person), 1)">
+                  <i class="fas fa-times"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </draggable>
+    </div>
+  </div>
+</draggable>
