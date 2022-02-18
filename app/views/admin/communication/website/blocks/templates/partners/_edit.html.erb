@@ -1,36 +1,37 @@
-<a class="<%= button_classes('mb-4') %>" v-on:click="data.elements.push({name: '', url: '', logo: ''})">Add partner</a>
-
+<a  class="<%= button_classes('mb-4') %>" 
+    v-on:click="data.elements.push({name: '', url: '', logo: ''})">
+    Add partner
+</a>
 
 <div class="row">
-    <div class="col-md-4">
-        <draggable :list="data.elements">
-            <div class="card" v-for="element in data.elements">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-11">
-                            <div class="mb-3">
-                                <label class="form-label">Partner's name</label>
-                                <input class="form-control" type="text" v-model="element.name" placeholder="Type partner's name here">
-                            </div>
+  <draggable class="col-md-6" :list="data.elements">
+    <div class="card" v-for="element in data.elements">
+      <div class="card-header pb-0 nav justify-content-between">
+          <a class="btn ps-0">
+            <i class="fa fa-bars handle"></i>
+          </a>
+          <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+            <i class="fas fa-times"></i>
+          </a>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Partner's name</label>
+          <input class="form-control" type="text" v-model="element.name" placeholder="Type partner's name here">
+        </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Partner's url</label>
-                                <input class="form-control" type="text" v-model="element.url"  placeholder="Type partner's url here">
-                            </div>
+        <div class="mb-3">
+          <label class="form-label">Partner's url</label>
+          <input class="form-control" type="url" v-model="element.url"  placeholder="Type partner's url here">
+        </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Partner's logo</label>
-                                <input class="form-control" type="file" v-model="element.logo">
-                            </div>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </draggable>
+        <div class="mb-3">
+          <label class="form-label">Partner's logo</label>
+          <input class="form-control" type="file" v-model="element.logo">
+        </div>
+
+      </div>
     </div>
+  </draggable>
+
 </div>

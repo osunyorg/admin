@@ -1,0 +1,12 @@
+<% @block.data['elements'].each do |element| %>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><%= element['name'] %></h2>
+        <p><%= element['url'] %></p>
+        <% if element['logo'] %>
+          <%#= kamifusen_tag element['logo'], class: 'img-fluid' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
