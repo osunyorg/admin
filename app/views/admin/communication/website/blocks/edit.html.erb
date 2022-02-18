@@ -20,6 +20,9 @@
 
 <script>
   var app = Vue.createApp({
+    components: {
+      draggable: VueDraggableNext.VueDraggableNext,
+    },
     data() {
       return { data: <%= @block.data.to_json.html_safe %> }
     }
