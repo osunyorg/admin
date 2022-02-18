@@ -9,4 +9,10 @@ class Git::Providers::Abstract
   def valid?
     repository.present? && access_token.present?
   end
+
+  protected
+
+  def batch
+    @batch ||= []
+  end
 end
