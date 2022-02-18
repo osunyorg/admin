@@ -1,5 +1,5 @@
 <a class="<%= button_classes('mb-4') %>" v-on:click="data.elements.push({title: 'Role name', persons: []})">Add role</a>
-<draggable class="dragArea list-group w-full" :list="data.elements">
+<draggable :list="data.elements">
   <div class="card" v-for="element in data.elements">
     <div class="card-body">
       <div class="row">
@@ -24,23 +24,27 @@
               <a class="<%= button_classes('mt-n1') %>" v-on:click="element.persons.push({id: '', role: ''})">Add person</a>
             </div>
           </div>
-          <div v-for="person in element.persons" class="mb-2">
-            <div class="row">
-              <div class="col-md-5">
-                <select class="form-select select" v-model="person.id">
-                  <% @website.university.people.ordered.each_with_index do |person, index| %>
-                  <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
-                  <% end %>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <input class="form-control" type="text" v-model="person.role" placeholder="Type role here">
-              </div>
-              <div class="col-md-1 text-end">
-                <a class="btn btn-sm btn-danger mt-1" v-on:click="element.persons.splice(element.persons.indexOf(person), 1)"><i class="fas fa-times"></i></a>
+
+          <draggable :list="element.persons">
+            <div v-for="person in element.persons" class="mb-2">
+              <div class="row">
+                <div class="col-md-5">
+                  <select class="form-select select" v-model="person.id">
+                    <% @website.university.people.ordered.each_with_index do |person, index| %>
+                    <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <input class="form-control" type="text" v-model="person.role" placeholder="Type role here">
+                </div>
+                <div class="col-md-1 text-end">
+                  <a class="btn btn-sm btn-danger mt-1" v-on:click="element.persons.splice(element.persons.indexOf(person), 1)"><i class="fas fa-times"></i></a>
+                </div>
               </div>
             </div>
-          </div>
+          </draggable>
+
         </div>
       </div>
     </div>
