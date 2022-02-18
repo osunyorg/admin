@@ -29,9 +29,12 @@ class Git::Repository
 
   protected
 
-  # Enhancement add gitlab
   def provider
-    @provider ||= Git::Providers::Github.new(website&.access_token, website&.repository)
+    @provider ||= provider_class.new(website&.access_token, website&.repository)
+  end
+
+  def provider_class
+    @provider_class ||= "Git::Providers::#{website.git_provider.titleize}".constantize
   end
 
   def git_files

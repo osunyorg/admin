@@ -47,14 +47,15 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
-          <%= f.input :url %>
 
           <p class="mt-4"><strong><%= t('communication.website.git') %></strong></p>
           <div class="row">
             <div class="col-md-6">
+              <%= f.input :url %>
               <%= f.input :repository %>
             </div>
             <div class="col-md-6">
+              <%= f.input :git_provider, include_blank: false %>
               <%= f.input :access_token %>
             </div>
           </div>

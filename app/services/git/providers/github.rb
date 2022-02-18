@@ -1,11 +1,4 @@
-class Git::Providers::Github
-  attr_reader :access_token, :repository
-
-  def initialize(access_token, repository)
-    @access_token = access_token
-    @repository = repository
-  end
-
+class Git::Providers::Github < Git::Providers::Abstract
   def create_file(path, content)
     batch << {
       path: path,
@@ -59,10 +52,6 @@ class Git::Providers::Github
       sha = nil
     end
     sha
-  end
-
-  def valid?
-    repository.present? && access_token.present?
   end
 
   protected

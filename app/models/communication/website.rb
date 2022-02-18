@@ -5,6 +5,7 @@
 #  id                                :uuid             not null, primary key
 #  about_type                        :string           indexed => [about_id]
 #  access_token                      :string
+#  git_provider                      :integer          default(0)
 #  name                              :string
 #  repository                        :string
 #  static_pathname_administrators    :string           default("administrators")
@@ -42,6 +43,11 @@ class Communication::Website < ApplicationRecord
   belongs_to :university
 
   scope :ordered, -> { order(:name) }
+
+  enum git_provider: {
+    github: 0,
+    gitlab: 1
+  }
 
   def to_s
     "#{name}"
