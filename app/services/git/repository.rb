@@ -55,7 +55,9 @@ class Git::Repository
 
   def mark_as_synced
     git_files.each do |git_file|
-      git_file.update previous_path: git_file.path, previous_sha: git_file.sha
+      git_file.update previous_path: git_file.path,
+                      previous_sha: git_file.sha,
+                      previous_sha256: git_file.sha256
     end
   end
 end

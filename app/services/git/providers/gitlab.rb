@@ -8,7 +8,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def update_file(path, previous_path, content)
-    file = find_in_tree previous_path
+    file = find previous_path
     return if file.nil?
     if previous_path != path
       batch << {
