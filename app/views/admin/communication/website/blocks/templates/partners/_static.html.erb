@@ -1,3 +1,8 @@
-      - name: Partner 1
-        url: https://partner1.com
-        logo: "e09f3794-44e5-4b51-be02-0e384616e791"
+<% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
+<% block.data['elements'].each do |element| %>
+      - name: >
+          <%= element['title'] %>
+        url: <%= element['url'] %>
+        logo: <%= element['logo'] %>
+<% end %>
+<% end %>

@@ -1,4 +1,4 @@
-<a class="<%= button_classes('mb-4') %>" v-on:click="data.elements.push({title: 'Role name', persons: []})">Add role</a>
+<a class="<%= button_classes('mb-4') %>" v-on:click="data.elements.push({title: '', persons: []})">Add role</a>
 <draggable :list="data.elements">
   <div class="card" v-for="element in data.elements">
     <div class="card-body">
@@ -6,7 +6,7 @@
         <div class="col-md-4">
           <div class="row">
             <div class="col-md-11">
-              <input class="form-control" type="text" v-model="element.title">
+              <input class="form-control" type="text" v-model="element.title" placeholder="Type role name here">
             </div>
             <div class="col-md-1 text-end">
               <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
@@ -15,6 +15,7 @@
             </div>
           </div>
         </div>
+
         <div class="offset-md-1 col-md-7">
           <div class="row">
             <div class="col-md-8">
