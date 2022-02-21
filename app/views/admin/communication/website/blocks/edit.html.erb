@@ -43,7 +43,7 @@
       uploadFile(file, object, key) {
         var url = this.directUpload.url;
         var upload = new ActiveStorage.DirectUpload(file, url);
-        upload.create((error, blob) => {
+        upload.create(function (error, blob) {
           if (error) {
             console.log(error);
           } else {
@@ -53,10 +53,12 @@
               filename: blob.filename
             };
           }
-        });
+        }.bind(this));
       },
       getFileUrl(signed_id, filename) {
-        return this.directUpload.blobUrlTemplate.replace(':signed_id', signed_id).replace(':filename', filename);
+        return this.directUpload.blobUrlTemplate
+          .replace(':signed_id', signed_id)
+          .replace(':filename', filename);
       },
       getImageUrl(data) {
         return this.getFileUrl(data.signed_id, data.filename);

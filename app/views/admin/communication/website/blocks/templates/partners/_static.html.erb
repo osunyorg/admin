@@ -8,12 +8,9 @@ element['partners'].each do |partner|
 %>
           - name: "<%= partner['name'] %>"
             url: "<%= partner['url'] %>"
-            <% if partner.has_key?('logo') %>
-            <% if partner['logo'].has_key?('id') %>
+            <% unless partner.dig('logo', 'id').blank? %>
             logo: "<%= partner['logo']['id'] %>"
             <% end %>
-            <% end %>
 <% end %>
-        
 <% end %>
 <% end %>

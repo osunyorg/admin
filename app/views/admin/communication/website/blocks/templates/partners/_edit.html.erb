@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-4 text-end">
               <a  class="<%= button_classes('mt-n1') %>"
-                  v-on:click="category.partners.push({name: '', url: '', logo: ''})">
+                  v-on:click="category.partners.push({name: '', url: '', logo: {}})">
                   Add partner
               </a>
             </div>
@@ -78,10 +78,10 @@
                               @change="onFileImageChange( $event, partner, 'logo' )"
                               :id="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
 
-                      <div v-if="partner.logo">
+                      <div v-if="partner.logo.id">
                         <img :src="getImageUrl(partner.logo)" class="img-fluid d-block" />
                         <a  class="btn btn-sm btn-danger mt-1"
-                            v-on:click="partner.logo=''">
+                            v-on:click="partner.logo={}">
                             Remove
                             <i class="fas fa-times"></i>
                         </a>
