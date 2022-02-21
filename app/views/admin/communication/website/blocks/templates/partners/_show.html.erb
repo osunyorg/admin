@@ -1,0 +1,20 @@
+<% @block.data['elements'].each do |element| %>
+  <h2><%= element['title'] %></h2>
+  <div class="row">
+    <% element['partners'].each do |partner| %>
+      <div class="col-md-3">
+        <article class="card">
+          <div class="card-body">
+            <% unless partner.dig('logo', 'id').blank? %>
+              <% blob = ActiveStorage::Blob.find(partner.dig('logo', 'id')) %>
+              <%= kamifusen_tag blob, width: 300, class: 'img-fluid mb-2' %>
+            <% end %>
+
+            <h3 class="card-title h5"><%= partner['name'] %></h3>
+            <p class="mb-0"><%= partner['url'] %></p>
+          </div>
+        </article>
+      </div>
+    <% end %>
+  </div>
+<% end %>

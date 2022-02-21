@@ -3,12 +3,67 @@
 @block.data = {} if @block.data.nil? || @block.data.blank?
 @block.data['elements'] ||= []
 %>
-<div ng-app ng-init="data = <%= @block.data.is_a?(String) ? @block.data : @block.data.to_json %>">
+<div id="app">
   <%= simple_form_for [:admin, @block] do |f| %>
     <%= render "admin/communication/website/blocks/templates/#{@block.template}/edit", f: f %>
-    <textarea name="communication_website_block[data]" rows="20" cols="200" class="d-none">{{ data | json}}</textarea>
+    <textarea name="communication_website_block[data]" rows="20" cols="200" class="d-none">
+      {{ JSON.stringify(data) }}
+    </textarea>
     <% content_for :action_bar_right do %>
       <%= submit f %>
     <% end %>
   <% end %>
 </div>
+
+<%# Include vue.js before call Vue.createApp %>
+<%= javascript_include_tag 'vue' %>
+
+<script>
+  var app = Vue.createApp({
+    components: {
+      draggable: VueDraggableNext.VueDraggableNext,
+    },
+    data() {
+      return { 
+        directUpload: {
+          url: "<%= rails_direct_uploads_url.html_safe %>",
+          blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
+        },
+        data: <%= @block.data.to_json.html_safe %>
+      }
+    },
+    methods: {
+      // TODO : create a uploader vue3 component
+      onFileImageChange(event, object, key) {
+        var files = event.target.files || event.dataTransfer.files;
+        if (!files.length)
+          return;
+        this.uploadFile(files[0], object, key);
+      },
+      uploadFile(file, object, key) {
+        var url = this.directUpload.url;
+        var upload = new ActiveStorage.DirectUpload(file, url);
+        upload.create(function (error, blob) {
+          if (error) {
+            console.log(error);
+          } else {
+            object[key] = {
+              id: blob.id,
+              signed_id: blob.signed_id,
+              filename: blob.filename
+            };
+          }
+        }.bind(this));
+      },
+      getFileUrl(signed_id, filename) {
+        return this.directUpload.blobUrlTemplate
+          .replace(':signed_id', signed_id)
+          .replace(':filename', filename);
+      },
+      getImageUrl(data) {
+        return this.getFileUrl(data.signed_id, data.filename);
+      }
+    }
+  });
+  app.mount('#app')
+</script>
