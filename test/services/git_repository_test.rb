@@ -51,4 +51,55 @@ class GitRepositoryTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "incorrect credentials for gitlb" do
+    VCR.use_cassette(location) do
+      exception = assert_raises(Exception) do
+        provider = Git::Providers::Gitlab.new 'wrong token', 'wrong id'
+        provider.create_file '/path.txt', 'content'
+        provider.push 'this is a commit'
+      end
+      assert_equal exception.class, Gitlab::Error::Unauthorized
+    end
+  end
+
+  test "file creation on gitlab" do
+    VCR.use_cassette(location) do
+      assert_nothing_raised do
+        provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_TOKEN'], ENV['TEST_GITLAB_REPOSITORY']
+        provider.create_file 'test.txt', 'content'
+        result = provider.push 'Creating test.txt file'
+      end
+    end
+  end
+
+  test "file update on gitlab" do
+    VCR.use_cassette(location) do
+      assert_nothing_raised do
+        provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_TOKEN'], ENV['TEST_GITLAB_REPOSITORY']
+        provider.update_file 'test.txt', 'test.txt', 'new content'
+        result = provider.push 'Updating test.txt file'
+      end
+    end
+  end
+
+  test "file move on gitlab" do
+    VCR.use_cassette(location) do
+      assert_nothing_raised do
+        provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_TOKEN'], ENV['TEST_GITLAB_REPOSITORY']
+        provider.update_file 'new_test.txt', 'test.txt', 'new content'
+        result = provider.push 'Moving test.txt file'
+      end
+    end
+  end
+
+  test "file destroy on gitlab" do
+    VCR.use_cassette(location) do
+      assert_nothing_raised do
+        provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_TOKEN'], ENV['TEST_GITLAB_REPOSITORY']
+        provider.destroy_file 'new_test.txt'
+        result = provider.push 'Destroying new_test.txt file'
+      end
+    end
+  end
 end

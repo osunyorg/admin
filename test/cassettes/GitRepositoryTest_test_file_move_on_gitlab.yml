@@ -1,0 +1,159 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/<TEST_GITLAB_REPOSITORY>/repository/files/test.txt?ref=main
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Gitlab Ruby Gem 4.18.0
+      Authorization:
+      - Bearer <TEST_GITLAB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 21 Feb 2022 17:44:27 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Etag:
+      - W/"d5c7ce69cbb98d64d63988d4b7d3384f"
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Gitlab-Blob-Id:
+      - 47d2739ba2c34690248c8f91b84bb54e8936899a
+      X-Gitlab-Commit-Id:
+      - 239c334f968ecbb7d350e7edfd319717891b133d
+      X-Gitlab-Content-Sha256:
+      - fe32608c9ef5b6cf7e3f946480253ff76f24f4ec0678f3d0f07f9844cbff9601
+      X-Gitlab-Encoding:
+      - base64
+      X-Gitlab-File-Name:
+      - test.txt
+      X-Gitlab-File-Path:
+      - test.txt
+      X-Gitlab-Last-Commit-Id:
+      - 239c334f968ecbb7d350e7edfd319717891b133d
+      X-Gitlab-Ref:
+      - main
+      X-Gitlab-Size:
+      - '11'
+      X-Request-Id:
+      - 01FWEP4YMG7J8ECYBDGBV5E0P7
+      X-Runtime:
+      - '0.076870'
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Gitlab-Lb:
+      - fe-11-lb-gprd
+      Gitlab-Sv:
+      - api-gke-us-east1-d
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=FNg9ug%2FXIRO%2B%2BpLKzAIHllWEIMmLlfU7FrfsOCcHUuGh61MJTzNXoBZ%2BcsMRWOD3uMIEeOe%2Br7tkuKtnGO5v6svpuXfLh8Cy4PzLhJoNgzf95lf6F87ng0YGtB93bKkA6RIjRK%2BtB7U%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 6e11c8638e723b49-CDG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"file_name":"test.txt","file_path":"test.txt","size":11,"encoding":"base64","content_sha256":"fe32608c9ef5b6cf7e3f946480253ff76f24f4ec0678f3d0f07f9844cbff9601","ref":"main","blob_id":"47d2739ba2c34690248c8f91b84bb54e8936899a","commit_id":"239c334f968ecbb7d350e7edfd319717891b133d","last_commit_id":"239c334f968ecbb7d350e7edfd319717891b133d","content":"bmV3IGNvbnRlbnQ="}'
+  recorded_at: Mon, 21 Feb 2022 17:44:27 GMT
+- request:
+    method: post
+    uri: https://gitlab.com/api/v4/projects/<TEST_GITLAB_REPOSITORY>/repository/commits
+    body:
+      encoding: UTF-8
+      string: branch=main&commit_message=Moving%20test.txt%20file&actions%5B%5D%5Baction%5D=move&actions%5B%5D%5Bfile_path%5D=new_test.txt&actions%5B%5D%5Bprevious_path%5D=test.txt&actions%5B%5D%5Baction%5D=update&actions%5B%5D%5Bfile_path%5D=new_test.txt&actions%5B%5D%5Bcontent%5D=new%20content
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Gitlab Ruby Gem 4.18.0
+      Authorization:
+      - Bearer <TEST_GITLAB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Mon, 21 Feb 2022 17:44:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '690'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Etag:
+      - W/"45773ae11e4dac4015ec44d2d0d8736c"
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 01FWEP4YX7XDERBPVFXRVE31NA
+      X-Runtime:
+      - '0.392906'
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Gitlab-Lb:
+      - fe-20-lb-gprd
+      Gitlab-Sv:
+      - api-gke-us-east1-d
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=J7nKZhEZxq7U9ETL0D52g5w%2BnbGZ4lyJvLmV%2BPvjED%2FpKh%2FgOYRlk9IHrLH4ijl2xkJc7Vwqp%2Fyu4jxU4Ay%2Bhmj91hynG1F3OTK82A6NX3l5HboRDARyGcwovF4S4XcJQsgW%2Bk0y4qI%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 6e11c8653b3a3b97-CDG
+    body:
+      encoding: UTF-8
+      string: '{"id":"5a5bbe5f19533c7eaaeff596c1d866ed9f1b516a","short_id":"5a5bbe5f","created_at":"2022-02-21T17:44:27.000+00:00","parent_ids":["239c334f968ecbb7d350e7edfd319717891b133d"],"title":"Moving
+        test.txt file","message":"Moving test.txt file","author_name":"Arnaud Levy","author_email":"contact@arnaudlevy.com","authored_date":"2022-02-21T17:44:27.000+00:00","committer_name":"Arnaud
+        Levy","committer_email":"contact@arnaudlevy.com","committed_date":"2022-02-21T17:44:27.000+00:00","trailers":{},"web_url":"https://gitlab.com/noesya/osuny/-/commit/5a5bbe5f19533c7eaaeff596c1d866ed9f1b516a","stats":{"additions":0,"deletions":0,"total":0},"status":null,"project_id":<TEST_GITLAB_REPOSITORY>,"last_pipeline":null}'
+  recorded_at: Mon, 21 Feb 2022 17:44:28 GMT
+recorded_with: VCR 6.0.0
