@@ -3,33 +3,36 @@
     Add category
 </a>
 <draggable :list="data.elements">
-  <div class="card" v-for="element in data.elements">
+  <div class="card" v-for="(category, categoryIndex) in data.elements">
     <div class="card-header pb-0 nav justify-content-between">
       <div class="d-flex">
         <a class="btn ps-0">
           <i class="fa fa-bars handle"></i>
         </a>
-        <h3>{{ element.title }}</h3>
+        <h3 class="pt-1">{{ category.title }}</h3>
       </div>
-      <a class="btn btn-sm btn-danger mt-1" v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-        <i class="fas fa-times"></i>
-      </a>
+      <div>
+        <a  class="btn btn-sm btn-danger"
+            v-on:click="data.elements.splice(data.elements.indexOf(category), 1)">
+          <i class="fas fa-times"></i>
+        </a>
+      </div>
     </div>
     <div class="card-header">
-      <div class="row">
-        <div class="col-10">
-          <label class="form-label" for="">Title</label>
-          <input  class="form-control form-control-lg"
-                  type="text"
-                  v-model="element.title"
-                  placeholder="Type category name here">
-        </div>
-      </div>
+      <label  class="form-label"
+              :for="'category-title-' + categoryIndex">
+              Title
+      </label>
+      <input  class="form-control form-control-lg"
+              type="text"
+              v-model="category.title"
+              placeholder="Type category name here"
+              :id="'category-title-' + categoryIndex">
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-md-8">
-          <p>Partner for {{ element.title  }}</p>
+          <p>Partners for {{ category.title  }}</p>
         </div>
         <div class="col-md-4 text-end">
           <a  class="<%= button_classes('mt-n1') %>"
@@ -38,9 +41,9 @@
           </a>
         </div>
       </div>
-          
-      <draggable :list="element.partners" class="list-group">
-        <div v-for="partner in element.partners" class="list-group-item">
+
+      <draggable :list="category.partners" class="list-group">
+        <div v-for="(partner, partnerIndex) in category.partners" class="list-group-item">
           <div class="row">
             <div class="col-1">
               <a class="btn ps-0">
@@ -48,42 +51,45 @@
               </a>
             </div>
             <div class="col-lg-3 col-sm-10">
-              <label class="form-label">
-                Name : 
-                <input class="form-control mb-2"
-                      type="text"
-                      v-model="partner.name"
-                      placeholder="Type partner's name here">
-              </label>
+              <label  class="form-label"
+                      :for="'category-' + categoryIndex + '-partner-name-' + partnerIndex">Name</label>
+              <input class="form-control mb-2"
+                    type="text"
+                    v-model="partner.name"
+                    placeholder="Type partner's name here"
+                    :id="'category-' + categoryIndex + '-partner-name-' + partnerIndex">
             </div>
             <div class="offset-lg-0 col-lg-3 offset-sm-1 col-sm-10">
-              <label class="form-label">
-                Url <small>(starting with http:// )</small>: 
-                <input class="form-control mb-2"
-                      type="text"
-                      v-model="partner.url"
-                      placeholder="Type partner's url here">
+              <label  class="form-label"
+                      :for="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
+                Url <small>(starting with https:// )</small>
               </label>
+              <input class="form-control mb-2"
+                    type="text"
+                    v-model="partner.url"
+                    placeholder="Type partner's url here"
+                    :id="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
             </div>
             <div class="offset-lg-0 col-lg-4 offset-sm-1 col-sm-10">
               <%# TODO : Replace by real image upload %>
-              <label class="form-label">
-                Logo :
-                <input  class="form-control mb-2"
-                        type="file"
-                        accept="image/*"
-                        @change="onFileImageChange( $event, partner, 'logo' )">
-
-                <div v-if="partner.logo">
-                  <img :src="partner.logo" class="img-fluid" />
-                  <a  class="btn btn-sm btn-danger mt-1"
-                      v-on:click="partner.logo=''">
-                      Remove
-                      <i class="fas fa-times"></i>
-                  </a>
-                </div>
-
+              <label  class="form-label"
+                      :for="'category-' + categoryIndex + '-partner-logo-' + partnerIndex">
+                Logo
               </label>
+              <input  class="form-control mb-2"
+                      type="file"
+                      accept="image/*"
+                      @change="onFileImageChange( $event, partner, 'logo' )"
+                      :id="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
+
+              <div v-if="partner.logo">
+                <img :src="partner.logo" class="img-fluid" />
+                <a  class="btn btn-sm btn-danger mt-1"
+                    v-on:click="partner.logo=''">
+                    Remove
+                    <i class="fas fa-times"></i>
+                </a>
+              </div>
             </div>
             <div class="col-1 text-end">
               <a  class="btn btn-sm btn-danger mt-1"
