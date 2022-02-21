@@ -5,7 +5,7 @@ class SummernoteTest < ActiveSupport::TestCase
   HTML_DEHYDRATED = "<action-text-attachment sgid=\"sgid\" content-type=\"image/jpeg\" url=\"http://localhost:3000/dan-gold.jpeg\" filename=\"test.jpg\" filesize=\"352931\" width=\"588\" height=\"746\" previewable=\"true\" presentation=\"gallery\"></action-text-attachment>"
 
   test "dehydrate actiontext" do
-    post = communication_website_post(:test_post)
+    post = communication_website_posts(:test_post)
     post.text = HTML_HYDRATED
     post.save
     post.reload
@@ -13,10 +13,10 @@ class SummernoteTest < ActiveSupport::TestCase
   end
 
   test "rehydrate actiontext" do
-    post = communication_website_post(:test_post)
+    post = communication_website_posts(:test_post)
     post.text = HTML_DEHYDRATED
     post.save
     post.reload
-    assert_equal HTML_HYDRATED, communication_website_post(:test_post).text.to_s
+    assert_equal HTML_HYDRATED, communication_website_posts(:test_post).text.to_s
   end
  end
