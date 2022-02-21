@@ -24,10 +24,16 @@
       draggable: VueDraggableNext.VueDraggableNext,
     },
     data() {
-      return { data: <%= @block.data.to_json.html_safe %> }
+      return { 
+        directUpload: {
+          url: "<%= rails_direct_uploads_url.html_safe %>",
+          blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
+        },
+        data: <%= @block.data.to_json.html_safe %>
+      }
     },
     methods: {
-      // TODO : replace by real image upload
+      // TODO : create a uploader vue3 component
       onFileImageChange(event, object, key) {
         var files = event.target.files || event.dataTransfer.files;
         if (!files.length)
@@ -35,14 +41,21 @@
         this.assignImage(files[0], object, key);
       },
       assignImage(file, object, key) {
-        var image = new Image();
-        var reader = new FileReader();
-
-        reader.onload = function(event){
-          object[key] = event.target.result;
-        }.bind(this);
-
-        reader.readAsDataURL(file);
+        this.uploadFile(file, object, key);
+      },
+      uploadFile(file, object, key) {
+        var url = this.directUpload.url;
+        var upload = new ActiveStorage.DirectUpload(file, url);
+        upload.create((error, blob) => {
+          if (error) {
+            console.log(error);
+          } else {
+            object[key] = this.getFileUrl(blob.signed_id, blob.filename);
+          }
+        });
+      },
+      getFileUrl(signed_id, filename) {
+        return this.directUpload.blobUrlTemplate.replace(':signed_id', signed_id).replace(':filename', filename);
       }
     }
   });

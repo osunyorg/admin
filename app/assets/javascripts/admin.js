@@ -1,5 +1,4 @@
 //= require activestorage
-//= require actiontext
 //= require jquery3
 //= require jquery_ujs
 //= require notyf/notyf.min
@@ -9,7 +8,6 @@
 //= require jquery-cropper/dist/jquery-cropper
 //= require appstack/app
 //= require gdpr/cookie_consent
-//= require trix
 //= require sortablejs/Sortable
 //= require summernote/summernote-lite
 //= require summernote-rails
