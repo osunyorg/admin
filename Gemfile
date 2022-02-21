@@ -54,6 +54,7 @@ gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git', b
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'figaro'
+  gem 'webmock'
   gem 'vcr'
 end
 
