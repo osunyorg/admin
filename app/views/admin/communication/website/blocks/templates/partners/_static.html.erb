@@ -3,6 +3,8 @@
       - name: >
           <%= element['title'] %>
         url: <%= element['url'] %>
-        logo: <%= element['logo'] %>
+        <% if element['logo'] %>
+        logo: <%= element['logo']['id'] %>
+        <% end %>
 <% end %>
 <% end %>
