@@ -2,9 +2,18 @@
 <% block.data['elements'].each do |element| %>
       - name: >
           <%= element['title'] %>
-        url: <%= element['url'] %>
-        <% if element['logo'] %>
-        logo: <%= element['logo']['id'] %>
-        <% end %>
+        partners:
+<%
+element['partners'].each do |partner|
+%>
+          - name: "<%= partner['name'] %>"
+            url: "<%= partner['url'] %>"
+            <% if partner.has_key?('logo') %>
+            <% if partner['logo'].has_key?('id') %>
+            logo: "<%= partner['logo']['id'] %>"
+            <% end %>
+            <% end %>
+<% end %>
+        
 <% end %>
 <% end %>

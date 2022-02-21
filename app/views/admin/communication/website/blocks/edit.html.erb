@@ -48,7 +48,8 @@
             console.log(error);
           } else {
             object[key] = {
-              id: blob.signed_id,
+              id: blob.id,
+              signed_id: blob.signed_id,
               filename: blob.filename
             };
           }
@@ -58,7 +59,7 @@
         return this.directUpload.blobUrlTemplate.replace(':signed_id', signed_id).replace(':filename', filename);
       },
       getImageUrl(data) {
-        return this.getFileUrl(data.id, data.filename);
+        return this.getFileUrl(data.signed_id, data.filename);
       }
     }
   });

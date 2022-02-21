@@ -30,7 +30,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_bb6a496c08  (university_id => universities.id)
+#  fk_rails_94b0abd85b  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
   include WithAbouts
