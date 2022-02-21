@@ -59,7 +59,7 @@ fr:
       university:
         sms_sender_name: "11 caractères maximum."
       university_person:
-        habilitation: "Bénéficie d’une Habilitation à Diriger des Recherches (HDR)."
+        habilitation: "Détient une Habilitation à Diriger des Recherches (HDR)."
         is_administration: "Remplit des missions administratives."
         is_author: "Écrit des articles pour les sites."
         is_researcher: "Écrit des articles dans des revues scientifiques."

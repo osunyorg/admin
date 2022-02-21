@@ -31,6 +31,11 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
     breadcrumb
   end
 
+  def static
+    @about = @page
+    render layout: false
+  end
+
   def new
     @page.website = @website
     breadcrumb

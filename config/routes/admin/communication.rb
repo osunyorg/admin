@@ -12,6 +12,7 @@ namespace :communication do
       end
       member do
         get :children
+        get :static
       end
     end
     resources :categories, controller: 'website/categories' do
@@ -24,7 +25,11 @@ namespace :communication do
     end
     resources :authors, controller: 'website/authors', only: [:index, :show]
     resources :posts, controller: 'website/posts'
-    resources :curations, path: 'posts/curations', as: :post_curations, controller: 'website/posts/curations', only: [:new, :create]
+    resources :curations,
+              path: 'posts/curations',
+              as: :post_curations,
+              controller: 'website/posts/curations',
+              only: [:new, :create]
     resources :blocks, controller: 'website/blocks', except: :index do
       collection do
         post :reorder
@@ -41,13 +46,13 @@ namespace :communication do
         end
       end
     end
-    get 'structure' => 'website/structure#edit'
-    patch 'structure' => 'website/structure#update'
+    get   'structure'     => 'website/structure#edit'
+    patch 'structure'     => 'website/structure#update'
 
-    get 'indexes' => 'website/index_pages#index'
-    get 'indexes/:kind' => 'website/index_pages#edit', as: :index
-    post 'indexes/:kind' => 'website/index_pages#update'
+    get   'indexes'       => 'website/index_pages#index'
+    get   'indexes/:kind' => 'website/index_pages#edit', as: :index
+    post  'indexes/:kind' => 'website/index_pages#update'
     patch 'indexes/:kind' => 'website/index_pages#update'
-    put 'indexes/:kind' => 'website/index_pages#update'
+    put   'indexes/:kind' => 'website/index_pages#update'
   end
 end

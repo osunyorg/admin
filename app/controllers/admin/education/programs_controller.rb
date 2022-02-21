@@ -85,12 +85,16 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :name, :slug, :level, :capacity, :ects, :continuing, :description, :published,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt,
       :prerequisites, :objectives, :duration, :registration, :pedagogy, :content,
-      :evaluation, :accessibility, :pricing, :contacts, :opportunities, :other,
-      :parent_id, school_ids: [], university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
+      :evaluation, :accessibility, :pricing, :contacts, :opportunities, :results, :other,
+      :parent_id, school_ids: [],
+      university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
     )
   end
 
   def load_teacher_people
-    @teacher_people = current_university.people.teachers.accessible_by(current_ability).ordered
+    @teacher_people = current_university.people
+                                        .teachers
+                                        .accessible_by(current_ability)
+                                        .ordered
   end
 end
