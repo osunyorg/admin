@@ -1,5 +1,5 @@
-test:
-  university: test
-  website: test
+test_post:
+  university: default_university
+  website: website_with_github
   title: Test
   slug: test

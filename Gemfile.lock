@@ -419,6 +419,7 @@ GEM
     unf_ext (0.0.8)
     unicode-display_width (2.1.0)
     unicode_utils (1.4.0)
+    vcr (6.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -490,6 +491,7 @@ DEPENDENCIES
   summernote-rails!
   two_factor_authentication!
   tzinfo-data
+  vcr
   web-console (>= 4.1.0)
   webdrivers
 
