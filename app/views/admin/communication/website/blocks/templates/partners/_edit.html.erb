@@ -5,44 +5,37 @@
 
 <draggable :list="data.elements" handle=".categoryHandle">
   <div v-for="(category, categoryIndex) in data.elements">
-    <div class="row mb-3">
-      <div class="col-md-1">
+    <div class="d-flex">
+      <div>
         <a class="btn ps-0 categoryHandle">
           <i class="fa fa-bars handle"></i>
         </a>
       </div>
-      <div class="col-md-10">
-        <label  class="visually-hidden"
-                aria-label="Title"
-                :for="'category-title-' + categoryIndex">
-                Title
-        </label>
-        <input  class="form-control form-control-lg"
-                type="text"
-                v-model="category.title"
-                placeholder="Type category name here"
-                :id="'category-title-' + categoryIndex">
-      </div>
-      <div class="col-md-1 text-end">
-        <a  class="btn btn-sm btn-danger"
-            v-on:click="data.elements.splice(data.elements.indexOf(category), 1)">
-          <i class="fas fa-times"></i>
-        </a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="offset-md-1 col-md-10">
-        <div class="row">
-          <div class="col-md-8">
-            <p>Partners for “{{ category.title  }}”</p>
-          </div>
-          <div class="col-md-4 text-end">
-            <a  class="<%= button_classes('mt-n1') %>"
-                v-on:click="category.partners.push({name: '', url: '', logo: ''})">
-                Add partner
-            </a>
-          </div>
+      <div class="flex-fill">
+        <div class="mb-3">
+          <label  class="visually-hidden"
+                  aria-label="Title"
+                  :for="'category-title-' + categoryIndex">
+                  Title
+          </label>
+          <input  class="form-control form-control-lg"
+                  type="text"
+                  v-model="category.title"
+                  placeholder="Type category name here"
+                  :id="'category-title-' + categoryIndex">
         </div>
+        <div>
+          <div class="row">
+            <div class="col-md-8">
+              <p>Partners for “{{ category.title  }}”</p>
+            </div>
+            <div class="col-md-4 text-end">
+              <a  class="<%= button_classes('mt-n1') %>"
+                  v-on:click="category.partners.push({name: '', url: '', logo: ''})">
+                  Add partner
+              </a>
+            </div>
+          </div>
           <draggable :list="category.partners" class="list-group" handle=".partnerHandle">
             <div v-for="(partner, partnerIndex) in category.partners" class="list-group-item">
               <div class="row">
@@ -94,13 +87,20 @@
                 </div>
                 <div class="col-1 text-end">
                   <a  class="btn btn-sm btn-danger mt-1"
-                      v-on:click="element.partners.splice(element.partners.indexOf(person), 1)">
+                      v-on:click="category.partners.splice(category.partners.indexOf(partner), 1)">
                       <i class="fas fa-times"></i>
                   </a>
                 </div>
               </div>
             </div>
           </draggable>
+        </div>
+      </div>
+      <div>
+        <a  class="btn btn-sm ms-3 btn-danger"
+            v-on:click="data.elements.splice(data.elements.indexOf(category), 1)">
+            <i class="fas fa-times"></i>
+        </a>
       </div>
     </div>
     <hr class="my-5">
