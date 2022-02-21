@@ -3,9 +3,11 @@ website_with_github:
   name: Site de test
   git_provider: github
   access_token: test
+  repository: test
 
 website_with_gitlab:
   university: default_university
   name: Site with gitlab
   git_provider: gitlab
   access_token: test
+  repository: test
