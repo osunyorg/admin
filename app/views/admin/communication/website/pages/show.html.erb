@@ -87,10 +87,13 @@
   <%= @page.text.to_s %>
 <% end %>
 
-<% content_for :action_bar_right do %>
-  <%= link_to 'static',
+<% content_for :action_bar_left do %>
+  <%= link_to t('static'),
               static_admin_communication_website_page_path(@page),
-              class: button_classes if can? :static, @page %>
+              class: button_classes('btn-light') if can? :static, @page %>
+<% end %>
+
+<% content_for :action_bar_right do %>
   <%= preview_link %>
   <%= edit_link @page %>
 <% end %>

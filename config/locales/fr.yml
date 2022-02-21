@@ -147,6 +147,7 @@ fr:
       test_chars: "%{min_length} caractères min."
   show: Voir
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
+  static: Fichier statique
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://osuny.org/conditions-d-utilisation
   time:
