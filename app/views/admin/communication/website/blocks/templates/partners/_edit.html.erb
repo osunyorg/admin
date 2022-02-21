@@ -76,7 +76,7 @@
                           :id="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
 
                   <div v-if="partner.logo">
-                    <img :src="partner.logo" class="img-fluid" />
+                    <img :src="getImageUrl(partner.logo)" class="img-fluid d-block" />
                     <a  class="btn btn-sm btn-danger mt-1"
                         v-on:click="partner.logo=''">
                         Remove

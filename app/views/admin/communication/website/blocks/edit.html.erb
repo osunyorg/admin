@@ -38,10 +38,7 @@
         var files = event.target.files || event.dataTransfer.files;
         if (!files.length)
           return;
-        this.assignImage(files[0], object, key);
-      },
-      assignImage(file, object, key) {
-        this.uploadFile(file, object, key);
+        this.uploadFile(files[0], object, key);
       },
       uploadFile(file, object, key) {
         var url = this.directUpload.url;
@@ -50,12 +47,18 @@
           if (error) {
             console.log(error);
           } else {
-            object[key] = this.getFileUrl(blob.signed_id, blob.filename);
+            object[key] = {
+              id: blob.signed_id,
+              filename: blob.filename
+            };
           }
         });
       },
       getFileUrl(signed_id, filename) {
         return this.directUpload.blobUrlTemplate.replace(':signed_id', signed_id).replace(':filename', filename);
+      },
+      getImageUrl(data) {
+        return this.getFileUrl(data.id, data.filename);
       }
     }
   });
