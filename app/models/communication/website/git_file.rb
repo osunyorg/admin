@@ -33,12 +33,9 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
-  def synchronized_with_git?
-    git_sha == previous_sha || git_sha == previous_sha256
-  end
-
   def should_create?
     !should_destroy? &&
+    !exists_on_git? &&
     (
       !synchronized_with_git? ||
       previous_path.nil? ||
@@ -49,7 +46,7 @@ class Communication::Website::GitFile < ApplicationRecord
   def should_update?
     !should_destroy? &&
     (
-      different_path || different_sha
+      different_path? || different_sha?
     )
   end
 
@@ -59,14 +56,6 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def path
     @path ||= about.git_path(website)&.gsub(/\/+/, '/')
-  end
-
-  def different_path
-    previous_path != path
-  end
-
-  def different_sha
-    previous_sha != sha && previous_sha != sha256
   end
 
   def sha
@@ -91,6 +80,25 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
+
+  def exists_on_git?
+    !git_sha.nil?
+  end
+
+  def synchronized_with_git?
+    exists_on_git? &&
+    (
+      git_sha == previous_sha || git_sha == previous_sha256
+    )
+  end
+
+  def different_path?
+    previous_path != path
+  end
+
+  def different_sha?
+    previous_sha != sha && previous_sha != sha256
+  end
 
   def git_sha
     @git_sha ||= website.git_repository.git_sha previous_path

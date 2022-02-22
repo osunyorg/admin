@@ -5,11 +5,18 @@
         partners:
 <%
 element['partners'].each do |partner|
+  logo_id = nil
+  if partner.has_key?('logo')
+    logo = partner['logo']
+    if logo.is_a?(Hash) && logo.has_key?('id')
+      logo_id = logo['id']
+    end
+  end
 %>
           - name: "<%= partner['name'] %>"
             url: "<%= partner['url'] %>"
-            <% unless partner.dig('logo', 'id').blank? %>
-            logo: "<%= partner['logo']['id'] %>"
+            <% if logo_id %>
+            logo: "<%= logo_id %>"
             <% end %>
 <% end %>
 <% end %>
