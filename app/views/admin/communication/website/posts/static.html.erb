@@ -1,6 +1,6 @@
 ---
 title: "<%= @about.title %>"
-date: <%= @about.published_at %> UTC
+date: "<%= @about.published_at.iso8601 %>"
 slug: "<%= @about.slug %>"
 <% if @about.pinned %>
 weight: 1

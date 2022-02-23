@@ -8,7 +8,7 @@ volumes:
   - "<%= @about.volume.path %>"
 <% end %>
 weight: <%= @about.position %>
-date: <%= @about.published_at %> UTC
+date: "<%= @about.published_at.iso8601 %>"
 <% if @about.pdf.attached? %>
 pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
