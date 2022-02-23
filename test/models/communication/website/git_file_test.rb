@@ -23,10 +23,24 @@
 require "test_helper"
 
 class Communication::Website::GitFileTest < ActiveSupport::TestCase
-  test "should_create? for a new file" do
+  test "should_create? a new file" do
     VCR.use_cassette(location) do
       file = communication_website_git_files(:git_file_1)
       assert file.should_create?
+    end
+  end
+
+  test "should_update? an existing file" do
+    VCR.use_cassette(location) do
+      # To create the file, i first did that:
+      # file = communication_website_git_files(:git_file_2)
+      # file.website.git_repository.add_git_file file
+      # file.website.git_repository.sync!
+      # byebug
+      # Then i got the sha and path, pasted it in the fixtures,
+      # changed the text so the content would need an update.
+      file = communication_website_git_files(:git_file_2)
+      assert file.should_update?
     end
   end
 end

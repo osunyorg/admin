@@ -23,3 +23,8 @@
 git_file_1:
   about: test_post (Communication::Website::Post)
   website: website_with_github
+git_file_2:
+  about: test_post_2 (Communication::Website::Post)
+  website: website_with_github
+  previous_sha: 8b58a401710ed6560d7d06353c0fdf46f587128f
+  previous_path: content/posts/2010/2010-11-28-test-2.html

@@ -1,0 +1,85 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content/posts/2010/2010-11-28-test-2.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.22.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <TEST_GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 23 Feb 2022 18:49:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      Etag:
+      - W/"8b58a401710ed6560d7d06353c0fdf46f587128f"
+      Last-Modified:
+      - Wed, 23 Feb 2022 18:16:13 GMT
+      X-Oauth-Scopes:
+      - repo
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Github-Authentication-Token-Expiration:
+      - 2022-03-02 10:41:25 UTC
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4956'
+      X-Ratelimit-Reset:
+      - '1645643208'
+      X-Ratelimit-Used:
+      - '44'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - C988:DD33:741334:7734EF:621681A8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"name":"2010-11-28-test-2.html","path":"content/posts/2010/2010-11-28-test-2.html","sha":"8b58a401710ed6560d7d06353c0fdf46f587128f","size":92,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content/posts/2010/2010-11-28-test-2.html?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/blob/main/content/posts/2010/2010-11-28-test-2.html","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/blobs/8b58a401710ed6560d7d06353c0fdf46f587128f","download_url":"https://raw.githubusercontent.com/<TEST_GITHUB_REPOSITORY>/main/content/posts/2010/2010-11-28-test-2.html","type":"file","content":"LS0tCnRpdGxlOiAiVGVzdCAyIgpkYXRlOiAiMjAxMC0xMS0yOFQwMTowMDow\nMCswMTowMCIKc2x1ZzogInRlc3QtMiIKZGVzY3JpcHRpb246ID4KICAKLS0t\nCgo=\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content/posts/2010/2010-11-28-test-2.html?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/blobs/8b58a401710ed6560d7d06353c0fdf46f587128f","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/blob/main/content/posts/2010/2010-11-28-test-2.html"}}'
+  recorded_at: Wed, 23 Feb 2022 18:49:12 GMT
+recorded_with: VCR 6.0.0
