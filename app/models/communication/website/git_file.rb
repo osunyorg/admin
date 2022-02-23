@@ -2,15 +2,14 @@
 #
 # Table name: communication_website_git_files
 #
-#  id              :uuid             not null, primary key
-#  about_type      :string           not null, indexed => [about_id]
-#  previous_path   :string
-#  previous_sha    :string
-#  previous_sha256 :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  about_id        :uuid             not null, indexed => [about_type]
-#  website_id      :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  about_type    :string           not null, indexed => [about_id]
+#  previous_path :string
+#  previous_sha  :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  about_id      :uuid             not null, indexed => [about_type]
+#  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -19,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_b6b8b2cce2  (website_id => communication_websites.id)
+#  fk_rails_8505d649e8  (website_id => communication_websites.id)
 #
 class Communication::Website::GitFile < ApplicationRecord
   belongs_to :website, class_name: 'Communication::Website'
@@ -58,16 +57,6 @@ class Communication::Website::GitFile < ApplicationRecord
     @path ||= about.git_path(website)&.gsub(/\/+/, '/')
   end
 
-  def sha
-    # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
-    # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
-    @sha ||= OpenSSL::Digest::SHA1.hexdigest "blob #{to_s.bytesize}\x00#{to_s}"
-  end
-
-  def sha256
-    @sha256 ||= OpenSSL::Digest::SHA256.hexdigest to_s
-  end
-
   def to_s
     @to_s ||= ApplicationController.render(
       template: "admin/#{about.class.name.underscore.pluralize}/static",
@@ -80,6 +69,16 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
+
+  # Real sha on the git repo
+  def git_sha
+    @git_sha ||= website.git_repository.git_sha previous_path
+  end
+
+  # Based on content, with the provider's algorithm (sha1 or sha256)
+  def computed_sha
+    @computed_sha ||= website.git_repository.computed_sha to_s
+  end
 
   def exists_on_git?
     !git_sha.nil?
@@ -97,10 +96,6 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def different_sha?
-    previous_sha != sha && previous_sha != sha256
-  end
-
-  def git_sha
-    @git_sha ||= website.git_repository.git_sha previous_path
+    previous_sha != computed_sha
   end
 end

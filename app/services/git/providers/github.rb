@@ -44,6 +44,12 @@ class Git::Providers::Github < Git::Providers::Abstract
     true
   end
 
+  def computed_sha(string)
+    # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
+    # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
+    OpenSSL::Digest::SHA1.hexdigest "blob #{string.bytesize}\x00#{string}"
+  end
+
   def git_sha(path)
     begin
       content = client.content repository, path: path

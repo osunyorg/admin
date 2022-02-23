@@ -27,8 +27,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_433744b4e8  (user_id => users.id)
-#  fk_rails_49ac392937  (university_id => universities.id)
+#  fk_rails_b47a769440  (user_id => users.id)
+#  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person < ApplicationRecord
   include WithGit

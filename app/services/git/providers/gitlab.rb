@@ -42,6 +42,10 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     true
   end
 
+  def computed_sha(string)
+    OpenSSL::Digest::SHA256.hexdigest string
+  end
+
   # https://gitlab.com/gitlab-org/gitlab/-/issues/23504
   def git_sha(path)
     begin

@@ -1,2 +1,20 @@
+# == Schema Information
+#
+# Table name: universities
+#
+#  id                :uuid             not null, primary key
+#  address           :string
+#  city              :string
+#  country           :string
+#  identifier        :string
+#  mail_from_address :string
+#  mail_from_name    :string
+#  name              :string
+#  private           :boolean
+#  sms_sender_name   :string
+#  zipcode           :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
 default_university:
   name: Université de test

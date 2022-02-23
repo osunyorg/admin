@@ -19,6 +19,10 @@ class Git::Repository
     mark_as_synced if provider.push(commit_message)
   end
 
+  def computed_sha(string)
+    provider.computed_sha(string)
+  end
+
   def git_sha(path)
     provider.git_sha path
   end
@@ -55,9 +59,10 @@ class Git::Repository
 
   def mark_as_synced
     git_files.each do |git_file|
-      git_file.update previous_path: git_file.path,
-                      previous_sha: git_file.sha,
-                      previous_sha256: git_file.sha256
+      path = git_file.path
+      sha = provider.git_sha path
+      git_file.update previous_path: path,
+                      previous_sha: sha
     end
   end
 end
