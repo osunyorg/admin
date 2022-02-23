@@ -51,6 +51,8 @@ fr:
       communication/website/category:
         children: Catégories enfants
         description: Description (SEO)
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
         name: Nom
         parent: Catégorie parente
         slug: Slug

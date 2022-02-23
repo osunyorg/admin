@@ -31,6 +31,21 @@
           </ul>
         </div>
       </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/category.featured_image') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :featured_image,
+                      as: :single_deletable_file,
+                      direct_upload: true,
+                      label: false,
+                      input_html: { accept: '.jpg,.jpeg,.png' },
+                      preview: true
+           %>
+           <%= f.input :featured_image_alt %>
+        </div>
+      </div>
     </div>
   </div>
   <% content_for :action_bar_right do %>

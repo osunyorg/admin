@@ -45,6 +45,16 @@
           <% end %>
         </div>
       </div>
+      <% if @category.featured_image.attached? && @category.featured_image.variable? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/category.featured_image') %></h5>
+          </div>
+          <div class="card-body">
+            <%= image_tag @category.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <% if @posts.total_count > 0 %>
@@ -58,6 +68,12 @@
       </div>
     </div>
   <% end %>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('static'),
+              static_admin_communication_website_category_path(@category),
+              class: button_classes('btn-light') if can? :static, @category %>
 <% end %>
 
 <% content_for :action_bar_right do %>

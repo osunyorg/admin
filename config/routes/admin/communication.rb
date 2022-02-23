@@ -21,6 +21,7 @@ namespace :communication do
       end
       member do
         get :children
+        get :static
       end
     end
     resources :authors, controller: 'website/authors', only: [:index, :show]

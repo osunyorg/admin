@@ -33,7 +33,12 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
     @posts = @category.posts.ordered.page(params[:page])
     breadcrumb
   end
-  
+
+  def static
+    @about = @category
+    render layout: false
+  end
+
   def new
     @category.website = @website
     breadcrumb
@@ -84,7 +89,9 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
 
   def category_params
     params.require(:communication_website_category)
-          .permit(:website_id, :name, :description, :slug, :parent_id)
+          .permit(
+            :website_id, :name, :description, :slug, :parent_id,
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt)
           .merge(university_id: current_university.id)
   end
 end

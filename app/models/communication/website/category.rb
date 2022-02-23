@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
+#  featured_image_alt       :string
 #  github_path              :text
 #  is_programs_root         :boolean          default(FALSE)
 #  name                     :string
@@ -33,6 +34,8 @@
 #
 class Communication::Website::Category < ApplicationRecord
   include WithGit
+  include WithFeaturedImage
+  include WithBlobs
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
@@ -76,11 +79,11 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + descendents + posts
+    [self] + descendents + active_storage_blobs + posts
   end
 
   def git_destroy_dependencies(website)
-    [self] + descendents
+    [self] + descendents + active_storage_blobs
   end
 
   def update_children_paths
@@ -102,5 +105,13 @@ class Communication::Website::Category < ApplicationRecord
 
   def slug_unavailable?(slug)
     self.class.unscoped.where(communication_website_id: self.communication_website_id, slug: slug).where.not(id: self.id).exists?
+  end
+
+  def explicit_blob_ids
+    super.concat [best_featured_image&.blob_id]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end

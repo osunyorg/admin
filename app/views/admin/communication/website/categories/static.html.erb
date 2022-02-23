@@ -2,5 +2,9 @@
 title: "<%= @about.name %>"
 slug: "<%= @about.slug %>"
 position: <%= @about.position %>
+<% if @about.best_featured_image.attached? %>
+image: "<%= @about.best_featured_image.blob.id %>"
+image_alt: "<%= @about.featured_image_alt %>"
+<% end %>
 ---
 <%= prepare_html_for_static @about.description, @about.university %>
