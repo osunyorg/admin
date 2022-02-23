@@ -68,6 +68,7 @@ class Education::School < ApplicationRecord
   def git_dependencies(website)
     [self] +
     university_people_through_role_involvements +
-    university_people_through_role_involvements.map(&:administrator)
+    university_people_through_role_involvements.map(&:administrator) +
+    university_people_through_role_involvements.map(&:active_storage_blobs).flatten
   end
 end
