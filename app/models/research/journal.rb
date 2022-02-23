@@ -40,7 +40,7 @@ class Research::Journal < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + articles + volumes + people + people.map(&:active_storage_blobs).flatten + people.map(&:researcher)
+    [self] + articles + volumes + people + people.map(&:researcher) + people.map(&:active_storage_blobs).flatten
   end
 
   def git_destroy_dependencies(website)
