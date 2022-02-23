@@ -36,8 +36,8 @@ website_with_github:
   university: default_university
   name: Site de test
   git_provider: github
-  access_token: test
-  repository: test
+  access_token: confidentialdata
+  repository: noesya/bordeauxmontaigne-test
 
 website_with_gitlab:
   university: default_university

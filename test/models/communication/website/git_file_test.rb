@@ -24,7 +24,9 @@ require "test_helper"
 
 class Communication::Website::GitFileTest < ActiveSupport::TestCase
   test "should_create? for a new file" do
-    file = communication_website_git_files(:git_file_1)
-    assert file.should_create?
+    VCR.use_cassette(location) do
+      file = communication_website_git_files(:git_file_1)
+      assert file.should_create?
+    end
   end
 end

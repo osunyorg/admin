@@ -1,0 +1,317 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.22.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <TEST_GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 23 Feb 2022 17:12:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      Etag:
+      - W/"7adeb339596749cf79d58b6198373cc9fae745c9"
+      Last-Modified:
+      - Mon, 10 Jan 2022 16:10:05 GMT
+      X-Oauth-Scopes:
+      - repo
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Github-Authentication-Token-Expiration:
+      - 2022-03-02 10:41:25 UTC
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4981'
+      X-Ratelimit-Reset:
+      - '1645638786'
+      X-Ratelimit-Used:
+      - '19'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - 24EB:4F60:CD63FF:D0CD45:62166AE7
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"name":"_articles","path":"_articles","sha":"bfe2ee494f61c4e6ab421a188f0b6326c3503452","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_articles?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_articles","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/bfe2ee494f61c4e6ab421a188f0b6326c3503452","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_articles?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/bfe2ee494f61c4e6ab421a188f0b6326c3503452","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_articles"}},{"name":"_authors","path":"_authors","sha":"571f08a27b5d85e517246f5e0ab7b2e8f3eeb1bb","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_authors?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_authors","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/571f08a27b5d85e517246f5e0ab7b2e8f3eeb1bb","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_authors?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/571f08a27b5d85e517246f5e0ab7b2e8f3eeb1bb","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_authors"}},{"name":"_categories","path":"_categories","sha":"15be0c30ae0985a88de3916034c3631928d5c4c9","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_categories?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_categories","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/15be0c30ae0985a88de3916034c3631928d5c4c9","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_categories?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/15be0c30ae0985a88de3916034c3631928d5c4c9","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_categories"}},{"name":"_data","path":"_data","sha":"72af10a2892ecc71d685bbe29ff3dd77c99d2ccd","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_data?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_data","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/72af10a2892ecc71d685bbe29ff3dd77c99d2ccd","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_data?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/72af10a2892ecc71d685bbe29ff3dd77c99d2ccd","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_data"}},{"name":"_pages","path":"_pages","sha":"acb942dbe07503f91812583c5b25bc61e9213c60","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_pages?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_pages","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/acb942dbe07503f91812583c5b25bc61e9213c60","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_pages?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/acb942dbe07503f91812583c5b25bc61e9213c60","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_pages"}},{"name":"_posts","path":"_posts","sha":"3cbef679621658f2e4c91b7b199fb6ad45d545bf","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_posts?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_posts","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3cbef679621658f2e4c91b7b199fb6ad45d545bf","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_posts?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3cbef679621658f2e4c91b7b199fb6ad45d545bf","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_posts"}},{"name":"_programs","path":"_programs","sha":"0dc00f4d348dc0559373c1b669de72277b1b2e28","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_programs?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_programs","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/0dc00f4d348dc0559373c1b669de72277b1b2e28","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_programs?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/0dc00f4d348dc0559373c1b669de72277b1b2e28","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_programs"}},{"name":"_teachers","path":"_teachers","sha":"2a564d74e8f10fd8f08da67c56a972459708d765","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_teachers?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_teachers","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/2a564d74e8f10fd8f08da67c56a972459708d765","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_teachers?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/2a564d74e8f10fd8f08da67c56a972459708d765","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_teachers"}},{"name":"_volumes","path":"_volumes","sha":"1387bc4fce1978e9d793cd5a9656efd69d37fe56","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_volumes?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_volumes","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/1387bc4fce1978e9d793cd5a9656efd69d37fe56","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_volumes?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/1387bc4fce1978e9d793cd5a9656efd69d37fe56","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_volumes"}},{"name":"actualites","path":"actualites","sha":"b1ecf2c52a82c8444a4de1054812b33bc107d4e6","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/actualites?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/actualites","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/b1ecf2c52a82c8444a4de1054812b33bc107d4e6","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/actualites?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/b1ecf2c52a82c8444a4de1054812b33bc107d4e6","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/actualites"}},{"name":"assets","path":"assets","sha":"af7e93717762e024e641f9f51ed03d21292e051f","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/assets?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/assets","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/af7e93717762e024e641f9f51ed03d21292e051f","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/assets?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/af7e93717762e024e641f9f51ed03d21292e051f","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/assets"}},{"name":"auteurs","path":"auteurs","sha":"3a3f73e809d2d681557755edd032b21c79967ceb","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/auteurs?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/auteurs","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3a3f73e809d2d681557755edd032b21c79967ceb","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/auteurs?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3a3f73e809d2d681557755edd032b21c79967ceb","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/auteurs"}},{"name":"content","path":"content","sha":"c9c1284eb2b8a585e700608c8fd7fb5f4a4f9eca","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/content","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/c9c1284eb2b8a585e700608c8fd7fb5f4a4f9eca","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/c9c1284eb2b8a585e700608c8fd7fb5f4a4f9eca","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/content"}},{"name":"data","path":"data","sha":"a6c2c8f6dd7ebb6e292d666e85719fcd42381e02","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/data?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/data","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/a6c2c8f6dd7ebb6e292d666e85719fcd42381e02","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/data?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/a6c2c8f6dd7ebb6e292d666e85719fcd42381e02","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/data"}}]'
+  recorded_at: Wed, 23 Feb 2022 17:12:07 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content/posts/2010/2010-11-28-test.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.22.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <TEST_GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 23 Feb 2022 17:12:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      X-Oauth-Scopes:
+      - repo
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Github-Authentication-Token-Expiration:
+      - 2022-03-02 10:41:25 UTC
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4980'
+      X-Ratelimit-Reset:
+      - '1645638786'
+      X-Ratelimit-Used:
+      - '20'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      Vary:
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Github-Request-Id:
+      - 24EC:01D8:A2D526:A5FDF4:62166AE7
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/repos#get-repository-content"}'
+  recorded_at: Wed, 23 Feb 2022 17:12:08 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.22.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <TEST_GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 23 Feb 2022 17:12:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      Etag:
+      - W/"7adeb339596749cf79d58b6198373cc9fae745c9"
+      Last-Modified:
+      - Mon, 10 Jan 2022 16:10:05 GMT
+      X-Oauth-Scopes:
+      - repo
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Github-Authentication-Token-Expiration:
+      - 2022-03-02 10:41:25 UTC
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4979'
+      X-Ratelimit-Reset:
+      - '1645638786'
+      X-Ratelimit-Used:
+      - '21'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - 24ED:4F5C:1EF659:20F2BA:62166AE8
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"name":"_articles","path":"_articles","sha":"bfe2ee494f61c4e6ab421a188f0b6326c3503452","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_articles?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_articles","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/bfe2ee494f61c4e6ab421a188f0b6326c3503452","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_articles?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/bfe2ee494f61c4e6ab421a188f0b6326c3503452","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_articles"}},{"name":"_authors","path":"_authors","sha":"571f08a27b5d85e517246f5e0ab7b2e8f3eeb1bb","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_authors?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_authors","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/571f08a27b5d85e517246f5e0ab7b2e8f3eeb1bb","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_authors?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/571f08a27b5d85e517246f5e0ab7b2e8f3eeb1bb","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_authors"}},{"name":"_categories","path":"_categories","sha":"15be0c30ae0985a88de3916034c3631928d5c4c9","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_categories?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_categories","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/15be0c30ae0985a88de3916034c3631928d5c4c9","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_categories?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/15be0c30ae0985a88de3916034c3631928d5c4c9","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_categories"}},{"name":"_data","path":"_data","sha":"72af10a2892ecc71d685bbe29ff3dd77c99d2ccd","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_data?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_data","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/72af10a2892ecc71d685bbe29ff3dd77c99d2ccd","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_data?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/72af10a2892ecc71d685bbe29ff3dd77c99d2ccd","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_data"}},{"name":"_pages","path":"_pages","sha":"acb942dbe07503f91812583c5b25bc61e9213c60","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_pages?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_pages","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/acb942dbe07503f91812583c5b25bc61e9213c60","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_pages?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/acb942dbe07503f91812583c5b25bc61e9213c60","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_pages"}},{"name":"_posts","path":"_posts","sha":"3cbef679621658f2e4c91b7b199fb6ad45d545bf","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_posts?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_posts","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3cbef679621658f2e4c91b7b199fb6ad45d545bf","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_posts?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3cbef679621658f2e4c91b7b199fb6ad45d545bf","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_posts"}},{"name":"_programs","path":"_programs","sha":"0dc00f4d348dc0559373c1b669de72277b1b2e28","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_programs?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_programs","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/0dc00f4d348dc0559373c1b669de72277b1b2e28","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_programs?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/0dc00f4d348dc0559373c1b669de72277b1b2e28","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_programs"}},{"name":"_teachers","path":"_teachers","sha":"2a564d74e8f10fd8f08da67c56a972459708d765","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_teachers?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_teachers","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/2a564d74e8f10fd8f08da67c56a972459708d765","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_teachers?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/2a564d74e8f10fd8f08da67c56a972459708d765","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_teachers"}},{"name":"_volumes","path":"_volumes","sha":"1387bc4fce1978e9d793cd5a9656efd69d37fe56","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_volumes?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_volumes","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/1387bc4fce1978e9d793cd5a9656efd69d37fe56","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/_volumes?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/1387bc4fce1978e9d793cd5a9656efd69d37fe56","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/_volumes"}},{"name":"actualites","path":"actualites","sha":"b1ecf2c52a82c8444a4de1054812b33bc107d4e6","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/actualites?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/actualites","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/b1ecf2c52a82c8444a4de1054812b33bc107d4e6","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/actualites?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/b1ecf2c52a82c8444a4de1054812b33bc107d4e6","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/actualites"}},{"name":"assets","path":"assets","sha":"af7e93717762e024e641f9f51ed03d21292e051f","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/assets?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/assets","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/af7e93717762e024e641f9f51ed03d21292e051f","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/assets?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/af7e93717762e024e641f9f51ed03d21292e051f","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/assets"}},{"name":"auteurs","path":"auteurs","sha":"3a3f73e809d2d681557755edd032b21c79967ceb","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/auteurs?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/auteurs","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3a3f73e809d2d681557755edd032b21c79967ceb","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/auteurs?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/3a3f73e809d2d681557755edd032b21c79967ceb","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/auteurs"}},{"name":"content","path":"content","sha":"c9c1284eb2b8a585e700608c8fd7fb5f4a4f9eca","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/content","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/c9c1284eb2b8a585e700608c8fd7fb5f4a4f9eca","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/c9c1284eb2b8a585e700608c8fd7fb5f4a4f9eca","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/content"}},{"name":"data","path":"data","sha":"a6c2c8f6dd7ebb6e292d666e85719fcd42381e02","size":0,"url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/data?ref=main","html_url":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/data","git_url":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/a6c2c8f6dd7ebb6e292d666e85719fcd42381e02","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/data?ref=main","git":"https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/git/trees/a6c2c8f6dd7ebb6e292d666e85719fcd42381e02","html":"https://github.com/<TEST_GITHUB_REPOSITORY>/tree/main/data"}}]'
+  recorded_at: Wed, 23 Feb 2022 17:12:08 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/contents/content/posts/2010/2010-11-28-test.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.22.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token <TEST_GITHUB_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 23 Feb 2022 17:12:09 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      X-Oauth-Scopes:
+      - repo
+      X-Accepted-Oauth-Scopes:
+      - ''
+      Github-Authentication-Token-Expiration:
+      - 2022-03-02 10:41:25 UTC
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4978'
+      X-Ratelimit-Reset:
+      - '1645638786'
+      X-Ratelimit-Used:
+      - '22'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO,
+        X-GitHub-Request-Id, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      Vary:
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Github-Request-Id:
+      - 24EE:55DB:A5C43A:A8EFA5:62166AE9
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/repos#get-repository-content"}'
+  recorded_at: Wed, 23 Feb 2022 17:12:09 GMT
+recorded_with: VCR 6.0.0
