@@ -36,3 +36,5 @@ test_post:
   website: website_with_github
   title: Test
   slug: test
+  published: true
+  published_at: 2010-11-28 00:00:00

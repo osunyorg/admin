@@ -45,12 +45,14 @@ class Communication::Website::GitFile < ApplicationRecord
   def should_update?
     !should_destroy? &&
     (
-      different_path? || different_sha?
+      different_path? ||
+      different_sha?
     )
   end
 
   def should_destroy?
-    will_be_destroyed || path.nil?
+    will_be_destroyed ||
+    path.nil?
   end
 
   def path
@@ -71,8 +73,16 @@ class Communication::Website::GitFile < ApplicationRecord
   protected
 
   # Real sha on the git repo
+  def git_sha_for(path)
+    website.git_repository.git_sha path
+  end
+
+  def previous_git_sha
+    @previous_git_sha ||= git_sha_for(previous_path)
+  end
+
   def git_sha
-    @git_sha ||= website.git_repository.git_sha previous_path
+    @git_sha ||= git_sha_for(path)
   end
 
   # Based on content, with the provider's algorithm (sha1 or sha256)
@@ -81,14 +91,17 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def exists_on_git?
-    !git_sha.nil?
+    previous_git_sha.present? || # The file exists where it was last time
+    (
+      previous_path.nil? && # Never saved in the database
+      git_sha.present?      # but it exists in the git repo
+    )
   end
 
   def synchronized_with_git?
-    exists_on_git? &&
-    (
-      git_sha == previous_sha || git_sha == previous_sha256
-    )
+    exists_on_git? && # File exists
+    previous_path == path && # at the same place
+    previous_git_sha == previous_sha # with the same content
   end
 
   def different_path?
