@@ -37,7 +37,7 @@ en:
   admin:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
-    infos: Infos
+    infos: Informations
     inheritance:
       sentence_html: Value inherited from %{link}
       status: Inherited value

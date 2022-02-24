@@ -37,7 +37,7 @@ fr:
   admin:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
-    infos: Infos
+    infos: Informations
     inheritance:
       sentence_html: Valeur héritée de %{link}
       status: Valeur héritée
