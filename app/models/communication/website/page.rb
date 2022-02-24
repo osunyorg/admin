@@ -78,11 +78,17 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + descendents + active_storage_blobs + siblings + git_block_dependencies
+    [self] +
+    descendents +
+    active_storage_blobs +
+    siblings +
+    git_block_dependencies
   end
 
   def git_destroy_dependencies(website)
-    [self] + descendents + active_storage_blobs
+    [self] +
+    descendents +
+    active_storage_blobs
   end
 
   def url

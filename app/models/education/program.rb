@@ -145,6 +145,7 @@ class Education::Program < ApplicationRecord
   def git_dependencies(website)
     [self] +
     active_storage_blobs +
+    git_block_dependencies +
     university_people_through_involvements +
     university_people_through_involvements.map(&:active_storage_blobs).flatten +
     university_people_through_involvements.map(&:teacher) +
