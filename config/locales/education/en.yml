@@ -47,7 +47,7 @@ en:
         phone: Phone
         programs: Programs provided
         roles: Team Members
-        websites: Associated websites
+        websites: Linked websites
         zipcode: Zipcode
   education:
     manage_programs: Manage programs
