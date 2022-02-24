@@ -3,10 +3,11 @@
     <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :name %>
+          <%= f.input :url %>
           <%= f.input :about_type,
                       collection: Communication::Website.about_types,
                       input_html: { data: { conditional: true } },
@@ -44,19 +45,18 @@
     <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+          <h5 class="card-title mb-0"><%= t('communication.website.git') %></h5>
         </div>
         <div class="card-body">
-
-          <p class="mt-4"><strong><%= t('communication.website.git') %></strong></p>
           <div class="row">
             <div class="col-md-6">
-              <%= f.input :url %>
-              <%= f.input :repository %>
+              <%= f.input :git_provider, include_blank: false %>
             </div>
             <div class="col-md-6">
-              <%= f.input :git_provider, include_blank: false %>
               <%= f.input :access_token %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :repository %>
             </div>
           </div>
 

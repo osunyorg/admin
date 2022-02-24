@@ -1,0 +1,12 @@
+posts:          /<%= @website.index_for(:communication_posts).path %>/:year/:month/:day/:slug/
+categories:     /<%= @website.index_for(:communication_posts).path %>/:slug/
+persons:        /<%= @website.index_for(:persons).path %>/:slug/
+authors:        /<%= @website.index_for(:persons).path %>/:slug/<%= @website.index_for(:communication_posts).path %>/
+<%# ces paths complémentaires sont nécessairesà Hugo mais on ne les utilise pas %>
+<% if @website.about_school? %>
+administrators: /<%= @website.index_for(:persons).path %>/:slug/roles/
+teachers:       /<%= @website.index_for(:persons).path %>/:slug/programs/
+<% end %>
+<% if @website.about_journal? %>
+researchers:    /<%= @website.index_for(:persons).path %>/:slug/articles/
+<% end %>

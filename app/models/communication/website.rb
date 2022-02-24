@@ -34,6 +34,7 @@
 #
 class Communication::Website < ApplicationRecord
   include WithAbouts
+  include WithConfigs
   include WithGit
   include WithGitRepository
   include WithImport
@@ -59,7 +60,7 @@ class Communication::Website < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = (
-      [self] +
+      [self, config_permalinks, config_base_url] +
       pages + pages.map(&:active_storage_blobs).flatten +
       posts + posts.map(&:active_storage_blobs).flatten +
       [index_for(:home)] + index_for(:home).active_storage_blobs +
