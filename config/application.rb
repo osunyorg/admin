@@ -56,9 +56,9 @@ module Osuny
       "sub", "sup", "tt", "u", "ul", "var", "video", "iframe"
     ]
     config.action_view.sanitized_allowed_attributes = [
-      "abbr", "allowfullscreen", "alt", "cite", "class", "controls", "datetime",
+      "abbr", "allowfullscreen", "alt", "cite", "controls", "datetime",
       "decoding", "frameborder", "height", "href", "loading", "mozallowfullscreen",
-      "name", "sizes", "src", "srcset", "style", "target", "title", "type",
+      "name", "sizes", "src", "srcset", "target", "title", "type",
       "webkitallowfullscreen", "width", "xml:lang",
 
     ]
