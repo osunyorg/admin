@@ -73,7 +73,7 @@
 <% content_for :action_bar_left do %>
   <%= link_to t('static'),
               static_admin_communication_website_category_path(@category),
-              class: button_classes('btn-light') if can? :static, @category %>
+              class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>
