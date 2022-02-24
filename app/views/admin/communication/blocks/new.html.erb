@@ -5,8 +5,7 @@
     <% @block.template = template %>
     <div class="col-lg-3 col-md-4">
       <div class="card">
-        <% asset = "communication/blocks/templates/#{template}.jpg" %>
-        <%= image_tag asset, alt: '' if Rails.application.assets.find_asset(asset) %>
+        <%= image_tag "communication/blocks/templates/#{template}.jpg", alt: '' %>
         <div class="card-body">
           <h5 class="card-title"><%= t "enums.communication.block.template.#{template}" %></h5>
           <%= simple_form_for [:admin, @block] do |f| %>
