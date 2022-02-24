@@ -58,7 +58,7 @@ class Communication::Website::IndexPage < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + active_storage_blobs + website.menus
+    [self] + active_storage_blobs + website.menus + [website.config_permalinks]
   end
 
   def git_destroy_dependencies(website)
