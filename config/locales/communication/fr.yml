@@ -4,12 +4,12 @@ fr:
       communication: Communication
   activerecord:
     models:
+      communication/block:
+        one: Bloc de contenu
+        other: Blocs de contenu
       communication/website:
         one: Site Web
         other: Sites Web
-      communication/website/block:
-        one: Bloc de contenu
-        other: Blocs de contenu
       communication/website/category:
         one: Catégorie
         other: Catégories
@@ -45,7 +45,7 @@ fr:
         about_type: Sujet du site
         name: Nom
         url: URL
-      communication/website/block:
+      communication/block:
         name: Nom
         template: Type de bloc
       communication/website/category:
@@ -109,12 +109,12 @@ fr:
     authors:
       one: Auteur·rice
       other: Auteur·rice·s
+    block:
+      choose_template: Choisir le type de bloc à ajouter
+      choose: Choisir
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
     website:
-      block:
-        choose_template: Choisir le type de bloc à ajouter
-        choose: Choisir
       git: Git
       imported:
         from: Importé depuis
@@ -176,11 +176,11 @@ fr:
       see_all: Voir la liste complète (%{number} éléments)
   enums:
     communication:
+      block:
+        template:
+          organization_chart: Organigramme
+          partners: Partenaires
       website:
-        block:
-          template:
-            organization_chart: Organigramme
-            partners: Partenaires
         menu:
           item:
             kind:

@@ -51,6 +51,7 @@ class Education::Program < ApplicationRecord
   include WithTree
   include WithInheritance
   include WithPosition
+  include WithBlocks
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,

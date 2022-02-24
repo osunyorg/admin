@@ -64,4 +64,5 @@ ects: <%= @about.ects %>
 <%= property.to_s %>: >
   <%= prepare_html_for_static @about.send("best_#{property}"), @about.university %>
 <% end %>
+<%= render 'admin/communication/blocks/static', about: @about %>
 ---

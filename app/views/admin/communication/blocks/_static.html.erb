@@ -3,5 +3,5 @@ blocks:
 <% about.blocks.each do |block| %>
   - template: <%= block.template %>
     data:
-<%= render "admin/communication/website/blocks/templates/#{block.template}/static", block: block if block.data %><% end %>
+<%= render "admin/communication/blocks/templates/#{block.template}/static", block: block if block.data %><% end %>
 <% end %>

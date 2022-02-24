@@ -5,8 +5,8 @@
 %>
 <div id="app">
   <%= simple_form_for [:admin, @block] do |f| %>
-    <%= render "admin/communication/website/blocks/templates/#{@block.template}/edit", f: f %>
-    <textarea name="communication_website_block[data]" rows="20" cols="200" class="d-none">
+    <%= render "admin/communication/blocks/templates/#{@block.template}/edit", f: f %>
+    <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}
     </textarea>
     <% content_for :action_bar_right do %>
@@ -24,7 +24,7 @@
       draggable: VueDraggableNext.VueDraggableNext,
     },
     data() {
-      return { 
+      return {
         directUpload: {
           url: "<%= rails_direct_uploads_url.html_safe %>",
           blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"

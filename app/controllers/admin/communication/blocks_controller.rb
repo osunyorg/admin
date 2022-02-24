@@ -1,11 +1,10 @@
-class Admin::Communication::Website::BlocksController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Block, through: :website
+class Admin::Communication::BlocksController < Admin::Communication::ApplicationController
+  load_and_authorize_resource class: Communication::Block
 
   def reorder
     ids = params[:ids] || []
-    first_page = nil
     ids.each.with_index do |id, index|
-      block = @website.blocks.find(id)
+      block = current_university.communication_blocks.find(id)
       block.update position: index + 1
     end
   end
@@ -25,8 +24,7 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
   end
 
   def create
-    @block.university = @website.university
-    @block.website = @website
+    @block.university = current_university
     if @block.save
       redirect_to [:edit, :admin, @block], notice: t('admin.successfully_created_html', model: @block.to_s)
     else
@@ -37,7 +35,7 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
   def update
     if @block.update(block_params)
       @block.about.save_and_sync
-      redirect_to [:admin, @block.about], notice: t('admin.successfully_updated_html', model: @block.to_s)
+      redirect_to about_path, notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -51,20 +49,30 @@ class Admin::Communication::Website::BlocksController < Admin::Communication::We
 
   protected
 
+  def website_id
+    params[:website_id] || @block.about&.website.id
+  rescue
+  end
+
+  def about_path
+    # La formation ou la page concernée
+    path_method = "admin_#{@block.about.class.to_s.parameterize.underscore}_path"
+    send path_method, id: @block.about_id, website_id: website_id
+  end
+
   def breadcrumb
-    super
-    add_breadcrumb @block.about.model_name.human(count: 2), [:admin, @block.about.class]
-    add_breadcrumb @block.about, [:admin, @block.about]
+    short_breadcrumb
+    add_breadcrumb @block.about, about_path
+    # Le block
     if @block.new_record?
-      add_breadcrumb t('communication.website.block.choose_template')
+      add_breadcrumb t('communication.block.choose_template')
     else
       add_breadcrumb @block
     end
   end
 
-
   def block_params
-    params.require(:communication_website_block)
+    params.require(:communication_block)
           .permit(:about_id, :about_type, :template, :data)
   end
 end

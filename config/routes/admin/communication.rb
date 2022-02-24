@@ -31,11 +31,6 @@ namespace :communication do
               as: :post_curations,
               controller: 'website/posts/curations',
               only: [:new, :create]
-    resources :blocks, controller: 'website/blocks', except: :index do
-      collection do
-        post :reorder
-      end
-    end
     resources :menus, controller: 'website/menus' do
       resources :items, controller: 'website/menu/items', except: :index do
         collection do
@@ -55,5 +50,10 @@ namespace :communication do
     post  'indexes/:kind' => 'website/index_pages#update'
     patch 'indexes/:kind' => 'website/index_pages#update'
     put   'indexes/:kind' => 'website/index_pages#update'
+  end
+  resources :blocks, controller: 'blocks', except: :index do
+    collection do
+      post :reorder
+    end
   end
 end

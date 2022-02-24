@@ -3,5 +3,6 @@ module University::WithCommunication
 
   included do
     has_many :communication_websites, class_name: 'Communication::Website', dependent: :destroy
+    has_many :communication_blocks, class_name: 'Communication::Block', dependent: :destroy
   end
 end
