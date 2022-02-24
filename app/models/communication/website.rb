@@ -58,6 +58,10 @@ class Communication::Website < ApplicationRecord
     "data/website.yml"
   end
 
+  def blocks
+    Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
+  end
+
   def git_dependencies(website)
     dependencies = (
       [self, config_permalinks, config_base_url] +
