@@ -120,10 +120,17 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
+    [
+      website.index_for(:communication_posts).path,
+      website.index_for(:education_programs).path,
+      website.index_for(:persons).path,
+      website.index_for(:research_articles).path,
+      website.index_for(:research_volumes).path
+    ].include?(slug) ||
+      self.class.unscoped
+                .where(communication_website_id: self.communication_website_id, slug: slug)
+                .where.not(id: self.id)
+                .exists?
   end
 
   def explicit_blob_ids

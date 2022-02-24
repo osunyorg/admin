@@ -37,6 +37,7 @@ class Research::Journal::Article < ApplicationRecord
   include WithGit
   include WithBlobs
   include WithPosition
+  include WithSlug
 
   has_summernote :text
   has_one_attached :pdf

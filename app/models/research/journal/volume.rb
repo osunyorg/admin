@@ -28,8 +28,9 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include WithGit
-  include WithFeaturedImage
   include WithBlobs
+  include WithFeaturedImage
+  include WithSlug
 
   belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id

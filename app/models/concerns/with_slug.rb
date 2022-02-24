@@ -2,6 +2,7 @@ module WithSlug
   extend ActiveSupport::Concern
 
   included do
+    validates :slug, presence: true
     validate :slug_must_be_unique
     validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }
 
