@@ -12,6 +12,6 @@ category: "<%= @about.related_category.path %>/"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
-<%= render 'admin/communication/website/blocks/static', about: @about %>
+<%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>

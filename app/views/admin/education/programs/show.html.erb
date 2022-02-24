@@ -39,7 +39,7 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-9">
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
@@ -58,56 +58,49 @@
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="col-md-5">
-
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h5 class="card-title mb-0"><%= t('education.program.educational_informations') %></h5>
       </div>
       <div class="card-body">
         <%  [
-              :objectives,
-              :content,
-              :prerequisites,
-              :pedagogy,
-              :evaluation,
-              :opportunities,
-              :results
-            ].each do |property| %>
-          <%= render 'admin/application/property/text', object: @program, property: property %>
+        :objectives,
+        :content,
+        :prerequisites,
+        :pedagogy,
+        :evaluation,
+        :opportunities,
+        :results
+        ].each do |property| %>
+        <%= render 'admin/application/property/text', object: @program, property: property %>
         <% end %>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="card flex-fill w-100">
-  <div class="card-header">
-    <h5 class="card-title mb-0"><%= Education::Program.human_attribute_name('team') %></h5>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6">
+    <%= render 'admin/communication/blocks/list', about: @program %>
+
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= Education::Program.human_attribute_name('team') %></h5>
+      </div>
+      <div class="card-body">
         <%= render 'admin/education/programs/show/roles', roles: @roles %>
       </div>
-      <div class="col-md-6">
+      <div class="card-body">
         <%= render 'admin/education/programs/show/teachers', involvements: @teacher_involvements %>
       </div>
     </div>
+
+    <% if @program.children.any? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
+        </div>
+        <%= render 'admin/education/programs/list', programs: @program.children %>
+      </div>
+    <% end %>
   </div>
 </div>
-
-<% if @program.children.any? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
-    </div>
-    <div class="card-body">
-      <%= render 'admin/education/programs/list', programs: @program.children %>
-    </div>
-  </div>
-<% end %>
 
 <% content_for :preview do %>
   <%  [

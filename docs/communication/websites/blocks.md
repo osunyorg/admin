@@ -12,7 +12,6 @@ Il faut lister les dépendances des blocs et les ajouter à l'objet about.
 ```
 communication/website/Block
 - university:references
-- website:references
 - about:references (polymorphic)
 - template:integer (enum)
 - position:integer
@@ -30,19 +29,19 @@ Un partial que l'on peut ajouter à un show d'objet, avec :
 - un bouton pour ajouter un bloc
 
 ```
-views/admin/communication/website/blocks/_list.html.erb
+views/admin/communication/blocks/_list.html.erb
 ```
 
 ### Show
 Le show du bloc utilise le partial de son template
 ```
-views/admin/communication/website/blocks/templates/partners/_show.html.erb
+views/admin/communication/blocks/templates/partners/_show.html.erb
 ```
 
 ### Edit
 L'edit du bloc utilise le partial de son template
 ```
-views/admin/communication/website/blocks/templates/partners/_edit.html.erb
+views/admin/communication/blocks/templates/partners/_edit.html.erb
 ```
 
 ### Concern
@@ -51,7 +50,7 @@ Tous les objets ayant des blocs utilisent le concern `WithBlocks`, qui ajoute la
 ### Export statique
 Les blocs sont exportés dans le frontmatter grâce au partial
 ```
-views/admin/communication/website/blocks/_static.html.erb
+views/admin/communication/blocks/_static.html.erb
 ```
 qui donne ce type de résultat
 ```
@@ -64,7 +63,7 @@ blocks:
 ```
 Les générateurs de chaque type suivent l'organisation :
 ```
-views/admin/communication/website/blocks/templates/partners/_static.html.erb
+views/admin/communication/blocks/templates/partners/_static.html.erb
 ```
 Attention, il faut 6 espaces pour respecter l'indentation du front-matter :
 ```

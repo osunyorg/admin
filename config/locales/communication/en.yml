@@ -4,12 +4,12 @@ en:
       communication: Communication
   activerecord:
     models:
+      communication/block:
+        one: Content block
+        other: Content blocks
       communication/website:
         one: Website
         other: Websites
-      communication/website/block:
-        one: Content block
-        other: Content blocks
       communication/website/category:
         one: Category
         other: Categories
@@ -42,7 +42,7 @@ en:
         about_type: About
         name: Name
         url: URL
-      communication/website/block:
+      communication/block:
         name: Name
         template: Kind of block
       communication/website/category:
@@ -97,12 +97,12 @@ en:
     authors:
       one: Author
       other: Authors
+    block:
+      choose_template: Choose the kind of block to add
+      choose: Choose
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
     website:
-      block:
-        choose_template: Choose the kind of block to add
-        choose: Choose
       git: Git
       imported:
         from: Imported from
@@ -122,11 +122,11 @@ en:
       see_all: See the full list (%{number} elements)
   enums:
     communication:
+      block:
+        template:
+          organization_chart: Organization chart
+          partners: Partners
       website:
-        block:
-          template:
-            organization_chart: Organization chart
-            partners: Partners
         menu:
           item:
             kind:
@@ -147,3 +147,7 @@ en:
               staff: Staff
               teachers: Educational staff
               url: URL
+  simple_form:
+    hints:
+      communication_website_index_page:
+        breadcrumb_title: If the field is empty, page title will be used in the breadcrumbs.

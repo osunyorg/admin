@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-5">
                   <select class="form-select select" v-model="person.id">
-                    <% @website.university.people.ordered.each_with_index do |person, index| %>
+                    <% current_university.people.ordered.each_with_index do |person, index| %>
                     <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
                     <% end %>
                   </select>
