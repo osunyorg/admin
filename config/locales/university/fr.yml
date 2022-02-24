@@ -38,9 +38,9 @@ fr:
         tenure: Titulaire ?
         user: Utilisateur
       university/person/involvement:
+        description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
-        description: Mission (dans ce contexte)
       university/role:
         description: Description (SEO)
         people: Personnes

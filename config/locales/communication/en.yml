@@ -17,6 +17,9 @@ en:
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
+      communication/website/index_page:
+        one: Index page
+        other: Index pages
       communication/website/menu:
         one: Menu
         other: Menus
@@ -53,6 +56,15 @@ en:
         name: Name
         parent: Parent category
         slug: Slug
+      communication/website/index_page:
+        breadcrumb_title: Name displayed in breadcrumb
+        description: Description (SEO)
+        featured_image: Features image
+        featured_image_alt: Alternative text
+        header_text: Header text
+        slug: Slug
+        text: Page text
+        title: Title
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -115,6 +127,48 @@ en:
         refresh: Refresh import
         show: Show import
         pending: Import in progress
+      index_pages:
+        default:
+          administrators:
+            description: List of members in the administrative team
+            path: administrative-team
+            title: Administrative team
+          authors:
+            description: List of members in the editorial team
+            path: editorial-team
+            title: Editoriale team
+          communication_posts:
+            description: List of posts
+            path: posts
+            title: Posts
+          education_programs:
+            description: List of available programs
+            path: programs
+            title: Programs
+          home:
+            description: ''
+            path: home
+            title: Home
+          persons:
+            description: List of members in the team
+            path: team
+            title: Team
+          research_articles:
+            description: List of articles
+            path: articles
+            title: Articles
+          research_volumes:
+            description: List of volumes
+            path: volumes
+            title: Volumes
+          researchers:
+            description: List of members in the research team
+            path: research-team
+            title: Research team
+          teachers:
+            description: List of members in the educational team
+            path: educational-team
+            title: Educational team
       last_pages: Last pages
       last_posts: Last posts
       posts:
