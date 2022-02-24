@@ -22,7 +22,12 @@
                         input_html: { name: 'communication_website_index_page[breadcrumb_title]' },
                         hint: t('simple_form.hints.communication_website_index_page.breadcrumb_title')  %>
             <%= f.input :description, input_html: { name: 'communication_website_index_page[description]' } %>
-            <%= f.input :header_text, as: :summernote, input_html: { name: 'communication_website_index_page[header_text]' } %>
+            <%= f.input :header_text,
+                        as: :summernote,
+                        input_html: {
+                          name: 'communication_website_index_page[header_text]',
+                          data: { 'summernote-config' => 'mini' }
+                        } %>
             <%= f.input :text, as: :summernote, input_html: { name: 'communication_website_index_page[text]' } %>
           </div>
         </div>
