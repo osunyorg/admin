@@ -15,7 +15,7 @@
   <%= render 'admin/communication/websites/show/pages' if can? :read, Communication::Website::Page %>
 <% end %>
 
-<% content_for :action_bar_right do %>
+<% content_for :action_bar_left do %>
   <% if can? :read, Communication::Website::Imported::Website %>
     <% if @website.imported? %>
       <%= link_to t('communication.website.imported.show'),
@@ -28,5 +28,9 @@
                   class: button_classes %>
     <% end %>
   <% end %>
+<% end %>
+
+<% content_for :action_bar_right do %>
   <%= edit_link @website %>
+  <%= destroy_link @website %>
 <% end %>
