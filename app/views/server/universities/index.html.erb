@@ -6,6 +6,8 @@
       <th><%= University.human_attribute_name('name') %></th>
       <th><%= University.human_attribute_name('url') %></th>
       <th><%= University.human_attribute_name('public_or_private') %></th>
+      <th><%= University.human_attribute_name('invoice_date') %></th>
+      <th><%= University.human_attribute_name('invoice_amount') %></th>
       <th></th>
     </tr>
   </thead>
@@ -15,6 +17,13 @@
         <td><%= link_to university, [:server, university] %></td>
         <td><%= link_to university.url, university.url, target: :_blank %></td>
         <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
+        <% if university.invoice_amount.blank? %>
+          <td></td>
+          <td></td>
+        <% else %>
+          <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= l university.invoice_date, format: "%d %B" unless university.invoice_amount.blank? %></td>
+          <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= university.invoice_amount %></td>
+        <% end %>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),

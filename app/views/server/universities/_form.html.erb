@@ -26,6 +26,15 @@
                   direct_upload: true %>
     </div>
   </div>
+  <h3 class="mt-5">Invoice informations</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :invoice_date %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :invoice_amount %>
+    </div>
+  </div>
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

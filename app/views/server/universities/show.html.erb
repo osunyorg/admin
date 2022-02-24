@@ -17,6 +17,16 @@
             <td class="text-end"><%= @university.public_send variable %></td>
           </tr>
         <% end %>
+        <% unless @university.invoice_amount.blank? %>
+          <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
+            <td><%= t('activerecord.attributes.university.invoice_date') %></td>
+            <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
+          </tr>
+          <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
+            <td><%= t('activerecord.attributes.university.invoice_amount') %></td>
+            <td class="text-end"><%= @university.invoice_amount %>€</td>
+          </tr>
+        <% end %>
       </table>
     </div>
   </div>

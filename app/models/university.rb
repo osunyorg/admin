@@ -7,6 +7,9 @@
 #  city              :string
 #  country           :string
 #  identifier        :string
+#  invoice_amount    :string
+#  invoice_date      :date
+#  invoice_date_yday :integer
 #  mail_from_address :string
 #  mail_from_name    :string
 #  name              :string
@@ -21,6 +24,7 @@ class University < ApplicationRecord
   include WithCommunication
   include WithEducation
   include WithIdentifier
+  include WithInvoice
   include WithResearch
   include WithUsers
 

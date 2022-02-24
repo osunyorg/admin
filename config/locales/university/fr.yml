@@ -6,6 +6,8 @@ fr:
         city: Ville
         country: Pays
         identifier: Identifiant
+        invoice_amount: Montant de facturation
+        invoice_date: Date de facturation
         logo: Logo
         name: Nom
         private: Etablissement privé

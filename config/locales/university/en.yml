@@ -6,6 +6,8 @@ en:
         city: City
         country: Country
         identifier: Identifier
+        invoice_amount: Invoice amount
+        invoice_date: Invoice date
         logo: Logo
         name: Name
         private: Private
