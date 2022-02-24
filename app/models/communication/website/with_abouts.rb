@@ -26,10 +26,6 @@ module Communication::Website::WithAbouts
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
-    has_many    :blocks,
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
     def self.about_types
       [
         nil,
