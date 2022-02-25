@@ -71,3 +71,26 @@ Attention, il faut 6 espaces pour respecter l'indentation du front-matter :
         url: https://partner1.com
         logo: "e09f3794-44e5-4b51-be02-0e384616e791"
 ```
+
+### Dépendances
+
+Il faut créer une classe pour chaque template, avec le nom au singulier (partners devient partner.rb, et la class Partner) :
+
+```
+models/communication/block/partner.rb
+```
+avec une structure de type :
+```
+class Communication::Block::Partner < Communication::Block::Template
+  def git_dependencies
+    ...
+  end
+end
+```
+
+## Pour créer un bloc
+
+1. Déclarer le template dans l'enum du modèle block
+2. Créer l'edit, le show et le static dans la vue du template
+3. Créer la classe du template pour gérer les dépendances
+4. Créer la vignette dans les images 

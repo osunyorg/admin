@@ -38,8 +38,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def git_dependencies
-    m = "git_dependencies_for_#{template}"
-    respond_to?(m, true) ? send(m) : []
+    template_class.git_dependencies
   end
 
   def last_ordered_element
@@ -52,32 +51,7 @@ class Communication::Block < ApplicationRecord
 
   protected
 
-  def git_dependencies_for_organization_chart
-    dependencies = []
-    data['elements'].each do |element|
-      element['persons'].each do |person|
-        id = person['id']
-        next if id.blank?
-        person = university.people.find id
-        next if person.nil?
-        dependencies += [person]
-        dependencies += person.active_storage_blobs
-      end
-    end
-    dependencies.uniq
-  end
-
-  def git_dependencies_for_partners
-    dependencies = []
-    data['elements'].each do |element|
-      element['partners'].each do |partner|
-        id = partner.dig('logo', 'id')
-        next if id.blank?
-        blob = university.active_storage_blobs.find id
-        next if blob.nil?
-        dependencies += [blob]
-      end
-    end
-    dependencies.uniq
+  def template_class
+    @template_class ||= "Communication::Block::#{template.classify}".constantize.new self
   end
 end
