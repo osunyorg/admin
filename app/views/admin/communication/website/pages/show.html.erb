@@ -88,6 +88,7 @@
 <% end %>
 
 <% content_for :action_bar_left do %>
+  <%= destroy_link @page %>
   <%= link_to t('static'),
               static_admin_communication_website_page_path(@page),
               class: button_classes('btn-light') if current_user.server_admin? %>
@@ -96,5 +97,4 @@
 <% content_for :action_bar_right do %>
   <%= preview_link %>
   <%= edit_link @page %>
-  <%= destroy_link @page %>
 <% end %>

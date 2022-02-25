@@ -29,7 +29,10 @@
   </div>
 <% end %>
 
-<% content_for :action_bar_right do %>
+<% content_for :action_bar_left do %>
   <%= edit_link @menu %>
+<% end %>
+
+<% content_for :action_bar_right do %>
   <%= destroy_link @menu %>
 <% end %>
