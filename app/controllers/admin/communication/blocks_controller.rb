@@ -44,9 +44,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def destroy
-    @about = @block.about
+    path = about_path
     @block.destroy
-    redirect_to [:admin, @about], notice: t('admin.successfully_destroyed_html', model: @block.to_s)
+    redirect_to path, notice: t('admin.successfully_destroyed_html', model: @block.to_s)
   end
 
   protected
