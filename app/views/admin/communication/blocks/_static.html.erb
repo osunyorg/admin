@@ -1,7 +1,8 @@
 <% if about.blocks.any? %>
 blocks:
-<% about.blocks.each do |block| %>
+<% about.blocks.ordered.each do |block| %>
   - template: <%= block.template %>
+    position: <%= block.position %>
     data:
 <%= render "admin/communication/blocks/templates/#{block.template}/static", block: block if block.data %><% end %>
 <% end %>
