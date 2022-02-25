@@ -93,4 +93,5 @@ end
 1. Déclarer le template dans l'enum du modèle block
 2. Créer l'edit, le show et le static dans la vue du template
 3. Créer la classe du template pour gérer les dépendances
-4. Créer la vignette dans les images 
+4. Créer la vignette dans les images
+5. Ecrire les locales fr et en

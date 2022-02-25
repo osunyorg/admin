@@ -1,0 +1,20 @@
+<% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
+      title: >
+          <%= prepare_text_for_static block.data['title'] %>
+      images:
+<% block.data['elements'].each do |image|
+  file_id = nil
+  if image.has_key?('file')
+    file = image['file']
+    if file.is_a?(Hash) && file.has_key?('id')
+      file_id = file['id']
+    end
+  end
+%>
+        - alt: >
+            <%= prepare_text_for_static image['alt'] %>
+          <% if file_id %>
+          file: "<%= file_id %>"
+          <% end %>
+<% end %>
+<% end %>

@@ -1,0 +1,57 @@
+
+<div class="mb-3">
+  <label  aria-label="Title"
+          for="title">
+          Title
+  </label>
+  <input  class="form-control form-control-lg"
+          type="text"
+          v-model="data.title"
+          placeholder="Type gallery title here"
+          id="title">
+</div>
+
+<a  class="<%= button_classes('mb-4') %>"
+    v-on:click="data.elements.push({alt: '', file: {}})">
+    Add image
+</a>
+
+<draggable :list="data.elements" handle=".imageHandle" class="row">
+  <div v-for="(image, imageIndex) in data.elements" class="col-xxl-2 col-xl-3 col-6">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <a class="btn ps-0 imageHandle">
+          <i class="fa fa-bars handle"></i>
+        </a>
+        <div class="float-end">
+          <a  class="btn btn-sm btn-danger"
+              v-on:click="data.elements.splice(data.elements.indexOf(image), 1)">
+              <i class="fas fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
+      <div class="card-body">
+        <label  class="form-label"
+                :for="'image-file-' + imageIndex">
+          Image
+        </label>
+        <input  class="form-control mb-2"
+                type="file"
+                accept="image/*"
+                @change="onFileImageChange( $event, image, 'file' )"
+                :id="'image-file-' + imageIndex">
+        <div class="mb-3">
+          <label  aria-label="Title"
+                  :for="'image-alt-' + imageIndex">
+                  Alt
+          </label>
+          <input  class="form-control form-control-lg"
+                  type="text"
+                  v-model="image.alt"
+                  :id="'image-alt-' + imageIndex">
+        </div>
+      </div>
+    </div>
+  </div>
+</draggable>

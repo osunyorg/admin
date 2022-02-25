@@ -1,7 +1,7 @@
 <% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
 <% block.data['elements'].each do |element| %>
       - title: >
-          <%= element['title'] %>
+          <%= prepare_text_for_static element['title'] %>
         persons:
 <%
 element['persons'].each do |person|
@@ -9,7 +9,7 @@ element['persons'].each do |person|
 %>
           - slug: "<%= p.slug %>"
             role: >
-              <%= person['role'] %>
+              <%= prepare_text_for_static person['role'] %>
 <% end %>
 <% end %>
 <% end %>

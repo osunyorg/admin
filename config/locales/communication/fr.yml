@@ -178,6 +178,7 @@ fr:
     communication:
       block:
         template:
+          gallery: Galerie
           organization_chart: Organigramme
           partners: Partenaires
       website:

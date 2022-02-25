@@ -29,7 +29,8 @@ class Communication::Block < ApplicationRecord
 
   enum template: {
     organization_chart: 100,
-    partners: 200
+    partners: 200,
+    gallery: 300
   }
 
   def data=(value)

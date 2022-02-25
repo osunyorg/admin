@@ -21,6 +21,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def edit
     breadcrumb
+    add_breadcrumb t('edit')
   end
 
   def create
@@ -37,6 +38,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       @block.about.save_and_sync
       redirect_to about_path, notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
+      add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -63,11 +65,10 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def breadcrumb
     short_breadcrumb
     add_breadcrumb @block.about, about_path
-    # Le block
     if @block.new_record?
       add_breadcrumb t('communication.block.choose_template')
     else
-      add_breadcrumb @block
+      add_breadcrumb @block, [:admin, @block]
     end
   end
 
