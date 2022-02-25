@@ -66,4 +66,18 @@ class Communication::Block < ApplicationRecord
     end
     dependencies.uniq
   end
+
+  def git_dependencies_for_partners
+    dependencies = []
+    data['elements'].each do |element|
+      element['partners'].each do |partner|
+        id = partner.dig('logo', 'id')
+        next if id.blank?
+        blob = university.active_storage_blobs.find id
+        next if blob.nil?
+        dependencies += [blob]
+      end
+    end
+    dependencies.uniq
+  end
 end
