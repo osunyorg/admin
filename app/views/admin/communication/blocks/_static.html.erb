@@ -4,5 +4,6 @@ blocks:
   - template: <%= block.template %>
     position: <%= block.position %>
     data:
-<%= render "admin/communication/blocks/templates/#{block.template}/static", block: block if block.data %><% end %>
+<%= render "admin/communication/blocks/templates/#{block.template}/static",
+            block: block if block.data && block.data.present? %><% end %>
 <% end %>

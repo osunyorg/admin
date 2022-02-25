@@ -1,7 +1,7 @@
-<% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
       title: >
           <%= prepare_text_for_static block.data['title'] %>
       images:
+<% if block.data.has_key?('elements') %>
 <% block.data['elements'].each do |image|
   file_id = nil
   if image.has_key?('file')

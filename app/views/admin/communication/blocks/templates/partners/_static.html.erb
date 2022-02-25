@@ -1,4 +1,4 @@
-<% if !block.data.nil? && !block.data.is_a?(String) && block.data.has_key?('elements') %>
+<% if block.data.has_key?('elements') %>
 <% block.data['elements'].each do |element| %>
       - title: >
           <%= element['title'] %>

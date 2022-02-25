@@ -12,7 +12,7 @@ class Communication::Block::Template
   protected
 
   def data
-    block.data
+    block.data || {}
   end
 
   def university
