@@ -53,13 +53,12 @@
               <%= f.input :git_provider, include_blank: false %>
             </div>
             <div class="col-md-6">
+              <%= f.input :git_endpoint,
+                          placeholder: 'If blank, default will be used (https://gitlab.com/api/v4)' %>
               <%= f.input :access_token %>
-            </div>
-            <div class="col-md-6">
               <%= f.input :repository %>
             </div>
           </div>
-
         </div>
       </div>
     </div>

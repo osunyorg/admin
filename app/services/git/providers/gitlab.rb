@@ -1,4 +1,6 @@
 class Git::Providers::Gitlab < Git::Providers::Abstract
+  DEFAULT_ENDPOINT = 'https://gitlab.com/api/v4'
+
   def create_file(path, content)
     batch << {
       action: 'create',
@@ -59,9 +61,14 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
 
   protected
 
+  def endpoint
+    @endpoint.blank?  ? DEFAULT_ENDPOINT
+                      : @endpoint
+  end
+
   def client
     @client ||= Gitlab.client(
-      endpoint: 'https://gitlab.com/api/v4',
+      endpoint: endpoint,
       private_token: access_token
     )
   end

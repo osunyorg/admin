@@ -5,6 +5,7 @@
 #  id                                :uuid             not null, primary key
 #  about_type                        :string           indexed => [about_id]
 #  access_token                      :string
+#  git_endpoint                      :string
 #  git_provider                      :integer          default("github")
 #  name                              :string
 #  repository                        :string

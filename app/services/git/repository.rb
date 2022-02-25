@@ -34,7 +34,9 @@ class Git::Repository
   protected
 
   def provider
-    @provider ||= provider_class.new(website&.access_token, website&.repository)
+    @provider ||= provider_class.new  website&.git_endpoint,
+                                      website&.access_token,
+                                      website&.repository
   end
 
   def provider_class
