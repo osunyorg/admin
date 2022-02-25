@@ -33,6 +33,7 @@
 #  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Category < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithFeaturedImage
   include WithBlobs

@@ -27,6 +27,7 @@
 #  fk_rails_c83d5e9068  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithBlobs
   include WithFeaturedImage

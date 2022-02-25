@@ -32,6 +32,7 @@
 #  fk_rails_fa4f4585e4  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
+  include Sanitizable
   include WithTree
   include WithPosition
   include WithTargets

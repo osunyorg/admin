@@ -43,6 +43,7 @@
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithFeaturedImage
   include WithBlobs

@@ -39,6 +39,7 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithFeaturedImage
   include WithBlobs

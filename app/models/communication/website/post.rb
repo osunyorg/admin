@@ -32,6 +32,7 @@
 #  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithFeaturedImage
   include WithBlobs

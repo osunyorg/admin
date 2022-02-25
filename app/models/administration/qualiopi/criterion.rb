@@ -10,6 +10,8 @@
 #  updated_at  :datetime         not null
 #
 class Administration::Qualiopi::Criterion < ApplicationRecord
+  include Sanitizable
+
   has_many :indicators, dependent: :destroy
 
   validates :number, uniqueness: true

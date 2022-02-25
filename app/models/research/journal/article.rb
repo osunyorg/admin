@@ -34,6 +34,7 @@
 #  fk_rails_935541e014  (university_id => universities.id)
 #
 class Research::Journal::Article < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithBlobs
   include WithPosition

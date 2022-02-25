@@ -24,6 +24,7 @@
 #  fk_rails_d334f832b4  (university_id => universities.id)
 #
 class Research::Laboratory::Axis < ApplicationRecord
+  include Sanitizable
   include WithPosition
 
   has_summernote :text

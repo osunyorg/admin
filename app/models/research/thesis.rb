@@ -30,6 +30,8 @@
 #  fk_rails_b3380066dc  (research_laboratory_id => research_laboratories.id)
 #
 class Research::Thesis < ApplicationRecord
+  include Sanitizable
+
   belongs_to :university
   belongs_to :laboratory, foreign_key: :research_laboratory_id
   belongs_to :author, class_name: 'University::Person'

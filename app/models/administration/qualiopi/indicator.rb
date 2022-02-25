@@ -23,6 +23,8 @@
 #  fk_rails_eed87f7acf  (criterion_id => administration_qualiopi_criterions.id)
 #
 class Administration::Qualiopi::Indicator < ApplicationRecord
+  include Sanitizable
+
   belongs_to :criterion
 
   validates :number, uniqueness: true

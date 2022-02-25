@@ -27,6 +27,7 @@
 #  fk_rails_7eb45227ae  (university_id => universities.id)
 #
 class Communication::Website::IndexPage < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithFeaturedImage
   include WithBlobs
