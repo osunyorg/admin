@@ -6,7 +6,7 @@
 #  breadcrumb_title         :string
 #  description              :text
 #  featured_image_alt       :string
-#  header_text              :string
+#  header_text              :text
 #  kind                     :integer
 #  path                     :string
 #  text                     :text
