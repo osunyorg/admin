@@ -5,6 +5,7 @@
 %>
 <div id="app" v-cloak>
   <%= simple_form_for [:admin, @block] do |f| %>
+    <%= f.input :title %>
     <%= render "admin/communication/blocks/templates/#{@block.template}/edit", f: f %>
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}

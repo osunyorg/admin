@@ -30,23 +30,28 @@
       </table>
     </div>
   </div>
-  <% if @university.logo.attached? %>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title"><%= t('activerecord.attributes.university.logo') %></h2>
-        </div>
-        <div class="card-body">
-          <% if @university.id == current_university.id %>
-            <%= kamifusen_tag @university.logo, class: 'img-fluid p-5' %>
-          <% else %>
-            <%= t('admin.attachment_not_available') %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
 </div>
+
+
+<h2>Blocks</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Block</th>
+      <th>About</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @university.communication_blocks.each do |block| %>
+      <tr>
+        <td><%= block %></td>
+        <td><%= block.about %></td>
+        <td><%= edit_link block %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>

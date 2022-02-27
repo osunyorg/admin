@@ -7,6 +7,7 @@
 #  data          :jsonb
 #  position      :integer          default(0), not null
 #  template      :integer          default(NULL), not null
+#  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid             indexed => [about_type]
@@ -47,7 +48,8 @@ class Communication::Block < ApplicationRecord
   end
 
   def to_s
-    "Bloc #{position}"
+    title.blank?  ? "Block #{position}"
+                  : "#{title}"
   end
 
   protected
