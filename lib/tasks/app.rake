@@ -8,26 +8,18 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    [
-      "text", "biography", "accessibility", "contacts", "duration",
-      "evaluation", "objectives", "opportunities", "other", "pedagogy",
-      "prerequisites", "pricing", "registration", "content", "results"
-    ].each do |attribute|
-      ActiveStorage::Attachment.where(name: "#{attribute}_new_summernote_embeds").find_each { _1.update_column :name, "#{attribute}_summernote_embeds" }
+    Communication::Block.where(template: 'partners').find_each do |partner|
+      next if partner.data.nil?
+      data = partner.data
+      next unless data.has_key? 'elements'
+      elements = data['elements']
+      next if elements.none?
+      first = elements.first
+      next unless first.has_key? 'partners'
+      partner.title = first['title']
+      partner.data['elements'] = first['partners']
+      partner.save
     end
-  end
-
-  def clean_for_summernote(actiontext)
-    return '' if actiontext.nil?
-    actiontext.body
-              .to_html
-              .gsub('<div>', '<p>')
-              .gsub('</div>', '</p>')
-              .gsub('<strong>', '<b>')
-              .gsub('</strong>', '</b>')
-              .gsub('<em>', '<i>')
-              .gsub('</em>', '</i>')
-              .gsub('<p><br></p>', '')
   end
 
   namespace :db do

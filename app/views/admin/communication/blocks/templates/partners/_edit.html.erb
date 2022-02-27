@@ -1,112 +1,71 @@
 <a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({title: '', partners: [] })">
-    Add category
+    v-on:click="data.elements.push({name: '', url: '', logo: {}})">
+    Add partner
 </a>
 
-<draggable :list="data.elements" handle=".categoryHandle">
-  <div v-for="(category, categoryIndex) in data.elements">
+<draggable :list="data.elements" class="list-group" handle=".partnerHandle">
+  <div v-for="(partner, index) in data.elements" class="list-group-item">
     <div class="d-flex">
       <div>
-        <a class="btn ps-0 categoryHandle">
+        <a class="btn ps-0 partnerHandle">
           <i class="fa fa-bars handle"></i>
         </a>
       </div>
       <div class="flex-fill">
-        <div class="mb-3">
-          <label  class="visually-hidden"
-                  aria-label="Title"
-                  :for="'category-title-' + categoryIndex">
-                  Title
-          </label>
-          <input  class="form-control form-control-lg"
+        <div class="row">
+          <div class="col-lg-4">
+            <label  class="form-label"
+                    :for="'partner-' + index + '-name'">Name</label>
+            <input class="form-control mb-2"
                   type="text"
-                  v-model="category.title"
-                  placeholder="Type category name here"
-                  :id="'category-title-' + categoryIndex">
-        </div>
-        <div>
-          <div class="row">
-            <div class="col-md-8">
-              <p>Partners for “{{ category.title  }}”</p>
+                  v-model="partner.name"
+                  placeholder="Type partner's name here"
+                  :id="'partner-' + index + '-name'">
+          </div>
+          <div class="col-lg-4">
+            <label  class="form-label"
+                    :for="'partner-' + index + '-url'">
+              Url <small>(starting with https:// )</small>
+            </label>
+            <input class="form-control mb-2"
+                  type="text"
+                  v-model="partner.url"
+                  placeholder="Type partner's url here"
+                  :id="'partner-' + index + '-url'">
+          </div>
+          <div class="col-lg-4">
+            <div v-if="!partner.logo.id">
+              <%# TODO : create a uploader vue3 component %>
+              <label  class="form-label"
+                      :for="'partner-' + index + '-logo'">
+                Logo
+              </label>
+              <input  class="form-control mb-2"
+                      type="file"
+                      accept="image/*"
+                      @change="onFileImageChange( $event, partner, 'logo' )"
+                      :id="'partner-' + index + '-logo'">
             </div>
-            <div class="col-md-4 text-end">
-              <a  class="<%= button_classes('mt-n1') %>"
-                  v-on:click="category.partners.push({name: '', url: '', logo: {}})">
-                  Add partner
+            <div v-if="partner.logo.id">
+              <img :src="getImageUrl(partner.logo)"
+                    class="img-fluid"
+                    style="max-height: 100px"
+                    />
+              <a  class="btn btn-sm btn-danger ms-2"
+                  v-on:click="partner.logo={}">
+                  Remove
+                  <i class="fas fa-times"></i>
               </a>
             </div>
           </div>
-          <draggable :list="category.partners" class="list-group" handle=".partnerHandle">
-            <div v-for="(partner, partnerIndex) in category.partners" class="list-group-item">
-              <div class="d-flex">
-                <div>
-                  <a class="btn ps-0 partnerHandle">
-                    <i class="fa fa-bars handle"></i>
-                  </a>
-                </div>
-                <div class="flex-fill">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <label  class="form-label"
-                              :for="'category-' + categoryIndex + '-partner-name-' + partnerIndex">Name</label>
-                      <input class="form-control mb-2"
-                            type="text"
-                            v-model="partner.name"
-                            placeholder="Type partner's name here"
-                            :id="'category-' + categoryIndex + '-partner-name-' + partnerIndex">
-                    </div>
-                    <div class="col-lg-4">
-                      <label  class="form-label"
-                              :for="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
-                        Url <small>(starting with https:// )</small>
-                      </label>
-                      <input class="form-control mb-2"
-                            type="text"
-                            v-model="partner.url"
-                            placeholder="Type partner's url here"
-                            :id="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
-                    </div>
-                    <div class="col-lg-4">
-                      <%# TODO : create a uploader vue3 component %>
-                      <label  class="form-label"
-                              :for="'category-' + categoryIndex + '-partner-logo-' + partnerIndex">
-                        Logo
-                      </label>
-                      <input  class="form-control mb-2"
-                              type="file"
-                              accept="image/*"
-                              @change="onFileImageChange( $event, partner, 'logo' )"
-                              :id="'category-' + categoryIndex + '-partner-url-' + partnerIndex">
-
-                      <div v-if="partner.logo.id">
-                        <img :src="getImageUrl(partner.logo)" class="img-fluid d-block" />
-                        <a  class="btn btn-sm btn-danger mt-1"
-                            v-on:click="partner.logo={}">
-                            Remove
-                            <i class="fas fa-times"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <a  class="btn btn-sm btn-danger ms-3"
-                      v-on:click="category.partners.splice(category.partners.indexOf(partner), 1)">
-                      <i class="fas fa-times"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </draggable>
         </div>
       </div>
       <div>
         <a  class="btn btn-sm btn-danger ms-3"
-            v-on:click="data.elements.splice(data.elements.indexOf(category), 1)">
+            v-on:click="data.elements.splice(data.elements.indexOf(partner), 1)">
             <i class="fas fa-times"></i>
         </a>
       </div>
     </div>
-    <hr class="my-5">
   </div>
 </draggable>
