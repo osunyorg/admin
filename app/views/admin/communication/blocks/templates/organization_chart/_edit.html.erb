@@ -1,77 +1,32 @@
 <a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({title: '', persons: []})">
-    Add role
+    v-on:click="data.elements.push({id: '', role: ''})">
+    Add person
 </a>
 
-<draggable :list="data.elements" handle=".elementHandle">
-  <div v-for="(element, elementIndex) in data.elements">
-    <div class="d-flex">
-      <div>
-        <a class="btn ps-0 elementHandle">
+<draggable :list="data.elements" class="list-group">
+  <div v-for="person in data.elements" class="list-group-item">
+    <div class="row">
+      <div class="col-md-1">
+        <a class="btn ps-0">
           <i class="fa fa-bars handle"></i>
         </a>
       </div>
-      <div class="flex-fill">
-        <div class="mb-3">
-          <label  class="visually-hidden"
-                  aria-label="Title"
-                  :for="'element-title-' + elementIndex">
-                  Title
-          </label>
-          <input  class="form-control form-control-lg"
-                  type="text"
-                  v-model="element.title"
-                  placeholder="Type role name here"
-                  :id="'element-title-' + elementIndex">
-        </div>
-        <div>
-          <div class="row">
-            <div class="col-md-8">
-              <p>People for “{{ element.title  }}”</p>
-            </div>
-            <div class="col-md-4 text-end">
-              <a  class="<%= button_classes('mt-n1') %>"
-                  v-on:click="element.persons.push({id: '', role: ''})">
-                  Add person
-              </a>
-            </div>
-          </div>
-          <draggable :list="element.persons" class="list-group">
-            <div v-for="person in element.persons" class="list-group-item">
-              <div class="row">
-                <div class="col-md-1">
-                  <a class="btn ps-0">
-                    <i class="fa fa-bars handle"></i>
-                  </a>
-                </div>
-                <div class="col-md-5">
-                  <select class="form-select select" v-model="person.id">
-                    <% current_university.people.ordered.each_with_index do |person, index| %>
-                    <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
-                    <% end %>
-                  </select>
-                </div>
-                <div class="col-md-5">
-                  <input class="form-control" type="text" v-model="person.role" placeholder="Type role here">
-                </div>
-                <div class="col-md-1 text-end">
-                  <a  class="btn btn-sm btn-danger mt-1"
-                      v-on:click="element.persons.splice(element.persons.indexOf(person), 1)">
-                      <i class="fas fa-times"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </draggable>
-        </div>
+      <div class="col-md-5">
+        <select class="form-select select" v-model="person.id">
+          <% current_university.people.ordered.each_with_index do |person, index| %>
+          <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
+          <% end %>
+        </select>
       </div>
-      <div>
-        <a  class="btn btn-sm btn-danger ms-3"
-            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+      <div class="col-md-5">
+        <input class="form-control" type="text" v-model="person.role" placeholder="Type role here">
+      </div>
+      <div class="col-md-1 text-end">
+        <a  class="btn btn-sm btn-danger mt-1"
+            v-on:click="data.elements.splice(data.elements.indexOf(person), 1)">
             <i class="fas fa-times"></i>
         </a>
       </div>
     </div>
-    <hr class="my-5">
   </div>
 </draggable>

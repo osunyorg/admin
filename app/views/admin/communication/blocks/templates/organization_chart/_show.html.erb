@@ -1,19 +1,19 @@
-<% @block.data['elements'].each do |element| %>
-  <h2><%= element['title'] %></h2>
-  <div class="row">
-    <% element['persons'].each do |person| %>
-      <%
-      p = current_university.people.find person['id']
-      next if p.nil?
-      %>
-      <div class="col-md-3">
-        <article class="card">
-          <div class="card-body">
-            <h3 class="card-title h5"><%= link_to p, [:admin, p] %></h3>
-            <p class="mb-0"><%= person['role'] %></p>
-          </div>
-        </article>
-      </div>
-    <% end %>
-  </div>
-<% end if @block.data %>
+<div class="row">
+  <% @block.data['elements'].each do |person| %>
+    <%
+    next unless person.has_key? 'id'
+    id = person['id']
+    next if id.blank?
+    p = current_university.people.find person['id']
+    next if p.nil?
+    %>
+    <div class="col-md-3">
+      <article class="card">
+        <div class="card-body">
+          <h3 class="card-title h5"><%= link_to p, [:admin, p] %></h3>
+          <p class="mb-0"><%= person['role'] %></p>
+        </div>
+      </article>
+    </div>
+  <% end if @block.data %>
+</div>

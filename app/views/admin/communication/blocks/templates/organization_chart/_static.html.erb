@@ -1,15 +1,12 @@
 <% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |element| %>
-      - title: >
-          <%= prepare_text_for_static element['title'] %>
-        persons:
-<%
-element['persons'].each do |person|
-  p = block.university.people.find person['id']
+<% block.data['elements'].each do |person|
+  next unless person.has_key? 'id'
+  id = person['id']
+  next if id.blank?
+  p = block.university.people.find id
 %>
-          - slug: "<%= p.slug %>"
-            role: >
-              <%= prepare_text_for_static person['role'] %>
-<% end %>
+      - slug: "<%= p.slug %>"
+        role: >
+          <%= prepare_text_for_static person['role'] %>
 <% end %>
 <% end %>
