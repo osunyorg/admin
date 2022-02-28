@@ -1,0 +1,12 @@
+      testimonials:
+<% if block.data.has_key?('elements') %>
+<% block.data['elements'].each do |testimonial| %>
+        - text: >-
+            <%= prepare_text_for_static testimonial['text'] %>
+          author: >-
+              <%= prepare_text_for_static testimonial['author'] %>
+          job: >-
+              <%= prepare_text_for_static testimonial['job'] %>
+          photo: "<%= prepare_media_for_static testimonial, 'photo' %>"
+<% end %>
+<% end %>

@@ -109,6 +109,13 @@ en:
     communication:
       blocks:
         templates:
+          gallery:
+            edit:
+              add_image: Add image
+              image_label: Image (.png, .jpg)
+              alt_label: Alternative text
+              alt_placeholder: Enter text description
+              remove_image: Remove image
           organization_chart:
             edit:
               add_person: Add person
@@ -128,13 +135,19 @@ en:
               partner_image_label: Logo
               remove_logo: Remove logo
               remove_partner: Remove partner
-          gallery:
+          testimonials:
             edit:
-              add_image: Add image
-              image_label: Image (.png, .jpg)
-              alt_label: Alternative text
-              alt_placeholder: Enter text description
-              remove_image: Remove image
+              add_testimonial: Add testimonial
+              text_label: Text
+              text_placeholder: Enter testimonial's text
+              author_label: Author of the text
+              author_placeholder: Enter authors' name
+              job_label: Author's job
+              job_placeholder: Enter authors' job
+              photo_label: Photo
+              remove_photo: Remove photo
+              remove_testimonial: Remove testimonial
+
   communication:
     authors:
       one: Author
@@ -211,6 +224,7 @@ en:
           gallery: Gallery
           organization_chart: Organization chart
           partners: Partners
+          testimonials: Testimonials
       website:
         menu:
           item:

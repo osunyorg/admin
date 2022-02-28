@@ -1,19 +1,9 @@
 <% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |partner|
-  logo_id = nil
-  if partner.has_key?('logo')
-    logo = partner['logo']
-    if logo.is_a?(Hash) && logo.has_key?('id')
-      logo_id = logo['id']
-    end
-  end
-%>
+<% block.data['elements'].each do |partner| %>
       - name: >
           <%= prepare_text_for_static partner['name'] %>
         url: >-
           <%= prepare_text_for_static partner['url'] %>
-        <% if logo_id %>
-        logo: "<%= logo_id %>"
-        <% end %>
+        logo: "<%= prepare_media_for_static partner, 'logo' %>"
 <% end %>
 <% end %>

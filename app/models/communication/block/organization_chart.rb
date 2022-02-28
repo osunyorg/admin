@@ -1,7 +1,7 @@
-class Communication::Block::OrganizationChart < Communication::Block::Template
+class Communication::Block::OrganizationChart < Communication::Block::Abstract
   def git_dependencies
     dependencies = []
-    data['elements'].each do |person|
+    elements.each do |person|
       id = person['id']
       next if id.blank?
       person = university.people.find id

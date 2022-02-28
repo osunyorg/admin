@@ -1,7 +1,7 @@
-class Communication::Block::Gallery < Communication::Block::Template
+class Communication::Block::Gallery < Communication::Block::Abstract
   def git_dependencies
     dependencies = []
-    data['elements'].each do |image|
+    elements.each do |image|
       id = image.dig('file', 'id')
       next if id.blank?
       blob = university.active_storage_blobs.find id

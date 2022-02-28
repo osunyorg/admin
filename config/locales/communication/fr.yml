@@ -109,6 +109,13 @@ fr:
     communication:
       blocks:
         templates:
+          gallery:
+            edit:
+              add_image: Ajouter une image
+              image_label: Image (.png, .jpg)
+              alt_label: Texte alternatif
+              alt_placeholder: Entrer la description textuelle
+              remove_image: Enlever l'image
           organization_chart:
             edit:
               add_person: Ajouter une personne
@@ -128,13 +135,18 @@ fr:
               partner_image_label: Logo
               remove_logo: Enlever le logo
               remove_partner: Enlever le partenaire
-          gallery:
+          testimonials:
             edit:
-              add_image: Ajouter une image
-              image_label: Image (.png, .jpg)
-              alt_label: Texte alternatif
-              alt_placeholder: Entrer la description textuelle
-              remove_image: Enlever l'image
+              add_testimonial: Ajouter un témoignage
+              text_label: Texte
+              text_placeholder: Entrer le texte du témoignage
+              author_label: Auteur·e du témoignage
+              author_placeholder: Entrer le nom de l'auteur·e
+              job_label: Métier de l'auteur·e
+              job_placeholder: Entrer le métier de l'auteur·e
+              photo_label: Photo
+              remove_photo: Enlever la photo
+              remove_testimonial: Enlever le témoignage
   communication:
     authors:
       one: Auteur·rice
@@ -211,6 +223,7 @@ fr:
           gallery: Galerie
           organization_chart: Organigramme
           partners: Partenaires
+          testimonials: Témoignages
       website:
         menu:
           item:

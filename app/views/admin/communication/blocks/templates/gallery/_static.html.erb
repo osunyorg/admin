@@ -1,18 +1,8 @@
       images:
 <% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |image|
-  file_id = nil
-  if image.has_key?('file')
-    file = image['file']
-    if file.is_a?(Hash) && file.has_key?('id')
-      file_id = file['id']
-    end
-  end
-%>
+<% block.data['elements'].each do |image| %>
         - alt: >
             <%= prepare_text_for_static image['alt'] %>
-          <% if file_id %>
-          file: "<%= file_id %>"
-          <% end %>
+          file: "<%= prepare_media_for_static image, 'file' %>"
 <% end %>
 <% end %>

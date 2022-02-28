@@ -84,6 +84,12 @@ module Admin::ApplicationHelper
     CGI.unescapeHTML text
   end
 
+  def prepare_media_for_static(object, key)
+    media = object[key]['id']
+  rescue
+    ''
+  end
+
   def collection_tree(list, except = nil)
     collection = []
     list.root.ordered.each do |object|

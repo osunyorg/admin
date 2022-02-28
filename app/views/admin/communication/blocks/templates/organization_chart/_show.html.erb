@@ -10,6 +10,12 @@
     <div class="col-md-3">
       <article class="card">
         <div class="card-body">
+          <% if p.best_picture.attached? %>
+            <div style="max-width: 80px" class="float-end">
+              <%= kamifusen_tag p.best_picture,
+                                class: 'img-fluid rounded-circle' %>
+            </div>
+          <% end %>
           <h3 class="card-title h5"><%= link_to p, [:admin, p] %></h3>
           <p class="mb-0"><%= person['role'] %></p>
         </div>
