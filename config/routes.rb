@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
+  authenticated :user, -> user { user.server_admin? } do
+    match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
+  end
 
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
