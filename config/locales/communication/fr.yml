@@ -113,11 +113,21 @@ fr:
             edit:
               add_person: Ajouter une personne
               person_label: Personne
-              person_placeholder: Choisir le personne
+              person_placeholder: Choisir la personne
               role_label: Rôle
               role_placeholder: Indiquer le rôle de la personne
               drag_title: Glisser-déposer pour organiser les personnes
               delete_title: Enlever la personne
+          partners:
+            edit:
+              add_partner: Ajouter un partenaire
+              partner_name_label: Partenaire
+              partner_name_placeholder: Entrer le nom du partenaire
+              partner_url_label: Site Web
+              partner_url_placeholder: https://
+              partner_image_label: Logo
+              remove_logo: Enlever le logo
+              remove_partner: Enlever le partenaire
   communication:
     authors:
       one: Auteur·rice

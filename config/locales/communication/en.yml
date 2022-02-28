@@ -118,6 +118,16 @@ en:
               role_placeholder: Enter person's role
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
+          partners:
+            edit:
+              add_partner: Add partner
+              partner_name_label: Partner
+              partner_name_placeholder: Enter partner's name
+              partner_url_label: Website
+              partner_url_placeholder: https://
+              partner_image_label: Logo
+              remove_logo: Remove logo
+              remove_partner: Remove partner
   communication:
     authors:
       one: Author
