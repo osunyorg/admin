@@ -53,7 +53,8 @@ module Osuny
       "cite", "code", "dd", "del", "dfn", "div", "dl", "dt", "em",
       "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li", "ol",
       "p", "picture", "pre", "samp", "small", "source", "span", "strong",
-      "sub", "sup", "tt", "u", "ul", "var", "video", "iframe", "action-text-attachment"
+      "sub", "sup", "tt", "u", "ul", "var", "video", "iframe", "action-text-attachment",
+      "table", "thead", "tbody", "tr", "td", "th"
     ]
     config.action_view.sanitized_allowed_attributes = [
       "abbr", "allowfullscreen", "alt", "cite", "controls", "datetime",
