@@ -128,6 +128,13 @@ en:
               partner_image_label: Logo
               remove_logo: Remove logo
               remove_partner: Remove partner
+          gallery:
+            edit:
+              add_image: Add image
+              image_label: Image (.png, .jpg)
+              alt_label: Alternative text
+              alt_placeholder: Enter text description
+              remove_image: Remove image
   communication:
     authors:
       one: Author

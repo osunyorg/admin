@@ -1,6 +1,6 @@
 <a  class="<%= button_classes('mb-4') %>"
     v-on:click="data.elements.push({alt: '', file: {}})">
-    Add image
+    <%= t '.add_image' %>
 </a>
 
 <draggable :list="data.elements" handle=".imageHandle" class="row">
@@ -12,7 +12,8 @@
         </a>
         <div class="float-end">
           <a  class="btn btn-sm btn-danger"
-              v-on:click="data.elements.splice(data.elements.indexOf(image), 1)">
+              v-on:click="data.elements.splice(data.elements.indexOf(image), 1)"
+              title="<%= t '.remove_image' %>">
               <i class="fas fa-times"></i>
           </a>
         </div>
@@ -21,7 +22,7 @@
       <div class="card-body">
         <label  class="form-label"
                 :for="'image-file-' + imageIndex">
-          Image
+          <%= t '.image_label' %>
         </label>
         <input  class="form-control mb-2"
                 type="file"
@@ -29,13 +30,14 @@
                 @change="onFileImageChange( $event, image, 'file' )"
                 :id="'image-file-' + imageIndex">
         <div class="mb-3">
-          <label  aria-label="Title"
+          <label  aria-label="<%= t '.alt_label' %>"
                   :for="'image-alt-' + imageIndex">
-                  Alt
+                  <%= t '.alt_label' %>
           </label>
-          <input  class="form-control form-control-lg"
+          <input  class="form-control"
                   type="text"
                   v-model="image.alt"
+                  placeholder="<%= t '.alt_placeholder' %>"
                   :id="'image-alt-' + imageIndex">
         </div>
       </div>
