@@ -1,12 +1,9 @@
 class Communication::Block::Gallery < Communication::Block::Abstract
-  def git_dependencies
+  def build_git_dependencies
     dependencies = []
     elements.each do |image|
-      id = image.dig('file', 'id')
-      next if id.blank?
-      blob = university.active_storage_blobs.find id
-      next if blob.nil?
-      dependencies += [blob]
+      blob = find_blob image, 'file'
+      add_dependency blob unless blob.nil?
     end
     dependencies.uniq
   end

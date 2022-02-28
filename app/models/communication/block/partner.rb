@@ -1,13 +1,8 @@
 class Communication::Block::Partner < Communication::Block::Abstract
-  def git_dependencies
-    dependencies = []
+  def build_git_dependencies
     elements.each do |partner|
-      id = partner.dig('logo', 'id')
-      next if id.blank?
-      blob = university.active_storage_blobs.find id
-      next if blob.nil?
-      dependencies += [blob]
+      blob = find_blob partner, 'logo'
+      add_dependency blob unless blob.nil?
     end
-    dependencies.uniq
   end
 end

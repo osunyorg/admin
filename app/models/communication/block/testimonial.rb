@@ -1,11 +1,8 @@
 class Communication::Block::Testimonial < Communication::Block::Abstract
-  def git_dependencies
-    dependencies = []
+  def build_git_dependencies
     elements.each do |testimonial|
       blob = find_blob testimonial, 'photo'
-      next if blob.nil?
-      dependencies += [blob]
+      add_dependency blob unless blob.nil?
     end
-    dependencies.uniq
   end
 end
