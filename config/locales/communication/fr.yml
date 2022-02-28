@@ -105,6 +105,19 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+  admin:
+    communication:
+      blocks:
+        templates:
+          organization_chart:
+            edit:
+              add_person: Ajouter une personne
+              person_label: Personne
+              person_placeholder: Choisir le personne
+              role_label: Rôle
+              role_placeholder: Indiquer le rôle de la personne
+              drag_title: Glisser-déposer pour organiser les personnes
+              delete_title: Enlever la personne
   communication:
     authors:
       one: Auteur·rice

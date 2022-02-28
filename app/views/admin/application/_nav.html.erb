@@ -7,9 +7,18 @@
 
     <footer class="small my-5">
       <hr>
-      <%= link_to t('terms_of_service'), t('terms_of_service_url'), target: '_blank', rel: 'noreferrer', class: 'sidebar-link' %>
-      <%= link_to t('privacy_policy'), t('privacy_policy_url'), target: '_blank', rel: 'noreferrer', class: 'sidebar-link' %>
-      <%= link_to t('cookies_policy'), t('cookies_policy_url'), target: '_blank', rel: 'noreferrer', class: 'sidebar-link' %>
+      <%
+      [
+        :terms_of_service,
+        :privacy_policy,
+        :cookies_policy
+      ].each do |term| %>
+        <%= link_to t("#{term}"),
+                    t("#{term}_url"),
+                    target: '_blank',
+                    rel: 'noreferrer',
+                    class: 'sidebar-link' %>
+      <% end %>
       <%= link_to t('cookies_consent_choice'), '', class: 'sidebar-link js-gdpr__cookie_consent__display_again' %>
     </footer>
   </div>

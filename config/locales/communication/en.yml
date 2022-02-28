@@ -105,6 +105,19 @@ en:
         text: Text
         title: Title
         website: Website
+  admin:
+    communication:
+      blocks:
+        templates:
+          organization_chart:
+            edit:
+              add_person: Add person
+              person_label: Person
+              person_placeholder: Select the person
+              role_label: Role
+              role_placeholder: Enter person's role
+              drag_title: Drag and drop to organize persons
+              delete_title: Remove person
   communication:
     authors:
       one: Author
