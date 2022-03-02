@@ -1,0 +1,18 @@
+<%= simple_form_for [:admin, extranet] do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :name %>
+          <%= f.input :domain %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

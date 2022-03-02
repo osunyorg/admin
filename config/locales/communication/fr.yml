@@ -7,6 +7,9 @@ fr:
       communication/block:
         one: Bloc de contenu
         other: Blocs de contenu
+      communication/extranet:
+        one: Extranet
+        other: Extranets
       communication/website:
         one: Site Web
         other: Sites Web
@@ -36,6 +39,12 @@ fr:
         other: Actualités
         all: Toutes les actualités
     attributes:
+      communication/block:
+        name: Nom
+        template: Type de bloc
+      communication/extranet:
+        name: Nom
+        domain: Domaine
       communication/website:
         about: Sujet du site
         about_: Site indépendant (aucun sujet)
@@ -45,9 +54,6 @@ fr:
         about_type: Sujet du site
         name: Nom
         url: URL
-      communication/block:
-        name: Nom
-        template: Type de bloc
       communication/website/category:
         children: Catégories enfants
         description: Description (SEO)

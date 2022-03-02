@@ -1,0 +1,29 @@
+<% content_for :title, Communication::Extranet.model_name.human(count: 2) %>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Communication::Website.human_attribute_name('name') %></th>
+      <th><%= Communication::Website.human_attribute_name('url') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @extranets.each do |extranet| %>
+      <tr>
+        <td><%= link_to extranet, [:admin, extranet] %></td>
+        <td><%= link_to extranet.url, extranet.url, target: :_blank %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link extranet %>
+            <%= destroy_link extranet %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Extranet %>
+<% end %>

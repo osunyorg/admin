@@ -1,0 +1,10 @@
+<% content_for :title, @extranet %>
+
+<% content_for :title_right do %>
+  <%= link_to @extranet.url, @extranet.url, target: :_blank %>
+<% end unless @extranet.url.blank? %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @extranet %>
+  <%= destroy_link @extranet %>
+<% end %>

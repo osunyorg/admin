@@ -56,4 +56,5 @@ namespace :communication do
       post :reorder
     end
   end
+  resources :extranets, controller: 'extranets'
 end

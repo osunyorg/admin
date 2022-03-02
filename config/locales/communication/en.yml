@@ -7,6 +7,9 @@ en:
       communication/block:
         one: Content block
         other: Content blocks
+      communication/extranet:
+        one: Extranet
+        other: Extranets
       communication/website:
         one: Website
         other: Websites
@@ -36,6 +39,12 @@ en:
         other: Posts
         all: All posts
     attributes:
+      communication/extranet:
+        name: Name
+        domain: Domain
+      communication/block:
+        name: Name
+        template: Kind of block
       communication/website:
         about: About
         about_: Independent website (no specific subject)
@@ -45,9 +54,6 @@ en:
         about_type: About
         name: Name
         url: URL
-      communication/block:
-        name: Name
-        template: Kind of block
       communication/website/category:
         children: Children categories
         description: Description (SEO)

@@ -29,6 +29,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     if @block.save
       redirect_to [:edit, :admin, @block], notice: t('admin.successfully_created_html', model: @block.to_s)
     else
+      breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
@@ -38,6 +39,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       @block.about.save_and_sync
       redirect_to about_path, notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
+      breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
