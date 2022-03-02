@@ -25,8 +25,8 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :research_researchers, t('research.researchers', count: 2), admin_research_researchers_path(journal_id: nil), { icon: 'microscope' } if can?(:read, University::Person)
       primary.item :research_laboratories, Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path, { icon: 'flask' } if can?(:read, Research::Laboratory)
       primary.item :research_theses, Research::Thesis.model_name.human(count: 2), admin_research_theses_path, { icon: 'scroll' } if can?(:read, Research::Thesis)
-      primary.item :research, 'Veille', nil, { icon: 'eye' }
       primary.item :research_journals, Research::Journal.model_name.human(count: 2), admin_research_journals_path, { icon: 'newspaper' } if can?(:read, Research::Journal)
+      primary.item :research_watch, 'Veille', nil, { icon: 'eye' }
     end
 
     if can?(:read, Communication::Website)
@@ -39,9 +39,10 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, Administration::Qualiopi::Criterion)
       primary.item :administration, 'Administration', nil, { kind: :header }
-      primary.item :administration, 'Campus', nil, { icon: 'map-marker-alt' }
-      primary.item :administration, 'Admissions', nil, { icon: 'door-open' }
-      primary.item :administration, 'Statistiques', nil, { icon: 'cog' }
+      primary.item :administration_campus, 'Campus', nil, { icon: 'map-marker-alt' }
+      primary.item :administration_admissions, 'Admissions', nil, { icon: 'door-open' }
+      primary.item :administration_internship, 'Stages', nil, { icon: 'hands-helping' }
+      primary.item :administration_statistics, 'Statistiques', nil, { icon: 'chart-bar' }
       primary.item :administration_qualiopi, 'Qualité', admin_administration_qualiopi_criterions_path, { icon: 'tasks' } if can?(:read, Administration::Qualiopi::Criterion)
     end
 
