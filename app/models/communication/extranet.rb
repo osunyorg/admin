@@ -22,6 +22,12 @@ class Communication::Extranet < ApplicationRecord
 
   validates_presence_of :name, :domain
 
+  has_one_attached_deletable :logo
+
+  def self.with_host(host)
+    find_by domain: host
+  end
+
   def url
     "https://#{domain}"
   end

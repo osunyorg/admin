@@ -14,7 +14,7 @@ module University::WithIdentifier
     end
 
     def self.with_host(host)
-      find_by!(identifier: extract_identifier_from(host))
+      find_by identifier: extract_identifier_from(host)
     end
 
     private
