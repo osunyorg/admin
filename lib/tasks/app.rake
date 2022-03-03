@@ -22,6 +22,30 @@ namespace :app do
     end
   end
 
+  namespace :websites do
+    desc "Refresh access token for Communication Websites."
+    task refresh_tokens: :environment do
+      options = {}
+      option_parser = OptionParser.new
+      option_parser.banner = "Usage: rake app:websites:refresh_tokens -- --old ghp_oldtoken --new ghp_newtoken"
+      option_parser.on("-o OLDTOKEN", "--old OLDTOKEN") do |old_access_token|
+        options[:old_access_token] = old_access_token
+      end
+      option_parser.on("-n NEWTOKEN", "--new NEWTOKEN") do |new_access_token|
+        options[:new_access_token] = new_access_token
+      end
+      args = option_parser.order!(ARGV) {}
+      option_parser.parse!(args)
+
+      websites = Communication::Website.where(access_token: options[:old_access_token])
+      websites.each { |website|
+        puts "Refreshing token for « #{website} »"
+        website.update_column :access_token, options[:new_access_token]
+      }
+      exit 0
+    end
+  end
+
   namespace :db do
     desc 'Get database from Scalingo'
     task :staging do
