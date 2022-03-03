@@ -29,6 +29,7 @@ class Communication::Block < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   enum template: {
+    chapter: 50,
     organization_chart: 100,
     partners: 200,
     gallery: 300,

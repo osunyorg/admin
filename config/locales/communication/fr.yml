@@ -40,7 +40,7 @@ fr:
         all: Toutes les actualités
     attributes:
       communication/block:
-        name: Nom
+        title: Titre
         template: Type de bloc
       communication/extranet:
         name: Nom
@@ -115,6 +115,10 @@ fr:
     communication:
       blocks:
         templates:
+          chapter:
+            edit:
+              text_label: Texte
+              text_placeholder: Entrer le texte
           gallery:
             edit:
               add_image: Ajouter une image
@@ -226,6 +230,7 @@ fr:
     communication:
       block:
         template:
+          chapter: Chapitre
           gallery: Galerie
           organization_chart: Organigramme
           partners: Partenaires

@@ -40,7 +40,7 @@ en:
         all: All posts
     attributes:
       communication/extranet:
-        name: Name
+        title: Title
         domain: Domain
       communication/block:
         name: Name
@@ -227,6 +227,7 @@ en:
     communication:
       block:
         template:
+          chapter: Chapter
           gallery: Gallery
           organization_chart: Organization chart
           partners: Partners
