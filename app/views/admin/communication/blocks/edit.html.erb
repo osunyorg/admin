@@ -1,6 +1,7 @@
 <% content_for :title, @block %>
 <%
 @block.data = {} if @block.data.nil? || @block.data.blank?
+# Default elements array to move outside : it is only required when block type has an elements list
 @block.data['elements'] ||= []
 %>
 <div id="app" v-cloak>
@@ -67,8 +68,31 @@
       },
       getImageUrl(data) {
         return this.getFileUrl(data.signed_id, data.filename);
+      },
+      handleSummernote() {
+        $(this.$refs.summernoteInput).summernote({
+          toolbar: [
+            ['font', ['bold', 'italic']],
+            ['insert', ['link']],
+            ['view', ['codeview']]
+          ],
+          callbacks: {
+            onChange: function(contents, $editable) { 
+              this.$refs.summernoteInput.value = contents;
+              this.$refs.summernoteInput.dispatchEvent(new Event('input'));
+            }.bind(this)
+          }
+        });
+      }
+    },
+    mounted: function() {
+      if (this.$refs.summernoteInput) {
+        this.handleSummernote();
       }
     }
   });
-  app.mount('#app')
+
+  window.addEventListener('load', function(){
+    app.mount('#app')
+  });
 </script>
