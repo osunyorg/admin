@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_140425) do
+ActiveRecord::Schema.define(version: 2022_03_03_125819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -356,15 +356,6 @@ ActiveRecord::Schema.define(version: 2022_03_02_140425) do
     t.string "repository"
     t.string "about_type"
     t.uuid "about_id"
-    t.string "static_pathname_authors", default: "authors"
-    t.string "static_pathname_posts", default: "posts"
-    t.string "static_pathname_programs", default: "programs"
-    t.string "static_pathname_staff", default: "staff"
-    t.string "static_pathname_research_volumes", default: "volumes"
-    t.string "static_pathname_research_articles", default: "articles"
-    t.string "static_pathname_administrators", default: "administrators"
-    t.string "static_pathname_researchers", default: "researchers"
-    t.string "static_pathname_teachers", default: "teachers"
     t.integer "git_provider", default: 0
     t.string "git_endpoint"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
