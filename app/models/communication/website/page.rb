@@ -80,6 +80,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def git_dependencies(website)
     [self] +
+    website.menus +
     descendents +
     active_storage_blobs +
     siblings +

@@ -76,7 +76,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = [self]
+    dependencies = [self] + website.menus
     dependencies += categories
     dependencies += active_storage_blobs
     if author.present?

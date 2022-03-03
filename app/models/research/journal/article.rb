@@ -69,7 +69,8 @@ class Research::Journal::Article < ApplicationRecord
     other_articles_in_the_volume +
     people +
     people.map(&:active_storage_blobs).flatten +
-    people.map(&:researcher)
+    people.map(&:researcher) +
+    website.menus
   end
 
   def to_s
