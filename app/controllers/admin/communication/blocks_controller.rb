@@ -1,5 +1,7 @@
 class Admin::Communication::BlocksController < Admin::Communication::ApplicationController
-  load_and_authorize_resource class: Communication::Block
+  load_and_authorize_resource class: Communication::Block,
+                              through: :current_university,
+                              through_association: :communication_blocks
 
   def reorder
     ids = params[:ids] || []

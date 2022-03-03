@@ -39,7 +39,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_6e16107511  (university_id => universities.id)
+#  fk_rails_08b351087c  (university_id => universities.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
@@ -152,7 +152,8 @@ class Education::Program < ApplicationRecord
     university_people_through_involvements.map(&:teacher) +
     university_people_through_role_involvements +
     university_people_through_role_involvements.map(&:active_storage_blobs).flatten +
-    university_people_through_role_involvements.map(&:administrator)
+    university_people_through_role_involvements.map(&:administrator) +
+    website.menus
   end
 
   def git_destroy_dependencies(website)

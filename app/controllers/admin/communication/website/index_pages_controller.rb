@@ -1,10 +1,15 @@
 class Admin::Communication::Website::IndexPagesController < Admin::Communication::Website::ApplicationController
-  before_action :ensure_abilities
   before_action :get_index_page, only: [:edit, :update]
+  before_action :ensure_abilities
 
   def index
     breadcrumb
-    @kinds = Communication::Website::IndexPage.kinds
+    @kinds = Communication::Website::IndexPage.kinds_global
+    if @website.about_school?
+      @kinds += Communication::Website::IndexPage.kinds_school
+    elsif @website.about_journal?
+      @kinds += Communication::Website::IndexPage.kinds_journal
+    end
   end
 
   def edit
@@ -29,7 +34,11 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   end
 
   def ensure_abilities
-    authorize! :update, @website
+    if @index_page
+      authorize! :update, @index_page
+    else
+      authorize! :read, @website
+    end
   end
 
   def breadcrumb

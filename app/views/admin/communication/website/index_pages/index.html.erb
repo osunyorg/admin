@@ -3,22 +3,22 @@
 <%= render 'admin/communication/websites/sidebar' do %>
 
   <div class="row">
-    <% @kinds.each do |key, value| %>
+    <% @kinds.each do |kind| %>
       <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="card">
           <div class="card-body">
-            <h2 class="card-title"><%= t("communication.website.index_pages.default.#{key}.title") %></h2>
-            <% if t("communication.website.index_pages.default.#{key}.title") != @website.index_for(key).title %>
+            <h2 class="card-title"><%= t("communication.website.index_pages.default.#{kind}.title") %></h2>
+            <% if t("communication.website.index_pages.default.#{kind}.title") != @website.index_for(kind).title %>
               <p class="text-muted mb-0 fst-italic">
-                <%= @website.index_for(key).title %>
+                <%= @website.index_for(kind).title %>
               </p>
             <% end %>
             <p class="text-muted small">
-              <%= @website.index_for(key).description %>&nbsp;
+              <%= @website.index_for(kind).description %>&nbsp;
             </p>
             <div class="text-end">
               <%= link_to t("edit"),
-                          admin_communication_website_index_path(website_id: @website.id, kind: key),
+                          admin_communication_website_index_path(website_id: @website.id, kind: kind),
                           class: button_classes('stretched-link') %>
             </div>
           </div>

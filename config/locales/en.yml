@@ -20,6 +20,7 @@ en:
           server_admin: Server admin
           teacher: Teacher
           visitor: Visitor
+          website_manager: Website manager
     errors:
       models:
         user:

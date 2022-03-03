@@ -37,6 +37,12 @@
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] } %>
           </div>
+          <div data-show-for-roles="website_manager">
+            <%= f.association :websites_to_manage,
+                              as: :check_boxes,
+                              collection: current_university.communication_websites.ordered
+                               %>
+          </div>
         </div>
       </div>
     </div>

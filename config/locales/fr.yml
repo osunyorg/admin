@@ -20,6 +20,7 @@ fr:
           server_admin: Administrateur du serveur
           teacher: Enseignant·e
           visitor: Visiteur
+          website_manager: Responsable de site web
     errors:
       models:
         user:

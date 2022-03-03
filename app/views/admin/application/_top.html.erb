@@ -1,8 +1,10 @@
 <nav id="topbar" class="navbar navbar-expand navbar-light navbar-bg">
   <div class="navbar-collapse collapse">
-    <a class="sidebar-toggle">
-      <i class="hamburger align-self-center"></i>
-    </a>
+    <% if current_user.can_display_global_menu? %>
+      <a class="sidebar-toggle">
+        <i class="hamburger align-self-center"></i>
+      </a>
+    <% end %>
     <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
     <ul class="navbar-nav navbar-align">
       <li class="nav-item dropdown">
