@@ -25,7 +25,12 @@
       <% end %>
     </div>
     <div class="wrapper">
-      <%= render 'admin/application/nav' %>
+      <% if current_user.can_display_global_menu? %>
+        <%= render 'admin/application/nav' %>
+      <% else %>
+        <%# we need a "collapsed" sidebar to display the footer full width %>
+        <div class="sidebar collapsed"></div>
+      <% end %>
       <%= render 'admin/application/footer' %>
       <div class="main">
         <%= render 'admin/application/top' %>

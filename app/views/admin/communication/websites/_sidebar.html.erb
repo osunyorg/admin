@@ -37,7 +37,7 @@
           {
             title: Communication::Website::IndexPage.model_name.human(count: 2),
             path: admin_communication_website_indexes_path(website_id: @website),
-            ability: can?(:read, Communication::Website::IndexPage)
+            ability: can?(:read, @website)
           },
         ].each do |object|
           next unless object[:ability]

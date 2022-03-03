@@ -57,7 +57,9 @@ class Ability
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can [:read, :update, :reorder], Communication::Website::Menu, university_id: @user.university_id, communication_website_id: managed_websites_ids
+    can [:read, :update], Communication::Website::IndexPage, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id, website_id: managed_websites_ids
+    can :create, Communication::Website::Menu::Item, university_id: @user.university_id
   end
 
   def admin
@@ -69,6 +71,7 @@ class Ability
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Website::Category, university_id: @user.university_id
+    can [:read, :update], Communication::Website::IndexPage, university_id: @user.university_id
     can [:read, :update, :reorder], Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Website, university_id: @user.university_id

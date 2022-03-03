@@ -1,6 +1,6 @@
 class Admin::Communication::Website::IndexPagesController < Admin::Communication::Website::ApplicationController
-  before_action :ensure_abilities
   before_action :get_index_page, only: [:edit, :update]
+  before_action :ensure_abilities
 
   def index
     breadcrumb
@@ -29,7 +29,11 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   end
 
   def ensure_abilities
-    authorize! :update, @website
+    if @index_page
+      authorize! :update, @index_page
+    else
+      authorize! :read, @website
+    end
   end
 
   def breadcrumb

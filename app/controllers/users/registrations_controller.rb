@@ -9,9 +9,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def edit
     add_breadcrumb t('admin.dashboard'), :admin_root_path
-    add_breadcrumb User.model_name.human(count: 2), admin_users_path
-    add_breadcrumb @user, [:admin, @user]
-    add_breadcrumb t('edit')
+    if can? :read, @user
+      add_breadcrumb User.model_name.human(count: 2), admin_users_path
+      add_breadcrumb @user, [:admin, @user]
+      add_breadcrumb t('edit')
+    else
+      add_breadcrumb t('menu.profile')
+    end
   end
 
   def update

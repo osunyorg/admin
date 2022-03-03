@@ -21,11 +21,19 @@ module User::WithRoles
     before_validation :set_default_role, on: :create
     before_validation :check_modifier_role
 
+    def self.roles_with_access_to_global_menu
+      roles.keys - ["website_manager"]
+    end
+
     def managed_roles
       User.roles.map do |role_name, role_id|
         next if role_id > User.roles[role]
         role_name
       end.compact
+    end
+
+    def can_display_global_menu?
+      User.roles_with_access_to_global_menu.include?(role)
     end
 
     protected
