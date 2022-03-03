@@ -60,7 +60,7 @@ fr:
   simple_form:
     hints:
       university:
-        sms_sender_name: "11 caractères maximum."
+        sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
       university_person:
         habilitation: "Détient une Habilitation à Diriger des Recherches (HDR)."
         is_administration: "Remplit des missions administratives."
@@ -69,6 +69,7 @@ fr:
         is_teacher: "Enseigne dans des formations."
         tenure: "A différencier d'une personne vacataire."
   university:
+    invoice_informations: Données de facturation
     person:
       administrator_roles: Rôles administratifs
       taught_programs: Formations enseignées

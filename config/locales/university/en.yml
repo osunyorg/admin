@@ -60,7 +60,7 @@ en:
   simple_form:
     hints:
       university:
-        sms_sender_name: "11 characters max."
+        sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
       university_person:
         habilitation: "Possesses an accreditation to supervise research."
         is_administration: "Fulfill administrative missions."
@@ -69,6 +69,7 @@ en:
         is_teacher: "Teaches in Schools."
         tenure: "To differ from temporary lecturer."
   university:
+    invoice_informations: Invoice informations
     person:
       administrator_roles: Administrator roles
       taught_programs: Taught programs

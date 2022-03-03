@@ -4,7 +4,8 @@
       <%= f.input :name %>
       <%= f.input :identifier %>
       <%= f.input :private %>
-      <%= f.input :sms_sender_name, maxlength: 11 %>
+      <%= f.input :sms_sender_name,
+                  maxlength: 11 %>
     </div>
     <div class="col-md-4">
       <%= f.input :address %>
@@ -26,7 +27,7 @@
                   direct_upload: true %>
     </div>
   </div>
-  <h3 class="mt-5">Invoice informations</h3>
+  <h3 class="mt-5"><%= t('university.invoice_informations') %></h3>
   <div class="row">
     <div class="col-md-4">
       <%= f.input :invoice_date %>
