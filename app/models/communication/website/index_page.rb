@@ -54,6 +54,18 @@ class Communication::Website::IndexPage < ApplicationRecord
   validates :title, presence: true
   validates :path, presence: true, unless: Proc.new { |p| p.home? }
 
+  def self.kinds_global
+    [:home, :communication_posts, :persons, :authors]
+  end
+
+  def self.kinds_school
+    [:education_programs, :administrators, :teachers]
+  end
+
+  def self.kinds_journal
+    [:research_articles, :research_volumes, :researchers]
+  end
+
   def to_s
     "#{title}"
   end
