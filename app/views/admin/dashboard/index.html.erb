@@ -1,10 +1,10 @@
-<% content_for :title, 'Tableau de bord' %>
+<% content_for :title, t('admin.dashboard') %>
 
 <div class="row">
   <div class="col-md-4">
     <div class="card">
       <div class="card-body">
-        <h4>Bonjour <%= current_user.first_name %>&nbsp;!</h4>
+        <h4><%= t('hello', name: current_user.first_name) %></h4>
         <% if current_university.logo.attached? %>
           <%= image_tag current_university.logo, width: 120, class: 'float-end' %>
         <% else %>
@@ -19,13 +19,14 @@
   <h2 class="h4 my-4"><%= Research::Journal.model_name.human(count: 2) %></h2>
   <div class="row">
     <% current_university.research_journals.each do |journal| %>
+      <% next unless can?(:read, journal) %>
       <div class="col-md-4">
         <div class="card">
           <div class="card-body">
             <span class="float-end"><i class="fas fa-newspaper fa-2x"></i></span>
             <h4><%= journal %></h4>
             <p>&nbsp;</p>
-            <%= link_to 'Voir', [:admin, journal], class: button_classes('stretched-link') %>
+            <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
           </div>
         </div>
       </div>
@@ -37,13 +38,14 @@
   <h2 class="h4 my-4"><%= Communication::Website.model_name.human(count: 2) %></h2>
   <div class="row">
     <% current_university.communication_websites.each do |website| %>
+      <% next unless can?(:read, website) %>
       <div class="col-md-4">
         <div class="card">
           <div class="card-body">
             <span class="float-end"><i class="fas fa-sitemap fa-2x"></i></span>
             <h4><%= website %></h4>
             <p class="small"><%= website.url %></p>
-            <%= link_to 'Voir', [:admin, website], class: button_classes('stretched-link') %>
+            <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
           </div>
         </div>
       </div>

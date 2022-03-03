@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_125819) do
+ActiveRecord::Schema.define(version: 2022_03_03_145900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -360,6 +360,13 @@ ActiveRecord::Schema.define(version: 2022_03_03_125819) do
     t.string "git_endpoint"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
+  end
+
+  create_table "communication_websites_users", id: false, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.uuid "user_id", null: false
+    t.index ["communication_website_id", "user_id"], name: "website_user"
+    t.index ["user_id", "communication_website_id"], name: "user_website"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
