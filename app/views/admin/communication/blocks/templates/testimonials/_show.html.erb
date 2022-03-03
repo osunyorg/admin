@@ -11,8 +11,8 @@
               <% photo = testimonial.dig('photo', 'id') %>
               <% unless photo.blank? %>
                 <% blob = ActiveStorage::Blob.find photo %>
-                <div style="max-width: 80px" class="me-3">
-                  <%= kamifusen_tag blob, width: 80, class: 'img-fluid rounded-circle' %>
+                <div style="max-width: 80px;" class="me-3">
+                  <%= kamifusen_tag blob, width: 80, class: 'img-fluid rounded-circle img-circle' %>
                 </div>
               <% end %>
               <p class="flex-fill mb-0">

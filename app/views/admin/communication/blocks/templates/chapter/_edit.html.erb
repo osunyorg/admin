@@ -4,10 +4,13 @@
             for="text">
       <%= t '.text_label' %>
     </label>
-    <textarea id="text"
+    <div class="summernote">
+      <textarea id="text"
               class="form-control"
               v-model="data.text"
+              ref="summernoteInput"
+              data-summernote-config="mini"
               placeholder="<%= t '.text_placeholder' %>"></textarea>
-
+    </div>
   </div>
 </div>
