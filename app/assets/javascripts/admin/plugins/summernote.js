@@ -11,6 +11,15 @@ $(function () {
         ]
     };
 
+    configs['mini-list'] = {
+        toolbar: [
+            ['font', ['bold', 'italic']],
+            ['para', ['ul', 'ol']],
+            ['insert', ['link']],
+            ['view', ['codeview']]
+        ]
+    };
+
     configs['default'] = {
         popover: {
             image: [
@@ -61,4 +70,6 @@ $(function () {
         config = config || 'default';
         $(this).summernote(configs[config]);
     });
+
+    window.SUMMERNOTE_CONFIGS = configs;
 });

@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_8505d649e8  (website_id => communication_websites.id)
+#  fk_rails_b6b8b2cce2  (website_id => communication_websites.id)
 #
 require "test_helper"
 

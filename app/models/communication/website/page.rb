@@ -33,8 +33,8 @@
 # Foreign Keys
 #
 #  fk_rails_1a42003f06  (parent_id => communication_website_pages.id)
+#  fk_rails_2315541232  (related_category_id => communication_website_categories.id)
 #  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
-#  fk_rails_47b37cf8b2  (related_category_id => communication_website_categories.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
 
