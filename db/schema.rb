@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_145900) do
+ActiveRecord::Schema.define(version: 2022_03_07_053000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -445,6 +445,23 @@ ActiveRecord::Schema.define(version: 2022_03_03_145900) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
+  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active"
+    t.string "sirene"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
@@ -570,6 +587,26 @@ ActiveRecord::Schema.define(version: 2022_03_03_145900) do
     t.date "invoice_date"
     t.integer "invoice_date_yday"
     t.string "invoice_amount"
+  end
+
+  create_table "university_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "long_name"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active", default: true
+    t.string "sirene"
+    t.integer "kind", default: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
   create_table "university_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -726,6 +763,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_145900) do
   add_foreign_key "research_theses", "universities"
   add_foreign_key "research_theses", "university_people", column: "author_id"
   add_foreign_key "research_theses", "university_people", column: "director_id"
+  add_foreign_key "university_organizations", "universities"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "users"
   add_foreign_key "university_person_involvements", "universities"

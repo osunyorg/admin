@@ -41,6 +41,9 @@ en:
         description: Mission (in this context)
         person: Person
         target_id: ''
+      university/organization:
+        name: Name
+        long_name: Long name
       university/role:
         description: Description (SEO)
         people: People
@@ -54,6 +57,9 @@ en:
       university/person/involvement:
         one: Involvement
         other: Involvements
+      university/organization:
+        one: Third party
+        other: Third parties
       university/role:
         one: Role
         other: Roles

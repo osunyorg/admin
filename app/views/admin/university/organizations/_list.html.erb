@@ -1,0 +1,23 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= University::Organization.human_attribute_name('name') %></th>
+      <th><%= University::Organization.human_attribute_name('kind') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% organizations.each do |organization| %>
+      <tr>
+        <td><%= link_to organization, admin_university_organization_path(organization) %></td>
+        <td><%= organization.kind %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_button organization %>
+            <%= delete_button organization %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

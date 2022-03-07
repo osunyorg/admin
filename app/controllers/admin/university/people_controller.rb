@@ -25,7 +25,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def create
     if @person.save_and_sync
-      redirect_to admin_university_person_path(@person), notice: t('admin.successfully_created_html', model: @person.to_s)
+      redirect_to admin_university_person_path(@person),
+                  notice: t('admin.successfully_created_html', model: @person.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -34,7 +35,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def update
     if @person.update_and_sync(person_params)
-      redirect_to admin_university_person_path(@person), notice: t('admin.successfully_updated_html', model: @person.to_s)
+      redirect_to admin_university_person_path(@person),
+                  notice: t('admin.successfully_updated_html', model: @person.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -44,7 +46,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def destroy
     @person.destroy_and_sync
-    redirect_to admin_university_people_url, notice: t('admin.successfully_destroyed_html', model: @person.to_s)
+    redirect_to admin_university_people_url,
+                notice: t('admin.successfully_destroyed_html', model: @person.to_s)
   end
 
   protected

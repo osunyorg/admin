@@ -1,0 +1,20 @@
+---
+title: >
+  <%= @about.to_s %>
+long_name: >
+  <%= @about.long_name %>
+kind: "<%= @about.kind %>"
+sirene: "<%= @about.sirene %>"
+address: "<%= @about.address %>"
+zipcode: "<%= @about.zipcode %>"
+city: "<%= @about.city %>"
+country: "<%= @about.country %>"
+phone: "<%= @about.phone %>"
+email: "<%= @about.email %>"
+website: "<%= @about.website %>"
+<% if @about.logo.attached? %>
+logo: "<%= @about.logo.blob.id %>"
+<% end %>
+description: >
+  <%= prepare_text_for_static @about.description %>
+---

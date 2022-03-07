@@ -1,0 +1,46 @@
+<%= simple_form_for [:admin, organization] do |f| %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('content') %></h5>
+      </div>
+      <div class="card-body">
+        <%= f.input :name %>
+        <%= f.input :long_name %>
+        <%= f.input :kind, include_blank: false %>
+        <%= f.input :active %>
+        <%= f.input :sirene %>
+        <%= f.input :description %>
+        <%= f.input :logo,
+                    as: :single_deletable_file,
+                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    preview: 200,
+                    resize: 1,
+                    direct_upload: true %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <%= University::Organization.human_attribute_name('contact_informations') %>
+        </h5>
+      </div>
+      <div class="card-body">
+        <%= f.input :address %>
+        <%= f.input :zipcode %>
+        <%= f.input :city %>
+        <%= f.input :country %>
+        <%= f.input :website %>
+        <%= f.input :phone %>
+        <%= f.input :mail %>
+      </div>
+    </div>
+  </div>
+</div>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
+<% end %>

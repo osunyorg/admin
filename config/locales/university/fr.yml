@@ -41,6 +41,9 @@ fr:
         description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
+      university/organization:
+        name: Nom
+        long_name: Nom complet
       university/role:
         description: Description (SEO)
         people: Personnes
@@ -54,6 +57,9 @@ fr:
       university/person/involvement:
         one: Implication
         other: Implications
+      university/organization:
+        one: Tierce partie
+        other: Tierces parties
       university/role:
         one: Rôle
         other: Rôles

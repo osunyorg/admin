@@ -1,3 +1,3 @@
 namespace :university do
-  resources :people
+  resources :people, :organizations
 end

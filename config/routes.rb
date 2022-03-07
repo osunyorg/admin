@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     root to: 'dashboard#index'
   end
 
+  draw 'extranet'
+
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 
   root to: 'home#index'

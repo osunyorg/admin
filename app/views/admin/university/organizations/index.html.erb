@@ -1,0 +1,8 @@
+<% content_for :title, "#{University::Organization.model_name.human(count: 2)} (#{@organizations.total_count})" %>
+
+<%= render 'admin/university/organizations/list', organizations: @organizations %>
+<%= paginate @organizations, theme: 'bootstrap-5' %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link University::Organization %>
+<% end %>

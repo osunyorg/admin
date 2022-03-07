@@ -1,0 +1,61 @@
+<% content_for :title, @organization %>
+
+<p>
+  <strong>Description:</strong>
+  <%= @organization.description %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @organization.address %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @organization.zipcode %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @organization.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @organization.country %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @organization.website %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @organization.phone %>
+</p>
+
+<p>
+  <strong>Mail:</strong>
+  <%= @organization.mail %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @organization.active %>
+</p>
+
+<p>
+  <strong>Sirene:</strong>
+  <%= @organization.sirene %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @organization.kind %>
+</p>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @organization %>
+  <%= destroy_link @organization %>
+<% end %>
