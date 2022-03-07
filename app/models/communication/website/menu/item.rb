@@ -32,6 +32,7 @@
 #  fk_rails_fa4f4585e4  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
+  include WithUniversity
   include Sanitizable
   include WithTree
   include WithPosition
@@ -39,7 +40,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   attr_accessor :skip_publication_callback
 
-  belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :menu, class_name: 'Communication::Website::Menu'
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true

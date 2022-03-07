@@ -44,6 +44,7 @@
 #
 class Education::Program < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithFeaturedImage
   include WithBlobs
@@ -70,7 +71,6 @@ class Education::Program < ApplicationRecord
 
   attr_accessor :skip_websites_categories_callback
 
-  belongs_to :university
   belongs_to :parent,
              class_name: 'Education::Program',
              optional: true

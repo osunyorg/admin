@@ -35,6 +35,7 @@
 #
 class Research::Journal::Article < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithBlobs
   include WithPosition
@@ -43,7 +44,6 @@ class Research::Journal::Article < ApplicationRecord
   has_summernote :text
   has_one_attached :pdf
 
-  belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
   belongs_to :updated_by, class_name: 'User'

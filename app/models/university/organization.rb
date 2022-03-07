@@ -31,10 +31,9 @@
 class University::Organization < ApplicationRecord
   include WithGit
   include WithBlobs
+  include WithUniversity
 
   has_one_attached_deletable :logo
-
-  belongs_to :university
 
   scope :ordered, -> { order(:name) }
 

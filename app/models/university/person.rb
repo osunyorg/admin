@@ -32,6 +32,7 @@
 #
 class University::Person < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithBlobs
   include WithSlug
@@ -40,7 +41,6 @@ class University::Person < ApplicationRecord
 
   has_summernote :biography
 
-  belongs_to :university
   belongs_to :user, optional: true
 
   has_and_belongs_to_many :research_journal_articles,

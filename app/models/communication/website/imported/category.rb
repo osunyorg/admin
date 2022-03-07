@@ -29,8 +29,8 @@
 #  fk_rails_f6070ca53d  (university_id => universities.id)
 #
 class Communication::Website::Imported::Category < ApplicationRecord
+  include WithUniversity
 
-  belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :category,

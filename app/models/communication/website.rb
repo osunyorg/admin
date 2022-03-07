@@ -25,6 +25,7 @@
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
+  include WithUniversity
   include WithAbouts
   include WithConfigs
   include WithGit
@@ -32,8 +33,6 @@ class Communication::Website < ApplicationRecord
   include WithImport
   include WithIndexPages
   include WithMenuItems
-
-  belongs_to :university
 
   scope :ordered, -> { order(:name) }
 

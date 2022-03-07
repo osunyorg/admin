@@ -40,6 +40,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithFeaturedImage
   include WithBlobs
@@ -51,7 +52,6 @@ class Communication::Website::Page < ApplicationRecord
 
   has_summernote :text
 
-  belongs_to :university
   belongs_to :website,
              foreign_key: :communication_website_id
   belongs_to :related_category,

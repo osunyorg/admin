@@ -54,12 +54,12 @@
 #
 class User < ApplicationRecord
   has_one_attached_deletable :picture  # In this order, "resize avatar" callback will be fired after the others.
+  include WithUniversity
   include WithAuthentication
   include WithPerson
   include WithRoles
   include WithSyncBetweenUniversities
 
-  belongs_to :university
   belongs_to :language
 
   scope :ordered, -> { order(:last_name, :first_name) }

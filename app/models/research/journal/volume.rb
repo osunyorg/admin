@@ -28,12 +28,12 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithBlobs
   include WithFeaturedImage
   include WithSlug
 
-  belongs_to :university
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal

@@ -36,9 +36,9 @@
 #  fk_rails_e582fbdc5c  (featured_medium_id => communication_website_imported_media.id)
 #
 class Communication::Website::Imported::Page < ApplicationRecord
+  include WithUniversity
   include Communication::Website::Imported::WithRichText
 
-  belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :page,

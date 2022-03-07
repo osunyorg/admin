@@ -23,9 +23,9 @@
 #  fk_rails_18291ef65f  (university_id => universities.id)
 #
 class Communication::Block < ApplicationRecord
+  include WithUniversity
   include WithPosition
 
-  belongs_to :university
   belongs_to :about, polymorphic: true
 
   enum template: {

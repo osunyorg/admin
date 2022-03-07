@@ -20,7 +20,8 @@
 #  fk_rails_3dbdb9cb2d  (website_id => communication_websites.id)
 #
 class Communication::Website::Imported::Website < ApplicationRecord
-  belongs_to :university
+  include WithUniversity
+
   belongs_to :website,
              class_name: 'Communication::Website'
   has_many   :authors,

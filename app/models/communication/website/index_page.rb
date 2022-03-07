@@ -27,6 +27,7 @@
 #  fk_rails_7eb45227ae  (university_id => universities.id)
 #
 class Communication::Website::IndexPage < ApplicationRecord
+  include WithUniversity
   include Sanitizable
   include WithGit
   include WithFeaturedImage
@@ -45,7 +46,6 @@ class Communication::Website::IndexPage < ApplicationRecord
       teachers: 140
   }
 
-  belongs_to :university
   belongs_to :website, foreign_key: :communication_website_id
 
   has_summernote :header_text

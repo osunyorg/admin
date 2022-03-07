@@ -21,9 +21,9 @@
 #  fk_rails_8e52293a38  (university_id => universities.id)
 #
 class University::Role < ApplicationRecord
+  include WithUniversity
   include WithPosition
 
-  belongs_to :university
   belongs_to :target, polymorphic: true, optional: true
   has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy, inverse_of: :target
   has_many :people, through: :involvements

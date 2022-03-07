@@ -25,7 +25,8 @@
 #  fk_rails_c54ac5a28b  (website_id => communication_website_imported_websites.id)
 #
 class Communication::Website::Imported::Medium < ApplicationRecord
-  belongs_to :university
+  include WithUniversity
+
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   has_many   :pages,

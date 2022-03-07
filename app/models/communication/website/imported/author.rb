@@ -27,8 +27,8 @@
 #  fk_rails_e37b63f880  (author_id => university_people.id)
 #
 class Communication::Website::Imported::Author < ApplicationRecord
+  include WithUniversity
 
-  belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :author,

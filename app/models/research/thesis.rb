@@ -31,8 +31,8 @@
 #
 class Research::Thesis < ApplicationRecord
   include Sanitizable
+  include WithUniversity
 
-  belongs_to :university
   belongs_to :laboratory, foreign_key: :research_laboratory_id
   belongs_to :author, class_name: 'University::Person'
   belongs_to :director, class_name: 'University::Person'

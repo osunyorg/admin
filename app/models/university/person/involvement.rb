@@ -25,11 +25,11 @@
 #  fk_rails_5c704f6338  (university_id => universities.id)
 #
 class University::Person::Involvement < ApplicationRecord
+  include WithUniversity
   include WithPosition
 
   enum kind: { administrator: 10, researcher: 20, teacher: 30 }
 
-  belongs_to :university
   belongs_to :person, class_name: 'University::Person'
   belongs_to :target, polymorphic: true
 

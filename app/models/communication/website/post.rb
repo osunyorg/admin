@@ -33,6 +33,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithFeaturedImage
   include WithBlobs
@@ -44,7 +45,6 @@ class Communication::Website::Post < ApplicationRecord
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
           dependent: :destroy
-  belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website',
              foreign_key: :communication_website_id

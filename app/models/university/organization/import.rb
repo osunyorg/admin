@@ -19,7 +19,8 @@
 #  fk_rails_da057ff44d  (user_id => users.id)
 #
 class University::Organization::Import < ApplicationRecord
-  belongs_to :university
+  include WithUniversity
+
   belongs_to :user
 
   has_one_attached :file
@@ -40,7 +41,7 @@ class University::Organization::Import < ApplicationRecord
 
   def parse
     csv.each do |row|
-      university.organizations.where(name: row['name']).first_or_create do |o|
+      university.organizations.where(university: university, name: row['name']).first_or_create do |o|
         [
           :long_name,
           :kind,

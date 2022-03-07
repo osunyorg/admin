@@ -18,7 +18,7 @@
 #  fk_rails_c2268c7ebd  (university_id => universities.id)
 #
 class Communication::Extranet < ApplicationRecord
-  belongs_to :university
+  include WithUniversity
 
   validates_presence_of :name, :domain
 

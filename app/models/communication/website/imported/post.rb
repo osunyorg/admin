@@ -37,9 +37,9 @@
 #  fk_rails_f9a08c7c77  (post_id => communication_website_posts.id)
 #
 class Communication::Website::Imported::Post < ApplicationRecord
+  include WithUniversity
   include Communication::Website::Imported::WithRichText
 
-  belongs_to :university
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :post,

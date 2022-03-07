@@ -21,9 +21,9 @@
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
+  include WithUniversity
   include WithGit
 
-  belongs_to :university
   has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
