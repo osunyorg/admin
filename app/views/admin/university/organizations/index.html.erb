@@ -3,6 +3,12 @@
 <%= render 'admin/university/organizations/list', organizations: @organizations %>
 <%= paginate @organizations, theme: 'bootstrap-5' %>
 
+<% content_for :action_bar_left do %>
+  <%= link_to t('import'),
+              admin_university_organization_imports_path,
+              class: button_classes if can? :manage, University::Organization::Import %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= create_link University::Organization %>
 <% end %>

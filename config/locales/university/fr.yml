@@ -44,6 +44,9 @@ fr:
       university/organization:
         name: Nom
         long_name: Nom complet
+        description: Description (SEO)
+      university/organization/import:
+        file: Fichier (.csv)
       university/role:
         description: Description (SEO)
         people: Personnes
@@ -60,6 +63,9 @@ fr:
       university/organization:
         one: Tierce partie
         other: Tierces parties
+      university/organization/import:
+        one: Import
+        other: Imports
       university/role:
         one: Rôle
         other: Rôles

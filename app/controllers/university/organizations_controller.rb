@@ -4,6 +4,7 @@ class University::OrganizationsController < ApplicationController
                               through_association: :organizations
 
   def index
+    @organizations = @organizations.ordered.page(params[:page])
   end
 
   def show

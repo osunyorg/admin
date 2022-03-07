@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_053000) do
+ActiveRecord::Schema.define(version: 2022_03_07_070155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -589,6 +589,15 @@ ActiveRecord::Schema.define(version: 2022_03_07_053000) do
     t.string "invoice_amount"
   end
 
+  create_table "university_organization_imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_university_organization_imports_on_university_id"
+    t.index ["user_id"], name: "index_university_organization_imports_on_user_id"
+  end
+
   create_table "university_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -763,6 +772,8 @@ ActiveRecord::Schema.define(version: 2022_03_07_053000) do
   add_foreign_key "research_theses", "universities"
   add_foreign_key "research_theses", "university_people", column: "author_id"
   add_foreign_key "research_theses", "university_people", column: "director_id"
+  add_foreign_key "university_organization_imports", "universities"
+  add_foreign_key "university_organization_imports", "users"
   add_foreign_key "university_organizations", "universities"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "users"

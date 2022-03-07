@@ -1,0 +1,5 @@
+<% content_for :title, @import %>
+
+<%= link_to "#{@import.file.filename} (#{number_to_human_size @import.file.byte_size})",
+            url_for(@import.file),
+            class: button_classes %>

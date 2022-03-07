@@ -104,6 +104,7 @@ en:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Hello %{name}!"
   home: Home
+  import: Import
   languages:
     en: English
     fr: French

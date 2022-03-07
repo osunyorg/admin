@@ -44,6 +44,9 @@ en:
       university/organization:
         name: Name
         long_name: Long name
+        description: Description (SEO)
+      university/organization/import:
+        file: File (.csv)
       university/role:
         description: Description (SEO)
         people: People
@@ -60,6 +63,9 @@ en:
       university/organization:
         one: Third party
         other: Third parties
+      university/organization/import:
+        one: Import
+        other: Imports
       university/role:
         one: Role
         other: Roles
