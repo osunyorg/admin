@@ -14,7 +14,7 @@
 #  name          :string
 #  phone         :string
 #  sirene        :string
-#  website       :string
+#  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

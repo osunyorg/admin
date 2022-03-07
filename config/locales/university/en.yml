@@ -14,7 +14,7 @@ en:
         public: Public
         public_or_private: Public/private
         sms_sender_name: SMS sender name
-        url: 'URL'
+        url: URL
         zipcode: Zipcode
       university/person:
         abilities: Abilities
@@ -35,7 +35,7 @@ en:
         picture: Profile picture
         research_journal_articles: Articles
         slug: Slug
-        tenure: Have tenure?
+        tenure: Has tenure?
         user: User
       university/person/involvement:
         description: Mission (in this context)

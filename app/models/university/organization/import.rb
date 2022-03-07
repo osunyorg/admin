@@ -39,8 +39,25 @@ class University::Organization::Import < ApplicationRecord
   protected
 
   def parse
-    csv.each do |line|
-      byebug
+    csv.each do |row|
+      university.organizations.where(name: row['name']).first_or_create do |o|
+        [
+          :long_name,
+          :kind,
+          :sirene,
+          :description,
+          :address,
+          :zipcode,
+          :city,
+          :country,
+          :mail,
+          :phone,
+          :url,
+        ].each do |property|
+          o[property] = row[property.to_s]
+        end
+        o.kind ||= :company
+      end
     end
   end
   handle_asynchronously :parse, queue: 'default'

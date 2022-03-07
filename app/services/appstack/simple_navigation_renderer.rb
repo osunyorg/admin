@@ -25,7 +25,12 @@ class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
   end
 
   def make_header(item)
-    "<li class=\"sidebar-header\">#{ item.name }</li>"
+    icon = item.send(:options)[:icon]
+    header = '<li class="sidebar-header">'
+    header += "<i class=\"fas fa-#{ icon }\"></i>" if icon
+    header += item.name
+    header += '</li>'
+    header
   end
 
   def make_a(item)
