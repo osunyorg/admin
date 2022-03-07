@@ -27,9 +27,9 @@ class University::Organization::Import < ApplicationRecord
   after_save :parse
 
   def lines
-    @lines ||= csv.rows
+    csv.count
   rescue
-    []
+    'NA'
   end
 
   def to_s
@@ -39,11 +39,11 @@ class University::Organization::Import < ApplicationRecord
   protected
 
   def parse
-    byebug
-    lines.each do |line|
-
+    csv.each do |line|
+      byebug
     end
   end
+  handle_asynchronously :parse, queue: 'default'
 
   def csv
     @csv ||= CSV.parse file.blob.download, headers: true

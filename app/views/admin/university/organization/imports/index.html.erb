@@ -11,7 +11,7 @@
     <% @imports.each do |import| %>
       <tr>
         <td><%= link_to import, [:admin, import] %></td>
-        <td><%= import.lines.count %></td>
+        <td><%= import.lines %></td>
       </tr>
     <% end %>
   </tbody>
