@@ -39,7 +39,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_6e16107511  (university_id => universities.id)
+#  fk_rails_08b351087c  (university_id => universities.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
