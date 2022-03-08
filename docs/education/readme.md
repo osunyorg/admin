@@ -2,6 +2,8 @@
 
 ## education/Program
 
+https://schema.org/EducationalOccupationalProgram
+
 Bachelor Universitaire de Technologie Métiers du Multimédia et de l'Internet
 
 - university:references
