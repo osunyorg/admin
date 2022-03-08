@@ -30,12 +30,16 @@ fr:
         is_researcher: Chercheur·se
         is_teacher: Enseignant·e
         last_name: Nom de famille
+        linkedin: LinkedIn (URL)
         name: Nom
         phone: Téléphone
         picture: Photo de profil
         research_journal_articles: Articles
         slug: Slug
+        socials: Réseaux sociaux
         tenure: Titulaire ?
+        twitter: Twitter (nom d'utilisateur)
+        url: Site web
         user: Utilisateur
       university/person/involvement:
         description: Mission (dans ce contexte)
@@ -79,7 +83,9 @@ fr:
         is_author: "Écrit des articles pour les sites."
         is_researcher: "Écrit des articles dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
+        linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "A différencier d'une personne vacataire."
+        twitter: "Exemple : osuny"
   university:
     invoice_informations: Données de facturation
     person:

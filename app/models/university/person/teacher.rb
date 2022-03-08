@@ -12,9 +12,12 @@
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
+#  linkedin          :string
 #  phone             :string
 #  slug              :string
 #  tenure            :boolean          default(FALSE)
+#  twitter           :string
+#  url               :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  university_id     :uuid             not null, indexed

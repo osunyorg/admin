@@ -30,12 +30,16 @@ en:
         is_researcher: Researcher
         is_teacher: Teacher
         last_name: Last name
+        linkedin: LinkedIn URL
         name: Name
         phone: Phone
         picture: Profile picture
         research_journal_articles: Articles
         slug: Slug
+        socials: Socials
         tenure: Has tenure?
+        twitter: Twitter username
+        url: Website
         user: User
       university/person/involvement:
         description: Mission (in this context)
@@ -79,7 +83,9 @@ en:
         is_author: "Writes posts for websites."
         is_researcher: "Writes articles for journals."
         is_teacher: "Teaches in Schools."
+        linkedin: "Example: https://www.linkedin.com/in/osuny"
         tenure: "To differ from temporary lecturer."
+        twitter: "Example: osuny"
   university:
     invoice_informations: Invoice informations
     person:

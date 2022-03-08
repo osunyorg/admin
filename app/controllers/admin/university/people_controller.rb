@@ -63,8 +63,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     params.require(:university_person).permit(
       :slug, :first_name, :last_name, :email, :phone, :description,
       :biography,  :picture, :picture_delete, :picture_infos,
-      :habilitation, :tenure, :is_researcher, :is_teacher,
-      :is_administration, :user_id
+      :habilitation, :tenure, :url, :linkedin, :twitter,
+      :is_researcher, :is_teacher, :is_administration, :user_id
     ).merge(university_id: current_university.id)
   end
 end

@@ -28,6 +28,22 @@
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
+          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('socials') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :url %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :linkedin %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :twitter %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
           <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('abilities') %></h5>
         </div>
         <div class="card-body">

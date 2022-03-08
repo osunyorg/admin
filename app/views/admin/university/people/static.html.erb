@@ -6,6 +6,11 @@ first_name: "<%= @about.first_name %>"
 last_name: "<%= @about.last_name %>"
 phone: "<%= @about.phone %>"
 email: "<%= @about.email %>"
+twitter: "<%= @about.twitter %>"
+linkedin: >-
+  <%= @about.linkedin %>
+website: >-
+  <%= @about.url %>
 <% if @about.best_picture.attached? %>
 image: "<%= @about.best_picture.blob.id %>"
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_164108) do
+ActiveRecord::Schema.define(version: 2022_03_08_114213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -445,23 +445,6 @@ ActiveRecord::Schema.define(version: 2022_03_07_164108) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "zipcode"
-    t.string "city"
-    t.string "country"
-    t.string "website"
-    t.string "phone"
-    t.string "mail"
-    t.boolean "active"
-    t.string "sirene"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
@@ -635,6 +618,9 @@ ActiveRecord::Schema.define(version: 2022_03_07_164108) do
     t.boolean "habilitation", default: false
     t.boolean "tenure", default: false
     t.text "biography"
+    t.string "url"
+    t.string "twitter"
+    t.string "linkedin"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
