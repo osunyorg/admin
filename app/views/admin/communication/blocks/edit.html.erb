@@ -91,6 +91,8 @@
   });
 
   window.addEventListener('load', function(){
-    app.mount('#app')
+    setTimeout(function() {
+      app.mount('#app');
+    }, 1000);
   });
 </script>
