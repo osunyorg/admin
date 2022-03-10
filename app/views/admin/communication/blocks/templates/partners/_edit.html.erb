@@ -1,8 +1,11 @@
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({name: '', url: '', logo: {}})">
+<a  class="<%= button_classes('mb-4 me-1') %>"
+    v-on:click="data.elements.push({name: '', url: '', logo: {}, type:'custom'})">
     <%= t '.add_partner' %>
 </a>
-
+<a  class="<%= button_classes('mb-4') %>"
+    v-on:click="data.elements.push({id:'', type:'organization'})">
+    <%= t '.add_organization' %>
+</a>
 <draggable :list="data.elements" class="list-group" handle=".partnerHandle">
   <div v-for="(partner, index) in data.elements" class="list-group-item">
     <div class="d-flex">
@@ -12,10 +15,23 @@
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row">
+        <div class="row"  v-if="partner.type === 'organization'">
+         <div class="col-lg-4">
+            <select :id="'organization-' + index + '-id'"
+                    class="form-select select"
+                    v-model="partner.id">
+              <option value="" disabled><%= t '.organization_placeholder' %></option>
+              <% current_university.organizations.ordered.each_with_index do |organization, index| %>
+                <option value="<%= organization.id %>"><%= organization.name %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="row"  v-if="partner.type === 'custom'">
           <div class="col-lg-4">
             <label  class="form-label"
                     :for="'partner-' + index + '-name'"><%= t '.partner_name_label' %></label>
+
             <input class="form-control mb-2"
                   type="text"
                   v-model="partner.name"
