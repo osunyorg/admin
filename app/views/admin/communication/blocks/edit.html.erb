@@ -4,7 +4,7 @@
 # Default elements array to move outside : it is only required when block type has an elements list
 @block.data['elements'] ||= []
 %>
-<div id="app" v-cloak>
+<div id="app" v-cloak style="opacity:0;">
   <%= simple_form_for [:admin, @block] do |f| %>
     <div class="row">
       <div class="col-xxl-4 col-md-6">
@@ -93,6 +93,7 @@
   window.addEventListener('load', function(){
     setTimeout(function() {
       app.mount('#app');
+      document.getElementById('app').style.opacity = 1;
     }, 1000);
   });
 </script>
