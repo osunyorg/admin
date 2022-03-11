@@ -1,20 +1,10 @@
 <% if block.data.has_key?('elements') %>
 <% block.data['elements'].each do |partner|
       id = partner['id']
-      if id != ''
-        unless id.nil?
-        unless id.empty?
-          organization = block.university.organizations.find id %>
+      unless id.blank?
+        organization = block.university.organizations.find id %>
       - id: "<%= id %>"
-        name: >
-          <%= prepare_text_for_static organization.name %>
-        url: <%= prepare_text_for_static organization.url %>
-        <% if organization.logo.attached? %>
-        logo: "<%= organization.logo.blob.id %>"
-        <% end %>
-        <% end
-        end 
-      else %>
+      <% else %>
       - name: >
           <%= prepare_text_for_static partner['name'] %>
         url: >-
