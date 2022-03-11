@@ -1,21 +1,20 @@
 <% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |partner| %>
-      <% if partner['type'] == 'organization' %>
-      <% organization = block.university.organizations.find partner['id'] %>
-      <% if organization %>
-      - is_organization: true
-        id: <%= partner['id'] %>
+<% block.data['elements'].each do |partner|
+      id = partner['id']
+      if id != ''
+        unless id.nil?
+        unless id.empty?
+          organization = block.university.organizations.find id %>
+      - id: "<%= id %>"
         name: >
           <%= prepare_text_for_static organization.name %>
-        <% if organization.url %>
-        url: >-
-          <%= prepare_text_for_static organization.url %>
-        <% end %>
+        url: <%= prepare_text_for_static organization.url %>
         <% if organization.logo.attached? %>
         logo: "<%= organization.logo.blob.id %>"
         <% end %>
-      <% end %>
-      <% else %>
+        <% end
+        end 
+      else %>
       - name: >
           <%= prepare_text_for_static partner['name'] %>
         url: >-

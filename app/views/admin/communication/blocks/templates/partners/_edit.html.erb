@@ -1,5 +1,5 @@
 <a  class="<%= button_classes('mb-4 me-1') %>"
-    v-on:click="data.elements.push({name: '', url: '', logo: {}})">
+    v-on:click="data.elements.push({id:'', name: '', url: '', logo: {}})">
     <%= t '.add_partner' %>
 </a>
 <draggable :list="data.elements" class="list-group" handle=".partnerHandle">
@@ -16,7 +16,7 @@
             <select :id="'organization-' + index + '-id'"
                     class="form-select select"
                     v-model="partner.id">
-              <option value="" :selected="!partner.id"><%= t '.unregistered_organization' %></option>
+              <option value="" :selected="true"><%= t '.unregistered_organization' %></option>
               <% current_university.organizations.ordered.each_with_index do |organization, index| %>
                 <option value="<%= organization.id %>"><%= organization.name %></option>
               <% end %>
