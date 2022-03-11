@@ -1,5 +1,27 @@
 <div class="row">
 <% @block.data['elements'].each do |partner| %>
+  <% organization = nil
+  id = partner['id']
+  if id != ''
+    unless id.nil?
+      unless id.empty?
+        organization = @block.university.organizations.find id 
+      end
+    end
+  end 
+  if organization %>
+  <div class="col-md-2">
+    <article class="card">
+      <% if organization.logo.attached? %>
+        <%= kamifusen_tag organization.logo, width: 300, class: 'img-fluid mb-2' %>
+      <% end %>
+      <div class="card-body">
+        <h3 class="card-title h5"><%= organization.name %></h3>
+        <p class="mb-0"><%= organization.url %></p>
+      </div>
+    </article>
+  </div>
+  <% else %>
   <div class="col-md-2">
     <article class="card">
       <% unless partner.dig('logo', 'id').blank? %>
@@ -12,5 +34,6 @@
       </div>
     </article>
   </div>
+  <% end %>
 <% end if @block.data %>
 </div>
