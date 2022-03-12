@@ -27,24 +27,10 @@ Bachelor Universitaire de Technologie Métiers du Multimédia et de l'Internet
 30 heures d'histoire de l'art en année 1
 
 - program:references
-- year:references
+- academic_year:references
 - name:string
 - syllabus:text
 - hours:integer
-
-## education/Year
-
-- university:references
-- program:references
-- year:integer
-
-## education/Session
-
-- name:string
-- university:references
-- program:references
-- from:date
-- to:date
 
 ## qualiopi/Criterion
 
