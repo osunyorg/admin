@@ -30,7 +30,7 @@ class Admin::University::Person::Alumnus::ImportsController < Admin::University:
   def breadcrumb
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
-                    admin_university_person_alumni_index_path
+                    admin_university_person_alumni_path
     add_breadcrumb  University::Person::Alumnus::Import.model_name.human(count: 2),
                     admin_university_person_alumnus_imports_path
     breadcrumb_for  @import

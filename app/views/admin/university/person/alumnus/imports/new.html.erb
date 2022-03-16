@@ -1,5 +1,30 @@
-<h1>New University Person Alumnus Import</h1>
+<% content_for :title, University::Organization::Import.model_name.human %>
 
-<%= render 'form', university_person_alumnus_import: @university_person_alumnus_import %>
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      Les données doivent être au format csv, comme l'exemple suivant.<br>
+      La première ligne doit être dédiée aux entêtes.<br>
+      Le champ name est obligatoire.<br>
+      Les noms des entêtes sont indicatifs, l'import est basé sur la position des champs.<br>
+      Les caractères doivent être encodés en UTF-8.
+    </p>
+    <%= simple_form_for [:admin, @import] do |f| %>
+      <%= f.input :file %>
+      <% content_for :action_bar_right do %>
+        <%= submit f %>
+      <% end %>
+    <% end %>
 
-<%= link_to 'Back', university_person_alumnus_imports_path %>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-small">
+      <tbody>
+        <tr>
+          <th>program*</th>
+          <td>c6b78fac-0a5f-4c44-ad22-4ee68ed382bb</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

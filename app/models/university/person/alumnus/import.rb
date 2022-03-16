@@ -7,6 +7,10 @@ class University::Person::Alumnus::Import < ApplicationRecord
 
   after_save :parse
 
+  def self.table_name
+    'university_person_alumnus_imports'
+  end
+
   def lines
     csv.count
   rescue
