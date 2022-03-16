@@ -9,6 +9,7 @@
 #  first_name        :string
 #  habilitation      :boolean          default(FALSE)
 #  is_administration :boolean
+#  is_alumnus        :boolean          default(FALSE)
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
@@ -103,6 +104,7 @@ class University::Person < ApplicationRecord
   scope :administration, -> { where(is_administration: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
+  scope :alumni,     -> { where(is_alumnus: true) }
 
   def to_s
     "#{first_name} #{last_name}"

@@ -64,6 +64,9 @@ fr:
       university/person/involvement:
         one: Implication
         other: Implications
+      university/person/alumnus:
+        one: Alumnus
+        other: Alumni
       university/organization:
         one: Tierce partie
         other: Tierces parties

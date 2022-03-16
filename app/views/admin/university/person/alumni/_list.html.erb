@@ -1,0 +1,16 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= University::Person.human_attribute_name('last_name') %></th>
+      <th><%= University::Person.human_attribute_name('first_name') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% alumni.each do |alumnus| %>
+      <tr>
+        <td><%= link_to alumnus.last_name, admin_university_alumnus_path(alumnus) %></td>
+        <td><%= link_to alumnus.first_name, admin_university_alumnus_path(alumnus) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

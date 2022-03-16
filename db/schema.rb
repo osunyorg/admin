@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_16_151533) do
+ActiveRecord::Schema.define(version: 2022_03_16_155340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -646,6 +646,7 @@ ActiveRecord::Schema.define(version: 2022_03_16_151533) do
     t.string "url"
     t.string "twitter"
     t.string "linkedin"
+    t.boolean "is_alumnus", default: false
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end

@@ -1,10 +1,10 @@
-<% content_for :title, University::Organization::Import.model_name.human(count: 2) %>
+<% content_for :title, University::Person::Alumnus::Import.model_name.human(count: 2) %>
 
 <table class="<%= table_classes %>">
   <thead>
     <tr>
-      <th><%= University::Organization::Import.human_attribute_name('name') %></th>
-      <th><%= University::Organization::Import.human_attribute_name('lines') %></th>
+      <th><%= University::Person::Alumnus::Import.human_attribute_name('name') %></th>
+      <th><%= University::Person::Alumnus::Import.human_attribute_name('lines') %></th>
     </tr>
   </thead>
   <tbody>
@@ -18,5 +18,5 @@
 </table>
 
 <% content_for :action_bar_right do %>
-  <%= create_link University::Organization::Import %>
+  <%= create_link University::Person::Alumnus::Import %>
 <% end %>
