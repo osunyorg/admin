@@ -10,7 +10,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :university, University.model_name.human, nil, { kind: :header }
       primary.item :university, University::Person.model_name.human(count: 2), admin_university_people_path, { icon: 'users-cog' }
       primary.item :university, University::Organization.model_name.human(count: 2), admin_university_organizations_path, { icon: 'building' }
-      primary.item :communication_alumni, University::Person::Alumnus.model_name.human(count: 2), admin_university_person_alumni_index_path, { icon: 'users' }
+      primary.item :communication_alumni, University::Person::Alumnus.model_name.human(count: 2), admin_university_person_alumni_path, { icon: 'users' }
     end
 
     if can?(:read, Education::Program)

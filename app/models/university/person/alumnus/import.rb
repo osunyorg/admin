@@ -7,10 +7,6 @@ class University::Person::Alumnus::Import < ApplicationRecord
 
   after_save :parse
 
-  def self.polymorphic_name
-    'University::Person::Alumnus::Import'
-  end
-
   def lines
     csv.count
   rescue

@@ -8,6 +8,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   # inflect.singular /^(ox)en/i, '\1'
   # inflect.uncountable %w( fish sheep )
   inflect.irregular 'axis', 'axes'
+  inflect.irregular 'alumnus', 'alumni'
 end
 
 # These inflection rules are supported but not enabled by default:
