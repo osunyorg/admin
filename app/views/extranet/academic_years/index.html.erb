@@ -1,0 +1,19 @@
+<% content_for :title, Education::AcademicYear.model_name.human(count: 2) %>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @academic_years.each do |year| %>
+      <tr>
+        <td><%= year.year %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

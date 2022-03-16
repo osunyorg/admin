@@ -1,6 +1,4 @@
-namespace :university do
-  resources :organizations, only: [:index, :show]
-end
-
-get 'organizations' => 'university/organizations#index', as: :organizations
-get 'organization/:id' => 'university/organizations#show', as: :organization
+get 'organizations'     => 'extranet/organizations#index', as: :organizations
+get 'organization/:id'  => 'extranet/organizations#show', as: :university_organization
+get 'years'             => 'extranet/academic_years#index', as: :academic_years
+get 'years/:id'         => 'extranet/academic_years#show', as: :academic_year

@@ -1,4 +1,4 @@
-class University::OrganizationsController < ApplicationController
+class Extranet::OrganizationsController < ApplicationController
   load_and_authorize_resource class: University::Organization,
                               through: :current_university,
                               through_association: :organizations

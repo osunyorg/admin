@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :university_person_alumnus_imports
   authenticated :user, -> user { user.server_admin? } do
     match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
   end
