@@ -1,14 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, @import %>
 
-<p>
-  <strong>University:</strong>
-  <%= @university_person_alumnus_import.university_id %>
-</p>
+<p><%= @import.lines %> lines</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @university_person_alumnus_import.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_university_person_alumnus_import_path(@university_person_alumnus_import) %> |
-<%= link_to 'Back', university_person_alumnus_imports_path %>
+<%= link_to "#{@import.file.filename} (#{number_to_human_size @import.file.byte_size})",
+            url_for(@import.file),
+            class: button_classes %>

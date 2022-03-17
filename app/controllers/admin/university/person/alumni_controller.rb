@@ -1,12 +1,12 @@
 class Admin::University::Person::AlumniController < Admin::University::ApplicationController
-  before_action :load_alumnus, only: [:show, :edit, :update]
-
+  load_and_authorize_resource class: University::Person::Alumnus,
+                              through: :current_university,
+                              through_association: :people
   def index
-    @alumni = current_university.people
-                                .alumni
-                                .accessible_by(current_ability)
-                                .ordered
-                                .page(params[:page])
+    @alumni = @alumni.alumni
+                     .accessible_by(current_ability)
+                     .ordered
+                     .page(params[:page])
     breadcrumb
   end
 
@@ -37,9 +37,6 @@ class Admin::University::Person::AlumniController < Admin::University::Applicati
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
                     admin_university_person_alumni_path
     breadcrumb_for  @alumnus
-  end
-
-  def load_alumnus
   end
 
   def alumnus_params
