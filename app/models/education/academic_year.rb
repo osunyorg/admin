@@ -19,7 +19,9 @@
 class Education::AcademicYear < ApplicationRecord
   include WithUniversity
 
-  scope :ordered, -> { order(year: :desc) } 
+  has_many :cohorts, class_name: 'Education::Cohort'
+
+  scope :ordered, -> { order(year: :desc) }
 
   def to_s
     "#{year}"

@@ -1,14 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, @academic_year %>
 
-<p>
-  <strong>University:</strong>
-  <%= @education_academic_year.university_id %>
-</p>
+<h1><%= @academic_year %></h1>
 
-<p>
-  <strong>Year:</strong>
-  <%= @education_academic_year.year %>
-</p>
-
-<%= link_to 'Edit', edit_education_academic_year_path(@education_academic_year) %> |
-<%= link_to 'Back', education_academic_years_path %>
+<% @academic_year.cohorts.each do |cohort| %>
+  <%= link_to cohort, cohort %>
+<% end %>

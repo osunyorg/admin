@@ -11,7 +11,7 @@
   <tbody>
     <% @academic_years.each do |year| %>
       <tr>
-        <td><%= year.year %></td>
+        <td><%= link_to year, year %></td>
         <td></td>
       </tr>
     <% end %>

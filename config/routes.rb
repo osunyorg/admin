@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  namespace :university do
-    namespace :person do
-      namespace :alumnus do
-        resources :imports
-      end
-    end
-  end
-  resources :university_person_alumnus_imports
   authenticated :user, -> user { user.server_admin? } do
     match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
   end

@@ -1,0 +1,19 @@
+<% content_for :title, Education::Cohort.model_name.human(count: 2) %>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cohorts.each do |cohort| %>
+      <tr>
+        <td><%= link_to cohort, cohort %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

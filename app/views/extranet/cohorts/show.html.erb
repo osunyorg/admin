@@ -1,0 +1,7 @@
+<% content_for :title, @cohort %>
+
+<h1><%= @cohort %></h1>
+<p><%= @cohort.people.count %></p>
+<% @cohort.people.each do |person| %>
+  <%= link_to person, person %>
+<% end %>

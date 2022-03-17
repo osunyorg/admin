@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>University:</strong>
+  <%= @education_cohort.university_id %>
+</p>
+
+<p>
+  <strong>Program:</strong>
+  <%= @education_cohort.program_id %>
+</p>
+
+<p>
+  <strong>Academic year:</strong>
+  <%= @education_cohort.academic_year_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @education_cohort.name %>
+</p>
+
+<%= link_to 'Edit', edit_education_cohort_path(@education_cohort) %> |
+<%= link_to 'Back', education_cohorts_path %>

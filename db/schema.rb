@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_16_155340) do
+ActiveRecord::Schema.define(version: 2022_03_17_151819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -390,6 +390,25 @@ ActiveRecord::Schema.define(version: 2022_03_16_155340) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_education_academic_years_on_university_id"
+  end
+
+  create_table "education_cohorts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "program_id", null: false
+    t.uuid "academic_year_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["academic_year_id"], name: "index_education_cohorts_on_academic_year_id"
+    t.index ["program_id"], name: "index_education_cohorts_on_program_id"
+    t.index ["university_id"], name: "index_education_cohorts_on_university_id"
+  end
+
+  create_table "education_cohorts_university_people", id: false, force: :cascade do |t|
+    t.uuid "education_cohort_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["education_cohort_id", "university_person_id"], name: "index_cohort_person"
+    t.index ["university_person_id", "education_cohort_id"], name: "index_person_cohort"
   end
 
   create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -775,6 +794,9 @@ ActiveRecord::Schema.define(version: 2022_03_16_155340) do
   add_foreign_key "communication_website_posts", "university_people", column: "author_id"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_academic_years", "universities"
+  add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"
+  add_foreign_key "education_cohorts", "education_programs", column: "program_id"
+  add_foreign_key "education_cohorts", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
