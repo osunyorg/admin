@@ -36,23 +36,34 @@ class University::Person::Alumnus::Import < ApplicationRecord
       year = university.academic_years
                        .where(year: row['year'])
                        .first_or_create
+      first_name = clean_encoding row['first_name']
+      last_name = clean_encoding row['last_name']
+      url = clean_encoding row['url']
       if row['mail'].blank?
         person = university.people
-                           .where(first_name: row['first_name'], last_name: row['last_name'])
+                           .where(first_name: first_name, last_name: last_name)
                            .first_or_create
       else
         person = university.people
                            .where(email: row['mail'])
                            .first_or_create
-        person.first_name = row['first_name']
-        person.last_name = row['last_name']
+        person.first_name = first_name
+        person.last_name = last_name
       end
       # TODO all fields
       person.is_alumnus = true
-      person.url = row['url']
+      person.url = url
       person.slug = person.to_s.parameterize
       person.save
       # byebug
     end
+  end
+
+  def clean_encoding(value)
+    return if value.nil?
+    if value.encoding != 'UTF-8'
+      value = value.force_encoding 'UTF-8'
+    end
+    value
   end
 end
