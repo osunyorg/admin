@@ -3,8 +3,9 @@
 <table class="<%= table_classes %>">
   <thead>
     <tr>
-      <th>Year</th>
-      <th></th>
+      <th><%= Education::AcademicYear.model_name.human %></th>
+      <th><%= Education::Cohort.model_name.human(count: 2) %></th>
+      <th><%= University::Person::Alumnus.model_name.human(count: 2) %></th>
     </tr>
   </thead>
 
@@ -12,7 +13,8 @@
     <% @academic_years.each do |year| %>
       <tr>
         <td><%= link_to year, year %></td>
-        <td></td>
+        <td><%= year.cohorts.count %></td>
+        <td><%= year.people.count %></td>
       </tr>
     <% end %>
   </tbody>

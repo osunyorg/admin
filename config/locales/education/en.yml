@@ -4,6 +4,12 @@ en:
       education: Education
   activerecord:
     models:
+      education/academic_year:
+        one: Year
+        other: Years
+      education/cohort:
+        one: Cohort
+        other: Cohorts
       education/program:
         one: Program
         other: Programs

@@ -21,6 +21,10 @@ class Education::AcademicYear < ApplicationRecord
 
   has_many :cohorts, class_name: 'Education::Cohort'
 
+  has_many :people,
+           class_name: 'University::Person',
+           through: :cohorts
+
   scope :ordered, -> { order(year: :desc) }
 
   def to_s

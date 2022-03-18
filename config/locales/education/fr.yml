@@ -4,6 +4,12 @@ fr:
       education: Enseignement
   activerecord:
     models:
+      education/academic_year:
+        one: Année
+        other: Années
+      education/cohort:
+        one: Promotion
+        other: Promotions
       education/program:
         one: Formation
         other: Formations

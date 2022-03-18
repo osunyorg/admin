@@ -4,7 +4,6 @@ class Extranet::PersonsController < ApplicationController
                               through_association: :people
 
   def index
-    @people = @people.ordered.page(params[:page])
   end
 
   def show

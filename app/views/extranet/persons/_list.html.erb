@@ -1,0 +1,39 @@
+<%
+people_paged = people.ordered.page(params[:page]).per(60)
+%>
+<p><%= people.count %> <%= University::Person::Alumnus.model_name.human(count: 2).downcase %></p>
+
+<div class="row">
+  <% people_paged.each do |person| %>
+    <div class="col-xxl-2 col-md-3">
+      <article class="card mb-4">
+        <div class="card-body">
+          <%= link_to person, class: 'stretched-link' do %>
+            <span class="small"><%= person.first_name %></span><br>
+            <%= person.last_name %>
+          <% end %>
+        </div>
+      </article>
+    </div>
+  <% end %>
+</div>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% people_paged.each do |person| %>
+      <tr>
+        <td><%= link_to person, person %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate people_paged, theme: 'bootstrap-5' %>

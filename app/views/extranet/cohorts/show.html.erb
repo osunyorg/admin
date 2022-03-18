@@ -1,11 +1,3 @@
 <% content_for :title, @cohort %>
 
-<h1><%= @cohort %></h1>
-<p><%= @cohort.people.count %></p>
-<div class="row">
-  <% @cohort.people.ordered.each do |person| %>
-    <div class="col-xxl-2 col-md-3">
-      <%= link_to person, person %>
-    </div>
-  <% end %>
-</div>
+<%= render 'extranet/persons/list', people: @cohort.people %>
