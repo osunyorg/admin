@@ -62,23 +62,24 @@ class University::Person::Alumnus::Import < ApplicationRecord
                          .first_or_create
       first_name = clean_encoding row['first_name']
       last_name = clean_encoding row['last_name']
-      email = row['mail']
+      email = clean_encoding(row['mail']).to_s.downcase
       url = clean_encoding row['url']
-      if email.blank?
-        person = university.people
-                           .where(first_name: first_name, last_name: last_name)
-                           .first_or_create
-      else
+      if email.present?
         person = university.people
                            .where(email: email)
                            .first_or_create
         person.first_name = first_name
         person.last_name = last_name
+      else
+        person = university.people
+                           .where(first_name: first_name, last_name: last_name)
+                           .first_or_create
       end
       # TODO all fields
       person.is_alumnus = true
       person.url = url
-      person.slug = person.to_s.parameterize
+      person.slug = person.to_s.parameterize.dasherize
+      byebug unless person.valid?
       person.save
       cohort.people << person unless person.in?(cohort.people)
     end
@@ -89,6 +90,6 @@ class University::Person::Alumnus::Import < ApplicationRecord
     if value.encoding != 'UTF-8'
       value = value.force_encoding 'UTF-8'
     end
-    value
+    value.strip
   end
 end
