@@ -1,0 +1,20 @@
+<% content_for :title, University::Person::Alumnus.model_name.human(count: 2) %>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to person, person %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @people, theme: 'bootstrap-5' %>

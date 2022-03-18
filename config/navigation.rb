@@ -16,5 +16,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :cohorts,
                   Education::Cohort.model_name.human(count: 2),
                   education_cohorts_path
+    primary.item  :person,
+                  University::Person::Alumnus.model_name.human(count: 2),
+                  university_persons_path
   end
 end
