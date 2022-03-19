@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   draw 'extranet'
+  draw 'api'
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 

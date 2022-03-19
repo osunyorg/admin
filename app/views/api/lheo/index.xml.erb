@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lheo xmlns="http://lheo.gouv.fr/2.3">
+  <offres>
+    <% @programs.each do |program| %>
+      <formation>
+        <intitule-formation><![CDATA[<%= program.name %>]]></intitule-formation>
+      </formation>
+    <% end %>
+  </offres>
+</lheo>
