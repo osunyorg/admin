@@ -1,5 +1,7 @@
 <% content_for :title, Education::Cohort.model_name.human(count: 2) %>
 
+<h1><%= Education::Cohort.model_name.human(count: 2) %></h1>
+
 <table class="<%= table_classes %>">
   <thead>
     <tr>
@@ -12,7 +14,7 @@
     <% @cohorts.each do |cohort| %>
       <tr>
         <td><%= link_to cohort, cohort %></td>
-        <td></td>
+        <td><%= cohort.people.count %></td>
       </tr>
     <% end %>
   </tbody>

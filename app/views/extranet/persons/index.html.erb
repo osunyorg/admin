@@ -1,3 +1,5 @@
 <% content_for :title, University::Person::Alumnus.model_name.human(count: 2) %>
 
+<h1><%= University::Person::Alumnus.model_name.human(count: 2) %></h1>
+
 <%= render 'extranet/persons/list', people: @people %>

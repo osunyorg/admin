@@ -1,5 +1,7 @@
 <% content_for :title, @academic_year %>
 
+<h1><%= @academic_year %></h1>
+
 <% @academic_year.cohorts.each do |cohort| %>
   <%= link_to cohort, cohort %>
 <% end %>

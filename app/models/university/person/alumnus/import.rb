@@ -49,7 +49,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
       # status
       # socialtwitter
       # sociallinkedin
-      row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
+      # row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
       program = university.education_programs
                           .find_by(id: row['program'])
       next if program.nil?
@@ -79,9 +79,20 @@ class University::Person::Alumnus::Import < ApplicationRecord
       person.is_alumnus = true
       person.url = url
       person.slug = person.to_s.parameterize.dasherize
+      person.twitter = row['socialtwitter']
+      person.linkedin = row['sociallinkedin']
       byebug unless person.valid?
       person.save
       cohort.people << person unless person.in?(cohort.people)
+      photo = row['photo'].to_s
+      if photo.end_with?('.jpg') || photo.end_with?('.png')
+        filename = File.basename photo
+        begin
+          file = URI.open photo
+          person.picture.attach(io: file, filename: 'some-image.jpg')
+        rescue
+        end
+      end
     end
   end
 

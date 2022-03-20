@@ -6,34 +6,20 @@ people_paged = people.ordered.page(params[:page]).per(60)
 <div class="row">
   <% people_paged.each do |person| %>
     <div class="col-xxl-2 col-md-3">
-      <article class="card mb-4">
-        <div class="card-body">
-          <%= link_to person, class: 'stretched-link' do %>
-            <span class="small"><%= person.first_name %></span><br>
+      <article class="mb-4 position-relative">
+        <% if person.picture.attached? %>
+          <%= kamifusen_tag person.picture, width: 400, class: 'img-fluid' %>
+        <% else %>
+          <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+        <% end %>
+        <%= link_to person, class: 'stretched-link' do %>
+          <%= person.first_name %>
+          <b>
             <%= person.last_name %>
-          <% end %>
-        </div>
+          </b>
+        <% end %>
       </article>
     </div>
   <% end %>
 </div>
-
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% people_paged.each do |person| %>
-      <tr>
-        <td><%= link_to person, person %></td>
-        <td></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <%= paginate people_paged, theme: 'bootstrap-5' %>

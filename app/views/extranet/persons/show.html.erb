@@ -1,1 +1,14 @@
 <% content_for :title, @person %>
+
+<div class="row">
+  <div class="col-md-9">
+    <h1><%= @person %></h1>
+  </div>
+  <div class="col-md-3">
+    <% if @person.picture.attached? %>
+      <%= kamifusen_tag @person.picture, width: 400, class: 'img-fluid' %>
+    <% else %>
+      <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+    <% end %>
+  </div>
+</div>

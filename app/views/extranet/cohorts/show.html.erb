@@ -1,3 +1,5 @@
 <% content_for :title, @cohort %>
 
+<h1><%= @cohort %></h1>
+
 <%= render 'extranet/persons/list', people: @cohort.people %>

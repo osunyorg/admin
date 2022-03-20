@@ -101,10 +101,10 @@ class University::Person < ApplicationRecord
   before_validation :sanitize_email
 
   scope :ordered,         -> { order(:last_name, :first_name) }
-  scope :administration, -> { where(is_administration: true) }
+  scope :administration,  -> { where(is_administration: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
-  scope :alumni,     -> { where(is_alumnus: true) }
+  scope :alumni,          -> { where(is_alumnus: true) }
 
   def to_s
     "#{first_name} #{last_name}"
