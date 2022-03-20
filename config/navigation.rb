@@ -1,5 +1,5 @@
 SimpleNavigation::Configuration.run do |navigation|
-  # navigation.renderer = ::Appstack::SimpleNavigationRenderer
+  navigation.renderer = ::SimpleNavigation::BootstrapRenderer
   navigation.auto_highlight = true
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
