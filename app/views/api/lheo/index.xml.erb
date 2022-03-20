@@ -13,8 +13,8 @@
         <% if program.schools.any? %>
         <nom-organisme><![CDATA[<%= program.schools.first.name %>]]></nom-organisme>
         <% end %>
-        <objectif-formation><![CDATA[<%= program.objectives %>]]></objectif-formation>
-        <resultats-attendus><![CDATA[<%= program.results %>]]></resultats-attendus>
+        <objectif-formation><![CDATA[<%= program.best_objectives %>]]></objectif-formation>
+        <resultats-attendus><![CDATA[<%= program.best_results %>]]></resultats-attendus>
       </formation>
     <% end %>
   </offres>
