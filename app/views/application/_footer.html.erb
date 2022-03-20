@@ -1,11 +1,39 @@
-<footer class="text-center small">
-  <div class="mb-5">
-    <%= image_tag 'osuny-black.svg', width: 80 %>
+<footer class="pt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-5">
+          <%= image_tag 'osuny-black.svg', width: 80 %>
+        </div>
+        <p>
+          <%= current_context %><br>
+          <%= current_context.address %><br>
+          <%= current_context.zipcode %>
+          <%= current_context.city %>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <nav class="nav flex-column text-end">
+          <%= link_to t('terms_of_service'),
+                      t('terms_of_service_url'),
+                      class: 'nav-link pe-0',
+                      target: '_blank',
+                      rel: 'noreferrer' %>
+          <%= link_to t('privacy_policy'),
+                      t('privacy_policy_url'),
+                      class: 'nav-link pe-0',
+                      target: '_blank',
+                      rel: 'noreferrer' %>
+          <%= link_to t('cookies_policy'),
+                      t('cookies_policy_url'),
+                      class: 'nav-link pe-0',
+                      target: '_blank',
+                      rel: 'noreferrer' %>
+          <%= link_to t('cookies_consent_choice'),
+                      '',
+                      class: 'nav-link pe-0 js-gdpr__cookie_consent__display_again' %>
+        </nav>
+      </div>
+    </div>
   </div>
-  <%= current_university %> |
-  <%= link_to t('terms_of_service'), t('terms_of_service_url'), target: '_blank', rel: 'noreferrer' %> |
-  <%= link_to t('privacy_policy'), t('privacy_policy_url'), target: '_blank', rel: 'noreferrer' %> |
-  <%= link_to t('cookies_policy'), t('cookies_policy_url'), target: '_blank', rel: 'noreferrer' %> |
-  <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
-
 </footer>

@@ -7,6 +7,7 @@
 
     <footer class="small my-5">
       <hr>
+      <%= link_to 'API', api_root_path, class: 'sidebar-link' %>
       <%
       [
         :terms_of_service,
@@ -19,7 +20,9 @@
                     rel: 'noreferrer',
                     class: 'sidebar-link' %>
       <% end %>
-      <%= link_to t('cookies_consent_choice'), '', class: 'sidebar-link js-gdpr__cookie_consent__display_again' %>
+      <%= link_to t('cookies_consent_choice'),
+                  '',
+                  class: 'sidebar-link js-gdpr__cookie_consent__display_again' %>
     </footer>
   </div>
 </nav>

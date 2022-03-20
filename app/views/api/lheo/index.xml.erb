@@ -3,7 +3,18 @@
   <offres>
     <% @programs.each do |program| %>
       <formation>
+        <domaine-formation>
+          <code-FORMACODE>...</code-FORMACODE>
+          <code-NSF>...</code-NSF>
+          <code-ROME>...</code-ROME>
+          <extras>N</extras>
+        </domaine-formation>
         <intitule-formation><![CDATA[<%= program.name %>]]></intitule-formation>
+        <% if program.schools.any? %>
+        <nom-organisme><![CDATA[<%= program.schools.first.name %>]]></nom-organisme>
+        <% end %>
+        <objectif-formation><![CDATA[<%= program.objectives %>]]></objectif-formation>
+        <resultats-attendus><![CDATA[<%= program.results %>]]></resultats-attendus>
       </formation>
     <% end %>
   </offres>
