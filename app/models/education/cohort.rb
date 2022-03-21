@@ -31,7 +31,7 @@ class Education::Cohort < ApplicationRecord
                           foreign_key: 'education_cohort_id',
                           association_foreign_key: 'university_person_id'
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> { includes(:academic_year).order('education_academic_years.year DESC') }
 
   def to_s
     "#{program} #{academic_year}"

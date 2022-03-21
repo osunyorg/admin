@@ -1,8 +1,6 @@
 <%
 people_paged = people.ordered.page(params[:page]).per(60)
 %>
-<p><%= people.count %> <%= University::Person::Alumnus.model_name.human(count: 2).downcase %></p>
-
 <div class="row">
   <% people_paged.each do |person| %>
     <div class="col-xxl-2 col-md-3">

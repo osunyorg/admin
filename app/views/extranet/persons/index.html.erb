@@ -1,5 +1,17 @@
 <% content_for :title, University::Person::Alumnus.model_name.human(count: 2) %>
 
-<h1><%= University::Person::Alumnus.model_name.human(count: 2) %></h1>
+<header class="mb-5">
+  <div class="row">
+    <div class="col-md-9">
+      <h1><%= University::Person::Alumnus.model_name.human(count: 2) %></h1>
+    </div>
+    <div class="col-md-3 text-end">
+      <p>
+        <%= @people.count %>
+        <%= University::Person::Alumnus.model_name.human(count: @people.count).downcase %>
+      </p>
+    </div>
+  </div>
+</header>
 
 <%= render 'extranet/persons/list', people: @people %>

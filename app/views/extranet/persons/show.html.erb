@@ -1,8 +1,10 @@
 <% content_for :title, @person %>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-md-9">
-    <h1><%= @person %></h1>
+    <header style="height: 100%">
+      <h1><%= @person %></h1>
+    </header>
   </div>
   <div class="col-md-3">
     <% if @person.picture.attached? %>
@@ -10,5 +12,43 @@
     <% else %>
       <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
     <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <p><%= @person.biography %></p>
+  </div>
+  <div class="offset-md-3 col-md-3">
+    <dl>
+      <% @person.cohorts.each do |cohort| %>
+        <dt><%= cohort.program %></dt>
+        <dd><%= link_to cohort.academic_year, cohort %></dd>
+      <% end %>
+      <% if @person.phone %>
+        <dt><%= University::Person.human_attribute_name(:phone) %></dt>
+        <dd><a href="tel:<%= @person.phone %>" target="_blank" rel="noreferrer"><%= @person.phone %></a></dd>
+      <% end %>
+      <% if @person.email %>
+        <dt><%= University::Person.human_attribute_name(:email) %></dt>
+        <dd><a href="mailto:<%= @person.email %>" target="_blank" rel="noreferrer"><%= @person.email %></a></dd>
+      <% end %>
+      <% if @person.url %>
+        <dt><%= University::Person.human_attribute_name(:url) %></dt>
+        <dd><a href="<%= @person.url %>" target="_blank" rel="noreferrer"><%= @person.url %></a></dd>
+      <% end %>
+      <% if @person.linkedin %>
+        <dt><%= University::Person.human_attribute_name(:linkedin) %></dt>
+        <dd><a href="<%= @person.linkedin %>" target="_blank" rel="noreferrer"><%= @person.linkedin %></a></dd>
+      <% end %>
+      <% if @person.twitter %>
+        <dt><%= University::Person.human_attribute_name(:twitter) %></dt>
+        <dd>
+          <a href="<%= @person.twitter %>" target="_blank" rel="noreferrer">
+            <%= @person.twitter.gsub('https://twitter.com/', '') %>
+          </a>
+        </dd>
+      <% end %>
+    </dl>
   </div>
 </div>

@@ -1,23 +1,26 @@
 <% content_for :title, Education::AcademicYear.model_name.human(count: 2) %>
 
-<h1><%= Education::AcademicYear.model_name.human(count: 2) %></h1>
+<header class="mb-5">
+  <h1><%= Education::AcademicYear.model_name.human(count: 2) %></h1>
+</header>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Education::AcademicYear.model_name.human %></th>
-      <th><%= Education::Cohort.model_name.human(count: 2) %></th>
-      <th><%= University::Person::Alumnus.model_name.human(count: 2) %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @academic_years.each do |year| %>
-      <tr>
-        <td><%= link_to year, year %></td>
-        <td><%= year.cohorts.count %></td>
-        <td><%= year.people.count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <% @academic_years.each do |year| %>
+    <div class="col-md-3">
+      <article class="card mb-4">
+        <div class="card-body">
+          <h2 class="mb-5">
+            <%= link_to year, year, class: 'stretched-link' %>
+          </h2>
+          <p class="text-end mb-0">
+            <%= year.cohorts.count %>
+            <%= Education::Cohort.model_name.human(count: year.cohorts.count).downcase %>
+            <br>
+            <%= year.people.count %>
+            <%= University::Person::Alumnus.model_name.human(count: year.people.count).downcase %>
+          </p>
+        </div>
+      </article>
+    </div>
+  <% end %>
+</div>

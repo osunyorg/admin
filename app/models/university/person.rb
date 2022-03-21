@@ -86,6 +86,11 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
+  has_and_belongs_to_many :cohorts,
+                          class_name: 'Education::Cohort',
+                          foreign_key: 'university_person_id',
+                          association_foreign_key: 'education_cohort_id'
+
   accepts_nested_attributes_for :involvements
 
   validates_presence_of   :first_name, :last_name

@@ -1,21 +1,7 @@
 <% content_for :title, Education::Cohort.model_name.human(count: 2) %>
 
-<h1><%= Education::Cohort.model_name.human(count: 2) %></h1>
+<header class="mb-5">
+  <h1><%= Education::Cohort.model_name.human(count: 2) %></h1>
+</header>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cohorts.each do |cohort| %>
-      <tr>
-        <td><%= link_to cohort, cohort %></td>
-        <td><%= cohort.people.count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'extranet/cohorts/list', cohorts: @cohorts %>

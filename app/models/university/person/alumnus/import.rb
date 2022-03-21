@@ -30,26 +30,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
 
   def parse
     csv.each do |row|
-      # program
-      # year
-      # first_name
-      # last_name
-      # gender
-      # birth
-      # mail
-      # photo
-      # url
-      # phonepro
-      # phoneperso
-      # mobile
-      # address
-      # zipcode
-      # city
-      # country
-      # status
-      # socialtwitter
-      # sociallinkedin
-      # row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
+      row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
       program = university.education_programs
                           .find_by(id: row['program'])
       next if program.nil?
@@ -76,23 +57,38 @@ class University::Person::Alumnus::Import < ApplicationRecord
                            .first_or_create
       end
       # TODO all fields
+      # gender
+      # birth
+      # phonepro
+      # phoneperso
+      # address
+      # zipcode
+      # city
+      # country
+      # status
       person.is_alumnus = true
       person.url = url
       person.slug = person.to_s.parameterize.dasherize
-      person.twitter = row['socialtwitter']
-      person.linkedin = row['sociallinkedin']
+      person.twitter ||= row['socialtwitter']
+      person.linkedin ||= row['sociallinkedin']
+      person.biography ||= row['status']
+      person.phone ||= row['mobile']
       byebug unless person.valid?
       person.save
       cohort.people << person unless person.in?(cohort.people)
-      photo = row['photo'].to_s
-      if photo.end_with?('.jpg') || photo.end_with?('.png')
-        filename = File.basename photo
-        begin
-          file = URI.open photo
-          person.picture.attach(io: file, filename: 'some-image.jpg')
-        rescue
-        end
-      end
+      add_picture person, row['photo']
+    end
+  end
+
+  def add_picture(person, photo)
+    return if photo.nil?
+    return if person.picture.attached?
+    return unless photo.end_with?('.jpg') || photo.end_with?('.png')
+    begin
+      file = URI.open photo
+      filename = File.basename photo
+      person.picture.attach(io: file, filename: filename)
+    rescue
     end
   end
 
