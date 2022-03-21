@@ -1,0 +1,5 @@
+<% if current_context.logo.attached? %>
+  <%= image_tag current_context.logo, width: 200, alt: current_context.to_s, class: 'logo' %>
+<% else %>
+  <%= current_context %>
+<% end %>

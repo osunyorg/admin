@@ -11,12 +11,12 @@
     <%= favicon_link_tag 'favicon.png' %>
   </head>
   <body class="extranet <%= body_classes %>">
-    <%= render 'nav' %>
+    <%= render 'extranet/application/nav' %>
     <main class="container">
-      <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
+      <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder if breadcrumbs.any? %>
       <%= yield %>
     </main>
-    <%= render 'footer' %>
+    <%= render 'extranet/application/footer' %>
     <%= render 'gdpr/cookie_consent' %>
     <%= render 'bugsnag' %>
   </body>
