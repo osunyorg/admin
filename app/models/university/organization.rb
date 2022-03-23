@@ -62,4 +62,10 @@ class University::Organization < ApplicationRecord
   def to_s
     "#{name}"
   end
+
+  protected
+
+  def explicit_blob_ids
+    [logo&.blob_id]
+  end
 end
