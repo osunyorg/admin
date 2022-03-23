@@ -6,9 +6,10 @@ module WithSlug
     validate :slug_must_be_unique
     validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }
 
-    before_validation :regenerate_slug, :make_path
+    before_validation :check_slug, :make_path
 
-    def regenerate_slug
+    def check_slug
+      self.slug = to_s.parameterize if self.slug.blank?
       current_slug = self.slug
       n = 0
       while slug_unavailable?(self.slug)

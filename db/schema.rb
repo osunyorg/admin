@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_08_114213) do
+ActiveRecord::Schema.define(version: 2022_03_23_224105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -384,6 +384,33 @@ ActiveRecord::Schema.define(version: 2022_03_08_114213) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "education_academic_years", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.integer "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_education_academic_years_on_university_id"
+  end
+
+  create_table "education_cohorts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "program_id", null: false
+    t.uuid "academic_year_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["academic_year_id"], name: "index_education_cohorts_on_academic_year_id"
+    t.index ["program_id"], name: "index_education_cohorts_on_program_id"
+    t.index ["university_id"], name: "index_education_cohorts_on_university_id"
+  end
+
+  create_table "education_cohorts_university_people", id: false, force: :cascade do |t|
+    t.uuid "education_cohort_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["education_cohort_id", "university_person_id"], name: "index_cohort_person"
+    t.index ["university_person_id", "education_cohort_id"], name: "index_person_cohort"
+  end
+
   create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -609,12 +636,13 @@ ActiveRecord::Schema.define(version: 2022_03_08_114213) do
     t.string "country"
     t.string "url"
     t.string "phone"
-    t.string "mail"
+    t.string "email"
     t.boolean "active", default: true
     t.string "sirene"
     t.integer "kind", default: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -638,8 +666,18 @@ ActiveRecord::Schema.define(version: 2022_03_08_114213) do
     t.string "url"
     t.string "twitter"
     t.string "linkedin"
+    t.boolean "is_alumnus", default: false
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
+  end
+
+  create_table "university_person_alumnus_imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_university_person_alumnus_imports_on_university_id"
+    t.index ["user_id"], name: "index_university_person_alumnus_imports_on_user_id"
   end
 
   create_table "university_person_involvements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -756,6 +794,10 @@ ActiveRecord::Schema.define(version: 2022_03_08_114213) do
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_website_posts", "university_people", column: "author_id"
   add_foreign_key "communication_websites", "universities"
+  add_foreign_key "education_academic_years", "universities"
+  add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"
+  add_foreign_key "education_cohorts", "education_programs", column: "program_id"
+  add_foreign_key "education_cohorts", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
@@ -780,6 +822,8 @@ ActiveRecord::Schema.define(version: 2022_03_08_114213) do
   add_foreign_key "university_organizations", "universities"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "users"
+  add_foreign_key "university_person_alumnus_imports", "universities"
+  add_foreign_key "university_person_alumnus_imports", "users"
   add_foreign_key "university_person_involvements", "universities"
   add_foreign_key "university_person_involvements", "university_people", column: "person_id"
   add_foreign_key "university_roles", "universities"

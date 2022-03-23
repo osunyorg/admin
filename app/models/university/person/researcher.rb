@@ -9,6 +9,7 @@
 #  first_name        :string
 #  habilitation      :boolean          default(FALSE)
 #  is_administration :boolean
+#  is_alumnus        :boolean          default(FALSE)
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string

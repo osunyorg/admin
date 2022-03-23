@@ -60,6 +60,12 @@ module WithGit
 
   protected
 
+  def in_block_dependencies?(website)
+    website.blocks.find_each do |block|
+      return true if in? block.git_dependencies
+    end
+  end
+
   def websites_for_self
     if is_a? Communication::Website
       [self]

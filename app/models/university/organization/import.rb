@@ -51,7 +51,7 @@ class University::Organization::Import < ApplicationRecord
           :zipcode,
           :city,
           :country,
-          :mail,
+          :email,
           :phone,
           :url,
         ].each do |property|

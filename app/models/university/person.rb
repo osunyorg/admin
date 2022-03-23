@@ -9,6 +9,7 @@
 #  first_name        :string
 #  habilitation      :boolean          default(FALSE)
 #  is_administration :boolean
+#  is_alumnus        :boolean          default(FALSE)
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
@@ -143,12 +144,6 @@ class University::Person < ApplicationRecord
 
   def teacher
     @teacher ||= University::Person::Teacher.find(id)
-  end
-
-  def in_block_dependencies?(website)
-    website.blocks.find_each do |block|
-      return true if in? block.git_dependencies
-    end
   end
 
   def for_website?(website)
