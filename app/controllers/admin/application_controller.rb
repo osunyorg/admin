@@ -1,7 +1,6 @@
 class Admin::ApplicationController < ApplicationController
   layout 'admin/layouts/application'
 
-  before_action :authenticate_user!
   around_action :switch_locale
 
   protected

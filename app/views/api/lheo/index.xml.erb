@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lheo xmlns="http://lheo.gouv.fr/2.3">
+  <offres>
+    <% @programs.each do |program| %>
+      <formation>
+        <domaine-formation>
+          <code-FORMACODE>...</code-FORMACODE>
+          <code-NSF>...</code-NSF>
+          <code-ROME>...</code-ROME>
+          <extras>N</extras>
+        </domaine-formation>
+        <intitule-formation><![CDATA[<%= program.name %>]]></intitule-formation>
+        <% if program.schools.any? %>
+        <nom-organisme><![CDATA[<%= program.schools.first.name %>]]></nom-organisme>
+        <% end %>
+        <objectif-formation><![CDATA[<%= program.best_objectives %>]]></objectif-formation>
+        <resultats-attendus><![CDATA[<%= program.best_results %>]]></resultats-attendus>
+        <contenu-formation><![CDATA[<%= program.best_content %>]]></contenu-formation>
+        <certifiante>1</certifiante>
+      </formation>
+    <% end %>
+  </offres>
+</lheo>

@@ -1,7 +1,49 @@
-footer
-    margin-top: 100px
 
 .alert
     padding: .95rem
     &-danger
         color: #82322F
+
+.extranet
+    .navbar
+        margin-bottom: 100px
+        .navbar-brand
+            img
+                max-width: 100px
+    header
+        border-bottom: 1px solid
+        border-top: 1px solid
+        min-height: 160px
+        h1, p
+            padding-top: 3rem
+    footer
+        margin-top: 100px
+        .logo
+            width: 100px
+
+.breadcrumb
+    font-size: 14px
+    padding-bottom: 50px
+.card
+    background: black
+    border: none
+    &, a
+        color: white
+        text-decoration-color: rgba(white, 0.5)
+        &:hover
+            text-decoration-color: white
+
+a
+    color: $primary
+    text-decoration-color: adjust-color($primary, $alpha: -0.8)
+    text-decoration-thickness: 1px
+    text-underline-offset: 3px
+    transition: text-decoration 0.5s
+    &:hover
+        text-decoration-color: $primary
+    &[target="_blank"]
+        &::after
+            background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij48cGF0aCBkPSJNOSAyTDkgMyAxMi4zIDMgNiA5LjMgNi43IDEwIDEzIDMuNyAxMyA3IDE0IDcgMTQgMlpNNCA0QzIuOSA0IDIgNC45IDIgNkwyIDEyQzIgMTMuMSAyLjkgMTQgNCAxNEwxMCAxNEMxMS4xIDE0IDEyIDEzLjEgMTIgMTJMMTIgNyAxMSA4IDExIDEyQzExIDEyLjYgMTAuNiAxMyAxMCAxM0w0IDEzQzMuNCAxMyAzIDEyLjYgMyAxMkwzIDZDMyA1LjQgMy40IDUgNCA1TDggNSA5IDRaIi8+PC9zdmc+) no-repeat
+            background-size: contain
+            content: ""
+            display: inline-block

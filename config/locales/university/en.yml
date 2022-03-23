@@ -64,6 +64,9 @@ en:
       university/person/involvement:
         one: Involvement
         other: Involvements
+      university/person/alumnus:
+        one: Alumnus
+        other: Alumni
       university/organization:
         one: Third party
         other: Third parties

@@ -1,0 +1,23 @@
+<% content_for :title, University::Organization.model_name.human(count: 2) %>
+
+<header class="mb-5">
+  <h1><%= University::Organization.model_name.human(count: 2) %></h1>
+</header>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= University::Organization.human_attribute_name('name') %></th>
+      <th><%= University::Organization.human_attribute_name('kind') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td><%= link_to organization, organization %></td>
+        <td><%= organization.kind %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @organizations, theme: 'bootstrap-5' %>

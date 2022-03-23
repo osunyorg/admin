@@ -11,6 +11,9 @@ module University::Person::WithEducation
               through: :involvements_as_teacher,
               source: :target,
               source_type: "Education::Program"
+
+    has_and_belongs_to_many :cohorts,
+                            class_name: 'Education::Cohort'
   end
 
   def education_programs_as_administrator

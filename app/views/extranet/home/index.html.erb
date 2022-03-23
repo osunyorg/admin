@@ -1,0 +1,5 @@
+<% content_for :title, current_context %>
+
+<h2><%= Education::Cohort.model_name.human(count: 2) %></h2>
+<p><%= link_to 'Voir toutes les promotions', education_cohorts_path %></p>
+<%= render 'extranet/cohorts/list', cohorts: @cohorts %>
