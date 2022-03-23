@@ -124,7 +124,7 @@ class University::Person < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = website.menus
+    dependencies = website.menus.to_a
     if for_website?(website)
       dependencies << self
       dependencies.concat active_storage_blobs
