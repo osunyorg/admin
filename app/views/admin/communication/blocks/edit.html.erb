@@ -5,6 +5,9 @@
 @block.data['elements'] ||= []
 %>
 <div id="app" v-cloak>
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
   <%= simple_form_for [:admin, @block] do |f| %>
     <div class="row">
       <div class="col-xxl-4 col-md-6">

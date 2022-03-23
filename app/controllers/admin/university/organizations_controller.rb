@@ -60,7 +60,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def organization_params
     params.require(:university_organization)
           .permit(
-            :name, :long_name, :description, :active, :sirene, :kind,
+            :name, :long_name, :slug, :description, :active, :sirene, :kind,
             :address, :zipcode, :city, :country,
             :website, :phone, :mail, :logo, :logo_delete
           )

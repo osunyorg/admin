@@ -7,6 +7,12 @@
         </div>
         <div class="card-body">
           <%= f.input :name %>
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: organization.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#university_organization_name' }
+                      } %>
           <%= f.input :long_name %>
           <%= f.input :kind, include_blank: false %>
           <%= f.input :active %>

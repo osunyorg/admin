@@ -8,12 +8,13 @@
 #  city          :string
 #  country       :string
 #  description   :text
+#  email         :string
 #  kind          :integer          default("company")
 #  long_name     :string
-#  mail          :string
 #  name          :string
 #  phone         :string
 #  sirene        :string
+#  slug          :string
 #  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null

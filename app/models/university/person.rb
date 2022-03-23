@@ -152,12 +152,6 @@ class University::Person < ApplicationRecord
     @teacher ||= University::Person::Teacher.find(id)
   end
 
-  def in_block_dependencies?(website)
-    website.blocks.find_each do |block|
-      return true if in? block.git_dependencies
-    end
-  end
-
   def for_website?(website)
     in_block_dependencies?(website) ||
     administrator.for_website?(website) ||

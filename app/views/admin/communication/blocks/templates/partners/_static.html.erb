@@ -1,9 +1,15 @@
 <% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |partner| %>
+<% block.data['elements'].each do |partner|
+      id = partner['id']
+      unless id.blank?
+        organization = block.university.organizations.find id %>
+      - id: "<%= id %>"
+      <% else %>
       - name: >
           <%= prepare_text_for_static partner['name'] %>
         url: >-
           <%= prepare_text_for_static partner['url'] %>
         logo: "<%= prepare_media_for_static partner, 'logo' %>"
+      <% end %>
 <% end %>
 <% end %>

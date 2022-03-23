@@ -8,12 +8,13 @@
 #  city          :string
 #  country       :string
 #  description   :text
+#  email         :string
 #  kind          :integer          default("company")
 #  long_name     :string
-#  mail          :string
 #  name          :string
 #  phone         :string
 #  sirene        :string
+#  slug          :string
 #  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null
@@ -32,6 +33,7 @@ class University::Organization < ApplicationRecord
   include WithGit
   include WithBlobs
   include WithUniversity
+  include WithSlug
 
   has_one_attached_deletable :logo
 
@@ -44,6 +46,18 @@ class University::Organization < ApplicationRecord
     non_profit: 20,
     government: 30
   }
+
+  def websites
+    university.communication_websites
+  end
+
+  def for_website?(website)
+    in_block_dependencies?(website)
+  end
+
+  def git_path(website)
+    "content/organizations/#{slug}.html" if for_website?(website)
+  end
 
   def to_s
     "#{name}"
