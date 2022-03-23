@@ -10,9 +10,9 @@ class Communication::Block::Partner < Communication::Block::Abstract
   protected
 
   def add_partner(id)
-    next if id.blank?
+    return if id.blank?
     organization = university.organizations.find id
-    next if organization.nil?
+    return if organization.nil?
     add_dependency organization
     add_dependency organization.active_storage_blobs
   end
