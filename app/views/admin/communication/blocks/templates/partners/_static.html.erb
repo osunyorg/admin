@@ -3,7 +3,7 @@
       id = partner['id']
       unless id.blank?
         organization = block.university.organizations.find id %>
-      - id: "<%= id %>"
+      - slug: "<%= organization.slug %>"
       <% else %>
       - name: >
           <%= prepare_text_for_static partner['name'] %>
