@@ -31,4 +31,6 @@ namespace :education do
       get :children
     end
   end
+  resources :academic_years
+  resources :cohorts
 end

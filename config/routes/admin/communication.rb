@@ -57,4 +57,9 @@ namespace :communication do
     end
   end
   resources :extranets, controller: 'extranets'
+  resources :alumni do
+    collection do
+      resources :imports, only: [:index, :show, :new, :create]
+    end
+  end
 end

@@ -86,6 +86,11 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
+  has_and_belongs_to_many :cohorts,
+                          class_name: 'Education::Cohort',
+                          foreign_key: 'university_person_id',
+                          association_foreign_key: 'education_cohort_id'
+
   accepts_nested_attributes_for :involvements
 
   validates_presence_of   :first_name, :last_name
@@ -101,9 +106,10 @@ class University::Person < ApplicationRecord
   before_validation :sanitize_email
 
   scope :ordered,         -> { order(:last_name, :first_name) }
-  scope :administration, -> { where(is_administration: true) }
+  scope :administration,  -> { where(is_administration: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
+  scope :alumni,          -> { where(is_alumnus: true) }
 
   def to_s
     "#{first_name} #{last_name}"
@@ -118,7 +124,7 @@ class University::Person < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = website.menus
+    dependencies = website.menus.to_a
     if for_website?(website)
       dependencies << self
       dependencies.concat active_storage_blobs

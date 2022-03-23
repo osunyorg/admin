@@ -10,6 +10,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :university, University.model_name.human, nil, { kind: :header }
       primary.item :university, University::Person.model_name.human(count: 2), admin_university_people_path, { icon: 'users-cog' }
       primary.item :university, University::Organization.model_name.human(count: 2), admin_university_organizations_path, { icon: 'building' }
+      primary.item :communication_alumni, University::Person::Alumnus.model_name.human(count: 2), admin_university_person_alumni_path, { icon: 'users' }
     end
 
     if can?(:read, Education::Program)
@@ -35,7 +36,6 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :communication_websites, Communication::Website.model_name.human(count: 2), admin_communication_websites_path, { icon: 'sitemap' } if can?(:read, Communication::Website)
       primary.item :communication_extranets, Communication::Extranet.model_name.human(count: 2), admin_communication_extranets_path, { icon: 'project-diagram' }
       primary.item :communication_newsletters, 'Lettres d\'information', nil, { icon: 'envelope' }
-      primary.item :communication_alumni, 'Alumni', nil, { icon: 'users' }
     end
 
     if can?(:read, Administration::Qualiopi::Criterion)

@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include WithLocale
   include WithDomain
 
+  before_action :authenticate_user!
+
   def breadcrumb
     add_breadcrumb t('home'), root_path
   end
