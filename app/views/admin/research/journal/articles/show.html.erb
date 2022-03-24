@@ -54,7 +54,10 @@
   </div>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @article %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @article %>
-  <%= destroy_link @article %>
 <% end %>

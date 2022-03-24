@@ -14,7 +14,10 @@
   <%= render 'admin/research/laboratory/axes/list', axes: @axes %>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @laboratory %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @laboratory %>
-  <%= destroy_link @laboratory %>
 <% end %>

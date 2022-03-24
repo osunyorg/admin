@@ -79,7 +79,10 @@
   </div>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @volume %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @volume %>
-  <%= destroy_link @volume %>
 <% end %>

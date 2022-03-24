@@ -91,6 +91,13 @@ fr:
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
+  enums:
+    university:
+      organization:
+        kind:
+          company: Entreprise
+          non_profit: Association
+          government: Structure gouvernementale
   university:
     invoice_informations: Données de facturation
     person:

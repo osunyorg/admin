@@ -20,7 +20,10 @@
   </div>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @axis %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @axis %>
-  <%= destroy_link @axis %>
 <% end %>

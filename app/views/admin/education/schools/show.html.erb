@@ -58,7 +58,10 @@
 
 <%= render 'admin/education/schools/show/roles', roles: @roles %>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @school %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @school %>
-  <%= destroy_link @school %>
 <% end %>

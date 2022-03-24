@@ -122,8 +122,11 @@
   <% end %>
 <% end %>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @program %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= preview_link %>
   <%= edit_link @program %>
-  <%= destroy_link @program %>
 <% end %>

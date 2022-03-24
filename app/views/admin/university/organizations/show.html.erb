@@ -55,7 +55,10 @@
   <%= @organization.kind %>
 </p>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @organization %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @organization %>
-  <%= destroy_link @organization %>
 <% end %>

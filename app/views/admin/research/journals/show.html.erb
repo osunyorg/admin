@@ -55,7 +55,10 @@
   <%= render 'admin/research/journal/articles/list', articles: @articles %>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @journal %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @journal %>
-  <%= destroy_link @journal %>
 <% end %>

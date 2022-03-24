@@ -89,6 +89,13 @@ en:
         linkedin: "Example: https://www.linkedin.com/in/osuny"
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
+  enums:
+    university:
+      organization:
+        kind:
+          company: Company
+          non_profit: Association
+          government: Government
   university:
     invoice_informations: Invoice informations
     person:

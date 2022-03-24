@@ -1,6 +1,9 @@
 <% content_for :title, @thesis %>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @thesis %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @thesis %>
-  <%= destroy_link @thesis %>
 <% end %>
