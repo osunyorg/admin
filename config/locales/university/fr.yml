@@ -50,6 +50,18 @@ fr:
         name: Nom
         long_name: Nom complet
         description: Description (SEO)
+        text: Texte
+        contact: Informations de contact
+        legal: Informations légales
+        address: Adresse
+        zipcode: Code postal
+        city: Ville
+        country: Pays
+        url: Site Web
+        phone: Téléphone
+        email: Email
+        kind: Type
+        sirene: Numéro de SIRENE
       university/organization/import:
         file: Fichier (.csv)
       university/role:

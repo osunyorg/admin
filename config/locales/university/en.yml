@@ -49,6 +49,18 @@ en:
         name: Name
         long_name: Long name
         description: Description (SEO)
+        text: Text
+        contact: Contact information
+        legal: Legal information
+        address: Address
+        zipcode: Zipcode
+        city: City
+        country: Country
+        url: Website
+        phone: Telephone
+        email: Email
+        kind: Kind
+        sirene: Legal identification number
       university/organization/import:
         file: File (.csv)
       university/role:

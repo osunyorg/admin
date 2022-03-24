@@ -19,3 +19,4 @@ logo: "<%= @about.logo.blob.id %>"
 description: >
   <%= prepare_text_for_static @about.description %>
 ---
+<%= prepare_html_for_static @about.text, @about.university %>

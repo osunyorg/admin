@@ -1,49 +1,89 @@
 <%= simple_form_for [:admin, organization] do |f| %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('content') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :name %>
+          <%= f.input :description %>
+          <%= f.input :text, as: :summernote %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <%= University::Organization.human_attribute_name('contact') %>
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :address %>
+              <%= f.input :zipcode %>
+              <%= f.input :city %>
+              <%= f.input :country %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :url %>
+              <%= f.input :phone %>
+              <%= f.input :email %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <%= University::Organization.human_attribute_name('legal') %>
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :long_name %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :kind, include_blank: false %>
+              <%= f.input :sirene %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('informations') %></h5>
+        </div>
+        <div class="card-body">
           <%= f.input :slug,
                       as: :string,
                       input_html: organization.persisted? ? {} : {
                         class: 'js-slug-input',
                         data: { source: '#university_organization_name' }
                       } %>
-          <%= f.input :long_name %>
-          <%= f.input :kind, include_blank: false %>
           <%= f.input :active %>
-          <%= f.input :sirene %>
-          <%= f.input :description %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <%= University::Organization.human_attribute_name('logo') %>
+          </h5>
+        </div>
+        <div class="card-body">
           <%= f.input :logo,
                       as: :single_deletable_file,
+                      label: false,
                       input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                       preview: 200,
                       resize: 1,
                       direct_upload: true %>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= University::Organization.human_attribute_name('contact_informations') %>
-          </h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :address %>
-          <%= f.input :zipcode %>
-          <%= f.input :city %>
-          <%= f.input :country %>
-          <%= f.input :url %>
-          <%= f.input :phone %>
-          <%= f.input :email %>
-        </div>
-      </div>
+
     </div>
   </div>
   <% content_for :action_bar_right do %>
