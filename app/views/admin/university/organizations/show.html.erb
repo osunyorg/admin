@@ -29,7 +29,9 @@
             <% end %>
           </div>
           <div class="col-md-6">
-            <% [:url, :phone, :email].each do |property| %>
+            <h3 class="h5"><%= University::Organization.human_attribute_name(:url) %></h3>
+            <p><%= link_to @organization.url, @organization.url, target: :_blank %></p>
+            <% [:phone, :email].each do |property| %>
               <h3 class="h5"><%= University::Organization.human_attribute_name(property) %></h3>
               <p><%= @organization.send property %></p>
             <% end %>
