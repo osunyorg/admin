@@ -1,1 +1,6 @@
 <% content_for :title, @alumnus %>
+
+<h2><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
+<% @alumnus.cohorts.each do |cohort| %>
+  <%= link_to cohort, [:admin, cohort] %>
+<% end %>

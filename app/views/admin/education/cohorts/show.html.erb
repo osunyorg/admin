@@ -1,24 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>University:</strong>
-  <%= @education_cohort.university_id %>
-</p>
+<% content_for :title, @cohort %>
 
 <p>
   <strong>Program:</strong>
-  <%= @education_cohort.program_id %>
+  <%= link_to @cohort.program, [:admin, @cohort.program] %>
 </p>
 
 <p>
   <strong>Academic year:</strong>
-  <%= @education_cohort.academic_year_id %>
+  <%= link_to @cohort.academic_year, [:admin, @cohort.academic_year] %>
 </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @education_cohort.name %>
-</p>
+<h2><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
 
-<%= link_to 'Edit', edit_education_cohort_path(@education_cohort) %> |
-<%= link_to 'Back', education_cohorts_path %>
+<%= render 'admin/university/person/alumni/list', alumni: @cohort.people.ordered %>

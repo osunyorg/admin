@@ -15,6 +15,7 @@
 #  phone         :string
 #  sirene        :string
 #  slug          :string
+#  text          :text
 #  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null
@@ -34,6 +35,8 @@ class University::Organization < ApplicationRecord
   include WithBlobs
   include WithUniversity
   include WithSlug
+
+  has_summernote :text
 
   has_one_attached_deletable :logo
 

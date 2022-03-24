@@ -1,33 +1,3 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, Education::Cohort.model_name.human(count: 2) %>
 
-<h1>Education Cohorts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>University</th>
-      <th>Program</th>
-      <th>Academic year</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @education_cohorts.each do |education_cohort| %>
-      <tr>
-        <td><%= education_cohort.university_id %></td>
-        <td><%= education_cohort.program_id %></td>
-        <td><%= education_cohort.academic_year_id %></td>
-        <td><%= education_cohort.name %></td>
-        <td><%= link_to 'Show', education_cohort %></td>
-        <td><%= link_to 'Edit', edit_education_cohort_path(education_cohort) %></td>
-        <td><%= link_to 'Destroy', education_cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Education Cohort', new_education_cohort_path %>
+<%= render 'admin/education/cohorts/list', cohorts: @cohorts %>

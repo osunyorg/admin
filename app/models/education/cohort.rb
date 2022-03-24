@@ -34,6 +34,6 @@ class Education::Cohort < ApplicationRecord
   scope :ordered, -> { includes(:academic_year).order('education_academic_years.year DESC') }
 
   def to_s
-    "#{program} #{academic_year}"
+    "#{program} #{academic_year} #{name}"
   end
 end

@@ -104,7 +104,10 @@ class Education::Program < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
-  has_many :websites, -> { distinct }, through: :schools
+  has_many   :cohorts,
+             class_name: 'Education::Cohort'
+  has_many   :websites, -> { distinct },
+             through: :schools
 
   accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 

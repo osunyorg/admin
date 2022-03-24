@@ -60,6 +60,7 @@ class Ability
     can [:read, :update], Communication::Website::IndexPage, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id, website_id: managed_websites_ids
     can :create, Communication::Website::Menu::Item, university_id: @user.university_id
+    can :manage, University::Organization, university_id: @user.university_id
   end
 
   def admin
@@ -86,6 +87,7 @@ class Ability
     can :manage, Research::Laboratory, university_id: @user.university_id
     can :manage, University::Role, university_id: @user.university_id
     can :manage, University::Person::Involvement, university_id: @user.university_id
+    can :manage, University::Organization, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
   end

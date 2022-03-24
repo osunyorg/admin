@@ -13,7 +13,9 @@ module University::Person::WithEducation
               source_type: "Education::Program"
 
     has_and_belongs_to_many :cohorts,
-                            class_name: 'Education::Cohort'
+                            class_name: 'Education::Cohort',
+                            foreign_key: 'university_person_id',
+                            association_foreign_key: 'education_cohort_id'
   end
 
   def education_programs_as_administrator
