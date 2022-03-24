@@ -11,7 +11,7 @@
           <p><%= @organization.send property %></p>
         <% end %>
         <h3 class="h5"><%= University::Organization.human_attribute_name(:text) %></h3>
-        <%= @organization.text.html_safe %>
+        <%= @organization.text.to_s.html_safe %>
       </div>
     </div>
     <div class="card flex-fill w-100">
