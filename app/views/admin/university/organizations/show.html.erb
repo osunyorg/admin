@@ -1,59 +1,88 @@
 <% content_for :title, @organization %>
-
-<p>
-  <strong>Description:</strong>
-  <%= @organization.description %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @organization.address %>
-</p>
-
-<p>
-  <strong>Zipcode:</strong>
-  <%= @organization.zipcode %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @organization.city %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @organization.country %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @organization.url %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @organization.phone %>
-</p>
-
-<p>
-  <strong>Mail:</strong>
-  <%= @organization.email %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @organization.active %>
-</p>
-
-<p>
-  <strong>Sirene:</strong>
-  <%= @organization.sirene %>
-</p>
-
-<p>
-  <strong>Kind:</strong>
-  <%= @organization.kind %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('content') %></h5>
+      </div>
+      <div class="card-body">
+        <% [:name, :description].each do |property| %>
+          <h3 class="h5"><%= University::Organization.human_attribute_name(property) %></h3>
+          <p><%= @organization.send property %></p>
+        <% end %>
+        <h3 class="h5"><%= University::Organization.human_attribute_name(:text) %></h3>
+        <%= @organization.text.html_safe %>
+      </div>
+    </div>
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <%= University::Organization.human_attribute_name('contact') %>
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <% [:address, :zipcode, :city, :country].each do |property| %>
+              <h3 class="h5"><%= University::Organization.human_attribute_name(property) %></h3>
+              <p><%= @organization.send property %></p>
+            <% end %>
+          </div>
+          <div class="col-md-6">
+            <% [:url, :phone, :email].each do |property| %>
+              <h3 class="h5"><%= University::Organization.human_attribute_name(property) %></h3>
+              <p><%= @organization.send property %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <%= University::Organization.human_attribute_name('legal') %>
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 class="h5"><%= University::Organization.human_attribute_name(:long_name) %></h3>
+            <p><%= @organization.long_name %></p>
+          </div>
+          <div class="col-md-6">
+            <h3 class="h5"><%= University::Organization.human_attribute_name(:kind) %></h3>
+            <p><%= @organization.kind_i18n %></p>
+            <h3 class="h5"><%= University::Organization.human_attribute_name(:sirene) %></h3>
+            <p><%= @organization.sirene %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0"><%= t('informations') %></h5>
+      </div>
+      <div class="card-body">
+        <h3 class="h5"><%= University::Organization.human_attribute_name(:slug) %></h3>
+        <p><%= @organization.slug %></p>
+        <h3 class="h5"><%= University::Organization.human_attribute_name(:active) %></h3>
+        <%= @organization.active %>
+      </div>
+    </div>
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <%= University::Organization.human_attribute_name('logo') %>
+        </h5>
+      </div>
+      <div class="card-body">
+        <%= kamifusen_tag @organization.logo, class: 'img-fluid' %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>
