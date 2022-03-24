@@ -1,0 +1,30 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Education::Cohort.human_attribute_name('year') %></th>
+      <th><%= Education::Cohort.human_attribute_name('program') %></th>
+      <th><%= Education::Cohort.human_attribute_name('alumni') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cohorts.ordered.each do |cohort| %>
+      <tr>
+        <td>
+          <%= link_to [:admin, cohort] do %>
+            <%= cohort.academic_year %>
+            <%= cohort.name %>
+          <% end %>
+        </td>
+        <td><%= link_to cohort.program, [:admin, cohort.program] %></td>
+        <td><%= cohort.people.count %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link cohort %>
+            <%= destroy_link cohort %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,3 @@
+<% content_for :title, Education::AcademicYear.model_name.human(count: 2) %>
+
+<%= render 'admin/education/academic_years/list', academic_years: @academic_years %>
