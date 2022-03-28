@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_081520) do
+ActiveRecord::Schema.define(version: 2022_03_28_131728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -318,6 +318,9 @@ ActiveRecord::Schema.define(version: 2022_03_24_081520) do
     t.uuid "related_category_id"
     t.string "featured_image_alt"
     t.text "text"
+    t.string "breadcrumb_title"
+    t.text "header_text"
+    t.integer "kind"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -470,23 +473,6 @@ ActiveRecord::Schema.define(version: 2022_03_24_081520) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
-  end
-
-  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "zipcode"
-    t.string "city"
-    t.string "country"
-    t.string "website"
-    t.string "phone"
-    t.string "mail"
-    t.boolean "active"
-    t.string "sirene"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

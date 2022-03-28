@@ -7,36 +7,44 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
+          <%= f.input :breadcrumb_title %>
           <%= f.input :description %>
+          <%= f.input :header_text,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
           <%= f.input :text, as: :summernote %>
           <%= f.association :related_category,
                             collection: collection_tree(@website.categories),
                             label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } if @website.categories.any? %>
+                            value_method: ->(p) { p[:id] } if @website.categories.any? && page.is_not_special_page? %>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+      <% unless page.kind_home? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+          </div>
+          <div class="card-body">
+            <%= f.input :slug,
+                        as: :string,
+                        input_html: page.persisted? ? {} : {
+                          class: 'js-slug-input',
+                          data: { source: '#communication_website_page_title' }
+                        } unless page.kind_home? %>
+            <%= f.input :published if page.is_not_special_page? %>
+            <%= f.association :parent,
+                              collection: collection_tree(@website.pages, page),
+                              label_method: ->(p) { sanitize p[:label] },
+                              value_method: ->(p) { p[:id] } unless page.kind_home? %>
+            <ul>
+            </ul>
+          </div>
         </div>
-        <div class="card-body">
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: page.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#communication_website_page_title' }
-                      } %>
-          <%= f.input :published %>
-          <%= f.association :parent,
-                            collection: collection_tree(@website.pages, page),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } %>
-          <ul>
-          </ul>
-        </div>
-      </div>
+      <% end %>
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/page.featured_image') %></h5>

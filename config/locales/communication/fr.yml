@@ -86,15 +86,17 @@ fr:
         title: Titre
         url: URL
       communication/website/page:
-        related_category: Catégorie liée
+        breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Description (SEO)
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
+        header_text: Texte affiché dans le header
         parent: Page parente
         published: Publié ?
+        related_category: Catégorie liée
         slug: Slug
-        text: Texte
+        text: Texte de la page
         title: Titre
         website: Site Web
       communication/website/post:
@@ -157,6 +159,9 @@ fr:
               photo_label: Photo
               remove_photo: Enlever la photo
               remove_testimonial: Enlever le témoignage
+      website:
+        pages:
+          delete_special_page_notice: Impossible de supprimer cette page
   communication:
     authors:
       one: Auteur·rice
@@ -258,5 +263,5 @@ fr:
               url: URL
   simple_form:
     hints:
-      communication_website_index_page:
+      communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
