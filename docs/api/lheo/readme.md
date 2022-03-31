@@ -12,7 +12,7 @@ https://bordeauxmontaigne.osuny.org/api/lheo
 
 ## Étapes
 
-- Implémenter le 1er cercle
+- Implémenter [le 1er cercle](formation/cercle-1.md)
   Doc : http://lheo.gouv.fr/2.3/cercle1.html (à faire d'urgence)
 - Implémenter le 2e cercle
   Doc : http://lheo.gouv.fr/2.3/cercle2.html
