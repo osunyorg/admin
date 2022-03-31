@@ -4,34 +4,39 @@ http://lheo.gouv.fr/2.3/cercle1.html
 
 ## Informations
 
-- Domaine de la formation (NSF, FORMACODE, ROME)
-- Intitulé de la formation
-- Organisme de formation responsable
-  - Nom de l’organisme de formation responsable
-  - Numéro de déclaration d’activité
-  - Numéro SIRET de l’organisme de formation
-  - Raison sociale de l’organisme
-  - Coordonnées de l’organisme
-  - Contact avec l’organisme
-- Objectif de formation
-- Résultats attendus de la formation
-- Contenu de la formation
-- Formation certifiante
-- Action de formation
-  - Rythme de la formation
-  - Niveau à l’entrée en formation obligatoire
-  - Modalités de l’alternance
-  - Formation présentielle ou à distance
-  - Conditions spécifiques et prérequis
-  - Prise en charge des frais de formation possible
-  - Modalités d’entrées/sorties
-  - Session de formation
-    - Période (format ISO AAAAMMJJ)
-    - Adresse d’inscription
-  - Code de public visé
-- Contact de l’offre de formation
-- Type de parcours de formation
-- Niveau à l’entrée en formation
+- [ ] Domaine de la formation (NSF, FORMACODE, ROME)
+  - [ ] Code FORMACODE
+  - [ ] Code NSF
+  - [ ] Code ROME
+- [ ] Intitulé de la formation
+- [ ] Organisme de formation responsable
+  - [ ] Nom de l’organisme de formation responsable
+  - [ ] Numéro de déclaration d’activité
+  - [ ] Numéro SIRET de l’organisme de formation
+  - [ ] Raison sociale de l’organisme
+  - [ ] Coordonnées de l’organisme
+  - [ ] Contact avec l’organisme
+- [ ] Objectif de formation
+- [ ] Résultats attendus de la formation
+- [ ] Contenu de la formation
+- [ ] Formation certifiante
+- [ ] Action de formation
+  - [ ] Rythme de la formation
+  - [ ] Niveau à l’entrée en formation obligatoire
+  - [ ] Modalités de l’alternance
+  - [ ] Formation présentielle ou à distance
+  - [ ] Conditions spécifiques et prérequis
+  - [ ] Prise en charge des frais de formation possible
+  - [ ] Modalités d’entrées/sorties
+  - [ ] Session de formation
+    - [ ] Période (format ISO AAAAMMJJ)
+      - [ ] Début
+      - [ ] Fin
+    - [ ] Adresse d’inscription
+  - [ ] Code de public visé
+- [ ] Contact de l’offre de formation
+- [ ] Type de parcours de formation
+- [ ] Niveau à l’entrée en formation
 
 ## XML
 
@@ -39,8 +44,11 @@ http://lheo.gouv.fr/2.3/cercle1.html
 <formation>
   <!-- Domaine de la formation (NSF, FORMACODE, ROME) -->
   <domaine-formation> <!-- [1,1] -->
+    <!-- Code FORMACODE -->
     <code-FORMACODE>...</code-FORMACODE> <!-- [0,5] -->
+    <!-- Code NSF -->
     <code-NSF>...</code-NSF> <!-- [0,3] -->
+    <!-- Code ROME -->
     <code-ROME>...</code-ROME> <!-- [0,5] -->
   </domaine-formation>
   <!-- Intitulé de la formation -->
@@ -80,8 +88,10 @@ http://lheo.gouv.fr/2.3/cercle1.html
     <!-- Session de formation -->
     <session> <!-- [1,N] -->
       <!-- Période -->
-      <periode>
+      <periode> <!-- [1,1] -->
+        <!-- Début -->
         <debut>...</debut> <!-- [1,1] -->
+        <!-- Fin -->
         <fin>...</fin> <!-- [1,1] -->
       </periode>
       <!-- Adresse d’inscription -->
