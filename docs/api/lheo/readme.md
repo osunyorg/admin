@@ -19,11 +19,11 @@ https://bordeauxmontaigne.osuny.org/api/lheo
 
 ## Éléments manquants
 
-- <domaine-formation>
+- `<domaine-formation>`
   - Doc : http://lheo.gouv.fr/2.3/lheo/domaine-formation.html
   - Codes ROME (Amethys) : https://code.ametys.org/projects/ODF/repos/odf/browse/main/plugin-odf/doc/constants/code_rome.xml
   - Quel code utiliser ? Comment l'interfacer automatiquement ?
-- <certifiante>
+- `<certifiante>`
   - Doc : http://lheo.gouv.fr/2.3/lheo/certifiante.html
   - A priori les universités n'ont que des formations certifiantes, mais le privé pas forcément.
     Ajouter une checkbox ? Et en faire dépendre le champ "nom du diplôme" ?
