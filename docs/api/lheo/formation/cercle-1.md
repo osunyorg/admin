@@ -8,18 +8,18 @@ http://lheo.gouv.fr/2.3/cercle1.html
   - [ ] Code FORMACODE
   - [ ] Code NSF
   - [ ] Code ROME
-- [ ] Intitulé de la formation
+- [x] Intitulé de la formation
 - [ ] Organisme de formation responsable
-  - [ ] Nom de l’organisme de formation responsable
+  - [x] Nom de l’organisme de formation responsable
   - [ ] Numéro de déclaration d’activité
   - [ ] Numéro SIRET de l’organisme de formation
   - [ ] Raison sociale de l’organisme
   - [ ] Coordonnées de l’organisme
   - [ ] Contact avec l’organisme
-- [ ] Objectif de formation
-- [ ] Résultats attendus de la formation
-- [ ] Contenu de la formation
-- [ ] Formation certifiante
+- [x] Objectif de formation
+- [x] Résultats attendus de la formation
+- [x] Contenu de la formation
+- [x] Formation certifiante
 - [ ] Action de formation
   - [ ] Rythme de la formation
   - [ ] Niveau à l’entrée en formation obligatoire
