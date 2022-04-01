@@ -102,6 +102,7 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Description (SEO)
+        description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         pinned: Mis en avant ?
