@@ -89,6 +89,7 @@ en:
         related_category: Related category
         children: Children pages
         description: Description (SEO)
+        description_short: Short description
         featured_image: Featured image
         featured_image_alt: Alt text
         parent: Parent page

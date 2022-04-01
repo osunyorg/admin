@@ -89,6 +89,7 @@ fr:
         related_category: Catégorie liée
         children: Pages enfants
         description: Description (SEO)
+        description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         parent: Page parente

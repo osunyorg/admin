@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_01_105007) do
+ActiveRecord::Schema.define(version: 2022_04_01_154318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -318,6 +318,7 @@ ActiveRecord::Schema.define(version: 2022_04_01_105007) do
     t.uuid "related_category_id"
     t.string "featured_image_alt"
     t.text "text"
+    t.text "description_short"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"

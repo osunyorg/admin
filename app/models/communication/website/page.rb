@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  about_type               :string           indexed => [about_id]
 #  description              :text
+#  description_short        :text
 #  featured_image_alt       :string
 #  github_path              :text
 #  old_text                 :text
