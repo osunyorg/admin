@@ -15,6 +15,8 @@
         <% end %>
         <h3 class="h5"><%= University::Person.human_attribute_name('description') %></h3>
         <%= simple_format person.description %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('description_short') %></h3>
+        <%= simple_format person.description_short %>
         <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
         <%= person.biography %>
       </div>

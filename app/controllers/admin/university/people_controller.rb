@@ -61,7 +61,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def person_params
     params.require(:university_person).permit(
-      :slug, :first_name, :last_name, :email, :phone, :description,
+      :slug, :first_name, :last_name, :email, :phone, :description, :description_short,
       :biography,  :picture, :picture_delete, :picture_infos,
       :habilitation, :tenure, :url, :linkedin, :twitter,
       :is_researcher, :is_teacher, :is_administration, :is_alumnus,
