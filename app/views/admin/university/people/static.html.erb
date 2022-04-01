@@ -16,6 +16,8 @@ image: "<%= @about.best_picture.blob.id %>"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
+description_short: >
+  <%= prepare_text_for_static @about.description_short %>
 roles:
 <% if @about.author.for_website?(@website) %>
   - author
