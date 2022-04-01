@@ -50,6 +50,7 @@
         </div>
         <div class="card-body">
           <%= f.input :description %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :presentation %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :duration %>
