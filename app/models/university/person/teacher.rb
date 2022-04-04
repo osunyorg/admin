@@ -5,6 +5,7 @@
 #  id                :uuid             not null, primary key
 #  biography         :text
 #  description       :text
+#  description_short :text
 #  email             :string
 #  first_name        :string
 #  habilitation      :boolean          default(FALSE)

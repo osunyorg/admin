@@ -11,9 +11,12 @@
   </div>
 <% end %>
 
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Post %>
+<% content_for :action_bar_left do %>
   <%= link_to t('communication.website.posts.new_curation'),
               new_admin_communication_website_post_curation_path(website_id: @website.id),
               class: button_classes if can?(:create, Communication::Website::Post) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Post %>
 <% end %>

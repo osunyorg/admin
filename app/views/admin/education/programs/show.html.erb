@@ -47,6 +47,7 @@
       <div class="card-body">
         <%= render 'admin/application/property/text', object: @program, property: :description %>
         <% [
+              :presentation,
               :registration,
               :pricing,
               :duration,
@@ -106,6 +107,7 @@
 
 <% content_for :preview do %>
   <%  [
+        :presentation,
         :registration,
         :pricing,
         :duration,

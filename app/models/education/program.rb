@@ -22,6 +22,7 @@
 #  pedagogy           :text
 #  position           :integer          default(0)
 #  prerequisites      :text
+#  presentation       :text
 #  pricing            :text
 #  published          :boolean          default(FALSE)
 #  registration       :text
@@ -64,6 +65,7 @@ class Education::Program < ApplicationRecord
                                     :other,
                                     :pedagogy,
                                     :prerequisites,
+                                    :presentation,
                                     :pricing,
                                     :registration,
                                     :content,
