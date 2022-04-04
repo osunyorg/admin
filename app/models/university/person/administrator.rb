@@ -50,7 +50,7 @@ class University::Person::Administrator < University::Person
              .university_people_through_role_involvements
              .find_by(id: id)
              .present? ||
-      website.programs
+      website.education_programs
              .published
              .joins(:involvements_through_roles)
              .where(university_person_involvements: { person_id: id })

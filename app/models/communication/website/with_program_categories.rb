@@ -12,7 +12,7 @@ module Communication::Website::WithProgramCategories
       is_programs_root: true,
       university_id: university.id
     )
-    set_programs_categories_at_level! programs_root_category, about.programs.root.ordered
+    set_programs_categories_at_level! programs_root_category, education_programs.root.ordered
   rescue
   end
 
@@ -28,7 +28,7 @@ module Communication::Website::WithProgramCategories
       category.parent = parent_category
       category.position = index + 1
       category.save
-      children = about.programs.where(parent_id: program.id).ordered
+      children = education_programs.where(parent_id: program.id).ordered
       set_programs_categories_at_level! category, children
     end
   end
