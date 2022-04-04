@@ -16,17 +16,4 @@ module Communication::Website::WithAbouts
     end
 
   end
-
-  def about_school?
-    about_type == 'Education::School'
-  end
-
-  def about_journal?
-    about_type == 'Research::Journal'
-  end
-
-  def about_laboratory?
-    about_type == 'Research::Laboratory'
-  end
-  
 end
