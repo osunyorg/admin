@@ -22,6 +22,7 @@
 #
 class Research::Laboratory < ApplicationRecord
   include WithGit
+  include Aboutable
 
   belongs_to  :university
   has_many    :websites,
@@ -45,5 +46,30 @@ class Research::Laboratory < ApplicationRecord
 
   def git_path(website)
     "data/laboratory.yml"
+  end
+
+  def has_administrators?
+    false
+  end
+
+  def has_researchers?
+    # TODO: Ajouter les researchers quand ils existeront
+    false
+  end
+
+  def has_teachers?
+    false
+  end
+
+  def has_education_programs?
+    false
+  end
+
+  def has_research_articles?
+    false
+  end
+
+  def has_research_volumes?
+    false
   end
 end

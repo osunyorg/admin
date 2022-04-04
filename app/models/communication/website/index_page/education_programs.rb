@@ -40,7 +40,7 @@ class Communication::Website::IndexPage::EducationPrograms < Communication::Webs
   end
 
   def git_dependencies(website)
-    [self] + active_storage_blobs + website.about.programs
+    [self] + active_storage_blobs + website.education_programs
   end
 
 end

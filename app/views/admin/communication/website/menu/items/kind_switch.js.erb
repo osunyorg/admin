@@ -23,7 +23,7 @@ function hideAbout() {
 <% elsif @kind == 'program' %>
     <%
     options = ['<option value="" label=" "></option>']
-    collection_tree(@website.programs).each do |page|
+    collection_tree(@website.education_programs).each do |page|
         options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
     end
     %>
