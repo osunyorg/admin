@@ -30,7 +30,7 @@ module Communication::Website::WithDependencies
   end
 
   def education_programs
-    has_education_programs? ? about.programs : Education::Program.none
+    has_education_programs? ? about.published_programs : Education::Program.none
   end
 
   def research_volumes

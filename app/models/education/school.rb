@@ -102,7 +102,7 @@ class Education::School < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = [self]
-    dependencies += programs + programs.map(&:active_storage_blobs).flatten if has_education_programs?
+    dependencies += published_programs + published_programs.map(&:active_storage_blobs).flatten if has_education_programs?
     dependencies += teachers + teachers.map(&:teacher) + teachers.map(&:active_storage_blobs).flatten if has_teachers?
     dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten if has_researchers?
     dependencies += administrators + administrators.map(&:administrator) + administrators.map(&:active_storage_blobs).flatten if has_administrators?
@@ -123,7 +123,7 @@ class Education::School < ApplicationRecord
   end
 
   def has_education_programs?
-    programs.any?
+    published_programs.any?
   end
 
   def has_research_articles?
