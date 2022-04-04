@@ -57,7 +57,7 @@ class Communication::Website < ApplicationRecord
     dependencies += posts + posts.map(&:active_storage_blobs).flatten if has_communication_posts?
     dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten if has_people?
     dependencies += [categories] if has_communication_categories?
-    dependencies += about.git_dependencies
+    dependencies += about.git_dependencies(website)
 
     # TMP: add index_pages
     dependencies += [index_for(:home)] + index_for(:home).active_storage_blobs
