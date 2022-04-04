@@ -25,6 +25,7 @@
 #
 class Education::School < ApplicationRecord
   include WithGit
+  include Aboutable
 
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
@@ -61,6 +62,15 @@ class Education::School < ApplicationRecord
     "#{name}"
   end
 
+  def researchers
+    people_ids = (
+      university_people_through_program_involvements +
+      university_people_through_role_involvements +
+      university_people_through_program_role_involvements
+    ).pluck(:id)
+    university.people.where(id: people_ids, is_researcher: true)
+  end
+
   def git_path(website)
     "data/school.yml"
   end
@@ -70,5 +80,30 @@ class Education::School < ApplicationRecord
     university_people_through_role_involvements +
     university_people_through_role_involvements.map(&:administrator) +
     university_people_through_role_involvements.map(&:active_storage_blobs).flatten
+  end
+
+  def has_administrators?
+    university_people_through_role_involvements.any? ||
+    university_people_through_program_role_involvements.any?
+  end
+
+  def has_researchers?
+    researchers.any?
+  end
+
+  def has_teachers?
+    university_people_through_program_involvements.any?
+  end
+
+  def has_education_programs?
+    programs.any?
+  end
+
+  def has_research_articles?
+    false
+  end
+
+  def has_research_volumes?
+    false
   end
 end
