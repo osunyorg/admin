@@ -81,7 +81,7 @@ class Education::School < ApplicationRecord
       university_people_through_role_involvements +
       university_people_through_program_role_involvements
     ).pluck(:id)
-    university.people.where(id: people_ids)
+    university.people.where(id: people_ids, is_administration: true)
   end
 
   def git_path(website)
