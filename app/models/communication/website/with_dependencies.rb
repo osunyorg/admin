@@ -34,11 +34,11 @@ module Communication::Website::WithDependencies
   end
 
   def research_volumes
-    has_research_volumes? ? about.volumes : Research::Journal::Volume.none
+    has_research_volumes? ? about.published_volumes : Research::Journal::Volume.none
   end
 
   def research_articles
-    has_research_articles? ? about.articles : Research::Journal::Article.none
+    has_research_articles? ? about.published_articles : Research::Journal::Article.none
   end
 
   def administrators

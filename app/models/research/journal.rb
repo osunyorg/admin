@@ -27,14 +27,20 @@ class Research::Journal < ApplicationRecord
 
   has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
+  has_many :published_volumes, -> { published }, foreign_key: :research_journal_id, dependent: :destroy
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
+  has_many :published_articles, -> { published }, foreign_key: :research_journal_id, dependent: :destroy
   has_many :people, -> { distinct }, through: :articles
-  alias researchers people
+  has_many :people_through_published_articles, -> { distinct }, through: :published_articles
 
   scope :ordered, -> { order(:title) }
 
   def to_s
     "#{title}"
+  end
+
+  def researchers
+    university.people.where(id: people_through_published_articles.pluck(:id), is_researcher: true)
   end
 
   def git_path(website)
@@ -43,9 +49,9 @@ class Research::Journal < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = [self]
-    dependencies += articles + articles.map(&:active_storage_blobs).flatten if has_research_articles?
-    dependencies += volumes + volumes.map(&:active_storage_blobs).flatten if has_research_volumes?
-    dependencies += people + people.map(&:researcher) + people.map(&:active_storage_blobs).flatten if has_researchers?
+    dependencies += published_articles + published_articles.map(&:active_storage_blobs).flatten if has_research_articles?
+    dependencies += published_volumes + published_volumes.map(&:active_storage_blobs).flatten if has_research_volumes?
+    dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten if has_researchers?
     dependencies
   end
 
@@ -70,10 +76,10 @@ class Research::Journal < ApplicationRecord
   end
 
   def has_research_articles?
-    articles.any?
+    published_articles.published.any?
   end
 
   def has_research_volumes?
-    volumes.any?
+    published_volumes.published.any?
   end
 end
