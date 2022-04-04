@@ -45,7 +45,7 @@ class University::Person::Researcher < University::Person
   end
 
   def for_website?(website)
-    is_researcher && website.about_journal? && website.research_articles
+    is_researcher && website.has_researchers? && website.research_articles
                                                       .joins(:people)
                                                       .where(university_people: { id: id })
                                                       .any?

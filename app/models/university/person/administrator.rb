@@ -45,7 +45,7 @@ class University::Person::Administrator < University::Person
   end
 
   def for_website?(website)
-    is_administration && website.about_school? && (
+    is_administration && website.has_administrators? && (
       website.about
              .university_people_through_role_involvements
              .find_by(id: id)
