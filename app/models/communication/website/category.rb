@@ -11,6 +11,7 @@
 #  path                     :string
 #  position                 :integer
 #  slug                     :string
+#  text                     :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed

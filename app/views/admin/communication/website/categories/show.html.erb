@@ -9,7 +9,9 @@
         </div>
         <div class="card-body">
           <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('description') %></h3>
-          <%= sanitize @category.description %>
+          <p><%= sanitize @category.description %></p>
+          <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('text') %></h3>
+          <%= sanitize @category.text %>
         </div>
       </div>
     </div>
