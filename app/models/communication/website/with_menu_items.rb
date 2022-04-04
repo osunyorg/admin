@@ -21,58 +21,58 @@ module Communication::Website::WithMenuItems
   end
 
   def menu_item_kind_programs?
-    about_school? && programs.any?
+    has_education_programs?
   end
 
   def menu_item_kind_program?
-    about_school? && programs.any?
+    has_education_programs?
   end
 
   def menu_item_kind_news?
-    posts.published.any?
+    has_communication_posts?
   end
 
   def menu_item_kind_news_category?
-    categories.any?
+    has_communication_categories?
   end
 
   def menu_item_kind_news_article?
-    menu_item_kind_news?
+    has_communication_posts?
   end
 
   def menu_item_kind_staff?
-    true
+    has_people?
   end
 
   def menu_item_kind_administrators?
-    people.any?
+    has_administrators?
   end
 
   def menu_item_kind_authors?
-    authors.compact.any?
+    has_authors?
   end
 
   def menu_item_kind_researchers?
-    about_journal? && about.people.any?
+    has_researchers?
   end
 
   def menu_item_kind_teachers?
-    about_school? && about.university_people_through_program_involvements.any?
+    has_teachers?
   end
 
   def menu_item_kind_research_volumes?
-    research_volumes.published.any?
+    has_research_volumes?
   end
 
   def menu_item_kind_research_volume?
-    menu_item_kind_research_volumes?
+    has_research_volumes?
   end
 
   def menu_item_kind_research_articles?
-    research_articles.published.any?
+    has_research_articles?
   end
 
   def menu_item_kind_research_article?
-    menu_item_kind_research_articles?
+    has_research_articles?
   end
 end

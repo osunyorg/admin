@@ -21,6 +21,7 @@
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
+  include Aboutable
   include WithUniversity
   include WithGit
 
@@ -28,6 +29,7 @@ class Research::Journal < ApplicationRecord
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
   has_many :people, -> { distinct }, through: :articles
+  alias researchers people
 
   scope :ordered, -> { order(:title) }
 
@@ -40,10 +42,40 @@ class Research::Journal < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + articles + volumes + people + people.map(&:researcher) + people.map(&:active_storage_blobs).flatten
+    dependencies = [self]
+    dependencies += articles + articles.map(&:active_storage_blobs).flatten if has_research_articles?
+    dependencies += volumes + volumes.map(&:active_storage_blobs).flatten if has_research_volumes?
+    if has_researchers?
+      dependencies += people + people.map(&:researcher) + people.map(&:active_storage_blobs).flatten
+    end
+    dependencies
   end
 
   def git_destroy_dependencies(website)
     [self] + articles + volumes
+  end
+
+  def has_administrators?
+    false
+  end
+
+  def has_researchers?
+    researchers.any?
+  end
+
+  def has_teachers?
+    false
+  end
+
+  def has_education_programs?
+    false
+  end
+
+  def has_research_articles?
+    articles.any?
+  end
+
+  def has_research_volumes?
+    volumes.any?
   end
 end

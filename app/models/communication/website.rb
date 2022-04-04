@@ -28,11 +28,13 @@ class Communication::Website < ApplicationRecord
   include WithUniversity
   include WithAbouts
   include WithConfigs
+  include WithDependencies
   include WithGit
   include WithGitRepository
   include WithImport
   include WithIndexPages
   include WithMenuItems
+  include WithProgramCategories
 
   scope :ordered, -> { order(:name) }
 
@@ -49,9 +51,6 @@ class Communication::Website < ApplicationRecord
     "data/website.yml"
   end
 
-  def blocks
-    Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
-  end
 
   def git_dependencies(website)
     dependencies = (
@@ -90,4 +89,9 @@ class Communication::Website < ApplicationRecord
 
     dependencies
   end
+
+
+
+
+
 end

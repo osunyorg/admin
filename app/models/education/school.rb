@@ -71,15 +71,30 @@ class Education::School < ApplicationRecord
     university.people.where(id: people_ids, is_researcher: true)
   end
 
+  def teachers
+    people_ids = university_people_through_program_involvements.pluck(:id)
+    university.people.where(id: people_ids, is_teacher: true)
+  end
+
+  def administrators
+    people_ids = (
+      university_people_through_role_involvements +
+      university_people_through_program_role_involvements
+    ).pluck(:id)
+    university.people.where(id: people_ids, is_administrator: true)
+  end
+
   def git_path(website)
     "data/school.yml"
   end
 
   def git_dependencies(website)
-    [self] +
-    university_people_through_role_involvements +
-    university_people_through_role_involvements.map(&:administrator) +
-    university_people_through_role_involvements.map(&:active_storage_blobs).flatten
+    dependencies = [self]
+    dependencies += programs + programs.map(&:active_storage_blobs).flatten if has_education_programs?
+    dependencies += teachers + teachers.map(&:teacher) + teachers.map(&:active_storage_blobs).flatten if has_teachers?
+    dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten if has_researchers?
+    dependencies += administrators + administrators.map(&:administrator) + administrators.map(&:active_storage_blobs).flatten if has_administrators?
+    dependencies
   end
 
   def has_administrators?
@@ -92,7 +107,7 @@ class Education::School < ApplicationRecord
   end
 
   def has_teachers?
-    university_people_through_program_involvements.any?
+    teachers.any?
   end
 
   def has_education_programs?

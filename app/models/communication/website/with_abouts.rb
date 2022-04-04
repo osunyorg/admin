@@ -6,26 +6,6 @@ module Communication::Website::WithAbouts
                 polymorphic: true,
                 optional: true
 
-    has_many    :pages,
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
-    has_many    :menus,
-                class_name: 'Communication::Website::Menu',
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
-    has_many    :posts,
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
-    has_many    :authors, -> { distinct }, through: :posts
-
-    has_many    :categories,
-                class_name: 'Communication::Website::Category',
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
     def self.about_types
       [
         nil,
@@ -35,7 +15,6 @@ module Communication::Website::WithAbouts
       ]
     end
 
-    after_save_commit :set_programs_categories!, if: -> (website) { website.about_school? }
   end
 
   def about_school?
@@ -49,76 +28,5 @@ module Communication::Website::WithAbouts
   def about_laboratory?
     about_type == 'Research::Laboratory'
   end
-
-  def programs
-    about_school? ? about.programs : Education::Program.none
-  end
-
-  def research_volumes
-    about_journal? ? about.volumes : Research::Journal::Volume.none
-  end
-
-  def research_articles
-    about_journal? ? about.articles : Research::Journal::Article.none
-  end
-
-  def people
-    @people ||= begin
-      people = authors
-      if about_school?
-        people += about.university_people_through_role_involvements
-        people += about.university_people_through_program_involvements
-        people += about.university_people_through_program_role_involvements
-      elsif about_journal?
-        people += about.people
-      end
-      people.uniq.compact
-    end
-  end
-
-  def people_with_facets
-    @people_with_facets ||= begin
-      people = authors + authors.compact.map(&:author)
-      if about_school?
-        people += about.university_people_through_role_involvements
-        people += about.university_people_through_role_involvements.map(&:administrator)
-        people += about.university_people_through_program_involvements
-        people += about.university_people_through_program_involvements.map(&:teacher)
-        people += about.university_people_through_program_role_involvements
-        people += about.university_people_through_program_role_involvements.map(&:administrator)
-      elsif about_journal?
-        people += about.people
-        people += about.people.map(&:researcher)
-      end
-      people.uniq.compact
-    end
-  end
-
-  def set_programs_categories!
-    programs_root_category = categories.where(is_programs_root: true).first_or_create(
-      name: 'Offre de formation',
-      slug: 'offre-de-formation',
-      is_programs_root: true,
-      university_id: university.id
-    )
-    set_programs_categories_at_level! programs_root_category, about.programs.root.ordered
-  rescue
-  end
-
-  protected
-
-  def set_programs_categories_at_level!(parent_category, programs)
-    programs.map.with_index do |program, index|
-      category = categories.where(program_id: program.id).first_or_initialize(
-        name: program.name,
-        slug: program.name.parameterize,
-        university_id: university.id
-      )
-      category.parent = parent_category
-      category.position = index + 1
-      category.save
-      children = about.programs.where(parent_id: program.id).ordered
-      set_programs_categories_at_level! category, children
-    end
-  end
+  
 end
