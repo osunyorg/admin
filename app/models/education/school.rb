@@ -32,6 +32,12 @@ class Education::School < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_school_id',
                           association_foreign_key: 'education_program_id'
+  has_and_belongs_to_many :published_programs,
+                          -> { published },
+                          class_name: 'Education::Program',
+                          join_table: 'education_programs_schools',
+                          foreign_key: 'education_school_id',
+                          association_foreign_key: 'education_program_id'
   belongs_to  :university
   has_many    :websites,
               class_name: 'Communication::Website',
@@ -53,6 +59,12 @@ class Education::School < ApplicationRecord
   has_many    :university_people_through_program_role_involvements,
               through: :programs,
               source: :university_people_through_role_involvements
+  has_many    :university_people_through_published_program_involvements,
+              through: :published_programs,
+              source: :university_people_through_involvements
+  has_many    :university_people_through_published_program_role_involvements,
+              through: :published_programs,
+              source: :university_people_through_role_involvements
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
@@ -64,22 +76,22 @@ class Education::School < ApplicationRecord
 
   def researchers
     people_ids = (
-      university_people_through_program_involvements +
+      university_people_through_published_program_involvements +
       university_people_through_role_involvements +
-      university_people_through_program_role_involvements
+      university_people_through_published_program_role_involvements
     ).pluck(:id)
     university.people.where(id: people_ids, is_researcher: true)
   end
 
   def teachers
-    people_ids = university_people_through_program_involvements.pluck(:id)
+    people_ids = university_people_through_published_program_involvements.pluck(:id)
     university.people.where(id: people_ids, is_teacher: true)
   end
 
   def administrators
     people_ids = (
       university_people_through_role_involvements +
-      university_people_through_program_role_involvements
+      university_people_through_published_program_role_involvements
     ).pluck(:id)
     university.people.where(id: people_ids, is_administration: true)
   end

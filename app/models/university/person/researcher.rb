@@ -45,9 +45,6 @@ class University::Person::Researcher < University::Person
   end
 
   def for_website?(website)
-    is_researcher && website.has_researchers? && website.research_articles
-                                                      .joins(:people)
-                                                      .where(university_people: { id: id })
-                                                      .any?
+    is_researcher && website.has_researchers? && website.researchers.pluck(:id).include?(self.id)
   end
 end

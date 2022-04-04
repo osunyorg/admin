@@ -41,13 +41,25 @@ module Communication::Website::WithDependencies
     has_research_articles? ? about.articles : Research::Journal::Article.none
   end
 
+  def administrators
+    about.administrators
+  end
+
+  def researchers
+    about.researchers
+  end
+
+  def teachers
+    about.teachers
+  end
+
   def people
     @people ||= begin
       people = []
       people += authors if has_authors?
-      people += about.teachers if has_teachers?
-      people += about.administrators if has_administrators?
-      people += about.researchers if has_researchers?
+      people += teachers if has_teachers?
+      people += administrators if has_administrators?
+      people += researchers if has_researchers?
       people.uniq.compact
     end
   end
@@ -56,9 +68,9 @@ module Communication::Website::WithDependencies
     @people_with_facets ||= begin
       people = []
       people += authors + authors.compact.map(&:author) if has_authors?
-      people += about.teachers + about.teachers.map(&:teacher) if has_teachers?
-      people += about.administrators + about.administrators.map(&:administrator) if has_administrators?
-      people += about.researchers + about.researchers.map(&:researcher) if has_researchers?
+      people += teachers + teachers.map(&:teacher) if has_teachers?
+      people += administrators + administrators.map(&:administrator) if has_administrators?
+      people += researchers + researchers.map(&:researcher) if has_researchers?
       people.uniq.compact
     end
   end
