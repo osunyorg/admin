@@ -31,6 +31,7 @@
           <div class="card-body">
             <%= f.input :slug,
                         as: :string,
+                        required: true,
                         input_html: page.persisted? ? {} : {
                           class: 'js-slug-input',
                           data: { source: '#communication_website_page_title' }
@@ -38,6 +39,7 @@
             <%= f.input :published if page.is_not_special_page? %>
             <%= f.association :parent,
                               collection: collection_tree(@website.pages, page),
+                              include_blank: false,
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] } unless page.kind_home? %>
             <ul>
