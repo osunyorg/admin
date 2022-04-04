@@ -32,3 +32,4 @@ module Communication::Website::WithProgramCategories
       set_programs_categories_at_level! category, children
     end
   end
+end
