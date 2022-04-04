@@ -45,9 +45,7 @@ class Research::Journal < ApplicationRecord
     dependencies = [self]
     dependencies += articles + articles.map(&:active_storage_blobs).flatten if has_research_articles?
     dependencies += volumes + volumes.map(&:active_storage_blobs).flatten if has_research_volumes?
-    if has_researchers?
-      dependencies += people + people.map(&:researcher) + people.map(&:active_storage_blobs).flatten
-    end
+    dependencies += people + people.map(&:researcher) + people.map(&:active_storage_blobs).flatten if has_researchers?
     dependencies
   end
 
