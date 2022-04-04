@@ -47,7 +47,7 @@
                 if item.kind_page?
                   about_collection = collection_tree(@website.pages)
                 elsif item.kind_program?
-                  about_collection = collection_tree(@website.programs)
+                  about_collection = collection_tree(@website.education_programs)
                 elsif item.kind_news_category?
                   about_collection = collection_tree(@website.categories)
                 elsif item.kind_news_article?
