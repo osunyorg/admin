@@ -6,5 +6,7 @@ position: <%= @about.position %>
 image: "<%= @about.best_featured_image.blob.id %>"
 image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
+description: >
+  <%= prepare_text_for_static @about.description %>
 ---
-<%= prepare_html_for_static @about.description, @about.university %>
+<%= prepare_html_for_static @about.text, @about.university %>

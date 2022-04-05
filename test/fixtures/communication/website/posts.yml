@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
+#  description_short        :text
 #  featured_image_alt       :string
 #  github_path              :text
 #  old_text                 :text

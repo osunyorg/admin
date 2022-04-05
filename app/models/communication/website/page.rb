@@ -4,12 +4,10 @@
 #
 #  id                       :uuid             not null, primary key
 #  about_type               :string           indexed => [about_id]
-#  breadcrumb_title         :string
 #  description              :text
+#  description_short        :text
 #  featured_image_alt       :string
 #  github_path              :text
-#  header_text              :text
-#  kind                     :integer
 #  old_text                 :text
 #  path                     :text
 #  position                 :integer          default(0), not null

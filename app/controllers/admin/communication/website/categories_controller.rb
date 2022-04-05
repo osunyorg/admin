@@ -90,7 +90,7 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
   def category_params
     params.require(:communication_website_category)
           .permit(
-            :website_id, :name, :description, :slug, :parent_id,
+            :website_id, :name, :description, :text, :slug, :parent_id,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt)
           .merge(university_id: current_university.id)
   end

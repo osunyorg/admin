@@ -57,6 +57,7 @@ fr:
       communication/website/category:
         children: Catégories enfants
         description: Description (SEO)
+        text: Texte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
@@ -89,6 +90,7 @@ fr:
         related_category: Catégorie liée
         children: Pages enfants
         description: Description (SEO)
+        description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         parent: Page parente
@@ -102,6 +104,7 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Description (SEO)
+        description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         pinned: Mis en avant ?
