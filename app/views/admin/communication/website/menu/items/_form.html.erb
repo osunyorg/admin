@@ -1,43 +1,15 @@
 <%= simple_form_for item, url: item.persisted?  ? [:admin, item, { menu_id: @menu.id }]
                                                 : admin_communication_website_menu_items_path(@menu) do |f| %>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
-        </div>
-        <div class="card-body">
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= t('content') %></h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
           <%= f.input :title %>
-          <%= f.input :kind,
-                      as: :hidden,
-                      input_html: {
-                        data: {
-                          url: kind_switch_admin_communication_website_menu_items_path
-                        }
-                      } %>
-          <div class="mb-3">
-            <label class="form-label required">
-              <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
-              <abbr title="required">*</abbr>
-            </label>
-            <div class="row">
-              <% @website.menu_item_kinds.keys.each do |kind| %>
-                <div class="col-6 col-lg-4 col-xl-3">
-                  <div class="card kind" data-kind="<%= kind %>">
-                    <div class="card-body">
-                      <p class="text-end mb-0">
-                        <i class="<%= icon_for "communication.website.menu.item.kind.#{kind}" %> fa-2x"></i><br>
-                      </p>
-                      <p class="mb-0">
-                        <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
-                      </p>
-                      <a class="stretched-link"></a>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
+        </div>
+        <div class="col-lg-6">
           <div data-kind-if="url">
             <%= f.input :url, as: :string %>
           </div>
@@ -61,26 +33,43 @@
                 about_collection = []
               end
             %>
-            <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-type' } %>
             <%= f.association :about,
                               collection: about_collection,
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] },
                               input_html: { class: 'js-about-id' } %>
+            <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-type' } %>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.association :parent,
-                            collection: item.list_of_other_items,
-                            label_method: -> (p) { sanitize p[:label] },
-                            value_method: -> (p) { p[:id] } %>
+      <%= f.input :kind,
+                  as: :hidden,
+                  input_html: {
+                    data: {
+                      url: kind_switch_admin_communication_website_menu_items_path
+                    }
+                  } %>
+      <div>
+        <label class="form-label required">
+          <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
+          <abbr title="required">*</abbr>
+        </label>
+        <div class="row">
+          <% @website.menu_item_kinds.keys.each do |kind| %>
+            <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
+              <div class="card kind" data-kind="<%= kind %>">
+                <div class="card-body">
+                  <p class="text-end mb-0">
+                    <i class="<%= icon_for "communication.website.menu.item.kind.#{kind}" %> fa-2x"></i><br>
+                  </p>
+                  <p class="mb-0">
+                    <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
+                  </p>
+                  <a class="stretched-link"></a>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
