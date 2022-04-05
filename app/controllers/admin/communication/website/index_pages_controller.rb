@@ -5,11 +5,11 @@ class Admin::Communication::Website::IndexPagesController < Admin::Communication
   def index
     breadcrumb
     @kinds = Communication::Website::IndexPage.kinds_global
-    if @website.about_school?
+    # if @website.about_school?
       @kinds += Communication::Website::IndexPage.kinds_school
-    elsif @website.about_journal?
+    # elsif @website.about_journal?
       @kinds += Communication::Website::IndexPage.kinds_journal
-    end
+    # end
   end
 
   def edit
