@@ -104,6 +104,7 @@ en:
         category: Category
         categories: Categories
         description: Description (SEO)
+        description_short: Short description
         featured_image: Featured image
         featured_image_alt: Alt text
         pinned: Pinned?
