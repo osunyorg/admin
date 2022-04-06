@@ -1,0 +1,39 @@
+<a  class="<%= button_classes('mb-4') %>"
+    v-on:click="data.elements.push({id: ''})">
+    <%= t '.add_post' %>
+</a>
+
+<draggable :list="data.elements" class="list-group" handle=".dragHandle">
+  <div v-for="(post, index) in data.elements" class="list-group-item">
+    <div class="d-flex">
+      <div>
+        <a class="btn ps-0 pt-0 dragHandle" title="<%= t '.drag_title' %>">
+          <i class="fa fa-bars handle"></i>
+        </a>
+      </div>
+      <div class="flex-fill">
+        <div class="row">
+          <div class="col-md-6">
+            <label  class="form-label visually-hidden"
+                    :for="'post-' + index + '-name'"><%= t '.post_label' %></label>
+            <select :id="'post-' + index + '-name'"
+                    class="form-select select"
+                    v-model="post.id">
+              <option value="" disabled><%= t '.post_placeholder' %></option>
+              <%# @website.posts.ordered.each_with_index do |post, index| %>
+                <%# <option value="<%= post.id %><%#"><%= post.title %><%#</option> %>
+              <%# end %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a  class="btn btn-sm btn-danger ms-3"
+            v-on:click="data.elements.splice(data.elements.indexOf(post), 1)"
+            title="<%= t '.delete_title' %>">
+            <i class="fas fa-times"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</draggable>

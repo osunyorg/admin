@@ -33,7 +33,8 @@ class Communication::Block < ApplicationRecord
     organization_chart: 100,
     partners: 200,
     gallery: 300,
-    testimonials: 400
+    testimonials: 400,
+    posts: 500
   }
 
   def data=(value)

@@ -1,0 +1,7 @@
+<div class="row">
+  <ul>
+    <% @block.data['elements'].each do |post| %>
+      <li><%= post.id %></li>
+    <% end if @block.data %>
+  </ul>
+</div>
