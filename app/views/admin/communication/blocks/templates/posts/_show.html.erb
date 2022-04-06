@@ -23,7 +23,7 @@
   <% elsif @block.data['elements'] %>
     <div class="row">
       <% @block.data['elements'].each do |element| %>
-        <% post = @block.about&.website.posts.find element['id'] if element['id'] %>
+        <% post = @block.about&.website.posts.find element['id'] unless element['id'].blank? %>
         <% if post %>
           <div class="col-md-4">
             <div class="card">

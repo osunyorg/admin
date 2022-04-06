@@ -1,6 +1,6 @@
 <% if block.data['category_id'] %>
-      category: <%= block['category_id'] %>
-      quantity: <%= block['posts_quantity'] %>
+      category: <%= block.data['category_id'] %>
+      quantity: <%= block.data['posts_quantity'] %>
 <% elsif block.data['elements'] %>
       posts:
     <% block.data['elements'].each do |post|
