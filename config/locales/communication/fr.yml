@@ -57,6 +57,7 @@ fr:
       communication/website/category:
         children: Catégories enfants
         description: Description (SEO)
+        text: Texte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
@@ -89,6 +90,7 @@ fr:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Description (SEO)
+        description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         header_text: Texte affiché dans le header
@@ -104,6 +106,7 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Description (SEO)
+        description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         pinned: Mis en avant ?

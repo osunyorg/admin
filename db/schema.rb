@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_01_105007) do
+ActiveRecord::Schema.define(version: 2022_04_04_140813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2022_04_01_105007) do
     t.boolean "is_programs_root", default: false
     t.string "path"
     t.string "featured_image_alt"
+    t.text "text"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_categories_on_program_id"
@@ -318,9 +319,7 @@ ActiveRecord::Schema.define(version: 2022_04_01_105007) do
     t.uuid "related_category_id"
     t.string "featured_image_alt"
     t.text "text"
-    t.string "breadcrumb_title"
-    t.text "header_text"
-    t.integer "kind"
+    t.text "description_short"
     t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -344,6 +343,7 @@ ActiveRecord::Schema.define(version: 2022_04_01_105007) do
     t.boolean "pinned", default: false
     t.string "featured_image_alt"
     t.text "text"
+    t.text "description_short"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"

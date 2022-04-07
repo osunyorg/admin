@@ -45,16 +45,6 @@ class University::Person::Administrator < University::Person
   end
 
   def for_website?(website)
-    is_administration && website.about_school? && (
-      website.about
-             .university_people_through_role_involvements
-             .find_by(id: id)
-             .present? ||
-      website.programs
-             .published
-             .joins(:involvements_through_roles)
-             .where(university_person_involvements: { person_id: id })
-             .any?
-    )
+    is_administration && website.has_administrators? && website.administrators.pluck(:id).include?(self.id)
   end
 end

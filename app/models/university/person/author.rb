@@ -45,8 +45,6 @@ class University::Person::Author < University::Person
   end
 
   def for_website?(website)
-    communication_website_posts.published
-                              .where(communication_website_id: website&.id)
-                              .any?
+    website.has_authors? && website.authors.pluck(:id).include?(self.id)
   end
 end
