@@ -90,7 +90,7 @@
 <% end %>
 
 <% content_for :action_bar_left do %>
-  <%= destroy_link @page if @page.is_not_special_page? %>
+  <%= destroy_link @page if @page.is_regular_page? %>
   <%= link_to t('static'),
               static_admin_communication_website_page_path(@page),
               class: button_classes('btn-light') if current_user.server_admin? %>

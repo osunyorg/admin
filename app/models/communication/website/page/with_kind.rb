@@ -25,7 +25,7 @@ module Communication::Website::Page::WithKind
       kind != nil
     end
 
-    def is_not_special_page?
+    def is_regular_page?
       !is_special_page?
     end
 

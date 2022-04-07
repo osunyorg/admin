@@ -18,7 +18,7 @@
           <%= f.association :related_category,
                             collection: collection_tree(@website.categories),
                             label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } if @website.categories.any? && page.is_not_special_page? %>
+                            value_method: ->(p) { p[:id] } if @website.categories.any? && page.is_regular_page? %>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
                           class: 'js-slug-input',
                           data: { source: '#communication_website_page_title' }
                         } unless page.kind_home? %>
-            <%= f.input :published if page.is_not_special_page? %>
+            <%= f.input :published if page.is_regular_page? %>
             <%= f.association :parent,
                               collection: collection_tree(@website.pages, page),
                               include_blank: false,

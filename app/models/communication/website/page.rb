@@ -89,12 +89,14 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] +
-    website.menus +
-    descendents +
-    active_storage_blobs +
-    siblings +
-    git_block_dependencies
+    dependencies = [self] +
+                    website.menus +
+                    descendents +
+                    active_storage_blobs +
+                    siblings +
+                    git_block_dependencies
+    dependencies += website.education_programs if kind_education_programs?
+    dependencies
   end
 
   def git_destroy_dependencies(website)

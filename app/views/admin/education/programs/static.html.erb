@@ -3,7 +3,7 @@
 <% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
 title: >
   <%= @about.name %>
-url: /<%= @website.index_for(:education_programs).path %><%= @about.path %>/
+url: <%= @website.special_page(:education_programs).path %><%= @about.path %>/
 description: >
   <%= prepare_text_for_static @about.description %>
 position: <%= @about.position %>

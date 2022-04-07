@@ -25,7 +25,7 @@
       <% end %>
       <div class="btn-group ms-auto" role="group">
         <%= edit_link page %>
-        <%= destroy_link page, confirm_message: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') if page.is_not_special_page? %>
+        <%= destroy_link page, confirm_message: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') if page.is_regular_page? %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, page) %> ms-4" data-id="<%= page.id %>">
