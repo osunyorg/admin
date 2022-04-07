@@ -9,12 +9,17 @@ module Communication::Website::Page::WithKind
       education_programs: 20,
       research_articles: 30,
       research_volumes: 32,
-      persons: 100,
+      legal_terms: 80,
+        sitemap: 81,
+        privacy_policy: 82,
+      people: 100,
         administrators: 110,
         authors: 120,
         researchers: 130,
         teachers: 140
     }, _prefix: 'kind'
+
+    after_create :move_legacy_root_pages, if: :kind_home?
 
     def is_special_page?
       kind != nil
@@ -24,6 +29,13 @@ module Communication::Website::Page::WithKind
       !is_special_page?
     end
 
+  end
+
+  private
+
+  def move_legacy_root_pages
+    root_pages = website.pages.where.not(id: id).root
+    root_pages.update_all(parent_id: id)
   end
 
 end

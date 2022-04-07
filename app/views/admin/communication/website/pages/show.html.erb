@@ -9,7 +9,6 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <%= render 'admin/application/property/text', object: @page, property: :description %>
           <%= render 'admin/application/property/text', object: @page, property: :description_short %>
           <%= render 'admin/application/property/text', object: @page, property: :text %>
         </div>
@@ -30,8 +29,10 @@
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
         <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
-          <p><%= @page.slug %></p>
+          <% unless @page.slug.blank? %>
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
+            <p><%= @page.slug %></p>
+          <% end %>
           <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
           <p><%= @page.path %></p>
           <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
@@ -58,7 +59,7 @@
           <% if @page.children.any? %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('children') %></h3>
             <ul class="list-unstyled mb-0">
-              <% @page.children.each do |child| %>
+              <% @page.children.ordered.each do |child| %>
                 <li>
                   <%= link_to_if can?(:read, child),
                                 child,

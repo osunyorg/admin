@@ -89,16 +89,16 @@ fr:
       communication/website/page:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
-        description: Description (SEO)
+        description: Meta Description
         description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        header_text: Texte affiché dans le header
+        header_text: Titre affiché dans le header
         parent: Page parente
         published: Publié ?
         related_category: Catégorie liée
         slug: Slug
-        text: Texte de la page
+        text: Texte principal de la page
         title: Titre
         website: Site Web
       communication/website/post:
@@ -231,6 +231,61 @@ fr:
             title: Équipe pédagogique
       last_pages: Dernières pages
       last_posts: Dernières actualités
+      pages:
+        defaults:
+          administrators:
+            description_short: Liste des membres de l'équipe administrative
+            slug: equipe-administrative
+            title: Équipe administrative
+          authors:
+            description_short: Liste des membres de l'équipe éditoriale
+            slug: equipe-editoriale
+            title: Équipe éditoriale
+          communication_posts:
+            description_short: Liste des actualités
+            slug: actualites
+            title: Actualités
+          education_programs:
+            description_short: Liste des formations proposées
+            slug: offre-de-formation
+            title: "L'offre de formation"
+          home:
+            description_short: ''
+            slug: ''
+            title: Accueil
+          legal_terms:
+            description_short: ''
+            slug: mentions-legales
+            title: Mentions légales
+          people:
+            description_short: Liste des membres de l'équipe
+            slug: equipe
+            title: Équipe
+          privacy_policy:
+            description_short: ''
+            slug: politique-de-confidentialite
+            title: Politique de confidentialité
+          research_articles:
+            description_short: Liste des articles
+            slug: articles
+            title: Articles
+          research_volumes:
+            description_short: Liste des volumes
+            slug: volumes
+            title: Volumes
+          researchers:
+            description_short: Liste des membres de l'équipe de recherche
+            slug: equipe-de-recherche
+            title: Équipe de recherche
+          sitemap:
+            description_short: ''
+            slug: plan-du-site
+            title: Plan du site
+          teachers:
+            description_short: Liste des membres de l'équipe pédagogique
+            slug: equipe-pedagogique
+            title: Équipe pédagogique
+
       posts:
         new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)
@@ -268,3 +323,4 @@ fr:
     hints:
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
+        description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.

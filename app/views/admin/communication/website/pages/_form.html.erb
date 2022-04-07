@@ -8,7 +8,6 @@
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :breadcrumb_title %>
-          <%= f.input :description %>
           <%= f.input :description_short %>
           <%= f.input :header_text,
                       as: :summernote,
@@ -61,6 +60,15 @@
            <%= f.input :featured_image_alt %>
         </div>
       </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :description %>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
   <% content_for :action_bar_right do %>

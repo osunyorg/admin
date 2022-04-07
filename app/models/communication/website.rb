@@ -35,6 +35,7 @@ class Communication::Website < ApplicationRecord
   include WithIndexPages
   include WithMenuItems
   include WithProgramCategories
+  include WithSpecialPages
 
   scope :ordered, -> { order(:name) }
 

@@ -134,6 +134,7 @@ en:
   save: Save
   search: Search
   select_language: Select language
+  seo: SEO
   simple_form:
     error_notification:
       default_message: "Please review the problems below:"

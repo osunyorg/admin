@@ -155,7 +155,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def make_path
-    self.path = generated_path
+    self.path = kind_home? ? '/' : generated_path
   end
 
   def slug_must_be_unique

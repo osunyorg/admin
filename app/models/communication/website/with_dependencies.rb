@@ -75,6 +75,7 @@ module Communication::Website::WithDependencies
     end
   end
 
+  # those tests has_xxx? should match the special page kind
   def has_communication_posts?
     posts.published.any?
   end
