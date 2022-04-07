@@ -476,23 +476,6 @@ ActiveRecord::Schema.define(version: 2022_04_04_140813) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "zipcode"
-    t.string "city"
-    t.string "country"
-    t.string "website"
-    t.string "phone"
-    t.string "mail"
-    t.boolean "active"
-    t.string "sirene"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
