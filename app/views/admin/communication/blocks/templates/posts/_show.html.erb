@@ -1,12 +1,10 @@
 <% if @block.data %>
-  <% category = @block.about&.website.categories.find @block.data['category_id'] if @block.data['category_id'] %>
-
-  <% if category %>
-    <% quantity = @block.data['posts_quantity'] || 3 %>
-    <% posts = category.posts.ordered.limit(quantity) %>
-    <h2 class="mb-4"><%= category %></h2>
+  <% if @block.template_class.category %>
+    <h2 class="mb-4"><%= @block.template_class.category %></h2>
+  <% end %>
+  <% if @block.template_class.posts.any? %>
     <div class="row">
-      <% posts.each do |post| %>
+      <% @block.template_class.posts.each do |post| %>
         <div class="col-md-4">
           <div class="card">
             <div class="card-header">
@@ -19,25 +17,5 @@
         </div>
       <% end %>
     </div>
-
-  <% elsif @block.data['elements'] %>
-    <div class="row">
-      <% @block.data['elements'].each do |element| %>
-        <% post = @block.about&.website.posts.find element['id'] unless element['id'].blank? %>
-        <% if post %>
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title h5"><%= post %></h3>
-              </div>
-              <div class="card-body">
-                <%= post.description_short %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
   <% end %>
-
 <% end %>

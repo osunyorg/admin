@@ -50,14 +50,12 @@ class Communication::Block < ApplicationRecord
     about.blocks.ordered.last
   end
 
+  def template_class
+    @template_class ||= "Communication::Block::#{template.classify}".constantize.new self
+  end
+
   def to_s
     title.blank?  ? "Block #{position}"
                   : "#{title}"
-  end
-
-  protected
-
-  def template_class
-    @template_class ||= "Communication::Block::#{template.classify}".constantize.new self
   end
 end

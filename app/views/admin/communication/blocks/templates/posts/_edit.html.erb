@@ -1,69 +1,62 @@
-<div class="card">
-  <div class="card-body">
+<div class="row mb-1">
+  <div class="col-md-6">
     <label class="form-label"
-          for="category_id">Sélectionnez une catégorie ou laissez le champ vide pour sélectionner des articles spécifiques</label>
+          for="category_id">Sélectionnez des articles spécifiques, ou une catégorie</label>
     <select id="category_id"
           class="form-select select"
           v-model="data.category_id"
           v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3">
-      <option value="" selected>Sélection d'actualités libres</option>
+      <option value="" selected>Sélection spécifique</option>
       <% @block.about&.website.categories.ordered.each_with_index do |category, index| %>
         <option value="<%= category.id %>"><%= category %></option>
       <% end %>
     </select>
+  </div>
+  <div class="col-md-6">
     <div v-if="data.category_id">
       <label class="form-label"
-            for="posts_quantity">Choisissez une quantité d'articles affichés</label>
-      <input type="number" 
-            placeholder="Quantité" 
-            class="form-select" 
-            id="posts_quantity" 
+            for="posts_quantity">Choisissez la quantité d'articles à afficher</label>
+      <input type="number"
+            placeholder="Quantité"
+            class="form-select"
+            id="posts_quantity"
             min="0" max="30"
             v-model="data.posts_quantity"
             value="3" />
     </div>
-    <div v-if="!data.category_id">
-      <a  class="<%= button_classes('my-4') %>"
-          v-on:click="data.elements.push({id: ''})">
-          <%= t '.add_post' %>
-      </a>
-
-      <draggable :list="data.elements" class="list-group" handle=".dragHandle">
-        <div v-for="(post, index) in data.elements" class="list-group-item">
-          <div class="d-flex">
-            <div>
-              <a class="btn ps-0 pt-0 dragHandle" title="TODO">
-                <i class="fa fa-bars handle"></i>
-              </a>
-            </div>
-            <div class="flex-fill">
-              <div class="row">
-                <div class="col-md-6">
-                  <label  class="form-label visually-hidden"
-                          :for="'post-' + index + '-name'"><%= t '.post_label' %></label>
-                  <select :id="'post-' + index + '-name'"
-                          class="form-select select"
-                          v-model="post.id">
-                    <option value="" disabled>Posts</option>
-                    <% @block.about&.website.posts.ordered.each_with_index do |post, index| %>
-                      <option value="<%= post.id %>"><%= post.title %></option>
-                    <% end %>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div>
-              <a  class="btn btn-sm btn-danger ms-3"
-                  v-on:click="data.elements.splice(data.elements.indexOf(post), 1)"
-                  title="TODO">
-                  <i class="fas fa-times"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </draggable>
-    </div>
-
   </div>
-  
+</div>
+<div v-if="!data.category_id">
+  <a  class="<%= button_classes('my-4') %>"
+      v-on:click="data.elements.push({id: ''})">
+      <%= t '.add_post' %>
+  </a>
+  <draggable :list="data.elements" class="row" handle=".dragHandle">
+    <div v-for="(post, index) in data.elements" class="col-xxl-3 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-2">
+            <a  class="btn btn-sm btn-danger float-end"
+                v-on:click="data.elements.splice(data.elements.indexOf(post), 1)"
+                title="Delete">
+                <i class="fas fa-times"></i>
+            </a>
+            <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+              <i class="fa fa-bars handle"></i>
+            </a>
+          </div>
+          <label  class="form-label visually-hidden"
+                  :for="'post-' + index + '-name'"><%= t '.post_label' %></label>
+          <select :id="'post-' + index + '-name'"
+                  class="form-select select"
+                  v-model="post.id">
+            <option value="" disabled>Posts</option>
+            <% @block.about&.website.posts.ordered.each_with_index do |post, index| %>
+              <option value="<%= post.id %>"><%= post.title %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+    </div>
+  </draggable>
 </div>
