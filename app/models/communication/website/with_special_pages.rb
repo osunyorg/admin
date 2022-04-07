@@ -34,19 +34,47 @@ module Communication::Website::WithSpecialPages
 
   end
 
-  private
+  # private
 
   def create_special_page(kind, parent_id = nil)
     i18n_key = "communication.website.pages.defaults.#{kind}"
-    # TODO: tmp should retrieve index_page (warning persons -> people) ,+ images/text
-    pages.where(kind: kind).first_or_create(
-      title: I18n.t("#{i18n_key}.title"),
-      slug: I18n.t("#{i18n_key}.slug"),
-      description_short: I18n.t("#{i18n_key}.description_short"),
-      parent_id: parent_id,
-      published: true,
-      university_id: university_id
-    )
+    # TODO: remove legacy after migrations
+    legacy_index_page = Communication::Website::IndexPage.where(communication_website_id: Communication::Website.first.id, kind: kind == 'people' ? 'persons' : kind).first
+    if legacy_index_page.present?
+      page = pages.where(kind: kind).first
+      unless page.present?
+        page = pages.create(
+          kind: kind,
+          title: legacy_index_page.title,
+          slug: legacy_index_page.path,
+          description_short: legacy_index_page.description,
+          parent_id: parent_id,
+          published: true,
+          university_id: university_id,
+          breadcrumb_title: legacy_index_page.breadcrumb_title,
+          featured_image_alt: legacy_index_page.featured_image_alt,
+          header_text: legacy_index_page.header_text,
+          text: legacy_index_page.text
+        )
+        if legacy_index_page.featured_image.attached?
+          blob_to_duplicate = legacy_index_page.featured_image.blob
+          page.featured_image.attach(
+            io: URI.open(blob_to_duplicate.url),
+            filename: blob_to_duplicate.filename.to_s
+          )
+        end
+      end
+    else
+      page = pages.where(kind: kind).first_or_create(
+        title: I18n.t("#{i18n_key}.title"),
+        slug: I18n.t("#{i18n_key}.slug"),
+        description_short: I18n.t("#{i18n_key}.description_short"),
+        parent_id: parent_id,
+        published: true,
+        university_id: university_id
+      )
+    end
+    page
   end
 
   def special_pages_keys

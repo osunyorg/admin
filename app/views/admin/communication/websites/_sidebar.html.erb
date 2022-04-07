@@ -33,12 +33,7 @@
             title: Communication::Website::Menu.model_name.human(count: 2),
             path: admin_communication_website_menus_path(website_id: @website),
             ability: can?(:read, Communication::Website::Category)
-          },
-          {
-            title: Communication::Website::IndexPage.model_name.human(count: 2),
-            path: admin_communication_website_indexes_path(website_id: @website),
-            ability: can?(:read, @website)
-          },
+          }
         ].each do |object|
           next unless object[:ability]
           active = object[:path].in? request.path

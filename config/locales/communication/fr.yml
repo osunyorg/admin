@@ -20,9 +20,6 @@ fr:
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
-      communication/website/index_page:
-        one: Page d'index
-        other: Pages d'index
       communication/website/menu:
         one: Menu
         other: Menus
@@ -63,15 +60,6 @@ fr:
         name: Nom
         parent: Catégorie parente
         slug: Slug
-      communication/website/index_page:
-        breadcrumb_title: Nom affiché dans le fil d'ariane
-        description: Description (SEO)
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        header_text: Texte affiché dans le header
-        slug: Slug
-        text: Texte de la page
-        title: Titre
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -187,48 +175,6 @@ fr:
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
-      index_pages:
-        default:
-          administrators:
-            description: Liste des membres de l'équipe administrative
-            path: equipe-administrative
-            title: Équipe administrative
-          authors:
-            description: Liste des membres de l'équipe éditoriale
-            path: equipe-editoriale
-            title: Équipe éditoriale
-          communication_posts:
-            description: Liste des actualités
-            path: actualites
-            title: Actualités
-          education_programs:
-            description: Liste des formations proposées
-            path: offre-de-formation
-            title: L'offre de formation
-          home:
-            description: ''
-            path: accueil
-            title: Accueil
-          persons:
-            description: Liste des membres de l'équipe
-            path: equipe
-            title: Équipe
-          research_articles:
-            description: Liste des articles
-            path: articles
-            title: Articles
-          research_volumes:
-            description: Liste des volumes
-            path: volumes
-            title: Volumes
-          researchers:
-            description: Liste des membres de l'équipe de recherche
-            path: equipe-de-recherche
-            title: Équipe de recherche
-          teachers:
-            description: Liste des membres de l'équipe pédagogique
-            path: equipe-pedagogique
-            title: Équipe pédagogique
       last_pages: Dernières pages
       last_posts: Dernières actualités
       pages:
@@ -285,7 +231,6 @@ fr:
             description_short: Liste des membres de l'équipe pédagogique
             slug: equipe-pedagogique
             title: Équipe pédagogique
-
       posts:
         new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)

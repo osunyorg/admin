@@ -1,6 +1,7 @@
 ---
 title: >
   <%= @about.title %>
+breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
 url: "<%= @about.path %>/"
 position: <%= @about.position %>
 <% if @about.best_featured_image.attached? %>
@@ -14,6 +15,8 @@ description: >
   <%= prepare_text_for_static @about.description %>
 description_short: >
   <%= prepare_text_for_static @about.description_short %>
+header_text: >
+  <%= prepare_html_for_static @about.header_text, @website.university %>
 <%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>
