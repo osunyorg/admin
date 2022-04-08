@@ -1,4 +1,4 @@
-class Communication::Block::Abstract
+class Communication::Block::Template
   attr_reader :block
 
   def initialize(block)

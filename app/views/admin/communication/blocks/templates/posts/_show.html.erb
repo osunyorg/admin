@@ -1,10 +1,10 @@
 <% if @block.data %>
-  <% if @block.template_class.category %>
-    <h2 class="mb-4"><%= @block.template_class.category %></h2>
+  <% if @block.template.category %>
+    <h2 class="mb-4"><%= @block.template.category %></h2>
   <% end %>
-  <% if @block.template_class.posts.any? %>
+  <% if @block.template.selected_posts.any? %>
     <div class="row">
-      <% @block.template_class.posts.each do |post| %>
+      <% @block.template.selected_posts.each do |post| %>
         <div class="col-md-4">
           <div class="card">
             <div class="card-header">

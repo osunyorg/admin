@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_140813) do
+ActiveRecord::Schema.define(version: 2022_04_08_091854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_04_04_140813) do
     t.uuid "university_id", null: false
     t.string "about_type"
     t.uuid "about_id"
-    t.integer "template", default: 0, null: false
+    t.integer "template_kind", default: 0, null: false
     t.jsonb "data"
     t.integer "position", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false

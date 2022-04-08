@@ -1,8 +1,6 @@
       images:
-<% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |image| %>
+<% block.template.images_with_alt.each do |image_with_alt| %>
         - alt: >
-            <%= prepare_text_for_static image['alt'] %>
-          file: "<%= prepare_media_for_static image, 'file' %>"
-<% end %>
+            <%= prepare_text_for_static image_with_alt[:alt] %>
+          file: "<%= image_with_alt[:image].id %>"
 <% end %>

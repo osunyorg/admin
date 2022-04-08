@@ -1,10 +1,14 @@
-class Communication::Block::Partner < Communication::Block::Abstract
+class Communication::Block::Template::Partner < Communication::Block::Template
   def build_git_dependencies
     elements.each do |partner|
       blob = find_blob partner, 'logo'
       add_dependency blob unless blob.nil?
       add_partner partner['id']
     end
+  end
+
+  def partners
+    # TODO
   end
 
   protected

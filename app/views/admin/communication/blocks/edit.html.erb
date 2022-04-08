@@ -14,7 +14,7 @@
         <%= f.input :title %>
       </div>
     </div>
-    <%= render "admin/communication/blocks/templates/#{@block.template}/edit", f: f %>
+    <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}
     </textarea>
@@ -78,7 +78,7 @@
         $(this.$refs.summernoteInput).summernote({
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
           callbacks: {
-            onChange: function(contents, $editable) { 
+            onChange: function(contents, $editable) {
               this.$refs.summernoteInput.value = contents;
               this.$refs.summernoteInput.dispatchEvent(new Event('input'));
             }.bind(this)

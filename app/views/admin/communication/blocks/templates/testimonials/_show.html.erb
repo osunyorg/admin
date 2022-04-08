@@ -1,6 +1,5 @@
-<% if @block.data %>
-  <div class="row">
-  <% @block.data['elements'].each do |testimonial| %>
+<div class="row">
+  <% @block.template.testimonials.each do |testimonial| %>
       <div class="col-xxl-4 col-xl-6">
         <article class="card">
           <div class="card-body">
@@ -8,11 +7,11 @@
               <%= testimonial['text'] %>
             </p>
             <div class="d-flex align-items-center">
-              <% photo = testimonial.dig('photo', 'id') %>
-              <% unless photo.blank? %>
-                <% blob = ActiveStorage::Blob.find photo %>
+              <% if testimonial['blob']  %>
                 <div style="max-width: 80px;" class="me-3">
-                  <%= kamifusen_tag blob, width: 80, class: 'img-fluid rounded-circle img-circle' %>
+                  <%= kamifusen_tag testimonial['blob'],
+                                    width: 80,
+                                    class: 'img-fluid rounded-circle img-circle' %>
                 </div>
               <% end %>
               <p class="flex-fill mb-0">
@@ -24,5 +23,4 @@
         </article>
       </div>
   <% end %>
-  </div>
-<% end %>
+</div>

@@ -1,13 +1,7 @@
-<% if block.template_class.category %>
-      category: <%= block.template_class.category.slug %>
+<% if block.template.category %>
+      category: <%= block.template.category.slug %>
 <% end %>
       posts:
-    <% block.template_class.posts.each do |post|
-      id = post['id']
-      unless id.blank?
-        post = block.about&.website.posts.find id
-        if post %>
+<% block.template.selected_posts.each do |post| %>
         - <%= post.slug %>
-        <% end %>
-      <% end %>
-    <% end %>
+<% end %>

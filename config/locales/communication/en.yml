@@ -117,7 +117,7 @@ en:
   admin:
     communication:
       blocks:
-        templates:
+        template_kinds:
           gallery:
             edit:
               add_image: Add image

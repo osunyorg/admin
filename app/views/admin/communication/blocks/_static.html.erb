@@ -1,11 +1,11 @@
 <% if about.blocks.any? %>
 blocks:
 <% about.blocks.ordered.each do |block| %>
-  - template: <%= block.template %>
+  - template: <%= block.template_kind %>
     title: >
       <%= prepare_text_for_static block.title %>
     position: <%= block.position %>
     data:
-<%= render "admin/communication/blocks/templates/#{block.template}/static",
+<%= render "admin/communication/blocks/templates/#{block.template_kind}/static",
             block: block, about: about if block.data && block.data.present? %><% end %>
 <% end %>
