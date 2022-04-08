@@ -81,6 +81,17 @@
           </div>
         </div>
       <% end %>
+      <% if @page.description.present? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('seo') %></h5>
+          </div>
+          <div class="card-body">
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('description') %></h3>
+            <%= simple_format @page.description %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>

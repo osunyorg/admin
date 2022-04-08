@@ -7,12 +7,6 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: volume.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#research_journal_volume_title' }
-                      } %>
           <%= f.input :featured_image,
                       as: :single_deletable_file,
                       input_html: { accept: '.jpg,.jpeg,.png' },
@@ -29,6 +23,12 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: volume.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#research_journal_volume_title' }
+                      } %>
           <%= f.input :number %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>

@@ -13,8 +13,6 @@
           <h3 class="h5"><%= University::Person.human_attribute_name('phone') %></h3>
           <p><%= link_to person.phone, "tel:#{person.phone}", target: '_blank' %></p>
         <% end %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('description') %></h3>
-        <%= simple_format person.description %>
         <h3 class="h5"><%= University::Person.human_attribute_name('description_short') %></h3>
         <%= simple_format person.description_short %>
         <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
@@ -50,6 +48,17 @@
             </p>
           <% end %>
           <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
+        </div>
+      </div>
+    <% end %>
+    <% if person.description.present? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <h3 class="h5"><%= University::Person.human_attribute_name('description') %></h3>
+          <%= simple_format person.description %>
         </div>
       </div>
     <% end %>

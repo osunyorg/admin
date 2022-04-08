@@ -38,6 +38,17 @@
         </div>
       </div>
     <% end %>
+    <% if @program.description.present? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <h3 class="h5"><%= Education::Program.human_attribute_name('description') %></h3>
+          <%= simple_format @program.description %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-9">
     <div class="card flex-fill w-100">
@@ -45,7 +56,6 @@
         <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
       </div>
       <div class="card-body">
-        <%= render 'admin/application/property/text', object: @program, property: :description %>
         <% [
               :presentation,
               :registration,
