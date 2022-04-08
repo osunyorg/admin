@@ -6,16 +6,18 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
   def testimonials
     @testimonials ||= elements.map do |element|
       blob = find_blob element, 'photo'
-      element['blob'] = blob if blob
-      element
+      element['blob'] = blob
+      element.to_dot
     end
   end
+
+  protected
 
   def photos
     unless @photos
       @photos = []
       testimonials.each do |testimonial|
-        @photos << testimonial['blob'] if testimonial.has_key? 'blob'
+        @photos << testimonial.blob if testimonial.blob
       end
     end
     @photos

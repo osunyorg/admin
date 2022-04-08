@@ -39,6 +39,7 @@ gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_auth
 gem 'curation'#, path: '../../arnaudlevy/curation'
 gem 'cocoon', '~> 1.2'
 gem 'has_scope', '~> 0.8.0'
+gem 'hash_dot'
 
 # Front
 gem 'jquery-rails'

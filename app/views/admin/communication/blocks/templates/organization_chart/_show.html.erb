@@ -1,9 +1,6 @@
 <div class="row">
-  <% @block.template.persons_with_role.each do |person_with_role| %>
-    <%
-    person = person_with_role[:person]
-    role = person_with_role[:role]
-    %>
+  <% @block.template.persons_with_role.each do |person_with_role|
+        person = person_with_role.person %>
     <div class="col-md-3">
       <article class="card">
         <div class="card-body">
@@ -14,7 +11,7 @@
             </div>
           <% end %>
           <h3 class="card-title h5"><%= link_to person, [:admin, person] %></h3>
-          <p class="mb-0"><%= role %></p>
+          <p class="mb-0"><%= person_with_role.role %></p>
         </div>
       </article>
     </div>

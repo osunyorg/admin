@@ -221,6 +221,7 @@ GEM
     has_scope (0.8.0)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
+    hash_dot (2.5.0)
     hashdiff (1.0.1)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
@@ -473,6 +474,7 @@ DEPENDENCIES
   gdpr
   gitlab
   has_scope (~> 0.8.0)
+  hash_dot
   image_processing
   jbuilder
   jquery-rails

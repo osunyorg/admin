@@ -1,6 +1,6 @@
       images:
-<% block.template.images_with_alt.each do |image_with_alt| %>
+<% block.template.images_with_alt.each do |image| %>
         - alt: >
-            <%= prepare_text_for_static image_with_alt[:alt] %>
-          file: "<%= image_with_alt[:image].id %>"
+            <%= prepare_text_for_static image.alt %>
+          file: "<%= image.blob.id %>"
 <% end %>

@@ -4,19 +4,19 @@
         <article class="card">
           <div class="card-body">
             <p class="lead">
-              <%= testimonial['text'] %>
+              <%= testimonial.text %>
             </p>
             <div class="d-flex align-items-center">
-              <% if testimonial['blob']  %>
+              <% if testimonial.blob  %>
                 <div style="max-width: 80px;" class="me-3">
-                  <%= kamifusen_tag testimonial['blob'],
+                  <%= kamifusen_tag testimonial.blob,
                                     width: 80,
                                     class: 'img-fluid rounded-circle img-circle' %>
                 </div>
               <% end %>
               <p class="flex-fill mb-0">
-                <b><%= testimonial['author'] %></b><br>
-                <%= testimonial['job'] %>
+                <b><%= testimonial.author %></b><br>
+                <%= testimonial.job %>
               </p>
             </div>
           </div>

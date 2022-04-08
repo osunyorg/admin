@@ -1,23 +1,54 @@
 class Communication::Block::Template::Partner < Communication::Block::Template
   def build_git_dependencies
-    elements.each do |partner|
-      blob = find_blob partner, 'logo'
-      add_dependency blob unless blob.nil?
-      add_partner partner['id']
-    end
+    add_dependency organizations
+    add_dependency blobs
   end
 
   def partners
-    # TODO
+    unless @partners
+      @partners = []
+      elements.each do |element|
+        # Init to have easy tests in the views and dependencies
+        element['organization'] = nil
+        element['blob'] = nil
+        if element['id']
+          organization = university.organizations.find_by id: element['id']
+          if organization
+            element['organization'] = organization
+            element['name'] = organization.to_s
+            element['url'] = organization.url
+            element['blob'] = organization.logo&.blob
+          end
+        else
+          element['blob'] = find_blob element, 'logo'
+        end
+        @partners << element.to_dot
+      end
+    end
+    @partners
   end
 
   protected
 
-  def add_partner(id)
-    return if id.blank?
-    organization = university.organizations.find id
-    return if organization.nil?
-    add_dependency organization
-    add_dependency organization.active_storage_blobs
+  def organizations
+    unless @organizations
+      @organizations = []
+      partners.each do |partner|
+        next if partner.organization.nil?
+        @organizations << partner.organization
+      end
+    end
+    @organizations
+  end
+
+  def blobs
+    unless @blobs
+      @blobs = []
+      partners.each do |partner|
+        next if partner.blob.nil?
+        @blobs << partner.blob
+      end
+    end
+    @blobs
   end
 end
