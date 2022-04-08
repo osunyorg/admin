@@ -12,17 +12,6 @@
           <%= f.input :text, as: :summernote %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.categories') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.association :categories,
-                            label_text: false,
-                            as: :check_boxes,
-                            collection: collection_tree_for_checkboxes(@website.categories) if @website.categories.any? %>
-        </div>
-      </div>
     </div>
     <div class="col-md-4">
       <div class="card flex-fill w-100">
@@ -55,6 +44,17 @@
                       preview: true
            %>
            <%= f.input :featured_image_alt %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.categories') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.association :categories,
+                            label_text: false,
+                            as: :check_boxes,
+                            collection: collection_tree_for_checkboxes(@website.categories) if @website.categories.any? %>
         </div>
       </div>
     </div>

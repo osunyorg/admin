@@ -1,7 +1,15 @@
 class Communication::Block::Post < Communication::Block::Abstract
   def build_git_dependencies
-    # TODO dépendences ajoutées avec les posts
-    # byebug
+    add_dependency category unless category.nil?
+    add_dependency posts
+    posts.each do |post|
+      add_dependency post.active_storage_blobs
+      add_dependency post.active_storage_blobs
+      if post.author.present?
+        add_dependency [author, author.author]
+        add_dependency author.active_storage_blobs
+      end
+    end
   end
 
   def category

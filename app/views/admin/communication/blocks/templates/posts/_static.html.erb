@@ -1,15 +1,13 @@
-<% if block.data['category_id'] %>
-      category: <%= block.data['category_id'] %>
-      quantity: <%= block.data['posts_quantity'] %>
-<% elsif block.data['elements'] %>
+<% if block.template_class.category %>
+      category: <%= block.template_class.category.slug %>
+<% end %>
       posts:
-    <% block.data['elements'].each do |post|
+    <% block.template_class.posts.each do |post|
       id = post['id']
       unless id.blank?
         post = block.about&.website.posts.find id
         if post %>
-        - id: <%= post.id %>
+        - <%= post.slug %>
         <% end %>
       <% end %>
     <% end %>
-<% end %>
