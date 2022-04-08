@@ -31,7 +31,7 @@ class Research::Journal < ApplicationRecord
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
   has_many :published_articles, -> { published }, class_name: 'Research::Journal::Article', foreign_key: :research_journal_id, dependent: :destroy
   has_many :people, -> { distinct }, through: :articles
-  has_many :people_through_published_articles, -> { distinct }, through: :published_articles
+  has_many :people_through_published_articles, -> { distinct }, through: :published_articles, source: :people
 
   scope :ordered, -> { order(:title) }
 
