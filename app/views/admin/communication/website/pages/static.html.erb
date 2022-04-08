@@ -2,7 +2,7 @@
 title: >
   <%= @about.title %>
 breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
-url: "<%= @about.path %>/"
+url: "<%= @about.path unless @about.kind_home? %>/"
 position: <%= @about.position %>
 <% if @about.best_featured_image.attached? %>
 image: "<%= @about.best_featured_image.blob.id %>"

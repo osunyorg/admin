@@ -4,6 +4,7 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  description                :text
 #  keywords                   :text
 #  position                   :integer
 #  published                  :boolean          default(FALSE)

@@ -53,7 +53,7 @@ fr:
         url: URL
       communication/website/category:
         children: Catégories enfants
-        description: Description (SEO)
+        description: Meta Description
         text: Texte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -93,7 +93,7 @@ fr:
         author: Auteur·rice
         category: Catégorie
         categories: Catégories
-        description: Description (SEO)
+        description: Meta Description
         description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -266,6 +266,10 @@ fr:
               url: URL
   simple_form:
     hints:
+      communication_website_category:
+        description: Si ce champ est vide le début du texte principal sera utilisé.
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
+        description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.
+      communication_website_post:
         description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.

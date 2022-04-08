@@ -53,7 +53,7 @@ en:
         url: URL
       communication/website/category:
         children: Children categories
-        description: Description (SEO)
+        description: Meta Description
         text: Text
         featured_image: Featured image
         featured_image_alt: Alt text
@@ -93,7 +93,7 @@ en:
         author: Author
         category: Category
         categories: Categories
-        description: Description (SEO)
+        description: Meta Description
         description_short: Short description
         featured_image: Featured image
         featured_image_alt: Alt text
@@ -266,6 +266,10 @@ en:
               url: URL
   simple_form:
     hints:
+      communication_website_category:
+        description: If this field is empty the main text's begining will be used.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
+        description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
+      communication_website_post:
         description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.

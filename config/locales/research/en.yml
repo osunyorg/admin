@@ -28,6 +28,7 @@ en:
         title: Title
       research/journal/article:
         abstract: Abstract
+        description: Meta Description
         keywords: Keywords
         pdf: Article PDF
         published: Published?
@@ -39,11 +40,12 @@ en:
       research/journal/volume:
         featured_image: Cover
         featured_image_alt: Alt text
-        description: Description (SEO)
+        description: Meta Description
         keywords: Keywords
         number: Number
         published: Published?
         published_at: Published at
+        text: Text
         title: Title
       research/laboratory:
         address: Address
@@ -52,7 +54,7 @@ en:
         name: Name
         zipcode: Zipcode
       research/laboratory/axis:
-        description: Description (SEO)
+        description: Meta Description
         name: Name
         short_name: Short name
         text: Text
@@ -73,5 +75,10 @@ en:
       other: Researchers
   simple_form:
     hints:
+      research_journal_article:
+        description: If this field is empty the main text's begining will be used.
       research_journal_volume:
         cover: JPG or PNG file
+        description: If this field is empty the main text's begining will be used.
+      research_laboratory_axis:
+        description: If this field is empty the main text's begining will be used.

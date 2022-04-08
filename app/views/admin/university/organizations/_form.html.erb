@@ -7,7 +7,6 @@
         </div>
         <div class="card-body">
           <%= f.input :name %>
-          <%= f.input :description %>
           <%= f.input :text, as: :summernote %>
         </div>
       </div>
@@ -81,6 +80,14 @@
                       preview: 200,
                       resize: 1,
                       direct_upload: true %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :description %>
         </div>
       </div>
     </div>
