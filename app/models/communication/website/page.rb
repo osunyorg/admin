@@ -3,7 +3,6 @@
 # Table name: communication_website_pages
 #
 #  id                       :uuid             not null, primary key
-#  about_type               :string           indexed => [about_id]
 #  breadcrumb_title         :string
 #  description              :text
 #  description_short        :text
@@ -11,7 +10,6 @@
 #  github_path              :text
 #  header_text              :text
 #  kind                     :integer
-#  old_text                 :text
 #  path                     :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
@@ -20,7 +18,6 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed => [about_type]
 #  communication_website_id :uuid             not null, indexed
 #  parent_id                :uuid             indexed
 #  related_category_id      :uuid             indexed
@@ -28,7 +25,6 @@
 #
 # Indexes
 #
-#  index_communication_website_pages_on_about                     (about_type,about_id)
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
 #  index_communication_website_pages_on_related_category_id       (related_category_id)
@@ -88,7 +84,12 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def git_path(website)
-    "content/pages/#{path}/_index.html" if published
+    return unless published
+    if is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
+      "content/#{kind.split('_').last}/_index.html"
+    else
+      "content/pages/#{path}/_index.html"
+    end
   end
 
   def git_dependencies(website)

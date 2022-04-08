@@ -12,12 +12,24 @@ module Communication::Website::Page::WithKind
       legal_terms: 80,
         sitemap: 81,
         privacy_policy: 82,
-      people: 100,
+      persons: 100,
         administrators: 110,
         authors: 120,
         researchers: 130,
         teachers: 140
     }, _prefix: 'kind'
+
+    SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH = [
+      'communication_posts',
+      'education_programs',
+      'research_articles',
+      'research_volumes',
+      'persons',
+      'administrators',
+      'authors',
+      'researchers',
+      'teachers'
+    ].freeze
 
     after_create :move_legacy_root_pages, if: :kind_home?
 

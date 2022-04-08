@@ -55,7 +55,7 @@ class Communication::Website < ApplicationRecord
     dependencies = [self, config_permalinks, config_base_url] + menus
     dependencies += pages + pages.map(&:active_storage_blobs).flatten
     dependencies += posts + posts.map(&:active_storage_blobs).flatten if has_communication_posts?
-    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten if has_people?
+    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten if has_persons?
     dependencies += [categories] if has_communication_categories?
     dependencies += about.git_dependencies(website)
     dependencies

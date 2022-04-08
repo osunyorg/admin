@@ -17,10 +17,10 @@ module Communication::Website::WithSpecialPages
         create_special_page(kind, homepage.id) if public_send("has_#{kind}?")
       end
       # team pages
-      if has_people?
-        people = create_special_page('people', homepage.id)
+      if has_persons?
+        persons = create_special_page('persons', homepage.id)
         ['administrators', 'authors', 'researchers', 'teachers'].each do |kind|
-          create_special_page(kind, people.id) if public_send("has_#{kind}?")
+          create_special_page(kind, persons.id) if public_send("has_#{kind}?")
         end
       end
     end
@@ -34,12 +34,12 @@ module Communication::Website::WithSpecialPages
 
   end
 
-  # private
+  private
 
   def create_special_page(kind, parent_id = nil)
     i18n_key = "communication.website.pages.defaults.#{kind}"
     # TODO: remove legacy after migrations
-    legacy_index_page = Communication::Website::IndexPage.where(communication_website_id: Communication::Website.first.id, kind: kind == 'people' ? 'persons' : kind).first
+    legacy_index_page = Communication::Website::IndexPage.where(communication_website_id: Communication::Website.first.id, kind: kind).first
     if legacy_index_page.present?
       page = pages.where(kind: kind).first
       unless page.present?

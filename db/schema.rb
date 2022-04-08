@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_140813) do
+ActiveRecord::Schema.define(version: 2022_04_08_080927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -309,11 +309,8 @@ ActiveRecord::Schema.define(version: 2022_04_04_140813) do
     t.text "path"
     t.uuid "parent_id"
     t.integer "position", default: 0, null: false
-    t.string "about_type"
-    t.uuid "about_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "old_text"
     t.boolean "published", default: false
     t.text "github_path"
     t.uuid "related_category_id"
@@ -323,7 +320,6 @@ ActiveRecord::Schema.define(version: 2022_04_04_140813) do
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
-    t.index ["about_type", "about_id"], name: "index_communication_website_pages_on_about"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["related_category_id"], name: "index_communication_website_pages_on_related_category_id"
@@ -335,7 +331,6 @@ ActiveRecord::Schema.define(version: 2022_04_04_140813) do
     t.uuid "communication_website_id", null: false
     t.string "title"
     t.text "description"
-    t.text "old_text"
     t.boolean "published", default: false
     t.datetime "published_at"
     t.datetime "created_at", precision: 6, null: false

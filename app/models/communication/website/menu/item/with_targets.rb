@@ -36,7 +36,7 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_staff
-    "#{website.special_page(:people).path}"
+    "#{website.special_page(:persons).path}"
   end
 
   def target_for_administrators

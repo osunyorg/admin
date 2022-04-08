@@ -104,7 +104,7 @@ module Communication::Website::WithDependencies
     authors.compact.any?
   end
 
-  def has_people?
+  def has_persons?
     has_authors? || has_administrators? || has_researchers? || has_teachers?
   end
 
