@@ -39,7 +39,7 @@ module Communication::Website::WithSpecialPages
   def create_special_page(kind, parent_id = nil)
     i18n_key = "communication.website.pages.defaults.#{kind}"
     # TODO: remove legacy after migrations
-    legacy_index_page = Communication::Website::IndexPage.where(communication_website_id: Communication::Website.first.id, kind: kind).first
+    legacy_index_page = Communication::Website::IndexPage.where(communication_website_id: id, kind: kind).first
     if legacy_index_page.present?
       page = pages.where(kind: kind).first
       unless page.present?
