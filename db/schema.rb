@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_04_08_105051) do
     t.uuid "university_id", null: false
     t.string "about_type"
     t.uuid "about_id"
-    t.integer "template", default: 0, null: false
+    t.integer "template_kind", default: 0, null: false
     t.jsonb "data"
     t.integer "position", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -316,10 +316,10 @@ ActiveRecord::Schema.define(version: 2022_04_08_105051) do
     t.uuid "related_category_id"
     t.string "featured_image_alt"
     t.text "text"
-    t.text "description_short"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
+    t.text "description_short"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["related_category_id"], name: "index_communication_website_pages_on_related_category_id"
