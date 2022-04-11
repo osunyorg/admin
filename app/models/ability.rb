@@ -74,6 +74,7 @@ class Ability
     can :read, Administration::Qualiopi::Indicator
     can :manage, University::Person
     can :manage, Communication::Block, university_id: @user.university_id
+    can :create, Communication::Block
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
