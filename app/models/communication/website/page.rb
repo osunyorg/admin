@@ -95,7 +95,7 @@ class Communication::Website::Page < ApplicationRecord
   def git_dependencies(website)
     dependencies = [self] +
                     website.menus +
-                    descendents +
+                    descendants +
                     active_storage_blobs +
                     siblings +
                     git_block_dependencies
@@ -105,7 +105,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def git_destroy_dependencies(website)
     [self] +
-    descendents +
+    descendants +
     active_storage_blobs
   end
 

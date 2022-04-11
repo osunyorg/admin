@@ -44,6 +44,7 @@
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
+  include Aboutable
   include Sanitizable
   include WithUniversity
   include WithGit
@@ -175,6 +176,35 @@ class Education::Program < ApplicationRecord
 
   def set_websites_categories
     websites.find_each(&:set_programs_categories!)
+  end
+
+  #####################
+  # Aboutable methods #
+  #####################
+  def has_administrators?
+    university_people_through_role_involvements.any? ||
+    descendants.any? { |descendant| descendant.university_people_through_role_involvements.any? }
+  end
+
+  def has_researchers?
+    false
+  end
+
+  def has_teachers?
+    university_people_through_involvements.any? ||
+    descendants.any? { |descendant| descendant.university_people_through_involvements.any? }
+  end
+
+  def has_education_programs?
+    published? || descendants.any?(&:published?)
+  end
+
+  def has_research_articles?
+    false
+  end
+
+  def has_research_volumes?
+    false
   end
 
   protected

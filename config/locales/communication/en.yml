@@ -45,6 +45,7 @@ en:
       communication/website:
         about: About
         about_: Independent website (no specific subject)
+        about_Education::Program: Program website
         about_Education::School: School website
         about_Research::Journal: Journal website
         about_Research::Laboratory: Laboratory website

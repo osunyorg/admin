@@ -59,6 +59,9 @@ class Research::Journal < ApplicationRecord
     [self] + articles + volumes
   end
 
+  #####################
+  # Aboutable methods #
+  #####################
   def has_administrators?
     false
   end
