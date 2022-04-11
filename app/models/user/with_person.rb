@@ -4,7 +4,7 @@ module User::WithPerson
   included do
     has_one :person, class_name: 'University::Person', dependent: :nullify
 
-    after_create_commit :find_or_create_person
+    after_create_commit :find_or_create_person unless :server_admin?
   end
 
   protected

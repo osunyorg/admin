@@ -1,22 +1,22 @@
 <% if @website.has_communication_posts? %>
-posts:          /<%= @website.index_for(:communication_posts).path %>/:year/:month/:day/:slug/
+posts:          <%= @website.special_page(:communication_posts).path %>/:year/:month/:day/:slug/
 <% end %>
 <% if @website.has_communication_categories? %>
-categories:     /<%= @website.index_for(:communication_posts).path %>/:slug/
+categories:     <%= @website.special_page(:communication_posts).path %>/:slug/
 <% end %>
-<% if @website.has_people? %>
-persons:        /<%= @website.index_for(:persons).path %>/:slug/
+<% if @website.has_persons? %>
+persons:        <%= @website.special_page(:persons).path %>/:slug/
 <% end %>
 <% if @website.has_authors? %>
-authors:        /<%= @website.index_for(:persons).path %>/:slug/<%= @website.index_for(:communication_posts).path %>/
+authors:        /<%= @website.special_page(:persons).path %>/:slug/<%= @website.special_page(:communication_posts).slug %>/
 <% end %>
 <%# ces paths complémentaires sont nécessairesà Hugo mais on ne les utilise pas %>
 <% if @website.has_administrators? %>
-administrators: /<%= @website.index_for(:persons).path %>/:slug/roles/
+administrators: /<%= @website.special_page(:persons).path %>/:slug/roles/
 <% end %>
 <% if @website.has_teachers? %>
-teachers:       /<%= @website.index_for(:persons).path %>/:slug/programs/
+teachers:       /<%= @website.special_page(:persons).path %>/:slug/programs/
 <% end %>
 <% if @website.has_researchers? %>
-researchers:    /<%= @website.index_for(:persons).path %>/:slug/articles/
+researchers:    /<%= @website.special_page(:persons).path %>/:slug/articles/
 <% end %>

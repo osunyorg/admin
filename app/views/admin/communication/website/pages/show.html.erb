@@ -9,7 +9,6 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <%= render 'admin/application/property/text', object: @page, property: :description %>
           <%= render 'admin/application/property/text', object: @page, property: :description_short %>
           <%= render 'admin/application/property/text', object: @page, property: :text %>
         </div>
@@ -30,8 +29,10 @@
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
         <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
-          <p><%= @page.slug %></p>
+          <% unless @page.slug.blank? %>
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
+            <p><%= @page.slug %></p>
+          <% end %>
           <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
           <p><%= @page.path %></p>
           <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
@@ -58,7 +59,7 @@
           <% if @page.children.any? %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('children') %></h3>
             <ul class="list-unstyled mb-0">
-              <% @page.children.each do |child| %>
+              <% @page.children.ordered.each do |child| %>
                 <li>
                   <%= link_to_if can?(:read, child),
                                 child,
@@ -80,6 +81,17 @@
           </div>
         </div>
       <% end %>
+      <% if @page.description.present? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('seo') %></h5>
+          </div>
+          <div class="card-body">
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('description') %></h3>
+            <%= simple_format @page.description %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
@@ -89,7 +101,7 @@
 <% end %>
 
 <% content_for :action_bar_left do %>
-  <%= destroy_link @page %>
+  <%= destroy_link @page if @page.is_regular_page? %>
   <%= link_to t('static'),
               static_admin_communication_website_page_path(@page),
               class: button_classes('btn-light') if current_user.server_admin? %>

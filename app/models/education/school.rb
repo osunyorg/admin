@@ -109,6 +109,9 @@ class Education::School < ApplicationRecord
     dependencies
   end
 
+  #####################
+  # Aboutable methods #
+  #####################
   def has_administrators?
     university_people_through_role_involvements.any? ||
     university_people_through_program_role_involvements.any?

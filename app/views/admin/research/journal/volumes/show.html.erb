@@ -7,8 +7,6 @@
         <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
       </div>
       <div class="card-body">
-        <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('description') %></h3>
-        <p><%= @volume.description %></p>
         <% if @articles.any? %>
           <h3 class="h5 mt-4"><%= Research::Journal::Volume.human_attribute_name('articles') %></h3>
           <table class="table">
@@ -73,6 +71,17 @@
         </div>
         <div class="card-body">
           <%= kamifusen_tag @volume.featured_image, class: 'img-fluid' %>
+        </div>
+      </div>
+    <% end %>
+    <% if @volume.description.present? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('description') %></h3>
+          <%= simple_format @volume.description %>
         </div>
       </div>
     <% end %>

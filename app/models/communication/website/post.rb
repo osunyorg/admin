@@ -7,7 +7,6 @@
 #  description_short        :text
 #  featured_image_alt       :string
 #  github_path              :text
-#  old_text                 :text
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
@@ -94,7 +93,7 @@ class Communication::Website::Post < ApplicationRecord
   def url
     return unless published
     return if website.url.blank?
-    "#{website.url}#{website.index_for(:communication_posts).path}#{path}"
+    "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
   end
 
   def to_s

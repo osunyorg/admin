@@ -20,17 +20,17 @@ fr:
         abilities: Responsabilités
         biography: Biographie
         communication_website_posts: Actualités
-        description: Description (SEO)
+        description: Meta Description
         description_short: Description courte
         education_programs: Formations
         email: Email
         first_name: Prénom
         habilitation: Peut diriger des recherches ?
         is_administration: Personnel administratif
+        is_alumnus: Alumnus
         is_author: Auteur·rice
         is_researcher: Chercheur·se
         is_teacher: Enseignant·e
-        is_alumnus: Alumnus
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
         name: Nom
@@ -50,7 +50,7 @@ fr:
       university/organization:
         name: Nom
         long_name: Nom complet
-        description: Description (SEO)
+        description: Meta Description
         text: Texte
         contact: Informations de contact
         legal: Informations légales
@@ -66,7 +66,7 @@ fr:
       university/organization/import:
         file: Fichier (.csv)
       university/role:
-        description: Description (SEO)
+        description: Description
         people: Personnes
     models:
       university:
@@ -94,13 +94,16 @@ fr:
     hints:
       university:
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
+      university_organization:
+        description: Si ce champ est vide le début du texte principal sera utilisé.
       university_person:
+        description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.
         habilitation: "Détient une Habilitation à Diriger des Recherches (HDR)."
         is_administration: "Remplit des missions administratives."
+        is_alumnus: "Étudie ou a étudié dans l'établissement."
         is_author: "Écrit des articles pour les sites."
         is_researcher: "Écrit des articles dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
-        is_alumnus: "Étudie ou a étudié dans l'établissement."
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"

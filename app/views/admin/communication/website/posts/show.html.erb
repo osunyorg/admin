@@ -8,11 +8,9 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <%= render 'admin/application/property/text', object: @post, property: :description %>
           <%= render 'admin/application/property/text', object: @post, property: :description_short %>
           <%= render 'admin/application/property/text', object: @post, property: :text %>
           <%= render 'admin/application/property/summernote_embeds', object: @post, property: :medias %>
-          <p><%= prepare_text_for_static @post.description %></p>
         </div>
       </div>
     </div>
@@ -61,6 +59,17 @@
           </div>
           <div class="card-body">
             <%= image_tag @post.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+          </div>
+        </div>
+      <% end %>
+      <% if @post.description.present? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('seo') %></h5>
+          </div>
+          <div class="card-body">
+            <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('description') %></h3>
+            <%= simple_format @post.description %>
           </div>
         </div>
       <% end %>

@@ -8,8 +8,6 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('description') %></h3>
-          <p><%= sanitize @category.description %></p>
           <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('text') %></h3>
           <%= sanitize @category.text %>
         </div>
@@ -54,6 +52,17 @@
           </div>
           <div class="card-body">
             <%= image_tag @category.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+          </div>
+        </div>
+      <% end %>
+      <% if @category.description.present? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('seo') %></h5>
+          </div>
+          <div class="card-body">
+            <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('description') %></h3>
+            <%= simple_format @category.description %>
           </div>
         </div>
       <% end %>

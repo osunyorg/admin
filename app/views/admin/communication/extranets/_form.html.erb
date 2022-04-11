@@ -8,7 +8,7 @@
         <div class="card-body">
           <%= f.input :name %>
           <%= f.input :domain %>
-
+          <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/extranet.about_' %>
         </div>
       </div>
     </div>
@@ -23,7 +23,6 @@
                       input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                       preview: 200,
                       direct_upload: true %>
-
         </div>
       </div>
     </div>

@@ -20,9 +20,6 @@ en:
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
-      communication/website/index_page:
-        one: Index page
-        other: Index pages
       communication/website/menu:
         one: Menu
         other: Menus
@@ -39,15 +36,23 @@ en:
         other: Posts
         all: All posts
     attributes:
-      communication/extranet:
-        title: Title
-        domain: Domain
       communication/block:
         name: Name
         template: Kind of block
+      communication/extranet:
+        about: About
+        about_: Independent extranet (no specific subject)
+        about_Education::Program: Program extranet
+        about_Education::School: School extranet
+        about_Research::Journal: Journal extranet
+        about_Research::Laboratory: Laboratory extranet
+        about_type: About
+        title: Title
+        domain: Domain
       communication/website:
         about: About
         about_: Independent website (no specific subject)
+        about_Education::Program: Program website
         about_Education::School: School website
         about_Research::Journal: Journal website
         about_Research::Laboratory: Laboratory website
@@ -56,22 +61,13 @@ en:
         url: URL
       communication/website/category:
         children: Children categories
-        description: Description (SEO)
+        description: Meta Description
         text: Text
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
         parent: Parent category
         slug: Slug
-      communication/website/index_page:
-        breadcrumb_title: Name displayed in breadcrumb
-        description: Description (SEO)
-        featured_image: Features image
-        featured_image_alt: Alternative text
-        header_text: Header text
-        slug: Slug
-        text: Page text
-        title: Title
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -87,23 +83,25 @@ en:
         title: Title
         url: URL
       communication/website/page:
-        related_category: Related category
+        breadcrumb_title: Title in breadcrumbs
         children: Children pages
-        description: Description (SEO)
+        description: Meta Description
         description_short: Short description
         featured_image: Featured image
         featured_image_alt: Alt text
+        header_text: Title displayed in header
         parent: Parent page
         published: Published?
+        related_category: Related category
         slug: Slug
-        text: Text
+        text: Main page text
         title: Title
         website: Website
       communication/website/post:
         author: Author
         category: Category
         categories: Categories
-        description: Description (SEO)
+        description: Meta Description
         description_short: Short description
         featured_image: Featured image
         featured_image_alt: Alt text
@@ -118,6 +116,10 @@ en:
     communication:
       blocks:
         templates:
+          chapter:
+            edit:
+              text_label: Text
+              text_placeholder: Enter text
           gallery:
             edit:
               add_image: Add image
@@ -156,7 +158,10 @@ en:
               photo_label: Photo
               remove_photo: Remove photo
               remove_testimonial: Remove testimonial
-
+      website:
+        pages:
+          delete_special_page_notice: Can't delete this page
+          structure: Structure
   communication:
     authors:
       one: Author
@@ -179,50 +184,62 @@ en:
         refresh: Refresh import
         show: Show import
         pending: Import in progress
-      index_pages:
-        default:
-          administrators:
-            description: List of members in the administrative team
-            path: administrative-team
-            title: Administrative team
-          authors:
-            description: List of members in the editorial team
-            path: editorial-team
-            title: Editoriale team
-          communication_posts:
-            description: List of posts
-            path: posts
-            title: Posts
-          education_programs:
-            description: List of available programs
-            path: programs
-            title: Programs
-          home:
-            description: ''
-            path: home
-            title: Home
-          persons:
-            description: List of members in the team
-            path: team
-            title: Team
-          research_articles:
-            description: List of articles
-            path: articles
-            title: Articles
-          research_volumes:
-            description: List of volumes
-            path: volumes
-            title: Volumes
-          researchers:
-            description: List of members in the research team
-            path: research-team
-            title: Research team
-          teachers:
-            description: List of members in the educational team
-            path: educational-team
-            title: Educational team
       last_pages: Last pages
       last_posts: Last posts
+      pages:
+        defaults:
+          administrators:
+            description_short: List of members in the administrative team
+            slug: administrative-team
+            title: Administrative team
+          authors:
+            description_short: List of members in the editorial team
+            slug: editorial-team
+            title: Editorial team
+          communication_posts:
+            description_short: List of posts
+            slug: posts
+            title: Posts
+          education_programs:
+            description_short: List of available programs
+            slug: programs
+            title: Programs
+          home:
+            description_short: ''
+            slug: ''
+            title: Home
+          legal_terms:
+            description_short: ''
+            slug: legal-terms
+            title: Legal terms
+          people:
+            description_short: List of members in the team
+            slug: team
+            title: Team
+          privacy_policy:
+            description_short: ''
+            slug: privacy-policy
+            title: Privacy policy
+          research_articles:
+            description_short: List of articles
+            slug: articles
+            title: Articles
+          research_volumes:
+            description_short: List of volumes
+            slug: volumes
+            title: Volumes
+          researchers:
+            description_short: List of members in the research team
+            slug: research-team
+            title: Research team
+          sitemap:
+            description_short: ''
+            slug: sitemap
+            title: Sitemap
+          teachers:
+            description_short: List of members in the educational team
+            slug: educational-team
+            title: Educational team
       posts:
         new_curation: New curation
       see_all: See the full list (%{number} elements)
@@ -258,5 +275,10 @@ en:
               url: URL
   simple_form:
     hints:
-      communication_website_index_page:
-        breadcrumb_title: If the field is empty, page title will be used in the breadcrumbs.
+      communication_website_category:
+        description: If this field is empty the main text's begining will be used.
+      communication_website_page:
+        breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
+        description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
+      communication_website_post:
+        description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.

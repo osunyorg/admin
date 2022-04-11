@@ -1,4 +1,4 @@
-module Communication::Website::WithAbouts
+module WithAbouts
   extend ActiveSupport::Concern
 
   included do
@@ -10,8 +10,9 @@ module Communication::Website::WithAbouts
       [
         nil,
         Education::School.name,
+        Education::Program.name,
         Research::Laboratory.name,
-        Research::Journal.name
+        Research::Journal.name,
       ]
     end
 
