@@ -27,6 +27,7 @@ class Ability
     can :read, Research::Journal::Volume, university_id: @user.university_id
     can :read, Research::Laboratory, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
+    can :read, Communication::Block, university_id: @user.university_id
   end
 
   def teacher
@@ -36,6 +37,7 @@ class Ability
     can :read, University::Role, university_id: @user.university_id
     can :manage, University::Person::Involvement, person_id: @user.person&.id
     can :read, University::Person::Involvement, university_id: @user.university_id
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
   end
 
   def program_manager
@@ -48,10 +50,13 @@ class Ability
     can :manage, University::Person::Involvement, target_type: "Education::Program", target_id: managed_programs_ids
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: managed_programs_ids
+    can :create, Communication::Block
   end
 
   def website_manager
     managed_websites_ids = @user.websites_to_manage.pluck(:communication_website_id)
+    managed_pages_ids = Communication::Website::Page.where(communication_website_id: managed_websites_ids).pluck(:id)
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Page, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids
@@ -60,6 +65,8 @@ class Ability
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id, website_id: managed_websites_ids
     can :create, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, University::Organization, university_id: @user.university_id
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
+    can :create, Communication::Block
   end
 
   def admin
