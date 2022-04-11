@@ -10,7 +10,7 @@
             ability: can?(:read, @website)
           },
           {
-            title: Communication::Website::Page.model_name.human(count: 2),
+            title: t('admin.communication.website.pages.structure'),
             path: admin_communication_website_pages_path(website_id: @website),
             ability: can?(:read, Communication::Website::Page)
           },

@@ -153,6 +153,7 @@ fr:
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page
+          structure: Arborescence
   communication:
     authors:
       one: Auteur·rice

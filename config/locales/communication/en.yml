@@ -153,6 +153,7 @@ en:
       website:
         pages:
           delete_special_page_notice: Can't delete this page
+          structure: Structure
   communication:
     authors:
       one: Author
