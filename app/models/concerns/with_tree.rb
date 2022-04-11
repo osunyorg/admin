@@ -14,7 +14,7 @@ module WithTree
     end
 
     def ancestors
-      has_parent? ? parent.ancestors.ordered.push(parent)
+      has_parent? ? parent.ancestors.push(parent)
                   : []
     end
 
