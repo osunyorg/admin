@@ -13,12 +13,37 @@
           <h3 class="h5"><%= University::Person.human_attribute_name('phone') %></h3>
           <p><%= link_to person.phone, "tel:#{person.phone}", target: '_blank' %></p>
         <% end %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('description_short') %></h3>
-        <%= simple_format person.description_short %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
-        <%= person.biography %>
+        <% unless person.description_short.blank? %>
+          <h3 class="h5"><%= University::Person.human_attribute_name('description_short') %></h3>
+          <%= simple_format person.description_short %>
+        <% end %>
+        <% unless person.biography.blank? %>
+          <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
+          <%= person.biography %>
+        <% end %>
       </div>
     </div>
+    <% unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h2 class="card-title mb-0 h5"><%= University::Person.human_attribute_name('socials') %></h2>
+        </div>
+        <div class="card-body">
+          <% unless person.url.blank? %>
+            <h3 class="h5"><%= University::Person.human_attribute_name('url') %></h3>
+            <p><%= link_to person.url, person.url, target: '_blank' %></p>
+          <% end %>
+          <% unless person.linkedin.blank? %>
+            <h3 class="h5"><%= University::Person.human_attribute_name('linkedin') %></h3>
+            <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
+          <% end %>
+          <% unless person.twitter.blank? %>
+            <h3 class="h5"><%= University::Person.human_attribute_name('twitter') %></h3>
+            <%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-4">
     <div class="card flex-fill w-100">
