@@ -36,12 +36,19 @@ en:
         other: Posts
         all: All posts
     attributes:
-      communication/extranet:
-        title: Title
-        domain: Domain
       communication/block:
         name: Name
         template: Kind of block
+      communication/extranet:
+        about: About
+        about_: Independent extranet (no specific subject)
+        about_Education::Program: Program extranet
+        about_Education::School: School extranet
+        about_Research::Journal: Journal extranet
+        about_Research::Laboratory: Laboratory extranet
+        about_type: About
+        title: Title
+        domain: Domain
       communication/website:
         about: About
         about_: Independent website (no specific subject)

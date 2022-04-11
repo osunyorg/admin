@@ -8,47 +8,7 @@
         <div class="card-body">
           <%= f.input :name %>
           <%= f.input :url %>
-          <%= f.input :about_type,
-                      collection: Communication::Website.about_types,
-                      input_html: { data: { conditional: true } },
-                      label_method: lambda { |object|
-                        I18n.t("activerecord.attributes.communication/website.about_#{object}")
-                      },
-                      include_blank: false %>
-          <div  class="d-none"
-                data-conditional-source="communication_website_about_type"
-                data-conditional-value="Education::School">
-            <%= f.input :about_id,
-                        collection: current_university.education_schools.ordered,
-                        label: Education::School.model_name.human,
-                        include_blank: false %>
-          </div>
-          <div  class="d-none"
-                data-conditional-source="communication_website_about_type"
-                data-conditional-value="Education::Program">
-            <%= f.input :about_id,
-                        collection: collection_tree(current_university.education_programs),
-                        label: Education::Program.model_name.human,
-                        label_method: ->(p) { sanitize p[:label] },
-                        value_method: ->(p) { p[:id] },
-                        include_blank: false %>
-          </div>
-          <div  class="d-none"
-                data-conditional-source="communication_website_about_type"
-                data-conditional-value="Research::Journal">
-            <%= f.input :about_id,
-                        collection: current_university.research_journals,
-                        label: Research::Journal.model_name.human,
-                        include_blank: false %>
-          </div>
-          <div  class="d-none"
-                data-conditional-source="communication_website_about_type"
-                data-conditional-value="Research::Laboratory">
-            <%= f.input :about_id,
-                        collection: current_university.research_laboratories,
-                        label: Research::Laboratory.model_name.human,
-                        include_blank: false %>
-          </div>
+          <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
         </div>
       </div>
     </div>

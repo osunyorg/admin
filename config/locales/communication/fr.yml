@@ -40,6 +40,13 @@ fr:
         title: Titre
         template: Type de bloc
       communication/extranet:
+        about: Sujet de l'extranet
+        about_: Extranet indépendant (aucun sujet)
+        about_Education::Program: Extranet d'une formation
+        about_Education::School: Extranet d'une école
+        about_Research::Journal: Extranet d'une revue scientifique
+        about_Research::Laboratory: Extranet d'un laboratoire
+        about_type: Type d'extranet
         name: Nom
         domain: Domaine
       communication/website:
@@ -49,7 +56,7 @@ fr:
         about_Education::School: Site d'école
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
-        about_type: Sujet du site
+        about_type: Type de site
         name: Nom
         url: URL
       communication/website/category:

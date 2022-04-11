@@ -1,4 +1,4 @@
-module Communication::Website::WithAbouts
+module WithAbouts
   extend ActiveSupport::Concern
 
   included do
