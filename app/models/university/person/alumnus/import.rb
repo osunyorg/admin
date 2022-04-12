@@ -30,7 +30,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
 
   def parse
     csv.each do |row|
-      row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
+      # row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
       program = university.education_programs
                           .find_by(id: row['program'])
       next if program.nil?
@@ -59,19 +59,18 @@ class University::Person::Alumnus::Import < ApplicationRecord
       # TODO all fields
       # gender
       # birth
-      # phonepro
-      # phoneperso
+      # phone_professional
+      # phone_personal
       # address
       # zipcode
       # city
       # country
-      # status
       person.is_alumnus = true
       person.url = url
       person.slug = person.to_s.parameterize.dasherize
-      person.twitter ||= row['socialtwitter']
-      person.linkedin ||= row['sociallinkedin']
-      person.biography ||= row['status']
+      person.twitter ||= row['social_twitter']
+      person.linkedin ||= row['social_linkedin']
+      person.biography ||= row['biography']
       person.phone ||= row['mobile']
       byebug unless person.valid?
       person.save
