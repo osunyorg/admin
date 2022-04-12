@@ -6,7 +6,7 @@
 
 <% content_for :action_bar_left do %>
   <%= link_to t('import'),
-              admin_university_person_alumnus_imports_path,
+              new_admin_university_person_alumnus_import_path,
               class: button_classes if can? :manage, University::Person::Alumnus::Import %>
 <% end %>
 
