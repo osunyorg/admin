@@ -85,7 +85,9 @@ class Communication::Website::Page < ApplicationRecord
 
   def git_path(website)
     return unless published
-    if is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
+    if kind_home?
+      "content/_index.html"
+    elsif is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
       "content/#{kind.split('_').last}/_index.html"
     else
       "content/pages/#{path}/_index.html"
