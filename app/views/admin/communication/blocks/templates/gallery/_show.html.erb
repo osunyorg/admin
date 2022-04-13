@@ -1,17 +1,14 @@
-<% if @block.data %>
-  <div class="row">
-  <% @block.data['elements'].each do |image| %>
-      <div class="col-xxl-2 col-xl-3 col-6">
-        <article class="card">
-          <% unless image.dig('file', 'id').blank? %>
-            <% blob = ActiveStorage::Blob.find(image.dig('file', 'id')) %>
-            <%= kamifusen_tag blob, width: 500, class: 'img-fluid mb-2' %>
-          <% end %>
-          <div class="card-body">
-            <p class="mb-0"><%= image['alt'] %></p>
-          </div>
-        </article>
-      </div>
-  <% end %>
-  </div>
-<% end %>
+<div class="row">
+  <% @block.template.images_with_alt.each do |image| %>
+    <div class="col-xxl-2 col-xl-3 col-6">
+      <article class="card">
+        <% if image.blob %>
+          <%= kamifusen_tag image.blob, width: 500, class: 'img-fluid mb-2' %>
+        <% end %>
+        <div class="card-body">
+          <p class="mb-0"><%= image.alt %></p>
+        </div>
+      </article>
+    </div>
+    <% end %>
+</div>

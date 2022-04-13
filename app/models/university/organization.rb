@@ -12,8 +12,9 @@
 #  kind          :integer          default("company")
 #  long_name     :string
 #  name          :string
+#  nic           :string
 #  phone         :string
-#  sirene        :string
+#  siren         :string
 #  slug          :string
 #  text          :text
 #  url           :string
@@ -35,6 +36,9 @@ class University::Organization < ApplicationRecord
   include WithBlobs
   include WithUniversity
   include WithSlug
+
+  has_many :experiences,
+           class_name: 'University::Person::Experience'
 
   has_summernote :text
 

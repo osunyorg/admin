@@ -1,12 +1,7 @@
-<% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |person|
-  next unless person.has_key? 'id'
-  id = person['id']
-  next if id.blank?
-  p = block.university.people.find id
-%>
-      - slug: "<%= p.slug %>"
+<%
+block.template.persons_with_role.each do |person_with_role|
+  person = person_with_role.person %>
+      - slug: "<%= person.slug %>"
         role: >
-          <%= prepare_text_for_static person['role'] %>
-<% end %>
+          <%= prepare_text_for_static person_with_role.role %>
 <% end %>

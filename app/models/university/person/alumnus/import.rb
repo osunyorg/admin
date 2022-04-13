@@ -29,10 +29,15 @@ class University::Person::Alumnus::Import < ApplicationRecord
   protected
 
   def parse
+    # substitute local data for testing
+    substitutes = {
+      'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55'
+    }
     csv.each do |row|
-      # row['program'] = '23279cab-8bc1-4c75-bcd8-1fccaa03ad55' #TMP local fix
+      program_id = row['program']
+      program_id = substitutes[program_id] if substitutes.has_key? program_id
       program = university.education_programs
-                          .find_by(id: row['program'])
+                          .find_by(id: program_id)
       next if program.nil?
       academic_year = university.academic_years
                                 .where(year: row['year'])
@@ -44,6 +49,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
       first_name = clean_encoding row['first_name']
       last_name = clean_encoding row['last_name']
       email = clean_encoding(row['mail']).to_s.downcase
+      next if first_name.blank? && last_name.blank? && email.blank?
       url = clean_encoding row['url']
       if email.present?
         person = university.people
@@ -59,8 +65,6 @@ class University::Person::Alumnus::Import < ApplicationRecord
       # TODO all fields
       # gender
       # birth
-      # phone_professional
-      # phone_personal
       # address
       # zipcode
       # city
@@ -72,10 +76,46 @@ class University::Person::Alumnus::Import < ApplicationRecord
       person.linkedin ||= row['social_linkedin']
       person.biography ||= row['biography']
       person.phone ||= row['mobile']
+      person.phone ||= row['phone_personal']
+      person.phone ||= row['phone_professional']
       byebug unless person.valid?
       person.save
       cohort.people << person unless person.in?(cohort.people)
       add_picture person, row['photo']
+
+      company_name = clean_encoding row['company_name']
+      company_siren = clean_encoding row['company_siren']
+      company_nic = clean_encoding row['company_nic']
+      if company_name.present?
+        if !row['company_siren'].blank? && !row['company_nic'].blank?
+          organization = university.organizations
+                                   .find_by siren: company_siren,
+                                            nic: company_nic
+        elsif !row['company_siren'].blank?
+          organization ||= university.organizations
+                                   .find_by siren: company_siren
+        end
+        if !company_name.blank?
+          organization ||= university.organizations
+                                     .find_by name: company_name
+        end
+        organization ||= university.organizations
+                                   .where( name: company_name,
+                                           siren: company_siren,
+                                           nic: company_nic)
+                                   .first_or_create
+        experience_job = row['experience_job']
+        experience_from = row['experience_from']
+        experience_to = row['experience_to']
+        experience = person.experiences
+                           .where(university: university,
+                                  organization: organization,
+                                  description: experience_job)
+                           .first_or_create
+        experience.from_year = experience_from
+        experience.to_year = experience_to
+        experience.save
+      end
     end
   end
 

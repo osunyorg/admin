@@ -1,0 +1,7 @@
+<% if block.template.category %>
+      category: <%= block.template.category.slug %>
+<% end %>
+      posts:
+<% block.template.selected_posts.each do |post| %>
+        - <%= post.slug %>
+<% end %>

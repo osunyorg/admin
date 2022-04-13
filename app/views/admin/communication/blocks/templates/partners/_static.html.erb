@@ -1,15 +1,11 @@
-<% if block.data.has_key?('elements') %>
-<% block.data['elements'].each do |partner|
-      id = partner['id']
-      unless id.blank?
-        organization = block.university.organizations.find id %>
-      - slug: "<%= organization.slug %>"
+<% block.template.partners.each do |partner|
+      if partner.organization %>
+      - slug: "<%= partner.organization.slug %>"
       <% else %>
       - name: >
           <%= prepare_text_for_static partner['name'] %>
         url: >-
           <%= prepare_text_for_static partner['url'] %>
-        logo: "<%= prepare_media_for_static partner, 'logo' %>"
+        logo: "<%= partner.blob&.id %>"
       <% end %>
-<% end %>
 <% end %>

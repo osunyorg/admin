@@ -1,25 +1,19 @@
 <div class="row">
-  <% @block.data['elements'].each do |person| %>
-    <%
-    next unless person.has_key? 'id'
-    id = person['id']
-    next if id.blank?
-    p = current_university.people.find person['id']
-    next if p.nil?
-    %>
+  <% @block.template.persons_with_role.each do |person_with_role|
+        person = person_with_role.person %>
     <div class="col-md-3">
       <article class="card">
         <div class="card-body">
-          <% if p.best_picture.attached? %>
+          <% if person.best_picture.attached? %>
             <div style="max-width: 80px" class="float-end">
-              <%= kamifusen_tag p.best_picture,
+              <%= kamifusen_tag person.best_picture,
                                 class: 'img-fluid rounded-circle' %>
             </div>
           <% end %>
-          <h3 class="card-title h5"><%= link_to p, [:admin, p] %></h3>
-          <p class="mb-0"><%= person['role'] %></p>
+          <h3 class="card-title h5"><%= link_to person, [:admin, person] %></h3>
+          <p class="mb-0"><%= person_with_role.role %></p>
         </div>
       </article>
     </div>
-  <% end if @block.data %>
+  <% end %>
 </div>

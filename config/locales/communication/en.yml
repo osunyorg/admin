@@ -115,7 +115,7 @@ en:
   admin:
     communication:
       blocks:
-        templates:
+        template_kinds:
           chapter:
             edit:
               text_label: Text
@@ -251,6 +251,7 @@ en:
           gallery: Gallery
           organization_chart: Organization chart
           partners: Partners
+          posts: Posts
           testimonials: Testimonials
       website:
         menu:

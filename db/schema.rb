@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_11_133002) do
+ActiveRecord::Schema.define(version: 2022_04_13_203256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_04_11_133002) do
     t.uuid "university_id", null: false
     t.string "about_type"
     t.uuid "about_id"
-    t.integer "template", default: 0, null: false
+    t.integer "template_kind", default: 0, null: false
     t.jsonb "data"
     t.integer "position", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -477,6 +477,23 @@ ActiveRecord::Schema.define(version: 2022_04_11_133002) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
+  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active"
+    t.string "sirene"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
@@ -628,12 +645,13 @@ ActiveRecord::Schema.define(version: 2022_04_11_133002) do
     t.string "phone"
     t.string "email"
     t.boolean "active", default: true
-    t.string "sirene"
+    t.string "siren"
     t.integer "kind", default: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.text "text"
+    t.string "nic"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -670,6 +688,20 @@ ActiveRecord::Schema.define(version: 2022_04_11_133002) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_university_person_alumnus_imports_on_university_id"
     t.index ["user_id"], name: "index_university_person_alumnus_imports_on_user_id"
+  end
+
+  create_table "university_person_experiences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "person_id", null: false
+    t.uuid "organization_id", null: false
+    t.text "description"
+    t.integer "from_year"
+    t.integer "to_year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_university_person_experiences_on_organization_id"
+    t.index ["person_id"], name: "index_university_person_experiences_on_person_id"
+    t.index ["university_id"], name: "index_university_person_experiences_on_university_id"
   end
 
   create_table "university_person_involvements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -816,6 +848,9 @@ ActiveRecord::Schema.define(version: 2022_04_11_133002) do
   add_foreign_key "university_people", "users"
   add_foreign_key "university_person_alumnus_imports", "universities"
   add_foreign_key "university_person_alumnus_imports", "users"
+  add_foreign_key "university_person_experiences", "universities"
+  add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
+  add_foreign_key "university_person_experiences", "university_people", column: "person_id"
   add_foreign_key "university_person_involvements", "universities"
   add_foreign_key "university_person_involvements", "university_people", column: "person_id"
   add_foreign_key "university_roles", "universities"

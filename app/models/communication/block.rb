@@ -6,7 +6,7 @@
 #  about_type    :string           indexed => [about_id]
 #  data          :jsonb
 #  position      :integer          default(0), not null
-#  template      :integer          default(NULL), not null
+#  template_kind :integer          default(NULL), not null
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -28,12 +28,13 @@ class Communication::Block < ApplicationRecord
 
   belongs_to :about, polymorphic: true
 
-  enum template: {
+  enum template_kind: {
     chapter: 50,
     organization_chart: 100,
     partners: 200,
     gallery: 300,
-    testimonials: 400
+    testimonials: 400,
+    posts: 500
   }
 
   def data=(value)
@@ -42,21 +43,19 @@ class Communication::Block < ApplicationRecord
   end
 
   def git_dependencies
-    template_class.git_dependencies
+    template.git_dependencies
   end
 
   def last_ordered_element
     about.blocks.ordered.last
   end
 
+  def template
+    @template ||= "Communication::Block::Template::#{template_kind.classify}".constantize.new self
+  end
+
   def to_s
     title.blank?  ? "Block #{position}"
                   : "#{title}"
-  end
-
-  protected
-
-  def template_class
-    @template_class ||= "Communication::Block::#{template.classify}".constantize.new self
   end
 end

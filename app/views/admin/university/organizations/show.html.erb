@@ -81,7 +81,7 @@
           </h5>
         </div>
         <div class="card-body">
-          <%= kamifusen_tag @organization.logo, class: 'img-fluid' %>
+          <%= kamifusen_tag @organization.logo, class: 'img-fluid' if @organization.logo.attached? %>
         </div>
       </div>
     <% end %>

@@ -246,11 +246,12 @@ fr:
   enums:
     communication:
       block:
-        template:
+        template_kind:
           chapter: Chapitre
           gallery: Galerie
           organization_chart: Organigramme
           partners: Partenaires
+          posts: Actualités
           testimonials: Témoignages
       website:
         menu:
