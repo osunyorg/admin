@@ -45,7 +45,8 @@ class University::Organization::Import < ApplicationRecord
         [
           :long_name,
           :kind,
-          :sirene,
+          :siren,
+          :nic,
           :description,
           :address,
           :zipcode,
