@@ -4,14 +4,8 @@ class Communication::Block::Template::Gallery < Communication::Block::Template
   end
 
   def images_with_alt
-    unless @images_with_alt
-      @images_with_alt = []
-      elements.each do |element|
-        @images_with_alt << image_with_alt(element)
-      end
-      @images_with_alt.compact!
-    end
-    @images_with_alt
+    @images_with_alt ||= elements.map { |element| image_with_alt(element) }
+                                 .compact
   end
 
   protected

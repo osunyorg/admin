@@ -27,12 +27,8 @@ class Communication::Block::Template::Post < Communication::Block::Template
   end
 
   def free_posts
-    array = []
-    elements.map do |element|
-      array << post(element['id'])
-    end
-    array.compact!
-    array
+    elements.map { |element| post(element['id']) }
+            .compact
   end
 
   def post(id)
