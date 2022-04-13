@@ -10,6 +10,7 @@
 #  published           :boolean          default(FALSE)
 #  published_at        :datetime
 #  slug                :string
+#  text                :text
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -34,6 +35,8 @@ class Research::Journal::Volume < ApplicationRecord
   include WithFeaturedImage
   include WithSlug
 
+  has_summernote :text
+  
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal

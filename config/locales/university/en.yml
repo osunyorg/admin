@@ -20,13 +20,14 @@ en:
         abilities: Abilities
         biography: Biography
         communication_website_posts: Posts
-        description: Description (SEO)
+        description: Meta Description
         description_short: Short description
         education_programs: Programs
         email: Email
         first_name: First name
         habilitation: Can direct research?
         is_administration: Administrative staff
+        is_alumnus: Alumnus
         is_author: Author
         is_researcher: Researcher
         is_teacher: Teacher
@@ -49,7 +50,7 @@ en:
       university/organization:
         name: Name
         long_name: Long name
-        description: Description (SEO)
+        description: Meta Description
         text: Text
         contact: Contact information
         legal: Legal information
@@ -65,7 +66,7 @@ en:
       university/organization/import:
         file: File (.csv)
       university/role:
-        description: Description (SEO)
+        description: Description
         people: People
     models:
       university:
@@ -93,9 +94,13 @@ en:
     hints:
       university:
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
+      university_organization:
+        description: If this field is empty the main text's begining will be used.
       university_person:
+        description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
         habilitation: "Possesses an accreditation to supervise research."
         is_administration: "Fulfill administrative missions."
+        is_alumnus: "Studies or studied in the school."
         is_author: "Writes posts for websites."
         is_researcher: "Writes articles for journals."
         is_teacher: "Teaches in Schools."

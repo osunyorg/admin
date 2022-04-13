@@ -18,20 +18,20 @@ module WithTree
                   : []
     end
 
-    def descendents
-      has_children? ? children.map { |child| [child, child.descendents].flatten }.flatten
+    def descendants
+      has_children? ? children.ordered.map { |child| [child, child.descendants].flatten }.flatten
                     : []
     end
 
     def siblings
-      self.class.unscoped.where(parent: parent, university: university).where.not(id: id)
+      self.class.unscoped.where(parent: parent, university: university).where.not(id: id).ordered
     end
 
     def self_and_children(level)
       elements = []
       label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s
       elements << { label: label, id: self.id, parent_id: self.parent_id }
-      children.each do |child|
+      children.ordered.each do |child|
         elements.concat(child.self_and_children(level + 1))
       end
       elements

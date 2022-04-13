@@ -5,7 +5,7 @@
     <% @block.template_kind = template_kind %>
     <div class="col-lg-3 col-md-4">
       <div class="card">
-        <%= image_tag "communication/blocks/templates/#{template_kind}.jpg", alt: '' %>
+        <%= image_tag "communication/blocks/templates/#{template_kind}.jpg", alt: '', class:"card-img-top" %>
         <div class="card-body">
           <h5 class="card-title"><%= t "enums.communication.block.template_kind.#{template_kind}" %></h5>
           <%= simple_form_for [:admin, @block] do |f| %>

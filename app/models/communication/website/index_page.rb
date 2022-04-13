@@ -29,7 +29,6 @@
 class Communication::Website::IndexPage < ApplicationRecord
   include WithUniversity
   include Sanitizable
-  include WithGit
   include WithFeaturedImage
   include WithBlobs
 
@@ -39,6 +38,9 @@ class Communication::Website::IndexPage < ApplicationRecord
     education_programs: 20,
     research_articles: 30,
     research_volumes: 32,
+    legal_terms: 80,
+      sitemap: 81,
+      privacy_policy: 82,
     persons: 100,
       administrators: 110,
       authors: 120,
@@ -54,46 +56,8 @@ class Communication::Website::IndexPage < ApplicationRecord
   validates :title, presence: true
   validates :path, presence: true, unless: Proc.new { |p| p.home? }
 
-  def self.kinds_global
-    [:home, :communication_posts, :persons, :authors]
-  end
-
-  def self.kinds_school
-    [:education_programs, :administrators, :teachers]
-  end
-
-  def self.kinds_journal
-    [:research_articles, :research_volumes, :researchers]
-  end
-
   def to_s
     "#{title}"
-  end
-
-  def git_dependencies(website)
-    [self] + active_storage_blobs + website.menus + [website.config_permalinks]
-  end
-
-  def git_destroy_dependencies(website)
-    [self] + active_storage_blobs
-  end
-
-  def home
-    @home ||= Communication::Website::IndexPage::Home.find(id)
-  end
-
-  def education_programs
-    @education_programs ||= Communication::Website::IndexPage::EducationPrograms.find(id)
-  end
-
-  protected
-
-  def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
   end
 
 end

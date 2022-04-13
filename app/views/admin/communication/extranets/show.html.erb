@@ -1,8 +1,14 @@
 <% content_for :title, @extranet %>
 
 <% content_for :title_right do %>
-  <%= link_to @extranet.url, @extranet.url, target: :_blank %>
-<% end unless @extranet.url.blank? %>
+  <% unless @extranet.url.blank? %>
+    <%= link_to @extranet.url, @extranet.url, target: :_blank %><br>
+  <% end %>
+  <%= I18n.t("activerecord.attributes.communication/extranet.about_#{@extranet.about_type}") %>
+  <% if @extranet.about %>
+    (<%= link_to @extranet.about, [:admin, @extranet.about] unless @extranet.about.nil? %>)
+  <% end %>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @extranet %>

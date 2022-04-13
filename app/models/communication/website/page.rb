@@ -3,12 +3,13 @@
 # Table name: communication_website_pages
 #
 #  id                       :uuid             not null, primary key
-#  about_type               :string           indexed => [about_id]
+#  breadcrumb_title         :string
 #  description              :text
 #  description_short        :text
 #  featured_image_alt       :string
 #  github_path              :text
-#  old_text                 :text
+#  header_text              :text
+#  kind                     :integer
 #  path                     :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
@@ -17,7 +18,6 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed => [about_type]
 #  communication_website_id :uuid             not null, indexed
 #  parent_id                :uuid             indexed
 #  related_category_id      :uuid             indexed
@@ -25,7 +25,6 @@
 #
 # Indexes
 #
-#  index_communication_website_pages_on_about                     (about_type,about_id)
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
 #  index_communication_website_pages_on_related_category_id       (related_category_id)
@@ -41,15 +40,15 @@
 
 class Communication::Website::Page < ApplicationRecord
   include Sanitizable
-  include WithUniversity
+  include WithBlobs
+  include WithBlocks
   include WithGit
   include WithFeaturedImage
-  include WithBlobs
+  include WithKind
   include WithMenuItemTarget
-  include WithSlug # We override slug_unavailable? method
-  include WithTree
   include WithPosition
-  include WithBlocks
+  include WithTree
+  include WithUniversity
 
   has_summernote :text
 
@@ -71,26 +70,42 @@ class Communication::Website::Page < ApplicationRecord
 
   validates :title, presence: true
 
+  validates :slug, presence: true, unless: :kind_home?
+  validate :slug_must_be_unique
+  validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }, unless: :kind_home?
+
+  before_validation :check_slug, :make_path
   after_save :update_children_paths, if: :saved_change_to_path?
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
+  def generated_path
+    "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+  end
+
   def git_path(website)
-    "content/pages/#{path}/_index.html" if published
+    return unless published
+    if is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
+      "content/#{kind.split('_').last}/_index.html"
+    else
+      "content/pages/#{path}/_index.html"
+    end
   end
 
   def git_dependencies(website)
-    [self] +
-    website.menus +
-    descendents +
-    active_storage_blobs +
-    siblings +
-    git_block_dependencies
+    dependencies = [self] +
+                    website.menus +
+                    descendants +
+                    active_storage_blobs +
+                    siblings +
+                    git_block_dependencies
+    dependencies += website.education_programs if kind_education_programs?
+    dependencies
   end
 
   def git_destroy_dependencies(website)
     [self] +
-    descendents +
+    descendants +
     active_storage_blobs
   end
 
@@ -128,18 +143,29 @@ class Communication::Website::Page < ApplicationRecord
     website.pages.where(parent_id: parent_id).ordered.last
   end
 
+  def check_slug
+    self.slug = to_s.parameterize if self.slug.blank? && !kind_home?
+    current_slug = self.slug
+    n = 0
+    while slug_unavailable?(self.slug)
+      n += 1
+      self.slug = [current_slug, n].join('-')
+    end
+  end
+
   def slug_unavailable?(slug)
-    [
-      website.index_for(:communication_posts).path,
-      website.index_for(:education_programs).path,
-      website.index_for(:persons).path,
-      website.index_for(:research_articles).path,
-      website.index_for(:research_volumes).path
-    ].include?(slug) ||
-      self.class.unscoped
-                .where(communication_website_id: self.communication_website_id, slug: slug)
-                .where.not(id: self.id)
-                .exists?
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, slug: slug)
+              .where.not(id: self.id)
+              .exists?
+  end
+
+  def make_path
+    self.path = kind_home? ? '/' : generated_path
+  end
+
+  def slug_must_be_unique
+    errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
   end
 
   def explicit_blob_ids

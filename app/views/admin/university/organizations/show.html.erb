@@ -6,7 +6,7 @@
         <h5 class="card-title mb-0"><%= t('content') %></h5>
       </div>
       <div class="card-body">
-        <% [:name, :description].each do |property| %>
+        <% [:name].each do |property| %>
           <h3 class="h5"><%= University::Organization.human_attribute_name(property) %></h3>
           <p><%= @organization.send property %></p>
         <% end %>
@@ -73,16 +73,29 @@
         <%= @organization.active %>
       </div>
     </div>
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0">
-          <%= University::Organization.human_attribute_name('logo') %>
-        </h5>
+    <% if @organization.logo.attached? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <%= University::Organization.human_attribute_name('logo') %>
+          </h5>
+        </div>
+        <div class="card-body">
+          <%= kamifusen_tag @organization.logo, class: 'img-fluid' if @organization.logo.attached? %>
+        </div>
       </div>
-      <div class="card-body">
-        <%= kamifusen_tag @organization.logo, class: 'img-fluid' if @organization.logo.attached? %>
+    <% end %>
+    <% if @organization.description.present? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <h3 class="h5"><%= University::Organization.human_attribute_name('description') %></h3>
+          <%= simple_format @organization.description %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 

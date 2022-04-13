@@ -134,6 +134,7 @@ fr:
   save: Enregistrer
   search: Rechercher
   select_language: Sélectionnez une langue
+  seo: SEO
   simple_form:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"

@@ -1,9 +1,9 @@
 class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
   load_and_authorize_resource class: Communication::Website::Page, through: :website
 
-  before_action :get_root_pages, only: [:index, :new, :create, :edit, :update]
-
   def index
+    @homepage = @website.pages.kind_home.first
+    @first_level_pages = @homepage.children.ordered
     breadcrumb
   end
 
@@ -67,15 +67,15 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def destroy
-    @page.destroy_and_sync
-    redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
+    if @page.is_special_page?
+      redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.delete_special_page_notice'))
+    else
+      @page.destroy_and_sync
+      redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
+    end
   end
 
   protected
-
-  def get_root_pages
-    @root_pages = @website.pages.root.ordered
-  end
 
   def breadcrumb
     super
@@ -86,8 +86,8 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
 
   def page_params
     params.require(:communication_website_page)
-          .permit(:communication_website_id, :title,
-            :description, :description_short, :text, :about_type, :about_id, :slug, :published,
+          .permit(:communication_website_id, :title, :breadcrumb_title,
+            :description, :description_short, :header_text, :text, :slug, :published,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt,
             :parent_id, :related_category_id)
           .merge(university_id: current_university.id)

@@ -32,9 +32,9 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithImport
-  include WithIndexPages
   include WithMenuItems
   include WithProgramCategories
+  include WithSpecialPages
 
   scope :ordered, -> { order(:name) }
 
@@ -55,27 +55,10 @@ class Communication::Website < ApplicationRecord
     dependencies = [self, config_permalinks, config_base_url] + menus
     dependencies += pages + pages.map(&:active_storage_blobs).flatten
     dependencies += posts + posts.map(&:active_storage_blobs).flatten if has_communication_posts?
-    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten if has_people?
+    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten if has_persons?
     dependencies += [categories] if has_communication_categories?
-    dependencies += about.git_dependencies(website)
-    dependencies += git_index_pages_dependencies(website)
+    dependencies += about.git_dependencies(website) if about.present?
     dependencies
-  end
-
-  def git_index_pages_dependencies(website)
-    # TMP: add index_pages
-    index_pages_dependencies = [index_for(:home)] + index_for(:home).active_storage_blobs
-    index_pages_dependencies += [index_for(:communication_posts)] + index_for(:communication_posts).active_storage_blobs if has_communication_posts?
-    index_pages_dependencies += [index_for(:education_programs)] + index_for(:education_programs).active_storage_blobs if has_education_programs?
-    index_pages_dependencies += [index_for(:persons)] + index_for(:persons).active_storage_blobs if has_people?
-    index_pages_dependencies += [index_for(:authors)] + index_for(:authors).active_storage_blobs if has_authors?
-    index_pages_dependencies += [index_for(:administrators)] + index_for(:administrators).active_storage_blobs if has_administrators?
-    index_pages_dependencies += [index_for(:teachers)] + index_for(:teachers).active_storage_blobs if has_teachers?
-    index_pages_dependencies += [index_for(:research_volumes)] + index_for(:research_volumes).active_storage_blobs if has_research_volumes?
-    index_pages_dependencies += [index_for(:research_articles)] + index_for(:research_articles).active_storage_blobs if has_research_articles?
-    index_pages_dependencies += [index_for(:researchers)] + index_for(:researchers).active_storage_blobs if has_researchers?
-    index_pages_dependencies
-    # END TMP
   end
 
 end

@@ -7,7 +7,6 @@
 #  description_short        :text
 #  featured_image_alt       :string
 #  github_path              :text
-#  old_text                 :text
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime

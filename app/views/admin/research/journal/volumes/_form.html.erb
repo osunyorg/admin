@@ -7,19 +7,13 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: volume.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#research_journal_volume_title' }
-                      } %>
           <%= f.input :featured_image,
                       as: :single_deletable_file,
                       input_html: { accept: '.jpg,.jpeg,.png' },
                       preview: 200,
                       direct_upload: true %>
           <%= f.input :featured_image_alt %>
-          <%= f.input :description, input_html: { rows: 10 } %>
+          <%= f.input :text, as: :summernote %>
         </div>
       </div>
     </div>
@@ -29,10 +23,24 @@
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
+          <%= f.input :slug,
+                      as: :string,
+                      input_html: volume.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#research_journal_volume_title' }
+                      } %>
           <%= f.input :number %>
           <%= f.input :published %>
           <%= f.input :published_at, html5: true %>
           <%= f.input :keywords %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :description %>
         </div>
       </div>
     </div>

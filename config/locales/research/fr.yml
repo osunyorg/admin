@@ -28,6 +28,7 @@ fr:
         title: Titre
       research/journal/article:
         abstract: Extrait
+        description: Meta Description
         keywords: Mots clés
         pdf: PDF de l'article
         published: Publié ?
@@ -39,11 +40,12 @@ fr:
       research/journal/volume:
         featured_image: Couverture
         featured_image_alt: Texte alternatif
-        description: Description (SEO)
+        description: Meta Description
         keywords: Mots clés
         number: Numéro
         published: Publié ?
         published_at: Publié le
+        text: Texte
         title: Titre
       research/laboratory:
         address: Adresse
@@ -52,7 +54,7 @@ fr:
         name: Nom
         zipcode: Code postal
       research/laboratory/axis:
-        description: Description (SEO)
+        description: Meta Description
         name: Nom
         short_name: Nom court
         text: Texte
@@ -73,5 +75,10 @@ fr:
       other: Chercheu·rs·ses
   simple_form:
     hints:
+      research_journal_article:
+        description: Si ce champ est vide le début de l'extrait sera utilisé.
       research_journal_volume:
         cover: Fichier JPG ou PNG
+        description: Si ce champ est vide le début du texte principal sera utilisé.
+      research_laboratory_axis:
+        description: Si ce champ est vide le début du texte principal sera utilisé.

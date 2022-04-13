@@ -20,9 +20,6 @@ fr:
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
-      communication/website/index_page:
-        one: Page d'index
-        other: Pages d'index
       communication/website/menu:
         one: Menu
         other: Menus
@@ -43,35 +40,34 @@ fr:
         title: Titre
         template: Type de bloc
       communication/extranet:
+        about: Sujet de l'extranet
+        about_: Extranet indépendant (aucun sujet)
+        about_Education::Program: Extranet d'une formation
+        about_Education::School: Extranet d'une école
+        about_Research::Journal: Extranet d'une revue scientifique
+        about_Research::Laboratory: Extranet d'un laboratoire
+        about_type: Type d'extranet
         name: Nom
         domain: Domaine
       communication/website:
         about: Sujet du site
         about_: Site indépendant (aucun sujet)
+        about_Education::Program: Site de formation
         about_Education::School: Site d'école
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
-        about_type: Sujet du site
+        about_type: Type de site
         name: Nom
         url: URL
       communication/website/category:
         children: Catégories enfants
-        description: Description (SEO)
+        description: Meta Description
         text: Texte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
         parent: Catégorie parente
         slug: Slug
-      communication/website/index_page:
-        breadcrumb_title: Nom affiché dans le fil d'ariane
-        description: Description (SEO)
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        header_text: Texte affiché dans le header
-        slug: Slug
-        text: Texte de la page
-        title: Titre
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -87,23 +83,25 @@ fr:
         title: Titre
         url: URL
       communication/website/page:
-        related_category: Catégorie liée
+        breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
-        description: Description (SEO)
+        description: Meta Description
         description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
+        header_text: Titre affiché dans le header
         parent: Page parente
         published: Publié ?
+        related_category: Catégorie liée
         slug: Slug
-        text: Texte
+        text: Texte principal de la page
         title: Titre
         website: Site Web
       communication/website/post:
         author: Auteur·rice
         category: Catégorie
         categories: Catégories
-        description: Description (SEO)
+        description: Meta Description
         description_short: Description courte
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -160,6 +158,10 @@ fr:
               photo_label: Photo
               remove_photo: Enlever la photo
               remove_testimonial: Enlever le témoignage
+      website:
+        pages:
+          delete_special_page_notice: Impossible de supprimer cette page
+          structure: Arborescence
   communication:
     authors:
       one: Auteur·rice
@@ -182,50 +184,62 @@ fr:
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
-      index_pages:
-        default:
-          administrators:
-            description: Liste des membres de l'équipe administrative
-            path: equipe-administrative
-            title: Équipe administrative
-          authors:
-            description: Liste des membres de l'équipe éditoriale
-            path: equipe-editoriale
-            title: Équipe éditoriale
-          communication_posts:
-            description: Liste des actualités
-            path: actualites
-            title: Actualités
-          education_programs:
-            description: Liste des formations proposées
-            path: offre-de-formation
-            title: L'offre de formation
-          home:
-            description: ''
-            path: accueil
-            title: Accueil
-          persons:
-            description: Liste des membres de l'équipe
-            path: equipe
-            title: Équipe
-          research_articles:
-            description: Liste des articles
-            path: articles
-            title: Articles
-          research_volumes:
-            description: Liste des volumes
-            path: volumes
-            title: Volumes
-          researchers:
-            description: Liste des membres de l'équipe de recherche
-            path: equipe-de-recherche
-            title: Équipe de recherche
-          teachers:
-            description: Liste des membres de l'équipe pédagogique
-            path: equipe-pedagogique
-            title: Équipe pédagogique
       last_pages: Dernières pages
       last_posts: Dernières actualités
+      pages:
+        defaults:
+          administrators:
+            description_short: Liste des membres de l'équipe administrative
+            slug: equipe-administrative
+            title: Équipe administrative
+          authors:
+            description_short: Liste des membres de l'équipe éditoriale
+            slug: equipe-editoriale
+            title: Équipe éditoriale
+          communication_posts:
+            description_short: Liste des actualités
+            slug: actualites
+            title: Actualités
+          education_programs:
+            description_short: Liste des formations proposées
+            slug: offre-de-formation
+            title: "L'offre de formation"
+          home:
+            description_short: ''
+            slug: ''
+            title: Accueil
+          legal_terms:
+            description_short: ''
+            slug: mentions-legales
+            title: Mentions légales
+          people:
+            description_short: Liste des membres de l'équipe
+            slug: equipe
+            title: Équipe
+          privacy_policy:
+            description_short: ''
+            slug: politique-de-confidentialite
+            title: Politique de confidentialité
+          research_articles:
+            description_short: Liste des articles
+            slug: articles
+            title: Articles
+          research_volumes:
+            description_short: Liste des volumes
+            slug: volumes
+            title: Volumes
+          researchers:
+            description_short: Liste des membres de l'équipe de recherche
+            slug: equipe-de-recherche
+            title: Équipe de recherche
+          sitemap:
+            description_short: ''
+            slug: plan-du-site
+            title: Plan du site
+          teachers:
+            description_short: Liste des membres de l'équipe pédagogique
+            slug: equipe-pedagogique
+            title: Équipe pédagogique
       posts:
         new_curation: Nouvelle curation
       see_all: Voir la liste complète (%{number} éléments)
@@ -262,5 +276,10 @@ fr:
               url: URL
   simple_form:
     hints:
-      communication_website_index_page:
+      communication_website_category:
+        description: Si ce champ est vide le début du texte principal sera utilisé.
+      communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
+        description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.
+      communication_website_post:
+        description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.

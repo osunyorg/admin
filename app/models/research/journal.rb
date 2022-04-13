@@ -27,11 +27,11 @@ class Research::Journal < ApplicationRecord
 
   has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
-  has_many :published_volumes, -> { published }, foreign_key: :research_journal_id, dependent: :destroy
+  has_many :published_volumes, -> { published }, class_name: 'Research::Journal::Volume', foreign_key: :research_journal_id, dependent: :destroy
   has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
-  has_many :published_articles, -> { published }, foreign_key: :research_journal_id, dependent: :destroy
+  has_many :published_articles, -> { published }, class_name: 'Research::Journal::Article', foreign_key: :research_journal_id, dependent: :destroy
   has_many :people, -> { distinct }, through: :articles
-  has_many :people_through_published_articles, -> { distinct }, through: :published_articles
+  has_many :people_through_published_articles, -> { distinct }, through: :published_articles, source: :people
 
   scope :ordered, -> { order(:title) }
 
@@ -59,6 +59,9 @@ class Research::Journal < ApplicationRecord
     [self] + articles + volumes
   end
 
+  #####################
+  # Aboutable methods #
+  #####################
   def has_administrators?
     false
   end
