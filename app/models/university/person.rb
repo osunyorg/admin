@@ -87,6 +87,8 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
+  has_many                :experiences
+
   accepts_nested_attributes_for :involvements
 
   validates_presence_of   :first_name, :last_name

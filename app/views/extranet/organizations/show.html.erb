@@ -3,3 +3,14 @@
 <header class="mb-5">
   <h1><%= @organization %></h1>
 </header>
+
+<ul>
+  <% @organization.experiences.ordered.each do |experience| %>
+    <li>
+      <%= link_to experience.person, experience.person %>
+      <%= experience.description %>
+      <%= experience.from_year %>
+      <%= experience.to_year %>
+    </li>
+  <% end %>
+</ul>

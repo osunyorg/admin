@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_071151) do
+ActiveRecord::Schema.define(version: 2022_04_13_203256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -687,6 +687,20 @@ ActiveRecord::Schema.define(version: 2022_04_13_071151) do
     t.index ["user_id"], name: "index_university_person_alumnus_imports_on_user_id"
   end
 
+  create_table "university_person_experiences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "person_id", null: false
+    t.uuid "organization_id", null: false
+    t.text "description"
+    t.integer "from_year"
+    t.integer "to_year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_university_person_experiences_on_organization_id"
+    t.index ["person_id"], name: "index_university_person_experiences_on_person_id"
+    t.index ["university_id"], name: "index_university_person_experiences_on_university_id"
+  end
+
   create_table "university_person_involvements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "person_id", null: false
@@ -831,6 +845,9 @@ ActiveRecord::Schema.define(version: 2022_04_13_071151) do
   add_foreign_key "university_people", "users"
   add_foreign_key "university_person_alumnus_imports", "universities"
   add_foreign_key "university_person_alumnus_imports", "users"
+  add_foreign_key "university_person_experiences", "universities"
+  add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
+  add_foreign_key "university_person_experiences", "university_people", column: "person_id"
   add_foreign_key "university_person_involvements", "universities"
   add_foreign_key "university_person_involvements", "university_people", column: "person_id"
   add_foreign_key "university_roles", "universities"

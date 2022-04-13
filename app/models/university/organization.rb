@@ -37,6 +37,9 @@ class University::Organization < ApplicationRecord
   include WithUniversity
   include WithSlug
 
+  has_many :experiences,
+           class_name: 'University::Person::Experience'
+
   has_summernote :text
 
   has_one_attached_deletable :logo
