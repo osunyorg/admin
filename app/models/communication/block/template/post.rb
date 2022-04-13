@@ -29,12 +29,14 @@ class Communication::Block::Template::Post < Communication::Block::Template
   def free_posts
     array = []
     elements.map do |element|
-      id = element['id']
-      next if id.blank?
-      post = block.about&.website.posts.find_by id: id
-      next if post.nil?
-      array << post
+      array << post(element['id'])
     end
+    array.compact!
     array
+  end
+
+  def post(id)
+    return if id.blank?
+    block.about&.website.posts.find_by id: id
   end
 end
