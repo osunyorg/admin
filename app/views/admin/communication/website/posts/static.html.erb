@@ -21,5 +21,7 @@ image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
+description_short: >
+  <%= prepare_text_for_static @about.description_short %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>
