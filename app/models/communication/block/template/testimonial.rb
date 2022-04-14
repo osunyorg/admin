@@ -1,6 +1,6 @@
 class Communication::Block::Template::Testimonial < Communication::Block::Template
   def build_git_dependencies
-    add_dependency photos
+    # Blobs already added in Communication::Block::Template#git_dependencies
   end
 
   def testimonials
@@ -8,12 +8,12 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
                               .compact
   end
 
-  protected
-
-  def photos
-    @photos ||= testimonials.map { |testimonial| testimonial.blob }
-                            .compact
+  def active_storage_blobs
+    @active_storage_blobs ||= testimonials.map { |testimonial| testimonial.blob }
+                                          .compact
   end
+
+  protected
 
   def testimonial(element)
     blob = find_blob element, 'photo'

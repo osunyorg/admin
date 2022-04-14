@@ -1,7 +1,7 @@
 class Communication::Block::Template::Partner < Communication::Block::Template
   def build_git_dependencies
+    # Blobs already added in Communication::Block::Template#git_dependencies
     add_dependency organizations
-    add_dependency blobs
   end
 
   def partners
@@ -9,16 +9,16 @@ class Communication::Block::Template::Partner < Communication::Block::Template
                           .compact
   end
 
+  def active_storage_blobs
+    @active_storage_blobs ||= partners.map { |partner| partner.blob }
+                                      .compact
+  end
+
   protected
 
   def organizations
     @organizations ||= partners.map { |partner| partner.organization }
                                .compact
-  end
-
-  def blobs
-    @blobs ||= partners.map { |partner| partner.blob }
-                       .compact
   end
 
   def partner(element)

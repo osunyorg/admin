@@ -31,7 +31,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
   def parse
     csv.each do |row|
       program_id = row['program']
-      if Rails.env.development? &&
+      if Rails.env.development?
         # substitute local data for testing
         substitutes = {
           'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55'

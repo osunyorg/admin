@@ -43,6 +43,10 @@ module ActiveStorageGitPathStatic
   def git_path(website)
     "data/media/#{id[0..1]}/#{id}.yml"
   end
+
+  def before_git_sync
+    analyze unless analyzed?
+  end
 end
 
 ActiveSupport::Reloader.to_prepare do

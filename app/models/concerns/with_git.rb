@@ -12,6 +12,11 @@ module WithGit
     raise NotImplementedError
   end
 
+  def before_git_sync
+    # Can be override to force some process before sync
+    # ex: ActiveStorage Blob analyze
+  end
+
   def save_and_sync
     if save
       sync_with_git

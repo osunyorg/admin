@@ -27,6 +27,8 @@ class Communication::Website::GitFile < ApplicationRecord
   attr_accessor :will_be_destroyed
 
   def self.sync(website, object, destroy: false)
+    # Handle optional before-sync process
+    object.before_git_sync
     git_file = where(website: website, about: object).first_or_create
     git_file.will_be_destroyed = destroy
     website.git_repository.add_git_file git_file

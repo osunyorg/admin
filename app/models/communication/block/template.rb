@@ -7,11 +7,15 @@ class Communication::Block::Template
 
   def git_dependencies
     unless @git_dependencies
-      @git_dependencies = []
+      @git_dependencies = active_storage_blobs
       build_git_dependencies
       @git_dependencies.uniq!
     end
     @git_dependencies
+  end
+
+  def active_storage_blobs
+    []
   end
 
   protected

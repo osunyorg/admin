@@ -28,6 +28,8 @@ class Communication::Block < ApplicationRecord
 
   belongs_to :about, polymorphic: true
 
+  has_many_attached :template_images
+
   enum template_kind: {
     chapter: 50,
     organization_chart: 100,
@@ -36,6 +38,9 @@ class Communication::Block < ApplicationRecord
     testimonials: 400,
     posts: 500
   }
+
+  before_save :update_template_images
+  after_update_commit :save_and_sync_about
 
   def data=(value)
     value = JSON.parse value if value.is_a? String
@@ -57,5 +62,15 @@ class Communication::Block < ApplicationRecord
   def to_s
     title.blank?  ? "Block #{position}"
                   : "#{title}"
+  end
+
+  protected
+
+  def save_and_sync_about
+    about.save_and_sync
+  end
+
+  def update_template_images
+    self.template_images = template.active_storage_blobs
   end
 end
