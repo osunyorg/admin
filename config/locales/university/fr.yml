@@ -62,7 +62,7 @@ fr:
         phone: Téléphone
         email: Email
         kind: Type
-        sirene: Numéro de SIRENE
+        siren: Numéro de SIREN
       university/organization/import:
         file: Fichier (.csv)
       university/role:

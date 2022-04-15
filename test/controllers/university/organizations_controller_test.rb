@@ -17,7 +17,7 @@ class University::OrganizationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create university_organization" do
     assert_difference('University::Organization.count') do
-      post university_organizations_url, params: { university_organization: { active: @university_organization.active, address: @university_organization.address, city: @university_organization.city, country: @university_organization.country, description: @university_organization.description, kind: @university_organization.kind, mail: @university_organization.mail, phone: @university_organization.phone, sirene: @university_organization.sirene, title: @university_organization.title, website: @university_organization.website, zipcode: @university_organization.zipcode } }
+      post university_organizations_url, params: { university_organization: { active: @university_organization.active, address: @university_organization.address, city: @university_organization.city, country: @university_organization.country, description: @university_organization.description, kind: @university_organization.kind, mail: @university_organization.mail, phone: @university_organization.phone, siren: @university_organization.siren, title: @university_organization.title, website: @university_organization.website, zipcode: @university_organization.zipcode } }
     end
 
     assert_redirected_to university_organization_url(University::Organization.last)
@@ -34,7 +34,7 @@ class University::OrganizationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update university_organization" do
-    patch university_organization_url(@university_organization), params: { university_organization: { active: @university_organization.active, address: @university_organization.address, city: @university_organization.city, country: @university_organization.country, description: @university_organization.description, kind: @university_organization.kind, mail: @university_organization.mail, phone: @university_organization.phone, sirene: @university_organization.sirene, title: @university_organization.title, website: @university_organization.website, zipcode: @university_organization.zipcode } }
+    patch university_organization_url(@university_organization), params: { university_organization: { active: @university_organization.active, address: @university_organization.address, city: @university_organization.city, country: @university_organization.country, description: @university_organization.description, kind: @university_organization.kind, mail: @university_organization.mail, phone: @university_organization.phone, siren: @university_organization.siren, title: @university_organization.title, website: @university_organization.website, zipcode: @university_organization.zipcode } }
     assert_redirected_to university_organization_url(@university_organization)
   end
 

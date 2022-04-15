@@ -13,7 +13,7 @@ class CreateUniversityOrganizations < ActiveRecord::Migration[6.1]
       t.string :phone
       t.string :mail
       t.boolean :active, default: true
-      t.string :sirene
+      t.string :siren
       t.integer :kind, default: 10
 
       t.timestamps

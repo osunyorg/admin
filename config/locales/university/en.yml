@@ -62,7 +62,7 @@ en:
         phone: Telephone
         email: Email
         kind: Kind
-        sirene: Legal identification number
+        siren: Legal identification number
       university/organization/import:
         file: File (.csv)
       university/role:

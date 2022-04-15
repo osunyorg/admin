@@ -43,7 +43,7 @@ one:
   phone: MyString
   mail: MyString
   active: false
-  sirene: MyString
+  siren: MyString
   kind: 1
 
 two:
@@ -57,5 +57,5 @@ two:
   phone: MyString
   mail: MyString
   active: false
-  sirene: MyString
+  siren: MyString
   kind: 1

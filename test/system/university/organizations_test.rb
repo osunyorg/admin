@@ -22,7 +22,7 @@ class University::OrganizationsTest < ApplicationSystemTestCase
     fill_in "Kind", with: @university_organization.kind
     fill_in "Mail", with: @university_organization.mail
     fill_in "Phone", with: @university_organization.phone
-    fill_in "Sirene", with: @university_organization.sirene
+    fill_in "Siren", with: @university_organization.siren
     fill_in "Title", with: @university_organization.title
     fill_in "Website", with: @university_organization.website
     fill_in "Zipcode", with: @university_organization.zipcode
@@ -44,7 +44,7 @@ class University::OrganizationsTest < ApplicationSystemTestCase
     fill_in "Kind", with: @university_organization.kind
     fill_in "Mail", with: @university_organization.mail
     fill_in "Phone", with: @university_organization.phone
-    fill_in "Sirene", with: @university_organization.sirene
+    fill_in "Siren", with: @university_organization.siren
     fill_in "Title", with: @university_organization.title
     fill_in "Website", with: @university_organization.website
     fill_in "Zipcode", with: @university_organization.zipcode
