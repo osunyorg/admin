@@ -1,0 +1,22 @@
+<% academic_years_paged = academic_years.ordered.page(params[:page]).per(60) %>
+<div class="row">
+  <% academic_years_paged.each do |year| %>
+    <div class="col-md-3">
+      <article class="card mb-4">
+        <div class="card-body">
+          <h2 class="mb-5">
+            <%= link_to year, year, class: 'stretched-link' %>
+          </h2>
+          <p class="text-end mb-0">
+            <%= year.cohorts.count %>
+            <%= Education::Cohort.model_name.human(count: year.cohorts.count).downcase %>
+            <br>
+            <%= year.people.count %>
+            <%= University::Person::Alumnus.model_name.human(count: year.people.count).downcase %>
+          </p>
+        </div>
+      </article>
+    </div>
+  <% end %>
+</div>
+<%= paginate academic_years_paged, theme: 'bootstrap-5' %>
