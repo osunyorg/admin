@@ -114,6 +114,8 @@ class Education::Program < ApplicationRecord
   has_many   :alumni,
              through: :cohorts,
              source: :people
+  has_many   :academic_years,
+             through: :cohorts
 
   accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 
