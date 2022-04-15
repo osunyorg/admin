@@ -5,13 +5,13 @@
 </header>
 
 <h2 class="mb-4">
-  <%= @academic_year.cohorts.count %>
-  <%= Education::Cohort.model_name.human(count: @academic_year.cohorts.count).downcase %>
+  <%= @cohorts.count %>
+  <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
 </h2>
-<%= render 'extranet/cohorts/list', cohorts: @academic_year.cohorts %>
+<%= render 'extranet/cohorts/list', cohorts: @cohorts %>
 
 <h2 class="mt-5 mb-4">
-  <%= @academic_year.people.count %>
-  <%= University::Person::Alumnus.model_name.human(count: @academic_year.people.count).downcase %>
+  <%= @alumni.count %>
+  <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
 </h2>
-<%= render 'extranet/persons/list', people: @academic_year.people %>
+<%= render 'extranet/persons/list', people: @alumni %>

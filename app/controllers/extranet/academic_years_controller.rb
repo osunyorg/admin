@@ -9,6 +9,8 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
   end
 
   def show
+    @cohorts = @academic_year.cohorts_in_context(current_context.about)
+    @alumni = @academic_year.alumni_in_context(current_context.about)
     breadcrumb
   end
 
