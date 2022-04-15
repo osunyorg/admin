@@ -111,6 +111,9 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Cohort'
   has_many   :websites, -> { distinct },
              through: :schools
+  has_many   :alumni,
+             through: :cohorts,
+             source: :people
 
   accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 

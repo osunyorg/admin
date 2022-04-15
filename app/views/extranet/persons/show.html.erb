@@ -35,15 +35,15 @@
         <dt><%= cohort.program %></dt>
         <dd><%= link_to cohort.academic_year, cohort %></dd>
       <% end %>
-      <% if @person.phone %>
+      <% if @person.phone.present? %>
         <dt><%= University::Person.human_attribute_name(:phone) %></dt>
         <dd><a href="tel:<%= @person.phone %>" target="_blank" rel="noreferrer"><%= @person.phone %></a></dd>
       <% end %>
-      <% if @person.email %>
+      <% if @person.email.present? %>
         <dt><%= University::Person.human_attribute_name(:email) %></dt>
         <dd><a href="mailto:<%= @person.email %>" target="_blank" rel="noreferrer"><%= @person.email %></a></dd>
       <% end %>
-      <% if @person.url %>
+      <% if @person.url.present? %>
         <dt><%= University::Person.human_attribute_name(:url) %></dt>
         <dd>
           <a href="<%= social_website_to_url @person.url %>" target="_blank" rel="noreferrer">
@@ -51,7 +51,7 @@
           </a>
         </dd>
       <% end %>
-      <% if @person.linkedin %>
+      <% if @person.linkedin.present? %>
         <dt><%= University::Person.human_attribute_name(:linkedin) %></dt>
         <dd>
           <a href="<%= social_linkedin_to_url @person.linkedin %>" target="_blank" rel="noreferrer">
@@ -59,7 +59,7 @@
           </a>
         </dd>
       <% end %>
-      <% if @person.twitter %>
+      <% if @person.twitter.present? %>
         <dt><%= University::Person.human_attribute_name(:twitter) %></dt>
         <dd>
           <a href="<%= social_twitter_to_url @person.twitter %>" target="_blank" rel="noreferrer">

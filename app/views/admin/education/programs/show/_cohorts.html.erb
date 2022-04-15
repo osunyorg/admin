@@ -1,6 +1,10 @@
 <% if @program.cohorts.any? %>
   <div class="card flex-fill w-100">
     <div class="card-header">
+      <div class="float-end">
+        <%= @program.alumni.count %>
+        <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
+      </div>
       <h5 class="card-title mb-0"><%= Education::Cohort.model_name.human(count: 2) %></h5>
     </div>
     <table class="<%= table_classes %>">

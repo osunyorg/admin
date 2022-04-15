@@ -17,6 +17,9 @@ en:
         one: School
         other: Schools
     attributes:
+      education/cohort:
+        year: Year
+        alumni: Alumni
       education/program:
         accessibility: Accessibilité
         capacity: Capacity
