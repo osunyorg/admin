@@ -15,7 +15,7 @@
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
-                      edit_admin_university_person_alumnus_path(alumnus),
+                      edit_admin_university_person_path(alumnus),
                       class: button_classes if can?(:update, alumnus) %>
             <%= link_to t('delete'),
                       path,

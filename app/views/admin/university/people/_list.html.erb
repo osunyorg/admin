@@ -3,6 +3,7 @@
     <tr>
       <th><%= University::Person.human_attribute_name('last_name') %></th>
       <th><%= University::Person.human_attribute_name('first_name') %></th>
+      <th><%= University::Person.human_attribute_name('roles') %></th>
       <th></th>
     </tr>
   </thead>
@@ -11,6 +12,13 @@
       <tr>
         <td><%= link_to person.last_name, admin_university_person_path(person) %></td>
         <td><%= link_to person.first_name, admin_university_person_path(person) %></td>
+        <td>
+          <% person.roles.each do |role| %>
+            <span class="badge bg-secondary">
+              <%= t "activerecord.attributes.university/person.#{role}" %>
+            </span>
+          <% end %>
+        </td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
