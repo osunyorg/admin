@@ -4,7 +4,7 @@ class Extranet::CohortsController < Extranet::ApplicationController
                               through_association: :education_cohorts
 
   def index
-    @cohorts = current_context.about&.cohorts || @cohorts
+    @cohorts = current_extranet.about&.cohorts || @cohorts
     breadcrumb
   end
 

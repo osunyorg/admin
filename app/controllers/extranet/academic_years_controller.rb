@@ -4,7 +4,7 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
                               through_association: :academic_years
 
   def index
-    @academic_years = current_context.about&.academic_years || @academic_years
+    @academic_years = current_extranet.about&.academic_years || @academic_years
     breadcrumb
   end
 
