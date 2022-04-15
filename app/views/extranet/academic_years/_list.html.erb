@@ -1,6 +1,10 @@
 <% academic_years_paged = academic_years.ordered.page(params[:page]).per(60) %>
 <div class="row">
   <% academic_years_paged.each do |year| %>
+    <%
+    cohorts = year.cohorts_in_context(current_context.about)
+    alumni = year.alumni_in_context(current_context.about)
+    %>
     <div class="col-md-3">
       <article class="card mb-4">
         <div class="card-body">
@@ -8,11 +12,11 @@
             <%= link_to year, year, class: 'stretched-link' %>
           </h2>
           <p class="text-end mb-0">
-            <%= year.cohorts.count %>
-            <%= Education::Cohort.model_name.human(count: year.cohorts.count).downcase %>
+            <%= cohorts.count %>
+            <%= Education::Cohort.model_name.human(count: cohorts.count).downcase %>
             <br>
-            <%= year.people.count %>
-            <%= University::Person::Alumnus.model_name.human(count: year.people.count).downcase %>
+            <%= alumni.count %>
+            <%= University::Person::Alumnus.model_name.human(count: alumni.count).downcase %>
           </p>
         </div>
       </article>
