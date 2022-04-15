@@ -81,7 +81,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
       person.slug = person.to_s.parameterize.dasherize
       person.twitter ||= row['social_twitter']
       person.linkedin ||= row['social_linkedin']
-      person.biography ||= row['biography']
+      person.biography ||= clean_encoding row['biography']
       person.phone ||= row['mobile']
       person.phone ||= row['phone_personal']
       person.phone ||= row['phone_professional']
