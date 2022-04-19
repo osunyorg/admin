@@ -163,6 +163,14 @@ en:
               photo_label: Photo
               remove_photo: Remove photo
               remove_testimonial: Remove testimonial
+          timeline:
+            edit:
+              add_event: Add event
+              remove_event: Delete event
+              title_label: Title
+              title_placeholder: Enter title here
+              text_label: Text
+              text_placeholder: Enter text here
       website:
         pages:
           delete_special_page_notice: Can't delete this page

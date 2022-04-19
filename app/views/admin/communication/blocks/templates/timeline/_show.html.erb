@@ -1,0 +1,12 @@
+<div class="row">
+  <% @block.template.events.each do |event| %>
+      <div class="col-xxl-4 col-xl-6">
+        <article class="card">
+          <div class="card-body">
+            <p class="lead"><%= event.title %></p>
+            <p><%= event.text %></p>
+          </div>
+        </article>
+      </div>
+  <% end %>
+</div>
