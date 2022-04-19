@@ -39,6 +39,14 @@
                   v-model="image.alt"
                   placeholder="<%= t '.alt_placeholder' %>"
                   :id="'image-alt-' + imageIndex">
+          <label  aria-label="<%= t '.text_label' %>"
+                  :for="'image-text-' + imageIndex">
+                  <%= t '.text_label' %>
+          </label>
+          <textarea class="form-control"
+                  v-model="image.text"
+                  placeholder="<%= t '.text_placeholder' %>"
+                  :id="'image-text-' + imageIndex"></textarea>
         </div>
       </div>
     </div>

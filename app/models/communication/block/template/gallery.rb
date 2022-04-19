@@ -20,7 +20,8 @@ class Communication::Block::Template::Gallery < Communication::Block::Template
     return if blob.nil?
     {
       blob: blob,
-      alt: element['alt']
+      alt: element['alt'],
+      text: element['text']
     }.to_dot
   end
 end
