@@ -171,6 +171,14 @@ fr:
               title_placeholder: Entrer le titre de l'événement
               text_label: Texte
               text_placeholder: Entrer le texte de l'événement
+          definitions:
+            edit:
+              add_definition: Ajouter une définition
+              remove_definition: Supprimer la définition
+              title_label: Titre
+              title_placeholder: Entrer le titre de la définition
+              text_label: Texte
+              text_placeholder: Entrer la description de la définition
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page

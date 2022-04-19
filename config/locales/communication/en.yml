@@ -171,6 +171,14 @@ en:
               title_placeholder: Enter title here
               text_label: Text
               text_placeholder: Enter text here
+          definitions:
+            edit:
+              add_definition: Add definition
+              remove_definition: Delete definition
+              title_label: Title
+              title_placeholder: Enter title here
+              text_label: Text
+              text_placeholder: Enter text here
       website:
         pages:
           delete_special_page_notice: Can't delete this page

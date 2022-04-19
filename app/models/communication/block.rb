@@ -38,6 +38,7 @@ class Communication::Block < ApplicationRecord
     testimonials: 400,
     posts: 500,
     timeline: 700,
+    definitions: 800,
   }
 
   before_save :update_template_images
