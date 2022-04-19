@@ -4,14 +4,20 @@
   <% end %>
   <% if @block.template.selected_pages.any? %>
     <div class="row">
-      <% @block.template.selected_pages.each do |page| %>
+      <% @block.template.selected_pages.each do |element| %>
         <div class="col-md-4">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title h5"><%= page %></h3>
+              <h3 class="card-title h5"><%= element.page %></h3>
             </div>
             <div class="card-body">
-              <%= page.description_short %>
+              <div class="mb-3">
+                <% if element.show_image %>
+                  <%= kamifusen_tag element.page.featured_image,
+                                    class: 'img-fluid' if element.page.featured_image.attached? && element.page.featured_image.variable? %>
+                <% end %>
+              </div>
+              <p><%= element.page.description_short if element.show_description %></p>
             </div>
           </div>
         </div>
