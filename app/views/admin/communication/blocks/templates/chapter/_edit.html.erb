@@ -6,11 +6,25 @@
     </label>
     <div class="summernote">
       <textarea id="text"
-              class="form-control"
+              class="form-control summernote-vue"
               v-model="data.text"
-              ref="summernoteInput"
               data-summernote-config="mini-list"
               placeholder="<%= t '.text_placeholder' %>"></textarea>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xxl-4 col-md-6">
+    <label  class="form-label"
+            for="notes">
+      <%= t '.notes_label' %>
+    </label>
+    <div class="summernote">
+      <textarea id="notes"
+              class="form-control summernote-vue"
+              v-model="data.notes"
+              data-summernote-config="mini"
+              placeholder="<%= t '.notes_placeholder' %>"></textarea>
     </div>
   </div>
 </div>

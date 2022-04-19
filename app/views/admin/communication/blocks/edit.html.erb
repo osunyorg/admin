@@ -72,23 +72,41 @@
       getImageUrl(data) {
         return this.getFileUrl(data.signed_id, data.filename);
       },
-      handleSummernote() {
-        var config = this.$refs.summernoteInput.getAttribute('data-summernote-config') || 'default';
-        $(this.$refs.summernoteInput).summernote({
+      handleSummernotes() {
+        var $summernoteElements = $('.summernote-vue');
+
+        $summernoteElements.each(function(index){
+          this.initSummernote($summernoteElements.get(index));
+        }.bind(this));
+      },
+      initSummernote(element) {
+        var config = element.getAttribute('data-summernote-config') || 'default';
+
+        $(element).summernote({
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
           callbacks: {
             onChange: function(contents, $editable) {
-              this.$refs.summernoteInput.value = contents;
-              this.$refs.summernoteInput.dispatchEvent(new Event('input'));
+              element.value = contents;
+              element.dispatchEvent(new Event('input'));
             }.bind(this)
           }
         });
       }
+      // handleSummernote() {
+      //   var config = this.$refs.summernoteInput.getAttribute('data-summernote-config') || 'default';
+      //   $(this.$refs.summernoteInput).summernote({
+      //     toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
+      //     callbacks: {
+      //       onChange: function(contents, $editable) {
+      //         this.$refs.summernoteInput.value = contents;
+      //         this.$refs.summernoteInput.dispatchEvent(new Event('input'));
+      //       }.bind(this)
+      //     }
+      //   });
+      // }
     },
     mounted: function() {
-      if (this.$refs.summernoteInput) {
-        this.handleSummernote();
-      }
+      this.handleSummernotes();
     }
   });
 
