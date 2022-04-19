@@ -14,9 +14,9 @@
   <div class="col-md-6">
     <label class="form-label">Option d'affichage</label>
     <div class="form-check">
-      <input v-model="data.show_main_page_short_description" class="form-check-input boolean optional" id="show_main_page_short_description" type="checkbox">
+      <input v-model="data.show_description" class="form-check-input boolean optional" id="show_description" type="checkbox">
       <label class="form-check-label boolean optional"
-            for="show_main_page_short_description">Afficher la description courte</label>
+            for="show_description">Afficher la description courte</label>
     </div>
   </div>
   <div v-if="!data.category_id" class="col-md-12 mt-5">
@@ -56,7 +56,7 @@
                 <div class="col-md-6">
                   <label class="form-label">Options d'affichage</label>
                   <div class="form-check">
-                    <input v-model="page.show_short_description" class="form-check-input boolean optional" :id="'page-' + index + '-show_short_description'" type="checkbox">
+                    <input v-model="page.show_description" class="form-check-input boolean optional" :id="'page-' + index + '-show_short_description'" type="checkbox">
                     <label class="form-check-label boolean optional"
                           :for="'page-' + index + '-short_description'">Afficher la description courte</label>
                   </div>

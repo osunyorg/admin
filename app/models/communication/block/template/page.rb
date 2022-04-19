@@ -4,7 +4,7 @@ class Communication::Block::Template::Page < Communication::Block::Template
     # add_dependency selected_posts
     # selected_posts.each do |post|
     #   add_dependency post.active_storage_blobs
-    #   if post.author.present?
+    #   if post.author.present?category.nil? ? free_posts : category_posts
     #     add_dependency [post.author, post.author.author]
     #     add_dependency post.author.active_storage_blobs
     #   end
@@ -15,24 +15,39 @@ class Communication::Block::Template::Page < Communication::Block::Template
   #   @category ||= block.about&.website.categories.find_by(id: data['category_id'])
   # end
 
-  # def selected_posts
-  #   @selected_posts ||= category.nil? ? free_posts : category_posts
-  # end
+  def selected_pages
+    @selected_pages ||= free_pages
+  end
+
+  def main_page
+    @main_page ||= page(data['page_id'])
+  end
+
+  def show_description
+    data['show_description'] || false
+  end
 
   protected
 
-  # def category_posts
-  #   quantity = data['posts_quantity'] || 3
-  #   category.posts.ordered.limit(quantity)
-  # end
+  def free_pages
+    elements.map { |element| 
+                  {
+                    slug: page_slug(element['id']),
+                    show_description: element['show_description'] || false,
+                    show_image: element['show_image'] || false
+                  }.to_dot
+                }
+                .compact
+  end
 
-  # def free_posts
-  #   elements.map { |element| post(element['id']) }
-  #           .compact
-  # end
+  def page(id)
+    return if id.blank?
+    page = block.about&.website.pages.find_by id: id
+  end
 
-  # def post(id)
-  #   return if id.blank?
-  #   block.about&.website.posts.find_by id: id
-  # end
+  def page_slug(id)
+    page = page(id)
+    return if page.blank?
+    return page.slug
+  end
 end
