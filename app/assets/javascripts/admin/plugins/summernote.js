@@ -14,6 +14,7 @@ $(function () {
     configs['mini-list'] = {
         toolbar: [
             ['font', ['bold', 'italic']],
+            ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
             ['insert', ['link']],
             ['view', ['codeview']]
@@ -29,6 +30,7 @@ $(function () {
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'italic']],
+            ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
             ['table', ['table']],
             ['insert', ['link', 'picture', 'video']],

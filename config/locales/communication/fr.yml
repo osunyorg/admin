@@ -86,7 +86,7 @@ fr:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Meta Description
-        description_short: Description courte
+        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         header_text: Titre affiché dans le header
@@ -102,7 +102,7 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Meta Description
-        description_short: Description courte
+        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         pinned: Mis en avant ?
@@ -118,6 +118,8 @@ fr:
         templates:
           chapter:
             edit:
+              notes_label: Notes
+              notes_placeholder: Entrer les notes
               text_label: Texte
               text_placeholder: Entrer le texte
           gallery:
