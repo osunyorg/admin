@@ -8,18 +8,16 @@ class Admin::Communication::Website::PagesController < Admin::Communication::Web
   end
 
   def reorder
-    parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    parent_page = @website.pages.find(params[:parentId])
     ids = params[:ids] || []
-    first_page = nil
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
-      first_page = page if index == 0
       page.update(
-        parent_id: parent_id,
+        parent_id: parent_page.id,
         position: index + 1
       )
     end
-    first_page.sync_with_git if first_page
+    parent_page.sync_with_git
   end
 
   def children
