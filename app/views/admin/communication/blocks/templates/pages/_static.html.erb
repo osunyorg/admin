@@ -3,8 +3,8 @@
       show_description: <%= block.template.show_description %>
 <% end %>
       pages:
-<% block.template.selected_pages.each do |page| %>
-        - slug: <%= page.slug %>
-          show_description: <%= page.show_description %>
-          show_image: <%= page.show_image %>
+<% block.template.selected_pages.each do |element| %>
+        - slug: <%= element.page.slug %>
+          show_description: <%= element.show_description %>
+          show_image: <%= element.show_image %>
 <% end %>

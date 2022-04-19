@@ -1,17 +1,17 @@
 <% if @block.data %>
-  <% if @block.template.category %>
-    <h2 class="mb-4"><%= @block.template.category %></h2>
+  <% if @block.template.main_page %>
+    <h2 class="mb-4"><%= @block.template.main_page.slug %></h2>
   <% end %>
-  <% if @block.template.selected_posts.any? %>
+  <% if @block.template.selected_pages.any? %>
     <div class="row">
-      <% @block.template.selected_posts.each do |post| %>
+      <% @block.template.selected_pages.each do |page| %>
         <div class="col-md-4">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title h5"><%= post %></h3>
+              <h3 class="card-title h5"><%= page %></h3>
             </div>
             <div class="card-body">
-              <%= post.description_short %>
+              <%= page.description_short %>
             </div>
           </div>
         </div>

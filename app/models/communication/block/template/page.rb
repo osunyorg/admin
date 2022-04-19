@@ -32,7 +32,7 @@ class Communication::Block::Template::Page < Communication::Block::Template
   def free_pages
     elements.map { |element| 
                   {
-                    slug: page_slug(element['id']),
+                    page: page(element['id']),
                     show_description: element['show_description'] || false,
                     show_image: element['show_image'] || false
                   }.to_dot
@@ -43,11 +43,5 @@ class Communication::Block::Template::Page < Communication::Block::Template
   def page(id)
     return if id.blank?
     page = block.about&.website.pages.find_by id: id
-  end
-
-  def page_slug(id)
-    page = page(id)
-    return if page.blank?
-    return page.slug
   end
 end
