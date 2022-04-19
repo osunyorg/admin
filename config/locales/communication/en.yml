@@ -126,6 +126,8 @@ en:
               image_label: Image (.png, .jpg)
               alt_label: Alternative text
               alt_placeholder: Enter text description
+              text_label: Text
+              text_placeholder: Enter text
               remove_image: Remove image
           organization_chart:
             edit:
