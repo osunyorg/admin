@@ -86,7 +86,7 @@ en:
         breadcrumb_title: Title in breadcrumbs
         children: Children pages
         description: Meta Description
-        description_short: Short description
+        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         header_text: Title displayed in header
@@ -102,7 +102,7 @@ en:
         category: Category
         categories: Categories
         description: Meta Description
-        description_short: Short description
+        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         pinned: Pinned?
@@ -118,6 +118,8 @@ en:
         template_kinds:
           chapter:
             edit:
+              notes_label: Notes
+              notes_placeholder: Enter notes
               text_label: Text
               text_placeholder: Enter text
           gallery:
