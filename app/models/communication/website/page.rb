@@ -3,6 +3,7 @@
 # Table name: communication_website_pages
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  breadcrumb_title         :string
 #  description              :text
 #  description_short        :text
@@ -121,11 +122,15 @@ class Communication::Website::Page < ApplicationRecord
     "#{title}"
   end
 
-  def best_featured_image(fallback: true)
-    return featured_image if featured_image.attached?
-    best_image = parent&.best_featured_image(fallback: false)
-    best_image ||= featured_image if fallback
-    best_image
+  def best_featured_image
+    # we don't want to fallback on homepage featured_image
+    return featured_image if featured_image.attached? || parent.kind_home?
+    parent&.best_featured_image
+  end
+
+  def best_bodyclass
+    return bodyclass if bodyclass.present?
+    parent&.best_bodyclass unless parent.kind_home?
   end
 
   def update_children_paths

@@ -83,6 +83,7 @@ fr:
         title: Titre
         url: URL
       communication/website/page:
+        bodyclass: Classe CSS spécifique
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Meta Description

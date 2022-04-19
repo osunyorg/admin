@@ -40,6 +40,7 @@ fr:
     dashboard: Tableau de bord
     infos: Informations
     inheritance:
+      sentence_without_link: Valeur héritée
       sentence_html: Valeur héritée de %{link}
       status: Valeur héritée
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.

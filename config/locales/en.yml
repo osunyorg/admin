@@ -40,6 +40,7 @@ en:
     dashboard: Dashboard
     infos: Informations
     inheritance:
+      sentence_without_link: Value inherited
       sentence_html: Value inherited from %{link}
       status: Inherited value
     password_hint: Leave blank if you do not wish to change the password.
