@@ -27,6 +27,10 @@ class Communication::Block::Template::Page < Communication::Block::Template
     data['show_description'] || false
   end
 
+  def show_image
+    data['show_image'] || false
+  end
+
   protected
 
   def free_pages

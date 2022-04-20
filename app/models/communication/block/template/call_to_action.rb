@@ -15,6 +15,14 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     "#{data['button']}"
   end
 
+  def url_secondary
+    "#{data['url_secondary']}"
+  end
+
+  def button_secondary
+    "#{data['button_secondary']}"
+  end
+
   def image
     image_with_alt
   end
