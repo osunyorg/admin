@@ -9,7 +9,7 @@
           <%= f.input :title %>
           <%= f.input :featured_image,
                       as: :single_deletable_file,
-                      input_html: { accept: '.jpg,.jpeg,.png' },
+                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                       preview: 200,
                       direct_upload: true %>
           <%= f.input :featured_image_alt %>
