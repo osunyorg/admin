@@ -11,6 +11,10 @@ class Communication::Block::Template::Post < Communication::Block::Template
     end
   end
 
+  def data
+    @data = block.data || { elements:[], category_id: "all", posts_quantity: 3 }
+  end
+
   def category
     @category ||= block.about&.website.categories.find_by(id: data['category_id'])
   end

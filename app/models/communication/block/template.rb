@@ -18,6 +18,10 @@ class Communication::Block::Template
     []
   end
 
+  def data
+    block.data || {elements: []}
+  end
+
   protected
 
   def build_git_dependencies
@@ -35,10 +39,6 @@ class Communication::Block::Template
     id = object.dig(key, 'id')
     return if id.blank?
     university.active_storage_blobs.find id
-  end
-
-  def data
-    block.data || {}
   end
 
   def elements
