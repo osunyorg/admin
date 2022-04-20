@@ -130,7 +130,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def best_bodyclass
     return bodyclass if bodyclass.present?
-    parent&.best_bodyclass unless kind_home? || parent.kind_home?
+    parent&.best_bodyclass unless kind_home? || parent&.kind_home?
   end
 
   def update_children_paths
