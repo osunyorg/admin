@@ -1,0 +1,6 @@
+<% block.template.events.each do |event| %>
+      - title: >-
+          <%= prepare_text_for_static event.title %>
+        text: >-
+          <%= prepare_text_for_static event.text %>
+<% end %>
