@@ -1,0 +1,76 @@
+<div class="row mb-1">
+  <div class="col-md-6">
+    <label class="form-label"
+          for="page_id">Sélectionnez une page principale</label>
+    <select id="page_id"
+          class="form-select select"
+          v-model="data.page_id">
+      <option value="" disabled>Aucune page sélectionnée</option>
+      <% @block.about&.website.pages.ordered.each_with_index do |page, index| %>
+        <option value="<%= page.id %>"><%= page %></option>
+      <% end %>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Option d'affichage</label>
+    <div class="form-check">
+      <input v-model="data.show_description" class="form-check-input boolean optional" id="show_description" type="checkbox">
+      <label class="form-check-label boolean optional"
+            for="show_description">Afficher la description courte</label>
+    </div>
+  </div>
+  <div v-if="!data.category_id" class="col-md-12 mt-5">
+    <h2>Ajouter des pages</h2>
+    <a  class="<%= button_classes('my-4') %>"
+        v-on:click="data.elements.push({id: ''})">
+        <%= t '.add_page' %>
+    </a>
+    <draggable :list="data.elements" handle=".dragHandle">
+      <div v-for="(page, index) in data.elements">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="mb-2">
+                <a  class="btn btn-sm btn-danger float-end"
+                    v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
+                    title="Delete">
+                    <i class="fas fa-times"></i>
+                </a>
+                <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+                  <i class="fa fa-bars handle"></i>
+                </a>
+              </div>
+              <div class="col-6">
+                <label  class="form-label visually-hidden"
+                        :for="'page-' + index + '-name'"><%= t '.page_label' %></label>
+                <select :id="'page-' + index + '-name'"
+                        class="form-select select"
+                        v-model="page.id">
+                  <option value="" disabled>Page</option>
+                  <% @block.about&.website.pages.ordered.each_with_index do |page, index| %>
+                    <option value="<%= page.id %>"><%= page.title %></option>
+                  <% end %>
+                </select>
+              </div>
+              <div class="col-6">
+                <div class="col-md-6">
+                  <label class="form-label">Options d'affichage</label>
+                  <div class="form-check">
+                    <input v-model="page.show_description" class="form-check-input boolean optional" :id="'page-' + index + '-show_short_description'" type="checkbox">
+                    <label class="form-check-label boolean optional"
+                          :for="'page-' + index + '-short_description'">Afficher la description courte</label>
+                  </div>
+                  <div class="form-check">
+                    <input v-model="page.show_image" class="form-check-input boolean optional" :id="'page-' + index + '-show_image'" type="checkbox">
+                    <label class="form-check-label boolean optional"
+                          :for="'page-' + index + '-show_image'">Afficher l'image</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </draggable>
+  </div>
+</div>

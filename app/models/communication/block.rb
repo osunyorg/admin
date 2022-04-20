@@ -36,7 +36,8 @@ class Communication::Block < ApplicationRecord
     partners: 200,
     gallery: 300,
     testimonials: 400,
-    posts: 500
+    posts: 500,
+    pages: 600
   }
 
   before_save :update_template_images
