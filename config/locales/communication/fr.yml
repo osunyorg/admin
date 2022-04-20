@@ -165,6 +165,8 @@ fr:
               remove_testimonial: Enlever le témoignage
           timeline:
             edit:
+              description_label: Description
+              description_placeholder: Entrer la description
               add_event: Ajouter un événement
               remove_event: Supprimer l'événement
               title_label: Titre

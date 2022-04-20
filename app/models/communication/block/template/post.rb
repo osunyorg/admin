@@ -35,7 +35,7 @@ class Communication::Block::Template::Post < Communication::Block::Template
     category.posts.ordered.limit(quantity)
   end
 
-  def selected_posts_free
+  def selected_posts_selection
     elements.map { |element| post(element['id']) }
             .compact
   end
