@@ -12,8 +12,11 @@
       <% end %>
       <hr>
       <%= @block.template.text.html_safe %>
-      <a href="<%= @block.template.url %>" class="btn btn-secondary" target="_blank" rel="noopener">
+      <a href="<%= @block.template.url %>" class="btn btn-primary" target="_blank" rel="noopener">
           <%= @block.template.button %>
+      </a>
+      <a href="<%= @block.template.url_secondary %>" class="btn btn-secondary" target="_blank" rel="noopener">
+          <%= @block.template.button_secondary %>
       </a>
     </div>
   </div>
