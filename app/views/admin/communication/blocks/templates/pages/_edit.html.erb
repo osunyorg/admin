@@ -1,3 +1,4 @@
+<h2 class="mt-5">Page principale</h2>
 <div class="row mb-1">
   <div class="col-md-6">
     <label class="form-label"
@@ -5,7 +6,7 @@
     <select id="page_id"
           class="form-select select"
           v-model="data.page_id">
-      <option value="" disabled>Aucune page sélectionnée</option>
+      <option value="">Aucune page sélectionnée</option>
       <% @block.about&.website.pages.ordered.each_with_index do |page, index| %>
         <option value="<%= page.id %>"><%= page %></option>
       <% end %>
@@ -18,10 +19,15 @@
       <label class="form-check-label boolean optional"
             for="show_description">Afficher la description courte</label>
     </div>
+    <div class="form-check">
+      <input v-model="data.show_image" class="form-check-input boolean optional" :id="'show_image'" type="checkbox">
+      <label class="form-check-label boolean optional"
+            :for="'show_image'">Afficher l'image</label>
+    </div>
   </div>
   <div v-if="!data.category_id" class="col-md-12 mt-5">
     <h2>Ajouter des pages</h2>
-    <a  class="<%= button_classes('my-4') %>"
+    <a  class="<%= button_classes('mb-4') %>"
         v-on:click="data.elements.push({id: ''})">
         <%= t '.add_page' %>
     </a>
@@ -41,12 +47,12 @@
                 </a>
               </div>
               <div class="col-6">
-                <label  class="form-label visually-hidden"
-                        :for="'page-' + index + '-name'"><%= t '.page_label' %></label>
+                <label  class="form-label"
+                        :for="'page-' + index + '-name'">Page secondaire</label>
                 <select :id="'page-' + index + '-name'"
                         class="form-select select"
                         v-model="page.id">
-                  <option value="" disabled>Page</option>
+                  <option value="" disabled>Aucune page</option>
                   <% @block.about&.website.pages.ordered.each_with_index do |page, index| %>
                     <option value="<%= page.id %>"><%= page.title %></option>
                   <% end %>
