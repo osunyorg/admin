@@ -11,19 +11,30 @@ class Communication::Block::Template::Post < Communication::Block::Template
     end
   end
 
-  def data
-    @data = block.data || { elements:[], category_id: "all", posts_quantity: 3 }
-  end
-
   def category
     @category ||= block.about&.website.categories.find_by(id: data['category_id'])
   end
 
   def selected_posts
-    @selected_posts ||= category.nil? ? free_posts : category_posts
+    if kind == 'all'
+      @selected_posts ||= all_posts
+    elsif kind == 'selection'
+      @selected_posts ||= free_posts
+    elsif kind == 'category'
+      @selected_posts ||= category_posts
+    end
   end
 
   protected
+
+  def kind
+    @kind ||= data['kind'] || 'all'
+  end
+
+  def all_posts
+    quantity = data['posts_quantity'] || 3
+    block.about&.website.posts.ordered.limit(quantity)
+  end
 
   def category_posts
     quantity = data['posts_quantity'] || 3

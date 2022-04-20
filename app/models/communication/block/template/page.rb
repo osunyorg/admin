@@ -11,10 +11,6 @@ class Communication::Block::Template::Page < Communication::Block::Template
     # end
   end
 
-  # def category
-  #   @category ||= block.about&.website.categories.find_by(id: data['category_id'])
-  # end
-
   def selected_pages
     @selected_pages ||= free_pages
   end
