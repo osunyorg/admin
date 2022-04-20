@@ -1,33 +1,55 @@
 <div class="row mb-1">
   <div class="col-md-6">
-    <label class="form-label"
-          for="category_id">Sélectionnez des articles spécifiques, ou une catégorie</label>
-    <select id="category_id"
-          class="form-select select"
-          v-model="data.category_id"
-          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3">
-      <option value="" selected>Sélection spécifique</option>
-      <% @block.about&.website.categories.ordered.each_with_index do |category, index| %>
-        <option value="<%= category.id %>"><%= category %></option>
-      <% end %>
-    </select>
-  </div>
-  <div class="col-md-6">
-    <div v-if="data.category_id">
+
+    <div class="mb-4">
+      <h3 class="mt-4">Sélectionnez le type de liste</h3>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="all" id="kind-all"
+          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3;">
+        <label class="form-check-label" for="kind-all">
+          Toutes les actualités
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="category" id="kind-category"
+          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3;">
+        <label class="form-check-label" for="kind-category">
+          Une catégorie
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="selection" id="kind-selection">
+        <label class="form-check-label" for="kind-selection">
+          Une sélection d'actualités
+        </label>
+      </div>
+    </div>
+    
+    <div v-if="data.kind === 'category'" class="mb-2">
+      <label class="form-label"
+            for="category_id">Sélectionnez une catégorie</label>
+      <select id="category_id"
+            class="form-select select"
+            v-model="data.category_id">
+        <% @block.about&.website.categories.ordered.each_with_index do |category, index| %>
+          <option value="<%= category.id %>"><%= category %></option>
+        <% end %>
+      </select>
+    </div>
+    <div v-if="data.kind === 'category' || data.kind === 'all'">
       <label class="form-label"
             for="posts_quantity">Choisissez la quantité d'articles à afficher</label>
       <input type="number"
             placeholder="Quantité"
-            class="form-select"
+            class="form-control"
             id="posts_quantity"
             min="0" max="30"
-            v-model="data.posts_quantity"
-            value="3" />
+            v-model="data.posts_quantity"/>
     </div>
   </div>
 </div>
-<div v-if="!data.category_id">
-  <a  class="<%= button_classes('my-4') %>"
+<div v-if="data.kind === 'selection'">
+  <a  class="<%= button_classes('mb-2') %>"
       v-on:click="data.elements.push({id: ''})">
       <%= t '.add_post' %>
   </a>

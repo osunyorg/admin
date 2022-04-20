@@ -1,0 +1,17 @@
+      text: >-
+        <%= prepare_html_for_static block.template.text, about.university %>
+    <% if block.template.image %>
+      image:
+        file: "<%= block.template.image.blob.id %>"
+        alt: <%= prepare_text_for_static block.template.image.alt %>
+    <% end %>
+      button:
+        text: >-
+          <%= prepare_text_for_static block.template.button %>
+        url: >-
+          <%= prepare_text_for_static block.template.url %>
+      button_secondary:
+        text: >-
+          <%= prepare_text_for_static block.template.button_secondary %>
+        url: >-
+          <%= prepare_text_for_static block.template.url_secondary %>

@@ -163,6 +163,35 @@ fr:
               photo_label: Photo
               remove_photo: Enlever la photo
               remove_testimonial: Enlever le témoignage
+          timeline:
+            edit:
+              add_event: Ajouter un événement
+              remove_event: Supprimer l'événement
+              title_label: Titre
+              title_placeholder: Entrer le titre de l'événement
+              text_label: Texte
+              text_placeholder: Entrer le texte de l'événement
+          definitions:
+            edit:
+              add_definition: Ajouter une définition
+              remove_definition: Supprimer la définition
+              title_label: Titre
+              title_placeholder: Entrer le titre de la définition
+              text_label: Texte
+              text_placeholder: Entrer la description de la définition
+          call_to_action:
+            edit:
+              text_label: Texte
+              text_placeholder: Entrer le texte ici
+              url_label: Lien
+              url_placeholder: Entrer le lien ici avec "https://..."
+              button_label: Bouton
+              button_placeholder: Entrer le texte du bouton ici
+              image_title: Image
+              image_label: Fichier
+              remove_image: Supprimer l'image
+              image_alt_label: Texte alternatif
+              image_alt_placeholder: Entrer le texte alternatif de l'image ici
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page

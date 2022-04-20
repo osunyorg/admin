@@ -16,17 +16,26 @@ class Communication::Block::Template::Post < Communication::Block::Template
   end
 
   def selected_posts
-    @selected_posts ||= category.nil? ? free_posts : category_posts
+    @selected_posts ||= send "selected_posts_#{kind}"
   end
 
   protected
 
-  def category_posts
+  def kind
+    @kind ||= data['kind'] || 'all'
+  end
+
+  def selected_posts_all
+    quantity = data['posts_quantity'] || 3
+    block.about&.website.posts.ordered.limit(quantity)
+  end
+
+  def selected_posts_category
     quantity = data['posts_quantity'] || 3
     category.posts.ordered.limit(quantity)
   end
 
-  def free_posts
+  def selected_posts_free
     elements.map { |element| post(element['id']) }
             .compact
   end

@@ -1,0 +1,23 @@
+<div class="col-md-8 col-xl-6">
+  <div class="card">
+    <div class="card-body">
+      <% if @block.template.image  %>
+        <div style= "max-width: 200px;" class="me-3">
+          <%= kamifusen_tag @block.template.image.blob,
+                          width: 200,
+                          alt: @block.template.image.alt,
+                          class: 'img-fluid' %>
+          <caption><%= @block.template.image.alt %></caption>
+        </div>
+      <% end %>
+      <hr>
+      <%= @block.template.text.html_safe %>
+      <a href="<%= @block.template.url %>" class="btn btn-primary" target="_blank" rel="noopener">
+          <%= @block.template.button %>
+      </a>
+      <a href="<%= @block.template.url_secondary %>" class="btn btn-secondary" target="_blank" rel="noopener">
+          <%= @block.template.button_secondary %>
+      </a>
+    </div>
+  </div>
+</div>
