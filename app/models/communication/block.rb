@@ -40,7 +40,7 @@ class Communication::Block < ApplicationRecord
     pages: 600,
     timeline: 700,
     definitions: 800,
-    push: 900,
+    call_to_action: 900,
   }
 
   before_save :update_template_images

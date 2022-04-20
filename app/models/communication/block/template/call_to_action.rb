@@ -1,4 +1,4 @@
-class Communication::Block::Template::Push < Communication::Block::Template
+class Communication::Block::Template::CallToAction < Communication::Block::Template
   def build_git_dependencies
     # image à déclarer
   end

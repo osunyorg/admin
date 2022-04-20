@@ -179,7 +179,7 @@ fr:
               title_placeholder: Entrer le titre de la définition
               text_label: Texte
               text_placeholder: Entrer la description de la définition
-          push:
+          call_to_action:
             edit:
               text_label: Texte
               text_placeholder: Entrer le texte ici
