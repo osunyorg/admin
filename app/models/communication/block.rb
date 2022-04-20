@@ -37,7 +37,7 @@ class Communication::Block < ApplicationRecord
     gallery: 300,
     testimonials: 400,
     posts: 500,
-    pages: 600
+    pages: 600,
     timeline: 700,
     definitions: 800,
     push: 900,
