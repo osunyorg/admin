@@ -66,6 +66,16 @@ class Education::School < ApplicationRecord
               through: :published_programs,
               source: :university_people_through_role_involvements
 
+  has_many    :alumni,
+              -> { distinct },
+              through: :programs
+  has_many    :academic_years,
+              -> { distinct },
+              through: :programs
+  has_many    :cohorts,
+              -> { distinct },
+              through: :programs
+
   validates :name, :address, :city, :zipcode, :country, presence: true
 
   scope :ordered, -> { order(:name) }

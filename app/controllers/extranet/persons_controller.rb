@@ -4,7 +4,7 @@ class Extranet::PersonsController < Extranet::ApplicationController
                               through_association: :people
 
   def index
-    @people = @people.alumni
+    @people = current_extranet.about&.alumni || @people.alumni
     breadcrumb
   end
 

@@ -17,6 +17,9 @@ fr:
         one: École
         other: Écoles
     attributes:
+      education/cohort:
+        year: Année
+        alumni: Alumni
       education/program:
         accessibility: Accessibilité
         capacity: Capacité

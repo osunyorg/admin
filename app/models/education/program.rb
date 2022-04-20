@@ -40,7 +40,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_6e16107511  (university_id => universities.id)
+#  fk_rails_08b351087c  (university_id => universities.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
@@ -111,6 +111,11 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Cohort'
   has_many   :websites, -> { distinct },
              through: :schools
+  has_many   :alumni,
+             through: :cohorts,
+             source: :people
+  has_many   :academic_years,
+             through: :cohorts
 
   accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 

@@ -47,6 +47,20 @@
                               ),
                               class: "#{'opacity-50' unless @page.parent.published?}" %></p>
           <% end %>
+
+          <% if can?(:edit, @website) && @page.best_bodyclass %>
+            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('bodyclass') %></h3>
+            <p>
+              <%= @page.best_bodyclass %>
+              <% if @page.bodyclass.blank? %>
+                <br>
+                <span class="small text-muted">
+                  <%= t 'admin.inheritance.sentence_without_link' %>
+                </span>
+              <% end %>
+            </p>
+          <% end %>
+
           <% if @page.related_category %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('related_category') %></h3>
             <p><%= link_to_if can?(:read, @page.related_category),
@@ -71,13 +85,18 @@
           <% end %>
         </div>
       </div>
-      <% if @page.featured_image.attached? && @page.featured_image.variable? %>
+      <% if @page.best_featured_image && @page.best_featured_image.attached? && @page.best_featured_image.variable? %>
         <div class="card flex-fill w-100">
           <div class="card-header">
             <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/page.featured_image') %></h5>
           </div>
           <div class="card-body">
-            <%= image_tag @page.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+            <%= image_tag @page.best_featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+            <% unless @page.featured_image.attached? %>
+              <span class="small text-muted">
+                <%= t 'admin.inheritance.sentence_without_link' %>
+              </span>
+            <% end %>
           </div>
         </div>
       <% end %>

@@ -83,10 +83,11 @@ en:
         title: Title
         url: URL
       communication/website/page:
+        bodyclass: Specific CSS class
         breadcrumb_title: Title in breadcrumbs
         children: Children pages
         description: Meta Description
-        description_short: Short description
+        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         header_text: Title displayed in header
@@ -102,7 +103,7 @@ en:
         category: Category
         categories: Categories
         description: Meta Description
-        description_short: Short description
+        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         pinned: Pinned?
@@ -118,6 +119,8 @@ en:
         template_kinds:
           chapter:
             edit:
+              notes_label: Notes
+              notes_placeholder: Enter notes
               text_label: Text
               text_placeholder: Enter text
           gallery:
@@ -126,6 +129,8 @@ en:
               image_label: Image (.png, .jpg)
               alt_label: Alternative text
               alt_placeholder: Enter text description
+              text_label: Text
+              text_placeholder: Enter text
               remove_image: Remove image
           organization_chart:
             edit:

@@ -113,6 +113,17 @@ class University::Person < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def roles
+    [:administration, :teacher, :researcher, :alumnus, :author].reject do |role|
+      ! send "is_#{role}"
+    end
+  end
+
+  # TODO denormalize
+  def is_author
+    communication_website_posts.any?
+  end
+
   def websites
     university.communication_websites
   end

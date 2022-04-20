@@ -83,10 +83,11 @@ fr:
         title: Titre
         url: URL
       communication/website/page:
+        bodyclass: Classe CSS spécifique
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Meta Description
-        description_short: Description courte
+        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         header_text: Titre affiché dans le header
@@ -102,7 +103,7 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Meta Description
-        description_short: Description courte
+        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         pinned: Mis en avant ?
@@ -118,6 +119,8 @@ fr:
         templates:
           chapter:
             edit:
+              notes_label: Notes
+              notes_placeholder: Entrer les notes
               text_label: Texte
               text_placeholder: Entrer le texte
           gallery:
@@ -126,6 +129,8 @@ fr:
               image_label: Image (.png, .jpg)
               alt_label: Texte alternatif
               alt_placeholder: Entrer la description textuelle
+              text_label: Texte
+              text_placeholder: Entrer le texte
               remove_image: Enlever l'image
           organization_chart:
             edit:

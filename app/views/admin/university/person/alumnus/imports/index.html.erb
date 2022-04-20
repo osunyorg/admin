@@ -4,14 +4,12 @@
   <thead>
     <tr>
       <th><%= University::Person::Alumnus::Import.human_attribute_name('name') %></th>
-      <th><%= University::Person::Alumnus::Import.human_attribute_name('lines') %></th>
     </tr>
   </thead>
   <tbody>
     <% @imports.each do |import| %>
       <tr>
         <td><%= link_to import, [:admin, import] %></td>
-        <td><%= import.lines %></td>
       </tr>
     <% end %>
   </tbody>

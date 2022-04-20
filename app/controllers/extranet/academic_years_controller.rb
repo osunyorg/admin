@@ -4,11 +4,13 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
                               through_association: :academic_years
 
   def index
-    @academic_years = @academic_years.ordered.page(params[:page])
+    @academic_years = current_extranet.about&.academic_years || @academic_years
     breadcrumb
   end
 
   def show
+    @cohorts = @academic_year.cohorts_in_context(current_context.about)
+    @alumni = @academic_year.alumni_in_context(current_context.about)
     breadcrumb
   end
 

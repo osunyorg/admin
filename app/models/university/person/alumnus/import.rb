@@ -34,7 +34,11 @@ class University::Person::Alumnus::Import < ApplicationRecord
       if Rails.env.development?
         # substitute local data for testing
         substitutes = {
-          'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55'
+          'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55', # DUT MMI
+          'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '863b8c9c-1ed1-4af7-b92c-7264dfb6b4da', # MASTER IJBA
+          'f4d4a92f-8b8f-4778-a127-9293684666be' => '8dfaee2a-c876-4b1c-8e4e-8380d720c71f', # DU_BILINGUE
+          '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'be3cb0b2-7f66-4c5f-b8d7-6a39a0480c46', # DU_JRI
+          '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '56a50383-3ef7-43f6-8e98-daf279e86802' # DUT_JOURNALISME
         }
         program_id = substitutes[program_id] if substitutes.has_key? program_id
       end
@@ -59,11 +63,12 @@ class University::Person::Alumnus::Import < ApplicationRecord
                            .first_or_create
         person.first_name = first_name
         person.last_name = last_name
-      else
+      elsif first_name.present? && last_name.present?
         person = university.people
                            .where(first_name: first_name, last_name: last_name)
                            .first_or_create
       end
+      next unless person
       # TODO all fields
       # gender
       # birth
@@ -76,7 +81,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
       person.slug = person.to_s.parameterize.dasherize
       person.twitter ||= row['social_twitter']
       person.linkedin ||= row['social_linkedin']
-      person.biography ||= row['biography']
+      person.biography ||= clean_encoding row['biography']
       person.phone ||= row['mobile']
       person.phone ||= row['phone_personal']
       person.phone ||= row['phone_professional']

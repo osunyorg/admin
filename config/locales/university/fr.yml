@@ -31,6 +31,11 @@ fr:
         is_author: Auteur·rice
         is_researcher: Chercheur·se
         is_teacher: Enseignant·e
+        administration: Personnel administratif
+        alumnus: Alumnus
+        author: Auteur·rice
+        researcher: Chercheur·se
+        teacher: Enseignant·e
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
         name: Nom

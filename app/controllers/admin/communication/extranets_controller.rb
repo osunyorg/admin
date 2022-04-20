@@ -8,6 +8,9 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
   end
 
   def show
+    @alumni = @extranet.about&.alumni
+    @cohorts = @extranet.about&.cohorts
+    @years = @extranet.about&.academic_years
     breadcrumb
   end
 

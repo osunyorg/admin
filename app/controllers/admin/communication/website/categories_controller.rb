@@ -19,8 +19,12 @@ class Admin::Communication::Website::CategoriesController < Admin::Communication
         parent_id: parent_id,
         position: index + 1
       )
+      category.sync_with_git unless parent_id
     end
-    first_category.sync_with_git if first_category
+    if parent_id
+      parent = @website.categories.find(parent_id)
+      parent.sync_with_git
+    end
   end
 
   def children

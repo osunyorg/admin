@@ -42,6 +42,7 @@
                               include_blank: false,
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] } unless page.kind_home? %>
+            <%= f.input :bodyclass if can?(:edit, @website) %>
           </div>
         </div>
       <% end %>

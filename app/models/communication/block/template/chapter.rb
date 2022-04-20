@@ -6,4 +6,8 @@ class Communication::Block::Template::Chapter < Communication::Block::Template
   def text
     "#{data['text']}"
   end
+
+  def notes
+    "#{data['notes']}"
+  end
 end

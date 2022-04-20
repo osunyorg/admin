@@ -32,6 +32,8 @@
               <li><%= link_to_if can?(:read, program), program, [:admin, program] %></li>
             <% end %>
           </ul>
+          <%= @school.alumni.count %>
+          <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
         </div>
       </div>
     </div>
