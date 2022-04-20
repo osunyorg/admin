@@ -1,3 +1,5 @@
+<% pages = collection_tree(@block.about&.website.pages) %>
+
 <h2 class="mt-5">Page principale</h2>
 <div class="row mb-1">
   <div class="col-md-6">
@@ -7,8 +9,8 @@
           class="form-select select"
           v-model="data.page_id">
       <option value="">Aucune page sélectionnée</option>
-      <% @block.about&.website.pages.ordered.each_with_index do |page, index| %>
-        <option value="<%= page.id %>"><%= page %></option>
+      <% pages.each_with_index do |page, index| %>
+        <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
       <% end %>
     </select>
   </div>
@@ -53,10 +55,11 @@
                         class="form-select select"
                         v-model="page.id">
                   <option value="" disabled>Aucune page</option>
-                  <% @block.about&.website.pages.ordered.each_with_index do |page, index| %>
-                    <option value="<%= page.id %>"><%= page.title %></option>
+                  <% pages.each_with_index do |page, index| %>
+                    <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
                   <% end %>
                 </select>
+                
               </div>
               <div class="col-6">
                 <div class="col-md-6">
