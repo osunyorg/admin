@@ -281,12 +281,16 @@ fr:
     communication:
       block:
         template_kind:
+          call_to_action: Appel à actions
           chapter: Chapitre
+          definitions: Définitions
           gallery: Galerie
           organization_chart: Organigramme
+          pages: Liste de pages
           partners: Partenaires
-          posts: Actualités
+          posts: Liste d'actualités
           testimonials: Témoignages
+          timeline: Frise chronologique
       website:
         menu:
           item:

@@ -281,12 +281,16 @@ en:
     communication:
       block:
         template:
+          call_to_action: Call to action
           chapter: Chapter
+          definitions: Definitions
           gallery: Gallery
           organization_chart: Organization chart
+          pages: Pages
           partners: Partners
           posts: Posts
           testimonials: Testimonials
+          timeline: Timeline
       website:
         menu:
           item:
