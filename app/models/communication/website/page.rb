@@ -124,7 +124,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def best_featured_image
     # we don't want to fallback on homepage featured_image
-    return featured_image if featured_image.attached? || kind_home? || parent.kind_home?
+    return featured_image if featured_image.attached? || kind_home? || parent&.kind_home?
     parent&.best_featured_image
   end
 
