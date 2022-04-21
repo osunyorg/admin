@@ -251,7 +251,7 @@ en:
             description_short: ''
             slug: legal-terms
             title: Legal terms
-          people:
+          persons:
             description_short: List of members in the team
             slug: team
             title: Team
@@ -321,6 +321,7 @@ en:
     hints:
       communication_website:
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
+        languages: 'If you select at least one language the website will be considered as possibly multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
       communication_website_category:
         description: If this field is empty the main text's begining will be used.
       communication_website_page:
