@@ -26,7 +26,11 @@ module Communication::Website::WithDependencies
   end
 
   def blocks
-    Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
+    @blocks ||= Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
+  end
+
+  def blocks_dependencies
+    blocks_dependencies ||= blocks.collect(&:git_dependencies).flatten.compact.uniq
   end
 
   def education_programs
@@ -54,7 +58,11 @@ module Communication::Website::WithDependencies
   end
 
   def people_in_blocks
-    [] # TODO
+    blocks_dependencies.reject { |dependency| !dependency.is_a? University::Person }
+  end
+
+  def people_with_facets_in_blocks
+    blocks_dependencies.reject { |dependency| !dependency.class.to_s.start_with?('University::Person') }
   end
 
   def people
@@ -71,12 +79,13 @@ module Communication::Website::WithDependencies
 
   def people_with_facets
     @people_with_facets ||= begin
-      people = []
-      people += authors + authors.compact.map(&:author) if has_authors?
-      people += teachers + teachers.map(&:teacher) if has_teachers?
-      people += administrators + administrators.map(&:administrator) if has_administrators?
-      people += researchers + researchers.map(&:researcher) if has_researchers?
-      people.uniq.compact
+      people_with_facets = people
+      people_with_facets += authors.compact.map(&:author) if has_authors?
+      people_with_facets += teachers.compact.map(&:teacher) if has_teachers?
+      people_with_facets += administrators.compact.map(&:administrator) if has_administrators?
+      people_with_facets += researchers.compact.map(&:researcher) if has_researchers?
+      people_with_facets += people_with_facets_in_blocks if has_people_in_blocks?
+      people_with_facets.uniq.compact
     end
   end
 
@@ -110,7 +119,6 @@ module Communication::Website::WithDependencies
   end
 
   def has_people_in_blocks?
-    # TODO
     people_in_blocks.compact.any?
   end
 

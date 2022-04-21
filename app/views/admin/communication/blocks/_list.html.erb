@@ -27,12 +27,14 @@
               <td><i class="fa fa-bars handle"></i></td>
             <% end %>
             <td><%= link_to_if can?(:read, block),
-                               block,
+                               block.to_s.truncate(50),
                                admin_communication_block_path(block) %></td>
             <td><%= block.template_kind_i18n  %></td>
             <td class="text-end">
-              <%= edit_link block %>
-              <%= destroy_link block %>
+              <div class="btn-group" role="group">
+                <%= edit_link block %>
+                <%= destroy_link block %>
+              </div>
             </td>
           </tr>
         <% end %>
