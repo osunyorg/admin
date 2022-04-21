@@ -1,6 +1,6 @@
 <% block.template.definitions.each do |definition| %>
       - title: >-
-          <%= prepare_text_for_static definition.title %>
+          <%= prepare_html_for_static definition.title, about.university %>
         text: >-
-          <%= prepare_text_for_static definition.text %>
+          <%= prepare_html_for_static definition.text, about.university %>
 <% end %>

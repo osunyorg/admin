@@ -1,9 +1,9 @@
       description: >-
-        <%= prepare_text_for_static block.template.description %>  
+        <%= prepare_html_for_static block.template.description, about.university %>
       events:
 <% block.template.events.each do |event| %>
         - title: >-
-            <%= prepare_text_for_static event.title %>
+            <%= prepare_html_for_static event.title, about.university %>
           text: >-
-            <%= prepare_text_for_static event.text %>
+            <%= prepare_html_for_static event.text, about.university %>
 <% end %>
