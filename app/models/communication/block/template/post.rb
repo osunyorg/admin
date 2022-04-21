@@ -16,6 +16,7 @@ class Communication::Block::Template::Post < Communication::Block::Template
   end
 
   def selected_posts
+    # kind could be : selection, category, or all
     @selected_posts ||= send "selected_posts_#{kind}"
   end
 
