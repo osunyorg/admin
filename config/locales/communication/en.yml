@@ -326,6 +326,6 @@ en:
         description: If this field is empty the main text's begining will be used.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
-        description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
+        description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
       communication_website_post:
-        description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
+        description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
