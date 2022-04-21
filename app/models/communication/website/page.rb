@@ -84,7 +84,7 @@ class Communication::Website::Page < ApplicationRecord
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
   def generated_path
-    "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+    "#{language_prefix}#{parent&.path}/#{slug}".gsub(/\/+/, '/')
   end
 
   def git_path(website)
@@ -119,6 +119,10 @@ class Communication::Website::Page < ApplicationRecord
     return unless published
     return if website.url.blank?
     "#{website.url}#{path}"
+  end
+
+  def language_prefix
+    "/#{language.iso_code}" if website.languages.any? && language_id
   end
 
   def to_s
