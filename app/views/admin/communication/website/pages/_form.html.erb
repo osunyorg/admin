@@ -50,6 +50,19 @@
             <%= f.input :bodyclass if can?(:edit, @website) %>
           </div>
         </div>
+      <% else %>
+        <% if @website.languages.many? %>
+          <div class="card flex-fill w-100">
+            <div class="card-header">
+              <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+            </div>
+            <div class="card-body">
+              <%= f.input :language_id, collection: @website.languages, include_blank: false %>
+            </div>
+          </div>
+        <% elsif @website.languages.any? %>
+          <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
+        <% end %>
       <% end %>
       <div class="card flex-fill w-100">
         <div class="card-header">

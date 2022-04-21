@@ -84,7 +84,7 @@ class Communication::Website::Page < ApplicationRecord
   scope :recent, -> { order(updated_at: :desc).limit(5) }
 
   def generated_path
-    "#{language_prefix}#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+    "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
   end
 
   def git_path(website)
@@ -175,7 +175,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def make_path
-    self.path = kind_home? ? '/' : generated_path
+    self.path = kind_home? ? "#{language_prefix}/" : generated_path
   end
 
   def slug_must_be_unique
