@@ -8,15 +8,15 @@ categories:     <%= @website.special_page(:communication_posts).path %>/:slug/
 persons:        <%= @website.special_page(:persons).path %>/:slug/
 <% end %>
 <% if @website.has_authors? %>
-authors:        /<%= @website.special_page(:persons).path %>/:slug/<%= @website.special_page(:communication_posts).slug %>/
+authors:        <%= @website.special_page(:persons).path %>/:slug/<%= @website.special_page(:communication_posts).slug %>/
 <% end %>
 <%# ces paths complémentaires sont nécessairesà Hugo mais on ne les utilise pas %>
 <% if @website.has_administrators? %>
-administrators: /<%= @website.special_page(:persons).path %>/:slug/roles/
+administrators: <%= @website.special_page(:persons).path %>/:slug/roles/
 <% end %>
 <% if @website.has_teachers? %>
-teachers:       /<%= @website.special_page(:persons).path %>/:slug/programs/
+teachers:       <%= @website.special_page(:persons).path %>/:slug/programs/
 <% end %>
 <% if @website.has_researchers? %>
-researchers:    /<%= @website.special_page(:persons).path %>/:slug/articles/
+researchers:    <%= @website.special_page(:persons).path %>/:slug/articles/
 <% end %>
