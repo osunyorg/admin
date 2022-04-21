@@ -168,6 +168,35 @@ en:
               photo_label: Photo
               remove_photo: Remove photo
               remove_testimonial: Remove testimonial
+          timeline:
+            edit:
+              add_event: Add event
+              remove_event: Delete event
+              title_label: Title
+              title_placeholder: Enter title here
+              text_label: Text
+              text_placeholder: Enter text here
+          definitions:
+            edit:
+              add_definition: Add definition
+              remove_definition: Delete definition
+              title_label: Title
+              title_placeholder: Enter title here
+              text_label: Text
+              text_placeholder: Enter text here
+          call_to_action:
+            edit:
+              text_label: Texte
+              text_placeholder: Entrer le texte ici
+              url_label: Lien
+              url_placeholder: Entrer le lien ici avec "https://..."
+              button_label: Bouton
+              button_placeholder: Entrer le texte du bouton ici
+              image_title: Image
+              image_label: Fichier
+              remove_image: Supprimer l'image
+              image_alt_label: Texte alternatif
+              image_alt_placeholder: Entrer le texte alternatif de l'image ici
       website:
         pages:
           delete_special_page_notice: Can't delete this page
@@ -257,12 +286,16 @@ en:
     communication:
       block:
         template:
+          call_to_action: Call to action
           chapter: Chapter
+          definitions: Definitions
           gallery: Gallery
           organization_chart: Organization chart
+          pages: Pages
           partners: Partners
           posts: Posts
           testimonials: Testimonials
+          timeline: Timeline
       website:
         menu:
           item:

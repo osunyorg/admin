@@ -319,10 +319,10 @@ ActiveRecord::Schema.define(version: 2022_04_21_093107) do
     t.uuid "related_category_id"
     t.string "featured_image_alt"
     t.text "text"
+    t.text "description_short"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
-    t.text "description_short"
     t.string "bodyclass"
     t.uuid "language_id"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
@@ -486,6 +486,23 @@ ActiveRecord::Schema.define(version: 2022_04_21_093107) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
+  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active"
+    t.string "sirene"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

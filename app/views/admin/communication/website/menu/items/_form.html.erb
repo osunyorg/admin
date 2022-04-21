@@ -1,5 +1,6 @@
 <%= simple_form_for item, url: item.persisted?  ? [:admin, item, { menu_id: @menu.id }]
                                                 : admin_communication_website_menu_items_path(@menu) do |f| %>
+  <%= f.input :parent_id, as: :hidden, wrapper: false %>
   <div class="card flex-fill w-100">
     <div class="card-header">
       <h5 class="card-title mb-0"><%= t('content') %></h5>

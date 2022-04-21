@@ -1,0 +1,6 @@
+<dl>
+  <% @block.template.definitions.each do |definition| %>
+    <dt><%= definition.title %></dt>
+    <dd><%= definition.text %></dd>
+  <% end %>
+</dl>
