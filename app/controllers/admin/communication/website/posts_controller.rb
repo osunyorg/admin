@@ -60,7 +60,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
             :university_id, :website_id, :title, :description, :description_short, :text,
             :published, :published_at, :featured_image, :featured_image_delete,
             :featured_image_infos, :featured_image_alt, :slug, :pinned,
-            :author_id, category_ids: []
+            :author_id, :language_id, category_ids: []
           )
           .merge(university_id: current_university.id)
   end

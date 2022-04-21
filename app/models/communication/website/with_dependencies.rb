@@ -53,6 +53,10 @@ module Communication::Website::WithDependencies
     about.teachers
   end
 
+  def people_in_blocks
+    [] # TODO
+  end
+
   def people
     @people ||= begin
       people = []
@@ -60,6 +64,7 @@ module Communication::Website::WithDependencies
       people += teachers if has_teachers?
       people += administrators if has_administrators?
       people += researchers if has_researchers?
+      people += people_in_blocks if has_people_in_blocks?
       people.uniq.compact
     end
   end
@@ -102,6 +107,11 @@ module Communication::Website::WithDependencies
 
   def has_authors?
     authors.compact.any?
+  end
+
+  def has_people_in_blocks?
+    # TODO
+    people_in_blocks.compact.any?
   end
 
   def has_persons?

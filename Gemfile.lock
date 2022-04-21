@@ -261,6 +261,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    language_select (0.0.2)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -480,6 +481,7 @@ DEPENDENCIES
   jquery-rails
   kamifusen
   kaminari
+  language_select (~> 0.0.2)
   listen (~> 3.3)
   mini_magick
   octokit

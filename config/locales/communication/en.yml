@@ -57,7 +57,12 @@ en:
         about_Research::Journal: Journal website
         about_Research::Laboratory: Laboratory website
         about_type: About
+        access_token: Access token
+        git_endpoint: Git endpoint
+        git_provider: Git provider
+        languages: Languages
         name: Name
+        repository: Repository
         url: URL
       communication/website/category:
         children: Children categories
@@ -246,7 +251,7 @@ en:
             description_short: ''
             slug: legal-terms
             title: Legal terms
-          people:
+          persons:
             description_short: List of members in the team
             slug: team
             title: Team
@@ -314,6 +319,9 @@ en:
               url: URL
   simple_form:
     hints:
+      communication_website:
+        git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
+        languages: 'If you select at least one language the website will be considered as possibly multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
       communication_website_category:
         description: If this field is empty the main text's begining will be used.
       communication_website_page:

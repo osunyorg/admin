@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_19_144340) do
+ActiveRecord::Schema.define(version: 2022_04_21_093107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -324,7 +324,9 @@ ActiveRecord::Schema.define(version: 2022_04_19_144340) do
     t.text "header_text"
     t.integer "kind"
     t.string "bodyclass"
+    t.uuid "language_id"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
+    t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["related_category_id"], name: "index_communication_website_pages_on_related_category_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
@@ -346,8 +348,10 @@ ActiveRecord::Schema.define(version: 2022_04_19_144340) do
     t.string "featured_image_alt"
     t.text "text"
     t.text "description_short"
+    t.uuid "language_id"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
+    t.index ["language_id"], name: "index_communication_website_posts_on_language_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
 
@@ -365,6 +369,12 @@ ActiveRecord::Schema.define(version: 2022_04_19_144340) do
     t.string "git_endpoint"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
+  end
+
+  create_table "communication_websites_languages", id: false, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.index ["communication_website_id", "language_id"], name: "website_language"
   end
 
   create_table "communication_websites_users", id: false, force: :cascade do |t|
