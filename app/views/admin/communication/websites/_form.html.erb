@@ -9,6 +9,7 @@
           <%= f.input :name %>
           <%= f.input :url %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
+          <%= f.association :languages, as: :check_boxes %>
         </div>
       </div>
     </div>
@@ -23,8 +24,7 @@
               <%= f.input :git_provider, include_blank: false %>
             </div>
             <div class="col-md-6">
-              <%= f.input :git_endpoint,
-                          placeholder: 'If blank, default will be used (https://gitlab.com/api/v4)' %>
+              <%= f.input :git_endpoint %>
               <%= f.input :access_token %>
               <%= f.input :repository %>
             </div>

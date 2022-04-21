@@ -36,6 +36,11 @@
                           class: 'js-slug-input',
                           data: { source: '#communication_website_page_title' }
                         } unless page.kind_home? %>
+            <% if @website.languages.many? %>
+              <%= f.input :language_id, collection: @website.languages, include_blank: false %>
+            <% elsif @website.languages.any? %>
+              <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
+            <% end %>
             <%= f.input :published if page.is_regular_page? %>
             <%= f.association :parent,
                               collection: collection_tree(@website.pages, page),
