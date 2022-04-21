@@ -76,6 +76,7 @@ module Communication::Website::WithDependencies
       people += teachers + teachers.map(&:teacher) if has_teachers?
       people += administrators + administrators.map(&:administrator) if has_administrators?
       people += researchers + researchers.map(&:researcher) if has_researchers?
+      people += people_in_blocks if has_people_in_blocks?
       people.uniq.compact
     end
   end
@@ -110,12 +111,11 @@ module Communication::Website::WithDependencies
   end
 
   def has_people_in_blocks?
-    # TODO
     people_in_blocks.compact.any?
   end
 
   def has_persons?
-    has_authors? || has_administrators? || has_researchers? || has_teachers?
+    has_authors? || has_administrators? || has_researchers? || has_teachers? || has_people_in_blocks?
   end
 
   def has_administrators?
