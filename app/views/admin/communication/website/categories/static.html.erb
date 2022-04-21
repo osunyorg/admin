@@ -1,6 +1,9 @@
 ---
 title: "<%= @about.name %>"
 slug: "<%= @about.slug %>"
+<% if @about.parent %>
+parent: "<%= about.parent.slug %>"
+<% end %>
 position: <%= @about.position %>
 <% if @about.best_featured_image.attached? %>
 image: "<%= @about.best_featured_image.blob.id %>"
