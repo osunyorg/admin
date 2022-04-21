@@ -73,12 +73,13 @@ module Admin::ApplicationHelper
     sanitize text
   end
 
-  def prepare_text_for_static(text)
-    indentation = '  ' # Beware, it works only at level one, with 2 spaces
+  def prepare_text_for_static(text, depth = 1)
+    indentation = '  ' * depth # Beware, it works only at level one, with 2 spaces
     text = text.to_s.dup
     text = strip_tags text
     text = text.strip
     text = text.gsub "\r\n", "\n" # Remove useless \r
+    text = text.gsub "\r", "\n" # Replace lonely \r
     text = text.gsub "\n", "\n#{indentation}" # Indent properly to avoid broken frontmatter
     text = text.chomp # Remove extra newlines
     CGI.unescapeHTML text
