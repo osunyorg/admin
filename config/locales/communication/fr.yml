@@ -57,7 +57,12 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
+        access_token: Access token
+        git_endpoint: Point d'accès Git
+        git_provider: Provider Git
+        languages: Langues
         name: Nom
+        repository: Repository
         url: URL
       communication/website/category:
         children: Catégories enfants
@@ -248,7 +253,7 @@ fr:
             description_short: ''
             slug: mentions-legales
             title: Mentions légales
-          people:
+          persons:
             description_short: Liste des membres de l'équipe
             slug: equipe
             title: Équipe
@@ -316,6 +321,9 @@ fr:
               url: URL
   simple_form:
     hints:
+      communication_website:
+        git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
+        languages: 'Si vous sélectionnez au moins une langue le site sera considéré comme possiblement multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
       communication_website_category:
         description: Si ce champ est vide le début du texte principal sera utilisé.
       communication_website_page:
