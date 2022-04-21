@@ -1,8 +1,8 @@
 ---
 title: "<%= @about.name %>"
-slug: "<%= @about.slug %>"
+slug: "<%= @about.path %>"
 <% if @about.parent %>
-parent: "<%= @about.parent.slug %>"
+parent: "<%= @about.parent.path %>"
 <% end %>
 position: <%= @about.position %>
 <% if @about.best_featured_image.attached? %>
