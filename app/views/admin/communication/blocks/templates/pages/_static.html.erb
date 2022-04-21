@@ -5,7 +5,7 @@
 <% end %>
       pages:
 <% block.template.selected_pages.each do |element| %>
-        - slug: <%= element.page.path %>
+        - slug: <%= element.page.generated_path %>
           show_description: <%= element.show_description %>
           show_image: <%= element.show_image %>
 <% end %>
