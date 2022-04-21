@@ -123,7 +123,7 @@ module Communication::Website::WithDependencies
   end
 
   def has_persons?
-    has_authors? || has_administrators? || has_researchers? || has_teachers?
+    has_authors? || has_administrators? || has_researchers? || has_teachers? || has_people_in_blocks?
   end
 
   def has_administrators?

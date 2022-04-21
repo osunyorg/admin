@@ -10,7 +10,7 @@ image: "<%= @about.best_featured_image.blob.id %>"
 image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
 <% if @about.related_category %>
-category: "<%= @about.related_category.path %>/"
+category: "<%= @about.related_category.path %>"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>

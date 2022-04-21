@@ -19,7 +19,7 @@ module WithSlug
     end
 
     def generated_path
-      "#{parent&.path}/#{slug}".gsub(/\/+/, '/')
+      "#{parent.nil? ? '/' : parent.path}#{slug}/".gsub(/\/+/, '/')
     end
 
     protected
