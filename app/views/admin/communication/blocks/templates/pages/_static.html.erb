@@ -1,11 +1,11 @@
 <% if block.template.main_page %>
-      page: <%= block.template.main_page.slug %>
+      page: <%= block.template.main_page.generated_path %>
       show_description: <%= block.template.show_description %>
       show_image: <%= block.template.show_image %>
 <% end %>
       pages:
 <% block.template.selected_pages.each do |element| %>
-        - slug: <%= element.page.slug %>
+        - slug: <%= element.page.path %>
           show_description: <%= element.show_description %>
           show_image: <%= element.show_image %>
 <% end %>
