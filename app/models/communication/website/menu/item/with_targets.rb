@@ -20,7 +20,7 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_program
-    "#{website.special_page(:education_programs).path}#{about.path}"
+    "#{website.special_page(:education_programs).path}#{about.path}".gsub("//", '/')
   end
 
   def target_for_news
@@ -28,11 +28,11 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_news_article
-    "#{website.special_page(:communication_posts).path}#{about.path}" if about&.published && about&.published_at
+    "#{website.special_page(:communication_posts).path}#{about.path}".gsub("//", '/') if about&.published && about&.published_at
   end
 
   def target_for_news_category
-    "#{website.special_page(:communication_posts).path}#{about.path}" if about
+    "#{website.special_page(:communication_posts).path}#{about.path}".gsub("//", '/') if about
   end
 
   def target_for_staff
@@ -60,7 +60,7 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_research_volume
-    "#{website.special_page(:research_volumes).path}#{about.path}" if about&.published && about&.published_at
+    "#{website.special_page(:research_volumes).path}#{about.path}".gsub("//", '/') if about&.published && about&.published_at
   end
 
   def target_for_research_articles
@@ -68,6 +68,6 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_research_article
-    "#{website.special_page(:research_articles).path}#{about.path}" if about&.published && about&.published_at
+    "#{website.special_page(:research_articles).path}#{about.path}".gsub("//", '/') if about&.published && about&.published_at
   end
 end
