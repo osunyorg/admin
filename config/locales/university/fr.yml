@@ -88,8 +88,8 @@ fr:
         one: Alumnus
         other: Alumni
       university/organization:
-        one: Tierce partie
-        other: Tierces parties
+        one: Organisation
+        other: Organisations
       university/organization/import:
         one: Import
         other: Imports

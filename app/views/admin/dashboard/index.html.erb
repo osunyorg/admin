@@ -52,3 +52,22 @@
     <% end %>
   </div>
 <% end %>
+
+<% if current_university.communication_extranets.any? && can?(:read, Communication::Extranet) %>
+  <h2 class="h4 my-4"><%= Communication::Extranet.model_name.human(count: 2) %></h2>
+  <div class="row">
+    <% current_university.communication_extranets.each do |extranet| %>
+      <% next unless can?(:read, extranet) %>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <span class="float-end"><i class="fas fa-project-diagram fa-2x"></i></span>
+            <h4><%= extranet %></h4>
+            <p class="small"><%= extranet.url %></p>
+            <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
