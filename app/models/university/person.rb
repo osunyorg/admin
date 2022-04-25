@@ -15,6 +15,7 @@
 #  is_teacher        :boolean
 #  last_name         :string
 #  linkedin          :string
+#  name              :string
 #  phone             :string
 #  slug              :string
 #  tenure            :boolean          default(FALSE)
@@ -101,7 +102,7 @@ class University::Person < ApplicationRecord
                           allow_blank: true,
                           if: :will_save_change_to_email?
 
-  before_validation :sanitize_email
+  before_validation :sanitize_email, :prepare_name
 
   scope :ordered,         -> { order(:last_name, :first_name) }
   scope :administration,  -> { where(is_administration: true) }
@@ -182,5 +183,9 @@ class University::Person < ApplicationRecord
 
   def sanitize_email
     self.email = self.email.to_s.downcase.strip
+  end
+
+  def prepare_name
+    self.name = to_s
   end
 end

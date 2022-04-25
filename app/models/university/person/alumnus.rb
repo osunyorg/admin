@@ -15,6 +15,7 @@
 #  is_teacher        :boolean
 #  last_name         :string
 #  linkedin          :string
+#  name              :string
 #  phone             :string
 #  slug              :string
 #  tenure            :boolean          default(FALSE)

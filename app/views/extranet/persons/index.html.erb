@@ -7,11 +7,26 @@
     </div>
     <div class="col-md-3 text-end">
       <p>
-        <%= @people.count %>
-        <%= University::Person::Alumnus.model_name.human(count: @people.count).downcase %>
+        <%= @count %>
+        <%= University::Person::Alumnus.model_name.human(count: @count).downcase %>
       </p>
     </div>
   </div>
 </header>
 
-<%= render 'extranet/persons/list', people: @people %>
+<div class="row">
+  <div class="col-lg-3">
+    <%= render 'faceted_search/facets', facets: @facets %>
+  </div>
+  <div class="offset-lg-1 col-lg-8">
+    <div class="row">
+      <% @people.each do |person| %>
+        <div class="col-xxl-3 col-md-4 col-sm-6">
+          <%= render 'extranet/persons/person', person: person %>
+        </div>
+      <% end %>
+    </div>
+    <%= paginate @people, theme: 'bootstrap-5' %>
+
+  </div>
+</div>
