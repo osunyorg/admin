@@ -22,7 +22,7 @@ module User::WithRoles
     before_validation :check_modifier_role
 
     def self.roles_with_access_to_global_menu
-      roles.keys - ["website_manager"]
+      roles.keys - ['contributor', 'author', 'website_manager']
     end
 
     def managed_roles
