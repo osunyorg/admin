@@ -55,11 +55,12 @@ class University::Organization < ApplicationRecord
   }
 
   def git_dependencies(website)
-    dependencies = website.menus.to_a
+    dependencies = []
     if for_website?(website)
       dependencies << self
       dependencies.concat active_storage_blobs
     end
+    dependencies += website.menus.to_a
     dependencies
   end
 
