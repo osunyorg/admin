@@ -21,7 +21,7 @@
         <td><%= link_to user.email, [:admin, user] %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.role.humanize %></td>
+        <td><%= t("activerecord.attributes.user.roles.#{user.role}") %></td>
         <td><%= user.language %></td>
         <td class="text-end">
           <div class="btn-group" role="group">

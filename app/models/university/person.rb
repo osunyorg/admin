@@ -108,6 +108,21 @@ class University::Person < ApplicationRecord
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(concat(university_people.first_name, ' ', university_people.last_name)) ILIKE unaccent(:term) OR
+      unaccent(concat(university_people.last_name, ' ', university_people.first_name)) ILIKE unaccent(:term) OR
+      unaccent(university_people.first_name) ILIKE unaccent(:term) OR
+      unaccent(university_people.last_name) ILIKE unaccent(:term) OR
+      unaccent(university_people.email) ILIKE unaccent(:term) OR
+      unaccent(university_people.phone) ILIKE unaccent(:term) OR
+      unaccent(university_people.biography) ILIKE unaccent(:term) OR
+      unaccent(university_people.description) ILIKE unaccent(:term) OR
+      unaccent(university_people.description_short) ILIKE unaccent(:term) OR
+      unaccent(university_people.twitter) ILIKE unaccent(:term) OR
+      unaccent(university_people.url) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def to_s
     "#{first_name} #{last_name}"
