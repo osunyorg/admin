@@ -40,6 +40,10 @@ module Communication::Website::WithMenuItems
     has_communication_posts?
   end
 
+  def menu_item_kind_organizations?
+    has_organizations?
+  end
+
   def menu_item_kind_staff?
     has_persons?
   end

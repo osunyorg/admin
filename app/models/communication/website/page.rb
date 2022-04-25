@@ -82,6 +82,7 @@ class Communication::Website::Page < ApplicationRecord
   after_save :update_children_paths, if: :saved_change_to_path?
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
+  scope :published, -> { where(published: true) }
 
   def generated_path
     "#{parent&.path}#{slug}/".gsub(/\/+/, '/')
@@ -106,6 +107,7 @@ class Communication::Website::Page < ApplicationRecord
                     siblings +
                     git_block_dependencies
     dependencies += website.education_programs if kind_education_programs?
+    dependencies += [parent] if has_parent?
     dependencies
   end
 

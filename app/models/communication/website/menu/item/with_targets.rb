@@ -35,6 +35,10 @@ module Communication::Website::Menu::Item::WithTargets
     "#{website.special_page(:communication_posts).path}#{about.path}".gsub("//", '/') if about
   end
 
+  def target_for_organizations
+    "#{website.special_page(:organizations).path}"
+  end
+
   def target_for_staff
     "#{website.special_page(:persons).path}"
   end

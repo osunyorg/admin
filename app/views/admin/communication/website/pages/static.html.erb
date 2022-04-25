@@ -9,6 +9,12 @@ bodyclass: <%= @about.best_bodyclass %>
 image: "<%= @about.best_featured_image.blob.id %>"
 image_alt: "<%= @about.featured_image_alt %>"
 <% end %>
+<% if @about.children.published.any? %>
+children:
+<% @about.children.published.ordered.each do |child| %>
+  - <%= child.path %>
+<% end %>
+<% end %>
 <% if @about.related_category %>
 category: "<%= @about.related_category.path %>"
 <% end %>
