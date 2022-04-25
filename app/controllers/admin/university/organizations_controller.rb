@@ -62,7 +62,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
           .permit(
             :name, :long_name, :slug, :description, :active, :siren, :kind,
             :address, :zipcode, :city, :country, :text,
-            :url, :phone, :email, :logo, :logo_delete
+            :url, :phone, :email, :logo, :logo_delete, :logo_infos
           )
   end
 end
