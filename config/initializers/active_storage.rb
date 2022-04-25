@@ -33,22 +33,23 @@ ActiveStorage::Filename.class_eval do
   end
 end
 
-module ActiveStorageGitPathStatic
-  extend ActiveSupport::Concern
+# https://stackoverflow.com/questions/8895103/how-can-i-keep-my-initializer-configuration-from-being-lost-in-development-mode
+Rails.application.config.to_prepare do
+  module ActiveStorageGitPathStatic
+    extend ActiveSupport::Concern
 
-  included do
-    has_many :git_files, class_name: "Communication::Website::GitFile", as: :about, dependent: :destroy
+    included do
+      has_many :git_files, class_name: "Communication::Website::GitFile", as: :about, dependent: :destroy
+    end
+
+    def git_path(website)
+      "data/media/#{id[0..1]}/#{id}.yml"
+    end
+
+    def before_git_sync
+      analyze unless analyzed?
+    end
   end
 
-  def git_path(website)
-    "data/media/#{id[0..1]}/#{id}.yml"
-  end
-
-  def before_git_sync
-    analyze unless analyzed?
-  end
-end
-
-ActiveSupport::Reloader.to_prepare do
   ActiveStorage::Blob.include ActiveStorageGitPathStatic
 end

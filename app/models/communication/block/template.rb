@@ -7,6 +7,7 @@ class Communication::Block::Template
 
   def git_dependencies
     unless @git_dependencies
+      @git_dependencies = []
       build_git_dependencies
       @git_dependencies.uniq!
     end
