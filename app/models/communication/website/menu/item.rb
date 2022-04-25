@@ -58,6 +58,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     news: 40,
     news_category: 41,
     news_article: 42,
+    organizations: 45,
     staff: 50,
     administrators: 51,
     authors: 52,

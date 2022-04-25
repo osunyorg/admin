@@ -131,6 +131,7 @@ module Admin::ApplicationHelper
       'communication.website.menu.item.kind.research_volumes' => 'fas fa-flask',
       'communication.website.menu.item.kind.research_volume' => 'fas fa-flask',
       'communication.website.menu.item.kind.researchers' => 'fas fa-user',
+      'communication.website.menu.item.kind.organizations' => 'fas fa-building',
       'communication.website.menu.item.kind.staff' => 'fas fa-user',
       'communication.website.menu.item.kind.teachers' => 'fas fa-user',
       'communication.website.menu.item.kind.url' => 'fas fa-globe',
