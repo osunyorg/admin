@@ -58,26 +58,18 @@
         </div>
         <div class="card-body">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :presentation %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :duration %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
-        </div>
-      </div>
-
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('education.program.educational_informations') %></h5>
-        </div>
-        <div class="card-body">
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :duration %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
         </div>
       </div>
 
