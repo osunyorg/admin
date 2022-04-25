@@ -258,6 +258,11 @@ en:
             description_short: ''
             slug: legal-terms
             title: Legal terms
+          organizations:
+            admin_description: third parties page
+            description_short: List of third parties
+            slug: third-parties
+            title: Third parties
           persons:
             admin_description: list of members in the team
             description_short: List of members in the team

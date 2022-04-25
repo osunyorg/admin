@@ -260,6 +260,11 @@ fr:
             description_short: ''
             slug: mentions-legales
             title: Mentions légales
+          organizations:
+            admin_description: page des tierces parties
+            description_short: Liste des tierces parties
+            slug: tierces-parties
+            title: Tierces parties
           persons:
             admin_description: liste des membres de l'équipe
             description_short: Liste des membres de l'équipe
