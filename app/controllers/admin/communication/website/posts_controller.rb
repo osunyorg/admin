@@ -12,6 +12,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def new
     @post.website = @website
+    @post.author_id = current_user.person&.id
     breadcrumb
   end
 
