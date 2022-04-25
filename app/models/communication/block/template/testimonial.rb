@@ -1,6 +1,6 @@
 class Communication::Block::Template::Testimonial < Communication::Block::Template
   def build_git_dependencies
-    # Blobs already added in Communication::Block::Template#git_dependencies
+    add_dependency active_storage_blobs
   end
 
   def testimonials
