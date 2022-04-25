@@ -1,7 +1,10 @@
 class Communication::Block::Template::Partner < Communication::Block::Template
   def build_git_dependencies
-    # Blobs already added in Communication::Block::Template#git_dependencies
+    add_dependency active_storage_blobs
     add_dependency organizations
+    organizations.each do |organization|
+      add_dependency organization.active_storage_blobs
+    end
   end
 
   def partners
