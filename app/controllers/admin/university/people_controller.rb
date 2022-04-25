@@ -5,6 +5,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
 
   has_scope :for_search_term
+  has_scope :for_role
 
   def index
     @people = apply_scopes(@people).ordered.page(params[:page])

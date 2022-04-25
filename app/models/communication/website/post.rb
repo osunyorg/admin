@@ -63,6 +63,7 @@ class Communication::Website::Post < ApplicationRecord
   validates :title, presence: true
 
   before_validation :set_published_at, if: :published_changed?
+  after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
@@ -122,5 +123,13 @@ class Communication::Website::Post < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def update_authors_statuses!
+    old_author = University::Person.find_by(id: author_id_before_last_save)
+    if old_author && old_author.communication_website_posts.none?
+      old_author.update_and_sync(is_author: false)
+    end
+    author.update_and_sync(is_author: true) if author_id
   end
 end

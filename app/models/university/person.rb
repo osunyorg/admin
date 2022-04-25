@@ -11,6 +11,7 @@
 #  habilitation      :boolean          default(FALSE)
 #  is_administration :boolean
 #  is_alumnus        :boolean          default(FALSE)
+#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
@@ -43,6 +44,8 @@ class University::Person < ApplicationRecord
   include WithSlug
   include WithPicture
   include WithEducation
+
+  LIST_OF_ROLES = [:administration, :teacher, :researcher, :alumnus, :author].freeze
 
   has_summernote :biography
 
@@ -108,6 +111,8 @@ class University::Person < ApplicationRecord
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
+  scope :for_role, -> (role) { where("is_#{role}": true) }
+
   scope :for_search_term, -> (term) {
     where("
       unaccent(concat(university_people.first_name, ' ', university_people.last_name)) ILIKE unaccent(:term) OR
@@ -129,14 +134,9 @@ class University::Person < ApplicationRecord
   end
 
   def roles
-    [:administration, :teacher, :researcher, :alumnus, :author].reject do |role|
+    LIST_OF_ROLES.reject do |role|
       ! send "is_#{role}"
     end
-  end
-
-  # TODO denormalize
-  def is_author
-    communication_website_posts.any?
   end
 
   def websites
