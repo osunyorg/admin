@@ -118,6 +118,10 @@ module Communication::Website::WithDependencies
     categories.any?
   end
 
+  def has_organizations?
+    # TODO
+  end
+
   def has_authors?
     authors.compact.any?
   end
