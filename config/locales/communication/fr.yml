@@ -202,6 +202,7 @@ fr:
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page
+          is_special_page: "Ceci est une page avec un comportement spécial :"
           structure: Arborescence
   communication:
     authors:
@@ -230,54 +231,67 @@ fr:
       pages:
         defaults:
           administrators:
+            admin_description: liste des membres de l'équipe administrative
             description_short: Liste des membres de l'équipe administrative
             slug: equipe-administrative
             title: Équipe administrative
           authors:
+            admin_description: liste des membres de l'équipe éditoriale
             description_short: Liste des membres de l'équipe éditoriale
             slug: equipe-editoriale
             title: Équipe éditoriale
           communication_posts:
+            admin_description: liste des actualités
             description_short: Liste des actualités
             slug: actualites
             title: Actualités
           education_programs:
+            admin_description: liste des formations proposées
             description_short: Liste des formations proposées
             slug: offre-de-formation
             title: "L'offre de formation"
           home:
+            admin_description: page d'accueil du site
             description_short: ''
             slug: ''
             title: Accueil
           legal_terms:
+            admin_description: page des mentions légales
             description_short: ''
             slug: mentions-legales
             title: Mentions légales
           persons:
+            admin_description: liste des membres de l'équipe
             description_short: Liste des membres de l'équipe
             slug: equipe
             title: Équipe
           privacy_policy:
+            admin_description: page de la politique de confidentialité
             description_short: ''
             slug: politique-de-confidentialite
             title: Politique de confidentialité
           research_articles:
+            admin_description: liste des articles
             description_short: Liste des articles
             slug: articles
             title: Articles
           research_volumes:
+            admin_description: liste des volumes
             description_short: Liste des volumes
             slug: volumes
             title: Volumes
           researchers:
+            admin_description: liste des membres de l'équipe de recherche
             description_short: Liste des membres de l'équipe de recherche
             slug: equipe-de-recherche
             title: Équipe de recherche
           sitemap:
+            admin_description: page plan du site
             description_short: ''
             slug: plan-du-site
             title: Plan du site
           teachers:
+            admin_description: liste des membres de l'équipe pédagogique
             description_short: Liste des membres de l'équipe pédagogique
             slug: equipe-pedagogique
             title: Équipe pédagogique
