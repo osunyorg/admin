@@ -119,7 +119,7 @@ module Communication::Website::WithDependencies
   end
 
   def has_organizations?
-    # TODO
+    has_organizations_in_blocks?
   end
 
   def has_authors?
