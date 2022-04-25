@@ -689,6 +689,7 @@ ActiveRecord::Schema.define(version: 2022_04_25_152944) do
     t.boolean "is_alumnus", default: false
     t.text "description_short"
     t.string "name"
+    t.boolean "is_author"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
