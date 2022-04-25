@@ -41,6 +41,7 @@ class Communication::Website::IndexPage < ApplicationRecord
     legal_terms: 80,
       sitemap: 81,
       privacy_policy: 82,
+    organizations: 90,
     persons: 100,
       administrators: 110,
       authors: 120,
