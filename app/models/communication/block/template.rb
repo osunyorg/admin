@@ -13,6 +13,10 @@ class Communication::Block::Template
     @git_dependencies
   end
 
+  def active_storage_blobs
+    []
+  end
+
   protected
 
   def build_git_dependencies
