@@ -58,32 +58,20 @@
       <div class="card-body">
         <% [
               :presentation,
-              :registration,
-              :pricing,
-              :duration,
-              :contacts,
+              :objectives,
+              :opportunities,
+              :results,
               :accessibility,
+              :duration,
+              :pricing,
+              :content,
+              :pedagogy,
+              :evaluation,
+              :prerequisites,
+              :registration,
               :other
             ].each_with_index do |property, index| %>
             <%= render 'admin/application/property/text', object: @program, property: property %>
-        <% end %>
-      </div>
-    </div>
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0"><%= t('education.program.educational_informations') %></h5>
-      </div>
-      <div class="card-body">
-        <%  [
-        :objectives,
-        :content,
-        :prerequisites,
-        :pedagogy,
-        :evaluation,
-        :opportunities,
-        :results
-        ].each do |property| %>
-        <%= render 'admin/application/property/text', object: @program, property: property %>
         <% end %>
       </div>
     </div>
