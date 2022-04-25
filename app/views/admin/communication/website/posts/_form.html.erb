@@ -29,10 +29,16 @@
           <% elsif @website.languages.any? %>
             <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
           <% end %>
-          <%= f.input :published %>
-          <%= f.input :published_at, html5: true %>
+          <% if can? :publish, post %>
+            <%= f.input :published %>
+            <%= f.input :published_at, html5: true %>
+          <% end %>
           <%= f.input :pinned %>
-          <%= f.association :author, collection: current_university.people.ordered %>
+          <% if current_user.author? || current_user.contributor? %>
+            <%= f.input :author_id, as: :hidden, input_html: { value: current_user.person&.id }, wrapper: false %>
+          <% else %>
+            <%= f.association :author, collection: current_university.people.ordered %>
+          <% end %>
         </div>
       </div>
       <div class="card flex-fill w-100">

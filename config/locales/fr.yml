@@ -16,11 +16,14 @@ fr:
         role: Rôle
         roles:
           admin: Administrateur
+          author: Auteur
+          contributor: Contributeur
           program_manager: Responsable de formation
           server_admin: Administrateur du serveur
           teacher: Enseignant·e
           visitor: Visiteur
           website_manager: Responsable de site web
+        websites_to_manage: Sites gérés
     errors:
       models:
         user:
