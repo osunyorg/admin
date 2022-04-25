@@ -18,6 +18,9 @@ en:
         zipcode: Zipcode
       university/person:
         abilities: Abilities
+        administration: Administrative staff
+        alumnus: Alumnus
+        author: Author
         biography: Biography
         communication_website_posts: Posts
         description: Meta Description
@@ -37,8 +40,11 @@ en:
         phone: Phone
         picture: Profile picture
         research_journal_articles: Articles
+        researcher: Researcher
+        roles: Roles
         slug: Slug
         socials: Socials
+        teacher: Teacher
         tenure: Has tenure?
         twitter: Twitter username
         url: Website

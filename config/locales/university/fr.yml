@@ -18,6 +18,9 @@ fr:
         zipcode: Code postal
       university/person:
         abilities: Responsabilités
+        administration: Personnel administratif
+        alumnus: Alumnus
+        author: Auteur·rice
         biography: Biographie
         communication_website_posts: Actualités
         description: Meta Description
@@ -31,19 +34,17 @@ fr:
         is_author: Auteur·rice
         is_researcher: Chercheur·se
         is_teacher: Enseignant·e
-        administration: Personnel administratif
-        alumnus: Alumnus
-        author: Auteur·rice
-        researcher: Chercheur·se
-        teacher: Enseignant·e
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
         name: Nom
         phone: Téléphone
         picture: Photo de profil
         research_journal_articles: Articles
+        researcher: Chercheur·se
+        roles: Rôles
         slug: Slug
         socials: Réseaux sociaux
+        teacher: Enseignant·e
         tenure: Titulaire ?
         twitter: Twitter (nom d'utilisateur)
         url: Site web
