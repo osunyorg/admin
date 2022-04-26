@@ -4,7 +4,15 @@ class Extranet::PersonsController < Extranet::ApplicationController
                               through_association: :people
 
   def index
-    @people = current_extranet.about&.alumni || @people.alumni
+    alumni = current_extranet.about&.alumni || @people.alumni
+    @facets = University::Person::Alumnus::Facets.new params[:facets], {
+      model: alumni,
+      about: current_extranet.about
+    }
+    @people = @facets.results
+                     .ordered
+                     .page params[:page]
+    @count = @people.total_count
     breadcrumb
   end
 

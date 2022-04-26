@@ -5,7 +5,6 @@ class Admin::UsersController < Admin::ApplicationController
   has_scope :for_search_term
 
   def index
-    @filters = ::Filters::User.new(current_user).list
     @users = apply_scopes(@users).ordered.page(params[:page])
     breadcrumb
   end

@@ -114,6 +114,16 @@ class Education::Program < ApplicationRecord
   has_many   :alumni,
              through: :cohorts,
              source: :people
+ has_many    :alumni_experiences,
+             -> { distinct },
+             class_name: 'University::Person::Experience',
+             through: :alumni,
+             source: :experiences
+ has_many    :alumni_organizations,
+             -> { distinct },
+             class_name: 'University::Organization',
+             through: :alumni_experiences,
+             source: :organization
   has_many   :academic_years,
              through: :cohorts
 

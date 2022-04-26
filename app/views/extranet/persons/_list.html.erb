@@ -2,19 +2,7 @@
 <div class="row">
   <% people_paged.each do |person| %>
     <div class="col-xxl-2 col-md-3">
-      <article class="mb-4 position-relative">
-        <% if person.picture.attached? %>
-          <%= kamifusen_tag person.picture, width: 400, class: 'img-fluid' %>
-        <% else %>
-          <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
-        <% end %>
-        <%= link_to person, class: 'stretched-link' do %>
-          <%= person.first_name %>
-          <b>
-            <%= person.last_name %>
-          </b>
-        <% end %>
-      </article>
+      <%= render 'extranet/persons/person', person: person %>
     </div>
   <% end %>
 </div>

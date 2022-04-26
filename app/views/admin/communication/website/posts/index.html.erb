@@ -4,7 +4,7 @@
   <div class="card">
     <%= form_tag publish_admin_communication_website_posts_path do %>
       <input type="hidden" name="ids[]" value="">
-      <%= render 'admin/communication/website/posts/list', posts: @posts, hide_author: true, selectable: true %>
+      <%= render 'admin/communication/website/posts/list', posts: @posts, selectable: true %>
       <div class="card-footer">
         <% if @posts.total_pages > 1 %>
           <div class="float-end">
