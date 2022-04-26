@@ -64,6 +64,18 @@ module WithGit
     end
   end
 
+  def has_website_for_self?(website)
+    websites_for_self.include?(website)
+  end
+
+  def git_dependencies(website = nil)
+    [self]
+  end
+
+  def git_destroy_dependencies(website = nil)
+    [self]
+  end
+
   protected
 
   def in_block_dependencies?(website)
@@ -82,13 +94,5 @@ module WithGit
     else
       []
     end
-  end
-
-  def git_dependencies(website = nil)
-    [self]
-  end
-
-  def git_destroy_dependencies(website = nil)
-    [self]
   end
 end

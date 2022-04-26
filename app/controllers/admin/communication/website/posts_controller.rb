@@ -6,6 +6,19 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
     breadcrumb
   end
 
+  def publish
+    ids = params[:ids] || []
+    target_posts = @website.posts.where(id: ids)
+    if params[:published] == "true"
+      target_posts.update(published: true)
+    elsif params[:published] == "false"
+      target_posts.update(published: false)
+    end
+    @website.sync_objects_with_git(target_posts) if target_posts.any?
+    redirect_back fallback_location: admin_communication_website_posts_path,
+                  notice: t('communication.website.posts.successful_batch_update')
+  end
+
   def show
     breadcrumb
   end

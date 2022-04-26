@@ -2,10 +2,29 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">
-    <%= render 'admin/communication/website/posts/list', posts: @posts, hide_author: true %>
-    <% if @posts.total_pages > 1 %>
+    <%= form_tag publish_admin_communication_website_posts_path do %>
+      <input type="hidden" name="ids[]" value="">
+      <%= render 'admin/communication/website/posts/list', posts: @posts, hide_author: true, selectable: true %>
       <div class="card-footer">
-        <%= paginate @posts, theme: 'bootstrap-5' %>
+        <% if @posts.total_pages > 1 %>
+          <div class="float-end">
+            <%= paginate @posts, theme: 'bootstrap-5' %>
+          </div>
+        <% end %>
+        <div class="row align-items-center">
+          <div class="col-auto">
+            Modifier la sélection
+          </div>
+          <div class="col-auto">
+            <select name="published" class="form-select">
+              <option value="false">Non publiée</option>
+              <option value="true">Publiée</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <input type="submit" value="Enregistrer" class="btn btn-primary">
+          </div>
+        </div>
       </div>
     <% end %>
   </div>

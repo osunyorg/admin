@@ -25,7 +25,9 @@ namespace :communication do
       end
     end
     resources :authors, controller: 'website/authors', only: [:index, :show]
-    resources :posts, controller: 'website/posts'
+    resources :posts, controller: 'website/posts' do
+      post :publish, on: :collection
+    end
     resources :curations,
               path: 'posts/curations',
               as: :post_curations,
@@ -44,7 +46,7 @@ namespace :communication do
     end
     get   'structure'     => 'website/structure#edit'
     patch 'structure'     => 'website/structure#update'
-    
+
   end
   resources :blocks, controller: 'blocks', except: :index do
     collection do
