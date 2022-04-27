@@ -1,9 +1,7 @@
 .facets
+    h2
+        margin-bottom: 1em
     .facet
-        .form-check
-            display: inline-block
-            padding: 0
-            vertical-align: middle
         .btn-sm
             background: $btn-facet-background
             border: 0
@@ -12,4 +10,14 @@
             padding: 2px 7px
         .btn-check:checked + .btn-sm
             background: $btn-facet-background-active
-
+        &--years
+            .form-check
+                display: inline-block
+                padding: 0
+                vertical-align: middle
+        .form-check-input[type="checkbox"]
+            border-color: $primary
+            border-radius: 0
+            height: 0.65em
+            margin-top: 0.5em
+            width: 0.65em

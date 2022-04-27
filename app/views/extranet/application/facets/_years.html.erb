@@ -1,7 +1,7 @@
 <% years = Education::AcademicYear.all %>
 
 <h2>Années</h2>
-<div class="facet">
+<div class="facet facet--years">
   <%  years.each do |year| %>
     <div class="form-check">
       <input type="checkbox" value="<%= year %>" id="<%= "year-#{year}" %>" class="btn-check" autocomplete="off">
