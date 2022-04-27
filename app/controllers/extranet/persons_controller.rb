@@ -11,7 +11,8 @@ class Extranet::PersonsController < Extranet::ApplicationController
     }
     @people = @facets.results
                      .ordered
-                     .page params[:page]
+                     .page(params[:page])
+                     .per(60)
     @count = @people.total_count
     breadcrumb
   end

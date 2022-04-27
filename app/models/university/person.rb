@@ -46,7 +46,13 @@ class University::Person < ApplicationRecord
   include WithPicture
   include WithEducation
 
-  LIST_OF_ROLES = [:administration, :teacher, :researcher, :alumnus, :author].freeze
+  LIST_OF_ROLES = [
+    :administration,
+    :teacher,
+    :researcher,
+    :alumnus,
+    :author
+  ].freeze
 
   has_summernote :biography
 
@@ -90,8 +96,6 @@ class University::Person < ApplicationRecord
                           -> { distinct },
                           through: :education_programs,
                           source: :websites
-
-  has_many                :experiences
 
   accepts_nested_attributes_for :involvements
 

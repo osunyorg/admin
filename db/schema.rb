@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_25_152944) do
+ActiveRecord::Schema.define(version: 2022_04_27_072259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -405,6 +405,13 @@ ActiveRecord::Schema.define(version: 2022_04_25_152944) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_education_academic_years_on_university_id"
+  end
+
+  create_table "education_academic_years_university_people", id: false, force: :cascade do |t|
+    t.uuid "university_person_id", null: false
+    t.uuid "education_academic_year_id", null: false
+    t.index ["education_academic_year_id", "university_person_id"], name: "index_academic_year_person"
+    t.index ["university_person_id", "education_academic_year_id"], name: "index_person_academic_year"
   end
 
   create_table "education_cohorts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

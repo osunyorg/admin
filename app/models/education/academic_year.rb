@@ -21,6 +21,11 @@ class Education::AcademicYear < ApplicationRecord
 
   has_many :cohorts, class_name: 'Education::Cohort'
 
+  # Dénormalisation des alumni pour le faceted search
+  has_and_belongs_to_many   :university_people,
+                            class_name: 'University::Person',
+                            foreign_key: 'education_academic_year_id',
+                            association_foreign_key: 'university_person_id'
   has_many :people,
            class_name: 'University::Person',
            through: :cohorts
