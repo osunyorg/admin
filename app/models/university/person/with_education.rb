@@ -24,6 +24,10 @@ module University::Person::WithEducation
                             class_name: 'Education::AcademicYear',
                             foreign_key: 'university_person_id',
                             association_foreign_key: 'education_academic_year_id'
+    has_and_belongs_to_many :diploma_programs,
+                            class_name: 'Education::Program',
+                            foreign_key: 'university_person_id',
+                            association_foreign_key: 'education_program_id'
   end
 
   def education_programs_as_administrator
@@ -36,5 +40,6 @@ module University::Person::WithEducation
   def add_to_cohort(cohort)
     cohorts << cohort unless cohort.in?(cohorts)
     diploma_years << cohort.academic_year unless cohort.academic_year.in? diploma_years
+    diploma_programs << cohort.program unless cohort.program.in? diploma_programs
   end
 end

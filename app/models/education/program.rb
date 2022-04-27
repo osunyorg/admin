@@ -107,10 +107,11 @@ class Education::Program < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_program_id',
                           association_foreign_key: 'education_school_id'
+  has_many   :websites,
+             -> { distinct },
+             through: :schools
   has_many   :cohorts,
              class_name: 'Education::Cohort'
-  has_many   :websites, -> { distinct },
-             through: :schools
   has_many   :alumni,
              through: :cohorts,
              source: :people
@@ -126,6 +127,12 @@ class Education::Program < ApplicationRecord
              source: :organization
   has_many   :academic_years,
              through: :cohorts
+
+   # Dénormalisation des alumni pour le faceted search
+   has_and_belongs_to_many   :university_people,
+                             class_name: 'University::Person',
+                             foreign_key: 'education_program_id',
+                             association_foreign_key: 'university_person_id'
 
   accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
 

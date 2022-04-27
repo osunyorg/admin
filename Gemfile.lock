@@ -20,7 +20,7 @@ GIT
 PATH
   remote: ../faceted_search
   specs:
-    faceted_search (3.5.12)
+    faceted_search (3.5.13)
       font-awesome-sass
       rails (>= 5.2.0, < 7)
 
