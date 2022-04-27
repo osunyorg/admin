@@ -24,14 +24,23 @@
 #
 class Education::Cohort < ApplicationRecord
   include WithUniversity
-  belongs_to :program, class_name: 'Education::Program'
-  belongs_to :academic_year, class_name: 'Education::AcademicYear'
+
+  belongs_to  :program,
+              class_name: 'Education::Program'
+              alias_attribute :education_program, :program
+
+  belongs_to  :academic_year,
+              class_name: 'Education::AcademicYear'
+              alias_attribute :education_academic_year, :academic_year
+
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
                           foreign_key: 'education_cohort_id',
                           association_foreign_key: 'university_person_id'
 
-  scope :ordered, -> { includes(:academic_year).order('education_academic_years.year DESC') }
+  scope :ordered, -> {
+    includes(:academic_year).order('education_academic_years.year DESC')
+  }
 
   def to_s
     "#{program} #{academic_year} #{name}"

@@ -19,7 +19,10 @@
 class Education::AcademicYear < ApplicationRecord
   include WithUniversity
 
-  has_many :cohorts, class_name: 'Education::Cohort'
+  has_many  :education_cohorts,
+            class_name: 'Education::Cohort'
+  has_many  :cohorts,
+            class_name: 'Education::Cohort'
 
   # Dénormalisation des alumni pour le faceted search
   has_and_belongs_to_many   :university_people,

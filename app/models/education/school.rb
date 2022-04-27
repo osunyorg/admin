@@ -38,7 +38,9 @@ class Education::School < ApplicationRecord
                           join_table: 'education_programs_schools',
                           foreign_key: 'education_school_id',
                           association_foreign_key: 'education_program_id'
+
   belongs_to  :university
+
   has_many    :websites,
               class_name: 'Communication::Website',
               as: :about,
@@ -74,7 +76,7 @@ class Education::School < ApplicationRecord
               class_name: 'University::Person::Experience',
               through: :alumni,
               source: :experiences
-  alias_attribute :experiences, :alumni_experiences
+              alias_attribute :experiences, :alumni_experiences
 
   has_many    :alumni_organizations,
               -> { distinct },
@@ -86,13 +88,13 @@ class Education::School < ApplicationRecord
               -> { distinct },
               class_name: 'Education::AcademicYear',
               through: :programs
-  alias_attribute :academic_years, :education_academic_years
+              alias_attribute :academic_years, :education_academic_years
 
   has_many    :education_cohorts, -> { distinct },
               class_name: 'Education::Cohort',
               through: :programs,
               source: :cohorts
-  alias_attribute :cohorts, :education_cohorts
+              alias_attribute :cohorts, :education_cohorts
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 

@@ -2,10 +2,15 @@
 
 <header class="mb-5">
   <h1><%= Education::Cohort.model_name.human(count: 2) %></h1>
+  <p>
+    <%= @count %>
+    <%= Education::Cohort.model_name.human(count: @count).downcase %>
+  </p>
 </header>
 
 <div class="row">
   <div class="col-md-3">
+    <%= render 'faceted_search/facets', facets: @facets %>
     <div class="facets">
       <div class="mb-4">
         <%= render 'extranet/application/facets/years' %>

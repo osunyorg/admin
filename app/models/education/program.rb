@@ -113,6 +113,8 @@ class Education::Program < ApplicationRecord
 
   has_many   :cohorts,
              class_name: 'Education::Cohort'
+  has_many   :education_cohorts,
+             class_name: 'Education::Cohort'
 
   has_many   :alumni,
              through: :cohorts,
@@ -123,7 +125,7 @@ class Education::Program < ApplicationRecord
              class_name: 'University::Person::Experience',
              through: :alumni,
              source: :experiences
-  alias_attribute :experiences, :alumni_experiences
+             alias_attribute :experiences, :alumni_experiences
 
   has_many   :alumni_organizations,
              -> { distinct },
@@ -136,7 +138,7 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::AcademicYear',
              through: :cohorts,
              source: :academic_year
-  alias_attribute :academic_years, :education_academic_years
+             alias_attribute :academic_years, :education_academic_years
 
   # Dénormalisation des alumni pour le faceted search
   has_and_belongs_to_many :university_people,
