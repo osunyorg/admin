@@ -5,14 +5,20 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
     @model = options[:model]
     @about = options[:about]
 
-    filter_with_text :name
+    filter_with_text :name, {
+      title: University::Person.human_attribute_name('name')
+    }
 
-    # TODO année de diplôme
+    filter_with_list :diploma_years, {
+      source: @about.academic_years.ordered,
+      title: Education::AcademicYear.model_name.human(count: 2),
+      habtm: true
+    }
 
-    # TODO liste des formations (si about ≠ formation)
-    # filter_with_list :program, {
-    #   source: @about.programs,
-    #   habtm: true
-    # }
+    filter_with_list :diploma_programs, {
+      source: @about.programs.ordered,
+      title: Education::Program.model_name.human(count: 2),
+      habtm: true
+    } unless @about.is_a? Education::Program
   end
 end

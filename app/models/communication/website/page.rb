@@ -88,6 +88,14 @@ class Communication::Website::Page < ApplicationRecord
     "#{parent&.path}#{slug}/".gsub(/\/+/, '/')
   end
 
+  def path_without_language
+    if parent_id.present?
+      "#{parent&.path_without_language}#{slug}/".gsub(/\/+/, '/')
+    else
+      "/#{slug}/".gsub(/\/+/, '/')
+    end
+  end
+
   def git_path(website)
     return unless published
     if kind_home?
