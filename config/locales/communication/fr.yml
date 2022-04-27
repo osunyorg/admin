@@ -302,6 +302,7 @@ fr:
             title: Équipe pédagogique
       posts:
         new_curation: Nouvelle curation
+        successful_batch_update: Les actualités ont bien été mises à jour
       see_all: Voir la liste complète (%{number} éléments)
   enums:
     communication:
