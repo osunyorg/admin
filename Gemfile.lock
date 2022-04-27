@@ -17,13 +17,6 @@ GIT
       randexp
       rotp (>= 4.0.0)
 
-PATH
-  remote: ../faceted_search
-  specs:
-    faceted_search (3.5.13)
-      font-awesome-sass
-      rails (>= 5.2.0, < 7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -179,6 +172,9 @@ GEM
     ethon (0.15.0)
       ffi (>= 1.15.0)
     execjs (2.8.1)
+    faceted_search (3.5.13)
+      font-awesome-sass
+      rails (>= 5.2.0, < 7)
     faraday (1.10.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -478,7 +474,7 @@ DEPENDENCIES
   devise
   devise-i18n
   enum_help
-  faceted_search!
+  faceted_search
   figaro
   front_matter_parser
   gdpr

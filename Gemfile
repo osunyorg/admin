@@ -19,7 +19,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'curation'#, path: '../../arnaudlevy/curation'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
-gem 'faceted_search', path: '../faceted_search'
+gem 'faceted_search'#, path: '../faceted_search'
 gem 'has_scope', '~> 0.8.0'
 gem 'hash_dot'
 gem 'rails', '~> 6.1'
