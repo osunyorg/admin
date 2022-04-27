@@ -5,12 +5,12 @@
 </header>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="facets">
       <%= render 'extranet/application/facets/years' %>
     </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 offset-md-1">
     <%= render 'extranet/cohorts/list', cohorts: @cohorts %>
   </div>
 </div>
