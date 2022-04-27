@@ -81,12 +81,18 @@ class Education::School < ApplicationRecord
               class_name: 'University::Organization',
               through: :alumni_experiences,
               source: :organization
-  has_many    :academic_years,
+
+  has_many    :education_academic_years,
               -> { distinct },
+              class_name: 'Education::AcademicYear',
               through: :programs
-  has_many    :cohorts,
-              -> { distinct },
-              through: :programs
+  alias_attribute :academic_years, :education_academic_years
+
+  has_many    :education_cohorts, -> { distinct },
+              class_name: 'Education::Cohort',
+              through: :programs,
+              source: :cohorts
+  alias_attribute :cohorts, :education_cohorts
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
