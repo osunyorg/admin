@@ -1,0 +1,11 @@
+<label for="search" class="form-label h2">Recherche</label>
+<div class="facet facet--search">
+  <div class="input-group">
+    <input class="form-control" list="search-datalist-options" id="search" placeholder="Entrez votre recherche...">
+    <datalist id="search-datalist-options">
+      <% dataList.each do |value| %>
+        <option value="<%= value %>">
+      <% end %>
+    </datalist>
+  </div>
+</div>
