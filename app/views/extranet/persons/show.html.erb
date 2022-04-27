@@ -1,9 +1,9 @@
 <% content_for :title, @person %>
 
-<div class="row mb-5">
+<div class="row mb-5 top">
   <div class="col-md-9">
     <header style="height: 100%">
-      <h1><%= @person %></h1>
+      <h1><%= @person.first_name %> <b><%= @person.last_name %></b></h1>
     </header>
   </div>
   <div class="col-md-3">
