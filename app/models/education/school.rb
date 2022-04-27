@@ -74,6 +74,8 @@ class Education::School < ApplicationRecord
               class_name: 'University::Person::Experience',
               through: :alumni,
               source: :experiences
+  alias_attribute :experiences, :alumni_experiences
+
   has_many    :alumni_organizations,
               -> { distinct },
               class_name: 'University::Organization',
