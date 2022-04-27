@@ -87,7 +87,7 @@ class University::Person::Alumnus::Import < ApplicationRecord
       person.phone ||= row['phone_professional']
       byebug unless person.valid?
       person.save
-      cohort.people << person unless person.in?(cohort.people)
+      person.add_to_cohort cohort
       add_picture person, row['photo']
 
       company_name = clean_encoding row['company_name']
