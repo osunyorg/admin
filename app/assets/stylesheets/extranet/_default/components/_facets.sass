@@ -21,3 +21,28 @@
             height: 0.65em
             margin-top: 0.5em
             width: 0.65em
+
+.faceted__facets
+    > li
+        margin-bottom: px2rem(40)
+        b
+            display: block
+            margin-bottom: px2rem(10)
+.faceted__facet
+    &__text
+        display: flex
+    &__list
+        display: flex
+        flex-wrap: wrap
+        &__value
+            @extend .btn-sm
+            background: $btn-facet-background
+            border: 0
+            color: $btn-facet-color
+            display: inline-block
+            margin-bottom: 10px
+            margin-right: 10px
+            min-width: px2rem(52)
+            padding: 2px 7px
+            &--selected
+                background: $btn-facet-background-active
