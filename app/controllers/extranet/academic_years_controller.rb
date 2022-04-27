@@ -4,7 +4,10 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
                               through_association: :academic_years
 
   def index
-    @academic_years = current_extranet.about&.academic_years || @academic_years
+    @academic_years = about&.academic_years
+                            .page(params[:page])
+                            .per(20)
+    @count = @academic_years.total_count
     breadcrumb
   end
 

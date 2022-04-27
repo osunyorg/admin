@@ -68,24 +68,20 @@ class Education::School < ApplicationRecord
               through: :published_programs,
               source: :university_people_through_role_involvements
 
-  has_many    :alumni,
-              -> { distinct },
+  has_many    :alumni, -> { distinct },
               through: :programs
-  has_many    :alumni_experiences,
-              -> { distinct },
+  has_many    :alumni_experiences, -> { distinct },
               class_name: 'University::Person::Experience',
               through: :alumni,
               source: :experiences
               alias_attribute :experiences, :alumni_experiences
 
-  has_many    :alumni_organizations,
-              -> { distinct },
+  has_many    :alumni_organizations, -> { distinct },
               class_name: 'University::Organization',
               through: :alumni_experiences,
               source: :organization
 
-  has_many    :education_academic_years,
-              -> { distinct },
+  has_many    :education_academic_years, -> { distinct },
               class_name: 'Education::AcademicYear',
               through: :programs
               alias_attribute :academic_years, :education_academic_years
