@@ -11,14 +11,6 @@
 <div class="row">
   <div class="col-md-3">
     <%= render 'faceted_search/facets', facets: @facets %>
-    <div class="facets">
-      <div class="mb-4">
-        <%= render 'extranet/application/facets/years' %>
-      </div>
-      <div class="mb-4">
-        <%= render 'extranet/application/facets/programs' %>
-      </div>
-    </div>
   </div>
   <div class="col-md-8 offset-md-1">
     <%= render 'extranet/cohorts/list', cohorts: @cohorts %>
