@@ -12,6 +12,10 @@ module University::WithCommunication
               dependent: :destroy
     alias_attribute :websites, :communication_websites
 
+    has_many  :communication_website_posts,
+              class_name: 'Communication::Website::Post',
+              dependent: :destroy
+
     has_many  :communication_blocks,
               class_name: 'Communication::Block',
               dependent: :destroy

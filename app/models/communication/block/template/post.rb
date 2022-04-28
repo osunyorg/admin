@@ -33,7 +33,12 @@ class Communication::Block::Template::Post < Communication::Block::Template
 
   def selected_posts_category
     quantity = data['posts_quantity'] || 3
-    category.posts.ordered.limit(quantity)
+    category_ids = [category.id, category.descendants.map(&:id)].flatten
+    university.communication_website_posts.joins(:categories)
+                                          .where(categories: { id: category_ids })
+                                          .distinct
+                                          .ordered
+                                          .limit(quantity)
   end
 
   def selected_posts_selection
