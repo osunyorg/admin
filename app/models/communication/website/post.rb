@@ -68,6 +68,9 @@ class Communication::Website::Post < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
+  scope :for_author, -> (author_id) { where(author_id: author_id) }
+  scope :for_category, -> (category_id) {  } # TODO Sebou
+  scope :for_pinned, -> (pinned) { where(pinned: pinned == 'true') } # TODO Sebou
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_posts.description) ILIKE unaccent(:term) OR

@@ -6,6 +6,9 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   before_action :load_filters, only: :index
 
   has_scope :for_search_term
+  has_scope :for_author
+  has_scope :for_category
+  has_scope :for_pinned
 
   def index
     @posts = apply_scopes(@posts).ordered.page params[:page]

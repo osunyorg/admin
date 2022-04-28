@@ -204,6 +204,8 @@ fr:
           delete_special_page_notice: Impossible de supprimer cette page
           is_special_page: "Ceci est une page avec un comportement spécial :"
           structure: Arborescence
+        post:
+          pinned_status: Mise en avant
   communication:
     authors:
       one: Auteur·rice
