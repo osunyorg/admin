@@ -2,6 +2,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   before_action :load_teacher, only: [:show, :edit, :update]
 
   has_scope :for_search_term
+  has_scope :for_program
 
   def index
     @teachers = apply_scopes(current_university.people.teachers.accessible_by(current_ability)).ordered.page(params[:page])

@@ -25,7 +25,11 @@ filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_n
               <% if filter[:scope_name] == :for_search_term %>
                 <%= text_field_tag filter[:scope_name], params[filter[:scope_name]], placeholder: filter[:label], class: 'form-control mb-1 filter' %>
               <% else %>
-                <% choices = filter[:choices].map { |elmt| elmt.is_a?(String) ?  [elmt, elmt] : [elmt.is_a?(Hash) ? elmt[:to_s] : elmt.to_s, elmt[:id]] } %>
+                <% if filter[:tree] %>
+                  <% choices = collection_tree(filter[:choices]).map { |elmt| [elmt[:label].html_safe, elmt[:id]] } %>
+                <% else %>
+                  <% choices = filter[:choices].map { |elmt| elmt.is_a?(String) ?  [elmt, elmt] : [elmt.is_a?(Hash) ? elmt[:to_s] : elmt.to_s, elmt[:id]] } %>
+                <% end %>
                 <% field_name = filter[:multiple] ? "#{filter[:scope_name]}[]" : filter[:scope_name] %>
                 <%= select_tag field_name, options_for_select(choices, params[filter[:scope_name]]), include_blank: filter[:label], class: 'form-select mb-1 filter' %>
               <% end %>

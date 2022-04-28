@@ -4,6 +4,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
                               through_association: :education_schools
 
   has_scope :for_search_term
+  has_scope :for_program
 
   def index
     @schools = apply_scopes(@schools).ordered.page(params[:page])

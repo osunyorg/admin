@@ -38,6 +38,7 @@
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person::Teacher < University::Person
+
   def self.polymorphic_name
     'University::Person::Teacher'
   end

@@ -96,6 +96,7 @@ en:
   filters:
     attributes:
       date: Filter by Date
+      element: Filter by %{element}
       kind: Filter by Kind
       role: Filter by Role
     buttons:

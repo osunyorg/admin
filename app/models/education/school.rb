@@ -91,6 +91,7 @@ class Education::School < ApplicationRecord
   validates :name, :address, :city, :zipcode, :country, presence: true
 
   scope :ordered, -> { order(:name) }
+  scope :for_program, -> (program_id) { } # TODO @Sebou
   scope :for_search_term, -> (term) {
     where("
       unaccent(education_schools.address) ILIKE unaccent(:term) OR
@@ -98,7 +99,7 @@ class Education::School < ApplicationRecord
       unaccent(education_schools.country) ILIKE unaccent(:term) OR
       unaccent(education_schools.name) ILIKE unaccent(:term) OR
       unaccent(education_schools.phone) ILIKE unaccent(:term) OR
-      unaccent(education_schools.zipcode) ILIKE unaccent(:term) 
+      unaccent(education_schools.zipcode) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 

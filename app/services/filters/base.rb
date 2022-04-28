@@ -9,12 +9,13 @@ module Filters
 
     protected
 
-    def add(scope_name, choices, label, multiple = false)
+    def add(scope_name, choices, label, multiple = false, tree = false)
       @list << {
         scope_name: scope_name,
         choices: choices,
         label: label,
-        multiple: multiple
+        multiple: multiple,
+        tree: tree
       }
     end
 

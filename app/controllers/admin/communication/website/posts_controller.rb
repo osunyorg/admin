@@ -1,8 +1,12 @@
 class Admin::Communication::Website::PostsController < Admin::Communication::Website::ApplicationController
+  skip_before_action :load_filters
+
   load_and_authorize_resource class: Communication::Website::Post, through: :website
 
+  before_action :load_filters, only: :index
+
   has_scope :for_search_term
-  
+
   def index
     @posts = apply_scopes(@posts).ordered.page params[:page]
     breadcrumb
@@ -79,5 +83,9 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
             :author_id, :language_id, category_ids: []
           )
           .merge(university_id: current_university.id)
+  end
+
+  def load_filters
+    @filters = ::Filters::Admin::Communication::Website::Posts.new(current_user, @website).list
   end
 end
