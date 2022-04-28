@@ -44,6 +44,7 @@ class University::Person < ApplicationRecord
   include WithBlobs
   include WithSlug
   include WithPicture
+  include WithRoles
   include WithEducation
 
   LIST_OF_ROLES = [
@@ -74,11 +75,6 @@ class University::Person < ApplicationRecord
                           dependent: :destroy
 
   has_many                :involvements,
-                          class_name: 'University::Person::Involvement',
-                          dependent: :destroy
-
-  has_many                :involvements_as_administrator,
-                          -> { where(kind: 'administrator') },
                           class_name: 'University::Person::Involvement',
                           dependent: :destroy
 
@@ -117,7 +113,16 @@ class University::Person < ApplicationRecord
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
   scope :for_role, -> (role) { where("is_#{role}": true) }
-  scope :for_program, -> (program_id) { } # TODO @Sebou
+  scope :for_program, -> (program_id) {
+    left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
+      .where(education_programs: { id: program_id })
+      .or(
+        left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
+          .where(education_programs_as_teachers_university_people: { id: program_id })
+      )
+      .select("university_people.*")
+      .distinct
+  }
   scope :for_search_term, -> (term) {
     where("
       unaccent(concat(university_people.first_name, ' ', university_people.last_name)) ILIKE unaccent(:term) OR

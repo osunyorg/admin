@@ -32,6 +32,10 @@ class University::Person::Involvement < ApplicationRecord
 
   belongs_to :person, class_name: 'University::Person'
   belongs_to :target, polymorphic: true
+  belongs_to  :university_role,
+              -> { where(university_person_involvements: { target_type: 'University::Role' }) },
+              class_name: "University::Role",
+              foreign_key: "target_id"
 
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
   validates :target_id, uniqueness: { scope: [:person_id, :target_type] }

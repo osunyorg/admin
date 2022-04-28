@@ -12,6 +12,12 @@ module University::Person::WithEducation
                             source: :target,
                             source_type: "Education::Program"
 
+    has_many                :education_programs_as_administrator,
+                            -> { distinct },
+                            through: :roles_as_administrator,
+                            source: :target,
+                            source_type: "Education::Program"
+
     has_many                :experiences
 
     has_and_belongs_to_many :cohorts,
@@ -28,13 +34,6 @@ module University::Person::WithEducation
                             class_name: 'Education::Program',
                             foreign_key: 'university_person_id',
                             association_foreign_key: 'education_program_id'
-  end
-
-  def education_programs_as_administrator
-    university.education_programs
-              .joins(:involvements_through_roles)
-              .where(university_person_involvements: { person_id: id })
-              .distinct
   end
 
   def add_to_cohort(cohort)

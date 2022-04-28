@@ -91,7 +91,7 @@ class Education::School < ApplicationRecord
   validates :name, :address, :city, :zipcode, :country, presence: true
 
   scope :ordered, -> { order(:name) }
-  scope :for_program, -> (program_id) { } # TODO @Sebou
+  scope :for_program, -> (program_id) { joins(:programs).where(education_programs: { id: program_id }) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(education_schools.address) ILIKE unaccent(:term) OR
