@@ -28,6 +28,14 @@ class Communication::Extranet < ApplicationRecord
 
   has_one_attached_deletable :logo
 
+  scope :ordered, -> { order(:name) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(communication_extranets.domain) ILIKE unaccent(:term) OR
+      unaccent(communication_extranets.name) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
   def self.with_host(host)
     find_by domain: host
   end

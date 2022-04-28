@@ -36,6 +36,11 @@ class Communication::Website < ApplicationRecord
   include WithProgramCategories
   include WithSpecialPages
 
+  enum git_provider: {
+    github: 0,
+    gitlab: 1
+  }
+
   has_and_belongs_to_many :languages,
                           class_name: 'Language',
                           join_table: 'communication_websites_languages',
@@ -43,10 +48,11 @@ class Communication::Website < ApplicationRecord
                           association_foreign_key: 'language_id'
 
   scope :ordered, -> { order(:name) }
-
-  enum git_provider: {
-    github: 0,
-    gitlab: 1
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(communication_websites.name) ILIKE unaccent(:term) OR
+      unaccent(communication_websites.url) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def to_s

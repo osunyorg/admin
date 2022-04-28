@@ -3,7 +3,11 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
                               through: :current_university,
                               through_association: :communication_extranets
 
+  has_scope :for_search_term
+  has_scope :for_about_type
+
   def index
+    @extranets = apply_scopes(@extranets).ordered.page(params[:page])
     breadcrumb
   end
 

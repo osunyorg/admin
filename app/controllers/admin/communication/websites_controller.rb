@@ -3,8 +3,11 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
                               through: :current_university,
                               through_association: :communication_websites
 
+  has_scope :for_search_term
+  has_scope :for_about_type
+
   def index
-    @websites = @websites.ordered
+    @websites = apply_scopes(@websites).ordered.page(params[:page])
     breadcrumb
     add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
   end

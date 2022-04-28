@@ -1,6 +1,8 @@
 <% content_for :title, "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters if @filters.any?  %>
+
   <div class="card">
     <%= form_tag publish_admin_communication_website_posts_path do %>
       <input type="hidden" name="ids[]" value="">

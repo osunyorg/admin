@@ -1,4 +1,6 @@
-<% content_for :title, Communication::Extranet.model_name.human(count: 2) %>
+<% content_for :title, "#{Communication::Extranet.model_name.human(count: 2)} (#{@extranets.total_count})" %>
+
+<%= render 'filters', current_path: admin_communication_extranets_path, filters: @filters if @filters.any?  %>
 
 <table class="<%= table_classes %>">
   <thead>
@@ -28,6 +30,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @extranets, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Extranet %>

@@ -6,6 +6,8 @@ module WithAbouts
                 polymorphic: true,
                 optional: true
 
+    scope :for_about_type, -> (type) { where(about_type: type) }
+
     def self.about_types
       [
         nil,

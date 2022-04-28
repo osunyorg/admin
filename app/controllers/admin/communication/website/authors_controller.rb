@@ -1,7 +1,9 @@
 class Admin::Communication::Website::AuthorsController < Admin::Communication::Website::ApplicationController
 
+  has_scope :for_search_term
+  
   def index
-    @authors =  @website.authors.accessible_by(current_ability)
+    @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
                                 .ordered
                                 .page(params[:page])
     breadcrumb

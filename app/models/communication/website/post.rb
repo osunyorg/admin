@@ -68,7 +68,14 @@ class Communication::Website::Post < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
-
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(communication_website_posts.description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_posts.description_short) ILIKE unaccent(:term) OR
+      unaccent(communication_website_posts.text) ILIKE unaccent(:term) OR
+      unaccent(communication_website_posts.title) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def path
     # used in menu_item#static_target

@@ -1,4 +1,6 @@
-<% content_for :title, Communication::Website.model_name.human(count: 2) %>
+<% content_for :title, "#{Communication::Website.model_name.human(count: 2)} (#{@websites.total_count})" %>
+
+<%= render 'filters', current_path: admin_communication_websites_path, filters: @filters if @filters.any?  %>
 
 <table class="<%= table_classes %>">
   <thead>
@@ -27,6 +29,9 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @websites, theme: 'bootstrap-5' %>
+
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website %>
