@@ -1,62 +1,35 @@
 .persons-show
     .top
-        align-items: stretch
-        header
-            align-items: center
-            display: flex
-            height: 100%
         h1
             font-weight: normal
-            margin: 0
-            padding: 0
-    dl
-        line-height: px2rem(26)
-        dt
-            font-size: $small-font-size
-        dd
-            margin-bottom: px2rem(26)
 
-.experiences
-    ul
-        padding-left: 0
-        li
-            @include make-row
-            display: flex
-            padding: px2rem(16) 0
-            position: relative
-            p
-                margin-bottom: px2rem(8)
-            &::before
-                border-top: 1px solid $primary
-                content: ''
-                left: $grid-gutter-width  * .5
-                position: absolute
-                right: $grid-gutter-width  * .5
-                top: 0
-            > div
-                @include make-col-ready
-                padding-bottom: px2rem(10)
-                padding-top: px2rem(10)
-                &:nth-child(1)
-                    width: 44.4444%
-                &:nth-child(2)
-                    width: 22.2222%
-                &:nth-child(3)
-                    align-self: center
-                    flex: 33.3333%
-                    padding-bottom: 0
-                    padding-top: 0
-                    text-align: right
-            &:last-child
-                &::after
-                    border-top: 1px solid $primary
-                    bottom: 0
-                    content: ''
-                    left: $grid-gutter-width  * .5
-                    position: absolute
-                    right: $grid-gutter-width  * .5
-            img
-                height: 80px
-
-.biography
-    margin-bottom: 90px
+    .experiences
+        margin-top: px2rem(80)
+        ul
+            padding-left: 0
+            li
+                @include make-row
+                @include pseudo-top-border
+                display: flex
+                padding: px2rem(16) 0
+                position: relative
+                p
+                    margin-bottom: px2rem(8)
+                > div
+                    @include make-col-ready
+                    padding-bottom: px2rem(10)
+                    padding-top: px2rem(10)
+                    &:nth-child(1)
+                        width: percentage(4/9)
+                    &:nth-child(2)
+                        width: percentage(2/9)
+                    &:nth-child(3)
+                        align-self: center
+                        padding-bottom: 0
+                        padding-top: 0
+                        text-align: right
+                        width: percentage(3/9)
+                &:last-child
+                    @include pseudo-bottom-border
+                img
+                    max-height: 80px

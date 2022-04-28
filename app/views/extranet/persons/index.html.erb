@@ -12,13 +12,7 @@
     <%= render 'faceted_search/facets', facets: @facets %>
   </div>
   <div class="offset-lg-1 col-lg-8">
-    <div class="row">
-      <% @people.each do |person| %>
-        <div class="col-xxl-3 col-md-4 col-sm-6">
-          <%= render 'extranet/persons/person', person: person %>
-        </div>
-      <% end %>
-    </div>
+    <%= render "extranet/persons/list" %>
     <%= paginate @people, theme: 'bootstrap-5' %>
   </div>
 </div>
