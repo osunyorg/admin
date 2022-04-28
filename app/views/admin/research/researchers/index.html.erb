@@ -1,5 +1,7 @@
 <% content_for :title, t('research.researchers', count: 2) %>
 
+<%= render 'filters', current_path: admin_research_researchers_path, filters: @filters if @filters.any?  %>
+
 <table class="table">
   <thead>
     <tr>
@@ -19,9 +21,8 @@
     <% end %>
   </tbody>
 </table>
-<% if @researchers.total_pages > 1 %>
-    <%= paginate @researchers, theme: 'bootstrap-5' %>
-<% end %>
+
+<%= paginate @researchers, theme: 'bootstrap-5' %>
 
 
 <% content_for :action_bar_right do %>

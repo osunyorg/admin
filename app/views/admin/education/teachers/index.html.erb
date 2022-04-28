@@ -1,10 +1,10 @@
 <% content_for :title, "#{t('education.teachers', count: 2)} (#{@teachers.total_count})" %>
 
+<%= render 'filters', current_path: admin_education_teachers_path, filters: @filters if @filters.any?  %>
+
 <%= render 'admin/education/teachers/list', teachers: @teachers %>
 
-<% if @teachers.total_pages > 1 %>
-  <%= paginate @teachers, theme: 'bootstrap-5' %>
-<% end %>
+<%= paginate @teachers, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('education.manage_teachers'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>

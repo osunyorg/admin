@@ -1,5 +1,7 @@
 <% content_for :title, Education::School.model_name.human(count: 2) %>
 
+<%= render 'filters', current_path: admin_education_schools_path, filters: @filters if @filters.any?  %>
+
 <table class="table">
   <thead>
     <tr>
@@ -27,6 +29,9 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @schools, theme: 'bootstrap-5' %>
+
 
 <% content_for :action_bar_right do %>
   <%= create_link Education::School %>

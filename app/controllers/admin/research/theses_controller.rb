@@ -3,8 +3,10 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
                               through: :current_university,
                               through_association: :research_theses
 
+  has_scope :for_search_term
+
   def index
-    @theses = @theses.ordered.page(params[:page])
+    @theses = apply_scopes(@theses).ordered.page(params[:page])
     breadcrumb
   end
 

@@ -1,5 +1,7 @@
 <% content_for :title, "#{University::Person::Alumnus.model_name.human(count: 2)} (#{@alumni.total_count})" %>
 
+<%= render 'filters', current_path: admin_university_person_alumni_path, filters: @filters if @filters.any?  %>
+
 <%= render 'admin/university/person/alumni/list', alumni: @alumni %>
 
 <%= paginate @alumni, theme: 'bootstrap-5' %>

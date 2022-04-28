@@ -1,5 +1,7 @@
 <% content_for :title, Research::Thesis.model_name.human(count: 2) %>
 
+<%= render 'filters', current_path: admin_research_theses_path, filters: @filters if @filters.any?  %>
+
 <table class="table">
   <thead>
     <tr>

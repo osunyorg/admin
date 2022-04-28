@@ -3,7 +3,10 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
                               through: :current_university,
                               through_association: :education_schools
 
+  has_scope :for_search_term
+
   def index
+    @schools = apply_scopes(@schools).ordered.page(params[:page])
     breadcrumb
   end
 

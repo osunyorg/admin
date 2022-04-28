@@ -2,8 +2,11 @@ class Admin::University::Person::AlumniController < Admin::University::Applicati
   load_and_authorize_resource class: University::Person::Alumnus,
                               through: :current_university,
                               through_association: :people
+
+  has_scope :for_search_term
+
   def index
-    @alumni = @alumni.alumni
+    @alumni = apply_scopes(@alumni).alumni
                      .accessible_by(current_ability)
                      .ordered
                      .page(params[:page])

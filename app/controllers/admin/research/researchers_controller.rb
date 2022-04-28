@@ -1,7 +1,9 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
 
+  has_scope :for_search_term
+  
   def index
-    @researchers = current_university.people.researchers.accessible_by(current_ability).ordered.page(params[:page])
+    @researchers = apply_scopes(current_university.people.researchers.accessible_by(current_ability)).ordered.page(params[:page])
     breadcrumb
   end
 

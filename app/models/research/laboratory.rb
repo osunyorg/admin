@@ -34,7 +34,18 @@ class Research::Laboratory < ApplicationRecord
               foreign_key: :research_laboratory_id,
               dependent: :destroy
 
+  validates :name, :address, :city, :zipcode, :country, presence: true
+
   scope :ordered, -> { order(:name) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
+      unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
+      unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
+      unaccent(research_laboratories.name) ILIKE unaccent(:term) OR
+      unaccent(research_laboratories.zipcode) ILIKE unaccent(:term) 
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def to_s
     "#{name}"

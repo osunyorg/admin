@@ -3,8 +3,10 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
                               through: :current_university,
                               through_association: :research_journals
 
+  has_scope :for_search_term
+
   def index
-    @journals = @journals.ordered.page(params[:page])
+    @journals = apply_scopes(@journals).ordered.page(params[:page])
     breadcrumb
     add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path
   end

@@ -34,6 +34,14 @@ class Research::Journal < ApplicationRecord
   has_many :people_through_published_articles, -> { distinct }, through: :published_articles, source: :people
 
   scope :ordered, -> { order(:title) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(research_journals.description) ILIKE unaccent(:term) OR
+      unaccent(research_journals.issn) ILIKE unaccent(:term) OR
+      unaccent(research_journals.repository) ILIKE unaccent(:term) OR
+      unaccent(research_journals.title) ILIKE unaccent(:term) 
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def to_s
     "#{title}"

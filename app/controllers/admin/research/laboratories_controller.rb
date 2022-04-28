@@ -3,8 +3,10 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
                               through: :current_university,
                               through_association: :research_laboratories
 
+  has_scope :for_search_term
+
   def index
-    @laboratories = @laboratories.ordered.page(params[:page])
+    @laboratories = apply_scopes(@laboratories).ordered.page(params[:page])
     breadcrumb
     add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
   end
