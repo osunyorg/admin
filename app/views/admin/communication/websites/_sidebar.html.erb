@@ -20,12 +20,12 @@
             ability: can?(:read, Communication::Website::Post)
           },
           {
-            title: Communication::Website::Category.model_name.human(count: 2),
+            title: "&nbsp;&nbsp;-&nbsp;#{Communication::Website::Category.model_name.human(count: 2)}",
             path: admin_communication_website_categories_path(website_id: @website),
             ability: can?(:read, Communication::Website::Category)
           },
           {
-            title: t('communication.authors', count: 2),
+            title: "&nbsp;&nbsp;-&nbsp;#{t('communication.authors', count: 2)}",
             path: admin_communication_website_authors_path(website_id: @website),
             ability: can?(:read, University::Person)
           },
@@ -39,7 +39,7 @@
           active = object[:path].in? request.path
         %>
         <a class="list-group-item list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
-          <%= object[:title] %>
+          <%= object[:title].html_safe %>
         </a>
         <% end %>
       </div>
