@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_151735) do
+ActiveRecord::Schema.define(version: 2022_04_28_171541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -463,6 +463,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_151735) do
     t.text "content"
     t.text "results"
     t.text "presentation"
+    t.text "main_information"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end

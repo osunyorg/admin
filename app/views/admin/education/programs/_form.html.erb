@@ -57,6 +57,7 @@
           <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
         </div>
         <div class="card-body">
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :main_information %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :presentation %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
           <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>

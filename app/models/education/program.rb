@@ -14,6 +14,7 @@
 #  evaluation         :text
 #  featured_image_alt :string
 #  level              :integer
+#  main_information   :text
 #  name               :string
 #  objectives         :text
 #  opportunities      :text
@@ -57,7 +58,8 @@ class Education::Program < ApplicationRecord
   include WithPosition
   include WithBlocks
 
-  rich_text_areas_with_inheritance  :accessibility,
+  rich_text_areas_with_inheritance  :main_information,
+                                    :accessibility,
                                     :contacts,
                                     :duration,
                                     :evaluation,
