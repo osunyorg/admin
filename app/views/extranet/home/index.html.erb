@@ -3,16 +3,43 @@
 <div class="row">
   <div class="col-md-8">
     <h2>Mouvements récents</h2>
-    <% @experiences.each do |experience| %>
-      <article>
-        <%= link_to experience.person, experience.person %>
-        <%= experience.description %>
-        <%= experience.from_year %>
-        <%= experience.to_year %>
-        <%= link_to experience.organization, experience.organization %>
-      </article>
-    <% end %>
+    <div class="experiences">
+      <ul>
+          <% @experiences.ordered.each do |experience| %>
+          <li class="mb-3">
+            <div>
+              <%= link_to experience.person, class: "stretched-link" do %>
+                <% if experience.person.picture.attached? %>
+                  <%= kamifusen_tag experience.person.picture, width: 200, class: 'img-fluid' %>
+                <% else %>
+                  <%= image_tag 'extranet/avatar.png', width: 200, class: 'img-fluid' %>
+                <% end %>
+              <% end %>
+            </div>
+            <div>
+              <div>
+                <p class="mb-0">
+                  <%= experience.person.first_name %> <b><%= experience.person.last_name %></b>
+                  <br>
+                  <%= experience.description %> — <%= experience.organization %>
+                </p>
+                <small><%= experience.created_at %></small>
+              </div>
+              <% if experience.organization.present? %>
+                <% if experience.organization.logo.attached? %>
+                    <%= link_to experience.organization do %>
+                      <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
+                    <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
+
+
   <div class="col-md-4">
     <h2>Promotions actuelles</h2>
     <p><%= link_to 'Voir toutes les promotions', education_cohorts_path %></p>

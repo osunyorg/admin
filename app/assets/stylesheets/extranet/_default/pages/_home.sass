@@ -1,0 +1,32 @@
+.home-index
+    .experiences
+        margin-top: px2rem(80)
+        ul
+            padding-left: 0
+            li
+                @include make-row
+                display: flex
+                position: relative
+                > div
+                    @include make-col-ready
+                    &:nth-child(1)
+                        width: percentage(2/9)
+                    &:nth-child(2)
+                        @include pseudo-bottom-border
+                        @include pseudo-top-border
+                        display: flex
+                        justify-content: space-between
+                        padding-bottom: px2rem(16)
+                        padding-top: px2rem(12)
+                        width: percentage(7/9)
+                        display: flex
+                        justify-content: space-between
+                        > div
+                            align-self: stretch
+                            display: flex
+                            flex-direction: column
+                            justify-content: space-between
+                        a
+                            align-self: center
+                        img
+                            max-height: 80px
