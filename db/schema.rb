@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_27_094234) do
+ActiveRecord::Schema.define(version: 2022_04_28_151735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -629,6 +629,12 @@ ActiveRecord::Schema.define(version: 2022_04_27_094234) do
     t.date "invoice_date"
     t.integer "invoice_date_yday"
     t.string "invoice_amount"
+    t.boolean "has_sso", default: false
+    t.integer "sso_provider", default: 0
+    t.string "sso_target_url"
+    t.text "sso_cert"
+    t.string "sso_name_identifier_format"
+    t.jsonb "sso_mapping"
   end
 
   create_table "university_organization_imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

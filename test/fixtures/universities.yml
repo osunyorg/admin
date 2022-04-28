@@ -2,22 +2,28 @@
 #
 # Table name: universities
 #
-#  id                :uuid             not null, primary key
-#  address           :string
-#  city              :string
-#  country           :string
-#  identifier        :string
-#  invoice_amount    :string
-#  invoice_date      :date
-#  invoice_date_yday :integer
-#  mail_from_address :string
-#  mail_from_name    :string
-#  name              :string
-#  private           :boolean
-#  sms_sender_name   :string
-#  zipcode           :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id                         :uuid             not null, primary key
+#  address                    :string
+#  city                       :string
+#  country                    :string
+#  has_sso                    :boolean          default(FALSE)
+#  identifier                 :string
+#  invoice_amount             :string
+#  invoice_date               :date
+#  invoice_date_yday          :integer
+#  mail_from_address          :string
+#  mail_from_name             :string
+#  name                       :string
+#  private                    :boolean
+#  sms_sender_name            :string
+#  sso_cert                   :text
+#  sso_mapping                :jsonb
+#  sso_name_identifier_format :string
+#  sso_provider               :integer          default("saml")
+#  sso_target_url             :string
+#  zipcode                    :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
 #
 default_university:
   name: Université de test
