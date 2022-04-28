@@ -24,7 +24,7 @@
       <p><%= @organization.text %></p>
     </div>
     <div class="experiences">
-      <p class="mb-4">Alumni dans cette organisation (2)</p>
+      <p class="mb-4">Alumni dans cette organisation (<%= @organization.experiences.count %>)</p>
       <ul>
           <% @organization.experiences.ordered.each do |experience| %>
           <li class="mb-3">

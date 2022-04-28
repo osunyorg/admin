@@ -14,4 +14,5 @@
   <%= @alumni.count %>
   <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
 </h2>
+
 <%= render 'extranet/persons/list', people: @alumni %>
