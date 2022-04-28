@@ -5,6 +5,7 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
 
   def index
     @academic_years = about&.academic_years
+                            .ordered
                             .page(params[:page])
                             .per(20)
     @count = @academic_years.total_count
