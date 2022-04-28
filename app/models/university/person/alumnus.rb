@@ -11,10 +11,12 @@
 #  habilitation      :boolean          default(FALSE)
 #  is_administration :boolean
 #  is_alumnus        :boolean          default(FALSE)
+#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
 #  linkedin          :string
+#  name              :string
 #  phone             :string
 #  slug              :string
 #  tenure            :boolean          default(FALSE)

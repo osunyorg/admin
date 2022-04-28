@@ -6,7 +6,7 @@ module Importable
 
     has_one_attached :file
 
-    after_save :parse_async
+    after_commit :parse_async
   end
 
   def lines

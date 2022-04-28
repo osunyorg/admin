@@ -62,6 +62,7 @@ class Communication::Website < ApplicationRecord
     dependencies += pages + pages.map(&:active_storage_blobs).flatten
     dependencies += posts + posts.map(&:active_storage_blobs).flatten if has_communication_posts?
     dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten if has_persons?
+    dependencies += organizations_in_blocks + organizations_in_blocks.map(&:active_storage_blobs).flatten if has_organizations_in_blocks?
     dependencies += [categories] if has_communication_categories?
     dependencies += about.git_dependencies(website) if about.present?
     dependencies

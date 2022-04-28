@@ -6,7 +6,7 @@
   <% end %>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
   <% if @website.about %>
-    (<%= link_to @website.about, [:admin, @website.about] unless @website.about.nil? %>)
+    (<%= link_to_if can?(:read, @website.about), @website.about, [:admin, @website.about] unless @website.about.nil? %>)
   <% end %>
 <% end %>
 

@@ -34,7 +34,7 @@ SimpleNavigation::Configuration.run do |navigation|
     if can?(:read, Communication::Website)
       primary.item :communication, Communication.model_name.human, nil, { kind: :header }
       primary.item :communication_websites, Communication::Website.model_name.human(count: 2), admin_communication_websites_path, { icon: 'sitemap' } if can?(:read, Communication::Website)
-      primary.item :communication_extranets, Communication::Extranet.model_name.human(count: 2), admin_communication_extranets_path, { icon: 'project-diagram' }
+      primary.item :communication_extranets, Communication::Extranet.model_name.human(count: 2), admin_communication_extranets_path, { icon: 'project-diagram' } if can?(:read, Communication::Extranet)
       primary.item :communication_newsletters, 'Lettres d\'information', nil, { icon: 'envelope' }
     end
 

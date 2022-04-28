@@ -54,6 +54,16 @@ class University::Organization < ApplicationRecord
     government: 30
   }
 
+  def git_dependencies(website)
+    dependencies = []
+    if for_website?(website)
+      dependencies << self
+      dependencies.concat active_storage_blobs
+    end
+    dependencies += website.menus.to_a
+    dependencies
+  end
+
   def websites
     university.communication_websites
   end

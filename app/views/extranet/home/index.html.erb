@@ -2,7 +2,16 @@
 
 <div class="row">
   <div class="col-md-8">
-
+    <h2>Mouvements récents</h2>
+    <% @experiences.each do |experience| %>
+      <article>
+        <%= link_to experience.person, experience.person %>
+        <%= experience.description %>
+        <%= experience.from_year %>
+        <%= experience.to_year %>
+        <%= link_to experience.organization, experience.organization %>
+      </article>
+    <% end %>
   </div>
   <div class="col-md-4">
     <h2>Promotions actuelles</h2>

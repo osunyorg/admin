@@ -61,6 +61,10 @@ module Communication::Website::WithDependencies
     blocks_dependencies.reject { |dependency| !dependency.is_a? University::Person }
   end
 
+  def organizations_in_blocks
+    blocks_dependencies.reject { |dependency| !dependency.is_a? University::Organization }
+  end
+
   def people_with_facets_in_blocks
     blocks_dependencies.reject { |dependency| !dependency.class.to_s.start_with?('University::Person') }
   end
@@ -114,12 +118,20 @@ module Communication::Website::WithDependencies
     categories.any?
   end
 
+  def has_organizations?
+    has_organizations_in_blocks?
+  end
+
   def has_authors?
     authors.compact.any?
   end
 
   def has_people_in_blocks?
     people_in_blocks.compact.any?
+  end
+
+  def has_organizations_in_blocks?
+    organizations_in_blocks.compact.any?
   end
 
   def has_persons?

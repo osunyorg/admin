@@ -1,6 +1,6 @@
 class Communication::Block::Template::CallToAction < Communication::Block::Template
   def build_git_dependencies
-    # image à déclarer
+    add_dependency image&.blob
   end
 
   def text

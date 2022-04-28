@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_21_093107) do
+ActiveRecord::Schema.define(version: 2022_04_27_094234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -407,6 +407,13 @@ ActiveRecord::Schema.define(version: 2022_04_21_093107) do
     t.index ["university_id"], name: "index_education_academic_years_on_university_id"
   end
 
+  create_table "education_academic_years_university_people", id: false, force: :cascade do |t|
+    t.uuid "university_person_id", null: false
+    t.uuid "education_academic_year_id", null: false
+    t.index ["education_academic_year_id", "university_person_id"], name: "index_academic_year_person"
+    t.index ["university_person_id", "education_academic_year_id"], name: "index_person_academic_year"
+  end
+
   create_table "education_cohorts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "program_id", null: false
@@ -465,6 +472,13 @@ ActiveRecord::Schema.define(version: 2022_04_21_093107) do
     t.uuid "education_school_id", null: false
     t.index ["education_program_id", "education_school_id"], name: "program_school"
     t.index ["education_school_id", "education_program_id"], name: "school_program"
+  end
+
+  create_table "education_programs_university_people", id: false, force: :cascade do |t|
+    t.uuid "university_person_id", null: false
+    t.uuid "education_program_id", null: false
+    t.index ["education_program_id", "university_person_id"], name: "index_program_person"
+    t.index ["university_person_id", "education_program_id"], name: "index_person_program"
   end
 
   create_table "education_programs_users", id: false, force: :cascade do |t|
@@ -688,6 +702,8 @@ ActiveRecord::Schema.define(version: 2022_04_21_093107) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
+    t.string "name"
+    t.boolean "is_author"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end

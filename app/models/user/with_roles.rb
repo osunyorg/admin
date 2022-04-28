@@ -4,7 +4,7 @@ module User::WithRoles
   included do
     attr_accessor :modified_by
 
-    enum role: { visitor: 0, teacher: 10, program_manager: 12, website_manager: 15, admin: 20, server_admin: 30 }
+    enum role: { visitor: 0, contributor: 4, author: 5, teacher: 10, program_manager: 12, website_manager: 15, admin: 20, server_admin: 30 }
 
     has_and_belongs_to_many :programs_to_manage,
                             class_name: 'Education::Program',
@@ -22,7 +22,7 @@ module User::WithRoles
     before_validation :check_modifier_role
 
     def self.roles_with_access_to_global_menu
-      roles.keys - ["website_manager"]
+      roles.keys - ['contributor', 'author', 'website_manager']
     end
 
     def managed_roles

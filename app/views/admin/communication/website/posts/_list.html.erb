@@ -1,10 +1,16 @@
 <%
   hide_author |= false
   hide_category |= false
+  selectable |= false
 %>
-<table class="<%= table_classes %>">
+<table class="<%= table_classes %>" <%= "data-batch-selectable" if selectable %>>
   <thead>
     <tr>
+      <% if selectable %>
+        <th>
+          <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } %>
+        </th>
+      <% end %>
       <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
       <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
       <% unless hide_author %>
@@ -20,6 +26,11 @@
   <tbody>
     <% posts.each do |post| %>
       <tr>
+        <% if selectable %>
+          <td>
+            <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %>
+          </td>
+        <% end %>
         <td><%= link_to post,
                         admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                         class: "#{'opacity-50' unless post.published?}" %></td>

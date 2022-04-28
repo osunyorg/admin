@@ -200,6 +200,7 @@ en:
       website:
         pages:
           delete_special_page_notice: Can't delete this page
+          is_special_page: "This is a page with a special behaviour:"
           structure: Structure
   communication:
     authors:
@@ -228,54 +229,72 @@ en:
       pages:
         defaults:
           administrators:
+            admin_description: list of members in the administrative team
             description_short: List of members in the administrative team
             slug: administrative-team
             title: Administrative team
           authors:
+            admin_description: list of members in the editorial team
             description_short: List of members in the editorial team
             slug: editorial-team
             title: Editorial team
           communication_posts:
+            admin_description: list of posts
             description_short: List of posts
             slug: posts
             title: Posts
           education_programs:
+            admin_description: list of available programs
             description_short: List of available programs
             slug: programs
             title: Programs
           home:
+            admin_description: homepage
             description_short: ''
             slug: ''
             title: Home
           legal_terms:
+            admin_description: legal terms page
             description_short: ''
             slug: legal-terms
             title: Legal terms
+          organizations:
+            admin_description: third parties page
+            description_short: List of third parties
+            slug: third-parties
+            title: Third parties
           persons:
+            admin_description: list of members in the team
             description_short: List of members in the team
             slug: team
             title: Team
           privacy_policy:
+            admin_description: privacy policy page
             description_short: ''
             slug: privacy-policy
             title: Privacy policy
           research_articles:
+            admin_description: list of articles
             description_short: List of articles
             slug: articles
             title: Articles
           research_volumes:
+            admin_description: list of volumes
             description_short: List of volumes
             slug: volumes
             title: Volumes
           researchers:
+            admin_description: list of members in the research team
             description_short: List of members in the research team
             slug: research-team
             title: Research team
           sitemap:
+            admin_description: sitemap page
             description_short: ''
             slug: sitemap
             title: Sitemap
           teachers:
+            admin_description: list of members in the educational team
             description_short: List of members in the educational team
             slug: educational-team
             title: Educational team
@@ -306,6 +325,7 @@ en:
               news: News index
               news_article: Specific news
               news_category: News category
+              organizations: Third parties index
               page: Specific Page
               program: Specific program
               programs: Programs index

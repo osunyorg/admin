@@ -11,10 +11,12 @@
 #  habilitation      :boolean          default(FALSE)
 #  is_administration :boolean
 #  is_alumnus        :boolean          default(FALSE)
+#  is_author         :boolean
 #  is_researcher     :boolean
 #  is_teacher        :boolean
 #  last_name         :string
 #  linkedin          :string
+#  name              :string
 #  phone             :string
 #  slug              :string
 #  tenure            :boolean          default(FALSE)
@@ -43,6 +45,14 @@ class University::Person < ApplicationRecord
   include WithSlug
   include WithPicture
   include WithEducation
+
+  LIST_OF_ROLES = [
+    :administration,
+    :teacher,
+    :researcher,
+    :alumnus,
+    :author
+  ].freeze
 
   has_summernote :biography
 
@@ -87,8 +97,6 @@ class University::Person < ApplicationRecord
                           through: :education_programs,
                           source: :websites
 
-  has_many                :experiences
-
   accepts_nested_attributes_for :involvements
 
   validates_presence_of   :first_name, :last_name
@@ -101,27 +109,39 @@ class University::Person < ApplicationRecord
                           allow_blank: true,
                           if: :will_save_change_to_email?
 
-  before_validation :sanitize_email
+  before_validation :sanitize_email, :prepare_name
 
   scope :ordered,         -> { order(:last_name, :first_name) }
   scope :administration,  -> { where(is_administration: true) }
   scope :teachers,        -> { where(is_teacher: true) }
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
+  scope :for_role, -> (role) { where("is_#{role}": true) }
+
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(concat(university_people.first_name, ' ', university_people.last_name)) ILIKE unaccent(:term) OR
+      unaccent(concat(university_people.last_name, ' ', university_people.first_name)) ILIKE unaccent(:term) OR
+      unaccent(university_people.first_name) ILIKE unaccent(:term) OR
+      unaccent(university_people.last_name) ILIKE unaccent(:term) OR
+      unaccent(university_people.email) ILIKE unaccent(:term) OR
+      unaccent(university_people.phone) ILIKE unaccent(:term) OR
+      unaccent(university_people.biography) ILIKE unaccent(:term) OR
+      unaccent(university_people.description) ILIKE unaccent(:term) OR
+      unaccent(university_people.description_short) ILIKE unaccent(:term) OR
+      unaccent(university_people.twitter) ILIKE unaccent(:term) OR
+      unaccent(university_people.url) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def to_s
     "#{first_name} #{last_name}"
   end
 
   def roles
-    [:administration, :teacher, :researcher, :alumnus, :author].reject do |role|
+    LIST_OF_ROLES.reject do |role|
       ! send "is_#{role}"
     end
-  end
-
-  # TODO denormalize
-  def is_author
-    communication_website_posts.any?
   end
 
   def websites
@@ -133,7 +153,7 @@ class University::Person < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = website.menus.to_a
+    dependencies = []
     if for_website?(website)
       dependencies << self
       dependencies.concat active_storage_blobs
@@ -142,6 +162,7 @@ class University::Person < ApplicationRecord
     dependencies << author if author.for_website?(website)
     dependencies << researcher if researcher.for_website?(website)
     dependencies << teacher if teacher.for_website?(website)
+    dependencies += website.menus.to_a
     dependencies
   end
 
@@ -181,5 +202,9 @@ class University::Person < ApplicationRecord
 
   def sanitize_email
     self.email = self.email.to_s.downcase.strip
+  end
+
+  def prepare_name
+    self.name = to_s
   end
 end

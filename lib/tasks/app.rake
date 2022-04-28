@@ -8,17 +8,9 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Communication::Block.where(template: 'partners').find_each do |partner|
-      next if partner.data.nil?
-      data = partner.data
-      next unless data.has_key? 'elements'
-      elements = data['elements']
-      next if elements.none?
-      first = elements.first
-      next unless first.has_key? 'partners'
-      partner.title = first['title']
-      partner.data['elements'] = first['partners']
-      partner.save
+    University::Person.find_each do |person|
+      person.is_author = person.communication_website_posts.any?
+      person.save
     end
   end
 

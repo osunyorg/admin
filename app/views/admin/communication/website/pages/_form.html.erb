@@ -8,7 +8,7 @@
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :breadcrumb_title %>
-          <%= f.input :description_short %>
+          <%= f.input :description_short, input_html: { value: page.description_short&.gsub('&amp;', '&') } %>
           <%= f.input :header_text,
                       as: :summernote,
                       input_html: {

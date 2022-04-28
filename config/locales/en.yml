@@ -16,11 +16,14 @@ en:
         role: Role
         roles:
           admin: Administrator
+          author: Author
+          contributor: Contributor
           program_manager: Program manager
           server_admin: Server admin
           teacher: Teacher
           visitor: Visitor
           website_manager: Website manager
+        websites_to_manage: Websites managed
     errors:
       models:
         user:
