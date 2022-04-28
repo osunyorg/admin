@@ -44,7 +44,7 @@ class Communication::Block < ApplicationRecord
   }
 
   before_save :update_template_images
-  after_update_commit :save_and_sync_about
+  after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
     value = JSON.parse value if value.is_a? String
@@ -71,7 +71,7 @@ class Communication::Block < ApplicationRecord
   protected
 
   def save_and_sync_about
-    about.save_and_sync
+    about&.save_and_sync unless about&.destroyed?
   end
 
   def update_template_images
