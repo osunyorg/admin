@@ -117,7 +117,6 @@ class University::Person < ApplicationRecord
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
   scope :for_role, -> (role) { where("is_#{role}": true) }
-
   scope :for_search_term, -> (term) {
     where("
       unaccent(concat(university_people.first_name, ' ', university_people.last_name)) ILIKE unaccent(:term) OR

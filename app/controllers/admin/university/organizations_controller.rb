@@ -3,8 +3,11 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                               through: :current_university,
                               through_association: :organizations
 
+  has_scope :for_search_term
+  has_scope :for_kind
+
   def index
-    @organizations = @organizations.ordered.page(params[:page])
+    @organizations = apply_scopes(@organizations).ordered.page(params[:page])
     breadcrumb
   end
 

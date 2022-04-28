@@ -96,6 +96,7 @@ fr:
   filters:
     attributes:
       date: Filtrer par Date
+      kind: Filtrer par Type
       role: Filtrer par Rôle
     buttons:
       expand: Filtrer le tableau

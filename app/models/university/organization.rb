@@ -45,6 +45,24 @@ class University::Organization < ApplicationRecord
   has_one_attached_deletable :logo
 
   scope :ordered, -> { order(:name) }
+  scope :for_kind, -> (kind) { where(kind: kind) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(university_organizations.address) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.city) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.country) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.description) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.email) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.long_name) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.name) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.nic) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.phone) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.text) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.url) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   validates_presence_of :name
 

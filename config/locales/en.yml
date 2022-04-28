@@ -96,6 +96,7 @@ en:
   filters:
     attributes:
       date: Filter by Date
+      kind: Filter by Kind
       role: Filter by Role
     buttons:
       expand: Filter table
