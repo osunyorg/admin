@@ -37,7 +37,7 @@
           <% if current_user.author? || current_user.contributor? %>
             <%= f.input :author_id, as: :hidden, input_html: { value: current_user.person&.id }, wrapper: false %>
           <% else %>
-            <%= f.association :author, collection: current_university.people.ordered %>
+            <%= f.association :author, collection: current_university.people.ordered, label_method: :to_s_alphabetical %>
           <% end %>
         </div>
       </div>
