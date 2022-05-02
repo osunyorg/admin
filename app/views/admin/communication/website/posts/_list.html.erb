@@ -3,7 +3,10 @@
   hide_category |= false
   selectable |= false
 %>
-<table class="<%= table_classes %>" <%= "data-batch-selectable" if selectable %>>
+<% if selectable %>
+<input type="hidden" name="ids[]" value="">
+<% end %>
+<table class="<%= table_classes %>">
   <thead>
     <tr>
       <% if selectable %>
