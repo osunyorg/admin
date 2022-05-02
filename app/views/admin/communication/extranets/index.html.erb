@@ -10,14 +10,13 @@
       <th><%= Communication::Extranet.human_attribute_name('about_type') %></th>
       <th><%= Communication::Extranet.human_attribute_name('about') %></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @extranets.each do |extranet| %>
       <tr>
         <td><%= link_to extranet, [:admin, extranet] %></td>
-        <td><%= link_to extranet.url, extranet.url, target: :_blank %></td>
+        <td><%= link_to extranet.url, extranet.url, target: :_blank unless extranet.url.blank? %></td>
         <td><%= I18n.t("activerecord.attributes.communication/extranet.about_#{extranet.about_type}") %></td>
         <td><%= link_to extranet.about, [:admin, extranet.about] if extranet.about %></td>
         <td class="text-end">
