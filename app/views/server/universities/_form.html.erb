@@ -36,8 +36,10 @@
         <%= f.input :sso_target_url, required: true %>
         <%= f.input :sso_cert, required: true %>
         <%= f.input :sso_name_identifier_format, required: true %>
-
-        <%#= render 'sso_mapping', brand: brand %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <%= render 'sso_mapping', university: university %>
     </div>
   </div>
 
