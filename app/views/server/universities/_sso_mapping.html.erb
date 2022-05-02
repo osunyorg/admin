@@ -31,16 +31,7 @@
             <div class="form-group">
               <label for="" class="form-control-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
               <select v-model="field.internal_key" id="" class="form-select" required>
-
-                <option v-for="(value, label) in keys" v-model="value">{{ label }}{{ value }}</option>
-
-                <option value="email"><%= User.human_attribute_name('email') %></option>
-                <option value="first_name"><%= User.human_attribute_name('first_name') %></option>
-                <option value="last_name"><%= User.human_attribute_name('last_name') %></option>
-                <option value="role"><%= User.human_attribute_name('role') %></option>
-                <option value="mobile_phone"><%= User.human_attribute_name('mobile_phone') %></option>
-                <option value="language"><%= User.human_attribute_name('language') %></option>
-                <option value="picture_url"><%= User.human_attribute_name('picture_url') %></option>
+                <option v-for="(label, key) in keys" :value="key">{{ label }}</option>
               </select>
             </div>
             <div v-if="field.internal_key === 'role'">
