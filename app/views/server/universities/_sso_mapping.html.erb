@@ -26,7 +26,7 @@
         <div class="card-body">
           <div class="form-group">
             <label for="" class="form-control-label">SSO Key *</label>
-            <input 
+            <input
               v-model="field.sso_key"
               type="text" class="form-control">
           </div>
@@ -67,7 +67,7 @@
     },
     data() {
       return {
-        fields: <%= university.sso_mapping.to_json.html_safe || "[]" %>
+        fields: <%= university.sso_mapping.blank? ? '[]' : university.sso_mapping.to_json.html_safe %>
       }
     }
   });
