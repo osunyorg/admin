@@ -16,6 +16,7 @@ en:
         public_or_private: Public/private
         sms_sender_name: SMS sender name
         sso_cert: Certificate
+        sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         url: URL
