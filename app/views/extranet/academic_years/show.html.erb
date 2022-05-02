@@ -2,6 +2,10 @@
 
 <header class="mb-5">
   <h1><%= @academic_year %></h1>
+  <p>
+    <%= @alumni.count %>
+    <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
+  </p>
 </header>
 
 <div class="row">
