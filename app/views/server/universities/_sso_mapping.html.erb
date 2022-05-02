@@ -5,53 +5,54 @@
   <div class="spinner-border text-primary" role="status">
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
-
-  <draggable :list="fields" >
-    <div v-for="(field, index) in fields">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between pb-0">
-          1. {{ field.sso_key }} -> {{ field.internal_key}}
-          <a
-            v-on:click="fields.splice(fields.indexOf(field), 1)"
-            title="Remove field">
-             <i class="far fa-trash-alt"></i>
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="form-group">
-            <label for="" class="form-control-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
-            <input
-              v-model="field.sso_key"
-              type="text" class="form-control">
+  <div class="app-form">
+    <draggable :list="fields">
+      <div v-for="(field, index) in fields">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between pb-0">
+            1. {{ field.sso_key }} -> {{ field.internal_key}}
+            <a
+              v-on:click="fields.splice(fields.indexOf(field), 1)"
+              title="Remove field">
+              <i class="far fa-trash-alt"></i>
+            </a>
           </div>
-          <div class="form-group">
-            <label for="" class="form-control-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
-            <select v-model="field.internal_key" id="" class="form-select" required>
-              <option value="email">Email</option>
-              <option value="first_name">First Name</option>
-              <option value="last_name">Last Name</option>
-              <option value="role">Role</option>
-              <option value="phone">Phone</option>
-              <option value="language">Language</option>
-              <option value="picture_url">Picture URL</option>
-            </select>
-          </div>
-          <div v-if="field.internal_key === 'role'">
-            <% User.roles.keys.each do |role| %>
-              <div class="form-group">
-                <label for="" class="form-label"><%= role %></label>
-                <input v-model="field.roles.<%= role %>" type="text" class="form-control">
-              </div>
-            <% end %>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="" class="form-control-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
+              <input
+                v-model="field.sso_key"
+                type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="" class="form-control-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
+              <select v-model="field.internal_key" id="" class="form-select" required>
+                <option value="email">Email</option>
+                <option value="first_name">First Name</option>
+                <option value="last_name">Last Name</option>
+                <option value="role">Role</option>
+                <option value="phone">Phone</option>
+                <option value="language">Language</option>
+                <option value="picture_url">Picture URL</option>
+              </select>
+            </div>
+            <div v-if="field.internal_key === 'role'">
+              <% User.roles.keys.each do |role| %>
+                <div class="form-group">
+                  <label for="" class="form-label"><%= role %></label>
+                  <input v-model="field.roles.<%= role %>" type="text" class="form-control">
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </draggable>
+    </draggable>
 
-  <a v-on:click="fields.push({sso_key: 'email', internal_key: 'key', roles: {}})" class="btn btn-primary btn-sm">
-    <%= t 'add_field' %>
-  </a>
+    <a v-on:click="fields.push({sso_key: 'email', internal_key: 'key', roles: {}})" class="btn btn-primary btn-sm">
+      <%= t 'add_field' %>
+    </a>
+  </div>
 
   <textarea name="university[sso_mapping]" id="university_sso_mapping" rows="20" cols="200" class="d-none">
     {{ JSON.stringify(fields) }}
