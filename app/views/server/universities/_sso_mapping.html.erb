@@ -10,7 +10,7 @@
     <div v-for="(field, index) in fields">
       <div class="card">
         <div class="card-header d-flex justify-content-between pb-0">
-          1. {{ field.sso_key }} -> {{ field.internal_key}}
+          {{index + 1}}. {{ field.sso_key }} -> {{ field.internal_key}}
           <a
             v-on:click="fields.splice(fields.indexOf(field), 1)"
             title="Remove field">
