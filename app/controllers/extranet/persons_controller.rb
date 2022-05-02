@@ -4,9 +4,8 @@ class Extranet::PersonsController < Extranet::ApplicationController
                               through_association: :people
 
   def index
-    alumni = current_extranet.about&.alumni || @people.alumni
     @facets = University::Person::Alumnus::Facets.new params[:facets], {
-      model: alumni,
+      model: about&.alumni,
       about: current_extranet.about
     }
     @people = @facets.results

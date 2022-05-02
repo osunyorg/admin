@@ -4,4 +4,8 @@ class Extranet::ApplicationController < ApplicationController
   def breadcrumb
     add_breadcrumb t('home'), root_path
   end
+
+  def about
+    current_extranet.about || current_university
+  end
 end

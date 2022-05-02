@@ -4,7 +4,15 @@ class Extranet::CohortsController < Extranet::ApplicationController
                               through_association: :education_cohorts
 
   def index
-    @cohorts = current_extranet.about&.cohorts || @cohorts
+    @facets = Education::Cohort::Facets.new params[:facets], {
+      model: about.cohorts,
+      about: about
+    }
+    @cohorts = @facets.results
+                      .ordered
+                      .page(params[:page])
+                      .per(60)
+    @count = @cohorts.total_count
     breadcrumb
   end
 

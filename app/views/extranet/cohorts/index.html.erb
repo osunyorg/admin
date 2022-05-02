@@ -2,6 +2,17 @@
 
 <header class="mb-5">
   <h1><%= Education::Cohort.model_name.human(count: 2) %></h1>
+  <p>
+    <%= @count %>
+    <%= Education::Cohort.model_name.human(count: @count).downcase %>
+  </p>
 </header>
 
-<%= render 'extranet/cohorts/list', cohorts: @cohorts %>
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'faceted_search/facets', facets: @facets %>
+  </div>
+  <div class="col-md-8 offset-md-1">
+    <%= render 'extranet/cohorts/list', cohorts: @cohorts %>
+  </div>
+</div>

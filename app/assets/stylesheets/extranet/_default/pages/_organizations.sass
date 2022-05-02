@@ -1,0 +1,47 @@
+.organization
+    @include pseudo-top-border
+    align-items: center
+    min-height: 80px
+    &:last-child
+        @include pseudo-bottom-border
+        &::after
+            bottom: 0
+            top: auto
+    > div
+        @include make-col-ready
+        &:nth-child(1)
+            width: percentage(3/8)
+        &:nth-child(2)
+            width: percentage(2/8)
+        &:nth-child(3)
+            align-self: center
+            padding-bottom: 0
+            padding-top: 0
+            text-align: right
+            width: percentage(3/8)
+        p
+            margin-bottom: 0
+        img
+            max-height: 80px
+
+.organizations-show
+    .experiences
+        margin-top: px2rem(80)
+        ul
+            padding-left: 0
+            li
+                @include make-row
+                display: flex
+                > div
+                    @include make-col-ready
+                    &:nth-child(1)
+                        width: percentage(2/9)
+                    &:nth-child(2)
+                        @include pseudo-bottom-border
+                        @include pseudo-top-border
+                        display: flex
+                        justify-content: space-between
+                        padding-top: px2rem(20)
+                        text-align: right
+                        width: percentage(7/9)
+

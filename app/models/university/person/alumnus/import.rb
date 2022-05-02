@@ -34,11 +34,17 @@ class University::Person::Alumnus::Import < ApplicationRecord
       if Rails.env.development?
         # substitute local data for testing
         substitutes = {
-          'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55', # DUT MMI
-          'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '863b8c9c-1ed1-4af7-b92c-7264dfb6b4da', # MASTER IJBA
-          'f4d4a92f-8b8f-4778-a127-9293684666be' => '8dfaee2a-c876-4b1c-8e4e-8380d720c71f', # DU_BILINGUE
-          '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'be3cb0b2-7f66-4c5f-b8d7-6a39a0480c46', # DU_JRI
-          '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '56a50383-3ef7-43f6-8e98-daf279e86802' # DUT_JOURNALISME
+          # 'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55', # DUT MMI
+          # 'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '863b8c9c-1ed1-4af7-b92c-7264dfb6b4da', # MASTER IJBA
+          # 'f4d4a92f-8b8f-4778-a127-9293684666be' => '8dfaee2a-c876-4b1c-8e4e-8380d720c71f', # DU_BILINGUE
+          # '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'be3cb0b2-7f66-4c5f-b8d7-6a39a0480c46', # DU_JRI
+          # '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '56a50383-3ef7-43f6-8e98-daf279e86802' # DUT_JOURNALISME
+
+          'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '02e6f703-d15b-4841-ac95-3c47d88e21b5', # DUT MMI
+          'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '8fdfafb7-11fd-456c-9f47-7fd76dddb373', # MASTER IJBA
+          'f4d4a92f-8b8f-4778-a127-9293684666be' => 'fab9b86c-8872-4df5-9a97-0e30b104a837', # DU_BILINGUE
+          '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'cb1a26b9-fe5c-4ad1-9715-71cec4642910', # DU_JRI
+          '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '91c44fd2-f0a4-4189-a3f5-311322b7b472' # DUT_JOURNALISME
         }
         program_id = substitutes[program_id] if substitutes.has_key? program_id
       end

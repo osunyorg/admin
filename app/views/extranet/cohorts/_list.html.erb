@@ -1,19 +1,17 @@
 <% cohorts_paged = cohorts.ordered.page(params[:page]).per(60) %>
-<div class="row">
+<ul class="list">
   <% cohorts_paged.each do |cohort| %>
-    <div class="col-md-6">
-      <article class="card mb-4">
-        <div class="card-body">
-          <h2 class="mb-5">
-            <%= link_to cohort, cohort, class: 'stretched-link' %>
-          </h2>
-          <p class="text-end mb-0">
-            <%= cohort.people.count %>
-            <%= University::Person::Alumnus.model_name.human(count: cohort.people.count).downcase %>
-          </p>
-        </div>
-      </article>
-    </div>
+  <li>
+    <h2>
+        <%= link_to cohort.program, cohort, class: 'stretched-link' %>
+        <%#= link_to cohort, cohort, class: 'stretched-link' %>
+    </h2>
+    <p>
+      <%= cohort.academic_year.year %>
+      <%#= cohort.people.count %>
+      <%#= University::Person::Alumnus.model_name.human(count: cohort.people.count).downcase %>
+    </p>
+  </li>
   <% end %>
-</div>
+</ul>
 <%= paginate cohorts_paged, theme: 'bootstrap-5' %>

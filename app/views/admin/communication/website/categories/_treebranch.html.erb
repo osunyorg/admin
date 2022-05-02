@@ -1,6 +1,6 @@
 <% categories.each do |category| %>
   <li class="treeview__element js-treeview-element <%= 'treeview__element--empty' unless category.has_children? %>" data-id="<%= category.id %>" data-parent="<%= category.parent_id %>">
-    <div class="d-flex align-items-center treeview__label border-bottom p-1">
+    <div class="d-flex align-items-center treeview__label border-bottom py-1">
       <%= link_to children_admin_communication_website_category_path(website_id: category.website.id, id: category.id),
                   class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
         <span class="open_btn">
