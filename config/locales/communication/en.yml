@@ -111,8 +111,8 @@ en:
         description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
-        pinned: Pinned?
-        published: Published?
+        pinned: Pinned
+        published: Published
         published_at: Publication date
         slug: Slug
         text: Text
