@@ -56,6 +56,7 @@ class User < ApplicationRecord
   has_one_attached_deletable :picture  # In this order, "resize avatar" callback will be fired after the others.
   include WithUniversity
   include WithAuthentication
+  include WithOmniauth
   include WithPerson
   include WithRoles
   include WithSyncBetweenUniversities

@@ -5,6 +5,7 @@ fr:
         address: Adresse
         city: Ville
         country: Pays
+        has_sso: A un SSO ?
         identifier: Identifiant
         invoice_amount: Montant de facturation
         invoice_date: Date de facturation
@@ -14,6 +15,9 @@ fr:
         public: Public
         public_or_private: Public/privé
         sms_sender_name: Nom de l'expéditeur SMS
+        sso_cert: Certificat
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: URL cible
         url: 'URL'
         zipcode: Code postal
       university/person:
@@ -125,3 +129,4 @@ fr:
     person:
       administrator_roles: Rôles administratifs
       taught_programs: Formations enseignées
+    sso: SSO

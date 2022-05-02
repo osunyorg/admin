@@ -121,6 +121,9 @@ fr:
     already_registered: Déjà inscrit ?
     not_registered_yet: Pas encore inscrit ?
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
+    or: ou bien
+    sign_in_with_credentials: Se connecter avec ses identifiants
+    sign_in_with_sso: Se connecter en SSO
     subtitle: Vous devez être authentifié pour continuer
   menu:
     admin: Admin

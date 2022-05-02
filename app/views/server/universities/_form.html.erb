@@ -27,6 +27,20 @@
                   direct_upload: true %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="mt-5"><%= t('university.sso') %></h3>
+      <%= f.input :has_sso %>
+      <div id="sso-inputs">
+        <%= f.input :sso_target_url, required: true %>
+        <%= f.input :sso_cert, required: true %>
+        <%= f.input :sso_name_identifier_format, required: true %>
+
+        <%#= render 'sso_mapping', brand: brand %>
+    </div>
+  </div>
+
   <h3 class="mt-5"><%= t('university.invoice_informations') %></h3>
   <div class="row">
     <div class="col-md-4">
