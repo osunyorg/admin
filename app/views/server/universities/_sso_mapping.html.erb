@@ -12,42 +12,45 @@
   <draggable :list="fields" handle=".dragHandle">
     <div v-for="(field, index) in fields">
       <div class="card">
-        <div>
+        <div class="card-header d-flex justify-content-between pb-0">
           <a class="btn ps-0 pt-0 dragHandle">
             <i class="fa fa-bars handle"></i>
           </a>
+          <a class="btn btn-sm btn-danger ms-3"
+            v-on:click="fields.splice(fields.indexOf(field), 1)"
+            title="Remove field">
+            Supprimer
+            <i class="fas fa-times"></i>
+          </a>
         </div>
-        <div class="form-group">
-          <label for="" class="form-control-label">SSO Key *</label>
-          <input 
-            v-model="field.sso_key"
-            type="text" class="form-control">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="" class="form-control-label">SSO Key *</label>
+            <input 
+              v-model="field.sso_key"
+              type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="" class="form-control-label">Internal Key *</label>
+            <select v-model="field.internal_key" id="" class="form-select" required>
+              <option value="email">Email</option>
+              <option value="first_name">First Name</option>
+              <option value="last_name">Last Name</option>
+              <option value="role">Role*</option>
+              <option value="phone">Phone</option>
+              <option value="language">Language</option>
+              <option value="picture_url">Picture URL</option>
+            </select>
+          </div>
+          <div v-if="field.internal_key === 'role'">
+            <% User.roles.keys.each do |role| %>
+              <div class="form-group">
+                <label for="" class="form-label"><%= role %></label>
+                <input v-model="field.roles.<%= role %>" type="text" class="form-control">
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="" class="form-control-label">Internal Key *</label>
-          <select v-model="field.internal_key" id="" class="form-select" required>
-            <option value="email">Email</option>
-            <option value="first_name">First Name</option>
-            <option value="last_name">Last Name</option>
-            <option value="role">Role*</option>
-            <option value="phone">Phone</option>
-            <option value="language">Language</option>
-            <option value="picture_url">Picture URL</option>
-          </select>
-        </div>
-        <div v-if="field.internal_key === 'role'">
-          <% User.roles.keys.each do |role| %>
-            <div class="form-group">
-              <label for=""><%= role %></label>
-              <input v-model="field.roles.<%= role %>" type="text">
-            </div>
-          <% end %>
-        </div>
-        <a class="btn btn-sm btn-danger ms-3"
-          v-on:click="fields.splice(fields.indexOf(field), 1)"
-          title="Remove field">
-          <i class="fas fa-times"></i>
-        </a>
       </div>
     </div>
   </draggable>
