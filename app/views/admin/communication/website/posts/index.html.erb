@@ -15,16 +15,16 @@
         <div data-batch-selectable-role="actions-container">
           <div class="d-flex align-items-center">
             <div class="col-auto me-3">
-              Modifier la sélection
+              <%= t('batch_selectable.title') %>
             </div>
             <div class="col-auto me-3">
               <select name="published" class="form-select">
-                <option value="false">Non publiée</option>
-                <option value="true">Publiée</option>
+                <option value="false"><%= t('communication.website.posts.unpublished') %></option>
+                <option value="true"><%= t('communication.website.posts.published') %></option>
               </select>
             </div>
             <div class="col-auto me-3">
-              <input type="submit" value="Enregistrer" class="btn btn-primary">
+              <%= submit_tag t("save"), class: "btn btn-primary" %>
             </div>
           </div>
         </div>
