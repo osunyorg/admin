@@ -10,7 +10,7 @@
     <% organizations.each do |organization| %>
       <tr>
         <td><%= link_to organization, admin_university_organization_path(organization) %></td>
-        <td><%= organization.kind_i18n %></td>
+        <td><span class="badge bg-secondary"><%= organization.kind_i18n %></span></td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= edit_link organization %>
