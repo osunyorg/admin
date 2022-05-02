@@ -79,6 +79,7 @@ class University::Organization < ApplicationRecord
       dependencies.concat active_storage_blobs
     end
     dependencies += website.menus.to_a
+    dependencies += dependencies_through_blocks(website) if in_block_dependencies?(website)
     dependencies
   end
 

@@ -172,6 +172,7 @@ class University::Person < ApplicationRecord
     dependencies << researcher if researcher.for_website?(website)
     dependencies << teacher if teacher.for_website?(website)
     dependencies += website.menus.to_a
+    dependencies += dependencies_through_blocks(website) if in_block_dependencies?(website)
     dependencies
   end
 

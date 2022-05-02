@@ -84,6 +84,13 @@ module WithGit
     end
   end
 
+  def dependencies_through_blocks(website)
+    # We select all blocks having this object as dependency
+    blocks = website.blocks.select { |block| in? block.git_dependencies }
+    # We map them to their parent object (program, page, etc.)
+    blocks.map(&:about).uniq.compact
+  end
+
   def websites_for_self
     if is_a? Communication::Website
       [self]

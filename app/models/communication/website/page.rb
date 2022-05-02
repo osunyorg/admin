@@ -116,6 +116,7 @@ class Communication::Website::Page < ApplicationRecord
                     git_block_dependencies
     dependencies += website.education_programs if kind_education_programs?
     dependencies += [parent] if has_parent?
+    dependencies += [website.config_permalinks] if is_special_page?
     dependencies
   end
 
