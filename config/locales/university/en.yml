@@ -5,6 +5,7 @@ en:
         address: Address
         city: City
         country: Country
+        has_sso: Has SSO?
         identifier: Identifier
         invoice_amount: Invoice amount
         invoice_date: Invoice date
@@ -14,6 +15,9 @@ en:
         public: Public
         public_or_private: Public/private
         sms_sender_name: SMS sender name
+        sso_cert: Certificate
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: Target URL
         url: URL
         zipcode: Zipcode
       university/person:
@@ -125,3 +129,4 @@ en:
     person:
       administrator_roles: Administrator roles
       taught_programs: Taught programs
+    sso: SSO

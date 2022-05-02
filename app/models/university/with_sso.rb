@@ -2,7 +2,10 @@ module University::WithSso
   extend ActiveSupport::Concern
 
   included do
-    enum sso_provider: { saml: 0, oauth2: 10 }, _prefix: :with_sso_via
+    enum sso_provider: { saml: 0 }, _prefix: :with_sso_via
+
+    validates :sso_cert, :sso_name_identifier_format, :sso_target_url, presence: true, if: :has_sso?
+
   end
 
   # Setter to serialize data as JSON
