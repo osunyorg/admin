@@ -57,6 +57,11 @@
             <h2 class="card-title"><%= t('communication.authors', count: 2) %></h2>
           </div>
           <%= render 'admin/communication/website/authors/list', authors: @authors %>
+          <% if @authors.total_pages > 1 %>
+            <div class="card-footer">
+              <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
+            </div>
+          <% end %>
         </div>
       </div>
   </div>
