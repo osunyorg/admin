@@ -111,6 +111,7 @@ en:
   hello: "Hello %{name}!"
   home: Home
   import: Import
+  inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
   languages:
     en: English
     fr: French

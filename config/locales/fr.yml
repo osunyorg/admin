@@ -111,6 +111,7 @@ fr:
   hello: "Bonjour %{name} !"
   home: Accueil
   import: Importer
+  inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
   languages:
     en: Anglais
     fr: Français
