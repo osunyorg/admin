@@ -14,7 +14,9 @@
       <div v-for="(field, index) in fields">
         <div class="card">
           <div class="card-header d-flex justify-content-between pb-0">
-            {{index + 1}}. {{ field.sso_key }} -> {{ keys[field.internal_key]}}
+            <a data-bs-toggle="collapse" href="#sso_mapping_collapse_{{index}}">
+              {{index + 1}}. {{ field.sso_key }} -> {{ keys[field.internal_key]}}
+            </a>
             <a
               v-on:click="fields.splice(fields.indexOf(field), 1)"
               title="Remove field">
@@ -22,34 +24,36 @@
             </a>
           </div>
           <div class="card-body">
-            <div class="form-group">
-              <label for="" class="form-control-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
-              <input
-                v-model="field.sso_key"
-                type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="" class="form-control-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
-              <select v-model="field.internal_key" id="" class="form-select" required>
+            <div class="collapse" id="sso_mapping_collapse_{{index}}">
+              <div class="form-group">
+                <label for="" class="form-control-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
+                <input
+                  v-model="field.sso_key"
+                  type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="" class="form-control-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
+                <select v-model="field.internal_key" id="" class="form-select" required>
 
-                <option v-for="(value, label) in keys" v-model="value">{{ label }}{{ value }}</option>
+                  <option v-for="(value, label) in keys" v-model="value">{{ label }}{{ value }}</option>
 
-                <option value="email"><%= User.human_attribute_name('email') %></option>
-                <option value="first_name"><%= User.human_attribute_name('first_name') %></option>
-                <option value="last_name"><%= User.human_attribute_name('last_name') %></option>
-                <option value="role"><%= User.human_attribute_name('role') %></option>
-                <option value="mobile_phone"><%= User.human_attribute_name('mobile_phone') %></option>
-                <option value="language"><%= User.human_attribute_name('language') %></option>
-                <option value="picture_url"><%= User.human_attribute_name('picture_url') %></option>
-              </select>
-            </div>
-            <div v-if="field.internal_key === 'role'">
-              <% User.roles.keys.each do |role| %>
-                <div class="form-group">
-                  <label for="" class="form-label"><%= t("activerecord.attributes.user.roles.#{role}") %></label>
-                  <input v-model="field.roles.<%= role %>" type="text" class="form-control">
-                </div>
-              <% end %>
+                  <option value="email"><%= User.human_attribute_name('email') %></option>
+                  <option value="first_name"><%= User.human_attribute_name('first_name') %></option>
+                  <option value="last_name"><%= User.human_attribute_name('last_name') %></option>
+                  <option value="role"><%= User.human_attribute_name('role') %></option>
+                  <option value="mobile_phone"><%= User.human_attribute_name('mobile_phone') %></option>
+                  <option value="language"><%= User.human_attribute_name('language') %></option>
+                  <option value="picture_url"><%= User.human_attribute_name('picture_url') %></option>
+                </select>
+              </div>
+              <div v-if="field.internal_key === 'role'">
+                <% User.roles.keys.each do |role| %>
+                  <div class="form-group">
+                    <label for="" class="form-label"><%= t("activerecord.attributes.user.roles.#{role}") %></label>
+                    <input v-model="field.roles.<%= role %>" type="text" class="form-control">
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
