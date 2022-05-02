@@ -80,6 +80,7 @@ en:
       communication/website/menu:
         identifier: Identifier
         title: Title
+        items: Items
       communication/website/menu/item:
         about: Target
         children: Children items

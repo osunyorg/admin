@@ -18,5 +18,5 @@
       <% end %>
     </h2>
   </div>
-  <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent %>
+  <%= render 'admin/communication/website/posts/list', posts: @website.posts.recent, hide_author: true, hide_category: true %>
 </div>

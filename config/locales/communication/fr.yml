@@ -80,6 +80,7 @@ fr:
       communication/website/menu:
         identifier: Identifiant
         title: Titre
+        items: Éléments
       communication/website/menu/item:
         about: Cible
         children: Sous-éléments

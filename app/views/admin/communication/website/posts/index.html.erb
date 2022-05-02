@@ -30,6 +30,35 @@
       </div>
     <% end %>
   </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="float-end">
+            <%= create_link Communication::Website::Category %>
+          </div>
+          <h2 class="card-title">
+            <%= Communication::Website::Category.model_name.human(count: 2) %>
+          </h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
+              data-id=""
+              data-sort-url="<%= reorder_admin_communication_website_categories_path %>">
+            <%= render 'admin/communication/website/categories/treebranch', categories: @root_categories %>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><%= t('communication.authors', count: 2) %></h2>
+          </div>
+          <%= render 'admin/communication/website/authors/list', authors: @authors %>
+        </div>
+      </div>
+  </div>
 
 <% end %>
 

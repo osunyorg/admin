@@ -12,6 +12,10 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def index
     @posts = apply_scopes(@posts).ordered.page params[:page]
+    @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
+                                .ordered
+                                .page(params[:page])
+    @root_categories = @website.categories.root.ordered
     breadcrumb
   end
 

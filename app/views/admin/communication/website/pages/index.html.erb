@@ -1,4 +1,4 @@
-<% content_for :title, "#{Communication::Website::Page.model_name.human(count: 2)} (#{@website.pages.count})" %>
+<% content_for :title, "#{t('admin.communication.website.pages.structure')} (#{@website.pages.count})" %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">
