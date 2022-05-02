@@ -113,7 +113,7 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         pinned: Pinned
-        published: Published
+        published: Published?
         published_at: Publication date
         slug: Slug
         text: Text
@@ -303,6 +303,9 @@ en:
             title: Educational team
       posts:
         new_curation: New curation
+        published: Published
+        successful_batch_update: Posts have been updated succesfully
+        unpublished: Unpublished
       see_all: See the full list (%{number} elements)
   enums:
     communication:

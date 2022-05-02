@@ -3,7 +3,7 @@ module User::WithAuthentication
 
   included do
     devise  :database_authenticatable, :registerable, :recoverable, :rememberable,
-            :timeoutable, :confirmable, :trackable, :lockable, :two_factor_authenticatable
+            :timeoutable, :confirmable, :trackable, :lockable, :two_factor_authenticatable, :omniauthable, omniauth_providers: [:saml]
             # note : i do not use :validatable because of the non-uniqueness of the email. :validatable is replaced by the validation sequences below
 
 

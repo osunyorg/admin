@@ -113,7 +113,7 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         pinned: Mis en avant
-        published: Publié
+        published: Publié ?
         published_at: Date de publication
         slug: Slug
         text: Texte
@@ -305,7 +305,9 @@ fr:
             title: Équipe pédagogique
       posts:
         new_curation: Nouvelle curation
+        published: Publiée
         successful_batch_update: Les actualités ont bien été mises à jour
+        unpublished: Non publiée
       see_all: Voir la liste complète (%{number} éléments)
   enums:
     communication:

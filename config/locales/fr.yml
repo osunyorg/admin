@@ -56,6 +56,8 @@ fr:
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."
+  batch_selectable:
+    title: Modifier la sélection
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
@@ -119,6 +121,9 @@ fr:
     already_registered: Déjà inscrit ?
     not_registered_yet: Pas encore inscrit ?
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
+    or: ou bien
+    sign_in_with_credentials: Se connecter avec ses identifiants
+    sign_in_with_sso: Se connecter en SSO
     subtitle: Vous devez être authentifié pour continuer
   menu:
     admin: Admin

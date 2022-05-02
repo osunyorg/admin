@@ -59,6 +59,10 @@ class Server::UniversitiesController < Server::ApplicationController
   end
 
   def university_params
-    params.require(:university).permit(:name, :address, :zipcode, :city, :country, :private, :identifier, :logo, :logo_delete, :sms_sender_name, :invoice_date, :invoice_amount)
+    params.require(:university).permit(:name,
+      :address, :zipcode, :city, :country,
+      :private, :identifier, :logo, :logo_delete, :sms_sender_name,
+      :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format,
+      :invoice_date, :invoice_amount)
   end
 end
