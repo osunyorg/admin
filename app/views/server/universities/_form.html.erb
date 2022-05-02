@@ -28,16 +28,19 @@
     </div>
   </div>
 
+  <h3 class="mt-5"><%= t('university.sso') %></h3>
   <div class="row">
     <div class="col-md-6">
-      <h3 class="mt-5"><%= t('university.sso') %></h3>
       <%= f.input :has_sso %>
       <div id="sso-inputs">
         <%= f.input :sso_target_url, required: true %>
         <%= f.input :sso_cert, required: true %>
         <%= f.input :sso_name_identifier_format, required: true %>
-
-        <%#= render 'sso_mapping', brand: brand %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+      <%= render 'sso_mapping', university: university %>
     </div>
   </div>
 

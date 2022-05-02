@@ -62,7 +62,7 @@ class Server::UniversitiesController < Server::ApplicationController
     params.require(:university).permit(:name,
       :address, :zipcode, :city, :country,
       :private, :identifier, :logo, :logo_delete, :sms_sender_name,
-      :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format,
+      :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping,
       :invoice_date, :invoice_amount)
   end
 end
