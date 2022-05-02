@@ -37,16 +37,14 @@ module User::WithOmniauth
     end
 
     def self.update_data_for_mapping_element_standard(user, mapping_element, sso_value)
-      case mapping_element['type']
-      when 'text'
-        user[mapping_element['internal_key']] = sso_value.first
-      when 'select'
-        value = mapping_element['values'].select { |val| val['sso_value'] == sso_value.first }
-        user[mapping_element['internal_key']] = value.first&.dig('internal_value')
-      when 'newsletter'
-          user.optin_newsletter_basic = '1' if mapping_element['values'].first['sso_value'] == sso_value.first
+      case mapping_element['internal_key']
       when 'language'
         user = self.set_best_id_for(user, mapping_element['type'], sso_value.first)
+      when 'role'
+        value = mapping_element['roles'].select { |key, val| val == sso_value.first }.first&.first
+        user['role'] = value if value
+      else
+        user[mapping_element['internal_key']] = sso_value.first
       end
       user
     end
