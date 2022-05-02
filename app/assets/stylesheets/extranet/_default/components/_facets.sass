@@ -15,12 +15,6 @@
                 display: inline-block
                 padding: 0
                 vertical-align: middle
-        .form-check-input[type="checkbox"]
-            border-color: $primary
-            border-radius: 0
-            height: 0.65em
-            margin-top: 0.5em
-            width: 0.65em
 
 .faceted__facets
     > li
@@ -29,6 +23,16 @@
             display: block
             margin-bottom: px2rem(10)
 .faceted__facet
+    
+    &__checkboxes
+        input[type="checkbox"]
+            @extend .form-check-input
+            border-color: $primary
+            border-radius: 0
+            height: 0.65em
+            margin-top: 0.5em
+            padding: 0
+            width: 0.65em
     &__text
         display: flex
     &__list
@@ -46,3 +50,6 @@
             padding: 2px 7px
             &--selected
                 background: $btn-facet-background-active
+    &__reinit a
+        @extend .btn
+        @extend .btn-primary

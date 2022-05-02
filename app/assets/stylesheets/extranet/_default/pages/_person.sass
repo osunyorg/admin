@@ -19,16 +19,23 @@
                     @include make-col-ready
                     padding-bottom: px2rem(10)
                     padding-top: px2rem(10)
-                    &:nth-child(1)
-                        width: percentage(4/9)
-                    &:nth-child(2)
-                        width: percentage(2/9)
                     &:nth-child(3)
                         align-self: center
                         padding-bottom: 0
                         padding-top: 0
                         text-align: right
-                        width: percentage(3/9)
+                    @include media-breakpoint-up(md)
+                        &:nth-child(1)
+                            width: percentage(4/9)
+                        &:nth-child(2)
+                            width: percentage(2/9)
+                        &:nth-child(2)
+                            width: percentage(3/9)
+                    @include media-breakpoint-down(md)
+                        &:nth-child(2)
+                            width: 50%
+                        &:nth-child(3)
+                            width: 50%
                 &:last-child
                     @include pseudo-bottom-border
                 img

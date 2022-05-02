@@ -1,7 +1,7 @@
 @mixin pseudo-top-border($pseudo: before)
     position: relative
     &::#{$pseudo}
-        border-top: 1px solid $primary
+        border-top: 1px solid $light-border-color
         content: ''
         left: $grid-gutter-width  * .5
         position: absolute

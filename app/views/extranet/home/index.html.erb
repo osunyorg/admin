@@ -42,9 +42,13 @@
 
   <div class="col-md-4">
     <h2>Promotions actuelles</h2>
-    <p><%= link_to 'Voir toutes les promotions', education_cohorts_path %></p>
-    <% @cohorts.each do |cohort| %>
-      <%= link_to cohort, cohort %><br>
-    <% end %>
+    <ul class="promotions">
+      <% @cohorts.each do |cohort| %>
+        <li>
+          <%= link_to cohort, cohort %>
+          <b><%= cohort.academic_year %></b>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

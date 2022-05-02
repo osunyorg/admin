@@ -41,7 +41,8 @@
               <p><b><%= experience.person.name %></b></p>
               <p>
                 <%= experience.description %><br>
-                <%= experience.from_year %> - <%= experience.to_year %>
+                <%# // TODO : pretty way to avoid empty dash " - " %>
+                <%= [experience.from_year, experience.to_year].join(" - ") %>
               </p>
             </div>
           </li>
