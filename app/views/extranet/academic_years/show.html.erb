@@ -4,11 +4,17 @@
   <h1><%= @academic_year %></h1>
 </header>
 
-<h2 class="mb-4">
-  <%= @cohorts.count %>
-  <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
-</h2>
-<%= render 'extranet/cohorts/list', cohorts: @cohorts %>
+<div class="row">
+  <div class="col-lg-4">
+    <h2 class="mb-4">
+      <%= @cohorts.count %>
+      <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
+    </h2>
+  </div>
+  <div class="col-lg-8">
+    <%= render 'extranet/cohorts/list', cohorts: @cohorts %>
+  </div>
+</div>
 
 <h2 class="mt-5 mb-4">
   <%= @alumni.count %>
