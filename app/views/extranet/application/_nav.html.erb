@@ -1,8 +1,13 @@
-<nav class="navbar navbar-light">
+<nav class="navbar navbar-light navbar-expand-md">
   <div class="container">
     <a class="navbar-brand" href="/">
       <%= render 'logo' %>
     </a>
-    <%= render_navigation %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle menu">
+      menu <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <%= render_navigation %>
+    </div>
   </div>
 </nav>
