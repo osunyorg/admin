@@ -111,8 +111,8 @@ fr:
         description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        pinned: Mis en avant ?
-        published: Publié ?
+        pinned: Mis en avant
+        published: Publié
         published_at: Date de publication
         slug: Slug
         text: Texte

@@ -22,7 +22,6 @@
       <% unless hide_category %>
         <th><%= Communication::Website::Post.human_attribute_name('categories') %></th>
       <% end %>
-      <th><%= Communication::Website::Post.human_attribute_name('pinned') %></th>
       <th colspan="2"><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
     </tr>
   </thead>
@@ -51,8 +50,12 @@
             </ul>
           </td>
         <% end %>
-        <td><small><%= t post.pinned %></small></td>
-        <td><small><%= l post.published_at, format: :date_with_explicit_month if post.published_at %></small></td>
+        <td>
+          <%= l post.published_at, format: :date_with_explicit_month if post.published_at %>
+          <% if post.pinned %>
+            <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
+          <% end %>
+        </td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
