@@ -125,8 +125,10 @@ en:
           non_profit: Association
           government: Government
   university:
+    internal_key: Internal Key
     invoice_informations: Invoice informations
     person:
       administrator_roles: Administrator roles
       taught_programs: Taught programs
     sso: SSO
+    sso_key: SSO Key
