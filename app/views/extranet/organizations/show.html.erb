@@ -1,16 +1,72 @@
 <% content_for :title, @organization %>
+<div class="row mb-5 top">
+  <div class="col-md-9">
+    <header>
+      <h1><%= @organization %></h1>
+      <% if @organization.url %>
+        <p><small><%= link_to @organization.url, @organization.url %></small></p>
+      <% end %>
+    </header>
+  </div>
+  <div class="col-md-3">
+    <% if @organization.logo.attached? %>
+      <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid' %>
+    <% else %>
+      <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+    <% end %>
+  </div>
+</div>
 
-<header class="mb-5">
-  <h1><%= @organization %></h1>
-</header>
 
-<ul>
-  <% @organization.experiences.ordered.each do |experience| %>
-    <li>
-      <%= link_to experience.person, experience.person %>
-      <%= experience.description %>
-      <%= experience.from_year %>
-      <%= experience.to_year %>
-    </li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-9">
+    <div class="biography">
+      <p><%= @organization.text %></p>
+    </div>
+    <div class="experiences">
+      <p class="mb-4">Alumni dans cette organisation (<%= @organization.experiences.count %>)</p>
+      <ul>
+          <% @organization.experiences.ordered.each do |experience| %>
+          <li class="mb-3">
+            <div>
+              <%= link_to experience.person, class: "stretched-link" do %>
+                <% if experience.person.picture.attached? %>
+                  <%= kamifusen_tag experience.person.picture, width: 200, class: 'img-fluid' %>
+                <% else %>
+                  <%= image_tag 'extranet/avatar.png', width: 200, class: 'img-fluid' %>
+                <% end %>
+              <% end %>
+            </div>
+            <div>
+              <p><b><%= experience.person.name %></b></p>
+              <p>
+                <%= experience.description %><br>
+                <%= experience.from_year %> - <%= experience.to_year %>
+              </p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <dl>
+        <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
+        <dd><%= @organization.kind %></dd>
+      <% if @organization.phone.present? %>
+        <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
+        <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
+      <% end %>
+      <% if @organization.email.present? %>
+        <dt><%= University::Organization.human_attribute_name(:email) %></dt>
+        <dd><a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer"><%= @organization.email %></a></dd>
+      <% end %>
+      <% if @organization.url.present? %>
+        <dt><%= University::Organization.human_attribute_name(:url) %></dt>
+        <dd>
+          <%= link_to @organization.url, @organization.url %>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+</div>

@@ -15,7 +15,7 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
       habtm: true
     }
 
-    filter_with_list :diploma_programs, {
+    filter_with_checkboxes :diploma_programs, {
       source: @about.programs.ordered,
       title: Education::Program.model_name.human(count: 2),
       habtm: true

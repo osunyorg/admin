@@ -1,27 +1,35 @@
 <footer class="pt-5">
-  <div class="container text-center">
-    <div class="mb-5">
+  <div class="container">
+    <div class="footer-logo pb-5 mb-5 text-center">
       <%= render 'logo' %>
     </div>
-    <nav class="nav justify-content-center">
-      <%= link_to t('terms_of_service'),
-                  t('terms_of_service_url'),
-                  class: 'nav-link',
-                  target: '_blank',
-                  rel: 'noreferrer' %>
-      <%= link_to t('privacy_policy'),
-                  t('privacy_policy_url'),
-                  class: 'nav-link',
-                  target: '_blank',
-                  rel: 'noreferrer' %>
-      <%= link_to t('cookies_policy'),
-                  t('cookies_policy_url'),
-                  class: 'nav-link',
-                  target: '_blank',
-                  rel: 'noreferrer' %>
-      <%= link_to t('cookies_consent_choice'),
-                  '',
-                  class: 'nav-link js-gdpr__cookie_consent__display_again' %>
-    </nav>
+    <div class="row justify-space-between">
+      <address class="col-md-6" itemscope itemtype="https://schema.org/CollegeOrUniversity">
+        <span itemprop="name">Institut de Journalisme Bordeaux Aquitaine</span>
+        <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">1 rue Jacques Ellul</span><br>
+          <span itemprop="postalCode">33000</span><span itemprop="addressLocality">Bordeaux</span><br>
+        </div>
+      </address>
+
+      <nav class="text-end col-md-6">
+        <%= link_to t('terms_of_service'),
+                    t('terms_of_service_url'),
+                    target: '_blank',
+                    rel: 'noreferrer' %>
+        <%= link_to t('privacy_policy'),
+                    t('privacy_policy_url'),
+                    target: '_blank',
+                    rel: 'noreferrer' %>
+        <%= link_to t('cookies_policy'),
+                    t('cookies_policy_url'),
+                    target: '_blank',
+                    rel: 'noreferrer' %>
+        <%= link_to t('cookies_consent_choice'),
+                    '',
+                    class: 'js-gdpr__cookie_consent__display_again' %>
+      </nav>
+    </div>
+    
   </div>
 </footer>

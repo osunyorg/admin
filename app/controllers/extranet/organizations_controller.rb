@@ -4,7 +4,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
                               through_association: :organizations
 
   def index
-    @organizations = current_extranet.about&.alumni_organizations || @organizations
+    @organizations = about&.alumni_organizations
     @organizations = @organizations.ordered.page(params[:page])
     @count = @organizations.total_count
     breadcrumb

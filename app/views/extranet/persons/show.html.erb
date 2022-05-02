@@ -1,9 +1,9 @@
 <% content_for :title, @person %>
 
-<div class="row mb-5">
+<div class="row mb-5 top">
   <div class="col-md-9">
-    <header style="height: 100%">
-      <h1><%= @person %></h1>
+    <header>
+      <h1><%= @person.first_name %> <b><%= @person.last_name %></b></h1>
     </header>
   </div>
   <div class="col-md-3">
@@ -16,20 +16,44 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
-    <p><%= @person.biography %></p>
-    <ul>
-      <% @person.experiences.ordered.each do |experience| %>
-        <li>
-          <%= experience.description %>
-          <%= experience.from_year %>
-          <%= experience.to_year %>
-          <%= link_to experience.organization, experience.organization %>
-        </li>
+  <div class="col-md-9">
+    <div class="biography">
+      <p><%= @person.biography %></p>
+    </div>
+    <% if @person.experiences %>
+      <div class="experiences">
+        <p class="mb-4">Parcours professionel</p>
+        <ul>
+          <% @person.experiences.ordered.each do |experience| %>
+            <li>
+              <div>
+                <p><b><%= experience.description %></b></p>
+                <p class="mb-0"><%= experience.from_year %> - <%= experience.to_year %></p>
+              </div>
+              <div>
+                <% if experience.organization.present? %>
+                  <p><%= link_to experience.organization, experience.organization %></p>
+                  <% if experience.organization.url %>
+                    <p class="mb-0"><small><%= link_to experience.organization.url, experience.organization.url %></small></p>
+                  <% end %>
+                <% end %>
+              </div>
+              <div>
+                <% if experience.organization.present? %>
+                  <% if experience.organization.logo.attached? %>
+                      <%= link_to experience.organization do %>
+                        <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
+                      <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
       <% end %>
-    </ul>
   </div>
-  <div class="offset-md-3 col-md-3">
+  <div class="col-md-3">
     <dl>
       <% @person.cohorts.each do |cohort| %>
         <dt><%= cohort.program %></dt>
@@ -70,3 +94,4 @@
     </dl>
   </div>
 </div>
+

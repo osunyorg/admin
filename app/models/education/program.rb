@@ -115,6 +115,8 @@ class Education::Program < ApplicationRecord
 
   has_many   :cohorts,
              class_name: 'Education::Cohort'
+  has_many   :education_cohorts,
+             class_name: 'Education::Cohort'
 
   has_many   :alumni,
              through: :cohorts,
@@ -125,7 +127,7 @@ class Education::Program < ApplicationRecord
              class_name: 'University::Person::Experience',
              through: :alumni,
              source: :experiences
-  alias_attribute :experiences, :alumni_experiences
+             alias_attribute :experiences, :alumni_experiences
 
   has_many   :alumni_organizations,
              -> { distinct },
@@ -133,16 +135,22 @@ class Education::Program < ApplicationRecord
              through: :alumni_experiences,
              source: :organization
 
-  has_many   :academic_years,
-             through: :cohorts
+  has_many   :education_academic_years,
+             -> { distinct },
+             class_name: 'Education::AcademicYear',
+             through: :cohorts,
+             source: :academic_year
+             alias_attribute :academic_years, :education_academic_years
 
-   # Dénormalisation des alumni pour le faceted search
-   has_and_belongs_to_many   :university_people,
-                             class_name: 'University::Person',
-                             foreign_key: 'education_program_id',
-                             association_foreign_key: 'university_person_id'
+  # Dénormalisation des alumni pour le faceted search
+  has_and_belongs_to_many :university_people,
+                          class_name: 'University::Person',
+                          foreign_key: 'education_program_id',
+                          association_foreign_key: 'university_person_id'
 
-  accepts_nested_attributes_for :university_person_involvements, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :university_person_involvements,
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   enum level: {
     not_applicable: 0,
