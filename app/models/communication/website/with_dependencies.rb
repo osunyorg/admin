@@ -26,7 +26,11 @@ module Communication::Website::WithDependencies
   end
 
   def blocks
-    @blocks ||= Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
+    @blocks ||= begin
+      blocks = Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
+      blocks = blocks.or(Communication::Block.where(about_type: 'Education::Program', about_id: education_programs)) if has_education_programs?
+      blocks
+    end
   end
 
   def blocks_dependencies
