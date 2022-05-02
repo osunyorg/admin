@@ -1,0 +1,77 @@
+<%# Include vue.js before call Vue.createApp %>
+<%= javascript_include_tag 'vue' %>
+
+<div id="app" v-cloak>
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only"><%= t 'loading' %></span>
+  </div>
+  <a v-on:click="fields.push({sso_key: '', internal_key: '', roles: {}})">
+    <%= t '.add_field' %>
+  </a>
+
+  <draggable :list="fields" handle=".dragHandle">
+    <div v-for="(field, index) in fields">
+      <div class="card">
+        <div>
+          <a class="btn ps-0 pt-0 dragHandle">
+            <i class="fa fa-bars handle"></i>
+          </a>
+        </div>
+        <div class="form-group">
+          <label for="" class="form-control-label">SSO Key *</label>
+          <input 
+            v-model="field.sso_key"
+            type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="" class="form-control-label">Internal Key *</label>
+          <select v-model="field.internal_key" id="" class="form-select" required>
+            <option value="email">Email</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="role">Role*</option>
+            <option value="phone">Phone</option>
+            <option value="language">Language</option>
+            <option value="picture_url">Picture URL</option>
+          </select>
+        </div>
+        <div v-if="field.internal_key === 'role'">
+          <% User.roles.keys.each do |role| %>
+            <div class="form-group">
+              <label for=""><%= role %></label>
+              <input v-model="field.roles.<%= role %>" type="text">
+            </div>
+          <% end %>
+        </div>
+        <a class="btn btn-sm btn-danger ms-3"
+          v-on:click="fields.splice(fields.indexOf(field), 1)"
+          title="Remove field">
+          <i class="fas fa-times"></i>
+        </a>
+      </div>
+    </div>
+  </draggable>
+
+  <textarea name="university[sso_mapping]" id="university_sso_mapping" rows="20" cols="200">
+    {{ JSON.stringify(fields) }}
+  </textarea>
+</div>
+
+<script>
+  var app = Vue.createApp({
+    components: {
+      draggable: VueDraggableNext.VueDraggableNext,
+    },
+    data() {
+      return {
+        fields: <%= university.sso_mapping.to_json.html_safe || "[]" %>
+      }
+    }
+  });
+
+  window.addEventListener('load', function(){
+    setTimeout(function() {
+      app.mount('#app');
+    }, 1000);
+  });
+</script>
