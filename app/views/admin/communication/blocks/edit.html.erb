@@ -6,7 +6,7 @@
 %>
 <div id="app" v-cloak>
   <div class="spinner-border text-primary" role="status">
-    <span class="sr-only">Loading...</span>
+    <span class="sr-only"><%= t 'loading' %></span>
   </div>
   <%= simple_form_for [:admin, @block] do |f| %>
     <div class="row">

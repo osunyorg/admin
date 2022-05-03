@@ -16,6 +16,7 @@ en:
         public_or_private: Public/private
         sms_sender_name: SMS sender name
         sso_cert: Certificate
+        sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         url: URL
@@ -125,8 +126,10 @@ en:
           non_profit: Association
           government: Government
   university:
+    internal_key: Internal Key
     invoice_informations: Invoice informations
     person:
       administrator_roles: Administrator roles
       taught_programs: Taught programs
     sso: SSO
+    sso_key: SSO Key

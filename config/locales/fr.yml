@@ -38,6 +38,7 @@ fr:
         one: Utilisateur·rice
         other: Utilisateur·rice·s
   add: Ajouter
+  add_field: Ajouter un champ
   admin:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
