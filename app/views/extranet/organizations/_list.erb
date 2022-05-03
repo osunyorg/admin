@@ -6,12 +6,5 @@
     <div>
         <p><small><%= link_to organization.url, organization.url if organization.url %></small></p>
     </div>
-    <% if organization.logo.attached? %>
-      <div>
-        <%= link_to organization do %>
-          <%= kamifusen_tag organization.logo, height: 80, class: 'img-fluid' %>
-        <% end %>
-      </div>
-    <% end %>
   </div>
 <% end %>

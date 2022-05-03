@@ -22,11 +22,13 @@
             <div>
               <div>
                 <p class="mb-md-0">
-                  <%= experience.person.first_name %> <b><%= experience.person.last_name %></b>
+                  <%= experience.person.first_name %> <%= experience.person.last_name %>
                   <br>
-                  <%= experience.description %> — <%= experience.organization %>
+                  <%= experience.description %>
+                  <%= '—' if experience.description.present? && experience.organization.present? %> 
+                  <%= experience.organization %>
                 </p>
-                <small><%= experience.created_at %></small>
+                <small><%= l experience.created_at.to_date, format: :long %></small>
               </div>
               <% if experience.organization.present? %>
                 <% if experience.organization.logo.attached? %>

@@ -4,8 +4,14 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
                               through_association: :organizations
 
   def index
-    @organizations = about&.alumni_organizations
-    @organizations = @organizations.ordered.page(params[:page])
+    @facets = University::Organization::Facets.new params[:facets], {
+      model: about&.alumni_organizations,
+      about: about
+    }
+    @organizations = @facets.results
+                      .ordered
+                      .page(params[:page])
+                      .per(60)
     @count = @organizations.total_count
     breadcrumb
   end
