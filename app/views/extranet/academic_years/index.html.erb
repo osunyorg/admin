@@ -20,11 +20,11 @@
           <%= link_to year, year, class: 'stretched-link' %>
         </b>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-6">
         <%= alumni.count %>
         <%= University::Person::Alumnus.model_name.human(count: alumni.count).downcase %>
       </div>
-      <div class="col-md-3 text-end">
+      <div class="col-md-3 col-6 text-end">
         <%= cohorts.count %>
         <%= Education::Cohort.model_name.human(count: cohorts.count).downcase %>
       </div>
