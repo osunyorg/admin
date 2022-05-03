@@ -1,12 +1,10 @@
 <% @organizations.each do |organization| %>
-  <div class="organization row">
+  <div class="organization">
     <div>
       <p><%= link_to organization, organization %></p>
     </div>
     <div>
-      <% if organization.url %>
-        <p><small><%= link_to organization.url, organization.url %></small></p>
-      <% end %>
+        <p><small><%= link_to organization.url, organization.url if organization.url %></small></p>
     </div>
     <% if organization.logo.attached? %>
       <div>
