@@ -20,7 +20,7 @@
     <div class="biography">
       <p><%= @person.biography %></p>
     </div>
-    <% if @person.experiences %>
+    <% if @person.experiences.any? %>
       <div class="experiences">
         <p class="mb-4">Parcours professionel</p>
         <ul>
@@ -94,4 +94,3 @@
     </dl>
   </div>
 </div>
-
