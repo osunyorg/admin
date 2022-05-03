@@ -38,6 +38,7 @@ en:
         one: User
         other: Users
   add: Add
+  add_field: Add field
   admin:
     attachment_not_available: Attachment not available
     dashboard: Dashboard

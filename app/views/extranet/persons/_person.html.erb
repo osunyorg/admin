@@ -1,6 +1,10 @@
 <article class="mb-4 person">
   <% if person.picture.attached? %>
-    <%= kamifusen_tag person.picture, width: 400, class: 'img-fluid mb-2' %>
+    <%= kamifusen_tag person.picture, width: 400, class: 'img-fluid mb-2', 
+      sizes: {
+          '(max-width: 576px)': '400px',
+          '(max-width: 991px)': '200px'
+      } %>
   <% else %>
     <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid mb-2' %>
   <% end %>

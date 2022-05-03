@@ -16,6 +16,7 @@ fr:
         public_or_private: Public/privé
         sms_sender_name: Nom de l'expéditeur SMS
         sso_cert: Certificat
+        sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         url: 'URL'
@@ -125,8 +126,10 @@ fr:
           non_profit: Association
           government: Structure gouvernementale
   university:
+    internal_key: Clé interne
     invoice_informations: Données de facturation
     person:
       administrator_roles: Rôles administratifs
       taught_programs: Formations enseignées
     sso: SSO
+    sso_key: Clé sur le SSO

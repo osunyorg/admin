@@ -2,7 +2,9 @@
     .top
         h1
             font-weight: normal
-
+        @include media-breakpoint-down(md)
+            header
+                border-bottom: 0
     .experiences
         margin-top: px2rem(80)
         ul

@@ -3,21 +3,18 @@
         ul
             padding-left: 0
             li
-                @include make-row
-                display: flex
+                border-bottom: 1px solid $light-border-color
+                margin-bottom: 30px
                 position: relative
                 > div
-                    @include make-col-ready
                     &:nth-child(1)
-                        width: percentage(2/9)
+                        img
+                            width: 100%
                     &:nth-child(2)
-                        @include pseudo-bottom-border
-                        @include pseudo-top-border
                         display: flex
                         justify-content: space-between
-                        padding-bottom: px2rem(16)
-                        padding-top: px2rem(12)
-                        width: percentage(7/9)
+                        padding-bottom: 16px
+                        padding-top: 12px
                         display: flex
                         justify-content: space-between
                         > div
@@ -29,7 +26,19 @@
                             align-self: center
                         img
                             max-height: 80px
-
+            @include media-breakpoint-up(md)
+                li
+                    @include make-row
+                    border-bottom: 0
+                    margin-bottom: px2rem(16)
+                    > div
+                        @include make-col-ready
+                        &:nth-child(1)
+                            width: percentage(2/9)
+                        &:nth-child(2)
+                            @include pseudo-bottom-border
+                            @include pseudo-top-border
+                            width: percentage(7/9)
     .promotions
         list-style: none
         padding-left: 0
