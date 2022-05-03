@@ -28,7 +28,10 @@
             <li>
               <div>
                 <p><b><%= experience.description %></b></p>
-                <p class="mb-0"><%= experience.from_year %> - <%= experience.to_year %></p>
+                <p class="mb-0">
+                  <%= "#{experience.from_year} —" if experience.from_year %>
+                  <%= experience.to_year || University::Person::Experience.human_attribute_name(:today) %>
+                </p>
               </div>
               <div>
                 <% if experience.organization.present? %>
@@ -61,11 +64,19 @@
       <% end %>
       <% if @person.phone.present? %>
         <dt><%= University::Person.human_attribute_name(:phone) %></dt>
-        <dd><a href="tel:<%= @person.phone %>" target="_blank" rel="noreferrer"><%= @person.phone %></a></dd>
+        <dd>
+          <a href="tel:<%= @person.phone %>" target="_blank" rel="noreferrer">
+            <%= @person.phone %>
+          </a>
+        </dd>
       <% end %>
       <% if @person.email.present? %>
         <dt><%= University::Person.human_attribute_name(:email) %></dt>
-        <dd><a href="mailto:<%= @person.email %>" target="_blank" rel="noreferrer"><%= @person.email %></a></dd>
+        <dd>
+          <a href="mailto:<%= @person.email %>" target="_blank" rel="noreferrer">
+            <%= @person.email %>
+          </a>
+        </dd>
       <% end %>
       <% if @person.url.present? %>
         <dt><%= University::Person.human_attribute_name(:url) %></dt>

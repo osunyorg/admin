@@ -54,6 +54,8 @@ en:
         twitter: Twitter username
         url: Website
         user: User
+      university/person/experience:
+        today: Today
       university/person/involvement:
         description: Mission (in this context)
         person: Person
@@ -92,6 +94,9 @@ en:
       university/person/alumnus:
         one: Alumnus
         other: Alumni
+      university/person/Experience:
+        one: Experience
+        other: Experiences
       university/organization:
         one: Organization
         other: Organizations
