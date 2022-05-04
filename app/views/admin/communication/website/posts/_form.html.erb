@@ -52,11 +52,9 @@
                       label: false,
                       input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                       preview: true
-           %>
-           <%= f.input :featured_image_alt %>
-        </div>
-        <div class="card-body">
-          <%= render  'admin/application/unsplash/selector',
+                      %>
+          <%= f.input :featured_image_alt %>
+          <%= render  'admin/communication/unsplash/selector',
                       image: post.featured_image,
                       text: post.image_keywords %>
         </div>

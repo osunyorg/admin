@@ -1,9 +1,9 @@
-<% unless image.attached? %>
+<% if !image.attached? && text.present? %>
   <p>Voulez-vous utiliser une de ces images Unsplash ?</p>
   <div class="row">
     <% Unsplash::Photo.search(text, 1, 4, :squarish).each do |photo| %>
       <div class="col-6">
-        <%= render 'admin/application/unsplash/photo', photo: photo %>
+        <%= render 'admin/communication/unsplash/photo', photo: photo %>
       </div>
     <% end %>
   </div>
@@ -31,7 +31,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="row">
+        <div class="row">
           <div class="col-lg-9">
             <input  type="text"
                     name="search"
@@ -45,12 +45,14 @@
               Chercher
             </button>
           </div>
-        </form>
+        </div>
         <div class="row">
-          <% Unsplash::Photo.search(text, 1, 18, :squarish).each do |photo| %>
-            <div class="col-6 col-lg-2">
-              <%= render 'admin/application/unsplash/photo', photo: photo %>
-            </div>
+          <% if text %>
+            <% Unsplash::Photo.search(text, 1, 18, :squarish).each do |photo| %>
+              <div class="col-6 col-lg-2">
+                <%= render 'admin/communication/unsplash/photo', photo: photo %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

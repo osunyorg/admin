@@ -1,4 +1,5 @@
 namespace :communication do
+  get 'unsplash' => 'unsplash#index'
   resources :websites do
     get 'home' => 'website/home#edit'
     patch 'home' => 'website/home#update'
