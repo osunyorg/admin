@@ -1,10 +1,8 @@
 <% @organizations.each do |organization| %>
   <div class="organization">
-    <div>
-      <p><%= link_to organization, organization %></p>
-    </div>
-    <div>
-        <p><small><%= link_to organization.url, organization.url if organization.url %></small></p>
-    </div>
+    <p><%= link_to organization, organization %></p>
+    <% if organization.url %>
+      <p><small><%= link_to organization.url, organization.url %></small></p>
+    <% end %>
   </div>
 <% end %>
