@@ -38,7 +38,7 @@
             <div>
               <p><b><%= experience.person.name %></b></p>
               <p>
-                <%= "#{experience.description}<br>" if experience.description.present? %>
+                <%= "#{experience.description}<br>".html_safe if experience.description.present? %>
                 <%= "#{experience.from_year} —" if experience.from_year %>
                 <%= experience.to_year || University::Person::Experience.human_attribute_name(:today) %>
               </p>
