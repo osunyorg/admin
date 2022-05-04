@@ -1,51 +1,16 @@
 .organization
-    min-height: 80px
-    > div
-        &:nth-child(3) // Logo
-            align-self: center
-            padding-bottom: 0
-            padding-top: 0
-        p
-            margin-bottom: 0
-        img
-            max-height: 80px
-    @include media-breakpoint-down(md)
-        border-top: 1px solid $light-border-color
-        display: grid
-        grid-template-columns: 1fr 1fr
-        &:last-child
-            border-bottom: 1px solid $light-border-color
-        > div
-            &:nth-child(1) // Name
-                align-self: end
-                grid-row: 1/2
-                p
-                    padding-top: 15px
-            &:nth-child(2) // Site
-                align-self: start
-                grid-row: 2/2
-                p
-                    padding-bottom: 15px
-            &:nth-child(3) // Logo
-                grid-column: 2/2
-                grid-row: 1/3
-                text-align: end
+    border-top: 1px solid $light-border-color
+    padding-bottom: 25px
+    padding-top: 25px
+    &:last-child
+        border-bottom: 1px solid $light-border-color
+    p:last-child
+        margin-bottom: 0
     @include media-breakpoint-up(md)
-        @include pseudo-top-border
-        @include make-row
         align-items: center
-        &:last-child
-            @include pseudo-bottom-border
-        > div
-            @include make-col-ready
-            &:nth-child(1) // Name
-                width: percentage(3/8)
-            &:nth-child(2) // Site
-                width: percentage(2/8)
-            &:nth-child(3) // Logo
-                text-align: right
-                width: percentage(3/8)
-
+        display: flex
+        justify-content: space-between
+        
 .organizations-show
     .experiences
         margin-top: px2rem(80)
@@ -62,7 +27,6 @@
                     &:nth-child(2)
                         @include pseudo-bottom-border
                         @include pseudo-top-border
-                        justify-content: space-between
                         padding-top: px2rem(20)
                         width: percentage(7/9)
 
