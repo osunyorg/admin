@@ -7,9 +7,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= User.human_attribute_name('email') %></th>
-      <th><%= User.human_attribute_name('first_name') %></th>
       <th><%= User.human_attribute_name('last_name') %></th>
+      <th><%= User.human_attribute_name('first_name') %></th>
+      <th><%= User.human_attribute_name('email') %></th>
       <th><%= User.human_attribute_name('role') %></th>
       <th><%= User.human_attribute_name('language') %></th>
       <th></th>
@@ -18,11 +18,19 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.email, [:admin, user] %></td>
-        <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= t("activerecord.attributes.user.roles.#{user.role}") %></td>
-        <td><%= user.language %></td>
+        <td><%= user.first_name %></td>
+        <td><%= link_to user.email, [:admin, user] %></td>
+        <td>
+          <span class="badge bg-secondary">
+            <%= t("activerecord.attributes.user.roles.#{user.role}") %>
+          </span>
+        </td>
+        <td>
+          <span class="badge bg-secondary">
+            <%= user.language %>
+          </span>
+        </td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= edit_link user %>
