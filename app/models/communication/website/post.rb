@@ -41,6 +41,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlobs
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
+  include WithUnsplash
 
   has_summernote :text
 

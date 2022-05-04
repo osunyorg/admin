@@ -58,7 +58,10 @@
             <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.featured_image') %></h5>
           </div>
           <div class="card-body">
-            <%= image_tag @post.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
+            <%= image_tag @post.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %>
+            <p class="small mb-0">
+              <%= @post.featured_image_alt %>
+            </p>
           </div>
         </div>
       <% end %>

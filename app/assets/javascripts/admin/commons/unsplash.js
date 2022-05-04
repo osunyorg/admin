@@ -1,8 +1,15 @@
 /* global $ */
 $('[data-unsplash]').click(function (e) {
     'use strict';
-    var id = $(this).data('unsplash'),
-        input = $('#unsplash');
+    var $image = $(this),
+        id = $image.data('unsplash'),
+        preview = $image.data('preview'),
+        alt = $image.data('alt'),
+        $input = $('#unsplashInput');
     e.stopPropagation();
-    input.val(id);
+    $('[data-unsplash]').removeClass('bg-secondary');
+    $('#communication_website_post_featured_image_alt').val(alt);
+    $('.communication_website_post_featured_image img').attr('src', preview);
+    $image.addClass('bg-secondary');
+    $input.val(id);
 });

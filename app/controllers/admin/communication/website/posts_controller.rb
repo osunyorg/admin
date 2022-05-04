@@ -49,6 +49,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def create
     @post.website = @website
+    @post.add_unsplash_image params[:unsplash]
     if @post.save_and_sync
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
@@ -58,6 +59,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def update
+    @post.add_unsplash_image params[:unsplash]
     if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
