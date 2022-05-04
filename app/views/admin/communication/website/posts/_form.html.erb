@@ -55,10 +55,17 @@
            %>
            <%= f.input :featured_image_alt %>
         </div>
+        <div class="card-body">
+          <%= render  'admin/application/unsplash/selector',
+                      image: post.featured_image,
+                      text: post.image_keywords %>
+        </div>
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.categories') %></h5>
+          <h5 class="card-title mb-0">
+            <%= t('activerecord.attributes.communication/website/post.categories') %>
+          </h5>
         </div>
         <div class="card-body">
           <%= f.association :categories,

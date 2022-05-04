@@ -113,6 +113,10 @@ class Communication::Website::Post < ApplicationRecord
     "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
   end
 
+  def image_keywords
+    title
+  end
+
   def to_s
     "#{title}"
   end
