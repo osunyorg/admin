@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_171541) do
+ActiveRecord::Schema.define(version: 2022_05_05_105709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -782,6 +782,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.datetime "direct_otp_sent_at"
     t.datetime "totp_timestamp"
     t.string "session_token"
+    t.string "picture_url"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
     t.index ["encrypted_otp_secret_key"], name: "index_users_on_encrypted_otp_secret_key", unique: true

@@ -34,7 +34,7 @@ module User::WithOmniauth
 
     def self.update_data_for_mapping_element(user, mapping_element, attributes)
       sso_key = mapping_element['sso_key']
-      return user if attributes[sso_key].blank? # if not provided by sso, just return
+      return user if attributes[sso_key].nil? # if not provided by sso, just return
       internal_key = mapping_element['internal_key']
       user = self.update_data_for_mapping_element_standard(user, mapping_element, self.get_provided_answer(attributes[sso_key]))
       user
