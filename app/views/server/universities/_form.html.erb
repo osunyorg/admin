@@ -1,4 +1,6 @@
 <%= simple_form_for [:server, university] do |f| %>
+  <%= f.error_notification %>
+
   <div class="row">
     <div class="col-md-4">
       <%= f.input :name %>
@@ -40,6 +42,7 @@
     </div>
     <div class="col-md-6">
       <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+      <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
       <%= render 'sso_mapping', university: university %>
     </div>
   </div>

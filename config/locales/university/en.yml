@@ -54,6 +54,8 @@ en:
         twitter: Twitter username
         url: Website
         user: User
+      university/person/experience:
+        today: Today
       university/person/involvement:
         description: Mission (in this context)
         person: Person
@@ -79,6 +81,12 @@ en:
       university/role:
         description: Description
         people: People
+    errors:
+      models:
+        university:
+          attributes:
+            sso_mapping:
+              missing_email: doesn't handle the email
     models:
       university:
         one: University
@@ -92,6 +100,9 @@ en:
       university/person/alumnus:
         one: Alumnus
         other: Alumni
+      university/person/Experience:
+        one: Experience
+        other: Experiences
       university/organization:
         one: Organization
         other: Organizations

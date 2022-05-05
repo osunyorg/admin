@@ -1,3 +1,7 @@
 .pagination
+    @extend .mt-5
+    flex-wrap: wrap
     font-size: $pagination-font-size
-    justify-content: end
+    margin-bottom: 0
+    @include media-breakpoint-up(md)
+        justify-content: end

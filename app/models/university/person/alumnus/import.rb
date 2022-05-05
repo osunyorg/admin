@@ -30,106 +30,103 @@ class University::Person::Alumnus::Import < ApplicationRecord
 
   def parse
     csv.each do |row|
-      program_id = row['program']
-      if Rails.env.development?
-        # substitute local data for testing
-        substitutes = {
-          # 'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55', # DUT MMI
-          # 'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '863b8c9c-1ed1-4af7-b92c-7264dfb6b4da', # MASTER IJBA
-          # 'f4d4a92f-8b8f-4778-a127-9293684666be' => '8dfaee2a-c876-4b1c-8e4e-8380d720c71f', # DU_BILINGUE
-          # '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'be3cb0b2-7f66-4c5f-b8d7-6a39a0480c46', # DU_JRI
-          # '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '56a50383-3ef7-43f6-8e98-daf279e86802' # DUT_JOURNALISME
-
-          'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '02e6f703-d15b-4841-ac95-3c47d88e21b5', # DUT MMI
-          'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '8fdfafb7-11fd-456c-9f47-7fd76dddb373', # MASTER IJBA
-          'f4d4a92f-8b8f-4778-a127-9293684666be' => 'fab9b86c-8872-4df5-9a97-0e30b104a837', # DU_BILINGUE
-          '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'cb1a26b9-fe5c-4ad1-9715-71cec4642910', # DU_JRI
-          '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '91c44fd2-f0a4-4189-a3f5-311322b7b472' # DUT_JOURNALISME
-        }
-        program_id = substitutes[program_id] if substitutes.has_key? program_id
-      end
-      program = university.education_programs
-                          .find_by(id: program_id)
-      next if program.nil?
-      academic_year = university.academic_years
-                                .where(year: row['year'])
-                                .first_or_create
-
-      cohort = university.education_cohorts
-                         .where(program: program, academic_year: academic_year)
-                         .first_or_create
-      first_name = clean_encoding row['first_name']
-      last_name = clean_encoding row['last_name']
-      email = clean_encoding(row['mail']).to_s.downcase
-      next if first_name.blank? && last_name.blank? && email.blank?
-      url = clean_encoding row['url']
-      if email.present?
-        person = university.people
-                           .where(email: email)
-                           .first_or_create
-        person.first_name = first_name
-        person.last_name = last_name
-      elsif first_name.present? && last_name.present?
-        person = university.people
-                           .where(first_name: first_name, last_name: last_name)
-                           .first_or_create
-      end
+      person = import_person row
       next unless person
-      # TODO all fields
-      # gender
-      # birth
-      # address
-      # zipcode
-      # city
-      # country
-      person.is_alumnus = true
-      person.url = url
-      person.slug = person.to_s.parameterize.dasherize
-      person.twitter ||= row['social_twitter']
-      person.linkedin ||= row['social_linkedin']
-      person.biography ||= clean_encoding row['biography']
-      person.phone ||= row['mobile']
-      person.phone ||= row['phone_personal']
-      person.phone ||= row['phone_professional']
-      byebug unless person.valid?
-      person.save
-      person.add_to_cohort cohort
-      add_picture person, row['photo']
-
-      company_name = clean_encoding row['company_name']
-      company_siren = clean_encoding row['company_siren']
-      company_nic = clean_encoding row['company_nic']
-      if company_name.present?
-        if !row['company_siren'].blank? && !row['company_nic'].blank?
-          organization = university.organizations
-                                   .find_by siren: company_siren,
-                                            nic: company_nic
-        elsif !row['company_siren'].blank?
-          organization ||= university.organizations
-                                   .find_by siren: company_siren
-        end
-        if !company_name.blank?
-          organization ||= university.organizations
-                                     .find_by name: company_name
-        end
-        organization ||= university.organizations
-                                   .where( name: company_name,
-                                           siren: company_siren,
-                                           nic: company_nic)
-                                   .first_or_create
-        experience_job = row['experience_job']
-        experience_from = row['experience_from']
-        experience_to = row['experience_to']
-        experience = person.experiences
-                           .where(university: university,
-                                  organization: organization,
-                                  description: experience_job)
-                           .first_or_create
-        experience.from_year = experience_from
-        experience.to_year = experience_to
-        experience.save
-      end
+      import_cohort row, person
+      organization = import_organization row
+      next unless organization
+      import_experience row, person, organization
     end
+  end
+
+  def import_person(row)
+    first_name = clean_encoding row['first_name']
+    last_name = clean_encoding row['last_name']
+    email = clean_encoding(row['mail']).to_s.downcase
+    return if first_name.blank? && last_name.blank? && email.blank?
+    url = clean_encoding row['url']
+    if email.present?
+      person = university.people
+                         .where(email: email)
+                         .first_or_create
+      person.first_name = first_name
+      person.last_name = last_name
+    elsif first_name.present? && last_name.present?
+      person = university.people
+                         .where(first_name: first_name, last_name: last_name)
+                         .first_or_create
+    end
+    return if person.nil?
+    # TODO all fields
+    # gender
+    # birth
+    # address
+    # zipcode
+    # city
+    # country
+    person.is_alumnus = true
+    person.url = url
+    person.slug = person.to_s.parameterize.dasherize
+    person.twitter ||= row['social_twitter']
+    person.linkedin ||= row['social_linkedin']
+    person.biography ||= clean_encoding row['biography']
+    person.phone ||= row['mobile']
+    person.phone ||= row['phone_personal']
+    person.phone ||= row['phone_professional']
+    byebug unless person.valid?
+    person.save
+    add_picture person, row['photo']
+    person
+  end
+
+  def import_cohort(row, person)
+    program = program_with_id row['program']
+    return if program.nil?
+    academic_year = university.academic_years
+                              .where(year: row['year'])
+                              .first_or_create
+    cohort = university.education_cohorts
+                       .where(program: program, academic_year: academic_year)
+                       .first_or_create
+    person.add_to_cohort cohort
+  end
+
+  def import_organization(row)
+    name = clean_encoding row['company_name']
+    siren = clean_encoding row['company_siren']
+    nic = clean_encoding row['company_nic']
+    return if name.blank?
+    if !siren.blank? && !nic.blank?
+      organization = university.organizations
+                               .find_by siren: siren,
+                                        nic: nic
+    elsif !siren.blank?
+      organization ||= university.organizations
+                               .find_by siren: siren
+    end
+    organization ||= university.organizations
+                               .find_by name: name
+    organization ||= university.organizations
+                               .where( name: name,
+                                       siren: siren,
+                                       nic: nic)
+                               .first_or_create
+    organization
+  end
+
+  def import_experience(row, person, organization)
+    job = row['experience_job']
+    from = row['experience_from']
+    to = row['experience_to']
+    experience = person.experiences
+                       .where(university: university,
+                              organization: organization,
+                              from_year: from)
+                       .first_or_create
+    experience.description = job
+    experience.to_year = to
+    experience.save
+    experience
   end
 
   def add_picture(person, photo)
@@ -142,6 +139,28 @@ class University::Person::Alumnus::Import < ApplicationRecord
       person.picture.attach(io: file, filename: filename)
     rescue
     end
+  end
+
+  def program_with_id(id)
+    if Rails.env.development?
+      # substitute local data for testing
+      substitutes = {
+        # Arnaud
+        'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '23279cab-8bc1-4c75-bcd8-1fccaa03ad55', # DUT MMI
+        'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '863b8c9c-1ed1-4af7-b92c-7264dfb6b4da', # MASTER IJBA
+        'f4d4a92f-8b8f-4778-a127-9293684666be' => '8dfaee2a-c876-4b1c-8e4e-8380d720c71f', # DU_BILINGUE
+        '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'be3cb0b2-7f66-4c5f-b8d7-6a39a0480c46', # DU_JRI
+        '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '56a50383-3ef7-43f6-8e98-daf279e86802' # DUT_JOURNALISME
+        # Alex
+        # 'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => '02e6f703-d15b-4841-ac95-3c47d88e21b5', # DUT MMI
+        # 'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '8fdfafb7-11fd-456c-9f47-7fd76dddb373', # MASTER IJBA
+        # 'f4d4a92f-8b8f-4778-a127-9293684666be' => 'fab9b86c-8872-4df5-9a97-0e30b104a837', # DU_BILINGUE
+        # '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'cb1a26b9-fe5c-4ad1-9715-71cec4642910', # DU_JRI
+        # '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '91c44fd2-f0a4-4189-a3f5-311322b7b472' # DUT_JOURNALISME
+      }
+      id = substitutes[id] if substitutes.has_key? id
+    end
+    university.education_programs.find_by(id: id)
   end
 
   def clean_encoding(value)

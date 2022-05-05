@@ -1,6 +1,6 @@
 <% content_for :title, @organization %>
 <div class="row mb-5 top">
-  <div class="col-md-9">
+  <div class="<%= 'col-md-9' if @organization.logo.attached? %>">
     <header>
       <h1><%= @organization %></h1>
       <% if @organization.url %>
@@ -8,13 +8,11 @@
       <% end %>
     </header>
   </div>
-  <div class="col-md-3">
-    <% if @organization.logo.attached? %>
+  <% if @organization.logo.attached? %>
+    <div class="col-md-3">
       <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid' %>
-    <% else %>
-      <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 
 
@@ -40,9 +38,11 @@
             <div>
               <p><b><%= experience.person.name %></b></p>
               <p>
-                <%= experience.description %><br>
-                <%# // TODO : pretty way to avoid empty dash " - " %>
-                <%= [experience.from_year, experience.to_year].join(" - ") %>
+                <% if experience.description.present? %>
+                  <%= experience.description %><br>
+                <% end %>
+                <%= "#{experience.from_year} —" if experience.from_year %>
+                <%= experience.to_year || University::Person::Experience.human_attribute_name(:today) %>
               </p>
             </div>
           </li>

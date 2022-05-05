@@ -1,19 +1,8 @@
 <% @organizations.each do |organization| %>
-  <div class="organization row">
-    <div>
-      <p><%= link_to organization, organization %></p>
-    </div>
-    <div>
-      <% if organization.url %>
-        <p><small><%= link_to organization.url, organization.url %></small></p>
-      <% end %>
-    </div>
-    <% if organization.logo.attached? %>
-      <div>
-        <%= link_to organization do %>
-          <%= kamifusen_tag organization.logo, height: 80, class: 'img-fluid' %>
-        <% end %>
-      </div>
+  <div class="organization">
+    <p><%= link_to organization, organization %></p>
+    <% if organization.url %>
+      <p><small><%= link_to organization.url, organization.url %></small></p>
     <% end %>
   </div>
 <% end %>

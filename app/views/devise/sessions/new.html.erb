@@ -11,7 +11,7 @@
   <div class="col-md-6">
     <h2 class="mb-4"><%= t('login.already_registered') %></h2>
     <% if current_university.has_sso? %>
-      <p><%= link_to t('login.sign_in_with_sso'), omniauth_authorize_path(resource_name, current_university.sso_provider), class: 'btn btn-primary' %></p>
+      <p><%= link_to t('login.sign_in_with_sso'), omniauth_authorize_path(resource_name, current_university.sso_provider), method: :post, class: 'btn btn-primary' %></p>
       <p><%= t('login.or') %></p>
       <a href="#collapseLoginForm" class="btn btn-primary mb-3" data-bs-toggle="collapse"><%= t('login.sign_in_with_credentials') %></a>
     <% end %>

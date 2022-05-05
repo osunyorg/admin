@@ -6,24 +6,29 @@
     <div class="experiences">
       <ul>
           <% @experiences.ordered.each do |experience| %>
-          <li class="mb-3">
+          <li>
             <div>
               <%= link_to experience.person, class: "stretched-link" do %>
                 <% if experience.person.picture.attached? %>
-                  <%= kamifusen_tag experience.person.picture, width: 200, class: 'img-fluid' %>
+                  <%= kamifusen_tag experience.person.picture, width: 400, class: 'img-fluid', sizes: {
+                        '(max-width: 576px)': '400px',
+                        '(max-width: 991px)': '200px'
+                    } %>
                 <% else %>
-                  <%= image_tag 'extranet/avatar.png', width: 200, class: 'img-fluid' %>
+                  <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
                 <% end %>
               <% end %>
             </div>
             <div>
               <div>
-                <p class="mb-0">
-                  <%= experience.person.first_name %> <b><%= experience.person.last_name %></b>
+                <p class="mb-md-0">
+                  <%= experience.person.first_name %> <%= experience.person.last_name %>
                   <br>
-                  <%= experience.description %> — <%= experience.organization %>
+                  <%= experience.description %>
+                  <%= '—' if experience.description.present? && experience.organization.present? %> 
+                  <%= experience.organization %>
                 </p>
-                <small><%= experience.created_at %></small>
+                <small><%= l experience.created_at.to_date, format: :long %></small>
               </div>
               <% if experience.organization.present? %>
                 <% if experience.organization.logo.attached? %>
@@ -40,7 +45,7 @@
   </div>
 
 
-  <div class="col-md-4">
+  <div class="col-md-4 mt-5 mt-md-0">
     <h2>Promotions actuelles</h2>
     <ul class="promotions">
       <% @cohorts.each do |cohort| %>

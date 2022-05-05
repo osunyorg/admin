@@ -1,0 +1,24 @@
+.navbar
+    margin-bottom: 50px
+    .navbar-brand
+        img
+            max-width: 100px
+    .active
+        .nav-link
+            color: $navbar-link-active-color
+    .navbar-collapse
+        flex-grow: 0
+    .navbar-toggler
+        border: 0
+        font-size: px2rem(14)
+        line-height: px2rem(28)
+        text-transform: uppercase
+    @include media-breakpoint-up(md)
+        margin-bottom: 100px
+        .nav
+            li:last-child .nav-link
+                padding-right: 0
+    @include media-breakpoint-down(md)
+        .nav
+            display: block
+            text-align: right

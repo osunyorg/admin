@@ -8,7 +8,7 @@
 </header>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-lg-3">
     <%= render 'faceted_search/facets', facets: @facets %>
   </div>
   <div class="offset-lg-1 col-lg-8">
@@ -19,6 +19,6 @@
         </div>
       <% end %>
     </div>
-    <%= paginate @people, theme: 'bootstrap-5' %>
+    <%= paginate @people, theme: 'bootstrap-5', window: 2 %>
   </div>
 </div>
