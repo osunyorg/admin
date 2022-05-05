@@ -22,9 +22,5 @@ module University::WithPeopleAndOrganizations
               dependent: :destroy
     alias_attribute :person_alumnus_imports, :university_person_alumnus_imports
     alias_attribute :alumnus_imports, :university_person_alumnus_imports
-
-    has_many :university_person_experiences,
-              class_name: "University::Person::Experience",
-              dependent: :destroy
   end
 end

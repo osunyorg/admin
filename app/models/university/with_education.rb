@@ -21,10 +21,5 @@ module University::WithEducation
               class_name: 'Education::AcademicYear',
               dependent: :destroy
     alias_attribute :academic_years, :education_academic_years
-
-    has_many  :university_person_alumni,
-              through: :education_cohorts,
-              source: :people
-    alias_attribute :alumni, :university_person_alumni
   end
 end
