@@ -4,7 +4,7 @@ module User::WithOmniauth
   included do
 
     def self.from_omniauth(university, attributes)
-      mapping = university.sso_mapping
+      mapping = university.sso_mapping || []
 
       # first step: we find the email (we are supposed to have an email mapping)
       email_sso_key = mapping.select { |elmt| elmt['internal_key'] == 'email' }&.first&.dig('sso_key')

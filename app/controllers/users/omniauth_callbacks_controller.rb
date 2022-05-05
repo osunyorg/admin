@@ -32,12 +32,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def manage_user(user_infos)
     @user = User.from_omniauth(current_university, user_infos)
-    
+
     if @user&.persisted?
       @user.remember_me = true
       sign_in_and_redirect @user, event: :authentication
     else
-      flash[:notice] = tt('devise.omniauth_callbacks.failure')
+      flash[:notice] = t('devise.omniauth_callbacks.failure')
       redirect_to new_user_session_url
     end
   end
