@@ -2,6 +2,7 @@ module WithUnsplash
   extend ActiveSupport::Concern
 
   def add_unsplash_image(id)
+    return if id.blank?
     photo = Unsplash::Photo.find id
     url = photo['links']['download']
     filename = "#{photo['id']}.jpg"

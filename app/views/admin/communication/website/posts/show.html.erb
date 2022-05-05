@@ -28,20 +28,26 @@
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('published') %></h3>
+              <p>
+                <%= t @post.published %><% if @post.published & @post.published_at %>,
+                  <%= l @post.published_at.to_date, format: :long if @post.published_at %>
+                <% end %>
+              </p>
+            </div>
+            <div class="col-6">
+              <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('pinned') %></h3>
+              <p><%= t @post.pinned %></p>
+            </div>
+          </div>
           <% if @post.author %>
             <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('author') %></h3>
             <p><%= link_to_if can?(:read, @post.author), @post.author, admin_communication_website_author_path(@post.author) %></p>
           <% end %>
           <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('slug') %></h3>
           <p><%= @post.slug %></p>
-          <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('published') %></h3>
-          <p>
-            <%= t @post.published %><% if @post.published & @post.published_at %>,
-              <%= l @post.published_at, format: :long if @post.published_at %>
-            <% end %>
-          </p>
-          <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('pinned') %></h3>
-          <p><%= t @post.pinned %></p>
           <% if @post.categories.any? %>
             <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('categories') %></h3>
             <ul class="list-unstyled mb-0">
