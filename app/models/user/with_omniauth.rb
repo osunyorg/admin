@@ -7,13 +7,12 @@ module User::WithOmniauth
       mapping = university.sso_mapping || []
 
       # first step: we find the email (we are supposed to have an email mapping)
-      email_sso_key = mapping.select { |elmt| elmt['internal_key'] == 'email' }&.first&.dig('sso_key')
+      email_sso_key = mapping.detect { |elmt| elmt['internal_key'] == 'email' }&.dig('sso_key')
       email = attributes.dig(email_sso_key)
       return unless email
       email = email.first if email.is_a?(Array)
-      email = email.downcase
 
-      user = User.where(university: university, email: email).first_or_create do |u|
+      user = User.where(university: university, email: email.downcase).first_or_create do |u|
         u.password = "#{Devise.friendly_token[0,20]}!" # meets password complexity requirements
       end
 

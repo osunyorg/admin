@@ -81,6 +81,12 @@ fr:
       university/role:
         description: Description
         people: Personnes
+    errors:
+      models:
+        university:
+          attributes:
+            sso_mapping:
+              missing_email: ne gère pas l'adresse email
     models:
       university:
         one: Université
