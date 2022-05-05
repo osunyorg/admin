@@ -81,6 +81,12 @@ en:
       university/role:
         description: Description
         people: People
+    errors:
+      models:
+        university:
+          attributes:
+            sso_mapping:
+              missing_email: doesn't handle the email
     models:
       university:
         one: University
