@@ -89,7 +89,9 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def path_without_language
-    if parent_id.present?
+    if kind_home?
+      "/"
+    elsif parent_id.present?
       "#{parent&.path_without_language}#{slug}/".gsub(/\/+/, '/')
     else
       "/#{slug}/".gsub(/\/+/, '/')
