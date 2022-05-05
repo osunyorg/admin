@@ -187,12 +187,15 @@ en:
               text_placeholder: Enter text here
           call_to_action:
             edit:
-              text_label: Texte
-              text_placeholder: Entrer le texte ici
+              text_label: Text
+              text_placeholder: Enter text here
               url_label: Lien
-              url_placeholder: Entrer le lien ici avec "https://..."
-              button_label: Bouton
-              button_placeholder: Entrer le texte du bouton ici
+              url_placeholder: Enter the URL with "https://..."
+              buttons: Action buttons
+              button_1: Primary button
+              button_2: Secondary button
+              button_label: Text
+              button_placeholder: Enter the button text here
               image_title: Image
               image_label: Fichier
               remove_image: Supprimer l'image

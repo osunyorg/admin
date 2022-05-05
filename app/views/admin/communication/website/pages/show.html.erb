@@ -127,6 +127,9 @@
 
 <% content_for :preview do %>
   <%= @page.text.to_s %>
+  <% @page.blocks.ordered.each do |block| %>
+    <%= render 'admin/communication/blocks/preview', block: block %>
+  <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>

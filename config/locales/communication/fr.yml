@@ -193,7 +193,10 @@ fr:
               text_placeholder: Entrer le texte ici
               url_label: Lien
               url_placeholder: Entrer le lien ici avec "https://..."
-              button_label: Bouton
+              buttons: Boutons d'action
+              button_1: Bouton principal
+              button_2: Bouton secondaire
+              button_label: Texte
               button_placeholder: Entrer le texte du bouton ici
               image_title: Image
               image_label: Fichier
