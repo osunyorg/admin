@@ -23,7 +23,10 @@
         <span class="open_text"><%= t 'folder.open' %></span>
         <span class="close_text"><%= t 'folder.close' %></span>
       <% end %>
-      <div class="btn-group ms-auto" role="group">
+      <div class="btn-group ms-auto align-items-center" role="group">
+        <% if page.is_special_page? %>
+          <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.#{page.kind}.admin_description") %></span>
+        <% end %>
         <%= edit_link page %>
         <%= destroy_link page, confirm_message: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') if page.is_regular_page? %>
       </div>
