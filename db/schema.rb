@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_171541) do
+ActiveRecord::Schema.define(version: 2022_05_05_083115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -349,6 +349,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.text "text"
     t.text "description_short"
     t.uuid "language_id"
+    t.text "featured_image_credit"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_posts_on_language_id"
@@ -501,6 +502,23 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
+  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active"
+    t.string "sirene"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -692,8 +710,8 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
-    t.boolean "is_author"
     t.string "name"
+    t.boolean "is_author"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end

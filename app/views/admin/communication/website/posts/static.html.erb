@@ -16,8 +16,11 @@ categories:
   <% end %>
 <% end %>
 <% if @about.featured_image.attached? %>
-image: "<%= @about.featured_image.blob.id %>"
-image_alt: "<%= @about.featured_image_alt %>"
+image:
+  id: "<%= @about.featured_image.blob.id %>"
+  alt: "<%= @about.featured_image_alt %>"
+  credit: >
+    <%= prepare_html_for_static @about.featured_image_credit, @about.university %>
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>

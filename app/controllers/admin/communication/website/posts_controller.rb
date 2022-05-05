@@ -36,6 +36,11 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
     breadcrumb
   end
 
+  def static
+    @about = @post
+    render layout: false
+  end
+
   def new
     @post.website = @website
     @post.author_id = current_user.person&.id
@@ -88,7 +93,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
           .permit(
             :university_id, :website_id, :title, :description, :description_short, :text,
             :published, :published_at, :featured_image, :featured_image_delete,
-            :featured_image_infos, :featured_image_alt, :slug, :pinned,
+            :featured_image_infos, :featured_image_alt, :featured_image_credit, :slug, :pinned,
             :author_id, :language_id, category_ids: []
           )
           .merge(university_id: current_university.id)

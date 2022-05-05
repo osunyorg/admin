@@ -3,7 +3,8 @@ class Admin::Communication::UnsplashController < Admin::Communication::Applicati
 
   def index
     @search = params[:search]
-    @photos = @search ? Unsplash::Photo.search(@search, 1, 18, :squarish)
+    @quantity = params[:quantity] || 18
+    @photos = @search ? Unsplash::Photo.search(@search, 1, @quantity, :squarish)
                       : []
   end
 end
