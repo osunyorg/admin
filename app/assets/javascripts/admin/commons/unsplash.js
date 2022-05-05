@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, bootstrap */
 $('[data-unsplash]').click(function (e) {
     'use strict';
     var $image = $(this),
@@ -9,7 +9,8 @@ $('[data-unsplash]').click(function (e) {
         $inputId = $('#unsplashInput'),
         $inputImg = $($('[data-unsplash-img]').data('unsplash-img')),
         $inputAlt = $($('[data-unsplash-alt]').data('unsplash-alt')),
-        $inputCredit = $($('[data-unsplash-credit]').data('unsplash-credit'));
+        $inputCredit = $($('[data-unsplash-credit]').data('unsplash-credit')),
+        modal = bootstrap.Modal.getOrCreateInstance(document.querySelector('#unsplashModal'));
     e.stopPropagation();
     $('[data-unsplash]').removeClass('bg-secondary');
     $image.addClass('bg-secondary');
@@ -17,4 +18,5 @@ $('[data-unsplash]').click(function (e) {
     $inputImg.attr('src', preview);
     $inputAlt.val(alt);
     $inputCredit.summernote('code', credit);
+    modal.hide();
 });
