@@ -39,7 +39,7 @@ module User::WithOmniauth
     def self.update_data_for_mapping_element_standard(user, mapping_element, sso_value)
       case mapping_element['internal_key']
       when 'language'
-        user = self.set_best_id_for(user, mapping_element['type'], sso_value.first)
+        user = self.set_best_id_for(user, 'language', sso_value.first)
       when 'role'
         value = mapping_element['roles'].select { |key, val| val == sso_value.first }.first&.first
         user['role'] = value if value
@@ -55,7 +55,7 @@ module User::WithOmniauth
     end
 
     def self.set_best_id_for(user, type, iso)
-      element_id = eval(type.classify).find_by(iso_code: iso)&.id
+      element_id = type.classify.safe_constantize.find_by(iso_code: iso)&.id
       user["#{type}_id"] = element_id unless element_id.nil?
       user
     end
