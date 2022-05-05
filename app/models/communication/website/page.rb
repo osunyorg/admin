@@ -8,6 +8,7 @@
 #  description              :text
 #  description_short        :text
 #  featured_image_alt       :string
+#  featured_image_credit    :text
 #  github_path              :text
 #  header_text              :text
 #  kind                     :integer
@@ -43,6 +44,7 @@
 
 class Communication::Website::Page < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithBlobs
   include WithBlocks
   include WithGit
@@ -51,7 +53,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithMenuItemTarget
   include WithPosition
   include WithTree
-  include WithUniversity
 
   has_summernote :text
 

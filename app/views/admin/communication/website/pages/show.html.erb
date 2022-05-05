@@ -95,21 +95,7 @@
           <% end %>
         </div>
       </div>
-      <% if @page.best_featured_image && @page.best_featured_image.attached? && @page.best_featured_image.variable? %>
-        <div class="card flex-fill w-100">
-          <div class="card-header">
-            <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/page.featured_image') %></h5>
-          </div>
-          <div class="card-body">
-            <%= image_tag @page.best_featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
-            <% unless @page.featured_image.attached? %>
-              <span class="small text-muted">
-                <%= t 'admin.inheritance.sentence_without_link' %>
-              </span>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'admin/application/featured_image/show', about: @page %>
       <% if @page.description.present? %>
         <div class="card flex-fill w-100">
           <div class="card-header">

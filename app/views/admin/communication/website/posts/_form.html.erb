@@ -64,7 +64,8 @@
           <% if current_user.author? || current_user.contributor? %>
             <%= f.input :author_id,
                         as: :hidden,
-                        input_html: { value: current_user.person&.id }, wrapper: false %>
+                        input_html: { value: current_user.person&.id },
+                        wrapper: false %>
           <% else %>
             <%= f.association :author,
                               collection: current_university.people.ordered,
@@ -78,29 +79,7 @@
                       } %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/post.featured_image') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :featured_image,
-                      as: :single_deletable_file,
-                      direct_upload: true,
-                      label: false,
-                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                      preview: true
-                      %>
-          <%= f.input :featured_image_alt %>
-          <%= f.input :featured_image_credit,
-                      as: :summernote,
-                      input_html: {
-                        data: { 'summernote-config' => 'mini' }
-                      } %>
-          <%= render  'admin/communication/unsplash/selector',
-                      image: post.featured_image,
-                      text: post.image_keywords %>
-        </div>
-      </div>
+      <%= render 'admin/application/featured_image/edit', about: @post, f: f %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

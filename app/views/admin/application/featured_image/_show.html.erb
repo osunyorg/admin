@@ -1,0 +1,24 @@
+<% if about.featured_image.attached? %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h2 class="card-title mb-0 h5">
+        <%= about.class.human_attribute_name :featured_image %>
+      </h2>
+    </div>
+    <div class="card-body">
+      <% image = about.featured_image.variable? ? about.featured_image.variant(resize: '600')
+                                                : about.featured_image %>
+      <%= image_tag image, class: 'img-fluid mb-2' %>
+      <% if about.featured_image_credit %>
+        <p class="mb-0">
+          <%= about.featured_image_alt %>
+        </p>
+      <% end %>
+      <% if about.featured_image_credit %>
+        <p class="small mb-0">
+          <%= about.featured_image_credit.html_safe %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,4 +1,17 @@
-<% if !image.attached? && text.present? %>
+<%
+# L'Escale du livre 2022
+search = about.to_s
+# communication_website_page
+about_identifier = about.class.to_s.parameterize.underscore
+# .communication_website_post_featured_image img
+about_featured_image_image = ".#{about_identifier}_featured_image img"
+# #communication_website_page_featured_image_alt
+about_featured_image_alt = "##{about_identifier}_featured_image_alt"
+# #communication_website_page_featured_image_credit
+about_featured_image_credit = "##{about_identifier}_featured_image_credit"
+%>
+
+<% if !about.featured_image.attached? && search.present? %>
   <p>Voulez-vous utiliser une de ces images Unsplash ?</p>
   <div class="row">
     <% Unsplash::Photo.search(text, 1, 4, :squarish).each do |photo| %>
@@ -18,7 +31,11 @@
         type="hidden"
         value=""
         name="unsplash"
-        id="unsplashInput">
+        id="unsplashInput"
+        data-unsplash-img="<%= about_featured_image_image %>"
+        data-unsplash-alt="<%= about_featured_image_alt %>"
+        data-unsplash-credit="<%= about_featured_image_credit %>"
+        >
 <div  class="modal fade"
       id="unsplashModal"
       tabindex="-1"
@@ -35,7 +52,7 @@
           <div class="col-lg-9">
             <input  type="text"
                     name="search"
-                    value="<%= text %>"
+                    value="<%= search %>"
                     class="form-control">
           </div>
           <div class="col-lg-3">
@@ -47,8 +64,8 @@
           </div>
         </div>
         <div class="row">
-          <% if text %>
-            <% Unsplash::Photo.search(text, 1, 18, :squarish).each do |photo| %>
+          <% if search.present? %>
+            <% Unsplash::Photo.search(search, 1, 18, :squarish).each do |photo| %>
               <div class="col-6 col-lg-2">
                 <%= render 'admin/communication/unsplash/photo', photo: photo %>
               </div>

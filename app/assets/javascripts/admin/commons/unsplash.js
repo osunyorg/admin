@@ -6,12 +6,15 @@ $('[data-unsplash]').click(function (e) {
         preview = $image.data('preview'),
         alt = $image.data('alt'),
         credit = $image.data('credit'),
-        $input = $('#unsplashInput');
+        $inputId = $('#unsplashInput'),
+        $inputImg = $($('[data-unsplash-img]').data('unsplash-img')),
+        $inputAlt = $($('[data-unsplash-alt]').data('unsplash-alt')),
+        $inputCredit = $($('[data-unsplash-credit]').data('unsplash-credit'));
     e.stopPropagation();
     $('[data-unsplash]').removeClass('bg-secondary');
-    $('#communication_website_post_featured_image_alt').val(alt);
-    $('#communication_website_post_featured_image_credit').summernote('code', credit);
-    $('.communication_website_post_featured_image img').attr('src', preview);
     $image.addClass('bg-secondary');
-    $input.val(id);
+    $inputId.val(id);
+    $inputImg.attr('src', preview);
+    $inputAlt.val(alt);
+    $inputCredit.summernote('code', credit);
 });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_083115) do
+ActiveRecord::Schema.define(version: 2022_05_05_101823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_083115) do
     t.string "path"
     t.string "featured_image_alt"
     t.text "text"
+    t.text "featured_image_credit"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_categories_on_program_id"
@@ -325,6 +326,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_083115) do
     t.integer "kind"
     t.string "bodyclass"
     t.uuid "language_id"
+    t.text "featured_image_credit"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -465,6 +467,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_083115) do
     t.text "results"
     t.text "presentation"
     t.text "main_information"
+    t.text "featured_image_credit"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -572,6 +575,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_083115) do
     t.string "featured_image_alt"
     t.boolean "published", default: false
     t.text "text"
+    t.text "featured_image_credit"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end

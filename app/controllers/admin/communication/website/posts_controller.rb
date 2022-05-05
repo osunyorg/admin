@@ -92,8 +92,8 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
     params.require(:communication_website_post)
           .permit(
             :university_id, :website_id, :title, :description, :description_short, :text,
-            :published, :published_at, :featured_image, :featured_image_delete,
-            :featured_image_infos, :featured_image_alt, :featured_image_credit, :slug, :pinned,
+            :published, :published_at, :slug, :pinned,
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             :author_id, :language_id, category_ids: []
           )
           .merge(university_id: current_university.id)

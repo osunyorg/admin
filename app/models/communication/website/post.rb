@@ -42,7 +42,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlobs
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
-  include WithUnsplash
 
   has_summernote :text
 
@@ -113,10 +112,6 @@ class Communication::Website::Post < ApplicationRecord
     return unless published
     return if website.url.blank?
     "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
-  end
-
-  def image_keywords
-    title
   end
 
   def to_s
