@@ -1,4 +1,5 @@
 namespace :communication do
+  get 'unsplash' => 'unsplash#index'
   resources :websites do
     get 'home' => 'website/home#edit'
     patch 'home' => 'website/home#update'
@@ -27,6 +28,9 @@ namespace :communication do
     resources :authors, controller: 'website/authors', only: [:index, :show]
     resources :posts, controller: 'website/posts' do
       post :publish, on: :collection
+      member do
+        get :static
+      end
     end
     resources :curations,
               path: 'posts/curations',

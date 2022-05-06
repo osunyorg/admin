@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  description              :text
 #  featured_image_alt       :string
+#  featured_image_credit    :text
 #  github_path              :text
 #  is_programs_root         :boolean          default(FALSE)
 #  name                     :string
@@ -35,6 +36,7 @@
 #
 class Communication::Website::Category < ApplicationRecord
   include Sanitizable
+  include WithUniversity
   include WithGit
   include WithFeaturedImage
   include WithBlobs

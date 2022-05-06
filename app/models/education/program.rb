@@ -2,37 +2,38 @@
 #
 # Table name: education_programs
 #
-#  id                 :uuid             not null, primary key
-#  accessibility      :text
-#  capacity           :integer
-#  contacts           :text
-#  content            :text
-#  continuing         :boolean
-#  description        :text
-#  duration           :text
-#  ects               :integer
-#  evaluation         :text
-#  featured_image_alt :string
-#  level              :integer
-#  main_information   :text
-#  name               :string
-#  objectives         :text
-#  opportunities      :text
-#  other              :text
-#  path               :string
-#  pedagogy           :text
-#  position           :integer          default(0)
-#  prerequisites      :text
-#  presentation       :text
-#  pricing            :text
-#  published          :boolean          default(FALSE)
-#  registration       :text
-#  results            :text
-#  slug               :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  parent_id          :uuid             indexed
-#  university_id      :uuid             not null, indexed
+#  id                    :uuid             not null, primary key
+#  accessibility         :text
+#  capacity              :integer
+#  contacts              :text
+#  content               :text
+#  continuing            :boolean
+#  description           :text
+#  duration              :text
+#  ects                  :integer
+#  evaluation            :text
+#  featured_image_alt    :string
+#  featured_image_credit :text
+#  level                 :integer
+#  main_information      :text
+#  name                  :string
+#  objectives            :text
+#  opportunities         :text
+#  other                 :text
+#  path                  :string
+#  pedagogy              :text
+#  position              :integer          default(0)
+#  prerequisites         :text
+#  presentation          :text
+#  pricing               :text
+#  published             :boolean          default(FALSE)
+#  registration          :text
+#  results               :text
+#  slug                  :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  parent_id             :uuid             indexed
+#  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
