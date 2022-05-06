@@ -43,13 +43,13 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
               <input  type="text"
                       name="search"
                       placeholder="Recherche en anglais..."
-                      v-model="parameters.query"
+                      v-model="query"
                       class="form-control">
             </div>
             <div class="col-lg-3">
               <button type="button"
                       class="btn btn-primary"
-                      v-on:click="search"
+                      v-on:click="research"
                       aria-label="Chercher">
                 Chercher
               </button>
@@ -96,8 +96,8 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           url: '<%= path %>',
           per_page: 12,
           lang: '<%= lang %>',
-          query: '<%= search || "" %>'
         },
+        query: '<%= search || "" %>',
         page: 1,
         targets: {
           image: '<%= about_featured_image_image %>',
@@ -128,7 +128,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
         if (event.key === "Enter" && this.isOpened) {
           event.preventDefault();
           event.stopImmediatePropagation();
-          this.search();
+          this.research();
         }
       }.bind(this));
     },
@@ -138,8 +138,12 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
       }
     },
     methods: {
+      research() {
+        this.page = 1;
+        this.search();
+      },
       search() {
-        if (!this.parameters.query) {
+        if (!this.query) {
           return null;
         }
 
@@ -150,7 +154,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           }
         }.bind(this);
 
-        xmlHttp.open( "GET", this.parameters.url + '?query=' + this.parameters.query + '&per_page=' + this.parameters.per_page + '&page=' + this.page + '&lang=' + this.parameters.lang, false );
+        xmlHttp.open( "GET", this.parameters.url + '?query=' + this.query + '&per_page=' + this.parameters.per_page + '&page=' + this.page + '&lang=' + this.parameters.lang, false );
         xmlHttp.send( null );
       },
       select(image) {
