@@ -107,13 +107,29 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
         data: {
           results: [],
           total: 0
-        }
+        },
+        isOpened: false
       }
     },
     mounted() {
       var modalElement = document.querySelector('#unsplashModal')
       this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-      modalElement.addEventListener('show.bs.modal', this.search.bind(this))
+
+      modalElement.addEventListener('show.bs.modal', function (){
+        this.isOpened = true;
+        this.search.bind(this)
+      }.bind(this));
+
+      modalElement.addEventListener('hide.bs.modal', function() {
+          this.isOpened = false;
+      }.bind(this));
+
+      document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && this.isOpened) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }.bind(this));
     },
     watch: {
       page(value) {
@@ -130,7 +146,6 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
         xmlHttp.onreadystatechange = function() {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             this.data = JSON.parse(xmlHttp.responseText);
-            console.log(this.data)
           }
         }.bind(this);
 
