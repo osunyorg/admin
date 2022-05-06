@@ -320,6 +320,9 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
+    omniauth-rails_csrf_protection (1.0.1)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     omniauth-saml (2.1.0)
       omniauth (~> 2.0)
       ruby-saml (~> 1.12)
@@ -511,7 +514,8 @@ DEPENDENCIES
   listen (~> 3.3)
   mini_magick
   octokit
-  omniauth-saml
+  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth-saml (~> 2.0)
   pg (~> 1.1)
   puma
   rack-mini-profiler (~> 2.0)

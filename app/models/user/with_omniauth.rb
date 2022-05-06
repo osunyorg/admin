@@ -4,16 +4,13 @@ module User::WithOmniauth
   included do
 
     def self.from_omniauth(university, attributes)
-      mapping = university.sso_mapping
+      mapping = university.sso_mapping || []
 
       # first step: we find the email (we are supposed to have an email mapping)
-      email_sso_key = mapping.select { |elmt| elmt['internal_key'] == 'email' }&.first&.dig('sso_key')
-      email = attributes.dig(email_sso_key)
+      email = get_email_from_mapping(mapping, attributes)
       return unless email
-      email = email.first if email.is_a?(Array)
-      email = email.downcase
 
-      user = User.where(university: university, email: email).first_or_create do |u|
+      user = User.where(university: university, email: email.downcase).first_or_create do |u|
         u.password = "#{Devise.friendly_token[0,20]}!" # meets password complexity requirements
       end
 
@@ -28,6 +25,13 @@ module User::WithOmniauth
 
     protected
 
+    def self.get_email_from_mapping(mapping, attributes)
+      email_sso_key = mapping.detect { |elmt| elmt['internal_key'] == 'email' }&.dig('sso_key')
+      email = attributes.dig(email_sso_key)
+      email = email.first if email.is_a?(Array)
+      email
+    end
+
     def self.update_data_for_mapping_element(user, mapping_element, attributes)
       sso_key = mapping_element['sso_key']
       return user if attributes[sso_key].nil? # if not provided by sso, just return
@@ -39,7 +43,7 @@ module User::WithOmniauth
     def self.update_data_for_mapping_element_standard(user, mapping_element, sso_value)
       case mapping_element['internal_key']
       when 'language'
-        user = self.set_best_id_for(user, mapping_element['type'], sso_value.first)
+        user = self.set_best_id_for(user, 'language', sso_value.first)
       when 'role'
         value = mapping_element['roles'].select { |key, val| val == sso_value.first }.first&.first
         user['role'] = value if value
@@ -55,7 +59,7 @@ module User::WithOmniauth
     end
 
     def self.set_best_id_for(user, type, iso)
-      element_id = eval(type.classify).find_by(iso_code: iso)&.id
+      element_id = type.classify.safe_constantize.find_by(iso_code: iso)&.id
       user["#{type}_id"] = element_id unless element_id.nil?
       user
     end

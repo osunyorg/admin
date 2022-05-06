@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_101823) do
+ActiveRecord::Schema.define(version: 2022_05_05_131539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -253,23 +253,6 @@ ActiveRecord::Schema.define(version: 2022_05_05_101823) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["university_id"], name: "index_communication_website_imported_websites_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
-  end
-
-  create_table "communication_website_index_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "communication_website_id", null: false
-    t.string "title"
-    t.string "path"
-    t.text "description"
-    t.text "text"
-    t.string "featured_image_alt"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "breadcrumb_title"
-    t.text "header_text"
-    t.index ["communication_website_id"], name: "idx_comm_website_index_page_on_communication_website_id"
-    t.index ["university_id"], name: "index_communication_website_index_pages_on_university_id"
   end
 
   create_table "communication_website_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -804,6 +787,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_101823) do
     t.datetime "direct_otp_sent_at"
     t.datetime "totp_timestamp"
     t.string "session_token"
+    t.string "picture_url"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
     t.index ["encrypted_otp_secret_key"], name: "index_users_on_encrypted_otp_secret_key", unique: true
@@ -841,8 +825,6 @@ ActiveRecord::Schema.define(version: 2022_05_05_101823) do
   add_foreign_key "communication_website_imported_posts", "universities"
   add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_websites", "universities"
-  add_foreign_key "communication_website_index_pages", "communication_websites"
-  add_foreign_key "communication_website_index_pages", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"

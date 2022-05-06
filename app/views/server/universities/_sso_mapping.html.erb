@@ -9,13 +9,17 @@
   </div>
 
   <div class="app-form">
-    <draggable :list="fields">
+    <draggable :list="fields" handle=".dragHandle" >
       <div v-for="(field, index) in fields">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <a data-bs-toggle="collapse" :href="'#sso_mapping_collapse_' + index ">
-              {{index + 1}}. {{ field.sso_key }} -> {{ keys[field.internal_key]}}
-            </a>
+            <div>
+              <i class="fas fa-arrows-alt dragHandle"></i>
+              &nbsp;
+              <a data-bs-toggle="collapse" :href="'#sso_mapping_collapse_' + index ">
+                {{index + 1}}. {{ field.sso_key }} -> {{ keys[field.internal_key]}}
+              </a>
+            </div>
             <a
               v-on:click="fields.splice(fields.indexOf(field), 1)"
               title="Remove field">

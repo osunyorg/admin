@@ -1,0 +1,6 @@
+<h2 class="h4 mt-5"><%= block.title %></h2>
+<%
+@block = block
+@preview = true
+%>
+<%= render "admin/communication/blocks/templates/#{@block.template_kind}/show" %>

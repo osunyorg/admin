@@ -1,6 +1,5 @@
-<div class="row">
+<div class="row mb-5">
   <div class="col-xxl-4 col-md-6">
-    <h3>Contenu</h3>
     <label  class="form-label"
             for="text">
       <%= t '.text_label' %>
@@ -12,51 +11,58 @@
               data-summernote-config="mini"
               placeholder="<%= t '.text_placeholder' %>"></textarea>
     </div>
-    <h3 class="mt-4"><%= t '.image_title' %></h3>
-    <div class="row">
-      <div class="col-md-6">
-        <div v-if="!data.image">
-          <%# TODO : create a uploader vue3 component %>
-          <label  class="form-label"
-                  for="image">
-            <%= t '.image_label' %>
-          </label>
-          <input  class="form-control mb-2"
-                  type="file"
-                  accept="image/*"
-                  @change="onFileImageChange( $event, data, 'image' )"
-                  id="image">
-        </div>
-        <div v-if="data.image">
-          <img :src="getImageUrl(data.image)"
-                class="img-fluid"
-                style="max-height: 80px"
-                />
-          <br>
-          <a  class="btn btn-sm btn-danger mt-2"
-              v-on:click="data.image=null">
-              <i class="fas fa-times"></i>
-              <%= t '.remove_image' %>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label  class="form-label"
-                for="image_alt">
-          <%= t '.image_alt_label' %>
-        </label>
-        <input id="image_alt"
-                type="text"
-                class="form-control"
-                v-model="data.image_alt"
-                placeholder="<%= t '.image_alt_placeholder' %>" />
-      </div>
-    </div>
   </div>
   <div class="col-xxl-4 col-md-6">
-    <h3>Bouton principal</h3>
+    <div v-if="!data.image">
+      <%# TODO : create a uploader vue3 component %>
+      <label  class="form-label"
+              for="image">
+        <%= t '.image_title' %>
+      </label>
+      <input  class="form-control mb-2"
+              type="file"
+              accept="image/*"
+              @change="onFileImageChange( $event, data, 'image' )"
+              id="image">
+    </div>
+    <div v-if="data.image">
+      <img :src="getImageUrl(data.image)"
+            class="img-fluid"
+            style="max-height: 80px"
+            />
+      <br>
+      <a  class="btn btn-sm btn-danger mt-2"
+          v-on:click="data.image=null">
+          <i class="fas fa-times"></i>
+          <%= t '.remove_image' %>
+      </a>
+    </div>
     <label  class="form-label"
-            for="url">
+            for="image_alt">
+      <%= t '.image_alt_label' %>
+    </label>
+    <input id="image_alt"
+            type="text"
+            class="form-control"
+            v-model="data.image_alt"
+            placeholder="<%= t '.image_alt_placeholder' %>" />
+  </div>
+</div>
+<h2><%= t '.buttons' %></h2>
+<div class="row">
+  <div class="col-xxl-4 col-md-6">
+    <h3 class="h4"><%= t '.button_1' %></h3>
+
+    <label class="form-label" for="button">
+      <%= t '.button_label' %>
+    </label>
+    <input  id="button"
+            type="text"
+            class="form-control"
+            v-model="data.button"
+            placeholder="<%= t '.button_placeholder' %>" />
+
+    <label class="form-label mt-3" for="url">
       <%= t '.url_label' %>
     </label>
     <input id="url"
@@ -65,35 +71,26 @@
             v-model="data.url"
             placeholder="<%= t '.url_placeholder' %>" />
 
-    <label  class="form-label mt-3"
-            for="button">
-      <%= t '.button_label' %>
-    </label>
-    <input id="button"
-            type="text"
-            class="form-control"
-            v-model="data.button"
-            placeholder="<%= t '.button_placeholder' %>" />
+  </div>
+  <div class="col-xxl-4 col-md-6">
+    <h3 class="h4"><%= t '.button_2' %></h3>
 
-    <h3 class="mt-4">Bouton secondaire</h3>
-    <label  class="form-label"
-            for="url_secondary">
-      <%= t '.url_label' %>
-    </label>
-    <input id="url_secondary"
-            type="url"
-            class="form-control"
-            v-model="data.url_secondary"
-            placeholder="<%= t '.url_placeholder' %>" />
-    <label  class="form-label mt-3"
-            for="button">
+    <label class="form-label" for="button">
       <%= t '.button_label' %>
     </label>
-    <input id="button_secondary"
+    <input  id="button_secondary"
             type="text"
             class="form-control"
             v-model="data.button_secondary"
             placeholder="<%= t '.button_placeholder' %>" />
 
+    <label class="form-label mt-3" for="url_secondary">
+      <%= t '.url_label' %>
+    </label>
+    <input  id="url_secondary"
+            type="url"
+            class="form-control"
+            v-model="data.url_secondary"
+            placeholder="<%= t '.url_placeholder' %>" />
   </div>
 </div>

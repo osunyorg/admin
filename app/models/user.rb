@@ -22,6 +22,7 @@
 #  last_sign_in_ip               :string
 #  locked_at                     :datetime
 #  mobile_phone                  :string
+#  picture_url                   :string
 #  remember_created_at           :datetime
 #  reset_password_sent_at        :datetime
 #  reset_password_token          :string           indexed
@@ -53,7 +54,7 @@
 #  fk_rails_bd6f7212a9  (university_id => universities.id)
 #
 class User < ApplicationRecord
-  has_one_attached_deletable :picture  # In this order, "resize avatar" callback will be fired after the others.
+  include WithAvatar
   include WithUniversity
   include WithAuthentication
   include WithOmniauth

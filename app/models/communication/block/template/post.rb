@@ -12,11 +12,13 @@ class Communication::Block::Template::Post < Communication::Block::Template
   end
 
   def category
-    @category ||= block.about&.website.categories.find_by(id: data['category_id'])
+    @category ||= block.about&.website
+                              .categories
+                              .find_by(id: data['category_id'])
   end
 
   def selected_posts
-    # kind could be : selection, category, or all
+    # kind could be: selection, category, or all
     @selected_posts ||= send "selected_posts_#{kind}"
   end
 
@@ -28,7 +30,11 @@ class Communication::Block::Template::Post < Communication::Block::Template
 
   def selected_posts_all
     quantity = data['posts_quantity'] || 3
-    block.about&.website.posts.ordered.limit(quantity)
+    block.about&.website
+                .posts
+                .published
+                .ordered
+                .limit(quantity)
   end
 
   def selected_posts_category
@@ -37,6 +43,7 @@ class Communication::Block::Template::Post < Communication::Block::Template
     university.communication_website_posts.joins(:categories)
                                           .where(categories: { id: category_ids })
                                           .distinct
+                                          .published
                                           .ordered
                                           .limit(quantity)
   end
@@ -48,6 +55,9 @@ class Communication::Block::Template::Post < Communication::Block::Template
 
   def post(id)
     return if id.blank?
-    block.about&.website.posts.find_by id: id
+    block.about&.website
+                .posts
+                .published
+                .find_by(id: id)
   end
 end
