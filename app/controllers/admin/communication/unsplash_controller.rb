@@ -3,9 +3,9 @@ class Admin::Communication::UnsplashController < Admin::Communication::Applicati
 
   def index
     if params[:query].blank?
-      @photos = []
+      @search = []
     else
-      @photos = Unsplash::Search.search "/search/photos",
+      @search = Unsplash::Search.search "/search/photos",
         Unsplash::Photo,
         {
           query: params[:query],

@@ -1,9 +1,0 @@
-<%= image_tag photo['urls']['thumb'],
-              class: 'img-fluid img-thumbnail mb-3',
-              data: {
-                unsplash: photo['id'],
-                filename: "#{photo['id']}.jpg",
-                preview: photo['urls']['regular'],
-                alt: photo['alt_description'],
-                credit: "Photo by <a href=\"https://unsplash.com/@#{ photo['user']['username'] }?utm_source=#{ Unsplash.configuration.utm_source }&utm_medium=referral\"> #{ photo['user']['name'] }</a> on <a href=\"https://unsplash.com/?utm_source=#{ Unsplash.configuration.utm_source }&utm_medium=referral\">Unsplash</a>"
-              } %>
