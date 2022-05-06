@@ -74,9 +74,16 @@ class Communication::Website::Page < ApplicationRecord
 
   validates :title, presence: true
 
-  validates :slug, presence: true, unless: :kind_home?
-  validate :slug_must_be_unique
-  validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }, unless: :kind_home?
+  validates :slug,
+            presence: true,
+            unless: :kind_home?
+  validate  :slug_must_be_unique
+  validates :slug,
+            format: {
+              with: /\A[a-z0-9\-]+\z/,
+              message: I18n.t('slug_error')
+            },
+            unless: :kind_home?
 
   before_validation :check_slug, :make_path
   after_save :update_children_paths, if: :saved_change_to_path?

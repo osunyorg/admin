@@ -1,7 +1,9 @@
 class Communication::Block::Template::Page < Communication::Block::Template
   def build_git_dependencies
-    add_dependency selected_pages
-    selected_pages.each do |page|
+    add_dependency main_page.page
+    selected_pages.each do |hash|
+      page = hash.page
+      add_dependency page
       add_dependency page.active_storage_blobs
     end
   end
@@ -26,15 +28,18 @@ class Communication::Block::Template::Page < Communication::Block::Template
 
   def free_pages
     elements.map { |element|
-                  p = page(element['id'])
-                  next if p.nil?
-                  {
-                    page: p,
-                    show_description: element['show_description'] || false,
-                    show_image: element['show_image'] || false
-                  }.to_dot
-                }
-                .compact
+      p = page(element['id'])
+      next if p.nil?
+      hash_from_page(p, element)
+    }.compact
+  end
+
+  def hash_from_page(page, element)
+    {
+      page: page,
+      show_description: element['show_description'] || false,
+      show_image: element['show_image'] || false
+    }.to_dot
   end
 
   def page(id)
