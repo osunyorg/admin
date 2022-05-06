@@ -185,14 +185,10 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           inputImage.classList.add('img-fluid', 'img-thumbnail');
           inputImage.width = 1000;
           inputImageContainer.appendChild(inputImage);
-          inputImageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
         }
 
-        console.log(inputImage);
-
-        if (inputImage) {
-          inputImage.setAttribute('src', image.preview);
-        }
+        inputImage.setAttribute('src', image.preview);
+        inputImageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
 
         inputAlt.value = image.alt;
         $(inputCredit).summernote('code', image.credit);
