@@ -11,6 +11,8 @@ about_featured_image_alt = "##{about_identifier}_featured_image_alt"
 about_featured_image_credit = "##{about_identifier}_featured_image_credit"
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
+# /admin/communication/unsplash.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
+path = admin_communication_unsplash_path(website_id: nil, format: :json)
 %>
 
 <div id="unsplash-app" v-cloak>
@@ -91,7 +93,7 @@ lang = about&.language&.iso_code if about.respond_to? :language
       return {
         selected: {},
         parameters: {
-          url: '<%= admin_communication_unsplash_path(format: :json) %>',
+          url: '<%= path %>',
           per_page: 12,
           lang: '<%= lang %>',
           query: '<%= search || "" %>'
@@ -145,11 +147,10 @@ lang = about&.language&.iso_code if about.respond_to? :language
         xmlHttp.onreadystatechange = function() {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             this.data = JSON.parse(xmlHttp.responseText);
-            console.log(this.data)
           }
         }.bind(this);
-        
-        xmlHttp.open( "GET", this.parameters.url + '&query=' + this.parameters.query + '&per_page=' + this.parameters.per_page + '&page=' + this.page + '&lang=' + this.parameters.lang, false );
+
+        xmlHttp.open( "GET", this.parameters.url + '?query=' + this.parameters.query + '&per_page=' + this.parameters.per_page + '&page=' + this.page + '&lang=' + this.parameters.lang, false );
         xmlHttp.send( null );
       },
       select(image) {
