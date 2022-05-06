@@ -16,67 +16,72 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
 %>
 
 <div id="unsplash-app" v-cloak>
-  <button type="button"
-          class="btn btn-secondary btn-sm"
-          data-bs-toggle="modal"
-          data-bs-target="#unsplashModal">
-    Chercher une image
-  </button>
-  <input  class="form-control string optional"
-          type="hidden"
-          name="unsplash"
-          v-model="selected.id">
-  <div  class="modal fade"
-        id="unsplashModal"
-        tabindex="-1"
-        aria-labelledby="Unsplash"
-        aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Recherche d'image sur Unsplash</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row mb-3">
-            <div class="col-lg-9">
-              <input  type="text"
-                      name="search"
-                      placeholder="Recherche en anglais..."
-                      v-model="query"
-                      class="form-control">
-            </div>
-            <div class="col-lg-3 d-grid">
-              <button type="button"
-                      class="btn btn-primary"
-                      v-on:click="research"
-                      aria-label="Chercher">
-                Chercher
-              </button>
-            </div>
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only"><%= t 'loading' %></span>
+  </div>
+  <div class="app-content">
+    <button type="button"
+            class="btn btn-secondary btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#unsplashModal"
+            >
+      Chercher une image
+    </button>
+    <input  class="form-control string optional"
+            type="hidden"
+            name="unsplash"
+            v-model="selected.id">
+    <div  class="modal fade"
+          id="unsplashModal"
+          tabindex="-1"
+          aria-labelledby="Unsplash"
+          aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Recherche d'image sur Unsplash</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="row" ref="results">
-            <p v-if="data.results.length === 0 || !data" >Aucun résultat</p>
-
-            <div v-for="image in data.results"  class="col-6 col-lg-2">
-              <img
-                  :src="image.thumb"
-                  :alt="image.alt"
-                  v-on:click="select(image)"
-                  class="img-fluid img-thumbnail mb-3"
-                  :class="image === selected ? 'bg-secondary' : ''">
+          <div class="modal-body">
+            <div class="row mb-3">
+              <div class="col-lg-9">
+                <input  type="text"
+                        name="search"
+                        placeholder="Recherche en anglais..."
+                        v-model="query"
+                        class="form-control">
+              </div>
+              <div class="col-lg-3 d-grid">
+                <button type="button"
+                        class="btn btn-primary"
+                        v-on:click="research"
+                        aria-label="Chercher">
+                  Chercher
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="d-flex"
-            :class="page === 1 ? 'justify-content-end' : 'justify-content-between'">
-            <div  href="#"
-                v-if="page > 1"
-                v-on:click="page = page - 1"
-                class="btn btn-light btn-sm">Page précédente</div>
-            <div  href="#"
-                v-if="page < data.total_pages"
-                v-on:click="page = page + 1"
-                class="btn btn-light bt-sm">Page suivante</div>
+            <div class="row" ref="results">
+              <p v-if="data.results.length === 0 || !data" >Aucun résultat</p>
+              <div v-for="image in data.results"  class="col-6 col-lg-2">
+                <img
+                    :src="image.thumb"
+                    :alt="image.alt"
+                    v-on:click="select(image)"
+                    class="img-fluid img-thumbnail mb-3"
+                    :class="image === selected ? 'bg-secondary' : ''">
+              </div>
+            </div>
+            <div class="d-flex"
+              :class="page === 1 ? 'justify-content-end' : 'justify-content-between'">
+              <div  href="#"
+                  v-if="page > 1"
+                  v-on:click="page = page - 1"
+                  class="btn btn-light btn-sm">Page précédente</div>
+              <div  href="#"
+                  v-if="page < data.total_pages"
+                  v-on:click="page = page + 1"
+                  class="btn btn-light bt-sm">Page suivante</div>
+            </div>
           </div>
         </div>
       </div>
@@ -109,7 +114,8 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           results: [],
           total: 0
         },
-        isOpened: false
+        isOpened: false,
+        isReady: false
       }
     },
     mounted() {
@@ -132,6 +138,8 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           this.research();
         }
       }.bind(this));
+
+      this.isReady = true;
     },
     watch: {
       page(value) {
@@ -175,12 +183,11 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
         if (!inputImage) {
           inputImage = document.createElement('img');
           // add img-fluid img-thumb
-          inputImageContainer.appendChild(img);
-        }
-
-        if (inputImage) {
+          inputImage.classList.add('img-fluid', 'img-thumb');
+          inputImageContainer.appendChild(inputImage);
           inputImage.setAttribute('src', image.preview);
         }
+
         inputAlt.value = image.alt;
         $(inputCredit).summernote('code', image.credit);
         this.modal.hide();
