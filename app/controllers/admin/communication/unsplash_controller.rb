@@ -10,7 +10,7 @@ class Admin::Communication::UnsplashController < Admin::Communication::Applicati
         {
           query: params[:query],
           page: (params[:page] || 1),
-          per_page: (params[:per_page] || 18),
+          per_page: (params[:per_page] || 10),
           orientation: (params[:orientation] || 'squarish'),
           lang: (params[:lang] || 'en')
         }
