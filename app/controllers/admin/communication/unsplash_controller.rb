@@ -2,9 +2,18 @@ class Admin::Communication::UnsplashController < Admin::Communication::Applicati
   layout false
 
   def index
-    @search = params[:search]
-    @quantity = params[:quantity] || 18
-    @photos = @search ? Unsplash::Photo.search(@search, 1, @quantity, :squarish)
-                      : []
+    if params[:query].blank?
+      @photos = []
+    else
+      @photos = Unsplash::Search.search "/search/photos",
+        Unsplash::Photo,
+        {
+          query: params[:query],
+          page: (params[:page] || 1),
+          per_page: (params[:per_page] || 18),
+          orientation: (params[:orientation] || 'squarish'),
+          lang: (params[:lang] || 'en')
+        }
+    end
   end
 end
