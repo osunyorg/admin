@@ -5,10 +5,7 @@ slug: "<%= @about.path %>"
 parent: "<%= @about.parent.path %>"
 <% end %>
 position: <%= @about.position %>
-<% if @about.best_featured_image.attached? %>
-image: "<%= @about.best_featured_image.blob.id %>"
-image_alt: "<%= @about.featured_image_alt %>"
-<% end %>
+<%= render 'admin/communication/unsplash/static' %>
 description: >
   <%= prepare_text_for_static @about.description %>
 ---

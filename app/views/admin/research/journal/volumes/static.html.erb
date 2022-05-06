@@ -6,10 +6,7 @@ issn: "<%= @about.journal.issn %>"
 keywords: >
   <%= @about.keywords %>
 date: "<%= @about.published_at.iso8601 %>"
-<% if @about.featured_image.attached? %>
-image: "<%= @about.featured_image.blob.id %>"
-image_alt: "<%= @about.featured_image_alt %>"
-<% end %>
+<%= render 'admin/communication/unsplash/static' %>
 description: >
   <%= prepare_text_for_static @about.description %>
 ---
