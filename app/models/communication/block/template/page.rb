@@ -1,14 +1,9 @@
 class Communication::Block::Template::Page < Communication::Block::Template
   def build_git_dependencies
-    # add_dependency category unless category.nil?
-    # add_dependency selected_posts
-    # selected_posts.each do |post|
-    #   add_dependency post.active_storage_blobs
-    #   if post.author.present?category.nil? ? free_posts : category_posts
-    #     add_dependency [post.author, post.author.author]
-    #     add_dependency post.author.active_storage_blobs
-    #   end
-    # end
+    add_dependency selected_pages
+    selected_pages.each do |page|
+      add_dependency page.active_storage_blobs
+    end
   end
 
   def selected_pages
@@ -30,9 +25,11 @@ class Communication::Block::Template::Page < Communication::Block::Template
   protected
 
   def free_pages
-    elements.map { |element| 
+    elements.map { |element|
+                  p = page(element['id'])
+                  next if p.nil?
                   {
-                    page: page(element['id']),
+                    page: p,
                     show_description: element['show_description'] || false,
                     show_image: element['show_image'] || false
                   }.to_dot
@@ -42,6 +39,9 @@ class Communication::Block::Template::Page < Communication::Block::Template
 
   def page(id)
     return if id.blank?
-    page = block.about&.website.pages.find_by id: id
+    page = block.about&.website
+                       .pages
+                       .published
+                       .find_by(id: id)
   end
 end
