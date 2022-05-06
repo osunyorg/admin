@@ -46,7 +46,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
                       v-model="parameters.query"
                       class="form-control">
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 d-grid">
               <button type="button"
                       class="btn btn-primary"
                       v-on:click="search"
@@ -149,7 +149,13 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           }
         }.bind(this);
 
-        xmlHttp.open( "GET", this.parameters.url + '?query=' + this.parameters.query + '&per_page=' + this.parameters.per_page + '&page=' + this.page + '&lang=' + this.parameters.lang, false );
+        xmlHttp.open( "GET",
+                      this.parameters.url
+                      + '?query=' + this.parameters.query
+                      + '&per_page=' + this.parameters.per_page
+                      + '&page=' + this.page
+                      + '&lang=' + this.parameters.lang,
+                      false );
         xmlHttp.send( null );
       },
       select(image) {
