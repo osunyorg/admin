@@ -9,6 +9,8 @@ about_featured_image_image = ".#{about_identifier}_featured_image img"
 about_featured_image_alt = "##{about_identifier}_featured_image_alt"
 # #communication_website_page_featured_image_credit
 about_featured_image_credit = "##{about_identifier}_featured_image_credit"
+# fr, en...
+lang = about&.language&.iso_code if about.respond_to? :language
 %>
 
 <div id="unsplash-app" v-cloak>
@@ -55,9 +57,9 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
             <p v-if="data.results.length === 0 || !data" >Aucun résultat</p>
 
             <div v-for="image in data.results"  class="col-6 col-lg-2">
-              <img 
-                  :src="image.thumb" 
-                  :alt="image.alt" 
+              <img
+                  :src="image.thumb"
+                  :alt="image.alt"
                   v-on:click="select(image)"
                   class="img-fluid img-thumbnail mb-3"
                   :class="image === selected ? 'bg-secondary' : ''">
@@ -72,7 +74,7 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
             <div  href="#"
                 v-if="page < data.total_pages"
                 v-on:click="page = page + 1"
-                class="btn btn-secondary">Page suivante</div> 
+                class="btn btn-secondary">Page suivante</div>
           </div>
         </div>
       </div>
@@ -91,7 +93,7 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
         parameters: {
           url: '<%= admin_communication_unsplash_path(format: :json) %>',
           per_page: 12,
-          lang: '<%= about&.language&.iso_code %>',
+          lang: '<%= lang %>',
           query: '<%= search || "" %>'
         },
         page: 1,
@@ -113,7 +115,6 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
     },
     watch: {
       page(value) {
-        console.log(value)
         this.search();
       }
     },
@@ -124,7 +125,7 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
         }
 
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() { 
+        xmlHttp.onreadystatechange = function() {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             this.data = JSON.parse(xmlHttp.responseText);
             console.log(this.data)
@@ -150,7 +151,7 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
       }
     }
   });
-  
+
   window.addEventListener('load', function(){
     setTimeout(function() {
       app.mount('#unsplash-app');

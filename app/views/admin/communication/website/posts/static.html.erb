@@ -15,13 +15,7 @@ categories:
   - "<%= category.path %>"
   <% end %>
 <% end %>
-<% if @about.featured_image.attached? %>
-image:
-  id: "<%= @about.featured_image.blob.id %>"
-  alt: "<%= @about.featured_image_alt %>"
-  credit: >
-    <%= prepare_html_for_static @about.featured_image_credit, @about.university %>
-<% end %>
+<%= render 'admin/communication/unsplash/static' %>
 description: >
   <%= prepare_text_for_static @about.description %>
 description_short: >

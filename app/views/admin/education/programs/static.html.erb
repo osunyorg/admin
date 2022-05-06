@@ -7,10 +7,7 @@ url: <%= @website.special_page(:education_programs).path %><%= @about.path %>/
 description: >
   <%= prepare_text_for_static @about.description %>
 position: <%= @about.position %>
-<% if @about.best_featured_image.attached? %>
-image: "<%= @about.best_featured_image.blob.id %>"
-image_alt: "<%= @about.featured_image_alt %>"
-<% end %>
+<%= render 'admin/communication/unsplash/static' %>
 category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>/"
 teachers:
 <% teacher_involvements.each do |involvement| %>
