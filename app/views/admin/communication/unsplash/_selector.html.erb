@@ -52,14 +52,14 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
             </div>
           </div>
           <div class="row" ref="results">
+            <p v-if="data.length === 0 || !data" >Aucun résultat</p>
             <div v-for="image in data"  class="col-6 col-lg-2">
               <img 
                   :src="image.thumb" 
                   :alt="image.alt" 
                   v-on:click="select(image)"
                   class="img-fluid img-thumbnail mb-3"
-                  :class="image === selected ? 'bg-secondary' : ''"
-                  >
+                  :class="image === selected ? 'bg-secondary' : ''">
             </div>
           </div>
         </div>
