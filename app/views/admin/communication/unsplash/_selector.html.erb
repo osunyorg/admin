@@ -64,13 +64,11 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
             </div>
           </div>
           <div class="d-flex"
-            :class="page === 1 ? 'justify-content-end' : 'justify-content-between'"
-          >
+            :class="page === 1 ? 'justify-content-end' : 'justify-content-between'">
             <div  href="#"
                 v-if="page > 1"
                 v-on:click="page = page - 1"
                 class="btn btn-secondary">Page précédente</div>
-
             <div  href="#"
                 v-if="page < data.total_pages"
                 v-on:click="page = page + 1"
