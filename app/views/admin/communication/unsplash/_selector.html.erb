@@ -126,6 +126,7 @@ lang = about&.language&.iso_code if about.respond_to? :language
         if (event.key === "Enter" && this.isOpened) {
           event.preventDefault();
           event.stopImmediatePropagation();
+          this.search();
         }
       }.bind(this));
     },
