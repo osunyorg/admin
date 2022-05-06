@@ -11,7 +11,7 @@ about_featured_image_alt = "##{about_identifier}_featured_image_alt"
 about_featured_image_credit = "##{about_identifier}_featured_image_credit"
 %>
 
-<div id="unsplash-app">
+<div id="unsplash-app" v-cloak>
   <button type="button"
           class="btn btn-secondary btn-sm"
           data-bs-toggle="modal"
@@ -39,7 +39,7 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
               <input  type="text"
                       name="search"
                       placeholder="Recherche en anglais..."
-                      v-model="params.query"
+                      v-model="parameters.query"
                       class="form-control">
             </div>
             <div class="col-lg-3">
@@ -62,8 +62,19 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
                   class="img-fluid img-thumbnail mb-3"
                   :class="image === selected ? 'bg-secondary' : ''">
             </div>
+          </div>
+          <div class="d-flex"
+            :class="page === 1 ? 'justify-content-end' : 'justify-content-between'"
+          >
+            <div  href="#"
+                v-if="page > 1"
+                v-on:click="page = page - 1"
+                class="btn btn-secondary">Page précédente</div>
 
-            <%# <button v-if="data.results.length > 0 && data.total_pages > params.page">Plus de résultats</button> %>
+            <div  href="#"
+                v-if="page < data.total_pages"
+                v-on:click="page = page + 1"
+                class="btn btn-secondary">Page suivante</div> 
           </div>
         </div>
       </div>
@@ -79,13 +90,13 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
     data() {
       return {
         selected: {},
-        params: {
+        parameters: {
           url: '<%= admin_communication_unsplash_path(format: :json) %>',
           per_page: 12,
-          page: 1,
           lang: '<%= about&.language&.iso_code %>',
           query: '<%= search || "" %>'
         },
+        page: 1,
         targets: {
           image: '<%= about_featured_image_image %>',
           alt: '<%= about_featured_image_alt %>',
@@ -102,9 +113,15 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
       this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
       modalElement.addEventListener('show.bs.modal', this.search.bind(this))
     },
+    watch: {
+      page(value) {
+        console.log(value)
+        this.search();
+      }
+    },
     methods: {
       search() {
-        if (!this.params.query) {
+        if (!this.parameters.query) {
           return null;
         }
 
@@ -116,7 +133,7 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
           }
         }.bind(this);
 
-        xmlHttp.open( "GET", this.params.url + '&query=' + this.params.query + '&per_page=' + this.params.per_page + '&page=' + this.params.page + '&lang=' + this.params.lang, false );
+        xmlHttp.open( "GET", this.parameters.url + '&query=' + this.parameters.query + '&per_page=' + this.parameters.per_page + '&page=' + this.page + '&lang=' + this.parameters.lang, false );
         xmlHttp.send( null );
       },
       select(image) {
