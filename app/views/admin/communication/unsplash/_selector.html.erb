@@ -172,11 +172,12 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
 
         this.selected = image;
 
-        if (!inputImage) (
+        if (!inputImage) {
           inputImage = document.createElement('img');
           // add img-fluid img-thumb
-          inputImageContainer.append(img);
-        )
+          inputImageContainer.appendChild(img);
+        }
+
         if (inputImage) {
           inputImage.setAttribute('src', image.preview);
         }
