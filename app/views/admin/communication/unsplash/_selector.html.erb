@@ -117,7 +117,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
 
       modalElement.addEventListener('show.bs.modal', function (){
         this.isOpened = true;
-        this.search.bind(this)
+        this.search()
       }.bind(this));
 
       modalElement.addEventListener('hide.bs.modal', function() {
