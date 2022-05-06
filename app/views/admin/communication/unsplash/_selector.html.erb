@@ -11,68 +11,121 @@ about_featured_image_alt = "##{about_identifier}_featured_image_alt"
 about_featured_image_credit = "##{about_identifier}_featured_image_credit"
 %>
 
-<% if !about.featured_image.attached? && search.present? %>
-  <p>Voulez-vous utiliser une de ces images Unsplash ?</p>
-  <div class="row">
-    <% Unsplash::Photo.search(text, 1, 4, :squarish).each do |photo| %>
-      <div class="col-6">
-        <%= render 'admin/communication/unsplash/photo', photo: photo %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
-<button type="button"
-        class="btn btn-secondary btn-sm"
-        data-bs-toggle="modal"
-        data-bs-target="#unsplashModal">
-  Chercher une image
-</button>
-<input  class="form-control string optional"
-        type="hidden"
-        value=""
-        name="unsplash"
-        id="unsplashInput"
-        data-unsplash-img="<%= about_featured_image_image %>"
-        data-unsplash-alt="<%= about_featured_image_alt %>"
-        data-unsplash-credit="<%= about_featured_image_credit %>"
-        >
-<div  class="modal fade"
-      id="unsplashModal"
-      tabindex="-1"
-      aria-labelledby="Unsplash"
-      aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Recherche d'image sur Unsplash</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row mb-3">
-          <div class="col-lg-9">
-            <input  type="text"
-                    name="search"
-                    value="<%= search %>"
-                    class="form-control">
-          </div>
-          <div class="col-lg-3">
-            <button type="button"
-                    class="btn btn-primary"
-                    aria-label="Chercher">
-              Chercher
-            </button>
-          </div>
+<div id="unsplash-app">
+  <button type="button"
+          class="btn btn-secondary btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#unsplashModal">
+    Chercher une image
+  </button>
+  <input  class="form-control string optional"
+          type="hidden"
+          name="unsplash"
+          v-model="selected.id">
+  <div  class="modal fade"
+        id="unsplashModal"
+        tabindex="-1"
+        aria-labelledby="Unsplash"
+        aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recherche d'image sur Unsplash</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="row">
-          <% if search.present? %>
-            <% Unsplash::Photo.search(search, 1, 18, :squarish).each do |photo| %>
-              <div class="col-6 col-lg-2">
-                <%= render 'admin/communication/unsplash/photo', photo: photo %>
-              </div>
-            <% end %>
-          <% end %>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-lg-9">
+              <input  type="text"
+                      name="search"
+                      placeholder="Recherche en anglais..."
+                      v-model="searchValue"
+                      class="form-control">
+            </div>
+            <div class="col-lg-3">
+              <button type="button"
+                      class="btn btn-primary"
+                      v-on:click="search"
+                      aria-label="Chercher">
+                Chercher
+              </button>
+            </div>
+          </div>
+          <div class="row" ref="results">
+            <p v-if="data.length === 0 || !data" >Aucun résultat</p>
+            <div v-for="image in data"  class="col-6 col-lg-2">
+              <img 
+                  :src="image.thumb" 
+                  :alt="image.alt" 
+                  v-on:click="select(image)"
+                  class="img-fluid img-thumbnail mb-3"
+                  :class="image === selected ? 'bg-secondary' : ''">
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<%# Include vue.js before call Vue.createApp %>
+<%= javascript_include_tag 'vue' %>
+
+<script>
+  var app = Vue.createApp({
+    data() {
+      return {
+        quantity: 12,
+        searchValue: '<%= search %>',
+        unsplashUrl: '<%= admin_communication_unsplash_path(format: :json) %>',
+        selected: {},
+        targets: {
+          image: '<%= about_featured_image_image %>',
+          alt: '<%= about_featured_image_alt %>',
+          credit: '<%= about_featured_image_credit %>'
+        },
+        data: []
+      }
+    },
+    mounted() {
+      var modalElement = document.querySelector('#unsplashModal')
+      this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+      modalElement.addEventListener('show.bs.modal', this.search.bind(this))
+    },
+    methods: {
+      search() {
+        if (!this.searchValue) {
+          return null;
+        }
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            this.data = JSON.parse(xmlHttp.responseText);
+          }
+        }.bind(this);
+        xmlHttp.open( "GET", this.unsplashUrl + '&search=' + this.searchValue + '&quantity=' + this.quantity, false );
+        xmlHttp.send( null );
+      },
+      select(image) {
+        var inputImage = document.querySelector(this.targets.image),
+            inputAlt = document.querySelector(this.targets.alt),
+            inputCredit = document.querySelector(this.targets.credit);
+
+        this.selected = image;
+
+        if (inputImage) {
+          inputImage.setAttribute('src', image.preview);
+        }
+        inputAlt.value = image.alt;
+        $(inputCredit).summernote('code', image.credit);
+        this.modal.hide();
+      }
+    }
+  });
+  
+  window.addEventListener('load', function(){
+    setTimeout(function() {
+      app.mount('#unsplash-app');
+    }, 1000);
+  });
+</script>
