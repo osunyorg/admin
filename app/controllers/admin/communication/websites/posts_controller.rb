@@ -1,4 +1,4 @@
-class Admin::Communication::Website::PostsController < Admin::Communication::Website::ApplicationController
+class Admin::Communication::Websites::PostsController < Admin::Communication::Websites::ApplicationController
   skip_before_action :load_filters
 
   load_and_authorize_resource class: Communication::Website::Post, through: :website

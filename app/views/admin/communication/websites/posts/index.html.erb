@@ -5,7 +5,7 @@
 
   <div class="card" data-batch-selectable>
     <%= form_tag publish_admin_communication_website_posts_path do %>
-      <%= render 'admin/communication/website/posts/list', posts: @posts, selectable: true %>
+      <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
       <div class="card-footer">
         <% if @posts.total_pages > 1 %>
           <div class="float-end mb-3">
@@ -46,7 +46,7 @@
           <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
               data-id=""
               data-sort-url="<%= reorder_admin_communication_website_categories_path %>">
-            <%= render 'admin/communication/website/categories/treebranch', categories: @root_categories %>
+            <%= render 'admin/communication/websites/categories/treebranch', categories: @root_categories %>
           </ul>
         </div>
       </div>
@@ -56,7 +56,7 @@
           <div class="card-header">
             <h2 class="card-title"><%= t('communication.authors', count: 2) %></h2>
           </div>
-          <%= render 'admin/communication/website/authors/list', authors: @authors %>
+          <%= render 'admin/communication/websites/authors/list', authors: @authors %>
           <% if @authors.total_pages > 1 %>
             <div class="card-footer">
               <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>

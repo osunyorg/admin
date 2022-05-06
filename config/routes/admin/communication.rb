@@ -1,12 +1,10 @@
 namespace :communication do
   resources :websites do
-    get 'home' => 'website/home#edit'
-    patch 'home' => 'website/home#update'
     member do
       get :import
       post :import
     end
-    resources :pages, controller: 'website/pages' do
+    resources :pages, controller: 'websites/pages' do
       collection do
         post :reorder
       end
@@ -15,7 +13,7 @@ namespace :communication do
         get :static
       end
     end
-    resources :categories, controller: 'website/categories' do
+    resources :categories, controller: 'websites/categories' do
       collection do
         post :reorder
       end
@@ -24,17 +22,17 @@ namespace :communication do
         get :static
       end
     end
-    resources :authors, controller: 'website/authors', only: [:index, :show]
-    resources :posts, controller: 'website/posts' do
+    resources :authors, controller: 'websites/authors', only: [:index, :show]
+    resources :posts, controller: 'websites/posts' do
       post :publish, on: :collection
     end
     resources :curations,
               path: 'posts/curations',
               as: :post_curations,
-              controller: 'website/posts/curations',
+              controller: 'websites/posts/curations',
               only: [:new, :create]
-    resources :menus, controller: 'website/menus' do
-      resources :items, controller: 'website/menu/items', except: :index do
+    resources :menus, controller: 'websites/menus' do
+      resources :items, controller: 'websites/menu/items', except: :index do
         collection do
           get :kind_switch
           post :reorder
@@ -44,9 +42,8 @@ namespace :communication do
         end
       end
     end
-    get   'structure'     => 'website/structure#edit'
-    patch 'structure'     => 'website/structure#update'
-
+    get   'structure'     => 'websites/structure#edit'
+    patch 'structure'     => 'websites/structure#update'
   end
   resources :blocks, controller: 'blocks', except: :index do
     collection do

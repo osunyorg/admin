@@ -2,7 +2,7 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">
-    <%= render 'admin/communication/website/menus/list', menus: @menus %>
+    <%= render 'admin/communication/websites/menus/list', menus: @menus %>
     <% if @menus.total_pages > 1 %>
       <div class="card-footer">
         <%= paginate @menus, theme: 'bootstrap-5' %>

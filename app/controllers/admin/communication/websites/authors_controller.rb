@@ -1,7 +1,7 @@
-class Admin::Communication::Website::AuthorsController < Admin::Communication::Website::ApplicationController
+class Admin::Communication::Websites::AuthorsController < Admin::Communication::Websites::ApplicationController
 
   has_scope :for_search_term
-  
+
   def index
     @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
                                 .ordered

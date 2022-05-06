@@ -1,4 +1,4 @@
-class Admin::Communication::Website::MenusController < Admin::Communication::Website::ApplicationController
+class Admin::Communication::Websites::MenusController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Menu, through: :website
 
   def index

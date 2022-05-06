@@ -4,7 +4,7 @@
   <%= render 'filters', current_path: admin_communication_website_authors_path, filters: @filters if @filters.any?  %>
 
   <div class="card">
-    <%= render 'admin/communication/website/authors/list', authors: @authors %>
+    <%= render 'admin/communication/websites/authors/list', authors: @authors %>
     <% if @authors.total_pages > 1 %>
       <div class="card-footer">
         <%= paginate @authors, theme: 'bootstrap-5' %>

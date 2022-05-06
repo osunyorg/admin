@@ -2,5 +2,5 @@
 <ul class="list-unstyled treeview js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @menu) %>"
     data-id="<%= item&.id %>"
     data-sort-url="<%= reorder_admin_communication_website_menu_items_path(@menu) %>">
-  <%= render 'admin/communication/website/menu/items/treebranch', items: items %>
+  <%= render 'admin/communication/websites/menu/items/treebranch', items: items %>
 </ul>

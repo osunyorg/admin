@@ -1,5 +1,6 @@
-class Admin::Communication::Website::PagesController < Admin::Communication::Website::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Page, through: :website
+class Admin::Communication::Websites::PagesController < Admin::Communication::Websites::ApplicationController
+  load_and_authorize_resource class: Communication::Website::Page,
+                              through: :website
 
   def index
     @homepage = @website.pages.kind_home.first

@@ -1,4 +1,4 @@
-class Admin::Communication::Website::Posts::CurationsController < Admin::Communication::Website::ApplicationController
+class Admin::Communication::Websites::Posts::CurationsController < Admin::Communication::Websites::ApplicationController
   def new
     breadcrumb
   end
