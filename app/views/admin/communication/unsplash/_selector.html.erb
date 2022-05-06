@@ -3,8 +3,8 @@
 search = about.to_s
 # communication_website_page
 about_identifier = about.class.to_s.parameterize.underscore
-# .communication_website_post_featured_image img
-about_featured_image_image = ".#{about_identifier}_featured_image img"
+# .communication_website_post_featured_image
+about_featured_image_image = ".#{about_identifier}_featured_image"
 # #communication_website_page_featured_image_alt
 about_featured_image_alt = "##{about_identifier}_featured_image_alt"
 # #communication_website_page_featured_image_credit
@@ -72,11 +72,11 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
             <div  href="#"
                 v-if="page > 1"
                 v-on:click="page = page - 1"
-                class="btn btn-secondary">Page précédente</div>
+                class="btn btn-light btn-sm">Page précédente</div>
             <div  href="#"
                 v-if="page < data.total_pages"
                 v-on:click="page = page + 1"
-                class="btn btn-secondary">Page suivante</div>
+                class="btn btn-light bt-sm">Page suivante</div>
           </div>
         </div>
       </div>
@@ -100,7 +100,8 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
         },
         page: 1,
         targets: {
-          image: '<%= about_featured_image_image %>',
+          image: '<%= about_featured_image_image %> img',
+          imageContainer: '<%= about_featured_image_image %> .sdfi-deletable-file__preview',
           alt: '<%= about_featured_image_alt %>',
           credit: '<%= about_featured_image_credit %>'
         },
@@ -161,11 +162,17 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
       },
       select(image) {
         var inputImage = document.querySelector(this.targets.image),
+            inputImageContainer = document.querySelector(this.targets.imageContainer),
             inputAlt = document.querySelector(this.targets.alt),
             inputCredit = document.querySelector(this.targets.credit);
 
         this.selected = image;
 
+        if (!inputImage) (
+          inputImage = document.createElement('img');
+          // add img-fluid img-thumb
+          inputImageContainer.append(img);
+        )
         if (inputImage) {
           inputImage.setAttribute('src', image.preview);
         }
