@@ -170,8 +170,8 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
 
         if (!inputImage) {
           inputImage = document.createElement('img');
-          inputImage.classList.add('img-fluid img-thumb');
-          inputImageContainer.append(img);
+          inputImage.classList.add('img-fluid', 'img-thumb');
+          inputImageContainer.append(inputImage);
         }
         if (inputImage) {
           inputImage.setAttribute('src', image.preview);
