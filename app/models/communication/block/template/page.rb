@@ -1,6 +1,6 @@
 class Communication::Block::Template::Page < Communication::Block::Template
   def build_git_dependencies
-    add_dependency main_page.page
+    add_dependency main_page
     selected_pages.each do |hash|
       page = hash.page
       add_dependency page
@@ -9,7 +9,11 @@ class Communication::Block::Template::Page < Communication::Block::Template
   end
 
   def selected_pages
-    @selected_pages ||= free_pages
+    @selected_pages ||= elements.map { |element|
+      p = page(element['id'])
+      next if p.nil?
+      hash_from_page(p, element)
+    }.compact
   end
 
   def main_page
@@ -25,14 +29,6 @@ class Communication::Block::Template::Page < Communication::Block::Template
   end
 
   protected
-
-  def free_pages
-    elements.map { |element|
-      p = page(element['id'])
-      next if p.nil?
-      hash_from_page(p, element)
-    }.compact
-  end
 
   def hash_from_page(page, element)
     {
