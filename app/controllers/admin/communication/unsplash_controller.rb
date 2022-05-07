@@ -9,10 +9,10 @@ class Admin::Communication::UnsplashController < Admin::Communication::Applicati
     else
       p = {
         query: params[:query],
-        page: (params[:page] || 1),
-        per_page: (params[:per_page] || 10),
-        orientation: (params[:orientation] || 'squarish'),
-        lang: (params[:lang] || 'en')
+        page: (params[:page].presence || 1),
+        per_page: (params[:per_page].presence || 10),
+        orientation: (params[:orientation].presence || 'squarish'),
+        lang: (params[:lang].presence || 'en')
       }
       @search = Unsplash::Search.search "/search/photos", Unsplash::Photo, p
       @total = @search.total
