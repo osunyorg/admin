@@ -2,20 +2,21 @@
 #
 # Table name: research_journal_volumes
 #
-#  id                  :uuid             not null, primary key
-#  description         :text
-#  featured_image_alt  :string
-#  keywords            :text
-#  number              :integer
-#  published           :boolean          default(FALSE)
-#  published_at        :datetime
-#  slug                :string
-#  text                :text
-#  title               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  research_journal_id :uuid             not null, indexed
-#  university_id       :uuid             not null, indexed
+#  id                    :uuid             not null, primary key
+#  description           :text
+#  featured_image_alt    :string
+#  featured_image_credit :text
+#  keywords              :text
+#  number                :integer
+#  published             :boolean          default(FALSE)
+#  published_at          :datetime
+#  slug                  :string
+#  text                  :text
+#  title                 :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  research_journal_id   :uuid             not null, indexed
+#  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
@@ -36,7 +37,7 @@ class Research::Journal::Volume < ApplicationRecord
   include WithSlug
 
   has_summernote :text
-  
+
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :articles, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal

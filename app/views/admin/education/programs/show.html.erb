@@ -28,16 +28,7 @@
         <% end %>
       </div>
     </div>
-    <% if @program.featured_image.attached? && @program.featured_image.variable? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.featured_image') %></h5>
-        </div>
-        <div class="card-body">
-          <%= image_tag @program.featured_image.variant(resize: '600'), class: 'img-fluid mb-3' %><br>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'admin/application/featured_image/show', about: @program %>
     <% if @program.description.present? %>
       <div class="card flex-fill w-100">
         <div class="card-header">

@@ -21,6 +21,18 @@
                             value_method: ->(p) { p[:id] } if @website.categories.any? && page.is_regular_page? %>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card flex-fill w-100">
+            <div class="card-header">
+              <h5 class="card-title mb-0"><%= t('seo') %></h5>
+            </div>
+            <div class="card-body">
+              <%= f.input :description %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <% unless page.kind_home? %>
@@ -64,30 +76,7 @@
           <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
         <% end %>
       <% end %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.communication/website/page.featured_image') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :featured_image,
-                      as: :single_deletable_file,
-                      direct_upload: true,
-                      label: false,
-                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                      preview: true
-           %>
-           <%= f.input :featured_image_alt %>
-        </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
-    </div>
+      <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

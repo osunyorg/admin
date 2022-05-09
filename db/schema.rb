@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_171541) do
+ActiveRecord::Schema.define(version: 2022_05_05_131539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.string "path"
     t.string "featured_image_alt"
     t.text "text"
+    t.text "featured_image_credit"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_categories_on_program_id"
@@ -254,23 +255,6 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
   end
 
-  create_table "communication_website_index_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "communication_website_id", null: false
-    t.string "title"
-    t.string "path"
-    t.text "description"
-    t.text "text"
-    t.string "featured_image_alt"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "breadcrumb_title"
-    t.text "header_text"
-    t.index ["communication_website_id"], name: "idx_comm_website_index_page_on_communication_website_id"
-    t.index ["university_id"], name: "index_communication_website_index_pages_on_university_id"
-  end
-
   create_table "communication_website_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
@@ -325,6 +309,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.integer "kind"
     t.string "bodyclass"
     t.uuid "language_id"
+    t.text "featured_image_credit"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -349,6 +334,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.text "text"
     t.text "description_short"
     t.uuid "language_id"
+    t.text "featured_image_credit"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_posts_on_language_id"
@@ -464,6 +450,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.text "results"
     t.text "presentation"
     t.text "main_information"
+    t.text "featured_image_credit"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -501,6 +488,23 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
+  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active"
+    t.string "sirene"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -554,6 +558,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.string "featured_image_alt"
     t.boolean "published", default: false
     t.text "text"
+    t.text "featured_image_credit"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -692,8 +697,8 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
-    t.boolean "is_author"
     t.string "name"
+    t.boolean "is_author"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -782,6 +787,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
     t.datetime "direct_otp_sent_at"
     t.datetime "totp_timestamp"
     t.string "session_token"
+    t.string "picture_url"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
     t.index ["encrypted_otp_secret_key"], name: "index_users_on_encrypted_otp_secret_key", unique: true
@@ -819,8 +825,6 @@ ActiveRecord::Schema.define(version: 2022_04_28_171541) do
   add_foreign_key "communication_website_imported_posts", "universities"
   add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_websites", "universities"
-  add_foreign_key "communication_website_index_pages", "communication_websites"
-  add_foreign_key "communication_website_index_pages", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"

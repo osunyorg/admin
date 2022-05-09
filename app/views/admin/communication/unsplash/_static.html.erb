@@ -1,0 +1,10 @@
+<%
+featured_image = @about&.best_featured_image || @about.featured_image
+if featured_image.attached?
+%>
+image:
+  id: "<%= featured_image.blob.id %>"
+  alt: "<%= @about.featured_image_alt %>"
+  credit: >
+    <%= prepare_html_for_static @about.featured_image_credit, @about.university %>
+<% end %>

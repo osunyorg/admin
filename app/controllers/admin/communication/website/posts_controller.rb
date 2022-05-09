@@ -36,6 +36,11 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
     breadcrumb
   end
 
+  def static
+    @about = @post
+    render layout: false
+  end
+
   def new
     @post.website = @website
     @post.author_id = current_user.person&.id
@@ -49,6 +54,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
 
   def create
     @post.website = @website
+    @post.add_unsplash_image params[:unsplash]
     if @post.save_and_sync
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
@@ -58,6 +64,7 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
   end
 
   def update
+    @post.add_unsplash_image params[:unsplash]
     if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
@@ -85,8 +92,8 @@ class Admin::Communication::Website::PostsController < Admin::Communication::Web
     params.require(:communication_website_post)
           .permit(
             :university_id, :website_id, :title, :description, :description_short, :text,
-            :published, :published_at, :featured_image, :featured_image_delete,
-            :featured_image_infos, :featured_image_alt, :slug, :pinned,
+            :published, :published_at, :slug, :pinned,
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             :author_id, :language_id, category_ids: []
           )
           .merge(university_id: current_university.id)

@@ -1,6 +1,6 @@
-<div class="row">
+<div class="<%= 'row' unless @preview %>">
   <% @block.template.testimonials.each do |testimonial| %>
-      <div class="col-xxl-4 col-xl-6">
+      <div class="<%= 'col-xxl-4 col-xl-6' unless @preview %>">
         <article class="card">
           <div class="card-body">
             <p class="lead">
