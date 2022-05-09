@@ -1,10 +1,10 @@
 class Extranet::AcademicYearsController < Extranet::ApplicationController
   load_and_authorize_resource class: Education::AcademicYear,
-                              through: :current_university,
-                              through_association: :academic_years
+                              through: :about,
+                              through_association: :education_academic_years
 
   def index
-    @academic_years = about&.academic_years
+    @academic_years = about&.education_academic_years
                             .ordered
                             .page(params[:page])
                             .per(20)

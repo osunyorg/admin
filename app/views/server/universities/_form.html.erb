@@ -35,13 +35,13 @@
   <div class="row">
     <div class="col-md-6">
       <%= f.input :has_sso %>
-      <div id="sso-inputs">
+      <div class="sso-inputs">
         <%= f.input :sso_target_url, required: true %>
         <%= f.input :sso_cert, required: true %>
         <%= f.input :sso_name_identifier_format, required: true %>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 sso-inputs">
       <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
       <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
       <%= render 'sso_mapping', university: university %>

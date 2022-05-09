@@ -5,7 +5,14 @@
     <% end %>
     <%= render_navigation context: :admin %>
 
+
     <footer class="small my-5">
+      <hr>
+      <div class="sidebar-header">
+        <p class="small">
+          <%= t('admin.number_of_enqueued_tasks', tasks: Delayed::Job.all.length) %>
+        </p>
+      </div>
       <hr>
       <%= link_to 'API', api_root_path, class: 'sidebar-link' %>
       <%
