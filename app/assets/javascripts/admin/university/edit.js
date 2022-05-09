@@ -3,17 +3,20 @@ window.osuny.university.edit = {
         'use strict';
         this.hasSsoInput = document.querySelector('input[type="checkbox"][name="university[has_sso]"]');
         this.hasSsoInput.addEventListener('change', this.onHasSsoChange.bind(this));
-        this.ssoFields = document.getElementById('sso-inputs');
+        this.ssoFields = document.querySelectorAll('.sso-inputs');
         this.onHasSsoChange();
     },
 
     onHasSsoChange: function () {
         'use strict';
-        var value = this.hasSsoInput.checked;
-        if (value) {
-            this.ssoFields.classList.remove('d-none');
-        } else {
-            this.ssoFields.classList.add('d-none');
+        var value = this.hasSsoInput.checked,
+            i;
+        for (i = 0; i < this.ssoFields.length; i += 1) {
+            if (value) {
+                this.ssoFields[i].classList.remove('d-none');
+            } else {
+                this.ssoFields[i].classList.add('d-none');
+            }
         }
     },
 
