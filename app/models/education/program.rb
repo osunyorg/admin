@@ -114,13 +114,12 @@ class Education::Program < ApplicationRecord
              -> { distinct },
              through: :schools
 
-  has_many   :cohorts,
-             class_name: 'Education::Cohort'
   has_many   :education_cohorts,
              class_name: 'Education::Cohort'
+  alias_attribute :cohorts, :education_cohorts
 
   has_many   :alumni,
-             through: :cohorts,
+             through: :education_cohorts,
              source: :people
   alias_attribute :university_person_alumni, :alumni
 
@@ -129,7 +128,6 @@ class Education::Program < ApplicationRecord
              class_name: 'University::Person::Experience',
              through: :alumni,
              source: :experiences
-  alias_attribute :experiences, :alumni_experiences
   alias_attribute :university_person_experiences, :alumni_experiences
 
   has_many   :alumni_organizations,
@@ -142,7 +140,7 @@ class Education::Program < ApplicationRecord
   has_many   :education_academic_years,
              -> { distinct },
              class_name: 'Education::AcademicYear',
-             through: :cohorts,
+             through: :education_cohorts,
              source: :academic_year
              alias_attribute :academic_years, :education_academic_years
 

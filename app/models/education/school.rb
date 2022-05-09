@@ -76,7 +76,6 @@ class Education::School < ApplicationRecord
               class_name: 'University::Person::Experience',
               through: :alumni,
               source: :experiences
-  alias_attribute :experiences, :alumni_experiences
   alias_attribute :university_person_experiences, :alumni_experiences
 
   has_many    :alumni_organizations, -> { distinct },
@@ -92,8 +91,7 @@ class Education::School < ApplicationRecord
 
   has_many    :education_cohorts, -> { distinct },
               class_name: 'Education::Cohort',
-              through: :programs,
-              source: :cohorts
+              through: :programs
   alias_attribute :cohorts, :education_cohorts
 
   validates :name, :address, :city, :zipcode, :country, presence: true
