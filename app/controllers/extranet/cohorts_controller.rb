@@ -1,11 +1,11 @@
 class Extranet::CohortsController < Extranet::ApplicationController
   load_and_authorize_resource class: Education::Cohort,
-                              through: :current_university,
+                              through: :about,
                               through_association: :education_cohorts
 
   def index
     @facets = Education::Cohort::Facets.new params[:facets], {
-      model: about.cohorts,
+      model: about.education_cohorts,
       about: about
     }
     @cohorts = @facets.results

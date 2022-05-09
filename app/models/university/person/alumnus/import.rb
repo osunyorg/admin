@@ -157,6 +157,12 @@ class University::Person::Alumnus::Import < ApplicationRecord
         # 'f4d4a92f-8b8f-4778-a127-9293684666be' => 'fab9b86c-8872-4df5-9a97-0e30b104a837', # DU_BILINGUE
         # '6df53074-195c-4299-8b49-bbc9d7cad41a' => 'cb1a26b9-fe5c-4ad1-9715-71cec4642910', # DU_JRI
         # '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '91c44fd2-f0a4-4189-a3f5-311322b7b472' # DUT_JOURNALISME
+        # Sebou
+        # 'c6b78fac-0a5f-4c44-ad22-4ee68ed382bb' => 'ea5d32be-b86a-4257-984a-4d84717dd1d6', # DUT MMI
+        # 'ae3e067a-63b4-4c3f-ba9c-468ade0e4182' => '701c3a4f-3585-4152-b866-da17f4e80e77', # MASTER IJBA
+        # 'f4d4a92f-8b8f-4778-a127-9293684666be' => '0c05b690-ebd1-4efa-862c-81ea0978fb0b', # DU_BILINGUE
+        # '6df53074-195c-4299-8b49-bbc9d7cad41a' => '4ded6dfa-2fab-4e77-b58d-0d97344a04d1', # DU_JRI
+        # '0d81d3a2-a12c-4326-a395-fd0df4a3ea4f' => '4edac5cd-6564-4e47-a18c-960d3e5de54e' # DUT_JOURNALISME
       }
       id = substitutes[id] if substitutes.has_key? id
     end
