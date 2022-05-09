@@ -9,6 +9,9 @@
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
   <%= simple_form_for [:admin, @block] do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
     <div class="row">
       <div class="col-xxl-4 col-md-6">
         <%= f.input :title %>

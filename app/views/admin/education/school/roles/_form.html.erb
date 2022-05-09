@@ -1,6 +1,8 @@
 <%= simple_form_for [:admin, role],
                     url: role.new_record? ? admin_education_school_roles_path(@school)
                                           : admin_education_school_role_path(role, { school_id: @school.id }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
     <div class="col-md-8">
