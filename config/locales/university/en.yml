@@ -139,6 +139,9 @@ en:
   university:
     internal_key: Internal Key
     invoice_informations: Invoice informations
+    manage_alumni: Manage alumni
+    manage_cohorts: Manage cohorts
+    manage_experiences: Manage experiences
     person:
       administrator_roles: Administrator roles
       taught_programs: Taught programs

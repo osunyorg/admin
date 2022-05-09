@@ -13,4 +13,5 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <%= link_to t('university.manage_alumni'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
 <% end %>

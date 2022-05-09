@@ -3,7 +3,6 @@
     <tr>
       <th><%= University::Person.human_attribute_name('last_name') %></th>
       <th><%= University::Person.human_attribute_name('first_name') %></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,18 +11,6 @@
       <tr>
         <td><%= link_to alumnus.last_name, path %></td>
         <td><%= link_to alumnus.first_name, path %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                      edit_admin_university_person_path(alumnus),
-                      class: button_classes if can?(:update, alumnus) %>
-            <%= link_to t('delete'),
-                      path,
-                      method: :delete,
-                      data: { confirm: t('please_confirm') },
-                      class: button_classes_danger if can?(:destroy, alumnus) %>
-          </div>
-        </td>
       </tr>
     <% end %>
   </tbody>

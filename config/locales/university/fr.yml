@@ -139,6 +139,9 @@ fr:
   university:
     internal_key: Clé interne
     invoice_informations: Données de facturation
+    manage_alumni: Gérer les alumni
+    manage_cohorts: Gérer les promotions
+    manage_experiences: Gérer les expériences professionnelles
     person:
       administrator_roles: Rôles administratifs
       taught_programs: Formations enseignées

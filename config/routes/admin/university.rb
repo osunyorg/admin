@@ -4,7 +4,14 @@ namespace :university do
     resources :imports, only: [:index, :show, :new, :create]
   end
   namespace :person do
-    resources :alumni
+    resources :alumni, only: [:index, :show] do
+      member do
+        get 'edit_cohorts' => 'alumni#edit_cohorts'
+        patch 'edit_cohorts' => 'alumni#update_cohorts'
+        get 'edit_experience' => 'alumni#edit_experiences'
+        patch 'edit_experiences' => 'alumni#update_experiences'
+      end
+    end
     namespace :alumnus do
       resources :imports, only: [:index, :show, :new, :create]
     end
