@@ -45,6 +45,7 @@ class Admin::University::Person::AlumniController < Admin::University::Applicati
   end
 
   def alumnus_params
+    # TODO: Permit nested attrs
     params.require(:university_person_alumnus)
           .permit()
   end

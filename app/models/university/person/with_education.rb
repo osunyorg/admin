@@ -25,6 +25,10 @@ module University::Person::WithEducation
                             foreign_key: 'university_person_id',
                             association_foreign_key: 'education_cohort_id'
 
+    accepts_nested_attributes_for :cohorts,
+                                  reject_if: :all_blank,
+                                  allow_destroy: true
+
     # Dénormalisation des liens via cohorts, pour la recherche par facettes
     has_and_belongs_to_many :diploma_years,
                             class_name: 'Education::AcademicYear',
