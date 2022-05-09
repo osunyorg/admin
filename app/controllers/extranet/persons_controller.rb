@@ -1,6 +1,6 @@
 class Extranet::PersonsController < Extranet::ApplicationController
   load_and_authorize_resource class: University::Person::Alumnus,
-                              through: :current_university,
+                              through: :about,
                               through_association: :university_person_alumni
 
   def index

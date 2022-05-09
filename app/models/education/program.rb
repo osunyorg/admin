@@ -122,19 +122,22 @@ class Education::Program < ApplicationRecord
   has_many   :alumni,
              through: :cohorts,
              source: :people
+  alias_attribute :university_person_alumni, :alumni
 
   has_many   :alumni_experiences,
              -> { distinct },
              class_name: 'University::Person::Experience',
              through: :alumni,
              source: :experiences
-             alias_attribute :experiences, :alumni_experiences
+  alias_attribute :experiences, :alumni_experiences
+  alias_attribute :university_person_experiences, :alumni_experiences
 
   has_many   :alumni_organizations,
              -> { distinct },
              class_name: 'University::Organization',
              through: :alumni_experiences,
              source: :organization
+  alias_attribute :university_person_alumni_organizations, :alumni_organizations
 
   has_many   :education_academic_years,
              -> { distinct },

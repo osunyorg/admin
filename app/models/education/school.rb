@@ -83,6 +83,7 @@ class Education::School < ApplicationRecord
               class_name: 'University::Organization',
               through: :alumni_experiences,
               source: :organization
+  alias_attribute :university_person_alumni_organizations, :alumni_organizations
 
   has_many    :education_academic_years, -> { distinct },
               class_name: 'Education::AcademicYear',
