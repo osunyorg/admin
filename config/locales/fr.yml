@@ -47,6 +47,7 @@ fr:
       sentence_without_link: Valeur héritée
       sentence_html: Valeur héritée de %{link}
       status: Valeur héritée
+    number_of_enqueued_tasks: "Nombre de tâches à traiter : %{tasks}"
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
