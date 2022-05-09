@@ -17,7 +17,7 @@
                       input_html: {
                         data: { 'summernote-config' => 'mini' }
                       } %>
-          <%= f.input :text, as: :summernote %>
+          <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
           <%= f.association :related_category,
                             collection: collection_tree(@website.categories),
                             label_method: ->(p) { sanitize p[:label] },

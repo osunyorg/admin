@@ -21,6 +21,7 @@ description_short: >
   <%= prepare_text_for_static @about.description_short %>
 header_text: >
   <%= prepare_html_for_static @about.header_text, @website.university %>
+legacy_text: >
+  <%= prepare_html_for_static @about.text, @about.university %>
 <%= render 'admin/communication/blocks/static', about: @about %>
 ---
-<%= prepare_html_for_static @about.text, @about.university %>
