@@ -46,8 +46,6 @@ namespace :communication do
         end
       end
     end
-    get   'structure'     => 'websites/structure#edit'
-    patch 'structure'     => 'websites/structure#update'
   end
   resources :blocks, controller: 'blocks', except: :index do
     collection do
