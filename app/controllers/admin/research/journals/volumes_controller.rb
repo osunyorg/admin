@@ -1,4 +1,4 @@
-class Admin::Research::Journal::VolumesController < Admin::Research::Journal::ApplicationController
+class Admin::Research::Journals::VolumesController < Admin::Research::Journals::ApplicationController
   load_and_authorize_resource class: Research::Journal::Volume, through: :journal
 
   def index

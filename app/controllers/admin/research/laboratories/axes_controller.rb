@@ -1,4 +1,4 @@
-class Admin::Research::Laboratory::AxesController < Admin::Research::Laboratory::ApplicationController
+class Admin::Research::Laboratories::AxesController < Admin::Research::Laboratories::ApplicationController
   load_and_authorize_resource class: Research::Laboratory::Axis, through: :laboratory
 
   include Admin::Reorderable

@@ -1,4 +1,4 @@
-class Admin::Research::Laboratory::ApplicationController < Admin::Research::ApplicationController
+class Admin::Research::Laboratories::ApplicationController < Admin::Research::ApplicationController
   load_and_authorize_resource :laboratory,
                               class: Research::Laboratory,
                               through: :current_university,

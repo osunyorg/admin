@@ -1,4 +1,4 @@
-class Admin::Research::Journal::ApplicationController < Admin::Research::ApplicationController
+class Admin::Research::Journals::ApplicationController < Admin::Research::ApplicationController
   load_and_authorize_resource :journal,
                               class: Research::Journal,
                               through: :current_university,

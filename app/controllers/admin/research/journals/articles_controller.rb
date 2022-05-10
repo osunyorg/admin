@@ -1,4 +1,4 @@
-class Admin::Research::Journal::ArticlesController < Admin::Research::Journal::ApplicationController
+class Admin::Research::Journals::ArticlesController < Admin::Research::Journals::ApplicationController
   load_and_authorize_resource class: Research::Journal::Article, through: :journal
 
   include Admin::Reorderable
