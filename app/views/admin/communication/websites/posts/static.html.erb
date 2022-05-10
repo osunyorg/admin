@@ -15,10 +15,7 @@ categories:
   - "<%= category.path %>"
   <% end %>
 <% end %>
-<% if @about.featured_image.attached? %>
-image: "<%= @about.featured_image.blob.id %>"
-image_alt: "<%= @about.featured_image_alt %>"
-<% end %>
+<%= render 'admin/communication/unsplash/static' %>
 description: >
   <%= prepare_text_for_static @about.description %>
 description_short: >

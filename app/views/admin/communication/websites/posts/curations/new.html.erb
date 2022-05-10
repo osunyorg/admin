@@ -1,6 +1,8 @@
 <% content_for :title, t('communication.website.posts.new_curation') %>
 
 <%= simple_form_for :curation, url: admin_communication_website_post_curations_path, html: { id: 'new_communication_website_post_curation' } do |f| %>
+  <%= f.error_notification %>
+
   <div class="row">
     <div class="col-md-8">
       <div class="card flex-fill w-100">

@@ -47,6 +47,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def create
     @page.website = @website
+    @page.add_unsplash_image params[:unsplash]
     if @page.save_and_sync
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
     else
@@ -56,6 +57,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
+    @page.add_unsplash_image params[:unsplash]
     if @page.update_and_sync(page_params)
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
     else
@@ -85,10 +87,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def page_params
     params.require(:communication_website_page)
-          .permit(:communication_website_id, :title, :breadcrumb_title, :bodyclass,
+          .permit(
+            :communication_website_id, :title, :breadcrumb_title, :bodyclass,
             :description, :description_short, :header_text, :text, :slug, :published,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt,
-            :parent_id, :related_category_id, :language_id)
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+            :parent_id, :related_category_id, :language_id
+          )
           .merge(university_id: current_university.id)
   end
 end

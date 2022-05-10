@@ -1,6 +1,9 @@
 <%= simple_form_for [:admin, role],
                     url: role.new_record? ? admin_education_program_roles_path(@program)
                                           : admin_education_program_role_path(role, { program_id: @program.id }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
   <div class="row">
     <div class="col-md-8">
       <div class="card flex-fill w-100">

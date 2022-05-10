@@ -6,6 +6,7 @@
 #  description              :text
 #  description_short        :text
 #  featured_image_alt       :string
+#  featured_image_credit    :text
 #  github_path              :text
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)

@@ -1,4 +1,7 @@
 <%= simple_form_for [:admin, volume] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
   <div class="row">
     <div class="col-md-8">
       <div class="card flex-fill w-100">
@@ -7,13 +10,29 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :featured_image,
-                      as: :single_deletable_file,
-                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                      preview: 200,
-                      direct_upload: true %>
-          <%= f.input :featured_image_alt %>
           <%= f.input :text, as: :summernote %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card flex-fill w-100">
+            <div class="card-header">
+              <h5 class="card-title mb-0"><%= t('seo') %></h5>
+            </div>
+            <div class="card-body">
+              <%= f.input :description %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('seo') %></h5>
+          </div>
+          <div class="card-body">
+            <%= f.input :description %>
+          </div>
         </div>
       </div>
     </div>
@@ -35,14 +54,7 @@
           <%= f.input :keywords %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/featured_image/edit', about: volume, f: f %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

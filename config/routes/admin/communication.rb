@@ -1,4 +1,5 @@
 namespace :communication do
+  get 'unsplash' => 'unsplash#index'
   resources :websites do
     member do
       get :import
@@ -25,6 +26,9 @@ namespace :communication do
     resources :authors, controller: 'websites/authors', only: [:index, :show]
     resources :posts, controller: 'websites/posts' do
       post :publish, on: :collection
+      member do
+        get :static
+      end
     end
     resources :curations,
               path: 'posts/curations',

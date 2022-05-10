@@ -55,6 +55,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
 
   def create
     @category.website = @website
+    @category.add_unsplash_image params[:unsplash]
     if @category.save_and_sync
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
     else
@@ -64,6 +65,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   end
 
   def update
+    @category.add_unsplash_image params[:unsplash]
     if @category.update_and_sync(category_params)
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
     else
@@ -95,7 +97,8 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
     params.require(:communication_website_category)
           .permit(
             :website_id, :name, :description, :text, :slug, :parent_id,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt)
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+          )
           .merge(university_id: current_university.id)
   end
 end

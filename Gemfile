@@ -50,7 +50,7 @@ gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git', b
 # gem 'summernote-rails', path: '../summernote-rails'
 gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_authentication.git'
 # gem 'two_factor_authentication', path: '../two_factor_authentication'
-
+gem 'unsplash'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

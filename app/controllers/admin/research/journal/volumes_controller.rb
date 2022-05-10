@@ -21,6 +21,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def create
+    @volume.add_unsplash_image params[:unsplash]
     @volume.assign_attributes(journal: @journal, university: current_university)
     if @volume.save_and_sync
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
@@ -31,6 +32,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
   end
 
   def update
+    @volume.add_unsplash_image params[:unsplash]
     if @volume.update_and_sync(volume_params)
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
     else
@@ -57,7 +59,7 @@ class Admin::Research::Journal::VolumesController < Admin::Research::Journal::Ap
     params.require(:research_journal_volume)
           .permit(
             :title, :slug, :number, :keywords, :published, :published_at, :description, :text,
-            :featured_image, :featured_image_infos, :featured_image_delete, :featured_image_alt
+            :featured_image, :featured_image_infos, :featured_image_delete, :featured_image_alt, :featured_image_credit
           )
           .merge(university_id: current_university.id)
   end

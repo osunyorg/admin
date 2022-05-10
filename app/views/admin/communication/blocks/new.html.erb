@@ -9,6 +9,9 @@
         <div class="card-body">
           <h5 class="card-title"><%= t "enums.communication.block.template_kind.#{template_kind}" %></h5>
           <%= simple_form_for [:admin, @block] do |f| %>
+            <%= f.error_notification %>
+            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
             <%= f.input :about_type, as: :hidden %>
             <%= f.input :about_id, as: :hidden %>
             <%= f.input :template_kind, as: :hidden %>

@@ -11,6 +11,9 @@
       Les valeurs possibles pour kind sont : company, non_profit, government.
     </p>
     <%= simple_form_for [:admin, @import] do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
       <%= f.input :file %>
       <% content_for :action_bar_right do %>
         <%= submit f %>

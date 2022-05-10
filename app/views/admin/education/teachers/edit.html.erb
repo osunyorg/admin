@@ -3,7 +3,9 @@
 <h2 class="h3"><%= Education::Program.model_name.human(count: 2) %></h2>
 
 <%= simple_form_for [:admin, @teacher], url: admin_education_teacher_path(@teacher) do |f| %>
-<div class="row">
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %><div class="row">
+
   <div class="col-md-2">
     <%= link_to_add_association t('add'), f, :involvements,
                                 class: button_classes,

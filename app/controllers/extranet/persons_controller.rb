@@ -1,12 +1,12 @@
 class Extranet::PersonsController < Extranet::ApplicationController
   load_and_authorize_resource class: University::Person::Alumnus,
-                              through: :current_university,
-                              through_association: :people
+                              through: :about,
+                              through_association: :university_person_alumni
 
   def index
     @facets = University::Person::Alumnus::Facets.new params[:facets], {
-      model: about&.alumni,
-      about: current_extranet.about
+      model: about&.university_person_alumni,
+      about: about
     }
     @people = @facets.results
                      .ordered
