@@ -136,6 +136,8 @@ fr:
               image_label: Image (.png, .jpg)
               alt_label: Texte alternatif
               alt_placeholder: Entrer la description textuelle
+              credit_label: Crédit
+              credit_placeholder: Entrer le crédit de l'image ici
               text_label: Texte
               text_placeholder: Entrer le texte
               remove_image: Enlever l'image
@@ -190,20 +192,22 @@ fr:
               text_placeholder: Entrer la description de la définition
           call_to_action:
             edit:
-              text_label: Texte
-              text_placeholder: Entrer le texte ici
-              url_label: Lien
-              url_placeholder: Entrer le lien ici avec "https://..."
-              buttons: Boutons d'action
               button_1: Bouton principal
               button_2: Bouton secondaire
               button_label: Texte
               button_placeholder: Entrer le texte du bouton ici
-              image_title: Image
-              image_label: Fichier
-              remove_image: Supprimer l'image
+              buttons: Boutons d'action
               image_alt_label: Texte alternatif
-              image_alt_placeholder: Entrer le texte alternatif de l'image ici
+              image_alt_placeholder: Entrer la description textuelle
+              image_credit_label: Crédit
+              image_credit_placeholder: Entrer le crédit de l'image ici
+              image_label: Fichier
+              image_title: Image
+              remove_image: Supprimer l'image
+              text_label: Texte
+              text_placeholder: Entrer le texte ici
+              url_label: Lien
+              url_placeholder: Entrer le lien ici avec "https://..."
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page

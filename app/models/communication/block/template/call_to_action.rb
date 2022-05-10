@@ -24,17 +24,18 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
   end
 
   def image
-    image_with_alt
+    image_with_alt_and_credit
   end
 
   protected
 
-  def image_with_alt
+  def image_with_alt_and_credit
     blob = find_blob data, 'image'
     return if blob.nil?
     {
       blob: blob,
-      alt: data['image_alt']
+      alt: data['image_alt'],
+      credit: data['image_credit'],
     }.to_dot
   end
 end
