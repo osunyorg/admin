@@ -18,6 +18,7 @@
 <% end %>
 
 <% content_for :action_bar_left do %>
+  <%= destroy_link @website %>
   <% if can? :read, Communication::Website::Imported::Website %>
     <% if @website.imported? %>
       <%= link_to t('communication.website.imported.show'),
@@ -34,5 +35,4 @@
 
 <% content_for :action_bar_right do %>
   <%= edit_link @website %>
-  <%= destroy_link @website %>
 <% end %>

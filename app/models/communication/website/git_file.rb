@@ -75,7 +75,11 @@ class Communication::Website::GitFile < ApplicationRecord
   protected
 
   def template_static
-    "admin/#{about.class.name.underscore.pluralize}/static"
+    if about.respond_to? :template_static
+      about.template_static
+    else
+      "admin/#{about.class.name.underscore.pluralize}/static"
+    end
   end
 
   # Real sha on the git repo
