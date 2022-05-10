@@ -10,7 +10,8 @@
       Les caractères doivent être encodés en UTF-8.<br>
       Les valeurs possibles pour kind sont : company, non_profit, government.
     </p>
-    <%= simple_form_for [:admin, @import] do |f| %>
+    <%= simple_form_for @import,
+                        url: admin_university_organizations_imports_path do |f| %>
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 

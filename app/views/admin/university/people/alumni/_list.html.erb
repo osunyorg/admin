@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <% alumni.each do |alumnus| %>
-      <% path = admin_university_person_alumnus_path(alumnus) %>
+      <% path = admin_university_people_alumnus_path(alumnus) %>
       <tr>
         <td><%= link_to alumnus.last_name, path %></td>
         <td><%= link_to alumnus.first_name, path %></td>

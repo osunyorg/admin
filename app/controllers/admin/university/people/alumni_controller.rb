@@ -1,4 +1,4 @@
-class Admin::University::Person::AlumniController < Admin::University::ApplicationController
+class Admin::University::People::AlumniController < Admin::University::ApplicationController
   load_and_authorize_resource class: University::Person::Alumnus,
                               through: :current_university,
                               through_association: :people
@@ -38,7 +38,7 @@ class Admin::University::Person::AlumniController < Admin::University::Applicati
   def breadcrumb
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
-                    admin_university_person_alumni_path
+                    admin_university_people_alumni_path
     breadcrumb_for  @alumnus
   end
 

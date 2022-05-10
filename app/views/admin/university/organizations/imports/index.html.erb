@@ -10,7 +10,7 @@
   <tbody>
     <% @imports.each do |import| %>
       <tr>
-        <td><%= link_to import, [:admin, import] %></td>
+        <td><%= link_to import, admin_university_organizations_import_path(import) %></td>
         <td><%= import.lines %></td>
       </tr>
     <% end %>
@@ -18,5 +18,8 @@
 </table>
 
 <% content_for :action_bar_right do %>
-  <%= create_link University::Organization::Import %>
+  <%= link_to_if  can?(:create, University::Organization::Import),
+                  t('create'),
+                  new_admin_university_organizations_import_path,
+                  class: button_classes %>
 <% end %>

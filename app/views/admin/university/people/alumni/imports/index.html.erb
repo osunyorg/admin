@@ -9,12 +9,15 @@
   <tbody>
     <% @imports.each do |import| %>
       <tr>
-        <td><%= link_to import, [:admin, import] %></td>
+        <td><%= link_to import, admin_university_people_alumni_import_path(import) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <% content_for :action_bar_right do %>
-  <%= create_link University::Person::Alumnus::Import %>
+  <%= link_to_if  can?(:create, University::Person::Alumnus::Import),
+                  t('create'),
+                  new_admin_university_people_alumni_import_path,
+                  class: button_classes %>
 <% end %>

@@ -63,7 +63,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def to_s
     @to_s ||= ApplicationController.render(
-      template: "admin/#{about.class.name.underscore.pluralize}/static",
+      template: template_static,
       layout: false,
       assigns: {
         about: about,
@@ -73,6 +73,10 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
+
+  def template_static
+    "admin/#{about.class.name.underscore.pluralize}/static"
+  end
 
   # Real sha on the git repo
   def git_sha_for(path)
