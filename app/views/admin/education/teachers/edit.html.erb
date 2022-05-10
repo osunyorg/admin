@@ -4,27 +4,29 @@
 
 <%= simple_form_for [:admin, @teacher], url: admin_education_teacher_path(@teacher) do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %><div class="row">
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="col-md-2">
-    <%= link_to_add_association t('add'), f, :involvements,
-                                class: button_classes,
-                                data: {
-                                  'association-insertion-method': 'append',
-                                  'association-insertion-node':   '#involvements',
-                                } %>
+  <div class="row">
 
-  </div>
-  <div class="col-md-10">
-    <div id="involvements">
-      <% sorted_teacher_involvements = @teacher.involvements.select(&:teacher?).sort_by { |involvement| involvement.created_at || Time.zone.now } %>
-      <%= f.simple_fields_for :involvements, sorted_teacher_involvements, include_id: false do |involvement_f| %>
-        <%= render 'admin/education/teachers/involvement_fields', f: involvement_f, include_id: true %>
-      <% end %>
+    <div class="col-md-2">
+      <%= link_to_add_association t('add'), f, :involvements,
+                                  class: button_classes,
+                                  data: {
+                                    'association-insertion-method': 'append',
+                                    'association-insertion-node':   '#involvements',
+                                  } %>
+
     </div>
 
+    <div class="col-md-10">
+      <div id="involvements">
+        <% sorted_teacher_involvements = @teacher.involvements.select(&:teacher?).sort_by { |involvement| involvement.created_at || Time.zone.now } %>
+        <%= f.simple_fields_for :involvements, sorted_teacher_involvements, include_id: false do |involvement_f| %>
+          <%= render 'admin/education/teachers/involvement_fields', f: involvement_f, include_id: true %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

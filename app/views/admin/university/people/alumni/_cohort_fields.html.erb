@@ -1,0 +1,32 @@
+<% include_id ||= false %>
+<div class="nested-fields">
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-5">
+          <%= f.association :program,
+                            collection: collection_tree(current_university.education_programs),
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] },
+                            label: false,
+                            include_blank: t('simple_form.include_blanks.defaults.program'),
+                            required: true,
+                            wrapper: false %>
+        </div>
+        <div class="col-md-6">
+          <%#= f.input :description,
+                      as: :string,
+                      label: false,
+                      placeholder: University::Person::Involvement.human_attribute_name('description'),
+                      wrapper: false %>
+        </div>
+        <div class="col-md-1 text-end">
+          <%= link_to_remove_association '<i class="fas fa-times"></i>'.html_safe,
+                                         f,
+                                         class: 'btn btn-sm btn-danger' %>
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :id if include_id %>
+  </div>
+</div>

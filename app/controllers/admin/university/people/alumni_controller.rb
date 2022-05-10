@@ -14,23 +14,25 @@ class Admin::University::People::AlumniController < Admin::University::Applicati
   end
 
   def show
+    @cohorts = @alumnus.cohorts.ordered.page(params[:cohorts_page])
     breadcrumb
   end
 
-  def edit
+  def edit_cohorts
     breadcrumb
     add_breadcrumb t('edit')
   end
 
-  def update
-    if @alumnus.update(alumnus_params)
-      redirect_to [:admin, @alumnus],
-                  notice: t('admin.successfully_updated_html', model: @alumnus.to_s)
-    else
-      render :edit
-      breadcrumb
-      add_breadcrumb t('edit')
-    end
+  def update_cohorts
+    # TODO
+    # if @alumnus.update(alumnus_params)
+    #   redirect_to [:admin, @alumnus],
+    #               notice: t('admin.successfully_updated_html', model: @alumnus.to_s)
+    # else
+    #   render :edit
+    #   breadcrumb
+    #   add_breadcrumb t('edit')
+    # end
   end
 
   protected
@@ -39,10 +41,11 @@ class Admin::University::People::AlumniController < Admin::University::Applicati
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
                     admin_university_people_alumni_path
-    breadcrumb_for  @alumnus
+    add_breadcrumb @alumnus, admin_university_person_alumnus_path(@alumnus) if @alumnus
   end
 
   def alumnus_params
+    # TODO: Permit nested attrs
     params.require(:university_person_alumnus)
           .permit()
   end

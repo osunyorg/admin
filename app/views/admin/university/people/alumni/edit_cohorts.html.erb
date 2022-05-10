@@ -1,0 +1,32 @@
+<% content_for :title, @alumnus %>
+
+<h2 class="h3"><%= Education::Program.model_name.human(count: 2) %></h2>
+
+<%= simple_form_for [:admin, @alumnus], url: edit_cohorts_admin_university_person_alumnus_path(@alumnus) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+
+    <div class="col-md-2">
+      <%= link_to_add_association t('add'), f, :cohorts,
+                                  class: button_classes,
+                                  data: {
+                                    'association-insertion-method': 'append',
+                                    'association-insertion-node':   '#cohorts',
+                                  } %>
+
+    </div>
+
+    <div class="col-md-10">
+      <div id="cohorts">
+        <%= f.simple_fields_for :cohorts, @alumnus.cohorts.ordered, include_id: false do |cohort_f| %>
+          <%= render 'admin/university/person/alumni/cohort_fields', f: cohort_f, include_id: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

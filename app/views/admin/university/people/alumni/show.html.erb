@@ -1,6 +1,20 @@
 <% content_for :title, @alumnus %>
 
+<%= render 'admin/university/people/main_infos', person: @alumnus %>
+
+<%= render 'admin/university/person/alumni/show/cohorts', cohorts: @cohorts, param_name: 'cohorts_page' %>
+
+<%# TODO: remove %>
+<% if @alumnus.cohorts.any? %>
 <h2><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
 <% @alumnus.cohorts.each do |cohort| %>
   <%= link_to cohort, [:admin, cohort] %>
+<% end %>
+<% end %>
+<%# end TODO %>
+
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @alumnus %>
+  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_person_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
 <% end %>
