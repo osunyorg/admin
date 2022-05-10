@@ -36,7 +36,7 @@ namespace :communication do
               controller: 'websites/posts/curations',
               only: [:new, :create]
     resources :menus, controller: 'websites/menus' do
-      resources :items, controller: 'websites/menu/items', except: :index do
+      resources :items, controller: 'websites/menus/items', except: :index do
         collection do
           get :kind_switch
           post :reorder

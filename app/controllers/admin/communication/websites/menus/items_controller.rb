@@ -1,4 +1,4 @@
-class Admin::Communication::Websites::Menu::ItemsController < Admin::Communication::Websites::ApplicationController
+class Admin::Communication::Websites::Menus::ItemsController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource :menu,
                               class: Communication::Website::Menu,
                               id_param: :menu_id,
