@@ -1,4 +1,4 @@
-class Admin::Education::Program::TeachersController < Admin::Education::Program::ApplicationController
+class Admin::Education::Programs::TeachersController < Admin::Education::Programs::ApplicationController
   load_and_authorize_resource :involvement,
                               class: University::Person::Involvement,
                               through: :program,

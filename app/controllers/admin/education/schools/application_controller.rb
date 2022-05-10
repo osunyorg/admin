@@ -1,4 +1,4 @@
-class Admin::Education::School::ApplicationController < Admin::Education::ApplicationController
+class Admin::Education::Schools::ApplicationController < Admin::Education::ApplicationController
   load_and_authorize_resource :school,
                               class: Education::School,
                               through: :current_university,

@@ -1,4 +1,4 @@
-class Admin::Education::Program::Role::PeopleController < Admin::Education::Program::ApplicationController
+class Admin::Education::Programs::Roles::PeopleController < Admin::Education::Programs::ApplicationController
   load_and_authorize_resource :role, class: University::Role, through: :program, param: :role_id, through_association: :university_roles
   load_and_authorize_resource :involvement, class: University::Person::Involvement, through: :role, parent: false
 

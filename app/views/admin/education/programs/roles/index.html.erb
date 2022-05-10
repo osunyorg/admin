@@ -1,5 +1,5 @@
 <% content_for :title, University::Role.model_name.human(count: 2) %>
-<%= render 'admin/education/program/roles/list', roles: @roles %>
+<%= render 'admin/education/programs/roles/list', roles: @roles %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'),

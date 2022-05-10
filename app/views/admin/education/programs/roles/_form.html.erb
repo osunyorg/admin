@@ -28,7 +28,7 @@
 
           <div class="mb-3" id="involvements" data-sortable="inputs">
             <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
-              <%= render 'admin/education/program/roles/involvement_fields', f: involvement_f, include_id: true %>
+              <%= render 'admin/education/programs/roles/involvement_fields', f: involvement_f, include_id: true %>
             <% end %>
           </div>
         </div>

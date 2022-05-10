@@ -1,5 +1,5 @@
 <% content_for :title, Education::Program.human_attribute_name("teachers") %>
-<%= render 'admin/education/program/teachers/list', involvements: @involvements %>
+<%= render 'admin/education/programs/teachers/list', involvements: @involvements %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'),

@@ -1,4 +1,4 @@
-class Admin::Education::Program::RolesController < Admin::Education::Program::ApplicationController
+class Admin::Education::Programs::RolesController < Admin::Education::Programs::ApplicationController
   load_and_authorize_resource class: University::Role, through: :program, through_association: :university_roles
 
   include Admin::Reorderable

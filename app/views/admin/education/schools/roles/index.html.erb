@@ -1,5 +1,5 @@
 <% content_for :title, Education::School.human_attribute_name('roles') %>
-<%= render 'admin/education/school/roles/list', roles: @roles %>
+<%= render 'admin/education/schools/roles/list', roles: @roles %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('add'), new_admin_education_school_role_path(school_id: @school.id), class: button_classes if can? :create, University::Role %>
