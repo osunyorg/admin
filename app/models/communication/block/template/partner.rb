@@ -8,20 +8,23 @@ class Communication::Block::Template::Partner < Communication::Block::Template
   end
 
   def partners
-    @partners ||= elements.map { |element| partner(element) }
-                          .compact
+    @partners ||= elements.map { |element|
+      partner(element)
+    }.compact
   end
 
   def active_storage_blobs
-    @active_storage_blobs ||= partners.map { |partner| partner.blob }
-                                      .compact
+    @active_storage_blobs ||= partners.map { |partner|
+      partner.blob
+    }.compact
   end
 
   protected
 
   def organizations
-    @organizations ||= partners.map { |partner| partner.organization }
-                               .compact
+    @organizations ||= partners.map { |partner|
+      partner.organization
+    }.compact
   end
 
   def partner(element)
