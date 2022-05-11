@@ -1,0 +1,17 @@
+<div class="<%= 'row' unless @preview %>">
+  <div class="<%= 'col-lg-3' unless @preview %>">
+    <% if @block.template.image  %>
+      <%= kamifusen_tag @block.template.image.blob,
+                        width: 600,
+                        alt: @block.template.image.alt,
+                        class: 'img-fluid' %>
+    <% end %>
+  </div>
+  <div class="<%= 'col-lg-3' unless @preview %>">
+    <caption><%= @block.template.image.alt %></caption>
+    <p class="small"><%= @block.template.image.credit %></p>
+  </div>
+  <div class="<%= 'col-lg-4' unless @preview %>">
+    <%= @block.template.text.html_safe %>
+  </div>
+</div>

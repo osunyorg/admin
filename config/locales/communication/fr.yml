@@ -319,14 +319,19 @@ fr:
         template_kind:
           call_to_action: Appel à actions
           chapter: Chapitre
+          datatable: Tableau
           definitions: Définitions
+          embed: Intégration HTML
+          files: Fichiers
           gallery: Galerie
+          image: Image
           organization_chart: Organigramme
           pages: Liste de pages
           partners: Partenaires
           posts: Liste d'actualités
           testimonials: Témoignages
           timeline: Frise chronologique
+          video: Vidéo
       website:
         menu:
           item:
