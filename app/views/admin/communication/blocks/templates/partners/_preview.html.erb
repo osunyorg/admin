@@ -1,0 +1,11 @@
+<% @block.template.partners.each do |partner| %>
+  <article class="card">
+    <%= kamifusen_tag partner.blob,
+                      width: 300,
+                      class: 'img-fluid mb-3' unless partner.blob.nil? %>
+    <div class="card-body">
+      <h3 class="card-title h5"><%= partner.name %></h3>
+      <p class="mb-0"><%= partner.url %></p>
+    </div>
+  </article>
+<% end %>

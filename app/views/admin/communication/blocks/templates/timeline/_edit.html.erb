@@ -16,7 +16,7 @@
           <div class="flex-fill">
             <label    class="form-label"
                       :for="'event-' + index + '-title'"><%= t '.title_label' %></label>
-            <input class="form-control mb-2"
+            <input class="form-control mb-3"
                       v-model="event.title"
                       placeholder="<%= t '.title_placeholder' %>"
                       type="text"
@@ -24,7 +24,7 @@
 
             <label    class="form-label"
                       :for="'event-' + index + '-text'"><%= t '.text_label' %></label>
-            <textarea class="form-control mb-2"
+            <textarea class="form-control mb-3"
                       rows="3"
                       v-model="event.text"
                       placeholder="<%= t '.text_placeholder' %>"

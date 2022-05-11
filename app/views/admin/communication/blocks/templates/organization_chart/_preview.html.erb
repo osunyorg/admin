@@ -1,0 +1,15 @@
+<% @block.template.persons_with_role.each do |person_with_role|
+      person = person_with_role.person %>
+  <article class="card">
+    <div class="card-body">
+      <% if person.best_picture.attached? %>
+        <div style="max-width: 80px" class="float-end">
+          <%= kamifusen_tag person.best_picture,
+                            class: 'img-fluid rounded-circle' %>
+        </div>
+      <% end %>
+      <h3 class="card-title h5"><%= link_to person, [:admin, person] %></h3>
+      <p class="mb-0"><%= person_with_role.role %></p>
+    </div>
+  </article>
+<% end %>

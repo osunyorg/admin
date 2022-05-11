@@ -155,7 +155,7 @@ fr:
               partner_name_placeholder: Entrer le nom du partenaire
               partner_url_label: Site Web
               partner_url_placeholder: https://
-              partner_image_label: Logo
+              partner_logo_label: Logo
               remove_logo: Enlever le logo
               remove_partner: Enlever le partenaire
           testimonials:

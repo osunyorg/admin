@@ -185,7 +185,7 @@ en:
               partner_name_placeholder: Enter partner's name
               partner_url_label: Website
               partner_url_placeholder: https://
-              partner_image_label: Logo
+              partner_logo_label: Logo
               remove_logo: Remove logo
               remove_partner: Remove partner
           testimonials:
