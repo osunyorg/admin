@@ -1,10 +1,3 @@
-<label for="description"><%= t '.description_placeholder' %></label>
-<textarea class="form-control mb-2"
-          rows="3"
-          v-model="data.description"
-          placeholder="<%= t '.description_placeholder' %>"
-          id="description"></textarea>
-
 <a  class="<%= button_classes('mb-4') %>"
     v-on:click="data.elements.push({title: '', text: ''})">
     <%= t '.add_event' %>
