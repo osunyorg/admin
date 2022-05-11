@@ -123,6 +123,20 @@ fr:
   admin:
     communication:
       blocks:
+        components:
+          text:
+            label: Texte
+            placeholder: Entrer le texte
+          image:
+            input:
+              label: Image (.png, .jpg, .svg)
+              remove: Enlever l'image
+            alt:
+              label: Texte alternatif
+              placeholder: Entrer la description textuelle
+            credit:
+              label: Crédit
+              placeholder: Entrer le crédit
         templates:
           chapter:
             edit:
