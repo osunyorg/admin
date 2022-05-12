@@ -13,9 +13,9 @@
     <% @blocks.each do |block| %>
       <% url = "#{block.about.university.url }#{edit_admin_communication_block_path(block)}" %>
       <tr>
-        <td><%= block %></td>
+        <td><%= truncate "#{block}" %></td>
         <td>
-          <%= block.about %>
+          <%= truncate "#{block.about}" %>
           <span class="badge bg-dark">
             <%= block.about.class.model_name.human %>
           </span>
@@ -23,8 +23,7 @@
         <td><%= block.about.university %></td>
         <td><%= link_to 'Open',
                         url,
-                        target: :_blank,
-                        class: button_classes %></td>
+                        target: :_blank %></td>
       </tr>
     <% end %>
   </tbody>
