@@ -5,5 +5,7 @@
       show_images: <%= block.template.show_images %>
       pages:
 <% block.template.selected_pages.each do |element| %>
-        - <%= element.generated_path %>
+        - slug: <%= element.generated_path %>
+          show_description: <%= block.template.show_descriptions %>
+          show_image: <%= block.template.show_images %>
 <% end %>
