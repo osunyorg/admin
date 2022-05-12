@@ -43,9 +43,18 @@
     </label>
     <input id="image_alt"
             type="text"
-            class="form-control"
+            class="form-control mb-2"
             v-model="data.image_alt"
             placeholder="<%= t '.image_alt_placeholder' %>" />
+    <label  class="form-label"
+            for="image_credit">
+      <%= t '.image_credit_label' %>
+    </label>
+    <input id="image_credit"
+            type="text"
+            class="form-control"
+            v-model="data.image_credit"
+            placeholder="<%= t '.image_credit_placeholder' %>" />
   </div>
 </div>
 <h2><%= t '.buttons' %></h2>

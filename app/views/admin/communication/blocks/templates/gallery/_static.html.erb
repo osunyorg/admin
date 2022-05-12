@@ -1,8 +1,11 @@
       images:
 <% block.template.images_with_alt.each do |image| %>
-        - alt: >
+        - file: "<%= image.blob.id %>"
+          alt: >
             <%= prepare_text_for_static image.alt %>
+          credit: >
+            <%= prepare_text_for_static image.credit %>
           text: >
             <%= prepare_text_for_static image.text %>
-          file: "<%= image.blob.id %>"
+          
 <% end %>
