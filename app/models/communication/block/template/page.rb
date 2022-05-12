@@ -16,12 +16,12 @@ class Communication::Block::Template::Page < Communication::Block::Template
     @main_page ||= page(data['page_id'])
   end
 
-  def show_descriptions
-    data['show_descriptions'] || false
+  def show_description
+    data['show_description'] || false
   end
 
-  def show_images
-    data['show_images'] || false
+  def show_image
+    data['show_image'] || false
   end
 
   protected
