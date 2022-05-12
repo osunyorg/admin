@@ -1,0 +1,7 @@
+<% content_for :title, Research::Laboratory::Axis.model_name.human(count: 2) %>
+
+<%= render 'admin/research/laboratories/axes/list', axes: @axes %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Research::Laboratory::Axis %>
+<% end %>

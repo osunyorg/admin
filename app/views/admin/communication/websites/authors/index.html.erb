@@ -1,0 +1,18 @@
+<% content_for :title, "#{t('communication.authors', count: 2)} (#{@authors.total_count})" %>
+
+<%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'filters', current_path: admin_communication_website_authors_path, filters: @filters if @filters.any?  %>
+
+  <div class="card">
+    <%= render 'admin/communication/websites/authors/list', authors: @authors %>
+    <% if @authors.total_pages > 1 %>
+      <div class="card-footer">
+        <%= paginate @authors, theme: 'bootstrap-5' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('communication.manage_authors'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
+<% end %>

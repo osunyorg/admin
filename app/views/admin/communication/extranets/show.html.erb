@@ -35,7 +35,10 @@
   </p>
 <% end %>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @extranet %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @extranet %>
-  <%= destroy_link @extranet %>
 <% end %>

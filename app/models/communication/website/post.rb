@@ -93,6 +93,10 @@ class Communication::Website::Post < ApplicationRecord
     "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published && published_at
   end
 
+  def template_static
+    "admin/communication/websites/posts/static"
+  end
+
   def git_dependencies(website)
     dependencies = [self] + website.menus
     dependencies += categories
