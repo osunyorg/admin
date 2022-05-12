@@ -1,0 +1,20 @@
+<% content_for :title, Communication::Block.model_name.human(count: 2) %>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Communication::Block.human_attribute_name('name') %></th>
+      <th><%= Communication::Block.human_attribute_name('about') %></th>
+      <th><%= Communication::Block.human_attribute_name('university') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blocks.each do |block| %>
+      <tr>
+        <td><%= link_to block, edit_admin_communication_block_url(block), target: :_blank %></td>
+        <td><%= block.about %></td>
+        <td><%= block.about.university %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
