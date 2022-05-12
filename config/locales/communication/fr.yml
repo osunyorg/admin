@@ -162,6 +162,9 @@ fr:
               role_placeholder: Indiquer le rôle de la personne
               drag_title: Glisser-déposer pour organiser les personnes
               delete_title: Enlever la personne
+          pages:
+            edit:
+              add_page: Sélectionner une page
           partners:
             edit:
               add_partner: Ajouter un partenaire

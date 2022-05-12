@@ -178,6 +178,9 @@ en:
               role_placeholder: Enter person's role
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
+          pages:
+            edit:
+              add_page: Select a page
           partners:
             edit:
               add_partner: Add partner
