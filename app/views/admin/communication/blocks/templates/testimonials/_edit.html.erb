@@ -16,7 +16,7 @@
           <div class="col-lg-4">
             <label    class="form-label"
                       :for="'testimonial-' + index + '-text'"><%= t '.text_label' %></label>
-            <textarea class="form-control mb-2"
+            <textarea class="form-control mb-3"
                       rows="3"
                       v-model="testimonial.text"
                       placeholder="<%= t '.text_placeholder' %>"
@@ -27,7 +27,7 @@
                     :for="'testimonial-' + index + '-author'">
               <%= t '.author_label' %>
             </label>
-            <input  class="form-control mb-2"
+            <input  class="form-control mb-3"
                     type="text"
                     v-model="testimonial.author"
                     placeholder="<%= t '.author_placeholder' %>"
@@ -36,7 +36,7 @@
                     :for="'testimonial-' + index + '-job'">
               <%= t '.job_label' %>
             </label>
-            <input  class="form-control mb-2"
+            <input  class="form-control mb-3"
                     type="text"
                     v-model="testimonial.job"
                     placeholder="<%= t '.job_placeholder' %>"
@@ -49,7 +49,7 @@
                       :for="'testimonial-' + index + '-photo'">
                 <%= t '.photo_label' %>
               </label>
-              <input  class="form-control mb-2"
+              <input  class="form-control mb-3"
                       type="file"
                       accept="image/*"
                       @change="onFileImageChange( $event, testimonial, 'photo' )"

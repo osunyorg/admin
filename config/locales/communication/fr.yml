@@ -123,6 +123,20 @@ fr:
   admin:
     communication:
       blocks:
+        components:
+          text:
+            label: Texte
+            placeholder: Entrer le texte
+          image:
+            input:
+              label: Image (.png, .jpg, .svg)
+              remove: Enlever l'image
+            alt:
+              label: Texte alternatif
+              placeholder: Entrer la description textuelle
+            credit:
+              label: Crédit
+              placeholder: Entrer le crédit
         templates:
           chapter:
             edit:
@@ -150,6 +164,9 @@ fr:
               role_placeholder: Indiquer le rôle de la personne
               drag_title: Glisser-déposer pour organiser les personnes
               delete_title: Enlever la personne
+          pages:
+            edit:
+              add_page: Sélectionner une page
           partners:
             edit:
               add_partner: Ajouter un partenaire
@@ -157,7 +174,7 @@ fr:
               partner_name_placeholder: Entrer le nom du partenaire
               partner_url_label: Site Web
               partner_url_placeholder: https://
-              partner_image_label: Logo
+              partner_logo_label: Logo
               remove_logo: Enlever le logo
               remove_partner: Enlever le partenaire
           testimonials:
@@ -323,14 +340,19 @@ fr:
         template_kind:
           call_to_action: Appel à actions
           chapter: Chapitre
+          datatable: Tableau
           definitions: Définitions
+          embed: Intégration HTML
+          files: Fichiers
           gallery: Galerie
+          image: Image
           organization_chart: Organigramme
           pages: Liste de pages
           partners: Partenaires
           posts: Liste d'actualités
           testimonials: Témoignages
           timeline: Frise chronologique
+          video: Vidéo
       website:
         menu:
           item:

@@ -1,0 +1,21 @@
+<% if @block.data %>
+  <% if @block.template.main_page %>
+    <h2 class="h5 mb-4"><%= @block.template.main_page.slug %></h2>
+  <% end %>
+  <% @block.template.selected_pages.each do |element| %>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3 class="card-title h5"><%= element %></h3>
+      </div>
+      <div class="card-body">
+        <% if @block.template.show_images && element.page.featured_image.attached? %>
+          <%= kamifusen_tag element.featured_image,
+                            class: 'img-fluid mb-3' %>
+        <% end %>
+        <% if @block.template.show_descriptions %>
+          <p><%= element.page.description_short %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

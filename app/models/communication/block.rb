@@ -32,15 +32,20 @@ class Communication::Block < ApplicationRecord
 
   enum template_kind: {
     chapter: 50,
-    organization_chart: 100,
-    partners: 200,
+    image: 51,
     gallery: 300,
+    video: 52,
+    datatable: 54,
+    files: 55,
+    embed: 53,
+    call_to_action: 900,
     testimonials: 400,
-    posts: 500,
-    pages: 600,
     timeline: 700,
     definitions: 800,
-    call_to_action: 900,
+    organization_chart: 100,
+    partners: 200,
+    posts: 500,
+    pages: 600,
   }
 
   before_save :update_template_images

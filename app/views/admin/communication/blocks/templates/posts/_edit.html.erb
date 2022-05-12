@@ -24,8 +24,8 @@
         </label>
       </div>
     </div>
-    
-    <div v-if="data.kind === 'category'" class="mb-2">
+
+    <div v-if="data.kind === 'category'" class="mb-3">
       <label class="form-label"
             for="category_id">Sélectionnez une catégorie</label>
       <select id="category_id"
@@ -49,7 +49,7 @@
   </div>
 </div>
 <div v-if="data.kind === 'selection'">
-  <a  class="<%= button_classes('mb-2') %>"
+  <a  class="<%= button_classes('mb-3') %>"
       v-on:click="data.elements.push({id: ''})">
       <%= t '.add_post' %>
   </a>
@@ -57,7 +57,7 @@
     <div v-for="(post, index) in data.elements" class="col-xxl-3 col-lg-4">
       <div class="card">
         <div class="card-body">
-          <div class="mb-2">
+          <div class="mb-3">
             <a  class="btn btn-sm btn-danger float-end"
                 v-on:click="data.elements.splice(data.elements.indexOf(post), 1)"
                 title="Delete">

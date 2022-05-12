@@ -123,6 +123,20 @@ en:
   admin:
     communication:
       blocks:
+        components:
+          text:
+            label: Text
+            placeholder: Enter text
+          image:
+            input:
+              label: Image (.png, .jpg, .svg)
+              remove: Remove image
+            alt:
+              label: Alternative text
+              placeholder: Enter alternative text
+            credit:
+              label: Credit
+              placeholder: Enter credit
         template_kinds:
           chapter:
             edit:
@@ -130,6 +144,24 @@ en:
               notes_placeholder: Enter notes
               text_label: Text
               text_placeholder: Enter text
+          call_to_action:
+            edit:
+              button_1: Primary button
+              button_2: Secondary button
+              button_label: Text
+              button_placeholder: Enter the button text here
+              buttons: Action buttons
+              image_alt_label: Alternative text
+              image_alt_placeholder: Enter image's alternative text here
+              image_credit_label: Credit
+              image_credit_placeholder: Enter image's credit here
+              image_label: File
+              image_title: Image
+              remove_image: Delete image
+              text_label: Text
+              text_placeholder: Enter text here
+              url_label: Link
+              url_placeholder: Enter the URL with "https://..."
           gallery:
             edit:
               add_image: Add image
@@ -150,6 +182,9 @@ en:
               role_placeholder: Enter person's role
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
+          pages:
+            edit:
+              add_page: Select a page
           partners:
             edit:
               add_partner: Add partner
@@ -157,7 +192,7 @@ en:
               partner_name_placeholder: Enter partner's name
               partner_url_label: Website
               partner_url_placeholder: https://
-              partner_image_label: Logo
+              partner_logo_label: Logo
               remove_logo: Remove logo
               remove_partner: Remove partner
           testimonials:
@@ -188,24 +223,6 @@ en:
               title_placeholder: Enter title here
               text_label: Text
               text_placeholder: Enter text here
-          call_to_action:
-            edit:
-              button_1: Primary button
-              button_2: Secondary button
-              button_label: Text
-              button_placeholder: Enter the button text here
-              buttons: Action buttons
-              image_alt_label: Alternative text
-              image_alt_placeholder: Enter image's alternative text here
-              image_credit_label: Credit
-              image_credit_placeholder: Enter image's credit here
-              image_label: File
-              image_title: Image
-              remove_image: Delete image
-              text_label: Text
-              text_placeholder: Enter text here
-              url_label: Link
-              url_placeholder: Enter the URL with "https://..."
       website:
         pages:
           delete_special_page_notice: Can't delete this page
@@ -321,14 +338,19 @@ en:
         template:
           call_to_action: Call to action
           chapter: Chapter
+          datatable: Table
           definitions: Definitions
+          embed: HTML embed
+          files: Files
           gallery: Gallery
+          image: Image
           organization_chart: Organization chart
           pages: Pages
           partners: Partners
           posts: Posts
           testimonials: Testimonials
           timeline: Timeline
+          video: Video
       website:
         menu:
           item:

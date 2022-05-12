@@ -11,7 +11,7 @@
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row mb-3">
+        <div class="row">
          <div class="col-lg-4">
             <select :id="'organization-' + index + '-id'"
                     class="form-select select"
@@ -23,12 +23,12 @@
             </select>
           </div>
         </div>
-        <div class="row"  v-if="!partner.id">
+        <div class="row mt-3"  v-if="!partner.id">
           <div class="col-lg-4">
             <label  class="form-label"
                     :for="'partner-' + index + '-name'"><%= t '.partner_name_label' %></label>
 
-            <input class="form-control mb-2"
+            <input class="form-control mb-3"
                   type="text"
                   v-model="partner.name"
                   placeholder="<%= t '.partner_name_placeholder' %>"
@@ -39,7 +39,7 @@
                     :for="'partner-' + index + '-url'">
               <%= t '.partner_url_label' %>
             </label>
-            <input class="form-control mb-2"
+            <input class="form-control mb-3"
                   type="url"
                   v-model="partner.url"
                   placeholder="<%= t '.partner_url_placeholder' %>"
@@ -52,7 +52,7 @@
                       :for="'partner-' + index + '-logo'">
                 <%= t '.partner_logo_label' %>
               </label>
-              <input  class="form-control mb-2"
+              <input  class="form-control mb-3"
                       type="file"
                       accept="image/*"
                       @change="onFileImageChange( $event, partner, 'logo' )"

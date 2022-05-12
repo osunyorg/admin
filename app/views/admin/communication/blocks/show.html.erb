@@ -1,7 +1,0 @@
-<% content_for :title, @block %>
-
-<%= render "admin/communication/blocks/templates/#{@block.template_kind}/show" %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @block %>
-<% end %>

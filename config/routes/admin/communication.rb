@@ -52,7 +52,7 @@ namespace :communication do
     patch 'structure'     => 'website/structure#update'
 
   end
-  resources :blocks, controller: 'blocks', except: :index do
+  resources :blocks, controller: 'blocks', except: [:index, :show] do
     collection do
       post :reorder
     end
