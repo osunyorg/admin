@@ -26,12 +26,11 @@
             <% if can? :reorder, Communication::Block %>
               <td><i class="fa fa-bars handle"></i></td>
             <% end %>
-            <td><%= link_to_if can?(:read, block),
-                               block.to_s.truncate(50),
-                               edit_admin_communication_block_path(block, website_id: nil) %></td>
+            <td><%= block.to_s.truncate(50) %></td>
             <td><%= block.template_kind_i18n  %></td>
             <td class="text-end">
               <div class="btn-group" role="group">
+                <%= edit_link block %>
                 <%= destroy_link block %>
               </div>
             </td>
