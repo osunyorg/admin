@@ -10,7 +10,7 @@ class Communication::Block::Template::Gallery < Communication::Block::Template
   end
 
   def active_storage_blobs
-    @active_storage_blobs ||=  images_with_data.map { |hash| hash.blob }
+    @active_storage_blobs ||=  images_with_alt.map { |hash| hash.blob }
                                               .compact
   end
 end
