@@ -1,4 +1,4 @@
-<% content_for :title, Communication::Block.model_name.human(count: 2) %>
+<% content_for :title, t("enums.communication.block.template_kind.#{@template}") %>
 
 <table class="<%= table_classes %>">
   <thead>
@@ -6,14 +6,25 @@
       <th><%= Communication::Block.human_attribute_name('name') %></th>
       <th><%= Communication::Block.human_attribute_name('about') %></th>
       <th><%= Communication::Block.human_attribute_name('university') %></th>
+      <th><%= Communication::Block.human_attribute_name('url') %></th>
     </tr>
   </thead>
   <tbody>
     <% @blocks.each do |block| %>
+      <% url = "#{block.about.university.url }#{edit_admin_communication_block_path(block)}" %>
       <tr>
-        <td><%= link_to block, edit_admin_communication_block_url(block), target: :_blank %></td>
-        <td><%= block.about %></td>
+        <td><%= block %></td>
+        <td>
+          <%= block.about %>
+          <span class="badge bg-dark">
+            <%= block.about.class.model_name.human %>
+          </span>
+        </td>
         <td><%= block.about.university %></td>
+        <td><%= link_to 'Open',
+                        url,
+                        target: :_blank,
+                        class: button_classes %></td>
       </tr>
     <% end %>
   </tbody>
