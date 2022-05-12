@@ -29,3 +29,10 @@
     <% end %>
   </tbody>
 </table>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('resave'),
+              server_resave_block_path(@template),
+              method: :post,
+              class: button_classes %>
+<% end %>
