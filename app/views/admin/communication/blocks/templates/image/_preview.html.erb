@@ -1,7 +1,9 @@
-<%= kamifusen_tag @block.template.image.blob,
-                  width: 600,
-                  alt: @block.template.image.alt,
-                  class: 'img-fluid' if @block.template.image %>
-<caption><%= @block.template.image.alt %></caption>
-<p class="small"><%= @block.template.image.credit %></p>
-<%= @block.template.text.html_safe %>
+<% if @block.template.image&.blob %>
+  <%= kamifusen_tag @block.template.image.blob,
+                    width: 600,
+                    alt: @block.template.image.alt,
+                    class: 'img-fluid' if @block.template.image %>
+  <caption><%= @block.template.image.alt %></caption>
+  <p class="small"><%= @block.template.image.credit %></p>
+  <%= @block.template.text.html_safe %>
+<% end %>

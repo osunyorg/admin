@@ -23,6 +23,14 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     "#{data['button_secondary']}"
   end
 
+  def url_tertiary
+    "#{data['url_tertiary']}"
+  end
+
+  def button_tertiary
+    "#{data['button_tertiary']}"
+  end
+
   def image
     extract_image_alt_and_credit data, 'image'
   end
