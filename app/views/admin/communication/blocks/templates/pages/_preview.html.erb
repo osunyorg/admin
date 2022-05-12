@@ -8,12 +8,12 @@
         <h3 class="card-title h5"><%= element %></h3>
       </div>
       <div class="card-body">
-        <% if @block.template.show_image && element.page.featured_image.attached? %>
+        <% if @block.template.show_image && element.featured_image.attached? %>
           <%= kamifusen_tag element.featured_image,
                             class: 'img-fluid mb-3' %>
         <% end %>
         <% if @block.template.show_description %>
-          <p><%= element.page.description_short %></p>
+          <p><%= element.description_short %></p>
         <% end %>
       </div>
     </div>
