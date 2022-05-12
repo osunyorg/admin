@@ -21,10 +21,18 @@
     <% end %>
     <% unless @block.template.url_secondary.blank? %>
       <a  href="<%= @block.template.url_secondary %>"
-          class="btn btn-secondary"
+          class="btn btn-primary"
           target="_blank"
           rel="noopener">
           <%= @block.template.button_secondary %>
+      </a>
+    <% end %>
+    <% unless @block.template.url_tertiary.blank? %>
+      <a  href="<%= @block.template.url_tertiary %>"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener">
+          <%= @block.template.button_tertiary %>
       </a>
     <% end %>
   </div>
