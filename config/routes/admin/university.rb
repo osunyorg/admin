@@ -1,9 +1,12 @@
 namespace :university do
-  resources :people, :organizations
-  namespace :organization do
+  # Resources must come after namespaces, otherwise there is a confusion with ids
+  namespace :organizations do
     resources :imports, only: [:index, :show, :new, :create]
   end
-  namespace :person do
+  namespace :people do
+    namespace :alumni do
+      resources :imports, only: [:index, :show, :new, :create]
+    end
     resources :alumni, only: [:index, :show] do
       member do
         get 'edit_cohorts' => 'alumni#edit_cohorts'
@@ -12,8 +15,6 @@ namespace :university do
         patch 'edit_experiences' => 'alumni#update_experiences'
       end
     end
-    namespace :alumnus do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
   end
+  resources :people, :organizations
 end

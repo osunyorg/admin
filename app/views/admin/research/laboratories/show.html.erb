@@ -11,7 +11,7 @@
       <%= link_to Research::Laboratory::Axis.model_name.human(count: 2),
                   admin_research_laboratory_axes_path(laboratory_id: @laboratory) %></h2>
   </div>
-  <%= render 'admin/research/laboratory/axes/list', axes: @axes %>
+  <%= render 'admin/research/laboratories/axes/list', axes: @axes %>
 </div>
 
 <% content_for :action_bar_left do %>

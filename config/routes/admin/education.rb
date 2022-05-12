@@ -1,8 +1,8 @@
 namespace :education do
   resources :teachers, only: [:index, :show, :edit, :update]
   resources :schools do
-    resources :roles, controller: 'school/roles' do
-      resources :people, controller: 'school/role/people', only: [:destroy] do
+    resources :roles, controller: 'schools/roles' do
+      resources :people, controller: 'schools/roles/people', only: [:destroy] do
         post :reorder, on: :collection
       end
       collection do
@@ -11,15 +11,15 @@ namespace :education do
     end
   end
   resources :programs do
-    resources :roles, controller: 'program/roles' do
-      resources :people, controller: 'program/role/people', only: [:destroy] do
+    resources :roles, controller: 'programs/roles' do
+      resources :people, controller: 'programs/role/people', only: [:destroy] do
         post :reorder, on: :collection
       end
       collection do
         post :reorder
       end
     end
-    resources :teachers, controller: 'program/teachers', except: :show do
+    resources :teachers, controller: 'programs/teachers', except: :show do
       collection do
         post :reorder
       end

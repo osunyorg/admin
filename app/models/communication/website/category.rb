@@ -82,6 +82,10 @@ class Communication::Website::Category < ApplicationRecord
     "content/categories/#{path}/_index.html"
   end
 
+  def template_static
+    "admin/communication/websites/categories/static"
+  end
+
   def git_dependencies(website)
     [self] + descendants + active_storage_blobs + posts + website.menus
   end

@@ -1,0 +1,8 @@
+<% content_for :title, University::Role.model_name.human(count: 2) %>
+<%= render 'admin/education/programs/roles/list', roles: @roles %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('create'),
+              new_admin_education_program_role_path(program_id: @program.id),
+              class: button_classes if can? :create, University::Role %>
+<% end %>

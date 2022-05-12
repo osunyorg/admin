@@ -42,11 +42,15 @@ class University::Person::Alumnus < University::Person
     'University::Person::Alumnus'
   end
 
+  def template_static
+    "admin/university/people/alumni/static"
+  end
+
   def git_path(website)
-    # TODO
+    # No alumni on websites
   end
 
   def for_website?(website)
-    # TODO
+    false
   end
 end

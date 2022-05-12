@@ -1,0 +1,38 @@
+<% content_for :title, @menu %>
+
+<%= render 'admin/communication/websites/sidebar' do %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h2 class="card-title mb-2 h5">
+            <%= "#{Communication::Website::Menu::Item.model_name.human(count: 2)} (#{@root_items.size})" %>
+          </h2>
+          <%= render 'admin/communication/websites/menus/items/list', items: @root_items if @items.any? %>
+          <%= link_to t('create'),
+                      new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
+                      class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
+        </div>
+        <div class="card-body">
+          <h3 class="h5"><%= Communication::Website::Menu.human_attribute_name('identifier') %></h3>
+          <p><%= @menu.identifier %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @menu %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @menu %>
+<% end %>
