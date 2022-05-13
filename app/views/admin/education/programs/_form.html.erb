@@ -58,8 +58,7 @@
       <%= render 'admin/education/programs/forms/part', part: :presentation do %>
         <div class="row">
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :presentation %>
+            <%= f.input :presentation %>
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance',
