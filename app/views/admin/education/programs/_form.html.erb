@@ -4,27 +4,19 @@
 
   <div class="row">
     <div class="col-md-3">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= t('education.program.parts.technical.label') %>
-          </h5>
-        </div>
-        <div class="card-body">
-          <p><%= t('education.program.parts.technical.hint') %></p>
-          <%= f.input :published %>
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: program.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#education_program_name' }
-                      } %>
-          <%= f.association :parent,
-                            collection: collection_tree(current_university.education_programs, program),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } %>
-        </div>
-      </div>
+      <%= render 'admin/education/programs/forms/part', part: :technical do %>
+        <%= f.input :published %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: program.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#education_program_name' }
+                    } %>
+        <%= f.association :parent,
+                          collection: collection_tree(current_university.education_programs, program),
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] } %>
+      <% end %>
       <%= render 'admin/application/featured_image/edit', about: program, f: f %>
       <div class="card flex-fill w-100">
         <div class="card-header">
