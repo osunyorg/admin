@@ -13,6 +13,14 @@
           <%= f.input :text, as: :summernote %>
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :description %>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <div class="card flex-fill w-100">
@@ -35,14 +43,6 @@
         </div>
       </div>
       <%= render 'admin/application/featured_image/edit', about: category, f: f %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
     </div>
   </div>
   <% content_for :action_bar_right do %>

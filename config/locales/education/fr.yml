@@ -66,9 +66,27 @@ fr:
     manage_teachers: Gérer les enseignants·es
     number_of_programs: Nombre de formations
     program:
-      educational_informations: Informations pédagogiques
-      main_informations: Informations essentielles
-      useful_informations: Informations pratiques
+      parts:
+        technical:
+          label: Technique
+          hint: Ces informations définissent la publication et l'organisation dans les sites Web concernés.
+        essential:
+          label: Essentiel
+          hint: Ces informations apparaissent en haut de page.
+        presentation:
+          label: Présentation
+          hint: Ces informations sont complétées par les blocs, afin de permettre une présentation libre et riche de la formation.
+        pedagogy:
+          label: Pédagogie
+          hint: Ces informations définissent le mode d'enseignement et d'évaluation, et permettent de présenter l'équipe pédagogique.
+        results:
+          label: Résultats
+          hint: Ces informations indiquent les résultats obtenus par les anciens élèves.
+        admission:
+          label: Admission
+          hint: Ces informations fixent les modalités administratives d'accès à la formation.
+      hints:
+        essential: Ces informations apparaissent en haut de page
     roles:
       one: Rôle
       other: Rôles

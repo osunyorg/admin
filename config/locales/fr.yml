@@ -99,6 +99,15 @@ fr:
   download: Télécharger
   edit: Modifier
   false: Non
+  featured_image:
+    title: Image
+    alt:
+      label: Texte alternatif
+      hint: Ce texte est essentiel pour l'accessibilité
+    credit:
+      label: Crédit
+      hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur
+    remove: Supprimer l'image
   filters:
     attributes:
       date: Filtrer par Date
@@ -175,6 +184,14 @@ fr:
       date_with_explicit_month: "%d %B %Y"
       date_with_hour: "%d %B %Y %H:%M"
   true: Oui
+  unsplash:
+    next: Images suivantes
+    nothing: Aucun résultat pour cette recherche
+    open: Chercher une image
+    placeholder: Tapez votre recherche
+    previous: Images précédentes
+    search: Chercher
+    title: Recherche d'image sur Unsplash
   validate: Valider
   views:
     pagination:
