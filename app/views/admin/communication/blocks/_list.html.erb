@@ -9,6 +9,7 @@
       <%= Communication::Block.model_name.human(count: 2) %>
     </h2>
   </div>
+  <% if about.blocks.any? %>
     <table class="<%= table_classes %>">
       <thead>
         <tr>
@@ -38,4 +39,5 @@
         <% end %>
       </tbody>
     </table>
+  <% end %>
 </div>
