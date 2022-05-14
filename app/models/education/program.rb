@@ -173,6 +173,7 @@ class Education::Program < ApplicationRecord
   after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
   scope :published, -> { where(published: true) }
+  scope :ordered_by_name, -> { order(:name) }
 
   def to_s
     "#{name}"

@@ -25,6 +25,7 @@ namespace :education do
       end
     end
     collection do
+      get :tree
       post :reorder
     end
     member do

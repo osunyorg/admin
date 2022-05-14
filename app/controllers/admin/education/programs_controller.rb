@@ -6,8 +6,14 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
   def index
+    @programs = @programs.ordered_by_name
+    breadcrumb
+  end
+
+  def tree
     @programs = @programs.root.ordered
     breadcrumb
+    add_breadcrumb t('.title')
   end
 
   def reorder

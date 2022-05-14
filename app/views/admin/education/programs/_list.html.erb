@@ -1,16 +1,19 @@
-<table class="table">
+<table class="<%= table_classes %>">
   <thead>
     <tr>
       <th><%= Education::Program.model_name.human %></th>
       <th><%= Education::Program.human_attribute_name('level') %></th>
+      <th><%= Education::Program.human_attribute_name('parent') %></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% programs.each do |program| %>
+      <% parent = program.parent %>
       <tr>
         <td><%= link_to_if can?(:read, program), program, [:admin, program] %></td>
         <td><%= program.level_i18n %></td>
+        <td><%= link_to_if can?(:read, parent), parent, [:admin, parent] if parent %></td>
         <td class="text-end pe-0">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),

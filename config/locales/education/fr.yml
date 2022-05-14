@@ -60,6 +60,13 @@ fr:
         roles: Membres de l'équipe
         websites: Sites Web associés
         zipcode: Code postal
+  admin:
+    education:
+      programs:
+        view_as_list: Vue en liste
+        view_as_tree: Vue en arbre
+        tree:
+          title: Arborescence des formations
   education:
     manage_programs: Gérer les formations
     manage_roles: Gérer les rôles

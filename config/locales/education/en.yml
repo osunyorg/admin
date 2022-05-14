@@ -60,6 +60,13 @@ en:
         roles: Team Members
         websites: Linked websites
         zipcode: Zipcode
+  admin:
+    education:
+      programs:
+        view_as_list: Listview
+        view_as_tree: Treeview
+        tree:
+          title: Programs treeview
   education:
     manage_programs: Manage programs
     manage_roles: Manage roles
