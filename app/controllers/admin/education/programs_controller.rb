@@ -5,8 +5,10 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
+  has_scope :for_search_term
+
   def index
-    @programs = @programs.ordered_by_name
+    @programs = apply_scopes(@programs).ordered_by_name.page(params[:page])
     breadcrumb
   end
 

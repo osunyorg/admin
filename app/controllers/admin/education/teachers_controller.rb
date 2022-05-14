@@ -5,12 +5,19 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   has_scope :for_program
 
   def index
-    @teachers = apply_scopes(current_university.people.teachers.accessible_by(current_ability)).ordered.page(params[:page])
+    @teachers = apply_scopes(
+      current_university.people
+                        .teachers
+                        .accessible_by(current_ability)
+    ).ordered.page(params[:page])
     breadcrumb
   end
 
   def show
-    @involvements = @teacher.involvements_as_teacher.includes(:target).ordered_by_date.page(params[:page])
+    @involvements = @teacher.involvements_as_teacher
+                            .includes(:target)
+                            .ordered_by_date
+                            .page(params[:page])
     breadcrumb
   end
 
@@ -40,7 +47,10 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   end
 
   def load_teacher
-    @teacher = current_university.people.teachers.accessible_by(current_ability).find(params[:id])
+    @teacher = current_university.people
+                                 .teachers
+                                 .accessible_by(current_ability)
+                                 .find(params[:id])
   end
 
   def teacher_params

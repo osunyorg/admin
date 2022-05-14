@@ -174,6 +174,11 @@ class Education::Program < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :ordered_by_name, -> { order(:name) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(education_programs.name) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def to_s
     "#{name}"

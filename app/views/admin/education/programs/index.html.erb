@@ -5,6 +5,7 @@
             filters: @filters if @filters.any?  %>
 
 <%= render 'admin/education/programs/list', programs: @programs %>
+<%= paginate @programs, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('admin.education.programs.view_as_tree'),
