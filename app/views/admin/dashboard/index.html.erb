@@ -1,8 +1,9 @@
 <% content_for :title, t('admin.dashboard') %>
+<% classes = 'col-md-6 col-xl-4 col-xxl-3 d-flex' %>
 
 <div class="row">
-  <div class="col-md-4">
-    <div class="card">
+  <div class="<%= classes %>">
+    <div class="card flex-fill">
       <div class="card-body">
         <h4><%= t('hello', name: current_user.first_name) %></h4>
         <% if current_university.logo.attached? %>
@@ -13,6 +14,24 @@
       </div>
     </div>
   </div>
+  <div class="<%= classes %>">
+    <div class="card flex-fill">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2"><%= Delayed::Job.all.length %></h3>
+            <p class="mb-0"><%= t 'admin.pending_tasks.label' %></p>
+            <p class="mb-0 small"><%= t 'admin.pending_tasks.hint' %></p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat stat-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-baseline"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% if current_university.research_journals.any? && can?(:read, Research::Journal) %>
@@ -20,10 +39,12 @@
   <div class="row">
     <% current_university.research_journals.each do |journal| %>
       <% next unless can?(:read, journal) %>
-      <div class="col-md-4">
-        <div class="card">
+      <div class="<%= classes %>">
+        <div class="card flex-fill">
           <div class="card-body">
-            <span class="float-end"><i class="fas fa-newspaper fa-2x"></i></span>
+            <span class="float-end">
+              <i class="fas fa-newspaper fa-2x"></i>
+            </span>
             <h4><%= journal %></h4>
             <p>&nbsp;</p>
             <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
@@ -39,10 +60,12 @@
   <div class="row">
     <% current_university.communication_websites.each do |website| %>
       <% next unless can?(:read, website) %>
-      <div class="col-md-4">
-        <div class="card">
+      <div class="<%= classes %>">
+        <div class="card flex-fill">
           <div class="card-body">
-            <span class="float-end"><i class="fas fa-sitemap fa-2x"></i></span>
+            <span class="float-end">
+              <i class="fas fa-sitemap fa-2x"></i>
+            </span>
             <h4><%= website %></h4>
             <p class="small"><%= website.url %></p>
             <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
@@ -58,10 +81,12 @@
   <div class="row">
     <% current_university.communication_extranets.each do |extranet| %>
       <% next unless can?(:read, extranet) %>
-      <div class="col-md-4">
-        <div class="card">
+      <div class="<%= classes %>">
+        <div class="card flex-fill">
           <div class="card-body">
-            <span class="float-end"><i class="fas fa-project-diagram fa-2x"></i></span>
+            <span class="float-end">
+              <i class="fas fa-project-diagram fa-2x"></i>
+            </span>
             <h4><%= extranet %></h4>
             <p class="small"><%= extranet.url %></p>
             <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
@@ -71,3 +96,24 @@
     <% end %>
   </div>
 <% end %>
+
+<div class="small mt-5">
+  <ul class="list-inline">
+    <li class="list-inline-item">
+      <%= link_to 'API', api_root_path %>
+    </li>
+    <%
+    [
+    :terms_of_service,
+    :privacy_policy,
+    :cookies_policy
+    ].each do |term| %>
+      <li class="list-inline-item">
+        <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
+      </li>
+    <% end %>
+    <li class="list-inline-item">
+      <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
+    </li>
+  </ul>
+</div>
