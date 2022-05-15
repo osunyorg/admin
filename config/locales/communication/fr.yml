@@ -170,6 +170,12 @@ fr:
               title_placeholder: Entrer le titre de la définition
               text_label: Texte
               text_placeholder: Entrer la description de la définition
+          embed:
+            edit:
+              code_label: Code du bloc d'intégration HTML
+              code_placeholder: Entrez ici le code
+              transcription_label: Transcription textuelle du contenu
+              transcription_placeholder: Entrez ici la transcription
           gallery:
             edit:
               add_image: Ajouter une image
