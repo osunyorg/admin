@@ -15,15 +15,14 @@
   </div>
   <div class="col-md-6">
     <label  class="form-label"
-            for="text">
+            for="transcription">
       <%= t '.transcription_label' %>
     </label>
     <div class="mb-3">
-      <textarea id="text"
+      <textarea id="transcription"
               rows="10"
               class="form-control"
               v-model="data.transcription"
-              data-summernote-config="mini-list"
               placeholder="<%= t '.transcription_placeholder' %>"></textarea>
     </div>
   </div>

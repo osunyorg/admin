@@ -231,6 +231,12 @@ fr:
               title_placeholder: Entrer le titre de l'événement
               text_label: Texte
               text_placeholder: Entrer le texte de l'événement
+          video:
+            edit:
+              url_label: Url de la vidéo
+              url_placeholder: Entrer l'url de la vidéo
+              transcription_label: Transcription textuelle du contenu
+              transcription_placeholder: Entrez ici la transcription
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page

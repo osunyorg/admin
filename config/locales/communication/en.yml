@@ -172,10 +172,10 @@ en:
               text_placeholder: Enter text here
           embed:
             edit:
-              code_label: Code du bloc d'intégration HTML
-              code_placeholder: Entrez ici le code
-              transcription_label: Transcription textuelle du contenu
-              transcription_placeholder: Entrez ici la transcription
+              code_label: Code
+              code_placeholder: Enter code
+              transcription_label: Text transcript
+              transcription_placeholder: Enter text transcript
           gallery:
             edit:
               add_image: Add image
@@ -229,6 +229,12 @@ en:
               title_placeholder: Enter title here
               text_label: Text
               text_placeholder: Enter text here
+          video:
+            edit:
+              url_label: Video url
+              url_placeholder: Enter video's url
+              transcription_label: Text transcript
+              transcription_placeholder: Enter text transcript
       website:
         pages:
           delete_special_page_notice: Can't delete this page
