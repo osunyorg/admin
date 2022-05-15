@@ -15,7 +15,6 @@
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  level                 :integer
-#  main_information      :text
 #  name                  :string
 #  objectives            :text
 #  opportunities         :text

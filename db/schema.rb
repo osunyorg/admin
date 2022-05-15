@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_15_060948) do
+ActiveRecord::Schema.define(version: 2022_05_15_082819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -460,7 +460,6 @@ ActiveRecord::Schema.define(version: 2022_05_15_060948) do
     t.text "content"
     t.text "results"
     t.text "presentation"
-    t.text "main_information"
     t.text "featured_image_credit"
     t.uuid "diploma_id"
     t.string "short_name"

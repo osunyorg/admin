@@ -45,21 +45,20 @@ level: <%= @about.level %>
 ects: <%= @about.ects %>
 <%
 [
-  :main_information,
   :accessibility,
   :contacts,
+  :content,
   :duration,
   :evaluation,
   :objectives,
   :opportunities,
   :other,
+  :pedagogy,
   :prerequisites,
   :presentation,
   :pricing,
   :registration,
-  :results,
-  :pedagogy,
-  :content
+  :results
 ].each do |property| %>
 <%= property.to_s %>: >
   <%= prepare_html_for_static @about.send("best_#{property}"), @about.university %>
