@@ -176,6 +176,13 @@ fr:
               code_placeholder: Entrez ici le code
               transcription_label: Transcription textuelle du contenu
               transcription_placeholder: Entrez ici la transcription
+          files:
+            edit:
+              add_file: Ajouter un fichier
+              remove_file: Supprimer le fichier
+              file_label: Fichier
+              title_label: Titre
+              title_placeholder: Entrer le titre de la définition
           gallery:
             edit:
               add_image: Ajouter une image

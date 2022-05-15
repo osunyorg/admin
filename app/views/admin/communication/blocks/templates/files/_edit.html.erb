@@ -1,0 +1,47 @@
+<a  class="<%= button_classes('mb-4') %>"
+    v-on:click="data.elements.push({title: '', file: {}})">
+    <%= t '.add_file' %>
+</a>
+
+<draggable :list="data.elements" handle=".dragHandle" class="row">
+  <div v-for="(element, index) in data.elements" class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex">
+          <div>
+            <a class="btn ps-0 pt-0 dragHandle">
+              <i class="fa fa-bars handle"></i>
+            </a>
+          </div>
+          <div class="flex-fill">
+            <label    class="form-label"
+                      :for="'element-' + index + '-title'"><%= t '.title_label' %></label>
+            <input class="form-control mb-3"
+                      v-model="element.title"
+                      placeholder="<%= t '.title_placeholder' %>"
+                      type="text"
+                      :id="'element-' + index + '-title'" />
+
+            <div v-if="!element.file.id">
+              <label  class="form-label"
+                      :for="'element-' + index + '-file'">
+                  <%= t '.file_label' %>
+              </label>
+              <input  class="form-control mb-4"
+                      type="file"
+                      @change="onFileImageChange( $event, element, 'file' )"
+                      :id="'element-' + index + '-file'">
+            </div>
+            <div v-if="element.file">
+              <a  class="btn btn-sm btn-danger mt-2"
+                  v-on:click="element.file=null">
+                  <i class="fas fa-times"></i>
+                  <%= t '.remove_file' %>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</draggable>
