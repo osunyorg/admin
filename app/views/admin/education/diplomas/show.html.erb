@@ -16,7 +16,9 @@
 </div>
 
 
-<%= render 'admin/education/programs/list', programs: @programs %>
+<%= render 'admin/education/programs/list',
+            programs: @programs,
+            hide_diploma: true %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>

@@ -6,6 +6,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
   has_scope :for_search_term
+  has_scope :for_diploma
 
   def index
     @programs = apply_scopes(@programs).ordered_by_name.page(params[:page])
@@ -101,7 +102,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :prerequisites, :objectives, :duration, :presentation, :registration, :pedagogy, :content,
       :evaluation, :accessibility, :pricing, :contacts, :opportunities, :results, :other,  :main_information,
-      :parent_id, :diploma_id, school_ids: [], 
+      :parent_id, :diploma_id, school_ids: [],
       university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
     )
   end

@@ -185,6 +185,7 @@ class Education::Program < ApplicationRecord
       unaccent(education_programs.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+  scope :for_diploma, -> (diploma_id) { where(diploma_id: diploma_id) }
 
   def to_s
     "#{name}"
