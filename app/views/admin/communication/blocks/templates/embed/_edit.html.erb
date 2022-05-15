@@ -1,0 +1,30 @@
+<div class="row mb-4">
+  <div class="col-md-6">
+    <label  class="form-label"
+            for="text">
+      <%= t '.code_label' %>
+    </label>
+    <div class="mb-3">
+      <textarea id="text"
+              rows="10"
+              class="form-control"
+              v-model="data.code"
+              data-summernote-config="mini-list"
+              placeholder="<%= t '.code_placeholder' %>"></textarea>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label  class="form-label"
+            for="text">
+      <%= t '.transcription_label' %>
+    </label>
+    <div class="mb-3">
+      <textarea id="text"
+              rows="10"
+              class="form-control"
+              v-model="data.transcription"
+              data-summernote-config="mini-list"
+              placeholder="<%= t '.transcription_placeholder' %>"></textarea>
+    </div>
+  </div>
+</div>
