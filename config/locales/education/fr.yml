@@ -10,6 +10,9 @@ fr:
       education/cohort:
         one: Promotion
         other: Promotions
+      education/diploma:
+        one: Diplôme
+        other: Diplômes
       education/program:
         one: Formation
         other: Formations
@@ -20,6 +23,11 @@ fr:
       education/cohort:
         year: Année
         alumni: Alumni
+      education/diploma:
+        name: Nom
+        short_name: Nom abrégé
+        level: Niveau
+        programs: Formations
       education/program:
         accessibility: Accessibilité
         capacity: Capacité
@@ -27,6 +35,7 @@ fr:
         continuing: Formation continue
         description: Meta Description
         duration: Durée
+        diploma: Diplôme
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
@@ -45,6 +54,7 @@ fr:
         registration: Modalités et délais d’accès
         roles: Rôles
         schools: Écoles proposant cette formation
+        short_name: Nom abrégé
         teachers: Enseignants·es
         team: Équipe
         content: Contenus de la formation
@@ -104,6 +114,18 @@ fr:
       other: Enseignants·es
   enums:
     education:
+      diploma:
+        level:
+          not_applicable: Non applicable
+          primary: École primaire
+          secondary: Collège
+          high: Lycée
+          first_year: Bac + 1
+          second_year: Bac + 2
+          third_year: Licence (Bac + 3)
+          fourth_year: Bac + 4
+          master: Master (Bac + 5)
+          doctor: Doctorat (Bac + 8)
       program:
         level:
           bachelor: Licence / bachelor

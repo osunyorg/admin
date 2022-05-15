@@ -1,0 +1,7 @@
+<% content_for :title, Education::Diploma.model_name.human(count: 2) %>
+
+<%= render 'admin/education/diplomas/list', diplomas: @diplomas %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Education::Diploma %>
+<% end %>

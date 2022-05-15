@@ -7,6 +7,11 @@ module University::WithEducation
               dependent: :destroy
     alias_attribute :cohorts, :education_cohorts
 
+    has_many  :education_diplomas,
+              class_name: 'Education::Diploma',
+              dependent: :destroy
+    alias_attribute :diplomas, :education_diplomas
+
     has_many  :education_programs,
               class_name: 'Education::Program',
               dependent: :destroy

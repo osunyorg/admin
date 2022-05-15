@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_131539) do
+ActiveRecord::Schema.define(version: 2022_05_15_060948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -419,6 +419,17 @@ ActiveRecord::Schema.define(version: 2022_05_05_131539) do
     t.index ["university_person_id", "education_cohort_id"], name: "index_person_cohort"
   end
 
+  create_table "education_diplomas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.integer "level", default: 0
+    t.string "slug"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_education_diplomas_on_university_id"
+  end
+
   create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -451,6 +462,9 @@ ActiveRecord::Schema.define(version: 2022_05_05_131539) do
     t.text "presentation"
     t.text "main_information"
     t.text "featured_image_credit"
+    t.uuid "diploma_id"
+    t.string "short_name"
+    t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -488,6 +502,23 @@ ActiveRecord::Schema.define(version: 2022_05_05_131539) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
+  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.string "website"
+    t.string "phone"
+    t.string "mail"
+    t.boolean "active"
+    t.string "sirene"
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -680,8 +711,8 @@ ActiveRecord::Schema.define(version: 2022_05_05_131539) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
-    t.boolean "is_author"
     t.string "name"
+    t.boolean "is_author"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -826,6 +857,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_131539) do
   add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"
   add_foreign_key "education_cohorts", "education_programs", column: "program_id"
   add_foreign_key "education_cohorts", "universities"
+  add_foreign_key "education_diplomas", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"

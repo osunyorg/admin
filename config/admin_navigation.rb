@@ -15,9 +15,10 @@ SimpleNavigation::Configuration.run do |navigation|
 
     if can?(:read, Education::Program)
       primary.item :education, Education.model_name.human, nil, { kind: :header }
-      primary.item :education, t('education.teachers', count: 2), admin_education_teachers_path, { icon: 'user-graduate' } if can?(:read, University::Person)
-      primary.item :education, Education::School.model_name.human(count: 2), admin_education_schools_path, { icon: 'university' } if can?(:read, Education::School)
-      primary.item :education_programs, Education::Program.model_name.human(count: 2), admin_education_programs_path, { icon: 'graduation-cap' } if can?(:read, Education::Program)
+      primary.item :education_teachers, t('education.teachers', count: 2), admin_education_teachers_path, { icon: 'user-graduate' } if can?(:read, University::Person)
+      primary.item :education_schools, Education::School.model_name.human(count: 2), admin_education_schools_path, { icon: 'university' } if can?(:read, Education::School)
+      primary.item :education_diplomas, Education::Diploma.model_name.human(count: 2), admin_education_diplomas_path, { icon: 'graduation-cap' } if can?(:read, Education::Diploma)
+      primary.item :education_programs, Education::Program.model_name.human(count: 2), admin_education_programs_path, { icon: 'chalkboard-teacher' } if can?(:read, Education::Program)
       primary.item :education, 'Ressources éducatives', nil, { icon: 'laptop' }
       primary.item :education, 'Feedbacks', nil, { icon: 'comments' }
     end

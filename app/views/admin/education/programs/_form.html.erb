@@ -29,9 +29,18 @@
     </div>
     <div class="col-md-9">
       <%= render 'admin/education/programs/forms/part', part: :essential do %>
-        <%= f.input :name %>
+        <div class="row">
+          <div class="col-lg-9">
+            <%= f.input :name %>
+          </div>
+          <div class="col-lg-3">
+            <%= f.input :short_name %>
+          </div>
+        </div>
         <div class="row">
           <div class="col-lg-6">
+            <%= f.association :diploma,
+                              collection: current_university.diplomas.ordered %>
             <%= f.input :level, include_blank: false %>
             <%= f.input :ects %>
             <%= render 'admin/education/programs/forms/input_with_inheritance',

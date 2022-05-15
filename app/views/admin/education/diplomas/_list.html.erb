@@ -1,0 +1,27 @@
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Education::Diploma.human_attribute_name('name') %></th>
+      <th><%= Education::Diploma.human_attribute_name('short_name') %></th>
+      <th><%= Education::Diploma.human_attribute_name('level') %></th>
+      <th><%= Education::Diploma.human_attribute_name('programs') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% diplomas.ordered.each do |diploma| %>
+      <tr>
+        <td><%= link_to diploma, [:admin, diploma] %></td>
+        <td><%= diploma.short_name %></td>
+        <td><%= diploma.level_i18n %></td>
+        <td><%= diploma.programs.count %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link diploma %>
+            <%= destroy_link diploma %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -34,4 +34,5 @@ namespace :education do
   end
   resources :academic_years
   resources :cohorts
+  resources :diplomas
 end

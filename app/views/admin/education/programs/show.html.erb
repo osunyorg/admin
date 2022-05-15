@@ -28,20 +28,34 @@
   <div class="col-md-9">
     <%= render 'admin/education/programs/forms/part',
                 part: :essential,
-                collapsed: true do %>
-      <h3 class="h5"><%= Education::Program.human_attribute_name('name') %></h3>
-      <%= @program.name %>
+                collapsed: false do %>
       <div class="row">
         <div class="col-lg-6">
-          <h3 class="h5 mt-4"><%= Education::Program.human_attribute_name('level') %></h3>
+          <h3 class="h5">
+            <%= Education::Program.human_attribute_name('name') %>
+          </h3>
+          <p><%= @program.name %></p>
+          <h3 class="h5 mt-4">
+            <%= Education::Program.human_attribute_name('diploma') %>
+          </h3>
+          <p><%= link_to @program.diploma, [:admin, @program.diploma] if @program.diploma %></p>
+          <h3 class="h5 mt-4">
+            <%= Education::Program.human_attribute_name('level') %>
+          </h3>
           <p><%= @program.level_i18n %></p>
-          <h3 class="h5 mt-4"><%= Education::Program.human_attribute_name('ects') %></h3>
+          <h3 class="h5 mt-4">
+            <%= Education::Program.human_attribute_name('ects') %>
+          </h3>
           <p><%= @program.ects %></p>
           <%= render 'admin/application/property/text',
                       object: @program,
                       property: :duration %>
         </div>
         <div class="col-lg-6">
+          <h3 class="h5">
+            <%= Education::Program.human_attribute_name('short_name') %>
+          </h3>
+          <p><%= @program.short_name %></p>
           <h3 class="h5 mt-4">
             <%= Education::Program.human_attribute_name('capacity') %>
           </h3>

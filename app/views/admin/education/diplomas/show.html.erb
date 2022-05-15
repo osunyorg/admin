@@ -1,0 +1,27 @@
+<% content_for :title, @diploma %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      <strong><%= Education::Diploma.human_attribute_name('short_name') %></strong>
+      <%= @diploma.short_name %>
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <strong><%= Education::Diploma.human_attribute_name('level') %></strong>
+      <%= @diploma.level_i18n %>
+    </p>
+  </div>
+</div>
+
+
+<%= render 'admin/education/programs/list', programs: @programs %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @diploma %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @diploma %>
+<% end %>

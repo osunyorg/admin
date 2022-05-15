@@ -10,6 +10,9 @@ en:
       education/cohort:
         one: Cohort
         other: Cohorts
+      education/diploma:
+        one: Diploma
+        other: Diplomas
       education/program:
         one: Program
         other: Programs
@@ -20,6 +23,11 @@ en:
       education/cohort:
         year: Year
         alumni: Alumni
+      education/diploma:
+        name: Name
+        short_name: Short name
+        level: Level
+        programs: Programs
       education/program:
         accessibility: Accessibilité
         capacity: Capacity
@@ -27,6 +35,7 @@ en:
         continuing: Formation continue
         description: Meta Description
         duration: Durée
+        diploma: Diploma
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Featured image
@@ -45,6 +54,7 @@ en:
         registration: Modalités et délais d’accès
         roles: Roles
         schools: Schools with this formation
+        short_name: Short name
         teachers: Teachers
         team: Team
         content: Program's content
@@ -86,6 +96,18 @@ en:
       other: Teachers
   enums:
     education:
+      diploma:
+        level:
+          not_applicable: Not applicable
+          primary: Primary school
+          secondary: Secondary school
+          high: High School
+          first_year: 1 year
+          second_year: 2 years
+          third_year: Licence (3 years)
+          fourth_year: 4 years
+          master: Master (5 years)
+          doctor: Doctorate (8 years)
       program:
         level:
           bachelor: Licence / bachelor
