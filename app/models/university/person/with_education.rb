@@ -38,6 +38,19 @@ module University::Person::WithEducation
                             class_name: 'Education::Program',
                             foreign_key: 'university_person_id',
                             association_foreign_key: 'education_program_id'
+
+    scope :for_alumni_program, -> (program_id) {
+      left_joins(:cohorts)
+        .where(education_cohorts: { program_id: program_id })
+        .select("university_people.*")
+        .distinct
+    }
+    scope :for_alumni_year, -> (academic_year_id) {
+      left_joins(:cohorts)
+        .where(education_cohorts: { academic_year_id: academic_year_id })
+        .select("university_people.*")
+        .distinct
+    }
   end
 
   def add_to_cohort(cohort)

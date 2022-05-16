@@ -1,9 +1,9 @@
 module Filters
-  class Admin::University::People::Alumni < Filters::Base
+  class Admin::University::Alumni < Filters::Base
     def initialize(user)
       super
       add_search
-      add :for_program,
+      add :for_alumni_program,
           user.university.education_programs,
           I18n.t(
             'filters.attributes.element',
@@ -11,7 +11,7 @@ module Filters
           ),
           false,
           true
-      add :for_academic_year,
+      add :for_alumni_year,
           user.university.academic_years.ordered,
           I18n.t(
             'filters.attributes.element',

@@ -20,5 +20,5 @@
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_people_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
 <% end %>

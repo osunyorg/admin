@@ -2,7 +2,7 @@
 
 <h2 class="h3"><%= Education::Program.model_name.human(count: 2) %></h2>
 
-<%= simple_form_for [:admin, @alumnus], url: edit_cohorts_admin_university_people_alumnus_path(@alumnus) do |f| %>
+<%= simple_form_for [:admin, @alumnus], url: edit_cohorts_admin_university_alumnus_path(@alumnus) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -21,7 +21,7 @@
     <div class="col-md-10">
       <div id="cohorts">
         <%= f.simple_fields_for :cohorts, @alumnus.cohorts.sort_by { |c| [c.year ? 0 : 1, c.year] }.reverse, include_id: false do |cohort_f| %>
-          <%= render 'admin/university/people/alumni/cohort_fields', f: cohort_f, include_id: true %>
+          <%= render 'admin/university/alumni/cohort_fields', f: cohort_f, include_id: true %>
         <% end %>
       </div>
     </div>
