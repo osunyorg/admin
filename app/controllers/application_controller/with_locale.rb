@@ -1,4 +1,4 @@
-module WithLocale
+module ApplicationController::WithLocale
   extend ActiveSupport::Concern
 
   included do

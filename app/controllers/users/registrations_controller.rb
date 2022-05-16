@@ -1,5 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  include WithLocale
   include Users::AddUniversityToRequestParams
 
   layout 'admin/layouts/application', only: [:edit, :update]
