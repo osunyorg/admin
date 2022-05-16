@@ -3,7 +3,9 @@ module Filters
     def initialize(user)
       super
       add_search
-      add :for_kind, ::University::Organization::kinds.keys.map { |r| { to_s: I18n.t("enums.university.organization.kind.#{r}"), id: r } }, I18n.t('filters.attributes.kind')
+      add :for_kind,
+          ::University::Organization::kinds.keys.map { |r| { to_s: I18n.t("enums.university.organization.kind.#{r}"), id: r } },
+          I18n.t('filters.attributes.kind')
     end
   end
 end

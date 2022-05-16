@@ -7,7 +7,7 @@ module Filters
           user.university.education_programs,
           I18n.t(
             'filters.attributes.element',
-            element: I18n.t('activerecord.models.education/program.one').downcase
+            element: Education::Program.model_name.human.downcase
           ),
           false,
           true
