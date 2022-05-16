@@ -12,6 +12,11 @@ namespace :app do
       person.is_author = person.communication_website_posts.any?
       person.save
     end
+
+    Communication::Website::Page.where("header_text ILIKE ?", "%<p>%").find_each { |page|
+      clean_header_text = ActionController::Base.helpers.strip_tags(page.header_text)
+      page.update(header_text: clean_header_text)
+    }
   end
 
   namespace :websites do
