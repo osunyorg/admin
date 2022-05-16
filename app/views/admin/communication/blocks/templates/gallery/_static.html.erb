@@ -3,10 +3,10 @@
         - id: "<%= image.blob.id %>"
           file: "<%= image.blob.id %>"
           alt: >
-            <%= prepare_text_for_static image.alt %>
+            <%= prepare_text_for_static image.alt, 6 %>
           credit: >
-            <%= prepare_text_for_static image.credit %>
+            <%= prepare_text_for_static image.credit, 6 %>
           text: >
-            <%= prepare_text_for_static image.text %>
+            <%= prepare_text_for_static image.text, 6 %>
 
 <% end %>

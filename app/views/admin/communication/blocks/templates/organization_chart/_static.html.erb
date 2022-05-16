@@ -2,6 +2,6 @@
 block.template.persons_with_role.each do |person_with_role|
   person = person_with_role.person %>
       - slug: "<%= person.slug %>"
-        role: >
-          <%= prepare_text_for_static person_with_role.role %>
+        role: >-
+          <%= prepare_text_for_static person_with_role.role, 5 %>
 <% end %>

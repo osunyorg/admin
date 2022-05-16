@@ -42,8 +42,8 @@ roles:
 roles: []
 <% end %>
 continuing: <%= @about.continuing %>
-level: <%= @about.level %>
-ects: <%= @about.ects %>
+level: <%= @about.diploma&.level %>
+ects: <%= @about.diploma&.ects %>
 <%
 [
   :accessibility,

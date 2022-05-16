@@ -3,6 +3,8 @@
 # Table name: education_diplomas
 #
 #  id            :uuid             not null, primary key
+#  duration      :text
+#  ects          :integer
 #  level         :integer          default("not_applicable")
 #  name          :string
 #  short_name    :string
@@ -24,7 +26,7 @@ class Education::Diploma < ApplicationRecord
   include WithGit
   include WithSlug
 
-  has_many :programs
+  has_many :programs, dependent: :nullify
 
   scope :ordered, -> { order(:level, :name) }
 
@@ -47,13 +49,25 @@ class Education::Diploma < ApplicationRecord
     }
   end
 
+  def published_programs_for_website(website)
+    website.education_programs.published.where(diploma: self)
+  end
+
   # We need to send the diplomas only to the websites that need them
   def for_website?(website)
-    website.education_programs.published.where(diploma: self).any?
+    published_programs_for_website(website).any?
   end
 
   def git_path(website)
     "content/diplomas/#{slug}/_index.html"
+  end
+
+  def git_dependencies(website)
+    published_programs = published_programs_for_website(website)
+
+    dependencies = [self]
+    dependencies += published_programs + published_programs.map(&:active_storage_blobs).flatten if published_programs.any?
+    dependencies
   end
 
   def to_s
