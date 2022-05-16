@@ -210,7 +210,8 @@ class Education::Program < ApplicationRecord
     university_people_through_role_involvements +
     university_people_through_role_involvements.map(&:active_storage_blobs).flatten +
     university_people_through_role_involvements.map(&:administrator) +
-    website.menus
+    website.menus +
+    [diploma]
   end
 
   def git_destroy_dependencies(website)
