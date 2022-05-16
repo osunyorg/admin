@@ -17,17 +17,13 @@
           <div class="col-lg-6">
             <%= f.association :diploma,
                               collection: current_university.diplomas.ordered %>
-            <%= f.input :level, include_blank: false %>
-            <%= f.input :ects %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :duration %>
+            <%= f.association :schools,
+                              as: :check_boxes,
+                              collection: current_university.education_schools.ordered %>
           </div>
           <div class="col-lg-6">
             <%= f.input :capacity %>
             <%= f.input :continuing %>
-            <%= f.association :schools,
-                              as: :check_boxes,
-                              collection: current_university.education_schools.ordered %>
           </div>
         </div>
       <% end %>

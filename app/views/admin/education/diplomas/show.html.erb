@@ -1,24 +1,39 @@
 <% content_for :title, @diploma %>
 
 <div class="row">
-  <div class="col-lg-6">
-    <p>
-      <strong><%= Education::Diploma.human_attribute_name('short_name') %></strong>
-      <%= @diploma.short_name %>
-    </p>
+  <div class="col-lg-8">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5">
+          <%= Education::Diploma.human_attribute_name('programs') %>
+        </h2>
+      </div>
+      <%= render 'admin/education/programs/list',
+                  programs: @programs,
+                  hide_diploma: true %>
+    </div>
   </div>
-  <div class="col-lg-6">
-    <p>
-      <strong><%= Education::Diploma.human_attribute_name('level') %></strong>
-      <%= @diploma.level_i18n %>
-    </p>
+  <div class="col-lg-4">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h2 class="card-title mb-0 h5"><%= t('information') %></h2>
+      </div>
+      <div class="card-body">
+        <strong><%= Education::Diploma.human_attribute_name('short_name') %></strong>
+        <span class="float-end"><%= @diploma.short_name %></span>
+        <hr>
+        <strong><%= Education::Diploma.human_attribute_name('level') %></strong>
+        <span class="float-end"><%= @diploma.level_i18n %></span>
+        <hr>
+        <strong><%= Education::Diploma.human_attribute_name('ects') %></strong>
+        <span class="float-end"><%= @diploma.ects %></span>
+        <hr>
+        <strong><%= Education::Diploma.human_attribute_name('duration') %></strong>
+        <span class="float-end"><%= @diploma.duration %></span>
+      </div>
+    </div>
   </div>
 </div>
-
-
-<%= render 'admin/education/programs/list',
-            programs: @programs,
-            hide_diploma: true %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>

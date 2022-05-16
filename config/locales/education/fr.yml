@@ -28,6 +28,8 @@ fr:
         short_name: Nom abrégé
         level: Niveau
         programs: Formations
+        duration: Durée
+        ects: Crédits ECTS
       education/program:
         accessibility: Accessibilité
         capacity: Capacité
@@ -140,6 +142,9 @@ fr:
           second_year: Bac + 2
   simple_form:
     hints:
+      education_diploma:
+        ects: European Credits Transfer System
+        duration: La durée peut être exprimée en heure ou en jour. Elle peut également être forfaitisée ou estimée.
       education_program:
         capacity: Nombre de places disponibles par promotion
         ects: European Credits Transfer System
