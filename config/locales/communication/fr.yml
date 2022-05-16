@@ -182,7 +182,7 @@ fr:
               remove_file: Supprimer le fichier
               file_label: Fichier
               title_label: Titre
-              title_placeholder: Entrer le titre de la définition
+              title_placeholder: Entrer le titre du fichier
           gallery:
             edit:
               add_image: Ajouter une image
