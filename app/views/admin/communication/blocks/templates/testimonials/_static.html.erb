@@ -1,11 +1,11 @@
       testimonials:
 <% block.template.testimonials.each do |testimonial| %>
         - text: >-
-            <%= prepare_text_for_static testimonial.text %>
+            <%= prepare_text_for_static testimonial.text, 6 %>
           author: >-
-              <%= prepare_text_for_static testimonial.author %>
+            <%= prepare_text_for_static testimonial.author, 6 %>
           job: >-
-              <%= prepare_text_for_static testimonial.job %>
+            <%= prepare_text_for_static testimonial.job, 6 %>
 <% if testimonial.blob %>
           photo: "<%= testimonial.blob.id %>"
 <% end %>

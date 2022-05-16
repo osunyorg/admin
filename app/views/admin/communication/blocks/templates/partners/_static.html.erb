@@ -3,9 +3,9 @@
       - slug: "<%= partner.organization.slug %>"
       <% else %>
       - name: >
-          <%= prepare_text_for_static partner['name'] %>
+          <%= prepare_text_for_static partner['name'], 5 %>
         url: >-
-          <%= prepare_text_for_static partner['url'] %>
+          <%= prepare_text_for_static partner['url'], 5 %>
         logo: "<%= partner.blob&.id %>"
       <% end %>
 <% end %>
