@@ -24,7 +24,7 @@ class Education::Diploma < ApplicationRecord
   include WithGit
   include WithSlug
 
-  has_many :programs
+  has_many :programs, dependent: :nullify
 
   scope :ordered, -> { order(:level, :name) }
 
