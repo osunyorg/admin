@@ -1,0 +1,84 @@
+<%= simple_form_for [:admin, page] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('content') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :title %>
+          <%= f.input :breadcrumb_title %>
+          <%= f.input :description_short, input_html: { value: page.description_short&.gsub('&amp;', '&') } %>
+          <%= f.input :header_text,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
+          <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
+          <%= f.association :related_category,
+                            collection: collection_tree(@website.categories),
+                            label_method: ->(p) { sanitize p[:label] },
+                            value_method: ->(p) { p[:id] } if @website.categories.any? && page.is_regular_page? %>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :description %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <% unless page.kind_home? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+          </div>
+          <div class="card-body">
+            <%= f.input :slug,
+                        as: :string,
+                        required: true,
+                        input_html: page.persisted? ? {} : {
+                          class: 'js-slug-input',
+                          data: { source: '#communication_website_page_title' }
+                        } unless page.kind_home? %>
+            <% if @website.languages.many? %>
+              <%= f.input :language_id, collection: @website.languages, include_blank: false %>
+            <% elsif @website.languages.any? %>
+              <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
+            <% end %>
+            <%= f.input :published if page.is_regular_page? %>
+            <%= f.association :parent,
+                              collection: collection_tree(@website.pages, page),
+                              include_blank: false,
+                              label_method: ->(p) { sanitize p[:label] },
+                              value_method: ->(p) { p[:id] } unless page.kind_home? %>
+            <%= f.input :bodyclass if can?(:edit, @website) %>
+          </div>
+        </div>
+      <% else %>
+        <% if @website.languages.many? %>
+          <div class="card flex-fill w-100">
+            <div class="card-header">
+              <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+            </div>
+            <div class="card-body">
+              <%= f.input :language_id, collection: @website.languages, include_blank: false %>
+            </div>
+          </div>
+        <% elsif @website.languages.any? %>
+          <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
+        <% end %>
+      <% end %>
+      <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

@@ -25,7 +25,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
             data-bs-toggle="modal"
             data-bs-target="#unsplashModal"
             >
-      Chercher une image
+      <%= t 'unsplash.open' %>
     </button>
     <input  class="form-control string optional"
             type="hidden"
@@ -39,7 +39,9 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
       <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Recherche d'image sur Unsplash</h5>
+            <h5 class="modal-title" id="exampleModalLabel">
+              <%= t 'unsplash.title' %>
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -47,7 +49,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
               <div class="col-lg-9">
                 <input  type="text"
                         name="search"
-                        placeholder="Recherche en anglais..."
+                        placeholder="<%= t 'unsplash.placeholder' %>"
                         v-model="query"
                         class="form-control">
               </div>
@@ -55,13 +57,15 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
                 <button type="button"
                         class="btn btn-primary"
                         v-on:click="research"
-                        aria-label="Chercher">
-                  Chercher
+                        aria-label="<%= t 'unsplash.search' %>">
+                  <%= t 'unsplash.search' %>
                 </button>
               </div>
             </div>
             <div class="row" ref="results">
-              <p v-if="data.results.length === 0 || !data" >Aucun résultat</p>
+              <p v-if="data.results.length === 0 || !data" >
+                <%= t 'unsplash.nothing' %>
+              </p>
               <div v-for="image in data.results"  class="col-6 col-lg-2">
                 <img
                     :src="image.thumb"
@@ -76,11 +80,11 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
               <div  href="#"
                   v-if="page > 1"
                   v-on:click="page = page - 1"
-                  class="btn btn-light btn-sm">Page précédente</div>
+                  class="btn btn-light btn-sm"><%= t 'unsplash.previous' %></div>
               <div  href="#"
                   v-if="page < data.total_pages"
                   v-on:click="page = page + 1"
-                  class="btn btn-light bt-sm">Page suivante</div>
+                  class="btn btn-light bt-sm"><%= t 'unsplash.next' %></div>
             </div>
           </div>
         </div>

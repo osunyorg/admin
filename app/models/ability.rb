@@ -20,6 +20,7 @@ class Ability
     can :read, Communication::Website::Imported::Website, university_id: @user.university_id
     can :read, Communication::Website::Imported::Page, university_id: @user.university_id
     can :read, Communication::Website::Imported::Post, university_id: @user.university_id
+    can :read, Education::Diploma, university_id: @user.university_id
     can :read, Education::Program, university_id: @user.university_id
     can :read, Education::School, university_id: @user.university_id
     can :read, Research::Journal, university_id: @user.university_id
@@ -100,6 +101,7 @@ class Ability
     can :manage, Education::AcademicYear, university_id: @user.university_id
     can :manage, Education::Cohort, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
+    can :manage, Education::Diploma, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
     can :manage, :all_programs # needed to prevent program_manager to access specific global screens
     can :manage, Research::Journal, university_id: @user.university_id

@@ -1,0 +1,37 @@
+<% content_for :title, t("enums.communication.block.template_kind.#{@template}") %>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th><%= Communication::Block.human_attribute_name('name') %></th>
+      <th><%= Communication::Block.human_attribute_name('about') %></th>
+      <th><%= Communication::Block.human_attribute_name('university') %></th>
+      <th><%= Communication::Block.human_attribute_name('url') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blocks.each do |block| %>
+      <% url = "#{block.about.university.url }#{edit_admin_communication_block_path(block)}" %>
+      <tr>
+        <td><%= truncate "#{block}" %></td>
+        <td>
+          <%= truncate "#{block.about}" %>
+          <span class="badge bg-dark">
+            <%= block.about.class.model_name.human %>
+          </span>
+        </td>
+        <td><%= block.about.university %></td>
+        <td><%= link_to 'Open',
+                        url,
+                        target: :_blank %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('resave'),
+              server_resave_block_path(@template),
+              method: :post,
+              class: button_classes %>
+<% end %>

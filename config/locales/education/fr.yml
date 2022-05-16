@@ -10,6 +10,9 @@ fr:
       education/cohort:
         one: Promotion
         other: Promotions
+      education/diploma:
+        one: Diplôme
+        other: Diplômes
       education/program:
         one: Formation
         other: Formations
@@ -20,6 +23,11 @@ fr:
       education/cohort:
         year: Année
         alumni: Alumni
+      education/diploma:
+        name: Nom
+        short_name: Nom abrégé
+        level: Niveau
+        programs: Formations
       education/program:
         accessibility: Accessibilité
         capacity: Capacité
@@ -27,6 +35,7 @@ fr:
         continuing: Formation continue
         description: Meta Description
         duration: Durée
+        diploma: Diplôme
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
@@ -45,6 +54,7 @@ fr:
         registration: Modalités et délais d’accès
         roles: Rôles
         schools: Écoles proposant cette formation
+        short_name: Nom abrégé
         teachers: Enseignants·es
         team: Équipe
         content: Contenus de la formation
@@ -60,15 +70,40 @@ fr:
         roles: Membres de l'équipe
         websites: Sites Web associés
         zipcode: Code postal
+  admin:
+    education:
+      programs:
+        view_as_list: Vue en liste
+        view_as_tree: Vue en arbre
+        tree:
+          title: Arborescence des formations
   education:
     manage_programs: Gérer les formations
     manage_roles: Gérer les rôles
     manage_teachers: Gérer les enseignants·es
     number_of_programs: Nombre de formations
     program:
-      educational_informations: Informations pédagogiques
-      main_informations: Informations essentielles
-      useful_informations: Informations pratiques
+      parts:
+        technical:
+          label: Technique
+          hint: État de publication et URLs dans les sites Web concernés.
+        essential:
+          label: Essentiel
+          hint: Haut de page, résumé de la formation.
+        presentation:
+          label: Présentation
+          hint: Complétées par les blocs, afin de permettre une présentation libre et riche de la formation.
+        pedagogy:
+          label: Pédagogie
+          hint: Mode d'enseignement et d'évaluation, et présentation de l'équipe pédagogique.
+        results:
+          label: Résultats
+          hint: Débouchés et résultats obtenus par les anciens élèves.
+        admission:
+          label: Admission
+          hint: Modalités administratives d'accès à la formation.
+      hints:
+        essential: Ces informations apparaissent en haut de page
     roles:
       one: Rôle
       other: Rôles
@@ -79,6 +114,18 @@ fr:
       other: Enseignants·es
   enums:
     education:
+      diploma:
+        level:
+          not_applicable: Non applicable
+          primary: École primaire
+          secondary: Collège
+          high: Lycée
+          first_year: Bac + 1
+          second_year: Bac + 2
+          third_year: Licence (Bac + 3)
+          fourth_year: Bac + 4
+          master: Master (Bac + 5)
+          doctor: Doctorat (Bac + 8)
       program:
         level:
           bachelor: Licence / bachelor

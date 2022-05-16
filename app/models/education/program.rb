@@ -15,7 +15,6 @@
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  level                 :integer
-#  main_information      :text
 #  name                  :string
 #  objectives            :text
 #  opportunities         :text
@@ -29,14 +28,17 @@
 #  published             :boolean          default(FALSE)
 #  registration          :text
 #  results               :text
+#  short_name            :string
 #  slug                  :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  diploma_id            :uuid             indexed
 #  parent_id             :uuid             indexed
 #  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_education_programs_on_diploma_id     (diploma_id)
 #  index_education_programs_on_parent_id      (parent_id)
 #  index_education_programs_on_university_id  (university_id)
 #
@@ -84,6 +86,9 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
+  belongs_to :diploma,
+             class_name: 'Education::Diploma',
+             optional: true
   has_many   :university_roles,
              class_name: 'University::Role',
              as: :target,
@@ -173,6 +178,13 @@ class Education::Program < ApplicationRecord
   after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
   scope :published, -> { where(published: true) }
+  scope :ordered_by_name, -> { order(:name) }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(education_programs.name) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_diploma, -> (diploma_id) { where(diploma_id: diploma_id) }
 
   def to_s
     "#{name}"

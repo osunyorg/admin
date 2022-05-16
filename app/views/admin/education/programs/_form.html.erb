@@ -4,32 +4,19 @@
 
   <div class="row">
     <div class="col-md-3">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('education.program.main_informations') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :name %>
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: program.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#education_program_name' }
-                      } %>
-          <%= f.input :published %>
-          <%= f.input :level, include_blank: false %>
-          <%= f.input :capacity %>
-          <%= f.input :ects %>
-          <%= f.input :continuing %>
-          <%= f.association :schools,
-                            as: :check_boxes,
-                            collection: current_university.education_schools.ordered %>
-          <%= f.association :parent,
-                            collection: collection_tree(current_university.education_programs, program),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } %>
-        </div>
-      </div>
+      <%= render 'admin/education/programs/forms/part', part: :technical do %>
+        <%= f.input :published %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: program.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#education_program_name' }
+                    } %>
+        <%= f.association :parent,
+                          collection: collection_tree(current_university.education_programs, program),
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] } %>
+      <% end %>
       <%= render 'admin/application/featured_image/edit', about: program, f: f %>
       <div class="card flex-fill w-100">
         <div class="card-header">
@@ -41,66 +28,130 @@
       </div>
     </div>
     <div class="col-md-9">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('education.program.useful_informations') %></h5>
+      <%= render 'admin/education/programs/forms/part', part: :essential do %>
+        <div class="row">
+          <div class="col-lg-9">
+            <%= f.input :name %>
+          </div>
+          <div class="col-lg-3">
+            <%= f.input :short_name %>
+          </div>
         </div>
-        <div class="card-body">
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :main_information %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :presentation %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :duration %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= f.association :diploma,
+                              collection: current_university.diplomas.ordered %>
+            <%= f.input :level, include_blank: false %>
+            <%= f.input :ects %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :duration %>
+          </div>
+          <div class="col-lg-6">
+            <%= f.input :capacity %>
+            <%= f.input :continuing %>
+            <%= f.association :schools,
+                              as: :check_boxes,
+                              collection: current_university.education_schools.ordered %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('activerecord.attributes.education/program.team') %></h5>
-        </div>
-        <div class="card-body">
-          <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
-        </div>
-        <div class="card-body">
-          <div class="row mb-2">
-            <div class="col-md-8">
-              <label class="form-label"><%= Education::Program.human_attribute_name('teachers') %></label>
-            </div>
-            <div class="col-md-4 text-end">
-              <%= link_to_add_association t('add'),
-              f,
-              :university_person_involvements,
-              class: button_classes,
-              partial: 'admin/education/programs/involvement_fields',
-              data: {
-                'association-insertion-method': 'append',
-                'association-insertion-node':   '#involvements',
-              } %>
-            </div>
+      <%= render 'admin/education/programs/forms/part', part: :presentation do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= f.input :presentation %>
           </div>
-          <div id="involvements">
-            <%
-            sorted_involvements = program.university_person_involvements.sort_by { |involvement|
-              [involvement.person&.last_name, involvement.person&.first_name]
-            }
-            %>
-            <%= f.simple_fields_for :university_person_involvements, sorted_involvements, include_id: false do |involvement_f| %>
-            <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
-            <% end %>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :objectives %>
           </div>
         </div>
-      </div>
+      <% end %>
+
+      <%= render 'admin/education/programs/forms/part', part: :pedagogy do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :content %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :pedagogy %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :evaluation %>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-8">
+            <label class="form-label">
+              <%= Education::Program.human_attribute_name('teachers') %>
+            </label>
+          </div>
+          <div class="col-md-4 text-end">
+            <%= link_to_add_association t('add'),
+            f,
+            :university_person_involvements,
+            class: button_classes,
+            partial: 'admin/education/programs/involvement_fields',
+            data: {
+              'association-insertion-method': 'append',
+              'association-insertion-node':   '#involvements',
+            } %>
+          </div>
+        </div>
+        <div id="involvements">
+          <%
+          sorted_involvements = program.university_person_involvements
+                                       .sort_by { |involvement|
+            [involvement.person&.last_name, involvement.person&.first_name]
+          }
+          %>
+          <%= f.simple_fields_for :university_person_involvements,
+                                  sorted_involvements,
+                                  include_id: false do |involvement_f| %>
+            <%= render 'admin/education/programs/involvement_fields',
+                        f: involvement_f,
+                        include_id: true %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= render 'admin/education/programs/forms/part', part: :results do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :opportunities %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :results %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render 'admin/education/programs/forms/part', part: :admission do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :prerequisites %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :accessibility %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :other %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :pricing %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :registration %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance',
+                        f: f, property: :contacts %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

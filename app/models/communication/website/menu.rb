@@ -41,4 +41,8 @@ class Communication::Website::Menu < ApplicationRecord
   def git_path(website)
     "data/menus/#{identifier}.yml"
   end
+
+  def template_static
+    "admin/communication/websites/menus/static"
+  end
 end

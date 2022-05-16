@@ -28,15 +28,11 @@ Rails.application.routes.draw do
     root to: 'dashboard#index'
   end
 
-  namespace :server do
-    resources :universities
-    resources :languages
-    root to: 'dashboard#index'
-  end
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 
   draw 'api'
   draw 'extranet'
+  draw 'server'
   # Root is in extranet
 end

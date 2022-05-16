@@ -6,7 +6,9 @@
   <% end %>
   <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
   <% if @website.about %>
-    (<%= link_to_if can?(:read, @website.about), @website.about, [:admin, @website.about] unless @website.about.nil? %>)
+    (<%= link_to_if can?(:read, @website.about),
+                    @website.about,
+                    [:admin, @website.about] unless @website.about.nil? %>)
   <% end %>
 <% end %>
 
@@ -16,6 +18,7 @@
 <% end %>
 
 <% content_for :action_bar_left do %>
+  <%= destroy_link @website %>
   <% if can? :read, Communication::Website::Imported::Website %>
     <% if @website.imported? %>
       <%= link_to t('communication.website.imported.show'),
@@ -32,5 +35,4 @@
 
 <% content_for :action_bar_right do %>
   <%= edit_link @website %>
-  <%= destroy_link @website %>
 <% end %>

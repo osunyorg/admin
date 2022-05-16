@@ -23,18 +23,15 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     "#{data['button_secondary']}"
   end
 
-  def image
-    image_with_alt
+  def url_tertiary
+    "#{data['url_tertiary']}"
   end
 
-  protected
+  def button_tertiary
+    "#{data['button_tertiary']}"
+  end
 
-  def image_with_alt
-    blob = find_blob data, 'image'
-    return if blob.nil?
-    {
-      blob: blob,
-      alt: data['image_alt']
-    }.to_dot
+  def image
+    extract_image_alt_and_credit data, 'image'
   end
 end

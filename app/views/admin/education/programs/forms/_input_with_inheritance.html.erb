@@ -17,7 +17,13 @@ id = "#{property}Collapse"
       </a>
     </div>
     <div class="collapse" id="<%= id %>">
-      <%= f.input property, as: :summernote, label: false %>
+      <%= f.input property,
+                  as: :summernote,
+                  label: false,
+                  input_html: {
+                    data: { 'summernote-config' => 'mini' }
+                  }
+                   %>
       <div class="bg-light p-2 mt-n2">
         <b><%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %></b><br>
         <%= best_prop_value %>
@@ -25,5 +31,9 @@ id = "#{property}Collapse"
     </div>
   </div>
 <% else %>
-  <%= f.input property, as: :summernote %>
+  <%= f.input property,
+              as: :summernote,
+              input_html: {
+                data: { 'summernote-config' => 'mini' }
+              } %>
 <% end %>

@@ -7,7 +7,7 @@
     <div class="card-header">
       <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Article.model_name.human(count: 2)} (#{@articles.total_count})" %></h2>
     </div>
-    <%= render 'admin/research/journal/articles/list', articles: @articles %>
+    <%= render 'admin/research/journals/articles/list', articles: @articles %>
     <% if @articles.total_pages > 1 %>
       <div class="card-footer">
         <%= paginate @articles, theme: 'bootstrap-5' %>

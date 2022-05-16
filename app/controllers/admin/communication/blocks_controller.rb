@@ -11,10 +11,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     end
   end
 
-  def show
-    breadcrumb
-  end
-
   def new
     @block.about_type = params[:about_type]
     @block.about_id = params[:about_id]
@@ -23,13 +19,13 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def edit
     breadcrumb
-    add_breadcrumb t('edit')
   end
 
   def create
     @block.university = current_university
     if @block.save
-      redirect_to [:edit, :admin, @block], notice: t('admin.successfully_created_html', model: @block.to_s)
+      redirect_to [:edit, :admin, @block],
+                  notice: t('admin.successfully_created_html', model: @block.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -38,7 +34,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def update
     if @block.update(block_params)
-      redirect_to about_path, notice: t('admin.successfully_updated_html', model: @block.to_s)
+      redirect_to about_path,
+                  notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -49,7 +46,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def destroy
     path = about_path
     @block.destroy
-    redirect_to path, notice: t('admin.successfully_destroyed_html', model: @block.to_s)
+    redirect_to path,
+                notice: t('admin.successfully_destroyed_html', model: @block.to_s)
   end
 
   protected
@@ -71,7 +69,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     if @block.new_record?
       add_breadcrumb t('communication.block.choose_template')
     else
-      add_breadcrumb @block, [:admin, @block]
+      add_breadcrumb @block
     end
   end
 

@@ -49,8 +49,9 @@ class Communication::Block::Template::Post < Communication::Block::Template
   end
 
   def selected_posts_selection
-    elements.map { |element| post(element['id']) }
-            .compact
+    elements.map { |element|
+      post(element['id'])
+    }.compact
   end
 
   def post(id)

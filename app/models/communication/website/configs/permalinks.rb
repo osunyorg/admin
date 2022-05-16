@@ -34,4 +34,8 @@ class Communication::Website::Configs::Permalinks < Communication::Website
     "config/_default/permalinks.yaml"
   end
 
+  def template_static
+    "admin/communication/websites/configs/permalinks/static"
+  end
+
 end

@@ -1,5 +1,3 @@
-<h1>New Education Cohort</h1>
+<% content_for :title, Education::Cohort.model_name.human %>
 
-<%= render 'form', education_cohort: @education_cohort %>
-
-<%= link_to 'Back', education_cohorts_path %>
+<%= render 'form', cohort: @cohort %>

@@ -2,8 +2,10 @@
         <%= prepare_html_for_static block.template.text, about.university %>
     <% if block.template.image %>
       image:
+        id: "<%= block.template.image.blob.id %>"
         file: "<%= block.template.image.blob.id %>"
         alt: <%= prepare_text_for_static block.template.image.alt %>
+        credit: <%= prepare_text_for_static block.template.image.credit %>
     <% end %>
       button:
         text: >-
@@ -15,3 +17,8 @@
           <%= prepare_text_for_static block.template.button_secondary %>
         url: >-
           <%= prepare_text_for_static block.template.url_secondary %>
+      button_tertiary:
+        text: >-
+          <%= prepare_text_for_static block.template.button_tertiary %>
+        url: >-
+          <%= prepare_text_for_static block.template.url_tertiary %>

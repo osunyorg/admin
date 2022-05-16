@@ -1,0 +1,8 @@
+<% if @block.template.image  %>
+  <%= kamifusen_tag @block.template.image.blob,
+                    width: 600,
+                    alt: @block.template.image.alt,
+                    class: 'img-fluid' %>
+<% end %>
+<%= @block.template.text.html_safe %>
+<%= @block.template.notes.html_safe %>

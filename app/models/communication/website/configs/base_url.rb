@@ -34,4 +34,8 @@ class Communication::Website::Configs::BaseUrl < Communication::Website
     "config/production/config.yaml"
   end
 
+  def template_static
+    "admin/communication/websites/configs/base_urls/static"
+  end
+
 end

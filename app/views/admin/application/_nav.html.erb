@@ -4,32 +4,5 @@
       <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
     <% end %>
     <%= render_navigation context: :admin %>
-
-
-    <footer class="small my-5">
-      <hr>
-      <div class="sidebar-header">
-        <p class="small">
-          <%= t('admin.number_of_enqueued_tasks', tasks: Delayed::Job.all.length) %>
-        </p>
-      </div>
-      <hr>
-      <%= link_to 'API', api_root_path, class: 'sidebar-link' %>
-      <%
-      [
-        :terms_of_service,
-        :privacy_policy,
-        :cookies_policy
-      ].each do |term| %>
-        <%= link_to t("#{term}"),
-                    t("#{term}_url"),
-                    target: '_blank',
-                    rel: 'noreferrer',
-                    class: 'sidebar-link' %>
-      <% end %>
-      <%= link_to t('cookies_consent_choice'),
-                  '',
-                  class: 'sidebar-link js-gdpr__cookie_consent__display_again' %>
-    </footer>
   </div>
 </nav>

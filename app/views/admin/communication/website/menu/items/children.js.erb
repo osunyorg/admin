@@ -1,8 +1,0 @@
-$branch = $('.js-treeview-element[data-id=<%= @item.id %>]');
-<% if @children.any? %>
-    $('.js-treeview-children', $branch).append("<%= escape_javascript(render 'admin/communication/website/menu/items/treebranch', items: @children) %>");
-<% else %>
-    $branch.addClass('treeview__element--empty');
-<% end %>
-$branch.addClass('treeview__element--loaded');
-window.osuny.treeView.initSortable();

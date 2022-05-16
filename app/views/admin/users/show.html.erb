@@ -50,8 +50,10 @@
   <% end %>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= destroy_link @user %>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @user %>
-  <%= destroy_link @user %>
 <% end %>
