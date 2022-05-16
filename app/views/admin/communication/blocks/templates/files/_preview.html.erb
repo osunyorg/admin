@@ -1,0 +1,19 @@
+<ul>
+    <% @block.template.files.each do |file| %>
+        <% file.title ||= file.blob.filename if file.blob %>
+        <% if file.title 
+            title = file.title
+          elsif file.blob
+            title = file.blob.filename
+          else
+            title = ''
+          end %>
+        <li>
+          <% if file.blob %>
+            <a href="<%= file.blob.url %>" download><%= title %> <small>(<%= file.blob.filename %>)</small></a>
+          <% else %>
+            <%= title %> <small>(<%= t 'admin.communication.blocks.components.file.not_linked' %>)</small>
+          <% end %>
+        </li>
+    <% end %>
+</ul>
