@@ -41,6 +41,17 @@ class Education::Diploma < ApplicationRecord
     doctor: 800
   }
 
+  def websites
+    @websites ||= university.websites.reject { |website|
+      !for_website?(website)
+    }
+  end
+
+  # We need to send the diplomas only to the websites that need them
+  def for_website?(website)
+    website.education_programs.published.where(diploma: self).any?
+  end
+
   def git_path(website)
     "content/diplomas/#{slug}/_index.html"
   end

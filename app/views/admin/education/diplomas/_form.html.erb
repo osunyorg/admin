@@ -1,19 +1,27 @@
 <%= simple_form_for [:admin, diploma] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
   <div class="row">
-    <div class="col-lg-6">
-      <%= f.input :name %>
-    </div>
-    <div class="col-lg-3">
-      <%= f.input :short_name %>
-    </div>
-    <div class="col-lg-3">
-      <%= f.input :level, include_blank: false %>
+    <div class="col-lg-8">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :name %>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= f.input :short_name %>
+            </div>
+            <div class="col-lg-6">
+              <%= f.input :level, include_blank: false %>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
-
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>
