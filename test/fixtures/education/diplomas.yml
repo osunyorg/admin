@@ -3,6 +3,8 @@
 # Table name: education_diplomas
 #
 #  id            :uuid             not null, primary key
+#  duration      :text
+#  ects          :integer
 #  level         :integer          default("not_applicable")
 #  name          :string
 #  short_name    :string

@@ -10,7 +10,6 @@
 #  continuing            :boolean
 #  description           :text
 #  duration              :text
-#  ects                  :integer
 #  evaluation            :text
 #  featured_image_alt    :string
 #  featured_image_credit :text

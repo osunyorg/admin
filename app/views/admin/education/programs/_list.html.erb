@@ -5,7 +5,7 @@
 <table class="<%= table_classes %>">
   <thead>
     <tr>
-      <th><%= Education::Program.model_name.human %></th>
+      <th><%= Education::Program.human_attribute_name('name') %></th>
       <% unless hide_diploma %>
         <th><%= Education::Program.human_attribute_name('diploma') %></th>
       <% end %>
@@ -29,7 +29,7 @@
         <% unless hide_parent %>
           <td><%= link_to_if can?(:read, parent), parent, [:admin, parent] if parent %></td>
         <% end %>
-        <td class="text-end pe-0">
+        <td class="text-end">
           <div class="btn-group" role="group">
             <%= link_to t('edit'),
                         edit_admin_education_program_path(program),

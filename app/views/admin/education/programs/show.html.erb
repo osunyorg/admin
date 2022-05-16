@@ -1,31 +1,7 @@
 <% content_for :title, @program %>
 
 <div class="row">
-  <div class="col-md-3">
-    <%= render 'admin/education/programs/forms/part', part: :technical do %>
-      <h3 class="h5"><%= Education::Program.human_attribute_name('published') %></h3>
-      <p><%= t @program.published %></p>
-      <h3 class="h5"><%= Education::Program.human_attribute_name('slug') %></h3>
-      <p><%= @program.slug %></p>
-      <% if @program.parent %>
-        <h3 class="h5"><%= Education::Program.human_attribute_name('parent') %></h3>
-        <p><%= link_to @program.parent, [:admin, @program.parent] %></p>
-      <% end %>
-    <% end %>
-    <%= render 'admin/application/featured_image/show', about: @program %>
-    <% if @program.description.present? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Education::Program.human_attribute_name('description') %></h3>
-          <%= simple_format @program.description %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="col-md-9">
+  <div class="col-lg-8 col-xxl-9">
     <%= render 'admin/education/programs/forms/part',
                 part: :essential,
                 collapsed: false do %>
@@ -43,10 +19,6 @@
             <%= Education::Program.human_attribute_name('level') %>
           </h3>
           <p><%= @program.level_i18n %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('ects') %>
-          </h3>
-          <p><%= @program.ects %></p>
           <%= render 'admin/application/property/text',
                       object: @program,
                       property: :duration %>
@@ -172,6 +144,30 @@
     <% end %>
 
     <%= render 'admin/education/programs/show/cohorts' %>
+  </div>
+  <div class="col-lg-4 col-xxl-3">
+    <%= render 'admin/education/programs/forms/part', part: :technical do %>
+      <h3 class="h5"><%= Education::Program.human_attribute_name('published') %></h3>
+      <p><%= t @program.published %></p>
+      <h3 class="h5"><%= Education::Program.human_attribute_name('slug') %></h3>
+      <p><%= @program.slug %></p>
+      <% if @program.parent %>
+        <h3 class="h5"><%= Education::Program.human_attribute_name('parent') %></h3>
+        <p><%= link_to @program.parent, [:admin, @program.parent] %></p>
+      <% end %>
+    <% end %>
+    <%= render 'admin/application/featured_image/show', about: @program %>
+    <% if @program.description.present? %>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('seo') %></h5>
+        </div>
+        <div class="card-body">
+          <h3 class="h5"><%= Education::Program.human_attribute_name('description') %></h3>
+          <%= simple_format @program.description %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
