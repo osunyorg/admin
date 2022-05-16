@@ -137,6 +137,8 @@ en:
             credit:
               label: Credit
               placeholder: Enter credit
+          file:
+              not_linked: Pas de fichier lié
         template_kinds:
           call_to_action:
             edit:
@@ -179,10 +181,10 @@ en:
           files:
             edit:
               add_file: Add a file
-              remove_file: Remove a file
               file_label: File
               title_label: Title
               title_placeholder: Enter title here
+              remove_file: Remove a file
           gallery:
             edit:
               add_image: Add image

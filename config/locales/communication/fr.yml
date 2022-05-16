@@ -137,6 +137,9 @@ fr:
             credit:
               label: Crédit
               placeholder: Entrer le crédit
+          file:
+              not_linked: Pas de fichier lié
+
         templates:
           call_to_action:
             edit:
@@ -179,10 +182,10 @@ fr:
           files:
             edit:
               add_file: Ajouter un fichier
-              remove_file: Supprimer le fichier
               file_label: Fichier
               title_label: Titre
-              title_placeholder: Entrer le titre du fichier
+              title_placeholder: Entrer le titre du fichier 
+              remove_file: Supprimer le fichier
           gallery:
             edit:
               add_image: Ajouter une image
