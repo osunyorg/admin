@@ -1,8 +1,8 @@
 <% content_for :title, t('admin.dashboard') %>
-<% classes = 'col-md-6 col-xl-4 col-xxl-3 d-flex' %>
+<% classes = 'col-md-6 col-xl-4 d-flex' %>
 
 <div class="row">
-  <div class="<%= classes %>">
+  <div class="col-md-6 d-flex">
     <div class="card flex-fill">
       <div class="card-body">
         <h4><%= t('hello', name: current_user.first_name) %></h4>
@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div class="<%= classes %>">
+  <div class="col-md-6 d-flex">
     <div class="card flex-fill">
       <div class="card-body py-4">
         <div class="d-flex align-items-start">
