@@ -129,6 +129,9 @@ fr:
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
+    include_blanks:
+      defaults:
+        year: Sélectionnez une année
   enums:
     university:
       organization:

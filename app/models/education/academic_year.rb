@@ -33,6 +33,8 @@ class Education::AcademicYear < ApplicationRecord
            class_name: 'University::Person',
            through: :cohorts
 
+  validates :year, numericality: { only_integer: true, greater_than: 0 }
+
   scope :ordered, -> { order(year: :desc) }
 
   def cohorts_in_context(context)
