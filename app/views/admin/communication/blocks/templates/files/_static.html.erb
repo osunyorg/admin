@@ -1,0 +1,5 @@
+      files:
+<% block.template.files.each do |file| %>
+        - title: "<%= file.title %>"
+          id: "<%= file.blob.id if file.blob %>"
+<% end %>

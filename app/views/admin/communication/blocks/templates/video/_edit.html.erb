@@ -1,0 +1,28 @@
+<div class="row mb-4">
+  <div class="col-md-6">
+    <label  class="form-label"
+            for="url">
+      <%= t '.url_label' %>
+    </label>
+    <div class="mb-3">
+      <input class="form-control mb-3"
+              v-model="data.url"
+              placeholder="<%= t '.url_placeholder' %>"
+              type="text"
+              id="url" />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label  class="form-label"
+            for="text">
+      <%= t '.transcription_label' %>
+    </label>
+    <div class="mb-3">
+      <textarea id="text"
+              rows="10"
+              class="form-control"
+              v-model="data.transcription"
+              placeholder="<%= t '.transcription_placeholder' %>"></textarea>
+    </div>
+  </div>
+</div>

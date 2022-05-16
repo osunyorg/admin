@@ -12,11 +12,7 @@
           <%= f.input :title %>
           <%= f.input :breadcrumb_title %>
           <%= f.input :description_short, input_html: { value: page.description_short&.gsub('&amp;', '&') } %>
-          <%= f.input :header_text,
-                      as: :summernote,
-                      input_html: {
-                        data: { 'summernote-config' => 'mini' }
-                      } %>
+          <%= f.input :header_text, as: :string %>
           <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
           <%= f.association :related_category,
                             collection: collection_tree(@website.categories),
