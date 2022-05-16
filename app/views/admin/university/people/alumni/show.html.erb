@@ -2,19 +2,23 @@
 
 <%= render 'admin/university/people/main_infos', person: @alumnus %>
 
-<%= render 'admin/university/person/alumni/show/cohorts', cohorts: @cohorts, param_name: 'cohorts_page' %>
-
-<%# TODO: remove %>
 <% if @alumnus.cohorts.any? %>
-<h2><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
-<% @alumnus.cohorts.each do |cohort| %>
-  <%= link_to cohort, [:admin, cohort] %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h2 class="card-title mb-0 h5"><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-unstyled">
+      <% @alumnus.cohorts.ordered.each do |cohort| %>
+        <li><%= link_to cohort, [:admin, cohort] %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
 <% end %>
-<% end %>
-<%# end TODO %>
 
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_person_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_people_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
 <% end %>

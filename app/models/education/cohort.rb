@@ -27,16 +27,20 @@ class Education::Cohort < ApplicationRecord
 
   belongs_to  :program,
               class_name: 'Education::Program'
-              alias_attribute :education_program, :program
+  alias_attribute :education_program, :program
 
   belongs_to  :academic_year,
               class_name: 'Education::AcademicYear'
-              alias_attribute :education_academic_year, :academic_year
+  alias_attribute :education_academic_year, :academic_year
 
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
                           foreign_key: 'education_cohort_id',
                           association_foreign_key: 'university_person_id'
+
+  validates_associated :academic_year, :program
+  validates :year, presence: true
+  before_validation :set_university_id, on: :create
 
   scope :ordered, -> {
     includes(:academic_year).order('education_academic_years.year DESC')
@@ -44,5 +48,19 @@ class Education::Cohort < ApplicationRecord
 
   def to_s
     "#{program} #{academic_year} #{name}"
+  end
+
+  def year
+    academic_year&.year
+  end
+
+  def year=(val)
+    self.academic_year = Education::AcademicYear.where(university_id: university_id, year: val).first_or_create
+  end
+
+  private
+
+  def set_university_id
+    self.university_id = self.program.university_id
   end
 end

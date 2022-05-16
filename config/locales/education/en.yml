@@ -21,8 +21,9 @@ en:
         other: Schools
     attributes:
       education/cohort:
-        year: Year
         alumni: Alumni
+        program: Program
+        year: Year
       education/diploma:
         name: Name
         short_name: Short name

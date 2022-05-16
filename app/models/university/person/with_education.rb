@@ -21,7 +21,7 @@ module University::Person::WithEducation
     has_many                :experiences
 
     has_and_belongs_to_many :cohorts,
-                            class_name: 'Education::Cohort',
+                            class_name: '::Education::Cohort',
                             foreign_key: 'university_person_id',
                             association_foreign_key: 'education_cohort_id'
 

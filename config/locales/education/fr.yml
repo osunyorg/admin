@@ -21,8 +21,9 @@ fr:
         other: Écoles
     attributes:
       education/cohort:
-        year: Année
         alumni: Alumni
+        program: Formation
+        year: Année
       education/diploma:
         name: Nom
         short_name: Nom abrégé

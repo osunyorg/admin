@@ -1,5 +1,5 @@
 module Filters
-  class Admin::Education::Schools < Filters::Base
+  class Admin::University::People::Alumni < Filters::Base
     def initialize(user)
       super
       add_search
@@ -11,6 +11,12 @@ module Filters
           ),
           false,
           true
+      add :for_academic_year,
+          user.university.academic_years.ordered,
+          I18n.t(
+            'filters.attributes.element',
+            element: Education::AcademicYear.model_name.human.downcase
+          )
     end
   end
 end
