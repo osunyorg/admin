@@ -41,7 +41,7 @@ class Admin::University::People::AlumniController < Admin::University::Applicati
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
                     admin_university_people_alumni_path
-    add_breadcrumb @alumnus, admin_university_person_alumnus_path(@alumnus) if @alumnus
+    add_breadcrumb @alumnus, admin_university_people_alumni_path(@alumnus) if @alumnus
   end
 
   def alumnus_params

@@ -2,7 +2,7 @@
 
 <%= render 'admin/university/people/main_infos', person: @alumnus %>
 
-<%= render 'admin/university/person/alumni/show/cohorts', cohorts: @cohorts, param_name: 'cohorts_page' %>
+<%= render 'admin/university/people/alumni/show/cohorts', cohorts: @cohorts, param_name: 'cohorts_page' %>
 
 <%# TODO: remove %>
 <% if @alumnus.cohorts.any? %>
@@ -16,5 +16,5 @@
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_person_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_people_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
 <% end %>
