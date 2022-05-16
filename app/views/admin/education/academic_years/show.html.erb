@@ -1,1 +1,11 @@
 <% content_for :title, @academic_year %>
+
+<% if @academic_year.cohorts.any? %>
+  <h2><%= Education::Cohort.model_name.human(count: 2) %></h2>
+  <%= render 'admin/education/cohorts/list', cohorts: @academic_year.cohorts.ordered %>
+<% end %>
+
+<% if @academic_year.people.any? %>
+  <h2><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
+  <%= render 'admin/university/alumni/list', alumni: @academic_year.people.ordered %>
+<% end %>

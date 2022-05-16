@@ -20,6 +20,8 @@ fr:
         one: École
         other: Écoles
     attributes:
+      education/academic_year:
+        year: Année
       education/cohort:
         alumni: Alumni
         program: Formation

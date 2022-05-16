@@ -2,9 +2,8 @@
   <thead>
     <tr>
       <th><%= Education::AcademicYear.human_attribute_name('year') %></th>
-      <th><%= Education::AcademicYear.human_attribute_name('cohorts') %></th>
-      <th><%= Education::AcademicYear.human_attribute_name('alumni') %></th>
-      <th></th>
+      <th><%= Education::Cohort.model_name.human(count: 2) %></th>
+      <th><%= University::Person::Alumnus.model_name.human(count: 2) %></th>
     </tr>
   </thead>
   <tbody>
@@ -15,12 +14,6 @@
         </td>
         <td><%= academic_year.cohorts.count %></td>
         <td><%= academic_year.people.count %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link academic_year %>
-            <%= destroy_link academic_year %>
-          </div>
-        </td>
       </tr>
     <% end %>
   </tbody>
