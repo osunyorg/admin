@@ -20,6 +20,8 @@ en:
         one: School
         other: Schools
     attributes:
+      education/academic_year:
+        year: Year
       education/cohort:
         alumni: Alumni
         program: Program

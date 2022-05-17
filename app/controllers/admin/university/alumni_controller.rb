@@ -1,9 +1,11 @@
-class Admin::University::People::AlumniController < Admin::University::ApplicationController
+class Admin::University::AlumniController < Admin::University::ApplicationController
   load_and_authorize_resource class: University::Person::Alumnus,
                               through: :current_university,
                               through_association: :people
 
   has_scope :for_search_term
+  has_scope :for_alumni_program
+  has_scope :for_alumni_year
 
   def index
     @alumni = apply_scopes(@alumni).alumni
@@ -25,7 +27,7 @@ class Admin::University::People::AlumniController < Admin::University::Applicati
 
   def update_cohorts
     if @alumnus.update(alumnus_params)
-      redirect_to admin_university_people_alumnus_path(@alumnus),
+      redirect_to admin_university_alumnus_path(@alumnus),
                   notice: t('admin.successfully_updated_html', model: @alumnus.to_s)
     else
       render :edit_cohorts
@@ -39,8 +41,8 @@ class Admin::University::People::AlumniController < Admin::University::Applicati
   def breadcrumb
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
-                    admin_university_people_alumni_path
-    add_breadcrumb @alumnus, admin_university_people_alumni_path(@alumnus) if @alumnus
+                    admin_university_alumni_path
+    add_breadcrumb @alumnus, admin_university_alumni_path(@alumnus) if @alumnus
   end
 
   def alumnus_params

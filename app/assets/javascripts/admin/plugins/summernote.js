@@ -6,6 +6,7 @@ $(function () {
     configs['mini'] = {
         toolbar: [
             ['font', ['bold', 'italic']],
+            ['position', ['superscript', 'subscript']],
             ['insert', ['link']],
             ['view', ['codeview']]
         ]
