@@ -184,6 +184,11 @@ class Education::Program < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_diploma, -> (diploma_id) { where(diploma_id: diploma_id) }
+  scope :for_school, -> (school_id) {
+    joins(:schools)
+      .where(education_schools: { id: school_id })
+      .distinct
+  }
 
   def to_s
     "#{name}"
