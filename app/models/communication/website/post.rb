@@ -84,13 +84,18 @@ class Communication::Website::Post < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  # Is it used?
   def path
     # used in menu_item#static_target
     "/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
   end
 
   def git_path(website)
-    "content/posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if published && published_at
+    "content/posts/#{static_path}.html" if published && published_at
+  end
+
+  def static_path
+    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
   end
 
   def template_static

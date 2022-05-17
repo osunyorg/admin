@@ -3,12 +3,12 @@
 <% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
 title: >
   <%= @about.name %>
-url: <%= @website.special_page(:education_programs).path %><%= @about.path %>/
+url: <%= @website.special_page(:education_programs).path %><%= @about.path %>
 description: >
   <%= prepare_text_for_static @about.description %>
 position: <%= @about.position %>
 <%= render 'admin/communication/unsplash/static' %>
-category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>/"
+category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>"
 diploma: "<%= @about.diploma&.slug %>"
 teachers:
 <% teacher_involvements.each do |involvement| %>

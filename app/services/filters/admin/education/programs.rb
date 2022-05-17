@@ -9,6 +9,12 @@ module Filters
             'filters.attributes.element',
             element: Education::Diploma.model_name.human.downcase
           )
+      add :for_school,
+          user.university.education_schools,
+          I18n.t(
+            'filters.attributes.element',
+            element: Education::School.model_name.human.downcase
+          )
     end
   end
 end
