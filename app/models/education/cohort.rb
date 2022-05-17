@@ -40,7 +40,7 @@ class Education::Cohort < ApplicationRecord
 
   validates_associated :academic_year, :program
   validates :year, presence: true
-  before_validation :set_university_id, on: :create
+  # before_validation :set_university_id, on: :create
 
   scope :ordered, -> {
     includes(:academic_year).order('education_academic_years.year DESC')
@@ -60,7 +60,7 @@ class Education::Cohort < ApplicationRecord
 
   private
 
-  def set_university_id
-    self.university_id = self.program.university_id
-  end
+  # def set_university_id
+  #   self.university_id = self.program.university_id
+  # end
 end

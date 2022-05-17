@@ -11,40 +11,6 @@ class Admin::Education::CohortsController < Admin::Education::ApplicationControl
     breadcrumb
   end
 
-  def new
-    breadcrumb
-  end
-
-  def edit
-    breadcrumb
-  end
-
-  def create
-    @cohort.university = current_university
-    if @cohort.save
-      redirect_to [:admin, @cohort],
-                  notice: t('admin.successfully_created_html', model: @cohort.to_s)
-    else
-      breadcrumb
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    if @cohort.update(cohort_params)
-      redirect_to [:admin, @cohort],
-                  notice: t('admin.successfully_updated_html', model: @cohort.to_s)
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @cohort.destroy
-    redirect_to education_cohorts_url,
-                notice: t('admin.successfully_destroyed_html', model: @cohort.to_s)
-  end
-
   protected
 
   def breadcrumb

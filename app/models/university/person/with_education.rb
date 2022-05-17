@@ -29,6 +29,9 @@ module University::Person::WithEducation
                                   reject_if: :all_blank,
                                   allow_destroy: true
 
+    before_validation :find_cohorts
+    validates_associated :cohorts
+
     # Dénormalisation des liens via cohorts, pour la recherche par facettes
     has_and_belongs_to_many :diploma_years,
                             class_name: 'Education::AcademicYear',
@@ -58,4 +61,22 @@ module University::Person::WithEducation
     diploma_years << cohort.academic_year unless cohort.academic_year.in? diploma_years
     diploma_programs << cohort.program unless cohort.program.in? diploma_programs
   end
+
+  def find_cohorts
+    # based on https://stackoverflow.com/questions/3579924/accepts-nested-attributes-for-with-find-or-create
+    cohorts = []
+    cohorts_ids = []
+    self.cohorts.map do |object|
+      academic_year = Education::AcademicYear.where(university_id: university_id, year: object.year).first_or_create
+      cohort = Education::Cohort.where(university_id: university_id, program_id: object.program_id, academic_year_id: academic_year.id).first_or_initialize
+      return unless cohort.valid?
+      cohort.save if cohort.new_record?
+      unless cohorts_ids.include?(cohort.reload.id) || object._destroy
+        cohorts_ids << cohort.id unless cohort.id.nil?
+        cohorts << cohort
+      end
+    end
+    self.cohorts = cohorts
+  end
+
 end

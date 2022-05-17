@@ -33,6 +33,6 @@ namespace :education do
     end
   end
   resources :academic_years
-  resources :cohorts
+  resources :cohorts, only: [:index, :show]
   resources :diplomas
 end
