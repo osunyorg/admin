@@ -4,6 +4,10 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-5">
+          <%= f.input :university_id,
+                      as: :hidden,
+                      input_html: { value: current_university.id },
+                      wrapper: false %>
           <%= f.association :program,
                             collection: collection_tree(current_university.education_programs),
                             label_method: ->(p) { sanitize p[:label] },
@@ -14,10 +18,12 @@
                             wrapper: false %>
         </div>
         <div class="col-md-6">
-          <%#= f.input :description,
-                      as: :string,
+          <%= f.input :year,
+                      as: :select,
+                      collection: ((Time.now.year + 5).downto(1950)),
                       label: false,
-                      placeholder: University::Person::Involvement.human_attribute_name('description'),
+                      include_blank: t('simple_form.include_blanks.defaults.year'),
+                      required: true,
                       wrapper: false %>
         </div>
         <div class="col-md-1 text-end">

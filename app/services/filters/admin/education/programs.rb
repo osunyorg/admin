@@ -7,10 +7,8 @@ module Filters
           user.university.education_diplomas,
           I18n.t(
             'filters.attributes.element',
-            element: I18n.t('activerecord.models.education/diploma.one').downcase
-          ),
-          false,
-          false
+            element: Education::Diploma.model_name.human.downcase
+          )
     end
   end
 end

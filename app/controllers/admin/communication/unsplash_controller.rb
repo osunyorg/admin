@@ -11,9 +11,9 @@ class Admin::Communication::UnsplashController < Admin::Communication::Applicati
         query: params[:query],
         page: (params[:page].presence || 1),
         per_page: (params[:per_page].presence || 10),
-        orientation: (params[:orientation].presence || 'squarish'),
         lang: (params[:lang].presence || 'en')
       }
+      p[:orientation] = params[:orientation] if params.has_key? :orientation
       @search = Unsplash::Search.search "/search/photos", Unsplash::Photo, p
       @total = @search.total
       @total_pages = @search.total_pages

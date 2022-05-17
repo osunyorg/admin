@@ -20,9 +20,12 @@ en:
         one: School
         other: Schools
     attributes:
-      education/cohort:
+      education/academic_year:
         year: Year
+      education/cohort:
         alumni: Alumni
+        program: Program
+        year: Year
       education/diploma:
         name: Name
         short_name: Short name

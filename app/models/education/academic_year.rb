@@ -19,10 +19,9 @@
 class Education::AcademicYear < ApplicationRecord
   include WithUniversity
 
-  has_many  :education_cohorts,
-            class_name: 'Education::Cohort'
   has_many  :cohorts,
             class_name: 'Education::Cohort'
+  alias_attribute :education_cohorts, :cohorts
 
   # Dénormalisation des alumni pour le faceted search
   has_and_belongs_to_many   :university_people,
@@ -32,6 +31,8 @@ class Education::AcademicYear < ApplicationRecord
   has_many :people,
            class_name: 'University::Person',
            through: :cohorts
+
+  validates :year, numericality: { only_integer: true, greater_than: 0 }
 
   scope :ordered, -> { order(year: :desc) }
 

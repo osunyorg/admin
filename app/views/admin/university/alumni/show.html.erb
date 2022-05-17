@@ -1,0 +1,24 @@
+<% content_for :title, @alumnus %>
+
+<%= render 'admin/university/people/main_infos', person: @alumnus %>
+
+<% if @alumnus.cohorts.any? %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h2 class="card-title mb-0 h5"><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-unstyled">
+      <% @alumnus.cohorts.ordered.each do |cohort| %>
+        <li><%= link_to cohort, [:admin, cohort] %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @alumnus %>
+  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+<% end %>

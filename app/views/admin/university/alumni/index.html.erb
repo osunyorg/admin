@@ -1,14 +1,14 @@
 <% content_for :title, "#{University::Person::Alumnus.model_name.human(count: 2)} (#{@alumni.total_count})" %>
 
-<%= render 'filters', current_path: admin_university_people_alumni_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_university_alumni_path, filters: @filters if @filters.any?  %>
 
-<%= render 'admin/university/people/alumni/list', alumni: @alumni %>
+<%= render 'admin/university/alumni/list', alumni: @alumni %>
 
 <%= paginate @alumni, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('import'),
-              new_admin_university_people_alumni_import_path,
+              new_admin_university_alumni_import_path,
               class: button_classes if can? :manage, University::Person::Alumnus::Import %>
 <% end %>
 

@@ -20,9 +20,12 @@ fr:
         one: École
         other: Écoles
     attributes:
-      education/cohort:
+      education/academic_year:
         year: Année
+      education/cohort:
         alumni: Alumni
+        program: Formation
+        year: Année
       education/diploma:
         name: Nom
         short_name: Nom abrégé

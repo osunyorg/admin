@@ -1,6 +1,8 @@
 class Communication::Block::Template::File < Communication::Block::Template
   def build_git_dependencies
-    add_dependency active_storage_blobs
+    files.each do |file|
+      add_dependency file.blob
+    end
   end
 
   def files

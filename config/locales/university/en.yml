@@ -129,6 +129,9 @@ en:
         linkedin: "Example: https://www.linkedin.com/in/osuny"
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
+    include_blanks:
+      defaults:
+        year: Select year
   enums:
     university:
       organization:

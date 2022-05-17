@@ -6,11 +6,11 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :dashboard, t('admin.dashboard'), admin_root_path, { icon: 'tachometer-alt', highlights_on: /admin$/ }
 
-    if can?(:read, User) || can?(:read, University::Person) || can?(:read, University::Organization)
+    if can?(:read, University::Person) || can?(:read, University::Organization)
       primary.item :university, University.model_name.human, nil, { kind: :header }
-      primary.item :university, University::Person.model_name.human(count: 2), admin_university_people_path, { icon: 'users-cog' }
-      primary.item :university, University::Organization.model_name.human(count: 2), admin_university_organizations_path, { icon: 'building' }
-      primary.item :communication_alumni, University::Person::Alumnus.model_name.human(count: 2), admin_university_people_alumni_path, { icon: 'users' }
+      primary.item :university, University::Person.model_name.human(count: 2), admin_university_people_path, { icon: 'users-cog' } if can?(:read, University::Person)
+      primary.item :university, University::Organization.model_name.human(count: 2), admin_university_organizations_path, { icon: 'building' } if can?(:read, University::Organization)
+      primary.item :communication_alumni, University::Person::Alumnus.model_name.human(count: 2), admin_university_alumni_path, { icon: 'users' } if can?(:read, University::Person)
     end
 
     if can?(:read, Education::Program)
