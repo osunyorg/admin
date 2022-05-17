@@ -3,5 +3,7 @@
 <% end %>
       posts:
 <% block.template.selected_posts.each do |post| %>
-        - <%= post.path %>
+        - slug: <%= post.slug %>
+          path: <%= post.path %>
+          url: <%= post.url %>
 <% end %>
