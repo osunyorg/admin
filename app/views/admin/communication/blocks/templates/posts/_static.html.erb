@@ -3,8 +3,5 @@
 <% end %>
       posts:
 <% block.template.selected_posts.each do |post| %>
-        - slug: <%= post.slug %>
-          path: <%= post.path %>
-          url: <%= post.url %>
-          file: <%= post.hugo_path %>
+        - <%= post.static_path %>
 <% end %>

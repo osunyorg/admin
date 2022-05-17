@@ -91,10 +91,10 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def git_path(website)
-    "content/posts/#{hugo_path}.html" if published && published_at
+    "content/posts/#{static_path}.html" if published && published_at
   end
 
-  def hugo_path
+  def static_path
     "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
   end
 
