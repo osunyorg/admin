@@ -27,7 +27,7 @@
 class University::Person::Experience < ApplicationRecord
   include WithUniversity
   belongs_to :person
-  belongs_to :organization
+  belongs_to :organization, class_name: "University::Organization"
 
   scope :ordered, -> { order(from_year: :desc)}
 end
