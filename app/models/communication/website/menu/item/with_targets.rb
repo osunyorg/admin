@@ -12,66 +12,70 @@ module Communication::Website::Menu::Item::WithTargets
   end
 
   def target_for_page
-    about.path if about&.published
+    Static.clean_path about.path if about&.published
   end
 
   def target_for_programs
-    "#{website.special_page(:education_programs).path}"
+    Static.clean_path website.special_page(:education_programs).path
   end
 
   def target_for_program
-    "#{website.special_page(:education_programs).path}#{about.path}".gsub("//", '/')
+    Static.clean_path "#{website.special_page(:education_programs).path}#{about.path}"
   end
 
   def target_for_news
-    "#{website.special_page(:communication_posts).path}"
+    Static.clean_path website.special_page(:communication_posts).path
   end
 
   def target_for_news_article
-    "#{website.special_page(:communication_posts).path}#{about.path}".gsub("//", '/') if about&.published && about&.published_at
+    return unless about&.published?
+    Static.clean_path "#{website.special_page(:communication_posts).path}#{about.path}"
   end
 
   def target_for_news_category
-    "#{website.special_page(:communication_posts).path}#{about.path}".gsub("//", '/') if about
+    return unless about
+    Static.clean_path "#{website.special_page(:communication_posts).path}#{about.path}"
   end
 
   def target_for_organizations
-    "#{website.special_page(:organizations).path}"
+    Static.clean_path website.special_page(:organizations).path
   end
 
   def target_for_staff
-    "#{website.special_page(:persons).path}"
+    Static.clean_path website.special_page(:persons).path
   end
 
   def target_for_administrators
-    "#{website.special_page(:administrators).path}"
+    Static.clean_path website.special_page(:administrators).path
   end
 
   def target_for_authors
-    "#{website.special_page(:authors).path}"
+    Static.clean_path website.special_page(:authors).path
   end
 
   def target_for_researchers
-    "#{website.special_page(:researchers).path}"
+    Static.clean_path website.special_page(:researchers).path
   end
 
   def target_for_teachers
-    "#{website.special_page(:teachers).path}"
+    Static.clean_path website.special_page(:teachers).path
   end
 
   def target_for_research_volumes
-    "#{website.special_page(:research_volumes).path}"
+    Static.clean_path website.special_page(:research_volumes).path
   end
 
   def target_for_research_volume
-    "#{website.special_page(:research_volumes).path}#{about.path}".gsub("//", '/') if about&.published && about&.published_at
+    return unless about&.published && about&.published_at
+    Static.clean_path "#{website.special_page(:research_volumes).path}#{about.path}"
   end
 
   def target_for_research_articles
-    "#{website.special_page(:research_articles).path}"
+    Static.clean_path website.special_page(:research_articles).path
   end
 
   def target_for_research_article
-    "#{website.special_page(:research_articles).path}#{about.path}".gsub("//", '/') if about&.published && about&.published_at
+    return unless about&.published && about&.published_at
+    Static.clean_path "#{website.special_page(:research_articles).path}#{about.path}"
   end
 end
