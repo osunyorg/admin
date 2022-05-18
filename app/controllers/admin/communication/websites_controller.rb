@@ -13,6 +13,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def show
+    @pages = @website.pages.published.recent
+    @posts = @website.posts.published.recent
     breadcrumb
   end
 
