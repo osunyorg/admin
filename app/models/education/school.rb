@@ -84,10 +84,10 @@ class Education::School < ApplicationRecord
               source: :organization
   alias_attribute :university_person_alumni_organizations, :alumni_organizations
 
-  has_many    :education_academic_years, -> { distinct },
+  has_many    :academic_years, -> { distinct },
               class_name: 'Education::AcademicYear',
               through: :programs
-  alias_attribute :academic_years, :education_academic_years
+  alias_attribute :education_academic_years, :academic_years
 
   has_many    :education_cohorts, -> { distinct },
               class_name: 'Education::Cohort',
