@@ -1,0 +1,9 @@
+      figures:
+<% block.template.figures.each do |figure| %>
+        - number: >-
+            <%= prepare_text_for_static figure.number, 6 %>
+          unit: >-
+            <%= prepare_text_for_static figure.unit, 6 %>
+          description: >-
+            <%= prepare_text_for_static figure.description, 6 %>
+<% end %>
