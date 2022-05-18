@@ -62,14 +62,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def to_s
-    @to_s ||= ApplicationController.render(
-      template: template_static,
-      layout: false,
-      assigns: {
-        about: about,
-        website: website
-      }
-    )
+    @to_s ||= Static.render(template_static, about, website)
   end
 
   protected
