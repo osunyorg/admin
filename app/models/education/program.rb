@@ -59,6 +59,8 @@ class Education::Program < ApplicationRecord
   include WithInheritance
   include WithPosition
   include WithBlocks
+  include WithSchools
+  include WithDiploma
   include WithAlumni
   include WithWebsites
   include WithTeam
@@ -87,16 +89,6 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
-
-  belongs_to :diploma,
-             class_name: 'Education::Diploma',
-             optional: true
-
-  has_and_belongs_to_many :schools,
-                          class_name: 'Education::School',
-                          join_table: 'education_programs_schools',
-                          foreign_key: 'education_program_id',
-                          association_foreign_key: 'education_school_id'
 
   # Deprecated, now in diploma
   enum level: {

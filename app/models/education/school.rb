@@ -26,8 +26,8 @@
 class Education::School < ApplicationRecord
   include WithGit
   include Aboutable
+  include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
-  include WithPrograms # must come before WithAlumni
   include WithAlumni
 
   belongs_to  :university
