@@ -4,6 +4,7 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
                               through_association: :people
 
   has_scope :for_search_term
+  has_scope :for_alumni_organization
   has_scope :for_alumni_program
   has_scope :for_alumni_year
 

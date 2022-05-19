@@ -12,6 +12,13 @@ module University::Person::WithExperiences
 
     validates_associated :experiences
 
+    scope :for_alumni_organization, -> (organization_id) {
+      left_joins(:experiences)
+        .where(university_person_experiences: { organization_id: organization_id })
+        .select("university_people.*")
+        .distinct
+    }
+  
   end
 
 end
