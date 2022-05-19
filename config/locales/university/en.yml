@@ -57,7 +57,6 @@ en:
       university/person/experience:
         from_year: Start year
         to_year: End year
-        today: Today
       university/person/involvement:
         description: Mission (in this context)
         person: Person

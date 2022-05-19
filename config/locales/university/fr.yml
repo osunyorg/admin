@@ -57,7 +57,6 @@ fr:
       university/person/experience:
         from_year: Année de début
         to_year: Année de fin
-        today: Aujourd'hui
       university/person/involvement:
         description: Mission (dans ce contexte)
         person: Personne

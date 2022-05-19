@@ -30,7 +30,7 @@
                 <p><b><%= experience.description %></b></p>
                 <p class="mb-0">
                   <%= "#{experience.from_year} —" if experience.from_year %>
-                  <%= experience.to_year || University::Person::Experience.human_attribute_name(:today) %>
+                  <%= experience.to_year || t('today') %>
                 </p>
               </div>
               <div>

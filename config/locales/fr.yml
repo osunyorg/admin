@@ -184,6 +184,7 @@ fr:
       date_only: "%d/%m/%Y"
       date_with_explicit_month: "%d %B %Y"
       date_with_hour: "%d %B %Y %H:%M"
+  today: Aujourd'hui
   true: Oui
   unsplash:
     next: Images suivantes
