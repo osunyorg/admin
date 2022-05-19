@@ -9,7 +9,7 @@ description: >
 position: <%= @about.position %>
 <%= render 'admin/communication/unsplash/static' %>
 category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>"
-diploma: "<%= @about.diploma&.slug %>"
+diplomas: "<%= @about.diploma&.slug %>"
 teachers:
 <% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
