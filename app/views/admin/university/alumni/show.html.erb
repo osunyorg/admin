@@ -27,7 +27,7 @@
       <% @alumnus.experiences.ordered.each do |experience| %>
         <% organization = experience.organization %>
         <li>
-          <%= link_to_if can?('read', organization), organization, [:admin, organization] %>
+          <%= link_to_if can?(:read, organization), organization, [:admin, organization] %>
           <%= "(#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')})" %>
         </li>
       <% end %>
