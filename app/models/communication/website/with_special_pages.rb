@@ -38,7 +38,7 @@ module Communication::Website::WithSpecialPages
 
   def create_special_page(kind, parent_id = nil)
     i18n_key = "communication.website.pages.defaults.#{kind}"
-    page = pages.where(kind: kind).first_or_create(
+    page = pages.where(kind: kind).first_or_initialize(
       title: I18n.t("#{i18n_key}.title"),
       slug: I18n.t("#{i18n_key}.slug"),
       description_short: I18n.t("#{i18n_key}.description_short"),
@@ -46,7 +46,9 @@ module Communication::Website::WithSpecialPages
       published: true,
       university_id: university_id
     )
-    page.sync_with_git
+    if page.new_record?
+      page.save_and_sync
+    end
     page
   end
 

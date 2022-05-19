@@ -14,7 +14,7 @@ organizations:  <%= @website.special_page(:organizations).path_without_language 
 authors:        <%= @website.special_page(:persons).path_without_language %>:slug/<%= @website.special_page(:communication_posts).slug %>/
 <% end %>
 <% if @website.has_education_diplomas? %>
-diplomas:    <%= @website.special_page(:education_diplomas).path_without_language %>:slug/
+diplomas:       <%= @website.special_page(:education_diplomas).path_without_language %>:slug/
 <% end %>
 <%# ces paths complémentaires sont nécessaires à Hugo mais on ne les utilise pas %>
 <% if @website.has_administrators? %>
