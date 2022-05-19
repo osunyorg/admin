@@ -66,7 +66,18 @@ class Communication::Website::Post < ApplicationRecord
   before_validation :set_published_at, if: :published_changed?
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
-  scope :published, -> { where(published: true) }
+  scope :published, -> {
+    where("
+      communication_website_posts.published = true AND
+      DATE(communication_website_posts.published_at) <= now()
+    ")
+  }
+  scope :published_in_the_future, -> {
+    where("
+      communication_website_posts.published = true AND
+      DATE(communication_website_posts.published_at) > now()
+    ")
+  }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
@@ -83,6 +94,10 @@ class Communication::Website::Post < ApplicationRecord
       unaccent(communication_website_posts.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+
+  def published?
+    published && published_at.to_date <= Date.today
+  end
 
   # Is it used?
   def path

@@ -18,7 +18,7 @@ module University::Person::WithEducation
                             source: :target,
                             source_type: "Education::Program"
 
-    has_many                :experiences
+    has_many                :experiences, class_name: "University::Person::Experience"
 
     has_and_belongs_to_many :cohorts,
                             class_name: '::Education::Cohort',

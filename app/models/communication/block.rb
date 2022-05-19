@@ -46,6 +46,7 @@ class Communication::Block < ApplicationRecord
     partners: 200,
     posts: 500,
     pages: 600,
+    key_figures: 56,
   }
 
   before_save :update_template_images

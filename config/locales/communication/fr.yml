@@ -197,6 +197,16 @@ fr:
               text_label: Texte
               text_placeholder: Entrer le texte
               remove_image: Enlever l'image
+          key_figures:
+            edit:
+              add_key: Add key figure
+              unit_label: Unit
+              unit_placeholder: Enter unit here
+              number_label: Number
+              number_placeholder: Enter key figure's value here
+              description_label: Description
+              description_placeholder: Enter description here
+              remove_key: Remove key figure
           organization_chart:
             edit:
               add_person: Ajouter une personne

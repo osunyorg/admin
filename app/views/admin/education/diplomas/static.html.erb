@@ -1,8 +1,8 @@
 ---
 title: >
-  <%= @about.name %>
+  <%= prepare_text_for_static @about.name %>
 short_name: >
-  <%= @about.short_name %>
+  <%= prepare_text_for_static @about.short_name %>
 level: <%= @about.level_i18n %>
 ects: <%= @about.ects %>
 duration: >

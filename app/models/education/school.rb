@@ -26,18 +26,9 @@
 class Education::School < ApplicationRecord
   include WithGit
   include Aboutable
-
-  has_and_belongs_to_many :programs,
-                          class_name: 'Education::Program',
-                          join_table: 'education_programs_schools',
-                          foreign_key: 'education_school_id',
-                          association_foreign_key: 'education_program_id'
-  has_and_belongs_to_many :published_programs,
-                          -> { published },
-                          class_name: 'Education::Program',
-                          join_table: 'education_programs_schools',
-                          foreign_key: 'education_school_id',
-                          association_foreign_key: 'education_program_id'
+  include WithPrograms # must come before WithAlumni and WithTeam
+  include WithTeam
+  include WithAlumni
 
   belongs_to  :university
 
@@ -45,59 +36,11 @@ class Education::School < ApplicationRecord
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
-  has_many    :university_roles,
-              class_name: 'University::Role',
-              as: :target,
-              dependent: :destroy
-  has_many    :involvements_through_roles,
-              through: :university_roles,
-              source: :involvements
-  has_many    :university_people_through_role_involvements,
-              through: :involvements_through_roles,
-              source: :person
-  has_many    :university_people_through_program_involvements,
-              through: :programs,
-              source: :university_people_through_involvements
-  has_many    :university_people_through_program_role_involvements,
-              through: :programs,
-              source: :university_people_through_role_involvements
-  has_many    :university_people_through_published_program_involvements,
-              through: :published_programs,
-              source: :university_people_through_involvements
-  has_many    :university_people_through_published_program_role_involvements,
-              through: :published_programs,
-              source: :university_people_through_role_involvements
 
-  has_many    :alumni, -> { distinct },
-              through: :programs
-  alias_attribute :university_person_alumni, :alumni
-
-  has_many    :alumni_experiences, -> { distinct },
-              class_name: 'University::Person::Experience',
-              through: :alumni,
-              source: :experiences
-  alias_attribute :university_person_experiences, :alumni_experiences
-
-  has_many    :alumni_organizations, -> { distinct },
-              class_name: 'University::Organization',
-              through: :alumni_experiences,
-              source: :organization
-  alias_attribute :university_person_alumni_organizations, :alumni_organizations
-
-  has_many    :education_academic_years, -> { distinct },
-              class_name: 'Education::AcademicYear',
-              through: :programs
-  alias_attribute :academic_years, :education_academic_years
-
-  has_many    :education_cohorts, -> { distinct },
-              class_name: 'Education::Cohort',
-              through: :programs
-  alias_attribute :cohorts, :education_cohorts
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
   scope :ordered, -> { order(:name) }
-  scope :for_program, -> (program_id) { joins(:programs).where(education_programs: { id: program_id }) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(education_schools.address) ILIKE unaccent(:term) OR
@@ -108,31 +51,12 @@ class Education::School < ApplicationRecord
       unaccent(education_schools.zipcode) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+  scope :for_program, -> (program_id) {
+    joins(:programs).where(education_programs: { id: program_id })
+  }
 
   def to_s
     "#{name}"
-  end
-
-  def researchers
-    people_ids = (
-      university_people_through_published_program_involvements +
-      university_people_through_role_involvements +
-      university_people_through_published_program_role_involvements
-    ).pluck(:id)
-    university.people.where(id: people_ids, is_researcher: true)
-  end
-
-  def teachers
-    people_ids = university_people_through_published_program_involvements.pluck(:id)
-    university.people.where(id: people_ids, is_teacher: true)
-  end
-
-  def administrators
-    people_ids = (
-      university_people_through_role_involvements +
-      university_people_through_published_program_role_involvements
-    ).pluck(:id)
-    university.people.where(id: people_ids, is_administration: true)
   end
 
   def git_path(website)
@@ -141,32 +65,23 @@ class Education::School < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = [self]
-    dependencies += published_programs + published_programs.map(&:active_storage_blobs).flatten if has_education_programs?
-    dependencies += teachers + teachers.map(&:teacher) + teachers.map(&:active_storage_blobs).flatten if has_teachers?
-    dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten if has_researchers?
-    dependencies += administrators + administrators.map(&:administrator) + administrators.map(&:active_storage_blobs).flatten if has_administrators?
+    dependencies += published_programs
+                    + published_programs.map(&:active_storage_blobs).flatten if has_education_programs?
+    dependencies += teachers
+                    + teachers.map(&:teacher)
+                    + teachers.map(&:active_storage_blobs).flatten if has_teachers?
+    dependencies += researchers
+                    + researchers.map(&:researcher)
+                    + researchers.map(&:active_storage_blobs).flatten if has_researchers?
+    dependencies += administrators
+                    + administrators.map(&:administrator)
+                    + administrators.map(&:active_storage_blobs).flatten if has_administrators?
     dependencies
   end
 
   #####################
   # Aboutable methods #
   #####################
-  def has_administrators?
-    university_people_through_role_involvements.any? ||
-    university_people_through_program_role_involvements.any?
-  end
-
-  def has_researchers?
-    researchers.any?
-  end
-
-  def has_teachers?
-    teachers.any?
-  end
-
-  def has_education_programs?
-    published_programs.any?
-  end
 
   def has_research_articles?
     false

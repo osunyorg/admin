@@ -59,6 +59,11 @@ class Education::Program < ApplicationRecord
   include WithInheritance
   include WithPosition
   include WithBlocks
+  include WithSchools
+  include WithDiploma
+  include WithAlumni
+  include WithWebsites
+  include WithTeam
 
   rich_text_areas_with_inheritance  :main_information,
                                     :accessibility,
@@ -76,88 +81,16 @@ class Education::Program < ApplicationRecord
                                     :content,
                                     :results
 
-  attr_accessor :skip_websites_categories_callback
-
   belongs_to :parent,
              class_name: 'Education::Program',
              optional: true
+
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id,
              dependent: :destroy
-  belongs_to :diploma,
-             class_name: 'Education::Diploma',
-             optional: true
-  has_many   :university_roles,
-             class_name: 'University::Role',
-             as: :target,
-             dependent: :destroy
-  has_many   :involvements_through_roles,
-             through: :university_roles,
-             source: :involvements
-  has_many   :university_people_through_role_involvements,
-             through: :involvements_through_roles,
-             source: :person
-  has_many   :university_person_involvements,
-             class_name: 'University::Person::Involvement',
-             as: :target,
-             inverse_of: :target,
-             dependent: :destroy
-  has_many   :university_people_through_involvements,
-             through: :university_person_involvements,
-             source: :person
-  has_many   :website_categories,
-             class_name: 'Communication::Website::Category',
-             dependent: :destroy
-  has_and_belongs_to_many :schools,
-                          class_name: 'Education::School',
-                          join_table: 'education_programs_schools',
-                          foreign_key: 'education_program_id',
-                          association_foreign_key: 'education_school_id'
-  has_many   :websites,
-             -> { distinct },
-             through: :schools
 
-  has_many   :education_cohorts,
-             class_name: 'Education::Cohort'
-  alias_attribute :cohorts, :education_cohorts
-
-  has_many   :alumni,
-             through: :education_cohorts,
-             source: :people
-  alias_attribute :university_person_alumni, :alumni
-
-  has_many   :alumni_experiences,
-             -> { distinct },
-             class_name: 'University::Person::Experience',
-             through: :alumni,
-             source: :experiences
-  alias_attribute :university_person_experiences, :alumni_experiences
-
-  has_many   :alumni_organizations,
-             -> { distinct },
-             class_name: 'University::Organization',
-             through: :alumni_experiences,
-             source: :organization
-  alias_attribute :university_person_alumni_organizations, :alumni_organizations
-
-  has_many   :education_academic_years,
-             -> { distinct },
-             class_name: 'Education::AcademicYear',
-             through: :education_cohorts,
-             source: :academic_year
-             alias_attribute :academic_years, :education_academic_years
-
-  # Dénormalisation des alumni pour le faceted search
-  has_and_belongs_to_many :university_people,
-                          class_name: 'University::Person',
-                          foreign_key: 'education_program_id',
-                          association_foreign_key: 'university_person_id'
-
-  accepts_nested_attributes_for :university_person_involvements,
-                                reject_if: :all_blank,
-                                allow_destroy: true
-
+  # Deprecated, now in diploma
   enum level: {
     not_applicable: 0,
     primary: 40,
@@ -174,7 +107,6 @@ class Education::Program < ApplicationRecord
   validates_presence_of :name
 
   after_save :update_children_paths, if: :saved_change_to_path?
-  after_save_commit :set_websites_categories, unless: :skip_websites_categories_callback
 
   scope :published, -> { where(published: true) }
   scope :ordered_by_name, -> { order(:name) }
@@ -229,10 +161,6 @@ class Education::Program < ApplicationRecord
       child.update_column :path, child.generated_path
       child.update_children_paths
     end
-  end
-
-  def set_websites_categories
-    websites.find_each(&:set_programs_categories!)
   end
 
   #####################
