@@ -49,7 +49,7 @@ en:
       status: Inherited value
     pending_tasks:
       label: Background tasks pending
-      hint: Those tasks precompute your data in order to minimize its carbon footprint. It creates a delay before your changes are online. 
+      hint: Those tasks precompute your data in order to minimize its carbon footprint. It creates a delay before your changes are online.
     password_hint: Leave blank if you do not wish to change the password.
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
@@ -172,7 +172,6 @@ en:
       defaults:
         language: "Select a language"
         person: "Select a person"
-        program: "Select a program"
   simple_form_password_with_hints:
       test_chars: "%{min_length} characters min."
   show: Show
@@ -185,6 +184,7 @@ en:
       date_only: "%m/%d/%Y"
       date_with_explicit_month: "%B %d, %Y"
       date_with_hour: "%B %d, %Y %H:%M"
+  today: Today
   true: Yes
   unsplash:
     next: Next image

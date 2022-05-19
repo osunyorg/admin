@@ -13,7 +13,7 @@ module Communication::Website::WithSpecialPages
     def create_missing_special_pages
       homepage = create_special_page('home')
       # first level pages with test
-      ['legal_terms', 'sitemap', 'privacy_policy', 'communication_posts', 'education_programs', 'research_articles', 'research_volumes', 'organizations'].each do |kind|
+      ['legal_terms', 'sitemap', 'privacy_policy', 'communication_posts', 'education_programs', 'education_diplomas', 'research_articles', 'research_volumes', 'organizations'].each do |kind|
         create_special_page(kind, homepage.id) if public_send("has_#{kind}?")
       end
       # team pages
@@ -38,7 +38,7 @@ module Communication::Website::WithSpecialPages
 
   def create_special_page(kind, parent_id = nil)
     i18n_key = "communication.website.pages.defaults.#{kind}"
-    page = pages.where(kind: kind).first_or_create(
+    page = pages.where(kind: kind).first_or_initialize(
       title: I18n.t("#{i18n_key}.title"),
       slug: I18n.t("#{i18n_key}.slug"),
       description_short: I18n.t("#{i18n_key}.description_short"),
@@ -46,6 +46,9 @@ module Communication::Website::WithSpecialPages
       published: true,
       university_id: university_id
     )
+    if page.new_record?
+      page.save_and_sync
+    end
     page
   end
 

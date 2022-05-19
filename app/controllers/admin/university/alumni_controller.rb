@@ -4,6 +4,7 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
                               through_association: :people
 
   has_scope :for_search_term
+  has_scope :for_alumni_organization
   has_scope :for_alumni_program
   has_scope :for_alumni_year
 
@@ -20,22 +21,6 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
     breadcrumb
   end
 
-  def edit_cohorts
-    breadcrumb
-    add_breadcrumb t('edit')
-  end
-
-  def update_cohorts
-    if @alumnus.update(alumnus_params)
-      redirect_to admin_university_alumnus_path(@alumnus),
-                  notice: t('admin.successfully_updated_html', model: @alumnus.to_s)
-    else
-      render :edit_cohorts
-      breadcrumb
-      add_breadcrumb t('edit')
-    end
-  end
-
   protected
 
   def breadcrumb
@@ -45,8 +30,4 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
     add_breadcrumb @alumnus, admin_university_alumni_path(@alumnus) if @alumnus
   end
 
-  def alumnus_params
-    params.require(:university_person)
-          .permit(cohorts_attributes: [:id, :program_id, :university_id, :year, :_destroy])
-  end
 end

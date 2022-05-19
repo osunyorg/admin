@@ -39,7 +39,7 @@ class Research::Journal < ApplicationRecord
       unaccent(research_journals.description) ILIKE unaccent(:term) OR
       unaccent(research_journals.issn) ILIKE unaccent(:term) OR
       unaccent(research_journals.repository) ILIKE unaccent(:term) OR
-      unaccent(research_journals.title) ILIKE unaccent(:term) 
+      unaccent(research_journals.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
@@ -83,6 +83,10 @@ class Research::Journal < ApplicationRecord
   end
 
   def has_education_programs?
+    false
+  end
+
+  def has_education_diplomas?
     false
   end
 

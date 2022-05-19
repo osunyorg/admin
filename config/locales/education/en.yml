@@ -142,3 +142,6 @@ en:
         evaluation: Means mobilised to measure with objective criteria the beneficiary's achievements during and/or at the end of the service.
         accessibility: Conditions of reception and access for people with disabilities (premises, adaptation of the means of provision).
         description: Plain text without HTML, dedicated to SEO
+    include_blanks:
+      defaults:
+        program: "Select a program"

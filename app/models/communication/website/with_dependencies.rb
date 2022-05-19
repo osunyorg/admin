@@ -158,6 +158,10 @@ module Communication::Website::WithDependencies
     about && about.has_education_programs?
   end
 
+  def has_education_diplomas?
+    about && about.has_education_diplomas?
+  end
+
   def has_research_articles?
     about && about.has_research_articles?
   end

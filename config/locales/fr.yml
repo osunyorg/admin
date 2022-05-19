@@ -49,7 +49,7 @@ fr:
       status: Valeur héritée
     pending_tasks:
       label: Tâches en cours de traitement
-      hint: L'exécution de ces tâches contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être. Cela peut générer un délai avant que vos modifications ne soient visibles. 
+      hint: L'exécution de ces tâches contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être. Cela peut générer un délai avant que vos modifications ne soient visibles.
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
@@ -172,7 +172,6 @@ fr:
       defaults:
         language: "Sélectionnez une langue"
         person: "Sélectionnez une personne"
-        program: "Sélectionnez une formation"
   simple_form_password_with_hints:
       test_chars: "%{min_length} caractères min."
   show: Voir
@@ -185,6 +184,7 @@ fr:
       date_only: "%d/%m/%Y"
       date_with_explicit_month: "%d %B %Y"
       date_with_hour: "%d %B %Y %H:%M"
+  today: Aujourd'hui
   true: Oui
   unsplash:
     next: Images suivantes

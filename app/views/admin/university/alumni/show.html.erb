@@ -17,8 +17,28 @@
   </div>
 <% end %>
 
+<% if @alumnus.experiences.any? %>
+  <div class="card flex-fill w-100">
+    <div class="card-header">
+      <h2 class="card-title mb-0 h5"><%= University::Person::Experience.model_name.human(count: @alumnus.experiences.count) %></h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-unstyled">
+      <% @alumnus.experiences.ordered.each do |experience| %>
+        <% organization = experience.organization %>
+        <li>
+          <%= link_to_if can?(:read, organization), organization, [:admin, organization] %>
+          <%= "(#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')})" %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'), edit_cohorts_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_cohorts'), cohorts_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_experiences'), experiences_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
 <% end %>

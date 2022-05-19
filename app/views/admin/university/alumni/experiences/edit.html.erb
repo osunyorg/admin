@@ -1,0 +1,33 @@
+<% content_for :title, @alumnus %>
+
+<h2 class="h3"><%= University::Person::Experience.model_name.human(count: 2) %></h2>
+
+<%= simple_form_for [:admin, @alumnus], url: experiences_admin_university_alumnus_path(@alumnus) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+
+    <div class="col-md-2">
+      <%= link_to_add_association t('add'), f, :experiences,
+                                  class: button_classes,
+                                  data: {
+                                    'association-insertion-method': 'append',
+                                    'association-insertion-node':   '#experiences',
+                                  } %>
+
+    </div>
+
+    <div class="col-md-10">
+      <div id="experiences">
+        <%= f.simple_fields_for :experiences, @alumnus.experiences.sort_by(&:from_year).reverse, include_id: false do |experience_f| %>
+          <%= render 'admin/university/alumni/experiences/experience_fields', f: experience_f, include_id: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

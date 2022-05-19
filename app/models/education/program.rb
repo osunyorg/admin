@@ -184,6 +184,10 @@ class Education::Program < ApplicationRecord
     published? || descendants.any?(&:published?)
   end
 
+  def has_education_diplomas?
+    diploma.present? || descendants.any? { |descendant| descendant.diploma.present? }
+  end
+
   def has_research_articles?
     false
   end

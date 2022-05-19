@@ -42,10 +42,11 @@ class University::Person < ApplicationRecord
   include WithUniversity
   include WithGit
   include WithBlobs
+  include WithEducation
+  include WithExperiences
   include WithSlug
   include WithPicture
   include WithRoles
-  include WithEducation
 
   LIST_OF_ROLES = [
     :administration,

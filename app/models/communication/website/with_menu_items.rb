@@ -28,6 +28,10 @@ module Communication::Website::WithMenuItems
     has_education_programs?
   end
 
+  def menu_item_kind_diplomas?
+    has_education_diplomas?
+  end
+
   def menu_item_kind_news?
     has_communication_posts?
   end

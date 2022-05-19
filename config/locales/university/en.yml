@@ -55,7 +55,8 @@ en:
         url: Website
         user: User
       university/person/experience:
-        today: Today
+        from_year: Start year
+        to_year: End year
       university/person/involvement:
         description: Mission (in this context)
         person: Person
@@ -100,9 +101,9 @@ en:
       university/person/alumnus:
         one: Alumnus
         other: Alumni
-      university/person/Experience:
-        one: Experience
-        other: Experiences
+      university/person/experience:
+        one: Professional experience
+        other: Professional experiences
       university/organization:
         one: Organization
         other: Organizations
@@ -131,6 +132,7 @@ en:
         twitter: "Example: osuny"
     include_blanks:
       defaults:
+        organization: Select organization
         year: Select year
   enums:
     university:
@@ -147,6 +149,10 @@ en:
     manage_experiences: Manage experiences
     person:
       administrator_roles: Administrator roles
-      taught_programs: Taught programs
+      experience:
+        no_organization_hint_html: "If the organization is not in the list,<br>you can <a href=\"%{url}\">create it</a>"
+        no_organization_hint_no_access_html: "If the organization is not in the list,<br>you should ask to create it"
+        period: Period
+    taught_programs: Taught programs
     sso: SSO
     sso_key: SSO Key
