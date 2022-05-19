@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: 3ec3acf128af2276891efeb806159c90bb60ec15
+  revision: 1b146332a20c40bc06ae9efe57cfd8ccc3462839
   branch: activestorage
   specs:
-    summernote-rails (0.8.22)
+    summernote-rails (0.8.23)
       rails (>= 6.0)
 
 GIT
@@ -88,7 +88,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.588.0)
+    aws-partitions (1.589.0)
     aws-sdk-core (3.131.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
