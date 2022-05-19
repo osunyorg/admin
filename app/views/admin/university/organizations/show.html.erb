@@ -113,6 +113,35 @@
   </div>
 </div>
 
+<% if @organization.experiences.any? %>
+  <h2><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
+
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= University::Person.human_attribute_name('last_name') %></th>
+        <th><%= University::Person.human_attribute_name('first_name') %></th>
+        <th><%= t('university.person.experience.period') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @organization.experiences.ordered.each do |experience| %>
+        <%
+          alumnus = experience.person
+          path = admin_university_alumnus_path(alumnus)
+        %>
+        <tr>
+          <td><%= link_to alumnus.last_name, path %></td>
+          <td><%= link_to alumnus.first_name, path %></td>
+          <td>
+            <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>
 <% end %>

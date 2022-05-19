@@ -152,6 +152,7 @@ en:
       experience:
         no_organization_hint_html: "If the organization is not in the list,<br>you can <a href=\"%{url}\">create it</a>"
         no_organization_hint_no_access_html: "If the organization is not in the list,<br>you should ask to create it"
-      taught_programs: Taught programs
+        period: Period
+    taught_programs: Taught programs
     sso: SSO
     sso_key: SSO Key

@@ -152,6 +152,7 @@ fr:
       experience:
         no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste,<br>vous pouvez la <a href=\"%{url}\">créer</a>"
         no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste,<br>il faut demander à la créer"
+        period: Période
       taught_programs: Formations enseignées
     sso: SSO
     sso_key: Clé sur le SSO
