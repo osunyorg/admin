@@ -14,10 +14,6 @@
           <%= f.input :description_short, input_html: { value: page.description_short&.gsub('&amp;', '&') } %>
           <%= f.input :header_text, as: :string %>
           <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
-          <%= f.association :related_category,
-                            collection: collection_tree(@website.categories),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } if @website.categories.any? && page.is_regular_page? %>
         </div>
       </div>
       <div class="card">
