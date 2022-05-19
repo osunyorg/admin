@@ -160,3 +160,6 @@ fr:
         evaluation: Moyens mobilisés pour mesurer à l'aide de critères objectifs les acquis du bénéficiaire en cours et/ou à la fin de la prestation.
         accessibility: Conditions d'accueil et d’accès des publics en situation de handicap (locaux, adaptation des moyens de la prestation).
         description: Texte simple, sans HTML, pour le SEO
+    include_blanks:
+      defaults:
+        program: "Sélectionnez une formation"

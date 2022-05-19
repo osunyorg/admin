@@ -55,6 +55,8 @@ fr:
         url: Site web
         user: Utilisateur
       university/person/experience:
+        from_year: Année de début
+        to_year: Année de fin
         today: Aujourd'hui
       university/person/involvement:
         description: Mission (dans ce contexte)
@@ -100,9 +102,9 @@ fr:
       university/person/alumnus:
         one: Alumnus
         other: Alumni
-      university/person/Experience:
-        one: Expérience
-        other: Expériences
+      university/person/experience:
+        one: Expérience professionnelle
+        other: Expériences professionnelles
       university/organization:
         one: Organisation
         other: Organisations
@@ -131,6 +133,7 @@ fr:
         twitter: "Exemple : osuny"
     include_blanks:
       defaults:
+        organization: Sélectionnez une organisation
         year: Sélectionnez une année
   enums:
     university:
@@ -147,6 +150,9 @@ fr:
     manage_experiences: Gérer les expériences professionnelles
     person:
       administrator_roles: Rôles administratifs
+      experience:
+        no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste,<br>vous pouvez la <a href=\"%{url}\">créer</a>"
+        no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste,<br>il faut demander à la créer"
       taught_programs: Formations enseignées
     sso: SSO
     sso_key: Clé sur le SSO

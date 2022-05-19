@@ -8,10 +8,10 @@ namespace :university do
   end
   resources :alumni, only: [:index, :show] do
     member do
-      get 'edit_cohorts' => 'alumni#edit_cohorts'
-      patch 'edit_cohorts' => 'alumni#update_cohorts'
-      get 'edit_experience' => 'alumni#edit_experiences'
-      patch 'edit_experiences' => 'alumni#update_experiences'
+      get 'cohorts' => 'alumni/cohorts#edit'
+      patch 'cohorts' => 'alumni/cohorts#update'
+      get 'experiences' => 'alumni/experiences#edit'
+      patch 'experiences' => 'alumni/experiences#update'
     end
   end
   resources :people, :organizations
