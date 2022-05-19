@@ -23,10 +23,10 @@
 
 one:
   name: MyString
-  university: one
-  url: MyString
+  university: default_university
+  domain: MyString
 
 two:
   name: MyString
-  university: two
-  url: MyString
+  university: default_university
+  domain: MyString

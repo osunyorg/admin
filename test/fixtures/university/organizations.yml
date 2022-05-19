@@ -33,29 +33,31 @@
 #
 
 one:
-  title: MyString
+  university: default_university
+  name: MyString
   description: MyText
   address: MyString
   zipcode: MyString
   city: MyString
   country: MyString
-  website: MyString
+  url: MyString
   phone: MyString
-  mail: MyString
+  email: MyString
   active: false
   siren: MyString
   kind: 1
 
 two:
-  title: MyString
+  university: default_university
+  name: MyString
   description: MyText
   address: MyString
   zipcode: MyString
   city: MyString
   country: MyString
-  website: MyString
+  url: MyString
   phone: MyString
-  mail: MyString
+  email: MyString
   active: false
   siren: MyString
   kind: 1
