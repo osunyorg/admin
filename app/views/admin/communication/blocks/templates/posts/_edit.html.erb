@@ -1,3 +1,5 @@
+<% categories = collection_tree(@block.about&.website.categories.ordered) %>
+
 <div class="row mb-1">
   <div class="col-md-6">
 
@@ -31,7 +33,7 @@
       <select id="category_id"
             class="form-select select"
             v-model="data.category_id">
-        <% @block.about&.website.categories.ordered.each_with_index do |category, index| %>
+        <% categories.each_with_index do |category, index| %>
           <option value="<%= category.id %>"><%= category %></option>
         <% end %>
       </select>
