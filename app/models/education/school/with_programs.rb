@@ -16,9 +16,17 @@ module Education::School::WithPrograms
                             foreign_key: 'education_school_id',
                             association_foreign_key: 'education_program_id'
 
+    has_many :diplomas,
+             through: :programs,
+             source: :diploma
+
   end
 
   def has_education_programs?
     published_programs.any?
+  end
+
+  def has_education_diplomas?
+    diplomas.any?
   end
 end

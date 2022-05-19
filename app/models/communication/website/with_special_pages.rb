@@ -13,7 +13,7 @@ module Communication::Website::WithSpecialPages
     def create_missing_special_pages
       homepage = create_special_page('home')
       # first level pages with test
-      ['legal_terms', 'sitemap', 'privacy_policy', 'communication_posts', 'education_programs', 'research_articles', 'research_volumes', 'organizations'].each do |kind|
+      ['legal_terms', 'sitemap', 'privacy_policy', 'communication_posts', 'education_programs', 'education_diplomas', 'research_articles', 'research_volumes', 'organizations'].each do |kind|
         create_special_page(kind, homepage.id) if public_send("has_#{kind}?")
       end
       # team pages
@@ -46,6 +46,7 @@ module Communication::Website::WithSpecialPages
       published: true,
       university_id: university_id
     )
+    page.sync_with_git
     page
   end
 

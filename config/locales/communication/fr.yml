@@ -184,7 +184,7 @@ fr:
               add_file: Ajouter un fichier
               file_label: Fichier
               title_label: Titre
-              title_placeholder: Entrer le titre du fichier 
+              title_placeholder: Entrer le titre du fichier
               remove_file: Supprimer le fichier
           gallery:
             edit:
@@ -305,6 +305,11 @@ fr:
             description_short: Liste des actualités
             slug: actualites
             title: Actualités
+          education_diplomas:
+            admin_description: liste des diplômes proposés
+            description_short: Liste des diplômes proposés
+            slug: diplomes
+            title: "Diplômes"
           education_programs:
             admin_description: liste des formations proposées
             description_short: Liste des formations proposées
@@ -392,6 +397,7 @@ fr:
               administrators: Équipe administrative
               authors: Équipe éditoriale
               blank: Titre intermédiaire
+              diplomas: Liste des diplômes
               news: Liste des actualités
               news_article: Actualité spécifique
               news_category: Catégorie d'actualités

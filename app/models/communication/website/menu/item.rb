@@ -55,6 +55,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     page: 20,
     programs: 30,
     program: 31,
+    diplomas: 32,
     news: 40,
     news_category: 41,
     news_article: 42,
@@ -74,6 +75,31 @@ class Communication::Website::Menu::Item < ApplicationRecord
   validates :about, presence: true, if: :has_about?
 
   after_commit :sync_menu
+
+  def self.icon_for(kind)
+    icons = {
+      'administrators' => 'fas fa-user',
+      'authors' => 'fas fa-user',
+      'blank' => 'fas fa-font',
+      'diplomas' => 'fas fa-award',
+      'news' => 'fas fa-newspaper',
+      'news_article' => 'fas fa-newspaper',
+      'news_category' => 'fas fa-newspaper',
+      'page' => 'fas fa-file',
+      'program' => 'fas fa-graduation-cap',
+      'programs' => 'fas fa-graduation-cap',
+      'research_article' => 'fas fa-flask',
+      'research_articles' => 'fas fa-flask',
+      'research_volumes' => 'fas fa-flask',
+      'research_volume' => 'fas fa-flask',
+      'researchers' => 'fas fa-user',
+      'organizations' => 'fas fa-building',
+      'staff' => 'fas fa-user',
+      'teachers' => 'fas fa-user',
+      'url' => 'fas fa-globe',
+    }
+    icons[kind] if icons.has_key? kind
+  end
 
   def to_s
     "#{title}"

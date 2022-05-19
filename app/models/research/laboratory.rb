@@ -43,7 +43,7 @@ class Research::Laboratory < ApplicationRecord
       unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
       unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
       unaccent(research_laboratories.name) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.zipcode) ILIKE unaccent(:term) 
+      unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
@@ -73,6 +73,10 @@ class Research::Laboratory < ApplicationRecord
   end
 
   def has_education_programs?
+    false
+  end
+
+  def has_education_diplomas?
     false
   end
 

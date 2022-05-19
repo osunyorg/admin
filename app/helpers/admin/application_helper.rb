@@ -115,30 +115,6 @@ module Admin::ApplicationHelper
     }
   end
 
-  def icon_for(identifier)
-    icons = {
-      'communication.website.menu.item.kind.administrators' => 'fas fa-user',
-      'communication.website.menu.item.kind.authors' => 'fas fa-user',
-      'communication.website.menu.item.kind.blank' => 'fas fa-font',
-      'communication.website.menu.item.kind.news' => 'fas fa-newspaper',
-      'communication.website.menu.item.kind.news_article' => 'fas fa-newspaper',
-      'communication.website.menu.item.kind.news_category' => 'fas fa-newspaper',
-      'communication.website.menu.item.kind.page' => 'fas fa-file',
-      'communication.website.menu.item.kind.program' => 'fas fa-graduation-cap',
-      'communication.website.menu.item.kind.programs' => 'fas fa-graduation-cap',
-      'communication.website.menu.item.kind.research_article' => 'fas fa-flask',
-      'communication.website.menu.item.kind.research_articles' => 'fas fa-flask',
-      'communication.website.menu.item.kind.research_volumes' => 'fas fa-flask',
-      'communication.website.menu.item.kind.research_volume' => 'fas fa-flask',
-      'communication.website.menu.item.kind.researchers' => 'fas fa-user',
-      'communication.website.menu.item.kind.organizations' => 'fas fa-building',
-      'communication.website.menu.item.kind.staff' => 'fas fa-user',
-      'communication.website.menu.item.kind.teachers' => 'fas fa-user',
-      'communication.website.menu.item.kind.url' => 'fas fa-globe',
-    }
-    icons[identifier] if icons.has_key? identifier
-  end
-
   private
 
   def polymorphic_url_param(object_or_class, **options)

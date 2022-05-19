@@ -17,6 +17,10 @@ module Aboutable
     raise NotImplementedError
   end
 
+  def has_education_diplomas?
+    raise NotImplementedError
+  end
+
   def has_research_articles?
     raise NotImplementedError
   end

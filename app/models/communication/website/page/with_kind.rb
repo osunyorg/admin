@@ -7,6 +7,7 @@ module Communication::Website::Page::WithKind
       home: 0,
       communication_posts: 10,
       education_programs: 20,
+      education_diplomas: 21,
       research_articles: 30,
       research_volumes: 32,
       legal_terms: 80,
@@ -23,6 +24,7 @@ module Communication::Website::Page::WithKind
     SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH = [
       'communication_posts',
       'education_programs',
+      'education_diplomas',
       'research_articles',
       'research_volumes',
       'organizations',

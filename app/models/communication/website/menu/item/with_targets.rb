@@ -23,6 +23,10 @@ module Communication::Website::Menu::Item::WithTargets
     Static.clean_path "#{website.special_page(:education_programs).path}#{about.path}"
   end
 
+  def target_for_diplomas
+    Static.clean_path website.special_page(:education_diplomas).path
+  end
+
   def target_for_news
     Static.clean_path website.special_page(:communication_posts).path
   end
