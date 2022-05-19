@@ -24,13 +24,13 @@
 #
 
 one:
-  university: one
+  university: default_university
   program: one
   academic_year: one
   name: MyString
 
 two:
-  university: two
+  university: default_university
   program: two
   academic_year: two
   name: MyString

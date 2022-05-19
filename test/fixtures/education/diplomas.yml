@@ -23,12 +23,14 @@
 #
 
 one:
+  university: default_university
   name: MyString
   short_name: MyString
   level: 1
   slug: MyString
 
 two:
+  university: default_university
   name: MyString
   short_name: MyString
   level: 1

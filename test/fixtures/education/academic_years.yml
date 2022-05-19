@@ -18,9 +18,9 @@
 #
 
 one:
-  university: one
-  year: 1
+  university: default_university
+  year: 2022
 
 two:
-  university: two
-  year: 1
+  university: default_university
+  year: 2023
