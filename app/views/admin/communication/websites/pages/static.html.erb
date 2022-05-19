@@ -12,9 +12,6 @@ children:
   - <%= child.path %>
 <% end %>
 <% end %>
-<% if @about.related_category %>
-category: "<%= @about.related_category.path %>"
-<% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
 description_short: >

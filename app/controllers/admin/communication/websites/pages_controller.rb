@@ -91,7 +91,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
             :communication_website_id, :title, :breadcrumb_title, :bodyclass,
             :description, :description_short, :header_text, :text, :slug, :published,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :parent_id, :related_category_id, :language_id
+            :parent_id, :language_id
           )
           .merge(university_id: current_university.id)
   end
