@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_16_095044) do
+ActiveRecord::Schema.define(version: 2022_05_19_100506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -300,7 +300,6 @@ ActiveRecord::Schema.define(version: 2022_05_16_095044) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "published", default: false
     t.text "github_path"
-    t.uuid "related_category_id"
     t.string "featured_image_alt"
     t.text "text"
     t.text "description_short"
@@ -313,7 +312,6 @@ ActiveRecord::Schema.define(version: 2022_05_16_095044) do
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
-    t.index ["related_category_id"], name: "index_communication_website_pages_on_related_category_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
@@ -828,7 +826,6 @@ ActiveRecord::Schema.define(version: 2022_05_16_095044) do
   add_foreign_key "communication_website_menu_items", "universities"
   add_foreign_key "communication_website_menus", "communication_websites"
   add_foreign_key "communication_website_menus", "universities"
-  add_foreign_key "communication_website_pages", "communication_website_categories", column: "related_category_id"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"

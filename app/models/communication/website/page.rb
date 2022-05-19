@@ -23,7 +23,6 @@
 #  communication_website_id :uuid             not null, indexed
 #  language_id              :uuid             indexed
 #  parent_id                :uuid             indexed
-#  related_category_id      :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
@@ -31,14 +30,12 @@
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_language_id               (language_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
-#  index_communication_website_pages_on_related_category_id       (related_category_id)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_1a42003f06  (parent_id => communication_website_pages.id)
 #  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
-#  fk_rails_47b37cf8b2  (related_category_id => communication_website_categories.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
 
@@ -58,9 +55,6 @@ class Communication::Website::Page < ApplicationRecord
 
   belongs_to :website,
              foreign_key: :communication_website_id
-  belongs_to :related_category,
-             class_name: 'Communication::Website::Category',
-             optional: true
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true

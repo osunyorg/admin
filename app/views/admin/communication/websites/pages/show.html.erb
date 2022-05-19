@@ -71,15 +71,6 @@
             </p>
           <% end %>
 
-          <% if @page.related_category %>
-            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('related_category') %></h3>
-            <p><%= link_to_if can?(:read, @page.related_category),
-                              @page.related_category,
-                              admin_communication_website_category_path(
-                                website_id: @website.id,
-                                id: @page.related_category.id
-                              ) %></p>
-          <% end %>
           <% if @page.children.any? %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('children') %></h3>
             <ul class="list-unstyled mb-0">
