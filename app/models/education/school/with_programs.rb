@@ -16,9 +16,10 @@ module Education::School::WithPrograms
                             foreign_key: 'education_school_id',
                             association_foreign_key: 'education_program_id'
 
-    has_many :diplomas,
+    has_many :diplomas, -> { distinct },
              through: :programs,
              source: :diploma
+             alias_attribute :education_diplomas, :diplomas
 
   end
 
