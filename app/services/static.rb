@@ -14,7 +14,7 @@ class Static
       }
     )
     # We don't want &#39; in the frontmatters!
-    string = string.gsub '&#39\;', "'"
+    string.gsub! '&#39\;', "'"
     string
   end
 end
