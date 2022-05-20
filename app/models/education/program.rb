@@ -75,7 +75,6 @@ class Education::Program < ApplicationRecord
                                     :other,
                                     :pedagogy,
                                     :prerequisites,
-                                    :presentation,
                                     :pricing,
                                     :registration,
                                     :content,
