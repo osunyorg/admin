@@ -5,7 +5,7 @@ class Static
   end
 
   def self.render(template_static, about, website)
-    string = ApplicationController.render(
+    code = ApplicationController.render(
       template: template_static,
       layout: false,
       assigns: {
@@ -14,7 +14,7 @@ class Static
       }
     )
     # We don't want &#39; in the frontmatters!
-    string.gsub! '&#39\;', "'"
-    string
+    code = code.gsub "&#39\;", "'"
+    code
   end
 end
