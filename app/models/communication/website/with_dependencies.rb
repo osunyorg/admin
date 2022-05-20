@@ -37,6 +37,10 @@ module Communication::Website::WithDependencies
     blocks_dependencies ||= blocks.collect(&:git_dependencies).flatten.compact.uniq
   end
 
+  def education_diplomas
+    has_education_diplomas? ? about.diplomas : Education::Program.none
+  end
+
   def education_programs
     has_education_programs? ? about.published_programs : Education::Program.none
   end
@@ -152,6 +156,10 @@ module Communication::Website::WithDependencies
 
   def has_teachers?
     about && about.has_teachers?
+  end
+
+  def has_education_diplomas?
+    about && about.has_education_diplomas?
   end
 
   def has_education_programs?

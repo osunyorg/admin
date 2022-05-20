@@ -326,10 +326,10 @@ fr:
             slug: mentions-legales
             title: Mentions légales
           organizations:
-            admin_description: page des tierces parties
-            description_short: Liste des tierces parties
-            slug: tierces-parties
-            title: Tierces parties
+            admin_description: page des organisations
+            description_short: Liste des organisations
+            slug: organisations
+            title: Organisations
           persons:
             admin_description: liste des membres de l'équipe
             description_short: Liste des membres de l'équipe
@@ -397,6 +397,7 @@ fr:
               administrators: Équipe administrative
               authors: Équipe éditoriale
               blank: Titre intermédiaire
+              diploma: Diplôme spécifique
               diplomas: Liste des diplômes
               news: Liste des actualités
               news_article: Actualité spécifique

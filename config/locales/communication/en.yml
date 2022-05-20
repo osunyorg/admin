@@ -323,10 +323,10 @@ en:
             slug: legal-terms
             title: Legal terms
           organizations:
-            admin_description: third parties page
-            description_short: List of third parties
-            slug: third-parties
-            title: Third parties
+            admin_description: organizations page
+            description_short: List of organizations
+            slug: organizations
+            title: Organizations
           persons:
             admin_description: list of members in the team
             description_short: List of members in the team
@@ -394,6 +394,7 @@ en:
               administrators: Administration staff
               authors: Editorial staff
               blank: Title
+              diploma: Specific diploma
               diplomas: Diplomas index
               news: News index
               news_article: Specific news

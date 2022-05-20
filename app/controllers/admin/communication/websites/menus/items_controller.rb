@@ -53,7 +53,8 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
     @item.menu = @menu
     @item.website = @website
     if @item.save
-      redirect_to admin_communication_website_menu_item_path(@item, menu_id: @menu.id), notice: t('admin.successfully_created_html', model: @item.to_s)
+      redirect_to admin_communication_website_menu_path(@menu),
+                  notice: t('admin.successfully_created_html', model: @item.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -62,7 +63,8 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
 
   def update
     if @item.update(item_params)
-      redirect_to admin_communication_website_menu_item_path(@item, menu_id: @menu.id), notice: t('admin.successfully_updated_html', model: @item.to_s)
+      redirect_to admin_communication_website_menu_path(@menu),
+                  notice: t('admin.successfully_updated_html', model: @item.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -72,7 +74,8 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
 
   def destroy
     @item.destroy
-    redirect_to admin_communication_website_menu_path(@menu), notice: t('admin.successfully_destroyed_html', model: @item.to_s)
+    redirect_to admin_communication_website_menu_path(@menu),
+                notice: t('admin.successfully_destroyed_html', model: @item.to_s)
   end
 
   protected

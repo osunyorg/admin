@@ -56,6 +56,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     programs: 30,
     program: 31,
     diplomas: 32,
+    diploma: 33,
     news: 40,
     news_category: 41,
     news_article: 42,
@@ -78,27 +79,28 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def self.icon_for(kind)
     icons = {
-      'administrators' => 'fas fa-user',
-      'authors' => 'fas fa-user',
-      'blank' => 'fas fa-font',
-      'diplomas' => 'fas fa-award',
-      'news' => 'fas fa-newspaper',
-      'news_article' => 'fas fa-newspaper',
-      'news_category' => 'fas fa-newspaper',
-      'page' => 'fas fa-file',
-      'program' => 'fas fa-graduation-cap',
-      'programs' => 'fas fa-graduation-cap',
-      'research_article' => 'fas fa-flask',
-      'research_articles' => 'fas fa-flask',
-      'research_volumes' => 'fas fa-flask',
-      'research_volume' => 'fas fa-flask',
-      'researchers' => 'fas fa-user',
-      'organizations' => 'fas fa-building',
-      'staff' => 'fas fa-user',
-      'teachers' => 'fas fa-user',
-      'url' => 'fas fa-globe',
+      'administrators' => 'user',
+      'authors' => 'user',
+      'blank' => 'font',
+      'diploma' => Icon::EDUCATION_DIPLOMA,
+      'diplomas' => Icon::EDUCATION_DIPLOMA,
+      'news' => 'newspaper',
+      'news_article' => 'newspaper',
+      'news_category' => 'newspaper',
+      'page' => 'file',
+      'program' => Icon::EDUCATION_PROGRAM,
+      'programs' => Icon::EDUCATION_PROGRAM,
+      'research_article' => Icon::RESEARCH_LABORATORY,
+      'research_articles' => Icon::RESEARCH_LABORATORY,
+      'research_volumes' => Icon::RESEARCH_LABORATORY,
+      'research_volume' => Icon::RESEARCH_LABORATORY,
+      'researchers' => Icon::RESEARCH_RESEARCHER,
+      'organizations' => Icon::UNIVERSITY_ORGANIZATION,
+      'staff' => 'user',
+      'teachers' => Icon::EDUCATION_TEACHER,
+      'url' => 'globe',
     }
-    icons[kind] if icons.has_key? kind
+    "fas fa-#{icons[kind]}" if icons.has_key? kind
   end
 
   def to_s
@@ -140,6 +142,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def has_about?
     kind_page? ||
+    kind_diploma? ||
     kind_program? ||
     kind_news_category? ||
     kind_news_article? ||
@@ -152,7 +155,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def siblings
-    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+    self.class
+        .unscoped
+        .where(parent: parent, university: university, website: website)
+        .where.not(id: id)
   end
 
   protected

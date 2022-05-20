@@ -20,6 +20,15 @@ function hideAbout() {
     end
     %>
     displayAbout('Communication::Website::Page', "<%= j(raw(options.join(''))) %>");
+<% elsif @kind == 'diploma' %>
+    <%
+    options = ['<option value="" label=" "></option>']
+    @website.education_diplomas.ordered.each do |diploma|
+        options << "<option value=\"#{diploma.id}\">#{diploma.to_s}</option>"
+    end
+    %>
+    displayAbout('Education::Diploma', "<%= j(raw(options.join(''))) %>");
+
 <% elsif @kind == 'program' %>
     <%
     options = ['<option value="" label=" "></option>']
