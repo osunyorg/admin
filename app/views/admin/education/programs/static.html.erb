@@ -1,11 +1,19 @@
 ---
-<% teacher_involvements = @about.university_person_involvements.includes(:person).ordered_by_name %>
-<% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
+<%
+teacher_involvements = @about.university_person_involvements
+                             .includes(:person)
+                             .ordered_by_name
+administrator_involvements = @about.involvements_through_roles
+                                   .includes(:person)
+                                   .ordered_by_name
+%>
 title: >
   <%= @about.name %>
 url: <%= @website.special_page(:education_programs).path %><%= @about.path %>
 description: >
   <%= prepare_text_for_static @about.description %>
+presentation: >
+  <%= prepare_text_for_static @about.presentation %>
 position: <%= @about.position %>
 <%= render 'admin/communication/unsplash/static' %>
 category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>"
@@ -53,7 +61,6 @@ continuing: <%= @about.continuing %>
   :other,
   :pedagogy,
   :prerequisites,
-  :presentation,
   :pricing,
   :registration,
   :results
