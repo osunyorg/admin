@@ -91,6 +91,15 @@ module Admin::ApplicationHelper
     ''
   end
 
+  def collection(list)
+    list.ordered.map do |e|
+      {
+        label: e.to_s,
+        id: e.id
+      }
+    end
+  end
+
   def collection_tree(list, except = nil)
     collection = []
     list.root.ordered.each do |object|
