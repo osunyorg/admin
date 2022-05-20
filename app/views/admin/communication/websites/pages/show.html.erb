@@ -55,7 +55,7 @@
                                 website_id: @website.id,
                                 id: @page.parent.id
                               ),
-                              class: "#{'opacity-50' unless @page.parent.published?}" %></p>
+                              class: "#{'draft' unless @page.parent.published?}" %></p>
           <% end %>
 
           <% if can?(:edit, @website) && @page.best_bodyclass %>
@@ -79,7 +79,7 @@
                   <%= link_to_if can?(:read, child),
                                 child,
                                 admin_communication_website_page_path( website_id: @website.id, id: child.id),
-                                class: "#{'opacity-50' unless child.published?}" %>
+                                class: "#{'draft' unless child.published?}" %>
                 </li>
               <% end %>
             </ul>

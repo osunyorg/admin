@@ -8,6 +8,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   has_scope :for_search_term
   has_scope :for_diploma
   has_scope :for_school
+  has_scope :for_publication
 
   def index
     @programs = apply_scopes(@programs).ordered_by_name.page(params[:page])

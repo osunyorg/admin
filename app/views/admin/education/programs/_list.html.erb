@@ -22,7 +22,10 @@
       diploma = program.diploma
       %>
       <tr>
-        <td><%= link_to_if can?(:read, program), program, [:admin, program] %></td>
+        <td><%= link_to_if  can?(:read, program),
+                            program,
+                            [:admin, program],
+                            class: "#{'draft' unless program.published?}" %></td>
         <% unless hide_diploma %>
           <td><%= link_to_if can?(:read, diploma), diploma, [:admin, diploma] if diploma %></td>
         <% end %>

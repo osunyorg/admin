@@ -80,6 +80,7 @@ en:
       programs:
         view_as_list: Listview
         view_as_tree: Treeview
+        publication: Publication
         tree:
           title: Programs treeview
   education:
@@ -88,9 +89,25 @@ en:
     manage_teachers: Manage teachers
     number_of_programs: Number of programs
     program:
-      educational_informations: Educational informations
-      main_informations: Main informations
-      useful_informations: Useful informations
+      parts:
+        technical:
+          label: Technical
+          hint: Publication status and URLs in the websites.
+        essential:
+          label: Essential
+          hint: Page header, summary.
+        presentation:
+          label: Presentation
+          hint: This part shows the blocks you set, so you can build a rich, customized presentation of the program.
+        pedagogy:
+          label: Pedagogy
+          hint: Teaching and evaluation methods, pedagogical team.
+        results:
+          label: Results
+          hint: What can students do after the program? What did the alumni do?
+        admission:
+          label: Admission
+          hint: How to register.
     roles:
       one: Role
       other: Roles

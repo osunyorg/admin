@@ -80,6 +80,7 @@ fr:
       programs:
         view_as_list: Vue en liste
         view_as_tree: Vue en arbre
+        publication: Publication
         tree:
           title: Arborescence des formations
   education:
@@ -107,8 +108,6 @@ fr:
         admission:
           label: Admission
           hint: Modalités administratives d'accès à la formation.
-      hints:
-        essential: Ces informations apparaissent en haut de page
     roles:
       one: Rôle
       other: Rôles

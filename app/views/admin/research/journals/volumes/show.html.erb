@@ -29,7 +29,7 @@
                   <td>
                     <%= link_to article,
                                 admin_research_journal_article_path(journal_id: article.journal, id: article),
-                                class: "#{'opacity-50' unless article.published?}" %>
+                                class: "#{'draft' unless article.published?}" %>
                   </td>
                   <td><%= article.published_at %></td>
                   <td class="text-end">

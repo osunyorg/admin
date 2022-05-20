@@ -115,11 +115,16 @@ class Education::Program < ApplicationRecord
       unaccent(education_programs.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_diploma, -> (diploma_id) { where(diploma_id: diploma_id) }
+  scope :for_diploma, -> (diploma_id) {
+    where(diploma_id: diploma_id)
+  }
   scope :for_school, -> (school_id) {
     joins(:schools)
       .where(education_schools: { id: school_id })
       .distinct
+  }
+  scope :for_publication, -> (publication) {
+    where(published: publication)
   }
 
   def to_s

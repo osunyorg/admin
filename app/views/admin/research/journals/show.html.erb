@@ -32,7 +32,7 @@
             <div class="card-body">
               <%= link_to volume,
                           admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                          class: "stretched-link #{'opacity-50' unless volume.published?}" %>
+                          class: "stretched-link #{'draft' unless volume.published?}" %>
             </div>
           </div>
         </div>

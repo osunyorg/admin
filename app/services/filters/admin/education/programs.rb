@@ -15,6 +15,15 @@ module Filters
             'filters.attributes.element',
             element: Education::School.model_name.human.downcase
           )
+      add :for_publication,
+          [
+            { to_s: I18n.t('true'), id: 'true' },
+            { to_s: I18n.t('false'), id: 'false' }
+          ],
+          I18n.t(
+            'filters.attributes.element',
+            element: I18n.t('admin.education.programs.publication').downcase
+          )
     end
   end
 end

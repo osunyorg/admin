@@ -14,7 +14,7 @@
       <% end %>
       <%= link_to page,
                   admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                  class: "#{'opacity-50' unless page.published?}" %>
+                  class: "#{'draft' unless page.published?}" %>
       <% unless page.kind_home? %>
         <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
       <% end %>

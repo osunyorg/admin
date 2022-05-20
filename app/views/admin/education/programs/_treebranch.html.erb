@@ -14,7 +14,7 @@
       <% end %>
       <%= link_to program,
                   admin_education_program_path(id: program.id),
-                  class: "#{'opacity-50' unless program.published?}"  %>
+                  class: "#{'draft' unless program.published?}"  %>
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
       <%= link_to children_admin_education_program_path(id: program.id),
                   class: 'js-treeview-openzone small ps-2', remote: true do %>

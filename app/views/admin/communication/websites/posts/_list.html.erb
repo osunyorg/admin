@@ -35,7 +35,7 @@
         <% end %>
         <td><%= link_to post,
                         admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                        class: "#{'opacity-50' unless post.published?}" %></td>
+                        class: "#{'draft' unless post.published?}" %></td>
         <td><%= image_tag post.featured_image.representation(resize: 'x100'),
                           height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
         <% unless hide_author %>
