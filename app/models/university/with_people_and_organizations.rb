@@ -11,6 +11,6 @@ module University::WithPeopleAndOrganizations
               class_name: 'University::Organization',
               dependent: :destroy
     alias_attribute :organizations, :university_organizations
-
   end
+
 end
