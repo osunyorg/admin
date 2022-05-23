@@ -28,6 +28,7 @@ class Communication::Block < ApplicationRecord
 
   belongs_to :about, polymorphic: true
 
+  # Used to purge images when unattaching them
   has_many_attached :template_images
 
   enum template_kind: {
