@@ -50,6 +50,7 @@ class Communication::Block < ApplicationRecord
     key_figures: 56,
   }
 
+  before_validation :sanitize_data
   before_save :update_template_images
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
@@ -77,11 +78,15 @@ class Communication::Block < ApplicationRecord
 
   protected
 
-  def save_and_sync_about
-    about&.save_and_sync unless about&.destroyed?
+  def sanitize_data
+    self.data = template.sanitized_data
   end
 
   def update_template_images
     self.template_images = template.active_storage_blobs
+  end
+
+  def save_and_sync_about
+    about&.save_and_sync unless about&.destroyed?
   end
 end

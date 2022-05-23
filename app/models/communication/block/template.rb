@@ -5,6 +5,10 @@ class Communication::Block::Template
     @block = block
   end
 
+  def sanitized_data
+    data
+  end
+
   def git_dependencies
     unless @git_dependencies
       @git_dependencies = []
