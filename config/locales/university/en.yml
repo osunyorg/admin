@@ -77,8 +77,6 @@ en:
         email: Email
         kind: Kind
         siren: Legal identification number
-      university/organization/import:
-        file: File (.csv)
       university/role:
         description: Description
         people: People
@@ -107,9 +105,6 @@ en:
       university/organization:
         one: Organization
         other: Organizations
-      university/organization/import:
-        one: Import
-        other: Imports
       university/role:
         one: Role
         other: Roles
@@ -142,6 +137,7 @@ en:
           non_profit: Association
           government: Government
   university:
+    import_hint_html: "Name field is mandatory.<br>Possible values for kind are: company, non_profit, government.<br>Siren, nic, zipcode and phone fields must have a text format, not numbers.<br>Country field must contain the ISO 3166 code of the country, so to upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)"
     internal_key: Internal Key
     invoice_informations: Invoice informations
     manage_alumni: Manage alumni

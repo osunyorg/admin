@@ -1,6 +1,11 @@
 en:
   activerecord:
     attributes:
+      import:
+        date: Date
+        file: File
+        number_of_lines: Number of lines
+        status: Status
       language:
         iso_code: Iso code
         name: Name
@@ -26,11 +31,19 @@ en:
         websites_to_manage: Websites managed
     errors:
       models:
+        import:
+          attributes:
+            file:
+              incorrect_type: type is incorrect
+              no_file: must be selected
         user:
           attributes:
             password:
               password_strength: doesn't match the security policy
     models:
+      import:
+        one: Import
+        other: Imports
       language:
         one: Language
         other: Languages
@@ -99,7 +112,14 @@ en:
       send_email_code: 'Send me a code via email'
       success: ""
   download: Download
+  download_with_size: Download (%{size})
   edit: Edit
+  enums:
+    import:
+      status:
+        finished: Finished
+        finished_with_errors: Finished with errors
+        pending: Pending
   false: No
   featured_image:
     title: Image
@@ -127,7 +147,15 @@ en:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Hello %{name}!"
   home: Home
-  import: Import
+  import:
+    error_msg: "Line %{line}: %{error}"
+    errors: Errors
+    hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8."
+    initiated_by: "Initiated by:"
+    number_of_lines: "Number of lines in the file:"
+    status: "Status:"
+    still_pending: "Your import has not been processed yet. You will receive an email as soon as it's ready."
+  import_btn: Import
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
   languages:
     en: English
@@ -166,6 +194,8 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     hints:
+      import:
+        file: .xlsx file only
       user:
         mobile_phone: "International format (+XX). By filling this field, you accept to receive your two-factor authentication codes via SMS."
     include_blanks:

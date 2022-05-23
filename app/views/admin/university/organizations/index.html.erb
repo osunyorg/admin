@@ -6,9 +6,9 @@
 <%= paginate @organizations, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_left do %>
-  <%= link_to t('import'),
+  <%= link_to t('import_btn'),
               new_admin_university_organizations_import_path,
-              class: button_classes if can? :manage, University::Organization::Import %>
+              class: button_classes if can? :create, University::Organization %>
 <% end %>
 
 <% content_for :action_bar_right do %>

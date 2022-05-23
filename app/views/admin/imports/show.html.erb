@@ -1,0 +1,27 @@
+<% content_for :title, @import.to_s %>
+
+<div class="row">
+  <div class="col-md-6">
+    <p><%= t('imports.initiated_by') %> <%= link_to_if can?(:read, @import.user), @import.user, [:admin, @import.user] %></p>
+    <% if @import.file.attached? %>
+      <p><%= link_to t('download_with_size', size: number_to_human_size(@import.file.byte_size)), url_for(@import.file), class: button_classes  %></p>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <h2><%= t('imports.status') %> <span class="<%= @import.status_class %>"><%= t("enums.import.status.#{@import.status}") %></span></h2>
+    <% unless @import.pending? %>
+      <p><%= t('imports.number_of_lines') %> <%= @import.number_of_lines %></p>
+    <% end %>
+    <% if @import.pending? && @import.user == current_user %>
+      <p><%= t('imports.still_pending') %></p>
+    <% end %>
+    <% if @import.finished_with_errors? %>
+      <h3><%= t('imports.errors') %></h3>
+      <ul>
+        <% @import.processing_errors.each do |obj| %>
+          <li><%= t('imports.error_msg', line: obj['line'], error: obj['error']) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

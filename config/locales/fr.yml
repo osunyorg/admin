@@ -1,6 +1,11 @@
 fr:
   activerecord:
     attributes:
+      import:
+        date: Date
+        file: Fichier
+        number_of_lines: Nombre de lignes
+        status: Status
       language:
         iso_code: Code Iso
         name: Nom
@@ -26,11 +31,19 @@ fr:
         websites_to_manage: Sites gérés
     errors:
       models:
+        import:
+          attributes:
+            file:
+              incorrect_type: n'est pas au bon format
+              no_file: doit être choisi
         user:
           attributes:
             password:
               password_strength: ne répond pas aux critères de sécurité
     models:
+      import:
+        one: Import
+        other: Imports
       language:
         one: Langue
         other: Langues
@@ -99,7 +112,14 @@ fr:
       send_email_code: 'Envoyer le code par email'
       success: ""
   download: Télécharger
+  download_with_size: Télécharger (%{size})
   edit: Modifier
+  enums:
+    import:
+      status:
+        finished: Traité
+        finished_with_errors: Traité avec des erreurs
+        pending: En cours de traitement
   false: Non
   featured_image:
     title: Image
@@ -127,7 +147,15 @@ fr:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Bonjour %{name} !"
   home: Accueil
-  import: Importer
+  imports:
+    error_msg: "Ligne %{line} : %{error}"
+    errors: Erreurs
+    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux entêtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8."
+    initiated_by: "Initié par :"
+    number_of_lines: "Nombre de lignes dans le fichier :"
+    status: "Status :"
+    still_pending: "Votre import est toujours en cours de traitement. Vous recevrez un email dès qu'il est prêt."
+  import_btn: Importer
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
   languages:
     en: Anglais
@@ -166,6 +194,8 @@ fr:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
+      import:
+        file: Fichier .xlsx uniquement
       user:
         mobile_phone: "Format international (+XX). En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
     include_blanks:
