@@ -41,6 +41,8 @@ class University < ApplicationRecord
   # We use after_destroy to let the attachment go first
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
 
+  has_many :imports, dependent: :destroy
+
   validates_presence_of :name
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
 

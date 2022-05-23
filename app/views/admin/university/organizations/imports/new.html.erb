@@ -1,21 +1,21 @@
-<% content_for :title, University::Organization::Import.model_name.human %>
+<% content_for :title, Import.model_name.human %>
 
 <div class="row">
   <div class="col-md-6">
     <p>
-      Les données doivent être au format csv, comme l'exemple suivant.<br>
-      La première ligne doit être dédiée aux entêtes.<br>
-      Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>
-      Le champ name est obligatoire.<br>
-      Les caractères doivent être encodés en UTF-8.<br>
-      Les valeurs possibles pour kind sont : company, non_profit, government.
+      <%= t('imports.hint_html') %>
+      <br>
+      <%= t('university.import_hint_html') %>
     </p>
     <%= simple_form_for @import,
                         url: admin_university_organizations_imports_path do |f| %>
+      <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
+      <%= f.input :id, as: :hidden %>
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
       <%= f.input :file %>
+
       <% content_for :action_bar_right do %>
         <%= submit f %>
       <% end %>

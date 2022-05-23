@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_100506) do
+ActiveRecord::Schema.define(version: 2022_05_23_102030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -502,21 +502,17 @@ ActiveRecord::Schema.define(version: 2022_05_19_100506) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "zipcode"
-    t.string "city"
-    t.string "country"
-    t.string "website"
-    t.string "phone"
-    t.string "mail"
-    t.boolean "active"
-    t.string "sirene"
+  create_table "imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "number_of_lines"
+    t.jsonb "processing_errors"
     t.integer "kind"
+    t.integer "status", default: 0
+    t.uuid "university_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["university_id"], name: "index_imports_on_university_id"
+    t.index ["user_id"], name: "index_imports_on_user_id"
   end
 
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -709,8 +705,8 @@ ActiveRecord::Schema.define(version: 2022_05_19_100506) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
-    t.string "name"
     t.boolean "is_author"
+    t.string "name"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -858,6 +854,8 @@ ActiveRecord::Schema.define(version: 2022_05_19_100506) do
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
+  add_foreign_key "imports", "universities"
+  add_foreign_key "imports", "users"
   add_foreign_key "research_journal_articles", "research_journal_volumes"
   add_foreign_key "research_journal_articles", "research_journals"
   add_foreign_key "research_journal_articles", "universities"

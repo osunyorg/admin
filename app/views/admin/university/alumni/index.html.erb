@@ -7,9 +7,9 @@
 <%= paginate @alumni, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_left do %>
-  <%= link_to t('import'),
+  <%= link_to t('import_btn'),
               new_admin_university_alumni_import_path,
-              class: button_classes if can? :manage, University::Person::Alumnus::Import %>
+              class: button_classes if can? :create, University::Person::Alumnus %>
 <% end %>
 
 <% content_for :action_bar_right do %>

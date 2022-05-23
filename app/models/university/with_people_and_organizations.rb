@@ -12,15 +12,5 @@ module University::WithPeopleAndOrganizations
               dependent: :destroy
     alias_attribute :organizations, :university_organizations
 
-    has_many  :university_organization_imports,
-              class_name: 'University::Organization::Import',
-              dependent: :destroy
-    alias_attribute :organization_imports, :university_organization_imports
-
-    has_many :university_person_alumnus_imports,
-              class_name: 'University::Person::Alumnus::Import',
-              dependent: :destroy
-    alias_attribute :person_alumnus_imports, :university_person_alumnus_imports
-    alias_attribute :alumnus_imports, :university_person_alumnus_imports
   end
 end
