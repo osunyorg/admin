@@ -16,9 +16,10 @@ module Importers
       @hash = hash
       @error = nil
       extract_variables
-      person.save
-      # manage picture
-      # save if valid?
+      if valid?
+        person.save
+        # manage picture
+      end
     end
 
     def valid?
@@ -107,6 +108,7 @@ module Importers
         person.is_alumnus = true
         person.slug = person.to_s.parameterize.dasherize
         person
+      end
     end
 
     def organization
@@ -128,16 +130,5 @@ module Importers
       @organization
     end
 
-    def save
-      organization.save
-    end
-
-    def clean_encoding(value)
-      return if value.nil?
-      if value.encoding != 'UTF-8'
-        value = value.force_encoding 'UTF-8'
-      end
-      value.strip
-    end
   end
 end
