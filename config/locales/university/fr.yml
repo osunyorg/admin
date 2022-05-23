@@ -137,12 +137,15 @@ fr:
           non_profit: Association
           government: Structure gouvernementale
   university:
-    import_hint_html: "Le champ name est obligatoire.<br>Les valeurs possibles pour kind sont : company, non_profit, government.<br>Les champs siren, nic, zipcode et phone doivent être au format texte, pas nombre.<br>Le champ pays doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
+    alumni:
+      import_hint_html: "Les valeurs pour gender peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs phone_professional, phone_personal, mobile et zipcode doivent être au format texte, pas nombre.<br>Le champ pays doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ social_twitter ne doit pas contenir d'@."
     internal_key: Clé interne
     invoice_informations: Données de facturation
     manage_alumni: Gérer les alumni
     manage_cohorts: Gérer les promotions
     manage_experiences: Gérer les expériences professionnelles
+    organization:
+      import_hint_html: "Les valeurs possibles pour kind sont : company, non_profit, government.<br>Les champs siren, nic, zipcode et phone doivent être au format texte, pas nombre.<br>Le champ pays doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
     person:
       administrator_roles: Rôles administratifs
       experience:

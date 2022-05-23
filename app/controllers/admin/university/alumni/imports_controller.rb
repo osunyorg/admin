@@ -1,14 +1,18 @@
 class Admin::University::Alumni::ImportsController < Admin::University::ApplicationController
-  load_and_authorize_resource class: University::Person::Alumnus::Import,
+  load_and_authorize_resource class: Import,
                               through: :current_university,
-                              through_association: :person_alumnus_imports
+                              through_association: :imports
+
+  has_scope :for_status
 
   def index
+    @imports = apply_scopes(@imports.kind_alumni).ordered.page(params[:page])
     breadcrumb
   end
 
   def show
     breadcrumb
+    render 'admin/imports/show'
   end
 
   def new
@@ -16,11 +20,14 @@ class Admin::University::Alumni::ImportsController < Admin::University::Applicat
   end
 
   def create
+    @import.kind = :alumni
     @import.university = current_university
     @import.user = current_user
     if @import.save
-      redirect_to [:admin, @import], notice: "Import was successfully created."
+      redirect_to admin_university_alumni_import_path(@import),
+                  notice: t('admin.successfully_created_html', model: @import.to_s)
     else
+      breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,7 +38,7 @@ class Admin::University::Alumni::ImportsController < Admin::University::Applicat
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
                     admin_university_alumni_path
-    add_breadcrumb  University::Person::Alumnus::Import.model_name.human(count: 2),
+    add_breadcrumb  Import.model_name.human(count: 2),
                     admin_university_alumni_imports_path
     return unless @import
     @import.persisted?  ? add_breadcrumb(@import, admin_university_alumni_import_path(@import))
@@ -39,7 +46,7 @@ class Admin::University::Alumni::ImportsController < Admin::University::Applicat
   end
 
   def import_params
-    params.require(:university_person_alumnus_import)
+    params.require(:import)
           .permit(:file)
   end
 end

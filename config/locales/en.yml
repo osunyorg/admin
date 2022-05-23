@@ -150,7 +150,7 @@ en:
   import:
     error_msg: "Line %{line}: %{error}"
     errors: Errors
-    hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8."
+    hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8.<br>Fields marked with an asterisk are mandatory."
     initiated_by: "Initiated by:"
     number_of_lines: "Number of lines in the file:"
     status: "Status:"
@@ -169,6 +169,17 @@ en:
     sign_in_with_credentials: Sign in with credentials
     sign_in_with_sso: Sign in through SSO
     subtitle: Sign in to your account to continue
+  mailers:
+    notifications:
+      import:
+        subject_with_errors: Your import has been processed with errors
+        subject_without_errors: Your import has been processed
+        text_line_1_html: Your import has been processed.
+        text_line_2_html: "You can check the result by clicking <a href=\"%{url}\">here</a>."
+        text_line_3_html: "Number of lines in the file: %{number}."
+        text_error_msg: "Line %{line}: %{error}"
+        text_errors_title: "Some errors have occured:"
+    yours: Yours.
   menu:
     admin: Admin
     profile: Profile
