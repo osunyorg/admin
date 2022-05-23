@@ -13,7 +13,7 @@
           <%= f.input :breadcrumb_title %>
           <%= f.input :description_short, input_html: { value: page.description_short&.gsub('&amp;', '&') } %>
           <%= f.input :header_text, as: :string %>
-          <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
+          <%= f.input :text, as: :summernote if page.text&.present? %>
         </div>
       </div>
       <div class="card">

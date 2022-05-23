@@ -122,7 +122,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
         content_type: featured_medium.file.blob.content_type
       )
     else
-      fragment = Nokogiri::HTML.fragment(post.text.body.to_html)
+      fragment = Nokogiri::HTML.fragment(post.text)
       image = fragment.css('img').first
       if image.present?
         begin
@@ -135,6 +135,6 @@ class Communication::Website::Imported::Post < ApplicationRecord
         end
       end
     end
-    post.update(text: rich_text_with_attachments(post.text.body.to_html))
+    post.update(text: rich_text_with_attachments(post.text))
   end
 end

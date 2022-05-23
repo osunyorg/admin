@@ -122,6 +122,6 @@ class Communication::Website::Imported::Page < ApplicationRecord
         end
       end
     end
-    page.update(text: rich_text_with_attachments(page.text.to_s))
+    page.update(text: rich_text_with_attachments(page.text))
   end
 end
