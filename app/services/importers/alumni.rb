@@ -15,18 +15,19 @@ module Importers
       @university = university
       @hash = hash
       @error = nil
-      # extract_variables
+      extract_variables
+      person.save
+      # manage picture
       # save if valid?
     end
 
     def valid?
-      return true
-      # if country_not_found?
-      #   @error = "Country #{@country} not found"
-      # elsif !organization.valid?
-      #   @error = "Unable to create the organization: #{organization.errors.full_messages}"
-      # end
-      # @error.nil?
+      if country_not_found?
+        @error = "Country #{@country} not found"
+      elsif !person.valid?
+        @error = "Unable to create the person: #{person.errors.full_messages}"
+      end
+      @error.nil?
     end
 
     def error
@@ -37,25 +38,75 @@ module Importers
       @organization_name ||= @hash[0].to_s.strip
     end
 
+    def program
+      @program ||= @hash[0].to_s.strip
+    end
+
     protected
 
     def extract_variables
-      @long_name = @hash[1].to_s.strip
-      @kind = @hash[2].to_s.strip
-      @siren = @hash[3].to_s.strip
-      @nic = @hash[4].to_s.strip
-      @description = @hash[5].to_s.strip
-      @address = @hash[6].to_s.strip
-      @zipcode = @hash[7].to_s.strip
-      @city = @hash[8].to_s.strip
-      @country = @hash[9].to_s.strip
-      @email = @hash[10].to_s.strip
-      @phone = @hash[11].to_s.strip
-      @url = @hash[12].to_s.strip
+      @program_id = @hash[0].to_s.strip
+      @year = @hash[1].to_s.strip
+      @first_name = @hash[2].to_s.strip
+      @last_name = @hash[3].to_s.strip
+      @gender = @hash[4].to_s.strip
+      @birth = @hash[5].to_s.strip
+      @email = @hash[6].to_s.strip
+      @photo = @hash[7].to_s.strip
+      @url = @hash[8].to_s.strip
+      @phone_professional = @hash[9].to_s.strip
+      @phone_personal = @hash[10].to_s.strip
+      @mobile = @hash[11].to_s.strip
+      @address = @hash[12].to_s.strip
+      @zipcode = @hash[13].to_s.strip
+      @city = @hash[14].to_s.strip
+      @country = @hash[15].to_s.strip
+      @biography = @hash[16].to_s.strip
+      @social_twitter = @hash[17].to_s.strip
+      @social_linkedin = @hash[18].to_s.strip
+      @company_name = @hash[19].to_s.strip
+      @company_siren = @hash[20].to_s.strip
+      @company_nic = @hash[21].to_s.strip
+      @experience_job = @hash[22].to_s.strip
+      @experience_from = @hash[23].to_s.strip
+      @experience_to = @hash[24].to_s.strip
     end
 
     def country_not_found?
       ISO3166::Country[@country].nil?
+    end
+
+    def person
+      # TODO: add missing properties
+      @person ||= begin
+        if @email.present?
+          person = university.people
+                             .where(email: @email)
+                             .first_or_initialize
+        elsif @first_name.present? && @last_name.present?
+          person = university.people
+                             .where(first_name: @first_name, last_name: @last_name)
+                             .first_or_initialize
+        end
+        person.first_name = @first_name
+        person.last_name = @last_name
+        # person.gender = @gender
+        # person.birth = @birth
+        person.email = @mail
+        person.url = @url
+        # person.phone_professional = @phone_professional
+        # person.phone_personal = @phone_personal
+        person.phone = @mobile
+        # person.address = @address
+        # person.zipcode = @zipcode
+        # person.city = @city
+        # person.country = @country
+        person.biography = @biography
+        person.twitter = @social_twitter
+        person.linkedin = @social_linkedin
+        person.is_alumnus = true
+        person.slug = person.to_s.parameterize.dasherize
+        person
     end
 
     def organization
@@ -79,6 +130,14 @@ module Importers
 
     def save
       organization.save
+    end
+
+    def clean_encoding(value)
+      return if value.nil?
+      if value.encoding != 'UTF-8'
+        value = value.force_encoding 'UTF-8'
+      end
+      value.strip
     end
   end
 end
