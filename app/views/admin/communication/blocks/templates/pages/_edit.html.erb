@@ -116,7 +116,7 @@
     <hr>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-check form-check-inline mb-3">
           <input  class="form-check-input"
                   type="radio"
@@ -132,7 +132,23 @@
           </label>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
+        <div class="form-check form-check-inline">
+          <input  class="form-check-input"
+                  type="radio"
+                  name="layout"
+                  v-model="data.layout"
+                  value="list"
+                  id="layout-list">
+          <label class="form-check-label" for="layout-list">
+            Listes
+            <%= image_tag 'communication/blocks/templates/pages/list.png',
+                          alt: 'Liste',
+                          class: 'img-fluid' %>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
         <div class="form-check form-check-inline">
           <input  class="form-check-input"
                   type="radio"
