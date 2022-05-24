@@ -65,8 +65,7 @@ class Education::Program < ApplicationRecord
   include WithWebsites
   include WithTeam
 
-  rich_text_areas_with_inheritance  :main_information,
-                                    :accessibility,
+  rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
                                     :duration,
                                     :evaluation,
