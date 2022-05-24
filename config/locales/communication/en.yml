@@ -138,12 +138,15 @@ en:
               label: Credit
               placeholder: Enter credit
           file:
-              not_linked: Pas de fichier lié
+              not_linked: No linked file
+          link:
+              target_blank: Open in new window
         template_kinds:
           call_to_action:
             edit:
               button_1: Primary button
               button_2: Secondary button
+              button_3: Tertiary button
               button_label: Text
               button_placeholder: Enter the button text here
               buttons: Action buttons
