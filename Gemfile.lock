@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: da6e54c1e45c09dbeef2382d50f390aba968bd63
-  branch: feature/cleaner
+  revision: ed2ee76977c5362707a1da7d8d30ab5d3efdcbab
+  branch: activestorage
   specs:
     summernote-rails (0.8.20.1)
-      railties (>= 3.1)
+      rails (>= 6.0)
 
 GIT
   remote: https://github.com/noesya/two_factor_authentication.git
