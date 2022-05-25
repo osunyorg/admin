@@ -56,6 +56,12 @@ class Import < ApplicationRecord
     super(value)
   end
 
+  def url_pattern
+    kind_alumni? ?
+      'admin_university_alumni_import_url' :
+      'admin_university_organizations_import_url'
+  end
+
   private
 
   def file_validation
@@ -74,13 +80,11 @@ class Import < ApplicationRecord
   end
 
   def send_mail_to_creator
-    # TODO
-    # ImportsMailer.companies(self).deliver_later
+    NotificationMailer.import(self).deliver_later
   end
 
   def status_changed_from_pending?
     saved_change_to_status? && status_before_last_save == 'pending'
   end
-
 
 end

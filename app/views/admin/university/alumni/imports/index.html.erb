@@ -1,22 +1,11 @@
-<% content_for :title, University::Person::Alumnus::Import.model_name.human(count: 2) %>
+<% content_for :title, Import.model_name.human(count: 2) %>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= University::Person::Alumnus::Import.human_attribute_name('name') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @imports.each do |import| %>
-      <tr>
-        <td><%= link_to import, admin_university_alumni_import_path(import) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'filters', current_path: admin_university_alumni_imports_path, filters: @filters if @filters.any?  %>
+
+<%= render 'admin/imports/list', imports: @imports, path_pattern: 'admin_university_alumni_import_path' %>
 
 <% content_for :action_bar_right do %>
-  <%= link_to_if  can?(:create, University::Person::Alumnus::Import),
+  <%= link_to_if  can?(:create, University::Person::Alumnus),
                   t('create'),
                   new_admin_university_alumni_import_path,
                   class: button_classes %>

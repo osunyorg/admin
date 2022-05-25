@@ -1,0 +1,15 @@
+<p><%= t('mailers.notifications.import.text_line_1_html') %></p>
+<p><%= t('mailers.notifications.import.text_line_2_html', url: @url) %></p>
+<p><%= t('mailers.notifications.import.text_line_3_html', number: @import.number_of_lines) %></p>
+<% if @import.finished_with_errors? %>
+  <p>
+    <%= t('mailers.notifications.import.text_errors_title') %>
+    <br/>
+    <ul>
+      <% @import.processing_errors.each do |obj| %>
+        <li><%= t('mailers.notifications.import.text_error_msg', line: obj['line'], error: obj['error']) %></li>
+      <% end %>
+    </ul>
+  </p>
+<% end %>
+<p><%= t('mailers.yours') %></p>

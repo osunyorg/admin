@@ -2,28 +2,83 @@
 
 <div class="row mb-4">
   <div class="col-md-6">
-    <h2 class="h3">Type de liste</h2>
-    <div class="form-check form-check-inline mb-3">
-      <input  class="form-check-input"
-              type="radio"
-              name="kind"
-              v-model="data.kind"
-              value="children"
-              id="kind-children">
-      <label class="form-check-label" for="kind-children">
-        La page principale et ses enfants
-      </label>
+    <div class="mb-4">
+      <h2 class="h3">Type de liste</h2>
+      <div class="form-check form-check-inline mb-3">
+        <input  class="form-check-input"
+                type="radio"
+                name="kind"
+                v-model="data.kind"
+                value="children"
+                id="kind-children">
+        <label class="form-check-label" for="kind-children">
+          La page principale et ses enfants
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input  class="form-check-input"
+                type="radio"
+                name="kind"
+                v-model="data.kind"
+                value="selection"
+                id="kind-selection">
+        <label class="form-check-label" for="kind-selection">
+          Une sélection spécifique de pages
+        </label>
+      </div>
     </div>
-    <div class="form-check form-check-inline">
-      <input  class="form-check-input"
-              type="radio"
-              name="kind"
-              v-model="data.kind"
-              value="selection"
-              id="kind-selection">
-      <label class="form-check-label" for="kind-selection">
-        Une sélection spécifique de pages
-      </label>
+
+    <div class="mb-4">
+      <h2 class="h3">Page principale</h2>
+      <label class="form-label"
+            for="page_id">Sélectionnez une page principale</label>
+      <select id="page_id"
+            class="form-select select"
+            v-model="data.page_id">
+        <option value="">Aucune page sélectionnée</option>
+        <% pages.each_with_index do |page, index| %>
+          <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
+        <% end %>
+      </select>
+      <div class="form-text">Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.</div>
+    </div>
+
+    <div class="mb-4" v-if="data.kind == 'selection'">
+      <h2 class="h3">Pages sélectionnées</h2>
+      <a  class="<%= button_classes('mb-3') %>"
+          v-on:click="data.elements.push({id: ''})">
+          <%= t '.add_page' %>
+      </a>
+      <draggable :list="data.elements" handle=".dragHandle" class="list-group">
+        <div v-for="(page, index) in data.elements" class="list-group-item">
+          <div class="d-flex">
+            <div>
+              <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+                <i class="fa fa-bars handle"></i>
+              </a>
+            </div>
+            <div class="flex-fill">
+              <label  class="form-label d-none"
+                      :for="'page-' + index + '-name'">Page</label>
+              <select :id="'page-' + index + '-name'"
+                      class="form-select select"
+                      v-model="page.id">
+                <option value="" disabled>Aucune page</option>
+                <% pages.each_with_index do |page, index| %>
+                  <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
+                <% end %>
+              </select>
+            </div>
+            <div>
+              <a  class="btn btn-sm btn-danger ms-3"
+                  v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
+                  title="Supprimer">
+                  <i class="fas fa-times"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </draggable>
     </div>
   </div>
   <div class="col-md-6">
@@ -58,59 +113,57 @@
         Afficher les images des pages
       </label>
     </div>
-  </div>
-</div>
+    <hr>
 
-<div class="row">
-  <div class="col-md-6">
-    <h2 class="h3">Page principale</h2>
-    <label class="form-label"
-          for="page_id">Sélectionnez une page principale</label>
-    <select id="page_id"
-          class="form-select select"
-          v-model="data.page_id">
-      <option value="">Aucune page sélectionnée</option>
-      <% pages.each_with_index do |page, index| %>
-        <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
-      <% end %>
-    </select>
-    <div class="form-text">Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.</div>
-  </div>
-  <div class="col-md-6" v-if="data.kind == 'selection'">
-    <h2 class="h3">Pages sélectionnées</h2>
-    <a  class="<%= button_classes('mb-3') %>"
-        v-on:click="data.elements.push({id: ''})">
-        <%= t '.add_page' %>
-    </a>
-    <draggable :list="data.elements" handle=".dragHandle" class="list-group">
-      <div v-for="(page, index) in data.elements" class="list-group-item">
-        <div class="d-flex">
-          <div>
-            <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
-              <i class="fa fa-bars handle"></i>
-            </a>
-          </div>
-          <div class="flex-fill">
-            <label  class="form-label d-none"
-                    :for="'page-' + index + '-name'">Page</label>
-            <select :id="'page-' + index + '-name'"
-                    class="form-select select"
-                    v-model="page.id">
-              <option value="" disabled>Aucune page</option>
-              <% pages.each_with_index do |page, index| %>
-                <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
-              <% end %>
-            </select>
-          </div>
-          <div>
-            <a  class="btn btn-sm btn-danger ms-3"
-                v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
-                title="Supprimer">
-                <i class="fas fa-times"></i>
-            </a>
-          </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-check form-check-inline mb-3">
+          <input  class="form-check-input"
+                  type="radio"
+                  name="layout"
+                  v-model="data.layout"
+                  value="grid"
+                  id="layout-grid">
+          <label class="form-check-label" for="layout-grid">
+            Grille
+            <%= image_tag 'communication/blocks/templates/pages/grid.png',
+                          alt: 'Grille',
+                          class: 'img-fluid' %>
+          </label>
         </div>
       </div>
-    </draggable>
+      <div class="col-md-4">
+        <div class="form-check form-check-inline">
+          <input  class="form-check-input"
+                  type="radio"
+                  name="layout"
+                  v-model="data.layout"
+                  value="list"
+                  id="layout-list">
+          <label class="form-check-label" for="layout-list">
+            Liste
+            <%= image_tag 'communication/blocks/templates/pages/list.png',
+                          alt: 'Liste',
+                          class: 'img-fluid' %>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-check form-check-inline">
+          <input  class="form-check-input"
+                  type="radio"
+                  name="layout"
+                  v-model="data.layout"
+                  value="cards"
+                  id="layout-cards">
+          <label class="form-check-label" for="layout-cards">
+            Cartes
+            <%= image_tag 'communication/blocks/templates/pages/cards.png',
+                          alt: 'Grille',
+                          class: 'img-fluid' %>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

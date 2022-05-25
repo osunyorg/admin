@@ -150,7 +150,7 @@ fr:
   imports:
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
-    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux entêtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8."
+    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux entêtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"
     status: "Status :"
@@ -169,6 +169,17 @@ fr:
     sign_in_with_credentials: Se connecter avec ses identifiants
     sign_in_with_sso: Se connecter en SSO
     subtitle: Vous devez être authentifié pour continuer
+  mailers:
+    notifications:
+      import:
+        subject_with_errors: Votre import a bien été traité mais comporte des erreurs
+        subject_without_errors: Votre import a bien été traité
+        text_line_1_html: Votre import a bien été traité.
+        text_line_2_html: "Vous pouvez voir le détail de l'import en cliquant <a href=\"%{url}\">ici</a>."
+        text_line_3_html: "Nombre de lignes traitées : %{number}."
+        text_error_msg: "Ligne %{line} : %{error}"
+        text_errors_title: "Des erreurs sont survenues :"
+    yours: Cordialement.
   menu:
     admin: Admin
     profile: Profil

@@ -137,12 +137,15 @@ en:
           non_profit: Association
           government: Government
   university:
-    import_hint_html: "Name field is mandatory.<br>Possible values for kind are: company, non_profit, government.<br>Siren, nic, zipcode and phone fields must have a text format, not numbers.<br>Country field must contain the ISO 3166 code of the country, so to upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)"
+    alumni:
+      import_hint_html: "Possible values for gender are: m (male), f (female) and n (non binary).<br>Phone_professional, phone_personal, mobile and zipcode fields must have a text format, not numbers.<br>Country field must contain the ISO 3166 code of the country, so to upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)<br>Social_twitter field should have no @."
     internal_key: Internal Key
     invoice_informations: Invoice informations
     manage_alumni: Manage alumni
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
+    organisation:
+      import_hint_html: "Possible values for kind are: company, non_profit, government.<br>Siren, nic, zipcode and phone fields must have a text format, not numbers.<br>Country field must contain the ISO 3166 code of the country, so to upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)"
     person:
       administrator_roles: Administrator roles
       experience:

@@ -4,6 +4,7 @@
       show_main_description: <%= block.template.show_main_description %>
       show_descriptions: <%= block.template.show_description %>
       show_images: <%= block.template.show_image %>
+      layout: <%= block.template.layout %>
       pages:
 <% block.template.selected_pages.each do |element| %>
         - page: <%= element.generated_path %>

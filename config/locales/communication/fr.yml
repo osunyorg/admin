@@ -139,12 +139,15 @@ fr:
               placeholder: Entrer le crédit
           file:
               not_linked: Pas de fichier lié
+          link:
+              target_blank: Ouvrir dans une nouvelle fenêtre
 
         templates:
           call_to_action:
             edit:
               button_1: Bouton principal
               button_2: Bouton secondaire
+              button_3: Bouton tertiaire
               button_label: Texte
               button_placeholder: Entrer le texte du bouton ici
               buttons: Boutons d'action

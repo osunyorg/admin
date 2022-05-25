@@ -5,15 +5,17 @@
     <p>
       <%= t('imports.hint_html') %>
       <br>
-      <%= t('university.import_hint_html') %>
+      <%= t('university.organization.import_hint_html') %>
     </p>
     <%= simple_form_for @import,
                         url: admin_university_organizations_imports_path do |f| %>
-      <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
-      <%= f.input :id, as: :hidden %>
+
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+      <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
+      <%= f.input :id, as: :hidden %>
+      
       <%= f.input :file %>
 
       <% content_for :action_bar_right do %>

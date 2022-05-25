@@ -1,21 +1,23 @@
-<% content_for :title, University::Organization::Import.model_name.human %>
+<% content_for :title, Import.model_name.human %>
 
 <div class="row">
   <div class="col-md-6">
     <p>
-      Les données doivent être au format csv, comme l'exemple suivant.<br>
-      La première ligne doit être dédiée aux entêtes.<br>
-      Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>
-      Les champs marqués d'une astérisque sont obligatoires.<br>
-      Les caractères doivent être encodés en UTF-8.<br>
-      Les valeurs pour gender peuvent être m (masculin), f (féminin) et n (non binaire).
+      <%= t('imports.hint_html') %>
+      <br>
+      <%= t('university.alumni.import_hint_html') %>
     </p>
     <%= simple_form_for @import,
                         url: admin_university_alumni_imports_path do |f| %>
+
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+      <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
+      <%= f.input :id, as: :hidden %>
+
       <%= f.input :file %>
+
       <% content_for :action_bar_right do %>
         <%= submit f %>
       <% end %>

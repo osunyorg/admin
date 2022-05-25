@@ -2,12 +2,15 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
   def sanitized_data
     {
       "text" => Osuny::Sanitizer.sanitize(text),
-      "url" => url,
       "button" => Osuny::Sanitizer.sanitize(button, 'string'),
-      "url_secondary" => url_secondary,
       "button_secondary" => Osuny::Sanitizer.sanitize(button_secondary, 'string'),
-      "url_tertiary" => url_tertiary,
       "button_tertiary" => Osuny::Sanitizer.sanitize(button_tertiary, 'string'),
+      "url" => url,
+      "url_secondary" => url_secondary,
+      "url_tertiary" => url_tertiary,
+      "target_blank" => target_blank,
+      "target_blank_secondary" => target_blank_secondary,
+      "target_blank_tertiary" => target_blank_tertiary,
       "image" => data['image'],
       "image_alt" => Osuny::Sanitizer.sanitize(data['image_alt'], 'string'),
       "image_credit" => Osuny::Sanitizer.sanitize(data['image_credit'], 'string')
@@ -30,6 +33,10 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     "#{data['button']}"
   end
 
+  def target_blank
+    data['target_blank'] == true
+  end
+
   def url_secondary
     "#{data['url_secondary']}"
   end
@@ -38,8 +45,16 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     "#{data['button_secondary']}"
   end
 
+  def target_blank_secondary
+    data['target_blank_secondary'] == true
+  end
+
   def url_tertiary
     "#{data['url_tertiary']}"
+  end
+
+  def target_blank_tertiary
+    data['target_blank_tertiary'] == true
   end
 
   def button_tertiary
