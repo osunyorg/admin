@@ -131,7 +131,7 @@ fr:
             label: Blocs narratifs
             description: Des outils plus sophistiqués pour articuler et mettre en scène des contenus
           references:
-            label: Blocs de liste
+            label: Blocs de listes
             description: Des listes d'autres objets, qui mettent en valeur et créent des liens
           utilities:
             label: Blocs techniques

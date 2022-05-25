@@ -441,7 +441,7 @@ en:
   enums:
     communication:
       block:
-        template:
+        template_kind:
           call_to_action: Call to action
           chapter: Chapter
           datatable: Table
