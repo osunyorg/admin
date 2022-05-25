@@ -96,7 +96,7 @@ class Communication::Website::Post < ApplicationRecord
   }
 
   def published?
-    published && published_at&.to_date <= Date.today
+    published && published_at && published_at.to_date <= Date.today
   end
 
   # Is it used?
@@ -152,7 +152,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def set_published_at
-    self.published_at = Time.zone.now if published? && published_at.nil?
+    self.published_at = Time.zone.now if published && published_at.nil?
   end
 
   def explicit_blob_ids
