@@ -1,0 +1,42 @@
+<%
+horizontal ||= false
+%>
+<% if horizontal %><div class="row"><% end %>
+<% layouts.each do |layout| %>
+  <%
+  name = t "admin.communication.blocks.templates.#{template}.layouts.#{layout}.label"
+  description = t "admin.communication.blocks.templates.#{template}.layouts.#{layout}.description"
+  %>
+  <% if horizontal %><div class="col-md-4"><% end %>
+  <div class="card mb-4">
+    <label for="layout-<%= layout %>">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-body">
+            <div class="form-check">
+              <input  class="form-check-input"
+                      type="radio"
+                      name="layout"
+                      v-model="data.layout"
+                      value="<%= layout %>"
+                      id="layout-<%= layout %>">
+              <h3 class="h4">
+                <%= name %>
+              </h3>
+            </div>
+            <p>
+              <%= description %>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <%= image_tag "communication/blocks/templates/#{template}/#{layout}.png",
+                          alt: name,
+                          class: 'img-fluid' %>
+        </div %>
+      </label %>
+    </div>
+  </div>
+  <% if horizontal %></div><% end %>
+<% end %>
+<% if horizontal %></div><% end %>

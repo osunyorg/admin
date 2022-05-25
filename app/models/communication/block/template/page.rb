@@ -1,4 +1,11 @@
 class Communication::Block::Template::Page < Communication::Block::Template
+
+  LAYOUTS = [
+    :grid,
+    :list,
+    :cards
+  ]
+
   def build_git_dependencies
     add_dependency main_page
     selected_pages.each do |page|

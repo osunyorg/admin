@@ -189,6 +189,13 @@ en:
               title_placeholder: Enter title here
               remove_file: Remove a file
           gallery:
+            layouts:
+              grid:
+                label: Grid
+                description: Images are presented as a grid, from left to right and top to bottom, with constant width.
+              carousel:
+                label: Carousel
+                description: Images are big, with a previous / next navigation and a constant height.
             edit:
               add_image: Add image
               image_label: Image (.png, .jpg)
@@ -219,8 +226,36 @@ en:
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
           pages:
+            layouts:
+              cards:
+                label: Cards
+                description: Side by side cards, same height, strong color on rollover. Perfect for a small amount of pages.
+              grid:
+                label: Grid
+                description: As a grid, left to right and top to bottom.
+              list:
+                label: List
+                description: The main page's short description is used as a big text, and the pages are listed on the right.
             edit:
-              add_page: Select a page
+              kind:
+                title: List kind
+                children: Main page and children
+                selection: A specific selection of pages
+              main_page:
+                title: Main page
+                label: Select the main page
+                none: No page selected
+                hint: This page will set the title and main link of the block on the website. If you select a page and fill no title above, the page title will be used. If you set a title, it will replace the main page's title.
+              selection:
+                add: Select a page
+                label: Page
+                none: No page
+                title: Selected pages
+              display:
+                title: Layout options
+                main_description: Show main page short description
+                pages_descriptions: Show pages short descriptions
+                pages_images: Show pages images
           partners:
             edit:
               add_partner: Add partner

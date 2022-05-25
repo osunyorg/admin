@@ -1,9 +1,9 @@
 <% pages = collection_tree(@block.about&.website.pages) %>
 
 <div class="row mb-4">
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <div class="mb-4">
-      <h2 class="h3">Type de liste</h2>
+      <h2 class="h3"><%= t '.kind.title' %></h2>
       <div class="form-check form-check-inline mb-3">
         <input  class="form-check-input"
                 type="radio"
@@ -12,7 +12,7 @@
                 value="children"
                 id="kind-children">
         <label class="form-check-label" for="kind-children">
-          La page principale et ses enfants
+          <%= t '.kind.children' %>
         </label>
       </div>
       <div class="form-check form-check-inline">
@@ -23,31 +23,31 @@
                 value="selection"
                 id="kind-selection">
         <label class="form-check-label" for="kind-selection">
-          Une sélection spécifique de pages
+          <%= t '.kind.selection' %>
         </label>
       </div>
     </div>
 
     <div class="mb-4">
-      <h2 class="h3">Page principale</h2>
-      <label class="form-label"
-            for="page_id">Sélectionnez une page principale</label>
+      <h2 class="h3"><%= t '.main_page.title' %></h2>
+      <label  class="form-label"
+              for="page_id"><%= t '.main_page.label' %></label>
       <select id="page_id"
             class="form-select select"
             v-model="data.page_id">
-        <option value="">Aucune page sélectionnée</option>
+        <option value=""><%= t '.main_page.none' %></option>
         <% pages.each_with_index do |page, index| %>
           <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
         <% end %>
       </select>
-      <div class="form-text">Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.</div>
+      <div class="form-text"><%= t '.main_page.hint' %></div>
     </div>
 
     <div class="mb-4" v-if="data.kind == 'selection'">
-      <h2 class="h3">Pages sélectionnées</h2>
+      <h2 class="h3"><%= t '.selection.title' %></h2>
       <a  class="<%= button_classes('mb-3') %>"
           v-on:click="data.elements.push({id: ''})">
-          <%= t '.add_page' %>
+          <%= t '.selection.add' %>
       </a>
       <draggable :list="data.elements" handle=".dragHandle" class="list-group">
         <div v-for="(page, index) in data.elements" class="list-group-item">
@@ -59,11 +59,11 @@
             </div>
             <div class="flex-fill">
               <label  class="form-label d-none"
-                      :for="'page-' + index + '-name'">Page</label>
+                      :for="'page-' + index + '-name'"><%= t '.selection.label' %></label>
               <select :id="'page-' + index + '-name'"
                       class="form-select select"
                       v-model="page.id">
-                <option value="" disabled>Aucune page</option>
+                <option value="" disabled><%= t '.selection.none' %></option>
                 <% pages.each_with_index do |page, index| %>
                   <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
                 <% end %>
@@ -81,89 +81,43 @@
       </draggable>
     </div>
   </div>
-  <div class="col-md-6">
-    <h2 class="h3">Options d'affichage</h2>
-    <div class="form-check">
-      <input  v-model="data.show_main_description"
-              class="form-check-input boolean optional"
-              id="show_main_description"
-              type="checkbox">
-      <label  class="form-check-label boolean optional"
-              for="show_main_description">
-        Afficher la description courte de la page principale
-      </label>
+  <div class="col-lg-6">
+    <h2 class="h3"><%= t '.display.title' %></h2>
+    <div class="mb-4">
+      <div class="form-check">
+        <input  v-model="data.show_main_description"
+                class="form-check-input boolean optional"
+                id="show_main_description"
+                type="checkbox">
+        <label  class="form-check-label boolean optional"
+                for="show_main_description">
+          <%= t '.display.main_description' %>
+        </label>
+      </div>
+      <div class="form-check">
+        <input  v-model="data.show_description"
+                class="form-check-input boolean optional"
+                id="show_description"
+                type="checkbox">
+        <label  class="form-check-label boolean optional"
+                for="show_description">
+          <%= t '.display.pages_descriptions' %>
+        </label>
+      </div>
+      <div class="form-check">
+        <input  v-model="data.show_image"
+                class="form-check-input boolean optional"
+                id="show_image"
+                type="checkbox">
+        <label  class="form-check-label boolean optional"
+                for="show_image">
+          <%= t '.display.pages_images' %>
+        </label>
+      </div>
     </div>
-    <div class="form-check">
-      <input  v-model="data.show_description"
-              class="form-check-input boolean optional"
-              id="show_description"
-              type="checkbox">
-      <label  class="form-check-label boolean optional"
-              for="show_description">
-        Afficher les descriptions courtes des pages
-      </label>
-    </div>
-    <div class="form-check">
-      <input  v-model="data.show_image"
-              class="form-check-input boolean optional"
-              id="show_image"
-              type="checkbox">
-      <label  class="form-check-label boolean optional"
-              for="show_image">
-        Afficher les images des pages
-      </label>
-    </div>
-    <hr>
 
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-check form-check-inline mb-3">
-          <input  class="form-check-input"
-                  type="radio"
-                  name="layout"
-                  v-model="data.layout"
-                  value="grid"
-                  id="layout-grid">
-          <label class="form-check-label" for="layout-grid">
-            Grille
-            <%= image_tag 'communication/blocks/templates/pages/grid.png',
-                          alt: 'Grille',
-                          class: 'img-fluid' %>
-          </label>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-check form-check-inline">
-          <input  class="form-check-input"
-                  type="radio"
-                  name="layout"
-                  v-model="data.layout"
-                  value="list"
-                  id="layout-list">
-          <label class="form-check-label" for="layout-list">
-            Liste
-            <%= image_tag 'communication/blocks/templates/pages/list.png',
-                          alt: 'Liste',
-                          class: 'img-fluid' %>
-          </label>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-check form-check-inline">
-          <input  class="form-check-input"
-                  type="radio"
-                  name="layout"
-                  v-model="data.layout"
-                  value="cards"
-                  id="layout-cards">
-          <label class="form-check-label" for="layout-cards">
-            Cartes
-            <%= image_tag 'communication/blocks/templates/pages/cards.png',
-                          alt: 'Grille',
-                          class: 'img-fluid' %>
-          </label>
-        </div>
-      </div>
-    </div>
+    <%= render 'admin/communication/blocks/layouts',
+                layouts: Communication::Block::Template::Page::LAYOUTS,
+                template: 'pages' %>
   </div>
 </div>

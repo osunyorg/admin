@@ -1,3 +1,8 @@
+<%= render 'admin/communication/blocks/layouts',
+            layouts: Communication::Block::Template::Gallery::LAYOUTS,
+            template: 'gallery',
+            horizontal: true %>
+
 <a  class="<%= button_classes('mb-4') %>"
     v-on:click="data.elements.push({alt: '', credit: '', file: {}})">
     <%= t '.add_image' %>
