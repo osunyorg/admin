@@ -96,7 +96,7 @@ class Communication::Website::Post < ApplicationRecord
   }
 
   def published?
-    published && published_at.to_date <= Date.today
+    published && published_at&.to_date <= Date.today
   end
 
   # Is it used?
