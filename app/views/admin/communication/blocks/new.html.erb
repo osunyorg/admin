@@ -1,25 +1,35 @@
 <% content_for :title, t('communication.block.choose_template') %>
 
-<div class="row">
-  <% Communication::Block.template_kinds.keys.each do |template_kind| %>
-    <% @block.template_kind = template_kind %>
-    <div class="col-lg-3 col-md-4">
-      <div class="card">
-        <%= image_tag "communication/blocks/templates/#{template_kind}.jpg", alt: '', class:"card-img-top" %>
-        <div class="card-body">
-          <h5 class="card-title"><%= t "enums.communication.block.template_kind.#{template_kind}" %></h5>
-          <%= simple_form_for [:admin, @block] do |f| %>
-            <%= f.error_notification %>
-            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-            <%= f.input :about_type, as: :hidden %>
-            <%= f.input :about_id, as: :hidden %>
-            <%= f.input :template_kind, as: :hidden %>
-            <%= f.submit  t('communication.block.choose'),
-                          class: button_classes('stretched-link') %>
-          <% end %>
+<% Communication::Block::CATEGORIES.each do |category, kinds| %>
+  <div class="row mt-5">
+    <div class="col-lg-7">
+      <h2><%= t "admin.communication.blocks.categories.#{category}.label" %></h2>
+    </div>
+    <div class="col-lg-5">
+      <p class="lead mb-0 text-end">
+        <%= t "admin.communication.blocks.categories.#{category}.description" %>
+      </p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <% kinds.each do |kind| %>
+      <% @block.template_kind = kind %>
+      <div class="col-xxl-2 col-lg-3 col-md-4 d-flex">
+        <div class="card flex-fill">
+          <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top" %>
+          <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><%= t "enums.communication.block.template.#{kind}" %></h5>
+              <p class="mb-0"><%= t "admin.communication.blocks.templates.#{kind}.description" %></p>
+              <%= simple_form_for [:admin, @block], html: { class: 'mt-auto'} do |f| %>
+                <%= f.input :about_type, as: :hidden %>
+                <%= f.input :about_id, as: :hidden %>
+                <%= f.input :template_kind, as: :hidden %>
+                <%= f.submit t('communication.block.choose'), class: button_classes %>
+              <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

@@ -36,6 +36,7 @@ class Communication::Block < ApplicationRecord
     image: 51,
     gallery: 300,
     video: 52,
+    key_figures: 56,
     datatable: 54,
     files: 55,
     embed: 53,
@@ -47,7 +48,13 @@ class Communication::Block < ApplicationRecord
     partners: 200,
     posts: 500,
     pages: 600,
-    key_figures: 56,
+  }
+
+  CATEGORIES = {
+    basic: [:chapter, :image, :video, :datatable],
+    storytelling: [:key_figures, :gallery, :call_to_action, :testimonials, :timeline],
+    references: [:pages, :posts, :organization_chart, :partners],
+    utilities: [:files, :definitions, :embed]
   }
 
   before_validation :sanitize_data

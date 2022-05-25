@@ -123,6 +123,19 @@ en:
   admin:
     communication:
       blocks:
+        categories:
+          basic:
+            label: Basic blocks
+            description: Essential bricks to build your page
+          storytelling:
+            label: Storytelling blocks
+            description: Advanced tools to organize and showcase your content
+          references:
+            label: List blocks
+            description: Lists of other objects, to present and connect
+          utilities:
+            label: Utility blocks
+            description: Purely practical and technical features
         components:
           text:
             label: Text
@@ -141,8 +154,9 @@ en:
               not_linked: No linked file
           link:
               target_blank: Open in new window
-        template_kinds:
+        templates:
           call_to_action:
+            description: A title, a text, an optional image and up to 3 call to action buttons.
             edit:
               button_1: Primary button
               button_2: Secondary button
@@ -162,12 +176,16 @@ en:
               url_label: Link
               url_placeholder: Enter the URL with "https://..."
           chapter:
+            description: A section of a document, with a title, a text, footnotes and an image.
             edit:
               notes_label: Notes
               notes_placeholder: Enter notes
               text_label: Text
               text_placeholder: Enter text
+          datatable:
+            description: A table of data, as responsive and accessible as possible.
           definitions:
+            description: A list of terms and definitions. We could call it a dictionary.
             edit:
               add_definition: Add definition
               remove_definition: Delete definition
@@ -176,12 +194,14 @@ en:
               text_label: Text
               text_placeholder: Enter text here
           embed:
+            description: HTML raw code, so you can integrate maps or iframe components.
             edit:
               code_label: Code
               code_placeholder: Enter code
               transcription_label: Text transcript
               transcription_placeholder: Enter text transcript
           files:
+            description: A list of downloadable files, mentioning their file size.
             edit:
               add_file: Add a file
               file_label: File
@@ -189,6 +209,7 @@ en:
               title_placeholder: Enter title here
               remove_file: Remove a file
           gallery:
+            description: A gallery of images, with an accessible description, a text and a credit for each image.
             layouts:
               grid:
                 label: Grid
@@ -206,7 +227,10 @@ en:
               text_label: Text
               text_placeholder: Enter text
               remove_image: Remove image
+          image:
+            description: An image with its alternative description, a credit and a text.
           key_figures:
+            description: Animated figures, with a unit and a text.
             edit:
               add_key: Add key figure
               unit_label: Unit
@@ -217,6 +241,7 @@ en:
               description_placeholder: Enter description here
               remove_key: Remove key figure
           organization_chart:
+            description: People and their jobs.
             edit:
               add_person: Add person
               person_label: Person
@@ -226,6 +251,7 @@ en:
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
           pages:
+            description: A highlight of some pages, with multiple layout options.
             layouts:
               cards:
                 label: Cards
@@ -257,6 +283,7 @@ en:
                 pages_descriptions: Show pages short descriptions
                 pages_images: Show pages images
           partners:
+            description: A list of organizations with logo, name and website.
             edit:
               add_partner: Add partner
               partner_name_label: Partner
@@ -266,7 +293,10 @@ en:
               partner_logo_label: Logo
               remove_logo: Remove logo
               remove_partner: Remove partner
+          posts:
+            description: A list of highlighted news.
           testimonials:
+            description: One or more testimonies
             edit:
               add_testimonial: Add testimonial
               text_label: Text
@@ -279,6 +309,7 @@ en:
               remove_photo: Remove photo
               remove_testimonial: Remove testimonial
           timeline:
+            description: A list of events with their description, on a timeline.
             edit:
               add_event: Add event
               remove_event: Delete event
@@ -287,6 +318,7 @@ en:
               text_label: Text
               text_placeholder: Enter text here
           video:
+            description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
               url_label: Video url
               url_placeholder: Enter video's url
@@ -418,6 +450,7 @@ en:
           files: Files
           gallery: Gallery
           image: Image
+          key_figures: Key figures
           organization_chart: Organization chart
           pages: Pages
           partners: Partners

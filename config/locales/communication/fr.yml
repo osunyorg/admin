@@ -123,6 +123,19 @@ fr:
   admin:
     communication:
       blocks:
+        categories:
+          basic:
+            label: Blocs de base
+            description: Les éléments essentiels pour constituer une page
+          storytelling:
+            label: Blocs narratifs
+            description: Des outils plus sophistiqués pour articuler et mettre en scène des contenus
+          references:
+            label: Blocs de liste
+            description: Des listes d'autres objets, qui mettent en valeur et créent des liens
+          utilities:
+            label: Blocs techniques
+            description: Des fonctionnalités pratiques, purement utilitaires
         components:
           text:
             label: Texte
@@ -144,6 +157,7 @@ fr:
 
         templates:
           call_to_action:
+            description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
             edit:
               button_1: Bouton principal
               button_2: Bouton secondaire
@@ -163,12 +177,16 @@ fr:
               url_label: Lien
               url_placeholder: Entrer le lien ici avec "https://..."
           chapter:
+            description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             edit:
               notes_label: Notes
               notes_placeholder: Entrer les notes
               text_label: Texte
               text_placeholder: Entrer le texte
+          datatable:
+            description: Un tableau de données, aussi responsive et accessible que possible.
           definitions:
+            description: Une liste de termes et leur définition. Un genre de dictionnaires, finalement.
             edit:
               add_definition: Ajouter une définition
               remove_definition: Supprimer la définition
@@ -177,12 +195,14 @@ fr:
               text_label: Texte
               text_placeholder: Entrer la description de la définition
           embed:
+            description: Du code HTML brut, permettant d'intégrer des cartes ou divers composants en iframe.
             edit:
               code_label: Code du bloc d'intégration HTML
               code_placeholder: Entrez ici le code
               transcription_label: Transcription textuelle du contenu
               transcription_placeholder: Entrez ici la transcription
           files:
+            description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
               add_file: Ajouter un fichier
               file_label: Fichier
@@ -190,6 +210,7 @@ fr:
               title_placeholder: Entrer le titre du fichier
               remove_file: Supprimer le fichier
           gallery:
+            description: Une galerie d'images, avec pour chaque image une description accessible, un texte et un crédit.
             layouts:
               grid:
                 label: Grille
@@ -207,7 +228,10 @@ fr:
               text_label: Texte
               text_placeholder: Entrer le texte
               remove_image: Enlever l'image
+          image:
+            description: Une image avec sa description alternative accessible, son texte et son crédit.
           key_figures:
+            description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
               add_key: Add key figure
               unit_label: Unit
@@ -218,6 +242,7 @@ fr:
               description_placeholder: Enter description here
               remove_key: Remove key figure
           organization_chart:
+            description: Un organigramme présentant des personnes et leur fonction.
             edit:
               add_person: Ajouter une personne
               person_label: Personne
@@ -227,6 +252,7 @@ fr:
               drag_title: Glisser-déposer pour organiser les personnes
               delete_title: Enlever la personne
           pages:
+            description: Une mise en avant d'une sélection de pages, avec plusieurs options d'affichage.
             layouts:
               cards:
                 label: Cartes
@@ -258,6 +284,7 @@ fr:
                 pages_descriptions: Afficher les descriptions courtes des pages
                 pages_images: Afficher les images des pages
           partners:
+            description: Une liste de partenaires, avec leur logo, leur site et leur nom.
             edit:
               add_partner: Ajouter un partenaire
               partner_name_label: Partenaire
@@ -267,7 +294,10 @@ fr:
               partner_logo_label: Logo
               remove_logo: Enlever le logo
               remove_partner: Enlever le partenaire
+          posts:
+            description: Une liste d'actualités mises en avant.
           testimonials:
+            description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:
               add_testimonial: Ajouter un témoignage
               text_label: Texte
@@ -280,6 +310,7 @@ fr:
               remove_photo: Enlever la photo
               remove_testimonial: Enlever le témoignage
           timeline:
+            description: Une liste d'événements avec leur description, présentés en frise.
             edit:
               description_label: Description
               description_placeholder: Entrer la description
@@ -290,6 +321,7 @@ fr:
               text_label: Texte
               text_placeholder: Entrer le texte de l'événement
           video:
+            description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
               url_label: Url de la vidéo
               url_placeholder: Entrer l'url de la vidéo
@@ -423,9 +455,9 @@ fr:
           image: Image
           key_figures: Chiffres-clés
           organization_chart: Organigramme
-          pages: Liste de pages
+          pages: Pages
           partners: Partenaires
-          posts: Liste d'actualités
+          posts: Actualités
           testimonials: Témoignages
           timeline: Frise chronologique
           video: Vidéo
