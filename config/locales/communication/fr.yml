@@ -41,7 +41,7 @@ fr:
         template: Type de bloc
       communication/extranet:
         about: Sujet de l'extranet
-        about_: Extranet indépendant (aucun sujet)
+        about_: Extranet indépendant
         about_Education::Program: Extranet d'une formation
         about_Education::School: Extranet d'une école
         about_Research::Journal: Extranet d'une revue scientifique
@@ -51,7 +51,7 @@ fr:
         domain: Domaine
       communication/website:
         about: Sujet du site
-        about_: Site indépendant (aucun sujet)
+        about_: Site indépendant
         about_Education::Program: Site de formation
         about_Education::School: Site d'école
         about_Research::Journal: Site de revue scientifique
