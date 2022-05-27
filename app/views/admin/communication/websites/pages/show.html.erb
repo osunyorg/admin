@@ -39,14 +39,14 @@
           <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
         </div>
         <div class="card-body">
+          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
+          <p><%= t @page.published %></p>
           <% unless @page.slug.blank? %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
             <p><%= @page.slug %></p>
           <% end %>
           <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
           <p><%= @page.path %></p>
-          <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
-          <p><%= t @page.published %></p>
           <% if @page.parent %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('parent') %></h3>
             <p><%= link_to_if can?(:read, @page.parent),

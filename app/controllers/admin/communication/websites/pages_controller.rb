@@ -80,7 +80,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Page.model_name.human(count: 2),
+    add_breadcrumb  t('admin.communication.website.pages.structure'),
                     admin_communication_website_pages_path
     breadcrumb_for @page
   end

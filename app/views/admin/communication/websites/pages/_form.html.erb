@@ -32,6 +32,7 @@
             <h5 class="card-title mb-0"><%= t('metadata') %></h5>
           </div>
           <div class="card-body">
+            <%= f.input :published if page.is_regular_page? %>
             <%= f.input :slug,
                         as: :string,
                         required: true,
@@ -44,7 +45,6 @@
             <% elsif @website.languages.any? %>
               <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
             <% end %>
-            <%= f.input :published if page.is_regular_page? %>
             <%= f.association :parent,
                               collection: collection_tree(@website.pages, page),
                               include_blank: false,
