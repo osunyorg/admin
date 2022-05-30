@@ -302,10 +302,10 @@ ActiveRecord::Schema.define(version: 2022_05_23_172753) do
     t.text "github_path"
     t.string "featured_image_alt"
     t.text "text"
+    t.text "description_short"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
-    t.text "description_short"
     t.string "bodyclass"
     t.uuid "language_id"
     t.text "featured_image_credit"
@@ -502,23 +502,6 @@ ActiveRecord::Schema.define(version: 2022_05_23_172753) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "zipcode"
-    t.string "city"
-    t.string "country"
-    t.string "website"
-    t.string "phone"
-    t.string "mail"
-    t.boolean "active"
-    t.string "sirene"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number_of_lines"
     t.jsonb "processing_errors"
@@ -713,8 +696,8 @@ ActiveRecord::Schema.define(version: 2022_05_23_172753) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
-    t.string "name"
     t.boolean "is_author"
+    t.string "name"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end

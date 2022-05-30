@@ -1,7 +1,5 @@
 .treeview
     &__element
-        .show-on-hover
-            display: none
 
         & > .treeview__children .treeview__empty
             display: none
@@ -24,6 +22,7 @@
                     display: none
 
             & > .move_btn,
+            & > div .show-on-hover,
             & > a .open_text,
             & > a .close_text
                 opacity: 0
@@ -70,8 +69,7 @@
             &:hover
                 & > .treeview__label
                     & > .move_btn,
+                    & > div .show-on-hover,
                     & > a .open_text,
                     & > a .close_text
                         opacity: 1
-                .show-on-hover
-                    display: inline
