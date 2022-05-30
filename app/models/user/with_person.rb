@@ -14,7 +14,7 @@ module User::WithPerson
       person.first_name = first_name
       person.last_name = last_name
       person.slug = person.to_s.parameterize
-      person.phone = mobile_phone
+      person.phone_mobile = mobile_phone
     end
     person.user = self
     person.save

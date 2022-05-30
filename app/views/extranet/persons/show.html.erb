@@ -62,11 +62,11 @@
         <dt><%= cohort.program %></dt>
         <dd><%= link_to cohort.academic_year, cohort %></dd>
       <% end %>
-      <% if @person.phone.present? %>
-        <dt><%= University::Person.human_attribute_name(:phone) %></dt>
+      <% if @person.phone_mobile.present? %>
+        <dt><%= University::Person.human_attribute_name(:phone_mobile) %></dt>
         <dd>
-          <a href="tel:<%= @person.phone %>" target="_blank" rel="noreferrer">
-            <%= @person.phone %>
+          <a href="tel:<%= @person.phone_mobile %>" target="_blank" rel="noreferrer">
+            <%= @person.phone_mobile %>
           </a>
         </dd>
       <% end %>
