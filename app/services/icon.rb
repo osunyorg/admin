@@ -1,6 +1,8 @@
 class Icon
   COMMUNICATION_EXTRANET = 'project-diagram'
   COMMUNICATION_WEBSITE = 'sitemap'
+  COMMUNICATION_WEBSITE_POST = 'newspaper'
+  COMMUNICATION_WEBSITE_PAGE = 'file'
 
   EDUCATION_DIPLOMA = 'graduation-cap'
   EDUCATION_PROGRAM = 'chalkboard-teacher'
