@@ -8,7 +8,7 @@
       <%= t('university.alumni.experiences.import_hint_html') %>
     </p>
     <%= simple_form_for @import,
-                        url: admin_university_alumni_cohorts_imports_path do |f| %>
+                        url: admin_university_alumni_experiences_imports_path do |f| %>
 
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -28,14 +28,6 @@
     <table class="table table-small">
       <tbody>
         <tr>
-          <th>program*</th>
-          <td>c6b78fac-0a5f-4c44-ad22-4ee68ed382bb</td>
-        </tr>
-        <tr>
-          <th>year*</th>
-          <td>2022</td>
-        </tr>
-        <tr>
           <th>first_name*</th>
           <td>Stéphane</td>
         </tr>
@@ -53,7 +45,7 @@
         </tr>
         <tr>
           <th>mail</th>
-          <td>jean.dupont@gmail.com</td>
+          <td>stephane.dupond@gmail.com</td>
         </tr>
         <tr>
           <th>photo</th>

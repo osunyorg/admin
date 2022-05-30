@@ -15,11 +15,8 @@ module Importers
       @university = university
       @hash = hash
       @error = nil
-      extract_variables
-      if valid?
-        person.save
-        # manage picture
-      end
+      extract_person_variables
+      person.save if valid?
     end
 
     def valid?
@@ -35,73 +32,31 @@ module Importers
       @error
     end
 
-    def organization_name
-      @organization_name ||= @hash[0].to_s.strip
-    end
-
-    def program
-      @program ||= @hash[0].to_s.strip
-    end
-
-    protected
-
-    def extract_variables
-      @program_id = @hash[0].to_s.strip
-      @year = @hash[1].to_s.strip
-      @first_name = @hash[2].to_s.strip
-      @last_name = @hash[3].to_s.strip
-      @gender = @hash[4].to_s.strip
-      @birth = @hash[5].to_s.strip
-      @email = @hash[6].to_s.strip
-      @photo = @hash[7].to_s.strip
-      @url = @hash[8].to_s.strip
-      @phone_professional = @hash[9].to_s.strip
-      @phone_personal = @hash[10].to_s.strip
-      @mobile = @hash[11].to_s.strip
-      @address = @hash[12].to_s.strip
-      @zipcode = @hash[13].to_s.strip
-      @city = @hash[14].to_s.strip
-      @country = @hash[15].to_s.strip
-      @biography = @hash[16].to_s.strip
-      @social_twitter = @hash[17].to_s.strip
-      @social_linkedin = @hash[18].to_s.strip
-      @company_name = @hash[19].to_s.strip
-      @company_siren = @hash[20].to_s.strip
-      @company_nic = @hash[21].to_s.strip
-      @experience_job = @hash[22].to_s.strip
-      @experience_from = @hash[23].to_s.strip
-      @experience_to = @hash[24].to_s.strip
-    end
-
-    def country_not_found?
-      ISO3166::Country[@country].nil?
-    end
-
     def person
-      # TODO: add missing properties
+      # TODO: photo
       @person ||= begin
         if @email.present?
-          person = university.people
+          person = @university.people
                              .where(email: @email)
                              .first_or_initialize
         elsif @first_name.present? && @last_name.present?
-          person = university.people
+          person = @university.people
                              .where(first_name: @first_name, last_name: @last_name)
                              .first_or_initialize
         end
         person.first_name = @first_name
         person.last_name = @last_name
-        # person.gender = @gender
-        # person.birth = @birth
-        person.email = @mail
+        person.gender = gender
+        person.birthdate = @birth
+        person.email = @email
         person.url = @url
-        # person.phone_professional = @phone_professional
-        # person.phone_personal = @phone_personal
-        person.phone = @mobile
-        # person.address = @address
-        # person.zipcode = @zipcode
-        # person.city = @city
-        # person.country = @country
+        person.phone_professional = @phone_professional
+        person.phone_personal = @phone_personal
+        person.phone_mobile = @mobile
+        person.address = @address
+        person.zipcode = @zipcode
+        person.city = @city
+        person.country = @country
         person.biography = @biography
         person.twitter = @social_twitter
         person.linkedin = @social_linkedin
@@ -111,23 +66,43 @@ module Importers
       end
     end
 
-    def organization
-      unless @organization
-        @organization = University::Organization.where(university_id: @university.id, name: organization_name).first_or_initialize
-        @organization.long_name = @long_name
-        @organization.kind = @kind.to_sym
-        @organization.siren = @siren
-        @organization.nic = @nic
-        @organization.description = @description
-        @organization.address = @address
-        @organization.zipcode = @zipcode
-        @organization.city = @city
-        @organization.country = @country
-        @organization.email = @email
-        @organization.phone = @phone
-        @organization.url = @url
+    protected
+
+    def extract_person_variables
+      @first_name = @hash[0].to_s.strip
+      @last_name = @hash[1].to_s.strip
+      @gender = @hash[2].to_s.strip
+      @birth = @hash[3].to_s.strip
+      @email = @hash[4].to_s.strip
+      @photo = @hash[5].to_s.strip
+      @url = @hash[6].to_s.strip
+      @phone_professional = @hash[7].to_s.strip
+      @phone_personal = @hash[8].to_s.strip
+      @mobile = @hash[9].to_s.strip
+      @address = @hash[10].to_s.strip
+      @zipcode = @hash[11].to_s.strip
+      @city = @hash[12].to_s.strip
+      @country = @hash[13].to_s.strip
+      @biography = @hash[14].to_s.strip
+      @social_twitter = @hash[15].to_s.strip
+      @social_linkedin = @hash[16].to_s.strip
+    end
+
+    def country_not_found?
+      ISO3166::Country[@country].nil?
+    end
+
+    def gender
+      case @gender
+        when 'm'
+          :male
+        when 'f'
+          :female
+        when 'n'
+          :non_binary
+        else
+          nil
       end
-      @organization
     end
 
   end
