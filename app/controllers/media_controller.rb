@@ -1,4 +1,6 @@
 class MediaController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def show
     @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
     @size = @blob.byte_size
