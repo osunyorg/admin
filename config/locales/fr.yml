@@ -80,6 +80,9 @@ fr:
   cookies_policy: Politique de cookies
   cookies_policy_url: https://osuny.org/politique-de-cookies
   create: Créer
+  date:
+    formats:
+      birthday: "%d %B"
   delete: Supprimer
   devise:
     failure:

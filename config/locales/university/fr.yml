@@ -23,16 +23,25 @@ fr:
         zipcode: Code postal
       university/person:
         abilities: Responsabilités
+        address: Adresse
         administration: Personnel administratif
         alumnus: Alumnus
         author: Auteur·rice
         biography: Biographie
+        birthdate: Anniversaire
+        city: Ville
         communication_website_posts: Actualités
+        country: Pays
         description: Meta Description
         description_short: Description courte
         education_programs: Formations
         email: Email
         first_name: Prénom
+        gender: Genre
+        genders:
+          female: Féminin
+          male: Masculin
+          non_binary: Non binaire
         habilitation: Peut diriger des recherches ?
         is_administration: Personnel administratif
         is_alumnus: Alumnus
@@ -42,7 +51,9 @@ fr:
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
         name: Nom
-        phone: Téléphone
+        phone_mobile: Téléphone mobile
+        phone_personal: Téléphone personnel
+        phone_professional: Téléphone professionnel
         picture: Photo de profil
         research_journal_articles: Articles
         researcher: Chercheur·se
@@ -54,6 +65,7 @@ fr:
         twitter: Twitter (nom d'utilisateur)
         url: Site web
         user: Utilisateur
+        zipcode: Code postal
       university/person/experience:
         from_year: Année de début
         to_year: Année de fin

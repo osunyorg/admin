@@ -23,16 +23,25 @@ en:
         zipcode: Zipcode
       university/person:
         abilities: Abilities
+        address: Address
         administration: Administrative staff
         alumnus: Alumnus
         author: Author
         biography: Biography
+        birthdate: Birthdate
+        city: City
+        country: Country
         communication_website_posts: Posts
         description: Meta Description
         description_short: Short description
         education_programs: Programs
         email: Email
         first_name: First name
+        gender: Gender
+        genders:
+          female: Female
+          male: Male
+          non_binary: Non binary
         habilitation: Can direct research?
         is_administration: Administrative staff
         is_alumnus: Alumnus
@@ -42,7 +51,9 @@ en:
         last_name: Last name
         linkedin: LinkedIn URL
         name: Name
-        phone: Phone
+        phone_mobile: Mobile phone
+        phone_personal: Personal phone
+        phone_professional: Professional phone
         picture: Profile picture
         research_journal_articles: Articles
         researcher: Researcher
@@ -54,6 +65,7 @@ en:
         twitter: Twitter username
         url: Website
         user: User
+        zipcode: Zipcode
       university/person/experience:
         from_year: Start year
         to_year: End year

@@ -11,6 +11,14 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
+              <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :birthdate, discard_year: true, include_blank: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
               <%= f.input :first_name %>
             </div>
             <div class="col-md-6">
@@ -22,9 +30,34 @@
               <%= f.input :email %>
             </div>
             <div class="col-md-6">
-              <%= f.input :phone %>
+              <%= f.input :phone_mobile %>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :phone_professional %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :phone_personal %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :address %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :zipcode %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :city %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :country, input_html: { class: 'form-select' } %>
+            </div>
+          </div>
+
           <%= f.input :description_short %>
           <%= f.input :biography, as: :summernote %>
         </div>

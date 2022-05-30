@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_23_172753) do
+ActiveRecord::Schema.define(version: 2022_05_30_094714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -685,7 +685,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_172753) do
     t.boolean "is_administration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "phone"
+    t.string "phone_mobile"
     t.string "email"
     t.text "description"
     t.boolean "habilitation", default: false
@@ -698,6 +698,14 @@ ActiveRecord::Schema.define(version: 2022_05_23_172753) do
     t.text "description_short"
     t.boolean "is_author"
     t.string "name"
+    t.integer "gender"
+    t.date "birthdate"
+    t.string "phone_professional"
+    t.string "phone_personal"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
