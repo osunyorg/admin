@@ -150,14 +150,21 @@ fr:
           government: Structure gouvernementale
   university:
     alumni:
-      import_hint_html: "Les valeurs pour gender peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs phone_professional, phone_personal, mobile et zipcode doivent être au format texte, pas nombre.<br>Le champ pays doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ social_twitter ne doit pas contenir d'@."
+      cohorts:
+        import_btn: Importer des promotions
+        import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
+        title: Imports de promotions
+      experiences:
+        import_btn: Importer des expériences
+        import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
+        title: Imports d'expériences
     internal_key: Clé interne
     invoice_informations: Données de facturation
     manage_alumni: Gérer les alumni
     manage_cohorts: Gérer les promotions
     manage_experiences: Gérer les expériences professionnelles
     organization:
-      import_hint_html: "Les valeurs possibles pour kind sont : company, non_profit, government.<br>Les champs siren, nic, zipcode et phone doivent être au format texte, pas nombre.<br>Le champ pays doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
+      import_hint_html: "Les valeurs possibles pour <i>kind</i> sont : company, non_profit, government.<br>Les champs <i>siren</i>, <i>nic</i>, <i>zipcode</i> et <i>phone</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
     person:
       administrator_roles: Rôles administratifs
       experience:

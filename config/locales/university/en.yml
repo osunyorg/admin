@@ -150,14 +150,21 @@ en:
           government: Government
   university:
     alumni:
-      import_hint_html: "Possible values for gender are: m (male), f (female) and n (non binary).<br>Phone_professional, phone_personal, mobile and zipcode fields must have a text format, not numbers.<br>Country field must contain the ISO 3166 code of the country, so to upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)<br>Social_twitter field should have no @."
+      cohorts:
+        import_btn: Import cohorts
+        import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>Program</i> field should contain the internal program id."
+        title: Cohorts imports
+      experiences:
+        import_btn: Import experiences
+        import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
+        title: Experiences imports
     internal_key: Internal Key
     invoice_informations: Invoice informations
     manage_alumni: Manage alumni
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
     organisation:
-      import_hint_html: "Possible values for kind are: company, non_profit, government.<br>Siren, nic, zipcode and phone fields must have a text format, not numbers.<br>Country field must contain the ISO 3166 code of the country, so to upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)"
+      import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
     person:
       administrator_roles: Administrator roles
       experience:

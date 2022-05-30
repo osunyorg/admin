@@ -1,5 +1,5 @@
 module Filters
-  class Admin::University::Alumni::Imports < Filters::Base
+  class Admin::University::Alumni::Cohorts::Imports < Filters::Base
     def initialize(user)
       super
       add :for_status,

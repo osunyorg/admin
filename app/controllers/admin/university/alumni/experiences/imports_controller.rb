@@ -1,4 +1,4 @@
-class Admin::University::Alumni::ImportsController < Admin::University::ApplicationController
+class Admin::University::Alumni::Experiences::ImportsController < Admin::University::ApplicationController
   load_and_authorize_resource class: Import,
                               through: :current_university,
                               through_association: :imports
@@ -6,7 +6,7 @@ class Admin::University::Alumni::ImportsController < Admin::University::Applicat
   has_scope :for_status
 
   def index
-    @imports = apply_scopes(@imports.kind_alumni).ordered.page(params[:page])
+    @imports = apply_scopes(@imports.kind_alumni_experiences).ordered.page(params[:page])
     breadcrumb
   end
 
@@ -20,11 +20,11 @@ class Admin::University::Alumni::ImportsController < Admin::University::Applicat
   end
 
   def create
-    @import.kind = :alumni
+    @import.kind = :alumni_experiences
     @import.university = current_university
     @import.user = current_user
     if @import.save
-      redirect_to admin_university_alumni_import_path(@import),
+      redirect_to admin_university_alumni_experiences_import_path(@import),
                   notice: t('admin.successfully_created_html', model: @import.to_s)
     else
       breadcrumb
@@ -38,10 +38,10 @@ class Admin::University::Alumni::ImportsController < Admin::University::Applicat
     super
     add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
                     admin_university_alumni_path
-    add_breadcrumb  Import.model_name.human(count: 2),
-                    admin_university_alumni_imports_path
+    add_breadcrumb  t('university.alumni.experiences.title'),
+                    admin_university_alumni_experiences_imports_path
     return unless @import
-    @import.persisted?  ? add_breadcrumb(@import, admin_university_alumni_import_path(@import))
+    @import.persisted?  ? add_breadcrumb(@import, admin_university_alumni_experiences_import_path(@import))
                         : add_breadcrumb(t('create'))
   end
 

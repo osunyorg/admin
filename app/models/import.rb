@@ -29,7 +29,7 @@ class Import < ApplicationRecord
   has_one_attached_deletable :file
 
 
-  enum kind: { organizations: 0, alumni: 1 }, _prefix: :kind
+  enum kind: { organizations: 0, alumni_cohorts: 1, alumni_experiences: 2 }, _prefix: :kind
   enum status: { pending: 0, finished: 1, finished_with_errors: 2 }
 
   validate :file_validation
@@ -57,9 +57,7 @@ class Import < ApplicationRecord
   end
 
   def url_pattern
-    kind_alumni? ?
-      'admin_university_alumni_import_url' :
-      'admin_university_organizations_import_url'
+    "admin_university_#{kind}_import_url"
   end
 
   private

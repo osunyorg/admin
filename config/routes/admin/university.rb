@@ -4,7 +4,12 @@ namespace :university do
     resources :imports, only: [:index, :show, :new, :create]
   end
   namespace :alumni do
-    resources :imports, only: [:index, :show, :new, :create]
+    namespace :cohorts do
+      resources :imports, only: [:index, :show, :new, :create]
+    end
+    namespace :experiences do
+      resources :imports, only: [:index, :show, :new, :create]
+    end
   end
   resources :alumni, only: [:index, :show] do
     member do
