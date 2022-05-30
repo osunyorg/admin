@@ -79,15 +79,15 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def self.icon_for(kind)
     icons = {
-      'administrators' => 'user',
-      'authors' => 'user',
+      'administrators' => Icon::UNIVERSITY_PERSON_ADMINISTRATORS,
+      'authors' => Icon::UNIVERSITY_PERSON,
       'blank' => 'font',
       'diploma' => Icon::EDUCATION_DIPLOMA,
       'diplomas' => Icon::EDUCATION_DIPLOMA,
-      'posts' => 'newspaper',
-      'post' => 'newspaper',
-      'category' => 'newspaper',
-      'page' => 'file',
+      'posts' => Icon::COMMUNICATION_WEBSITE_POST,
+      'post' => Icon::COMMUNICATION_WEBSITE_POST,
+      'category' => Icon::COMMUNICATION_WEBSITE_POST,
+      'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
       'program' => Icon::EDUCATION_PROGRAM,
       'programs' => Icon::EDUCATION_PROGRAM,
       'article' => Icon::RESEARCH_LABORATORY,
@@ -96,7 +96,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'volume' => Icon::RESEARCH_LABORATORY,
       'researchers' => Icon::RESEARCH_RESEARCHER,
       'organizations' => Icon::UNIVERSITY_ORGANIZATION,
-      'persons' => 'user',
+      'persons' => Icon::UNIVERSITY_PERSON,
       'teachers' => Icon::EDUCATION_TEACHER,
       'url' => 'globe',
     }

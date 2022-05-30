@@ -1,3 +1,4 @@
+# used in menu items and in admin navigation
 class Icon
   COMMUNICATION_EXTRANET = 'project-diagram'
   COMMUNICATION_WEBSITE = 'sitemap'
@@ -15,6 +16,7 @@ class Icon
   RESEARCH_THESE = 'scroll'
 
   UNIVERSITY_ORGANIZATION = 'building'
-  UNIVERSITY_PERSON = 'users-cog'
-  UNIVERSITY_PERSON_ALUMNUS = 'users'
+  UNIVERSITY_PERSON = 'users'
+  UNIVERSITY_PERSON_ADMINISTRATORS = 'users-cog'
+  UNIVERSITY_PERSON_ALUMNUS = 'user-graduate'
 end
