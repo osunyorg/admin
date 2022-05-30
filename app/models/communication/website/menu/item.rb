@@ -57,19 +57,19 @@ class Communication::Website::Menu::Item < ApplicationRecord
     program: 31,
     diplomas: 32,
     diploma: 33,
-    news: 40,
-    news_category: 41,
-    news_article: 42,
+    posts: 40,
+    category: 41,
+    post: 42,
     organizations: 45,
-    staff: 50,
+    persons: 50,
     administrators: 51,
     authors: 52,
     researchers: 53,
     teachers: 54,
-    research_volumes: 60,
-    research_volume: 61,
-    research_articles: 62,
-    research_article: 63
+    volumes: 60,
+    volume: 61,
+    articles: 62,
+    article: 63
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -84,19 +84,19 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'blank' => 'font',
       'diploma' => Icon::EDUCATION_DIPLOMA,
       'diplomas' => Icon::EDUCATION_DIPLOMA,
-      'news' => 'newspaper',
-      'news_article' => 'newspaper',
-      'news_category' => 'newspaper',
+      'posts' => 'newspaper',
+      'post' => 'newspaper',
+      'category' => 'newspaper',
       'page' => 'file',
       'program' => Icon::EDUCATION_PROGRAM,
       'programs' => Icon::EDUCATION_PROGRAM,
-      'research_article' => Icon::RESEARCH_LABORATORY,
-      'research_articles' => Icon::RESEARCH_LABORATORY,
-      'research_volumes' => Icon::RESEARCH_LABORATORY,
-      'research_volume' => Icon::RESEARCH_LABORATORY,
+      'article' => Icon::RESEARCH_LABORATORY,
+      'articles' => Icon::RESEARCH_LABORATORY,
+      'volumes' => Icon::RESEARCH_LABORATORY,
+      'volume' => Icon::RESEARCH_LABORATORY,
       'researchers' => Icon::RESEARCH_RESEARCHER,
       'organizations' => Icon::UNIVERSITY_ORGANIZATION,
-      'staff' => 'user',
+      'persons' => 'user',
       'teachers' => Icon::EDUCATION_TEACHER,
       'url' => 'globe',
     }
@@ -144,10 +144,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
     kind_page? ||
     kind_diploma? ||
     kind_program? ||
-    kind_news_category? ||
-    kind_news_article? ||
-    kind_research_volume? ||
-    kind_research_article?
+    kind_category? ||
+    kind_post? ||
+    kind_volume? ||
+    kind_article?
   end
 
   def sync_menu

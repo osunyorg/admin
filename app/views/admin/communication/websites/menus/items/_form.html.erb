@@ -26,13 +26,13 @@
                   about_collection = collection @website.education_diplomas
                 elsif item.kind_program?
                   about_collection = collection_tree @website.education_programs
-                elsif item.kind_news_category?
+                elsif item.kind_category?
                   about_collection = collection_tree @website.categories
-                elsif item.kind_news_article?
+                elsif item.kind_post?
                   about_collection = collection @website.posts
-                elsif item.kind_research_volume?
+                elsif item.kind_volume?
                   about_collection = collection @website.research_volumes
-                elsif item.kind_research_article?
+                elsif item.kind_article?
                   about_collection = collection @website.research_articles
                 end
               else

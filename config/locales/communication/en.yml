@@ -467,19 +467,19 @@ en:
               blank: Title
               diploma: Specific diploma
               diplomas: Diplomas index
-              news: News index
-              news_article: Specific news
-              news_category: News category
+              posts: News index
+              post: Specific news
+              category: News category
               organizations: Third parties index
               page: Specific Page
               program: Specific program
               programs: Programs index
-              research_article: Specific research article
-              research_articles: Research articles index
-              research_volume: Specific research volume
-              research_volumes: Research volumes index
+              article: Specific research article
+              articles: Research articles index
+              volume: Specific research volume
+              volumes: Research volumes index
               researchers: Research staff
-              staff: Staff
+              persons: Staff
               teachers: Educational staff
               url: URL
   simple_form:
