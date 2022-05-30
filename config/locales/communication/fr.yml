@@ -470,19 +470,19 @@ fr:
               blank: Titre intermédiaire
               diploma: Diplôme spécifique
               diplomas: Liste des diplômes
-              news: Liste des actualités
-              news_article: Actualité spécifique
-              news_category: Catégorie d'actualités
+              posts: Liste des actualités
+              post: Actualité spécifique
+              category: Catégorie d'actualités
               organizations: Liste des tierces parties
               page: Page spécifique
               program: Formation spécifique
               programs: Liste des formations
-              research_article: Article spécifique
-              research_articles: Liste des articles
-              research_volume: Volume spécifique
-              research_volumes: Liste des volumes
+              article: Article spécifique
+              articles: Liste des articles
+              volume: Volume spécifique
+              volumes: Liste des volumes
               researchers: Équipe de recherche
-              staff: Équipe
+              persons: Équipe
               teachers: Équipe pédagogique
               url: URL
   simple_form:

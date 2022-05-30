@@ -36,15 +36,15 @@ module Communication::Website::WithMenuItems
     has_education_diplomas?
   end
 
-  def menu_item_kind_news?
+  def menu_item_kind_posts?
     has_communication_posts?
   end
 
-  def menu_item_kind_news_category?
+  def menu_item_kind_category?
     has_communication_categories?
   end
 
-  def menu_item_kind_news_article?
+  def menu_item_kind_post?
     has_communication_posts?
   end
 
@@ -52,7 +52,7 @@ module Communication::Website::WithMenuItems
     has_organizations?
   end
 
-  def menu_item_kind_staff?
+  def menu_item_kind_persons?
     has_persons?
   end
 
@@ -72,19 +72,19 @@ module Communication::Website::WithMenuItems
     has_teachers?
   end
 
-  def menu_item_kind_research_volumes?
+  def menu_item_kind_volumes?
     has_research_volumes?
   end
 
-  def menu_item_kind_research_volume?
+  def menu_item_kind_volume?
     has_research_volumes?
   end
 
-  def menu_item_kind_research_articles?
+  def menu_item_kind_articles?
     has_research_articles?
   end
 
-  def menu_item_kind_research_article?
+  def menu_item_kind_article?
     has_research_articles?
   end
 end
