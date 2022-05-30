@@ -38,7 +38,6 @@ module ApplicationHelper
 
   def social_twitter_to_s(string)
     string.gsub('http://', 'https://')
-          .gsub('twitter.com', 'https://twitter.com')
           .gsub('https://www.twitter.com/', 'https://twitter.com/')
           .gsub('https://twitter.com/', '')
   end

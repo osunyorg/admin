@@ -19,14 +19,14 @@ module Education::School::WithAlumni
                   source: :organization
                   alias_attribute :university_person_alumni_organizations, :alumni_organizations
 
-      has_many    :cohorts, -> { distinct },
+      has_many    :education_cohorts, -> { distinct },
                   class_name: 'Education::Cohort',
                   through: :programs
-                  alias_attribute :education_cohorts, :cohorts
-                  
+                  alias_attribute :cohorts, :education_cohorts
+
       has_many    :academic_years, -> { distinct },
                   class_name: 'Education::AcademicYear',
-                  through: :cohorts,
+                  through: :education_cohorts,
                   source: :academic_year
                   alias_attribute :education_academic_years, :academic_years
 

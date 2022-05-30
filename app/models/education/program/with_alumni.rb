@@ -2,12 +2,12 @@ module Education::Program::WithAlumni
   extend ActiveSupport::Concern
 
   included do
-    has_many   :cohorts,
+    has_many   :education_cohorts,
                class_name: 'Education::Cohort'
-               alias_attribute :education_cohorts, :cohorts
+               alias_attribute :cohorts, :education_cohorts
 
     has_many   :alumni,
-               through: :cohorts,
+               through: :education_cohorts,
                source: :people
                alias_attribute :university_person_alumni, :alumni
 
@@ -41,7 +41,8 @@ module Education::Program::WithAlumni
     #            alias_attribute :education_academic_years, :academic_years
 
     def academic_years
-      Education::AcademicYear.where(id: cohorts.pluck(:academic_year_id))
+      Education::AcademicYear.where(id: education_cohorts.pluck(:academic_year_id))
     end
+    alias :education_academic_years :academic_years
   end
 end
