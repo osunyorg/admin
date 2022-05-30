@@ -16,7 +16,10 @@ module Importers
       @hash = hash
       @error = nil
       extract_person_variables
-      person.save if valid?
+      if valid?
+        person.save
+        add_picture_if_possible!(person)
+      end
     end
 
     def valid?
@@ -33,7 +36,6 @@ module Importers
     end
 
     def person
-      # TODO: photo
       @person ||= begin
         if @email.present?
           person = @university.people
@@ -102,6 +104,18 @@ module Importers
           :non_binary
         else
           nil
+      end
+    end
+
+    def add_picture_if_possible!(person)
+      return if @photo.nil?
+      return if @person.picture.attached?
+      return unless @photo.end_with?('.jpg') || @photo.end_with?('.png')
+      begin
+        file = URI.open @photo
+        filename = File.basename @photo
+        person.picture.attach(io: file, filename: filename)
+      rescue
       end
     end
 
