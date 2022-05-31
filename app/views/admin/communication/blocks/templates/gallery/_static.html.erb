@@ -1,3 +1,4 @@
+      layout: <%= block.template.layout %>
       images:
 <% block.template.images_with_alt.each do |image| %>
         - id: "<%= image.blob.id %>"
