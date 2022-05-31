@@ -8,6 +8,10 @@ class Communication::Block::Template::Gallery < Communication::Block::Template
     add_dependency active_storage_blobs
   end
 
+  def layout
+    data['layout'] || 'grid'
+  end
+
   def images_with_alt
     @images_with_alt ||= elements.map { |element|
       extract_image_alt_and_credit element, 'file'
