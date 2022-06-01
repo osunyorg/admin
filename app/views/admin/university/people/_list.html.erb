@@ -5,6 +5,7 @@
       <th><%= University::Person.human_attribute_name('first_name') %></th>
       <th><%= University::Person.human_attribute_name('roles') %></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,10 @@
               <%= t "activerecord.attributes.university/person.#{role}" %>
             </span>
           <% end %>
+        </td>
+        <td class="p-0">
+          <%= kamifusen_tag person.best_picture,
+                            width: 40 if person.best_picture.attached? %>
         </td>
         <td class="text-end">
           <div class="btn-group" role="group">

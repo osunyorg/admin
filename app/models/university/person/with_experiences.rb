@@ -10,7 +10,8 @@ module University::Person::WithExperiences
                                   reject_if: :all_blank,
                                   allow_destroy: true
 
-    validates_associated :experiences
+    # PA FIXME
+    # validates_associated :experiences
 
     scope :for_alumni_organization, -> (organization_id) {
       left_joins(:experiences)
@@ -18,7 +19,7 @@ module University::Person::WithExperiences
         .select("university_people.*")
         .distinct
     }
-  
+
   end
 
 end
