@@ -11,7 +11,7 @@
         <div class="card-body">
           <%= f.input :title %>
           <%= f.input :description_short %>
-          <%= f.input :text, as: :summernote %>
+          <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
         </div>
       </div>
       <div class="row">

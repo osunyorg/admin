@@ -44,6 +44,7 @@
           </div>
         <% end %>
       </div>
+      <%= render 'admin/communication/blocks/list', about: @post %>
     </div>
     <div class="col-md-4">
       <div class="card flex-fill w-100">
@@ -88,6 +89,9 @@
 
 <% content_for :preview do %>
   <%= @post.text.to_s %>
+  <% @post.blocks.ordered.each do |block| %>
+    <%= render 'admin/communication/blocks/preview', block: block %>
+  <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>

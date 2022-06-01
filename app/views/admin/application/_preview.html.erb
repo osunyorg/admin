@@ -1,8 +1,9 @@
 <div class="offcanvas offcanvas-start preview" tabindex="-1" id="preview" aria-labelledby="offcanvasRightLabel" aria-modal="true" role="dialog">
   <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel"><%= t 'preview.title' %></h5>
+    <h5 id="offcanvasRightLabel" class="pt-2"><%= t 'preview.title' %></h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+  <hr class="m-0">
   <div class="offcanvas-body">
     <%= yield :preview %>
   </div>

@@ -40,6 +40,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithGit
   include WithFeaturedImage
   include WithBlobs
+  include WithBlocks
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
 

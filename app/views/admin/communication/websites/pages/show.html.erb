@@ -19,8 +19,12 @@
           <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
         </div>
         <div class="card-body">
-          <%= render 'admin/application/property/text', object: @page, property: :description_short %>
-          <%= render 'admin/application/property/text', object: @page, property: :text if @page.text&.to_plain_text.present? %>
+          <%= render 'admin/application/property/text',
+                      object: @page,
+                      property: :description_short %>
+          <%= render 'admin/application/property/text',
+                      object: @page,
+                      property: :text if @page.text&.to_plain_text.present? %>
         </div>
       </div>
       <%= render 'admin/communication/blocks/list', about: @page %>
