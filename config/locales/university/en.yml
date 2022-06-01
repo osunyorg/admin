@@ -30,12 +30,14 @@ en:
         biography: Biography
         birthdate: Birthdate
         city: City
-        country: Country
         communication_website_posts: Posts
+        contacts: Contact information
+        country: Country
         description: Meta Description
         description_short: Short description
         education_programs: Programs
         email: Email
+        essentials: Essentials
         first_name: First name
         gender: Gender
         genders:

@@ -31,11 +31,13 @@ fr:
         birthdate: Anniversaire
         city: Ville
         communication_website_posts: Actualités
+        contacts: Coordonnées
         country: Pays
         description: Meta Description
         description_short: Description courte
         education_programs: Formations
         email: Email
+        essentials: Informations essentielles
         first_name: Prénom
         gender: Genre
         genders:

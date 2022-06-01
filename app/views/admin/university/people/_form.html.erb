@@ -6,17 +6,11 @@
     <div class="col-md-8">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
+          <h5 class="card-title mb-0">
+            <%= University::Person.human_attribute_name('essentials') %>
+          </h5>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :birthdate, discard_year: true, include_blank: true %>
-            </div>
-          </div>
           <div class="row">
             <div class="col-md-6">
               <%= f.input :first_name %>
@@ -25,6 +19,26 @@
               <%= f.input :last_name %>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :birthdate, discard_year: true, include_blank: true %>
+            </div>
+          </div>
+          <%= f.input :description_short %>
+          <%= f.input :biography, as: :summernote %>
+        </div>
+      </div>
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <%= University::Person.human_attribute_name('contacts') %>
+          </h5>
+        </div>
+        <div class="card-body">
+
           <div class="row">
             <div class="col-md-6">
               <%= f.input :email %>
@@ -57,14 +71,13 @@
               <%= f.input :country, input_html: { class: 'form-select' } %>
             </div>
           </div>
-
-          <%= f.input :description_short %>
-          <%= f.input :biography, as: :summernote %>
         </div>
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('socials') %></h5>
+          <h5 class="card-title mb-0">
+            <%= University::Person.human_attribute_name('socials') %>
+          </h5>
         </div>
         <div class="card-body">
           <%= f.input :url %>
