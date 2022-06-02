@@ -28,34 +28,47 @@ class Communication::Block::Template::Base
   def self.has_field(property, kind)
     self.fields ||= []
     self.fields << { name: property, type: kind }
-    sanitizers = {
-      string: 'string',
-      text: 'text',
-      rich_text: 'text'
-    }
-    sanitizer_type = sanitizers[kind]
     class_eval <<-CODE, __FILE__, __LINE__ + 1
+
+      def #{property}_component
+        @#{property}_component ||= Communication::Block::Component::#{kind.to_s.classify}.new(:#{property}, self)
+      end
+
       def #{property}
-        Communication::Block::Component::#{kind.classify}.new(property, self).data
+        #{property}_component.data
       end
 
       def #{property}=(value)
-        Communication::Block::Component::#{kind.classify}.new(property, self).data = value
+        #{property}_component.data = value
       end
+
     CODE
   end
 
   def initialize(block)
     @block = block
-    @fields = []
   end
 
   def data=(value)
-    json = JSON.parse value
-    self.class.fields.each do |field|
-      update_field field, json
+    if value.is_a? String
+      json = JSON.parse(value)
+    elsif value.is_a? Hash
+      json = value
+    else
+      json = default_data
     end
-    true
+    components.each do |component|
+      next unless json.has_key? component.property
+      component.data = json[component.property]
+    end
+  end
+
+  def data
+    hash = default_data
+    components.each do |component|
+      hash[component.property] = component.data
+    end
+    hash
   end
 
   def git_dependencies
@@ -75,14 +88,8 @@ class Communication::Block::Template::Base
 
   def default_data
     {
-      'elements': []
+      'elements' => []
     }
-  end
-
-  def update_field(field, json)
-    name = field[:name]
-    value = json["#{name}"]
-    public_send "#{name}=", value
   end
 
   def build_git_dependencies
@@ -116,13 +123,10 @@ class Communication::Block::Template::Base
     }.to_dot
   end
 
-  def data
-    block.data
-  end
-
-  def elements
-    data.has_key?('elements') ? data['elements']
-                              : []
+  def components
+    self.class.fields.map do |field|
+      send "#{field[:name]}_component"
+    end
   end
 
   def university

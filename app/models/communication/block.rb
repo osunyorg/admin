@@ -26,6 +26,8 @@ class Communication::Block < ApplicationRecord
   include WithUniversity
   include WithPosition
 
+  store_accessor :data
+
   belongs_to :about, polymorphic: true
 
   # Used to purge images when unattaching them
@@ -62,11 +64,13 @@ class Communication::Block < ApplicationRecord
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
-    attributes['data'] = template.parse(value).to_h
+    template.data = value
+    self.attributes['data'] = template.data
   end
 
   def data
-    template.to_h
+    template.data = self.attributes['data']
+    template.data
   end
 
   def git_dependencies

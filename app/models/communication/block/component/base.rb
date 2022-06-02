@@ -7,14 +7,10 @@ class Communication::Block::Component::Base
   end
 
   def data
-    data[property]
+    @data
   end
 
   def data=(value)
-    data[property] = value
-  end
-
-  def data
-    template.data
+    @data = Osuny::Sanitizer.sanitize value, 'string'
   end
 end
