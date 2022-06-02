@@ -1,11 +1,7 @@
 class Communication::Block::Template::Page < Communication::Block::Template
   has_rich_text :text
 
-  LAYOUTS = [
-    :grid,
-    :list,
-    :cards
-  ]
+  LAYOUTS = [:grid, :list, :cards].freeze
 
   def build_git_dependencies
     add_dependency main_page

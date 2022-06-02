@@ -1,11 +1,14 @@
 <%
 horizontal ||= false
+template = @block.template
+template_kind = @block.template_kind
+layouts = template.class::LAYOUTS
 %>
 <% if horizontal %><div class="row"><% end %>
 <% layouts.each do |layout| %>
   <%
-  name = t "admin.communication.blocks.templates.#{template}.layouts.#{layout}.label"
-  description = t "admin.communication.blocks.templates.#{template}.layouts.#{layout}.description"
+  name = t "admin.communication.blocks.templates.#{template_kind}.layouts.#{layout}.label"
+  description = t "admin.communication.blocks.templates.#{template_kind}.layouts.#{layout}.description"
   %>
   <% if horizontal %><div class="col-md-4"><% end %>
   <div class="card mb-4">
@@ -30,12 +33,12 @@ horizontal ||= false
           </div>
         </div>
         <div class="col-md-6">
-            <%= image_tag "communication/blocks/templates/#{template}/#{layout}.png",
-                          alt: name,
-                          class: 'img-fluid' %>
-        </div %>
-      </label %>
-    </div>
+          <%= image_tag "communication/blocks/templates/#{template_kind}/#{layout}.png",
+                        alt: name,
+                        class: 'img-fluid' %>
+        </div>
+      </div>
+    </label>
   </div>
   <% if horizontal %></div><% end %>
 <% end %>

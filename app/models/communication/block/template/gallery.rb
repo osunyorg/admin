@@ -1,8 +1,6 @@
 class Communication::Block::Template::Gallery < Communication::Block::Template
-  LAYOUTS = [
-    :grid,
-    :carousel
-  ]
+
+  LAYOUTS = [:grid, :carousel].freeze
 
   def build_git_dependencies
     add_dependency active_storage_blobs
