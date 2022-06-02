@@ -4,5 +4,5 @@
                     alt: @block.template.image.alt,
                     class: 'img-fluid' %>
 <% end %>
-<%= @block.template.text.html_safe %>
-<%= @block.template.notes.html_safe %>
+<%= render 'admin/communication/blocks/components/rich_text/preview', property: :text %>
+<%= render 'admin/communication/blocks/components/rich_text/preview', property: :notes %>
