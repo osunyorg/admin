@@ -35,10 +35,12 @@ class Communication::Block::Template::Base
       end
 
       def #{property}
+        load_data
         #{property}_component.data
       end
 
       def #{property}=(value)
+        load_data
         #{property}_component.data = value
       end
 
@@ -47,6 +49,7 @@ class Communication::Block::Template::Base
 
   def initialize(block)
     @block = block
+    @data_loaded = false
   end
 
   def data=(value)
@@ -90,6 +93,13 @@ class Communication::Block::Template::Base
     {
       'elements' => []
     }
+  end
+
+  def load_data
+    return if @data_loaded
+    # Accessing the data loads it from database
+    block.data
+    @data_loaded = true
   end
 
   def build_git_dependencies
