@@ -23,7 +23,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def create
     @block.university = current_university
-    pass_data_through_template
     if @block.save
       redirect_to [:edit, :admin, @block],
                   notice: t('admin.successfully_created_html', model: @block.to_s)
@@ -34,7 +33,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def update
-    pass_data_through_template
     if @block.update(block_params)
       redirect_to about_path,
                   notice: t('admin.successfully_updated_html', model: @block.to_s)
@@ -59,10 +57,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   rescue
   end
 
-  def pass_data_through_template
-    @block.template.data = params[:communication_block][:data]
-  end
-
   def about_path
     # La formation ou la page concernée
     path_method = "admin_#{@block.about.class.to_s.parameterize.underscore}_path"
@@ -81,6 +75,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def block_params
     params.require(:communication_block)
-          .permit(:about_id, :about_type, :template_kind, :title)
+          .permit(:about_id, :about_type, :template_kind, :title, :data)
   end
 end

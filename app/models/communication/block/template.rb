@@ -35,11 +35,12 @@ class Communication::Block::Template
   end
 
   def data=(value)
+    block.data = {}
     object = JSON.parse value
     self.class.fields.each do |hash|
       name = hash[:name]
       type = hash[:type]
-      send "#{name}=", object["#{name}"]
+      public_send "self.#{name}=", object["#{name}"]
     end
   end
 
