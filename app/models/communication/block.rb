@@ -26,8 +26,6 @@ class Communication::Block < ApplicationRecord
   include WithUniversity
   include WithPosition
 
-  store_accessor :data
-
   belongs_to :about, polymorphic: true
 
   # Used to purge images when unattaching them

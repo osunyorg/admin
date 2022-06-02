@@ -87,6 +87,10 @@ class Communication::Block::Template::Base
     []
   end
 
+  def blob_with_id(id)
+    university.active_storage_blobs.find id
+  end
+
   protected
 
   def default_data
@@ -116,7 +120,7 @@ class Communication::Block::Template::Base
   def find_blob(object, key)
     id = object.dig(key, 'id')
     return if id.blank?
-    university.active_storage_blobs.find id
+    find_blob id
   end
 
   def extract_image_alt_and_credit(source, variable)

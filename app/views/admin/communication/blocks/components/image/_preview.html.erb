@@ -1,3 +1,11 @@
-<% image = @block.template.public_send(property) %>
-<%= kamifusen_tag image.blob, width: 600, alt: image.alt, class: 'img-fluid' if image.blob %>
-<p class="small"><%= image.credit %></p>
+<%
+image = @block.template.public_send property
+blob = image['blob'] if image&.has_key? 'blob'
+alt = @block.template.public_send "#{property}_alt"
+credit = @block.template.public_send "#{property}_credit"
+%>
+<%= kamifusen_tag blob,
+                  width: 600,
+                  alt: alt,
+                  class: 'img-fluid' if blob %>
+<p class="small"><%= credit %></p>
