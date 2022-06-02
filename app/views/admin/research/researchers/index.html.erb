@@ -7,6 +7,7 @@
     <tr>
       <th><%= University::Person.human_attribute_name('name') %></th>
       <th><%= University::Person.human_attribute_name('first_name') %></th>
+      <th></th>
       <th><%= t('research.number_of_articles') %></th>
     </tr>
   </thead>
@@ -16,6 +17,10 @@
       <tr>
         <td><%= link_to researcher.last_name, admin_research_researcher_path(researcher) %></td>
         <td><%= link_to researcher.first_name, admin_research_researcher_path(researcher) %></td>
+        <td class="p-0">
+          <%= kamifusen_tag researcher.best_picture,
+                            width: 40 if researcher.best_picture.attached? %>
+        </td>
         <td><%= researcher.research_journal_articles.count %></td>
       </tr>
     <% end %>

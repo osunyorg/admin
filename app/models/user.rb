@@ -65,6 +65,7 @@ class User < ApplicationRecord
   belongs_to :language
 
   scope :ordered, -> { order(:last_name, :first_name) }
+  scope :for_language, -> (language_id) { where(language_id: language_id) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(concat(users.first_name, ' ', users.last_name)) ILIKE unaccent(:term) OR

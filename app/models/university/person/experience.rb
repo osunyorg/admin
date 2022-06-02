@@ -29,7 +29,5 @@ class University::Person::Experience < ApplicationRecord
   belongs_to :person
   belongs_to :organization, class_name: "University::Organization"
 
-  validates :from_year, presence: true
-
   scope :ordered, -> { order(from_year: :desc)}
 end

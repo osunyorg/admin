@@ -135,10 +135,10 @@ en:
     remove: Remove image
   filters:
     attributes:
-      date: Filter by Date
+      date: Filter by date
       element: Filter by %{element}
-      kind: Filter by Kind
-      role: Filter by Role
+      kind: Filter by kind
+      role: Filter by role
     buttons:
       expand: Filter table
       submit: Filter

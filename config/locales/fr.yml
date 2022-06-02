@@ -135,10 +135,10 @@ fr:
     remove: Supprimer l'image
   filters:
     attributes:
-      date: Filtrer par Date
+      date: Filtrer par date
       element: Filtrer par %{element}
-      kind: Filtrer par Type
-      role: Filtrer par Rôle
+      kind: Filtrer par type
+      role: Filtrer par rôle
     buttons:
       expand: Filtrer le tableau
       submit: Filtrer
