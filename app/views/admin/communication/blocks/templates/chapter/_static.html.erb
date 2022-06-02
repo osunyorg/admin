@@ -1,7 +1,5 @@
-      text: >-
-        <%= prepare_html_for_static block.template.text, about.university %>
-      notes: >-
-        <%= prepare_html_for_static block.template.notes, about.university %>
+<%= render 'admin/communication/blocks/components/rich_text/static', property: :text %>
+<%= render 'admin/communication/blocks/components/rich_text/static', property: :notes %>
       <% if block.template.image %>
       image:
         id: "<%= block.template.image.blob.id %>"

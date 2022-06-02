@@ -57,7 +57,6 @@ class Communication::Block < ApplicationRecord
     utilities: [:files, :definitions, :embed]
   }
 
-  before_validation :sanitize_data
   before_save :update_template_images
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
@@ -84,10 +83,6 @@ class Communication::Block < ApplicationRecord
   end
 
   protected
-
-  def sanitize_data
-    self.data = template.sanitized_data
-  end
 
   def update_template_images
     self.template_images = template.active_storage_blobs

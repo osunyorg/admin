@@ -1,6 +1,9 @@
 <% if about.blocks.any? %>
 blocks:
-<% about.blocks.ordered.each do |block| %>
+<% about.blocks.ordered.each do |block|
+  @block = block
+  @university = about.university
+  %>
   - template: <%= block.template_kind %>
     title: >
       <%= prepare_text_for_static block.title, 3 %>

@@ -24,7 +24,7 @@ class Communication::Block::Template
       end
 
       def #{property}=(value)
-        data['#{property}'] = #{ sanitizer_type ? "Osuny::Sanitizer.sanitize value, #{sanitizer_type}" : "value" }
+        data['#{property}'] = #{ sanitizer_type ? "Osuny::Sanitizer.sanitize(value, '#{sanitizer_type}')" : "value" }
       end
     CODE
   end
@@ -36,12 +36,11 @@ class Communication::Block::Template
 
   def data=(value)
     object = JSON.parse value
-    @fields.each do |property|
-      send "#{property}=", object["#{property}"]
+    self.class.fields.each do |hash|
+      name = hash[:name]
+      type = hash[:type]
+      send "#{name}=", object["#{name}"]
     end
-    # text = object['text']
-    # notes = object['notes']
-    byebug
   end
 
   def git_dependencies

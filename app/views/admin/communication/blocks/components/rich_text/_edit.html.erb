@@ -1,0 +1,10 @@
+<label  class="form-label" for="<%= property %>">
+  <%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.label" %>
+</label>
+<div class="summernote mb-3">
+  <textarea id="<%= property %>"
+            class="form-control summernote-vue"
+            v-model="data.<%= property %>"
+            data-summernote-config="mini-list"
+            placeholder="<%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.placeholder" %>"></textarea>
+</div>

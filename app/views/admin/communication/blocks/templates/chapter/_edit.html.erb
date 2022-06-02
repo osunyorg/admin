@@ -1,27 +1,7 @@
 <div class="row mb-4">
   <div class="col-md-6">
-    <label  class="form-label"
-            for="text">
-      <%= t '.text_label' %>
-    </label>
-    <div class="summernote mb-3">
-      <textarea id="text"
-              class="form-control summernote-vue"
-              v-model="data.text"
-              data-summernote-config="mini-list"
-              placeholder="<%= t '.text_placeholder' %>"></textarea>
-    </div>
-    <label  class="form-label"
-            for="notes">
-      <%= t '.notes_label' %>
-    </label>
-    <div class="summernote">
-      <textarea id="notes"
-              class="form-control summernote-vue"
-              v-model="data.notes"
-              data-summernote-config="mini"
-              placeholder="<%= t '.notes_placeholder' %>"></textarea>
-    </div>
+    <%= render 'admin/communication/blocks/components/rich_text/edit', property: :text %>
+    <%= render 'admin/communication/blocks/components/rich_text/edit', property: :notes %>
   </div>
   <div class="col-md-6">
     <div class="mb-3">

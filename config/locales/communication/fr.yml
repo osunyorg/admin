@@ -179,10 +179,12 @@ fr:
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             edit:
-              notes_label: Notes
-              notes_placeholder: Entrer les notes
-              text_label: Texte
-              text_placeholder: Entrer le texte
+              notes:
+                label: Notes
+                placeholder: Entrer les notes
+              text:
+                label: Texte
+                placeholder: Entrer le texte
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
           definitions:
