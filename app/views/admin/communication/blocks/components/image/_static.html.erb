@@ -1,0 +1,13 @@
+<%
+image = @block.template.public_send(property)
+indentation = '      '
+%>
+<% if image.blob %>
+<%= indentation %>image:
+<%= indentation %>  id: "<%= image.blob.id %>"
+<%= indentation %>  file: "<%= image.blob.id %>"
+<%= indentation %>  alt: >-
+<%= indentation %>    <%= prepare_text_for_static image.alt %>
+<%= indentation %>  credit: >-
+<%= indentation %>    <%= prepare_text_for_static image.credit %>
+<% end %>

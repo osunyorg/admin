@@ -16,7 +16,7 @@ class Communication::Block::Template
   end
 
   def self.has_image(property)
-    has_field property, :blob
+    has_field property, :image
     has_field "#{property}_alt".to_sym, :string
     has_field "#{property}_credit".to_sym, :string
   end
@@ -32,7 +32,7 @@ class Communication::Block::Template
     sanitizer_type = sanitizers[kind]
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{property}
-        data['#{property}']
+        #{ kind == :image ? "extract_image_alt_and_credit(data, '#{property}')" : "data['#{property}']" }
       end
 
       def #{property}=(value)

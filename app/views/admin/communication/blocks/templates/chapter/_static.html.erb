@@ -1,9 +1,3 @@
 <%= render 'admin/communication/blocks/components/rich_text/static', property: :text %>
 <%= render 'admin/communication/blocks/components/rich_text/static', property: :notes %>
-      <% if block.template.image %>
-      image:
-        id: "<%= block.template.image.blob.id %>"
-        file: "<%= block.template.image.blob.id %>"
-        alt: <%= prepare_text_for_static block.template.image.alt %>
-        credit: <%= prepare_text_for_static block.template.image.credit %>
-      <% end %>
+<%= render 'admin/communication/blocks/components/image/static', property: :image %>
