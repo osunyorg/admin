@@ -62,11 +62,11 @@ class Communication::Block < ApplicationRecord
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
-    attributes['data'] = template.parse(value).to_json
+    attributes['data'] = template.parse(value).to_h
   end
 
   def data
-    template.to_json
+    template.to_h
   end
 
   def git_dependencies

@@ -6,12 +6,12 @@ class Communication::Block::Component::Base
     @template = template
   end
 
-  def value
+  def data
     data[property]
   end
 
-  def value=(v)
-    data[property] = v
+  def data=(value)
+    data[property] = value
   end
 
   def data

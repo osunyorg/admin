@@ -36,11 +36,11 @@ class Communication::Block::Template::Base
     sanitizer_type = sanitizers[kind]
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{property}
-        Communication::Block::Component::#{kind.classify}.new(property, self).value
+        Communication::Block::Component::#{kind.classify}.new(property, self).data
       end
 
       def #{property}=(value)
-        Communication::Block::Component::#{kind.classify}.new(property, self).value = value
+        Communication::Block::Component::#{kind.classify}.new(property, self).data = value
       end
     CODE
   end
