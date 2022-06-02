@@ -1,4 +1,6 @@
 class Communication::Block::Template
+  class_attribute :fields
+
   attr_reader :block
 
   def self.has_rich_text(property)
@@ -10,6 +12,9 @@ class Communication::Block::Template
   end
 
   def self.has_field(property, kind)
+    self.fields ||= []
+    self.fields << { name: property, type: kind }
+
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{property}
         data[:#{property}]
