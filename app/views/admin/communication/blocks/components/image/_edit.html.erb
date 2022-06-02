@@ -15,12 +15,12 @@
                 @change="onFileImageChange( $event, data, '<%= property %>' )"
                 id="<%= property %>">
       </div>
-      <div v-if="data.<%= property %>" class="align-items-top">
+      <div v-if="data.<%= property %>" class="d-flex mb-2">
         <img  :src="getImageUrl(data.<%= property %>)"
               class="img-fluid me-2"
               style="max-height: 80px"
               />
-        <a  class="btn btn-sm btn-danger mt-2"
+        <a  class="btn btn-sm btn-danger mb-auto"
             v-on:click="data.<%= property %>=null">
             <i class="fas fa-times"></i>
             <%= t 'admin.communication.blocks.components.image.input.remove' %>
