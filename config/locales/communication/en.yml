@@ -178,10 +178,12 @@ en:
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
             edit:
-              notes_label: Notes
-              notes_placeholder: Enter notes
-              text_label: Text
-              text_placeholder: Enter text
+              notes:
+                label: Notes
+                placeholder: Enter notes
+              text:
+                label: Text
+                placeholder: Enter text
           datatable:
             description: A table of data, as responsive and accessible as possible.
           definitions:
