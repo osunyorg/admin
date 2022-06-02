@@ -87,6 +87,10 @@ class Communication::Block::Template::Base
     []
   end
 
+  def elements
+    data['elements']
+  end
+
   def blob_with_id(id)
     university.active_storage_blobs.find id
   end
@@ -138,6 +142,7 @@ class Communication::Block::Template::Base
   end
 
   def components
+    return [] if self.class.fields.nil?
     self.class.fields.map do |field|
       send "#{field[:name]}_component"
     end
