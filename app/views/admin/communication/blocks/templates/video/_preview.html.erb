@@ -1,2 +1,3 @@
-<pre><%= @block.template.url %></pre>
-<p><%= @block.template.transcription %></p>
+<%# TODO iframe video %>
+<%= render 'admin/communication/blocks/components/string/preview', property: :url %>
+<%= render 'admin/communication/blocks/components/text/preview', property: :transcription %>

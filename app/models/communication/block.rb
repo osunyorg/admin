@@ -62,6 +62,7 @@ class Communication::Block < ApplicationRecord
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
+    # Symbol does not work (:data)
     attributes['data'] = default_data
     # Template data setter will write properly sanitized values to block data
     template.data = value

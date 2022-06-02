@@ -1,3 +1,6 @@
-<% indentation = '      ' %>
+<%
+indentation = '      '
+value = @block.template.public_send property
+%>
 <%= indentation %><%= property %>: >-
-<%= indentation %>  <%= prepare_html_for_static @block.template.text, @university %>
+<%= indentation %>  <%= prepare_html_for_static value, @university %>

@@ -1,4 +1,2 @@
-      url: >-
-        <%= prepare_text_for_static block.template.url, 4 %>
-      transcription: >-
-        <%= prepare_text_for_static block.template.transcription, 4  %>
+<%= render 'admin/communication/blocks/components/string/static', property: :url %>
+<%= render 'admin/communication/blocks/components/text/static', property: :transcription %>

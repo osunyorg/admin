@@ -3,16 +3,6 @@
     <%= render 'admin/communication/blocks/components/string/edit', property: :url %>
   </div>
   <div class="col-md-6">
-    <label  class="form-label"
-            for="text">
-      <%= t '.transcription_label' %>
-    </label>
-    <div class="mb-3">
-      <textarea id="text"
-              rows="10"
-              class="form-control"
-              v-model="data.transcription"
-              placeholder="<%= t '.transcription_placeholder' %>"></textarea>
-    </div>
+    <%= render 'admin/communication/blocks/components/text/edit', property: :transcription, rows: 10 %>
   </div>
 </div>
