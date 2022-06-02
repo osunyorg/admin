@@ -4,6 +4,7 @@ class Communication::Block::Component::Base
   def initialize(property, template)
     @property = property.to_s
     @template = template
+    @data = nil
   end
 
   def data

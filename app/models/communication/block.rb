@@ -65,7 +65,7 @@ class Communication::Block < ApplicationRecord
 
   def data=(value)
     template.data = value
-    self.attributes['data'] = template.data
+    super template.data
   end
 
   def data
