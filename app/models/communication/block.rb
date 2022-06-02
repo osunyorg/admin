@@ -78,6 +78,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def data=(value)
+    attributes[:data] = {}
     template.data = value
   end
 
