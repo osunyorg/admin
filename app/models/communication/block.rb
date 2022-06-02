@@ -61,8 +61,8 @@ class Communication::Block < ApplicationRecord
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
-    value = JSON.parse value if value.is_a? String
-    super(value)
+    attributes[:data] = {}
+    template.data = value
   end
 
   def git_dependencies
@@ -75,11 +75,6 @@ class Communication::Block < ApplicationRecord
 
   def template
     @template ||= "Communication::Block::Template::#{template_kind.classify}".constantize.new self
-  end
-
-  def data=(value)
-    attributes[:data] = {}
-    template.data = value
   end
 
   def to_s
