@@ -1,4 +1,8 @@
 class Communication::Block::Template::Chapter < Communication::Block::Template
+  has_rich_text :text
+  has_rich_text :notes
+  has_image :image
+
   def sanitized_data
     {
       "text" => Osuny::Sanitizer.sanitize(text),

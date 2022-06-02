@@ -1,6 +1,16 @@
 class Communication::Block::Template
   attr_reader :block
 
+  @@fields = []
+
+  def self.has_rich_text(property)
+    @@fields << property
+  end
+
+  def self.has_image(property)
+    @@fields << property
+  end
+
   def initialize(block)
     @block = block
   end

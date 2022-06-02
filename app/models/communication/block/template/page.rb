@@ -1,4 +1,5 @@
 class Communication::Block::Template::Page < Communication::Block::Template
+  has_rich_text :text
 
   LAYOUTS = [
     :grid,
