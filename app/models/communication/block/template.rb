@@ -3,6 +3,14 @@ class Communication::Block::Template
 
   attr_reader :block
 
+  def self.has_string(property)
+    has_field property, :string
+  end
+
+  def self.has_text(property)
+    has_field property, :text
+  end
+
   def self.has_rich_text(property)
     has_field property, :rich_text
   end
@@ -15,6 +23,8 @@ class Communication::Block::Template
     self.fields ||= []
     self.fields << { name: property, type: kind }
     sanitizers = {
+      string: 'string',
+      text: 'text',
       rich_text: 'text'
     }
     sanitizer_type = sanitizers[kind]
@@ -35,12 +45,11 @@ class Communication::Block::Template
   end
 
   def data=(value)
-    object = JSON.parse value
-    self.class.fields.each do |hash|
-      name = hash[:name]
-      type = hash[:type]
-      public_send "#{name}=", object["#{name}"]
+    json = JSON.parse value
+    self.class.fields.each do |field|
+      update_field field, json
     end
+    true
   end
 
   def git_dependencies
@@ -57,6 +66,12 @@ class Communication::Block::Template
   end
 
   protected
+
+  def update_field(field, json)
+    name = field[:name]
+    value = json["#{name}"]
+    public_send "#{name}=", value
+  end
 
   def build_git_dependencies
   end
@@ -90,7 +105,7 @@ class Communication::Block::Template
   end
 
   def data
-    block.data || {}
+    block.data
   end
 
   def elements

@@ -154,7 +154,6 @@ fr:
               not_linked: Pas de fichier lié
           link:
               target_blank: Ouvrir dans une nouvelle fenêtre
-
         templates:
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
@@ -325,10 +324,12 @@ fr:
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
-              url_label: Url de la vidéo
-              url_placeholder: Entrer l'url de la vidéo
-              transcription_label: Transcription textuelle du contenu
-              transcription_placeholder: Entrez ici la transcription
+              url:
+                label: Url de la vidéo
+                placeholder: Entrer l'url de la vidéo
+              transcription:
+                label: Transcription textuelle du contenu
+                placeholder: Entrez ici la transcription
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page

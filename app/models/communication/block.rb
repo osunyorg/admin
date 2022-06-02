@@ -29,6 +29,7 @@ class Communication::Block < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   # Used to purge images when unattaching them
+  # template_blobs would be a better name, because there are files
   has_many_attached :template_images
 
   enum template_kind: {
@@ -57,12 +58,17 @@ class Communication::Block < ApplicationRecord
     utilities: [:files, :definitions, :embed]
   }
 
-  before_save :update_template_images
+  before_save :attach_template_blobs
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
-    attributes[:data] = {}
+    attributes[:data] = default_data
     template.data = value
+    byebug
+  end
+
+  def data
+    attributes[:data] ||= default_data
   end
 
   def git_dependencies
@@ -84,7 +90,13 @@ class Communication::Block < ApplicationRecord
 
   protected
 
-  def update_template_images
+  def default_data
+    {
+      'elements': []
+    }
+  end
+
+  def attach_template_blobs
     self.template_images = template.active_storage_blobs
   end
 
