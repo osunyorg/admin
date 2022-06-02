@@ -1,5 +1,5 @@
 class Communication::Block::Template
-  attr_reader :block
+  attr_reader :block, :fields
 
   def self.has_rich_text(property)
     has_field property, :rich_text
@@ -10,22 +10,34 @@ class Communication::Block::Template
   end
 
   def self.has_field(property, kind)
+    sanitizers = {
+      rich_text: 'text'
+    }
+    sanitizer_type = sanitizers[kind]
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{property}
-        data[:#{property}]
+        data['#{property}']
       end
+
       def #{property}=(value)
-        data[:#{property}] = value
+        data['#{property}'] = #{ sanitizer_type ? "Osuny::Sanitizer.sanitize value, #{sanitizer_type}" : "value" }
       end
     CODE
   end
 
   def initialize(block)
     @block = block
+    @fields = []
   end
 
-  def sanitized_data
-    data
+  def data=(value)
+    object = JSON.parse value
+    @fields.each do |property|
+      send "#{property}=", object["#{property}"]
+    end
+    # text = object['text']
+    # notes = object['notes']
+    byebug
   end
 
   def git_dependencies
