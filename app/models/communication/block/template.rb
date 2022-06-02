@@ -14,7 +14,10 @@ class Communication::Block::Template
   def self.has_field(property, kind)
     self.fields ||= []
     self.fields << { name: property, type: kind }
-
+    sanitizers = {
+      rich_text: 'text'
+    }
+    sanitizer_type = sanitizers[kind]
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{property}
         data['#{property}']
