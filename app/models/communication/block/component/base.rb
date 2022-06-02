@@ -11,6 +11,6 @@ class Communication::Block::Component::Base
   end
 
   def data=(value)
-    @data = Osuny::Sanitizer.sanitize value, 'string'
+    @data = value
   end
 end
