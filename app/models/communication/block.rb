@@ -62,13 +62,13 @@ class Communication::Block < ApplicationRecord
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
-    attributes[:data] = default_data
+    attributes['data'] = default_data
+    # Template data setter will write properly sanitized values to block data
     template.data = value
-    byebug
   end
 
   def data
-    attributes[:data] ||= default_data
+    attributes['data'] ||= default_data
   end
 
   def git_dependencies
