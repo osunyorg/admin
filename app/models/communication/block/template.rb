@@ -16,7 +16,7 @@ class Communication::Block::Template
   end
 
   def self.has_image(property)
-    has_field property, :image
+    has_field property, :blob
     has_field "#{property}_alt".to_sym, :string
     has_field "#{property}_credit".to_sym, :string
   end
