@@ -1,4 +1,4 @@
-class Communication::Block::Template::CallToAction < Communication::Block::Template
+class Communication::Block::Template::CallToAction < Communication::Block::Template::Base
   def sanitized_data
     {
       "text" => Osuny::Sanitizer.sanitize(text),

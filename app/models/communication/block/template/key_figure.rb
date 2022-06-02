@@ -1,4 +1,4 @@
-class Communication::Block::Template::KeyFigure < Communication::Block::Template
+class Communication::Block::Template::KeyFigure < Communication::Block::Template::Base
   def build_git_dependencies
   end
 

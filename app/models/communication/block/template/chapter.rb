@@ -1,4 +1,4 @@
-class Communication::Block::Template::Chapter < Communication::Block::Template
+class Communication::Block::Template::Chapter < Communication::Block::Template::Base
   has_rich_text :text
   has_rich_text :notes
   has_image :image

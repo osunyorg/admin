@@ -1,4 +1,4 @@
-class Communication::Block::Template::File < Communication::Block::Template
+class Communication::Block::Template::File < Communication::Block::Template::Base
   def build_git_dependencies
     files.each do |file|
       add_dependency file.blob

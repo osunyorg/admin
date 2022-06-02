@@ -1,4 +1,4 @@
-class Communication::Block::Template::Post < Communication::Block::Template
+class Communication::Block::Template::Post < Communication::Block::Template::Base
   def build_git_dependencies
     add_dependency category unless category.nil?
     add_dependency selected_posts

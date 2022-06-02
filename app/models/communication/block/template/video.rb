@@ -1,4 +1,4 @@
-class Communication::Block::Template::Video < Communication::Block::Template
+class Communication::Block::Template::Video < Communication::Block::Template::Base
   has_string :url
   has_text :transcription
 

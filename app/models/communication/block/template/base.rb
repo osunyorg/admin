@@ -1,4 +1,4 @@
-class Communication::Block::Template
+class Communication::Block::Template::Base
   class_attribute :fields
 
   attr_reader :block
@@ -36,11 +36,11 @@ class Communication::Block::Template
     sanitizer_type = sanitizers[kind]
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       def #{property}
-        #{ kind == :image ? "extract_image_alt_and_credit(data, '#{property}')" : "data['#{property}']" }
+        Communication::Block::Component::#{kind.classify}.new(property, self).value
       end
 
       def #{property}=(value)
-        data['#{property}'] = #{ sanitizer_type ? "Osuny::Sanitizer.sanitize(value, '#{sanitizer_type}')" : "value" }
+        Communication::Block::Component::#{kind.classify}.new(property, self).value = value
       end
     CODE
   end
@@ -72,6 +72,12 @@ class Communication::Block::Template
   end
 
   protected
+
+  def default_data
+    {
+      'elements': []
+    }
+  end
 
   def update_field(field, json)
     name = field[:name]

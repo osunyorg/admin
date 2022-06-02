@@ -1,4 +1,4 @@
-class Communication::Block::Template::Testimonial < Communication::Block::Template
+class Communication::Block::Template::Testimonial < Communication::Block::Template::Base
   def build_git_dependencies
     add_dependency active_storage_blobs
   end

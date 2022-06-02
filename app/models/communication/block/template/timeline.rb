@@ -1,4 +1,4 @@
-class Communication::Block::Template::Timeline < Communication::Block::Template
+class Communication::Block::Template::Timeline < Communication::Block::Template::Base
 
   def description
     "#{data['description']}"

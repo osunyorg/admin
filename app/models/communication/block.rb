@@ -62,14 +62,11 @@ class Communication::Block < ApplicationRecord
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
   def data=(value)
-    # Symbol does not work (:data)
-    attributes['data'] = default_data
-    # Template data setter will write properly sanitized values to block data
-    template.data = value
+    attributes['data'] = template.parse(value).to_json
   end
 
   def data
-    attributes['data'] ||= default_data
+    template.to_json
   end
 
   def git_dependencies
@@ -90,12 +87,6 @@ class Communication::Block < ApplicationRecord
   end
 
   protected
-
-  def default_data
-    {
-      'elements': []
-    }
-  end
 
   def attach_template_blobs
     self.template_images = template.active_storage_blobs

@@ -1,4 +1,4 @@
-class Communication::Block::Template::Definition < Communication::Block::Template
+class Communication::Block::Template::Definition < Communication::Block::Template::Base
   def definitions
     @definitions ||= elements.map { |element| definition(element) }
                               .compact

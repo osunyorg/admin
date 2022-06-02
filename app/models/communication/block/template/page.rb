@@ -1,4 +1,4 @@
-class Communication::Block::Template::Page < Communication::Block::Template
+class Communication::Block::Template::Page < Communication::Block::Template::Base
   has_rich_text :text
 
   LAYOUTS = [:grid, :list, :cards].freeze

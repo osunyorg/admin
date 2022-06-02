@@ -1,4 +1,4 @@
-class Communication::Block::Template::Gallery < Communication::Block::Template
+class Communication::Block::Template::Gallery < Communication::Block::Template::Base
 
   LAYOUTS = [:grid, :carousel].freeze
 

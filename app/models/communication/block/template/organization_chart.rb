@@ -1,4 +1,4 @@
-class Communication::Block::Template::OrganizationChart < Communication::Block::Template
+class Communication::Block::Template::OrganizationChart < Communication::Block::Template::Base
   def build_git_dependencies
     add_dependency persons
     persons.each do |person|
