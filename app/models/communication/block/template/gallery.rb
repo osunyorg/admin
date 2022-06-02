@@ -2,12 +2,14 @@ class Communication::Block::Template::Gallery < Communication::Block::Template
 
   LAYOUTS = [:grid, :carousel].freeze
 
+  has_select :layout, options: LAYOUTS, default: LAYOUTS.first
+
   def build_git_dependencies
     add_dependency active_storage_blobs
   end
 
   def layout
-    data['layout'] || 'grid'
+    data['layout'] || LAYOUTS.first
   end
 
   def images_with_alt

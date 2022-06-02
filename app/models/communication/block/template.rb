@@ -15,6 +15,10 @@ class Communication::Block::Template
     has_field property, :rich_text
   end
 
+  def self.has_select(property, **args)
+    has_field property, :select
+  end
+
   def self.has_image(property)
     has_field property, :image
     has_field "#{property}_alt".to_sym, :string
