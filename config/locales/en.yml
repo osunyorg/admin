@@ -128,7 +128,7 @@ en:
     title: Image
     alt:
       label: Alternative text
-      hint: This text is important for accessibility
+      hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
     credit:
       label: Credit
       hint: The credit must be present according to copyright or copyleft licenses.
