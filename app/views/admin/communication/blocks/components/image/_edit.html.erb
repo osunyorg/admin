@@ -3,48 +3,55 @@
     <%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.label" %>
   </div>
   <div class="card-body">
-    <div class="mb-3">
-      <div v-if="!data.<%= property %>">
-        <label  class="form-label"
-                for="<%= property %>">
-          <%= t 'admin.communication.blocks.components.image.input.label' %>
-        </label>
-        <input  class="form-control"
-                type="file"
-                accept="image/*"
-                @change="onFileImageChange( $event, data, '<%= property %>' )"
-                id="<%= property %>">
+    <div class="row">
+      <div class="col-xl-3 col-6 mb-3">
+        <div v-if="!data.<%= property %>">
+          <label  class="form-label"
+                  for="<%= property %>">
+            <%= t 'admin.communication.blocks.components.image.input.label' %>
+          </label>
+          <input  class="form-control"
+                  type="file"
+                  accept="image/*"
+                  @change="onFileImageChange( $event, data, '<%= property %>' )"
+                  id="<%= property %>">
+        </div>
+        <div v-if="data.<%= property %>">
+          <img  :src="getImageUrl(data.<%= property %>)"
+                class="img-fluid"
+                />
+          <br>
+        </div>
       </div>
-      <div v-if="data.<%= property %>" class="d-flex mb-2">
-        <img  :src="getImageUrl(data.<%= property %>)"
-              class="img-fluid me-2"
-              style="max-height: 80px"
-              />
-        <a  class="btn btn-sm btn-danger mb-auto"
-            v-on:click="data.<%= property %>=null">
+      <div class="col-xl-9">
+        <label  class="form-label"
+                for="<%= property %>_alt">
+          <%= t 'admin.communication.blocks.components.image.alt.label' %>
+        </label>
+        <input  id="<%= property %>_alt"
+                type="text"
+                class="form-control mb-3"
+                v-model="data.<%= property %>_alt"
+                placeholder="<%= t 'admin.communication.blocks.components.image.alt.placeholder' %>" />
+
+        <label  class="form-label"
+                for="<%= property %>_credit">
+          <%= t 'admin.communication.blocks.components.image.credit.label' %>
+        </label>
+        <input  id="<%= property %>_credit"
+                type="text"
+                class="form-control mb-3"
+                v-model="data.<%= property %>_credit"
+                placeholder="<%= t 'admin.communication.blocks.components.image.credit.placeholder' %>" />
+
+        <a  class="btn btn-sm btn-danger"
+            v-on:click="data.<%= property %>=null"
+            v-if="data.<%= property %>">
             <i class="fas fa-times"></i>
-            <%= t 'admin.communication.blocks.components.image.input.remove' %>
+          <%= t 'admin.communication.blocks.components.image.input.remove' %>
         </a>
+
       </div>
     </div>
-    <label  class="form-label"
-            for="<%= property %>_alt">
-      <%= t 'admin.communication.blocks.components.image.alt.label' %>
-    </label>
-    <input  id="<%= property %>_alt"
-            type="text"
-            class="form-control mb-3"
-            v-model="data.<%= property %>_alt"
-            placeholder="<%= t 'admin.communication.blocks.components.image.alt.placeholder' %>" />
-
-    <label  class="form-label"
-            for="<%= property %>_credit">
-      <%= t 'admin.communication.blocks.components.image.credit.label' %>
-    </label>
-    <input  id="<%= property %>_credit"
-            type="text"
-            class="form-control"
-            v-model="data.<%= property %>_credit"
-            placeholder="<%= t 'admin.communication.blocks.components.image.credit.placeholder' %>" />
   </div>
 </div>
