@@ -2,10 +2,8 @@
             layouts: Communication::Block::Template::Gallery::LAYOUTS,
             horizontal: true %>
 
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push(defaultElement)">
-    <%= t '.add_image' %>
-</a>
+<%= render  'admin/communication/blocks/components/add_element/edit',
+            label: t('.add_image') %>
 
 <draggable :list="data.elements" handle=".imageHandle" class="row">
   <div v-for="(image, imageIndex) in data.elements" class="col-xxl-2 col-xl-3 col-md-4 col-6">
@@ -24,7 +22,6 @@
       </div>
       <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
       <div class="card-body">
-
         <label  class="form-label"
                 :for="'image-file-' + imageIndex">
           <%= t '.image_label' %>
