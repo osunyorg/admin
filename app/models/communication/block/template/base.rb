@@ -95,13 +95,13 @@ class Communication::Block::Template::Base
     university.active_storage_blobs.find id
   end
 
-  protected
-
   def default_data
     {
       'elements' => []
     }
   end
+
+  protected
 
   def load_data
     return if @data_loaded

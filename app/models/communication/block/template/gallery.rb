@@ -4,6 +4,10 @@ class Communication::Block::Template::Gallery < Communication::Block::Template::
 
   # has_select :layout, options: LAYOUTS, default: LAYOUTS.first
 
+  def element
+    Communication::Block::Template::Gallery::Image.new block
+  end
+
   def build_git_dependencies
     add_dependency active_storage_blobs
   end
