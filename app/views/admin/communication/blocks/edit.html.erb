@@ -36,7 +36,8 @@
           url: "<%= rails_direct_uploads_url.html_safe %>",
           blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
         },
-        data: <%= @block.data.to_json.html_safe %>
+        data: <%= @block.data.to_json.html_safe %>,
+        defaultElement: <%= @block.template.element.default_data.to_json.html_safe %>
       }
     },
     methods: {

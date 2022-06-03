@@ -2,9 +2,8 @@
             layouts: Communication::Block::Template::Gallery::LAYOUTS,
             horizontal: true %>
 
-
 <a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push(<%= raw @block.template.element.default_data.to_s %>)">
+    v-on:click="data.elements.push(defaultElement)">
     <%= t '.add_image' %>
 </a>
 
