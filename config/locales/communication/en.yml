@@ -322,12 +322,15 @@ en:
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
-              url:
-                label: Video url
-                placeholder: Enter video's url
               transcription:
                 label: Text transcript
                 placeholder: Enter text transcript
+              url:
+                label: Video url
+                placeholder: Enter video's url
+              video_title:
+                label: Video title
+                placeholder: Enter video title
       website:
         pages:
           delete_special_page_notice: Can't delete this page

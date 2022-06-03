@@ -326,12 +326,15 @@ fr:
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
+              transcription:
+                label: Transcription textuelle du contenu
+                placeholder: Entrer ici la transcription
               url:
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo
-              transcription:
-                label: Transcription textuelle du contenu
-                placeholder: Entrez ici la transcription
+              video_title:
+                label: Titre de la vidéo
+                placeholder: Entrer le titre de la vidéo
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page
