@@ -1,33 +1,33 @@
 class Communication::Block::Template::Base
-  class_attribute :fields
+  class_attribute :components_descriptions
 
   attr_reader :block
 
   def self.has_string(property)
-    has_field property, :string
+    has_component property, :string
   end
 
   def self.has_text(property)
-    has_field property, :text
+    has_component property, :text
   end
 
   def self.has_rich_text(property)
-    has_field property, :rich_text
+    has_component property, :rich_text
   end
 
   def self.has_select(property, **args)
-    has_field property, :select
+    has_component property, :select
   end
 
   def self.has_image(property)
-    has_field property, :image
-    has_field "#{property}_alt".to_sym, :string
-    has_field "#{property}_credit".to_sym, :string
+    has_component property, :image
+    has_component "#{property}_alt".to_sym, :string
+    has_component "#{property}_credit".to_sym, :string
   end
 
-  def self.has_field(property, kind)
-    self.fields ||= []
-    self.fields << { name: property, type: kind }
+  def self.has_component(property, kind)
+    self.components_descriptions ||= []
+    self.components_descriptions << { name: property, type: kind }
     class_eval <<-CODE, __FILE__, __LINE__ + 1
 
       def #{property}_component
@@ -142,9 +142,9 @@ class Communication::Block::Template::Base
   end
 
   def components
-    return [] if self.class.fields.nil?
-    self.class.fields.map do |field|
-      send "#{field[:name]}_component"
+    return [] if self.class.components_descriptions.nil?
+    self.class.components_descriptions.map do |component_description|
+      send "#{component_description[:name]}_component"
     end
   end
 
