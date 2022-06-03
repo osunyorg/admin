@@ -6,6 +6,8 @@
       image:
         id: "<%= block.template.image.blob.id %>"
         file: "<%= block.template.image.blob.id %>"
-        alt: <%= prepare_text_for_static block.template.image.alt %>
-        credit: <%= prepare_text_for_static block.template.image.credit %>
+        alt: >-
+          <%= prepare_text_for_static block.template.image.alt, 5 %>
+        credit: >-
+          <%= prepare_text_for_static block.template.image.credit, 5 %>
       <% end %>
