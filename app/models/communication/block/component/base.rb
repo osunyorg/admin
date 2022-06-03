@@ -13,4 +13,8 @@ class Communication::Block::Component::Base
   def data=(value)
     @data = value
   end
+
+  def kind
+    self.class.name.demodulize.underscore
+  end
 end
