@@ -13,6 +13,7 @@ module Communication::Website::Page::WithKind
       legal_terms: 80,
         sitemap: 81,
         privacy_policy: 82,
+        accessibility: 83,
       organizations: 90,
       persons: 100,
         administrators: 110,

@@ -360,6 +360,11 @@ fr:
       last_posts: Dernières actualités
       pages:
         defaults:
+          accessibility:
+            admin_description: page accessibilité
+            description_short: ''
+            slug: accessibilite
+            title: Accessibilité
           administrators:
             admin_description: liste des membres de l'équipe administrative
             description_short: Liste des membres de l'équipe administrative
