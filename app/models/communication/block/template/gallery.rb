@@ -4,7 +4,7 @@ class Communication::Block::Template::Gallery < Communication::Block::Template::
 
   # has_select :layout, options: LAYOUTS, default: LAYOUTS.first
 
-  def element
+  def default_element
     Communication::Block::Template::Gallery::Image.new block
   end
 

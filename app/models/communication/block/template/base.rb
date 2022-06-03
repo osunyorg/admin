@@ -87,6 +87,10 @@ class Communication::Block::Template::Base
     []
   end
 
+  def default_element
+    nil
+  end
+
   def elements
     data['elements']
   end
