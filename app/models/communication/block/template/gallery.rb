@@ -1,10 +1,7 @@
 class Communication::Block::Template::Gallery < Communication::Block::Template::Base
 
   has_layouts [:grid, :carousel]
-
-  def default_element
-    Communication::Block::Template::Gallery::Image.new block
-  end
+  has_elements Communication::Block::Template::Gallery::Image
 
   def build_git_dependencies
     add_dependency active_storage_blobs

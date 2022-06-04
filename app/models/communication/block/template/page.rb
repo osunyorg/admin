@@ -20,10 +20,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     @main_page ||= page(data['page_id'])
   end
 
-  def layout
-    data['layout'] || 'grid'
-  end
-
   def show_main_description
     data['show_main_description'] || false
   end

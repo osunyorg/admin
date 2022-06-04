@@ -1,5 +1,7 @@
 class Communication::Block::Template::Base
-  class_attribute :components_descriptions, :layouts
+  class_attribute :components_descriptions,
+                  :layouts,
+                  :element_class
 
   attr_reader :block
 
@@ -27,6 +29,10 @@ class Communication::Block::Template::Base
 
   def self.has_layouts(list)
     self.layouts = list
+  end
+
+  def self.has_elements(element_class)
+    self.element_class = element_class
   end
 
   def self.has_component(property, kind)
@@ -92,7 +98,8 @@ class Communication::Block::Template::Base
   end
 
   def default_element
-    nil
+    return if self.class.element_class.nil?
+    self.class.element_class.new block
   end
 
   def elements
