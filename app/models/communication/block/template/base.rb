@@ -107,7 +107,7 @@ class Communication::Block::Template::Base
   end
 
   def default_layout
-    self.class.layouts.first
+    self.class.layouts&.first
   end
 
   def layout

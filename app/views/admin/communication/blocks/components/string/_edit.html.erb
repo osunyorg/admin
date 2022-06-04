@@ -1,10 +1,16 @@
+<%
+template_kind = @block.template_kind
+namespace = "admin.communication.blocks.templates.#{template_kind}.edit.#{property}"
+label ||= t "#{namespace}.label"
+placeholder ||= t "#{namespace}.placeholder"
+%>
 <label  class="form-label" for="<%= property %>">
-  <%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.label" %>
+  <%= label%>
 </label>
 <div class="mb-3">
   <input  id="<%= property %>"
           class="form-control mb-3"
           v-model="data.<%= property %>"
-          placeholder="<%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.placeholder" %>"
+          placeholder="<%= placeholder %>"
           type="text" />
 </div>
