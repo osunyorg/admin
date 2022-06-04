@@ -1,8 +1,6 @@
 class Communication::Block::Template::Gallery < Communication::Block::Template::Base
 
-  LAYOUTS = [:grid, :carousel].freeze
-
-  # has_select :layout, options: LAYOUTS, default: LAYOUTS.first
+  has_layouts [:grid, :carousel]
 
   def default_element
     Communication::Block::Template::Gallery::Image.new block

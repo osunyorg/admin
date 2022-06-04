@@ -2,7 +2,7 @@
 horizontal ||= false
 template = @block.template
 template_kind = @block.template_kind
-layouts = template.class::LAYOUTS
+layouts = template.class.layouts
 %>
 <% if horizontal %><div class="row"><% end %>
 <% layouts.each do |layout| %>
