@@ -99,12 +99,21 @@ class Communication::Block::Template::Base
     data['elements']
   end
 
+  def default_layout
+    self.class.layouts.first
+  end
+
+  def layout
+    data['layout']
+  end
+
   def blob_with_id(id)
     university.active_storage_blobs.find id
   end
 
   def default_data
     {
+      'layout' => default_layout,
       'elements' => []
     }
   end
