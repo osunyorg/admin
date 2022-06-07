@@ -43,12 +43,10 @@ class Communication::Block::Template::Base
       end
 
       def #{property}
-        load_data
         #{property}_component.data
       end
 
       def #{property}=(value)
-        load_data
         #{property}_component.data = value
       end
 
@@ -57,10 +55,10 @@ class Communication::Block::Template::Base
 
   # It can be initialized with no data, for a full block
   # or with data provided, for nested elements
-  def initialize(block, json = nil)
+  def initialize(block, json)
     @block = block
-    @data_loaded = false
-    @data = json unless json.nil?
+    @elements = []
+    self.data = json
   end
 
   # Transforms raw json into ruby objects, based on componenets
@@ -76,9 +74,14 @@ class Communication::Block::Template::Base
       next unless json.has_key? component.property
       component.data = json[component.property]
     end
+    return unless has_elements?
+    # Objects are initialized from the database,
+    # then data from the form replaces data from the db.
+    # We need to reset elements, otherwises it never deletes.
+    @elements = []
     json['elements'].each do |json|
-      default_element json
-    end if has_elements?
+      @elements << default_element(json)
+    end
   end
 
   def data
@@ -86,9 +89,12 @@ class Communication::Block::Template::Base
     components.each do |component|
       hash[component.property] = component.data
     end
-    elements.each do |element|
-      hash['elements'] << element.data
-    end if has_elements?
+    if has_elements?
+      hash['elements'] = []
+      elements.each do |element|
+        hash['elements'] << element.data
+      end
+    end
     hash
   end
 
@@ -115,9 +121,7 @@ class Communication::Block::Template::Base
   end
 
   def elements
-    block.attributes['data']['elements'].map do |json|
-      default_element json
-    end if has_elements?
+    @elements
   end
 
   def default_layout
@@ -141,13 +145,6 @@ class Communication::Block::Template::Base
 
   protected
 
-  def load_data
-    return if @data_loaded
-    # Accessing the data loads it from database
-    block.data
-    @data_loaded = true
-  end
-
   def build_git_dependencies
   end
 
@@ -157,26 +154,6 @@ class Communication::Block::Template::Base
     else
       @git_dependencies += [dependency]
     end
-  end
-
-  def find_blob(object, key)
-    id = object.dig(key, 'id')
-    return if id.blank?
-    find_blob id
-  end
-
-  def extract_image_alt_and_credit(source, variable)
-    blob = find_blob source, variable
-    return if blob.nil?
-    alt = source["alt"] || source["#{variable}_alt"]
-    credit = source["credit"] || source["#{variable}_credit"]
-    text = source["text"] || source["#{variable}_text"]
-    {
-      blob: blob,
-      alt: alt,
-      credit: credit,
-      text: text
-    }.to_dot
   end
 
   def components

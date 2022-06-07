@@ -1,11 +1,11 @@
-<% @block.template.images_with_alt.each do |image| %>
+<% @block.template.elements.each do |element| %>
   <article class="card">
-    <% if image.blob %>
-      <%= kamifusen_tag image.blob, width: 500, class: 'img-fluid mb-3' %>
+    <% if element.image['blob'] %>
+      <%= kamifusen_tag element.image['blob'], width: 500, class: 'img-fluid mb-3' %>
     <% end %>
     <div class="card-body">
-      <p class="mb-0"><%= image.alt %></p>
-      <p class="mb-0 small"><%= image.text %></p>
+      <p class="mb-0"><%= element.alt %></p>
+      <p class="mb-0 small"><%= element.text %></p>
     </div>
   </article>
 <% end %>

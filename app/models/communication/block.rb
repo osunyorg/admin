@@ -61,13 +61,15 @@ class Communication::Block < ApplicationRecord
   before_save :attach_template_blobs
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
+  # When we set data from json, we pass it to the template.
+  # The json we save is first sanitized and prepared by the template.
   def data=(value)
     template.data = value
     super template.data
   end
 
+  # Template data is clean and sanitized, and initialized with json
   def data
-    template.data = self.attributes['data']
     template.data
   end
 
@@ -80,7 +82,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def template
-    @template ||= "Communication::Block::Template::#{template_kind.classify}".constantize.new self
+    @template ||= template_class.new self, self.attributes['data']
   end
 
   def to_s
@@ -89,6 +91,10 @@ class Communication::Block < ApplicationRecord
   end
 
   protected
+
+  def template_class
+    "Communication::Block::Template::#{template_kind.classify}".constantize
+  end
 
   def attach_template_blobs
     self.template_images = template.active_storage_blobs

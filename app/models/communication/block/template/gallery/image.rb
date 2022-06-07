@@ -2,13 +2,15 @@ class Communication::Block::Template::Gallery::Image < Communication::Block::Tem
   has_image :image
   has_string :alt
   has_rich_text :credit
-  has_rich_text :text
+  has_text :text
 
   def default_data
     {
       'alt' => '',
       'credit' => '',
-      'image' => {}
+      'image' => {
+        'id' => ''
+      }
     }
   end
 end

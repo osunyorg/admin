@@ -38,8 +38,11 @@
         },
         data: <%= @block.data.to_json.html_safe %>,
         <% if @block.template.default_element %>
-          <% element = @block.template.default_element %>
-        defaultElement: <%= element.default_data.to_json.html_safe %>
+        defaultElement: <%= @block.template
+                                  .default_element
+                                  .default_data
+                                  .to_json
+                                  .html_safe %>
         <% end %>
       }
     },
