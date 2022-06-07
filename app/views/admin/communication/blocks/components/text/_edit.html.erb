@@ -1,13 +1,27 @@
 <%
+template_kind = @block.template_kind
+i18n_template = "admin.communication.blocks.templates.#{template_kind}.edit"
+if element
+  model = 'element'
+  dom_id = "'element-' + index + '-#{property}'"
+  i18n_component = "#{i18n_template}.element.#{property}"
+else
+  model = 'data'
+  dom_id = property
+  i18n_component = "#{i18n_template}.#{property}"
+end
+label ||= t "#{i18n_component}.label"
+placeholder ||= t "#{i18n_component}.placeholder"
 rows ||= 3
 %>
-<label  class="form-label" for="<%= property %>">
-  <%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.label" %>
+
+<label    class="form-label"
+          aria-label="<%= label %>"
+          :for="<%= dom_id.html_safe %>">
+  <%= label %>
 </label>
-<div class="mb-3">
-  <textarea id="<%= property %>"
-            class="form-control"
-            rows="<%= rows %>"
-            v-model="data.<%= property %>"
-            placeholder="<%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.placeholder" %>"></textarea>
-</div>
+<textarea :id="<%= dom_id.html_safe %>"
+          class="form-control mb-3"
+          rows="<%= rows %>"
+          v-model="<%= model %>.<%= property %>"
+          placeholder="<%= placeholder %>"></textarea>

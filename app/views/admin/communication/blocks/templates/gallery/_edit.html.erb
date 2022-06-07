@@ -1,3 +1,6 @@
+<%
+element = @block.template.default_element
+%>
 <%= render 'admin/communication/blocks/components/layouts/edit',
             horizontal: true %>
 
@@ -5,7 +8,9 @@
             label: t('.add_image') %>
 
 <draggable :list="data.elements" handle=".imageHandle" class="row">
-  <div v-for="(image, imageIndex) in data.elements" class="col-xxl-2 col-xl-3 col-md-4 col-6">
+  <div  v-for="(element, index) in data.elements"
+        :key="index"
+        class="col-xxl-2 col-xl-3 col-md-4 col-6">
     <div class="card">
       <div class="card-header border-bottom">
         <a class="btn ps-0 pt-0 imageHandle">
@@ -13,56 +18,27 @@
         </a>
         <div class="float-end">
           <a  class="btn btn-sm btn-danger"
-              v-on:click="data.elements.splice(data.elements.indexOf(image), 1)"
+              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
               title="<%= t '.remove_image' %>">
               <i class="fas fa-times"></i>
           </a>
         </div>
       </div>
-      <img :src="getImageUrl(image.file)" class="img-fluid d-block" v-if="image.file.id" />
+      <img :src="getImageUrl(element.file)" class="img-fluid d-block" v-if="element.file.id" />
       <div class="card-body">
         <label  class="form-label"
-                :for="'image-file-' + imageIndex">
+                :for="'element-' + index + '-file'">
           <%= t '.image_label' %>
         </label>
         <input  class="form-control mb-3"
                 type="file"
                 accept="image/*"
-                @change="onFileImageChange( $event, image, 'file' )"
-                :id="'image-file-' + imageIndex">
+                @change="onFileImageChange( $event, element, 'file' )"
+                :id="'element-' + index + '-file'">
 
-        <div class="mb-3">
-          <label  class="form-label"
-                  aria-label="<%= t '.alt_label' %>"
-                  :for="'image-alt-' + imageIndex">
-                  <%= t '.alt_label' %>
-          </label>
-          <input  class="form-control mb-2"
-                  type="text"
-                  v-model="image.alt"
-                  placeholder="<%= t '.alt_placeholder' %>"
-                  :id="'image-alt-' + imageIndex">
-
-          <label  class="form-label"
-                  aria-label="<%= t '.text_label' %>"
-                  :for="'image-text-' + imageIndex">
-                  <%= t '.text_label' %>
-          </label>
-          <textarea class="form-control mb-2"
-                  v-model="image.text"
-                  placeholder="<%= t '.text_placeholder' %>"
-                  :id="'image-text-' + imageIndex"></textarea>
-
-          <label  class="form-label"
-                  :for="'image-credit-' + imageIndex">
-            <%= t '.credit_label' %>
-          </label>
-          <input  type="text"
-                  class="form-control"
-                  v-model="image.credit"
-                  :id="'image-credit-' + imageIndex"
-                  placeholder="<%= t '.credit_placeholder' %>" />
-        </div>
+        <%= block_component_edit :alt, element: element %>
+        <%= block_component_edit :credit, element: element %>
+        <%= block_component_edit :text, element: element %>
       </div>
     </div>
   </div>

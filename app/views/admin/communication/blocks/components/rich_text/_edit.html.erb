@@ -1,10 +1,28 @@
-<label  class="form-label" for="<%= property %>">
-  <%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.label" %>
+<%
+template_kind = @block.template_kind
+i18n_template = "admin.communication.blocks.templates.#{template_kind}.edit"
+if element
+  model = 'element'
+  dom_id = "'element-' + index + '-#{property}'"
+  i18n_component = "#{i18n_template}.element.#{property}"
+else
+  model = 'data'
+  dom_id = property
+  i18n_component = "#{i18n_template}.#{property}"
+end
+label ||= t "#{i18n_component}.label"
+placeholder ||= t "#{i18n_component}.placeholder"
+%>
+
+<label      class="form-label"
+            aria-label="<%= label %>"
+            :for="<%= dom_id.html_safe %>">
+  <%= label %>
 </label>
 <div class="summernote mb-3">
-  <textarea id="<%= property %>"
+  <textarea :id="<%= dom_id.html_safe %>"
             class="form-control summernote-vue"
-            v-model="data.<%= property %>"
+            v-model="<%= model %>.<%= property %>"
             data-summernote-config="mini-list"
-            placeholder="<%= t "admin.communication.blocks.templates.#{@block.template_kind}.edit.#{property}.placeholder" %>"></textarea>
+            placeholder="<%= placeholder %>"></textarea>
 </div>

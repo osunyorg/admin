@@ -222,6 +222,16 @@ fr:
                 label: Carrousel
                 description: Les images sont présentées en grand, avec une navigation suivant / précédent.
             edit:
+              element:
+                text:
+                  label: Texte
+                  placeholder: Entrer le texte
+                alt:
+                  label: Texte alternatif
+                  placeholder: Entrer la description textuelle
+                credit:
+                  label: Crédit
+                  placeholder: Entrer le crédit de l'image ici
               add_image: Ajouter une image
               image_label: Image (.png, .jpg)
               alt_label: Texte alternatif
