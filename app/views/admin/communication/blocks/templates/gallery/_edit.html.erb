@@ -24,18 +24,8 @@ element = @block.template.default_element
           </a>
         </div>
       </div>
-      <img :src="getImageUrl(element.file)" class="img-fluid d-block" v-if="element.file.id" />
       <div class="card-body">
-        <label  class="form-label"
-                :for="'element-' + index + '-file'">
-          <%= t '.image_label' %>
-        </label>
-        <input  class="form-control mb-3"
-                type="file"
-                accept="image/*"
-                @change="onFileImageChange( $event, element, 'file' )"
-                :id="'element-' + index + '-file'">
-
+        <%= block_component_edit :image, element: element %>
         <%= block_component_edit :alt, element: element %>
         <%= block_component_edit :credit, element: element %>
         <%= block_component_edit :text, element: element %>

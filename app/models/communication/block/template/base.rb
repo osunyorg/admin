@@ -23,8 +23,6 @@ class Communication::Block::Template::Base
 
   def self.has_image(property)
     has_component property, :image
-    has_component "#{property}_alt".to_sym, :string
-    has_component "#{property}_credit".to_sym, :string
   end
 
   def self.has_layouts(list)

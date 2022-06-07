@@ -220,15 +220,16 @@ en:
                 label: Carousel
                 description: Images are big, with a previous / next navigation and a constant height.
             edit:
-              add_image: Add image
-              image_label: Image (.png, .jpg)
-              alt_label: Alternative text
-              alt_placeholder: Enter text description
-              credit_label: Credit
-              credit_placeholder: Enter image's credit here
-              text_label: Text
-              text_placeholder: Enter text
-              remove_image: Remove image
+              element:
+                text:
+                  label: Text
+                  placeholder: Enter text
+                alt:
+                  label: Alternative text
+                  placeholder: Enter text description
+                credit:
+                  label: Credit
+                  placeholder: Enter image's credit here
           image:
             description: An image with its alternative description, a credit and a text.
           key_figures:

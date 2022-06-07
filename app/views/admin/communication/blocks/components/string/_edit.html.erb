@@ -1,13 +1,14 @@
 <%
 template_kind = @block.template_kind
 i18n_template = "admin.communication.blocks.templates.#{template_kind}.edit"
+element ||= false
 if element
   model = 'element'
   dom_id = "'element-' + index + '-#{property}'"
   i18n_component = "#{i18n_template}.element.#{property}"
 else
   model = 'data'
-  dom_id = property
+  dom_id = "#{property}"
   i18n_component = "#{i18n_template}.#{property}"
 end
 label ||= t "#{i18n_component}.label"

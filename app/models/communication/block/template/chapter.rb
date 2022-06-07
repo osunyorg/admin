@@ -2,6 +2,8 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
   has_rich_text :text
   has_rich_text :notes
   has_image :image
+  has_string :image_alt
+  has_rich_text :image_credit
 
   def build_git_dependencies
     add_dependency image&.blob

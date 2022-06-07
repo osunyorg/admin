@@ -1,16 +1,10 @@
 <%
 image = @block.template.public_send(property)
 blob = image['blob'] if image&.has_key? 'blob'
-alt = @block.template.public_send "#{property}_alt"
-credit = @block.template.public_send "#{property}_credit"
 indentation = '      '
 %>
 <% if blob %>
 <%= indentation %>image:
 <%= indentation %>  id: "<%= blob.id %>"
 <%= indentation %>  file: "<%= blob.id %>"
-<%= indentation %>  alt: >-
-<%= indentation %>    <%= prepare_text_for_static alt %>
-<%= indentation %>  credit: >-
-<%= indentation %>    <%= prepare_text_for_static credit %>
 <% end %>
