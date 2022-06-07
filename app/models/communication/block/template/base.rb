@@ -55,11 +55,15 @@ class Communication::Block::Template::Base
     CODE
   end
 
-  def initialize(block)
+  # It can be initialized with no data, for a full block
+  # or with data provided, for nested elements
+  def initialize(block, json = nil)
     @block = block
     @data_loaded = false
+    @data = json unless json.nil?
   end
 
+  # Transforms raw json into ruby objects, based on componenets
   def data=(value)
     if value.is_a? String
       json = JSON.parse(value)
@@ -72,6 +76,9 @@ class Communication::Block::Template::Base
       next unless json.has_key? component.property
       component.data = json[component.property]
     end
+    json['elements'].each do |json|
+      default_element json
+    end if has_elements?
   end
 
   def data
@@ -79,6 +86,9 @@ class Communication::Block::Template::Base
     components.each do |component|
       hash[component.property] = component.data
     end
+    elements.each do |element|
+      hash['elements'] << element.data
+    end if has_elements?
     hash
   end
 
@@ -95,13 +105,19 @@ class Communication::Block::Template::Base
     []
   end
 
-  def default_element
-    return if self.class.element_class.nil?
-    self.class.element_class.new block
+  def has_elements?
+    !self.class.element_class.nil?
+  end
+
+  def default_element(data = nil)
+    return unless has_elements?
+    self.class.element_class.new block, data
   end
 
   def elements
-    data['elements']
+    block.attributes['data']['elements'].map do |json|
+      default_element json
+    end if has_elements?
   end
 
   def default_layout

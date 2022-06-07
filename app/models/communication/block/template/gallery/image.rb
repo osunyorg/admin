@@ -8,7 +8,7 @@ class Communication::Block::Template::Gallery::Image < Communication::Block::Tem
     {
       'alt' => '',
       'credit' => '',
-      'file' => {}
+      'image' => {}
     }
   end
 end
