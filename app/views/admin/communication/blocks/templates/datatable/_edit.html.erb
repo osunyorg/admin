@@ -1,0 +1,42 @@
+<a  class="<%= button_classes('mb-4 me-2') %>"
+    v-on:click="data.columns.push('')">
+    Ajouter une colonne
+</a>
+
+<a  class="<%= button_classes('mb-4 me-2 btn-danger') %>"
+    v-on:click="data.columns.pop()">
+      Supprimer une colonne <i class="fas fa-times"></i>
+</a>
+
+<a  class="<%= button_classes('mb-4 me-2') %>"
+    v-on:click="data.elements.push({cells: []})">
+    Ajouter une ligne
+</a>
+
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <td v-for="(column, index) in data.columns">
+          <input 
+              type="text"
+              v-model="data.columns[index]">
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="row in data.elements">
+        <td v-for="(column, index) in data.columns">
+          <input 
+              type="text"
+              v-model="row.cells[index]">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%#= block_component_add_element "Ajouter une ligne" %> 
+<%# Comportement non attendu dans ce context  %>
+
+

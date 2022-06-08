@@ -1,4 +1,4 @@
 class Communication::Block::Template::Datatable < Communication::Block::Template::Base
-  def build_git_dependencies
-  end
+  has_array :columns
+  has_elements Communication::Block::Template::Datatable::Row
 end
