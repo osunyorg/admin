@@ -40,6 +40,7 @@ class Communication::Block::Template::Base
 
   def self.has_component(property, kind)
     self.components_descriptions ||= []
+    # TODO rename property / kind ?
     self.components_descriptions << { name: property, type: kind }
     class_eval <<-CODE, __FILE__, __LINE__ + 1
 
