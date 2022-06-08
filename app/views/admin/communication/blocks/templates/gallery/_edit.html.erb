@@ -1,8 +1,7 @@
 <%
 element = @block.template.default_element
 %>
-<%= render 'admin/communication/blocks/components/layouts/edit',
-            horizontal: true %>
+<%= block_component_edit :layout, horizontal: true %>
 
 <%= render  'admin/communication/blocks/components/add_element/edit',
             label: t('.add_image') %>

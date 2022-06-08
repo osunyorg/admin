@@ -1,6 +1,7 @@
 <%
-indentation = '      '
-value = @block.template.public_send property
+value = template.public_send property
+depth ||= 3
+indentation = '  ' * depth
 %>
 <%= indentation %><%= property %>: >-
-<%= indentation %>  <%= prepare_text_for_static value, 4 %>
+<%= indentation %>  <%= prepare_text_for_static value, depth + 1 %>

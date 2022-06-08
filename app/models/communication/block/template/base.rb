@@ -27,6 +27,7 @@ class Communication::Block::Template::Base
 
   def self.has_layouts(list)
     self.layouts = list
+    has_component :layout, :layout
   end
 
   def self.has_elements(element_class)

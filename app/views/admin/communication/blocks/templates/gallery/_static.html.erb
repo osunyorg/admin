@@ -1,6 +1,12 @@
-      layout: <%= block.template.layout %>
+<%= block_component_static :layout %>
       images:
 <% block.template.elements.each do |element| %>
+<% next unless element.blob %>
+        -
+<%= block_component_static :image, template: element, depth: 5 %>
+<%= block_component_static :alt, template: element, depth: 6 %>
+<%= block_component_static :credit, template: element, depth: 6 %>
+<%= block_component_static :text, template: element, depth: 6 %>
         - id: "<%= element.blob.id %>"
           file: "<%= element.blob.id %>"
           alt: >

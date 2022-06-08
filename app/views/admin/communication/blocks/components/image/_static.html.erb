@@ -1,10 +1,11 @@
 <%
 component = template.public_send "#{property}_component"
 blob = component.blob
-indentation = '      '
+depth ||= 3
+indentation = '  ' * depth
 %>
 <% if blob %>
-<%= indentation %>image:
+<%= indentation %><%= property %>:
 <%= indentation %>  id: "<%= blob.id %>"
 <%= indentation %>  file: "<%= blob.id %>"
 <% end %>

@@ -74,7 +74,7 @@ module Admin::ApplicationHelper
   end
 
   def prepare_text_for_static(text, depth = 1)
-    indentation = '  ' * depth # Beware, it works only at level one, with 2 spaces
+    indentation = '  ' * depth
     text = text.to_s.dup
     text = strip_tags text
     text = text.strip
