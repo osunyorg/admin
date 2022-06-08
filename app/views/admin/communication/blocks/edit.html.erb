@@ -13,7 +13,7 @@
       </div>
     </div>
     <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
-    <textarea name="communication_block[data]" rows="20" cols="200" class="d-non">
+    <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}
     </textarea>
     <% content_for :action_bar_right do %>
