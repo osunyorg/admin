@@ -139,6 +139,10 @@ class Communication::Block::Template::Base
     data['layout']
   end
 
+  def kind
+    block.template_kind
+  end
+
   def blob_with_id(id)
     university.active_storage_blobs.find id
   end

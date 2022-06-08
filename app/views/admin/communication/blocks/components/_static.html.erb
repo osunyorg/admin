@@ -4,11 +4,12 @@ component = template.public_send "#{property}_component"
 value = template.public_send property
 depth ||= 3
 indentation = '  ' * depth
+partial = "admin/communication/blocks/components/#{component.kind}/static"
+
 local_assigns[:template] = template
 local_assigns[:component] = component
 local_assigns[:value] = value
 local_assigns[:depth] = depth
 local_assigns[:indentation] = indentation
-partial = "admin/communication/blocks/components/#{component.kind}/static"
 %>
 <%= render partial, **local_assigns %>
