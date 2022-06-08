@@ -2,18 +2,8 @@
       images:
 <% block.template.elements.each do |element| %>
 <% next unless element.blob %>
-        -
-<%= block_component_static :image, template: element, depth: 5 %>
-<%= block_component_static :alt, template: element, depth: 6 %>
-<%= block_component_static :credit, template: element, depth: 6 %>
-<%= block_component_static :text, template: element, depth: 6 %>
-        - id: "<%= element.blob.id %>"
-          file: "<%= element.blob.id %>"
-          alt: >
-            <%= prepare_text_for_static element.alt, 6 %>
-          credit: >
-            <%= prepare_text_for_static element.credit, 6 %>
-          text: >
-            <%= prepare_text_for_static element.text, 6 %>
-
+<%= block_component_static :image, template: element, depth: 4, list: true %>
+<%= block_component_static :alt, template: element, depth: 5 %>
+<%= block_component_static :credit, template: element, depth: 5 %>
+<%= block_component_static :text, template: element, depth: 5 %>
 <% end %>

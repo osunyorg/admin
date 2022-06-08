@@ -2,9 +2,14 @@
 component = template.public_send "#{property}_component"
 blob = component.blob
 depth ||= 3
+list ||= false
 indentation = '  ' * depth
+return unless blob
 %>
-<% if blob %>
+<% if list %>
+<%= indentation %>- id: "<%= blob.id %>"
+<%= indentation %>  file: "<%= blob.id %>"
+<% else %>
 <%= indentation %><%= property %>:
 <%= indentation %>  id: "<%= blob.id %>"
 <%= indentation %>  file: "<%= blob.id %>"

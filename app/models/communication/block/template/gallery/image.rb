@@ -14,7 +14,8 @@ class Communication::Block::Template::Gallery::Image < Communication::Block::Tem
         'id' => ''
       },
       'alt' => '',
-      'credit' => ''
+      'credit' => '',
+      'text' => ''
     }
   end
 end

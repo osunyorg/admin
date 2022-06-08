@@ -1,11 +1,17 @@
 <div class="row">
   <% @block.template.elements.each do |element| %>
+    <% next unless element.blob %>
     <div class="col-6">
       <article class="card">
         <%= block_component_preview :image, template: element %>
         <div class="card-body">
-          <p class="mb-0"><%= element.alt %></p>
-          <p class="mb-0 small"><%= element.text %></p>
+          <p class="small mb-0">
+            <%= block_component_preview :alt, template: element %>
+            <%= block_component_preview :credit, template: element %>
+          </p>
+          <p class="mb-0">
+            <%= block_component_preview :text, template: element %>
+          </p>
         </div>
       </article>
     </div>
