@@ -1,0 +1,69 @@
+
+
+<a  class="<%= button_classes('mb-4 me-2') %>"
+    v-on:click="data.columns.pop(); data.elements.forEach(row => row.cells.pop());">
+    Supprimer la dernière colonne
+</a>
+
+
+<div class="table-responsive mb-5">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td></td>
+        <td v-for="(column, index) in data.columns">
+          <input 
+              type="text"
+              v-model="data.columns[index]">
+            <a  class="btn btn-sm btn-danger ms-2"
+                v-on:click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
+                <i class="fas fa-times"></i>
+            </a>
+        </td>
+        <td>
+          <a  class="<%= button_classes("btn-sm") %>"
+              v-on:click="data.columns.push('')">
+              <i class="fas fa-plus"></i> colonne
+          </a>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <draggable :list="data.elements" handle=".dragHandle">
+        <tr v-for="(row, index) in data.elements">
+          <td>
+            <a class="btn p-0 dragHandle">
+              <i class="fa fa-bars handle"></i>
+            </a>
+          </td>
+          <td v-for="(column, columnIndex) in data.columns">
+            <input 
+                type="text"
+                v-model="row.cells[columnIndex]">
+          </td>
+          <td>
+            <a  class="btn btn-sm btn-danger"
+                v-on:click="data.elements.splice(index, 1);">
+                <i class="fas fa-times"></i>
+            </a>
+          </td>
+        </tr>
+      </draggable>
+    </tbody>
+  </table>
+  <a  class="<%= button_classes('btn-sm') %>"
+      v-on:click="data.elements.push({cells: []})">
+      <i class="fas fa-plus"></i> ligne
+  </a>
+</div>
+
+
+<%= block_component_edit :caption,
+    label: "Transcription textuelle",
+    placeholder: "Écrivez-ici la transcription textuelle du tableau" %>
+
+
+<%#= block_component_add_element "Ajouter une ligne" %> 
+<%# Comportement non attendu dans ce context  %>
+
+

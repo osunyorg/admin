@@ -29,6 +29,10 @@ class Communication::Block::Template::Base
     has_component property, :number
   end
 
+  def self.has_array(property)
+    has_component property, :array
+  end
+
   def self.has_layouts(list)
     self.layouts = list
     has_component :layout, :layout
