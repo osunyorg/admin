@@ -25,10 +25,18 @@ element = @block.template.default_element
         </div>
       </div>
       <div class="card-body">
-        <%= block_component_edit :image, element: element %>
-        <%= block_component_edit :alt, element: element %>
-        <%= block_component_edit :credit, element: element %>
-        <%= block_component_edit :text, element: element %>
+        <%= block_component_edit :image,
+              template: element %>
+        <%= block_component_edit :alt,
+              template: element,
+              label: t('admin.communication.blocks.components.image.alt.label'),
+              placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+        <%= block_component_edit :credit,
+              template: element,
+              label: t('admin.communication.blocks.components.image.credit.label'),
+              placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
+        <%= block_component_edit :text,
+              template: element %>
       </div>
     </div>
   </div>

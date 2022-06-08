@@ -1,13 +1,13 @@
       layout: <%= block.template.layout %>
       images:
-<% block.template.images_with_alt.each do |image| %>
-        - id: "<%= image.blob.id %>"
-          file: "<%= image.blob.id %>"
+<% block.template.elements.each do |element| %>
+        - id: "<%= element.blob.id %>"
+          file: "<%= element.blob.id %>"
           alt: >
-            <%= prepare_text_for_static image.alt, 6 %>
+            <%= prepare_text_for_static element.alt, 6 %>
           credit: >
-            <%= prepare_text_for_static image.credit, 6 %>
+            <%= prepare_text_for_static element.credit, 6 %>
           text: >
-            <%= prepare_text_for_static image.text, 6 %>
+            <%= prepare_text_for_static element.text, 6 %>
 
 <% end %>

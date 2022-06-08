@@ -17,4 +17,8 @@ class Communication::Block::Component::Base
   def kind
     self.class.name.demodulize.underscore
   end
+
+  def git_dependencies
+    []
+  end
 end

@@ -61,7 +61,7 @@ class Communication::Block::Template::Base
     self.data = json
   end
 
-  # Transforms raw json into ruby objects, based on componenets
+  # Transforms raw json into ruby objects, based on components
   def data=(value)
     if value.is_a? String
       json = JSON.parse(value)
@@ -77,13 +77,14 @@ class Communication::Block::Template::Base
     return unless has_elements?
     # Objects are initialized from the database,
     # then data from the form replaces data from the db.
-    # We need to reset elements, otherwises it never deletes.
+    # We need to reset elements, otherwise it's never deleted.
     @elements = []
     json['elements'].each do |json|
       @elements << default_element(json)
     end
   end
 
+  # Reads the data from the components
   def data
     hash = default_data
     components.each do |component|
@@ -101,7 +102,12 @@ class Communication::Block::Template::Base
   def git_dependencies
     unless @git_dependencies
       @git_dependencies = []
-      build_git_dependencies
+      components.each do |component|
+        add_dependency component.git_dependencies
+      end
+      elements.each do |element|
+        add_dependency element.git_dependencies
+      end
       @git_dependencies.uniq!
     end
     @git_dependencies

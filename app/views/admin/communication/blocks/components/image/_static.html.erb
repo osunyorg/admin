@@ -1,6 +1,6 @@
 <%
-image = @block.template.public_send(property)
-blob = image['blob'] if image&.has_key? 'blob'
+component = template.public_send "#{property}_component"
+blob = component.blob
 indentation = '      '
 %>
 <% if blob %>

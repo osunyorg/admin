@@ -4,13 +4,17 @@ class Communication::Block::Template::Gallery::Image < Communication::Block::Tem
   has_rich_text :credit
   has_text :text
 
+  def blob
+    image_component.blob
+  end
+
   def default_data
     {
-      'alt' => '',
-      'credit' => '',
       'image' => {
         'id' => ''
-      }
+      },
+      'alt' => '',
+      'credit' => ''
     }
   end
 end

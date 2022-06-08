@@ -1,15 +1,17 @@
 <%
 template_kind = @block.template_kind
-i18n_template = "admin.communication.blocks.templates.#{template_kind}.edit"
-element ||= false
-if element
-  model = 'element'
-  dom_id = "'element-' + index + '-#{property}'"
-  i18n_component = "#{i18n_template}.element.#{property}"
-else
+i18n = "admin.communication.blocks.templates.#{template_kind}.edit"
+template ||= @block.template
+root_template = template == @block.template
+if root_template
   model = 'data'
   dom_id = "#{property}"
-  i18n_component = "#{i18n_template}.#{property}"
+  i18n_component = "#{i18n}.#{property}"
+else
+  # Nested element
+  model = 'element'
+  dom_id = "'element-' + index + '-#{property}'"
+  i18n_component = "#{i18n}.element.#{property}"
 end
 label ||= t "#{i18n_component}.label"
 placeholder ||= t "#{i18n_component}.placeholder"

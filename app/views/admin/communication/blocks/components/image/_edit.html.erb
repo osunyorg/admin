@@ -1,17 +1,22 @@
 <%
-element ||= false
-if element
-  model = 'element'
-  dom_id = "'element-' + index + '-#{property}'"
-else
+template_kind = @block.template_kind
+i18n ||= "admin.communication.blocks.templates.#{template_kind}.edit"
+template ||= @block.template
+root_template = template == @block.template
+if root_template
   model = 'data'
   dom_id = "#{property}"
+  i18n_component = "#{i18n}.#{property}"
+else
+  # Nested element
+  model = 'element'
+  dom_id = "'element-' + index + '-#{property}'"
+  i18n_component = "#{i18n}.element.#{property}"
 end
 label ||= t 'admin.communication.blocks.components.image.input.label'
 remove ||= t 'admin.communication.blocks.components.image.input.remove'
 %>
 <div class="mb-3">
-
   <div v-if="!<%= model %>.<%= property %>.id">
     <label  class="form-label"
             :for="<%= dom_id.html_safe %>">

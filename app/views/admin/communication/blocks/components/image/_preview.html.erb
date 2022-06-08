@@ -1,7 +1,6 @@
 <%
-image = @block.template.public_send property
-blob = image['blob'] if image&.has_key? 'blob'
+image = template.public_send "#{property}_component"
 %>
-<%= kamifusen_tag blob,
-                  width: 600,
-                  class: 'img-fluid' if blob %>
+<%= kamifusen_tag image.blob,
+                  width: 400,
+                  class: 'img-fluid' if image.blob %>

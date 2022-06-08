@@ -1,11 +1,13 @@
-<% @block.template.elements.each do |element| %>
-  <article class="card">
-    <% if element.image['blob'] %>
-      <%= kamifusen_tag element.image['blob'], width: 500, class: 'img-fluid mb-3' %>
-    <% end %>
-    <div class="card-body">
-      <p class="mb-0"><%= element.alt %></p>
-      <p class="mb-0 small"><%= element.text %></p>
+<div class="row">
+  <% @block.template.elements.each do |element| %>
+    <div class="col-6">
+      <article class="card">
+        <%= block_component_preview :image, template: element %>
+        <div class="card-body">
+          <p class="mb-0"><%= element.alt %></p>
+          <p class="mb-0 small"><%= element.text %></p>
+        </div>
+      </article>
     </div>
-  </article>
-<% end %>
+  <% end %>
+</div>
