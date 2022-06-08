@@ -4,12 +4,17 @@
     <%= block_component_edit :notes %>
   </div>
   <div class="col-md-6">
+    <label class="form-label">&nbsp;</label>
     <div class="card">
       <div class="card-header">
         <%= t "admin.communication.blocks.templates.chapter.edit.image.label" %>
       </div>
       <div class="card-body">
-        <%= block_component_edit :image %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= block_component_edit :image %>
+          </div>
+        </div>
         <%= block_component_edit :image_alt,
               label: t('admin.communication.blocks.components.image.alt.label'),
               placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
