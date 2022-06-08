@@ -3,38 +3,53 @@
     Ajouter une colonne
 </a>
 
-<a  class="<%= button_classes('mb-4 me-2 btn-danger') %>"
+<a  class="<%= button_classes('mb-4 me-2') %>"
     v-on:click="data.columns.pop()">
-      Supprimer une colonne <i class="fas fa-times"></i>
+    Supprimer la dernière colonne
 </a>
 
-<a  class="<%= button_classes('mb-4 me-2') %>"
-    v-on:click="data.elements.push({cells: []})">
-    Ajouter une ligne
-</a>
 
 <div class="row">
   <table class="table">
     <thead>
       <tr>
+        <td></td>
         <td v-for="(column, index) in data.columns">
           <input 
               type="text"
               v-model="data.columns[index]">
+          <%#
+            <a  class="btn btn-sm btn-danger"
+                v-on:click="data.columns.splice(index, 1)">
+                <i class="fas fa-times"></i>
+            </a>
+          %>
         </td>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="row in data.elements">
-        <td v-for="(column, index) in data.columns">
-          <input 
-              type="text"
-              v-model="row.cells[index]">
-        </td>
-      </tr>
+      <draggable :list="data.elements" handle=".dragHandle" class="row">
+        <tr v-for="row in data.elements">
+          <td>
+            <a class="btn p-0 dragHandle">
+              <i class="fa fa-bars handle"></i>
+            </a>
+          </td>
+          <td v-for="(column, index) in data.columns">
+            <input 
+                type="text"
+                v-model="row.cells[index]">
+          </td>
+        </tr>
+      </draggable>
     </tbody>
   </table>
 </div>
+
+<a  class="<%= button_classes('mb-4 me-2') %>"
+    v-on:click="data.elements.push({cells: []})">
+    Ajouter une ligne
+</a>
 
 <%#= block_component_add_element "Ajouter une ligne" %> 
 <%# Comportement non attendu dans ce context  %>
