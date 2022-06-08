@@ -5,7 +5,9 @@ module Admin::BlocksHelper
   end
 
   def block_component_preview(property, **options)
-    block_component_render :preview, property, **options
+    render "admin/communication/blocks/components/preview",
+            property: property,
+            **options
   end
 
   def block_component_static(property, **options)

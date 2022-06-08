@@ -1,6 +1,5 @@
 <%
-image = template.public_send "#{property}_component"
+blob = component.blob
+return unless blob
 %>
-<%= kamifusen_tag image.blob,
-                  width: 400,
-                  class: 'img-fluid' if image.blob %>
+<%= kamifusen_tag blob, width: 600, class: 'img-fluid' %>
