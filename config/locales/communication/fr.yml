@@ -188,6 +188,10 @@ fr:
                 placeholder: Entrer le texte
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
+            edit:
+              caption:
+                label: Transcription textuelle
+                placeholder: Écrivez-ici la transcription textuelle du tableau
           definitions:
             description: Une liste de termes et leur définition. Un genre de dictionnaires, finalement.
             edit:

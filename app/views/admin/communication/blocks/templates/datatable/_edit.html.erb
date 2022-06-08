@@ -51,11 +51,8 @@
   </table>
 </div>
 
-
-<%= block_component_edit :caption,
-    label: "Transcription textuelle",
-    placeholder: "Écrivez-ici la transcription textuelle du tableau" %>
-
-
-<%#= block_component_add_element "Ajouter une ligne" %>
-<%# Comportement non attendu dans ce context  %>
+<div class="row">
+  <div class="col-lg-6">
+    <%= block_component_edit :caption %>
+  </div>
+</div>
