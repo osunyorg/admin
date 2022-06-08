@@ -89,6 +89,8 @@
 
         $(element).summernote({
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
+          followingToolbar: true,
+          disableDragAndDrop: true,
           callbacks: {
             onChange: function(contents, $editable) {
               element.value = contents;

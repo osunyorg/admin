@@ -9,7 +9,9 @@ $(function () {
             ['position', ['superscript', 'subscript']],
             ['insert', ['link']],
             ['view', ['codeview']]
-        ]
+        ],
+        followingToolbar: true,
+        disableDragAndDrop: true
     };
 
     configs['mini-list'] = {
@@ -19,7 +21,9 @@ $(function () {
             ['para', ['ul', 'ol']],
             ['insert', ['link']],
             ['view', ['codeview']]
-        ]
+        ],
+        followingToolbar: true,
+        disableDragAndDrop: true
     };
 
     configs['default'] = {
@@ -46,6 +50,7 @@ $(function () {
             'h4'
         ],
         followingToolbar: true,
+        disableDragAndDrop: true,
         callbacks: {
             onImageUpload: function (files) {
                 var attachmentUpload = new SummernoteAttachmentUpload(this, files[0]);
