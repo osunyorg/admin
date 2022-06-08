@@ -1,10 +1,7 @@
-<%
-element = @block.template.default_element
-%>
-<%= block_component_edit :layout, horizontal: true %>
+<% element = @block.template.default_element %>
 
-<%= render  'admin/communication/blocks/components/add_element/edit',
-            label: t('.add_image') %>
+<%= block_component_edit :layout, horizontal: true %>
+<%= block_component_add_element t('.add_image') %>
 
 <draggable :list="data.elements" handle=".imageHandle" class="row">
   <div  v-for="(element, index) in data.elements"

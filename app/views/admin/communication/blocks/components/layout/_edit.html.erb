@@ -5,8 +5,9 @@ layouts = template.class.layouts
 <% if horizontal %><div class="row"><% end %>
 <% layouts.each do |layout| %>
   <%
-  name = t "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}.label"
-  description = t "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}.description"
+  i18n = "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}"
+  name = t "#{i18n}.label"
+  description = t "#{i18n}.description"
   %>
   <% if horizontal %><div class="col-md-4"><% end %>
   <div class="card mb-4">

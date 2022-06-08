@@ -1,9 +1,6 @@
       figures:
-<% block.template.figures.each do |figure| %>
-        - number: >-
-            <%= prepare_text_for_static figure.number, 6 %>
-          unit: >-
-            <%= prepare_text_for_static figure.unit, 6 %>
-          description: >-
-            <%= prepare_text_for_static figure.description, 6 %>
+<% block.template.elements.each do |element| %>
+        - <%= block_component_static :number, template: element, depth: 0 %>
+<%= block_component_static :unit, template: element, depth: 5 %>
+<%= block_component_static :description, template: element, depth: 5 %>
 <% end %>

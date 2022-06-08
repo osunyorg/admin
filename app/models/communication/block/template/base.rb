@@ -25,6 +25,10 @@ class Communication::Block::Template::Base
     has_component property, :image
   end
 
+  def self.has_number(property)
+    has_component property, :number
+  end
+
   def self.has_layouts(list)
     self.layouts = list
     has_component :layout, :layout
@@ -141,10 +145,6 @@ class Communication::Block::Template::Base
     self.class.layouts&.first
   end
 
-  def layout
-    data['layout']
-  end
-
   def kind
     block.template_kind
   end
@@ -155,7 +155,6 @@ class Communication::Block::Template::Base
 
   def default_data
     hash = {}
-    hash['layout'] = default_layout if default_layout
     hash['elements'] = [] if has_element_class?
     components.each do |component|
       hash[component.property] = component.default_data

@@ -233,13 +233,6 @@ fr:
                   label: Crédit
                   placeholder: Entrer le crédit de l'image ici
               add_image: Ajouter une image
-              image_label: Image (.png, .jpg)
-              alt_label: Texte alternatif
-              alt_placeholder: Entrer la description textuelle
-              credit_label: Crédit
-              credit_placeholder: Entrer le crédit de l'image ici
-              text_label: Texte
-              text_placeholder: Entrer le texte
               remove_image: Enlever l'image
           image:
             description: Une image avec sa description alternative accessible, son texte et son crédit.
@@ -250,14 +243,18 @@ fr:
           key_figures:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
-              add_key: Add key figure
-              unit_label: Unit
-              unit_placeholder: Enter unit here
-              number_label: Number
-              number_placeholder: Enter key figure's value here
-              description_label: Description
-              description_placeholder: Enter description here
-              remove_key: Remove key figure
+              remove_key: Supprimer le chiffre clé
+              add_key: Ajouter un chiffre clé
+              element:
+                unit:
+                  label: Unité
+                  placeholder: Entrer l'unité ici
+                number:
+                  label: Numéro
+                  placeholder: Entrer le chiffre ici
+                description:
+                  label: Description
+                  placeholder: Entrer la description
           organization_chart:
             description: Un organigramme présentant des personnes et leur fonction.
             edit:

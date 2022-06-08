@@ -1,20 +1,25 @@
 module Admin::BlocksHelper
 
   def block_component_edit(property, **options)
-    render "admin/communication/blocks/components/edit",
+    render 'admin/communication/blocks/components/edit',
             property: property,
             **options
   end
 
   def block_component_preview(property, **options)
-    render "admin/communication/blocks/components/preview",
+    render 'admin/communication/blocks/components/preview',
             property: property,
             **options
   end
 
   def block_component_static(property, **options)
-    render "admin/communication/blocks/components/static",
+    render 'admin/communication/blocks/components/static',
             property: property,
             **options
+  end
+
+  def block_component_add_element(label)
+    render 'admin/communication/blocks/components/add_element/edit',
+            label: label
   end
 end
