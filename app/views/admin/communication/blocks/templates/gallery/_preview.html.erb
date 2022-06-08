@@ -5,10 +5,12 @@
       <article class="card">
         <%= block_component_preview :image, template: element %>
         <div class="card-body">
-          <p class="small mb-0">
-            <%= block_component_preview :alt, template: element %>
+          <div class="small">
+            <p class="mb-0">
+              <%= block_component_preview :alt, template: element %>
+            </p>
             <%= block_component_preview :credit, template: element %>
-          </p>
+          </div>
           <p class="mb-0">
             <%= block_component_preview :text, template: element %>
           </p>
