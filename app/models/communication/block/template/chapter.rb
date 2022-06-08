@@ -3,7 +3,7 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
   has_rich_text :text
   has_rich_text :notes
   has_image :image
-  has_string :image_alt
-  has_rich_text :image_credit
+  has_string :alt
+  has_rich_text :credit
 
 end

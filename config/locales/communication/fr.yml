@@ -243,6 +243,10 @@ fr:
               remove_image: Enlever l'image
           image:
             description: Une image avec sa description alternative accessible, son texte et son crédit.
+            edit:
+              text:
+                label: Texte
+                placeholder: Entrer le texte
           key_figures:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
