@@ -2,5 +2,4 @@ class Communication::Block::Template::Datatable::Row < Communication::Block::Tem
 
     has_array :cells
 
-
 end

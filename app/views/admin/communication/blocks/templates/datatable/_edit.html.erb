@@ -6,7 +6,7 @@
 </a>
 
 
-<div class="row">
+<div class="table-responsive mb-5">
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -51,12 +51,17 @@
       </draggable>
     </tbody>
   </table>
+  <a  class="<%= button_classes('btn-sm') %>"
+      v-on:click="data.elements.push({cells: []})">
+      <i class="fas fa-plus"></i> ligne
+  </a>
 </div>
 
-<a  class="<%= button_classes('btn-sm') %>"
-    v-on:click="data.elements.push({cells: []})">
-    <i class="fas fa-plus"></i> ligne
-</a>
+
+<%= block_component_edit :caption,
+    label: "Transcription textuelle",
+    placeholder: "Écrivez-ici la transcription textuelle du tableau" %>
+
 
 <%#= block_component_add_element "Ajouter une ligne" %> 
 <%# Comportement non attendu dans ce context  %>
