@@ -9,7 +9,9 @@ module Admin::BlocksHelper
   end
 
   def block_component_static(property, **options)
-    block_component_render :static, property, **options
+    render "admin/communication/blocks/components/static",
+            property: property,
+            **options
   end
 
   protected

@@ -1,9 +1,6 @@
 <%
-component = template.public_send "#{property}_component"
 blob = component.blob
-depth ||= 3
 list ||= false
-indentation = '  ' * depth
 return unless blob
 %>
 <% if list %>

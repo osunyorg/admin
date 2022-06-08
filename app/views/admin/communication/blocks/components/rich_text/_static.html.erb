@@ -1,7 +1,2 @@
-<%
-value = template.public_send property
-depth ||= 3
-indentation = '  ' * depth
-%>
 <%= indentation %><%= property %>: >-
 <%= indentation %>  <%= prepare_html_for_static value, @university %>
