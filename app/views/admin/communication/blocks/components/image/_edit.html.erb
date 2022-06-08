@@ -1,6 +1,6 @@
 <%
 template_kind = @block.template_kind
-i18n ||= "admin.communication.blocks.templates.#{template_kind}.edit"
+i18n = "admin.communication.blocks.templates.#{template_kind}.edit"
 template ||= @block.template
 root_template = template == @block.template
 if root_template
