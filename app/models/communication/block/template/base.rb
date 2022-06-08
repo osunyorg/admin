@@ -75,7 +75,7 @@ class Communication::Block::Template::Base
       next unless json.has_key? component.property
       component.data = json[component.property]
     end
-    return unless has_elements?
+    return unless has_element_class?
     # Objects are initialized from the database,
     # then data from the form replaces data from the db.
     # We need to reset elements, otherwise it's never deleted.
@@ -91,7 +91,7 @@ class Communication::Block::Template::Base
     components.each do |component|
       hash[component.property] = component.data
     end
-    if has_elements?
+    if has_element_class?
       hash['elements'] = []
       elements.each do |element|
         hash['elements'] << element.data
@@ -115,15 +115,21 @@ class Communication::Block::Template::Base
   end
 
   def active_storage_blobs
-    []
-  end
-
-  def has_elements?
-    !self.class.element_class.nil?
+    unless @active_storage_blobs
+      @active_storage_blobs = []
+      components.each do |component|
+        @active_storage_blobs += component.active_storage_blobs
+      end
+      elements.each do |element|
+        @active_storage_blobs += element.active_storage_blobs
+      end
+      @active_storage_blobs.uniq!
+    end
+    @active_storage_blobs
   end
 
   def default_element(data = nil)
-    return unless has_elements?
+    return unless has_element_class?
     self.class.element_class.new block, data
   end
 
@@ -148,15 +154,19 @@ class Communication::Block::Template::Base
   end
 
   def default_data
-    {
-      'layout' => default_layout,
-      'elements' => []
-    }
+    hash = {}
+    hash['layout'] = default_layout if default_layout
+    hash['elements'] = [] if has_element_class?
+    components.each do |component|
+      hash[component.property] = component.default_data
+    end
+    hash
   end
 
   protected
 
-  def build_git_dependencies
+  def has_element_class?
+    !self.class.element_class.nil?
   end
 
   def add_dependency(dependency)

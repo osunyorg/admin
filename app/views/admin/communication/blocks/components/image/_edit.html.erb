@@ -20,7 +20,7 @@ remove = t 'admin.communication.blocks.components.image.input.remove'
           />
   </div>
   <a  class="btn btn-sm btn-danger"
-      v-on:click="<%= model %>.<%= property %>={'id': ''}"
+      v-on:click="<%= model %>.<%= property %>={}"
       v-if="<%= model %>.<%= property %>.id">
       <i class="fas fa-times"></i>
     <%= remove %>

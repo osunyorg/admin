@@ -86,7 +86,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def to_s
-    title.blank?  ? "Block #{position}"
+    title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"
   end
 

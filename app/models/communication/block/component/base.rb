@@ -6,6 +6,10 @@ class Communication::Block::Component::Base
     @template = template
   end
 
+  def default_data
+    ''
+  end
+
   def data
     @data
   end
@@ -19,6 +23,10 @@ class Communication::Block::Component::Base
   end
 
   def git_dependencies
+    active_storage_blobs
+  end
+
+  def active_storage_blobs
     []
   end
 end

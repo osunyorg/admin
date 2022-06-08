@@ -7,15 +7,4 @@ class Communication::Block::Template::Gallery::Image < Communication::Block::Tem
   def blob
     image_component.blob
   end
-
-  def default_data
-    {
-      'image' => {
-        'id' => ''
-      },
-      'alt' => '',
-      'credit' => '',
-      'text' => ''
-    }
-  end
 end
