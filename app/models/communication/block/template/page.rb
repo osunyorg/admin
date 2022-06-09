@@ -41,6 +41,10 @@ class Communication::Block::Template::Page < Communication::Block::Template
 
   protected
 
+  def exclude_for
+    [Education::Program]
+  end
+
   def kind
     @kind ||= data['kind'] || 'selection'
   end

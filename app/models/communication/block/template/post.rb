@@ -24,6 +24,10 @@ class Communication::Block::Template::Post < Communication::Block::Template
 
   protected
 
+  def exclude_for
+    [Education::Program]
+  end
+
   def kind
     @kind ||= data['kind'] || 'all'
   end

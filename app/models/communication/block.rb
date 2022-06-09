@@ -78,6 +78,10 @@ class Communication::Block < ApplicationRecord
     @template ||= "Communication::Block::Template::#{template_kind.classify}".constantize.new self
   end
 
+  def template_reset!
+    @template = nil
+  end
+
   def to_s
     title.blank?  ? "Block #{position}"
                   : "#{title}"

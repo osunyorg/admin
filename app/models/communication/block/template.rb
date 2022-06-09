@@ -22,6 +22,10 @@ class Communication::Block::Template
     []
   end
 
+  def excluded_for?(about)
+    about.class.in? exclude_for
+  end
+
   protected
 
   def build_git_dependencies
@@ -62,6 +66,10 @@ class Communication::Block::Template
   def elements
     data.has_key?('elements') ? data['elements']
                               : []
+  end
+
+  def exclude_for
+    []
   end
 
   def university
