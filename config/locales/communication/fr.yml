@@ -140,6 +140,9 @@ fr:
           text:
             label: Texte
             placeholder: Entrer le texte
+            transcription:
+              label: Transcription textuelle du contenu
+              placeholder: Entrer ici la transcription
           image:
             input:
               label: Image (.png, .jpg, .svg)
@@ -204,10 +207,9 @@ fr:
           embed:
             description: Du code HTML brut, permettant d'intégrer des cartes ou divers composants en iframe.
             edit:
-              code_label: Code du bloc d'intégration HTML
-              code_placeholder: Entrez ici le code
-              transcription_label: Transcription textuelle du contenu
-              transcription_placeholder: Entrez ici la transcription
+              code:
+                label: Code du bloc d'intégration HTML
+                placeholder: Entrez ici le code
           files:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
@@ -341,9 +343,6 @@ fr:
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
-              transcription:
-                label: Transcription textuelle du contenu
-                placeholder: Entrer ici la transcription
               url:
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo

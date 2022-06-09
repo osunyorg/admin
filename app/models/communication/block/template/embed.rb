@@ -1,12 +1,6 @@
 class Communication::Block::Template::Embed < Communication::Block::Template::Base
-  def build_git_dependencies
-  end
 
-  def code
-    "#{data['code']}"
-  end
+  has_text :code
+  has_text :transcription
 
-  def transcription
-    "#{data['transcription']}"
-  end
 end

@@ -140,6 +140,9 @@ en:
           text:
             label: Text
             placeholder: Enter text
+            transcription:
+              label: Text transcript
+              placeholder: Enter text transcript
           image:
             input:
               label: Image (.png, .jpg, .svg)
@@ -198,10 +201,9 @@ en:
           embed:
             description: HTML raw code, so you can integrate maps or iframe components.
             edit:
-              code_label: Code
-              code_placeholder: Enter code
-              transcription_label: Text transcript
-              transcription_placeholder: Enter text transcript
+              code:
+                label: Code
+                code_placeholder: Enter code
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
@@ -323,9 +325,6 @@ en:
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
-              transcription:
-                label: Text transcript
-                placeholder: Enter text transcript
               url:
                 label: Video url
                 placeholder: Enter video's url
