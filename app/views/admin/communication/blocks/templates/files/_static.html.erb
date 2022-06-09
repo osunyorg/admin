@@ -1,5 +1,6 @@
       files:
 <% block.template.files.each do |file| %>
-        - title: "<%= file.title %>"
+        - title: >-
+            <%= prepare_text_for_static file.title, 6 %>
           id: "<%= file.blob.id if file.blob %>"
 <% end %>

@@ -118,6 +118,10 @@ module Communication::Website::WithDependencies
     true
   end
 
+  def has_accessibility?
+    true
+  end
+
   def has_communication_posts?
     posts.published.any?
   end

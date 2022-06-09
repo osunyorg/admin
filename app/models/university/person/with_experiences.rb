@@ -10,8 +10,7 @@ module University::Person::WithExperiences
                                   reject_if: :all_blank,
                                   allow_destroy: true
 
-    # PA FIXME
-    # validates_associated :experiences
+    validates_associated :experiences
 
     scope :for_alumni_organization, -> (organization_id) {
       left_joins(:experiences)

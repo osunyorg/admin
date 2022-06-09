@@ -128,17 +128,17 @@ fr:
     title: Image
     alt:
       label: Texte alternatif
-      hint: Ce texte est essentiel pour l'accessibilité
+      hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
     credit:
       label: Crédit
-      hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur
+      hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
     remove: Supprimer l'image
   filters:
     attributes:
-      date: Filtrer par Date
+      date: Filtrer par date
       element: Filtrer par %{element}
-      kind: Filtrer par Type
-      role: Filtrer par Rôle
+      kind: Filtrer par type
+      role: Filtrer par rôle
     buttons:
       expand: Filtrer le tableau
       submit: Filtrer

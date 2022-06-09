@@ -16,7 +16,7 @@ class Curator
   protected
 
   def create_post!
-    text = Wordpress.clean_html("#{page.text}<br><a href=\"#{@url}\" target=\"_blank\">Source</a>")
+    text = Wordpress.clean_html("#{page.text}<p><a href=\"#{@url}\" target=\"_blank\">Source</a></p>")
     @post = website.posts.create(
       university: website.university,
       title: page.title,

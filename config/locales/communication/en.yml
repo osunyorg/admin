@@ -365,6 +365,11 @@ en:
       last_posts: Last posts
       pages:
         defaults:
+          accessibility:
+            admin_description: accessibility page
+            description_short: ''
+            slug: accessibility
+            title: Accessibility
           administrators:
             admin_description: list of members in the administrative team
             description_short: List of members in the administrative team
