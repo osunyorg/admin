@@ -10,7 +10,7 @@
         <%= t('communication.website.last_pages') %>
         <small>
           -
-          <%= t('communication.website.see_all', number: @website.pages.count) %>
+          <%= t('communication.website.see_all', number: @website.pages.accessible_by(current_ability).count) %>
         </small>
       <% end %>
     </h2>

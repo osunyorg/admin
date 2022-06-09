@@ -13,8 +13,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def show
-    @pages = @website.pages.published.recent
-    @posts = @website.posts.published.recent
+    @pages = @website.pages.accessible_by(current_ability).published.recent
+    @posts = @website.posts.accessible_by(current_ability).published.recent
     breadcrumb
   end
 
