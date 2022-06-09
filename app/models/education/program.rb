@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  accessibility         :text
+#  apprenticeship        :boolean
 #  capacity              :integer
 #  contacts              :text
 #  content               :text
@@ -13,6 +14,7 @@
 #  evaluation            :text
 #  featured_image_alt    :string
 #  featured_image_credit :text
+#  initial               :boolean
 #  level                 :integer
 #  name                  :string
 #  objectives            :text
