@@ -141,11 +141,17 @@ class University::Person < ApplicationRecord
       unaccent(university_people.first_name) ILIKE unaccent(:term) OR
       unaccent(university_people.last_name) ILIKE unaccent(:term) OR
       unaccent(university_people.email) ILIKE unaccent(:term) OR
-      unaccent(university_people.phone) ILIKE unaccent(:term) OR
+      unaccent(university_people.phone_mobile) ILIKE unaccent(:term) OR
+      unaccent(university_people.phone_personal) ILIKE unaccent(:term) OR
+      unaccent(university_people.phone_professional) ILIKE unaccent(:term) OR
       unaccent(university_people.biography) ILIKE unaccent(:term) OR
       unaccent(university_people.description) ILIKE unaccent(:term) OR
       unaccent(university_people.description_short) ILIKE unaccent(:term) OR
       unaccent(university_people.twitter) ILIKE unaccent(:term) OR
+      unaccent(university_people.linkedin) ILIKE unaccent(:term) OR
+      unaccent(university_people.address) ILIKE unaccent(:term) OR
+      unaccent(university_people.zipcode) ILIKE unaccent(:term) OR
+      unaccent(university_people.city) ILIKE unaccent(:term) OR
       unaccent(university_people.url) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
