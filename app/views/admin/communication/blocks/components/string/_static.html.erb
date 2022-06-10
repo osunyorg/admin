@@ -1,2 +1,7 @@
+<% if list %>
+<%= indentation %>- <%= property %>: >-
+<%= indentation %>    <%= prepare_text_for_static value, depth + 2 %>
+<% else %>
 <%= indentation %><%= property %>: >-
 <%= indentation %>  <%= prepare_text_for_static value, depth + 1 %>
+<% end %>
