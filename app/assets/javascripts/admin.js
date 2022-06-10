@@ -9,7 +9,7 @@
 //= require appstack/app
 //= require gdpr/cookie_consent
 //= require sortablejs/Sortable
-//= require summernote/summernote-lite
+//= require summernote/summernote-bs5
 //= require summernote-rails
 //= require slug/slug
 //= require cocoon
