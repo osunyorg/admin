@@ -6,12 +6,12 @@ class Admin::ApplicationController < ApplicationController
   protected
 
   def breadcrumb
-    add_breadcrumb t('admin.dashboard'), :admin_root_path
+    add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
   end
 
   def short_breadcrumb
     @menu_collapsed = true
-    add_breadcrumb t('admin.dashboard'), :admin_root_path
+    add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
     add_breadcrumb '...'
   end
 

@@ -12,6 +12,7 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   end
 
   def active_storage_blobs
+    # If blob is nil, compact will remove it and the method will return an empty array
     [blob].compact
   end
 
