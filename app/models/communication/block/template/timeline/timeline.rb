@@ -1,6 +1,6 @@
-class Communication::Block::Template::Testimonial::Testimonial < Communication::Block::Template::Base
+class Communication::Block::Template::Timeline::Timeline < Communication::Block::Template::Base
 
-  has_string :author
+  has_string :title
   has_text :text
 
 end
