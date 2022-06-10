@@ -1,8 +1,8 @@
-<% @block.template.events.each do |event| %>
+<% @block.template.elements.each do |element| %>
   <article class="card">
     <div class="card-body">
-      <p class="lead"><%= event.title %></p>
-      <p><%= event.text %></p>
+      <p class="lead"><%= block_component_preview :title, template: element %></p>
+      <p><%= block_component_preview :text, template: element %></p>
     </div>
   </article>
 <% end %>
