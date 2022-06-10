@@ -200,10 +200,13 @@ fr:
             edit:
               add_definition: Ajouter une définition
               remove_definition: Supprimer la définition
-              title_label: Titre
-              title_placeholder: Entrer le titre de la définition
-              text_label: Texte
-              text_placeholder: Entrer la description de la définition
+              element:
+                title:
+                  label: Titre
+                  placeholder: Entrer le titre de la définition
+                description:
+                  label: Texte
+                  placeholder: Entrer la description de la définition
           embed:
             description: Du code HTML brut, permettant d'intégrer des cartes ou divers composants en iframe.
             edit:

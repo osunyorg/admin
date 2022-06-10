@@ -1,6 +1,8 @@
-<dl>
-  <% @block.template.definitions.each do |definition| %>
-    <dt><%= definition.title %></dt>
-    <dd><%= definition.text %></dd>
-  <% end %>
-</dl>
+<% @block.template.elements.each do |element| %>
+  <p class="lead mb-0">
+    <b>
+      <%= block_component_preview :title, template: element %>
+    </b>
+  </p>
+  <%= block_component_preview :description, template: element %>
+<% end %>

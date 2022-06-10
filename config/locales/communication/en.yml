@@ -194,10 +194,13 @@ en:
             edit:
               add_definition: Add definition
               remove_definition: Delete definition
-              title_label: Title
-              title_placeholder: Enter title here
-              text_label: Text
-              text_placeholder: Enter text here
+              element:
+                title:
+                  label: Title
+                  placeholder: Enter title here
+                description:
+                  label: Text
+                  placeholder: Enter text here
           embed:
             description: HTML raw code, so you can integrate maps or iframe components.
             edit:

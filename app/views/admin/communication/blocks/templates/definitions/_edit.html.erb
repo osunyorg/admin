@@ -1,10 +1,9 @@
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({title: '', text: ''})">
-    <%= t '.add_definition' %>
-</a>
+<% element = @block.template.default_element %>
+
+<%= block_component_add_element t('.add_definition') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row">
-  <div v-for="(definition, index) in data.elements" class="col-md-4">
+  <div v-for="(element, index) in data.elements" class="col-md-4">
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
@@ -14,6 +13,26 @@
             </a>
           </div>
           <div class="flex-fill">
+            <%= block_component_edit :title, template: element %>
+            <%= block_component_edit :description, template: element %>
+          </div>
+          <div>
+            <a  class="btn btn-sm btn-danger ms-3"
+                v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+                title="<%= t '.remove_definition' %>">
+                <i class="fas fa-times"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</draggable>
+
+
+
+
+            <!-- >
             <label    class="form-label"
                       :for="'definition-' + index + '-title'"><%= t '.title_label' %></label>
             <input class="form-control mb-3"
@@ -29,16 +48,4 @@
                       v-model="definition.text"
                       placeholder="<%= t '.text_placeholder' %>"
                       :id="'definition-' + index + '-text'"></textarea>
-          </div>
-          <div>
-            <a  class="btn btn-sm btn-danger ms-3"
-                v-on:click="data.elements.splice(data.elements.indexOf(definition), 1)"
-                title="<%= t '.remove_definition' %>">
-                <i class="fas fa-times"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</draggable>
+            <!-->
