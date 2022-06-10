@@ -1,22 +1,22 @@
-<% @block.template.testimonials.each do |testimonial| %>
+<% @block.template.elements.each do |element| %>
+
   <article class="card">
     <div class="card-body">
       <p class="lead">
-        <%= testimonial.text %>
+        <%= block_component_preview :text, template: element %>
       </p>
       <div class="d-flex align-items-center">
-        <% if testimonial.blob  %>
+        <% if element.photo  %>
           <div style="max-width: 80px;" class="me-3">
-            <%= kamifusen_tag testimonial.blob,
-                              width: 80,
-                              class: 'img-fluid rounded-circle img-circle' %>
+             <%= block_component_preview :photo, template: element %>
           </div>
         <% end %>
         <p class="flex-fill mb-0">
-          <b><%= testimonial.author %></b><br>
-          <%= testimonial.job %>
+          <b><%= block_component_preview :author, template: element %></b><br>
+          <%= block_component_preview :job, template: element %>
         </p>
       </div>
     </div>
   </article>
+
 <% end %>

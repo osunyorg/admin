@@ -322,27 +322,36 @@ fr:
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:
-              add_testimonial: Ajouter un témoignage
-              text_label: Texte
-              text_placeholder: Entrer le texte du témoignage
-              author_label: Auteur·e du témoignage
-              author_placeholder: Entrer le nom de l'auteur·e
-              job_label: Métier de l'auteur·e
-              job_placeholder: Entrer le métier de l'auteur·e
-              photo_label: Photo
-              remove_photo: Enlever la photo
-              remove_testimonial: Enlever le témoignage
+              element:
+                add_testimonial: Ajouter un témoignage
+                remove_testimonial: Enlever le témoignage
+                text:
+                  label: Texte
+                  placeholder: Entrer le texte du témoignage
+                author:
+                  label: Auteur·e du témoignage
+                  placeholder: Entrer le nom de l'auteur·e
+                job:
+                  label: Métier de l'auteur·e
+                  placeholder: Entrer le métier de l'auteur·e
+                photo:
+                  label: Photo
+                  remove_photo: Enlever la photo
           timeline:
             description: Une liste d'événements avec leur description, présentés en frise.
             edit:
-              description_label: Description
-              description_placeholder: Entrer la description
               add_event: Ajouter un événement
               remove_event: Supprimer l'événement
-              title_label: Titre
-              title_placeholder: Entrer le titre de l'événement
-              text_label: Texte
-              text_placeholder: Entrer le texte de l'événement
+              element:
+                description:
+                  label: Description
+                  placeholder: Entrer la description
+                title:
+                  label: Titre
+                  placeholder: Entrer le titre de l'événement
+                text:
+                  label: Texte
+                  placeholder: Entrer le texte de l'événement
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:

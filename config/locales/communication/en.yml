@@ -307,15 +307,20 @@ en:
             description: One or more testimonies
             edit:
               add_testimonial: Add testimonial
-              text_label: Text
-              text_placeholder: Enter testimonial's text
-              author_label: Author of the text
-              author_placeholder: Enter authors' name
-              job_label: Author's job
-              job_placeholder: Enter authors' job
-              photo_label: Photo
-              remove_photo: Remove photo
               remove_testimonial: Remove testimonial
+              element:
+                text:
+                  label: Text
+                  placeholder: Enter testimonial's text
+                author:
+                  label: Author of the text
+                  placeholder: Enter authors' name
+                job:
+                  label: Author's job
+                  placeholder: Enter authors' job
+                photo:
+                  label: Photo
+                  remove_photo: Remove photo
           timeline:
             description: A list of events with their description, on a timeline.
             edit:
