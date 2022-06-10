@@ -194,7 +194,7 @@ fr:
             edit:
               caption:
                 label: Transcription textuelle
-                placeholder: Écrivez-ici la transcription textuelle du tableau
+                placeholder: Entrer ici la transcription textuelle du tableau
           definitions:
             description: Une liste de termes et leur définition. Un genre de dictionnaires, finalement.
             edit:
@@ -212,7 +212,10 @@ fr:
             edit:
               code:
                 label: Code du bloc d'intégration HTML
-                placeholder: Entrez ici le code
+                placeholder: Entrer le code
+              iframe_title:
+                label: Titre de l'iframe (nécessaire pour l'accessibilité)
+                placeholder: Entrer le titre
           files:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:

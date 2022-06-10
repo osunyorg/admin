@@ -1,8 +1,9 @@
 <div class="row">
-  <div class="col-md-6 mb-3">
+  <div class="col-md-6">
     <%= block_component_edit :code %>
+    <%= block_component_edit :iframe_title %>
   </div>
-  <div class="col-md-6mb-3">
+  <div class="col-md-6">
     <%= block_component_edit :transcription,
           label: t('admin.communication.blocks.components.text.transcription.label'),
           placeholder: t('admin.communication.blocks.components.text.transcription.placeholder') %>
