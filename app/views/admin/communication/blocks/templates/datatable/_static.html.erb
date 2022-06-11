@@ -1,11 +1,6 @@
-      headers:
-<% block.template.columns.each do |column| %>
-        - <%= column %>
-<% end %>
+<%= block_component_static :columns %>
       rows:
 <% block.template.elements.each do |element| %>
-<% if element.cells.count > 0 %>
-        - ["<%= element.cells.join('", "').html_safe %>"]
-<% end %>
+<%= block_component_static :cells, template: element, list: true, depth: 4 %>
 <% end %>
 <%= block_component_static :caption %>
