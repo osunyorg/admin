@@ -33,6 +33,10 @@ class Communication::Block::Template::Base
     has_component property, :array
   end
 
+  def self.has_boolean(property)
+    has_component property, :boolean
+  end
+
   def self.has_layouts(list)
     self.layouts = list
     has_component :layout, :layout

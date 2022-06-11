@@ -1,167 +1,46 @@
 <div class="row mb-5">
   <div class="col-xxl-4 col-md-6">
-    <label  class="form-label"
-            for="text">
-      <%= t '.text_label' %>
-    </label>
     <div class="summernote">
-      <textarea id="text"
-              class="form-control summernote-vue"
-              v-model="data.text"
-              data-summernote-config="mini"
-              placeholder="<%= t '.text_placeholder' %>"></textarea>
+      <%= block_component_edit :text,
+          label: t('admin.communication.blocks.components.text.label'),
+          placeholder: t('admin.communication.blocks.components.text.placeholder') %>
     </div>
   </div>
   <div class="col-xxl-4 col-md-6">
-    <div v-if="!data.image">
-      <%# TODO : create a uploader vue3 component %>
-      <label  class="form-label"
-              for="image">
-        <%= t '.image_title' %>
-      </label>
-      <input  class="form-control mb-3"
-              type="file"
-              accept="image/*"
-              @change="onFileImageChange( $event, data, 'image' )"
-              id="image">
-    </div>
-    <div v-if="data.image">
-      <img :src="getImageUrl(data.image)"
-            class="img-fluid"
-            style="max-height: 80px"
-            />
-      <br>
-      <a  class="btn btn-sm btn-danger mt-2"
-          v-on:click="data.image=null">
-          <i class="fas fa-times"></i>
-          <%= t '.remove_image' %>
+    <%= block_component_edit :image,
+          label: t('admin.communication.blocks.components.image.input.label'),
+          remove: t('admin.communication.blocks.components.image.input.remove') %>
+    <%= block_component_edit :alt,
+          label: t('admin.communication.blocks.components.image.alt.label'),
+          placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+    <%= block_component_edit :credit,
+          label: t('admin.communication.blocks.components.image.credit.label'),
+          placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
+  </div>
+</div>
+
+<% element = @block.template.default_element %>
+<%= block_component_add_element t('.add_button') %>
+
+<div :list="data.elements" class="row">
+  <div v-for="(element, index) in data.elements">
+  <h3 class="h4"><%= t '.buttons' %></h3>
+  <div class="row mb-5">
+    <div class="col-lg-3">
+      <%= block_component_edit  :title, template: element %>
+      <a  class="btn btn-sm btn-danger"
+          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+          <i class="fas fa-times"></i> <%= t '.remove_button' %>
       </a>
     </div>
-    <label  class="form-label"
-            for="image_alt">
-      <%= t '.image_alt_label' %>
-    </label>
-    <input id="image_alt"
-            type="text"
-            class="form-control mb-2"
-            v-model="data.image_alt"
-            placeholder="<%= t '.image_alt_placeholder' %>" />
-    <label  class="form-label"
-            for="image_credit">
-      <%= t '.image_credit_label' %>
-    </label>
-    <input id="image_credit"
-            type="text"
-            class="form-control"
-            v-model="data.image_credit"
-            placeholder="<%= t '.image_credit_placeholder' %>" />
-  </div>
-</div>
-<h3 class="h4"><%= t '.button_1' %></h3>
-<div class="row mb-5">
-  <div class="col-lg-3">
-    <label class="form-label" for="button">
-      <%= t '.button_label' %>
-    </label>
-    <input  id="button"
-            type="text"
-            class="form-control mb-3"
-            v-model="data.button"
-            placeholder="<%= t '.button_placeholder' %>" />
-  </div>
-  <div class="col-lg-5">
-    <label class="form-label" for="url">
-      <%= t '.url_label' %>
-    </label>
-    <input  id="url"
-            type="url"
-            class="form-control"
-            v-model="data.url"
-            placeholder="<%= t '.url_placeholder' %>" />
-  </div>
-  <div class="col-lg-4">
-    <label class="form-label">&nbsp;</label>
-    <div class="form-check">
-      <input  id="target_blank"
-              type="checkbox"
-              class="form-check-input boolean optional"
-              v-model="data.target_blank">
-      <label class="form-label" for="target_blank">
-        <%= t 'admin.communication.blocks.components.link.target_blank' %>
-      </label>
+    <div class="col-lg-5">
+      <%= block_component_edit :url, template: element %>
     </div>
-  </div>
-</div>
-
-<h3 class="h4"><%= t '.button_2' %></h3>
-<div class="row mb-5">
-  <div class="col-lg-3">
-    <label class="form-label" for="button_secondary">
-      <%= t '.button_label' %>
-    </label>
-    <input  id="button_secondary"
-            type="text"
-            class="form-control mb-3"
-            v-model="data.button_secondary"
-            placeholder="<%= t '.button_placeholder' %>" />
-  </div>
-  <div class="col-lg-5">
-    <label class="form-label" for="url_secondary">
-      <%= t '.url_label' %>
-    </label>
-    <input  id="url_secondary"
-            type="url"
-            class="form-control"
-            v-model="data.url_secondary"
-            placeholder="<%= t '.url_placeholder' %>" />
-  </div>
-  <div class="col-lg-4">
-    <label class="form-label">&nbsp;</label>
-    <div class="form-check">
-      <input  id="target_blank_secondary"
-              type="checkbox"
-              class="form-check-input boolean optional"
-              v-model="data.target_blank_secondary">
-      <label class="form-label" for="target_blank_secondary">
-        <%= t 'admin.communication.blocks.components.link.target_blank' %>
-      </label>
-    </div>
-  </div>
-</div>
-
-
-<h3 class="h4"><%= t '.button_3' %></h3>
-<div class="row mb-5">
-  <div class="col-lg-3">
-    <label class="form-label" for="button_tertiary">
-      <%= t '.button_label' %>
-    </label>
-    <input  id="button_tertiary"
-            type="text"
-            class="form-control mb-3"
-            v-model="data.button_tertiary"
-            placeholder="<%= t '.button_placeholder' %>" />
-  </div>
-  <div class="col-lg-5">
-    <label class="form-label" for="url_tertiary">
-      <%= t '.url_label' %>
-    </label>
-    <input  id="url_tertiary"
-            type="url"
-            class="form-control"
-            v-model="data.url_tertiary"
-            placeholder="<%= t '.url_placeholder' %>" />
-  </div>
-  <div class="col-lg-4">
-    <label class="form-label">&nbsp;</label>
-    <div class="form-check">
-      <input  id="target_blank_tertiary"
-              type="checkbox"
-              class="form-check-input boolean optional"
-              v-model="data.target_blank_tertiary">
-      <label class="form-label" for="target_blank_tertiary">
-        <%= t 'admin.communication.blocks.components.link.target_blank' %>
-      </label>
+    <div class="col-lg-4">
+      <label class="form-label">&nbsp;</label>
+      <div class="form-check">
+        <%= block_component_edit :target_blank, template: element %>
+      </div>
     </div>
   </div>
 </div>

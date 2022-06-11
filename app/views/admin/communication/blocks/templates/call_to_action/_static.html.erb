@@ -1,29 +1,24 @@
       text: >-
-        <%= prepare_html_for_static block.template.text, about.university %>
-    <% if block.template.image %>
-      image:
-        id: "<%= block.template.image.blob.id %>"
-        file: "<%= block.template.image.blob.id %>"
-        alt: >-
-          <%= prepare_text_for_static block.template.image.alt, 5 %>
-        credit: >-
-          <%= prepare_text_for_static block.template.image.credit, 5 %>
-    <% end %>
-      button:
-        text: >-
-          <%= prepare_text_for_static block.template.button, 5 %>
-        url: >-
-          <%= prepare_text_for_static block.template.url, 5 %>
-        target_blank: <%= block.template.target_blank %>
-      button_secondary:
-        text: >-
-          <%= prepare_text_for_static block.template.button_secondary, 5 %>
-        url: >-
-          <%= prepare_text_for_static block.template.url_secondary, 5 %>
-        target_blank: <%= block.template.target_blank_secondary %>
-      button_tertiary:
-        text: >-
-          <%= prepare_text_for_static block.template.button_tertiary, 5 %>
-        url: >-
-          <%= prepare_text_for_static block.template.url_tertiary, 5 %>
-        target_blank: <%= block.template.target_blank_tertiary %>
+<%= block_component_static :text,
+          label: t('admin.communication.blocks.components.image.alt.label'),
+          placeholder: t('admin.communication.blocks.components.image.alt.placeholder'),
+          depth: 5 %>
+<%= block_component_static :image,
+          label: t('admin.communication.blocks.components.image.input.label'),
+          remove: t('admin.communication.blocks.components.image.input.remove'),
+          list:true %>
+<%= block_component_static :alt,
+          label: t('admin.communication.blocks.components.image.alt.label'),
+          placeholder: t('admin.communication.blocks.components.image.alt.placeholder'),
+          depth: 4 %>
+<%= block_component_static :credit,
+          label: t('admin.communication.blocks.components.image.credit.label'),
+          placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
+          depth: 4 %>
+      buttons: >-
+<% block.template.elements.each do |element| %>
+  <%= block_component_static :title, template: element, list: true %>
+  <%= block_component_static :url, template: element, depth: 4 %>
+  <%= block_component_static :target_blank, template: element, depth: 4 %>
+
+<% end %>
