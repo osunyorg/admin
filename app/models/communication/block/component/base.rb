@@ -1,4 +1,6 @@
 class Communication::Block::Component::Base
+  include Accessible
+
   attr_reader :property, :template
 
   def initialize(property, template)

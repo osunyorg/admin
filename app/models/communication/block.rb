@@ -25,6 +25,7 @@
 class Communication::Block < ApplicationRecord
   include WithUniversity
   include WithPosition
+  include Accessible
 
   belongs_to :about, polymorphic: true
 
@@ -91,6 +92,10 @@ class Communication::Block < ApplicationRecord
   end
 
   protected
+
+  def check_accessibility
+    accessibility_merge template
+  end
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize

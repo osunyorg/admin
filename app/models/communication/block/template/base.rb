@@ -1,4 +1,6 @@
 class Communication::Block::Template::Base
+  include Accessible
+
   class_attribute :components_descriptions,
                   :layouts,
                   :element_class
@@ -169,6 +171,12 @@ class Communication::Block::Template::Base
   end
 
   protected
+
+  def check_accessibility
+    components.each do |component|
+      accessibility_merge component
+    end
+  end
 
   def has_element_class?
     !self.class.element_class.nil?

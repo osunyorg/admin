@@ -11,6 +11,9 @@
       <div class="col-xxl-4 col-md-6">
         <%= f.input :title %>
       </div>
+      <div class="col-xxl-4 col-md-6">
+        <%= render 'admin/application/accessibility', about: @block %>
+      </div>
     </div>
     <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
