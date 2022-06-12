@@ -154,30 +154,31 @@ fr:
               label: Crédit
               placeholder: Entrer le crédit
           file:
-              not_linked: Pas de fichier lié
+            not_linked: Pas de fichier lié
           link:
-              target_blank: Ouvrir dans une nouvelle fenêtre
+            target_blank: Ouvrir dans une nouvelle fenêtre
         templates:
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
             edit:
-              button_1: Bouton principal
-              button_2: Bouton secondaire
-              button_3: Bouton tertiaire
-              button_label: Texte
-              button_placeholder: Entrer le texte du bouton ici
+              add_button: Ajouter un bouton
+              remove_button: Supprimer le bouton
+              text:
+                label: Texte
+                placeholder: Entrer le texte ici
+              element:
+                title:
+                  label: Texte
+                  placeholder: Entrer le texte du bouton ici
+                url:
+                  label: Lien
+                  placeholder: Entrer le lien ici avec "https://..."
+                target_blank:
+                  label: Ouvrir dans une nouvelle fenêtre
               buttons: Boutons d'action
-              image_alt_label: Texte alternatif
-              image_alt_placeholder: Entrer la description textuelle
-              image_credit_label: Crédit
-              image_credit_placeholder: Entrer le crédit de l'image ici
-              image_label: Fichier
-              image_title: Image
-              remove_image: Supprimer l'image
-              text_label: Texte
-              text_placeholder: Entrer le texte ici
-              url_label: Lien
-              url_placeholder: Entrer le lien ici avec "https://..."
+              credit:
+                label: Crédit
+                placeholder: Entrer le crédit de l'image ici
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             edit:
