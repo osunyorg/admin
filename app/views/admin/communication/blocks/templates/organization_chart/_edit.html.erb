@@ -1,10 +1,8 @@
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({id: '', role: ''})">
-    <%= t '.add_person' %>
-</a>
+<% element = @block.template.default_element %>
+<%= block_component_add_element t('.add_person') %>
 
 <draggable :list="data.elements" class="list-group" handle=".dragHandle">
-  <div v-for="(person, index) in data.elements" class="list-group-item">
+  <div v-for="(element, index) in data.elements" class="list-group-item">
     <div class="d-flex">
       <div>
         <a class="btn ps-0 pt-0 dragHandle" title="<%= t '.drag_title' %>">
@@ -26,13 +24,7 @@
             </select>
           </div>
           <div class="col-md-6">
-            <label  class="form-label visually-hidden"
-                    :for="'person-' + index + '-role'"><%= t '.role_label' %></label>
-            <input  :id="'person-' + index + '-role'"
-                    class="form-control"
-                    type="text"
-                    v-model="person.role"
-                    placeholder="<%= t '.role_placeholder' %>">
+            <%= block_component_edit  :role, template: element %>
           </div>
         </div>
       </div>

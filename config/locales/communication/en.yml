@@ -256,10 +256,13 @@ en:
             description: People and their jobs.
             edit:
               add_person: Add person
-              person_label: Person
-              person_placeholder: Select the person
-              role_label: Role
-              role_placeholder: Enter person's role
+              element:
+                person:
+                  label: Person
+                  placeholder: Select the person
+              role:
+                label: Role
+                placeholder: Enter person's role
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
           pages:
