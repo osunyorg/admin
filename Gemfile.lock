@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: ed2ee76977c5362707a1da7d8d30ab5d3efdcbab
+  revision: 6fcba157fb469ba289d6b78b6dbf4a370de3b47f
   branch: activestorage
   specs:
-    summernote-rails (0.8.20.1)
+    summernote-rails (0.8.20.2)
       rails (>= 6.0)
 
 GIT
@@ -88,7 +88,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.597.0)
+    aws-partitions (1.598.0)
     aws-sdk-core (3.131.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -300,7 +300,7 @@ GEM
     msgpack (1.5.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.2.0)
+    multipart-post (2.2.3)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nesty (1.0.2)
@@ -362,7 +362,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.2)
+    rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     rails-i18n (7.0.3)
       i18n (>= 0.7, < 2)
@@ -555,4 +555,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.15
+   2.3.12
