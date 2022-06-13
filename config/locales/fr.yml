@@ -7,6 +7,11 @@ fr:
     warnings:
       one: '1 information utile'
       other: '%{count} informations utiles'
+    commons:
+      alt:
+        empty:
+          title: Texte alternatif vide
+          text_html: Vous avez une image, mais le texte alternatif est vide. C'est tout à fait pertinent s'il n'y a aucune information significative dans l'image. En revanche, si l'image contient des informations utiles, il est nécessaire de les indiquer en texte.
     blocks:
       components:
       templates:
