@@ -1,5 +1,7 @@
 class Communication::Block::Template::KeyFigure::Figure < Communication::Block::Template::Base
-  has_number :number
-  has_string :unit
-  has_text :description
+
+  has_component :number, :number
+  has_component :unit, :string
+  has_component :description, :text
+
 end

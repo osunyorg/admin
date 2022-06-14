@@ -1,9 +1,9 @@
 class Communication::Block::Template::CallToAction < Communication::Block::Template::Base
 
-  has_rich_text :text
-  has_image :image
-  has_string :alt
-  has_string :credit
+  has_component :text, :rich_text
+  has_component :image, :image
+  has_component :alt, :string
+  has_component :credit, :rich_text
 
   has_elements Communication::Block::Template::CallToAction::Button
 

@@ -1,6 +1,7 @@
 class Communication::Block::Template::Post < Communication::Block::Template::Base
 
-  has_option :mode, [:all, :category, :selection]
+  has_component :mode, :option, options: [:all, :category, :selection]
+  has_component :posts_quantity, :number, options: 3
 
   def build_git_dependencies
     add_dependency category unless category.nil?
@@ -21,30 +22,27 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   def selected_posts
-    # kind could be: selection, category, or all
-    @selected_posts ||= send "selected_posts_#{kind}"
+    @selected_posts ||= send "selected_posts_#{mode}"
   end
 
   protected
 
   def selected_posts_all
-    quantity = data['posts_quantity'] || 3
     block.about&.website
                 .posts
                 .published
                 .ordered
-                .limit(quantity)
+                .limit(posts_quantity)
   end
 
   def selected_posts_category
-    quantity = data['posts_quantity'] || 3
     category_ids = [category.id, category.descendants.map(&:id)].flatten
     university.communication_website_posts.joins(:categories)
                                           .where(categories: { id: category_ids })
                                           .distinct
                                           .published
                                           .ordered
-                                          .limit(quantity)
+                                          .limit(posts_quantity)
   end
 
   def selected_posts_selection

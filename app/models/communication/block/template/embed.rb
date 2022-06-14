@@ -1,7 +1,7 @@
 class Communication::Block::Template::Embed < Communication::Block::Template::Base
 
-  has_text :code
-  has_string :iframe_title
-  has_text :transcription
+  has_component :code, :text
+  has_component :iframe_title, :string
+  has_component :transcription, :text
 
 end

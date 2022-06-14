@@ -7,52 +7,16 @@ class Communication::Block::Template::Base
 
   attr_reader :block
 
-  def self.has_array(property)
-    has_component property, :array
-  end
-
-  def self.has_boolean(property)
-    has_component property, :boolean
-  end
-
   def self.has_elements(element_class)
     self.element_class = element_class
   end
 
-  def self.has_image(property)
-    has_component property, :image
-  end
-
-  def self.has_layouts(list)
-    self.layouts = list
+  def self.has_layouts(property)
+    self.layouts = property
     has_component :layout, :layout
   end
 
-  def self.has_number(property)
-    has_component property, :number
-  end
-
-  def self.has_option(property, options)
-    has_component property, :option, options
-  end
-
-  def self.has_rich_text(property)
-    has_component property, :rich_text
-  end
-
-  def self.has_select(property, **args)
-    has_component property, :select
-  end
-
-  def self.has_string(property)
-    has_component property, :string
-  end
-
-  def self.has_text(property)
-    has_component property, :text
-  end
-
-  def self.has_component(property, kind, options = nil)
+  def self.has_component(property, kind, options: nil)
     self.components_descriptions ||= []
     self.components_descriptions << {
       property: property,

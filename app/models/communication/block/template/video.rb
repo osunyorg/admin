@@ -1,8 +1,8 @@
 class Communication::Block::Template::Video < Communication::Block::Template::Base
 
-  has_string :url
-  has_string :video_title
-  has_text :transcription
+  has_component :url, :string
+  has_component :video_title, :string
+  has_component :transcription, :text
 
   protected
 

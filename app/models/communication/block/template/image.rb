@@ -1,8 +1,8 @@
 class Communication::Block::Template::Image < Communication::Block::Template::Base
 
-  has_image :image
-  has_string :alt
-  has_rich_text :credit
-  has_text :text
+  has_component :image, :image
+  has_component :alt, :string
+  has_component :credit, :rich_text
+  has_component :text, :text
 
 end
