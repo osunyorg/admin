@@ -21,7 +21,9 @@
       </div>
       <div class="card-body">
         <%= block_component_edit :image,
-              template: element %>
+              template: element,
+              label: t('admin.communication.blocks.components.image.input.label'),
+              placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
         <%= block_component_edit :alt,
               template: element,
               label: t('admin.communication.blocks.components.image.alt.label'),

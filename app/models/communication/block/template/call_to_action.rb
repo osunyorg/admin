@@ -7,4 +7,9 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
 
   has_elements Communication::Block::Template::CallToAction::Button
 
+  def check_accessibility
+    super
+    accessibility_warning 'accessibility.commons.alt.empty' if image_component.blob && alt.blank?
+  end
+
 end

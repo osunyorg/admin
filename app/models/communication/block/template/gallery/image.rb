@@ -7,4 +7,10 @@ class Communication::Block::Template::Gallery::Image < Communication::Block::Tem
   def blob
     image_component.blob
   end
+
+  def check_accessibility
+    super
+    accessibility_warning 'accessibility.commons.alt.empty' if image_component.blob && alt.blank?
+  end
+
 end
