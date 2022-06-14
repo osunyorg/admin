@@ -1,7 +1,7 @@
 class Communication::Block::Template::Page < Communication::Block::Template::Base
 
   has_layouts [:grid, :list, :cards]
-  has_rich_text :text
+  has_component :text, :rich_text
 
   def build_git_dependencies
     add_dependency main_page
