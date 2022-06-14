@@ -1,7 +1,6 @@
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({title: '', file: {}})">
-    <%= t '.add_file' %>
-</a>
+<% element = @block.template.default_element %>
+
+<%= block_component_add_element t('.add_file') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row">
   <div v-for="(element, index) in data.elements" class="col-md-4">
@@ -21,18 +20,8 @@
       <div class="card-body">
         <div class="d-flex">
           <div class="flex-fill">
-            <label    class="form-label"
-                      :for="'element-' + index + '-title'"><%= t '.title_label' %></label>
-            <input class="form-control mb-3"
-                      v-model="element.title"
-                      placeholder="<%= t '.title_placeholder' %>"
-                      type="text"
-                      :id="'element-' + index + '-title'" />
+            <%= block_component_edit :title, template: element %>
 
-            <label  class="form-label"
-                    :for="'element-' + index + '-file'">
-                <%= t '.file_label' %>
-            </label>
             <div v-if="element.file.id">
               <p><b>{{ element.file.filename }}</b></p>
               <a  class="btn btn-sm btn-danger mt-2"
@@ -42,10 +31,7 @@
               </a>
             </div>
             <div v-if="!element.file.id">
-              <input  class="form-control mb-4"
-                      type="file"
-                      @change="onFileImageChange( $event, element, 'file' )"
-                      :id="'element-' + index + '-file'">
+              <%= block_component_edit :file, template: element %>
             </div>
           </div>
         </div>

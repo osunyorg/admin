@@ -221,9 +221,12 @@ fr:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
               add_file: Ajouter un fichier
-              file_label: Fichier
-              title_label: Titre
-              title_placeholder: Entrer le titre du fichier
+              element:
+                file:
+                  label: Fichier
+                title:
+                  label: Titre
+                  placeholder: Entrer le titre du fichier
               remove_file: Supprimer le fichier
           gallery:
             description: Une galerie d'images, avec pour chaque image une description accessible, un texte et un crédit.

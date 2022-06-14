@@ -1,7 +1,7 @@
 <ul>
-    <% @block.template.files.each do |file| %>
+<% @block.template.elements.each do |element| %>
         <% file.title ||= file.blob.filename if file.blob %>
-        <% if file.title 
+        <% if file.title
             title = file.title
           elsif file.blob
             title = file.blob.filename
