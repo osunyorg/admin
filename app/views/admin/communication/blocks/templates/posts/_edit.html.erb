@@ -2,32 +2,9 @@
 
 <div class="row mb-1">
   <div class="col-md-6">
+    <%= block_component_edit :mode %>
 
-    <div class="mb-4">
-      <h3 class="mt-4">Sélectionnez le type de liste</h3>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="all" id="kind-all"
-          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3;">
-        <label class="form-check-label" for="kind-all">
-          Toutes les actualités
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="category" id="kind-category"
-          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3;">
-        <label class="form-check-label" for="kind-category">
-          Une catégorie
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="selection" id="kind-selection">
-        <label class="form-check-label" for="kind-selection">
-          Une sélection d'actualités
-        </label>
-      </div>
-    </div>
-
-    <div v-if="data.kind === 'category'" class="mb-3">
+    <div v-if="data.mode === 'category'" class="mb-3">
       <label class="form-label"
             for="category_id">Sélectionnez une catégorie</label>
       <select id="category_id"
@@ -38,7 +15,7 @@
         <% end %>
       </select>
     </div>
-    <div v-if="data.kind === 'category' || data.kind === 'all'">
+    <div v-if="data.mode === 'category' || data.mode === 'all'">
       <label class="form-label"
             for="posts_quantity">Choisissez la quantité d'articles à afficher</label>
       <input type="number"
@@ -50,7 +27,7 @@
     </div>
   </div>
 </div>
-<div v-if="data.kind === 'selection'">
+<div v-if="data.mode === 'selection'">
   <a  class="<%= button_classes('mb-3') %>"
       v-on:click="data.elements.push({id: ''})">
       <%= t '.add_post' %>

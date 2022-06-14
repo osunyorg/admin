@@ -7,12 +7,33 @@ class Communication::Block::Template::Base
 
   attr_reader :block
 
-  def self.has_string(property)
-    has_component property, :string
+  def self.has_array(property)
+    has_component property, :array
   end
 
-  def self.has_text(property)
-    has_component property, :text
+  def self.has_boolean(property)
+    has_component property, :boolean
+  end
+
+  def self.has_elements(element_class)
+    self.element_class = element_class
+  end
+
+  def self.has_image(property)
+    has_component property, :image
+  end
+
+  def self.has_layouts(list)
+    self.layouts = list
+    has_component :layout, :layout
+  end
+
+  def self.has_number(property)
+    has_component property, :number
+  end
+
+  def self.has_option(property, options)
+    has_component property, :option, options
   end
 
   def self.has_rich_text(property)
@@ -23,39 +44,25 @@ class Communication::Block::Template::Base
     has_component property, :select
   end
 
-  def self.has_image(property)
-    has_component property, :image
+  def self.has_string(property)
+    has_component property, :string
   end
 
-  def self.has_number(property)
-    has_component property, :number
+  def self.has_text(property)
+    has_component property, :text
   end
 
-  def self.has_array(property)
-    has_component property, :array
-  end
-
-  def self.has_boolean(property)
-    has_component property, :boolean
-  end
-
-  def self.has_layouts(list)
-    self.layouts = list
-    has_component :layout, :layout
-  end
-
-  def self.has_elements(element_class)
-    self.element_class = element_class
-  end
-
-  def self.has_component(property, kind)
+  def self.has_component(property, kind, options = nil)
     self.components_descriptions ||= []
-    # TODO rename property / kind ?
-    self.components_descriptions << { name: property, type: kind }
+    self.components_descriptions << {
+      property: property,
+      kind: kind,
+      options: options
+    }
     class_eval <<-CODE, __FILE__, __LINE__ + 1
 
       def #{property}_component
-        @#{property}_component ||= Communication::Block::Component::#{kind.to_s.classify}.new(:#{property}, self)
+        @#{property}_component ||= build_component(:#{property})
       end
 
       def #{property}
@@ -176,6 +183,16 @@ class Communication::Block::Template::Base
 
   protected
 
+  def build_component(property)
+    hash = self.class.components_descriptions.detect do |hash|
+      hash[:property] == property
+    end
+    component_class = "Communication::Block::Component::#{hash[:kind].to_s.classify}".constantize
+    component_class.new hash[:property],
+                        self,
+                        hash[:options]
+  end
+
   def check_accessibility
     components.each do |component|
       accessibility_merge component
@@ -197,7 +214,7 @@ class Communication::Block::Template::Base
   def components
     return [] if self.class.components_descriptions.nil?
     self.class.components_descriptions.map do |component_description|
-      send "#{component_description[:name]}_component"
+      send "#{component_description[:property]}_component"
     end
   end
 

@@ -323,6 +323,13 @@ fr:
               remove_partner: Enlever le partenaire
           posts:
             description: Une liste d'actualités mises en avant.
+            edit:
+              mode:
+                label: Quelles actualités afficher ?
+                options:
+                  all: Toutes les actualités
+                  category: Une catégorie spécifique
+                  selection: Une sélection d'actualités
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:

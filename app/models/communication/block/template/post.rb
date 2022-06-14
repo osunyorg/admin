@@ -1,4 +1,7 @@
 class Communication::Block::Template::Post < Communication::Block::Template::Base
+
+  has_option :mode, [:all, :category, :selection]
+
   def build_git_dependencies
     add_dependency category unless category.nil?
     add_dependency selected_posts
@@ -23,10 +26,6 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   protected
-
-  def kind
-    @kind ||= data['kind'] || 'all'
-  end
 
   def selected_posts_all
     quantity = data['posts_quantity'] || 3
