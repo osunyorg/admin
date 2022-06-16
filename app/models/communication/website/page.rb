@@ -86,6 +86,9 @@ class Communication::Website::Page < ApplicationRecord
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
 
+  def sync_with_git
+  end
+
   def generated_path
     "#{parent&.path}#{slug}/".gsub(/\/+/, '/')
   end
