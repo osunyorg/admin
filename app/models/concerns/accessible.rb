@@ -15,6 +15,12 @@ module Accessible
     end
   end
 
+  def accessibility_merge_array(array)
+    array.each do |object|
+      accessibility_merge object
+    end
+  end
+
   def accessibility_errors
     check_accessibility_if_necessary
     @accessibility_errors

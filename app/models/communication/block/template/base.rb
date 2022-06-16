@@ -158,9 +158,8 @@ class Communication::Block::Template::Base
   end
 
   def check_accessibility
-    components.each do |component|
-      accessibility_merge component
-    end
+    accessibility_merge_array components
+    accessibility_merge_array elements
   end
 
   def has_element_class?

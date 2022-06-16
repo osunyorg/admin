@@ -174,9 +174,7 @@ class Communication::Website::Page < ApplicationRecord
   protected
 
   def check_accessibility
-    blocks.each do |block|
-      accessibility_merge block
-    end
+    accessibility_merge_array blocks
   end
 
   def last_ordered_element
