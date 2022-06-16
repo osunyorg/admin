@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: f1ef26910dea907cc83e4c6c351d7a242172ea4d
+  revision: d8f1155a64d995228b1949d7ef95b3cff5b00fc3
   branch: activestorage
   specs:
     summernote-rails (0.8.20.5)
@@ -297,6 +297,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.16.0)
     msgpack (1.5.2)
     multi_json (1.15.0)
@@ -306,6 +307,9 @@ GEM
       ruby2_keywords (~> 0.0.1)
     nesty (1.0.2)
     nio4r (2.5.8)
+    nokogiri (1.13.6)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.13.6-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.6-x86_64-darwin)
@@ -492,6 +496,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  ruby
   x86_64-darwin-21
   x86_64-linux
 
@@ -558,7 +563,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 2.7.6p219
 
 BUNDLED WITH
    2.3.12
