@@ -44,7 +44,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithUniversity
   include WithBlobs
   include WithBlocks
-  # include WithGit
+  include WithGit
   include WithFeaturedImage
   include WithKind
   include WithMenuItemTarget
@@ -85,24 +85,6 @@ class Communication::Website::Page < ApplicationRecord
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
-
-  ### TODO: test ram
-  def save_and_sync
-    if save
-      true
-    else
-      false
-    end
-  end
-
-  def update_and_sync(params)
-    if update(params)
-      true
-    else
-      false
-    end
-  end
-  ### end todo
 
   def generated_path
     "#{parent&.path}#{slug}/".gsub(/\/+/, '/')
