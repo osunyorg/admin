@@ -12,17 +12,15 @@
   </div>
 </div>
 <div v-if="data.mode === 'selection'">
-  <a  class="<%= button_classes('mb-3') %>"
-      v-on:click="data.elements.push({id: ''})">
-      <%= t '.add_post' %>
-  </a>
+  <%= block_component_add_element t('.add_post') %>
+
   <draggable :list="data.elements" class="row" handle=".dragHandle">
-    <div v-for="(post, index) in data.elements" class="col-xxl-3 col-lg-4">
+    <div v-for="(element, index) in data.elements" class="col-xxl-3 col-lg-4">
       <div class="card">
         <div class="card-body">
           <div class="mb-3">
             <a  class="btn btn-sm btn-danger float-end"
-                v-on:click="data.elements.splice(data.elements.indexOf(post), 1)"
+                v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
                 title="Delete">
                 <i class="fas fa-times"></i>
             </a>
@@ -30,16 +28,7 @@
               <i class="fa fa-bars handle"></i>
             </a>
           </div>
-          <label  class="form-label visually-hidden"
-                  :for="'post-' + index + '-name'"><%= t '.post_label' %></label>
-          <select :id="'post-' + index + '-name'"
-                  class="form-select select"
-                  v-model="post.id">
-            <option value="" disabled>Posts</option>
-            <% @block.about&.website.posts.ordered.each_with_index do |post, index| %>
-              <option value="<%= post.id %>"><%= post.title %></option>
-            <% end %>
-          </select>
+          <%= block_component_edit :id, template: @element %>
         </div>
       </div>
     </div>

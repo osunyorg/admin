@@ -330,6 +330,7 @@ fr:
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
+              add_post: Ajouter un article
               mode:
                 label: Quelles actualités afficher ?
                 options:
@@ -339,9 +340,13 @@ fr:
               posts_quantity:
                 label: Quantité d'articles
                 placeholder: Entrer la quantité
-              category:
+              category_id:
                 label: Catégorie
                 placeholder: Sélectionner une catégorie
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir l'article
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:

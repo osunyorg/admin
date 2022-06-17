@@ -18,6 +18,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def edit
+    @element = @block.template.default_element
     breadcrumb
   end
 

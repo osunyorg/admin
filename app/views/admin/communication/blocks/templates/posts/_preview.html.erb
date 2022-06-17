@@ -1,15 +1,11 @@
 <% if @block.data %>
   <% if @block.template.category %>
-    <h2 class="mb-4"><%= @block.template.category_component.object %></h2>
+    <h2 class="mb-4"><%= @block.template.category %></h2>
   <% end %>
   <% @block.template.selected_posts.each do |post| %>
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title h5"><%= post %></h3>
-      </div>
-      <div class="card-body">
-        <%= post.description_short %>
-      </div>
-    </div>
+    <h3 class="h5"><%= post %></h3>
+    <p>
+      <%= post.description_short %>
+    </p>
   <% end %>
 <% end %>

@@ -1,5 +1,6 @@
 class Communication::Block::Template::Post < Communication::Block::Template::Base
 
+  has_elements Communication::Block::Template::Post::Item
   has_component :mode, :option, options: [:all, :category, :selection]
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :category
@@ -17,11 +18,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   def category
-    return unless block.about&.website
-    block.about
-         .website
-         .categories
-         .find_by(id: data)
+    category_id_component.category
   end
 
   def selected_posts
@@ -51,7 +48,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   def selected_posts_selection
     elements.map { |element|
-      post(element['id'])
+      post(element.id)
     }.compact
   end
 

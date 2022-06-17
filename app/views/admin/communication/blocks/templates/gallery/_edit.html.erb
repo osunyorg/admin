@@ -1,5 +1,3 @@
-<% element = @block.template.default_element %>
-
 <%= block_component_edit :layout, horizontal: true %>
 <%= block_component_add_element t('.add_image') %>
 
@@ -21,19 +19,19 @@
       </div>
       <div class="card-body">
         <%= block_component_edit :image,
-              template: element,
+              template: @element,
               label: t('admin.communication.blocks.components.image.input.label'),
               placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
         <%= block_component_edit :alt,
-              template: element,
+              template: @element,
               label: t('admin.communication.blocks.components.image.alt.label'),
               placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
         <%= block_component_edit :credit,
-              template: element,
+              template: @element,
               label: t('admin.communication.blocks.components.image.credit.label'),
               placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
         <%= block_component_edit :text,
-              template: element %>
+              template: @element %>
       </div>
     </div>
   </div>
