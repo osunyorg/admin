@@ -1,5 +1,5 @@
 <%
-array = JSON.parse value
+array = value.blank? ? [] : JSON.parse(value)
 %>
 <% array.each do |item| %>
   <td><%= item %></td>

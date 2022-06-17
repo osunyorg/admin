@@ -1,28 +1,24 @@
 <div class="row mb-4">
-  <div class="col-xxl-4 col-md-6">
+  <div class="col-xl-6">
     <%= block_component_edit :text %>
     <%= block_component_edit :notes %>
   </div>
-  <div class="col-xxl-8 col-md-6">
-    <label class="form-label">&nbsp;</label>
-    <div class="card">
-      <div class="card-header">
-        <%= t "admin.communication.blocks.templates.chapter.edit.image.label" %>
+  <div class="col-xl-6">
+    <label class="form-label">
+      <%= t "admin.communication.blocks.templates.chapter.edit.image.label" %>
+    </label>
+
+    <div class="row">
+      <div class="col-xxl-6">
+        <%= block_component_edit :image %>
       </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-xxl-6">
-            <%= block_component_edit :image %>
-          </div>
-          <div class="col-xxl-6">
-            <%= block_component_edit :alt,
-                  label: t('admin.communication.blocks.components.image.alt.label'),
-                  placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-            <%= block_component_edit :credit,
-                  label: t('admin.communication.blocks.components.image.credit.label'),
-                  placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
-          </div>
-        </div>
+      <div class="col-xxl-6">
+        <%= block_component_edit :alt,
+              label: t('admin.communication.blocks.components.image.alt.label'),
+              placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+        <%= block_component_edit :credit,
+              label: t('admin.communication.blocks.components.image.credit.label'),
+              placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
       </div>
     </div>
   </div>

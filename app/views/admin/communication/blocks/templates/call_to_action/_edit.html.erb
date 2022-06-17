@@ -19,28 +19,33 @@
   </div>
 </div>
 
-<% element = @block.template.default_element %>
-<%= block_component_add_element t('.add_button') %>
-
-<div :list="data.elements" class="row">
-  <div v-for="(element, index) in data.elements">
-  <h3 class="h4"><%= t '.buttons' %></h3>
-  <div class="row mb-5">
-    <div class="col-lg-3">
-      <%= block_component_edit  :title, template: element %>
-      <a  class="btn btn-sm btn-danger"
-          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-          <i class="fas fa-times"></i> <%= t '.remove_button' %>
-      </a>
-    </div>
-    <div class="col-lg-5">
-      <%= block_component_edit :url, template: element %>
-    </div>
-    <div class="col-lg-4">
-      <label class="form-label">&nbsp;</label>
-      <div class="form-check">
-        <%= block_component_edit :target_blank, template: element %>
+<h3 class="h4"><%= t '.buttons' %></h3>
+<div v-for="(element, index) in data.elements" class="list-group">
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col-11">
+        <div class="row">
+          <div class="col-xl-3">
+            <%= block_component_edit  :title, template: @element %>
+          </div>
+          <div class="col-xl-4">
+            <%= block_component_edit :url, template: @element %>
+          </div>
+          <div class="col-xl-4">
+            <label class="form-label d-none d-xl-block">&nbsp;</label>
+            <%= block_component_edit :target_blank, template: @element %>
+          </div>
+        </div>
+      </div>
+      <div class="col-1">
+        <a  class="btn btn-sm btn-danger float-end"
+            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+          <i class="fas fa-times"></i>
+        </a>
       </div>
     </div>
   </div>
+</div>
+<div v-if="data.elements.length < 3" class="mt-3">
+  <%= block_component_add_element t('.add_button') %>
 </div>

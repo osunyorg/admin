@@ -8,40 +8,40 @@ color = about.accessible? ? 'text-success' : 'text-danger'
       <%= t('accessibility.label') %>
     </h2>
   </div>
-  <% if about.accessibility_errors.any? || about.accessibility_warnings.any? %>
-    <div class="card-body">
-      <% if about.accessibility_errors.any? %>
-        <h2 class="h5 text-danger">
-          <%= t 'accessibility.errors', count: about.accessibility_errors.count %>
-        </h2>
-        <ol class="list-unstyled">
-          <% about.accessibility_errors.each do |key| %>
-            <li>
-              <hr>
-              <h3 class="h5 text-danger"><%= t "#{key}.title" %></h3>
-              <p>
-                <%= t "#{key}.text_html" %>
-              </p>
-            </li>
-          <% end %>
-        </ol>
-      <% end %>
-      <% if about.accessibility_warnings.any? %>
-        <h2 class="h5">
-          <%= t 'accessibility.warnings', count: about.accessibility_warnings.count %>
-        </h2>
-        <ul class="list-unstyled">
-          <% about.accessibility_warnings.each do |key| %>
+  <div class="card-body">
+    <% if about.accessibility_errors.any? %>
+      <h2 class="h5 text-danger">
+        <%= t 'accessibility.errors', count: about.accessibility_errors.count %>
+      </h2>
+      <ol class="list-unstyled">
+        <% about.accessibility_errors.each do |key| %>
           <li>
             <hr>
-            <h3 class="h5"><%= t "#{key}.title" %></h3>
+            <h3 class="h5 text-danger"><%= t "#{key}.title" %></h3>
             <p>
               <%= t "#{key}.text_html" %>
             </p>
           </li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
+        <% end %>
+      </ol>
+    <% else %>
+      <p><%= t 'accessibility.errors', count: 0 %></p>
+    <% end %>
+    <% if about.accessibility_warnings.any? %>
+      <h2 class="h5">
+        <%= t 'accessibility.warnings', count: about.accessibility_warnings.count %>
+      </h2>
+      <ul class="list-unstyled">
+        <% about.accessibility_warnings.each do |key| %>
+        <li>
+          <hr>
+          <h3 class="h5"><%= t "#{key}.title" %></h3>
+          <p>
+            <%= t "#{key}.text_html" %>
+          </p>
+        </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 </div>

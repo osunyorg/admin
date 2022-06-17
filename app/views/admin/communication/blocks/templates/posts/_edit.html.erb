@@ -1,35 +1,32 @@
 <% categories = collection_tree(@block.about&.website.categories) %>
 
-<div class="row mb-1">
-  <div class="col-md-6">
-    <%= block_component_edit :mode %>
-    <div v-if="data.mode === 'category' || data.mode === 'all'">
+<div class="mb-3">
+  <%= block_component_edit :mode %>
+  <div class="row">
+    <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
       <%= block_component_edit :posts_quantity %>
     </div>
-    <div v-if="data.mode === 'category'">
+    <div v-if="data.mode === 'category'" class="col-lg-9">
       <%= block_component_edit :category_id %>
     </div>
   </div>
 </div>
 <div v-if="data.mode === 'selection'">
   <%= block_component_add_element t('.add_post') %>
-
-  <draggable :list="data.elements" class="row" handle=".dragHandle">
-    <div v-for="(element, index) in data.elements" class="col-xxl-3 col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="mb-3">
-            <a  class="btn btn-sm btn-danger float-end"
-                v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-                title="Delete">
-                <i class="fas fa-times"></i>
-            </a>
-            <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
-              <i class="fa fa-bars handle"></i>
-            </a>
-          </div>
+  <draggable :list="data.elements" handle=".dragHandle" class="list-group">
+    <div v-for="(element, index) in data.elements" class="list-group-item">
+      <div class="d-flex">
+        <a class="btn ps-0 dragHandle" title="Drag and drop">
+          <i class="fa fa-bars handle"></i>
+        </a>
+        <div class="flex-fill">
           <%= block_component_edit :id, template: @element %>
         </div>
+        <a  class="btn btn-danger ms-3"
+            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+            title="Delete">
+            <i class="fas fa-times"></i>
+        </a>
       </div>
     </div>
   </draggable>

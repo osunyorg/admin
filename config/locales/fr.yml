@@ -2,6 +2,7 @@ fr:
   accessibility:
     label: Accessibilité
     errors:
+      zero: Félicitations, aucun problème d'accessibilité détecté !
       one: '1 erreur'
       other: '%{count} erreurs'
     warnings:
