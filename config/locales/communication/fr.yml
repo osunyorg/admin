@@ -157,8 +157,6 @@ fr:
             credit:
               label: Crédit
               placeholder: Entrer le crédit
-          file:
-            not_linked: Pas de fichier lié
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
         templates:
@@ -225,6 +223,8 @@ fr:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
               add_file: Ajouter un fichier
+              description:
+                label: Description
               element:
                 file:
                   label: Fichier
@@ -237,11 +237,13 @@ fr:
             layouts:
               grid:
                 label: Grille
-                description: Les images sont présentées en grille, de gauche à droite puis de haut en bas.
+                description: Les images sont présentées en grille, toutes de la même taille.
               carousel:
                 label: Carrousel
-                description: Les images sont présentées en grand, avec une navigation suivant / précédent.
+                description: Les images sont présentées en grand, toutes de la même hauteur.
             edit:
+              description:
+                label: Description
               element:
                 text:
                   label: Texte
@@ -279,6 +281,8 @@ fr:
             description: Un organigramme présentant des personnes et leur fonction.
             edit:
               add_person: Ajouter une personne
+              description:
+                label: Description
               element:
                 id:
                   label: Personne
@@ -330,6 +334,8 @@ fr:
             description: Une liste de partenaires, avec leur logo, leur site et leur nom.
             edit:
               add_partner: Ajouter un partenaire
+              description:
+                label: Description
               element:
                 id:
                   label: Organisation

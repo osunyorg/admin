@@ -1,4 +1,11 @@
-<%= block_component_edit :layout, horizontal: true %>
+<div class="row">
+  <div class="col-xl-6">
+    <%= block_component_edit :description %>
+  </div>
+  <div class="col-xl-6">
+    <%= block_component_edit :layout %>
+  </div>
+</div>
 <%= block_component_add_element t('.add_image') %>
 
 <draggable :list="data.elements" handle=".imageHandle" class="row">

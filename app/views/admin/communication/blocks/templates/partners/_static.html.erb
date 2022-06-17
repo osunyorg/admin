@@ -1,10 +1,11 @@
-<%
-block.template.elements.each do |element| %>
+<%= block_component_static :description %>
+      partners:
+<% block.template.elements.each do |element| %>
 <% if element.organization %>
-      - slug: "<%= element.organization.slug %>"
+        - slug: "<%= element.organization.slug %>"
 <% else %>
-<%= block_component_static :name, template: element, list: true %>
-<%= block_component_static :url, template: element, depth: 4 %>
-        logo: "<%= element.logo_component.blob&.id %>"
+<%= block_component_static :name, template: element, depth: 4, list: true %>
+<%= block_component_static :url, template: element, depth: 5 %>
+          logo: "<%= element.logo_component.blob&.id %>"
 <% end %>
 <% end %>

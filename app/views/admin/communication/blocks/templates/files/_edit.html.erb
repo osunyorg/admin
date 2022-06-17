@@ -1,4 +1,8 @@
-<% element = @block.template.default_element %>
+<div class="row">
+  <div class="col-xl-6">
+    <%= block_component_edit :description %>
+  </div>
+</div>
 
 <%= block_component_add_element t('.add_file') %>
 
@@ -18,23 +22,8 @@
         </div>
       </div>
       <div class="card-body">
-        <div class="d-flex">
-          <div class="flex-fill">
-            <%= block_component_edit :title, template: element %>
-
-            <div v-if="element.file.id">
-              <p><b>{{ element.file.filename }}</b></p>
-              <a  class="btn btn-sm btn-danger mt-2"
-                  v-on:click="element.file={}">
-                  <i class="fas fa-times"></i>
-                  <%= t '.remove_file' %>
-              </a>
-            </div>
-            <div v-if="!element.file.id">
-              <%= block_component_edit :file, template: element %>
-            </div>
-          </div>
-        </div>
+        <%= block_component_edit :title, template: @element %>
+        <%= block_component_edit :file, template: @element %>
       </div>
     </div>
   </div>

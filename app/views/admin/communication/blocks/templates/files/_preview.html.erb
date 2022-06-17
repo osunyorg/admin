@@ -1,3 +1,4 @@
+<%= block_component_preview :description %>
 <ul>
   <% @block.template.elements.each do |element| %>
     <% next unless element.blob %>
@@ -7,5 +8,5 @@
         <small>(<%= element.blob.filename %>)</small>
       </a>
     </li>
-<% end %>
+  <% end %>
 </ul>
