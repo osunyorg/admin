@@ -1,5 +1,6 @@
 class Communication::Block::Template::File::File < Communication::Block::Template::Base
 
-  has_string :title
+  has_component :title, :string
+  has_component :file, :file
 
 end

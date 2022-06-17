@@ -1,6 +1,6 @@
 class Communication::Block::Template::Post < Communication::Block::Template::Base
 
-  has_elements Communication::Block::Template::Post::Item
+  has_elements
   has_component :mode, :option, options: [:all, :category, :selection]
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :category

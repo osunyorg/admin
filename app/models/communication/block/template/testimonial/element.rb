@@ -1,4 +1,4 @@
-class Communication::Block::Template::Testimonial::Testimonial < Communication::Block::Template::Base
+class Communication::Block::Template::Testimonial::Element < Communication::Block::Template::Base
 
   has_component :text, :text
   has_component :author, :string

@@ -1,4 +1,4 @@
-class Communication::Block::Template::KeyFigure::Figure < Communication::Block::Template::Base
+class Communication::Block::Template::KeyFigure::Element < Communication::Block::Template::Base
 
   has_component :number, :number
   has_component :unit, :string

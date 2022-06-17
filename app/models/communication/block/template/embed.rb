@@ -4,6 +4,8 @@ class Communication::Block::Template::Embed < Communication::Block::Template::Ba
   has_component :iframe_title, :string
   has_component :transcription, :text
 
+  protected
+
   def check_accessibility
     super
     accessibility_error 'accessibility.blocks.templates.embed.title_missing' if  iframe_title.blank?

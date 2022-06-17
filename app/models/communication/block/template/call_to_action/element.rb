@@ -1,4 +1,4 @@
-class Communication::Block::Template::CallToAction::Button < Communication::Block::Template::Base
+class Communication::Block::Template::CallToAction::Element < Communication::Block::Template::Base
 
   has_component :title, :string
   has_component :url, :string

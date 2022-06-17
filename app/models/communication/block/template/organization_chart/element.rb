@@ -1,4 +1,4 @@
-class Communication::Block::Template::OrganizationChart::Person < Communication::Block::Template::Base
+class Communication::Block::Template::OrganizationChart::Element < Communication::Block::Template::Base
 
   has_component :id, :person
   has_component :role, :string
