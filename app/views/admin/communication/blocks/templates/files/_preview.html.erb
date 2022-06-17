@@ -1,19 +1,11 @@
 <ul>
-<% @block.template.elements.each do |element| %>
-        <% file.title ||= file.blob.filename if file.blob %>
-        <% if file.title
-            title = file.title
-          elsif file.blob
-            title = file.blob.filename
-          else
-            title = ''
-          end %>
-        <li>
-          <% if file.blob %>
-            <a href="<%= file.blob.url %>" download><%= title %> <small>(<%= file.blob.filename %>)</small></a>
-          <% else %>
-            <%= title %> <small>(<%= t 'admin.communication.blocks.components.file.not_linked' %>)</small>
-          <% end %>
-        </li>
-    <% end %>
+  <% @block.template.elements.each do |element| %>
+    <% next unless element.blob %>
+    <li>
+      <a href="<%= element.blob.url %>" download>
+        <%= element.title %>
+        <small>(<%= element.blob.filename %>)</small>
+      </a>
+    </li>
+<% end %>
 </ul>

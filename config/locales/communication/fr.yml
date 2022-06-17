@@ -143,6 +143,10 @@ fr:
             transcription:
               label: Transcription textuelle du contenu
               placeholder: Entrer ici la transcription
+          file:
+            input:
+              label: Fichier
+              remove: Enlever le fichier
           image:
             input:
               label: Image (.png, .jpg, .svg)
