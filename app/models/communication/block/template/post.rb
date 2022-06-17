@@ -2,6 +2,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   has_component :mode, :option, options: [:all, :category, :selection]
   has_component :posts_quantity, :number, options: 3
+  has_component :category, :category
 
   def build_git_dependencies
     add_dependency category unless category.nil?

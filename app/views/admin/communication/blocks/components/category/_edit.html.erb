@@ -1,0 +1,12 @@
+<%
+categories = collection_tree(@block.about&.website.categories)
+%>
+<label class="form-label"
+      for="category_id">Sélectionnez une catégorie</label>
+<select id="category_id"
+      class="form-select select mb-3"
+      v-model="data.category_id">
+  <% categories.each_with_index do |category, index| %>
+    <option value="<%= category[:id] %>"><%= category[:label].html_safe %></option>
+  <% end %>
+</select>

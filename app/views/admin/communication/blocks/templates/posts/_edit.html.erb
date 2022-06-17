@@ -3,27 +3,21 @@
 <div class="row mb-1">
   <div class="col-md-6">
     <%= block_component_edit :mode %>
+    <div v-if="data.mode === 'category' || data.mode === 'all'">
+      <%= block_component_edit :posts_quantity %>
+    </div>
 
-    <div v-if="data.mode === 'category'" class="mb-3">
+    <div v-if="data.mode === 'category'">
+      <%= block_component_edit :category %>
       <label class="form-label"
             for="category_id">Sélectionnez une catégorie</label>
       <select id="category_id"
-            class="form-select select"
+            class="form-select select mb-3"
             v-model="data.category_id">
         <% categories.each_with_index do |category, index| %>
           <option value="<%= category[:id] %>"><%= category[:label].html_safe %></option>
         <% end %>
       </select>
-    </div>
-    <div v-if="data.mode === 'category' || data.mode === 'all'">
-      <label class="form-label"
-            for="posts_quantity">Choisissez la quantité d'articles à afficher</label>
-      <input type="number"
-            placeholder="Quantité"
-            class="form-control"
-            id="posts_quantity"
-            min="0" max="30"
-            v-model="data.posts_quantity"/>
     </div>
   </div>
 </div>

@@ -336,6 +336,9 @@ fr:
                   all: Toutes les actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
+              posts_quantity:
+                label: Quantité d'articles à afficher
+                placeholder: Entrer la quantité
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:
