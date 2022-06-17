@@ -1,3 +1,9 @@
+<div class="row">
+  <div class="col-xl-6">
+    <%= block_component_edit :description %>
+  </div>
+</div>
+
 <%= block_component_add_element t('.add_person') %>
 
 <draggable :list="data.elements" class="list-group" handle=".dragHandle">
