@@ -276,7 +276,7 @@ fr:
             edit:
               add_person: Ajouter une personne
               element:
-                person:
+                id:
                   label: Personne
                   placeholder: Choisir la personne
                 role:

@@ -1,7 +1,5 @@
-<%
-block.template.persons_with_role.each do |person_with_role|
-  person = person_with_role.person %>
-      - slug: "<%= person.slug %>"
-        role: >-
-          <%= prepare_text_for_static person_with_role.role, 5 %>
+<% block.template.elements.each do |element| %>
+<% next unless element.person %>
+<%= block_component_static :id, template: element, depth: 4, list: true %>
+<%= block_component_static :role, template: element, depth: 5 %>
 <% end %>

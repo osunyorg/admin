@@ -3,5 +3,5 @@
 <% end %>
       posts:
 <% block.template.selected_posts.each do |post| %>
-        - <%= post.static_path %>
+        - "<%= post.static_path %>"
 <% end %>

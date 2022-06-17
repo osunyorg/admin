@@ -1,5 +1,7 @@
-<% @block.template.persons_with_role.each do |person_with_role|
-      person = person_with_role.person %>
+<% @block.template.elements.each do |element|
+      person = element.person
+      next if person.nil?
+      %>
   <article class="card">
     <div class="card-body">
       <% if person.best_picture.attached? %>
@@ -9,7 +11,7 @@
         </div>
       <% end %>
       <h3 class="card-title h5"><%= link_to person, [:admin, person] %></h3>
-      <p class="mb-0"><%= person_with_role.role %></p>
+      <p class="mb-0"><%= element.role %></p>
     </div>
   </article>
 <% end %>

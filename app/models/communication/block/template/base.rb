@@ -96,6 +96,7 @@ class Communication::Block::Template::Base
       elements.each do |element|
         add_dependency element.git_dependencies
       end
+      add_custom_git_dependencies
       @git_dependencies.uniq!
     end
     @git_dependencies
@@ -164,6 +165,9 @@ class Communication::Block::Template::Base
 
   def has_element_class?
     !self.class.element_class.nil?
+  end
+
+  def add_custom_git_dependencies
   end
 
   def add_dependency(dependency)

@@ -1,4 +1,3 @@
-<% element = @block.template.default_element %>
 <%= block_component_add_element t('.add_person') %>
 
 <draggable :list="data.elements" class="list-group" handle=".dragHandle">
@@ -10,21 +9,12 @@
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row">
+        <div class="row mb-n2">
           <div class="col-md-6">
-            <label  class="form-label visually-hidden"
-                    :for="'person-' + index + '-name'"><%= t '.person_label' %></label>
-            <select :id="'person-' + index + '-name'"
-                    class="form-select select"
-                    v-model="person.id">
-              <option value="" disabled><%= t '.person_placeholder' %></option>
-              <% current_university.people.ordered.each_with_index do |person, index| %>
-              <option value="<%= person.id %>"><%= person.last_name %>, <%= person.first_name %></option>
-              <% end %>
-            </select>
+            <%= block_component_edit :id, template: @element %>
           </div>
           <div class="col-md-6">
-            <%= block_component_edit  :role, template: element %>
+            <%= block_component_edit :role, template: @element %>
           </div>
         </div>
       </div>

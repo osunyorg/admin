@@ -5,10 +5,9 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :category
 
-  def build_git_dependencies
-    add_dependency category unless category.nil?
-    add_dependency selected_posts
+  def add_custom_git_dependencies
     selected_posts.each do |post|
+      add_dependency post
       add_dependency post.active_storage_blobs
       if post.author.present?
         add_dependency [post.author, post.author.author]

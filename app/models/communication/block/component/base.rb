@@ -32,4 +32,8 @@ class Communication::Block::Component::Base
   def active_storage_blobs
     []
   end
+
+  def website
+    template.block.about&.website
+  end
 end
