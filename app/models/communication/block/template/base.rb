@@ -7,7 +7,8 @@ class Communication::Block::Template::Base
 
   attr_reader :block
 
-  def self.has_elements(element_class)
+  def self.has_elements(element_class = nil)
+    element_class = "#{self}::Element".constantize if element_class.nil?
     self.element_class = element_class
   end
 

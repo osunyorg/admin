@@ -297,15 +297,24 @@ fr:
                 label: Liste
                 description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
             edit:
-              kind:
-                title: Type de liste
-                children: La page principale et ses enfants
-                selection: Une sélection spécifique de pages
+              mode:
+                label: Type de liste
+                options:
+                  children: La page principale et ses enfants
+                  selection: Une sélection spécifique de pages
+              show_main_description:
+                label: Afficher la description courte de la page principale
+              show_description:
+                label: Afficher les descriptions courtes des pages
+              show_image:
+                label: Afficher les images des pages
+              page_id:
+                label: Sélectionnez une page principale
+                hint: Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.
+                none: Aucune page sélectionnée
+
               main_page:
                 title: Page principale
-                label: Sélectionnez une page principale
-                none: Aucune page sélectionnée
-                hint: Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.
               selection:
                 add: Sélectionner une page
                 label: Page
@@ -313,9 +322,6 @@ fr:
                 title: Pages sélectionnées
               display:
                 title: Options d'affichage
-                main_description: Afficher la description courte de la page principale
-                pages_descriptions: Afficher les descriptions courtes des pages
-                pages_images: Afficher les images des pages
           partners:
             description: Une liste de partenaires, avec leur logo, leur site et leur nom.
             edit:
