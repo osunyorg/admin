@@ -1,11 +1,15 @@
-<% @block.template.partners.each do |partner| %>
-  <article class="card">
-    <%= kamifusen_tag partner.blob,
-                      width: 300,
-                      class: 'img-fluid mb-3' unless partner.blob.nil? %>
-    <div class="card-body">
-      <h3 class="card-title h5"><%= partner.name %></h3>
-      <p class="mb-0"><%= partner.url %></p>
+<div class="row">
+  <% @block.template.elements.each do |element| %>
+    <div class="col-6 mb-3">
+      <%= kamifusen_tag element.best_logo,
+                        width: 600,
+                        class: 'img-fluid mb-2' unless element.best_logo.nil? %>
+      <p>
+        <%= element.best_name %><br>
+        <span class="small">
+          <%= element.best_url %>
+        </span>
+      </p>
     </div>
-  </article>
-<% end %>
+  <% end %>
+</div>

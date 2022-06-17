@@ -1,9 +1,6 @@
-<a  class="<%= button_classes('mb-4 me-1') %>"
-    v-on:click="data.elements.push({id:'', name: '', url: '', logo: {}})">
-    <%= t '.add_partner' %>
-</a>
+<%= block_component_add_element t('.add_partner') %>
 <draggable :list="data.elements" class="list-group" handle=".partnerHandle">
-  <div v-for="(partner, index) in data.elements" class="list-group-item">
+  <div v-for="(element, index) in data.elements" class="list-group-item">
     <div class="d-flex">
       <div>
         <a class="btn ps-0 pt-0 partnerHandle">
@@ -13,62 +10,18 @@
       <div class="flex-fill">
         <div class="row">
          <div class="col-lg-4">
-            <select :id="'organization-' + index + '-id'"
-                    class="form-select select"
-                    v-model="partner.id">
-              <option value="" :selected="true"><%= t '.unregistered_organization' %></option>
-              <% current_university.organizations.ordered.each_with_index do |organization, index| %>
-                <option value="<%= organization.id %>"><%= organization.name %></option>
-              <% end %>
-            </select>
+           <%= block_component_edit :id, template: @element, label: '' %>
           </div>
         </div>
-        <div class="row mt-3"  v-if="!partner.id">
+        <div class="row"  v-if="!element.id">
           <div class="col-lg-4">
-            <label  class="form-label"
-                    :for="'partner-' + index + '-name'"><%= t '.partner_name_label' %></label>
-
-            <input class="form-control mb-3"
-                  type="text"
-                  v-model="partner.name"
-                  placeholder="<%= t '.partner_name_placeholder' %>"
-                  :id="'partner-' + index + '-name'">
+            <%= block_component_edit :name, template: @element %>
           </div>
           <div class="col-lg-4">
-            <label  class="form-label"
-                    :for="'partner-' + index + '-url'">
-              <%= t '.partner_url_label' %>
-            </label>
-            <input class="form-control mb-3"
-                  type="url"
-                  v-model="partner.url"
-                  placeholder="<%= t '.partner_url_placeholder' %>"
-                  :id="'partner-' + index + '-url'">
+            <%= block_component_edit :url, template: @element %>
           </div>
           <div class="col-lg-4">
-            <div v-if="!partner.logo.id">
-              <%# TODO : create a uploader vue3 component %>
-              <label  class="form-label"
-                      :for="'partner-' + index + '-logo'">
-                <%= t '.partner_logo_label' %>
-              </label>
-              <input  class="form-control mb-3"
-                      type="file"
-                      accept="image/*"
-                      @change="onFileImageChange( $event, partner, 'logo' )"
-                      :id="'partner-' + index + '-logo'">
-            </div>
-            <div v-if="partner.logo.id">
-              <img :src="getImageUrl(partner.logo)"
-                    class="img-fluid"
-                    style="max-height: 80px"
-                    />
-              <a  class="btn btn-sm btn-danger ms-2"
-                  v-on:click="partner.logo={}">
-                  <i class="fas fa-times"></i>
-                  <%= t '.remove_logo' %>
-              </a>
-            </div>
+            <%= block_component_edit :logo, template: @element %>
           </div>
         </div>
       </div>

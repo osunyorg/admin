@@ -1,19 +1,12 @@
 class Communication::Block::Template::Page < Communication::Block::Template::Base
 
   has_layouts [:grid, :list, :cards]
+  has_elements Communication::Block::Template::Page::Element
+  has_component :mode, :option, options: [:selection, :children]
   has_component :text, :rich_text
 
-  def build_git_dependencies
-    add_dependency main_page
-    selected_pages.each do |page|
-      add_dependency page
-      add_dependency page.active_storage_blobs
-    end
-  end
-
   def selected_pages
-    # kind could be: selection (default), children
-    @selected_pages ||= send "selected_pages_#{kind}"
+    @selected_pages ||= send "selected_pages_#{mode}"
   end
 
   def main_page
@@ -34,13 +27,10 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   protected
 
-  def kind
-    @kind ||= data['kind'] || 'selection'
-  end
-
   def selected_pages_selection
+    return []
     elements.map { |element|
-      page element['id']
+      element.page
     }.compact
   end
 

@@ -1,0 +1,21 @@
+<%
+organizations = current_university.organizations.ordered
+%>
+<% unless label.blank? %>
+  <label  class="form-label"
+          :for="<%= dom_id.html_safe %>">
+    <%= label %>
+  </label>
+<% end %>
+<select :id="<%= dom_id.html_safe %>"
+        class="form-select select mb-3"
+        v-model="<%= model %>.<%= property %>">
+  <option value="" :selected="true">
+    <%= t "#{i18n_component}.unregistered" %>
+  </option>
+  <% organizations.each do |organization| %>
+    <option value="<%= organization.id %>">
+      <%= organization.name %>
+    </option>
+  <% end %>
+</select>

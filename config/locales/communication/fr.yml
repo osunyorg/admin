@@ -320,13 +320,20 @@ fr:
             description: Une liste de partenaires, avec leur logo, leur site et leur nom.
             edit:
               add_partner: Ajouter un partenaire
-              partner_name_label: Partenaire
-              partner_name_placeholder: Entrer le nom du partenaire
-              partner_url_label: Site Web
-              partner_url_placeholder: https://
-              partner_logo_label: Logo
-              remove_logo: Enlever le logo
-              remove_partner: Enlever le partenaire
+              element:
+                id:
+                  label: Organisation
+                  placeholder: Choisir l'organisation
+                  unregistered: Organisation non enregistrée
+                name:
+                  label: Nom
+                  placeholder: Entrer le nom du partenaire
+                url:
+                  label: Site Web
+                  placeholder: https://
+                logo_label: Logo
+                remove_logo: Enlever le logo
+                remove_partner: Enlever le partenaire
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
