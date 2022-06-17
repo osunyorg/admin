@@ -2,7 +2,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   has_component :mode, :option, options: [:all, :category, :selection]
   has_component :posts_quantity, :number, options: 3
-  has_component :category, :category
+  has_component :category_id, :category
 
   def build_git_dependencies
     add_dependency category unless category.nil?
@@ -17,9 +17,11 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   def category
-    @category ||= block.about&.website
-                              .categories
-                              .find_by(id: data['category_id'])
+    return unless block.about&.website
+    block.about
+         .website
+         .categories
+         .find_by(id: data)
   end
 
   def selected_posts
@@ -37,6 +39,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   def selected_posts_category
+    return [] if category.nil?
     category_ids = [category.id, category.descendants.map(&:id)].flatten
     university.communication_website_posts.joins(:categories)
                                           .where(categories: { id: category_ids })

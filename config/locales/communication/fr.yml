@@ -337,8 +337,11 @@ fr:
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
               posts_quantity:
-                label: Quantité d'articles à afficher
+                label: Quantité d'articles
                 placeholder: Entrer la quantité
+              category:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:

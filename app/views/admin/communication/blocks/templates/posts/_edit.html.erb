@@ -6,18 +6,8 @@
     <div v-if="data.mode === 'category' || data.mode === 'all'">
       <%= block_component_edit :posts_quantity %>
     </div>
-
     <div v-if="data.mode === 'category'">
-      <%= block_component_edit :category %>
-      <label class="form-label"
-            for="category_id">Sélectionnez une catégorie</label>
-      <select id="category_id"
-            class="form-select select mb-3"
-            v-model="data.category_id">
-        <% categories.each_with_index do |category, index| %>
-          <option value="<%= category[:id] %>"><%= category[:label].html_safe %></option>
-        <% end %>
-      </select>
+      <%= block_component_edit :category_id %>
     </div>
   </div>
 </div>

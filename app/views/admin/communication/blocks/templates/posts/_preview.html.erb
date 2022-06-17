@@ -1,6 +1,6 @@
 <% if @block.data %>
   <% if @block.template.category %>
-    <h2 class="mb-4"><%= @block.template.category %></h2>
+    <h2 class="mb-4"><%= @block.template.category_component.object %></h2>
   <% end %>
   <% @block.template.selected_posts.each do |post| %>
     <div class="card">
