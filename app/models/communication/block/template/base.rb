@@ -134,6 +134,10 @@ class Communication::Block::Template::Base
     block.template_kind
   end
 
+  def allowed_for_about?
+    true
+  end
+
   def blob_with_id(id)
     university.active_storage_blobs.find id
   end
@@ -188,5 +192,9 @@ class Communication::Block::Template::Base
 
   def university
     block.university
+  end
+
+  def website
+    block.about&.website
   end
 end

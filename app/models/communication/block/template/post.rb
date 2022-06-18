@@ -24,11 +24,11 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     @selected_posts ||= send "selected_posts_#{mode}"
   end
 
-  protected
-
-  def exclude_for
-    [Education::Program]
+  def allowed_for_about?
+    !website.nil?
   end
+
+  protected
 
   def kind
     @kind ||= data['kind'] || 'all'

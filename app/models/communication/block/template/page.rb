@@ -17,11 +17,11 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     @selected_pages ||= send "selected_pages_#{mode}"
   end
 
-  protected
-
-  def exclude_for
-    [Education::Program]
+  def allowed_for_about?
+    !website.nil?
   end
+
+  protected
 
   def kind
     @kind ||= data['kind'] || 'selection'
