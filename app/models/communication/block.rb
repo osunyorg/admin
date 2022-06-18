@@ -86,6 +86,10 @@ class Communication::Block < ApplicationRecord
     @template ||= template_class.new self, self.attributes['data']
   end
 
+  def template_reset!
+    @template = nil
+  end
+
   def to_s
     title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"

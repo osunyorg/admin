@@ -35,16 +35,18 @@ en:
         ects: ECTS
       education/program:
         accessibility: Accessibilité
+        apprenticeship: Apprenticeship
         capacity: Capacity
         contacts: Contacts
-        continuing: Formation continue
+        continuing: Continuing training
         description: Meta Description
-        duration: Durée
+        duration: Duration
         diploma: Diploma
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Featured image
         featured_image_alt: Alt text
+        initial: Initial training
         level: Level
         main_information: Main information
         name: Name
@@ -108,6 +110,7 @@ en:
         admission:
           label: Admission
           hint: How to register.
+      registration_scheme: Registration scheme
     roles:
       one: Role
       other: Roles

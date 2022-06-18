@@ -35,6 +35,7 @@ fr:
         ects: Crédits ECTS
       education/program:
         accessibility: Accessibilité
+        apprenticeship: Apprentissage
         capacity: Capacité
         contacts: Contacts
         continuing: Formation continue
@@ -45,6 +46,7 @@ fr:
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
+        initial: Formation initiale
         level: Niveau
         main_information: Informations essentielles
         name: Nom
@@ -108,6 +110,7 @@ fr:
         admission:
           label: Admission
           hint: Modalités administratives d'accès à la formation.
+      registration_scheme: Régime d'inscription
     roles:
       one: Rôle
       other: Rôles

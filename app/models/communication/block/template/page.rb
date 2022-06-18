@@ -19,6 +19,14 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   protected
 
+  def exclude_for
+    [Education::Program]
+  end
+
+  def kind
+    @kind ||= data['kind'] || 'selection'
+  end
+
   def selected_pages_selection
     elements.map { |element| element.page }.compact
   end

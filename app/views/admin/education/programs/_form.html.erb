@@ -23,7 +23,10 @@
           </div>
           <div class="col-lg-6">
             <%= f.input :capacity %>
+            <legend class="col-form-label pt-0 mb-1"><%= t('education.program.registration_scheme') %></legend>
+            <%= f.input :initial %>
             <%= f.input :continuing %>
+            <%= f.input :apprenticeship %>
           </div>
         </div>
       <% end %>
