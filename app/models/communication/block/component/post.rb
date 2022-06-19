@@ -6,12 +6,12 @@ class Communication::Block::Component::Post < Communication::Block::Component::B
   end
 
   def git_dependencies
-    active_storage_blobs +
-    [post, post.author, post.author.author]
-  end
-
-  def active_storage_blobs
-    post&.author&.active_storage_blobs || []
+    [
+      post,
+      post&.author,
+      post&.author&.author,
+      post&.author&.picture&.blob
+    ]
   end
 
 end

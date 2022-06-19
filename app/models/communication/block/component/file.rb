@@ -11,9 +11,8 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     }
   end
 
-  def active_storage_blobs
-    # If blob is nil, compact will remove it and the method will return an empty array
-    [blob].compact
+  def git_dependencies
+    [blob]
   end
 
 end

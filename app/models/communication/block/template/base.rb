@@ -98,23 +98,17 @@ class Communication::Block::Template::Base
         add_dependency element.git_dependencies
       end
       add_custom_git_dependencies
+      @git_dependencies.compact!
       @git_dependencies.uniq!
     end
     @git_dependencies
   end
 
   def active_storage_blobs
-    unless @active_storage_blobs
-      @active_storage_blobs = []
-      components.each do |component|
-        @active_storage_blobs += component.active_storage_blobs
-      end
-      elements.each do |element|
-        @active_storage_blobs += element.active_storage_blobs
-      end
-      @active_storage_blobs.uniq!
-    end
-    @active_storage_blobs
+    @active_storage_blobs ||= git_dependencies.select { |dependency|
+      # dependency.is_a? ActiveStorage::Blob misses some occurrences
+      dependency.class.name == 'ActiveStorage::Blob'
+    }.uniq
   end
 
   def default_element(data = nil)

@@ -8,10 +8,10 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def add_custom_git_dependencies
     selected_posts.each do |post|
       add_dependency post
-      add_dependency post.active_storage_blobs
+      add_dependency post.active_storage_blobs.to_a
       if post.author.present?
         add_dependency [post.author, post.author.author]
-        add_dependency post.author.active_storage_blobs
+        add_dependency post.author.active_storage_blobs.to_a
       end
     end
   end

@@ -6,11 +6,7 @@ class Communication::Block::Component::Category < Communication::Block::Componen
   end
 
   def git_dependencies
-    active_storage_blobs +
-    [category]
+    [category, category&.best_featured_image&.blob]
   end
 
-  def active_storage_blobs
-    category&.active_storage_blobs || []
-  end
 end

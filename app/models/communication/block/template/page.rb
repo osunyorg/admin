@@ -21,19 +21,22 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     !website.nil?
   end
 
-  protected
-
-  def kind
-    @kind ||= data['kind'] || 'selection'
+  def add_custom_git_dependencies
+    selected_pages.each do |page|
+      add_dependency page
+      add_dependency page.active_storage_blobs.to_a
+    end
   end
+
+  protected
 
   def selected_pages_selection
     elements.map { |element| element.page }.compact
   end
 
   def selected_pages_children
-    return [] unless main_page
-    main_page.children.published.ordered
+    return [] unless page
+    page.children.published.ordered
   end
 
 end

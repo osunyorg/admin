@@ -26,10 +26,6 @@ class Communication::Block::Component::Base
   end
 
   def git_dependencies
-    active_storage_blobs
-  end
-
-  def active_storage_blobs
     []
   end
 

@@ -4,14 +4,15 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Id</th>
             <th>Class</th>
             <th>Name</th>
-            <th>Id</th>
         </tr>
     </thead>
     <tbody>
         <% @block.template.git_dependencies.each do |dependency| %>
             <tr>
+                <td><%= dependency.id %></td>
                 <td><%= dependency.class %></td>
                 <td><%= dependency.to_s %></td>
             </tr>
@@ -23,15 +24,15 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Filename</th>
             <th>Id</th>
+            <th>Filename</th>
         </tr>
     </thead>
     <tbody>
-        <% @block.template.active_storage_blobs.each do |attachment| %>
+        <% @block.template.active_storage_blobs.each do |blob| %>
             <tr>
-                <td><%= attachment.to_s %></td>
-                <td><%= attachment.id %></td>
+                <td><%= blob.id %></td>
+                <td><%= blob.filename %></td>
             </tr>
         <% end %>
     </tbody>

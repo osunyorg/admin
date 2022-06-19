@@ -23,6 +23,12 @@
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}
     </textarea>
+    <% content_for :action_bar_left do %>
+      <%= destroy_link @block %>
+      <%= link_to 'Dependencies', 
+                  [:admin, @block],
+                  class: button_classes('btn-light') if current_user.server_admin? %>
+    <% end %>
     <% content_for :action_bar_right do %>
       <%= submit f %>
     <% end %>
