@@ -47,7 +47,7 @@ namespace :communication do
       end
     end
   end
-  resources :blocks, controller: 'blocks', except: [:index, :show] do
+  resources :blocks, controller: 'blocks', except: [:index] do
     collection do
       post :reorder
     end

@@ -16,6 +16,10 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     @block.about_id = params[:about_id]
     breadcrumb
   end
+  
+  def show
+    breadcrumb
+  end
 
   def edit
     @element = @block.template.default_element

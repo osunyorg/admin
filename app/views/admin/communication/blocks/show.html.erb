@@ -1,0 +1,42 @@
+<% content_for :title, @block %>
+
+<h2>git_dependencies</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Class</th>
+            <th>Name</th>
+            <th>Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @block.template.git_dependencies.each do |dependency| %>
+            <tr>
+                <td><%= dependency.class %></td>
+                <td><%= dependency.to_s %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<h2>active_storage_blobs</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Filename</th>
+            <th>Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @block.template.active_storage_blobs.each do |attachment| %>
+            <tr>
+                <td><%= attachment.to_s %></td>
+                <td><%= attachment.id %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<% content_for :action_bar_right do %>
+    <%= edit_link @block %>
+<% end %>
