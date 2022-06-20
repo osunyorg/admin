@@ -1,60 +1,57 @@
-class Communication::Block::Template::Post < Communication::Block::Template
-  def build_git_dependencies
-    add_dependency category unless category.nil?
-    add_dependency selected_posts
+class Communication::Block::Template::Post < Communication::Block::Template::Base
+
+  has_elements
+  has_component :mode, :option, options: [:all, :category, :selection]
+  has_component :posts_quantity, :number, options: 3
+  has_component :category_id, :category
+
+  def add_custom_git_dependencies
     selected_posts.each do |post|
-      add_dependency post.active_storage_blobs
+      add_dependency post
+      add_dependency post.active_storage_blobs.to_a
       if post.author.present?
         add_dependency [post.author, post.author.author]
-        add_dependency post.author.active_storage_blobs
+        add_dependency post.author.active_storage_blobs.to_a
       end
     end
   end
 
   def category
-    @category ||= block.about&.website
-                              .categories
-                              .find_by(id: data['category_id'])
+    category_id_component.category
   end
 
   def selected_posts
-    # kind could be: selection, category, or all
-    @selected_posts ||= send "selected_posts_#{kind}"
+    @selected_posts ||= send "selected_posts_#{mode}"
+  end
+
+  def allowed_for_about?
+    !website.nil?
   end
 
   protected
 
-  def exclude_for
-    [Education::Program]
-  end
-
-  def kind
-    @kind ||= data['kind'] || 'all'
-  end
-
   def selected_posts_all
-    quantity = data['posts_quantity'] || 3
     block.about&.website
                 .posts
                 .published
                 .ordered
-                .limit(quantity)
+                .limit(posts_quantity)
   end
 
   def selected_posts_category
-    quantity = data['posts_quantity'] || 3
+    return [] if category.nil?
     category_ids = [category.id, category.descendants.map(&:id)].flatten
     university.communication_website_posts.joins(:categories)
                                           .where(categories: { id: category_ids })
                                           .distinct
                                           .published
                                           .ordered
-                                          .limit(quantity)
+                                          .limit(posts_quantity)
   end
 
   def selected_posts_selection
     elements.map { |element|
-      post(element['id'])
+      post(element.id)
     }.compact
   end
 

@@ -16,8 +16,13 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     @block.about_id = params[:about_id]
     breadcrumb
   end
+  
+  def show
+    breadcrumb
+  end
 
   def edit
+    @element = @block.template.default_element
     breadcrumb
   end
 
@@ -75,6 +80,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def block_params
     params.require(:communication_block)
-          .permit(:about_id, :about_type, :template_kind, :data, :title)
+          .permit(:about_id, :about_type, :template_kind, :title, :data)
   end
 end

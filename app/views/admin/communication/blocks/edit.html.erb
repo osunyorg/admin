@@ -1,9 +1,4 @@
 <% content_for :title, @block %>
-<%
-@block.data = {} if @block.data.nil? || @block.data.blank?
-# Default elements array to move outside : it is only required when block type has an elements list
-@block.data['elements'] ||= []
-%>
 <div id="app" v-cloak>
   <div class="spinner-border text-primary" role="status">
     <span class="sr-only"><%= t 'loading' %></span>
@@ -13,14 +8,27 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <div class="row">
-      <div class="col-xxl-4 col-md-6">
-        <%= f.input :title %>
+      <div class="col-xxl-9 col-lg-8">
+        <div class="row">
+          <div class="col-xxl-3 col-lg-6">
+            <%= f.input :title %>
+          </div>
+        </div>
+        <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
+      </div>
+      <div class="col-xxl-3 col-lg-4">
+        <%= render 'admin/application/accessibility', about: @block %>
       </div>
     </div>
-    <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}
     </textarea>
+    <% content_for :action_bar_left do %>
+      <%= destroy_link @block %>
+      <%= link_to 'Dependencies', 
+                  [:admin, @block],
+                  class: button_classes('btn-light') if current_user.server_admin? %>
+    <% end %>
     <% content_for :action_bar_right do %>
       <%= submit f %>
     <% end %>
@@ -41,7 +49,14 @@
           url: "<%= rails_direct_uploads_url.html_safe %>",
           blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
         },
-        data: <%= @block.data.to_json.html_safe %>
+        data: <%= @block.data.to_json.html_safe %>,
+        <% if @block.template.default_element %>
+        defaultElement: <%= @block.template
+                                  .default_element
+                                  .default_data
+                                  .to_json
+                                  .html_safe %>
+        <% end %>
       }
     },
     methods: {
@@ -87,6 +102,8 @@
 
         $(element).summernote({
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
+          followingToolbar: true,
+          disableDragAndDrop: true,
           callbacks: {
             onChange: function(contents, $editable) {
               element.value = contents;

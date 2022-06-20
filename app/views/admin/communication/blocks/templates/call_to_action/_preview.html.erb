@@ -1,38 +1,22 @@
 <div class="card">
   <div class="card-body">
-    <% if @block.template.image  %>
-      <div style= "max-width: 200px;" class="me-3">
-        <%= kamifusen_tag @block.template.image.blob,
-                        width: 200,
-                        alt: @block.template.image.alt,
-                        class: 'img-fluid' %>
-        <caption><%= @block.template.image.alt %></caption>
-      </div>
-      <hr>
-    <% end %>
-    <%= @block.template.text.html_safe %>
-    <% unless @block.template.url.blank? %>
-    <a  href="<%= @block.template.url %>"
-        class="btn btn-primary"
-        target="_blank"
+    <div style= "max-width: 200px;" class="me-3">
+      <%= block_component_preview :image,
+          label: t('admin.communication.blocks.components.image.input.label'),
+          remove: t('admin.communication.blocks.components.image.input.remove') %><br>
+      <%= block_component_preview :alt,
+          label: t('admin.communication.blocks.components.image.alt.label'),
+          placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+    </div>
+    <hr>
+
+    <% @block.template.elements.each do |element| %>
+      <a  href="<%= block_component_preview :url, template: element %>" class="btn btn-primary"
+        <% if element.target_blank === true %>
+          target="_blank"
+        <% end %>
         rel="noopener">
-        <%= @block.template.button %>
-    </a>
-    <% end %>
-    <% unless @block.template.url_secondary.blank? %>
-      <a  href="<%= @block.template.url_secondary %>"
-          class="btn btn-primary"
-          target="_blank"
-          rel="noopener">
-          <%= @block.template.button_secondary %>
-      </a>
-    <% end %>
-    <% unless @block.template.url_tertiary.blank? %>
-      <a  href="<%= @block.template.url_tertiary %>"
-          class="btn btn-primary"
-          target="_blank"
-          rel="noopener">
-          <%= @block.template.button_tertiary %>
+        <%= block_component_preview :title, template: element %>
       </a>
     <% end %>
   </div>

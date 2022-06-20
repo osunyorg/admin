@@ -1,10 +1,9 @@
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({title: '', text: ''})">
-    <%= t '.add_event' %>
-</a>
+<% element = @block.template.default_element %>
+
+<%= block_component_add_element t('.add_event') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row">
-  <div v-for="(event, index) in data.elements" class="col-md-4">
+  <div v-for="(element, index) in data.elements" class="col-lg-6 col-xl-4">
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
@@ -14,21 +13,8 @@
             </a>
           </div>
           <div class="flex-fill">
-            <label    class="form-label"
-                      :for="'event-' + index + '-title'"><%= t '.title_label' %></label>
-            <input class="form-control mb-3"
-                      v-model="event.title"
-                      placeholder="<%= t '.title_placeholder' %>"
-                      type="text"
-                      :id="'event-' + index + '-title'" />
-
-            <label    class="form-label"
-                      :for="'event-' + index + '-text'"><%= t '.text_label' %></label>
-            <textarea class="form-control mb-3"
-                      rows="3"
-                      v-model="event.text"
-                      placeholder="<%= t '.text_placeholder' %>"
-                      :id="'event-' + index + '-text'"></textarea>
+            <%= block_component_edit :title, template: element %>
+            <%= block_component_edit :text, template: element %>
           </div>
           <div>
             <a  class="btn btn-sm btn-danger ms-3"

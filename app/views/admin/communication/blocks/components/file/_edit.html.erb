@@ -1,0 +1,25 @@
+<%
+label = t 'admin.communication.blocks.components.file.input.label'
+remove = t 'admin.communication.blocks.components.file.input.remove'
+%>
+<div class="mb-3">
+  <div v-if="!<%= model %>.<%= property %>.id">
+    <label  class="form-label"
+            :for="<%= dom_id.html_safe %>">
+      <%= label %>
+    </label>
+    <input  class="form-control"
+            type="file"
+            accept="*"
+            @change="onFileImageChange( $event, <%= model %>, '<%= property %>' )"
+            :id="<%= dom_id.html_safe %>">
+  </div>
+  <div v-if="<%= model %>.<%= property %>.id">
+    <p><b>{{ element.file.filename }}</b></p>
+    <a  class="btn btn-sm btn-danger"
+        v-on:click="<%= model %>.<%= property %>={}">
+        <i class="fas fa-times"></i>
+      <%= remove %>
+    </a>
+  </div>
+</div>

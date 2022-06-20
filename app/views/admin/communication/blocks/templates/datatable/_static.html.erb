@@ -1,0 +1,6 @@
+<%= block_component_static :columns %>
+      rows:
+<% block.template.elements.each do |element| %>
+<%= block_component_static :cells, template: element, list: true, depth: 4 %>
+<% end %>
+<%= block_component_static :caption %>

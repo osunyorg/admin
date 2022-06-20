@@ -1,17 +1,19 @@
 <%
 horizontal ||= false
+layouts = template.class.layouts
 %>
 <% if horizontal %><div class="row"><% end %>
 <% layouts.each do |layout| %>
   <%
-  name = t "admin.communication.blocks.templates.#{template}.layouts.#{layout}.label"
-  description = t "admin.communication.blocks.templates.#{template}.layouts.#{layout}.description"
+  i18n = "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}"
+  name = t "#{i18n}.label"
+  description = t "#{i18n}.description"
   %>
-  <% if horizontal %><div class="col-md-4"><% end %>
+  <% if horizontal %><div class="col-xxl-6"><% end %>
   <div class="card mb-4">
     <label for="layout-<%= layout %>">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-8 col-xxl-6">
           <div class="card-body">
             <div class="form-check">
               <input  class="form-check-input"
@@ -29,13 +31,13 @@ horizontal ||= false
             </p>
           </div>
         </div>
-        <div class="col-md-6">
-            <%= image_tag "communication/blocks/templates/#{template}/#{layout}.png",
-                          alt: name,
-                          class: 'img-fluid' %>
-        </div %>
-      </label %>
-    </div>
+        <div class="col-4 col-xxl-6">
+          <%= image_tag "communication/blocks/templates/#{template.kind}/#{layout}.png",
+                        alt: name,
+                        class: 'img-fluid' %>
+        </div>
+      </div>
+    </label>
   </div>
   <% if horizontal %></div><% end %>
 <% end %>

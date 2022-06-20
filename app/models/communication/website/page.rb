@@ -50,6 +50,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithMenuItemTarget
   include WithPosition
   include WithTree
+  include Accessible
 
   has_summernote :text
 
@@ -171,6 +172,10 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
 
   def last_ordered_element
     website.pages.where(parent_id: parent_id).ordered.last

@@ -1,0 +1,17 @@
+<%
+posts = @block.about&.website.posts.ordered
+%>
+<label  class="form-label <%= 'visually-hidden' if label.blank? %>"
+        :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
+<select :id="<%= dom_id.html_safe %>"
+        class="form-select select"
+        v-model="<%= model %>.<%= property %>">
+  <% if placeholder %>
+    <option value="" disabled><%= placeholder %></option>
+  <% end %>
+  <% posts.each do |post| %>
+    <option value="<%= post.id %>"><%= post.title %></option>
+  <% end %>
+</select>

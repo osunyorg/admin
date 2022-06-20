@@ -1,27 +1,15 @@
-class Communication::Block::Template::Chapter < Communication::Block::Template
-  def sanitized_data
-    {
-      "text" => Osuny::Sanitizer.sanitize(text),
-      "notes" => Osuny::Sanitizer.sanitize(notes),
-      "image" => data['image'],
-      "image_alt" => Osuny::Sanitizer.sanitize(data['image_alt'], 'string'),
-      "image_credit" => Osuny::Sanitizer.sanitize(data['image_credit'], 'string')
-    }
-  end
+class Communication::Block::Template::Chapter < Communication::Block::Template::Base
 
-  def build_git_dependencies
-    add_dependency image&.blob
-  end
+  has_component :text, :rich_text
+  has_component :notes, :rich_text
+  has_component :image, :image
+  has_component :alt, :string
+  has_component :credit, :rich_text
 
-  def image
-    extract_image_alt_and_credit data, 'image'
-  end
+  protected
 
-  def text
-    "#{data['text']}"
-  end
-
-  def notes
-    "#{data['notes']}"
+  def check_accessibility
+    super
+    accessibility_warning 'accessibility.commons.alt.empty' if image_component.blob && alt.blank?
   end
 end

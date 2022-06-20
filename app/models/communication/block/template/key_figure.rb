@@ -1,15 +1,5 @@
-class Communication::Block::Template::KeyFigure < Communication::Block::Template
-  def build_git_dependencies
-  end
+class Communication::Block::Template::KeyFigure < Communication::Block::Template::Base
 
-  def figures
-    @figures ||= elements.map { |element| figure(element) }
-                              .compact
-  end
+  has_elements
 
-  protected
-
-  def figure(element)
-    element.to_dot
-  end
 end

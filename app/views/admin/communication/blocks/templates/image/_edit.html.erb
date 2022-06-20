@@ -1,60 +1,14 @@
 <div class="row mb-5">
   <div class="col-xxl-4 col-md-6">
-    <div v-if="!data.image">
-      <label  class="form-label"
-              for="image">
-        <%= t 'admin.communication.blocks.components.image.input.label' %>
-      </label>
-      <input  class="form-control mb-4"
-              type="file"
-              accept="image/*"
-              @change="onFileImageChange( $event, data, 'image' )"
-              id="image">
-    </div>
-    <div v-if="data.image">
-      <img :src="getImageUrl(data.image)"
-            class="img-fluid"
-            style="max-height: 80px"
-            />
-      <br>
-      <a  class="btn btn-sm btn-danger mt-2"
-          v-on:click="data.image=null">
-          <i class="fas fa-times"></i>
-          <%= t 'admin.communication.blocks.components.image.input.remove' %>
-      </a>
-    </div>
+    <%= block_component_edit :image %>
   </div>
   <div class="col-xxl-4 col-md-6">
-    <label  class="form-label"
-            for="image_alt">
-      <%= t 'admin.communication.blocks.components.image.alt.label' %>
-    </label>
-    <input id="image_alt"
-            type="text"
-            class="form-control mb-3"
-            v-model="data.image_alt"
-            placeholder="<%= t 'admin.communication.blocks.components.image.alt.placeholder' %>" />
-
-    <label  class="form-label"
-            for="image_credit">
-      <%= t 'admin.communication.blocks.components.image.credit.label' %>
-    </label>
-    <input  id="image_credit"
-            type="text"
-            class="form-control mb-3"
-            v-model="data.image_credit"
-            placeholder="<%= t 'admin.communication.blocks.components.image.credit.placeholder' %>" />
-
-    <label  class="form-label"
-            for="text">
-      <%= t 'admin.communication.blocks.components.text.label' %>
-    </label>
-    <div class="summernote">
-      <textarea id="text"
-              class="form-control summernote-vue"
-              v-model="data.text"
-              data-summernote-config="mini"
-              placeholder="<%= t 'admin.communication.blocks.components.text.placeholder' %>"></textarea>
-    </div>
+    <%= block_component_edit :alt,
+          label: t('admin.communication.blocks.components.image.alt.label'),
+          placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+    <%= block_component_edit :credit,
+          label: t('admin.communication.blocks.components.image.credit.label'),
+          placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
+    <%= block_component_edit :text %>
   </div>
 </div>

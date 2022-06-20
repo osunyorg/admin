@@ -2,72 +2,28 @@
 
 <div class="row mb-4">
   <div class="col-lg-6">
-    <div class="mb-4">
-      <h2 class="h3"><%= t '.kind.title' %></h2>
-      <div class="form-check form-check-inline mb-3">
-        <input  class="form-check-input"
-                type="radio"
-                name="kind"
-                v-model="data.kind"
-                value="children"
-                id="kind-children">
-        <label class="form-check-label" for="kind-children">
-          <%= t '.kind.children' %>
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input  class="form-check-input"
-                type="radio"
-                name="kind"
-                v-model="data.kind"
-                value="selection"
-                id="kind-selection">
-        <label class="form-check-label" for="kind-selection">
-          <%= t '.kind.selection' %>
-        </label>
-      </div>
+    <div class="mb-5">
+      <%= block_component_edit :mode %>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-5">
       <h2 class="h3"><%= t '.main_page.title' %></h2>
-      <label  class="form-label"
-              for="page_id"><%= t '.main_page.label' %></label>
-      <select id="page_id"
-            class="form-select select"
-            v-model="data.page_id">
-        <option value=""><%= t '.main_page.none' %></option>
-        <% pages.each_with_index do |page, index| %>
-          <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
-        <% end %>
-      </select>
-      <div class="form-text"><%= t '.main_page.hint' %></div>
+      <%= block_component_edit :page_id %>
     </div>
 
-    <div class="mb-4" v-if="data.kind == 'selection'">
+    <div class="mb-4" v-if="data.mode == 'selection'">
       <h2 class="h3"><%= t '.selection.title' %></h2>
-      <a  class="<%= button_classes('mb-3') %>"
-          v-on:click="data.elements.push({id: ''})">
-          <%= t '.selection.add' %>
-      </a>
+      <%= block_component_add_element t('.selection.add') %>
       <draggable :list="data.elements" handle=".dragHandle" class="list-group">
-        <div v-for="(page, index) in data.elements" class="list-group-item">
-          <div class="d-flex">
+        <div v-for="(element, index) in data.elements" class="list-group-item">
+          <div class="d-flex mb-n3">
             <div>
               <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
                 <i class="fa fa-bars handle"></i>
               </a>
             </div>
             <div class="flex-fill">
-              <label  class="form-label d-none"
-                      :for="'page-' + index + '-name'"><%= t '.selection.label' %></label>
-              <select :id="'page-' + index + '-name'"
-                      class="form-select select"
-                      v-model="page.id">
-                <option value="" disabled><%= t '.selection.none' %></option>
-                <% pages.each_with_index do |page, index| %>
-                  <option value="<%= page[:id] %>"><%= page[:label].html_safe %></option>
-                <% end %>
-              </select>
+              <%= block_component_edit :id, template: @element %>
             </div>
             <div>
               <a  class="btn btn-sm btn-danger ms-3"
@@ -83,41 +39,9 @@
   </div>
   <div class="col-lg-6">
     <h2 class="h3"><%= t '.display.title' %></h2>
-    <div class="mb-4">
-      <div class="form-check">
-        <input  v-model="data.show_main_description"
-                class="form-check-input boolean optional"
-                id="show_main_description"
-                type="checkbox">
-        <label  class="form-check-label boolean optional"
-                for="show_main_description">
-          <%= t '.display.main_description' %>
-        </label>
-      </div>
-      <div class="form-check">
-        <input  v-model="data.show_description"
-                class="form-check-input boolean optional"
-                id="show_description"
-                type="checkbox">
-        <label  class="form-check-label boolean optional"
-                for="show_description">
-          <%= t '.display.pages_descriptions' %>
-        </label>
-      </div>
-      <div class="form-check">
-        <input  v-model="data.show_image"
-                class="form-check-input boolean optional"
-                id="show_image"
-                type="checkbox">
-        <label  class="form-check-label boolean optional"
-                for="show_image">
-          <%= t '.display.pages_images' %>
-        </label>
-      </div>
-    </div>
-
-    <%= render 'admin/communication/blocks/layouts',
-                layouts: Communication::Block::Template::Page::LAYOUTS,
-                template: 'pages' %>
+    <%= block_component_edit :show_main_description %>
+    <%= block_component_edit :show_description %>
+    <%= block_component_edit :show_image %>
+    <%= block_component_edit :layout %>
   </div>
 </div>

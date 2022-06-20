@@ -42,7 +42,7 @@ gem 'rails-i18n'
 gem "roo", "~> 2.9"
 gem 'sanitize'
 gem 'sassc-rails'
-gem "scout_apm", "~> 5.1"
+gem 'scout_apm', '~> 5.1'
 gem 'sib-api-v3-sdk'
 gem 'simple-navigation'
 gem 'simple_form'

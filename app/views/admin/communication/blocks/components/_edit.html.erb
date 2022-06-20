@@ -1,0 +1,33 @@
+<%
+template ||= @block.template
+component = template.public_send "#{property}_component"
+i18n = "admin.communication.blocks.templates.#{template.kind}.edit"
+template ||= @block.template
+root_template = template == @block.template
+if root_template
+  model = 'data'
+  dom_id = "#{property}"
+  i18n_component = "#{i18n}.#{property}"
+else
+  # Nested element
+  model = 'element'
+  dom_id = "'element-' + index + '-#{property}'"
+  i18n_component = "#{i18n}.element.#{property}"
+end
+label ||= t "#{i18n_component}.label", default: ''
+placeholder ||= t "#{i18n_component}.placeholder", default: ''
+hint ||= t "#{i18n_component}.hint", default: ''
+none ||= t "#{i18n_component}.none", default: ''
+partial = "admin/communication/blocks/components/#{component.kind}/edit"
+
+local_assigns[:template] = template
+local_assigns[:component] = component
+local_assigns[:model] = model
+local_assigns[:dom_id] = dom_id
+local_assigns[:i18n_component] = i18n_component
+local_assigns[:label] = label
+local_assigns[:placeholder] = placeholder
+local_assigns[:hint] = hint
+local_assigns[:none] ||= t "#{i18n_component}.none", default: ''
+%>
+<%= render partial, **local_assigns %>

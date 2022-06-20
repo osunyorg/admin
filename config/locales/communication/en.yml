@@ -140,6 +140,9 @@ en:
           text:
             label: Text
             placeholder: Enter text
+            transcription:
+              label: Text transcript
+              placeholder: Enter text transcript
           image:
             input:
               label: Image (.png, .jpg, .svg)
@@ -158,30 +161,36 @@ en:
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
             edit:
-              button_1: Primary button
-              button_2: Secondary button
-              button_3: Tertiary button
-              button_label: Text
-              button_placeholder: Enter the button text here
+              add_button: Add button
+              remove_button: Remove button
+              text:
+                label: Text
+                placeholder: Enter text here
+              element:
+                title:
+                  label: Text
+                  placeholder: Enter the button text here
+                url:
+                  label: Link
+                  placeholder: Enter the URL with "https://..."
+                target_blank:
+                  label: Open in new window
               buttons: Action buttons
-              image_alt_label: Alternative text
-              image_alt_placeholder: Enter image's alternative text here
-              image_credit_label: Credit
-              image_credit_placeholder: Enter image's credit here
-              image_label: File
-              image_title: Image
-              remove_image: Delete image
-              text_label: Text
-              text_placeholder: Enter text here
-              url_label: Link
-              url_placeholder: Enter the URL with "https://..."
+              alt:
+                label: Alternative text
+                placeholder: Enter image's alternative text here
+              credit:
+                label: Credit
+                placeholder: Enter image's credit here
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
             edit:
-              notes_label: Notes
-              notes_placeholder: Enter notes
-              text_label: Text
-              text_placeholder: Enter text
+              notes:
+                label: Notes
+                placeholder: Enter notes
+              text:
+                label: Text
+                placeholder: Enter text
           datatable:
             description: A table of data, as responsive and accessible as possible.
           definitions:
@@ -189,24 +198,29 @@ en:
             edit:
               add_definition: Add definition
               remove_definition: Delete definition
-              title_label: Title
-              title_placeholder: Enter title here
-              text_label: Text
-              text_placeholder: Enter text here
+              element:
+                title:
+                  label: Title
+                  placeholder: Enter title here
+                description:
+                  label: Text
+                  placeholder: Enter text here
           embed:
             description: HTML raw code, so you can integrate maps or iframe components.
             edit:
-              code_label: Code
-              code_placeholder: Enter code
-              transcription_label: Text transcript
-              transcription_placeholder: Enter text transcript
+              code:
+                label: Code
+                code_placeholder: Enter code
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
               add_file: Add a file
-              file_label: File
-              title_label: Title
-              title_placeholder: Enter title here
+              element:
+                file:
+                  label: File
+                title:
+                  label: Title
+                  placeholder: Enter title here
               remove_file: Remove a file
           gallery:
             description: A gallery of images, with an accessible description, a text and a credit for each image.
@@ -218,15 +232,16 @@ en:
                 label: Carousel
                 description: Images are big, with a previous / next navigation and a constant height.
             edit:
-              add_image: Add image
-              image_label: Image (.png, .jpg)
-              alt_label: Alternative text
-              alt_placeholder: Enter text description
-              credit_label: Credit
-              credit_placeholder: Enter image's credit here
-              text_label: Text
-              text_placeholder: Enter text
-              remove_image: Remove image
+              element:
+                text:
+                  label: Text
+                  placeholder: Enter text
+                alt:
+                  label: Alternative text
+                  placeholder: Enter text description
+                credit:
+                  label: Credit
+                  placeholder: Enter image's credit here
           image:
             description: An image with its alternative description, a credit and a text.
           key_figures:
@@ -244,10 +259,13 @@ en:
             description: People and their jobs.
             edit:
               add_person: Add person
-              person_label: Person
-              person_placeholder: Select the person
-              role_label: Role
-              role_placeholder: Enter person's role
+              element:
+                person:
+                  label: Person
+                  placeholder: Select the person
+              role:
+                label: Role
+                placeholder: Enter person's role
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
           pages:
@@ -299,31 +317,41 @@ en:
             description: One or more testimonies
             edit:
               add_testimonial: Add testimonial
-              text_label: Text
-              text_placeholder: Enter testimonial's text
-              author_label: Author of the text
-              author_placeholder: Enter authors' name
-              job_label: Author's job
-              job_placeholder: Enter authors' job
-              photo_label: Photo
-              remove_photo: Remove photo
               remove_testimonial: Remove testimonial
+              element:
+                text:
+                  label: Text
+                  placeholder: Enter testimonial's text
+                author:
+                  label: Author of the text
+                  placeholder: Enter authors' name
+                job:
+                  label: Author's job
+                  placeholder: Enter authors' job
+                photo:
+                  label: Photo
+                  remove_photo: Remove photo
           timeline:
             description: A list of events with their description, on a timeline.
             edit:
               add_event: Add event
               remove_event: Delete event
-              title_label: Title
-              title_placeholder: Enter title here
-              text_label: Text
-              text_placeholder: Enter text here
+              element:
+              title:
+                label: Title
+                placeholder: Enter title here
+              text:
+                label: Text
+                placeholder: Enter text here
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
-              url_label: Video url
-              url_placeholder: Enter video's url
-              transcription_label: Text transcript
-              transcription_placeholder: Enter text transcript
+              url:
+                label: Video url
+                placeholder: Enter video's url
+              video_title:
+                label: Video title
+                placeholder: Enter video title
       website:
         pages:
           delete_special_page_notice: Can't delete this page

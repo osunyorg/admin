@@ -1,0 +1,35 @@
+<%
+template ||= @block.template
+component = template.public_send "#{property}_component"
+value = template.public_send property
+depth ||= 3
+# ---
+# List
+# ---
+#
+# No list for an image
+#       image:
+#         id: "6481e276-23c7-43bb-84aa-87820706ef27"
+#         file: "6481e276-23c7-43bb-84aa-87820706ef27"
+# List for an image (removes the property name)
+#       - id: "1372a56a-8859-45b9-a7db-d6f9c0e1f38f"
+#         file: "1372a56a-8859-45b9-a7db-d6f9c0e1f38f
+#
+# No list for a string
+#       title: >-
+#         def 1
+# List for a string
+#       - title: >-
+#           def 1
+list ||= false
+indentation = '  ' * depth
+partial = "admin/communication/blocks/components/#{component.kind}/static"
+
+local_assigns[:template] = template
+local_assigns[:component] = component
+local_assigns[:value] = value
+local_assigns[:depth] = depth
+local_assigns[:list] = list
+local_assigns[:indentation] = indentation
+%>
+<%= render partial, **local_assigns %>

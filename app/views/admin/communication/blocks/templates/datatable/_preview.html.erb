@@ -1,0 +1,18 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <%= block_component_preview :columns %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @block.template.elements.each do |row| %>
+        <tr>
+          <%= block_component_preview :cells, template: row %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= block_component_preview :caption %>

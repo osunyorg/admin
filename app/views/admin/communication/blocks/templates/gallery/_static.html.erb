@@ -1,13 +1,10 @@
-      layout: <%= block.template.layout %>
+<%= block_component_static :description %>
+<%= block_component_static :layout %>
       images:
-<% block.template.images_with_alt.each do |image| %>
-        - id: "<%= image.blob.id %>"
-          file: "<%= image.blob.id %>"
-          alt: >-
-            <%= prepare_text_for_static image.alt, 6 %>
-          credit: >-
-            <%= prepare_text_for_static image.credit, 6 %>
-          text: >-
-            <%= prepare_text_for_static image.text, 6 %>
-
+<% block.template.elements.each do |element| %>
+<% next unless element.blob %>
+<%= block_component_static :image, template: element, depth: 4, list: true %>
+<%= block_component_static :alt, template: element, depth: 5 %>
+<%= block_component_static :credit, template: element, depth: 5 %>
+<%= block_component_static :text, template: element, depth: 5 %>
 <% end %>

@@ -25,10 +25,12 @@
 class Communication::Block < ApplicationRecord
   include WithUniversity
   include WithPosition
+  include Accessible
 
   belongs_to :about, polymorphic: true
 
   # Used to purge images when unattaching them
+  # template_blobs would be a better name, because there are files
   has_many_attached :template_images
 
   enum template_kind: {
@@ -57,13 +59,19 @@ class Communication::Block < ApplicationRecord
     utilities: [:files, :definitions, :embed]
   }
 
-  before_validation :sanitize_data
-  before_save :update_template_images
+  before_save :attach_template_blobs
   after_commit :save_and_sync_about, on: [:update, :destroy]
 
+  # When we set data from json, we pass it to the template.
+  # The json we save is first sanitized and prepared by the template.
   def data=(value)
-    value = JSON.parse value if value.is_a? String
-    super(value)
+    template.data = value
+    super template.data
+  end
+
+  # Template data is clean and sanitized, and initialized with json
+  def data
+    template.data
   end
 
   def git_dependencies
@@ -75,7 +83,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def template
-    @template ||= "Communication::Block::Template::#{template_kind.classify}".constantize.new self
+    @template ||= template_class.new self, self.attributes['data']
   end
 
   def template_reset!
@@ -83,18 +91,24 @@ class Communication::Block < ApplicationRecord
   end
 
   def to_s
-    title.blank?  ? "Block #{position}"
+    title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"
   end
 
   protected
 
-  def sanitize_data
-    self.data = template.sanitized_data
+  def check_accessibility
+    accessibility_merge template
   end
 
-  def update_template_images
-    self.template_images = template.active_storage_blobs
+  def template_class
+    "Communication::Block::Template::#{template_kind.classify}".constantize
+  end
+
+  # FIXME @sebou
+  # Could not find or build blob: expected attachable, got #<ActiveStorage::Blob id: "f4c78657-5062-416b-806f-0b80fb66f9cd", key: "gri33wtop0igur8w3a646llel3sd", filename: "logo.svg", content_type: "image/svg+xml", metadata: {"identified"=>true, "width"=>709, "height"=>137, "analyzed"=>true}, service_name: "scaleway", byte_size: 4137, checksum: "aZqqTYabP5+72ZeddcZ/2Q==", created_at: "2022-05-05 12:17:33.941505000 +0200", university_id: "ebf2d273-ffc9-4d9f-a4ee-a2146913d617">
+  def attach_template_blobs
+    # self.template_images = template.active_storage_blobs
   end
 
   def save_and_sync_about

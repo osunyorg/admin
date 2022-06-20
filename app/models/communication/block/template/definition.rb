@@ -1,12 +1,5 @@
-class Communication::Block::Template::Definition < Communication::Block::Template
-  def definitions
-    @definitions ||= elements.map { |element| definition(element) }
-                              .compact
-  end
+class Communication::Block::Template::Definition < Communication::Block::Template::Base
 
-  protected
+  has_elements
 
-  def definition(element)
-    element.to_dot
-  end
 end

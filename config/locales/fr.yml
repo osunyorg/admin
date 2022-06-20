@@ -1,4 +1,37 @@
 fr:
+  accessibility:
+    label: Accessibilité
+    errors:
+      zero: Félicitations, aucun problème d'accessibilité détecté !
+      one: '1 erreur'
+      other: '%{count} erreurs'
+    warnings:
+      one: '1 information utile'
+      other: '%{count} informations utiles'
+    commons:
+      alt:
+        empty:
+          title: Texte alternatif vide
+          text_html: Vous avez une image, mais le texte alternatif est vide. C'est tout à fait pertinent s'il n'y a aucune information significative dans l'image. En revanche, si l'image contient des informations utiles, il est nécessaire de les indiquer en texte.
+    blocks:
+      components:
+      templates:
+        video:
+          title_missing:
+            title: Pas de titre
+            text_html: Ni le bloc ni la vidéo n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
+          transcription_missing:
+            title: Pas de transcription
+            text_html: La vidéo n'est pas accompagnée d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+        embed:
+          title_missing:
+            title: Pas de titre de cadre
+            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
+          transcription_missing:
+            title: Pas de transcription
+            text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+
+
   activerecord:
     attributes:
       import:

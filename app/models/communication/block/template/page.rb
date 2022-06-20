@@ -1,72 +1,42 @@
-class Communication::Block::Template::Page < Communication::Block::Template
+class Communication::Block::Template::Page < Communication::Block::Template::Base
 
-  LAYOUTS = [
-    :grid,
-    :list,
-    :cards
-  ]
+  has_elements
+  has_layouts [:grid, :list, :cards]
+  has_component :mode, :option, options: [:selection, :children]
+  has_component :text, :rich_text
+  has_component :page_id, :page
+  has_component :show_main_description, :boolean
+  has_component :show_description, :boolean
+  has_component :show_image, :boolean
 
-  def build_git_dependencies
-    add_dependency main_page
-    selected_pages.each do |page|
-      add_dependency page
-      add_dependency page.active_storage_blobs
-    end
+  def page
+    page_id_component.page
   end
 
   def selected_pages
-    # kind could be: selection (default), children
-    @selected_pages ||= send "selected_pages_#{kind}"
+    @selected_pages ||= send "selected_pages_#{mode}"
   end
 
-  def main_page
-    @main_page ||= page(data['page_id'])
+  def allowed_for_about?
+    !website.nil?
   end
 
-  def layout
-    data['layout'] || 'grid'
-  end
-
-  def show_main_description
-    data['show_main_description'] || false
-  end
-
-  def show_description
-    data['show_description'] || false
-  end
-
-  def show_image
-    data['show_image'] || false
+  def add_custom_git_dependencies
+    selected_pages.each do |page|
+      add_dependency page
+      add_dependency page.active_storage_blobs.to_a
+    end
   end
 
   protected
 
-  def exclude_for
-    [Education::Program]
-  end
-
-  def kind
-    @kind ||= data['kind'] || 'selection'
-  end
-
   def selected_pages_selection
-    elements.map { |element|
-      page element['id']
-    }.compact
+    elements.map { |element| element.page }.compact
   end
 
   def selected_pages_children
-    return [] unless main_page
-    main_page.children
-             .published
-             .ordered
+    return [] unless page
+    page.children.published.ordered
   end
 
-  def page(id)
-    return if id.blank?
-    page = block.about&.website
-                       .pages
-                       .published
-                       .find_by(id: id)
-  end
 end

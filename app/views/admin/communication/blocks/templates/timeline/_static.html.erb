@@ -1,7 +1,4 @@
-      events:
-<% block.template.events.each do |event| %>
-        - title: >-
-            <%= prepare_text_for_static event.title, 6 %>
-          text: >-
-            <%= prepare_text_for_static event.text, 6 %>
+<% block.template.elements.each do |element| %>
+<%= block_component_static :title, template: element, depth: 4 %>
+<%= block_component_static :text, template: element, depth: 4 %>
 <% end %>

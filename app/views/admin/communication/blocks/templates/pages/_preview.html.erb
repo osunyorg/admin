@@ -1,6 +1,6 @@
 <% if @block.data %>
-  <% if @block.template.main_page %>
-    <h2 class="h5 mb-4"><%= @block.template.main_page.slug %></h2>
+  <% if @block.template.page %>
+    <h2 class="h5 mb-4"><%= @block.template.page.slug %></h2>
   <% end %>
   <% @block.template.selected_pages.each do |element| %>
     <div class="card mb-4">

@@ -1,11 +1,23 @@
-<% @block.template.images_with_alt.each do |image| %>
-  <article class="card">
-    <% if image.blob %>
-      <%= kamifusen_tag image.blob, width: 500, class: 'img-fluid mb-3' %>
-    <% end %>
-    <div class="card-body">
-      <p class="mb-0"><%= image.alt %></p>
-      <p class="mb-0 small"><%= image.text %></p>
+<%= block_component_preview :description %>
+<%= block_component_preview :layout %>
+<div class="row">
+  <% @block.template.elements.each do |element| %>
+    <% next unless element.blob %>
+    <div class="col-6">
+      <article class="card">
+        <%= block_component_preview :image, template: element %>
+        <div class="card-body">
+          <div class="small">
+            <p class="mb-0">
+              <%= block_component_preview :alt, template: element %>
+            </p>
+            <%= block_component_preview :credit, template: element %>
+          </div>
+          <p class="mb-0">
+            <%= block_component_preview :text, template: element %>
+          </p>
+        </div>
+      </article>
     </div>
-  </article>
-<% end %>
+  <% end %>
+</div>

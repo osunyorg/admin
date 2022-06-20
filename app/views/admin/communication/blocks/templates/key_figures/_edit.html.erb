@@ -1,10 +1,9 @@
-<a  class="<%= button_classes('mb-4') %>"
-    v-on:click="data.elements.push({number: 0, unit: '', description: ''})">
-    <%= t '.add_key' %>
-</a>
+<% element = @block.template.default_element %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row">
-  <div v-for="(key, index) in data.elements" class="col-md-4">
+<%= block_component_add_element t('.add_key') %>
+
+<draggable :list="data.elements" handle=".dragHandle">
+  <div v-for="(element, index) in data.elements">
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
@@ -14,31 +13,21 @@
             </a>
           </div>
           <div class="flex-fill">
-            <label    class="form-label"
-                      :for="'key-' + index + '-number'"><%= t '.number_label' %></label>
-            <input class="form-control mb-3"
-                      v-model="key.number"
-                      placeholder="<%= t '.number_placeholder' %>"
-                      type="number"
-                      :id="'key-' + index + '-number'" />
-
-            <label    class="form-label"
-                      :for="'key-' + index + '-unit'"><%= t '.unit_label' %></label>
-            <input class="form-control mb-3"
-                      v-model="key.unit"
-                      placeholder="<%= t '.unit_placeholder' %>"
-                      :id="'key-' + index + '-unit'">
-
-            <label    class="form-label"
-                      :for="'key-' + index + '-description'"><%= t '.description_label' %></label>
-            <input class="form-control mb-3"
-                      v-model="key.description"
-                      placeholder="<%= t '.description_placeholder' %>"
-                      :id="'key-' + index + '-description'">
+            <div class="row mb-n3">
+              <div class="col-lg-2">
+                <%= block_component_edit :number, template: element %>
+              </div>
+              <div class="col-lg-3">
+                <%= block_component_edit :unit, template: element %>
+              </div>
+              <div class="col-lg-7">
+                <%= block_component_edit :description, template: element, rows: 1 %>
+              </div>
+            </div>
           </div>
           <div>
             <a  class="btn btn-sm btn-danger ms-3"
-                v-on:click="data.elements.splice(data.elements.indexOf(key), 1)"
+                v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
                 title="<%= t '.remove_key' %>">
                 <i class="fas fa-times"></i>
             </a>

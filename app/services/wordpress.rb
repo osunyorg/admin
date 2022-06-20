@@ -1,7 +1,6 @@
 class Wordpress
   attr_reader :url
 
-
   def self.clean_string(string)
     string = string.gsub('&nbsp;', ' ')
     string = string.gsub('&amp;', '&')

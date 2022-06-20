@@ -18,6 +18,7 @@
           <% end %>
           <th><%= Communication::Block.human_attribute_name('title') %></th>
           <th><%= Communication::Block.human_attribute_name('template') %></th>
+          <th><%= t 'accessibility.label' %></th>
           <th></th>
         </tr>
       </thead>
@@ -29,11 +30,17 @@
             <% end %>
             <td><%= block.to_s.truncate(50) %></td>
             <td><%= block.template_kind_i18n  %></td>
+            <td>
+              <p class="m-0 lead">
+                <i class="fas fa-universal-access <%= block.accessible? ?
+                    'text-success' : 'text-danger'%>"></i>
+              </p>
+            </td>
             <td class="text-end">
-              <div class="btn-group" role="group">
-                <%= edit_link block %>
-                <%= destroy_link block %>
-              </div>
+              <%= edit_link block %>
+              <%= link_to 'Dependencies', 
+                          [:admin, block],
+                          class: button_classes('btn-light') if current_user.server_admin? %>
             </td>
           </tr>
         <% end %>

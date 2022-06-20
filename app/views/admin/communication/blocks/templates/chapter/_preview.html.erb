@@ -1,8 +1,9 @@
-<% if @block.template.image  %>
-  <%= kamifusen_tag @block.template.image.blob,
-                    width: 600,
-                    alt: @block.template.image.alt,
-                    class: 'img-fluid' %>
-<% end %>
-<%= @block.template.text.html_safe %>
-<%= @block.template.notes.html_safe %>
+<%= block_component_preview :image %>
+<div class="small">
+  <p class="mb-0">
+    <%= block_component_preview :alt %>
+  </p>
+  <%= block_component_preview :credit %>
+</div>
+<%= block_component_preview :text %>
+<%= block_component_preview :notes %>

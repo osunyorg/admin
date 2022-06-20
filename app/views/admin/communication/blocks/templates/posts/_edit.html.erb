@@ -1,85 +1,32 @@
 <% categories = collection_tree(@block.about&.website.categories) %>
 
-<div class="row mb-1">
-  <div class="col-md-6">
-
-    <div class="mb-4">
-      <h3 class="mt-4">Sélectionnez le type de liste</h3>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="all" id="kind-all"
-          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3;">
-        <label class="form-check-label" for="kind-all">
-          Toutes les actualités
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="category" id="kind-category"
-          v-on:change="data.posts_quantity = data.posts_quantity ? data.posts_quantity : 3;">
-        <label class="form-check-label" for="kind-category">
-          Une catégorie
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="kind" v-model="data.kind" value="selection" id="kind-selection">
-        <label class="form-check-label" for="kind-selection">
-          Une sélection d'actualités
-        </label>
-      </div>
+<div class="mb-3">
+  <%= block_component_edit :mode %>
+  <div class="row">
+    <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
+      <%= block_component_edit :posts_quantity %>
     </div>
-
-    <div v-if="data.kind === 'category'" class="mb-3">
-      <label class="form-label"
-            for="category_id">Sélectionnez une catégorie</label>
-      <select id="category_id"
-            class="form-select select"
-            v-model="data.category_id">
-        <% categories.each_with_index do |category, index| %>
-          <option value="<%= category[:id] %>"><%= category[:label].html_safe %></option>
-        <% end %>
-      </select>
-    </div>
-    <div v-if="data.kind === 'category' || data.kind === 'all'">
-      <label class="form-label"
-            for="posts_quantity">Choisissez la quantité d'articles à afficher</label>
-      <input type="number"
-            placeholder="Quantité"
-            class="form-control"
-            id="posts_quantity"
-            min="0" max="30"
-            v-model="data.posts_quantity"/>
+    <div v-if="data.mode === 'category'" class="col-lg-9">
+      <%= block_component_edit :category_id %>
     </div>
   </div>
 </div>
-<div v-if="data.kind === 'selection'">
-  <a  class="<%= button_classes('mb-3') %>"
-      v-on:click="data.elements.push({id: ''})">
-      <%= t '.add_post' %>
-  </a>
-  <draggable :list="data.elements" class="row" handle=".dragHandle">
-    <div v-for="(post, index) in data.elements" class="col-xxl-3 col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="mb-3">
-            <a  class="btn btn-sm btn-danger float-end"
-                v-on:click="data.elements.splice(data.elements.indexOf(post), 1)"
-                title="Delete">
-                <i class="fas fa-times"></i>
-            </a>
-            <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
-              <i class="fa fa-bars handle"></i>
-            </a>
-          </div>
-          <label  class="form-label visually-hidden"
-                  :for="'post-' + index + '-name'"><%= t '.post_label' %></label>
-          <select :id="'post-' + index + '-name'"
-                  class="form-select select"
-                  v-model="post.id">
-            <option value="" disabled>Posts</option>
-            <% @block.about&.website.posts.ordered.each_with_index do |post, index| %>
-              <option value="<%= post.id %>"><%= post.title %></option>
-            <% end %>
-          </select>
+<div v-if="data.mode === 'selection'">
+  <%= block_component_add_element t('.add_post') %>
+  <draggable :list="data.elements" handle=".dragHandle" class="list-group">
+    <div v-for="(element, index) in data.elements" class="list-group-item">
+      <div class="d-flex">
+        <a class="btn ps-0 dragHandle" title="Drag and drop">
+          <i class="fa fa-bars handle"></i>
+        </a>
+        <div class="flex-fill">
+          <%= block_component_edit :id, template: @element %>
         </div>
+        <a  class="btn btn-danger ms-3"
+            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+            title="Delete">
+            <i class="fas fa-times"></i>
+        </a>
       </div>
     </div>
   </draggable>

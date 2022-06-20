@@ -1,0 +1,10 @@
+<% rows ||= 3 %>
+
+<label class="form-label" aria-label="<%= label %>" :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
+<textarea :id="<%= dom_id.html_safe %>"
+          class="form-control mb-3"
+          rows="<%= rows %>"
+          v-model="<%= model %>.<%= property %>"
+          placeholder="<%= placeholder %>"></textarea>

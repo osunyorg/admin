@@ -22,8 +22,8 @@ class Communication::Block::Template
     []
   end
 
-  def excluded_for?(about)
-    about.class.in? exclude_for
+  def allowed_for_about?
+    template.allowed_for_about?
   end
 
   protected

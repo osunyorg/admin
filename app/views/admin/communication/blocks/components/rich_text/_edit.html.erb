@@ -1,0 +1,10 @@
+<label class="form-label" aria-label="<%= label %>" :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
+<div class="summernote mb-3">
+  <textarea :id="<%= dom_id.html_safe %>"
+            class="form-control summernote-vue"
+            v-model="<%= model %>.<%= property %>"
+            data-summernote-config="mini-list"
+            placeholder="<%= placeholder %>"></textarea>
+</div>

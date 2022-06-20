@@ -1,0 +1,11 @@
+<%
+template ||= @block.template
+component = template.public_send "#{property}_component"
+value = template.public_send(property).to_s
+partial = "admin/communication/blocks/components/#{component.kind}/preview"
+
+local_assigns[:template] = template
+local_assigns[:component] = component
+local_assigns[:value] = value
+%>
+<%= render partial, **local_assigns %>

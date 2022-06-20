@@ -1,0 +1,58 @@
+<div class="table-responsive mb-5">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <td v-for="(column, index) in data.columns">
+          <div class="d-flex">
+            <input  type="text"
+                    class="form-control"
+                    v-model="data.columns[index]">
+            <a  class="btn btn-danger ms-2"
+                v-on:click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
+                <i class="fas fa-times"></i>
+            </a>
+          </div>
+        </td>
+        <td class="text-end">
+          <a  class="btn btn-primary me-2"
+              v-on:click="data.columns.push('')">
+              <i class="fas fa-plus"></i> colonne
+          </a>
+          <a  class="btn btn-primary"
+              v-on:click="data.elements.push({cells: []})">
+              <i class="fas fa-plus"></i> ligne
+          </a>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <draggable :list="data.elements" handle=".dragHandle">
+        <tr v-for="(row, index) in data.elements">
+          <td v-for="(column, columnIndex) in data.columns">
+            <input  type="text"
+                    class="form-control"
+                    v-model="row.cells[columnIndex]">
+          </td>
+          <td class="text-end">
+            <div class="d-flex">
+              <a  class="btn btn-danger"
+                  v-on:click="data.elements.splice(index, 1)">
+                  <i class="fas fa-times"></i>
+              </a>
+
+              <a class="btn ms-auto dragHandle">
+                <i class="fa fa-bars handle"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </draggable>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= block_component_edit :caption %>
+  </div>
+</div>

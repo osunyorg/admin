@@ -1,6 +1,7 @@
+<%= block_component_static :description %>
       files:
-<% block.template.files.each do |file| %>
-        - title: >-
-            <%= prepare_text_for_static file.title, 6 %>
-          id: "<%= file.blob.id if file.blob %>"
+<% block.template.elements.each do |element| %>
+<% next unless element.blob %>
+<%= block_component_static :file, template: element, depth: 4, list: true %>
+<%= block_component_static :title, template: element, depth: 5 %>
 <% end %>

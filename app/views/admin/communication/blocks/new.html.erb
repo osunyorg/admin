@@ -20,7 +20,7 @@
       about = @block.about
       template = @block.template
       %>
-      <% next if template.excluded_for?(about) %>
+      <% next unless template.allowed_for_about? %>
       <div class="col-xxl-2 col-lg-3 col-md-4 d-flex">
         <div class="card flex-fill">
           <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top" %>
