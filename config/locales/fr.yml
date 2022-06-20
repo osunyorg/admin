@@ -31,7 +31,6 @@ fr:
             title: Pas de transcription
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
 
-
   activerecord:
     attributes:
       import:
