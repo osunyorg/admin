@@ -22,7 +22,7 @@
                       admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                       method: :delete,
                       data: { confirm: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') },
-                      class: button_classes_danger if can?(:destroy, page) %>
+                      class: button_classes_danger if can?(:destroy, page) && !page.is_special_page? %>
           </div>
         </td>
       </tr>
