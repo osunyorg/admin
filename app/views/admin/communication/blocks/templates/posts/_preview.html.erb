@@ -4,8 +4,6 @@
   <% end %>
   <% @block.template.selected_posts.each do |post| %>
     <h3 class="h5"><%= post %></h3>
-    <p>
-      <%= post.description_short %>
-    </p>
+    <p><%= post.description_short %></p>
   <% end %>
 <% end %>
