@@ -17,6 +17,8 @@ namespace :app do
       clean_header_text = ActionController::Base.helpers.strip_tags(page.header_text)
       page.update(header_text: clean_header_text)
     }
+
+    BlocksMigration.cleanup
   end
 
   namespace :websites do

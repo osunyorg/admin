@@ -64,7 +64,7 @@ module Osuny
       "decoding", "frameborder", "height", "href", "loading", "mozallowfullscreen",
       "name", "sizes", "src", "srcset", "target", "title", "type",
       "webkitallowfullscreen", "width", "xml:lang",
-      "sgid", "content-type", "url", "filename", "filesize", "previewable"
+      "sgid", "content-type", "url", "filename", "filesize", "previewable", "referrerpolicy"
     ]
 
     config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'
