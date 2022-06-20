@@ -314,13 +314,12 @@ fr:
                 label: Afficher les descriptions courtes des pages
               show_image:
                 label: Afficher les images des pages
+              main_page:
+                title: Page principale
               page_id:
                 label: Sélectionnez une page principale
                 hint: Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.
                 none: Aucune page sélectionnée
-
-              main_page:
-                title: Page principale
               selection:
                 add: Sélectionner une page
                 label: Page
@@ -391,10 +390,10 @@ fr:
             edit:
               add_event: Ajouter un événement
               remove_event: Supprimer l'événement
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
-                description:
-                  label: Description
-                  placeholder: Entrer la description
                 title:
                   label: Titre
                   placeholder: Entrer le titre de l'événement

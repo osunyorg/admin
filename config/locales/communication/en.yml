@@ -238,6 +238,8 @@ en:
                 label: Carousel
                 description: Images are big, with a previous / next navigation and a constant height.
             edit:
+              description:
+                label: Description
               element:
                 text:
                   label: Text
@@ -248,23 +250,37 @@ en:
                 credit:
                   label: Credit
                   placeholder: Enter image's credit here
+              add_image: Add image
+              remove_image: Remove image
           image:
             description: An image with its alternative description, a credit and a text.
+            edit:
+              text:
+                label: Text
+                placeholder: Enter text
           key_figures:
             description: Animated figures, with a unit and a text.
             edit:
               add_key: Add key figure
-              unit_label: Unit
-              unit_placeholder: Enter unit here
-              number_label: Number
-              number_placeholder: Enter key figure's value here
-              description_label: Description
-              description_placeholder: Enter description here
+              element:
+                unit:
+                  label: Unit
+                  placeholder: Enter unit here
+                number:
+                  label: Number
+                  placeholder: Enter key figure's value here
+                description:
+                  label: Description
+                  placeholder: Enter description here
               remove_key: Remove key figure
           organization_chart:
             description: People and their jobs.
             edit:
               add_person: Add person
+              drag_title: Drag and drop to organize persons
+              delete_title: Remove person
+              description:
+                label: Description
               element:
                 person:
                   label: Person
@@ -272,8 +288,6 @@ en:
               role:
                 label: Role
                 placeholder: Enter person's role
-              drag_title: Drag and drop to organize persons
-              delete_title: Remove person
           pages:
             description: A highlight of some pages, with multiple layout options.
             layouts:
@@ -287,15 +301,23 @@ en:
                 label: List
                 description: The main page's short description is used as a big text, and the pages are listed on the right.
             edit:
-              kind:
-                title: List kind
-                children: Main page and children
-                selection: A specific selection of pages
+              mode:
+                label: List kind
+                options:
+                  children: Main page and children
+                  selection: A specific selection of pages
+              show_main_description: 
+                label: Show main page short description
+              show_description: 
+                label: Show pages short descriptions
+              show_image: 
+                label: Show pages images
               main_page:
                 title: Main page
+              page_id:
                 label: Select the main page
-                none: No page selected
                 hint: This page will set the title and main link of the block on the website. If you select a page and fill no title above, the page title will be used. If you set a title, it will replace the main page's title.
+                none: No page selected
               selection:
                 add: Select a page
                 label: Page
@@ -303,22 +325,44 @@ en:
                 title: Selected pages
               display:
                 title: Layout options
-                main_description: Show main page short description
-                pages_descriptions: Show pages short descriptions
-                pages_images: Show pages images
           partners:
             description: A list of organizations with logo, name and website.
             edit:
               add_partner: Add partner
-              partner_name_label: Partner
-              partner_name_placeholder: Enter partner's name
-              partner_url_label: Website
-              partner_url_placeholder: https://
-              partner_logo_label: Logo
-              remove_logo: Remove logo
               remove_partner: Remove partner
+              element:
+                id: 
+                  label: Partner
+                  placeholder: Choose organization
+                  unregistered: Unregistered organization
+                name:
+                  label: Nom
+                  placeholder: Enter partner's name
+                url:
+                  label: Website
+                  laceholder: https://
+                logo_label: Logo
+                remove_logo: Remove logo
           posts:
             description: A list of highlighted news.
+            edit:
+              add_post: Add post
+              mode:
+                label: Which posts shall we show?
+                options:
+                  all: All posts
+                  category: A specific category
+                  selection: A selection of posts
+              posts_quantity:
+                label: Quantity
+                placeholder: Enter quantity
+              category_id:
+                label: Category
+                placeholder: Select category
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose post
           testimonials:
             description: One or more testimonies
             edit:
@@ -342,13 +386,16 @@ en:
             edit:
               add_event: Add event
               remove_event: Delete event
+              description:
+                label: Description
+                placeholder: Enter description
               element:
-              title:
-                label: Title
-                placeholder: Enter title here
-              text:
-                label: Text
-                placeholder: Enter text here
+                title:
+                  label: Title
+                  placeholder: Enter title here
+                text:
+                  label: Text
+                  placeholder: Enter text here
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
