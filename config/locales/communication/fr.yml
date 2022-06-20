@@ -334,6 +334,7 @@ fr:
             description: Une liste de partenaires, avec leur logo, leur site et leur nom.
             edit:
               add_partner: Ajouter un partenaire
+              remove_partner: Enlever le partenaire
               description:
                 label: Description
               element:
@@ -349,7 +350,6 @@ fr:
                   placeholder: https://
                 logo_label: Logo
                 remove_logo: Enlever le logo
-                remove_partner: Enlever le partenaire
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
