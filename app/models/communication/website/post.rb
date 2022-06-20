@@ -136,6 +136,7 @@ class Communication::Website::Post < ApplicationRecord
   def url
     return unless published
     return if website.url.blank?
+    return if website.special_page(:communication_posts)&.path.blank?
     "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
   end
 
