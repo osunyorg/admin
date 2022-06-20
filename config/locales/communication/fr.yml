@@ -373,9 +373,9 @@ fr:
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:
+              add_testimonial: Ajouter un témoignage
+              remove_testimonial: Enlever le témoignage
               element:
-                add_testimonial: Ajouter un témoignage
-                remove_testimonial: Enlever le témoignage
                 text:
                   label: Texte
                   placeholder: Entrer le texte du témoignage
