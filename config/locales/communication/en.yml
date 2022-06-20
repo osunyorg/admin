@@ -143,6 +143,10 @@ en:
             transcription:
               label: Text transcript
               placeholder: Enter text transcript
+          file:
+            input:
+              label: File
+              remove: Remove file
           image:
             input:
               label: Image (.png, .jpg, .svg)
@@ -153,8 +157,6 @@ en:
             credit:
               label: Credit
               placeholder: Enter credit
-          file:
-              not_linked: No linked file
           link:
               target_blank: Open in new window
         templates:
@@ -176,9 +178,6 @@ en:
                 target_blank:
                   label: Open in new window
               buttons: Action buttons
-              alt:
-                label: Alternative text
-                placeholder: Enter image's alternative text here
               credit:
                 label: Credit
                 placeholder: Enter image's credit here
@@ -193,6 +192,10 @@ en:
                 placeholder: Enter text
           datatable:
             description: A table of data, as responsive and accessible as possible.
+            edit:
+              caption:
+                label: Text transcript
+                placeholder: Enter the text transcript of the table
           definitions:
             description: A list of terms and definitions. We could call it a dictionary.
             edit:
@@ -211,6 +214,9 @@ en:
               code:
                 label: Code
                 code_placeholder: Enter code
+              iframe_title:
+                label: Iframe title (mandatory for accessibility)
+                placeholder: Enter the title
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:

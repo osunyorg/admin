@@ -1,24 +1,11 @@
-      text: >-
-<%= block_component_static :text,
-          label: t('admin.communication.blocks.components.image.alt.label'),
-          placeholder: t('admin.communication.blocks.components.image.alt.placeholder'),
-          depth: 5 %>
-<%= block_component_static :image,
-          label: t('admin.communication.blocks.components.image.input.label'),
-          remove: t('admin.communication.blocks.components.image.input.remove'),
-          list:true %>
-<%= block_component_static :alt,
-          label: t('admin.communication.blocks.components.image.alt.label'),
-          placeholder: t('admin.communication.blocks.components.image.alt.placeholder'),
-          depth: 4 %>
-<%= block_component_static :credit,
-          label: t('admin.communication.blocks.components.image.credit.label'),
-          placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-          depth: 4 %>
+<%= block_component_static :text %>
+<%= block_component_static :image %>
+<%= block_component_static :alt %>
+<%= block_component_static :credit %>
       buttons: >-
 <% block.template.elements.each do |element| %>
-  <%= block_component_static :title, template: element, list: true %>
-  <%= block_component_static :url, template: element, depth: 4 %>
-  <%= block_component_static :target_blank, template: element, depth: 4 %>
+<%= block_component_static :title, template: element, depth: 4, list: true %>
+<%= block_component_static :url, template: element, depth: 5 %>
+<%= block_component_static :target_blank, template: element, depth: 5 %>
 
 <% end %>

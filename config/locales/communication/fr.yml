@@ -184,8 +184,6 @@ fr:
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             edit:
-              image:
-                label: Image d'illustration
               notes:
                 label: Notes
                 placeholder: Entrer les notes
