@@ -51,7 +51,7 @@ class BlocksMigration
   def self.clean_definitions
     Communication::Block.where(template_kind: 'definitions').each do |block|
       data = block['data']
-      if data && data['elements'].any? && data['elements'].first.has_key?('text')
+      if data && data.has_key?('elements') && data['elements'].any? && data['elements'].first.has_key?('text')
         elements = []
         data['elements'].each do |elmt|
           elements << { title: elmt['title'], description: elmt['text'] }
@@ -66,7 +66,7 @@ class BlocksMigration
   def self.clean_gallery
     Communication::Block.where(template_kind: 'gallery').each do |block|
       data = block['data']
-      if data && data['elements'].any? && data['elements'].first.has_key?('file')
+      if data && data.has_key?('elements') && data['elements'].any? && data['elements'].first.has_key?('file')
         elements = []
         data['elements'].each do |elmt|
           elements << { alt: elmt['alt'], text: elmt['text'], credit: elmt['credit'], image: elmt['file'] }
