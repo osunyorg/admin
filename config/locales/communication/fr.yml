@@ -281,6 +281,8 @@ fr:
             description: Un organigramme présentant des personnes et leur fonction.
             edit:
               add_person: Ajouter une personne
+              drag_title: Glisser-déposer pour organiser les personnes
+              delete_title: Enlever la personne
               description:
                 label: Description
               element:
@@ -290,8 +292,6 @@ fr:
                 role:
                   label: Rôle
                   placeholder: Indiquer le rôle de la personne
-                drag_title: Glisser-déposer pour organiser les personnes
-                delete_title: Enlever la personne
           pages:
             description: Une mise en avant d'une sélection de pages, avec plusieurs options d'affichage.
             layouts:
