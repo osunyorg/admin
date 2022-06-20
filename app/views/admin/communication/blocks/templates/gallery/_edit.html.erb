@@ -9,9 +9,8 @@
 
 <%= block_component_add_element t('.add_image') %>
 
-<draggable :list="data.elements" handle=".imageHandle" class="row">
-  <div  v-for="(element, index) in data.elements"
-        class="col-xxl-3 col-md-4 col-6">
+<draggable :list="data.elements" handle=".imageHandle">
+  <div  v-for="(element, index) in data.elements">
     <div class="card">
       <div class="card-header border-bottom">
         <a class="btn ps-0 pt-0 imageHandle">
@@ -26,20 +25,28 @@
         </div>
       </div>
       <div class="card-body">
-        <%= block_component_edit :image,
-              template: @element,
-              label: t('admin.communication.blocks.components.image.input.label'),
-              placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
-        <%= block_component_edit :alt,
-              template: @element,
-              label: t('admin.communication.blocks.components.image.alt.label'),
-              placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-        <%= block_component_edit :credit,
-              template: @element,
-              label: t('admin.communication.blocks.components.image.credit.label'),
-              placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
-        <%= block_component_edit :text,
-              template: @element %>
+        <div class="flex-fill">
+          <div class="row">
+            <div class="col-lg-6">
+              <%= block_component_edit :image,
+                    template: @element,
+                    label: t('admin.communication.blocks.components.image.input.label'),
+                    placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
+              </div>
+              <div class="col-lg-6">
+              <%= block_component_edit :alt,
+                    template: @element,
+                    label: t('admin.communication.blocks.components.image.alt.label'),
+                    placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+              <%= block_component_edit :credit,
+                    template: @element,
+                    label: t('admin.communication.blocks.components.image.credit.label'),
+                    placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
+              <%= block_component_edit :text,
+                  template: @element %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

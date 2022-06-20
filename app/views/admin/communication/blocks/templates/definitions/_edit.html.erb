@@ -2,8 +2,8 @@
 
 <%= block_component_add_element t('.add_definition') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row">
-  <div v-for="(element, index) in data.elements" class="col-md-4">
+<draggable :list="data.elements" handle=".dragHandle">
+  <div v-for="(element, index) in data.elements">
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
@@ -13,8 +13,14 @@
             </a>
           </div>
           <div class="flex-fill">
-            <%= block_component_edit :title, template: element %>
-            <%= block_component_edit :description, template: element %>
+            <div class="row mb-n3">
+              <div class="col-lg-5">
+                <%= block_component_edit :title, template: element %>
+              </div>
+              <div class="col-lg-7">
+                <%= block_component_edit :description, template: element %>
+              </div>
+            </div>
           </div>
           <div>
             <a  class="btn btn-sm btn-danger ms-3"
