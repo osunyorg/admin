@@ -30,10 +30,6 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   protected
 
-  def kind
-    @kind ||= data['kind'] || 'all'
-  end
-
   def selected_posts_all
     block.about&.website
                 .posts

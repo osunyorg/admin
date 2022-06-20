@@ -37,10 +37,10 @@
               </p>
             </td>
             <td class="text-end">
+              <%= edit_link block %>
               <%= link_to 'Dependencies', 
                           [:admin, block],
                           class: button_classes('btn-light') if current_user.server_admin? %>
-              <%= edit_link block %>
             </td>
           </tr>
         <% end %>
