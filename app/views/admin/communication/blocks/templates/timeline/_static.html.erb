@@ -1,4 +1,5 @@
+      events:
 <% block.template.elements.each do |element| %>
-<%= block_component_static :title, template: element, depth: 3, list: true %>
-<%= block_component_static :text, template: element, depth: 4 %>
+<%= block_component_static :title, template: element, depth: 4, list: true %>
+<%= block_component_static :text, template: element, depth: 5 %>
 <% end %>
