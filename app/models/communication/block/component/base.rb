@@ -14,7 +14,7 @@ class Communication::Block::Component::Base
   end
 
   def data
-    @data
+    @data || default_data
   end
 
   def data=(value)

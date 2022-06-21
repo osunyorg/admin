@@ -5,6 +5,7 @@
     <tr>
       <th><%= Communication::Block.human_attribute_name('name') %></th>
       <th><%= Communication::Block.human_attribute_name('about') %></th>
+      <th><%= Communication::Block.human_attribute_name('data') %></th>
       <th><%= Communication::Block.human_attribute_name('university') %></th>
       <th><%= Communication::Block.human_attribute_name('url') %></th>
     </tr>
@@ -19,6 +20,9 @@
           <span class="badge bg-dark">
             <%= block.about.class.model_name.human %>
           </span>
+        </td>
+        <td>
+          <textarea rows="1" class="form-control"><%= block.data %></textarea>
         </td>
         <td><%= block.about.university %></td>
         <td><%= link_to 'Open',
