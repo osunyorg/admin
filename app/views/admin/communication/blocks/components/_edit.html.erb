@@ -6,7 +6,7 @@ template ||= @block.template
 root_template = template == @block.template
 if root_template
   model = 'data'
-  dom_id = "#{property}"
+  dom_id = "'#{property}'"
   i18n_component = "#{i18n}.#{property}"
 else
   # Nested element

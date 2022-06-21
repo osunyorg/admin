@@ -3,7 +3,9 @@
           class="form-check-input"
           v-model="<%= model %>.<%= property %>"
           type="checkbox" />
-  <label class="form-label" aria-label="<%= label %>" :for="<%= dom_id.html_safe %>">
+  <label  class="form-label"
+          aria-label="<%= label %>"
+          :for="<%= dom_id.html_safe %>">
     <%= label %>
   </label>
 </div>
