@@ -12,6 +12,7 @@
   </thead>
   <tbody>
     <% @blocks.each do |block| %>
+      <% next if block.nil?%>
       <% url = "#{block.about.university.url }#{edit_admin_communication_block_path(block)}" %>
       <tr>
         <td><%= truncate "#{block}" %></td>
