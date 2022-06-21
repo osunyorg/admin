@@ -383,6 +383,13 @@ en:
                   remove_photo: Remove photo
           timeline:
             description: A list of events with their description, on a timeline.
+            layouts:
+              horizontal:
+                label: Horizontal
+                description: Events are shown left to right, and can be browsed with arrows.
+              vertical:
+                label: Vertical
+                description: Events are shown vertically, along the page.
             edit:
               add_event: Add event
               remove_event: Delete event

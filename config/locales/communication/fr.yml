@@ -387,6 +387,13 @@ fr:
                   remove_photo: Enlever la photo
           timeline:
             description: Une liste d'événements avec leur description, présentés en frise.
+            layouts:
+              horizontal:
+                label: Horizontal
+                description: Les événements sont présentés de gauche à droite, navigables avec des flèches.
+              vertical:
+                label: Vertical
+                description: Les événements sont présentés verticalement, dans la continuité de la page.
             edit:
               add_event: Ajouter un événement
               remove_event: Supprimer l'événement

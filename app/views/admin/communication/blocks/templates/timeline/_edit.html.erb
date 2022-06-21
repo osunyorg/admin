@@ -1,5 +1,4 @@
-<% element = @block.template.default_element %>
-
+<%= block_component_edit :layout, horizontal: true %>
 <%= block_component_add_element t('.add_event') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row">
@@ -13,8 +12,8 @@
             </a>
           </div>
           <div class="flex-fill">
-            <%= block_component_edit :title, template: element %>
-            <%= block_component_edit :text, template: element %>
+            <%= block_component_edit :title, template: @element %>
+            <%= block_component_edit :text, template: @element %>
           </div>
           <div>
             <a  class="btn btn-sm btn-danger ms-3"
