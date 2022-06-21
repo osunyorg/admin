@@ -1,4 +1,5 @@
 <%= block_component_static :description %>
+      persons:
 <% block.template.elements.each do |element| %>
 <% next unless element.person %>
 <%= block_component_static :id, template: element, depth: 4, list: true %>
