@@ -2,52 +2,67 @@
   <div class="col-xl-6">
     <%= block_component_edit :description %>
   </div>
-  <div class="col-xl-6">
-    <%= block_component_edit :layout %>
-  </div>
 </div>
 
-<%= block_component_add_element t('.add_image') %>
+<%= block_component_edit :layout, horizontal: true %>
 
-<draggable :list="data.elements" handle=".imageHandle">
-  <div  v-for="(element, index) in data.elements">
-    <div class="card">
-      <div class="card-header border-bottom">
-        <a class="btn ps-0 pt-0 imageHandle">
-          <i class="fa fa-bars handle"></i>
-        </a>
-        <div class="float-end">
-          <a  class="btn btn-sm btn-danger"
-              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-              title="<%= t '.remove_image' %>">
-              <i class="fas fa-times"></i>
-          </a>
+<div v-show="data.elements.length > 1">
+  <hr class="my-5">
+
+  <p>Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité</p>
+
+  <draggable :list="data.elements" class="row">
+    <div v-for="(element, index) in data.elements" class="col-xxl-1 col-lg-2 col-4">
+      <div class="card">
+        <div class="card-header p-1 text-center">
+          <i class="fas fa-arrows-alt"></i>
+        </div>
+        <div v-if="element.image.id">
+          <img :src="getImageUrl(element.image)" class="img-fluid" />
         </div>
       </div>
-      <div class="card-body">
-        <div class="flex-fill">
-          <div class="row mb-n3">
-            <div class="col-lg-6">
-              <%= block_component_edit :image,
-                    template: @element,
-                    label: t('admin.communication.blocks.components.image.input.label'),
-                    placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
-              </div>
-              <div class="col-lg-6">
-              <%= block_component_edit :alt,
-                    template: @element,
-                    label: t('admin.communication.blocks.components.image.alt.label'),
-                    placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-              <%= block_component_edit :credit,
-                    template: @element,
-                    label: t('admin.communication.blocks.components.image.credit.label'),
-                    placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
-              <%= block_component_edit :text,
-                  template: @element %>
+    </div>
+  </draggable>
+</div>
+
+<hr class="my-5">
+
+<p>Envoyer les images et saisir les textes ci-dessous</p>
+
+<div  v-for="(element, index) in data.elements">
+  <div class="card">
+    <div class="card-body">
+      <div class="float-end">
+        <a  class="btn btn-sm btn-danger"
+            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+            title="<%= t '.remove_image' %>">
+            <i class="fas fa-times"></i>
+        </a>
+      </div>
+      <div class="flex-fill">
+        <div class="row mb-n3">
+          <div class="col-lg-6">
+            <%= block_component_edit :image,
+                  template: @element,
+                  label: t('admin.communication.blocks.components.image.input.label'),
+                  placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
             </div>
+            <div class="col-lg-6">
+            <%= block_component_edit :alt,
+                  template: @element,
+                  label: t('admin.communication.blocks.components.image.alt.label'),
+                  placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+            <%= block_component_edit :credit,
+                  template: @element,
+                  label: t('admin.communication.blocks.components.image.credit.label'),
+                  placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
+            <%= block_component_edit :text,
+                template: @element %>
           </div>
         </div>
       </div>
     </div>
   </div>
-</draggable>
+</div>
+
+<%= block_component_add_element t('.add_image') %>
