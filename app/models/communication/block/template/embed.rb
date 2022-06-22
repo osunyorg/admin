@@ -20,7 +20,7 @@ class Communication::Block::Template::Embed < Communication::Block::Template::Ba
     
     if has_iframe?
       
-      has_title = Nokogiri::XML(code).at('iframe').attr('title')
+      Nokogiri::XML(code).at('iframe').attr('title')
 
     end
 
