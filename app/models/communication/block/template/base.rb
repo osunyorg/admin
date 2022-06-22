@@ -132,10 +132,6 @@ class Communication::Block::Template::Base
     true
   end
 
-  def blob_with_id(id)
-    university.active_storage_blobs.find_by id: id
-  end
-
   def default_data
     hash = {}
     hash['elements'] = [] if has_element_class?
