@@ -5,31 +5,23 @@ class Communication::Block::Template::Embed < Communication::Block::Template::Ba
 
   protected
 
+  def check_accessibility
+    super
+    accessibility_error 'accessibility.blocks.templates.embed.title_missing' if has_iframe_without_title?
+    accessibility_error 'accessibility.blocks.templates.embed.transcription_missing' if  has_iframe? && transcription.blank?
+  end
+
   def has_iframe?
-
-    @doc = Nokogiri::XML(code)
-    is_iframe = @doc.xpath("//iframe")
-
-    if !is_iframe.empty?
-      return true
-    end
-
+    !nokogiri.xpath("//iframe").empty?
   end
 
   def has_iframe_without_title?
-    
-    if has_iframe?
-      
-      Nokogiri::XML(code).at('iframe').attr('title')
-
-    end
-
+    return false unless has_iframe?
+    nokogiri.at('iframe').attr('title')
   end
 
-  def check_accessibility
-    super
-    accessibility_error 'accessibility.blocks.templates.embed.title_missing' if  has_iframe? && !has_iframe_without_title?
-    accessibility_error 'accessibility.blocks.templates.embed.transcription_missing' if  has_iframe? && transcription.blank?
+  def nokogiri
+    @nokogiri ||= Nokogiri::XML(code)
   end
 
 end
