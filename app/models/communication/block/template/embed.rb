@@ -16,7 +16,7 @@ class Communication::Block::Template::Embed < Communication::Block::Template::Ba
 
   end
 
-  def has_iframe_without_title?
+  def has_iframe_title?
     
     if has_iframe?
       
