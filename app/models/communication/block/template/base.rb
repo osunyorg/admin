@@ -133,7 +133,7 @@ class Communication::Block::Template::Base
   end
 
   def blob_with_id(id)
-    university.active_storage_blobs.find id
+    university.active_storage_blobs.find_by id: id
   end
 
   def default_data
