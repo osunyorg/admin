@@ -26,7 +26,7 @@ en:
         embed:
           title_missing:
             title: No frame title
-            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the video.
+            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
           transcription_missing:
             title: No transcription
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
