@@ -17,7 +17,7 @@ class Communication::Block::Template::Embed < Communication::Block::Template::Ba
 
   def iframe_without_title?
     return false unless has_iframe?
-    nokogiri.at('iframe').attr('title')
+    !nokogiri.at('iframe').attr('title')
   end
 
   def nokogiri
