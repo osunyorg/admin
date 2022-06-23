@@ -1,5 +1,7 @@
 <% pages = collection_tree(@block.about&.website.pages) %>
 
+<%= block_component_edit :layout %>
+
 <div class="row mb-4">
   <div class="col-lg-6">
     <div class="mb-5">
@@ -42,6 +44,5 @@
     <%= block_component_edit :show_main_description %>
     <%= block_component_edit :show_description %>
     <%= block_component_edit :show_image %>
-    <%= block_component_edit :layout %>
   </div>
 </div>
