@@ -2,6 +2,6 @@
       persons:
 <% block.template.elements.each do |element| %>
 <% next unless element.person %>
-<%= block_component_static :id, template: element, depth: 4, list: true %>
+        - slug: "<%= element.person.slug %>"
 <%= block_component_static :role, template: element, depth: 5 %>
 <% end %>
