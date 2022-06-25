@@ -12,6 +12,7 @@ namespace :communication do
       member do
         get :children
         get :static
+        get :preview
       end
     end
     resources :categories, controller: 'websites/categories' do

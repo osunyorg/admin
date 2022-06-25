@@ -35,6 +35,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     render layout: false
   end
 
+  def preview
+    @url = @website.url
+    render layout: 'admin/layouts/preview'
+  end
+
   def new
     @page.website = @website
     breadcrumb

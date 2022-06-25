@@ -1,0 +1,4 @@
+<%= @page.text.to_s %>
+<% @page.blocks.ordered.each do |block| %>
+<%= render 'admin/communication/blocks/preview', block: block %>
+<% end %>
