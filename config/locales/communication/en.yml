@@ -281,6 +281,8 @@ en:
               delete_title: Remove person
               description:
                 label: Description
+              with_link:
+                label: With clickable links to the person's page?
               element:
                 person:
                   label: Person

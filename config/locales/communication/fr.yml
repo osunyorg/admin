@@ -281,6 +281,8 @@ fr:
               add_person: Ajouter une personne
               drag_title: Glisser-déposer pour organiser les personnes
               delete_title: Enlever la personne
+              with_link:
+                label: Avec des liens cliquables vers les pages des personnes ?
               description:
                 label: Description
               element:
