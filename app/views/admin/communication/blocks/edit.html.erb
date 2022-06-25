@@ -17,7 +17,7 @@
         <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
       </div>
       <div class="col-xxl-3 col-lg-4">
-        <%= render 'admin/application/accessibility', about: @block %>
+        <%= render 'admin/application/a11y/widget', about: @block %>
       </div>
     </div>
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">

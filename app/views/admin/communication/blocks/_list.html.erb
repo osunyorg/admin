@@ -30,12 +30,7 @@
             <% end %>
             <td><%= block.to_s.truncate(50) %></td>
             <td><%= block.template_kind_i18n  %></td>
-            <td>
-              <p class="m-0 lead">
-                <i class="fas fa-universal-access <%= block.accessible? ?
-                    'text-success' : 'text-danger'%>"></i>
-              </p>
-            </td>
+            <td><%= render 'admin/application/a11y/status', about: block %></td>
             <td class="text-end">
               <%= edit_link block %>
               <%= link_to 'Dependencies', 

@@ -1,0 +1,4 @@
+<p class="m-0">
+    <i class="lead fas fa-universal-access <%= about.accessible? ? 'text-success' : 'text-danger'%>"></i>
+    <%= t "accessibility.status.#{about.accessible?}" %>
+</p>

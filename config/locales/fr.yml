@@ -5,6 +5,9 @@ fr:
       zero: Félicitations, aucun problème d'accessibilité détecté !
       one: '1 erreur'
       other: '%{count} erreurs'
+    status:
+      true: Accessible
+      false: Non accessible
     warnings:
       one: '1 information utile'
       other: '%{count} informations utiles'
