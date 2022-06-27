@@ -17,11 +17,9 @@ end
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><%= yield :title %></title>
+    <link rel="stylesheet" media="all" href="<%= style_admin_communication_website_path @website.id, website_id: nil %>" />
   </head>
-  <body class="is-loaded">
-    <style>
-      <%= @css %>
-    </style>
+  <body>
     <main class="page-with-blocks" id="main" role="main" tabindex="-1">
       <div class="blocks">
         <%= yield %>

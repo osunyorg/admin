@@ -1,3 +1,11 @@
-<h2 class="h4 mt-5"><%= block.title %></h2>
-<% @block = block %>
-<%= render "admin/communication/blocks/templates/#{@block.template_kind}/preview" %>
+<section class="block-<%= block.template_kind %>">
+  <div class="container">
+    <div class="block-content">
+      <div class="top">
+        <h2><%= block.title %></h2>
+      </div>
+      <% @block = block %>
+      <%= render "admin/communication/blocks/templates/#{@block.template_kind}/preview" %>
+    </div>
+  </div>
+</section>

@@ -4,6 +4,7 @@ namespace :communication do
     member do
       get :import
       post :import
+      get :style
     end
     resources :pages, controller: 'websites/pages' do
       collection do

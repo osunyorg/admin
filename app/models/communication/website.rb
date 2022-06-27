@@ -74,4 +74,20 @@ class Communication::Website < ApplicationRecord
     dependencies
   end
 
+  def preview_style
+    return '' if url.blank?
+    html = Nokogiri::HTML open(url)
+    css_files = html.xpath '//link[@rel="stylesheet"]/@href'
+    css = ''
+    css_files.each do |css_url|
+      css_uri = URI.parse css_url
+      data = Net::HTTP.get css_uri
+      data = data.force_encoding("UTF-8")
+      data = data.gsub "src:url(../", "src:url(#{url}/assets/"
+      data = data.gsub ",url(../", ",url(#{url}/assets/"
+      css << data
+    end
+    css
+  end
+
 end

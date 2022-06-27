@@ -1,4 +1,6 @@
-<%= @page.text.to_s %>
+<div class="container">
+    <%= @page.text.to_s %>
+</div>
 <% @page.blocks.ordered.each do |block| %>
-<%= render 'admin/communication/blocks/preview', block: block %>
+    <%= render 'admin/communication/blocks/preview', block: block %>
 <% end %>
