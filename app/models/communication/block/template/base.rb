@@ -185,6 +185,6 @@ class Communication::Block::Template::Base
   end
 
   def website
-    block.about&.website
+    block.about&.try(:website)
   end
 end
