@@ -1,5 +1,7 @@
 # used in menu items and in admin navigation
 class Icon
+  DASHBOARD = 'tachometer-alt'
+
   COMMUNICATION_EXTRANET = 'project-diagram'
   COMMUNICATION_WEBSITE = 'sitemap'
   COMMUNICATION_WEBSITE_POST = 'newspaper'
