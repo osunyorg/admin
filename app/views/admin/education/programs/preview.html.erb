@@ -5,9 +5,7 @@
     <%= @program.send(property).to_s %>
 <% end %>
 
-<% @program.blocks.ordered.each do |block| %>
-    <%= render 'admin/communication/blocks/preview', block: block %>
-<% end %>
+<%= render 'admin/communication/blocks/preview', about: @program %>
 
 <%  [
     :opportunities,
