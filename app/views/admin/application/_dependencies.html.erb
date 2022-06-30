@@ -1,0 +1,58 @@
+<%
+expanded ||= false
+%>
+<% if current_user.server_admin? %>
+    <div class="card flex-fill w-100">
+        <div class="card-header">
+            <div class="card-actions float-end">
+            <button class="accordion-button bg-transparent <%= 'collapsed' unless expanded %> mt-n1"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#dependencies"
+                    aria-expanded="<%= expanded %>"
+                    aria-controls="dependencies">
+            </button>
+            </div>
+            <h2 class="card-title mb-0 h5">Dependencies</h2>
+        </div>
+        <div class="card-body collapse <%= 'show' if expanded %>" id="dependencies">
+            <h2 class="h5">git_dependencies</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Class</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% git_dependencies.each do |dependency| %>
+                        <tr>
+                            <td><%= dependency.id %></td>
+                            <td><%= dependency.class %></td>
+                            <td><%= dependency.to_s %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+            <h2 class="h5 mt-5">active_storage_blobs</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Filename</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% active_storage_blobs.each do |blob| %>
+                        <tr>
+                            <td><%= blob.id %></td>
+                            <td><%= blob.filename %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<% end %>

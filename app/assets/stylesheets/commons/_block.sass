@@ -4,3 +4,27 @@
 [data-v-app]
     .spinner-border
         display: none
+
+.fake-table
+    display: table
+    border-collapse: collapse
+    caption-side: bottom
+    border: 1px solid $border-color
+    .thead, .tbody
+        display: table-row-group
+    .tr
+        display: table-row
+        border-bottom: 1px solid $border-color
+    .td
+        display: table-cell
+        min-width: 120px
+        &:not(:first-child)
+            border-left: 1px solid  $border-color
+    .thead
+        white-space: nowrap
+    .tbody
+        .tr
+            &:nth-child(even)
+                background: $table-striped-bg
+            &:hover
+                background: $table-hover-bg

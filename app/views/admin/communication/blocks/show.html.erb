@@ -1,42 +1,9 @@
 <% content_for :title, @block %>
 
-<h2>git_dependencies</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Class</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @block.template.git_dependencies.each do |dependency| %>
-            <tr>
-                <td><%= dependency.id %></td>
-                <td><%= dependency.class %></td>
-                <td><%= dependency.to_s %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<h2>active_storage_blobs</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Filename</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @block.template.active_storage_blobs.each do |blob| %>
-            <tr>
-                <td><%= blob.id %></td>
-                <td><%= blob.filename %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+<%= render 'admin/application/dependencies',
+            git_dependencies: @block.template.git_dependencies,
+            active_storage_blobs: @block.template.active_storage_blobs,
+            expanded: true %>
 
 <% content_for :action_bar_right do %>
     <%= edit_link @block %>

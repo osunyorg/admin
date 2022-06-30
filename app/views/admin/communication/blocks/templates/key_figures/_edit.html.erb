@@ -1,4 +1,8 @@
-<% element = @block.template.default_element %>
+<div class="row">
+  <div class="col-xl-6">
+    <%= block_component_edit :description %>
+  </div>
+</div>
 
 <%= block_component_add_element t('.add_key') %>
 
@@ -15,13 +19,13 @@
           <div class="flex-fill">
             <div class="row mb-n3">
               <div class="col-lg-2">
-                <%= block_component_edit :number, template: element %>
+                <%= block_component_edit :number, template: @element %>
               </div>
               <div class="col-lg-3">
-                <%= block_component_edit :unit, template: element %>
+                <%= block_component_edit :unit, template: @element %>
               </div>
               <div class="col-lg-7">
-                <%= block_component_edit :description, template: element, rows: 1 %>
+                <%= block_component_edit :description, template: @element, rows: 1 %>
               </div>
             </div>
           </div>

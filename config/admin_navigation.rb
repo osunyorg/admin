@@ -4,7 +4,9 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
   navigation.items do |primary|
-    primary.item :dashboard, t('admin.dashboard'), admin_root_path, { icon: 'tachometer-alt', highlights_on: /admin$/ }
+    primary.item  :dashboard, t('admin.dashboard'),
+                  admin_root_path, 
+                  { icon: Icon::DASHBOARD, highlights_on: /admin$/ }
 
     if can?(:read, University::Person) || can?(:read, University::Organization)
       primary.item :university,

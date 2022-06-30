@@ -283,6 +283,8 @@ en:
                 label: Description
               with_link:
                 label: With clickable links to the person's page?
+              with_photo:
+                label: With a portrait for each person?
               element:
                 person:
                   label: Person

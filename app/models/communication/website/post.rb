@@ -122,6 +122,7 @@ class Communication::Website::Post < ApplicationRecord
     dependencies = [self] + website.menus
     dependencies += categories
     dependencies += active_storage_blobs
+    dependencies += git_block_dependencies
     if author.present?
       dependencies += [author, author.author]
       dependencies += author.active_storage_blobs
