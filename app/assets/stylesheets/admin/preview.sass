@@ -1,7 +1,17 @@
 .preview
-    img
-        height: auto
-        max-width: 100%
-    iframe
-        height: 220px
-        max-width: 100%
+    .modal-body
+        background: black
+        text-align: center
+        overflow: hidden
+        iframe
+            height: 100%
+            transition: width 0.5s ease
+    &--mobile
+        iframe
+            width: 415px
+    &--tablet
+        iframe
+            width: 768px
+    &--desktop
+        iframe
+            width: 100%

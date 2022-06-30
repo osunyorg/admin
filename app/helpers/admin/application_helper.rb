@@ -38,7 +38,11 @@ module Admin::ApplicationHelper
   end
 
   def preview_link
-    raw "<button class=\"btn btn-primary\" type=\"button\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#preview\" aria-controls=\"preview\">#{ t 'preview.button'}</button>"
+    raw "<button  class=\"btn btn-primary\"
+                  type=\"button\"
+                  data-bs-toggle=\"modal\"
+                  data-bs-target=\"#preview\"
+                  aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
   def button_classes(additional = '', **options)

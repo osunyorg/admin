@@ -226,7 +226,10 @@ en:
   please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
   preview:
     button: Preview
-    title: Mobile preview
+    title: Preview
+    mobile: Mobile
+    tablet: Tablet
+    desktop: Desktop
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   quit: Quit
