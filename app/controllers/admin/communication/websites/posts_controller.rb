@@ -36,6 +36,10 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     breadcrumb
   end
 
+  def preview
+    render layout: 'admin/layouts/preview'
+  end
+
   def static
     @about = @post
     render layout: false

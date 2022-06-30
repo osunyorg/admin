@@ -30,6 +30,7 @@ namespace :communication do
       post :publish, on: :collection
       member do
         get :static
+        get :preview
       end
     end
     resources :curations,

@@ -36,7 +36,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def preview
-    @url = @website.url
     render layout: 'admin/layouts/preview'
   end
 

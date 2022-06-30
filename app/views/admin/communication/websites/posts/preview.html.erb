@@ -1,0 +1,6 @@
+<div class="container">
+    <%= @post.text.to_s %>
+</div>
+<% @post.blocks.ordered.each do |block| %>
+    <%= render 'admin/communication/blocks/preview', block: block %>
+<% end %>

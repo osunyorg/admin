@@ -54,6 +54,11 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     breadcrumb
   end
 
+  def preview
+    @website = @program.websites&.first
+    render layout: 'admin/layouts/preview'
+  end
+
   def new
     breadcrumb
   end

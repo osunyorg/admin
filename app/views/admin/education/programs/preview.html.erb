@@ -1,0 +1,27 @@
+<%  [
+    :presentation,
+    :objectives
+    ].each do |property| %>
+    <%= @program.send(property).to_s %>
+<% end %>
+
+<% @program.blocks.ordered.each do |block| %>
+    <%= render 'admin/communication/blocks/preview', block: block %>
+<% end %>
+
+<%  [
+    :opportunities,
+    :results,
+    :accessibility,
+    :duration,
+    :pricing,
+    :content,
+    :pedagogy,
+    :evaluation,
+    :prerequisites,
+    :registration,
+    :other,
+    :contacts
+    ].each do |property| %>
+    <%= @program.send(property).to_s %>
+<% end %>

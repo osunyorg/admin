@@ -30,6 +30,7 @@ namespace :education do
     end
     member do
       get :children
+      get :preview
     end
   end
   resources :academic_years
