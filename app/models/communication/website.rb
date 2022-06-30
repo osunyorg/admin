@@ -2,18 +2,20 @@
 #
 # Table name: communication_websites
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  access_token  :string
-#  git_endpoint  :string
-#  git_provider  :integer          default("github")
-#  name          :string
-#  repository    :string
-#  url           :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  university_id :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  about_type       :string           indexed => [about_id]
+#  access_token     :string
+#  git_endpoint     :string
+#  git_provider     :integer          default("github")
+#  name             :string
+#  repository       :string
+#  style            :text
+#  style_updated_at :date
+#  url              :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  about_id         :uuid             indexed => [about_type]
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -35,6 +37,7 @@ class Communication::Website < ApplicationRecord
   include WithMenuItems
   include WithProgramCategories
   include WithSpecialPages
+  include WithStyle
 
   enum git_provider: {
     github: 0,
@@ -73,21 +76,4 @@ class Communication::Website < ApplicationRecord
     dependencies += about.git_dependencies(website) if about.present?
     dependencies
   end
-
-  def preview_style
-    return '' if url.blank?
-    html = Nokogiri::HTML open(url)
-    css_files = html.xpath '//link[@rel="stylesheet"]/@href'
-    css = ''
-    css_files.each do |css_url|
-      css_uri = URI.parse css_url
-      data = Net::HTTP.get css_uri
-      data = data.force_encoding("UTF-8")
-      data = data.gsub "src:url(../", "src:url(#{url}/assets/"
-      data = data.gsub ",url(../", ",url(#{url}/assets/"
-      css << data
-    end
-    css
-  end
-
 end

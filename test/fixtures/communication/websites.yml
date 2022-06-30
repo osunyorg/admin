@@ -2,18 +2,20 @@
 #
 # Table name: communication_websites
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  access_token  :string
-#  git_endpoint  :string
-#  git_provider  :integer          default("github")
-#  name          :string
-#  repository    :string
-#  url           :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  university_id :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  about_type       :string           indexed => [about_id]
+#  access_token     :string
+#  git_endpoint     :string
+#  git_provider     :integer          default("github")
+#  name             :string
+#  repository       :string
+#  style            :text
+#  style_updated_at :date
+#  url              :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  about_id         :uuid             indexed => [about_type]
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
