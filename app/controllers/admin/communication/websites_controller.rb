@@ -18,6 +18,10 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
     breadcrumb
   end
 
+  def style
+    render body: @website.preview_style, content_type: "text/css"
+  end
+
   def new
     breadcrumb
   end

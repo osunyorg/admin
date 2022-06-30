@@ -4,6 +4,7 @@ namespace :communication do
     member do
       get :import
       post :import
+      get :style
     end
     resources :pages, controller: 'websites/pages' do
       collection do
@@ -12,6 +13,7 @@ namespace :communication do
       member do
         get :children
         get :static
+        get :preview
       end
     end
     resources :categories, controller: 'websites/categories' do
@@ -28,6 +30,7 @@ namespace :communication do
       post :publish, on: :collection
       member do
         get :static
+        get :preview
       end
     end
     resources :curations,

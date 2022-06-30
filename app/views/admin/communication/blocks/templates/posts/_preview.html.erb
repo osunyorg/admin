@@ -1,9 +1,20 @@
-<% if @block.data %>
-  <% if @block.template.category %>
-    <h2 class="mb-4"><%= @block.template.category %></h2>
+<div class="posts">
+  <% if @block.data %>
+    <% @block.template.selected_posts.each do |post| %>
+      <div>
+        <article class="post">
+          <div>
+            <p class="title"><%= post %></p>
+            <p><%= post.description_short %></p>
+            <time datetime="<%= post.published_at %>"><%= post.published_at.to_date %></time>
+          </div>
+          <% if post.best_featured_image.attached? %>
+            <div class="media">
+              <%= kamifusen_tag post.best_featured_image %>
+            </div>
+          <% end %>
+        </article>
+      </div>
+    <% end %>
   <% end %>
-  <% @block.template.selected_posts.each do |post| %>
-    <h3 class="h5"><%= post %></h3>
-    <p><%= post.description_short %></p>
-  <% end %>
-<% end %>
+</div>

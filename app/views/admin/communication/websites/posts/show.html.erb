@@ -87,13 +87,6 @@
   </div>
 <% end %>
 
-<% content_for :preview do %>
-  <%= @post.text.to_s %>
-  <% @post.blocks.ordered.each do |block| %>
-    <%= render 'admin/communication/blocks/preview', block: block %>
-  <% end %>
-<% end %>
-
 <% content_for :action_bar_left do %>
   <%= destroy_link @post %>
   <%= link_to t('static'),
