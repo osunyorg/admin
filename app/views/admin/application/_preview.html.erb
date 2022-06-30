@@ -4,15 +4,15 @@
       <div class="modal-header">
         <h5 class="modal-title h4"><%= t 'preview.title' %></h5>
         <div class="btn-group m-auto" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary preview__button preview__button__mobile">
+          <button type="button" class="btn btn-primary preview__button" data-mode="mobile">
             <i class="fas fa-mobile"></i>
             <%= t 'preview.mobile' %>
           </button>
-          <button type="button" class="btn btn-light preview__button preview__button__tablet">
+          <button type="button" class="btn btn-light preview__button" data-mode="tablet">
             <i class="fas fa-tablet"></i>
             <%= t 'preview.tablet' %>
           </button>
-          <button type="button" class="btn btn-light preview__button preview__button__desktop">
+          <button type="button" class="btn btn-light preview__button" data-mode="desktop">
             <i class="fas fa-desktop"></i>
             <%= t 'preview.desktop' %>
           </button>
