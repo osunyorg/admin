@@ -437,6 +437,7 @@ fr:
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
     website:
+      analytics: Analytics
       git: Git
       imported:
         from: Importé depuis

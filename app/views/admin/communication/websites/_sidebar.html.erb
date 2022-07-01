@@ -3,39 +3,49 @@
     <div class="card">
       <div class="list-group list-group-flush" role="tablist">
         <%
-        [
+        navigation = [
           {
             title: Communication::Website.model_name.human,
-            path: admin_communication_website_path(id: @website),
-            icon: 'fas fa-home',
+            path: admin_communication_website_path(id: @website, website_id: nil),
+            icon: Icon::COMMUNICATION_WEBSITE_HOME,
             ability: can?(:read, @website)
           },
           {
             title: t('admin.communication.website.pages.structure'),
             path: admin_communication_website_pages_path(website_id: @website),
-            icon: 'fas fa-sitemap',
+            icon: Icon::COMMUNICATION_WEBSITE_PAGES,
             ability: can?(:read, Communication::Website::Page)
           },
           {
             title: Communication::Website::Post.model_name.human(count: 2),
             path: admin_communication_website_posts_path(website_id: @website),
-            icon: 'fas fa-newspaper',
+            icon: Icon::COMMUNICATION_WEBSITE_POST,
             ability: can?(:read, Communication::Website::Post)
           },
           {
             title: Communication::Website::Menu.model_name.human(count: 2),
             path: admin_communication_website_menus_path(website_id: @website),
-            icon: 'fas fa-bars',
+            icon: Icon::COMMUNICATION_WEBSITE_MENUS,
             ability: can?(:read, Communication::Website::Category)
           }
-        ].each do |object|
+        ]
+
+        navigation << {
+          title: t('communication.website.analytics'),
+          path: analytics_admin_communication_website_path(@website.id, website_id: nil),
+          icon:  Icon::COMMUNICATION_WEBSITE_ANALYTICS,
+          ability: can?(:read, @website)
+        } if @website.plausible_url.present?
+
+        navigation.each_with_index do |object, index|
           next unless object[:ability]
-          active = object[:path].in? request.path
+          active = index.zero?  ? object[:path] == request.path
+                                : object[:path].in?(request.path)
         %>
         <a class="list-group-item list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
           <%= object[:title].html_safe %>
           <span class="float-end">
-            <i class="<%= object[:icon] %>"></i>
+            <i class="fas fa-<%= object[:icon] %>"></i>
           </span>
         </a>
         <% end %>

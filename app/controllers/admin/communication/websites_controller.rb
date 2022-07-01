@@ -22,6 +22,11 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
     render body: @website.preview_style, content_type: "text/css"
   end
 
+  def analytics
+    breadcrumb
+    add_breadcrumb t('communication.website.analytics')
+  end
+
   def new
     breadcrumb
   end
@@ -76,7 +81,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
 
   def website_params
     params.require(:communication_website).permit(
-      :name, :url, :repository, :access_token, :about_type, :about_id, :git_provider, :git_endpoint, language_ids: []
+      :name, :url, :repository, :access_token, :about_type, :about_id, :git_provider, :git_endpoint, :plausible_url, language_ids: []
     )
   end
 end

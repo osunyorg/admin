@@ -5,6 +5,7 @@ namespace :communication do
       get :import
       post :import
       get :style
+      get :analytics
     end
     resources :pages, controller: 'websites/pages' do
       collection do

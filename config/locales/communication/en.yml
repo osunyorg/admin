@@ -433,6 +433,7 @@ en:
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
     website:
+      analytics: Analytics
       git: Git
       imported:
         from: Imported from

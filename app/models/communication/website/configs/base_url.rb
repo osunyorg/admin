@@ -8,6 +8,7 @@
 #  git_endpoint     :string
 #  git_provider     :integer          default("github")
 #  name             :string
+#  plausible_url    :string
 #  repository       :string
 #  style            :text
 #  style_updated_at :date
