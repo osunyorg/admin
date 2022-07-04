@@ -6,6 +6,7 @@
 #  about_type    :string           indexed => [about_id]
 #  data          :jsonb
 #  position      :integer          default(0), not null
+#  published     :boolean          default(TRUE)
 #  template_kind :integer          default(NULL), not null
 #  title         :string
 #  created_at    :datetime         not null
@@ -58,6 +59,8 @@ class Communication::Block < ApplicationRecord
     references: [:pages, :posts, :organization_chart, :partners],
     utilities: [:files, :definitions, :embed]
   }
+
+  scope :published, -> { where(published: true) } 
 
   before_save :attach_template_blobs
   after_commit :save_and_sync_about, on: [:update, :destroy]

@@ -80,6 +80,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def block_params
     params.require(:communication_block)
-          .permit(:about_id, :about_type, :template_kind, :title, :data)
+          .permit(:about_id, :about_type, :template_kind, :title, :data, :published)
   end
 end

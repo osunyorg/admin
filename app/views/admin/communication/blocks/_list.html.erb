@@ -24,7 +24,7 @@
       </thead>
       <tbody data-sortable data-sort-url="<%= reorder_admin_communication_blocks_path %>">
         <% about.blocks.ordered.each do |block| %>
-          <tr data-id="<%= block.id %>">
+          <tr data-id="<%= block.id %>" class="<%= 'draft' unless block.published? %>">
             <% if can? :reorder, Communication::Block %>
               <td><i class="fa fa-bars handle"></i></td>
             <% end %>
