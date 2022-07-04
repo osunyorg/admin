@@ -55,6 +55,9 @@ namespace :communication do
     collection do
       post :reorder
     end
+    member do
+      post :duplicate
+    end
   end
   resources :extranets, controller: 'extranets'
   resources :alumni do

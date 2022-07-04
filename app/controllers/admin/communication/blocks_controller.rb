@@ -48,6 +48,11 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     end
   end
 
+  def duplicate
+    redirect_to [:edit, :admin, @block.duplicate],
+                notice: t('admin.successfully_duplicated_html', model: @block.to_s)
+  end
+
   def destroy
     path = about_path
     @block.destroy

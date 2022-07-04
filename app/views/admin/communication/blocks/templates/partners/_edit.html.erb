@@ -13,12 +13,12 @@
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row mb-n3">
+        <div class="row">
          <div class="col-lg-4">
            <%= block_component_edit :id, template: @element, label: '' %>
           </div>
         </div>
-        <div class="row mb-n3"  v-if="!element.id">
+        <div class="row"  v-if="!element.id">
           <div class="col-lg-4">
             <%= block_component_edit :name, template: @element %>
           </div>

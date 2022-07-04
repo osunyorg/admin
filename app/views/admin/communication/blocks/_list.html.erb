@@ -32,10 +32,8 @@
             <td><%= block.template_kind_i18n  %></td>
             <td><%= render 'admin/application/a11y/status', about: block %></td>
             <td class="text-end">
+              <%= duplicate block %>
               <%= edit_link block %>
-              <%= link_to 'Dependencies', 
-                          [:admin, block],
-                          class: button_classes('btn-light') if current_user.server_admin? %>
             </td>
           </tr>
         <% end %>

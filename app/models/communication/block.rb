@@ -93,6 +93,12 @@ class Communication::Block < ApplicationRecord
     @template = nil
   end
 
+  def duplicate
+    block = self.dup
+    block.save
+    block
+  end
+
   def to_s
     title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"

@@ -90,6 +90,7 @@ fr:
   admin:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
+    duplicate: Dupliquer
     infos: Informations
     inheritance:
       sentence_without_link: Valeur héritée
@@ -101,6 +102,7 @@ fr:
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
+    successfully_duplicated_html: "<i>%{model}</i> a bien été dupliqué(e)."
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."

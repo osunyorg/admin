@@ -68,6 +68,13 @@ module Admin::ApplicationHelper
                 form: form.options.dig(:html, :id)
   end
 
+  def duplicate(object)
+    link_to t('admin.duplicate'),
+            [:duplicate, :admin, object], 
+            method: :post,
+            class: button_classes
+  end
+
   def prepare_html_for_static(html, university)
     text = html.to_s
     text = sanitize text
