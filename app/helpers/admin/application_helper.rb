@@ -45,6 +45,13 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
+  def duplicate_link(object)
+    link_to t('admin.duplicate'),
+            [:duplicate, :admin, object], 
+            method: :post,
+            class: button_classes
+  end
+
   def button_classes(additional = '', **options)
     classes = "btn btn-primary btn-xs #{additional}"
     classes += ' disabled' if options[:disabled]
@@ -66,13 +73,6 @@ module Admin::ApplicationHelper
                 t('save'),
                 class: button_classes,
                 form: form.options.dig(:html, :id)
-  end
-
-  def duplicate(object)
-    link_to t('admin.duplicate'),
-            [:duplicate, :admin, object], 
-            method: :post,
-            class: button_classes
   end
 
   def prepare_html_for_static(html, university)

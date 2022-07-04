@@ -32,8 +32,10 @@
             <td><%= block.template_kind_i18n  %></td>
             <td><%= render 'admin/application/a11y/status', about: block %></td>
             <td class="text-end">
-              <%= duplicate block %>
-              <%= edit_link block %>
+              <div class="btn-group">
+                <%= duplicate_link block %>
+                <%= edit_link block %>
+              </div>
             </td>
           </tr>
         <% end %>

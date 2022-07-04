@@ -15,6 +15,7 @@ namespace :communication do
         get :children
         get :static
         get :preview
+        post :duplicate
       end
     end
     resources :categories, controller: 'websites/categories' do

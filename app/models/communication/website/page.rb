@@ -145,6 +145,18 @@ class Communication::Website::Page < ApplicationRecord
     "/#{language.iso_code}" if website.languages.any? && language_id
   end
 
+  def duplicate
+    page = self.dup
+    page.published = false
+    page.save
+    blocks.each do |block|
+      b = block.duplicate
+      b.about = page
+      b.save
+    end
+    page
+  end
+
   def to_s
     "#{title}"
   end
