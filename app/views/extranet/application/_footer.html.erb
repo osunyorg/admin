@@ -4,14 +4,20 @@
       <%= render 'logo' %>
     </div>
     <div class="row justify-space-between">
-      <address class="col-md-6" itemscope itemtype="https://schema.org/CollegeOrUniversity">
-        <span itemprop="name">Institut de Journalisme Bordeaux Aquitaine</span>
-        <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-          <span itemprop="streetAddress">1 rue Jacques Ellul</span><br>
-          <span itemprop="postalCode">33000</span>
-          <span itemprop="addressLocality">Bordeaux</span><br>
+      <% if current_extranet.about.is_a?(Education::School) %>
+        <address class="col-md-6" itemscope itemtype="https://schema.org/CollegeOrUniversity">
+          <span itemprop="name"><%= current_extranet.about.name %></span>
+          <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress"><%= current_extranet.about.address %></span><br>
+            <span itemprop="postalCode"><%= current_extranet.about.zipcode %></span>
+            <span itemprop="addressLocality"><%= current_extranet.about.city %></span><br>
+          </div>
+        </address>
+      <% elsif current_extranet.about.is_a?(Education::Program) %>
+        <div class="col-md-6" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+          <span itemprop="name"><%= current_extranet.about.name %></span>
         </div>
-      </address>
+      <% end %>
 
       <nav class="text-md-end col-md-6">
         <%= link_to t('terms_of_service'),
