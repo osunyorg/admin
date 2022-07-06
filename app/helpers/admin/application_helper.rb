@@ -49,7 +49,8 @@ module Admin::ApplicationHelper
     link_to t('admin.duplicate'),
             [:duplicate, :admin, object], 
             method: :post,
-            class: button_classes
+            data: { confirm: t('please_confirm') },
+            class: button_classes('btn-info')
   end
 
   def button_classes(additional = '', **options)
