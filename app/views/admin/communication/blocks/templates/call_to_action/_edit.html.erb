@@ -20,30 +20,26 @@
 </div>
 
 <h3 class="h4"><%= t '.buttons' %></h3>
-<div v-for="(element, index) in data.elements" class="list-group">
-  <div class="list-group-item">
-    <div class="flex-fill">
-      <div class="row mb-n2">
-        <div class="col-lg-3">
-          <%= block_component_edit  :title, template: @element %>
-        </div>
-        <div class="col-lg-4">
-          <%= block_component_edit :url, template: @element %>
-        </div>
-        <div class="col-lg-4">
-          <label class="form-label d-none d-xl-block">&nbsp;</label>
-          <%= block_component_edit :target_blank, template: @element %>
-        </div>
-        <div class="col-lg-1">
-          <a  class="btn btn-sm btn-danger float-end"
-              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-            <i class="fas fa-times"></i>
-          </a>
-        </div>
+<div class="list-group">
+  <div v-for="(element, index) in data.elements" class="list-group-item">
+    <div class="row mb-n3">
+      <div class="col-lg-3">
+        <%= block_component_edit  :title, template: @element %>
       </div>
-
+      <div class="col-lg-4">
+        <%= block_component_edit :url, template: @element %>
+      </div>
+      <div class="col-lg-4">
+        <label class="form-label d-none d-xl-block">&nbsp;</label>
+        <%= block_component_edit :target_blank, template: @element %>
+      </div>
+      <div class="col-lg-1">
+        <a  class="btn btn-sm btn-danger float-end"
+            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+          <i class="fas fa-times"></i>
+        </a>
+      </div>
     </div>
-
   </div>
 </div>
 <div v-if="data.elements.length < 3" class="mt-3">
