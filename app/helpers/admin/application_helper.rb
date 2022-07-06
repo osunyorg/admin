@@ -50,7 +50,7 @@ module Admin::ApplicationHelper
             [:duplicate, :admin, object], 
             method: :post,
             data: { confirm: t('please_confirm') },
-            class: button_classes('btn-info')
+            class: button_classes('btn-light')
   end
 
   def button_classes(additional = '', **options)
