@@ -77,7 +77,7 @@ module Admin::ApplicationHelper
   end
 
   def prepare_html_for_static(html, university)
-    text = html.to_s
+    text = html.to_s.dup
     text = sanitize text
     text.gsub! "\r", ''
     text.gsub! "\n", ' '
@@ -86,19 +86,27 @@ module Admin::ApplicationHelper
   end
 
   def prepare_text_for_static(text, depth = 1)
-    indentation = '  ' * depth
-    text = text.to_s.dup
-    text = strip_tags text
-    text = text.strip
-    # Remove useless \r
-    text = text.gsub "\r\n", "\n"
-    # Replace lonely \r
-    text = text.gsub "\r", "\n"
-    # Indent properly to avoid broken frontmatter, with 2 lines so the linebreak work
-    text = text.gsub "\n", "\n#{indentation}\n#{indentation}"
-    # Remove extra newlines
-    text = text.chomp
+    text = strip_tags text.to_s.dup
+    text = indent text, depth
     CGI.unescapeHTML text
+  end
+
+  def prepare_code_for_static(code, depth = 1)
+    text = code.to_s.dup
+    text = indent text, depth
+    raw text
+  end
+  
+  def indent(text, depth)
+    indentation = '  ' * depth
+    # Remove useless \r
+    text.gsub! "\r\n", "\n"
+    # Replace lonely \r
+    text.gsub! "\r", "\n"
+    # Indent properly to avoid broken frontmatter, with 2 lines so the linebreak work
+    text.gsub! "\n", "\n#{indentation}\n#{indentation}"
+    text.chomp!
+    text
   end
 
   def prepare_media_for_static(object, key)
