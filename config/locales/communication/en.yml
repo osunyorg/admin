@@ -218,6 +218,7 @@ en:
               iframe_title:
                 label: Iframe title (mandatory for accessibility)
                 placeholder: Enter the title
+              warning: Beware, the code below is used as is, without any security filtering. Be extremely careful and never integrate possibly unreliable code.
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:

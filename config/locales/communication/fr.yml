@@ -218,6 +218,7 @@ fr:
               iframe_title:
                 label: Titre de l'iframe (nécessaire pour l'accessibilité)
                 placeholder: Entrer le titre
+              warning: Attention, le code ci-dessous est intégré tel quel, sans filtrage de sécurité. N'intégrez jamais de code externe dont la fiabilité n'est pas certaine.
           files:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
