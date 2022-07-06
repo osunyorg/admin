@@ -39,6 +39,7 @@ en:
       communication/block:
         name: Name
         template: Kind of block
+        published: Published?
       communication/extranet:
         about: About
         about_: Independent extranet
@@ -67,7 +68,7 @@ en:
       communication/website/category:
         children: Children categories
         description: Meta Description
-        text: Text
+        text: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name

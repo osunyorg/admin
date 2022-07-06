@@ -15,6 +15,7 @@ namespace :communication do
         get :children
         get :static
         get :preview
+        post :duplicate
       end
     end
     resources :categories, controller: 'websites/categories' do
@@ -54,6 +55,9 @@ namespace :communication do
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
       post :reorder
+    end
+    member do
+      post :duplicate
     end
   end
   resources :extranets, controller: 'extranets'

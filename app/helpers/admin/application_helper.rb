@@ -45,6 +45,14 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
+  def duplicate_link(object)
+    link_to t('admin.duplicate'),
+            [:duplicate, :admin, object], 
+            method: :post,
+            data: { confirm: t('please_confirm') },
+            class: button_classes('btn-light')
+  end
+
   def button_classes(additional = '', **options)
     classes = "btn btn-primary btn-xs #{additional}"
     classes += ' disabled' if options[:disabled]

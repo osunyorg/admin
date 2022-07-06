@@ -1,6 +1,6 @@
 <% if about.blocks.any? %>
 blocks:
-<% about.blocks.ordered.each do |block|
+<% about.blocks.published.ordered.each do |block|
   @block = block
   @university = about.university
   %>

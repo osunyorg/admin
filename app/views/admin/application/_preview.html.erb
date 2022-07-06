@@ -5,11 +5,11 @@
         <h5 class="modal-title h4"><%= t 'preview.title' %></h5>
         <div class="btn-group m-auto" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary preview__button" data-mode="mobile">
-            <i class="fas fa-mobile"></i>
+            <i class="fas fa-mobile-alt"></i>
             <%= t 'preview.mobile' %>
           </button>
           <button type="button" class="btn btn-light preview__button" data-mode="tablet">
-            <i class="fas fa-tablet"></i>
+            <i class="fas fa-tablet-alt"></i>
             <%= t 'preview.tablet' %>
           </button>
           <button type="button" class="btn btn-light preview__button" data-mode="desktop">
@@ -19,7 +19,7 @@
         </div>
         <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body p-2">
+      <div class="modal-body">
         <iframe src="<%= request.path %>/preview" loading="lazy"></iframe>
       </div>
     </div>
