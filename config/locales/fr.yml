@@ -132,6 +132,9 @@ fr:
         text_html: "Votre code d'authentification pour %{university} est :<br><br><b>%{code}</b><br><br>Il expirera dans 5 minutes."
     omniauth_callbacks:
       failure: "Échec de l'authentification."
+    passwords:
+      new: 
+        send_me_reset_password_instructions: Réinitialiser mon mot de passe
     sessions:
       signed_in: ''
     shared:
