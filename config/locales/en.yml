@@ -5,6 +5,9 @@ en:
       zero: Congratulations, no accessibility problem detected!
       one: '1 error'
       other: '%{count} errors'
+    status:
+      true: Accessible
+      false: Not accessible
     warnings:
       one: '1 insight'
       other: '%{count} insights'
@@ -30,7 +33,6 @@ en:
           transcription_missing:
             title: No transcription
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
-
   activerecord:
     attributes:
       import:
@@ -182,7 +184,7 @@ en:
     privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Hello %{name}!"
   home: Home
-  import:
+  imports:
     error_msg: "Line %{line}: %{error}"
     errors: Errors
     hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8.<br>Fields marked with an asterisk are mandatory."
@@ -255,6 +257,7 @@ en:
       test_chars: "%{min_length} characters min."
   show: Show
   slug_error: can only contain downcase letters, numbers, and dashes.
+  sms_code: "%{code} is your authentication code on %{university} (valid #{duration})"
   static: Static file
   terms_of_service: Terms of service
   terms_of_service_url: https://osuny.org/conditions-d-utilisation
