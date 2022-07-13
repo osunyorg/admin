@@ -89,6 +89,7 @@ en:
   admin:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
+    duplicate: Duplicate
     infos: Informations
     inheritance:
       sentence_without_link: Value inherited
@@ -100,6 +101,7 @@ en:
     password_hint: Leave blank if you do not wish to change the password.
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
+    successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."

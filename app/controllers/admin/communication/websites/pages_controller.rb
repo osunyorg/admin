@@ -71,6 +71,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     end
   end
 
+  def duplicate
+    redirect_to [:admin, @page.duplicate],
+                notice: t('admin.successfully_duplicated_html', model: @page.to_s)
+  end
+
   def destroy
     if @page.is_special_page?
       redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.delete_special_page_notice'))

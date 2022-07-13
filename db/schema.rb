@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_01_064111) do
+ActiveRecord::Schema.define(version: 2022_07_04_164321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2022_07_01_064111) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
+    t.boolean "published", default: true
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
@@ -507,23 +508,6 @@ ActiveRecord::Schema.define(version: 2022_07_01_064111) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "external_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "zipcode"
-    t.string "city"
-    t.string "country"
-    t.string "website"
-    t.string "phone"
-    t.string "mail"
-    t.boolean "active"
-    t.string "sirene"
-    t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number_of_lines"
     t.jsonb "processing_errors"
@@ -718,8 +702,8 @@ ActiveRecord::Schema.define(version: 2022_07_01_064111) do
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
     t.text "description_short"
-    t.string "name"
     t.boolean "is_author"
+    t.string "name"
     t.integer "gender"
     t.date "birthdate"
     t.string "phone_professional"

@@ -39,6 +39,7 @@ fr:
       communication/block:
         title: Titre
         template: Type de bloc
+        published: Publié ?
       communication/extranet:
         about: Sujet de l'extranet
         about_: Extranet indépendant
@@ -67,7 +68,7 @@ fr:
       communication/website/category:
         children: Catégories enfants
         description: Meta Description
-        text: Texte
+        text: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
@@ -217,6 +218,7 @@ fr:
               iframe_title:
                 label: Titre de l'iframe (nécessaire pour l'accessibilité)
                 placeholder: Entrer le titre
+              warning: Attention, le code ci-dessous est intégré tel quel, sans filtrage de sécurité. N'intégrez jamais de code externe dont la fiabilité n'est pas certaine.
           files:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:

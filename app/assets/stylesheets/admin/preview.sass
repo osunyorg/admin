@@ -1,11 +1,20 @@
 .preview
     .modal-body
-        background: black
-        text-align: center
+        background: #EEEEEE
         overflow: hidden
+        padding: 0
+        text-align: center
+        transition: padding 0.5s ease
         iframe
+            background: white
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1)
             height: 100%
-            transition: width 0.5s ease
+            transition: width 0.5s ease, height 0.5s ease
+    &--mobile, &--tablet
+        .modal-body
+            padding: 2rem
+        iframe
+            border-radius: 10px
     &--mobile
         iframe
             width: 415px
