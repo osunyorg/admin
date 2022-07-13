@@ -128,11 +128,11 @@ fr:
     mailer:
       two_factor_authentication_code:
         subject: "Code d'authentification à deux facteurs"
-        text_html: "Votre code d'authentification pour %{university} est :<br><br><b>%{code}</b><br><br>Il expirera dans 5 minutes."
+        text_html: "Votre code d'authentification pour %{university} est :<br><br><b>%{code}</b><br><br>Il expirera dans %{duration}."
     omniauth_callbacks:
       failure: "Échec de l'authentification."
     passwords:
-      new: 
+      new:
         send_me_reset_password_instructions: Réinitialiser mon mot de passe
     sessions:
       signed_in: ''
