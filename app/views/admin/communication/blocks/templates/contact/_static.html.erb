@@ -1,5 +1,9 @@
 <%= block_component_static :name %>
-<%= block_component_static :address %>
+      address:
+<%= block_component_static :street, depth: 4 %>
+<%= block_component_static :locality, depth: 4 %>
+<%= block_component_static :postal_code, depth: 4 %>
+<%= block_component_static :country, depth: 4 %>
 <%= block_component_static :phone_numbers %>
 <%= block_component_static :emails %>
       timetable:

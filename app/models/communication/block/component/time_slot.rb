@@ -2,8 +2,8 @@ class Communication::Block::Component::TimeSlot < Communication::Block::Componen
 
   def default_data
     {
-      'from' => '0',
-      'to' => '0'
+      'from' => nil,
+      'to' => nil
     }
   end
 

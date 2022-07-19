@@ -8,8 +8,21 @@
         label: "Nom (personne, établissement...)",
         placeholder: t('admin.communication.blocks.components.text.placeholder') %>
 
-    <%= block_component_edit :address,
-        label: "Adresse",
+    <h4 class="h5">Adresse postale</h4>
+    <%= block_component_edit :street,
+        label: "Numéro et rue",
+        placeholder: t('admin.communication.blocks.components.text.placeholder') %>
+
+    <%= block_component_edit :locality,
+        label: "Ville",
+        placeholder: t('admin.communication.blocks.components.text.placeholder') %>
+
+    <%= block_component_edit :postal_code,
+        label: "Code postal",
+        placeholder: t('admin.communication.blocks.components.text.placeholder') %>
+
+    <%= block_component_edit :country,
+        label: "Pays",
         placeholder: t('admin.communication.blocks.components.text.placeholder') %>
 
   </div>
