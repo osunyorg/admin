@@ -1,8 +1,11 @@
-<% @block.template.elements.each do |element| %>
-  <p class="lead mb-0">
-    <b>
-      <%= block_component_preview :title, template: element %>
-    </b>
-  </p>
-  <%= block_component_preview :description, template: element %>
-<% end %>
+<div class="definitions">
+  <% @block.template.elements.each do |element| %>
+    <details itemscope itemtype="https://schema.org/DefinedTerm">
+      <summary itemprop="name">
+      <b>
+        <%= block_component_preview :title, template: element %>
+      </b></summary>
+      <p itemprop="description"><%= block_component_preview :description, template: element %></p>
+    </details>
+  <% end %>
+</div>
