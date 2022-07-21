@@ -1,8 +1,10 @@
-<%= block_component_preview :image %>
-<div class="small">
-  <p class="mb-0">
-    <%= block_component_preview :alt %>
-  </p>
-  <%= block_component_preview :credit %>
-</div>
-<%= block_component_preview :text %>
+<figure>
+  <a class="glightbox" data-glightbox="type: image;" href='{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}'>
+    <%= block_component_preview :image %>
+  </a>
+  <figcaption>
+      <p><%= block_component_preview :alt %></p>
+      <p><%= block_component_preview :text %></p>
+      <p><small><%= block_component_preview :credit %></small></p>
+  </figcaption>
+</figure>

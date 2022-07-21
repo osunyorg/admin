@@ -1,12 +1,15 @@
-<%= block_component_preview :description %>
-<% @block.template.elements.each do |element| %>
-  <p class="lead mb-0">
-    <b>
-      <%= block_component_preview :number, template: element %>
-    </b>
-    <span class="small">
-      <%= block_component_preview :unit, template: element %>
-    </span>
-  </p>
-  <%= block_component_preview :description, template: element %>
-<% end %>
+<div class="top">
+  <div class="description">
+    <%= block_component_preview :description %>
+  </div>
+</div>
+<ul>
+  <% @block.template.elements.each do |element| %>
+    <li>
+        <dl>
+            <dt><strong><%= block_component_preview :number, template: element %></strong><%= block_component_preview :unit, template: element %></dt>
+            <dd><%= block_component_preview :description, template: element %></dd>
+        </dl>
+    </li>
+  <% end %>
+</ul>

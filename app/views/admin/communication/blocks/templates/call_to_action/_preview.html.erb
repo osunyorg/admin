@@ -1,23 +1,22 @@
-<div class="card">
-  <div class="card-body">
-    <div style= "max-width: 200px;" class="me-3">
-      <%= block_component_preview :image,
-          label: t('admin.communication.blocks.components.image.input.label'),
-          remove: t('admin.communication.blocks.components.image.input.remove') %><br>
-      <%= block_component_preview :alt,
-          label: t('admin.communication.blocks.components.image.alt.label'),
-          placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-    </div>
-    <hr>
 
-    <% @block.template.elements.each do |element| %>
-      <a  href="<%= block_component_preview :url, template: element %>" class="btn btn-primary"
-        <% if element.target_blank === true %>
-          target="_blank"
+<%= block_component_preview :image %><br>
+<%= block_component_preview :alt %>
+
+<div>
+  <% if @block.template.elements%>
+    <div {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+      <% @block.template.elements.each do |element| %>
+        <% if element.title %>
+          <a href="<%= block_component_preview :url, template: element %>"
+            <% if element.target_blank %>
+              title="{{ i18n 'commons.link.blank_aria' (dict 'Title' $title) }}"
+              target="_blank"
+            <% else %>
+              title="<%= block_component_preview :title, template: element %>"
+            <% end %>
+            ><%= block_component_preview :title, template: element %></a>
         <% end %>
-        rel="noopener">
-        <%= block_component_preview :title, template: element %>
-      </a>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
