@@ -20,7 +20,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_31f1a0a2c9  (criterion_id => administration_qualiopi_criterions.id)
+#  fk_rails_eed87f7acf  (criterion_id => administration_qualiopi_criterions.id)
 #
 class Administration::Qualiopi::Indicator < ApplicationRecord
   include Sanitizable
