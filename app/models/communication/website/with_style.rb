@@ -2,9 +2,13 @@ module Communication::Website::WithStyle
     extend ActiveSupport::Concern
 
   def preview_style
-    return '' if url.blank?
+    return '' unless has_style?
     load_style if style_outdated? 
     style
+  end
+
+  def has_style?
+    !url.blank?
   end
 
   protected
