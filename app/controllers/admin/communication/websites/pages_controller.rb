@@ -98,7 +98,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     params.require(:communication_website_page)
           .permit(
             :communication_website_id, :title, :breadcrumb_title, :bodyclass,
-            :description, :description_short, :header_text, :text, :slug, :published,
+            :description, :description_short, :header_text, :text, :slug, :published, :full_width,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             :parent_id, :language_id
           )

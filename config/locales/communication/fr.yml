@@ -97,6 +97,7 @@ fr:
         description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
+        full_width: Pleine largeur
         header_text: Titre affiché dans le header
         parent: Page parente
         published: Publié ?
@@ -596,5 +597,6 @@ fr:
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
+        full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
       communication_website_post:
         description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.

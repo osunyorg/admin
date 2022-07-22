@@ -9,6 +9,7 @@
 #  description_short        :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
+#  full_width               :boolean          default(FALSE)
 #  github_path              :text
 #  header_text              :text
 #  kind                     :integer
@@ -155,6 +156,11 @@ class Communication::Website::Page < ApplicationRecord
       b.save
     end
     page
+  end
+
+  def full_width
+    kind_home?  ? true 
+                : attributes['full_width']
   end
 
   def to_s
