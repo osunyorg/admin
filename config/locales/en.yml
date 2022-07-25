@@ -236,6 +236,9 @@ en:
     desktop: Desktop
   privacy_policy: Privacy policy
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  properties:
+    text:
+      missing: Missing text
   quit: Quit
   remove: Remove
   reset: Reset

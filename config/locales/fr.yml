@@ -239,6 +239,9 @@ fr:
     desktop: Ordinateur de bureau
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  properties:
+    text:
+      missing: Texte manquant
   quit: Quitter
   remove: Retirer
   reset: Réinitialiser
