@@ -262,7 +262,7 @@ en:
       test_chars: "%{min_length} characters min."
   show: Show
   slug_error: can only contain downcase letters, numbers, and dashes.
-  sms_code: "%{code} is your authentication code on %{university} (valid #{duration})"
+  sms_code: "%{code} is your authentication code on %{university} (valid %{duration})"
   static: Static file
   terms_of_service: Terms of service
   terms_of_service_url: https://osuny.org/conditions-d-utilisation
