@@ -160,6 +160,9 @@ fr:
               placeholder: Entrer le crédit
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
+          time_slot:
+            from: De
+            to: à
         templates:
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
@@ -193,6 +196,40 @@ fr:
                 placeholder: Entrer le texte
           contact:
             description: Des coordonnées et des horaires d'ouverture, tout ce qu'il faut pour être contacté.
+            edit:
+              add: Ajouter
+              add_slot: Ajouter un créneau horaire
+              address:
+                label: Adresse
+                placeholder: Numéro et voie
+              city:
+                label: Ville
+                placeholder: Entrer le nom de la ville
+              contacts: Contacts
+              country:
+                label: Pays
+                placeholder: Entrer le nom du pays
+              element:
+                title: 
+                  label: Jour
+                  placeholder: Entrer le jour ou la période
+                time_slot_morning:
+                  label: Matin (si nécessaire)
+                time_slot_afternoon:
+                  label: Après-midi (ou jour complet)
+              name: 
+                label: Nom (personne, établissement...)
+                placeholder: Entrer le texte
+              zipcode:
+                label: Code postal
+                placeholder: Entrer le code postal
+              mails: 
+                label: Mails
+                placeholder: Entrer le mail
+              phones: 
+                label: Téléphones
+                placeholder: Entrer le numéro
+              slots: Horaires  
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:

@@ -160,6 +160,9 @@ en:
               placeholder: Enter credit
           link:
               target_blank: Open in new window
+          time_slot:
+            from: From
+            to: to
         templates:
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
@@ -193,6 +196,40 @@ en:
                 placeholder: Enter text
           contact:
             description: Contact information and opening time, so anyone can get in touch.
+            edit:
+              add: Add
+              add_slot: Add a time slot
+              address:
+                label: Address
+                placeholder: Street and number
+              city:
+                label: City
+                placeholder: Enter the city
+              contacts: Contacts
+              country:
+                label: Country
+                placeholder: Enter the country
+              element:
+                title: 
+                  label: Day
+                  placeholder: Enter the day or period
+                time_slot_morning:
+                  label: Morning (if necessary)
+                time_slot_afternoon:
+                  label: Afternoon (or full day)
+              name: 
+                label: Name (person, organization...)
+                placeholder: Enter the text
+              zipcode:
+                label: Zipcode
+                placeholder: Enter the zipcode
+              mails: 
+                label: Mails
+                placeholder: Enter the mail
+              phones: 
+                label: Telephone numbers
+                placeholder: Enter the number
+              slots: Opening times
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:
