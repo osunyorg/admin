@@ -6,10 +6,6 @@ module Communication::Website::WithStyle
     style
   end
 
-  def has_style?
-    !url.blank?
-  end
-
   protected
 
   def load_style
