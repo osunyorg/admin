@@ -5,6 +5,6 @@ class Communication::Block::Component::Program < Communication::Block::Component
   end
 
   def git_dependencies
-    [program, program&.picture&.blob]
+    [program, program&.best_featured_image&.blob]
   end
 end

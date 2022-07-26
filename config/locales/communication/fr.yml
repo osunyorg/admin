@@ -191,6 +191,8 @@ fr:
               text:
                 label: Texte
                 placeholder: Entrer le texte
+          contact:
+            description: Des coordonnées et des horaires d'ouverture, tout ce qu'il faut pour être contacté.
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:
@@ -198,7 +200,7 @@ fr:
                 label: Transcription textuelle
                 placeholder: Entrer ici la transcription textuelle du tableau
           definitions:
-            description: Une liste de termes et leur définition. Un genre de dictionnaires, finalement.
+            description: Une liste de termes et leur définition. Un genre de dictionnaire, finalement.
             edit:
               add_definition: Ajouter une définition
               remove_definition: Supprimer la définition
@@ -373,6 +375,10 @@ fr:
                 id:
                   label: ''
                   placeholder: Choisir l'article
+          programs:
+            description: Une sélection de formations.
+            edit:
+              add: Ajouter une formation
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:
@@ -548,6 +554,7 @@ fr:
         template_kind:
           call_to_action: Appel à actions
           chapter: Chapitre
+          contact: Contact
           datatable: Tableau
           definitions: Définitions
           embed: Intégration HTML
@@ -559,6 +566,7 @@ fr:
           pages: Pages
           partners: Partenaires
           posts: Actualités
+          programs: Formations
           testimonials: Témoignages
           timeline: Frise chronologique
           video: Vidéo

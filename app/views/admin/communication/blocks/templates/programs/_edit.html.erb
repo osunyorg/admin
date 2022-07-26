@@ -3,7 +3,7 @@
 <div class="row mb-4">
   <div class="col-lg-6">
     <div class="mb-4">
-      <%= block_component_add_element t('.selection.add') %>
+      <%= block_component_add_element t('.add') %>
       <draggable :list="data.elements" handle=".dragHandle" class="list-group">
         <div v-for="(element, index) in data.elements" class="list-group-item">
           <div class="d-flex mb-n3">
@@ -13,7 +13,7 @@
               </a>
             </div>
             <div class="flex-fill">
-              <%= block_component_edit :id, template: @element %>
+              <%= block_component_edit :id, template: @element, label: false %>
             </div>
             <div>
               <a  class="btn btn-sm btn-danger ms-3"
