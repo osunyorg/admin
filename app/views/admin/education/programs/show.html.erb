@@ -57,9 +57,7 @@
         </div>
       </div>
     <% end %>
-    <%= render 'admin/education/programs/forms/part',
-                part: :presentation,
-                collapsed: true do %>
+    <%= render 'admin/education/programs/forms/part', part: :presentation, collapsed: true do %>
       <div class="row">
         <div class="col-xxl-6">
           <h3 class="h5">
@@ -68,75 +66,44 @@
           <p><%= @program.presentation %></p>
         </div>
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :objectives %>
+          <%= render 'admin/application/property/text', object: @program, property: :objectives %>
         </div>
       </div>
     <% end %>
     <%= render 'admin/communication/blocks/list', about: @program %>
-    <%= render 'admin/education/programs/forms/part',
-                part: :pedagogy,
-                collapsed: true do %>
+    <%= render 'admin/education/programs/forms/part', part: :pedagogy, collapsed: true do %>
       <div class="row">
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :content %>
+          <%= render 'admin/application/property/text', object: @program, property: :content %>
         </div>
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :pedagogy %>
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :evaluation %>
+          <%= render 'admin/application/property/text', object: @program, property: :pedagogy %>
+          <%= render 'admin/application/property/text', object: @program, property: :evaluation %>
         </div>
       </div>
-      <%= render 'admin/education/programs/show/teachers',
-                  involvements: @teacher_involvements %>
+      <%= render 'admin/education/programs/show/teachers', involvements: @teacher_involvements %>
     <% end %>
-    <%= render 'admin/education/programs/forms/part',
-                part: :results,
-                collapsed: true do %>
+    <%= render 'admin/education/programs/forms/part', part: :results, collapsed: true do %>
       <div class="row">
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :opportunities %>
+          <%= render 'admin/application/property/text', object: @program, property: :opportunities %>
         </div>
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :results %>
+          <%= render 'admin/application/property/text', object: @program, property: :results %>
         </div>
       </div>
     <% end %>
-    <%= render 'admin/education/programs/forms/part',
-                part: :admission,
-                collapsed: true do %>
+    <%= render 'admin/education/programs/forms/part', part: :admission, collapsed: true do %>
       <div class="row">
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :prerequisites %>
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :accessibility %>
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :other %>
+          <%= render 'admin/application/property/text', object: @program, property: :prerequisites %>
+          <%= render 'admin/application/property/text', object: @program, property: :registration %>
+          <%= render 'admin/application/property/text', object: @program, property: :other %>
         </div>
         <div class="col-xxl-6">
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :pricing %>
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :registration %>
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :contacts %>
+          <%= render 'admin/application/property/text', object: @program, property: :pricing %>
+          <%= render 'admin/application/property/text', object: @program, property: :accessibility %>
+          <%= render 'admin/application/property/text', object: @program, property: :contacts %>
         </div>
       </div>
       <%= render 'admin/education/programs/show/roles', roles: @roles %>

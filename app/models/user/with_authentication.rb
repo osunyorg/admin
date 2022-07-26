@@ -6,7 +6,6 @@ module User::WithAuthentication
             :timeoutable, :confirmable, :trackable, :lockable, :two_factor_authenticatable, :omniauthable, omniauth_providers: [:saml]
             # note : i do not use :validatable because of the non-uniqueness of the email. :validatable is replaced by the validation sequences below
 
-
     has_one_time_password(encrypted: true)
 
     validates :role, presence: true

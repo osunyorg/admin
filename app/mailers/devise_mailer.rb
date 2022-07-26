@@ -41,6 +41,7 @@ class DeviseMailer < Devise::Mailer
   def two_factor_authentication_code(record, code, opts = {})
     opts = merge_with_university_infos(record.university, opts)
     @code = code
+    @duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
     I18n.with_locale(record.language.iso_code.to_sym) do
       devise_mail(record, :two_factor_authentication_code, opts)
     end

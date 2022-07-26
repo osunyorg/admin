@@ -17,6 +17,7 @@ end
 <p>
   <% if value.blank? %>
     <i class="fa fa-exclamation-circle text-danger"></i>
+    <%= t 'properties.text.missing' %>
   <% else %>
     <%= strip_tags(value).truncate(200).html_safe %>
   <% end %>

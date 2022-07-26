@@ -33,7 +33,6 @@ fr:
           transcription_missing:
             title: Pas de transcription
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
-
   activerecord:
     attributes:
       import:
@@ -129,11 +128,11 @@ fr:
     mailer:
       two_factor_authentication_code:
         subject: "Code d'authentification à deux facteurs"
-        text_html: "Votre code d'authentification pour %{university} est :<br><br><b>%{code}</b><br><br>Il expirera dans 5 minutes."
+        text_html: "Votre code d'authentification pour %{university} est :<br><br><b>%{code}</b><br><br>Il expirera dans %{duration}."
     omniauth_callbacks:
       failure: "Échec de l'authentification."
     passwords:
-      new: 
+      new:
         send_me_reset_password_instructions: Réinitialiser mon mot de passe
     sessions:
       signed_in: ''
@@ -240,6 +239,9 @@ fr:
     desktop: Ordinateur de bureau
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  properties:
+    text:
+      missing: Texte manquant
   quit: Quitter
   remove: Retirer
   reset: Réinitialiser
@@ -263,6 +265,7 @@ fr:
       test_chars: "%{min_length} caractères min."
   show: Voir
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
+  sms_code: "%{code} est votre code d'authentification sur %{university} (valide %{duration})"
   static: Fichier statique
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://osuny.org/conditions-d-utilisation

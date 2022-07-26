@@ -10,36 +10,44 @@
     </h2>
   </div>
   <% if about.blocks.any? %>
-    <table class="<%= table_classes %>">
-      <thead>
-        <tr>
-          <% if can? :reorder, Communication::Block %>
-            <th width="20" class="ps-0">&nbsp;</th>
-          <% end %>
-          <th><%= Communication::Block.human_attribute_name('title') %></th>
-          <th><%= Communication::Block.human_attribute_name('template') %></th>
-          <th><%= t 'accessibility.label' %></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody data-sortable data-sort-url="<%= reorder_admin_communication_blocks_path %>">
-        <% about.blocks.ordered.each do |block| %>
-          <tr data-id="<%= block.id %>" class="<%= 'draft' unless block.published? %>">
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <thead>
+          <tr>
             <% if can? :reorder, Communication::Block %>
-              <td><i class="fa fa-bars handle"></i></td>
+              <th width="20" class="ps-0">&nbsp;</th>
             <% end %>
-            <td><%= block.to_s.truncate(50) %></td>
-            <td><%= block.template_kind_i18n  %></td>
-            <td><%= render 'admin/application/a11y/status', about: block %></td>
-            <td class="text-end">
-              <div class="btn-group">
-                <%= duplicate_link block %>
-                <%= edit_link block %>
-              </div>
-            </td>
+            <th><%= Communication::Block.model_name.human %></th>
+            <th></th>
+            <th><%= t 'accessibility.label' %></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody data-sortable data-sort-url="<%= reorder_admin_communication_blocks_path %>">
+          <% about.blocks.ordered.each do |block| %>
+            <tr data-id="<%= block.id %>" class="<%= 'draft' unless block.published? %>">
+              <% if can? :reorder, Communication::Block %>
+                <td><i class="fa fa-bars handle"></i></td>
+              <% end %>
+              <td>
+                <%= block.to_s.truncate(50) %><br>
+                <span class="small"><%= block.template_kind_i18n  %></span>
+              </td>
+              <td class="p-0">
+                <%= image_tag "communication/blocks/templates/#{block.template_kind}.jpg",
+                              height: "100px", alt: '', style:"max-height: 50px" %>
+              </td>
+              <td><%= render 'admin/application/a11y/status', about: block %></td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <%= duplicate_link block %>
+                  <%= edit_link block %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <% end %>
 </div>
