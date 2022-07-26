@@ -1,1 +1,3 @@
-<%= simple_format value %>
+<% if component.present? %>
+  <%= component.from %> → <%= component.to %>
+<% end %>

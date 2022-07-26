@@ -1,0 +1,16 @@
+<p><%= block_component_preview :name %></p>
+<div>
+    <%= block_component_preview :address %>
+    <%= block_component_preview :zipcode %>
+    <%= block_component_preview :city %>
+    <%= block_component_preview :country %>
+</div>
+<table class="table">
+<% @block.template.elements.each do |element| %>
+    <tr>
+        <td><%= block_component_preview :title, template: element %></td>
+        <td><%= block_component_preview :time_slot_morning, template: element %></td>
+        <td><%= block_component_preview :time_slot_afternoon, template: element %></td>
+    </tr>
+<% end %>
+</table>

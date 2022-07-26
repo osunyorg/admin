@@ -2,7 +2,6 @@ module Communication::Website::WithStyle
     extend ActiveSupport::Concern
 
   def preview_style
-    return '' if url.blank?
     load_style if style_outdated? 
     style
   end
@@ -14,6 +13,7 @@ module Communication::Website::WithStyle
     load_style_from url 
     load_style_from "#{url}/fr" if @style.blank?
     load_style_from "#{url}/en" if @style.blank?
+    load_style_from "https://example.osuny.org" if @style.blank?
     substitute_fonts_urls_in_style!
     self.update_columns style: @style, 
                         style_updated_at: Date.today
@@ -26,6 +26,7 @@ module Communication::Website::WithStyle
     css_files.each do |css_url|
       add_css_url_to_style css_url.to_s
     end
+  rescue
   end
 
   def add_css_url_to_style(css_url)
