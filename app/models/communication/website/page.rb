@@ -150,7 +150,7 @@ class Communication::Website::Page < ApplicationRecord
     page = self.dup
     page.published = false
     page.save
-    blocks.each do |block|
+    blocks.ordered.each do |block|
       b = block.duplicate
       b.about = page
       b.save
