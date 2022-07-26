@@ -205,7 +205,7 @@ fr:
               city:
                 label: Ville
                 placeholder: Entrer le nom de la ville
-              contacts: Contacts
+              contacts: Adresse postale
               country:
                 label: Pays
                 placeholder: Entrer le nom du pays

@@ -205,7 +205,7 @@ en:
               city:
                 label: City
                 placeholder: Enter the city
-              contacts: Contacts
+              contacts: Mailing address
               country:
                 label: Country
                 placeholder: Enter the country
