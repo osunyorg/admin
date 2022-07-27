@@ -72,6 +72,7 @@ class Ability
     managed_websites_ids = @user.websites_to_manage.pluck(:communication_website_id)
     managed_pages_ids = Communication::Website::Page.where(communication_website_id: managed_websites_ids).pluck(:id)
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
+    can :analytics, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Page, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
@@ -90,6 +91,7 @@ class Ability
     can :manage, Communication::Block, university_id: @user.university_id
     can :create, Communication::Block
     can :read, Communication::Website, university_id: @user.university_id
+    can :analytics, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Website::Category, university_id: @user.university_id
