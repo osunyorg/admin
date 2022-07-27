@@ -1,7 +1,10 @@
 <div id="preview" class="preview modal fade preview--mobile">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-body">
+        <iframe src="<%= request.path %>/preview" loading="lazy"></iframe>
+      </div>
+      <div class="modal-footer">
         <h5 class="modal-title h4"><%= t 'preview.title' %></h5>
         <div class="btn-group m-auto" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary preview__button" data-mode="mobile">
@@ -18,9 +21,6 @@
           </button>
         </div>
         <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <iframe src="<%= request.path %>/preview" loading="lazy"></iframe>
       </div>
     </div>
   </div>
