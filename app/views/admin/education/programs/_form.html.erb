@@ -101,14 +101,22 @@
         <div class="row">
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
             <%= f.input :registration_url %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
           </div>
         </div>
       <% end %>
