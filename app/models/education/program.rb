@@ -143,6 +143,10 @@ class Education::Program < ApplicationRecord
     "content/programs/#{path}/_index.html"
   end
 
+  def path_in_website(website)
+    "#{website.special_page(:education_programs).path}#{path}".gsub('//', '/')
+  end
+
   def git_dependencies(website)
     [self] +
     active_storage_blobs +
