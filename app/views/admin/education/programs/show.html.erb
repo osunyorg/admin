@@ -15,13 +15,16 @@
             <%= Education::Program.human_attribute_name('diploma') %>
           </h3>
           <p><%= link_to @program.diploma, [:admin, @program.diploma] if @program.diploma %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('level') %>
-          </h3>
-          <p><%= @program.level_i18n %></p>
-          <%= render 'admin/application/property/text',
-                      object: @program,
-                      property: :duration %>
+          <% if @program.schools.any? %>
+            <h3 class="h5 mt-4">
+              <%= Education::Program.human_attribute_name('schools') %>
+            </h3>
+            <ul class="list-unstyled">
+              <% @program.schools.ordered.each do |school| %>
+                <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
+              <% end %>
+            </ul>
+          <% end %>
         </div>
         <div class="col-lg-6">
           <h3 class="h5">
@@ -44,15 +47,13 @@
             <%= Education::Program.human_attribute_name('apprenticeship') %>
           </h3>
           <p><%= t @program.apprenticeship %></p>
-          <% if @program.schools.any? %>
+          <% if @program.downloadable_summary.attached? %>
             <h3 class="h5 mt-4">
-              <%= Education::Program.human_attribute_name('schools') %>
+              <%= Education::Program.human_attribute_name('downloadable_summary') %>
             </h3>
-            <ul class="list-unstyled">
-              <% @program.schools.ordered.each do |school| %>
-                <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
-              <% end %>
-            </ul>
+            <p><%= link_to "#{@program.downloadable_summary.filename} (#{ number_to_human_size @program.downloadable_summary.blob.byte_size })",
+                            url_for(@program.downloadable_summary), 
+                            target: :_blank %></p>
           <% end %>
         </div>
       </div>

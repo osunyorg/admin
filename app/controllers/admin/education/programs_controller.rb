@@ -115,6 +115,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
       :evaluation, :accessibility, :pricing, :contacts, :opportunities, :results, :other,  :main_information,
+      :downloadable_summary, :downloadable_summary_delete,
       :parent_id, :diploma_id, school_ids: [],
       university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
     )

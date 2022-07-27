@@ -10,6 +10,9 @@ administrator_involvements = @about.involvements_through_roles
 title: >
   <%= @about.name %>
 url: <%= @about.path_in_website(@website) %>
+<% if @about.downloadable_summary.attached? %>
+downloadable_summary: <%= @about.downloadable_summary.blob_id %>
+<% end %>
 registration_url: >
   <%= @about.registration_url %>
 description: >
