@@ -1,10 +1,12 @@
 <div class="testimonials">
-  <div class="splide" data-splide='{"arrows":false,"autoplay":true,"pauseOnHover":false,"pauseOnFocus":false,"type":"loop","autoHeight":true}'>
-    <div class="splide__slider">
-      <div class="splide__track">
-        <div class="splide__list">
+  <% if !@block.template.elements.one? %>
+    <div class="splide" data-splide='{"arrows":false,"autoplay":true,"pauseOnHover":false,"pauseOnFocus":false,"type":"loop","autoHeight":true}'>
+      <div class="splide__slider">
+        <div class="splide__track">
+          <div class="splide__list">
+          <% end %>
           <% @block.template.elements.each do |element| %>
-            <figure {{ if $is_carousel }}class="splide__slide"{{ end }}>
+            <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
               <blockquote {{- if $is_long }} class="is-long" {{- end }}>
                 <p><%= block_component_preview :text, template: element %></p>
               </blockquote>
@@ -23,6 +25,7 @@
               </figcaption>
             </figure>
           <% end %>
+        <% if !@block.template.elements.one? %>
         </div>
       </div>
     </div>
@@ -32,4 +35,5 @@
       <button class="splide__pause"></button>
     </div>
   </div>
+  <% end %>
 </div>
