@@ -2,11 +2,16 @@
 title: >
   <%= @about.to_s %>
 slug: "<%= @about.slug %>"
-first_name: "<%= @about.first_name %>"
-last_name: "<%= @about.last_name %>"
-phone: "<%= @about.phone_mobile %>"
-email: "<%= @about.email %>"
-twitter: "<%= @about.twitter %>"
+first_name: >
+  <%= @about.first_name %>
+last_name: >
+  <%= @about.last_name %>
+phone: >
+  <%= @about.phone_mobile %>
+email: >
+  <%= @about.email %>
+twitter: >
+  <%= @about.twitter %>
 linkedin: >-
   <%= @about.linkedin %>
 website: >-
@@ -30,6 +35,19 @@ roles:
 <% end %>
 <% if @about.administrator.for_website?(@website) %>
   - administrator
+<% end %>
+<% if @about.roles_as_administrator.any? %>
+involvements_as_administrator:
+<% @about.roles_as_administrator.each do |role| 
+    target = role.target %>
+  - title: >
+      <%= role.to_s %>
+    target: 
+      title: >
+        <%= target.to_s %>
+      path: >
+        <%= target.path_in_website(@website) if target.respond_to? :path_in_website %>
+<% end %>
 <% end %>
 ---
 <%= prepare_html_for_static @about.biography, @about.university %>

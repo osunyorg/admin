@@ -19,5 +19,10 @@ namespace :university do
       patch 'experiences' => 'alumni/experiences#update'
     end
   end
-  resources :people, :organizations
+  resources :people do
+    member do
+      get :static
+    end
+  end
+  resources :organizations
 end

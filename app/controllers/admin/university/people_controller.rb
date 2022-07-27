@@ -18,6 +18,12 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     breadcrumb
   end
 
+  def static
+    @about = @person
+    @website = @person.websites&.first
+    render layout: false
+  end
+
   def new
     breadcrumb
   end
