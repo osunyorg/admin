@@ -36,16 +36,30 @@ roles:
 <% if @about.administrator.for_website?(@website) %>
   - administrator
 <% end %>
+<% if @about.involvements_as_teacher.any? %>
+teachings:
+<% @about.involvements_as_teacher.each do |involvement|     
+    target = involvement.target
+    %>
+  - description: >
+      <%= involvement.description %>
+    program: 
+      title: >
+        <%= target.to_s %>
+      url: >
+        <%= target.path_in_website(@website) if target.respond_to? :path_in_website %>
+<% end %>
+<% end %>
 <% if @about.roles_as_administrator.any? %>
-involvements_as_administrator:
+administrative_missions:
 <% @about.roles_as_administrator.each do |role| 
     target = role.target %>
-  - title: >
+  - description: >
       <%= role.to_s %>
     target: 
       title: >
         <%= target.to_s %>
-      path: >
+      url: >
         <%= target.path_in_website(@website) if target.respond_to? :path_in_website %>
 <% end %>
 <% end %>
