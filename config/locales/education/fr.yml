@@ -40,8 +40,9 @@ fr:
         contacts: Contacts
         continuing: Formation continue
         description: Meta Description
-        duration: Durée
         diploma: Diplôme
+        duration: Durée
+        downloadable_summary: Document de synthèse téléchargeable
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
