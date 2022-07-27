@@ -1,4 +1,11 @@
-<%# TODO iframe video %>
-<%= block_component_preview :url %>
-<%= block_component_preview :video_title %>
+<% if @block.template.video_title %>
+  <div class="top">
+    <h2><%= block_component_preview :video_title %></h2>
+  </div>
+<% end %>
+<% if @block.template.url %>
+  <div class="video">
+    <%= block_component_preview :url %>
+  </div>
+<% end %>
 <%= block_component_preview :transcription %>

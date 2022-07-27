@@ -1,9 +1,9 @@
 <%= block_component_preview :layout %>
+<div class="events">
 <% @block.template.elements.each do |element| %>
-  <article class="card">
-    <div class="card-body">
-      <p class="lead"><%= block_component_preview :title, template: element %></p>
-      <p><%= block_component_preview :text, template: element %></p>
-    </div>
-  </article>
+  <div class="event">
+    <%= block_component_preview :title, template: element %>
+    <%= block_component_preview :text, template: element %>
+  </div>
 <% end %>
+</div>
