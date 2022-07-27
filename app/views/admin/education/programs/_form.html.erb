@@ -24,9 +24,9 @@
           <div class="col-lg-6">
             <%= f.input :capacity %>
             <legend class="col-form-label pt-0 mb-1"><%= t('education.program.registration_scheme') %></legend>
-            <%= f.input :initial %>
-            <%= f.input :continuing %>
-            <%= f.input :apprenticeship %>
+            <div class="mb-n3"><%= f.input :initial %></div>
+            <div class="mb-n3"><%= f.input :continuing %></div>
+            <div class="mb-n3"><%= f.input :apprenticeship %></div>
           </div>
         </div>
       <% end %>
@@ -37,8 +37,7 @@
             <%= f.input :presentation %>
           </div>
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :objectives %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
           </div>
         </div>
       <% end %>
@@ -46,14 +45,11 @@
       <%= render 'admin/education/programs/forms/part', part: :pedagogy do %>
         <div class="row">
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :content %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :content %>
           </div>
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :pedagogy %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :evaluation %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
           </div>
         </div>
         <div class="row mb-2">
@@ -84,9 +80,7 @@
           <%= f.simple_fields_for :university_person_involvements,
                                   sorted_involvements,
                                   include_id: false do |involvement_f| %>
-            <%= render 'admin/education/programs/involvement_fields',
-                        f: involvement_f,
-                        include_id: true %>
+            <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
           <% end %>
         </div>
       <% end %>
@@ -94,12 +88,10 @@
       <%= render 'admin/education/programs/forms/part', part: :results do %>
         <div class="row">
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :opportunities %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :opportunities %>
           </div>
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :results %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :results %>
           </div>
         </div>
       <% end %>
@@ -107,20 +99,15 @@
       <%= render 'admin/education/programs/forms/part', part: :admission do %>
         <div class="row">
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :prerequisites %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :registration %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :other %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :other %>
           </div>
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :pricing %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :accessibility %>
-            <%= render 'admin/education/programs/forms/input_with_inheritance',
-                        f: f, property: :contacts %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
+            <%= f.input :registration_url %>
           </div>
         </div>
       <% end %>

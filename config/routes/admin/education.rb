@@ -31,6 +31,7 @@ namespace :education do
     member do
       get :children
       get :preview
+      get :static
     end
   end
   resources :academic_years

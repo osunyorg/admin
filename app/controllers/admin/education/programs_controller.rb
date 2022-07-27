@@ -54,6 +54,12 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     breadcrumb
   end
 
+  def static
+    @about = @program
+    @website = @program.websites&.first
+    render layout: false
+  end
+
   def preview
     @website = @program.websites&.first
     render layout: 'admin/layouts/preview'
@@ -107,7 +113,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     params.require(:education_program).permit(
       :name, :short_name, :slug, :level, :capacity, :continuing, :initial, :apprenticeship, :description, :published,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content,
+      :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
       :evaluation, :accessibility, :pricing, :contacts, :opportunities, :results, :other,  :main_information,
       :parent_id, :diploma_id, school_ids: [],
       university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]

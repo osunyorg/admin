@@ -104,6 +104,10 @@
           <%= render 'admin/application/property/text', object: @program, property: :pricing %>
           <%= render 'admin/application/property/text', object: @program, property: :accessibility %>
           <%= render 'admin/application/property/text', object: @program, property: :contacts %>
+          <% if @program.registration_url.present? %>
+            <h3 class="h5"><%= Education::Program.human_attribute_name(:registration_url) %></h3>
+            <p><%= link_to @program.registration_url, @program.registration_url, target: :_blank %></p>
+          <% end %>
         </div>
       </div>
       <%= render 'admin/education/programs/show/roles', roles: @roles %>
@@ -148,6 +152,9 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @program %>
+  <%= link_to t('static'),
+              static_admin_education_program_path(@program),
+              class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>

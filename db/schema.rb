@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_22_103657) do
+ActiveRecord::Schema.define(version: 2022_07_27_075720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -469,6 +469,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_103657) do
     t.string "short_name"
     t.boolean "initial"
     t.boolean "apprenticeship"
+    t.string "registration_url"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"

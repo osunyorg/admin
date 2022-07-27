@@ -10,6 +10,8 @@ administrator_involvements = @about.involvements_through_roles
 title: >
   <%= @about.name %>
 url: <%= @website.special_page(:education_programs).path %><%= @about.path %>
+registration_url: >
+  <%= @about.registration_url %>
 description: >
   <%= prepare_text_for_static @about.description %>
 presentation: >

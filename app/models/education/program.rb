@@ -28,6 +28,7 @@
 #  pricing               :text
 #  published             :boolean          default(FALSE)
 #  registration          :text
+#  registration_url      :string
 #  results               :text
 #  short_name            :string
 #  slug                  :string
