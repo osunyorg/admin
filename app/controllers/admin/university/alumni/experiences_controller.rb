@@ -30,7 +30,8 @@ class Admin::University::Alumni::ExperiencesController < Admin::University::Appl
 
   def experiences_params
     params.require(:university_person)
-          .permit(experiences_attributes: [:id, :organization_id, :university_id, :from_year, :to_year, :_destroy])
+          .permit(experiences_attributes: [:id, :organization_id, :university_id, :description, :from_year, :to_year, :_destroy])
+          .merge(university_id: current_university.id)
   end
 
 end

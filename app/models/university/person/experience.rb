@@ -26,6 +26,7 @@
 #
 class University::Person::Experience < ApplicationRecord
   include WithUniversity
+
   belongs_to :person
   belongs_to :organization, class_name: "University::Organization"
 
