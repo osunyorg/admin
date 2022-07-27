@@ -9,12 +9,23 @@ administrator_involvements = @about.involvements_through_roles
 %>
 title: >
   <%= @about.name %>
-url: <%= @website.special_page(:education_programs).path %><%= @about.path %>
+url: <%= @about.path_in_website(@website) %>
+<% if @about.downloadable_summary.attached? %>
+downloadable_summary: <%= @about.downloadable_summary.blob_id %>
+<% end %>
+registration_url: >
+  <%= @about.registration_url %>
 description: >
   <%= prepare_text_for_static @about.description %>
 presentation: >
   <%= prepare_text_for_static @about.presentation %>
 position: <%= @about.position %>
+<% if @about.parent %>
+parent:
+  title: >
+    <%= @about.parent.name %>
+  url: <%= @about.parent.path_in_website(@website) %>
+<% end %>
 <%= render 'admin/communication/unsplash/static' %>
 category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>"
 diplomas: "<%= @about.diploma&.slug %>"

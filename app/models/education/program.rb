@@ -28,6 +28,7 @@
 #  pricing               :text
 #  published             :boolean          default(FALSE)
 #  registration          :text
+#  registration_url      :string
 #  results               :text
 #  short_name            :string
 #  slug                  :string
@@ -90,6 +91,8 @@ class Education::Program < ApplicationRecord
              foreign_key: :parent_id,
              dependent: :destroy
 
+  has_one_attached_deletable :downloadable_summary
+
   # Deprecated, now in diploma
   enum level: {
     not_applicable: 0,
@@ -140,6 +143,10 @@ class Education::Program < ApplicationRecord
 
   def git_path(website)
     "content/programs/#{path}/_index.html"
+  end
+
+  def path_in_website(website)
+    "#{website.special_page(:education_programs).path}#{path}".gsub('//', '/')
   end
 
   def git_dependencies(website)
@@ -208,7 +215,7 @@ class Education::Program < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [featured_image&.blob_id, downloadable_summary&.blob_id]
   end
 
   def inherited_blob_ids

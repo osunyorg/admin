@@ -51,7 +51,12 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def git_sha(path)
+    return if path.nil?
+    # Try to find in stored tree to avoid multiple queries
+    return hash_for_paths[path] if hash_for_paths.has_key? path
     begin
+      # The fast way, with no query, does not work.
+      # Let's query the API 
       content = client.content repository, path: path
       sha = content[:sha]
     rescue
@@ -72,6 +77,18 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def branch_sha
     @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
+  end
+
+  def hash_for_paths
+    unless @hash_for_paths
+      @hash_for_paths = {}
+      tree[:tree].each do |hash|
+        path = hash[:path]
+        sha = hash[:sha]
+        @hash_for_paths[path] = sha
+      end
+    end
+    @hash_for_paths
   end
 
   def tree

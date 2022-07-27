@@ -239,6 +239,9 @@ fr:
     desktop: Ordinateur de bureau
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  properties:
+    text:
+      missing: Texte manquant
   quit: Quitter
   remove: Retirer
   reset: Réinitialiser
@@ -262,7 +265,7 @@ fr:
       test_chars: "%{min_length} caractères min."
   show: Voir
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
-  sms_code: "%{code} est votre code d'authentification sur %{university} (valide #{duration})"
+  sms_code: "%{code} est votre code d'authentification sur %{university} (valide %{duration})"
   static: Fichier statique
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://osuny.org/conditions-d-utilisation

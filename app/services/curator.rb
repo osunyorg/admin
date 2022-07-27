@@ -16,15 +16,24 @@ class Curator
   protected
 
   def create_post!
-    text = Wordpress.clean_html("#{page.text}<p><a href=\"#{@url}\" target=\"_blank\">Source</a></p>")
     @post = website.posts.create(
       university: website.university,
       title: page.title,
-      text: text,
       slug: page.title.parameterize,
       author: @user.person,
       published_at: Time.now
     )
+    @chapter = @post.blocks.create(
+      university: website.university,
+      template_kind: :chapter,
+      published: true,
+      position: 0
+    )
+    text = Wordpress.clean_html("#{page.text}<p><a href=\"#{@url}\" target=\"_blank\">Source</a></p>")
+    data = @chapter.data.deep_dup
+    data['text'] = text
+    @chapter.data = data
+    @chapter.save
   end
 
   def attach_image!

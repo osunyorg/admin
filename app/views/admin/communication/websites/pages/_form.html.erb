@@ -51,6 +51,7 @@
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] } unless page.kind_home? %>
             <%= f.input :bodyclass if can?(:edit, @website) %>
+            <%= f.input :full_width %>
           </div>
         </div>
       <% else %>

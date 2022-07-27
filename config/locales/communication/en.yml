@@ -97,6 +97,7 @@ en:
         description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
+        full_width: Full width
         header_text: Title displayed in header
         parent: Parent page
         published: Published?
@@ -160,6 +161,9 @@ en:
               placeholder: Enter credit
           link:
               target_blank: Open in new window
+          time_slot:
+            from: From
+            to: to
         templates:
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
@@ -191,6 +195,42 @@ en:
               text:
                 label: Text
                 placeholder: Enter text
+          contact:
+            description: Contact information and opening time, so anyone can get in touch.
+            edit:
+              add: Add
+              add_slot: Add a time slot
+              address:
+                label: Address
+                placeholder: Street and number
+              city:
+                label: City
+                placeholder: Enter the city
+              contacts: Mailing address
+              country:
+                label: Country
+                placeholder: Enter the country
+              element:
+                title: 
+                  label: Day
+                  placeholder: Enter the day or period
+                time_slot_morning:
+                  label: Morning (if necessary)
+                time_slot_afternoon:
+                  label: Afternoon (or full day)
+              name: 
+                label: Name (person, organization...)
+                placeholder: Enter the text
+              zipcode:
+                label: Zipcode
+                placeholder: Enter the zipcode
+              mails: 
+                label: Mails
+                placeholder: Enter the mail
+              phones: 
+                label: Telephone numbers
+                placeholder: Enter the number
+              slots: Opening times
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:
@@ -369,6 +409,10 @@ en:
                 id:
                   label: ''
                   placeholder: Choose post
+          programs:
+            description: A selection of programs.
+            edit:
+              add: Add a program
           testimonials:
             description: One or more testimonies
             edit:
@@ -544,6 +588,7 @@ en:
         template_kind:
           call_to_action: Call to action
           chapter: Chapter
+          contact: Contact
           datatable: Table
           definitions: Definitions
           embed: HTML embed
@@ -555,6 +600,7 @@ en:
           pages: Pages
           partners: Partners
           posts: Posts
+          programs: Programs
           testimonials: Testimonials
           timeline: Timeline
           video: Video
@@ -592,5 +638,6 @@ en:
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
+        full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents. 
       communication_website_post:
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.

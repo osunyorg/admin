@@ -23,6 +23,7 @@
 #
 class Education::Diploma < ApplicationRecord
   include WithUniversity
+  include WithBlocks
   include WithGit
   include WithSlug
 

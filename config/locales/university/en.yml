@@ -69,6 +69,8 @@ en:
         user: User
         zipcode: Zipcode
       university/person/experience:
+        description: Description
+        organization: Organization
         from_year: Start year
         to_year: End year
       university/person/involvement:
@@ -170,8 +172,8 @@ en:
     person:
       administrator_roles: Administrator roles
       experience:
-        no_organization_hint_html: "If the organization is not in the list,<br>you can <a href=\"%{url}\">create it</a>"
-        no_organization_hint_no_access_html: "If the organization is not in the list,<br>you should ask to create it"
+        no_organization_hint_html: "If the organization is not in the list, you can <a href=\"%{url}\">create it</a>"
+        no_organization_hint_no_access_html: "If the organization is not in the list, you should ask to create it"
         period: Period
     taught_programs: Taught programs
     sso: SSO

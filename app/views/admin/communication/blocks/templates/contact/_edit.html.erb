@@ -1,0 +1,106 @@
+<div class="row mb-4">
+  <div class="col-md-6 col-xl-4">
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3 class="h4"><%= t '.contacts' %></h3>
+      </div>
+      <div class="card-body">
+        <%= block_component_edit :name %>
+        <%= block_component_edit :address, rows: 1 %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= block_component_edit :zipcode %>
+          </div>
+          <div class="col-md-8">
+            <%= block_component_edit :city %>
+          </div>
+        </div>
+        <%= block_component_edit :country %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-8">
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="card">
+          <div class="card-header d-flex">
+            <h3 class="h4 pt-1 flex-fill"><%= t '.phones.label' %></h3>
+            <a class="btn bn-sm btn-primary" v-on:click="data.phone_numbers.push('')">
+              <%= t('.add') %>
+            </a>
+          </div>
+          <div class="card-body mb-n2">
+            <div v-for="(element, index) in data.phone_numbers">
+              <div class="d-flex mb-2">
+                <input  type="tel"
+                        class="form-control"
+                        placeholder="<%= t '.phones.placeholder' %>"
+                        maxlength="12"
+                        v-model="data.phone_numbers[index]">
+                <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
+                  <i class="fas fa-times"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="card">
+          <div class="card-header d-flex">
+            <h3 class="h4 flex-fill"><%= t '.mails.label' %></h3>
+            <a class="btn bn-sm btn-primary" v-on:click="data.emails.push('')">
+              <%= t('.add') %>
+            </a>
+          </div>
+          <div class="card-body mb-n2">
+            <div v-for="(element, index) in data.emails">
+              <div class="d-flex mb-2">
+                <input  type="email"
+                        class="form-control" 
+                        placeholder="<%= t '.mails.placeholder' %>"
+                        v-model="data.emails[index]">
+                <a class="btn text-danger" v-on:click="data.emails.splice(index, 1)">
+                  <i class="fas fa-times"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="h4"><%= t '.slots' %></h3>
+<%= block_component_add_element t('.add_slot') %>
+<draggable :list="data.elements" handle=".dragHandle" class="list-group">
+  <div v-for="(element, index) in data.elements" class="list-group-item">
+    <div class="d-flex">
+      <div>
+        <a class="btn ps-0 pt-0 dragHandle">
+          <i class="fa fa-bars handle"></i>
+        </a>
+      </div>
+      <div class="flex-fill">
+        <div class="row mb-n3">
+          <div class="col-xl-4">
+            <%= block_component_edit :title, template: @element %>
+          </div>
+          <div class="col-xl-4 col-md-6">
+            <%= block_component_edit :time_slot_morning, template: @element %>
+          </div>
+          <div class="col-xl-4 col-md-6">
+            <%= block_component_edit :time_slot_afternoon, template: @element %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a  class="btn text-danger position-absolute top-0 end-0"
+            v-on:click="data.elements.splice(index, 1)">
+            <i class="fas fa-times"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</draggable>

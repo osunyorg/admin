@@ -69,6 +69,8 @@ fr:
         user: Utilisateur
         zipcode: Code postal
       university/person/experience:
+        description: Description
+        organization: Organisation
         from_year: Année de début
         to_year: Année de fin
       university/person/involvement:
@@ -170,8 +172,8 @@ fr:
     person:
       administrator_roles: Rôles administratifs
       experience:
-        no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste,<br>vous pouvez la <a href=\"%{url}\">créer</a>"
-        no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste,<br>il faut demander à la créer"
+        no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste, vous pouvez la <a href=\"%{url}\">créer</a>"
+        no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste, il faut demander à la créer"
         period: Période
       taught_programs: Formations enseignées
     sso: SSO
