@@ -2,6 +2,7 @@
 
 <div class="row">
   <div class="col-lg-8">
+    <%= render 'admin/communication/blocks/list', about: @diploma %>
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h2 class="card-title mb-0 h5">
@@ -11,6 +12,7 @@
       <%= render 'admin/education/programs/list',
                   programs: @programs,
                   hide_diploma: true %>
+      
     </div>
   </div>
   <div class="col-lg-4">
@@ -37,6 +39,9 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>
+  <%= link_to t('static'),
+              static_admin_education_diploma_path(@diploma),
+              class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>
