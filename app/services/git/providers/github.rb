@@ -54,15 +54,15 @@ class Git::Providers::Github < Git::Providers::Abstract
     return if path.nil?
     # Try to find in stored tree to avoid multiple queries
     return hash_for_paths[path] if hash_for_paths.has_key? path
-    begin
-      # The fast way, with no query, does not work.
-      # Let's query the API 
-      content = client.content repository, path: path
-      sha = content[:sha]
-    rescue
-      sha = nil
-    end
-    sha
+    # This is still generating too many requests, so we try based only on the tree  
+    # begin
+    #   # The fast way, with no query, does not work.
+    #   # Let's query the API.
+    #   content = client.content repository, path: path
+    #   return content[:sha]
+    # rescue
+    # end
+    nil
   end
 
   protected
