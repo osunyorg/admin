@@ -9,7 +9,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def update_file(path, previous_path, content)
-    file = find_in_tree previous_path
+    file = tree_item_for_path(previous_path)
     return if file.nil?
     batch << {
       path: previous_path,
@@ -26,7 +26,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def destroy_file(path)
-    file = find_in_tree path
+    file = tree_item_for_path(path)
     return if file.nil?
     batch << {
       path: path,
@@ -53,8 +53,8 @@ class Git::Providers::Github < Git::Providers::Abstract
   def git_sha(path)
     return if path.nil?
     # Try to find in stored tree to avoid multiple queries
-    return find_in_tree(path)
-    # This is still generating too many requests, so we try based only on the tree  
+    return tree_item_for_path(path)&.dig(:sha)
+    # This is still generating too many requests, so we try based only on the tree
     # begin
     #   # The fast way, with no query, does not work.
     #   # Let's query the API.
@@ -79,23 +79,26 @@ class Git::Providers::Github < Git::Providers::Abstract
     @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
   end
 
-  def hash_for_paths
-    unless @hash_for_paths
-      @hash_for_paths = {}
+  def tree_items_by_path
+    unless @tree_items_by_path
+      @tree_items_by_path = {}
       tree[:tree].each do |hash|
         path = hash[:path]
-        sha = hash[:sha]
-        @hash_for_paths[path] = sha
+        @tree_items_by_path[path] = {
+          mode: hash[:mode],
+          type: hash[:type],
+          sha: hash[:sha]
+        }
       end
     end
-    @hash_for_paths
+    @tree_items_by_path
   end
 
   def tree
     @tree ||= client.tree repository, branch_sha, recursive: true
   end
 
-  def find_in_tree(path)
-    hash_for_paths[path] if hash_for_paths.has_key? path
+  def tree_item_for_path(path)
+    tree_items_by_path[path] if tree_items_by_path.has_key? path
   end
 end

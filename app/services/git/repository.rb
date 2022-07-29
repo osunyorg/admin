@@ -114,7 +114,7 @@ class Git::Repository
         sha = nil
       else
         path = git_file.path
-        # TODO Arnaud : Invalider le cache des tree et hash_for_paths pour GitHub pour faire un appel API au lieu de N calculs de SHA
+        # TODO Arnaud : Invalider le cache des tree et tree_items_by_path pour GitHub pour faire un appel API au lieu de N calculs de SHA
         sha = computed_sha(git_file.to_s)
       end
       puts "Marking #{path}"
