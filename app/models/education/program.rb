@@ -146,7 +146,7 @@ class Education::Program < ApplicationRecord
   end
 
   def path_in_website(website)
-    "#{website.special_page(:education_programs).path}#{path}".gsub('//', '/')
+    "#{website.special_page(:education_programs)&.path}#{path}".gsub('//', '/')
   end
 
   def git_dependencies(website)
