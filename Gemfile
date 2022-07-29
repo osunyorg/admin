@@ -39,7 +39,7 @@ gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 6.1'
 gem 'rails-i18n'
-gem "roo", "~> 2.9"
+gem 'roo', "~> 2.9"
 gem 'sanitize'
 gem 'sassc-rails'
 # gem 'scout_apm', '~> 5.1'

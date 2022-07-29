@@ -5,7 +5,9 @@
         <i class="hamburger align-self-center"></i>
       </a>
     <% end %>
-    <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
+    <div class="d-none d-lg-block">
+      <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder %>
+    </div>
     <ul class="navbar-nav navbar-align">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block js-user-dropdown-toggle" href="#" data-bs-toggle="dropdown">

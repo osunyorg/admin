@@ -27,8 +27,11 @@ h1
     color: white
 
 #topbar
-    padding-left: 2.5rem
-    padding-right: 2.5rem
+    padding-left: $grid-gutter-width
+    padding-right: $grid-gutter-width
+    @include media-breakpoint-up(lg)
+        padding-left: 2.5rem
+        padding-right: 2.5rem
     .nav-link--last
         padding-right: 0
 
