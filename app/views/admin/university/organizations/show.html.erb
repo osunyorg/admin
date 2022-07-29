@@ -94,8 +94,8 @@
             <%= University::Organization.human_attribute_name('logo') %>
           </h5>
         </div>
-        <div class="card-body">
-          <%= kamifusen_tag @organization.logo, class: 'img-fluid' if @organization.logo.attached? %>
+        <div class="card-body bg-grey">
+          <%= kamifusen_tag @organization.logo, class: 'img-fluid p-5' if @organization.logo.attached? %>
         </div>
       </div>
     <% end %>
