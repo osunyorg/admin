@@ -19,11 +19,12 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
         parent_id: parent_id,
         position: index + 1
       )
-      category.sync_with_git unless parent_id
     end
     if parent_id
       parent = @website.categories.find(parent_id)
       parent.sync_with_git
+    else
+      first_category&.sync_with_git # Will sync siblings
     end
   end
 

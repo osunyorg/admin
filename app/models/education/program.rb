@@ -151,6 +151,8 @@ class Education::Program < ApplicationRecord
 
   def git_dependencies(website)
     [self] +
+    siblings + 
+    descendants + 
     active_storage_blobs +
     git_block_dependencies +
     university_people_through_involvements +

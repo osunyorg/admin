@@ -9,6 +9,7 @@ module Admin::Reorderable
       object.update_column(:position, index + 1) unless object.nil?
     end
     first_object.sync_with_git if first_object&.respond_to?(:sync_with_git)
+    # Used to add extra code
     yield first_object if block_given?
   end
 

@@ -87,7 +87,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] + descendants + active_storage_blobs + posts + website.menus
+    [self] + siblings + descendants + active_storage_blobs + posts + website.menus
   end
 
   def git_destroy_dependencies(website)

@@ -47,6 +47,7 @@ module Communication::Website::WithSpecialPages
       university_id: university_id
     )
     if page.new_record?
+      # This is a bit brutal, as it might generate several syncs at the same time
       page.save_and_sync
     end
     page
@@ -55,6 +56,5 @@ module Communication::Website::WithSpecialPages
   def special_pages_keys
     @special_pages_keys ||= pages.where.not(kind: nil).pluck(:kind).uniq
   end
-
 
 end

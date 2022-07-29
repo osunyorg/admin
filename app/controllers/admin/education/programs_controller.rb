@@ -25,21 +25,20 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      program = current_university.education_programs.find(id)
-      program.update(
+      @program = current_university.education_programs.find(id)
+      @program.update(
         parent_id: parent_id,
         position: index + 1,
         skip_websites_categories_callback: true
       )
-      unless parent_id
-        program.set_websites_categories
-        program.sync_with_git
-      end
     end
     if parent_id
       parent = current_university.education_programs.find(parent_id)
       parent.set_websites_categories
       parent.sync_with_git
+    else
+      @program&.set_websites_categories
+      @program&.sync_with_git
     end
   end
 
