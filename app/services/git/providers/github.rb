@@ -53,7 +53,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   def git_sha(path)
     return if path.nil?
     # Try to find in stored tree to avoid multiple queries
-    return hash_for_paths[path] if hash_for_paths.has_key? path
+    return find_in_tree(path)
     # This is still generating too many requests, so we try based only on the tree  
     # begin
     #   # The fast way, with no query, does not work.
@@ -96,9 +96,6 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def find_in_tree(path)
-    tree[:tree].each do |file|
-      return file if path == file[:path]
-    end
-    nil
+    hash_for_paths[path] if hash_for_paths.has_key? path
   end
 end
