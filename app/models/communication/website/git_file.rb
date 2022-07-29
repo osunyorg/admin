@@ -31,6 +31,10 @@ class Communication::Website::GitFile < ApplicationRecord
     object.before_git_sync
     git_file = where(website: website, about: object).first_or_create
     git_file.will_be_destroyed = destroy
+    # It is very important to go through this specific instance of the website, 
+    # and not through each git_file.website, which would be different instances.
+    # Otherwise, we get 1 instance of git_repository per git_file, 
+    # and it causes a huge amount of useless queries.
     website.git_repository.add_git_file git_file
   end
 
