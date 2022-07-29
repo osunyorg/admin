@@ -37,8 +37,6 @@ $(function () {
             ['font', ['bold', 'italic']],
             ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
             ['view', ['codeview']]
         ],
         styleTags: [
