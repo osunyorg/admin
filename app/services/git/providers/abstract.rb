@@ -11,6 +11,30 @@ class Git::Providers::Abstract
     repository.present? && access_token.present?
   end
 
+  def create_file(path, content)
+    raise NotImplementedError
+  end
+
+  def update_file(path, previous_path, content)
+    raise NotImplementedError
+  end
+
+  def destroy_file(path)
+    raise NotImplementedError
+  end
+
+  def push(commit_message)
+    raise NotImplementedError
+  end
+
+  def computed_sha(string)
+    raise NotImplementedError
+  end
+
+  def git_sha(path)
+    raise NotImplementedError
+  end
+
   protected
 
   def batch

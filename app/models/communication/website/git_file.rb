@@ -34,29 +34,6 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
-  def should_create?
-    !should_destroy? &&
-    !exists_on_git? &&
-    (
-      !synchronized_with_git? ||
-      previous_path.nil? ||
-      previous_sha.nil?
-    )
-  end
-
-  def should_update?
-    !should_destroy? &&
-    (
-      different_path? ||
-      different_sha?
-    )
-  end
-
-  def should_destroy?
-    will_be_destroyed ||
-    path.nil?
-  end
-
   def path
     @path ||= about.git_path(website)&.gsub(/\/+/, '/')
   end
@@ -86,32 +63,5 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def git_sha
     @git_sha ||= git_sha_for(path)
-  end
-
-  # Based on content, with the provider's algorithm (sha1 or sha256)
-  def computed_sha
-    @computed_sha ||= website.git_repository.computed_sha to_s
-  end
-
-  def exists_on_git?
-    previous_git_sha.present? || # The file exists where it was last time
-    (
-      previous_path.nil? && # Never saved in the database
-      git_sha.present?      # but it exists in the git repo
-    )
-  end
-
-  def synchronized_with_git?
-    exists_on_git? && # File exists
-    previous_path == path && # at the same place
-    previous_git_sha == previous_sha # with the same content
-  end
-
-  def different_path?
-    previous_path != path
-  end
-
-  def different_sha?
-    previous_sha != computed_sha
   end
 end
