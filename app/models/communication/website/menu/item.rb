@@ -68,8 +68,8 @@ class Communication::Website::Menu::Item < ApplicationRecord
     teachers: 54,
     volumes: 60,
     volume: 61,
-    articles: 62,
-    article: 63
+    papers: 62,
+    paper: 63
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -90,8 +90,8 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
       'program' => Icon::EDUCATION_PROGRAM,
       'programs' => Icon::EDUCATION_PROGRAM,
-      'article' => Icon::RESEARCH_LABORATORY,
-      'articles' => Icon::RESEARCH_LABORATORY,
+      'paper' => Icon::RESEARCH_LABORATORY,
+      'papers' => Icon::RESEARCH_LABORATORY,
       'volumes' => Icon::RESEARCH_LABORATORY,
       'volume' => Icon::RESEARCH_LABORATORY,
       'researchers' => Icon::RESEARCH_RESEARCHER,
@@ -147,7 +147,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     kind_category? ||
     kind_post? ||
     kind_volume? ||
-    kind_article?
+    kind_paper?
   end
 
   def sync_menu

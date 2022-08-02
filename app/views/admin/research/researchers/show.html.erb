@@ -2,15 +2,15 @@
 
 <%= render 'admin/university/people/main_infos', person: @researcher %>
 
-<% if @articles.total_count > 0 %>
+<% if @papers.total_count > 0 %>
   <div class="card">
     <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Article.model_name.human(count: 2)} (#{@articles.total_count})" %></h2>
+      <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Paper.model_name.human(count: 2)} (#{@papers.total_count})" %></h2>
     </div>
-    <%= render 'admin/research/journals/articles/list', articles: @articles %>
-    <% if @articles.total_pages > 1 %>
+    <%= render 'admin/research/journals/papers/list', papers: @papers %>
+    <% if @papers.total_pages > 1 %>
       <div class="card-footer">
-        <%= paginate @articles, theme: 'bootstrap-5' %>
+        <%= paginate @papers, theme: 'bootstrap-5' %>
       </div>
     <% end %>
   </div>

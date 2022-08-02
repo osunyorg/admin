@@ -32,8 +32,8 @@
                   about_collection = collection @website.posts
                 elsif item.kind_volume?
                   about_collection = collection @website.research_volumes
-                elsif item.kind_article?
-                  about_collection = collection @website.research_articles
+                elsif item.kind_paper?
+                  about_collection = collection @website.research_papers
                 end
               else
                 about_collection = []

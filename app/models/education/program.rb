@@ -202,7 +202,7 @@ class Education::Program < ApplicationRecord
     diploma.present? || descendants.any? { |descendant| descendant.diploma.present? }
   end
 
-  def has_research_articles?
+  def has_research_papers?
     false
   end
 

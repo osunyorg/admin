@@ -70,9 +70,9 @@ class University::Person < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  has_and_belongs_to_many :research_journal_articles,
-                          class_name: 'Research::Journal::Article',
-                          join_table: :research_journal_articles_researchers,
+  has_and_belongs_to_many :research_journal_papers,
+                          class_name: 'Research::Journal::Paper',
+                          join_table: :research_journal_papers_researchers,
                           foreign_key: :researcher_id
 
   has_many                :communication_website_posts,
@@ -96,7 +96,7 @@ class University::Person < ApplicationRecord
 
   has_many                :researcher_websites,
                           -> { distinct },
-                          through: :research_journal_articles,
+                          through: :research_journal_papers,
                           source: :websites
 
   has_many                :teacher_websites,

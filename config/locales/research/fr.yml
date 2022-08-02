@@ -7,9 +7,9 @@ fr:
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
-      research/journal/article:
-        one: Article
-        other: Articles
+      research/journal/paper:
+        one: Papier
+        other: Papiers
       research/journal/volume:
         one: Volumes
         other: Volumes
@@ -26,11 +26,11 @@ fr:
       research/journal:
         issn: ISSN
         title: Titre
-      research/journal/article:
+      research/journal/paper:
         abstract: Extrait
         description: Meta Description
         keywords: Mots clés
-        pdf: PDF de l'article
+        pdf: PDF
         published: Publié ?
         published_at: Publié le
         references: Références
@@ -69,13 +69,13 @@ fr:
         title: Titre
   research:
     manage_researchers: Gérer les Chercheu·rs·ses
-    number_of_articles: Nombre d'articles
+    number_of_papers: Nombre de papiers
     researchers:
       one: Chercheu·r·se
       other: Chercheu·rs·ses
   simple_form:
     hints:
-      research_journal_article:
+      research_journal_paper:
         description: Si ce champ est vide le début de l'extrait sera utilisé.
       research_journal_volume:
         cover: Fichier JPG ou PNG

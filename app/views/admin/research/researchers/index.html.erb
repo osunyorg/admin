@@ -8,7 +8,7 @@
       <th><%= University::Person.human_attribute_name('name') %></th>
       <th><%= University::Person.human_attribute_name('first_name') %></th>
       <th></th>
-      <th><%= t('research.number_of_articles') %></th>
+      <th><%= t('research.number_of_papers') %></th>
     </tr>
   </thead>
 
@@ -21,7 +21,7 @@
           <%= kamifusen_tag researcher.best_picture,
                             width: 40 if researcher.best_picture.attached? %>
         </td>
-        <td><%= researcher.research_journal_articles.count %></td>
+        <td><%= researcher.research_journal_papers.count %></td>
       </tr>
     <% end %>
   </tbody>

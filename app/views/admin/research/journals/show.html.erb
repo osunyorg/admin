@@ -11,7 +11,6 @@
   <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
 <% end %>
 
-
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">
@@ -45,14 +44,14 @@
   <div class="card-header">
     <div class="float-end">
       <%= link_to t('create'),
-                  new_admin_research_journal_article_path(journal_id: @journal),
+                  new_admin_research_journal_paper_path(journal_id: @journal),
                   class: button_classes %>
     </div>
     <h2 class="card-title">
-      <%= link_to Research::Journal::Article.model_name.human(count: 2),
-                  admin_research_journal_articles_path(journal_id: @journal) %></h2>
+      <%= link_to Research::Journal::Paper.model_name.human(count: 2),
+                  admin_research_journal_papers_path(journal_id: @journal) %></h2>
   </div>
-  <%= render 'admin/research/journals/articles/list', articles: @articles %>
+  <%= render 'admin/research/journals/papers/list', papers: @papers %>
 </div>
 
 <% content_for :action_bar_left do %>

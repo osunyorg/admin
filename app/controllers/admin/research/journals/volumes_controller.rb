@@ -7,7 +7,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def show
-    @articles = @volume.articles.ordered
+    @papers = @volume.papers.ordered
     breadcrumb
   end
 

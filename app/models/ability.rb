@@ -24,7 +24,7 @@ class Ability
     can :read, Education::Program, university_id: @user.university_id
     can :read, Education::School, university_id: @user.university_id
     can :read, Research::Journal, university_id: @user.university_id
-    can :read, Research::Journal::Article, university_id: @user.university_id
+    can :read, Research::Journal::Paper, university_id: @user.university_id
     can :read, Research::Journal::Volume, university_id: @user.university_id
     can :read, Research::Laboratory, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
@@ -107,7 +107,7 @@ class Ability
     can :manage, Education::Program, university_id: @user.university_id
     can :manage, :all_programs # needed to prevent program_manager to access specific global screens
     can :manage, Research::Journal, university_id: @user.university_id
-    can :manage, Research::Journal::Article, university_id: @user.university_id
+    can :manage, Research::Journal::Paper, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id
     can :manage, Research::Laboratory, university_id: @user.university_id
     can :manage, University::Role, university_id: @user.university_id

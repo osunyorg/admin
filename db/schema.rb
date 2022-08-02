@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_27_075720) do
+ActiveRecord::Schema.define(version: 2022_08_02_151713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -530,7 +530,7 @@ ActiveRecord::Schema.define(version: 2022_07_27_075720) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "research_journal_articles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_journal_papers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.datetime "published_at"
     t.uuid "university_id", null: false
@@ -547,17 +547,17 @@ ActiveRecord::Schema.define(version: 2022_07_27_075720) do
     t.integer "position"
     t.text "text"
     t.text "description"
-    t.index ["research_journal_id"], name: "index_research_journal_articles_on_research_journal_id"
-    t.index ["research_journal_volume_id"], name: "index_research_journal_articles_on_research_journal_volume_id"
-    t.index ["university_id"], name: "index_research_journal_articles_on_university_id"
-    t.index ["updated_by_id"], name: "index_research_journal_articles_on_updated_by_id"
+    t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
+    t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
+    t.index ["university_id"], name: "index_research_journal_papers_on_university_id"
+    t.index ["updated_by_id"], name: "index_research_journal_papers_on_updated_by_id"
   end
 
-  create_table "research_journal_articles_researchers", force: :cascade do |t|
+  create_table "research_journal_papers_researchers", force: :cascade do |t|
     t.uuid "researcher_id", null: false
-    t.uuid "article_id", null: false
-    t.index ["article_id"], name: "index_research_journal_articles_researchers_on_article_id"
-    t.index ["researcher_id"], name: "index_research_journal_articles_researchers_on_researcher_id"
+    t.uuid "paper_id", null: false
+    t.index ["paper_id"], name: "index_research_journal_papers_researchers_on_paper_id"
+    t.index ["researcher_id"], name: "index_research_journal_papers_researchers_on_researcher_id"
   end
 
   create_table "research_journal_volumes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -854,12 +854,12 @@ ActiveRecord::Schema.define(version: 2022_07_27_075720) do
   add_foreign_key "education_schools", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
-  add_foreign_key "research_journal_articles", "research_journal_volumes"
-  add_foreign_key "research_journal_articles", "research_journals"
-  add_foreign_key "research_journal_articles", "universities"
-  add_foreign_key "research_journal_articles", "users", column: "updated_by_id"
-  add_foreign_key "research_journal_articles_researchers", "research_journal_articles", column: "article_id"
-  add_foreign_key "research_journal_articles_researchers", "university_people", column: "researcher_id"
+  add_foreign_key "research_journal_papers", "research_journal_volumes"
+  add_foreign_key "research_journal_papers", "research_journals"
+  add_foreign_key "research_journal_papers", "universities"
+  add_foreign_key "research_journal_papers", "users", column: "updated_by_id"
+  add_foreign_key "research_journal_papers_researchers", "research_journal_papers", column: "paper_id"
+  add_foreign_key "research_journal_papers_researchers", "university_people", column: "researcher_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "universities"

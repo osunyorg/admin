@@ -78,12 +78,12 @@ module Communication::Website::Menu::Item::WithTargets
     Static.clean_path "#{website.special_page(:research_volumes).path}#{about.path}"
   end
 
-  def target_for_articles
-    Static.clean_path website.special_page(:research_articles).path
+  def target_for_papers
+    Static.clean_path website.special_page(:research_papers).path
   end
 
-  def target_for_article
+  def target_for_paper
     return unless about&.published && about&.published_at
-    Static.clean_path "#{website.special_page(:research_articles).path}#{about.path}"
+    Static.clean_path "#{website.special_page(:research_papers).path}#{about.path}"
   end
 end

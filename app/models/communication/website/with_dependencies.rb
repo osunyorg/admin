@@ -49,8 +49,8 @@ module Communication::Website::WithDependencies
     has_research_volumes? ? about.published_volumes : Research::Journal::Volume.none
   end
 
-  def research_articles
-    has_research_articles? ? about.published_articles : Research::Journal::Article.none
+  def research_papers
+    has_research_papers? ? about.published_papers : Research::Journal::Paper.none
   end
 
   def administrators
@@ -174,8 +174,8 @@ module Communication::Website::WithDependencies
     about && about.has_education_diplomas?
   end
 
-  def has_research_articles?
-    about && about.has_research_articles?
+  def has_research_papers?
+    about && about.has_research_papers?
   end
 
   def has_research_volumes?

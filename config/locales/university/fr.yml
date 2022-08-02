@@ -57,7 +57,7 @@ fr:
         phone_personal: Téléphone personnel
         phone_professional: Téléphone professionnel
         picture: Photo de profil
-        research_journal_articles: Articles
+        research_journal_papers: Papiers
         researcher: Chercheur·se
         roles: Rôles
         slug: Slug
@@ -136,7 +136,7 @@ fr:
         is_administration: "Remplit des missions administratives."
         is_alumnus: "Étudie ou a étudié dans l'établissement."
         is_author: "Écrit des articles pour les sites."
-        is_researcher: "Écrit des articles dans des revues scientifiques."
+        is_researcher: "Écrit des papiers dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "À différencier d'une personne vacataire."

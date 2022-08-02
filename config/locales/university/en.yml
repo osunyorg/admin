@@ -57,7 +57,7 @@ en:
         phone_personal: Personal phone
         phone_professional: Professional phone
         picture: Profile picture
-        research_journal_articles: Articles
+        research_journal_papers: Papiers
         researcher: Researcher
         roles: Roles
         slug: Slug
@@ -136,7 +136,7 @@ en:
         is_administration: "Fulfill administrative missions."
         is_alumnus: "Studies or studied in the school."
         is_author: "Writes posts for websites."
-        is_researcher: "Writes articles for journals."
+        is_researcher: "Writes papers for journals."
         is_teacher: "Teaches in Schools."
         linkedin: "Example: https://www.linkedin.com/in/osuny"
         tenure: "To differ from temporary lecturer."

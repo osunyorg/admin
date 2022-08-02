@@ -551,11 +551,11 @@ en:
             description_short: ''
             slug: privacy-policy
             title: Privacy policy
-          research_articles:
-            admin_description: list of articles
-            description_short: List of articles
-            slug: articles
-            title: Articles
+          research_papers:
+            admin_description: list of papers
+            description_short: List of papers
+            slug: papers
+            title: Papers
           research_volumes:
             admin_description: list of volumes
             description_short: List of volumes
@@ -620,8 +620,8 @@ en:
               page: Specific Page
               program: Specific program
               programs: Programs index
-              article: Specific research article
-              articles: Research articles index
+              paper: Specific research paper
+              papers: Research papers index
               volume: Specific research volume
               volumes: Research volumes index
               researchers: Research staff

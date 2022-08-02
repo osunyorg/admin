@@ -28,10 +28,10 @@ class Research::Journal < ApplicationRecord
   has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
   has_many :published_volumes, -> { published }, class_name: 'Research::Journal::Volume', foreign_key: :research_journal_id, dependent: :destroy
-  has_many :articles, foreign_key: :research_journal_id, dependent: :destroy
-  has_many :published_articles, -> { published }, class_name: 'Research::Journal::Article', foreign_key: :research_journal_id, dependent: :destroy
-  has_many :people, -> { distinct }, through: :articles
-  has_many :people_through_published_articles, -> { distinct }, through: :published_articles, source: :people
+  has_many :papers, foreign_key: :research_journal_id, dependent: :destroy
+  has_many :published_papers, -> { published }, class_name: 'Research::Journal::Paper', foreign_key: :research_journal_id, dependent: :destroy
+  has_many :people, -> { distinct }, through: :papers
+  has_many :people_through_published_papers, -> { distinct }, through: :published_papers, source: :people
 
   scope :ordered, -> { order(:title) }
   scope :for_search_term, -> (term) {
@@ -48,7 +48,7 @@ class Research::Journal < ApplicationRecord
   end
 
   def researchers
-    university.people.where(id: people_through_published_articles.pluck(:id), is_researcher: true)
+    university.people.where(id: people_through_published_papers.pluck(:id), is_researcher: true)
   end
 
   def git_path(website)
@@ -57,14 +57,14 @@ class Research::Journal < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = [self]
-    dependencies += published_articles + published_articles.map(&:active_storage_blobs).flatten if has_research_articles?
+    dependencies += published_papers + published_papers.map(&:active_storage_blobs).flatten if has_research_papers?
     dependencies += published_volumes + published_volumes.map(&:active_storage_blobs).flatten if has_research_volumes?
     dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten if has_researchers?
     dependencies
   end
 
   def git_destroy_dependencies(website)
-    [self] + articles + volumes
+    [self] + papers + volumes
   end
 
   #####################
@@ -90,8 +90,8 @@ class Research::Journal < ApplicationRecord
     false
   end
 
-  def has_research_articles?
-    published_articles.published.any?
+  def has_research_papers?
+    published_papers.published.any?
   end
 
   def has_research_volumes?
