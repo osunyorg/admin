@@ -8,15 +8,15 @@
         <h5 class="modal-title h4"><%= t 'preview.title' %></h5>
         <div class="btn-group m-auto" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary preview__button" data-mode="mobile">
-            <i class="fas fa-mobile-alt"></i>
+            <i class="fas fa-<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_MOBILE %>"></i>
             <%= t 'preview.mobile' %>
           </button>
           <button type="button" class="btn btn-light preview__button" data-mode="tablet">
-            <i class="fas fa-tablet-alt"></i>
+            <i class="fas fa-<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_TABLET %>"></i>
             <%= t 'preview.tablet' %>
           </button>
           <button type="button" class="btn btn-light preview__button" data-mode="desktop">
-            <i class="fas fa-desktop"></i>
+            <i class="fas fa-<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_DESKTOP %>"></i>
             <%= t 'preview.desktop' %>
           </button>
         </div>
