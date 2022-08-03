@@ -65,6 +65,10 @@ class Research::Journal::Paper < ApplicationRecord
     "content/papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
   end
 
+  def template_static
+    "admin/research/journals/papers/static"
+  end
+
   def git_dependencies(website)
     [self] +
     active_storage_blobs +

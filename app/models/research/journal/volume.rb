@@ -56,6 +56,11 @@ class Research::Journal::Volume < ApplicationRecord
     "content/volumes/#{published_at.year}/#{slug}/_index.html" if published_at
   end
 
+  def template_static
+    "admin/research/journals/volumes/static"
+  end
+
+
   def git_dependencies(website)
     [self] +
     papers +
