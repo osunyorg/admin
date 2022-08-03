@@ -459,6 +459,10 @@ en:
               url:
                 label: Video url
                 placeholder: Enter video's url
+                hint: >
+                  Ex: 
+                  https://vimeo.com/732180675,
+                  https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
                 label: Video title
                 placeholder: Enter video title
