@@ -1,7 +1,7 @@
 <% if @website.has_communication_posts? %>
 posts:          <%= @website.special_page(:communication_posts).path_without_language %>:year/:month/:day/:slug/
 <% end %>
-<% if @website.has_communication_categories? %>
+<% if @website.has_communication_posts? && @website.has_communication_categories? %>
 categories:     <%= @website.special_page(:communication_posts).path_without_language %>:slug/
 <% end %>
 <% if @website.has_persons? %>
