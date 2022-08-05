@@ -51,6 +51,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithMenuItemTarget
   include WithPosition
   include WithTree
+  include WithPath
   include Accessible
 
   has_summernote :text
@@ -71,47 +72,8 @@ class Communication::Website::Page < ApplicationRecord
 
   validates :title, presence: true
 
-  validates :slug,
-            presence: true,
-            unless: :kind_home?
-  validate  :slug_must_be_unique
-  validates :slug,
-            format: {
-              with: /\A[a-z0-9\-]+\z/,
-              message: I18n.t('slug_error')
-            },
-            unless: :kind_home?
-
-  before_validation :check_slug, :make_path
-  after_save :update_children_paths, if: :saved_change_to_path?
-
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
-
-  def generated_path
-    "#{parent&.path}#{slug}/".gsub(/\/+/, '/')
-  end
-
-  def path_without_language
-    if kind_home?
-      "/"
-    elsif parent_id.present?
-      "#{parent&.path_without_language}#{slug}/".gsub(/\/+/, '/')
-    else
-      "/#{slug}/".gsub(/\/+/, '/')
-    end
-  end
-
-  def git_path(website)
-    return unless published
-    if kind_home?
-      "content/_index.html"
-    elsif is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
-      "content/#{kind.split('_').last}/_index.html"
-    else
-      "content/pages/#{path}/_index.html"
-    end
-  end
 
   def template_static
     "admin/communication/websites/pages/static"
@@ -134,12 +96,6 @@ class Communication::Website::Page < ApplicationRecord
     [self] +
     descendants +
     active_storage_blobs
-  end
-
-  def url
-    return unless published
-    return if website.url.blank?
-    "#{website.url}#{path}"
   end
 
   def language_prefix
@@ -178,15 +134,10 @@ class Communication::Website::Page < ApplicationRecord
     parent&.best_bodyclass unless kind_home? || parent&.kind_home?
   end
 
-  def update_children_paths
-    children.each do |child|
-      child.update_column :path, child.generated_path
-      child.update_children_paths
-    end
-  end
-
   def siblings
-    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+    self.class.unscoped
+              .where(parent: parent, university: university, website: website)
+              .where.not(id: id)
   end
 
   protected
@@ -197,31 +148,6 @@ class Communication::Website::Page < ApplicationRecord
 
   def last_ordered_element
     website.pages.where(parent_id: parent_id).ordered.last
-  end
-
-  def check_slug
-    self.slug = to_s.parameterize if self.slug.blank? && !kind_home?
-    current_slug = self.slug
-    n = 0
-    while slug_unavailable?(self.slug)
-      n += 1
-      self.slug = [current_slug, n].join('-')
-    end
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
-
-  def make_path
-    self.path = kind_home? ? "#{language_prefix}/" : generated_path
-  end
-
-  def slug_must_be_unique
-    errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
   end
 
   def explicit_blob_ids

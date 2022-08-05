@@ -46,6 +46,10 @@ module Communication::Website::Page::WithKind
       !is_special_page?
     end
 
+    def has_special_git_path?
+      is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
+    end
+
   end
 
   private
