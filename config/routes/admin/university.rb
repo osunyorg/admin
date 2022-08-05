@@ -24,5 +24,9 @@ namespace :university do
       get :static
     end
   end
-  resources :organizations
+  resources :organizations do
+    member do
+      get :static
+    end
+  end
 end

@@ -63,5 +63,6 @@ administrative_missions:
         <%= target.path_in_website(@website) if target.respond_to? :path_in_website %>
 <% end %>
 <% end %>
+<%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography, @about.university %>

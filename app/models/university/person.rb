@@ -55,6 +55,7 @@ class University::Person < ApplicationRecord
   include WithSlug
   include WithPicture
   include WithRoles
+  include WithBlocks
 
   LIST_OF_ROLES = [
     :administration,

@@ -36,6 +36,7 @@ class University::Organization < ApplicationRecord
   include WithBlobs
   include WithUniversity
   include WithSlug
+  include WithBlocks
 
   has_many :experiences,
            class_name: 'University::Person::Experience'

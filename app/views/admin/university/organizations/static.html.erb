@@ -18,5 +18,6 @@ logo: "<%= @about.logo.blob.id %>"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
+<%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>
