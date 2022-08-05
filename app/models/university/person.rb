@@ -184,6 +184,7 @@ class University::Person < ApplicationRecord
     if for_website?(website)
       dependencies << self
       dependencies.concat active_storage_blobs
+      dependencies.concat git_block_dependencies
     end
     dependencies << administrator if administrator.for_website?(website)
     dependencies << author if author.for_website?(website)
