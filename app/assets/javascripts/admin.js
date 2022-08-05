@@ -10,7 +10,6 @@
 //= require gdpr/cookie_consent
 //= require sortablejs/Sortable
 //= require summernote/summernote-bs5
-//= require summernote-rails
 //= require slug/slug
 //= require cocoon
 //= require_self
