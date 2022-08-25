@@ -159,6 +159,12 @@ en:
         finished: Finished
         finished_with_errors: Finished with errors
         pending: Pending
+  extranet:
+    account: 
+      my: My account
+      edit: Edit
+      updated: Updated
+      logout: Log out
   false: No
   featured_image:
     title: Image
