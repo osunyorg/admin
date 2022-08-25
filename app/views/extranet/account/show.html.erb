@@ -1,0 +1,13 @@
+<% content_for :title, @person %>
+
+<%= render 'extranet/persons/header', person: @person unless @person.nil? %>
+
+<%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary' %>
+
+<div class="row">
+  <div class="col-md-9">
+  </div>
+  <div class="col-md-3">
+    <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
+  </div>
+</div>

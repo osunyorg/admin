@@ -16,5 +16,16 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :organizations,
                   University::Organization.model_name.human(count: 2),
                   university_organizations_path
+    primary.item  :account,
+                  current_user,
+                  nil do |secondary|
+      secondary.item :edit, 
+                      t('extranet.account.my'),
+                      account_path
+      secondary.item :logout,
+                      t('extranet.account.logout'),
+                      destroy_user_session_path,
+                      method: :delete
+    end
   end
 end
