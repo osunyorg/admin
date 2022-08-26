@@ -3,9 +3,23 @@
 <%= render 'extranet/persons/header', person: @person unless @person.nil? %>
 
 <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary' %>
+<%= link_to t('extranet.account.logout'), destroy_user_session_path, method: :delete, class: 'btn text-danger' %>
 
 <div class="row">
   <div class="col-md-9">
+    <div class="biography">
+      <p><%= @person.biography %></p>
+    </div>
+    <% if @person.experiences.any? %>
+      <div class="experiences">
+        <p class="mb-4">Parcours professionel</p>
+        <ul>
+          <% @person.experiences.ordered.each do |experience| %>
+            <li><%= render 'extranet/persons/experience', experience: experience %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-3">
     <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
