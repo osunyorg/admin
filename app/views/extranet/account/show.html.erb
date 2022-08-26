@@ -10,16 +10,17 @@
     <div class="biography">
       <p><%= @person.biography %></p>
     </div>
-    <% if @person.experiences.any? %>
-      <div class="experiences">
-        <p class="mb-4">Parcours professionel</p>
+    <div class="experiences">
+      <p class="mb-4">Parcours professionel</p>
+      <%= link_to 'Ajouter une expérience', '', class: 'btn btn-sm btn-primary mb-4' %>
+      <% if @person.experiences.any? %>
         <ul>
           <% @person.experiences.ordered.each do |experience| %>
-            <li><%= render 'extranet/persons/experience', experience: experience %></li>
+            <%= render 'extranet/persons/experience', experience: experience, edit: true %>
           <% end %>
         </ul>
-      </div>
-    <% end %>
+        <% end %>
+    </div>
   </div>
   <div class="col-md-3">
     <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
