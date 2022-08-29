@@ -1,0 +1,9 @@
+fr:
+  extranet:
+    experiences:
+      new: Ajouter une expérience
+    account: 
+      my: Mon compte
+      edit: Modifier
+      updated: Mise à jour effectuée
+      logout: Déconnexion

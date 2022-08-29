@@ -31,4 +31,9 @@ class University::Person::Experience < ApplicationRecord
   belongs_to :organization, class_name: "University::Organization"
 
   scope :ordered, -> { order(from_year: :desc)}
+
+  def to_s
+    persisted?  ? "#{description}"
+                : self.class.human_attribute_name('new')
+  end
 end

@@ -73,6 +73,7 @@ en:
         organization: Organization
         from_year: Start year
         to_year: End year
+        new: Add experience
       university/person/involvement:
         description: Mission (in this context)
         person: Person
@@ -141,6 +142,11 @@ en:
         linkedin: "Example: https://www.linkedin.com/in/osuny"
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
+      university_person_experience:
+        organization: "Choose the organization if it exists, otherwise create it with the button below"
+        description: "Ex: Project manager, Communication assistant, Journalist..."
+        from_year: "In charge since..."
+        to_year: "Leave blank if you are still in charge"
     include_blanks:
       defaults:
         organization: Select organization

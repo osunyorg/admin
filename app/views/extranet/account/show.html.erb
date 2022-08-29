@@ -2,12 +2,31 @@
 
 <%= render 'extranet/persons/header', person: @person unless @person.nil? %>
 
-<%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary' %>
-
 <div class="row">
   <div class="col-md-9">
+    <div class="biography">
+      <p><%= @person.biography %></p>
+    </div>
+    <div class="experiences">
+      <%= link_to University::Person::Experience.human_attribute_name('new'),
+                  new_experience_path,
+                  class: 'btn btn-sm btn-secondary float-end mb-4' %>
+      <p class="mb-4">Parcours professionel</p>
+      <br>
+      <% if @person.experiences.any? %>
+        <ul>
+          <% @person.experiences.ordered.each do |experience| %>
+            <%= render 'extranet/experiences/experience', experience: experience, edit: true %>
+          <% end %>
+        </ul>
+        <% end %>
+    </div>
   </div>
   <div class="col-md-3">
+    <div class="mb-4">
+      <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary' %>
+      <%= link_to t('extranet.account.logout'), destroy_user_session_path, method: :delete, class: 'btn text-danger' %>
+    </div>
     <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
   </div>
 </div>
