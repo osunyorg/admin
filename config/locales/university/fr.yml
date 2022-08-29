@@ -143,6 +143,11 @@ fr:
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
+      university_person_experience:
+        organization: "Choisissez l'organisation si elle existe. Si elle n'existe pas encore, créez-là ci-dessous."
+        description: "Ex: Chargée de projet, Assistant communication, Journaliste..."
+        from_year: "En poste depuis..."
+        to_year: "Si vous êtes toujours à ce poste, laissez vide"
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation

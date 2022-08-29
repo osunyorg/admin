@@ -1,7 +1,20 @@
 <%= simple_form_for experience, url: experience.persisted? ? experience_path(experience) : experiences_path do |f| %>
-  <%= f.association :organization %>
-  <%= f.input :description %>
-  <%= f.input :from_year %>
-  <%= f.input :to_year %>
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :description, as: :string %>
+      <div class="row">
+        <div class="col-6">
+          <%= f.input :from_year %>
+        </div>
+        <div class="col-6">
+          <%= f.input :to_year %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <%= f.association :organization, include_blank: false %>
+      <%= link_to 'Créer une nouvelle organisation', '', class: 'btn btn-sm btn-secondary mb-4' %>
+    </div>
+  </div>
   <%= submit f %>
 <% end %>
