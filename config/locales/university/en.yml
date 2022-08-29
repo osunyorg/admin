@@ -73,6 +73,7 @@ en:
         organization: Organization
         from_year: Start year
         to_year: End year
+        new: Add experience
       university/person/involvement:
         description: Mission (in this context)
         person: Person

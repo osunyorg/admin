@@ -70,8 +70,10 @@ fr:
         zipcode: Code postal
       university/person/experience:
         description: Description
-        organization: Organisation
+        edit: Modifier l'expérience
         from_year: Année de début
+        new: Ajouter une expérience
+        organization: Organisation
         to_year: Année de fin
       university/person/involvement:
         description: Mission (dans ce contexte)

@@ -12,7 +12,7 @@
         <p class="mb-4">Parcours professionel</p>
         <ul>
           <% @person.experiences.ordered.each do |experience| %>
-            <%= render 'extranet/persons/experience', experience: experience %>
+            <%= render 'extranet/experiences/experience', experience: experience %>
           <% end %>
         </ul>
       </div>

@@ -8,7 +8,9 @@ edit ||= false
       <%= "#{experience.from_year} —" if experience.from_year %>
       <%= experience.to_year || t('today') %>
     </p>
-    <%= link_to 'Modifier cette expérience', '', class: 'btn btn-sm btn-primary mt-2' if edit %>
+    <%= link_to University::Person::Experience.human_attribute_name('edit'),
+                edit_experience_path(experience),
+                class: 'btn btn-sm btn-primary mt-2' if edit %>
   </div>
   <div>
     <% if experience.organization.present? %>

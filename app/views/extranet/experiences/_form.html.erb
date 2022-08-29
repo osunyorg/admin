@@ -1,0 +1,7 @@
+<%= simple_form_for experience, url: experience.persisted? ? experience_path(experience) : experiences_path do |f| %>
+  <%= f.association :organization %>
+  <%= f.input :description %>
+  <%= f.input :from_year %>
+  <%= f.input :to_year %>
+  <%= submit f %>
+<% end %>

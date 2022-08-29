@@ -12,11 +12,13 @@
     </div>
     <div class="experiences">
       <p class="mb-4">Parcours professionel</p>
-      <%= link_to 'Ajouter une expérience', '', class: 'btn btn-sm btn-primary mb-4' %>
+      <%= link_to University::Person::Experience.human_attribute_name('new'),
+                  new_experience_path,
+                  class: 'btn btn-sm btn-primary mb-4' %>
       <% if @person.experiences.any? %>
         <ul>
           <% @person.experiences.ordered.each do |experience| %>
-            <%= render 'extranet/persons/experience', experience: experience, edit: true %>
+            <%= render 'extranet/experiences/experience', experience: experience, edit: true %>
           <% end %>
         </ul>
         <% end %>

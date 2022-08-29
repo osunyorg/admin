@@ -162,12 +162,6 @@ fr:
         finished: Traité
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
-  extranet:
-    account: 
-      my: Mon compte
-      edit: Modifier
-      updated: Mise à jour effectuée
-      logout: Déconnexion
   false: Non
   featured_image:
     title: Image
