@@ -8,7 +8,7 @@ $(function () {
         toolbar: [
             ['font', ['bold', 'italic']],
             ['position', ['superscript', 'subscript']],
-            ['insert', ['link']],
+            ['insert', ['link', 'unlink']],
             ['view', ['codeview']]
         ],
         followingToolbar: true,
@@ -20,7 +20,7 @@ $(function () {
             ['font', ['bold', 'italic']],
             ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
-            ['insert', ['link']],
+            ['insert', ['link', 'unlink']],
             ['view', ['codeview']]
         ],
         followingToolbar: true,
@@ -40,7 +40,7 @@ $(function () {
             ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
             ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
+            ['insert', ['link', 'unlink', 'picture', 'video']],
             ['view', ['codeview']]
         ],
         styleTags: [
