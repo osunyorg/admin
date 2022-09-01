@@ -1,10 +1,14 @@
-<h2>
+<h4>
   <% if resource.direct_otp %>
-    <%= t('devise.two_factor_authentication.enter_code_direct_otp') %>
+    <% if resource.direct_otp_delivery_method == 'mobile_phone' %>
+      <%= t('devise.two_factor_authentication.enter_code_direct_otp_mobile_phone', phone: resource.mobile_phone) %>
+    <% else %>
+    <%= t('devise.two_factor_authentication.enter_code_direct_otp_email', mail: resource.email) %>
+    <% end %>
   <% else %>
     <%= t('devise.two_factor_authentication.enter_code_totp') %>
   <% end %>
-</h2>
+</h4>
 
 <%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put, class: 'my-3' }) do |f| %>
   <div class="row">
@@ -38,7 +42,7 @@
                   method: :delete,
                   class: "btn btn-danger float-end" %>
       <%= f.button  :submit,
-                    t('validate'),
+                    t('devise.two_factor_authentication.validate'),
                     class: "btn btn-primary" %>
     </div>
   </div>

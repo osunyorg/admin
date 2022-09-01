@@ -143,7 +143,8 @@ en:
       admin_unlock: Unlock it now!
       attempt_failed: "Invalid Code"
       code_has_been_sent: "Your authentication code has been sent."
-      enter_code_direct_otp: "Enter the code that was sent to you"
+      enter_code_direct_otp_email: "Enter the code that was sent to you on your email %{mail}"
+      enter_code_direct_otp_mobile_phone: "Enter the code that was sent to you on your mobile phone %{phone}"
       enter_code_totp: "Enter the code from your authentication application"
       max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
       resend_code: "Resend Code"

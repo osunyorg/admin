@@ -9,6 +9,7 @@
 #  current_sign_in_at            :datetime
 #  current_sign_in_ip            :string
 #  direct_otp                    :string
+#  direct_otp_delivery_method    :string
 #  direct_otp_sent_at            :datetime
 #  email                         :string           default(""), not null, indexed => [university_id]
 #  encrypted_otp_secret_key      :string           indexed
