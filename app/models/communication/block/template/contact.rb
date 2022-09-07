@@ -1,5 +1,6 @@
 class Communication::Block::Template::Contact < Communication::Block::Template::Base
 
+  has_component :description, :rich_text
   has_component :name, :string
   has_component :address, :text
   has_component :zipcode, :string

@@ -210,6 +210,9 @@ fr:
               country:
                 label: Pays
                 placeholder: Entrer le nom du pays
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 title: 
                   label: Jour

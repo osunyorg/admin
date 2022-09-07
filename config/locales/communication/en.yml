@@ -210,6 +210,9 @@ en:
               country:
                 label: Country
                 placeholder: Enter the country
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 title: 
                   label: Day
