@@ -2,29 +2,15 @@
 blob = component.blob
 return unless blob
 %>
-<%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1' %>
 
-{{- $position := .position -}}
-{{- $title := .title -}}
-{{- with .data -}}
-  {{- $buttons := and .button.text .button_secondary.text -}}
-  <section class="block-image{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
-    <div class="container">
-      <div class="block-content">
-
-            <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1' %>
-            <figcaption>
-              {{- if $title }}
-                <p>{{ partial "PrepareHTML" $title }}</p>
-              {{ end -}}
-              {{- if partial "PrepareHTML" .credit }}
-                <p><small>{{ partial "PrepareHTML" .credit }}</small></p>
-              {{ end -}}
-            </figcaption>
-          </figure>
-        {{- end -}}
-
-      </div>
+<section class="block-image">
+  <div class="container">
+    <div class="block-content">
+          <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1' %>
+          <figcaption>
+            <%= component.template.credit if component.template.credit.present? %>
+          </figcaption>
+        </figure>
     </div>
-  </section>
-{{- end -}}
+  </div>
+</section>
