@@ -57,7 +57,7 @@ fr:
         phone_personal: Téléphone personnel
         phone_professional: Téléphone professionnel
         picture: Photo de profil
-        research_journal_articles: Articles
+        research_journal_papers: Papiers
         researcher: Chercheur·se
         roles: Rôles
         slug: Slug
@@ -69,7 +69,11 @@ fr:
         user: Utilisateur
         zipcode: Code postal
       university/person/experience:
+        description: Description
+        edit: Modifier l'expérience
         from_year: Année de début
+        new: Ajouter une expérience
+        organization: Organisation
         to_year: Année de fin
       university/person/involvement:
         description: Mission (dans ce contexte)
@@ -134,11 +138,16 @@ fr:
         is_administration: "Remplit des missions administratives."
         is_alumnus: "Étudie ou a étudié dans l'établissement."
         is_author: "Écrit des articles pour les sites."
-        is_researcher: "Écrit des articles dans des revues scientifiques."
+        is_researcher: "Écrit des papiers dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
+      university_person_experience:
+        organization: "Choisissez l'organisation si elle existe. Si elle n'existe pas encore, créez-là ci-dessous."
+        description: "Ex: Chargée de projet, Assistant communication, Journaliste..."
+        from_year: "En poste depuis..."
+        to_year: "Si vous êtes toujours à ce poste, laissez vide"
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation
@@ -170,8 +179,8 @@ fr:
     person:
       administrator_roles: Rôles administratifs
       experience:
-        no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste,<br>vous pouvez la <a href=\"%{url}\">créer</a>"
-        no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste,<br>il faut demander à la créer"
+        no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste, vous pouvez la <a href=\"%{url}\">créer</a>"
+        no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste, il faut demander à la créer"
         period: Période
       taught_programs: Formations enseignées
     sso: SSO

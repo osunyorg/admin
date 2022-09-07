@@ -31,30 +31,11 @@ class Communication::Website::GitFile < ApplicationRecord
     object.before_git_sync
     git_file = where(website: website, about: object).first_or_create
     git_file.will_be_destroyed = destroy
+    # It is very important to go through this specific instance of the website, 
+    # and not through each git_file.website, which would be different instances.
+    # Otherwise, we get 1 instance of git_repository per git_file, 
+    # and it causes a huge amount of useless queries.
     website.git_repository.add_git_file git_file
-  end
-
-  def should_create?
-    !should_destroy? &&
-    !exists_on_git? &&
-    (
-      !synchronized_with_git? ||
-      previous_path.nil? ||
-      previous_sha.nil?
-    )
-  end
-
-  def should_update?
-    !should_destroy? &&
-    (
-      different_path? ||
-      different_sha?
-    )
-  end
-
-  def should_destroy?
-    will_be_destroyed ||
-    path.nil?
   end
 
   def path
@@ -86,32 +67,5 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def git_sha
     @git_sha ||= git_sha_for(path)
-  end
-
-  # Based on content, with the provider's algorithm (sha1 or sha256)
-  def computed_sha
-    @computed_sha ||= website.git_repository.computed_sha to_s
-  end
-
-  def exists_on_git?
-    previous_git_sha.present? || # The file exists where it was last time
-    (
-      previous_path.nil? && # Never saved in the database
-      git_sha.present?      # but it exists in the git repo
-    )
-  end
-
-  def synchronized_with_git?
-    exists_on_git? && # File exists
-    previous_path == path && # at the same place
-    previous_git_sha == previous_sha # with the same content
-  end
-
-  def different_path?
-    previous_path != path
-  end
-
-  def different_sha?
-    previous_sha != computed_sha
   end
 end

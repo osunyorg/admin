@@ -16,5 +16,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :organizations,
                   University::Organization.model_name.human(count: 2),
                   university_organizations_path
+    primary.item  :account,
+                  t('extranet.account.my'),
+                  account_path
   end
 end

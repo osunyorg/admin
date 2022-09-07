@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: research_journal_articles
+# Table name: research_journal_papers
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
@@ -22,10 +22,10 @@
 #
 # Indexes
 #
-#  index_research_journal_articles_on_research_journal_id         (research_journal_id)
-#  index_research_journal_articles_on_research_journal_volume_id  (research_journal_volume_id)
-#  index_research_journal_articles_on_university_id               (university_id)
-#  index_research_journal_articles_on_updated_by_id               (updated_by_id)
+#  index_research_journal_papers_on_research_journal_id         (research_journal_id)
+#  index_research_journal_papers_on_research_journal_volume_id  (research_journal_volume_id)
+#  index_research_journal_papers_on_university_id               (university_id)
+#  index_research_journal_papers_on_updated_by_id               (updated_by_id)
 #
 # Foreign Keys
 #
@@ -34,7 +34,7 @@
 #  fk_rails_2713063b85  (updated_by_id => users.id)
 #  fk_rails_935541e014  (university_id => universities.id)
 #
-class Research::Journal::Article < ApplicationRecord
+class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
   include WithUniversity
   include WithGit
@@ -50,7 +50,7 @@ class Research::Journal::Article < ApplicationRecord
   belongs_to :updated_by, class_name: 'User'
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
-                          join_table: :research_journal_articles_researchers,
+                          join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
   has_many :websites, -> { distinct }, through: :journal
 
@@ -59,15 +59,20 @@ class Research::Journal::Article < ApplicationRecord
   before_validation :set_published_at, if: :published_changed?
 
   scope :published, -> { where(published: true) }
+  scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
 
   def git_path(website)
-    "content/articles/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
+    "content/papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
+  end
+
+  def template_static
+    "admin/research/journals/papers/static"
   end
 
   def git_dependencies(website)
     [self] +
     active_storage_blobs +
-    other_articles_in_the_volume +
+    other_papers_in_the_volume +
     people +
     people.map(&:active_storage_blobs).flatten +
     people.map(&:researcher) +
@@ -84,13 +89,13 @@ class Research::Journal::Article < ApplicationRecord
 
   protected
 
-  def other_articles_in_the_volume
+  def other_papers_in_the_volume
     return [] if volume.nil?
-    volume.articles.where.not(id: self)
+    volume.papers.where.not(id: self)
   end
 
   def last_ordered_element
-    Research::Journal::Article.where(
+    Research::Journal::Paper.where(
       university_id: university_id,
       research_journal_volume_id: research_journal_volume_id
     ).ordered.last

@@ -80,11 +80,11 @@ module Communication::Website::WithMenuItems
     has_research_volumes?
   end
 
-  def menu_item_kind_articles?
-    has_research_articles?
+  def menu_item_kind_papers?
+    has_research_papers?
   end
 
-  def menu_item_kind_article?
-    has_research_articles?
+  def menu_item_kind_paper?
+    has_research_papers?
   end
 end

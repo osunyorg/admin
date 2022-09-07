@@ -21,7 +21,7 @@ module Aboutable
     raise NotImplementedError
   end
 
-  def has_research_articles?
+  def has_research_papers?
     raise NotImplementedError
   end
 

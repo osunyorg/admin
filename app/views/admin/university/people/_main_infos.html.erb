@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 col-xl-9">
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
@@ -61,8 +61,9 @@
         </div>
       </div>
     <% end %>
+    <%= render 'admin/communication/blocks/list', about: person %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 col-xl-3">
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>

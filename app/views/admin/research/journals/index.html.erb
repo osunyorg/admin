@@ -7,7 +7,7 @@
     <tr>
       <th><%= Research::Journal.human_attribute_name('title') %></th>
       <th><%= Research::Journal::Volume.model_name.human(count: 2) %></th>
-      <th><%= Research::Journal::Article.model_name.human(count: 2) %></th>
+      <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
       <th></th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to journal, [:admin, journal] %></td>
         <td><%= link_to "#{journal.volumes.count}", admin_research_journal_volumes_path(journal_id: journal) %></td>
-        <td><%= link_to "#{journal.articles.count}", admin_research_journal_articles_path(journal_id: journal) %></td>
+        <td><%= link_to "#{journal.papers.count}", admin_research_journal_papers_path(journal_id: journal) %></td>
         <td class="text-end">
           <div class="btn-group" role="group">
             <%= edit_link journal %>

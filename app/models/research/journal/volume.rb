@@ -39,9 +39,9 @@ class Research::Journal::Volume < ApplicationRecord
   has_summernote :text
 
   belongs_to :journal, foreign_key: :research_journal_id
-  has_many :articles, foreign_key: :research_journal_volume_id, dependent: :nullify
+  has_many :papers, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal
-  has_many :people, -> { distinct }, through: :articles
+  has_many :people, -> { distinct }, through: :papers
 
   before_validation :set_published_at, if: :published_changed?
 
@@ -56,9 +56,14 @@ class Research::Journal::Volume < ApplicationRecord
     "content/volumes/#{published_at.year}/#{slug}/_index.html" if published_at
   end
 
+  def template_static
+    "admin/research/journals/volumes/static"
+  end
+
+
   def git_dependencies(website)
     [self] +
-    articles +
+    papers +
     people +
     people.map(&:active_storage_blobs).flatten +
     people.map(&:researcher) +

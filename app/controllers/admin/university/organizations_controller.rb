@@ -15,6 +15,12 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     breadcrumb
   end
 
+  def static
+    @about = @organization
+    @website = @organization.websites&.first
+    render layout: false
+  end
+
   def new
     breadcrumb
   end

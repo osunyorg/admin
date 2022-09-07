@@ -7,7 +7,6 @@
                                     : 'Osuny' %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-  	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <script>
     // Avoid opening menu on load
     </script>
@@ -28,12 +27,7 @@
       <% end %>
     </div>
     <div class="wrapper">
-      <% if current_user.can_display_global_menu? %>
-        <%= render 'admin/application/nav' %>
-      <% else %>
-        <%# we need a "collapsed" sidebar to display the footer full width %>
-        <div class="sidebar collapsed"></div>
-      <% end %>
+      <%= render 'admin/application/nav' %>
       <%= render 'admin/application/footer' %>
       <div class="main">
         <%= render 'admin/application/top' %>

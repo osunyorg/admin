@@ -38,8 +38,8 @@ module User::WithAuthentication
       true
     end
 
-    def send_two_factor_authentication_code(code, options = {})
-      if mobile_phone.blank? || options.dig(:delivery_method) == :email
+    def send_two_factor_authentication_code(code, delivery_method)
+      if mobile_phone.blank? || delivery_method == :email
         send_devise_notification(:two_factor_authentication_code, code, {})
       else
         Sendinblue::SmsService.send_mfa_code(self, code)

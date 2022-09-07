@@ -463,6 +463,10 @@ fr:
               url:
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo
+                hint: >
+                  Ex: 
+                  https://vimeo.com/732180675,
+                  https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
                 label: Titre de la vidéo
                 placeholder: Entrer le titre de la vidéo
@@ -555,11 +559,11 @@ fr:
             description_short: ''
             slug: politique-de-confidentialite
             title: Politique de confidentialité
-          research_articles:
-            admin_description: liste des articles
-            description_short: Liste des articles
-            slug: articles
-            title: Articles
+          research_papers:
+            admin_description: liste des papiers
+            description_short: Liste des papiers
+            slug: papiers
+            title: Papiers
           research_volumes:
             admin_description: liste des volumes
             description_short: Liste des volumes
@@ -624,8 +628,8 @@ fr:
               page: Page spécifique
               program: Formation spécifique
               programs: Liste des formations
-              article: Article spécifique
-              articles: Liste des articles
+              paper: Papier spécifique
+              papers: Liste des papiers
               volume: Volume spécifique
               volumes: Liste des volumes
               researchers: Équipe de recherche

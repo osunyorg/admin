@@ -146,7 +146,8 @@ fr:
       admin_unlock: Le débloquer !
       attempt_failed: "Code invalide"
       code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
-      enter_code_direct_otp: "Entrez le code qui vous a été envoyé"
+      enter_code_direct_otp_email: "Entrez le code qui vous a été envoyé sur votre mail %{mail}"
+      enter_code_direct_otp_mobile_phone: "Entrez le code qui vous a été envoyé sur votre mobile %{phone}"
       enter_code_totp: "Entrez le code de votre application d'authentification"
       max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
       resend_code: "Renvoyer le code"
@@ -236,7 +237,7 @@ fr:
     title: Prévisualisation
     mobile: Mobile
     tablet: Tablette
-    desktop: Ordinateur de bureau
+    desktop: Ordinateur
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://osuny.org/politique-de-confidentialite
   properties:

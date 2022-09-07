@@ -9,7 +9,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def update_file(path, previous_path, content)
-    file = find_in_tree previous_path
+    file = tree_item_at_path(previous_path)
     return if file.nil?
     batch << {
       path: previous_path,
@@ -26,7 +26,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def destroy_file(path)
-    file = find_in_tree path
+    file = tree_item_at_path(path)
     return if file.nil?
     batch << {
       path: path,
@@ -41,6 +41,10 @@ class Git::Providers::Github < Git::Providers::Abstract
     new_tree = client.create_tree repository, batch, base_tree: tree[:sha]
     commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
     client.update_branch repository, default_branch, commit[:sha]
+    # The repo changed, invalidate the tree
+    @tree = nil
+    @tree_items_by_path = nil
+    #
     true
   end
 
@@ -51,13 +55,17 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def git_sha(path)
+    return if path.nil?
+    # Try to find in stored tree to avoid multiple queries
+    return tree_item_at_path(path)&.dig(:sha)
     begin
+      # The fast way, with no query, does not work.
+      # Let's query the API.
       content = client.content repository, path: path
-      sha = content[:sha]
+      return content[:sha]
     rescue
-      sha = nil
     end
-    sha
+    nil
   end
 
   protected
@@ -74,14 +82,27 @@ class Git::Providers::Github < Git::Providers::Abstract
     @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
   end
 
+  def tree_item_at_path(path)
+    tree_items_by_path[path] if tree_items_by_path.has_key? path
+  end
+
+  def tree_items_by_path
+    unless @tree_items_by_path
+      @tree_items_by_path = {}
+      tree[:tree].each do |hash|
+        path = hash[:path]
+        @tree_items_by_path[path] = {
+          mode: hash[:mode],
+          type: hash[:type],
+          sha: hash[:sha]
+        }
+      end
+    end
+    @tree_items_by_path
+  end
+
   def tree
     @tree ||= client.tree repository, branch_sha, recursive: true
   end
 
-  def find_in_tree(path)
-    tree[:tree].each do |file|
-      return file if path == file[:path]
-    end
-    nil
-  end
 end

@@ -6,8 +6,10 @@ class Git::Repository
   end
 
   def add_git_file(git_file)
+    puts "Adding #{git_file.path}"
     if git_files.empty?
-      action = git_file.should_destroy? ? "Destroy" : "Save"
+      analyzer.git_file = git_file
+      action = analyzer.should_destroy? ? "Destroy" : "Save"
       @commit_message = "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
     end
     git_files << git_file
@@ -15,10 +17,12 @@ class Git::Repository
 
   def sync!
     return if git_files.empty?
+    puts "Start sync"
     sync_git_files
     mark_as_synced if provider.push(commit_message)
   end
 
+  # Based on content, with the provider's algorithm (sha1 or sha256)
   def computed_sha(string)
     provider.computed_sha(string)
   end
@@ -47,22 +51,40 @@ class Git::Repository
     @git_files ||= []
   end
 
+  def analyzer
+    @analyzer ||= Git::Analyzer.new self
+  end
+
   def sync_git_files
-    git_files.each do |file|
-      if file.should_create?
-        provider.create_file file.path, file.to_s
-      elsif file.should_update?
-        provider.update_file file.path, file.previous_path, file.to_s
-      elsif file.should_destroy?
-        provider.destroy_file file.previous_path
+    git_files.each do |git_file|
+      analyzer.git_file = git_file
+      if analyzer.should_create?
+        puts "Syncing - Creating #{git_file.path}"
+        provider.create_file git_file.path, git_file.to_s
+      elsif analyzer.should_update?
+        puts "Syncing - Updating #{git_file.path}"
+        provider.update_file git_file.path, git_file.previous_path, git_file.to_s
+      elsif analyzer.should_destroy?
+        puts "Syncing - Destroying #{git_file.previous_path}"
+        provider.destroy_file git_file.previous_path
+      else
+        puts "Syncing - Nothing to do with #{git_file.path}"
       end
     end
   end
 
   def mark_as_synced
+    puts "Marking as synced"
     git_files.each do |git_file|
-      path = git_file.path
-      sha = provider.git_sha path
+      analyzer.git_file = git_file
+      if analyzer.should_destroy?
+        path = nil
+        sha = nil
+      else
+        path = git_file.path
+        sha = computed_sha(git_file.to_s)
+      end
+      puts "Marking #{path}"
       git_file.update previous_path: path,
                       previous_sha: sha
     end

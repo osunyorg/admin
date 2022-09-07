@@ -10,6 +10,9 @@ class Wordpress
   end
 
   def self.clean_html(html)
+    # invalid byte sequence in UTF-8
+    # https://stackoverflow.com/questions/32826781/invalid-byte-sequence-in-utf-8-when-sanitizing-wordpress-export-content
+    html = html.force_encoding('UTF-8').scrub
     # Relaxed config : https://github.com/rgrove/sanitize/blob/main/lib/sanitize/config/relaxed.rb
     # iframe attributes from MDN : https://developer.mozilla.org/fr/docs/Web/HTML/Element/iframe
     fragment = Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RELAXED,

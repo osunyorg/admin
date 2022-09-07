@@ -7,9 +7,9 @@ en:
       research/journal:
         one: Journal
         other: Journals
-      research/journal/article:
-        one: Article
-        other: Articles
+      research/journal/paper:
+        one: Paper
+        other: Papers
       research/journal/volume:
         one: Volume
         other: Volumes
@@ -26,11 +26,11 @@ en:
       research/journal:
         issn: ISSN
         title: Title
-      research/journal/article:
+      research/journal/paper:
         abstract: Abstract
         description: Meta Description
         keywords: Keywords
-        pdf: Article PDF
+        pdf: PDF
         published: Published?
         published_at: Published at
         references: References
@@ -69,13 +69,13 @@ en:
         title: Title
   research:
     manage_researchers: Managege researchers
-    number_of_articles: Number of articles
+    number_of_papers: Number of papers
     researchers:
       one: Researcher
       other: Researchers
   simple_form:
     hints:
-      research_journal_article:
+      research_journal_paper:
         description: If this field is empty the main text's begining will be used.
       research_journal_volume:
         cover: JPG or PNG file

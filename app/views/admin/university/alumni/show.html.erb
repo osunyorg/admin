@@ -22,23 +22,36 @@
     <div class="card-header">
       <h2 class="card-title mb-0 h5"><%= University::Person::Experience.model_name.human(count: @alumnus.experiences.count) %></h2>
     </div>
-    <div class="card-body">
-      <ul class="list-unstyled">
-      <% @alumnus.experiences.ordered.each do |experience| %>
-        <% organization = experience.organization %>
-        <li>
-          <%= link_to_if can?(:read, organization), organization, [:admin, organization] %>
-          <%= "(#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')})" if experience.from_year %>
-        </li>
-      <% end %>
-      </ul>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= University::Person::Experience.human_attribute_name('description') %></th>
+          <th><%= University::Person::Experience.human_attribute_name('organization') %></th>
+          <th><%= University::Person::Experience.human_attribute_name('from_year') %></th>
+          <th><%= University::Person::Experience.human_attribute_name('to_year') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @alumnus.experiences.ordered.each do |experience| %>
+          <% organization = experience.organization %>
+          <tr>
+            <td><%= experience.description %></td>
+            <td><%= link_to_if can?(:read, organization), organization, [:admin, organization] %></td>
+            <td><%= experience.from_year %></td>
+            <td><%= experience.to_year %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 <% end %>
 
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'), cohorts_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
-  <%= link_to t('university.manage_experiences'), experiences_admin_university_alumnus_path(@alumnus), class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_cohorts'), 
+              cohorts_admin_university_alumnus_path(@alumnus),
+              class: button_classes if can?(:update, @alumnus) %>
+  <%= link_to t('university.manage_experiences'), experiences_admin_university_alumnus_path(@alumnus), 
+              class: button_classes if can?(:update, @alumnus) %>
 <% end %>

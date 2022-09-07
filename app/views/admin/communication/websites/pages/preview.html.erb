@@ -1,4 +1,3 @@
-<div class="container">
-    <%= @page.text.to_s %>
-</div>
+<% content_for :title, @page.title %>
+<% content_for :image, kamifusen_tag(@page.best_featured_image) if @page.best_featured_image.attached? %>
 <%= render 'admin/communication/blocks/preview', about: @page %>

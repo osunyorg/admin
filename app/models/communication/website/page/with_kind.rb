@@ -8,7 +8,7 @@ module Communication::Website::Page::WithKind
       communication_posts: 10,
       education_programs: 20,
       education_diplomas: 21,
-      research_articles: 30,
+      research_papers: 30,
       research_volumes: 32,
       legal_terms: 80,
         sitemap: 81,
@@ -26,7 +26,7 @@ module Communication::Website::Page::WithKind
       'communication_posts',
       'education_programs',
       'education_diplomas',
-      'research_articles',
+      'research_papers',
       'research_volumes',
       'organizations',
       'persons',
@@ -44,6 +44,10 @@ module Communication::Website::Page::WithKind
 
     def is_regular_page?
       !is_special_page?
+    end
+
+    def has_special_git_path?
+      is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
     end
 
   end

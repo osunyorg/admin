@@ -3,11 +3,12 @@ $(function () {
     'use strict';
 
     var configs = [];
+
     configs['mini'] = {
         toolbar: [
             ['font', ['bold', 'italic']],
             ['position', ['superscript', 'subscript']],
-            ['insert', ['link']],
+            ['insert', ['link', 'unlink']],
             ['view', ['codeview']]
         ],
         followingToolbar: true,
@@ -19,14 +20,15 @@ $(function () {
             ['font', ['bold', 'italic']],
             ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
-            ['insert', ['link']],
+            ['insert', ['link', 'unlink']],
             ['view', ['codeview']]
         ],
         followingToolbar: true,
         disableDragAndDrop: true
     };
 
-    configs['default'] = {
+
+    configs['full'] = {
         popover: {
             image: [
                 ['remove', ['removeMedia']]
@@ -38,7 +40,7 @@ $(function () {
             ['position', ['superscript', 'subscript']],
             ['para', ['ul', 'ol']],
             ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
+            ['insert', ['link', 'unlink', 'picture', 'video']],
             ['view', ['codeview']]
         ],
         styleTags: [
@@ -68,16 +70,49 @@ $(function () {
         }
     };
 
+
+    configs['default'] = {
+        popover: {
+            image: [
+                ['remove', ['removeMedia']]
+            ]
+        },
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic']],
+            ['position', ['superscript', 'subscript']],
+            ['para', ['ul', 'ol']],
+            ['view', ['codeview']]
+        ],
+        styleTags: [
+            'p',
+            'blockquote',
+            'pre',
+            'h2',
+            'h3',
+            'h4'
+        ],
+        followingToolbar: true,
+        disableDragAndDrop: true
+    };
+
     $.extend($.summernote.lang['en-US'].image, {
         dragImageHere: 'Drag file here',
         dropImage: 'Drop file'
     });
 
     $('[data-provider="summernote"]').each(function () {
-        var config = $(this).attr('data-summernote-config');
+        var config = $(this).attr('data-summernote-config'),
+            options = {};
         config = config || 'default';
-        $(this).summernote(configs[config]);
+        options = configs[config];
+        $(this).summernote(options);
     });
+
+    // https://github.com/summernote/summernote/issues/4170
+    $("button[data-toggle='dropdown']").each(function (index) { 
+        $(this).removeAttr("data-toggle").attr("data-bs-toggle", "dropdown"); 
+    }); 
 
     window.SUMMERNOTE_CONFIGS = configs;
 });

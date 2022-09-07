@@ -36,6 +36,7 @@ class University::Organization < ApplicationRecord
   include WithBlobs
   include WithUniversity
   include WithSlug
+  include WithBlocks
 
   has_many :experiences,
            class_name: 'University::Person::Experience'
@@ -77,6 +78,7 @@ class University::Organization < ApplicationRecord
     if for_website?(website)
       dependencies << self
       dependencies.concat active_storage_blobs
+      dependencies.concat git_block_dependencies
     end
     dependencies += website.menus.to_a
     dependencies += dependencies_through_blocks(website) if in_block_dependencies?(website)

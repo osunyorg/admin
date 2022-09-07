@@ -6,9 +6,10 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def reorder
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      block = current_university.communication_blocks.find(id)
-      block.update position: index + 1
+      @block = current_university.communication_blocks.find(id)
+      @block.update position: index + 1
     end
+    @block.about.sync_with_git
   end
 
   def new
@@ -29,6 +30,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def create
     @block.university = current_university
     if @block.save
+      # No need to sync as content is empty
       redirect_to [:edit, :admin, @block],
                   notice: t('admin.successfully_created_html', model: @block.to_s)
     else
@@ -39,6 +41,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def update
     if @block.update(block_params)
+      @block.about.sync_with_git
       redirect_to about_path,
                   notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
@@ -56,6 +59,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def destroy
     path = about_path
     @block.destroy
+    @block.about.sync_with_git
     redirect_to path,
                 notice: t('admin.successfully_destroyed_html', model: @block.to_s)
   end

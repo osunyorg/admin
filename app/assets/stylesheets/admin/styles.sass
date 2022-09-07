@@ -27,14 +27,20 @@ h1
     color: white
 
 #topbar
-    padding-left: 2.5rem
-    padding-right: 2.5rem
+    padding-left: $grid-gutter-width
+    padding-right: $grid-gutter-width
+    @include media-breakpoint-up(lg)
+        padding-left: 2.5rem
+        padding-right: 2.5rem
     .nav-link--last
         padding-right: 0
 
 .img-circle
     aspect-ratio: 1/1
     object-fit: cover
+    width: 100%
+
+.img-fill
     width: 100%
 
 .card-actions
@@ -47,3 +53,6 @@ h1
 
 .btn-light[target=_blank]::after
     filter: invert(0)
+
+.bg-grey
+    background-color: #DDDDDD !important

@@ -40,8 +40,9 @@ fr:
         contacts: Contacts
         continuing: Formation continue
         description: Meta Description
-        duration: Durée
         diploma: Diplôme
+        duration: Durée
+        downloadable_summary: Document de synthèse téléchargeable
         ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
@@ -59,6 +60,7 @@ fr:
         pricing: Tarifs
         published: Publiée ?
         registration: Modalités et délais d’accès
+        registration_url: Lien d'inscription (URL)
         roles: Rôles
         schools: Écoles proposant cette formation
         short_name: Nom abrégé

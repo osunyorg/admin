@@ -2,7 +2,7 @@ namespace :research do
   resources :researchers, only: [:index, :show]
   resources :journals do
     resources :volumes, controller: 'journals/volumes'
-    resources :articles, controller: 'journals/articles' do
+    resources :papers, controller: 'journals/papers' do
       collection do
         post :reorder
       end

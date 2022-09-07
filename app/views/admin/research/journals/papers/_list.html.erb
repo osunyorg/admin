@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Research::Journal::Paper.model_name.human %></th>
+      <th><%= Research::Journal::Paper.human_attribute_name('published_at') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% papers.each do |paper| %>
+      <tr>
+        <td>
+          <%= link_to paper,
+                      admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                      class: "#{'draft' unless paper.published?}" %>
+        </td>
+        <td><%= paper.published_at %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= link_to t('edit'),
+                        edit_admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                        class: button_classes %>
+            <%= link_to t('delete'),
+                        admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

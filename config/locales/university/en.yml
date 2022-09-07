@@ -57,7 +57,7 @@ en:
         phone_personal: Personal phone
         phone_professional: Professional phone
         picture: Profile picture
-        research_journal_articles: Articles
+        research_journal_papers: Papiers
         researcher: Researcher
         roles: Roles
         slug: Slug
@@ -69,8 +69,11 @@ en:
         user: User
         zipcode: Zipcode
       university/person/experience:
+        description: Description
+        organization: Organization
         from_year: Start year
         to_year: End year
+        new: Add experience
       university/person/involvement:
         description: Mission (in this context)
         person: Person
@@ -134,11 +137,16 @@ en:
         is_administration: "Fulfill administrative missions."
         is_alumnus: "Studies or studied in the school."
         is_author: "Writes posts for websites."
-        is_researcher: "Writes articles for journals."
+        is_researcher: "Writes papers for journals."
         is_teacher: "Teaches in Schools."
         linkedin: "Example: https://www.linkedin.com/in/osuny"
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
+      university_person_experience:
+        organization: "Choose the organization if it exists, otherwise create it with the button below"
+        description: "Ex: Project manager, Communication assistant, Journalist..."
+        from_year: "In charge since..."
+        to_year: "Leave blank if you are still in charge"
     include_blanks:
       defaults:
         organization: Select organization
@@ -170,8 +178,8 @@ en:
     person:
       administrator_roles: Administrator roles
       experience:
-        no_organization_hint_html: "If the organization is not in the list,<br>you can <a href=\"%{url}\">create it</a>"
-        no_organization_hint_no_access_html: "If the organization is not in the list,<br>you should ask to create it"
+        no_organization_hint_html: "If the organization is not in the list, you can <a href=\"%{url}\">create it</a>"
+        no_organization_hint_no_access_html: "If the organization is not in the list, you should ask to create it"
         period: Period
     taught_programs: Taught programs
     sso: SSO

@@ -31,9 +31,14 @@ namespace :education do
     member do
       get :children
       get :preview
+      get :static
     end
   end
   resources :academic_years
   resources :cohorts, only: [:index, :show]
-  resources :diplomas
+  resources :diplomas do
+    member do
+      get :static
+    end
+  end
 end

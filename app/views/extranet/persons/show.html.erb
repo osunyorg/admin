@@ -1,107 +1,24 @@
 <% content_for :title, @person %>
 
-<div class="row mb-5 top">
-  <div class="col-md-9">
-    <header>
-      <h1><%= @person.first_name %> <b><%= @person.last_name %></b></h1>
-    </header>
-  </div>
-  <div class="col-md-3">
-    <% if @person.picture.attached? %>
-      <%= kamifusen_tag @person.picture, width: 400, class: 'img-fluid' %>
-    <% else %>
-      <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
-    <% end %>
-  </div>
-</div>
+<%= render 'extranet/persons/header', person: @person %>
 
 <div class="row">
   <div class="col-md-9">
     <div class="biography">
-      <p><%= @person.biography %></p>
+      <p><%= @person&.biography %></p>
     </div>
-    <% if @person.experiences.any? %>
+    <% if @person&.experiences.any? %>
       <div class="experiences">
         <p class="mb-4">Parcours professionel</p>
         <ul>
           <% @person.experiences.ordered.each do |experience| %>
-            <li>
-              <div>
-                <p><b><%= experience.description %></b></p>
-                <p class="mb-0">
-                  <%= "#{experience.from_year} —" if experience.from_year %>
-                  <%= experience.to_year || t('today') %>
-                </p>
-              </div>
-              <div>
-                <% if experience.organization.present? %>
-                  <p><%= link_to experience.organization, experience.organization %></p>
-                  <% if experience.organization.url %>
-                    <p class="mb-0"><small><%= link_to experience.organization.url, experience.organization.url %></small></p>
-                  <% end %>
-                <% end %>
-              </div>
-              <div>
-                <% if experience.organization.present? %>
-                  <% if experience.organization.logo.attached? %>
-                      <%= link_to experience.organization do %>
-                        <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
-                      <% end %>
-                  <% end %>
-                <% end %>
-              </div>
-            </li>
+            <%= render 'extranet/experiences/experience', experience: experience %>
           <% end %>
         </ul>
       </div>
-      <% end %>
+    <% end %>
   </div>
   <div class="col-md-3">
-    <dl>
-      <% @person.cohorts.each do |cohort| %>
-        <dt><%= cohort.program %></dt>
-        <dd><%= link_to cohort.academic_year, cohort %></dd>
-      <% end %>
-      <% if @person.phone_mobile.present? %>
-        <dt><%= University::Person.human_attribute_name(:phone_mobile) %></dt>
-        <dd>
-          <a href="tel:<%= @person.phone_mobile %>" target="_blank" rel="noreferrer">
-            <%= @person.phone_mobile %>
-          </a>
-        </dd>
-      <% end %>
-      <% if @person.email.present? %>
-        <dt><%= University::Person.human_attribute_name(:email) %></dt>
-        <dd>
-          <a href="mailto:<%= @person.email %>" target="_blank" rel="noreferrer">
-            <%= @person.email %>
-          </a>
-        </dd>
-      <% end %>
-      <% if @person.url.present? %>
-        <dt><%= University::Person.human_attribute_name(:url) %></dt>
-        <dd>
-          <a href="<%= social_website_to_url @person.url %>" target="_blank" rel="noreferrer">
-            <%= social_website_to_s @person.url %>
-          </a>
-        </dd>
-      <% end %>
-      <% if @person.linkedin.present? %>
-        <dt><%= University::Person.human_attribute_name(:linkedin) %></dt>
-        <dd>
-          <a href="<%= social_linkedin_to_url @person.linkedin %>" target="_blank" rel="noreferrer">
-            <%= social_linkedin_to_s @person.linkedin %>
-          </a>
-        </dd>
-      <% end %>
-      <% if @person.twitter.present? %>
-        <dt><%= University::Person.human_attribute_name(:twitter) %></dt>
-        <dd>
-          <a href="<%= social_twitter_to_url @person.twitter %>" target="_blank" rel="noreferrer">
-            <%= social_twitter_to_s @person.twitter %>
-          </a>
-        </dd>
-      <% end %>
-    </dl>
+    <%= render 'extranet/persons/details', person: @person %>
   </div>
 </div>

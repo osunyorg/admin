@@ -1,4 +1,3 @@
-<div class="container">
-    <%= @post.text.to_s %>
-</div>
+<% content_for :title, @post.title %>
+<% content_for :image, kamifusen_tag(@post.featured_image) if @post.featured_image.attached? %>
 <%= render 'admin/communication/blocks/preview', about: @post %>

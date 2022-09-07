@@ -5,7 +5,12 @@ class Communication::Block::Template::Base
                   :layouts,
                   :element_class
 
-  attr_reader :block
+  attr_reader :block, :elements
+
+  delegate :university, to: :block
+  delegate :about, to: :block
+  delegate :template_kind, to: :block
+  alias :kind :template_kind
 
   def self.has_elements(element_class = nil)
     element_class = "#{self}::Element".constantize if element_class.nil?
@@ -116,16 +121,8 @@ class Communication::Block::Template::Base
     self.class.element_class.new block, data
   end
 
-  def elements
-    @elements
-  end
-
   def default_layout
     self.class.layouts&.first
-  end
-
-  def kind
-    block.template_kind
   end
 
   def allowed_for_about?
@@ -180,11 +177,7 @@ class Communication::Block::Template::Base
     end
   end
 
-  def university
-    block.university
-  end
-
   def website
-    block.about&.try(:website)
+    about&.try(:website)
   end
 end

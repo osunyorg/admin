@@ -84,7 +84,7 @@ class Education::School < ApplicationRecord
   # Aboutable methods #
   #####################
 
-  def has_research_articles?
+  def has_research_papers?
     false
   end
 

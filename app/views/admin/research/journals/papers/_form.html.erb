@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, article] do |f| %>
+<%= simple_form_for [:admin, paper] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -25,9 +25,9 @@
         <div class="card-body">
           <%= f.input :slug,
                       as: :string,
-                      input_html: article.persisted? ? {} : {
+                      input_html: paper.persisted? ? {} : {
                         class: 'js-slug-input',
-                        data: { source: '#research_journal_article_title' }
+                        data: { source: '#research_journal_paper_title' }
                       } %>
           <%= f.association :volume, collection: @journal.volumes, label: Research::Journal::Volume.model_name.human %>
           <%= f.input :published %>

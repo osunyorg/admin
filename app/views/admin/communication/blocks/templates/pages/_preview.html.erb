@@ -1,13 +1,12 @@
 <% if @block.data %>
   <% if @block.template.page %>
-    <h2 class="h5 mb-4"><%= @block.template.page.slug %></h2>
+    <%= @block.template.page.slug %>
   <% end %>
-  <% @block.template.selected_pages.each do |element| %>
-    <div class="card mb-4">
-      <div class="card-header">
-        <h3 class="card-title h5"><%= element %></h3>
-      </div>
-      <div class="card-body">
+
+  <div class="pages">
+    <% @block.template.selected_pages.each do |element| %>
+      <div>
+        <%= element %>
         <% if @block.template.show_image && element.featured_image.attached? %>
           <%= kamifusen_tag element.featured_image,
                             class: 'img-fluid mb-3' %>
@@ -16,6 +15,6 @@
           <p><%= element.description_short %></p>
         <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% end %>

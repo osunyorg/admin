@@ -6,7 +6,7 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
   def create
     @curator = Curator.new @website, current_user, curation_params[:url]
     if @curator.valid?
-      redirect_to [:edit, :admin, @curator.post],
+      redirect_to [:admin, @curator.post],
                   notice: t('admin.successfully_created_html', model: @curator.post.to_s)
     else
       breadcrumb

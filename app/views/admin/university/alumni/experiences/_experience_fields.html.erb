@@ -1,44 +1,47 @@
-<% include_id ||= false %>
+<%
+include_id ||= false
+hint = can?(:create, University::Organization) ?  t('university.person.experience.no_organization_hint_html', url: new_admin_university_organization_path) :
+                                                  t('university.person.experience.no_organization_hint_no_access_html')
+%>
 <div class="nested-fields">
   <div class="card mb-3">
     <div class="card-body">
-      <div class="row">
-        <div class="col-md-5">
-          <%= f.input        :university_id,
-                             as: :hidden,
-                             input_html: { value: current_university.id },
-                             wrapper: false %>
-          <%= f.association  :organization,
-                             collection: current_university.organizations.ordered,
-                             label: false,
-                             include_blank: t('simple_form.include_blanks.defaults.organization'),
-                             hint: can?(:create, University::Organization) ? t('university.person.experience.no_organization_hint_html', url: new_admin_university_organization_path) :
-                                                                             t('university.person.experience.no_organization_hint_no_access_html'),
-                             required: true,
-                             wrapper: false %>
+      <div class="d-flex">
+        <div class="row flex-fill">
+          <div class="col-md-6 col-xxl-4">
+            <%= f.input       :university_id, 
+                              as: :hidden, 
+                              input_html: { value: current_university.id },
+                              wrapper: false %>
+            <%= f.association :organization,
+                              collection: current_university.organizations.ordered,
+                              include_blank: t('simple_form.include_blanks.defaults.organization'),
+                              hint: hint,
+                              required: true,
+                              wrapper: false %>
+          </div>
+          <div class="col-md-6 col-xxl-4">
+            <%= f.input :description, as: :string %>
+          </div>
+          <div class="col-md-6 col-xxl-2">
+            <%= f.input       :from_year,
+                              as: :select,
+                              collection: ((Time.now.year).downto(1950)),
+                              include_blank: University::Person::Experience.human_attribute_name('from_year'),
+                              wrapper: false %>
+          </div>
+          <div class="col-md-6 col-xxl-2">
+            <%= f.input       :to_year,
+                              as: :select,
+                              collection: ((Time.now.year).downto(1950)),
+                              include_blank: University::Person::Experience.human_attribute_name('to_year'),
+                              wrapper: false %>
+          </div>
         </div>
-        <div class="col-md-3">
-          <%= f.input        :from_year,
-                             as: :select,
-                             collection: ((Time.now.year).downto(1950)),
-                             label: false,
-                             include_blank: University::Person::Experience.human_attribute_name('from_year'),
-                             required: true,
-                             wrapper: false %>
-        </div>
-        <div class="col-md-3">
-          <%= f.input        :to_year,
-                             as: :select,
-                             collection: ((Time.now.year).downto(1950)),
-                             label: false,
-                             include_blank: University::Person::Experience.human_attribute_name('to_year'),
-                             required: true,
-                             wrapper: false %>
-        </div>
-        <div class="col-md-1 text-end">
+        <div>
           <%= link_to_remove_association '<i class="fas fa-times"></i>'.html_safe,
-                                         f,
-                                         class: 'btn btn-sm btn-danger' %>
+                                        f,
+                                        class: 'btn btn-sm btn-danger' %>
         </div>
       </div>
     </div>

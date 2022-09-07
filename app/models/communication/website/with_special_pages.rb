@@ -13,7 +13,7 @@ module Communication::Website::WithSpecialPages
     def create_missing_special_pages
       homepage = create_special_page('home')
       # first level pages with test
-      ['legal_terms', 'sitemap', 'privacy_policy', 'accessibility', 'communication_posts', 'education_programs', 'education_diplomas', 'research_articles', 'research_volumes', 'organizations'].each do |kind|
+      ['legal_terms', 'sitemap', 'privacy_policy', 'accessibility', 'communication_posts', 'education_programs', 'education_diplomas', 'research_papers', 'research_volumes', 'organizations'].each do |kind|
         create_special_page(kind, homepage.id) if public_send("has_#{kind}?")
       end
       # team pages
@@ -47,6 +47,7 @@ module Communication::Website::WithSpecialPages
       university_id: university_id
     )
     if page.new_record?
+      # This is a bit brutal, as it might generate several syncs at the same time
       page.save_and_sync
     end
     page
@@ -55,6 +56,5 @@ module Communication::Website::WithSpecialPages
   def special_pages_keys
     @special_pages_keys ||= pages.where.not(kind: nil).pluck(:kind).uniq
   end
-
 
 end

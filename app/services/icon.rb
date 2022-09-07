@@ -1,6 +1,6 @@
 # used in menu items and in admin navigation
 class Icon
-  DASHBOARD = 'tachometer-alt'
+  DASHBOARD = 'chart-line'
 
   COMMUNICATION_EXTRANET = 'project-diagram'
   COMMUNICATION_WEBSITE = 'sitemap'
@@ -10,6 +10,9 @@ class Icon
   COMMUNICATION_WEBSITE_PAGES = 'sitemap'
   COMMUNICATION_WEBSITE_MENUS = 'bars'
   COMMUNICATION_WEBSITE_ANALYTICS = 'chart-pie'
+  COMMUNICATION_WEBSITE_PREVIEW_MOBILE = 'mobile-alt'
+  COMMUNICATION_WEBSITE_PREVIEW_TABLET = 'tablet-alt'
+  COMMUNICATION_WEBSITE_PREVIEW_DESKTOP = 'laptop'
 
   EDUCATION_DIPLOMA = 'graduation-cap'
   EDUCATION_PROGRAM = 'chalkboard-teacher'

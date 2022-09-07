@@ -74,6 +74,7 @@
         </div>
       </div>
     </div>
+    <%= render 'admin/communication/blocks/list', about: @organization %>
   </div>
   <div class="col-md-4">
     <div class="card flex-fill w-100">
@@ -94,8 +95,8 @@
             <%= University::Organization.human_attribute_name('logo') %>
           </h5>
         </div>
-        <div class="card-body">
-          <%= kamifusen_tag @organization.logo, class: 'img-fluid' if @organization.logo.attached? %>
+        <div class="card-body bg-grey">
+          <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill p-5' if @organization.logo.attached? %>
         </div>
       </div>
     <% end %>
@@ -144,6 +145,10 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>
+  <%= link_to t('static'),
+              static_admin_university_organization_path(@organization),
+              target: :_blank,
+              class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>

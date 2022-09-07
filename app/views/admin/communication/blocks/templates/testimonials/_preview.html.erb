@@ -1,22 +1,39 @@
-<% @block.template.elements.each do |element| %>
-
-  <article class="card">
-    <div class="card-body">
-      <p class="lead">
-        <%= block_component_preview :text, template: element %>
-      </p>
-      <div class="d-flex align-items-center">
-        <% if element.photo  %>
-          <div style="max-width: 80px;" class="me-3">
-             <%= block_component_preview :photo, template: element %>
-          </div>
-        <% end %>
-        <p class="flex-fill mb-0">
-          <b><%= block_component_preview :author, template: element %></b><br>
-          <%= block_component_preview :job, template: element %>
-        </p>
+<div class="testimonials">
+  <% if !@block.template.elements.one? %>
+    <div class="splide" data-splide='{"arrows":false,"autoplay":true,"pauseOnHover":false,"pauseOnFocus":false,"type":"loop","autoHeight":true}'>
+      <div class="splide__slider">
+        <div class="splide__track">
+          <div class="splide__list">
+          <% end %>
+          <% @block.template.elements.each do |element| %>
+            <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
+              <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+                <p><%= block_component_preview :text, template: element %></p>
+              </blockquote>
+              <figcaption>
+                <% if element.photo  %>
+                  <div class="avatar">
+                    <div style="max-width: 80px;" class="me-3">
+                      <%= block_component_preview :photo, template: element %>
+                    </div>
+                  </div>
+                <% end %>
+                <span>
+                  <b><%= block_component_preview :author, template: element %></b><br>
+                  <%= block_component_preview :job, template: element %>
+                </span>
+              </figcaption>
+            </figure>
+          <% end %>
+        <% if !@block.template.elements.one? %>
+        </div>
       </div>
     </div>
-  </article>
 
-<% end %>
+    <div class="splide__autoplay is-active">
+      <button class="splide__play"></button>
+      <button class="splide__pause"></button>
+    </div>
+  </div>
+  <% end %>
+</div>

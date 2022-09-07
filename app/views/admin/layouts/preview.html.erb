@@ -11,6 +11,24 @@
     <% end %>
   </head>
   <body>
+    <header class="hero">
+      <%= yield :image %>
+      <div class="container">
+        <div>
+          <h1><%= yield :title %></h1>
+        </div>
+        <ol class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+          <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+            <a itemprop="item"><span itemprop="name">Accueil</span></a>
+            <meta itemprop="position" content="1">
+          </li>
+          <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+            <span itemprop="name"><%= yield :title %></span>
+            <meta itemprop="position" content="2">
+          </li>
+        </ol>
+      </div>
+    </header>
     <main class="page-with-blocks" id="main" role="main" tabindex="-1">
       <div class="blocks">
         <%= yield %>

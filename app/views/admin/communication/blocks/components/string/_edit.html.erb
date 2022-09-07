@@ -1,10 +1,15 @@
-<label  class="form-label" 
-        aria-label="<%= label %>"
-        :for="<%= dom_id.html_safe %>">
-  <%= label%>
-</label>
-<input  :id="<%= dom_id.html_safe %>"
-        class="form-control mb-3"
-        v-model="<%= model %>.<%= property %>"
-        placeholder="<%= placeholder %>"
-        type="text" />
+<div class="mb-3">
+  <label  class="form-label" 
+          aria-label="<%= label %>"
+          :for="<%= dom_id.html_safe %>">
+    <%= label%>
+  </label>
+  <input  :id="<%= dom_id.html_safe %>"
+          class="form-control"
+          v-model="<%= model %>.<%= property %>"
+          placeholder="<%= placeholder %>"
+          type="text" />
+  <% if hint %>
+    <div class="form-text"><%= hint %></div>
+  <% end %>
+</div>

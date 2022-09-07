@@ -41,4 +41,12 @@ module ApplicationHelper
           .gsub('https://www.twitter.com/', 'https://twitter.com/')
           .gsub('https://twitter.com/', '')
   end
+
+  def masked_email(string)
+    string.gsub(/(?<=.{2}).*@.*(?=\S{2})/, '****@****')
+  end
+
+  def masked_phone(string)
+    string.gsub(/(?<=.{3}).+(?=.{2})/, '*******')
+  end
 end

@@ -6,11 +6,13 @@
   <h2 class="mb-3"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
 
   <div class="row">
-    <div class="col-md-6">
-      <%= render  'admin/education/teachers/show/programs',
-                  involvements: @teacher_involvements,
-                  param_name: :programs_page if @person.is_teacher? %>
-    </div>
+    <% if @person.is_teacher? && @teacher_involvements.any? %>
+      <div class="col-md-6">
+        <%= render  'admin/education/teachers/show/programs',
+                    involvements: @teacher_involvements,
+                    param_name: :programs_page %>
+      </div>
+    <% end %>
     <div class="col-md-6">
       <%= render  'admin/university/people/show/roles',
                   involvements: @administrator_involvements,
@@ -21,6 +23,10 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
+  <%= link_to t('static'),
+              static_admin_university_person_path(@person),
+              target: :_blank,
+              class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>

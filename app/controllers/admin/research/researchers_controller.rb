@@ -1,7 +1,7 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
 
   has_scope :for_search_term
-  
+
   def index
     @researchers = apply_scopes(current_university.people.researchers.accessible_by(current_ability)).ordered.page(params[:page])
     breadcrumb
@@ -9,7 +9,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def show
     @researcher = current_university.people.researchers.accessible_by(current_ability).find(params[:id])
-    @articles = @researcher.research_journal_articles.ordered.page(params[:page])
+    @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
   end
 

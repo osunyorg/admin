@@ -11,6 +11,12 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
     breadcrumb
   end
 
+  def static
+    @about = @diploma
+    @website = @diploma.websites&.first
+    render layout: false
+  end
+
   def new
     breadcrumb
   end

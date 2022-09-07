@@ -1,18 +1,37 @@
-<%= block_component_preview :description %>
-<% @block.template.elements.each do |element|
-      person = element.person
-      next if person.nil?
-      %>
-  <article class="card">
-    <div class="card-body">
-      <% if person.best_picture.attached? %>
-        <div style="max-width: 80px" class="float-end">
-          <%= kamifusen_tag person.best_picture,
-                            class: 'img-fluid rounded-circle' %>
+<div class="top">
+  <div class="description">
+    <%= block_component_preview :description %>
+  </div>
+</div>
+
+<div class="persons">
+  <% @block.template.elements.each do |element|
+    person = element.person
+    next if person.nil?
+    %>
+    <div>
+      <article class="person" itemscope itemtype="https://schema.org/Person">
+        <div>
+          <p class="name" itemprop="name">
+            <% if @block.template.with_link %>
+              <%= link_to person, [:admin, person] %>    
+              <% else %>  
+                <%= element.person %>
+            <% end %>    
+          </p>
+          <p itemprop="jobTitle"><%= element.role %></p>
         </div>
-      <% end %>
-      <h3 class="card-title h5"><%= link_to person, [:admin, person] %></h3>
-      <p class="mb-0"><%= element.role %></p>
+        <% if @block.template.with_photo %>
+          <div class="avatar" itemprop="image">
+            <% if person.best_picture.attached? %>
+              <div style="max-width: 80px" class="float-end">
+                <%= kamifusen_tag person.best_picture,
+                                  class: 'img-fluid rounded-circle' %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </article>
     </div>
-  </article>
-<% end %>
+  <% end %>
+</div>
