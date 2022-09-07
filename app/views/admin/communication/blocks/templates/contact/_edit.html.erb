@@ -35,7 +35,6 @@
                 <input  type="tel"
                         class="form-control"
                         placeholder="<%= t '.phones.placeholder' %>"
-                        maxlength="12"
                         v-model="data.phone_numbers[index]">
                 <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
                   <i class="fas fa-times"></i>

@@ -2,4 +2,15 @@
 blob = component.blob
 return unless blob
 %>
-<%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1' %>
+
+<section class="block-image">
+  <div class="container">
+    <div class="block-content">
+          <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1' %>
+          <figcaption>
+            <%= component.template.credit if component.template.credit.present? %>
+          </figcaption>
+        </figure>
+    </div>
+  </div>
+</section>
