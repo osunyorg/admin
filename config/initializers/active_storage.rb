@@ -1,3 +1,4 @@
+require 'active_storage/record'
 require 'active_storage/attachment'
 require 'active_storage/filename'
 

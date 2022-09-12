@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
+ruby '3.1.2'
 
 # Infrastructure
 gem 'angularjs-rails'
@@ -37,7 +37,7 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'omniauth-saml', '~> 2.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 gem 'rails-i18n'
 gem 'roo', "~> 2.9"
 gem 'sanitize'
