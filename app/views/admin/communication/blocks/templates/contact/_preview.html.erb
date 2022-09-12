@@ -1,10 +1,13 @@
-<p><%= block_component_preview :name %></p>
-<div>
-    <%= block_component_preview :address %>
-    <%= block_component_preview :zipcode %>
-    <%= block_component_preview :city %>
-    <%= block_component_preview :country %>
-</div>
+<%= block_component_preview :description %>
+<p>
+  <%= block_component_preview :name %><br>
+  <% if @block.template.address.present? %>
+    <%= @block.template.address %><br>
+  <% end %>
+  <%= block_component_preview :zipcode %>
+  <%= block_component_preview :city %>
+  <%= block_component_preview :country %>
+</p>
 <table class="table">
 <% @block.template.elements.each do |element| %>
     <tr>

@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col-xl-6">
+    <%= block_component_edit :description %>
+  </div>
+</div>
 <div class="row mb-4">
   <div class="col-md-6 col-xl-4">
     <div class="card">
@@ -6,7 +11,7 @@
       </div>
       <div class="card-body">
         <%= block_component_edit :name %>
-        <%= block_component_edit :address, rows: 1 %>
+        <%= block_component_edit :address %>
         <div class="row">
           <div class="col-md-4">
             <%= block_component_edit :zipcode %>
@@ -35,7 +40,6 @@
                 <input  type="tel"
                         class="form-control"
                         placeholder="<%= t '.phones.placeholder' %>"
-                        maxlength="12"
                         v-model="data.phone_numbers[index]">
                 <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
                   <i class="fas fa-times"></i>
