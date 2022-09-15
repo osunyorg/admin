@@ -123,6 +123,7 @@ class Communication::Website::Post < ApplicationRecord
     dependencies += categories
     dependencies += active_storage_blobs
     dependencies += git_block_dependencies
+    dependencies += university.communication_blocks.where(template_kind: :posts).includes(:about).map(&:about).uniq
     if author.present?
       dependencies += [author, author.author]
       dependencies += author.active_storage_blobs

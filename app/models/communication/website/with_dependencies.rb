@@ -28,7 +28,10 @@ module Communication::Website::WithDependencies
   def blocks
     @blocks ||= begin
       blocks = Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
+      blocks = blocks.or(Communication::Block.where(about_type: 'Communication::Website::Post', about_id: posts))
       blocks = blocks.or(Communication::Block.where(about_type: 'Education::Program', about_id: education_programs)) if has_education_programs?
+      blocks = blocks.or(Communication::Block.where(about_type: 'Education::Diploma', about_id: education_diplomas)) if has_education_diplomas?
+      # TODO: Blocks from People & Organizations ?
       blocks
     end
   end
@@ -38,7 +41,7 @@ module Communication::Website::WithDependencies
   end
 
   def education_diplomas
-    has_education_diplomas? ? about.diplomas : Education::Program.none
+    has_education_diplomas? ? about.diplomas : Education::Diploma.none
   end
 
   def education_programs
@@ -168,10 +171,6 @@ module Communication::Website::WithDependencies
 
   def has_education_programs?
     about && about.has_education_programs?
-  end
-
-  def has_education_diplomas?
-    about && about.has_education_diplomas?
   end
 
   def has_research_papers?
