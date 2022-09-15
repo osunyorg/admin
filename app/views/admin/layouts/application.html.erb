@@ -36,7 +36,8 @@
             <% unless current_user.confirmed? %>
               <div class="alert alert-warning">
                 <div class="alert-message">
-                  <%= t('admin.users_alerts.pending_confirmation', duration: distance_of_time_in_words(Rails.configuration.devise.allow_unconfirmed_access_for)) %>
+                  <%= t('admin.users_alerts.pending_confirmation_html', duration: distance_of_time_in_words(Rails.configuration.devise.allow_unconfirmed_access_for)) %>
+                  <br>
                   <%= link_to t('devise.confirmations.new.resend_confirmation_instructions'), resend_user_confirmation_path, method: :post, class: 'alert-link' %>
                 </div>
               </div>
