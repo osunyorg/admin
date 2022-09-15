@@ -90,7 +90,7 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
@@ -321,4 +321,21 @@ Devise.setup do |config|
   config.otp_secret_encryption_key = ENV['OTP_SECRET_ENCRYPTION_KEY']
   config.second_factor_resource_id = 'id' # Field or method name used to set value for 2fA remember cookie
   config.delete_cookie_on_logout = false # Delete cookie when user signs out, to force 2fA again on login
+end
+
+require 'devise/models/lockable'
+
+Devise::Models::Lockable.class_eval do
+  def unauthenticated_message
+    # paranoid mode normally hide the locked message because it leaks the existence of an account.
+    # but I think this is totally not user friendly: a user can lock is account and still has the message "uncorrect"
+    # so I reverted to something less secure but more user friendly
+    if access_locked? || (lock_strategy_enabled?(:failed_attempts) && attempts_exceeded?)
+      :locked
+    elsif lock_strategy_enabled?(:failed_attempts) && last_attempt? && self.class.last_attempt_warning
+      :last_attempt
+    else
+      super
+    end
+  end
 end
