@@ -4,10 +4,6 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-5">
-          <%= f.input       :university_id,
-                            as: :hidden,
-                            input_html: { value: current_university.id },
-                            wrapper: false %>
           <%= f.association :program,
                             collection: collection_tree(current_university.education_programs),
                             label_method: ->(p) { sanitize p[:label] },
