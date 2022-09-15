@@ -58,6 +58,9 @@ module User::WithAuthentication
       if self.mobile_phone.start_with?('06', '07')
         self.mobile_phone = "+33#{self.mobile_phone[1..-1]}"
       end
+      if self.mobile_phone.start_with?('+330')
+        self.mobile_phone = "+33#{self.mobile_phone[4..-1]}"
+      end
     end
 
     def sanitize_fields
