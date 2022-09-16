@@ -22,13 +22,14 @@ Bundler.require(*Rails.groups)
 module Osuny
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     config.time_zone = 'Europe/Paris'
 
     config.active_job.queue_adapter = :delayed_job
 
     config.active_storage.service_urls_expire_in = 1.hour
+    config.active_storage.variant_processor = :mini_magick
 
     config.sass.preferred_syntax = :sass
 
