@@ -106,7 +106,9 @@ en:
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     users_alerts:
+      already_confirmed: "Your account has already been confirmed."
       not_locked_html: '<i>%{model}</i> was not locked.'
+      pending_confirmation_html: "Your account has not been <b>confirmed</b> yet.<br>You have received an e-mail with a confirmation link. If you don't confirm, your account will stop working after <b>%{duration}</b>."
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
     will_be_published_html: "<i>%{model}</i> will soon be published."
   batch_selectable:
@@ -131,6 +133,9 @@ en:
         text_html: "Your two-factor authentication code for %{university} is: <br><br><b>%{code}</b><br><br>It will expire in %{duration}."
     omniauth_callbacks:
       failure: "Failed to sign in."
+    passwords:
+      new:
+        send_me_reset_password_instructions: Reset my password
     sessions:
       signed_in: ''
     shared:
