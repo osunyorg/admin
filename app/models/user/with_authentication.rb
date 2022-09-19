@@ -38,11 +38,16 @@ module User::WithAuthentication
       true
     end
 
+    def direct_otp_default_delivery_method
+      mobile_phone.present? ? :mobile_phone : :email
+    end
+
     def send_two_factor_authentication_code(code, delivery_method)
-      if mobile_phone.blank? || delivery_method == :email
-        send_devise_notification(:two_factor_authentication_code, code, {})
-      else
+      case delivery_method
+      when :mobile_phone
         Sendinblue::SmsService.send_mfa_code(self, code)
+      when :email
+        send_devise_notification(:two_factor_authentication_code, code, {})
       end
     end
 
