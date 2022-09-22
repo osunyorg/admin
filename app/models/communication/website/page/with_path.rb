@@ -32,7 +32,7 @@ module Communication::Website::Page::WithPath
   end
 
   def git_path(website)
-    return unless published
+    return unless website.id == communication_website_id && published
     if kind_home?
       "content/_index.html"
     elsif has_special_git_path?
