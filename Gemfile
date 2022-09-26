@@ -48,6 +48,7 @@ gem 'simple-navigation'
 gem 'simple_form'
 gem 'simple_form_bs5_file_input'#, path: '../simple_form_bs5_file_input'
 gem 'simple_form_password_with_hints'#, path: '../simple_form_password_with_hints'
+gem 'sinatra', '~> 2.2' # Issues with deployment (cannot load such file -- rack-protection)
 gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git', branch: 'activestorage'
 # gem 'summernote-rails', path: '../summernote-rails'
 gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_authentication.git'

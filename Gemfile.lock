@@ -287,7 +287,7 @@ GEM
     msgpack (1.5.6)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
-    mustermann (3.0.0)
+    mustermann (2.0.2)
       ruby2_keywords (~> 0.0.1)
     nesty (1.0.2)
     nio4r (2.5.8)
@@ -327,7 +327,7 @@ GEM
     rack (2.2.4)
     rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
-    rack-protection (3.0.0)
+    rack-protection (2.2.2)
       rack
     rack-test (2.0.2)
       rack (>= 1.3)
@@ -415,10 +415,10 @@ GEM
     simple_form_password_with_hints (0.0.6)
       rails
       simple_form
-    sinatra (3.0.0)
-      mustermann (~> 3.0)
-      rack (~> 2.2, >= 2.2.4)
-      rack-protection (= 3.0.0)
+    sinatra (2.2.2)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.2)
       tilt (~> 2.0)
     sixarm_ruby_unaccent (1.2.0)
     snaky_hash (2.0.1)
@@ -530,6 +530,7 @@ DEPENDENCIES
   simple_form
   simple_form_bs5_file_input
   simple_form_password_with_hints
+  sinatra (~> 2.2)
   spring
   summernote-rails!
   two_factor_authentication!
