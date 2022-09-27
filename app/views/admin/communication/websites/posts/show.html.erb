@@ -10,7 +10,7 @@
           </div>
           <div class="card-body">
             <p class="lead">
-              <%= raw @post.description_short %>
+              <%= sanitize @post.description_short %>
             </p>
           </div>
         </div>
