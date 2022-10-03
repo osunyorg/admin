@@ -3,46 +3,18 @@
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
     <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
-        </div>
-        <div class="card-body">
-          <%= render 'admin/application/property/text', object: @post, property: :description_short %>
-          <%= render 'admin/application/property/summernote_embeds', object: @post, property: :medias %>
-        </div>
-      </div>
-      <div class="row">
-      <% if @post.categories.any? %>
-        <div class="col-md-6">
-          <div class="card flex-fill w-100">
-            <div class="card-header">
-              <h2 class="card-title mb-0"><%= Communication::Website::Post.human_attribute_name('categories') %></h2>
-            </div>
-            <div class="card-body">
-              <ul class="list-unstyled mb-0">
-                <% @post.categories.each do |category| %>
-                  <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
-                <% end %>
-              </ul>
-            </div>
+      <% unless @post.description_short.blank? %>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h2 class="card-title mb-0 h5"><%= Communication::Website::Post.human_attribute_name('description_short') %></h2>
+          </div>
+          <div class="card-body">
+            <p class="lead">
+              <%= sanitize @post.description_short %>
+            </p>
           </div>
         </div>
       <% end %>
-        <% if @post.description.present? %>
-          <div class="col-md-6">
-            <div class="card flex-fill w-100">
-              <div class="card-header">
-                <h2 class="card-title mb-0"><%= t('seo') %></h2>
-              </div>
-              <div class="card-body">
-                <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('description') %></h3>
-                <%= simple_format @post.description %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
       <%= render 'admin/communication/blocks/list', about: @post %>
     </div>
     <div class="col-md-4">
@@ -77,8 +49,20 @@
             <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('author') %></h3>
             <p><%= link_to_if can?(:read, @post.author), @post.author, admin_communication_website_author_path(@post.author) %></p>
           <% end %>
+          <% if @post.categories.any? %>
+            <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('categories') %></h3>
+            <ul class="list-unstyled">
+              <% @post.categories.each do |category| %>
+                <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+              <% end %>
+            </ul>
+          <% end %>
           <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('slug') %></h3>
           <p><%= @post.slug %></p>
+          <% if @post.description.present? %>
+            <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('description') %></h3>
+            <%= simple_format @post.description %>
+          <% end %>
         </div>
       </div>
       <%= render 'admin/application/featured_image/show', about: @post %>
