@@ -26,7 +26,9 @@ module Importers
     end
 
     def valid?
-      if program.nil?
+      if school.nil?
+        @error = "School #{@school_id} not found"
+      elsif program.nil?
         @error = "Program #{@program_id} not found"
       elsif academic_year.nil?
         @error = "The year #{@year} seems incorrect"
@@ -43,8 +45,13 @@ module Importers
     protected
 
     def extract_variables
-      @program_id = @hash[17].to_s.strip
-      @year = @hash[18].to_s.strip.to_i
+      @school_id = @hash[17].to_s.strip
+      @program_id = @hash[18].to_s.strip
+      @year = @hash[19].to_s.strip.to_i
+    end
+
+    def school
+      @university.education_schools.find_by(id: @school_id)
     end
 
     def program
@@ -57,7 +64,7 @@ module Importers
 
     def cohort
       @cohort ||= @university.education_cohorts
-                       .where(program: program, academic_year: academic_year)
+                       .where(school: school, program: program, academic_year: academic_year)
                        .first_or_create
     end
 
