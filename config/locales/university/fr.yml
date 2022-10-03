@@ -151,6 +151,7 @@ fr:
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation
+        school: Sélectionnez une école
         year: Sélectionnez une année
   enums:
     university:

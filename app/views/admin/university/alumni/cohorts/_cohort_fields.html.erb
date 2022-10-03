@@ -3,7 +3,15 @@
   <div class="card mb-3">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3">
+          <%= f.association :school,
+                            collection: current_university.education_schools.ordered,
+                            label: false,
+                            include_blank: t('simple_form.include_blanks.defaults.school'),
+                            required: true,
+                            wrapper: false %>
+        </div>
+        <div class="col-md-4">
           <%= f.association :program,
                             collection: collection_tree(current_university.education_programs),
                             label_method: ->(p) { sanitize p[:label] },
@@ -13,7 +21,7 @@
                             required: true,
                             wrapper: false %>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2">
           <%= f.input       :year,
                             as: :select,
                             collection: ((Time.now.year + 5).downto(1950)),

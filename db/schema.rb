@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_01_160808) do
+ActiveRecord::Schema.define(version: 2022_10_03_144016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -410,8 +410,10 @@ ActiveRecord::Schema.define(version: 2022_09_01_160808) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "school_id", null: false
     t.index ["academic_year_id"], name: "index_education_cohorts_on_academic_year_id"
     t.index ["program_id"], name: "index_education_cohorts_on_program_id"
+    t.index ["school_id"], name: "index_education_cohorts_on_school_id"
     t.index ["university_id"], name: "index_education_cohorts_on_university_id"
   end
 
@@ -848,6 +850,7 @@ ActiveRecord::Schema.define(version: 2022_09_01_160808) do
   add_foreign_key "education_academic_years", "universities"
   add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"
   add_foreign_key "education_cohorts", "education_programs", column: "program_id"
+  add_foreign_key "education_cohorts", "education_schools", column: "school_id"
   add_foreign_key "education_cohorts", "universities"
   add_foreign_key "education_diplomas", "universities"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"

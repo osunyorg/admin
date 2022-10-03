@@ -70,6 +70,7 @@ en:
         zipcode: Zipcode
       university/person/experience:
         description: Description
+        edit: Edit experience
         organization: Organization
         from_year: Start year
         to_year: End year
@@ -150,6 +151,7 @@ en:
     include_blanks:
       defaults:
         organization: Select organization
+        school: Select school
         year: Select year
   enums:
     university:
@@ -174,6 +176,7 @@ en:
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
     organisation:
+      employees: Employees
       import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
     person:
       administrator_roles: Administrator roles
