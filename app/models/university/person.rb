@@ -185,7 +185,7 @@ class University::Person < ApplicationRecord
     dependencies += git_block_dependencies
     dependencies += [administrator, author, researcher, teacher]
     dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website) if in_block_dependencies?(website)
+    dependencies += dependencies_through_blocks(website)
     dependencies
   end
 
