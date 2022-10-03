@@ -175,6 +175,7 @@ fr:
     manage_cohorts: Gérer les promotions
     manage_experiences: Gérer les expériences professionnelles
     organization:
+      employees: Employés·es
       import_hint_html: "Les valeurs possibles pour <i>kind</i> sont : company, non_profit, government.<br>Les champs <i>siren</i>, <i>nic</i>, <i>zipcode</i> et <i>phone</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
     person:
       administrator_roles: Rôles administratifs
