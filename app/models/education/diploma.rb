@@ -50,8 +50,12 @@ class Education::Diploma < ApplicationRecord
     }
   end
 
+  def programs_for_website(website)
+    website.education_programs.where(diploma: self)
+  end
+
   def published_programs_for_website(website)
-    website.education_programs.published.where(diploma: self)
+    programs_for_website(website).published
   end
 
   # We need to send the diplomas only to the websites that need them
@@ -64,10 +68,10 @@ class Education::Diploma < ApplicationRecord
   end
 
   def git_dependencies(website)
-    published_programs = published_programs_for_website(website)
+    website_programs = programs_for_website(website)
 
     dependencies = [self]
-    dependencies += published_programs + published_programs.map(&:active_storage_blobs).flatten if published_programs.any?
+    dependencies += website_programs + website_programs.map(&:active_storage_blobs).flatten
     dependencies
   end
 
