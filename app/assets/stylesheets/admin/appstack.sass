@@ -32,5 +32,9 @@ main.content
 
 .sidebar[data-auto-collapsed]
     @include media-breakpoint-up(lg)
-        transition-duration: 0s
         margin-left: -260px
+        transition-duration: 0s
+
+.sidebar[data-auto-collapsed] + .footer.fixed
+    @include media-breakpoint-up(lg)
+        left: 0
