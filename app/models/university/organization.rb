@@ -81,7 +81,7 @@ class University::Organization < ApplicationRecord
       dependencies.concat git_block_dependencies
     end
     dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website) if in_block_dependencies?(website)
+    dependencies += dependencies_through_blocks(website)
     dependencies
   end
 

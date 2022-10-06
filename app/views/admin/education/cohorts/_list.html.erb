@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Education::Cohort.human_attribute_name('year') %></th>
+      <th><%= Education::Cohort.human_attribute_name('school') %></th>
       <th><%= Education::Cohort.human_attribute_name('program') %></th>
       <th><%= Education::Cohort.human_attribute_name('alumni') %></th>
     </tr>
@@ -15,7 +16,8 @@
             <%= cohort.name %>
           <% end %>
         </td>
-        <td><%= link_to cohort.program, [:admin, cohort.program] %></td>
+        <td><%= link_to_if can?(:read, cohort.school), cohort.school, [:admin, cohort.school] %></td>
+        <td><%= link_to_if can?(:read, cohort.program), cohort.program, [:admin, cohort.program] %></td>
         <td><%= cohort.people.count %></td>
       </tr>
     <% end %>

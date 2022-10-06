@@ -115,7 +115,7 @@
 </div>
 
 <% if @organization.experiences.any? %>
-  <h2><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
+  <h2><%= t('university.organization.employees') %></h2>
 
   <table class="<%= table_classes %>">
     <thead>

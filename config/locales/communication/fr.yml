@@ -93,16 +93,17 @@ fr:
         bodyclass: Classe CSS spécifique
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
-        description: Meta Description
+        description: Description pour le référencement naturel
         description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
         header_text: Titre affiché dans le header
         parent: Page parente
+        path: Chemin
         published: Publié ?
         related_category: Catégorie liée
-        slug: Slug
+        slug: Identifiant
         text: Texte principal de la page
         title: Titre
         website: Site Web
@@ -110,7 +111,7 @@ fr:
         author: Auteur·rice
         category: Catégorie
         categories: Catégories
-        description: Meta Description
+        description: Description pour le référencement naturel
         description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -118,7 +119,7 @@ fr:
         pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication
-        slug: Slug
+        slug: Identifiant
         text: Texte
         title: Titre
         website: Site Web

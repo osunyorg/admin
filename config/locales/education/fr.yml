@@ -25,6 +25,7 @@ fr:
       education/cohort:
         alumni: Alumni
         program: Formation
+        school: École
         year: Année
       education/diploma:
         name: Nom

@@ -4,6 +4,8 @@
   <div class="col-md-8">
     <div class="card flex-fill w-100">
       <div class="card-body">
+        <h3 class="h5"><%= Education::Cohort.human_attribute_name('school') %></h3>
+        <p><%= link_to_if can?(:read, @cohort.school), @cohort.school, [:admin, @cohort.school] %></p>
         <h3 class="h5"><%= Education::Cohort.human_attribute_name('program') %></h3>
         <p><%= link_to_if can?(:read, @cohort.program), @cohort.program, [:admin, @cohort.program] %></p>
         <h3 class="h5"><%= Education::Cohort.human_attribute_name('year') %></h3>

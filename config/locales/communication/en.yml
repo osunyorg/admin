@@ -93,7 +93,7 @@ en:
         bodyclass: Specific CSS class
         breadcrumb_title: Title in breadcrumbs
         children: Children pages
-        description: Meta Description
+        description: Meta description
         description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
@@ -110,7 +110,7 @@ en:
         author: Author
         category: Category
         categories: Categories
-        description: Meta Description
+        description: Meta description
         description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
