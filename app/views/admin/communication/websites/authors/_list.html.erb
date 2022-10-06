@@ -1,18 +1,20 @@
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= University::Person.human_attribute_name('last_name') %></th>
-      <th><%= University::Person.human_attribute_name('first_name') %></th>
-      <th><%= t('communication.number_of_posts') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% authors.each do |author| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to author.last_name, admin_communication_website_author_path(website_id: @website.id, id: author.id) %></td>
-        <td><%= link_to author.first_name, admin_communication_website_author_path(website_id: @website.id, id: author.id) %></td>
-        <td><%= author.communication_website_posts.count %></td>
+        <th><%= University::Person.human_attribute_name('last_name') %></th>
+        <th><%= University::Person.human_attribute_name('first_name') %></th>
+        <th><%= t('communication.number_of_posts') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% authors.each do |author| %>
+        <tr>
+          <td><%= link_to author.last_name, admin_communication_website_author_path(website_id: @website.id, id: author.id) %></td>
+          <td><%= link_to author.first_name, admin_communication_website_author_path(website_id: @website.id, id: author.id) %></td>
+          <td><%= author.communication_website_posts.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

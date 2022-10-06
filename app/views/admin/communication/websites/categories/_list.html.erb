@@ -1,27 +1,29 @@
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Communication::Website::Category.human_attribute_name('title') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% categories.each do |category| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to category, admin_communication_website_category_path(website_id: category.website.id, id: category.id) %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                      edit_admin_communication_website_category_path(website_id: category.website.id, id: category.id),
-                      class: button_classes if can?(:update, category) %>
-            <%= link_to t('delete'),
-                      admin_communication_website_category_path(website_id: category.website.id, id: category.id),
-                      method: :delete,
-                      data: { confirm: t('please_confirm') },
-                      class: button_classes_danger if can?(:destroy, category) %>
-          </div>
-        </td>
+        <th><%= Communication::Website::Category.human_attribute_name('title') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% categories.each do |category| %>
+        <tr>
+          <td><%= link_to category, admin_communication_website_category_path(website_id: category.website.id, id: category.id) %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                        edit_admin_communication_website_category_path(website_id: category.website.id, id: category.id),
+                        class: button_classes if can?(:update, category) %>
+              <%= link_to t('delete'),
+                        admin_communication_website_category_path(website_id: category.website.id, id: category.id),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger if can?(:destroy, category) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,35 +1,37 @@
 <% content_for :title, Research::Journal::Volume.model_name.human(count: 2) %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Research::Journal::Volume.model_name.human %></th>
-      <th><%= Research::Journal::Volume.human_attribute_name('featured_image') %></th>
-      <th><%= Research::Journal::Volume.human_attribute_name('published_at') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @volumes.each do |volume| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td>
-          <%= link_to volume,
-                      admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                      class: "#{'draft' unless volume.published?}" %>
-        </td>
-        <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
-                          height: 100 if volume.featured_image.attached? %></td>
-        <td><%= volume.published_at %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link volume, { journal_id: @journal.id } %>
-            <%#= destroy_link volume, journal_id: @journal.id %>
-          </div>
-        </td>
+        <th><%= Research::Journal::Volume.model_name.human %></th>
+        <th><%= Research::Journal::Volume.human_attribute_name('featured_image') %></th>
+        <th><%= Research::Journal::Volume.human_attribute_name('published_at') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @volumes.each do |volume| %>
+        <tr>
+          <td>
+            <%= link_to volume,
+                        admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                        class: "#{'draft' unless volume.published?}" %>
+          </td>
+          <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
+                            height: 100 if volume.featured_image.attached? %></td>
+          <td><%= volume.published_at %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link volume, { journal_id: @journal.id } %>
+              <%#= destroy_link volume, journal_id: @journal.id %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Journal::Volume %>

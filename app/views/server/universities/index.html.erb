@@ -1,45 +1,47 @@
 <% content_for :title, University.model_name.human(count: 2) %>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= University.human_attribute_name('name') %></th>
-      <th><%= University.human_attribute_name('url') %></th>
-      <th><%= University.human_attribute_name('public_or_private') %></th>
-      <th><%= University.human_attribute_name('invoice_date') %></th>
-      <th><%= University.human_attribute_name('invoice_amount') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @universities.each do |university| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to university, [:server, university] %></td>
-        <td><%= link_to university.url, university.url, target: :_blank %></td>
-        <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
-        <% if university.invoice_amount.blank? %>
-          <td></td>
-          <td></td>
-        <% else %>
-          <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= l university.invoice_date, format: "%d %B" unless university.invoice_amount.blank? %></td>
-          <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= university.invoice_amount %></td>
-        <% end %>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                      edit_server_university_path(university),
-                      class: button_classes %>
-            <%= link_to t('delete'),
-                      server_university_path(university),
-                      method: :delete,
-                      data: { confirm: t('please_confirm') },
-                      class: button_classes_danger %>
-          </div>
-        </td>
+        <th><%= University.human_attribute_name('name') %></th>
+        <th><%= University.human_attribute_name('url') %></th>
+        <th><%= University.human_attribute_name('public_or_private') %></th>
+        <th><%= University.human_attribute_name('invoice_date') %></th>
+        <th><%= University.human_attribute_name('invoice_amount') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @universities.each do |university| %>
+        <tr>
+          <td><%= link_to university, [:server, university] %></td>
+          <td><%= link_to university.url, university.url, target: :_blank %></td>
+          <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
+          <% if university.invoice_amount.blank? %>
+            <td></td>
+            <td></td>
+          <% else %>
+            <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= l university.invoice_date, format: "%d %B" unless university.invoice_amount.blank? %></td>
+            <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= university.invoice_amount %></td>
+          <% end %>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                        edit_server_university_path(university),
+                        class: button_classes %>
+              <%= link_to t('delete'),
+                        server_university_path(university),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'), new_server_university_path, class: button_classes %>

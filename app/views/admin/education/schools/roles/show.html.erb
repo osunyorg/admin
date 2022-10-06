@@ -1,38 +1,40 @@
 <% content_for :title, @role %>
 
 <% if @involvements.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <% if can? :reorder, University::Person::Involvement %>
-          <th width="20" class="ps-0">&nbsp;</th>
-        <% end %>
-        <th class="ps-0"><%= University::Person.model_name.human %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody data-sortable data-sort-url="<%= reorder_admin_education_school_role_people_path(@role, { school_id: @school.id }) %>">
-      <% @involvements.each do |involvement| %>
-        <tr data-id="<%= involvement.id %>">
+  <div class="table-responsive">
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
           <% if can? :reorder, University::Person::Involvement %>
-            <td><i class="fa fa-bars handle"></i></td>
+            <th width="20" class="ps-0">&nbsp;</th>
           <% end %>
-          <td class="ps-0">
-            <%= link_to_if  can?(:read, involvement.person),
-                            involvement.person,
-                            [:admin, involvement.person] %>
-          </td>
-          <td class="text-end pe-0">
-            <%= link_to t('remove'),
-                        admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }),
-                        method: :delete,
-                        data: { confirm: t('please_confirm') },
-                        class: button_classes_danger if can?(:destroy, involvement) %>
-          </td>
+          <th class="ps-0"><%= University::Person.model_name.human %></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody data-sortable data-sort-url="<%= reorder_admin_education_school_role_people_path(@role, { school_id: @school.id }) %>">
+        <% @involvements.each do |involvement| %>
+          <tr data-id="<%= involvement.id %>">
+            <% if can? :reorder, University::Person::Involvement %>
+              <td><i class="fa fa-bars handle"></i></td>
+            <% end %>
+            <td class="ps-0">
+              <%= link_to_if  can?(:read, involvement.person),
+                              involvement.person,
+                              [:admin, involvement.person] %>
+            </td>
+            <td class="text-end pe-0">
+              <%= link_to t('remove'),
+                          admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, involvement) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
 
 

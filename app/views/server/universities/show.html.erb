@@ -6,53 +6,57 @@
       <div class="card-header">
         <h2 class="card-title"><%= t('admin.infos') %></h2>
       </div>
-      <table class="table">
-        <tr>
-          <td><%= t('activerecord.attributes.university.url') %></td>
-          <td class="text-end"><%= link_to @university.url, @university.url, target: :_blank %></td>
-        </tr>
-        <% ['address', 'zipcode', 'city', 'country', 'private'].each do |variable| %>
+      <div class="table-responsive">
+        <table class="<%= table_classes %>">
           <tr>
-            <td><%= University.human_attribute_name(variable) %></td>
-            <td class="text-end"><%= @university.public_send variable %></td>
+            <td><%= t('activerecord.attributes.university.url') %></td>
+            <td class="text-end"><%= link_to @university.url, @university.url, target: :_blank %></td>
           </tr>
-        <% end %>
-        <% unless @university.invoice_amount.blank? %>
-          <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
-            <td><%= t('activerecord.attributes.university.invoice_date') %></td>
-            <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
-          </tr>
-          <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
-            <td><%= t('activerecord.attributes.university.invoice_amount') %></td>
-            <td class="text-end"><%= @university.invoice_amount %>€</td>
-          </tr>
-        <% end %>
-      </table>
+          <% ['address', 'zipcode', 'city', 'country', 'private'].each do |variable| %>
+            <tr>
+              <td><%= University.human_attribute_name(variable) %></td>
+              <td class="text-end"><%= @university.public_send variable %></td>
+            </tr>
+          <% end %>
+          <% unless @university.invoice_amount.blank? %>
+            <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
+              <td><%= t('activerecord.attributes.university.invoice_date') %></td>
+              <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
+            </tr>
+            <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
+              <td><%= t('activerecord.attributes.university.invoice_amount') %></td>
+              <td class="text-end"><%= @university.invoice_amount %>€</td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
 <h2>Blocks</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Block</th>
-      <th>About</th>
-      <th>Template</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @university.communication_blocks.each do |block| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= block %></td>
-        <td><%= block.about %></td>
-        <td><%= block.template_kind %></td>
-        <td><%= edit_link block %></td>
+        <th>Block</th>
+        <th>About</th>
+        <th>Template</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @university.communication_blocks.each do |block| %>
+        <tr>
+          <td><%= block %></td>
+          <td><%= block.about %></td>
+          <td><%= block.template_kind %></td>
+          <td><%= edit_link block %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>
