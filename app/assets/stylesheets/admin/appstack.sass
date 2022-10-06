@@ -24,3 +24,8 @@ main.content
 
 .alert
     padding: .95rem
+
+.sidebar[data-auto-collapsed]
+    @include media-breakpoint-up(lg)
+        transition-duration: 0s
+        margin-left: -260px
