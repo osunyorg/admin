@@ -1,22 +1,24 @@
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Import.human_attribute_name('date') %></th>
-      <th><%= Import.human_attribute_name('number_of_lines') %></th>
-      <th><%= Import.human_attribute_name('status') %></th>
-      <th><%= Import.human_attribute_name('file') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% imports.each do |import| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to import, send(path_pattern, import) %></td>
-        <td><%= import.number_of_lines %></td>
-        <td class="<%= import.status_class %>"><%= t("enums.import.status.#{import.status}") %></td>
-        <td><%= link_to t('download'), url_for(import.file), class: button_classes if import.file.attached? %></td>
+        <th><%= Import.human_attribute_name('date') %></th>
+        <th><%= Import.human_attribute_name('number_of_lines') %></th>
+        <th><%= Import.human_attribute_name('status') %></th>
+        <th><%= Import.human_attribute_name('file') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% imports.each do |import| %>
+        <tr>
+          <td><%= link_to import, send(path_pattern, import) %></td>
+          <td><%= import.number_of_lines %></td>
+          <td class="<%= import.status_class %>"><%= t("enums.import.status.#{import.status}") %></td>
+          <td><%= link_to t('download'), url_for(import.file), class: button_classes if import.file.attached? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate imports, theme: 'bootstrap-5' %>

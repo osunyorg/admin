@@ -8,12 +8,14 @@
   <%= block_component_preview :city %>
   <%= block_component_preview :country %>
 </p>
-<table class="table">
-<% @block.template.elements.each do |element| %>
-    <tr>
-        <td><%= block_component_preview :title, template: element %></td>
-        <td><%= block_component_preview :time_slot_morning, template: element %></td>
-        <td><%= block_component_preview :time_slot_afternoon, template: element %></td>
-    </tr>
-<% end %>
-</table>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <% @block.template.elements.each do |element| %>
+      <tr>
+          <td><%= block_component_preview :title, template: element %></td>
+          <td><%= block_component_preview :time_slot_morning, template: element %></td>
+          <td><%= block_component_preview :time_slot_afternoon, template: element %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

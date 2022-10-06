@@ -67,7 +67,7 @@ module University::Person::WithEducation
     cohorts_ids = []
     self.cohorts.map do |object|
       academic_year = Education::AcademicYear.where(university_id: university_id, year: object.year).first_or_create
-      cohort = Education::Cohort.where(university_id: university_id, program_id: object.program_id, academic_year_id: academic_year.id).first_or_initialize
+      cohort = Education::Cohort.where(university_id: university_id, school_id: object.school_id, program_id: object.program_id, academic_year_id: academic_year.id).first_or_initialize
       return unless cohort.valid?
       cohort.save if cohort.new_record?
       unless cohorts_ids.include?(cohort.reload.id) || object._destroy

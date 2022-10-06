@@ -1,37 +1,39 @@
-<table class="table">
-  <thead>
-    <tr>
-      <% if can? :reorder, Research::Laboratory::Axis %>
-        <th width="20" class="ps-0">&nbsp;</th>
-      <% end %>
-      <th><%= Research::Laboratory::Axis.model_name.human %></th>
-      <th><%= Research::Laboratory::Axis.human_attribute_name('short_name') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody data-sortable data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
-    <% axes.each do |axis| %>
-      <tr data-id="<%= axis.id %>">
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
         <% if can? :reorder, Research::Laboratory::Axis %>
-          <td><i class="fa fa-bars handle"></i></td>
+          <th width="20" class="ps-0">&nbsp;</th>
         <% end %>
-        <td>
-          <%= link_to axis, admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
-        </td>
-        <td><%= axis.short_name %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                        edit_admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
-                        class: button_classes %>
-            <%= link_to t('delete'),
-                        admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
-                        method: :delete,
-                        data: { confirm: t('please_confirm') },
-                        class: button_classes_danger %>
-          </div>
-        </td>
+        <th><%= Research::Laboratory::Axis.model_name.human %></th>
+        <th><%= Research::Laboratory::Axis.human_attribute_name('short_name') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody data-sortable data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
+      <% axes.each do |axis| %>
+        <tr data-id="<%= axis.id %>">
+          <% if can? :reorder, Research::Laboratory::Axis %>
+            <td><i class="fa fa-bars handle"></i></td>
+          <% end %>
+          <td>
+            <%= link_to axis, admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
+          </td>
+          <td><%= axis.short_name %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
+                          class: button_classes %>
+              <%= link_to t('delete'),
+                          admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

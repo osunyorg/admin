@@ -3,43 +3,45 @@
     <div class="card-header">
       <h2 class="card-title mb-0 h5"><%= t('university.person.administrator_roles') %> (<%= involvements.total_count %>)</h2>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= University::Role.model_name.human %></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% involvements.each do |involvement| %>
-          <%
-          role = involvement.target
-          role_target = role.target
-          %>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <thead>
           <tr>
-            <td>
-              <%= role.to_s %>
-              <% if role_target.present? %>
-                <br>
-                <small>
-                  <%= role_target.class.model_name.human %> :
-                  <%= link_to_if  can?(:read, role_target),
-                                  role_target,
-                                  [:admin, role_target] if role_target.present? %>
-                </small>
-              <% end %>
-            </td>
-            <td class="text-end">
-              <%= link_to t('remove'),
-                          [:admin, role_target, :role_person, { role_id: role.id, id: involvement.id }],
-                          method: :delete,
-                          data: { confirm: t('please_confirm') },
-                          class: button_classes_danger if can?(:destroy, involvement) %>
-            </td>
+            <th><%= University::Role.model_name.human %></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% involvements.each do |involvement| %>
+            <%
+            role = involvement.target
+            role_target = role.target
+            %>
+            <tr>
+              <td>
+                <%= role.to_s %>
+                <% if role_target.present? %>
+                  <br>
+                  <small>
+                    <%= role_target.class.model_name.human %> :
+                    <%= link_to_if  can?(:read, role_target),
+                                    role_target,
+                                    [:admin, role_target] if role_target.present? %>
+                  </small>
+                <% end %>
+              </td>
+              <td class="text-end">
+                <%= link_to t('remove'),
+                            [:admin, role_target, :role_person, { role_id: role.id, id: involvement.id }],
+                            method: :delete,
+                            data: { confirm: t('please_confirm') },
+                            class: button_classes_danger if can?(:destroy, involvement) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <% if involvements.total_pages > 1 %>
       <div class="card-footer">
         <%= paginate involvements, theme: 'bootstrap-5', param_name: :roles_page %>

@@ -1,29 +1,31 @@
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Communication::Website::Menu.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Menu.human_attribute_name('items') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% menus.each do |menu| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to menu, admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id) %></td>
-        <td><%= menu.items.count %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                      edit_admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
-                      class: button_classes if can?(:update, menu) %>
-            <%= link_to t('delete'),
-                      admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
-                      method: :delete,
-                      data: { confirm: t('please_confirm') },
-                      class: button_classes_danger if can?(:destroy, menu) %>
-          </div>
-        </td>
+        <th><%= Communication::Website::Menu.human_attribute_name('title') %></th>
+        <th><%= Communication::Website::Menu.human_attribute_name('items') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% menus.each do |menu| %>
+        <tr>
+          <td><%= link_to menu, admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id) %></td>
+          <td><%= menu.items.count %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                        edit_admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
+                        class: button_classes if can?(:update, menu) %>
+              <%= link_to t('delete'),
+                        admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger if can?(:destroy, menu) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

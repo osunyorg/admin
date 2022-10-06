@@ -9,10 +9,6 @@ hint = can?(:create, University::Organization) ?  t('university.person.experienc
       <div class="d-flex">
         <div class="row flex-fill">
           <div class="col-md-6 col-xxl-4">
-            <%= f.input       :university_id, 
-                              as: :hidden, 
-                              input_html: { value: current_university.id },
-                              wrapper: false %>
             <%= f.association :organization,
                               collection: current_university.organizations.ordered,
                               include_blank: t('simple_form.include_blanks.defaults.organization'),

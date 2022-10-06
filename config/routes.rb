@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
+    post '/users/confirmation/resend' => 'users/confirmations#resend', as: :resend_user_confirmation
     match '/users/auth/saml/setup' => 'users/omniauth_callbacks#saml_setup', via: [:get, :post]
   end
 
   namespace :admin do
     resources :users do
+      post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
       patch 'unlock' => 'users#unlock', on: :member
     end
     draw 'admin/administration'

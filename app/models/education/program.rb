@@ -142,7 +142,7 @@ class Education::Program < ApplicationRecord
   end
 
   def git_path(website)
-    "content/programs/#{path}/_index.html"
+    "content/programs/#{path}/_index.html" if for_website?(website)
   end
 
   def path_in_website(website)
@@ -151,8 +151,8 @@ class Education::Program < ApplicationRecord
 
   def git_dependencies(website)
     [self] +
-    siblings + 
-    descendants + 
+    siblings +
+    descendants +
     active_storage_blobs +
     git_block_dependencies +
     university_people_through_involvements +
@@ -174,6 +174,17 @@ class Education::Program < ApplicationRecord
     children.each do |child|
       child.update_column :path, child.generated_path
       child.update_children_paths
+    end
+  end
+
+  def for_website?(website)
+    case website.about
+    when Education::School
+      school_ids.include? website.about_id
+    when Education::Program
+      id == website.about_id || ancestors.map(&:id).include?(website.about_id)
+    else
+      false
     end
   end
 

@@ -180,18 +180,12 @@ class University::Person < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = []
-    if for_website?(website)
-      dependencies << self
-      dependencies.concat active_storage_blobs
-      dependencies.concat git_block_dependencies
-    end
-    dependencies << administrator if administrator.for_website?(website)
-    dependencies << author if author.for_website?(website)
-    dependencies << researcher if researcher.for_website?(website)
-    dependencies << teacher if teacher.for_website?(website)
+    dependencies = [self]
+    dependencies += active_storage_blobs
+    dependencies += git_block_dependencies
+    dependencies += [administrator, author, researcher, teacher]
     dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website) if in_block_dependencies?(website)
+    dependencies += dependencies_through_blocks(website)
     dependencies
   end
 

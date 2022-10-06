@@ -38,11 +38,16 @@ module User::WithAuthentication
       true
     end
 
+    def direct_otp_default_delivery_method
+      mobile_phone.present? ? :mobile_phone : :email
+    end
+
     def send_two_factor_authentication_code(code, delivery_method)
-      if mobile_phone.blank? || delivery_method == :email
-        send_devise_notification(:two_factor_authentication_code, code, {})
-      else
+      case delivery_method
+      when :mobile_phone
         Sendinblue::SmsService.send_mfa_code(self, code)
+      when :email
+        send_devise_notification(:two_factor_authentication_code, code, {})
       end
     end
 
@@ -57,6 +62,9 @@ module User::WithAuthentication
       self.mobile_phone = self.mobile_phone.delete(' ')
       if self.mobile_phone.start_with?('06', '07')
         self.mobile_phone = "+33#{self.mobile_phone[1..-1]}"
+      end
+      if self.mobile_phone.start_with?('+330')
+        self.mobile_phone = "+33#{self.mobile_phone[4..-1]}"
       end
     end
 

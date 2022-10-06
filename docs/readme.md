@@ -26,11 +26,18 @@ Au moment de la création on choisit un "about".
 Cet "about" peut concerner une université, une école, une revue, ou rien du tout (ex: site de projet étudiant)...
 
 2. Définition du repository
-Sélection du repository git avec le site Hugo.
-Ex: https://github.com/noesya/bordeauxmontaigne-iut
+    - Sélection du repository git avec le site Hugo.
+      Ex: https://github.com/noesya/bordeauxmontaigne-iut
+    - Ajout d'un access token d'un compte ayant des droits d'écriture sur le repository.
 
 3. Edition du site
 Gestion des objets côté Rails, export statique à l'enregistrement.
 
 4. Paramétrage
 Définition des langues, adaptation des chemins et des textes pour chaque langue.
+
+### Rafraîchir token GitHub
+
+```
+rails app:websites:refresh_tokens -- --old ghp_oldToken --new ghp_newToken
+```

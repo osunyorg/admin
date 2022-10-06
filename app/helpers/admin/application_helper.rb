@@ -46,8 +46,9 @@ module Admin::ApplicationHelper
   end
 
   def duplicate_link(object)
+    return unless can?(:update, object)
     link_to t('admin.duplicate'),
-            [:duplicate, :admin, object], 
+            [:duplicate, :admin, object],
             method: :post,
             data: { confirm: t('please_confirm') },
             class: button_classes('btn-light')
@@ -96,7 +97,7 @@ module Admin::ApplicationHelper
     text = indent text, depth
     raw text
   end
-  
+
   def indent(text, depth)
     indentation = '  ' * depth
     # Remove useless \r

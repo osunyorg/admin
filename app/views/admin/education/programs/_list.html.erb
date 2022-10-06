@@ -2,49 +2,51 @@
   hide_diploma |= false
   hide_parent |= false
 %>
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Education::Program.human_attribute_name('name') %></th>
-      <% unless hide_diploma %>
-        <th><%= Education::Program.human_attribute_name('diploma') %></th>
-      <% end %>
-      <% unless hide_parent %>
-        <th><%= Education::Program.human_attribute_name('parent') %></th>
-      <% end %>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% programs.each do |program| %>
-      <%
-      parent = program.parent
-      diploma = program.diploma
-      %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to_if  can?(:read, program),
-                            program,
-                            [:admin, program],
-                            class: "#{'draft' unless program.published?}" %></td>
+        <th><%= Education::Program.human_attribute_name('name') %></th>
         <% unless hide_diploma %>
-          <td><%= link_to_if can?(:read, diploma), diploma, [:admin, diploma] if diploma %></td>
+          <th><%= Education::Program.human_attribute_name('diploma') %></th>
         <% end %>
         <% unless hide_parent %>
-          <td><%= link_to_if can?(:read, parent), parent, [:admin, parent] if parent %></td>
+          <th><%= Education::Program.human_attribute_name('parent') %></th>
         <% end %>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                        edit_admin_education_program_path(program),
-                        class: button_classes if can?(:update, program) %>
-            <%= link_to t('delete'),
-                        admin_education_program_path(program),
-                        method: :delete,
-                        data: { confirm: program.children.any? ? t('please_confirm_with_children') : t('please_confirm') },
-                        class: button_classes_danger if can?(:destroy, program) %>
-          </div>
-        </td>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% programs.each do |program| %>
+        <%
+        parent = program.parent
+        diploma = program.diploma
+        %>
+        <tr>
+          <td><%= link_to_if  can?(:read, program),
+                              program,
+                              [:admin, program],
+                              class: "#{'draft' unless program.published?}" %></td>
+          <% unless hide_diploma %>
+            <td><%= link_to_if can?(:read, diploma), diploma, [:admin, diploma] if diploma %></td>
+          <% end %>
+          <% unless hide_parent %>
+            <td><%= link_to_if can?(:read, parent), parent, [:admin, parent] if parent %></td>
+          <% end %>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_education_program_path(program),
+                          class: button_classes if can?(:update, program) %>
+              <%= link_to t('delete'),
+                          admin_education_program_path(program),
+                          method: :delete,
+                          data: { confirm: program.children.any? ? t('please_confirm_with_children') : t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, program) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

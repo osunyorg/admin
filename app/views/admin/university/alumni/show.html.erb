@@ -7,13 +7,7 @@
     <div class="card-header">
       <h2 class="card-title mb-0 h5"><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
     </div>
-    <div class="card-body">
-      <ul class="list-unstyled">
-      <% @alumnus.cohorts.ordered.each do |cohort| %>
-        <li><%= link_to cohort, [:admin, cohort] %></li>
-      <% end %>
-      </ul>
-    </div>
+    <%= render 'admin/education/cohorts/list', cohorts: @alumnus.cohorts.ordered %>
   </div>
 <% end %>
 
@@ -22,36 +16,38 @@
     <div class="card-header">
       <h2 class="card-title mb-0 h5"><%= University::Person::Experience.model_name.human(count: @alumnus.experiences.count) %></h2>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th><%= University::Person::Experience.human_attribute_name('description') %></th>
-          <th><%= University::Person::Experience.human_attribute_name('organization') %></th>
-          <th><%= University::Person::Experience.human_attribute_name('from_year') %></th>
-          <th><%= University::Person::Experience.human_attribute_name('to_year') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @alumnus.experiences.ordered.each do |experience| %>
-          <% organization = experience.organization %>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <thead>
           <tr>
-            <td><%= experience.description %></td>
-            <td><%= link_to_if can?(:read, organization), organization, [:admin, organization] %></td>
-            <td><%= experience.from_year %></td>
-            <td><%= experience.to_year %></td>
+            <th><%= University::Person::Experience.human_attribute_name('description') %></th>
+            <th><%= University::Person::Experience.human_attribute_name('organization') %></th>
+            <th><%= University::Person::Experience.human_attribute_name('from_year') %></th>
+            <th><%= University::Person::Experience.human_attribute_name('to_year') %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @alumnus.experiences.ordered.each do |experience| %>
+            <% organization = experience.organization %>
+            <tr>
+              <td><%= experience.description %></td>
+              <td><%= link_to_if can?(:read, organization), organization, [:admin, organization] %></td>
+              <td><%= experience.from_year %></td>
+              <td><%= experience.to_year %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 <% end %>
 
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'), 
+  <%= link_to t('university.manage_cohorts'),
               cohorts_admin_university_alumnus_path(@alumnus),
               class: button_classes if can?(:update, @alumnus) %>
-  <%= link_to t('university.manage_experiences'), experiences_admin_university_alumnus_path(@alumnus), 
+  <%= link_to t('university.manage_experiences'), experiences_admin_university_alumnus_path(@alumnus),
               class: button_classes if can?(:update, @alumnus) %>
 <% end %>

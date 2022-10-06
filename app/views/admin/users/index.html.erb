@@ -4,37 +4,40 @@
     current_path: admin_users_path,
     filters: @filters if @filters.any? %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= User.human_attribute_name('last_name') %></th>
-      <th><%= User.human_attribute_name('first_name') %></th>
-      <th><%= User.human_attribute_name('email') %></th>
-      <th><%= User.human_attribute_name('role') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to_if can?(:read, user), user.last_name, [:admin, user] %></td>
-        <td><%= link_to_if can?(:read, user), user.first_name, [:admin, user] %></td>
-        <td><%= link_to user.email, [:admin, user] %></td>
-        <td>
-          <span class="badge bg-secondary">
-            <%= t("activerecord.attributes.user.roles.#{user.role}") %>
-          </span>
-        </td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link user %>
-            <%= destroy_link user %>
-          </div>
-        </td>
+        <th><%= User.human_attribute_name('last_name') %></th>
+        <th><%= User.human_attribute_name('first_name') %></th>
+        <th><%= User.human_attribute_name('email') %></th>
+        <th><%= User.human_attribute_name('role') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to_if can?(:read, user), user.last_name, [:admin, user] %></td>
+          <td><%= link_to_if can?(:read, user), user.first_name, [:admin, user] %></td>
+          <td><%= link_to user.email, [:admin, user] %></td>
+          <td>
+            <span class="badge bg-secondary">
+              <%= t("activerecord.attributes.user.roles.#{user.role}") %>
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link user %>
+              <%= destroy_link user %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <%= paginate @users, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>

@@ -57,9 +57,9 @@ class Research::Journal < ApplicationRecord
 
   def git_dependencies(website)
     dependencies = [self]
-    dependencies += published_papers + published_papers.map(&:active_storage_blobs).flatten if has_research_papers?
-    dependencies += published_volumes + published_volumes.map(&:active_storage_blobs).flatten if has_research_volumes?
-    dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten if has_researchers?
+    dependencies += papers + papers.map(&:active_storage_blobs).flatten
+    dependencies += volumes + volumes.map(&:active_storage_blobs).flatten
+    dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten
     dependencies
   end
 

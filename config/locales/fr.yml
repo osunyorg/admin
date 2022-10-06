@@ -106,7 +106,9 @@ fr:
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     users_alerts:
+      already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
+      pending_confirmation_html: "Votre compte n'a pas encore été <b>confirmé</b>.<br>Vous avez reçu un e-mail contenant un lien de confirmation. En l'absence de confirmation, votre compte cessera de fonctionner après <b>%{duration}</b>."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."
   batch_selectable:

@@ -25,6 +25,7 @@ en:
       education/cohort:
         alumni: Alumni
         program: Program
+        school: School
         year: Year
       education/diploma:
         name: Name

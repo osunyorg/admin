@@ -30,7 +30,13 @@ class Admin::University::Alumni::CohortsController < Admin::University::Applicat
 
   def cohorts_params
     params.require(:university_person)
-          .permit(cohorts_attributes: [:id, :program_id, :university_id, :year, :_destroy])
+          .permit(cohorts_attributes: [:id, :school_id, :program_id, :year, :_destroy])
+          .merge(university_id: current_university.id)
+          .tap { |permitted_params|
+            permitted_params[:cohorts_attributes].transform_values! do |hash|
+              hash.merge(university_id: current_university.id)
+            end
+          }
   end
 
 end

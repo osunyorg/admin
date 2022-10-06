@@ -1,25 +1,27 @@
 <% content_for :title, Administration::Qualiopi::Indicator.model_name.human(count: 2) %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Administration::Qualiopi::Indicator.human_attribute_name('criterion') %></th>
-      <th><%= Administration::Qualiopi::Indicator.human_attribute_name('number') %></th>
-      <th><%= Administration::Qualiopi::Indicator.human_attribute_name('name') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @indicators.each do |indicator| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= indicator.criterion %></td>
-        <td><%= indicator.number %></td>
-        <td><%= link_to indicator, [:admin, indicator] %></td>
-        <td class="text-end">
-          <%= edit_link indicator %>
-          <%= destroy_link indicator %>
-        </td>
+        <th><%= Administration::Qualiopi::Indicator.human_attribute_name('criterion') %></th>
+        <th><%= Administration::Qualiopi::Indicator.human_attribute_name('number') %></th>
+        <th><%= Administration::Qualiopi::Indicator.human_attribute_name('name') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @indicators.each do |indicator| %>
+        <tr>
+          <td><%= indicator.criterion %></td>
+          <td><%= indicator.number %></td>
+          <td><%= link_to indicator, [:admin, indicator] %></td>
+          <td class="text-end">
+            <%= edit_link indicator %>
+            <%= destroy_link indicator %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

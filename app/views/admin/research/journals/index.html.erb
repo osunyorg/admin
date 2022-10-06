@@ -2,34 +2,36 @@
 
 <%= render 'filters', current_path: admin_research_journals_path, filters: @filters if @filters.any?  %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Research::Journal.human_attribute_name('title') %></th>
-      <th><%= Research::Journal::Volume.model_name.human(count: 2) %></th>
-      <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @journals.each do |journal| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to journal, [:admin, journal] %></td>
-        <td><%= link_to "#{journal.volumes.count}", admin_research_journal_volumes_path(journal_id: journal) %></td>
-        <td><%= link_to "#{journal.papers.count}", admin_research_journal_papers_path(journal_id: journal) %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link journal %>
-            <%= destroy_link journal %>
-          </div>
-        </td>
+        <th><%= Research::Journal.human_attribute_name('title') %></th>
+        <th><%= Research::Journal::Volume.model_name.human(count: 2) %></th>
+        <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @journals, theme: 'bootstrap-5' %>
+    </thead>
 
+    <tbody>
+      <% @journals.each do |journal| %>
+        <tr>
+          <td><%= link_to journal, [:admin, journal] %></td>
+          <td><%= link_to "#{journal.volumes.count}", admin_research_journal_volumes_path(journal_id: journal) %></td>
+          <td><%= link_to "#{journal.papers.count}", admin_research_journal_papers_path(journal_id: journal) %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link journal %>
+              <%= destroy_link journal %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @journals, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Journal %>
