@@ -2,33 +2,35 @@
 
 <%= render 'filters', current_path: admin_communication_websites_path, filters: @filters if @filters.any?  %>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Communication::Website.human_attribute_name('name') %></th>
-      <th><%= Communication::Website.human_attribute_name('url') %></th>
-      <th><%= Communication::Website.human_attribute_name('about_type') %></th>
-      <th><%= Communication::Website.human_attribute_name('about') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @websites.each do |website| %>
-    <tr>
-      <td><%= link_to website, [:admin, website] %></td>
-      <td><%= link_to website.url, website.url, target: :_blank unless website.url.blank? %></td>
-      <td><%= I18n.t("activerecord.attributes.communication/website.about_#{website.about_type}") %></td>
-      <td><%= link_to_if can?(:read, website.about), website.about, [:admin, website.about] if website.about %></td>
-      <td class="text-end">
-        <div class="btn-group" role="group">
-          <%= edit_link website %>
-          <%= destroy_link website %>
-        </div>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website.human_attribute_name('name') %></th>
+        <th><%= Communication::Website.human_attribute_name('url') %></th>
+        <th><%= Communication::Website.human_attribute_name('about_type') %></th>
+        <th><%= Communication::Website.human_attribute_name('about') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @websites.each do |website| %>
+      <tr>
+        <td><%= link_to website, [:admin, website] %></td>
+        <td><%= link_to website.url, website.url, target: :_blank unless website.url.blank? %></td>
+        <td><%= I18n.t("activerecord.attributes.communication/website.about_#{website.about_type}") %></td>
+        <td><%= link_to_if can?(:read, website.about), website.about, [:admin, website.about] if website.about %></td>
+        <td class="text-end">
+          <div class="btn-group" role="group">
+            <%= edit_link website %>
+            <%= destroy_link website %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate @websites, theme: 'bootstrap-5' %>
 

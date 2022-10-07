@@ -1,31 +1,33 @@
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= University::Person.human_attribute_name('last_name') %></th>
-      <th><%= University::Person.human_attribute_name('first_name') %></th>
-      <th><%= Education::Program.model_name.human(count: 2) %></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% teachers.each do |teacher| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to teacher.last_name, admin_education_teacher_path(teacher) %></td>
-        <td><%= link_to teacher.first_name, admin_education_teacher_path(teacher) %></td>
-        <td><%= teacher.involvements.size %></td>
-        <td class="p-0">
-          <%= kamifusen_tag teacher.best_picture,
-                            width: 40 if teacher.best_picture.attached? %>
-        </td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                      edit_admin_education_teacher_path(teacher),
-                      class: button_classes %>
-          </div>
-        </td>
+        <th><%= University::Person.human_attribute_name('last_name') %></th>
+        <th><%= University::Person.human_attribute_name('first_name') %></th>
+        <th><%= Education::Program.model_name.human(count: 2) %></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% teachers.each do |teacher| %>
+        <tr>
+          <td><%= link_to teacher.last_name, admin_education_teacher_path(teacher) %></td>
+          <td><%= link_to teacher.first_name, admin_education_teacher_path(teacher) %></td>
+          <td><%= teacher.involvements.size %></td>
+          <td class="p-0">
+            <%= kamifusen_tag teacher.best_picture,
+                              width: 40 if teacher.best_picture.attached? %>
+          </td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                        edit_admin_education_teacher_path(teacher),
+                        class: button_classes %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

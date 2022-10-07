@@ -11,24 +11,6 @@ class Ability
   protected
 
   def visitor
-    can :read, Administration::Qualiopi::Criterion
-    can :read, Administration::Qualiopi::Indicator
-    can :read, University::Person
-    can :read, Communication::Website, university_id: @user.university_id
-    can :read, Communication::Website::Page, university_id: @user.university_id
-    can :read, Communication::Website::Post, university_id: @user.university_id
-    can :read, Communication::Website::Imported::Website, university_id: @user.university_id
-    can :read, Communication::Website::Imported::Page, university_id: @user.university_id
-    can :read, Communication::Website::Imported::Post, university_id: @user.university_id
-    can :read, Education::Diploma, university_id: @user.university_id
-    can :read, Education::Program, university_id: @user.university_id
-    can :read, Education::School, university_id: @user.university_id
-    can :read, Research::Journal, university_id: @user.university_id
-    can :read, Research::Journal::Paper, university_id: @user.university_id
-    can :read, Research::Journal::Volume, university_id: @user.university_id
-    can :read, Research::Laboratory, university_id: @user.university_id
-    can :read, User, university_id: @user.university_id
-    can :read, Communication::Block, university_id: @user.university_id
   end
 
   def contributor

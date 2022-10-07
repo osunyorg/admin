@@ -1,36 +1,38 @@
-<table class="table mt-5">
-  <thead>
-    <tr>
-      <th><%= Education::Program.model_name.human %></th>
-      <% checks.each do |check| %>
-        <th><%= Education::Program.human_attribute_name(check) %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% programs.each do |program| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %> mt-5">
+    <thead>
       <tr>
-        <td>
-          <% if program.ancestors.any? %>
-            <small>
-              <% program.ancestors.each do |program| %>
-                <%= program %> /
-              <% end %>
-            </small><br>
-          <% end %>
-          <%= link_to program, [:admin, program] %>
-        </td>
+        <th><%= Education::Program.model_name.human %></th>
         <% checks.each do |check| %>
-          <% valid = !program.public_send("best_#{check}").blank? %>
-          <td>
-            <% if valid %>
-              <span class="fas fa-check text-success"></span>
-            <% else %>
-              <span class="fas fa-times text-danger"></span>
-            <% end %>
-          </td>
+          <th><%= Education::Program.human_attribute_name(check) %></th>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% programs.each do |program| %>
+        <tr>
+          <td>
+            <% if program.ancestors.any? %>
+              <small>
+                <% program.ancestors.each do |program| %>
+                  <%= program %> /
+                <% end %>
+              </small><br>
+            <% end %>
+            <%= link_to program, [:admin, program] %>
+          </td>
+          <% checks.each do |check| %>
+            <% valid = !program.public_send("best_#{check}").blank? %>
+            <td>
+              <% if valid %>
+                <span class="fas fa-check text-success"></span>
+              <% else %>
+                <span class="fas fa-times text-danger"></span>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

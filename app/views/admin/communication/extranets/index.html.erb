@@ -2,33 +2,35 @@
 
 <%= render 'filters', current_path: admin_communication_extranets_path, filters: @filters if @filters.any?  %>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Communication::Extranet.human_attribute_name('name') %></th>
-      <th><%= Communication::Extranet.human_attribute_name('domain') %></th>
-      <th><%= Communication::Extranet.human_attribute_name('about_type') %></th>
-      <th><%= Communication::Extranet.human_attribute_name('about') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @extranets.each do |extranet| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to extranet, [:admin, extranet] %></td>
-        <td><%= link_to extranet.url, extranet.url, target: :_blank unless extranet.url.blank? %></td>
-        <td><%= I18n.t("activerecord.attributes.communication/extranet.about_#{extranet.about_type}") %></td>
-        <td><%= link_to extranet.about, [:admin, extranet.about] if extranet.about %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link extranet %>
-            <%= destroy_link extranet %>
-          </div>
-        </td>
+        <th><%= Communication::Extranet.human_attribute_name('name') %></th>
+        <th><%= Communication::Extranet.human_attribute_name('domain') %></th>
+        <th><%= Communication::Extranet.human_attribute_name('about_type') %></th>
+        <th><%= Communication::Extranet.human_attribute_name('about') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @extranets.each do |extranet| %>
+        <tr>
+          <td><%= link_to extranet, [:admin, extranet] %></td>
+          <td><%= link_to extranet.url, extranet.url, target: :_blank unless extranet.url.blank? %></td>
+          <td><%= I18n.t("activerecord.attributes.communication/extranet.about_#{extranet.about_type}") %></td>
+          <td><%= link_to extranet.about, [:admin, extranet.about] if extranet.about %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link extranet %>
+              <%= destroy_link extranet %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate @extranets, theme: 'bootstrap-5' %>
 

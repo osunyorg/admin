@@ -4,71 +4,73 @@
   selectable |= false
 %>
 <% if selectable %>
-<input type="hidden" name="ids[]" value="">
+  <input type="hidden" name="ids[]" value="">
 <% end %>
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <% if selectable %>
-        <th>
-          <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } %>
-        </th>
-      <% end %>
-      <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
-      <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
-      <% unless hide_author %>
-        <th><%= Communication::Website::Post.human_attribute_name('author') %></th>
-      <% end %>
-      <% unless hide_category %>
-        <th><%= Communication::Website::Post.human_attribute_name('categories') %></th>
-      <% end %>
-      <th colspan="2"><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% posts.each do |post| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
         <% if selectable %>
-          <td>
-            <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %>
-          </td>
+          <th>
+            <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } %>
+          </th>
         <% end %>
-        <td><%= link_to post,
-                        admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                        class: "#{'draft' unless post.published?}" %></td>
-        <td><%= image_tag post.featured_image.representation(resize: 'x100'),
-                          height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
+        <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
+        <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
         <% unless hide_author %>
-          <td><%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) if post.author %></td>
+          <th><%= Communication::Website::Post.human_attribute_name('author') %></th>
         <% end %>
         <% unless hide_category %>
-          <td>
-            <ul class="list-unstyled mb-0">
-              <% post.categories.each do |category| %>
-                <li><%= link_to_if can?(:read, category), category, admin_communication_website_category_path(website_id: post.website.id, id: category.id) %></li>
-              <% end %>
-            </ul>
-          </td>
+          <th><%= Communication::Website::Post.human_attribute_name('categories') %></th>
         <% end %>
-        <td>
-          <%= l post.published_at, format: :date_with_explicit_month if post.published_at %>
-          <% if post.pinned %>
-            <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
-          <% end %>
-        </td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= link_to t('edit'),
-                        edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                        class: button_classes if can?(:update, post) %>
-            <%= link_to t('delete'),
-                        admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                        method: :delete,
-                        data: { confirm: t('please_confirm') },
-                        class: button_classes_danger if can?(:destroy, post) %>
-          </div>
-        </td>
+        <th colspan="2"><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% posts.each do |post| %>
+        <tr>
+          <% if selectable %>
+            <td>
+              <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %>
+            </td>
+          <% end %>
+          <td><%= link_to post,
+                          admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                          class: "#{'draft' unless post.published?}" %></td>
+          <td><%= image_tag post.featured_image.representation(resize: 'x100'),
+                            height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          <% unless hide_author %>
+            <td><%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) if post.author %></td>
+          <% end %>
+          <% unless hide_category %>
+            <td>
+              <ul class="list-unstyled mb-0">
+                <% post.categories.each do |category| %>
+                  <li><%= link_to_if can?(:read, category), category, admin_communication_website_category_path(website_id: post.website.id, id: category.id) %></li>
+                <% end %>
+              </ul>
+            </td>
+          <% end %>
+          <td>
+            <%= l post.published_at, format: :date_with_explicit_month if post.published_at %>
+            <% if post.pinned %>
+              <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
+            <% end %>
+          </td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                          class: button_classes if can?(:update, post) %>
+              <%= link_to t('delete'),
+                          admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, post) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
