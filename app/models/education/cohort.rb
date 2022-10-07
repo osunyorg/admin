@@ -53,7 +53,7 @@ class Education::Cohort < ApplicationRecord
   }
 
   def to_s
-    "#{school} #{program} #{academic_year}"
+    "#{program} #{academic_year}"
   end
 
   def year
