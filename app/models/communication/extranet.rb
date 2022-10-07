@@ -40,6 +40,10 @@ class Communication::Extranet < ApplicationRecord
     find_by domain: host
   end
 
+  def should_show_years?
+    about.programs.many?
+  end
+
   def url
     "https://#{domain}"
   end

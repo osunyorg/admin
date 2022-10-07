@@ -9,7 +9,7 @@ SimpleNavigation::Configuration.run do |navigation|
                   university_persons_path
     primary.item  :years,
                   Education::AcademicYear.model_name.human(count: 2),
-                  education_academic_years_path
+                  education_academic_years_path if current_extranet.should_show_years?
     primary.item  :cohorts,
                   Education::Cohort.model_name.human(count: 2),
                   education_cohorts_path
