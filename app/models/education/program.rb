@@ -130,6 +130,10 @@ class Education::Program < ApplicationRecord
     where(published: publication)
   }
 
+  def to_short_s
+    short_name.empty? ? to_s : short_name
+  end
+
   def to_s
     "#{name}"
   end
