@@ -74,6 +74,7 @@ GEM
       activesupport (= 6.1.7)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
+    activestorage-scaleway-service (1.0.0)
     activesupport (6.1.7)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -480,6 +481,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activestorage-scaleway-service
   angularjs-rails
   annotate
   aws-sdk-s3
@@ -544,4 +546,4 @@ RUBY VERSION
    ruby 2.7.6p219
 
 BUNDLED WITH
-   2.3.12
+   2.3.22
