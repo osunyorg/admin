@@ -41,6 +41,9 @@ class Communication::Extranet < ApplicationRecord
   end
 
   def should_show_years?
+    # For a single program, year is like cohort
+    return false if about.is_a? Education::Program
+    # if a school has a single program, same thing
     about.programs.many?
   end
 
