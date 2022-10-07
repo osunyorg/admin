@@ -50,7 +50,7 @@
     <ul class="promotions">
       <% @cohorts.each do |cohort| %>
         <li>
-          <%= link_to cohort, cohort %>
+          <%= link_to cohort.program, cohort %>
           <b><%= cohort.academic_year %></b>
         </li>
       <% end %>
