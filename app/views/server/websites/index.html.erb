@@ -1,0 +1,22 @@
+<% content_for :title, "#{@websites.count} #{Communication::Website.model_name.human(count: @websites.count).downcase}" %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website.human_attribute_name('name') %></th>
+        <th><%= Communication::Website.human_attribute_name('url') %></th>
+        <th><%= University.model_name.human %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @websites.each do |website| %>
+        <tr>
+          <td><%= website.name %></td>
+          <td><%= link_to website.url, website.url, target: :_blank if website.url.present? %></td>
+          <td><%= link_to website.university, [:server, website.university] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

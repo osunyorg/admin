@@ -1,4 +1,4 @@
-<% content_for :title, University.model_name.human(count: 2) %>
+<% content_for :title, "#{ @universities.count} #{University.model_name.human(count:  @universities.count).downcase}" %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
