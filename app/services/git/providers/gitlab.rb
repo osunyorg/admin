@@ -60,7 +60,8 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def branch
-    super || 'main'
+    super.present?  ? super
+                    : 'main'
   end
 
   protected
