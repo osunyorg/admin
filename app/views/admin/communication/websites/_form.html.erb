@@ -13,6 +13,7 @@
           <%= f.input :url %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
           <%= f.association :languages, as: :check_boxes %>
+          <%= f.input :in_production %>
         </div>
       </div>
     </div>
@@ -25,11 +26,12 @@
           <div class="row">
             <div class="col-md-6">
               <%= f.input :git_provider, include_blank: false %>
+              <%= f.input :git_endpoint %>
             </div>
             <div class="col-md-6">
-              <%= f.input :git_endpoint %>
               <%= f.input :access_token %>
               <%= f.input :repository %>
+              <%= f.input :git_branch %>
             </div>
           </div>
         </div>

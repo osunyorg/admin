@@ -5,8 +5,10 @@
 #  id               :uuid             not null, primary key
 #  about_type       :string           indexed => [about_id]
 #  access_token     :string
+#  git_branch       :string
 #  git_endpoint     :string
 #  git_provider     :integer          default("github")
+#  in_production    :boolean          default(FALSE)
 #  name             :string
 #  plausible_url    :string
 #  repository       :string
@@ -52,6 +54,7 @@ class Communication::Website < ApplicationRecord
                           association_foreign_key: 'language_id'
 
   scope :ordered, -> { order(:name) }
+  scope :in_production, -> { where(in_production: true) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_websites.name) ILIKE unaccent(:term) OR

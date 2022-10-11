@@ -1,8 +1,9 @@
 class Git::Providers::Abstract
-  attr_reader :endpoint, :access_token, :repository
+  attr_reader :endpoint, :branch, :access_token, :repository
 
-  def initialize(endpoint, access_token, repository)
+  def initialize(endpoint, branch, access_token, repository)
     @endpoint = endpoint
+    @branch = branch
     @access_token = access_token
     @repository = repository
   end

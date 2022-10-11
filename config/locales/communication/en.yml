@@ -59,8 +59,10 @@ en:
         about_Research::Laboratory: Laboratory website
         about_type: About
         access_token: Access token
+        git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
+        in_production: Production
         languages: Languages
         name: Name
         repository: Repository
@@ -638,6 +640,7 @@ en:
   simple_form:
     hints:
       communication_website:
+        git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         languages: 'If you select at least one language the website will be considered as possibly multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
       communication_website_category:
