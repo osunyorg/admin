@@ -6,6 +6,7 @@ module User::WithPerson
 
     delegate :experiences, to: :person
 
+    after_save_commit :sync_person, if: :person
     after_create_commit :find_or_create_person, unless: :server_admin?
   end
 
@@ -19,6 +20,15 @@ module User::WithPerson
       person.phone_mobile = mobile_phone
     end
     person.user = self
+    person.save
+  end
+
+  def sync_person
+    person.first_name = first_name
+    person.last_name = last_name
+    person.slug = person.to_s.parameterize
+    person.phone_mobile = mobile_phone
+    person.picture.purge if picture_infos.present? && person.picture&.attached?
     person.save
   end
 end
