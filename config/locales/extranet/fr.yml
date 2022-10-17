@@ -1,9 +1,12 @@
 fr:
   extranet:
-    experiences:
-      new: Ajouter une expérience
-    account: 
+    account:
       my: Mon compte
       edit: Modifier
       updated: Mise à jour effectuée
       logout: Déconnexion
+    errors:
+      email_not_allowed: n'est pas autorisé à accéder à cet extranet.
+      email_not_allowed_with_contact: n'est pas autorisé à accéder à cet extranet. Contactez %{contact} pour en savoir plus.
+    experiences:
+      new: Ajouter une expérience

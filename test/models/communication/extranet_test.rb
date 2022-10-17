@@ -2,14 +2,15 @@
 #
 # Table name: communication_extranets
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  domain        :string
-#  name          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  university_id :uuid             not null, indexed
+#  id                   :uuid             not null, primary key
+#  about_type           :string           indexed => [about_id]
+#  domain               :string
+#  name                 :string
+#  registration_contact :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  about_id             :uuid             indexed => [about_type]
+#  university_id        :uuid             not null, indexed
 #
 # Indexes
 #

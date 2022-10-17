@@ -1,7 +1,9 @@
 en:
   extranet:
-    account: 
+    account:
       my: My account
       edit: Edit
       updated: Updated
       logout: Log out
+    experiences:
+      new: Add experience

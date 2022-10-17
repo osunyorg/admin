@@ -48,8 +48,9 @@ en:
         about_Research::Journal: Journal extranet
         about_Research::Laboratory: Laboratory extranet
         about_type: About
-        title: Title
         domain: Domain
+        name: Name
+        registration_contact: Contact mail for registrations problems
       communication/website:
         about: About
         about_: Independent website
@@ -216,23 +217,23 @@ en:
                 label: Description
                 placeholder: Enter description here
               element:
-                title: 
+                title:
                   label: Day
                   placeholder: Enter the day or period
                 time_slot_morning:
                   label: Morning (if necessary)
                 time_slot_afternoon:
                   label: Afternoon (or full day)
-              name: 
+              name:
                 label: Name (person, organization...)
                 placeholder: Enter the text
               zipcode:
                 label: Zipcode
                 placeholder: Enter the zipcode
-              mails: 
+              mails:
                 label: Mails
                 placeholder: Enter the mail
-              phones: 
+              phones:
                 label: Telephone numbers
                 placeholder: Enter the number
               slots: Opening times
@@ -357,11 +358,11 @@ en:
                 options:
                   children: Main page and children
                   selection: A specific selection of pages
-              show_main_description: 
+              show_main_description:
                 label: Show main page short description
-              show_description: 
+              show_description:
                 label: Show pages short descriptions
-              show_image: 
+              show_image:
                 label: Show pages images
               main_page:
                 title: Main page
@@ -382,7 +383,7 @@ en:
               add_partner: Add partner
               remove_partner: Remove partner
               element:
-                id: 
+                id:
                   label: Partner
                   placeholder: Choose organization
                   unregistered: Unregistered organization
@@ -465,7 +466,7 @@ en:
                 label: Video url
                 placeholder: Enter video's url
                 hint: >
-                  Ex: 
+                  Ex:
                   https://vimeo.com/732180675,
                   https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
@@ -648,6 +649,6 @@ en:
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
-        full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents. 
+        full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
       communication_website_post:
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.

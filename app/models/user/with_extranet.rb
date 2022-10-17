@@ -11,7 +11,11 @@ module User::WithExtranet
     def extranet_access
       # do extranet_to_validate alumni include current email?
       # TODO
-      # errors.add :email, 'n est pas autorisé'
+      # if extranet_to_validate.registration_contact.present?
+      #   errors.add :email, I18n.t('extranet.errors.email_not_allowed_with_contact', contact: extranet_to_validate.registration_contact)
+      # else
+      #   errors.add :email, I18n.t('extranet.errors.email_not_allowed')
+      # end
     end
 
   end

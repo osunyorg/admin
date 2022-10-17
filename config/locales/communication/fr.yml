@@ -48,8 +48,9 @@ fr:
         about_Research::Journal: Extranet d'une revue scientifique
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
-        name: Nom
         domain: Domaine
+        name: Nom
+        registration_contact: Mail de contact pour les problèmes d'inscription
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -217,26 +218,26 @@ fr:
                 label: Description
                 placeholder: Entrer la description
               element:
-                title: 
+                title:
                   label: Jour
                   placeholder: Entrer le jour ou la période
                 time_slot_morning:
                   label: Matin (si nécessaire)
                 time_slot_afternoon:
                   label: Après-midi (ou jour complet)
-              name: 
+              name:
                 label: Nom (personne, établissement...)
                 placeholder: Entrer le texte
               zipcode:
                 label: Code postal
                 placeholder: Entrer le code postal
-              mails: 
+              mails:
                 label: Mails
                 placeholder: Entrer le mail
-              phones: 
+              phones:
                 label: Téléphones
                 placeholder: Entrer le numéro
-              slots: Horaires  
+              slots: Horaires
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:
@@ -470,7 +471,7 @@ fr:
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo
                 hint: >
-                  Ex: 
+                  Ex:
                   https://vimeo.com/732180675,
                   https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
