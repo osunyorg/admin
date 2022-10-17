@@ -1,6 +1,8 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # include Users::AddBrandToRequestParams
+  # include Users::LayoutChoice
   # include I18nHelper
+
 
   protect_from_forgery except: :saml
   before_action :redirect_unless_university_has_sso

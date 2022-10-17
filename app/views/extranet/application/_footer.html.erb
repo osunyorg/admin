@@ -1,8 +1,12 @@
+<% hide_logo ||= false %>
+
 <footer class="pt-5">
   <div class="container">
-    <div class="footer-logo pb-5 mb-5 text-center">
-      <%= render 'logo' %>
-    </div>
+    <% unless hide_logo %>
+      <div class="footer-logo pb-5 mb-5 text-center">
+        <%= render 'logo' %>
+      </div>
+    <% end %>
     <div class="row justify-space-between">
       <% if current_extranet.about.is_a?(Education::School) %>
         <address class="col-md-6" itemscope itemtype="https://schema.org/CollegeOrUniversity">

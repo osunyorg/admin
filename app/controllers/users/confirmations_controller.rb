@@ -1,5 +1,6 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
   include Users::AddUniversityToRequestParams
+  include Users::LayoutChoice
 
   def resend
     unless signed_in_resource.confirmed?
