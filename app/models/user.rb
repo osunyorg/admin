@@ -56,6 +56,7 @@
 #
 class User < ApplicationRecord
   include WithAvatar
+  include WithExtranet
   include WithUniversity
   include WithAuthentication
   include WithOmniauth

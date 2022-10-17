@@ -50,4 +50,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_phone, :language_id, :first_name, :last_name, :picture, :picture_infos, :picture_delete])
   end
+
+  def sign_up_params
+    devise_parameter_sanitized = devise_parameter_sanitizer.sanitize(:sign_up)
+    current_mode == 'extranet' ? devise_parameter_sanitized.merge(extranet_to_validate: current_extranet) : devise_parameter_sanitized
+  end
 end
