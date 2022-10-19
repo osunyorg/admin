@@ -8,11 +8,8 @@
   </p>
 </header>
 
-<div class="row">
-  <div class="col-md-3">
-    <%= render 'faceted_search/facets', facets: @facets %>
-  </div>
-  <div class="col-md-8 offset-md-1">
-    <%= render 'extranet/cohorts/list', cohorts: @cohorts %>
-  </div>
-</div>
+<% if current_extranet.should_show_years? %>
+  <%= render 'index.facets' %>
+<% else %>
+  <%= render 'index.cards' %>
+<% end %>
