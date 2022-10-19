@@ -2,7 +2,7 @@
 <div class="row">
   <% cohorts_paged.each do |cohort| %>
   <div class="col-md-4 col-xl-3">
-    <article class="card">
+    <article class="card mb-5">
       <div class="card-body">
         <h2><%= link_to cohort.program, cohort, class: 'stretched-link' %></h2>
         <p><%= cohort.academic_year.year %></p>
