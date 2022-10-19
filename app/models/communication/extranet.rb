@@ -48,6 +48,22 @@ class Communication::Extranet < ApplicationRecord
     about.programs.many?
   end
 
+  def alumni
+    about&.university_person_alumni
+  end
+
+  def cohorts
+    about&.cohorts
+  end
+
+  def years
+    about&.academic_years
+  end
+
+  def organizations
+    about&.alumni_organizations
+  end
+
   def url
     "https://#{domain}"
   end

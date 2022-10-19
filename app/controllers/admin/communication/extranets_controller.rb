@@ -13,10 +13,10 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
 
   def show
     @about = @extranet.about
-    @alumni = @about&.alumni
-    @cohorts = @about&.cohorts
-    @years = @about&.academic_years
-    @organizations = @about&.alumni_organizations
+    @alumni = @extranet.alumni
+    @cohorts = @extranet.cohorts
+    @years = @extranet.years
+    @organizations = @extranet.organizations
     breadcrumb
   end
 
