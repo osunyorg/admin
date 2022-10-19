@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-9">
     <div class="biography">
-      <p><%= @person.biography %></p>
+      <p><%= @person&.biography %></p>
     </div>
     <div class="experiences">
       <%= link_to University::Person::Experience.human_attribute_name('new'),
@@ -13,7 +13,7 @@
                   class: 'btn btn-sm btn-secondary float-end mb-4' %>
       <p class="mb-4">Parcours professionel</p>
       <br>
-      <% if @person.experiences.any? %>
+      <% if @person&.experiences.any? %>
         <ul>
           <% @person.experiences.ordered.each do |experience| %>
             <%= render 'extranet/experiences/experience', experience: experience, edit: true %>
