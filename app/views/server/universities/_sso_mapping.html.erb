@@ -1,8 +1,9 @@
 <%
+kind = object.class.name.underscore.gsub('/', '_')
 if kind == 'university'
   mapping_keys = ['email', 'first_name', 'last_name', 'role', 'mobile_phone', 'language', 'picture_url']
 else
-  mapping_keys = ['email', 'first_name', 'last_name', 'mobile_phone', 'language', 'picture_url'] 
+  mapping_keys = ['email', 'first_name', 'last_name', 'mobile_phone', 'language', 'picture_url']
 end
 %>
 
