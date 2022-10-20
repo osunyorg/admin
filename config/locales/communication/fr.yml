@@ -49,8 +49,14 @@ fr:
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
         domain: Domaine
+        has_sso: A un SSO ?
         name: Nom
         registration_contact: Mail de contact pour les problèmes d'inscription
+        sso_cert: Certificat
+        sso_inherit_from_university: SSO hérité de l'Université
+        sso_mapping: Mapping
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: URL cible
       communication/website:
         about: Sujet du site
         about_: Site indépendant

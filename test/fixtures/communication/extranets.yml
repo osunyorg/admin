@@ -13,7 +13,7 @@
 #  sso_mapping                 :jsonb
 #  sso_name_identifier_format  :string
 #  sso_provider                :integer          default("saml")
-#  sso_target_url              :integer          default(0)
+#  sso_target_url              :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  about_id                    :uuid             indexed => [about_type]

@@ -16,6 +16,5 @@
 //= require_tree ./admin/commons
 //= require_tree ./admin/plugins
 //= require ./admin/communication/init
-//= require ./admin/university/init
 
 window.osuny = {};

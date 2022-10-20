@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_20_102138) do
+ActiveRecord::Schema.define(version: 2022_10_20_124935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_102138) do
     t.jsonb "sso_mapping"
     t.string "sso_name_identifier_format"
     t.integer "sso_provider", default: 0
-    t.integer "sso_target_url", default: 0
+    t.string "sso_target_url"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
