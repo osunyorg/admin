@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     registrations: 'users/registrations',
     sessions: 'users/sessions',
+    two_factor_authentication: 'users/two_factor_authentication',
     unlocks: 'users/unlocks'
   }
 
