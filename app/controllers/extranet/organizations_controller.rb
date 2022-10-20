@@ -13,7 +13,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   end
 
   def search
-    @term = params[:term]
+    @term = params[:term].to_s
     @organizations = current_extranet.organizations
                                       .for_search_term(@term)
                                       .ordered
