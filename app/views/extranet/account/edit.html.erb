@@ -36,4 +36,12 @@
     </div>
   </div>
   <%= submit f %>
+
+  <% if current_user.visitor? %>
+    <%# we don't want the osuny priviledged account to be able to get deleted through extranet %>
+    <h3 class="mt-5 mb-4"><%= t("devise.registrations.edit.cancel_my_account") %></h3>
+
+    <p><%= t("devise.registrations.edit.unhappy") %> <%= link_to t("devise.registrations.edit.cancel_my_account"), registration_path(current_user), data: { confirm: t("devise.registrations.edit.are_you_sure") }, method: :delete %></p>
+  <% end %>
+
 <% end %>
