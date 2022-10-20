@@ -1,8 +1,4 @@
 class Extranet::OrganizationsController < Extranet::ApplicationController
-  load_and_authorize_resource class: University::Organization,
-                              through: :about,
-                              through_association: :university_person_alumni_organizations
-
   def index
     @facets = University::Organization::Facets.new params[:facets], {
       model: about&.university_person_alumni_organizations,
@@ -17,6 +13,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   end
 
   def show
+    @organization = about.university_person_alumni_organizations.find(params[:id])
     breadcrumb
   end
 
