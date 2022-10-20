@@ -213,6 +213,11 @@ class University::Person < ApplicationRecord
     teacher.for_website?(website)
   end
 
+  def full_street_address
+    return nil if [address, zipcode, city].all?(&:blank?)
+    [address, "#{zipcode} #{city} #{country}".strip].join(', ')
+  end
+
   protected
 
   def explicit_blob_ids
