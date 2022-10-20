@@ -4,8 +4,8 @@ module Communication::Extranet::WithSso
   included do
     enum sso_provider: { saml: 0 }, _prefix: :with_sso_via
 
-    validates :sso_cert, :sso_name_identifier_format, :sso_target_url, presence: true, if: -> { has_sso? && !sso_inherit_from_university? }
-    validate :sso_mapping_should_have_email, if: -> { has_sso? && !sso_inherit_from_university? }
+    validates :sso_cert, :sso_name_identifier_format, :sso_target_url, presence: true, if: :has_sso?
+    validate :sso_mapping_should_have_email, if: :has_sso?
   end
 
   # Setter to serialize data as JSON
@@ -16,26 +16,6 @@ module Communication::Extranet::WithSso
       value = JSON.parse value if value.is_a? String
     end
     super(value)
-  end
-
-  def sso_cert
-    sso_inherit_from_university? ? university.sso_cert : @sso_cert
-  end
-
-  def sso_mapping
-    sso_inherit_from_university? ? university.sso_mapping : @sso_mapping
-  end
-
-  def sso_name_identifier_format
-    sso_inherit_from_university? ? university.sso_name_identifier_format : @sso_name_identifier_format
-  end
-
-  def sso_provider
-    sso_inherit_from_university? ? university.sso_provider : @sso_provider
-  end
-
-  def sso_target_url
-    sso_inherit_from_university? ? university.sso_target_url : @sso_target_url
   end
 
   private
