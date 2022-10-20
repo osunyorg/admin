@@ -17,3 +17,7 @@ fr:
     menu: Menu
     organization:
       experiences: Alumni dans cette organisation (%{count})
+    personal_data:
+      edit: Modifier
+      title: Mes données personnelles
+      updated: Mise à jour des donnes personnelles effectuée !

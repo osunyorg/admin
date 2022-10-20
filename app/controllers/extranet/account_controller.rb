@@ -4,7 +4,7 @@ class Extranet::AccountController < Extranet::ApplicationController
     @person = current_user.person
     breadcrumb
   end
-  
+
   def edit
     breadcrumb
     add_breadcrumb t('extranet.account.edit')
