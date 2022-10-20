@@ -53,7 +53,7 @@
   <div class="col-md-3">
     <dl>
         <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
-        <dd><%= @organization.kind %></dd>
+        <dd><%= @organization.kind_i18n %></dd>
       <% if @organization.phone.present? %>
         <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
         <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
