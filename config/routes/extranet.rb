@@ -1,6 +1,7 @@
 get 'cohorts' => 'extranet/cohorts#index', as: :education_cohorts
 get 'cohorts/:id' => 'extranet/cohorts#show', as: :education_cohort
 get 'organizations' => 'extranet/organizations#index', as: :university_organizations
+get 'organizations/search' => 'extranet/organizations#search', as: :search_university_organizations, defaults: { format: 'json' }
 get 'organizations/:id' => 'extranet/organizations#show', as: :university_organization
 get 'persons' => 'extranet/persons#index', as: :university_persons
 get 'persons/:id' => 'extranet/persons#show', as: :university_person

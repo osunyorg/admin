@@ -12,6 +12,13 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
     breadcrumb
   end
 
+  def search
+    @term = params[:term]
+    @organizations = current_extranet.organizations
+                                      .for_search_term(@term)
+                                      .ordered
+  end
+
   def show
     @organization = about.university_person_alumni_organizations.find(params[:id])
     breadcrumb
