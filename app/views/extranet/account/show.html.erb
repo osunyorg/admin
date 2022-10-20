@@ -11,7 +11,7 @@
       <%= link_to University::Person::Experience.human_attribute_name('new'),
                   new_experience_path,
                   class: 'btn btn-sm btn-secondary float-end mb-4' %>
-      <p class="mb-4">Parcours professionel</p>
+      <p class="mb-4"><%= t('extranet.experiences.title') %></p>
       <br>
       <% if @person&.experiences.any? %>
         <ul>

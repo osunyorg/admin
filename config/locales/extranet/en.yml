@@ -5,5 +5,15 @@ en:
       edit: Edit
       updated: Updated
       logout: Log out
+    errors:
+      email_not_allowed: is not authorized to access this extranet.
+      email_not_allowed_with_contact: is not authorized to access this extranet. Contact %{contact} for more information.
     experiences:
       new: Add experience
+      title: Professional path
+    home:
+      recent_cohorts: Recent cohorts
+      recent_experiences: Recent experiences
+    menu: Menu
+    organization:
+      experiences: Alumni in this organization (%{count})

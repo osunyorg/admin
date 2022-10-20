@@ -9,7 +9,7 @@
     </div>
     <% if @person&.experiences.any? %>
       <div class="experiences">
-        <p class="mb-4">Parcours professionel</p>
+        <p class="mb-4"><%= t('extranet.experiences.title') %></p>
         <ul>
           <% @person.experiences.ordered.each do |experience| %>
             <%= render 'extranet/experiences/experience', experience: experience %>
