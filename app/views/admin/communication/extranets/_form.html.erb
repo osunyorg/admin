@@ -47,7 +47,7 @@
         <div class="sso-inherited-inputs">
           <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
           <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-          <%= render 'server/universities/sso_mapping', kind: 'extranet', object: extranet %>
+          <%= render 'server/universities/sso_mapping', object: extranet %>
         </div>
       </div>
     </div>

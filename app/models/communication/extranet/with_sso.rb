@@ -4,8 +4,8 @@ module Communication::Extranet::WithSso
   included do
     enum sso_provider: { saml: 0 }, _prefix: :with_sso_via
 
-    validates :sso_cert, :sso_name_identifier_format, :sso_target_url, presence: true, if: :has_sso?
-    validate :sso_mapping_should_have_email, if: :has_sso?
+    validates :sso_cert, :sso_name_identifier_format, :sso_target_url, presence: true, if: -> { has_sso? && !sso_inherit_from_university? }
+    validate :sso_mapping_should_have_email, if: -> { has_sso? && !sso_inherit_from_university? }
   end
 
   # Setter to serialize data as JSON
