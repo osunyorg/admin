@@ -36,15 +36,19 @@
         <%= f.input :has_sso %>
         <div class="sso-inputs">
           <%= f.input :sso_inherit_from_university if current_university.has_sso? %>
-          <%= f.input :sso_target_url, required: true %>
-          <%= f.input :sso_cert, required: true %>
-          <%= f.input :sso_name_identifier_format, required: true %>
+          <div class="sso-inherited-inputs">
+            <%= f.input :sso_target_url, required: true %>
+            <%= f.input :sso_cert, required: true %>
+            <%= f.input :sso_name_identifier_format, required: true %>
+          </div>
         </div>
       </div>
       <div class="col-md-6 sso-inputs">
-        <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
-        <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-        <%= render 'server/universities/sso_mapping', kind: 'extranet', object: extranet %>
+        <div class="sso-inherited-inputs">
+          <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+          <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+          <%= render 'server/universities/sso_mapping', kind: 'extranet', object: extranet %>
+        </div>
       </div>
     </div>
   </div>

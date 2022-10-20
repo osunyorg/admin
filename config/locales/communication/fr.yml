@@ -132,6 +132,12 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+    errors:
+      models:
+        communication/extranet:
+          attributes:
+            sso_mapping:
+              missing_email: ne gère pas l'adresse email
   admin:
     communication:
       blocks:
