@@ -18,6 +18,28 @@ module University::WithSso
     super(value)
   end
 
+  def sso_cert
+    sso_inherit_from_university? ? university.sso_cert : @sso_cert
+  end
+
+  def sso_mapping
+    sso_inherit_from_university? ? university.sso_mapping : @sso_mapping
+  end
+
+  def sso_name_identifier_format
+    sso_inherit_from_university? ? university.sso_name_identifier_format : @sso_name_identifier_format
+  end
+
+  def sso_provider
+    sso_inherit_from_university? ? university.sso_provider : @sso_provider
+  end
+
+  def sso_target_url
+    sso_inherit_from_university? ? university.sso_target_url : @sso_target_url
+  end
+
+  private
+
   def sso_mapping_should_have_email
     errors.add(:sso_mapping, :missing_email) unless (sso_mapping || []).detect { |sso_item| sso_item['internal_key'] == 'email' }
   end

@@ -1,9 +1,4 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # include Users::AddBrandToRequestParams
-  # include Users::LayoutChoice
-  # include I18nHelper
-
-
   protect_from_forgery except: :saml
   before_action :redirect_unless_university_has_sso
   skip_before_action :verify_authenticity_token, only: :saml
@@ -23,9 +18,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def saml_setup
     # SAML config is stored in current brand
     request.env['omniauth.strategy'].options[:issuer] = "#{user_saml_omniauth_authorize_url}/metadata"
-    request.env['omniauth.strategy'].options[:idp_sso_target_url] = current_university.sso_target_url
-    request.env['omniauth.strategy'].options[:idp_cert] = current_university.sso_cert
-    request.env['omniauth.strategy'].options[:name_identifier_format] = current_university.sso_name_identifier_format
+    request.env['omniauth.strategy'].options[:idp_sso_target_url] = current_context.sso_target_url
+    request.env['omniauth.strategy'].options[:idp_cert] = current_context.sso_cert
+    request.env['omniauth.strategy'].options[:name_identifier_format] = current_context.sso_name_identifier_format
 
     render plain: "Omniauth SAML setup phase.", status: 404
   end
@@ -33,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def manage_user(user_infos)
-    @user = User.from_omniauth(current_university, user_infos)
+    @user = User.from_omniauth(current_context, user_infos)
 
     if @user&.persisted?
       @user.remember_me = true
@@ -45,6 +40,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def redirect_unless_university_has_sso
-    redirect_to root_path and return unless current_university.has_sso?
+    redirect_to root_path and return unless current_context.has_sso?
   end
 end

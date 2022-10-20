@@ -3,8 +3,9 @@ module User::WithOmniauth
 
   included do
 
-    def self.from_omniauth(university, attributes)
-      mapping = university.sso_mapping || []
+    def self.from_omniauth(context, attributes)
+      mapping = context.sso_mapping || []
+      university = context.is_a?(University) ? context : context.university
 
       # first step: we find the email (we are supposed to have an email mapping)
       email = get_email_from_mapping(mapping, attributes)
@@ -12,6 +13,7 @@ module User::WithOmniauth
 
       user = User.where(university: university, email: email.downcase).first_or_create do |u|
         u.password = "#{Devise.friendly_token[0,20]}!" # meets password complexity requirements
+        u.registration_context = context
       end
 
       # update user data according to mapping & infos provided by SSO
