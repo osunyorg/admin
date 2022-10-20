@@ -3,6 +3,7 @@ fr:
     account:
       my: Mon compte
       edit: Modifier
+      edit_personal_data: Modifier mes données personnelles
       updated: Mise à jour effectuée
       logout: Déconnexion
     errors:

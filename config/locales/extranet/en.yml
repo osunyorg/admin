@@ -3,6 +3,7 @@ en:
     account:
       my: My account
       edit: Edit
+      edit_personal_data: Edit my personal data
       updated: Updated
       logout: Log out
     errors:
@@ -18,6 +19,5 @@ en:
     organization:
       experiences: Alumni in this organization (%{count})
     personal_data:
-      edit: Edit
       title: My personal data
       updated: Your personal data has been updated!

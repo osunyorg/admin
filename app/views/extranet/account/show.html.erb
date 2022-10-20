@@ -7,6 +7,52 @@
     <div class="biography">
       <p><%= @person&.biography %></p>
     </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h5><%= University::Person.human_attribute_name('contacts') %></h5>
+
+        <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
+          <% next if @person.public_send(attribute_name).blank? %>
+          <p>
+            <strong><%= University::Person.human_attribute_name(attribute_name) %> :</strong>
+            <%= @person.public_send(attribute_name) %>
+          </p>
+        <% end %>
+
+        <% if @person.full_street_address.present? %>
+          <p>
+            <strong><%= University::Person.human_attribute_name("address") %> :</strong>
+            <%= @person.full_street_address %>
+          </p>
+        <% end %>
+      </div>
+      <div class="col-lg-6">
+        <h5><%= University::Person.human_attribute_name('socials') %></h5>
+
+        <% if @person.url.present? %>
+          <p>
+            <strong><%= University::Person.human_attribute_name("url") %> :</strong>
+            <%= link_to @person.url, @person.url %>
+          </p>
+        <% end %>
+
+        <% if @person.linkedin.present? %>
+          <p>
+            <strong><%= University::Person.human_attribute_name("linkedin") %> :</strong>
+            <%= link_to @person.linkedin, @person.linkedin %>
+          </p>
+        <% end %>
+
+        <% if @person.twitter.present? %>
+          <p>
+            <strong><%= University::Person.human_attribute_name("twitter") %> :</strong>
+              <%= link_to @person.twitter, "https://twitter.com/#{@person.twitter}" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
     <div class="experiences">
       <%= link_to University::Person::Experience.human_attribute_name('new'),
                   new_experience_path,
@@ -24,8 +70,8 @@
   </div>
   <div class="col-md-3">
     <div class="mb-4">
-      <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary' %>
-      <%= link_to t('extranet.account.logout'), destroy_user_session_path, method: :delete, class: 'btn text-danger' %>
+      <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary mb-2' %>
+      <%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: 'btn btn-primary' %>
     </div>
     <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
   </div>

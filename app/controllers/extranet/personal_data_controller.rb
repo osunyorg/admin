@@ -1,19 +1,19 @@
 class Extranet::PersonalDataController < Extranet::ApplicationController
   before_action :load_person
 
-  def show
-    # Superadmins don't have a person
-    breadcrumb
-  end
-
   def edit
     breadcrumb
-    add_breadcrumb t('extranet.personal_data.edit')
+    add_breadcrumb t('extranet.account.edit_personal_data')
   end
 
   def update
-    @person.update person_params
-    redirect_to personal_data_path, notice: t('extranet.personal_data.updated')
+    if @person.update person_params
+      redirect_to account_path, notice: t('extranet.personal_data.updated')
+    else
+      render :edit
+      breadcrumb
+      add_breadcrumb t('extranet.account.edit_personal_data')
+    end
   end
 
   private
@@ -35,6 +35,6 @@ class Extranet::PersonalDataController < Extranet::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb t('extranet.personal_data.title'), personal_data_path
+    add_breadcrumb t('extranet.account.my'), account_path
   end
 end

@@ -13,7 +13,6 @@ patch 'account' => 'extranet/account#update'
 scope :account do
   resources :experiences, controller: 'extranet/experiences', except: [:index, :show]
 end
-get 'personal_data' => 'extranet/personal_data#show', as: :personal_data
 get 'personal_data/edit' => 'extranet/personal_data#edit', as: :edit_personal_data
-patch 'personal_data' => 'extranet/personal_data#update'
+patch 'personal_data' => 'extranet/personal_data#update', as: :personal_data
 root to: 'extranet/home#index'
