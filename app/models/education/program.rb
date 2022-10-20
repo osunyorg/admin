@@ -131,7 +131,7 @@ class Education::Program < ApplicationRecord
   }
 
   def to_short_s
-    short_name.empty? ? to_s : short_name
+    short_name.blank? ? to_s : short_name
   end
 
   def to_s

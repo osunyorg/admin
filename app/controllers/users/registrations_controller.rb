@@ -52,7 +52,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    devise_parameter_sanitized = devise_parameter_sanitizer.sanitize(:sign_up)
-    current_mode == 'extranet' ? devise_parameter_sanitized.merge(extranet_to_validate: current_extranet) : devise_parameter_sanitized
+    devise_parameter_sanitized = devise_parameter_sanitizer.sanitize(:sign_up).merge(registration_context: current_context)
   end
 end
