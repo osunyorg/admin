@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <%= f.association :organization, include_blank: false %>
+      <%= f.association :organization,
+                        include_blank: false,
+                        collection: current_extranet.organizations.ordered %>
     </div>
   </div>
   <%= submit f %>
