@@ -4,7 +4,7 @@
 #
 #  id                   :uuid             not null, primary key
 #  about_type           :string           indexed => [about_id]
-#  domain               :string
+#  host                 :string
 #  name                 :string
 #  registration_contact :string
 #  created_at           :datetime         not null

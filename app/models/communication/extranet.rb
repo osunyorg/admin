@@ -4,7 +4,7 @@
 #
 #  id                   :uuid             not null, primary key
 #  about_type           :string           indexed => [about_id]
-#  domain               :string
+#  host                 :string
 #  name                 :string
 #  registration_contact :string
 #  created_at           :datetime         not null
@@ -25,20 +25,20 @@ class Communication::Extranet < ApplicationRecord
   include WithAbouts
   include WithUniversity
 
-  validates_presence_of :name, :domain
+  validates_presence_of :name, :host
 
   has_one_attached_deletable :logo
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
     where("
-      unaccent(communication_extranets.domain) ILIKE unaccent(:term) OR
+      unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
       unaccent(communication_extranets.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def self.with_host(host)
-    find_by domain: host
+    find_by host: host
   end
 
   def should_show_years?
@@ -65,7 +65,7 @@ class Communication::Extranet < ApplicationRecord
   end
 
   def url
-    "https://#{domain}"
+    @url ||= Rails.env.development? ? "http://#{host}:3000" : "https://#{host}"
   end
 
   def to_s

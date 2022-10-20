@@ -64,6 +64,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
 
   def extranet_params
     params.require(:communication_extranet)
-          .permit(:name, :domain, :about_type, :about_id, :registration_contact, :logo, :logo_delete)
+          .permit(:name, :host, :about_type, :about_id, :registration_contact, :logo, :logo_delete)
   end
 end

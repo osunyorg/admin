@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_17_142108) do
+ActiveRecord::Schema.define(version: 2022_10_20_102322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_10_17_142108) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
     t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_10_17_142108) do
   create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
-    t.string "domain"
+    t.string "host"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "about_type"

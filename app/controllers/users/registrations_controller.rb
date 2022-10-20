@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  include Users::AddUniversityToRequestParams
+  include Users::AddContextToRequestParams
   include Users::LayoutChoice
 
   before_action :configure_sign_up_params, only: :create

@@ -48,7 +48,7 @@ en:
         about_Research::Journal: Journal extranet
         about_Research::Laboratory: Laboratory extranet
         about_type: About
-        domain: Domain
+        host: Domain
         name: Name
         registration_contact: Contact mail for registrations problems
       communication/website:
