@@ -4,7 +4,7 @@ module User::WithRegistrationContext
   included do
     attr_accessor :registration_context
 
-    validate :extranet_access, if: -> { registration_context.is_a?(Communication::Extranet) }
+    validate :extranet_access, on: :create, if: -> { registration_context.is_a?(Communication::Extranet) }
 
     private
 

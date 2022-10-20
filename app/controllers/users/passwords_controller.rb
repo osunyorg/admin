@@ -1,5 +1,5 @@
 class Users::PasswordsController < Devise::PasswordsController
-  include Users::AddUniversityToRequestParams
+  include Users::AddContextToRequestParams
   include Users::LayoutChoice
 
   def update

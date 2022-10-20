@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  include Users::AddUniversityToRequestParams
+  include Users::AddContextToRequestParams
   include Users::LayoutChoice
 
   # DELETE /resource/sign_out

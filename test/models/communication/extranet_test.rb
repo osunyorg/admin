@@ -4,8 +4,8 @@
 #
 #  id                          :uuid             not null, primary key
 #  about_type                  :string           indexed => [about_id]
-#  domain                      :string
 #  has_sso                     :boolean          default(FALSE)
+#  host                        :string
 #  name                        :string
 #  registration_contact        :string
 #  sso_cert                    :text

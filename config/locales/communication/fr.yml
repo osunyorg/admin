@@ -48,8 +48,8 @@ fr:
         about_Research::Journal: Extranet d'une revue scientifique
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
-        domain: Domaine
         has_sso: A un SSO ?
+        host: Domaine
         name: Nom
         registration_contact: Mail de contact pour les problèmes d'inscription
         sso_cert: Certificat

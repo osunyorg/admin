@@ -24,6 +24,23 @@ module User::WithAuthentication
       where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
     end
 
+    def self.send_confirmation_instructions(attributes = {})
+      confirmable = find_by_unconfirmed_email_with_errors(attributes) if reconfirmable
+      unless confirmable.try(:persisted?)
+        confirmable = find_or_initialize_with_errors(confirmation_keys, attributes, :not_found)
+      end
+      confirmable.registration_context = attributes[:registration_context] if attributes.has_key?(:registration_context)
+      confirmable.resend_confirmation_instructions if confirmable.persisted?
+      confirmable
+    end
+
+    def self.send_unlock_instructions(attributes = {})
+      lockable = find_or_initialize_with_errors(unlock_keys, attributes, :not_found)
+      lockable.registration_context = attributes[:registration_context] if attributes.has_key?(:registration_context)
+      lockable.resend_unlock_instructions if lockable.persisted?
+      lockable
+    end
+
     # Inject a session_token in user salt to prevent Cookie session hijacking
     # https://makandracards.com/makandra/53562-devise-invalidating-all-sessions-for-a-user
     def authenticatable_salt
