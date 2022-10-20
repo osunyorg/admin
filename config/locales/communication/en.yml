@@ -131,6 +131,12 @@ en:
         text: Text
         title: Title
         website: Website
+    errors:
+      models:
+        communication/extranet:
+          attributes:
+            sso_mapping:
+              missing_email: doesn't handle the email
   admin:
     communication:
       blocks:
