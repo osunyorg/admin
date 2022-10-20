@@ -48,9 +48,15 @@ en:
         about_Research::Journal: Journal extranet
         about_Research::Laboratory: Laboratory extranet
         about_type: About
+        has_sso: Has SSO?
         host: Domain
         name: Name
         registration_contact: Contact mail for registrations problems
+        sso_cert: Certificate
+        sso_inherit_from_university: SSO inherited from University
+        sso_mapping: Mapping
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: Target URL
       communication/website:
         about: About
         about_: Independent website

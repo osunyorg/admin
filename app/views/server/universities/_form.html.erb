@@ -44,7 +44,7 @@
     <div class="col-md-6 sso-inputs">
       <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
       <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-      <%= render 'sso_mapping', university: university %>
+      <%= render 'sso_mapping', kind: 'university', object: university %>
     </div>
   </div>
 
