@@ -21,7 +21,7 @@
     </dd>
   <% end %>
   <% if person.full_street_address.present? %>
-    <dt><%= University::Person.human_attribute_name("address") %> :</dt>
+    <dt><%= University::Person.human_attribute_name("address") %></dt>
     <dd><%= person.full_street_address %></dd>
   <% end %>
   <% if person.url.present? %>
