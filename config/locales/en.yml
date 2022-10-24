@@ -205,6 +205,7 @@ en:
   languages:
     en: English
     fr: French
+  legal: Legal
   loading: Loading...
   login:
     already_registered: Already registered?
@@ -214,6 +215,7 @@ en:
     sign_in_with_credentials: Sign in with credentials
     sign_in_with_sso: Sign in through SSO
     subtitle: Sign in to your account to continue
+  look_feel: Look & feel
   mailers:
     notifications:
       import:

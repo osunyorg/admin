@@ -48,15 +48,19 @@ fr:
         about_Research::Journal: Extranet d'une revue scientifique
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
+        color: Couleur
+        cookies_policy: Politique de cookies
         has_sso: A un SSO ?
         host: Domaine
         name: Nom
+        privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
         sso_cert: Certificat
         sso_inherit_from_university: SSO hérité de l'Université
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
+        terms: Conditions d'utilisation
       communication/website:
         about: Sujet du site
         about_: Site indépendant

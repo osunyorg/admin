@@ -48,6 +48,10 @@ en:
         about_Research::Journal: Journal extranet
         about_Research::Laboratory: Laboratory extranet
         about_type: About
+        color: Couleur
+        cookies_policy: Cookies policy
+        privacy_policy: Privacy policy
+        terms: Terms of service
         has_sso: Has SSO?
         host: Domain
         name: Name
