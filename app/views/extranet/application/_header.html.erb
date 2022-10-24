@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="container">
+    <%= render_breadcrumbs builder: Appstack::BreadcrumbsOnRailsBuilder if breadcrumbs.any? %>
+    <% if content_for(:header).present? %>
+      <%= yield :header %>
+    <% else %>
+      <h1><%= yield :title %></h1>
+      <p class="header__additional_data">
+        <%= yield :header_right %>&nbsp;
+      </p>
+    <% end %>
+  </div>
+</header>

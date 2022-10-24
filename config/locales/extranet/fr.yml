@@ -2,8 +2,8 @@ fr:
   extranet:
     account:
       my: Mon compte
-      edit: Modifier
-      edit_personal_data: Modifier mes données personnelles
+      edit: Modifier mon compte
+      edit_personal_data: Modifier mon profil
       updated: Mise à jour effectuée
       logout: Déconnexion
     errors:

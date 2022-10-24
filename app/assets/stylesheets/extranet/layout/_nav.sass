@@ -1,5 +1,8 @@
 .navbar
-    margin-bottom: 50px
+    position: absolute
+    width: 100%
+    @include media-breakpoint-up(md)
+        padding-top: 30px
     .navbar-brand
         img
             max-width: 100px
@@ -10,8 +13,11 @@
             color: $navbar-link-active-color
     .navbar-collapse
         flex-grow: 0
-    
+    .navbar-nav
+        > .nav-item
+            margin-left: 20px
     .dropdown-menu
+        background: transparent
         border: 0
         padding: 0
     .navbar-toggler
@@ -21,7 +27,6 @@
         padding-right: 0
         text-transform: uppercase
     @include media-breakpoint-up(md)
-        margin-bottom: 100px
         .navbar-nav
             li:last-child .nav-link
                 padding-right: 0
