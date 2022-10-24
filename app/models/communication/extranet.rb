@@ -33,6 +33,7 @@
 #
 class Communication::Extranet < ApplicationRecord
   include WithAbouts
+  include WithLegal
   include WithSso
   include WithUniversity
 
