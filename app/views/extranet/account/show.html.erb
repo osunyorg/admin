@@ -2,28 +2,18 @@
 
 <div class="row">
   <div class="col-md-9">
-    <div class="biography">
+    <div class="biography mb-5">
       <p><%= @person&.biography %></p>
     </div>
 
-    <div class="experiences">
-      <%= link_to University::Person::Experience.human_attribute_name('new'),
-                  new_experience_path,
-                  class: 'btn btn-sm btn-secondary float-end mb-4' %>
-      <p class="mb-4"><%= t('extranet.experiences.title') %></p>
-      <br>
-      <% if @person&.experiences.any? %>
-        <ul>
-          <% @person.experiences.ordered.each do |experience| %>
-            <%= render 'extranet/experiences/experience', experience: experience, edit: true %>
-          <% end %>
-        </ul>
-        <% end %>
-    </div>
+    <%= link_to University::Person::Experience.human_attribute_name('new'),
+                new_experience_path,
+                class: 'btn btn-sm btn-secondary float-end' %>
+    <p><%= t('extranet.experiences.title') %></p>
+    <%= render 'extranet/experiences/list', person: @person, edit: true %>
   </div>
   <div class="col-md-3">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person&.best_picture.attached? %>
-
     <div class="mb-4">
       <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary mb-2' %>
       <%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: 'btn btn-primary' %>

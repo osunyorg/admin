@@ -2,8 +2,8 @@ en:
   extranet:
     account:
       my: My account
-      edit: Edit
-      edit_personal_data: Edit my personal data
+      edit: Edit account
+      edit_personal_data: Edit profile
       updated: Updated
       logout: Log out
     errors:

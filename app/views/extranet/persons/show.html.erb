@@ -5,16 +5,10 @@
     <div class="biography">
       <p><%= @person&.biography %></p>
     </div>
-    <% if @person&.experiences.any? %>
-      <div class="experiences">
-        <p class="mb-4"><%= t('extranet.experiences.title') %></p>
-        <ul>
-          <% @person.experiences.ordered.each do |experience| %>
-            <%= render 'extranet/experiences/experience', experience: experience %>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+
+    <p class="mb-4"><%= t('extranet.experiences.title') %></p>
+    <%= render 'extranet/experiences/list', person: @person %>
+
   </div>
   <div class="col-md-3">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>

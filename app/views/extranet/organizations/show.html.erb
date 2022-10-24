@@ -2,16 +2,16 @@
 
 <div class="row">
   <div class="col-md-9">
-    <div class="biography">
+    <div class="biography mb-5">
       <p><%= @organization.text %></p>
     </div>
     <div class="experiences">
       <p class="mb-4"><%= t('extranet.organization.experiences', count: @organization.experiences.count) %></p>
-      <ul>
+      <ul class="list-unstyled">
           <% @organization.experiences.ordered.each do |experience| %>
           <li class="mb-3">
             <div>
-              <%= link_to experience.person, class: "stretched-link" do %>
+              <%= link_to experience.person do %>
                 <% if experience.person.picture.attached? %>
                   <%= kamifusen_tag experience.person.picture, width: 200, class: 'img-fluid' %>
                 <% else %>

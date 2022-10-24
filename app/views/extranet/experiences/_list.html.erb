@@ -1,0 +1,12 @@
+<%
+edit ||= false
+%>
+<% if person&.experiences.any? %>
+  <div class="experiences mt-4">
+    <ul class="list-unstyled">
+      <% @person.experiences.ordered.each do |experience| %>
+        <%= render 'extranet/experiences/experience', experience: experience, edit: edit %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
