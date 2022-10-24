@@ -2,6 +2,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery3
+//= require jquery-ui/widgets/autocomplete
 //= require jquery_ujs
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
@@ -11,6 +12,5 @@
 //= require gdpr/cookie_consent
 //= require autocomplete-rails
 //= require_tree ./application/plugins
+//= require_tree ./extranet
 //= require_self
-
-window.osuny = {};

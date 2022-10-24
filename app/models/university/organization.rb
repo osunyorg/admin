@@ -38,6 +38,8 @@ class University::Organization < ApplicationRecord
   include WithSlug
   include WithBlocks
 
+  attr_accessor :created_from_extranet
+
   has_many :experiences,
            class_name: 'University::Person::Experience'
 
@@ -62,6 +64,12 @@ class University::Organization < ApplicationRecord
       unaccent(university_organizations.text) ILIKE unaccent(:term) OR
       unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
       unaccent(university_organizations.url) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :search_by_siren_or_name, -> (term) {
+    where("
+      unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 

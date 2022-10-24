@@ -11,6 +11,7 @@ fr:
       email_not_allowed_with_contact: n'est pas autorisé à accéder à cet extranet. Contactez %{contact} pour en savoir plus.
     experiences:
       new: Ajouter une expérience
+      search_organization: Rechercher par nom ou SIREN
       title: Parcours professionnel
     home:
       recent_cohorts: Promotions récentes

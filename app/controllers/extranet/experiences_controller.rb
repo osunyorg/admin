@@ -34,7 +34,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
 
   def experience_params
     params.require(:university_person_experience)
-          .permit(:description, :from_year, :to_year, :organization_id)
+          .permit(:description, :from_year, :to_year, :organization_id, :organization_name)
   end
 
   def breadcrumb
