@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/noesya/two_factor_authentication.git
-  revision: 55807c784803abb1f93000adab3e3b3f518b508b
+  revision: ab9734c72d389aefe8ff566d41a0c35bfe5ec989
   specs:
-    two_factor_authentication (3.0.2)
+    two_factor_authentication (4.0.0)
       devise
       encryptor
       rails (>= 3.1.1)
