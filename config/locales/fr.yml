@@ -205,6 +205,7 @@ fr:
   languages:
     en: Anglais
     fr: Français
+  legal: Légal
   loading: Chargement...
   login:
     already_registered: Déjà inscrit ?
@@ -214,6 +215,7 @@ fr:
     sign_in_with_credentials: Se connecter avec ses identifiants
     sign_in_with_sso: Se connecter en SSO
     subtitle: Vous devez être authentifié pour continuer
+  look_feel: Look & feel
   mailers:
     notifications:
       import:
