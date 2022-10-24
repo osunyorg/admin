@@ -1,7 +1,5 @@
 <% content_for :title, @person %>
 
-<%= render 'extranet/persons/header', person: @person %>
-
 <div class="row">
   <div class="col-md-9">
     <div class="biography">
@@ -19,6 +17,7 @@
     <% end %>
   </div>
   <div class="col-md-3">
+    <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
     <%= render 'extranet/persons/details', person: @person %>
   </div>
 </div>

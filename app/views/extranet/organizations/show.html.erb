@@ -1,20 +1,4 @@
 <% content_for :title, @organization %>
-<div class="row mb-5 top">
-  <div class="<%= 'col-md-9' if @organization.logo.attached? %>">
-    <header>
-      <h1><%= @organization %></h1>
-      <% if @organization.url %>
-        <p><small><%= link_to @organization.url, @organization.url %></small></p>
-      <% end %>
-    </header>
-  </div>
-  <% if @organization.logo.attached? %>
-    <div class="col-md-3">
-      <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid' %>
-    </div>
-  <% end %>
-</div>
-
 
 <div class="row">
   <div class="col-md-9">
@@ -51,6 +35,8 @@
     </div>
   </div>
   <div class="col-md-3">
+    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
+
     <dl>
         <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
         <dd><%= @organization.kind_i18n %></dd>

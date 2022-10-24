@@ -7,17 +7,12 @@
       <%= t('extranet.menu') %> <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="menu">
-      <ul class="navbar-nav">
-        <li class="nav-item"><%= link_to University::Person::Alumnus.model_name.human(count: 2), university_persons_path, class: "nav-link" %></li>
-        <% if current_extranet.should_show_years? %>
-          <li class="nav-item"><%= link_to Education::AcademicYear.model_name.human(count: 2), education_academic_years_path, class: "nav-link" %></li>
-        <% end %>
-        <li class="nav-item"><%= link_to Education::Cohort.model_name.human(count: 2), education_cohorts_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to University::Organization.model_name.human(count: 2), university_organizations_path, class: "nav-link" %></li>
+      <%= render_navigation context: :extranet %>
+      <ul class="navbar-nav navbar-nav__account">
         <li class="nav-item dropdown">
-          <%= link_to current_user.to_s, "#", class: "nav-link dropdown-toggle", data: { "bs-toggle": "dropdown" }, aria: { expanded: false } %>
+          <%= link_to t('extranet.account.my'), "#", class: "nav-link dropdown-toggle", data: { "bs-toggle": "dropdown" }, aria: { expanded: false } %>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><%= link_to t('extranet.account.my'), account_path, class: "dropdown-item" %></li>
+            <li><%= link_to current_user.to_s, account_path, class: "dropdown-item" %></li>
             <li><%= link_to t('extranet.account.logout'), destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
           </ul>
         </li>

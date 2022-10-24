@@ -6,6 +6,15 @@
         border-bottom: 1px solid $light-border-color
     p:last-child
         margin-bottom: 0
+    &__logo
+        border: 1px solid $light-border-color
+        background: white
+        padding: 60px
+    @include media-breakpoint-up(md)
+        &__logo
+            margin-top: -200px
+            margin-bottom: 50px
+
     @include media-breakpoint-up(md)
         align-items: center
         display: flex

@@ -17,11 +17,11 @@ edit ||= false
       <% end %>
     <% end %>
   </div>
-  <div>
+  <div class="experience__company">
     <% if experience.organization.present? %>
       <% if experience.organization.logo.attached? %>
           <%= link_to experience.organization do %>
-            <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
+            <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid experience__company__logo' %>
           <% end %>
       <% end %>
     <% end %>

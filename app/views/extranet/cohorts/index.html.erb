@@ -1,12 +1,8 @@
 <% content_for :title, Education::Cohort.model_name.human(count: 2) %>
-
-<header class="mb-5">
-  <h1><%= Education::Cohort.model_name.human(count: 2) %></h1>
-  <p>
-    <%= @count %>
-    <%= Education::Cohort.model_name.human(count: @count).downcase %>
-  </p>
-</header>
+<% content_for :header_right do %>
+  <%= @count %>
+  <%= Education::Cohort.model_name.human(count: @count).downcase %>
+<% end %>
 
 <% if current_extranet.should_show_years? %>
   <%= render 'index.facets' %>
