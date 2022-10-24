@@ -74,6 +74,7 @@ class University::Organization < ApplicationRecord
   }
 
   validates_presence_of :name
+  validates_uniqueness_of :name, scope: :university_id
   # Organization can be created from extranet with only their name. Be careful for future validators.
   # There is an attribute accessor above : `created_from_extranet`
 
