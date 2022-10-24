@@ -130,7 +130,7 @@ en:
     mailer:
       two_factor_authentication_code:
         subject: "Two-factor authentication code"
-        text_html: "Your two-factor authentication code for %{university} is: <br><br><b>%{code}</b><br><br>It will expire in %{duration}."
+        text_html: "Your two-factor authentication code for %{context} is: <br><br><b>%{code}</b><br><br>It will expire in %{duration}."
     omniauth_callbacks:
       failure: "Failed to sign in."
     passwords:
@@ -268,7 +268,7 @@ en:
       test_chars: "%{min_length} characters min."
   show: Show
   slug_error: can only contain downcase letters, numbers, and dashes.
-  sms_code: "%{code} is your authentication code on %{university} (valid %{duration})"
+  sms_code: "%{code} is your authentication code on %{context} (valid %{duration})"
   static: Static file
   terms_of_service: Terms of service
   terms_of_service_url: https://osuny.org/conditions-d-utilisation

@@ -55,6 +55,14 @@ module User::WithAuthentication
       true
     end
 
+    def send_new_otp(request, options = {})
+      current_extranet = Communication::Extranet.with_host(request.host)
+      current_university = University.with_host(request.host)
+      current_university ||= university
+      self.registration_context = current_extranet || current_university
+      super
+    end
+
     def direct_otp_default_delivery_method
       mobile_phone.present? ? :mobile_phone : :email
     end
