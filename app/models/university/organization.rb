@@ -38,6 +38,8 @@ class University::Organization < ApplicationRecord
   include WithSlug
   include WithBlocks
 
+  attr_accessor :created_from_extranet
+
   has_many :experiences,
            class_name: 'University::Person::Experience'
 
@@ -64,8 +66,17 @@ class University::Organization < ApplicationRecord
       unaccent(university_organizations.url) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+  scope :search_by_siren_or_name, -> (term) {
+    where("
+      unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
+      unaccent(university_organizations.name) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   validates_presence_of :name
+  validates_uniqueness_of :name, scope: :university_id
+  # Organization can be created from extranet with only their name. Be careful for future validators.
+  # There is an attribute accessor above : `created_from_extranet`
 
   enum kind: {
     company: 10,

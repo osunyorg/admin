@@ -30,6 +30,7 @@ gem 'hash_dot'
 gem 'image_processing'
 gem 'jbuilder'
 gem 'jquery-rails'
+gem "jquery-ui-rails", "~> 6.0.1"
 gem 'kamifusen'#, path: '../kamifusen'
 gem 'kaminari'
 gem 'mini_magick'
@@ -39,6 +40,7 @@ gem 'omniauth-saml', '~> 2.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 6.1'
+gem "rails-autocomplete", "~> 2.0"
 gem 'rails-i18n'
 gem 'roo', "~> 2.9"
 gem 'sanitize'

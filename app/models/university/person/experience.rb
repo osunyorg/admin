@@ -27,13 +27,33 @@
 class University::Person::Experience < ApplicationRecord
   include WithUniversity
 
+  attr_accessor :organization_name
+
   belongs_to :person
   belongs_to :organization, class_name: "University::Organization"
+
+  before_validation :create_organization_if_needed
 
   scope :ordered, -> { order(from_year: :desc)}
 
   def to_s
     persisted?  ? "#{description}"
                 : self.class.human_attribute_name('new')
+  end
+
+  def organization_name
+    @organization_name || organization&.name
+  end
+
+  private
+
+  def create_organization_if_needed
+    if organization.nil? && organization_name.present?
+      self.organization_name = self.organization_name.strip
+      orga = university.organizations.find_by("name ILIKE ?", organization_name)
+      orga ||= university.organizations.find_by(siren: organization_name)
+      orga ||= university.organizations.create(name: organization_name, created_from_extranet: true)
+      self.organization = orga if orga.persisted?
+    end
   end
 end
