@@ -16,6 +16,8 @@
     .navbar-nav
         > .nav-item
             margin-left: 20px
+        &__account
+            margin-left: 30px
     .dropdown-menu
         background: transparent
         border: 0
@@ -26,6 +28,16 @@
         line-height: px2rem(28)
         padding-right: 0
         text-transform: uppercase
+    .dropdown-toggle
+        &::after
+            width: 6px
+            height: 6px
+            border-bottom: 1px solid black
+            border-left: 0
+            border-right: 1px solid black
+            border-top: 0
+            transform: rotate(45deg)
+
     @include media-breakpoint-up(md)
         .navbar-nav
             li:last-child .nav-link

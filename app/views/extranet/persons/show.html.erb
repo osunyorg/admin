@@ -1,16 +1,20 @@
 <% content_for :title, @person %>
 
 <div class="row">
-  <div class="col-md-9">
-    <div class="biography">
-      <p><%= @person&.biography %></p>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="biography mb-5">
+          <%= @person&.biography %>
+        </div>
+      </div>
     </div>
 
     <p class="mb-4"><%= t('extranet.experiences.title') %></p>
     <%= render 'extranet/experiences/list', person: @person %>
 
   </div>
-  <div class="col-md-3">
+  <div class="offset-md-1 col-md-3">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
     <%= render 'extranet/persons/details', person: @person %>
   </div>
