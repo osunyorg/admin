@@ -4,13 +4,12 @@
   <div class="col-md-4 col-xl-3">
     <article class="card mb-5">
       <div class="card-body">
-        <h2><%= link_to cohort.program, cohort, class: 'stretched-link' %></h2>
-        <p><%= cohort.academic_year.year %></p>
-        <p class="small">
+        <h2 class="mb-0"><%= link_to cohort.academic_year.year, cohort, class: 'stretched-link' %></h2>
+        <p class="small mb-0">
           <%= cohort.people.count %>
           <%= University::Person::Alumnus.model_name.human(count: cohort.people.count).downcase %>
         </p>
-        <p class="text-end mb-0">
+        <p class="text-end mb-n2">
           <i class="bi bi-arrow-right"></i>
         </p>
       </div>

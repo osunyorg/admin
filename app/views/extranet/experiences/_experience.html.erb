@@ -1,31 +1,28 @@
 <%
 edit ||= false
 %>
-<li class="experiences__experience row py-3">
-  <div class="col-md-4">
-    <p><b><%= experience.description %></b></p>
-    <p class="mb-0">
-      <%= "#{experience.from_year} —" if experience.from_year %>
-      <%= experience.to_year || t('today') %>
-    </p>
-
-    <%= link_to University::Person::Experience.human_attribute_name('edit'),
-                edit_experience_path(experience),
-                class: 'btn btn-sm btn-secondary mt-2' if edit %>
-  </div>
-  <% if experience.organization.present? %>
+<li class="experiences__experience py-4 border-top">
+  <div class="row">
     <div class="col-md-6">
-      <p><%= link_to experience.organization, experience.organization %></p>
-      <% if experience.organization.url %>
-        <p class="mb-0"><small><%= link_to experience.organization.url, experience.organization.url %></small></p>
-      <% end %>
+      <p class="mb-0">
+        <b><%= experience.description %></b><br>
+        <%= "#{experience.from_year} —" if experience.from_year %>
+        <%= experience.to_year || t('today') %>
+      </p>
+      <%= link_to University::Person::Experience.human_attribute_name('edit'),
+                  edit_experience_path(experience),
+                  class: 'btn btn-sm btn-secondary mt-2' if edit %>
     </div>
-    <div class="col-md-2">
-      <% if experience.organization.logo.attached? %>
+    <div class="col-md-6 text-end">
+      <% if experience.organization.present? %>
         <%= link_to experience.organization do %>
-          <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
+          <% if experience.organization.logo.attached? %>
+            <%= kamifusen_tag experience.organization.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
+          <% else %>
+            <p class="text-end><%= link_to experience.organization, experience.organization %></p>
+          <% end %>
         <% end %>
-      <% end %>
-    <div>
-  <% end %>
+      <div>
+    <% end %>
+  </div>
 </li>
