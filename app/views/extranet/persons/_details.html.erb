@@ -3,11 +3,12 @@
     <dt><%= cohort.program %></dt>
     <dd><%= link_to cohort.academic_year, cohort %></dd>
   <% end %>
-  <% if person.phone_mobile.present? %>
-    <dt><%= University::Person.human_attribute_name(:phone_mobile) %></dt>
+  <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
+    <% next if person.public_send(attribute_name).blank? %>
+    <dt><%= University::Person.human_attribute_name(attribute_name) %> :</dt>
     <dd>
-      <a href="tel:<%= person.phone_mobile %>" target="_blank" rel="noreferrer">
-        <%= person.phone_mobile %>
+      <a href="tel:<%= person.public_send(attribute_name) %>" target="_blank" rel="noreferrer">
+        <%= person.public_send(attribute_name) %>
       </a>
     </dd>
   <% end %>
@@ -18,6 +19,10 @@
         <%= person.email %>
       </a>
     </dd>
+  <% end %>
+  <% if person.full_street_address.present? %>
+    <dt><%= University::Person.human_attribute_name("address") %> :</dt>
+    <dd><%= person.full_street_address %></dd>
   <% end %>
   <% if person.url.present? %>
     <dt><%= University::Person.human_attribute_name(:url) %></dt>
