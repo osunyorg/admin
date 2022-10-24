@@ -50,11 +50,10 @@ class University::Person::Experience < ApplicationRecord
   def create_organization_if_needed
     if organization.nil? && organization_name.present?
       self.organization_name = self.organization_name.strip
-      self.organization = university.organizations
-                          .where("name ILIKE ?", organization_name)
-                          .or(university.organizations.where(siren: organization_name)).first_or_create do |organization|
-        organization.created_from_extranet = true
-      end
+      orga = university.organizations.find_by("name ILIKE ?", organization_name)
+      orga ||= university.organizations.find_by(siren: organization_name)
+      orga ||= university.organizations.create(name: organization_name, created_from_extranet: true)
+      self.organization = orga if orga.persisted?
     end
   end
 end

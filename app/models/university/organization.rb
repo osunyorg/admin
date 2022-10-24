@@ -74,6 +74,8 @@ class University::Organization < ApplicationRecord
   }
 
   validates_presence_of :name
+  # Organization can be created from extranet with only their name. Be careful for future validators.
+  # There is an attribute accessor above : `created_from_extranet`
 
   enum kind: {
     company: 10,
