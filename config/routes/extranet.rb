@@ -15,4 +15,7 @@ scope :account do
   get 'personal_data' => 'extranet/personal_data#edit', as: :edit_personal_data
   patch 'personal_data' => 'extranet/personal_data#update', as: :personal_data
 end
+get 'terms-of-service' => 'extranet/pages#terms_of_service', as: :terms_of_service
+get 'privacy-policy' => 'extranet/pages#privacy_policy', as: :privacy_policy
+get 'cookies-policy' => 'extranet/pages#cookies_policy', as: :cookies_policy
 root to: 'extranet/home#index'

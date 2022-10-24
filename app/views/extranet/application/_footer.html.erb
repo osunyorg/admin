@@ -25,17 +25,17 @@
 
       <nav class="text-md-end col-md-6">
         <%= link_to t('terms_of_service'),
-                    t('terms_of_service_url'),
+                    terms_of_service_path,
                     target: '_blank',
-                    rel: 'noreferrer' %>
+                    rel: 'noreferrer' if current_extranet.has_terms? %>
         <%= link_to t('privacy_policy'),
-                    t('privacy_policy_url'),
+                    privacy_policy_path,
                     target: '_blank',
-                    rel: 'noreferrer' %>
+                    rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
         <%= link_to t('cookies_policy'),
-                    t('cookies_policy_url'),
+                    cookies_policy_path,
                     target: '_blank',
-                    rel: 'noreferrer' %>
+                    rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
         <%= link_to t('cookies_consent_choice'),
                     '',
                     class: 'js-gdpr__cookie_consent__display_again' %>
