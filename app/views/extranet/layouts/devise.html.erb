@@ -21,7 +21,7 @@
           <%= yield %>
           <footer>
             <nav class="d-md-flex justify-content-between py-4">
-              <%= link_to t('terms_of_service'), terms_of_service_path, rel: 'noreferrer' if current_extranet.has_terms_of_service? %>
+              <%= link_to t('terms_of_service'), terms_of_service_path, rel: 'noreferrer' if current_extranet.has_terms? %>
               <%= link_to t('privacy_policy'), privacy_policy_path, rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
               <%= link_to t('cookies_policy'), cookies_policy_path, rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
               <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
