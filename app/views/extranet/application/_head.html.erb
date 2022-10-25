@@ -6,7 +6,7 @@
 <%= stylesheet_link_tag 'extranet', media: 'all' %>
 <%= javascript_include_tag 'extranet' %>
 <%= favicon_link_tag 'favicon.png' %>
-<% if current_extranet.color.present? %>
+<% if current_extranet.color.present? && current_extranet.color != '#000000' %>
   <style>
   h1 a {
     color: <%= current_extranet.color %>;
