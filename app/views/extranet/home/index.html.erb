@@ -20,8 +20,8 @@
           <li>
             <div>
               <%= link_to experience.person, class: "stretched-link" do %>
-                <% if experience.person.picture.attached? %>
-                  <%= kamifusen_tag experience.person.picture, width: 400, class: 'img-fluid', sizes: {
+                <% if experience.person.best_picture.attached? %>
+                  <%= kamifusen_tag experience.person.best_picture, width: 400, class: 'img-fluid', sizes: {
                         '(max-width: 576px)': '400px',
                         '(max-width: 991px)': '200px'
                     } %>
