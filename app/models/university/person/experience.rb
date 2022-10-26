@@ -35,7 +35,11 @@ class University::Person::Experience < ApplicationRecord
   before_validation :create_organization_if_needed
 
   scope :ordered, -> { order(from_year: :desc) }
-  scope :recent, -> { order(from_year: :desc, created_at: :desc).limit(10) }
+  scope :recent, -> {
+    where.not(from_year: nil)
+    .order(from_year: :desc, created_at: :desc)
+    .limit(10)
+  }
 
   def to_s
     persisted?  ? "#{description}"
