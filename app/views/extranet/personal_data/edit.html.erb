@@ -14,7 +14,11 @@
       <%= f.input :birthdate, discard_year: true, include_blank: true %>
     </div>
     <div class="col-md-8">
-      <%= f.input :biography, as: :summernote %>
+      <%= f.input :biography, 
+                  as: :summernote,
+                  input_html: {
+                    data: { 'summernote-config' => 'mini' }
+                  } %>
     </div>
   </div>
 
