@@ -16,7 +16,7 @@
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person&.best_picture.attached? %>
     <div class="mb-4">
       <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary mb-2' %>
-      <%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: 'btn btn-primary' %>
+      <%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: 'btn btn-primary mb-2' %>
     </div>
     <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
   </div>

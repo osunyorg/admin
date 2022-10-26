@@ -10,6 +10,15 @@
             font-size: $small-font-size
         dd
             margin-bottom: px2rem(26)
+        a
+            transition: text-decoration 0.5s
+            text-decoration: underline
+            text-decoration-thickness: 1px
+            text-underline-offset: 4px
+            text-decoration-color: adjust-color(black, $alpha: -0.8)
+            &:hover
+                text-decoration-color: black
+
 
 ul
     list-style: none
