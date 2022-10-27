@@ -2,8 +2,13 @@
   <div class="col-xl-6">
     <%= block_component_edit :description %>
   </div>
+  <div class="col-xl-6">
+    <label class="form-label">&nbsp;</label>
+    <%= block_component_edit :with_link %>
+    <%= block_component_edit :alphabetical %>
+  </div>
 </div>
-<draggable :list="data.elements" class="list-group" handle=".partnerHandle">
+<draggable :list="data.elements" class="list-group mb-3" handle=".partnerHandle">
   <div v-for="(element, index) in data.elements" class="list-group-item">
     <div class="d-flex mb-n3">
       <div>
@@ -12,19 +17,15 @@
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row">
-         <div class="col-lg-4">
-           <%= block_component_edit :id, template: @element, label: '' %>
-          </div>
-        </div>
+        <%= block_component_edit :id, template: @element, label: '' %>
         <div class="row"  v-if="!element.id">
-          <div class="col-lg-4">
+          <div class="col-xl-4 col-md-6">
             <%= block_component_edit :name, template: @element %>
           </div>
-          <div class="col-lg-4">
+          <div class="col-xl-4 col-md-6">
             <%= block_component_edit :url, template: @element %>
           </div>
-          <div class="col-lg-4">
+          <div class="col-xl-4 col-md-6">
             <%= block_component_edit :logo, template: @element %>
           </div>
         </div>

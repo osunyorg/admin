@@ -405,6 +405,10 @@ fr:
               remove_partner: Enlever le partenaire
               description:
                 label: Description
+              alphabetical:
+                label: Ordre alphabétique
+              with_link:
+                label: Avec des liens cliquables vers les pages des organisations?
               element:
                 id:
                   label: Organisation

@@ -348,7 +348,7 @@ en:
               description:
                 label: Description
               with_link:
-                label: With clickable links to the person's page?
+                label: With clickable link to each person's page?
               with_photo:
                 label: With a portrait for each person?
               element:
@@ -400,6 +400,10 @@ en:
             edit:
               add_partner: Add partner
               remove_partner: Remove partner
+              alphabetical:
+                label: Alphabetical order
+              with_link:
+                label: With clickable link to each organization's page?
               element:
                 id:
                   label: Partner
