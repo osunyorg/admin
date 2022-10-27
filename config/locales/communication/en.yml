@@ -343,6 +343,8 @@ en:
               add_person: Add person
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
+              alphabetical:
+                label: Alphabetical order
               description:
                 label: Description
               with_link:

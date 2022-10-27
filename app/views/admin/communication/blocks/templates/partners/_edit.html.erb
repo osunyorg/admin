@@ -3,7 +3,6 @@
     <%= block_component_edit :description %>
   </div>
 </div>
-<%= block_component_add_element t('.add_partner') %>
 <draggable :list="data.elements" class="list-group" handle=".partnerHandle">
   <div v-for="(element, index) in data.elements" class="list-group-item">
     <div class="d-flex mb-n3">
@@ -40,3 +39,4 @@
     </div>
   </div>
 </draggable>
+<%= block_component_add_element t('.add_partner') %>
