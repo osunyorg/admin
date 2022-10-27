@@ -6,7 +6,11 @@
     <% else %>
       <h1><%= yield :title %></h1>
       <p class="header__additional_data">
-        <%= yield :header_right %>&nbsp;
+        <% if content_for(:header_right).present? %>
+          <%= yield :header_right %>
+        <% else %>
+          &nbsp;
+        <% end %>
       </p>
     <% end %>
   </div>
