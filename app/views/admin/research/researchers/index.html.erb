@@ -2,30 +2,32 @@
 
 <%= render 'filters', current_path: admin_research_researchers_path, filters: @filters if @filters.any?  %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= University::Person.human_attribute_name('name') %></th>
-      <th><%= University::Person.human_attribute_name('first_name') %></th>
-      <th></th>
-      <th><%= t('research.number_of_papers') %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @researchers.each do |researcher| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to researcher.last_name, admin_research_researcher_path(researcher) %></td>
-        <td><%= link_to researcher.first_name, admin_research_researcher_path(researcher) %></td>
-        <td class="p-0">
-          <%= kamifusen_tag researcher.best_picture,
-                            width: 40 if researcher.best_picture.attached? %>
-        </td>
-        <td><%= researcher.research_journal_papers.count %></td>
+        <th><%= University::Person.human_attribute_name('name') %></th>
+        <th><%= University::Person.human_attribute_name('first_name') %></th>
+        <th></th>
+        <th><%= t('research.number_of_papers') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @researchers.each do |researcher| %>
+        <tr>
+          <td><%= link_to researcher.last_name, admin_research_researcher_path(researcher) %></td>
+          <td><%= link_to researcher.first_name, admin_research_researcher_path(researcher) %></td>
+          <td class="p-0">
+            <%= kamifusen_tag researcher.best_picture,
+                              width: 40 if researcher.best_picture.attached? %>
+          </td>
+          <td><%= researcher.research_journal_papers.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate @researchers, theme: 'bootstrap-5' %>
 

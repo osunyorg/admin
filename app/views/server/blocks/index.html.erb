@@ -1,18 +1,20 @@
 <% content_for :title, Communication::Block.model_name.human(count: 2) %>
 
-<table class="<%= table_classes %>">
-  <thead>
-    <tr>
-      <th><%= Communication::Block.human_attribute_name('name') %></th>
-      <th><%= Communication::Block.human_attribute_name('quantity') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @templates.each do |template| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to t("enums.communication.block.template_kind.#{template}"), server_block_path(template) %></td>
-        <td><%= Communication::Block.send(template).count %></td>
+        <th><%= Communication::Block.human_attribute_name('name') %></th>
+        <th><%= Communication::Block.human_attribute_name('quantity') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @templates.each do |template| %>
+        <tr>
+          <td><%= link_to t("enums.communication.block.template_kind.#{template}"), server_block_path(template) %></td>
+          <td><%= Communication::Block.send(template).count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

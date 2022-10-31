@@ -38,7 +38,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   def push(commit_message)
     return if !valid? || batch.empty?
     client.create_commit  repository,
-                          'main',
+                          branch,
                           commit_message,
                           batch
     true
@@ -59,6 +59,11 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     sha
   end
 
+  def branch
+    super.present?  ? super
+                    : 'main'
+  end
+
   protected
 
   def endpoint
@@ -76,7 +81,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   def find(path)
     client.get_file repository,
                     path,
-                    'main'
+                    branch
   rescue
     nil
   end

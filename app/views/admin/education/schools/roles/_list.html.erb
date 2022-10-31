@@ -1,41 +1,43 @@
 <% if roles.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <% if can? :reorder, University::Role %>
-          <th width="20" class="ps-0">&nbsp;</th>
-        <% end %>
-        <th class="ps-0"><%= University::Role.model_name.human %></th>
-        <th><%= University::Role.human_attribute_name('people') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody data-sortable data-sort-url="<%= reorder_admin_education_school_roles_path(school_id: @school.id) %>">
-      <% roles.each do |role| %>
-        <tr data-id="<%= role.id %>">
+  <div class="table-responsive">
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
           <% if can? :reorder, University::Role %>
-            <td><i class="fa fa-bars handle"></i></td>
+            <th width="20" class="ps-0">&nbsp;</th>
           <% end %>
-          <td class="ps-0">
-            <%= link_to_if  can?(:read, role),
-                            role,
-                            admin_education_school_role_path(role, { school_id: @school.id }) %>
-          </td>
-          <td><%= role.involvements.includes(:person).ordered.map { |involvement| involvement.person.to_s }.to_sentence %></td>
-          <td class="text-end pe-0">
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                          edit_admin_education_school_role_path(role, { school_id: @school.id }),
-                          class: button_classes if can?(:edit, role) %>
-              <%= link_to t('delete'),
-                          admin_education_school_role_path(role, { school_id: @school.id }),
-                          method: :delete,
-                          data: { confirm: t('please_confirm') },
-                          class: button_classes_danger if can?(:destroy, role) %>
-            </div>
-          </td>
+          <th class="ps-0"><%= University::Role.model_name.human %></th>
+          <th><%= University::Role.human_attribute_name('people') %></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody data-sortable data-sort-url="<%= reorder_admin_education_school_roles_path(school_id: @school.id) %>">
+        <% roles.each do |role| %>
+          <tr data-id="<%= role.id %>">
+            <% if can? :reorder, University::Role %>
+              <td><i class="fa fa-bars handle"></i></td>
+            <% end %>
+            <td class="ps-0">
+              <%= link_to_if  can?(:read, role),
+                              role,
+                              admin_education_school_role_path(role, { school_id: @school.id }) %>
+            </td>
+            <td><%= role.involvements.includes(:person).ordered.map { |involvement| involvement.person.to_s }.to_sentence %></td>
+            <td class="text-end pe-0">
+              <div class="btn-group" role="group">
+                <%= link_to t('edit'),
+                            edit_admin_education_school_role_path(role, { school_id: @school.id }),
+                            class: button_classes if can?(:edit, role) %>
+                <%= link_to t('delete'),
+                            admin_education_school_role_path(role, { school_id: @school.id }),
+                            method: :delete,
+                            data: { confirm: t('please_confirm') },
+                            class: button_classes_danger if can?(:destroy, role) %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 <% end %>

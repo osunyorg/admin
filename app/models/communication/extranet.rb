@@ -2,14 +2,25 @@
 #
 # Table name: communication_extranets
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  domain        :string
-#  name          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  university_id :uuid             not null, indexed
+#  id                         :uuid             not null, primary key
+#  about_type                 :string           indexed => [about_id]
+#  color                      :string
+#  cookies_policy             :text
+#  has_sso                    :boolean          default(FALSE)
+#  host                       :string
+#  name                       :string
+#  privacy_policy             :text
+#  registration_contact       :string
+#  sso_cert                   :text
+#  sso_mapping                :jsonb
+#  sso_name_identifier_format :string
+#  sso_provider               :integer          default("saml")
+#  sso_target_url             :string
+#  terms                      :text
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  about_id                   :uuid             indexed => [about_type]
+#  university_id              :uuid             not null, indexed
 #
 # Indexes
 #
@@ -22,26 +33,51 @@
 #
 class Communication::Extranet < ApplicationRecord
   include WithAbouts
+  include WithLegal
+  include WithSso
   include WithUniversity
 
-  validates_presence_of :name, :domain
+  validates_presence_of :name, :host
 
   has_one_attached_deletable :logo
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
     where("
-      unaccent(communication_extranets.domain) ILIKE unaccent(:term) OR
+      unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
       unaccent(communication_extranets.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def self.with_host(host)
-    find_by domain: host
+    find_by host: host
+  end
+
+  def should_show_years?
+    # For a single program, year is like cohort
+    return false if about.is_a? Education::Program
+    # if a school has a single program, same thing
+    about.programs.many?
+  end
+
+  def alumni
+    about&.university_person_alumni
+  end
+
+  def cohorts
+    about&.cohorts
+  end
+
+  def years
+    about&.academic_years
+  end
+
+  def organizations
+    about&.alumni_organizations
   end
 
   def url
-    "https://#{domain}"
+    @url ||= Rails.env.development? ? "http://#{host}:3000" : "https://#{host}"
   end
 
   def to_s

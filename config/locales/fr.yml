@@ -130,7 +130,7 @@ fr:
     mailer:
       two_factor_authentication_code:
         subject: "Code d'authentification à deux facteurs"
-        text_html: "Votre code d'authentification pour %{university} est :<br><br><b>%{code}</b><br><br>Il expirera dans %{duration}."
+        text_html: "Votre code d'authentification pour %{context} est :<br><br><b>%{code}</b><br><br>Il expirera dans %{duration}."
     omniauth_callbacks:
       failure: "Échec de l'authentification."
     passwords:
@@ -205,6 +205,7 @@ fr:
   languages:
     en: Anglais
     fr: Français
+  legal: Légal
   loading: Chargement...
   login:
     already_registered: Déjà inscrit ?
@@ -214,6 +215,7 @@ fr:
     sign_in_with_credentials: Se connecter avec ses identifiants
     sign_in_with_sso: Se connecter en SSO
     subtitle: Vous devez être authentifié pour continuer
+  look_feel: Look & feel
   mailers:
     notifications:
       import:
@@ -268,7 +270,7 @@ fr:
       test_chars: "%{min_length} caractères min."
   show: Voir
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
-  sms_code: "%{code} est votre code d'authentification sur %{university} (valide %{duration})"
+  sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://osuny.org/conditions-d-utilisation

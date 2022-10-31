@@ -81,6 +81,7 @@ GEM
       activesupport (= 7.0.4)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
+    activestorage-scaleway-service (1.0.0)
     activesupport (7.0.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -243,6 +244,8 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
     js_cookie_rails (2.2.0)
       railties (>= 3.1)
     json (2.6.2)
@@ -366,6 +369,8 @@ GEM
       activesupport (= 7.0.4)
       bundler (>= 1.15.0)
       railties (= 7.0.4)
+    rails-autocomplete (2.0.1)
+      rails (>= 4.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -503,6 +508,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activestorage-scaleway-service
   angularjs-rails
   annotate
   aws-sdk-s3
@@ -532,6 +538,7 @@ DEPENDENCIES
   image_processing
   jbuilder
   jquery-rails
+  jquery-ui-rails (~> 6.0.1)
   kamifusen
   kaminari
   listen (~> 3.3)
@@ -543,6 +550,7 @@ DEPENDENCIES
   puma
   rack-mini-profiler (~> 2.0)
   rails (~> 7.0)
+  rails-autocomplete (~> 2.0)
   rails-i18n
   roo (~> 2.9)
   sanitize

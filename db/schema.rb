@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_03_144016) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_24_145426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -96,11 +96,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_144016) do
   create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
-    t.string "domain"
+    t.string "host"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "about_type"
     t.uuid "about_id"
+    t.string "registration_contact"
+    t.boolean "has_sso", default: false
+    t.text "sso_cert"
+    t.jsonb "sso_mapping"
+    t.string "sso_name_identifier_format"
+    t.integer "sso_provider", default: 0
+    t.string "sso_target_url"
+    t.text "terms"
+    t.text "privacy_policy"
+    t.text "cookies_policy"
+    t.string "color"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -355,6 +366,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_144016) do
     t.text "style"
     t.date "style_updated_at"
     t.string "plausible_url"
+    t.string "git_branch"
+    t.boolean "in_production", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
   end

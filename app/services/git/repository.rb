@@ -39,6 +39,7 @@ class Git::Repository
 
   def provider
     @provider ||= provider_class.new  website&.git_endpoint,
+                                      website&.git_branch,
                                       website&.access_token,
                                       website&.repository
   end

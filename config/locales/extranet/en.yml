@@ -1,7 +1,23 @@
 en:
   extranet:
-    account: 
+    account:
       my: My account
-      edit: Edit
+      edit: Edit account
+      edit_personal_data: Edit profile
       updated: Updated
       logout: Log out
+    errors:
+      email_not_allowed: is not authorized to access this extranet.
+      email_not_allowed_with_contact: is not authorized to access this extranet. Contact %{contact} for more information.
+    experiences:
+      new: Add experience
+      title: Professional path
+    home:
+      recent_cohorts: Recent cohorts
+      recent_experiences: Recent experiences
+    menu: Menu
+    organization:
+      experiences: Alumni in this organization (%{count})
+    personal_data:
+      title: My personal data
+      updated: Your personal data has been updated!

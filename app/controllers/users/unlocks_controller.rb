@@ -1,3 +1,4 @@
 class Users::UnlocksController < Devise::UnlocksController
-  include Users::AddUniversityToRequestParams
+  include Users::AddContextToRequestParams
+  include Users::LayoutChoice
 end

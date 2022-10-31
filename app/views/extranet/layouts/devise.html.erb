@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'extranet/application/head' %>
+  </head>
+  <body class="<%= body_classes %> layout-devise">
+    <main class="container">
+      <div class="row">
+        <div class="offset-md-2 col-md-8">
+          <h1 class="text-center">
+            <%= link_to root_path do %>
+              <%= render 'logo' %>
+            <% end %>
+          </h1>
+          <% unless notice.blank? %>
+            <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
+          <% end %>
+          <% unless alert.blank? %>
+            <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
+          <% end %>
+          <%= yield %>
+          <footer>
+            <nav class="d-md-flex justify-content-between py-4">
+              <%= link_to t('terms_of_service'), terms_of_service_path, rel: 'noreferrer' if current_extranet.has_terms? %>
+              <%= link_to t('privacy_policy'), privacy_policy_path, rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
+              <%= link_to t('cookies_policy'), cookies_policy_path, rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
+              <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
+          </footer>
+        </div>
+      </div>
+    </main>
+    <%= render 'extranet/gdpr/cookie_consent' %>
+    <%= render 'bugsnag' %>
+  </body>
+</html>

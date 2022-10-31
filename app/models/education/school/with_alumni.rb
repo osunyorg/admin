@@ -3,8 +3,13 @@ module Education::School::WithAlumni
 
   included do
 
+      has_many    :education_cohorts,
+                  class_name: 'Education::Cohort'
+                  alias_attribute :cohorts, :education_cohorts
+
       has_many    :alumni, -> { distinct },
-                  through: :programs
+                  through: :education_cohorts,
+                  source: :people
                   alias_attribute :university_person_alumni, :alumni
 
       has_many    :alumni_experiences, -> { distinct },
@@ -18,11 +23,6 @@ module Education::School::WithAlumni
                   through: :alumni_experiences,
                   source: :organization
                   alias_attribute :university_person_alumni_organizations, :alumni_organizations
-
-      has_many    :education_cohorts, -> { distinct },
-                  class_name: 'Education::Cohort',
-                  through: :programs
-                  alias_attribute :cohorts, :education_cohorts
 
       has_many    :academic_years, -> { distinct },
                   class_name: 'Education::AcademicYear',

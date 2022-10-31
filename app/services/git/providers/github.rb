@@ -75,7 +75,8 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def default_branch
-    @default_branch ||= client.repo(repository)[:default_branch]
+    @default_branch ||= branch.present? ? branch
+                                        : client.repo(repository)[:default_branch]
   end
 
   def branch_sha

@@ -1,5 +1,5 @@
 <% if current_user.can_display_global_menu? %>
-  <nav id="sidebar" class="sidebar<%= ' collapsed' if @menu_collapsed %>">
+  <nav id="sidebar" class="sidebar" <%= 'data-auto-collapsed' if @menu_collapsed %>>
     <div class="sidebar-content js-simplebar">
       <%= link_to admin_root_path, class: 'sidebar-brand' do %>
         <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>

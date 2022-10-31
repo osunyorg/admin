@@ -1,4 +1,0 @@
-# Osuny Extranet
-
-## Alumni
-

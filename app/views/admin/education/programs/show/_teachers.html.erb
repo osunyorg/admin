@@ -7,22 +7,24 @@
 </div>
 <h3 class="h5"><%= Education::Program.human_attribute_name('teachers') %></h3>
 <% if @teacher_involvements.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="ps-0"><%= University::Person.model_name.human %></th>
-        <th><%= University::Person::Involvement.human_attribute_name('description') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @teacher_involvements.each do |involvement| %>
+  <div class="table-responsive">
+    <table class="<%= table_classes %>">
+      <thead>
         <tr>
-          <td class="ps-0">
-            <%= link_to_if can?(:read, involvement.person), involvement.person.to_s, admin_university_person_path(involvement.person) %>
-          </td>
-          <td><%= involvement.description %></td>
+          <th class="ps-0"><%= University::Person.model_name.human %></th>
+          <th><%= University::Person::Involvement.human_attribute_name('description') %></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @teacher_involvements.each do |involvement| %>
+          <tr>
+            <td class="ps-0">
+              <%= link_to_if can?(:read, involvement.person), involvement.person.to_s, admin_university_person_path(involvement.person) %>
+            </td>
+            <td><%= involvement.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 <% end %>

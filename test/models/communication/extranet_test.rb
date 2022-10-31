@@ -2,14 +2,25 @@
 #
 # Table name: communication_extranets
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  domain        :string
-#  name          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  university_id :uuid             not null, indexed
+#  id                         :uuid             not null, primary key
+#  about_type                 :string           indexed => [about_id]
+#  color                      :string
+#  cookies_policy             :text
+#  has_sso                    :boolean          default(FALSE)
+#  host                       :string
+#  name                       :string
+#  privacy_policy             :text
+#  registration_contact       :string
+#  sso_cert                   :text
+#  sso_mapping                :jsonb
+#  sso_name_identifier_format :string
+#  sso_provider               :integer          default("saml")
+#  sso_target_url             :string
+#  terms                      :text
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  about_id                   :uuid             indexed => [about_type]
+#  university_id              :uuid             not null, indexed
 #
 # Indexes
 #

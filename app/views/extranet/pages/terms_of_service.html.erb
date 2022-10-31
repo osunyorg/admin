@@ -1,0 +1,8 @@
+<% content_for :title, Communication::Extranet.human_attribute_name('terms') %>
+<% content_for :header do %>
+  <h1><%= Communication::Extranet.human_attribute_name('terms') %></h1>
+<% end %>
+
+<div class="content">
+  <%= sanitize current_extranet.terms %>
+</div>

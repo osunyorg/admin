@@ -1,9 +1,25 @@
 fr:
   extranet:
-    experiences:
-      new: Ajouter une expérience
-    account: 
+    account:
       my: Mon compte
-      edit: Modifier
+      edit: Modifier mon compte
+      edit_personal_data: Modifier mon profil
       updated: Mise à jour effectuée
       logout: Déconnexion
+    errors:
+      email_not_allowed: n'est pas autorisé à accéder à cet extranet.
+      email_not_allowed_with_contact: n'est pas autorisé à accéder à cet extranet. Contactez %{contact} pour en savoir plus.
+    experiences:
+      new: Ajouter une expérience
+      search_organization: Rechercher par nom ou SIREN
+      title: Parcours professionnel
+    home:
+      recent_cohorts: Promotions récentes
+      recent_experiences: Mouvements récents
+    menu: Menu
+    organization:
+      experiences: Alumni dans cette organisation (%{count})
+    personal_data:
+      edit: Modifier
+      title: Mes données personnelles
+      updated: Mise à jour des donnes personnelles effectuée !

@@ -48,8 +48,19 @@ fr:
         about_Research::Journal: Extranet d'une revue scientifique
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
+        color: Couleur
+        cookies_policy: Politique de cookies
+        has_sso: A un SSO ?
+        host: Domaine
         name: Nom
-        domain: Domaine
+        privacy_policy: Politique de confidentialité
+        registration_contact: Mail de contact pour les problèmes d'inscription
+        sso_cert: Certificat
+        sso_inherit_from_university: SSO hérité de l'Université
+        sso_mapping: Mapping
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: URL cible
+        terms: Conditions d'utilisation
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -59,8 +70,10 @@ fr:
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
         access_token: Access token
+        git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Provider Git
+        in_production: Site en production
         languages: Langues
         name: Nom
         repository: Repository
@@ -123,6 +136,12 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+    errors:
+      models:
+        communication/extranet:
+          attributes:
+            sso_mapping:
+              missing_email: ne gère pas l'adresse email
   admin:
     communication:
       blocks:
@@ -215,26 +234,26 @@ fr:
                 label: Description
                 placeholder: Entrer la description
               element:
-                title: 
+                title:
                   label: Jour
                   placeholder: Entrer le jour ou la période
                 time_slot_morning:
                   label: Matin (si nécessaire)
                 time_slot_afternoon:
                   label: Après-midi (ou jour complet)
-              name: 
+              name:
                 label: Nom (personne, établissement...)
                 placeholder: Entrer le texte
               zipcode:
                 label: Code postal
                 placeholder: Entrer le code postal
-              mails: 
+              mails:
                 label: Mails
                 placeholder: Entrer le mail
-              phones: 
+              phones:
                 label: Téléphones
                 placeholder: Entrer le numéro
-              slots: Horaires  
+              slots: Horaires
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:
@@ -322,11 +341,13 @@ fr:
                   label: Description
                   placeholder: Entrer la description
           organization_chart:
-            description: Un organigramme présentant des personnes et leur fonction.
+            description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
             edit:
               add_person: Ajouter une personne
               drag_title: Glisser-déposer pour organiser les personnes
               delete_title: Enlever la personne
+              alphabetical:
+                label: Ordre alphabétique
               with_link:
                 label: Avec des liens cliquables vers les pages des personnes ?
               with_photo:
@@ -378,12 +399,16 @@ fr:
               display:
                 title: Options d'affichage
           partners:
-            description: Une liste de partenaires, avec leur logo, leur site et leur nom.
+            description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
               add_partner: Ajouter un partenaire
               remove_partner: Enlever le partenaire
               description:
                 label: Description
+              alphabetical:
+                label: Ordre alphabétique
+              with_link:
+                label: Avec des liens cliquables vers les pages des organisations?
               element:
                 id:
                   label: Organisation
@@ -468,7 +493,7 @@ fr:
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo
                 hint: >
-                  Ex: 
+                  Ex:
                   https://vimeo.com/732180675,
                   https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
@@ -608,9 +633,9 @@ fr:
           gallery: Galerie
           image: Image
           key_figures: Chiffres-clés
-          organization_chart: Organigramme
+          organization_chart: Personnes
           pages: Pages
-          partners: Partenaires
+          partners: Organisations
           posts: Actualités
           programs: Formations
           testimonials: Témoignages
@@ -643,6 +668,7 @@ fr:
   simple_form:
     hints:
       communication_website:
+        git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         languages: 'Si vous sélectionnez au moins une langue le site sera considéré comme possiblement multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
       communication_website_category:

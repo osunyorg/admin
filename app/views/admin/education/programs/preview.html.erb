@@ -17,29 +17,31 @@
         </div>
         <div class="subpart">
           <h3>Informations administratives</h3>
-          <table class="table table-infos">
-            <caption>Informations administratives</caption>
-            <tbody>
-              <% if @program.diploma%>
+          <div class="table-responsive">
+            <table class="<%= table_classes %> table-infos">
+              <caption>Informations administratives</caption>
+              <tbody>
+                <% if @program.diploma%>
+                  <tr>
+                    <th>Crédits ECTS</th>
+                    <td><%= @program.diploma.ects %></td>
+                  </tr>
+                <% end %>
                 <tr>
-                  <th>Crédits ECTS</th>
-                  <td><%= @program.diploma.ects %></td>
+                  <th>Formation initiale</th>
+                  <td><%= t @program.initial %></td>
                 </tr>
-              <% end %>
-              <tr>
-                <th>Formation initiale</th>
-                <td><%= t @program.initial %></td>
-              </tr>
-              <tr>
-                <th>Formation continue</th>
-                <td><%= t @program.continuing %></td>
-              </tr>
-              <tr>
-                <th>Apprentissage</th>
-                <td><%= t @program.apprenticeship %></td>
-              </tr>
-            </tbody>
-          </table>
+                <tr>
+                  <th>Formation continue</th>
+                  <td><%= t @program.continuing %></td>
+                </tr>
+                <tr>
+                  <th>Apprentissage</th>
+                  <td><%= t @program.apprenticeship %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -59,29 +61,31 @@
       <div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('content') %></h3>
-          <%= @program.content %> 
+          <%= @program.content %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('pedagogy') %></h3>
-          <%= @program.pedagogy %> 
+          <%= @program.pedagogy %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('evaluation') %></h3>
-          <%= @program.evaluation %> 
+          <%= @program.evaluation %>
         </div>
         <div class="subpart">
           <h3>Enseignants·es</h3>
-          <table class="table-persons">
-            <caption>Enseignants·es</caption>
-            <tbody>
-              <% @program.university_person_involvements.each do |involvement| %>
-                <tr>
-                  <th scope="row"><a><%= involvement %></a></th>
-                  <td><%= involvement.description%></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table-persons">
+              <caption>Enseignants·es</caption>
+              <tbody>
+                <% @program.university_person_involvements.each do |involvement| %>
+                  <tr>
+                    <th scope="row"><a><%= involvement %></a></th>
+                    <td><%= involvement.description%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -97,9 +101,9 @@
     <div>
     <div class="subpart">
       <h3><%= Education::Program.human_attribute_name('opportunities') %></h3>
-      <%= @program.opportunities %> 
+      <%= @program.opportunities %>
       <h3><%= Education::Program.human_attribute_name('results') %></h3>
-      <%= @program.results %> 
+      <%= @program.results %>
     </div>
   </div>
 </section>
@@ -113,23 +117,23 @@
       <div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('prerequisites') %></h3>
-          <%= @program.prerequisites %> 
+          <%= @program.prerequisites %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('pricing') %></h3>
-          <%= @program.pricing %> 
+          <%= @program.pricing %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('registration') %></h3>
-          <%= @program.registration %> 
+          <%= @program.registration %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('accessibility') %></h3>
-          <%= @program.accessibility %> 
+          <%= @program.accessibility %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('other') %></h3>
-          <%= @program.other %> 
+          <%= @program.other %>
         </div>
         <div class="subpart">
           <h3>Rôles</h3>
@@ -145,7 +149,7 @@
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('contacts') %></h3>
-          <%= @program.contacts %> 
+          <%= @program.contacts %>
         </div>
       </div>
     </div>

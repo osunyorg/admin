@@ -3,11 +3,27 @@
     <a class="navbar-brand" href="/">
       <%= render 'logo' %>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle menu">
-      menu <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="menu">
-      <%= render_navigation %>
-    </div>
+    <% if user_signed_in? %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle menu">
+        <%= t('extranet.menu') %> <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <%= render_navigation context: :extranet %>
+        <ul class="navbar-nav navbar-nav__account">
+          <li class="nav-item dropdown<%= ' active' if '/account'.in?(request.path) %>">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+              <%= t('extranet.account.my') %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end text-end">
+              <li><%= link_to current_user.to_s, account_path, class: "dropdown-item" %></li>
+              <li><%= link_to t('extranet.account.edit'), edit_account_path, class: "dropdown-item" %></li>
+              <li><%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: "dropdown-item" %></li>
+              <li><%= link_to t('extranet.account.logout'), destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </nav>

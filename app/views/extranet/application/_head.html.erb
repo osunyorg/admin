@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title><%= yield :title %></title>
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%= stylesheet_link_tag 'extranet', media: 'all' %>
+<%= javascript_include_tag 'extranet' %>
+<%= favicon_link_tag 'favicon.png' %>
+<% if current_extranet.color.present? && current_extranet.color != '#000000' %>
+  <style>
+  h1 a {
+    color: <%= current_extranet.color %>;
+    text-decoration-color: <%= current_extranet.color %>66;
+  }
+  h1 a:hover {
+    color: <%= current_extranet.color %>;
+    text-decoration-color: <%= current_extranet.color %>;
+  }
+  .navbar .active .nav-link {
+    color: <%= current_extranet.color %>;
+  }
+  .btn-primary {
+    background-color: <%= current_extranet.color %>;
+    border-color: <%= current_extranet.color %>;
+  }
+  </style>
+<% end %>

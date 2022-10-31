@@ -1,0 +1,8 @@
+<% content_for :title, Communication::Extranet.human_attribute_name('privacy_policy') %>
+<% content_for :header do %>
+  <h1><%= Communication::Extranet.human_attribute_name('privacy_policy') %></h1>
+<% end %>
+
+<div class="content">
+  <%= sanitize current_extranet.privacy_policy %>
+</div>

@@ -1,8 +1,4 @@
 class Extranet::AcademicYearsController < Extranet::ApplicationController
-  load_and_authorize_resource class: Education::AcademicYear,
-                              through: :about,
-                              through_association: :education_academic_years
-
   def index
     @academic_years = about&.education_academic_years
                             .ordered
@@ -13,6 +9,7 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
   end
 
   def show
+    @academic_year = about.education_academic_years.find(params[:id])
     @cohorts = @academic_year.cohorts_in_context(current_context.about)
     @alumni = @academic_year.alumni_in_context(current_context.about)
     breadcrumb

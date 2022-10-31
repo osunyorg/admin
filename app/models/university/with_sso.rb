@@ -18,6 +18,8 @@ module University::WithSso
     super(value)
   end
 
+  private
+
   def sso_mapping_should_have_email
     errors.add(:sso_mapping, :missing_email) unless (sso_mapping || []).detect { |sso_item| sso_item['internal_key'] == 'email' }
   end

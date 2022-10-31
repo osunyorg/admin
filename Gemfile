@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Infrastructure
+gem 'activestorage-scaleway-service'#, path: '../activestorage-scaleway-service'
 gem 'angularjs-rails'
 gem 'aws-sdk-s3'
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -20,7 +21,7 @@ gem 'delayed_job_web'
 gem 'devise'
 gem 'devise-i18n'
 gem 'enum_help'
-gem 'faceted_search'#, path: '../faceted_search'
+gem 'faceted_search'#, path: '../../noesya/faceted_search'
 gem 'front_matter_parser'
 gem 'gdpr'
 gem 'gitlab'
@@ -29,6 +30,7 @@ gem 'hash_dot'
 gem 'image_processing'
 gem 'jbuilder'
 gem 'jquery-rails'
+gem "jquery-ui-rails", "~> 6.0.1"
 gem 'kamifusen'#, path: '../kamifusen'
 gem 'kaminari'
 gem 'mini_magick'
@@ -38,6 +40,7 @@ gem 'omniauth-saml', '~> 2.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 7.0'
+gem "rails-autocomplete", "~> 2.0"
 gem 'rails-i18n'
 gem 'roo', "~> 2.9"
 gem 'sanitize'

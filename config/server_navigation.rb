@@ -11,6 +11,9 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :universities,
                   University.model_name.human(count: 2),
                   server_universities_path, { icon: 'university' } if can?(:read, University)
+    primary.item  :websites,
+                  Communication::Website.model_name.human(count: 2),
+                  server_websites_path, { icon: 'globe' }
     primary.item  :languages,
                   Language.model_name.human(count: 2),
                   server_languages_path,

@@ -14,8 +14,8 @@
 //= require cocoon
 //= require_self
 //= require_tree ./admin/commons
+//= require_tree ./application/plugins
 //= require_tree ./admin/plugins
 //= require ./admin/communication/init
-//= require ./admin/university/init
 
 window.osuny = {};

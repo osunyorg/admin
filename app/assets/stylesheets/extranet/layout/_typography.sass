@@ -1,0 +1,39 @@
+@font-face
+    font-display: swap
+    font-family: 'Basier Square'
+    font-style: normal
+    font-weight: 400
+    src: asset-url("Basier-Square/basiersquare-regular.woff2") format("woff2"), url("Basier-Square/basiersquare-regular.woff") format("woff")
+
+@font-face
+    font-display: swap
+    font-family: 'Basier Square'
+    font-style: normal
+    font-weight: 500
+    src: asset-url("Basier-Square/basiersquare-medium.woff2") format("woff2"), url("Basier-Square/basiersquare-medium.woff") format("woff")
+
+@font-face
+    font-display: swap
+    font-family: 'Basier Square'
+    font-style: normal
+    font-weight: 700
+    src: asset-url("Basier-Square/basiersquare-semibold.woff2") format("woff2"), url("Basier-Square/basiersquare-semibold.woff") format("woff")
+
+h1
+    margin-top: 20px
+    font-weight: 500
+    line-height: 125%
+    @include media-breakpoint-up(md)
+        max-width: 70vw
+    @include media-breakpoint-down(md)
+        font-size: px2rem(30)
+    a
+        color: $active-color
+        transition: text-decoration 0.5s, color 0.5s
+        text-decoration: underline
+        text-decoration-thickness: 1px
+        text-underline-offset: 5px
+        text-decoration-color: adjust-color($active-color, $alpha: -0.5)
+        &:hover
+            color: darken($active-color, 10)
+            text-decoration-color: $active-color

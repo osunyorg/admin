@@ -1,0 +1,72 @@
+<% content_for :title, @person %>
+
+<%= simple_form_for @person, url: personal_data_path do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <h2 class="h5 mt-5">
+    <%= University::Person.human_attribute_name('essentials') %>
+  </h2>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
+      <%= f.input :birthdate, discard_year: true, include_blank: true %>
+    </div>
+    <div class="col-md-8">
+      <%= f.input :biography, 
+                  as: :summernote,
+                  input_html: {
+                    data: { 'summernote-config' => 'mini' }
+                  } %>
+    </div>
+  </div>
+
+  <h2 class="h5 mt-5">
+    <%= University::Person.human_attribute_name('contacts') %>
+  </h2>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :phone_mobile %>
+      <%= f.input :phone_professional %>
+      <%= f.input :phone_personal %>
+    </div>
+    <div class="col-md-8">
+      <%= f.input :address %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :zipcode %>
+        </div>
+        <div class="col-md-8">
+          <%= f.input :city %>
+        </div>
+      </div>
+      <%= f.input :country, input_html: { class: 'form-select' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    </div>
+  </div>
+  <div class="row">
+  </div>
+
+  <h2 class="h5 mt-5">
+    <%= University::Person.human_attribute_name('socials') %>
+  </h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :url %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :linkedin %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :twitter %>
+    </div>
+  </div>
+
+  <%= submit f %>
+<% end %>

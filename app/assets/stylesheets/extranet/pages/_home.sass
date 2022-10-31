@@ -1,0 +1,56 @@
+.home-index
+    h1
+        margin-bottom: 60px
+    .experiences
+        ul
+            padding-left: 0
+            li
+                border-bottom: 1px solid $light-border-color
+                margin-bottom: 30px
+                position: relative
+                > div
+                    &:nth-child(1)
+                        img
+                            width: 100%
+                    &:nth-child(2)
+                        display: flex
+                        justify-content: space-between
+                        padding-bottom: 16px
+                        padding-top: 12px
+                        display: flex
+                        justify-content: space-between
+                        > div
+                            align-self: stretch
+                            display: flex
+                            flex-direction: column
+                            justify-content: space-between
+                        a
+                            align-self: center
+                        img
+                            max-height: 80px
+            @include media-breakpoint-up(md)
+                li
+                    @include make-row
+                    border-bottom: 0
+                    margin-bottom: px2rem(16)
+                    > div
+                        @include make-col-ready
+                        &:nth-child(1)
+                            width: percentage(2/9)
+                        &:nth-child(2)
+                            @include pseudo-top-border
+                            width: percentage(7/9)
+    .promotions
+        list-style: none
+        padding-left: 0
+        li
+            border-top: solid 1px $light-border-color
+            display: flex
+            justify-content: space-between
+            padding: px2rem(20) 0
+            position: relative
+            a
+                @extend .stretched-link
+            &:last-child
+                border-bottom: solid 1px $light-border-color
+

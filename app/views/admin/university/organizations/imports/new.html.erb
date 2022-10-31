@@ -15,7 +15,7 @@
 
       <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
       <%= f.input :id, as: :hidden %>
-      
+
       <%= f.input :file %>
 
       <% content_for :action_bar_right do %>
@@ -25,61 +25,63 @@
 
   </div>
   <div class="col-md-6">
-    <table class="table table-small">
-      <tbody>
-        <tr>
-          <th>name*</th>
-          <td>Le Monde</td>
-        </tr>
-        <tr>
-          <th>long_name</th>
-          <td>Société Editrice du Monde</td>
-        </tr>
-        <tr>
-          <th>kind</th>
-          <td>company</td>
-        </tr>
-        <tr>
-          <th>siren</th>
-          <td>433891850</td>
-        </tr>
-        <tr>
-          <th>nic</th>
-          <td>00052</td>
-        </tr>
-        <tr>
-          <th>description</th>
-          <td>Le quotidien de référence</td>
-        </tr>
-        <tr>
-          <th>address</th>
-          <td>13 rue Auguste Blanqui</td>
-        </tr>
-        <tr>
-          <th>zipcode</th>
-          <td>75013</td>
-        </tr>
-        <tr>
-          <th>city</th>
-          <td>Paris</td>
-        </tr>
-        <tr>
-          <th>country</th>
-          <td>FR</td>
-        </tr>
-        <tr>
-          <th>email</th>
-          <td>contact@lemonde.fr</td>
-        </tr>
-        <tr>
-          <th>phone</th>
-          <td>+33 1 01 01 01 01</td>
-        </tr>
-        <tr>
-          <th>url</th>
-          <td>https://www.lemonde.fr</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <tbody>
+          <tr>
+            <th>name*</th>
+            <td>Le Monde</td>
+          </tr>
+          <tr>
+            <th>long_name</th>
+            <td>Société Editrice du Monde</td>
+          </tr>
+          <tr>
+            <th>kind</th>
+            <td>company</td>
+          </tr>
+          <tr>
+            <th>siren</th>
+            <td>433891850</td>
+          </tr>
+          <tr>
+            <th>nic</th>
+            <td>00052</td>
+          </tr>
+          <tr>
+            <th>description</th>
+            <td>Le quotidien de référence</td>
+          </tr>
+          <tr>
+            <th>address</th>
+            <td>13 rue Auguste Blanqui</td>
+          </tr>
+          <tr>
+            <th>zipcode</th>
+            <td>75013</td>
+          </tr>
+          <tr>
+            <th>city</th>
+            <td>Paris</td>
+          </tr>
+          <tr>
+            <th>country</th>
+            <td>FR</td>
+          </tr>
+          <tr>
+            <th>email</th>
+            <td>contact@lemonde.fr</td>
+          </tr>
+          <tr>
+            <th>phone</th>
+            <td>+33 1 01 01 01 01</td>
+          </tr>
+          <tr>
+            <th>url</th>
+            <td>https://www.lemonde.fr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -1,7 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  include Users::AddUniversityToRequestParams
-
-  layout 'admin/layouts/application', only: [:edit, :update]
+  include Users::AddContextToRequestParams
+  include Users::LayoutChoice
 
   before_action :configure_sign_up_params, only: :create
   before_action :configure_account_update_params, only: :update
@@ -50,5 +49,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_phone, :language_id, :first_name, :last_name, :picture, :picture_infos, :picture_delete])
+  end
+
+  def sign_up_params
+    devise_parameter_sanitized = devise_parameter_sanitizer.sanitize(:sign_up).merge(registration_context: current_context)
   end
 end

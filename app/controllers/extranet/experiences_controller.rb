@@ -1,16 +1,16 @@
 class Extranet::ExperiencesController < Extranet::ApplicationController
-  load_and_authorize_resource class: University::Person::Experience,
-                              through: :current_user,
-                              through_association: :experiences
   def new
+    @experience = current_user.experiences.new
     breadcrumb
   end
-  
+
   def edit
+    @experience = current_user.experiences.find(params[:id])
     breadcrumb
   end
 
   def create
+    @experience = current_user.experiences.new(experience_params)
     @experience.university = current_university
     if @experience.save
       redirect_to account_path, notice: 'Ok'
@@ -21,6 +21,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   end
 
   def update
+    @experience = current_user.experiences.find(params[:id])
     if @experience.update experience_params
       redirect_to account_path, notice: 'Ok'
     else
@@ -33,7 +34,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
 
   def experience_params
     params.require(:university_person_experience)
-          .permit(:description, :from_year, :to_year, :organization_id)
+          .permit(:description, :from_year, :to_year, :organization_id, :organization_name)
   end
 
   def breadcrumb

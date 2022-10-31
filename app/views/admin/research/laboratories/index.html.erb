@@ -2,30 +2,33 @@
 
 <%= render 'filters', current_path: admin_research_laboratories_path, filters: @filters if @filters.any?  %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Research::Laboratory.human_attribute_name('name') %></th>
-      <th><%= Research::Laboratory.human_attribute_name('address') %></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @laboratories.each do |laboratory| %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
       <tr>
-        <td><%= link_to laboratory, [:admin, laboratory] %></td>
-        <td><%= laboratory.full_address %></td>
-        <td class="text-end">
-          <div class="btn-group" role="group">
-            <%= edit_link laboratory %>
-            <%= destroy_link laboratory %>
-          </div>
-        </td>
+        <th><%= Research::Laboratory.human_attribute_name('name') %></th>
+        <th><%= Research::Laboratory.human_attribute_name('address') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @laboratories.each do |laboratory| %>
+        <tr>
+          <td><%= link_to laboratory, [:admin, laboratory] %></td>
+          <td><%= laboratory.full_address %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link laboratory %>
+              <%= destroy_link laboratory %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <%= paginate @laboratories, theme: 'bootstrap-5' %>
 
 

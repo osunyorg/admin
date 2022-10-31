@@ -48,8 +48,19 @@ en:
         about_Research::Journal: Journal extranet
         about_Research::Laboratory: Laboratory extranet
         about_type: About
-        title: Title
-        domain: Domain
+        color: Couleur
+        cookies_policy: Cookies policy
+        privacy_policy: Privacy policy
+        terms: Terms of service
+        has_sso: Has SSO?
+        host: Domain
+        name: Name
+        registration_contact: Contact mail for registrations problems
+        sso_cert: Certificate
+        sso_inherit_from_university: SSO inherited from University
+        sso_mapping: Mapping
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: Target URL
       communication/website:
         about: About
         about_: Independent website
@@ -59,8 +70,10 @@ en:
         about_Research::Laboratory: Laboratory website
         about_type: About
         access_token: Access token
+        git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
+        in_production: Production
         languages: Languages
         name: Name
         repository: Repository
@@ -122,6 +135,12 @@ en:
         text: Text
         title: Title
         website: Website
+    errors:
+      models:
+        communication/extranet:
+          attributes:
+            sso_mapping:
+              missing_email: doesn't handle the email
   admin:
     communication:
       blocks:
@@ -214,23 +233,23 @@ en:
                 label: Description
                 placeholder: Enter description here
               element:
-                title: 
+                title:
                   label: Day
                   placeholder: Enter the day or period
                 time_slot_morning:
                   label: Morning (if necessary)
                 time_slot_afternoon:
                   label: Afternoon (or full day)
-              name: 
+              name:
                 label: Name (person, organization...)
                 placeholder: Enter the text
               zipcode:
                 label: Zipcode
                 placeholder: Enter the zipcode
-              mails: 
+              mails:
                 label: Mails
                 placeholder: Enter the mail
-              phones: 
+              phones:
                 label: Telephone numbers
                 placeholder: Enter the number
               slots: Opening times
@@ -324,10 +343,12 @@ en:
               add_person: Add person
               drag_title: Drag and drop to organize persons
               delete_title: Remove person
+              alphabetical:
+                label: Alphabetical order
               description:
                 label: Description
               with_link:
-                label: With clickable links to the person's page?
+                label: With clickable link to each person's page?
               with_photo:
                 label: With a portrait for each person?
               element:
@@ -355,11 +376,11 @@ en:
                 options:
                   children: Main page and children
                   selection: A specific selection of pages
-              show_main_description: 
+              show_main_description:
                 label: Show main page short description
-              show_description: 
+              show_description:
                 label: Show pages short descriptions
-              show_image: 
+              show_image:
                 label: Show pages images
               main_page:
                 title: Main page
@@ -379,8 +400,12 @@ en:
             edit:
               add_partner: Add partner
               remove_partner: Remove partner
+              alphabetical:
+                label: Alphabetical order
+              with_link:
+                label: With clickable link to each organization's page?
               element:
-                id: 
+                id:
                   label: Partner
                   placeholder: Choose organization
                   unregistered: Unregistered organization
@@ -463,7 +488,7 @@ en:
                 label: Video url
                 placeholder: Enter video's url
                 hint: >
-                  Ex: 
+                  Ex:
                   https://vimeo.com/732180675,
                   https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
@@ -638,6 +663,7 @@ en:
   simple_form:
     hints:
       communication_website:
+        git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         languages: 'If you select at least one language the website will be considered as possibly multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
       communication_website_category:
@@ -645,6 +671,6 @@ en:
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
-        full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents. 
+        full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
       communication_website_post:
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.

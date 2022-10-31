@@ -6,12 +6,11 @@
     <label class="form-label">&nbsp;</label>
     <%= block_component_edit :with_link %>
     <%= block_component_edit :with_photo %>
+    <%= block_component_edit :alphabetical %>
   </div>
 </div>
 
-<%= block_component_add_element t('.add_person') %>
-
-<draggable :list="data.elements" class="list-group" handle=".dragHandle">
+<draggable :list="data.elements" class="list-group mb-3" handle=".dragHandle">
   <div v-for="(element, index) in data.elements" class="list-group-item">
     <div class="d-flex">
       <div>
@@ -22,10 +21,10 @@
       <div class="flex-fill">
         <div class="row mb-n3">
           <div class="col-md-6">
-            <%= block_component_edit :id, template: @element %>
+            <%= block_component_edit :id, template: @element, label: '' %>
           </div>
           <div class="col-md-6">
-            <%= block_component_edit :role, template: @element %>
+            <%= block_component_edit :role, template: @element, label: '' %>
           </div>
         </div>
       </div>
@@ -39,3 +38,5 @@
     </div>
   </div>
 </draggable>
+
+<%= block_component_add_element t('.add_person') %>

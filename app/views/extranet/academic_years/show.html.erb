@@ -1,12 +1,8 @@
 <% content_for :title, @academic_year %>
-
-<header class="mb-5">
-  <h1><%= @academic_year %></h1>
-  <p>
-    <%= @alumni.count %>
-    <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
-  </p>
-</header>
+<% content_for :header_right do %>
+  <%= @alumni.count %>
+  <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
+<% end %>
 
 <div class="row">
   <div class="col-lg-4">

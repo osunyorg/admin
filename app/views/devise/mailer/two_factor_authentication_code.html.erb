@@ -1,1 +1,1 @@
-<p><%= t('devise.mailer.two_factor_authentication_code.text_html', university: @university, code: @code, duration: @duration) %></p>
+<p><%= t('devise.mailer.two_factor_authentication_code.text_html', context: @resource.registration_context, code: @code, duration: @duration) %></p>

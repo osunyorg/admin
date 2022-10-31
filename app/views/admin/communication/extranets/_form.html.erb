@@ -3,22 +3,21 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card flex-fill w-100">
         <div class="card-header">
           <h5 class="card-title mb-0"><%= t('metadata') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :name %>
-          <%= f.input :domain %>
+          <%= f.input :host %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/extranet.about_' %>
+          <%= f.input :registration_contact %>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('logo') %></h5>
+          <h5 class="card-title mb-0"><%= t('look_feel') %></h5>
         </div>
         <div class="card-body">
           <%= f.input :logo,
@@ -26,10 +25,41 @@
                       input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                       preview: 200,
                       direct_upload: true %>
+          <%= f.input :color, as: :color %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card flex-fill w-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= t('legal') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.input :terms, as: :summernote %>
+          <%= f.input :privacy_policy, as: :summernote %>
+          <%= f.input :cookies_policy, as: :summernote %>
         </div>
       </div>
     </div>
   </div>
+
+  <h3 class="mt-5"><%= t('university.sso') %></h3>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :has_sso %>
+      <div class="sso-inputs">
+        <%= f.input :sso_target_url, required: true %>
+        <%= f.input :sso_cert, required: true %>
+        <%= f.input :sso_name_identifier_format, required: true %>
+      </div>
+    </div>
+    <div class="col-md-6 sso-inputs">
+      <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+      <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+      <%= render 'server/universities/sso_mapping', object: extranet %>
+    </div>
+  </div>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

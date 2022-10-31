@@ -6,14 +6,16 @@
       <div class="card-header">
         <h2 class="card-title"><%= t('admin.infos') %></h2>
       </div>
-      <table class="table">
-        <% ['iso_code'].each do |variable| %>
-          <tr>
-            <td><%= Language.human_attribute_name(variable) %></td>
-            <td class="text-end"><%= @language.public_send variable %></td>
-          </tr>
-        <% end %>
-      </table>
+      <div class="table-responsive">
+        <table class="<%= table_classes %>">
+          <% ['iso_code'].each do |variable| %>
+            <tr>
+              <td><%= Language.human_attribute_name(variable) %></td>
+              <td class="text-end"><%= @language.public_send variable %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+@function px2rem($size)
+    $remSize: $size / 16
+    @return #{$remSize}rem
+
+@function pxr2rem($size)
+    $remSize: $size / 16 / 2
+    @return #{$remSize}rem
+
+@mixin pseudo-top-border($pseudo: before)
+    position: relative
+    &::#{$pseudo}
+        border-top: 1px solid $light-border-color
+        content: ''
+        left: $grid-gutter-width  * .5
+        position: absolute
+        right: $grid-gutter-width  * .5
+        top: 0
+
+@mixin pseudo-bottom-border($pseudo: after)
+    @include pseudo-top-border($pseudo)
+    &::#{$pseudo}
+        bottom: 0
+        top: auto
