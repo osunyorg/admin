@@ -11,6 +11,7 @@
 #  name                       :string
 #  privacy_policy             :text
 #  registration_contact       :string
+#  sso_button_label           :string
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string

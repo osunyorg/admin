@@ -16,6 +16,7 @@
 #  name                       :string
 #  private                    :boolean
 #  sms_sender_name            :string
+#  sso_button_label           :string
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string

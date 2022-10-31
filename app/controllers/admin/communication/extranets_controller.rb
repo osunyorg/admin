@@ -67,7 +67,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
           .permit(:name, :host, :about_type, :about_id,
             :registration_contact, :logo, :logo_delete,
             :terms, :privacy_policy, :cookies_policy, :color,
-            :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
+            :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label
           )
   end
 end

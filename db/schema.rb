@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_24_145426) do
+ActiveRecord::Schema.define(version: 2022_10_31_155827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_10_24_145426) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
     t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2022_10_24_145426) do
     t.text "privacy_policy"
     t.text "cookies_policy"
     t.string "color"
+    t.string "sso_button_label"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -672,6 +673,7 @@ ActiveRecord::Schema.define(version: 2022_10_24_145426) do
     t.text "sso_cert"
     t.string "sso_name_identifier_format"
     t.jsonb "sso_mapping"
+    t.string "sso_button_label"
   end
 
   create_table "university_organizations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|

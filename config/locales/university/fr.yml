@@ -15,6 +15,7 @@ fr:
         public: Public
         public_or_private: Public/privé
         sms_sender_name: Nom de l'expéditeur SMS
+        sso_button_label: Libellé du bouton de connexion
         sso_cert: Certificat
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
@@ -130,6 +131,7 @@ fr:
     hints:
       university:
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
+        sso_button_label: "Par défaut : Se connecter en SSO"
       university_organization:
         description: Si ce champ est vide le début du texte principal sera utilisé.
       university_person:
