@@ -56,6 +56,7 @@ en:
         host: Domain
         name: Name
         registration_contact: Contact mail for registrations problems
+        sso_button_label: Sign in button's label
         sso_cert: Certificate
         sso_inherit_from_university: SSO inherited from University
         sso_mapping: Mapping
@@ -662,6 +663,8 @@ en:
               url: URL
   simple_form:
     hints:
+      communication_extranet:
+        sso_button_label: "Default: Sign in via SSO"
       communication_website:
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'

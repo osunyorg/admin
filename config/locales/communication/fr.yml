@@ -55,6 +55,7 @@ fr:
         name: Nom
         privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
+        sso_button_label: Libellé du bouton de connexion
         sso_cert: Certificat
         sso_inherit_from_university: SSO hérité de l'Université
         sso_mapping: Mapping
@@ -667,6 +668,8 @@ fr:
               url: URL
   simple_form:
     hints:
+      communication_extranet:
+        sso_button_label: "Par défaut : Se connecter en SSO"
       communication_website:
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'

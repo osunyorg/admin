@@ -15,6 +15,7 @@ en:
         public: Public
         public_or_private: Public/private
         sms_sender_name: SMS sender name
+        sso_button_label: Sign in button's label
         sso_cert: Certificate
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
@@ -130,6 +131,7 @@ en:
     hints:
       university:
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
+        sso_button_label: "Default: Sign in via SSO"
       university_organization:
         description: If this field is empty the main text's begining will be used.
       university_person:
