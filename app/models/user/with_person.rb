@@ -26,6 +26,7 @@ module User::WithPerson
   def sync_person
     person.first_name = first_name
     person.last_name = last_name
+    person.email = email
     person.slug = person.to_s.parameterize
     person.phone_mobile = mobile_phone
     person.picture.purge if picture_infos.present? && person.picture&.attached?
