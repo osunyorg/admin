@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum"
+    t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
