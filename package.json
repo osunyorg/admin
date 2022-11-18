@@ -5,6 +5,8 @@
   },
   "dependencies": {
     "16": "0.0.2",
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.9.1",
     "bootstrap-print-css": "^1.0.1",
     "cropperjs": "^1.5.12",

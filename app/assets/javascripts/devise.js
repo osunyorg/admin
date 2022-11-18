@@ -1,6 +1,6 @@
 //= require activestorage
-//= require popper
-//= require bootstrap-sprockets
+//= require @popperjs/core
+//= require bootstrap/dist/js/bootstrap.js
 //= require jquery3
 //= require jquery_ujs
 //= require notyf/notyf.min
