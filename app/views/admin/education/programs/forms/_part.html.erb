@@ -4,6 +4,7 @@ id = "part-#{part}"
 %>
 <div class="card">
   <div class="card-header">
+    <!--
     <div class="card-actions float-end">
       <button class="accordion-button bg-transparent <%= 'collapsed' if collapsed %>"
               type="button"
@@ -14,12 +15,16 @@ id = "part-#{part}"
         <i class="fa-solid fa-square-caret-down"></i>
       </button>
     </div>
+    -->
     <h5 class="card-title mb-1">
       <%= t("education.program.parts.#{part}.label") %>
     </h5>
     <p class="mb-0"><%= t("education.program.parts.#{part}.hint") %></p>
   </div>
+  <div class="card-body">
+  <!-- 
   <div class="card-body collapse <%= 'show' unless collapsed %>" id="<%= id %>">
+  -->
     <%= yield %>
   </div>
 </div>

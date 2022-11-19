@@ -14,11 +14,6 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.20.3.tgz#5358cf62e380cf69efcb87a7bb922ff88bfac6e2"
   integrity sha512-OP/s5a94frIPXwjzEcv5S/tpQfc6XhxYUnmWpgdqMWGgYCuErA3SzozaRAMQgSZWKeTJxht9aWAkUY+0UzvOFg==
 
-"@popperjs/core@^2.11.6":
-  version "2.11.6"
-  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
-  integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
-
 "@vue/compiler-core@3.2.45":
   version "3.2.45"
   resolved "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.2.45.tgz#d9311207d96f6ebd5f4660be129fb99f01ddb41b"
@@ -118,11 +113,6 @@ bootstrap-print-css@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/bootstrap-print-css/-/bootstrap-print-css-1.0.1.tgz#acc0264388caebbad0805e60c869d42cd6fe55bf"
   integrity sha512-I73Cw87BaxCccTjo3qEbvn7KRb55msMxTuT7mpkAAY4Obq8iG9xCybdxnJqq+RrykLD79O3092AiJwaKiEex7w==
-
-bootstrap@^5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.2.2.tgz#834e053eed584a65e244d8aa112a6959f56e27a0"
-  integrity sha512-dEtzMTV71n6Fhmbg4fYJzQsw1N29hJKO1js5ackCgIpDcGid2ETMGC6zwSYw09v05Y+oRdQ9loC54zB1La3hHQ==
 
 cropperjs@^1.5.12:
   version "1.5.12"
