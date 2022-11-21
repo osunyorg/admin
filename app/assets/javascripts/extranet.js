@@ -1,6 +1,6 @@
 //= require activestorage
 //= require popper
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require jquery3
 //= require jquery-ui/widgets/autocomplete
 //= require jquery_ujs

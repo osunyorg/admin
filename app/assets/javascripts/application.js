@@ -1,6 +1,6 @@
 //= require activestorage
 //= require popper
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require jquery3
 //= require jquery_ujs
 //= require cropperjs/dist/cropper
