@@ -78,7 +78,7 @@ module Admin::ApplicationHelper
   end
 
   def prepare_html_for_static(html, university)
-    text = html.to_s.dup
+    text = html.to_s.strip.dup
     text = sanitize text
     text.gsub! "\r", ''
     text.gsub! "\n", ' '
@@ -87,7 +87,7 @@ module Admin::ApplicationHelper
   end
 
   def prepare_text_for_static(text, depth = 1)
-    text = strip_tags text.to_s.dup
+    text = strip_tags text.to_s.strip.dup
     text = indent text, depth
     CGI.unescapeHTML text
   end

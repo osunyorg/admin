@@ -7,8 +7,8 @@ ruby '3.1.2'
 gem 'activestorage-scaleway-service'#, path: '../activestorage-scaleway-service'
 gem 'angularjs-rails'
 gem 'aws-sdk-s3'
-gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap'
+gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap5-kaminari-views'
 gem 'breadcrumbs_on_rails'
 gem 'bugsnag'
