@@ -44,6 +44,7 @@ fr:
         iso_code: Code Iso
         name: Nom
       user:
+        admin_theme: Thème de l'administration
         email: Email
         first_name: Prénom
         language: Langue préférée

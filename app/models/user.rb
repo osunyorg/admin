@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
+#  admin_theme                   :integer          default(0)
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           indexed
 #  confirmed_at                  :datetime
@@ -63,6 +64,7 @@ class User < ApplicationRecord
   include WithPerson
   include WithRoles
   include WithSyncBetweenUniversities
+  include WithAdminTheme
 
   belongs_to :language
 

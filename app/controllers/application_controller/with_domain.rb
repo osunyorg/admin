@@ -31,5 +31,10 @@ module ApplicationController::WithDomain
       current_extranet.present? ? 'extranet'  : 'university'
     end
     helper_method :current_mode
+
+    def current_admin_theme
+      current_user.nil? ? 'appstack' : current_user.admin_theme
+    end
+    helper_method :current_admin_theme
   end
 end
