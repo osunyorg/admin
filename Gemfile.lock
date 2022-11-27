@@ -514,6 +514,7 @@ DEPENDENCIES
   enum_help
   faceted_search
   figaro
+  font-awesome-sass
   front_matter_parser
   gdpr
   gitlab
