@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
+ruby '3.1.3'
 
 # Infrastructure
 gem 'activestorage-scaleway-service'#, path: '../activestorage-scaleway-service'
@@ -40,7 +40,7 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'omniauth-saml', '~> 2.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 gem "rails-autocomplete", "~> 2.0"
 gem 'rails-i18n'
 gem 'roo', "~> 2.9"
@@ -52,6 +52,7 @@ gem 'simple-navigation'
 gem 'simple_form'
 gem 'simple_form_bs5_file_input'#, path: '../simple_form_bs5_file_input'
 gem 'simple_form_password_with_hints'#, path: '../simple_form_password_with_hints'
+gem "sprockets-rails", "~> 3.4"
 gem 'summernote-rails', git: 'https://github.com/noesya/summernote-rails.git', branch: 'activestorage'
 # gem 'summernote-rails', path: '../summernote-rails'
 gem 'two_factor_authentication', git: 'https://github.com/noesya/two_factor_authentication.git'

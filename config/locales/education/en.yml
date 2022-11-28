@@ -49,7 +49,6 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         initial: Initial training
-        level: Level
         main_information: Main information
         name: Name
         objectives: Objectifs
@@ -136,18 +135,6 @@ en:
           fourth_year: 4 years
           master: Master (5 years)
           doctor: Doctorate (8 years)
-      program:
-        level:
-          bachelor: Licence / bachelor
-          doctor: Doctorate
-          dut: DUT
-          first_year: First year
-          high: High School
-          master: Master
-          not_applicable: Not applicable
-          primary: Primary school
-          secondary: Secondary school
-          second_year: Second year
   simple_form:
     hints:
       education_diploma:

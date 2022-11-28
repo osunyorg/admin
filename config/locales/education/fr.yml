@@ -49,7 +49,6 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         initial: Formation initiale
-        level: Niveau
         main_information: Informations essentielles
         name: Nom
         objectives: Objectifs
@@ -136,18 +135,6 @@ fr:
           fourth_year: Bac + 4
           master: Master (Bac + 5)
           doctor: Doctorat (Bac + 8)
-      program:
-        level:
-          bachelor: Licence / bachelor
-          doctor: Doctorat
-          dut: DUT
-          first_year: Bac + 1
-          high: Lycée
-          master: Master
-          not_applicable: Non applicable
-          primary: École primaire
-          secondary: Collège
-          second_year: Bac + 2
   simple_form:
     hints:
       education_diploma:

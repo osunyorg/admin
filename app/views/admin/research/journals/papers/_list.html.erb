@@ -15,7 +15,7 @@
                         admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
                         class: "#{'draft' unless paper.published?}" %>
           </td>
-          <td><%= paper.published_at %></td>
+          <td><%= l(paper.published_at.to_time, format: :date_with_explicit_month) if paper.published_at.present? %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
