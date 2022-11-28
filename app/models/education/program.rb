@@ -15,7 +15,6 @@
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  initial               :boolean
-#  level                 :integer
 #  name                  :string
 #  objectives            :text
 #  opportunities         :text
@@ -92,20 +91,6 @@ class Education::Program < ApplicationRecord
              dependent: :destroy
 
   has_one_attached_deletable :downloadable_summary
-
-  # Deprecated, now in diploma
-  enum level: {
-    not_applicable: 0,
-    primary: 40,
-    secondary: 60,
-    high: 80,
-    first_year: 100,
-    second_year: 200,
-    dut: 210,
-    bachelor: 300,
-    master: 500,
-    doctor: 800
-  }
 
   validates_presence_of :name
 

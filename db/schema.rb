@@ -10,62 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_155827) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_112830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
-  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
     t.uuid "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.uuid "record_id", null: false
     t.uuid "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
     t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
   end
 
-  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number"
     t.text "name"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "administration_qualiopi_indicators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "administration_qualiopi_indicators", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "criterion_id", null: false
     t.integer "number"
     t.text "name"
@@ -73,33 +72,33 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.text "proof"
     t.text "requirement"
     t.text "non_conformity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "glossary"
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
   end
 
-  create_table "communication_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_blocks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "about_type"
     t.uuid "about_id"
     t.integer "template_kind", default: 0, null: false
     t.jsonb "data"
     t.integer "position", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
-  create_table "communication_extranets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
     t.string "host"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "about_type"
     t.uuid "about_id"
     t.string "registration_contact"
@@ -118,14 +117,14 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
 
-  create_table "communication_website_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "name"
     t.text "description"
     t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "slug"
     t.uuid "parent_id"
     t.text "github_path"
@@ -148,19 +147,19 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
   end
 
-  create_table "communication_website_git_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "previous_path"
     t.string "about_type", null: false
     t.uuid "about_id", null: false
     t.uuid "website_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "previous_sha"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
-  create_table "communication_website_imported_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_imported_authors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.uuid "author_id"
@@ -169,14 +168,14 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "slug"
     t.string "identifier"
     t.jsonb "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "idx_communication_website_imported_auth_on_author"
     t.index ["university_id"], name: "idx_communication_website_imported_auth_on_university"
     t.index ["website_id"], name: "idx_communication_website_imported_auth_on_website"
   end
 
-  create_table "communication_website_imported_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_imported_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.uuid "category_id"
@@ -186,20 +185,20 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "slug"
     t.string "url"
     t.string "parent"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.jsonb "data"
     t.index ["category_id"], name: "idx_communication_website_imported_cat_on_category"
     t.index ["university_id"], name: "idx_communication_website_imported_cat_on_university"
     t.index ["website_id"], name: "idx_communication_website_imported_cat_on_website"
   end
 
-  create_table "communication_website_imported_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_imported_media", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "identifier"
     t.jsonb "data"
     t.text "file_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "filename"
@@ -209,13 +208,13 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["website_id"], name: "index_communication_website_imported_media_on_website_id"
   end
 
-  create_table "communication_website_imported_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_imported_pages", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.uuid "page_id"
     t.integer "status", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "title"
     t.text "content"
     t.text "path"
@@ -233,7 +232,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
   end
 
-  create_table "communication_website_imported_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_imported_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.uuid "post_id"
@@ -243,10 +242,10 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.text "content"
     t.text "path"
     t.text "url"
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.string "identifier"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "slug"
     t.jsonb "data"
     t.uuid "featured_medium_id"
@@ -258,17 +257,17 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["website_id"], name: "index_communication_website_imported_posts_on_website_id"
   end
 
-  create_table "communication_website_imported_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_imported_websites", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.integer "status", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_communication_website_imported_websites_on_university_id"
     t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
   end
 
-  create_table "communication_website_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_menu_items", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.uuid "menu_id", null: false
@@ -278,8 +277,8 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.uuid "parent_id"
     t.string "about_type"
     t.uuid "about_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "url"
     t.index ["about_type", "about_id"], name: "index_communication_website_menu_items_on_about"
     t.index ["menu_id"], name: "index_communication_website_menu_items_on_menu_id"
@@ -288,19 +287,19 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["website_id"], name: "index_communication_website_menu_items_on_website_id"
   end
 
-  create_table "communication_website_menus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_menus", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "title"
     t.string "identifier"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "github_path"
     t.index ["communication_website_id"], name: "idx_comm_website_menus_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
   end
 
-  create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_pages", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "title"
@@ -309,16 +308,16 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.text "path"
     t.uuid "parent_id"
     t.integer "position", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "published", default: false
     t.text "github_path"
     t.string "featured_image_alt"
     t.text "text"
+    t.text "description_short"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
-    t.text "description_short"
     t.string "bodyclass"
     t.uuid "language_id"
     t.text "featured_image_credit"
@@ -329,15 +328,15 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "title"
     t.text "description"
     t.boolean "published", default: false
-    t.datetime "published_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "published_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "slug"
     t.text "github_path"
     t.uuid "author_id"
@@ -353,12 +352,12 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
 
-  create_table "communication_websites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_websites", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
     t.string "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "access_token"
     t.string "repository"
     t.string "about_type"
@@ -392,21 +391,21 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
     t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: nil
+    t.datetime "locked_at", precision: nil
+    t.datetime "failed_at", precision: nil
     t.string "locked_by"
     t.string "queue"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "education_academic_years", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "education_academic_years", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.integer "year"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_education_academic_years_on_university_id"
   end
 
@@ -417,13 +416,13 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["university_person_id", "education_academic_year_id"], name: "index_person_academic_year"
   end
 
-  create_table "education_cohorts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "education_cohorts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "program_id", null: false
     t.uuid "academic_year_id", null: false
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "school_id", null: false
     t.index ["academic_year_id"], name: "index_education_cohorts_on_academic_year_id"
     t.index ["program_id"], name: "index_education_cohorts_on_program_id"
@@ -438,27 +437,26 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["university_person_id", "education_cohort_id"], name: "index_person_cohort"
   end
 
-  create_table "education_diplomas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "education_diplomas", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.integer "level", default: 0
     t.string "slug"
     t.uuid "university_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "ects"
     t.text "duration"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
-  create_table "education_programs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "education_programs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
-    t.integer "level"
     t.integer "capacity"
     t.boolean "continuing"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "parent_id"
     t.integer "position", default: 0
     t.string "slug"
@@ -511,7 +509,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["education_program_id", "user_id"], name: "index_education_programs_users_on_program_id_and_user_id"
   end
 
-  create_table "education_schools", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "education_schools", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
     t.string "address"
@@ -520,40 +518,40 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "country"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "phone"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
-  create_table "imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "imports", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number_of_lines"
     t.jsonb "processing_errors"
     t.integer "kind"
     t.integer "status", default: 0
     t.uuid "university_id", null: false
     t.uuid "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_imports_on_university_id"
     t.index ["user_id"], name: "index_imports_on_user_id"
   end
 
-  create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "languages", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "iso_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "research_journal_papers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_journal_papers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "updated_by_id"
     t.text "abstract"
     t.text "references"
@@ -576,14 +574,14 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["researcher_id"], name: "index_research_journal_papers_researchers_on_researcher_id"
   end
 
-  create_table "research_journal_volumes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_journal_volumes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
     t.string "title"
     t.integer "number"
-    t.datetime "published_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "published_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "description"
     t.text "keywords"
     t.string "slug"
@@ -595,45 +593,45 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
 
-  create_table "research_journals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_journals", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "title"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "access_token"
     t.string "repository"
     t.string "issn"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
 
-  create_table "research_laboratories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_laboratories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
     t.string "address"
     t.string "zipcode"
     t.string "city"
     t.string "country"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
-  create_table "research_laboratory_axes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_laboratory_axes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_laboratory_id", null: false
     t.string "name"
     t.text "description"
     t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "short_name"
     t.text "text"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
 
-  create_table "research_theses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_theses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_laboratory_id", null: false
     t.uuid "author_id", null: false
@@ -643,15 +641,15 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.date "started_at"
     t.boolean "completed", default: false
     t.date "completed_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_research_theses_on_author_id"
     t.index ["director_id"], name: "index_research_theses_on_director_id"
     t.index ["research_laboratory_id"], name: "index_research_theses_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_theses_on_university_id"
   end
 
-  create_table "universities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "universities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "identifier"
     t.string "address"
@@ -659,8 +657,8 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "city"
     t.string "country"
     t.boolean "private"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "mail_from_name"
     t.string "mail_from_address"
     t.string "sms_sender_name"
@@ -676,7 +674,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "sso_button_label"
   end
 
-  create_table "university_organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_organizations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
     t.string "long_name"
@@ -691,15 +689,15 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.boolean "active", default: true
     t.string "siren"
     t.integer "kind", default: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "slug"
     t.text "text"
     t.string "nic"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
-  create_table "university_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_people", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "user_id"
     t.string "last_name"
@@ -708,8 +706,8 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.boolean "is_researcher"
     t.boolean "is_teacher"
     t.boolean "is_administration"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "phone_mobile"
     t.string "email"
     t.text "description"
@@ -735,21 +733,21 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
 
-  create_table "university_person_experiences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_person_experiences", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "person_id", null: false
     t.uuid "organization_id", null: false
     t.text "description"
     t.integer "from_year"
     t.integer "to_year"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_university_person_experiences_on_organization_id"
     t.index ["person_id"], name: "index_university_person_experiences_on_person_id"
     t.index ["university_id"], name: "index_university_person_experiences_on_university_id"
   end
 
-  create_table "university_person_involvements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_person_involvements", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "person_id", null: false
     t.integer "kind"
@@ -757,26 +755,26 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.uuid "target_id", null: false
     t.text "description"
     t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
     t.index ["target_type", "target_id"], name: "index_university_person_involvements_on_target"
     t.index ["university_id"], name: "index_university_person_involvements_on_university_id"
   end
 
-  create_table "university_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_roles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "target_type"
     t.uuid "target_id"
     t.text "description"
     t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["target_type", "target_id"], name: "index_university_roles_on_target"
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "first_name"
     t.string "last_name"
@@ -784,22 +782,22 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "locked_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "language_id"
     t.string "mobile_phone"
     t.integer "second_factor_attempts_count", default: 0
@@ -807,8 +805,8 @@ ActiveRecord::Schema.define(version: 2022_10_31_155827) do
     t.string "encrypted_otp_secret_key_iv"
     t.string "encrypted_otp_secret_key_salt"
     t.string "direct_otp"
-    t.datetime "direct_otp_sent_at"
-    t.datetime "totp_timestamp"
+    t.datetime "direct_otp_sent_at", precision: nil
+    t.datetime "totp_timestamp", precision: nil
     t.string "session_token"
     t.string "picture_url"
     t.string "direct_otp_delivery_method"
