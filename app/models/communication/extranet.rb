@@ -41,6 +41,9 @@ class Communication::Extranet < ApplicationRecord
   validates_presence_of :name, :host
 
   has_one_attached_deletable :logo
+  has_one_attached_deletable :favicon do |attachable|
+    attachable.variant :thumb, resize_to_limit: [228, 228]
+  end
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
