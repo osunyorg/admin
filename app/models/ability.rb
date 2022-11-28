@@ -94,6 +94,8 @@ class Ability
     can :manage, Research::Journal::Paper, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id
     can :manage, Research::Laboratory, university_id: @user.university_id
+    can :manage, Research::Laboratory::Axis, university_id: @user.university_id
+    can :manage, Research::Thesis, university_id: @user.university_id
     can :manage, University::Role, university_id: @user.university_id
     can :manage, University::Person::Involvement, university_id: @user.university_id
     can :manage, University::Organization, university_id: @user.university_id
