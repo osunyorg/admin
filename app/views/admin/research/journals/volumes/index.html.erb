@@ -20,7 +20,7 @@
           </td>
           <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
                             height: 100 if volume.featured_image.attached? %></td>
-          <td><%= volume.published_at %></td>
+          <td><%= l(volume.published_at.to_time, format: :date_with_explicit_month) if volume.published_at.present? %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= edit_link volume, journal_id: @journal.id %>
