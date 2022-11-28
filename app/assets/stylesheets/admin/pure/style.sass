@@ -13,16 +13,24 @@
     bottom: 0
     background: black
     color: white
+    overflow-y: scroll
     z-index: 1000
+    padding-bottom: 30px
     .menu-content
-        overflow: scroll
+        position: relative
         margin-top: 150px
         ul
             list-style-type: none
             padding: 0
+            li
+                padding: 5px 0
+                span
+                    opacity: 0.2
         a
             color: white
-            text-decoration: none
+            text-decoration-color: #FFFFFF66
+            &:hover
+                text-decoration-color: #FFFFFFFF
 
 .hero
     padding-top: 150px

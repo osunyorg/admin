@@ -1,51 +1,39 @@
 class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
+  OPEN = "<div class=\"col-md-4 col-lg-3 mb-5\">"
+  CLOSE = "</div>"
+
+  attr_accessor :content, :index, :item
+
   def render(item_container)
-    content = '<ul class="sidebar-nav">'
+    @content = ''
+    @index = 0
     item_container.items.each do |item|
-      content << make(item)
+      @item = item
+      build
+      @index += 1
     end
-    content << '</ul>'
-    content.html_safe
+    @content << CLOSE
+    @content.html_safe
   end
 
   protected
 
-  def make(item)
-    kind = item.send(:options)[:kind]
-    kind == :header ? make_header(item)
-                    : make_item(item)
+  def build
+    if @index.zero?
+      @content << "#{OPEN}<h2>#{item_name_and_link}</h2>"
+    elsif item_is_header?
+      @content << "</ul>#{CLOSE}#{OPEN}<h2>#{item_name_and_link}</h2><ul>"
+    else
+      @content << "<li>#{item_name_and_link}</li>"
+    end
   end
 
-  def make_item(item)
-    li = "<li class=\"sidebar-item #{ item.html_options[:class] } #{ ' disabled' unless item.url }\">"
-    li += make_a(item)
-    li += make_subnavigation(item) if consider_sub_navigation?(item)
-    li += '</li>'
-    li
+  def item_is_header?
+    item.send(:options)[:kind] == :header
   end
 
-  def make_header(item)
-    icon = item.send(:options)[:icon]
-    header = ''
-    header += '</div>'
-    # header += "<i class=\"fas fa-#{ icon }\"></i>" if icon
-    header += "<div class=\"col-md-4 col-lg-3\"><h2>#{item.name}</h2>"
-    header
-  end
-
-  def make_a(item)
-    icon = item.send(:options)[:icon]
-    a = "<a href=\"#{ item.url }\" class=\"sidebar-link#{ item.selected? ? '' : ' collapsed' }\""
-    a += " data-bs-target=\"##{ item.key }\" data-bs-toggle=\"collapse\"" if consider_sub_navigation?(item)
-    a += ">"
-    a += "<i class=\"fas fa-#{ icon }\"></i>" if icon
-    a += "<span class=\"align-middle\">#{ item.name }</span></a>"
-    a
-  end
-
-  def make_subnavigation(item)
-    "<ul id=\"#{ item.key }\" class=\"sidebar-dropdown list-unstyled #{ item.selected? ? 'show' : 'collapse' }\">
-      #{ render_sub_navigation_for item }
-    </ul>"
+  def item_name_and_link
+    item.url.present? ? "<a href=\"#{item.url}\">#{item.name}</a>"
+                      : "<span>#{item.name}</span>"
   end
 end

@@ -38,9 +38,7 @@
   <div class="menu-content">
     <div class="container-fluid">
       <div class="row">
-        <div>
         <%= render_navigation context: :admin, renderer: Osuny::SimpleNavigationRenderer %>
-        </div>
         <div class="col-md-4 col-lg-3">
           <a class="float-end" href="#">
             <% if current_user.picture.attached? && current_user.picture.variable? %>
