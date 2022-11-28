@@ -5,7 +5,11 @@
 <%= csp_meta_tag %>
 <%= stylesheet_link_tag 'extranet', media: 'all' %>
 <%= javascript_include_tag 'extranet' %>
-<%= favicon_link_tag 'favicon.png' %>
+<% if current_extranet.favicon.attached? %>
+  <%= favicon_link_tag url_for(current_extranet.favicon.variant(:thumb)) %>
+<% else %>
+  <%= favicon_link_tag 'favicon.png' %>
+<% end %>
 <% if current_extranet.color.present? && current_extranet.color != '#000000' %>
   <style>
   h1 a {

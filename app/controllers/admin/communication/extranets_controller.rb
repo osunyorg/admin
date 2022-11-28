@@ -65,7 +65,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
   def extranet_params
     params.require(:communication_extranet)
           .permit(:name, :host, :about_type, :about_id,
-            :registration_contact, :logo, :logo_delete,
+            :registration_contact, :logo, :logo_delete, :favicon, :favicon_delete,
             :terms, :privacy_policy, :cookies_policy, :color,
             :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label
           )

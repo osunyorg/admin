@@ -50,11 +50,12 @@ en:
         about_type: About
         color: Couleur
         cookies_policy: Cookies policy
-        privacy_policy: Privacy policy
-        terms: Terms of service
+        favicon: Favicon (.png)
         has_sso: Has SSO?
         host: Domain
+        logo: Logo (.png, .jpg, .svg)
         name: Name
+        privacy_policy: Privacy policy
         registration_contact: Contact mail for registrations problems
         sso_button_label: Sign in button's label
         sso_cert: Certificate
@@ -62,6 +63,7 @@ en:
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
+        terms: Terms of service
       communication/website:
         about: About
         about_: Independent website
@@ -114,6 +116,7 @@ en:
         full_width: Full width
         header_text: Title displayed in header
         parent: Parent page
+        path: Path
         published: Published?
         related_category: Related category
         slug: Slug
@@ -286,6 +289,8 @@ en:
             description: A list of downloadable files, mentioning their file size.
             edit:
               add_file: Add a file
+              description:
+                label: Description
               element:
                 file:
                   label: File
@@ -400,24 +405,26 @@ en:
             description: A list of organizations with logo, name and website.
             edit:
               add_partner: Add partner
-              remove_partner: Remove partner
               alphabetical:
                 label: Alphabetical order
-              with_link:
-                label: With clickable link to each organization's page?
+              description:
+                label: Description
               element:
                 id:
                   label: Partner
+                  name:
+                    label: Nom
+                    placeholder: Enter partner's name
+                    url:
+                      label: Website
+                      logo_label: Logo
+                      placeholder: https://
+                      remove_logo: Remove logo
                   placeholder: Choose organization
                   unregistered: Unregistered organization
-                name:
-                  label: Nom
-                  placeholder: Enter partner's name
-                url:
-                  label: Website
-                  laceholder: https://
-                logo_label: Logo
-                remove_logo: Remove logo
+              remove_partner: Remove partner
+              with_link:
+                label: With clickable link to each organization's page?
           posts:
             description: A list of highlighted news.
             edit:
@@ -664,6 +671,7 @@ en:
   simple_form:
     hints:
       communication_extranet:
+        host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
       communication_website:
         git_branch: 'If blank, default branch will be used'
