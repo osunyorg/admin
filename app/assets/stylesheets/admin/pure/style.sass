@@ -14,6 +14,15 @@
     background: black
     color: white
     z-index: 1000
+    .menu-content
+        overflow: scroll
+        margin-top: 150px
+        ul
+            list-style-type: none
+            padding: 0
+        a
+            color: white
+            text-decoration: none
 
 .hero
     padding-top: 150px
@@ -24,6 +33,9 @@
 .container-fluid
     padding-right: var(--bs-gutter-x)
     padding-left: var(--bs-gutter-x)
+
+h2
+    font-weight: bold
 
 a
     transition: text-decoration 0.5s, color 0.5s
@@ -41,6 +53,7 @@ a
     bottom: 0
     left: 0
     right: 0
+    z-index: 100
 
 footer
     min-height: 300px
