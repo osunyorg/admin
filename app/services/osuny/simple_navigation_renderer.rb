@@ -26,10 +26,10 @@ class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
 
   def make_header(item)
     icon = item.send(:options)[:icon]
-    header = '<li class="sidebar-header">'
-    header += "<i class=\"fas fa-#{ icon }\"></i>" if icon
-    header += item.name
-    header += '</li>'
+    header = ''
+    header += '</div>'
+    # header += "<i class=\"fas fa-#{ icon }\"></i>" if icon
+    header += "<div class=\"col-md-4 col-lg-3\"><h2>#{item.name}</h2>"
     header
   end
 
