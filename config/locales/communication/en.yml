@@ -212,6 +212,8 @@ en:
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
             edit:
+              image:
+                label: Chapter illustration
               notes:
                 label: Notes
                 placeholder: Enter notes
