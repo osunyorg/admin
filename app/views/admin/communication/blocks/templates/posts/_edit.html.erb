@@ -1,5 +1,7 @@
 <% categories = collection_tree(@block.about&.website.categories) %>
 
+<%= block_component_edit :layout %>
+
 <div class="mb-3">
   <%= block_component_edit :mode %>
   <div class="row">

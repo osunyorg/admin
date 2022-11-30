@@ -429,6 +429,16 @@ fr:
                 label: Avec des liens cliquables vers les pages des organisations?
           posts:
             description: Une liste d'actualités mises en avant.
+            layouts:
+              highlight:
+                label: Mise en avant
+                description: Un premier article en grand avec son image, puis plusieurs petits, sans images.
+              grid:
+                label: Grille
+                description: Une grille avec toutes les images à la même taille.
+              list:
+                label: Liste
+                description: Une liste d'articles avec de petites images à la même largeur. 
             edit:
               add_post: Ajouter un article
               mode:

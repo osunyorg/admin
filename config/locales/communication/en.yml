@@ -429,6 +429,16 @@ en:
                 label: With clickable link to each organization's page?
           posts:
             description: A list of highlighted news.
+            layouts:
+              highlight:
+                label: Highlighted
+                description: The first post is big and has an image, the next ones are smaller with no image.
+              grid:
+                label: Grid
+                description: A grid of posts, with all images the same size.
+              list:
+                label: List
+                description: A list of posts with small images the same width.
             edit:
               add_post: Add post
               mode:
