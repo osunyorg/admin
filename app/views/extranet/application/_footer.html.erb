@@ -8,20 +8,23 @@
       </div>
     <% end %>
     <div class="row justify-space-between">
-      <% if current_extranet.about.is_a?(Education::School) %>
-        <address class="col-md-6" itemscope itemtype="https://schema.org/CollegeOrUniversity">
-          <span itemprop="name"><%= current_extranet.about.name %></span>
-          <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="streetAddress"><%= current_extranet.about.address %></span><br>
-            <span itemprop="postalCode"><%= current_extranet.about.zipcode %></span>
-            <span itemprop="addressLocality"><%= current_extranet.about.city %></span><br>
+      <div class="col-md-6">
+        <% if current_extranet.about.is_a?(Education::School) %>
+          <address itemscope itemtype="https://schema.org/CollegeOrUniversity">
+            <span itemprop="name"><%= current_extranet.about.name %></span>
+            <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress"><%= current_extranet.about.address %></span><br>
+              <span itemprop="postalCode"><%= current_extranet.about.zipcode %></span>
+              <span itemprop="addressLocality"><%= current_extranet.about.city %></span><br>
+            </div>
+          </address>
+        <% elsif current_extranet.about.is_a?(Education::Program) %>
+          <div itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+            <span itemprop="name"><%= current_extranet.about.name %></span>
           </div>
-        </address>
-      <% elsif current_extranet.about.is_a?(Education::Program) %>
-        <div class="col-md-6" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
-          <span itemprop="name"><%= current_extranet.about.name %></span>
-        </div>
-      <% end %>
+        <% end %>
+        <p class="my-5"><%= t 'extranet.osuny_html' %></p>
+      </div>
 
       <nav class="text-md-end col-md-6">
         <%= link_to t('terms_of_service'),

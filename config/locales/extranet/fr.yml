@@ -19,6 +19,8 @@ fr:
     menu: Menu
     organization:
       experiences: Alumni dans cette organisation (%{count})
+    osuny_html:
+      Développé avec <a href="https://www.osuny.org" target="_blank" rel="noreferer">Osuny</a>
     personal_data:
       edit: Modifier
       title: Mes données personnelles
