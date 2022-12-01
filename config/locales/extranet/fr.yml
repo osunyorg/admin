@@ -13,7 +13,7 @@ fr:
     experiences:
       new: Ajouter une expérience
       search_organization: Rechercher par nom ou SIREN
-      title: Parcours professionnel
+      title: Parcours
     home:
       recent_cohorts: Promotions récentes
       recent_experiences: Mouvements récents

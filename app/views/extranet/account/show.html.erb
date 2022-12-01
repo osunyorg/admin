@@ -5,12 +5,11 @@
     <div class="biography mb-5">
       <p><%= @person&.biography %></p>
     </div>
-
     <p><%= t('extranet.experiences.title') %></p>
     <%= link_to University::Person::Experience.human_attribute_name('new'),
                 new_experience_path,
                 class: 'btn btn-sm btn-primary mt-md-n5 float-md-end' %>
-    <%= render 'extranet/experiences/list', person: @person, edit: true %>
+    <%= render 'extranet/persons/path', person: @person, edit: true %>
   </div>
   <div class="col-md-3">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person&.best_picture.attached? %>

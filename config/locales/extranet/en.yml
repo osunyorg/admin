@@ -12,7 +12,7 @@ en:
       email_not_allowed_with_contact: is not authorized to access this extranet. Contact %{contact} for more information.
     experiences:
       new: Add experience
-      title: Professional path
+      title: Path
     home:
       recent_cohorts: Recent cohorts
       recent_experiences: Recent experiences
