@@ -810,6 +810,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_112830) do
     t.string "session_token"
     t.string "picture_url"
     t.string "direct_otp_delivery_method"
+    t.integer "admin_theme", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
     t.index ["encrypted_otp_secret_key"], name: "index_users_on_encrypted_otp_secret_key", unique: true

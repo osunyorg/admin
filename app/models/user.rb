@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
+#  admin_theme                   :integer          default("appstack")
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           indexed
 #  confirmed_at                  :datetime
@@ -55,6 +56,7 @@
 #  fk_rails_bd6f7212a9  (university_id => universities.id)
 #
 class User < ApplicationRecord
+  include WithAdminTheme
   include WithAvatar
   include WithRegistrationContext
   include WithUniversity

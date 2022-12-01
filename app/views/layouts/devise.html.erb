@@ -6,7 +6,7 @@
     <title><%= yield :title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'admin', media: 'all' %>
+    <%= stylesheet_link_tag "admin/#{current_admin_theme}", media: 'all' %>
     <%= javascript_include_tag 'devise' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>

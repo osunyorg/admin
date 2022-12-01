@@ -1,0 +1,31 @@
+<footer class="bg-black py-5 mt-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <%= link_to 'https://www.osuny.org', target: :_blank do %>
+          <%= image_tag 'osuny-white.svg', width: 100 %>
+        <% end %>
+      </div>
+      <div class="col-md-9 text-md-end small">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <%= link_to 'API', api_root_path %>
+          </li>
+          <%
+          [
+          :terms_of_service,
+          :privacy_policy,
+          :cookies_policy
+          ].each do |term| %>
+            <li class="list-inline-item">
+              <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
+            </li>
+          <% end %>
+          <li class="list-inline-item">
+            <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

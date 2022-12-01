@@ -1,0 +1,102 @@
+.navbar
+    position: absolute
+    left: 0
+    right: 0
+    padding-top: $spacing2
+    .navbar-brand
+        img
+            width: 100px
+#menu
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: black
+    color: white
+    overflow-y: scroll
+    z-index: 1000
+    padding-bottom: 30px
+    .menu-content
+        position: relative
+        margin-top: 150px
+        ul
+            list-style-type: none
+            padding: 0
+            li
+                padding: 5px 0
+                span
+                    opacity: 0.2
+        a
+            color: white
+            text-decoration: underline
+            text-decoration-color: #FFFFFF66
+            &:hover
+                text-decoration-color: #FFFFFFFF
+
+.hero
+    padding-top: 150px
+    padding-bottom: 30px
+    background-color: $color-background-alt
+    margin-bottom: 30px
+
+main
+    min-height: 70vh
+
+.container-fluid
+    padding-right: var(--bs-gutter-x)
+    padding-left: var(--bs-gutter-x)
+
+h2
+    font-weight: bold
+
+.section
+    font-size: $h5-font-size
+    margin-top: 60px !important
+    padding-bottom: 10px
+    border-bottom: 1px solid #00000033
+
+a
+    text-decoration: none
+    text-decoration-thickness: 1px
+    text-underline-offset: 5px
+    transition: text-decoration 0.5s, color 0.5s
+
+    &:hover
+        color: darken($primary, 10)
+
+.card
+    margin-bottom: $spacing2
+    .card-header
+        .card-title
+            font-size: $h5-font-size
+            text-transform: uppercase
+            color: $color-text-alt
+    .card-body
+        margin-top: $spacing1
+
+.list-group-item.active
+    color: $color-accent
+    font-weight: bold
+
+.btn-xs
+    font-size: 14px
+    padding: 2px 7px
+
+.commands
+    background: $color-background-alt
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 100
+
+.table
+    input[type=checkbox]
+        margin-right: 10px
+
+footer
+    min-height: 300px
+    a
+        text-decoration: none
+        color: white

@@ -19,6 +19,7 @@
                         include_blank: false,
                         label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>
       <%= f.input :mobile_phone %>
+      <%= f.input :admin_theme, include_blank: false %>
     </div>
     <div class="col-md-4">
       <%= f.input :password,

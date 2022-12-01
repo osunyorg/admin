@@ -1,0 +1,60 @@
+<nav class="navbar navbar-main navbar-light bg-transparent" aria-label="Navigation">
+  <div class="container-fluid">
+    <%= link_to admin_root_path, class: 'navbar-brand' do %>
+      <%= image_tag 'osuny-black.svg', class: 'img-fluid' %>
+    <% end %>
+    <button class="btn-open bg-transparent border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+            data-bs-animation=""
+            aria-controls="navbar-brand"
+            aria-expanded="false"
+            aria-label="Afficher la navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
+<div class="collapse" id="menu">
+  <div class="navbar">
+    <div class="container-fluid">
+      <%= link_to admin_root_path, class: 'navbar-brand' do %>
+        <%= image_tag 'osuny-white.svg', class: 'img-fluid', width: 100 %>
+      <% end %>
+      <button class="btn-open bg-transparent border-0 text-white"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#menu"
+              data-bs-animation=""
+              aria-controls="navbar-brand"
+              aria-expanded="false"
+              aria-label="Masquer la navigation">
+        Fermer
+        <i class="fas fa-xmark"></i>
+      </button>
+   </div>
+  </div>
+  <div class="menu-content">
+    <div class="container-fluid">
+      <div class="row">
+        <%= render_navigation context: :admin, renderer: Osuny::SimpleNavigationRenderer %>
+        <div class="col-md-4 col-lg-3">
+          <a class="float-end" href="#">
+            <% if current_user.picture.attached? && current_user.picture.variable? %>
+              <%= image_tag current_user.picture.variant(resize: '80x80'), class: 'avatar img-fluid rounded-circle' %>
+            <% else %>
+              <%= image_tag 'avatar.jpg', class: 'avatar img-fluid rounded-circle' %>
+            <% end %>
+          </a>
+          <h2><%= current_user.to_s %></h2>
+          <ul>
+            <li><%= link_to t('menu.profile'), edit_user_registration_path %></li>
+            <li><%= link_to t('menu.server_admin'), server_root_path if current_user.server_admin? %></li>
+            <li><%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

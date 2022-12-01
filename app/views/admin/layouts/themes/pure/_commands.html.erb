@@ -1,0 +1,12 @@
+<% if content_for?(:action_bar_left) or content_for?(:action_bar_right) %>
+  <div class="commands">
+    <div class="container-fluid py-3 d-flex">
+      <div>
+        <%= yield :action_bar_left %>
+      </div>
+      <div class="ms-auto">
+        <%= yield :action_bar_right %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<body class="<%= body_classes %>" data-layout="fluid" data-sidebar-position="left">
+  <%= render 'admin/application/notice' %>
+  <div class="wrapper">
+    <%= render "admin/layouts/themes/appstack/nav" %>
+    <%= render "admin/layouts/themes/appstack/footer" %>
+    <div class="main">
+      <%= render "admin/layouts/themes/appstack/top" %>
+      <main class="content">
+        <div class="container-fluid p-0">
+          <% unless current_user.confirmed? %>
+            <div class="alert alert-warning">
+              <div class="alert-message">
+                <%= t('admin.users_alerts.pending_confirmation_html', duration: distance_of_time_in_words(Rails.configuration.devise.allow_unconfirmed_access_for)) %>
+                <br>
+                <%= link_to t('devise.confirmations.new.resend_confirmation_instructions'), resend_user_confirmation_path, method: :post, class: 'alert-link' %>
+              </div>
+            </div>
+          <% end %>
+          <div class="d-flex justify-content-between">
+            <h1><%= yield :title %></h1>
+            <p class="text-end pt-1"><%= yield :title_right %></p>
+          </div>
+          <%= yield %>
+        </div>
+        <%= render 'admin/application/preview' %>
+      </main>
+    </div>
+  </div>
+  <%= javascript_include_tag 'admin/appstack' %>
+  <%= render 'gdpr/cookie_consent' %>
+  <%= render 'bugsnag' %>
+</body>

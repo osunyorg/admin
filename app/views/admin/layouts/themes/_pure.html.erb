@@ -1,0 +1,23 @@
+<body class="<%= body_classes %>">
+  <%= render "admin/layouts/themes/pure/nav" %>
+  <%= render "admin/layouts/themes/pure/hero" %>
+  <%= render 'admin/application/notice' %>
+  <main class="container-fluid">
+    <% unless current_user.confirmed? %>
+      <div class="alert alert-warning">
+        <div class="alert-message">
+          <%= t('admin.users_alerts.pending_confirmation_html', duration: distance_of_time_in_words(Rails.configuration.devise.allow_unconfirmed_access_for)) %>
+          <br>
+          <%= link_to t('devise.confirmations.new.resend_confirmation_instructions'), resend_user_confirmation_path, method: :post, class: 'alert-link' %>
+        </div>
+      </div>
+    <% end %>
+    <%= yield %>
+    <%= render 'admin/application/preview' %>
+  </main>
+  <%= render "admin/layouts/themes/pure/commands" %>
+  <%= render "admin/layouts/themes/pure/footer" %>
+  <%= javascript_include_tag 'admin/pure' %>
+  <%= render 'gdpr/cookie_consent' %>
+  <%= render 'bugsnag' %>
+</body>
