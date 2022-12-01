@@ -56,6 +56,7 @@
 #  fk_rails_bd6f7212a9  (university_id => universities.id)
 #
 class User < ApplicationRecord
+  include WithAdminTheme
   include WithAvatar
   include WithRegistrationContext
   include WithUniversity
@@ -64,7 +65,6 @@ class User < ApplicationRecord
   include WithPerson
   include WithRoles
   include WithSyncBetweenUniversities
-  include WithAdminTheme
 
   belongs_to :language
 
