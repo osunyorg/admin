@@ -6,6 +6,7 @@ fr:
       edit_personal_data: Modifier mon profil
       updated: Mise à jour effectuée
       logout: Déconnexion
+    data: Informations
     errors:
       email_not_allowed: n'est pas autorisé à accéder à cet extranet.
       email_not_allowed_with_contact: n'est pas autorisé à accéder à cet extranet. Contactez %{contact} pour en savoir plus.
@@ -20,7 +21,7 @@ fr:
     organization:
       experiences: Alumni dans cette organisation (%{count})
     osuny_html:
-      Développé avec <a href="https://www.osuny.org" target="_blank" rel="noreferer">Osuny</a>
+      <a href="https://www.osuny.org" target="_blank" rel="noreferer">Développé avec ♥ et avec Osuny</a>
     personal_data:
       edit: Modifier
       title: Mes données personnelles

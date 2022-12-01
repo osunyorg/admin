@@ -6,6 +6,7 @@ en:
       edit_personal_data: Edit profile
       updated: Updated
       logout: Log out
+    data: Data
     errors:
       email_not_allowed: is not authorized to access this extranet.
       email_not_allowed_with_contact: is not authorized to access this extranet. Contact %{contact} for more information.
@@ -19,7 +20,7 @@ en:
     organization:
       experiences: Alumni in this organization (%{count})
     osuny_html:
-      Crafted with <a href="https://www.osuny.org" target="_blank" rel="noreferer">Osuny</a>
+      <a href="https://www.osuny.org" target="_blank" rel="noreferer">Crafted with ♥ and with Osuny</a>
     personal_data:
       title: My personal data
       updated: Your personal data has been updated!

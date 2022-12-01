@@ -68,6 +68,10 @@ class Communication::Extranet < ApplicationRecord
     about&.university_person_alumni
   end
 
+  def users
+    university.users.where(person: alumni)
+  end
+
   def cohorts
     about&.cohorts
   end
@@ -75,9 +79,14 @@ class Communication::Extranet < ApplicationRecord
   def years
     about&.academic_years
   end
+  alias academic_years years
 
   def organizations
     about&.alumni_organizations
+  end
+
+  def experiences
+    about&.alumni_experiences
   end
 
   def url

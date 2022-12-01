@@ -23,12 +23,11 @@
             <span itemprop="name"><%= current_extranet.about.name %></span>
           </div>
         <% end %>
-        <p class="my-5"><%= t 'extranet.osuny_html' %></p>
       </div>
 
       <nav class="text-md-end col-md-6">
         <%= link_to t('terms_of_service'),
-                    terms_of_service_path,
+                    terms_path,
                     target: '_blank',
                     rel: 'noreferrer' if current_extranet.has_terms? %>
         <%= link_to t('privacy_policy'),
@@ -39,9 +38,12 @@
                     cookies_policy_path,
                     target: '_blank',
                     rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
+        <%= link_to t('extranet.data'), data_path %>
         <%= link_to t('cookies_consent_choice'),
                     '',
                     class: 'js-gdpr__cookie_consent__display_again' %>
+                  
+        <%= t 'extranet.osuny_html' %>
       </nav>
     </div>
 
