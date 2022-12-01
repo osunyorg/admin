@@ -22,7 +22,12 @@
   <% end %>
   <% if person.full_street_address.present? %>
     <dt><%= University::Person.human_attribute_name("address") %></dt>
-    <dd><%= person.full_street_address %></dd>
+    <dd>
+      <%= person.address %>
+      <% if person.address.present? && (person.city.present? || person.zipcode.present?) %><br><% end %>
+      <%= person.zipcode %>
+      <%= person.city %>
+    </dd>
   <% end %>
   <% if person.url.present? %>
     <dt><%= University::Person.human_attribute_name(:url) %></dt>
