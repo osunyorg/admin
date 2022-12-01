@@ -1,0 +1,13 @@
+<% content_for :title, t('extranet.data') %>
+<% content_for :header do %>
+  <h1><%= t('extranet.data') %></h1>
+<% end %>
+
+<div class="row">
+  <% @metrics.each do |metric| %>
+  <div class="col-md-3">
+    <p class="h1 mb-0"><%= metric[:value] %></p>
+    <p><%= metric[:name] %></p>
+  </div>
+  <% end %>
+</div>

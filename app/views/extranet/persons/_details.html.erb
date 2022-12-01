@@ -1,8 +1,4 @@
 <dl>
-  <% person.cohorts.each do |cohort| %>
-    <dt><%= cohort.program %></dt>
-    <dd><%= link_to cohort.academic_year, cohort %></dd>
-  <% end %>
   <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
     <% next if person.public_send(attribute_name).blank? %>
     <dt><%= University::Person.human_attribute_name(attribute_name) %> :</dt>
@@ -22,7 +18,12 @@
   <% end %>
   <% if person.full_street_address.present? %>
     <dt><%= University::Person.human_attribute_name("address") %></dt>
-    <dd><%= person.full_street_address %></dd>
+    <dd>
+      <%= person.address %>
+      <% if person.address.present? && (person.city.present? || person.zipcode.present?) %><br><% end %>
+      <%= person.zipcode %>
+      <%= person.city %>
+    </dd>
   <% end %>
   <% if person.url.present? %>
     <dt><%= University::Person.human_attribute_name(:url) %></dt>

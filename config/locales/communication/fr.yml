@@ -50,8 +50,10 @@ fr:
         about_type: Type d'extranet
         color: Couleur
         cookies_policy: Politique de cookies
+        favicon: Favicon (.png)
         has_sso: A un SSO ?
         host: Domaine
+        logo: Logo (.png, .jpg, .svg)
         name: Nom
         privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
@@ -210,6 +212,8 @@ fr:
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             edit:
+              image:
+                label: Image d'illustration
               notes:
                 label: Notes
                 placeholder: Entrer les notes
@@ -403,28 +407,38 @@ fr:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
               add_partner: Ajouter un partenaire
-              remove_partner: Enlever le partenaire
-              description:
-                label: Description
               alphabetical:
                 label: Ordre alphabétique
-              with_link:
-                label: Avec des liens cliquables vers les pages des organisations?
+              description:
+                label: Description
               element:
                 id:
                   label: Organisation
+                  name:
+                    label: Nom
+                    placeholder: Entrer le nom du partenaire
+                    url:
+                      label: Site Web
+                      logo_label: Logo
+                      placeholder: https://
+                      remove_logo: Enlever le logo
                   placeholder: Choisir l'organisation
                   unregistered: Organisation non enregistrée
-                name:
-                  label: Nom
-                  placeholder: Entrer le nom du partenaire
-                url:
-                  label: Site Web
-                  placeholder: https://
-                logo_label: Logo
-                remove_logo: Enlever le logo
+              remove_partner: Enlever le partenaire
+              with_link:
+                label: Avec des liens cliquables vers les pages des organisations?
           posts:
             description: Une liste d'actualités mises en avant.
+            layouts:
+              highlight:
+                label: Mise en avant
+                description: Un premier article en grand avec son image, puis plusieurs petits, sans images.
+              grid:
+                label: Grille
+                description: Une grille avec toutes les images à la même taille.
+              list:
+                label: Liste
+                description: Une liste d'articles avec de petites images à la même largeur. 
             edit:
               add_post: Ajouter un article
               mode:
@@ -669,6 +683,7 @@ fr:
   simple_form:
     hints:
       communication_extranet:
+        host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
       communication_website:
         git_branch: 'Laisser vide pour la branche par défaut'

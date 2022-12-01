@@ -41,6 +41,9 @@ class Communication::Extranet < ApplicationRecord
   validates_presence_of :name, :host
 
   has_one_attached_deletable :logo
+  has_one_attached_deletable :favicon do |attachable|
+    attachable.variant :thumb, resize_to_limit: [228, 228]
+  end
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
@@ -65,6 +68,10 @@ class Communication::Extranet < ApplicationRecord
     about&.university_person_alumni
   end
 
+  def users
+    university.users.where(person: alumni)
+  end
+
   def cohorts
     about&.cohorts
   end
@@ -72,9 +79,14 @@ class Communication::Extranet < ApplicationRecord
   def years
     about&.academic_years
   end
+  alias academic_years years
 
   def organizations
     about&.alumni_organizations
+  end
+
+  def experiences
+    about&.alumni_experiences
   end
 
   def url

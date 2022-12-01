@@ -37,6 +37,7 @@ class Education::School < ApplicationRecord
               as: :about,
               dependent: :nullify
 
+  has_one_attached_deletable :logo
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 

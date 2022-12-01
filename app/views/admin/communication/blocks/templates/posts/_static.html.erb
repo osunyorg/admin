@@ -1,6 +1,7 @@
 <% if block.template.category %>
       category: "<%= block.template.category.path %>"
 <% end %>
+      layout: <%= block.template.layout %>
       posts:
 <% block.template.selected_posts.each do |post| %>
         - "<%= post.static_path %>"
