@@ -5,3 +5,5 @@
 //= link vue.js
 //= link admin/appstack.css
 //= link admin/pure.css
+//= link admin/appstack.js
+//= link admin/pure.js
