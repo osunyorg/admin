@@ -34,27 +34,6 @@
   </div>
 </div>
 
-<% if current_university.research_journals.any? && can?(:read, Research::Journal) %>
-  <h2 class="h4 my-4 section"><%= Research::Journal.model_name.human(count: 2) %></h2>
-  <div class="row">
-    <% current_university.research_journals.each do |journal| %>
-      <% next unless can?(:read, journal) %>
-      <div class="<%= classes %>">
-        <div class="card flex-fill">
-          <div class="card-body">
-            <span class="float-end">
-              <i class="fas fa-<%= Icon::RESEARCH_JOURNAL %> fa-2x"></i>
-            </span>
-            <h4><%= journal %></h4>
-            <p>&nbsp;</p>
-            <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
-
 <% if current_university.communication_websites.any? && can?(:read, Communication::Website) %>
   <h2 class="h4 my-4 section"><%= Communication::Website.model_name.human(count: 2) %></h2>
   <div class="row">
@@ -97,23 +76,46 @@
   </div>
 <% end %>
 
-<div class="small mt-5">
-  <ul class="list-inline">
-    <li class="list-inline-item">
-      <%= link_to 'API', api_root_path %>
-    </li>
-    <%
-    [
-    :terms_of_service,
-    :privacy_policy,
-    :cookies_policy
-    ].each do |term| %>
-      <li class="list-inline-item">
-        <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
-      </li>
+<% if current_university.research_journals.any? && can?(:read, Research::Journal) %>
+  <h2 class="h4 my-4 section"><%= Research::Journal.model_name.human(count: 2) %></h2>
+  <div class="row">
+    <% current_university.research_journals.each do |journal| %>
+      <% next unless can?(:read, journal) %>
+      <div class="<%= classes %>">
+        <div class="card flex-fill">
+          <div class="card-body">
+            <span class="float-end">
+              <i class="fas fa-<%= Icon::RESEARCH_JOURNAL %> fa-2x"></i>
+            </span>
+            <h4><%= journal %></h4>
+            <p>&nbsp;</p>
+            <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
+          </div>
+        </div>
+      </div>
     <% end %>
-    <li class="list-inline-item">
-      <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
-    </li>
-  </ul>
-</div>
+  </div>
+<% end %>
+
+<% if current_admin_theme == 'appstack' %>
+  <div class="small mt-5">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <%= link_to 'API', api_root_path %>
+      </li>
+      <%
+      [
+      :terms_of_service,
+      :privacy_policy,
+      :cookies_policy
+      ].each do |term| %>
+        <li class="list-inline-item">
+          <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
+        </li>
+      <% end %>
+      <li class="list-inline-item">
+        <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
+      </li>
+    </ul>
+  </div>
+<% end %>

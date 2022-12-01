@@ -17,13 +17,7 @@
         <% end %>
         <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
         <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
-        <% unless hide_author %>
-          <th><%= Communication::Website::Post.human_attribute_name('author') %></th>
-        <% end %>
-        <% unless hide_category %>
-          <th><%= Communication::Website::Post.human_attribute_name('categories') %></th>
-        <% end %>
-        <th colspan="2"><%= Communication::Website::Post.human_attribute_name('published_at') %></th>
+        <th colspan="2"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
       </tr>
     </thead>
     <tbody>
@@ -39,20 +33,22 @@
                           class: "#{'draft' unless post.published?}" %></td>
           <td><%= image_tag post.featured_image.representation(resize: 'x100'),
                             height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
-          <% unless hide_author %>
-            <td><%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) if post.author %></td>
-          <% end %>
-          <% unless hide_category %>
-            <td>
+          <td>
+            <p class="small mb-0">
+              <%= l post.published_at, format: :date_with_explicit_month if post.published_at %>
+            </p>
+            <% if !hide_author && post.author %>
+              <p class="small mb-0">
+                <%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) %>
+              </p>
+            <% end %>
+            <% unless hide_category %>
               <ul class="list-unstyled mb-0">
                 <% post.categories.each do |category| %>
-                  <li><%= link_to_if can?(:read, category), category, admin_communication_website_category_path(website_id: post.website.id, id: category.id) %></li>
+                  <li><%= link_to_if can?(:read, category), category, admin_communication_website_category_path(website_id: post.website.id, id: category.id), class: 'small' %></li>
                 <% end %>
               </ul>
-            </td>
-          <% end %>
-          <td>
-            <%= l post.published_at, format: :date_with_explicit_month if post.published_at %>
+            <% end %>
             <% if post.pinned %>
               <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
             <% end %>

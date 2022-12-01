@@ -28,6 +28,7 @@
                     opacity: 0.2
         a
             color: white
+            text-decoration: underline
             text-decoration-color: #FFFFFF66
             &:hover
                 text-decoration-color: #FFFFFFFF
@@ -46,28 +47,49 @@ h2
     font-weight: bold
 
 .section
-    font-size: 14px
+    font-size: $h5-font-size
     margin-top: 60px !important
     padding-bottom: 10px
     border-bottom: 1px solid #00000033
 
 a
-    transition: text-decoration 0.5s, color 0.5s
-    text-decoration: underline
+    text-decoration: none
     text-decoration-thickness: 1px
     text-underline-offset: 5px
-    text-decoration-color: adjust-color($primary, $alpha: -0.5)
+    transition: text-decoration 0.5s, color 0.5s
+
     &:hover
         color: darken($primary, 10)
-        text-decoration-color: $primary
+
+.card
+    margin-bottom: $spacing2
+    .card-header
+        .card-title
+            font-size: $h5-font-size
+            text-transform: uppercase
+            color: $color-text-alt
+    .card-body
+        margin-top: $spacing1
+
+.list-group-item.active
+    color: $color-accent
+    font-weight: bold
+
+.btn-xs
+    font-size: 14px
+    padding: 2px 7px
 
 .commands
-    background: black
+    background: $color-background-alt
     position: fixed
     bottom: 0
     left: 0
     right: 0
     z-index: 100
+
+.table
+    input[type=checkbox]
+        margin-right: 10px
 
 footer
     min-height: 300px
