@@ -56,6 +56,7 @@ class University::Person < ApplicationRecord
   include WithPicture
   include WithRoles
   include WithBlocks
+  include WithWebsitePermalink
 
   LIST_OF_ROLES = [
     :administration,
@@ -234,5 +235,9 @@ class University::Person < ApplicationRecord
 
   def prepare_name
     self.name = to_s
+  end
+
+  def permalink_config_key
+    :persons
   end
 end

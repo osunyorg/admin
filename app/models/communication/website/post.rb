@@ -43,6 +43,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlocks
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
+  include WithWebsitePermalink
 
   has_summernote :text
 
@@ -142,6 +143,13 @@ class Communication::Website::Post < ApplicationRecord
     "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
   end
 
+  def computed_permalink_for_website(website)
+    return unless website.id == communication_website_id && published && published_at
+    raw_permalink_for_website(website)
+      .gsub(':slug', self.slug)
+      .gsub(':year/:month/:day', published_at.strftime("%Y/%m/%d"))
+  end
+
   def to_s
     "#{title}"
   end
@@ -173,5 +181,9 @@ class Communication::Website::Post < ApplicationRecord
       old_author.update_and_sync(is_author: false)
     end
     author.update_and_sync(is_author: true) if author_id
+  end
+
+  def permalink_config_key
+    :posts
   end
 end

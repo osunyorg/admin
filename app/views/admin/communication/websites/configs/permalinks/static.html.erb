@@ -1,29 +1,3 @@
-<% if @website.has_communication_posts? %>
-posts:          <%= @website.special_page(:communication_posts).path_without_language %>:year/:month/:day/:slug/
-<% end %>
-<% if @website.has_communication_posts? && @website.has_communication_categories? %>
-categories:     <%= @website.special_page(:communication_posts).path_without_language %>:slug/
-<% end %>
-<% if @website.has_persons? %>
-persons:        <%= @website.special_page(:persons).path_without_language %>:slug/
-<% end %>
-<% if @website.has_organizations? %>
-organizations:  <%= @website.special_page(:organizations).path_without_language %>:slug/
-<% end %>
-<%# website might have authors but no communication_posts (if a post unpublished exists) %>
-<% if @website.has_authors? && @website.has_communication_posts? %>
-authors:        <%= @website.special_page(:persons).path_without_language %>:slug/<%= @website.special_page(:communication_posts).slug %>/
-<% end %>
-<% if @website.has_education_diplomas? %>
-diplomas:       <%= @website.special_page(:education_diplomas).path_without_language %>:slug/
-<% end %>
-<%# ces paths complémentaires sont nécessaires à Hugo mais on ne les utilise pas %>
-<% if @website.has_administrators? %>
-administrators: <%= @website.special_page(:persons).path_without_language %>:slug/roles/
-<% end %>
-<% if @website.has_teachers? %>
-teachers:       <%= @website.special_page(:persons).path_without_language %>:slug/programs/
-<% end %>
-<% if @website.has_researchers? %>
-researchers:    <%= @website.special_page(:persons).path_without_language %>:slug/papers/
+<% @website.config_permalinks.permalinks_data.each do |key, value| %>
+<%= key %>: <%= value %>
 <% end %>

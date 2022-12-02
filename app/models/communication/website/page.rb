@@ -41,6 +41,7 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  include Accessible
   include Sanitizable
   include WithUniversity
   include WithBlobs
@@ -52,7 +53,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPosition
   include WithTree
   include WithPath
-  include Accessible
+  include WithWebsitePermalink
 
   has_summernote :text
 
@@ -115,7 +116,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def full_width
-    kind_home?  ? true 
+    kind_home?  ? true
                 : attributes['full_width']
   end
 
@@ -138,6 +139,10 @@ class Communication::Website::Page < ApplicationRecord
     self.class.unscoped
               .where(parent: parent, university: university, website: website)
               .where.not(id: id)
+  end
+
+  def computed_permalink_for_website(website)
+    path
   end
 
   protected

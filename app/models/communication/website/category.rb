@@ -45,6 +45,7 @@ class Communication::Website::Category < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
   include WithTree
   include WithPosition
+  include WithWebsitePermalink
 
   has_one                 :imported_category,
                           class_name: 'Communication::Website::Imported::Category',
@@ -106,6 +107,10 @@ class Communication::Website::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
+  def computed_permalink_for_website(website)
+    raw_permalink_for_website(website).gsub(':slug', self.path)
+  end
+
   protected
 
   def last_ordered_element
@@ -122,5 +127,9 @@ class Communication::Website::Category < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def permalink_config_key
+    :categories
   end
 end

@@ -43,4 +43,22 @@ class Communication::Website::Configs::Permalinks < Communication::Website
     "admin/communication/websites/configs/permalinks/static"
   end
 
+  def permalinks_data
+    @permalinks_data ||= begin
+      data = {}
+      data[:posts] = "#{self.special_page(:communication_posts).path_without_language}:year/:month/:day/:slug/" if has_communication_posts?
+      data[:categories] = "#{self.special_page(:communication_posts).path_without_language}:slug/" if has_communication_posts? && has_communication_categories?
+      data[:persons] = "#{self.special_page(:persons).path_without_language}:slug/" if has_persons?
+      data[:organizations] = "#{self.special_page(:organizations).path_without_language}:slug/" if has_organizations?
+      # website might have authors but no communication_posts (if a post unpublished exists)
+      data[:authors] = "#{self.special_page(:persons).path_without_language}:slug/#{self.special_page(:communication_posts).slug}/" if has_authors? && has_communication_posts?
+      data[:diplomas] = "#{self.special_page(:education_diplomas).path_without_language}:slug/" if has_education_diplomas?
+      # ces paths complémentaires sont nécessaires à Hugo mais on ne les utilise pas
+      data[:administrators] = "#{self.special_page(:persons).path_without_language}:slug/roles/" if has_administrators?
+      data[:teachers] = "#{self.special_page(:persons).path_without_language}:slug/programs/" if has_teachers?
+      data[:researchers] = "#{self.special_page(:persons).path_without_language}:slug/papers/" if has_researchers?
+      data
+    end
+  end
+
 end
