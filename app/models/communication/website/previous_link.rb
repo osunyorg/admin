@@ -30,10 +30,15 @@ class Communication::Website::PreviousLink < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   before_validation :set_university, on: :create
+  after_destroy_commit :sync_about
 
   private
 
   def set_university
     self.university_id = website.university_id
+  end
+
+  def sync_about
+    about.sync_with_git
   end
 end
