@@ -144,16 +144,16 @@ class Communication::Website::Post < ApplicationRecord
     "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
   end
 
-  def computed_permalink_for_website(website)
+  def computed_permalink_in_website(website)
     return unless website.id == communication_website_id && published && published_at
-    raw_permalink_for_website(website)
+    raw_permalink_in_website(website)
       .gsub(':slug', self.slug)
       .gsub(':year/:month/:day', published_at.strftime("%Y/%m/%d"))
   end
 
-  def previous_computed_permalink_for_website(website)
+  def previous_computed_permalink_in_website(website)
     return unless website.id == communication_website_id && published_was && published_at_was
-    raw_permalink_for_website(website)
+    raw_permalink_in_website(website)
       .gsub(':slug', self.slug_was)
       .gsub(':year/:month/:day', published_at_was.strftime("%Y/%m/%d"))
   end
