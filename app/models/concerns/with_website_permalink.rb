@@ -8,8 +8,17 @@ module WithWebsitePermalink
       computed_permalink.present? ? Static.clean_path(computed_permalink) : nil
     end
 
+    def previous_permalink_for_website(website)
+      computed_permalink = previous_computed_permalink_for_website(website)
+      computed_permalink.present? ? Static.clean_path(computed_permalink) : nil
+    end
+
     def computed_permalink_for_website(website)
-      raw_permalink_for_website(website).gsub(':slug', self.slug)
+      raw_permalink_for_website(website)&.gsub(':slug', self.slug)
+    end
+
+    def previous_computed_permalink_for_website(website)
+      raw_permalink_for_website(website)&.gsub(':slug', self.slug_was)
     end
 
     protected

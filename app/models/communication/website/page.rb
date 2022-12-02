@@ -54,6 +54,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithTree
   include WithPath
   include WithWebsitePermalink
+  include WithWebsitePreviousLinks
 
   has_summernote :text
 
@@ -143,6 +144,10 @@ class Communication::Website::Page < ApplicationRecord
 
   def computed_permalink_for_website(website)
     path
+  end
+
+  def previous_computed_permalink_for_website(website)
+    path_was
   end
 
   protected

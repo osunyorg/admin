@@ -46,6 +46,7 @@ class Communication::Website::Category < ApplicationRecord
   include WithTree
   include WithPosition
   include WithWebsitePermalink
+  include WithWebsitePreviousLinks
 
   has_one                 :imported_category,
                           class_name: 'Communication::Website::Imported::Category',
@@ -109,6 +110,10 @@ class Communication::Website::Category < ApplicationRecord
 
   def computed_permalink_for_website(website)
     raw_permalink_for_website(website).gsub(':slug', self.path)
+  end
+
+  def previous_computed_permalink_for_website(website)
+    raw_permalink_for_website(website).gsub(':slug', self.path_was)
   end
 
   protected

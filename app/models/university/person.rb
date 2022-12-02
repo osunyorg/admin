@@ -57,6 +57,7 @@ class University::Person < ApplicationRecord
   include WithRoles
   include WithBlocks
   include WithWebsitePermalink
+  include WithWebsitePreviousLinks
 
   LIST_OF_ROLES = [
     :administration,

@@ -44,6 +44,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithWebsitePermalink
+  include WithWebsitePreviousLinks
 
   has_summernote :text
 
@@ -148,6 +149,13 @@ class Communication::Website::Post < ApplicationRecord
     raw_permalink_for_website(website)
       .gsub(':slug', self.slug)
       .gsub(':year/:month/:day', published_at.strftime("%Y/%m/%d"))
+  end
+
+  def previous_computed_permalink_for_website(website)
+    return unless website.id == communication_website_id && published_was && published_at_was
+    raw_permalink_for_website(website)
+      .gsub(':slug', self.slug_was)
+      .gsub(':year/:month/:day', published_at_was.strftime("%Y/%m/%d"))
   end
 
   def to_s
