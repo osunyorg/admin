@@ -2,12 +2,7 @@
 title: >
   <%= @about.to_s %>
 slug: "<%= @about.slug %>"
-<% if @about.previous_links.any? %>
-aliases:
-<% @about.previous_links.each do |previous_link| %>
-  - <%= previous_link.link %>
-<% end %>
-<% end %>
+<%= render 'admin/application/static/aliases' %>
 first_name: >
   <%= @about.first_name %>
 last_name: >

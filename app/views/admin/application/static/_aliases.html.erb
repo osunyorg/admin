@@ -1,0 +1,6 @@
+<% if @about.previous_links.any? %>
+aliases:
+<% @about.previous_links.each do |previous_link| %>
+  - <%= previous_link.link %>
+<% end %>
+<% end %>

@@ -2,12 +2,7 @@
 title: "<%= @about.title %>"
 date: "<%= @about.published_at.iso8601 %>"
 slug: "<%= @about.slug %>"
-<% if @about.previous_links.any? %>
-aliases:
-<% @about.previous_links.each do |previous_link| %>
-  - <%= previous_link.link %>
-<% end %>
-<% end %>
+<%= render 'admin/application/static/aliases' %>
 <% if @about.pinned %>
 weight: 1
 <% end %>
