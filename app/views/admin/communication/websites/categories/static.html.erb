@@ -4,6 +4,12 @@ slug: "<%= @about.path %>"
 <% if @about.parent %>
 parent: "<%= @about.parent.path %>"
 <% end %>
+<% if @about.previous_links.any? %>
+aliases:
+<% @about.previous_links.each do |previous_link| %>
+  - <%= previous_link.link %>
+<% end %>
+<% end %>
 position: <%= @about.position %>
 <%= render 'admin/communication/unsplash/static' %>
 description: >
