@@ -16,6 +16,9 @@ website: "<%= @about.url %>"
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>
+<% if @about.logo_on_dark_background.attached? %>
+logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
+<% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
 <%= render 'admin/communication/blocks/static', about: @about %>

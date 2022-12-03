@@ -5,7 +5,11 @@ class Communication::Block::Component::Organization < Communication::Block::Comp
   end
 
   def git_dependencies
-    [organization, organization&.logo&.blob]
+    [
+      organization,
+      organization&.logo&.blob,
+      organization&.logo_on_dark_background&.blob
+    ]
   end
 
 end

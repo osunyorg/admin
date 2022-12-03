@@ -94,6 +94,8 @@ fr:
         url: Site Web
         phone: Téléphone
         email: Email
+        logo: Logo sur fond clair (par défaut)
+        logo_on_dark_background: Logo sur fond sombre (optionnel)
         kind: Type
         siren: Numéro de SIREN
       university/role:
@@ -134,6 +136,8 @@ fr:
         sso_button_label: "Par défaut : Se connecter en SSO"
       university_organization:
         description: Si ce champ est vide le début du texte principal sera utilisé.
+        logo: Ce logo doit contraster sur un fond clair (blanc ou gris pâle)
+        logo_on_dark_background: Ce logo doit contraster sur un fond sombre (noir ou gris sombre).
       university_person:
         description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.
         habilitation: "Détient une Habilitation à Diriger des Recherches (HDR)."
@@ -180,6 +184,7 @@ fr:
     organization:
       employees: Employés·es
       import_hint_html: "Les valeurs possibles pour <i>kind</i> sont : company, non_profit, government.<br>Les champs <i>siren</i>, <i>nic</i>, <i>zipcode</i> et <i>phone</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
+      logo: Logo
     person:
       administrator_roles: Rôles administratifs
       experience:

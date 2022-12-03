@@ -88,15 +88,20 @@
         <%= @organization.active %>
       </div>
     </div>
-    <% if @organization.logo.attached? %>
+    <% if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= University::Organization.human_attribute_name('logo') %>
-          </h5>
+          <h5 class="card-title mb-0"><%= t 'university.organization.logo' %></h5>
         </div>
-        <div class="card-body bg-grey">
-          <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill p-5' if @organization.logo.attached? %>
+        <div class="card-body">
+          <% if @organization.logo.attached? %>
+            <label class="form-label"><%= University::Organization.human_attribute_name('logo') %></label>
+            <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5' %>
+          <% end %>
+          <% if @organization.logo_on_dark_background.attached? %>
+            <label class="form-label mt-4"><%= University::Organization.human_attribute_name('logo_on_dark_background') %></label>
+            <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+          <% end %>
         </div>
       </div>
     <% end %>
