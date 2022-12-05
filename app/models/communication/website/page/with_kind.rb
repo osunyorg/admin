@@ -50,6 +50,23 @@ module Communication::Website::Page::WithKind
       is_special_page? && SPECIAL_PAGES_WITH_GIT_SPECIAL_PATH.include?(kind)
     end
 
+    def special_page_git_dependencies(website)
+      dependencies = [website.config_permalinks]
+      dependencies += [
+        website.categories,
+        website.authors.map(&:author),
+        website.posts
+      ].flatten if kind_communication_posts?
+      ['education_programs', 'education_diplomas', 'research_papers', 'organizations'].each do |kind|
+        dependencies += website.public_send(kind) if public_send("kind_#{kind}?")
+      end
+      dependencies += website.people_with_facets if kind_persons?
+      [:administrator, :author, :researcher, :teacher].each do |kind|
+        dependencies += website.public_send(kind.to_s.pluralize).map(&kind) if public_send("kind_#{kind.to_s.pluralize}?")
+      end
+      dependencies
+    end
+
   end
 
   private

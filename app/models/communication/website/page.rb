@@ -88,19 +88,7 @@ class Communication::Website::Page < ApplicationRecord
                     siblings +
                     git_block_dependencies
     dependencies += [parent] if has_parent?
-    dependencies += [website.config_permalinks] if is_special_page?
-    dependencies += [
-      website.categories,
-      website.authors.map(&:author),
-      website.posts
-    ].flatten if kind_communication_posts?
-    ['education_programs', 'education_diplomas', 'research_papers', 'organizations'].each do |kind|
-      dependencies += website.public_send(kind) if public_send("kind_#{kind}?")
-    end
-    dependencies += website.people_with_facets if kind_persons?
-    [:administrator, :author, :researcher, :teacher].each do |kind|
-      dependencies += website.public_send(kind.to_s.pluralize).map(&kind) if public_send("kind_#{kind.to_s.pluralize}?")
-    end
+    dependencies += special_page_git_dependencies(website) if is_special_page?
     dependencies.flatten
   end
 
