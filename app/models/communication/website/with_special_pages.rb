@@ -3,6 +3,28 @@ module Communication::Website::WithSpecialPages
 
   included do
 
+    # first level pages with test
+    SPECIAL_PAGES_WITH_TEST = [
+      'legal_terms',
+      'sitemap',
+      'privacy_policy',
+      'accessibility',
+      'communication_posts',
+      'education_programs',
+      'education_diplomas',
+      'research_papers',
+      'research_volumes',
+      'organizations'
+    ]
+
+    # team pages
+    SPECIAL_PAGES_FOR_PERSONS = [
+      'administrators',
+      'authors',
+      'researchers',
+      'teachers'
+    ]
+
     after_create :create_missing_special_pages
     after_touch :create_missing_special_pages, :manage_special_pages_publication
 
@@ -12,30 +34,12 @@ module Communication::Website::WithSpecialPages
 
     def create_missing_special_pages
       homepage = create_special_page('home')
-      # first level pages with test
-      [
-        'legal_terms',
-        'sitemap',
-        'privacy_policy',
-        'accessibility',
-        'communication_posts',
-        'education_programs',
-        'education_diplomas',
-        'research_papers',
-        'research_volumes',
-        'organizations'
-      ].each do |kind|
+      SPECIAL_PAGES_WITH_TEST.each do |kind|
         create_special_page(kind, homepage.id) if public_send("has_#{kind}?")
       end
-      # team pages
       if has_persons?
         persons = create_special_page('persons', homepage.id)
-        [
-          'administrators',
-          'authors',
-          'researchers',
-          'teachers'
-        ].each do |kind|
+        SPECIAL_PAGES_FOR_PERSONS.each do |kind|
           create_special_page(kind, persons.id) if public_send("has_#{kind}?")
         end
       end
