@@ -51,9 +51,7 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :not_current, -> { where(is_current: false) }
 
   def self.config_in_website(website)
-    MAPPING.values.select { |permalink_class|
-      permalink_class.required_for_website?(website)
-    }.map { |permalink_class|
+    config_required_in_website.map { |permalink_class|
       [permalink_class.static_config_key, permalink_class.pattern_in_website(website)]
     }.to_h
   end
@@ -78,6 +76,12 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   protected
+
+  def self.config_required_in_website(website)
+    MAPPING.values.select { |permalink_class|
+      permalink_class.required_for_website?(website)
+    }
+  end
 
   def published?
     # Can be overwritten
