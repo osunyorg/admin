@@ -51,7 +51,7 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :not_current, -> { where(is_current: false) }
 
   def self.config_in_website(website)
-    required_kinds_in_website.map { |permalink_class|
+    required_kinds_in_website(website).map { |permalink_class|
       [permalink_class.static_config_key, permalink_class.pattern_in_website(website)]
     }.to_h
   end
@@ -60,6 +60,11 @@ class Communication::Website::Permalink < ApplicationRecord
     permalink_class = MAPPING[object.class.to_s]
     raise ArgumentError.new("Permalinks do not handle an object of type #{object.class.to_s}") if permalink_class.nil?
     permalink = permalink_class.new(website: website, about: object)
+  end
+
+  # Can be overwritten
+  def self.required_in_config?(website)
+    false
   end
 
   def self.pattern_in_website(website)
