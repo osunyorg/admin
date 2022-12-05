@@ -74,7 +74,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def computed_path
     return nil unless published?
-    @computed_path ||= published_path
+    @computed_path ||= Static.clean_path(published_path)
   end
 
   protected
@@ -91,4 +91,5 @@ class Communication::Website::Permalink < ApplicationRecord
   def set_university
     self.university_id = website.university_id
   end
+
 end
