@@ -1,5 +1,5 @@
 class Communication::Website::Permalink::Diploma < Communication::Website::Permalink
-  def self.required_for_website?(website)
+  def self.required_in_config?(website)
     website.has_education_diplomas?
   end
 

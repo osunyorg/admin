@@ -79,7 +79,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def self.required_kinds_in_website(website)
     MAPPING.values.select { |permalink_class|
-      permalink_class.required_for_website?(website)
+      permalink_class.required_in_config?(website)
     }
   end
 

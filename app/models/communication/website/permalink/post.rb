@@ -1,5 +1,5 @@
 class Communication::Website::Permalink::Post < Communication::Website::Permalink
-  def self.required_for_website?(website)
+  def self.required_in_config?(website)
     website.has_communication_posts?
   end
 
