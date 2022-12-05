@@ -13,7 +13,7 @@ module WithPermalinkInWebsite
     new_permalink = Communication::Website::Permalink.for_object(self, website)
 
     # If the object had no permalink or if its path changed, we create a new permalink
-    if last_permalink.nil? || new_permalink.computed_path.present? && last_permalink.path != new_permalink.computed_path
+    if new_permalink.computed_path.present? && (last_permalink.nil? || last_permalink.path != new_permalink.computed_path)
       last_permalink&.update(is_current: false)
       new_permalink.path = new_permalink.computed_path
       new_permalink.save
