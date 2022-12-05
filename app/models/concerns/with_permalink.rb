@@ -12,9 +12,13 @@ module WithPermalink
     permalinks.for_website(website).current.first
   end
 
+  def new_permalink_in_website(website)
+    Communication::Website::Permalink.for_object(self, website)
+  end
+
   def manage_permalink_in_website(website)
     current_permalink = current_permalink_in_website(website)
-    new_permalink = Communication::Website::Permalink.for_object(self, website)
+    new_permalink = new_permalink_in_website(website)
 
     # If the object had no permalink or if its path changed, we create a new permalink
     if new_permalink.computed_path.present? && (last_permalink.nil? || last_permalink.path != new_permalink.computed_path)
