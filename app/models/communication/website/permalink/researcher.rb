@@ -10,14 +10,4 @@ class Communication::Website::Permalink::Researcher < Communication::Website::Pe
   def self.pattern_in_website(website)
     "#{website.special_page(:persons).path_without_language}:slug/papers/"
   end
-
-  protected
-
-  def published?
-    about.for_website?(website)
-  end
-
-  def published_path
-    pattern.gsub(":slug", about.slug)
-  end
 end

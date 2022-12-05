@@ -13,7 +13,9 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   protected
 
-  def published_path
-    pattern.gsub(":slug", about.path)
+  def substitutions
+    {
+      slug: about.path
+    }
   end
 end

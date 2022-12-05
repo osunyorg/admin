@@ -91,13 +91,15 @@ class Communication::Website::Permalink < ApplicationRecord
     p
   end
 
+  # Can be overwritten
   def published?
-    # Can be overwritten
-    true
+    about.for_website?(website)
   end
 
   def substitutions
-    raise NotImplementedError
+    {
+      slug: about.slug
+    }
   end
 
   def set_university
