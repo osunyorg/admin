@@ -1,4 +1,4 @@
-module WithPermalinkInWebsite
+module WithPermalink
   extend ActiveSupport::Concern
 
   included do

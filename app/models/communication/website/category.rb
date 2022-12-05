@@ -44,7 +44,7 @@ class Communication::Website::Category < ApplicationRecord
   include WithMenuItemTarget
   include WithSlug # We override slug_unavailable? method
   include WithTree
-  include WithPermalinkInWebsite
+  include WithPermalink
   include WithPosition
 
   has_one                 :imported_category,

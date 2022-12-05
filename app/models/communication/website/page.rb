@@ -53,7 +53,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPosition
   include WithTree
   include WithPath
-  include WithPermalinkInWebsite
+  include WithPermalink
 
   has_summernote :text
 
