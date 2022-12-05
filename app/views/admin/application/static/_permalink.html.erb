@@ -2,9 +2,12 @@ url: "<%= @about.permalinks.for_website(@website).current.first.path %>"
 <% if @about&.slug %>
 slug: "<%= @about.slug %>"
 <% end %>
-<% if @about.permalinks.any? %>
+<%
+past_permalinks = @about.permalinks.for_website(@website).not_current
+if past_permalinks.any?
+%>
 aliases:
-<% @about.permalinks.for_website(@website).not_current.each do |permalink| %>
+<% past_permalinks.each do |permalink| %>
   - <%= permalink.path %>
 <% end %>
 <% end %>

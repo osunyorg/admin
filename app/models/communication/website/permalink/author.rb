@@ -18,7 +18,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
     about.for_website?(website)
   end
 
-  def computed_path
+  def published_path
     pattern.gsub(":slug", about.slug)
   end
 end
