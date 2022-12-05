@@ -24,7 +24,7 @@ module WithPermalink
 
   # Called from git_file.sync
   def manage_permalink_in_website(website)
-    new_permalink_in_website(website).save_if_needed!
+    new_permalink_in_website(website).save_if_needed
   end
 
 end
