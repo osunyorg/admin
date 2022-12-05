@@ -86,7 +86,7 @@ class Communication::Website::Permalink < ApplicationRecord
   def published_path
     p = pattern
     substitutions.each do |key, value|
-      p.gsub! ":#{key}", value
+      p.gsub! ":#{key}", "#{value}"
     end
     p
   end
