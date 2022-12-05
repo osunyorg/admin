@@ -8,7 +8,11 @@ module WithPermalink
               dependent: :destroy
   end
 
-  # Persisted in db
+  def previous_permalinks_in_website(website)
+    permalinks.for_website(website).not_current
+  end
+
+  # Persisted in db or nil
   def current_permalink_in_website(website)
     permalinks.for_website(website).current.first
   end
@@ -20,14 +24,7 @@ module WithPermalink
 
   # Called from git_file.sync
   def manage_permalink_in_website(website)
-    current_permalink = current_permalink_in_website(website)
-    new_permalink = new_permalink_in_website(website)
-
-    # If the object had no permalink or if its path changed, we create a new permalink
-    if new_permalink.computed_path.present? && (current_permalink.nil? || current_permalink.path != new_permalink.computed_path)
-      new_permalink.path = new_permalink.computed_path
-      current_permalink&.update(is_current: false) if new_permalink.save
-    end
+    new_permalink_in_website(website).save_if_needed!
   end
 
 end
