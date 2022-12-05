@@ -19,9 +19,12 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
     website.id == about.communication_website_id && about.published && about.published_at
   end
 
-  def published_path
-    pattern
-      .gsub(":year/:month/:day", about.published_at.strftime("%Y/%m/%d"))
-      .gsub(":slug", about.slug)
+  def substitutions
+    {
+      year: about.published_at.year,
+      month: about.published_at.month,
+      day: about.published_at.day,
+      slug: about.slug
+    }
   end
 end

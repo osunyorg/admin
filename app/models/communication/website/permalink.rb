@@ -83,12 +83,20 @@ class Communication::Website::Permalink < ApplicationRecord
     }
   end
 
+  def published_path
+    p = pattern
+    substitutions.each do |key, value|
+      p.gsub! ":#{key}", value
+    end
+    p
+  end
+
   def published?
     # Can be overwritten
     true
   end
 
-  def published_path
+  def substitutions
     raise NotImplementedError
   end
 
