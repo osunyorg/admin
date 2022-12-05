@@ -8,8 +8,12 @@ module WithPermalink
               dependent: :destroy
   end
 
+  def current_permalink_in_website(website)
+    permalinks.for_website(website).current.first
+  end
+
   def manage_permalink_in_website(website)
-    last_permalink = permalinks.for_website(website).current.first
+    current_permalink = current_permalink_in_website(website)
     new_permalink = Communication::Website::Permalink.for_object(self, website)
 
     # If the object had no permalink or if its path changed, we create a new permalink
