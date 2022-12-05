@@ -13,6 +13,10 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   protected
 
+  def published?
+    true
+  end
+
   def substitutions
     {
       slug: about.path

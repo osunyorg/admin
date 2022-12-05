@@ -51,7 +51,7 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :not_current, -> { where(is_current: false) }
 
   def self.config_in_website(website)
-    required_kinds_in_website.map { |permalink_class|
+    required_kinds_in_website(website).map { |permalink_class|
       [permalink_class.static_config_key, permalink_class.pattern_in_website(website)]
     }.to_h
   end
