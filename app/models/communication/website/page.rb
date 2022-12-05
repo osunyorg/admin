@@ -95,11 +95,11 @@ class Communication::Website::Page < ApplicationRecord
       website.posts
     ].flatten if kind_communication_posts?
     ['education_programs', 'education_diplomas', 'research_papers', 'organizations'].each do |kind|
-      dependencies += website.send(kind) if send("kind_#{kind}?"
+      dependencies += website.public_send(kind) if public_send("kind_#{kind}?")
     end
     dependencies += website.people_with_facets if kind_persons?
     [:administrator, :author, :researcher, :teacher].each do |kind|
-      dependencies += website.send(kind.to_s.pluralize).map(&kind) if send("kind_#{kind.to_s.pluralize}?")
+      dependencies += website.public_send(kind.to_s.pluralize).map(&kind) if public_send("kind_#{kind.to_s.pluralize}?")
     end
     dependencies.flatten
   end
