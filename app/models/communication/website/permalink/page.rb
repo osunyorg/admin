@@ -1,7 +1,4 @@
 class Communication::Website::Permalink::Page < Communication::Website::Permalink
-  def self.required_in_config?(website)
-    false
-  end
 
   protected
 

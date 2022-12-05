@@ -62,6 +62,11 @@ class Communication::Website::Permalink < ApplicationRecord
     permalink = permalink_class.new(website: website, about: object)
   end
 
+  # Can be overwritten
+  def self.required_in_config?(website)
+    false
+  end
+
   def self.pattern_in_website(website)
     raise NotImplementedError
   end
