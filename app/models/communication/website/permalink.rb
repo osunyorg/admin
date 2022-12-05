@@ -24,10 +24,16 @@
 #
 class Communication::Website::Permalink < ApplicationRecord
   MAPPING = {
+    "Communication::Website::Category" => Communication::Website::Permalink::Category,
     "Communication::Website::Page" => Communication::Website::Permalink::Page,
     "Communication::Website::Post" => Communication::Website::Permalink::Post,
+    "Education::Diploma" => Communication::Website::Permalink::Diploma,
+    "University::Organization" => Communication::Website::Permalink::Organization,
     "University::Person" => Communication::Website::Permalink::Person,
-    "University::Person::Author" => Communication::Website::Permalink::Author
+    "University::Person::Administrator" => Communication::Website::Permalink::Administrator,
+    "University::Person::Author" => Communication::Website::Permalink::Author,
+    "University::Person::Researcher" => Communication::Website::Permalink::Researcher,
+    "University::Person::Teacher" => Communication::Website::Permalink::Teacher
   }
 
   include WithUniversity

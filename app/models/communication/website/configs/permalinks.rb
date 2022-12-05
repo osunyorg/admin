@@ -43,18 +43,4 @@ class Communication::Website::Configs::Permalinks < Communication::Website
     "admin/communication/websites/configs/permalinks/static"
   end
 
-  def permalinks_data
-    @permalinks_data ||= begin
-      # TODO : Clean
-      data = Communication::Website::Permalink.config_in_website(self)
-      data[:categories] = "#{self.special_page(:communication_posts).path_without_language}:slug/" if has_communication_posts? && has_communication_categories?
-      data[:organizations] = "#{self.special_page(:organizations).path_without_language}:slug/" if has_organizations?
-      data[:diplomas] = "#{self.special_page(:education_diplomas).path_without_language}:slug/" if has_education_diplomas?
-      data[:administrators] = "#{self.special_page(:persons).path_without_language}:slug/roles/" if has_administrators?
-      data[:teachers] = "#{self.special_page(:persons).path_without_language}:slug/programs/" if has_teachers?
-      data[:researchers] = "#{self.special_page(:persons).path_without_language}:slug/papers/" if has_researchers?
-      data
-    end
-  end
-
 end
