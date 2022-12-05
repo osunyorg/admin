@@ -59,7 +59,7 @@ class Communication::Website::Permalink < ApplicationRecord
   def self.for_object(object, website)
     permalink_class = MAPPING[object.class.to_s]
     raise ArgumentError.new("Permalinks do not handle an object of type #{object.class.to_s}") if permalink_class.nil?
-    permalink = permalink_class.new(website: website, about: object)
+    permalink_class.new(website: website, about: object)
   end
 
   # Can be overwritten
