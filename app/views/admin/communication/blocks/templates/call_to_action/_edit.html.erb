@@ -1,12 +1,12 @@
 <div class="row mb-5">
-  <div class="col-xxl-4 col-md-6">
+  <div class="col-md-6">
     <div class="summernote">
       <%= block_component_edit :text,
           label: t('admin.communication.blocks.components.text.label'),
           placeholder: t('admin.communication.blocks.components.text.placeholder') %>
     </div>
   </div>
-  <div class="col-xxl-4 col-md-6">
+  <div class="col-md-6">
     <%= block_component_edit :image,
           label: t('admin.communication.blocks.components.image.input.label'),
           remove: t('admin.communication.blocks.components.image.input.remove') %>
@@ -20,28 +20,37 @@
 </div>
 
 <h3 class="h4"><%= t '.buttons' %></h3>
-<div class="list-group">
+<draggable :list="data.elements" handle=".dragHandle" class="list-group">
   <div v-for="(element, index) in data.elements" class="list-group-item">
-    <div class="row mb-n3">
-      <div class="col-lg-3">
-        <%= block_component_edit  :title, template: @element %>
-      </div>
-      <div class="col-lg-4">
-        <%= block_component_edit :url, template: @element %>
-      </div>
-      <div class="col-lg-4">
-        <label class="form-label d-none d-xl-block">&nbsp;</label>
-        <%= block_component_edit :target_blank, template: @element %>
-      </div>
-      <div class="col-lg-1">
-        <a  class="btn btn-sm btn-danger float-end"
-            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
-          <i class="fas fa-times"></i>
+    <div class="d-flex">
+      <div>
+        <a class="btn ps-0 pt-0 dragHandle">
+          <i class="fa fa-bars handle"></i>
         </a>
+      </div>
+      <div class="flex-fill">
+        <div class="row mb-n3">
+          <div class="col-lg-3">
+            <%= block_component_edit  :title, template: @element %>
+          </div>
+          <div class="col-lg-4">
+            <%= block_component_edit :url, template: @element %>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label d-none d-xl-block">&nbsp;</label>
+            <%= block_component_edit :target_blank, template: @element %>
+          </div>
+          <div class="col-lg-1">
+            <a  class="btn btn-sm btn-danger float-end"
+                v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div v-if="data.elements.length < 3" class="mt-3">
+</draggable>
+<div class="mt-3">
   <%= block_component_add_element t('.add_button') %>
 </div>
