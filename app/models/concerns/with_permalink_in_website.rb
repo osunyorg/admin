@@ -12,31 +12,26 @@ module WithPermalinkInWebsite
 
   end
 
-  def permalink_in_website(website)
+  def permalink_path_in_website(website)
     computed_permalink = computed_permalink_in_website(website)
     computed_permalink.present? ? Static.clean_path(computed_permalink) : nil
   end
 
-  def previous_permalink_in_website(website)
-    computed_permalink = previous_computed_permalink_in_website(website)
-    computed_permalink.present? ? Static.clean_path(computed_permalink) : nil
-  end
-
-  def computed_permalink_in_website(website)
+  def computed_permalink_path_in_website(website)
     raw_permalink_in_website(website)&.gsub(':slug', self.slug)
-  end
-
-  def previous_computed_permalink_in_website(website)
-    raw_permalink_in_website(website)&.gsub(':slug', self.slug_was)
   end
 
   def manage_permalinks
     websites_for_self.each do |website|
-      old_permalink = previous_permalink_in_website(website)
-      new_permalink = permalink_in_website(website)
+      last_permalink = permalinks.for_website(website).current.first
+      new_permalink_path = permalink_path_in_website(website)
 
-      # If the object had a permalink and now is different, we create a previous link
-      permalinks.create(website: website, path: old_permalink) if old_permalink.present? && new_permalink != old_permalink
+      # If the object had no permalink or if its path changed, we create a new permalink
+      if last_permalink.nil? || new_permalink_path != last_permalink.path
+        last_permalink&.update(is_current: false)
+        permalinks.create(website: website, path: new_permalink_path)
+      end
+
     end
   end
 
