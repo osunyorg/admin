@@ -24,6 +24,7 @@ module WithPermalink
 
   # Called from git_file.sync
   def manage_permalink_in_website(website)
+    return unless Communication::Website::Permalink::MAPPING.keys.include?(self.class.to_s)
     new_permalink_in_website(website).save_if_needed
   end
 
