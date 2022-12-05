@@ -8,10 +8,12 @@ module WithPermalink
               dependent: :destroy
   end
 
+  # Persisted in db
   def current_permalink_in_website(website)
     permalinks.for_website(website).current.first
   end
 
+  # Not persisted yet
   def new_permalink_in_website(website)
     Communication::Website::Permalink.for_object(self, website)
   end
