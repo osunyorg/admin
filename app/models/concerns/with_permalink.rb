@@ -18,6 +18,7 @@ module WithPermalink
     Communication::Website::Permalink.for_object(self, website)
   end
 
+  # Called from git_file.sync
   def manage_permalink_in_website(website)
     current_permalink = current_permalink_in_website(website)
     new_permalink = new_permalink_in_website(website)
