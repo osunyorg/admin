@@ -1,5 +1,5 @@
 class Communication::Website::Permalink::Post < Communication::Website::Permalink
-  def self.required_for_website?(website)
+  def self.required_in_config?(website)
     website.has_communication_posts?
   end
 
@@ -21,9 +21,9 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
 
   def substitutions
     {
-      year: about.published_at.year,
-      month: about.published_at.month,
-      day: about.published_at.day,
+      year: about.published_at.strftime("%Y"),
+      month: about.published_at.strftime("%m"),
+      day: about.published_at.strftime("%d"),
       slug: about.slug
     }
   end
