@@ -83,6 +83,7 @@ class Communication::Website::Permalink < ApplicationRecord
     }
   end
 
+  # Can be overwritten (Page for example)
   def published_path
     p = pattern
     substitutions.each do |key, value|
@@ -96,6 +97,7 @@ class Communication::Website::Permalink < ApplicationRecord
     about.for_website?(website)
   end
 
+  # Can be overwritten
   def substitutions
     {
       slug: about.slug
