@@ -94,6 +94,8 @@ en:
         url: Website
         phone: Telephone
         email: Email
+        logo: Logo for light backgrounds (default)
+        logo_on_dark_background: Logo for dark backgrounds (optional)
         kind: Kind
         siren: Legal identification number
       university/role:
@@ -134,6 +136,8 @@ en:
         sso_button_label: "Default: Sign in via SSO"
       university_organization:
         description: If this field is empty the main text's begining will be used.
+        logo: This logo should contrast properly on a light bacgkground (white or pale grey)
+        logo_on_dark_background: This logo should contrast on a dark background (black or dark grey)
       university_person:
         description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
         habilitation: "Possesses an accreditation to supervise research."
@@ -180,6 +184,7 @@ en:
     organisation:
       employees: Employees
       import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
+      logo: Logo
     person:
       administrator_roles: Administrator roles
       experience:

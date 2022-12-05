@@ -46,6 +46,7 @@ class University::Organization < ApplicationRecord
   has_summernote :text
 
   has_one_attached_deletable :logo
+  has_one_attached_deletable :logo_on_dark_background
 
   scope :ordered, -> { order(:name) }
   scope :for_kind, -> (kind) { where(kind: kind) }
@@ -115,6 +116,9 @@ class University::Organization < ApplicationRecord
   protected
 
   def explicit_blob_ids
-    [logo&.blob_id]
+    [
+      logo&.blob_id,
+      logo_on_dark_background&.blob_id
+    ]
   end
 end

@@ -71,14 +71,17 @@
       </div>
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= University::Organization.human_attribute_name('logo') %>
-          </h5>
+          <h5 class="card-title mb-0"><%= t 'university.organization.logo' %></h5>
         </div>
         <div class="card-body">
           <%= f.input :logo,
                       as: :single_deletable_file,
-                      label: false,
+                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                      preview: 200,
+                      resize: false,
+                      direct_upload: true %>
+          <%= f.input :logo_on_dark_background,
+                      as: :single_deletable_file,
                       input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                       preview: 200,
                       resize: false,

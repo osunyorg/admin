@@ -13,10 +13,7 @@
         <tr>
           <td><%= link_to organization, admin_university_organization_path(organization) %></td>
           <td><span class="badge bg-secondary"><%= organization.kind_i18n %></span></td>
-          <td class="p-0 bg-grey text-center">
-            <%= kamifusen_tag organization.logo,
-                              width: 40 if organization.logo.attached? %>
-          </td>
+          <td><%= kamifusen_tag organization.logo, width: 40 if organization.logo.attached? %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= edit_link organization %>
