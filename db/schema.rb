@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_02_132447) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_100440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -328,6 +328,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_132447) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.string "about_type", null: false
+    t.uuid "about_id", null: false
+    t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_current", default: true
+    t.index ["university_id"], name: "index_communication_website_permalinks_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_permalinks_on_website_id"
+  end
+
   create_table "communication_website_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
@@ -350,18 +363,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_132447) do
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_posts_on_language_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
-  end
-
-  create_table "communication_website_previous_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.string "about_type", null: false
-    t.uuid "about_id", null: false
-    t.string "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["university_id"], name: "index_communication_website_previous_links_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_previous_links_on_website_id"
   end
 
   create_table "communication_websites", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -869,11 +870,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_132447) do
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
+  add_foreign_key "communication_website_permalinks", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_permalinks", "universities"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_website_posts", "university_people", column: "author_id"
-  add_foreign_key "communication_website_previous_links", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_previous_links", "universities"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_academic_years", "universities"
   add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"

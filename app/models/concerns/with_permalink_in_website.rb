@@ -3,12 +3,12 @@ module WithPermalinkInWebsite
 
   included do
 
-    has_many  :previous_links,
-              class_name: "Communication::Website::PreviousLink",
+    has_many  :permalinks,
+              class_name: "Communication::Website::Permalink",
               as: :about,
               dependent: :destroy
 
-    after_validation :manage_previous_links, on: [:create, :update]
+    after_validation :manage_permalinks, on: [:create, :update]
 
   end
 
@@ -30,13 +30,13 @@ module WithPermalinkInWebsite
     raw_permalink_in_website(website)&.gsub(':slug', self.slug_was)
   end
 
-  def manage_previous_links
+  def manage_permalinks
     websites_for_self.each do |website|
       old_permalink = previous_permalink_in_website(website)
       new_permalink = permalink_in_website(website)
 
       # If the object had a permalink and now is different, we create a previous link
-      previous_links.create(website: website, link: old_permalink) if old_permalink.present? && new_permalink != old_permalink
+      permalinks.create(website: website, path: old_permalink) if old_permalink.present? && new_permalink != old_permalink
     end
   end
 

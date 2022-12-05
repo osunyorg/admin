@@ -1,10 +1,11 @@
 # == Schema Information
 #
-# Table name: communication_website_previous_links
+# Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
 #  about_type    :string           not null
-#  link          :string
+#  is_current    :boolean          default(TRUE)
+#  path          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid             not null
@@ -13,8 +14,8 @@
 #
 # Indexes
 #
-#  index_communication_website_previous_links_on_university_id  (university_id)
-#  index_communication_website_previous_links_on_website_id     (website_id)
+#  index_communication_website_permalinks_on_university_id  (university_id)
+#  index_communication_website_permalinks_on_website_id     (website_id)
 #
 # Foreign Keys
 #
