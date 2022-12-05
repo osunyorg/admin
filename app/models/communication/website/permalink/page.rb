@@ -6,7 +6,8 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
     website.id == about.communication_website_id && about.published
   end
 
-  # Pages are special, there is no substitution
+  # /notre-institut/histoire/
+  # Pages are special, there is no substitution and no pattern
   def published_path
     about.path
   end

@@ -7,6 +7,7 @@ class Communication::Website::Permalink::Diploma < Communication::Website::Perma
     :diplomas
   end
 
+  # /diplomes/:slug/
   def self.pattern_in_website(website)
     "#{website.special_page(:education_diplomas).path_without_language}:slug/"
   end

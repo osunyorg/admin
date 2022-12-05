@@ -7,6 +7,7 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
     :categories
   end
 
+  # /actualites/:slug/
   def self.pattern_in_website(website)
     "#{website.special_page(:communication_posts).path_without_language}:slug/"
   end

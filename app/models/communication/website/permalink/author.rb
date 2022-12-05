@@ -8,6 +8,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
     :authors
   end
 
+  # /equipe/:slug/actualites/
   def self.pattern_in_website(website)
     "#{website.special_page(:persons).path_without_language}:slug/#{website.special_page(:communication_posts).slug}/"
   end

@@ -7,6 +7,7 @@ class Communication::Website::Permalink::Person < Communication::Website::Permal
     :persons
   end
 
+  # /equipe/:slug/
   def self.pattern_in_website(website)
     "#{website.special_page(:persons).path_without_language}:slug/"
   end

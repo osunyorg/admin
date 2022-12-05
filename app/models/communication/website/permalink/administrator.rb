@@ -7,6 +7,7 @@ class Communication::Website::Permalink::Administrator < Communication::Website:
     :administrators
   end
 
+  # /equipe/:slug/roles/
   def self.pattern_in_website(website)
     "#{website.special_page(:persons).path_without_language}:slug/roles/"
   end

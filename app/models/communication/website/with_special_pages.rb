@@ -13,13 +13,29 @@ module Communication::Website::WithSpecialPages
     def create_missing_special_pages
       homepage = create_special_page('home')
       # first level pages with test
-      ['legal_terms', 'sitemap', 'privacy_policy', 'accessibility', 'communication_posts', 'education_programs', 'education_diplomas', 'research_papers', 'research_volumes', 'organizations'].each do |kind|
+      [
+        'legal_terms',
+        'sitemap',
+        'privacy_policy',
+        'accessibility',
+        'communication_posts',
+        'education_programs',
+        'education_diplomas',
+        'research_papers',
+        'research_volumes',
+        'organizations'
+      ].each do |kind|
         create_special_page(kind, homepage.id) if public_send("has_#{kind}?")
       end
       # team pages
       if has_persons?
         persons = create_special_page('persons', homepage.id)
-        ['administrators', 'authors', 'researchers', 'teachers'].each do |kind|
+        [
+          'administrators',
+          'authors',
+          'researchers',
+          'teachers'
+        ].each do |kind|
           create_special_page(kind, persons.id) if public_send("has_#{kind}?")
         end
       end

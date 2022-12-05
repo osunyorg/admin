@@ -7,6 +7,8 @@ class Communication::Website::Permalink::Teacher < Communication::Website::Perma
     :teachers
   end
 
+  # /equipe/:slug/programs/
+  # FIXME
   def self.pattern_in_website(website)
     "#{website.special_page(:persons).path_without_language}:slug/programs/"
   end
