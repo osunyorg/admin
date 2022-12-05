@@ -1,5 +1,5 @@
 url: "<%= @about.current_permalink_in_website(@website)&.path %>"
-<% if @about && @about.respond_to?(:slug) && @about.slug.present? %>
+<% if @about.respond_to?(:slug) && @about.slug.present? %>
 slug: "<%= @about.slug %>"
 <% end %>
 <%
