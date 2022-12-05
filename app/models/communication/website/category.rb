@@ -124,8 +124,4 @@ class Communication::Website::Category < ApplicationRecord
   def inherited_blob_ids
     [best_featured_image&.blob_id]
   end
-
-  def permalink_config_key
-    :categories
-  end
 end

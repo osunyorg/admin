@@ -175,8 +175,4 @@ class Communication::Website::Post < ApplicationRecord
     end
     author.update_and_sync(is_author: true) if author_id
   end
-
-  def permalink_config_key
-    :posts
-  end
 end

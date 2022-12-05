@@ -237,8 +237,4 @@ class University::Person < ApplicationRecord
   def prepare_name
     self.name = to_s
   end
-
-  def permalink_config_key
-    :persons
-  end
 end
