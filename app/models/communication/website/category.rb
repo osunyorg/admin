@@ -107,14 +107,6 @@ class Communication::Website::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
-  def computed_permalink_in_website(website)
-    raw_permalink_in_website(website).gsub(':slug', self.path)
-  end
-
-  def previous_computed_permalink_in_website(website)
-    raw_permalink_in_website(website).gsub(':slug', self.path_was)
-  end
-
   protected
 
   def last_ordered_element

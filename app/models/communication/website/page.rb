@@ -141,14 +141,6 @@ class Communication::Website::Page < ApplicationRecord
               .where.not(id: id)
   end
 
-  def computed_permalink_in_website(website)
-    path
-  end
-
-  def previous_computed_permalink_in_website(website)
-    path_was
-  end
-
   protected
 
   def check_accessibility

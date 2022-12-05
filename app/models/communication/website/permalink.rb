@@ -23,16 +23,64 @@
 #  fk_rails_f389ba7d45  (website_id => communication_websites.id)
 #
 class Communication::Website::Permalink < ApplicationRecord
-  include Sanitizable
+  MAPPING = {
+    "Communication::Website::Page" => Communication::Website::Permalink::Page,
+    "Communication::Website::Post" => Communication::Website::Permalink::Post,
+    "University::Person" => Communication::Website::Permalink::Person,
+    "University::Person::Author" => Communication::Website::Permalink::Author
+  }
+
   include WithUniversity
 
   belongs_to :university
   belongs_to :website, class_name: "Communication::Website"
   belongs_to :about, polymorphic: true
 
+  validates :about_id, :about_type, :path, presence: true
+
   before_validation :set_university, on: :create
 
-  private
+  scope :for_website, -> (website) { where(website_id: website.id) }
+  scope :current, -> { where(is_current: true) }
+  scope :not_current, -> { where(is_current: false) }
+
+  def self.config_in_website(website)
+    MAPPING.values.select { |permalink_class|
+      permalink_class.required_for_website?(website)
+    }.map { |permalink_class|
+      [permalink_class.static_config_key, permalink_class.pattern_in_website(website)]
+    }.to_h
+  end
+
+  def self.for_object(object, website)
+    permalink_class = MAPPING[object.class.to_s]
+    raise ArgumentError.new("Permalinks do not handle an object of type #{object.class.to_s}") if permalink_class.nil?
+    permalink = permalink_class.new(website: website, about: object)
+  end
+
+  def self.pattern_in_website(website)
+    raise NotImplementedError
+  end
+
+  def pattern
+    self.class.pattern_in_website(website)
+  end
+
+  def computed_path
+    return nil unless published?
+    @computed_path ||= published_path
+  end
+
+  protected
+
+  def published?
+    # Can be overwritten
+    true
+  end
+
+  def published_path
+    raise NotImplementedError
+  end
 
   def set_university
     self.university_id = website.university_id
