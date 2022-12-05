@@ -21,7 +21,7 @@
 #  fk_rails_e9646cce64  (university_id => universities.id)
 #  fk_rails_f389ba7d45  (website_id => communication_websites.id)
 #
-class Communication::Website::PreviousLink < ApplicationRecord
+class Communication::Website::Permalink < ApplicationRecord
   include Sanitizable
   include WithUniversity
 

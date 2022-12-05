@@ -1,3 +1,7 @@
+url: "<%= @about.permalink_in_website(@website) %>"
+<% if @about&.slug %>
+slug: "<%= @about.slug %>"
+<% end %>
 <% if @about.previous_links.any? %>
 aliases:
 <% @about.previous_links.each do |previous_link| %>

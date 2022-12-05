@@ -1,10 +1,9 @@
 ---
 title: "<%= @about.name %>"
-slug: "<%= @about.path %>"
+<%= render 'admin/application/static/permalink' %>
 <% if @about.parent %>
 parent: "<%= @about.parent.path %>"
 <% end %>
-<%= render 'admin/application/static/aliases' %>
 position: <%= @about.position %>
 <%= render 'admin/communication/unsplash/static' %>
 description: >
