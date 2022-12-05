@@ -87,9 +87,22 @@ class Communication::Website::Page < ApplicationRecord
                     active_storage_blobs +
                     siblings +
                     git_block_dependencies
-    dependencies += website.education_programs if kind_education_programs?
     dependencies += [parent] if has_parent?
     dependencies += [website.config_permalinks] if is_special_page?
+    dependencies += [
+      website.categories,
+      website.authors.map(&:author),
+      website.posts
+    ].flatten if kind_communication_posts?
+    dependencies += website.education_programs if kind_education_programs?
+    dependencies += website.education_diplomas if kind_education_diplomas?
+    dependencies += website.research_papers if kind_research_papers?
+    dependencies += website.organizations if kind_organizations?
+    dependencies += website.people_with_facets if kind_persons?
+    dependencies += website.administrators.map(&:administrator) if kind_administrators?
+    dependencies += website.authors.map(&:author) if kind_authors?
+    dependencies += website.researchers.map(&:researcher) if kind_researchers?
+    dependencies += website.teachers.map(&:teacher) if kind_teachers?
     dependencies.flatten
   end
 

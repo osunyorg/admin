@@ -185,6 +185,7 @@ class University::Person < ApplicationRecord
     dependencies += active_storage_blobs
     dependencies += git_block_dependencies
     dependencies += [administrator, author, researcher, teacher]
+    dependencies += communication_website_posts.where(communication_website_id: website.id)
     dependencies += website.menus.to_a
     dependencies += dependencies_through_blocks(website)
     dependencies
