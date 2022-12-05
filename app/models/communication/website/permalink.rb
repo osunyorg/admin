@@ -67,6 +67,10 @@ class Communication::Website::Permalink < ApplicationRecord
     false
   end
 
+  def self.supported_by?(object)
+    MAPPING.keys.include?(object.class.to_s)
+  end
+
   def self.pattern_in_website(website)
     raise NotImplementedError
   end
