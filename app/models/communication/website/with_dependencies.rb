@@ -23,6 +23,10 @@ module Communication::Website::WithDependencies
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
+    has_many    :permalinks,
+                class_name: "Communication::Website::Permalink",
+                dependent: :destroy
+
   end
 
   def blocks

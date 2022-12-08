@@ -1,13 +1,13 @@
 ---
 title: >
   Actualités de <%= @about.to_s %>
+<%= render 'admin/application/static/permalink' %>
 person: >
   <%= @about.to_s %>
 first_name: >
   <%= @about.first_name %>
 last_name: >
   <%= @about.last_name %>
-slug: "<%= @about.slug %>"
 description: >
   <%= prepare_text_for_static @about.description %>
 ---

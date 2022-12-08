@@ -41,6 +41,7 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  include Accessible
   include Sanitizable
   include WithUniversity
   include WithBlobs
@@ -52,7 +53,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPosition
   include WithTree
   include WithPath
-  include Accessible
+  include WithPermalink
 
   has_summernote :text
 
@@ -86,9 +87,8 @@ class Communication::Website::Page < ApplicationRecord
                     active_storage_blobs +
                     siblings +
                     git_block_dependencies
-    dependencies += website.education_programs if kind_education_programs?
     dependencies += [parent] if has_parent?
-    dependencies += [website.config_permalinks] if is_special_page?
+    dependencies += special_page_git_dependencies(website) if is_special_page?
     dependencies.flatten
   end
 
@@ -115,7 +115,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def full_width
-    kind_home?  ? true 
+    kind_home?  ? true
                 : attributes['full_width']
   end
 

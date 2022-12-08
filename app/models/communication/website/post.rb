@@ -42,6 +42,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithMenuItemTarget
+  include WithPermalink
   include WithSlug # We override slug_unavailable? method
 
   has_summernote :text

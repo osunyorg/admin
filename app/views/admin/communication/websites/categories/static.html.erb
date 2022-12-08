@@ -1,6 +1,6 @@
 ---
 title: "<%= @about.name %>"
-slug: "<%= @about.path %>"
+<%= render 'admin/application/static/permalink' %>
 <% if @about.parent %>
 parent: "<%= @about.parent.path %>"
 <% end %>

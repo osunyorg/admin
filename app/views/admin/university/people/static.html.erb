@@ -1,7 +1,7 @@
 ---
 title: >
   <%= @about.to_s %>
-slug: "<%= @about.slug %>"
+<%= render 'admin/application/static/permalink' %>
 first_name: >
   <%= @about.first_name %>
 last_name: >
@@ -38,12 +38,12 @@ roles:
 <% end %>
 <% if @about.involvements_as_teacher.any? %>
 teachings:
-<% @about.involvements_as_teacher.each do |involvement|     
+<% @about.involvements_as_teacher.each do |involvement|
     target = involvement.target
     %>
   - description: >
       <%= involvement.description %>
-    program: 
+    program:
       title: >
         <%= target.to_s %>
       url: >
@@ -52,11 +52,11 @@ teachings:
 <% end %>
 <% if @about.roles_as_administrator.any? %>
 administrative_missions:
-<% @about.roles_as_administrator.each do |role| 
+<% @about.roles_as_administrator.each do |role|
     target = role.target %>
   - description: >
       <%= role.to_s %>
-    target: 
+    target:
       title: >
         <%= target.to_s %>
       url: >
