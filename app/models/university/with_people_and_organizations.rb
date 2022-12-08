@@ -11,6 +11,11 @@ module University::WithPeopleAndOrganizations
               class_name: 'University::Organization',
               dependent: :destroy
     alias_attribute :organizations, :university_organizations
+
+    has_many  :person_experiences,
+              class_name: 'University::Person::Experience',
+              dependent: :destroy
+    alias_attribute :university_person_experiences, :person_experiences
   end
 
 end
