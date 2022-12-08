@@ -14,6 +14,10 @@ module ApplicationController::WithErrors
       render_not_found
     end
 
+    rescue_from ActiveRecord::ActiveStorage::FileNotFoundError do |exception|
+      render_not_found
+    end
+
     def raise_403_unless(condition)
       raise CanCan::AccessDenied unless condition
     end
