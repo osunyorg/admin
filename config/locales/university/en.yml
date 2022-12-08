@@ -150,7 +150,7 @@ en:
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
       university_person_experience:
-        organization: "Choose the organization if it exists, otherwise create it with the button below"
+        organization_name: "Choose the organization if it exists, by searching with name or SIREN code.<br>Otherwise create it by entering it's name."
         description: "Ex: Project manager, Communication assistant, Journalist..."
         from_year: "In charge since..."
         to_year: "Leave blank if you are still in charge"
