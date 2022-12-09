@@ -14,7 +14,7 @@ module ApplicationController::WithErrors
       render_not_found
     end
 
-    rescue_from ActiveRecord::ActiveStorage::FileNotFoundError do |exception|
+    rescue_from ActiveStorage::FileNotFoundError do |exception|
       render_not_found
     end
 
