@@ -51,21 +51,22 @@
 class Education::Program < ApplicationRecord
   include Aboutable
   include Sanitizable
-  include WithUniversity
-  include WithGit
-  include WithFeaturedImage
-  include WithBlobs
-  include WithMenuItemTarget
-  include WithSlug
-  include WithTree
-  include WithInheritance
-  include WithPosition
-  include WithBlocks
-  include WithSchools
-  include WithDiploma
   include WithAlumni
-  include WithWebsites
+  include WithBlobs
+  include WithBlocks
+  include WithDiploma
+  include WithFeaturedImage
+  include WithGit
+  include WithInheritance
+  include WithMenuItemTarget
+  include WithPermalink
+  include WithPosition
+  include WithSchools
+  include WithSlug
   include WithTeam
+  include WithTree
+  include WithUniversity
+  include WithWebsites
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,

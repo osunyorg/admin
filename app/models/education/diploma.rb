@@ -22,10 +22,11 @@
 #  fk_rails_6cb2e9fa90  (university_id => universities.id)
 #
 class Education::Diploma < ApplicationRecord
-  include WithUniversity
   include WithBlocks
   include WithGit
+  include WithPermalink
   include WithSlug
+  include WithUniversity
 
   has_many :programs, dependent: :nullify
 

@@ -28,6 +28,7 @@ class Communication::Website::Permalink < ApplicationRecord
     "Communication::Website::Page" => Communication::Website::Permalink::Page,
     "Communication::Website::Post" => Communication::Website::Permalink::Post,
     "Education::Diploma" => Communication::Website::Permalink::Diploma,
+    "Education::Program" => Communication::Website::Permalink::Program,
     "University::Organization" => Communication::Website::Permalink::Organization,
     "University::Person" => Communication::Website::Permalink::Person,
     "University::Person::Administrator" => Communication::Website::Permalink::Administrator,
