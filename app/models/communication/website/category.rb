@@ -81,7 +81,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def git_path(website)
-    "content/categories/#{path}/_index.html"
+    "content/categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   def template_static
@@ -108,7 +108,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def slug_with_ancestors_slugs
-    (ancestors.map(&:slug) << slug).join('/')
+    (ancestors.map(&:slug) << slug).join('-')
   end
 
   protected
