@@ -17,6 +17,7 @@ registration_url: >
   <%= @about.registration_url %>
 description: >
   <%= prepare_text_for_static @about.description %>
+<%= render 'admin/application/chapo/static' %>
 presentation: >
   <%= prepare_text_for_static @about.presentation %>
 position: <%= @about.position %>

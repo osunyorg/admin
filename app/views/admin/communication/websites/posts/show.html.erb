@@ -3,18 +3,7 @@
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
     <div class="col-md-8">
-      <% unless @post.description_short.blank? %>
-        <div class="card flex-fill w-100">
-          <div class="card-header">
-            <h2 class="card-title mb-0 h5"><%= Communication::Website::Post.human_attribute_name('description_short') %></h2>
-          </div>
-          <div class="card-body">
-            <p class="lead">
-              <%= sanitize @post.description_short %>
-            </p>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'admin/application/chapo/show', about: @post %>
       <%= render 'admin/communication/blocks/list', about: @post %>
     </div>
     <div class="col-md-4">

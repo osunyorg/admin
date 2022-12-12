@@ -22,8 +22,7 @@ children:
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
-description_short: >
-  <%= prepare_text_for_static @about.description_short %>
+<%= render 'admin/application/chapo/static' %>
 header_text: >-
   <%= prepare_html_for_static @about.header_text, @website.university %>
 legacy_text: >

@@ -10,6 +10,7 @@
 #  content               :text
 #  continuing            :boolean
 #  description           :text
+#  description_short     :text
 #  duration              :text
 #  evaluation            :text
 #  featured_image_alt    :string

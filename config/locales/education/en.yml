@@ -34,6 +34,7 @@ en:
         programs: Programs
         duration: Duration
         ects: ECTS
+        description_short: Lead text
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprenticeship
@@ -41,6 +42,7 @@ en:
         contacts: Contacts
         continuing: Continuing training
         description: Meta Description
+        description_short: Lead text
         diploma: Diploma
         duration: Duration
         downloadable_summary: Downloadable summary

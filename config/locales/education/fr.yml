@@ -34,6 +34,7 @@ fr:
         programs: Formations
         duration: Durée
         ects: Crédits ECTS
+        description_short: Chapô
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprentissage
@@ -41,6 +42,7 @@ fr:
         contacts: Contacts
         continuing: Formation continue
         description: Meta Description
+        description_short: Chapô
         diploma: Diplôme
         duration: Durée
         downloadable_summary: Document de synthèse téléchargeable
