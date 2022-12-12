@@ -32,11 +32,12 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
-  include WithGit
   include WithBlobs
-  include WithUniversity
-  include WithSlug
   include WithBlocks
+  include WithGit
+  include WithPermalink
+  include WithSlug
+  include WithUniversity
 
   attr_accessor :created_from_extranet
 
