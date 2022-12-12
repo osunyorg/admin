@@ -107,6 +107,10 @@ class Communication::Website::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
+  def slug_with_ancestors_slugs
+    (ancestors.map(&:slug) << slug).join('/')
+  end
+
   protected
 
   def last_ordered_element

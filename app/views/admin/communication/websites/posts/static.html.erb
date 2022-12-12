@@ -12,7 +12,7 @@ authors:
 <% if @about.categories.any? %>
 categories:
   <% @about.categories.each do |category| %>
-  - "<%= category.slug %>"
+  - "<%= category.slug_with_ancestors_slugs %>"
   <% end %>
 <% end %>
 <%= render 'admin/communication/unsplash/static' %>
