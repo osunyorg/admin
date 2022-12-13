@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= f.input :description_short %>
+          <%= render 'admin/application/chapo/form', f: f, about: post %>
           <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
         </div>
       </div>

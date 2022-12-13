@@ -13,6 +13,7 @@
             <%= f.input :short_name %>
           </div>
         </div>
+        <%= render 'admin/application/chapo/form', f: f, about: program %>
         <div class="row">
           <div class="col-lg-6">
             <%= f.association :diploma,

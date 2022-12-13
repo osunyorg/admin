@@ -64,6 +64,6 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   def diploma_params
     params.require(:education_diploma)
-          .permit(:name, :short_name, :level, :ects, :duration)
+          .permit(:name, :short_name, :description_short, :level, :ects, :duration)
   end
 end

@@ -21,8 +21,7 @@ image: "<%= @about.best_picture.blob.id %>"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
-description_short: >
-  <%= prepare_text_for_static @about.description_short %>
+<%= render 'admin/application/chapo/static' %>
 roles:
 <% if @about.author.for_website?(@website) %>
   - author
