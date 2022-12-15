@@ -76,6 +76,10 @@ module Communication::Website::WithDependencies
     blocks_dependencies.reject { |dependency| !dependency.is_a? University::Person }
   end
 
+  def organizations
+    organizations_in_blocks
+  end
+
   def organizations_in_blocks
     blocks_dependencies.reject { |dependency| !dependency.is_a? University::Organization }
   end
