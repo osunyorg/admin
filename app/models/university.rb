@@ -27,6 +27,8 @@
 #  updated_at                 :datetime         not null
 #
 class University < ApplicationRecord
+  self.filter_attributes += [:sso_cert]
+
   include WithPeopleAndOrganizations
   include WithCommunication
   include WithEducation
