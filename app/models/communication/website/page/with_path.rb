@@ -33,13 +33,17 @@ module Communication::Website::Page::WithPath
 
   def git_path(website)
     return unless website.id == communication_website_id && published
+
+    path = git_path_content_prefix(website)
     if kind_home?
-      "content/_index.html"
+      path += "_index.html"
     elsif has_special_git_path?
-      "content/#{kind.split('_').last}/_index.html"
+      path += "#{kind.split('_').last}/_index.html"
     else
-      "content/pages/#{path}/_index.html"
+      path += "pages/#{path_without_language}/_index.html"
     end
+
+    path
   end
 
   def url

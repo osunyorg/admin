@@ -81,7 +81,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def git_path(website)
-    "content/categories/#{slug_with_ancestors_slugs}/_index.html"
+    "#{git_path_content_prefix(website)}categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   def template_static

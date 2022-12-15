@@ -133,7 +133,7 @@ class Education::Program < ApplicationRecord
   end
 
   def git_path(website)
-    "content/programs/#{path}/_index.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}programs/#{path}/_index.html" if for_website?(website)
   end
 
   def path_in_website(website)

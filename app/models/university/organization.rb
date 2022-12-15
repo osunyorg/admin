@@ -108,7 +108,7 @@ class University::Organization < ApplicationRecord
   end
 
   def git_path(website)
-    "content/organizations/#{slug}.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
   end
 
   def to_s

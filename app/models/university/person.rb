@@ -177,7 +177,7 @@ class University::Person < ApplicationRecord
   end
 
   def git_path(website)
-    "content/persons/#{slug}.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}persons/#{slug}.html" if for_website?(website)
   end
 
   def git_dependencies(website)
