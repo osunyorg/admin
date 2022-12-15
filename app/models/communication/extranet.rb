@@ -33,6 +33,8 @@
 #  fk_rails_c2268c7ebd  (university_id => universities.id)
 #
 class Communication::Extranet < ApplicationRecord
+  self.filter_attributes += [:sso_cert]
+
   include WithAbouts
   include WithLegal
   include WithSso
