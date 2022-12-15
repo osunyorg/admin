@@ -1,0 +1,7 @@
+<% @website.languages.each do |language| %>
+<%= language.iso_code %>:
+  title: <%= @website %><%# TODO I18n: Traduire le nom du site %>
+  contentDir: content/<%= language.iso_code %>
+  languageCode: <%= language.iso_code %>
+  languageName: <%= language.name %>
+<% end %>

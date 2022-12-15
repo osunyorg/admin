@@ -1,0 +1,4 @@
+## LANGUAGE
+<%# TODO I18n: Add "Default language" in Communication::Website %>
+defaultContentLanguage: <%= @website.languages.first.iso_code %>
+defaultContentLanguageInSubdir: <%= @website.languages.many? %>

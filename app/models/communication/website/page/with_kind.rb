@@ -51,7 +51,7 @@ module Communication::Website::Page::WithKind
     end
 
     def special_page_git_dependencies(website)
-      dependencies = [website.config_permalinks]
+      dependencies = [website.config_default_permalinks]
       case kind
       when "communication_posts"
         dependencies += [

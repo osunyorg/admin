@@ -29,18 +29,18 @@
 #
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
-class Communication::Website::Configs::BaseUrl < Communication::Website
+class Communication::Website::Configs::DefaultLanguages < Communication::Website
 
   def self.polymorphic_name
-    'Communication::Website::Configs::BaseUrl'
+    'Communication::Website::Configs::DefaultLanguages'
   end
 
   def git_path(website)
-    "config/production/config.yaml"
+    "config/_default/languages.yaml"
   end
 
   def template_static
-    "admin/communication/websites/configs/base_urls/static"
+    "admin/communication/websites/configs/default_languages/static"
   end
 
 end
