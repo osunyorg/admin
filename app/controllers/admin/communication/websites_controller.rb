@@ -82,7 +82,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   def website_params
     params.require(:communication_website).permit(
       :name, :url, :repository, :access_token, :about_type, :about_id, :in_production,
-      :git_provider, :git_endpoint, :git_branch, :plausible_url, language_ids: []
+      :git_provider, :git_endpoint, :git_branch, :plausible_url, :default_language_id, language_ids: []
     )
   end
 end
