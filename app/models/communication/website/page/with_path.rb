@@ -13,33 +13,34 @@ module Communication::Website::Page::WithPath
               },
               unless: :kind_home?
 
-    before_validation :check_slug, :make_path
-    after_save :update_children_paths, if: :saved_change_to_path?
+    before_validation :check_slug
   end
 
-  def generated_path
-    "#{parent&.path}#{slug}/".gsub(/\/+/, '/')
+  def path
+    path = ''
+    # TODO i18n remplacer le choix de la langue
+    path += "/#{website.languages.first.iso_code}" if website.languages.any?
+    path += "/#{slug_with_ancestors}/"
+    path.gsub(/\/+/, '/')
   end
 
-  def path_without_language
-    if kind_home?
-      "/"
-    elsif parent_id.present?
-      "#{parent&.path_without_language}#{slug}/".gsub(/\/+/, '/')
-    else
-      "/#{slug}/".gsub(/\/+/, '/')
-    end
+  def slug_with_ancestors
+    (ancestors.map(&:slug) << slug).reject(&:blank?).join('/')
   end
 
   def git_path(website)
     return unless website.id == communication_website_id && published
+
+    path = git_path_content_prefix(website)
     if kind_home?
-      "content/_index.html"
+      path += "_index.html"
     elsif has_special_git_path?
-      "content/#{kind.split('_').last}/_index.html"
+      path += "#{kind.split('_').last}/_index.html"
     else
-      "content/pages/#{path}/_index.html"
+      path += "pages/#{slug_with_ancestors}/_index.html"
     end
+
+    path
   end
 
   def url
@@ -49,13 +50,6 @@ module Communication::Website::Page::WithPath
   end
 
   protected
-
-  def update_children_paths
-    children.each do |child|
-      child.update_column :path, child.generated_path
-      child.update_children_paths
-    end
-  end
 
   def check_slug
     self.slug = to_s.parameterize if self.slug.blank? && !kind_home?
@@ -72,10 +66,6 @@ module Communication::Website::Page::WithPath
               .where(communication_website_id: self.communication_website_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def make_path
-    self.path = kind_home? ? "#{language_prefix}/" : generated_path
   end
 
   def slug_must_be_unique

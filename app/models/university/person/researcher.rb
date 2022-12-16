@@ -51,7 +51,7 @@ class University::Person::Researcher < University::Person
   end
 
   def git_path(website)
-    "content/researchers/#{slug}/_index.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}researchers/#{slug}/_index.html" if for_website?(website)
   end
 
   def template_static

@@ -32,9 +32,8 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
   end
 
   # /actualites/2022-10-21-un-article/
-  # Pas de /fr au début, parce qu'Hugo a besoin du permalink sans langue
   def self.pattern_in_website(website)
-    "#{website.special_page(:communication_posts).path_without_language}:year-:month-:day-:slug/"
+    "/#{website.special_page(:communication_posts).slug_with_ancestors}/:year-:month-:day-:slug/"
   end
 
   protected

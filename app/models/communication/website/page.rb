@@ -41,6 +41,8 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  self.ignored_columns = %w(path)
+
   include Accessible
   include Sanitizable
   include WithUniversity
@@ -96,10 +98,6 @@ class Communication::Website::Page < ApplicationRecord
     [self] +
     descendants +
     active_storage_blobs
-  end
-
-  def language_prefix
-    "/#{language.iso_code}" if website.languages.any? && language_id
   end
 
   def duplicate

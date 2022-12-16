@@ -30,7 +30,7 @@
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  self.filter_attributes += [ :access_token ]
+  self.filter_attributes += [:access_token]
 
   include WithUniversity
   include WithAbouts
@@ -73,7 +73,7 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = [self, config_permalinks, config_base_url] + menus
+    dependencies = [self, config_default_languages, config_default_permalinks, config_development_config, config_production_config] + menus
     dependencies += pages + pages.map(&:active_storage_blobs).flatten
     dependencies += posts + posts.map(&:active_storage_blobs).flatten
     dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten
