@@ -33,6 +33,6 @@ class Communication::Website::Permalink::Person < Communication::Website::Permal
 
   # /equipe/:slug/
   def self.pattern_in_website(website)
-    "#{website.special_page(:persons).path}:slug/"
+    "/#{website.special_page(:persons).slug_with_ancestors}/:slug/"
   end
 end

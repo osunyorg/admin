@@ -33,7 +33,7 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
 
   # /actualites/2022-10-21-un-article/
   def self.pattern_in_website(website)
-    "#{website.special_page(:communication_posts).path}:year-:month-:day-:slug/"
+    "/#{website.special_page(:communication_posts).slug_with_ancestors}/:year-:month-:day-:slug/"
   end
 
   protected
