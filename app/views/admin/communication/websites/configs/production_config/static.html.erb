@@ -3,10 +3,9 @@
 baseURL: <%= @website.url %>
 
 ## LANGUAGE
-<%# TODO I18n: Add "Default language" in Communication::Website %>
-<% if @website.languages.many? %>
-defaultContentLanguage: fr
+<% if @website.languages.any? %>
+defaultContentLanguage: <%= @website.default_language.iso_code %>
 <% else %>
-defaultContentLanguage: <%= @website.languages.first.iso_code %>
+defaultContentLanguage: fr
 <% end %>
 defaultContentLanguageInSubdir: <%= @website.languages.many? %>

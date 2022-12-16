@@ -107,7 +107,7 @@ class Communication::Website::Permalink < ApplicationRecord
   def published_path
     # TODO I18n doit prendre la langue du about
     p = ""
-    p += "/#{website.languages.first.iso_code}" if website.languages.any?
+    p += "/#{website.default_language.iso_code}" if website.languages.any?
     p += pattern
     substitutions.each do |key, value|
       p.gsub! ":#{key}", "#{value}"
