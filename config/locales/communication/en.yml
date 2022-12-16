@@ -699,5 +699,5 @@ en:
       communication_website_post:
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
   include_blanks:
-      communication_website:
-        default_language: "Select a language"
+    communication_website:
+      default_language: "Select a language"
