@@ -39,9 +39,9 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def git_path(website)
-    # TODO I18n : Right now, we use the language of the website. Add a language to the menu (and future translations)
     path = "data/menus/"
-    path += "#{website.default_language.iso_code}/" if website.languages.any?
+    # TODO I18n : Right now, we continue to send only a master version
+    # path += "#{website.default_language.iso_code}/" if website.languages.any?
     "#{path}#{identifier}.yml"
   end
 
