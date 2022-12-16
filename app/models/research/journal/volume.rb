@@ -53,7 +53,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def git_path(website)
-    "content/volumes/#{published_at.year}/#{slug}/_index.html" if published_at
+    "#{git_path_content_prefix(website)}volumes/#{published_at.year}/#{slug}/_index.html" if published_at
   end
 
   def template_static

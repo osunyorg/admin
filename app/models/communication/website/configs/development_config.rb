@@ -29,18 +29,18 @@
 #
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
-class Communication::Website::Configs::Permalinks < Communication::Website
+class Communication::Website::Configs::DevelopmentConfig < Communication::Website
 
   def self.polymorphic_name
-    'Communication::Website::Configs::Permalinks'
+    'Communication::Website::Configs::DevelopmentConfig'
   end
 
   def git_path(website)
-    "config/_default/permalinks.yaml"
+    "config/development/config.yaml"
   end
 
   def template_static
-    "admin/communication/websites/configs/permalinks/static"
+    "admin/communication/websites/configs/development_config/static"
   end
 
 end

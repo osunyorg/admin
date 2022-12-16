@@ -105,7 +105,10 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Can be overwritten (Page for example)
   def published_path
-    p = pattern
+    # TODO I18n doit prendre la langue du about
+    p = ""
+    p += "/#{website.languages.first.iso_code}" if website.languages.any?
+    p += pattern
     substitutions.each do |key, value|
       p.gsub! ":#{key}", "#{value}"
     end

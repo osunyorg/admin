@@ -12,6 +12,14 @@ module WithGit
     raise NotImplementedError
   end
 
+  def git_path_content_prefix(website)
+    # Handle legacy language-less websites
+    # TODO I18n: Right now, we use the language of the website. It HAS TO get the language from the object including this concern.
+    path = "content/"
+    path += "#{website.languages.first.iso_code}/" if website.languages.any?
+    path
+  end
+
   def before_git_sync
     # Can be override to force some process before sync
     # ex: ActiveStorage Blob analyze

@@ -62,7 +62,7 @@ class Research::Journal::Paper < ApplicationRecord
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
 
   def git_path(website)
-    "content/papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
+    "#{git_path_content_prefix(website)}papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html" if (volume.nil? || volume.published_at) && published_at
   end
 
   def template_static

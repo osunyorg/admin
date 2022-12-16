@@ -66,7 +66,7 @@ class Education::Diploma < ApplicationRecord
   end
 
   def git_path(website)
-    "content/diplomas/#{slug}/_index.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}diplomas/#{slug}/_index.html" if for_website?(website)
   end
 
   def git_dependencies(website)

@@ -108,7 +108,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def git_path(website)
-    "content/posts/#{static_path}.html" if website.id == communication_website_id && published && published_at
+    "#{git_path_content_prefix(website)}posts/#{static_path}.html" if website.id == communication_website_id && published && published_at
   end
 
   def static_path
