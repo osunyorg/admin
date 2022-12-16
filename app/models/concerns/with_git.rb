@@ -16,7 +16,12 @@ module WithGit
     # Handle legacy language-less websites
     # TODO I18n: Right now, we use the language of the website. It HAS TO get the language from the object including this concern.
     path = "content/"
-    path += "#{website.languages.first.iso_code}/" if website.languages.any?
+    if website.languages.many?
+      # todo totalement arbitraire
+      path += "fr/"
+    else
+      path += "#{website.languages.first.iso_code}/"
+    end
     path
   end
 
