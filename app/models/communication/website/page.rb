@@ -13,7 +13,6 @@
 #  github_path              :text
 #  header_text              :text
 #  kind                     :integer
-#  path                     :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
