@@ -19,7 +19,7 @@ module WithGit
     if website.languages.many?
       # todo totalement arbitraire
       path += "fr/"
-    else
+    elsif website.languages.any?
       path += "#{website.languages.first.iso_code}/"
     end
     path
