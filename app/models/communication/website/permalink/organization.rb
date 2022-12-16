@@ -33,6 +33,6 @@ class Communication::Website::Permalink::Organization < Communication::Website::
 
   # /organisations/:slug/
   def self.pattern_in_website(website)
-    "#{website.special_page(:organizations).path_without_language}:slug/"
+    "#{website.special_page(:organizations).path}:slug/"
   end
 end
