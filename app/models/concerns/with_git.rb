@@ -20,7 +20,7 @@ module WithGit
       # todo totalement arbitraire
       path += "fr/"
     elsif website.languages.any?
-      path += "#{website.languages.first.iso_code}/"
+      path += "#{website.default_language.iso_code}/"
     end
     path
   end

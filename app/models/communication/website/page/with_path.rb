@@ -20,9 +20,9 @@ module Communication::Website::Page::WithPath
     path = ''
     # TODO i18n remplacer le choix de la langue
     if website.languages.many?
-      path += "/fr" 
+      path += "/fr"
     elsif website.languages.any?
-      path += "/#{website.languages.first.iso_code}"
+      path += "/#{website.default_language.iso_code}"
     end
     path += "/#{slug_with_ancestors}/"
     path.gsub(/\/+/, '/')
