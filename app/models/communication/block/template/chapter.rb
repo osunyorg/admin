@@ -1,5 +1,7 @@
 class Communication::Block::Template::Chapter < Communication::Block::Template::Base
 
+  has_layouts [:no_background, :alt_background, :accent_background]
+
   has_component :text, :rich_text
   has_component :notes, :rich_text
   has_component :image, :image

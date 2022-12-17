@@ -212,6 +212,16 @@ en:
                 placeholder: Enter image's credit here
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
+            layouts:
+              no_background:
+                label: Simple
+                description: A title, a text, possibly some notes and and an image.
+              alt_background:
+                label: Subtle highlight
+                description: A chapter on a light background.
+              accent_background:
+                label: Strong highlight
+                description: A chapter on a strong background, like a call to action.
             edit:
               image:
                 label: Chapter illustration
