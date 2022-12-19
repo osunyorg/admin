@@ -54,7 +54,12 @@ module Communication::Website::Page::WithPath
   protected
 
   def check_slug
-    self.slug = to_s.parameterize if self.slug.blank? && !kind_home?
+    if kind_home?
+      self.slug = ""
+      return
+    end
+
+    self.slug = to_s.parameterize if self.slug.blank?
     current_slug = self.slug
     n = 0
     while slug_unavailable?(self.slug)

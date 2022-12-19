@@ -9,6 +9,7 @@ module WithSlug
     before_validation :check_slug, :make_path
 
     def check_slug
+      byebug
       self.slug = to_s.parameterize if self.slug.blank?
       current_slug = self.slug
       n = 0
