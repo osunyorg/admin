@@ -9,10 +9,12 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def update_file(path, previous_path, content)
-    file = tree_item_at_path(previous_path)
+    # Handle newly created GitFiles which update existing remote files while having blank previous_path.
+    path_to_check = previous_path.present? ? previous_path : path
+    file = tree_item_at_path(path_to_check)
     return if file.nil?
     batch << {
-      path: previous_path,
+      path: path_to_check,
       mode: file[:mode],
       type: file[:type],
       sha: nil

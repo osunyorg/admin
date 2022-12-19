@@ -11,8 +11,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
 
   def update_file(path, previous_path, content)
     file = find previous_path
-    return if file.nil?
-    if previous_path != path
+    if file.present? && previous_path != path
       batch << {
         action: 'move',
         file_path: path,
