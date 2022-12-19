@@ -31,7 +31,6 @@ window.osuny.communication.websites = {
             languageOption = this.defaultLanguageOptions[i];
             languageCheckbox = document.querySelector('.js-languages input[type="checkbox"][value="' + languageOption.value + '"]')
             if (languageOption.value === "" || languageCheckbox.checked) {
-                console.log(languageOption);
                 this.defaultLanguageSelect.appendChild(languageOption);
             }
         }
