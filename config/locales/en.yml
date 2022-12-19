@@ -44,6 +44,7 @@ en:
         iso_code: Iso code
         name: Name
       user:
+        admin_theme: Admin Theme
         email: Email
         first_name: First name
         language: Favourite language
@@ -260,6 +261,9 @@ en:
     hints:
       import:
         file: .xlsx file only
+      language:
+        iso_code: ISO 639-1 code (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
+        name: Name in the language (= "Français", "Deutsch", ...)
       user:
         mobile_phone: "International format (+XX). By filling this field, you accept to receive your two-factor authentication codes via SMS."
     include_blanks:
