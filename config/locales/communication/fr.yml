@@ -146,6 +146,10 @@ fr:
           attributes:
             sso_mapping:
               missing_email: ne gère pas l'adresse email
+        communication/website:
+          attributes:
+            languages:
+              too_short: doivent en comporter une minimum
   admin:
     communication:
       blocks:
