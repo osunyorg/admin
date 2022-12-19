@@ -698,6 +698,3 @@ en:
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
       communication_website_post:
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
-  include_blanks:
-    communication_website:
-      default_language: "Select a language"
