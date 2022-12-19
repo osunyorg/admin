@@ -59,6 +59,8 @@ class Communication::Website < ApplicationRecord
                           foreign_key: 'communication_website_id',
                           association_foreign_key: 'language_id'
 
+  validates :languages, length: { minimum: 1 }
+
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
   scope :for_search_term, -> (term) {
