@@ -33,6 +33,8 @@ Rails.application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
+  config.active_record.verify_foreign_keys_for_fixtures = false
+
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 

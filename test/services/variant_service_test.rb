@@ -437,7 +437,13 @@ class VariantServiceTest < ActiveSupport::TestCase
   private
 
   def create_file_blob(key: nil, filename: "dan-gold.jpeg", content_type: "image/jpeg", metadata: nil, service_name: nil, record: nil)
-    ActiveStorage::Blob.create_and_upload! io: file_fixture(filename).open, filename: filename, content_type: content_type, metadata: metadata, service_name: service_name, record: record
+    ActiveStorage::Blob.create_and_upload!  io: file_fixture(filename).open, 
+                                            filename: filename, 
+                                            content_type: content_type, 
+                                            metadata: metadata, 
+                                            service_name: service_name, 
+                                            record: record,
+                                            university_id: universities(:default_university).id
   end
 
   def read_image(blob_or_variant)
