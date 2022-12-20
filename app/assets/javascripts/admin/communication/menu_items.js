@@ -73,10 +73,7 @@ window.osuny.communication.menuItems = {
 
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    if (document.body.classList.contains('items-new') ||
-            document.body.classList.contains('items-edit') ||
-            document.body.classList.contains('items-create') ||
-            document.body.classList.contains('items-update')) {
+    if (window.osuny.isInControllerForm('items')) {
         window.osuny.communication.menuItems.init();
     }
 });

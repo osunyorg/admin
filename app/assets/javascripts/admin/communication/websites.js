@@ -46,10 +46,7 @@ window.osuny.communication.websites = {
 
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    if (document.body.classList.contains('websites-new') ||
-            document.body.classList.contains('websites-edit') ||
-            document.body.classList.contains('websites-create') ||
-            document.body.classList.contains('websites-update')) {
+    if (window.osuny.isInControllerForm('websites')) {
         window.osuny.communication.websites.init();
     }
 });
