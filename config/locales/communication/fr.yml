@@ -702,6 +702,3 @@ fr:
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
       communication_website_post:
         description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
-  include_blanks:
-    communication_website:
-      default_language: "Sélectionnez une langue"
