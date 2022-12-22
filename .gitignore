@@ -45,3 +45,6 @@ yarn-debug.log*
 
 # Ignore db dump
 /db/latest.dump
+
+# Ignore coverage report
+coverage
