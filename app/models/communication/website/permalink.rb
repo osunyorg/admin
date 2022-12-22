@@ -91,7 +91,7 @@ class Communication::Website::Permalink < ApplicationRecord
     return unless computed_path.present? && (current_permalink.nil? || current_permalink.path != computed_path)
 
     # If the object had no permalink or if its path changed, we create a new permalink and delete old with same path
-    existing_permalinks_for_path = self.class.unscoped.where(website: website, about: about, path: computed_path, is_current: false)
+    existing_permalinks_for_path = self.class.unscoped.where(website_id: website_id, about_id: about_id, about_type: about_type, path: computed_path, is_current: false)
     self.path = computed_path
     if save
       existing_permalinks_for_path.find_each(&:destroy)
