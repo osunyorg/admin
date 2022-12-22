@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"16@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/16/-/16-0.0.2.tgz#1e1f67a1633e1800c167e0e703dff0890c3e153a"
-  integrity sha512-AhG4lpdn+/it+U5Xl1bm5SbaHYTH5NfU/vXZkP7E7CHjtVtITuFVZKa3AZP3gN38RDJHYYtEqWmqzCutlXaR7w==
-  dependencies:
-    numeric "^1.2.6"
-
 "@babel/parser@^7.16.4":
   version "7.20.3"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.20.3.tgz#5358cf62e380cf69efcb87a7bb922ff88bfac6e2"
@@ -150,11 +143,6 @@ notyf@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/notyf/-/notyf-3.10.0.tgz#67a64443c69ea0e6495c56ea0f91198860163d06"
   integrity sha512-Mtnp+0qiZxgrH+TzVlzhWyZceHdAZ/UWK0/ju9U0HQeDpap1mZ8cC7H5wSI5mwgni6yeAjaxsTw0sbMK+aSuHw==
-
-numeric@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/numeric/-/numeric-1.2.6.tgz#765b02bef97988fcf880d4eb3f36b80fa31335aa"
-  integrity sha512-avBiDAP8siMa7AfJgYyuxw1oyII4z2sswS23+O+ZfV28KrtNzy0wxUFwi4f3RyM4eeeXNs1CThxR7pb5QQcMiw==
 
 picocolors@^1.0.0:
   version "1.0.0"
