@@ -71,3 +71,7 @@ Communication::Block.all.find_each { |block|
   block.save
 }
 ```
+
+## Sources
+
+https://www.bigbinary.com/blog/how-we-upgraded-from-rails-6-to-rails-7
