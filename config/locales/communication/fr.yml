@@ -146,6 +146,10 @@ fr:
           attributes:
             sso_mapping:
               missing_email: ne gère pas l'adresse email
+        communication/website:
+          attributes:
+            languages:
+              too_short: doivent en comporter une minimum
   admin:
     communication:
       blocks:
@@ -212,6 +216,16 @@ fr:
                 placeholder: Entrer le crédit de l'image ici
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
+            layouts:
+              no_background:
+                label: Simple
+                description: Un titre et un texte, éventuellement des notes et une image.
+              alt_background:
+                label: Légère mise en avant
+                description: Un chapitre sur un fond discret, par exemple pour rythmer la page.
+              accent_background:
+                label: Forte mise en avant
+                description: Un chapitre sur un fond très fort, comme un appel à actions.
             edit:
               image:
                 label: Image d'illustration
@@ -698,6 +712,3 @@ fr:
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
       communication_website_post:
         description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
-  include_blanks:
-    communication_website:
-      default_language: "Sélectionnez une langue"

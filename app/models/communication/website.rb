@@ -18,7 +18,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  about_id            :uuid             indexed => [about_type]
-#  default_language_id :uuid             indexed
+#  default_language_id :uuid             not null, indexed
 #  university_id       :uuid             not null, indexed
 #
 # Indexes
@@ -52,12 +52,14 @@ class Communication::Website < ApplicationRecord
     gitlab: 1
   }
 
-  belongs_to :default_language, class_name: "Language", optional: true
+  belongs_to :default_language, class_name: "Language"
   has_and_belongs_to_many :languages,
                           class_name: 'Language',
                           join_table: 'communication_websites_languages',
                           foreign_key: 'communication_website_id',
                           association_foreign_key: 'language_id'
+
+  validates :languages, length: { minimum: 1 }
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }

@@ -261,6 +261,9 @@ fr:
     hints:
       import:
         file: Fichier .xlsx uniquement
+      language:
+        iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
+        name: Nom dans la langue (= "Français", "Deutsch", ...)
       user:
         mobile_phone: "Format international (+XX). En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
     include_blanks:

@@ -16,6 +16,7 @@
 //= require_tree ./commons
 //= require_tree ../application/plugins
 //= require_tree ./plugins
+//= require_tree ./utils
 //= require ./communication/init
 
 window.osuny = {};

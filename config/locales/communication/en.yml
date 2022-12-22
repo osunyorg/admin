@@ -146,6 +146,10 @@ en:
           attributes:
             sso_mapping:
               missing_email: doesn't handle the email
+        communication/website:
+          attributes:
+            languages:
+              too_short: must include at least one
   admin:
     communication:
       blocks:
@@ -212,6 +216,16 @@ en:
                 placeholder: Enter image's credit here
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
+            layouts:
+              no_background:
+                label: Simple
+                description: A title, a text, possibly some notes and and an image.
+              alt_background:
+                label: Subtle highlight
+                description: A chapter on a light background.
+              accent_background:
+                label: Strong highlight
+                description: A chapter on a strong background, like a call to action.
             edit:
               image:
                 label: Chapter illustration
@@ -698,6 +712,3 @@ en:
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
       communication_website_post:
         description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
-  include_blanks:
-    communication_website:
-      default_language: "Select a language"
