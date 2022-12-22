@@ -12,7 +12,7 @@ A partir de Rails 7, le générateur de clés utilise SHA256 comme algorithme pa
 
 Pour les fichiers médias, une mise à jour des sites web va actualiser sans problème. Cependant, il faut un script pour mettre à jour les IDs signés dans les data JSON des blocs.
 
-## Classe du *rotator*
+## Classe du convertisseur
 
 ### Définition
 
@@ -44,7 +44,7 @@ end
 ActiveStorageKeyConverter.convert legacy_signed_id
 ```
 
-## Script pour les blocs
+## Script pour les Communication::Blocks
 
 ```ruby
 
