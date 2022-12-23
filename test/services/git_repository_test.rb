@@ -5,6 +5,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       exception = assert_raises(Exception) do
         provider = Git::Providers::Github.new ENV['TEST_GITHUB_ENDPOINT'],
+                                              ENV['TEST_GITHUB_BRANCH'],
                                               'wrong access token',
                                               ENV['TEST_GITHUB_REPOSITORY']
         provider.create_file '/path.txt', 'content'
@@ -18,6 +19,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Github.new ENV['TEST_GITHUB_ENDPOINT'],
+                                              ENV['TEST_GITHUB_BRANCH'],
                                               ENV['TEST_GITHUB_TOKEN'],
                                               ENV['TEST_GITHUB_REPOSITORY']
         provider.create_file 'test.txt', 'content'
@@ -30,6 +32,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Github.new ENV['TEST_GITHUB_ENDPOINT'],
+                                              ENV['TEST_GITHUB_BRANCH'],
                                               ENV['TEST_GITHUB_TOKEN'],
                                               ENV['TEST_GITHUB_REPOSITORY']
         provider.update_file 'test.txt', 'test.txt', 'new content'
@@ -42,6 +45,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Github.new ENV['TEST_GITHUB_ENDPOINT'],
+                                              ENV['TEST_GITHUB_BRANCH'],
                                               ENV['TEST_GITHUB_TOKEN'],
                                               ENV['TEST_GITHUB_REPOSITORY']
         provider.update_file 'new_test.txt', 'test.txt', 'new content'
@@ -54,6 +58,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Github.new ENV['TEST_GITHUB_ENDPOINT'],
+                                              ENV['TEST_GITHUB_BRANCH'],
                                               ENV['TEST_GITHUB_TOKEN'],
                                               ENV['TEST_GITHUB_REPOSITORY']
         provider.destroy_file 'new_test.txt'
@@ -66,6 +71,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       exception = assert_raises(Exception) do
         provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_ENDPOINT'],
+                                              ENV['TEST_GITLAB_BRANCH'],
                                               'wrong access_token',
                                               ENV['TEST_GITLAB_REPOSITORY']
         provider.create_file '/path.txt', 'content'
@@ -79,6 +85,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_ENDPOINT'],
+                                              ENV['TEST_GITLAB_BRANCH'],
                                               ENV['TEST_GITLAB_TOKEN'],
                                               ENV['TEST_GITLAB_REPOSITORY']
         provider.create_file 'test.txt', 'content'
@@ -91,6 +98,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_ENDPOINT'],
+                                              ENV['TEST_GITLAB_BRANCH'],
                                               ENV['TEST_GITLAB_TOKEN'],
                                               ENV['TEST_GITLAB_REPOSITORY']
         provider.update_file 'test.txt', 'test.txt', 'new content'
@@ -103,6 +111,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_ENDPOINT'],
+                                              ENV['TEST_GITLAB_BRANCH'],
                                               ENV['TEST_GITLAB_TOKEN'],
                                               ENV['TEST_GITLAB_REPOSITORY']
         provider.update_file 'new_test.txt', 'test.txt', 'new content'
@@ -115,6 +124,7 @@ class GitRepositoryTest < ActiveSupport::TestCase
     VCR.use_cassette(location) do
       assert_nothing_raised do
         provider = Git::Providers::Gitlab.new ENV['TEST_GITLAB_ENDPOINT'],
+                                              ENV['TEST_GITLAB_BRANCH'],
                                               ENV['TEST_GITLAB_TOKEN'],
                                               ENV['TEST_GITLAB_REPOSITORY']
         provider.destroy_file 'new_test.txt'

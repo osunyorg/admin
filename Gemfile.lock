@@ -172,6 +172,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
+    docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     encryptor (3.0.0)
@@ -436,6 +437,12 @@ GEM
     simple_form_password_with_hints (0.0.7)
       rails
       simple_form
+    simplecov (0.21.2)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sinatra (3.0.4)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
@@ -558,6 +565,7 @@ DEPENDENCIES
   simple_form
   simple_form_bs5_file_input
   simple_form_password_with_hints
+  simplecov
   spring
   sprockets-rails (~> 3.4)
   summernote-rails!

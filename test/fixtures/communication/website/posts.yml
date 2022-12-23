@@ -48,4 +48,3 @@ test_post_2:
   slug: test-2
   published: true
   published_at: 2010-11-28 00:00:00
-  text: new content

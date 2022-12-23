@@ -38,6 +38,8 @@ website_with_github:
   git_provider: github
   access_token: confidentialdata
   repository: noesya/bordeauxmontaigne-test
+  languages: [fr]
+  default_language: fr
 
 website_with_gitlab:
   university: default_university
@@ -45,3 +47,5 @@ website_with_gitlab:
   git_provider: gitlab
   access_token: test
   repository: test
+  languages: [fr, en]
+  default_language: fr

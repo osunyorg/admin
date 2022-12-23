@@ -1,10 +1,5 @@
 {
-  "engines": {
-    "node": "16",
-    "npm": "8"
-  },
   "dependencies": {
-    "16": "0.0.2",
     "bootstrap-icons": "^1.9.1",
     "bootstrap-print-css": "^1.0.1",
     "cropperjs": "^1.5.12",
