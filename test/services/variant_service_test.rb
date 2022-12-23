@@ -13,29 +13,6 @@ class VariantServiceTest < ActiveSupport::TestCase
     ActiveStorage.track_variants = @was_tracking
   end
 
-  # = Examples =
-  # dan-gold.jpeg
-  # dan-gold.webp
-  # dan-gold_500x500.jpeg
-  # dan-gold_500x.jpeg
-  # dan-gold_x500.jpeg
-  # dan-gold_crop_left.jpeg
-  # dan-gold@2x.jpeg
-  # dan-gold_500x500_crop_left.jpeg
-  # dan-gold_500x500@2x.jpeg
-  # dan-gold_250x250@3x.jpeg
-  # dan-gold_crop_left@2x.jpeg
-  # dan-gold_250x250_crop_left@2x.jpeg
-  # dan-gold_200x300_crop_top.jpeg
-  # dan-gold_300x200_crop_right@2x.jpeg
-  # dan-gold_1000x500_crop_left.jpeg
-  # dan-gold_1500x500_crop_left.jpeg
-  # dan-gold_800x840_crop_left.jpeg
-  # dan-gold
-  # dan-gold_500x500
-
-  # Params tests
-
   test "params for dan-gold.jpeg" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
     expected_params = {}
@@ -322,141 +299,16 @@ class VariantServiceTest < ActiveSupport::TestCase
     assert_equal expected_transformations, variant_service.transformations
   end
 
-  # Variants tests
-
-  test "variant for dan-gold.webp" do
-    expected_blob = create_file_blob(filename: "dan-gold.webp")
-    image = load_image_from_variant_name(expected_blob.filename.base, format: 'webp')
-    assert_equal "WEBP", image.type
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_500x500.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_500x500.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_500x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_500x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_x500.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_x500.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_crop_left.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_crop_left.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold@2x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold@2x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_500x500_crop_left.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_500x500_crop_left.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_500x500@2x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_500x500@2x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_250x250@3x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_250x250@3x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_crop_left@2x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_crop_left@2x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_250x250_crop_left@2x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_250x250_crop_left@2x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_200x300_crop_top.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_200x300_crop_top.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_300x200_crop_right@2x.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_300x200_crop_right@2x.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_1000x500_crop_left.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_1000x500_crop_left.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_1500x500_crop_left.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_1500x500_crop_left.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_800x840_crop_left.jpeg" do
-    expected_blob = create_file_blob(filename: "dan-gold_800x840_crop_left.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold" do
-    expected_blob = create_file_blob(filename: "dan-gold.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base, format: nil)
-    assert_equal "JPEG", image.type
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
-  test "variant for dan-gold_500x500" do
-    expected_blob = create_file_blob(filename: "dan-gold_500x500.jpeg")
-    image = load_image_from_variant_name(expected_blob.filename.base, format: nil)
-    assert_equal expected_blob.checksum, image_checksum(image)
-  end
-
   private
 
   def create_file_blob(key: nil, filename: "dan-gold.jpeg", content_type: "image/jpeg", metadata: nil, service_name: nil, record: nil)
-    ActiveStorage::Blob.create_and_upload! io: file_fixture(filename).open, filename: filename, content_type: content_type, metadata: metadata, service_name: service_name, record: record
-  end
-
-  def read_image(blob_or_variant)
-    MiniMagick::Image.open blob_or_variant.service.send(:path_for, blob_or_variant.key)
-  end
-
-  def load_image_from_variant_name(variant_name, format: 'jpeg')
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    variant_service = VariantService.compute(blob, variant_name, format)
-    transformations = variant_service.transformations
-    blob_or_variant = transformations.empty? ? blob : blob.variant(variant_service.transformations).processed
-    read_image(blob_or_variant)
-  end
-
-  def image_checksum(image)
-    OpenSSL::Digest::MD5.base64digest(image.to_blob)
-  end
-
-  def extract_metadata_from(blob)
-    blob.tap(&:analyze).metadata
+    blob = ActiveStorage::Blob.create_and_upload!   io: file_fixture(filename).open,
+                                                    filename: filename,
+                                                    content_type: content_type,
+                                                    metadata: metadata,
+                                                    service_name: service_name,
+                                                    record: record
+    blob.update_column :university_id, universities(:default_university).id
+    blob
   end
 end
