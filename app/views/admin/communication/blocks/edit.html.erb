@@ -29,7 +29,7 @@
     </textarea>
     <% content_for :action_bar_left do %>
       <%= destroy_link @block %>
-      <%= link_to 'Dependencies', 
+      <%= link_to 'Dependencies',
                   [:admin, @block],
                   class: button_classes('btn-light') if current_user.server_admin? %>
     <% end %>
@@ -54,12 +54,8 @@
           blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
         },
         data: <%= @block.data.to_json.html_safe %>,
-        <% if @block.template.default_element %>
-        defaultElement: <%= @block.template
-                                  .default_element
-                                  .default_data
-                                  .to_json
-                                  .html_safe %>
+        <% if @element %>
+        defaultElement: <%= @element.default_data.to_json.html_safe %>
         <% end %>
       }
     },
