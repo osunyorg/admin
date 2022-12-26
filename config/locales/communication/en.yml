@@ -277,9 +277,13 @@ en:
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:
+              alphabetical:
+                    label: Alphabetical order
               caption:
                 label: Text transcript
                 placeholder: Enter the text transcript of the table
+              description:
+                label: Description
           definitions:
             description: A list of terms and definitions. We could call it a dictionary.
             edit:
