@@ -1,7 +1,7 @@
 ---
 title: "<%= @about.name %>"
 <%= render 'admin/application/static/permalink', forced_slug: @about.slug_with_ancestors_slugs %>
-<%= render 'admin/application/static/layout', full_width: true, toc_present: false, toc_offcanvas: false %>
+<%= render 'admin/application/static/design', full_width: true, toc_present: false, toc_offcanvas: false %>
 <% if @about.parent %>
 parent: "<%= @about.parent.path %>"
 <% end %>

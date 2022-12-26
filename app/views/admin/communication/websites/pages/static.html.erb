@@ -3,7 +3,7 @@ title: >
   <%= @about.title %>
 breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
 <%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/layout' %>
+<%= render 'admin/application/static/design' %>
 <% if @about.kind_persons? %>
 has:
   administrators: <%= @website.has_administrators? %>
