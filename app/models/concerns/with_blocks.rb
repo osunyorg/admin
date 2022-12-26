@@ -11,6 +11,6 @@ module WithBlocks
 
   # Basic rule is: TOC if 2 titles or more
   def show_toc?
-    (blocks.collect(&:title).uniq.compact - ['']).many?
+    (blocks.collect(&:title) - ['']).many?
   end
 end
