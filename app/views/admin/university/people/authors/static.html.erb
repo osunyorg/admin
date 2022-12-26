@@ -10,4 +10,9 @@ last_name: >
   <%= @about.last_name %>
 description: >
   <%= prepare_text_for_static @about.description %>
+layout:
+  full_width: true
+  toc:
+    present: <%= @about.show_toc? %>
+    offcanvas: true
 ---

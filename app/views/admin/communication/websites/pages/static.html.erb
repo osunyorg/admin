@@ -11,7 +11,11 @@ has:
   teachers: <%= @website.has_teachers? %>
 <% end %>
 position: <%= @about.position %>
-full_width: <%= @about.full_width %>
+layout:
+  full_width: <%= @about.full_width %>
+  toc:
+    offcanvas: <%= !@about.full_width %>
+    present: <%= @about.show_toc? %>
 bodyclass: <%= @about.best_bodyclass %>
 <%= render 'admin/communication/unsplash/static' %>
 <% if @about.children.published.any? %>
