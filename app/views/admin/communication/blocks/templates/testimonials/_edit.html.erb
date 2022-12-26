@@ -1,5 +1,3 @@
-<% element = @block.template.default_element %>
-
 <%= block_component_add_element t('.add_testimonial') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row">
@@ -13,14 +11,14 @@
       <div class="flex-fill">
         <div class="row mb-n3">
           <div class="col-lg-4">
-            <%= block_component_edit :text, template: element %>
+            <%= block_component_edit :text, template: @element %>
           </div>
           <div class="col-lg-4">
-            <%= block_component_edit :author, template: element %>
-            <%= block_component_edit :job, template: element %>
+            <%= block_component_edit :author, template: @element %>
+            <%= block_component_edit :job, template: @element %>
           </div>
           <div class="col-lg-4">
-            <%= block_component_edit :photo, template: element %>
+            <%= block_component_edit :photo, template: @element %>
           </div>
         </div>
       </div>
