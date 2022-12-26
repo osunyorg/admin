@@ -6,6 +6,9 @@ toc_offcanvas = local_assigns.has_key?(:toc_offcanvas)  ? local_assigns[:toc_off
 toc_present = local_assigns.has_key?(:toc_present)      ? local_assigns[:toc_present]
                                                         : @about.show_toc?
 %>
+<% # legacy, please remove when site migrated %>
+full_width: <%= full_width %>
+<% # end of legacy%>
 design:
   full_width: <%= full_width %>
   toc:
