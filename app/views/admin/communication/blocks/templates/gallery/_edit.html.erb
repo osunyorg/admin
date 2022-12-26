@@ -55,7 +55,8 @@
             <%= block_component_edit :credit,
                   template: @element,
                   label: t('admin.communication.blocks.components.image.credit.label'),
-                  placeholder: t('admin.communication.blocks.components.image.credit.placeholder') %>
+                  placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
+                  summernote_config: 'link' %>
             <%= block_component_edit :text,
                 template: @element %>
           </div>
