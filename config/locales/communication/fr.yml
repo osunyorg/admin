@@ -278,7 +278,7 @@ fr:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:
               alphabetical:
-                  label: Ordre alphabétique
+                label: Ordre alphabétique
               caption:
                 label: Transcription textuelle
                 placeholder: Entrer ici la transcription textuelle du tableau
