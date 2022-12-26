@@ -2,6 +2,7 @@
 title: >
   Actualités de <%= @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/layout', full_width: true, toc_offcanvas: true %>
 person: >
   <%= @about.to_s %>
 first_name: >
@@ -10,9 +11,4 @@ last_name: >
   <%= @about.last_name %>
 description: >
   <%= prepare_text_for_static @about.description %>
-layout:
-  full_width: true
-  toc:
-    present: <%= @about.show_toc? %>
-    offcanvas: true
 ---

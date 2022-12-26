@@ -2,16 +2,12 @@
 title: >
   <%= prepare_text_for_static @about.name %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/layout', full_width: true, toc_offcanvas: true %>
 short_name: >
   <%= prepare_text_for_static @about.short_name %>
 <%= render 'admin/application/chapo/static' %>
 level: <%= @about.level_i18n %>
 ects: <%= @about.ects %>
-layout:
-  full_width: true
-  toc:
-    present: <%= @about.show_toc? %>
-    offcanvas: true
 duration: >
   <%= prepare_text_for_static @about.duration %>
 <%= render 'admin/communication/blocks/static', about: @about %>

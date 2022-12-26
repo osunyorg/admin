@@ -2,6 +2,7 @@
 title: >
   <%= @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/layout', full_width: true, toc_offcanvas: true %>
 first_name: >
   <%= @about.first_name %>
 last_name: >
@@ -22,11 +23,6 @@ image: "<%= @about.best_picture.blob.id %>"
 description: >
   <%= prepare_text_for_static @about.description %>
 <%= render 'admin/application/chapo/static' %>
-layout:
-  full_width: true
-  toc:
-    present: <%= @about.show_toc? %>
-    offcanvas: true
 roles:
 <% if @about.author.for_website?(@website) %>
   - author
