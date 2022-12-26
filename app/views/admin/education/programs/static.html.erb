@@ -10,6 +10,7 @@ administrator_involvements = @about.involvements_through_roles
 title: >
   <%= @about.name %>
 url: <%= @about.path_in_website(@website) %>
+<%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true %>
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>

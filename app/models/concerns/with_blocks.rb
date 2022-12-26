@@ -8,4 +8,11 @@ module WithBlocks
   def git_block_dependencies
     blocks.collect &:git_dependencies
   end
+
+  # Basic rule is: TOC if 2 titles or more
+  def show_toc?
+    blocks.collect(&:title)
+          .reject(&:blank?)
+          .many?
+  end
 end
