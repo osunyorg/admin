@@ -278,7 +278,7 @@ en:
             description: A table of data, as responsive and accessible as possible.
             edit:
               alphabetical:
-                    label: Alphabetical order
+                label: Alphabetical order
               caption:
                 label: Text transcript
                 placeholder: Enter the text transcript of the table
