@@ -37,6 +37,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def update
     @user.modified_by = current_user
+    @user.skip_reconfirmation!
     manage_password
     if @user.update(user_params)
       redirect_to [:admin, @user], notice: t('admin.successfully_updated_html', model: @user.to_s)
