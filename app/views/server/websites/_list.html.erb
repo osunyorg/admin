@@ -28,7 +28,7 @@
             <%= link_to website.university, [:server, website.university] %>
           </td>
           <td>
-            <%= link_to "Sync version", refresh_server_website_path(website), method: :post, class: button_classes %>
+            <%= link_to "Sync version", refresh_server_website_path(website), method: :post, class: button_classes if website.url.present? %>
           </td>
         </tr>
       <% end %>
