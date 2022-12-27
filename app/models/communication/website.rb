@@ -47,6 +47,7 @@ class Communication::Website < ApplicationRecord
   include WithProgramCategories
   include WithSpecialPages
   include WithStyle
+  include WithTheme
 
   enum git_provider: {
     github: 0,

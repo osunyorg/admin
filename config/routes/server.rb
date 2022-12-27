@@ -1,5 +1,11 @@
 namespace :server do
-  resources :universities, :languages, :websites
+  resources :universities
+  resources :languages
+  resources :websites do 
+    member do
+      post :refresh
+    end
+  end
   get 'blocks' => 'blocks#index', as: :blocks
   get 'blocks/:id' => 'blocks#show', as: :block
   post 'blocks/:id' => 'blocks#resave', as: :resave_block

@@ -1,5 +1,5 @@
 module Communication::Website::WithStyle
-    extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
   def preview_style
     load_style if style_outdated? 

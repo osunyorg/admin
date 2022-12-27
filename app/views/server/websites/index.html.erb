@@ -11,20 +11,30 @@
         <th><%= Communication::Website.human_attribute_name('in_production') %></th>
         <th><%= Communication::Website.human_attribute_name('theme_version') %></th>
         <th><%= University.model_name.human %></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @websites.each do |website| %>
         <tr>
-          <td><%= link_to website.name, edit_server_website_path(website) %></td>
+          <td>
+            <%= link_to website.name, edit_server_website_path(website) %>
+          </td>
           <td>
             <%= link_to website.url, website.url, target: :_blank if website.url.present? %>
           </td>
-          <td><%= t website.in_production %></td>
           <td>
-            <%= link_to website.theme_version, "#{website.url}/osuny-theme-version", target: :_blank if website.url.present? %>
+            <%= t website.in_production %>
           </td>
-          <td><%= link_to website.university, [:server, website.university] %></td>
+          <td>
+            <%= link_to website.theme_version, website.theme_version_url, target: :_blank if website.theme_version_url.present? %>
+          </td>
+          <td>
+            <%= link_to website.university, [:server, website.university] %>
+          </td>
+          <td>
+            <%= link_to "Sync version", refresh_server_website_path(website), method: :post, class: button_classes %>
+          </td>
         </tr>
       <% end %>
     </tbody>
