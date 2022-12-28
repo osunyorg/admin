@@ -7,6 +7,6 @@
   <textarea :id="<%= dom_id.html_safe %>"
             class="form-control summernote-vue"
             v-model="<%= model %>.<%= property %>"
-            data-summernote-config="mini-list"
+            data-summernote-config="<%= summernote_config %>"
             placeholder="<%= placeholder %>"></textarea>
 </div>

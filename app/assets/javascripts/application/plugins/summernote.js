@@ -4,6 +4,14 @@ $(function () {
 
     var configs = [];
 
+    configs['link'] = {
+        toolbar: [
+            ['insert', ['link', 'unlink']]
+        ],
+        followingToolbar: true,
+        disableDragAndDrop: true
+    };
+
     configs['mini'] = {
         toolbar: [
             ['font', ['bold', 'italic']],
@@ -110,9 +118,9 @@ $(function () {
     });
 
     // https://github.com/summernote/summernote/issues/4170
-    $("button[data-toggle='dropdown']").each(function (index) { 
-        $(this).removeAttr("data-toggle").attr("data-bs-toggle", "dropdown"); 
-    }); 
+    $("button[data-toggle='dropdown']").each(function (index) {
+        $(this).removeAttr("data-toggle").attr("data-bs-toggle", "dropdown");
+    });
 
     window.SUMMERNOTE_CONFIGS = configs;
 });
