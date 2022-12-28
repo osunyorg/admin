@@ -13,12 +13,10 @@ module User::WithPerson
   protected
 
   def find_or_create_person
-    person = university.people.where(email: email).first_or_initialize do |person|
-      person.first_name = first_name
-      person.last_name = last_name
-      person.slug = person.to_s.parameterize
-      person.phone_mobile = mobile_phone
-    end
+    person = university.people.where(email: email).first || university.people.new
+    person.first_name = first_name
+    person.last_name = last_name
+    person.slug = person.to_s.parameterize
     person.user = self
     person.save
   end
@@ -26,9 +24,7 @@ module User::WithPerson
   def sync_person
     person.first_name = first_name
     person.last_name = last_name
-    person.email = email
     person.slug = person.to_s.parameterize
-    person.phone_mobile = mobile_phone
     person.picture.purge if picture_infos.present? && person.picture&.attached?
     person.save
   end

@@ -191,6 +191,7 @@ fr:
         no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste, vous pouvez la <a href=\"%{url}\">créer</a>"
         no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste, il faut demander à la créer"
         period: Période
+      personal_data_warning: Attention ! Les informations renseignées ici sont susceptibles d'être visibles publiquement sur les sites web et les extranets vous concernant.
       taught_programs: Formations enseignées
     sso: SSO
     sso_key: Clé sur le SSO

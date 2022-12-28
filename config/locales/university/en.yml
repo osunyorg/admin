@@ -191,6 +191,7 @@ en:
         no_organization_hint_html: "If the organization is not in the list, you can <a href=\"%{url}\">create it</a>"
         no_organization_hint_no_access_html: "If the organization is not in the list, you should ask to create it"
         period: Period
-    taught_programs: Taught programs
+      personal_data_warning: Warning! The information provided below can be publicly visible on the websites and the extranets about you.
+      taught_programs: Taught programs
     sso: SSO
     sso_key: SSO Key
