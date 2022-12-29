@@ -208,11 +208,11 @@ class University::Person < ApplicationRecord
   end
 
   def for_website?(website)
-    in_block_dependencies?(website) ||
     administrator.for_website?(website) ||
     author.for_website?(website) ||
     researcher.for_website?(website) ||
-    teacher.for_website?(website)
+    teacher.for_website?(website) ||
+    in_block_dependencies?(website)
   end
 
   def full_street_address

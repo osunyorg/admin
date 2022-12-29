@@ -89,9 +89,7 @@ module WithGit
   protected
 
   def in_block_dependencies?(website)
-    website.blocks.find_each do |block|
-      return true if in? block.git_dependencies
-    end
+    website.blocks_dependencies.include?(self)
   end
 
   def dependencies_through_blocks(website)
