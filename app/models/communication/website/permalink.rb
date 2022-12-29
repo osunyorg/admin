@@ -82,8 +82,8 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def computed_path
-    return nil unless published?
-    @computed_path ||= Static.clean_path(published_path)
+    return @computed_path if defined?(@computed_path)
+    @computed_path ||= published? ? Static.clean_path(published_path) : nil
   end
 
   def save_if_needed
