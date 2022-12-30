@@ -5,7 +5,9 @@ breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.br
 <%= render 'admin/application/static/permalink' %>
 <% 
 case @about.kind
-when 'education_programs', 'education_diplomas' %>
+when  'education_programs', 
+      'education_diplomas',
+      'communication_posts' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <% else %>
 <%= render 'admin/application/static/design' %>
