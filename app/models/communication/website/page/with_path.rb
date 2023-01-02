@@ -13,7 +13,7 @@ module Communication::Website::Page::WithPath
               },
               unless: :kind_home?
 
-    before_validation :check_slug
+    before_validation :set_slug
   end
 
   def path
@@ -53,12 +53,7 @@ module Communication::Website::Page::WithPath
 
   protected
 
-  def check_slug
-    if kind_home?
-      self.slug = ""
-      return
-    end
-
+  def set_slug
     self.slug = to_s.parameterize if self.slug.blank?
     current_slug = self.slug
     n = 0
