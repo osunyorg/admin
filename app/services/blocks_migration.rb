@@ -6,21 +6,26 @@ class BlocksMigration
   def self.cleanup
     Communication::Website::Post.find_each do |post|
       next if post.text.blank?
-      cleanup_post post
+      cleanup_item post
+    end
+    Communication::Website::Page.find_each do |page|
+      next if page.text.blank?
+      cleanup_item page
     end
   end
 
   private
 
-  def self.cleanup_post(post)
-    puts "#{post} (#{post.id}, #{post.university})"
-    return if post.blocks.any?
+  def self.cleanup_item(item)
+    puts "#{item} (#{item.id}, #{item.university}, #{item.website})"
+    return if item.blocks.any?
     puts "  migrating"
-    puts post.text.to_html
-    # block = post.blocks.create university: post.university, template_kind: :chapter
-    # data = block.data
-    # data['text'] = post.text.to_html
-    # block.data = data
-    # block.save
+    puts item.text.to_html
+    return
+    block = item.blocks.create university: item.university, template_kind: :chapter
+    data = block.data
+    data['text'] = item.text.to_html
+    block.data = data
+    block.save
   end
 end
