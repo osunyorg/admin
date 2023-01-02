@@ -16,10 +16,10 @@ class BlocksMigration
 
   def self.cleanup_item(item)
     return if item.text.blank?
-    puts "#{item} (#{item.id}, #{item.university}, #{item.website})"
+    puts "#{item.university}, #{item.website}, #{item.id}, #{item}"
     return if item.blocks.any?
     puts "  migrating"
-    puts item.text.to_html
+    # puts item.text.to_html
     return
     block = item.blocks.create university: item.university, template_kind: :chapter
     data = block.data
