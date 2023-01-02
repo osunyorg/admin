@@ -7,14 +7,13 @@ class BlocksMigration
     Communication::Website::Post.find_each do |post|
       next if post.text.blank?
       puts "#{post} (#{post.id}, #{post.university})"
-      if post.blocks.none?
-        puts "  migrating"
-        block = post.blocks.create university: post.university, template_kind: :chapter
-        data = block.data
-        data['text'] = post.text.to_html
-        block.data = data
-        block.save
-      end
+      next if post.blocks.any?
+      puts "  migrating"
+      block = post.blocks.create university: post.university, template_kind: :chapter
+      data = block.data
+      data['text'] = post.text.to_html
+      block.data = data
+      block.save
     end
   end
 end
