@@ -1,11 +1,11 @@
-<div class="float-end">
+<div class="float-end pt-4">
   <% if !current_user.program_manager? || current_user.programs_to_manage.pluck(:education_program_id).include?(@program.id) %>
     <%= link_to t('education.manage_roles'),
               admin_education_program_roles_path(program_id: @program.id),
               class: button_classes if can?(:update, University::Role) %>
   <% end %>
 </div>
-<h3 class="h5"><%= Education::Program.human_attribute_name('roles') %></h3>
+<h3 class="h5 mt-4 mb-3"><%= Education::Program.human_attribute_name('roles') %></h3>
 <% if @roles.any? %>
   <div class="table-responsive">
     <table class="<%= table_classes %>">
