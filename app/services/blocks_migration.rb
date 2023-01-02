@@ -4,7 +4,8 @@ require 'communication/block/template/chapter'
 class BlocksMigration
 
   def self.cleanup
-    Communication::Website::Post.where.not(text: [nil, ""]).each do |post|
+    Communication::Website::Post.find_each do |post|
+      next if post.text.blank?
       puts "#{post} (#{post.id}, #{post.university})"
       if post.blocks.none?
         puts "  migrating"
