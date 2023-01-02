@@ -4,10 +4,10 @@ require 'communication/block/template/chapter'
 class BlocksMigration
 
   def self.cleanup
-    Communication::Website::Post.find_each do |post|
+    Communication::Website::Post.order(:website).find_each do |post|
       cleanup_item post
     end
-    Communication::Website::Page.find_each do |page|
+    Communication::Website::Page.order(:website).find_each do |page|
       cleanup_item page
     end
   end
