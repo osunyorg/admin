@@ -10,7 +10,12 @@
         </div>
         <div class="card-body">
           <%= f.input :name %>
-          <%= f.input :text, as: :summernote %>
+          <%= f.input :description_short %>
+          <%= f.input :text,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini-list' }
+                      } %>
         </div>
       </div>
       <div class="card flex-fill w-100">

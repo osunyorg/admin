@@ -34,7 +34,7 @@ fr:
         communication_website_posts: Actualités
         contacts: Coordonnées
         country: Pays
-        description: Meta Description
+        description: Meta description
         description_short: Chapô
         education_programs: Formations
         email: Email
@@ -83,7 +83,8 @@ fr:
       university/organization:
         name: Nom
         long_name: Nom complet
-        description: Meta Description
+        description: Meta description
+        description_short: Chapô
         text: Texte
         contact: Informations de contact
         legal: Informations légales
