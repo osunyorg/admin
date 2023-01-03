@@ -45,10 +45,10 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
     "#{git_path_prefix}programs/_index.html"
   end
 
-  def git_dependencies(website)
+  def type_git_dependencies
     [
       website.config_default_permalinks,
       website.education_programs
-    ].flatten
+    ]
   end
 end

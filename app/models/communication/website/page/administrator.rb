@@ -45,10 +45,10 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     "#{git_path_prefix}administrators/_index.html"
   end
 
-  def git_dependencies(website)
+  def type_git_dependencies
     [
       website.config_default_permalinks,
       website.website.administrators.map(&:administrator)
-    ].flatten
+    ]
   end
 end

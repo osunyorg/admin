@@ -45,7 +45,7 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
     "#{git_path_prefix}teachers/_index.html"
   end
 
-  def git_dependencies(website)
+  def type_git_dependencies
     [
       website.config_default_permalinks,
       website.website.teachers.map(&:teacher)

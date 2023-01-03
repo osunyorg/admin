@@ -30,20 +30,20 @@ url = page.new_record?  ? admin_communication_website_pages_path
       </div>
     </div>
     <div class="col-md-4">
-      <% unless page.kind_home? %>
+      <% unless page.is_home? %>
         <div class="card flex-fill w-100">
           <div class="card-header">
             <h5 class="card-title mb-0"><%= t('metadata') %></h5>
           </div>
           <div class="card-body">
-            <%= f.input :published if page.is_regular_page? %>
+            <%= f.input :published if page.draftable? %>
             <%= f.input :slug,
                         as: :string,
                         required: true,
                         input_html: page.persisted? ? {} : {
                           class: 'js-slug-input',
                           data: { source: '#communication_website_page_title' }
-                        } unless page.kind_home? %>
+                        } unless page.is_home? %>
             <% if @website.languages.many? %>
               <%= f.input :language_id, collection: @website.languages, include_blank: false %>
             <% elsif @website.languages.any? %>
@@ -53,7 +53,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
                               collection: collection_tree(@website.pages, page),
                               include_blank: false,
                               label_method: ->(p) { sanitize p[:label] },
-                              value_method: ->(p) { p[:id] } unless page.kind_home? %>
+                              value_method: ->(p) { p[:id] } unless page.is_home? %>
             <%= f.input :bodyclass if can?(:edit, @website) %>
             <%= f.input :full_width %>
           </div>

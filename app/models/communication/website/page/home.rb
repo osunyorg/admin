@@ -45,6 +45,10 @@ class Communication::Website::Page::Home < Communication::Website::Page
     "#{git_path_prefix}_index.html"
   end
 
+  def full_width
+    true
+  end
+
   def draftable?
     false
   end

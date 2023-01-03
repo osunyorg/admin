@@ -3,7 +3,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
                               through: :website
 
   def index
-    @homepage = @website.pages.kind_home.first
+    @homepage = @website.pages.home.first
     @first_level_pages = @homepage.children.ordered
     breadcrumb
   end

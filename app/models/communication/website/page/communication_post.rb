@@ -45,12 +45,12 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     "#{git_path_prefix}posts/_index.html"
   end
 
-  def git_dependencies(website)
+  def type_git_dependencies
     [
       website.config_default_permalinks,
       website.categories,
       website.authors.map(&:author),
       website.posts
-    ].flatten
+    ]
   end
 end
