@@ -92,7 +92,7 @@ class Communication::Website::Page < ApplicationRecord
                     git_block_dependencies +
                     type_git_dependencies
     dependencies += [parent] if has_parent?
-    dependencies.flatten
+    dependencies.flatten.compact
   end
 
   def git_destroy_dependencies(website)

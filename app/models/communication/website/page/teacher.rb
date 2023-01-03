@@ -48,7 +48,7 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
   def type_git_dependencies
     [
       website.config_default_permalinks,
-      website.website.teachers.map(&:teacher)
+      website&.teachers&.map(&:teacher)
     ].flatten
   end
 end

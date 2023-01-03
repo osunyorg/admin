@@ -48,7 +48,7 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
   def type_git_dependencies
     [
       website.config_default_permalinks,
-      website.website.administrators.map(&:administrator)
+      website&.administrators&.map(&:administrator)
     ]
   end
 end

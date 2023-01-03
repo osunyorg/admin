@@ -61,15 +61,15 @@ module Communication::Website::WithDependencies
   end
 
   def administrators
-    about.administrators
+    about&.administrators
   end
 
   def researchers
-    about.researchers
+    about&.researchers
   end
 
   def teachers
-    about.teachers
+    about&.teachers
   end
 
   def people_in_blocks

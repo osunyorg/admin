@@ -48,7 +48,7 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
   def type_git_dependencies
     [
       website.config_default_permalinks,
-      website.website.researchers.map(&:researcher)
+      website&.researchers&.map(&:researcher)
     ]
   end
 end

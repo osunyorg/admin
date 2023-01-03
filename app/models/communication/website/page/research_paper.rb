@@ -41,6 +41,10 @@
 #
 class Communication::Website::Page::ResearchPaper < Communication::Website::Page
 
+  def is_necessary_for_website?
+    website.about && website.about&.respond_to(:research_papers)
+  end
+
   def current_git_path
     "#{git_path_prefix}papers/_index.html"
   end

@@ -3,7 +3,26 @@ module Communication::Website::Page::WithType
 
   
   included do
-    HOME_TYPE = '::Communication::Website::Page::Home'
+    HOME_TYPE = 'Communication::Website::Page::Home'
+
+    TYPES = [
+      Communication::Website::Page::Home, # Always start with home
+      Communication::Website::Page::Accessibility,
+      Communication::Website::Page::Administrator,
+      Communication::Website::Page::Author,
+      Communication::Website::Page::CommunicationPost,
+      Communication::Website::Page::EducationDiploma,
+      Communication::Website::Page::EducationProgram,
+      Communication::Website::Page::LegalTerm,
+      Communication::Website::Page::Organization,
+      Communication::Website::Page::Person,
+      Communication::Website::Page::PrivacyPolicy,
+      Communication::Website::Page::ResearchPaper,
+      Communication::Website::Page::ResearchVolume,
+      Communication::Website::Page::Researcher,
+      Communication::Website::Page::Sitemap,
+      Communication::Website::Page::Teacher
+    ]
 
     scope :home, -> { where(type: HOME_TYPE) }
   end

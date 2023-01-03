@@ -41,6 +41,10 @@
 #
 class Communication::Website::Page::EducationProgram < Communication::Website::Page
 
+  def is_necessary_for_website?
+    website.about && website.about&.respond_to(:education_programs)
+  end
+
   def full_width
     true
   end

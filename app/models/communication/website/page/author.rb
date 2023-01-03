@@ -48,7 +48,7 @@ class Communication::Website::Page::Author < Communication::Website::Page
   def type_git_dependencies
     [
       website.config_default_permalinks,
-      website.website.authors.map(&:author)
+      website&.authors&.map(&:author)
     ]
   end
 end
