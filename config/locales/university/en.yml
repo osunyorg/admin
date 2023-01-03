@@ -34,7 +34,7 @@ en:
         communication_website_posts: Posts
         contacts: Contact information
         country: Country
-        description: Meta Description
+        description: Meta description
         description_short: Lead text
         education_programs: Programs
         email: Email
@@ -83,7 +83,8 @@ en:
       university/organization:
         name: Name
         long_name: Long name
-        description: Meta Description
+        description: Meta description
+        description_short: Lead text
         text: Text
         contact: Contact information
         legal: Legal information
