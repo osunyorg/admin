@@ -75,13 +75,7 @@ module Communication::Website::Page::WithPath
   end
 
   def slug_must_have_proper_format
-    # TODO method equivalent of:
-    # validates :slug,
-    #           format: {
-    #             with: /\A[a-z0-9\-]+\z/,
-    #             message: I18n.t('slug_error')
-    #           },
-    #           unless: :kind_home?
+    errors.add(:slug, I18n.t('slug_error')) unless /\A[a-z0-9\-]+\z/.match?(slug)
   end
 
 end
