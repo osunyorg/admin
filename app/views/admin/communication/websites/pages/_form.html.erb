@@ -55,7 +55,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] } unless page.is_home? %>
             <%= f.input :bodyclass if can?(:edit, @website) %>
-            <%= f.input :full_width %>
+            <%= f.input :full_width if page.editable_width? %>
           </div>
         </div>
       <% else %>

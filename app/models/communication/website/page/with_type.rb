@@ -30,8 +30,12 @@ module Communication::Website::Page::WithType
     true
   end
 
-  def full_width_by_default?
+  def editable_width?
     true
+  end
+
+  def full_width_by_default?
+    false
   end
 
   def published_by_default?

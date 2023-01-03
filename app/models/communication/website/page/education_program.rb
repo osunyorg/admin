@@ -41,6 +41,18 @@
 #
 class Communication::Website::Page::EducationProgram < Communication::Website::Page
 
+  def full_width
+    true
+  end
+
+  def full_width_by_default?
+    true
+  end
+
+  def editable_width?
+    false
+  end
+
   def current_git_path
     "#{git_path_prefix}programs/_index.html"
   end

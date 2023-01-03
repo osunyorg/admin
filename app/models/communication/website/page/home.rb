@@ -49,6 +49,10 @@ class Communication::Website::Page::Home < Communication::Website::Page
     true
   end
 
+  def full_width_by_default?
+    true
+  end
+
   def draftable?
     false
   end
