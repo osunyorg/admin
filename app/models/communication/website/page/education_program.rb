@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::EducationProgram < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}programs/_index.html"
+  end
+
 end

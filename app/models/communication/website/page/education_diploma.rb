@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::EducationDiploma < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}diplomas/_index.html"
+  end
+
 end

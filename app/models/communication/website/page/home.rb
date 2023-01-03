@@ -50,4 +50,8 @@ class Communication::Website::Page::Home < Communication::Website::Page
   def set_slug
     self.slug = ''
   end
+
+  def validate_slug
+    true
+  end
 end

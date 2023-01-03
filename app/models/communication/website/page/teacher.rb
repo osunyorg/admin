@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::Teacher < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}teachers/_index.html"
+  end
+
 end

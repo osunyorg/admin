@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::ResearchPaper < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}papers/_index.html"
+  end
+
 end

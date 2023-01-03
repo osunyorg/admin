@@ -2,18 +2,8 @@ module Communication::Website::Page::WithPath
   extend ActiveSupport::Concern
 
   included do
-    validates :slug,
-              presence: true,
-              unless: :kind_home?
-    validate  :slug_must_be_unique
-    validates :slug,
-              format: {
-                with: /\A[a-z0-9\-]+\z/,
-                message: I18n.t('slug_error')
-              },
-              unless: :kind_home?
-
     before_validation :set_slug
+    validate :validate_slug
   end
 
   def path
@@ -31,30 +21,26 @@ module Communication::Website::Page::WithPath
   end
 
   def git_path(website)
-    # Same website and page published
+    # Same website only, page published only
+    # FIXME is it ever called for other websites?
     return unless website.id == communication_website_id && published
-
-    path = git_path_content_prefix(website)
-    if kind_home?
-      path += "_index.html"
-    elsif has_special_git_path?
-      path += "#{kind.split('_').last}/_index.html"
-    else
-    end
-    
-    "#{git_path_prefix}pages/#{slug_with_ancestors}/_index.html"
+    current_git_path
   end
 
   def url
     return unless published
     return if website.url.blank?
-    "#{website.url}#{path}"
+    "#{website.url}#{path}".gsub('//', '/')
   end
 
   protected
 
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}pages/#{slug_with_ancestors}/_index.html"
+  end
+
   def git_path_prefix
-    git_path_content_prefix(website)
+    @git_path_prefix ||= git_path_content_prefix(website)
   end
 
   def set_slug
@@ -74,8 +60,28 @@ module Communication::Website::Page::WithPath
               .exists?
   end
 
+  def validate_slug
+    slug_must_be_present
+    slug_must_be_unique
+    slug_must_have_proper_format
+  end
+
+  def slug_must_be_present
+    errors.add(:slug, ActiveRecord::Errors.default_error_messages[:absent]) if slug.blank?
+  end
+
   def slug_must_be_unique
     errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
+  end
+
+  def slug_must_have_proper_format
+    # TODO method equivalent of:
+    # validates :slug,
+    #           format: {
+    #             with: /\A[a-z0-9\-]+\z/,
+    #             message: I18n.t('slug_error')
+    #           },
+    #           unless: :kind_home?
   end
 
 end

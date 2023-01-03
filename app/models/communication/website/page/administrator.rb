@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::Administrator < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}administrators/_index.html"
+  end
+
 end

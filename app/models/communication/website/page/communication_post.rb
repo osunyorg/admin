@@ -41,11 +41,11 @@
 #
 class Communication::Website::Page::CommunicationPost < Communication::Website::Page
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}posts/_index.html"
+  def current_git_path
+    "#{git_path_prefix}posts/_index.html"
   end
 
-  def git_dependencies
+  def git_dependencies(website)
     [
       website.config_default_permalinks,
       website.categories,

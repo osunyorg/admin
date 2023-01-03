@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::ResearchVolume < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}volumes/_index.html"
+  end
+
 end

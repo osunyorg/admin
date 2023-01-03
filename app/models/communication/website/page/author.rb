@@ -41,4 +41,8 @@
 #
 class Communication::Website::Page::Author < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}authors/_index.html"
+  end
+
 end
