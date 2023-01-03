@@ -42,7 +42,7 @@
 class Communication::Website::Page::Home < Communication::Website::Page
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}_index.html"
+    "#{git_path_prefix}_index.html"
   end
 
   protected 

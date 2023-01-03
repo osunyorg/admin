@@ -39,6 +39,6 @@
 #  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
-class Communication::Website::Page::Teachers < Communication::Website::Page
+class Communication::Website::Page::Teacher < Communication::Website::Page
 
 end

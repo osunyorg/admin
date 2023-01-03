@@ -31,6 +31,7 @@ module Communication::Website::Page::WithPath
   end
 
   def git_path(website)
+    # Same website and page published
     return unless website.id == communication_website_id && published
 
     path = git_path_content_prefix(website)
@@ -39,10 +40,9 @@ module Communication::Website::Page::WithPath
     elsif has_special_git_path?
       path += "#{kind.split('_').last}/_index.html"
     else
-      path += "pages/#{slug_with_ancestors}/_index.html"
     end
-
-    path
+    
+    "#{git_path_prefix}pages/#{slug_with_ancestors}/_index.html"
   end
 
   def url
@@ -52,6 +52,10 @@ module Communication::Website::Page::WithPath
   end
 
   protected
+
+  def git_path_prefix
+    git_path_content_prefix(website)
+  end
 
   def set_slug
     self.slug = to_s.parameterize if self.slug.blank?

@@ -39,6 +39,18 @@
 #  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
-class Communication::Website::Page::EducationDiplomas < Communication::Website::Page
+class Communication::Website::Page::CommunicationPost < Communication::Website::Page
 
+  def git_path(website)
+    "#{git_path_content_prefix(website)}posts/_index.html"
+  end
+
+  def git_dependencies
+    [
+      website.config_default_permalinks,
+      website.categories,
+      website.authors.map(&:author),
+      website.posts
+    ].flatten
+  end
 end

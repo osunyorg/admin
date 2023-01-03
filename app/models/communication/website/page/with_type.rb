@@ -1,7 +1,21 @@
 module Communication::Website::Page::WithType
   extend ActiveSupport::Concern
 
-  def is_necessary?
+  # Communication::Website::Page::CommunicationPosts -> communication_posts
+  # Used for i18n
+  def type_key
+    type.demodulize.underscore
+  end
+
+  def is_special_page?
+    type.present?
+  end
+
+  def is_regular_page?
+    type.blank?
+  end
+
+  def is_necessary_for_website?
     true
   end
 
@@ -13,7 +27,12 @@ module Communication::Website::Page::WithType
     true
   end
 
-  def unpublishable?
+  # Can it be unpublished?
+  def draftable?
+    true
+  end
+
+  def deletable?
     true
   end
 end

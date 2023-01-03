@@ -9,7 +9,10 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     Communication::Website::Page.find_each do |page|
-      page.update_column :type, "::Communication::Website::Page::#{page.kind.to_s.classify}"
+      if page.kind
+        type = "::Communication::Website::Page::#{page.kind.to_s.classify}"
+        page.update_column :type, type
+      end
     end
   end
 
