@@ -45,4 +45,10 @@ class Communication::Website::Page::ResearchVolume < Communication::Website::Pag
     "#{git_path_prefix}volumes/_index.html"
   end
 
+  def git_dependencies(website)
+    [
+      website.config_default_permalinks,
+      website.research_volumes
+    ].flatten
+  end
 end

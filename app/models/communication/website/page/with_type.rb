@@ -32,7 +32,8 @@ module Communication::Website::Page::WithType
     true
   end
 
+  # All special pages are undeletable
   def deletable?
-    true
+    is_regular_page?
   end
 end

@@ -45,4 +45,11 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     "#{git_path_prefix}researchers/_index.html"
   end
 
+
+  def git_dependencies(website)
+    [
+      website.config_default_permalinks,
+      website.website.researchers.map(&:researcher)
+    ].flatten
+  end
 end

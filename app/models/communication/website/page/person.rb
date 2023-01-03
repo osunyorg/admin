@@ -45,4 +45,10 @@ class Communication::Website::Page::Person < Communication::Website::Page
     "#{git_path_prefix}persons/_index.html"
   end
 
+  def git_dependencies(website)
+    [
+      website.config_default_permalinks,
+      website.people_with_facets
+    ].flatten
+  end
 end

@@ -45,4 +45,10 @@ class Communication::Website::Page::Author < Communication::Website::Page
     "#{git_path_prefix}authors/_index.html"
   end
 
+  def git_dependencies(website)
+    [
+      website.config_default_permalinks,
+      website.website.authors.map(&:author)
+    ].flatten
+  end
 end

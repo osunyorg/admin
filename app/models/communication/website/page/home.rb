@@ -45,6 +45,10 @@ class Communication::Website::Page::Home < Communication::Website::Page
     "#{git_path_prefix}_index.html"
   end
 
+  def draftable?
+    false
+  end
+
   protected 
 
   def set_slug
