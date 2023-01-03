@@ -568,85 +568,53 @@ en:
       pages:
         defaults:
           accessibility:
-            admin_description: accessibility page
-            description_short: ''
             slug: accessibility
             title: Accessibility
           administrator:
-            admin_description: list of members in the administrative team
-            description_short: List of members in the administrative team
-            slug: administrative-team
-            title: Administrative team
+            slug: administrators
+            title: Administrators
           author:
-            admin_description: list of members in the editorial team
-            description_short: List of members in the editorial team
-            slug: editorial-team
-            title: Editorial team
+            slug: editors
+            title: Editors
           communication_post:
-            admin_description: list of posts
-            description_short: List of posts
             slug: posts
             title: Posts
           education_diploma:
-            admin_description: list of available diplomas
-            description_short: List of available diplomas
             slug: diplomas
             title: Diplomas
           education_program:
-            admin_description: list of available programs
-            description_short: List of available programs
             slug: programs
             title: Programs
           home:
-            admin_description: homepage
-            description_short: ''
             slug: ''
             title: Home
           legal_term:
-            admin_description: legal terms page
-            description_short: ''
             slug: legal-terms
             title: Legal terms
           organization:
-            admin_description: organizations page
-            description_short: List of organizations
             slug: organizations
             title: Organizations
           person:
-            admin_description: list of members in the team
-            description_short: List of members in the team
             slug: team
             title: Team
           privacy_policy:
-            admin_description: privacy policy page
-            description_short: ''
             slug: privacy-policy
             title: Privacy policy
           research_paper:
-            admin_description: list of papers
-            description_short: List of papers
             slug: papers
             title: Papers
           research_volume:
-            admin_description: list of volumes
-            description_short: List of volumes
             slug: volumes
             title: Volumes
           researcher:
-            admin_description: list of members in the research team
-            description_short: List of members in the research team
-            slug: research-team
-            title: Research team
+            slug: researchers
+            title: Researchers
           sitemap:
-            admin_description: sitemap page
-            description_short: ''
             slug: sitemap
             title: Sitemap
           teacher:
-            admin_description: list of members in the educational team
-            description_short: List of members in the educational team
-            slug: educational-team
-            title: Educational team
+            slug: teachers
+            title: Teachers
       posts:
         new_curation: New curation
         published: Published

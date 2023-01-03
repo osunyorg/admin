@@ -25,7 +25,7 @@
       <% end %>
       <div class="ms-auto align-items-center" role="group">
         <% if page.is_special_page? %>
-          <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.#{page.type_key}.admin_description") %></span>
+          <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></span>
         <% end %>
         <div class="btn-group">
           <%= duplicate_link page if page.is_regular_page? %>
