@@ -18,6 +18,7 @@
 #  slug                     :string
 #  text                     :text
 #  title                    :string
+#  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -54,6 +55,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPosition
   include WithTree
   include WithPath
+  include WithType
   include WithPermalink
 
   has_summernote :text

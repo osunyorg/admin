@@ -8,7 +8,9 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    BlocksMigration.cleanup
+    Communication::Website::Page.find_each do |page|
+      page.update_column :type, "::Communication::Website::Page::#{page.kind.to_s.classify}"
+    end
   end
 
   namespace :websites do

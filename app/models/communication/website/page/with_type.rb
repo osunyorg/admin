@@ -1,4 +1,6 @@
-class Communication::Website::Page::Special < Communication::Website::Page
+module Communication::Website::Page::WithType
+  extend ActiveSupport::Concern
+
   def is_necessary?
     true
   end
