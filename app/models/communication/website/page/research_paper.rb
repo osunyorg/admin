@@ -41,8 +41,12 @@
 #
 class Communication::Website::Page::ResearchPaper < Communication::Website::Page
 
+  def default_position
+    41
+  end
+
   def is_necessary_for_website?
-    website.about && website.about&.respond_to(:research_papers)
+    website.about && website.about&.respond_to?(:papers)
   end
 
   def current_git_path

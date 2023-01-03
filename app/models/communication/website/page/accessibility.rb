@@ -44,4 +44,8 @@ class Communication::Website::Page::Accessibility < Communication::Website::Page
   def draftable?
     false
   end
+
+  def default_position
+    90
+  end
 end

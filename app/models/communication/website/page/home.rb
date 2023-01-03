@@ -59,6 +59,10 @@ class Communication::Website::Page::Home < Communication::Website::Page
 
   protected 
 
+  def default_parent
+    nil
+  end
+
   def set_slug
     self.slug = ''
   end

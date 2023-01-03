@@ -53,6 +53,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     false
   end
 
+  def default_position
+    1
+  end
+
   def current_git_path
     "#{git_path_prefix}posts/_index.html"
   end

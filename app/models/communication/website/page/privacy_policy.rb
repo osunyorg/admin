@@ -41,4 +41,7 @@
 #
 class Communication::Website::Page::PrivacyPolicy < Communication::Website::Page
 
+  def default_position
+    92
+  end
 end

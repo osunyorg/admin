@@ -44,4 +44,8 @@ class Communication::Website::Page::LegalTerm < Communication::Website::Page
   def draftable?
     false
   end
+
+  def default_position
+    91
+  end
 end

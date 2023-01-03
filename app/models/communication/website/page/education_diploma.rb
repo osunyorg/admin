@@ -42,7 +42,7 @@
 class Communication::Website::Page::EducationDiploma < Communication::Website::Page
 
   def is_necessary_for_website?
-    website.about && website.about&.respond_to(:education_diplomas)
+    website.about && website.about&.respond_to?(:education_diplomas)
   end
 
   def full_width
@@ -55,6 +55,10 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
 
   def editable_width?
     false
+  end
+
+  def default_position
+    10
   end
 
   def current_git_path

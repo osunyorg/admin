@@ -41,6 +41,10 @@
 #
 class Communication::Website::Page::Organization < Communication::Website::Page
 
+  def default_position
+    31
+  end
+
   def current_git_path
     "#{git_path_prefix}organizations/_index.html"
   end

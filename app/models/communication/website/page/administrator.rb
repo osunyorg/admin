@@ -42,7 +42,7 @@
 class Communication::Website::Page::Administrator < Communication::Website::Page
 
   def is_necessary_for_website?
-    website.about && website.about&.respond_to(:administrators)
+    website.about && website.about&.respond_to?(:administrators)
   end
 
   def current_git_path
@@ -54,5 +54,11 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
       website.config_default_permalinks,
       website&.administrators&.map(&:administrator)
     ]
+  end
+
+  protected
+
+  def default_parent
+    website.persons_page
   end
 end

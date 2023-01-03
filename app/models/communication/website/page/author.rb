@@ -51,4 +51,10 @@ class Communication::Website::Page::Author < Communication::Website::Page
       website&.authors&.map(&:author)
     ]
   end
+
+  protected
+
+  def default_parent
+    website.persons_page
+  end
 end

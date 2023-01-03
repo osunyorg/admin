@@ -42,7 +42,7 @@
 class Communication::Website::Page::Teacher < Communication::Website::Page
 
   def is_necessary_for_website?
-    website.about && website.about&.respond_to(:teachers)
+    website.about && website.about&.respond_to?(:teachers)
   end
 
   def current_git_path
@@ -54,5 +54,11 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
       website.config_default_permalinks,
       website&.teachers&.map(&:teacher)
     ].flatten
+  end
+
+  protected
+
+  def default_parent
+    website.persons_page
   end
 end

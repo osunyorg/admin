@@ -3,7 +3,8 @@ module Communication::Website::Page::WithType
 
   
   included do
-    HOME_TYPE = 'Communication::Website::Page::Home'
+    TYPE_HOME = 'Communication::Website::Page::Home'
+    TYPE_PERSONS = 'Communication::Website::Page::Person'
 
     TYPES = [
       Communication::Website::Page::Home, # Always start with home
@@ -24,7 +25,11 @@ module Communication::Website::Page::WithType
       Communication::Website::Page::Teacher
     ]
 
-    scope :home, -> { where(type: HOME_TYPE) }
+    scope :home, -> { where(type: TYPE_HOME) }
+    scope :persons, -> { where(type: TYPE_PERSONS) }
+
+    after_initialize :initialize_page
+    after_create :positionize_page
   end
 
   # Communication::Website::Page::CommunicationPosts -> communication_posts
@@ -34,7 +39,7 @@ module Communication::Website::Page::WithType
   end
 
   def is_home?
-    type == HOME_TYPE
+    type == TYPE_HOME
   end
 
   def is_special_page?
@@ -71,7 +76,31 @@ module Communication::Website::Page::WithType
     is_regular_page?
   end
 
+  protected
+
+  def default_parent
+    website.home_page
+  end
+
+  def default_position
+    nil
+  end
+
   def type_git_dependencies
     []
+  end
+
+  def initialize_page
+    i18n_key = "communication.website.pages.defaults.#{type_key}"
+    self.title = I18n.t("#{i18n_key}.title")
+    self.slug = I18n.t("#{i18n_key}.slug")
+    self.parent = default_parent
+    self.full_width = full_width_by_default?
+    self.published = published_by_default?
+  end
+
+  def positionize_page
+    return if is_regular_page?
+    self.update_column :position, default_position if default_position
   end
 end
