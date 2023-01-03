@@ -28,8 +28,8 @@
           <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.#{page.kind}.admin_description") %></span>
         <% end %>
         <div class="btn-group">
-          <%= duplicate_link page if page.is_regular_page?%>
-          <%= edit_link page %>
+          <%= duplicate_link page if page.is_regular_page? %>
+          <%= link_to t('edit'), edit_admin_communication_website_page_path(page), class: button_classes %>
           <%= destroy_link page, confirm_message: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') if page.is_regular_page? %>
         </div>
       </div>

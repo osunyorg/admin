@@ -1,4 +1,8 @@
-<%= simple_form_for [:admin, page] do |f| %>
+<%
+url = page.new_record?  ? admin_communication_website_pages_path
+                        : admin_communication_website_page_path(page)
+%>
+<%= simple_form_for page, url: url  do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
