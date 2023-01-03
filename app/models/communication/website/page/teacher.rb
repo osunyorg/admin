@@ -41,6 +41,10 @@
 #
 class Communication::Website::Page::Teacher < Communication::Website::Page
 
+  def is_necessary_for_website?
+    website.about && website.about&.respond_to(:teachers)
+  end
+
   def current_git_path
     "#{git_path_prefix}teachers/_index.html"
   end
