@@ -15,10 +15,12 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def new
     about_class = params[:about_type].constantize
     about = about_class.find params[:about_id]
+    # Rails uses ActiveRecord::Inheritance#polymorphic_name to hydrate the about_type.
+    # Example: A Block for a Communication::Website::Page::Home will have about_type = "Communication::Website::Page"
     @block.about = about
     breadcrumb
   end
-  
+
   def show
     breadcrumb
   end
