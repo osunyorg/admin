@@ -13,8 +13,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def new
-    @block.about_type = params[:about_type]
-    @block.about_id = params[:about_id]
+    about_class = params[:about_type].constantize
+    about = about_class.find params[:about_id]
+    @block.about = about
     breadcrumb
   end
   
