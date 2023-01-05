@@ -1,7 +1,7 @@
 module Communication::Website::Page::WithType
   extend ActiveSupport::Concern
 
-  
+
   included do
     TYPE_HOME = 'Communication::Website::Page::Home'
     TYPE_PERSONS = 'Communication::Website::Page::Person'
@@ -28,7 +28,7 @@ module Communication::Website::Page::WithType
     scope :home, -> { where(type: TYPE_HOME) }
     scope :persons, -> { where(type: TYPE_PERSONS) }
 
-    after_initialize :initialize_page
+    before_validation :initialize_special_page, on: :create, if: :is_special_page?
     after_create :positionize_page
   end
 
@@ -90,7 +90,7 @@ module Communication::Website::Page::WithType
     []
   end
 
-  def initialize_page
+  def initialize_special_page
     i18n_key = "communication.website.pages.defaults.#{type_key}"
     self.title = I18n.t("#{i18n_key}.title")
     self.slug = I18n.t("#{i18n_key}.slug")
