@@ -45,8 +45,8 @@ class Communication::Website::Page::Home < Communication::Website::Page
     "#{git_path_prefix}_index.html"
   end
 
-  def full_width
-    true
+  def editable_width?
+    false
   end
 
   def full_width_by_default?
@@ -57,7 +57,7 @@ class Communication::Website::Page::Home < Communication::Website::Page
     false
   end
 
-  protected 
+  protected
 
   def default_parent
     nil
@@ -70,4 +70,5 @@ class Communication::Website::Page::Home < Communication::Website::Page
   def validate_slug
     true
   end
+  
 end

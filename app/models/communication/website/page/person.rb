@@ -45,10 +45,13 @@ class Communication::Website::Page::Person < Communication::Website::Page
     "#{git_path_prefix}persons/_index.html"
   end
 
+  protected
+
   def type_git_dependencies
     [
       website.config_default_permalinks,
       website.people_with_facets
     ]
   end
+  
 end

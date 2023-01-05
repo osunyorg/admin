@@ -41,25 +41,23 @@
 #
 class Communication::Website::Page::EducationDiploma < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}diplomas/_index.html"
+  end
+
   def is_necessary_for_website?
     website.about && website.about&.respond_to?(:education_diplomas)
-  end
-
-  def full_width
-    true
-  end
-
-  def full_width_by_default?
-    true
   end
 
   def editable_width?
     false
   end
 
-  def current_git_path
-    "#{git_path_prefix}diplomas/_index.html"
+  def full_width_by_default?
+    true
   end
+
+  protected
 
   def type_git_dependencies
     [
@@ -67,4 +65,5 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
       website.education_diplomas
     ]
   end
+  
 end

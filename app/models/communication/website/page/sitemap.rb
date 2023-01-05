@@ -41,15 +41,12 @@
 #
 class Communication::Website::Page::Sitemap < Communication::Website::Page
 
+  def editable_width?
+    false
+  end
+
   def draftable?
     false
   end
 
-  def full_width
-    false
-  end
-
-  def editable_width?
-    false
-  end
 end

@@ -41,12 +41,18 @@
 #
 class Communication::Website::Page::Researcher < Communication::Website::Page
 
+  def current_git_path
+    "#{git_path_prefix}researchers/_index.html"
+  end
+
   def is_necessary_for_website?
     website.about && website.about&.respond_to?(:researchers)
   end
 
-  def current_git_path
-    "#{git_path_prefix}researchers/_index.html"
+  protected
+  
+  def default_parent
+    website.persons_page
   end
 
   def type_git_dependencies
@@ -56,9 +62,4 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     ]
   end
 
-  protected
-
-  def default_parent
-    website.persons_page
-  end
 end

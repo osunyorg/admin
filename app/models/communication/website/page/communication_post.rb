@@ -41,21 +41,19 @@
 #
 class Communication::Website::Page::CommunicationPost < Communication::Website::Page
 
-  def full_width
-    true
-  end
-
-  def full_width_by_default?
-    true
+  def current_git_path
+    "#{git_path_prefix}posts/_index.html"
   end
 
   def editable_width?
     false
   end
 
-  def current_git_path
-    "#{git_path_prefix}posts/_index.html"
+  def full_width_by_default?
+    true
   end
+
+  protected
 
   def type_git_dependencies
     [
@@ -65,4 +63,5 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
       website.posts
     ]
   end
+  
 end

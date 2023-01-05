@@ -45,16 +45,17 @@ class Communication::Website::Page::Author < Communication::Website::Page
     "#{git_path_prefix}authors/_index.html"
   end
 
+  protected
+
+  def default_parent
+    website.persons_page
+  end
+
   def type_git_dependencies
     [
       website.config_default_permalinks,
       website&.authors&.map(&:author)
     ]
   end
-
-  protected
-
-  def default_parent
-    website.persons_page
-  end
+  
 end

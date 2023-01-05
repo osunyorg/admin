@@ -44,4 +44,5 @@ class Communication::Website::Page::LegalTerm < Communication::Website::Page
   def draftable?
     false
   end
+  
 end

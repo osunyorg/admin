@@ -44,4 +44,5 @@ class Communication::Website::Page::Accessibility < Communication::Website::Page
   def draftable?
     false
   end
+  
 end
