@@ -28,7 +28,7 @@ module Communication::Website::Page::WithPath
   def url
     return unless published
     return if website.url.blank?
-    "#{website.url}#{path}".gsub('//', '/')
+    Static.clean_path "#{website.url}#{path}"
   end
 
   protected
