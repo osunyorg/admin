@@ -19,12 +19,25 @@ class AddTypeToCommunicationWebsitePages < ActiveRecord::Migration[7.0]
       '130': :researchers,
       '140': :teachers
     }
+    full_width_pages = [
+      :home,
+      :communication_posts,
+      :education_programs,
+      :research_papers, 
+      :research_volumes,
+      :organizations,
+      :persons,
+      :administrators,
+      :authors,
+      :researchers,
+      :teachers
+    ]
     Communication::Website::Page.find_each do |page|
-      if page.kind
-        kind = kinds[page.kind.to_s.to_sym]
-        type = "Communication::Website::Page::#{kind.to_s.classify}"
-        page.update_column :type, type
-      end
+      next unless page.kind
+      kind = kinds[page.kind.to_s.to_sym]
+      type = "Communication::Website::Page::#{kind.to_s.classify}"
+      page.update_column :type, type      
+      page.update_column :full_width, true if kind.in?(full_width_pages)
     end
   end
 
