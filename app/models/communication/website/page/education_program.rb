@@ -57,10 +57,6 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
     false
   end
 
-  def default_position
-    11
-  end
-
   def current_git_path
     "#{git_path_prefix}programs/_index.html"
   end

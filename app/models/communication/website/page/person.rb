@@ -41,10 +41,6 @@
 #
 class Communication::Website::Page::Person < Communication::Website::Page
 
-  def default_position
-    30
-  end
-
   def current_git_path
     "#{git_path_prefix}persons/_index.html"
   end

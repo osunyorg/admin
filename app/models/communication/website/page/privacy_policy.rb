@@ -40,8 +40,4 @@
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
 class Communication::Website::Page::PrivacyPolicy < Communication::Website::Page
-
-  def default_position
-    92
-  end
 end

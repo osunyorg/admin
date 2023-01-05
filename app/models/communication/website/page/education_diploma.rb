@@ -57,10 +57,6 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
     false
   end
 
-  def default_position
-    10
-  end
-
   def current_git_path
     "#{git_path_prefix}diplomas/_index.html"
   end
