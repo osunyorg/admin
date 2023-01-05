@@ -7,12 +7,8 @@ module Communication::Website::WithSpecialPages
     after_touch :create_missing_special_pages
   end
 
-  def home_page
-    pages.home.first
-  end
-
-  def persons_page
-    pages.persons.first
+  def special_page(type)
+    pages.where(type: type.to_s).first
   end
 
   def create_missing_special_pages

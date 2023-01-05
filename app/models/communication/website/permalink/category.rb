@@ -34,7 +34,7 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   # /actualites/:slug/
   def self.pattern_in_website(website)
-    "/#{website.special_page(:communication_posts).slug_with_ancestors}/:slug/"
+    "/#{website.special_page(Communication::Website::Page::CommunicationPost).slug_with_ancestors}/:slug/"
   end
 
   protected

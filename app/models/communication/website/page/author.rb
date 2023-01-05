@@ -48,7 +48,7 @@ class Communication::Website::Page::Author < Communication::Website::Page
   end
 
   def default_parent
-    website.persons_page
+    website.special_page(Communication::Website::Page::Person)
   end
 
   def type_git_dependencies

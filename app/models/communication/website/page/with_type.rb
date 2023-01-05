@@ -2,8 +2,6 @@ module Communication::Website::Page::WithType
   extend ActiveSupport::Concern
 
   included do
-    TYPE_HOME = 'Communication::Website::Page::Home'
-    TYPE_PERSONS = 'Communication::Website::Page::Person'
 
     # Types are listed in the order we want them to be created
     TYPES = [
@@ -31,9 +29,6 @@ module Communication::Website::Page::WithType
       Communication::Website::Page::Sitemap
     ]
 
-    scope :home, -> { where(type: TYPE_HOME) }
-    scope :persons, -> { where(type: TYPE_PERSONS) }
-
     before_validation :initialize_special_page, on: :create, if: :is_special_page?
   end
 
@@ -44,7 +39,7 @@ module Communication::Website::Page::WithType
   end
 
   def is_home?
-    type == TYPE_HOME
+    type == 'Communication::Website::Page::Home'
   end
 
   def is_special_page?
@@ -84,7 +79,7 @@ module Communication::Website::Page::WithType
   protected
 
   def default_parent
-    website.home_page
+    website.special_page(Communication::Website::Page::Home)
   end
 
   def type_git_dependencies
