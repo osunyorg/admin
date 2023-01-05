@@ -51,8 +51,4 @@ class Communication::Website::Page::Sitemap < Communication::Website::Page
   def editable_width?
     false
   end
-
-  def default_position
-    93
-  end
 end

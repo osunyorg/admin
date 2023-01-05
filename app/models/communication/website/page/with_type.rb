@@ -6,30 +6,36 @@ module Communication::Website::Page::WithType
     TYPE_HOME = 'Communication::Website::Page::Home'
     TYPE_PERSONS = 'Communication::Website::Page::Person'
 
+    # Types are listed in the order we want them to be created
     TYPES = [
-      Communication::Website::Page::Home, # Always start with home
-      Communication::Website::Page::Accessibility,
-      Communication::Website::Page::Administrator,
-      Communication::Website::Page::Author,
+      # Home always first
+      Communication::Website::Page::Home,
+      # Global objects
       Communication::Website::Page::CommunicationPost,
+      Communication::Website::Page::Person,
+      Communication::Website::Page::Organization,
+      # Education
       Communication::Website::Page::EducationDiploma,
       Communication::Website::Page::EducationProgram,
-      Communication::Website::Page::LegalTerm,
-      Communication::Website::Page::Organization,
-      Communication::Website::Page::Person,
-      Communication::Website::Page::PrivacyPolicy,
-      Communication::Website::Page::ResearchPaper,
+      # Research
       Communication::Website::Page::ResearchVolume,
+      Communication::Website::Page::ResearchPaper,
+      # People facets
+      Communication::Website::Page::Administrator,
+      Communication::Website::Page::Author,
       Communication::Website::Page::Researcher,
-      Communication::Website::Page::Sitemap,
-      Communication::Website::Page::Teacher
+      Communication::Website::Page::Teacher,
+      # Legal pages always at the end
+      Communication::Website::Page::LegalTerm,
+      Communication::Website::Page::PrivacyPolicy,
+      Communication::Website::Page::Accessibility,
+      Communication::Website::Page::Sitemap
     ]
 
     scope :home, -> { where(type: TYPE_HOME) }
     scope :persons, -> { where(type: TYPE_PERSONS) }
 
     before_validation :initialize_special_page, on: :create, if: :is_special_page?
-    after_create :positionize_page
   end
 
   # Communication::Website::Page::CommunicationPosts -> communication_posts
@@ -82,10 +88,6 @@ module Communication::Website::Page::WithType
     website.home_page
   end
 
-  def default_position
-    nil
-  end
-
   def type_git_dependencies
     []
   end
@@ -97,10 +99,5 @@ module Communication::Website::Page::WithType
     self.parent = default_parent
     self.full_width = full_width_by_default?
     self.published = published_by_default?
-  end
-
-  def positionize_page
-    return if is_regular_page?
-    self.update_column :position, default_position if default_position
   end
 end
