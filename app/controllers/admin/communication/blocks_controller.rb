@@ -73,7 +73,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def about_path
     # La formation ou la page concernée
-    path_method = "admin_#{@block.about.class.to_s.parameterize.underscore}_path"
+    path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
     send path_method, id: @block.about_id, website_id: website_id
   end
 
