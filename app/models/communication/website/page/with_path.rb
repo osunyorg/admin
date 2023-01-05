@@ -21,9 +21,7 @@ module Communication::Website::Page::WithPath
   end
 
   def git_path(website)
-    # Same website only, page published only
-    # FIXME is it ever called for other websites?
-    return unless website.id == communication_website_id && published
+    return unless published
     current_git_path
   end
 
