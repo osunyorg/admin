@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_03_132305) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_02_173952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -322,7 +322,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_132305) do
     t.uuid "language_id"
     t.text "featured_image_credit"
     t.boolean "full_width", default: false
-    t.string "type"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"

@@ -112,26 +112,7 @@ module Communication::Website::WithDependencies
     end
   end
 
-  # those tests has_xxx? should match the special page kind
-  def has_home?
-    true
-  end
-
-  def has_legal_terms?
-    true
-  end
-
-  def has_sitemap?
-    true
-  end
-
-  def has_privacy_policy?
-    true
-  end
-
-  def has_accessibility?
-    true
-  end
+  # Deprecated, needs refactor for performance
 
   def has_communication_posts?
     posts.published.any?
