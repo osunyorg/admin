@@ -21,7 +21,7 @@ class AddTypeToCommunicationWebsitePages < ActiveRecord::Migration[7.0]
     }
     Communication::Website::Page.find_each do |page|
       if page.kind
-        kind = kinds[page.kind.to_s]
+        kind = kinds[page.kind.to_s.to_sym]
         type = "Communication::Website::Page::#{kind.to_s.classify}"
         page.update_column :type, type
       end

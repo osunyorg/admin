@@ -18,6 +18,7 @@
 #  slug                     :string
 #  text                     :text
 #  title                    :string
+#  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
