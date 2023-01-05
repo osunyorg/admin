@@ -50,7 +50,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithBlocks
   include WithGit
   include WithFeaturedImage
-  include WithKind
   include WithMenuItemTarget
   include WithPosition
   include WithTree
