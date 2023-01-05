@@ -43,7 +43,7 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithImport
-  include WithMenuItems
+  include WithMenus
   include WithProgramCategories
   include WithSpecialPages
   include WithStyle

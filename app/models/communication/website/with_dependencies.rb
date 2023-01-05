@@ -7,11 +7,6 @@ module Communication::Website::WithDependencies
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
-    has_many    :menus,
-                class_name: 'Communication::Website::Menu',
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
     has_many    :posts,
                 foreign_key: :communication_website_id,
                 dependent: :destroy

@@ -1,5 +1,14 @@
-module Communication::Website::WithMenuItems
+module Communication::Website::WithMenus
   extend ActiveSupport::Concern
+
+  included do
+    has_many    :menus,
+                class_name: 'Communication::Website::Menu',
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
+    after_create :initialize_menus
+  end
 
   def menu_item_kinds
     Communication::Website::Menu::Item.kinds.reject do |key, value|
@@ -86,5 +95,19 @@ module Communication::Website::WithMenuItems
 
   def menu_item_kind_paper?
     has_research_papers?
+  end
+
+  protected
+
+  def initialize_menus
+    create_menu 'Primary'
+    create_menu 'Legal'
+    create_menu 'Social'
+  end
+
+  def create_menu(title)
+    menus.create  title: title,
+                  identifier: title.parameterize,
+                  university: university
   end
 end
