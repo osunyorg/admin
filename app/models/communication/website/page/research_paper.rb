@@ -41,15 +41,15 @@
 #
 class Communication::Website::Page::ResearchPaper < Communication::Website::Page
 
-  def current_git_path
-    "#{git_path_prefix}papers/_index.html"
-  end
-
   def is_necessary_for_website?
     website.about && website.about&.respond_to?(:papers)
   end
 
   protected
+  
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}papers/_index.html"
+  end
 
   def type_git_dependencies
     [
@@ -57,5 +57,5 @@ class Communication::Website::Page::ResearchPaper < Communication::Website::Page
       website.research_papers
     ]
   end
-  
+
 end

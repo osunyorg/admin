@@ -41,11 +41,11 @@
 #
 class Communication::Website::Page::Author < Communication::Website::Page
 
-  def current_git_path
-    "#{git_path_prefix}authors/_index.html"
-  end
-
   protected
+
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}authors/_index.html"
+  end
 
   def default_parent
     website.persons_page
@@ -57,5 +57,5 @@ class Communication::Website::Page::Author < Communication::Website::Page
       website&.authors&.map(&:author)
     ]
   end
-  
+
 end

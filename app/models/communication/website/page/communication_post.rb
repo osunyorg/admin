@@ -41,10 +41,6 @@
 #
 class Communication::Website::Page::CommunicationPost < Communication::Website::Page
 
-  def current_git_path
-    "#{git_path_prefix}posts/_index.html"
-  end
-
   def editable_width?
     false
   end
@@ -54,6 +50,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
   end
 
   protected
+  
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}posts/_index.html"
+  end
 
   def type_git_dependencies
     [
@@ -63,5 +63,5 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
       website.posts
     ]
   end
-  
+
 end

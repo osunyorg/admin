@@ -41,10 +41,6 @@
 #
 class Communication::Website::Page::Home < Communication::Website::Page
 
-  def git_path(website)
-    "#{git_path_prefix}_index.html"
-  end
-
   def editable_width?
     false
   end
@@ -59,6 +55,10 @@ class Communication::Website::Page::Home < Communication::Website::Page
 
   protected
 
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}_index.html"
+  end
+
   def default_parent
     nil
   end
@@ -70,5 +70,5 @@ class Communication::Website::Page::Home < Communication::Website::Page
   def validate_slug
     true
   end
-  
+
 end

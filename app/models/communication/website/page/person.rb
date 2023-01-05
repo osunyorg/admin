@@ -41,11 +41,11 @@
 #
 class Communication::Website::Page::Person < Communication::Website::Page
 
-  def current_git_path
-    "#{git_path_prefix}persons/_index.html"
-  end
-
   protected
+  
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}persons/_index.html"
+  end
 
   def type_git_dependencies
     [
@@ -53,5 +53,5 @@ class Communication::Website::Page::Person < Communication::Website::Page
       website.people_with_facets
     ]
   end
-  
+
 end
