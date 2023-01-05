@@ -2,7 +2,6 @@ module Communication::Website::WithSpecialPages
   extend ActiveSupport::Concern
 
   included do
-    after_create :create_missing_special_pages
     after_save :create_missing_special_pages
     after_touch :create_missing_special_pages
   end
