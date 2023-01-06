@@ -36,7 +36,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
   include Sanitizable
   include WithTree
   include WithPosition
-  include WithTargets
 
   attr_accessor :skip_publication_callback
 
@@ -53,22 +52,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
     blank: 0,
     url: 10,
     page: 20,
-    programs: 30,
     program: 31,
-    diplomas: 32,
     diploma: 33,
-    posts: 40,
     category: 41,
     post: 42,
-    organizations: 45,
-    persons: 50,
-    administrators: 51,
-    authors: 52,
-    researchers: 53,
-    teachers: 54,
-    volumes: 60,
     volume: 61,
-    papers: 62,
     paper: 63
   }, _prefix: :kind
 
@@ -79,25 +67,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def self.icon_for(kind)
     icons = {
-      'administrators' => Icon::UNIVERSITY_PERSON_ADMINISTRATORS,
-      'authors' => Icon::UNIVERSITY_PERSON,
       'blank' => 'font',
       'diploma' => Icon::EDUCATION_DIPLOMA,
-      'diplomas' => Icon::EDUCATION_DIPLOMA,
-      'posts' => Icon::COMMUNICATION_WEBSITE_POST,
       'post' => Icon::COMMUNICATION_WEBSITE_POST,
       'category' => Icon::COMMUNICATION_WEBSITE_POST,
       'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
       'program' => Icon::EDUCATION_PROGRAM,
-      'programs' => Icon::EDUCATION_PROGRAM,
       'paper' => Icon::RESEARCH_LABORATORY,
-      'papers' => Icon::RESEARCH_LABORATORY,
-      'volumes' => Icon::RESEARCH_LABORATORY,
       'volume' => Icon::RESEARCH_LABORATORY,
-      'researchers' => Icon::RESEARCH_RESEARCHER,
-      'organizations' => Icon::UNIVERSITY_ORGANIZATION,
-      'persons' => Icon::UNIVERSITY_PERSON,
-      'teachers' => Icon::EDUCATION_TEACHER,
       'url' => 'globe',
     }
     "fas fa-#{icons[kind]}" if icons.has_key? kind
@@ -108,17 +85,17 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def static_target
-    target = nil
-    active = website.send "menu_item_kind_#{kind}?"
-    return nil unless active
-    # Les méthodes target_for_ sont définies dans le concern WithTarget
-    method = "target_for_#{kind}"
-    # Le true sert à examiner les méthodes protected
-    target = respond_to?(method, true)  ? send(method)
-                                        : about&.path
-    return nil if target.nil?
-    target.end_with?('/') ? target
-                          : "#{target}/"
+    test_kind_method = "menu_item_kind_#{kind}?"
+    return nil if website.respond_to?(test_kind_method) && !website.public_send(test_kind_method)
+
+    case kind
+    when "blank"
+      ''
+    when "url"
+      url
+    else
+      about.new_permalink_in_website(website).computed_path
+    end
   end
 
   def list_of_other_items
