@@ -1,17 +1,17 @@
 class SetAboutFromMenuItemKind < ActiveRecord::Migration[7.0]
   def change
     mapping = {
-      programs: Communication::Website::Page::EducationProgram,
-      diplomas: Communication::Website::Page::EducationDiploma,
-      posts: Communication::Website::Page::CommunicationPost,
-      organizations: Communication::Website::Page::Organization,
-      persons: Communication::Website::Page::Person,
-      administrators: Communication::Website::Page::Administrator,
-      authors: Communication::Website::Page::Author,
-      researchers: Communication::Website::Page::Researcher,
-      teachers: Communication::Website::Page::Teacher,
-      volumes: Communication::Website::Page::ResearchVolume,
-      papers: Communication::Website::Page::ResearchPaper
+      30: Communication::Website::Page::EducationProgram,
+      32: Communication::Website::Page::EducationDiploma,
+      40: Communication::Website::Page::CommunicationPost,
+      45: Communication::Website::Page::Organization,
+      50: Communication::Website::Page::Person,
+      51: Communication::Website::Page::Administrator,
+      52: Communication::Website::Page::Author,
+      53: Communication::Website::Page::Researcher,
+      54: Communication::Website::Page::Teacher,
+      60: Communication::Website::Page::ResearchVolume,
+      62: Communication::Website::Page::ResearchPaper
     }
 
     websites = Communication::Website.where(id: Communication::Website::Menu::Item.where(kind: mapping.keys).distinct.pluck(:website_id))

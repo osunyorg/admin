@@ -57,19 +57,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     category: 41,
     post: 42,
     volume: 61,
-    paper: 63,
-    # Legacy (remove when no menu items remain with these kinds)
-    programs: 30,
-    diplomas: 32,
-    posts: 40,
-    organizations: 45,
-    persons: 50,
-    administrators: 51,
-    authors: 52,
-    researchers: 53,
-    teachers: 54,
-    volumes: 60,
-    papers: 62
+    paper: 63
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -79,25 +67,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def self.icon_for(kind)
     icons = {
-      'administrators' => Icon::UNIVERSITY_PERSON_ADMINISTRATORS,
-      'authors' => Icon::UNIVERSITY_PERSON,
       'blank' => 'font',
       'diploma' => Icon::EDUCATION_DIPLOMA,
-      'diplomas' => Icon::EDUCATION_DIPLOMA,
-      'posts' => Icon::COMMUNICATION_WEBSITE_POST,
       'post' => Icon::COMMUNICATION_WEBSITE_POST,
       'category' => Icon::COMMUNICATION_WEBSITE_POST,
       'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
       'program' => Icon::EDUCATION_PROGRAM,
-      'programs' => Icon::EDUCATION_PROGRAM,
       'paper' => Icon::RESEARCH_LABORATORY,
-      'papers' => Icon::RESEARCH_LABORATORY,
-      'volumes' => Icon::RESEARCH_LABORATORY,
       'volume' => Icon::RESEARCH_LABORATORY,
-      'researchers' => Icon::RESEARCH_RESEARCHER,
-      'organizations' => Icon::UNIVERSITY_ORGANIZATION,
-      'persons' => Icon::UNIVERSITY_PERSON,
-      'teachers' => Icon::EDUCATION_TEACHER,
       'url' => 'globe',
     }
     "fas fa-#{icons[kind]}" if icons.has_key? kind
