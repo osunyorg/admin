@@ -48,7 +48,7 @@ class University < ApplicationRecord
 
   validates_presence_of :name
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
-  validates :logo, size: { less_than: 5.megabytes }
+  validates :logo, size: { less_than: 1.megabytes }
 
   after_destroy :destroy_remaining_blobs
 

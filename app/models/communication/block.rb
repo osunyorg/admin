@@ -28,7 +28,7 @@ class Communication::Block < ApplicationRecord
   include WithPosition
   include Accessible
 
-  IMAGE_MAX_SIZE = 5000 # ko
+  IMAGE_MAX_SIZE = 5.megabytes
 
   belongs_to :about, polymorphic: true
 

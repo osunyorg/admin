@@ -69,9 +69,9 @@
       },
       uploadFile(file, object, key) {
         var url = this.directUpload.url,
-            size = Math.round(file.size / 1024);
-        if (size > <%= Communication::Block::IMAGE_MAX_SIZE %>) {
-          alert("<%= t('admin.communication.blocks.alerts.image_is_too_big').html_safe %> (" + size + " ko > "+ <%= Communication::Block::IMAGE_MAX_SIZE %> +" ko)");
+            size = Math.round(file.size / 1024 / 1024);
+        if (file.size > <%= Communication::Block::IMAGE_MAX_SIZE %>) {
+          alert("<%= t('admin.communication.blocks.alerts.image_is_too_big').html_safe %> (" + size + " Mo > <%= number_to_human_size Communication::Block::IMAGE_MAX_SIZE %>)");
           return;
         }
         var upload = new ActiveStorage.DirectUpload(file, url);
