@@ -12,6 +12,8 @@ module Communication::Website::WithMenus
 
   def menu_item_kinds
     Communication::Website::Menu::Item.kinds.reject do |key, value|
+      # TODO: Supprimer quand les pages spéciales seront en kind=page
+      next true if ["programs", "diplomas", "posts", "organizations", "persons", "administrators", "authors", "researchers", "teachers", "volumes", "papers"].include?(key)
       method_name = "menu_item_kind_#{key}?"
       respond_to?(method_name) && !public_send(method_name)
     end

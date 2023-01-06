@@ -36,7 +36,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
   include Sanitizable
   include WithTree
   include WithPosition
-  include WithTargets
 
   attr_accessor :skip_publication_callback
 
@@ -53,13 +52,16 @@ class Communication::Website::Menu::Item < ApplicationRecord
     blank: 0,
     url: 10,
     page: 20,
-    programs: 30,
     program: 31,
-    diplomas: 32,
     diploma: 33,
-    posts: 40,
     category: 41,
     post: 42,
+    volume: 61,
+    paper: 63,
+    # Legacy (remove when no menu items remain with these kinds)
+    programs: 30,
+    diplomas: 32,
+    posts: 40,
     organizations: 45,
     persons: 50,
     administrators: 51,
@@ -67,9 +69,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     researchers: 53,
     teachers: 54,
     volumes: 60,
-    volume: 61,
-    papers: 62,
-    paper: 63
+    papers: 62
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -108,17 +108,17 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def static_target
-    target = nil
-    active = website.send "menu_item_kind_#{kind}?"
-    return nil unless active
-    # Les méthodes target_for_ sont définies dans le concern WithTarget
-    method = "target_for_#{kind}"
-    # Le true sert à examiner les méthodes protected
-    target = respond_to?(method, true)  ? send(method)
-                                        : about&.path
-    return nil if target.nil?
-    target.end_with?('/') ? target
-                          : "#{target}/"
+    test_kind_method = "menu_item_kind_#{kind}?"
+    return nil if website.respond_to?(test_kind_method) && !website.public_send(test_kind_method)
+
+    case kind
+    when "blank"
+      ''
+    when "url"
+      url
+    else
+      about.new_permalink_in_website(website).computed_path
+    end
   end
 
   def list_of_other_items
