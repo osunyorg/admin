@@ -40,6 +40,7 @@ class Education::School < ApplicationRecord
   has_one_attached_deletable :logo
 
   validates :name, :address, :city, :zipcode, :country, presence: true
+  validates :logo, size: { less_than: 1.megabytes }
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {

@@ -40,12 +40,14 @@ class Communication::Extranet < ApplicationRecord
   include WithSso
   include WithUniversity
 
-  validates_presence_of :name, :host
-
   has_one_attached_deletable :logo
   has_one_attached_deletable :favicon do |attachable|
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
+
+  validates_presence_of :name, :host
+  validates :logo, size: { less_than: 1.megabytes }
+  validates :favicon, size: { less_than: 1.megabytes }
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {

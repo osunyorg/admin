@@ -95,6 +95,7 @@ class Education::Program < ApplicationRecord
   has_one_attached_deletable :downloadable_summary
 
   validates_presence_of :name
+  validates :downloadable_summary, size: { less_than: 50.megabytes }
 
   after_save :update_children_paths, if: :saved_change_to_path?
 

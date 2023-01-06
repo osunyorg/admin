@@ -3,6 +3,8 @@ module WithFeaturedImage
 
   included do
     has_one_attached_deletable :featured_image
+
+    validates :featured_image, size: { less_than: 5.megabytes }
   end
 
   # Can be overwrite to get featured_image from associated objects (ex: parents)
