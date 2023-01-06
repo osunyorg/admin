@@ -1,19 +1,17 @@
 <% content_for :title, @organization %>
 <div class="row">
   <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0"><%= t('content') %></h5>
+    <%= render 'admin/application/chapo/show', about: @organization %>
+    <% if strip_tags(@organization.text.to_html).present? %>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0"><%= University::Organization.human_attribute_name(:text) %></h5>
+        </div>
+        <div class="card-body">
+          <%= @organization.text.to_s.html_safe %>
+        </div>
       </div>
-      <div class="card-body">
-        <% [:name].each do |property| %>
-          <h3 class="h5"><%= University::Organization.human_attribute_name(property) %></h3>
-          <p><%= @organization.send property %></p>
-        <% end %>
-        <h3 class="h5"><%= University::Organization.human_attribute_name(:text) %></h3>
-        <%= @organization.text.to_s.html_safe %>
-      </div>
-    </div>
+    <% end %>
     <div class="card flex-fill w-100">
       <div class="card-header">
         <h5 class="card-title mb-0">
