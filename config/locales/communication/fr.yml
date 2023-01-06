@@ -570,83 +570,51 @@ fr:
       pages:
         defaults:
           accessibility:
-            admin_description: page accessibilité
-            description_short: ''
             slug: accessibilite
             title: Accessibilité
-          administrators:
-            admin_description: liste des membres de l'équipe administrative
-            description_short: Liste des membres de l'équipe administrative
+          administrator:
             slug: equipe-administrative
             title: Équipe administrative
-          authors:
-            admin_description: liste des membres de l'équipe éditoriale
-            description_short: Liste des membres de l'équipe éditoriale
+          author:
             slug: equipe-editoriale
             title: Équipe éditoriale
-          communication_posts:
-            admin_description: liste des actualités
-            description_short: Liste des actualités
+          communication_post:
             slug: actualites
             title: Actualités
-          education_diplomas:
-            admin_description: liste des diplômes proposés
-            description_short: Liste des diplômes proposés
+          education_diploma:
             slug: diplomes
             title: "Diplômes"
-          education_programs:
-            admin_description: liste des formations proposées
-            description_short: Liste des formations proposées
-            slug: offre-de-formation
-            title: "L'offre de formation"
+          education_program:
+            slug: formations
+            title: "Formations"
           home:
-            admin_description: page d'accueil du site
-            description_short: ''
-            slug: ''
+            slug: 
             title: Accueil
-          legal_terms:
-            admin_description: page des mentions légales
-            description_short: ''
+          legal_term:
             slug: mentions-legales
             title: Mentions légales
-          organizations:
-            admin_description: page des organisations
-            description_short: Liste des organisations
+          organization:
             slug: organisations
             title: Organisations
-          persons:
-            admin_description: liste des membres de l'équipe
-            description_short: Liste des membres de l'équipe
+          person:
             slug: equipe
             title: Équipe
           privacy_policy:
-            admin_description: page de la politique de confidentialité
-            description_short: ''
             slug: politique-de-confidentialite
             title: Politique de confidentialité
-          research_papers:
-            admin_description: liste des papiers
-            description_short: Liste des papiers
+          research_paper:
             slug: papiers
             title: Papiers
-          research_volumes:
-            admin_description: liste des volumes
-            description_short: Liste des volumes
+          research_volume:
             slug: volumes
             title: Volumes
-          researchers:
-            admin_description: liste des membres de l'équipe de recherche
-            description_short: Liste des membres de l'équipe de recherche
+          researcher:
             slug: equipe-de-recherche
             title: Équipe de recherche
           sitemap:
-            admin_description: page plan du site
-            description_short: ''
             slug: plan-du-site
             title: Plan du site
-          teachers:
-            admin_description: liste des membres de l'équipe pédagogique
-            description_short: Liste des membres de l'équipe pédagogique
+          teacher:
             slug: equipe-pedagogique
             title: Équipe pédagogique
       posts:

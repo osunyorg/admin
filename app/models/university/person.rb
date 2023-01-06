@@ -173,6 +173,7 @@ class University::Person < ApplicationRecord
   end
 
   def websites
+    # FIXME: Sera corrigé avec les liens directs
     university.communication_websites
   end
 

@@ -59,7 +59,8 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def self.for_object(object, website)
-    permalink_class = MAPPING[object.class.to_s]
+    lookup_key = self.lookup_key_for_object(object)
+    permalink_class = MAPPING[lookup_key]
     raise ArgumentError.new("Permalinks do not handle an object of type #{object.class.to_s}") if permalink_class.nil?
     permalink_class.new(website: website, about: object)
   end
@@ -69,8 +70,16 @@ class Communication::Website::Permalink < ApplicationRecord
     false
   end
 
+  def self.lookup_key_for_object(object)
+    lookup_key = object.class.to_s
+    # Special pages are defined as STI classes (e.g. Communication::Website::Page::Home) but permalinks are handled the same way.
+    lookup_key = "Communication::Website::Page" if lookup_key.starts_with?("Communication::Website::Page")
+    lookup_key
+  end
+
   def self.supported_by?(object)
-    MAPPING.keys.include?(object.class.to_s)
+    lookup_key = self.lookup_key_for_object(object)
+    MAPPING.keys.include?(lookup_key)
   end
 
   def self.pattern_in_website(website)

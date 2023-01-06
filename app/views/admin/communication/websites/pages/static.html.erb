@@ -3,16 +3,8 @@ title: >
   <%= @about.title %>
 breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
 <%= render 'admin/application/static/permalink' %>
-<% 
-case @about.kind
-when  'education_programs', 
-      'education_diplomas',
-      'communication_posts' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<% else %>
 <%= render 'admin/application/static/design' %>
-<% end %>
-<% if @about.kind_persons? %>
+<% if @about.is_a?(Communication::Website::Page::Person) %>
 has:
   administrators: <%= @website.has_administrators? %>
   authors: <%= @website.has_authors? %>

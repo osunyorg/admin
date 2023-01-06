@@ -8,7 +8,6 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    BlocksMigration.cleanup
   end
 
   namespace :websites do

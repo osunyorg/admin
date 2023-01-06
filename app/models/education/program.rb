@@ -137,7 +137,7 @@ class Education::Program < ApplicationRecord
   end
 
   def path_in_website(website)
-    "#{website.special_page(:education_programs)&.path}#{path}".gsub('//', '/')
+    Static.clean_path "#{website.special_page(Communication::Website::Page::EducationProgram)&.path}#{path}"
   end
 
   def git_dependencies(website)

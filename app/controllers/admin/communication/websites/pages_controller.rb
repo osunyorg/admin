@@ -3,7 +3,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
                               through: :website
 
   def index
-    @homepage = @website.pages.kind_home.first
+    @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
     breadcrumb
   end
@@ -28,6 +28,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def show
     breadcrumb
+    add_breadcrumb(@page, admin_communication_website_page_path(@page))
   end
 
   def static
@@ -42,10 +43,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def new
     @page.website = @website
     breadcrumb
+    add_breadcrumb(t('create'))
   end
 
   def edit
     breadcrumb
+    add_breadcrumb(@page, admin_communication_website_page_path(@page))
     add_breadcrumb t('edit')
   end
 
@@ -56,6 +59,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
     else
       breadcrumb
+      add_breadcrumb(t('create'))
       render :new, status: :unprocessable_entity
     end
   end
@@ -66,6 +70,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
     else
       breadcrumb
+      add_breadcrumb(@page, admin_communication_website_page_path(@page))
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
@@ -91,7 +96,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     super
     add_breadcrumb  t('admin.communication.website.pages.structure'),
                     admin_communication_website_pages_path
-    breadcrumb_for @page
   end
 
   def page_params

@@ -81,7 +81,13 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = [self, config_default_languages, config_default_permalinks, config_development_config, config_production_config] + menus
+    dependencies = [
+      self,
+      config_default_languages, 
+      config_default_permalinks, 
+      config_development_config, 
+      config_production_config
+    ] + menus
     dependencies += pages + pages.includes(parent: { featured_image_attachment: :blob }, featured_image_attachment: :blob).map(&:active_storage_blobs).flatten
     dependencies += posts + posts.includes(featured_image_attachment: :blob).map(&:active_storage_blobs).flatten
     dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten
