@@ -3,7 +3,7 @@ class Communication::Block::Template::Image < Communication::Block::Template::Ba
   has_component :image, :image
   has_component :alt, :string
   has_component :credit, :rich_text
-  has_component :text, :text
+  has_component :text, :rich_text
 
   protected
 
