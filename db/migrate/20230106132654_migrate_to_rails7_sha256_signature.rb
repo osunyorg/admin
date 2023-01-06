@@ -35,7 +35,7 @@ class MigrateToRails7Sha256Signature < ActiveRecord::Migration[7.0]
       begin
         # Try to find blob with ID from SHA1-signed_id
         key_generator = ActiveSupport::KeyGenerator.new(
-          Rails.application.secrets.secret_key_base,
+          Rails.application.secret_key_base,
           iterations: 1000,
           hash_digest_class: OpenSSL::Digest::SHA1
         )
