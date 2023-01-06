@@ -97,8 +97,11 @@ en:
         filename: Filename
       communication/website/menu:
         identifier: Identifier
-        title: Title
         items: Items
+        legal: Legal
+        primary: Main menu
+        social: Social
+        title: Title
       communication/website/menu/item:
         about: Target
         children: Children items
