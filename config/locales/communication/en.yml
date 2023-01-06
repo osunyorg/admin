@@ -99,6 +99,9 @@ en:
         identifier: Identifier
         title: Title
         items: Items
+        primary: Main menu
+        legal: Legal
+        social: Social
       communication/website/menu/item:
         about: Target
         children: Children items

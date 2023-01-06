@@ -100,14 +100,15 @@ module Communication::Website::WithMenus
   protected
 
   def initialize_menus
-    create_menu 'Primary'
-    create_menu 'Legal'
-    create_menu 'Social'
+    create_menu 'primary'
+    create_menu 'legal'
+    create_menu 'social'
   end
 
-  def create_menu(title)
+  def create_menu(identifier)
+    title = Communication::Website::Menu.human_attribute_name(identifier)
     menus.create  title: title,
-                  identifier: title.parameterize,
+                  identifier: identifier,
                   university: university
   end
 end

@@ -99,6 +99,9 @@ fr:
         identifier: Identifiant
         title: Titre
         items: Éléments
+        primary: Menu principal
+        legal: Informations légales
+        social: Liens sociaux
       communication/website/menu/item:
         about: Cible
         children: Sous-éléments
