@@ -58,7 +58,10 @@ module Communication::Website::WithMenus
   end
 
   def menu_item_kind_organizations?
-    has_organizations?
+    # TODO: has_organization takes a looong time when having a lot of blocks.
+    # when we have a direct relation between website & organizations re-adjust this test.
+    # has_organizations?
+    true
   end
 
   def menu_item_kind_persons?
