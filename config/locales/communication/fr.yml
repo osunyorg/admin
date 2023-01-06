@@ -97,11 +97,11 @@ fr:
         filename: Nom du fichier
       communication/website/menu:
         identifier: Identifiant
-        title: Titre
         items: Éléments
-        primary: Menu principal
         legal: Informations légales
+        primary: Menu principal
         social: Liens sociaux
+        title: Titre
       communication/website/menu/item:
         about: Cible
         children: Sous-éléments
