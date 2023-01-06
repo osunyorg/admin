@@ -156,6 +156,8 @@ fr:
   admin:
     communication:
       blocks:
+        alerts:
+          image_is_too_big: L'image est trop grosse !
         categories:
           basic:
             label: Blocs de base

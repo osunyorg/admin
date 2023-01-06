@@ -51,7 +51,7 @@
       return {
         directUpload: {
           url: "<%= rails_direct_uploads_url.html_safe %>",
-          blobUrlTemplate: "<%= rails_service_blob_url(":signed_id", ":filename").html_safe %>"
+          blobUrlTemplate: "<%= medium_url(":signed_id", ":filename").html_safe %>"
         },
         data: <%= @block.data.to_json.html_safe %>,
         <% if @element %>
@@ -68,7 +68,12 @@
         this.uploadFile(files[0], object, key);
       },
       uploadFile(file, object, key) {
-        var url = this.directUpload.url;
+        var url = this.directUpload.url,
+            size = Math.round(file.size / 1024);
+        if (size > <%= Communication::Block::IMAGE_MAX_SIZE %>) {
+          alert("<%= t('admin.communication.blocks.alerts.image_is_too_big').html_safe %> (" + size + " ko > "+ <%= Communication::Block::IMAGE_MAX_SIZE %> +" ko)");
+          return;
+        }
         var upload = new ActiveStorage.DirectUpload(file, url);
         upload.create(function (error, blob) {
           if (error) {
@@ -88,7 +93,7 @@
           .replace(':filename', filename);
       },
       getImageUrl(data) {
-        return this.getFileUrl(data.signed_id, data.filename);
+        return this.getFileUrl(data.signed_id, "image_1024x.jpg");
       },
       handleSummernotes() {
         var $summernoteElements = $('.summernote-vue');

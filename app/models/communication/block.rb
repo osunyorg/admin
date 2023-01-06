@@ -28,6 +28,8 @@ class Communication::Block < ApplicationRecord
   include WithPosition
   include Accessible
 
+  IMAGE_MAX_SIZE = 5000 # ko
+
   belongs_to :about, polymorphic: true
 
   # Used to purge images when unattaching them
