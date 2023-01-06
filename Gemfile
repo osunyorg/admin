@@ -5,6 +5,7 @@ ruby '3.1.3'
 
 # Infrastructure
 gem 'activestorage-scaleway-service'#, path: '../activestorage-scaleway-service'
+gem 'active_storage_validations'
 gem 'angularjs-rails'
 gem 'aws-sdk-s3'
 gem 'bootstrap'
@@ -41,7 +42,7 @@ gem 'omniauth-saml', '~> 2.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 7.0'
-gem "rails-autocomplete", "~> 2.0"
+gem 'rails-autocomplete', '~> 2.0'
 gem 'rails-i18n'
 gem 'roo', "~> 2.9"
 gem 'sanitize'

@@ -38,3 +38,65 @@ main.content
 .sidebar[data-auto-collapsed] + .footer.fixed
     @include media-breakpoint-up(lg)
         left: 0
+
+.invalid-feedback
+    display: block
+
+h1
+    margin-bottom: 30px
+
+.sidebar-nav .fas
+    min-width: 20px
+
+.sidebar
+    background: black
+    footer
+        a
+            padding: 0.625rem 1.625rem
+.sidebar-content
+    background-color: black
+    background-image: asset-url('sun.svg')
+    background-position-x: center
+    background-position-y: -420px
+    background-repeat: no-repeat
+    background-size: 400%
+.sidebar-brand
+    padding: 90px 80px 120px
+.disabled
+    opacity: 0.6
+    pointer-events: none
+.sidebar-link, a.sidebar-link
+    color: rgba(255, 255, 255, 0.8)
+.sidebar-item.active .sidebar-link:hover, .sidebar-item.active > .sidebar-link
+    color: white
+
+#topbar
+    padding-left: $grid-gutter-width
+    padding-right: $grid-gutter-width
+    @include media-breakpoint-up(lg)
+        padding-left: 2.5rem
+        padding-right: 2.5rem
+    .nav-link--last
+        padding-right: 0
+
+.img-circle
+    aspect-ratio: 1/1
+    object-fit: cover
+    width: 100%
+
+.img-fill
+    width: 100%
+
+.card-actions
+    .accordion-button
+        box-shadow: none
+        padding: 0.5rem 0
+
+.draft
+    opacity: 0.5
+
+.btn-light[target=_blank]::after
+    filter: invert(0)
+
+.bg-grey
+    background-color: #DDDDDD !important
