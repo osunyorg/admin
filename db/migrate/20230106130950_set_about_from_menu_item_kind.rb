@@ -14,12 +14,11 @@ class SetAboutFromMenuItemKind < ActiveRecord::Migration[7.0]
       '62' => Communication::Website::Page::ResearchPaper
     }
 
-    websites = Communication::Website.where(id: Communication::Website::Menu::Item.where(kind: mapping.keys).distinct.pluck(:website_id))
-    Communication::Website::Menu::Item.includes(:website).where(kind: mapping.keys.map(&:to_i)).find_each do |menu_item|
+    kinds = mapping.keys.map(&:to_i)
+    Communication::Website::Menu::Item.includes(:website).where(kind: kinds).find_each do |menu_item|
       page_class = mapping[menu_item.kind_before_type_cast.to_s]
       about = menu_item.website.special_page(page_class)
       menu_item.update(about: about, kind: :page)
     end
-    websites.find_each(&:sync_with_git)
   end
 end
