@@ -12,7 +12,7 @@
         <div class="card">
           <div class="card-body">
             <%= t('admin.communication.website.pages.is_special_page') %>
-            <b><%= t("communication.website.pages.defaults.#{@page.kind}.admin_description") %></b>
+            <b><%= t("communication.website.pages.defaults.#{@page.type_key}.title") %></b>
           </div>
         </div>
       <% end %>
@@ -106,5 +106,5 @@
 
 <% content_for :action_bar_right do %>
   <%= preview_link %>
-  <%= edit_link @page %>
+  <%= link_to t('edit'), edit_admin_communication_website_page_path(@page), class: button_classes %>
 <% end %>

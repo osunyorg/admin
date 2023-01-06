@@ -2,6 +2,8 @@
 title: >
   <%= @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/chapo/static' %>
+<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 first_name: >
   <%= @about.first_name %>
 last_name: >
@@ -21,7 +23,6 @@ image: "<%= @about.best_picture.blob.id %>"
 <% end %>
 description: >
   <%= prepare_text_for_static @about.description %>
-<%= render 'admin/application/chapo/static' %>
 roles:
 <% if @about.author.for_website?(@website) %>
   - author

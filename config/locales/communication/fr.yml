@@ -97,8 +97,11 @@ fr:
         filename: Nom du fichier
       communication/website/menu:
         identifier: Identifiant
-        title: Titre
         items: Éléments
+        legal: Informations légales
+        primary: Menu principal
+        social: Liens sociaux
+        title: Titre
       communication/website/menu/item:
         about: Cible
         children: Sous-éléments
@@ -277,14 +280,20 @@ fr:
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:
+              alphabetical:
+                label: Ordre alphabétique
               caption:
                 label: Transcription textuelle
                 placeholder: Entrer ici la transcription textuelle du tableau
+              description:
+                label: Description
           definitions:
             description: Une liste de termes et leur définition. Un genre de dictionnaire, finalement.
             edit:
               add_definition: Ajouter une définition
               remove_definition: Supprimer la définition
+              description:
+                label: Description
               element:
                 title:
                   label: Titre
@@ -564,83 +573,51 @@ fr:
       pages:
         defaults:
           accessibility:
-            admin_description: page accessibilité
-            description_short: ''
             slug: accessibilite
             title: Accessibilité
-          administrators:
-            admin_description: liste des membres de l'équipe administrative
-            description_short: Liste des membres de l'équipe administrative
+          administrator:
             slug: equipe-administrative
             title: Équipe administrative
-          authors:
-            admin_description: liste des membres de l'équipe éditoriale
-            description_short: Liste des membres de l'équipe éditoriale
+          author:
             slug: equipe-editoriale
             title: Équipe éditoriale
-          communication_posts:
-            admin_description: liste des actualités
-            description_short: Liste des actualités
+          communication_post:
             slug: actualites
             title: Actualités
-          education_diplomas:
-            admin_description: liste des diplômes proposés
-            description_short: Liste des diplômes proposés
+          education_diploma:
             slug: diplomes
             title: "Diplômes"
-          education_programs:
-            admin_description: liste des formations proposées
-            description_short: Liste des formations proposées
-            slug: offre-de-formation
-            title: "L'offre de formation"
+          education_program:
+            slug: formations
+            title: "Formations"
           home:
-            admin_description: page d'accueil du site
-            description_short: ''
-            slug: ''
+            slug: 
             title: Accueil
-          legal_terms:
-            admin_description: page des mentions légales
-            description_short: ''
+          legal_term:
             slug: mentions-legales
             title: Mentions légales
-          organizations:
-            admin_description: page des organisations
-            description_short: Liste des organisations
+          organization:
             slug: organisations
             title: Organisations
-          persons:
-            admin_description: liste des membres de l'équipe
-            description_short: Liste des membres de l'équipe
+          person:
             slug: equipe
             title: Équipe
           privacy_policy:
-            admin_description: page de la politique de confidentialité
-            description_short: ''
             slug: politique-de-confidentialite
             title: Politique de confidentialité
-          research_papers:
-            admin_description: liste des papiers
-            description_short: Liste des papiers
+          research_paper:
             slug: papiers
             title: Papiers
-          research_volumes:
-            admin_description: liste des volumes
-            description_short: Liste des volumes
+          research_volume:
             slug: volumes
             title: Volumes
-          researchers:
-            admin_description: liste des membres de l'équipe de recherche
-            description_short: Liste des membres de l'équipe de recherche
+          researcher:
             slug: equipe-de-recherche
             title: Équipe de recherche
           sitemap:
-            admin_description: page plan du site
-            description_short: ''
             slug: plan-du-site
             title: Plan du site
-          teachers:
-            admin_description: liste des membres de l'équipe pédagogique
-            description_short: Liste des membres de l'équipe pédagogique
+          teacher:
             slug: equipe-pedagogique
             title: Équipe pédagogique
       posts:
@@ -710,5 +687,7 @@ fr:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
+        text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
       communication_website_post:
         description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
+        text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.

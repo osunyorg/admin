@@ -28,12 +28,14 @@
 
 one:
   university: default_university
+  school: default_school
   program: one
   academic_year: one
   name: MyString
 
 two:
   university: default_university
+  school: default_school
   program: two
   academic_year: two
   name: MyString

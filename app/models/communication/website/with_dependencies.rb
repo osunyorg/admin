@@ -7,11 +7,6 @@ module Communication::Website::WithDependencies
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
-    has_many    :menus,
-                class_name: 'Communication::Website::Menu',
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
     has_many    :posts,
                 foreign_key: :communication_website_id,
                 dependent: :destroy
@@ -41,7 +36,7 @@ module Communication::Website::WithDependencies
   end
 
   def blocks_dependencies
-    blocks_dependencies ||= blocks.collect(&:git_dependencies).flatten.compact.uniq
+    @blocks_dependencies ||= blocks.collect(&:git_dependencies).flatten.compact.uniq
   end
 
   def education_diplomas
@@ -61,19 +56,19 @@ module Communication::Website::WithDependencies
   end
 
   def administrators
-    about.administrators
+    about&.administrators
   end
 
   def researchers
-    about.researchers
+    about&.researchers
   end
 
   def teachers
-    about.teachers
+    about&.teachers
   end
 
   def people_in_blocks
-    blocks_dependencies.reject { |dependency| !dependency.is_a? University::Person }
+    @people_in_blocks ||= blocks_dependencies.reject { |dependency| !dependency.is_a? University::Person }
   end
 
   def organizations
@@ -81,11 +76,11 @@ module Communication::Website::WithDependencies
   end
 
   def organizations_in_blocks
-    blocks_dependencies.reject { |dependency| !dependency.is_a? University::Organization }
+    @organizations_in_blocks ||= blocks_dependencies.reject { |dependency| !dependency.is_a? University::Organization }
   end
 
   def people_with_facets_in_blocks
-    blocks_dependencies.reject { |dependency| !dependency.class.to_s.start_with?('University::Person') }
+    @people_with_facets_in_blocks ||= blocks_dependencies.reject { |dependency| !dependency.class.to_s.start_with?('University::Person') }
   end
 
   def people
@@ -112,26 +107,7 @@ module Communication::Website::WithDependencies
     end
   end
 
-  # those tests has_xxx? should match the special page kind
-  def has_home?
-    true
-  end
-
-  def has_legal_terms?
-    true
-  end
-
-  def has_sitemap?
-    true
-  end
-
-  def has_privacy_policy?
-    true
-  end
-
-  def has_accessibility?
-    true
-  end
+  # Deprecated, needs refactor for performance
 
   def has_communication_posts?
     posts.published.any?

@@ -14,6 +14,7 @@
 #  repository          :string
 #  style               :text
 #  style_updated_at    :date
+#  theme_version       :string
 #  url                 :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -42,10 +43,11 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithImport
-  include WithMenuItems
+  include WithMenus
   include WithProgramCategories
   include WithSpecialPages
   include WithStyle
+  include WithTheme
 
   enum git_provider: {
     github: 0,
@@ -79,9 +81,15 @@ class Communication::Website < ApplicationRecord
   end
 
   def git_dependencies(website)
-    dependencies = [self, config_default_languages, config_default_permalinks, config_development_config, config_production_config] + menus
-    dependencies += pages + pages.map(&:active_storage_blobs).flatten + pages.map(&:git_block_dependencies).flatten
-    dependencies += posts + posts.map(&:active_storage_blobs).flatten + posts.map(&:git_block_dependencies).flatten
+    dependencies = [
+      self,
+      config_default_languages,
+      config_default_permalinks,
+      config_development_config,
+      config_production_config
+    ] + menus
+    dependencies += pages + pages.includes(parent: { featured_image_attachment: :blob }, featured_image_attachment: :blob).map(&:active_storage_blobs).flatten + pages.map(&:git_block_dependencies).flatten
+    dependencies += posts + posts.includes(featured_image_attachment: :blob).map(&:active_storage_blobs).flatten + posts.map(&:git_block_dependencies).flatten
     dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten + people.map(&:git_block_dependencies).flatten
     dependencies += organizations_in_blocks + organizations_in_blocks.map(&:active_storage_blobs).flatten + organizations_in_blocks.map(&:git_block_dependencies).flatten
     dependencies += categories + categories.map(&:git_block_dependencies).flatten

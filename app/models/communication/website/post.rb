@@ -136,8 +136,9 @@ class Communication::Website::Post < ApplicationRecord
   def url
     return unless published
     return if website.url.blank?
-    return if website.special_page(:communication_posts)&.path.blank?
-    "#{website.url}#{website.special_page(:communication_posts).path}#{path}"
+    return if website.special_page(Communication::Website::Page::CommunicationPost)&.path.blank?
+    return if current_permalink_in_website(website).blank?
+    Static.clean_path "#{website.url}#{current_permalink_in_website(website).path}"
   end
 
   def to_s

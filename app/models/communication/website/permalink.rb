@@ -3,17 +3,18 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null
+#  about_type    :string           not null, indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null
+#  about_id      :uuid             not null, indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_communication_website_permalinks_on_about          (about_type,about_id)
 #  index_communication_website_permalinks_on_university_id  (university_id)
 #  index_communication_website_permalinks_on_website_id     (website_id)
 #
@@ -58,7 +59,8 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def self.for_object(object, website)
-    permalink_class = MAPPING[object.class.to_s]
+    lookup_key = self.lookup_key_for_object(object)
+    permalink_class = MAPPING[lookup_key]
     raise ArgumentError.new("Permalinks do not handle an object of type #{object.class.to_s}") if permalink_class.nil?
     permalink_class.new(website: website, about: object)
   end
@@ -68,8 +70,16 @@ class Communication::Website::Permalink < ApplicationRecord
     false
   end
 
+  def self.lookup_key_for_object(object)
+    lookup_key = object.class.to_s
+    # Special pages are defined as STI classes (e.g. Communication::Website::Page::Home) but permalinks are handled the same way.
+    lookup_key = "Communication::Website::Page" if lookup_key.starts_with?("Communication::Website::Page")
+    lookup_key
+  end
+
   def self.supported_by?(object)
-    MAPPING.keys.include?(object.class.to_s)
+    lookup_key = self.lookup_key_for_object(object)
+    MAPPING.keys.include?(lookup_key)
   end
 
   def self.pattern_in_website(website)
@@ -81,8 +91,8 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def computed_path
-    return nil unless published?
-    @computed_path ||= Static.clean_path(published_path)
+    return @computed_path if defined?(@computed_path)
+    @computed_path ||= published? ? Static.clean_path(published_path) : nil
   end
 
   def save_if_needed

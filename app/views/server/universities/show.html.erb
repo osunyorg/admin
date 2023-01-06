@@ -34,29 +34,8 @@
   </div>
 </div>
 
-<h2>Blocks</h2>
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th>Block</th>
-        <th>About</th>
-        <th>Template</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @university.communication_blocks.each do |block| %>
-        <tr>
-          <td><%= block %></td>
-          <td><%= block.about %></td>
-          <td><%= block.template_kind %></td>
-          <td><%= edit_link block %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<h2 class="mt-5 h3"><%= Communication::Website.model_name.human(count: @university.websites.count) %></h2>
+<%= render 'server/websites/list', websites: @university.websites %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>

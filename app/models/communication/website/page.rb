@@ -18,6 +18,7 @@
 #  slug                     :string
 #  text                     :text
 #  title                    :string
+#  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -49,11 +50,11 @@ class Communication::Website::Page < ApplicationRecord
   include WithBlocks
   include WithGit
   include WithFeaturedImage
-  include WithKind
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithPath
+  include WithType
   include WithPermalink
 
   has_summernote :text
@@ -87,10 +88,10 @@ class Communication::Website::Page < ApplicationRecord
                     descendants +
                     active_storage_blobs +
                     siblings +
-                    git_block_dependencies
+                    git_block_dependencies +
+                    type_git_dependencies
     dependencies += [parent] if has_parent?
-    dependencies += special_page_git_dependencies(website) if is_special_page?
-    dependencies.flatten
+    dependencies.flatten.compact
   end
 
   def git_destroy_dependencies(website)
@@ -111,24 +112,19 @@ class Communication::Website::Page < ApplicationRecord
     page
   end
 
-  def full_width
-    kind_home?  ? true
-                : attributes['full_width']
-  end
-
   def to_s
     "#{title}"
   end
 
   def best_featured_image
     # we don't want to fallback on homepage featured_image
-    return featured_image if featured_image.attached? || kind_home? || parent&.kind_home?
+    return featured_image if featured_image.attached? || is_home? || parent&.is_home?
     parent&.best_featured_image
   end
 
   def best_bodyclass
     return bodyclass if bodyclass.present?
-    parent&.best_bodyclass unless kind_home? || parent&.kind_home?
+    parent&.best_bodyclass unless is_home? || parent&.is_home?
   end
 
   def siblings

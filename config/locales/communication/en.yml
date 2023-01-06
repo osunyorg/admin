@@ -97,8 +97,11 @@ en:
         filename: Filename
       communication/website/menu:
         identifier: Identifier
-        title: Title
         items: Items
+        legal: Legal
+        primary: Main menu
+        social: Social
+        title: Title
       communication/website/menu/item:
         about: Target
         children: Children items
@@ -277,9 +280,13 @@ en:
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:
+              alphabetical:
+                label: Alphabetical order
               caption:
                 label: Text transcript
                 placeholder: Enter the text transcript of the table
+              description:
+                label: Description
           definitions:
             description: A list of terms and definitions. We could call it a dictionary.
             edit:
@@ -564,85 +571,53 @@ en:
       pages:
         defaults:
           accessibility:
-            admin_description: accessibility page
-            description_short: ''
             slug: accessibility
             title: Accessibility
-          administrators:
-            admin_description: list of members in the administrative team
-            description_short: List of members in the administrative team
-            slug: administrative-team
-            title: Administrative team
-          authors:
-            admin_description: list of members in the editorial team
-            description_short: List of members in the editorial team
-            slug: editorial-team
-            title: Editorial team
-          communication_posts:
-            admin_description: list of posts
-            description_short: List of posts
+          administrator:
+            slug: administrators
+            title: Administrators
+          author:
+            slug: editors
+            title: Editors
+          communication_post:
             slug: posts
             title: Posts
-          education_diplomas:
-            admin_description: list of available diplomas
-            description_short: List of available diplomas
+          education_diploma:
             slug: diplomas
             title: Diplomas
-          education_programs:
-            admin_description: list of available programs
-            description_short: List of available programs
+          education_program:
             slug: programs
             title: Programs
           home:
-            admin_description: homepage
-            description_short: ''
             slug: ''
             title: Home
-          legal_terms:
-            admin_description: legal terms page
-            description_short: ''
+          legal_term:
             slug: legal-terms
             title: Legal terms
-          organizations:
-            admin_description: organizations page
-            description_short: List of organizations
+          organization:
             slug: organizations
             title: Organizations
-          persons:
-            admin_description: list of members in the team
-            description_short: List of members in the team
+          person:
             slug: team
             title: Team
           privacy_policy:
-            admin_description: privacy policy page
-            description_short: ''
             slug: privacy-policy
             title: Privacy policy
-          research_papers:
-            admin_description: list of papers
-            description_short: List of papers
+          research_paper:
             slug: papers
             title: Papers
-          research_volumes:
-            admin_description: list of volumes
-            description_short: List of volumes
+          research_volume:
             slug: volumes
             title: Volumes
-          researchers:
-            admin_description: list of members in the research team
-            description_short: List of members in the research team
-            slug: research-team
-            title: Research team
+          researcher:
+            slug: researchers
+            title: Researchers
           sitemap:
-            admin_description: sitemap page
-            description_short: ''
             slug: sitemap
             title: Sitemap
-          teachers:
-            admin_description: list of members in the educational team
-            description_short: List of members in the educational team
-            slug: educational-team
-            title: Educational team
+          teacher:
+            slug: teachers
+            title: Teachers
       posts:
         new_curation: New curation
         published: Published

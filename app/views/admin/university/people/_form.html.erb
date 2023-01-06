@@ -28,7 +28,7 @@
             </div>
           </div>
           <%= f.input :description_short %>
-          <%= f.input :biography, 
+          <%= f.input :biography,
                       as: :summernote,
                       input_html: {
                         data: { 'summernote-config' => 'mini-list' }
@@ -42,6 +42,7 @@
           </h5>
         </div>
         <div class="card-body">
+          <p><em><%= t("university.person.personal_data_warning") %></em></p>
           <div class="row">
             <div class="col-md-6">
               <%= f.input :email %>

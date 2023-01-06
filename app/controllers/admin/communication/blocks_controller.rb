@@ -13,11 +13,14 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def new
-    @block.about_type = params[:about_type]
-    @block.about_id = params[:about_id]
+    about_class = params[:about_type].constantize
+    about = about_class.find params[:about_id]
+    # Rails uses ActiveRecord::Inheritance#polymorphic_name to hydrate the about_type.
+    # Example: A Block for a Communication::Website::Page::Home will have about_type = "Communication::Website::Page"
+    @block.about = about
     breadcrumb
   end
-  
+
   def show
     breadcrumb
   end
@@ -73,7 +76,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def about_path
     # La formation ou la page concernée
-    path_method = "admin_#{@block.about.class.to_s.parameterize.underscore}_path"
+    path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
     send path_method, id: @block.about_id, website_id: website_id
   end
 

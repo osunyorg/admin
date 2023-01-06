@@ -26,7 +26,9 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
   test "should_create? a new file" do
     VCR.use_cassette(location) do
       file = communication_website_git_files(:git_file_1)
-      assert file.should_create?
+      analyzer = Git::Analyzer.new(file.website.git_repository)
+      analyzer.git_file = file
+      assert analyzer.should_create?
     end
   end
 
@@ -40,7 +42,9 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
       # Then i got the sha and path, pasted it in the fixtures,
       # changed the text so the content would need an update.
       file = communication_website_git_files(:git_file_2)
-      assert file.should_update?
+      analyzer = Git::Analyzer.new(file.website.git_repository)
+      analyzer.git_file = file
+      assert analyzer.should_update?
     end
   end
 end

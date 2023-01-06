@@ -3,17 +3,18 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null
+#  about_type    :string           not null, indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null
+#  about_id      :uuid             not null, indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_communication_website_permalinks_on_about          (about_type,about_id)
 #  index_communication_website_permalinks_on_university_id  (university_id)
 #  index_communication_website_permalinks_on_website_id     (website_id)
 #
@@ -33,6 +34,6 @@ class Communication::Website::Permalink::Organization < Communication::Website::
 
   # /organisations/:slug/
   def self.pattern_in_website(website)
-    "/#{website.special_page(:organizations).slug_with_ancestors}/:slug/"
+    "/#{website.special_page(Communication::Website::Page::Organization).slug_with_ancestors}/:slug/"
   end
 end

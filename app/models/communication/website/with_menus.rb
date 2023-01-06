@@ -1,5 +1,14 @@
-module Communication::Website::WithMenuItems
+module Communication::Website::WithMenus
   extend ActiveSupport::Concern
+
+  included do
+    has_many    :menus,
+                class_name: 'Communication::Website::Menu',
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
+    after_create :initialize_menus
+  end
 
   def menu_item_kinds
     Communication::Website::Menu::Item.kinds.reject do |key, value|
@@ -49,7 +58,10 @@ module Communication::Website::WithMenuItems
   end
 
   def menu_item_kind_organizations?
-    has_organizations?
+    # TODO: has_organization takes a looong time when having a lot of blocks.
+    # when we have a direct relation between website & organizations re-adjust this test.
+    # has_organizations?
+    true
   end
 
   def menu_item_kind_persons?
@@ -86,5 +98,20 @@ module Communication::Website::WithMenuItems
 
   def menu_item_kind_paper?
     has_research_papers?
+  end
+
+  protected
+
+  def initialize_menus
+    create_menu 'primary'
+    create_menu 'legal'
+    create_menu 'social'
+  end
+
+  def create_menu(identifier)
+    title = Communication::Website::Menu.human_attribute_name(identifier)
+    menus.create  title: title,
+                  identifier: identifier,
+                  university: university
   end
 end

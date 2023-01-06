@@ -173,6 +173,7 @@ class University::Person < ApplicationRecord
   end
 
   def websites
+    # FIXME: Sera corrigé avec les liens directs
     university.communication_websites
   end
 
@@ -208,11 +209,11 @@ class University::Person < ApplicationRecord
   end
 
   def for_website?(website)
-    in_block_dependencies?(website) ||
     administrator.for_website?(website) ||
     author.for_website?(website) ||
     researcher.for_website?(website) ||
-    teacher.for_website?(website)
+    teacher.for_website?(website) ||
+    in_block_dependencies?(website)
   end
 
   def full_street_address

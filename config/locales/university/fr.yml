@@ -34,7 +34,7 @@ fr:
         communication_website_posts: Actualités
         contacts: Coordonnées
         country: Pays
-        description: Meta Description
+        description: Meta description
         description_short: Chapô
         education_programs: Formations
         email: Email
@@ -83,7 +83,8 @@ fr:
       university/organization:
         name: Nom
         long_name: Nom complet
-        description: Meta Description
+        description: Meta description
+        description_short: Chapô
         text: Texte
         contact: Informations de contact
         legal: Informations légales
@@ -191,6 +192,7 @@ fr:
         no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste, vous pouvez la <a href=\"%{url}\">créer</a>"
         no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste, il faut demander à la créer"
         period: Période
+      personal_data_warning: Attention ! Les informations renseignées ici sont susceptibles d'être visibles publiquement sur les sites web et les extranets vous concernant.
       taught_programs: Formations enseignées
     sso: SSO
     sso_key: Clé sur le SSO
