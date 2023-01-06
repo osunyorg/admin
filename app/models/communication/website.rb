@@ -83,16 +83,16 @@ class Communication::Website < ApplicationRecord
   def git_dependencies(website)
     dependencies = [
       self,
-      config_default_languages, 
-      config_default_permalinks, 
-      config_development_config, 
+      config_default_languages,
+      config_default_permalinks,
+      config_development_config,
       config_production_config
     ] + menus
-    dependencies += pages + pages.includes(parent: { featured_image_attachment: :blob }, featured_image_attachment: :blob).map(&:active_storage_blobs).flatten
-    dependencies += posts + posts.includes(featured_image_attachment: :blob).map(&:active_storage_blobs).flatten
-    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten
-    dependencies += organizations_in_blocks + organizations_in_blocks.map(&:active_storage_blobs).flatten
-    dependencies += categories
+    dependencies += pages + pages.includes(parent: { featured_image_attachment: :blob }, featured_image_attachment: :blob).map(&:active_storage_blobs).flatten + pages.map(&:git_block_dependencies).flatten
+    dependencies += posts + posts.includes(featured_image_attachment: :blob).map(&:active_storage_blobs).flatten + posts.map(&:git_block_dependencies).flatten
+    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten + people.map(&:git_block_dependencies).flatten
+    dependencies += organizations_in_blocks + organizations_in_blocks.map(&:active_storage_blobs).flatten + organizations_in_blocks.map(&:git_block_dependencies).flatten
+    dependencies += categories + categories.map(&:git_block_dependencies).flatten
     dependencies += about.git_dependencies(website) if about.present?
     dependencies
   end

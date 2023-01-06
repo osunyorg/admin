@@ -68,8 +68,10 @@ class Education::School < ApplicationRecord
   def git_dependencies(website)
     dependencies = [self]
     dependencies += programs +
-                    programs.map(&:active_storage_blobs).flatten
-    dependencies += diplomas
+                    programs.map(&:active_storage_blobs).flatten +
+                    programs.map(&:git_block_dependencies).flatten
+    dependencies += diplomas +
+                    diplomas.map(&:git_block_dependencies).flatten
     dependencies += teachers +
                     teachers.map(&:teacher) +
                     teachers.map(&:active_storage_blobs).flatten
