@@ -6,10 +6,10 @@
 #  address            :string
 #  biography          :text
 #  birthdate          :date
+#  chapo              :text
 #  city               :string
 #  country            :string
 #  description        :text
-#  description_short  :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer
@@ -148,7 +148,7 @@ class University::Person < ApplicationRecord
       unaccent(university_people.phone_professional) ILIKE unaccent(:term) OR
       unaccent(university_people.biography) ILIKE unaccent(:term) OR
       unaccent(university_people.description) ILIKE unaccent(:term) OR
-      unaccent(university_people.description_short) ILIKE unaccent(:term) OR
+      unaccent(university_people.chapo) ILIKE unaccent(:term) OR
       unaccent(university_people.twitter) ILIKE unaccent(:term) OR
       unaccent(university_people.linkedin) ILIKE unaccent(:term) OR
       unaccent(university_people.address) ILIKE unaccent(:term) OR

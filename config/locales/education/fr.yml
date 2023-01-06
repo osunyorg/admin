@@ -28,21 +28,21 @@ fr:
         school: École
         year: Année
       education/diploma:
-        name: Nom
-        short_name: Nom abrégé
-        level: Niveau
-        programs: Formations
+        chapo: Chapô
         duration: Durée
         ects: Crédits ECTS
-        description_short: Chapô
+        level: Niveau
+        name: Nom
+        programs: Formations
+        short_name: Nom abrégé
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprentissage
         capacity: Capacité
+        chapo: Chapô
         contacts: Contacts
         continuing: Formation continue
         description: Meta Description
-        description_short: Chapô
         diploma: Diplôme
         duration: Durée
         downloadable_summary: Document de synthèse téléchargeable

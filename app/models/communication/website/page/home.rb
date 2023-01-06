@@ -5,8 +5,8 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  breadcrumb_title         :string
+#  chapo                    :text
 #  description              :text
-#  description_short        :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  full_width               :boolean          default(FALSE)

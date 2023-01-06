@@ -6,10 +6,10 @@
 #  address            :string
 #  biography          :text
 #  birthdate          :date
+#  chapo              :text
 #  city               :string
 #  country            :string
 #  description        :text
-#  description_short  :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer

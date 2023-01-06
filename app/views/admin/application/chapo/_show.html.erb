@@ -1,11 +1,11 @@
-<% unless about.description_short.blank? %>
+<% unless about.chapo.blank? %>
   <div class="card flex-fill w-100">
     <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= about.class.human_attribute_name('description_short') %></h2>
+      <h2 class="card-title mb-0 h5"><%= about.class.human_attribute_name('chapo') %></h2>
     </div>
     <div class="card-body">
       <p class="lead">
-        <%= sanitize about.description_short %>
+        <%= sanitize about.chapo %>
       </p>
     </div>
   </div>

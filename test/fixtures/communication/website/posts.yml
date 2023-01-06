@@ -3,8 +3,8 @@
 # Table name: communication_website_posts
 #
 #  id                       :uuid             not null, primary key
+#  chapo                    :text
 #  description              :text
-#  description_short        :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  github_path              :text

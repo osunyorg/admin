@@ -30,12 +30,12 @@ en:
         author: Author
         biography: Biography
         birthdate: Birthdate
+        chapo: Lead text
         city: City
         communication_website_posts: Posts
         contacts: Contact information
         country: Country
         description: Meta description
-        description_short: Lead text
         education_programs: Programs
         email: Email
         essentials: Essentials
@@ -81,24 +81,24 @@ en:
         person: Person
         target_id: ''
       university/organization:
-        name: Name
-        long_name: Long name
-        description: Meta description
-        description_short: Lead text
-        text: Text
-        contact: Contact information
-        legal: Legal information
         address: Address
-        zipcode: Zipcode
+        chapo: Lead text
         city: City
+        contact: Contact information
         country: Country
-        url: Website
-        phone: Telephone
+        description: Meta description
         email: Email
+        kind: Kind
+        legal: Legal information
         logo: Logo for light backgrounds (default)
         logo_on_dark_background: Logo for dark backgrounds (optional)
-        kind: Kind
+        long_name: Long name
+        name: Name
+        phone: Telephone
         siren: Legal identification number
+        text: Text
+        url: Website
+        zipcode: Zipcode
       university/role:
         description: Description
         people: People

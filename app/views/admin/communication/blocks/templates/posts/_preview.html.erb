@@ -5,7 +5,7 @@
         <article class="post">
           <div>
             <p class="title"><%= post %></p>
-            <p><%= post.description_short %></p>
+            <p><%= post.chapo %></p>
             <time datetime="<%= post.published_at %>"><%= post.published_at.to_date %></time>
           </div>
           <% if post.best_featured_image.attached? %>

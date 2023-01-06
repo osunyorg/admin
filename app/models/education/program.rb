@@ -6,11 +6,11 @@
 #  accessibility         :text
 #  apprenticeship        :boolean
 #  capacity              :integer
+#  chapo                 :text
 #  contacts              :text
 #  content               :text
 #  continuing            :boolean
 #  description           :text
-#  description_short     :text
 #  duration              :text
 #  evaluation            :text
 #  featured_image_alt    :string

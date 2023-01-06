@@ -112,9 +112,9 @@ en:
       communication/website/page:
         bodyclass: Specific CSS class
         breadcrumb_title: Title in breadcrumbs
+        chapo: Lead text
         children: Children pages
         description: Meta description
-        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         full_width: Full width
@@ -131,8 +131,8 @@ en:
         author: Author
         category: Category
         categories: Categories
+        chapo: Lead text
         description: Meta description
-        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
