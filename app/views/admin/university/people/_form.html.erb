@@ -27,7 +27,7 @@
               <%= f.input :birthdate, discard_year: true, include_blank: true %>
             </div>
           </div>
-          <%= f.input :chapo %>
+          <%= render 'admin/application/chapo/form', f: f, about: person %>
           <%= f.input :biography,
                       as: :summernote,
                       input_html: {

@@ -31,11 +31,6 @@
           <h3 class="h5"><%= University::Person.human_attribute_name(property) %></h3>
           <p><%= value %></p>
         <% end %>
-
-        <% unless person.chapo.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('chapo') %></h3>
-          <%= simple_format person.chapo %>
-        <% end %>
         <% unless person.biography.blank? %>
           <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
           <%= person.biography %>
