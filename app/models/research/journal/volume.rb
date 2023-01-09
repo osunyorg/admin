@@ -3,10 +3,10 @@
 # Table name: research_journal_volumes
 #
 #  id                    :uuid             not null, primary key
-#  description           :text
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  keywords              :text
+#  meta_description      :text
 #  number                :integer
 #  published             :boolean          default(FALSE)
 #  published_at          :datetime

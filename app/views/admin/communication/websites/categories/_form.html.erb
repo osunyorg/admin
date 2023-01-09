@@ -13,14 +13,7 @@
           <%= render 'admin/application/summary/form', f: f, about: category %>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: category %>
     </div>
     <div class="col-md-4">
       <div class="card flex-fill w-100">

@@ -22,14 +22,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: axis %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

@@ -84,7 +84,6 @@ fr:
         url: URL
       communication/website/category:
         children: Catégories enfants
-        description: Meta Description
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
@@ -112,7 +111,6 @@ fr:
         bodyclass: Classe CSS spécifique
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
-        description: Description pour le référencement naturel
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
@@ -129,7 +127,6 @@ fr:
         author: Auteur·rice
         category: Catégorie
         categories: Catégories
-        description: Description pour le référencement naturel
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
@@ -680,13 +677,9 @@ fr:
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         languages: 'Si vous sélectionnez au moins une langue le site sera considéré comme possiblement multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
-      communication_website_category:
-        description: Si ce champ est vide le début du texte principal sera utilisé.
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
-        description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
       communication_website_post:
-        description: Si ce champ est vide le "chapô" sera utilisé. Si il est également vide le début du texte principal sera utilisé.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.

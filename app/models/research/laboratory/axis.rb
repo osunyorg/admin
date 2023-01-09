@@ -3,7 +3,7 @@
 # Table name: research_laboratory_axes
 #
 #  id                     :uuid             not null, primary key
-#  description            :text
+#  meta_description       :text
 #  name                   :string
 #  position               :integer
 #  short_name             :string

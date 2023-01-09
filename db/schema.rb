@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_143628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "name"
-    t.text "description"
+    t.text "meta_description"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -303,7 +303,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "title"
-    t.text "description"
+    t.text "meta_description"
     t.string "slug"
     t.text "path"
     t.uuid "parent_id"
@@ -347,7 +347,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.string "title"
-    t.text "description"
+    t.text "meta_description"
     t.boolean "published", default: false
     t.datetime "published_at", precision: nil
     t.datetime "created_at", null: false
@@ -480,7 +480,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.integer "position", default: 0
     t.string "slug"
     t.string "path"
-    t.text "description"
+    t.text "meta_description"
     t.boolean "published", default: false
     t.string "featured_image_alt"
     t.text "accessibility"
@@ -580,7 +580,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.boolean "published", default: false
     t.integer "position"
     t.text "text"
-    t.text "description"
+    t.text "meta_description"
     t.text "summary"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
@@ -603,7 +603,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.datetime "published_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
+    t.text "meta_description"
     t.text "keywords"
     t.string "slug"
     t.string "featured_image_alt"
@@ -617,7 +617,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
   create_table "research_journals", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "title"
-    t.text "description"
+    t.text "meta_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "access_token"
@@ -642,7 +642,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.uuid "university_id", null: false
     t.uuid "research_laboratory_id", null: false
     t.string "name"
-    t.text "description"
+    t.text "meta_description"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -699,7 +699,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.uuid "university_id", null: false
     t.string "name"
     t.string "long_name"
-    t.text "description"
+    t.text "meta_description"
     t.string "address"
     t.string "zipcode"
     t.string "city"
@@ -732,7 +732,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
     t.datetime "updated_at", null: false
     t.string "phone_mobile"
     t.string "email"
-    t.text "description"
+    t.text "meta_description"
     t.boolean "habilitation", default: false
     t.boolean "tenure", default: false
     t.text "biography"

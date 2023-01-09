@@ -90,7 +90,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
     sanitized_title = Wordpress.clean_string self.title.to_s
     page.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     page.slug = slug
-    page.description = Wordpress.clean_string excerpt.to_s
+    page.meta_description = Wordpress.clean_string excerpt.to_s
     page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save

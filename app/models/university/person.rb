@@ -8,7 +8,6 @@
 #  birthdate          :date
 #  city               :string
 #  country            :string
-#  description        :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer
@@ -20,6 +19,7 @@
 #  is_teacher         :boolean
 #  last_name          :string
 #  linkedin           :string
+#  meta_description   :text
 #  name               :string
 #  phone_mobile       :string
 #  phone_personal     :string
@@ -147,7 +147,7 @@ class University::Person < ApplicationRecord
       unaccent(university_people.phone_personal) ILIKE unaccent(:term) OR
       unaccent(university_people.phone_professional) ILIKE unaccent(:term) OR
       unaccent(university_people.biography) ILIKE unaccent(:term) OR
-      unaccent(university_people.description) ILIKE unaccent(:term) OR
+      unaccent(university_people.meta_description) ILIKE unaccent(:term) OR
       unaccent(university_people.summary) ILIKE unaccent(:term) OR
       unaccent(university_people.twitter) ILIKE unaccent(:term) OR
       unaccent(university_people.linkedin) ILIKE unaccent(:term) OR

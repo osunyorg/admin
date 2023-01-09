@@ -9,12 +9,12 @@
 #  contacts              :text
 #  content               :text
 #  continuing            :boolean
-#  description           :text
 #  duration              :text
 #  evaluation            :text
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  initial               :boolean
+#  meta_description      :text
 #  name                  :string
 #  objectives            :text
 #  opportunities         :text

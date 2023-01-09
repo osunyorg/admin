@@ -68,7 +68,7 @@ class Communication::Website::Imported::Category < ApplicationRecord
     sanitized_name = Wordpress.clean_string self.name.to_s
     category.name = sanitized_name unless sanitized_name.blank? # If there is no title, leave it with "Untitled"
     category.slug = slug
-    category.description = Wordpress.clean_string description.to_s
+    category.meta_description = Wordpress.clean_string description.to_s
     category.save
   end
 end

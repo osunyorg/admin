@@ -60,7 +60,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
 
   def paper_params
     params.require(:research_journal_paper)
-          .permit(:title, :slug, :text, :published, :published_at, :summary, :abstract, :description, :pdf, :references, :keywords, :research_journal_volume_id, person_ids: [])
+          .permit(:title, :slug, :text, :published, :published_at, :summary, :abstract, :meta_description, :pdf, :references, :keywords, :research_journal_volume_id, person_ids: [])
           .merge(university_id: current_university.id)
   end
 end

@@ -67,17 +67,7 @@
       </div>
     </div>
     <%= render 'admin/application/featured_image/show', about: @volume %>
-    <% if @volume.description.present? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Research::Journal::Volume.human_attribute_name('description') %></h3>
-          <%= simple_format @volume.description %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'admin/application/meta_description/show', about: @volume %>
   </div>
 </div>
 

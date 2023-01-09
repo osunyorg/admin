@@ -34,7 +34,6 @@ fr:
         communication_website_posts: Actualités
         contacts: Coordonnées
         country: Pays
-        description: Meta description
         education_programs: Formations
         email: Email
         essentials: Informations essentielles
@@ -84,7 +83,6 @@ fr:
         city: Ville
         contact: Informations de contact
         country: Pays
-        description: Meta description
         email: Email
         kind: Type
         legal: Informations légales

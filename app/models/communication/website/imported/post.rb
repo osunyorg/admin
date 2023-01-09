@@ -93,7 +93,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
     sanitized_title = Wordpress.clean_string self.title.to_s
     post.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
-    post.description = Wordpress.clean_string excerpt.to_s
+    post.meta_description = Wordpress.clean_string excerpt.to_s
     post.text = Wordpress.clean_html content.to_s
     post.created_at = created_at
     post.updated_at = updated_at

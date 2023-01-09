@@ -95,7 +95,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
           .permit(
-            :university_id, :website_id, :title, :description, :summary, :text,
+            :university_id, :website_id, :title, :meta_description, :summary, :text,
             :published, :published_at, :slug, :pinned,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             :author_id, :language_id, category_ids: []

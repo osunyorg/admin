@@ -1,8 +1,6 @@
 ---
 title: "<%= @about.title %>"
 slug: "<%= @about.slug %>"
-description: >
-  <%= prepare_text_for_static @about.description %>
 <% if @about.volume && @about.volume.path %>
 volumes:
   - "<%= @about.volume.path %>"
@@ -18,6 +16,7 @@ researchers:
 <% @about.people.each do |person| %>
 - "<%= person.slug %>"
 <% end %>
+<%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 abstract: "<%= @about.abstract %>"
 references: "<%= @about.references %>"

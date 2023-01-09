@@ -3,11 +3,11 @@
 # Table name: communication_website_categories
 #
 #  id                       :uuid             not null, primary key
-#  description              :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  github_path              :text
 #  is_programs_root         :boolean          default(FALSE)
+#  meta_description         :text
 #  name                     :string
 #  path                     :string
 #  position                 :integer

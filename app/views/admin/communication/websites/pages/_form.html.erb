@@ -20,14 +20,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
           <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: page %>
     </div>
     <div class="col-md-4">
       <% unless page.is_home? %>

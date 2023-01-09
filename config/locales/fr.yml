@@ -96,6 +96,9 @@ fr:
       sentence_without_link: Valeur héritée
       sentence_html: Valeur héritée de %{link}
       status: Valeur héritée
+    meta_description:
+      hint: Texte simple, dédié au SEO
+      label: Meta description
     pending_tasks:
       label: Tâches en cours de traitement
       hint: L'exécution de ces tâches contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être. Cela peut générer un délai avant que vos modifications ne soient visibles.
