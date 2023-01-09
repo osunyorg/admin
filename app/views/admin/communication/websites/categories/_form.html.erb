@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <%= f.input :name %>
-          <%= f.input :text %>
+          <%= render 'admin/application/summary/form', f: f, about: category %>
         </div>
       </div>
       <div class="card">

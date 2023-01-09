@@ -9,7 +9,6 @@
 #  city               :string
 #  country            :string
 #  description        :text
-#  description_short  :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer
@@ -26,6 +25,7 @@
 #  phone_personal     :string
 #  phone_professional :string
 #  slug               :string
+#  summary            :text
 #  tenure             :boolean          default(FALSE)
 #  twitter            :string
 #  url                :string

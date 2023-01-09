@@ -85,7 +85,6 @@ en:
       communication/website/category:
         children: Children categories
         description: Meta Description
-        text: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
@@ -114,7 +113,6 @@ en:
         breadcrumb_title: Title in breadcrumbs
         children: Children pages
         description: Meta description
-        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         full_width: Full width
@@ -132,7 +130,6 @@ en:
         category: Category
         categories: Categories
         description: Meta description
-        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
