@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_110701) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_132016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -132,7 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_110701) do
     t.boolean "is_programs_root", default: false
     t.string "path"
     t.string "featured_image_alt"
-    t.text "text"
+    t.text "summary"
     t.text "featured_image_credit"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"

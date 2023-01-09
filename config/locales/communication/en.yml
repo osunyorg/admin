@@ -85,12 +85,12 @@ en:
       communication/website/category:
         children: Children categories
         description: Meta Description
-        text: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
         parent: Parent category
         slug: Slug
+        summary: Summary
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
