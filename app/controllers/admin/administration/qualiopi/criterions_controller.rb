@@ -19,8 +19,4 @@ class Admin::Administration::Qualiopi::CriterionsController < Admin::Administrat
     end
   end
 
-  def criterion_params
-    params.require(:features_education_qualiopi_criterion)
-          .permit(:number, :name, :description)
-  end
 end

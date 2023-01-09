@@ -2,15 +2,15 @@
 #
 # Table name: research_journals
 #
-#  id            :uuid             not null, primary key
-#  access_token  :string
-#  description   :text
-#  issn          :string
-#  repository    :string
-#  title         :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  university_id :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  access_token     :string
+#  issn             :string
+#  meta_description :text
+#  repository       :string
+#  title            :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -36,7 +36,7 @@ class Research::Journal < ApplicationRecord
   scope :ordered, -> { order(:title) }
   scope :for_search_term, -> (term) {
     where("
-      unaccent(research_journals.description) ILIKE unaccent(:term) OR
+      unaccent(research_journals.meta_description) ILIKE unaccent(:term) OR
       unaccent(research_journals.issn) ILIKE unaccent(:term) OR
       unaccent(research_journals.repository) ILIKE unaccent(:term) OR
       unaccent(research_journals.title) ILIKE unaccent(:term)

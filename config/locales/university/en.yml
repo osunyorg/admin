@@ -34,7 +34,6 @@ en:
         communication_website_posts: Posts
         contacts: Contact information
         country: Country
-        description: Meta description
         education_programs: Programs
         email: Email
         essentials: Essentials
@@ -84,7 +83,6 @@ en:
         city: City
         contact: Contact information
         country: Country
-        description: Meta description
         email: Email
         kind: Kind
         legal: Legal information

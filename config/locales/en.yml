@@ -96,6 +96,9 @@ en:
       sentence_without_link: Value inherited
       sentence_html: Value inherited from %{link}
       status: Inherited value
+    meta_description:
+      hint: Plain text without HTML, dedicated to SEO
+      label: Meta description
     pending_tasks:
       label: Background tasks pending
       hint: Those tasks precompute your data in order to minimize its carbon footprint. It creates a delay before your changes are online.

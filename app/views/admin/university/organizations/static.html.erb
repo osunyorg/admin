@@ -2,7 +2,6 @@
 title: >
   <%= @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 long_name: >
   <%= @about.long_name %>
@@ -21,8 +20,8 @@ logo: "<%= @about.logo.blob.id %>"
 <% if @about.logo_on_dark_background.attached? %>
 logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
-description: >
-  <%= prepare_text_for_static @about.description %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 <%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>

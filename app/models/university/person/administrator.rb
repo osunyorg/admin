@@ -8,7 +8,6 @@
 #  birthdate          :date
 #  city               :string
 #  country            :string
-#  description        :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer
@@ -20,6 +19,7 @@
 #  is_teacher         :boolean
 #  last_name          :string
 #  linkedin           :string
+#  meta_description   :text
 #  name               :string
 #  phone_mobile       :string
 #  phone_personal     :string

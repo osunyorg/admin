@@ -16,8 +16,7 @@ downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
 registration_url: >
   <%= @about.registration_url %>
-description: >
-  <%= prepare_text_for_static @about.description %>
+<%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 presentation: >
   <%= prepare_text_for_static @about.presentation %>

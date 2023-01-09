@@ -4,8 +4,8 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
-#  description                :text
 #  keywords                   :text
+#  meta_description           :text
 #  position                   :integer
 #  published                  :boolean          default(FALSE)
 #  published_at               :datetime

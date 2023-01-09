@@ -84,7 +84,6 @@ en:
         url: URL
       communication/website/category:
         children: Children categories
-        description: Meta Description
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
@@ -112,7 +111,6 @@ en:
         bodyclass: Specific CSS class
         breadcrumb_title: Title in breadcrumbs
         children: Children pages
-        description: Meta description
         featured_image: Featured image
         featured_image_alt: Alt text
         full_width: Full width
@@ -129,7 +127,6 @@ en:
         author: Author
         category: Category
         categories: Categories
-        description: Meta description
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
@@ -678,11 +675,6 @@ en:
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         languages: 'If you select at least one language the website will be considered as possibly multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
-      communication_website_category:
-        description: If this field is empty the main text's begining will be used.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
-        description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
-      communication_website_post:
-        description: If this field is empty, the "lead text" field will be used. If also emty the main text's begining will be used.

@@ -54,6 +54,8 @@
   <%= render 'admin/research/journals/papers/list', papers: @papers %>
 </div>
 
+<%= render 'admin/application/meta_description/show', about: @journal %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @journal %>
 <% end %>

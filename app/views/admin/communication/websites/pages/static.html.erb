@@ -20,8 +20,7 @@ children:
   - <%= child.path %>
 <% end %>
 <% end %>
-description: >
-  <%= prepare_text_for_static @about.description %>
+<%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 header_text: >-
   <%= prepare_html_for_static @about.header_text, @website.university %>

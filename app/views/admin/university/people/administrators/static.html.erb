@@ -9,6 +9,6 @@ first_name: >
   <%= @about.first_name %>
 last_name: >
   <%= @about.last_name %>
-description: >
-  <%= prepare_text_for_static @about.description %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 ---
