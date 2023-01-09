@@ -56,7 +56,8 @@ gem "simple_form_password_with_hints"#, path: "../simple_form_password_with_hint
 gem "sprockets-rails", "~> 3.4"
 gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git", branch: "activestorage"
 # gem "summernote-rails", path: "../summernote-rails"
-gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
+# gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
+gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git", ref: "feature/integration-helper"
 # gem "two_factor_authentication", path: "../two_factor_authentication"
 gem "unsplash"
 

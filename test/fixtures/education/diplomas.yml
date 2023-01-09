@@ -23,16 +23,7 @@
 #  fk_rails_6cb2e9fa90  (university_id => universities.id)
 #
 
-one:
+default_diploma:
+  name: Diplôme de test
+  short_name: DT
   university: default_university
-  name: MyString
-  short_name: MyString
-  level: 1
-  slug: MyString
-
-two:
-  university: default_university
-  name: MyString
-  short_name: MyString
-  level: 1
-  slug: MyString

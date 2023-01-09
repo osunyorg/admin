@@ -33,32 +33,7 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 
-one:
+default_organization:
+  name: Organisation de test
+  active: true
   university: default_university
-  name: MyString
-  description: MyText
-  address: MyString
-  zipcode: MyString
-  city: MyString
-  country: MyString
-  url: MyString
-  phone: MyString
-  email: MyString
-  active: false
-  siren: MyString
-  kind: 1
-
-two:
-  university: default_university
-  name: MyString
-  description: MyText
-  address: MyString
-  zipcode: MyString
-  city: MyString
-  country: MyString
-  url: MyString
-  phone: MyString
-  email: MyString
-  active: false
-  siren: MyString
-  kind: 1
