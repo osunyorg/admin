@@ -28,13 +28,13 @@ en:
         school: School
         year: Year
       education/diploma:
-        name: Name
-        short_name: Short name
-        level: Level
-        programs: Programs
         duration: Duration
         ects: ECTS
-        description_short: Lead text
+        level: Level
+        name: Name
+        programs: Programs
+        short_name: Short name
+        summary: Summary
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprenticeship
@@ -42,7 +42,6 @@ en:
         contacts: Contacts
         continuing: Continuing training
         description: Meta Description
-        description_short: Lead text
         diploma: Diploma
         duration: Duration
         downloadable_summary: Downloadable summary
@@ -66,6 +65,7 @@ en:
         roles: Roles
         schools: Schools with this formation
         short_name: Short name
+        summary: Summary
         teachers: Teachers
         team: Team
         content: Program's content

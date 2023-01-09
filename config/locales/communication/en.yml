@@ -114,7 +114,6 @@ en:
         breadcrumb_title: Title in breadcrumbs
         children: Children pages
         description: Meta description
-        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         full_width: Full width
@@ -124,6 +123,7 @@ en:
         published: Published?
         related_category: Related category
         slug: Slug
+        summary: Summary
         text: Main page text
         title: Title
         website: Website
@@ -132,7 +132,6 @@ en:
         category: Category
         categories: Categories
         description: Meta description
-        description_short: Lead text
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
@@ -140,6 +139,7 @@ en:
         published: Published?
         published_at: Publication date
         slug: Slug
+        summary: Summary
         text: Text
         title: Title
         website: Website

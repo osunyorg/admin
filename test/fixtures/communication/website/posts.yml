@@ -4,7 +4,6 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
-#  description_short        :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  github_path              :text
@@ -12,6 +11,7 @@
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
+#  summary                  :text
 #  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null

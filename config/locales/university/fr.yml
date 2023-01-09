@@ -35,7 +35,6 @@ fr:
         contacts: Coordonnées
         country: Pays
         description: Meta description
-        description_short: Chapô
         education_programs: Formations
         email: Email
         essentials: Informations essentielles
@@ -63,6 +62,7 @@ fr:
         roles: Rôles
         slug: Slug
         socials: Réseaux sociaux
+        summary: Résumé
         teacher: Enseignant·e
         tenure: Titulaire ?
         twitter: Twitter (nom d'utilisateur)
@@ -81,24 +81,24 @@ fr:
         person: Personne
         target_id: ''
       university/organization:
-        name: Nom
-        long_name: Nom complet
-        description: Meta description
-        description_short: Chapô
-        text: Texte
-        contact: Informations de contact
-        legal: Informations légales
         address: Adresse
-        zipcode: Code postal
         city: Ville
+        contact: Informations de contact
         country: Pays
-        url: Site Web
-        phone: Téléphone
+        description: Meta description
         email: Email
+        kind: Type
+        legal: Informations légales
         logo: Logo sur fond clair (par défaut)
         logo_on_dark_background: Logo sur fond sombre (optionnel)
-        kind: Type
+        long_name: Nom complet
+        name: Nom
+        phone: Téléphone
         siren: Numéro de SIREN
+        summary: Chapô
+        text: Texte
+        url: Site Web
+        zipcode: Code postal
       university/role:
         description: Description
         people: Personnes

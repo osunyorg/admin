@@ -114,7 +114,6 @@ fr:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Description pour le référencement naturel
-        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
@@ -124,6 +123,7 @@ fr:
         published: Publié ?
         related_category: Catégorie liée
         slug: Identifiant
+        summary: Résumé
         text: Texte principal de la page
         title: Titre
         website: Site Web
@@ -132,7 +132,6 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Description pour le référencement naturel
-        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
@@ -140,6 +139,7 @@ fr:
         published: Publié ?
         published_at: Date de publication
         slug: Identifiant
+        summary: Résumé
         text: Texte
         title: Titre
         website: Site Web
@@ -593,7 +593,7 @@ fr:
             slug: formations
             title: "Formations"
           home:
-            slug: 
+            slug:
             title: Accueil
           legal_term:
             slug: mentions-legales

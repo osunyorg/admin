@@ -6,7 +6,6 @@
 #  bodyclass                :string
 #  breadcrumb_title         :string
 #  description              :text
-#  description_short        :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  full_width               :boolean          default(FALSE)
@@ -16,6 +15,7 @@
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string
+#  summary                  :text
 #  text                     :text
 #  title                    :string
 #  type                     :string

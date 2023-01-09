@@ -4,7 +4,6 @@
 #
 #  id                       :uuid             not null, primary key
 #  description              :text
-#  description_short        :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  github_path              :text
@@ -12,6 +11,7 @@
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :text
+#  summary                  :text
 #  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
@@ -88,7 +88,7 @@ class Communication::Website::Post < ApplicationRecord
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_posts.description) ILIKE unaccent(:term) OR
-      unaccent(communication_website_posts.description_short) ILIKE unaccent(:term) OR
+      unaccent(communication_website_posts.summary) ILIKE unaccent(:term) OR
       unaccent(communication_website_posts.text) ILIKE unaccent(:term) OR
       unaccent(communication_website_posts.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")

@@ -32,10 +32,6 @@
           <p><%= value %></p>
         <% end %>
 
-        <% unless person.description_short.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('description_short') %></h3>
-          <%= simple_format person.description_short %>
-        <% end %>
         <% unless person.biography.blank? %>
           <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
           <%= person.biography %>

@@ -9,7 +9,6 @@
 #  city               :string
 #  country            :string
 #  description        :text
-#  description_short  :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer
@@ -26,6 +25,7 @@
 #  phone_personal     :string
 #  phone_professional :string
 #  slug               :string
+#  summary            :text
 #  tenure             :boolean          default(FALSE)
 #  twitter            :string
 #  url                :string
@@ -148,7 +148,7 @@ class University::Person < ApplicationRecord
       unaccent(university_people.phone_professional) ILIKE unaccent(:term) OR
       unaccent(university_people.biography) ILIKE unaccent(:term) OR
       unaccent(university_people.description) ILIKE unaccent(:term) OR
-      unaccent(university_people.description_short) ILIKE unaccent(:term) OR
+      unaccent(university_people.summary) ILIKE unaccent(:term) OR
       unaccent(university_people.twitter) ILIKE unaccent(:term) OR
       unaccent(university_people.linkedin) ILIKE unaccent(:term) OR
       unaccent(university_people.address) ILIKE unaccent(:term) OR
