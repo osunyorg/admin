@@ -36,7 +36,7 @@
 one:
   university: default_university
   name: MyString
-  description: MyText
+  meta_description: MyText
   address: MyString
   zipcode: MyString
   city: MyString
@@ -51,7 +51,7 @@ one:
 two:
   university: default_university
   name: MyString
-  description: MyText
+  meta_description: MyText
   address: MyString
   zipcode: MyString
   city: MyString
