@@ -21,7 +21,7 @@ module Communication::Website::Page::WithPath
   end
 
   def git_path(website)
-    return unless published
+    return unless website.id == communication_website_id && published
     current_git_path
   end
 
