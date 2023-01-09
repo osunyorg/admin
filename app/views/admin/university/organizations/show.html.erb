@@ -1,7 +1,7 @@
 <% content_for :title, @organization %>
 <div class="row">
   <div class="col-md-8">
-    <%= render 'admin/application/chapo/show', about: @organization %>
+    <%= render 'admin/application/summary/show', about: @organization %>
     <% if strip_tags(@organization.text.to_html).present? %>
       <div class="card">
         <div class="card-header">

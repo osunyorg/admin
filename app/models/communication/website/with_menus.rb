@@ -12,21 +12,9 @@ module Communication::Website::WithMenus
 
   def menu_item_kinds
     Communication::Website::Menu::Item.kinds.reject do |key, value|
-      active = send "menu_item_kind_#{key}?"
-      !active
+      method_name = "menu_item_kind_#{key}?"
+      respond_to?(method_name) && !public_send(method_name)
     end
-  end
-
-  def menu_item_kind_blank?
-    true
-  end
-
-  def menu_item_kind_url?
-    true
-  end
-
-  def menu_item_kind_page?
-    pages.any?
   end
 
   def menu_item_kind_programs?
@@ -45,35 +33,8 @@ module Communication::Website::WithMenus
     has_education_diplomas?
   end
 
-  def menu_item_kind_posts?
-    has_communication_posts?
-  end
-
-  def menu_item_kind_category?
-    has_communication_categories?
-  end
-
-  def menu_item_kind_post?
-    has_communication_posts?
-  end
-
-  def menu_item_kind_organizations?
-    # TODO: has_organization takes a looong time when having a lot of blocks.
-    # when we have a direct relation between website & organizations re-adjust this test.
-    # has_organizations?
-    true
-  end
-
-  def menu_item_kind_persons?
-    has_persons?
-  end
-
   def menu_item_kind_administrators?
     has_administrators?
-  end
-
-  def menu_item_kind_authors?
-    has_authors?
   end
 
   def menu_item_kind_researchers?

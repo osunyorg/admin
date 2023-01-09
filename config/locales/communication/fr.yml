@@ -85,7 +85,6 @@ fr:
       communication/website/category:
         children: Catégories enfants
         description: Meta Description
-        text: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
@@ -114,7 +113,6 @@ fr:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
         description: Description pour le référencement naturel
-        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
@@ -132,7 +130,6 @@ fr:
         category: Catégorie
         categories: Catégories
         description: Description pour le référencement naturel
-        description_short: Chapô
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
@@ -593,7 +590,7 @@ fr:
             slug: formations
             title: "Formations"
           home:
-            slug: 
+            slug:
             title: Accueil
           legal_term:
             slug: mentions-legales

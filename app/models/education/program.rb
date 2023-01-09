@@ -10,7 +10,6 @@
 #  content               :text
 #  continuing            :boolean
 #  description           :text
-#  description_short     :text
 #  duration              :text
 #  evaluation            :text
 #  featured_image_alt    :string
@@ -32,6 +31,7 @@
 #  results               :text
 #  short_name            :string
 #  slug                  :string
+#  summary               :text
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  diploma_id            :uuid             indexed

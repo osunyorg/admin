@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_140347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -132,7 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.boolean "is_programs_root", default: false
     t.string "path"
     t.string "featured_image_alt"
-    t.text "text"
+    t.text "summary"
     t.text "featured_image_credit"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
@@ -314,7 +314,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.text "github_path"
     t.string "featured_image_alt"
     t.text "text"
-    t.text "description_short"
+    t.text "summary"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
@@ -358,7 +358,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.boolean "pinned", default: false
     t.string "featured_image_alt"
     t.text "text"
-    t.text "description_short"
+    t.text "summary"
     t.uuid "language_id"
     t.text "featured_image_credit"
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
@@ -465,7 +465,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.datetime "updated_at", null: false
     t.integer "ects"
     t.text "duration"
-    t.text "description_short"
+    t.text "summary"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
@@ -503,7 +503,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.boolean "initial"
     t.boolean "apprenticeship"
     t.string "registration_url"
-    t.text "description_short"
+    t.text "summary"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
@@ -581,6 +581,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.integer "position"
     t.text "text"
     t.text "description"
+    t.text "summary"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_papers_on_university_id"
@@ -714,7 +715,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.string "slug"
     t.text "text"
     t.string "nic"
-    t.text "description_short"
+    t.text "summary"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -739,7 +740,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_132654) do
     t.string "twitter"
     t.string "linkedin"
     t.boolean "is_alumnus", default: false
-    t.text "description_short"
+    t.text "summary"
     t.boolean "is_author"
     t.string "name"
     t.integer "gender"

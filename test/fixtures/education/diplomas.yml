@@ -2,17 +2,17 @@
 #
 # Table name: education_diplomas
 #
-#  id                :uuid             not null, primary key
-#  description_short :text
-#  duration          :text
-#  ects              :integer
-#  level             :integer          default("not_applicable")
-#  name              :string
-#  short_name        :string
-#  slug              :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  university_id     :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  duration      :text
+#  ects          :integer
+#  level         :integer          default("not_applicable")
+#  name          :string
+#  short_name    :string
+#  slug          :string
+#  summary       :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
