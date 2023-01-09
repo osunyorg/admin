@@ -34,7 +34,6 @@ fr:
         name: Nom
         programs: Formations
         short_name: Nom abrégé
-        summary: Résumé
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprentissage
@@ -65,7 +64,6 @@ fr:
         roles: Rôles
         schools: Écoles proposant cette formation
         short_name: Nom abrégé
-        summary: Résumé
         teachers: Enseignants·es
         team: Équipe
         content: Contenus de la formation

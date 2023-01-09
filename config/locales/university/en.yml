@@ -62,7 +62,6 @@ en:
         roles: Roles
         slug: Slug
         socials: Socials
-        summary: Summary
         teacher: Teacher
         tenure: Has tenure?
         twitter: Twitter username
@@ -95,7 +94,6 @@ en:
         name: Name
         phone: Telephone
         siren: Legal identification number
-        summary: Summary
         text: Text
         url: Website
         zipcode: Zipcode

@@ -106,6 +106,7 @@ fr:
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
+    summary: Résumé
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."

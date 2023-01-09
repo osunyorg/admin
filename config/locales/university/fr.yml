@@ -62,7 +62,6 @@ fr:
         roles: Rôles
         slug: Slug
         socials: Réseaux sociaux
-        summary: Résumé
         teacher: Enseignant·e
         tenure: Titulaire ?
         twitter: Twitter (nom d'utilisateur)
@@ -95,7 +94,6 @@ fr:
         name: Nom
         phone: Téléphone
         siren: Numéro de SIREN
-        summary: Chapô
         text: Texte
         url: Site Web
         zipcode: Code postal

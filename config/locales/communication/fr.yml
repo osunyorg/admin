@@ -90,7 +90,6 @@ fr:
         name: Nom
         parent: Catégorie parente
         slug: Slug
-        summary: Résumé
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
@@ -123,7 +122,6 @@ fr:
         published: Publié ?
         related_category: Catégorie liée
         slug: Identifiant
-        summary: Résumé
         text: Texte principal de la page
         title: Titre
         website: Site Web
@@ -139,7 +137,6 @@ fr:
         published: Publié ?
         published_at: Date de publication
         slug: Identifiant
-        summary: Résumé
         text: Texte
         title: Titre
         website: Site Web

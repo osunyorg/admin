@@ -34,7 +34,6 @@ en:
         name: Name
         programs: Programs
         short_name: Short name
-        summary: Summary
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprenticeship
@@ -65,7 +64,6 @@ en:
         roles: Roles
         schools: Schools with this formation
         short_name: Short name
-        summary: Summary
         teachers: Teachers
         team: Team
         content: Program's content
