@@ -134,7 +134,9 @@ class Education::Program < ApplicationRecord
   end
 
   def git_path(website)
-    Static.clean_path("#{git_path_content_prefix(website)}programs/#{path}/_index.html") if for_website?(website)
+    return unless for_website?(website)
+    clean_path = Static.clean_path "#{git_path_content_prefix(website)}programs/#{path}/"
+    "#{clean_path}_index.html"
   end
 
   def path_in_website(website)
