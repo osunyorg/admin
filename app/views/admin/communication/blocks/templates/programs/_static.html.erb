@@ -2,4 +2,6 @@
 <% block.template.elements.each do |element| %>
 <% next unless element.program %>
         - slug: "<%= element.program.slug %>"
+          path: "<%= element.program.path %>"
+          git_path: "<%= element.program.git_path(@website) %>"
 <% end %>
