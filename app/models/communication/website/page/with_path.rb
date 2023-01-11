@@ -28,7 +28,8 @@ module Communication::Website::Page::WithPath
   def url
     return unless published
     return if website.url.blank?
-    Static.clean_path "#{website.url}#{path}"
+    # do not use a global Static.clean here because url has protocol with 2 slashes!
+    "#{website.url.end_with?('/') ? website.url[0..-2] : website.url}#{Static.clean_path path}"
   end
 
   protected
