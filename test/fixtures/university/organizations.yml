@@ -9,6 +9,7 @@
 #  country          :string
 #  email            :string
 #  kind             :integer          default("company")
+#  linkedin         :string
 #  long_name        :string
 #  meta_description :text
 #  name             :string
@@ -18,6 +19,7 @@
 #  slug             :string
 #  summary          :text
 #  text             :text
+#  twitter          :string
 #  url              :string
 #  zipcode          :string
 #  created_at       :datetime         not null

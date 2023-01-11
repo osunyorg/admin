@@ -3,17 +3,30 @@ title: >
   <%= @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-long_name: >
-  <%= @about.long_name %>
-kind: "<%= @about.kind %>"
-siren: "<%= @about.siren %>"
-address: "<%= @about.address %>"
-zipcode: "<%= @about.zipcode %>"
-city: "<%= @about.city %>"
-country: "<%= @about.country %>"
-phone: "<%= @about.phone %>"
-email: "<%= @about.email %>"
-website: "<%= @about.url %>"
+kind:
+  code: "<%= @about.kind %>"
+  label: "<%= @about.kind_i18n %>"
+<%
+[
+  :long_name,
+  :siren,
+  :address,
+  :zipcode,
+  :city,
+  :country,
+  :phone,
+  :email,
+  :twitter,
+  :linkedin,
+  :url
+].each do |key| 
+  value = @about.send key
+%>
+<%= key %>: >
+  <%= prepare_text_for_static value %>
+<% end %>
+website: >
+  <%= prepare_text_for_static @about.url %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>
