@@ -139,10 +139,6 @@ class Education::Program < ApplicationRecord
     "#{clean_path}_index.html"
   end
 
-  def path_in_website(website)
-    Static.clean_path "#{website.special_page(Communication::Website::Page::EducationProgram)&.path}#{path}"
-  end
-
   def git_dependencies(website)
     [self] +
     siblings +
