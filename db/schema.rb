@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_143628) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_083139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -716,6 +716,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_143628) do
     t.text "text"
     t.string "nic"
     t.text "summary"
+    t.string "twitter"
+    t.string "linkedin"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 

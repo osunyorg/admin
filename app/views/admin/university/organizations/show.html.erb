@@ -39,7 +39,7 @@
                               @organization.url,
                               target: :_blank %></p>
             <% end %>
-            <% [:phone, :email].each do |property| %>
+            <% [:phone, :email, :linkedin, :twitter].each do |property| %>
               <% value = @organization.send property %>
               <% next if value.blank? %>
               <h3 class="h5">

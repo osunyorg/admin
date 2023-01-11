@@ -71,7 +71,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
           .permit(
             :name, :long_name, :slug, :meta_description, :summary, :active, :siren, :kind,
             :address, :zipcode, :city, :country, :text,
-            :url, :phone, :email,
+            :url, :phone, :email, :linkedin, :twitter,
             :logo, :logo_delete, :logo_infos,
             :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
           )
