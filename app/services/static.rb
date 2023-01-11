@@ -4,6 +4,11 @@ class Static
     path.gsub("//", '/')
   end
 
+  def self.remove_trailing_slash(string)
+    string = string[0..-2] if string.end_with?('/')
+    string
+  end
+
   def self.render(template_static, about, website)
     code = ApplicationController.render(
       template: template_static,
