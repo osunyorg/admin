@@ -1,8 +1,5 @@
       programs:
 <% block.template.elements.each do |element| %>
 <% next unless element.program %>
-        - slug: "<%= element.program.slug %>"
-          path: "<%= element.program.path %>"
-          git_path: "<%= element.program.git_path(@website) %>"
-          path_in_website: "<%= element.program.path_in_website(@website) %>"
+        - path: "<%= element.program.path %>"
 <% end %>
