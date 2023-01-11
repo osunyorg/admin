@@ -13,7 +13,7 @@
       <% websites.ordered.each do |website| %>
         <tr>
           <td>
-            <%= link_to website.name, edit_server_website_path(website) %>
+            <%= link_to website.name, admin_communication_website_path(website, host: website.university.url), target: :_blank %>
           </td>
           <td>
             <%= link_to website.url, website.url, target: :_blank if website.url.present? %>
