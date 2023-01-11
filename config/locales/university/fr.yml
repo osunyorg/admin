@@ -86,6 +86,7 @@ fr:
         email: Email
         kind: Type
         legal: Informations légales
+        linkedin: LinkedIn
         logo: Logo sur fond clair (par défaut)
         logo_on_dark_background: Logo sur fond sombre (optionnel)
         long_name: Nom complet
@@ -93,6 +94,7 @@ fr:
         phone: Téléphone
         siren: Numéro de SIREN
         text: Texte
+        twitter: Twitter
         url: Site Web
         zipcode: Code postal
       university/role:
