@@ -17,14 +17,14 @@ kind:
   :phone,
   :email,
   :twitter,
-  :linkedin,
-  :url
+  :linkedin
 ].each do |key| 
   value = @about.public_send key
 %>
 <%= key %>: >
   <%= prepare_text_for_static value %>
 <% end %>
+<% # url is a reserved keyword for Hugo %>
 website: >
   <%= prepare_text_for_static @about.url %>
 <% if @about.logo.attached? %>
