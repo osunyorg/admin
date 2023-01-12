@@ -15,7 +15,7 @@ module WithFeaturedImage
   def add_unsplash_image(id)
     return if id.blank?
     photo = Unsplash::Photo.find id
-    url = photo['urls']['full']
+    url = "#{photo['urls']['full']}&w=2048&fit=max"
     filename = "#{photo['id']}.jpg"
     begin
       file = URI.open url
