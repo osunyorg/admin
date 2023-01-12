@@ -27,7 +27,7 @@ parent:
     <%= @about.parent.name %>
   url: <%= @about.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
-<%= render 'admin/communication/unsplash/static' %>
+<%= render 'admin/application/featured_image/static' %>
 related_category: "<%= @website.categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
 teachers:
