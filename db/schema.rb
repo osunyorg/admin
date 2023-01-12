@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_12_131744) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_145505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -610,6 +610,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_131744) do
     t.boolean "published", default: false
     t.text "text"
     t.text "featured_image_credit"
+    t.text "summary"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -621,6 +622,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_131744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "issn"
+    t.text "summary"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
 
