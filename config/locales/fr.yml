@@ -43,7 +43,7 @@ fr:
       language:
         iso_code: Code Iso
         name: Nom
-        summernote_locale: Nom de la loca Summernote
+        summernote_locale: Nom de la locale Summernote
       user:
         admin_theme: Thème de l'administration
         email: Email
@@ -269,7 +269,7 @@ fr:
       language:
         iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
         name: Nom dans la langue (= "Français", "Deutsch", ...)
-        summernote_locale: 'Nom de la loca de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
+        summernote_locale: 'Nom de la locale de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
       user:
         mobile_phone: "Format international (+XX). Ce numéro reste privé. En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
     include_blanks:
