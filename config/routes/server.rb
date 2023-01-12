@@ -1,7 +1,7 @@
 namespace :server do
   resources :universities
   resources :languages
-  resources :websites do 
+  resources :websites, only: :index do
     member do
       post :refresh
     end
