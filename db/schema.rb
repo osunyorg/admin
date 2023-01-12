@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_083139) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_151136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -562,6 +562,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_083139) do
     t.string "iso_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "summernote_locale"
   end
 
   create_table "research_journal_papers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|

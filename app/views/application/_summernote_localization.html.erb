@@ -1,0 +1,3 @@
+<% unless current_language.summernote_locale.blank? %>
+  <script id="summernote-locale" data-locale="<%= current_language.summernote_locale %>" src="https://cdn.jsdelivr.net/npm/summernote@<%= SummernoteRails::Rails::VERSION.split('.').take(3).join('.') %>/dist/lang/summernote-<%= current_language.summernote_locale %>.js"></script>
+<% end %>

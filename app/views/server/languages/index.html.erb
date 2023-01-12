@@ -6,6 +6,7 @@
       <tr>
         <th><%= Language.human_attribute_name('name') %></th>
         <th><%= Language.human_attribute_name('iso_code') %></th>
+        <th><%= Language.human_attribute_name('summernote_locale') %></th>
         <th></th>
       </tr>
     </thead>
@@ -15,6 +16,7 @@
         <tr>
           <td><%= link_to language, [:server, language] %></td>
           <td><%= language.iso_code %></td>
+          <td><%= language.summernote_locale %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
