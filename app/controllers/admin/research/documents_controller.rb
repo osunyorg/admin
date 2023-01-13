@@ -12,6 +12,7 @@ class Admin::Research::DocumentsController < Admin::Research::ApplicationControl
 
   def update
     @document = Research::Document.find params[:id]
+    # TODO update from api
     redirect_to admin_research_document_path(@document)
   end
 
