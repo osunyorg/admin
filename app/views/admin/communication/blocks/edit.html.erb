@@ -65,27 +65,22 @@
         var files = event.target.files || event.dataTransfer.files;
         if (!files.length)
           return;
-        this.uploadFile(files[0], object, key);
+        this.uploadFile(event.target, files[0], object, key);
       },
-      uploadFile(file, object, key) {
-        var url = this.directUpload.url,
-            size = Math.round(file.size / 1024 / 1024);
+      uploadFile(input, file, object, key) {
+        var size = Math.round(file.size / 1024 / 1024);
+        var controller = new Vue.DirectUploadController(input, file, this.directUpload.url)
         if (file.size > <%= Communication::Block::IMAGE_MAX_SIZE %>) {
           alert("<%= t('admin.communication.blocks.alerts.image_is_too_big').html_safe %> (" + size + " Mo > <%= number_to_human_size Communication::Block::IMAGE_MAX_SIZE %>)");
           return;
         }
-        var upload = new ActiveStorage.DirectUpload(file, url);
-        upload.create(function (error, blob) {
-          if (error) {
-            console.log(error);
-          } else {
-            object[key] = {
+        controller.start(function (blob) {
+          object[key] = {
               id: blob.id,
               signed_id: blob.signed_id,
               filename: blob.filename
-            };
-          }
-        }.bind(this));
+          };
+        });
       },
       getFileUrl(signed_id, filename) {
         return this.directUpload.blobUrlTemplate
@@ -120,6 +115,24 @@
     },
     mounted: function() {
       this.handleSummernotes();
+    }
+  });
+
+  window.addEventListener('direct-upload:initialize', function (event) {
+    event.target.insertAdjacentHTML('afterend', `<progress value="0" max="100" style="width: 100%;"></progress>`)
+  });
+
+  window.addEventListener('direct-upload:progress', function (event) {
+    var progressBar = event.target.parentNode.querySelector('progress');
+    if (progressBar) {
+      progressBar.value = event.detail.progress;
+    }
+  });
+
+  window.addEventListener('direct-upload:end', function (event) {
+    var progressBar = event.target.parentNode.querySelector('progress');
+    if (progressBar) {
+      progressBar.parentNode.removeChild(progressBar);
     }
   });
 
