@@ -30,11 +30,12 @@ Vue.DirectUploadController.prototype.uploadRequestDidProgress = function (event)
 
 Vue.DirectUploadController.prototype.dispatch = function (name, detail) {
     var event = document.createEvent("Event"),
+        eventName = 'direct-upload:' + name,
         disabled = this.input.disabled;
     detail = detail || {};
     detail.file = this.file;
     detail.id = this.directUpload.id;
-    event.initEvent(`direct-upload:${name}`, true, true);
+    event.initEvent(eventName, true, true);
     event.detail = detail;
 
     this.input.disabled = false;
