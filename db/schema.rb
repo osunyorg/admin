@@ -611,6 +611,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_151136) do
     t.boolean "published", default: false
     t.text "text"
     t.text "featured_image_credit"
+    t.text "summary"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -621,9 +622,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_151136) do
     t.text "meta_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "access_token"
-    t.string "repository"
     t.string "issn"
+    t.text "summary"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
 

@@ -116,10 +116,10 @@ class Communication::Website::Page < ApplicationRecord
     "#{title}"
   end
 
-  def best_featured_image
+  def best_featured_image_source(fallback: true)
     # we don't want to fallback on homepage featured_image
-    return featured_image if featured_image.attached? || is_home? || parent&.is_home?
-    parent&.best_featured_image
+    return self if featured_image.attached? || is_home? || parent&.is_home?
+    parent&.best_featured_image_source
   end
 
   def best_bodyclass

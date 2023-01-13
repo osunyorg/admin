@@ -13,7 +13,7 @@ has:
 <% end %>
 position: <%= @about.position %>
 bodyclass: <%= @about.best_bodyclass %>
-<%= render 'admin/communication/unsplash/static' %>
+<%= render 'admin/application/featured_image/static' %>
 <% if @about.children.published.any? %>
 children:
 <% @about.children.published.ordered.each do |child| %>
