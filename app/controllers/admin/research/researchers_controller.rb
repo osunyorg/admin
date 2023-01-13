@@ -9,7 +9,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def show
     load
-    if @researcher.hal_person_identifier.present?
+    if @researcher.hal_identity?
       @researcher.load_research_documents!
     else
       @possible_hal_authors = @researcher.possible_hal_authors
@@ -20,7 +20,9 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def update
     load
-    @researcher.update_column :hal_person_identifier, params[:hal_person_identifier] if params.has_key? :hal_person_identifier
+    @researcher.update_column :hal_doc_identifier, params[:hal_doc_identifier] if params.has_key?(:hal_doc_identifier)
+    @researcher.update_column :hal_form_identifier, params[:hal_form_identifier] if params.has_key?(:hal_form_identifier)
+    @researcher.update_column :hal_person_identifier, params[:hal_person_identifier] if params.has_key?(:hal_person_identifier)
     @researcher.load_research_documents!
     redirect_to admin_research_researcher_path(@researcher)
   end
