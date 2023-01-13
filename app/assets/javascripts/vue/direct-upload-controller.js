@@ -1,4 +1,6 @@
-/*global ActiveStorage, Vue */
+/* global ActiveStorage, Vue */
+/* eslint no-console: ["error", { allow: ["error"] }] */
+
 Vue.DirectUploadController = function DirectUploadController (input, file, url) {
     'use strict';
     this.input = input;
