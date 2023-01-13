@@ -1,0 +1,7 @@
+researcher:
+  email: researcher@osuny.org
+  first_name: Researcher
+  is_researcher: true
+  last_name: Osuny
+  name: Researcher Osuny
+  university: default_university

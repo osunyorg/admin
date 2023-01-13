@@ -24,20 +24,11 @@
 #  fk_rails_ceb4d1344f  (university_id => universities.id)
 #
 
-one:
-  university: one
-  university_person: one
+default_document:
+  university: default_university
+  person: researcher
   docid: MyString
-  data: 
-  title: MyString
-  url: MyString
-  ref: MyString
-
-two:
-  university: two
-  university_person: two
-  docid: MyString
-  data: 
+  data:
   title: MyString
   url: MyString
   ref: MyString
