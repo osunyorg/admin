@@ -7,16 +7,16 @@ module University::Person::WithResearch
 
   def load_research_documents!
     return unless hal_person_identifier.present?
-    url = "https://api.archives-ouvertes.fr/search/?q=authIdPerson_i:#{hal_person_identifier}&fl=docid,title_s,citationRef_s,uri_s&rows=1000"
-    uri = URI(url)
-    response = Net::HTTP.get(uri)
-    data = JSON.parse(response)
-    data['response']['docs'].each do |doc|
-      docid = doc['docid']
-      document = Research::Document.where(university: university, person: self, docid: docid).first_or_create
-      document.title = doc['title_s'][0]
-      document.ref = doc['citationRef_s']
-      document.url = doc['uri_s']
+    response = HalOpenscience::Document.search_by_person_id(
+      hal_person_identifier,
+      fields: ["docid", "title_s", "citationRef_s", "uri_s"],
+      limit: 1000
+    )
+    response.results.each do |doc|
+      document = Research::Document.where(university: university, person: self, docid: doc.docid).first_or_create
+      document.title = doc.title_s[0]
+      document.ref = doc.citationRef_s
+      document.url = doc.uri_s
       document.save
     end
   end
