@@ -8,7 +8,7 @@
       </div>
       <div class="table-responsive">
         <table class="<%= table_classes %>">
-          <% ['iso_code'].each do |variable| %>
+          <% ['iso_code', 'summernote_locale'].each do |variable| %>
             <tr>
               <td><%= Language.human_attribute_name(variable) %></td>
               <td class="text-end"><%= @language.public_send variable %></td>
