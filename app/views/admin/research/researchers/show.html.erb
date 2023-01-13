@@ -16,25 +16,37 @@
   </div>
 <% end %>
 
-<h2 class="h4 mt-5">Publications</h2>
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Research::Document.human_attribute_name('title') %></th>
-        <th><%= Research::Document.human_attribute_name('url') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @researcher.research_documents.each do |document| %>
-        <tr>
-          <td><%= link_to document, admin_research_document_path(document) %></td>
-          <td><%= link_to t('open'), document.url, class: button_classes, target: :_blank %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="card flex-fill w-100">
+  <div class="card-header">
+    <h2 class="card-title mb-0 h5"><%= Research::Document.model_name.human(count: 2) %></h2>
+  </div>
+  <% if @researcher.hal_person_identifier.present? %>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <thead>
+          <tr>
+            <th><%= Research::Document.human_attribute_name('title') %></th>
+            <th><%= Research::Document.human_attribute_name('url') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @researcher.research_documents.each do |document| %>
+            <tr>
+              <td><%= link_to document, admin_research_document_path(document) %></td>
+              <td><%= link_to t('open'), document.url, class: button_classes, target: :_blank %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="card-body">
+      <p>Pas d'identifiant HAL<p>
+      <% # TODO récupération via la gem des auteurs possibles avec le nom complet et choix éventuel %>
+    </div>
+  <% end %>
 </div>
+
 
 <% content_for :action_bar_right do %>
   <%= edit_link @researcher %>
