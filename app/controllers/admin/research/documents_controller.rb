@@ -7,6 +7,7 @@ class Admin::Research::DocumentsController < Admin::Research::ApplicationControl
 
   def show
     @document = Research::Document.find params[:id]
+    breadcrumb
   end
 
   def update

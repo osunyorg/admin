@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, @document %>
 
-<%= render @research_document %>
+<p><%= @document.docid %></p>
 
-<div>
-  <%= link_to "Edit this document", edit_research_document_path(@research_document) %> |
-  <%= link_to "Back to documents", research_documents_path %>
+<div><%= sanitize @document.ref %></div>
 
-  <%= button_to "Destroy this document", @research_document, method: :delete %>
-</div>
+<% content_for :action_bar_right do %>
+  <%= link_to t('show'), @document.url, class: button_classes, target: :_blank %>
+<% end %>
