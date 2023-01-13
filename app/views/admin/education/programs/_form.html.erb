@@ -13,7 +13,7 @@
             <%= f.input :short_name %>
           </div>
         </div>
-        <%= render 'admin/application/chapo/form', f: f, about: program %>
+        <%= render 'admin/application/summary/form', f: f, about: program %>
         <div class="row">
           <div class="col-lg-6">
             <%= f.association :diploma,
@@ -137,14 +137,7 @@
                           value_method: ->(p) { p[:id] } %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: program, f: f %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: program %>
     </div>
   </div>
 

@@ -2,27 +2,29 @@
 #
 # Table name: university_organizations
 #
-#  id                :uuid             not null, primary key
-#  active            :boolean          default(TRUE)
-#  address           :string
-#  city              :string
-#  country           :string
-#  description       :text
-#  description_short :text
-#  email             :string
-#  kind              :integer          default("company")
-#  long_name         :string
-#  name              :string
-#  nic               :string
-#  phone             :string
-#  siren             :string
-#  slug              :string
-#  text              :text
-#  url               :string
-#  zipcode           :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  university_id     :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  active           :boolean          default(TRUE)
+#  address          :string
+#  city             :string
+#  country          :string
+#  email            :string
+#  kind             :integer          default("company")
+#  linkedin         :string
+#  long_name        :string
+#  meta_description :text
+#  name             :string
+#  nic              :string
+#  phone            :string
+#  siren            :string
+#  slug             :string
+#  summary          :text
+#  text             :text
+#  twitter          :string
+#  url              :string
+#  zipcode          :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #

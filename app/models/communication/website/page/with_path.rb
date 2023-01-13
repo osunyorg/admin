@@ -21,14 +21,16 @@ module Communication::Website::Page::WithPath
   end
 
   def git_path(website)
-    return unless published
+    return unless website.id == communication_website_id && published
     current_git_path
   end
 
   def url
     return unless published
     return if website.url.blank?
-    Static.clean_path "#{website.url}#{path}"
+    # do not use a global Static.clean_path here because url has protocol with 2 slashes!
+    # remove trailing slash if needed, because path begins with a slash
+    "#{Static.remove_trailing_slash website.url}#{Static.clean_path path}"
   end
 
   protected

@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-8">
 
-      <%= render 'admin/application/chapo/show', about: @page %>
+      <%= render 'admin/application/summary/show', about: @page %>
       <%= render 'admin/communication/blocks/list', about: @page %>
 
       <% if @page.is_special_page? %>
@@ -44,11 +44,6 @@
           <% end %>
           <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
           <p><%= @page.path %></p>
-
-          <% if @page.description.present? %>
-            <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('description') %></h3>
-            <%= simple_format @page.description %>
-          <% end %>
 
           <% if @page.parent %>
             <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('parent') %></h3>
@@ -93,6 +88,7 @@
         </div>
       </div>
       <%= render 'admin/application/featured_image/show', about: @page %>
+      <%= render 'admin/application/meta_description/show', about: @page %>
     </div>
   </div>
 <% end %>

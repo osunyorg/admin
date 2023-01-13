@@ -26,7 +26,7 @@ class Extranet::PersonalDataController < Extranet::ApplicationController
   def person_params
     params.require(:university_person)
           .permit(
-            :gender, :birthdate, :description_short, :biography,
+            :gender, :birthdate, :summary, :biography,
             :phone_mobile, :phone_professional, :phone_personal,
             :address, :zipcode, :city, :country,
             :url, :linkedin, :twitter

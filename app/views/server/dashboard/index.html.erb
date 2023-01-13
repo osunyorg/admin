@@ -1,1 +1,16 @@
 <% content_for :title, t('hello', name: current_user.first_name) %>
+
+<div class="row">
+  <% @parts.each do |part| %>
+    <div class="col-md-6 d-flex">
+      <div class="card flex-fill">
+        <div class="card-body">
+          <h4 class="mb-4"><%= part[:title] %></h4>
+          <%= link_to 'Voir la liste', 
+                      part[:path], 
+                      class: 'btn btn-sm btn-primary stretched-link' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,5 +1,5 @@
       programs:
 <% block.template.elements.each do |element| %>
 <% next unless element.program %>
-        - slug: "<%= element.program.slug %>"
+        - path: "<%= element.program.path %>"
 <% end %>

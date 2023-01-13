@@ -111,9 +111,12 @@ $(function () {
 
     $('[data-provider="summernote"]').each(function () {
         var config = $(this).attr('data-summernote-config'),
+            locale = $('#summernote-locale').data('locale'),
             options = {};
         config = config || 'default';
         options = configs[config];
+        // if locale is undefined, summernote use default (en-US)
+        options['lang'] = locale;
         $(this).summernote(options);
     });
 

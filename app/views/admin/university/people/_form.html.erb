@@ -27,7 +27,7 @@
               <%= f.input :birthdate, discard_year: true, include_blank: true %>
             </div>
           </div>
-          <%= f.input :description_short %>
+          <%= render 'admin/application/summary/form', f: f, about: person %>
           <%= f.input :biography,
                       as: :summernote,
                       input_html: {
@@ -144,14 +144,7 @@
                   direct_upload: true %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: person %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

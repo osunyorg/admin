@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <%= f.input :title %>
-          <%= render 'admin/application/chapo/form', f: f, about: post %>
+          <%= render 'admin/application/summary/form', f: f, about: post %>
           <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
         </div>
       </div>
@@ -31,14 +31,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="card flex-fill w-100">
-            <div class="card-header">
-              <h5 class="card-title mb-0"><%= t('seo') %></h5>
-            </div>
-            <div class="card-body">
-              <%= f.input :description %>
-            </div>
-          </div>
+          <%= render 'admin/application/meta_description/form', f: f, about: post %>
         </div>
       </div>
     </div>

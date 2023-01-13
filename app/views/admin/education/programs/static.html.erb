@@ -9,16 +9,15 @@ administrator_involvements = @about.involvements_through_roles
 %>
 title: >
   <%= @about.name %>
-url: <%= @about.path_in_website(@website) %>
+<%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true, toc_present: true %>
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
 registration_url: >
   <%= @about.registration_url %>
-description: >
-  <%= prepare_text_for_static @about.description %>
-<%= render 'admin/application/chapo/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 presentation: >
   <%= prepare_text_for_static @about.presentation %>
 position: <%= @about.position %>
@@ -26,10 +25,10 @@ position: <%= @about.position %>
 parent:
   title: >
     <%= @about.parent.name %>
-  url: <%= @about.parent.path_in_website(@website) %>
+  url: <%= @about.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
-<%= render 'admin/communication/unsplash/static' %>
-category: "<%= @website.categories.find_by(program_id: @about.id)&.path %>"
+<%= render 'admin/application/featured_image/static' %>
+related_category: "<%= @website.categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
 teachers:
 <% teacher_involvements.each do |involvement| %>

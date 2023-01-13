@@ -2,7 +2,8 @@
 title: >
   <%= @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/chapo/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 first_name: >
   <%= @about.first_name %>
@@ -21,8 +22,6 @@ website: >-
 <% if @about.best_picture.attached? %>
 image: "<%= @about.best_picture.blob.id %>"
 <% end %>
-description: >
-  <%= prepare_text_for_static @about.description %>
 roles:
 <% if @about.author.for_website?(@website) %>
   - author
@@ -47,7 +46,7 @@ teachings:
       title: >
         <%= target.to_s %>
       url: >
-        <%= target.path_in_website(@website) if target.respond_to? :path_in_website %>
+        <%= target.current_permalink_in_website(@website)&.path %>
 <% end %>
 <% end %>
 <% if @about.roles_as_administrator.any? %>
@@ -60,7 +59,7 @@ administrative_missions:
       title: >
         <%= target.to_s %>
       url: >
-        <%= target.path_in_website(@website) if target.respond_to? :path_in_website %>
+        <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
 <% end %>
 <% end %>
 <%= render 'admin/communication/blocks/static', about: @about %>

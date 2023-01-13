@@ -1,7 +1,7 @@
 <% content_for :title, @organization %>
 <div class="row">
   <div class="col-md-8">
-    <%= render 'admin/application/chapo/show', about: @organization %>
+    <%= render 'admin/application/summary/show', about: @organization %>
     <% if strip_tags(@organization.text.to_html).present? %>
       <div class="card">
         <div class="card-header">
@@ -39,7 +39,7 @@
                               @organization.url,
                               target: :_blank %></p>
             <% end %>
-            <% [:phone, :email].each do |property| %>
+            <% [:phone, :email, :linkedin, :twitter].each do |property| %>
               <% value = @organization.send property %>
               <% next if value.blank? %>
               <h3 class="h5">
@@ -103,17 +103,7 @@
         </div>
       </div>
     <% end %>
-    <% if @organization.description.present? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= University::Organization.human_attribute_name('description') %></h3>
-          <%= simple_format @organization.description %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'admin/application/meta_description/show', about: @organization %>
   </div>
 </div>
 

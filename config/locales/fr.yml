@@ -43,6 +43,7 @@ fr:
       language:
         iso_code: Code Iso
         name: Nom
+        summernote_locale: Nom de la locale Summernote
       user:
         admin_theme: Thème de l'administration
         email: Email
@@ -96,6 +97,9 @@ fr:
       sentence_without_link: Valeur héritée
       sentence_html: Valeur héritée de %{link}
       status: Valeur héritée
+    meta_description:
+      hint: Texte simple, dédié au SEO
+      label: Meta description
     pending_tasks:
       label: Tâches en cours de traitement
       hint: L'exécution de ces tâches contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être. Cela peut générer un délai avant que vos modifications ne soient visibles.
@@ -106,6 +110,7 @@ fr:
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
+    summary: Résumé
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
@@ -264,6 +269,7 @@ fr:
       language:
         iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
         name: Nom dans la langue (= "Français", "Deutsch", ...)
+        summernote_locale: 'Nom de la locale de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
       user:
         mobile_phone: "Format international (+XX). Ce numéro reste privé. En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
     include_blanks:

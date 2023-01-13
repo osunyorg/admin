@@ -7,9 +7,13 @@
       <div class="card flex-fill w-100">
         <div class="card-body">
           <%= f.input :title %>
+          <%= render 'admin/application/summary/form', f: f, about: journal %>
           <%= f.input :issn %>
         </div>
       </div>
+    </div>
+    <div class="col-md-6">
+      <%= render 'admin/application/meta_description/form', f: f, about: journal %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

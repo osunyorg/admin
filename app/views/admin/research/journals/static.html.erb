@@ -3,6 +3,6 @@ title: >
   <%= @about.title %>
 issn: >
   <%= @about.issn %>
-description: >
-  <%= prepare_text_for_static @about.description %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 ---

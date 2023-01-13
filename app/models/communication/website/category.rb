@@ -3,16 +3,16 @@
 # Table name: communication_website_categories
 #
 #  id                       :uuid             not null, primary key
-#  description              :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  github_path              :text
 #  is_programs_root         :boolean          default(FALSE)
+#  meta_description         :text
 #  name                     :string
 #  path                     :string
 #  position                 :integer
 #  slug                     :string
-#  text                     :text
+#  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -109,6 +109,13 @@ class Communication::Website::Category < ApplicationRecord
 
   def slug_with_ancestors_slugs
     (ancestors.map(&:slug) << slug).join('-')
+  end
+
+  def best_featured_image_source(fallback: true)
+    return self if featured_image.attached?
+    best_source = parent&.best_featured_image_source(fallback: false)
+    best_source ||= self if fallback
+    best_source
   end
 
   protected

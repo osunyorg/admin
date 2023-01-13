@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <%= f.input :name %>
-          <%= f.input :description_short %>
+          <%= render 'admin/application/summary/form', f: f, about: organization %>
           <%= f.input :text,
                       as: :summernote,
                       input_html: {
@@ -36,6 +36,8 @@
               <%= f.input :url %>
               <%= f.input :phone %>
               <%= f.input :email %>
+              <%= f.input :linkedin %>
+              <%= f.input :twitter %>
             </div>
           </div>
         </div>
@@ -93,14 +95,7 @@
                       direct_upload: true %>
         </div>
       </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description %>
-        </div>
-      </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: organization %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

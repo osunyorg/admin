@@ -8,8 +8,6 @@
 #  birthdate          :date
 #  city               :string
 #  country            :string
-#  description        :text
-#  description_short  :text
 #  email              :string
 #  first_name         :string
 #  gender             :integer
@@ -21,11 +19,13 @@
 #  is_teacher         :boolean
 #  last_name          :string
 #  linkedin           :string
+#  meta_description   :text
 #  name               :string
 #  phone_mobile       :string
 #  phone_personal     :string
 #  phone_professional :string
 #  slug               :string
+#  summary            :text
 #  tenure             :boolean          default(FALSE)
 #  twitter            :string
 #  url                :string

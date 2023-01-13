@@ -13,16 +13,15 @@ has:
 <% end %>
 position: <%= @about.position %>
 bodyclass: <%= @about.best_bodyclass %>
-<%= render 'admin/communication/unsplash/static' %>
+<%= render 'admin/application/featured_image/static' %>
 <% if @about.children.published.any? %>
 children:
 <% @about.children.published.ordered.each do |child| %>
   - <%= child.path %>
 <% end %>
 <% end %>
-description: >
-  <%= prepare_text_for_static @about.description %>
-<%= render 'admin/application/chapo/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 header_text: >-
   <%= prepare_html_for_static @about.header_text, @website.university %>
 legacy_text: >

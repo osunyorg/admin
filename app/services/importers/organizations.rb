@@ -43,7 +43,7 @@ module Importers
       @kind = @hash[2].to_s.strip
       @siren = @hash[3].to_s.strip
       @nic = @hash[4].to_s.strip
-      @description = @hash[5].to_s.strip
+      @meta_description = @hash[5].to_s.strip
       @address = @hash[6].to_s.strip
       @zipcode = @hash[7].to_s.strip
       @city = @hash[8].to_s.strip
@@ -64,7 +64,7 @@ module Importers
         @organization.kind = @kind.to_sym
         @organization.siren = @siren
         @organization.nic = @nic
-        @organization.description = @description
+        @organization.meta_description = @meta_description
         @organization.address = @address
         @organization.zipcode = @zipcode
         @organization.city = @city

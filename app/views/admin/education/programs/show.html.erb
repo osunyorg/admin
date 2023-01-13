@@ -2,6 +2,7 @@
 
 <div class="row">
   <div class="col-lg-8 col-xxl-9">
+    <%= render 'admin/application/summary/show', about: @program %>
     <%= render 'admin/education/programs/forms/part',
                 part: :essential,
                 collapsed: false do %>
@@ -15,12 +16,6 @@
             <%= Education::Program.human_attribute_name('diploma') %>
           </h3>
           <p><%= link_to @program.diploma, [:admin, @program.diploma] if @program.diploma %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('description_short') %>
-          </h3>
-          <p class="lead">
-            <%= sanitize @program.description_short %>
-          </p>
           <% if @program.schools.any? %>
             <h3 class="h5 mt-4">
               <%= Education::Program.human_attribute_name('schools') %>
@@ -58,7 +53,7 @@
               <%= Education::Program.human_attribute_name('downloadable_summary') %>
             </h3>
             <p><%= link_to "#{@program.downloadable_summary.filename} (#{ number_to_human_size @program.downloadable_summary.blob.byte_size })",
-                            url_for(@program.downloadable_summary), 
+                            url_for(@program.downloadable_summary),
                             target: :_blank %></p>
           <% end %>
         </div>
@@ -143,17 +138,7 @@
       <% end %>
     <% end %>
     <%= render 'admin/application/featured_image/show', about: @program %>
-    <% if @program.description.present? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('seo') %></h5>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Education::Program.human_attribute_name('description') %></h3>
-          <%= simple_format @program.description %>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'admin/application/meta_description/show', about: @program %>
   </div>
 </div>
 

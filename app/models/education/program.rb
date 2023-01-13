@@ -9,13 +9,12 @@
 #  contacts              :text
 #  content               :text
 #  continuing            :boolean
-#  description           :text
-#  description_short     :text
 #  duration              :text
 #  evaluation            :text
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  initial               :boolean
+#  meta_description      :text
 #  name                  :string
 #  objectives            :text
 #  opportunities         :text
@@ -32,6 +31,7 @@
 #  results               :text
 #  short_name            :string
 #  slug                  :string
+#  summary               :text
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  diploma_id            :uuid             indexed
@@ -126,19 +126,17 @@ class Education::Program < ApplicationRecord
     "#{name}"
   end
 
-  def best_featured_image(fallback: true)
-    return featured_image if featured_image.attached?
-    best_image = parent&.best_featured_image(fallback: false)
-    best_image ||= featured_image if fallback
-    best_image
+  def best_featured_image_source(fallback: true)
+    return self if featured_image.attached?
+    best_source = parent&.best_featured_image_source(fallback: false)
+    best_source ||= self if fallback
+    best_source
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}programs/#{path}/_index.html" if for_website?(website)
-  end
-
-  def path_in_website(website)
-    Static.clean_path "#{website.special_page(Communication::Website::Page::EducationProgram)&.path}#{path}"
+    return unless for_website?(website)
+    clean_path = Static.clean_path "#{git_path_content_prefix(website)}programs/#{path}/"
+    "#{clean_path}_index.html"
   end
 
   def git_dependencies(website)

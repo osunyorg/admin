@@ -16,10 +16,9 @@ categories:
   - "<%= category.slug_with_ancestors_slugs %>"
   <% end %>
 <% end %>
-<%= render 'admin/communication/unsplash/static' %>
-description: >
-  <%= prepare_text_for_static @about.description %>
-<%= render 'admin/application/chapo/static' %>
+<%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
 <%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>
