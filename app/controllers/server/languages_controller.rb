@@ -57,6 +57,6 @@ class Server::LanguagesController < Server::ApplicationController
   end
 
   def language_params
-    params.require(:language).permit(:name, :iso_code)
+    params.require(:language).permit(:name, :iso_code, :summernote_locale)
   end
 end
