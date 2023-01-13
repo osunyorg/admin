@@ -99,13 +99,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def page_params
-    params.require(:communication_website_page)
-          .permit(
-            :communication_website_id, :title, :breadcrumb_title, :bodyclass,
-            :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :parent_id, :language_id
-          )
-          .merge(university_id: current_university.id)
+    allowed_properties = [:communication_website_id, :title, :breadcrumb_title, :bodyclass,
+                          :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
+                          :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+                          :parent_id]
+    allowed_properties << :language_id if @website.languages.many?
+    allowed_params = params.require(:communication_website_page)
+                           .permit(allowed_properties)
+                           .merge(university_id: current_university.id)
+    allowed_params = allowed_params.merge(language_id: @website.default_language_id) if @website.languages.one?
+    allowed_params
   end
 end

@@ -39,8 +39,6 @@ url = page.new_record?  ? admin_communication_website_pages_path
                         } unless page.is_home? %>
             <% if @website.languages.many? %>
               <%= f.input :language_id, collection: @website.languages, include_blank: false %>
-            <% elsif @website.languages.any? %>
-              <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
             <% end %>
             <%= f.association :parent,
                               collection: collection_tree(@website.pages, page),

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_12_151136) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -319,12 +319,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_151136) do
     t.text "header_text"
     t.integer "kind"
     t.string "bodyclass"
-    t.uuid "language_id"
+    t.uuid "language_id", null: false
     t.text "featured_image_credit"
     t.boolean "full_width", default: false
     t.string "type"
+    t.uuid "original_id"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
+    t.index ["original_id"], name: "index_communication_website_pages_on_original_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
@@ -879,6 +881,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_151136) do
   add_foreign_key "communication_website_menu_items", "universities"
   add_foreign_key "communication_website_menus", "communication_websites"
   add_foreign_key "communication_website_menus", "universities"
+  add_foreign_key "communication_website_pages", "communication_website_pages", column: "original_id"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
   add_foreign_key "communication_website_pages", "universities"
