@@ -1,7 +1,7 @@
 class Admin::Research::DocumentsController < Admin::Research::ApplicationController
 
   def index
-    @documents = Research::Document.all.page(params[:page])
+    @documents = current_university.research_documents.page(params[:page])
     breadcrumb
   end
 

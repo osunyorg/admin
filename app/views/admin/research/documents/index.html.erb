@@ -5,7 +5,6 @@
     <thead>
       <tr>
         <th><%= Research::Document.human_attribute_name('title') %></th>
-        <th width="400"><%= Research::Document.human_attribute_name('ref') %></th>
         <th><%= Research::Document.human_attribute_name('url') %></th>
       </tr>
     </thead>
@@ -14,8 +13,7 @@
       <% @documents.each do |document| %>
         <tr>
           <td><%= link_to document, admin_research_document_path(document) %></td>
-          <td><%= sanitize document.ref %></td>
-          <td><%= link_to t('show'), document.url, class: button_classes, target: :_blank %></td>
+          <td><%= link_to t('open'), document.url, class: button_classes, target: :_blank %></td>
         </tr>
       <% end %>
     </tbody>

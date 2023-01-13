@@ -2,10 +2,11 @@ module University::Person::WithResearch
   extend ActiveSupport::Concern
 
   included do
-    has_many :research_documents
+    has_many :research_documents, class_name: 'Research::Document', foreign_key: :university_person_id
   end
 
   def load_research_documents!
+    return unless hal_person_identifier.present?
     url = "https://api.archives-ouvertes.fr/search/?q=authIdPerson_i:#{hal_person_identifier}&fl=docid,title_s,citationRef_s,uri_s&rows=1000"
     uri = URI(url)
     response = Net::HTTP.get(uri)

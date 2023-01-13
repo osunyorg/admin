@@ -16,35 +16,27 @@
   </div>
 <% end %>
 
-<% content_for :action_bar_right do %>
-  <%= edit_link @researcher %>
-<% end %>
-
-
-<% if @researcher.hal_person_identifier.present? %>
-  <h2 class="h4 mt-5">Publications</h2>
-  <%
-  url = "https://api.archives-ouvertes.fr/search/?q=authIdPerson_i:#{@researcher.hal_person_identifier}&fl=title_s,citationRef_s,uri_s&rows=1000"
-  uri = URI(url)
-  response = Net::HTTP.get(uri)
-  data = JSON.parse(response)
-  %>
-  <table class="table">
+<h2 class="h4 mt-5">Publications</h2>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th>Titre</th>
-        <th>Source</th>
-        <th>URL</th>
+        <th><%= Research::Document.human_attribute_name('title') %></th>
+        <th><%= Research::Document.human_attribute_name('url') %></th>
       </tr>
     </thead>
     <tbody>
-      <% data['response']['docs'].each do |doc| %>
+      <% @researcher.research_documents.each do |document| %>
         <tr>
-          <td><%= sanitize doc['title_s'][0] %></td>
-          <td><%= sanitize doc['citationRef_s'] %></td>
-          <td><%= link_to t('show'), doc['uri_s'], target: :_blank %></td>
+          <td><%= link_to document, admin_research_document_path(document) %></td>
+          <td><%= link_to t('open'), document.url, class: button_classes, target: :_blank %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @researcher %>
 <% end %>
+
