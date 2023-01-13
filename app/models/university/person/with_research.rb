@@ -21,4 +21,9 @@ module University::Person::WithResearch
     end
   end
 
+  def possible_hal_authors
+    data = HalOpenscience::Author.search(to_s, fields: ['*'])
+    data.results.reject { |r| !r.attributes.has_key?('person_i') }
+  end
+
 end

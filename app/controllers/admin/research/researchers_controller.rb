@@ -8,13 +8,28 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def show
-    @researcher = current_university.people.researchers.accessible_by(current_ability).find(params[:id])
-    @researcher.load_research_documents!
+    load
+    if @researcher.hal_person_identifier.present?
+      @researcher.load_research_documents!
+    else
+      @possible_hal_authors = @researcher.possible_hal_authors
+    end
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
   end
 
+  def update
+    load
+    @researcher.update_column :hal_person_identifier, params[:hal_person_identifier] if params.has_key? :hal_person_identifier
+    @researcher.load_research_documents!
+    redirect_to admin_research_researcher_path(@researcher)
+  end
+
   protected
+
+  def load
+    @researcher = current_university.people.researchers.accessible_by(current_ability).find(params[:id])
+  end
 
   def breadcrumb
     super

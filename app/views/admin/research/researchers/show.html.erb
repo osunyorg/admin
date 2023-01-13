@@ -41,8 +41,17 @@
     </div>
   <% else %>
     <div class="card-body">
-      <p>Pas d'identifiant HAL<p>
+      <p>Vous n'avez pas d'identifiant HAL. Est-ce l'une des possibilités suivantes ?<p>
       <% # TODO récupération via la gem des auteurs possibles avec le nom complet et choix éventuel %>
+      <ul class="list-unstyled">
+        <% @possible_hal_authors.each do |author| %>
+          <li>
+            <%= link_to admin_research_researcher_path(@researcher, hal_person_identifier: author.person_i), method: :put do %>
+              <%= author.fullName_s %> (identifiant <%= author.person_i %>)
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 </div>
