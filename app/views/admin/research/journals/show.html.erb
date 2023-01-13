@@ -11,6 +11,7 @@
   <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
 <% end %>
 
+<%= render 'admin/application/summary/show', about: @journal %>
 <div class="card mt-5">
   <div class="card-header">
     <div class="float-end">

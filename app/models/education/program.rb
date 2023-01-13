@@ -126,11 +126,11 @@ class Education::Program < ApplicationRecord
     "#{name}"
   end
 
-  def best_featured_image(fallback: true)
-    return featured_image if featured_image.attached?
-    best_image = parent&.best_featured_image(fallback: false)
-    best_image ||= featured_image if fallback
-    best_image
+  def best_featured_image_source(fallback: true)
+    return self if featured_image.attached?
+    best_source = parent&.best_featured_image_source(fallback: false)
+    best_source ||= self if fallback
+    best_source
   end
 
   def git_path(website)
