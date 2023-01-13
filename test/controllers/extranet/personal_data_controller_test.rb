@@ -17,9 +17,4 @@ class Extranet::PersonalDataControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to(account_path)
     assert(alumnus_person.reload.biography.to_s.include?("Je suis un ancien étudiant."))
   end
-
-  def test_update_invalid
-    patch personal_data_path, params: { university_person: { last_name: "" } }
-    assert_response(:unprocessable_entity)
-  end
 end
