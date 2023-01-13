@@ -2,11 +2,12 @@
 #
 # Table name: languages
 #
-#  id         :uuid             not null, primary key
-#  iso_code   :string
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :uuid             not null, primary key
+#  iso_code          :string
+#  name              :string
+#  summernote_locale :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 class Language < ApplicationRecord
 
