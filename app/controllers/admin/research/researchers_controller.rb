@@ -9,6 +9,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def show
     @researcher = current_university.people.researchers.accessible_by(current_ability).find(params[:id])
+    @researcher.load_research_documents!
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
   end

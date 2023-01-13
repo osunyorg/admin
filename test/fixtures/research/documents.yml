@@ -1,0 +1,44 @@
+# == Schema Information
+#
+# Table name: research_documents
+#
+#  id                   :uuid             not null, primary key
+#  data                 :jsonb
+#  docid                :string
+#  ref                  :string
+#  title                :string
+#  url                  :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  university_id        :uuid             not null, indexed
+#  university_person_id :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_research_documents_on_university_id         (university_id)
+#  index_research_documents_on_university_person_id  (university_person_id)
+#
+# Foreign Keys
+#
+#  fk_rails_03e727a207  (university_person_id => university_people.id)
+#  fk_rails_ceb4d1344f  (university_id => universities.id)
+#
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  university: one
+  university_person: one
+  docid: MyString
+  data: 
+  title: MyString
+  url: MyString
+  ref: MyString
+
+two:
+  university: two
+  university_person: two
+  docid: MyString
+  data: 
+  title: MyString
+  url: MyString
+  ref: MyString

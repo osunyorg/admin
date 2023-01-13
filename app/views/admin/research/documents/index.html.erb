@@ -1,0 +1,23 @@
+<% content_for :title, Research::Document.model_name.human(count: 2) %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Research::Document.human_attribute_name('title') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @documents.each do |document| %>
+        <tr>
+          <td><%= link_to document, admin_research_document_path(document) %></td>
+          <td><%= document.ref %></td>
+          <td><%= link_to t('show'), document.url, class: button_classes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @documents, theme: 'bootstrap-5' %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @research_document %>
+
+<div>
+  <%= link_to "Edit this document", edit_research_document_path(@research_document) %> |
+  <%= link_to "Back to documents", research_documents_path %>
+
+  <%= button_to "Destroy this document", @research_document, method: :delete %>
+</div>

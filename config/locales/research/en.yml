@@ -4,6 +4,9 @@ en:
       research: Research
   activerecord:
     models:
+      research/document:
+        one: Document
+        other: Documents
       research/journal:
         one: Journal
         other: Journals

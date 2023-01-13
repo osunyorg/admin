@@ -1,5 +1,6 @@
 namespace :research do
   resources :researchers, only: [:index, :show]
+  resources :documents, only: [:index, :show, :update]
   resources :journals do
     resources :volumes, controller: 'journals/volumes'
     resources :papers, controller: 'journals/papers' do
