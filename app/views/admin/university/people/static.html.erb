@@ -62,6 +62,17 @@ administrative_missions:
         <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
 <% end %>
 <% end %>
+<% if @about.research_documents.any? %>
+documents:
+<% @about.research_documents.each do |document| %>
+  - title: >
+      <%= prepare_text_for_static document.title %>
+    ref: >
+      <%= prepare_html_for_static document.ref, @website.university %>
+    url: >
+      <%= prepare_text_for_static document.url %>
+<% end %>
+<% end %>
 <%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography, @about.university %>
