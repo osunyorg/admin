@@ -12,13 +12,16 @@ module University::Person::WithResearch
   def load_research_documents!
     return unless hal_identity?
     response = HalOpenscience::Document.search  "authIdForm_i:#{hal_form_identifier}",
-                                                fields: ["docid", "title_s", "citationRef_s", "uri_s"],
+                                                fields: ["docid", "title_s", "citationRef_s", "uri_s", "*"],
                                                 limit: 1000
     response.results.each do |doc|
       document = Research::Document.where(university: university, person: self, docid: doc.docid).first_or_create
       document.title = doc.title_s[0]
       document.ref = doc.citationRef_s
-      document.url = doc.uri_s
+      document.hal_url = doc.uri_s
+      document.doi = doc.attributes['doiId_s']
+      document.publication_date = doc.publicationDate_tdate
+      document.url = doc.attributes['linkExtUrl_s']
       document.save
     end
   end

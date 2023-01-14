@@ -12,6 +12,8 @@
 #  first_name            :string
 #  gender                :integer
 #  habilitation          :boolean          default(FALSE)
+#  hal_doc_identifier    :string
+#  hal_form_identifier   :string
 #  hal_person_identifier :string
 #  is_administration     :boolean
 #  is_alumnus            :boolean          default(FALSE)

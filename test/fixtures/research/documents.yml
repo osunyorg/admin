@@ -5,6 +5,7 @@
 #  id                   :uuid             not null, primary key
 #  data                 :jsonb
 #  docid                :string
+#  hal_url              :string
 #  ref                  :string
 #  title                :string
 #  url                  :string

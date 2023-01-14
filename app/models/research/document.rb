@@ -5,6 +5,7 @@
 #  id                   :uuid             not null, primary key
 #  data                 :jsonb
 #  docid                :string
+#  hal_url              :string
 #  ref                  :string
 #  title                :string
 #  url                  :string
@@ -27,6 +28,11 @@ class Research::Document < ApplicationRecord
   include WithUniversity
 
   belongs_to :person, class_name: 'University::Person', foreign_key: :university_person_id
+
+  def doi_url
+    return unless doi.present?
+    "http://dx.doi.org/#{doi}"
+  end
 
   def to_s
     "#{title}"
