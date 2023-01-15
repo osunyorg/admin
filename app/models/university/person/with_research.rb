@@ -6,6 +6,7 @@ module University::Person::WithResearch
                             class_name: 'Research::Publication', 
                             foreign_key: 'research_publication_id',
                             association_foreign_key: 'university_person_id'
+    alias :publications :research_publications
   end
 
   def hal_identity?
