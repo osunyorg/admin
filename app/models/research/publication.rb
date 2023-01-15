@@ -9,17 +9,22 @@
 #  hal_url          :string
 #  publication_date :date
 #  ref              :string
+#  slug             :string
 #  title            :string
 #  url              :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
 class Research::Publication < ApplicationRecord
+  include WithGit
+  include WithSlug
+
   has_and_belongs_to_many :research_people,
                           class_name: 'University::Person', 
                           foreign_key: 'university_person_id',
                           association_foreign_key: 'research_publication_id'
   alias :researchers :research_people
+
   before_destroy { research_people.clear }
 
   validates_presence_of :docid
@@ -39,6 +44,10 @@ class Research::Publication < ApplicationRecord
     publication
   end
 
+  def template_static
+    "admin/research/publications/static"
+  end
+
   def doi_url
     return unless doi.present?
     "http://dx.doi.org/#{doi}"
@@ -46,5 +55,14 @@ class Research::Publication < ApplicationRecord
 
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(slug: slug)
+              .where.not(id: self.id)
+              .exists?
   end
 end

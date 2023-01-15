@@ -12,7 +12,9 @@
           <td><%= link_to publication, admin_research_publication_path(publication) %></td>
           <td>
             <% publication.researchers.each do |researcher| %>
-              <%= link_to researcher, admin_research_researcher_path(researcher) %>
+              <%= link_to_if  researcher.university == current_university, 
+                              researcher, 
+                              admin_research_researcher_path(researcher) %>
             <% end %>
           </td>
         </tr>

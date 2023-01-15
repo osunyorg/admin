@@ -10,6 +10,11 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
     breadcrumb
   end
 
+  def static
+    @about = Research::Publication.find params[:id]
+    render layout: false
+  end
+
   def update
     @publication = Research::Publication.find params[:id]
     # TODO update from api

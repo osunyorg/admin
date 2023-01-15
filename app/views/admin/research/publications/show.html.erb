@@ -12,3 +12,8 @@
 <%= link_to 'HAL', @publication.hal_url, target: :_blank if @publication.hal_url %>
 <%= link_to 'DOI', @publication.doi_url, target: :_blank if @publication.doi_url %>
 
+<% content_for :action_bar_left do %>
+  <%= link_to t('static'),
+              static_admin_research_publication_path(@publication),
+              class: button_classes('btn-light') if current_user.server_admin? %>
+<% end %>

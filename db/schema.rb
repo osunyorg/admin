@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_092626) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_15_162644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -671,6 +671,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_092626) do
     t.string "hal_url"
     t.date "publication_date"
     t.string "doi"
+    t.string "slug"
   end
 
   create_table "research_publications_university_people", id: false, force: :cascade do |t|
