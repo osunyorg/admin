@@ -18,11 +18,14 @@
 
 <div class="card flex-fill w-100">
   <div class="card-header">
-    <h2 class="card-title mb-0 h5"><%= Research::Document.model_name.human(count: 2) %></h2>
+    <h2 class="card-title mb-0 h5">
+      <%= Research::Publication.model_name.human(count: @researcher.research_publications.count) %>
+      (<%= @researcher.research_publications.count %>)
+    </h2>
   </div>
   <% if @researcher.hal_identity? %>
     <div class="table-responsive">
-      <%= render 'admin/research/documents/list', documents: @researcher.research_documents %>
+      <%= render 'admin/research/publications/list', publications: @researcher.research_publications.ordered %>
     </div>
   <% else %>
     <div class="card-body">
@@ -43,8 +46,6 @@
   <% end %>
 </div>
 
-
 <% content_for :action_bar_right do %>
   <%= edit_link @researcher %>
 <% end %>
-

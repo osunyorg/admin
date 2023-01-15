@@ -4,9 +4,6 @@ fr:
       research: Recherche
   activerecord:
     models:
-      research/document:
-        one: Document
-        other: Documents
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -22,6 +19,9 @@ fr:
       research/laboratory/axis:
         one: Axe
         other: Axes
+      research/publication:
+        one: Publication
+        other: Publications
       research/thesis:
         one: Thèse
         other: Thèses

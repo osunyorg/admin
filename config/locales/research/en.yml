@@ -4,9 +4,6 @@ en:
       research: Research
   activerecord:
     models:
-      research/document:
-        one: Document
-        other: Documents
       research/journal:
         one: Journal
         other: Journals
@@ -22,6 +19,9 @@ en:
       research/laboratory/axis:
         one: Axis
         other: Axes
+      research/publication:
+        one: Publication
+        other: Publications
       research/thesis:
         one: Thesis
         other: Theses

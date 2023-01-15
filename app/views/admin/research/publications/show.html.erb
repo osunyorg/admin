@@ -1,0 +1,14 @@
+<% content_for :title, @publication %>
+
+<% @publication.research_people.each do |person| %>
+  <%= link_to person, admin_research_researcher_path(person) %>
+<% end %>
+
+<p><%= @publication.docid %></p>
+
+<div><%= sanitize @publication.ref %></div>
+
+<%= link_to 'url', @publication.url, target: :_blank if @publication.url %>
+<%= link_to 'HAL', @publication.hal_url, target: :_blank if @publication.hal_url %>
+<%= link_to 'DOI', @publication.doi_url, target: :_blank if @publication.doi_url %>
+

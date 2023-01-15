@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Research::Publication.human_attribute_name('title') %></th>
+        <th><%= t('research.researchers', count: 2) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% publications.each do |publication| %>
+        <tr>
+          <td><%= link_to publication, admin_research_publication_path(publication) %></td>
+          <td>
+            <% publication.researchers.each do |researcher| %>
+              <%= link_to researcher, admin_research_researcher_path(researcher) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
