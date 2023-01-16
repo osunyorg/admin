@@ -36,7 +36,11 @@
       <%= render 'admin/education/programs/forms/part', part: :presentation do %>
         <div class="row">
           <div class="col-xxl-6">
-            <%= f.input :presentation %>
+            <%= f.input :presentation,
+                        as: :summernote,
+                        input_html: {
+                          data: { 'summernote-config' => 'link' }
+                        } %>
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :objectives %>
