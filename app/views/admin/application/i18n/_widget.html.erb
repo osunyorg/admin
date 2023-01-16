@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-language fa-2x float-end"></i>
+    <h2 class="card-title mt-1 mb-0">
+      <%= t('internationalization.label') %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <p><%= t('internationalization.text_html', lang: t("languages.#{about.language.iso_code}")) %></p>
+    <h3 class="h5 mt-4"><%= t('internationalization.translations_title') %></h3>
+    <ol class="list-unstyled">
+      <% about.website.languages.each do |language| %>
+        <% next if language.id == about.language_id %>
+        <li>
+          <%= link_to t("languages.#{language.iso_code}"), "#" %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>
