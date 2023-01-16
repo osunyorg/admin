@@ -19,8 +19,8 @@ class Icon
   EDUCATION_SCHOOL = 'university'
   EDUCATION_TEACHER = 'user-graduate'
 
-  RESEARCH_JOURNAL = 'newspaper'
   RESEARCH_LABORATORY = 'flask'
+  RESEARCH_PUBLICATION = 'newspaper'
   RESEARCH_RESEARCHER = 'microscope'
   RESEARCH_THESE = 'scroll'
 
