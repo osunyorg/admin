@@ -12,7 +12,7 @@
       <% about.website.languages.each do |language| %>
         <% next if language.id == about.language_id %>
         <li>
-          <%= link_to t("languages.#{language.iso_code}"), "#" %>
+          <%= link_to t("languages.#{language.iso_code}"), [:translate, :admin, about, iso_code: language.iso_code] %>
         </li>
       <% end %>
     </ol>

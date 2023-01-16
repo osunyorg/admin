@@ -2,6 +2,8 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Page,
                               through: :website
 
+  include Admin::Translatable
+
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
@@ -38,6 +40,20 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def preview
     render layout: 'admin/layouts/preview'
+  end
+
+  def translate
+    language = @website.languages.find_by!(iso_code: params[:iso_code])
+    if @page.language_id == language.id
+      redirect_to [:admin, @page]
+    else
+      # We try to find translation for given language
+      @translation = @page.translations.where(language_id: language.id).first
+      # If not found, duplicate the current page (with blocks and all) for given language
+      @translation ||= @page.duplicate!(language_id: language.id)
+      # Redirect to the translation
+      redirect_to [:admin @translation]
+    end
   end
 
   def new
@@ -99,15 +115,16 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def page_params
-    allowed_properties = [:communication_website_id, :title, :breadcrumb_title, :bodyclass,
-                          :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
-                          :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-                          :parent_id]
-    allowed_properties << :language_id if @website.languages.many?
-    allowed_params = params.require(:communication_website_page)
-                           .permit(allowed_properties)
-                           .merge(university_id: current_university.id)
-    allowed_params = allowed_params.merge(language_id: @website.default_language_id) if @website.languages.one?
-    allowed_params
+    translatable_params(
+      :communication_website_page,
+      [
+        :communication_website_id, :title, :breadcrumb_title, :bodyclass,
+        :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :parent_id
+      ],
+      @website.default_language_id,
+      @website.languages.size
+    )
   end
 end

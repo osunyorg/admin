@@ -78,6 +78,9 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :destroy
+  has_many   :translations,
+             class_name: 'Communication::Website::Page',
+             foreign_key: :original_id
 
   validates :title, presence: true
 
@@ -137,6 +140,21 @@ class Communication::Website::Page < ApplicationRecord
     self.class.unscoped
               .where(parent: parent, university: university, website: website)
               .where.not(id: id)
+  end
+
+  def duplicate!(**new_attributes)
+    duplicate = self.dup
+    duplicate.assign_attributes(
+      original_id: self.id,
+      github_path: nil,
+      published: false,
+      published_at: nil,
+      **new_attributes
+    )
+    duplicate.save
+    # TODO:
+    # Dupliquer les blocs
+    # Dupliquer le featured image
   end
 
   protected

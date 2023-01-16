@@ -94,5 +94,5 @@ module Communication::Website::Page::WithType
     self.full_width = full_width_by_default?
     self.published = published_by_default?
   end
-  
+
 end

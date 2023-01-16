@@ -15,6 +15,7 @@ namespace :communication do
         get :children
         get :static
         get :preview
+        get "translate/:iso_code" => "websites/pages#translate", as: :translate
         post :duplicate
       end
     end

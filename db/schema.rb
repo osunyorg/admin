@@ -567,6 +567,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
     t.string "summernote_locale"
   end
 
+  create_table "research_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "university_person_id", null: false
+    t.string "docid"
+    t.jsonb "data"
+    t.string "title"
+    t.string "url"
+    t.string "ref"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_research_documents_on_university_id"
+    t.index ["university_person_id"], name: "index_research_documents_on_university_person_id"
+  end
+
   create_table "research_journal_papers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.datetime "published_at", precision: nil
@@ -756,6 +770,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
     t.string "zipcode"
     t.string "city"
     t.string "country"
+    t.string "hal_person_identifier"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -903,6 +918,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
   add_foreign_key "education_schools", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
+  add_foreign_key "research_documents", "universities"
+  add_foreign_key "research_documents", "university_people"
   add_foreign_key "research_journal_papers", "research_journal_volumes"
   add_foreign_key "research_journal_papers", "research_journals"
   add_foreign_key "research_journal_papers", "universities"
