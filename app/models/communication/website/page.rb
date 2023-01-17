@@ -82,6 +82,10 @@ class Communication::Website::Page < ApplicationRecord
     "admin/communication/websites/pages/static"
   end
 
+  def static_layout
+    nil
+  end
+
   def git_dependencies(website)
     dependencies = [self] +
                     website.menus +
