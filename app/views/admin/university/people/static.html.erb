@@ -19,6 +19,17 @@ linkedin: >-
   <%= @about.linkedin %>
 website: >-
   <%= @about.url %>
+contact_details:
+  website: <% detail = ContactDetails::Website.new @about.url %>
+    label: <%= detail.label %>
+    url: <%= detail.url %>
+  linkedin: <% detail = ContactDetails::Linkedin.new @about.linkedin %>
+    label: <%= detail.label %>
+    url: <%= detail.url %>
+  twitter: <% detail = ContactDetails::Twitter.new @about.twitter %>
+    label: <%= detail.label %>
+    url: <%= detail.url %>
+
 <% if @about.best_picture.attached? %>
 image: "<%= @about.best_picture.blob.id %>"
 <% end %>
