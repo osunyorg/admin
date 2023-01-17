@@ -24,6 +24,18 @@ kind:
 <%= key %>: >
   <%= prepare_text_for_static value %>
 <% end %>
+
+contact_details:
+  website: <% detail = ContactDetails::Website.new @about.url %>
+    label: <%= detail.label %>
+    url: <%= detail.url %>
+  linkedin: <% detail = ContactDetails::Linkedin.new @about.linkedin %>
+    label: <%= detail.label %>
+    url: <%= detail.url %>
+  twitter: <% detail = ContactDetails::Twitter.new @about.twitter %>
+    label: <%= detail.label %>
+    url: <%= detail.url %>
+
 <% # url is a reserved keyword for Hugo %>
 website: >
   <%= prepare_text_for_static @about.url %>
