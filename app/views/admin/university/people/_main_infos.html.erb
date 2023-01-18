@@ -54,7 +54,11 @@
           <% end %>
           <% unless person.twitter.blank? %>
             <h3 class="h5"><%= University::Person.human_attribute_name('twitter') %></h3>
-            <%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %>
+            <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
+          <% end %>
+          <% unless person.mastodon.blank? %>
+            <h3 class="h5"><%= University::Person.human_attribute_name('mastodon') %></h3>
+            <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
           <% end %>
         </div>
       </div>
