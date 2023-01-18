@@ -3,11 +3,7 @@ class ContactDetails::Twitter < ContactDetails::Base
   DOMAIN = 'twitter.com'
   
   protected
-  
-  # arnaudlevy
-  # twitter.com/arnaudlevy
-  # https://twitter.com/arnaudlevy
-  # TODO vrais tests
+
   def prepare_url
     @url = @string
     @url.remove! DOMAIN if @url.start_with? DOMAIN

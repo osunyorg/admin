@@ -2,7 +2,7 @@ class ContactDetails::Base
   attr_accessor :url, :label
 
   def initialize(string)
-    @string = string
+    @string = string.to_s
     prepare_url
     prepare_label
   end
