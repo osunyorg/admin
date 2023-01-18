@@ -38,6 +38,24 @@ class ContactDetailsTest < ActiveSupport::TestCase
     assert_equal 'https://twitter.com/arnaudlevy', detail.url
   end
 
+  test "mastodon nil" do
+    detail = ContactDetails::Mastodon.new nil
+    assert_nil detail.label
+    assert_nil detail.url
+  end
+
+  test "mastodon mastodon.social/@arnaudlevy" do
+    detail = ContactDetails::Mastodon.new 'mastodon.social/@arnaudlevy'
+    assert_equal 'mastodon.social/@arnaudlevy', detail.label
+    assert_equal 'https://mastodon.social/@arnaudlevy', detail.url
+  end
+
+  test "mastodon https://mastodon.social/@arnaudlevy" do
+    detail = ContactDetails::Mastodon.new 'https://mastodon.social/@arnaudlevy'
+    assert_equal 'mastodon.social/@arnaudlevy', detail.label
+    assert_equal 'https://mastodon.social/@arnaudlevy', detail.url
+  end
+
   test "twitter twitter.com/arnaudlevy" do
     detail = ContactDetails::Twitter.new 'twitter.com/arnaudlevy'
     assert_equal 'arnaudlevy', detail.label
