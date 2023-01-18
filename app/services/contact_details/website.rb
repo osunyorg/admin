@@ -3,12 +3,12 @@ class ContactDetails::Website < ContactDetails::Base
 
   protected
 
-  def prepare_url
+  def prepare_value
     super
-    @url = "#{PROTOCOL}#{@url}" unless @url.start_with? PROTOCOL
+    @value = "#{PROTOCOL}#{@value}" unless @value.start_with? PROTOCOL
   end
 
   def prepare_label
-    @label = @url.remove PROTOCOL
+    @label = @value.remove PROTOCOL
   end
 end

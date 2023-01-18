@@ -3,8 +3,8 @@ class ContactDetails::Email < ContactDetails::Base
 
   protected
 
-  def prepare_url
-    @url = "#{PREFIX}#{@string}"
+  def prepare_value
+    @value = "#{PREFIX}#{@string}"
   end
 
 end
