@@ -48,5 +48,9 @@ class Communication::Website::Page::Sitemap < Communication::Website::Page
   def draftable?
     false
   end
+  
+  def static_layout
+    'sitemap'
+  end
 
 end
