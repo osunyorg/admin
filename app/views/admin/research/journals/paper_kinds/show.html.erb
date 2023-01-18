@@ -1,0 +1,9 @@
+<% content_for :title, @paper_kind %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @paper_kind %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @paper_kind %>
+<% end %>

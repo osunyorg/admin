@@ -2,7 +2,7 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Research::Journal::Paper.model_name.human %></th>
+        <th><%= Research::Journal::Paper.human_attribute_name('title') %></th>
         <th><%= Research::Journal::Paper.human_attribute_name('published_at') %></th>
         <th></th>
       </tr>

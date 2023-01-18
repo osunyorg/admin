@@ -7,6 +7,7 @@ namespace :research do
         post :reorder
       end
     end
+    resources :paper_kinds, controller: 'journals/paper_kinds'
   end
   resources :laboratories do
     resources :axes, controller: 'laboratories/axes' do

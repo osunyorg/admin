@@ -21,6 +21,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   end
 
   def create
+    byebug
     @paper.assign_attributes(
       journal: @journal,
       university: current_university,
@@ -42,7 +43,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
-  end
+    end
   end
 
   def destroy

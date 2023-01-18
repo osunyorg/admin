@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Research::Journal::Paper::Kind.human_attribute_name('title') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% paper_kinds.each do |paper_kind| %>
+        <tr>
+          <td>
+            <%= link_to paper_kind,
+                        admin_research_journal_paper_kind_path(journal_id: paper_kind.journal, id: paper_kind) %>
+          </td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_research_journal_paper_kind_path(journal_id: paper_kind.journal, id: paper_kind),
+                          class: button_classes %>
+              <%= link_to t('delete'),
+                          admin_research_journal_paper_kind_path(journal_id: paper_kind.journal, id: paper_kind),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

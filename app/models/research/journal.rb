@@ -31,6 +31,7 @@ class Research::Journal < ApplicationRecord
   has_many :published_papers, -> { published }, class_name: 'Research::Journal::Paper', foreign_key: :research_journal_id, dependent: :destroy
   has_many :people, -> { distinct }, through: :papers
   has_many :people_through_published_papers, -> { distinct }, through: :published_papers, source: :people
+  has_many :paper_kinds, class_name: 'Research::Journal::Paper::Kind'
 
   scope :ordered, -> { order(:title) }
   scope :for_search_term, -> (term) {
