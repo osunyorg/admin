@@ -22,6 +22,7 @@
 #  is_teacher            :boolean
 #  last_name             :string
 #  linkedin              :string
+#  mastodon              :string
 #  meta_description      :text
 #  name                  :string
 #  phone_mobile          :string

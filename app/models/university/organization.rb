@@ -11,6 +11,7 @@
 #  kind             :integer          default("company")
 #  linkedin         :string
 #  long_name        :string
+#  mastodon         :string
 #  meta_description :text
 #  name             :string
 #  nic              :string

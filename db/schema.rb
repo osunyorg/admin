@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_162644) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_155630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -747,6 +747,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_162644) do
     t.text "summary"
     t.string "twitter"
     t.string "linkedin"
+    t.string "mastodon"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -785,6 +786,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_162644) do
     t.string "hal_person_identifier"
     t.string "hal_doc_identifier"
     t.string "hal_form_identifier"
+    t.string "mastodon"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
