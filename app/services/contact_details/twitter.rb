@@ -1,7 +1,6 @@
 class ContactDetails::Twitter < ContactDetails::Base
   URL = 'https://twitter.com'
   DOMAIN = 'twitter.com'
-
   
   protected
   

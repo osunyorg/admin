@@ -24,21 +24,20 @@ kind:
 <%= key %>: >
   <%= prepare_text_for_static value %>
 <% end %>
-
-contact_details:
-  website: <% detail = ContactDetails::Website.new @about.url %>
-    label: <%= detail.label %>
-    url: <%= detail.url %>
-  linkedin: <% detail = ContactDetails::Linkedin.new @about.linkedin %>
-    label: <%= detail.label %>
-    url: <%= detail.url %>
-  twitter: <% detail = ContactDetails::Twitter.new @about.twitter %>
-    label: <%= detail.label %>
-    url: <%= detail.url %>
-
 <% # url is a reserved keyword for Hugo %>
 website: >
   <%= prepare_text_for_static @about.url %>
+contact_details:
+<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin %>
+<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter %>
+<%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
+<%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>
