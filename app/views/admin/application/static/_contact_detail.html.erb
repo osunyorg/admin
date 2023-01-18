@@ -1,6 +1,8 @@
 <%
 detail = kind.new data
+if detail.present?
 %>
   <%= variable %>:
     label: <%= detail.label %>
     url: <%= detail.url %>
+<% end %>
