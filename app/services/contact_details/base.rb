@@ -9,7 +9,7 @@ class ContactDetails::Base
   end
 
   def present?
-    label.present? && url.present?
+    url.present?
   end
 
   protected
