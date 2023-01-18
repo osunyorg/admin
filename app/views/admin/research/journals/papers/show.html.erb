@@ -65,6 +65,9 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @paper %>
+  <%= link_to t('static'),
+            static_admin_research_journal_paper_path(@paper),
+            class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>

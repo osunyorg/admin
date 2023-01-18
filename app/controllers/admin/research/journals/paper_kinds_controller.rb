@@ -8,7 +8,12 @@ class Admin::Research::Journals::PaperKindsController < Admin::Research::Journal
   def show
     breadcrumb
   end
-  
+
+  def static
+    @about = @paper_kind
+    render layout: false
+  end
+
   def new
     breadcrumb
   end

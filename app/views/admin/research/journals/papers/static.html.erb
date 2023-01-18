@@ -1,5 +1,6 @@
 ---
-title: "<%= @about.title %>"
+title: >-
+  <%= prepare_text_for_static @about.title %>
 slug: "<%= @about.slug %>"
 <% if @about.volume && @about.volume.path %>
 volumes:

@@ -11,6 +11,11 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     breadcrumb
   end
 
+  def static
+    @about = @paper
+    render layout: false
+  end
+
   def new
     breadcrumb
   end

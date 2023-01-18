@@ -2,6 +2,9 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @paper_kind %>
+  <%= link_to t('static'),
+            static_admin_research_journal_paper_kind_path(@paper_kind),
+            class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>
