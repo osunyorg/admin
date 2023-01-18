@@ -3,14 +3,14 @@ class ContactDetails::Phone < ContactDetails::Base
 
   protected
 
-  def prepare_url
+  def prepare_value
     super
-    @url.remove! ' '
-    @url.remove! '.'
-    @url = "#{PREFIX}#{@url}"
+    @value.remove! ' '
+    @value.remove! '.'
+    @value = "#{PREFIX}#{@value}"
   end
 
   def prepare_label
-    @label = @url.remove PREFIX
+    @label = @value.remove PREFIX
   end
 end
