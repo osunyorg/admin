@@ -4,7 +4,7 @@ class ContactDetails::Website < ContactDetails::Base
   protected
 
   def prepare_url
-    @url = @string.to_s
+    super
     @url = "#{PROTOCOL}#{@url}" unless @url.start_with? PROTOCOL
   end
 

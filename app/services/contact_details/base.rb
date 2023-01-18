@@ -3,17 +3,22 @@ class ContactDetails::Base
 
   def initialize(string)
     @string = string.to_s
+    return if @string.blank?
     prepare_url
     prepare_label
   end
 
-  protected
-
-  def prepare_label
-    @label = @string
+  def present?
+    url.present?
   end
 
+  protected
+
   def prepare_url
-    @url = @string
+    @url = @string.dup
+  end
+
+  def prepare_label
+    @label = @string.dup
   end
 end

@@ -1,20 +1,19 @@
 class ContactDetails::Twitter < ContactDetails::Base
-  URL = 'https://twitter.com'
+  URL = 'https://twitter.com/'
   DOMAIN = 'twitter.com'
-  
+
   protected
 
   def prepare_url
-    @url = @string
+    super
     @url.remove! DOMAIN if @url.start_with? DOMAIN
     @url.remove! URL if @url.start_with? URL
     @url.delete_suffix! '/'
     @url.delete_prefix! '/'
-    @url = "#{URL}/#{@string}"
+    @url = "#{URL}#{@url}"
   end
-  
+
   def prepare_label
-    super
-    @label.remove! URL
+    @label = @url.remove URL
   end
 end
