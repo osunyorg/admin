@@ -4,10 +4,6 @@ class ContactDetails::Twitter < ContactDetails::Base
 
   protected
 
-  # arnaudlevy
-  # twitter.com/arnaudlevy
-  # https://twitter.com/arnaudlevy
-  # TODO vrais tests
   def prepare_url
     super
     @url.remove! DOMAIN if @url.start_with? DOMAIN
