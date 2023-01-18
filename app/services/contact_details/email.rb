@@ -1,9 +1,10 @@
 class ContactDetails::Email < ContactDetails::Base
+  PREFIX = "mailto:"
 
   protected
 
   def prepare_url
-    @url = "mailto:#{@string}"
+    @url = "#{PREFIX}#{@string}"
   end
 
 end
