@@ -55,7 +55,7 @@ SimpleNavigation::Configuration.run do |navigation|
                     { icon: 'comments' }
     end
 
-    if can?(:read, Research::Publication) || can?(:read, Research::Laboratory)
+    if can?(:read, Research::Journal) || can?(:read, Research::Publication) || can?(:read, Research::Laboratory)
       primary.item :research,
                     Research.model_name.human,
                     nil,
@@ -71,6 +71,10 @@ SimpleNavigation::Configuration.run do |navigation|
                     Research::Thesis.model_name.human(count: 2),
                     admin_research_theses_path,
                     { icon: Icon::RESEARCH_THESE } if can?(:read, Research::Thesis)
+      primary.item :research_journals,
+                    Research::Journal.model_name.human(count: 2),
+                    admin_research_journals_path,
+                    { icon: Icon::RESEARCH_JOURNAL } if can?(:read, Research::Journal)
       primary.item :research_publications,
                     Research::Publication.model_name.human(count: 2),
                     admin_research_publications_path,
