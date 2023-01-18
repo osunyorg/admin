@@ -6,6 +6,7 @@ class Admin::Research::Journals::PaperKindsController < Admin::Research::Journal
   end
   
   def show
+    @papers = @paper_kind.papers.page params[:page]
     breadcrumb
   end
 

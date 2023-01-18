@@ -36,6 +36,7 @@ en:
         published: Published?
         published_at: Published at
         references: References
+        paper_kind: Kind of paper
         people: Authors
         text: Text
         title: Title

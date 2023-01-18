@@ -47,6 +47,12 @@
           </h3>
           <p><%= @paper.keywords %></p>
         <% end %>
+        <% if @paper.paper_kind %>
+          <h3 class="h5">
+            <%= Research::Journal::Paper.human_attribute_name('paper_kind') %>
+          </h3>
+          <p><%= link_to @paper.paper_kind, admin_research_journal_paper_kind_path(@paper.paper_kind) %></p>
+        <% end %>
         <% if @paper.people.any? %>
           <h3 class="h5">
             <%= Research::Journal::Paper.human_attribute_name('people') %>

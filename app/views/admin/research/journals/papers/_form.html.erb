@@ -35,6 +35,7 @@
           <%= f.input :published_at, html5: true %>
           <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
           <%= f.association :people, collection: current_university.people.researchers.ordered, as: :check_boxes %>
+          <%= f.association :paper_kind, collection: @journal.paper_kinds.ordered if @journal.paper_kinds.any? %>
         </div>
       </div>
       <%= render 'admin/application/meta_description/form', f: f, about: paper %>

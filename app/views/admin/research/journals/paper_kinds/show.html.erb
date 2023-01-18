@@ -1,5 +1,7 @@
 <% content_for :title, @paper_kind %>
 
+<%= render 'admin/research/journals/papers/list', papers: @papers %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @paper_kind %>
   <%= link_to t('static'),
