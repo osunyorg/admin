@@ -13,7 +13,12 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def static
     @about = @kind
-    render layout: false
+    @website = @journal.websites.first
+    if @website.nil?
+      render plain: "Pas de site Web lié au journal"
+    else
+      render layout: false
+    end
   end
 
   def new

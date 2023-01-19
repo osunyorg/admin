@@ -35,6 +35,7 @@ class Research::Journal::Volume < ApplicationRecord
   include WithGit
   include WithBlobs
   include WithFeaturedImage
+  include WithPermalink
   include WithSlug
 
   has_summernote :text
@@ -49,8 +50,12 @@ class Research::Journal::Volume < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
-  def website
-    journal.website
+  def published?
+    published && published_at && published_at.to_date <= Date.today
+  end
+
+  def for_website?(website)
+    journal == website.about
   end
 
   def git_path(website)

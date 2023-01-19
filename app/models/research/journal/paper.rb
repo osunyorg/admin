@@ -16,7 +16,7 @@
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  paper_kind_id              :uuid             indexed
+#  kind_id                    :uuid             indexed
 #  research_journal_id        :uuid             not null, indexed
 #  research_journal_volume_id :uuid             indexed
 #  university_id              :uuid             not null, indexed
@@ -24,7 +24,7 @@
 #
 # Indexes
 #
-#  index_research_journal_papers_on_paper_kind_id               (paper_kind_id)
+#  index_research_journal_papers_on_kind_id                     (kind_id)
 #  index_research_journal_papers_on_research_journal_id         (research_journal_id)
 #  index_research_journal_papers_on_research_journal_volume_id  (research_journal_volume_id)
 #  index_research_journal_papers_on_university_id               (university_id)
@@ -36,13 +36,14 @@
 #  fk_rails_22f161a6a7  (research_journal_volume_id => research_journal_volumes.id)
 #  fk_rails_2713063b85  (updated_by_id => users.id)
 #  fk_rails_935541e014  (university_id => universities.id)
-#  fk_rails_db4e38788c  (paper_kind_id => research_journal_paper_kinds.id)
+#  fk_rails_db4e38788c  (kind_id => research_journal_paper_kinds.id)
 #
 class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
   include WithUniversity
   include WithGit
   include WithBlobs
+  include WithPermalink
   include WithPosition
   include WithSlug
 
@@ -66,8 +67,20 @@ class Research::Journal::Paper < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
 
+  def published?
+    published && published_at && published_at.to_date <= Date.today
+  end
+
+  def for_website?(website)
+    journal == website.about
+  end
+
   def git_path(website)
-    "#{git_path_content_prefix(website)}papers/#{published_at.year}#{path}.html" if published_at
+    "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
+  end
+
+  def static_path
+    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
   end
 
   def template_static
@@ -86,10 +99,6 @@ class Research::Journal::Paper < ApplicationRecord
 
   def to_s
     "#{ title }"
-  end
-
-  def path
-    "/#{published_at.strftime "%Y-%m-%d"}-#{slug}" if published_at
   end
 
   protected

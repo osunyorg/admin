@@ -13,7 +13,12 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
 
   def static
     @about = @volume
-    render layout: false
+    @website = @journal.websites.first
+    if @website.nil?
+      render plain: "Pas de site Web lié au journal"
+    else
+      render layout: false
+    end
   end
 
   def new
