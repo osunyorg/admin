@@ -28,7 +28,7 @@
             <p><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></p>
           <% elsif @item.has_about? %>
             <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('about') %></h3>
-            <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about] %></p>
+            <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %></p>
           <% end %>
         </div>
       </div>
