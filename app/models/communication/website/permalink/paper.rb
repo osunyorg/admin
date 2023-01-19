@@ -25,7 +25,7 @@
 #
 class Communication::Website::Permalink::Paper < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.about == about.journal
+    website.about.is_a? Research::Journal
   end
 
   def self.static_config_key
