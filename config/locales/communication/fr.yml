@@ -151,7 +151,7 @@ fr:
     communication:
       blocks:
         alerts:
-          image_is_too_big: L'image est trop grosse !
+          file_is_too_big: Le fichier est trop lourd !
         categories:
           basic:
             label: Blocs de base
