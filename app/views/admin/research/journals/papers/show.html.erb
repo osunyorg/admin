@@ -47,11 +47,11 @@
           </h3>
           <p><%= @paper.keywords %></p>
         <% end %>
-        <% if @paper.paper_kind %>
+        <% if @paper.kind %>
           <h3 class="h5">
-            <%= Research::Journal::Paper.human_attribute_name('paper_kind') %>
+            <%= Research::Journal::Paper.human_attribute_name('kind') %>
           </h3>
-          <p><%= link_to @paper.paper_kind, admin_research_journal_paper_kind_path(@paper.paper_kind) %></p>
+          <p><%= link_to @paper.kind, admin_research_journal_kind_path(@paper.kind) %></p>
         <% end %>
         <% if @paper.people.any? %>
           <h3 class="h5">

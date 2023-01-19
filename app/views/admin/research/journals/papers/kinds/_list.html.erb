@@ -3,23 +3,25 @@
     <thead>
       <tr>
         <th><%= Research::Journal::Paper::Kind.human_attribute_name('title') %></th>
+        <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% paper_kinds.each do |paper_kind| %>
+      <% kinds.each do |kind| %>
         <tr>
           <td>
-            <%= link_to paper_kind,
-                        admin_research_journal_paper_kind_path(journal_id: paper_kind.journal, id: paper_kind) %>
+            <%= link_to kind,
+                        admin_research_journal_kind_path(journal_id: kind.journal, id: kind) %>
           </td>
+          <td><%= kind.papers.count %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
-                          edit_admin_research_journal_paper_kind_path(journal_id: paper_kind.journal, id: paper_kind),
+                          edit_admin_research_journal_kind_path(journal_id: kind.journal, id: kind),
                           class: button_classes %>
               <%= link_to t('delete'),
-                          admin_research_journal_paper_kind_path(journal_id: paper_kind.journal, id: paper_kind),
+                          admin_research_journal_kind_path(journal_id: kind.journal, id: kind),
                           method: :delete,
                           data: { confirm: t('please_confirm') },
                           class: button_classes_danger %>

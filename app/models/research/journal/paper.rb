@@ -51,7 +51,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   belongs_to :journal, foreign_key: :research_journal_id
   belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
-  belongs_to :paper_kind, class_name: 'Research::Journal::Paper::Kind', optional: true
+  belongs_to :kind, class_name: 'Research::Journal::Paper::Kind', optional: true
   belongs_to :updated_by, class_name: 'User'
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',

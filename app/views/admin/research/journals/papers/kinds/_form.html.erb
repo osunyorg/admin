@@ -1,4 +1,8 @@
-<%= simple_form_for [:admin, paper_kind] do |f| %>
+<%
+url = kind.new_record?  ? admin_research_journal_kinds_path
+                        : admin_research_journal_kind_path(kind)
+%>
+<%= simple_form_for kind, url: url do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="row">
@@ -20,7 +24,7 @@
         <div class="card-body">
           <%= f.input :slug,
                       as: :string,
-                      input_html: paper_kind.persisted? ? {} : {
+                      input_html: kind.persisted? ? {} : {
                         class: 'js-slug-input',
                         data: { source: '#research_journal_paper_title' }
                       } %>

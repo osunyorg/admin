@@ -8,13 +8,13 @@ namespace :research do
     end
     resources :papers, controller: 'journals/papers' do
       collection do
+        resources :kinds, controller: 'journals/papers/kinds' do
+          member do
+            get :static
+          end
+        end
         post :reorder
       end
-      member do
-        get :static
-      end
-    end
-    resources :paper_kinds, controller: 'journals/paper_kinds' do
       member do
         get :static
       end

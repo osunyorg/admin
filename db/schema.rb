@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_18_201432) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_164205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -594,8 +594,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_201432) do
     t.text "text"
     t.text "meta_description"
     t.text "summary"
-    t.uuid "paper_kind_id"
-    t.index ["paper_kind_id"], name: "index_research_journal_papers_on_paper_kind_id"
+    t.uuid "kind_id"
+    t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
     t.index ["university_id"], name: "index_research_journal_papers_on_university_id"
@@ -948,7 +948,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_201432) do
   add_foreign_key "imports", "users"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"
   add_foreign_key "research_journal_paper_kinds", "universities"
-  add_foreign_key "research_journal_papers", "research_journal_paper_kinds", column: "paper_kind_id"
+  add_foreign_key "research_journal_papers", "research_journal_paper_kinds", column: "kind_id"
   add_foreign_key "research_journal_papers", "research_journal_volumes"
   add_foreign_key "research_journal_papers", "research_journals"
   add_foreign_key "research_journal_papers", "universities"

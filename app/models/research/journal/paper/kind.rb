@@ -26,7 +26,7 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   include WithSlug
 
   belongs_to :journal, class_name: 'Research::Journal'
-  has_many :papers, foreign_key: :paper_kind_id
+  has_many :papers
 
   scope :ordered, -> { order(:title) }
 

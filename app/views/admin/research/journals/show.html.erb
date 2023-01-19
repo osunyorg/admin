@@ -65,14 +65,14 @@
       <div class="card-header">
         <div class="float-end">
           <%= link_to t('create'),
-                      new_admin_research_journal_paper_kind_path(journal_id: @journal),
+                      new_admin_research_journal_kind_path(journal_id: @journal),
                       class: button_classes %>
         </div>
         <h2 class="card-title">
           <%= link_to Research::Journal::Paper::Kind.model_name.human(count: 2),
-                      admin_research_journal_paper_kinds_path(journal_id: @journal) %></h2>
+                      admin_research_journal_kind_path(journal_id: @journal) %></h2>
       </div>
-      <%= render 'admin/research/journals/paper_kinds/list', paper_kinds: @paper_kinds %>
+      <%= render 'admin/research/journals/papers/kinds/list', kinds: @kinds %>
     </div>
   </div>
 </div>

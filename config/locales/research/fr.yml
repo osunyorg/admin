@@ -36,7 +36,7 @@ fr:
         published: Publié ?
         published_at: Publié le
         references: Références
-        paper_kind: Type de papier
+        kind: Type de papier
         people: Auteu·rs·rices
         text: Texte
         title: Titre

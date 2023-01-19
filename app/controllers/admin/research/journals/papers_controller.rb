@@ -26,7 +26,6 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   end
 
   def create
-    byebug
     @paper.assign_attributes(
       journal: @journal,
       university: current_university,
@@ -68,7 +67,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     params.require(:research_journal_paper)
           .permit(
             :title, :slug, :text, :published, :published_at, :summary, :abstract, :meta_description, 
-            :pdf, :references, :keywords, :research_journal_volume_id, :paper_kind_id, person_ids: [])
+            :pdf, :references, :keywords, :research_journal_volume_id, :kind_id, person_ids: [])
           .merge(university_id: current_university.id)
   end
 end
