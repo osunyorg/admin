@@ -26,16 +26,9 @@
 #  fk_rails_c2d725cabd  (academic_year_id => education_academic_years.id)
 #
 
-one:
+default_cohort:
+  name: Formation de test 2022
   university: default_university
   school: default_school
-  program: one
-  academic_year: one
-  name: MyString
-
-two:
-  university: default_university
-  school: default_school
-  program: two
-  academic_year: two
-  name: MyString
+  program: default_program
+  academic_year: twenty_two
