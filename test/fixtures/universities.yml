@@ -29,3 +29,9 @@
 default_university:
   name: Université de test
   identifier: my-university
+  sms_sender_name: "unitest"
+
+stale_university:
+  name: Université obsolète
+  identifier: stale-university
+  sms_sender_name: "unistale"
