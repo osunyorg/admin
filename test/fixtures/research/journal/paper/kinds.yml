@@ -22,9 +22,13 @@
 #
 
 one:
-  title: MyString
-  slug: MyString
+  university: default_university
+  journal: default_journal
+  title: Articles
+  slug: articles
 
 two:
-  title: MyString
-  slug: MyString
+  university: default_university
+  journal: default_journal
+  title: Recensions
+  slug: recensions
