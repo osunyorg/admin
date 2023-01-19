@@ -29,6 +29,7 @@ class Communication::Block < ApplicationRecord
   include Accessible
 
   IMAGE_MAX_SIZE = 5.megabytes
+  FILE_MAX_SIZE = 100.megabytes
 
   belongs_to :about, polymorphic: true
 

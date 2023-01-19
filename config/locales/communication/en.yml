@@ -151,7 +151,7 @@ en:
     communication:
       blocks:
         alerts:
-          image_is_too_big: Image is too big!
+          file_is_too_big: File is too big!
         categories:
           basic:
             label: Basic blocks
@@ -424,17 +424,17 @@ en:
           partners:
             description: A list of organizations with logo, name and website.
             edit:
-              add_partner: Add partner
+              add_partner: Add organization
               alphabetical:
                 label: Alphabetical order
               description:
                 label: Description
               element:
                 id:
-                  label: Partner
+                  label: Organization
                   name:
                     label: Nom
-                    placeholder: Enter partner's name
+                    placeholder: Enter organization's name
                     url:
                       label: Website
                       logo_label: Logo
@@ -442,7 +442,7 @@ en:
                       remove_logo: Remove logo
                   placeholder: Choose organization
                   unregistered: Unregistered organization
-              remove_partner: Remove partner
+              remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
           posts:
@@ -634,9 +634,9 @@ en:
           gallery: Gallery
           image: Image
           key_figures: Key figures
-          organization_chart: Organization chart
+          organization_chart: People
           pages: Pages
-          partners: Partners
+          partners: Organizations
           posts: Posts
           programs: Programs
           testimonials: Testimonials

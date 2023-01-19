@@ -21,7 +21,12 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">
-            <% [:address, :zipcode, :city, :country].each do |property| %>
+            <% [
+                  :address, 
+                  :zipcode, 
+                  :city, 
+                  :country
+                ].each do |property| %>
               <% value = @organization.send property %>
               <% next if value.blank? %>
               <h3 class="h5">
@@ -39,7 +44,13 @@
                               @organization.url,
                               target: :_blank %></p>
             <% end %>
-            <% [:phone, :email, :linkedin, :twitter].each do |property| %>
+            <% [
+                  :phone, 
+                  :email, 
+                  :linkedin, 
+                  :twitter, 
+                  :mastodon
+                ].each do |property| %>
               <% value = @organization.send property %>
               <% next if value.blank? %>
               <h3 class="h5">
