@@ -194,7 +194,6 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
         inputImage.setAttribute('src', image.preview);
         inputImageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
 
-        inputAlt.value = image.alt;
         $(inputCredit).summernote('code', image.credit);
         this.modal.hide();
       }
