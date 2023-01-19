@@ -22,6 +22,19 @@ class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  def test_create_invalid
+    assert_no_difference("alumnus.experiences.count") do
+      post experiences_path, params: {
+        university_person_experience: {
+          description: "Stage",
+          from_year: 2022,
+          to_year: 2022
+        }
+      }
+      assert_response(:success)
+    end
+  end
+
   def test_edit
     get edit_experience_path(university_person_experiences(:default_experience))
     assert_response(:success)
@@ -38,6 +51,17 @@ class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
     }
     assert_redirected_to(account_path)
     assert_equal("Alternance", experience.reload.description)
+  end
+
+  def test_update_invalid
+    experience = university_person_experiences(:default_experience)
+
+    patch experience_path(experience), params: {
+      university_person_experience: {
+        organization_id: ""
+      }
+    }
+    assert_response(:success)
   end
 
 end
