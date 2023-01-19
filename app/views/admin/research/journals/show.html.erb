@@ -11,51 +11,71 @@
   <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
 <% end %>
 
-<%= render 'admin/application/summary/show', about: @journal %>
-<div class="card mt-5">
-  <div class="card-header">
-    <div class="float-end">
-      <%= link_to t('create'),
-                  new_admin_research_journal_volume_path(journal_id: @journal),
-                  class: button_classes %>
-    </div>
-    <h2 class="card-title">
-      <%= link_to Research::Journal::Volume.model_name.human(count: 2),
-                  admin_research_journal_volumes_path(journal_id: @journal) %></h2>
+<div class="row">
+  <div class="col-md-8">
+    <%= render 'admin/application/summary/show', about: @journal %>
   </div>
-  <div class="card-body">
-    <div class="row">
-      <% @journal.volumes.ordered.limit(4).each do |volume| %>
-        <div class="col-md-3 mt-4">
-          <div class="card">
-            <%= image_tag volume.featured_image, class: 'img-fluid' if volume.featured_image.attached? %>
-            <div class="card-body">
-              <%= link_to volume,
-                          admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                          class: "stretched-link #{'draft' unless volume.published?}" %>
-            </div>
-          </div>
+  <div class="col-md-4">
+    <%= render 'admin/application/meta_description/show', about: @journal %>
+  </div>
+</div>
+
+<div class="float-end">
+  <%= link_to t('create'),
+              new_admin_research_journal_volume_path(journal_id: @journal),
+              class: button_classes %>
+</div>
+<h2 class="h4">
+  <%= link_to Research::Journal::Volume.model_name.human(count: 2),
+              admin_research_journal_volumes_path(journal_id: @journal) %>
+</h2>
+<div class="row">
+  <% @journal.volumes.ordered.limit(4).each do |volume| %>
+    <div class="col-md-3 mt-4 p-0">
+      <div class="card">
+        <%= kamifusen_tag volume.featured_image, width: 600, class: 'img-fluid' if volume.featured_image.attached? %>
+        <div class="card-body">
+          <%= link_to volume,
+                      admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                      class: "stretched-link #{'draft' unless volume.published?}" %>
         </div>
-      <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-end">
+          <%= link_to t('create'),
+                      new_admin_research_journal_paper_path(journal_id: @journal),
+                      class: button_classes %>
+        </div>
+        <h2 class="card-title">
+          <%= link_to Research::Journal::Paper.model_name.human(count: 2),
+                      admin_research_journal_papers_path(journal_id: @journal) %></h2>
+      </div>
+      <%= render 'admin/research/journals/papers/list', papers: @papers %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="float-end">
+          <%= link_to t('create'),
+                      new_admin_research_journal_kind_path(journal_id: @journal),
+                      class: button_classes %>
+        </div>
+        <h2 class="card-title">
+          <%= link_to Research::Journal::Paper::Kind.model_name.human(count: 2),
+                      admin_research_journal_kind_path(journal_id: @journal) %></h2>
+      </div>
+      <%= render 'admin/research/journals/papers/kinds/list', kinds: @kinds %>
     </div>
   </div>
 </div>
-
-<div class="card mt-5">
-  <div class="card-header">
-    <div class="float-end">
-      <%= link_to t('create'),
-                  new_admin_research_journal_paper_path(journal_id: @journal),
-                  class: button_classes %>
-    </div>
-    <h2 class="card-title">
-      <%= link_to Research::Journal::Paper.model_name.human(count: 2),
-                  admin_research_journal_papers_path(journal_id: @journal) %></h2>
-  </div>
-  <%= render 'admin/research/journals/papers/list', papers: @papers %>
-</div>
-
-<%= render 'admin/application/meta_description/show', about: @journal %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @journal %>

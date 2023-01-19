@@ -11,6 +11,11 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     breadcrumb
   end
 
+  def static
+    @about = @volume
+    render layout: false
+  end
+
   def new
     breadcrumb
   end

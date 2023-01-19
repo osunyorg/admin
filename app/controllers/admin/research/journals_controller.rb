@@ -13,6 +13,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
 
   def show
     @papers = @journal.papers.ordered.limit(10)
+    @kinds = @journal.kinds.ordered
     breadcrumb
   end
 

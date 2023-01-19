@@ -3,57 +3,50 @@
 <div class="row">
   <div class="col-md-9">
     <%= render 'admin/application/summary/show', about: @volume %>
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
-      </div>
-      <div class="card-body">
-        <% if @papers.any? %>
-          <h3 class="h5 mt-4"><%= Research::Journal::Volume.human_attribute_name('papers') %></h3>
-          <div class="table-responsive">
-            <table class="<%= table_classes %>">
-              <thead>
-                <tr>
-                  <% if can? :reorder, Research::Journal::Paper %>
-                    <th width="20" class="ps-0">&nbsp;</th>
-                  <% end %>
-                  <th class="ps-0"><%= Research::Journal::Paper.model_name.human %></th>
-                  <th><%= Research::Journal::Paper.human_attribute_name('published_at') %></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody data-sortable data-sort-url="<%= reorder_admin_research_journal_papers_path(journal_id: @journal.id) %>">
-                <% @papers.each do |paper| %>
-                  <tr data-id="<%= paper.id %>">
-                    <% if can? :reorder, Research::Journal::Paper %>
-                      <td><i class="fa fa-bars handle"></i></td>
-                    <% end %>
-                    <td>
-                      <%= link_to paper,
-                                  admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
-                                  class: "#{'draft' unless paper.published?}" %>
-                    </td>
-                    <td><%= l(paper.published_at.to_time, format: :date_with_explicit_month) if paper.published_at.present? %></td>
-                    <td class="text-end">
-                      <div class="btn-group" role="group">
-                        <%= link_to t('edit'),
-                                    edit_admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
-                                    class: button_classes %>
-                        <%= link_to t('delete'),
-                                    admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
-                                    method: :delete,
-                                    data: { confirm: t('please_confirm') },
-                                    class: button_classes_danger %>
-                      </div>
-                    </td>
-                  </tr>
+    <% if @papers.any? %>
+      <h3 class="h5 mt-5"><%= Research::Journal::Paper.model_name.human(count: 2) %></h3>
+      <div class="table-responsive">
+        <table class="<%= table_classes %>">
+          <thead>
+            <tr>
+              <% if can? :reorder, Research::Journal::Paper %>
+                <th width="20" class="ps-0">&nbsp;</th>
+              <% end %>
+              <th class="ps-0"><%= Research::Journal::Paper.human_attribute_name('title') %></th>
+              <th><%= Research::Journal::Paper.human_attribute_name('published_at') %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody data-sortable data-sort-url="<%= reorder_admin_research_journal_papers_path(journal_id: @journal.id) %>">
+            <% @papers.each do |paper| %>
+              <tr data-id="<%= paper.id %>">
+                <% if can? :reorder, Research::Journal::Paper %>
+                  <td><i class="fa fa-bars handle"></i></td>
                 <% end %>
-              </tbody>
-            </table>
-          </div>
-        <% end %>
+                <td>
+                  <%= link_to paper,
+                              admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                              class: "#{'draft' unless paper.published?}" %>
+                </td>
+                <td><%= l(paper.published_at.to_time, format: :date_with_explicit_month) if paper.published_at.present? %></td>
+                <td class="text-end">
+                  <div class="btn-group" role="group">
+                    <%= link_to t('edit'),
+                                edit_admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                                class: button_classes %>
+                    <%= link_to t('delete'),
+                                admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                                method: :delete,
+                                data: { confirm: t('please_confirm') },
+                                class: button_classes_danger %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-    </div>
+    <% end %>
   </div>
   <div class="col-md-3">
     <div class="card flex-fill w-100">
@@ -74,6 +67,9 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @volume %>
+  <%= link_to t('static'),
+        static_admin_research_journal_volume_path(@volume),
+        class: button_classes('btn-light') if current_user.server_admin? %>
 <% end %>
 
 <% content_for :action_bar_right do %>

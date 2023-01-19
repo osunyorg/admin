@@ -11,6 +11,11 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     breadcrumb
   end
 
+  def static
+    @about = @paper
+    render layout: false
+  end
+
   def new
     breadcrumb
   end
@@ -42,7 +47,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
-  end
+    end
   end
 
   def destroy
@@ -60,7 +65,9 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
 
   def paper_params
     params.require(:research_journal_paper)
-          .permit(:title, :slug, :text, :published, :published_at, :summary, :abstract, :meta_description, :pdf, :references, :keywords, :research_journal_volume_id, person_ids: [])
+          .permit(
+            :title, :slug, :text, :published, :published_at, :summary, :abstract, :meta_description, 
+            :pdf, :references, :keywords, :research_journal_volume_id, :kind_id, person_ids: [])
           .merge(university_id: current_university.id)
   end
 end

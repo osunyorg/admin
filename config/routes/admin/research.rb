@@ -1,10 +1,22 @@
 namespace :research do
   resources :researchers, only: [:index, :show]
   resources :journals do
-    resources :volumes, controller: 'journals/volumes'
+    resources :volumes, controller: 'journals/volumes' do
+      member do
+        get :static
+      end
+    end
     resources :papers, controller: 'journals/papers' do
       collection do
+        resources :kinds, controller: 'journals/papers/kinds' do
+          member do
+            get :static
+          end
+        end
         post :reorder
+      end
+      member do
+        get :static
       end
     end
   end
