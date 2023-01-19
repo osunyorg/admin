@@ -35,6 +35,6 @@
 
 default_extranet:
   name: Extranet de test
-  host: extranet.osuny
+  host: extranet.osuny.test
   about: default_program (Education::Program)
   university: default_university

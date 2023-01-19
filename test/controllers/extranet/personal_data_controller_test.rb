@@ -1,10 +1,7 @@
 require "test_helper"
 
 class Extranet::PersonalDataControllerTest < ActionDispatch::IntegrationTest
-  def setup
-    host! "extranet.osuny"
-    sign_in_with_2fa(alumnus)
-  end
+  include ExtranetSetup
 
   def test_edit
     get edit_personal_data_path

@@ -1,10 +1,7 @@
 require "test_helper"
 
 class Extranet::AccountControllerTest < ActionDispatch::IntegrationTest
-  def setup
-    host! "extranet.osuny"
-    sign_in_with_2fa(alumnus)
-  end
+  include ExtranetSetup
 
   def test_show
     get account_path

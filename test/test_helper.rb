@@ -13,6 +13,10 @@ class ActiveSupport::TestCase
 
   fixtures :all
 
+  setup do
+    ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
+  end
+
   def alumnus
     @alumnus ||= users(:alumnus)
   end

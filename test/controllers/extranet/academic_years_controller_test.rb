@@ -1,10 +1,7 @@
 require "test_helper"
 
 class Extranet::AcademicYearsControllerTest < ActionDispatch::IntegrationTest
-  def setup
-    host! "extranet.osuny"
-    sign_in_with_2fa(alumnus)
-  end
+  include ExtranetSetup
 
   def test_index
     get education_academic_years_path
