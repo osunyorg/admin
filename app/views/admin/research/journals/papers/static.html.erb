@@ -5,7 +5,7 @@ slug: "<%= @about.slug %>"
 <% if @about.kind %>
 kind: >-
   <%= prepare_text_for_static @about.kind %>
-kinds: 
+paper_kinds: 
   - "<%= @about.kind.slug %>"
 <% end %>
 <% if @about.volume && @about.volume.path %>
