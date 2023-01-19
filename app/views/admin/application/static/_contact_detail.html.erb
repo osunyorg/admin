@@ -3,6 +3,6 @@ detail = kind.new data
 if detail.present?
 %>
   <%= variable %>:
-    label: <%= detail.label %>
-    value: <%= detail.value %>
+    label: "<%= detail.label %>"
+    value: "<%= detail.value %>"
 <% end %>
