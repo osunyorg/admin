@@ -54,7 +54,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}volumes/#{published_at.year}/#{slug}/_index.html" if published_at
+    "#{git_path_content_prefix(website)}volumes/#{published_at.year}#{path}/_index.html" if published_at
   end
 
   def template_static
@@ -77,7 +77,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def path
-    "/#{published_at&.year}/#{slug}" if published_at
+    "/#{published_at&.year}-#{slug}" if published_at
   end
 
   def to_s
