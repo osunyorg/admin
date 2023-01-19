@@ -2,11 +2,11 @@
 title: >-
   <%= prepare_text_for_static @about.title %>
 slug: "<%= @about.slug %>"
-<% if @about.paper_kind %>
+<% if @about.kind %>
 kind: >-
-  <%= prepare_text_for_static @about.paper_kind %>
-paper_kinds: 
-  - "<%= @about.paper_kind.slug %>"
+  <%= prepare_text_for_static @about.kind %>
+kinds: 
+  - "<%= @about.kind.slug %>"
 <% end %>
 <% if @about.volume && @about.volume.path %>
 volumes:
