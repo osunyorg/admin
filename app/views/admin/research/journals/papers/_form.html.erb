@@ -13,8 +13,16 @@
           <%= render 'admin/application/summary/form', f: f, about: paper %>
           <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
           <%= f.input :pdf %>
-          <%= f.input :text, as: :summernote %>
-          <%= f.input :references, as: :text, input_html: { rows: 10 } %>
+          <%= f.input :text, 
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
+          <%= f.input :references, 
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
         </div>
       </div>
     </div>
