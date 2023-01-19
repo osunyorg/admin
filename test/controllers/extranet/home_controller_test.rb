@@ -2,6 +2,7 @@ require "test_helper"
 
 class Extranet::HomeControllerTest < ActionDispatch::IntegrationTest
   def test_index_unknown_context
+    host! "example.com"
     get(root_path)
     assert_response(:forbidden)
   end

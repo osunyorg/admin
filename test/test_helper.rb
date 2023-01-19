@@ -15,7 +15,11 @@ class ActiveSupport::TestCase
 
   setup do
     ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
-    host! "my-university#{University.test_domain}"
+    try(:host!, default_university.host)
+  end
+
+  def default_university
+    @default_university ||= universities(:default_university)
   end
 
   def alumnus
