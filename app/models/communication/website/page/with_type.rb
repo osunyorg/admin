@@ -76,6 +76,11 @@ module Communication::Website::Page::WithType
     is_regular_page?
   end
 
+  # Some pages need a specific Hugo layout
+  def static_layout
+    nil
+  end
+
   protected
 
   def default_parent

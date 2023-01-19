@@ -1,4 +1,4 @@
-# == Schema Information
+  # == Schema Information
 #
 # Table name: university_people
 #
@@ -12,7 +12,6 @@
 #  first_name            :string
 #  gender                :integer
 #  habilitation          :boolean          default(FALSE)
-#  hal_person_identifier :string
 #  is_administration     :boolean
 #  is_alumnus            :boolean          default(FALSE)
 #  is_author             :boolean
@@ -20,6 +19,7 @@
 #  is_teacher            :boolean
 #  last_name             :string
 #  linkedin              :string
+#  mastodon              :string
 #  meta_description      :text
 #  name                  :string
 #  phone_mobile          :string

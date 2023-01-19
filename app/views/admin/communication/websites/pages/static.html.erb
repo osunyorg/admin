@@ -4,6 +4,9 @@ title: >
 breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design' %>
+<% if @about.static_layout %>
+layout: <%= @about.static_layout %>
+<% end %>
 <% if @about.is_a?(Communication::Website::Page::Person) %>
 has:
   administrators: <%= @website.has_administrators? %>

@@ -655,6 +655,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
+  create_table "research_laboratories_publications", id: false, force: :cascade do |t|
+    t.uuid "research_publication_id", null: false
+    t.uuid "research_laboratory_id", null: false
+    t.index ["research_laboratory_id", "research_publication_id"], name: "index_laboratory_publication"
+    t.index ["research_publication_id", "research_laboratory_id"], name: "index_publication_laboratory"
+  end
+
   create_table "research_laboratory_axes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_laboratory_id", null: false
@@ -667,6 +674,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
     t.text "text"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
+  end
+
+  create_table "research_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "docid"
+    t.jsonb "data"
+    t.string "title"
+    t.string "url"
+    t.string "ref"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "hal_url"
+    t.date "publication_date"
+    t.string "doi"
+    t.string "slug"
+  end
+
+  create_table "research_publications_university_people", id: false, force: :cascade do |t|
+    t.uuid "research_publication_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["research_publication_id", "university_person_id"], name: "index_publication_person"
+    t.index ["university_person_id", "research_publication_id"], name: "index_person_publication"
   end
 
   create_table "research_theses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -735,6 +763,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
     t.text "summary"
     t.string "twitter"
     t.string "linkedin"
+    t.string "mastodon"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -770,7 +799,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_164208) do
     t.string "zipcode"
     t.string "city"
     t.string "country"
-    t.string "hal_person_identifier"
+    t.string "mastodon"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
