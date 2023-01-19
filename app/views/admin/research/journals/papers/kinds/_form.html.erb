@@ -26,7 +26,7 @@ url = kind.new_record?  ? admin_research_journal_kinds_path
                       as: :string,
                       input_html: kind.persisted? ? {} : {
                         class: 'js-slug-input',
-                        data: { source: '#research_journal_paper_title' }
+                        data: { source: '#research_journal_paper_kind_title' }
                       } %>
         </div>
       </div>
