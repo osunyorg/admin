@@ -47,8 +47,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     if @page.language_id == language.id
       redirect_to [:admin, @page]
     else
-      # We try to find translation for given language
-      @translation = @page.translations.where(language_id: language.id).first
+      @translation = @page.translation_for(language)
       # If not found, duplicate the current page (with blocks and all) for given language
       @translation ||= @page.duplicate!(language_id: language.id)
       # Redirect to the translation

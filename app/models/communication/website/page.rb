@@ -142,10 +142,19 @@ class Communication::Website::Page < ApplicationRecord
               .where.not(id: id)
   end
 
+  def translation_for(language, lookup_original: true)
+    # If current language is language, returns itself
+    return self if language_id == language.id
+    # Translations have the same original_id if set
+    original_id.present?  ? original.translation_for(language)
+                          : translations.find_by(language_id: language.id)
+  end
+
   def duplicate!(**new_attributes)
     duplicate = self.dup
+    # Inherits from original_id or set it to itself
     duplicate.assign_attributes(
-      original_id: self.id,
+      original_id: self.original_id || self.id,
       github_path: nil,
       published: false,
       **new_attributes
