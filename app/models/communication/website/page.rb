@@ -148,13 +148,21 @@ class Communication::Website::Page < ApplicationRecord
       original_id: self.id,
       github_path: nil,
       published: false,
-      published_at: nil,
       **new_attributes
     )
+    duplicate.featured_image.attach(
+      io: URI.open(featured_image.url),
+      filename: featured_image.filename.to_s,
+      content_type: featured_image.content_type
+    ) if featured_image.attached?
     duplicate.save
-    # TODO:
-    # Dupliquer les blocs
-    # Dupliquer le featured image
+
+    blocks.ordered.each do |block|
+      block_duplicate = block.dup
+      block_duplicate.about = duplicate
+      block_duplicate.save
+    end
+    duplicate
   end
 
   protected

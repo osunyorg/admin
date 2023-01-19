@@ -52,7 +52,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       # If not found, duplicate the current page (with blocks and all) for given language
       @translation ||= @page.duplicate!(language_id: language.id)
       # Redirect to the translation
-      redirect_to [:admin @translation]
+      redirect_to [:admin, @translation.becomes(@translation.class.base_class)]
     end
   end
 
