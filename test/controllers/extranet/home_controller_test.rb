@@ -8,13 +8,13 @@ class Extranet::HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_index_unauthenticated
-    host! "extranet.osuny.test"
+    host! default_extranet.host
     get(root_path)
     assert_redirected_to(new_user_session_path)
   end
 
   def test_index
-    host! "extranet.osuny.test"
+    host! default_extranet.host
     sign_in_with_2fa(alumnus)
     get(root_path)
     assert_response(:success)

@@ -1,6 +1,6 @@
 module ExtranetSetup
   def setup
-    host! "extranet.osuny.test"
+    host! default_extranet.host
     sign_in_with_2fa(alumnus)
   end
 end
