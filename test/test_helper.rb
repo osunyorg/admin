@@ -15,6 +15,15 @@ class ActiveSupport::TestCase
 
   setup do
     ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
+    try(:host!, default_university.host)
+  end
+
+  def default_university
+    @default_university ||= universities(:default_university)
+  end
+
+  def default_extranet
+    @default_extranet ||= communication_extranets(:default_extranet)
   end
 
   def alumnus

@@ -2,12 +2,10 @@ namespace :server do
   resources :universities
   resources :languages
   resources :websites, only: :index do
-    member do
-      post :refresh
-    end
+    post :refresh, on: :member
   end
-  get 'blocks' => 'blocks#index', as: :blocks
-  get 'blocks/:id' => 'blocks#show', as: :block
-  post 'blocks/:id' => 'blocks#resave', as: :resave_block
+  resources :blocks, only: [:index, :show] do
+    post :resave, on: :member
+  end
   root to: 'dashboard#index'
 end
