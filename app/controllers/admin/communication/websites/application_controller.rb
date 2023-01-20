@@ -6,10 +6,21 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
 
   protected
 
+  def current_website_language
+    @current_website_language ||= begin
+      language = @website.languages.find_by(iso_code: params[:lang])
+      language ||= @website.default_language
+      language
+    end
+  end
+  helper_method :current_website_language
+
   def default_url_options
-    return {} unless params.has_key? :website_id
-    {
-      website_id: params[:website_id]
-    }
+    options = {}
+    if @website.present?
+      options[:website_id] = @website.id
+      options[:lang] = current_website_language.iso_code if @website.languages.many?
+    end
+    options
   end
 end

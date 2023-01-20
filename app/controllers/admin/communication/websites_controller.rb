@@ -1,8 +1,4 @@
-class Admin::Communication::WebsitesController < Admin::Communication::ApplicationController
-  load_and_authorize_resource class: Communication::Website,
-                              through: :current_university,
-                              through_association: :communication_websites
-
+class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   has_scope :for_search_term
   has_scope :for_about_type
 
@@ -84,5 +80,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
       :name, :url, :repository, :access_token, :about_type, :about_id, :in_production,
       :git_provider, :git_endpoint, :git_branch, :plausible_url, :default_language_id, language_ids: []
     )
+  end
+
+  def default_url_options
+    options = {}
+    if @website.present?
+      options[:lang] = current_website_language.iso_code if @website.languages.many?
+    end
+    options
   end
 end

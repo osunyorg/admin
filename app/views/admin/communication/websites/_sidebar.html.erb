@@ -39,7 +39,7 @@
 
         navigation.each_with_index do |object, index|
           next unless object[:ability]
-          active = index.zero?  ? object[:path] == request.path
+          active = index.zero?  ? controller_name == "websites" && action_name == "show"
                                 : object[:path].in?(request.path)
         %>
         <a class="list-group-item list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
@@ -51,6 +51,16 @@
         <% end %>
       </div>
     </div>
+    <% if @website.languages.many? %>
+      <div class="card">
+        <p><%= Language.model_name.human %></p>
+        <ul>
+          <% @website.languages.each do |language| %>
+            <li><%= link_to_if current_website_language != language, I18n.t(language.iso_code, scope: :languages), request.params.merge(lang: language.iso_code) %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <div class="col-lg-9 col-xl-10">
     <%= yield %>
