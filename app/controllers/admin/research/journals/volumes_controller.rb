@@ -11,6 +11,16 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     breadcrumb
   end
 
+  def static
+    @about = @volume
+    @website = @journal.websites.first
+    if @website.nil?
+      render plain: "Pas de site Web lié au journal"
+    else
+      render layout: false
+    end
+  end
+
   def new
     breadcrumb
   end

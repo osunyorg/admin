@@ -1,6 +1,7 @@
 ---
-title: "<%= @about.title %>"
-slug: "<%= @about.slug %>"
+title: >-
+  <%= prepare_text_for_static @about.title %>
+<%= render 'admin/application/static/permalink' %>
 number: <%= @about.number %>
 issn: "<%= @about.journal.issn %>"
 keywords: >

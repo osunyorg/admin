@@ -1,9 +1,16 @@
 ---
-title: "<%= @about.title %>"
-slug: "<%= @about.slug %>"
+title: >-
+  <%= prepare_text_for_static @about.title %>
+<%= render 'admin/application/static/permalink' %>
+<% if @about.kind %>
+paper_kind: >-
+  <%= prepare_text_for_static @about.kind %>
+paper_kinds: 
+  - "<%= @about.kind.slug %>"
+<% end %>
 <% if @about.volume && @about.volume.path %>
 volumes:
-  - "<%= @about.volume.path %>"
+  - "<%= @about.volume.path.delete_prefix('/') %>"
 <% end %>
 weight: <%= @about.position %>
 date: "<%= @about.published_at.iso8601 %>"

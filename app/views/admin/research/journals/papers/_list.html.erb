@@ -2,7 +2,8 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Research::Journal::Paper.model_name.human %></th>
+        <th><%= Research::Journal::Paper.human_attribute_name('title') %></th>
+        <th><%= Research::Journal::Paper.human_attribute_name('volume') %></th>
         <th><%= Research::Journal::Paper.human_attribute_name('published_at') %></th>
         <th></th>
       </tr>
@@ -15,6 +16,7 @@
                         admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
                         class: "#{'draft' unless paper.published?}" %>
           </td>
+          <td><%= link_to paper.volume, admin_research_journal_volume_path(paper.volume) if paper.volume %></td>
           <td><%= l(paper.published_at.to_time, format: :date_with_explicit_month) if paper.published_at.present? %></td>
           <td class="text-end">
             <div class="btn-group" role="group">

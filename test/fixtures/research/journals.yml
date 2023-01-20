@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: research_journals
+#
+#  id               :uuid             not null, primary key
+#  issn             :string
+#  meta_description :text
+#  summary          :text
+#  title            :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  university_id    :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_research_journals_on_university_id  (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_96097d5f10  (university_id => universities.id)
+#
+default_journal:
+  university: default_university
+  title: Journal

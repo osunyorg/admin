@@ -33,12 +33,8 @@
 #  fk_rails_c2268c7ebd  (university_id => universities.id)
 #
 
-one:
-  name: MyString
+default_extranet:
+  name: Extranet de test
+  host: extranet.osuny.test
+  about: default_program (Education::Program)
   university: default_university
-  host: MyString
-
-two:
-  name: MyString
-  university: default_university
-  host: MyString

@@ -51,6 +51,14 @@ class Communication::Website::Page::Sitemap < Communication::Website::Page
   def draftable?
     false
   end
+
+  def full_width
+    false
+  end
+
+  def show_toc?
+    true
+  end
   
   def static_layout
     'sitemap'

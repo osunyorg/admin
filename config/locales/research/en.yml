@@ -10,6 +10,9 @@ en:
       research/journal/paper:
         one: Paper
         other: Papers
+      research/journal/paper/kind:
+        one: Kind of paper
+        other: Kinds of paper
       research/journal/volume:
         one: Volume
         other: Volumes
@@ -33,8 +36,11 @@ en:
         published: Published?
         published_at: Published at
         references: References
+        kind: Kind of paper
         people: Authors
         text: Text
+        title: Title
+      research/journal/paper/kind:
         title: Title
       research/journal/volume:
         featured_image: Cover

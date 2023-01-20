@@ -35,6 +35,10 @@ module University::WithIdentifier
       ENV['OSUNY_STAGING'] || '.osuny.dev'
     end
 
+    def self.test_domain
+      ENV['OSUNY_TEST'] || '.osuny.test'
+    end
+
     def self.development_domain
       ENV['OSUNY_DEV'] || '.osuny'
     end

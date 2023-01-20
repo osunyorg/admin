@@ -17,10 +17,10 @@
 #  fk_rails_7d376afe35  (university_id => universities.id)
 #
 
-one:
+twenty_two:
   university: default_university
   year: 2022
 
-two:
+twenty_three:
   university: default_university
   year: 2023

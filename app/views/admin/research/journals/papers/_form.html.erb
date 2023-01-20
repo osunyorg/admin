@@ -13,8 +13,16 @@
           <%= render 'admin/application/summary/form', f: f, about: paper %>
           <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
           <%= f.input :pdf %>
-          <%= f.input :text, as: :summernote %>
-          <%= f.input :references, as: :text, input_html: { rows: 10 } %>
+          <%= f.input :text, 
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
+          <%= f.input :references, 
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
         </div>
       </div>
     </div>
@@ -35,6 +43,7 @@
           <%= f.input :published_at, html5: true %>
           <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
           <%= f.association :people, collection: current_university.people.researchers.ordered, as: :check_boxes %>
+          <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>
         </div>
       </div>
       <%= render 'admin/application/meta_description/form', f: f, about: paper %>

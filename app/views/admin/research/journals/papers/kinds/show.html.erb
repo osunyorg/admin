@@ -1,0 +1,19 @@
+<% content_for :title, @kind %>
+
+<%= render 'admin/research/journals/papers/list', papers: @papers %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('destroy'), 
+              admin_research_journal_kind_path(@kind),
+              data: { confirm: t('please_confirm') },
+              class: button_classes_danger %>
+  <%= link_to t('static'),
+              static_admin_research_journal_kind_path(@kind),
+              class: button_classes('btn-light') if current_user.server_admin? %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('edit'), 
+              edit_admin_research_journal_kind_path(@kind),
+              class: button_classes %>
+<% end %>
