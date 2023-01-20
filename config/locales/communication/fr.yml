@@ -587,7 +587,7 @@ fr:
             slug: formations
             title: "Formations"
           home:
-            slug:
+            slug: ''
             title: Accueil
           legal_term:
             slug: mentions-legales
