@@ -1,20 +1,11 @@
-<div class="card mb-5">
-  <div class="card-header">
-    <div class="float-end">
-      <%= link_to t('create'),
-                  new_admin_communication_website_page_path(website_id: @website),
-                  class: button_classes if can?(:create, Communication::Website::Page) %>
-    </div>
-    <h2 class="card-title">
-      <%= link_to admin_communication_website_pages_path(website_id: @website) do %>
-        <%= t('communication.website.last_pages') %>
-        <small>
-          -
-          <%= t('communication.website.see_all', number: @website.pages.accessible_by(current_ability).count) %>
-        </small>
-      <% end %>
-    </h2>
+<section class="mb-5">
+  <div class="float-end">
+    <%= link_to t('create'),
+                new_admin_communication_website_page_path(website_id: @website),
+                class: button_classes if can?(:create, Communication::Website::Page) %>
   </div>
-  <%= render 'admin/communication/websites/pages/list',
-              pages: @pages %>
-</div>
+  <h2 class="h3"><%= t('communication.website.last_pages') %></h2>
+  <p><%= link_to  t('communication.website.see_all', number: @website.pages.accessible_by(current_ability).count),
+                  admin_communication_website_pages_path(website_id: @website) %></p>
+  <%= render 'admin/communication/websites/pages/list', pages: @pages %>
+</section>

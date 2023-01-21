@@ -1,27 +1,21 @@
-<div class="card flex-fill w-100">
-  <div class="card-header">
-    <h5 class="card-title mb-0">
-      <%= t('featured_image.title') %>
-    </h5>
-  </div>
-  <div class="card-body">
-    <%= f.input :featured_image,
-                as: :single_deletable_file,
-                direct_upload: true,
-                label: false,
-                hint: '.jpg, .jpeg, .png, .svg',
-                input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                preview: true %>
-    <%= f.input :featured_image_alt,
-                label: t('featured_image.alt.label'),
-                hint: t('featured_image.alt.hint') %>
-    <%= f.input :featured_image_credit,
-                as: :summernote,
-                label: t('featured_image.credit.label'),
-                hint: t('featured_image.credit.hint'),
-                input_html: {
-                  data: { 'summernote-config' => 'link' }
-                } %>
-    <%= render 'admin/communication/unsplash/selector', about: about, f:f %>
-  </div>
-</div>
+<section class="mb-5">
+  <h2 class="h3"><%= t('featured_image.title') %></h2>
+  <%= f.input :featured_image,
+              as: :single_deletable_file,
+              direct_upload: true,
+              label: false,
+              hint: '.jpg, .jpeg, .png, .svg',
+              input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+              preview: true %>
+  <%= f.input :featured_image_alt,
+              label: t('featured_image.alt.label'),
+              hint: t('featured_image.alt.hint') %>
+  <%= f.input :featured_image_credit,
+              as: :summernote,
+              label: t('featured_image.credit.label'),
+              hint: t('featured_image.credit.hint'),
+              input_html: {
+                data: { 'summernote-config' => 'link' }
+              } %>
+  <%= render 'admin/communication/unsplash/selector', about: about, f:f %>
+</section>

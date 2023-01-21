@@ -2,17 +2,20 @@
 $color-accent: #0038FF
 $color-text: #000000
 $color-text-alt: #454545
-$color-border: rgba(0, 0, 0, 0.30)
+$color-border: rgba(0, 0, 0, 0.1)
 $color-background-alt: #F2F2F2
 $color-background: #FFFFFF
 
+$color-valid: #bedabe
+
 // Spacing
-$spacing0: px2rem(10)
-$spacing1: px2rem(20)
-$spacing2: px2rem(40)
-$spacing3: px2rem(60)
-$spacing4: px2rem(120)
-$spacing5: px2rem(240)
+$spacing0: px2rem(12)
+$spacing1: px2rem(24)
+$spacing2: px2rem(48)
+$spacing3: px2rem(64)
+$spacing4: px2rem(128)
+$spacing5: px2rem(256)
+$spacing-section-y: px2rem(36)
 
 // Bootstrap
 
@@ -21,7 +24,7 @@ $color-background-alt: #F5F5F5
 
 $font-family-sans-serif: "Basier Square", sans-serif
 
-$grid-gutter-width: 60px
+$grid-gutter-width: 64px
 
 $border-radius: 0
 $border-radius-sm: 0
@@ -29,14 +32,14 @@ $border-radius-lg: 0
 $border-radius-xl: 0
 $border-radius-2xl: 0
 
-$card-spacer-y: 0
-$card-spacer-x: 0
 $card-border-width: 0
-$card-cap-bg: transparent
+$card-cap-bg: $color-background-alt
+$card-cap-padding-y: $spacing0
+$card-bg: $color-background-alt
 
 $transition-collapse: height 0
 
-$h2-font-size: 20px
+$h2-font-size: px2rem(20)
 $h5-font-size: px2rem(14)
 
 $table-cell-padding-x: 0
@@ -45,6 +48,9 @@ $table-cell-padding-x-sm: 0
 $badge-font-weight: normal
 
 $form-label-font-size: $h5-font-size
+
+$hr-color: $color-border
+$hr-opacity: 1
 
 $breadcrumb-font-size:  $h5-font-size
 $breadcrumb-padding-y: $spacing1

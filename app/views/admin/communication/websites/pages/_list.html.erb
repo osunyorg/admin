@@ -2,19 +2,19 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Communication::Website::Page.human_attribute_name('title') %></th>
+        <th class="ps-0"><%= Communication::Website::Page.human_attribute_name('title') %></th>
         <th width="150"></th>
       </tr>
     </thead>
     <tbody>
       <% pages.each do |page| %>
         <tr>
-          <td>
+          <td class="ps-0">
             <%= link_to page,
                         admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                         class: "#{'draft' unless page.published?}" %>
           </td>
-          <td class="text-end">
+          <td class="text-end pe-0">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
                         edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),

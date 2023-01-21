@@ -1,12 +1,8 @@
 <% unless about.summary.blank? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= t('admin.summary') %></h2>
-    </div>
-    <div class="card-body">
-      <p class="lead">
-        <%= sanitize about.summary %>
-      </p>
-    </div>
-  </div>
+  <section class="mb-5">
+    <h2 class="h3"><%= t('admin.summary') %></h2>
+    <p class="lead">
+      <%= sanitize about.summary %>
+    </p>
+  </section>
 <% end %>
