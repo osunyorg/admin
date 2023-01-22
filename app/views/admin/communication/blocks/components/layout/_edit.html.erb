@@ -15,7 +15,7 @@ layouts = template.class.layouts
   </a>
 </p>
 
-<div class="row row-small collapse" id="layouts">
+<div class="row pure__row--small collapse" id="layouts">
   <% layouts.each do |layout| %>
     <%
     i18n = "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}"
@@ -25,7 +25,7 @@ layouts = template.class.layouts
     <div class="col-xxl-6">
       <div class="card mb-4">
         <label for="layout-<%= layout %>">
-          <div class="row row-small">
+          <div class="row pure__row--small">
             <div class="col-8 col-xxl-6">
               <div class="card-body">
                 <div class="form-check">

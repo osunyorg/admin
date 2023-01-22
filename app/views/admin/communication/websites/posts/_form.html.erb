@@ -10,7 +10,7 @@
         <%= render 'admin/application/summary/form', f: f, about: post %>
         <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
       </section>
-      <div class="row row-small">
+      <div class="row pure__row--small">
         <% if @website.categories.any? %>
           <div class="col-md-6">
             <h2 class="h3">
@@ -31,7 +31,7 @@
       <section class="mb-5">
         <h2 class="h3"><%= t('metadata') %></h2>
         <% if can? :publish, post %>
-          <div class="row row-small">
+          <div class="row pure__row--small">
             <div class="col-6">
               <%= f.input :published %>
             </div>

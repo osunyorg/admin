@@ -45,6 +45,17 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
+  def panel(title: nil, subtitle: nil, action: nil, &block)
+    render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
+            locals: { 
+              title: title, 
+              subtitle: subtitle,
+              action: action
+            } do
+      capture(&block)
+    end
+  end
+
   def duplicate_link(object)
     return unless can?(:update, object)
     link_to t('admin.duplicate'),

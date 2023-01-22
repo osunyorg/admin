@@ -6,7 +6,7 @@
   <%= f.input :parent_id, as: :hidden, wrapper: false %>
     <h2 class="h3"><%= t('content') %></h2>
     <div class="card-body">
-      <div class="row row-small">
+      <div class="row pure__row--small">
         <div class="col-lg-6">
           <%= f.input :title %>
         </div>
@@ -57,7 +57,7 @@
           <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
           <abbr title="required">*</abbr>
         </label>
-        <div class="row row-small">
+        <div class="row pure__row--small">
           <% @website.menu_item_kinds.keys.each do |kind| %>
             <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
               <div class="card kind" data-kind="<%= kind %>">

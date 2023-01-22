@@ -3,87 +3,67 @@
 
 <div class="row mb-5">
   <div class="col-md-6 pb-4">
-    <h2 class="h4"><%= t('hello', name: current_user.first_name) %></h2>
-    <% if current_university.logo.attached? %>
-      <%= image_tag current_university.logo, width: 120, class: 'float-end' %>
-    <% else %>
-      <p><%= current_university %></p>
+    <%= panel title: t('hello', name: current_user.first_name) do %>
+      <div class="text-end">
+        <% if current_university.logo.attached? %>
+          <%= image_tag current_university.logo, width: 120 %>
+        <% else %>
+          <%= current_university %>
+        <% end %>
+      </div>
     <% end %>
   </div>
   <div class="col-md-6 pb-4">
-    <div class="d-flex align-items-start">
-      <div class="flex-grow-1">
-        <h2 class="h4 mb-2"><%= Delayed::Job.all.length %></h2>
-        <p class="mb-0"><%= t 'admin.pending_tasks.label' %></p>
-        <p class="mb-0 small"><%= t 'admin.pending_tasks.hint' %></p>
-      </div>
-      <div class="d-inline-block ms-3">
-        <div class="stat stat-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-baseline"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        </div>
-      </div>
-    </div>
+    <%= panel title: Delayed::Job.all.length, 
+              action: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-baseline"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>' do %>
+      <p class="mb-0"><%= t 'admin.pending_tasks.label' %></p>
+      <p class="mb-0 small"><%= t 'admin.pending_tasks.hint' %></p>
+    <% end %>
   </div>
 </div>
 
 <% if current_university.communication_websites.any? && can?(:read, Communication::Website) %>
-  <h2 class="section"><%= Communication::Website.model_name.human(count: 2) %></h2>
-  <div class="row row-small">
+  <h2 class="category"><%= Communication::Website.model_name.human(count: 2) %></h2>
+  <div class="row">
     <% current_university.communication_websites.each do |website| %>
       <% next unless can?(:read, website) %>
       <div class="<%= classes %>">
-        <div class="card flex-fill">
-          <div class="card-body">
-            <span class="float-end">
-              <i class="fas fa-<%= Icon::COMMUNICATION_WEBSITE %>"></i>
-            </span>
-            <h3 class="card-title"><%= website %></h3>
-            <p class="small"><%= website.url %></p>
-            <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
-          </div>
-        </div>
+        <%= panel title: website, 
+                  action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_WEBSITE }\"></i>" do %>
+          <p class="small"><%= website.url %></p>
+          <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
+        <% end %>
       </div>
     <% end %>
   </div>
 <% end %>
 
 <% if current_university.communication_extranets.any? && can?(:read, Communication::Extranet) %>
-  <h2 class="section"><%= Communication::Extranet.model_name.human(count: 2) %></h2>
-  <div class="row row-small">
+  <h2 class="category"><%= Communication::Extranet.model_name.human(count: 2) %></h2>
+  <div class="row">
     <% current_university.communication_extranets.each do |extranet| %>
       <% next unless can?(:read, extranet) %>
       <div class="<%= classes %>">
-        <div class="card flex-fill">
-          <div class="card-body">
-            <span class="float-end">
-              <i class="fas fa-<%= Icon::COMMUNICATION_EXTRANET %>"></i>
-            </span>
-            <h3 class="card-title"><%= extranet %></h3>
-            <p class="small"><%= extranet.url %></p>
-            <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
-          </div>
-        </div>
+        <%= panel title: extranet, 
+                  action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_EXTRANET }\"></i>" do %>
+          <p class="small"><%= extranet.url %></p>
+          <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
+        <% end %>
       </div>
     <% end %>
   </div>
 <% end %>
 
 <% if current_university.research_journals.any? && can?(:read, Research::Journal) %>
-  <h2 class="section"><%= Research::Journal.model_name.human(count: 2) %></h2>
-  <div class="row row-small">
+  <h2 class="category"><%= Research::Journal.model_name.human(count: 2) %></h2>
+  <div class="row pure__row--small">
     <% current_university.research_journals.each do |journal| %>
       <% next unless can?(:read, journal) %>
       <div class="<%= classes %>">
-        <div class="card flex-fill">
-          <div class="card-body">
-            <span class="float-end">
-              <i class="fas fa-<%= Icon::RESEARCH_JOURNAL %>"></i>
-            </span>
-            <h3 class="card-title"><%= journal %></h3>
-            <p>&nbsp;</p>
-            <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
-          </div>
-        </div>
+        <%= panel title: journal, 
+            action: "<i class=\"fas fa-#{ Icon::RESEARCH_JOURNAL }\"></i>" do %>
+          <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
+        <% end %>
       </div>
     <% end %>
   </div>
