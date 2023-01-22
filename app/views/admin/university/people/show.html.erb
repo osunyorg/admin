@@ -3,7 +3,7 @@
 <%= render 'main_infos', person: @person %>
 
 <% if @teacher_involvements.total_count > 0 || @administrator_involvements.total_count > 0 %>
-  <h2 class="mb-3"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
+  <h2 class="category"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
 
   <div class="row">
     <% if @person.is_teacher? && @teacher_involvements.any? %>

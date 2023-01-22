@@ -1,8 +1,6 @@
 <% if involvements.total_count > 0 %>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= t('university.person.administrator_roles') %> (<%= involvements.total_count %>)</h2>
-    </div>
+  <%= panel title: t('university.person.administrator_roles'),
+            subtitle: "#{involvements.total_count} #{t('university.person.administrator_roles').downcase}" do %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">
         <thead>
@@ -42,10 +40,6 @@
         </tbody>
       </table>
     </div>
-    <% if involvements.total_pages > 1 %>
-      <div class="card-footer">
-        <%= paginate involvements, theme: 'bootstrap-5', param_name: :roles_page %>
-      </div>
-    <% end %>
-  </div>
+    <%= paginate involvements, theme: 'bootstrap-5', param_name: :roles_page %>
+  <% end %>
 <% end %>
