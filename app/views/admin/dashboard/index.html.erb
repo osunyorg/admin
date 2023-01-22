@@ -4,6 +4,19 @@
 <div class="row mb-5">
   <div class="col-md-6 pb-4">
     <%= panel title: t('hello', name: current_user.first_name) do %>
+      <% if current_admin_theme == 'appstack' %>
+        <p>
+          Osuny a un nouveau thème pour l'administration, "Pure". <br>
+          Voulez-vous l'essayer ?
+        </p>
+        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put, class: button_classes %>
+      <% else %>
+        <p>
+          Vous utilisez le thème "Pure" pour l'administration. <br>
+          Voulez-vous revenir au thème "Appstack" ?
+        </p>
+        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put, class: button_classes %>
+      <% end %>
       <div class="text-end">
         <% if current_university.logo.attached? %>
           <%= image_tag current_university.logo, width: 120 %>
