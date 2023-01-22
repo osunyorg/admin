@@ -1,5 +1,4 @@
-<section class="mb-5">
-  <h2 class="h3"><%= t('featured_image.title') %></h2>
+<%= panel title: t('featured_image.title') do %>
   <%= f.input :featured_image,
               as: :single_deletable_file,
               direct_upload: true,
@@ -18,4 +17,4 @@
                 data: { 'summernote-config' => 'link' }
               } %>
   <%= render 'admin/communication/unsplash/selector', about: about, f:f %>
-</section>
+<% end %>

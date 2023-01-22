@@ -6,56 +6,57 @@
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters if @filters.any?  %>
-
-  <div class="mb-5" data-batch-selectable>
-    <%= form_tag publish_admin_communication_website_posts_path do %>
-      <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
-      <div>
-        <% if @posts.total_pages > 1 %>
-          <div class="float-end mb-3">
-            <%= paginate @posts, theme: 'bootstrap-5' %>
-          </div>
-        <% end %>
-        <div data-batch-selectable-role="actions-container">
-          <div class="d-flex align-items-center">
-            <div class="col-auto me-3">
-              <%= t('batch_selectable.title') %>
+  <%= panel title: Communication::Website::Post.model_name.human(count: 2) do %>
+    <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters if @filters.any? %>
+    <div data-batch-selectable>
+      <%= form_tag publish_admin_communication_website_posts_path do %>
+        <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
+        <div>
+          <% if @posts.total_pages > 1 %>
+            <div class="float-end mb-3">
+              <%= paginate @posts, theme: 'bootstrap-5' %>
             </div>
-            <div class="col-auto me-3">
-              <select name="published" class="form-select">
-                <option value="false"><%= t('communication.website.posts.unpublished') %></option>
-                <option value="true"><%= t('communication.website.posts.published') %></option>
-              </select>
-            </div>
-            <div class="col-auto me-3">
-              <%= submit_tag t("save"), class: "btn btn-primary" %>
+          <% end %>
+          <div data-batch-selectable-role="actions-container">
+            <div class="d-flex align-items-center">
+              <div class="col-auto me-3">
+                <%= t('batch_selectable.title') %>
+              </div>
+              <div class="col-auto me-3">
+                <select name="published" class="form-select">
+                  <option value="false"><%= t('communication.website.posts.unpublished') %></option>
+                  <option value="true"><%= t('communication.website.posts.published') %></option>
+                </select>
+              </div>
+              <div class="col-auto me-3">
+                <%= submit_tag t("save"), class: "btn btn-primary" %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
   <div class="row">
     <% if can?(:create, Communication::Website::Category) || (@root_categories.any? && can?(:edit, @root_categories.first))  %>
       <div class="col-md-6">
-        <div class="float-end">
-          <%= create_link Communication::Website::Category %>
-        </div>
-        <h2 class="h3"><%= Communication::Website::Category.model_name.human(count: 2) %></h2>
-        <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
-            data-id=""
-            data-sort-url="<%= reorder_admin_communication_website_categories_path %>">
-          <%= render 'admin/communication/websites/categories/treebranch', categories: @root_categories %>
-        </ul>
+        <% action = create_link Communication::Website::Category %>
+        <%= panel title: Communication::Website::Category.model_name.human(count: 2), action: action do %>
+          <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
+              data-id=""
+              data-sort-url="<%= reorder_admin_communication_website_categories_path %>">
+            <%= render 'admin/communication/websites/categories/treebranch', categories: @root_categories %>
+          </ul>
+        <% end %>
       </div>
     <% end %>
     <% if @authors.any? %>
       <div class="col-md-6">
-        <h2 class="h3"><%= t('communication.authors', count: 2) %></h2>
-        <%= render 'admin/communication/websites/authors/list', authors: @authors %>
-        <% if @authors.total_pages > 1 %>
-          <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
+        <%= panel title: t('communication.authors', count: 2) do %>
+          <%= render 'admin/communication/websites/authors/list', authors: @authors %>
+          <% if @authors.total_pages > 1 %>
+            <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
+          <% end %>
         <% end %>
       </div>
     <% end %>

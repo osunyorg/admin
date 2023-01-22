@@ -1,27 +1,16 @@
-<% if about.best_featured_image.attached? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5">
-        <%= about.class.human_attribute_name :featured_image %>
-        <% unless about.featured_image.attached? %>
-          (<%= t('admin.inheritance.sentence_without_link').downcase %>)
-        <% end %>
-      </h2>
+<%= panel title: t('featured_image.title') do %>
+  <% image = about.best_featured_image.variable?  ? about.best_featured_image.variant(resize: '600')
+                                                  : about.best_featured_image %>
+  <%= image_tag image, class: 'img-fluid mb-2' %>
+  <% unless about.featured_image.attached? %>
+    <p class="small"><%= t('admin.inheritance.sentence_without_link').downcase %></p>
+  <% end %>
+  <% if about.best_featured_image_alt %>
+    <p class="mb-0"><%= about.best_featured_image_alt %></p>
+  <% end %>
+  <% if about.best_featured_image_credit %>
+    <div class="small mb-0">
+      <%= sanitize about.best_featured_image_credit %>
     </div>
-    <div class="card-body">
-      <% image = about.best_featured_image.variable?  ? about.best_featured_image.variant(resize: '600')
-                                                      : about.best_featured_image %>
-      <%= image_tag image, class: 'img-fluid mb-2' %>
-      <% if about.best_featured_image_alt %>
-        <p class="mb-0">
-          <%= about.best_featured_image_alt %>
-        </p>
-      <% end %>
-      <% if about.best_featured_image_credit %>
-        <div class="small mb-0">
-          <%= sanitize about.best_featured_image_credit %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+<% end if about.best_featured_image.attached? %>

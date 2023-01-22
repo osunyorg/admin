@@ -1,12 +1,10 @@
-<section class="mb-5">
-  <div class="float-end">
-    <%= link_to t('add'),
-                new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                class: button_classes if can? :create, Communication::Block %>
-  </div>
-  <h2 class="h3 mb-3">
-    <%= Communication::Block.model_name.human(count: 2) %>
-  </h2>
+<%
+action = ''
+action += link_to t('add'),
+                  new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
+                  class: button_classes if can? :create, Communication::Block
+%>
+<%= panel title: Communication::Block.model_name.human(count: 2), action: action do %>
   <% if about.blocks.any? %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">
@@ -37,4 +35,4 @@
       </table>
     </div>
   <% end %>
-</section>
+<% end %>

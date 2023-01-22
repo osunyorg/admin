@@ -1,11 +1,8 @@
 <%
 color = about.accessible? ? 'text-success' : 'text-danger'
+action = "<i class=\"fas fa-universal-access fa-2x float-end #{ color}\"></i>"
 %>
-<section class="mb-5">
-  <i class="fas fa-universal-access fa-2x float-end <%= color %>"></i>
-  <h2 class="h3">
-    <%= t('accessibility.label') %>
-  </h2>
+<%= panel title: t('accessibility.label'), action: action do %>
   <% if about.accessibility_errors.any? %>
     <h3 class="h5 text-danger">
       <%= t 'accessibility.errors', count: about.accessibility_errors.count %>
@@ -40,4 +37,4 @@ color = about.accessible? ? 'text-success' : 'text-danger'
       <% end %>
     </ul>
   <% end %>
-</section>
+<% end %>

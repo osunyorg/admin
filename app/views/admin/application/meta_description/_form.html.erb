@@ -1,9 +1,8 @@
-<section class="mb-5">
-  <h2 class="h3"><%= t('seo') %></h2>
+<%= panel title: t('admin.summary') do %>
   <%= f.input :meta_description,
               label: t('admin.meta_description.label'),
               hint: t('admin.meta_description.hint'),
               input_html: {
                 value: about.meta_description&.gsub('&amp;', '&')
               } %>
-</section>
+<% end %>

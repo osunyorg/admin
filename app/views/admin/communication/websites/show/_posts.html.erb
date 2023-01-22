@@ -1,17 +1,15 @@
-<section class="mb-5">
-  <div class="float-end">
-    <%= link_to t('communication.website.posts.new_curation'),
-                new_admin_communication_website_post_curation_path(website_id: @website.id),
-                class: button_classes if can?(:create, Communication::Website::Post) %>
-    <%= link_to t('create'),
-                new_admin_communication_website_post_path(website_id: @website),
-                class: button_classes if can?(:create, Communication::Website::Post) %>
-  </div>
-  <h2 class="h3"><%= t('communication.website.last_posts') %></h2>
-  <p><%= link_to  t('communication.website.see_all', number: @website.posts.accessible_by(current_ability).count), 
-                  admin_communication_website_posts_path(website_id: @website) %></p>
+<%
+action = ''
+action += link_to t('communication.website.posts.new_curation'),
+                  new_admin_communication_website_post_curation_path(website_id: @website.id),
+                  class: button_classes if can?(:create, Communication::Website::Post)
+action += link_to t('create'),
+                  new_admin_communication_website_post_path(website_id: @website),
+                  class: button_classes('ms-1') if can?(:create, Communication::Website::Post)
+%>
+<%= panel title: t('communication.website.last_posts'), action: action do %>
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,
               hide_category: true %>
-</section>
+<% end %>

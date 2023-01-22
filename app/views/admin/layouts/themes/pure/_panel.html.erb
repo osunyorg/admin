@@ -1,9 +1,9 @@
-<section class="flex-fill position-relative">
+<section class="pure__section flex-fill position-relative mb-5">
   <% if action %>
     <div class="float-end"><%= raw action %></div>
   <% end %>
   <% if title %>
-    <h2 class="h4"><%= title %></h2>
+    <h2><%= title %></h2>
   <% end %>
   <%= yield %>
 </section>
