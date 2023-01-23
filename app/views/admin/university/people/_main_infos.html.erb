@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-8 col-xl-9">
     <%= render 'admin/application/summary/show', about: person %>
-    <%= osuny_panel title: t('content') do %>
+    <%= osuny_panel t('content') do %>
       <div class="row pure__row--small">
         <% unless person.gender.blank? %>
           <div class="col-md-6">
@@ -44,7 +44,7 @@
       <% end %>
     <% end %>
     
-    <%= osuny_panel title: University::Person.human_attribute_name('socials') do %>
+    <%= osuny_panel University::Person.human_attribute_name('socials') do %>
       <% unless person.url.blank? %>
         <h3 class="h5"><%= University::Person.human_attribute_name('url') %></h3>
         <p><%= link_to person.url, person.url, target: '_blank' %></p>
@@ -66,7 +66,7 @@
     <%= render 'admin/communication/blocks/list', about: person %>
   </div>
   <div class="col-md-4 col-xl-3">
-    <%= osuny_panel title: t('metadata') do %>
+    <%= osuny_panel t('metadata') do %>
         <h3 class="h5"><%= University::Person.human_attribute_name('slug') %></h3>
         <p><%= person.slug %></p>
         <% if person.user.present? %>
@@ -74,7 +74,7 @@
           <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
         <% end %>
     <% end %>
-    <%= osuny_panel title: t('activerecord.attributes.university/person.picture') do %>
+    <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
       <% if person.best_picture_inherits_from_user? %>
         <p>
           <span class="small text-muted">

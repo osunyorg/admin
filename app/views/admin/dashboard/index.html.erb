@@ -3,7 +3,7 @@
 
 <div class="row mb-5">
   <div class="col-md-6 pb-4">
-    <%= osuny_panel title: t('hello', name: current_user.first_name) do %>
+    <%= osuny_panel t('hello', name: current_user.first_name) do %>
       <% if current_admin_theme == 'appstack' %>
         <p>
           Osuny a un nouveau thème pour l'administration, "Pure". <br>
@@ -27,7 +27,7 @@
     <% end %>
   </div>
   <div class="col-md-6 pb-4">
-    <%= osuny_panel title: Delayed::Job.all.length, 
+    <%= osuny_panel Delayed::Job.all.length, 
               action: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-baseline"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>' do %>
       <p class="mb-0"><%= t 'admin.pending_tasks.label' %></p>
       <p class="mb-0 small"><%= t 'admin.pending_tasks.hint' %></p>
@@ -41,7 +41,7 @@
     <% current_university.communication_websites.each do |website| %>
       <% next unless can?(:read, website) %>
       <div class="<%= classes %>">
-        <%= osuny_panel title: website, 
+        <%= osuny_panel website, 
                   action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_WEBSITE }\"></i>" do %>
           <p class="small"><%= website.url %></p>
           <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
@@ -57,7 +57,7 @@
     <% current_university.communication_extranets.each do |extranet| %>
       <% next unless can?(:read, extranet) %>
       <div class="<%= classes %>">
-        <%= osuny_panel title: extranet, 
+        <%= osuny_panel extranet, 
                   action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_EXTRANET }\"></i>" do %>
           <p class="small"><%= extranet.url %></p>
           <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
@@ -73,7 +73,7 @@
     <% current_university.research_journals.each do |journal| %>
       <% next unless can?(:read, journal) %>
       <div class="<%= classes %>">
-        <%= osuny_panel title: journal, 
+        <%= osuny_panel journal, 
             action: "<i class=\"fas fa-#{ Icon::RESEARCH_JOURNAL }\"></i>" do %>
           <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
         <% end %>

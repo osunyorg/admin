@@ -1,7 +1,7 @@
 <%
 action = link_to t('open'), @page.url, target: :_blank, class: 'btn btn-light btn-xs'
 %>
-<%= osuny_panel title: t('metadata'), action: action do %>
+<%= osuny_panel t('metadata'), action: action do %>
   <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
   <p><%= t @page.published %></p>
   <% unless @page.slug.blank? %>

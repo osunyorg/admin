@@ -3,11 +3,11 @@
   <div class="col-md-8">
     <%= render 'admin/application/summary/show', about: @organization %>
 
-    <%= osuny_panel title: University::Organization.human_attribute_name('text') do %>
+    <%= osuny_panel University::Organization.human_attribute_name('text') do %>
       <%= @organization.text.to_s.html_safe %>
     <% end if strip_tags(@organization.text.to_html).present? %>
 
-    <%= osuny_panel title: University::Organization.human_attribute_name('contact') do %>
+    <%= osuny_panel University::Organization.human_attribute_name('contact') do %>
       <div class="row pure__row--small">
         <% [
           :address, 
@@ -47,7 +47,7 @@
       </div>
     <% end %>
 
-    <%= osuny_panel title: University::Organization.human_attribute_name('legal') do %>
+    <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
       <div class="row pure__row--small">
         <div class="col-xxl-6">
           <%= osuny_label University::Organization.human_attribute_name('long_name') %>
@@ -68,14 +68,14 @@
   </div>
 
   <div class="col-md-4">
-    <%= osuny_panel title: t('informations') do %>
+    <%= osuny_panel t('informations') do %>
       <%= osuny_label University::Organization.human_attribute_name('slug') %>
       <p><%= @organization.slug %></p>
       <%= osuny_label University::Organization.human_attribute_name('active') %>
       <p><%= t @organization.active %></>
     <% end %>
     
-    <%= osuny_panel title: t('university.organization.logo') do %>
+    <%= osuny_panel t('university.organization.logo') do %>
       <% if @organization.logo.attached? %>
         <%= osuny_label University::Organization.human_attribute_name('logo') %>
         <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>

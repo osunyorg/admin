@@ -45,7 +45,7 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
-  def osuny_panel(title: nil, subtitle: nil, action: nil, &block)
+  def osuny_panel(title = nil, subtitle: nil, action: nil, &block)
     render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
             locals: { 
               title: title, 

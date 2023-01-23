@@ -1,6 +1,6 @@
 <% param_name ||= :page %>
 <% if involvements.total_count > 0 %>
-  <%= osuny_panel title: Education::Program.model_name.human(count: 2),
+  <%= osuny_panel Education::Program.model_name.human(count: 2),
                   subtitle: "#{involvements.total_count} #{Education::Program.model_name.human(count: involvements.total_count).downcase}" do %>
 
     <div class="table-responsive">

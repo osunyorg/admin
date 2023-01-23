@@ -1,5 +1,5 @@
 <% if involvements.total_count > 0 %>
-  <%= osuny_panel title: t('university.person.administrator_roles'),
+  <%= osuny_panel t('university.person.administrator_roles'),
             subtitle: "#{involvements.total_count} #{t('university.person.administrator_roles').downcase}" do %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">

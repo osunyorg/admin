@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-xxl-6">
-      <%= osuny_panel title: t('metadata') do %>
+      <%= osuny_panel t('metadata') do %>
         <%= f.input :name %>
         <%= f.input :phone %>
         <%= f.input :address %>
@@ -25,7 +25,7 @@
       <% end %>
     </div>
     <div class="col-xxl-6">
-      <%= osuny_panel title: Education::Program.model_name.human(count: 2) do %>
+      <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
         <%= f.association :programs,
                           as: :check_boxes,
                           collection: collection_tree(current_university.education_programs),

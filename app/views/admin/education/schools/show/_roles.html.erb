@@ -4,7 +4,7 @@ action += link_to t('education.schools.manage_roles'),
                   admin_education_school_roles_path(school_id: @school.id),
                   class: button_classes if can?(:update, University::Role)
 %>
-<%= osuny_panel title: Education::School.human_attribute_name('roles'), action: action do %>
+<%= osuny_panel Education::School.human_attribute_name('roles'), action: action do %>
   <% if @roles.any? %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">
