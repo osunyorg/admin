@@ -10,7 +10,7 @@ module Communication::Website::WithSpecialPages
     special_page = pages.where(type: type.to_s, language_id: language.id).first
     special_page ||= begin
       original_special_page = pages.where(type: type.to_s, language_id: default_language_id).first
-      original_special_page.duplicate!(language) if original_special_page.present?
+      original_special_page.translate!(language) if original_special_page.present?
     end
     special_page
   end

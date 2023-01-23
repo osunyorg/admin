@@ -3,6 +3,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   load_and_authorize_resource class: Communication::Website::Post, through: :website
 
+  include Admin::Translatable
+
   before_action :load_filters, only: :index
 
   has_scope :for_search_term
@@ -11,7 +13,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).ordered.page params[:page]
+    @posts = apply_scopes(@posts).where(language_id: current_website_language.id).ordered.page params[:page]
     @authors =  @website.authors.accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
@@ -93,14 +95,15 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def post_params
-    params.require(:communication_website_post)
-          .permit(
-            :university_id, :website_id, :title, :meta_description, :summary, :text,
-            :published, :published_at, :slug, :pinned,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :author_id, :language_id, category_ids: []
-          )
-          .merge(university_id: current_university.id)
+    translatable_params(
+      :communication_website_post,
+      [
+        :title, :meta_description, :summary, :text,
+        :published, :published_at, :slug, :pinned,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :author_id, category_ids: []
+      ]
+    )
   end
 
   def load_filters

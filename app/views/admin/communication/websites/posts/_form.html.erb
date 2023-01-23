@@ -52,11 +52,6 @@
             </div>
             <%= f.input :published_at, html5: true %>
           <% end %>
-          <% if @website.languages.many? %>
-            <%= f.input :language_id, collection: @website.languages, include_blank: false %>
-          <% elsif @website.languages.any? %>
-            <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
-          <% end %>
           <% if current_user.author? || current_user.contributor? %>
             <%= f.input :author_id,
                         as: :hidden,

@@ -59,6 +59,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPath
   include WithType
   include WithPermalink
+  include WithTranslations
 
   has_summernote :text
 
@@ -140,53 +141,6 @@ class Communication::Website::Page < ApplicationRecord
     self.class.unscoped
               .where(parent: parent, university: university, website: website)
               .where.not(id: id)
-  end
-
-  def translation_for(language)
-    # If current language is language, returns itself
-    return self if language_id == language.id
-    # Translations have the same original_id if set
-    original_id.present?  ? original.translation_for(language)
-                          : translations.find_by(language_id: language.id)
-  end
-
-  def duplicate!(language)
-    # Duplicate parent if needed
-    if parent_id.present?
-      parent_translation = parent.translation_for(language)
-      parent_translation ||= parent.duplicate!(language)
-    end
-
-    duplicate = self.dup
-    # Inherits from original_id or set it to itself
-    duplicate.assign_attributes(
-      original_id: original_object.id,
-      parent_id: parent_translation&.id,
-      github_path: nil,
-      published: false,
-      language_id: language.id
-    )
-    duplicate.featured_image.attach(
-      io: URI.open(featured_image.url),
-      filename: featured_image.filename.to_s,
-      content_type: featured_image.content_type
-    ) if featured_image.attached?
-    duplicate.save
-
-    blocks.ordered.each do |block|
-      block_duplicate = block.dup
-      block_duplicate.about = duplicate
-      block_duplicate.save
-    end
-    duplicate
-  end
-
-  def original_object
-    @original_object ||= (self.original || self)
-  end
-
-  def original_with_translations
-    original_object.translations + [original_object]
   end
 
   protected

@@ -4,8 +4,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   include Admin::Translatable
 
-  before_action :check_or_redirect_translatable_page, only: [:show, :edit, :update, :destroy]
-
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
@@ -42,10 +40,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def preview
     render layout: 'admin/layouts/preview'
-  end
-
-  def translate
-
   end
 
   def new
@@ -118,20 +112,4 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     )
   end
 
-  def check_or_redirect_translatable_page
-    # Early return if language is correct
-    return if @page.language_id == current_website_language.id
-    # Look up for translation from page
-    translation = @page.translation_for(current_website_language)
-    # If not found, duplicate the current page (with blocks and all) for given language
-    translation ||= @page.duplicate!(current_website_language)
-    # Redirect to the translation
-    if ['edit', 'update'].include?(action_name)
-      # Safety net on update action if called on wrong language
-      redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
-    else
-      # Safety net on destroy action if called on wrong language
-      redirect_to [:admin, translation.becomes(translation.class.base_class)]
-    end
-  end
 end

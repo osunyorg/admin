@@ -13,7 +13,7 @@
         <%= t('communication.website.last_posts') %>
         <small>
           -
-          <%= t('communication.website.see_all', number: @website.posts.accessible_by(current_ability).count) %>
+          <%= t('communication.website.see_all', number: @website.posts.accessible_by(current_ability).where(language_id: current_website_language.id).count) %>
         </small>
       <% end %>
     </h2>
