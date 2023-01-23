@@ -45,6 +45,10 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
+  def static_link(path)
+    raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
+  end
+
   def osuny_panel(title = nil, subtitle: nil, action: nil, &block)
     render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
             locals: { 

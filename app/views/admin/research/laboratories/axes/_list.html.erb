@@ -5,7 +5,7 @@
         <% if can? :reorder, Research::Laboratory::Axis %>
           <th width="20" class="ps-0">&nbsp;</th>
         <% end %>
-        <th><%= Research::Laboratory::Axis.model_name.human %></th>
+        <th><%= Research::Laboratory::Axis.human_attribute_name('name') %></th>
         <th><%= Research::Laboratory::Axis.human_attribute_name('short_name') %></th>
         <th></th>
       </tr>

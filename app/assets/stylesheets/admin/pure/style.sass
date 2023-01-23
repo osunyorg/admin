@@ -11,6 +11,9 @@
         > *
             padding-left: calc(.5 * #{$spacing1})
             padding-right: calc(.5 * #{$spacing1})
+    &__separation
+        border-width: 10px
+        margin-bottom: $spacing3
 
 .navbar
     position: absolute
@@ -112,7 +115,9 @@ a
     &.kind--selected
         background: $color-accent
         border-color: $color-accent
-        color: $color-background
+        &, p
+            color: $color-background
+        
 
 .list-group-item.active
     color: $color-accent
