@@ -56,7 +56,7 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
   end
 
   def default_parent
-    website.special_page(Communication::Website::Page::Person)
+    website.special_page(Communication::Website::Page::Person, language: language)
   end
 
   def type_git_dependencies

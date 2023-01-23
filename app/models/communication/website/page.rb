@@ -142,7 +142,7 @@ class Communication::Website::Page < ApplicationRecord
               .where.not(id: id)
   end
 
-  def translation_for(language, lookup_original: true)
+  def translation_for(language)
     # If current language is language, returns itself
     return self if language_id == language.id
     # Translations have the same original_id if set
@@ -150,14 +150,21 @@ class Communication::Website::Page < ApplicationRecord
                           : translations.find_by(language_id: language.id)
   end
 
-  def duplicate!(**new_attributes)
+  def duplicate!(language)
+    # Duplicate parent if needed
+    if parent_id.present?
+      parent_translation = parent.translation_for(language)
+      parent_translation ||= parent.duplicate!(language)
+    end
+
     duplicate = self.dup
     # Inherits from original_id or set it to itself
     duplicate.assign_attributes(
       original_id: original_object.id,
+      parent_id: parent_translation&.id,
       github_path: nil,
       published: false,
-      **new_attributes
+      language_id: language.id
     )
     duplicate.featured_image.attach(
       io: URI.open(featured_image.url),
@@ -189,7 +196,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def last_ordered_element
-    website.pages.where(parent_id: parent_id).ordered.last
+    website.pages.where(parent_id: parent_id, language_id: language_id).ordered.last
   end
 
   def explicit_blob_ids

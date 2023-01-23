@@ -37,11 +37,8 @@ url = page.new_record?  ? admin_communication_website_pages_path
                           class: 'js-slug-input',
                           data: { source: '#communication_website_page_title' }
                         } unless page.is_home? %>
-            <% if @website.languages.many? %>
-              <%= f.input :language_id, collection: @website.languages, include_blank: false %>
-            <% end %>
             <%= f.association :parent,
-                              collection: collection_tree(@website.pages, page),
+                              collection: collection_tree(@website.pages.where(language: current_website_language), page),
                               include_blank: false,
                               label_method: ->(p) { sanitize p[:label] },
                               value_method: ->(p) { p[:id] } unless page.is_home? %>
@@ -49,19 +46,6 @@ url = page.new_record?  ? admin_communication_website_pages_path
             <%= f.input :full_width if page.editable_width? %>
           </div>
         </div>
-      <% else %>
-        <% if @website.languages.many? %>
-          <div class="card flex-fill w-100">
-            <div class="card-header">
-              <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-            </div>
-            <div class="card-body">
-              <%= f.input :language_id, collection: @website.languages, include_blank: false %>
-            </div>
-          </div>
-        <% elsif @website.languages.any? %>
-          <%= f.input :language_id, as: :hidden, input_html: { value: @website.languages.first.id }, wrapper: false %>
-        <% end %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
     </div>

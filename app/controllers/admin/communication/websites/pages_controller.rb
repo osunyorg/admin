@@ -4,8 +4,10 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   include Admin::Translatable
 
+  before_action :check_or_redirect_translatable_page, only: [:show, :edit, :update, :destroy]
+
   def index
-    @homepage = @website.special_page(Communication::Website::Page::Home)
+    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
     breadcrumb
   end
@@ -43,16 +45,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def translate
-    language = @website.languages.find_by!(iso_code: params[:iso_code])
-    if @page.language_id == language.id
-      redirect_to [:admin, @page]
-    else
-      @translation = @page.translation_for(language)
-      # If not found, duplicate the current page (with blocks and all) for given language
-      @translation ||= @page.duplicate!(language_id: language.id)
-      # Redirect to the translation
-      redirect_to [:admin, @translation.becomes(@translation.class.base_class)]
-    end
+
   end
 
   def new
@@ -121,9 +114,24 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
         :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :parent_id
-      ],
-      @website.default_language_id,
-      @website.languages.size
+      ]
     )
+  end
+
+  def check_or_redirect_translatable_page
+    # Early return if language is correct
+    return if @page.language_id == current_website_language.id
+    # Look up for translation from page
+    translation = @page.translation_for(current_website_language)
+    # If not found, duplicate the current page (with blocks and all) for given language
+    translation ||= @page.duplicate!(current_website_language)
+    # Redirect to the translation
+    if ['edit', 'update'].include?(action_name)
+      # Safety net on update action if called on wrong language
+      redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
+    else
+      # Safety net on destroy action if called on wrong language
+      redirect_to [:admin, translation.becomes(translation.class.base_class)]
+    end
   end
 end

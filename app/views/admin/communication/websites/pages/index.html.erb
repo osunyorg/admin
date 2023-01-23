@@ -1,4 +1,4 @@
-<% content_for :title, "#{t('admin.communication.website.pages.structure')} (#{@website.pages.count})" %>
+<% content_for :title, "#{t('admin.communication.website.pages.structure')} (#{@website.pages.where(language_id: current_website_language.id).count})" %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="card">

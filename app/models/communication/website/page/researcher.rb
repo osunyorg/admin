@@ -49,13 +49,13 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
   end
 
   protected
-  
+
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}researchers/_index.html"
   end
 
   def default_parent
-    website.special_page(Communication::Website::Page::Person)
+    website.special_page(Communication::Website::Page::Person, language: language)
   end
 
   def type_git_dependencies

@@ -84,7 +84,7 @@ module Communication::Website::Page::WithType
   protected
 
   def default_parent
-    website.special_page(Communication::Website::Page::Home)
+    website.special_page(Communication::Website::Page::Home, language: language)
   end
 
   def type_git_dependencies
