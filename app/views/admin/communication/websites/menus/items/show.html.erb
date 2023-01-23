@@ -2,36 +2,28 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-2 h5">
-            <%= "#{Communication::Website::Menu::Item.human_attribute_name('children')} (#{@children.size})" %>
-          </h2>
-          <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
-          <%= link_to t('create'),
-                      new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
-                      class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
-        </div>
-      </div>
+    <div class="col-xl-8">
+      <%
+      action = link_to  t('create'),
+                        new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
+                        class: button_classes if can?(:create, Communication::Website::Menu::Item)
+      %>
+      <%= osuny_panel Communication::Website::Menu::Item.human_attribute_name('children'), action: action do %>
+        <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
+      <% end %>
     </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('kind') %></h3>
-          <p><%= @item.kind_i18n %></p>
-          <% if @item.kind_url? %>
-            <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('url') %></h3>
-            <p><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></p>
-          <% elsif @item.has_about? %>
-            <h3 class="h5"><%= Communication::Website::Menu::Item.human_attribute_name('about') %></h3>
-            <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %></p>
-          <% end %>
-        </div>
-      </div>
+    <div class="col-xl-4">
+      <%= osuny_panel t('metadata') do %>
+        <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('kind') %>
+        <p><%= @item.kind_i18n %></p>
+        <% if @item.kind_url? %>
+          <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('url') %>
+          <p><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></p>
+        <% elsif @item.has_about? %>
+          <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('about') %>
+          <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %></p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
