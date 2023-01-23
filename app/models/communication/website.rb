@@ -62,6 +62,7 @@ class Communication::Website < ApplicationRecord
                           association_foreign_key: 'language_id'
 
   validates :languages, length: { minimum: 1 }
+  validate :languages_must_include_default_language
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
@@ -95,5 +96,11 @@ class Communication::Website < ApplicationRecord
     dependencies += categories + categories.map(&:git_block_dependencies).flatten
     dependencies += about.git_dependencies(website) if about.present?
     dependencies
+  end
+
+  protected
+
+  def languages_must_include_default_language
+    errors.add(:languages, :must_include_default) unless language_ids.include?(default_language_id)
   end
 end

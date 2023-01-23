@@ -7,7 +7,12 @@ module Communication::Website::WithSpecialPages
   end
 
   def special_page(type, language: default_language)
-    pages.where(type: type.to_s, language_id: language).first
+    special_page = pages.where(type: type.to_s, language_id: language.id).first
+    special_page ||= begin
+      original_special_page = pages.where(type: type.to_s, language_id: default_language_id).first
+      original_special_page.duplicate!(language) if original_special_page.present?
+    end
+    special_page
   end
 
   def create_missing_special_pages

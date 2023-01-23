@@ -13,7 +13,7 @@
           <%= f.input :url %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
           <%= f.association :languages, as: :check_boxes, required: true, wrapper_html: { class: "js-languages" } %>
-          <%= f.association :default_language, include_blank: t('simple_form.include_blanks.defaults.language'), input_html: { class: "js-default-language" } %>
+          <%= f.association :default_language, include_blank: t('simple_form.include_blanks.defaults.language'), input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
           <%= f.input :in_production %>
         </div>
       </div>

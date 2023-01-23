@@ -76,10 +76,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   protected
 
   def website_params
-    params.require(:communication_website).permit(
+    attribute_names = [
       :name, :url, :repository, :access_token, :about_type, :about_id, :in_production,
       :git_provider, :git_endpoint, :git_branch, :plausible_url, :default_language_id, language_ids: []
-    )
+    ]
+    attribute_names << :default_language_id unless @website&.persisted?
+    params.require(:communication_website).permit(*attribute_names)
   end
 
   def default_url_options

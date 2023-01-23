@@ -146,6 +146,7 @@ en:
         communication/website:
           attributes:
             languages:
+              must_include_default: must include at least the default language
               too_short: must include at least one
   admin:
     communication:
