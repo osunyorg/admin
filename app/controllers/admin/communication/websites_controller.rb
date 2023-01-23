@@ -85,7 +85,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def default_url_options
     options = {}
     if @website.present?
-      options[:lang] = current_website_language.iso_code if @website.languages.many?
+      options[:lang] = current_website_language.iso_code if @website.languages.any?
     end
     options
   end
