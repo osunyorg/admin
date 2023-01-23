@@ -15,21 +15,24 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="card flex-fill w-100">
-            <div class="card-header">
-              <h5 class="card-title mb-0">
-                <%= t('activerecord.attributes.communication/website/post.categories') %>
-              </h5>
-            </div>
-            <div class="card-body">
-              <%= f.association :categories,
-                                label_text: false,
-                                as: :check_boxes,
-                                collection: collection_tree_for_checkboxes(@website.categories) if @website.categories.any? %>
+        <% categories = @website.categories.where(language_id: current_website_language.id) %>
+        <% if categories.any? %>
+          <div class="col-md-6">
+            <div class="card flex-fill w-100">
+              <div class="card-header">
+                <h5 class="card-title mb-0">
+                  <%= t('activerecord.attributes.communication/website/post.categories') %>
+                </h5>
+              </div>
+              <div class="card-body">
+                  <%= f.association :categories,
+                                    label_text: false,
+                                    as: :check_boxes,
+                                    collection: collection_tree_for_checkboxes(categories) %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
         <div class="col-md-6">
           <%= render 'admin/application/meta_description/form', f: f, about: post %>
         </div>

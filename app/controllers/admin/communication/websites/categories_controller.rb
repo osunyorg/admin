@@ -1,10 +1,12 @@
 class Admin::Communication::Websites::CategoriesController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Category, through: :website
 
+  include Admin::Translatable
+
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
-    @categories = @website.categories.ordered
+    @categories = @website.categories.where(language_id: current_website_language.id).ordered
     breadcrumb
   end
 
@@ -30,7 +32,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
 
   def children
     return unless request.xhr?
-    @category = @website.categories.find(params[:id])
+    @category = @website.categories.where(language_id: current_website_language.id).find(params[:id])
     @children = @category.children.ordered
   end
 
@@ -84,7 +86,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   protected
 
   def get_root_categories
-    @root_categories = @website.categories.root.ordered
+    @root_categories = @website.categories.root.where(language_id: current_website_language.id).ordered
   end
 
   def breadcrumb
@@ -95,11 +97,12 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   end
 
   def category_params
-    params.require(:communication_website_category)
-          .permit(
-            :website_id, :name, :meta_description, :summary, :slug, :parent_id,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
-          )
-          .merge(university_id: current_university.id)
+    translatable_params(
+      :communication_website_category,
+      [
+        :name, :meta_description, :summary, :slug, :parent_id,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+      ]
+    )
   end
 end

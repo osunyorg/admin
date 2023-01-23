@@ -17,7 +17,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @authors =  @website.authors.accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
-    @root_categories = @website.categories.root.ordered
+    @root_categories = @website.categories.where(language_id: current_website_language.id).root.ordered
     breadcrumb
   end
 

@@ -5,8 +5,9 @@ module Communication::Website::WithProgramCategories
     after_save_commit :set_programs_categories!, if: -> (website) { website.has_education_programs? }
   end
 
+  # TODO : I18n
   def set_programs_categories!
-    programs_root_category = categories.where(is_programs_root: true).first_or_create(
+    programs_root_category = categories.where(language_id: default_language_id, is_programs_root: true).first_or_create(
       name: 'Offre de formation',
       slug: 'offre-de-formation',
       is_programs_root: true,
@@ -20,7 +21,7 @@ module Communication::Website::WithProgramCategories
 
   def set_programs_categories_at_level!(parent_category, programs)
     programs.map.with_index do |program, index|
-      category = categories.where(program_id: program.id).first_or_initialize(
+      category = categories.where(language_id: default_language_id, program_id: program.id).first_or_initialize(
         name: program.name,
         slug: program.name.parameterize,
         university_id: university.id
