@@ -178,6 +178,10 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def translate_additional_data!(translation)
-    # TODO: Must handle categories
+    categories.each do |category|
+      translated_category = category.translation_for(translation.language)
+      translated_category ||= category.translate!(translation.language)
+      translation.categories << translated_category
+    end
   end
 end
