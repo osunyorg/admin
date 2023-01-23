@@ -46,6 +46,7 @@ module Admin::ApplicationHelper
   end
 
   def static_link(path)
+    return unless current_user.server_admin?
     raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
   end
 

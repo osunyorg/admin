@@ -123,10 +123,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>
-  <%= link_to t('static'),
-              static_admin_university_organization_path(@organization),
-              target: :_blank,
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_university_organization_path(@organization) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

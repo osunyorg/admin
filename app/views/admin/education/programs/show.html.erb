@@ -145,9 +145,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @program %>
-  <%= link_to t('static'),
-              static_admin_education_program_path(@program),
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_education_program_path(@program) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

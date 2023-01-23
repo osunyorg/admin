@@ -27,9 +27,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>
-  <%= link_to t('static'),
-              static_admin_education_diploma_path(@diploma),
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_education_diploma_path(@diploma) %>
 <% end %>
 
 <% content_for :action_bar_right do %>
