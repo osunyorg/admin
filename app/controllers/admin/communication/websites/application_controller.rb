@@ -19,7 +19,7 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
     options = {}
     if @website.present?
       options[:website_id] = @website.id
-      options[:lang] = current_website_language.iso_code if @website.languages.many?
+      options[:lang] = current_website_language.iso_code if @website.languages.any?
     end
     options
   end
