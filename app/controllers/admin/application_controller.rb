@@ -3,6 +3,11 @@ class Admin::ApplicationController < ApplicationController
 
   before_action :load_filters, only: :index
 
+  def set_theme
+    current_user.update_column :admin_theme, params[:theme]
+    redirect_to admin_root_path
+  end
+
   protected
 
   def breadcrumb

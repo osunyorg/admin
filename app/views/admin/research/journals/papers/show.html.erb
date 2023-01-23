@@ -2,78 +2,58 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
-      </div>
-      <div class="card-body">
-        <h3 class="h5"><%= Research::Journal::Paper.human_attribute_name('abstract') %></h3>
-        <p><%= @paper.abstract %></p>
-        <% if @paper.pdf.attached? %>
-          <h3 class="h5 mt-4"><%= Research::Journal::Paper.human_attribute_name('pdf') %></h3>
-          <%= link_to @paper.pdf.filename, url_for(@paper.pdf) %>
-        <% end %>
-        <h3 class="h5 mt-4"><%= Research::Journal::Paper.human_attribute_name('text') %></h3>
-        <p><%= @paper.text %></p>
-        <h3 class="h5 mt-4"><%= Research::Journal::Paper.human_attribute_name('references') %></h3>
-        <p><%= @paper.references %></p>
-      </div>
-    </div>
+    <%= osuny_panel t('content') do %>
+      <%= osuny_label Research::Journal::Paper.human_attribute_name('abstract') %>
+      <p><%= @paper.abstract %></p>
+      <% if @paper.pdf.attached? %>
+        <%= osuny_label Research::Journal::Paper.human_attribute_name('pdf') %>
+        <%= link_to @paper.pdf.filename, url_for(@paper.pdf) %>
+      <% end %>
+      <%= osuny_label Research::Journal::Paper.human_attribute_name('text') %>
+      <p><%= @paper.text %></p>
+      <%= osuny_label Research::Journal::Paper.human_attribute_name('references') %>
+      <p><%= @paper.references %></p>
+    <% end %>
     <%= render 'admin/application/summary/show', about: @paper %>
   </div>
   <div class="col-md-4">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-      </div>
-      <div class="card-body">
+    <%= osuny_panel t('metadata') do %>
         <% if @paper.volume %>
-          <h3 class="h5"><%= Research::Journal::Paper.human_attribute_name('volume') %></h3>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('volume') %>
           <p><%= link_to  @paper.volume,
                           [:admin, @paper.volume],
                           class: "#{'draft' unless @paper.volume.published?}" %></p>
         <% end %>
-        <h3 class="h5"><%= Research::Journal::Paper.human_attribute_name('published') %></h3>
+        <%= osuny_label Research::Journal::Paper.human_attribute_name('published') %>
         <p><%= t @paper.published %></p>
         <% if @paper.published? && @paper.published_at.present? %>
-          <h3 class="h5">
-            <%= Research::Journal::Paper.human_attribute_name('published_at') %>
-          </h3>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('published_at') %>
           <p><%= l @paper.published_at.to_time, format: :date_with_explicit_month %></p>
         <% end %>
         <% unless @paper.keywords.blank? %>
-          <h3 class="h5">
-            <%= Research::Journal::Paper.human_attribute_name('keywords') %>
-          </h3>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('keywords') %>
           <p><%= @paper.keywords %></p>
         <% end %>
         <% if @paper.kind %>
-          <h3 class="h5">
-            <%= Research::Journal::Paper.human_attribute_name('kind') %>
-          </h3>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('kind') %>
           <p><%= link_to @paper.kind, admin_research_journal_kind_path(@paper.kind) %></p>
         <% end %>
         <% if @paper.people.any? %>
-          <h3 class="h5">
-            <%= Research::Journal::Paper.human_attribute_name('people') %>
-          </h3>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('people') %>
           <ul class="list-unstyled mb-0">
             <% @paper.people.each do |person| %>
               <li><%= link_to person, admin_research_researcher_path(person) %></li>
             <% end %>
           </ul>
         <% end %>
-      </div>
-    </div>
+    <% end %>
     <%= render 'admin/application/meta_description/show', about: @paper %>
   </div>
 </div>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @paper %>
-  <%= link_to t('static'),
-            static_admin_research_journal_paper_path(@paper),
-            class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_research_journal_paper_path(@paper) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

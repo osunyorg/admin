@@ -1,5 +1,29 @@
 <% content_for :title, @thesis %>
 
+<div class="row">
+  <div class="col-xl-6">
+    <%= simple_format @thesis.abstract %>
+  </div>
+  <div class="col-xl-6">
+    <% if @thesis.started_at %>
+      <%= osuny_label Research::Thesis.human_attribute_name('started_at') %>
+      <p><%= l @thesis.started_at %></p>
+    <% end %>
+    <%= osuny_label Research::Thesis.human_attribute_name('completed') %>
+    <p><%= t @thesis.completed %></p>
+    <% if @thesis.completed_at %>
+      <%= osuny_label Research::Thesis.human_attribute_name('completed_at') %>
+      <p><%= l @thesis.completed_at %></p>
+    <% end %>
+    <%= osuny_label Research::Thesis.human_attribute_name('author') %>
+    <p><%= link_to @thesis.author, [:admin, @thesis.author] %></p>
+    <%= osuny_label Research::Thesis.human_attribute_name('laboratory') %>
+    <p><%= link_to @thesis.laboratory, [:admin, @thesis.laboratory] %></p>
+    <%= osuny_label Research::Thesis.human_attribute_name('director') %>
+    <p><%= link_to @thesis.director, [:admin, @thesis.director] %></p>
+  </div>
+</div>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @thesis %>
 <% end %>

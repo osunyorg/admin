@@ -11,11 +11,11 @@
     <thead>
       <tr>
         <% if selectable %>
-          <th>
+          <th class="ps-0">
             <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } %>
           </th>
         <% end %>
-        <th><%= Communication::Website::Post.human_attribute_name('title') %></th>
+        <th class="ps-0"><%= Communication::Website::Post.human_attribute_name('title') %></th>
         <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
         <th colspan="2"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
       </tr>
@@ -24,11 +24,11 @@
       <% posts.each do |post| %>
         <tr>
           <% if selectable %>
-            <td>
+            <td class="ps-0">
               <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %>
             </td>
           <% end %>
-          <td><%= link_to post,
+          <td class="ps-0"><%= link_to post,
                           admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                           class: "#{'draft' unless post.published?}" %></td>
           <td><%= image_tag post.featured_image.representation(resize: 'x100'),

@@ -1,0 +1,26 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Research::Thesis.human_attribute_name('title') %></th>
+        <th><%= Research::Thesis.human_attribute_name('laboratory') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @theses.each do |thesis| %>
+        <tr>
+          <td><%= link_to thesis, [:admin, thesis] %></td>
+          <td><%= link_to thesis.laboratory, [:admin, thesis.laboratory] %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link thesis %>
+              <%= destroy_link thesis %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @theses, theme: 'bootstrap-5' %>

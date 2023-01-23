@@ -2,52 +2,26 @@
 
 <%= render 'admin/university/people/main_infos', person: @alumnus %>
 
-<% if @alumnus.cohorts.any? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= Education::Cohort.model_name.human(count: @alumnus.cohorts.count) %></h2>
-    </div>
-    <%= render 'admin/education/cohorts/list', cohorts: @alumnus.cohorts.ordered %>
-  </div>
+<%
+action = ''
+action += link_to t('university.manage_cohorts'),
+                  cohorts_admin_university_alumnus_path(@alumnus),
+                  class: button_classes if can?(:update, @alumnus)
+%>
+<%= osuny_panel title:Education::Cohort.model_name.human(count: 2), action: action do %>
+  <%= render 'admin/education/cohorts/list', cohorts: @alumnus.cohorts.ordered %>
 <% end %>
 
-<% if @alumnus.experiences.any? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= University::Person::Experience.model_name.human(count: @alumnus.experiences.count) %></h2>
-    </div>
-    <div class="table-responsive">
-      <table class="<%= table_classes %>">
-        <thead>
-          <tr>
-            <th><%= University::Person::Experience.human_attribute_name('description') %></th>
-            <th><%= University::Person::Experience.human_attribute_name('organization') %></th>
-            <th><%= University::Person::Experience.human_attribute_name('from_year') %></th>
-            <th><%= University::Person::Experience.human_attribute_name('to_year') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @alumnus.experiences.ordered.each do |experience| %>
-            <% organization = experience.organization %>
-            <tr>
-              <td><%= experience.description %></td>
-              <td><%= link_to_if can?(:read, organization), organization, [:admin, organization] %></td>
-              <td><%= experience.from_year %></td>
-              <td><%= experience.to_year %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<%
+action = ''
+action += link_to t('university.manage_experiences'),
+                  experiences_admin_university_alumnus_path(@alumnus),
+                  class: button_classes if can?(:update, @alumnus)
+%>
+<%= osuny_panel title:University::Person::Experience.model_name.human(count: 2), action: action do %>
+  <%= render 'admin/university/people/experiences/list', experiences: @alumnus.experiences.ordered %>
 <% end %>
-
 
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
-  <%= link_to t('university.manage_cohorts'),
-              cohorts_admin_university_alumnus_path(@alumnus),
-              class: button_classes if can?(:update, @alumnus) %>
-  <%= link_to t('university.manage_experiences'), experiences_admin_university_alumnus_path(@alumnus),
-              class: button_classes if can?(:update, @alumnus) %>
 <% end %>

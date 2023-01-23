@@ -1,32 +1,33 @@
-<% content_for :title, "#{t('admin.communication.website.pages.structure')} (#{@website.pages.count})" %>
+<% content_for :title, t('admin.communication.website.pages.structure') %>
+
+<% content_for :title_right do %>
+  <%= @website.pages.count %>
+  <%= Communication::Website::Page.model_name.human(count: @website.pages.count).downcase %>
+<% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <div class="card">
-    <div class="card-body">
-      <ul class="list-unstyled treeview">
-        <li class="treeview__element treeview__element--opened treeview__element--loaded" data-id="<%= @homepage.id %>" data-parent="">
-          <div class="d-flex align-items-center treeview__label border-bottom p-1">
-            <div class="d-inline-block p-2 ps-0" style="width: 22px">
-              <span class="close_btn text-primary">
-                <i class="close_btn--with_children fas fa-folder-open"></i>
-              </span>
-            </div>
-            <%= link_to @homepage,
-                        admin_communication_website_page_path(website_id: @homepage.website.id, id: @homepage.id)
-                        %>
-            <div class="btn-group ms-auto" role="group">
-              <%= link_to t('edit'), edit_admin_communication_website_page_path(@homepage), class: button_classes %>
-            </div>
-          </div>
-          <ul class="list-unstyled ms-4 treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"
-              data-id="<%= @homepage.id %>"
-              data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
-            <%= render 'treebranch', pages: @first_level_pages %>
-          </ul>
-        </li>
+  <ul class="list-unstyled treeview">
+    <li class="treeview__element treeview__element--opened treeview__element--loaded" data-id="<%= @homepage.id %>" data-parent="">
+      <div class="d-flex align-items-center treeview__label border-bottom p-1">
+        <div class="d-inline-block p-2 ps-0" style="width: 22px">
+          <span class="close_btn text-primary">
+            <i class="close_btn--with_children fas fa-folder-open"></i>
+          </span>
+        </div>
+        <%= link_to @homepage,
+                    admin_communication_website_page_path(website_id: @homepage.website.id, id: @homepage.id)
+                    %>
+        <div class="btn-group ms-auto" role="group">
+          <%= link_to t('edit'), edit_admin_communication_website_page_path(@homepage), class: button_classes %>
+        </div>
+      </div>
+      <ul class="list-unstyled ms-4 treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"
+          data-id="<%= @homepage.id %>"
+          data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
+        <%= render 'treebranch', pages: @first_level_pages %>
       </ul>
-    </div>
-  </div>
+    </li>
+  </ul>
 <% end %>
 
 <% content_for :action_bar_right do %>

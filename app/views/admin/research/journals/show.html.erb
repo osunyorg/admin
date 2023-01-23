@@ -20,60 +20,54 @@
   </div>
 </div>
 
-<div class="float-end">
-  <%= link_to t('create'),
-              new_admin_research_journal_volume_path(journal_id: @journal),
-              class: button_classes %>
-</div>
-<h2 class="h4">
-  <%= link_to Research::Journal::Volume.model_name.human(count: 2),
-              admin_research_journal_volumes_path(journal_id: @journal) %>
-</h2>
-<div class="row">
-  <% @journal.volumes.ordered.limit(4).each do |volume| %>
-    <div class="col-md-3 mt-4 p-0">
-      <div class="card">
-        <%= kamifusen_tag volume.featured_image, width: 600, class: 'img-fluid' if volume.featured_image.attached? %>
-        <div class="card-body">
-          <%= link_to volume,
-                      admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                      class: "stretched-link #{'draft' unless volume.published?}" %>
+<%
+action = link_to    t('create'),
+                    new_admin_research_journal_volume_path(journal_id: @journal),
+                    class: button_classes
+subtitle = link_to  t('communication.website.see_all', number: @volumes.count),
+                    admin_research_journal_volumes_path(journal_id: @journal)
+%>
+<%= osuny_panel Research::Journal::Volume.model_name.human(count: 2), subtitle: subtitle, action: action do %>
+  <div class="row">
+    <% @volumes.limit(4).each do |volume| %>
+      <div class="col-md-6 col-xl-3">
+        <div class="card">
+          <%= kamifusen_tag volume.featured_image, width: 600, class: 'img-fluid' if volume.featured_image.attached? %>
+          <div class="card-body">
+            <%= link_to volume,
+                        admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                        class: "stretched-link #{'draft' unless volume.published?}" %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="row">
-  <div class="col-md-8">
-    <div class="card mt-5">
-      <div class="card-header">
-        <div class="float-end">
-          <%= link_to t('create'),
-                      new_admin_research_journal_paper_path(journal_id: @journal),
-                      class: button_classes %>
-        </div>
-        <h2 class="card-title">
-          <%= link_to Research::Journal::Paper.model_name.human(count: 2),
-                      admin_research_journal_papers_path(journal_id: @journal) %></h2>
-      </div>
+  <div class="col-xl-8">
+    <%
+    action = link_to    t('create'),
+                        new_admin_research_journal_paper_path(journal_id: @journal),
+                        class: button_classes
+    subtitle = link_to  t('communication.website.see_all', number: @papers.count),
+                        admin_research_journal_papers_path(journal_id: @journal)
+    %>
+    <%= osuny_panel Research::Journal::Paper.model_name.human(count: 2), subtitle: subtitle, action: action do %>
       <%= render 'admin/research/journals/papers/list', papers: @papers %>
-    </div>
+    <% end %>
   </div>
-  <div class="col-md-4">
-    <div class="card mt-5">
-      <div class="card-header">
-        <div class="float-end">
-          <%= link_to t('create'),
-                      new_admin_research_journal_kind_path(journal_id: @journal),
-                      class: button_classes %>
-        </div>
-        <h2 class="card-title">
-          <%= link_to Research::Journal::Paper::Kind.model_name.human(count: 2),
-                      admin_research_journal_kind_path(journal_id: @journal) %></h2>
-      </div>
+  <div class="col-xl-4">
+    <%
+    action = link_to    t('create'),
+                        new_admin_research_journal_kind_path(journal_id: @journal),
+                        class: button_classes
+    subtitle = link_to  t('communication.website.see_all', number: @kinds.count),
+                        admin_research_journal_kinds_path(journal_id: @journal)
+    %>
+    <%= osuny_panel Research::Journal::Paper::Kind.model_name.human(count: 2), subtitle: subtitle, action: action do %>
       <%= render 'admin/research/journals/papers/kinds/list', kinds: @kinds %>
-    </div>
+    <% end %>
   </div>
 </div>
 

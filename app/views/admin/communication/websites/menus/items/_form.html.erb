@@ -4,12 +4,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <%= f.input :parent_id, as: :hidden, wrapper: false %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h5 class="card-title mb-0"><%= t('content') %></h5>
-    </div>
+    <h2 class="h3"><%= t('content') %></h2>
     <div class="card-body">
-      <div class="row">
+      <div class="row pure__row--small">
         <div class="col-lg-6">
           <%= f.input :title %>
         </div>
@@ -60,16 +57,16 @@
           <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
           <abbr title="required">*</abbr>
         </label>
-        <div class="row">
+        <div class="row pure__row--small">
           <% @website.menu_item_kinds.keys.each do |kind| %>
             <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
               <div class="card kind" data-kind="<%= kind %>">
                 <div class="card-body">
-                  <p class="text-end mb-0">
-                    <i class="<%= Communication::Website::Menu::Item.icon_for(kind) %> fa-2x"></i><br>
-                  </p>
-                  <p class="mb-0">
+                  <h3 class="h5">
                     <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
+                  </h3>
+                  <p class="text-end mb-0">
+                    <i class="<%= Communication::Website::Menu::Item.icon_for(kind) %>"></i><br>
                   </p>
                   <a class="stretched-link"></a>
                 </div>

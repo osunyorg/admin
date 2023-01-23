@@ -2,118 +2,90 @@
 <div class="row">
   <div class="col-md-8">
     <%= render 'admin/application/summary/show', about: @organization %>
-    <% if strip_tags(@organization.text.to_html).present? %>
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= University::Organization.human_attribute_name(:text) %></h5>
+
+    <%= osuny_panel University::Organization.human_attribute_name('text') do %>
+      <%= @organization.text.to_s.html_safe %>
+    <% end if strip_tags(@organization.text.to_html).present? %>
+
+    <%= osuny_panel University::Organization.human_attribute_name('contact') do %>
+      <div class="row pure__row--small">
+        <% [
+          :address, 
+              :zipcode, 
+              :city, 
+              :country
+            ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+        <% unless @organization.url.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('url') %>
+            <p><%= link_to  @organization.url,
+                            @organization.url,
+                            target: :_blank %></p>
+          </div>
+        <% end %>
+        <% [
+          :phone, 
+              :email, 
+              :linkedin, 
+              :twitter, 
+              :mastodon
+            ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
+      <div class="row pure__row--small">
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('long_name') %>
+          <p><%= @organization.long_name %></p>
         </div>
-        <div class="card-body">
-          <%= @organization.text.to_s.html_safe %>
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('kind') %>
+          <p><%= @organization.kind_i18n %></p>
+        </div>
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('siren') %>
+          <p><%= @organization.siren %></p>
         </div>
       </div>
     <% end %>
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0">
-          <%= University::Organization.human_attribute_name('contact') %>
-        </h5>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <% [
-                  :address, 
-                  :zipcode, 
-                  :city, 
-                  :country
-                ].each do |property| %>
-              <% value = @organization.send property %>
-              <% next if value.blank? %>
-              <h3 class="h5">
-                <%= University::Organization.human_attribute_name(property) %>
-              </h3>
-              <p><%= value %></p>
-            <% end %>
-          </div>
-          <div class="col-md-6">
-            <% unless @organization.url.blank? %>
-              <h3 class="h5">
-                <%= University::Organization.human_attribute_name(:url) %>
-              </h3>
-              <p><%= link_to  @organization.url,
-                              @organization.url,
-                              target: :_blank %></p>
-            <% end %>
-            <% [
-                  :phone, 
-                  :email, 
-                  :linkedin, 
-                  :twitter, 
-                  :mastodon
-                ].each do |property| %>
-              <% value = @organization.send property %>
-              <% next if value.blank? %>
-              <h3 class="h5">
-                <%= University::Organization.human_attribute_name(property) %>
-              </h3>
-              <p><%= value %></p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0">
-          <%= University::Organization.human_attribute_name('legal') %>
-        </h5>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <h3 class="h5"><%= University::Organization.human_attribute_name(:long_name) %></h3>
-            <p><%= @organization.long_name %></p>
-          </div>
-          <div class="col-md-6">
-            <h3 class="h5"><%= University::Organization.human_attribute_name(:kind) %></h3>
-            <p><%= @organization.kind_i18n %></p>
-            <h3 class="h5"><%= University::Organization.human_attribute_name(:siren) %></h3>
-            <p><%= @organization.siren %></p>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <%= render 'admin/communication/blocks/list', about: @organization %>
   </div>
+
   <div class="col-md-4">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0"><%= t('informations') %></h5>
-      </div>
-      <div class="card-body">
-        <h3 class="h5"><%= University::Organization.human_attribute_name(:slug) %></h3>
-        <p><%= @organization.slug %></p>
-        <h3 class="h5"><%= University::Organization.human_attribute_name(:active) %></h3>
-        <%= @organization.active %>
-      </div>
-    </div>
-    <% if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t 'university.organization.logo' %></h5>
-        </div>
-        <div class="card-body">
-          <% if @organization.logo.attached? %>
-            <label class="form-label"><%= University::Organization.human_attribute_name('logo') %></label>
-            <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5' %>
-          <% end %>
-          <% if @organization.logo_on_dark_background.attached? %>
-            <label class="form-label mt-4"><%= University::Organization.human_attribute_name('logo_on_dark_background') %></label>
-            <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
-          <% end %>
-        </div>
-      </div>
+    <%= osuny_panel t('informations') do %>
+      <%= osuny_label University::Organization.human_attribute_name('slug') %>
+      <p><%= @organization.slug %></p>
+      <%= osuny_label University::Organization.human_attribute_name('active') %>
+      <p><%= t @organization.active %></>
     <% end %>
+    
+    <%= osuny_panel t('university.organization.logo') do %>
+      <% if @organization.logo.attached? %>
+        <%= osuny_label University::Organization.human_attribute_name('logo') %>
+        <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+      <% end %>
+      <% if @organization.logo_on_dark_background.attached? %>
+        <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %>
+        <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+      <% end %>
+    <% end if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
+
     <%= render 'admin/application/meta_description/show', about: @organization %>
   </div>
 </div>
@@ -151,10 +123,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>
-  <%= link_to t('static'),
-              static_admin_university_organization_path(@organization),
-              target: :_blank,
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_university_organization_path(@organization) %>
 <% end %>
 
 <% content_for :action_bar_right do %>
