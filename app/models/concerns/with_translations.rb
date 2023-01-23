@@ -46,6 +46,7 @@ module WithTranslations
     translation.save
     # Handle blocks if object has any
     translate_blocks!(translation) if respond_to?(:blocks)
+    translate_additional_data!(translation)
 
     translation
   end
@@ -66,5 +67,9 @@ module WithTranslations
       block_duplicate.about = translation
       block_duplicate.save
     end
+  end
+
+  def translate_additional_data!(translation)
+    # Overridable method to handle custom cases
   end
 end

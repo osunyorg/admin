@@ -47,7 +47,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
-  include WithTranslations # TODO: Must handle categories
+  include WithTranslations
 
   has_summernote :text
 
@@ -175,5 +175,9 @@ class Communication::Website::Post < ApplicationRecord
       old_author.update_and_sync(is_author: false)
     end
     author.update_and_sync(is_author: true) if author_id
+  end
+
+  def translate_additional_data!(translation)
+    # TODO: Must handle categories
   end
 end
