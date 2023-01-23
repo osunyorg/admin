@@ -133,9 +133,20 @@ a
     left: 0
     right: 0
     z-index: 100
+
 .blocks
-    .card
+    &__category
+        &__description
+            margin-top: -4px
+.block
+    &__image
         border: 1px solid $color-border
+        margin-bottom: $spacing0
+    &__title
+        font-size: px2rem(18)
+        font-weight: bold
+    &__description
+        font-size: px2rem(14)
 
 .filters
     position: absolute
