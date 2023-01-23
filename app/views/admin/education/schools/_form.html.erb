@@ -3,45 +3,35 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :name %>
-          <%= f.input :phone %>
-          <%= f.input :address %>
-          <div class="row">
-            <div class="col-md-4">
-              <%= f.input :zipcode %>
-            </div>
-            <div class="col-md-8">
-              <%= f.input :city %>
-            </div>
+    <div class="col-xxl-6">
+      <%= osuny_panel title: t('metadata') do %>
+        <%= f.input :name %>
+        <%= f.input :phone %>
+        <%= f.input :address %>
+        <div class="row pure__row--small">
+          <div class="col-md-4">
+            <%= f.input :zipcode %>
           </div>
-          <%= f.input :country, input_html: { class: 'form-select' } %>
-          <%= f.input :logo, 
-                      as: :single_deletable_file,
-                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                      preview: 200,
-                      direct_upload: true %>
+          <div class="col-md-8">
+            <%= f.input :city %>
+          </div>
         </div>
-      </div>
+        <%= f.input :country, input_html: { class: 'form-select' } %>
+        <%= f.input :logo, 
+                    as: :single_deletable_file,
+                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    preview: 200,
+                    direct_upload: true %>
+      <% end %>
     </div>
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.association :programs,
-                            as: :check_boxes,
-                            collection: collection_tree(current_university.education_programs),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } %>
-        </div>
-      </div>
+    <div class="col-xxl-6">
+      <%= osuny_panel title: Education::Program.model_name.human(count: 2) do %>
+        <%= f.association :programs,
+                          as: :check_boxes,
+                          collection: collection_tree(current_university.education_programs),
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] } %>
+      <% end %>
     </div>
   </div>
   <% content_for :action_bar_right do %>
