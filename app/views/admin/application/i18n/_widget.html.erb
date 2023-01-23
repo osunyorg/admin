@@ -12,7 +12,13 @@
       <% about.website.languages.each do |language| %>
         <% next if language.id == about.language_id %>
         <li>
-          <%= link_to t("languages.#{language.iso_code}"), [:translate, :admin, about.becomes(about.class.base_class), iso_code: language.iso_code] %>
+          <% if about.original_with_translations.detect { |translation| translation.language_id == language.id }.present? %>
+            <i class="fas fa-edit float-end"></i>
+          <% else %>
+            <i class="fas fa-add float-end"></i>
+          <% end %>
+          <%= link_to t(language.iso_code, scope: :languages), [:translate, :admin, about.becomes(about.class.base_class), iso_code: language.iso_code] %>
+
         </li>
       <% end %>
     </ol>

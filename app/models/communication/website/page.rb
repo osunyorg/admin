@@ -154,7 +154,7 @@ class Communication::Website::Page < ApplicationRecord
     duplicate = self.dup
     # Inherits from original_id or set it to itself
     duplicate.assign_attributes(
-      original_id: self.original_id || self.id,
+      original_id: original_object.id,
       github_path: nil,
       published: false,
       **new_attributes
@@ -172,6 +172,14 @@ class Communication::Website::Page < ApplicationRecord
       block_duplicate.save
     end
     duplicate
+  end
+
+  def original_object
+    @original_object ||= (self.original || self)
+  end
+
+  def original_with_translations
+    original_object.translations + [original_object]
   end
 
   protected
