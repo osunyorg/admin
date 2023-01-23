@@ -12,19 +12,19 @@
           },
           {
             title: Communication::Website::Post.model_name.human(count: 2),
-            path: admin_communication_website_posts_path(website_id: @website),
+            path: admin_communication_website_posts_path(website_id: @website.id),
             icon: Icon::COMMUNICATION_WEBSITE_POST,
             ability: can?(:read, Communication::Website::Post)
           },
           {
             title: t('admin.communication.website.pages.structure'),
-            path: admin_communication_website_pages_path(website_id: @website),
+            path: admin_communication_website_pages_path(website_id: @website.id),
             icon: Icon::COMMUNICATION_WEBSITE_PAGES,
             ability: can?(:read, Communication::Website::Page)
           },
           {
             title: Communication::Website::Menu.model_name.human(count: 2),
-            path: admin_communication_website_menus_path(website_id: @website),
+            path: admin_communication_website_menus_path(website_id: @website.id),
             icon: Icon::COMMUNICATION_WEBSITE_MENUS,
             ability: can?(:read, Communication::Website::Category)
           }
