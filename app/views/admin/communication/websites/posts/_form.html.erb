@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-md-8">
-      <%= panel title: t('content') do %>
+      <%= osuny_panel title: t('content') do %>
         <%= f.input :title %>
         <%= render 'admin/application/summary/form', f: f, about: post %>
         <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
@@ -12,7 +12,7 @@
       <div class="row pure__row--small">
         <% if @website.categories.any? %>
           <div class="col-md-6">
-            <%= panel title: t('activerecord.attributes.communication/website/post.categories') do %>
+            <%= osuny_panel title: t('activerecord.attributes.communication/website/post.categories') do %>
               <%= f.association :categories,
                                 label_text: false,
                                 as: :check_boxes,
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <%= panel title: t('metadata') do %>
+      <%= osuny_panel title: t('metadata') do %>
         <% if can? :publish, post %>
           <div class="row pure__row--small">
             <div class="col-6">

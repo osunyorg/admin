@@ -7,7 +7,7 @@ action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
                   class: button_classes('ms-1') if can?(:create, Communication::Website::Post)
 %>
-<%= panel title: t('communication.website.last_posts'), action: action do %>
+<%= osuny_panel title: t('communication.website.last_posts'), action: action do %>
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,

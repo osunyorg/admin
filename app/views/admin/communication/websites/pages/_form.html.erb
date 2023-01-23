@@ -8,7 +8,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
 
   <div class="row">
     <div class="col-md-8">
-      <%= panel title: t('content') do %>
+      <%= osuny_panel title: t('content') do %>
         <%= f.input :title %>
         <%= f.input :breadcrumb_title %>
         <%= render 'admin/application/summary/form', f: f, about: page %>

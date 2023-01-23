@@ -4,7 +4,7 @@ action += link_to t('add'),
                   new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
                   class: button_classes if can? :create, Communication::Block
 %>
-<%= panel title: Communication::Block.model_name.human(count: 2), action: action do %>
+<%= osuny_panel title: Communication::Block.model_name.human(count: 2), action: action do %>
   <% if about.blocks.any? %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">

@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-md-8">
-      <%= panel title: University::Person.human_attribute_name('essentials') do %>
+      <%= osuny_panel title: University::Person.human_attribute_name('essentials') do %>
         <div class="row pure__row--small">
           <div class="col-xxl-6">
             <%= f.input :first_name %>
@@ -28,7 +28,7 @@
                       data: { 'summernote-config' => 'mini-list' }
                     } %>
       <% end %>
-      <%= panel title: University::Person.human_attribute_name('contacts') do %>
+      <%= osuny_panel title: University::Person.human_attribute_name('contacts') do %>
         <p><em><%= t("university.person.personal_data_warning") %></em></p>
         <div class="row pure__row--small">
           <div class="col-xxl-6">
@@ -57,7 +57,7 @@
           </div>
         </div>
       <% end %>
-      <%= panel title: University::Person.human_attribute_name('socials') do %>
+      <%= osuny_panel title: University::Person.human_attribute_name('socials') do %>
         <p><em><%= t("university.person.personal_data_warning") %></em></p>
         <div class="row pure__row--small">
           <div class="col-xxl-6">
@@ -74,7 +74,7 @@
           </div>
         </div>
       <% end %>
-      <%= panel title: University::Person.human_attribute_name('abilities') do %>
+      <%= osuny_panel title: University::Person.human_attribute_name('abilities') do %>
         <div class="row pure__row--small">
           <div class="col-xxl-6">
             <%= f.input :is_teacher %>
@@ -90,7 +90,7 @@
       <% end %>
     </div>
     <div class="col-md-4">
-      <%= panel title: t('metadata') do %>
+      <%= osuny_panel title: t('metadata') do %>
           <%= f.input :slug,
                       as: :string,
                       input_html: person.persisted? ? {} : {
@@ -99,7 +99,7 @@
                       } %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
       <% end %>
-      <%= panel title: University::Person.human_attribute_name('picture') do %>
+      <%= osuny_panel title: University::Person.human_attribute_name('picture') do %>
         <%= f.input :picture,
                     as: :single_deletable_file,
                     label: false,

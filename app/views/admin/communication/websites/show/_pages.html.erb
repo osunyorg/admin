@@ -4,6 +4,6 @@ action += link_to t('create'),
                   new_admin_communication_website_page_path(website_id: @website),
                   class: button_classes if can?(:create, Communication::Website::Page)
 %>
-<%= panel title: t('communication.website.last_pages'), action: action do %>
+<%= osuny_panel title: t('communication.website.last_pages'), action: action do %>
   <%= render 'admin/communication/websites/pages/list', pages: @pages %>
 <% end %>
