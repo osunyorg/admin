@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= University::Person::Experience.human_attribute_name('description') %></th>
+        <th><%= University::Person::Experience.human_attribute_name('organization') %></th>
+        <th><%= University::Person::Experience.human_attribute_name('from_year') %></th>
+        <th><%= University::Person::Experience.human_attribute_name('to_year') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% experiences.each do |experience| %>
+        <% organization = experience.organization %>
+        <tr>
+          <td><%= experience.description %></td>
+          <td><%= link_to_if can?(:read, organization), organization, [:admin, organization] %></td>
+          <td><%= experience.from_year %></td>
+          <td><%= experience.to_year %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

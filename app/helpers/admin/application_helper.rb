@@ -45,7 +45,7 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
-  def panel(title: nil, subtitle: nil, action: nil, &block)
+  def osuny_panel(title: nil, subtitle: nil, action: nil, &block)
     render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
             locals: { 
               title: title, 
@@ -54,6 +54,10 @@ module Admin::ApplicationHelper
             } do
       capture(&block)
     end
+  end
+  
+  def osuny_label(title)
+    raw "<label class=\"form-label\">#{title}</label>"
   end
 
   def duplicate_link(object)
