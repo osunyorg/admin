@@ -8,8 +8,8 @@
     <%= block_component_edit :alphabetical %>
   </div>
 </div>
-<draggable :list="data.elements" class="list-group mb-3" handle=".partnerHandle">
-  <div v-for="(element, index) in data.elements" class="list-group-item">
+<draggable :list="data.elements" class="mb-3" handle=".partnerHandle">
+  <div v-for="(element, index) in data.elements" class="mb-2">
     <div class="d-flex mb-n3">
       <div>
         <a class="btn ps-0 pt-0 partnerHandle">
@@ -18,7 +18,7 @@
       </div>
       <div class="flex-fill">
         <%= block_component_edit :id, template: @element, label: '' %>
-        <div class="row"  v-if="!element.id">
+        <div class="row pure__row--small mt-n2"  v-if="!element.id">
           <div class="col-xl-4 col-md-6">
             <%= block_component_edit :name, template: @element %>
           </div>

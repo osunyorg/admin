@@ -15,8 +15,8 @@
 </div>
 <div v-if="data.mode === 'selection'">
   <%= block_component_add_element t('.add_post') %>
-  <draggable :list="data.elements" handle=".dragHandle" class="list-group">
-    <div v-for="(element, index) in data.elements" class="list-group-item">
+  <draggable :list="data.elements" handle=".dragHandle">
+    <div v-for="(element, index) in data.elements" class="mb-2">
       <div class="d-flex">
         <a class="btn ps-0 dragHandle" title="Drag and drop">
           <i class="fa fa-bars handle"></i>

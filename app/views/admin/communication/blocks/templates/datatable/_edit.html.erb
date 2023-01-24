@@ -9,7 +9,7 @@
 </div>
 
 <div class="table-responsive mb-5">
-  <div class="fake-table table">
+  <div class="fake-table">
     <div class="thead">
       <div class="tr">
         <div class="td" v-for="(column, index) in data.columns">
@@ -17,20 +17,16 @@
             <input  type="text"
                     class="form-control"
                     v-model="data.columns[index]">
-            <a  class="btn btn-danger ms-2"
+            <a  class="btn btn-danger"
                 v-on:click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
                 <i class="fas fa-times"></i>
             </a>
           </div>
         </div>
-        <div class="td text-end">
-          <a  class="btn btn-primary me-2"
+        <div class="td">
+          <a  class="btn btn-primary mt-n1"
               v-on:click="data.columns.push('')">
               <i class="fas fa-plus"></i> colonne
-          </a>
-          <a  class="btn btn-primary"
-              v-on:click="data.elements.push({cells: []})">
-              <i class="fas fa-plus"></i> ligne
           </a>
         </div>
       </div>
@@ -48,7 +44,6 @@
                 v-on:click="data.elements.splice(index, 1)">
                 <i class="fas fa-times"></i>
             </a>
-
             <a class="btn ms-auto dragHandle">
               <i class="fa fa-bars handle"></i>
             </a>
@@ -56,6 +51,12 @@
         </div>
       </div>
     </draggable>
+    <div>
+      <a  class="btn btn-primary"
+          v-on:click="data.elements.push({cells: []})">
+          <i class="fas fa-plus"></i> ligne
+      </a>
+    </div>
   </div>
 </div>
 
