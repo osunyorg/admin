@@ -1,3 +1,6 @@
+<%
+context ||= :admin
+%>
 <nav class="navbar navbar-main navbar-light bg-transparent" aria-label="Navigation">
   <div class="container-fluid">
     <%= link_to admin_root_path, class: 'navbar-brand' do %>
@@ -38,7 +41,7 @@
   <div class="menu-content">
     <div class="container-fluid">
       <div class="row">
-        <%= render_navigation context: :admin, renderer: Osuny::SimpleNavigationRenderer %>
+        <%= render_navigation context: context, renderer: Osuny::SimpleNavigationRenderer %>
         <div class="col-md-4 col-lg-3">
           <a class="float-end" href="#">
             <% if current_user.picture.attached? && current_user.picture.variable? %>

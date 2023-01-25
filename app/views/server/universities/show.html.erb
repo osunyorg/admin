@@ -1,11 +1,8 @@
 <% content_for :title, @university %>
 
 <div class="row">
-  <div class="col-md-5">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title"><%= t('admin.infos') %></h2>
-      </div>
+  <div class="col-xl-4">
+    <%= osuny_panel t('admin.infos') do %>
       <div class="table-responsive">
         <table class="<%= table_classes %>">
           <tr>
@@ -30,7 +27,7 @@
           <% end %>
         </table>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
