@@ -9,13 +9,13 @@
           Osuny a un nouveau thème pour l'administration, "Pure". <br>
           Voulez-vous l'essayer ?
         </p>
-        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put, class: button_classes %>
+        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put %>
       <% else %>
         <p>
           Vous utilisez le thème "Pure" pour l'administration. <br>
           Voulez-vous revenir au thème "Appstack" ?
         </p>
-        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put, class: button_classes %>
+        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
       <% end %>
       <div class="text-end">
         <% if current_university.logo.attached? %>
