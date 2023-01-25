@@ -25,34 +25,36 @@
 <p>Envoyer les images et saisir les textes ci-dessous</p>
 
 <div v-for="(element, index) in data.elements" class="mb-5">
-  <div class="text-end">
-    <a  class="btn btn-sm btn-danger"
-        v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-        title="<%= t '.remove_image' %>">
-        <i class="fas fa-times"></i>
-    </a>
-  </div>
-  <div class="row pure__row--small">
-    <div class="col-lg-6">
-      <%= block_component_edit :image,
-            template: @element,
-            label: t('admin.communication.blocks.components.image.input.label'),
-            placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
+  <%= osuny_panel 'Image' do %>
+    <div class="text-end">
+      <a  class="btn btn-sm btn-danger mt-n4"
+          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
+          <i class="fas fa-times"></i>
+      </a>
+    </div>
+    <div class="row pure__row--small">
+      <div class="col-lg-6">
+        <%= block_component_edit :image,
+              template: @element,
+              label: t('admin.communication.blocks.components.image.input.label'),
+              placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
       </div>
       <div class="col-lg-6">
-      <%= block_component_edit :alt,
-            template: @element,
-            label: t('admin.communication.blocks.components.image.alt.label'),
-            placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-      <%= block_component_edit :credit,
-            template: @element,
-            label: t('admin.communication.blocks.components.image.credit.label'),
-            placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-            summernote_config: 'link' %>
-      <%= block_component_edit :text,
-          template: @element %>
+        <%= block_component_edit :alt,
+              template: @element,
+              label: t('admin.communication.blocks.components.image.alt.label'),
+              placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+        <%= block_component_edit :credit,
+              template: @element,
+              label: t('admin.communication.blocks.components.image.credit.label'),
+              placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
+              summernote_config: 'link' %>
+        <%= block_component_edit :text,
+            template: @element %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <%= block_component_add_element t('.add_image') %>
