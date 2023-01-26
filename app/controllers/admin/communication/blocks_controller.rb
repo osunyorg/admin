@@ -77,7 +77,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def about_path
     # La formation ou la page concernée
     path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
-    send path_method, id: @block.about_id, website_id: website_id
+    path_method_options = { id: @block.about_id, website_id: website_id }
+    path_method_options[:lang] = @block.about.language.iso_code if @block.about.respond_to?(:language)
+    public_send path_method, **path_method_options
   end
 
   def breadcrumb
