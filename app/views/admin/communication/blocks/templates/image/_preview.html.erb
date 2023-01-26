@@ -1,7 +1,5 @@
 <figure>
-  <a class="glightbox" data-glightbox="type: image;" href='{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}'>
-    <%= block_component_preview :image %>
-  </a>
+  <%= block_component_preview :image %>
   <figcaption>
       <p><%= block_component_preview :alt %></p>
       <p><%= block_component_preview :text %></p>
