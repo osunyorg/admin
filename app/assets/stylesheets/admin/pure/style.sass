@@ -1,3 +1,20 @@
+.pure
+    &__section
+        margin-bottom: $spacing3
+        h2
+            color: $color-text-alt
+            font-size: px2rem(18)
+            font-weight: bold
+    &__row--small
+        margin-left: calc(-.5 * #{$spacing1})
+        margin-right: calc(-.5 * #{$spacing1})
+        > *
+            padding-left: calc(.5 * #{$spacing1})
+            padding-right: calc(.5 * #{$spacing1})
+    &__separation
+        border-width: 10px
+        margin-bottom: $spacing3
+
 .navbar
     position: absolute
     left: 0
@@ -9,6 +26,8 @@
     .navbar-brand
         img
             width: 100px
+    .btn-open
+        margin-right: -14px
 #menu
     position: fixed
     top: 0
@@ -20,6 +39,8 @@
     overflow-y: scroll
     z-index: 1000
     padding-bottom: 30px
+    .avatar
+        width: 80px
     .menu-content
         position: relative
         margin-top: 150px
@@ -45,20 +66,24 @@
 
 main
     min-height: 70vh
+    padding-bottom: px2rem(100)
     position: relative
 
 .container-fluid
-    padding-right: var(--bs-gutter-x)
     padding-left: var(--bs-gutter-x)
+    padding-right: var(--bs-gutter-x)
 
-h2
-    font-weight: bold
+p
+    color: $color-text
 
-.section
+.category
+    border-bottom: 1px solid $color-border
     font-size: $h5-font-size
-    margin-top: 60px !important
-    padding-bottom: 10px
-    border-bottom: 1px solid #00000033
+    font-weight: normal
+    margin-bottom: $spacing1
+    margin-top: $spacing4 !important
+    padding-bottom: $spacing0
+    text-transform: uppercase
 
 a
     text-decoration: none
@@ -69,15 +94,32 @@ a
     &:hover
         color: darken($primary, 10)
 
+.form-control:valid,
+.form-control.is-valid,
+.form-select:valid,
+.form-select.is-valid
+    border-color: $color-valid
+.form-label
+    color: $color-text-alt
+
 .card
-    margin-bottom: $spacing2
-    .card-header
-        .card-title
-            font-size: $h5-font-size
-            text-transform: uppercase
-            color: $color-text-alt
-    .card-body
-        margin-top: $spacing1
+    margin-bottom: $spacing1
+    .card-title
+        font-size: px2rem(18)
+        font-weight: bold
+        small
+            font-weight: normal
+    .table
+        margin-bottom: 0
+        th,
+        td
+            padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x)
+    &.kind--selected
+        background: $color-accent
+        border-color: $color-accent
+        &, p
+            color: $color-background
+        
 
 .list-group-item.active
     color: $color-accent
@@ -87,19 +129,42 @@ a
     font-size: 14px
     padding: 2px 7px
 
+.btn-light
+    background: $color-background
+    border-color: $color-border
+
 .commands
     background: $color-background-alt
-    position: fixed
+    position: sticky
     bottom: 0
     left: 0
     right: 0
     z-index: 100
 
+.blocks
+    &__category
+        &__description
+            margin-top: -4px
+.block
+    &__image
+        border: 1px solid $color-border
+        margin-bottom: $spacing0
+    &__title
+        font-size: px2rem(18)
+        font-weight: bold
+    &__description
+        font-size: px2rem(14)
+
 .filters
     position: absolute
     top: 0
-    right: var(--bs-gutter-x)
-    margin-top: 0px !important
+    right: 0
+    margin-top: 0 !important
+
+#collapseFilters
+    padding-top: 0 !important
+    + br
+        display: none
 
 .sdfi-deletable-file__preview
     margin-top: 10px
@@ -110,6 +175,9 @@ a
 .table
     input[type=checkbox]
         margin-right: 10px
+    th
+        color: $color-text-alt
+        font-weight: normal
 
 footer
     min-height: 300px

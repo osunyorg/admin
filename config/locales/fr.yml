@@ -263,6 +263,7 @@ fr:
   save: Enregistrer
   search: Rechercher
   select_language: Sélectionnez une langue
+  server: Serveur
   seo: SEO
   simple_form:
     error_notification:

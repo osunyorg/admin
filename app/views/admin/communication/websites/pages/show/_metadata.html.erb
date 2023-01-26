@@ -1,0 +1,55 @@
+<%
+action = link_to t('open'), @page.url, target: :_blank, class: 'btn btn-light btn-xs'
+%>
+<%= osuny_panel t('metadata'), action: action do %>
+  <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
+  <p><%= t @page.published %></p>
+  <% unless @page.slug.blank? %>
+    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
+    <p><%= @page.slug %></p>
+  <% end %>
+  <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
+  <p><%= @page.path %></p>
+
+  <% if @page.parent %>
+    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('parent') %></h3>
+    <p><%= link_to_if can?(:read, @page.parent),
+                      @page.parent,
+                      admin_communication_website_page_path(
+                        website_id: @website.id,
+                        id: @page.parent.id
+                      ),
+                      class: "#{'draft' unless @page.parent.published?}" %></p>
+  <% end %>
+
+  <% if can?(:edit, @website) && @page.best_bodyclass %>
+    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('bodyclass') %></h3>
+    <p>
+      <%= @page.best_bodyclass %>
+      <% if @page.bodyclass.blank? %>
+        <br>
+        <span class="small text-muted">
+          <%= t 'admin.inheritance.sentence_without_link' %>
+        </span>
+      <% end %>
+    </p>
+  <% end %>
+
+  <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('full_width') %></h3>
+  <p><%= t @page.full_width %></p>
+
+  <% if @page.children.any? %>
+    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('children') %></h3>
+    <ul class="list-unstyled mb-0">
+      <% @page.children.ordered.each do |child| %>
+        <li>
+          <%= link_to_if can?(:read, child),
+                        child,
+                        admin_communication_website_page_path( website_id: @website.id, id: child.id),
+                        class: "#{'draft' unless child.published?}" %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<% end %>

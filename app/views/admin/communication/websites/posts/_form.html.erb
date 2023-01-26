@@ -4,33 +4,21 @@
 
   <div class="row">
     <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :title %>
-          <%= render 'admin/application/summary/form', f: f, about: post %>
-          <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
-        </div>
-      </div>
-      <div class="row">
+      <%= osuny_panel t('content') do %>
+        <%= f.input :title %>
+        <%= render 'admin/application/summary/form', f: f, about: post %>
+        <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
+      <% end %>
+      <div class="row pure__row--small">
         <% categories = @website.categories.where(language_id: current_website_language.id) %>
         <% if categories.any? %>
           <div class="col-md-6">
-            <div class="card flex-fill w-100">
-              <div class="card-header">
-                <h5 class="card-title mb-0">
-                  <%= t('activerecord.attributes.communication/website/post.categories') %>
-                </h5>
-              </div>
-              <div class="card-body">
-                  <%= f.association :categories,
-                                    label_text: false,
-                                    as: :check_boxes,
-                                    collection: collection_tree_for_checkboxes(categories) %>
-              </div>
-            </div>
+            <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
+              <%= f.association :categories,
+                                label_text: false,
+                                as: :check_boxes,
+                                collection: collection_tree_for_checkboxes(categories) %>
+            <% end %>
           </div>
         <% end %>
         <div class="col-md-6">
@@ -39,40 +27,35 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <% if can? :publish, post %>
-            <div class="row">
-              <div class="col-6">
-                <%= f.input :published %>
-              </div>
-              <div class="col-6">
-                <%= f.input :pinned %>
-              </div>
+      <%= osuny_panel t('metadata') do %>
+        <% if can? :publish, post %>
+          <div class="row pure__row--small">
+            <div class="col-6">
+              <%= f.input :published %>
             </div>
-            <%= f.input :published_at, html5: true %>
-          <% end %>
-          <% if current_user.author? || current_user.contributor? %>
-            <%= f.input :author_id,
-                        as: :hidden,
-                        input_html: { value: current_user.person&.id },
-                        wrapper: false %>
-          <% else %>
-            <%= f.association :author,
-                              collection: current_university.people.ordered,
-                              label_method: :to_s_alphabetical %>
-          <% end %>
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: post.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#communication_website_post_title' }
-                      } %>
-        </div>
-      </div>
+            <div class="col-6">
+              <%= f.input :pinned %>
+            </div>
+          </div>
+          <%= f.input :published_at, html5: true %>
+        <% end %>
+        <% if current_user.author? || current_user.contributor? %>
+          <%= f.input :author_id,
+                      as: :hidden,
+                      input_html: { value: current_user.person&.id },
+                      wrapper: false %>
+        <% else %>
+          <%= f.association :author,
+                            collection: current_university.people.ordered,
+                            label_method: :to_s_alphabetical %>
+        <% end %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: post.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#communication_website_post_title' }
+                    } %>
+      <% end %>
       <%= render 'admin/application/featured_image/edit', about: @post, f: f %>
     </div>
   </div>

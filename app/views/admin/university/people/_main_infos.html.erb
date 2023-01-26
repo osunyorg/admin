@@ -1,101 +1,90 @@
 <div class="row">
   <div class="col-md-8 col-xl-9">
     <%= render 'admin/application/summary/show', about: person %>
-
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('content') %></h2>
-      </div>
-      <div class="card-body">
+    <%= osuny_panel t('content') do %>
+      <div class="row pure__row--small">
         <% unless person.gender.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('gender') %></h3>
-          <p><%= t("activerecord.attributes.university/person.genders.#{person.gender}") %></p>
+          <div class="col-md-6">
+            <h3 class="h5"><%= University::Person.human_attribute_name('gender') %></h3>
+            <p><%= t("activerecord.attributes.university/person.genders.#{person.gender}") %></p>
+          </div>
         <% end %>
         <% unless person.email.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('email') %></h3>
-          <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
+          <div class="col-md-6">
+            <h3 class="h5"><%= University::Person.human_attribute_name('email') %></h3>
+            <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
+          </div>
         <% end %>
         <% ['phone_mobile', 'phone_personal', 'phone_professional'].each do |phone| %>
           <% unless person[phone].blank? %>
-            <h3 class="h5"><%= University::Person.human_attribute_name(phone) %></h3>
-            <p><%= link_to person[phone], "tel:#{person[phone]}", target: '_blank' %></p>
+            <div class="col-md-6">
+              <h3 class="h5"><%= University::Person.human_attribute_name(phone) %></h3>
+              <p><%= link_to person[phone], "tel:#{person[phone]}", target: '_blank' %></p>
+            </div>
           <% end %>
         <% end %>
         <% unless person.birthdate.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('birthdate') %></h3>
-          <p><%= l(person.birthdate, format: :birthday) %></p>
+          <div class="col-md-6">
+            <h3 class="h5"><%= University::Person.human_attribute_name('birthdate') %></h3>
+            <p><%= l(person.birthdate, format: :birthday) %></p>
+           </div>
         <% end %>
         <% [:address, :zipcode, :city, :country].each do |property| %>
           <% value = person.send property %>
           <% next if value.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name(property) %></h3>
-          <p><%= value %></p>
-        <% end %>
-
-        <% unless person.biography.blank? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
-          <%= person.biography %>
+          <div class="col-md-6">
+            <h3 class="h5"><%= University::Person.human_attribute_name(property) %></h3>
+            <p><%= value %></p>
+          </div>
         <% end %>
       </div>
-    </div>
-    <% unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= University::Person.human_attribute_name('socials') %></h2>
-        </div>
-        <div class="card-body">
-          <% unless person.url.blank? %>
-            <h3 class="h5"><%= University::Person.human_attribute_name('url') %></h3>
-            <p><%= link_to person.url, person.url, target: '_blank' %></p>
-          <% end %>
-          <% unless person.linkedin.blank? %>
-            <h3 class="h5"><%= University::Person.human_attribute_name('linkedin') %></h3>
-            <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
-          <% end %>
-          <% unless person.twitter.blank? %>
-            <h3 class="h5"><%= University::Person.human_attribute_name('twitter') %></h3>
-            <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
-          <% end %>
-          <% unless person.mastodon.blank? %>
-            <h3 class="h5"><%= University::Person.human_attribute_name('mastodon') %></h3>
-            <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
-          <% end %>
-        </div>
-      </div>
+      <% unless person.biography.blank? %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
+        <%= person.biography %>
+      <% end %>
     <% end %>
+    
+    <%= osuny_panel University::Person.human_attribute_name('socials') do %>
+      <% unless person.url.blank? %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('url') %></h3>
+        <p><%= link_to person.url, person.url, target: '_blank' %></p>
+      <% end %>
+      <% unless person.linkedin.blank? %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('linkedin') %></h3>
+        <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
+      <% end %>
+      <% unless person.twitter.blank? %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('twitter') %></h3>
+        <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
+      <% end %>
+      <% unless person.mastodon.blank? %>
+        <h3 class="h5"><%= University::Person.human_attribute_name('mastodon') %></h3>
+        <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
+      <% end %>
+    <% end unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? %>
+
     <%= render 'admin/communication/blocks/list', about: person %>
   </div>
   <div class="col-md-4 col-xl-3">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-      </div>
-      <div class="card-body">
+    <%= osuny_panel t('metadata') do %>
         <h3 class="h5"><%= University::Person.human_attribute_name('slug') %></h3>
         <p><%= person.slug %></p>
         <% if person.user.present? %>
           <h3 class="h5"><%= University::Person.human_attribute_name('user') %></h3>
           <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
         <% end %>
-      </div>
-    </div>
-    <% if person.best_picture.attached? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('activerecord.attributes.university/person.picture') %></h2>
-        </div>
-        <div class="card-body">
-          <% if person.best_picture_inherits_from_user? %>
-            <p>
-              <span class="small text-muted">
-                <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
-              </span>
-            </p>
-          <% end %>
-          <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
-        </div>
-      </div>
     <% end %>
+    <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
+      <% if person.best_picture_inherits_from_user? %>
+        <p>
+          <span class="small text-muted">
+            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
+          </span>
+        </p>
+      <% end %>
+      <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
+    <% end if person.best_picture.attached? %>
+
     <%= render 'admin/application/meta_description/show', about: person %>
   </div>
 </div>

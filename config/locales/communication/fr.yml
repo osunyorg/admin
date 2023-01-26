@@ -73,6 +73,7 @@ fr:
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
         access_token: Access token
+        created_at: Création
         default_language: Langue par défaut
         git_branch: Branche
         git_endpoint: Point d'accès Git
@@ -588,7 +589,7 @@ fr:
             slug: formations
             title: "Formations"
           home:
-            slug:
+            slug: ''
             title: Accueil
           legal_term:
             slug: mentions-legales

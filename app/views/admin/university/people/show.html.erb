@@ -3,7 +3,7 @@
 <%= render 'main_infos', person: @person %>
 
 <% if @teacher_involvements.total_count > 0 || @administrator_involvements.total_count > 0 %>
-  <h2 class="mb-3"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
+  <h2 class="category"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
 
   <div class="row">
     <% if @person.is_teacher? && @teacher_involvements.any? %>
@@ -23,10 +23,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
-  <%= link_to t('static'),
-              static_admin_university_person_path(@person),
-              target: :_blank,
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_university_person_path(@person) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

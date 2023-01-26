@@ -58,9 +58,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>
-  <%= link_to t('static'),
-              static_admin_communication_website_category_path(@category),
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <%= static_link static_admin_communication_website_category_path(@category) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

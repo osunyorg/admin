@@ -1,13 +1,4 @@
-<% unless about.meta_description.blank? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h2 class="card-title mb-0"><%= t('seo') %></h2>
-    </div>
-    <div class="card-body">
-      <p class="lead">
-        <h3 class="h5"><%= t('admin.meta_description.label') %></h3>
-        <%= sanitize about.meta_description %>
-      </p>
-    </div>
-  </div>
-<% end %>
+<%= osuny_panel t('seo') do %>
+  <h3 class="h5"><%= t('admin.meta_description.label') %></h3>
+  <p><%= sanitize about.meta_description %></p>
+<% end unless about.meta_description.blank? %>

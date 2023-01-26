@@ -5,31 +5,22 @@ url = kind.new_record?  ? admin_research_journal_kinds_path
 <%= simple_form_for kind, url: url do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
   <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :title %>
-        </div>
-      </div>
+    <div class="col-xl-8">
+      <%= osuny_panel t('content') do %>
+        <%= f.input :title %>
+      <% end %>
     </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: kind.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#research_journal_paper_kind_title' }
-                      } %>
-        </div>
-      </div>
+    <div class="col-xl-4">
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: kind.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#research_journal_paper_kind_title' }
+                    } %>
+      <% end %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

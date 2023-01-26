@@ -9,8 +9,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @pages = @website.pages.accessible_by(current_ability).where(language_id: current_website_language.id).published.recent
-    @posts = @website.posts.accessible_by(current_ability).where(language_id: current_website_language.id).published.recent
+    @pages = @website.pages.accessible_by(current_ability).where(language_id: current_website_language.id).recent
+    @posts = @website.posts.accessible_by(current_ability).where(language_id: current_website_language.id).recent
     breadcrumb
   end
 

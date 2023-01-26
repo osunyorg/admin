@@ -45,6 +45,26 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
+  def static_link(path)
+    return unless current_user.server_admin?
+    raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
+  end
+
+  def osuny_panel(title = nil, subtitle: nil, action: nil, &block)
+    render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
+            locals: { 
+              title: title, 
+              subtitle: subtitle,
+              action: action
+            } do
+      capture(&block)
+    end
+  end
+  
+  def osuny_label(title)
+    raw "<label class=\"form-label\">#{title}</label>"
+  end
+
   def duplicate_link(object)
     return unless can?(:update, object)
     link_to t('admin.duplicate'),

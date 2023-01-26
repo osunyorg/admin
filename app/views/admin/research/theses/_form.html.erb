@@ -3,22 +3,20 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-body">
-          <%= f.input :title %>
-          <%= f.input :abstract %>
-          <%= f.input :started_at, html5: true %>
-          <%= f.input :completed %>
-          <%= f.input :completed_at, html5: true %>
-          <%= f.association :laboratory,
-                            collection: current_university.research_laboratories.ordered %>
-          <%= f.association :author,
-                            collection: current_university.people.researchers.ordered %>
-          <%= f.association :director,
-                            collection: current_university.people.researchers.ordered %>
-        </div>
-      </div>
+    <div class="col-xl-6">
+      <%= f.input :title %>
+      <%= f.input :abstract, input_html: { rows: 10 } %>
+    </div>
+    <div class="col-xl-6">
+      <%= f.input :started_at, html5: true %>
+      <%= f.input :completed %>
+      <%= f.input :completed_at, html5: true %>
+      <%= f.association :laboratory,
+                        collection: current_university.research_laboratories.ordered %>
+      <%= f.association :author,
+                        collection: current_university.people.researchers.ordered %>
+      <%= f.association :director,
+                        collection: current_university.people.researchers.ordered %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

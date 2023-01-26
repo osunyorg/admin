@@ -3,54 +3,39 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :name %>
-          <%= f.input :host %>
-          <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/extranet.about_' %>
-          <%= f.input :registration_contact %>
-        </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('look_feel') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :logo,
-                      as: :single_deletable_file,
-                      input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                      preview: 200,
-                      direct_upload: true %>
-          <%= f.input :favicon,
-                      as: :single_deletable_file,
-                      input_html: { accept: '.png' },
-                      preview: 100,
-                      direct_upload: true %>
-          <%= f.input :color, as: :color %>
-        </div>
-      </div>
+    <div class="col-xl-6">
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :name %>
+        <%= f.input :host %>
+        <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/extranet.about_' %>
+        <%= f.input :registration_contact %>
+      <% end %>
+      <%= osuny_panel t('look_feel') do %>
+        <%= f.input :logo,
+                    as: :single_deletable_file,
+                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    preview: 200,
+                    direct_upload: true %>
+        <%= f.input :favicon,
+                    as: :single_deletable_file,
+                    input_html: { accept: '.png' },
+                    preview: 100,
+                    direct_upload: true %>
+        <%= f.input :color, as: :color %>
+      <% end %>
     </div>
-    <div class="col-md-6">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('legal') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :terms, as: :summernote %>
-          <%= f.input :privacy_policy, as: :summernote %>
-          <%= f.input :cookies_policy, as: :summernote %>
-        </div>
-      </div>
+    <div class="col-xl-6">
+      <%= osuny_panel t('legal') do %>
+        <%= f.input :terms, as: :summernote %>
+        <%= f.input :privacy_policy, as: :summernote %>
+        <%= f.input :cookies_policy, as: :summernote %>
+      <% end %>
     </div>
   </div>
 
-  <h3 class="mt-5"><%= t('university.sso') %></h3>
+  <h2 class="category"><%= t('university.sso') %></h2>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xl-6">
       <%= f.input :has_sso %>
       <div class="sso-inputs">
         <%= f.input :sso_target_url, required: true %>
@@ -59,7 +44,7 @@
         <%= f.input :sso_button_label %>
       </div>
     </div>
-    <div class="col-md-6 sso-inputs">
+    <div class="col-xl-6 sso-inputs">
       <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
       <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
       <%= render 'server/universities/sso_mapping', object: extranet %>
