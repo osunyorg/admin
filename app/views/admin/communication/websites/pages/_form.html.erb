@@ -19,8 +19,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
     </div>
     <div class="col-md-4">
       <% unless page.is_home? %>
-        <section class="mb-5">
-          <h2 class="h3"><%= t('metadata') %></h2>
+        <%= osuny_panel t('metadata') do %>
           <%= f.input :published if page.draftable? %>
           <%= f.input :slug,
                       as: :string,
@@ -36,7 +35,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
                             value_method: ->(p) { p[:id] } unless page.is_home? %>
           <%= f.input :bodyclass if can?(:edit, @website) %>
           <%= f.input :full_width if page.editable_width? %>
-        </section>
+        <% end %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
     </div>

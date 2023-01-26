@@ -6,12 +6,13 @@ action += link_to t('communication.website.posts.new_curation'),
 action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
                   class: button_classes('ms-1') if can?(:create, Communication::Website::Post)
+title = t('communication.website.last_posts')
+title += '<small> - '
+title += link_to t('communication.website.see_all', number: @website.posts.accessible_by(current_ability).where(language_id: current_website_language.id).count),
+                 admin_communication_website_posts_path(website_id: @website)
+title += '</small>'
 %>
-<%= osuny_panel t('communication.website.last_posts'), action: action do %>
-  <small>
-    -
-    <%= t('communication.website.see_all', number: @website.posts.accessible_by(current_ability).where(language_id: current_website_language.id).count) %>
-  </small>
+<%= osuny_panel sanitize(title), action: action do %>
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,
