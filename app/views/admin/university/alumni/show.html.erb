@@ -8,7 +8,7 @@ action += link_to t('university.manage_cohorts'),
                   cohorts_admin_university_alumnus_path(@alumnus),
                   class: button_classes if can?(:update, @alumnus)
 %>
-<%= osuny_panel title:Education::Cohort.model_name.human(count: 2), action: action do %>
+<%= osuny_panel Education::Cohort.model_name.human(count: 2), action: action do %>
   <%= render 'admin/education/cohorts/list', cohorts: @alumnus.cohorts.ordered %>
 <% end %>
 
@@ -18,7 +18,7 @@ action += link_to t('university.manage_experiences'),
                   experiences_admin_university_alumnus_path(@alumnus),
                   class: button_classes if can?(:update, @alumnus)
 %>
-<%= osuny_panel title:University::Person::Experience.model_name.human(count: 2), action: action do %>
+<%= osuny_panel University::Person::Experience.model_name.human(count: 2), action: action do %>
   <%= render 'admin/university/people/experiences/list', experiences: @alumnus.experiences.ordered %>
 <% end %>
 
