@@ -1,4 +1,5 @@
 <div class="row mt-2">
+
   <div class="col-lg-3 col-xl-2">
     <div class="card">
       <div class="list-group list-group-flush" role="tablist">
@@ -53,16 +54,20 @@
     </div>
     <% if @website.languages.many? %>
       <div class="card">
-        <p><%= Language.model_name.human %></p>
-        <ul>
+        <div class="card-header">
+          <h2 class="card-title mb-0"><%= Language.model_name.human %></h2>
+        </div>
+        <div class="list-group list-group-flush" role="tablist">
           <% @website.languages.each do |language| %>
-            <li><%= link_to_if current_website_language != language, I18n.t(language.iso_code, scope: :languages), request.params.merge(lang: language.iso_code) %></li>
+              <%= link_to I18n.t(language.iso_code, scope: :languages), request.params.merge(lang: language.iso_code), class: "list-group-item list-group-item-action #{'active' if current_website_language == language}" %>
           <% end %>
-        </ul>
+        </div>
       </div>
     <% end %>
   </div>
+
   <div class="col-lg-9 col-xl-10">
     <%= yield %>
   </div>
+
 </div>
