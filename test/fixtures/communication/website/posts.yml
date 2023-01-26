@@ -42,6 +42,7 @@ test_post:
   website: website_with_github
   title: Test
   slug: test
+  language: fr
   published: true
   published_at: 2010-11-28 00:00:00
 test_post_2:
@@ -49,5 +50,6 @@ test_post_2:
   website: website_with_github
   title: Test 2
   slug: test-2
+  language: fr
   published: true
   published_at: 2010-11-28 00:00:00
