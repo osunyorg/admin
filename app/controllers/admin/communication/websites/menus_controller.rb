@@ -1,8 +1,10 @@
 class Admin::Communication::Websites::MenusController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Menu, through: :website
 
+  include Admin::Translatable
+
   def index
-    @menus = @menus.ordered.page(params[:page])
+    @menus = @menus.where(language_id: current_website_language.id).ordered.page(params[:page])
     breadcrumb
   end
 
@@ -57,8 +59,6 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   end
 
   def menu_params
-    params.require(:communication_website_menu)
-          .permit(:website_id, :title, :identifier)
-          .merge(university_id: current_university.id)
+    translatable_params(:communication_website_menu, [:title, :identifier])
   end
 end

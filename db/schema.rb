@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_23_162224) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_26_163347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -299,7 +299,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "github_path"
+    t.uuid "original_id"
+    t.uuid "language_id", null: false
     t.index ["communication_website_id"], name: "idx_comm_website_menus_on_communication_website_id"
+    t.index ["language_id"], name: "index_communication_website_menus_on_language_id"
+    t.index ["original_id"], name: "index_communication_website_menus_on_original_id"
     t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
   end
 
@@ -573,6 +577,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162224) do
     t.string "summernote_locale"
   end
 
+  create_table "research_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "university_person_id", null: false
+    t.string "docid"
+    t.jsonb "data"
+    t.string "title"
+    t.string "url"
+    t.string "ref"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_research_documents_on_university_id"
+    t.index ["university_person_id"], name: "index_research_documents_on_university_person_id"
+  end
+
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "journal_id", null: false
@@ -776,6 +794,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162224) do
     t.string "zipcode"
     t.string "city"
     t.string "country"
+    t.string "hal_person_identifier"
     t.string "mastodon"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
@@ -902,7 +921,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162224) do
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_menu_items", "universities"
+  add_foreign_key "communication_website_menus", "communication_website_menus", column: "original_id"
   add_foreign_key "communication_website_menus", "communication_websites"
+  add_foreign_key "communication_website_menus", "languages"
   add_foreign_key "communication_website_menus", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "original_id"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
@@ -927,6 +948,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162224) do
   add_foreign_key "education_schools", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
+  add_foreign_key "research_documents", "universities"
+  add_foreign_key "research_documents", "university_people"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"
   add_foreign_key "research_journal_paper_kinds", "universities"
   add_foreign_key "research_journal_papers", "research_journal_paper_kinds", column: "kind_id"
