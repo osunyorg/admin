@@ -1,22 +1,32 @@
-
-<%= block_component_preview :image %><br>
-<%= block_component_preview :alt %>
-
-<div>
-  <% if @block.template.elements%>
-    <div {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
-      <% @block.template.elements.each do |element| %>
-        <% if element.title %>
-          <a href="<%= block_component_preview :url, template: element %>"
-            <% if element.target_blank %>
-              title="{{ i18n 'commons.link.blank_aria' (dict 'Title' $title) }}"
-              target="_blank"
-            <% else %>
-              title="<%= block_component_preview :title, template: element %>"
-            <% end %>
-            ><%= block_component_preview :title, template: element %></a>
-        <% end %>
-      <% end %>
+<section class="block block-call_to_action">
+  <div class="container">
+    <div class="block-content">
+      <div class="call_to_action">
+        <div>
+          <% if @block.template.text %>
+            <div class="description">
+              <%= block_component_preview :text %>
+            </div>
+          <% end %>
+          <% if @block.template.elements%>
+            <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+              <% @block.template.elements.each do |element| %>
+                <% if element.title %>
+                  <a href="<%= block_component_preview :url, template: element %>"
+                    <% if element.target_blank %>
+                      title="<%= block_component_preview :title, template: element %>"
+                      target="_blank"
+                    <% else %>
+                      title="<%= block_component_preview :title, template: element %>"
+                    <% end %>
+                    ><%= block_component_preview :title, template: element %></a>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <%= block_component_preview :image %>
+      </div>
     </div>
-  <% end %>
-</div>
+  </div>
+</section>

@@ -1,15 +1,21 @@
-<div class="top">
-  <div class="description">
-    <%= block_component_preview :description %>
+<section class="block block-key_figures">
+  <div class="container">
+    <div class="block-content">
+      <div class="top">
+        <div class="description">
+          <%= block_component_preview :description %>
+        </div>
+      </div>
+      <ul>
+        <% @block.template.elements.each do |element| %>
+          <li>
+              <dl>
+                <dt><strong><%= block_component_preview :number, template: element %></strong><%= block_component_preview :unit, template: element %></dt>
+                <dd><%= block_component_preview :description, template: element %></dd>
+              </dl>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
-<ul>
-  <% @block.template.elements.each do |element| %>
-    <li>
-        <dl>
-            <dt><strong><%= block_component_preview :number, template: element %></strong><%= block_component_preview :unit, template: element %></dt>
-            <dd><%= block_component_preview :description, template: element %></dd>
-        </dl>
-    </li>
-  <% end %>
-</ul>
+  </section>

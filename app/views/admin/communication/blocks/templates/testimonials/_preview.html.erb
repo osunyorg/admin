@@ -1,39 +1,54 @@
-<div class="testimonials">
-  <% if !@block.template.elements.one? %>
-    <div class="splide" data-splide='{"arrows":false,"autoplay":true,"pauseOnHover":false,"pauseOnFocus":false,"type":"loop","autoHeight":true}'>
-      <div class="splide__slider">
-        <div class="splide__track">
-          <div class="splide__list">
+<section class="block block-testimonials>
+    <div class="container">
+      <div class="block-content">
+        <div class="testimonials">
+          <% if !@block.template.elements.one? %>
+            <div class="splide" 
+                data-splide='{
+                    "arrows":false,
+                    "autoplay":true,
+                    "pauseOnHover":false,
+                    "pauseOnFocus":true,
+                    "type":"loop",
+                    "autoHeight":true,
+                    "interval":8000
+                  }'
+                >
+              <div class="splide__slider">
+                <div class="splide__track">
+                  <div class="splide__list">
           <% end %>
+
           <% @block.template.elements.each do |element| %>
             <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
-              <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+              <blockquote>
                 <p><%= block_component_preview :text, template: element %></p>
               </blockquote>
               <figcaption>
                 <% if element.photo  %>
                   <div class="avatar">
-                    <div style="max-width: 80px;" class="me-3">
-                      <%= block_component_preview :photo, template: element %>
-                    </div>
+                    <%# <%= block_component_preview :photo, template: element %> %>
                   </div>
                 <% end %>
-                <span>
-                  <b><%= block_component_preview :author, template: element %></b><br>
-                  <%= block_component_preview :job, template: element %>
-                </span>
+                <span class="signature"><%= block_component_preview :author, template: element %></span>
+                <% if element.job %>
+                  <span class="meta"><%= block_component_preview :job, template: element %></span>
+                <% end %>
               </figcaption>
             </figure>
           <% end %>
-        <% if !@block.template.elements.one? %>
-        </div>
+          <% if !@block.template.elements.one? %>
+                </div>
+              </div>
+            </div>
+
+            <div class="splide__autoplay is-active">
+              <button class="splide__play"></button>
+              <button class="splide__pause"></button>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-
-    <div class="splide__autoplay is-active">
-      <button class="splide__play"></button>
-      <button class="splide__pause"></button>
-    </div>
   </div>
-  <% end %>
-</div>
+</section>
