@@ -1,6 +1,14 @@
 <% content_for :title, t('admin.dashboard') %>
-<% classes = 'col-md-6 col-xl-4 d-flex' %>
 
+<% content_for :title_right do %>
+  <% if current_university.logo.attached? %>
+    <%= image_tag current_university.logo, width: 120 %>
+  <% else %>
+    <%= current_university %>
+  <% end %>
+<% end %>
+
+<% classes = 'col-md-6 col-xl-4 d-flex' %>
 <div class="row mb-5">
   <div class="col-md-6 pb-4">
     <%= osuny_panel t('hello', name: current_user.first_name) do %>
@@ -17,13 +25,6 @@
         </p>
         <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
       <% end %>
-      <div class="text-end">
-        <% if current_university.logo.attached? %>
-          <%= image_tag current_university.logo, width: 120 %>
-        <% else %>
-          <%= current_university %>
-        <% end %>
-      </div>
     <% end %>
   </div>
   <div class="col-md-6 pb-4">

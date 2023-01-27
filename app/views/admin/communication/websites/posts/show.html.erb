@@ -2,20 +2,19 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-xl-8">
       <%= render 'admin/application/summary/show', about: @post %>
       <%= render 'admin/communication/blocks/list', about: @post %>
     </div>
-    <div class="col-md-4">
-      <div class="float-end">
-        <% if @post.url %>
-          <%= link_to t('open'),
-                      @post.url,
-                      target: :_blank,
-                      class: 'btn btn-light' %>
-        <% end %>
-      </div>
-      <%= osuny_panel t('metadata') do %>
+    <div class="col-xl-4">
+      <% 
+      action = ''
+      action += link_to t('open'),
+                        @post.url,
+                        target: :_blank,
+                        class: 'btn btn-light btn-xs' if @post.url
+      %>
+      <%= osuny_panel t('metadata'), action: action do %>
         <div class="row pure__row--small">
           <div class="col-6">
             <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('published') %></h3>
