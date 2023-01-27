@@ -1,20 +1,34 @@
 <% if @block.data %>
-  <% if @block.template.page %>
-    <%= @block.template.page.slug %>
-  <% end %>
 
-  <div class="pages">
-    <% @block.template.selected_pages.each do |element| %>
-      <div>
-        <%= element %>
-        <% if @block.template.show_image && element.featured_image.attached? %>
-          <%= kamifusen_tag element.featured_image,
-                            class: 'img-fluid mb-3' %>
-        <% end %>
-        <% if @block.template.show_description %>
-          <p><%= element.summary %></p>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <% if @block.template.layout ===  "list" %>
+    
+    <ul>
+      <% @block.template.elements.each do |element| %>
+        <li>
+          <%= element %>
+        </li>
+      <% end %>
+    </ul>
+
+  <% elsif @block.template.layout ===  "cards" %>
+
+    <div class="cards">
+      <% @block.template.elements.each do |element| %>
+        <article class="card">
+          <%= element %>
+        </article>
+      <% end %>
+    </div>
+
+  <% else %>
+
+    <div class="grid">
+      <% @block.template.elements.each do |element| %>
+        <article>
+          <%= element %>
+        </article>
+      <% end %>
+    </div>
+
+  <% end %>
 <% end %>
