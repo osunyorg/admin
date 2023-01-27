@@ -34,7 +34,7 @@ class Communication::Website::Permalink::Paper < Communication::Website::Permali
 
   # /papiers/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::ResearchPaper).slug_with_ancestors}/:year-:month-:day-:slug/"
+    "/#{website.special_page(Communication::Website::Page::ResearchPaper, language: language).slug_with_ancestors}/:year-:month-:day-:slug/"
   end
 
   protected
