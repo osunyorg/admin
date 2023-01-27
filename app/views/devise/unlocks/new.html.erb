@@ -1,3 +1,5 @@
+<%= content_for :title, t('.title') %>
+
 <h2 class="mb-4"><%= t(".resend_unlock_instructions") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>

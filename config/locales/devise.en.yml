@@ -1,0 +1,21 @@
+en:
+  devise:
+    confirmations:
+      new:
+        title: Account confirmation
+    passwords:
+      edit:
+        new: Password change
+      new:
+        title: Password forgotton
+    registrations:
+      edit:
+        title: Account edition
+      new: 
+        title: Register on Osuny
+    sessions:
+      new:
+        title: Welcome to Osuny
+    unlocks:
+      new:
+        title: Account unlocking
