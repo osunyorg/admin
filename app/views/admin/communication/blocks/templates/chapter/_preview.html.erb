@@ -1,14 +1,21 @@
-<div class="chapter">
-  <div>
-    <%= block_component_preview :text %>
+<section>
+  <div class="container">
+    <div class="block-content">
+      <div class="chapter">
+        <div class="text">
+          <% if @block.template.text %>
+          <div class="rich-text">
+            <%= block_component_preview :text %>
+          </div>
+          <% end %>
+          <% if @block.template.notes %>
+            <div class="notes">
+              <%= block_component_preview :notes %>
+            </div>
+          <% end %>
+        </div>
+        <%= block_component_preview :image %>
+      </div>
+    </div>
   </div>
-  <div class="notes">
-    <%= block_component_preview :notes %>
-  </div>
-</div>
-<figure>
-    <%= block_component_preview :image %>
-    <figcaption>
-      <%= block_component_preview :credit %>
-    </figcaption>
-</figure>
+</section>
