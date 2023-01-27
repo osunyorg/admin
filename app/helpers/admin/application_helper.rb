@@ -65,6 +65,11 @@ module Admin::ApplicationHelper
     raw "<label class=\"form-label\">#{title}</label>"
   end
 
+  def appstack(string)
+    return '' if current_admin_theme != 'appstack' 
+    " #{string}"
+  end
+
   def duplicate_link(object)
     return unless can?(:update, object)
     link_to t('admin.duplicate'),

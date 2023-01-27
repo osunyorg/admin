@@ -17,7 +17,7 @@ remove = t 'admin.communication.blocks.components.file.input.remove'
   </div>
   <div v-if="<%= model %>.<%= property %>.id">
     <p><b>{{ element.file.filename }}</b></p>
-    <a  class="btn btn-sm btn-danger"
+    <a  class="btn btn-sm text-danger"
         v-on:click="<%= model %>.<%= property %>={}">
         <i class="fas fa-times"></i>
       <%= remove %>

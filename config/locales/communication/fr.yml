@@ -427,7 +427,7 @@ fr:
           partners:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
-              add_partner: Ajouter un partenaire
+              add_partner: Ajouter une organisation
               alphabetical:
                 label: Ordre alphabétique
               description:

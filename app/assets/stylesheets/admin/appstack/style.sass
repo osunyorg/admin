@@ -119,3 +119,22 @@ h1
 .kind--selected
     *
         color: white
+
+// Bloc datatable
+.fake-table
+    display: table
+    border: 1px solid $border-color
+    margin-bottom: 10px
+    .tr
+        border-bottom: 1px solid $border-color
+    .td
+        min-width: 120px
+        padding: 10px !important
+        &:not(:first-child)
+            border-left: 1px solid  $border-color
+    .tbody
+        .tr
+            &:nth-child(even)
+                background: $table-striped-bg
+            &:hover
+                background: $table-hover-bg

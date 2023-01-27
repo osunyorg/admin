@@ -17,7 +17,7 @@
             <input  type="text"
                     class="form-control"
                     v-model="data.columns[index]">
-            <a  class="btn btn-danger"
+            <a  class="btn text-danger"
                 v-on:click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
                 <i class="fas fa-times"></i>
             </a>
@@ -40,7 +40,7 @@
         </div>
         <div class="td" class="text-end">
           <div class="d-flex">
-            <a  class="btn btn-danger"
+            <a  class="btn text-danger"
                 v-on:click="data.elements.splice(index, 1)">
                 <i class="fas fa-times"></i>
             </a>
@@ -51,13 +51,11 @@
         </div>
       </div>
     </draggable>
-    <div>
-      <a  class="btn btn-primary"
-          v-on:click="data.elements.push({cells: []})">
-          <i class="fas fa-plus"></i> ligne
-      </a>
-    </div>
   </div>
+  <a  class="btn btn-primary"
+      v-on:click="data.elements.push({cells: []})">
+      <i class="fas fa-plus"></i> ligne
+  </a>
 </div>
 
 <div class="row">

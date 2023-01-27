@@ -1,7 +1,7 @@
 <%= block_component_add_element t('.add_testimonial') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small">
-  <div v-for="(element, index) in data.elements" class="list-group-item">
+<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small <%= appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="<%= appstack 'list-group-item' %>">
     <div class="d-flex mb-5">
       <div>
         <a class="btn ps-0 pt-0 dragHandle">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div>
-        <a  class="btn btn-sm btn-danger ms-3"
+        <a  class="btn btn-sm text-danger ms-3"
             v-on:click="data.elements.splice(data.elements.indexOf(testimonial), 1)"
             title="<%= t '.remove_testimonial' %>">
             <i class="fas fa-times"></i>
