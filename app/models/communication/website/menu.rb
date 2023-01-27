@@ -46,10 +46,7 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def git_path(website)
-    path = "data/menus/"
-    # TODO I18n : Right now, we continue to send only a master version
-    # path += "#{website.default_language.iso_code}/" if website.languages.any?
-    "#{path}#{identifier}.yml"
+    "data/menus/#{language.iso_code}/#{identifier}.yml"
   end
 
   def template_static

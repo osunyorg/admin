@@ -34,7 +34,7 @@ class Communication::Website::Permalink::Researcher < Communication::Website::Pe
 
   # /equipe/:slug/papers/
   # FIXME
-  def self.pattern_in_website(website)
+  def self.pattern_in_website(website, language)
     "/#{website.special_page(Communication::Website::Page::Person).slug_with_ancestors}/:slug/papers/"
   end
 end

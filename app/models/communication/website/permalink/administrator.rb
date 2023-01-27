@@ -33,7 +33,7 @@ class Communication::Website::Permalink::Administrator < Communication::Website:
   end
 
   # /equipe/:slug/roles/
-  def self.pattern_in_website(website)
+  def self.pattern_in_website(website, language)
     "/#{website.special_page(Communication::Website::Page::Person).slug_with_ancestors}/:slug/roles/"
   end
 end
