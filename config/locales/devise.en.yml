@@ -16,6 +16,11 @@ en:
     sessions:
       new:
         title: Welcome to Osuny
+    two_factor_authentication:
+      max_login_attempts_reached:
+        title: Maximul login attemps reached
+      show:
+        title: Multi-factor authentication
     unlocks:
       new:
         title: Account unlocking

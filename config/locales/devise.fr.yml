@@ -16,6 +16,11 @@ fr:
     sessions:
       new:
         title: Bienvenue sur Osuny
+    two_factor_authentication:
+      max_login_attempts_reached:
+        title: Maximum d'essais atteint
+      show:
+        title: Authentification multi-facteur
     unlocks:
       new:
         title: Déblocage de compte
