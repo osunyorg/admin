@@ -65,7 +65,7 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at, if: :published_changed?
+  before_validation :set_published_at
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   scope :published, -> {
