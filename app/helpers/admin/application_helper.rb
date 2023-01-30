@@ -91,8 +91,14 @@ module Admin::ApplicationHelper
     classes
   end
 
-  def table_classes
-    'table table-hover'
+  def table_classes(with_actions: true)
+    classes = 'table'
+    classes += ' table--with-actions' if with_actions
+    classes
+  end
+
+  def table_actions_cell
+    'text-end pe-0'
   end
 
   def submit(form)
