@@ -4,50 +4,40 @@
 
 <div class="row">
   <div class="col-md-6">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h2 class="card-title mb-0 h5"><%= t('admin.infos') %></h2>
-      </div>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
+    <h2 class="h5"><%= t('admin.infos') %></h2>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <tr>
+          <td><%= User.human_attribute_name('email') %></td>
+          <td class="text-end"><%= link_to @user.email, "mailto:#{@user.email}" %></td>
+        </tr>
+        <% ['first_name', 'last_name', 'mobile_phone'].each do |variable| %>
           <tr>
-            <td><%= User.human_attribute_name('email') %></td>
-            <td class="text-end"><%= link_to @user.email, "mailto:#{@user.email}" %></td>
+            <td><%= User.human_attribute_name(variable) %></td>
+            <td class="text-end"><%= @user.public_send variable %></td>
           </tr>
-          <% ['first_name', 'last_name', 'mobile_phone'].each do |variable| %>
-            <tr>
-              <td><%= User.human_attribute_name(variable) %></td>
-              <td class="text-end"><%= @user.public_send variable %></td>
-            </tr>
-          <% end %>
+        <% end %>
+        <tr>
+          <td><%= User.human_attribute_name('role') %></td>
+          <td class="text-end"><%= t("activerecord.attributes.user.roles.#{@user.role.to_s}") %></td>
+        </tr>
+        <tr>
+          <td><%= User.human_attribute_name('language') %></td>
+          <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
+        </tr>
+        <% if @user.person %>
           <tr>
-            <td><%= User.human_attribute_name('role') %></td>
-            <td class="text-end"><%= t("activerecord.attributes.user.roles.#{@user.role.to_s}") %></td>
+            <td><%= User.human_attribute_name('person') %></td>
+            <td class="text-end"><%= link_to @user.person, [:admin, @user.person] %></td>
           </tr>
-          <tr>
-            <td><%= User.human_attribute_name('language') %></td>
-            <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
-          </tr>
-          <% if @user.person %>
-            <tr>
-              <td><%= User.human_attribute_name('person') %></td>
-              <td class="text-end"><%= link_to @user.person, [:admin, @user.person] %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+        <% end %>
+      </table>
     </div>
   </div>
   <% if @user.picture.attached? %>
     <div class="col-md-3">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('activerecord.attributes.user.picture') %></h2>
-        </div>
-        <div class="card-body">
-          <%= kamifusen_tag @user.picture, class: 'img-fluid' %>
-        </div>
-      </div>
+      <h2 class="h5"><%= t('activerecord.attributes.user.picture') %></h2>
+      <%= kamifusen_tag @user.picture, class: 'img-fluid' %>
     </div>
   <% end %>
 </div>

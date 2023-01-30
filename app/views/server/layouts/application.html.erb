@@ -3,49 +3,36 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><%= content_for?(:title) ? raw("#{yield(:title)} ∙ Osuny")
-                                    : 'Osuny' %></title>
+    <title><%= content_for?(:title) ? raw("#{yield(:title)} ∙ Osuny") : 'Osuny' %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-  	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    <%= stylesheet_link_tag 'admin/appstack', media: 'all' %>
+    <script>
+    // Avoid opening menu on load
+    </script>
+    <%= stylesheet_link_tag 'admin/pure', media: 'all' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-  <body class="<%= body_classes %>" data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
-    <div class="toasts-container" style="position: fixed; top: 20px; right: 20px; z-index: 100000;">
-      <% unless notice.nil? %>
-        <div class="js-notyf-notice d-none">
-          <%= notice %>
-        </div>
-      <% end %>
-      <% unless alert.nil? %>
-        <div class="js-notyf-alert d-none">
-          <%= alert %>
-        </div>
-      <% end %>
-    </div>
-    <div class="wrapper">
-      <nav id="sidebar" class="sidebar">
-        <div class="sidebar-content js-simplebar">
-          <%= link_to server_root_path, class: 'sidebar-brand' do %>
-            <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
-          <% end %>
-          <%= render_navigation context: :server %>
-        </div>
-      </nav>
-      <%= render 'admin/layouts/themes/appstack/footer' %>
-      <div class="main">
-        <%= render 'server/application/top' %>
-        <main class="content">
-          <div class="container-fluid p-0">
-            <h1><%= yield :title %></h1>
-            <%= yield %>
+  <body class="<%= body_classes %>">
+    <%= render "admin/layouts/themes/pure/nav", context: :server %>
+    <%= render "admin/layouts/themes/pure/hero" %>
+    <%= render 'admin/application/notice' %>
+    <main class="container-fluid">
+      <% unless current_user.confirmed? %>
+        <div class="alert alert-warning">
+          <div class="alert-message">
+            <%= t('admin.users_alerts.pending_confirmation_html', duration: distance_of_time_in_words(Rails.configuration.devise.allow_unconfirmed_access_for)) %>
+            <br>
+            <%= link_to t('devise.confirmations.new.resend_confirmation_instructions'), resend_user_confirmation_path, method: :post, class: 'alert-link' %>
           </div>
-        </main>
+        </div>
+      <% end %>
+      <div class="position-relative">
+        <%= yield %>
       </div>
-    </div>
-    <%= javascript_include_tag 'admin/appstack' %>
-    <%= render 'gdpr/cookie_consent' %>
+    </main>
+    <%= render "admin/layouts/themes/pure/commands" %>
+    <%= render "admin/layouts/themes/pure/footer" %>
+    <%= javascript_include_tag 'admin/pure' %>
     <%= render 'bugsnag' %>
   </body>
 </html>

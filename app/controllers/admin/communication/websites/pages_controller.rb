@@ -27,6 +27,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def show
+    @preview = true
     breadcrumb
     add_breadcrumb(@page, admin_communication_website_page_path(@page))
   end

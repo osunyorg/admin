@@ -73,6 +73,7 @@ en:
         about_Research::Laboratory: Laboratory website
         about_type: About
         access_token: Access token
+        created_at: Creation
         default_language: Default language
         git_branch: Git branch
         git_endpoint: Git endpoint
@@ -151,7 +152,7 @@ en:
     communication:
       blocks:
         alerts:
-          image_is_too_big: Image is too big!
+          file_is_too_big: File is too big!
         categories:
           basic:
             label: Basic blocks

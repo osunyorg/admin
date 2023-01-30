@@ -1,0 +1,18 @@
+<% content_for :title, @kind %>
+
+<%= render 'admin/research/journals/papers/list', papers: @papers %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('delete'), 
+              admin_research_journal_kind_path(@kind),
+              data: { confirm: t('please_confirm') },
+              class: button_classes_danger %>
+
+  <%= static_link static_admin_research_journal_kind_path(@kind) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('edit'), 
+              edit_admin_research_journal_kind_path(@kind),
+              class: button_classes %>
+<% end %>

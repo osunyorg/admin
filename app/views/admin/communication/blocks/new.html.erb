@@ -1,43 +1,36 @@
 <% content_for :title, t('communication.block.choose_template') %>
 
 <% Communication::Block::CATEGORIES.each do |category, kinds| %>
-  <div class="row mt-5">
-    <div class="col-lg-7">
-      <h2><%= t "admin.communication.blocks.categories.#{category}.label" %></h2>
-    </div>
-    <div class="col-lg-5">
-      <p class="lead mt-1 mb-0 text-end">
-        <%= t "admin.communication.blocks.categories.#{category}.description" %>
-      </p>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <% kinds.each do |kind| %>
-      <%
-      @block.template_reset!
-      @block.template_kind = kind
-      about = @block.about
-      template = @block.template
-      %>
-      <% next unless template.allowed_for_about? %>
-      <div class="col-xxl-2 col-lg-3 col-md-4 d-flex">
-        <div class="card flex-fill">
-          <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top" %>
-          <div class="card-body d-flex flex-column">
-              <h4><%= t "enums.communication.block.template_kind.#{kind}" %></h4>
-              <p class="mb-0">
-                <%= t "admin.communication.blocks.templates.#{kind}.description" %>
-              </p>
-              <%= simple_form_for [:admin, @block], html: { class: 'mt-auto'} do |f| %>
-                <%= f.input :about_type, as: :hidden %>
-                <%= f.input :about_id, as: :hidden %>
-                <%= f.input :template_kind, as: :hidden %>
-                <%= f.submit t('communication.block.choose'), class: button_classes %>
-              <% end %>
+  <section class="blocks">
+    <p class="float-end blocks__category__description"><%= t "admin.communication.blocks.categories.#{category}.description" %></p>
+    <h2 class="h3 category blocks__category__title"><%= t "admin.communication.blocks.categories.#{category}.label" %></h2>
+    <div class="row pure__row--small">
+      <% kinds.each do |kind| %>
+        <%
+        @block.template_reset!
+        @block.template_kind = kind
+        about = @block.about
+        template = @block.template
+        %>
+        <% next unless template.allowed_for_about? %>
+        <div class="col-xxl-2 col-lg-3 col-md-4 d-flex">
+          <div class="<%= 'card' if current_admin_theme == 'appstack' %> flex-fill position-relative js-validate-form-click">
+            <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top block__image" %>
+            <div class="<%= 'card-body' if current_admin_theme == 'appstack' %>">
+                <h3 class="h4 block__title"><%= t "enums.communication.block.template_kind.#{kind}" %></h4>
+                <p class="mb-0 block__description">
+                  <%= t "admin.communication.blocks.templates.#{kind}.description" %>
+                </p>
+                <%= simple_form_for [:admin, @block], html: { class: 'mt-auto'} do |f| %>
+                  <%= f.input :about_type, as: :hidden %>
+                  <%= f.input :about_id, as: :hidden %>
+                  <%= f.input :template_kind, as: :hidden %>
+                  <%= f.submit t('communication.block.choose'), class: button_classes('stretched-link') %>
+                <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  </section>
 <% end %>

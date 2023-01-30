@@ -12,8 +12,10 @@
         </div>
       </div>
     <% end %>
-    <%= yield %>
-    <%= render 'admin/application/preview' %>
+    <div class="position-relative">
+      <%= yield %>
+    </div>
+    <%= render 'admin/application/preview' if @preview %>
   </main>
   <%= render "admin/layouts/themes/pure/commands" %>
   <%= render "admin/layouts/themes/pure/footer" %>

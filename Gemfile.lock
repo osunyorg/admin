@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/noesya/two_factor_authentication.git
-  revision: 4574ece65da41397dd852001e22a0c3b9ee3d01e
+  revision: 852a0ea0b1c755fdf52a423aea0538e7013773b1
   specs:
-    two_factor_authentication (4.0.0)
+    two_factor_authentication (4.1.0)
       devise
       encryptor
       rails (>= 3.1.1)
@@ -103,7 +103,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.688.0)
+    aws-partitions (1.689.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -187,7 +187,7 @@ GEM
     ethon (0.16.0)
       ffi (>= 1.15.0)
     execjs (2.8.1)
-    faceted_search (3.5.16)
+    faceted_search (3.6.0)
       font-awesome-sass
       rails (>= 5.2.0)
     faraday (2.7.2)
@@ -466,7 +466,7 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    spring (4.1.0)
+    spring (4.1.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)

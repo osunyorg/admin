@@ -7,20 +7,22 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :dashboard,
                   t('dashboard'),
                   server_root_path,
-                  { icon: Icon::DASHBOARD, highlights_on: %r{server$} }
+                  { kind: :header, highlights_on: %r{server$} }
+    primary.item  :server,
+                  t('server'),
+                  nil,
+                  { kind: :header }
     primary.item  :universities,
                   University.model_name.human(count: 2),
-                  server_universities_path, { icon: 'university' } if can?(:read, University)
+                  server_universities_path
     primary.item  :websites,
                   Communication::Website.model_name.human(count: 2),
-                  server_websites_path, { icon: 'globe' }
+                  server_websites_path
     primary.item  :languages,
                   Language.model_name.human(count: 2),
-                  server_languages_path,
-                  { icon: 'flag' } if can?(:read, Language)
+                  server_languages_path
     primary.item  :blocks,
                   Communication::Block.model_name.human(count: 2),
-                  server_blocks_path,
-                  { icon: 'puzzle-piece' } if can?(:read, Communication::Block)
+                  server_blocks_path
   end
 end

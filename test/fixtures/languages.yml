@@ -16,3 +16,7 @@ en:
 fr:
   name: Français
   iso_code: fr
+
+it:
+  name: Italiano
+  iso_code: it

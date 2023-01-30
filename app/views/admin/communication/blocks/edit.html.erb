@@ -9,11 +9,11 @@
 
     <div class="row">
       <div class="col-xxl-9 col-lg-8">
-        <div class="row">
-          <div class="col-xxl-3 col-lg-6">
+        <div class="row pure__row--small">
+          <div class="col-lg-6">
             <%= f.input :title %>
           </div>
-          <div class="col-xxl-3 col-lg-6">
+          <div class="col-lg-6">
             <label class="form-label d-none d-lg-block">&nbsp;</label>
             <%= f.input :published %>
           </div>
@@ -68,10 +68,17 @@
         this.uploadFile(event.target, files[0], object, key);
       },
       uploadFile(input, file, object, key) {
-        var size = Math.round(file.size / 1024 / 1024);
-        var controller = new Vue.DirectUploadController(input, file, this.directUpload.url)
-        if (file.size > <%= Communication::Block::IMAGE_MAX_SIZE %>) {
-          alert("<%= t('admin.communication.blocks.alerts.image_is_too_big').html_safe %> (" + size + " Mo > <%= number_to_human_size Communication::Block::IMAGE_MAX_SIZE %>)");
+        var size = Math.round(file.size / 1024 / 1024), 
+            sizeLimit = <%= Communication::Block::IMAGE_MAX_SIZE %>,
+            sizeLimitMo = 0, 
+            controller;
+        if (input.hasAttribute('data-size-limit')) {
+          sizeLimit = input.getAttribute('data-size-limit');
+        }
+        sizeLimitMo = Math.round(sizeLimit / 1024 / 1024);
+        controller = new Vue.DirectUploadController(input, file, this.directUpload.url);
+        if (file.size > sizeLimit) {
+          alert("<%= t('admin.communication.blocks.alerts.file_is_too_big').html_safe %> (" + size + " Mo > " + sizeLimitMo + " Mo)");
           return;
         }
         controller.start(function (blob) {

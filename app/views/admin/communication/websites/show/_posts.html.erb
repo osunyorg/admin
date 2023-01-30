@@ -1,25 +1,15 @@
-<div class="card mb-5">
-  <div class="card-header">
-    <div class="float-end">
-      <%= link_to t('communication.website.posts.new_curation'),
+<%
+action = ''
+action += link_to t('communication.website.posts.new_curation'),
                   new_admin_communication_website_post_curation_path(website_id: @website.id),
-                  class: button_classes if can?(:create, Communication::Website::Post) %>
-      <%= link_to t('create'),
+                  class: button_classes if can?(:create, Communication::Website::Post)
+action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
-                  class: button_classes if can?(:create, Communication::Website::Post) %>
-    </div>
-    <h2 class="card-title">
-      <%= link_to admin_communication_website_posts_path(website_id: @website) do %>
-        <%= t('communication.website.last_posts') %>
-        <small>
-          -
-          <%= t('communication.website.see_all', number: @website.posts.accessible_by(current_ability).count) %>
-        </small>
-      <% end %>
-    </h2>
-  </div>
+                  class: button_classes('ms-1') if can?(:create, Communication::Website::Post)
+%>
+<%= osuny_panel t('communication.website.last_posts'), action: action do %>
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,
               hide_category: true %>
-</div>
+<% end %>

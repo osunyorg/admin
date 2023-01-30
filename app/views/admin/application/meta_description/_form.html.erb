@@ -1,13 +1,8 @@
-<div class="card">
-  <div class="card-header">
-    <h5 class="card-title mb-0"><%= t('seo') %></h5>
-  </div>
-  <div class="card-body">
-    <%= f.input :meta_description,
-                label: t('admin.meta_description.label'),
-                hint: t('admin.meta_description.hint'),
-                input_html: {
-                  value: about.meta_description&.gsub('&amp;', '&')
-                } %>
-  </div>
-</div>
+<%= osuny_panel t('admin.summary') do %>
+  <%= f.input :meta_description,
+              label: t('admin.meta_description.label'),
+              hint: t('admin.meta_description.hint'),
+              input_html: {
+                value: about.meta_description&.gsub('&amp;', '&')
+              } %>
+<% end %>

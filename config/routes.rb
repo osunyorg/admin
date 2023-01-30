@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
       patch 'unlock' => 'users#unlock', on: :member
     end
+    put 'theme' => 'application#set_theme', as: :set_theme
     draw 'admin/administration'
     draw 'admin/communication'
     draw 'admin/education'

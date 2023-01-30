@@ -4,12 +4,8 @@
 
   <div class="row">
     <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
-        </div>
-        <div class="card-body">
-          <div class="row">
+      <%= osuny_panel t('content') do %>
+          <div class="row pure__row--small">
             <div class="col-lg-8 col-xxl-9">
               <%= f.input :name %>
             </div>
@@ -18,8 +14,7 @@
             </div>
           </div>
           <%= f.input :text, as: :summernote %>
-        </div>
-      </div>
+      <% end %>
     </div>
     <div class="col-md-4">
       <%= render 'admin/application/meta_description/form', f: f, about: axis %>

@@ -10,6 +10,9 @@ fr:
       research/journal/paper:
         one: Papier
         other: Papiers
+      research/journal/paper/kind:
+        one: Type de papier
+        other: Types de papier
       research/journal/volume:
         one: Volumes
         other: Volumes
@@ -36,8 +39,11 @@ fr:
         published: Publié ?
         published_at: Publié le
         references: Références
+        kind: Type de papier
         people: Auteu·rs·rices
         text: Texte
+        title: Titre
+      research/journal/paper/kind:
         title: Titre
       research/journal/volume:
         featured_image: Couverture

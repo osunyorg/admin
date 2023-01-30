@@ -97,6 +97,7 @@ class Ability
     can :manage, :all_programs # needed to prevent program_manager to access specific global screens
     can :manage, Research::Journal, university_id: @user.university_id
     can :manage, Research::Journal::Paper, university_id: @user.university_id
+    can :manage, Research::Journal::Paper::Kind, university_id: @user.university_id
     can :manage, Research::Journal::Volume, university_id: @user.university_id
     can :manage, Research::Laboratory, university_id: @user.university_id
     can :manage, Research::Laboratory::Axis, university_id: @user.university_id

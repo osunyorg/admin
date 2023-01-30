@@ -4,7 +4,8 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Research::Journal::Volume.model_name.human %></th>
+        <th><%= Research::Journal::Volume.human_attribute_name('title') %></th>
+        <th><%= Research::Journal::Volume.human_attribute_name('number') %></th>
         <th><%= Research::Journal::Volume.human_attribute_name('featured_image') %></th>
         <th><%= Research::Journal::Volume.human_attribute_name('published_at') %></th>
         <th></th>
@@ -18,6 +19,7 @@
                         admin_research_journal_volume_path(journal_id: @journal, id: volume),
                         class: "#{'draft' unless volume.published?}" %>
           </td>
+          <td><%= volume.number %></td>
           <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
                             height: 100 if volume.featured_image.attached? %></td>
           <td><%= l(volume.published_at.to_time, format: :date_with_explicit_month) if volume.published_at.present? %></td>

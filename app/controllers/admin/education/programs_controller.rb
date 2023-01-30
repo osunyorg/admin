@@ -50,6 +50,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def show
     @roles = @program.university_roles.ordered
     @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name
+    @preview = true
     breadcrumb
   end
 

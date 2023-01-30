@@ -25,4 +25,8 @@
 #
 default_school:
   name: École de test
+  address: 1 Rue Jacques Ellul
+  zipcode: 33080
+  city: Bordeaux
+  country: FR
   university: default_university

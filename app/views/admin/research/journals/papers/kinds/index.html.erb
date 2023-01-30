@@ -1,0 +1,7 @@
+<% content_for :title, Research::Journal::Paper::Kind.model_name.human(count: 2) %>
+
+<%= render 'admin/research/journals/papers/kinds/list', kinds: @kinds %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('create'), new_admin_research_journal_kind_path, class: button_classes %>
+<% end %>

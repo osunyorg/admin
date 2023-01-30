@@ -3,166 +3,124 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= University::Person.human_attribute_name('essentials') %>
-          </h5>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :first_name %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :last_name %>
-            </div>
+    <div class="col-lg-8">
+      <%= osuny_panel University::Person.human_attribute_name('essentials') do %>
+        <div class="row pure__row--small">
+          <div class="col-xxl-6">
+            <%= f.input :first_name %>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :birthdate, discard_year: true, include_blank: true %>
-            </div>
-          </div>
-          <%= render 'admin/application/summary/form', f: f, about: person %>
-          <%= f.input :biography,
-                      as: :summernote,
-                      input_html: {
-                        data: { 'summernote-config' => 'mini-list' }
-                      } %>
-        </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= University::Person.human_attribute_name('contacts') %>
-          </h5>
-        </div>
-        <div class="card-body">
-          <p><em><%= t("university.person.personal_data_warning") %></em></p>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :email %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :phone_mobile %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :phone_professional %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :phone_personal %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :address %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :zipcode %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :city %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :country, input_html: { class: 'form-select' } %>
-            </div>
+          <div class="col-xxl-6">
+            <%= f.input :last_name %>
           </div>
         </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            <%= University::Person.human_attribute_name('socials') %>
-          </h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :url %>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :linkedin %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :twitter %>
-              <%= f.input :mastodon %>
-            </div>
+        <div class="row pure__row--small">
+          <div class="col-xxl-6">
+            <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :birthdate, discard_year: true, include_blank: true %>
           </div>
         </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0">
-            HAL
-          </h5>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :hal_doc_identifier %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :hal_person_identifier %>
-              <%= f.input :hal_form_identifier %>
-            </div>
+        <%= render 'admin/application/summary/form', f: f, about: person %>
+        <%= f.input :biography,
+                    as: :summernote,
+                    input_html: {
+                      data: { 'summernote-config' => 'mini-list' }
+                    } %>
+      <% end %>
+      <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
+        <p><em><%= t("university.person.personal_data_warning") %></em></p>
+        <div class="row pure__row--small">
+          <div class="col-xxl-6">
+            <%= f.input :email %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :phone_mobile %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :phone_professional %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :phone_personal %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :address %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :zipcode %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :city %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :country, input_html: { class: 'form-select' } %>
           </div>
         </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('abilities') %></h5>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :is_teacher %>
-              <%= f.input :is_administration %>
-              <%= f.input :is_alumnus %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :tenure %>
-              <%= f.input :is_researcher %>
-              <%= f.input :habilitation %>
-            </div>
+      <% end %>
+      <%= osuny_panel University::Person.human_attribute_name('socials') do %>
+        <p><em><%= t("university.person.personal_data_warning") %></em></p>
+        <div class="row pure__row--small">
+          <div class="col-xxl-6">
+           <%= f.input :url %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :linkedin %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :twitter %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :mastodon %>
           </div>
         </div>
-      </div>
+      <% end %>
+      <%= osuny_panel 'HAL' do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= f.input :hal_doc_identifier %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :hal_person_identifier %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :hal_form_identifier %>
+          </div>
+        </div>
+      <% end %>
+      <%= osuny_panel University::Person.human_attribute_name('abilities') do %>
+        <div class="row pure__row--small">
+          <div class="col-xxl-6">
+            <%= f.input :is_teacher %>
+            <%= f.input :is_administration %>
+            <%= f.input :is_alumnus %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :tenure %>
+            <%= f.input :is_researcher %>
+            <%= f.input :habilitation %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
+    <div class="col-lg-4">
+      <%= osuny_panel t('metadata') do %>
           <%= f.input :slug,
-          as: :string,
-          input_html: person.persisted? ? {} : {
-            class: 'js-slug-input',
-            data: { source: '#university_person_first_name, #university_person_last_name' }
-          } %>
+                      as: :string,
+                      input_html: person.persisted? ? {} : {
+                        class: 'js-slug-input',
+                        data: { source: '#university_person_first_name, #university_person_last_name' }
+                      } %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
-        </div>
-      </div>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= University::Person.human_attribute_name('picture') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :picture,
-                  as: :single_deletable_file,
-                  label: false,
-                  input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                  preview: 200,
-                  resize: 1,
-                  direct_upload: true %>
-        </div>
-      </div>
+      <% end %>
+      <%= osuny_panel University::Person.human_attribute_name('picture') do %>
+        <%= f.input :picture,
+                    as: :single_deletable_file,
+                    label: false,
+                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    preview: 200,
+                    resize: 1,
+                    direct_upload: true %>
+      <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: person %>
     </div>
   </div>

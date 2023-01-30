@@ -4,28 +4,16 @@
 
   <div class="row">
     <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :title %>
-        </div>
-      </div>
+      <h2 class="h3"><%= t('content') %></h2>
+      <%= f.input :title %>
     </div>
     <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :identifier,
-              input_html: menu.persisted? ? {} : {
-                class: 'js-slug-input',
-                data: { source: '#communication_website_menu_title' }
-              } if can?(:create, menu) %>
-        </div>
-      </div>
+      <h2 class="h3"><%= t('metadata') %></h2>
+      <%= f.input :identifier,
+          input_html: menu.persisted? ? {} : {
+            class: 'js-slug-input',
+            data: { source: '#communication_website_menu_title' }
+          } if can?(:create, menu) %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

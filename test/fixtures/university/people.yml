@@ -49,10 +49,14 @@
 #  fk_rails_b47a769440  (user_id => users.id)
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
-researcher:
-  email: researcher@osuny.org
-  first_name: Researcher
-  is_researcher: true
+
+alumnus:
+  email: alumnus@osuny.org
+  first_name: Alumnus
+  is_alumnus: true
   last_name: Osuny
-  name: Researcher Osuny
+  name: Alumnus Osuny
+  cohorts:
+    - default_cohort
   university: default_university
+  user: alumnus
