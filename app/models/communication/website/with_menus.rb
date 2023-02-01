@@ -64,9 +64,9 @@ module Communication::Website::WithMenus
   protected
 
   def initialize_menus
-    create_menu 'primary'
-    create_menu 'social'
-    menu = create_menu 'legal'
+    find_or_create_menu 'primary'
+    find_or_create_menu 'social'
+    menu = find_or_create_menu 'legal'
     fill_legal_menu menu
   end
 
@@ -89,7 +89,7 @@ module Communication::Website::WithMenus
     end
   end
 
-  def create_menu(identifier)
+  def find_or_create_menu(identifier)
     title = Communication::Website::Menu.human_attribute_name(identifier)
     menus.where(identifier: identifier, university: university).first_or_create do |menu|
       menu.title = title
