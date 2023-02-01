@@ -64,10 +64,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
             <div class="row">
               <div class="col-md-6">
                 <div class="row pure__row--small" ref="results">
-                  <p v-if="data.results.length === 0 || !data" >
+                  <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
                     <%= t 'photo_import.nothing' %>
                   </p>
-                  <div v-for="image in data.results"  class="col-6 col-lg-4">
+                  <div v-for="image in unsplash.data.results"  class="col-6 col-lg-4">
                     <img
                         :src="image.thumb"
                         :alt="image.alt"
@@ -78,7 +78,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                 </div>
                 <div class="row">
                   <div class="col-lg-5">
-                    <a href="#" v-if="page > 1" v-on:click="page = page - 1" class="btn btn-light btn-sm">
+                    <a href="#" v-if="unsplash.page > 1" v-on:click="unsplash.page = unsplash.page - 1" class="btn btn-light btn-sm">
                       <%= t 'photo_import.previous' %>
                     </a>
                   </div>
@@ -86,7 +86,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                     <%= image_tag 'communication/photo_import/unsplash.svg', width: 100, alt: 'Unsplash' %>
                   </div>
                   <div class="col-lg-5 text-end">
-                    <a href="#" v-if="page < data.total_pages" v-on:click="page = page + 1" class="btn btn-light btn-sm">
+                    <a href="#" v-if="unsplash.page < unsplash.data.total_pages" v-on:click="unsplash.page = unsplash.page + 1" class="btn btn-light btn-sm">
                       <%= t 'photo_import.next' %>
                     </a>
                   </div>
@@ -109,21 +109,23 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
       return {
         selected: {},
         parameters: {
-          url: '<%= unsplash_path %>',
           per_page: 12,
           lang: '<%= lang %>',
         },
         query: '<%= search || "" %>',
-        page: 1,
+        unsplash: {
+          url: '<%= unsplash_path %>',
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          }
+        },
         targets: {
           image: '<%= about_featured_image_image %> img',
           imageContainer: '<%= about_featured_image_image %> .sdfi-deletable-file__preview',
           alt: '<%= about_featured_image_alt %>',
           credit: '<%= about_featured_image_credit %>'
-        },
-        data: {
-          results: [],
-          total: 0
         },
         isOpened: false,
         isReady: false
@@ -135,7 +137,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
 
       modalElement.addEventListener('show.bs.modal', function (){
         this.isOpened = true;
-        this.search()
+        this.research()
       }.bind(this));
 
       modalElement.addEventListener('hide.bs.modal', function() {
@@ -153,16 +155,16 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
       this.isReady = true;
     },
     watch: {
-      page(value) {
-        this.search();
+      'unsplash.page': function(newVal, oldVal) {
+        this.searchUnsplash();
       }
     },
     methods: {
       research() {
-        this.page = 1;
-        this.search();
+        this.unsplash.page = 1;
+        this.searchUnsplash();
       },
-      search() {
+      searchUnsplash() {
         if (!this.query) {
           return null;
         }
@@ -170,15 +172,15 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            this.data = JSON.parse(xmlHttp.responseText);
+            this.unsplash.data = JSON.parse(xmlHttp.responseText);
           }
         }.bind(this);
 
         xmlHttp.open( "GET",
-                      this.parameters.url
+                      this.unsplash.url
                       + '?query=' + this.query
                       + '&per_page=' + this.parameters.per_page
-                      + '&page=' + this.page
+                      + '&page=' + this.unsplash.page
                       + '&lang=' + this.parameters.lang,
                       false );
         xmlHttp.send( null );
