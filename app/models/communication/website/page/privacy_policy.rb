@@ -44,5 +44,9 @@ class Communication::Website::Page::PrivacyPolicy < Communication::Website::Page
   def draftable?
     false
   end
+
+  def is_listed_among_children?
+    false
+  end
   
 end
