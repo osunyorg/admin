@@ -667,6 +667,10 @@ en:
               persons: Staff
               teachers: Educational staff
               url: URL
+  curation:
+    error: Import error, be sure to use a valid URL
+    label: URL of the post to import
+    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

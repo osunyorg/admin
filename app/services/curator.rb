@@ -7,6 +7,7 @@ class Curator
     @url = url
     create_post!
     attach_image! unless page.image.blank?
+  rescue
   end
 
   def valid?
