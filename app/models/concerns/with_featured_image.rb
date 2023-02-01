@@ -43,12 +43,13 @@ module WithFeaturedImage
 
   def photo_import_pexels(id)
     photo = Pexels::Client.new.photos.find id
-    url = photo.src['original']
+    url = "#{photo.src['original']}?auto=compress&cs=tinysrgb&w=2048"
     filename = "#{photo.id}.png"
     begin
       file = URI.open url
       featured_image.attach(io: file, filename: filename)
     rescue
+      byebug
     end
   end
 end
