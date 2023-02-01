@@ -26,15 +26,10 @@ class Admin::Communication::PhotoImportController < Admin::Communication::Applic
     @total = 0
     @total_pages = 0
     if @query.present?
-      p = {
-        query: @query,
-        page: (params[:page].presence || 1),
-        per_page: (params[:per_page].presence || 10),
-        lang: (params[:lang].presence || 'en')
-      }
-      p[:orientation] = params[:orientation] if params.has_key? :orientation
-      @search = Unsplash::Search.search "/search/photos", Unsplash::Photo, p
-      @total = @search.total
+      page = params[:page].presence || 1
+      per_page = params[:per_page].presence || 10
+      @search = Pexels::Client.new.photos.search(@query, page: page, per_page: per_page)
+      @total = @search.total_results
       @total_pages = @search.total_pages
     end
   end
