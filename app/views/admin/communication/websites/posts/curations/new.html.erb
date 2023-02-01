@@ -3,8 +3,9 @@
 <%= simple_form_for :curation, url: admin_communication_website_post_curations_path, html: { id: 'new_communication_website_post_curation' } do |f| %>
   <%= f.error_notification %>
   <%= f.input :url,
-              label: 'URL',
-              value: params.dig(:curation, :url) %>
+              label: t('curation.label'),
+              placeholder: t('curation.placeholder'),
+              input_html: { value: @url } %>
 
   <% content_for :action_bar_right do %>
     <%= submit f %>

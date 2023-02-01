@@ -669,6 +669,10 @@ fr:
               persons: Équipe
               teachers: Équipe pédagogique
               url: URL
+  curation:
+    error: Erreur lors de la curation, veillez à utiliser une URL valide
+    label: URL de l'article à importer
+    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:
