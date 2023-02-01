@@ -40,27 +40,27 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
       <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title"> <%= t 'photo_import.title' %></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="col-auto">
+              <h5 class="modal-title"><%= t 'photo_import.title' %></h5>
+            </div>
+            <div class="col-auto d-flex flex-fill mx-5">
+              <input  type="text"
+                      name="search"
+                      placeholder="<%= t 'photo_import.placeholder' %>"
+                      v-model="query"
+                      class="form-control ms-auto">
+              <button type="button"
+                      class="btn btn-primary me-auto"
+                      v-on:click="research"
+                      aria-label="<%= t 'photo_import.search' %>">
+                <%= t 'photo_import.search' %>
+              </button>
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
           </div>
           <div class="modal-body">
-            <div class="row pure__row--small mb-3">
-              <div class="col-lg-9">
-                <input  type="text"
-                        name="search"
-                        placeholder="<%= t 'photo_import.placeholder' %>"
-                        v-model="query"
-                        class="form-control">
-              </div>
-              <div class="col-lg-3 d-grid">
-                <button type="button"
-                        class="btn btn-primary"
-                        v-on:click="research"
-                        aria-label="<%= t 'photo_import.search' %>">
-                  <%= t 'photo_import.search' %>
-                </button>
-              </div>
-            </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="row pure__row--small" ref="results">
@@ -74,21 +74,6 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                         v-on:click="select(image)"
                         class="img-fluid img-thumbnail mb-3"
                         :class="image === selected ? 'bg-secondary' : ''">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-5">
-                    <a href="#" v-if="unsplash.page > 1" v-on:click="unsplash.page = unsplash.page - 1" class="btn btn-light btn-sm">
-                      <%= t 'photo_import.previous' %>
-                    </a>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <%= image_tag 'communication/photo_import/unsplash.svg', width: 100, alt: 'Unsplash' %>
-                  </div>
-                  <div class="col-lg-5 text-end">
-                    <a href="#" v-if="unsplash.page < unsplash.data.total_pages" v-on:click="unsplash.page = unsplash.page + 1" class="btn btn-light btn-sm">
-                      <%= t 'photo_import.next' %>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -106,6 +91,29 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                         :class="image === selected ? 'bg-secondary' : ''">
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-block">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <a href="#" v-if="unsplash.page > 1" v-on:click="unsplash.page = unsplash.page - 1" class="btn btn-light btn-sm">
+                      <%= t 'photo_import.previous' %>
+                    </a>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <%= image_tag 'communication/photo_import/unsplash.svg', width: 100, alt: 'Unsplash' %>
+                  </div>
+                  <div class="col-lg-5 text-end">
+                    <a href="#" v-if="unsplash.page < unsplash.data.total_pages" v-on:click="unsplash.page = unsplash.page + 1" class="btn btn-light btn-sm">
+                      <%= t 'photo_import.next' %>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
                 <div class="row">
                   <div class="col-lg-5">
                     <a href="#" v-if="pexels.page > 1" v-on:click="pexels.page = pexels.page - 1" class="btn btn-light btn-sm">
