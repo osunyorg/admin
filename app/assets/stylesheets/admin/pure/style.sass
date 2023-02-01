@@ -15,54 +15,22 @@
         border-width: 10px
         margin-bottom: $spacing3
 
-.navbar
-    position: absolute
-    left: 0
-    right: 0
-    padding-top: $spacing2
-    .bi
-        font-size: 26px
-        vertical-align: middle
-    .navbar-brand
-        img
-            width: 100px
-    .btn-open
-        margin-right: -14px
-#menu
-    position: fixed
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background: black
-    color: white
-    overflow-y: scroll
-    z-index: 1000
-    padding-bottom: 30px
-    .avatar
-        width: 80px
-    .menu-content
-        position: relative
-        margin-top: 150px
-        ul
-            list-style-type: none
-            padding: 0
-            li
-                padding: 5px 0
-                span
-                    opacity: 0.2
-        a
-            color: white
-            text-decoration: underline
-            text-decoration-color: #FFFFFF66
-            &:hover
-                text-decoration-color: #FFFFFFFF
+.dashboard-index
+    .pure__section
+        .float-end
+            // No icon in cards
+            display: none
+
+.draggable-item
+    margin-bottom: $spacing1
 
 .hero
     padding-top: 150px
     padding-bottom: 30px
     background-color: $color-background-alt
     margin-bottom: 30px
+    @media (min-height: 800px)
+        padding-top: 250px
 
 main
     min-height: 70vh
@@ -125,16 +93,8 @@ a
     color: $color-accent
     font-weight: bold
 
-.btn-xs
-    font-size: 14px
-    padding: 2px 7px
-
-.btn-light
-    background: $color-background
-    border-color: $color-border
-
 .commands
-    background: $color-background-alt
+    background: $color-commands
     position: sticky
     bottom: 0
     left: 0
@@ -155,29 +115,19 @@ a
     &__description
         font-size: px2rem(14)
 
-.filters
-    position: absolute
-    top: 0
-    right: 0
-    margin-top: 0 !important
-
-#collapseFilters
-    padding-top: 0 !important
-    + br
-        display: none
-
 .sdfi-deletable-file__preview
     margin-top: 10px
-
-#collapseFilters
-    padding-top: 50px
 
 .table
     input[type=checkbox]
         margin-right: 10px
     th
         color: $color-text-alt
+        font-size: $form-label-font-size
         font-weight: normal
+
+.handle
+    margin-right: $spacing0
 
 footer
     min-height: 300px

@@ -15,21 +15,19 @@
 </div>
 <div v-if="data.mode === 'selection'">
   <%= block_component_add_element t('.add_post') %>
-  <draggable :list="data.elements" handle=".dragHandle" class="list-group">
-    <div v-for="(element, index) in data.elements" class="list-group-item">
-      <div class="d-flex">
-        <a class="btn ps-0 dragHandle" title="Drag and drop">
-          <i class="fa fa-bars handle"></i>
-        </a>
-        <div class="flex-fill">
-          <%= block_component_edit :id, template: @element %>
-        </div>
-        <a  class="btn btn-danger ms-3"
-            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-            title="Delete">
-            <i class="fas fa-times"></i>
-        </a>
+  <draggable :list="data.elements" handle=".dragHandle" class="<%= if_appstack 'list-group' %>">
+    <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
+      <a class="btn ps-0 dragHandle" title="Drag and drop">
+        <i class="fa fa-bars handle"></i>
+      </a>
+      <div class="flex-fill">
+        <%= block_component_edit :id, template: @element %>
       </div>
+      <a  class="btn text-danger ms-3"
+          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          title="Delete">
+          <i class="fas fa-times"></i>
+      </a>
     </div>
   </draggable>
 </div>

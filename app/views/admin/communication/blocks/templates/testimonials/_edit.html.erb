@@ -1,15 +1,15 @@
 <%= block_component_add_element t('.add_testimonial') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small">
-  <div v-for="(element, index) in data.elements" class="list-group-item">
-    <div class="d-flex">
+<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small <%= if_appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="<%= if_appstack 'list-group-item' %>">
+    <div class="d-flex mb-5">
       <div>
         <a class="btn ps-0 pt-0 dragHandle">
           <i class="fa fa-bars handle"></i>
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row mb-n3">
+        <div class="row pure__row--small mb-n3">
           <div class="col-lg-4">
             <%= block_component_edit :text, template: @element %>
           </div>
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div>
-        <a  class="btn btn-sm btn-danger ms-3"
+        <a  class="btn btn-sm text-danger ms-3"
             v-on:click="data.elements.splice(data.elements.indexOf(testimonial), 1)"
             title="<%= t '.remove_testimonial' %>">
             <i class="fas fa-times"></i>

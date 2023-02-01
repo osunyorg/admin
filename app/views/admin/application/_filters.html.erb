@@ -4,9 +4,9 @@ should_be_open = false
 filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_name]) }
 %>
 
-<% if collapsable %>
-  <div class="text-end filters mt-n5">
-    <a  class="btn btn-outline-secondary btn-sm"
+<div class="filters">
+  <% if collapsable %>
+    <a  class="btn btn-outline-secondary btn-sm filters__button"
         data-bs-toggle="collapse"
         href="#collapseFilters"
         role="button"
@@ -15,18 +15,16 @@ filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_n
       <i class="fas fa-filter"></i>
       <%= t('filters.buttons.expand') %>
     </a>
-  </div>
-<% end %>
-<div class="mt-4 mb-n3 collapse <%= (!collapsable || should_be_open) ? 'show' : '' %>" id="collapseFilters">
-  <%= form_tag current_path, method: :get, class: 'do-not-unlock' do |f| %>
-    <div class="row">
+  <% end %>
+  <div class="collapse filters__content <%= (!collapsable || should_be_open) ? 'show' : '' %>" id="collapseFilters">
+    <%= form_tag current_path, method: :get, class: 'do-not-unlock' do |f| %>
       <% filters.each do |filter| %>
-        <div class="col-md-4">
+        <div class="filters__content__filter">
           <% if filter[:scope_name] == :for_search_term %>
             <%= text_field_tag  filter[:scope_name],
                                 params[filter[:scope_name]],
                                 placeholder: filter[:label],
-                                class: 'form-control mb-3 filter' %>
+                                class: 'form-control mb-2 filter' %>
           <% else %>
             <% if filter[:tree] %>
               <% choices = collection_tree(filter[:choices]).map { |elmt| [elmt[:label].html_safe, elmt[:id]] } %>
@@ -37,16 +35,12 @@ filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_n
             <%= select_tag  field_name,
                             options_for_select(choices, params[filter[:scope_name]]),
                             include_blank: filter[:label],
-                            class: 'form-select mb-3 filter' %>
+                            class: 'form-select mb-2 filter' %>
           <% end %>
         </div>
       <% end %>
-      <div class="col-md-4">
-        <%= submit_tag t('filters.buttons.submit'), class: 'btn btn-primary btn-submit' %>
-        <%= link_to t('reset'), current_path, class: 'btn btn-secondary' %>
-      </div>
-    </div>
-  <% end %>
+      <%= submit_tag t('filters.buttons.submit'), class: 'btn btn-primary btn-submit' %>
+      <%= link_to t('reset'), current_path, class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
 </div>
-
-<br>
