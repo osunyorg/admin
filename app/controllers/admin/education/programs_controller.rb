@@ -76,7 +76,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def create
     @program.university = current_university
-    @program.add_unsplash_image params[:unsplash]
+    @program.add_photo_import params[:photo_import]
     if @program.save_and_sync
       redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s)
     else
@@ -86,7 +86,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def update
-    @program.add_unsplash_image params[:unsplash]
+    @program.add_photo_import params[:photo_import]
     if @program.update_and_sync(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else

@@ -16,7 +16,7 @@ unsplash_path = admin_communication_unsplash_path(website_id: nil, format: :json
 pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
 %>
 
-<div id="unsplash-app" v-cloak>
+<div id="photo-import-app" v-cloak>
   <div class="spinner-border text-primary" role="status">
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
@@ -24,16 +24,19 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
     <button type="button"
             class="btn btn-secondary btn-sm"
             data-bs-toggle="modal"
-            data-bs-target="#unsplashModal"
+            data-bs-target="#photoImportModal"
             >
       <%= t 'photo_import.open' %>
     </button>
+    <input  type="hidden"
+            name="photo_import[unsplash]"
+            v-model="unsplash.selected">
     <input  class="form-control string optional"
             type="hidden"
-            name="unsplash"
-            v-model="selected.id">
+            name="photo_import[pexels]"
+            v-model="pexels.selected">
     <div  class="modal fade"
-          id="unsplashModal"
+          id="photoImportModal"
           tabindex="-1"
           aria-labelledby="Unsplash"
           aria-hidden="true">
@@ -68,12 +71,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                     <%= t 'photo_import.nothing' %>
                   </p>
                   <div v-for="image in unsplash.data.results"  class="col-6 col-lg-4">
-                    <img
-                        :src="image.thumb"
-                        :alt="image.alt"
-                        v-on:click="select(image)"
-                        class="img-fluid img-thumbnail mb-3"
-                        :class="image === selected ? 'bg-secondary' : ''">
+                    <img  :src="image.thumb"
+                          :alt="image.alt"
+                          v-on:click="selectUnsplash(image)"
+                          class="img-fluid img-thumbnail mb-3">
                   </div>
                 </div>
               </div>
@@ -83,12 +84,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                     <%= t 'photo_import.nothing' %>
                   </p>
                   <div v-for="image in pexels.data.results"  class="col-6 col-lg-4">
-                    <img
-                        :src="image.thumb"
-                        :alt="image.alt"
-                        v-on:click="select(image)"
-                        class="img-fluid img-thumbnail mb-3"
-                        :class="image === selected ? 'bg-secondary' : ''">
+                    <img  :src="image.thumb"
+                          :alt="image.alt"
+                          v-on:click="selectPexels(image)"
+                          class="img-fluid img-thumbnail mb-3">
                   </div>
                 </div>
               </div>
@@ -99,7 +98,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-lg-5">
-                    <a href="#" v-if="unsplash.page > 1" v-on:click="unsplash.page = unsplash.page - 1" class="btn btn-light btn-sm">
+                    <a  href="#"
+                        v-if="unsplash.page > 1"
+                        v-on:click="unsplash.page = unsplash.page - 1"
+                        class="btn btn-light btn-sm">
                       <%= t 'photo_import.previous' %>
                     </a>
                   </div>
@@ -107,7 +109,9 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                     <%= image_tag 'communication/photo_import/unsplash.svg', width: 100, alt: 'Unsplash' %>
                   </div>
                   <div class="col-lg-5 text-end">
-                    <a href="#" v-if="unsplash.page < unsplash.data.total_pages" v-on:click="unsplash.page = unsplash.page + 1" class="btn btn-light btn-sm">
+                    <a  href="#" v-if="unsplash.page < unsplash.data.total_pages"
+                        v-on:click="unsplash.page = unsplash.page + 1"
+                        class="btn btn-light btn-sm">
                       <%= t 'photo_import.next' %>
                     </a>
                   </div>
@@ -116,7 +120,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-lg-5">
-                    <a href="#" v-if="pexels.page > 1" v-on:click="pexels.page = pexels.page - 1" class="btn btn-light btn-sm">
+                    <a  href="#"
+                        v-if="pexels.page > 1"
+                        v-on:click="pexels.page = pexels.page - 1"
+                        class="btn btn-light btn-sm">
                       <%= t 'photo_import.previous' %>
                     </a>
                   </div>
@@ -124,7 +131,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                     <%= image_tag 'communication/photo_import/pexels.png', width: 100, alt: 'Unsplash' %>
                   </div>
                   <div class="col-lg-5 text-end">
-                    <a href="#" v-if="pexels.page < pexels.data.total_pages" v-on:click="pexels.page = pexels.page + 1" class="btn btn-light btn-sm">
+                    <a  href="#"
+                        v-if="pexels.page < pexels.data.total_pages"
+                        v-on:click="pexels.page = pexels.page + 1"
+                        class="btn btn-light btn-sm">
                       <%= t 'photo_import.next' %>
                     </a>
                   </div>
@@ -145,7 +155,6 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
   var app = Vue.createApp({
     data() {
       return {
-        selected: {},
         parameters: {
           per_page: 12,
           lang: '<%= lang %>',
@@ -157,7 +166,8 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
           data: {
             results: [],
             total: 0
-          }
+          },
+          selected: {}
         },
         pexels: {
           url: '<%= pexels_path %>',
@@ -165,20 +175,21 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
           data: {
             results: [],
             total: 0
-          }
+          },
+          selected: {}
         },
         targets: {
-          image: '<%= about_featured_image_image %> img',
-          imageContainer: '<%= about_featured_image_image %> .sdfi-deletable-file__preview',
-          alt: '<%= about_featured_image_alt %>',
-          credit: '<%= about_featured_image_credit %>'
+          image: document.querySelector('<%= about_featured_image_image %> img'),
+          imageContainer: document.querySelector('<%= about_featured_image_image %> .sdfi-deletable-file__preview'),
+          alt: document.querySelector('<%= about_featured_image_alt %>'),
+          credit: document.querySelector('<%= about_featured_image_credit %>')
         },
         isOpened: false,
         isReady: false
       }
     },
     mounted() {
-      var modalElement = document.querySelector('#unsplashModal')
+      var modalElement = document.querySelector('#photoImportModal')
       this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
 
       modalElement.addEventListener('show.bs.modal', function (){
@@ -210,72 +221,61 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
     },
     methods: {
       research() {
-        this.unsplash.page = 1;
-        this.pexels.page = 1;
         this.searchUnsplash();
         this.searchPexels();
       },
       searchUnsplash() {
-        if (!this.query) {
-          return null;
-        }
-
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() {
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            this.unsplash.data = JSON.parse(xmlHttp.responseText);
-          }
-        }.bind(this);
-
-        xmlHttp.open( "GET",
-                      this.unsplash.url
+        var url = this.unsplash.url
                       + '?query=' + this.query
-                      + '&per_page=' + this.parameters.per_page
                       + '&page=' + this.unsplash.page
-                      + '&lang=' + this.parameters.lang,
-                      false );
-        xmlHttp.send( null );
+                      + '&per_page=' + this.parameters.per_page
+                      + '&lang=' + this.parameters.lang
+        this.search(url, this.unsplash);
       },
       searchPexels() {
+        var url = this.pexels.url
+                    + '?query=' + this.query
+                    + '&page=' + this.pexels.page
+                    + '&per_page=' + this.parameters.per_page
+                    + '&lang=' + this.parameters.lang
+        this.search(url, this.pexels);
+      },
+      search(url, source) {
         if (!this.query) {
           return null;
         }
-
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            this.pexels.data = JSON.parse(xmlHttp.responseText);
+            source.data = JSON.parse(xmlHttp.responseText);
           }
         }.bind(this);
-
-        xmlHttp.open( "GET",
-                      this.pexels.url
-                      + '?query=' + this.query
-                      + '&per_page=' + this.parameters.per_page
-                      + '&page=' + this.pexels.page
-                      + '&lang=' + this.parameters.lang,
-                      false );
-        xmlHttp.send( null );
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send(null);
+      },
+      selectUnsplash(image) {
+        this.unsplash.selected = image.id;
+        this.pexels.selected = null;
+        this.select(image);
+      },
+      selectPexels(image) {
+        this.unsplash.selected = null;
+        this.pexels.selected = image.id;
+        this.select(image);
       },
       select(image) {
-        var inputImage = document.querySelector(this.targets.image),
-            inputImageContainer = document.querySelector(this.targets.imageContainer),
-            inputAlt = document.querySelector(this.targets.alt),
-            inputCredit = document.querySelector(this.targets.credit);
-
-        this.selected = image;
-
-        if (!inputImage) {
-          inputImage = document.createElement('img');
-          inputImage.classList.add('img-fluid', 'img-thumbnail');
-          inputImage.width = 1000;
-          inputImageContainer.appendChild(inputImage);
+        if (!this.targets.image) {
+          this.targets.image = document.createElement('img');
+          this.targets.image.classList.add('img-fluid', 'img-thumbnail');
+          this.targets.image.width = 1000;
+          this.targets.imageContainer.appendChild(this.targets.image);
         }
 
-        inputImage.setAttribute('src', image.preview);
-        inputImageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
+        this.targets.image.setAttribute('src', image.preview);
+        this.targets.imageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
 
-        $(inputCredit).summernote('code', image.credit);
+        $(this.targets.credit).summernote('code', image.credit);
+
         this.modal.hide();
       }
     }
@@ -283,7 +283,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
 
   window.addEventListener('load', function(){
     setTimeout(function() {
-      app.mount('#unsplash-app');
+      app.mount('#photo-import-app');
     }, 1000);
   });
 </script>
