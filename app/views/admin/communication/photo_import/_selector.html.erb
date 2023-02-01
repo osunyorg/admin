@@ -11,8 +11,9 @@ about_featured_image_alt = "##{about_identifier}_featured_image_alt"
 about_featured_image_credit = "##{about_identifier}_featured_image_credit"
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
-# /admin/communication/unsplash.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
-path = admin_communication_unsplash_path(website_id: nil, format: :json)
+# /admin/communication/photo_import.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
+unsplash_path = admin_communication_unsplash_path(website_id: nil, format: :json)
+pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
 %>
 
 <div id="unsplash-app" v-cloak>
@@ -25,7 +26,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
             data-bs-toggle="modal"
             data-bs-target="#unsplashModal"
             >
-      <%= t 'unsplash.open' %>
+      <%= t 'photo_import.open' %>
     </button>
     <input  class="form-control string optional"
             type="hidden"
@@ -36,20 +37,18 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
           tabindex="-1"
           aria-labelledby="Unsplash"
           aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              <%= t 'unsplash.title' %>
-            </h5>
+            <h5 class="modal-title"> <%= t 'photo_import.title' %></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="row mb-3">
+            <div class="row pure__row--small mb-3">
               <div class="col-lg-9">
                 <input  type="text"
                         name="search"
-                        placeholder="<%= t 'unsplash.placeholder' %>"
+                        placeholder="<%= t 'photo_import.placeholder' %>"
                         v-model="query"
                         class="form-control">
               </div>
@@ -57,34 +56,42 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
                 <button type="button"
                         class="btn btn-primary"
                         v-on:click="research"
-                        aria-label="<%= t 'unsplash.search' %>">
-                  <%= t 'unsplash.search' %>
+                        aria-label="<%= t 'photo_import.search' %>">
+                  <%= t 'photo_import.search' %>
                 </button>
               </div>
             </div>
-            <div class="row" ref="results">
-              <p v-if="data.results.length === 0 || !data" >
-                <%= t 'unsplash.nothing' %>
-              </p>
-              <div v-for="image in data.results"  class="col-6 col-lg-2">
-                <img
-                    :src="image.thumb"
-                    :alt="image.alt"
-                    v-on:click="select(image)"
-                    class="img-fluid img-thumbnail mb-3"
-                    :class="image === selected ? 'bg-secondary' : ''">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row pure__row--small" ref="results">
+                  <p v-if="data.results.length === 0 || !data" >
+                    <%= t 'photo_import.nothing' %>
+                  </p>
+                  <div v-for="image in data.results"  class="col-6 col-lg-4">
+                    <img
+                        :src="image.thumb"
+                        :alt="image.alt"
+                        v-on:click="select(image)"
+                        class="img-fluid img-thumbnail mb-3"
+                        :class="image === selected ? 'bg-secondary' : ''">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-5">
+                    <a href="#" v-if="page > 1" v-on:click="page = page - 1" class="btn btn-light btn-sm">
+                      <%= t 'photo_import.previous' %>
+                    </a>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <%= image_tag 'communication/photo_import/unsplash.svg', width: 100, alt: 'Unsplash' %>
+                  </div>
+                  <div class="col-lg-5 text-end">
+                    <a href="#" v-if="page < data.total_pages" v-on:click="page = page + 1" class="btn btn-light btn-sm">
+                      <%= t 'photo_import.next' %>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="d-flex"
-              :class="page === 1 ? 'justify-content-end' : 'justify-content-between'">
-              <div  href="#"
-                  v-if="page > 1"
-                  v-on:click="page = page - 1"
-                  class="btn btn-light btn-sm"><%= t 'unsplash.previous' %></div>
-              <div  href="#"
-                  v-if="page < data.total_pages"
-                  v-on:click="page = page + 1"
-                  class="btn btn-light bt-sm"><%= t 'unsplash.next' %></div>
             </div>
           </div>
         </div>
@@ -102,7 +109,7 @@ path = admin_communication_unsplash_path(website_id: nil, format: :json)
       return {
         selected: {},
         parameters: {
-          url: '<%= path %>',
+          url: '<%= unsplash_path %>',
           per_page: 12,
           lang: '<%= lang %>',
         },

@@ -1,5 +1,8 @@
 namespace :communication do
-  get 'unsplash' => 'unsplash#index'
+  scope 'photo-import' do
+    get 'unsplash' => 'photo_import#unsplash'
+    get 'pexels' => 'photo_import#pexels'
+  end
   resources :websites do
     member do
       get :import
