@@ -11,8 +11,8 @@
 </div>
 
 <%= osuny_label University::Person.model_name.human(count: 2) %>
-<draggable :list="data.elements" class="mb-3<%= appstack 'list-group' %>" handle=".dragHandle">
-  <div v-for="(element, index) in data.elements" class="<%= appstack 'list-group-item' %> draggable-item">
+<draggable :list="data.elements" class="mb-3<%= if_appstack 'list-group' %>" handle=".dragHandle">
+  <div v-for="(element, index) in data.elements" class="<%= if_appstack 'list-group-item' %> draggable-item">
     <div class="d-flex">
       <div>
         <a class="btn ps-0 pt-0 dragHandle" title="<%= t '.drag_title' %>">

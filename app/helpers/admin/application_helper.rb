@@ -65,7 +65,7 @@ module Admin::ApplicationHelper
     raw "<label class=\"form-label\">#{title}</label>"
   end
 
-  def appstack(string)
+  def if_appstack(string)
     return '' if current_admin_theme != 'appstack' 
     " #{string}"
   end

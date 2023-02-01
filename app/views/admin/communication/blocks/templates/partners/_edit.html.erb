@@ -8,8 +8,8 @@
     <%= block_component_edit :alphabetical %>
   </div>
 </div>
-<draggable :list="data.elements" class="mb-3 <%= appstack 'list-group' %>" handle=".partnerHandle">
-  <div v-for="(element, index) in data.elements" class="draggable-item <%= appstack 'list-group-item' %>">
+<draggable :list="data.elements" class="mb-3 <%= if_appstack 'list-group' %>" handle=".partnerHandle">
+  <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
     <div class="d-flex mb-n3">
       <div>
         <a class="btn ps-0 pt-0 partnerHandle">

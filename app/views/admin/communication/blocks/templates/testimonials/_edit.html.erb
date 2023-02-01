@@ -1,7 +1,7 @@
 <%= block_component_add_element t('.add_testimonial') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small <%= appstack 'list-group' %>">
-  <div v-for="(element, index) in data.elements" class="<%= appstack 'list-group-item' %>">
+<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small <%= if_appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="<%= if_appstack 'list-group-item' %>">
     <div class="d-flex mb-5">
       <div>
         <a class="btn ps-0 pt-0 dragHandle">

@@ -1,6 +1,6 @@
 <% pages = collection_tree(@block.university.programs) %>
-<draggable :list="data.elements" handle=".dragHandle" class="mb-3 <%= appstack 'list-group' %>">
-  <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= appstack 'list-group-item' %>">
+<draggable :list="data.elements" handle=".dragHandle" class="mb-3 <%= if_appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
     <div>
       <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
         <i class="fa fa-bars handle"></i>
