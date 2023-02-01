@@ -92,6 +92,36 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                   </div>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="row pure__row--small" ref="results">
+                  <p v-if="pexels.data.results.length === 0 || !pexels.data" >
+                    <%= t 'photo_import.nothing' %>
+                  </p>
+                  <div v-for="image in pexels.data.results"  class="col-6 col-lg-4">
+                    <img
+                        :src="image.thumb"
+                        :alt="image.alt"
+                        v-on:click="select(image)"
+                        class="img-fluid img-thumbnail mb-3"
+                        :class="image === selected ? 'bg-secondary' : ''">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-5">
+                    <a href="#" v-if="pexels.page > 1" v-on:click="pexels.page = pexels.page - 1" class="btn btn-light btn-sm">
+                      <%= t 'photo_import.previous' %>
+                    </a>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <%= image_tag 'communication/photo_import/pexels.png', width: 100, alt: 'Unsplash' %>
+                  </div>
+                  <div class="col-lg-5 text-end">
+                    <a href="#" v-if="pexels.page < pexels.data.total_pages" v-on:click="pexels.page = pexels.page + 1" class="btn btn-light btn-sm">
+                      <%= t 'photo_import.next' %>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -115,6 +145,14 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
         query: '<%= search || "" %>',
         unsplash: {
           url: '<%= unsplash_path %>',
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          }
+        },
+        pexels: {
+          url: '<%= pexels_path %>',
           page: 1,
           data: {
             results: [],
@@ -157,12 +195,17 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
     watch: {
       'unsplash.page': function(newVal, oldVal) {
         this.searchUnsplash();
+      },
+      'pexels.page': function(newVal, oldVal) {
+        this.searchPexels();
       }
     },
     methods: {
       research() {
         this.unsplash.page = 1;
+        this.pexels.page = 1;
         this.searchUnsplash();
+        this.searchPexels();
       },
       searchUnsplash() {
         if (!this.query) {
@@ -181,6 +224,27 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                       + '?query=' + this.query
                       + '&per_page=' + this.parameters.per_page
                       + '&page=' + this.unsplash.page
+                      + '&lang=' + this.parameters.lang,
+                      false );
+        xmlHttp.send( null );
+      },
+      searchPexels() {
+        if (!this.query) {
+          return null;
+        }
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            this.pexels.data = JSON.parse(xmlHttp.responseText);
+          }
+        }.bind(this);
+
+        xmlHttp.open( "GET",
+                      this.pexels.url
+                      + '?query=' + this.query
+                      + '&per_page=' + this.parameters.per_page
+                      + '&page=' + this.pexels.page
                       + '&lang=' + this.parameters.lang,
                       false );
         xmlHttp.send( null );
