@@ -1,0 +1,289 @@
+<%
+# L'Escale du livre 2022
+search = about.to_s
+# communication_website_page
+about_identifier = about.class.base_class.to_s.parameterize.underscore
+# .communication_website_post_featured_image
+about_featured_image_image = ".#{about_identifier}_featured_image"
+# #communication_website_page_featured_image_alt
+about_featured_image_alt = "##{about_identifier}_featured_image_alt"
+# #communication_website_page_featured_image_credit
+about_featured_image_credit = "##{about_identifier}_featured_image_credit"
+# fr, en...
+lang = about&.language&.iso_code if about.respond_to? :language
+# /admin/communication/photo_import.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
+unsplash_path = admin_communication_unsplash_path(website_id: nil, format: :json)
+pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
+%>
+
+<div id="photo-import-app" v-cloak>
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only"><%= t 'loading' %></span>
+  </div>
+  <div class="app-content">
+    <button type="button"
+            class="btn btn-secondary btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#photoImportModal"
+            >
+      <%= t 'photo_import.open' %>
+    </button>
+    <input  type="hidden"
+            name="photo_import[unsplash]"
+            v-model="unsplash.selected">
+    <input  class="form-control string optional"
+            type="hidden"
+            name="photo_import[pexels]"
+            v-model="pexels.selected">
+    <div  class="modal fade"
+          id="photoImportModal"
+          tabindex="-1"
+          aria-labelledby="Unsplash"
+          aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="col-auto">
+              <h5 class="modal-title"><%= t 'photo_import.title' %></h5>
+            </div>
+            <div class="col-auto d-flex flex-fill mx-5">
+              <input  type="text"
+                      name="search"
+                      placeholder="<%= t 'photo_import.placeholder' %>"
+                      v-model="query"
+                      class="form-control ms-auto">
+              <button type="button"
+                      class="btn btn-primary me-auto"
+                      v-on:click="research"
+                      aria-label="<%= t 'photo_import.search' %>">
+                <%= t 'photo_import.search' %>
+              </button>
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row pure__row--small" ref="results">
+                  <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
+                    <%= t 'photo_import.nothing' %>
+                  </p>
+                  <div v-for="image in unsplash.data.results"  class="col-6 col-lg-4">
+                    <img  :src="image.thumb"
+                          :alt="image.alt"
+                          v-on:click="selectUnsplash(image)"
+                          class="img-fluid img-thumbnail mb-3">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row pure__row--small" ref="results">
+                  <p v-if="pexels.data.results.length === 0 || !pexels.data" >
+                    <%= t 'photo_import.nothing' %>
+                  </p>
+                  <div v-for="image in pexels.data.results"  class="col-6 col-lg-4">
+                    <img  :src="image.thumb"
+                          :alt="image.alt"
+                          v-on:click="selectPexels(image)"
+                          class="img-fluid img-thumbnail mb-3">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-block">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <a  href="#"
+                        v-if="unsplash.page > 1"
+                        v-on:click="unsplash.page = unsplash.page - 1"
+                        class="btn btn-light btn-sm">
+                      <%= t 'photo_import.previous' %>
+                    </a>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <%= image_tag 'communication/photo_imports/unsplash.svg', width: 100, alt: 'Unsplash' %>
+                  </div>
+                  <div class="col-lg-5 text-end">
+                    <a  href="#" v-if="unsplash.page < unsplash.data.total_pages"
+                        v-on:click="unsplash.page = unsplash.page + 1"
+                        class="btn btn-light btn-sm">
+                      <%= t 'photo_import.next' %>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <a  href="#"
+                        v-if="pexels.page > 1"
+                        v-on:click="pexels.page = pexels.page - 1"
+                        class="btn btn-light btn-sm">
+                      <%= t 'photo_import.previous' %>
+                    </a>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <%= image_tag 'communication/photo_imports/pexels.png', width: 100, alt: 'Unsplash' %>
+                  </div>
+                  <div class="col-lg-5 text-end">
+                    <a  href="#"
+                        v-if="pexels.page < pexels.data.total_pages"
+                        v-on:click="pexels.page = pexels.page + 1"
+                        class="btn btn-light btn-sm">
+                      <%= t 'photo_import.next' %>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# Include vue.js before call Vue.createApp %>
+<%= javascript_include_tag 'vue' %>
+
+<script>
+  var app = Vue.createApp({
+    data() {
+      return {
+        parameters: {
+          per_page: 12,
+          lang: '<%= lang %>',
+        },
+        query: '<%= search || "" %>',
+        unsplash: {
+          url: '<%= unsplash_path %>',
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
+          selected: {}
+        },
+        pexels: {
+          url: '<%= pexels_path %>',
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
+          selected: {}
+        },
+        targets: {
+          image: document.querySelector('<%= about_featured_image_image %> img'),
+          imageContainer: document.querySelector('<%= about_featured_image_image %> .sdfi-deletable-file__preview'),
+          alt: document.querySelector('<%= about_featured_image_alt %>'),
+          credit: document.querySelector('<%= about_featured_image_credit %>')
+        },
+        isOpened: false,
+        isReady: false
+      }
+    },
+    mounted() {
+      var modalElement = document.querySelector('#photoImportModal')
+      this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+
+      modalElement.addEventListener('show.bs.modal', function (){
+        this.isOpened = true;
+        this.research()
+      }.bind(this));
+
+      modalElement.addEventListener('hide.bs.modal', function() {
+          this.isOpened = false;
+      }.bind(this));
+
+      document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && this.isOpened) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          this.research();
+        }
+      }.bind(this));
+
+      this.isReady = true;
+    },
+    watch: {
+      'unsplash.page': function(newVal, oldVal) {
+        this.searchUnsplash();
+      },
+      'pexels.page': function(newVal, oldVal) {
+        this.searchPexels();
+      }
+    },
+    methods: {
+      research() {
+        this.searchUnsplash();
+        this.searchPexels();
+      },
+      searchUnsplash() {
+        var url = this.unsplash.url
+                      + '?query=' + this.query
+                      + '&page=' + this.unsplash.page
+                      + '&per_page=' + this.parameters.per_page
+                      + '&lang=' + this.parameters.lang
+        this.search(url, this.unsplash);
+      },
+      searchPexels() {
+        var url = this.pexels.url
+                    + '?query=' + this.query
+                    + '&page=' + this.pexels.page
+                    + '&per_page=' + this.parameters.per_page
+                    + '&lang=' + this.parameters.lang
+        this.search(url, this.pexels);
+      },
+      search(url, source) {
+        if (!this.query) {
+          return null;
+        }
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            source.data = JSON.parse(xmlHttp.responseText);
+          }
+        }.bind(this);
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send(null);
+      },
+      selectUnsplash(image) {
+        this.unsplash.selected = image.id;
+        this.pexels.selected = null;
+        this.select(image);
+      },
+      selectPexels(image) {
+        this.unsplash.selected = null;
+        this.pexels.selected = image.id;
+        this.select(image);
+      },
+      select(image) {
+        if (!this.targets.image) {
+          this.targets.image = document.createElement('img');
+          this.targets.image.classList.add('img-fluid', 'img-thumbnail');
+          this.targets.image.width = 1000;
+          this.targets.imageContainer.appendChild(this.targets.image);
+        }
+
+        this.targets.image.setAttribute('src', image.preview);
+        this.targets.imageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
+
+        $(this.targets.credit).summernote('code', image.credit);
+
+        this.modal.hide();
+      }
+    }
+  });
+
+  window.addEventListener('load', function(){
+    setTimeout(function() {
+      app.mount('#photo-import-app');
+    }, 1000);
+  });
+</script>
