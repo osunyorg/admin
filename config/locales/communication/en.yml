@@ -152,6 +152,7 @@ en:
   admin:
     communication:
       blocks:
+        add: Add block
         alerts:
           file_is_too_big: File is too big!
         categories:

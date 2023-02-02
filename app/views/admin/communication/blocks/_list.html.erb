@@ -1,6 +1,6 @@
 <%
 action = ''
-action += link_to t('add'),
+action += link_to t('admin.communication.blocks.add'),
                   new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
                   class: button_classes if can? :create, Communication::Block
 %>
@@ -33,6 +33,9 @@ action += link_to t('add'),
           <% end %>
         </tbody>
       </table>
+      <% if about.blocks.count > 9 %>
+        <%= raw action %>
+      <% end %>
     </div>
   <% end %>
 <% end %>
