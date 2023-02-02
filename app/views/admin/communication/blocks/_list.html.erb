@@ -17,12 +17,12 @@ action += link_to t('add'),
               <td>
                 <%= block.to_s.truncate(50) %><br>
                 <span class="small"><%= block.template_kind_i18n  %></span>
+                <%= render 'admin/application/a11y/status', about: block %>
               </td>
               <td class="p-0">
                 <%= image_tag "communication/blocks/templates/#{block.template_kind}.jpg",
                               height: "100px", alt: '', style:"max-height: 75px" %>
               </td>
-              <td><%= render 'admin/application/a11y/status', about: block %></td>
               <td>
                 <div class="btn-group">
                   <%= duplicate_link block %>

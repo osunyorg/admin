@@ -1,58 +1,56 @@
-<div class="row mt-2">
+<div class="row mt-2 website__sidebar">
   <div class="col-lg-3 col-xl-2">
-    <div class="card">
-      <div class="list-group list-group-flush" role="tablist">
-        <%
-        navigation = [
-          {
-            title: Communication::Website.model_name.human,
-            path: admin_communication_website_path(id: @website, website_id: nil),
-            icon: Icon::COMMUNICATION_WEBSITE_HOME,
-            ability: can?(:read, @website)
-          },
-          {
-            title: Communication::Website::Post.model_name.human(count: 2),
-            path: admin_communication_website_posts_path(website_id: @website),
-            icon: Icon::COMMUNICATION_WEBSITE_POST,
-            ability: can?(:read, Communication::Website::Post)
-          },
-          {
-            title: t('admin.communication.website.pages.structure'),
-            path: admin_communication_website_pages_path(website_id: @website),
-            icon: Icon::COMMUNICATION_WEBSITE_PAGES,
-            ability: can?(:read, Communication::Website::Page)
-          },
-          {
-            title: Communication::Website::Menu.model_name.human(count: 2),
-            path: admin_communication_website_menus_path(website_id: @website),
-            icon: Icon::COMMUNICATION_WEBSITE_MENUS,
-            ability: can?(:read, Communication::Website::Category)
-          }
-        ]
-
-        navigation << {
-          title: t('communication.website.analytics'),
-          path: analytics_admin_communication_website_path(@website.id, website_id: nil),
-          icon:  Icon::COMMUNICATION_WEBSITE_ANALYTICS,
+    <div class="list-group list-group-flush" role="tablist">
+      <%
+      navigation = [
+        {
+          title: Communication::Website.model_name.human,
+          path: admin_communication_website_path(id: @website, website_id: nil),
+          icon: Icon::COMMUNICATION_WEBSITE_HOME,
           ability: can?(:read, @website)
-        } if @website.plausible_url.present?
+        },
+        {
+          title: Communication::Website::Post.model_name.human(count: 2),
+          path: admin_communication_website_posts_path(website_id: @website),
+          icon: Icon::COMMUNICATION_WEBSITE_POST,
+          ability: can?(:read, Communication::Website::Post)
+        },
+        {
+          title: t('admin.communication.website.pages.structure'),
+          path: admin_communication_website_pages_path(website_id: @website),
+          icon: Icon::COMMUNICATION_WEBSITE_PAGES,
+          ability: can?(:read, Communication::Website::Page)
+        },
+        {
+          title: Communication::Website::Menu.model_name.human(count: 2),
+          path: admin_communication_website_menus_path(website_id: @website),
+          icon: Icon::COMMUNICATION_WEBSITE_MENUS,
+          ability: can?(:read, Communication::Website::Category)
+        }
+      ]
 
-        navigation.each_with_index do |object, index|
-          next unless object[:ability]
-          active = index.zero?  ? object[:path] == request.path
-                                : object[:path].in?(request.path)
-        %>
-        <a class="list-group-item list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
-          <%= object[:title].html_safe %>
-          <span class="float-end">
-            <i class="fas fa-<%= object[:icon] %>"></i>
-          </span>
-        </a>
-        <% end %>
-      </div>
+      navigation << {
+        title: t('communication.website.analytics'),
+        path: analytics_admin_communication_website_path(@website.id, website_id: nil),
+        icon:  Icon::COMMUNICATION_WEBSITE_ANALYTICS,
+        ability: can?(:read, @website)
+      } if @website.plausible_url.present?
+
+      navigation.each_with_index do |object, index|
+        next unless object[:ability]
+        active = index.zero?  ? object[:path] == request.path
+                              : object[:path].in?(request.path)
+      %>
+      <a class="list-group-item bg-transparent px-0 list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
+        <%= object[:title].html_safe %>
+        <span class="float-end">
+          <i class="fas fa-<%= object[:icon] %>"></i>
+        </span>
+      </a>
+      <% end %>
     </div>
   </div>
-  <div class="col-lg-9 col-xl-10 offset-xxl-1 col-xxl-9">
+  <div class="col-lg-9 col-xl-10">
     <%= yield %>
   </div>
 </div>
