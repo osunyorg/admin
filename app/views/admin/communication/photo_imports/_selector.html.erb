@@ -66,7 +66,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-                <div class="row pure__row--small" ref="results">
+                <div class="photo_import__unsplash photo_import__unsplash__results row pure__row--small" ref="results">
                   <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
                     <%= t 'photo_import.nothing' %>
                   </p>
@@ -79,7 +79,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="row pure__row--small" ref="results">
+                <div class="photo_import__pexels photo_import__pexels__results row pure__row--small" ref="results">
                   <p v-if="pexels.data.results.length === 0 || !pexels.data" >
                     <%= t 'photo_import.nothing' %>
                   </p>
@@ -96,7 +96,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
           <div class="modal-footer d-block">
             <div class="row">
               <div class="col-md-6">
-                <div class="row">
+                <div class="row photo_import__unsplash photo_import__unsplash__nav">
                   <div class="col-lg-5">
                     <a  href="#"
                         v-if="unsplash.page > 1"
@@ -118,7 +118,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="row">
+                <div class="row photo_import__pexels photo_import__pexels__nav">
                   <div class="col-lg-5">
                     <a  href="#"
                         v-if="pexels.page > 1"
