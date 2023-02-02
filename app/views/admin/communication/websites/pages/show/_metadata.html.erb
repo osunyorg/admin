@@ -2,17 +2,21 @@
 action = link_to t('open'), @page.url, target: :_blank, class: 'btn btn-light btn-xs'
 %>
 <%= osuny_panel t('metadata'), action: action do %>
-  <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('published') %></h3>
+  <%= osuny_label Communication::Website::Page.human_attribute_name('published') %>
   <p><%= t @page.published %></p>
+  <% if @page.is_special_page? %>
+    <%= osuny_label Communication::Website::Page.human_attribute_name('special_page') %>
+    <p><%= t("communication.website.pages.defaults.#{@page.type_key}.title") %></p>
+  <% end %>
   <% unless @page.slug.blank? %>
-    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('slug') %></h3>
+    <%= osuny_label Communication::Website::Page.human_attribute_name('slug') %>
     <p><%= @page.slug %></p>
   <% end %>
-  <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('path') %></h3>
+  <%= osuny_label Communication::Website::Page.human_attribute_name('path') %>
   <p><%= @page.path %></p>
 
   <% if @page.parent %>
-    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('parent') %></h3>
+    <%= osuny_label Communication::Website::Page.human_attribute_name('parent') %>
     <p><%= link_to_if can?(:read, @page.parent),
                       @page.parent,
                       admin_communication_website_page_path(
@@ -23,7 +27,7 @@ action = link_to t('open'), @page.url, target: :_blank, class: 'btn btn-light bt
   <% end %>
 
   <% if can?(:edit, @website) && @page.best_bodyclass %>
-    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('bodyclass') %></h3>
+    <%= osuny_label Communication::Website::Page.human_attribute_name('bodyclass') %>
     <p>
       <%= @page.best_bodyclass %>
       <% if @page.bodyclass.blank? %>
@@ -35,11 +39,11 @@ action = link_to t('open'), @page.url, target: :_blank, class: 'btn btn-light bt
     </p>
   <% end %>
 
-  <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('full_width') %></h3>
+  <%= osuny_label Communication::Website::Page.human_attribute_name('full_width') %>
   <p><%= t @page.full_width %></p>
 
   <% if @page.children.any? %>
-    <h3 class="h5"><%= Communication::Website::Page.human_attribute_name('children') %></h3>
+    <%= osuny_label Communication::Website::Page.human_attribute_name('children') %>
     <ul class="list-unstyled mb-0">
       <% @page.children.ordered.each do |child| %>
         <li>

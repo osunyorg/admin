@@ -117,6 +117,7 @@ class Communication::Website::Page < ApplicationRecord
     blocks.ordered.each do |block|
       b = block.duplicate
       b.about = page
+      b.position = block.position
       b.save
     end
     page

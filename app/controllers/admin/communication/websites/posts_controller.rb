@@ -35,6 +35,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def show
+    @preview = true
     breadcrumb
   end
 

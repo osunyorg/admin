@@ -10,7 +10,8 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
                   notice: t('admin.successfully_created_html', model: @curator.post.to_s)
     else
       breadcrumb
-      flash[:alert] = "Erreur lors de la curation"
+      @url = curation_params[:url]
+      flash[:alert] = t('curation.error')
       render :new, status: :unprocessable_entity
     end
   end

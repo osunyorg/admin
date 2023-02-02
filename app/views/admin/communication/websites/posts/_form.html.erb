@@ -37,7 +37,7 @@
               <%= f.input :pinned %>
             </div>
           </div>
-          <%= f.input :published_at, html5: true %>
+          <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
         <% if current_user.author? || current_user.contributor? %>
           <%= f.input :author_id,

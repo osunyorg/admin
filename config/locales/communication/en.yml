@@ -488,6 +488,7 @@ en:
             edit:
               add_testimonial: Add testimonial
               remove_testimonial: Remove testimonial
+              title_disclaimer: The title above won't show on the website. Nevertheless, it will appear and be clickable in the table of contents if there's one on the page.
               element:
                 text:
                   label: Text
@@ -670,6 +671,10 @@ en:
               persons: Staff
               teachers: Educational staff
               url: URL
+  curation:
+    error: Import error, be sure to use a valid URL
+    label: URL of the post to import
+    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

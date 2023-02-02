@@ -56,6 +56,10 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
     true
   end
 
+  def full_width
+    true
+  end
+
   protected
   
   def current_git_path

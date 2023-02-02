@@ -43,9 +43,9 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithImport
-  include WithMenus
   include WithProgramCategories
   include WithSpecialPages
+  include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithStyle
   include WithTheme
 

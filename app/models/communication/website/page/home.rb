@@ -44,10 +44,6 @@
 #
 class Communication::Website::Page::Home < Communication::Website::Page
 
-  def editable_width?
-    false
-  end
-
   def full_width_by_default?
     true
   end

@@ -54,6 +54,10 @@ module Communication::Website::Page::WithType
     true
   end
 
+  def is_listed_among_children?
+    true
+  end
+
   def editable_width?
     true
   end

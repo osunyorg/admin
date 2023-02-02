@@ -4,76 +4,72 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <%= f.input :parent_id, as: :hidden, wrapper: false %>
-    <h2 class="h3"><%= t('content') %></h2>
-    <div class="card-body">
-      <div class="row pure__row--small">
-        <div class="col-lg-6">
-          <%= f.input :title %>
-        </div>
-        <div class="col-lg-6">
-          <div data-kind-if="url">
-            <%= f.input :url, as: :string %>
-          </div>
-          <div class="<%= 'd-none' unless item.has_about? %> js-about-fields">
-            <%
-              if item.has_about?
-                if item.kind_page?
-                  about_collection = collection_tree @website.pages.where(language_id: current_website_language.id)
-                elsif item.kind_diploma?
-                  about_collection = collection @website.education_diplomas
-                elsif item.kind_program?
-                  about_collection = collection_tree @website.education_programs
-                elsif item.kind_category?
-                  about_collection = collection_tree @website.categories.where(language_id: current_website_language.id)
-                elsif item.kind_post?
-                  about_collection = collection @website.posts.where(language_id: current_website_language.id)
-                elsif item.kind_volume?
-                  about_collection = collection @website.research_volumes
-                elsif item.kind_paper?
-                  about_collection = collection @website.research_papers
-                end
-              else
-                about_collection = []
-              end
-            %>
-            <%= f.association :about,
-                              collection: about_collection,
-                              label_method: ->(p) { sanitize p[:label] },
-                              value_method: ->(p) { p[:id] },
-                              input_html: { class: 'js-about-id' } %>
-            <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-type' } %>
-          </div>
-        </div>
-      </div>
-      <%= f.input :kind,
-                  as: :hidden,
-                  input_html: {
-                    data: {
-                      url: kind_switch_admin_communication_website_menu_items_path
-                    }
-                  } %>
-      <div>
-        <label class="form-label required">
-          <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
-          <abbr title="required">*</abbr>
-        </label>
-        <div class="row pure__row--small">
-          <% @website.menu_item_kinds.keys.each do |kind| %>
-            <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
-              <div class="card kind" data-kind="<%= kind %>">
-                <div class="card-body">
-                  <h3 class="h5">
-                    <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
-                  </h3>
-                  <p class="text-end mb-0">
-                    <i class="<%= Communication::Website::Menu::Item.icon_for(kind) %>"></i><br>
-                  </p>
-                  <a class="stretched-link"></a>
-                </div>
-              </div>
+  <%= f.input :kind,
+              as: :hidden,
+              input_html: {
+                data: {
+                  url: kind_switch_admin_communication_website_menu_items_path
+                }
+              } %>
+  <div>
+    <label class="form-label required">
+      <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
+      <abbr title="required">*</abbr>
+    </label>
+    <div class="row pure__row--small">
+      <% @website.menu_item_kinds.keys.each do |kind| %>
+        <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
+          <div class="card kind" data-kind="<%= kind %>">
+            <div class="card-body">
+              <h3 class="h5">
+                <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
+              </h3>
+              <p class="text-end mb-0">
+                <i class="<%= Communication::Website::Menu::Item.icon_for(kind) %>"></i><br>
+              </p>
+              <a class="stretched-link"></a>
             </div>
-          <% end %>
+          </div>
         </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row pure__row--small">
+    <div class="col-lg-6">
+      <%= f.input :title %>
+    </div>
+    <div class="col-lg-6">
+      <div data-kind-if="url">
+        <%= f.input :url, as: :string %>
+      </div>
+      <div class="<%= 'd-none' unless item.has_about? %> js-about-fields">
+        <%
+          if item.has_about?
+            if item.kind_page?
+              about_collection = collection_tree @website.pages.where(language_id: current_website_language.id)
+            elsif item.kind_diploma?
+              about_collection = collection @website.education_diplomas
+            elsif item.kind_program?
+              about_collection = collection_tree @website.education_programs
+            elsif item.kind_category?
+              about_collection = collection_tree @website.categories.where(language_id: current_website_language.id)
+            elsif item.kind_post?
+              about_collection = collection @website.posts.where(language_id: current_website_language.id)
+            elsif item.kind_volume?
+              about_collection = collection @website.research_volumes
+            elsif item.kind_paper?
+              about_collection = collection @website.research_papers
+            end
+          else
+            about_collection = []
+          end
+        %>
+        <%= f.association :about,
+                          collection: about_collection,
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] },
+                          input_html: { class: 'js-about-id' } %>
+        <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-type' } %>
       </div>
     </div>
   </div>

@@ -65,6 +65,11 @@ module Admin::ApplicationHelper
     raw "<label class=\"form-label\">#{title}</label>"
   end
 
+  def if_appstack(string)
+    return '' if current_admin_theme != 'appstack' 
+    " #{string}"
+  end
+
   def duplicate_link(object)
     return unless can?(:update, object)
     link_to t('admin.duplicate'),
@@ -86,8 +91,14 @@ module Admin::ApplicationHelper
     classes
   end
 
-  def table_classes
-    'table table-hover'
+  def table_classes(with_actions: true)
+    classes = 'table'
+    classes += ' table--with-actions' if with_actions
+    classes
+  end
+
+  def table_actions_cell
+    'text-end pe-0'
   end
 
   def submit(form)

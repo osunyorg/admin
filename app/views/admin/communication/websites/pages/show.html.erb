@@ -4,12 +4,6 @@
 
   <div class="row">
     <div class="col-md-8">
-      <% if @page.is_special_page? %>
-        <p>
-          <%= t('admin.communication.website.pages.is_special_page') %>
-          <b><%= t("communication.website.pages.defaults.#{@page.type_key}.title") %></b>
-        </p>
-      <% end %>
       <%= render 'admin/application/summary/show', about: @page %>
       <%= render 'admin/communication/blocks/list', about: @page %>
       <%= render 'admin/application/dependencies',
