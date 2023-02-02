@@ -1,5 +1,5 @@
 <% pages.each do |page| %>
-  <li class="treeview__element js-treeview-element <%= 'treeview__element--empty' unless page.has_children? %>" data-id="<%= page.id %>" data-parent="<%= page.parent_id %>">
+  <li class="treeview__element js-treeview-element <%= 'treeview__element--draft' unless page.published %> <%= 'treeview__element--empty' unless page.has_children? %>" data-id="<%= page.id %>" data-parent="<%= page.parent_id %>">
     <div class="d-flex align-items-center treeview__label border-bottom p-1">
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
@@ -14,7 +14,7 @@
       <% end %>
       <%= link_to page,
                   admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                  class: "#{'draft' unless page.published?}" %>
+                  class: "page-title" %>
       <% unless page.is_home? %>
         <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
       <% end %>
