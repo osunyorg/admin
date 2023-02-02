@@ -97,9 +97,6 @@ en:
       communication/website/menu:
         identifier: Identifier
         items: Items
-        legal: Legal
-        primary: Main menu
-        social: Social
         title: Title
       communication/website/menu/item:
         about: Target
@@ -569,6 +566,11 @@ en:
         pending: Import in progress
       last_pages: Last pages
       last_posts: Last posts
+      menus:
+        default_title:
+          legal: Legal
+          primary: Main menu
+          social: Social
       pages:
         defaults:
           accessibility:

@@ -97,9 +97,6 @@ fr:
       communication/website/menu:
         identifier: Identifiant
         items: Éléments
-        legal: Informations légales
-        primary: Menu principal
-        social: Liens sociaux
         title: Titre
       communication/website/menu/item:
         about: Cible
@@ -569,6 +566,11 @@ fr:
         pending: Import en cours
       last_pages: Dernières pages
       last_posts: Dernières actualités
+      menus:
+        default_title:
+          legal: Informations légales
+          primary: Menu principal
+          social: Liens sociaux
       pages:
         defaults:
           accessibility:
