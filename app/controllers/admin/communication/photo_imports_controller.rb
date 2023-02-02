@@ -1,4 +1,4 @@
-class Admin::Communication::PhotoImportController < Admin::Communication::ApplicationController
+class Admin::Communication::PhotoImportsController < Admin::Communication::ApplicationController
   layout false
 
   def unsplash
