@@ -12,18 +12,18 @@ action += link_to t('add'),
           <% about.blocks.ordered.each do |block| %>
             <tr data-id="<%= block.id %>" class="<%= 'draft' unless block.published? %>">
               <% if can? :reorder, Communication::Block %>
-                <td class="ps-0"><i class="fa fa-bars handle"></i></td>
+                <td class="ps-0 blocks__list__handle"><i class="fa fa-bars handle"></i></td>
               <% end %>
-              <td>
+              <td class="blocks__list__name">
                 <%= block.to_s.truncate(50) %><br>
                 <span class="small"><%= block.template_kind_i18n  %></span>
                 <%= render 'admin/application/a11y/status', about: block %>
               </td>
-              <td class="p-0">
+              <td class="p-0 blocks__list__image">
                 <%= image_tag "communication/blocks/templates/#{block.template_kind}.jpg",
                               height: "100px", alt: '', style:"max-height: 75px" %>
               </td>
-              <td>
+              <td class="blocks__list__buttons">
                 <div class="btn-group">
                   <%= duplicate_link block %>
                   <%= edit_link block %>
