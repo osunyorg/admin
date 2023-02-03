@@ -43,7 +43,7 @@
         <%= person.biography %>
       <% end %>
     <% end %>
-    
+
     <%= osuny_panel University::Person.human_attribute_name('socials') do %>
       <% unless person.url.blank? %>
         <h3 class="h5"><%= University::Person.human_attribute_name('url') %></h3>
@@ -74,6 +74,7 @@
           <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
         <% end %>
     <% end %>
+    <%= render 'admin/application/i18n/widget', about: person %>
     <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
       <% if person.best_picture_inherits_from_user? %>
         <p>

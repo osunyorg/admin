@@ -25,6 +25,15 @@
 #  zipcode                    :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  default_language_id        :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_universities_on_default_language_id  (default_language_id)
+#
+# Foreign Keys
+#
+#  fk_rails_a8022b1c3f  (default_language_id => languages.id)
 #
 class University < ApplicationRecord
   self.filter_attributes += [:sso_cert]
@@ -43,8 +52,8 @@ class University < ApplicationRecord
   # Can't use dependent: :destroy because of attachments
   # We use after_destroy to let the attachment go first
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
-
   has_many :imports, dependent: :destroy
+  belongs_to :default_language, class_name: "Language"
 
   validates_presence_of :name
   validates :sms_sender_name, presence: true, length: { maximum: 11 }

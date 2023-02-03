@@ -20,6 +20,7 @@ namespace :university do
     end
   end
   resources :people do
+    resources :translations, only: :show, param: :lang, controller: "people/translations"
     member do
       get :static
     end

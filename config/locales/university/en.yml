@@ -5,6 +5,7 @@ en:
         address: Address
         city: City
         country: Country
+        default_language: Default language
         has_sso: Has SSO?
         identifier: Identifier
         invoice_amount: Invoice amount

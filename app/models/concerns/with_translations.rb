@@ -42,7 +42,7 @@ module WithTranslations
     # Handle publication
     translation.published = false if respond_to?(:published)
     # Handle featured image if object has one
-    translate_featured_image(translation) if respond_to?(:featured_image) && featured_image.attached?
+    translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
     translation.save
     # Handle blocks if object has any
     translate_blocks!(translation) if respond_to?(:blocks)
@@ -53,20 +53,21 @@ module WithTranslations
 
   protected
 
-  def translate_featured_image(translation)
-    translation.featured_image.attach(
-      io: URI.open(featured_image.url),
-      filename: featured_image.filename.to_s,
-      content_type: featured_image.content_type
-    )
-  end
-
   def translate_blocks!(translation)
     blocks.ordered.each do |block|
       block_duplicate = block.dup
       block_duplicate.about = translation
       block_duplicate.save
     end
+  end
+
+  # Utility method to duplicate attachments
+  def translate_attachment(translation, attachment_name)
+    translation.public_send(attachment_name).attach(
+      io: URI.open(public_send(attachment_name).url),
+      filename: public_send(attachment_name).filename.to_s,
+      content_type: public_send(attachment_name).content_type
+    )
   end
 
   def translate_additional_data!(translation)

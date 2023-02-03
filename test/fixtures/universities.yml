@@ -25,6 +25,15 @@
 #  zipcode                    :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  default_language_id        :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_universities_on_default_language_id  (default_language_id)
+#
+# Foreign Keys
+#
+#  fk_rails_a8022b1c3f  (default_language_id => languages.id)
 #
 default_university:
   name: Université de test

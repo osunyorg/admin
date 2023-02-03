@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_26_163347) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_135355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -733,6 +733,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_163347) do
     t.string "sso_name_identifier_format"
     t.jsonb "sso_mapping"
     t.string "sso_button_label"
+    t.uuid "default_language_id", null: false
+    t.index ["default_language_id"], name: "index_universities_on_default_language_id"
   end
 
   create_table "university_organizations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -796,6 +798,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_163347) do
     t.string "country"
     t.string "hal_person_identifier"
     t.string "mastodon"
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_people_on_language_id"
+    t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -969,8 +975,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_163347) do
   add_foreign_key "research_theses", "universities"
   add_foreign_key "research_theses", "university_people", column: "author_id"
   add_foreign_key "research_theses", "university_people", column: "director_id"
+  add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_organizations", "universities"
+  add_foreign_key "university_people", "languages"
   add_foreign_key "university_people", "universities"
+  add_foreign_key "university_people", "university_people", column: "original_id"
   add_foreign_key "university_people", "users"
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
