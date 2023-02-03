@@ -117,12 +117,9 @@
     <% end %>
 
     <% if @program.children.any? %>
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= Education::Program.model_name.human(count: 2) %></h5>
-        </div>
+      <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
         <%= render 'admin/education/programs/list', programs: @program.children %>
-      </div>
+      <% end %>
     <% end %>
 
     <%= render 'admin/education/programs/show/cohorts' %>
