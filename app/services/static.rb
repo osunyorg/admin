@@ -9,6 +9,12 @@ class Static
     string
   end
 
+  def self.html_to_text(string)
+    string = ActionController::Base.helpers.strip_tags string
+    string = string.strip
+    string
+  end
+
   def self.render(template_static, about, website)
     code = ApplicationController.render(
       template: template_static,
