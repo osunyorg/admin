@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: osuny_development
+  database: <%= ENV.fetch("OSUNY_DEVELOPMENT_DBNAME", "osuny_development") %>
 
 test:
   <<: *default
