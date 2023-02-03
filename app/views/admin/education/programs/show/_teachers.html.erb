@@ -5,7 +5,7 @@
               class: button_classes if can?(:update, University::Person::Involvement) %>
   <% end %>
 </div>
-<h3 class="h5 mt-4 mb-3"><%= Education::Program.human_attribute_name('teachers') %></h3>
+<h4 class="h5 mt-4 mb-3"><%= Education::Program.human_attribute_name('teachers') %></h4>
 <% if @teacher_involvements.any? %>
   <div class="table-responsive">
     <table class="<%= table_classes %>">
