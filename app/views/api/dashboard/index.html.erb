@@ -1,10 +1,17 @@
 <% content_for :title, 'API' %>
 
 <h2>Lhéo</h2>
-<p>
-  Lhéo est un <a href="http://lheo.gouv.fr/" target="_blank" rel="
-  ">
-    Langage Harmonisé d'Échange d'informations sur l'Offre de formation.
-  </a>. L'API Osuny Lhéo met à disposition toute l'offre de formation à ce format.
-</p>
-<%= link_to 'Accéder à l\'API Lhéo', api_lheo_path, class: 'btn btn-primary' %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      Lhéo est un <a href="http://lheo.gouv.fr/" target="_blank" rel="
+      ">
+        Langage Harmonisé d'Échange d'informations sur l'Offre de formation.
+      </a>. L'API Osuny Lhéo met à disposition toute l'offre de formation à ce format.
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <%= link_to 'Accéder à l\'API Lhéo', api_lheo_path, class: 'btn btn-primary' %>
+  </div>
+</div>
