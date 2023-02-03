@@ -296,14 +296,14 @@ en:
       date_with_hour: "%B %d, %Y %H:%M"
   today: Today
   true: Yes
-  unsplash:
+  photo_import:
     next: Next image
     nothing: No results for this search
     open: Search an image
     placeholder: Type your search here
     previous: Previous images
     search: Search
-    title: Images on Unsplash
+    title: Photo search
   validate: Validate
   views:
     pagination:

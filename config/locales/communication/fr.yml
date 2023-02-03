@@ -118,6 +118,7 @@ fr:
         published: Publié ?
         related_category: Catégorie liée
         slug: Identifiant
+        special_page: Page spéciale
         text: Texte principal de la page
         title: Titre
         website: Site Web
@@ -149,6 +150,7 @@ fr:
   admin:
     communication:
       blocks:
+        add: Ajouter un bloc
         alerts:
           file_is_too_big: Le fichier est trop lourd !
         categories:
@@ -537,7 +539,6 @@ fr:
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page
-          is_special_page: "Ceci est une page avec un comportement spécial :"
           structure: Arborescence
         post:
           pinned_status: Mise en avant

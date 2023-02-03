@@ -118,6 +118,7 @@ en:
         published: Published?
         related_category: Related category
         slug: Slug
+        special_page: Special page
         text: Main page text
         title: Title
         website: Website
@@ -149,6 +150,7 @@ en:
   admin:
     communication:
       blocks:
+        add: Add block
         alerts:
           file_is_too_big: File is too big!
         categories:
@@ -537,7 +539,6 @@ en:
       website:
         pages:
           delete_special_page_notice: Can't delete this page
-          is_special_page: "This is a page with a special behaviour:"
           structure: Structure
         post:
           pinned_status: Pinned status

@@ -296,14 +296,14 @@ fr:
       date_with_hour: "%d %B %Y %H:%M"
   today: Aujourd'hui
   true: Oui
-  unsplash:
+  photo_import:
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche
     open: Chercher une image
     placeholder: Tapez votre recherche
     previous: Images précédentes
     search: Chercher
-    title: Recherche d'image sur Unsplash
+    title: Recherche d'image
   validate: Valider
   views:
     pagination:

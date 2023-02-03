@@ -31,7 +31,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def create
-    @volume.add_unsplash_image params[:unsplash]
+    @volume.add_photo_import params[:photo_import]
     @volume.assign_attributes(journal: @journal, university: current_university)
     if @volume.save_and_sync
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
@@ -42,7 +42,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def update
-    @volume.add_unsplash_image params[:unsplash]
+    @volume.add_photo_import params[:photo_import]
     if @volume.update_and_sync(volume_params)
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
     else

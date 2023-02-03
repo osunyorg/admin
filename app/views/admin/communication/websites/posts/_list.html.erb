@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <% posts.each do |post| %>
-        <tr>
+        <tr <% unless post.published? %>class="draft"<% end %>>
           <% if selectable %>
             <td class="ps-0">
               <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %>

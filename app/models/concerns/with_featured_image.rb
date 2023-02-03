@@ -24,8 +24,12 @@ module WithFeaturedImage
     best_featured_image_source.featured_image_credit
   end
 
-  def add_unsplash_image(id)
-    return if id.blank?
+  def add_photo_import(params)
+    photo_import_unsplash(params['unsplash']) if params['unsplash'].present?
+    photo_import_pexels(params['pexels']) if params['pexels'].present?
+  end
+
+  def photo_import_unsplash(id)
     photo = Unsplash::Photo.find id
     url = "#{photo['urls']['full']}&w=2048&fit=max"
     filename = "#{photo['id']}.jpg"
@@ -34,6 +38,18 @@ module WithFeaturedImage
       featured_image.attach(io: file, filename: filename)
       photo.track_download
     rescue
+    end
+  end
+
+  def photo_import_pexels(id)
+    photo = Pexels::Client.new.photos.find id
+    url = "#{photo.src['original']}?auto=compress&cs=tinysrgb&w=2048"
+    filename = "#{photo.id}.png"
+    begin
+      file = URI.open url
+      featured_image.attach(io: file, filename: filename)
+    rescue
+      byebug
     end
   end
 end
