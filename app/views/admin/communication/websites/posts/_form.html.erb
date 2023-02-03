@@ -39,16 +39,9 @@
           </div>
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
-        <% if current_user.author? || current_user.contributor? %>
-          <%= f.input :author_id,
-                      as: :hidden,
-                      input_html: { value: current_user.person&.id },
-                      wrapper: false %>
-        <% else %>
-          <%= f.association :author,
-                            collection: current_university.people.ordered,
+        <%= f.association :author,
+                            collection: current_university.people.where(language_id: current_university.default_language_id).ordered,
                             label_method: :to_s_alphabetical %>
-        <% end %>
         <%= f.input :slug,
                     as: :string,
                     input_html: post.persisted? ? {} : {

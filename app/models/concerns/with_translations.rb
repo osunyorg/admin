@@ -7,6 +7,12 @@ module WithTranslations
     has_many    :translations, class_name: base_class.to_s, foreign_key: :original_id, dependent: :nullify
   end
 
+  def find_or_translate!(language)
+    translation = translation_for(language)
+    translation ||= translate!(language)
+    translation
+  end
+
   def translation_for(language)
     # If current language is language, returns itself
     return self if language_id == language.id
@@ -28,8 +34,7 @@ module WithTranslations
 
     # Translate parent if needed
     if respond_to?(:parent_id) && parent_id.present?
-      parent_translation = parent.translation_for(language)
-      parent_translation ||= parent.translate!(language)
+      parent_translation = parent.find_or_translate!(language)
       translation.parent_id = parent_translation&.id
     end
 
