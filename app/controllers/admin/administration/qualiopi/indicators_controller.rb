@@ -6,6 +6,10 @@ class Admin::Administration::Qualiopi::IndicatorsController < Admin::Administrat
   end
 
   def show
+    dir = "admin/administration/qualiopi/evaluations/"
+    file = "#{dir}_criterion_#{@indicator.number}"
+    file_exists = lookup_context.find_all(file).any? 
+    @partial = "#{dir}criterion_#{@indicator.number}" if file_exists
     breadcrumb
   end
 

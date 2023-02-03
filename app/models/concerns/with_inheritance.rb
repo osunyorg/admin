@@ -23,7 +23,8 @@ module WithInheritance
 
   def best(property)
     value = send(property)
-    text = Static.html_to_text value.to_html
+    text = value.nil? ? '' : value.to_html
+    text = Static.html_to_text text
     text.blank? ? parent&.send("best_#{property}") : value
   end
 
