@@ -15,6 +15,7 @@ class Static
   
   def self.blank?(html)
     text = ActionController::Base.helpers.strip_tags html
+    text = '' if text.nil?
     text = text.strip
     text.blank?
   end
