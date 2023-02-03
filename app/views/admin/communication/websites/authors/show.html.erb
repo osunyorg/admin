@@ -3,19 +3,12 @@
 <%= render 'admin/communication/websites/sidebar' do %>
   <%= render 'admin/university/people/main_infos', person: @author %>
 
-  <% if @posts.total_count > 0 %>
-    <div class="card">
-      <div class="card-header">
-        <h5><%= "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %></h5>
-      </div>
+  <% if @posts.any? %>
+    <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
+                    subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase}" do %>
       <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_author: true %>
-      <% if @posts.total_pages > 1 %>
-        <div class="card-footer">
-          <%= paginate @posts, theme: 'bootstrap-5' %>
-        </div>
-      <% end %>
-    </div>
-
+      <%= paginate @posts, theme: 'bootstrap-5' if @posts.total_pages > 1 %>
+    <% end %>
   <% end %>
 <% end %>
 
