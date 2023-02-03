@@ -8,15 +8,14 @@ class Static
     string = string[0..-2] if string.end_with?('/')
     string
   end
-  
+
   def self.has_content?(html)
     !blank?(html)
   end
-  
+
   def self.blank?(html)
     text = ActionController::Base.helpers.strip_tags html
-    text = '' if text.nil?
-    text = text.strip
+    text = text.to_s.strip
     text.blank?
   end
 
