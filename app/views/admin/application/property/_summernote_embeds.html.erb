@@ -1,4 +1,4 @@
-<h3 class="h5"><%= object.class.human_attribute_name(property) %></h3>
+<%= osuny_label object.class.human_attribute_name(property) %>
 <% if object.summernote_embeds.any? %>
   <% object.summernote_embeds.each do |embed| %>
     <div class="row mb-3">

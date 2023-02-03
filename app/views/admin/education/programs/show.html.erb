@@ -8,18 +8,12 @@
                 collapsed: false do %>
       <div class="row">
         <div class="col-lg-6">
-          <h3 class="h5">
-            <%= Education::Program.human_attribute_name('name') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('name') %>
           <p><%= @program.name %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('diploma') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('diploma') %>
           <p><%= link_to @program.diploma, [:admin, @program.diploma] if @program.diploma %></p>
           <% if @program.schools.any? %>
-            <h3 class="h5 mt-4">
-              <%= Education::Program.human_attribute_name('schools') %>
-            </h3>
+            <%= osuny_label Education::Program.human_attribute_name('schools') %>
             <ul class="list-unstyled">
               <% @program.schools.ordered.each do |school| %>
                 <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
@@ -28,30 +22,18 @@
           <% end %>
         </div>
         <div class="col-lg-6">
-          <h3 class="h5">
-            <%= Education::Program.human_attribute_name('short_name') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('short_name') %>
           <p><%= @program.short_name %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('capacity') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('capacity') %>
           <p><%= @program.capacity %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('initial') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('initial') %>
           <p><%= t @program.initial %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('continuing') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('continuing') %>
           <p><%= t @program.continuing %></p>
-          <h3 class="h5 mt-4">
-            <%= Education::Program.human_attribute_name('apprenticeship') %>
-          </h3>
+          <%= osuny_label Education::Program.human_attribute_name('apprenticeship') %>
           <p><%= t @program.apprenticeship %></p>
           <% if @program.downloadable_summary.attached? %>
-            <h3 class="h5 mt-4">
-              <%= Education::Program.human_attribute_name('downloadable_summary') %>
-            </h3>
+            <%= osuny_label Education::Program.human_attribute_name('downloadable_summary') %>
             <p><%= link_to "#{@program.downloadable_summary.filename} (#{ number_to_human_size @program.downloadable_summary.blob.byte_size })",
                             url_for(@program.downloadable_summary),
                             target: :_blank %></p>
@@ -105,7 +87,7 @@
           <%= render 'admin/application/property/text', object: @program, property: :accessibility %>
           <%= render 'admin/application/property/text', object: @program, property: :contacts %>
           <% if @program.registration_url.present? %>
-            <h3 class="h5"><%= Education::Program.human_attribute_name(:registration_url) %></h3>
+            <%= osuny_label Education::Program.human_attribute_name(:registration_url) %>
             <p><%= link_to @program.registration_url, @program.registration_url, target: :_blank %></p>
           <% end %>
         </div>
@@ -123,12 +105,12 @@
   </div>
   <div class="col-lg-4 col-xxl-3">
     <%= render 'admin/education/programs/forms/part', part: :technical do %>
-      <h3 class="h5"><%= Education::Program.human_attribute_name('published') %></h3>
+      <%= osuny_label Education::Program.human_attribute_name('published') %>
       <p><%= t @program.published %></p>
-      <h3 class="h5"><%= Education::Program.human_attribute_name('slug') %></h3>
+      <%= osuny_label Education::Program.human_attribute_name('slug') %>
       <p><%= @program.slug %></p>
       <% if @program.parent %>
-        <h3 class="h5"><%= Education::Program.human_attribute_name('parent') %></h3>
+        <%= osuny_label Education::Program.human_attribute_name('parent') %>
         <p><%= link_to @program.parent, [:admin, @program.parent] %></p>
       <% end %>
     <% end %>

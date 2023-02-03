@@ -61,8 +61,8 @@ module Admin::ApplicationHelper
     end
   end
   
-  def osuny_label(title)
-    raw "<label class=\"form-label\">#{title}</label>"
+  def osuny_label(title, classes: '')
+    raw "<label class=\"form-label #{classes}\">#{title}</label>"
   end
 
   def if_appstack(string)
