@@ -101,7 +101,7 @@ fr:
           hint: Haut de page, résumé de la formation.
         presentation:
           label: Présentation
-          hint: Complétées par les blocs, afin de permettre une présentation libre et riche de la formation.
+          hint: Complétée par les blocs, afin de permettre un descriptif libre et riche de la formation.
         pedagogy:
           label: Pédagogie
           hint: Mode d'enseignement et d'évaluation, et présentation de l'équipe pédagogique.

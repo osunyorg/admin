@@ -62,10 +62,7 @@
     <%= render 'admin/education/programs/forms/part', part: :presentation, collapsed: true do %>
       <div class="row">
         <div class="col-xxl-6">
-          <h3 class="h5">
-            <%= Education::Program.human_attribute_name('presentation') %>
-          </h3>
-          <p><%= @program.presentation %></p>
+          <%= render 'admin/application/property/text', object: @program, property: :presentation %>
         </div>
         <div class="col-xxl-6">
           <%= render 'admin/application/property/text', object: @program, property: :objectives %>

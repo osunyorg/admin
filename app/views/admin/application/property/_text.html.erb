@@ -4,6 +4,7 @@ if object.respond_to? "best_#{property}"
   value = object.public_send("best_#{property}").to_s
   source = object.public_send("best_#{property}_source")
 end
+text = Static.html_to_text value
 %>
 <h3 class="h5">
   <%= object.class.human_attribute_name(property) %>
@@ -15,7 +16,7 @@ end
   <% end %>
 </h3>
 <p>
-  <% if value.blank? %>
+  <% if text.blank? %>
     <i class="fa fa-exclamation-circle text-danger"></i>
     <%= t 'properties.text.missing' %>
   <% else %>
