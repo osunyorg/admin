@@ -49,8 +49,6 @@ class University::Organization < ApplicationRecord
            class_name: 'University::Person::Experience',
            dependent: :destroy
 
-  has_summernote :text
-
   has_one_attached_deletable :logo
   has_one_attached_deletable :logo_on_dark_background
 

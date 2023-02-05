@@ -57,8 +57,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithType
   include WithPermalink
 
-  has_summernote :text
-
   belongs_to :website,
              foreign_key: :communication_website_id
   belongs_to :parent,

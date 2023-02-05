@@ -38,8 +38,6 @@ class Research::Journal::Volume < ApplicationRecord
   include WithPermalink
   include WithSlug
 
-  has_summernote :text
-
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :papers, foreign_key: :research_journal_volume_id, dependent: :nullify
   has_many :websites, -> { distinct }, through: :journal

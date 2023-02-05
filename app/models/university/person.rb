@@ -69,8 +69,6 @@ class University::Person < ApplicationRecord
 
   enum gender: { male: 0, female: 1, non_binary: 2 }
 
-  has_summernote :biography
-
   belongs_to :user, optional: true
 
   has_and_belongs_to_many :research_journal_papers,

@@ -45,8 +45,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
 
-  has_summernote :text
-
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
           dependent: :destroy
