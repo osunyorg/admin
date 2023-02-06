@@ -1,25 +1,21 @@
 <%
 if about.respond_to?(:website)
-  languages = about.website.languages
+  languages = about.website.languages.ordered
   route_args = [:admin, about.becomes(about.class.base_class)]
 else
-  languages = Language.all
+  languages = Language.all.ordered
   route_args = [:admin, about.becomes(about.class.base_class), :translation]
 end
 %>
 <%= osuny_panel t('internationalization.label') do %>
-  <p><%= t('internationalization.text_html', lang: t("languages.#{about.language.iso_code}")) %></p>
-  <h3 class="h5 mt-4"><%= t('internationalization.translations_title') %></h3>
   <ol class="list-unstyled">
     <% languages.each do |language| %>
-      <% next if language.id == about.language_id %>
+      <% 
+      label = t(language.iso_code, scope: :languages)
+      current = language.id == about.language_id
+      %>
       <li>
-        <% if about.original_with_translations.detect { |translation| translation.language_id == language.id }.present? %>
-          <i class="fas fa-edit float-end"></i>
-        <% else %>
-          <i class="fas fa-add float-end"></i>
-        <% end %>
-        <%= link_to t(language.iso_code, scope: :languages), [*route_args, lang: language.iso_code] %>
+        <%= link_to_unless current, label, [*route_args, lang: language.iso_code] %>
       </li>
     <% end %>
   </ol>

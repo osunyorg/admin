@@ -210,8 +210,6 @@ fr:
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
   internationalization:
     label: Internationalisation
-    text_html: Cette page est en <b>%{lang}</b>
-    translations_title: 'Traductions'
   languages:
     en: Anglais
     fr: Français
