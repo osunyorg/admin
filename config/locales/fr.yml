@@ -211,7 +211,7 @@ fr:
   internationalization:
     label: Internationalisation
     text_html: Cette page est en <b>%{lang}</b>
-    translations_title: 'Traductions :'
+    translations_title: 'Traductions'
   languages:
     en: Anglais
     fr: Français
