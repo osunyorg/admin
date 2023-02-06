@@ -29,6 +29,11 @@ module WithTranslations
     original_object.translations + [original_object]
   end
 
+  # Used by Hugo to link translations with themselves
+  def static_translation_key
+    "#{self.class.polymorphic_name.parameterize}-#{self.original_object.id}"
+  end
+
   def translate!(language)
     translation = self.dup
 
