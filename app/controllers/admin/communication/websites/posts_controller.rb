@@ -14,7 +14,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def index
     @posts = apply_scopes(@posts).where(language_id: current_website_language.id).ordered.page params[:page]
-    @authors =  @website.authors.accessible_by(current_ability)
+    @authors =  @website.authors.where(language_id: current_website_language.id)
+                                .accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
     @root_categories = @website.categories.where(language_id: current_website_language.id).root.ordered
@@ -50,7 +51,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def new
     @post.website = @website
-    @post.author_id = current_user.person&.id
+    if current_user.person.present?
+      @post.author_id = current_user.person.find_or_translate!(current_website_language).id
+    end
     breadcrumb
   end
 

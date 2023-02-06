@@ -40,7 +40,7 @@
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
         <%= f.association :author,
-                            collection: current_university.people.where(language_id: current_university.default_language_id).ordered,
+                            collection: current_university.people.where(language_id: current_website_language.id).ordered,
                             label_method: :to_s_alphabetical %>
         <%= f.input :slug,
                     as: :string,
