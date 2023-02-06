@@ -187,5 +187,6 @@ class Communication::Website::Post < ApplicationRecord
       translated_category = category.find_or_translate!(translation.language)
       translation.categories << translated_category
     end
+    translation.update(author_id: author.find_or_translate!(translation.language).id) if author_id.present?
   end
 end
