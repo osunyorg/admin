@@ -1,11 +1,14 @@
 <div class="card flex-fill">
   <% if title %>
-    <div class="card-header">
-      <% if action %>
-        <div class="float-end"><%= raw action %></div>
-      <% end %>
-      <h2 class="card-title mb-0"><%= title  %></h2>
-    </div>
+  <div class="card-header mb-n4">
+    <% if action %>
+      <div class="float-end"><%= raw action %></div>
+    <% end %>
+    <h2 class="card-title mb-0"><%= title  %></h2>
+    <% if subtitle %>
+      <p class="text-muted"><%= subtitle %></p>
+    <% end %>
+  </div>
   <% end %>
   <div class="card-body">
     <%= yield %>

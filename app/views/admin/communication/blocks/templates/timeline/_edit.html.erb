@@ -1,31 +1,29 @@
 <%= block_component_edit :layout %>
 <%= block_component_add_element t('.add_event') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="list-group">
-  <div v-for="(element, index) in data.elements" class="list-group-item">
-    <div class="d-flex">
-      <div>
-        <a class="btn ps-0 pt-0 dragHandle">
-          <i class="fa fa-bars handle"></i>
-        </a>
-      </div>
-      <div class="flex-fill">
-        <div class="row mb-n3">
-          <div class="col-lg-5">
-            <%= block_component_edit :title, template: @element %>
-          </div>
-          <div class="col-lg-7">
-            <%= block_component_edit :text, template: @element %>
-          </div>
+<draggable :list="data.elements" handle=".dragHandle" class="<%= if_appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
+    <div>
+      <a class="btn ps-0 pt-0 dragHandle">
+        <i class="fa fa-bars handle"></i>
+      </a>
+    </div>
+    <div class="flex-fill">
+      <div class="row pure__row--small mb-n3">
+        <div class="col-lg-5">
+          <%= block_component_edit :title, template: @element %>
+        </div>
+        <div class="col-lg-7">
+          <%= block_component_edit :text, template: @element %>
         </div>
       </div>
-      <div>
-        <a  class="btn btn-sm btn-danger ms-3"
-            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-            title="<%= t '.remove_event' %>">
-            <i class="fas fa-times"></i>
-        </a>
-      </div>
+    </div>
+    <div>
+      <a  class="btn btn-sm text-danger ms-3"
+          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          title="<%= t '.remove_event' %>">
+          <i class="fas fa-times"></i>
+      </a>
     </div>
   </div>
 </draggable>

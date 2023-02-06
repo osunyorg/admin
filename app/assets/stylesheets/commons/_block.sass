@@ -6,25 +6,21 @@
         display: none
 
 .fake-table
-    display: table
     border-collapse: collapse
     caption-side: bottom
-    border: 1px solid $border-color
+    display: table
     .thead, .tbody
         display: table-row-group
+        .tr
+            .td
+                padding-bottom: 5px
+                padding-right: 5px
     .tr
         display: table-row
-        border-bottom: 1px solid $border-color
     .td
         display: table-cell
         min-width: 120px
-        &:not(:first-child)
-            border-left: 1px solid  $border-color
     .thead
         white-space: nowrap
-    .tbody
-        .tr
-            &:nth-child(even)
-                background: $table-striped-bg
-            &:hover
-                background: $table-hover-bg
+        .btn-danger
+            margin-left: 5px

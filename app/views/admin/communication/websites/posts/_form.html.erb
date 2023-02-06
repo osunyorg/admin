@@ -36,7 +36,7 @@
               <%= f.input :pinned %>
             </div>
           </div>
-          <%= f.input :published_at, html5: true %>
+          <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
         <% if @website.languages.many? %>
           <%= f.input :language_id, collection: @website.languages, include_blank: false %>

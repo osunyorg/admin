@@ -19,7 +19,10 @@ bodyclass: <%= @about.best_bodyclass %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @about.children.published.any? %>
 children:
-<% @about.children.published.ordered.each do |child| %>
+<% 
+@about.children.published.ordered.each do |child|
+  next unless child.is_listed_among_children?
+%>
   - <%= child.path %>
 <% end %>
 <% end %>

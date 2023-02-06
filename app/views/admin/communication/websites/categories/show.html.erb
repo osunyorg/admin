@@ -7,51 +7,42 @@
       <%= render 'admin/communication/blocks/list', about: @category %>
     </div>
     <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h2 class="card-title mb-0 h5"><%= t('metadata') %></h2>
-        </div>
-        <div class="card-body">
-          <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('slug') %></h3>
-          <p><%= @category.slug %></p>
-          <% if @category.parent %>
-            <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('parent') %></h3>
-            <p><%= link_to_if can?(:read, @category.parent),
-                            @category.parent,
-                            admin_communication_website_category_path(
-                              website_id: @website.id,
-                              id: @category.parent.id
-                            ) %></p>
-          <% end %>
-          <% if @category.children.any? %>
-            <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('children') %></h3>
-            <ul class="list-unstyled mb-0">
-              <% @category.children.each do |child| %>
-                <li><%= link_to_if can?(:read, child),
-                                child,
-                                admin_communication_website_category_path(
-                                  website_id: @website.id,
-                                  id: child.id
-                                ) %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
-      </div>
+      <%= osuny_panel t('metadata') do %>
+        <%= osuny_label Communication::Website::Category.human_attribute_name('slug') %>
+        <p><%= @category.slug %></p>
+        <% if @category.parent %>
+          <%= osuny_label Communication::Website::Category.human_attribute_name('parent') %>
+          <p><%= link_to_if can?(:read, @category.parent),
+                          @category.parent,
+                          admin_communication_website_category_path(
+                            website_id: @website.id,
+                            id: @category.parent.id
+                          ) %></p>
+        <% end %>
+        <% if @category.children.any? %>
+          <%= osuny_label Communication::Website::Category.human_attribute_name('children') %>
+          <ul class="list-unstyled mb-0">
+            <% @category.children.each do |child| %>
+              <li><%= link_to_if can?(:read, child),
+                              child,
+                              admin_communication_website_category_path(
+                                website_id: @website.id,
+                                id: child.id
+                              ) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
       <%= render 'admin/application/featured_image/show', about: @category %>
       <%= render 'admin/application/meta_description/show', about: @category %>
     </div>
   </div>
   <% if @posts.total_count > 0 %>
-    <div class="card">
-      <div class="card-header">
-        <h5><%= "#{Communication::Website::Post.model_name.human(count: 2)} (#{@posts.total_count})" %></h5>
-      </div>
+    <%= osuny_panel Communication::Website::Post.model_name.human(count: 2), 
+                    subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>
       <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_category: true %>
-      <div class="card-footer">
-        <%= paginate @posts, theme: 'bootstrap-5' %>
-      </div>
-    </div>
+      <%= paginate @posts, theme: 'bootstrap-5' %>
+    <% end %>
   <% end %>
 <% end %>
 

@@ -65,7 +65,7 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at, if: :published_changed?
+  before_validation :set_published_at
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   scope :published, -> {
@@ -80,7 +80,7 @@ class Communication::Website::Post < ApplicationRecord
       DATE(communication_website_posts.published_at) > now()
     ")
   }
-  scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
+  scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }

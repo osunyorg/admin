@@ -48,7 +48,8 @@ main.content
 
 h1
     margin-bottom: 30px
-
+p
+    color: black
 .sidebar-nav .fas
     min-width: 20px
 
@@ -75,6 +76,10 @@ h1
 .sidebar-item.active > .sidebar-link
     color: white
 
+.website__sidebar
+    .list-group-item.active
+        color: $primary
+    
 #topbar
     padding-left: $grid-gutter-width
     padding-right: $grid-gutter-width
@@ -114,3 +119,32 @@ h1
 
 .pure__separation
     display: none
+
+// Menu item
+.kind--selected
+    *
+        color: white
+
+// Photo imports
+.photo_import
+    &__unsplash
+        border-right: 1px solid rgba(0, 0, 0, 0.3)
+
+// Bloc datatable
+.fake-table
+    border: 1px solid $border-color
+    display: table
+    margin-bottom: 10px
+    .tr
+        border-bottom: 1px solid $border-color
+    .td
+        min-width: 120px
+        padding: 10px !important
+        &:not(:first-child)
+            border-left: 1px solid  $border-color
+    .tbody
+        .tr
+            &:nth-child(even)
+                background: $table-striped-bg
+            &:hover
+                background: $table-hover-bg

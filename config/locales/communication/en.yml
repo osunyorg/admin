@@ -121,6 +121,7 @@ en:
         published: Published?
         related_category: Related category
         slug: Slug
+        special_page: Special page
         text: Main page text
         title: Title
         website: Website
@@ -151,6 +152,7 @@ en:
   admin:
     communication:
       blocks:
+        add: Add block
         alerts:
           file_is_too_big: File is too big!
         categories:
@@ -485,6 +487,7 @@ en:
             edit:
               add_testimonial: Add testimonial
               remove_testimonial: Remove testimonial
+              title_disclaimer: The title above won't show on the website. Nevertheless, it will appear and be clickable in the table of contents if there's one on the page.
               element:
                 text:
                   label: Text
@@ -536,7 +539,6 @@ en:
       website:
         pages:
           delete_special_page_notice: Can't delete this page
-          is_special_page: "This is a page with a special behaviour:"
           structure: Structure
         post:
           pinned_status: Pinned status
@@ -667,6 +669,10 @@ en:
               persons: Staff
               teachers: Educational staff
               url: URL
+  curation:
+    error: Import error, be sure to use a valid URL
+    label: URL of the post to import
+    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

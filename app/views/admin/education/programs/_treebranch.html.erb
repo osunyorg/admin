@@ -1,5 +1,5 @@
 <% programs.each do |program| %>
-  <li class="treeview__element js-treeview-element <%= 'treeview__element--empty' unless program.has_children? %>" data-id="<%= program.id %>" data-parent="<%= program.parent_id %>">
+  <li class="treeview__element js-treeview-element <%= 'treeview__element--draft' unless program.published %> <%= 'treeview__element--empty' unless program.has_children? %>" data-id="<%= program.id %>" data-parent="<%= program.parent_id %>">
     <div class="d-flex align-items-center treeview__label border-bottom p-1">
       <%= link_to children_admin_education_program_path(id: program.id),
                   class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
@@ -14,7 +14,7 @@
       <% end %>
       <%= link_to program,
                   admin_education_program_path(id: program.id),
-                  class: "#{'draft' unless program.published?}"  %>
+                  class: 'leaf-title'  %>
       <span class="move_btn py-2 ps-2"><i class="fas fa-sort"></i></span>
       <%= link_to children_admin_education_program_path(id: program.id),
                   class: 'js-treeview-openzone small ps-2', remote: true do %>

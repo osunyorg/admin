@@ -1,12 +1,6 @@
 <% if @program.cohorts.any? %>
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <div class="float-end">
-        <%= @program.alumni.count %>
-        <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
-      </div>
-      <h5 class="card-title mb-0"><%= Education::Cohort.model_name.human(count: 2) %></h5>
-    </div>
+  <%= osuny_panel Education::Cohort.model_name.human(count: 2),
+                  subtitle: "#{@program.alumni.count} #{University::Person::Alumnus.model_name.human(count: @program.alumni.count).downcase}" do %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">
         <thead>
@@ -32,5 +26,5 @@
         </tbody>
       </table>
     </div>
-  </div>
+  <% end %>
 <% end %>

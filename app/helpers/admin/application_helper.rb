@@ -61,8 +61,13 @@ module Admin::ApplicationHelper
     end
   end
   
-  def osuny_label(title)
-    raw "<label class=\"form-label\">#{title}</label>"
+  def osuny_label(title, classes: '')
+    raw "<label class=\"form-label #{classes}\">#{title}</label>"
+  end
+
+  def if_appstack(string)
+    return '' if current_admin_theme != 'appstack' 
+    " #{string}"
   end
 
   def duplicate_link(object)
@@ -86,8 +91,14 @@ module Admin::ApplicationHelper
     classes
   end
 
-  def table_classes
-    'table table-hover'
+  def table_classes(with_actions: true)
+    classes = 'table'
+    classes += ' table--with-actions' if with_actions
+    classes
+  end
+
+  def table_actions_cell
+    'text-end pe-0'
   end
 
   def submit(form)

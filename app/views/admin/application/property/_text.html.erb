@@ -4,18 +4,16 @@ if object.respond_to? "best_#{property}"
   value = object.public_send("best_#{property}").to_s
   source = object.public_send("best_#{property}_source")
 end
+title = object.class.human_attribute_name(property)
+if source
+  title += ' <span class="small">'
+  title += t 'admin.inheritance.sentence_html', link: link_to(source, [:admin, source])
+  title += '</span>'
+end
 %>
-<h3 class="h5">
-  <%= object.class.human_attribute_name(property) %>
-  <% if source %>
-    <span class="small text-muted">
-      <%= t 'admin.inheritance.sentence_html',
-            link: link_to(source, [:admin, source]) %>
-    </span>
-  <% end %>
-</h3>
+<%= osuny_label title %>
 <p>
-  <% if value.blank? %>
+  <% if Static.blank?(value) %>
     <i class="fa fa-exclamation-circle text-danger"></i>
     <%= t 'properties.text.missing' %>
   <% else %>

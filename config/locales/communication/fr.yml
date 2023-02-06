@@ -121,6 +121,7 @@ fr:
         published: Publié ?
         related_category: Catégorie liée
         slug: Identifiant
+        special_page: Page spéciale
         text: Texte principal de la page
         title: Titre
         website: Site Web
@@ -151,6 +152,7 @@ fr:
   admin:
     communication:
       blocks:
+        add: Ajouter un bloc
         alerts:
           file_is_too_big: Le fichier est trop lourd !
         categories:
@@ -427,7 +429,7 @@ fr:
           partners:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
-              add_partner: Ajouter un partenaire
+              add_partner: Ajouter une organisation
               alphabetical:
                 label: Ordre alphabétique
               description:
@@ -487,6 +489,7 @@ fr:
             edit:
               add_testimonial: Ajouter un témoignage
               remove_testimonial: Enlever le témoignage
+              title_disclaimer: Le titre ci-dessus ne s'affichera pas dans le site Web. Il sera en revanche présent et cliquable dans la table des matières, si elle est présente.
               element:
                 text:
                   label: Texte
@@ -538,7 +541,6 @@ fr:
       website:
         pages:
           delete_special_page_notice: Impossible de supprimer cette page
-          is_special_page: "Ceci est une page avec un comportement spécial :"
           structure: Arborescence
         post:
           pinned_status: Mise en avant
@@ -669,6 +671,10 @@ fr:
               persons: Équipe
               teachers: Équipe pédagogique
               url: URL
+  curation:
+    error: Erreur lors de la curation, veillez à utiliser une URL valide
+    label: URL de l'article à importer
+    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:
