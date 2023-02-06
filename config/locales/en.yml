@@ -210,8 +210,6 @@ en:
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
   internationalization:
     label: Internationalization
-    text_html: This page is in <b>%{lang}</b>
-    translations_title: 'Translations:'
   languages:
     en: English
     fr: French
