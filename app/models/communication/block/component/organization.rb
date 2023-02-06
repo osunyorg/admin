@@ -12,4 +12,8 @@ class Communication::Block::Component::Organization < Communication::Block::Comp
     ]
   end
 
+  def translate!
+    # TODO: Traduction des Organisations à faire
+  end
+
 end

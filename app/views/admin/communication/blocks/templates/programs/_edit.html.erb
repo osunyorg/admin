@@ -1,4 +1,3 @@
-<% pages = collection_tree(@block.university.programs) %>
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3 <%= if_appstack 'list-group' %>">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
     <div>

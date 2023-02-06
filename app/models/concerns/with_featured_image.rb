@@ -48,8 +48,6 @@ module WithFeaturedImage
     begin
       file = URI.open url
       featured_image.attach(io: file, filename: filename)
-    rescue
-      byebug
     end
   end
 end

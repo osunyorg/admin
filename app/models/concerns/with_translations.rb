@@ -60,9 +60,7 @@ module WithTranslations
 
   def translate_blocks!(translation)
     blocks.ordered.each do |block|
-      block_duplicate = block.dup
-      block_duplicate.about = translation
-      block_duplicate.save
+      block.translate!(translation)
     end
   end
 

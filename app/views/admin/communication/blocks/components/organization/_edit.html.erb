@@ -1,6 +1,5 @@
-<%
-organizations = current_university.organizations.ordered
-%>
+<%# TODO: Traduire les organisations %>
+<% organizations = current_university.organizations.ordered %>
 <% unless label.blank? %>
   <label  class="form-label"
           :for="<%= dom_id.html_safe %>">
