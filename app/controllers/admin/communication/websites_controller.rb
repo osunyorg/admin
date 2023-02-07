@@ -79,6 +79,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
 
   protected
 
+  def breadcrumb
+    super
+    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
+    breadcrumb_for @website
+  end
+
   def website_params
     params.require(:communication_website).permit(
       :name, :url, :repository, :access_token, :about_type, :about_id, :in_production,

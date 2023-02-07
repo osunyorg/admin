@@ -15,14 +15,19 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def short_breadcrumb
-    @menu_collapsed = true
-    add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
-    add_breadcrumb '...'
+    if current_admin_theme == 'appstack'
+      @menu_collapsed = true
+      add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
+      add_breadcrumb '...'
+    else
+      breadcrumb
+    end
   end
 
   def breadcrumb_for(object, **options)
     return unless object
-    object.persisted? ? add_breadcrumb(object, [:admin, object, options])
+    title = object.to_s.truncate(50)
+    object.persisted? ? add_breadcrumb(title, [:admin, object, options])
                       : add_breadcrumb(t('create'))
   end
 

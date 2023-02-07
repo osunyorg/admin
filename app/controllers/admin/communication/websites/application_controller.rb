@@ -6,6 +6,12 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
 
   protected
 
+  def breadcrumb
+    super
+    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
+    breadcrumb_for @website
+  end
+
   def default_url_options
     return {} unless params.has_key? :website_id
     {
