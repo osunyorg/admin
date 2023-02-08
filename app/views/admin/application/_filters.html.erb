@@ -12,7 +12,7 @@ filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_n
         role="button"
         aria-expanded="false"
         aria-controls="collapseFilters">
-      <i class="fas fa-filter"></i>
+      <i class="<%= Icon::FILTERS %>"></i>
       <%= t('filters.buttons.expand') %>
     </a>
   <% end %>

@@ -21,7 +21,7 @@
           <div class="d-flex mb-n3">
             <div>
               <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
-                <i class="fa fa-bars handle"></i>
+                <i class="<%= Icon::DRAG %> handle"></i>
               </a>
             </div>
             <div class="flex-fill">
@@ -31,7 +31,7 @@
               <a  class="btn btn-sm text-danger ms-3"
                   v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
                   title="Supprimer">
-                  <i class="fas fa-times"></i>
+                  <i class="<%= Icon::DELETE %>"></i>
               </a>
             </div>
           </div>

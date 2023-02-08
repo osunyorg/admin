@@ -67,7 +67,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def self.icon_for(kind)
     icons = {
-      'blank' => 'font',
+      'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
       'diploma' => Icon::EDUCATION_DIPLOMA,
       'post' => Icon::COMMUNICATION_WEBSITE_POST,
       'category' => Icon::COMMUNICATION_WEBSITE_POST,
@@ -75,9 +75,9 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'program' => Icon::EDUCATION_PROGRAM,
       'paper' => Icon::RESEARCH_LABORATORY,
       'volume' => Icon::RESEARCH_LABORATORY,
-      'url' => 'globe',
+      'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
     }
-    "fas fa-#{icons[kind]}" if icons.has_key? kind
+    icons[kind] if icons.has_key? kind
   end
 
   def to_s

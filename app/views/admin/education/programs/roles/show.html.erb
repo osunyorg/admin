@@ -16,7 +16,7 @@
         <% @involvements.each do |involvement| %>
           <tr data-id="<%= involvement.id %>">
             <% if can? :reorder, University::Role %>
-              <td><i class="fa fa-bars handle"></i></td>
+              <td><i class="<%= Icon::DRAG %> handle"></i></td>
             <% end %>
             <td class="ps-0">
               <%= link_to_if  can?(:read, involvement.person),

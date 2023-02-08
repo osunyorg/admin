@@ -3,7 +3,7 @@
   <div class="card-body">
     <div class="row align-items-center">
       <div class="col-1">
-        <i class="fa fa-bars handle"></i>
+        <i class="<%= Icon::DRAG %> handle"></i>
       </div>
       <div class="col-9">
         <%= f.association :person,
@@ -14,7 +14,9 @@
                           required: true %>
       </div>
       <div class="col-2">
-        <%= link_to_remove_association '<i class="fas fa-times"></i>'.html_safe, f, class: 'btn btn-sm btn-danger' %>
+        <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                        f,
+                                        class: 'btn btn-sm btn-danger' %>
       </div>
     </div>
   </div>

@@ -43,7 +43,7 @@
       %>
         <li class="mb-3">
           <a class="d-block py-1 <%= active ? 'text-black' : 'text-muted' %>" href="<%= object[:path] %>">
-            <i class="fas fa-<%= object[:icon] %>" style="min-width: 30px"></i>
+            <i class="<%= object[:icon] %>" style="min-width: 30px"></i>
             <%= object[:title].html_safe %>
           </a>
         </li>
