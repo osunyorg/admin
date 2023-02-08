@@ -54,6 +54,15 @@ class University < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
 
+  def self.parts
+    [
+      [University::Person, :admin_university_people_path],
+      [University::Organization, :admin_university_organizations_path],
+      [University::Person::Alumnus, :admin_university_alumni_path],
+      [User, :admin_users_path],
+    ]
+  end
+
   def to_s
     "#{name}"
   end

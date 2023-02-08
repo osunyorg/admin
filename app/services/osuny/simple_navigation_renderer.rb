@@ -20,7 +20,7 @@ class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
 
   def build
     if @index.zero?
-      @content << "#{OPEN}<h2>#{item_name_and_link}</h2>"
+      @content << "#{OPEN}<h2>#{item_name_and_link}</h2><ul>"
     elsif item_is_header?
       @content << "</ul>#{CLOSE}#{OPEN}<h2>#{item_name_and_link}</h2><ul>"
     else

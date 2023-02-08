@@ -1,4 +1,5 @@
 <section class="pure__section flex-fill position-relative">
+  <%= image_tag image, class: 'img-fluid mb-3' if image %>
   <% if action %>
     <div class="float-end"><%= raw action %></div>
   <% end %>

@@ -42,7 +42,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
 
   def breadcrumb
     super
-    add_breadcrumb t('education.teachers', count: 2), admin_education_teachers_path
+    add_breadcrumb University::Person::Teacher.model_name.human(count: 2), admin_education_teachers_path
     add_breadcrumb @teacher, admin_education_teacher_path(@teacher) if @teacher
   end
 

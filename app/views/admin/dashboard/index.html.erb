@@ -83,6 +83,21 @@
   </div>
 <% end %>
 
+<div class="row mt-5 pt-5">
+  <% @chapters.each do |class_name| %>
+    <% 
+    path = send "admin_#{class_name.to_s.downcase}_root_path"
+    description = t "#{class_name.to_s.downcase}.description.text"
+    %>
+  <div class="col-lg-3">
+    <%= osuny_panel class_name.model_name.human, image: "admin/#{class_name.to_s.downcase}.jpg" do %>
+      <p><%= description.truncate 180 %></p>
+      <%= link_to t('show'), path, class: 'stretched-link' %>
+    <% end %>
+  </div>
+<% end %>
+</div>
+
 <% if current_admin_theme == 'appstack' %>
   <div class="small mt-5">
     <ul class="list-inline">

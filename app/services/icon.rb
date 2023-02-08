@@ -29,19 +29,24 @@ class Icon
   RESEARCH_RESEARCHER = 'fas fa-microscope'
   RESEARCH_THESE = 'fas fa-scroll'
   RESEARCH_WATCH = 'fas fa-eye'
+  UNIVERSITY_PERSON_RESEARCHER = RESEARCH_RESEARCHER
+  RESEARCH_THESIS = RESEARCH_THESE
 
   ADMINISTRATION_CAMPUS = 'fas fa-map-marker-alt'
   ADMINISTRATION_ADMISSIONS = 'fas fa-door-open'
   ADMINISTRATION_INTERNSHIPS = 'fas fa-hands-helping'
   ADMINISTRATION_STATISTICS = 'fas fa-chart-bar'
   ADMINISTRATION_QUALITY = 'fas fa-tasks'
+  ADMINISTRATION_QUALIOPI = ADMINISTRATION_QUALITY
 
   UNIVERSITY_ORGANIZATION = 'fas fa-building'
   UNIVERSITY_PERSON = 'fas fa-users'
   UNIVERSITY_PERSON_ADMINISTRATORS = 'fas fa-users-cog'
   UNIVERSITY_PERSON_ALUMNUS = 'fas fa-user-graduate'
+  UNIVERSITY_PERSON_TEACHER = EDUCATION_TEACHER
 
   OSUNY_USER = 'fas fa-user'
+  USER = OSUNY_USER
   
   ADD = 'fas fa-plus'
   ARROW_RIGHT = 'fas fa-arrow-right'
@@ -60,4 +65,10 @@ class Icon
   SETTINGS = 'fas fa-gear'
   SORT = 'fas fa-sort'
   WARNING = 'fas fa-exclamation-circle'
+
+  def self.icon_for(class_name)
+    # University::Person::Teacher -> UNIVERSITY_PERSON_TEACHER
+    constant = class_name.to_s.remove('::').underscore.upcase
+    const_get constant
+  end
 end

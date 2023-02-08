@@ -50,7 +50,7 @@ context ||= :admin
               <%= image_tag 'avatar.jpg', class: 'avatar img-fluid rounded-circle' %>
             <% end %>
           </a>
-          <h2><%= current_user.to_s %></h2>
+          <h2><%= link_to current_user.to_s, admin_user_path(current_user) %></h2>
           <ul>
             <li><%= link_to t('menu.profile'), edit_user_registration_path %></li>
             <li><%= link_to t('menu.server_admin'), server_root_path if current_user.server_admin? %></li>
