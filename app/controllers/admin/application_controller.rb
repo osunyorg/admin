@@ -15,13 +15,9 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def short_breadcrumb
-    if current_admin_theme == 'appstack'
-      @menu_collapsed = true
-      add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
-      add_breadcrumb '...'
-    else
-      breadcrumb
-    end
+    @menu_collapsed = true
+    add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
+    add_breadcrumb '...'
   end
 
   def breadcrumb_for(object, **options)
