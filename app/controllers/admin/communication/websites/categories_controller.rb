@@ -6,7 +6,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
-    @categories = @website.categories.where(language_id: current_website_language.id).ordered
+    @categories = @website.categories.for_language(current_website_language).ordered
     breadcrumb
   end
 
@@ -32,7 +32,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
 
   def children
     return unless request.xhr?
-    @category = @website.categories.where(language_id: current_website_language.id).find(params[:id])
+    @category = @website.categories.for_language(current_website_language).find(params[:id])
     @children = @category.children.ordered
   end
 
@@ -86,7 +86,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   protected
 
   def get_root_categories
-    @root_categories = @website.categories.root.where(language_id: current_website_language.id).ordered
+    @root_categories = @website.categories.root.for_language(current_website_language).ordered
   end
 
   def breadcrumb

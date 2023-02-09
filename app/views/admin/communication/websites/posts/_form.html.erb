@@ -10,7 +10,7 @@
         <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
       <% end %>
       <div class="row pure__row--small">
-        <% categories = @website.categories.where(language_id: current_website_language.id) %>
+        <% categories = @website.categories.for_language(current_website_language) %>
         <% if categories.any? %>
           <div class="col-md-6">
             <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
@@ -40,7 +40,7 @@
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
         <%= f.association :author,
-                            collection: current_university.people.where(language_id: current_website_language.id).ordered,
+                            collection: current_university.people.for_language(current_website_language).ordered,
                             label_method: :to_s_alphabetical %>
         <%= f.input :slug,
                     as: :string,

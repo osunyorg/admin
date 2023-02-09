@@ -5,6 +5,9 @@ module WithTranslations
     belongs_to  :language
     belongs_to  :original, class_name: base_class.to_s, optional: true
     has_many    :translations, class_name: base_class.to_s, foreign_key: :original_id, dependent: :nullify
+
+    scope :for_language_id, -> (language_id) { where(language_id: language_id) }
+    scope :for_language, -> (language) { for_language_id(language.id) }
   end
 
   def find_or_translate!(language)

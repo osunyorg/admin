@@ -15,7 +15,7 @@ function hideAbout() {
 <% elsif @kind == 'page' %>
     <%
     options = ['<option value="" label=" "></option>']
-    collection_tree(@website.pages.where(language_id: current_website_language.id)).each do |page|
+    collection_tree(@website.pages.for_language(current_website_language)).each do |page|
         options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
     end
     %>
@@ -40,7 +40,7 @@ function hideAbout() {
 <% elsif @kind == 'category' %>
     <%
         options = ['<option value="" label=" "></option>']
-        collection_tree(@website.categories.where(language_id: current_website_language.id)).each do |category|
+        collection_tree(@website.categories.for_language(current_website_language)).each do |category|
             options << "<option value=\"#{category[:id]}\">#{category[:label]}</option>"
         end
     %>
@@ -48,7 +48,7 @@ function hideAbout() {
 <% elsif @kind == 'post' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.posts.where(language_id: current_website_language.id).ordered.each do |post|
+    @website.posts.for_language(current_website_language).ordered.each do |post|
         options << "<option value=\"#{post.id}\">#{post.to_s}</option>"
     end
     %>

@@ -5,7 +5,7 @@ action += link_to t('create'),
                   class: button_classes if can?(:create, Communication::Website::Page)
 title = t('communication.website.last_pages')
 title += '<small> - '
-title += link_to t('communication.website.see_all', number: @website.pages.accessible_by(current_ability).where(language_id: current_website_language.id).count),
+title += link_to t('communication.website.see_all', number: @website.pages.accessible_by(current_ability).for_language(current_website_language).count),
                  admin_communication_website_pages_path(website_id: @website)
 title += '</small>'
 %>

@@ -10,7 +10,7 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
 
   def index
     @alumni = apply_scopes(@alumni)
-                .where(language_id: current_university.default_language_id)
+                .for_language_id(current_university.default_language_id)
                 .alumni
                 .accessible_by(current_ability)
                 .ordered
