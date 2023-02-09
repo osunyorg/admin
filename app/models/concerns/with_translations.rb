@@ -25,9 +25,11 @@ module WithTranslations
   end
 
   def translation_for(language)
-    # If current language is language, returns itself
+    # If the requested language is the object language, we return itself
     return self if language_id == language.id
-    # Translations have the same original_id if set
+    # All translations share the same original.
+    # If the current object is a translation, we call translation_for on the original.
+    # Else, if the current object is the original, we search the translation with the language.
     original_id.present?  ? original.translation_for(language)
                           : translations.find_by(language_id: language.id)
   end
