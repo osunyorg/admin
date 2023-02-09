@@ -98,6 +98,12 @@ class Communication::Website < ApplicationRecord
     dependencies
   end
 
+  def best_language_for(iso_code)
+    # We look for the language by the ISO code in the websites languages.
+    # If not found, we fallback to the default language.
+    languages.find_by(iso_code: iso_code) || default_language
+  end
+
   protected
 
   def languages_must_include_default_language

@@ -7,11 +7,7 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   protected
 
   def current_website_language
-    @current_website_language ||= begin
-      language = @website.languages.find_by(iso_code: params[:lang])
-      language ||= @website.default_language
-      language
-    end
+    @current_website_language ||= @website.best_language_for(params[:lang])
   end
   helper_method :current_website_language
 
