@@ -18,6 +18,12 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     breadcrumb
   end
 
+  def in_language
+    language = Language.find_by!(iso_code: params[:lang])
+    translation = @person.find_or_translate!(language)
+    redirect_to [:admin, translation.becomes(translation.class.base_class)]
+  end
+
   def static
     @about = @person
     @website = @person.websites&.first

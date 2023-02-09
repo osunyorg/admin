@@ -6,6 +6,7 @@ module Communication::Website::WithProgramCategories
   end
 
   # TODO : I18n
+  # Actuellement, on ne crée que dans la langue par défaut du website, on ne gère pas les autres langues
   def set_programs_categories!
     programs_root_category = categories.for_language_id(default_language_id).where(is_programs_root: true).first_or_create(
       name: 'Offre de formation',

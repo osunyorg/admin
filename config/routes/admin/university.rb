@@ -20,9 +20,9 @@ namespace :university do
     end
   end
   resources :people do
-    resources :translations, only: :show, param: :lang, controller: "people/translations"
     member do
       get :static
+      get "/translations/:lang" => "people#in_language", as: :show_in_language
     end
   end
   resources :organizations do
