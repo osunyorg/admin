@@ -103,15 +103,17 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def page_params
-    translatable_params(
-      :communication_website_page,
-      [
-        :communication_website_id, :title, :breadcrumb_title, :bodyclass,
-        :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-        :parent_id
-      ]
-    )
+    params.require(:communication_website_page)
+          .permit(
+            :communication_website_id, :title, :breadcrumb_title, :bodyclass,
+            :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+            :parent_id
+          )
+          .merge(
+            university_id: current_university.id,
+            language_id: current_website_language.id
+          )
   end
 
 end

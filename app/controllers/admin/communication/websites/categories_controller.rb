@@ -97,12 +97,14 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   end
 
   def category_params
-    translatable_params(
-      :communication_website_category,
-      [
-        :name, :meta_description, :summary, :slug, :parent_id,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
-      ]
-    )
+    params.require(:communication_website_category)
+          .permit(
+            :name, :meta_description, :summary, :slug, :parent_id,
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+          )
+          .merge(
+            university_id: current_university.id,
+            language_id: current_website_language.id
+          )
   end
 end

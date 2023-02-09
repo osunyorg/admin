@@ -59,6 +59,11 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   end
 
   def menu_params
-    translatable_params(:communication_website_menu, [:title, :identifier])
+    params.require(:communication_website_menu)
+          .permit(:title, :identifier)
+          .merge(
+            university_id: current_university.id,
+            language_id: current_website_language.id
+          )
   end
 end
