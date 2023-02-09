@@ -7,13 +7,15 @@ module University::Person::WithResearch
                             foreign_key: 'research_publication_id',
                             association_foreign_key: 'university_person_id'
     alias :publications :research_publications
+
+    scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
 
   def hal_identity?
     hal_form_identifier.present?
   end
 
-  def load_research_publications!
+  def load_research_publications
     return unless hal_identity?
     response = HalOpenscience::Document.search  "authIdForm_i:#{hal_form_identifier}",
                                                 fields: ["docid", "title_s", "citationRef_s", "uri_s", "*"],
@@ -23,6 +25,7 @@ module University::Person::WithResearch
       research_publications << publication unless publication.in?(research_publications)
     end
   end
+  handle_asynchronously :load_research_publications
 
   def possible_hal_authors
     HalOpenscience::Author.search(to_s, fields: ['*']).results

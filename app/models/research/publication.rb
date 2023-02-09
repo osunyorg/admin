@@ -44,6 +44,13 @@ class Research::Publication < ApplicationRecord
     publication
   end
 
+  def self.update_from_hal
+    University::Person::Researcher.with_hal_identifier.find_each do |researcher|
+      puts "Loading publications for #{researcher} (#{researcher.university})"
+      researcher.load_research_publications
+    end
+  end
+
   def template_static
     "admin/research/publications/static"
   end
