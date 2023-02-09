@@ -2,6 +2,8 @@ module WithTranslations
   extend ActiveSupport::Concern
 
   included do
+    attr_accessor :newly_translated
+
     belongs_to  :language
     belongs_to  :original, class_name: base_class.to_s, optional: true
     has_many    :translations, class_name: base_class.to_s, foreign_key: :original_id, dependent: :nullify
@@ -9,6 +11,7 @@ module WithTranslations
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
     scope :for_language_id, -> (language_id) { where(language_id: language_id) }
+
   end
 
   def available_languages
@@ -53,7 +56,8 @@ module WithTranslations
     # Inherits from original_id or set it to itself
     translation.assign_attributes(
       original_id: original_object.id,
-      language_id: language.id
+      language_id: language.id,
+      newly_translated: true
     )
 
     # Handle publication

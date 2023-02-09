@@ -19,7 +19,13 @@ module Admin::Translatable
         redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
       else
         # Safety net on destroy action if called on wrong language
-        redirect_to [:admin, translation.becomes(translation.class.base_class)]
+        # There's an attribute accessor named "newly_translated" that we set to true
+        # when we just created the translation. We use it to redirect to the form instead of the show.
+        if translation.newly_translated
+          redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
+        else
+          redirect_to [:admin, translation.becomes(translation.class.base_class)]
+        end
       end
     end
 
