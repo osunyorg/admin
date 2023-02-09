@@ -15,7 +15,7 @@ has:
   teachers: <%= @website.has_teachers? %>
 <% end %>
 position: <%= @about.position %>
-<%= render 'admin/application/translation_key/static' %>
+<%= render 'admin/application/i18n/static' %>
 bodyclass: <%= @about.best_bodyclass %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @about.children.published.any? %>

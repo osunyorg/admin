@@ -2,7 +2,7 @@ module User::WithPerson
   extend ActiveSupport::Concern
 
   included do
-    # Master person
+    # Original person
     has_one :person, -> { where(original_id: nil) }, class_name: 'University::Person', dependent: :nullify
 
     delegate :experiences, to: :person

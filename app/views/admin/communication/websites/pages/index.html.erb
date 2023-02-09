@@ -1,9 +1,8 @@
 <% content_for :title, t('admin.communication.website.pages.structure') %>
 
 <% content_for :title_right do %>
-  <% pages_count = @website.pages.for_language(current_website_language).count %>
-  <%= pages_count %>
-  <%= Communication::Website::Page.model_name.human(count: pages_count).downcase %>
+  <%= @pages.size %>
+  <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>

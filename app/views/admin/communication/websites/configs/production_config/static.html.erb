@@ -3,9 +3,5 @@
 baseURL: <%= @website.url %>
 
 ## LANGUAGE
-<% if @website.languages.any? %>
 defaultContentLanguage: <%= @website.default_language.iso_code %>
-<% else %>
-defaultContentLanguage: fr
-<% end %>
 defaultContentLanguageInSubdir: <%= @website.languages.many? %>

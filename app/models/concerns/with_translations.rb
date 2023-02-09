@@ -10,6 +10,13 @@ module WithTranslations
     scope :for_language, -> (language) { for_language_id(language.id) }
   end
 
+  def available_languages
+    @available_languages ||= begin
+      languages = respond_to?(:website) ? website.languages : Language.all
+      languages.ordered
+    end
+  end
+
   def find_or_translate!(language)
     translation = translation_for(language)
     translation ||= translate!(language)

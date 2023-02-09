@@ -18,10 +18,8 @@ module Admin::Translatable
     def check_or_redirect_translatable_resource
       # Early return if language is correct
       return if resource.language_id == current_website_language.id
-      # Look up for translation from resource
-      translation = resource.translation_for(current_website_language)
-      # If not found, translate the current resource (with blocks and all) for given language
-      translation ||= resource.translate!(current_website_language)
+      # Look up for translation or translate (with blocks and all) from resource
+      translation = resource.find_or_translate!(current_website_language)
       # Redirect to the translation
       if ['edit', 'update'].include?(action_name)
         # Safety net on update action if called on wrong language

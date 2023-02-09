@@ -10,14 +10,13 @@
         <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
       <% end %>
       <div class="row pure__row--small">
-        <% categories = @website.categories.for_language(current_website_language) %>
-        <% if categories.any? %>
+        <% if @categories.any? %>
           <div class="col-md-6">
             <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
               <%= f.association :categories,
                                 label_text: false,
                                 as: :check_boxes,
-                                collection: collection_tree_for_checkboxes(categories) %>
+                                collection: collection_tree_for_checkboxes(@categories) %>
             <% end %>
           </div>
         <% end %>

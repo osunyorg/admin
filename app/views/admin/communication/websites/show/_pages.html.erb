@@ -3,12 +3,10 @@ action = ''
 action += link_to t('create'),
                   new_admin_communication_website_page_path(website_id: @website),
                   class: button_classes if can?(:create, Communication::Website::Page)
-title = t('communication.website.last_pages')
-title += '<small> - '
-title += link_to t('communication.website.see_all', number: @website.pages.accessible_by(current_ability).for_language(current_website_language).count),
-                 admin_communication_website_pages_path(website_id: @website)
-title += '</small>'
+subtitle = link_to t('communication.website.see_all', number: @all_pages.count), admin_communication_website_pages_path(website_id: @website)
 %>
-<%= osuny_panel sanitize(title), action: action do %>
+<%= osuny_panel t('communication.website.last_pages'),
+                subtitle: subtitle,
+                action: action do %>
   <%= render 'admin/communication/websites/pages/list', pages: @pages %>
 <% end %>

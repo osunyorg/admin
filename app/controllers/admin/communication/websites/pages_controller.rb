@@ -7,6 +7,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
+    @pages = @website.pages.for_language(current_website_language)
     breadcrumb
   end
 

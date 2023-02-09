@@ -6,6 +6,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   include Admin::Translatable
 
   before_action :load_filters, only: :index
+  before_action :load_categories, only: [:new, :edit]
 
   has_scope :for_search_term
   has_scope :for_author
@@ -68,6 +69,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     if @post.save_and_sync
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
+      load_categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -78,6 +80,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
+      load_categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -112,5 +115,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def load_filters
     @filters = ::Filters::Admin::Communication::Website::Posts.new(current_user, @website).list
+  end
+
+  def load_categories
+    @categories = @website.categories.for_language(current_website_language)
   end
 end
