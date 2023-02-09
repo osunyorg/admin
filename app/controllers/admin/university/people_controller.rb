@@ -8,7 +8,10 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   has_scope :for_role
 
   def index
-    @people = apply_scopes(@people).for_language_id(current_university.default_language_id).ordered.page(params[:page])
+    @people = apply_scopes(@people)
+                .for_language_id(current_university.default_language_id)
+                .ordered
+                .page(params[:page])
     breadcrumb
   end
 

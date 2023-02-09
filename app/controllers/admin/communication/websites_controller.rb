@@ -11,7 +11,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def show
     @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
     @pages = @all_pages.recent
-    @posts = @website.posts.accessible_by(current_ability).for_language(current_website_language).recent
+    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
+    @posts = @all_posts.recent
     breadcrumb
   end
 
