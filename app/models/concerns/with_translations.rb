@@ -50,12 +50,6 @@ module WithTranslations
   def translate!(language)
     translation = self.dup
 
-    # Translate parent if needed
-    if respond_to?(:parent_id) && parent_id.present?
-      parent_translation = parent.find_or_translate!(language)
-      translation.parent_id = parent_translation&.id
-    end
-
     # Inherits from original_id or set it to itself
     translation.assign_attributes(
       original_id: original_object.id,
@@ -64,6 +58,8 @@ module WithTranslations
 
     # Handle publication
     translation.published = false if respond_to?(:published)
+    # Translate parent if needed
+    translation.parent_id = translate_parent!(language)&.id if respond_to?(:parent_id)
     # Handle featured image if object has one
     translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
     translation.save
@@ -75,6 +71,11 @@ module WithTranslations
   end
 
   protected
+
+  def translate_parent!(language)
+    return nil if parent_id.nil?
+    parent.find_or_translate!(language)
+  end
 
   def translate_blocks!(translation)
     blocks.ordered.each do |block|

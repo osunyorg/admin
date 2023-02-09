@@ -62,28 +62,25 @@ class Communication::Website::Menu < ApplicationRecord
     item_translation.menu = menu_translation
     item_translation.parent = parent_translation
 
-    case item_translation.kind
-    when 'blank', 'url'
-      # Nothing to do
-    when 'program', 'diploma', 'volume', 'paper'
-      # TODO: Translate Education & Research Models
-    when 'page', 'category', 'post'
-      translated_about = item.about.translation_for(menu_translation.language)
-      if translated_about.present?
-        item_translation.about = translated_about
-      elsif item.children.any?
-        # Convert to a blank menu item to translate children correctly
-        item_translation.kind = 'blank'
-        item_translation.about = nil
-      else
-        # Skip menu item if no translation and no children to translate
-        return
+    # TODO : I18n
+    # For now, only pages, posts, categories are handled.
+    # We need to translate programs, diplomas, volumes and papers
+    set_item_translation_attributes(item_translation, item, menu_translation)
+
+    # If no translation and no children to translate, translation won't be save, as about is nil and kind requires one.
+    if item_translation.save
+      item.children.ordered.each do |child|
+        translate_menu_item!(child, menu_translation, item_translation)
       end
     end
+  end
 
-    item_translation.save
-    item.children.ordered.each do |child|
-      translate_menu_item!(child, menu_translation, item_translation)
+  def set_item_translation_attributes(item_translation, item, menu_translation)
+    return unless item.about.present? && item.about.respond_to?(:translation_for)
+    # Search for the target translation based on the given language.
+    item_translation.about = item.about.translation_for(menu_translation.language)
+    # If no target translation found, convert to a blank menu item if item has children.
+    item_translation.kind = 'blank' if item_translation.about.nil? && item.children.any?
     end
   end
 end
