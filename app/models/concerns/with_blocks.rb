@@ -11,7 +11,8 @@ module WithBlocks
 
   # Basic rule is: TOC if 2 titles or more
   def show_toc?
-    blocks.collect(&:title)
+    blocks.published
+          .collect(&:title)
           .reject(&:blank?)
           .many?
   end
