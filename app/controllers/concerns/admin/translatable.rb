@@ -14,15 +14,17 @@ module Admin::Translatable
       # Look up for translation or translate (with blocks and all) from resource
       translation = resource.find_or_translate!(current_website_language)
       # Redirect to the translation
-      if ['edit', 'update'].include?(action_name)
+      redirect_to_translation(translation)
+    end
+
+    def redirect_to_translation
+      if ['edit', 'update'].include?(action_name) || translation.newly_translated
         # Safety net on update action if called on wrong language
-        redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
-      elsif translation.newly_translated
-        # Safety net on destroy action if called on wrong language
         # There's an attribute accessor named "newly_translated" that we set to true
         # when we just created the translation. We use it to redirect to the form instead of the show.
         redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
       else
+        # Safety net on destroy action if called on wrong language
         redirect_to [:admin, translation.becomes(translation.class.base_class)]
       end
     end
