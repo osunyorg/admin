@@ -24,9 +24,9 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def in_language
     language = Language.find_by!(iso_code: params[:lang])
     translation = @person.find_or_translate!(language)
-    # There's an attribute accessor named "newly_translated" that we set to true
-    # when we just created the translation. We use it to redirect to the form instead of the show.
     if translation.newly_translated
+      # There's an attribute accessor named "newly_translated" that we set to true
+      # when we just created the translation. We use it to redirect to the form instead of the show.
       redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
     else
       redirect_to [:admin, translation.becomes(translation.class.base_class)]
