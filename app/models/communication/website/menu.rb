@@ -81,6 +81,5 @@ class Communication::Website::Menu < ApplicationRecord
     item_translation.about = item.about.translation_for(menu_translation.language)
     # If no target translation found, convert to a blank menu item if item has children.
     item_translation.kind = 'blank' if item_translation.about.nil? && item.children.any?
-    end
   end
 end
