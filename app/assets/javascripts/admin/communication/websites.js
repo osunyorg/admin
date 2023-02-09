@@ -5,8 +5,10 @@ window.osuny.communication.websites = {
         this.languagesCheckboxes = document.querySelectorAll('.js-languages input[type="checkbox"]');
         this.defaultLanguageSelect = document.querySelector('.js-default-language');
         this.defaultLanguageOptions = this.defaultLanguageSelect.querySelectorAll('option');
-        this.initEvents();
-        this.onChangeCheckbox();
+        if (this.defaultLanguageSelect) {
+            this.initEvents();
+            this.onChangeCheckbox();
+        }
     },
 
     initEvents: function () {

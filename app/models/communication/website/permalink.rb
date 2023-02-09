@@ -54,9 +54,9 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :current, -> { where(is_current: true) }
   scope :not_current, -> { where(is_current: false) }
 
-  def self.config_in_website(website)
+  def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
-      [permalink_class.static_config_key, permalink_class.pattern_in_website(website)]
+      [permalink_class.static_config_key, permalink_class.pattern_in_website(website, language)]
     }.to_h
   end
 
@@ -84,12 +84,13 @@ class Communication::Website::Permalink < ApplicationRecord
     MAPPING.keys.include?(lookup_key)
   end
 
-  def self.pattern_in_website(website)
+  def self.pattern_in_website(website, language)
     raise NotImplementedError
   end
 
   def pattern
-    self.class.pattern_in_website(website)
+    language = about.respond_to?(:language) ? about.language : website.default_language
+    self.class.pattern_in_website(website, language)
   end
 
   def computed_path
@@ -122,8 +123,9 @@ class Communication::Website::Permalink < ApplicationRecord
   # Can be overwritten (Page for example)
   def published_path
     # TODO I18n doit prendre la langue du about
+    language = about.respond_to?(:language) ? about.language : website.default_language
     p = ""
-    p += "/#{website.default_language.iso_code}" if website.languages.many?
+    p += "/#{language.iso_code}" if website.languages.many?
     p += pattern
     substitutions.each do |key, value|
       p.gsub! ":#{key}", "#{value}"

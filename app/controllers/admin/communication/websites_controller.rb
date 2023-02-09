@@ -1,8 +1,4 @@
-class Admin::Communication::WebsitesController < Admin::Communication::ApplicationController
-  load_and_authorize_resource class: Communication::Website,
-                              through: :current_university,
-                              through_association: :communication_websites
-
+class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   has_scope :for_search_term
   has_scope :for_about_type
 
@@ -13,8 +9,10 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def show
-    @pages = @website.pages.accessible_by(current_ability).recent
-    @posts = @website.posts.accessible_by(current_ability).recent
+    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
+    @pages = @all_pages.recent
+    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
+    @posts = @all_posts.recent
     breadcrumb
   end
 
@@ -86,9 +84,18 @@ class Admin::Communication::WebsitesController < Admin::Communication::Applicati
   end
 
   def website_params
-    params.require(:communication_website).permit(
+    attribute_names = [
       :name, :url, :repository, :access_token, :about_type, :about_id, :in_production,
-      :git_provider, :git_endpoint, :git_branch, :plausible_url, :default_language_id, language_ids: []
-    )
+      :git_provider, :git_endpoint, :git_branch, :plausible_url, language_ids: []
+    ]
+    # For now, default language can't be changed, too many implications, especially around special pages.
+    attribute_names << :default_language_id unless @website&.persisted?
+    params.require(:communication_website).permit(*attribute_names)
+  end
+
+  def default_url_options
+    options = {}
+    options[:lang] = current_website_language.iso_code if @website.present?
+    options
   end
 end

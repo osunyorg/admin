@@ -97,9 +97,6 @@ fr:
       communication/website/menu:
         identifier: Identifiant
         items: Éléments
-        legal: Informations légales
-        primary: Menu principal
-        social: Liens sociaux
         title: Titre
       communication/website/menu/item:
         about: Cible
@@ -148,6 +145,7 @@ fr:
         communication/website:
           attributes:
             languages:
+              must_include_default: doivent contenir la langue par défaut
               too_short: doivent en comporter une minimum
   admin:
     communication:
@@ -569,6 +567,11 @@ fr:
         pending: Import en cours
       last_pages: Dernières pages
       last_posts: Dernières actualités
+      menus:
+        default_title:
+          legal: Informations légales
+          primary: Menu principal
+          social: Liens sociaux
       pages:
         defaults:
           accessibility:
@@ -683,7 +686,7 @@ fr:
       communication_website:
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
-        languages: 'Si vous sélectionnez au moins une langue le site sera considéré comme possiblement multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
+        languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.

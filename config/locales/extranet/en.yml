@@ -12,6 +12,7 @@ en:
       email_not_allowed_with_contact: is not authorized to access this extranet. Contact %{contact} for more information.
     experiences:
       new: Add experience
+      search_organization: Search by name or SIREN
       title: Path
     home:
       recent_cohorts: Recent cohorts
@@ -22,5 +23,6 @@ en:
     osuny_html:
       <a href="https://www.osuny.org" target="_blank" rel="noreferer">Crafted with ♥ and with Osuny</a>
     personal_data:
+      edit: Edit
       title: My personal data
       updated: Your personal data has been updated!

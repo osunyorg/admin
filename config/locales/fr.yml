@@ -208,6 +208,8 @@ fr:
     still_pending: "Votre import est toujours en cours de traitement. Vous recevrez un email dès qu'il est prêt."
   import_btn: Importer
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
+  internationalization:
+    label: Internationalisation
   languages:
     en: Anglais
     fr: Français

@@ -1,8 +1,8 @@
 <% content_for :title, t('admin.communication.website.pages.structure') %>
 
 <% content_for :title_right do %>
-  <%= @website.pages.count %>
-  <%= Communication::Website::Page.model_name.human(count: @website.pages.count).downcase %>
+  <%= @pages.size %>
+  <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>

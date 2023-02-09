@@ -34,6 +34,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def selected_posts_all
     block.about&.website
                 .posts
+                .for_language(block.language)
                 .published
                 .ordered
                 .limit(posts_quantity)
@@ -42,7 +43,8 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def selected_posts_category
     return [] if category.nil?
     category_ids = [category.id, category.descendants.map(&:id)].flatten
-    university.communication_website_posts.joins(:categories)
+    university.communication_website_posts.for_language(block.language)
+                                          .joins(:categories)
                                           .where(categories: { id: category_ids })
                                           .distinct
                                           .published
@@ -60,6 +62,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     return if id.blank?
     block.about&.website
                 .posts
+                .for_language(block.language)
                 .published
                 .find_by(id: id)
   end

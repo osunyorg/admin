@@ -28,7 +28,7 @@
                         data: { source: '#communication_website_category_name' }
                       } %>
           <%= f.association :parent,
-                            collection: collection_tree(@website.categories, category),
+                            collection: collection_tree(@website.categories.for_language(current_website_language), category),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] } %>
           <ul>

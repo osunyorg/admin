@@ -33,8 +33,8 @@ class Communication::Website::Permalink::Paper < Communication::Website::Permali
   end
 
   # /papiers/:slug/
-  def self.pattern_in_website(website)
-    "/#{website.special_page(Communication::Website::Page::ResearchPaper).slug_with_ancestors}/:year-:month-:day-:slug/"
+  def self.pattern_in_website(website, language)
+    "/#{website.special_page(Communication::Website::Page::ResearchPaper, language: language).slug_with_ancestors}/:year-:month-:day-:slug/"
   end
 
   protected

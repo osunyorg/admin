@@ -38,7 +38,6 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
       # file = communication_website_git_files(:git_file_2)
       # file.website.git_repository.add_git_file file
       # file.website.git_repository.sync!
-      # byebug
       # Then i got the sha and path, pasted it in the fixtures,
       # changed the text so the content would need an update.
       file = communication_website_git_files(:git_file_2)

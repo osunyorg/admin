@@ -29,7 +29,8 @@ class Server::UniversitiesControllerTest < ActionDispatch::IntegrationTest
         university: {
           name: "Nouvelle université",
           identifier: "my-second-university",
-          sms_sender_name: "unitest2"
+          sms_sender_name: "unitest2",
+          default_language_id: languages(:fr).id
         }
       }
       university = University.find_by(identifier: "my-second-university")

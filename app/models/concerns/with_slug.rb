@@ -25,8 +25,11 @@ module WithSlug
     protected
 
     def slug_unavailable?(slug)
+      existence_params = { university_id: self.university_id, slug: slug }
+      existence_params[:language_id] = self.language_id if respond_to?(:language_id)
+
       self.class.unscoped
-                .where(university_id: self.university_id, slug: slug)
+                .where(**existence_params)
                 .where.not(id: self.id)
                 .exists?
     end

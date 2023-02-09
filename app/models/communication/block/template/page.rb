@@ -36,7 +36,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   def selected_pages_children
     return [] unless page
-    page.children.published.ordered
+    page.children.for_language(block.language).published.ordered
   end
 
 end
