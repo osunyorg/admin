@@ -31,30 +31,24 @@
       </div>
     <% end %>
   </div>
-  <div class="row">
-    <% if can?(:create, Communication::Website::Category) || (@root_categories.any? && can?(:edit, @root_categories.first))  %>
-      <div class="col-md-6">
-        <% action = create_link Communication::Website::Category %>
-        <%= osuny_panel Communication::Website::Category.model_name.human(count: 2), action: action do %>
-          <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
-              data-id=""
-              data-sort-url="<%= reorder_admin_communication_website_categories_path %>">
-            <%= render 'admin/communication/websites/categories/treebranch', categories: @root_categories %>
-          </ul>
-        <% end %>
-      </div>
+  <% if can?(:create, Communication::Website::Category) || (@root_categories.any? && can?(:edit, @root_categories.first))  %>
+      <% action = create_link Communication::Website::Category %>
+      <%= osuny_panel Communication::Website::Category.model_name.human(count: 2), action: action do %>
+        <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
+            data-id=""
+            data-sort-url="<%= reorder_admin_communication_website_categories_path %>">
+          <%= render 'admin/communication/websites/categories/treebranch', categories: @root_categories %>
+        </ul>
+      <% end %>
+  <% end %>
+  <% if @authors.any? %>
+    <%= osuny_panel t('communication.authors', count: 2) do %>
+      <%= render 'admin/communication/websites/authors/list', authors: @authors %>
+      <% if @authors.total_pages > 1 %>
+        <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
+      <% end %>
     <% end %>
-    <% if @authors.any? %>
-      <div class="col-md-6">
-        <%= osuny_panel t('communication.authors', count: 2) do %>
-          <%= render 'admin/communication/websites/authors/list', authors: @authors %>
-          <% if @authors.total_pages > 1 %>
-            <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <% end %>
 
 <% end %>
 
