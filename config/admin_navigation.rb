@@ -48,11 +48,11 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :education,
                     'Ressources éducatives',
                     nil,
-                    { icon: 'laptop' }
+                    { icon: Icon::EDUCATION_RESOURCES }
       primary.item :education,
                     'Feedbacks',
                     nil,
-                    { icon: 'comments' }
+                    { icon: Icon::EDUCATION_FEEDBACKS }
     end
 
     if can?(:read, Research::Journal) || can?(:read, Research::Laboratory)
@@ -78,7 +78,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :research_watch,
                     'Veille',
                     nil,
-                    { icon: 'eye' }
+                    { icon: Icon::RESEARCH_WATCH }
     end
 
     if can?(:read, Communication::Website)
@@ -96,7 +96,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :communication_newsletters,
                     'Lettres d\'information',
                     nil,
-                    { icon: 'envelope' }
+                    { icon: Icon::COMMUNICATION_NEWSLETTERS }
     end
 
     if can?(:read, Administration::Qualiopi::Criterion)
@@ -107,34 +107,34 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :administration_campus,
                     'Campus',
                     nil,
-                    { icon: 'map-marker-alt' }
+                    { icon: Icon::ADMINISTRATION_CAMPUS }
       primary.item :administration_admissions,
                     'Admissions',
                     nil,
-                    { icon: 'door-open' }
+                    { icon: Icon::ADMINISTRATION_ADMISSIONS }
       primary.item :administration_internship,
                     'Stages',
                     nil,
-                    { icon: 'hands-helping' }
+                    { icon: Icon::ADMINISTRATION_INTERNSHIPS }
       primary.item :administration_statistics,
                     'Statistiques',
                     nil,
-                    { icon: 'chart-bar' }
+                    { icon: Icon::ADMINISTRATION_STATISTICS }
       primary.item :administration_qualiopi,
                     'Qualité',
                     admin_administration_qualiopi_criterions_path,
-                    { icon: 'tasks' } if can?(:read, Administration::Qualiopi::Criterion)
+                    { icon: Icon::ADMINISTRATION_QUALITY } if can?(:read, Administration::Qualiopi::Criterion)
     end
 
     if can?(:read, User)
-      primary.item :administration,
+      primary.item :osuny,
                     'Osuny',
                     nil,
                     { kind: :header }
-      primary.item :administration_users,
+      primary.item :osuny_users,
                     User.model_name.human(count: 2),
                     admin_users_path,
-                    { icon: 'user' } if can?(:read, User)
+                    { icon: Icon::OSUNY_USER } if can?(:read, User)
     end
   end
 end

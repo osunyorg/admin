@@ -19,14 +19,14 @@
                     v-model="data.columns[index]">
             <a  class="btn text-danger"
                 v-on:click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
-                <i class="fas fa-times"></i>
+                <i class="<%= Icon::DELETE %>"></i>
             </a>
           </div>
         </div>
         <div class="td">
           <a  class="btn btn-primary mt-n1"
               v-on:click="data.columns.push('')">
-              <i class="fas fa-plus"></i> colonne
+              <i class="<%= Icon::ADD %>"></i> colonne
           </a>
         </div>
       </div>
@@ -42,10 +42,10 @@
           <div class="d-flex">
             <a  class="btn text-danger"
                 v-on:click="data.elements.splice(index, 1)">
-                <i class="fas fa-times"></i>
+                <i class="<%= Icon::DELETE %>"></i>
             </a>
             <a class="btn dragHandle">
-              <i class="fa fa-bars handle"></i>
+              <i class="<%= Icon::DRAG %> handle"></i>
             </a>
           </div>
         </div>
@@ -54,7 +54,7 @@
   </div>
   <a  class="btn btn-primary"
       v-on:click="data.elements.push({cells: []})">
-      <i class="fas fa-plus"></i> ligne
+      <i class="<%= Icon::ADD %>"></i> ligne
   </a>
 </div>
 

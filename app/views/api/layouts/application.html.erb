@@ -6,20 +6,20 @@
     <title><%= yield :title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'admin', media: 'all' %>
-    <%= javascript_include_tag 'admin' %>
+    <%= stylesheet_link_tag 'admin/pure', media: 'all' %>
+    <%= javascript_include_tag 'admin/pure' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-  <body class="<%= body_classes %>">
-    <nav class="navbar navbar-light">
+  <body>
+    <nav class="navbar navbar-expand position-relative">
       <div class="container">
-        <a class="navbar-brand" href="<%= api_root_path %>">
+        <a class="navbar-brand mx-auto" href="<%= api_root_path %>">
           <%= render 'logo' %>
         </a>
       </div>
     </nav>
     <main class="container mt-5">
-      <h1><%= yield :title %></h1>
+      <h1 class="my-5"><%= yield :title %></h1>
       <%= yield %>
     </main>
     <%= render 'footer' %>

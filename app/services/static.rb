@@ -9,6 +9,16 @@ class Static
     string
   end
 
+  def self.has_content?(html)
+    !blank?(html)
+  end
+
+  def self.blank?(html)
+    text = ActionController::Base.helpers.strip_tags html
+    text = text.to_s.strip
+    text.blank?
+  end
+
   def self.render(template_static, about, website)
     code = ApplicationController.render(
       template: template_static,

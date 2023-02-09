@@ -1,0 +1,14 @@
+<%
+indentation = ' ' * depth
+%>
+<% programs.each do |program| %>
+<%= indentation %>- label: >
+<%= indentation %>    <%= program.to_s %>
+<%= indentation %>  path: >
+<%= indentation %>    <%= program.current_permalink_in_website(@website)&.path %>
+<% children = program.children.ordered %>
+<% if children.any? %>
+<%= indentation %>  children: 
+<%= render 'programs', programs: program.children.ordered, depth: depth + 4 %>
+<% end %>
+<% end %>

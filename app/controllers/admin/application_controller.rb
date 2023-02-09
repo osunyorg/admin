@@ -22,7 +22,8 @@ class Admin::ApplicationController < ApplicationController
 
   def breadcrumb_for(object, **options)
     return unless object
-    object.persisted? ? add_breadcrumb(object, [:admin, object, options])
+    title = object.to_s.truncate(50)
+    object.persisted? ? add_breadcrumb(title, [:admin, object, options])
                       : add_breadcrumb(t('create'))
   end
 

@@ -1,20 +1,16 @@
 <%
 color = about.accessible? ? 'text-success' : 'text-danger'
-action = "<i class=\"fas fa-universal-access fa-2x float-end #{ color}\"></i>"
+action = "<i class=\"#{ Icon::A11Y } fa-2x float-end #{ color}\"></i>"
 %>
 <%= osuny_panel t('accessibility.label'), action: action do %>
   <% if about.accessibility_errors.any? %>
-    <h3 class="h5 text-danger">
-      <%= t 'accessibility.errors', count: about.accessibility_errors.count %>
-    </h3>
+    <%= osuny_label t('accessibility.errors', count: about.accessibility_errors.count), classes: 'text-danger' %>
     <ol class="list-unstyled">
       <% about.accessibility_errors.each do |key| %>
         <li>
           <hr>
-          <h3 class="h5 text-danger"><%= t "#{key}.title" %></h3>
-          <p>
-            <%= t "#{key}.text_html" %>
-          </p>
+          <%= osuny_label t("#{key}.title"), classes: 'text-danger' %>
+          <p><%= t "#{key}.text_html" %></p>
         </li>
       <% end %>
     </ol>
@@ -22,14 +18,12 @@ action = "<i class=\"fas fa-universal-access fa-2x float-end #{ color}\"></i>"
     <p><%= t 'accessibility.errors', count: 0 %></p>
   <% end %>
   <% if about.accessibility_warnings.any? %>
-    <h3 class="h5">
-      <%= t 'accessibility.warnings', count: about.accessibility_warnings.count %>
-    </h3>
+    <%= osuny_label t('accessibility.warnings', count: about.accessibility_warnings.count) %>
     <ul class="list-unstyled">
       <% about.accessibility_warnings.each do |key| %>
       <li>
         <hr>
-        <h3 class="h5"><%= t "#{key}.title" %></h3>
+        <%= osuny_label t("#{key}.title") %>
         <p>
           <%= t "#{key}.text_html" %>
         </p>

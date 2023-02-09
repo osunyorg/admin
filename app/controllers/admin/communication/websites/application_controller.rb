@@ -11,6 +11,12 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   end
   helper_method :current_website_language
 
+  def breadcrumb
+    super
+    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
+    breadcrumb_for @website
+  end
+
   def default_url_options
     options = {}
     if @website.present?

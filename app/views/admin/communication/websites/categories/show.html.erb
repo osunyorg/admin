@@ -9,10 +9,10 @@
     <div class="col-md-4">
       <%= render 'admin/application/i18n/widget', about: @category %>
       <%= osuny_panel t('metadata') do %>
-        <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('slug') %></h3>
+        <%= osuny_label Communication::Website::Category.human_attribute_name('slug') %>
         <p><%= @category.slug %></p>
         <% if @category.parent %>
-          <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('parent') %></h3>
+          <%= osuny_label Communication::Website::Category.human_attribute_name('parent') %>
           <p><%= link_to_if can?(:read, @category.parent),
                           @category.parent,
                           admin_communication_website_category_path(
@@ -21,7 +21,7 @@
                           ) %></p>
         <% end %>
         <% if @category.children.any? %>
-          <h3 class="h5"><%= Communication::Website::Category.human_attribute_name('children') %></h3>
+          <%= osuny_label Communication::Website::Category.human_attribute_name('children') %>
           <ul class="list-unstyled mb-0">
             <% @category.children.each do |child| %>
               <li><%= link_to_if can?(:read, child),

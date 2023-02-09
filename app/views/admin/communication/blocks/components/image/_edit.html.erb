@@ -20,7 +20,7 @@ remove = t 'admin.communication.blocks.components.image.input.remove'
   <a  class="btn btn-sm text-danger"
       v-on:click="<%= model %>.<%= property %>={}"
       v-if="<%= model %>.<%= property %>.id">
-      <i class="fas fa-times"></i>
+      <i class="<%= Icon::DELETE %>"></i>
     <%= remove %>
   </a>
 </div>

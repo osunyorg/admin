@@ -5,27 +5,27 @@
       <div class="row pure__row--small">
         <% unless person.gender.blank? %>
           <div class="col-md-6">
-            <h3 class="h5"><%= University::Person.human_attribute_name('gender') %></h3>
+            <%= osuny_label University::Person.human_attribute_name('gender') %>
             <p><%= t("activerecord.attributes.university/person.genders.#{person.gender}") %></p>
           </div>
         <% end %>
         <% unless person.email.blank? %>
           <div class="col-md-6">
-            <h3 class="h5"><%= University::Person.human_attribute_name('email') %></h3>
+            <%= osuny_label University::Person.human_attribute_name('email') %>
             <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
           </div>
         <% end %>
         <% ['phone_mobile', 'phone_personal', 'phone_professional'].each do |phone| %>
           <% unless person[phone].blank? %>
             <div class="col-md-6">
-              <h3 class="h5"><%= University::Person.human_attribute_name(phone) %></h3>
+              <%= osuny_label University::Person.human_attribute_name(phone) %>
               <p><%= link_to person[phone], "tel:#{person[phone]}", target: '_blank' %></p>
             </div>
           <% end %>
         <% end %>
         <% unless person.birthdate.blank? %>
           <div class="col-md-6">
-            <h3 class="h5"><%= University::Person.human_attribute_name('birthdate') %></h3>
+            <%= osuny_label University::Person.human_attribute_name('birthdate') %>
             <p><%= l(person.birthdate, format: :birthday) %></p>
            </div>
         <% end %>
@@ -33,32 +33,32 @@
           <% value = person.send property %>
           <% next if value.blank? %>
           <div class="col-md-6">
-            <h3 class="h5"><%= University::Person.human_attribute_name(property) %></h3>
+            <%= osuny_label University::Person.human_attribute_name(property) %>
             <p><%= value %></p>
           </div>
         <% end %>
       </div>
       <% unless person.biography.blank? %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('biography') %></h3>
+        <%= osuny_label University::Person.human_attribute_name('biography') %>
         <%= person.biography %>
       <% end %>
     <% end %>
 
     <%= osuny_panel University::Person.human_attribute_name('socials') do %>
       <% unless person.url.blank? %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('url') %></h3>
+        <%= osuny_label University::Person.human_attribute_name('url') %>
         <p><%= link_to person.url, person.url, target: '_blank' %></p>
       <% end %>
       <% unless person.linkedin.blank? %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('linkedin') %></h3>
+        <%= osuny_label University::Person.human_attribute_name('linkedin') %>
         <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
       <% end %>
       <% unless person.twitter.blank? %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('twitter') %></h3>
+        <%= osuny_label University::Person.human_attribute_name('twitter') %>
         <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
       <% end %>
       <% unless person.mastodon.blank? %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('mastodon') %></h3>
+        <%= osuny_label University::Person.human_attribute_name('mastodon') %>
         <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
       <% end %>
     <% end unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? %>
@@ -67,10 +67,10 @@
   </div>
   <div class="col-md-4 col-xl-3">
     <%= osuny_panel t('metadata') do %>
-        <h3 class="h5"><%= University::Person.human_attribute_name('slug') %></h3>
+        <%= osuny_label University::Person.human_attribute_name('slug') %>
         <p><%= person.slug %></p>
         <% if person.user.present? %>
-          <h3 class="h5"><%= University::Person.human_attribute_name('user') %></h3>
+          <%= osuny_label University::Person.human_attribute_name('user') %>
           <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
         <% end %>
     <% end %>

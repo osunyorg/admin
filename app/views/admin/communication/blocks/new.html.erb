@@ -14,9 +14,9 @@
         %>
         <% next unless template.allowed_for_about? %>
         <div class="col-xxl-2 col-lg-3 col-md-4 d-flex">
-          <div class="<%= 'card' if current_admin_theme == 'appstack' %> flex-fill position-relative js-validate-form-click">
+          <div class="<%= if_appstack 'card' %> flex-fill position-relative js-validate-form-click">
             <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top block__image" %>
-            <div class="<%= 'card-body' if current_admin_theme == 'appstack' %>">
+            <div class="<%= if_appstack 'card-body' %>">
                 <h3 class="h4 block__title"><%= t "enums.communication.block.template_kind.#{kind}" %></h4>
                 <p class="mb-0 block__description">
                   <%= t "admin.communication.blocks.templates.#{kind}.description" %>

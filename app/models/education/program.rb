@@ -134,7 +134,7 @@ class Education::Program < ApplicationRecord
   end
 
   def git_path(website)
-    return unless for_website?(website)
+    return unless published? && for_website?(website)
     clean_path = Static.clean_path "#{git_path_content_prefix(website)}programs/#{path}/"
     "#{clean_path}_index.html"
   end

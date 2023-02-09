@@ -21,9 +21,7 @@
         <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
           <div class="card kind" data-kind="<%= kind %>">
             <div class="card-body">
-              <h3 class="h5">
-                <%= t "enums.communication.website.menu.item.kind.#{kind}" %>
-              </h3>
+              <%= osuny_label t("enums.communication.website.menu.item.kind.#{kind}") %>
               <p class="text-end mb-0">
                 <i class="<%= Communication::Website::Menu::Item.icon_for(kind) %>"></i><br>
               </p>

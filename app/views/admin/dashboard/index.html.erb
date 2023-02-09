@@ -43,7 +43,7 @@
       <% next unless can?(:read, website) %>
       <div class="<%= classes %>">
         <%= osuny_panel website, 
-                  action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_WEBSITE }\"></i>" do %>
+                  action: "<i class=\"#{ Icon::COMMUNICATION_WEBSITE }\"></i>" do %>
           <p class="small"><%= website.url %></p>
           <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
         <% end %>
@@ -59,7 +59,7 @@
       <% next unless can?(:read, extranet) %>
       <div class="<%= classes %>">
         <%= osuny_panel extranet, 
-                  action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_EXTRANET }\"></i>" do %>
+                  action: "<i class=\"#{ Icon::COMMUNICATION_EXTRANET }\"></i>" do %>
           <p class="small"><%= extranet.url %></p>
           <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
         <% end %>
@@ -75,7 +75,7 @@
       <% next unless can?(:read, journal) %>
       <div class="<%= classes %>">
         <%= osuny_panel journal, 
-            action: "<i class=\"fas fa-#{ Icon::RESEARCH_JOURNAL }\"></i>" do %>
+            action: "<i class=\"#{ Icon::RESEARCH_JOURNAL }\"></i>" do %>
           <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
         <% end %>
       </div>
