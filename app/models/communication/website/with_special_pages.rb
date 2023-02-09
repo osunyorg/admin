@@ -7,12 +7,7 @@ module Communication::Website::WithSpecialPages
   end
 
   def special_page(type, language: default_language)
-    special_page = pages.where(type: type.to_s, language_id: language.id).first
-    special_page ||= begin
-      original_special_page = pages.where(type: type.to_s, language_id: default_language_id).first
-      original_special_page.translate!(language) if original_special_page.present?
-    end
-    special_page
+    find_special_page(type, language) || translate_special_page(type, language)
   end
 
   def create_missing_special_pages
@@ -22,5 +17,17 @@ module Communication::Website::WithSpecialPages
       next unless page.is_necessary_for_website? # No useless pages
       page.save_and_sync
     end
+  end
+
+  protected
+
+  def find_special_page(type, language)
+    pages.where(type: type.to_s, language_id: language.id).first
+  end
+
+  def translate_special_page(type, language)
+    # Not found for given language, we create it from the page in default_language
+    original_special_page = pages.where(type: type.to_s, language_id: default_language_id).first
+    original_special_page.translate!(language) if original_special_page.present?
   end
 end
