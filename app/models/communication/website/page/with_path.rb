@@ -8,9 +8,8 @@ module Communication::Website::Page::WithPath
 
   def path
     path = ''
-    # TODO i18n remplacer le choix de la langue
     if website.languages.many?
-      path += "/#{website.default_language.iso_code}"
+      path += "/#{language.iso_code}"
     end
     path += "/#{slug_with_ancestors}/"
     path.gsub(/\/+/, '/')
@@ -55,7 +54,7 @@ module Communication::Website::Page::WithPath
 
   def slug_unavailable?(slug)
     self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, slug: slug)
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
   end

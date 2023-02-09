@@ -14,7 +14,7 @@ end
 <%= osuny_label title %>
 <p>
   <% if Static.blank?(value) %>
-    <i class="fa fa-exclamation-circle text-danger"></i>
+    <i class="<%= Icon::WARNING %> text-danger"></i>
     <%= t 'properties.text.missing' %>
   <% else %>
     <%= strip_tags(value).truncate(200).html_safe %>

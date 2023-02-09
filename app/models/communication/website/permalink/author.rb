@@ -34,7 +34,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
   end
 
   # /equipe/:slug/actualites/
-  def self.pattern_in_website(website)
-    "/#{website.special_page(Communication::Website::Page::Person).slug_with_ancestors}/:slug/#{website.special_page(Communication::Website::Page::CommunicationPost).slug}/"
+  def self.pattern_in_website(website, language)
+    "/#{website.special_page(Communication::Website::Page::Person, language: language).slug_with_ancestors}/:slug/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug}/"
   end
 end

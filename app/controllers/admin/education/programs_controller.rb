@@ -123,6 +123,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def load_teacher_people
     @teacher_people = current_university.people
+                                        .for_language_id(current_university.default_language_id)
                                         .teachers
                                         .accessible_by(current_ability)
                                         .ordered

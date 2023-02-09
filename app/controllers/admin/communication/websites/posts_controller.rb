@@ -3,7 +3,10 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   load_and_authorize_resource class: Communication::Website::Post, through: :website
 
+  include Admin::Translatable
+
   before_action :load_filters, only: :index
+  before_action :load_categories, only: [:new, :edit]
 
   has_scope :for_search_term
   has_scope :for_author
@@ -11,11 +14,12 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).ordered.page params[:page]
-    @authors =  @website.authors.accessible_by(current_ability)
+    @posts = apply_scopes(@posts).for_language(current_website_language).ordered.page params[:page]
+    @authors =  @website.authors.for_language(current_website_language)
+                                .accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
-    @root_categories = @website.categories.root.ordered
+    @root_categories = @website.categories.for_language(current_website_language).root.ordered
     breadcrumb
   end
 
@@ -48,7 +52,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def new
     @post.website = @website
-    @post.author_id = current_user.person&.id
+    if current_user.person.present?
+      @post.author_id = current_user.person.find_or_translate!(current_website_language).id
+    end
     breadcrumb
   end
 
@@ -63,6 +69,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     if @post.save_and_sync
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
+      load_categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -73,6 +80,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
+      load_categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -95,16 +103,23 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def post_params
     params.require(:communication_website_post)
-          .permit(
-            :university_id, :website_id, :title, :meta_description, :summary, :text,
-            :published, :published_at, :slug, :pinned,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :author_id, :language_id, category_ids: []
-          )
-          .merge(university_id: current_university.id)
+    .permit(
+      :title, :meta_description, :summary, :text,
+      :published, :published_at, :slug, :pinned,
+      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :author_id, category_ids: []
+    )
+    .merge(
+      university_id: current_university.id,
+      language_id: current_website_language.id
+    )
   end
 
   def load_filters
     @filters = ::Filters::Admin::Communication::Website::Posts.new(current_user, @website).list
+  end
+
+  def load_categories
+    @categories = @website.categories.for_language(current_website_language)
   end
 end

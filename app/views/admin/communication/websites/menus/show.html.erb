@@ -12,6 +12,7 @@
                   class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
     </div>
     <div class="col-md-4">
+      <%= render 'admin/application/i18n/widget', about: @menu %>
       <%= osuny_panel t('metadata') do %>
         <%= osuny_label Communication::Website::Menu.human_attribute_name('identifier') %>
         <p><%= @menu.identifier %></p>

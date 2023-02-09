@@ -8,7 +8,10 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   has_scope :for_role
 
   def index
-    @people = apply_scopes(@people).ordered.page(params[:page])
+    @people = apply_scopes(@people)
+                .for_language_id(current_university.default_language_id)
+                .ordered
+                .page(params[:page])
     breadcrumb
   end
 
@@ -16,6 +19,18 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     @teacher_involvements = @person.involvements_as_teacher.includes(:target).ordered_by_date.page(params[:programs_page])
     @administrator_involvements = @person.involvements_as_administrator.includes(:target).ordered_by_date.page(params[:roles_page])
     breadcrumb
+  end
+
+  def in_language
+    language = Language.find_by!(iso_code: params[:lang])
+    translation = @person.find_or_translate!(language)
+    if translation.newly_translated
+      # There's an attribute accessor named "newly_translated" that we set to true
+      # when we just created the translation. We use it to redirect to the form instead of the show.
+      redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
+    else
+      redirect_to [:admin, translation.becomes(translation.class.base_class)]
+    end
   end
 
   def static

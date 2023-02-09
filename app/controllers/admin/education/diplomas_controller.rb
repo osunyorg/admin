@@ -14,6 +14,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def static
     @about = @diploma
     @website = @diploma.websites&.first
+    @programs = @website.education_programs.root.ordered
     render layout: false
   end
 

@@ -11,7 +11,7 @@
   <div v-for="(element, index) in data.elements" class="col-xxl-1 col-lg-2 col-4">
     <div class="card">
       <div class="card-header p-1 text-center">
-        <i class="fas fa-arrows-alt"></i>
+        <i class="<%= Icon::MOVE %>"></i>
       </div>
       <div v-if="element.image.id">
         <img :src="getImageUrl(element.image)" class="img-fluid" />
@@ -30,7 +30,7 @@
       <a  class="btn btn-sm text-danger mt-n4"
           v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
           title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
-          <i class="fas fa-times"></i>
+          <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>
     <div class="row pure__row--small">

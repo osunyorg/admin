@@ -5,6 +5,10 @@ class Server::ApplicationController < ApplicationController
 
   protected
 
+  def current_admin_theme
+    'pure'
+  end
+
   def breadcrumb
     add_breadcrumb t('admin.dashboard'), :server_root_path
   end

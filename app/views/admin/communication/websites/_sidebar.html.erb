@@ -1,6 +1,6 @@
 <div class="row mt-2 website__sidebar">
   <div class="col-lg-3 col-xl-2">
-    <div class="list-group list-group-flush" role="tablist">
+    <ul class="list-unstyled" role="tablist">
       <%
       navigation = [
         {
@@ -32,25 +32,38 @@
       navigation << {
         title: t('communication.website.analytics'),
         path: analytics_admin_communication_website_path(@website.id, website_id: nil),
-        icon:  Icon::COMMUNICATION_WEBSITE_ANALYTICS,
+        icon: Icon::COMMUNICATION_WEBSITE_ANALYTICS,
         ability: can?(:read, @website)
       } if @website.plausible_url.present?
 
       navigation.each_with_index do |object, index|
         next unless object[:ability]
-        active = index.zero?  ? object[:path] == request.path
+        active = index.zero?  ? controller_name == "websites" && action_name == "show"
                               : object[:path].in?(request.path)
       %>
-      <a class="list-group-item bg-transparent px-0 list-group-item-action<%= ' active' if active %>" href="<%= object[:path] %>">
-        <%= object[:title].html_safe %>
-        <span class="float-end">
-          <i class="fas fa-<%= object[:icon] %>"></i>
-        </span>
-      </a>
+        <li class="mb-3">
+          <a class="d-block py-1 <%= active ? 'text-black' : 'text-muted' %>" href="<%= object[:path] %>">
+            <i class="<%= object[:icon] %>" style="min-width: 30px"></i>
+            <%= object[:title].html_safe %>
+          </a>
+        </li>
       <% end %>
-    </div>
+    </ul>
+    <% if @website.languages.many? %>
+      <select class="form-control form-select mt-5"  onchange="if (this.value) window.location.href=this.value">
+        <% @website.languages.each do |language| %>
+          <%
+          label = I18n.t(language.iso_code, scope: :languages)
+          path = url_for request.params.merge(lang: language.iso_code)
+          selected = current_website_language == language
+          %>
+          <option value="<%= path %>"<% if selected %> selected="selected"<% end %>><%= label %></option>
+        <% end %>
+      </select>
+    <% end %>
   </div>
   <div class="col-lg-9 col-xl-10">
     <%= yield %>
   </div>
+
 </div>

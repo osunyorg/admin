@@ -33,8 +33,8 @@ class Communication::Website::Permalink::Volume < Communication::Website::Permal
   end
 
   # /volumes/:slug/
-  def self.pattern_in_website(website)
-    "/#{website.special_page(Communication::Website::Page::ResearchVolume).slug_with_ancestors}/:year-:slug/"
+  def self.pattern_in_website(website, language)
+    "/#{website.special_page(Communication::Website::Page::ResearchVolume, language: language).slug_with_ancestors}/:year-:slug/"
   end
 
   protected

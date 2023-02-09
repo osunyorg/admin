@@ -1,6 +1,4 @@
-<%
-categories = collection_tree(@block.about&.website.categories)
-%>
+<% categories = collection_tree(@block.about&.website.categories.for_language(@block.language)) %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">
   <%= label %>

@@ -33,7 +33,7 @@ class Communication::Website::Permalink::Diploma < Communication::Website::Perma
   end
 
   # /diplomes/:slug/
-  def self.pattern_in_website(website)
-    "/#{website.special_page(Communication::Website::Page::EducationDiploma).slug_with_ancestors}/:slug/"
+  def self.pattern_in_website(website, language)
+    "/#{website.special_page(Communication::Website::Page::EducationDiploma, language: language).slug_with_ancestors}/:slug/"
   end
 end

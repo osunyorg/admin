@@ -2,7 +2,7 @@
 expanded ||= false
 %>
 <% if current_user.server_admin? %>
-<i  class="fas fa-gear text-muted"
+<i  class="<%= Icon::SETTINGS %> text-muted"
     data-bs-toggle="collapse"
     data-bs-target="#dependencies"
     aria-expanded="<%= expanded %>"
