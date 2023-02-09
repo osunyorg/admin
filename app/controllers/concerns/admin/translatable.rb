@@ -8,13 +8,6 @@ module Admin::Translatable
 
     # If we don't have a website, it will not work
 
-    def translatable_params(model_name, attribute_names)
-      params.require(model_name).permit(attribute_names).merge(
-        university_id: current_university.id,
-        language_id: current_website_language.id
-      )
-    end
-
     def check_or_redirect_translatable_resource
       # Early return if language is correct
       return if resource.language_id == current_website_language.id

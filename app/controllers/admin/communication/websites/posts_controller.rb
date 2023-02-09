@@ -102,14 +102,16 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def post_params
-    translatable_params(
-      :communication_website_post,
-      [
-        :title, :meta_description, :summary, :text,
-        :published, :published_at, :slug, :pinned,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-        :author_id, category_ids: []
-      ]
+    params.require(:communication_website_post)
+    .permit(
+      :title, :meta_description, :summary, :text,
+      :published, :published_at, :slug, :pinned,
+      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :author_id, category_ids: []
+    )
+    .merge(
+      university_id: current_university.id,
+      language_id: current_website_language.id
     )
   end
 
