@@ -2,7 +2,8 @@ module User::WithPerson
   extend ActiveSupport::Concern
 
   included do
-    has_one :person, class_name: 'University::Person', dependent: :nullify
+    # Original person
+    has_one :person, -> { where(original_id: nil) }, class_name: 'University::Person', dependent: :nullify
 
     delegate :experiences, to: :person
 

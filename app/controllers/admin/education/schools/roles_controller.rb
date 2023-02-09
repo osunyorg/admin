@@ -70,6 +70,10 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
   end
 
   def load_administration_people
-    @administration_people = current_university.people.administration.accessible_by(current_ability).ordered
+    @administration_people =  current_university.people
+                                                .for_language_id(current_university.default_language_id)
+                                                .administration
+                                                .accessible_by(current_ability)
+                                                .ordered
   end
 end

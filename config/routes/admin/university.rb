@@ -22,6 +22,7 @@ namespace :university do
   resources :people do
     member do
       get :static
+      get "/translations/:lang" => "people#in_language", as: :show_in_language
     end
   end
   resources :organizations do

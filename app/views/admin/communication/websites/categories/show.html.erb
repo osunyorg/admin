@@ -7,6 +7,7 @@
       <%= render 'admin/communication/blocks/list', about: @category %>
     </div>
     <div class="col-md-4">
+      <%= render 'admin/application/i18n/widget', about: @category %>
       <%= osuny_panel t('metadata') do %>
         <%= osuny_label Communication::Website::Category.human_attribute_name('slug') %>
         <p><%= @category.slug %></p>
@@ -38,7 +39,7 @@
     </div>
   </div>
   <% if @posts.total_count > 0 %>
-    <%= osuny_panel Communication::Website::Post.model_name.human(count: 2), 
+    <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
                     subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>
       <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_category: true %>
       <%= paginate @posts, theme: 'bootstrap-5' %>

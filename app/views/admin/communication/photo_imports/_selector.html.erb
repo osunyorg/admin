@@ -12,8 +12,8 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 # /admin/communication/photo_import.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
-unsplash_path = admin_communication_unsplash_path(website_id: nil, format: :json)
-pexels_path = admin_communication_pexels_path(website_id: nil, format: :json)
+unsplash_path = admin_communication_unsplash_path(website_id: nil, lang: nil, format: :json)
+pexels_path = admin_communication_pexels_path(website_id: nil, lang: nil, format: :json)
 %>
 
 <div id="photo-import-app" v-cloak>

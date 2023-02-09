@@ -20,7 +20,7 @@ class Language < ApplicationRecord
   validates_presence_of :iso_code
   validates_uniqueness_of :iso_code
 
-  default_scope { order(name: :asc) }
+  scope :ordered, -> { order(name: :asc) }
 
   def to_s
     "#{name}"

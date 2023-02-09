@@ -14,4 +14,10 @@ class Communication::Block::Component::Post < Communication::Block::Component::B
     ]
   end
 
+  def translate!
+    return unless website && data.present?
+    source_post = website.posts.find_by(id: data)
+    @data = source_post.find_or_translate!(template.language).id if source_post.present?
+  end
+
 end

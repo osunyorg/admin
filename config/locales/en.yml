@@ -209,6 +209,8 @@ en:
     still_pending: "Your import has not been processed yet. You will receive an email as soon as it's ready."
   import_btn: Import
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
+  internationalization:
+    label: Internationalization
   languages:
     en: English
     fr: French

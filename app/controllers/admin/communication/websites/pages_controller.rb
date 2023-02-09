@@ -2,9 +2,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Page,
                               through: :website
 
+  include Admin::Translatable
+
   def index
-    @homepage = @website.special_page(Communication::Website::Page::Home)
+    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
+    @pages = @website.pages.for_language(current_website_language)
     breadcrumb
   end
 
@@ -105,8 +108,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
             :communication_website_id, :title, :breadcrumb_title, :bodyclass,
             :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :parent_id, :language_id
+            :parent_id
           )
-          .merge(university_id: current_university.id)
+          .merge(
+            university_id: current_university.id,
+            language_id: current_website_language.id
+          )
   end
+
 end

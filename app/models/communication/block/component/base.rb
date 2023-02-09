@@ -32,4 +32,8 @@ class Communication::Block::Component::Base
   def website
     template.block.about&.website
   end
+
+  def translate!
+    # By default, does nothing. Specific cases are handled in their own definitions. (example: post)
+  end
 end

@@ -5,6 +5,7 @@ fr:
         address: Adresse
         city: Ville
         country: Pays
+        default_language: Langue par défaut
         has_sso: A un SSO ?
         identifier: Identifiant
         invoice_amount: Montant de facturation

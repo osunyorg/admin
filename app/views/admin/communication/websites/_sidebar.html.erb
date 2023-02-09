@@ -32,13 +32,13 @@
       navigation << {
         title: t('communication.website.analytics'),
         path: analytics_admin_communication_website_path(@website.id, website_id: nil),
-        icon:  Icon::COMMUNICATION_WEBSITE_ANALYTICS,
+        icon: Icon::COMMUNICATION_WEBSITE_ANALYTICS,
         ability: can?(:read, @website)
       } if @website.plausible_url.present?
 
       navigation.each_with_index do |object, index|
         next unless object[:ability]
-        active = index.zero?  ? object[:path] == request.path
+        active = index.zero?  ? controller_name == "websites" && action_name == "show"
                               : object[:path].in?(request.path)
       %>
         <li class="mb-3">
@@ -48,9 +48,22 @@
           </a>
         </li>
       <% end %>
-    </li>
+    </ul>
+    <% if @website.languages.many? %>
+      <select class="form-control form-select mt-5"  onchange="if (this.value) window.location.href=this.value">
+        <% @website.languages.each do |language| %>
+          <%
+          label = I18n.t(language.iso_code, scope: :languages)
+          path = url_for request.params.merge(lang: language.iso_code)
+          selected = current_website_language == language
+          %>
+          <option value="<%= path %>"<% if selected %> selected="selected"<% end %>><%= label %></option>
+        <% end %>
+      </select>
+    <% end %>
   </div>
   <div class="col-lg-9 col-xl-10">
     <%= yield %>
   </div>
+
 </div>
