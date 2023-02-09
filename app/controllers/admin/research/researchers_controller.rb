@@ -12,6 +12,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     @possible_hal_authors = @researcher.possible_hal_authors unless @researcher.hal_identity?
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
+    add_breadcrumb @researcher
   end
 
   def update
@@ -33,7 +34,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     super
     add_breadcrumb t('research.researchers', count: 2),
                    admin_research_researchers_path
-    breadcrumb_for @researcher
   end
 
 end
