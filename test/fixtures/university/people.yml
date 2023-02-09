@@ -64,3 +64,4 @@ alumnus:
     - default_cohort
   university: default_university
   user: alumnus
+  language: fr
