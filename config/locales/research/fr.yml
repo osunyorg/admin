@@ -4,6 +4,9 @@ fr:
       research: Recherche
   activerecord:
     models:
+      university/person/researcher:
+        one: Chercheur·e
+        other: Chercheur·e·s
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -27,6 +30,7 @@ fr:
         other: Thèses
     attributes:
       research/journal:
+        description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
         title: Titre
       research/journal/paper:
@@ -37,7 +41,7 @@ fr:
         published_at: Publié le
         references: Références
         kind: Type de papier
-        people: Auteu·rs·rices
+        people: Auteur·e·s
         text: Texte
         title: Titre
       research/journal/paper/kind:
@@ -55,6 +59,7 @@ fr:
         address: Adresse
         country: Pays
         city: Ville
+        description: Structure de recherche hébergeant le travail des chercheur·e·s
         name: Nom
         zipcode: Code postal
       research/laboratory/axis:
@@ -66,16 +71,20 @@ fr:
         author: Auteur·rice
         completed: Complétée ?
         completed_at: Complétée le
+        description: Production scientifique permettant d'obtenir le titre de Docteur·e
         director: Directeur·rice
         laboratory: Laboratoire
         started_at: Commencée le
         title: Titre
   research:
-    manage_researchers: Gérer les Chercheu·rs·ses
+    description: 
+      text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
+      source: Serge Haroche, Prix Nobel de physique 2012
+    manage_researchers: Gérer les chercheur·e·s
     number_of_papers: Nombre de papiers
     researchers:
-      one: Chercheu·r·se
-      other: Chercheu·rs·ses
+      one: Chercheur·e
+      other: Chercheur·e·s
   simple_form:
     hints:
       research_journal_volume:

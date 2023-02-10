@@ -14,5 +14,6 @@ subtitle = link_to t('communication.website.see_all', number: @all_posts.size), 
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,
-              hide_category: true %>
+              hide_category: true,
+              hide_buttons: true %>
 <% end %>

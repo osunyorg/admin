@@ -6,14 +6,14 @@ filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_n
 
 <div class="filters">
   <% if collapsable %>
-    <a  class="btn btn-outline-secondary btn-sm filters__button"
+    <a  class="btn btn-light btn-xs filters__button"
         data-bs-toggle="collapse"
         href="#collapseFilters"
         role="button"
         aria-expanded="false"
         aria-controls="collapseFilters">
-      <i class="<%= Icon::FILTERS %>"></i>
       <%= t('filters.buttons.expand') %>
+      <i class="<%= Icon::FILTERS %>"></i>
     </a>
   <% end %>
   <div class="collapse filters__content <%= (!collapsable || should_be_open) ? 'show' : '' %>" id="collapseFilters">

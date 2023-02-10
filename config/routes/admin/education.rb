@@ -41,4 +41,5 @@ namespace :education do
       get :static
     end
   end
+  root to: 'dashboard#index'
 end

@@ -1,7 +1,8 @@
 <%
-  hide_author |= false
-  hide_category |= false
-  selectable |= false
+  hide_author ||= false
+  hide_category ||= false
+  hide_buttons ||= false
+  selectable ||= false
 %>
 <% if selectable %>
   <input type="hidden" name="ids[]" value="">
@@ -15,9 +16,9 @@
             <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } %>
           </th>
         <% end %>
-        <th class="ps-0"><%= Communication::Website::Post.human_attribute_name('title') %></th>
+        <th class="ps-0" width="60%"><%= Communication::Website::Post.human_attribute_name('title') %></th>
         <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
-        <th colspan="2"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
+        <th<% unless hide_buttons %> colspan="2"<% end %> class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
       </tr>
     </thead>
     <tbody>
@@ -31,16 +32,12 @@
           <td class="ps-0"><%= link_to post,
                           admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                           class: "#{'draft' unless post.published?}" %></td>
-          <td class="p-0"><%= image_tag post.featured_image.representation(resize: 'x100'),
-                                            height: 50 if post.featured_image.attached? && post.featured_image.representable? %></td>
-          <td>
-            <p class="small mb-0">
-              <%= l post.published_at, format: :date_with_explicit_month if post.published_at %>
-            </p>
+          <td><%= image_tag post.featured_image.representation(resize: '200x'),
+                                            width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          <td class="ps-3 small">
+            <%= l post.published_at, format: :date_with_explicit_month if post.published_at %><br>
             <% if !hide_author && post.author %>
-              <p class="small mb-0">
-                <%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) %>
-              </p>
+              <%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) %><br>
             <% end %>
             <% unless hide_category %>
               <ul class="list-unstyled mb-0">
@@ -53,18 +50,20 @@
               <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
             <% end %>
           </td>
-          <td>
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                          edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                          class: button_classes if can?(:update, post) %>
-              <%= link_to t('delete'),
-                          admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                          method: :delete,
-                          data: { confirm: t('please_confirm') },
-                          class: button_classes_danger if can?(:destroy, post) %>
-            </div>
-          </td>
+          <% unless hide_buttons %>
+            <td>
+              <div class="btn-group" role="group">
+                <%= link_to t('edit'),
+                            edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                            class: button_classes if can?(:update, post) %>
+                <%= link_to t('delete'),
+                            admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                            method: :delete,
+                            data: { confirm: t('please_confirm') },
+                            class: button_classes_danger if can?(:destroy, post) %>
+              </div>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

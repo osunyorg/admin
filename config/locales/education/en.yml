@@ -4,6 +4,9 @@ en:
       education: Education
   activerecord:
     models:
+      university/person/teacher:
+        one: Teacher
+        other: Teachers
       education/academic_year:
         one: Year
         other: Years
@@ -87,6 +90,9 @@ en:
         tree:
           title: Programs treeview
   education:
+    description: 
+      text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
+      source: Olivier Reboul, La philosophie de l'éducation, 2018
     manage_programs: Manage programs
     manage_roles: Manage roles
     manage_teachers: Manage teachers
@@ -117,9 +123,6 @@ en:
       other: Roles
     schools:
       manage_roles: Manage the team
-    teachers:
-      one: Teacher
-      other: Teachers
   enums:
     education:
       diploma:
