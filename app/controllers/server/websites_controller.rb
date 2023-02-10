@@ -1,7 +1,10 @@
 class Server::WebsitesController < Server::ApplicationController
 
+  has_scope :for_theme_version
+  has_scope :for_search_term
+
   def index
-    @websites = Communication::Website.all.ordered
+    @websites = apply_scopes(Communication::Website.all).ordered
     breadcrumb
     add_breadcrumb Communication::Website.model_name.human(count: 2), server_websites_path
   end

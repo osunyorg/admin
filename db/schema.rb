@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_135355) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_10_132818) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -397,7 +397,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_135355) do
     t.string "git_branch"
     t.boolean "in_production", default: false
     t.uuid "default_language_id", null: false
-    t.string "theme_version"
+    t.string "theme_version", default: "NA"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -575,20 +575,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_135355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "summernote_locale"
-  end
-
-  create_table "research_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "university_person_id", null: false
-    t.string "docid"
-    t.jsonb "data"
-    t.string "title"
-    t.string "url"
-    t.string "ref"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["university_id"], name: "index_research_documents_on_university_id"
-    t.index ["university_person_id"], name: "index_research_documents_on_university_person_id"
   end
 
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -796,7 +782,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_135355) do
     t.string "zipcode"
     t.string "city"
     t.string "country"
-    t.string "hal_person_identifier"
     t.string "mastodon"
     t.uuid "language_id", null: false
     t.uuid "original_id"
@@ -954,8 +939,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_135355) do
   add_foreign_key "education_schools", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
-  add_foreign_key "research_documents", "universities"
-  add_foreign_key "research_documents", "university_people"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"
   add_foreign_key "research_journal_paper_kinds", "universities"
   add_foreign_key "research_journal_papers", "research_journal_paper_kinds", column: "kind_id"
