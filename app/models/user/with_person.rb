@@ -19,6 +19,7 @@ module User::WithPerson
     person.last_name = last_name
     person.slug = person.to_s.parameterize
     person.user = self
+    person.language_id ||= university.default_language_id
     person.save
   end
 
