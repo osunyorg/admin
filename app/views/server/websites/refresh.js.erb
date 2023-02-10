@@ -1,0 +1,2 @@
+var column = document.querySelector('#website-<%= @website.id %> .js-version');
+column.innerHTML = "<%= j link_to @website.theme_version, @website.theme_version_url, target: '_blank' if @website.theme_version_url.present? %>";
