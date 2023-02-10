@@ -86,11 +86,11 @@
 <div class="row mt-5 pt-5">
   <% @namespaces.each do |namespace| %>
     <% 
-    path = send "admin_#{namespace.to_s.downcase}_root_path"
-    description = t "#{namespace.to_s.downcase}.description.text"
+    path = send "admin_#{namespace.to_s.underscore}_root_path"
+    description = t "#{namespace.to_s.underscore}.description.text"
     %>
   <div class="col-lg-3">
-    <%= osuny_panel namespace.model_name.human, image: "admin/#{namespace.to_s.downcase}.jpg" do %>
+    <%= osuny_panel namespace.model_name.human, image: "admin/#{namespace.to_s.underscore}.jpg" do %>
       <p><%= description.truncate 180 %></p>
       <%= link_to t('show'), path, class: 'stretched-link' %>
     <% end %>

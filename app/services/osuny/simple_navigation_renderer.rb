@@ -33,7 +33,7 @@ class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
     if item.options.has_key? :image
       image = item.options[:image]
       part += "<a href=\"#{item.url}\">"
-      part += ActionController::Base.helpers.image_tag image, class: 'image'
+      part += ActionController::Base.helpers.image_tag image, class: 'image', loading: :lazy
       part += "</a>"
     end
     part += "<h2>#{item_name_and_link}</h2>"

@@ -50,7 +50,7 @@ context ||= :admin
             image = 'avatar.jpg'
           end
           %>
-          <%= image_tag image, class: 'image' %>
+          <%= image_tag image, class: 'image', loading: :lazy %>
           <h2><%= link_to current_user.to_s, admin_user_path(current_user) %></h2>
           <ul>
             <li><%= link_to t('menu.profile'), edit_user_registration_path %></li>
