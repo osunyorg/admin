@@ -9,7 +9,6 @@ class Server::WebsitesController < Server::ApplicationController
   def refresh
     @website = Communication::Website.find params[:id]
     @website.get_current_theme_version!
-    # redirect_back fallback_location: server_websites_path
   end
 
 end
