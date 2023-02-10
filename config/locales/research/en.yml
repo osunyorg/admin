@@ -70,7 +70,7 @@ en:
         short_name: Short name
         text: Text
       research/publication:
-        description: TODO Description Publication
+        description: Publications scientifiques importées automatiquement de HAL
       research/thesis:
         abstract: Abstract
         author: Author
