@@ -1,6 +1,6 @@
 namespace :research do
   resources :researchers, only: [:index, :show, :update]
-  resources :publications, only: [:index, :show, :update] do
+  resources :publications, only: [:index, :show] do
     member do
       get :static
     end

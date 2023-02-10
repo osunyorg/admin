@@ -1,4 +1,5 @@
 class Admin::Research::PublicationsController < Admin::Research::ApplicationController
+  before_action :load, except: :index
 
   def index
     @publications = Research::Publication.ordered.page(params[:page])
@@ -6,22 +7,19 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
   end
 
   def show
-    @publication = Research::Publication.find params[:id]
     breadcrumb
   end
 
   def static
-    @about = Research::Publication.find params[:id]
+    @about = @publication
     render layout: false
   end
 
-  def update
-    @publication = Research::Publication.find params[:id]
-    # TODO update from api
-    redirect_to admin_research_publication_path(@publication)
-  end
-
   protected
+
+  def load
+    @publication = Research::Publication.find params[:id]
+  end
 
   def breadcrumb
     super
