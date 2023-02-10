@@ -66,11 +66,11 @@ module Communication::Website::Page::WithPath
   end
 
   def slug_must_be_present
-    errors.add(:slug, ActiveRecord::Errors.default_error_messages[:absent]) if slug.blank?
+    errors.add(:slug, :absent) if slug.blank?
   end
 
   def slug_must_be_unique
-    errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
+    errors.add(:slug, :taken) if slug_unavailable?(slug)
   end
 
   def slug_must_have_proper_format

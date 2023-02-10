@@ -30,4 +30,5 @@ namespace :university do
       get :static
     end
   end
+  root to: 'dashboard#index'
 end

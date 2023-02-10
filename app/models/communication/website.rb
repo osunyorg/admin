@@ -14,7 +14,7 @@
 #  repository          :string
 #  style               :text
 #  style_updated_at    :date
-#  theme_version       :string
+#  theme_version       :string           default("NA")
 #  url                 :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -66,6 +66,7 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
+  scope :for_theme_version, -> (version) { where(theme_version: version) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_websites.name) ILIKE unaccent(:term) OR

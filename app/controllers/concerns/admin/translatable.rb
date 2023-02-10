@@ -17,7 +17,7 @@ module Admin::Translatable
       redirect_to_translation(translation)
     end
 
-    def redirect_to_translation
+    def redirect_to_translation(translation)
       if ['edit', 'update'].include?(action_name) || translation.newly_translated
         # Safety net on update action if called on wrong language
         # There's an attribute accessor named "newly_translated" that we set to true

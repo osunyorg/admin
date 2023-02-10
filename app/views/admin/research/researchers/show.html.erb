@@ -3,17 +3,10 @@
 <%= render 'admin/university/people/main_infos', person: @researcher %>
 
 <% if @papers.total_count > 0 %>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Paper.model_name.human(count: 2)} (#{@papers.total_count})" %></h2>
-    </div>
+  <%= osuny_panel Research::Journal::Paper.model_name.human(count: 2) do %>
     <%= render 'admin/research/journals/papers/list', papers: @papers %>
-    <% if @papers.total_pages > 1 %>
-      <div class="card-footer">
-        <%= paginate @papers, theme: 'bootstrap-5' %>
-      </div>
-    <% end %>
-  </div>
+    <%= paginate @papers, theme: 'bootstrap-5' %>
+  <% end %>
 <% end %>
 
 <%= osuny_panel Research::Publication.model_name.human(count: 2), action: @researcher.research_publications.count do %>

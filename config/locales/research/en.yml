@@ -4,6 +4,9 @@ en:
       research: Research
   activerecord:
     models:
+      university/person/researcher:
+        one: Researcher
+        other: Researchers
       research/journal:
         one: Journal
         other: Journals
@@ -30,6 +33,7 @@ en:
         other: Theses
     attributes:
       research/journal:
+        description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
         title: Title
       research/journal/paper:
@@ -58,22 +62,29 @@ en:
         address: Address
         country: Country
         city: City
+        description: Structure de recherche hébergeant le travail des chercheur·e·s
         name: Name
         zipcode: Zipcode
       research/laboratory/axis:
         name: Name
         short_name: Short name
         text: Text
+      research/publication:
+        description: TODO Description Publication
       research/thesis:
         abstract: Abstract
         author: Author
         completed: Completed?
         completed_at: Completed at
+        description: Production scientifique permettant d'obtenir le titre de Docteur·e
         director: Director
         laboratory: Laboratory
         started_at: Started at
         title: Title
   research:
+    description:
+      text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
+      source: Serge Haroche, Prix Nobel de physique 2012
     manage_researchers: Managege researchers
     number_of_papers: Number of papers
     researchers:

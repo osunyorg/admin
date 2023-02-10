@@ -37,12 +37,12 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
                                     .researchers
                                     .accessible_by(current_ability)
                                     .find(params[:id])
+    @papers = @researcher.research_journal_papers.ordered.page(params[:page])
   end
 
   def breadcrumb
     super
-    add_breadcrumb t('research.researchers', count: 2),
-                   admin_research_researchers_path
+    add_breadcrumb t('research.researchers', count: 2), admin_research_researchers_path
   end
 
 end

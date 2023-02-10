@@ -46,6 +46,7 @@ fr:
         summernote_locale: Nom de la locale Summernote
       user:
         admin_theme: Thème de l'administration
+        description: Personne utilisant Osuny, dotée d'un compte authentifié
         email: Email
         first_name: Prénom
         language: Langue préférée

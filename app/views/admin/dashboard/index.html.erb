@@ -83,6 +83,21 @@
   </div>
 <% end %>
 
+<div class="row mt-5 pt-5">
+  <% @namespaces.each do |namespace| %>
+    <% 
+    path = send "admin_#{namespace.to_s.underscore}_root_path"
+    description = t "#{namespace.to_s.underscore}.description.text"
+    %>
+  <div class="col-lg-3">
+    <%= osuny_panel namespace.model_name.human, image: "admin/#{namespace.to_s.underscore}.jpg" do %>
+      <p><%= description.truncate 180 %></p>
+      <%= link_to t('show'), path, class: 'stretched-link' %>
+    <% end %>
+  </div>
+<% end %>
+</div>
+
 <% if current_admin_theme == 'appstack' %>
   <div class="small mt-5">
     <ul class="list-inline">

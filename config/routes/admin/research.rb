@@ -33,4 +33,5 @@ namespace :research do
     end
   end
   resources :theses
+  root to: 'dashboard#index'
 end

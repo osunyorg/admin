@@ -74,6 +74,7 @@ class Ability
   end
 
   def admin
+    can :read, Administration::Qualiopi
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
     can :manage, University::Person

@@ -8,5 +8,5 @@ subtitle = link_to t('communication.website.see_all', number: @all_pages.count),
 <%= osuny_panel t('communication.website.last_pages'),
                 subtitle: subtitle,
                 action: action do %>
-  <%= render 'admin/communication/websites/pages/list', pages: @pages %>
+  <%= render 'admin/communication/websites/pages/list', pages: @pages, hide_buttons: true %>
 <% end %>
