@@ -19,6 +19,8 @@ class Research::Publication < ApplicationRecord
   include WithGit
   include WithSlug
 
+  DOI_PREFIX = 'http://dx.doi.org/'
+
   has_and_belongs_to_many :research_people,
                           class_name: 'University::Person', 
                           foreign_key: 'university_person_id',
@@ -57,7 +59,7 @@ class Research::Publication < ApplicationRecord
 
   def doi_url
     return unless doi.present?
-    "http://dx.doi.org/#{doi}"
+    "#{DOI_PREFIX}#{doi}"
   end
 
   def to_s
