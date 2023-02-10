@@ -94,6 +94,9 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       :habilitation, :tenure, :url, :linkedin, :twitter, :mastodon,
       :is_researcher, :is_teacher, :is_administration, :is_alumnus,
       :hal_person_identifier, :user_id
-    ).merge(university_id: current_university.id)
+    ).merge(
+      university_id: current_university.id,
+      language_id: current_university.default_language_id
+    )
   end
 end
