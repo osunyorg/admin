@@ -1,9 +1,9 @@
 class Admin::Communication::ApplicationController < Admin::ApplicationController
 
   def index
-    @class_name = Communication
+    @namespace = Communication
     breadcrumb
-    render 'admin/dashboard/part'
+    render 'admin/dashboard/namespace'
   end
 
   protected
