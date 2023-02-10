@@ -5,7 +5,7 @@ module Filters
       add_search
       add :for_theme_version,
           ::Communication::Website.all.pluck(:theme_version).uniq.sort,
-          'Filter par version du thème'
+          'Filtrer par version du thème'
     end
   end
 end
