@@ -15,7 +15,7 @@
       <%= render 'admin/research/publications/list', publications: @researcher.research_publications.ordered %>
     </div>
   <% else %>
-    <p>Vous n'avez pas d'identifiant HAL. Est-ce l'une des possibilités suivantes ?<p>
+    <p><%= t 'research.hal.select_identifier' %><p>
     <ul class="list-unstyled">
       <% @possible_hal_authors.each do |author| %>
         <li>

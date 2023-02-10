@@ -85,8 +85,10 @@ en:
     description:
       text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
       source: Serge Haroche, Prix Nobel de physique 2012
+    hal:
+      title: HAL
+      select_identifier: You have no HAL identifier yet. Is it one of these possibilities? If there are several, please choose the most complete one (without -0 at the end).
     manage_researchers: Managege researchers
-    number_of_papers: Number of papers
     researchers:
       one: Researcher
       other: Researchers

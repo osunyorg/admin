@@ -46,6 +46,9 @@ fr:
           male: Masculin
           non_binary: Non binaire
         habilitation: Peut diriger des recherches ?
+        hal_doc_identifier: Identifiant doc
+        hal_form_identifier: Identifiant form
+        hal_person_identifier: Identifiant person
         is_administration: Personnel administratif
         is_alumnus: Alumnus
         is_author: Auteur·rice

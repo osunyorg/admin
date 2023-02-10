@@ -46,6 +46,9 @@ en:
           male: Male
           non_binary: Non binary
         habilitation: Can direct research?
+        hal_doc_identifier: Doc identifier
+        hal_form_identifier: Form identifier
+        hal_person_identifier: Person identifier
         is_administration: Administrative staff
         is_alumnus: Alumnus
         is_author: Author
