@@ -9,7 +9,7 @@ class Server::WebsitesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_refresh
-    post(refresh_server_website_path(communication_websites(:website_with_github)))
-    assert_redirected_to(server_websites_path)
+    post(refresh_server_website_path(communication_websites(:website_with_github)), xhr: true)
+    assert_response(:success)
   end
 end

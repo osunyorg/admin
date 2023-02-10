@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <% websites.ordered.each do |website| %>
-        <tr>
+        <tr id="website-<%= website.id %>">
           <td><%= link_to website.name, admin_communication_website_url(website, host: website.university.url), target: :_blank %></td>
           <td><%= I18n.t("activerecord.attributes.communication/website.about_#{website.about_type}") %></td>
           <td>
@@ -22,10 +22,10 @@
               <span class="badge bg-success">Prod</span>
             <% end %>
           </td>
-          <td><%= link_to website.theme_version, website.theme_version_url, target: :_blank if website.theme_version_url.present? %></td>
+          <td class="js-version"><%= link_to website.theme_version, website.theme_version_url, target: :_blank if website.theme_version_url.present? %></td>
           <td><%= link_to website.university, [:server, website.university] %></td>
           <td><%= l website.created_at.to_date %></td>
-          <td><%= link_to "Sync version", refresh_server_website_path(website), method: :post, class: button_classes if website.url.present? %></td>
+          <td><%= link_to "Sync version", refresh_server_website_path(website), method: :post, remote: true, class: button_classes if website.url.present? %></td>
         </tr>
       <% end %>
     </tbody>
