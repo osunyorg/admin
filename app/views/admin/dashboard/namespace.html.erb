@@ -23,6 +23,7 @@
     path = send part.last
     title = class_name.model_name.human(count: 2)
     description = class_name.human_attribute_name('description')
+    # TODO
     description = t 'administration.qualiopi.description' if class_name == Administration::Qualiopi
     %>
     <div class="col-lg-4 mt-4">
