@@ -1,6 +1,6 @@
 class Admin::DashboardController < Admin::ApplicationController
   def index
-    @chapters = [
+    @namespaces = [
       Education,
       Research,
       Communication,
