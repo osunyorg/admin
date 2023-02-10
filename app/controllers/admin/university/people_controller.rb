@@ -49,6 +49,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def create
+    @person.language_id = current_university.default_language_id
     if @person.save_and_sync
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_created_html', model: @person.to_s)
@@ -94,9 +95,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       :habilitation, :tenure, :url, :linkedin, :twitter, :mastodon,
       :is_researcher, :is_teacher, :is_administration, :is_alumnus,
       :user_id
-    ).merge(
-      university_id: current_university.id,
-      language_id: current_university.default_language_id
-    )
+    ).merge(university_id: current_university.id)
   end
 end
