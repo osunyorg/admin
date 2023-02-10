@@ -28,5 +28,5 @@ namespace :research do
     end
   end
   resources :theses
-  root to: 'application#index'
+  root to: 'dashboard#index'
 end

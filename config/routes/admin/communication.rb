@@ -70,5 +70,5 @@ namespace :communication do
       resources :imports, only: [:index, :show, :new, :create]
     end
   end
-  root to: 'application#index'
+  root to: 'dashboard#index'
 end

@@ -1,11 +1,5 @@
 class Admin::Administration::ApplicationController < Admin::ApplicationController
  
-  def index
-    @namespace = Administration
-    breadcrumb
-    render 'admin/dashboard/namespace'
-  end
-
   protected
 
   def breadcrumb

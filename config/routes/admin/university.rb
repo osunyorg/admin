@@ -30,5 +30,5 @@ namespace :university do
       get :static
     end
   end
-  root to: 'application#index'
+  root to: 'dashboard#index'
 end
