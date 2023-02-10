@@ -2,12 +2,12 @@
 
 <div class="row mb-5">
   <div class="col-lg-7">
-    <p class="lead"><i><%= t "#{@namespace.to_s.downcase}.description.text" %></i></p>
-    <p>— <%= t "#{@namespace.to_s.downcase}.description.source" %></p>
+    <p class="lead"><i><%= t "#{@namespace.to_s.underscore}.description.text" %></i></p>
+    <p>— <%= t "#{@namespace.to_s.underscore}.description.source" %></p>
   </div>
   <% if current_admin_theme == 'pure' %>
     <div class="offset-lg-1 col-lg-4">
-      <%= image_tag "admin/#{@namespace.to_s.downcase}.jpg", class: 'img-fluid pure__chapter__image'%>
+      <%= image_tag "admin/#{@namespace.to_s.underscore}.jpg", class: 'img-fluid pure__chapter__image'%>
       <p class="small text-lg-end mt-3">
         Illustration de Virginia Frances Sterrett. 
         Source : University of California Libraries, the Internet Archive.
