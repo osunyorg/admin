@@ -49,7 +49,7 @@ class Research::Publication < ApplicationRecord
   def self.update_from_hal
     University::Person::Researcher.with_hal_identifier.find_each do |researcher|
       puts "Loading publications for #{researcher} (#{researcher.university})"
-      researcher.load_research_publications!
+      researcher.import_research_publications_from_hal!
     end
   end
 
