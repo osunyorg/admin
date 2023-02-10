@@ -1,8 +1,8 @@
 <%
-  hide_author |= false
-  hide_category |= false
-  hide_buttons |= false
-  selectable |= false
+  hide_author ||= false
+  hide_category ||= false
+  hide_buttons ||= false
+  selectable ||= false
 %>
 <% if selectable %>
   <input type="hidden" name="ids[]" value="">
