@@ -40,7 +40,7 @@ module WithSlug
     end
 
     def slug_must_be_unique
-      errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
+      errors.add(:slug, :taken) if slug_unavailable?(slug)
     end
   end
 end
