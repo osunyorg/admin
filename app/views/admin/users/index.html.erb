@@ -1,8 +1,8 @@
 <% content_for :title, "#{User.model_name.human(count: 2)} (#{@users.total_count})" %>
 
-<%= render 'admin/application/filters',
-    current_path: admin_users_path,
-    filters: @filters if @filters.any? %>
+<%= render  'admin/application/filters',
+            current_path: admin_users_path,
+            filters: @filters if @filters.any? %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
