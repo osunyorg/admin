@@ -1,4 +1,5 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
+  before_action :load, except: :index
 
   has_scope :for_search_term
 
@@ -13,7 +14,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def show
-    load
     @possible_hal_authors = @researcher.possible_hal_authors unless @researcher.hal_identity?
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
@@ -21,7 +21,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def update
-    load
     [
       :hal_doc_identifier,
       :hal_form_identifier,
