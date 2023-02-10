@@ -1,5 +1,5 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
-  before_action :load, except: :index
+  before_action :load_researcher, except: :index
 
   has_scope :for_search_term
 
@@ -14,6 +14,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def show
+    @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     @possible_hal_authors = @researcher.possible_hal_authors unless @researcher.hal_identity?
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
@@ -34,13 +35,12 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   protected
 
-  def load
+  def load_researcher
     @researcher = current_university.people
                                     .for_language_id(current_university.default_language_id)
                                     .researchers
                                     .accessible_by(current_ability)
                                     .find(params[:id])
-    @papers = @researcher.research_journal_papers.ordered.page(params[:page])
   end
 
   def breadcrumb

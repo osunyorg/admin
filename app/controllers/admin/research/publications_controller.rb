@@ -1,5 +1,5 @@
 class Admin::Research::PublicationsController < Admin::Research::ApplicationController
-  before_action :load, except: :index
+  before_action :load_publication, except: :index
 
   def index
     @publications = Research::Publication.ordered.page(params[:page])
@@ -17,7 +17,7 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
 
   protected
 
-  def load
+  def load_publication
     @publication = Research::Publication.find params[:id]
   end
 
