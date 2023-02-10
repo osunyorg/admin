@@ -22,9 +22,13 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def update
     load
-    @researcher.update_column :hal_doc_identifier, params[:hal_doc_identifier] if params.has_key?(:hal_doc_identifier)
-    @researcher.update_column :hal_form_identifier, params[:hal_form_identifier] if params.has_key?(:hal_form_identifier)
-    @researcher.update_column :hal_person_identifier, params[:hal_person_identifier] if params.has_key?(:hal_person_identifier)
+    [
+      :hal_doc_identifier,
+      :hal_form_identifier,
+      :hal_person_identifier
+    ].each do |key|
+      @researcher.update_column key, params[key] if params.has_key?(key)
+    end
     @researcher.load_research_publications
     redirect_to admin_research_researcher_path(@researcher)
   end
