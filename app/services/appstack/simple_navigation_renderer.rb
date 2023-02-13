@@ -27,7 +27,7 @@ class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
   def make_header(item)
     icon = item.send(:options)[:icon]
     header = '<li class="sidebar-header">'
-    header += "<i class=\"fas fa-#{ icon }\"></i>" if icon
+    header += "<i class=\"#{ icon }\"></i>" if icon
     header += item.name
     header += '</li>'
     header
@@ -38,7 +38,7 @@ class Appstack::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
     a = "<a href=\"#{ item.url }\" class=\"sidebar-link#{ item.selected? ? '' : ' collapsed' }\""
     a += " data-bs-target=\"##{ item.key }\" data-bs-toggle=\"collapse\"" if consider_sub_navigation?(item)
     a += ">"
-    a += "<i class=\"fas fa-#{ icon }\"></i>" if icon
+    a += "<i class=\"#{ icon }\"></i>" if icon
     a += "<span class=\"align-middle\">#{ item.name }</span></a>"
     a
   end

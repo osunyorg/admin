@@ -1,6 +1,5 @@
-<%
-program = current_university.programs.ordered
-%>
+<%# TODO: Traduire les formations %>
+<% programs = current_university.programs.ordered %>
 <% if label.present? %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">
@@ -13,7 +12,7 @@ program = current_university.programs.ordered
   <% if placeholder %>
     <option value="" disabled><%= placeholder %></option>
   <% end %>
-  <% program.each do |program| %>
+  <% programs.each do |program| %>
     <option value="<%= program.id %>">
       <%= program %>
     </option>

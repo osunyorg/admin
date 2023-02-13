@@ -14,6 +14,10 @@
     &__separation
         border-width: 10px
         margin-bottom: $spacing3
+    &__chapter
+        &__image
+            @media (min-width: 992px)
+                margin-top: -200px
 
 .dashboard-index
     .pure__section
@@ -87,7 +91,7 @@ p + .form-label
     &.kind--selected
         background: $color-accent
         border-color: $color-accent
-        &, p
+        &, p, label
             color: $color-background
         
 

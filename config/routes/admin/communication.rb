@@ -5,12 +5,14 @@ namespace :communication do
   end
   resources :websites do
     member do
-      get :import
-      post :import
-      get :style
-      get :analytics
+      scope '/:lang' do
+        get :import
+        post :import
+        get :style
+        get :analytics
+      end
     end
-    resources :pages, controller: 'websites/pages' do
+    resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder
       end
@@ -18,10 +20,11 @@ namespace :communication do
         get :children
         get :static
         get :preview
+        get "translate" => "websites/pages#translate", as: :translate
         post :duplicate
       end
     end
-    resources :categories, controller: 'websites/categories' do
+    resources :categories, controller: 'websites/categories', path: '/:lang/categories' do
       collection do
         post :reorder
       end
@@ -30,20 +33,18 @@ namespace :communication do
         get :static
       end
     end
-    resources :authors, controller: 'websites/authors', only: [:index, :show]
-    resources :posts, controller: 'websites/posts' do
-      post :publish, on: :collection
+    resources :authors, controller: 'websites/authors', path: '/:lang/authors', only: [:index, :show]
+    resources :posts, controller: 'websites/posts', path: '/:lang/posts' do
+      collection do
+        resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
+        post :publish
+      end
       member do
         get :static
         get :preview
       end
     end
-    resources :curations,
-              path: 'posts/curations',
-              as: :post_curations,
-              controller: 'websites/posts/curations',
-              only: [:new, :create]
-    resources :menus, controller: 'websites/menus' do
+    resources :menus, controller: 'websites/menus', path: '/:lang/menus' do
       resources :items, controller: 'websites/menus/items', except: :index do
         collection do
           get :kind_switch
@@ -69,4 +70,5 @@ namespace :communication do
       resources :imports, only: [:index, :show, :new, :create]
     end
   end
+  root to: 'dashboard#index'
 end

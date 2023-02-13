@@ -84,6 +84,7 @@ module Communication::Website::WithDependencies
   end
 
   def people
+    # TODO: Scoper aux langues du website dans le cas où une personne serait traduite dans + de langues
     @people ||= begin
       people = []
       people += authors if has_authors?
@@ -96,6 +97,7 @@ module Communication::Website::WithDependencies
   end
 
   def people_with_facets
+    # TODO: Scoper aux langues du website dans le cas où une personne serait traduite dans + de langues
     @people_with_facets ||= begin
       people_with_facets = people
       people_with_facets += authors.compact.map(&:author) if has_authors?

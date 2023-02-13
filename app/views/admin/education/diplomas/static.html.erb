@@ -3,6 +3,8 @@ title: >
   <%= prepare_text_for_static @about.name %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+programs:
+<%= render 'programs', programs: @programs, depth: 2 %>
 short_name: >
   <%= prepare_text_for_static @about.short_name %>
 <%= render 'admin/application/summary/static' %>

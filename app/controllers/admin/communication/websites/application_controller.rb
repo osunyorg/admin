@@ -6,10 +6,23 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
 
   protected
 
+  def current_website_language
+    @current_website_language ||= @website.best_language_for(params[:lang])
+  end
+  helper_method :current_website_language
+
+  def breadcrumb
+    super
+    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
+    breadcrumb_for @website
+  end
+
   def default_url_options
-    return {} unless params.has_key? :website_id
-    {
-      website_id: params[:website_id]
-    }
+    options = {}
+    if @website.present?
+      options[:website_id] = @website.id
+      options[:lang] = current_website_language.iso_code
+    end
+    options
   end
 end

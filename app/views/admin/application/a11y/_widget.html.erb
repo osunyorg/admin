@@ -1,6 +1,6 @@
 <%
 color = about.accessible? ? 'text-success' : 'text-danger'
-action = "<i class=\"fas fa-universal-access fa-2x float-end #{ color}\"></i>"
+action = "<i class=\"#{ Icon::A11Y } fa-2x float-end #{ color}\"></i>"
 %>
 <%= osuny_panel t('accessibility.label'), action: action do %>
   <% if about.accessibility_errors.any? %>

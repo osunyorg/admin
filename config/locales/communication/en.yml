@@ -50,6 +50,7 @@ en:
         about_type: About
         color: Couleur
         cookies_policy: Cookies policy
+        description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         has_sso: Has SSO?
         host: Domain
@@ -75,6 +76,7 @@ en:
         access_token: Access token
         created_at: Creation
         default_language: Default language
+        description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -97,9 +99,6 @@ en:
       communication/website/menu:
         identifier: Identifier
         items: Items
-        legal: Legal
-        primary: Main menu
-        social: Social
         title: Title
       communication/website/menu/item:
         about: Target
@@ -148,6 +147,7 @@ en:
         communication/website:
           attributes:
             languages:
+              must_include_default: must include at least the default language
               too_short: must include at least one
   admin:
     communication:
@@ -291,6 +291,8 @@ en:
             edit:
               add_definition: Add definition
               remove_definition: Delete definition
+              description:
+                label: Description
               element:
                 title:
                   label: Title
@@ -549,6 +551,9 @@ en:
     block:
       choose_template: Choose the kind of block to add
       choose: Choose
+    description:
+      text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
     website:
@@ -567,6 +572,11 @@ en:
         pending: Import in progress
       last_pages: Last pages
       last_posts: Last posts
+      menus:
+        default_title:
+          legal: Legal
+          primary: Main menu
+          social: Social
       pages:
         defaults:
           accessibility:
@@ -681,7 +691,10 @@ en:
       communication_website:
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
-        languages: 'If you select at least one language the website will be considered as possibly multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
+        languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
+        text: This field is deprecated, content will not be displayed on the website.
+      communication_website_post:
+        text: This field is deprecated, content will not be displayed on the website.

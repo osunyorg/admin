@@ -25,9 +25,9 @@
             <% valid = !program.public_send("best_#{check}").blank? %>
             <td>
               <% if valid %>
-                <span class="fas fa-check text-success"></span>
+                <span class="<%= Icon::CHECK_OK %> text-success"></span>
               <% else %>
-                <span class="fas fa-times text-danger"></span>
+                <span class="<%= Icon::CHECK_KO %> text-danger"></span>
               <% end %>
             </td>
           <% end %>

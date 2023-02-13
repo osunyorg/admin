@@ -2,4 +2,8 @@
 
 <p><%= Communication::Website.in_production.count %> en production</p>
 
+<%= render  'admin/application/filters',
+            current_path: server_websites_path,
+            filters: @filters if @filters.any? %>
+
 <%= render 'server/websites/list', websites: @websites %>

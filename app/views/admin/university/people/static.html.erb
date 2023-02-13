@@ -5,6 +5,7 @@ title: >
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+<%= render 'admin/application/i18n/static' %>
 first_name: >
   <%= @about.first_name %>
 last_name: >
@@ -71,6 +72,21 @@ administrative_missions:
         <%= target.to_s %>
       url: >
         <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
+<% end %>
+<% end %>
+<% if @about.publications.any? %>
+publications:
+<% @about.publications.each do |publication| %>
+  - title: >
+      <%= prepare_text_for_static publication.title %>
+    ref: >
+      <%= prepare_html_for_static publication.ref, @website.university %>
+    url: >
+      <%= prepare_text_for_static publication.url %>
+    hal_url: >
+      <%= prepare_text_for_static publication.hal_url %>
+    doi_url: >
+      <%= prepare_text_for_static publication.doi_url %>
 <% end %>
 <% end %>
 <%= render 'admin/communication/blocks/static', about: @about %>

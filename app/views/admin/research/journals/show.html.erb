@@ -3,7 +3,7 @@
 <% content_for :title_right do %>
   <% if @journal.websites.any? %>
     <%= Communication::Website.model_name.human(count: 2) %>
-    <i class="fas fa-arrow-right small"></i>
+    <i class="<%= Icon::ARROW_RIGHT %> small"></i>
     <% @journal.websites.each do |website| %>
       <%= link_to website, [:admin, website] %><br>
     <% end %>

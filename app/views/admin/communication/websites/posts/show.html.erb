@@ -7,7 +7,8 @@
       <%= render 'admin/communication/blocks/list', about: @post %>
     </div>
     <div class="col-xl-4">
-      <% 
+      <%= render 'admin/application/i18n/widget', about: @post %>
+      <%
       action = ''
       action += link_to t('open'),
                         @post.url,

@@ -21,7 +21,7 @@ end
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div>
-              <i class="fas fa-arrows-alt dragHandle"></i>
+              <i class="<%= Icon::SORT %> dragHandle"></i>
               &nbsp;
               <a data-bs-toggle="collapse" :href="'#sso_mapping_collapse_' + index ">
                 {{index + 1}}. {{ field.sso_key }} -> {{ keys[field.internal_key]}}
@@ -30,7 +30,7 @@ end
             <a
               v-on:click="fields.splice(fields.indexOf(field), 1)"
               title="Remove field">
-              <i class="far fa-trash-alt"></i>
+              <i class="<%= Icon::DELETE %>"></i>
             </a>
           </div>
           <div class="card-body collapse pt-0" :id="'sso_mapping_collapse_' + index ">

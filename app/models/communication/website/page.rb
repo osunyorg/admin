@@ -22,7 +22,8 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             not null, indexed
+#  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
@@ -30,6 +31,7 @@
 #
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_language_id               (language_id)
+#  index_communication_website_pages_on_original_id               (original_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
@@ -37,6 +39,7 @@
 #
 #  fk_rails_1a42003f06  (parent_id => communication_website_pages.id)
 #  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
+#  fk_rails_304f57360f  (original_id => communication_website_pages.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
 
@@ -48,21 +51,25 @@ class Communication::Website::Page < ApplicationRecord
   include WithUniversity
   include WithBlobs
   include WithBlocks
-  include WithGit
   include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithPath
   include WithType
   include WithPermalink
+  include WithTranslations
 
   belongs_to :website,
              foreign_key: :communication_website_id
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true
-  belongs_to :language, optional: true
+  belongs_to :original,
+             class_name: 'Communication::Website::Page',
+             optional: true
+  belongs_to :language
   has_one    :imported_page,
              class_name: 'Communication::Website::Imported::Page',
              dependent: :nullify
@@ -70,6 +77,9 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :destroy
+  has_many   :translations,
+             class_name: 'Communication::Website::Page',
+             foreign_key: :original_id
 
   validates :title, presence: true
 
@@ -139,7 +149,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def last_ordered_element
-    website.pages.where(parent_id: parent_id).ordered.last
+    website.pages.where(parent_id: parent_id, language_id: language_id).ordered.last
   end
 
   def explicit_blob_ids

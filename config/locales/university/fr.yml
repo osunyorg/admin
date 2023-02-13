@@ -5,6 +5,7 @@ fr:
         address: Adresse
         city: Ville
         country: Pays
+        default_language: Langue par défaut
         has_sso: A un SSO ?
         identifier: Identifiant
         invoice_amount: Montant de facturation
@@ -34,6 +35,7 @@ fr:
         communication_website_posts: Actualités
         contacts: Coordonnées
         country: Pays
+        description: Personne physique liée à une université, une composante, un laboratoire, etc.
         education_programs: Formations
         email: Email
         essentials: Informations essentielles
@@ -44,10 +46,13 @@ fr:
           male: Masculin
           non_binary: Non binaire
         habilitation: Peut diriger des recherches ?
+        hal_doc_identifier: Identifiant doc
+        hal_form_identifier: Identifiant form
+        hal_person_identifier: Identifiant person
         is_administration: Personnel administratif
         is_alumnus: Alumnus
         is_author: Auteur·rice
-        is_researcher: Chercheur·se
+        is_researcher: Chercheur·e
         is_teacher: Enseignant·e
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
@@ -57,7 +62,7 @@ fr:
         phone_professional: Téléphone professionnel
         picture: Photo de profil
         research_journal_papers: Papiers
-        researcher: Chercheur·se
+        researcher: Chercheur·e
         roles: Rôles
         slug: Slug
         socials: Réseaux sociaux
@@ -83,6 +88,7 @@ fr:
         city: Ville
         contact: Informations de contact
         country: Pays
+        description: Personne morale liée à une université, une composante, un laboratoire, etc.
         email: Email
         kind: Type
         legal: Informations légales
@@ -175,6 +181,9 @@ fr:
         import_btn: Importer des expériences
         import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
         title: Imports d'expériences
+    description:
+      text: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions “collèges”, “facultés”, “instituts”, “départements”, “centres”, “sections”, “unités” ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
+      source: Wikipedia
     internal_key: Clé interne
     invoice_informations: Données de facturation
     manage_alumni: Gérer les alumni

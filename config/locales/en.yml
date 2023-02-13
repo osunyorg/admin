@@ -46,6 +46,7 @@ en:
         summernote_locale: Summernote locale code
       user:
         admin_theme: Admin Theme
+        description: Personne utilisant Osuny, dotée d'un compte authentifié
         email: Email
         first_name: First name
         language: Favourite language
@@ -208,6 +209,8 @@ en:
     still_pending: "Your import has not been processed yet. You will receive an email as soon as it's ready."
   import_btn: Import
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
+  internationalization:
+    label: Internationalization
   languages:
     en: English
     fr: French

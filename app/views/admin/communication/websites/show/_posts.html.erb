@@ -6,10 +6,14 @@ action += link_to t('communication.website.posts.new_curation'),
 action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
                   class: button_classes('ms-1') if can?(:create, Communication::Website::Post)
+subtitle = link_to t('communication.website.see_all', number: @all_posts.size), admin_communication_website_posts_path(website_id: @website)
 %>
-<%= osuny_panel t('communication.website.last_posts'), action: action do %>
+<%= osuny_panel t('communication.website.last_posts'),
+                subtitle: subtitle,
+                action: action do %>
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,
-              hide_category: true %>
+              hide_category: true,
+              hide_buttons: true %>
 <% end %>

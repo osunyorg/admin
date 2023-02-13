@@ -2,7 +2,8 @@ module User::WithPerson
   extend ActiveSupport::Concern
 
   included do
-    has_one :person, class_name: 'University::Person', dependent: :nullify
+    # Original person
+    has_one :person, -> { where(original_id: nil) }, class_name: 'University::Person', dependent: :nullify
 
     delegate :experiences, to: :person
 
@@ -18,6 +19,7 @@ module User::WithPerson
     person.last_name = last_name
     person.slug = person.to_s.parameterize
     person.user = self
+    person.language_id ||= university.default_language_id
     person.save
   end
 

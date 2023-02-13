@@ -9,6 +9,7 @@ class Communication::Block::Template::Base
 
   delegate :university, to: :block
   delegate :about, to: :block
+  delegate :language, to: :block
   delegate :template_kind, to: :block
   alias :kind :template_kind
 
@@ -91,6 +92,11 @@ class Communication::Block::Template::Base
       end
     end
     hash
+  end
+
+  def translate!
+    components.each(&:translate!)
+    elements.each(&:translate!) if has_element_class?
   end
 
   def git_dependencies

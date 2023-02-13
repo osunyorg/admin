@@ -40,7 +40,7 @@
                     placeholder="<%= t '.phones.placeholder' %>"
                     v-model="data.phone_numbers[index]">
             <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
-              <i class="fas fa-times"></i>
+              <i class="<%= Icon::DELETE %>"></i>
             </a>
           </div>
         </div>
@@ -61,7 +61,7 @@
                     placeholder="<%= t '.mails.placeholder' %>"
                     v-model="data.emails[index]">
             <a class="btn text-danger" v-on:click="data.emails.splice(index, 1)">
-              <i class="fas fa-times"></i>
+              <i class="<%= Icon::DELETE %>"></i>
             </a>
           </div>
         </div>
@@ -76,7 +76,7 @@
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
     <div>
       <a class="btn ps-0 pt-0 dragHandle">
-        <i class="fa fa-bars handle"></i>
+        <i class="<%= Icon::DRAG %> handle"></i>
       </a>
     </div>
     <div class="flex-fill">
@@ -95,7 +95,7 @@
     <div>
       <a  class="btn text-danger position-absolute top-0 end-0"
           v-on:click="data.elements.splice(index, 1)">
-          <i class="fas fa-times"></i>
+          <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>
   </div>

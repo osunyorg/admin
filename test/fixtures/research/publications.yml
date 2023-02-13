@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: research_publications
+#
+#  id               :uuid             not null, primary key
+#  data             :jsonb
+#  docid            :string           indexed
+#  doi              :string
+#  hal_url          :string
+#  publication_date :date
+#  ref              :string
+#  slug             :string
+#  title            :string
+#  url              :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_research_publications_on_docid  (docid)
+#
+
+default_publication:
+  docid: MyString
+  data:
+  title: MyString
+  url: MyString
+  ref: MyString

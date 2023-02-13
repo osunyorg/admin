@@ -12,7 +12,7 @@ action += link_to t('admin.communication.blocks.add'),
           <% about.blocks.ordered.each do |block| %>
             <tr data-id="<%= block.id %>" class="<%= 'draft' unless block.published? %>">
               <% if can? :reorder, Communication::Block %>
-                <td class="ps-0 blocks__list__handle"><i class="fa fa-bars handle"></i></td>
+                <td class="ps-0 blocks__list__handle"><i class="<%= Icon::DRAG %> handle"></i></td>
               <% end %>
               <td class="blocks__list__name">
                 <%= block.to_s.truncate(50) %><br>
