@@ -23,7 +23,7 @@ class Research::Publication < ApplicationRecord
   include WithGit
   include WithSlug
 
-  DOI_PREFIX = 'http://dx.doi.org/'
+  DOI_PREFIX = 'http://dx.doi.org/'.freeze
 
   has_and_belongs_to_many :research_people,
                           class_name: 'University::Person', 
