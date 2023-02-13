@@ -14,12 +14,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def static
     @about = @diploma
     @website = @diploma.websites&.first
-    if @website.nil?
-      redirect_to [:admin, @diploma]
-    else
-      @programs = @website.education_programs.root.ordered
-      render layout: false
-    end
+    render layout: false
   end
 
   def new
