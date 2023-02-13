@@ -9,6 +9,6 @@ indentation = ' ' * depth
 <% children = program.children.ordered %>
 <% if children.any? %>
 <%= indentation %>  children: 
-<%= render 'programs', programs: program.children.ordered, depth: depth + 4 %>
+<%= render 'admin/education/diplomas/programs', programs: program.children.ordered, depth: depth + 4 %>
 <% end %>
 <% end %>

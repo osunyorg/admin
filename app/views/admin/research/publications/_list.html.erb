@@ -14,6 +14,7 @@
           <td><%= l publication.publication_date %></td>
           <td>
             <% publication.researchers.each do |researcher| %>
+              <% next if researcher.university != current_university %>
               <%= link_to_if  researcher.university == current_university, 
                               researcher, 
                               admin_research_researcher_path(researcher) %>
