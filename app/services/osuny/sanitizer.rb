@@ -4,8 +4,9 @@ class Osuny::Sanitizer
   ALLOWED_TAGS = [
     "a", "b", "br", "em", "i", "img", "li", "ol", "p", "strong", "sub", "sup", "ul"
   ]
-  
+
   ALLOWED_ATTRIBUTES = [
+    "href", "target", "title"
   ]
 
   # type(ActiveRecord) = ['text', 'string']
