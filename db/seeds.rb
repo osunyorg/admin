@@ -1,7 +1,7 @@
-University.create name: 'Osuny', identifier: 'demo', sms_sender_name: 'Osuny'
-
-Language.where(name: 'French', iso_code: 'fr').first_or_create
+fr = Language.where(name: 'French', iso_code: 'fr').first_or_create
 Language.where(name: 'English', iso_code: 'en').first_or_create
+
+University.create name: 'Osuny', identifier: 'demo', sms_sender_name: 'Osuny', default_language: fr
 
 Administration::Qualiopi::Criterion.destroy_all
 Administration::Qualiopi::Criterion.create [

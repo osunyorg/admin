@@ -8,10 +8,7 @@ module Communication::Website::WithImport
   end
 
   def import!
-    imported_website = Communication::Website::Imported::Website.where(
-      website: self, university: university
-    ).first_or_create unless imported?
-
+    create_imported_website(university: university) unless imported?
     imported_website.run!
     reload
   end

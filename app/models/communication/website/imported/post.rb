@@ -78,7 +78,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
   def sync
     if post.nil?
       self.post = Communication::Website::Post.new university: university,
-                                                   website: website.website # Real website, not imported website
+                                                   website: website.website, # Real website, not imported website
+                                                   language: website.website.default_language
       self.post.title = "Untitled" # No title yet
       self.post.save
     else
@@ -93,7 +94,6 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
     post.meta_description = Wordpress.clean_string excerpt.to_s
-    post.text = Wordpress.clean_html content.to_s
     post.created_at = created_at
     post.updated_at = updated_at
     post.published_at = published_at if published_at
@@ -106,10 +106,19 @@ class Communication::Website::Imported::Post < ApplicationRecord
       post.categories << imported_category.category unless post.categories.pluck(:id).include?(imported_category.category_id)
     end
     post.save
+
+    chapter = post.blocks.where(university: website.university, template_kind: :chapter).first_or_create
+    chapter_data = chapter.data.deep_dup
+    chapter_data['text'] = Wordpress.clean_html(content.to_s)
+    chapter.data = chapter_data
+    chapter.save
   end
 
   def sync_attachments
     return unless ENV['APPLICATION_ENV'] == 'development' || updated_at > post.updated_at
+    chapter = post.blocks.where(university: website.university, template_kind: :chapter).first_or_create
+    chapter_data = chapter.data.deep_dup
+
     if featured_medium.present?
       unless featured_medium.file.attached?
         featured_medium.load_remote_file!
@@ -121,7 +130,7 @@ class Communication::Website::Imported::Post < ApplicationRecord
         content_type: featured_medium.file.blob.content_type
       )
     else
-      fragment = Nokogiri::HTML.fragment(post.text.body.to_html)
+      fragment = Nokogiri::HTML.fragment(chapter_data['text'].to_s)
       image = fragment.css('img').first
       if image.present?
         begin
@@ -129,11 +138,12 @@ class Communication::Website::Imported::Post < ApplicationRecord
           download_service = DownloadService.download(url)
           post.featured_image.attach(download_service.attachable_data)
           image.remove
-          post.update(text: fragment.to_html)
+          chapter_data['text'] = fragment.to_html
+          chapter.data = chapter_data
+          chapter.save
         rescue
         end
       end
     end
-    post.update(text: post.text.body.to_html)
   end
 end

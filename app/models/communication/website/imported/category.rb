@@ -59,8 +59,9 @@ class Communication::Website::Imported::Category < ApplicationRecord
 
   def sync
     if category.nil?
-      self.category = Communication::Website::Category.new university: university,
-                                                   website: website.website # Real website, not imported website
+      self.category = Communication::Website::Category.new  university: university,
+                                                            website: website.website, # Real website, not imported website
+                                                            language: website.website.default_language
       self.category.name = "Untitled" # No title yet
       self.category.save
     end

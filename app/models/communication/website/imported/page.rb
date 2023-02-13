@@ -76,6 +76,8 @@ class Communication::Website::Imported::Page < ApplicationRecord
     if page.nil?
       self.page = Communication::Website::Page.new  university: university,
                                                     website: website.website, # Real website, not imported website
+                                                    language: website.website.default_language,
+                                                    parent: website.website.special_page(Communication::Website::Page::Home),
                                                     slug: path
       self.page.title = "Untitled"
       self.page.save
@@ -90,13 +92,21 @@ class Communication::Website::Imported::Page < ApplicationRecord
     page.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     page.slug = slug
     page.meta_description = Wordpress.clean_string excerpt.to_s
-    page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save
+
+    chapter = page.blocks.where(university: website.university, template_kind: :chapter).first_or_create
+    chapter_data = chapter.data.deep_dup
+    chapter_data['text'] = Wordpress.clean_html(content.to_s)
+    chapter.data = chapter_data
+    chapter.save
   end
 
   def sync_attachments
     return unless ENV['APPLICATION_ENV'] == 'development' || updated_at > page.updated_at
+    chapter = page.blocks.where(university: website.university, template_kind: :chapter).first_or_create
+    chapter_data = chapter.data.deep_dup
+
     if featured_medium.present?
       unless featured_medium.file.attached?
         featured_medium.load_remote_file!
@@ -108,7 +118,7 @@ class Communication::Website::Imported::Page < ApplicationRecord
         content_type: featured_medium.file.blob.content_type
       )
     else
-      fragment = Nokogiri::HTML.fragment(page.text.to_s)
+      fragment = Nokogiri::HTML.fragment(chapter_data['text'].to_s)
       image = fragment.css('img').first
       if image.present?
         begin
@@ -116,11 +126,12 @@ class Communication::Website::Imported::Page < ApplicationRecord
           download_service = DownloadService.download(url)
           page.featured_image.attach(download_service.attachable_data)
           image.remove
-          page.update(text: fragment.to_html)
+          chapter_data['text'] = fragment.to_html
+          chapter.data = chapter_data
+          chapter.save
         rescue
         end
       end
     end
-    page.update(text: page.text.to_s)
   end
 end
