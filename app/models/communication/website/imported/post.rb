@@ -100,12 +100,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.published_at = published_at if published_at
     post.published = true
 
-    imported_author = website.authors.where(identifier: author).first
-    post.author = imported_author.author if imported_author&.author.present?
-    imported_categories = website.categories.where(identifier: categories)
-    imported_categories.each do |imported_category|
-      post.categories << imported_category.category unless post.categories.pluck(:id).include?(imported_category.category_id)
-    end
+    sync_author
+    sync_categories
     post.save
 
     chapter = post.blocks.where(university: website.university, template_kind: :chapter).first_or_create
@@ -113,6 +109,18 @@ class Communication::Website::Imported::Post < ApplicationRecord
     chapter_data['text'] = Wordpress.clean_html(content.to_s)
     chapter.data = chapter_data
     chapter.save
+  end
+
+  def sync_author
+    imported_author = website.authors.where(identifier: author).first
+    post.author = imported_author.author if imported_author&.author.present?
+  end
+
+  def sync_categories
+    imported_categories = website.categories.where(identifier: categories)
+    imported_categories.each do |imported_category|
+      post.categories << imported_category.category unless post.categories.pluck(:id).include?(imported_category.category_id)
+    end
   end
 
 end
