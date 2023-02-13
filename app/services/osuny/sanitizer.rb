@@ -1,13 +1,8 @@
 class Osuny::Sanitizer
   include ActionView::Helpers::SanitizeHelper
 
-  ALLOWED_TAGS = [
-    "a", "b", "br", "em", "i", "img", "li", "ol", "p", "strong", "sub", "sup", "ul"
-  ]
-
-  ALLOWED_ATTRIBUTES = [
-    "href", "target", "title"
-  ]
+  self.sanitized_allowed_tags = Rails.application.config.action_view.sanitized_allowed_tags
+  self.sanitized_allowed_attributes = Rails.application.config.action_view.sanitized_allowed_attributes
 
   # type(ActiveRecord) = ['text', 'string']
   def self.sanitize(input, type = 'text')

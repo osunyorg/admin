@@ -7,7 +7,7 @@ class AddDefaultLanguageToUniversities < ActiveRecord::Migration[7.0]
     language ||= Language.find_by(iso_code: 'en')
     language ||= Language.first
 
-    University.all.update_all(default_language_id: language.id) if University.all.any?
+    University.all.update_all(default_language_id: language.id) if University.any?
 
     change_column_null :universities, :default_language_id, false
   end
