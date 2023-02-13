@@ -32,7 +32,7 @@ class Communication::Website::Permalink::Researcher < Communication::Website::Pe
     :researchers
   end
 
-  # /equipe/:slug/papers/
+  # /equipe/:slug/publications/
   # FIXME
   def self.pattern_in_website(website, language)
     "/#{website.special_page(Communication::Website::Page::Person, language: language).slug_with_ancestors}/:slug/papers/"

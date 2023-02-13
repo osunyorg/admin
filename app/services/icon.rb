@@ -27,6 +27,7 @@ class Icon
   RESEARCH_JOURNAL = 'fas fa-newspaper'
   RESEARCH_LABORATORY = 'fas fa-flask'
   RESEARCH_RESEARCHER = 'fas fa-microscope'
+  RESEARCH_PUBLICATION = 'fas fa-book'
   RESEARCH_THESE = 'fas fa-scroll'
   RESEARCH_WATCH = 'fas fa-eye'
   UNIVERSITY_PERSON_RESEARCHER = RESEARCH_RESEARCHER

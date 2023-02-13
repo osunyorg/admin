@@ -9,6 +9,28 @@
   <% end %>
 <% end %>
 
+<%= osuny_panel Research::Publication.model_name.human(count: 2), action: @researcher.research_publications.count do %>
+  <% if @researcher.hal_identity? %>
+    <div class="table-responsive">
+      <%= render 'admin/research/publications/list', publications: @researcher.research_publications.ordered %>
+    </div>
+  <% else %>
+    <p><%= t 'research.hal.select_identifier' %><p>
+    <ul class="list-unstyled">
+      <% @possible_hal_authors.each do |author| %>
+        <li>
+          <%= link_to admin_research_researcher_path( @researcher, 
+                                                      hal_doc_identifier: author.docid,
+                                                      hal_form_identifier: author.attributes['form_i'],
+                                                      hal_person_identifier: author.attributes['person_i']), method: :put do %>
+            <%= author.fullName_s %> (<%= author.docid %>)
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @researcher %>
 <% end %>

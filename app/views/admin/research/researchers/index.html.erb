@@ -8,8 +8,10 @@
       <tr>
         <th><%= University::Person.human_attribute_name('name') %></th>
         <th><%= University::Person.human_attribute_name('first_name') %></th>
-        <th></th>
-        <th><%= t('research.number_of_papers') %></th>
+        <th><%= University::Person.human_attribute_name('picture') %></th>
+        <th><%= Research::Publication.model_name.human(count: 2) %></th>
+        <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
+        <th width="160"></th>
       </tr>
     </thead>
 
@@ -18,11 +20,14 @@
         <tr>
           <td><%= link_to researcher.last_name, admin_research_researcher_path(researcher) %></td>
           <td><%= link_to researcher.first_name, admin_research_researcher_path(researcher) %></td>
-          <td class="p-0">
-            <%= kamifusen_tag researcher.best_picture,
-                              width: 40 if researcher.best_picture.attached? %>
+          <td>
+            <% if researcher.best_picture.attached? && researcher.best_picture.variable? %>
+              <%= kamifusen_tag researcher.best_picture, width: 60 %>
+            <% end %>
           </td>
+          <td><%= researcher.research_publications.count %></td>
           <td><%= researcher.research_journal_papers.count %></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>
@@ -30,7 +35,6 @@
 </div>
 
 <%= paginate @researchers, theme: 'bootstrap-5' %>
-
 
 <% content_for :action_bar_right do %>
   <%= link_to t('research.manage_researchers'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
