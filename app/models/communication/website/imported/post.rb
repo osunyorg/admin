@@ -38,7 +38,6 @@
 #
 class Communication::Website::Imported::Post < ApplicationRecord
   include WithUniversity
-  include Communication::Website::Imported::WithRichText
 
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
@@ -135,6 +134,6 @@ class Communication::Website::Imported::Post < ApplicationRecord
         end
       end
     end
-    post.update(text: rich_text_with_attachments(post.text.body.to_html))
+    post.update(text: post.text.body.to_html)
   end
 end
