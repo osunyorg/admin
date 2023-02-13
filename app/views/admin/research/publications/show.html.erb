@@ -13,7 +13,13 @@
 <%= link_to 'DOI', @publication.doi_url, target: :_blank if @publication.doi_url %>
 
 <% content_for :action_bar_left do %>
-  <%= link_to t('static'),
-              static_admin_research_publication_path(@publication),
-              class: button_classes('btn-light') if current_user.server_admin? %>
+  <% if current_user.server_admin? %>
+    <%= link_to t('delete'),
+                admin_research_publication_path(@publication),
+                method: :delete,
+                class: button_classes_danger %>
+    <%= link_to t('static'),
+                static_admin_research_publication_path(@publication),
+                class: button_classes('btn-light') %>
+  <% end %>
 <% end %>

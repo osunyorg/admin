@@ -36,7 +36,7 @@
                 <% docs = HalOpenscience::Document.search "authIdFormPerson_s:#{author.docid}", fields: ["*"], limit: 5 %>
                 <ul class="list-unstyled small">
                   <% docs.results.each do |doc| %>
-                    <li class="mb-2"><%= sanitize doc.label_s %></li>
+                    <li class="mb-2"><%= sanitize doc.citationFull_s %></li>
                   <% end unless docs.nil? %>
                 </ul>
               </td>

@@ -15,6 +15,11 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
     render layout: false
   end
 
+  def destroy
+    @publication.destroy
+    redirect_to admin_research_publications_path
+  end
+
   protected
 
   def load_publication
