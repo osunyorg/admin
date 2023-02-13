@@ -21,7 +21,8 @@ window.osuny.treeView = {
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
                 onEnd: function (evt) {
-                    var from = evt.from,
+                    var item = evt.item,
+                        from = evt.from,
                         to = evt.to,
                         ids = [],
                         parentId,
@@ -47,8 +48,10 @@ window.osuny.treeView = {
 
                     // call to application
                     $.post(url, {
+                        oldParentId: from.dataset.id,
                         parentId: parentId,
-                        ids: ids
+                        ids: ids,
+                        itemId: item.dataset.id
                     });
                 }
             });

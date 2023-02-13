@@ -23,23 +23,24 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    old_parent_id = params[:oldParentId].blank? ? nil : params[:oldParentId]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      @program = current_university.education_programs.find(id)
-      @program.update(
+      program = current_university.education_programs.find(id)
+      program.update(
         parent_id: parent_id,
         position: index + 1,
         skip_websites_categories_callback: true
       )
     end
-    if parent_id
-      parent = current_university.education_programs.find(parent_id)
-      parent.set_websites_categories
-      parent.sync_with_git
-    else
-      @program&.set_websites_categories
-      @program&.sync_with_git
+    if old_parent_id
+      old_parent = current_university.education_programs.find(old_parent_id)
+      old_parent.set_websites_categories
+      old_parent.sync_with_git
     end
+    program = current_university.education_programs.find(params[:itemId])
+    program.set_websites_categories
+    program.sync_with_git
   end
 
   def children
