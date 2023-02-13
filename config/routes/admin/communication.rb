@@ -5,12 +5,10 @@ namespace :communication do
   end
   resources :websites do
     member do
-      scope '/:lang' do
-        get :import
-        post :import
-        get :style
-        get :analytics
-      end
+      get :import
+      post :import
+      get :style
+      get :analytics
     end
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do

@@ -2,7 +2,7 @@ module Communication::Website::WithStyle
   extend ActiveSupport::Concern
 
   def preview_style
-    load_style if style_outdated? 
+    load_style if style_outdated?
     style
   end
 
@@ -10,12 +10,14 @@ module Communication::Website::WithStyle
 
   def load_style
     @style = ''
-    load_style_from url 
-    load_style_from "#{url}/fr" if @style.blank?
-    load_style_from "#{url}/en" if @style.blank?
+    if url.present?
+      load_style_from url
+      load_style_from "#{url}/fr" if @style.blank?
+      load_style_from "#{url}/en" if @style.blank?
+    end
     load_style_from "https://example.osuny.org" if @style.blank?
     substitute_fonts_urls_in_style!
-    self.update_columns style: @style, 
+    self.update_columns style: @style,
                         style_updated_at: Date.today
   end
 
@@ -39,7 +41,7 @@ module Communication::Website::WithStyle
   end
 
   def style_outdated?
-    style_updated_at.nil? || style_updated_at < Date.yesterday 
+    style_updated_at.nil? || style_updated_at < Date.yesterday
   end
-    
+
 end
