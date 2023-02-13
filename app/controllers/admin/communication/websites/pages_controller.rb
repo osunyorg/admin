@@ -13,6 +13,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def reorder
     parent_page = @website.pages.find(params[:parentId])
+    old_parent_page = @website.pages.find(params[:oldParentId])
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
@@ -21,6 +22,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
         position: index + 1
       )
     end
+    old_parent_page.sync_with_git
     parent_page.sync_with_git
   end
 
