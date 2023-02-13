@@ -10,15 +10,21 @@ module Communication::Website::WithStyle
 
   def load_style
     @style = ''
-    if url.present?
-      load_style_from url
-      load_style_from "#{url}/fr" if @style.blank?
-      load_style_from "#{url}/en" if @style.blank?
-    end
-    load_style_from "https://example.osuny.org" if @style.blank?
+    load_style_from_website_url if url.present?
+    load_style_from_example
     substitute_fonts_urls_in_style!
     self.update_columns style: @style,
                         style_updated_at: Date.today
+  end
+
+  def load_style_from_website_url
+    load_style_from url
+    load_style_from "#{url}/fr" if @style.blank?
+    load_style_from "#{url}/en" if @style.blank?
+  end
+
+  def load_style_from_example
+    load_style_from "https://example.osuny.org" if @style.blank?
   end
 
   def load_style_from(url)
