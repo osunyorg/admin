@@ -39,8 +39,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       old_parent.sync_with_git
     end
     program = current_university.education_programs.find(params[:itemId])
-    program&.set_websites_categories
-    program&.sync_with_git
+    program.set_websites_categories
+    program.sync_with_git
   end
 
   def children
