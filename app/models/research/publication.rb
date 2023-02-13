@@ -40,7 +40,7 @@ class Research::Publication < ApplicationRecord
   def self.create_from(doc)
     publication = where(docid: doc.docid).first_or_create
     puts "pub-- #{where(docid: doc.docid).count}"
-    publication.title = doc.title_s.first
+    publication.title = Osuny::Sanitizer.sanitize doc.title_s.first, 'string'
     publication.ref = doc.attributes['citationRef_s']
     publication.hal_url = doc.attributes['uri_s']
     publication.doi = doc.attributes['doiId_s']
