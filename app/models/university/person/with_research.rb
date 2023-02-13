@@ -18,7 +18,7 @@ module University::Person::WithResearch
   def import_research_publications_from_hal!
     return unless hal_identity?
     response = HalOpenscience::Document.search  "authIdForm_i:#{hal_form_identifier}",
-                                                fields: ["docid", "title_s", "citationRef_s", "uri_s", "*"],
+                                                fields: ["*"],
                                                 limit: 1000
     response.results.each do |doc|
       publication = Research::Publication.create_from doc
@@ -28,7 +28,7 @@ module University::Person::WithResearch
   handle_asynchronously :import_research_publications_from_hal!
 
   def possible_hal_authors
-    HalOpenscience::Author.search(to_s, fields: ['*']).results
+    HalOpenscience::Author.search(to_s, fields: ["*"]).results
   end
 
 end
