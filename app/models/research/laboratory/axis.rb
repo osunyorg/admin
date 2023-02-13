@@ -28,6 +28,8 @@ class Research::Laboratory::Axis < ApplicationRecord
   include WithUniversity
   include WithPosition
 
+  has_summernote :text
+
   belongs_to :laboratory, foreign_key: :research_laboratory_id
 
   def to_s

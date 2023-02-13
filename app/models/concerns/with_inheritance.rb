@@ -4,6 +4,8 @@ module WithInheritance
   included do
     def self.rich_text_areas_with_inheritance(*properties)
       properties.each do |property|
+        has_summernote property
+
         class_eval <<-CODE, __FILE__, __LINE__ + 1
           def best_#{property}
             best("#{property}")

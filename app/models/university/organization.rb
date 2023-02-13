@@ -45,6 +45,8 @@ class University::Organization < ApplicationRecord
 
   attr_accessor :created_from_extranet
 
+  has_summernote :text
+
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy

@@ -47,6 +47,7 @@ class Research::Journal::Paper < ApplicationRecord
   include WithPosition
   include WithSlug
 
+  has_summernote :text
   has_one_attached :pdf
 
   belongs_to :journal, foreign_key: :research_journal_id

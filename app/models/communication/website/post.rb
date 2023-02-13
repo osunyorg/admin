@@ -49,6 +49,8 @@ class Communication::Website::Post < ApplicationRecord
   include WithSlug # We override slug_unavailable? method
   include WithTranslations
 
+  has_summernote :text # TODO: Remove text attribute
+
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
           dependent: :destroy
