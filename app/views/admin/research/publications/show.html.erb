@@ -24,6 +24,7 @@
   </div>
   <div class="col-lg-4">
     <% @publication.research_people.each do |person| %>
+      <% next if person.university != current_university %>
       <article class="mb-4 d-flex align-items-center position-relative">
         <div style="width: 80px">
           <%= kamifusen_tag person.best_picture, width: 80, class: 'img-circle' if person.best_picture.attached? %>
