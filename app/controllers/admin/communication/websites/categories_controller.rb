@@ -12,22 +12,20 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
 
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    old_parent_id = params[:oldParentId].blank? ? nil : params[:oldParentId]
     ids = params[:ids] || []
-    first_category = nil
     ids.each.with_index do |id, index|
       category = @website.categories.find(id)
-      first_category = category if index == 0
       category.update(
         parent_id: parent_id,
         position: index + 1
       )
     end
-    if parent_id
-      parent = @website.categories.find(parent_id)
-      parent.sync_with_git
-    else
-      first_category&.sync_with_git # Will sync siblings
+    if old_parent_id
+      old_parent = @website.categories.find(old_parent_id)
+      old_parent.sync_with_git
     end
+    @website.categories.find(params[:itemId]).sync_with_git # Will sync siblings
   end
 
   def children
