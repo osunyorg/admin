@@ -4,7 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  data             :jsonb
-#  docid            :string
+#  docid            :string           indexed
 #  doi              :string
 #  hal_url          :string
 #  publication_date :date
@@ -14,6 +14,10 @@
 #  url              :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_research_publications_on_docid  (docid)
 #
 
 default_publication:
