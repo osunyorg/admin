@@ -54,19 +54,10 @@ module Osuny
     config.active_storage.supported_image_processing_methods = ["+"]
 
     config.action_view.sanitized_allowed_tags = [
-      "a", "abbr", "acronym", "address", "b", "big", "blockquote", "br",
-      "cite", "code", "dd", "del", "dfn", "div", "dl", "dt", "em",
-      "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li", "ol",
-      "p", "picture", "pre", "samp", "small", "source", "span", "strong",
-      "sub", "sup", "tt", "u", "ul", "var", "video", "iframe", "action-text-attachment",
-      "table", "thead", "tbody", "tr", "td", "th"
+      "a", "b", "br", "em", "i", "img", "li", "ol", "p", "strong", "sub", "sup", "ul"
     ]
     config.action_view.sanitized_allowed_attributes = [
-      "abbr", "allowfullscreen", "alt", "cite", "controls", "datetime",
-      "decoding", "frameborder", "height", "href", "loading", "mozallowfullscreen",
-      "name", "sizes", "src", "srcset", "target", "title", "type",
-      "webkitallowfullscreen", "width", "xml:lang",
-      "sgid", "content-type", "url", "filename", "filesize", "previewable", "referrerpolicy"
+      "href", "target", "title"
     ]
 
     config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'

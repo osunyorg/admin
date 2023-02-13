@@ -61,7 +61,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPermalink
   include WithTranslations
 
-  has_summernote :text
+  has_summernote :text # TODO: Remove text attribute
 
   belongs_to :website,
              foreign_key: :communication_website_id
