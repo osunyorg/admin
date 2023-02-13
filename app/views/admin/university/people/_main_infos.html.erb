@@ -40,7 +40,7 @@
       </div>
       <% unless person.biography.blank? %>
         <%= osuny_label University::Person.human_attribute_name('biography') %>
-        <%= person.biography %>
+        <%= sanitize person.biography %>
       <% end %>
     <% end %>
 
