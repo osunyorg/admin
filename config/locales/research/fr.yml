@@ -70,8 +70,13 @@ fr:
         short_name: Nom court
         text: Texte
       research/publication:
-        title: Titre
         description: Publications scientifiques importées automatiquement de HAL
+        docid: Identifiant
+        doi_url: URL DOI
+        publication_date: Date de publication
+        title: Titre
+        url: URL
+        hal_url: URL HAL
       research/thesis:
         abstract: Résumé
         author: Auteur·rice

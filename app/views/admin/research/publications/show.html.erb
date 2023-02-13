@@ -1,16 +1,40 @@
 <% content_for :title, @publication %>
 
-<% @publication.research_people.each do |person| %>
-  <%= link_to person, admin_research_researcher_path(person) %>
-<% end %>
-
-<p><%= @publication.docid %></p>
-
-<div><%= sanitize @publication.ref %></div>
-
-<%= link_to 'url', @publication.url, target: :_blank if @publication.url %>
-<%= link_to 'HAL', @publication.hal_url, target: :_blank if @publication.hal_url %>
-<%= link_to 'DOI', @publication.doi_url, target: :_blank if @publication.doi_url %>
+<div class="row">
+  <div class="col-lg-8">
+    <p class="lead mb-4"><%= sanitize @publication.ref %></p>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= osuny_label Research::Publication.human_attribute_name('docid') %>
+        <p><%= @publication.docid %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Publication.human_attribute_name('publication_date') %>
+        <p><%= l @publication.publication_date %></p>
+      </div>
+      <% [:url, :hal_url, :doi_url].each do |key| %>
+        <% value = @publication.send key %>
+        <% next if value.blank? %>
+        <div class="col-lg-6">
+          <%= osuny_label Research::Publication.human_attribute_name(key) %>
+          <p><%= link_to value, value, target: :_blank %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <% @publication.research_people.each do |person| %>
+      <article class="mb-4 d-flex align-items-center position-relative">
+        <div style="width: 80px">
+          <%= kamifusen_tag person.best_picture, width: 80, class: 'img-circle' if person.best_picture.attached? %>
+        </div>
+        <div class="ms-3">
+          <%= link_to person, admin_research_researcher_path(person), class: 'stretched-link' %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</div>
 
 <% content_for :action_bar_left do %>
   <% if current_user.server_admin? %>

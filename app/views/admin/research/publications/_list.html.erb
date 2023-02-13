@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th><%= Research::Publication.human_attribute_name('title') %></th>
+        <th><%= Research::Publication.human_attribute_name('publication_date') %></th>
         <th><%= t('research.researchers', count: 2) %></th>
       </tr>
     </thead>
@@ -10,6 +11,7 @@
       <% publications.each do |publication| %>
         <tr>
           <td><%= link_to publication, admin_research_publication_path(publication) %></td>
+          <td><%= l publication.publication_date %></td>
           <td>
             <% publication.researchers.each do |researcher| %>
               <%= link_to_if  researcher.university == current_university, 
