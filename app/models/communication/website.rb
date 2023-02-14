@@ -62,7 +62,7 @@ class Communication::Website < ApplicationRecord
                           foreign_key: 'communication_website_id',
                           association_foreign_key: 'language_id'
 
-  has_connection University::Organization
+  has_connections University::Organization
 
   validates :languages, length: { minimum: 1 }
   validate :languages_must_include_default_language

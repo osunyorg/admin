@@ -2,7 +2,7 @@ module WithConnections
   extend ActiveSupport::Concern
 
   included do
-    def self.has_connection(klass)
+    def self.has_connections(klass)
       # university_organizations
       relation = relation_name klass
       # University::Organization
