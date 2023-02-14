@@ -4,7 +4,7 @@ module WithConnections
   included do
     def self.has_connection(klass)
       # university_organizations
-      relation = klass.to_s.underscore.gsub('/', '_').pluralize.to_sym
+      relation = relation_name klass
       # University::Organization
       class_name = klass.to_s
       # :communication_website_id
@@ -17,14 +17,29 @@ module WithConnections
                               association_foreign_key: association_foreign_key
 
     end
+
+    protected
+  
+    # University::Organization -> university_organizations
+    def self.relation_name(klass)
+      klass.to_s.underscore.gsub('/', '_').pluralize.to_sym
+    end
   end
 
   def connect(dependency)
-    return if dependency.in?(university_organizations)
-    university_organizations << dependency
+    relation = relation(dependency)
+    return if dependency.in?(relation)
+    relation << dependency
+  end
+  
+  def disconnect(dependency)
+    relation(dependency).delete dependency
   end
 
-  def disconnect(dependency)
-    university_organizations.delete dependency
+  protected
+  
+  def relation(instance)
+    relation_name = self.class.relation_name instance.class
+    send relation_name
   end
 end
