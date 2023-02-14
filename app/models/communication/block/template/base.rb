@@ -144,6 +144,9 @@ class Communication::Block::Template::Base
     hash
   end
 
+  def connect
+  end
+
   protected
 
   def build_component(property)
