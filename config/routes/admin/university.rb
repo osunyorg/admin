@@ -26,6 +26,9 @@ namespace :university do
     end
   end
   resources :organizations do
+    collection do 
+      get :search, defaults: { format: 'json' }
+    end
     member do
       get :static
     end

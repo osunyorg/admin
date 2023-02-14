@@ -1,0 +1,39 @@
+<%= osuny_panel University::Organization.model_name.human(count: 2) do %>
+  <%= simple_form_for :association, class_name: 'association' do |f| %>
+    <%= f.input :organization_name,
+                label: false,
+                as: :autocomplete,
+                url: search_admin_university_organizations_path(lang: nil, website_id: nil),
+                placeholder: t("extranet.experiences.search_organization"),
+                input_html: {
+                  data: {
+                    connect: admin_connect_path(  lang: nil, 
+                                                  website_id: nil,
+                                                  object_type: @website.class, 
+                                                  object_id: @website.id, 
+                                                  dependency_type: University::Organization,
+                                                  dependency_id: ':dependency_id')
+                  }
+                }
+                %>
+  <% end %>
+
+  <table class="<%= table_classes%>">
+    <tbody>
+      <% @website.university_organizations.each do |organization| %>
+        <tr>
+          <td><%= link_to organization, [:admin, organization] %></td>
+          <td><%= link_to 'Déconnecter', 
+                          admin_disconnect_path(lang: nil, 
+                                                website_id: nil,
+                                                object_type: @website.class, 
+                                                object_id: @website.id, 
+                                                dependency_type: organization.class,
+                                                dependency_id: organization.id),
+                          class: button_classes_danger,
+                          method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

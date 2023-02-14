@@ -39,6 +39,7 @@ class Communication::Website < ApplicationRecord
   include WithUniversity
   include WithAbouts
   include WithConfigs
+  include WithConnections
   include WithDependencies
   include WithGit
   include WithGitRepository
@@ -60,6 +61,11 @@ class Communication::Website < ApplicationRecord
                           join_table: 'communication_websites_languages',
                           foreign_key: 'communication_website_id',
                           association_foreign_key: 'language_id'
+
+  has_and_belongs_to_many :university_organizations,
+                          class_name: 'University::Organization',
+                          foreign_key: :communication_website_id,
+                          association_foreign_key: :university_organization_id
 
   validates :languages, length: { minimum: 1 }
   validate :languages_must_include_default_language

@@ -11,6 +11,13 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     breadcrumb
   end
 
+  def search
+    @term = params[:term].to_s
+    @organizations = current_university.organizations
+                                        .search_by_siren_or_name(@term)
+                                        .ordered
+  end
+
   def show
     breadcrumb
   end

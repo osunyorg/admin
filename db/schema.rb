@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_14_071223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -407,6 +407,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.uuid "communication_website_id", null: false
     t.uuid "language_id", null: false
     t.index ["communication_website_id", "language_id"], name: "website_language"
+  end
+
+  create_table "communication_websites_university_organizations", id: false, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.uuid "university_organization_id", null: false
+    t.index ["communication_website_id", "university_organization_id"], name: "website_organization"
+    t.index ["university_organization_id", "communication_website_id"], name: "organization_website"
   end
 
   create_table "communication_websites_users", id: false, force: :cascade do |t|
@@ -811,12 +818,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.string "zipcode"
     t.string "city"
     t.string "country"
-    t.string "mastodon"
-    t.uuid "language_id", null: false
-    t.uuid "original_id"
     t.string "hal_person_identifier"
     t.string "hal_doc_identifier"
     t.string "hal_form_identifier"
+    t.string "mastodon"
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"

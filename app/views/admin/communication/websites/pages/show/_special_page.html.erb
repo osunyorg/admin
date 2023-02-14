@@ -1,0 +1,8 @@
+<% if about.is_special_page? %>
+  <%
+  partial = about.type.demodulize.underscore
+  path = "admin/communication/websites/pages/show/special_pages/#{partial}"
+  exists = lookup_context.exists? path, [], true
+  %>
+  <%= render path, about: about if exists %>
+<% end %>
