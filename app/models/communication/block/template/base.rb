@@ -144,6 +144,7 @@ class Communication::Block::Template::Base
     hash
   end
 
+  # If the template has connections to entities, it must be managed here
   def connect
   end
 
