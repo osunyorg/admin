@@ -8,6 +8,14 @@ action += link_to t('admin.communication.blocks.add'),
   <% if about.blocks.any? %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">
+        <thead>
+          <tr>
+            <th></th>
+            <th><%= Communication::Block.human_attribute_name :title %></th>
+            <th><%= Communication::Block.human_attribute_name :template %></th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody data-sortable data-sort-url="<%= reorder_admin_communication_blocks_path %>">
           <% about.blocks.ordered.each do |block| %>
             <tr data-id="<%= block.id %>" class="<%= 'draft' unless block.published? %>">
@@ -19,9 +27,8 @@ action += link_to t('admin.communication.blocks.add'),
                 <span class="small"><%= block.template_kind_i18n  %></span>
                 <%= render 'admin/application/a11y/status', about: block %>
               </td>
-              <td class="p-0 blocks__list__image">
-                <%= image_tag "communication/blocks/templates/#{block.template_kind}.jpg",
-                              height: "100px", alt: '', style:"max-height: 75px" %>
+              <td class="blocks__list__image">
+                <%= image_tag "communication/blocks/templates/#{block.template_kind}.jpg", alt: '' %>
               </td>
               <td class="blocks__list__buttons">
                 <div class="btn-group">
