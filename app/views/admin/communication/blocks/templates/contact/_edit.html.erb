@@ -5,68 +5,55 @@
 </div>
 <div class="row pure__row--small mb-4">
   <div class="col-xl-6">
-    <div class="card">
-      <div class="card-header d-flex">
-        <h3 class="h4"><%= t '.contacts' %></h3>
-      </div>
-      <div class="card-body">
-        <%= block_component_edit :name %>
-        <%= block_component_edit :address %>
-        <div class="row pure__row--small">
-          <div class="col-md-4">
-            <%= block_component_edit :zipcode %>
-          </div>
-          <div class="col-md-8">
-            <%= block_component_edit :city %>
-          </div>
+    <%= osuny_panel t('.contacts') do %>
+      <%= block_component_edit :name %>
+      <%= block_component_edit :address %>
+      <div class="row pure__row--small">
+        <div class="col-md-4">
+          <%= block_component_edit :zipcode %>
         </div>
-        <%= block_component_edit :country %>
+        <div class="col-md-8">
+          <%= block_component_edit :city %>
+        </div>
       </div>
-    </div>
+      <%= block_component_edit :country %>
+    <% end %>
   </div>
   <div class="col-xl-6">
-    <div class="card">
-      <div class="card-header d-flex">
-        <h3 class="h4 pt-1 flex-fill"><%= t '.phones.label' %></h3>
-        <a class="btn bn-sm btn-primary" v-on:click="data.phone_numbers.push('')">
-          <%= t('.add') %>
-        </a>
-      </div>
-      <div class="card-body mb-n2">
-        <div v-for="(element, index) in data.phone_numbers">
-          <div class="d-flex mb-2">
-            <input  type="tel"
-                    class="form-control"
-                    placeholder="<%= t '.phones.placeholder' %>"
-                    v-model="data.phone_numbers[index]">
-            <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
-              <i class="<%= Icon::DELETE %>"></i>
-            </a>
-          </div>
+    <% 
+    action = "<a class=\"#{ button_classes }\" v-on:click=\"data.phone_numbers.push('')\">#{ t('.add') }</a>"
+    placeholder = t '.phones.placeholder'
+    %>
+    <%= osuny_panel t('.phones.label'), action: action do %>
+      <div v-for="(element, index) in data.phone_numbers">
+        <div class="d-flex mb-2">
+          <input  type="tel"
+                  class="form-control"
+                  placeholder="<%= placeholder %>"
+                  v-model="data.phone_numbers[index]">
+          <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
+            <i class="<%= Icon::DELETE %>"></i>
+          </a>
         </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-header d-flex">
-        <h3 class="h4 flex-fill"><%= t '.mails.label' %></h3>
-        <a class="btn bn-sm btn-primary" v-on:click="data.emails.push('')">
-          <%= t('.add') %>
-        </a>
-      </div>
-      <div class="card-body mb-n2">
-        <div v-for="(element, index) in data.emails">
-          <div class="d-flex mb-2">
-            <input  type="email"
-                    class="form-control" 
-                    placeholder="<%= t '.mails.placeholder' %>"
-                    v-model="data.emails[index]">
-            <a class="btn text-danger" v-on:click="data.emails.splice(index, 1)">
-              <i class="<%= Icon::DELETE %>"></i>
-            </a>
-          </div>
+    <% end %>
+    <% 
+    action = "<a class=\"#{ button_classes }\" v-on:click=\"data.emails.push('')\">#{ t('.add') }</a>"
+    placeholder = t '.mails.placeholder'
+    %>
+    <%= osuny_panel t('.mails.label'), action: action do %>
+      <div v-for="(element, index) in data.emails">
+        <div class="d-flex mb-2">
+          <input  type="email"
+                  class="form-control" 
+                  placeholder="<%= placeholder %>"
+                  v-model="data.emails[index]">
+          <a class="btn text-danger" v-on:click="data.emails.splice(index, 1)">
+            <i class="<%= Icon::DELETE %>"></i>
+          </a>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
