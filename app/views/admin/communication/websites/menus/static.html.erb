@@ -1,6 +1,13 @@
-<%= raw @about.items
-             .root
-             .ordered
-             .map(&:to_static_hash)
-             .compact
-             .to_yaml %>
+<%
+title = @about.title
+items = @about.items
+              .root
+              .ordered
+              .map(&:to_static_hash)
+              .compact
+hash = { 
+  'title' => title,
+  'items' => items
+}
+%>
+<%= raw hash.to_yaml %>
