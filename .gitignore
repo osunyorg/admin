@@ -45,6 +45,7 @@ yarn-debug.log*
 
 # Ignore db dump
 /db/latest.dump
+/db/scalingo-dump.tar.gz
 
 # Ignore coverage report
 coverage
