@@ -1,5 +1,11 @@
 <% content_for :title, @organization %>
 
+<% if @organization.summary.present? %>
+  <p class="lead mb-5">
+    <%= @organization.summary %>
+  </p>
+<% end %>
+
 <div class="row">
   <div class="col-md-8 order-2 order-md-1">
     <div class="row">
