@@ -74,7 +74,7 @@ module Communication::Website::WithMenus
 
   def find_or_create_menu(identifier)
     menu = menus.where(identifier: identifier, university: university, language: default_language).first_or_initialize do |menu|
-      menu.title = I18n.t("communication.menus.default_title.#{identifier}")
+      menu.title = I18n.t("communication.website.menus.default_title.#{identifier}")
     end
     unless menu.persisted?
       menu.save
