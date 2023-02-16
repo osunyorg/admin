@@ -17,10 +17,4 @@ class Communication::Block::Template::Partner < Communication::Block::Template::
   def organizations
     @organizations ||= elements.collect(&:organization).compact.uniq
   end
-
-  def connect
-    organizations.each do |organization|
-      website.connect organization
-    end if website
-  end
 end

@@ -14,35 +14,37 @@ module Communication::Website::WithConnections
 
   def clean_connections!
     start = Time.now
-    connect self, self
+    connect self
     # connections.where('updated_at < ?', start).destroy_all
   end
 
   def connect(object, source = nil)
+    source = object if source.nil?
     connect_object object, source
     return unless object.respond_to?(:dependencies)
     dependencies = object.dependencies
-    puts "#{dependencies.count} dependencies to connect"
     dependencies.each do |dependency|
+      # Connexion à la source primaire
       connect_object dependency, source
+      # Connexion à la dépendance la plus proche
       connect_object dependency, object
     end
   end
 
   # TODO pas pensé
   def disconnect(object, source = nil)
+    source = object if source.nil?
     disconnect_object object, source
     return unless object.respond_to?(:dependencies)
     object.dependencies.each do |dependency|
       disconnect_object dependency, source
-      disconnect_object dependency, object # Faut-il la double connexion ?
     end
   end
 
   protected
 
   def connect_object(object, source)
-    puts "connect_object #{object} from #{source}"
+    # puts "connect_object #{object} from #{source}"
     connection = connections.where(university: university, object: object, source: source).first_or_create
     connection.touch if connection.persisted?
   end

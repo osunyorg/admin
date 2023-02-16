@@ -28,7 +28,9 @@ class Communication::Website::Connection < ApplicationRecord
   belongs_to :university
   belongs_to :website
   belongs_to :object, polymorphic: true
-  belongs_to :source, polymorphic: true, optional: true
+  belongs_to :source, polymorphic: true
+
+  scope :ordered, -> { order(updated_at: :desc, )}
 
   def for_same_object
     self.class.where( university: university, 
@@ -38,6 +40,6 @@ class Communication::Website::Connection < ApplicationRecord
   end
 
   def to_s
-    "#{id}"
+    "#{id.split('-').first}"
   end
 end

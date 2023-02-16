@@ -2,7 +2,7 @@ class Admin::Communication::Websites::ConnectionsController < Admin::Communicati
   before_action :load_from_object, only: [:create, :destroy]
 
   def index
-    @connections = @website.connections.page params[:page]
+    @connections = @website.connections.ordered.page params[:page]
     breadcrumb
   end
 
@@ -15,13 +15,13 @@ class Admin::Communication::Websites::ConnectionsController < Admin::Communicati
 
   # Strange use of create, does not really create a connection
   def create
-    @website.connect @object
+    @website.connect @object, @website
     head :ok
   end
   
   # Strange use of destroy, does not really create a connection
   def destroy
-    @website.disconnect @object
+    @website.disconnect @object, @website
     redirect_back(fallback_location: [:admin, @object])
   end
 

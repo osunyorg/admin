@@ -9,9 +9,9 @@ module WithWebsites
   
   def connect_to_websites
     if respond_to?(:website)
-      website.connect self, self
+      website.connect self
     elsif respond_to?(:websites)
-      websites.each { |website| website.connect self, self }
+      websites.each { |website| website.connect self }
     end
   end
 end
