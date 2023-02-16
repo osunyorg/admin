@@ -10,7 +10,7 @@ namespace :communication do
       get :style
       get :analytics
     end
-    resources :connections, controller: 'websites/connections', only: [:index, :create, :destroy]
+    resources :connections, controller: 'websites/connections', except: [:new, :edit]
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder

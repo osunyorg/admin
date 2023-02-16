@@ -29,4 +29,15 @@ class Communication::Website::Connection < ApplicationRecord
   belongs_to :website
   belongs_to :object, polymorphic: true
   belongs_to :source, polymorphic: true, optional: true
+
+  def for_same_object
+    self.class.where( university: university, 
+                      website: website,
+                      object: object)
+              .where.not(id: id)
+  end
+
+  def to_s
+    "#{id}"
+  end
 end

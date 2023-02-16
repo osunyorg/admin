@@ -1,0 +1,24 @@
+<% content_for :title, @connection %>
+
+<div class="row">
+  <div class="col-lg-6 mb-5">
+    <%= osuny_label Communication::Website::Connection.human_attribute_name('object') %>
+    <p><%= @connection.object %></p>
+    <%= osuny_label Communication::Website::Connection.human_attribute_name('object_type') %>
+    <p><%= @connection.object_type %></p>
+    <%= osuny_label Communication::Website::Connection.human_attribute_name('object_id') %>
+    <p><%= @connection.object_id %></p>
+  </div>
+  <div class="col-lg-6 mb-5">
+    <%= osuny_label Communication::Website::Connection.human_attribute_name('source') %>
+    <p><%= @connection.source %></p>
+    <%= osuny_label Communication::Website::Connection.human_attribute_name('source_type') %>
+    <p><%= @connection.source_type %></p>
+    <%= osuny_label Communication::Website::Connection.human_attribute_name('source_id') %>
+    <p><%= @connection.source_id %></p>
+  </div>
+</div>
+
+<%= osuny_panel Communication::Website::Connection.human_attribute_name('others') do %>
+  <%= render 'admin/communication/websites/connections/list', connections: @others %>
+<% end %>

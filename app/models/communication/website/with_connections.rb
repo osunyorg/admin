@@ -13,9 +13,9 @@ module Communication::Website::WithConnections
   end
 
   def clean_connections!
-    # start = Time.now
+    start = Time.now
     connect self
-    # connections.where('updated_at < ?', start).destroy_all
+    connections.where('updated_at < ?', start).destroy_all
   end
 
   def connect(object, source = nil)
@@ -25,6 +25,7 @@ module Communication::Website::WithConnections
     puts "#{dependencies.count} dependencies to connect"
     dependencies.each do |dependency|
       connect_object dependency, source
+      connect_object dependency, object
     end
   end
 
