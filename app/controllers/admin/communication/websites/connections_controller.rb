@@ -1,5 +1,9 @@
 class Admin::Communication::Websites::ConnectionsController < Admin::Communication::Websites::ApplicationController
-  before_action :load_object
+  before_action :load_object, except: :index
+
+  def index
+    @connections = @website.connections.page params[:page]
+  end
 
   def create
     @website.connect @object

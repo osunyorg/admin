@@ -1,4 +1,4 @@
-module WithSimpleDependencies
+module WithDependencies
   extend ActiveSupport::Concern
 
   # Cette méthode doit être définie dans chaque objet, 
@@ -9,12 +9,12 @@ module WithSimpleDependencies
     []
   end
 
-  def simple_dependencies(list = [])
+  def dependencies(list = [])
     direct_dependencies.each do |dependency|
       next if dependency.in?(list)
       list << dependency
-      next unless dependency.respond_to?(:simple_dependencies)
-      list += dependency.simple_dependencies(list)
+      next unless dependency.respond_to?(:dependencies)
+      list += dependency.dependencies(list)
     end
     list
   end

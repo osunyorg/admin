@@ -18,8 +18,8 @@ module Communication::Website::WithConnections
 
   def connect(object, source = nil)
     connect_object object, source
-    return unless object.respond_to?(:simple_dependencies)
-    object.simple_dependencies.each do |dependency|
+    return unless object.respond_to?(:dependencies)
+    object.dependencies.each do |dependency|
       connect_object dependency, source
       connect_object dependency, object # Faut-il la double connexion ?
     end
@@ -28,8 +28,8 @@ module Communication::Website::WithConnections
   # TODO pas pensé
   def disconnect(object, source = nil)
     disconnect_object object, source
-    return unless object.respond_to?(:simple_dependencies)
-    object.simple_dependencies.each do |dependency|
+    return unless object.respond_to?(:dependencies)
+    object.dependencies.each do |dependency|
       disconnect_object dependency, source
       disconnect_object dependency, object # Faut-il la double connexion ?
     end

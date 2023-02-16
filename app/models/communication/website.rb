@@ -41,7 +41,7 @@ class Communication::Website < ApplicationRecord
   include WithConfigs
   include WithConnections
   include WithDependencies
-  include WithSimpleDependencies
+  include WithOldDependencies
   include WithGit
   include WithGitRepository
   include WithImport

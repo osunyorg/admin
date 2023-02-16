@@ -1,4 +1,4 @@
-module Communication::Website::WithDependencies
+module Communication::Website::WithOldDependencies
   extend ActiveSupport::Concern
 
   included do
