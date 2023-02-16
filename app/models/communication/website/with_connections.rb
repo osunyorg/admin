@@ -14,8 +14,8 @@ module Communication::Website::WithConnections
 
   def clean_connections!
     start = Time.now
-    connect self
-    connections.where('updated_at < ?', start).destroy_all
+    connect self, self
+    # connections.where('updated_at < ?', start).destroy_all
   end
 
   def connect(object, source = nil)

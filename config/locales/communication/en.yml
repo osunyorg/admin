@@ -95,6 +95,16 @@ en:
         name: Name
         parent: Parent category
         slug: Slug
+      communication/website/connection:
+        id: Identifier
+        object: Object
+        object_type: Object type
+        object_id: Object identifier
+        others: Other connections
+        source: Source
+        source_type: Source type
+        source_id: Source identifier
+        updated_at: Updated at
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:
