@@ -100,7 +100,7 @@ class Communication::Block < ApplicationRecord
 
   def language
     return @language if defined?(@language)
-    @language ||= about.respond_to?(:language) ? about.language : nil
+    @language ||= about.respond_to?(:language) ? about.language : about.university.default_language
   end
 
   def duplicate
