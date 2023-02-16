@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_071223) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_125515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -149,6 +149,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_071223) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.string "object_type", null: false
+    t.uuid "object_id", null: false
+    t.string "source_type"
+    t.uuid "source_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
+    t.index ["source_type", "source_id"], name: "index_communication_website_connections_on_source"
+    t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -407,13 +422,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_071223) do
     t.uuid "communication_website_id", null: false
     t.uuid "language_id", null: false
     t.index ["communication_website_id", "language_id"], name: "website_language"
-  end
-
-  create_table "communication_websites_university_organizations", id: false, force: :cascade do |t|
-    t.uuid "communication_website_id", null: false
-    t.uuid "university_organization_id", null: false
-    t.index ["communication_website_id", "university_organization_id"], name: "website_organization"
-    t.index ["university_organization_id", "communication_website_id"], name: "organization_website"
   end
 
   create_table "communication_websites_users", id: false, force: :cascade do |t|
@@ -928,6 +936,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_071223) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"

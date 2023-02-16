@@ -41,6 +41,7 @@ class Communication::Website < ApplicationRecord
   include WithConfigs
   include WithConnections
   include WithDependencies
+  include WithSimpleDependencies
   include WithGit
   include WithGitRepository
   include WithImport
@@ -62,8 +63,6 @@ class Communication::Website < ApplicationRecord
                           foreign_key: 'communication_website_id',
                           association_foreign_key: 'language_id'
 
-  has_connections University::Organization
-
   validates :languages, length: { minimum: 1 }
   validate :languages_must_include_default_language
 
@@ -83,6 +82,14 @@ class Communication::Website < ApplicationRecord
 
   def git_path(website)
     "data/website.yml"
+  end
+
+  def direct_dependencies
+    pages +
+    posts + 
+    categories +
+    menus +
+    [about]
   end
 
   def git_dependencies(website)

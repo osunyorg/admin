@@ -3,12 +3,16 @@ $(function () {
     'use strict';
     $('input.autocomplete')
         .on('railsAutocomplete.select', function ($event, data) {
-            var connect = $event.target.dataset.connect,
-                id = data.item.id,
-                url = connect.replace(':dependency_id', id);
+            var type = $event.target.dataset.type,
+                target = $event.target.dataset.target,
+                id = data.item.id;
             $.ajax({
                 type: 'POST',
-                url: url
+                url: target,
+                data: {
+                    object_id: id,
+                    object_type: type
+                }
             }).done(function () {
                 location.reload();
             });

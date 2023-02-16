@@ -24,8 +24,6 @@ Rails.application.routes.draw do
       patch 'unlock' => 'users#unlock', on: :member
     end
     put 'theme' => 'application#set_theme', as: :set_theme
-    post 'connect/:object_type/:object_id/:dependency_type/:dependency_id' => 'connection#connect', as: :connect
-    delete 'disconnect/:object_type/:object_id/:dependency_type/:dependency_id' => 'connection#disconnect', as: :disconnect
     draw 'admin/administration'
     draw 'admin/communication'
     draw 'admin/education'
