@@ -8,12 +8,14 @@ module Communication::Website::WithConnections
               through: :connections,
               source: :object,
               source_type: 'University::Organization'
+    
+    after_save :clean_connections!
   end
 
   def clean_connections!
-    start = Time.now
+    # start = Time.now
     connect self
-    connections.where('updated_at < ?', time).destroy_all
+    # connections.where('updated_at < ?', start).destroy_all
   end
 
   def connect(object, source = nil)
@@ -40,7 +42,8 @@ module Communication::Website::WithConnections
 
   def connect_object(object, source)
     puts "connect_object #{object} from #{source}"
-    connections.where(university: university, object: object, source: source).first_or_create
+    connection = connections.where(university: university, object: object, source: source).first_or_create
+    connection.touch if connection.persisted?
   end
 
   def disconnect_object(object, source)

@@ -97,6 +97,14 @@ class Communication::Website::Category < ApplicationRecord
     "admin/communication/websites/categories/static"
   end
 
+  def direct_dependencies
+    active_storage_blobs +
+    blocks +
+    children +
+    posts +
+    [parent]
+  end
+
   def git_dependencies(website)
     [self, parent].compact + siblings + descendants + active_storage_blobs + posts + website.menus
   end
