@@ -7,7 +7,7 @@
       <%= osuny_panel t('content') do %>
         <%= f.input :title %>
         <%= render 'admin/application/summary/form', f: f, about: post %>
-        <%= f.input :text, as: :summernote if post.text&.to_plain_text.present? %>
+        <%= f.input :text, as: :summernote if strip_tags(post.text).present? %>
       <% end %>
       <div class="row pure__row--small">
         <% if @categories.any? %>
