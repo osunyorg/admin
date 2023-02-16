@@ -43,6 +43,7 @@ class University::Organization < ApplicationRecord
   include WithPermalink
   include WithSlug
   include WithUniversity
+  include WithWebsites
 
   attr_accessor :created_from_extranet
 
@@ -104,10 +105,6 @@ class University::Organization < ApplicationRecord
     dependencies += website.menus.to_a
     dependencies += dependencies_through_blocks(website)
     dependencies
-  end
-
-  def websites
-    university.communication_websites
   end
 
   def for_website?(website)

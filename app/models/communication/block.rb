@@ -28,6 +28,7 @@ class Communication::Block < ApplicationRecord
   include WithDependencies
   include WithPosition
   include WithUniversity
+  include WithWebsites
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
@@ -37,6 +38,9 @@ class Communication::Block < ApplicationRecord
   # Used to purge images when unattaching them
   # template_blobs would be a better name, because there are files
   has_many_attached :template_images
+
+  delegate :website, to: :about
+  delegate :websites, to: :about
 
   enum template_kind: {
     chapter: 50,
@@ -69,7 +73,6 @@ class Communication::Block < ApplicationRecord
   scope :published, -> { where(published: true) }
 
   before_save :attach_template_blobs
-  after_save :connect
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
@@ -141,9 +144,5 @@ class Communication::Block < ApplicationRecord
   # Could not find or build blob: expected attachable, got #<ActiveStorage::Blob id: "f4c78657-5062-416b-806f-0b80fb66f9cd", key: "gri33wtop0igur8w3a646llel3sd", filename: "logo.svg", content_type: "image/svg+xml", metadata: {"identified"=>true, "width"=>709, "height"=>137, "analyzed"=>true}, service_name: "scaleway", byte_size: 4137, checksum: "aZqqTYabP5+72ZeddcZ/2Q==", created_at: "2022-05-05 12:17:33.941505000 +0200", university_id: "ebf2d273-ffc9-4d9f-a4ee-a2146913d617">
   def attach_template_blobs
     # self.template_images = template.active_storage_blobs
-  end
-
-  def connect
-    template.connect
   end
 end
