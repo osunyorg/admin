@@ -13,7 +13,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
         <%= f.input :breadcrumb_title %>
         <%= render 'admin/application/summary/form', f: f, about: page %>
         <%= f.input :header_text, as: :string %>
-        <%= f.input :text, as: :summernote if page.text&.to_plain_text.present? %>
+        <%= f.input :text, as: :summernote if strip_tags(page.text).present? %>
       <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: page %>
     </div>
