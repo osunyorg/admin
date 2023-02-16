@@ -24,9 +24,10 @@
 #  fk_rails_18291ef65f  (university_id => universities.id)
 #
 class Communication::Block < ApplicationRecord
-  include WithUniversity
-  include WithPosition
   include Accessible
+  include WithDependencies
+  include WithPosition
+  include WithUniversity
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
@@ -80,6 +81,10 @@ class Communication::Block < ApplicationRecord
   # Template data is clean and sanitized, and initialized with json
   def data
     template.data
+  end
+
+  def direct_dependencies
+    template.direct_dependencies
   end
 
   def git_dependencies

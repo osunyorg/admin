@@ -39,15 +39,17 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
-  include WithFeaturedImage
   include WithBlobs
   include WithBlocks
+  include WithDependencies
+  include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
   include WithTranslations
+  include WithUniversity
+  include WithWebsites
 
   has_summernote :text # TODO: Remove text attribute
 
@@ -117,6 +119,17 @@ class Communication::Website::Post < ApplicationRecord
 
   def template_static
     "admin/communication/websites/posts/static"
+  end
+  
+  def menu_items
+    Communication::Website::Menu::Item.where(website: website, kind: :post, about: self)
+  end
+
+  def direct_dependencies
+    active_storage_blobs +
+    blocks +
+    menu_items +
+    categories
   end
 
   def git_dependencies(website)

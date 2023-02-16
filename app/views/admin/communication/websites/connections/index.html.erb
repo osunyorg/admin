@@ -1,4 +1,5 @@
 <% content_for :title, Communication::Website::Connection.model_name.human(count: 2) %>
+<% content_for :title_right, @connections.total_count %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
@@ -13,10 +14,24 @@
     </thead>
     <tbody>
       <% @connections.each do |connection| %>
+        <%
+        object = connection.object
+        object_name = object.to_s
+        object_name = object.id if object.is_a?(ActiveStorage::Blob)
+        begin
+          object_link = url_for [:admin, object]
+        rescue
+        end
+        source = connection.source 
+        begin
+          source_link = url_for [:admin, source]
+        rescue
+        end
+        %>
       <tr>
-        <td><%= link_to connection.object, [:admin, connection.object] %></td>
+        <td><%= link_to_if object_link, object_name, object_link %></td>
         <td><%= connection.object_type %></td>
-        <td><%= link_to connection.source, [:admin, connection.source] if connection.source %></td>
+        <td><%= link_to_if source_link, source, source_link %></td>
         <td><%= connection.source_type %></td>
         <td><%= l connection.updated_at %></td>
       </tr>

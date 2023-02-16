@@ -13,6 +13,10 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     page_id_component.page
   end
 
+  def direct_dependencies
+    selected_pages
+  end
+
   def selected_pages
     @selected_pages ||= send "selected_pages_#{mode}"
   end

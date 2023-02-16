@@ -21,6 +21,10 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     category_id_component.category
   end
 
+  def direct_dependencies
+    selected_posts
+  end
+
   def selected_posts
     @selected_posts ||= send "selected_posts_#{mode}"
   end

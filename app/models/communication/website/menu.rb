@@ -28,10 +28,12 @@
 #  fk_rails_dcc7198fc5  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Menu < ApplicationRecord
-  include WithUniversity
   include Sanitizable
+  include WithDependencies
   include WithGit
   include WithTranslations
+  include WithUniversity
+  include WithWebsites
 
   belongs_to :website, foreign_key: :communication_website_id
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
@@ -51,6 +53,10 @@ class Communication::Website::Menu < ApplicationRecord
 
   def template_static
     "admin/communication/websites/menus/static"
+  end
+
+  def direct_dependencies
+    items
   end
 
   def translate_additional_data!(translation)

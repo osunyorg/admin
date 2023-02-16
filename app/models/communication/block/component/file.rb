@@ -14,6 +14,10 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     }
   end
 
+  def direct_dependencies
+    [blob]
+  end
+
   def git_dependencies
     [blob]
   end

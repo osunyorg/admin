@@ -1,5 +1,6 @@
 class Communication::Block::Template::Base
   include Accessible
+  include WithDependencies
 
   class_attribute :components_descriptions,
                   :layouts,
@@ -97,6 +98,11 @@ class Communication::Block::Template::Base
   def translate!
     components.each(&:translate!)
     elements.each(&:translate!) if has_element_class?
+  end
+
+  def direct_dependencies
+    components +
+    elements
   end
 
   def git_dependencies

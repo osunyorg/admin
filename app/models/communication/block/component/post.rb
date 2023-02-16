@@ -5,6 +5,10 @@ class Communication::Block::Component::Post < Communication::Block::Component::B
     website.posts.published.find_by(id: data)
   end
 
+  def direct_dependencies
+    [post]
+  end
+
   def git_dependencies
     [
       post,

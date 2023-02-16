@@ -42,17 +42,19 @@
 #
 class Communication::Website::Category < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
-  include WithFeaturedImage
   include WithBlobs
   include WithBlocks
+  include WithDependencies
+  include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
-  include WithSlug # We override slug_unavailable? method
-  include WithTree
   include WithPermalink
   include WithPosition
+  include WithSlug # We override slug_unavailable? method
   include WithTranslations
+  include WithTree
+  include WithUniversity
+  include WithWebsites
 
   has_one                 :imported_category,
                           class_name: 'Communication::Website::Imported::Category',

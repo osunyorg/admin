@@ -51,6 +51,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithUniversity
   include WithBlobs
   include WithBlocks
+  include WithDependencies
   include WithFeaturedImage
   include WithGit
   include WithMenuItemTarget
@@ -60,6 +61,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithType
   include WithPermalink
   include WithTranslations
+  include WithWebsites
 
   has_summernote :text # TODO: Remove text attribute
 
@@ -82,7 +84,7 @@ class Communication::Website::Page < ApplicationRecord
   has_many   :translations,
              class_name: 'Communication::Website::Page',
              foreign_key: :original_id
-
+             
   validates :title, presence: true
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
@@ -91,7 +93,18 @@ class Communication::Website::Page < ApplicationRecord
   def template_static
     "admin/communication/websites/pages/static"
   end
+  
+  def menu_items
+    Communication::Website::Menu::Item.where(website: website, kind: :page, about: self)
+  end
 
+  def direct_dependencies
+    active_storage_blobs +
+    blocks +
+    menu_items +
+    children
+  end
+  
   def git_dependencies(website)
     dependencies = [self] +
                     website.menus +

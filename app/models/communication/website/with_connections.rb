@@ -19,9 +19,10 @@ module Communication::Website::WithConnections
   def connect(object, source = nil)
     connect_object object, source
     return unless object.respond_to?(:dependencies)
-    object.dependencies.each do |dependency|
+    dependencies = object.dependencies
+    puts "#{dependencies.count} dependencies to connect"
+    dependencies.each do |dependency|
       connect_object dependency, source
-      connect_object dependency, object # Faut-il la double connexion ?
     end
   end
 
@@ -38,6 +39,7 @@ module Communication::Website::WithConnections
   protected
 
   def connect_object(object, source)
+    puts "connect_object #{object} from #{source}"
     connections.where(university: university, object: object, source: source).first_or_create
   end
 

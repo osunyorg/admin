@@ -32,10 +32,12 @@
 #  fk_rails_fa4f4585e4  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
-  include WithUniversity
   include Sanitizable
-  include WithTree
+  include WithDependencies
   include WithPosition
+  include WithTree
+  include WithUniversity
+  include WithWebsites
 
   attr_accessor :skip_publication_callback
 
@@ -115,6 +117,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'kind' => kind,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
+  end
+
+  def direct_dependencies
+    [menu]
   end
 
   def has_about?
