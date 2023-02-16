@@ -67,3 +67,11 @@ alumnus:
   university: default_university
   user: alumnus
   language: fr
+
+person_1:
+  email: person1@osuny.org
+  first_name: Person 1
+  last_name: Person 1
+  name: Person 1 Person 1
+  university: default_university
+  language: fr

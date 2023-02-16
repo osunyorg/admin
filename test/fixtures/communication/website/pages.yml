@@ -1,0 +1,9 @@
+page1:
+  university: default_university
+  website: website_with_github
+  title: Page 1
+  slug: page-1
+  language: fr
+  position: 1
+  published: true
+  text: Lorem Ipsum
