@@ -36,6 +36,7 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
+  include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithGit

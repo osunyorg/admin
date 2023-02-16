@@ -76,17 +76,13 @@ administrative_missions:
 <% end %>
 <% if @about.publications.any? %>
 publications:
-<% @about.publications.each do |publication| %>
+<% @about.publications.ordered.each do |publication| %>
   - title: >
       <%= prepare_text_for_static publication.title %>
     ref: >
       <%= prepare_html_for_static publication.ref, @website.university %>
-    url: >
-      <%= prepare_text_for_static publication.url %>
-    hal_url: >
-      <%= prepare_text_for_static publication.hal_url %>
-    doi_url: >
-      <%= prepare_text_for_static publication.doi_url %>
+    date: "<%= publication.publication_date&.iso8601 %>"
+    url: "<%= publication.best_url %>"
 <% end %>
 <% end %>
 <%= render 'admin/communication/blocks/static', about: @about %>

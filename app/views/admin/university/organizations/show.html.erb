@@ -68,7 +68,7 @@
   </div>
 
   <div class="col-md-4">
-    <%= osuny_panel t('informations') do %>
+    <%= osuny_panel t('metadata') do %>
       <%= osuny_label University::Organization.human_attribute_name('slug') %>
       <p><%= @organization.slug %></p>
       <%= osuny_label University::Organization.human_attribute_name('active') %>
