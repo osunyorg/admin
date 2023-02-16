@@ -66,6 +66,10 @@ class Research::Publication < ApplicationRecord
     "#{DOI_PREFIX}#{doi}"
   end
 
+  def best_url
+    doi_url || url || hal_url
+  end
+
   def to_s
     "#{title}"
   end

@@ -82,12 +82,7 @@ publications:
     ref: >
       <%= prepare_html_for_static publication.ref, @website.university %>
     date: "<%= publication.publication_date&.iso8601 %>"
-    url: >
-      <%= prepare_text_for_static publication.url %>
-    hal_url: >
-      <%= prepare_text_for_static publication.hal_url %>
-    doi_url: >
-      <%= prepare_text_for_static publication.doi_url %>
+    url: "<%= publication.best_url %>"
 <% end %>
 <% end %>
 <%= render 'admin/communication/blocks/static', about: @about %>
