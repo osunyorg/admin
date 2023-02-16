@@ -17,6 +17,9 @@ en:
         one: Category
         other: Categories
         all: All categories
+      communication/website/connection:
+        one: Connection
+        other: Connections
       communication/website/imported/website:
         one: Imported website
         other: Imported websites

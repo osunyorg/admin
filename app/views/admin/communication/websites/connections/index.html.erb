@@ -1,1 +1,28 @@
 <% content_for :title, Communication::Website::Connection.model_name.human(count: 2) %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Connection.human_attribute_name('object') %></th>
+        <th><%= Communication::Website::Connection.human_attribute_name('object_type') %></th>
+        <th><%= Communication::Website::Connection.human_attribute_name('source') %></th>
+        <th><%= Communication::Website::Connection.human_attribute_name('source_type') %></th>
+        <th><%= Communication::Website::Connection.human_attribute_name('updated_at') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @connections.each do |connection| %>
+      <tr>
+        <td><%= link_to connection.object, [:admin, connection.object] %></td>
+        <td><%= connection.object_type %></td>
+        <td><%= link_to connection.source, [:admin, connection.source] if connection.source %></td>
+        <td><%= connection.source_type %></td>
+        <td><%= l connection.updated_at %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @connections, theme: 'bootstrap-5' %>

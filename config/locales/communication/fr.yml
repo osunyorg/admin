@@ -17,6 +17,9 @@ fr:
         one: Catégorie
         other: Catégories
         all: Toutes les catégories
+      communication/website/connection:
+        one: Connexion
+        other: Connexions
       communication/website/imported/website:
         one: Site importé
         other: Sites importés

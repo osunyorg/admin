@@ -3,6 +3,7 @@ class Admin::Communication::Websites::ConnectionsController < Admin::Communicati
 
   def index
     @connections = @website.connections.page params[:page]
+    breadcrumb
   end
 
   def create
@@ -21,5 +22,10 @@ class Admin::Communication::Websites::ConnectionsController < Admin::Communicati
     object_type = params[:object_type]
     object_id = params[:object_id]
     @object = object_type.constantize.find object_id
+  end
+
+  def breadcrumb
+    super
+    add_breadcrumb Communication::Website::Connection.model_name.human(count: 2)
   end
 end
