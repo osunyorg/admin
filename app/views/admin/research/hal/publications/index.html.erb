@@ -1,0 +1,4 @@
+<% content_for :title, Research::Hal::Publication.model_name.human(count: 2) %>
+<% content_for :title_right, "#{ @publications.total_count }" %>
+<%= render 'admin/research/hal/publications/list', publications: @publications %>
+<%= paginate @publications, theme: 'bootstrap-5' %>

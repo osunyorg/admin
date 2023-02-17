@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: research_publications
+# Table name: research_hal_publications
 #
 #  id               :uuid             not null, primary key
 #  data             :jsonb
@@ -17,9 +17,9 @@
 #
 # Indexes
 #
-#  index_research_publications_on_docid  (docid)
+#  index_research_hal_publications_on_docid  (docid)
 #
-class Research::Publication < ApplicationRecord
+class Research::Hal::Publication < ApplicationRecord
   include WithGit
   include WithSlug
 
@@ -52,8 +52,8 @@ class Research::Publication < ApplicationRecord
 
   def self.update_from_hal
     University::Person::Researcher.with_hal_identifier.find_each do |researcher|
-      puts "Loading publications for #{researcher} (#{researcher.university})"
-      researcher.import_research_publications_from_hal!
+      # puts "Loading publications for #{researcher} (#{researcher.university})"
+      researcher.import_research_hal_publications!
     end
   end
 

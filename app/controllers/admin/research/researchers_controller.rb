@@ -29,7 +29,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     ].each do |key|
       @researcher.update_column key, params[key] if params.has_key?(key)
     end
-    @researcher.import_research_publications_from_hal_without_delay!
+    @researcher.import_research_hal_publications!
     redirect_to admin_research_researcher_path(@researcher)
   end
 

@@ -9,10 +9,10 @@
   <% end %>
 <% end %>
 
-<%= osuny_panel Research::Publication.model_name.human(count: 2), action: @researcher.research_publications.count do %>
+<%= osuny_panel Research::Hal::Publication.model_name.human(count: 2), action: @researcher.hal_publications.count do %>
   <% if @researcher.hal_identity? %>
     <div class="table-responsive">
-      <%= render 'admin/research/publications/list', publications: @researcher.research_publications.ordered %>
+      <%= render 'admin/research/hal/publications/list', publications: @researcher.hal_publications.ordered %>
     </div>
   <% else %>
     <p><%= t 'research.hal.select_identifier' %><p>

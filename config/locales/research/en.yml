@@ -7,6 +7,9 @@ en:
       university/person/researcher:
         one: Researcher
         other: Researchers
+      research/hal/publication:
+        one: Publication
+        other: Publications
       research/journal:
         one: Journal
         other: Journals
@@ -25,13 +28,18 @@ en:
       research/laboratory/axis:
         one: Axis
         other: Axes
-      research/publication:
-        one: Publication
-        other: Publications
       research/thesis:
         one: Thesis
         other: Theses
     attributes:
+      research/hal/publication:
+        description: Publications scientifiques importées automatiquement de HAL
+        docid: Identifier
+        doi_url: URL DOI
+        publication_date: Publication date
+        title: Title
+        url: URL
+        hal_url: URL HAL
       research/journal:
         description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
@@ -69,14 +77,6 @@ en:
         name: Name
         short_name: Short name
         text: Text
-      research/publication:
-        description: Publications scientifiques importées automatiquement de HAL
-        docid: Identifier
-        doi_url: URL DOI
-        publication_date: Publication date
-        title: Title
-        url: URL
-        hal_url: URL HAL
       research/thesis:
         abstract: Abstract
         author: Author

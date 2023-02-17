@@ -1,8 +1,10 @@
 namespace :research do
   resources :researchers, only: [:index, :show, :update]
-  resources :publications, only: [:index, :show, :destroy] do
-    member do
-      get :static
+  namespace :hal do
+    resources :publications, only: [:index, :show, :destroy] do
+      member do
+        get :static
+      end
     end
   end
   resources :journals do
