@@ -1,0 +1,12 @@
+<%= osuny_panel Communication::Website::Connection.model_name.human(count: 2) do %>
+  <% about.websites.each do |website| %>
+    <div class="mb-4">
+      <p class="mb-0"><b><%= link_to website, [:admin, website] %></b></p>
+      <ul class="list-unstyled small">
+        <% Communication::Website::Connection.for_object(about).in_website(website).each do |connection| %>
+          <li><%= render  'admin/application/connections/source', connection: connection %></li>
+        <% end %>
+      </ul>
+    </tr>
+  <% end %>
+<% end if about.websites.any? %>

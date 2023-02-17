@@ -1,0 +1,13 @@
+<% 
+source = connection.source
+website = connection.website
+begin
+  path = url_for [:admin, source]
+rescue
+end
+path = edit_admin_communication_block_path(source) if source.is_a?(Communication::Block)
+path = admin_communication_website_page_path( website_id: website.id, 
+                                              lang: website.default_language, 
+                                              id: source) if source.is_special_page?
+%>
+<%= link_to_if path, source, path %>
