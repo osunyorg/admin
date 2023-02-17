@@ -1,6 +1,4 @@
 class Admin::Communication::Websites::ConnectionsController < Admin::Communication::Websites::ApplicationController
-  before_action :load_from_object, only: [:create, :destroy]
-
   def index
     @connections = @website.connections.ordered.page params[:page]
     breadcrumb
@@ -13,25 +11,7 @@ class Admin::Communication::Websites::ConnectionsController < Admin::Communicati
     add_breadcrumb @connection
   end
 
-  # Strange use of create, does not really create a connection
-  def create
-    @website.connect @object, @website
-    head :ok
-  end
-  
-  # Strange use of destroy, does not really create a connection
-  def destroy
-    @website.disconnect @object, @website
-    redirect_back(fallback_location: [:admin, @object])
-  end
-
   protected
-
-  def load_from_object
-    object_type = params[:object_type]
-    object_id = params[:object_id]
-    @object = object_type.constantize.find object_id
-  end
 
   def breadcrumb
     super

@@ -87,6 +87,8 @@
     <% end if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
 
     <%= render 'admin/application/meta_description/show', about: @organization %>
+
+    <%= render 'admin/application/connections', about: @organization %>
   </div>
 </div>
 
@@ -119,39 +121,6 @@
   </div>
 <% end if @organization.experiences.any? %>
 
-<%= osuny_panel Communication::Website::Connection.model_name.human(count: 2) do %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th><%= Communication::Website.model_name.human %></th>
-        <th><%= Communication::Website::Connection.human_attribute_name(:source) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @organization.websites.each do |website| %>
-        <tr>
-          <td><%= link_to website, [:admin, website] %></td>
-          <td>
-            <ul class="list-unstyled">
-              <% Communication::Website::Connection.for_object(@organization).in_website(website).each do |connection| %>
-                <% 
-                begin
-                  path = url_for [:admin, connection.source] 
-                  if connection.source.is_a? Communication::Block
-                    path = edit_admin_communication_block_path(connection.source)
-                  end
-                rescue
-                end
-                %>
-                <li><%= link_to connection.source, path %></li>
-              <% end %>
-            </ul>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end if @organization.websites.any? %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>

@@ -46,6 +46,18 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     render layout: 'admin/layouts/preview'
   end
 
+  def connect
+    load_object
+    @website.connect @object, @page
+    head :ok
+  end
+  
+  def disconnect
+    load_object
+    @website.disconnect @object, @page
+    redirect_back(fallback_location: [:admin, @object])
+  end
+
   def new
     @page.website = @website
     breadcrumb
@@ -97,6 +109,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   protected
+
+  def load_object
+    object_type = params[:object_type]
+    object_id = params[:object_id]
+    @object = object_type.constantize.find object_id
+  end
 
   def breadcrumb
     super

@@ -11,7 +11,7 @@
                 input_html: {
                   data: {
                     type: 'University::Organization',
-                    target: admin_communication_website_connections_path(lang: nil)
+                    target: connect_admin_communication_website_page_path(@page)
                   }
                 }
                 %>
@@ -22,9 +22,9 @@
         <tr>
           <td><%= link_to organization, [:admin, organization] %></td>
           <td><%= link_to 'Déconnecter', 
-                          admin_communication_website_connection_path(id: 'no-id', object_id: organization.id, object_type: organization.class),
+                          disconnect_admin_communication_website_page_path(@page, object_id: organization.id, object_type: organization.class),
                           class: button_classes_danger,
-                          method: :delete %></td>
+                          method: :post %></td>
         </tr>
       <% end %>
     </tbody>
