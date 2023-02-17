@@ -9,43 +9,44 @@
   <% end %>
 <% end %>
 
-<%= osuny_panel Research::Hal::Publication.model_name.human(count: 2), action: @researcher.hal_publications.count do %>
-  <% if @researcher.hal_identity? %>
-    <div class="table-responsive">
-      <%= render 'admin/research/hal/publications/list', publications: @researcher.hal_publications.ordered %>
-    </div>
-  <% else %>
-    <p><%= t 'research.hal.select_identifier' %><p>
-    <div class="table-responsive">
-      <table class="table">
-        <tbody>
-          <% @possible_hal_authors.each do |author| %>
-            <%
-            path = admin_research_researcher_path @researcher, 
-                                                  hal_doc_identifier: author.docid,
-                                                  hal_form_identifier: author.attributes['form_i'],
-                                                  hal_person_identifier: author.attributes['person_i']
-            %>
-            <tr>
-              <td width="300">
-                Identifiant HAL : <%= author.docid %><br>
-                <small><%= author.fullName_s %></small>
-              </td>
-              <td class="ps-3" width="200"><%= link_to 'Choisir cet identifiant', path, method: :put, class: 'btn btn-primary btn-sm' %><td>
-              <td class="ps-3">
-                <% docs = HalOpenscience::Document.search "authIdFormPerson_s:#{author.docid}", fields: ["*"], limit: 5 %>
-                <ul class="list-unstyled small">
-                  <% docs.results.each do |doc| %>
-                    <li class="mb-2"><%= sanitize doc.citationFull_s %></li>
-                  <% end unless docs.nil? %>
-                </ul>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
+<%= osuny_panel Research::Hal::Author.model_name.human(count: 2), action: @researcher.hal_publications.count do %>
+  <p><%= t 'research.hal.select_identifier' %><p>
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <% @possible_hal_authors.each do |author| %>
+          <%
+          path = admin_research_researcher_path @researcher, 
+                                                hal_doc_identifier: author.docid,
+                                                hal_form_identifier: author.attributes['form_i'],
+                                                hal_person_identifier: author.attributes['person_i']
+          %>
+          <tr>
+            <td width="300">
+              Identifiant HAL : <%= author.docid %><br>
+              <small><%= author.fullName_s %></small>
+            </td>
+            <td class="ps-3" width="200"><%= link_to 'Choisir cet identifiant', path, method: :put, class: 'btn btn-primary btn-sm' %><td>
+            <td class="ps-3">
+              <% docs = HalOpenscience::Document.search "authIdFormPerson_s:#{author.docid}", fields: ["*"], limit: 5 %>
+              <ul class="list-unstyled small">
+                <% docs.results.each do |doc| %>
+                  <li class="mb-2"><%= sanitize doc.citationFull_s %></li>
+                <% end unless docs.nil? %>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<%= osuny_panel Research::Hal::Publication.model_name.human do %>
+  <p><%= "#{@researcher.hal_publications.count} #{Research::Hal::Publication.model_name.human(count: @researcher.hal_publications.count).downcase}" %> 
+  <div class="table-responsive">
+    <%= render 'admin/research/hal/publications/list', publications: @researcher.hal_publications.ordered %>
+  </div>
 <% end %>
 
 <% content_for :action_bar_right do %>

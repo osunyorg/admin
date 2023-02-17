@@ -25,11 +25,7 @@ class Research::Hal::Publication < ApplicationRecord
 
   DOI_PREFIX = 'http://dx.doi.org/'.freeze
 
-  has_and_belongs_to_many :research_people,
-                          class_name: 'University::Person', 
-                          foreign_key: 'university_person_id',
-                          association_foreign_key: 'research_publication_id'
-  alias :researchers :research_people
+  has_and_belongs_to_many :publications
 
   before_destroy { research_people.clear }
 

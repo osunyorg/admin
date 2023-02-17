@@ -1,6 +1,11 @@
 namespace :research do
   resources :researchers, only: [:index, :show, :update]
   namespace :hal do
+    resources :authors, only: [:index, :show, :destroy] do
+      member do
+        get :static
+      end
+    end
     resources :publications, only: [:index, :show, :destroy] do
       member do
         get :static

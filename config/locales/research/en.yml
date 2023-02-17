@@ -2,11 +2,15 @@ en:
   activemodel:
     models:
       research: Research
+      research/hal: HAL
   activerecord:
     models:
       university/person/researcher:
         one: Researcher
         other: Researchers
+      research/hal/author:
+        one: Author
+        other: Authors
       research/hal/publication:
         one: Publication
         other: Publications
@@ -32,6 +36,10 @@ en:
         one: Thesis
         other: Theses
     attributes:
+      research/hal/author:
+        first_name: First name
+        last_name: Last name
+        full_name: Full name
       research/hal/publication:
         description: Publications scientifiques importées automatiquement de HAL
         docid: Identifier
@@ -93,8 +101,8 @@ en:
       source: Serge Haroche, Prix Nobel de physique 2012
     hal:
       title: HAL
-      select_identifier: You have no HAL identifier yet. Is it one of these possibilities? If there are several, please choose the most complete one (without -0 at the end).
-    manage_researchers: Managege researchers
+      select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
+    manage_researchers: Manage researchers
     researchers:
       one: Researcher
       other: Researchers

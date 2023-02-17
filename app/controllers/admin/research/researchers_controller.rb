@@ -15,7 +15,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def show
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
-    @possible_hal_authors = @researcher.possible_hal_authors unless @researcher.hal_identity?
+    @possible_hal_authors = @researcher.possible_hal_authors
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
     add_breadcrumb @researcher

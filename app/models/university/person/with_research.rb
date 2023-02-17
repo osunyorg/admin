@@ -12,12 +12,7 @@ module University::Person::WithResearch
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
 
-  def hal_identity?
-    hal_form_identifier.present?
-  end
-
   def import_research_hal_publications!
-    return unless hal_identity?
     response = HalOpenscience::Document.search  "authIdForm_i:#{hal_form_identifier}",
                                                 fields: ["*"],
                                                 limit: 1000
