@@ -11,23 +11,20 @@
     %>
     <div>
       <article class="person" itemscope itemtype="https://schema.org/Person">
-        <div>
-          <p class="name" itemprop="name">
+        <div class="description">
+          <h3 class="name" itemprop="name">
             <% if @block.template.with_link %>
               <%= link_to person, [:admin, person] %>    
               <% else %>  
                 <%= element.person %>
             <% end %>    
-          </p>
+          </h3>
           <p itemprop="jobTitle"><%= element.role %></p>
         </div>
         <% if @block.template.with_photo %>
           <div class="avatar" itemprop="image">
             <% if person.best_picture.attached? %>
-              <div style="max-width: 80px" class="float-end">
-                <%= kamifusen_tag person.best_picture,
-                                  class: 'img-fluid rounded-circle' %>
-              </div>
+              <%= kamifusen_tag person.best_picture, class: 'img-fluid rounded-circle' %>
             <% end %>
           </div>
         <% end %>

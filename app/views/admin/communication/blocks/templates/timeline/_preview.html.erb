@@ -1,46 +1,42 @@
 <%= block_component_preview :layout %>
 
-<section class="block block-timeline">
-  <div class="container">
-    <% if @block.template.layout ===  "horizontal" %>
-      <div class="timeline">
-        <div class="events">
-          <ol>
-            <% @block.template.elements.each do |element| %>
-              <div class="event">
-                <li class="event">
-                  <p class="title">
-                    <%= block_component_preview :title, template: element %>
-                  <p>
-                  <div class="line"></div>
-                  <p class="description"><%= block_component_preview :text, template: element %></p>
-                </li>
-              </div>
-            <% end %>
-          </ol>
-          <% if !@block.template.elements.one? %>
-            <div class="timeline-arrows">
-              <button class="previous" disabled title="{{ i18n "blocks.timeline.previous"}}"></button>
-              <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
-            </div>
-          <% end %>
+<% if @block.template.layout ===  "horizontal" %>
+  <div class="timeline">
+    <div class="events">
+      <ol>
+        <% @block.template.elements.each do |element| %>
+          <div class="event">
+            <li class="event">
+              <p class="title">
+                <%= block_component_preview :title, template: element %>
+              <p>
+              <div class="line"></div>
+              <p class="description"><%= block_component_preview :text, template: element %></p>
+            </li>
+          </div>
+        <% end %>
+      </ol>
+      <% if !@block.template.elements.one? %>
+        <div class="timeline-arrows">
+          <button class="previous" disabled title="{{ i18n "blocks.timeline.previous"}}"></button>
+          <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
         </div>
-      </div>
-    <% else %>
-      <div class="block-content">
-        <div class="events">
-          <% @block.template.elements.each do |element| %>
-            <div class="event">
-              <article class="event">
-                <h3 class="event-title">
-                  <%= block_component_preview :title, template: element %>
-                <h3>
-                <p><%= block_component_preview :text, template: element %></p>
-              </article>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</section>
+<% else %>
+  <div class="block-content">
+    <div class="events">
+      <% @block.template.elements.each do |element| %>
+        <div class="event">
+          <article class="event">
+            <h3 class="event-title">
+              <%= block_component_preview :title, template: element %>
+            <h3>
+            <p><%= block_component_preview :text, template: element %></p>
+          </article>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

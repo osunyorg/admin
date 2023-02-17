@@ -1,5 +1,13 @@
 <% if @block.data %>
 
+<% if @block.template.page %>
+    <%= @block.template.page.slug %>
+  <% end %>
+
+  <% if @block.template.show_main_description %>
+    <p></p>
+  <% end %>
+
   <% if @block.template.layout ===  "list" %>
     
     <ul>
@@ -16,6 +24,9 @@
       <% @block.template.elements.each do |element| %>
         <article class="card">
           <%= element %>
+          <% if @block.template.show_description %>
+            <p><%#= element.summary %></p>
+          <% end %>
         </article>
       <% end %>
     </div>
@@ -26,9 +37,13 @@
       <% @block.template.elements.each do |element| %>
         <article>
           <%= element %>
+          <% if @block.template.show_description %>
+            <p><%#= element.summary %></p>
+          <% end %>
         </article>
       <% end %>
     </div>
 
   <% end %>
+  
 <% end %>

@@ -1,28 +1,22 @@
-<section class="block block-datatable">
-    <div class="container">
-      <div class="block-content">
-        <div class="top">
-          <p><%= block_component_preview :description %></p>
-        </div>
-        <div class="table-responsive">
-          <table class="<%= table_classes %>">
-            <caption>
-              <%= block_component_preview :caption %>
-            </caption>
-            <thead>
-              <tr>
-                <%= block_component_preview :columns %>
-              </tr>
-            </thead>
-            <tbody>
-              <% @block.template.elements.each do |row| %>
-                <tr>
-                  <%= block_component_preview :cells, template: row %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="top">
+  <p><%= block_component_preview :description %></p>
+</div>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <caption>
+      <%= block_component_preview :caption %>
+    </caption>
+    <thead>
+      <tr>
+        <%= block_component_preview :columns %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @block.template.elements.each do |row| %>
+        <tr>
+          <%= block_component_preview :cells, template: row %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
