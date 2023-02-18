@@ -22,15 +22,17 @@
 class Research::Hal::Publication < ApplicationRecord
   include WithGit
   include WithSlug
+  
+  DOI_PREFIX = 'http://dx.doi.org/'.freeze
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
                           foreign_key: 'university_person_id',
                           association_foreign_key: 'research_hal_publication_id'
 
-  DOI_PREFIX = 'http://dx.doi.org/'.freeze
-
-  before_destroy { research_people.clear }
+  has_and_belongs_to_many :authors,
+                          foreign_key: 'research_hal_author_id',
+                          association_foreign_key: 'research_hal_publication_id'
 
   validates_presence_of :docid
 
@@ -47,11 +49,13 @@ class Research::Hal::Publication < ApplicationRecord
       'linkExtUrl_s',
       # '*',
     ]
-    response = HalOpenscience::Document.search "authIdForm_i:#{author.form_identifier}", fields: fields, limit: 1000
+    publications = []
+    response = HalOpenscience::Document.search "authIdFormPerson_s:#{author.docid}", fields: fields, limit: 1000
     response.results.each do |doc|
-      publication = Research::Hal::Publication.create_from doc
-      author.publications << publication unless publication.in?(author.publications)
+      publication = create_from doc
+      publications << publication
     end
+    publications
   end
 
   def self.create_from(doc)
@@ -77,7 +81,7 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   def best_url
-    doi_url || url || hal_url
+    url || doi_url || hal_url
   end
 
   def to_s

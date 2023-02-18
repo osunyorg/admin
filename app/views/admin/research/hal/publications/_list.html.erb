@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th><%= Research::Hal::Publication.human_attribute_name('title') %></th>
-        <th><%= Research::Hal::Publication.human_attribute_name('publication_date') %></th>
-        <th><%= University::Person::Researcher.model_name.human(count: 2) %></th>
+        <th width="150"><%= Research::Hal::Publication.human_attribute_name('publication_date') %></th>
+        <th width="200"><%= University::Person::Researcher.model_name.human(count: 2) %></th>
       </tr>
     </thead>
     <tbody>
@@ -13,8 +13,7 @@
           <td><%= link_to publication, admin_research_hal_publication_path(publication) %></td>
           <td><%= l publication.publication_date %></td>
           <td>
-            <% publication.researchers.each do |researcher| %>
-              <% next if researcher.university != current_university %>
+            <% publication.researchers.in_university(current_university).each do |researcher| %>
               <%= link_to_if  researcher.university == current_university, 
                               researcher, 
                               admin_research_researcher_path(researcher) %>

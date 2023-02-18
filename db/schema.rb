@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_18_074127) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_18_162239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -845,9 +845,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_18_074127) do
     t.string "zipcode"
     t.string "city"
     t.string "country"
-    t.string "hal_person_identifier"
-    t.string "hal_doc_identifier"
-    t.string "hal_form_identifier"
     t.string "mastodon"
     t.uuid "language_id", null: false
     t.uuid "original_id"

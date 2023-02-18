@@ -1,5 +1,23 @@
 <% content_for :title, @author %>
 
+<div class="row">
+  <div class="col-lg-8">
+    <%= osuny_label Research::Hal::Author.human_attribute_name :docid %>
+    <p><%= @author.docid %></p>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_panel University::Person::Researcher.model_name.human do %>
+      <% @author.researchers.in_university(current_university).each do |researcher| %>
+        <%= render 'admin/university/people/researchers/researcher', researcher: researcher %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%= osuny_panel Research::Hal::Publication.model_name.human(count: 2), subtitle: @author.publications.count do %>
+  <%= render 'admin/research/hal/publications/list', publications: @author.publications.ordered %>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @author %>
 <% end %>

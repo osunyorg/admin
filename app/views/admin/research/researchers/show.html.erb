@@ -17,8 +17,10 @@
         <% @hal_authors_with_same_name.each do |author| %>
           <tr>
             <td width="300">
-              <%= Research::Hal::Author.human_attribute_name('docid') %> : <%= author.docid %><br>
-              <small><%= author.full_name %></small>
+              <%= link_to [:admin, author] do %>
+                <%= Research::Hal::Author.human_attribute_name('docid') %> : <%= author.docid %><br>
+                <small><%= author.full_name %></small>
+              <% end %>
             </td>
             <td class="ps-3" width="200">
               <% path = researcher_admin_research_hal_author_path author, researcher_id: @researcher %>

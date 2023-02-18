@@ -10,7 +10,7 @@ module University::Person::WithResearch
 
     has_and_belongs_to_many :research_hal_publications,
                             class_name: 'Research::Hal::Publication', 
-                            foreign_key: 'research_publication_id',
+                            foreign_key: 'research_hal_publication_id',
                             association_foreign_key: 'university_person_id'
     alias :hal_publications :research_hal_publications
     alias :publications :research_hal_publications
@@ -19,17 +19,11 @@ module University::Person::WithResearch
   end
 
   def import_research_hal_publications!
+    publications.clear
     hal_authors.each do |author|
-      author.import_research_hal_publications!
-    end
-    response = HalOpenscience::Document.search  "authIdForm_i:#{hal_form_identifier}",
-                                                fields: ["*"],
-                                                limit: 1000
-    response.results.each do |doc|
-      publication = Research::Hal::Publication.create_from doc
-      publications << publication unless publication.in?(publications)
+      # TODO manage same researcher in different universities
+      publications.concat author.import_research_hal_publications!
     end
   end
-  handle_asynchronously :import_research_hal_publications!
 
 end
