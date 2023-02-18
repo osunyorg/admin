@@ -3,7 +3,8 @@ namespace :research do
   namespace :hal do
     resources :authors, only: [:index, :show, :destroy] do
       member do
-        get :static
+        post 'researchers/:researcher_id' => 'authors#connect_researcher', as: :researcher
+        delete 'researchers/:researcher_id' => 'authors#disconnect_researcher'
       end
     end
     resources :publications, only: [:index, :show, :destroy] do
@@ -11,6 +12,7 @@ namespace :research do
         get :static
       end
     end
+    root to: 'dashboard#index'
   end
   resources :journals do
     resources :volumes, controller: 'journals/volumes' do

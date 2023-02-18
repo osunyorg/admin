@@ -15,7 +15,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def show
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
-    @possible_hal_authors = @researcher.possible_hal_authors
+    @hal_authors_with_same_name = Research::Hal::Author.import_from_hal @researcher.to_s
     @papers = @researcher.research_journal_papers.ordered.page(params[:page])
     breadcrumb
     add_breadcrumb @researcher
@@ -45,7 +45,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def breadcrumb
     super
-    add_breadcrumb t('research.researchers', count: 2), admin_research_researchers_path
+    add_breadcrumb University::Person::Researcher.model_name.human(count: 2), admin_research_researchers_path
   end
 
 end

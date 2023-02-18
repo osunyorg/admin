@@ -4,7 +4,7 @@
       <tr>
         <th><%= Research::Hal::Publication.human_attribute_name('title') %></th>
         <th><%= Research::Hal::Publication.human_attribute_name('publication_date') %></th>
-        <th><%= t('research.researchers', count: 2) %></th>
+        <th><%= University::Person::Researcher.model_name.human(count: 2) %></th>
       </tr>
     </thead>
     <tbody>

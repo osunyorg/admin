@@ -9,11 +9,11 @@ en:
         one: Researcher
         other: Researchers
       research/hal/author:
-        one: Author
-        other: Authors
+        one: HAL author
+        other: HAL authors
       research/hal/publication:
-        one: Publication
-        other: Publications
+        one: HAL publication
+        other: HAL publications
       research/journal:
         one: Journal
         other: Journals
@@ -37,6 +37,7 @@ en:
         other: Theses
     attributes:
       research/hal/author:
+        docid: HAL identifier
         first_name: First name
         last_name: Last name
         full_name: Full name
@@ -102,10 +103,6 @@ en:
     hal:
       title: HAL
       select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
-    manage_researchers: Manage researchers
-    researchers:
-      one: Researcher
-      other: Researchers
   simple_form:
     hints:
       research_journal_volume:

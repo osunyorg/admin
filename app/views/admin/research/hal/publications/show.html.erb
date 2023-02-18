@@ -23,14 +23,14 @@
     </div>
   </div>
   <div class="col-lg-4">
-    <% @publication.research_people.each do |person| %>
-      <% next if person.university != current_university %>
+    <% @publication.researchers.each do |researcher| %>
+      <% next if researcher.university != current_university %>
       <article class="mb-4 d-flex align-items-center position-relative">
         <div style="width: 80px">
-          <%= kamifusen_tag person.best_picture, width: 80, class: 'img-circle' if person.best_picture.attached? %>
+          <%= kamifusen_tag researcher.best_picture, width: 80, class: 'img-circle' if researcher.best_picture.attached? %>
         </div>
         <div class="ms-3">
-          <%= link_to person, admin_research_researcher_path(person), class: 'stretched-link' %>
+          <%= link_to researcher, admin_research_researcher_path(researcher), class: 'stretched-link' %>
         </div>
       </article>
     <% end %>

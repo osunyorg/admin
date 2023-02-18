@@ -23,9 +23,12 @@ class Research::Hal::Publication < ApplicationRecord
   include WithGit
   include WithSlug
 
-  DOI_PREFIX = 'http://dx.doi.org/'.freeze
+  has_and_belongs_to_many :researchers,
+                          class_name: 'University::Person',
+                          foreign_key: 'university_person_id',
+                          association_foreign_key: 'research_hal_publication_id'
 
-  has_and_belongs_to_many :publications
+  DOI_PREFIX = 'http://dx.doi.org/'.freeze
 
   before_destroy { research_people.clear }
 
@@ -33,9 +36,27 @@ class Research::Hal::Publication < ApplicationRecord
 
   scope :ordered, -> { order(publication_date: :desc)}
 
+  def self.import_from_hal_for_author(author)
+    fields = [
+      'docid',
+      'title_s',
+      'citationRef_s',
+      'uri_s',
+      'doiId_s',
+      'publicationDate_tdate',
+      'linkExtUrl_s',
+      # '*',
+    ]
+    response = HalOpenscience::Document.search "authIdForm_i:#{author.form_identifier}", fields: fields, limit: 1000
+    response.results.each do |doc|
+      publication = Research::Hal::Publication.create_from doc
+      author.publications << publication unless publication.in?(author.publications)
+    end
+  end
+
   def self.create_from(doc)
     publication = where(docid: doc.docid).first_or_create
-    puts "pub-- #{where(docid: doc.docid).count}"
+    puts "HAL sync publication #{doc.docid}"
     publication.title = Osuny::Sanitizer.sanitize doc.title_s.first, 'string'
     publication.ref = doc.attributes['citationRef_s']
     publication.hal_url = doc.attributes['uri_s']
@@ -44,13 +65,6 @@ class Research::Hal::Publication < ApplicationRecord
     publication.url = doc.attributes['linkExtUrl_s']
     publication.save
     publication
-  end
-
-  def self.update_from_hal
-    University::Person::Researcher.with_hal_identifier.find_each do |researcher|
-      # puts "Loading publications for #{researcher} (#{researcher.university})"
-      researcher.import_research_hal_publications!
-    end
   end
 
   def template_static

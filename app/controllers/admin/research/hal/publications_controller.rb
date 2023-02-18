@@ -1,4 +1,4 @@
-class Admin::Research::Hal::PublicationsController < Admin::Research::ApplicationController
+class Admin::Research::Hal::PublicationsController < Admin::Research::Hal::ApplicationController
   before_action :load_publication, except: :index
 
   def index

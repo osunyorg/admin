@@ -1,4 +1,4 @@
-<% content_for :title, t('research.researchers', count: 2) %>
+<% content_for :title, University::Person::Researcher.model_name.human(count: 2) %>
 
 <%= render 'filters', current_path: admin_research_researchers_path, filters: @filters if @filters.any?  %>
 
@@ -33,9 +33,4 @@
     </tbody>
   </table>
 </div>
-
 <%= paginate @researchers, theme: 'bootstrap-5' %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('research.manage_researchers'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
-<% end %>

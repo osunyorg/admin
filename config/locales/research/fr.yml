@@ -9,11 +9,11 @@ fr:
         one: Chercheur·e
         other: Chercheur·e·s
       research/hal/author:
-        one: Auteur·e
-        other: Auteur·e·s
+        one: Auteur·e HAL
+        other: Auteur·e·s HAL
       research/hal/publication:
-        one: Publication
-        other: Publications
+        one: Publication HAL
+        other: Publications HAL
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -37,6 +37,7 @@ fr:
         other: Thèses
     attributes:
       research/hal/author:
+        docid: Identifiant HAL
         first_name: Prénom
         last_name: Nom
         full_name: Nom complet
@@ -101,10 +102,6 @@ fr:
       source: Serge Haroche, Prix Nobel de physique 2012
     hal:
       select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
-    manage_researchers: Gérer les chercheur·e·s
-    researchers:
-      one: Chercheur·e
-      other: Chercheur·e·s
   simple_form:
     hints:
       research_journal_volume:

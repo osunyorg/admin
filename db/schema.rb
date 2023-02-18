@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_17_205953) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_18_074127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -593,7 +593,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_205953) do
   end
 
   create_table "research_hal_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "doc_identifier"
+    t.string "docid"
     t.string "form_identifier"
     t.string "person_identifier"
     t.string "first_name"
@@ -601,6 +601,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_205953) do
     t.string "full_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["docid"], name: "index_research_hal_authors_on_docid"
   end
 
   create_table "research_hal_authors_publications", id: false, force: :cascade do |t|
@@ -610,7 +611,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_205953) do
     t.index ["research_hal_publication_id", "research_hal_author_id"], name: "hal_publication_author"
   end
 
-  create_table "research_hal_authors_university_persons", id: false, force: :cascade do |t|
+  create_table "research_hal_authors_university_people", id: false, force: :cascade do |t|
     t.uuid "research_hal_author_id", null: false
     t.uuid "university_person_id", null: false
     t.index ["research_hal_author_id", "university_person_id"], name: "hal_author_person"
@@ -633,10 +634,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_205953) do
   end
 
   create_table "research_hal_publications_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_publication_id", null: false
+    t.uuid "research_hal_publication_id", null: false
     t.uuid "university_person_id", null: false
-    t.index ["research_publication_id", "university_person_id"], name: "index_publication_person"
-    t.index ["university_person_id", "research_publication_id"], name: "index_person_publication"
+    t.index ["research_hal_publication_id", "university_person_id"], name: "index_publication_person"
+    t.index ["university_person_id", "research_hal_publication_id"], name: "index_person_publication"
   end
 
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
