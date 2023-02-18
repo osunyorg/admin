@@ -18,7 +18,7 @@
 #
 
 one:
-  doc_identifier: MyString
+  docid: MyString
   form_identifier: MyString
   person_identifier: MyString
   first_name: MyString
@@ -26,7 +26,7 @@ one:
   full_name: MyString
 
 two:
-  doc_identifier: MyString
+  docid: MyString
   form_identifier: MyString
   person_identifier: MyString
   first_name: MyString
