@@ -86,8 +86,8 @@ class Communication::Block < ApplicationRecord
     template.data
   end
 
-  def direct_dependencies
-    template.direct_dependencies
+  def display_dependencies
+    template.display_dependencies
   end
 
   def git_dependencies

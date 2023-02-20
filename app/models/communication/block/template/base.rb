@@ -100,7 +100,7 @@ class Communication::Block::Template::Base
     elements.each(&:translate!) if has_element_class?
   end
 
-  def direct_dependencies
+  def display_dependencies
     components +
     elements
   end

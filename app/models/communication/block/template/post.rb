@@ -21,7 +21,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     category_id_component.category
   end
 
-  def direct_dependencies
+  def display_dependencies
     selected_posts
   end
 

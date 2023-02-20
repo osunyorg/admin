@@ -119,7 +119,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     }
   end
 
-  def direct_dependencies
+  def display_dependencies
     [menu]
   end
 

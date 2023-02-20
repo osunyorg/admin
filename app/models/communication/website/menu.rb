@@ -55,7 +55,7 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
-  def direct_dependencies
+  def display_dependencies
     items
   end
 

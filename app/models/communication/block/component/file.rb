@@ -14,7 +14,7 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     }
   end
 
-  def direct_dependencies
+  def display_dependencies
     [blob]
   end
 

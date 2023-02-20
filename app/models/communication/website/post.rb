@@ -125,7 +125,7 @@ class Communication::Website::Post < ApplicationRecord
     Communication::Website::Menu::Item.where(website: website, kind: :post, about: self)
   end
 
-  def direct_dependencies
+  def display_dependencies
     active_storage_blobs +
     blocks +
     menu_items +

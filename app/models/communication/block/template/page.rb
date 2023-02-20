@@ -13,7 +13,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     page_id_component.page
   end
 
-  def direct_dependencies
+  def display_dependencies
     selected_pages
   end
 

@@ -4,7 +4,7 @@ class Communication::Block::Component::Program < Communication::Block::Component
     template.block.university.programs.find_by(id: data)
   end
 
-  def direct_dependencies
+  def display_dependencies
     [program]
   end
 
