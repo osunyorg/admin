@@ -12,7 +12,7 @@ module WithWebsites
   protected
   
   def connect_to_websites
-    if respond_to?(:website)
+    if respond_to?(:website) && !website.nil?
       website.connect self
     else
       websites.each { |website| website.connect self }

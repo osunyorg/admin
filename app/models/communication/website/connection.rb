@@ -35,13 +35,6 @@ class Communication::Website::Connection < ApplicationRecord
     for_object(object).distinct(:website).collect(&:website).uniq
   end
 
-  def for_same_object
-    self.class.where( university: university, 
-                      website: website,
-                      object: object)
-              .where.not(id: id)
-  end
-
   def to_s
     "#{id.split('-').first}"
   end

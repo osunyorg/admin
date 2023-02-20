@@ -6,7 +6,6 @@ class Admin::Communication::Websites::ConnectionsController < Admin::Communicati
 
   def show
     @connection = @website.connections.find params[:id]
-    @others = @connection.for_same_object
     breadcrumb
     add_breadcrumb @connection
   end

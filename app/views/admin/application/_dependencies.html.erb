@@ -10,6 +10,27 @@ expanded ||= false
     aria-controls="dependencies"></i>
 <div id="dependencies" class="collapse">
   <%= osuny_panel 'Dependencies', subtitle: 'Only for server admins' do %>
+    <h2 class="h5">dependencies</h2>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Class</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% dependencies.each do |dependency| %>
+                  <tr>
+                      <td><%= dependency.to_s %></td>
+                      <td><%= dependency.class %></td>
+                  </tr>
+              <% end %>
+          </tbody>
+      </table>
+    </div>
+    
+    
     <h2 class="h5">git_dependencies</h2>
     <div class="table-responsive">
       <table class="<%= table_classes %>">

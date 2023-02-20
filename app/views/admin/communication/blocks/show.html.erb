@@ -1,6 +1,7 @@
 <% content_for :title, @block %>
 
 <%= render 'admin/application/dependencies',
+            dependencies: @block.dependencies,
             git_dependencies: @block.template.git_dependencies,
             active_storage_blobs: @block.template.active_storage_blobs,
             expanded: true %>

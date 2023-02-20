@@ -39,9 +39,6 @@ class Communication::Block < ApplicationRecord
   # template_blobs would be a better name, because there are files
   has_many_attached :template_images
 
-  delegate :website, to: :about
-  delegate :websites, to: :about
-
   enum template_kind: {
     chapter: 50,
     image: 51,
@@ -84,6 +81,18 @@ class Communication::Block < ApplicationRecord
   # Template data is clean and sanitized, and initialized with json
   def data
     template.data
+  end
+
+  def website
+    about.website
+  rescue
+    nil
+  end
+
+  def websites
+    about.websites
+  rescue
+    []
   end
 
   def display_dependencies

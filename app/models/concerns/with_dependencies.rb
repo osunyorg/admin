@@ -20,7 +20,7 @@ module WithDependencies
     reference_dependencies.each do |dependency|
       add_dependency_to_array array, dependency
     end
-    array
+    array.compact
   end
 
   protected

@@ -5,7 +5,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def index
     @websites = apply_scopes(@websites).ordered.page(params[:page])
     breadcrumb
-    add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path
   end
 
   def show

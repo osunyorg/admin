@@ -150,6 +150,10 @@ class Communication::Block::Template::Base
     hash
   end
 
+  def to_s
+    self.class.to_s.demodulize
+  end
+
   protected
 
   def build_component(property)
