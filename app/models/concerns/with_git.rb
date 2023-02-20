@@ -53,7 +53,6 @@ module WithGit
     websites_for_self.each do |website|
       website.touch
       next unless website.git_repository.valid?
-      dependencies = git_dependencies(website).to_a.flatten.uniq.compact
       dependencies.each do |object|
         Communication::Website::GitFile.sync website, object
       end
@@ -65,6 +64,7 @@ module WithGit
   def destroy_from_git
     websites_for_self.each do |website|
       next unless website.git_repository.valid?
+      # FIXME
       dependencies = git_destroy_dependencies(website).to_a.flatten.uniq.compact
       dependencies.each do |object|
         Communication::Website::GitFile.sync website, object, destroy: true

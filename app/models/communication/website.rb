@@ -76,6 +76,10 @@ class Communication::Website < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  def self.save_and_sync_websites!
+    find_each &:save_and_sync
+  end
+
   def to_s
     "#{name}"
   end
