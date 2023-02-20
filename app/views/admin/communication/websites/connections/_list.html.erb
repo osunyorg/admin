@@ -5,8 +5,6 @@
         <th><%= Communication::Website::Connection.human_attribute_name('id') %></th>
         <th><%= Communication::Website::Connection.human_attribute_name('object') %></th>
         <th><%= Communication::Website::Connection.human_attribute_name('object_type') %></th>
-        <th><%= Communication::Website::Connection.human_attribute_name('source') %></th>
-        <th><%= Communication::Website::Connection.human_attribute_name('source_type') %></th>
         <th><%= Communication::Website::Connection.human_attribute_name('updated_at') %></th>
       </tr>
     </thead>
@@ -20,20 +18,13 @@
           object_link = url_for [:admin, object]
         rescue
         end
-        source = connection.source 
-        begin
-          source_link = url_for [:admin, source]
-        rescue
-        end
         %>
-      <tr>
-        <td><%= link_to connection, [:admin, connection] %></td>
-        <td><%= link_to_if object_link, object_name, object_link %></td>
-        <td><%= connection.object_type %></td>
-        <td><%= link_to_if source_link, source, source_link %></td>
-        <td><%= connection.source_type %></td>
-        <td><%= l connection.updated_at %></td>
-      </tr>
+        <tr>
+          <td><%= link_to connection, [:admin, connection] %></td>
+          <td><%= link_to_if object_link, object_name, object_link %></td>
+          <td><%= connection.object_type %></td>
+          <td><%= l connection.updated_at %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

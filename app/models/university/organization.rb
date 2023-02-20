@@ -95,6 +95,14 @@ class University::Organization < ApplicationRecord
     government: 30
   }
 
+  def display_dependencies
+    [
+      logo&.blob, 
+      logo_on_dark_background&.blob
+    ] +
+    blocks
+  end
+
   def git_dependencies(website)
     dependencies = []
     if for_website?(website)
