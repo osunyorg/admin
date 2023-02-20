@@ -15,15 +15,22 @@ module WithDependencies
 
   def dependencies(array = [])
     display_dependencies.each do |dependency|
-      next if dependency.in?(array)
-      array << dependency
-      next unless dependency.respond_to?(:dependencies)
-      array = array | dependency.dependencies(array)
+      add_dependency_to_array array, dependency, recursive: true
     end
     reference_dependencies.each do |dependency|
-      next if dependency.in?(array)
-      array << dependency
+      add_dependency_to_array array, dependency
     end
+    array
+  end
+
+  protected
+
+  def add_dependency_to_array(array = [], dependency, recursive: false)
+    return if dependency.in?(array)
+    array << dependency
+    return unless recursive
+    return unless dependency.respond_to?(:dependencies)
+    array = array | dependency.dependencies(array)
     array
   end
 end
