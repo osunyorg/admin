@@ -1,0 +1,55 @@
+<% content_for :title, @publication %>
+
+<div class="row">
+  <div class="col-lg-8">
+    <p class="lead mb-4"><%= sanitize @publication.ref %></p>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= osuny_label Research::Hal::Publication.human_attribute_name('docid') %>
+        <p><%= @publication.docid %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Hal::Publication.human_attribute_name('publication_date') %>
+        <p><%= l @publication.publication_date %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_panel University::Person::Researcher.model_name.human(count: 2) do %>
+      <% @publication.researchers.in_university(current_university).each do |researcher| %>
+        <%= render 'admin/university/people/researchers/researcher', researcher: researcher %>
+      <% end %>
+    <% end %>
+    <%= osuny_panel Research::Hal::Author.model_name.human(count: 2) do %>
+      <ul class="list-unstyled">
+        <% @publication.authors.each do |author| %>
+          <li>
+            <%= link_to [:admin, author] do %>
+              <%= author %>
+              (<%= author.docid %>)
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
+<% [:url, :hal_url, :doi_url].each do |key| %>
+  <% value = @publication.send key %>
+  <% next if value.blank? %>
+  <%= osuny_label Research::Hal::Publication.human_attribute_name(key) %>
+  <p><%= link_to value, value, target: :_blank %></p>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <% if current_user.server_admin? %>
+    <%= link_to t('delete'),
+                admin_research_hal_publication_path(@publication),
+                method: :delete,
+                class: button_classes_danger %>
+    <%= link_to t('static'),
+                static_admin_research_hal_publication_path(@publication),
+                class: button_classes('btn-light') %>
+  <% end %>
+<% end %>

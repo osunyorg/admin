@@ -2,11 +2,18 @@ en:
   activemodel:
     models:
       research: Research
+      research/hal: HAL
   activerecord:
     models:
       university/person/researcher:
         one: Researcher
         other: Researchers
+      research/hal/author:
+        one: Author
+        other: Authors
+      research/hal/publication:
+        one: Publication
+        other: Publications
       research/journal:
         one: Journal
         other: Journals
@@ -25,13 +32,25 @@ en:
       research/laboratory/axis:
         one: Axis
         other: Axes
-      research/publication:
-        one: Publication
-        other: Publications
       research/thesis:
         one: Thesis
         other: Theses
     attributes:
+      research/hal:
+        description: Publications et auteur·e·s dans la base de données HAL
+      research/hal/author:
+        docid: HAL identifier
+        first_name: First name
+        full_name: Full name
+        last_name: Last name
+      research/hal/publication:
+        description: Publications scientifiques importées automatiquement de HAL
+        docid: Identifier
+        doi_url: URL DOI
+        publication_date: Publication date
+        title: Title
+        url: URL
+        hal_url: URL HAL
       research/journal:
         description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
@@ -69,14 +88,6 @@ en:
         name: Name
         short_name: Short name
         text: Text
-      research/publication:
-        description: Publications scientifiques importées automatiquement de HAL
-        docid: Identifier
-        doi_url: URL DOI
-        publication_date: Publication date
-        title: Title
-        url: URL
-        hal_url: URL HAL
       research/thesis:
         abstract: Abstract
         author: Author
@@ -87,17 +98,17 @@ en:
         laboratory: Laboratory
         started_at: Started at
         title: Title
+  research/hal:
+    description: 
+      text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
+      source: HAL.science
   research:
     description:
       text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
       source: Serge Haroche, Prix Nobel de physique 2012
     hal:
       title: HAL
-      select_identifier: You have no HAL identifier yet. Is it one of these possibilities? If there are several, please choose the most complete one (without -0 at the end).
-    manage_researchers: Managege researchers
-    researchers:
-      one: Researcher
-      other: Researchers
+      select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
   simple_form:
     hints:
       research_journal_volume:

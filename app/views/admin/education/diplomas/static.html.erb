@@ -3,12 +3,10 @@ title: >
   <%= prepare_text_for_static @about.name %>
 <%= render 'admin/application/static/permalink' if @website %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<% 
-if @website 
-  @programs = @website.education_programs.root.ordered
-%>
+<% if @website 
+  @programs = @website.education_programs.where(diploma: @about).root.ordered %>
 programs:
-<%= render 'admin/education/diplomas/programs', programs: @programs, depth: 2 %>
+<%= render 'admin/education/diplomas/programs', diploma: @about, programs: @programs %>
 <% end %>
 short_name: >
   <%= prepare_text_for_static @about.short_name %>
