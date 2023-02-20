@@ -1,4 +1,0 @@
-<% content_for :title, Research::Publication.model_name.human(count: 2) %>
-<% content_for :title_right, "#{ @publications.total_count }" %>
-<%= render 'admin/research/publications/list', publications: @publications %>
-<%= paginate @publications, theme: 'bootstrap-5' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_18_162239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -149,6 +149,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.string "object_type", null: false
+    t.uuid "object_id", null: false
+    t.string "source_type"
+    t.uuid "source_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
+    t.index ["source_type", "source_id"], name: "index_communication_website_connections_on_source"
+    t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -339,7 +354,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -577,6 +592,54 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.string "summernote_locale"
   end
 
+  create_table "research_hal_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "docid"
+    t.string "form_identifier"
+    t.string "person_identifier"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "full_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["docid"], name: "index_research_hal_authors_on_docid"
+  end
+
+  create_table "research_hal_authors_publications", id: false, force: :cascade do |t|
+    t.uuid "research_hal_author_id", null: false
+    t.uuid "research_hal_publication_id", null: false
+    t.index ["research_hal_author_id", "research_hal_publication_id"], name: "hal_author_publication"
+    t.index ["research_hal_publication_id", "research_hal_author_id"], name: "hal_publication_author"
+  end
+
+  create_table "research_hal_authors_university_people", id: false, force: :cascade do |t|
+    t.uuid "research_hal_author_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["research_hal_author_id", "university_person_id"], name: "hal_author_person"
+    t.index ["university_person_id", "research_hal_author_id"], name: "hal_person_author"
+  end
+
+  create_table "research_hal_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "docid"
+    t.jsonb "data"
+    t.string "title"
+    t.string "url"
+    t.string "ref"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "hal_url"
+    t.date "publication_date"
+    t.string "doi"
+    t.string "slug"
+    t.index ["docid"], name: "index_research_hal_publications_on_docid"
+  end
+
+  create_table "research_hal_publications_university_people", id: false, force: :cascade do |t|
+    t.uuid "research_hal_publication_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["research_hal_publication_id", "university_person_id"], name: "index_publication_person"
+    t.index ["university_person_id", "research_hal_publication_id"], name: "index_person_publication"
+  end
+
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "journal_id", null: false
@@ -664,13 +727,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
-  create_table "research_laboratories_publications", id: false, force: :cascade do |t|
-    t.uuid "research_publication_id", null: false
-    t.uuid "research_laboratory_id", null: false
-    t.index ["research_laboratory_id", "research_publication_id"], name: "index_laboratory_publication"
-    t.index ["research_publication_id", "research_laboratory_id"], name: "index_publication_laboratory"
-  end
-
   create_table "research_laboratory_axes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_laboratory_id", null: false
@@ -683,28 +739,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.text "text"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
-  end
-
-  create_table "research_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "docid"
-    t.jsonb "data"
-    t.string "title"
-    t.string "url"
-    t.string "ref"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "hal_url"
-    t.date "publication_date"
-    t.string "doi"
-    t.string "slug"
-    t.index ["docid"], name: "index_research_publications_on_docid"
-  end
-
-  create_table "research_publications_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_publication_id", null: false
-    t.uuid "university_person_id", null: false
-    t.index ["research_publication_id", "university_person_id"], name: "index_publication_person"
-    t.index ["university_person_id", "research_publication_id"], name: "index_person_publication"
   end
 
   create_table "research_theses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -814,9 +848,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
     t.string "mastodon"
     t.uuid "language_id", null: false
     t.uuid "original_id"
-    t.string "hal_person_identifier"
-    t.string "hal_doc_identifier"
-    t.string "hal_form_identifier"
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
@@ -921,6 +952,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_083544) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"

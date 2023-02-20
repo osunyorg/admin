@@ -15,6 +15,7 @@
         description = class_name.human_attribute_name('description')
         # TODO
         description = t 'administration.qualiopi.description' if class_name == Administration::Qualiopi
+        description = t 'activerecord.attributes.research/hal.description' if class_name == Research::Hal
         %>
         <div class="col-lg-6 mt-5">
           <%= osuny_panel title do %>

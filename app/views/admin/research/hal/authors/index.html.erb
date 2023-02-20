@@ -1,0 +1,4 @@
+<% content_for :title, Research::Hal::Author.model_name.human(count: 2) %>
+<% content_for :title_right, "#{ @authors.total_count }" %>
+<%= render 'admin/research/hal/authors/list', authors: @authors %>
+<%= paginate @authors, theme: 'bootstrap-5' %>
