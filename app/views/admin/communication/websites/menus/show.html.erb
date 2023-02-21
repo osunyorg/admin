@@ -22,6 +22,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @menu %>
+  <%= static_link static_admin_communication_website_menu_path(@menu) %>
 <% end %>
 
 <% content_for :action_bar_right do %>
