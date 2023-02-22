@@ -36,6 +36,7 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
+  include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithGit
@@ -45,11 +46,11 @@ class University::Organization < ApplicationRecord
 
   attr_accessor :created_from_extranet
 
+  has_summernote :text
+
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
-
-  has_summernote :text
 
   has_one_attached_deletable :logo
   has_one_attached_deletable :logo_on_dark_background

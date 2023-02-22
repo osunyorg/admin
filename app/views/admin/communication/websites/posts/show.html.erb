@@ -7,7 +7,8 @@
       <%= render 'admin/communication/blocks/list', about: @post %>
     </div>
     <div class="col-xl-4">
-      <% 
+      <%= render 'admin/application/i18n/widget', about: @post %>
+      <%
       action = ''
       action += link_to t('open'),
                         @post.url,
@@ -17,7 +18,7 @@
       <%= osuny_panel t('metadata'), action: action do %>
         <div class="row pure__row--small">
           <div class="col-6">
-            <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('published') %></h3>
+            <%= osuny_label Communication::Website::Post.human_attribute_name('published') %>
             <p>
               <%= t @post.published %><% if @post.published & @post.published_at %>,
                 <%= l @post.published_at.to_date, format: :long if @post.published_at %>
@@ -25,23 +26,23 @@
             </p>
           </div>
           <div class="col-6">
-            <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('pinned') %></h3>
+            <%= osuny_label Communication::Website::Post.human_attribute_name('pinned') %>
             <p><%= t @post.pinned %></p>
           </div>
         </div>
         <% if @post.author %>
-          <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('author') %></h3>
+          <%= osuny_label Communication::Website::Post.human_attribute_name('author') %>
           <p><%= link_to_if can?(:read, @post.author), @post.author, admin_communication_website_author_path(@post.author) %></p>
         <% end %>
         <% if @post.categories.any? %>
-          <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('categories') %></h3>
+          <%= osuny_label Communication::Website::Post.human_attribute_name('categories') %>
           <ul class="list-unstyled">
             <% @post.categories.each do |category| %>
               <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
             <% end %>
           </ul>
         <% end %>
-        <h3 class="h5"><%= Communication::Website::Post.human_attribute_name('slug') %></h3>
+        <%= osuny_label Communication::Website::Post.human_attribute_name('slug') %>
         <p><%= @post.slug %></p>
       <% end %>
       <%= render 'admin/application/featured_image/show', about: @post %>

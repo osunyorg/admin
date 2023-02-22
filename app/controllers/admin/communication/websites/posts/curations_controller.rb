@@ -4,13 +4,14 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
   end
 
   def create
-    @curator = Curator.new @website, current_user, curation_params[:url]
+    @curator = Curator.new @website, current_user, current_website_language, curation_params[:url]
     if @curator.valid?
       redirect_to [:admin, @curator.post],
                   notice: t('admin.successfully_created_html', model: @curator.post.to_s)
     else
       breadcrumb
-      flash[:alert] = "Erreur lors de la curation"
+      @url = curation_params[:url]
+      flash[:alert] = t('curation.error')
       render :new, status: :unprocessable_entity
     end
   end

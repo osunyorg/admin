@@ -6,4 +6,8 @@
   contentDir: content/<%= language.iso_code %>
   languageCode: <%= language.iso_code %>
   languageName: <%= language.name %>
+  permalinks:
+    <% Communication::Website::Permalink.config_in_website(@website, language).each do |key, value| %>
+    <%= key %>: <%= value %>
+    <% end %>
 <% end %>

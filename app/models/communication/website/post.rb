@@ -18,7 +18,8 @@
 #  updated_at               :datetime         not null
 #  author_id                :uuid             indexed
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             not null, indexed
+#  original_id              :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
@@ -26,11 +27,13 @@
 #  index_communication_website_posts_on_author_id                 (author_id)
 #  index_communication_website_posts_on_communication_website_id  (communication_website_id)
 #  index_communication_website_posts_on_language_id               (language_id)
+#  index_communication_website_posts_on_original_id               (original_id)
 #  index_communication_website_posts_on_university_id             (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_1e0d058a25  (university_id => universities.id)
+#  fk_rails_bbbef3b1e9  (original_id => communication_website_posts.id)
 #  fk_rails_d1c1a10946  (communication_website_id => communication_websites.id)
 #  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
@@ -44,8 +47,9 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
+  include WithTranslations
 
-  has_summernote :text
+  has_summernote :text # TODO: Remove text attribute
 
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
@@ -56,7 +60,6 @@ class Communication::Website::Post < ApplicationRecord
   belongs_to :author,
              class_name: 'University::Person',
              optional: true
-  belongs_to :language, optional: true
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Category',
                           join_table: 'communication_website_categories_posts',
@@ -65,7 +68,7 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at, if: :published_changed?
+  before_validation :set_published_at
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   scope :published, -> {
@@ -80,7 +83,7 @@ class Communication::Website::Post < ApplicationRecord
       DATE(communication_website_posts.published_at) > now()
     ")
   }
-  scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
+  scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
@@ -123,8 +126,9 @@ class Communication::Website::Post < ApplicationRecord
     dependencies += git_block_dependencies
     dependencies += university.communication_blocks.where(template_kind: :posts).includes(:about).map(&:about).uniq
     if author.present?
-      dependencies += [author, author.author]
+      dependencies += [author, author.author, translated_author, translated_author.author]
       dependencies += author.active_storage_blobs
+      dependencies += translated_author.active_storage_blobs
     end
     dependencies
   end
@@ -141,6 +145,10 @@ class Communication::Website::Post < ApplicationRecord
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
+  def translated_author
+    @translated_author ||= author.find_or_translate!(language)
+  end
+
   def to_s
     "#{title}"
   end
@@ -149,7 +157,7 @@ class Communication::Website::Post < ApplicationRecord
 
   def slug_unavailable?(slug)
     self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, slug: slug)
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
   end
@@ -172,5 +180,13 @@ class Communication::Website::Post < ApplicationRecord
       old_author.update_and_sync(is_author: false)
     end
     author.update_and_sync(is_author: true) if author_id
+  end
+
+  def translate_additional_data!(translation)
+    categories.each do |category|
+      translated_category = category.find_or_translate!(translation.language)
+      translation.categories << translated_category
+    end
+    translation.update(author_id: author.find_or_translate!(translation.language).id) if author_id.present?
   end
 end

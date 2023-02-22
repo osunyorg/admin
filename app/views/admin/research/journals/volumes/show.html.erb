@@ -21,7 +21,7 @@
               <% @papers.each do |paper| %>
                 <tr data-id="<%= paper.id %>">
                   <% if can? :reorder, Research::Journal::Paper %>
-                    <td><i class="fa fa-bars handle"></i></td>
+                    <td><i class="<%= Icon::DRAG %> handle"></i></td>
                   <% end %>
                   <td>
                     <%= link_to paper,

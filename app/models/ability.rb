@@ -6,9 +6,16 @@ class Ability
   def initialize(user)
     @user = user ||= User.new # guest user (not logged in)
     send @user.role.to_sym
+    common_abilities
   end
 
   protected
+
+  def common_abilities
+    can :read, Research::Hal
+    can :read, Research::Hal::Publication
+    can :read, Research::Hal::Author
+  end
 
   def visitor
   end
@@ -18,12 +25,14 @@ class Ability
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids, author_id: @user.person&.id
     cannot :publish, Communication::Website::Post
+    can :manage, Research::Journal
   end
 
   def author
     managed_websites_ids = @user.websites_to_manage.pluck(:communication_website_id)
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids, author_id: @user.person&.id
+    can :manage, Research::Journal
   end
 
   def teacher
@@ -34,6 +43,7 @@ class Ability
     can :manage, University::Person::Involvement, person_id: @user.person&.id
     can :read, University::Person::Involvement, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Research::Journal
   end
 
   def program_manager
@@ -48,6 +58,7 @@ class Ability
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: managed_programs_ids
     can :create, Communication::Block
+    can :manage, Research::Journal
   end
 
   def website_manager
@@ -66,9 +77,11 @@ class Ability
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
     can :create, Communication::Block
+    can :manage, Research::Journal
   end
 
   def admin
+    can :read, Administration::Qualiopi
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
     can :manage, University::Person

@@ -4,7 +4,7 @@
   <div class="col-xl-6">
     <%= simple_format @thesis.abstract %>
   </div>
-  <div class="col-xl-6">
+  <div class="offset-xl-1 col-xl-5">
     <% if @thesis.started_at %>
       <%= osuny_label Research::Thesis.human_attribute_name('started_at') %>
       <p><%= l @thesis.started_at %></p>

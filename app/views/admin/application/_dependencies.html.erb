@@ -2,57 +2,54 @@
 expanded ||= false
 %>
 <% if current_user.server_admin? %>
-<section class="mt-5">
-  <div class="float-end">
-    <i  class="fas fa-arrow-down text-muted"
-        data-bs-toggle="collapse"
-        data-bs-target="#dependencies"
-        aria-expanded="<%= expanded %>"
-        aria-controls="dependencies"></i>
-  </div>
-  <p class="text-muted mb-0">Dépendances</p>
-  <p class="small text-muted">Visible uniquement pour les server admins</p>
-  <div class="card-body collapse <%= 'show' if expanded %>" id="dependencies">
-      <h2 class="h5">git_dependencies</h2>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Class</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% git_dependencies.each do |dependency| %>
-                    <tr>
-                        <td><%= dependency.id %></td>
-                        <td><%= dependency.class %></td>
-                        <td><%= dependency.to_s %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-      </div>
+<i  class="<%= Icon::SETTINGS %> text-muted"
+    data-bs-toggle="collapse"
+    data-bs-target="#dependencies"
+    aria-expanded="<%= expanded %>"
+    aria-controls="dependencies"></i>
+<div id="dependencies" class="collapse">
+  <%= osuny_panel 'Dependencies', subtitle: 'Only for server admins' do %>
+    <h2 class="h5">git_dependencies</h2>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Class</th>
+                  <th>Name</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% git_dependencies.each do |dependency| %>
+                  <tr>
+                      <td><%= dependency.id %></td>
+                      <td><%= dependency.class %></td>
+                      <td><%= dependency.to_s %></td>
+                  </tr>
+              <% end %>
+          </tbody>
+      </table>
+    </div>
 
-      <h2 class="h5 mt-5">active_storage_blobs</h2>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Filename</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% active_storage_blobs.each do |blob| %>
-                    <tr>
-                        <td><%= blob.id %></td>
-                        <td><%= blob.filename %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-      </div>
-</section>
+    <h2 class="h5 mt-5">active_storage_blobs</h2>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Filename</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% active_storage_blobs.each do |blob| %>
+                  <tr>
+                      <td><%= blob.id %></td>
+                      <td><%= blob.filename %></td>
+                  </tr>
+              <% end %>
+          </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
 <% end %>

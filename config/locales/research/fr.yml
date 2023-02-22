@@ -2,8 +2,18 @@ fr:
   activemodel:
     models:
       research: Recherche
+      research/hal: HAL
   activerecord:
     models:
+      university/person/researcher:
+        one: Chercheur·e
+        other: Chercheur·e·s
+      research/hal/author:
+        one: Auteur·e
+        other: Auteur·e·s
+      research/hal/publication:
+        one: Publication
+        other: Publications
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -26,7 +36,24 @@ fr:
         one: Thèse
         other: Thèses
     attributes:
+      research/hal:
+        description: Publications et auteur·e·s dans la base de données HAL
+      research/hal/author:
+        description: Profils des chercheur·e·s dans la base de données HAL
+        docid: Identifiant HAL
+        first_name: Prénom
+        full_name: Nom complet
+        last_name: Nom
+      research/hal/publication:
+        description: Publications scientifiques importées automatiquement de HAL
+        docid: Identifiant
+        doi_url: URL DOI
+        publication_date: Date de publication
+        title: Titre
+        url: URL
+        hal_url: URL HAL
       research/journal:
+        description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
         title: Titre
       research/journal/paper:
@@ -37,7 +64,7 @@ fr:
         published_at: Publié le
         references: Références
         kind: Type de papier
-        people: Auteu·rs·rices
+        people: Auteur·e·s
         text: Texte
         title: Titre
       research/journal/paper/kind:
@@ -55,6 +82,7 @@ fr:
         address: Adresse
         country: Pays
         city: Ville
+        description: Structure de recherche hébergeant le travail des chercheur·e·s
         name: Nom
         zipcode: Code postal
       research/laboratory/axis:
@@ -66,16 +94,21 @@ fr:
         author: Auteur·rice
         completed: Complétée ?
         completed_at: Complétée le
+        description: Production scientifique permettant d'obtenir le titre de Docteur·e
         director: Directeur·rice
         laboratory: Laboratoire
         started_at: Commencée le
         title: Titre
+  research/hal:
+    description: 
+      text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
+      source: HAL.science
   research:
-    manage_researchers: Gérer les Chercheu·rs·ses
-    number_of_papers: Nombre de papiers
-    researchers:
-      one: Chercheu·r·se
-      other: Chercheu·rs·ses
+    description:
+      text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
+      source: Serge Haroche, Prix Nobel de physique 2012
+    hal:
+      select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
   simple_form:
     hints:
       research_journal_volume:

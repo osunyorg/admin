@@ -7,6 +7,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   def index
     @teachers = apply_scopes(
       current_university.people
+                        .for_language_id(current_university.default_language_id)
                         .teachers
                         .accessible_by(current_ability)
     ).ordered.page(params[:page])
@@ -42,12 +43,13 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
 
   def breadcrumb
     super
-    add_breadcrumb t('education.teachers', count: 2), admin_education_teachers_path
+    add_breadcrumb University::Person::Teacher.model_name.human(count: 2), admin_education_teachers_path
     add_breadcrumb @teacher, admin_education_teacher_path(@teacher) if @teacher
   end
 
   def load_teacher
     @teacher = current_university.people
+                                 .for_language_id(current_university.default_language_id)
                                  .teachers
                                  .accessible_by(current_ability)
                                  .find(params[:id])

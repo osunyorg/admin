@@ -65,7 +65,7 @@ class Communication::Block < ApplicationRecord
     utilities: [:files, :definitions, :embed, :contact]
   }
 
-  scope :published, -> { where(published: true) } 
+  scope :published, -> { where(published: true) }
 
   before_save :attach_template_blobs
 
@@ -97,10 +97,23 @@ class Communication::Block < ApplicationRecord
     @template = nil
   end
 
+  def language
+    return @language if defined?(@language)
+    @language ||= about.respond_to?(:language) ? about.language : about.university.default_language
+  end
+
   def duplicate
     block = self.dup
     block.save
     block
+  end
+
+  def translate!(about_translation)
+    translation = self.dup
+    translation.about = about_translation
+    translation.template.translate!
+    translation.data = translation.template.data
+    translation.save
   end
 
   def to_s

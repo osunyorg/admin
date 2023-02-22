@@ -3,16 +3,51 @@
 <%= render 'admin/university/people/main_infos', person: @researcher %>
 
 <% if @papers.total_count > 0 %>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="card-title mb-0 h5"><%= "#{Research::Journal::Paper.model_name.human(count: 2)} (#{@papers.total_count})" %></h2>
-    </div>
+  <%= osuny_panel Research::Journal::Paper.model_name.human(count: 2) do %>
     <%= render 'admin/research/journals/papers/list', papers: @papers %>
-    <% if @papers.total_pages > 1 %>
-      <div class="card-footer">
-        <%= paginate @papers, theme: 'bootstrap-5' %>
-      </div>
-    <% end %>
+    <%= paginate @papers, theme: 'bootstrap-5' %>
+  <% end %>
+<% end %>
+
+<%= osuny_panel Research::Hal::Author.model_name.human(count: 2) do %>
+  <p><%= t 'research.hal.select_identifier' %><p>
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <% @hal_authors_with_same_name.each do |author| %>
+          <tr>
+            <td width="300">
+              <%= link_to [:admin, author] do %>
+                <%= Research::Hal::Author.human_attribute_name('docid') %> : <%= author.docid %><br>
+                <small><%= author.full_name %></small>
+              <% end %>
+            </td>
+            <td class="ps-3" width="200">
+              <% path = researcher_admin_research_hal_author_path author, researcher_id: @researcher %>
+              <% if author.in? @researcher.hal_authors %>
+                <%= link_to 'Déconnecter', path, method: :delete, class: button_classes_danger %>
+              <% else %>
+                <%= link_to 'Connecter', path, method: :post, class: button_classes %>
+              <% end %>
+            <td>
+            <td class="ps-3">
+              <ul class="list-unstyled small">
+                <% author.sample_documents.each do |doc| %>
+                  <li class="mb-2"><%= sanitize doc %></li>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<%= osuny_panel Research::Hal::Publication.model_name.human(count: 2) do %>
+  <p><%= "#{@researcher.hal_publications.count} #{Research::Hal::Publication.model_name.human(count: @researcher.hal_publications.count).downcase}" %> 
+  <div class="table-responsive">
+    <%= render 'admin/research/hal/publications/list', publications: @researcher.hal_publications.ordered %>
   </div>
 <% end %>
 

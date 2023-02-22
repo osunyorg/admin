@@ -54,7 +54,7 @@ class Communication::Website::Imported::Author < ApplicationRecord
 
   def sync
     if author.nil?
-      self.author = University::Person.new university: university
+      self.author = University::Person.new university: university, language: university.default_language
       self.author.last_name = "Doe" # No title yet
       self.author.first_name = "John" # No title yet
       self.author.save

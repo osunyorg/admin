@@ -12,7 +12,7 @@
         <tr>
           <td><%= link_to menu, admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id) %></td>
           <td><%= menu.items.count %></td>
-          <td class="text-end">
+          <td>
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
                         edit_admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),

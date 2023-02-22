@@ -1,0 +1,17 @@
+<% if about.available_languages.many? %>
+  <%
+    route_args = about.respond_to?(:website)  ? [:admin, about.becomes(about.class.base_class)]
+                                              : [:show_in_language, :admin, about.becomes(about.class.base_class)]
+  %>
+  <%= osuny_panel t('internationalization.label') do %>
+    <ol class="list-unstyled">
+      <% about.available_languages.each do |language| %>
+        <%
+        label = t(language.iso_code, scope: :languages)
+        current = language.id == about.language_id
+        %>
+        <li><%= link_to_unless current, label, [*route_args, lang: language.iso_code] %></li>
+      <% end %>
+    </ol>
+  <% end %>
+<% end %>

@@ -8,22 +8,19 @@
       </div>
       <div class="col-md-9 text-md-end small">
         <ul class="list-inline">
-          <li class="list-inline-item">
-            <%= link_to 'API', api_root_path %>
-          </li>
           <%
-          [
-          :terms_of_service,
-          :privacy_policy,
-          :cookies_policy
-          ].each do |term| %>
+            [
+              ['Aide à la contribution', 'https://support.osuny.org'],
+              ['Aide au code', 'https://developers.osuny.org'],
+              ['Site d\'exemple', 'https://example.osuny.org'],
+              ['Thème Figma', 'https://www.figma.com/community/file/1176490763864113451'],
+              ['Statut', 'https://status.osuny.org'],
+            ].each do |item| 
+          %>
             <li class="list-inline-item">
-              <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
+              <%= link_to item.first, item.last, target: :_blank %>
             </li>
           <% end %>
-          <li class="list-inline-item">
-            <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
-          </li>
         </ul>
       </div>
     </div>

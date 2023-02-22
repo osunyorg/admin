@@ -11,13 +11,13 @@
     <div class="card">
       <div class="card-header border-bottom">
         <a class="btn ps-0 pt-0 dragHandle">
-          <i class="fa fa-bars handle"></i>
+          <i class="<%= Icon::DRAG %> handle"></i>
         </a>
         <div class="float-end">
-          <a  class="btn btn-sm btn-danger"
+          <a  class="btn btn-sm text-danger"
               v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
               title="<%= t '.remove_file' %>">
-              <i class="fas fa-times"></i>
+              <i class="<%= Icon::DELETE %>"></i>
           </a>
         </div>
       </div>

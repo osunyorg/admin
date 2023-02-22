@@ -3,7 +3,7 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <%= osuny_panel University::Person.human_attribute_name('essentials') do %>
         <div class="row pure__row--small">
           <div class="col-xxl-6">
@@ -89,7 +89,7 @@
         </div>
       <% end %>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <%= osuny_panel t('metadata') do %>
           <%= f.input :slug,
                       as: :string,

@@ -22,7 +22,7 @@
           </div>
           <%= yield %>
         </div>
-        <%= render 'admin/application/preview' %>
+        <%= render 'admin/application/preview' if @preview %>
       </main>
     </div>
   </div>

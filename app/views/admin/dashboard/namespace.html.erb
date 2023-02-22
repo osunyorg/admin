@@ -1,0 +1,38 @@
+<% content_for :title, @namespace.model_name.human %>
+
+<div class="row">
+  <div class="col-lg-7">
+    <div>
+      <p class="lead"><i><%= t "#{@namespace.to_s.underscore}.description.text" %></i></p>
+      <p>— <%= t "#{@namespace.to_s.underscore}.description.source" %></p>
+    </div>
+    <div class="row pt-5 mt-5">
+      <% @namespace.parts.each do |part| %>
+        <%
+        class_name = part.first
+        path = send part.last
+        title = class_name.model_name.human(count: 2)
+        description = class_name.human_attribute_name('description')
+        # TODO
+        description = t 'administration.qualiopi.description' if class_name == Administration::Qualiopi
+        description = t 'activerecord.attributes.research/hal.description' if class_name == Research::Hal
+        %>
+        <div class="col-lg-6 mt-5">
+          <%= osuny_panel title do %>
+            <p><%= description %></p>
+            <%= link_to t('show'), path, class: 'stretched-link' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if current_admin_theme == 'pure' %>
+    <div class="offset-lg-1 col-lg-4">
+      <%= image_tag "admin/#{@namespace.to_s.underscore}.jpg", class: 'img-fluid pure__chapter__image'%>
+      <p class="small text-lg-end mt-3">
+        Illustration de Virginia Frances Sterrett. 
+        Source : University of California Libraries, the Internet Archive.
+      </p>
+    </div>
+  <% end %>
+</div>

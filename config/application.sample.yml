@@ -1,4 +1,6 @@
 APPLICATION_ENV: development
+# Can be used when working on two incompatible branches (e.g. main & i18n)
+OSUNY_DEVELOPMENT_DBNAME:
 
 BUGSNAG_JAVASCRIPT_KEY:
 BUGSNAG_RUBY_KEY:
@@ -26,6 +28,7 @@ SMTP_PASSWORD:
 
 UNSPLASH_ACCESS_KEY:
 UNSPLASH_SECRET:
+PEXELS_API_KEY:
 
 # Pour les tests automatisés
 TEST_GITHUB_BRANCH:

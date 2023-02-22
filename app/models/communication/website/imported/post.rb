@@ -38,19 +38,19 @@
 #
 class Communication::Website::Imported::Post < ApplicationRecord
   include WithUniversity
-  include Communication::Website::Imported::WithRichText
+  include Communication::Website::Imported::WithFeaturedImage
 
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
   belongs_to :post,
              class_name: 'Communication::Website::Post',
              optional: true
+  alias_attribute :generated_object, :post
   belongs_to :featured_medium,
              class_name: 'Communication::Website::Imported::Medium',
              optional: true
 
   before_validation :sync
-  after_commit :sync_attachments, on: [:create, :update]
 
   default_scope { order(path: :desc) }
 
@@ -79,7 +79,8 @@ class Communication::Website::Imported::Post < ApplicationRecord
   def sync
     if post.nil?
       self.post = Communication::Website::Post.new university: university,
-                                                   website: website.website # Real website, not imported website
+                                                   website: website.website, # Real website, not imported website
+                                                   language: website.website.default_language
       self.post.title = "Untitled" # No title yet
       self.post.save
     else
@@ -94,47 +95,32 @@ class Communication::Website::Imported::Post < ApplicationRecord
     post.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     post.slug = slug
     post.meta_description = Wordpress.clean_string excerpt.to_s
-    post.text = Wordpress.clean_html content.to_s
     post.created_at = created_at
     post.updated_at = updated_at
     post.published_at = published_at if published_at
     post.published = true
 
+    sync_author
+    sync_categories
+    post.save
+
+    chapter = post.blocks.where(university: website.university, template_kind: :chapter).first_or_create
+    chapter_data = chapter.data.deep_dup
+    chapter_data['text'] = Wordpress.clean_html(content.to_s)
+    chapter.data = chapter_data
+    chapter.save
+  end
+
+  def sync_author
     imported_author = website.authors.where(identifier: author).first
     post.author = imported_author.author if imported_author&.author.present?
+  end
+
+  def sync_categories
     imported_categories = website.categories.where(identifier: categories)
     imported_categories.each do |imported_category|
       post.categories << imported_category.category unless post.categories.pluck(:id).include?(imported_category.category_id)
     end
-    post.save
   end
 
-  def sync_attachments
-    return unless ENV['APPLICATION_ENV'] == 'development' || updated_at > post.updated_at
-    if featured_medium.present?
-      unless featured_medium.file.attached?
-        featured_medium.load_remote_file!
-        featured_medium.save
-      end
-      post.featured_image.attach(
-        io: URI.open(featured_medium.file.blob.url),
-        filename: featured_medium.file.blob.filename,
-        content_type: featured_medium.file.blob.content_type
-      )
-    else
-      fragment = Nokogiri::HTML.fragment(post.text.body.to_html)
-      image = fragment.css('img').first
-      if image.present?
-        begin
-          url = image.attr('src')
-          download_service = DownloadService.download(url)
-          post.featured_image.attach(download_service.attachable_data)
-          image.remove
-          post.update(text: fragment.to_html)
-        rescue
-        end
-      end
-    end
-    post.update(text: rich_text_with_attachments(post.text.body.to_html))
-  end
 end

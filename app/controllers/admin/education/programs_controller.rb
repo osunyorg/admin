@@ -23,23 +23,24 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    old_parent_id = params[:oldParentId].blank? ? nil : params[:oldParentId]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      @program = current_university.education_programs.find(id)
-      @program.update(
+      program = current_university.education_programs.find(id)
+      program.update(
         parent_id: parent_id,
         position: index + 1,
         skip_websites_categories_callback: true
       )
     end
-    if parent_id
-      parent = current_university.education_programs.find(parent_id)
-      parent.set_websites_categories
-      parent.sync_with_git
-    else
-      @program&.set_websites_categories
-      @program&.sync_with_git
+    if old_parent_id
+      old_parent = current_university.education_programs.find(old_parent_id)
+      old_parent.set_websites_categories
+      old_parent.sync_with_git
     end
+    program = current_university.education_programs.find(params[:itemId])
+    program.set_websites_categories
+    program.sync_with_git
   end
 
   def children
@@ -50,6 +51,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def show
     @roles = @program.university_roles.ordered
     @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name
+    @preview = true
     breadcrumb
   end
 
@@ -75,7 +77,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def create
     @program.university = current_university
-    @program.add_unsplash_image params[:unsplash]
+    @program.add_photo_import params[:photo_import]
     if @program.save_and_sync
       redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s)
     else
@@ -85,7 +87,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def update
-    @program.add_unsplash_image params[:unsplash]
+    @program.add_photo_import params[:photo_import]
     if @program.update_and_sync(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else
@@ -122,6 +124,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def load_teacher_people
     @teacher_people = current_university.people
+                                        .for_language_id(current_university.default_language_id)
                                         .teachers
                                         .accessible_by(current_ability)
                                         .ordered

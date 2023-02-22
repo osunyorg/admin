@@ -14,7 +14,7 @@
 #  repository          :string
 #  style               :text
 #  style_updated_at    :date
-#  theme_version       :string
+#  theme_version       :string           default("NA")
 #  url                 :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

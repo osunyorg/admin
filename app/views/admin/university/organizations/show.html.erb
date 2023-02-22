@@ -5,14 +5,14 @@
 
     <%= osuny_panel University::Organization.human_attribute_name('text') do %>
       <%= @organization.text.to_s.html_safe %>
-    <% end if strip_tags(@organization.text.to_html).present? %>
+    <% end if strip_tags(@organization.text.to_s).present? %>
 
     <%= osuny_panel University::Organization.human_attribute_name('contact') do %>
       <div class="row pure__row--small">
         <% [
-          :address, 
-              :zipcode, 
-              :city, 
+          :address,
+              :zipcode,
+              :city,
               :country
             ].each do |property| %>
           <% value = @organization.send property %>
@@ -31,10 +31,10 @@
           </div>
         <% end %>
         <% [
-          :phone, 
-              :email, 
-              :linkedin, 
-              :twitter, 
+          :phone,
+              :email,
+              :linkedin,
+              :twitter,
               :mastodon
             ].each do |property| %>
           <% value = @organization.send property %>
@@ -68,13 +68,13 @@
   </div>
 
   <div class="col-md-4">
-    <%= osuny_panel t('informations') do %>
+    <%= osuny_panel t('metadata') do %>
       <%= osuny_label University::Organization.human_attribute_name('slug') %>
       <p><%= @organization.slug %></p>
       <%= osuny_label University::Organization.human_attribute_name('active') %>
       <p><%= t @organization.active %></>
     <% end %>
-    
+
     <%= osuny_panel t('university.organization.logo') do %>
       <% if @organization.logo.attached? %>
         <%= osuny_label University::Organization.human_attribute_name('logo') %>

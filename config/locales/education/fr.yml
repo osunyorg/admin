@@ -4,6 +4,9 @@ fr:
       education: Enseignement
   activerecord:
     models:
+      university/person/teacher:
+        one: Enseignant·e
+        other: Enseignant·e·s
       education/academic_year:
         one: Année
         other: Années
@@ -28,6 +31,7 @@ fr:
         school: École
         year: Année
       education/diploma:
+        description: Présentation des diplômes et de leurs caractéristiques
         duration: Durée
         ects: Crédits ECTS
         level: Niveau
@@ -40,6 +44,7 @@ fr:
         capacity: Capacité
         contacts: Contacts
         continuing: Formation continue
+        description: Présentation exhaustive des formations, de leurs contenus, modalités pédagogiques et perspectives
         diploma: Diplôme
         duration: Durée
         downloadable_summary: Document de synthèse téléchargeable
@@ -63,7 +68,7 @@ fr:
         roles: Rôles
         schools: Écoles proposant cette formation
         short_name: Nom abrégé
-        teachers: Enseignants·es
+        teachers: Enseignant·e·s
         team: Équipe
         content: Contenus de la formation
         results: Indicateurs de résultats
@@ -72,12 +77,15 @@ fr:
         administrators: Équipe administrative
         city: Ville
         country: Pays
+        description: Présentation des écoles, de leurs coordonnées, enseignements, équipes et informations administratives
         name: Nom
         phone: Téléphone
         programs: Formations dispensées
         roles: Membres de l'équipe
         websites: Sites Web associés
         zipcode: Code postal
+      university/person/teacher:
+        description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
   admin:
     education:
       programs:
@@ -87,6 +95,9 @@ fr:
         tree:
           title: Arborescence des formations
   education:
+    description: 
+      text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
+      source: Olivier Reboul, La philosophie de l'éducation, 2018
     manage_programs: Gérer les formations
     manage_roles: Gérer les rôles
     manage_teachers: Gérer les enseignants·es
@@ -101,7 +112,7 @@ fr:
           hint: Haut de page, résumé de la formation.
         presentation:
           label: Présentation
-          hint: Complétées par les blocs, afin de permettre une présentation libre et riche de la formation.
+          hint: Complétée par les blocs, afin de permettre un descriptif libre et riche de la formation.
         pedagogy:
           label: Pédagogie
           hint: Mode d'enseignement et d'évaluation, et présentation de l'équipe pédagogique.
@@ -117,9 +128,6 @@ fr:
       other: Rôles
     schools:
       manage_roles: Gérer l'équipe
-    teachers:
-      one: Enseignant·e
-      other: Enseignants·es
   enums:
     education:
       diploma:

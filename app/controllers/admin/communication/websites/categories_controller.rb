@@ -1,36 +1,36 @@
 class Admin::Communication::Websites::CategoriesController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Category, through: :website
 
+  include Admin::Translatable
+
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
-    @categories = @website.categories.ordered
+    @categories = @website.categories.for_language(current_website_language).ordered
     breadcrumb
   end
 
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
+    old_parent_id = params[:oldParentId].blank? ? nil : params[:oldParentId]
     ids = params[:ids] || []
-    first_category = nil
     ids.each.with_index do |id, index|
       category = @website.categories.find(id)
-      first_category = category if index == 0
       category.update(
         parent_id: parent_id,
         position: index + 1
       )
     end
-    if parent_id
-      parent = @website.categories.find(parent_id)
-      parent.sync_with_git
-    else
-      first_category&.sync_with_git # Will sync siblings
+    if old_parent_id
+      old_parent = @website.categories.find(old_parent_id)
+      old_parent.sync_with_git
     end
+    @website.categories.find(params[:itemId]).sync_with_git # Will sync siblings
   end
 
   def children
     return unless request.xhr?
-    @category = @website.categories.find(params[:id])
+    @category = @website.categories.for_language(current_website_language).find(params[:id])
     @children = @category.children.ordered
   end
 
@@ -56,7 +56,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
 
   def create
     @category.website = @website
-    @category.add_unsplash_image params[:unsplash]
+    @category.add_photo_import params[:photo_import]
     if @category.save_and_sync
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
     else
@@ -66,7 +66,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   end
 
   def update
-    @category.add_unsplash_image params[:unsplash]
+    @category.add_photo_import params[:photo_import]
     if @category.update_and_sync(category_params)
       redirect_to admin_communication_website_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
     else
@@ -84,7 +84,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   protected
 
   def get_root_categories
-    @root_categories = @website.categories.root.ordered
+    @root_categories = @website.categories.root.for_language(current_website_language).ordered
   end
 
   def breadcrumb
@@ -97,9 +97,12 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   def category_params
     params.require(:communication_website_category)
           .permit(
-            :website_id, :name, :meta_description, :summary, :slug, :parent_id,
+            :name, :meta_description, :summary, :slug, :parent_id,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
           )
-          .merge(university_id: current_university.id)
+          .merge(
+            university_id: current_university.id,
+            language_id: current_website_language.id
+          )
   end
 end

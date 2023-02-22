@@ -37,7 +37,6 @@
 #
 class Communication::Website::Imported::Page < ApplicationRecord
   include WithUniversity
-  include Communication::Website::Imported::WithRichText
 
   belongs_to :website,
              class_name: 'Communication::Website::Imported::Website'
@@ -50,7 +49,6 @@ class Communication::Website::Imported::Page < ApplicationRecord
              optional: true
 
   before_validation :sync
-  after_commit :sync_attachments, on: [:create, :update]
 
   default_scope { order(:path) }
 
@@ -77,6 +75,8 @@ class Communication::Website::Imported::Page < ApplicationRecord
     if page.nil?
       self.page = Communication::Website::Page.new  university: university,
                                                     website: website.website, # Real website, not imported website
+                                                    language: website.website.default_language,
+                                                    parent: website.website.special_page(Communication::Website::Page::Home),
                                                     slug: path
       self.page.title = "Untitled"
       self.page.save
@@ -91,37 +91,13 @@ class Communication::Website::Imported::Page < ApplicationRecord
     page.title = sanitized_title unless sanitized_title.blank? # If there is no title, leave it with "Untitled"
     page.slug = slug
     page.meta_description = Wordpress.clean_string excerpt.to_s
-    page.text = Wordpress.clean_html content.to_s
     page.published = true
     page.save
-  end
 
-  def sync_attachments
-    return unless ENV['APPLICATION_ENV'] == 'development' || updated_at > page.updated_at
-    if featured_medium.present?
-      unless featured_medium.file.attached?
-        featured_medium.load_remote_file!
-        featured_medium.save
-      end
-      page.featured_image.attach(
-        io: URI.open(featured_medium.file.blob.url),
-        filename: featured_medium.file.blob.filename,
-        content_type: featured_medium.file.blob.content_type
-      )
-    else
-      fragment = Nokogiri::HTML.fragment(page.text.to_s)
-      image = fragment.css('img').first
-      if image.present?
-        begin
-          url = image.attr('src')
-          download_service = DownloadService.download(url)
-          page.featured_image.attach(download_service.attachable_data)
-          image.remove
-          page.update(text: fragment.to_html)
-        rescue
-        end
-      end
-    end
-    page.update(text: rich_text_with_attachments(page.text.to_s))
+    chapter = page.blocks.where(university: website.university, template_kind: :chapter).first_or_create
+    chapter_data = chapter.data.deep_dup
+    chapter_data['text'] = Wordpress.clean_html(content.to_s)
+    chapter.data = chapter_data
+    chapter.save
   end
 end

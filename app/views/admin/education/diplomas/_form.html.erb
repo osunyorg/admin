@@ -3,29 +3,24 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="row">
     <div class="col-lg-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :name %>
-          <div class="row">
-            <div class="col-lg-6">
-              <%= f.input :short_name %>
-            </div>
-            <div class="col-lg-6">
-              <%= f.input :level, include_blank: false %>
-            </div>
-            <div class="col-lg-6">
-              <%= f.input :ects %>
-            </div>
-            <div class="col-lg-6">
-              <%= f.input :duration, as: :string %>
-            </div>
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :name %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= f.input :short_name %>
           </div>
-          <%= render 'admin/application/summary/form', f: f, about: diploma %>
+          <div class="col-lg-6">
+            <%= f.input :level, include_blank: false %>
+          </div>
+          <div class="col-lg-6">
+            <%= f.input :ects %>
+          </div>
+          <div class="col-lg-6">
+            <%= f.input :duration, as: :string %>
+          </div>
         </div>
-      </div>
+        <%= render 'admin/application/summary/form', f: f, about: diploma %>
+      <% end %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

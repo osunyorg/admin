@@ -25,8 +25,11 @@ module WithSlug
     protected
 
     def slug_unavailable?(slug)
+      existence_params = { university_id: self.university_id, slug: slug }
+      existence_params[:language_id] = self.language_id if respond_to?(:language_id)
+
       self.class.unscoped
-                .where(university_id: self.university_id, slug: slug)
+                .where(**existence_params)
                 .where.not(id: self.id)
                 .exists?
     end
@@ -37,7 +40,7 @@ module WithSlug
     end
 
     def slug_must_be_unique
-      errors.add(:slug, ActiveRecord::Errors.default_error_messages[:taken]) if slug_unavailable?(slug)
+      errors.add(:slug, :taken) if slug_unavailable?(slug)
     end
   end
 end

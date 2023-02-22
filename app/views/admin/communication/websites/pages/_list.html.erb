@@ -1,10 +1,16 @@
+<%
+  hide_buttons ||= false
+%>
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th class="ps-0"><%= Communication::Website::Page.human_attribute_name('title') %></th>
+        <th class="ps-0" width="60%"><%= Communication::Website::Page.human_attribute_name('title') %></th>
+        <th><%= Communication::Website::Page.human_attribute_name('featured_image') %></th>
         <th><%= Communication::Website::Page.human_attribute_name('parent') %></th>
-        <th width="150"></th>
+        <% unless hide_buttons %>
+          <th width="150"></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -16,21 +22,28 @@
                         class: "#{'draft' unless page.published?}" %>
           </td>
           <td>
+            <% if page.featured_image.attached? && page.featured_image.representable? %>
+              <%= image_tag page.featured_image.representation(resize: '200x'), width: 100 %>
+            <% end %>
+          </td>
+          <td>
             <%= link_to page.parent,
                         admin_communication_website_page_path(website_id: page.website.id, id: page.id) if page.parent %>
           </td>
-          <td class="text-end pe-0">
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                        edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                        class: button_classes if can?(:update, page) %>
-              <%= link_to t('delete'),
-                        admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                        method: :delete,
-                        data: { confirm: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') },
-                        class: button_classes_danger if can?(:destroy, page) && !page.is_special_page? %>
-            </div>
-          </td>
+          <% unless hide_buttons %>
+            <td class="text-end pe-0">
+              <div class="btn-group" role="group">
+                <%= link_to t('edit'),
+                          edit_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                          class: button_classes if can?(:update, page) %>
+                <%= link_to t('delete'),
+                          admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                          method: :delete,
+                          data: { confirm: page.children.any? ? t('please_confirm_with_children') : t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, page) && !page.is_special_page? %>
+              </div>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

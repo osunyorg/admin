@@ -1,6 +1,6 @@
 <%
-  hide_diploma |= false
-  hide_parent |= false
+  hide_diploma ||= false
+  hide_parent ||= false
 %>
 <div class="table-responsive">
   <table class="<%= table_classes %>">
@@ -22,11 +22,10 @@
         parent = program.parent
         diploma = program.diploma
         %>
-        <tr>
+        <tr <% unless program.published? %> class="draft"<% end %>>
           <td><%= link_to_if  can?(:read, program),
                               program,
-                              [:admin, program],
-                              class: "#{'draft' unless program.published?}" %></td>
+                              [:admin, program] %></td>
           <% unless hide_diploma %>
             <td><%= link_to_if can?(:read, diploma), diploma, [:admin, diploma] if diploma %></td>
           <% end %>

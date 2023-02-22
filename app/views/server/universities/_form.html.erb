@@ -6,6 +6,7 @@
     <div class="col-md-4">
       <%= f.input :name %>
       <%= f.input :identifier %>
+      <%= f.association :default_language, include_blank: false %>
       <%= f.input :private %>
       <%= f.input :sms_sender_name,
                   maxlength: 11 %>
@@ -26,7 +27,7 @@
       <%= f.input :logo,
                   as: :single_deletable_file,
                   input_html: { accept: '.jpg,.jpeg,.png,.svg' },
-                  preview: 200,
+                  preview: false,
                   direct_upload: true %>
     </div>
   </div>

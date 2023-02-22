@@ -7,7 +7,7 @@ module Communication::Website::WithMenus
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
-    after_create :initialize_menus
+    after_save :initialize_menus
   end
 
   def menu_item_kinds
@@ -64,15 +64,36 @@ module Communication::Website::WithMenus
   protected
 
   def initialize_menus
-    create_menu 'primary'
-    create_menu 'legal'
-    create_menu 'social'
+    find_or_create_menu 'primary'
+    find_or_create_menu 'social'
+    find_or_create_menu('legal') do |menu|
+      # Only executed after menu creation
+      fill_legal_menu(menu)
+    end
   end
 
-  def create_menu(identifier)
-    title = Communication::Website::Menu.human_attribute_name(identifier)
-    menus.create  title: title,
-                  identifier: identifier,
-                  university: university
+  def find_or_create_menu(identifier)
+    menu = menus.where(identifier: identifier, university: university, language: default_language).first_or_initialize do |menu|
+      menu.title = I18n.t("communication.website.menus.default_title.#{identifier}")
+    end
+    unless menu.persisted?
+      menu.save
+      yield(menu) if block_given?
+    end
+    menu
+  end
+
+  def fill_legal_menu(menu)
+    [
+      Communication::Website::Page::LegalTerm,
+      Communication::Website::Page::PrivacyPolicy,
+      Communication::Website::Page::Accessibility,
+      Communication::Website::Page::Sitemap
+    ].each do |page_class|
+      page = special_page(page_class, language: menu.language)
+      menu.items.where(kind: 'page', about: page, university: university, website: self).first_or_create do |item|
+        item.title = page.title
+      end
+    end
   end
 end

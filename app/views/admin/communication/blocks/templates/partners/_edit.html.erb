@@ -8,17 +8,17 @@
     <%= block_component_edit :alphabetical %>
   </div>
 </div>
-<draggable :list="data.elements" class="list-group mb-3" handle=".partnerHandle">
-  <div v-for="(element, index) in data.elements" class="list-group-item">
+<draggable :list="data.elements" class="mb-3 <%= if_appstack 'list-group' %>" handle=".partnerHandle">
+  <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
     <div class="d-flex mb-n3">
       <div>
         <a class="btn ps-0 pt-0 partnerHandle">
-          <i class="fa fa-bars handle"></i>
+          <i class="<%= Icon::DRAG %> handle"></i>
         </a>
       </div>
       <div class="flex-fill">
         <%= block_component_edit :id, template: @element, label: '' %>
-        <div class="row"  v-if="!element.id">
+        <div class="row pure__row--small mt-n2"  v-if="!element.id">
           <div class="col-xl-4 col-md-6">
             <%= block_component_edit :name, template: @element %>
           </div>
@@ -31,10 +31,10 @@
         </div>
       </div>
       <div>
-        <a  class="btn btn-sm btn-danger ms-3"
+        <a  class="btn btn-sm text-danger ms-3"
             v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
             title="<%= t '.remove_partner' %>">
-            <i class="fas fa-times"></i>
+            <i class="<%= Icon::DELETE %>"></i>
         </a>
       </div>
     </div>

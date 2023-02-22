@@ -17,13 +17,13 @@
           Osuny a un nouveau thème pour l'administration, "Pure". <br>
           Voulez-vous l'essayer ?
         </p>
-        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put, class: button_classes %>
+        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put %>
       <% else %>
         <p>
           Vous utilisez le thème "Pure" pour l'administration. <br>
           Voulez-vous revenir au thème "Appstack" ?
         </p>
-        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put, class: button_classes %>
+        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
       <% end %>
     <% end %>
   </div>
@@ -43,7 +43,7 @@
       <% next unless can?(:read, website) %>
       <div class="<%= classes %>">
         <%= osuny_panel website, 
-                  action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_WEBSITE }\"></i>" do %>
+                  action: "<i class=\"#{ Icon::COMMUNICATION_WEBSITE }\"></i>" do %>
           <p class="small"><%= website.url %></p>
           <%= link_to t('show'), [:admin, website], class: button_classes('stretched-link') %>
         <% end %>
@@ -59,7 +59,7 @@
       <% next unless can?(:read, extranet) %>
       <div class="<%= classes %>">
         <%= osuny_panel extranet, 
-                  action: "<i class=\"fas fa-#{ Icon::COMMUNICATION_EXTRANET }\"></i>" do %>
+                  action: "<i class=\"#{ Icon::COMMUNICATION_EXTRANET }\"></i>" do %>
           <p class="small"><%= extranet.url %></p>
           <%= link_to t('show'), [:admin, extranet], class: button_classes('stretched-link') %>
         <% end %>
@@ -75,13 +75,28 @@
       <% next unless can?(:read, journal) %>
       <div class="<%= classes %>">
         <%= osuny_panel journal, 
-            action: "<i class=\"fas fa-#{ Icon::RESEARCH_JOURNAL }\"></i>" do %>
+            action: "<i class=\"#{ Icon::RESEARCH_JOURNAL }\"></i>" do %>
           <%= link_to t('show'), [:admin, journal], class: button_classes('stretched-link') %>
         <% end %>
       </div>
     <% end %>
   </div>
 <% end %>
+
+<div class="row mt-5 pt-5">
+  <% @namespaces.each do |namespace| %>
+    <% 
+    path = send "admin_#{namespace.to_s.underscore}_root_path"
+    description = t "#{namespace.to_s.underscore}.description.text"
+    %>
+  <div class="col-lg-3">
+    <%= osuny_panel namespace.model_name.human, image: "admin/#{namespace.to_s.underscore}.jpg" do %>
+      <p><%= description.truncate 180 %></p>
+      <%= link_to t('show'), path, class: 'stretched-link' %>
+    <% end %>
+  </div>
+<% end %>
+</div>
 
 <% if current_admin_theme == 'appstack' %>
   <div class="small mt-5">

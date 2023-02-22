@@ -2,14 +2,18 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Page,
                               through: :website
 
+  include Admin::Translatable
+
   def index
-    @homepage = @website.special_page(Communication::Website::Page::Home)
+    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
+    @pages = @website.pages.for_language(current_website_language)
     breadcrumb
   end
 
   def reorder
     parent_page = @website.pages.find(params[:parentId])
+    old_parent_page = @website.pages.find(params[:oldParentId])
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
@@ -18,6 +22,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
         position: index + 1
       )
     end
+    old_parent_page.sync_with_git
     parent_page.sync_with_git
   end
 
@@ -27,6 +32,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def show
+    @preview = true
     breadcrumb
     add_breadcrumb(@page, admin_communication_website_page_path(@page))
   end
@@ -54,7 +60,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def create
     @page.website = @website
-    @page.add_unsplash_image params[:unsplash]
+    @page.add_photo_import params[:photo_import]
     if @page.save_and_sync
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
     else
@@ -65,7 +71,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    @page.add_unsplash_image params[:unsplash]
+    @page.add_photo_import params[:photo_import]
     if @page.update_and_sync(page_params)
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
     else
@@ -104,8 +110,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
             :communication_website_id, :title, :breadcrumb_title, :bodyclass,
             :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :parent_id, :language_id
+            :parent_id
           )
-          .merge(university_id: current_university.id)
+          .merge(
+            university_id: current_university.id,
+            language_id: current_website_language.id
+          )
   end
+
 end

@@ -10,16 +10,17 @@
   </div>
 </div>
 
-<draggable :list="data.elements" class="list-group mb-3" handle=".dragHandle">
-  <div v-for="(element, index) in data.elements" class="list-group-item">
+<%= osuny_label University::Person.model_name.human(count: 2) %>
+<draggable :list="data.elements" class="mb-3<%= if_appstack 'list-group' %>" handle=".dragHandle">
+  <div v-for="(element, index) in data.elements" class="<%= if_appstack 'list-group-item' %> draggable-item">
     <div class="d-flex">
       <div>
         <a class="btn ps-0 pt-0 dragHandle" title="<%= t '.drag_title' %>">
-          <i class="fa fa-bars handle"></i>
+          <i class="<%= Icon::DRAG %> handle"></i>
         </a>
       </div>
       <div class="flex-fill">
-        <div class="row mb-n3">
+        <div class="row pure__row--small mb-n3">
           <div class="col-md-6">
             <%= block_component_edit :id, template: @element, label: '' %>
           </div>
@@ -29,10 +30,10 @@
         </div>
       </div>
       <div>
-        <a  class="btn btn-sm btn-danger ms-3"
+        <a  class="btn btn-sm text-danger"
             v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
             title="<%= t '.delete_title' %>">
-            <i class="fas fa-times"></i>
+            <i class="<%= Icon::DELETE %>"></i>
         </a>
       </div>
     </div>

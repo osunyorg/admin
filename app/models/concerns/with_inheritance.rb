@@ -23,12 +23,13 @@ module WithInheritance
 
   def best(property)
     value = send(property)
-    value.blank? ? parent&.send("best_#{property}") : value
+    html = value.to_s
+    Static.blank?(html) ? parent&.send("best_#{property}") : value
   end
 
   def best_source(property, is_ancestor: false)
     value = send(property)
-    return (is_ancestor ? self : nil) if value.present?
+    return (is_ancestor ? self : nil) if Static.has_content?(value.to_s)
     parent&.send(:best_source, property, is_ancestor: true)
   end
 end

@@ -54,6 +54,10 @@ module Communication::Website::Page::WithType
     true
   end
 
+  def is_listed_among_children?
+    true
+  end
+
   def editable_width?
     true
   end
@@ -84,7 +88,7 @@ module Communication::Website::Page::WithType
   protected
 
   def default_parent
-    website.special_page(Communication::Website::Page::Home)
+    website.special_page(Communication::Website::Page::Home, language: language)
   end
 
   def type_git_dependencies
@@ -99,5 +103,5 @@ module Communication::Website::Page::WithType
     self.full_width = full_width_by_default?
     self.published = published_by_default?
   end
-  
+
 end

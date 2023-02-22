@@ -1,5 +1,3 @@
-<% pages = collection_tree(@block.about&.website.pages) %>
-
 <%= block_component_edit :layout %>
 
 <div class="row pure__row--small">
@@ -16,22 +14,22 @@
     <div class="mb-4" v-if="data.mode == 'selection'">
       <h2 class="h3"><%= t '.selection.title' %></h2>
       <%= block_component_add_element t('.selection.add') %>
-      <draggable :list="data.elements" handle=".dragHandle" class="list-group">
-        <div v-for="(element, index) in data.elements" class="list-group-item">
+      <draggable :list="data.elements" handle=".dragHandle" class="<%= if_appstack 'list-group' %>">
+        <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
           <div class="d-flex mb-n3">
             <div>
               <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
-                <i class="fa fa-bars handle"></i>
+                <i class="<%= Icon::DRAG %> handle"></i>
               </a>
             </div>
             <div class="flex-fill">
               <%= block_component_edit :id, template: @element %>
             </div>
             <div>
-              <a  class="btn btn-sm btn-danger ms-3"
+              <a  class="btn btn-sm text-danger ms-3"
                   v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
                   title="Supprimer">
-                  <i class="fas fa-times"></i>
+                  <i class="<%= Icon::DELETE %>"></i>
               </a>
             </div>
           </div>

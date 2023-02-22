@@ -9,10 +9,12 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
   has_scope :for_alumni_year
 
   def index
-    @alumni = apply_scopes(@alumni).alumni
-                     .accessible_by(current_ability)
-                     .ordered
-                     .page(params[:page])
+    @alumni = apply_scopes(@alumni)
+                .for_language_id(current_university.default_language_id)
+                .alumni
+                .accessible_by(current_ability)
+                .ordered
+                .page(params[:page])
     breadcrumb
   end
 

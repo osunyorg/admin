@@ -20,12 +20,25 @@ class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
 
   def build
     if @index.zero?
-      @content << "#{OPEN}<h2>#{item_name_and_link}</h2>"
+      @content << part
     elsif item_is_header?
-      @content << "</ul>#{CLOSE}#{OPEN}<h2>#{item_name_and_link}</h2><ul>"
+      @content << "</ul>#{CLOSE}#{part}"
     else
       @content << "<li>#{item_name_and_link}</li>"
     end
+  end
+
+  def part
+    part = OPEN
+    if item.options.has_key? :image
+      image = item.options[:image]
+      part += "<a href=\"#{item.url}\">"
+      part += ActionController::Base.helpers.image_tag image, class: 'image', loading: :lazy
+      part += "</a>"
+    end
+    part += "<h2>#{item_name_and_link}</h2>"
+    part += "<ul>"
+    part
   end
 
   def item_is_header?

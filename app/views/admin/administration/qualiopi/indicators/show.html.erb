@@ -16,12 +16,4 @@
     <% end %>
   </div>
 </div>
-
-<%
-partial = "admin/administration/qualiopi/evaluations/criterion_#{@indicator.number}"
-# TODO render only if file exists, so we can have errors
-%>
-<% begin %>
-<%= render "admin/administration/qualiopi/evaluations/criterion_#{@indicator.number}" %>
-<% rescue %>
-<% end %>
+<%= render @partial unless @partial.nil? %>

@@ -1,12 +1,14 @@
 class Curator
-  attr_reader :website, :user, :url, :post
+  attr_reader :website, :user, :language, :url, :post
 
-  def initialize(website, user, url)
+  def initialize(website, user, language, url)
     @website = website
     @user = user
+    @language = language
     @url = url
     create_post!
     attach_image! unless page.image.blank?
+  rescue
   end
 
   def valid?
@@ -21,7 +23,8 @@ class Curator
       title: page.title,
       slug: page.title.parameterize,
       author: @user.person,
-      published_at: Time.now
+      published_at: Time.now,
+      language_id: @language.id
     )
     @chapter = @post.blocks.create(
       university: website.university,

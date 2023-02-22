@@ -6,64 +6,55 @@
 
 <%= block_component_edit :layout %>
 
-<div v-show="data.elements.length > 1">
-  <hr class="my-5">
-
-  <p>Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité</p>
-
-  <draggable :list="data.elements" class="row pure__row--small">
-    <div v-for="(element, index) in data.elements" class="col-xxl-1 col-lg-2 col-4">
-      <div class="card">
-        <div class="card-header p-1 text-center">
-          <i class="fas fa-arrows-alt"></i>
-        </div>
-        <div v-if="element.image.id">
-          <img :src="getImageUrl(element.image)" class="img-fluid" />
-        </div>
+<p>Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité</p>
+<draggable :list="data.elements" class="row pure__row--small">
+  <div v-for="(element, index) in data.elements" class="col-xxl-1 col-lg-2 col-4">
+    <div class="card">
+      <div class="card-header p-1 text-center">
+        <i class="<%= Icon::MOVE %>"></i>
+      </div>
+      <div v-if="element.image.id">
+        <img :src="getImageUrl(element.image)" class="img-fluid" />
       </div>
     </div>
-  </draggable>
-</div>
+  </div>
+</draggable>
 
 <hr class="my-5">
 
 <p>Envoyer les images et saisir les textes ci-dessous</p>
 
-<div  v-for="(element, index) in data.elements">
-  <div class="card">
-    <div class="card-body">
-      <div class="float-end">
-        <a  class="btn btn-sm btn-danger"
-            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-            title="<%= t '.remove_image' %>">
-            <i class="fas fa-times"></i>
-        </a>
+<div v-for="(element, index) in data.elements" class="mb-5">
+  <%= osuny_panel 'Image' do %>
+    <div class="text-end">
+      <a  class="btn btn-sm text-danger mt-n4"
+          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
+          <i class="<%= Icon::DELETE %>"></i>
+      </a>
+    </div>
+    <div class="row pure__row--small">
+      <div class="col-lg-6">
+        <%= block_component_edit :image,
+              template: @element,
+              label: t('admin.communication.blocks.components.image.input.label'),
+              placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
       </div>
-      <div class="flex-fill">
-        <div class="row mb-n3">
-          <div class="col-lg-6">
-            <%= block_component_edit :image,
-                  template: @element,
-                  label: t('admin.communication.blocks.components.image.input.label'),
-                  placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
-            </div>
-            <div class="col-lg-6">
-            <%= block_component_edit :alt,
-                  template: @element,
-                  label: t('admin.communication.blocks.components.image.alt.label'),
-                  placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-            <%= block_component_edit :credit,
-                  template: @element,
-                  label: t('admin.communication.blocks.components.image.credit.label'),
-                  placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-                  summernote_config: 'link' %>
-            <%= block_component_edit :text,
-                template: @element %>
-          </div>
-        </div>
+      <div class="col-lg-6">
+        <%= block_component_edit :alt,
+              template: @element,
+              label: t('admin.communication.blocks.components.image.alt.label'),
+              placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+        <%= block_component_edit :credit,
+              template: @element,
+              label: t('admin.communication.blocks.components.image.credit.label'),
+              placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
+              summernote_config: 'link' %>
+        <%= block_component_edit :text,
+            template: @element %>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <%= block_component_add_element t('.add_image') %>

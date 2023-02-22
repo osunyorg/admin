@@ -1,0 +1,16 @@
+---
+title: "<%= @about.title %>"
+date: "<%= @about.publication_date&.iso8601 %>"
+slug: "<%= @about.slug %>"
+docid: "<%= @about.docid %>"
+ref: >
+  <%= sanitize @about.ref %>
+url:
+  hal: "<%= @about.hal_url %>"
+  doi: "<%= @about.doi_url %>"
+  raw: "<%= @about.url %>"
+researchers:
+<% @about.researchers.each do |researcher| %>
+  - <%= researcher.slug %>
+<% end %>
+---
