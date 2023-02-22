@@ -93,8 +93,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       :meta_description, :summary,
       :biography,  :picture, :picture_delete, :picture_infos,
       :habilitation, :tenure, :url, :linkedin, :twitter, :mastodon,
-      :is_researcher, :is_teacher, :is_administration, :is_alumnus,
-      :hal_person_identifier, :hal_doc_identifier, :hal_form_identifier, :user_id
+      :is_researcher, :is_teacher, :is_administration, :is_alumnus, :user_id
     ).merge(university_id: current_university.id)
   end
 end
