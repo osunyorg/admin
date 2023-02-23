@@ -57,6 +57,7 @@
 #
 class User < ApplicationRecord
   include WithAdminTheme
+  include WithAuthorship
   include WithAvatar
   include WithRegistrationContext
   include WithUniversity
