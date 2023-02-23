@@ -94,13 +94,11 @@ module User::WithAuthentication
     end
 
     def sanitize_fields
-      full_sanitizer = Rails::Html::FullSanitizer.new
-
       # Only text allowed, and remove '=' to prevent excel formulas
-      self.email = full_sanitizer.sanitize(self.email)&.gsub('=', '')
-      self.first_name = full_sanitizer.sanitize(self.first_name)&.gsub('=', '')
-      self.last_name = full_sanitizer.sanitize(self.last_name)&.gsub('=', '')
-      self.mobile_phone = full_sanitizer.sanitize(self.mobile_phone)&.gsub('=', '')
+      self.email = Osuny::Sanitizer.sanitize(self.email, 'string')&.gsub('=', '')
+      self.first_name = Osuny::Sanitizer.sanitize(self.first_name, 'string')&.gsub('=', '')
+      self.last_name = Osuny::Sanitizer.sanitize(self.last_name, 'string')&.gsub('=', '')
+      self.mobile_phone = Osuny::Sanitizer.sanitize(self.mobile_phone, 'string')&.gsub('=', '')
     end
 
     def password_required?

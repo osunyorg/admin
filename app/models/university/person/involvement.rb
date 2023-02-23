@@ -25,6 +25,7 @@
 #  fk_rails_5c704f6338  (university_id => universities.id)
 #
 class University::Person::Involvement < ApplicationRecord
+  include Sanitizable
   include WithUniversity
   include WithPosition
 

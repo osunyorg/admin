@@ -21,6 +21,8 @@
 #  fk_rails_8505d649e8  (website_id => communication_websites.id)
 #
 class Communication::Website::GitFile < ApplicationRecord
+  # We don't include Sanitizable as this model is never handled by users directly.
+
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 

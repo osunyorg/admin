@@ -20,9 +20,10 @@
 #  index_research_hal_publications_on_docid  (docid)
 #
 class Research::Hal::Publication < ApplicationRecord
+  include Sanitizable
   include WithGit
   include WithSlug
-  
+
   DOI_PREFIX = 'http://dx.doi.org/'.freeze
 
   has_and_belongs_to_many :researchers,

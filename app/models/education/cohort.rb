@@ -26,6 +26,7 @@
 #  fk_rails_c2d725cabd  (academic_year_id => education_academic_years.id)
 #
 class Education::Cohort < ApplicationRecord
+  include Sanitizable
   include WithUniversity
 
   belongs_to  :school,
