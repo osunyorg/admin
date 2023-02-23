@@ -25,13 +25,24 @@ module Sanitizable
     end
 
     def should_sanitize?(attribute_name, attribute_type)
+      attribute_is_textual?(attribute_type) &&
+        attribute_has_value?(attribute_name) &&
+        attribute_is_not_polymorphic?(attribute_name)
+    end
+
+    def attribute_is_textual?(attribute_type)
       # We filter the attributes with "string" or "text" SQL type.
-      return false unless [:string, :text].include?(attribute_type)
+      [:string, :text].include?(attribute_type)
+    end
+
+    def attribute_has_value?(attribute_name)
       # We filter the text attributes by their presence.
-      return false unless public_send(attribute_name).present?
+      public_send(attribute_name).present?
+    end
+
+    def attribute_is_not_polymorphic?(attribute_name)
       # We filter the attributes which end with "_type" (polymorphic attributes)
-      return false if attribute_name.ends_with?('_type')
-      true
+      !attribute_name.ends_with?('_type')
     end
 
     #  {
