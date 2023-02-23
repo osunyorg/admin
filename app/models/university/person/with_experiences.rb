@@ -4,7 +4,8 @@ module University::Person::WithExperiences
   included do
 
     has_many                      :experiences,
-                                  class_name: "University::Person::Experience"
+                                  class_name: "University::Person::Experience",
+                                  dependent: :destroy
 
     accepts_nested_attributes_for :experiences,
                                   reject_if: :all_blank,

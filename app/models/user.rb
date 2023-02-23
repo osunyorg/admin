@@ -59,6 +59,7 @@ class User < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes.
   # The sanitization is handled in User::WithAuthentication's sanitize_fields method.
   include WithAdminTheme
+  include WithAuthorship
   include WithAvatar
   include WithRegistrationContext
   include WithUniversity
