@@ -23,7 +23,7 @@ module University::Person::WithResearch
     has_many                :directed_research_theses,
                             class_name: 'Research::Thesis',
                             foreign_key: 'director_id',
-                            dependent: :destroy
+                            dependent: :nullify
 
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
