@@ -17,6 +17,8 @@
 #  index_research_hal_authors_on_docid  (docid)
 #
 class Research::Hal::Author < ApplicationRecord
+  include Sanitizable
+
   has_and_belongs_to_many :publications,
                           foreign_key: 'research_hal_publication_id',
                           association_foreign_key: 'research_hal_author_id'
@@ -76,7 +78,7 @@ class Research::Hal::Author < ApplicationRecord
     researchers << researcher
     researcher.import_research_hal_publications!
   end
-  
+
   def disconnect_researcher(researcher)
     researchers.delete researcher
     researcher.import_research_hal_publications!

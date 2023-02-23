@@ -21,6 +21,7 @@
 #  fk_rails_8e6f992b9d  (university_id => universities.id)
 #
 class Research::Journal::Paper::Kind < ApplicationRecord
+  include Sanitizable
   include WithUniversity
   include WithGit
   include WithSlug

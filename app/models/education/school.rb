@@ -24,6 +24,7 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
+  include Sanitizable
   include WithGit
   include Aboutable
   include WithPrograms # must come before WithAlumni and WithTeam

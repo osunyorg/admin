@@ -24,6 +24,7 @@
 #  fk_rails_18291ef65f  (university_id => universities.id)
 #
 class Communication::Block < ApplicationRecord
+  include Sanitizable
   include WithUniversity
   include WithPosition
   include Accessible

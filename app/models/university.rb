@@ -38,6 +38,7 @@
 class University < ApplicationRecord
   self.filter_attributes += [:sso_cert]
 
+  # We don't include Sanitizable because too many complex attributes. We handle it below.
   include WithPeopleAndOrganizations
   include WithCommunication
   include WithEducation
@@ -59,6 +60,7 @@ class University < ApplicationRecord
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
   validates :logo, size: { less_than: 1.megabytes }
 
+  before_validation :sanitize_fields
   after_destroy :destroy_remaining_blobs
 
   scope :ordered, -> { order(:name) }
@@ -87,6 +89,20 @@ class University < ApplicationRecord
   end
 
   private
+
+  def sanitize_fields
+    self.address = Osuny::Sanitizer.sanitize(self.address, 'string')
+    self.city = Osuny::Sanitizer.sanitize(self.city, 'string')
+    self.country = Osuny::Sanitizer.sanitize(self.country, 'string')
+    self.identifier = Osuny::Sanitizer.sanitize(self.identifier, 'string')
+    self.invoice_amount = Osuny::Sanitizer.sanitize(self.invoice_amount, 'string')
+    self.mail_from_address = Osuny::Sanitizer.sanitize(self.mail_from_address, 'string')
+    self.mail_from_name = Osuny::Sanitizer.sanitize(self.mail_from_name, 'string')
+    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
+    self.sms_sender_name = Osuny::Sanitizer.sanitize(self.sms_sender_name, 'string')
+    self.sso_button_label = Osuny::Sanitizer.sanitize(self.sso_button_label, 'string')
+    self.zipcode = Osuny::Sanitizer.sanitize(self.zipcode, 'string')
+  end
 
   def destroy_remaining_blobs
     active_storage_blobs.delete_all

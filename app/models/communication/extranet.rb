@@ -35,6 +35,7 @@
 class Communication::Extranet < ApplicationRecord
   self.filter_attributes += [:sso_cert]
 
+  # We don't include Sanitizable because too many complex attributes. We handle it below.
   include WithAbouts
   include WithLegal
   include WithSso
@@ -48,6 +49,8 @@ class Communication::Extranet < ApplicationRecord
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
+
+  before_validation :sanitize_fields
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
@@ -99,5 +102,17 @@ class Communication::Extranet < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  private
+
+  def sanitize_fields
+    self.color = Osuny::Sanitizer.sanitize(self.color, 'string')
+    self.cookies_policy = Osuny::Sanitizer.sanitize(self.cookies_policy, 'text')
+    self.host = Osuny::Sanitizer.sanitize(self.host, 'string')
+    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
+    self.privacy_policy = Osuny::Sanitizer.sanitize(self.privacy_policy, 'text')
+    self.registration_contact = Osuny::Sanitizer.sanitize(self.registration_contact, 'string')
+    self.terms = Osuny::Sanitizer.sanitize(self.terms, 'text')
   end
 end
