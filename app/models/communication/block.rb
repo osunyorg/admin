@@ -24,10 +24,10 @@
 #  fk_rails_18291ef65f  (university_id => universities.id)
 #
 class Communication::Block < ApplicationRecord
+  include Accessible
   include Sanitizable
   include WithUniversity
   include WithPosition
-  include Accessible
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
