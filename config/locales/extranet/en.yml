@@ -1,5 +1,6 @@
 en:
   extranet:
+    features: Features
     account:
       my: My account
       edit: Edit account
