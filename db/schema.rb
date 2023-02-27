@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_045821) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -118,6 +118,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_045821) do
     t.boolean "feature_assets", default: false
     t.boolean "feature_posts", default: false
     t.boolean "feature_jobs", default: false
+    t.text "home_sentence"
+    t.text "sass"
+    t.text "css"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end

@@ -1,13 +1,18 @@
 <% content_for :title, current_context %>
 <% content_for :header do %>
-  <h1><%# TODO i18n %>
-    Bienvenue sur l’extranet <%= current_context %>. 
-    Retrouvez les <%= link_to University::Person::Alumnus.model_name.human(count: 2).downcase, university_persons_path %>, 
-    <% if current_extranet.should_show_years? %>
-    recherchez par <%= link_to Education::AcademicYear.model_name.human(count: 2).downcase, education_academic_years_path %>, 
+  <h1>
+    <% if current_extranet.home_sentence.present? %>
+      <%= current_extranet.home_sentence.html_safe %>
+    <% else %>
+      <%# TODO i18n %>
+      Bienvenue sur l’extranet <%= current_context %>. 
+      Retrouvez les <%= link_to University::Person::Alumnus.model_name.human(count: 2).downcase, university_persons_path %>, 
+      <% if current_extranet.should_show_years? %>
+      recherchez par <%= link_to Education::AcademicYear.model_name.human(count: 2).downcase, education_academic_years_path %>, 
+      <% end %>
+      explorez les <%= link_to Education::Cohort.model_name.human(count: 2).downcase, education_cohorts_path %>,
+      découvrez les <%= link_to University::Organization.model_name.human(count: 2).downcase, university_organizations_path %>.
     <% end %>
-    explorez les <%= link_to Education::Cohort.model_name.human(count: 2).downcase, education_cohorts_path %>,
-    découvrez les <%= link_to University::Organization.model_name.human(count: 2).downcase, university_organizations_path %>.
   </h1>
 <% end %>
 

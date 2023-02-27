@@ -19,4 +19,5 @@ get 'terms' => 'extranet/pages#terms', as: :terms
 get 'privacy-policy' => 'extranet/pages#privacy_policy', as: :privacy_policy
 get 'cookies-policy' => 'extranet/pages#cookies_policy', as: :cookies_policy
 get 'data' => 'extranet/pages#data', as: :data
+get 'extranet' => 'extranet/style#index', as: :extranet_style, constraints: { format: 'css' }
 root to: 'extranet/home#index'
