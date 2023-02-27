@@ -53,8 +53,8 @@ fr:
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         feature_alumni: Alumni
-        feature_dam: Gestion de fichiers
-        feature_directory: Répertoire
+        feature_assets: Gestion de fichiers
+        feature_contacts: Répertoire
         feature_posts: Actualités
         feature_jobs: Offres d'emploi
         has_sso: A un SSO ?

@@ -17,7 +17,11 @@ class Icon
   COMMUNICATION_WEBSITE_MENU_URL = 'fas fa-globe'
   COMMUNICATION_EXTRANET_HOME = COMMUNICATION_WEBSITE_HOME
   COMMUNICATION_EXTRANET_ALUMNI = 'fas fa-user-graduate'
-  COMMUNICATION_NEWSLETTERS = 'fas fa-envelope'
+  COMMUNICATION_EXTRANET_CONTACTS = 'fas fa-address-book'
+  COMMUNICATION_EXTRANET_POSTS = 'fas fa-newspaper'
+  COMMUNICATION_EXTRANET_JOBS = 'fas fa-code-branch'
+  COMMUNICATION_EXTRANET_ASSETS = 'fas fa-file'
+  COMMUNICATION_NEWSLETTERS = 'fas fa-message'
 
   EDUCATION_DIPLOMA = 'fas fa-graduation-cap'
   EDUCATION_PROGRAM = 'fas fa-chalkboard-teacher'

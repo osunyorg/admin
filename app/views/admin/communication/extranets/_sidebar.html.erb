@@ -8,12 +8,17 @@
           path: admin_communication_extranet_path(id: @extranet),
           icon: Icon::COMMUNICATION_EXTRANET_HOME
         },
-        {
-          title: Communication::Extranet.human_attribute_name(:feature_alumni),
-          path: admin_communication_extranet_alumni_path(extranet_id: @extranet),
-          icon: Icon::COMMUNICATION_EXTRANET_ALUMNI
-        },
       ]
+      Communication::Extranet::FEATURES.each do |feature|
+        next unless @extranet.feature? feature
+        property = "feature_#{feature}"
+        constant = "COMMUNICATION_EXTRANET_#{feature.upcase}"
+        navigation << {
+          title: Communication::Extranet.human_attribute_name(property),
+          path: url_for([:admin, @extranet, feature]),
+          icon: Icon::const_get(constant)
+        }
+      end
       navigation.each_with_index do |object, index|
         active = index.zero?  ? controller_name == "extranets" && action_name == "show"
                               : object[:path].in?(request.path)

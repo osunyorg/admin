@@ -7,8 +7,8 @@
 #  color                      :string
 #  cookies_policy             :text
 #  feature_alumni             :boolean          default(FALSE)
-#  feature_dam                :boolean          default(FALSE)
-#  feature_directory          :boolean          default(FALSE)
+#  feature_assets             :boolean          default(FALSE)
+#  feature_contacts           :boolean          default(FALSE)
 #  feature_jobs               :boolean          default(FALSE)
 #  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
