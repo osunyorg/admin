@@ -2,7 +2,7 @@
 depth ||= 2
 indentation = ' ' * depth 
 %>
-<% programs.ordered.each do |program| %>
+<% programs.ordered_by_name.each do |program| %>
 <%= indentation %>- label: >
 <%= indentation %>    <%= program.to_s %>
 <%= indentation %>  path: "<%= program.current_permalink_in_website(@website)&.path %>"
