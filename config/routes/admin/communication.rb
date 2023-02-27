@@ -65,7 +65,9 @@ namespace :communication do
       post :duplicate
     end
   end
-  resources :extranets, controller: 'extranets'
+  resources :extranets, controller: 'extranets' do
+    resources :alumni, only: :index, controller: 'extranets/alumni'
+  end
   resources :alumni do
     collection do
       resources :imports, only: [:index, :show, :new, :create]

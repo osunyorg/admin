@@ -10,29 +10,8 @@
   <% end %>
 <% end %>
 
-<% if @alumni %>
-  <p>
-    <%= @alumni.count %>
-    <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
-  </p>
-<% end %>
-<% if @cohorts %>
-  <p>
-    <%= @cohorts.count %>
-    <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
-  </p>
-<% end %>
-<% if @years %>
-  <p>
-    <%= @years.count %>
-    <%= Education::AcademicYear.model_name.human(count: @years.count).downcase %>
-  </p>
-<% end %>
-<% if @organizations %>
-  <p>
-    <%= @organizations.count %>
-    <%= University::Organization.model_name.human(count: @organizations.count).downcase %>
-  </p>
+<%= render 'admin/communication/extranets/sidebar' do %>
+
 <% end %>
 
 <% content_for :action_bar_left do %>
