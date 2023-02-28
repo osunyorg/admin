@@ -3,17 +3,27 @@ module University::Person::WithResearch
 
   included do
     has_and_belongs_to_many :research_hal_authors,
-                            class_name: 'Research::Hal::Author', 
+                            class_name: 'Research::Hal::Author',
                             foreign_key: 'research_hal_author_id',
                             association_foreign_key: 'university_person_id'
     alias :hal_authors :research_hal_authors
 
     has_and_belongs_to_many :research_hal_publications,
-                            class_name: 'Research::Hal::Publication', 
+                            class_name: 'Research::Hal::Publication',
                             foreign_key: 'research_hal_publication_id',
                             association_foreign_key: 'university_person_id'
     alias :hal_publications :research_hal_publications
     alias :publications :research_hal_publications
+
+    has_many                :authored_research_theses,
+                            class_name: 'Research::Thesis',
+                            foreign_key: 'author_id',
+                            dependent: :destroy
+
+    has_many                :directed_research_theses,
+                            class_name: 'Research::Thesis',
+                            foreign_key: 'director_id',
+                            dependent: :nullify
 
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end

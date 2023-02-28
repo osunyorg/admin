@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_18_162239) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_27_040442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -113,6 +113,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_18_162239) do
     t.text "cookies_policy"
     t.string "color"
     t.string "sso_button_label"
+    t.boolean "feature_alumni", default: false
+    t.boolean "feature_directory", default: false
+    t.boolean "feature_dam", default: false
+    t.boolean "feature_posts", default: false
+    t.boolean "feature_jobs", default: false
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -156,12 +161,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_18_162239) do
     t.uuid "website_id", null: false
     t.string "object_type", null: false
     t.uuid "object_id", null: false
-    t.string "source_type"
-    t.uuid "source_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
-    t.index ["source_type", "source_id"], name: "index_communication_website_connections_on_source"
     t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
     t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
