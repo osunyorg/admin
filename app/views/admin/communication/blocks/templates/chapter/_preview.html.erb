@@ -1,9 +1,16 @@
 <%
 $class = "block block-chapter" 
+
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+
 if @block.template.image[:id] #TODO comment vérifier proprement la présence de l'image?
   $class += " block-chapter--with-image"
 end
+
 $class += " block-chapter--" + @block.template.layout
+
 %>
 
 <section class="<%= $class %>">

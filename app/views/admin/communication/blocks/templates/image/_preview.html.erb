@@ -1,6 +1,18 @@
-<section class="block">
+<%
+$class = "block block-chapter" 
+
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+%>
+<section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
+      <% unless @block.title.empty? %>
+        <div class="top">
+          <h2><%= @block.title %></h2>
+        </div>
+      <% end %>
       <% if @block.template.image %>
         <%= block_component_preview :image %>
       <% end %>
