@@ -27,7 +27,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :education, 'Feedbacks', nil, { icon: Icon::EDUCATION_FEEDBACKS }
     end
 
-    if can?(:read, Research::Journal) || can?(:read, Research::Publication) || can?(:read, Research::Laboratory)
+    if can?(:read, Research::Journal) || can?(:read, Research::Hal::Publication) || can?(:read, Research::Laboratory)
       primary.item :research, Research.model_name.human, admin_research_root_path, { kind: :header, image: 'admin/research-thumb.jpg' }
       load_from_parts Research, primary
       primary.item :research_watch, 'Veille', nil, { icon: Icon::RESEARCH_WATCH }
