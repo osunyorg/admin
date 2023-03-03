@@ -1,11 +1,40 @@
-<% if @block.template.video_title %>
-  <div class="top">
-    <h2><%= block_component_preview :video_title %></h2>
+<%
+$class = "block block-video" 
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+%>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.empty? %>
+        <div class="top">
+          <h2><%= @block.title %></h2>
+        </div>
+      <% end %>
+      <% if @block.template.url %>
+        <div class="video">
+          <%# TODO: identification du provider de la vidéo %>
+          <iframe 
+            src="<%= block_component_preview :url %>"
+            title="<%= @block.template.video_title %>"
+            loading="lazy"
+            ></iframe>
+        </div>
+      <% end %>
+      <% if @block.template.video_title %>
+        <p><%= @block.template.video_title %></p>
+      <% end %>
+      <% if @block.template.transcription %>
+      <div class="transcription">
+        <details>
+          <summary><%= t 'accessibility.transcription' %></summary>
+          <p>
+            <%= @block.template.transcription %>
+          </p>
+        </details>
+      </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-<% if @block.template.url %>
-  <div class="video">
-    <%= block_component_preview :url %>
-  </div>
-<% end %>
-<%= block_component_preview :transcription %>
+</section>
