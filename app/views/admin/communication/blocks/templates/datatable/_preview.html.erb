@@ -1,22 +1,43 @@
-<div class="top">
-  <p><%= block_component_preview :description %></p>
-</div>
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <caption>
-      <%= block_component_preview :caption %>
-    </caption>
-    <thead>
-      <tr>
-        <%= block_component_preview :columns %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @block.template.elements.each do |row| %>
-        <tr>
-          <%= block_component_preview :cells, template: row %>
-        </tr>
+<%
+$class = "block block-datatable" 
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+%>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.empty? && @block.template.description.empty? %>
+        <div class="top">
+          <% unless @block.title.empty? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.empty? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-    </tbody>
-  </table>
-</div>
+      <div class="table-responsive">
+        <table>
+          <% unless @block.template.caption.empty? %>
+            <caption><%= block_component_preview :caption %></caption>
+          <% end %>
+          <thead>
+            <tr>
+              <%= block_component_preview :columns %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @block.template.elements.each do |row| %>
+              <tr>
+                <%= block_component_preview :cells, template: row %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
