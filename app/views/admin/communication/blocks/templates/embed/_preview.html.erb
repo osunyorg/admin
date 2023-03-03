@@ -1,2 +1,37 @@
-<%= block_component_preview :code %>
-<%= block_component_preview :transcription %>
+<%
+  $class = "block block-definitions" 
+  unless @block.title.empty?
+    $class += " block-with-title"
+  end
+%>
+
+<section class="block block-embed{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.empty? && @block.template.description.empty? %>
+        <div class="top">
+          <% unless @block.title.empty? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.empty? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= block_component_preview :code %>
+      <div class="transcription">
+        <details>
+          <summary>Transcription</summary>
+          <p>
+            <%= block_component_preview :transcription %>
+          </p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
