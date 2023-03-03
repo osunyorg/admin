@@ -7,20 +7,18 @@ end
 <section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
-      <div class="top">
-        <% unless @block.title.empty? && @block.template.description.empty? %>
-          <div class="top">
-            <% unless @block.title.empty? %>
-              <h2><%= @block.title %></h2>
-            <% end %>
-            <% unless @block.template.description.empty? %>
-              <div class="description">
-                <p><%= block_component_preview :description %></p>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <% unless @block.title.empty? && @block.template.description.empty? %>
+        <div class="top">
+          <% unless @block.title.empty? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.empty? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
       <ul class="<%= @block.template.elements.count.even? ? "even-items" : "odd-items" %>">
         <% @block.template.elements.each do |element| %>
           <li>
