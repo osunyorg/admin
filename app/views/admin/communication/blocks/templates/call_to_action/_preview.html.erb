@@ -1,15 +1,27 @@
+<%
+$class = "block block-call_to_action" 
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+
+$image_class = "call_to_action--with" + (@block.template.image.empty? ? "out" : "") + "-image"
+
+%>
 <section class="block block-call_to_action">
   <div class="container">
     <div class="block-content">
-      <div class="call_to_action">
+      <div class="call_to_action <%= $image_class %>">
         <div>
+          <% unless @block.title.empty? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
           <% if @block.template.text %>
             <div class="description">
               <%= block_component_preview :text %>
             </div>
           <% end %>
-          <% if @block.template.elements%>
-            <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+          <% if @block.template.elements %>
+            <div class="actions" <% if @block.template.elements.count > 1 %>role="group"<% end %>>
               <% @block.template.elements.each do |element| %>
                 <% if element.title %>
                   <a href="<%= block_component_preview :url, template: element %>"
@@ -25,7 +37,10 @@
             </div>
           <% end %>
         </div>
-        <%= block_component_preview :image %>
+        <% component = @block.template.public_send "image_component" %>
+        <% if component.blob %>
+          <%= kamifusen_tag component.blob, width: 600, class: 'img-fluid mb-1', alt: @block.template.alt %>
+        <% end %>
       </div>
     </div>
   </div>
