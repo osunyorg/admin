@@ -1,10 +1,28 @@
-<section class="block block-gallery">
+<%
+$class = "block block-gallery" 
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+
+$class += " block-gallery--" + @block.template.layout
+%>
+
+<section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
       <div class="top">
-        <div class="description">
-          <%= block_component_preview :description %>
-        </div>
+        <% unless @block.title.empty? && @block.template.description.empty? %>
+          <div class="top">
+            <% unless @block.title.empty? %>
+              <h2><%= @block.title %></h2>
+            <% end %>
+            <% unless @block.template.description.empty? %>
+              <div class="description">
+                <p><%= block_component_preview :description %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <% if @block.template.layout ===  "carousel" %>
         <% if !@block.template.elements.one? %>
