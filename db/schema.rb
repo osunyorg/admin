@@ -93,6 +93,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_153945) do
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
+  create_table "communication_extranet_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "extranet_id", null: false
+    t.string "object_type"
+    t.uuid "object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_connections_on_extranet_id"
+    t.index ["object_type", "object_id"], name: "index_communication_extranet_connections_on_object"
+    t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
+  end
+
   create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
@@ -113,6 +125,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_153945) do
     t.text "cookies_policy"
     t.string "color"
     t.string "sso_button_label"
+    t.boolean "feature_alumni", default: false
+    t.boolean "feature_contacts", default: false
+    t.boolean "feature_assets", default: false
+    t.boolean "feature_posts", default: false
+    t.boolean "feature_jobs", default: false
+    t.text "home_sentence"
+    t.text "sass"
+    t.text "css"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -149,6 +169,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_153945) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.string "object_type", null: false
+    t.uuid "object_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
+    t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -932,6 +964,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_153945) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_blocks", "universities"
+  add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_connections", "universities"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "original_id"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
@@ -939,6 +973,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_153945) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"

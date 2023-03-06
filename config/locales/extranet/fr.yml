@@ -1,5 +1,6 @@
 fr:
   extranet:
+    features: Fonctionnalités
     account:
       my: Mon compte
       edit: Modifier mon compte
