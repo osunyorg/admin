@@ -25,6 +25,7 @@
 #  fk_rails_923d0b71fd  (university_id => universities.id)
 #
 class University::Person::Experience < ApplicationRecord
+  include Sanitizable
   include WithUniversity
 
   attr_accessor :organization_name

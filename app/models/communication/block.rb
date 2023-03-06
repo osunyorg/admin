@@ -29,6 +29,7 @@ class Communication::Block < ApplicationRecord
   include WithPosition
   include WithUniversity
   include WithWebsites
+  include Sanitizable
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes

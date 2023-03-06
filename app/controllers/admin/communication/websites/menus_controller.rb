@@ -14,6 +14,11 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
     breadcrumb
   end
 
+  def static
+    @about = @menu
+    render layout: false
+  end
+
   def new
     @menu.website = @website
     breadcrumb

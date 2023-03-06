@@ -46,6 +46,9 @@ namespace :communication do
       end
     end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do
+      member do
+        get :static
+      end
       resources :items, controller: 'websites/menus/items', except: :index do
         collection do
           get :kind_switch

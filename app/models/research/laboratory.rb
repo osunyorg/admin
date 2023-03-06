@@ -21,8 +21,9 @@
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
-  include WithGit
   include Aboutable
+  include Sanitizable
+  include WithGit
 
   belongs_to  :university
   has_many    :websites,

@@ -66,6 +66,8 @@ class Communication::Website < ApplicationRecord
   validates :languages, length: { minimum: 1 }
   validate :languages_must_include_default_language
 
+  before_validation :sanitize_fields
+
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
   scope :for_theme_version, -> (version) { where(theme_version: version) }
@@ -120,6 +122,15 @@ class Communication::Website < ApplicationRecord
   end
 
   protected
+
+  def sanitize_fields
+    self.git_branch = Osuny::Sanitizer.sanitize(self.git_branch, 'string')
+    self.git_endpoint = Osuny::Sanitizer.sanitize(self.git_endpoint, 'string')
+    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
+    self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
+    self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
+    self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
 
   def languages_must_include_default_language
     errors.add(:languages, :must_include_default) unless language_ids.include?(default_language_id)

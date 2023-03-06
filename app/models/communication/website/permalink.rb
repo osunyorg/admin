@@ -40,6 +40,7 @@ class Communication::Website::Permalink < ApplicationRecord
     "University::Person::Teacher" => Communication::Website::Permalink::Teacher
   }
 
+  # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
 
   belongs_to :university

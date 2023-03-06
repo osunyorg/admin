@@ -74,19 +74,6 @@
           </div>
         </div>
       <% end %>
-      <%= osuny_panel t('research.hal.title') do %>
-        <div class="row">
-          <div class="col-xxl-6">
-            <%= f.input :hal_doc_identifier %>
-          </div>
-          <div class="col-xxl-6">
-            <%= f.input :hal_person_identifier %>
-          </div>
-          <div class="col-xxl-6">
-            <%= f.input :hal_form_identifier %>
-          </div>
-        </div>
-      <% end if person.is_researcher? %>
       <%= osuny_panel University::Person.human_attribute_name('abilities') do %>
         <div class="row pure__row--small">
           <div class="col-xxl-6">
