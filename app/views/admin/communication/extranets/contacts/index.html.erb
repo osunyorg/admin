@@ -1,23 +1,69 @@
 <% content_for :title, Communication::Extranet.human_attribute_name(:feature_contacts) %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
-  Search
-  <table class="<%= table_classes%>">
-    <tbody>
-      <% @persons.each do |person| %>
-        <tr>
-          <td><%= link_to person, [:admin, person] %></td>
-          <td><%= link_to 'Déconnecter', 
-                          disconnect_admin_communication_extranet_contacts_path(
-                            extranet_id: @extranet.id, 
-                            objectId: person.id, 
-                            objectType: person.class
-                          ),
-                          class: button_classes_danger,
-                          method: :post %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @persons, theme: 'bootstrap-5' %>
+  <%= osuny_panel University::Person.model_name.human(count: 2) do %>
+    <table class="<%= table_classes%>">
+      <tbody>
+        <% @persons.each do |person| %>
+          <tr>
+            <td><%= link_to person, [:admin, person] %></td>
+            <td><%= person.email %></td>
+            <td>
+              <% if @extranet.connected?(person) %>
+                <%= link_to 'Déconnecter', 
+                                disconnect_admin_communication_extranet_contacts_path(
+                                  extranet_id: @extranet.id, 
+                                  objectId: person.id, 
+                                  objectType: person.class
+                                ),
+                                class: button_classes_danger,
+                                method: :post %>
+               <% else %>
+                <%= link_to 'Connecter', 
+                                connect_admin_communication_extranet_contacts_path(
+                                  extranet_id: @extranet.id, 
+                                  objectId: person.id, 
+                                  objectType: person.class
+                                ),
+                                class: button_classes,
+                                method: :post %>
+               <% end %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <%= osuny_panel University::Organization.model_name.human(count: 2) do %>
+    <table class="<%= table_classes%>">
+      <tbody>
+        <% @organizations.each do |organization| %>
+          <tr>
+            <td><%= link_to organization, [:admin, organization] %></td>
+            <td>
+              <% if @extranet.connected?(organization) %>
+                <%= link_to 'Déconnecter', 
+                                disconnect_admin_communication_extranet_contacts_path(
+                                  extranet_id: @extranet.id, 
+                                  objectId: organization.id, 
+                                  objectType: organization.class
+                                ),
+                                class: button_classes_danger,
+                                method: :post %>
+               <% else %>
+                <%= link_to 'Connecter', 
+                                connect_admin_communication_extranet_contacts_path(
+                                  extranet_id: @extranet.id, 
+                                  objectId: organization.id, 
+                                  objectType: organization.class
+                                ),
+                                class: button_classes,
+                                method: :post %>
+               <% end %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
