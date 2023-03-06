@@ -48,8 +48,8 @@ class Communication::Extranet < ApplicationRecord
   include WithConnections
   include WithFeatures
   include WithLegal
-  include WithStyle
   include WithSso
+  include WithStyle
   include WithUniversity
 
   has_one_attached_deletable :logo
