@@ -67,7 +67,12 @@ namespace :communication do
   end
   resources :extranets, controller: 'extranets' do
     resources :alumni, only: :index, controller: 'extranets/alumni'
-    resources :contacts, only: :index, controller: 'extranets/contacts'
+    resources :contacts, only: :index, controller: 'extranets/contacts' do
+      collection do
+        post :connect
+        post :disconnect
+      end
+    end
     resources :posts, only: :index, controller: 'extranets/posts'
     resources :assets, only: :index, controller: 'extranets/assets'
     resources :jobs, only: :index, controller: 'extranets/jobs'

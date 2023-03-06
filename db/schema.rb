@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_134627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -91,6 +91,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.boolean "published", default: true
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
+  end
+
+  create_table "communication_extranet_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "extranet_id", null: false
+    t.string "object_type"
+    t.uuid "object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_connections_on_extranet_id"
+    t.index ["object_type", "object_id"], name: "index_communication_extranet_connections_on_object"
+    t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
   end
 
   create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -950,6 +962,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_blocks", "universities"
+  add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_connections", "universities"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "original_id"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
