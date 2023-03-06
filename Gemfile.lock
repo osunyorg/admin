@@ -221,6 +221,7 @@ GEM
       js_cookie_rails
       rails
       sassc-rails
+    geocoder (1.8.1)
     gitlab (4.19.0)
       httparty (~> 0.20)
       terminal-table (>= 1.5.1)
@@ -559,6 +560,7 @@ DEPENDENCIES
   font-awesome-sass
   front_matter_parser
   gdpr
+  geocoder (~> 1.8)
   gitlab
   hal_openscience (~> 0.1)
   has_scope (~> 0.8.0)
