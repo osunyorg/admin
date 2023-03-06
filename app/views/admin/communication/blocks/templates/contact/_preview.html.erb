@@ -1,44 +1,65 @@
-<div class="description">
-  <%= block_component_preview :description %>
-</div>
+<%
+$class = "block block-contact" 
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+%>
 
-<div class="informations">
-  <address itemscope itemtype="https://schema.org/Organization">
-    <p><%= block_component_preview :name %></p>
-    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-      <span itemprop="streetAddress">
-        <% if @block.template.address.present? %>
-          <%= @block.template.address %><br>
-        <% end %>
-      </span>
-      <span itemprop="addressLocality">
-        <%= block_component_preview :city %>
-      </span>
-      <span itemprop="postalCode">
-        <%= block_component_preview :zipcode %>
-      </span>
-      <span itemprop="postalCode">
-        <%= block_component_preview :country %>
-      </span>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.empty? && @block.template.description.empty? %>
+        <div class="top">
+          <% unless @block.title.empty? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.empty? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="informations">
+        <address itemscope itemtype="https://schema.org/Organization">
+          <% unless @block.template.name.empty? %>
+            <p><%= block_component_preview :name %></p>
+          <% end %>
+          <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress">
+              <%= block_component_preview :address %>
+            </span>
+            <span itemprop="addressLocality">
+              <%= block_component_preview :city %>
+            </span>
+            <span itemprop="postalCode">
+              <%= block_component_preview :zipcode %>
+            </span>
+            <span itemprop="addressCountry">
+              <%= block_component_preview :country %>
+            </span>
+          </div>
+
+          <p>
+            <% @block.template.phone_numbers.each do |phone_number| %>
+              <a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a><br>
+            <% end %>
+            <% @block.template.emails.each do |email| %>
+              <a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a><br>
+            <% end %>
+          </p>
+        </address>
+        <ul>
+          <% @block.template.elements.each do |element| %>
+            <li>
+              <span><%= block_component_preview :title, template: element %></span>
+              <span><time datetime="<%= block_component_preview :time_slot_morning, template: element %>"><%= block_component_preview :time_slot_morning, template: element %></time></span>
+              <span><time datetime="<%= block_component_preview :time_slot_afternoon, template: element %>"><%= block_component_preview :time_slot_afternoon, template: element %></time></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-    <p>
-      <% @block.template.phone_numbers.each do |phone_number| %>
-        <a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a><br>
-      <% end %>
-      <% @block.template.emails.each do |email| %>
-        <a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a><br>
-      <% end %>
-    </p>
-  </address>
-     
-  <ul>
-      <% @block.template.elements.each do |element| %>
-        <li>
-          <span><%= block_component_preview :title, template: element %></span>
-          <span><time datetime="<%= block_component_preview :time_slot_morning, template: element %>"><%= block_component_preview :time_slot_morning, template: element %></time></span>
-          <span><time datetime="<%= block_component_preview :time_slot_afternoon, template: element %>"><%= block_component_preview :time_slot_afternoon, template: element %></time></span>
-        </li>
-      <% end %>
-  </ul>
-  
-</div>
+  </div>
+</section>
