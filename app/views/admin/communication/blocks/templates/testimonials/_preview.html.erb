@@ -1,43 +1,55 @@
-<section class="block block-testimonials">
-    <div class="container">
-      <div class="block-content">
-        <div class="testimonials">
-          <% if !@block.template.elements.one? %>
-            <div class="splide" 
-                data-splide='{
-                    "arrows":false,
-                    "autoplay":true,
-                    "pauseOnHover":false,
-                    "pauseOnFocus":true,
-                    "type":"loop",
-                    "autoHeight":true,
-                    "interval":8000
-                  }'
-                >
-              <div class="splide__slider">
-                <div class="splide__track">
-                  <div class="splide__list">
-          <% end %>
+<%
+  $class = "block block-testimonials" 
+  unless @block.title.empty?
+    $class += " block-with-title"
+  end
+  if !@block.template.elements.one?
+    $class += " with-carousel"
+  end
+%>
 
-          <% @block.template.elements.each do |element| %>
-            <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
-              <blockquote>
-                <p><%= block_component_preview :text, template: element %></p>
-              </blockquote>
-              <figcaption>
-                <% if element.photo  %>
-                  <div class="avatar">
-                    <%# <%= block_component_preview :photo, template: element %> %>
-                  </div>
-                <% end %>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <div class="testimonials">
+        <% if !@block.template.elements.one? %>
+          <div class="splide" 
+              data-splide='{
+                  "arrows":false,
+                  "autoplay":true,
+                  "pauseOnHover":false,
+                  "pauseOnFocus":true,
+                  "type":"loop",
+                  "autoHeight":true,
+                  "interval":8000
+                }'
+              >
+            <div class="splide__slider">
+              <div class="splide__track">
+                <div class="splide__list">
+        <% end %>
+
+        <% @block.template.elements.each do |element| %>
+          <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
+            <blockquote>
+              <p><%= block_component_preview :text, template: element %></p>
+            </blockquote>
+            <figcaption>
+              <% if element.photo  %>
+                <div class="avatar">
+                  <%#= block_component_preview :photo, template: element %>
+                </div>
+              <% end %>
+              <% if element.author %>
                 <span class="signature"><%= block_component_preview :author, template: element %></span>
-                <% if element.job %>
-                  <span class="meta"><%= block_component_preview :job, template: element %></span>
-                <% end %>
-              </figcaption>
-            </figure>
-          <% end %>
-          <% if !@block.template.elements.one? %>
+              <% end %>
+              <% if element.job %>
+                <span class="meta"><%= block_component_preview :job, template: element %></span>
+              <% end %>
+            </figcaption>
+          </figure>
+        <% end %>
+        <% if !@block.template.elements.one? %>
                 </div>
               </div>
             </div>
@@ -47,7 +59,7 @@
               <button class="splide__pause"></button>
             </div>
           </div>
-        <% end %>
+      <% end %>
       </div>
     </div>
   </div>
