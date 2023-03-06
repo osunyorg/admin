@@ -22,7 +22,7 @@
         <tr>
           <td><%= link_to organization, [:admin, organization] %></td>
           <td><%= link_to 'Déconnecter', 
-                          disconnect_admin_communication_website_page_path(@page, object_id: organization.id, object_type: organization.class),
+                          disconnect_admin_communication_website_page_path(@page, objectId: organization.id, objectType: organization.class),
                           class: button_classes_danger,
                           method: :post %></td>
         </tr>

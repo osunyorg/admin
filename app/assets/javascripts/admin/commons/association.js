@@ -10,8 +10,8 @@ $(function () {
                 type: 'POST',
                 url: target,
                 data: {
-                    object_id: id,
-                    object_type: type
+                    objectId: id,
+                    objectType: type
                 }
             }).done(function () {
                 location.reload();
