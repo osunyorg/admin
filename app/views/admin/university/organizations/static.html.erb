@@ -14,11 +14,13 @@ kind:
   :zipcode,
   :city,
   :country,
+  :latitude,
+  :longitude,
   :phone,
   :email,
   :twitter,
   :linkedin
-].each do |key| 
+].each do |key|
   value = @about.public_send key
 %>
 <%= key %>: >
