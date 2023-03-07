@@ -40,8 +40,6 @@ one:
   featured_image_credit: MyText
   slug: MyString
   summary: MyText
-  language: one
-  original: one
 
 two:
   title: MyString
@@ -54,5 +52,3 @@ two:
   featured_image_credit: MyText
   slug: MyString
   summary: MyText
-  language: two
-  original: two
