@@ -15,11 +15,11 @@ edit ||= false
     </div>
     <div class="col-md-6 text-end">
       <% if experience.organization.present? %>
-        <%= link_to experience.organization do %>
+        <%= link_to [:alumni, experience.organization] do %>
           <% if experience.organization.logo.attached? %>
             <%= kamifusen_tag experience.organization.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
           <% else %>
-            <p class="text-end><%= link_to experience.organization, experience.organization %></p>
+            <p class="text-end><%= link_to experience.organization, [:alumni, experience.organization] %></p>
           <% end %>
         <% end %>
       <div>

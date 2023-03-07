@@ -1,0 +1,17 @@
+<% content_for :title, University::Organization.model_name.human(count: 2) %>
+<% content_for :header_right do %>
+  <%= @count %>
+  <%= University::Organization.model_name.human(count: @count).downcase %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'faceted_search/facets', facets: @facets %>
+  </div>
+  <div class="offset-lg-1 col-lg-8">
+    <div class="organizations">
+      <%= render "extranet/alumni/organizations/list" %>
+    </div>
+    <%= paginate @organizations, theme: 'bootstrap-5', window: 2 %>
+  </div>
+</div>

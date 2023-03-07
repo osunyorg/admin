@@ -1,0 +1,14 @@
+<% content_for :title, University::Person.model_name.human(count: 2) %>
+<% content_for :header_right do %>
+  <%= @count %>
+  <%= University::Person.model_name.human(count: @count).downcase %>
+<% end %>
+
+<div class="row">
+  <% @people.each do |person| %>
+    <div class="col-xxl-2 col-md-3 col-sm-6">
+      <%= render 'extranet/contacts/persons/person', person: person %>
+    </div>
+  <% end %>
+</div>
+<%= paginate @people, theme: 'bootstrap-5', window: 2 %>

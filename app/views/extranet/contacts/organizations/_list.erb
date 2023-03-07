@@ -1,0 +1,12 @@
+<div class="row">
+<% @organizations.each do |organization| %>
+  <div class="col-md-3">
+    <div class="card">
+      <%= kamifusen_tag organization.logo, width: 400, class: 'img-fluid p-5' if organization.logo.attached? %>
+      <div class="card-body text-center">
+        <%= link_to organization, [:contacts, organization], class: 'stretched-link' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

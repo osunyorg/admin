@@ -16,4 +16,15 @@ module Communication::Extranet::WithConnections
   def disconnect(object)
     connections.where(university: university, object: object).destroy_all
   end
+
+  def connected_organizations
+    ids = connections.where(object_type: 'University::Organization').pluck(:object_id)
+    University::Organization.where(id: ids)
+  end
+
+  def connected_persons
+    ids = connections.where(object_type: 'University::Person').pluck(:object_id)
+    University::Person.where(id: ids)
+  end
+
 end

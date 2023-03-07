@@ -1,0 +1,30 @@
+<% content_for :title, Education::AcademicYear.model_name.human(count: 2) %>
+<% content_for :header_right do %>
+    <%= @count %>
+    <%= Education::AcademicYear.model_name.human(count: @count).downcase %>
+<% end %>
+
+<ul class="years">
+  <% @academic_years.each do |year| %>
+    <%
+    cohorts = year.cohorts_in_context(current_context.about)
+    alumni = year.alumni_in_context(current_context.about)
+    %>
+    <li class="row">
+      <div class="col-md-6">
+        <b>
+          <%= link_to year, [:alumni, year], class: 'stretched-link' %>
+        </b>
+      </div>
+      <div class="col-md-3 col-6">
+        <%= alumni.count %>
+        <%= University::Person::Alumnus.model_name.human(count: alumni.count).downcase %>
+      </div>
+      <div class="col-md-3 col-6 text-end">
+        <%= cohorts.count %>
+        <%= Education::Cohort.model_name.human(count: cohorts.count).downcase %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<%= paginate @academic_years, theme: 'bootstrap-5', window: 2 %>
