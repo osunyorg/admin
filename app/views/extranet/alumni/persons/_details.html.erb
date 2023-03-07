@@ -1,7 +1,7 @@
 <dl>
   <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
     <% next if person.public_send(attribute_name).blank? %>
-    <dt><%= University::Person.human_attribute_name(attribute_name) %> :</dt>
+    <dt><%= University::Person.human_attribute_name(attribute_name) %></dt>
     <dd>
       <a href="tel:<%= person.public_send(attribute_name) %>" target="_blank" rel="noreferrer">
         <%= person.public_send(attribute_name) %>
