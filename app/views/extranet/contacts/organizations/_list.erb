@@ -1,7 +1,7 @@
 <div class="row">
 <% @organizations.each do |organization| %>
   <div class="col-md-3">
-    <div class="position-relative">
+    <div class="position-relative mb-5">
       <%= kamifusen_tag organization.logo, 
                         width: 400, 
                         class: 'img-fluid organization__logo mb-2' if organization.logo.attached? %>
