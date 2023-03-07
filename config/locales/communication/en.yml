@@ -10,6 +10,10 @@ en:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/post:
+        one: Post
+        other: Posts
+        all: All posts
       communication/website:
         one: Website
         other: Websites
@@ -70,6 +74,15 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
+      communication/extranet/post:
+        author: Author
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        featured_image_credit: Credit
+        published: Published?
+        published_at: Publication date
+        slug: Slug
+        title: Title
       communication/website:
         about: About
         about_: Independent website

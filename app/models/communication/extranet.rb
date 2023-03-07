@@ -57,6 +57,8 @@ class Communication::Extranet < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
+  has_many :posts
+
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }

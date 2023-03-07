@@ -10,6 +10,10 @@ fr:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/post:
+        one: Actualité
+        other: Actualités
+        all: Toutes les actualités
       communication/website:
         one: Site Web
         other: Sites Web
@@ -70,6 +74,15 @@ fr:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         terms: Conditions d'utilisation
+      communication/extranet/post:
+        author: Auteur·rice
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        featured_image_credit: Crédit
+        published: Publié ?
+        published_at: Date de publication
+        slug: Identifiant
+        title: Titre
       communication/website:
         about: Sujet du site
         about_: Site indépendant
