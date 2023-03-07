@@ -1,3 +1,10 @@
+# Full :as names are useful for the resolution of links like [:alumni, cohort]
+namespace :contacts do
+  get 'organizations' => 'organizations#index', as: :university_organizations
+  get 'organizations/:id' => 'organizations#show', as: :university_organization
+  get 'persons' => 'persons#index', as: :university_persons
+  get 'persons/:id' => 'persons#show', as: :university_person
+end
 namespace :alumni do 
   get 'cohorts' => 'cohorts#index', as: :education_cohorts
   get 'cohorts/:id' => 'cohorts#show', as: :education_cohort

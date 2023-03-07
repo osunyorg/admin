@@ -1,0 +1,35 @@
+<% content_for :title, @organization %>
+
+<div class="row">
+  <div class="col-md-8 order-2 order-md-1">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="biography mb-5">
+          <%= sanitize @organization.text %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="offset-md-1 col-md-3 order-1 order-md-2">
+    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
+
+    <dl>
+        <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
+        <dd><%= @organization.kind_i18n %></dd>
+      <% if @organization.phone.present? %>
+        <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
+        <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
+      <% end %>
+      <% if @organization.email.present? %>
+        <dt><%= University::Organization.human_attribute_name(:email) %></dt>
+        <dd><a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer"><%= @organization.email %></a></dd>
+      <% end %>
+      <% if @organization.url.present? %>
+        <dt><%= University::Organization.human_attribute_name(:url) %></dt>
+        <dd>
+          <%= link_to @organization.url, @organization.url %>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+</div>
