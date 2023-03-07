@@ -24,8 +24,8 @@
       <% if @organization.url.present? %>
         <dt><%= University::Organization.human_attribute_name(:url) %></dt>
         <dd>
-          <a href="<%= social_twitter_to_url @organization.url %>" target="_blank" rel="noreferrer">
-            <%= social_twitter_to_s @organization.url %>
+          <a href="<%= social_website_to_url @organization.url %>" target="_blank" rel="noreferrer">
+            <%= social_website_to_s @organization.url %>
           </a>
         </dd>
       <% end %>
