@@ -1,19 +1,15 @@
 class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationController
   def index
-    @facets = University::Person::Alumnus::Facets.new params[:facets], {
-      model: about&.university_person_alumni.for_language_id(current_university.default_language_id),
-      about: about
-    }
-    @people = @facets.results
-                     .ordered
-                     .page(params[:page])
-                     .per(60)
+    @people = current_extranet.connected_persons
+                              .ordered
+                              .page(params[:page])
+                              .per(60)
     @count = @people.total_count
     breadcrumb
   end
 
   def show
-    @person = about.university_person_alumni.find(params[:id])
+    @person = current_extranet.connected_persons.find(params[:id])
     breadcrumb
   end
 
@@ -21,7 +17,7 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
 
   def breadcrumb
     super
-    add_breadcrumb University::Person.model_name.human(count: 2), alumni_university_persons_path
+    add_breadcrumb University::Person.model_name.human(count: 2), contacts_university_persons_path
     add_breadcrumb @person if @person
   end
 end

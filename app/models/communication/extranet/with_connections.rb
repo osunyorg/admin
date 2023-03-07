@@ -22,4 +22,9 @@ module Communication::Extranet::WithConnections
     University::Organization.where(id: ids)
   end
 
+  def connected_persons
+    ids = connections.where(object_type: 'University::Person').pluck(:object_id)
+    University::Person.where(id: ids)
+  end
+
 end
