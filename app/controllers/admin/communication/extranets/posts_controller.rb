@@ -12,6 +12,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def preview
+    # TODO faire une preview dans le bon contexte
     render layout: 'admin/layouts/preview'
   end
 

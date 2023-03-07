@@ -73,7 +73,11 @@ namespace :communication do
         post :disconnect
       end
     end
-    resources :posts, controller: 'extranets/posts'
+    resources :posts, controller: 'extranets/posts' do
+      member do
+        get :preview
+      end
+    end
     resources :assets, only: :index, controller: 'extranets/assets'
     resources :jobs, only: :index, controller: 'extranets/jobs'
   end

@@ -44,7 +44,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def update
     if @block.update(block_params)
-      @block.about.sync_with_git
+      sync_with_git_if_necessary
       redirect_to about_path,
                   notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
@@ -62,22 +62,36 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def destroy
     path = about_path
     @block.destroy
-    @block.about.sync_with_git
+    sync_with_git_if_necessary
     redirect_to path,
                 notice: t('admin.successfully_destroyed_html', model: @block.to_s)
   end
 
   protected
 
+  def sync_with_git_if_necessary
+    return unless @block.about.respond_to?(:sync_with_git)
+    @block.about.sync_with_git 
+  end
+
   def website_id
     params[:website_id] || @block.about&.website.id
+  rescue
+  end
+
+  def extranet_id
+    params[:extranet_id] || @block.about&.extranet.id
   rescue
   end
 
   def about_path
     # La formation ou la page concernée
     path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
-    path_method_options = { id: @block.about_id, website_id: website_id }
+    path_method_options = { 
+      id: @block.about_id, 
+      website_id: website_id,
+      extranet_id: extranet_id 
+    }
     path_method_options[:lang] = @block.about.language.iso_code if @block.about.respond_to?(:language)
     public_send path_method, **path_method_options
   end
