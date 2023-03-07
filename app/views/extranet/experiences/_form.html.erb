@@ -26,7 +26,7 @@
       <%= f.input :organization_name,
                   label: University::Organization.model_name.human,
                   as: :autocomplete,
-                  url: search_university_organizations_path,
+                  url: alumni_search_university_organizations_path,
                   placeholder: t("extranet.experiences.search_organization"),
                   input_html: {
                     data: {

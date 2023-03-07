@@ -3,7 +3,7 @@
   <% cohorts_paged.each do |cohort| %>
   <li>
     <h2>
-        <%= link_to cohort.program, cohort, class: 'stretched-link' %>
+        <%= link_to cohort.program, [:alumni, cohort], class: 'stretched-link' %>
         <%#= link_to cohort, cohort, class: 'stretched-link' %>
     </h2>
     <p>

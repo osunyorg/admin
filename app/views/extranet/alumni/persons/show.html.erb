@@ -10,10 +10,10 @@
       </div>
     </div>
     <p class="mb-4"><%= t('extranet.experiences.title') %></p>
-    <%= render 'extranet/persons/path', person: @person %>
+    <%= render 'extranet/alumni/persons/path', person: @person %>
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
-    <%= render 'extranet/persons/details', person: @person %>
+    <%= render 'extranet/alumni/persons/details', person: @person %>
   </div>
 </div>

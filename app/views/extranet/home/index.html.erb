@@ -6,12 +6,12 @@
     <% else %>
       <%# TODO i18n %>
       Bienvenue sur l’extranet <%= current_context %>. 
-      Retrouvez les <%= link_to University::Person::Alumnus.model_name.human(count: 2).downcase, university_persons_path %>, 
+      Retrouvez les <%= link_to University::Person::Alumnus.model_name.human(count: 2).downcase, alumni_university_persons_path %>, 
       <% if current_extranet.should_show_years? %>
-      recherchez par <%= link_to Education::AcademicYear.model_name.human(count: 2).downcase, education_academic_years_path %>, 
+      recherchez par <%= link_to Education::AcademicYear.model_name.human(count: 2).downcase, alumni_education_academic_years_path %>, 
       <% end %>
-      explorez les <%= link_to Education::Cohort.model_name.human(count: 2).downcase, education_cohorts_path %>,
-      découvrez les <%= link_to University::Organization.model_name.human(count: 2).downcase, university_organizations_path %>.
+      explorez les <%= link_to Education::Cohort.model_name.human(count: 2).downcase, alumni_education_cohorts_path %>,
+      découvrez les <%= link_to University::Organization.model_name.human(count: 2).downcase, alumni_university_organizations_path %>.
     <% end %>
   </h1>
 <% end %>
@@ -24,7 +24,7 @@
           <% @experiences.ordered.each do |experience| %>
           <li>
             <div>
-              <%= link_to experience.person, class: "stretched-link" do %>
+              <%= link_to [:alumni, experience.person], class: "stretched-link" do %>
                 <% if experience.person.best_picture.attached? %>
                   <%= kamifusen_tag experience.person.best_picture, width: 400, class: 'img-fluid', sizes: {
                         '(max-width: 576px)': '400px',
@@ -48,7 +48,7 @@
               </div>
               <% if experience.organization.present? %>
                 <% if experience.organization.logo.attached? %>
-                    <%= link_to experience.organization do %>
+                    <%= link_to [:alumni, experience.organization] do %>
                       <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
                     <% end %>
                 <% end %>
@@ -66,7 +66,7 @@
     <ul class="promotions">
       <% @cohorts.each do |cohort| %>
         <li>
-          <%= link_to cohort.program.to_short_s, cohort %>
+          <%= link_to cohort.program.to_short_s, [:alumni, cohort] %>
           <b><%= cohort.academic_year %></b>
         </li>
       <% end %>

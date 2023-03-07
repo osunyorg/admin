@@ -1,4 +1,4 @@
-class Extranet::AcademicYearsController < Extranet::ApplicationController
+class Extranet::Alumni::AcademicYearsController < Extranet::Alumni::ApplicationController
   def index
     @academic_years = about&.education_academic_years
                             .ordered
@@ -19,7 +19,7 @@ class Extranet::AcademicYearsController < Extranet::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb Education::AcademicYear.model_name.human(count: 2), education_academic_years_path
+    add_breadcrumb Education::AcademicYear.model_name.human(count: 2), alumni_education_academic_years_path
     add_breadcrumb @academic_year if @academic_year
   end
 end

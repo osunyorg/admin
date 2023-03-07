@@ -1,6 +1,6 @@
 <% @organizations.each do |organization| %>
   <div class="organization">
-    <p class="mb-0"><%= link_to organization, organization %></p>
+    <p class="mb-0"><%= link_to organization, [:alumni, organization] %></p>
     <% if organization.url %>
       <p class="mb-0 mt-n1"><small><%= link_to organization.url, organization.url %></small></p>
     <% end %>

@@ -1,4 +1,4 @@
-class Extranet::OrganizationsController < Extranet::ApplicationController
+class Extranet::Alumni::OrganizationsController < Extranet::Alumni::ApplicationController
   def index
     @facets = University::Organization::Facets.new params[:facets], {
       model: about&.university_person_alumni_organizations,
@@ -28,7 +28,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb University::Organization.model_name.human(count: 2), university_organizations_path
+    add_breadcrumb University::Organization.model_name.human(count: 2), alumni_university_organizations_path
     add_breadcrumb @organization if @organization
   end
 end
