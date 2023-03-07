@@ -1,0 +1,7 @@
+<% content_for :title, @post %>
+
+<% content_for :header_right do %>
+  <% if @post.featured_image.attached? %>
+    <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
+  <% end %>
+<% end %>

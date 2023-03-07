@@ -1,10 +1,11 @@
 # Full :as names are useful for the resolution of links like [:alumni, cohort]
 namespace :contacts do
-  get 'search' => 'search#index', as: :search
-  get 'organizations' => 'organizations#index', as: :university_organizations
-  get 'organizations/:id' => 'organizations#show', as: :university_organization
   get 'persons' => 'persons#index', as: :university_persons
   get 'persons/:id' => 'persons#show', as: :university_person
+  get 'organizations' => 'organizations#index', as: :university_organizations
+  get 'organizations/:id' => 'organizations#show', as: :university_organization
+  get 'search' => 'search#index', as: :search
+  root to: 'persons#index'
 end
 namespace :alumni do 
   get 'cohorts' => 'cohorts#index', as: :education_cohorts
@@ -16,6 +17,11 @@ namespace :alumni do
   get 'persons/:id' => 'persons#show', as: :university_person
   get 'years' => 'academic_years#index', as: :education_academic_years
   get 'years/:id' => 'academic_years#show', as: :education_academic_year
+  root to: 'persons#index'
+end
+namespace :posts do
+  get ':slug' => 'posts#show', as: :communication_extranet_post
+  root to: 'posts#index'
 end
 get 'account' => 'account#show', as: :account
 get 'account/edit' => 'account#edit', as: :edit_account
