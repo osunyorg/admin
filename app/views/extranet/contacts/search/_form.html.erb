@@ -1,0 +1,14 @@
+<%= simple_form_for :contacts, url: contacts_search_path, method: :get do |f| %>
+  <div class="row g-3">
+    <div class="col">
+      <input  class="form-control form-control-lg" 
+              placeholder="Entrez votre recherche ici"
+              type="text"
+              name="term"
+              value="<%= @term %>">
+    </div>
+    <div class="col-auto">
+      <input type="submit" name="commit" value="Chercher" class="btn btn-primary btn-lg">
+    </div>
+  </div>
+<% end %>

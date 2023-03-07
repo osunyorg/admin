@@ -1,9 +1,13 @@
-<% people_paged = people.ordered.page(params[:page]).per(60) %>
-<div class="row">
-  <% people_paged.each do |person| %>
-    <div class="col-md-2">
-      <%= render 'extranet/alumni/persons/person', person: person %>
-    </div>
-  <% end %>
-</div>
-<%= paginate people_paged, theme: 'bootstrap-5' %>
+<% if people.any? %>
+  <% people_paged = people.ordered.page(params[:page]).per(60) %>
+  <div class="row">
+    <% people_paged.each do |person| %>
+      <div class="col-md-2">
+        <%= render 'extranet/alumni/persons/person', person: person %>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate people_paged, theme: 'bootstrap-5' %>
+<% else %>
+  <p>Pas de résultat</p>
+<% end %>
