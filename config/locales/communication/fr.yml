@@ -54,7 +54,7 @@ fr:
         favicon: Favicon (.png)
         feature_alumni: Alumni
         feature_assets: Gestion de fichiers
-        feature_contacts: Répertoire
+        feature_contacts: Annuaire
         feature_posts: Actualités
         feature_jobs: Offres d'emploi
         has_sso: A un SSO ?
