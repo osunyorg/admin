@@ -1,8 +1,21 @@
-<figure>
-  <%= block_component_preview :image %>
-  <figcaption>
-      <p><%= block_component_preview :alt %></p>
-      <p><%= block_component_preview :text %></p>
-      <p><small><%= block_component_preview :credit %></small></p>
-  </figcaption>
-</figure>
+<%
+$class = "block block-image" 
+
+unless @block.title.empty?
+  $class += " block-with-title"
+end
+%>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.empty? %>
+        <div class="top">
+          <h2><%= @block.title %></h2>
+        </div>
+      <% end %>
+      <% if @block.template.image %>
+        <%= block_component_preview :image %>
+      <% end %>
+    </div>
+  </div>
+</section>
