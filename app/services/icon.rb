@@ -20,7 +20,7 @@ class Icon
   COMMUNICATION_EXTRANET_CONTACTS = 'fas fa-address-book'
   COMMUNICATION_EXTRANET_POSTS = 'fas fa-newspaper'
   COMMUNICATION_EXTRANET_JOBS = 'fas fa-code-branch'
-  COMMUNICATION_EXTRANET_ASSETS = 'fas fa-file'
+  COMMUNICATION_EXTRANET_FILES = 'fas fa-file'
   COMMUNICATION_NEWSLETTERS = 'fas fa-message'
 
   EDUCATION_DIPLOMA = 'fas fa-graduation-cap'

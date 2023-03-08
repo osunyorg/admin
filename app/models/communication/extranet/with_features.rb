@@ -6,7 +6,7 @@ module Communication::Extranet::WithFeatures
       :alumni,
       :contacts,
       :posts,
-      :assets,
+      :files,
       :jobs,
     ]
   end

@@ -78,8 +78,8 @@ namespace :communication do
         get :preview
       end
     end
-    resources :assets, only: :index, controller: 'extranets/assets'
-    resources :jobs, only: :index, controller: 'extranets/jobs'
+    resources :files, controller: 'extranets/files'
+    resources :jobs, controller: 'extranets/jobs'
   end
   resources :alumni do
     collection do
