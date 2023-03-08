@@ -2,13 +2,13 @@
   <div class="row g-3">
     <div class="col">
       <input  class="form-control form-control-lg" 
-              placeholder="Entrez votre recherche ici"
+              placeholder="<%= t 'extranet.contacts.search.placeholder' %>"
               type="text"
               name="term"
               value="<%= @term %>">
     </div>
     <div class="col-auto">
-      <input type="submit" name="commit" value="Chercher" class="btn btn-primary btn-lg">
+      <input type="submit" value="<%= t 'extranet.contacts.search.submit' %>" class="btn btn-primary btn-lg">
     </div>
   </div>
 <% end %>

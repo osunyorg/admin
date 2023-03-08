@@ -7,6 +7,11 @@ fr:
       edit_personal_data: Modifier mon profil
       updated: Mise à jour effectuée
       logout: Déconnexion
+    contacts:
+      search:
+        title: Recherche
+        placeholder: Entrez votre recherche ici
+        submit: Chercher
     data: Informations
     errors:
       email_not_allowed: n'est pas autorisé à accéder à cet extranet.
@@ -18,6 +23,7 @@ fr:
     home:
       recent_cohorts: Promotions récentes
       recent_experiences: Mouvements récents
+      welcome: Bienvenue !
     menu: Menu
     organization:
       experiences: Alumni dans cette organisation (%{count})
