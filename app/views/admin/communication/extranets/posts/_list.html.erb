@@ -25,7 +25,7 @@
                           edit_admin_communication_extranet_post_path(website_id: post.extranet.id, id: post.id),
                           class: button_classes if can?(:update, post) %>
               <%= link_to t('delete'),
-                          admin_communication_extranet_post_path(website_id: post.extranet.id, id: post.id),
+                          admin_communication_extranet_post_path(extranet_id: post.extranet.id, id: post.id),
                           method: :delete,
                           data: { confirm: t('please_confirm') },
                           class: button_classes_danger if can?(:destroy, post) %>

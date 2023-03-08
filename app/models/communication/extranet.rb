@@ -58,6 +58,7 @@ class Communication::Extranet < ApplicationRecord
   end
 
   has_many :posts
+  has_many :files
 
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }

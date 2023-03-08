@@ -22,6 +22,22 @@
 #  fk_rails_af877a8c0c  (university_id => universities.id)
 #
 class Communication::Extranet::File < ApplicationRecord
-  belongs_to :university
-  belongs_to :extranet
+  include Sanitizable
+  include WithUniversity
+
+  belongs_to :extranet, class_name: 'Communication::Extranet'
+
+  validates :name, presence: true
+
+  before_validation :set_published_at
+
+  def to_s
+    "#{name}"
+  end
+
+  protected
+
+  def set_published_at
+    self.published_at = Time.zone.now if published && published_at.nil?
+  end
 end

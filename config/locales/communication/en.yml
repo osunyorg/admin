@@ -12,6 +12,9 @@ en:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/file:
+        one: File
+        other: Files
       communication/extranet/post:
         one: Post
         other: Posts
@@ -76,6 +79,10 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
+      communication/extranet/file:
+        name: Name
+        published: Published?
+        published_at: Publication date
       communication/extranet/post:
         author: Author
         featured_image: Featured image
