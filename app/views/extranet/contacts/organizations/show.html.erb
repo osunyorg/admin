@@ -13,6 +13,8 @@
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
     <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
     <dl>
+      <dt><%= University::Organization.human_attribute_name(:address) %></dt>
+      <dd><%= sanitize @organization.full_address %></dd>
       <% if @organization.phone.present? %>
         <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
         <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
@@ -28,6 +30,20 @@
             <%= social_website_to_s @organization.url %>
           </a>
         </dd>
+      <% end %>
+      <% if @organization.geolocated? %>
+        <dt><%= University::Organization.human_attribute_name(:map) %></dt>
+        <dl><%= map(
+              center: {
+                latlng: @organization.latlong,
+                zoom: 15
+              },
+              markers: [
+                {
+                  latlng: @organization.latlong
+                }
+              ]
+          ) %></dl>
       <% end %>
     </dl>
   </div>

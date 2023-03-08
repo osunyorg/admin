@@ -7,21 +7,40 @@
       <%= @organization.text.to_s.html_safe %>
     <% end if strip_tags(@organization.text.to_s).present? %>
 
-    <%= osuny_panel University::Organization.human_attribute_name('contact') do %>
+    <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
       <div class="row pure__row--small">
-        <% [
-          :address,
+        <div class="col-xxl-6">
+          <% [
+              :address_name,
+              :address,
+              :address_additional,
+            ].each do |property| %>
+            <% value = @organization.send property %>
+            <% next if value.blank? %>
+              <%= osuny_label University::Organization.human_attribute_name(property) %>
+              <p><%= value %></p>
+            <% end %>
+        </div>
+        <div class="col-xxl-6">
+          <% [
               :zipcode,
               :city,
-              :country
+              :country,
             ].each do |property| %>
-          <% value = @organization.send property %>
-          <% next if value.blank? %>
-          <div class="col-xxl-6">
-            <%= osuny_label University::Organization.human_attribute_name(property) %>
-            <p><%= value %></p>
-          </div>
-        <% end %>
+            <% value = @organization.send property %>
+            <% next if value.blank? %>
+              <%= osuny_label University::Organization.human_attribute_name(property) %>
+              <p><%= value %></p>
+          <% end %>
+        </div>
+      </div>
+      <% if @organization.geolocated? %>
+        <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
+        <p><%= @organization.geo_point.to_s %></p>
+      <% end %>
+    <% end %>
+    <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
+      <div class="row pure__row--small">
         <% unless @organization.url.blank? %>
           <div class="col-xxl-6">
             <%= osuny_label University::Organization.human_attribute_name('url') %>
@@ -46,6 +65,7 @@
         <% end %>
       </div>
     <% end %>
+
 
     <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
       <div class="row pure__row--small">
