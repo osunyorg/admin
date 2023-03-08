@@ -446,6 +446,13 @@ en:
                 title: Layout options
           partners:
             description: A list of organizations with logo, name and website.
+            layouts:
+              grid:
+                label: Grid
+                description: Square logos and a simple text below.
+              map:
+                label: Map
+                description: A geographic map, with a pin for every organization with a known location.
             edit:
               add_partner: Add organization
               alphabetical:
