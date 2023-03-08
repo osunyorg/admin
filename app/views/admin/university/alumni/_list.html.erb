@@ -17,10 +17,7 @@
           <td><%= link_to_if can?(:read, alumnus), alumnus.first_name, path %></td>
           <td><%= link_to_if can?(:update, alumnus), alumnus.cohorts.size, cohorts_admin_university_alumnus_path(alumnus) %></td>
           <td><%= link_to_if can?(:update, alumnus), alumnus.experiences.size, experiences_admin_university_alumnus_path(alumnus) %></td>
-          <td class="p-0">
-            <%= kamifusen_tag alumnus.best_picture,
-                              width: 40 if alumnus.best_picture.attached? %>
-          </td>
+          <td><%= kamifusen_tag alumnus.best_picture, width: 80 if alumnus.best_picture.attached? %></td>
         </tr>
       <% end %>
     </tbody>

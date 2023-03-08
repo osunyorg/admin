@@ -3,11 +3,11 @@
     <div class="col-lg-4">
       <div class="position-relative mt-5">
         <% if post.featured_image.attached? && post.featured_image.representable? %>
-          <%= image_tag post.featured_image.variant(resize_to_fill: [800, 500]), class: 'img-fluid' %>
+          <%= kamifusen_tag post.featured_image, width: 800, height: 500, class: 'img-fluid' %>
         <% end %>
         <p class="mt-2">
           <b><%= post %></b><br>
-          <span class="text-muted"><%= l post.published_at %><span>
+          <span class="text-muted"><%= l post.published_at.to_date %><span>
         </p>
         <%= link_to t('extranet.posts.read_post'), posts_communication_extranet_post_path(post.slug), class: ' btn btn-outline-primary stretched-link' %>
       </div>
