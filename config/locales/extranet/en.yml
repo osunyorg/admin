@@ -9,6 +9,7 @@ en:
       logout: Log out
     contacts:
       search:
+        home: Search in directory
         title: Search
         placeholder: Type your search here
         submit: Search
@@ -33,3 +34,5 @@ en:
       edit: Edit
       title: My personal data
       updated: Your personal data has been updated!
+    posts:
+      home: Recent posts

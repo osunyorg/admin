@@ -9,6 +9,7 @@
   </h1>
 <% end %>
 
+<%= render 'extranet/home/features/posts' if current_extranet.feature_posts %>
 <%= render 'extranet/home/features/alumni' if current_extranet.feature_alumni %>
 <%= render 'extranet/home/features/contacts' if current_extranet.feature_contacts %>
 

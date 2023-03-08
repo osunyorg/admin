@@ -9,6 +9,7 @@ fr:
       logout: Déconnexion
     contacts:
       search:
+        home: Chercher dans l'annuaire
         title: Recherche
         placeholder: Entrez votre recherche ici
         submit: Chercher
@@ -33,3 +34,5 @@ fr:
       edit: Modifier
       title: Mes données personnelles
       updated: Mise à jour des donnes personnelles effectuée !
+    posts:
+      home: Actualités récentes
