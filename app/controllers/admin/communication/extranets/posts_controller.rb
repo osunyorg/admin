@@ -3,7 +3,6 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
 
   def index
     breadcrumb
-    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_posts)
   end
 
   def show
@@ -35,7 +34,6 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
     if @post.save
       redirect_to admin_communication_extranet_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
-      load_categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -46,7 +44,6 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
     if @post.update(post_params)
       redirect_to admin_communication_extranet_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
-      load_categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -62,8 +59,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Extranet::Post.model_name.human(count: 2),
-                    admin_communication_extranet_posts_path
+    add_breadcrumb Communication::Extranet::Post.model_name.human(count: 2), admin_communication_extranet_posts_path
     breadcrumb_for @post
   end
 
