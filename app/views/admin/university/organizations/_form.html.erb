@@ -13,20 +13,22 @@
                       data: { 'summernote-config' => 'mini-list' }
                     } %>
       <% end %>
-      <%= osuny_panel University::Organization.human_attribute_name('contact') do %>
+      <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
         <div class="row pure__row--small">
           <div class="col-xl-6">
+            <%= f.input :address_name %>
             <%= f.input :address %>
+            <%= f.input :address_additional %>
           </div>
           <div class="col-xl-6">
             <%= f.input :zipcode %>
-          </div>
-          <div class="col-xl-6">
             <%= f.input :city %>
-          </div>
-          <div class="col-xl-6">
             <%= f.input :country, input_html: { class: 'form-select' } %>
           </div>
+        </div>
+      <% end %>
+      <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
+        <div class="row pure__row--small">
           <div class="col-xl-6">
             <%= f.input :url %>
           </div>

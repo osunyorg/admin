@@ -85,11 +85,13 @@ en:
         target_id: ''
       university/organization:
         address: Address
+        address_name: Address name
+        address_additional: Additional address
         city: City
-        contact: Contact information
         country: Country
-        email: Email
         description: Personne morale liée à une université, une composante, un laboratoire, etc.
+        digital: Digital contact
+        email: Email
         kind: Kind
         legal: Legal information
         linkedin: LinkedIn
@@ -98,6 +100,7 @@ en:
         long_name: Long name
         name: Name
         phone: Telephone
+        physical: Contact information
         siren: Legal identification number
         text: Text
         twitter: Twitter
@@ -140,9 +143,15 @@ en:
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
       university_organization:
+        address: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+        address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'
+        address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
+        city: 'This field is used for geolocation. Ex: Cenon'
+        country: 'This field is used for geolocation. Ex: France'
         description: If this field is empty the main text's begining will be used.
         logo: This logo should contrast properly on a light bacgkground (white or pale grey)
         logo_on_dark_background: This logo should contrast on a dark background (black or dark grey)
+        zipcode: 'This field is used for geolocation. Ex: 33150'
       university_person:
         description: If this field is empty, "short description" field will be used. If also emty the main text's begining will be used.
         habilitation: "Possesses an accreditation to supervise research."
