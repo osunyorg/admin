@@ -1,11 +1,15 @@
-<div class="row">
+<div class="row mt-n5">
   <% posts.each do |post| %>
     <div class="col-lg-4">
-      <div class="position-relative">
-        <% if post.featured_image.attached? && post.featured_image.analyzed? && post.featured_image.representable? %>
-          <%= kamifusen_tag post.featured_image.variant(resize_to_fill: [800, 500]), class: 'img-fluid' %>
+      <div class="position-relative mt-5">
+        <% if post.featured_image.attached? && post.featured_image.representable? %>
+          <%= image_tag post.featured_image.variant(resize_to_fill: [800, 500]), class: 'img-fluid' %>
         <% end %>
-        <%= link_to post, posts_communication_extranet_post_path(post.slug), class: 'stretched-link' %>
+        <p class="mt-2">
+          <b><%= post %></b><br>
+          <span class="text-muted"><%= l post.published_at %><span>
+        </p>
+        <%= link_to t('extranet.posts.read_post'), posts_communication_extranet_post_path(post.slug), class: ' btn btn-outline-primary stretched-link' %>
       </div>
     </div>
   <% end %>
