@@ -36,7 +36,7 @@ class Communication::Extranet::Post < ApplicationRecord
   include WithPermalink
   include WithSlug
 
-  belongs_to :author, class_name: 'University::Person'
+  belongs_to :author, class_name: 'University::Person', optional: true
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
   validates :title, presence: true
