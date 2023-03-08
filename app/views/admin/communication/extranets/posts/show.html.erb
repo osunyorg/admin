@@ -10,7 +10,7 @@
       <%
       action = ''
       action += link_to t('open'),
-                        '',
+                        posts_communication_extranet_post_url(@post.slug, host: @post.extranet.url, extranet_id: nil),
                         target: :_blank,
                         class: 'btn btn-light btn-xs' if @post.published
       %>
