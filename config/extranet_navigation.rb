@@ -4,8 +4,11 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
   navigation.items do |primary|
-    primary.item  :contacts,
-                  Communication::Extranet.human_attribute_name(:feature_contacts) do |secondary|
+    primary.item      :posts,
+                      Communication::Extranet.human_attribute_name(:feature_posts),
+                      posts_root_path if current_extranet.feature_posts
+
+    primary.item :contacts, Communication::Extranet.human_attribute_name(:feature_contacts) do |secondary|
       secondary.item  :person,
                       University::Person.model_name.human(count: 2),
                       contacts_university_persons_path
@@ -13,8 +16,8 @@ SimpleNavigation::Configuration.run do |navigation|
                       University::Organization.model_name.human(count: 2),
                       contacts_university_organizations_path
     end if current_extranet.feature_contacts?
-    primary.item  :alumni, 
-                  University::Person::Alumnus.model_name.human(count: 2) do |secondary|
+
+    primary.item :alumni, University::Person::Alumnus.model_name.human(count: 2) do |secondary|
       secondary.item  :person,
                       University::Person.model_name.human(count: 2),
                       alumni_university_persons_path

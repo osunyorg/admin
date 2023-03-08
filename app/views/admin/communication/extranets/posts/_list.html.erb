@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th class="ps-0" width="60%"><%= Communication::Extranet::Post.human_attribute_name('title') %></th>
+        <th><%= Communication::Extranet::Post.human_attribute_name('featured_image') %></th>
+        <th colspan="2" class="ps-3"><%= Communication::Extranet::Post.human_attribute_name('meta') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% posts.each do |post| %>
+        <tr <% unless post.published? %>class="draft"<% end %>>
+          <td class="ps-0"><%= link_to post,
+                          admin_communication_extranet_post_path(extranet_id: post.extranet.id, id: post.id),
+                          class: "#{'draft' unless post.published?}" %></td>
+          <td><%= image_tag post.featured_image.representation(resize: '200x'),
+                                            width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          <td class="ps-3 small">
+            <%= l post.published_at, format: :date_with_explicit_month if post.published_at %><br>
+            <%= post.author %>
+          </td>
+          <td>
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_communication_extranet_post_path(website_id: post.extranet.id, id: post.id),
+                          class: button_classes if can?(:update, post) %>
+              <%= link_to t('delete'),
+                          admin_communication_extranet_post_path(website_id: post.extranet.id, id: post.id),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, post) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
