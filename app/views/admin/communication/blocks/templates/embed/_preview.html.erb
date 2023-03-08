@@ -14,16 +14,19 @@
         </div>
       <% end %>
 
-      <%= block_component_preview :code %>
+      <%= raw @block.template.code %>
+      <%# <%= block_component_preview :code %> <%# ça ne fonctionne pas %>
 
-      <div class="transcription">
-        <details>
-          <summary>Transcription</summary>
-          <p>
-            <%= block_component_preview :transcription %>
-          </p>
-        </details>
-      </div>
+      <% unless @block.template.transcription.empty? %>
+        <div class="transcription">
+          <details>
+            <summary>Transcription</summary>
+            <p>
+              <%= block_component_preview :transcription %>
+            </p>
+          </details>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
