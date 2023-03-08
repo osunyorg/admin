@@ -221,6 +221,20 @@ GEM
       js_cookie_rails
       rails
       sassc-rails
+    geo_calc (0.7.8)
+      activesupport (>= 3.0.1)
+      geo_units (~> 0.3.2)
+      i18n (>= 0.5)
+      require_all (>= 1.2.0)
+      sugar-high (~> 0.7.2)
+      sweetloader
+    geo_point (0.2.6)
+      geo_calc (>= 0.7.7.1)
+    geo_units (0.3.4)
+      activesupport (>= 4)
+      i18n (>= 0.8)
+      sugar-high (~> 0.7.2)
+      sweetloader (~> 0.1.6)
     geocoder (1.8.1)
     gitlab (4.19.0)
       httparty (~> 0.20)
@@ -277,6 +291,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    leaflet-rails (1.9.3)
+      rails (>= 4.2.0)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -408,6 +424,7 @@ GEM
       ffi (~> 1.0)
     regexp_parser (2.7.0)
     requests (1.0.2)
+    require_all (3.0.0)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -479,6 +496,10 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     stringio (3.0.5)
+    sugar-high (0.7.3)
+    sweetloader (0.1.6)
+      activesupport (>= 3.0.1)
+      i18n
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.2.1)
@@ -560,6 +581,7 @@ DEPENDENCIES
   font-awesome-sass
   front_matter_parser
   gdpr
+  geo_point
   geocoder (~> 1.8)
   gitlab
   hal_openscience (~> 0.1)
@@ -571,6 +593,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 6.0.1)
   kamifusen
   kaminari
+  leaflet-rails
   listen (~> 3.3)
   mini_magick
   octokit

@@ -10,6 +10,7 @@
 //= require simple_form_bs5_file_input
 //= require summernote/summernote-bs5
 //= require gdpr/cookie_consent
+//= require leaflet
 //= require autocomplete-rails
 //= require_tree ./application/plugins
 //= require_tree ./extranet

@@ -34,6 +34,10 @@
           <% end %>
         </div>
       </div>
+      <% if @organization.geolocated? %>
+        <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
+        <p><%= @organization.geo_point.to_s %></p>
+      <% end %>
     <% end %>
     <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
       <div class="row pure__row--small">

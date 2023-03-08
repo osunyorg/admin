@@ -93,11 +93,13 @@ fr:
         digital: Coordonnées numériques
         email: Email
         kind: Type
+        geolocation: Coordonnées géographiques
         legal: Informations légales
         linkedin: LinkedIn
         logo: Logo sur fond clair (par défaut)
         logo_on_dark_background: Logo sur fond sombre (optionnel)
         long_name: Nom complet
+        map: Carte
         name: Nom
         phone: Téléphone
         physical: Coordonnées physiques

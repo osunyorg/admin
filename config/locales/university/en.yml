@@ -92,12 +92,14 @@ en:
         description: Personne morale liée à une université, une composante, un laboratoire, etc.
         digital: Digital contact
         email: Email
+        geolocation: Geographical coordinates
         kind: Kind
         legal: Legal information
         linkedin: LinkedIn
         logo: Logo for light backgrounds (default)
         logo_on_dark_background: Logo for dark backgrounds (optional)
         long_name: Long name
+        map: Map
         name: Name
         phone: Telephone
         physical: Contact information
