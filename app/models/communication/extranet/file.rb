@@ -23,24 +23,14 @@
 #
 class Communication::Extranet::File < ApplicationRecord
   include Sanitizable
+  include WithPublication
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
   validates :name, presence: true
 
-  before_validation :set_published_at
-
-  scope :published, -> { where(published: true) }
-  scope :ordered, -> { order(published_at: :desc) }
-
   def to_s
     "#{name}"
-  end
-
-  protected
-
-  def set_published_at
-    self.published_at = Time.zone.now if published && published_at.nil?
   end
 end

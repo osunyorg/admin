@@ -3,19 +3,21 @@
     <thead>
       <tr>
         <th class="ps-0" width="60%"><%= Communication::Extranet::File.human_attribute_name('name') %></th>
+        <th class="ps-3"><%= Communication::Extranet::File.human_attribute_name('published') %></th>
         <th colspan="2" class="ps-3"><%= Communication::Extranet::File.human_attribute_name('meta') %></th>
       </tr>
     </thead>
     <tbody>
       <% files.each do |file| %>
-        <tr <% unless file.published? %>class="draft"<% end %>>
+        <tr <% if file.draft? %>class="draft"<% end %>>
           <td class="ps-0">
             <%= link_to file,
                         admin_communication_extranet_file_path(extranet_id: file.extranet.id, id: file.id),
                         class: "#{'draft' unless file.published?}" %>
           </td>
           <td class="ps-3 small">
-            <%= l file.published_at, format: :date_with_explicit_month if file.published_at %><br>
+            <%= t file.published %>, 
+            <%= l file.published_at, format: :date_with_explicit_month if file.published_at %>
           </td>
           <td>
             <div class="btn-group" role="group">

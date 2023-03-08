@@ -4,6 +4,7 @@
       <tr>
         <th class="ps-0" width="60%"><%= Communication::Extranet::Post.human_attribute_name('title') %></th>
         <th><%= Communication::Extranet::Post.human_attribute_name('featured_image') %></th>
+        <th class="ps-3"><%= Communication::Extranet::Post.human_attribute_name('published') %></th>
         <th colspan="2" class="ps-3"><%= Communication::Extranet::Post.human_attribute_name('meta') %></th>
       </tr>
     </thead>
@@ -16,6 +17,7 @@
           <td><%= image_tag post.featured_image.representation(resize: '200x'),
                                             width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
           <td class="ps-3 small">
+            <%= t post.published %>, 
             <%= l post.published_at, format: :date_with_explicit_month if post.published_at %><br>
             <%= post.author %>
           </td>

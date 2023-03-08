@@ -1,3 +1,3 @@
-<% content_for :title, Communication::Extranet::File.model_name.human(count: 2) %>
+<% content_for :title, Communication::Extranet.human_attribute_name(:feature_files) %>
 
 <%= render 'extranet/files/files/list', files: @files %>
