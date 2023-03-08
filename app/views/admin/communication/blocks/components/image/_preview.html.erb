@@ -6,7 +6,6 @@ return unless blob
 <figure>
   <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1', alt: component.template.alt %>
   <figcaption>
-    <%#= sanitize component.template.text if component.template.try(:text).present? %>
     <%= sanitize component.template.credit if component.template.try(:credit).present? %>
   </figcaption>
 </figure>
