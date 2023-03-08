@@ -446,6 +446,13 @@ fr:
                 title: Options d'affichage
           partners:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
+            layouts:
+              grid:
+                label: Grille
+                description: Une série de logos carrés, avec le nom de chaque organisation.
+              map:
+                label: Carte
+                description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
             edit:
               add_partner: Ajouter une organisation
               alphabetical:
