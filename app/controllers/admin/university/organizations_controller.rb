@@ -70,7 +70,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     params.require(:university_organization)
           .permit(
             :name, :long_name, :slug, :meta_description, :summary, :active, :siren, :kind,
-            :address, :zipcode, :city, :country, :text,
+            :address, :address_name, :address_additional, :zipcode, :city, :country, :text,
             :url, :phone, :email, :linkedin, :twitter, :mastodon,
             :logo, :logo_delete, :logo_infos,
             :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,

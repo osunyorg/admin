@@ -86,10 +86,10 @@ en:
       university/organization:
         address: Address
         city: City
-        contact: Contact information
         country: Country
-        email: Email
         description: Personne morale liée à une université, une composante, un laboratoire, etc.
+        digital: Digital contact
+        email: Email
         kind: Kind
         legal: Legal information
         linkedin: LinkedIn
@@ -98,6 +98,7 @@ en:
         long_name: Long name
         name: Name
         phone: Telephone
+        physical: Contact information
         siren: Legal identification number
         text: Text
         twitter: Twitter
