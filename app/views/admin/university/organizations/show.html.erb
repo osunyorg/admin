@@ -9,35 +9,33 @@
 
     <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
       <div class="row pure__row--small">
-        <div class="col-xxl-6">
-          <% [
-              :address_name,
-              :address,
-              :address_additional,
-            ].each do |property| %>
-            <% value = @organization.send property %>
-            <% next if value.blank? %>
-              <%= osuny_label University::Organization.human_attribute_name(property) %>
-              <p><%= value %></p>
-            <% end %>
-        </div>
-        <div class="col-xxl-6">
-          <% [
-              :zipcode,
-              :city,
-              :country,
-            ].each do |property| %>
-            <% value = @organization.send property %>
-            <% next if value.blank? %>
-              <%= osuny_label University::Organization.human_attribute_name(property) %>
-              <p><%= value %></p>
-          <% end %>
-        </div>
+        <% [
+            :address_name,
+            :address,
+            :address_additional,
+            :zipcode,
+            :city,
+          ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+        <% if @organization.country.present? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('country') %>
+            <p><%= ISO3166::Country[@organization.country].common_name %></p>
+          </div>
+        <% end %>
+        <% if @organization.geolocated? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
+            <p><%= @organization.geo_point.to_s %></p>
+          </div>
+        <% end %>
       </div>
-      <% if @organization.geolocated? %>
-        <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
-        <p><%= @organization.geo_point.to_s %></p>
-      <% end %>
     <% end %>
     <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
       <div class="row pure__row--small">
