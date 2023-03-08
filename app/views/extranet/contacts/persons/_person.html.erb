@@ -13,7 +13,10 @@
     </div>
     <div class="col-9 col-md-12">
       <%= link_to [:contacts, person], class: 'stretched-link' do %>
-        <%= person.first_name %> <%= person.last_name %>
+        <p>
+          <b><%= person.first_name %> <%= person.last_name %></b><br>
+          <span class="text-muted"><%= person.summary %></span>
+        </p>
       <% end %>
     </div>
 </article>
