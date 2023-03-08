@@ -31,6 +31,9 @@ class Communication::Extranet::File < ApplicationRecord
 
   before_validation :set_published_at
 
+  scope :published, -> { where(published: true) }
+  scope :ordered, -> { order(published_at: :desc) }
+
   def to_s
     "#{name}"
   end

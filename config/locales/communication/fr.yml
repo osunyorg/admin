@@ -62,7 +62,7 @@ fr:
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         feature_alumni: Alumni
-        feature_files: Gestion de fichiers
+        feature_files: Documents
         feature_contacts: Annuaire
         feature_posts: Actualités
         feature_jobs: Offres d'emploi

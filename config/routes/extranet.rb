@@ -24,7 +24,7 @@ namespace :posts do
   root to: 'posts#index'
 end
 namespace :files do
-  get ':id' => 'posts#show', as: :communication_extranet_file
+  get ':id' => 'files#show', as: :communication_extranet_file
   root to: 'files#index'
 end
 get 'account' => 'account#show', as: :account

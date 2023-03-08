@@ -1,0 +1,3 @@
+<% content_for :title, Communication::Extranet::File.model_name.human(count: 2) %>
+
+<%= render 'extranet/files/files/list', files: @files %>

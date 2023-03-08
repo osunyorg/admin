@@ -1,0 +1,13 @@
+<div class="row mt-n5">
+  <% files.each do |file| %>
+    <div class="col-lg-4">
+      <div class="position-relative mt-5">
+        <p class="mt-2">
+          <b><%= file %></b><br>
+          <span class="text-muted"><%= l file.published_at.to_date %><span>
+        </p>
+        <%= link_to t('extranet.files.show'), files_communication_extranet_file_path(file), class: ' btn btn-outline-primary stretched-link' %>
+      </div>
+    </div>
+  <% end %>
+</div>

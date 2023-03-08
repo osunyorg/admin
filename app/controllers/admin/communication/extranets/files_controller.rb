@@ -48,7 +48,7 @@ class Admin::Communication::Extranets::FilesController < Admin::Communication::E
 
   def breadcrumb
     super
-    add_breadcrumb Communication::Extranet::File.model_name.human(count: 2), admin_communication_extranet_files_path
+    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_files), admin_communication_extranet_files_path
     breadcrumb_for @file
   end
 
