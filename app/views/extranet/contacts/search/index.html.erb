@@ -1,0 +1,9 @@
+<% content_for :title, t('extranet.contacts.search.title') %>
+
+<%= render 'extranet/contacts/search/form' %>
+
+<h2 class="mt-5"><%= University::Person.model_name.human(count: 2) %></h2>
+<%= render 'extranet/contacts/persons/list', people: @people %>
+
+<h2 class="mt-5"><%= University::Organization.model_name.human(count: 2) %></h2>
+<%= render 'extranet/contacts/organizations/list', organizations: @organizations %>

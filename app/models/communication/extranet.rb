@@ -6,11 +6,19 @@
 #  about_type                 :string           indexed => [about_id]
 #  color                      :string
 #  cookies_policy             :text
+#  css                        :text
+#  feature_alumni             :boolean          default(FALSE)
+#  feature_assets             :boolean          default(FALSE)
+#  feature_contacts           :boolean          default(FALSE)
+#  feature_jobs               :boolean          default(FALSE)
+#  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
+#  home_sentence              :text
 #  host                       :string
 #  name                       :string
 #  privacy_policy             :text
 #  registration_contact       :string
+#  sass                       :text
 #  sso_button_label           :string
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
@@ -37,14 +45,19 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include WithAbouts
+  include WithConnections
+  include WithFeatures
   include WithLegal
   include WithSso
+  include WithStyle
   include WithUniversity
 
   has_one_attached_deletable :logo
   has_one_attached_deletable :favicon do |attachable|
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
+
+  has_many :posts
 
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }

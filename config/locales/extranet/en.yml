@@ -1,11 +1,17 @@
 en:
   extranet:
+    features: Features
     account:
       my: My account
       edit: Edit account
       edit_personal_data: Edit profile
       updated: Updated
       logout: Log out
+    contacts:
+      search:
+        title: Search
+        placeholder: Type your search here
+        submit: Search
     data: Data
     errors:
       email_not_allowed: is not authorized to access this extranet.
@@ -17,6 +23,7 @@ en:
     home:
       recent_cohorts: Recent cohorts
       recent_experiences: Recent experiences
+      welcome: Welcome!
     menu: Menu
     organization:
       experiences: Alumni in this organization (%{count})

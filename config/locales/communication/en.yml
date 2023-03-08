@@ -10,6 +10,10 @@ en:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/post:
+        one: Post
+        other: Posts
+        all: All posts
       communication/website:
         one: Website
         other: Websites
@@ -52,6 +56,11 @@ en:
         cookies_policy: Cookies policy
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
+        feature_alumni: Alumni
+        feature_assets: Asset management
+        feature_contacts: Directory
+        feature_posts: News
+        feature_jobs: Job board
         has_sso: Has SSO?
         host: Domain
         logo: Logo (.png, .jpg, .svg)
@@ -65,6 +74,15 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
+      communication/extranet/post:
+        author: Author
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        featured_image_credit: Credit
+        published: Published?
+        published_at: Publication date
+        slug: Slug
+        title: Title
       communication/website:
         about: About
         about_: Independent website
@@ -428,6 +446,13 @@ en:
                 title: Layout options
           partners:
             description: A list of organizations with logo, name and website.
+            layouts:
+              grid:
+                label: Grid
+                description: Square logos and a simple text below.
+              map:
+                label: Map
+                description: A geographic map, with a pin for every organization with a known location.
             edit:
               add_partner: Add organization
               alphabetical:

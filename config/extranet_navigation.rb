@@ -4,17 +4,32 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
   navigation.items do |primary|
-    primary.item  :person,
-                  University::Person::Alumnus.model_name.human(count: 2),
-                  university_persons_path
-    primary.item  :years,
-                  Education::AcademicYear.model_name.human(count: 2),
-                  education_academic_years_path if current_extranet.should_show_years?
-    primary.item  :cohorts,
-                  Education::Cohort.model_name.human(count: 2),
-                  education_cohorts_path
-    primary.item  :organizations,
-                  University::Organization.model_name.human(count: 2),
-                  university_organizations_path
+    primary.item      :posts,
+                      Communication::Extranet.human_attribute_name(:feature_posts),
+                      posts_root_path if current_extranet.feature_posts
+
+    primary.item :contacts, Communication::Extranet.human_attribute_name(:feature_contacts) do |secondary|
+      secondary.item  :person,
+                      University::Person.model_name.human(count: 2),
+                      contacts_university_persons_path
+      secondary.item  :organizations,
+                      University::Organization.model_name.human(count: 2),
+                      contacts_university_organizations_path
+    end if current_extranet.feature_contacts?
+
+    primary.item :alumni, University::Person::Alumnus.model_name.human(count: 2) do |secondary|
+      secondary.item  :person,
+                      University::Person.model_name.human(count: 2),
+                      alumni_university_persons_path
+      secondary.item  :years,
+                      Education::AcademicYear.model_name.human(count: 2),
+                      alumni_education_academic_years_path if current_extranet.should_show_years?
+      secondary.item  :cohorts,
+                      Education::Cohort.model_name.human(count: 2),
+                      alumni_education_cohorts_path
+      secondary.item  :organizations,
+                      University::Organization.model_name.human(count: 2),
+                      alumni_university_organizations_path
+    end if current_extranet.feature_alumni?
   end
 end

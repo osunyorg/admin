@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_040442) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_145748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -93,7 +93,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_040442) do
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
-  create_table "communication_extranets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "extranet_id", null: false
+    t.string "object_type"
+    t.uuid "object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_connections_on_extranet_id"
+    t.index ["object_type", "object_id"], name: "index_communication_extranet_connections_on_object"
+    t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
+  end
+
+  create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.uuid "author_id"
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.string "slug"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_communication_extranet_posts_on_author_id"
+    t.index ["extranet_id"], name: "index_communication_extranet_posts_on_extranet_id"
+    t.index ["university_id"], name: "index_communication_extranet_posts_on_university_id"
+  end
+
+  create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
     t.string "host"
@@ -114,10 +144,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_040442) do
     t.string "color"
     t.string "sso_button_label"
     t.boolean "feature_alumni", default: false
-    t.boolean "feature_directory", default: false
-    t.boolean "feature_dam", default: false
+    t.boolean "feature_contacts", default: false
+    t.boolean "feature_assets", default: false
     t.boolean "feature_posts", default: false
     t.boolean "feature_jobs", default: false
+    t.text "home_sentence"
+    t.text "sass"
+    t.text "css"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -812,6 +845,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_040442) do
     t.string "twitter"
     t.string "linkedin"
     t.string "mastodon"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -947,6 +982,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_040442) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_blocks", "universities"
+  add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_connections", "universities"
+  add_foreign_key "communication_extranet_posts", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_posts", "universities"
+  add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "original_id"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"

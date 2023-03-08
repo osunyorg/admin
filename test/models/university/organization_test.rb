@@ -9,8 +9,10 @@
 #  country          :string
 #  email            :string
 #  kind             :integer          default("company")
+#  latitude         :float
 #  linkedin         :string
 #  long_name        :string
+#  longitude        :float
 #  mastodon         :string
 #  meta_description :text
 #  name             :string

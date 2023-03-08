@@ -22,9 +22,18 @@
                     preview: 100,
                     direct_upload: true %>
         <%= f.input :color, as: :color %>
+        <%= f.input :home_sentence %>
+        <%= f.input :sass %>
       <% end %>
     </div>
     <div class="col-xl-6">
+      <%= osuny_panel t('extranet.features') do %>
+        <%= f.input :feature_alumni %>
+        <%= f.input :feature_contacts %>
+        <%= f.input :feature_assets %>
+        <%= f.input :feature_posts %>
+        <%= f.input :feature_jobs %>
+      <% end %>
       <%= osuny_panel t('legal') do %>
         <%= f.input :terms, as: :summernote %>
         <%= f.input :privacy_policy, as: :summernote %>
@@ -33,23 +42,24 @@
     </div>
   </div>
 
-  <h2 class="category"><%= t('university.sso') %></h2>
-  <div class="row">
-    <div class="col-xl-6">
-      <%= f.input :has_sso %>
-      <div class="sso-inputs">
-        <%= f.input :sso_target_url, required: true %>
-        <%= f.input :sso_cert, required: true %>
-        <%= f.input :sso_name_identifier_format, required: true %>
-        <%= f.input :sso_button_label %>
+  <%= osuny_panel t('university.sso') do %>
+    <div class="row">
+      <div class="col-xl-6">
+        <%= f.input :has_sso %>
+        <div class="sso-inputs">
+          <%= f.input :sso_target_url, required: true %>
+          <%= f.input :sso_cert, required: true %>
+          <%= f.input :sso_name_identifier_format, required: true %>
+          <%= f.input :sso_button_label %>
+        </div>
+      </div>
+      <div class="col-xl-6 sso-inputs">
+        <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+        <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+        <%= render 'server/universities/sso_mapping', object: extranet %>
       </div>
     </div>
-    <div class="col-xl-6 sso-inputs">
-      <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
-      <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-      <%= render 'server/universities/sso_mapping', object: extranet %>
-    </div>
-  </div>
+  <% end %>
 
   <% content_for :action_bar_right do %>
     <%= submit f %>

@@ -2,14 +2,16 @@
 
 <div class="row">
   <div class="col-md-9">
-    <div class="biography mb-5">
-      <p><%= @person&.biography %></p>
-    </div>
+    <% unless @person.biography.blank? %>
+      <div class="biography mb-5">
+        <%= sanitize @person.biography %>
+      </div>
+    <% end %>
     <p><%= t('extranet.experiences.title') %></p>
     <%= link_to University::Person::Experience.human_attribute_name('new'),
                 new_experience_path,
                 class: 'btn btn-sm btn-primary mt-md-n5 float-md-end' %>
-    <%= render 'extranet/persons/path', person: @person, edit: true %>
+    <%= render 'extranet/alumni/persons/path', person: @person, edit: true %>
   </div>
   <div class="col-md-3">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person&.best_picture&.attached? %>
@@ -17,6 +19,6 @@
       <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary mb-2' %>
       <%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: 'btn btn-primary mb-2' %>
     </div>
-    <%= render 'extranet/persons/details', person: @person unless @person.nil? %>
+    <%= render 'extranet/alumni/persons/details', person: @person unless @person.nil? %>
   </div>
 </div>

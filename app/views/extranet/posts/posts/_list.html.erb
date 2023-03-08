@@ -1,0 +1,10 @@
+<div class="row">
+  <% posts.each do |post| %>
+    <div class="col-lg-4">
+      <div class="position-relative">
+        <%= kamifusen_tag post.featured_image, class: 'img-fluid' if post.featured_image.attached? %>
+        <%= link_to post, posts_communication_extranet_post_path(post.slug), class: 'stretched-link' %>
+      </div>
+    </div>
+  <% end %>
+</div>

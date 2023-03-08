@@ -1,22 +1,38 @@
-get 'cohorts' => 'extranet/cohorts#index', as: :education_cohorts
-get 'cohorts/:id' => 'extranet/cohorts#show', as: :education_cohort
-get 'organizations' => 'extranet/organizations#index', as: :university_organizations
-get 'organizations/search' => 'extranet/organizations#search', as: :search_university_organizations, defaults: { format: 'json' }
-get 'organizations/:id' => 'extranet/organizations#show', as: :university_organization
-get 'persons' => 'extranet/persons#index', as: :university_persons
-get 'persons/:id' => 'extranet/persons#show', as: :university_person
-get 'years' => 'extranet/academic_years#index', as: :education_academic_years
-get 'years/:id' => 'extranet/academic_years#show', as: :education_academic_year
-get 'account' => 'extranet/account#show', as: :account
-get 'account/edit' => 'extranet/account#edit', as: :edit_account
-patch 'account' => 'extranet/account#update'
-scope :account do
-  resources :experiences, controller: 'extranet/experiences', except: [:index, :show]
-  get 'personal_data' => 'extranet/personal_data#edit', as: :edit_personal_data
-  patch 'personal_data' => 'extranet/personal_data#update', as: :personal_data
+# Full :as names are useful for the resolution of links like [:alumni, cohort]
+namespace :contacts do
+  get 'persons' => 'persons#index', as: :university_persons
+  get 'persons/:id' => 'persons#show', as: :university_person
+  get 'organizations' => 'organizations#index', as: :university_organizations
+  get 'organizations/:id' => 'organizations#show', as: :university_organization
+  get 'search' => 'search#index', as: :search
+  root to: 'persons#index'
 end
-get 'terms' => 'extranet/pages#terms', as: :terms
-get 'privacy-policy' => 'extranet/pages#privacy_policy', as: :privacy_policy
-get 'cookies-policy' => 'extranet/pages#cookies_policy', as: :cookies_policy
-get 'data' => 'extranet/pages#data', as: :data
-root to: 'extranet/home#index'
+namespace :alumni do 
+  get 'cohorts' => 'cohorts#index', as: :education_cohorts
+  get 'cohorts/:id' => 'cohorts#show', as: :education_cohort
+  get 'organizations' => 'organizations#index', as: :university_organizations
+  get 'organizations/search' => 'organizations#search', as: :search_university_organizations, defaults: { format: 'json' }
+  get 'organizations/:id' => 'organizations#show', as: :university_organization
+  get 'persons' => 'persons#index', as: :university_persons
+  get 'persons/:id' => 'persons#show', as: :university_person
+  get 'years' => 'academic_years#index', as: :education_academic_years
+  get 'years/:id' => 'academic_years#show', as: :education_academic_year
+  root to: 'persons#index'
+end
+namespace :posts do
+  get ':slug' => 'posts#show', as: :communication_extranet_post
+  root to: 'posts#index'
+end
+get 'account' => 'account#show', as: :account
+get 'account/edit' => 'account#edit', as: :edit_account
+patch 'account' => 'account#update'
+scope :account do
+  resources :experiences, controller: 'experiences', except: [:index, :show]
+  get 'personal_data' => 'personal_data#edit', as: :edit_personal_data
+  patch 'personal_data' => 'personal_data#update', as: :personal_data
+end
+get 'terms' => 'pages#terms', as: :terms
+get 'privacy-policy' => 'pages#privacy_policy', as: :privacy_policy
+get 'cookies-policy' => 'pages#cookies_policy', as: :cookies_policy
+get 'data' => 'pages#data', as: :data
+get 'style' => 'style#index', as: :style, constraints: { format: 'css' }

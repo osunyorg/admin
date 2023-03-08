@@ -1,0 +1,8 @@
+<% content_for :title, University::Organization.model_name.human(count: 2) %>
+<% content_for :header_right do %>
+  <%= @count %>
+  <%= University::Organization.model_name.human(count: @count).downcase %>
+<% end %>
+
+<%= render "extranet/contacts/organizations/list" %>
+<%= paginate @organizations, theme: 'bootstrap-5' %>

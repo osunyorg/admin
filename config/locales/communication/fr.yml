@@ -12,6 +12,10 @@ fr:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/post:
+        one: Actualité
+        other: Actualités
+        all: Toutes les actualités
       communication/website:
         one: Site Web
         other: Sites Web
@@ -54,6 +58,11 @@ fr:
         cookies_policy: Politique de cookies
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
+        feature_alumni: Alumni
+        feature_assets: Gestion de fichiers
+        feature_contacts: Annuaire
+        feature_posts: Actualités
+        feature_jobs: Offres d'emploi
         has_sso: A un SSO ?
         host: Domaine
         logo: Logo (.png, .jpg, .svg)
@@ -67,6 +76,15 @@ fr:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         terms: Conditions d'utilisation
+      communication/extranet/post:
+        author: Auteur·rice
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        featured_image_credit: Crédit
+        published: Publié ?
+        published_at: Date de publication
+        slug: Identifiant
+        title: Titre
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -430,6 +448,13 @@ fr:
                 title: Options d'affichage
           partners:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
+            layouts:
+              grid:
+                label: Grille
+                description: Une série de logos carrés, avec le nom de chaque organisation.
+              map:
+                label: Carte
+                description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
             edit:
               add_partner: Ajouter une organisation
               alphabetical:

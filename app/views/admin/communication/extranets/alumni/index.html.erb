@@ -1,0 +1,28 @@
+<% content_for :title, Communication::Extranet.human_attribute_name(:feature_alumni) %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <% if @alumni %>
+    <p>
+      <%= @alumni.count %>
+      <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
+    </p>
+  <% end %>
+  <% if @cohorts %>
+    <p>
+      <%= @cohorts.count %>
+      <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
+    </p>
+  <% end %>
+  <% if @years %>
+    <p>
+      <%= @years.count %>
+      <%= Education::AcademicYear.model_name.human(count: @years.count).downcase %>
+    </p>
+  <% end %>
+  <% if @organizations %>
+    <p>
+      <%= @organizations.count %>
+      <%= University::Organization.model_name.human(count: @organizations.count).downcase %>
+    </p>
+  <% end %>
+<% end %>

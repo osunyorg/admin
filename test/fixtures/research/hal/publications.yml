@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: research_publications
+# Table name: research_hal_publications
 #
 #  id               :uuid             not null, primary key
 #  data             :jsonb
@@ -17,7 +17,7 @@
 #
 # Indexes
 #
-#  index_research_publications_on_docid  (docid)
+#  index_research_hal_publications_on_docid  (docid)
 #
 
 default_publication:
