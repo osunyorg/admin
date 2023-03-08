@@ -1,4 +1,6 @@
 fr:
+  accessibility:
+    transcription: Transcription
   activemodel:
     models:
       communication: Communication

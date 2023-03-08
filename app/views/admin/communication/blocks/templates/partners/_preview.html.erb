@@ -1,24 +1,24 @@
+<div class="top">
+  <div class="description">
+    <%= block_component_preview :description %>
+  </div>
+</div>
+
 <div class="organizations">
   <% @block.template.elements.each do |element| %>
-    <div>
-      <article class="organization">
-        <div>
-          <p class="title">
-            <% if element.best_url %>
-              <a href="<%= element.best_url %>" target="_blank">
-            <% end %>
-            <%= element.best_name %>
-            <% if element.best_url%>
-              </a>
-            <% end %>
-          </p>
-        </div>
-        <div class="media">
-          <%= kamifusen_tag element.best_logo,
-                        width: 600,
-                        class: 'img-fluid mb-2' unless element.best_logo.nil? %>
-        </div>
-      </article>
-    </div>
+    <article class="organization">
+      <h3>
+        <% if element.best_url %>
+          <a href="<%= element.best_url %>" target="_blank">
+        <% end %>
+        <%= element.best_name %>
+        <% if element.best_url%>
+          </a>
+        <% end %>
+      </h3>
+      <div class="media">
+        <%= kamifusen_tag element.best_logo, width: 600%>
+      </div>
+    </article>
   <% end %>
 </div>

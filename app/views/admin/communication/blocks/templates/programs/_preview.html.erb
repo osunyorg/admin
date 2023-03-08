@@ -1,5 +1,7 @@
-<hr>
-<% @block.template.selected_programs.each do |program| %>
-    <p><%= program %></p>
-    <hr>
-<% end %>
+<ol class="programs">
+  <% @block.template.selected_programs.each do |program| %>
+    <li>
+      <%= program %></p>
+    </li>
+  <% end %>
+</ol>

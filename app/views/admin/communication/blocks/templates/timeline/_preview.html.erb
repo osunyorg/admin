@@ -1,9 +1,53 @@
-<%= block_component_preview :layout %>
-<div class="events">
-<% @block.template.elements.each do |element| %>
-  <div class="event">
-    <%= block_component_preview :title, template: element %>
-    <%= block_component_preview :text, template: element %>
+<%
+  $class = "block block-timeline" 
+  unless @block.title.empty?
+    $class += " block-with-title"
+  end
+  $class += " block-timeline--" + @block.template.layout
+%>
+
+<section class="<%= $class %>">
+  <div class="container">
+    <% if @block.template.layout == "vertical" %>
+      <div class="block-content">
+        <% unless @block.title.empty? %>
+          <div class="top">
+            <h2><%= @block.title %></h2>
+          </div>
+        <% end %>
+        <div class="events">
+          <% @block.template.elements.each do |element| %>
+            <article class="event">
+              <h3 class="event-title">
+                <%= block_component_preview :title, template: element %>
+              <h3>
+              <p><%= block_component_preview :text, template: element %></p>
+            </article>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="timeline">
+        <% unless @block.title.empty? %>
+          <h2><%= @block.title %></h2>
+        <% end %>
+        <div class="events">
+          <ol>
+            <% @block.template.elements.each do |element| %>
+              <li class="event">
+                <p class="title"><%= block_component_preview :title, template: element %><p>
+                <div class="line"></div>
+                <p class="description"><%= block_component_preview :text, template: element %></p>
+              </li>
+            <% end %>
+          </ol>
+          <% if !@block.template.elements.one? %>
+            <div class="timeline-arrows">
+              <button class="previous" disabled></button>
+              <button class="next"></button>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
   </div>
-<% end %>
-</div>
+</section>

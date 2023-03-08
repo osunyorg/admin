@@ -1,2 +1,32 @@
-<%= block_component_preview :code %>
-<%= block_component_preview :transcription %>
+<%
+  $class = "block block-embed" 
+  if @block.title
+    $class += " block-with-title"
+  end
+%>
+
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% if @block.title %>
+        <div class="top">
+          <h2><%= @block.title %></h2>
+        </div>
+      <% end %>
+
+      <%= block_component_preview :code %>
+
+      <div class="transcription">
+        <details>
+          <summary>Transcription</summary>
+          <p>
+            <%= block_component_preview :transcription %>
+          </p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
