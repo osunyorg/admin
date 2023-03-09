@@ -1,6 +1,6 @@
 <%
-$class = "block block-gallery" 
-if @block.title
+$class = "block block-gallery"
+if @block.title.present?
   $class += " block-with-title"
 end
 
@@ -10,12 +10,12 @@ $class += " block-gallery--" + @block.template.layout
 <section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
-      <% if @block.title || @block.template.description %>
+      <% if @block.title.present? || @block.template.description.present? %>
         <div class="top">
-          <% if @block.title %>
+          <% if @block.title.present? %>
             <h2><%= @block.title %></h2>
           <% end %>
-          <% if @block.template.description %>
+          <% if @block.template.description.present? %>
             <div class="description">
               <p><%= block_component_preview :description %></p>
             </div>
@@ -29,7 +29,7 @@ $class += " block-gallery--" + @block.template.layout
             <div class="splide__track">
               <div class="splide__list">
         <% end %>
-        <% @block.template.elements.each do |element| %> 
+        <% @block.template.elements.each do |element| %>
           <%= block_component_preview :image, template: element %>
         <% end %>
         <% if !@block.template.elements.one? %>
@@ -39,7 +39,7 @@ $class += " block-gallery--" + @block.template.layout
         <% end %>
       <% else %>
         <div class="gallery" role="group">
-          <% @block.template.elements.each do |element| %> 
+          <% @block.template.elements.each do |element| %>
             <%= block_component_preview :image, template: element %>
           <% end %>
         </div>
