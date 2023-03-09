@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: communication_extranet_files
+# Table name: communication_extranet_documents
 #
 #  id            :uuid             not null, primary key
 #  name          :string
@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  index_communication_extranet_files_on_extranet_id    (extranet_id)
-#  index_communication_extranet_files_on_university_id  (university_id)
+#  index_communication_extranet_documents_on_extranet_id    (extranet_id)
+#  index_communication_extranet_documents_on_university_id  (university_id)
 #
 # Foreign Keys
 #
