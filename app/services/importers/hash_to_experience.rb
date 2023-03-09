@@ -1,21 +1,4 @@
 module Importers
-  class AlumniExperiences < Importers::Alumni
-
-    protected
-
-    def analyze_hash(hash, index)
-      hash_to_alumnus = HashToAlumnus.new(@university, hash)
-      if hash_to_alumnus.valid?
-        person = hash_to_alumnus.person
-        hash_to_experience = HashToExperience.new(person, hash)
-        add_error(hash_to_experience.error, index + 1) unless hash_to_experience.valid?
-      else
-        add_error(hash_to_alumnus.error, index + 1)
-      end
-    end
-
-  end
-
   class HashToExperience
     def initialize(person, hash)
       @person = person
@@ -84,8 +67,5 @@ module Importers
         obj
       end
     end
-
-
   end
-
 end

@@ -65,10 +65,10 @@ fr:
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         feature_alumni: Alumni
-        feature_library: Documents
         feature_contacts: Annuaire
-        feature_posts: Actualités
         feature_jobs: Offres d'emploi
+        feature_library: Documents
+        feature_posts: Actualités
         has_sso: A un SSO ?
         home_sentence: Phrase affichée sur la home
         host: Domaine

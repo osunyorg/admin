@@ -1,14 +1,14 @@
 <%
-$class = "block block-image" 
+$class = "block block-image"
 
-unless @block.title.empty?
+unless @block.title.blank?
   $class += " block-with-title"
 end
 %>
 <section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.empty? %>
+      <% unless @block.title.blank? %>
         <div class="top">
           <h2><%= @block.title %></h2>
         </div>
