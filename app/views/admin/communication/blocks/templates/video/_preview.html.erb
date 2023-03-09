@@ -25,13 +25,13 @@ end
       <% if @block.template.video_title %>
         <p><%= block_component_preview :video_title %></p>
       <% end %>
-      <% if @block.template.transcription %>
-      <div class="transcription">
-        <details>
-          <summary><%= t 'accessibility.transcription' %></summary>
-          <p><%= block_component_preview :transcription %></p>
-        </details>
-      </div>
+      <% unless @block.template.transcription.empty? %>
+        <div class="transcription">
+          <details>
+            <summary><%= t 'accessibility.transcription' %></summary>
+            <p><%= block_component_preview :transcription %></p>
+          </details>
+        </div>
       <% end %>
     </div>
   </div>
