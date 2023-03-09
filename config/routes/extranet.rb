@@ -23,6 +23,9 @@ namespace :posts do
   get ':slug' => 'posts#show', as: :communication_extranet_post
   root to: 'posts#index'
 end
+namespace :library do
+  root to: 'documents#index'
+end
 get 'account' => 'account#show', as: :account
 get 'account/edit' => 'account#edit', as: :edit_account
 patch 'account' => 'account#update'

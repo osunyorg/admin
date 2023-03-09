@@ -78,8 +78,10 @@ namespace :communication do
         get :preview
       end
     end
-    resources :assets, only: :index, controller: 'extranets/assets'
-    resources :jobs, only: :index, controller: 'extranets/jobs'
+    # Automatic routes based on feature names
+    get 'library' => 'extranets/documents#index', as: :library
+    resources :documents, controller: 'extranets/documents'
+    resources :jobs, controller: 'extranets/jobs'
   end
   resources :alumni do
     collection do

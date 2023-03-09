@@ -1,0 +1,18 @@
+<% content_for :title, Communication::Extranet::Document.model_name.human(count: 2) %>
+
+<div class="row mt-n5">
+  <% @documents.each do |document| %>
+    <div class="col-lg-4">
+      <div class="position-relative mt-5">
+        <p class="mt-2">
+          <b><%= document %></b><br>
+          <span class="text-muted"><%= l document.published_at.to_date %><span>
+        </p>
+        <%= link_to t('extranet.library.download'), 
+                    document.file.url,
+                    class: 'btn btn-primary',
+                    target: :_blank if document.file.attached? %>
+      </div>
+    </div>
+  <% end %>
+</div>

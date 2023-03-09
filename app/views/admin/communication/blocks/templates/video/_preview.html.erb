@@ -1,5 +1,5 @@
 <%
-$class = "block block-video" 
+$class = "block block-video"
 unless @block.title.empty?
   $class += " block-with-title"
 end
@@ -12,14 +12,9 @@ end
           <h2><%= @block.title %></h2>
         </div>
       <% end %>
-      <% if @block.template.url %>
+      <% if @block.template.url.present? %>
         <div class="video">
-          <%# TODO: identification du provider de la vidéo %>
-          <iframe 
-            src="<%= block_component_preview :url %>"
-            title="<%= block_component_preview :video_title %>"
-            loading="lazy"
-            ></iframe>
+          <%= @block.template.video_iframe %>
         </div>
       <% end %>
       <% if @block.template.video_title %>

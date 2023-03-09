@@ -25,6 +25,8 @@ fr:
       recent_cohorts: Promotions récentes
       recent_experiences: Mouvements récents
       welcome: Bienvenue !
+    library:
+      download: Télécharger
     menu: Menu
     organization:
       experiences: Alumni dans cette organisation (%{count})

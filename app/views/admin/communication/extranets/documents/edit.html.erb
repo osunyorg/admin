@@ -1,0 +1,5 @@
+<% content_for :title, @document %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <%= render 'form', document: @document %>
+<% end %>
