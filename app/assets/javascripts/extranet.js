@@ -13,7 +13,6 @@
 //= require gdpr/cookie_consent
 //= require leaflet
 //= require autocomplete-rails
-//= require ./admin/plugins/notyf
 //= require_tree ./application/plugins
 //= require_tree ./extranet
 //= require_self
