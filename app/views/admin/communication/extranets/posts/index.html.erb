@@ -6,7 +6,8 @@
     <%= paginate @posts, theme: 'bootstrap-5' %>
   </section>
 
-  <% action = link_to t('create'), new_admin_communication_extranet_posts_category_path, class: button_classes %>
+  <% action = link_to t('create'), new_admin_communication_extranet_post_category_path, class: button_classes %>
+  <%# action = create_link Communication::Website::Category %>
   <%= osuny_panel Communication::Website::Category.model_name.human(count: 2), action: action do %>
     <%= render 'admin/communication/extranets/posts/categories/list', categories: @categories %>
   <% end %>

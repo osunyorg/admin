@@ -1,7 +1,8 @@
 class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Communication::Extranets::ApplicationController
-  load_and_authorize_resource class: Communication::Extranet::Post::Category, through: :extranet
+  load_and_authorize_resource class: Communication::Extranet::Post::Category, through: :extranet, through_association: :post_categories
 
   def index
+    @categories = @categories.ordered
     breadcrumb
   end
 
@@ -10,9 +11,6 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
   end
 
   def new
-    if current_user.person.present?
-      @post.author = current_user.person
-    end
     breadcrumb
   end
 
@@ -31,7 +29,6 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
   end
 
   def update
-    @category.add_photo_import params[:photo_import]
     if @category.update(category_params)
       redirect_to admin_communication_extranet_post_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
     else
@@ -50,6 +47,7 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
 
   def breadcrumb
     super
+    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_posts), admin_communication_extranet_posts_path
     add_breadcrumb Communication::Extranet::Post::Category.model_name.human(count: 2), admin_communication_extranet_post_categories_path
     breadcrumb_for @category
   end

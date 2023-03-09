@@ -19,6 +19,9 @@ en:
         one: Post
         other: Posts
         all: All posts
+      communication/extranet/post/category:
+        one: Category
+        other: Categories
       communication/website:
         one: Website
         other: Websites
@@ -94,6 +97,8 @@ en:
         published_at: Publication date
         slug: Slug
         title: Title
+      communication/extranet/post/category:
+        name: Name
       communication/website:
         about: About
         about_: Independent website

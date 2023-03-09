@@ -1,5 +1,5 @@
-<% content_for :title, Communication::Extranet::Post.model_name.human %>
+<% content_for :title, Communication::Extranet::Post::Category.model_name.human %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
-  <%= render 'form', post: @post %>
+  <%= render 'form', category: @category %>
 <% end %>
