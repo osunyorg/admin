@@ -1,6 +1,6 @@
 <%
-  $class = "block block-testimonials" 
-  unless @block.title.empty?
+  $class = "block block-testimonials"
+  unless @block.title.blank?
     $class += " block-with-title"
   end
   if !@block.template.elements.one?
@@ -13,7 +13,7 @@
     <div class="block-content">
       <div class="testimonials">
         <% if !@block.template.elements.one? %>
-          <div class="splide" 
+          <div class="splide"
               data-splide='{
                   "arrows":false,
                   "autoplay":true,
