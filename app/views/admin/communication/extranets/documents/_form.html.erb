@@ -1,0 +1,28 @@
+<%= simple_form_for [:admin, document] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <%= osuny_panel t('content') do %>
+        <%= f.input :name %>
+        <%= f.input :file, as: :single_deletable_file %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= osuny_panel t('metadata') do %>
+        <% if can? :publish, document %>
+          <div class="row pure__row--small">
+            <div class="col-6">
+              <%= f.input :published %>
+            </div>
+          </div>
+          <%= f.input :published_at, html5: true, as: :date %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

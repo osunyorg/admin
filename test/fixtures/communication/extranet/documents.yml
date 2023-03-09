@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: communication_extranet_documents
+#
+#  id            :uuid             not null, primary key
+#  name          :string
+#  published     :boolean
+#  published_at  :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  extranet_id   :uuid             not null, indexed
+#  university_id :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_communication_extranet_documents_on_extranet_id    (extranet_id)
+#  index_communication_extranet_documents_on_university_id  (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_1272fd263c  (extranet_id => communication_extranets.id)
+#  fk_rails_af877a8c0c  (university_id => universities.id)
+#
+
+one:
+  name: MyString
+  university: one
+  extranet: one
+  published: false
+  published_at: 2023-03-08 16:55:05
+
+two:
+  name: MyString
+  university: two
+  extranet: two
+  published: false
+  published_at: 2023-03-08 16:55:05

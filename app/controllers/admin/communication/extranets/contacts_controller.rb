@@ -1,7 +1,7 @@
 class Admin::Communication::Extranets::ContactsController < Admin::Communication::Extranets::ApplicationController
   def index
-    @persons = current_university.people.ordered
-    @organizations = current_university.organizations.ordered
+    @persons = current_university.people.ordered.page params[:persons_page]
+    @organizations = current_university.organizations.ordered.page params[:organizations_page]
     breadcrumb
     add_breadcrumb Communication::Extranet.human_attribute_name(:feature_contacts)
   end
