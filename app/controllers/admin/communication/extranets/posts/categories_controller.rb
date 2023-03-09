@@ -57,6 +57,7 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
     params.require(:communication_extranet_post_category)
     .permit(
       :name,
+      :slug,
     )
     .merge(
       university_id: current_university.id

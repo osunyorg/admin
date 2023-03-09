@@ -9,6 +9,14 @@
       <% end %>
     </div>
     <div class="col-md-4">
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: category.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#communication_extranet_post_category_name' }
+                    } %>
+      <% end %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

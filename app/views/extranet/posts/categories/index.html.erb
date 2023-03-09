@@ -1,0 +1,7 @@
+<% content_for :title, Communication::Extranet::Post::Category.model_name.human(count: 2) %>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li><%= link_to category, posts_category_path(slug: category.slug) %></li>
+  <% end %>
+</ul>
