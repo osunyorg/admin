@@ -30,14 +30,15 @@
         <% end %>
 
         <% @block.template.elements.each do |element| %>
+          <% element_blob = element.photo_component.blob %>
           <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
             <blockquote>
               <p><%= block_component_preview :text, template: element %></p>
             </blockquote>
             <figcaption>
-              <% if element.photo  %>
+              <% if element_blob.present? %>
                 <div class="avatar">
-                  <%#= block_component_preview :photo, template: element %>
+                  <%= kamifusen_tag element_blob, width: 600, class: 'img-fluid mb-1', alt: element.author %>
                 </div>
               <% end %>
               <% if element.author %>
