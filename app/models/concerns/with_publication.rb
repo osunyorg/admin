@@ -17,6 +17,10 @@ module WithPublication
     published && published_at > Time.now
   end
 
+  def published_now?
+    published && published_at <= Time.now
+  end
+
   protected
 
   def set_published_at

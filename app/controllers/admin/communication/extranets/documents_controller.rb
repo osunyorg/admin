@@ -2,6 +2,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
   load_and_authorize_resource class: Communication::Extranet::Document, through: :extranet
 
   def index
+    @documents = @documents.ordered.page params[:page]
     breadcrumb
   end
 
@@ -10,7 +11,6 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
   end
 
   def new
-    @document.extranet = @extranet
     breadcrumb
   end
 
@@ -20,7 +20,6 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
   end
 
   def create
-    @document.extranet = @extranet
     if @document.save
       redirect_to admin_communication_extranet_document_path(@document), notice: t('admin.successfully_created_html', model: @document.to_s)
     else
