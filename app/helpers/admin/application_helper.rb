@@ -71,6 +71,11 @@ module Admin::ApplicationHelper
     " #{string}"
   end
 
+  def if_pure(string)
+    return '' if current_admin_theme != 'pure' 
+    " #{string}"
+  end
+
   def duplicate_link(object)
     return unless can?(:update, object)
     link_to t('admin.duplicate'),

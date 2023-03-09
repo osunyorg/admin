@@ -64,11 +64,13 @@ en:
         feature_posts: News
         feature_jobs: Job board
         has_sso: Has SSO?
+        home_sentence: Sentence displayed on homepage
         host: Domain
         logo: Logo (.png, .jpg, .svg)
         name: Name
         privacy_policy: Privacy policy
         registration_contact: Contact mail for registrations problems
+        sass: Custom style
         sso_button_label: Sign in button's label
         sso_cert: Certificate
         sso_inherit_from_university: SSO inherited from University

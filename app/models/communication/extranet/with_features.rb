@@ -11,7 +11,7 @@ module Communication::Extranet::WithFeatures
     ]
   end
 
-  def feature?(identifier)
+  def has_feature?(identifier)
     public_send "feature_#{identifier}"
   end
 end
