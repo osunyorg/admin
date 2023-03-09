@@ -98,6 +98,33 @@
 <% end %>
 </div>
 
+<% if current_admin_theme == 'pure' %>
+  <div class="row mt-5 pt-5">
+    <div class="col-lg-2">
+      <%= image_tag "admin/university.jpg", class: 'img-fluid'%>
+    </div>
+    <div class="col-lg-4">
+      <%= osuny_panel University.model_name.human do %>
+        <p><%= t('university.description.text') %></p>
+        <%= link_to t('show'), admin_university_root_path, class: 'stretched-link' %>
+      <% end %>
+    </div>
+    <div class="col-lg-4">
+      <ul class="list-unstyled mt-4">
+      <% University.parts.each do |part| %>
+        <%
+        class_name = part.first
+        path = send part.last
+        title = class_name.model_name.human(count: 2)
+        %>
+        <li>
+          <%= link_to title, path, class: 'btn btn-sm btn-light mt-3' %>
+        </li>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% if current_admin_theme == 'appstack' %>
   <div class="small mt-5">
     <ul class="list-inline">
