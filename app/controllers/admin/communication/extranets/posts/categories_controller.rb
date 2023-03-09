@@ -7,6 +7,7 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
   end
 
   def show
+    @posts = @category.posts.ordered.page params[:page]
     breadcrumb
   end
 

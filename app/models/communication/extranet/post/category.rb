@@ -24,6 +24,7 @@ class Communication::Extranet::Post::Category < ApplicationRecord
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
+  has_many :posts
 
   scope :ordered, -> { order(:name) }
 

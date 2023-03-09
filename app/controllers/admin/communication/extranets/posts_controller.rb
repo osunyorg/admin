@@ -69,7 +69,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
       :title, :summary, :text,
       :published, :published_at, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :author_id
+      :author_id, :category_id
     )
     .merge(
       university_id: current_university.id

@@ -90,6 +90,7 @@ en:
         published_at: Publication date
       communication/extranet/post:
         author: Author
+        category: Category
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit

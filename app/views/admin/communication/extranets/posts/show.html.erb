@@ -25,6 +25,10 @@
             </p>
           </div>
         </div>
+        <% if @post.category %>
+          <%= osuny_label Communication::Extranet::Post.human_attribute_name('category') %>
+          <p><%= link_to @post.category, [:admin, @post.category] %></p>
+        <% end %>
         <% if @post.author %>
           <%= osuny_label Communication::Extranet::Post.human_attribute_name('author') %>
           <p><%= @post.author %></p>

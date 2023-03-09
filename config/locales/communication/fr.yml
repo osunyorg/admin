@@ -90,6 +90,7 @@ fr:
         published_at: Date de publication
       communication/extranet/post:
         author: Auteur·rice
+        category: Catégorie
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
