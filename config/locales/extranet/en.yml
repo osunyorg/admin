@@ -2,9 +2,11 @@ en:
   extranet:
     features: Features
     account:
-      my: My account
       edit: Edit account
       edit_personal_data: Edit profile
+      experiences:
+        create_new_html: The organization *** doesn't exist, do you want to <a class='btn btn-primary' href='%{url}'>create it</a>?
+      my: My account
       updated: Updated
       logout: Log out
     contacts:

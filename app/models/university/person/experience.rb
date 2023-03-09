@@ -39,8 +39,6 @@ class University::Person::Experience < ApplicationRecord
   # validates_numericality_of :to_year, { greater_than_or_equal_to: :from_year }, allow_nil: true
   validate :to_year, :not_before_from_year
 
-  before_validation :create_organization_if_needed
-
   scope :ordered, -> { order('university_person_experiences.to_year DESC NULLS FIRST, university_person_experiences.from_year') }
   scope :recent, -> {
     where.not(from_year: nil)
@@ -65,13 +63,4 @@ class University::Person::Experience < ApplicationRecord
     end
   end
 
-  def create_organization_if_needed
-    if organization.nil? && organization_name.present?
-      self.organization_name = self.organization_name.strip
-      orga = university.organizations.find_by("name ILIKE ?", organization_name)
-      orga ||= university.organizations.find_by(siren: organization_name)
-      orga ||= university.organizations.create(name: organization_name, created_from_extranet: true)
-      self.organization = orga if orga.persisted?
-    end
-  end
 end
