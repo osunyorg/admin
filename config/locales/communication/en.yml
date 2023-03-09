@@ -12,9 +12,9 @@ en:
       communication/extranet:
         one: Extranet
         other: Extranets
-      communication/extranet/file:
-        one: File
-        other: Files
+      communication/extranet/document:
+        one: Document
+        other: Documents
       communication/extranet/post:
         one: Post
         other: Posts
@@ -79,7 +79,7 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
-      communication/extranet/file:
+      communication/extranet/document:
         name: Name
         published: Published?
         published_at: Publication date

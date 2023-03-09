@@ -12,9 +12,9 @@ fr:
       communication/extranet:
         one: Extranet
         other: Extranets
-      communication/extranet/file:
-        one: Fichier
-        other: Fichiers
+      communication/extranet/document:
+        one: Document
+        other: Documents
       communication/extranet/post:
         one: Actualité
         other: Actualités
@@ -62,7 +62,7 @@ fr:
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         feature_alumni: Alumni
-        feature_files: Documents
+        feature_library: Documents
         feature_contacts: Annuaire
         feature_posts: Actualités
         feature_jobs: Offres d'emploi
@@ -79,7 +79,7 @@ fr:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         terms: Conditions d'utilisation
-      communication/extranet/file:
+      communication/extranet/document:
         name: Nom
         published: Publié ?
         published_at: Date de publication

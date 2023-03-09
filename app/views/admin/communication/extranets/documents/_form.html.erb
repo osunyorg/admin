@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, file] do |f| %>
+<%= simple_form_for [:admin, document] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
-        <% if can? :publish, file %>
+        <% if can? :publish, document %>
           <div class="row pure__row--small">
             <div class="col-6">
               <%= f.input :published %>

@@ -21,7 +21,7 @@
 #  fk_rails_1272fd263c  (extranet_id => communication_extranets.id)
 #  fk_rails_af877a8c0c  (university_id => universities.id)
 #
-class Communication::Extranet::File < ApplicationRecord
+class Communication::Extranet::Document < ApplicationRecord
   include Sanitizable
   include WithPublication
   include WithUniversity
