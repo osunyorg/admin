@@ -13,9 +13,9 @@
 <%= render 'admin/communication/extranets/sidebar' do %>
   <div class="row">
     <% Communication::Extranet::FEATURES.each do |feature| %>
-      <% 
+      <%
       property = "feature_#{feature}"
-      active = @extranet.feature? feature
+      active = @extranet.has_feature? feature
       next unless active
       %>
       <div class="col-lg-3">
