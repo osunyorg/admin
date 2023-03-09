@@ -1,6 +1,6 @@
 <%
-$class = "block block-call_to_action" 
-unless @block.title.empty?
+$class = "block block-call_to_action"
+unless @block.title.blank?
   $class += " block-with-title"
 end
 
@@ -13,7 +13,7 @@ $image_class = "call_to_action--with" + (@block.template.image.empty? ? "out" : 
     <div class="block-content">
       <div class="call_to_action <%= $image_class %>">
         <div>
-          <% unless @block.title.empty? %>
+          <% unless @block.title.blank? %>
             <h2><%= @block.title %></h2>
           <% end %>
           <% if @block.template.text %>

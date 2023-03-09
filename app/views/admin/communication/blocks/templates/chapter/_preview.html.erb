@@ -1,7 +1,7 @@
 <%
-$class = "block block-chapter" 
+$class = "block block-chapter"
 
-unless @block.title.empty?
+unless @block.title.blank?
   $class += " block-with-title"
 end
 
@@ -18,17 +18,17 @@ $class += " block-chapter--" + @block.template.layout
     <div class="block-content">
       <div class="chapter">
         <div class="text">
-          <% unless @block.title.empty? %>
+          <% unless @block.title.blank? %>
             <div class="top">
               <h2><%= @block.title %></h2>
             </div>
           <% end %>
-          <% unless @block.template.text.empty? %>
+          <% unless @block.template.text.blank? %>
             <div class="rich-text">
               <%= block_component_preview :text %>
             </div>
           <% end %>
-          <% unless @block.template.notes.empty? %>
+          <% unless @block.template.notes.blank? %>
             <div class="notes">
               <%= block_component_preview :notes %>
             </div>

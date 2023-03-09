@@ -1,18 +1,18 @@
 <%
-$class = "block block-datatable" 
-unless @block.title.empty?
+$class = "block block-datatable"
+unless @block.title.blank?
   $class += " block-with-title"
 end
 %>
 <section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.empty? && @block.template.description.empty? %>
+      <% unless @block.title.blank? && @block.template.description.blank? %>
         <div class="top">
-          <% unless @block.title.empty? %>
+          <% unless @block.title.blank? %>
             <h2><%= @block.title %></h2>
           <% end %>
-          <% unless @block.template.description.empty? %>
+          <% unless @block.template.description.blank? %>
             <div class="description">
               <p><%= block_component_preview :description %></p>
             </div>
@@ -21,7 +21,7 @@ end
       <% end %>
       <div class="table-responsive">
         <table>
-          <% unless @block.template.caption.empty? %>
+          <% unless @block.template.caption.blank? %>
             <caption><%= block_component_preview :caption %></caption>
           <% end %>
           <thead>
