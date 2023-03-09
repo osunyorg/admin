@@ -10,9 +10,6 @@
   <%= link_to t('university.alumni.cohorts.import_btn'),
               new_admin_university_alumni_cohorts_import_path,
               class: button_classes if can? :create, University::Person::Alumnus %>
-  <%= link_to t('university.alumni.experiences.import_btn'),
-              new_admin_university_alumni_experiences_import_path,
-              class: button_classes if can? :create, University::Person::Alumnus %>
 <% end %>
 
 <% content_for :action_bar_right do %>
