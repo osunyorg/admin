@@ -60,16 +60,16 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
   def extranet_params
     params.require(:communication_extranet)
           .permit(
-            :about_id, :about_type, 
-            :color, :cookies_policy, 
-            :favicon, :favicon_delete, :feature_alumni, :feature_assets, :feature_contacts, :feature_jobs, :feature_posts,
+            :about_id, :about_type,
+            :color, :cookies_policy,
+            :favicon, :favicon_delete, :feature_alumni, :feature_library, :feature_contacts, :feature_jobs, :feature_posts,
             :has_sso, :host, :home_sentence,
-            :logo, :logo_delete, 
-            :name, 
-            :privacy_policy, 
+            :logo, :logo_delete,
+            :name,
+            :privacy_policy,
             :registration_contact,
             :sass, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label,
-            :terms, 
+            :terms,
           )
   end
 end

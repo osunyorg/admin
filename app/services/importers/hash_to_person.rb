@@ -1,16 +1,5 @@
 module Importers
-  class Alumni < Base
-
-    protected
-
-    def analyze_hash(hash, index)
-      hash_to_alumnus = HashToAlumnus.new(@university, hash)
-      add_error(hash_to_alumnus.error, index + 1) unless hash_to_alumnus.valid?
-    end
-
-  end
-
-  class HashToAlumnus
+  class HashToPerson
     def initialize(university, hash)
       @university = university
       @hash = hash
@@ -36,36 +25,7 @@ module Importers
     end
 
     def person
-      @person ||= begin
-        if @email.present?
-          person = @university.people
-                             .where(email: @email)
-                             .first_or_initialize
-        elsif @first_name.present? && @last_name.present?
-          person = @university.people
-                             .where(first_name: @first_name, last_name: @last_name)
-                             .first_or_initialize
-        end
-        person.first_name = @first_name
-        person.last_name = @last_name
-        person.gender = gender
-        person.birthdate = @birth
-        person.email = @email
-        person.url = @url
-        person.phone_professional = @phone_professional
-        person.phone_personal = @phone_personal
-        person.phone_mobile = @mobile
-        person.address = @address
-        person.zipcode = @zipcode
-        person.city = @city
-        person.country = @country
-        person.biography = @biography
-        person.twitter = @social_twitter
-        person.linkedin = @social_linkedin
-        person.is_alumnus = true
-        person.slug = person.to_s.parameterize.dasherize
-        person
-      end
+      @person ||= build_person
     end
 
     protected
@@ -88,6 +48,37 @@ module Importers
       @biography = @hash[14].to_s.strip
       @social_twitter = @hash[15].to_s.strip
       @social_linkedin = @hash[16].to_s.strip
+    end
+
+    def build_person
+      if @email.present?
+        person = @university.people
+                           .where(email: @email)
+                           .first_or_initialize
+      elsif @first_name.present? && @last_name.present?
+        person = @university.people
+                           .where(first_name: @first_name, last_name: @last_name)
+                           .first_or_initialize
+      end
+      person.first_name = @first_name
+      person.last_name = @last_name
+      person.gender = gender
+      person.birthdate = @birth
+      person.email = @email
+      person.url = @url
+      person.phone_professional = @phone_professional
+      person.phone_personal = @phone_personal
+      person.phone_mobile = @mobile
+      person.address = @address
+      person.zipcode = @zipcode
+      person.city = @city
+      person.country = @country
+      person.biography = @biography
+      person.twitter = @social_twitter
+      person.linkedin = @social_linkedin
+      person.slug = person.to_s.parameterize.dasherize
+      person.language_id = @university.default_language_id
+      person
     end
 
     def country_not_found?

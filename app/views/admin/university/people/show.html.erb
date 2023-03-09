@@ -21,6 +21,16 @@
   </div>
 <% end %>
 
+<%
+action = ''
+action += link_to t('university.manage_experiences'),
+                  experiences_admin_university_person_path(@person),
+                  class: button_classes if can?(:update, @person)
+%>
+<%= osuny_panel University::Person::Experience.model_name.human(count: 2), action: action do %>
+  <%= render 'admin/university/people/experiences/list', experiences: @person.experiences.ordered %>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
   <%= static_link static_admin_university_person_path(@person) %>

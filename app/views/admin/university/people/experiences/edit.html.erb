@@ -1,14 +1,14 @@
-<% content_for :title, @alumnus %>
+<% content_for :title, @person %>
 
 <h2 class="h3"><%= University::Person::Experience.model_name.human(count: 2) %></h2>
 
-<%= simple_form_for [:admin, @alumnus], url: experiences_admin_university_alumnus_path(@alumnus) do |f| %>
+<%= simple_form_for [:admin, @person], url: experiences_admin_university_person_path(@person) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="mb-3">
-    <%= link_to_add_association t('add'), 
-                                f, 
+    <%= link_to_add_association t('add'),
+                                f,
                                 :experiences,
                                 class: button_classes,
                                 data: {
@@ -18,8 +18,8 @@
   </div>
 
   <div id="experiences">
-    <%= f.simple_fields_for :experiences, @alumnus.experiences.ordered, include_id: false do |experience_f| %>
-      <%= render 'admin/university/alumni/experiences/experience_fields', f: experience_f, include_id: true %>
+    <%= f.simple_fields_for :experiences, @person.experiences.ordered, include_id: false do |experience_f| %>
+      <%= render 'admin/university/people/experiences/experience_fields', f: experience_f, include_id: true %>
     <% end %>
   </div>
 

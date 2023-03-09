@@ -25,6 +25,8 @@ en:
       recent_cohorts: Recent cohorts
       recent_experiences: Recent experiences
       welcome: Welcome!
+    library:
+      download: Download
     menu: Menu
     organization:
       experiences: Alumni in this organization (%{count})

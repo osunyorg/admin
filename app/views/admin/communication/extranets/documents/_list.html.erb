@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th class="ps-0" width="60%"><%= Communication::Extranet::Document.human_attribute_name('name') %></th>
+        <th class="ps-3"><%= Communication::Extranet::Document.human_attribute_name('published') %></th>
+        <th colspan="2" class="ps-3"><%= Communication::Extranet::Document.human_attribute_name('meta') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% documents.each do |document| %>
+        <tr <% if document.draft? %>class="draft"<% end %>>
+          <td class="ps-0">
+            <%= link_to document,
+                        admin_communication_extranet_document_path(extranet_id: document.extranet.id, id: document.id),
+                        class: "#{'draft' unless document.published?}" %>
+          </td>
+          <td class="ps-3 small">
+            <%= t document.published %>, 
+            <%= l document.published_at, format: :date_with_explicit_month if document.published_at %>
+          </td>
+          <td>
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_communication_extranet_document_path(extranet_id: document.extranet.id, id: document.id),
+                          class: button_classes if can?(:update, document) %>
+              <%= link_to t('delete'),
+                          admin_communication_extranet_document_path(extranet_id: document.extranet.id, id: document.id),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, document) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

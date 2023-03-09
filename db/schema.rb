@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_101244) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -105,6 +105,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_101244) do
     t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
   end
 
+  create_table "communication_extranet_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "university_id", null: false
+    t.uuid "extranet_id", null: false
+    t.boolean "published"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_documents_on_extranet_id"
+    t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
+  end
+
   create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.boolean "published", default: false
@@ -145,7 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_101244) do
     t.string "sso_button_label"
     t.boolean "feature_alumni", default: false
     t.boolean "feature_contacts", default: false
-    t.boolean "feature_assets", default: false
+    t.boolean "feature_library", default: false
     t.boolean "feature_posts", default: false
     t.boolean "feature_jobs", default: false
     t.text "home_sentence"
@@ -974,6 +986,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_101244) do
   add_foreign_key "communication_blocks", "universities"
   add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_connections", "universities"
+  add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_documents", "universities"
   add_foreign_key "communication_extranet_posts", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_posts", "universities"
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"

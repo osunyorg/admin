@@ -33,6 +33,7 @@ class Communication::Extranet::Post < ApplicationRecord
   include WithUniversity
   include WithFeaturedImage
   include WithBlocks
+  include WithPublication
   include WithPermalink
   include WithSlug
 
@@ -40,11 +41,6 @@ class Communication::Extranet::Post < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
   validates :title, presence: true
-
-  before_validation :set_published_at
-
-  scope :published, -> { where(published: true) }
-  scope :ordered, -> { order(published_at: :desc) }
 
   def to_s
     "#{title}"
@@ -57,9 +53,5 @@ class Communication::Extranet::Post < ApplicationRecord
               .where(extranet_id: self.extranet_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def set_published_at
-    self.published_at = Time.zone.now if published && published_at.nil?
   end
 end

@@ -12,6 +12,9 @@ en:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/document:
+        one: Document
+        other: Documents
       communication/extranet/post:
         one: Post
         other: Posts
@@ -59,10 +62,10 @@ en:
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         feature_alumni: Alumni
-        feature_assets: Asset management
         feature_contacts: Directory
-        feature_posts: News
         feature_jobs: Job board
+        feature_library: Documents
+        feature_posts: News
         has_sso: Has SSO?
         home_sentence: Sentence displayed on homepage
         host: Domain
@@ -78,6 +81,10 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
+      communication/extranet/document:
+        name: Name
+        published: Published?
+        published_at: Publication date
       communication/extranet/post:
         author: Author
         featured_image: Featured image

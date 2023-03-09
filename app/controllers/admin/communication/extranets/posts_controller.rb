@@ -2,6 +2,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   load_and_authorize_resource class: Communication::Extranet::Post, through: :extranet
 
   def index
+    @posts = @posts.ordered.page params[:page]
     breadcrumb
   end
 

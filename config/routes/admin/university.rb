@@ -7,22 +7,24 @@ namespace :university do
     namespace :cohorts do
       resources :imports, only: [:index, :show, :new, :create]
     end
-    namespace :experiences do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
   end
   resources :alumni, only: [:index, :show] do
     member do
       get 'cohorts' => 'alumni/cohorts#edit'
       patch 'cohorts' => 'alumni/cohorts#update'
-      get 'experiences' => 'alumni/experiences#edit'
-      patch 'experiences' => 'alumni/experiences#update'
     end
   end
   resources :people do
     member do
       get :static
       get "/translations/:lang" => "people#in_language", as: :show_in_language
+      get 'experiences' => 'people/experiences#edit'
+      patch 'experiences' => 'people/experiences#update'
+    end
+  end
+  namespace :people do
+    namespace :experiences do
+      resources :imports, only: [:index, :show, :new, :create]
     end
   end
   resources :organizations do
