@@ -12,16 +12,6 @@ action += link_to t('university.manage_cohorts'),
   <%= render 'admin/education/cohorts/list', cohorts: @alumnus.cohorts.ordered %>
 <% end %>
 
-<%
-action = ''
-action += link_to t('university.manage_experiences'),
-                  experiences_admin_university_alumnus_path(@alumnus),
-                  class: button_classes if can?(:update, @alumnus)
-%>
-<%= osuny_panel University::Person::Experience.model_name.human(count: 2), action: action do %>
-  <%= render 'admin/university/people/experiences/list', experiences: @alumnus.experiences.ordered %>
-<% end %>
-
 <% content_for :action_bar_right do %>
   <%= edit_link @alumnus %>
 <% end %>

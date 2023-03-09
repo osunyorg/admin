@@ -105,6 +105,7 @@ en:
       label: Background tasks pending
       hint: Those tasks precompute your data in order to minimize its carbon footprint. It creates a delay before your changes are online.
     password_hint: Leave blank if you do not wish to change the password.
+    seo: SEO
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
     successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."
