@@ -5,25 +5,25 @@
     font-family: Aestetico
     font-style: normal
     font-weight: 400
-    src: url(https://ran-coper.fr/assets/fonts/Aestetico-Light/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-Light/font.woff)format("woff")
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-Light/font.woff2) format("woff2"), url(https://ran-coper.fr/assets/fonts/Aestetico-Light/font.woff) format("woff")
 @font-face
     font-display: swap
     font-family: Aestetico
     font-style: italic
     font-weight: 400
-    src: url(https://ran-coper.fr/assets/fonts/Aestetico-LightIt/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-LightIt/font.woff)format("woff")
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-LightIt/font.woff2) format("woff2"), url(https://ran-coper.fr/assets/fonts/Aestetico-LightIt/font.woff) format("woff")
 @font-face
     font-display: swap
     font-family: Aestetico
     font-style: normal
     font-weight: 700
-    src: url(https://ran-coper.fr/assets/fonts/Aestetico-Regular/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-Regular/font.woff)format("woff")
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-Regular/font.woff2) format("woff2"), url(https://ran-coper.fr/assets/fonts/Aestetico-Regular/font.woff) format("woff")
 @font-face
     font-display: swap
     font-family: Aestetico
     font-style: italic
     font-weight: 700
-    src: url(https://ran-coper.fr/assets/fonts/Aestetico-RegularIt/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-RegularIt/font.woff)format("woff")
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-RegularIt/font.woff2) format("woff2"), url(https://ran-coper.fr/assets/fonts/Aestetico-RegularIt/font.woff) format("woff")
 
 // VARIABLES
 $color-accent: #134b3e
@@ -41,9 +41,9 @@ body
         
     h1, .h1
         font-weight: 400
-        @include media-breakpoint-up(md)
-            font-size: px2rem(60)
-            line-height: px2rem(80px)
+        @media screen and (max-width: 768px)
+            font-size: 3.75rem
+            line-height: 5rem
         a
             color: $color-accent
 
@@ -61,7 +61,7 @@ nav.navbar
         max-width: 191px
         width: 100%
     .navbar-nav a
-        font-size: px2rem(18)
+        font-size: 1.125rem
         font-weight: 300
         &::after
             margin-left: $spacer
