@@ -64,11 +64,13 @@ fr:
         feature_posts: Actualités
         feature_jobs: Offres d'emploi
         has_sso: A un SSO ?
+        home_sentence: Phrase affichée sur la home
         host: Domaine
         logo: Logo (.png, .jpg, .svg)
         name: Nom
         privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
+        sass: Style custom
         sso_button_label: Libellé du bouton de connexion
         sso_cert: Certificat
         sso_inherit_from_university: SSO hérité de l'Université
