@@ -1,15 +1,5 @@
 <%= simple_form_for experience, url: experience.persisted? ? experience_path(experience) : experiences_path do |f| %>
 
-  <% if experience.errors.any? %>
-    <div id="error_explanation" class="text-danger">
-      <ul class="list-unstyled">
-        <% experience.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row">
     <div class="col-lg-6">
       <%= f.input :description, as: :string %>
@@ -26,6 +16,7 @@
       <%= f.input :organization_name,
                   label: University::Organization.model_name.human,
                   as: :autocomplete,
+                  required: true,
                   url: search_organizations_path,
                   placeholder: t("extranet.experiences.search_organization"),
                   input_html: {

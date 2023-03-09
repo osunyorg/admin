@@ -33,11 +33,12 @@ class University::Person::Experience < ApplicationRecord
   belongs_to :person
   belongs_to :organization, class_name: "University::Organization"
 
-  validates_presence_of :organization
   validates_presence_of :from_year
   # TODO validateur de comparaison
   # validates_numericality_of :to_year, { greater_than_or_equal_to: :from_year }, allow_nil: true
   validate :to_year, :not_before_from_year
+
+  after_validation :deport_error_on_organization
 
   scope :ordered, -> { order('university_person_experiences.to_year DESC NULLS FIRST, university_person_experiences.from_year') }
   scope :recent, -> {
@@ -60,6 +61,12 @@ class University::Person::Experience < ApplicationRecord
   def not_before_from_year
     if to_year.present? && to_year < from_year
       errors.add :to_year
+    end
+  end
+
+  def deport_error_on_organization
+    if errors[:organization] && organization_name
+      errors.add :organization_name, :required
     end
   end
 
