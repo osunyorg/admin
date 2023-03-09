@@ -1,0 +1,76 @@
+// FONTS
+
+@font-face
+    font-display: swap
+    font-family: Aestetico
+    font-style: normal
+    font-weight: 400
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-Light/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-Light/font.woff)format("woff")
+@font-face
+    font-display: swap
+    font-family: Aestetico
+    font-style: italic
+    font-weight: 400
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-LightIt/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-LightIt/font.woff)format("woff")
+@font-face
+    font-display: swap
+    font-family: Aestetico
+    font-style: normal
+    font-weight: 700
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-Regular/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-Regular/font.woff)format("woff")
+@font-face
+    font-display: swap
+    font-family: Aestetico
+    font-style: italic
+    font-weight: 700
+    src: url(https://ran-coper.fr/assets/fonts/Aestetico-RegularIt/font.woff2)format("woff2"),url(https://ran-coper.fr/assets/fonts/Aestetico-RegularIt/font.woff)format("woff")
+
+// VARIABLES
+$color-accent: #134b3e
+$color-text: #000000
+$color-text-alt: #454545
+$color-border: rgba(19, 75, 62, 0.2)
+$color-background-alt: #E7EDEC
+$color-background: white
+
+// TYPOGRAPHY
+
+body
+    font-family: "Aestetico", sans-serif !important
+    font-weight: 300
+        
+    h1, .h1
+        font-weight: 400
+        @include media-breakpoint-up(md)
+            font-size: px2rem(60)
+            line-height: px2rem(80px)
+        a
+            color: $color-accent
+
+// Header
+header, .header
+    background-color: $color-background-alt
+    .header__additional_data
+        transform: translateY(-60%)
+
+// Navbar
+nav.navbar
+    > .container
+        align-items: flex-start
+    .navbar-brand img
+        max-width: 191px
+        width: 100%
+    .navbar-nav a
+        font-size: px2rem(18)
+        font-weight: 300
+        &::after
+            margin-left: $spacer
+        &.dropdown-toggle i
+            margin-right: $spacer
+        &.dropdown-item:active
+            background-color: transparentize($color-accent, .5)
+    .active .nav-link
+        color: $color-accent
+        text-decoration: underline
+        text-decoration-color: $color-accent
+        text-underline-offset: 2px
