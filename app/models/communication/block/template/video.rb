@@ -4,6 +4,10 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
   has_component :video_title, :string
   has_component :transcription, :text
 
+  def video_iframe
+    Video::Provider.find(url).iframe_tag(title: video_title)
+  end
+
   protected
 
   def check_accessibility
