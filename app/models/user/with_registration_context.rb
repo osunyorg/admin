@@ -9,7 +9,8 @@ module User::WithRegistrationContext
     private
 
     def extranet_access
-      unless registration_context.alumni.where(email: email).any?
+      unless (registration_context.has_feature?(:alumni) && registration_context.alumni.where(email: email).any?) || 
+             (registration_context.has_feature?(:contacts) && registration_context.connected_persons.where(email: email).any?)
         if registration_context.registration_contact.present?
           errors.add :email, I18n.t('extranet.errors.email_not_allowed_with_contact', contact: registration_context.registration_contact)
         else
