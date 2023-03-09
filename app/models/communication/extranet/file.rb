@@ -28,6 +28,8 @@ class Communication::Extranet::File < ApplicationRecord
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
+  has_one_attached_deletable :file
+
   validates :name, presence: true
 
   def to_s

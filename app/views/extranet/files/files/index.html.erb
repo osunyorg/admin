@@ -1,3 +1,18 @@
 <% content_for :title, Communication::Extranet.human_attribute_name(:feature_files) %>
 
-<%= render 'extranet/files/files/list', files: @files %>
+<div class="row mt-n5">
+  <% @files.each do |file| %>
+    <div class="col-lg-4">
+      <div class="position-relative mt-5">
+        <p class="mt-2">
+          <b><%= file %></b><br>
+          <span class="text-muted"><%= l file.published_at.to_date %><span>
+        </p>
+        <%= link_to t('extranet.files.download'), 
+                    file.file.url,
+                    class: 'btn btn-primary',
+                    target: :_blank if file.file.attached? %>
+      </div>
+    </div>
+  <% end %>
+</div>
