@@ -19,8 +19,15 @@ module User::WithRegistrationContext
     end
 
     def user_can_access_registration_context?
-      (registration_context.has_feature?(:alumni) && registration_context.alumni.where(email: email).any?) ||
-        (registration_context.has_feature?(:contacts) && registration_context.connected_persons.where(email: email).any?)
+      user_is_alumni? || user_is_contact?
+    end
+
+    def user_is_alumni?
+      registration_context.has_feature?(:alumni) && registration_context.alumni.where(email: email).any?
+    end
+
+    def user_is_contact?
+      registration_context.has_feature?(:contacts) && registration_context.connected_persons.where(email: email).any?
     end
 
   end
