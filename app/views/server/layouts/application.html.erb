@@ -15,7 +15,7 @@
   <body class="<%= body_classes %>">
     <%= render "admin/layouts/themes/pure/nav", context: :server %>
     <%= render "admin/layouts/themes/pure/hero" %>
-    <%= render 'admin/application/notice' %>
+    <%= render 'application/notice' %>
     <main class="container-fluid">
       <% unless current_user.confirmed? %>
         <div class="alert alert-warning">
