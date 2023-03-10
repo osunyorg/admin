@@ -214,7 +214,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_131421) do
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
   end
 
-  create_table "communication_website_git_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "previous_path"
     t.string "about_type", null: false
     t.uuid "about_id", null: false

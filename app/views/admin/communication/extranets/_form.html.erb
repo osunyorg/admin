@@ -23,7 +23,14 @@
                     direct_upload: true %>
         <%= f.input :color, as: :color %>
         <%= f.input :home_sentence %>
-        <%= f.input :sass %>
+        <%= f.input :sass,
+                    input_html: {
+                      data: {
+                        provider: 'codemirror',
+                        "codemirror-mode": "sass",
+                        "codemirror-indentation": 4
+                      }
+                    } %>
       <% end %>
     </div>
     <div class="col-xl-6">

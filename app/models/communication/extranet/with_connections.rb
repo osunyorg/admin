@@ -27,4 +27,8 @@ module Communication::Extranet::WithConnections
     University::Person.where(id: ids)
   end
 
+  def experiences_through_connections
+    University::Person::Experience.where(person_id: connected_persons, organization_id: connected_organizations)
+  end
+
 end
