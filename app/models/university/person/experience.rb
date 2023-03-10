@@ -34,8 +34,6 @@ class University::Person::Experience < ApplicationRecord
   belongs_to :organization, class_name: "University::Organization"
 
   validates_presence_of :from_year
-  # TODO validateur de comparaison
-  # validates_numericality_of :to_year, { greater_than_or_equal_to: :from_year }, allow_nil: true
   validate :to_year, :not_before_from_year
 
   after_validation :deport_error_on_organization
@@ -65,7 +63,7 @@ class University::Person::Experience < ApplicationRecord
   end
 
   def deport_error_on_organization
-    if errors[:organization] && organization_name
+    if errors[:organization].present? && organization_name
       errors.add :organization_name, :required
     end
   end

@@ -1,3 +1,5 @@
 <% content_for :title, @experience %>
 
 <%= render 'form', experience: @experience %>
+
+<%= link_to t('delete'), experience_path(@experience), method: :delete, data: { confirm: t('please_confirm') }, class: 'btn btn-danger mt-3' %>
