@@ -20,7 +20,10 @@ namespace :alumni do
   root to: 'persons#index'
 end
 namespace :posts do
-  get ':slug' => 'posts#show', as: :communication_extranet_post
+  get 'categories' => 'categories#index', as: :categories
+  get 'categories/:slug' => 'categories#show', as: :category
+  # Categories before slug !
+  get ':slug' => 'posts#show', as: :post
   root to: 'posts#index'
 end
 namespace :library do

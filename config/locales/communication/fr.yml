@@ -19,6 +19,9 @@ fr:
         one: Actualité
         other: Actualités
         all: Toutes les actualités
+      communication/extranet/post/category:
+        one: Catégorie
+        other: Catégories
       communication/website:
         one: Site Web
         other: Sites Web
@@ -87,6 +90,7 @@ fr:
         published_at: Date de publication
       communication/extranet/post:
         author: Auteur·rice
+        category: Catégorie
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
@@ -94,6 +98,8 @@ fr:
         published_at: Date de publication
         slug: Identifiant
         title: Titre
+      communication/extranet/post/category:
+        name: Nom
       communication/website:
         about: Sujet du site
         about_: Site indépendant

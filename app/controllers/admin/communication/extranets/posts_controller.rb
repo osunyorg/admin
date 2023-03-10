@@ -3,6 +3,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
 
   def index
     @posts = @posts.ordered.page params[:page]
+    @categories = @extranet.post_categories.ordered
     breadcrumb
   end
 
@@ -17,7 +18,6 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def new
-    @post.extranet = @extranet
     if current_user.person.present?
       @post.author = current_user.person
     end
@@ -30,7 +30,6 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def create
-    @post.extranet = @extranet
     @post.add_photo_import params[:photo_import]
     if @post.save
       redirect_to admin_communication_extranet_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
@@ -70,7 +69,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
       :title, :summary, :text,
       :published, :published_at, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :author_id
+      :author_id, :category_id
     )
     .merge(
       university_id: current_university.id

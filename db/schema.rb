@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_131421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -117,6 +117,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
     t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
   end
 
+  create_table "communication_extranet_post_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_post_categories_on_extranet_id"
+    t.index ["university_id"], name: "index_communication_extranet_post_categories_on_university_id"
+  end
+
   create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.boolean "published", default: false
@@ -130,7 +141,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
     t.text "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "category_id"
     t.index ["author_id"], name: "index_communication_extranet_posts_on_author_id"
+    t.index ["category_id"], name: "index_communication_extranet_posts_on_category_id"
     t.index ["extranet_id"], name: "index_communication_extranet_posts_on_extranet_id"
     t.index ["university_id"], name: "index_communication_extranet_posts_on_university_id"
   end
@@ -389,7 +402,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -988,6 +1001,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
   add_foreign_key "communication_extranet_connections", "universities"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_documents", "universities"
+  add_foreign_key "communication_extranet_post_categories", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_post_categories", "universities"
+  add_foreign_key "communication_extranet_posts", "communication_extranet_post_categories", column: "category_id"
   add_foreign_key "communication_extranet_posts", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_posts", "universities"
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
@@ -998,6 +1014,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_111101) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"
