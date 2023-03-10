@@ -64,6 +64,7 @@ class Communication::Extranet < ApplicationRecord
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
+  validates_presence_of :about_type, :about_id, if: :feature_alumni
 
   before_validation :sanitize_fields
 
