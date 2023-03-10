@@ -14,8 +14,6 @@
 //= require slug/slug
 //= require cocoon
 //= require codemirror/lib/codemirror
-//= require codemirror/mode/css/css
-//= require codemirror/mode/sass/sass
 //= require_self
 //= require_tree ./commons
 //= require_tree ../application/plugins
