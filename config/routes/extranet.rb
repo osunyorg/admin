@@ -18,7 +18,7 @@ namespace :alumni do
   get 'years/:id' => 'academic_years#show', as: :education_academic_year
   root to: 'persons#index'
 end
-resources :organizations, except: :destroy do
+resources :organizations, except: [:index, :destroy] do
   collection do
     get 'search' => 'organizations#search', as: :search, defaults: { format: 'json' }
   end

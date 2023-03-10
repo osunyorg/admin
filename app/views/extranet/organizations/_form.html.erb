@@ -1,0 +1,92 @@
+<% url = organization.persisted? ? organization_path(organization) : organizations_path %>
+<%= simple_form_for organization, url: url do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-xl-6">
+      <%= f.input :name %>
+      <%= render 'admin/application/summary/form', f: f, about: organization %>
+      <%= f.input :text,
+                  as: :summernote,
+                  input_html: {
+                    data: { 'summernote-config' => 'mini-list' }
+                  } %>
+
+      <h2><%= University::Organization.human_attribute_name('legal') %></h2>
+      <div class="row">
+        <div class="col-xl-6">
+          <%= f.input :long_name %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :kind, include_blank: false %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :siren %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+      <h2><%= University::Organization.human_attribute_name('physical') %></h2>
+      <div class="row">
+        <div class="col-xl-6">
+          <%= f.input :address_name %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :address %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :address_additional %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :zipcode %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :city %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :country, input_html: { class: 'form-select' } %>
+        </div>
+      </div>
+
+      <h2><%= University::Organization.human_attribute_name('digital') %></h2>
+      <div class="row">
+        <div class="col-xl-6">
+          <%= f.input :url %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :phone %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :email %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :linkedin %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :twitter %>
+        </div>
+        <div class="col-xl-6">
+          <%= f.input :mastodon %>
+        </div>
+      </div>
+
+      <h2><%= University::Organization.human_attribute_name('logos') %></h2>
+      <%= f.input :logo,
+                  as: :single_deletable_file,
+                  input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                  preview: 200,
+                  resize: false,
+                  direct_upload: true %>
+      <%= f.input :logo_on_dark_background,
+                  as: :single_deletable_file,
+                  input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                  preview: 200,
+                  resize: false,
+                  direct_upload: true %>
+    </div>
+
+  </div>
+  <%= submit f %>
+<% end %>

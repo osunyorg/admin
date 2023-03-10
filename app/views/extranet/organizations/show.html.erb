@@ -1,0 +1,149 @@
+<% content_for :title, @organization %>
+<div class="row">
+  <div class="col-md-8">
+    <%= render 'admin/application/summary/show', about: @organization %>
+
+    <%= osuny_panel University::Organization.human_attribute_name('text') do %>
+      <%= @organization.text.to_s.html_safe %>
+    <% end if strip_tags(@organization.text.to_s).present? %>
+
+    <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
+      <div class="row pure__row--small">
+        <% [
+            :address_name,
+            :address,
+            :address_additional,
+            :zipcode,
+            :city,
+          ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+        <% if @organization.country.present? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('country') %>
+            <p><%= ISO3166::Country[@organization.country].common_name %></p>
+          </div>
+        <% end %>
+        <% if @organization.geolocated? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
+            <p><%= @organization.geo_point.to_s %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
+      <div class="row pure__row--small">
+        <% unless @organization.url.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('url') %>
+            <p><%= link_to  @organization.url,
+                            @organization.url,
+                            target: :_blank %></p>
+          </div>
+        <% end %>
+        <% [
+          :phone,
+              :email,
+              :linkedin,
+              :twitter,
+              :mastodon
+            ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+
+    <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
+      <div class="row pure__row--small">
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('long_name') %>
+          <p><%= @organization.long_name %></p>
+        </div>
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('kind') %>
+          <p><%= @organization.kind_i18n %></p>
+        </div>
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('siren') %>
+          <p><%= @organization.siren %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <%= render 'admin/communication/blocks/list', about: @organization %>
+  </div>
+
+  <div class="col-md-4">
+    <%= osuny_panel t('metadata') do %>
+      <%= osuny_label University::Organization.human_attribute_name('slug') %>
+      <p><%= @organization.slug %></p>
+      <%= osuny_label University::Organization.human_attribute_name('active') %>
+      <p><%= t @organization.active %></>
+    <% end %>
+
+    <%= osuny_panel t('university.organization.logo') do %>
+      <% if @organization.logo.attached? %>
+        <%= osuny_label University::Organization.human_attribute_name('logo') %><br>
+        <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+      <% end %>
+      <% if @organization.logo_on_dark_background.attached? %>
+        <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %><br>
+        <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+      <% end %>
+    <% end if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
+
+    <%= render 'admin/application/meta_description/show', about: @organization %>
+  </div>
+</div>
+
+<% if @organization.experiences.any? %>
+  <h2><%= t('university.organization.employees') %></h2>
+
+  <div class="table-responsive">
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
+          <th><%= University::Person.human_attribute_name('last_name') %></th>
+          <th><%= University::Person.human_attribute_name('first_name') %></th>
+          <th><%= t('university.person.experience.period') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @organization.experiences.ordered.each do |experience| %>
+          <%
+            alumnus = experience.person
+            path = admin_university_alumnus_path(alumnus)
+          %>
+          <tr>
+            <td><%= link_to_if can?(:read, alumnus), alumnus.last_name, path %></td>
+            <td><%= link_to_if can?(:read, alumnus), alumnus.first_name, path %></td>
+            <td>
+              <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @organization %>
+  <%= static_link static_admin_university_organization_path(@organization) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @organization %>
+<% end %>
