@@ -4,7 +4,11 @@
   <% @documents.each do |document| %>
     <div class="col-lg-4">
       <article class="position-relative mt-5">
-        <p class="mt-2">
+        <div>
+          <i class="bi bi-file-earmark-text display-1"></i>
+          <span>PDF - 120ko</span>
+        </div>
+        <p>
           <b><%= document %></b><br>
           <span class="text-muted"><%= l document.published_at.to_date %><span>
         </p>
