@@ -7,17 +7,21 @@ namespace :contacts do
   get 'search' => 'search#index', as: :search
   root to: 'persons#index'
 end
-namespace :alumni do 
+namespace :alumni do
   get 'cohorts' => 'cohorts#index', as: :education_cohorts
   get 'cohorts/:id' => 'cohorts#show', as: :education_cohort
   get 'organizations' => 'organizations#index', as: :university_organizations
-  get 'organizations/search' => 'organizations#search', as: :search_university_organizations, defaults: { format: 'json' }
-  get 'organizations/:id' => 'organizations#show', as: :university_organization
+  get 'organization/:id' => 'organizations#show', as: :university_organization
   get 'persons' => 'persons#index', as: :university_persons
   get 'persons/:id' => 'persons#show', as: :university_person
   get 'years' => 'academic_years#index', as: :education_academic_years
   get 'years/:id' => 'academic_years#show', as: :education_academic_year
   root to: 'persons#index'
+end
+resources :organizations, except: [:index, :destroy] do
+  collection do
+    get 'search' => 'organizations#search', as: :search, defaults: { format: 'json' }
+  end
 end
 namespace :posts do
   get 'categories' => 'categories#index', as: :categories

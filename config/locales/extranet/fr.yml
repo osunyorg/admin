@@ -2,9 +2,11 @@ fr:
   extranet:
     features: Fonctionnalités
     account:
-      my: Mon compte
       edit: Modifier mon compte
       edit_personal_data: Modifier mon profil
+      experiences:
+        create_new_html: L'organisation <b>%{name}</b> n'existe pas, souhaitez-vous <a class='btn btn-primary' href='%{url}'>la créer</a> ?
+      my: Mon compte
       updated: Mise à jour effectuée
       logout: Déconnexion
     contacts:

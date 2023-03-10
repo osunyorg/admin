@@ -78,6 +78,7 @@ fr:
         from_year: Année de début
         new: Ajouter une expérience
         organization: Organisation
+        organization_name: Organisation
         to_year: Année de fin
       university/person/involvement:
         description: Mission (dans ce contexte)
