@@ -107,6 +107,11 @@ bootstrap-print-css@^1.0.1:
   resolved "https://registry.yarnpkg.com/bootstrap-print-css/-/bootstrap-print-css-1.0.1.tgz#acc0264388caebbad0805e60c869d42cd6fe55bf"
   integrity sha512-I73Cw87BaxCccTjo3qEbvn7KRb55msMxTuT7mpkAAY4Obq8iG9xCybdxnJqq+RrykLD79O3092AiJwaKiEex7w==
 
+codemirror@5:
+  version "5.65.12"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.65.12.tgz#294fdf097d10ac5b56a9e011a91eff252afc73ae"
+  integrity sha512-z2jlHBocElRnPYysN2HAuhXbO3DNB0bcSKmNz3hcWR2Js2Dkhc1bEOxG93Z3DeUrnm+qx56XOY5wQmbP5KY0sw==
+
 cropperjs@^1.5.12:
   version "1.5.12"
   resolved "https://registry.yarnpkg.com/cropperjs/-/cropperjs-1.5.12.tgz#d9c0db2bfb8c0d769d51739e8f916bbc44e10f50"

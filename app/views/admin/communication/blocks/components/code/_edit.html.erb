@@ -4,7 +4,8 @@
   <%= label %>
 </label>
 <textarea :id="<%= dom_id.html_safe %>"
-          class="form-control mb-3"
+          class="form-control mb-3 codemirror-vue"
+          data-codemirror-mode="<%= codemirror_mode %>"
           rows="<%= rows %>"
           v-model="<%= model %>.<%= property %>"
           placeholder="<%= placeholder %>"></textarea>
