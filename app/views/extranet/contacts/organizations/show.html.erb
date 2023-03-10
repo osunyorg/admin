@@ -7,6 +7,36 @@
         <div class="biography mb-5">
           <%= sanitize @organization.text %>
         </div>
+        <% if @current_experiences.any? %>
+          <div class="experiences mb-5">
+            <h3><%= t('extranet.contacts.organizations.experiences', count: @current_experiences.pluck(:person_id).uniq.size) %></h3>
+
+            <% @current_experiences.each do |experience| %>
+              <article class="experience mb-4">
+                <div class="row gx-3">
+                  <div class="col-md-3">
+                    <% if experience.person.best_picture.attached? %>
+                      <%= kamifusen_tag experience.person.best_picture, width: 400, class: 'img-fluid',
+                        sizes: {
+                            '(max-width: 576px)': '400px',
+                            '(max-width: 991px)': '200px'
+                        } %>
+                    <% else %>
+                      <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+                    <% end %>
+                  </div>
+                  <div class="col-md-9">
+                    <%= link_to [:contacts, experience.person], class: 'stretched-link' do %>
+                      <p>
+                        <b><%= experience.person.first_name %> <%= experience.person.last_name %></b><br>
+                        <span class="text-muted"><%= experience.description %></span>
+                      </p>
+                    <% end %>
+                  </div>
+              </article>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
