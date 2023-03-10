@@ -16,11 +16,11 @@
           <% end %>
         </p>
         <% if @document.category %>
-          <%= osuny_label Communication::Extranet::Document.human_attribute_name('category') %>
+          <%= osuny_label Communication::Extranet::Document::Category.model_name.human %>
           <p><%= link_to @document.category, [:admin, @document.category] %></p>
         <% end %>
         <% if @document.kind %>
-          <%= osuny_label Communication::Extranet::Document.human_attribute_name('kind') %>
+          <%= osuny_label Communication::Extranet::Document::Kind.model_name.human %>
           <p><%= link_to @document.kind, [:admin, @document.kind] %></p>
         <% end %>
       <% end %>

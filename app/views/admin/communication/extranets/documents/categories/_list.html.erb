@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th class="ps-0" width="60%"><%= Communication::Extranet::Document::Category.human_attribute_name('name') %></th>
+        <th><%= Communication::Extranet::Document::Category.human_attribute_name('quantity') %></th>
         <th></th>
       </tr>
     </thead>
@@ -10,7 +11,7 @@
       <% categories.each do |category| %>
         <tr>
           <td class="ps-0"><%= link_to category, admin_communication_extranet_document_category_path(extranet_id: category.extranet.id, id: category.id) %></td>
-
+          <td><%= category.documents.count %></td>
           <td>
             <div class="btn-group" role="group">
               <%= link_to t('edit'),

@@ -1,10 +1,11 @@
 <% content_for :title, Communication::Extranet.human_attribute_name(:feature_library) %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
-  <section class="mb-5">
+  <% action = create_link Communication::Extranet::Document %>
+  <%= osuny_panel Communication::Extranet::Document.model_name.human(count: 2), action: action do %>
     <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
     <%= paginate @documents, theme: 'bootstrap-5' %>
-  </section>
+  <% end %>
 
   <% action = link_to t('create'), new_admin_communication_extranet_document_category_path, class: button_classes %>
   <%= osuny_panel Communication::Extranet::Document::Category.model_name.human(count: 2), action: action do %>

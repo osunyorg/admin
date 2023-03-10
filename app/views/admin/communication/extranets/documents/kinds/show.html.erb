@@ -1,8 +1,10 @@
 <% content_for :title, @kind %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
-  <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
-  <%= paginate @documents, theme: 'bootstrap-5' %>
+  <%= osuny_panel Communication::Extranet::Document.model_name.human(count: 2) do %>
+    <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
+    <%= paginate @documents, theme: 'bootstrap-5' %>
+  <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>

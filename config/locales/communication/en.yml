@@ -15,6 +15,12 @@ en:
       communication/extranet/document:
         one: Document
         other: Documents
+      communication/extranet/document/category:
+        one: Category
+        other: Categories
+      communication/extranet/document/kind:
+        one: Kind
+        other: Kinds
       communication/extranet/post:
         one: Post
         other: Posts
@@ -88,6 +94,12 @@ en:
         name: Name
         published: Published?
         published_at: Publication date
+      communication/extranet/document/category:
+        name: Name
+        quantity: Quantity of documents
+      communication/extranet/document/kind:
+        name: Name
+        quantity: Quantity of documents
       communication/extranet/post:
         author: Author
         category: Category
@@ -100,6 +112,7 @@ en:
         title: Title
       communication/extranet/post/category:
         name: Name
+        quantity: Quantity of posts
       communication/website:
         about: About
         about_: Independent website

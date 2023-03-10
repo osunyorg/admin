@@ -15,6 +15,12 @@ fr:
       communication/extranet/document:
         one: Document
         other: Documents
+      communication/extranet/document/category:
+        one: Catégorie
+        other: Catégories
+      communication/extranet/document/kind:
+        one: Type
+        other: Types
       communication/extranet/post:
         one: Actualité
         other: Actualités
@@ -88,6 +94,12 @@ fr:
         name: Nom
         published: Publié ?
         published_at: Date de publication
+      communication/extranet/document/category:
+        name: Nom
+        quantity: Quantité de documents
+      communication/extranet/document/kind:
+        name: Nom
+        quantity: Quantité de documents
       communication/extranet/post:
         author: Auteur·rice
         category: Catégorie
@@ -100,6 +112,7 @@ fr:
         title: Titre
       communication/extranet/post/category:
         name: Nom
+        quantity: Quantité d'actualités
       communication/website:
         about: Sujet du site
         about_: Site indépendant
