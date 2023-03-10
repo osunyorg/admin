@@ -16,8 +16,6 @@ kind:
   :zipcode,
   :city,
   :country,
-  :latitude,
-  :longitude,
   :phone,
   :email,
   :twitter,
@@ -43,6 +41,9 @@ contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon %>
 <%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
 <%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
+  geolocation:
+    latitude: <%= @about.latitude %>
+    longitude: <%= @about.longitude %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>

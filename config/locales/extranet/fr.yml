@@ -10,6 +10,10 @@ fr:
       updated: Mise à jour effectuée
       logout: Déconnexion
     contacts:
+      organizations:
+        experiences: Membres de cette organisation (%{count})
+      persons:
+        experiences: Organisations dont iel fait partie (%{count})
       search:
         home: Chercher dans l'annuaire
         title: Recherche

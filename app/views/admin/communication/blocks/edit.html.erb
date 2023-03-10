@@ -71,9 +71,9 @@
         this.uploadFile(event.target, files[0], object, key);
       },
       uploadFile(input, file, object, key) {
-        var size = Math.round(file.size / 1024 / 1024), 
+        var size = Math.round(file.size / 1024 / 1024),
             sizeLimit = <%= Communication::Block::IMAGE_MAX_SIZE %>,
-            sizeLimitMo = 0, 
+            sizeLimitMo = 0,
             controller;
         if (input.hasAttribute('data-size-limit')) {
           sizeLimit = input.getAttribute('data-size-limit');
@@ -107,6 +107,13 @@
           this.initSummernote($summernoteElements.get(index));
         }.bind(this));
       },
+      handleCodemirrors() {
+        var $codemirrorElements = $('.codemirror-vue');
+
+        $codemirrorElements.each(function(index){
+          this.initCodemirror($codemirrorElements.get(index));
+        }.bind(this));
+      },
       initSummernote(element) {
         var config = element.getAttribute('data-summernote-config') || 'default';
         $(element).summernote({
@@ -121,10 +128,21 @@
             }.bind(this)
           }
         });
+      },
+      initCodemirror(element) {
+        CodeMirror.fromTextArea(element, {
+            lineNumbers: true,
+            styleActiveLine: true,
+            indentUnit: 2,
+            viewportMargin: Infinity,
+            mode: element.getAttribute('data-codemirror-mode')
+        });
       }
     },
     mounted: function() {
       this.handleSummernotes();
+      // Use Timeout to prevent display issues
+      setTimeout(this.handleCodemirrors.bind(this), 0);
     }
   });
 

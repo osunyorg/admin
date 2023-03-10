@@ -12,6 +12,7 @@
 //= require summernote/summernote-bs5
 //= require slug/slug
 //= require cocoon
+//= require codemirror/lib/codemirror
 //= require_self
 //= require_tree ./commons
 //= require_tree ../application/plugins
