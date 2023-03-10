@@ -1,15 +1,14 @@
 <% content_for :title, current_context %>
 <% content_for :header do %>
-  <h1>
+  <div class="header__title">
     <% if current_extranet.home_sentence.present? %>
-      <%= current_extranet.home_sentence.html_safe %>
+      <%= sanitize current_extranet.home_sentence %>
     <% else %>
-      <%= t 'extranet.home.welcome' %>
+      <p><%= t 'extranet.home.welcome' %></p>
     <% end %>
-  </h1>
+  </div>
 <% end %>
 
 <%= render 'extranet/home/features/posts' if current_extranet.feature_posts %>
 <%= render 'extranet/home/features/alumni' if current_extranet.feature_alumni %>
 <%= render 'extranet/home/features/contacts' if current_extranet.feature_contacts %>
-

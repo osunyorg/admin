@@ -22,7 +22,7 @@
                     preview: 100,
                     direct_upload: true %>
         <%= f.input :color, as: :color %>
-        <%= f.input :home_sentence %>
+        <%= f.input :home_sentence, as: :summernote, input_html: { data: { 'summernote-config': 'link' } } %>
         <%= f.input :sass,
                     input_html: {
                       data: {
