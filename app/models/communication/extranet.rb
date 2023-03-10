@@ -104,7 +104,7 @@ class Communication::Extranet < ApplicationRecord
   alias academic_years years
 
   def organizations
-    about&.alumni_organizations
+    about&.alumni_organizations || connected_organizations
   end
 
   def experiences
