@@ -22,8 +22,8 @@ window.codemirrorManager = {
 
     createInstance: function (textarea) {
         'use strict';
-        var mode = textarea.getAttribute("data-codemirror-mode"),
-            indentationLevel = window.parseInt(textarea.getAttribute("data-codemirror-indentation"));
+        var mode = textarea.getAttribute('data-codemirror-mode'),
+            indentationLevel = window.parseInt(textarea.getAttribute('data-codemirror-indentation'));
 
         if (isNaN(indentationLevel)) {
             indentationLevel = 2;
