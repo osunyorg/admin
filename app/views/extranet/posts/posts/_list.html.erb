@@ -1,6 +1,6 @@
-<div class="row mt-n5">
+<div class="row mt-n5 posts-list">
   <% posts.each do |post| %>
-    <div class="col-lg-4">
+    <article class="col-lg-4">
       <div class="position-relative mt-5">
         <% if post.featured_image.attached? && post.featured_image.representable? %>
           <%= kamifusen_tag post.featured_image, width: 800, height: 500, class: 'img-fluid' %>
@@ -11,6 +11,6 @@
         </p>
         <%= link_to t('extranet.posts.read_post'), posts_post_path(post.slug), class: ' btn btn-outline-primary stretched-link' %>
       </div>
-    </div>
+    </article>
   <% end %>
 </div>
