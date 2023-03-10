@@ -3,14 +3,14 @@
 <div class="row">
   <div class="col-md-8 order-2 order-md-1">
     <div class="row">
-      <div class="col-md-9 mt-n5">
+      <div class="col-md-9">
         <% unless @person.biography.blank? %>
-          <p class="lead mt-5">
+          <p class="lead">
             <%= @person.summary %>
           </p>
         <% end %>
         <% unless @person.biography.blank? %>
-          <div class="biography my-5">
+          <div class="biography mb-5">
             <%= sanitize @person&.biography %>
           </div>
         <% end %>
