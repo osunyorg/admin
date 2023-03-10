@@ -20,7 +20,6 @@
 #  fk_rails_aad7b8db63  (university_id => universities.id)
 #  fk_rails_e53c2a25fc  (extranet_id => communication_extranets.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   name: MyString

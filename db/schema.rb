@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_131421) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_081530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -105,6 +105,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_131421) do
     t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
   end
 
+  create_table "communication_extranet_document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_document_categories_on_extranet_id"
+    t.index ["university_id"], name: "extranet_document_categories_universities"
+  end
+
+  create_table "communication_extranet_document_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_document_kinds_on_extranet_id"
+    t.index ["university_id"], name: "extranet_document_kinds_universities"
+  end
+
   create_table "communication_extranet_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
@@ -113,7 +133,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_131421) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "kind_id"
+    t.uuid "category_id"
+    t.index ["category_id"], name: "extranet_document_categories"
     t.index ["extranet_id"], name: "index_communication_extranet_documents_on_extranet_id"
+    t.index ["kind_id"], name: "index_extranet_document_kinds"
     t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
   end
 
@@ -1011,6 +1035,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_131421) do
   add_foreign_key "communication_blocks", "universities"
   add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_connections", "universities"
+  add_foreign_key "communication_extranet_document_categories", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_document_categories", "universities"
+  add_foreign_key "communication_extranet_document_kinds", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_document_kinds", "universities"
+  add_foreign_key "communication_extranet_documents", "communication_extranet_document_categories", column: "category_id"
+  add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_documents", "universities"
   add_foreign_key "communication_extranet_post_categories", "communication_extranets", column: "extranet_id"

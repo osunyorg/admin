@@ -1,14 +1,14 @@
 <%
-  $class = "block block-testimonials"
+  class_name = "block block-testimonials"
   unless @block.title.blank?
-    $class += " block-with-title"
+    class_name += " block-with-title"
   end
   if !@block.template.elements.one?
-    $class += " with-carousel"
+    class_name += " with-carousel"
   end
 %>
 
-<section class="<%= $class %>">
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <div class="testimonials">
@@ -30,22 +30,25 @@
         <% end %>
 
         <% @block.template.elements.each do |element| %>
+          <% element_blob = element.photo_component.blob %>
           <figure <% if !@block.template.elements.one? %> class="splide__slide" <% end %>>
             <blockquote>
               <p><%= block_component_preview :text, template: element %></p>
             </blockquote>
             <figcaption>
-              <% if element.photo  %>
+              <% if element_blob.present? %>
                 <div class="avatar">
-                  <%#= block_component_preview :photo, template: element %>
+                  <%= kamifusen_tag element_blob, width: 600, class: 'img-fluid mb-1', alt: element.author %>
                 </div>
               <% end %>
-              <% if element.author %>
-                <span class="signature"><%= block_component_preview :author, template: element %></span>
-              <% end %>
-              <% if element.job %>
-                <span class="meta"><%= block_component_preview :job, template: element %></span>
-              <% end %>
+              <p>
+                <% if element.author %>
+                  <span class="signature"><%= block_component_preview :author, template: element %></span>
+                <% end %>
+                <% if element.job %>
+                  <span class="meta"><%= block_component_preview :job, template: element %></span>
+                <% end %>
+              </p>
             </figcaption>
           </figure>
         <% end %>

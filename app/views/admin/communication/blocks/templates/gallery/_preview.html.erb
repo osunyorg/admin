@@ -1,6 +1,6 @@
 <%
 $class = "block block-gallery"
-unless @block.title.blank?
+if @block.title.present?
   $class += " block-with-title"
 end
 
@@ -10,20 +10,19 @@ $class += " block-gallery--" + @block.template.layout
 <section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
-      <div class="top">
-        <% unless @block.title.blank? && @block.template.description.blank? %>
-          <div class="top">
-            <% unless @block.title.blank? %>
-              <h2><%= @block.title %></h2>
-            <% end %>
-            <% unless @block.template.description.blank? %>
-              <div class="description">
-                <p><%= block_component_preview :description %></p>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <% if @block.title.present? || @block.template.description.present? %>
+        <div class="top">
+          <% if @block.title.present? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% if @block.template.description.present? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
       <% if @block.template.layout ===  "carousel" %>
         <% if !@block.template.elements.one? %>
           <div class="splide" role="group" data-splide='{"arrows":true,"pagination":false,"autoWidth":true,"autoplay":false}'>
