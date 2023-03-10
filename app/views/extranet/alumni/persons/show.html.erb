@@ -12,10 +12,38 @@
       </div>
     </div>
     <p class="mb-4"><%= t('extranet.experiences.title') %></p>
-    <%= render 'extranet/alumni/persons/path', person: @person %>
+    <%= render 'extranet/experiences/list', person: @person %>
+
+    <div class="experiences mt-4">
+      <ul class="list-unstyled">
+        <% @person&.cohorts&.each do |cohort| %>
+          <li class="experiences__experience py-4 border-top">
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-0">
+                  <%= link_to [:alumni, cohort] do %>
+                    <b><%= cohort.program %></b><br>
+                    <%= cohort.program.diploma %><br>
+                    <%= cohort.year %>
+                  <% end %>
+                </p>
+              </div>
+              <div class="col-md-6 text-end">
+                <% if cohort.school.logo.attached? %>
+                  <%= kamifusen_tag cohort.school.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
+                <% else %>
+                  <p class="text-end"><%= cohort.school %></p>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
-    <%= render 'extranet/alumni/persons/details', person: @person %>
+    <%= render 'extranet/personal_data/details', person: @person %>
   </div>
 </div>

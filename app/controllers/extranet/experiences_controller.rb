@@ -1,11 +1,11 @@
 class Extranet::ExperiencesController < Extranet::ApplicationController
+  before_action :load_experience, only: [:edit, :update, :destroy]
   def new
     @experience = current_user.experiences.new
     breadcrumb
   end
 
   def edit
-    @experience = current_user.experiences.find(params[:id])
     breadcrumb
   end
 
@@ -13,7 +13,8 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
     @experience = current_user.experiences.new(experience_params)
     @experience.university = current_university
     if @experience.save
-      redirect_to account_path, notice: 'Ok'
+      redirect_to account_path,
+                  notice: t('admin.successfully_created_html', model: @experience.organization.to_s)
     else
       breadcrumb
       render :new
@@ -21,16 +22,26 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   end
 
   def update
-    @experience = current_user.experiences.find(params[:id])
     if @experience.update experience_params
-      redirect_to account_path, notice: 'Ok'
+      redirect_to account_path,
+                  notice: t('admin.successfully_updated_html', model: @experience.organization.to_s)
     else
       breadcrumb
       render :edit
     end
   end
 
+  def destroy
+    @experience.destroy
+    redirect_to account_path,
+                notice: t('admin.successfully_destroyed_html', model: @experience.organization.to_s)
+  end
+
   protected
+
+  def load_experience
+    @experience = current_user.experiences.find_by!(id: params[:id])
+  end
 
   def experience_params
     params.require(:university_person_experience)

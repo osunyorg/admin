@@ -66,6 +66,7 @@ class Communication::Extranet < ApplicationRecord
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
+  validates_presence_of :about_type, :about_id, if: :feature_alumni
 
   before_validation :sanitize_fields
 
@@ -106,11 +107,19 @@ class Communication::Extranet < ApplicationRecord
   alias academic_years years
 
   def organizations
-    about&.alumni_organizations
+    if about.present? && about.respond_to?(:alumni_organizations)
+      about.alumni_organizations
+    else
+      connected_organizations
+    end
   end
 
   def experiences
-    about&.alumni_experiences
+    if about.present? && about.respond_to?(:alumni_experiences)
+      about.alumni_experiences
+    else
+      experiences_through_connections
+    end
   end
 
   def url

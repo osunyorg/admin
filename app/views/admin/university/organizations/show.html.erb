@@ -123,12 +123,12 @@
       <tbody>
         <% @organization.experiences.ordered.each do |experience| %>
           <%
-            alumnus = experience.person
-            path = admin_university_alumnus_path(alumnus)
+            person = experience.person
+            path = admin_university_person_path(person)
           %>
           <tr>
-            <td><%= link_to_if can?(:read, alumnus), alumnus.last_name, path %></td>
-            <td><%= link_to_if can?(:read, alumnus), alumnus.first_name, path %></td>
+            <td><%= link_to_if can?(:read, person), person.last_name, path %></td>
+            <td><%= link_to_if can?(:read, person), person.first_name, path %></td>
             <td>
               <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
             </td>
