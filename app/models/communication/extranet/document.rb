@@ -33,6 +33,8 @@ class Communication::Extranet::Document < ApplicationRecord
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
+  belongs_to :category
+  belongs_to :kind
 
   has_one_attached_deletable :file
 

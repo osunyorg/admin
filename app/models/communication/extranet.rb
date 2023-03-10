@@ -60,6 +60,8 @@ class Communication::Extranet < ApplicationRecord
   has_many :posts
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
   has_many :documents
+  has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
+  has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }

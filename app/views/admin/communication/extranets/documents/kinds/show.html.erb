@@ -1,0 +1,14 @@
+<% content_for :title, @kind %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
+  <%= paginate @documents, theme: 'bootstrap-5' %>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @kind %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @kind %>
+<% end %>

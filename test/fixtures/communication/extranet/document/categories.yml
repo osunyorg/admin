@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  name          :string
+#  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  extranet_id   :uuid             not null, indexed
@@ -19,7 +20,6 @@
 #  fk_rails_6f2232d9f8  (university_id => universities.id)
 #  fk_rails_76e327b90f  (extranet_id => communication_extranets.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   extranet: one

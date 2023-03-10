@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_081530) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_081530) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["extranet_id"], name: "index_communication_extranet_document_categories_on_extranet_id"
     t.index ["university_id"], name: "extranet_document_categories_universities"
   end
@@ -121,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_081530) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["extranet_id"], name: "index_communication_extranet_document_kinds_on_extranet_id"
     t.index ["university_id"], name: "extranet_document_kinds_universities"
   end

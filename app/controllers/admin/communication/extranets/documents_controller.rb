@@ -3,6 +3,8 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
 
   def index
     @documents = @documents.ordered.page params[:page]
+    @categories = @extranet.document_categories.ordered
+    @kinds = @extranet.document_kinds.ordered
     breadcrumb
   end
 
