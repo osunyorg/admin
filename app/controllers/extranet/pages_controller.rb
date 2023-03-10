@@ -17,14 +17,21 @@ class Extranet::PagesController < Extranet::ApplicationController
   end
 
   def data
-    @metrics = [
-      { value: current_extranet.alumni.count, name: University::Person::Alumnus.model_name.human(count: 2) },
-      { value: current_extranet.users.count, name: User.model_name.human(count: 2) },
-      { value: current_extranet.experiences.count, name: University::Person::Experience.model_name.human(count: 2) },
-      { value: current_extranet.academic_years.count, name: Education::AcademicYear.model_name.human(count: 2) },
-      { value: current_extranet.cohorts.count, name: Education::Cohort.model_name.human(count: 2) },
-      { value: current_extranet.organizations.count, name: University::Organization.model_name.human(count: 2) },
-    ]
+    @metrics = []
+    if current_extranet.has_feature?(:alumni)
+      @metrics.concat [
+        { value: current_extranet.alumni.count, name: University::Person::Alumnus.model_name.human(count: 2) },
+        { value: current_extranet.academic_years.count, name: Education::AcademicYear.model_name.human(count: 2) },
+        { value: current_extranet.cohorts.count, name: Education::Cohort.model_name.human(count: 2) }
+      ]
+    end
+    if current_extranet.has_feature?(:alumni) || current_extranet.has_feature?(:contacts)
+      @metrics.concat [
+        { value: current_extranet.users.count, name: User.model_name.human(count: 2) },
+        { value: current_extranet.experiences.count, name: University::Person::Experience.model_name.human(count: 2) },
+        { value: current_extranet.organizations.count, name: University::Organization.model_name.human(count: 2) }
+      ]
+    end
     breadcrumb
     add_breadcrumb t('extranet.data')
   end
