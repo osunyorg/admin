@@ -1,0 +1,5 @@
+<% content_for :title, Communication::Extranet::Post::Category.model_name.human %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <%= render 'form', category: @category %>
+<% end %>

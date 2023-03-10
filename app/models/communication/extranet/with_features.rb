@@ -3,10 +3,10 @@ module Communication::Extranet::WithFeatures
 
   included do
     FEATURES = [
-      :alumni,
-      :contacts,
       :posts,
+      :contacts,
       :library,
+      :alumni,
       :jobs,
     ]
   end
