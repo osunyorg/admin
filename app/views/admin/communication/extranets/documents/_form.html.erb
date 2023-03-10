@@ -15,8 +15,8 @@
           <%= f.input :published %>
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
-        <%= f.association :kind, collection: @extranet.document_kinds, include_blank: false %>
-        <%= f.association :category, collection: @extranet.document_categories, include_blank: false %>
+        <%= f.association :kind, collection: @extranet.document_kinds.ordered, include_blank: false %>
+        <%= f.association :category, collection: @extranet.document_categories.ordered, include_blank: false %>
       <% end %>
     </div>
   </div>
