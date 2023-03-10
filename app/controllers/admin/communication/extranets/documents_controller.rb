@@ -57,7 +57,8 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
     params.require(:communication_extranet_document)
     .permit(
       :name, :published, :published_at, :slug,
-      :file, :file_delete
+      :file, :file_delete,
+      :category_id, :kind_id
     )
     .merge(
       university_id: current_university.id
