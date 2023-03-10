@@ -23,7 +23,7 @@ class Extranet::AccountController < Extranet::ApplicationController
     # Password not provided when user from sso
     params[:user][:password] ||= ''
 
-    if params[:user][:password].empty?
+    if params[:user][:password].blank?
       params[:user].delete(:password)
     else
       current_user.reset_password(params[:user][:password], params[:user][:password])

@@ -3,7 +3,7 @@
   <head>
     <%= render 'extranet/application/head' %>
   </head>
-  <body class="extranet <%= body_classes %>">
+  <body class="extranet <%= body_classes %> full-width">
     <%= render 'application/notice' %>
     <%= render 'extranet/application/nav' %>
     <%= render 'extranet/application/header' %>
@@ -13,5 +13,7 @@
     <%= render 'extranet/application/footer' %>
     <%= render 'extranet/gdpr/cookie_consent' %>
     <%= render 'bugsnag' %>
+    <%= javascript_include_tag 'extranet' %>
+    <script src="https://example.osuny.org/js/extranet.js"></script>
   </body>
 </html>

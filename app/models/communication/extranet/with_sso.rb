@@ -10,7 +10,7 @@ module Communication::Extranet::WithSso
 
   # Setter to serialize data as JSON
   def sso_mapping=(value)
-    if value.empty?
+    if value.blank?
       value = nil
     else
       value = JSON.parse value if value.is_a? String

@@ -8,6 +8,6 @@ module Communication::Extranet::WithStyle
   protected
 
   def generate_css
-    self.css = SassC::Sass2Scss.convert sass
+    self.css = SassC::Engine.new(sass, syntax: :sass, style: :compressed).render
   end
 end

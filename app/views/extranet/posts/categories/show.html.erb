@@ -1,0 +1,4 @@
+<% content_for :title, @category %>
+
+<%= render 'extranet/posts/posts/list', posts: @posts %>
+<%= paginate @posts, theme: 'bootstrap-5' %>

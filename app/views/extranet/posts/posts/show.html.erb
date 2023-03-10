@@ -6,6 +6,8 @@
   <% end %>
 <% end %>
 
+<%= link_to @post.category, posts_category_path(slug: @post.category.slug) if @post.category %>
+
 </main>
 <%= render 'admin/communication/blocks/preview', about: @post %>
 <main>

@@ -5,7 +5,7 @@
 <%= csp_meta_tag %>
 <%= stylesheet_link_tag 'extranet', media: 'all' %>
 <link rel="stylesheet" href="<%= style_path(format: :css) %>" media="all">
-<%= javascript_include_tag 'extranet' %>
+<link rel="stylesheet" href="https://example.osuny.org/assets/css/extranet.min.css" media="all">
 <% if current_extranet.favicon.attached? %>
   <%= favicon_link_tag url_for(current_extranet.favicon.variant(:thumb)) %>
 <% else %>

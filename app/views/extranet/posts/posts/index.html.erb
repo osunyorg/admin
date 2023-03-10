@@ -1,3 +1,4 @@
 <% content_for :title, Communication::Extranet::Post.model_name.human(count: 2) %>
 
 <%= render 'extranet/posts/posts/list', posts: @posts %>
+<%= paginate @posts, theme: 'bootstrap-5' %>

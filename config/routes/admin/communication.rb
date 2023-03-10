@@ -73,7 +73,12 @@ namespace :communication do
         post :disconnect
       end
     end
+    namespace :posts do
+    end
     resources :posts, controller: 'extranets/posts' do
+      collection do
+        resources :categories, controller: 'extranets/posts/categories', as: 'post_categories'
+      end
       member do
         get :preview
       end

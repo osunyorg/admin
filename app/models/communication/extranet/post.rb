@@ -33,14 +33,15 @@
 #
 class Communication::Extranet::Post < ApplicationRecord
   include Sanitizable
-  include WithUniversity
   include WithFeaturedImage
   include WithBlocks
   include WithPublication
   include WithPermalink
   include WithSlug
+  include WithUniversity
 
   belongs_to :author, class_name: 'University::Person', optional: true
+  belongs_to :category, class_name: 'Communication::Extranet::Post::Category', optional: true
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
   validates :title, presence: true

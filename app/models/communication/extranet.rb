@@ -58,6 +58,7 @@ class Communication::Extranet < ApplicationRecord
   end
 
   has_many :posts
+  has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
   has_many :documents
 
   validates_presence_of :name, :host

@@ -1,6 +1,6 @@
 <%
-  $class = "block block-timeline" 
-  unless @block.title.empty?
+  $class = "block block-timeline"
+  unless @block.title.blank?
     $class += " block-with-title"
   end
   $class += " block-timeline--" + @block.template.layout
@@ -10,7 +10,7 @@
   <div class="container">
     <% if @block.template.layout == "vertical" %>
       <div class="block-content">
-        <% unless @block.title.empty? %>
+        <% unless @block.title.blank? %>
           <div class="top">
             <h2><%= @block.title %></h2>
           </div>
@@ -20,15 +20,17 @@
             <article class="event">
               <h3 class="event-title">
                 <%= block_component_preview :title, template: element %>
-              <h3>
-              <p><%= block_component_preview :text, template: element %></p>
+              </h3>
+
+              <%# TODO: gérer les sauts de ligne %>
+              <p><%= element.text %></p>
             </article>
           <% end %>
         </div>
       </div>
     <% else %>
       <div class="timeline">
-        <% unless @block.title.empty? %>
+        <% unless @block.title.blank? %>
           <h2><%= @block.title %></h2>
         <% end %>
         <div class="events">
@@ -37,7 +39,7 @@
               <li class="event">
                 <p class="title"><%= block_component_preview :title, template: element %><p>
                 <div class="line"></div>
-                <p class="description"><%= block_component_preview :text, template: element %></p>
+                <div class="description"><%= block_component_preview :text, template: element %></div>
               </li>
             <% end %>
           </ol>

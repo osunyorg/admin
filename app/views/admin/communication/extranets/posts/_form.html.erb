@@ -12,16 +12,14 @@
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
         <% if can? :publish, post %>
-          <div class="row pure__row--small">
-            <div class="col-6">
-              <%= f.input :published %>
-            </div>
-          </div>
+          <%= f.input :published %>
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
+        <%= f.association :category, 
+                          collection: @extranet.post_categories.ordered %>
         <%= f.association :author,
-                            collection: @extranet.connected_persons.ordered,
-                            label_method: :to_s_alphabetical %>
+                          collection: @extranet.connected_persons.ordered,
+                          label_method: :to_s_alphabetical %>
         <%= f.input :slug,
                     as: :string,
                     input_html: post.persisted? ? {} : {
