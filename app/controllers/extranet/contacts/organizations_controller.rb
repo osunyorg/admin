@@ -10,6 +10,7 @@ class Extranet::Contacts::OrganizationsController < Extranet::Contacts::Applicat
 
   def show
     @organization = current_extranet.connected_organizations.find(params[:id])
+    @current_experiences = @organization.experiences.includes(:person).current.ordered
     breadcrumb
   end
 

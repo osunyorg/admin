@@ -8,6 +8,10 @@ en:
       updated: Updated
       logout: Log out
     contacts:
+      organizations:
+        experiences: Members of this organization (%{count})
+      persons:
+        experiences: Organizations where they belong (%{count})
       search:
         home: Search in directory
         title: Search
