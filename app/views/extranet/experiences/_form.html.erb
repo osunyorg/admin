@@ -2,7 +2,29 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <%= f.input :description, as: :string %>
+      <%= f.input :organization_name,
+      label: University::Organization.model_name.human,
+      as: :autocomplete,
+      required: true,
+      url: search_organizations_path,
+      placeholder: t("extranet.experiences.search_organization"),
+      input_html: {
+        data: {
+          "showNoMatches": "false",
+          "autocomplete-target": "#university_person_experience_organization_id",
+          "autocomplete-no-result-target": "#university_person_experience_organization_not_found"
+        },
+        autocomplete: 'off',
+        role: 'presentation'
+      } %>
+      <%= f.hidden_field :organization_id %>
+      <div class="<%= 'd-none' unless experience.organization_id.nil? && experience.organization_name.present? %>" id="university_person_experience_organization_not_found" data-default-text="<%= t('extranet.account.experiences.create_new_html', name: 'CHANGEME', url: new_organization_path(name: 'CHANGEME')) %>">
+        <% if experience.organization_id.nil? && experience.organization_name.present? %>
+        <%= t('extranet.account.experiences.create_new_html', name: experience.organization_name, url: new_organization_path(name: experience.organization_name)) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-6">
       <div class="row">
         <div class="col-6">
           <%= f.input :from_year %>
@@ -11,29 +33,7 @@
           <%= f.input :to_year %>
         </div>
       </div>
-    </div>
-    <div class="col-lg-6">
-      <%= f.input :organization_name,
-                  label: University::Organization.model_name.human,
-                  as: :autocomplete,
-                  required: true,
-                  url: search_organizations_path,
-                  placeholder: t("extranet.experiences.search_organization"),
-                  input_html: {
-                    data: {
-                      "showNoMatches": "false",
-                      "autocomplete-target": "#university_person_experience_organization_id",
-                      "autocomplete-no-result-target": "#university_person_experience_organization_not_found"
-                    },
-                    autocomplete: 'off',
-                    role: 'presentation'
-                  } %>
-      <%= f.hidden_field :organization_id %>
-      <div class="<%= 'd-none' unless experience.organization_id.nil? && experience.organization_name.present? %>" id="university_person_experience_organization_not_found" data-default-text="<%= t('extranet.account.experiences.create_new_html', name: 'CHANGEME', url: new_organization_path(name: 'CHANGEME')) %>">
-        <% if experience.organization_id.nil? && experience.organization_name.present? %>
-          <%= t('extranet.account.experiences.create_new_html', name: experience.organization_name, url: new_organization_path(name: experience.organization_name)) %>
-        <% end %>
-      </div>
+      <%= f.input :description, as: :string %>
     </div>
   </div>
   <%= submit f %>
