@@ -76,6 +76,7 @@ en:
         description: Description
         edit: Edit experience
         organization: Organization
+        organization_name: Organisation
         from_year: Start year
         to_year: End year
         new: Add experience
