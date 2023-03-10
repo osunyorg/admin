@@ -1,5 +1,6 @@
 <% content_for :title, Communication::Extranet::Document.model_name.human(count: 2) %>
 
+<%= render 'faceted_search/facets', facets: @facets %>
 <div class="row mt-n5">
   <% @documents.each do |document| %>
     <div class="col-lg-4">
