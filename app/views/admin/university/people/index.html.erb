@@ -5,6 +5,10 @@
 <%= render 'admin/university/people/list', people: @people %>
 <%= paginate @people, theme: 'bootstrap-5' %>
 
+<h1 class="mt-5"><%= "#{University::Person::Category.model_name.human(count: 2)} (#{@categories.total_count})" %></h1>
+<%= render 'admin/university/people/categories/list', categories: @categories %>
+<%= paginate @categories, theme: 'bootstrap-5', param: :categories_page %>
+
 <% content_for :action_bar_left do %>
   <%= link_to t('university.person.experiences.import_btn'),
               new_admin_university_people_experiences_import_path,
