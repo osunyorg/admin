@@ -1,7 +1,9 @@
 .posts-show header figure
+    display: inline-block
     position: relative
     figcaption
         display: block
+        font-size: 1rem
         left: 0
         position: absolute
         right: 0
@@ -9,11 +11,16 @@
         z-index: 10
         &::before
             font-family: inter,sans-serif
-            font-size: .875rem
-            font-weight: 400
-            line-height: 150%
             content: '©'
+            padding: calc(1rem/2)
             position: absolute
             right: 0
             top: 0
+        p
+            display: none
+            font-weight: 400
+            padding: calc(1rem/2)
+            padding-right: 1.5rem
+    &:hover figcaption p
+        display: block
                         
