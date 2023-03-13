@@ -39,15 +39,16 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
-  include WithFeaturedImage
   include WithBlobs
   include WithBlocks
+  include WithDuplication
+  include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
   include WithTranslations
+  include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
 

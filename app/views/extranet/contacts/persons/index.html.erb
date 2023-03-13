@@ -1,7 +1,9 @@
 <% content_for :title, University::Person.model_name.human(count: 2) %>
 <% content_for :header_right do %>
-  <%= @count %>
-  <%= University::Person.model_name.human(count: @count).downcase %>
+  <p>
+    <%= @count %>
+    <%= University::Person.model_name.human(count: @count).downcase %>
+  </p>
 <% end %>
 
 <div class="row">

@@ -48,18 +48,19 @@ class Communication::Website::Page < ApplicationRecord
 
   include Accessible
   include Sanitizable
-  include WithUniversity
   include WithBlobs
   include WithBlocks
+  include WithDuplication
   include WithFeaturedImage
   include WithGit
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithPath
-  include WithType
   include WithPermalink
+  include WithType
   include WithTranslations
+  include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
 
@@ -108,19 +109,6 @@ class Communication::Website::Page < ApplicationRecord
     [self] +
     descendants +
     active_storage_blobs
-  end
-
-  def duplicate
-    page = self.dup
-    page.published = false
-    page.save
-    blocks.ordered.each do |block|
-      b = block.duplicate
-      b.about = page
-      b.position = block.position
-      b.save
-    end
-    page
   end
 
   def to_s

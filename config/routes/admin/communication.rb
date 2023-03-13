@@ -40,6 +40,7 @@ namespace :communication do
       member do
         get :static
         get :preview
+        post :duplicate
       end
     end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do

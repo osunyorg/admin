@@ -7,6 +7,10 @@ fr:
         country: Pays
         default_language: Langue par défaut
         has_sso: A un SSO ?
+        feature_administration: Administration
+        feature_communication: Communication
+        feature_education: Enseignement
+        feature_research: Recherche
         identifier: Identifiant
         invoice_amount: Montant de facturation
         invoice_date: Date de facturation

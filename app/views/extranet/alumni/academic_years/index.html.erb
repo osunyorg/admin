@@ -1,7 +1,9 @@
 <% content_for :title, Education::AcademicYear.model_name.human(count: 2) %>
 <% content_for :header_right do %>
+  <p>
     <%= @count %>
     <%= Education::AcademicYear.model_name.human(count: @count).downcase %>
+  </p>
 <% end %>
 
 <ul class="years">

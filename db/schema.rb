@@ -858,6 +858,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_144352) do
     t.jsonb "sso_mapping"
     t.string "sso_button_label"
     t.uuid "default_language_id", null: false
+    t.boolean "feature_education", default: true
+    t.boolean "feature_research", default: true
+    t.boolean "feature_communication", default: true
+    t.boolean "feature_administration", default: true
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
   end
 
