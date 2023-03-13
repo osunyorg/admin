@@ -13,10 +13,10 @@
               <i class="bi bi-file-earmark-text display-1"></i>
               <% if document.file.attached? %>
                 <% file = document.file %>
-              <span>
-                <%= file.filename.extension.upcase %> - 
-                <%= number_to_human_size file.byte_size %>
-              </span>
+                <span>
+                  <%= file.filename.extension.upcase %>
+                  - <%= number_to_human_size file.byte_size %>
+                </span>
               <% end %>
             </div>
             <p class="mb-3">

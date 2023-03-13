@@ -27,10 +27,14 @@ end
           <li>
           <figure>
               <a href="<%= element.blob.url %>" target="_blank" title="<%= element.title %>"><%= element.title %></a>
-              <figcaption>
-                <abbr title="">TODO : EXTENSION</abbr>
-                - <abbr title="">TODO : TAILLE FICHIER</abbr>
-              </figcaption>
+              <% if document.file.attached? %>
+                <% file = document.file %>
+                <figcaption>
+                  <abbr title=""><%= file.filename.extension.upcase %></abbr>
+                  - <abbr title=""><%= number_to_human_size file.byte_size %></abbr>
+                </figcaption>
+              <% end %>
+
             </figure>
             </a>
           </li>
