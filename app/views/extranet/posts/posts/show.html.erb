@@ -2,7 +2,14 @@
 
 <% content_for :header_right do %>
   <% if @post.featured_image.attached? %>
-    <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
+    <figure>
+      <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
+      <figcaption tabindex="0">
+        <p>
+          <% @post.featured_image_credit %>
+        </p>
+      </figcaption>
+    </figure>
   <% end %>
 <% end %>
 
