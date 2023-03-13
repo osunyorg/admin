@@ -53,6 +53,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @post %>
+  <%= duplicate_link @post %>
   <%= static_link static_admin_communication_website_post_path(@post) %>
 <% end %>
 
