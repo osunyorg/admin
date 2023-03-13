@@ -11,9 +11,15 @@
           <article class="position-relative mt-5">
             <div>
               <i class="bi bi-file-earmark-text display-1"></i>
-              <span>PDF - 120ko</span>
+              <% if document.file.attached? %>
+                <% file = document.file %>
+              <span>
+                <%= file.filename.extension.upcase %> - 
+                <%= number_to_human_size file.byte_size %>
+              </span>
+              <% end %>
             </div>
-            <p>
+            <p class="mb-3">
               <b><%= document %></b><br>
               <span class="text-muted"><%= l document.published_at.to_date %><span>
             </p>
