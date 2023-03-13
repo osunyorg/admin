@@ -5,19 +5,23 @@
     <%= render 'faceted_search/facets', facets: @facets %>
   </div>
   <div class="col-lg-9">
-    <div class="row mt-n5">
+    <div class="row mt-n5 documents-list">
       <% @documents.each do |document| %>
         <div class="col-lg-4">
-          <div class="position-relative mt-5">
-            <p class="mt-2">
+          <article class="position-relative mt-5">
+            <div>
+              <i class="bi bi-file-earmark-text display-1"></i>
+              <span>PDF - 120ko</span>
+            </div>
+            <p>
               <b><%= document %></b><br>
               <span class="text-muted"><%= l document.published_at.to_date %><span>
             </p>
             <%= link_to t('extranet.library.download'), 
                         document.file.url,
-                        class: 'btn btn-primary',
+                        class: 'btn btn-primary stretched-link',
                         target: :_blank if document.file.attached? %>
-          </div>
+          </article>
         </div>
       <% end %>
     </div>
