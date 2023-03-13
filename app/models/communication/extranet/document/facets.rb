@@ -1,7 +1,7 @@
 class Communication::Extranet::Document::Facets < FacetedSearch::Facets
   def initialize(params, extranet)
     super(params)
-    @model = extranet.documents
+    @model = extranet.documents.published
     filter_with_text :name, {
       title: Communication::Extranet::Document.human_attribute_name('name')
     }
