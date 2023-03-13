@@ -6,6 +6,10 @@
 #  address                    :string
 #  city                       :string
 #  country                    :string
+#  feature_administration     :boolean          default(TRUE)
+#  feature_communication      :boolean          default(TRUE)
+#  feature_education          :boolean          default(TRUE)
+#  feature_research           :boolean          default(TRUE)
 #  has_sso                    :boolean          default(FALSE)
 #  identifier                 :string
 #  invoice_amount             :string
@@ -70,7 +74,6 @@ class University < ApplicationRecord
     [
       [University::Person, :admin_university_people_path],
       [University::Organization, :admin_university_organizations_path],
-      [University::Person::Alumnus, :admin_university_alumni_path],
       [User, :admin_users_path],
     ]
   end

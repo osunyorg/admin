@@ -7,6 +7,10 @@ en:
         country: Country
         default_language: Default language
         has_sso: Has SSO?
+        feature_administration: Administration
+        feature_communication: Communication
+        feature_education: Education
+        feature_research: Research
         identifier: Identifier
         invoice_amount: Invoice amount
         invoice_date: Invoice date

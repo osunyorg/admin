@@ -186,6 +186,30 @@ module Admin::ApplicationHelper
     }
   end
 
+  def feature_education?
+    can?(:read, Education::Program) && 
+    current_university.feature_education
+  end
+
+  def feature_research?
+    (
+      can?(:read, Research::Journal) || 
+      can?(:read, Research::Hal::Publication) || 
+      can?(:read, Research::Laboratory)
+    ) && 
+    current_university.feature_research
+  end
+
+  def feature_communication?
+    can?(:read, Communication::Website) && 
+    current_university.feature_communication
+  end
+
+  def feature_administration?
+    can?(:read, Administration::Qualiopi::Criterion) && 
+    current_university.feature_administration
+  end
+
   private
 
   def polymorphic_url_param(object_or_class, **options)

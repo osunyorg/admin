@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_140557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -238,6 +238,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
+  end
+
+  create_table "communication_website_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "website_id", null: false
+    t.string "object_type", null: false
+    t.uuid "object_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
+    t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
+    t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -857,6 +869,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
     t.jsonb "sso_mapping"
     t.string "sso_button_label"
     t.uuid "default_language_id", null: false
+    t.boolean "feature_education", default: true
+    t.boolean "feature_research", default: true
+    t.boolean "feature_communication", default: true
+    t.boolean "feature_administration", default: true
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
   end
 
@@ -1046,6 +1062,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
+  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"
