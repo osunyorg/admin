@@ -1,9 +1,9 @@
 <% content_for :title, @category %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
-  <%= osuny_panel Communication::Extranet::Post.model_name.human(count: 2) do %>
-    <%= render 'admin/communication/extranets/posts/list', posts: @posts %>
-    <%= paginate @posts, theme: 'bootstrap-5' %>
+  <%= osuny_panel Communication::Extranet::Document.model_name.human(count: 2) do %>
+    <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
+    <%= paginate @documents, theme: 'bootstrap-5' %>
   <% end %>
 <% end %>
 

@@ -73,8 +73,6 @@ namespace :communication do
         post :disconnect
       end
     end
-    namespace :posts do
-    end
     resources :posts, controller: 'extranets/posts' do
       collection do
         resources :categories, controller: 'extranets/posts/categories', as: 'post_categories'
@@ -85,7 +83,12 @@ namespace :communication do
     end
     # Automatic routes based on feature names
     get 'library' => 'extranets/documents#index', as: :library
-    resources :documents, controller: 'extranets/documents'
+    resources :documents, controller: 'extranets/documents' do
+      collection do
+        resources :categories, controller: 'extranets/documents/categories', as: 'document_categories'
+        resources :kinds, controller: 'extranets/documents/kinds', as: 'document_kinds'
+      end
+    end
     resources :jobs, controller: 'extranets/jobs'
   end
   resources :alumni do
