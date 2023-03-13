@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: 26889491557e607cedade7590b18ae28161215ec
-  branch: feature/cleaner
+  revision: 32fd182c929cdcacaa6e3bd3569871bd025fa669
   specs:
     summernote-rails (0.8.20.1)
       nokogiri
