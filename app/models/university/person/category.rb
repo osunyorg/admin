@@ -19,7 +19,7 @@
 class University::Person::Category < ApplicationRecord
   include WithUniversity
 
-  has_and_belongs_to_many :persons,
+  has_and_belongs_to_many :people,
                           class_name: 'University::Person::Category',
                           join_table: :university_people_categories,
                           foreign_key: :category_id
