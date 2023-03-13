@@ -5,13 +5,13 @@
       <%= yield :header %>
     <% else %>
       <h1><%= yield :title %></h1>
-      <p class="header__additional_data">
+      <div class="header__additional_data">
         <% if content_for(:header_right).present? %>
           <%= yield :header_right %>
         <% else %>
           &nbsp;
         <% end %>
-      </p>
+      </div>
     <% end %>
   </div>
 </header>
