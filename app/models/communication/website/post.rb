@@ -39,15 +39,16 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
-  include WithFeaturedImage
   include WithBlobs
   include WithBlocks
+  include WithDuplication
+  include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
   include WithTranslations
+  include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
 
@@ -143,20 +144,6 @@ class Communication::Website::Post < ApplicationRecord
     return if website.special_page(Communication::Website::Page::CommunicationPost)&.path.blank?
     return if current_permalink_in_website(website).blank?
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
-  end
-
-  def duplicate
-    post = self.dup
-    post.published = false
-    post.published_at = nil
-    post.save
-    blocks.ordered.each do |block|
-      b = block.duplicate
-      b.about = post
-      b.position = block.position
-      b.save
-    end
-    post
   end
 
   def translated_author
