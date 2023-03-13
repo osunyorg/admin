@@ -1,4 +1,4 @@
-<% content_for :title, Communication::Extranet::Post::Category.model_name.human(count: 2) %>
+<% content_for :title, Communication::Extranet::Document::Category.model_name.human(count: 2) %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
   <%= render 'admin/communication/extranets/documents/categories/list', categories: @categories %>
