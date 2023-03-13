@@ -60,11 +60,6 @@ $(function () {
 
 
     configs['default'] = {
-        popover: {
-            image: [
-                ['remove', ['removeMedia']]
-            ]
-        },
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'italic']],
@@ -83,11 +78,6 @@ $(function () {
         followingToolbar: true,
         disableDragAndDrop: true
     };
-
-    $.extend($.summernote.lang['en-US'].image, {
-        dragImageHere: 'Drag file here',
-        dropImage: 'Drop file'
-    });
 
     $('[data-provider="summernote"]').each(function () {
         var config = $(this).attr('data-summernote-config'),
