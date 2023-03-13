@@ -1,24 +1,44 @@
-<div class="top">
-  <div class="description">
-    <%= block_component_preview :description %>
-  </div>
-</div>
+<%
+$class = "block block-partners"
+unless @block.title.blank?
+  $class += " block-with-title"
+end
+%>
 
-<div class="organizations">
-  <% @block.template.elements.each do |element| %>
-    <article class="organization">
-      <h3>
-        <% if element.best_url %>
-          <a href="<%= element.best_url %>" target="_blank">
+<section class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.blank? && @block.template.description.blank? %>
+        <div class="top">
+          <% unless @block.title.blank? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.blank? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="organizations">
+        <% @block.template.elements.each do |element| %>
+          <article class="organization">
+            <h3>
+              <% if element.best_url %>
+                <a href="<%= element.best_url %>" target="_blank">
+              <% end %>
+              <%= element.best_name %>
+              <% if element.best_url%>
+                </a>
+              <% end %>
+            </h3>
+            <div class="media">
+              <%= kamifusen_tag element.best_logo, width: 600%>
+            </div>
+          </article>
         <% end %>
-        <%= element.best_name %>
-        <% if element.best_url%>
-          </a>
-        <% end %>
-      </h3>
-      <div class="media">
-        <%= kamifusen_tag element.best_logo, width: 600%>
       </div>
-    </article>
-  <% end %>
-</div>
+  </div>
+</section>
+
