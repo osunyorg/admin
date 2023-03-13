@@ -1,20 +1,21 @@
-<% 
+<%
 connected = @extranet.connected?(about)
 path = toggle_admin_communication_extranet_contacts_path(
   extranet_id: @extranet.id,
   objectId: about.id,
-  objectType: about.class, 
-  connection: connected ? 'disconnect' : 'connect'
+  objectType: about.class,
 )
 %>
-<%= form_tag path, remote: true do %>
   <input  class="form-check-input"
           type="checkbox"
+          name="connection"
+          value="connect"
           id="checkbox-<%= about.id %>"
-          onchange="this.form.submit()" 
+          data-remote="true"
+          data-method="post"
+          data-url="<%= path %>"
           <% if connected %> checked<% end %>>
-  <label  class="form-check-label" 
+  <label  class="form-check-label"
           for="checkbox-<%= about.id %>">
-    <%= Communication::Extranet::Connection.human_attribute_name 'connected' %>
+    &nbsp;<%= Communication::Extranet::Connection.human_attribute_name 'connected' %>
   </label>
-<% end %>
