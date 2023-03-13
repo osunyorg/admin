@@ -1,12 +1,10 @@
 class Admin::University::Organizations::CategoriesController < Admin::University::ApplicationController
   load_and_authorize_resource class: University::Organization::Category,
                               through: :current_university,
-                              through_association: :organizations_categories
+                              through_association: :organization_categories
 
   def index
-    @categories = current_university.organizations_categories
-                .ordered
-                .page(params[:page])
+    @categories = @organizations.ordered.page(params[:page])
     breadcrumb
   end
 

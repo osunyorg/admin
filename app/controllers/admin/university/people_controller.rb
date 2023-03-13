@@ -13,7 +13,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                 .for_language_id(current_university.default_language_id)
                 .ordered
                 .page(params[:page])
-    @categories = current_university.people_categories.ordered.page(params[:categories_page])
+    @categories = current_university.person_categories.ordered.page(params[:categories_page])
 
     breadcrumb
   end

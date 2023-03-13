@@ -99,11 +99,11 @@
                       } %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
       <% end %>
-      <% if current_university.people_categories.any? %>
+      <% if current_university.person_categories.any? %>
         <%= osuny_panel University::Person.human_attribute_name('categories') do %>
           <%= f.association :categories,
                             as: :check_boxes,
-                            collection: current_university.people_categories %>
+                            collection: current_university.person_categories %>
         <% end %>
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('picture') do %>

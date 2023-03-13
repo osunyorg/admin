@@ -9,7 +9,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def index
     @organizations = apply_scopes(@organizations).ordered.page(params[:page])
-    @categories = current_university.organizations_categories.ordered.page(params[:categories_page])
+    @categories = current_university.organization_categories.ordered.page(params[:categories_page])
     breadcrumb
   end
 
