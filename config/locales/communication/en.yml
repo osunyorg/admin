@@ -94,6 +94,8 @@ en:
         name: Name
         published: Published?
         published_at: Publication date
+        category: Category
+        kind: Type
       communication/extranet/document/category:
         name: Name
         quantity: Quantity of documents
