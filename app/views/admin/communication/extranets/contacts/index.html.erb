@@ -2,7 +2,7 @@
 
 <%= render 'admin/communication/extranets/sidebar' do %>
   <% action = link_to t('export'),
-                    admin_communication_extranet_contacts_path(extranet_id: @extranet.id, export: 'persons'),
+                    admin_communication_extranet_contacts_path(extranet_id: @extranet.id, export: 'persons', format: :xlsx),
                     class: button_classes('ms-1') if can?(:show, University::Person) %>
   <%= osuny_panel University::Person.model_name.human(count: 2), action: action do %>
     <div class="table-responsive">
@@ -40,7 +40,10 @@
     </div>
     <%= paginate @persons, theme: 'bootstrap-5', param_name: :persons_page %>
   <% end %>
-  <%= osuny_panel University::Organization.model_name.human(count: 2) do %>
+  <% action = link_to t('export'),
+                    admin_communication_extranet_contacts_path(extranet_id: @extranet.id, export: 'organizations', format: :xlsx),
+                    class: button_classes('ms-1') if can?(:show, University::Person) %>
+  <%= osuny_panel University::Organization.model_name.human(count: 2), action: action do %>
     <div class="table-responsive">
       <table class="<%= table_classes%>">
         <tbody>

@@ -1,7 +1,21 @@
 class Admin::Communication::Extranets::ContactsController < Admin::Communication::Extranets::ApplicationController
   def index
-    @persons = current_university.people.ordered.page params[:persons_page]
-    @organizations = current_university.organizations.ordered.page params[:organizations_page]
+    @persons = current_university.people.ordered
+    @organizations = current_university.organizations.ordered
+    respond_to do |format|
+      format.html {
+        @persons = @persons.page params[:persons_page]
+        @organizations = @organizations.page params[:organizations_page]
+      }
+      format.xlsx {
+        @export = params['export']
+        filename = "#{@export}-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+        render @export
+      }
+    end
+
+
     breadcrumb
     add_breadcrumb Communication::Extranet.human_attribute_name(:feature_contacts)
   end
