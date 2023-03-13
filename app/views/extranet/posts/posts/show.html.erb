@@ -6,7 +6,7 @@
       <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
       <figcaption tabindex="0">
         <p>
-          <% @post.featured_image_credit %>
+          <%= sanitize @post.featured_image_credit %>
         </p>
       </figcaption>
     </figure>
