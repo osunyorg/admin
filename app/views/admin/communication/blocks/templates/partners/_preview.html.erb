@@ -6,7 +6,8 @@
   $class += " block-partners--" + @block.template.layout
 %>
 
-<section class="<%= $class %>">
+
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% unless @block.title.blank? && @block.template.description.blank? %>
@@ -24,24 +25,24 @@
 
       <% if @block.template.layout == "grid" %>
         <div class="organizations">
-            <% @block.template.elements.each do |element| %>
-              <article class="organization">
-                <h3>
-                  <% if element.best_url %>
-                    <a href="<%= element.best_url %>" target="_blank">
-                  <% end %>
-                  <%= element.best_name %>
-                  <% if element.best_url%>
-                    </a>
-                  <% end %>
-                </h3>
-                <div class="media">
-                  <%= kamifusen_tag element.best_logo, width: 600%>
-                </div>
-              </article>
-            <% end %>
-          </div>
+          <% @block.template.elements.each do |element| %>
+            <article class="organization">
+              <h3>
+                <% if element.best_url %>
+                  <a href="<%= element.best_url %>" target="_blank">
+                <% end %>
+                <%= element.best_name %>
+                <% if element.best_url%>
+                  </a>
+                <% end %>
+              </h3>
+              <div class="media">
+                <%= kamifusen_tag element.best_logo, width: 600%>
+              </div>
+            </article>
+          <% end %>
         </div>
+
       <% else %>
         <div class="map" id="map">
           <% @block.template.elements.each do |element| %>
