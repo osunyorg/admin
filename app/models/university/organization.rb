@@ -43,6 +43,7 @@ class University::Organization < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
+  include WithCountry
   include WithGeolocation
   include WithGit
   include WithPermalink

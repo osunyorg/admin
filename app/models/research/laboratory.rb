@@ -23,6 +23,7 @@
 class Research::Laboratory < ApplicationRecord
   include Aboutable
   include Sanitizable
+  include WithCountry
   include WithGit
 
   belongs_to  :university

@@ -17,7 +17,7 @@ module WithGeolocation
     string += "#{address}<br>" if address.present?
     string += "#{address_additional}<br>" if address_additional.present?
     string += "#{zipcode} #{city}"
-    string += "<br>#{ISO3166::Country[country]}" if country
+    string += "<br>#{country_common_name}" if country
     string
   end
 
