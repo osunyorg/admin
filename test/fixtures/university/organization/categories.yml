@@ -16,7 +16,6 @@
 #
 #  fk_rails_f610c7eb13  (university_id => universities.id)
 #
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   name: MyString

@@ -75,6 +75,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
             :url, :phone, :email, :linkedin, :twitter, :mastodon,
             :logo, :logo_delete, :logo_infos,
             :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+            category_ids: []
           )
   end
 end

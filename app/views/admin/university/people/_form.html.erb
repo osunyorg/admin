@@ -99,6 +99,13 @@
                       } %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
       <% end %>
+      <% if current_university.people_categories.any? %>
+        <%= osuny_panel University::Person.human_attribute_name('categories') do %>
+          <%= f.association :categories,
+                            as: :check_boxes,
+                            collection: current_university.people_categories %>
+        <% end %>
+      <% end %>
       <%= osuny_panel University::Person.human_attribute_name('picture') do %>
         <%= f.input :picture,
                     as: :single_deletable_file,

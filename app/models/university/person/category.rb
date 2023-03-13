@@ -19,6 +19,11 @@
 class University::Person::Category < ApplicationRecord
   include WithUniversity
 
+  has_and_belongs_to_many :persons,
+                          class_name: 'University::Person::Category',
+                          join_table: :university_people_categories,
+                          foreign_key: :category_id
+
   scope :ordered, -> { order(:name) }
 
   def to_s

@@ -93,6 +93,10 @@ en:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
     duplicate: Duplicate
+    elements:
+      zero: No element
+      one: 1 element
+      other: "%{count} elements"
     infos: Informations
     inheritance:
       sentence_without_link: Value inherited

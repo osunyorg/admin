@@ -54,6 +54,10 @@ class University::Organization < ApplicationRecord
 
   has_summernote :text
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'University::Organization::Category',
+                          join_table: :university_organizations_categories,
+                          foreign_key: :organization_id
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy

@@ -93,6 +93,10 @@ fr:
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
     duplicate: Dupliquer
+    elements:
+      zero: Aucun élément
+      one: 1 élément
+      other: "%{count} éléments"
     infos: Informations
     inheritance:
       sentence_without_link: Valeur héritée

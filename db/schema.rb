@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_114528) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_144352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -900,6 +900,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_114528) do
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
+  create_table "university_organizations_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organization_id", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id"], name: "index_university_organizations_categories_on_category_id"
+    t.index ["organization_id"], name: "index_university_organizations_categories_on_organization_id"
+  end
+
   create_table "university_people", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "user_id"
@@ -939,6 +946,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_114528) do
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
+  end
+
+  create_table "university_people_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id"], name: "index_university_people_categories_on_category_id"
+    t.index ["person_id"], name: "index_university_people_categories_on_person_id"
   end
 
   create_table "university_person_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1135,10 +1149,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_114528) do
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organizations", "universities"
+  add_foreign_key "university_organizations_categories", "university_organization_categories", column: "category_id"
+  add_foreign_key "university_organizations_categories", "university_organizations", column: "organization_id"
   add_foreign_key "university_people", "languages"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "university_people", column: "original_id"
   add_foreign_key "university_people", "users"
+  add_foreign_key "university_people_categories", "university_people", column: "person_id"
+  add_foreign_key "university_people_categories", "university_person_categories", column: "category_id"
   add_foreign_key "university_person_categories", "universities"
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"

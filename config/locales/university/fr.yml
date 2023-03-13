@@ -23,6 +23,34 @@ fr:
         sso_target_url: URL cible
         url: 'URL'
         zipcode: Code postal
+      university/organization:
+        address: Adresse
+        address_name: Nom de l'adresse
+        address_additional: Complément d'adresse
+        categories: Catégories
+        city: Ville
+        country: Pays
+        description: Personne morale liée à une université, une composante, un laboratoire, etc.
+        digital: Coordonnées numériques
+        email: Email
+        kind: Type
+        geolocation: Coordonnées géographiques
+        legal: Informations légales
+        linkedin: LinkedIn
+        logo: Logo sur fond clair (par défaut)
+        logo_on_dark_background: Logo sur fond sombre (optionnel)
+        long_name: Nom complet
+        map: Carte
+        name: Nom
+        phone: Téléphone
+        physical: Coordonnées physiques
+        siren: Numéro de SIREN
+        text: Texte
+        twitter: Twitter
+        url: Site Web
+        zipcode: Code postal
+      university/organization/category:
+        name: Nom
       university/person:
         abilities: Responsabilités
         address: Adresse
@@ -31,6 +59,7 @@ fr:
         author: Auteur·rice
         biography: Biographie
         birthdate: Anniversaire
+        categories: Catégories
         city: Ville
         communication_website_posts: Actualités
         contacts: Coordonnées
@@ -86,33 +115,6 @@ fr:
         description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
-      university/organization:
-        address: Adresse
-        address_name: Nom de l'adresse
-        address_additional: Complément d'adresse
-        city: Ville
-        country: Pays
-        description: Personne morale liée à une université, une composante, un laboratoire, etc.
-        digital: Coordonnées numériques
-        email: Email
-        kind: Type
-        geolocation: Coordonnées géographiques
-        legal: Informations légales
-        linkedin: LinkedIn
-        logo: Logo sur fond clair (par défaut)
-        logo_on_dark_background: Logo sur fond sombre (optionnel)
-        long_name: Nom complet
-        map: Carte
-        name: Nom
-        phone: Téléphone
-        physical: Coordonnées physiques
-        siren: Numéro de SIREN
-        text: Texte
-        twitter: Twitter
-        url: Site Web
-        zipcode: Code postal
-      university/organization/category:
-        name: Nom
       university/role:
         description: Description
         people: Personnes
