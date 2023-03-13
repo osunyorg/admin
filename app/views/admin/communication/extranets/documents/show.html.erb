@@ -9,16 +9,20 @@
     </div>
     <div class="col-xl-4">
       <%= osuny_panel t('metadata') do %>
-        <div class="row pure__row--small">
-          <div class="col-6">
-            <%= osuny_label Communication::Extranet::Document.human_attribute_name('published') %>
-            <p>
-              <%= t @document.published %><% if @document.published %>,
-                <%= l @document.published_at.to_date, format: :long %>
-              <% end %>
-            </p>
-          </div>
-        </div>
+        <%= osuny_label Communication::Extranet::Document.human_attribute_name('published') %>
+        <p>
+          <%= t @document.published %><% if @document.published %>,
+            <%= l @document.published_at.to_date, format: :long %>
+          <% end %>
+        </p>
+        <% if @document.category %>
+          <%= osuny_label Communication::Extranet::Document::Category.model_name.human %>
+          <p><%= link_to @document.category, [:admin, @document.category] %></p>
+        <% end %>
+        <% if @document.kind %>
+          <%= osuny_label Communication::Extranet::Document::Kind.model_name.human %>
+          <p><%= link_to @document.kind, [:admin, @document.kind] %></p>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -101,8 +101,8 @@ class Ability
     can :manage, Communication::Extranet::Post, university_id: @user.university_id
     can :manage, Communication::Extranet::Post::Category, university_id: @user.university_id
     can :manage, Communication::Extranet::Document, university_id: @user.university_id
-    # can :manage, Communication::Extranet::Document::Category, university_id: @user.university_id
-    # can :manage, Communication::Extranet::Document::Kind, university_id: @user.university_id
+    can :manage, Communication::Extranet::Document::Category, university_id: @user.university_id
+    can :manage, Communication::Extranet::Document::Kind, university_id: @user.university_id
     can :manage, Communication::Extranet::Connection, university_id: @user.university_id
     can :manage, Education::AcademicYear, university_id: @user.university_id
     can :manage, Education::Cohort, university_id: @user.university_id

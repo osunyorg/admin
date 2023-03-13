@@ -33,6 +33,7 @@ en:
       welcome: Welcome!
     library:
       download: Download
+      reset: Reset
     menu: Menu
     organization:
       experiences: Alumni in this organization (%{count})

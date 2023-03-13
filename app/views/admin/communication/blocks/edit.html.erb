@@ -130,12 +130,16 @@
         });
       },
       initCodemirror(element) {
-        CodeMirror.fromTextArea(element, {
+        var editor = CodeMirror.fromTextArea(element, {
             lineNumbers: true,
             styleActiveLine: true,
             indentUnit: 2,
             viewportMargin: Infinity,
             mode: element.getAttribute('data-codemirror-mode')
+        });
+        editor.on("change", function (instance, changeObj) {
+          element.value = instance.getValue();
+          element.dispatchEvent(new Event('input'));
         });
       }
     },

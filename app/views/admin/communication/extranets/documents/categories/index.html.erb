@@ -1,0 +1,9 @@
+<% content_for :title, Communication::Extranet::Document::Category.model_name.human(count: 2) %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <%= render 'admin/communication/extranets/documents/categories/list', categories: @categories %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Extranet::Document::Category %>
+<% end %>

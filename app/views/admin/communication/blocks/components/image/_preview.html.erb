@@ -1,9 +1,10 @@
 <%
 blob = component.blob
 return unless blob
+is_carousel = @block.template.is_a?(Communication::Block::Template::Gallery) && @block.template.layout == "carousel"
 %>
 
-<figure>
+<figure <% if is_carousel %>class="splide__slide"<% end %>>
   <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1', alt: component.template.try(:alt).blank? ? "" : component.template.alt %>
   <figcaption>
     <%= sanitize component.template.credit if component.template.try(:credit).present? %>
