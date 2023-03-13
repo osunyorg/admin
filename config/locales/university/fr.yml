@@ -72,6 +72,8 @@ fr:
         url: Site web
         user: Utilisateur
         zipcode: Code postal
+      university/person/category:
+        name: Nom
       university/person/experience:
         description: Description
         edit: Modifier l'expérience
@@ -109,6 +111,8 @@ fr:
         twitter: Twitter
         url: Site Web
         zipcode: Code postal
+      university/organization/category:
+        name: Nom
       university/role:
         description: Description
         people: Personnes
@@ -125,6 +129,9 @@ fr:
       university/person:
         one: Personne
         other: Personnes
+      university/person/category:
+        one: Catégorie
+        other: Catégories
       university/person/involvement:
         one: Implication
         other: Implications
@@ -137,6 +144,9 @@ fr:
       university/organization:
         one: Organisation
         other: Organisations
+      university/organization/category:
+        one: Catégorie
+        other: Catégories
       university/role:
         one: Rôle
         other: Rôles

@@ -17,4 +17,12 @@
 #  fk_rails_134ac9c0b6  (university_id => universities.id)
 #
 class University::Person::Category < ApplicationRecord
+  include WithUniversity
+
+  scope :ordered, -> { order(:name) }
+
+  def to_s
+    "#{name}"
+  end
+
 end
