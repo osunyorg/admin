@@ -1,10 +1,10 @@
 class Admin::Communication::Extranets::ContactsController < Admin::Communication::Extranets::ApplicationController
   def index
-    @persons = current_university.people.ordered
+    @people = current_university.people.ordered
     @organizations = current_university.organizations.ordered
     respond_to do |format|
       format.html {
-        @persons = @persons.page params[:persons_page]
+        @people = @people.page params[:persons_page]
         @organizations = @organizations.page params[:organizations_page]
       }
       format.xlsx {

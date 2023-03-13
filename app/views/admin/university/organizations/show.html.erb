@@ -26,7 +26,7 @@
         <% if @organization.country.present? %>
           <div class="col-xxl-6">
             <%= osuny_label University::Organization.human_attribute_name('country') %>
-            <p><%= ISO3166::Country[@organization.country].common_name %></p>
+            <p><%= @organization.country_name %></p>
           </div>
         <% end %>
         <% if @organization.geolocated? %>

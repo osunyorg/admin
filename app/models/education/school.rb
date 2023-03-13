@@ -25,6 +25,7 @@
 #
 class Education::School < ApplicationRecord
   include Sanitizable
+  include WithCountry
   include WithGit
   include Aboutable
   include WithPrograms # must come before WithAlumni and WithTeam

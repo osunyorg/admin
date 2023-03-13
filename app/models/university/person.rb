@@ -57,6 +57,7 @@ class University::Person < ApplicationRecord
   include WithUniversity
   include WithGit
   include WithBlobs
+  include WithCountry
   include WithEducation
   include WithExperiences
   include WithSlug
