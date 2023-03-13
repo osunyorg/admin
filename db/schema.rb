@@ -240,18 +240,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
   end
 
-  create_table "communication_website_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.string "object_type", null: false
-    t.uuid "object_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
-    t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
-  end
-
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "previous_path"
     t.string "about_type", null: false
@@ -1058,8 +1046,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_083029) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
-  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"

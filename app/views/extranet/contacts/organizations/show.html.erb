@@ -64,6 +64,8 @@
         </dd>
       <% end %>
       <% if @organization.geolocated? %>
+        <%# Include map.js before call Leaflet (map helper) %>
+        <%= javascript_include_tag 'map' %>
         <dt><%= University::Organization.human_attribute_name(:map) %></dt>
         <dl><%= map(
               center: {
