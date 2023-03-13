@@ -145,6 +145,20 @@ class Communication::Website::Post < ApplicationRecord
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
+  def duplicate
+    post = self.dup
+    post.published = false
+    post.published_at = nil
+    post.save
+    blocks.ordered.each do |block|
+      b = block.duplicate
+      b.about = post
+      b.position = block.position
+      b.save
+    end
+    post
+  end
+
   def translated_author
     @translated_author ||= author.find_or_translate!(language)
   end
