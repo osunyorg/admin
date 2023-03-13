@@ -19,6 +19,8 @@
 
 one:
   name: MyString
+  university: default_university
 
 two:
   name: MyString
+  university: default_university
