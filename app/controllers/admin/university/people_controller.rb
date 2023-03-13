@@ -12,10 +12,19 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     @people = apply_scopes(@people)
                 .for_language_id(current_university.default_language_id)
                 .ordered
-                .page(params[:page])
-    @categories = current_university.person_categories.ordered.page(params[:categories_page])
 
-    breadcrumb
+    respond_to do |format|
+      format.html {
+        @people = @people.page params[:page]
+        @categories = current_university.person_categories.ordered.page(params[:categories_page])
+        breadcrumb
+      }
+      format.xlsx {
+        filename = "people-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+      }
+    end
+
   end
 
   def show
