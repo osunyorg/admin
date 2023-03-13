@@ -1,0 +1,17 @@
+<%= simple_form_for [:admin, category] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-xl-8">
+      <%= osuny_panel t('content') do %>
+        <%= f.input :name %>
+      <% end %>
+    </div>
+    <div class="col-xl-4">
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>
