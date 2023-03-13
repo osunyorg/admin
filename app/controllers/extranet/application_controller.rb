@@ -35,7 +35,7 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def user_is_contact
-    current_extranet.connected_persons.find_by(id: current_user.person&.id).present?
+    current_extranet.connected_people.find_by(id: current_user.person&.id).present?
   end
 
 end

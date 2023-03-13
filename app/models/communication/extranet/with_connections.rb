@@ -22,13 +22,13 @@ module Communication::Extranet::WithConnections
     University::Organization.where(id: ids)
   end
 
-  def connected_persons
+  def connected_people
     ids = connections.where(object_type: 'University::Person').pluck(:object_id)
     University::Person.where(id: ids)
   end
 
   def experiences_through_connections
-    University::Person::Experience.where(person_id: connected_persons, organization_id: connected_organizations)
+    University::Person::Experience.where(person_id: connected_people, organization_id: connected_organizations)
   end
 
 end
