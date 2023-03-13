@@ -1,7 +1,10 @@
 <% content_for :title, Communication::Extranet.human_attribute_name(:feature_contacts) %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>
-  <%= osuny_panel University::Person.model_name.human(count: 2) do %>
+  <% action = link_to t('export'),
+                    admin_communication_extranet_contacts_path(extranet_id: @extranet.id, export: 'persons'),
+                    class: button_classes('ms-1') if can?(:show, University::Person) %>
+  <%= osuny_panel University::Person.model_name.human(count: 2), action: action do %>
     <div class="table-responsive">
       <table class="<%= table_classes%>">
         <tbody>
@@ -11,19 +14,19 @@
               <td><%= person.email %></td>
               <td>
                 <% if @extranet.connected?(person) %>
-                  <%= link_to 'Déconnecter', 
+                  <%= link_to 'Déconnecter',
                                   disconnect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id, 
-                                    objectId: person.id, 
+                                    extranet_id: @extranet.id,
+                                    objectId: person.id,
                                     objectType: person.class
                                   ),
                                   class: button_classes_danger,
                                   method: :post %>
                 <% else %>
-                  <%= link_to 'Connecter', 
+                  <%= link_to 'Connecter',
                                   connect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id, 
-                                    objectId: person.id, 
+                                    extranet_id: @extranet.id,
+                                    objectId: person.id,
                                     objectType: person.class
                                   ),
                                   class: button_classes,
@@ -46,19 +49,19 @@
               <td><%= link_to organization, [:admin, organization] %></td>
               <td>
                 <% if @extranet.connected?(organization) %>
-                  <%= link_to 'Déconnecter', 
+                  <%= link_to 'Déconnecter',
                                   disconnect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id, 
-                                    objectId: organization.id, 
+                                    extranet_id: @extranet.id,
+                                    objectId: organization.id,
                                     objectType: organization.class
                                   ),
                                   class: button_classes_danger,
                                   method: :post %>
                 <% else %>
-                  <%= link_to 'Connecter', 
+                  <%= link_to 'Connecter',
                                   connect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id, 
-                                    objectId: organization.id, 
+                                    extranet_id: @extranet.id,
+                                    objectId: organization.id,
                                     objectType: organization.class
                                   ),
                                   class: button_classes,

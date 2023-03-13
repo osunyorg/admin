@@ -173,6 +173,7 @@ fr:
         finished: Traité
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
+  export: Exporter
   false: Non
   featured_image:
     title: Image
