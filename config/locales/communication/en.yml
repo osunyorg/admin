@@ -90,6 +90,8 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
+      communication/extranet/connection:
+        connected: Connected
       communication/extranet/document:
         name: Name
         published: Published?
