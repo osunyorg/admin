@@ -141,6 +141,7 @@ class University::Person < ApplicationRecord
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
   scope :for_role, -> (role) { where("is_#{role}": true) }
+  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
   scope :for_program, -> (program_id) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
       .where(education_programs: { id: program_id })

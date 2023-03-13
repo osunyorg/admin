@@ -4,6 +4,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                               through_association: :organizations
 
   has_scope :for_search_term
+  has_scope :for_category
   has_scope :for_kind
 
   def index

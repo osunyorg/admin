@@ -74,6 +74,7 @@ class University::Organization < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :for_kind, -> (kind) { where(kind: kind) }
+  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
   scope :for_search_term, -> (term) {
     where("
       unaccent(university_organizations.address) ILIKE unaccent(:term) OR

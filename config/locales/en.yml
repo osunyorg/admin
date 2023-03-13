@@ -190,6 +190,7 @@ en:
     remove: Remove image
   filters:
     attributes:
+      category: Filter by category
       date: Filter by date
       element: Filter by %{element}
       kind: Filter by kind

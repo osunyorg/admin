@@ -190,6 +190,7 @@ fr:
     remove: Supprimer l'image
   filters:
     attributes:
+      category: Filtrer par catégorie
       date: Filtrer par date
       element: Filtrer par %{element}
       kind: Filtrer par type
