@@ -8,6 +8,7 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
         @organizations = @organizations.page params[:organizations_page]
       }
       format.xlsx {
+        # could be 2 differents controllers in Contacts/People & Contacts#Organizations, each with an index export
         @export = params['export']
         filename = "#{@export}-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
