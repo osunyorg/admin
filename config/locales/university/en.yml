@@ -27,6 +27,34 @@ en:
         sso_target_url: Target URL
         url: URL
         zipcode: Zipcode
+      university/organization:
+        address: Address
+        address_name: Address name
+        address_additional: Additional address
+        categories: Categories
+        city: City
+        country: Country
+        description: Personne morale liée à une université, une composante, un laboratoire, etc.
+        digital: Digital contact
+        email: Email
+        geolocation: Geographical coordinates
+        kind: Kind
+        legal: Legal information
+        linkedin: LinkedIn
+        logo: Logo for light backgrounds (default)
+        logo_on_dark_background: Logo for dark backgrounds (optional)
+        long_name: Long name
+        map: Map
+        name: Name
+        phone: Telephone
+        physical: Contact information
+        siren: Legal identification number
+        text: Text
+        twitter: Twitter
+        url: Website
+        zipcode: Zipcode
+      university/organization/category:
+        name: Name
       university/person:
         abilities: Abilities
         address: Address
@@ -35,6 +63,7 @@ en:
         author: Author
         biography: Biography
         birthdate: Birthdate
+        categories: Categories
         city: City
         communication_website_posts: Posts
         contacts: Contact information
@@ -76,6 +105,8 @@ en:
         url: Website
         user: User
         zipcode: Zipcode
+      university/person/category:
+        name: Name
       university/person/experience:
         description: Description
         edit: Edit experience
@@ -88,31 +119,6 @@ en:
         description: Mission (in this context)
         person: Person
         target_id: ''
-      university/organization:
-        address: Address
-        address_name: Address name
-        address_additional: Additional address
-        city: City
-        country: Country
-        description: Personne morale liée à une université, une composante, un laboratoire, etc.
-        digital: Digital contact
-        email: Email
-        geolocation: Geographical coordinates
-        kind: Kind
-        legal: Legal information
-        linkedin: LinkedIn
-        logo: Logo for light backgrounds (default)
-        logo_on_dark_background: Logo for dark backgrounds (optional)
-        long_name: Long name
-        map: Map
-        name: Name
-        phone: Telephone
-        physical: Contact information
-        siren: Legal identification number
-        text: Text
-        twitter: Twitter
-        url: Website
-        zipcode: Zipcode
       university/role:
         description: Description
         people: People
@@ -129,6 +135,9 @@ en:
       university/person:
         one: Person
         other: People
+      university/person/category:
+        one: Category
+        other: Categories
       university/person/involvement:
         one: Involvement
         other: Involvements
@@ -141,6 +150,9 @@ en:
       university/organization:
         one: Organization
         other: Organizations
+      university/organization/category:
+        one: Category
+        other: Categories
       university/role:
         one: Role
         other: Roles

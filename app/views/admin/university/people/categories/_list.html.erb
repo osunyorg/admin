@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= University::Person::Category.human_attribute_name('name') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.each do |category| %>
+        <tr>
+          <td><%= link_to category, admin_university_person_category_path(category) %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link category %>
+              <%= destroy_link category %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

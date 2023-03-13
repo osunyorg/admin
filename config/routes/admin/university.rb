@@ -15,6 +15,9 @@ namespace :university do
     end
   end
   resources :people do
+    collection do
+      resources :categories, controller: 'people/categories', as: 'person_categories'
+    end
     member do
       get :static
       get "/translations/:lang" => "people#in_language", as: :show_in_language
@@ -28,6 +31,9 @@ namespace :university do
     end
   end
   resources :organizations do
+    collection do
+      resources :categories, controller: 'organizations/categories', as: 'organization_categories'
+    end
     member do
       get :static
     end
