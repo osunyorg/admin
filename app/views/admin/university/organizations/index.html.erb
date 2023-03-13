@@ -30,4 +30,7 @@ subtitle = t('admin.elements', count: @categories.total_count)
   <%= link_to t('import_btn'),
               new_admin_university_organizations_import_path,
               class: button_classes if can? :create, University::Organization %>
+  <%= link_to t('export'),
+              request.params.merge(format: "xlsx"),
+              class: button_classes %>
 <% end %>

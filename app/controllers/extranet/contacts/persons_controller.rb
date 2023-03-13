@@ -1,6 +1,6 @@
 class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationController
   def index
-    @people = current_extranet.connected_persons
+    @people = current_extranet.connected_people
                               .ordered
                               .page(params[:page])
                               .per(60)
@@ -9,7 +9,7 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
   end
 
   def show
-    @person = current_extranet.connected_persons.find(params[:id])
+    @person = current_extranet.connected_people.find(params[:id])
     @current_experiences = @person.experiences.includes(:organization).current.ordered
     breadcrumb
   end

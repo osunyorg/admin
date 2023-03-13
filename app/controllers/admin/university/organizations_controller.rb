@@ -8,9 +8,19 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   has_scope :for_kind
 
   def index
-    @organizations = apply_scopes(@organizations).ordered.page(params[:page])
-    @categories = current_university.organization_categories.ordered.page(params[:categories_page])
-    breadcrumb
+    @organizations = apply_scopes(@organizations).ordered
+
+    respond_to do |format|
+      format.html {
+        @organizations = @organizations.page params[:page]
+        @categories = current_university.organization_categories.ordered.page(params[:categories_page])
+        breadcrumb
+      }
+      format.xlsx {
+        filename = "organizations-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+      }
+    end
   end
 
   def show
