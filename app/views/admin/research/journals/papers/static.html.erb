@@ -18,15 +18,17 @@ date: "<%= @about.published_at.iso8601 %>"
 pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
 keywords: >
-  <%= @about.keywords %>
+  <%= prepare_text_for_static @about.keywords %>
 researchers:
 <% @about.people.each do |person| %>
 - "<%= person.slug %>"
 <% end %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-abstract: "<%= @about.abstract %>"
-references: "<%= @about.references %>"
+abstract: >
+  <%= prepare_text_for_static @about.abstract %>
+references: >
+  <%= prepare_html_for_static @about.references, @about.university %>
 <%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>
