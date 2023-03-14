@@ -66,7 +66,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
       :terms, :privacy_policy, :cookies_policy
     ]
     if can?(:create, Communication::Extranet)
-      allowed_params = allowed_params + [
+      allowed_params += [
         :host, :about_id, :about_type,
         :sass,
         :feature_alumni, :feature_library, :feature_contacts, :feature_jobs, :feature_posts,
