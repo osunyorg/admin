@@ -101,7 +101,7 @@ class Ability
     can :manage, Communication::Website::Imported::Website, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Page, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
-    can :read, Communication::Extranet, university_id: @user.university_id
+    can [:read, :update], Communication::Extranet, university_id: @user.university_id
     can :manage, Communication::Extranet::Post, university_id: @user.university_id
     can :manage, Communication::Extranet::Post::Category, university_id: @user.university_id
     can :manage, Communication::Extranet::Document, university_id: @user.university_id
