@@ -40,13 +40,15 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
   include WithBlobs
+  include WithBlocks
+  include WithGit
   include WithPermalink
   include WithPosition
+  include WithPublication
   include WithSlug
-
+  include WithUniversity
+  
   has_summernote :text
   has_one_attached :pdf
 
@@ -62,14 +64,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at, if: :published_changed?
-
-  scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
-
-  def published?
-    published && published_at && published_at.to_date <= Date.today
-  end
 
   def for_website?(website)
     journal == website.about
@@ -117,9 +112,5 @@ class Research::Journal::Paper < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [pdf&.blob_id]
-  end
-
-  def set_published_at
-    self.published_at = published? ? Time.zone.now : nil
   end
 end

@@ -27,5 +27,6 @@ researchers:
 <%= render 'admin/application/summary/static' %>
 abstract: "<%= @about.abstract %>"
 references: "<%= @about.references %>"
+<%= render 'admin/communication/blocks/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>
