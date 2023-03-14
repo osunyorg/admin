@@ -40,6 +40,14 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
     redirect_back(fallback_location: admin_communication_extranet_contacts_path(@extranet))
   end
 
+  def toggle
+    load_object
+    # connect / disconnect
+    params[:connection] == 'connect'  ? @extranet.connect(@object)
+                                      : @extranet.disconnect(@object)
+    head :ok
+  end
+
 
   protected
 

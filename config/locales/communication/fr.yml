@@ -90,6 +90,8 @@ fr:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         terms: Conditions d'utilisation
+      communication/extranet/connection:
+        connected: Connecté
       communication/extranet/document:
         name: Nom
         published: Publié ?
