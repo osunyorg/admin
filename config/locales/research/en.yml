@@ -57,6 +57,7 @@ en:
         title: Title
       research/journal/paper:
         abstract: Abstract
+        doi: DOI
         keywords: Keywords
         pdf: PDF
         published: Published?
@@ -113,5 +114,7 @@ en:
       select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
   simple_form:
     hints:
+      research_journal_paper:
+        doi: "You can type the DOI identifier without https://, for example “10.19182/perspective/31918”"
       research_journal_volume:
         cover: JPG or PNG file

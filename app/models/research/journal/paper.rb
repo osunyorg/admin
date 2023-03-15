@@ -5,6 +5,7 @@
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
 #  accepted_at                :date
+#  doi                        :string
 #  keywords                   :text
 #  meta_description           :text
 #  position                   :integer
@@ -94,6 +95,10 @@ class Research::Journal::Paper < ApplicationRecord
                     people.map(&:researcher) +
                     website.menus
     dependencies.flatten.compact
+  end
+
+  def doi_url
+    Doi.url doi
   end
 
   def to_s

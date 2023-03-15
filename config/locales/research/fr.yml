@@ -58,6 +58,7 @@ fr:
         title: Titre
       research/journal/paper:
         abstract: Extrait
+        doi: DOI
         keywords: Mots clés
         pdf: PDF
         published: Publié ?
@@ -113,5 +114,7 @@ fr:
       select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
   simple_form:
     hints:
+      research_journal_paper:
+        doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
       research_journal_volume:
         cover: Fichier JPG ou PNG

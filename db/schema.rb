@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_15_142604) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_170508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -758,6 +758,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_142604) do
     t.uuid "kind_id"
     t.date "received_at"
     t.date "accepted_at"
+    t.string "doi"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
