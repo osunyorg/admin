@@ -9,7 +9,7 @@
         <p><%= @paper.abstract %></p>
         <% if @paper.pdf.attached? %>
           <%= osuny_label Research::Journal::Paper.human_attribute_name('pdf') %>
-          <%= link_to @paper.pdf.filename, url_for(@paper.pdf) %>
+          <p><%= link_to @paper.pdf.filename, url_for(@paper.pdf) %></p>
         <% end %>
         <% if has_content?(@paper.text)%>
           <%= osuny_label Research::Journal::Paper.human_attribute_name('text') %>
