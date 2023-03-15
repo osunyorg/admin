@@ -37,6 +37,14 @@
             <%= osuny_label Research::Journal::Paper.human_attribute_name('published_at') %>
             <p><%= l @paper.published_at.to_time, format: :date_with_explicit_month %></p>
           <% end %>
+          <% if @paper.accepted_at.present? %>
+            <%= osuny_label Research::Journal::Paper.human_attribute_name('accepted_at') %>
+            <p><%= l @paper.accepted_at.to_time, format: :date_with_explicit_month %></p>
+          <% end %>
+          <% if @paper.received_at.present? %>
+            <%= osuny_label Research::Journal::Paper.human_attribute_name('received_at') %>
+            <p><%= l @paper.received_at.to_time, format: :date_with_explicit_month %></p>
+          <% end %>
           <% unless @paper.keywords.blank? %>
             <%= osuny_label Research::Journal::Paper.human_attribute_name('keywords') %>
             <p><%= @paper.keywords %></p>

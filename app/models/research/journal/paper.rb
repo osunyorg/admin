@@ -4,11 +4,13 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  accepted_at                :date
 #  keywords                   :text
 #  meta_description           :text
 #  position                   :integer
 #  published                  :boolean          default(FALSE)
 #  published_at               :datetime
+#  received_at                :date
 #  references                 :text
 #  slug                       :string
 #  summary                    :text

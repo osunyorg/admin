@@ -31,6 +31,8 @@
         <%= f.association :volume, collection: @journal.volumes, label: Research::Journal::Volume.model_name.human %>
         <%= f.input :published %>
         <%= f.input :published_at, html5: true %>
+        <%= f.input :accepted_at, html5: true %>
+        <%= f.input :received_at, html5: true %>
         <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
         <%= f.association :people, collection: current_university.people.researchers.ordered, as: :check_boxes %>
         <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>

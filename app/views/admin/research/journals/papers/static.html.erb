@@ -14,7 +14,10 @@ volumes:
   - "<%= @about.volume.path.delete_prefix('/') %>"
 <% end %>
 weight: <%= @about.position %>
-date: "<%= @about.published_at.iso8601 %>"
+dates: 
+  published: "<%= @about.published_at&.to_date&.iso8601 %>"
+  accepted: "<%= @about.accepted_at&.to_date&.iso8601 %>"
+  received: "<%= @about.received_at&.to_date&.iso8601 %>"
 <% if @about.pdf.attached? %>
 pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
