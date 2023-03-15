@@ -135,6 +135,10 @@ module Admin::ApplicationHelper
     raw text
   end
 
+  def has_content?(html)
+    strip_tags(html.to_s).present?
+  end
+
   def indent(text, depth)
     indentation = '  ' * depth
     # Remove useless \r

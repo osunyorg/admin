@@ -13,12 +13,12 @@
                     as: :summernote,
                     input_html: {
                       data: { 'summernote-config' => 'mini' }
-                    } if paper.text.present? %>
+                    } if has_content?(paper.text) %>
         <%= f.input :references, 
                     as: :summernote,
                     input_html: {
                       data: { 'summernote-config' => 'mini' }
-                    } if paper.references.present? %>
+                    } if has_content?(paper.references) %>
       <% end %>
     </div>
     <div class="col-md-4">
