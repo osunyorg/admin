@@ -62,6 +62,8 @@ fr:
         pdf: PDF
         published: Publié ?
         published_at: Publié le
+        accepted_at: Accepté le
+        received_at: Reçu le
         references: Références
         kind: Type de papier
         people: Auteur·e·s

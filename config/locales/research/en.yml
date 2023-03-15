@@ -61,6 +61,8 @@ en:
         pdf: PDF
         published: Published?
         published_at: Published at
+        accepted_at: Accepted at
+        received_at: Received at
         references: References
         kind: Kind of paper
         people: Authors
