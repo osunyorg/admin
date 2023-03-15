@@ -83,14 +83,15 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] +
-    active_storage_blobs +
-    git_block_dependencies +
-    other_papers_in_the_volume +
-    people +
-    people.map(&:active_storage_blobs).flatten +
-    people.map(&:researcher) +
-    website.menus
+    dependencies =  [self] +
+                    active_storage_blobs +
+                    git_block_dependencies +
+                    other_papers_in_the_volume +
+                    people +
+                    people.map(&:active_storage_blobs).flatten +
+                    people.map(&:researcher) +
+                    website.menus
+    dependencies.flatten.compact
   end
 
   def to_s
