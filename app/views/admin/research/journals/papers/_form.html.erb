@@ -6,7 +6,6 @@
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
         <%= f.input :title, as: :text, input_html: { rows: 3 } %>
-        <%= render 'admin/application/summary/form', f: f, about: paper %>
         <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
         <%= f.input :pdf %>
         <%= f.input :text, 
