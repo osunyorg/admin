@@ -25,11 +25,10 @@ class Communication::Website::Connection < ApplicationRecord
   belongs_to :university
   belongs_to :website
   belongs_to :object, polymorphic: true
-  belongs_to :source, polymorphic: true, optional: true
 
   scope :for_object, -> (object) { where(object: object) }
   scope :in_website, -> (website) { where(website: website) }
-  scope :ordered, -> { order(updated_at: :desc, )}
+  scope :ordered, -> { order(updated_at: :desc) }
 
   def self.websites_for(object)
     for_object(object).distinct(:website).collect(&:website).uniq

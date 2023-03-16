@@ -105,6 +105,7 @@ class Communication::Website::Page < ApplicationRecord
     children
   end
   
+  # Deprecated
   def git_dependencies(website)
     dependencies = [self] +
                     website.menus +
@@ -117,6 +118,7 @@ class Communication::Website::Page < ApplicationRecord
     dependencies.flatten.compact
   end
 
+  # Deprecated
   def git_destroy_dependencies(website)
     [self] +
     descendants +

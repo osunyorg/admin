@@ -31,8 +31,11 @@ class Communication::Website::GitFile < ApplicationRecord
   def self.sync(website, object, destroy: false)
     # Permalinks must be calculated BEFORE renders
     object.manage_permalink_in_website(website) if Communication::Website::Permalink.supported_by?(object)
-    object.before_git_sync # Handle optional before-sync process
+    # Handle optional before-sync process
+    object.before_git_sync
+    # The git file might exist or not
     git_file = where(website: website, about: object).first_or_create
+    # Mark for destruction if necessary
     git_file.will_be_destroyed = destroy
     # It is very important to go through this specific instance of the website,
     # and not through each git_file.website, which would be different instances.

@@ -26,11 +26,14 @@ module WithDependencies
   protected
 
   def add_dependency_to_array(array = [], dependency, recursive: false)
+    # Pas de boucle infinie !
     return if dependency.in?(array)
     array << dependency
+    # On s'arrête là si ce n'est pas récursif
     return unless recursive
+    # Si la dépendance n'a pas de dépendances, on s'arrête là de toutes façons
     return unless dependency.respond_to?(:dependencies)
-    array = array | dependency.dependencies(array)
-    array
+    # On fait l'union des 2 arrays
+    array | dependency.dependencies(array)
   end
 end
