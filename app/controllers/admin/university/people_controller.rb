@@ -24,7 +24,13 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
       }
     end
+  end
 
+  def search
+    @term = params[:term].to_s
+    @people = current_university.people
+                                .for_search_term(@term)
+                                .ordered
   end
 
   def show
