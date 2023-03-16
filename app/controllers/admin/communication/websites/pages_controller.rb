@@ -48,13 +48,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def connect
     load_object
-    @website.connect @object
+    @website.connect @object, @page
     head :ok
   end
   
   def disconnect
     load_object
-    @website.disconnect @object
+    @website.disconnect @object, @page
     redirect_back(fallback_location: [:admin, @object])
   end
 

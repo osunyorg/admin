@@ -13,16 +13,16 @@ module Communication::Website::WithConnections
     connections.reload.where('updated_at < ?', start).delete_all
   end
 
-  def connect(object)
-    connect_object object
+  def connect(object, source = self)
+    connect_object object, source
     return unless object.respond_to?(:dependencies)
     object.dependencies.each do |dependency|
-      connect_object dependency
+      connect_object dependency, source
     end
   end
 
-  def disconnect(object)
-    disconnect_object object
+  def disconnect(object, source = self)
+    connections.where(university: university, object: object, source: source).delete_all
   end
 
   # TODO factoriser avec les extranets
@@ -36,18 +36,22 @@ module Communication::Website::WithConnections
     University::Organization.where(id: ids)
   end
 
+  def connection_sources_for(object)
+    connections.for_object(object)
+               .collect(&:source)
+               .uniq
+               .compact
+  end
+
   protected
 
-  def connect_object(object)
+  def connect_object(object, source)
+    return unless persisted?
     return if object.nil?
     # On ne connecte pas le site à lui-même
     return if object.is_a?(Communication::Website)
     # puts "connect #{object} (#{object.class})"
-    connection = connections.where(university: university, object: object).first_or_create
+    connection = connections.where(university: university, object: object, source: source).first_or_create
     connection.touch if connection.persisted?
-  end
-
-  def disconnect_object(object)
-    connections.where(university: university, object: object).delete_all
   end
 end

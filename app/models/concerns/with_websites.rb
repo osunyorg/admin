@@ -5,7 +5,8 @@ module WithWebsites
   included do 
     include WithGit
 
-    after_save :connect_to_websites
+    after_save  :connect_to_websites
+    after_touch :connect_to_websites
   end
 
   def websites
@@ -19,10 +20,20 @@ module WithWebsites
   protected
   
   def connect_to_websites
-    if respond_to?(:website) && !website.nil?
-      website.connect self
-    else
-      websites.each { |website| website.connect self }
+    respond_to?(:website) ? connect_directly
+                          : connect_indirectly
+  end
+
+  def connect_directly
+    website.connect self, self
+  end
+
+  def connect_indirectly
+    websites.each do |website|
+      # Only direct connections
+      website.connection_sources_for(self).each do |source|
+        website.connect self, source
+      end
     end
   end
 end

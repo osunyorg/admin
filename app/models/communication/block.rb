@@ -33,7 +33,7 @@ class Communication::Block < ApplicationRecord
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
 
-  belongs_to :about, polymorphic: true
+  belongs_to :about, polymorphic: true, touch: true
 
   # Used to purge images when unattaching them
   # template_blobs would be a better name, because there are files

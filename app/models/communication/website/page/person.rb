@@ -50,6 +50,11 @@ class Communication::Website::Page::Person < Communication::Website::Page
     website.connected_people
   end
 
+  def connected_people
+    ids = website.connections.where(object_type: 'University::Person', source: self).pluck(:object_id)
+    University::Person.where(id: ids)
+  end
+
   protected
   
   def current_git_path
