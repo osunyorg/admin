@@ -4,7 +4,8 @@ module Education::School::WithAlumni
   included do
 
       has_many    :education_cohorts,
-                  class_name: 'Education::Cohort'
+                  class_name: 'Education::Cohort',
+                  dependent: :destroy
                   alias_attribute :cohorts, :education_cohorts
 
       has_many    :alumni, -> { distinct },
