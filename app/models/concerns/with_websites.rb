@@ -1,7 +1,10 @@
+# Le website utilise WithGit sans WithWebsites, parce qu'il en est un
 module WithWebsites
   extend ActiveSupport::Concern
 
   included do 
+    include WithGit
+
     after_save :connect_to_websites
   end
 

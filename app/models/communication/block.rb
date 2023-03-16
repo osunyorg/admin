@@ -28,7 +28,6 @@ class Communication::Block < ApplicationRecord
   include WithDependencies
   include WithPosition
   include WithUniversity
-  include WithWebsites
   include Sanitizable
 
   IMAGE_MAX_SIZE = 5.megabytes
@@ -82,18 +81,6 @@ class Communication::Block < ApplicationRecord
   # Template data is clean and sanitized, and initialized with json
   def data
     template.data
-  end
-
-  def website
-    about.website
-  rescue
-    nil
-  end
-
-  def websites
-    about.websites
-  rescue
-    []
   end
 
   def display_dependencies

@@ -47,7 +47,7 @@ class Communication::Website::Page::Person < Communication::Website::Page
   def display_dependencies
     super + 
     [website.config_default_permalinks] +
-    website.people_with_facets
+    website.connected_people
   end
 
   protected

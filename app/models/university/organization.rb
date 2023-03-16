@@ -45,7 +45,6 @@ class University::Organization < ApplicationRecord
   include WithBlocks
   include WithCountry
   include WithGeolocation
-  include WithGit
   include WithPermalink
   include WithSlug
   include WithUniversity

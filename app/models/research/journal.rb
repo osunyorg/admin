@@ -23,7 +23,6 @@ class Research::Journal < ApplicationRecord
   include Sanitizable
   include Aboutable
   include WithUniversity
-  include WithGit
   include WithWebsites
 
   has_many :communication_websites, class_name: 'Communication::Website', as: :about, dependent: :nullify

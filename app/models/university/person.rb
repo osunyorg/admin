@@ -55,7 +55,6 @@
 class University::Person < ApplicationRecord
   include Sanitizable
   include WithUniversity
-  include WithGit
   include WithBlobs
   include WithCountry
   include WithEducation
@@ -64,7 +63,7 @@ class University::Person < ApplicationRecord
   include WithPicture
   include WithRoles
   include WithBlocks
-  include WithPermalink
+  include WitvihPermalink
   include WithResearch
   include WithTranslations
   include WithWebsites

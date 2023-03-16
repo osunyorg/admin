@@ -43,7 +43,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method

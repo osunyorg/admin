@@ -45,7 +45,6 @@ class Communication::Website::Category < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition

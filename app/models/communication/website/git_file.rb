@@ -29,10 +29,12 @@ class Communication::Website::GitFile < ApplicationRecord
   attr_accessor :will_be_destroyed
 
   def self.sync(website, object, destroy: false)
+    # A dependency does not always have a GitFile (ex: Communication::Block)
+    return unless object.respond_to?(:git_files)
     # Permalinks must be calculated BEFORE renders
-    object.manage_permalink_in_website(website) if Communication::Website::Permalink.supported_by?(object)
-    # Handle optional before-sync process
-    object.before_git_sync
+    manage_permalink object, website
+    # Blobs need to be completely analyzed, which is async
+    analyze_if_blob object
     # The git file might exist or not
     git_file = where(website: website, about: object).first_or_create
     # Mark for destruction if necessary
@@ -53,6 +55,16 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
+
+  def self.manage_permalink(object, website)
+    return unless Communication::Website::Permalink.supported_by?(object)
+    object.manage_permalink_in_website(website)
+  end
+
+  def self.analyze_if_blob(object)
+    return unless object.is_a? ActiveStorage::Blob
+    object.analyze unless object.analyzed?
+  end
 
   def template_static
     if about.respond_to? :template_static

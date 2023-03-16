@@ -26,6 +26,17 @@ module Communication::Website::WithConnections
     disconnect_object object
   end
 
+  # TODO factoriser avec les extranets
+  def connected_people
+    ids = connections.where(object_type: 'University::Person').pluck(:object_id)
+    University::Person.where(id: ids)
+  end
+
+  def connected_organizations
+    ids = connections.where(object_type: 'University::Organization').pluck(:object_id)
+    University::Organization.where(id: ids)
+  end
+
   protected
 
   def connect_object(object)

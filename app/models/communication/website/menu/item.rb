@@ -37,7 +37,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
   include WithPosition
   include WithTree
   include WithUniversity
-  include WithWebsites
 
   attr_accessor :skip_publication_callback
 

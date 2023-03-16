@@ -57,7 +57,6 @@ class Education::Program < ApplicationRecord
   include WithBlocks
   include WithDiploma
   include WithFeaturedImage
-  include WithGit
   include WithInheritance
   include WithMenuItemTarget
   include WithPermalink
@@ -68,6 +67,7 @@ class Education::Program < ApplicationRecord
   include WithTree
   include WithUniversity
   include WithWebsites
+  include WithWebsitesCategories
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,

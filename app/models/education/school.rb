@@ -27,8 +27,8 @@ class Education::School < ApplicationRecord
   include Aboutable
   include Sanitizable
   include WithAlumni
+  include WithBlobs
   include WithCountry
-  include WithGit
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
   include WithWebsites
@@ -86,5 +86,13 @@ class Education::School < ApplicationRecord
 
   def has_research_volumes?
     false
+  end
+
+  protected
+
+  def explicit_blob_ids
+    [
+      logo&.blob_id
+    ]
   end
 end

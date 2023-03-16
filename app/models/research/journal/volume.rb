@@ -33,7 +33,6 @@ class Research::Journal::Volume < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage
-  include WithGit
   include WithPermalink
   include WithPublication
   include WithSlug

@@ -45,7 +45,6 @@ class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithGit
   include WithPermalink
   include WithPosition
   include WithPublication

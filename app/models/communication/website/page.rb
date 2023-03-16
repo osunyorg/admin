@@ -52,7 +52,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPosition
   include WithTree

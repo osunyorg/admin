@@ -47,7 +47,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
   def display_dependencies
     super + 
     [website.config_default_permalinks] +
-    website.organizations
+    website.connected_organizations
   end
 
   protected
