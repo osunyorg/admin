@@ -8,9 +8,9 @@
 #  cookies_policy             :text
 #  css                        :text
 #  feature_alumni             :boolean          default(FALSE)
-#  feature_assets             :boolean          default(FALSE)
 #  feature_contacts           :boolean          default(FALSE)
 #  feature_jobs               :boolean          default(FALSE)
+#  feature_library            :boolean          default(FALSE)
 #  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
 #  home_sentence              :text
