@@ -37,10 +37,9 @@
         <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
         <%= f.association :people,
                           collection: current_university.people
-                                                        .for_language_id(current_university
-                                                        .default_language_id)
+                                                        .for_language_id(current_university.default_language_id)
                                                         .researchers
-                                                        .ordered, 
+                                                        .ordered,
                           as: :check_boxes %>
         <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>
       <% end %>
