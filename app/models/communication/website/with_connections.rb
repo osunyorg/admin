@@ -10,12 +10,11 @@ module Communication::Website::WithConnections
   def clean_connections!
     start = Time.now
     connect self
-    connections.where('updated_at < ?', start).destroy_all
+    connections.reload.where('updated_at < ?', start).delete_all
   end
 
   def connect(object)
-    # On ne connecte pas le site à lui-même
-    connect_object object unless object.is_a?(Communication::Website)
+    connect_object object
     return unless object.respond_to?(:dependencies)
     object.dependencies.each do |dependency|
       connect_object dependency
@@ -40,11 +39,15 @@ module Communication::Website::WithConnections
   protected
 
   def connect_object(object)
+    return if object.nil?
+    # On ne connecte pas le site à lui-même
+    return if object.is_a?(Communication::Website)
+    # puts "connect #{object} (#{object.class})"
     connection = connections.where(university: university, object: object).first_or_create
     connection.touch if connection.persisted?
   end
 
   def disconnect_object(object)
-    connections.where(university: university, object: object).destroy_all
+    connections.where(university: university, object: object).delete_all
   end
 end

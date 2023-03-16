@@ -51,7 +51,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def create
     @organization.university = current_university
-    if @organization.save_and_sync()
+    if @organization.save_and_sync
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s)
     else

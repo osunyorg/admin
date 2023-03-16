@@ -55,11 +55,12 @@ class Communication::Website::Page < ApplicationRecord
   include WithMenuItemTarget
   include WithPosition
   include WithTree
-  include WithPath
   include WithPermalink
   include WithType
   include WithTranslations
   include WithWebsites
+  # WithPath overwrite the git_path method defined in WithWebsites
+  include WithPath
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
