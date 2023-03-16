@@ -9,12 +9,12 @@
         <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
         <%= f.input :pdf %>
         <%= f.input :doi %>
-        <%= f.input :text, 
+        <%= f.input :text,
                     as: :summernote,
                     input_html: {
                       data: { 'summernote-config' => 'mini' }
                     } if has_content?(paper.text) %>
-        <%= f.input :references, 
+        <%= f.input :references,
                     as: :summernote,
                     input_html: {
                       data: { 'summernote-config' => 'mini' }
@@ -35,7 +35,13 @@
         <%= f.input :accepted_at, html5: true, as: :date %>
         <%= f.input :received_at, html5: true, as: :date %>
         <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
-        <%= f.association :people, collection: current_university.people.researchers.ordered, as: :check_boxes %>
+        <%= f.association :people,
+                          collection: current_university.people
+                                                        .for_language_id(current_university
+                                                        .default_language_id)
+                                                        .researchers
+                                                        .ordered, 
+                          as: :check_boxes %>
         <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>
       <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: paper %>
