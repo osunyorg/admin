@@ -63,7 +63,7 @@ class University::Person < ApplicationRecord
   include WithPicture
   include WithRoles
   include WithBlocks
-  include WitvihPermalink
+  include WithPermalink
   include WithResearch
   include WithTranslations
   include WithWebsites
