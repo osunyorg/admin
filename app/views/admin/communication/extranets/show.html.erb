@@ -10,29 +10,21 @@
   <% end %>
 <% end %>
 
-<% if @alumni %>
-  <p>
-    <%= @alumni.count %>
-    <%= University::Person::Alumnus.model_name.human(count: @alumni.count).downcase %>
-  </p>
-<% end %>
-<% if @cohorts %>
-  <p>
-    <%= @cohorts.count %>
-    <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
-  </p>
-<% end %>
-<% if @years %>
-  <p>
-    <%= @years.count %>
-    <%= Education::AcademicYear.model_name.human(count: @years.count).downcase %>
-  </p>
-<% end %>
-<% if @organizations %>
-  <p>
-    <%= @organizations.count %>
-    <%= University::Organization.model_name.human(count: @organizations.count).downcase %>
-  </p>
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <div class="row">
+    <% Communication::Extranet::FEATURES.each do |feature| %>
+      <%
+      property = "feature_#{feature}"
+      active = @extranet.has_feature? feature
+      next unless active
+      %>
+      <div class="col-lg-3">
+        <%= osuny_panel Communication::Extranet.human_attribute_name property do %>
+          <%= link_to t('show'), [:admin, @extranet, feature], class: 'stretched-link' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <% content_for :action_bar_left do %>

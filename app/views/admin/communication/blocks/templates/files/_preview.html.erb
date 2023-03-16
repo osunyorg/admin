@@ -1,13 +1,44 @@
-<div class="description">
-  <%= block_component_preview :description %>
-</div>
-<ul>
-  <% @block.template.elements.each do |element| %>
-    <% next unless element.blob %>
-    <li>
-      <a href="<%= element.blob.url %>" download="{{ partial 'PrepareHTML' $file.name }}" target="_blank" title="{{ i18n 'commons.link.blank_aria' (dict 'Title' $title_with_size) }}">
-        <span><%= element.title %><br><span>(<%= element.blob.filename %>)</span></span>
-      </a>
-    </li>
-  <% end %>
-</ul>
+<%
+$class = "block block-files"
+unless @block.title.blank?
+  $class += " block-with-title"
+end
+%>
+
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.blank? && @block.template.description.blank? %>
+        <div class="top">
+          <% unless @block.title.blank? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.blank? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <ul class="files">
+        <% @block.template.elements.each do |element| %>
+          <% next unless element.blob %>
+          <li>
+          <figure>
+              <a href="<%= element.blob.url %>" target="_blank" title="<%= element.title %>"><%= element.title %></a>
+              <% if document.file.attached? %>
+                <% file = document.file %>
+                <figcaption>
+                  <abbr title=""><%= file.filename.extension.upcase %></abbr>
+                  - <abbr title=""><%= number_to_human_size file.byte_size %></abbr>
+                </figcaption>
+              <% end %>
+            </figure>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -12,11 +12,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
   end
 
   def show
-    @about = @extranet.about
-    @alumni = @extranet.alumni
-    @cohorts = @extranet.cohorts
-    @years = @extranet.years
-    @organizations = @extranet.organizations
     breadcrumb
   end
 
@@ -63,11 +58,22 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
   end
 
   def extranet_params
+    allowed_params = [
+      :name,
+      :registration_contact,
+      :logo, :logo_delete, :favicon, :favicon_delete, :color,
+      :home_sentence,
+      :terms, :privacy_policy, :cookies_policy
+    ]
+    if can?(:create, Communication::Extranet)
+      allowed_params += [
+        :host, :about_id, :about_type,
+        :sass,
+        :feature_alumni, :feature_library, :feature_contacts, :feature_jobs, :feature_posts,
+        :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label
+      ]
+    end
     params.require(:communication_extranet)
-          .permit(:name, :host, :about_type, :about_id,
-            :registration_contact, :logo, :logo_delete, :favicon, :favicon_delete,
-            :terms, :privacy_policy, :cookies_policy, :color,
-            :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label
-          )
+          .permit(allowed_params)
   end
 end

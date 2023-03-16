@@ -1,0 +1,6 @@
+<% if @posts.any? %>
+  <section class="mt-5">
+    <h2><%= t('extranet.posts.home') %></h2>
+    <%= render 'extranet/posts/posts/list', posts: @posts %>
+  </section>
+<% end %>

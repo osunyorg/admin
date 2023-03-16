@@ -10,7 +10,9 @@ kind:
 [
   :long_name,
   :siren,
+  :address_name,
   :address,
+  :address_additional,
   :zipcode,
   :city,
   :country,
@@ -18,7 +20,7 @@ kind:
   :email,
   :twitter,
   :linkedin
-].each do |key| 
+].each do |key|
   value = @about.public_send key
 %>
 <%= key %>: >
@@ -39,6 +41,9 @@ contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon %>
 <%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
 <%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
+  geolocation:
+    latitude: <%= @about.latitude %>
+    longitude: <%= @about.longitude %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>

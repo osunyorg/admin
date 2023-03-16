@@ -1,73 +1,117 @@
 <% content_for :title, @organization %>
-
 <div class="row">
-  <div class="col-md-8 order-2 order-md-1">
+  <div class="col-md-6">
+    <%= render 'admin/application/summary/show', about: @organization %>
+
+    <% if strip_tags(@organization.text.to_s).present? %>
+    <h2><%= University::Organization.human_attribute_name('text') %></h2>
+    <%= @organization.text.to_s.html_safe %>
+    <% end %>
+
+    <h2><%= University::Organization.human_attribute_name('legal') %></h2>
     <div class="row">
-      <div class="col-md-9">
-        <div class="biography mb-5">
-          <%= sanitize @organization.text %>
+      <% if @organization.long_name.present? %>
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('long_name') %>
+          <p><%= @organization.long_name %></p>
         </div>
+      <% end %>
+      <div class="col-xxl-6">
+        <%= osuny_label University::Organization.human_attribute_name('kind') %>
+        <p><%= @organization.kind_i18n %></p>
       </div>
+      <% if @organization.siren.present? %>
+        <div class="col-xxl-6">
+          <%= osuny_label University::Organization.human_attribute_name('siren') %>
+          <p><%= @organization.siren %></p>
+        </div>
+      <% end %>
     </div>
-    <% if @organization.experiences.any? %>
-      <div class="experiences">
-        <p class="mb-4"><%= t('extranet.organization.experiences', count: @organization.experiences.count) %></p>
-        <ul class="list-unstyled">
-          <% @organization.experiences.ordered.each do |experience| %>
-            <li class="mb-4">
-              <article class="row position-relative">
-                <div class="col-md-3">
-                  <% if experience.person.best_picture.attached? %>
-                    <%= kamifusen_tag experience.person.best_picture, width: 400, class: 'img-fluid' %>
-                  <% else %>
-                    <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
-                  <% end %>
-                </div>
-                <div class="col-md-9 ms-md-n4">
-                  <div class="border-top">
-                    <div class="row pt-4">
-                      <div class="col-md-6">
-                        <p><b><%= link_to experience.person.name, experience.person, class: "stretched-link" %></b></p>
-                      </div>
-                      <div class="col-md-6">
-                        <p class="text-end">
-                          <% if experience.description.present? %>
-                            <%= experience.description %><br>
-                          <% end %>
-                          <%= "#{experience.from_year} —" if experience.from_year %>
-                          <%= experience.to_year || t('today') %>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </li>
-          <% end %>
-        </ul>
+  </div>
+
+  <div class="col-md-6">
+    <% if @organization.address_name.present? ||
+          @organization.address.present? ||
+          @organization.address_additional.present? ||
+          @organization.zipcode.present? ||
+          @organization.city.present? ||
+          @organization.country.present? ||
+          @organization.geolocated? %>
+      <h2><%= University::Organization.human_attribute_name('physical') %>
+      <div class="row">
+        <% [
+            :address_name,
+            :address,
+            :address_additional,
+            :zipcode,
+            :city,
+          ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+        <% if @organization.country.present? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('country') %>
+            <p><%= @organization.country_common_name %></p>
+          </div>
+        <% end %>
+        <% if @organization.geolocated? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
+            <p><%= @organization.geo_point.to_s %></p>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  </div>
-  <div class="offset-md-1 col-md-3 order-1 order-md-2">
-    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
 
-    <dl>
-        <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
-        <dd><%= @organization.kind_i18n %></dd>
-      <% if @organization.phone.present? %>
-        <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
-        <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
+    <% if @organization.phone.present? ||
+          @organization.email.present? ||
+          @organization.linkedin.present? ||
+          @organization.twitter.present? ||
+          @organization.mastodon.present? %>
+      <h2><%= University::Organization.human_attribute_name('digital') %></h2>
+      <div class="row">
+        <% unless @organization.url.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name('url') %>
+            <p><%= link_to  @organization.url,
+                            @organization.url,
+                            target: :_blank %></p>
+          </div>
+        <% end %>
+        <% [
+            :phone,
+            :email,
+            :linkedin,
+            :twitter,
+            :mastodon
+            ].each do |property| %>
+          <% value = @organization.send property %>
+          <% next if value.blank? %>
+          <div class="col-xxl-6">
+            <%= osuny_label University::Organization.human_attribute_name(property) %>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
+      <h2><%= t('university.organization.logos') %></h2>
+      <% if @organization.logo.attached? %>
+        <%= osuny_label University::Organization.human_attribute_name('logo') %><br>
+        <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail mb-3' %>
       <% end %>
-      <% if @organization.email.present? %>
-        <dt><%= University::Organization.human_attribute_name(:email) %></dt>
-        <dd><a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer"><%= @organization.email %></a></dd>
+      <% if @organization.logo_on_dark_background.attached? %>
+        <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %><br>
+        <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail' %>
       <% end %>
-      <% if @organization.url.present? %>
-        <dt><%= University::Organization.human_attribute_name(:url) %></dt>
-        <dd>
-          <%= link_to @organization.url, @organization.url %>
-        </dd>
-      <% end %>
-    </dl>
+    <% end %>
   </div>
+
 </div>
+<%= link_to t('edit'), edit_organization_path(@organization), class: 'btn btn-primary' %>

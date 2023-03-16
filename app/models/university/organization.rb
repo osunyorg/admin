@@ -2,30 +2,34 @@
 #
 # Table name: university_organizations
 #
-#  id               :uuid             not null, primary key
-#  active           :boolean          default(TRUE)
-#  address          :string
-#  city             :string
-#  country          :string
-#  email            :string
-#  kind             :integer          default("company")
-#  linkedin         :string
-#  long_name        :string
-#  mastodon         :string
-#  meta_description :text
-#  name             :string
-#  nic              :string
-#  phone            :string
-#  siren            :string
-#  slug             :string
-#  summary          :text
-#  text             :text
-#  twitter          :string
-#  url              :string
-#  zipcode          :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  university_id    :uuid             not null, indexed
+#  id                 :uuid             not null, primary key
+#  active             :boolean          default(TRUE)
+#  address            :string
+#  address_additional :string
+#  address_name       :string
+#  city               :string
+#  country            :string
+#  email              :string
+#  kind               :integer          default("company")
+#  latitude           :float
+#  linkedin           :string
+#  long_name          :string
+#  longitude          :float
+#  mastodon           :string
+#  meta_description   :text
+#  name               :string
+#  nic                :string
+#  phone              :string
+#  siren              :string
+#  slug               :string
+#  summary            :text
+#  text               :text
+#  twitter            :string
+#  url                :string
+#  zipcode            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
@@ -39,7 +43,9 @@ class University::Organization < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
+  include WithCountry
   include WithDependencies
+  include WithGeolocation
   include WithGit
   include WithPermalink
   include WithSlug
@@ -50,6 +56,10 @@ class University::Organization < ApplicationRecord
 
   has_summernote :text
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'University::Organization::Category',
+                          join_table: :university_organizations_categories,
+                          foreign_key: :organization_id
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
@@ -66,6 +76,7 @@ class University::Organization < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :for_kind, -> (kind) { where(kind: kind) }
+  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
   scope :for_search_term, -> (term) {
     where("
       unaccent(university_organizations.address) ILIKE unaccent(:term) OR

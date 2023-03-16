@@ -4,11 +4,14 @@
 #
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
+#  accepted_at                :date
+#  doi                        :string
 #  keywords                   :text
 #  meta_description           :text
 #  position                   :integer
 #  published                  :boolean          default(FALSE)
 #  published_at               :datetime
+#  received_at                :date
 #  references                 :text
 #  slug                       :string
 #  summary                    :text
@@ -40,13 +43,15 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
   include WithBlobs
+  include WithBlocks
+  include WithGit
   include WithPermalink
   include WithPosition
+  include WithPublication
   include WithSlug
-
+  include WithUniversity
+  
   has_summernote :text
   has_one_attached :pdf
 
@@ -62,14 +67,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at, if: :published_changed?
-
-  scope :published, -> { where(published: true) }
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
-
-  def published?
-    published && published_at && published_at.to_date <= Date.today
-  end
 
   def for_website?(website)
     journal == website.about
@@ -88,13 +86,19 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   def git_dependencies(website)
-    [self] +
-    active_storage_blobs +
-    other_papers_in_the_volume +
-    people +
-    people.map(&:active_storage_blobs).flatten +
-    people.map(&:researcher) +
-    website.menus
+    dependencies =  [self] +
+                    active_storage_blobs +
+                    git_block_dependencies +
+                    other_papers_in_the_volume +
+                    people +
+                    people.map(&:active_storage_blobs).flatten +
+                    people.map(&:researcher) +
+                    website.menus
+    dependencies.flatten.compact
+  end
+
+  def doi_url
+    Doi.url doi
   end
 
   def to_s
@@ -117,9 +121,5 @@ class Research::Journal::Paper < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [pdf&.blob_id]
-  end
-
-  def set_published_at
-    self.published_at = published? ? Time.zone.now : nil
   end
 end

@@ -1,0 +1,18 @@
+<% if @organizations.any? %>
+  <div class="row">
+    <% @organizations.each do |organization| %>
+      <div class="col-md-3">
+        <div class="position-relative mb-5">
+          <%= kamifusen_tag organization.logo, 
+                            width: 400, 
+                            class: 'img-fluid organization__logo mb-2' if organization.logo.attached? %>
+          <%= link_to organization, 
+                      [:contacts, organization], 
+                      class: 'stretched-link' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>Pas de résultat</p>
+<% end %>

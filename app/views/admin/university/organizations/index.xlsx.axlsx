@@ -1,0 +1,63 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "index") do |sheet|
+  options = [
+    University::Organization.human_attribute_name('name'),
+    University::Organization.human_attribute_name('address_name'),
+    University::Organization.human_attribute_name('address'),
+    University::Organization.human_attribute_name('address_additional'),
+    University::Organization.human_attribute_name('zipcode'),
+    University::Organization.human_attribute_name('city'),
+    University::Organization.human_attribute_name('country'),
+    University::Organization.human_attribute_name('kind'),
+    University::Organization.human_attribute_name('siren'),
+    University::Organization.human_attribute_name('phone'),
+    University::Organization.human_attribute_name('url'),
+    University::Organization.human_attribute_name('email'),
+    University::Organization.human_attribute_name('linkedin'),
+    University::Organization.human_attribute_name('twitter'),
+    University::Organization.human_attribute_name('categories')
+    ]
+
+  types = [
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string,
+    :string
+  ]
+
+  sheet.add_row options, types: Array.new(types.length) { |_| :string }
+
+  @organizations.each do |organization|
+    infos = [
+      organization.name,
+      organization.address_name,
+      organization.address,
+      organization.address_additional,
+      organization.zipcode,
+      organization.city,
+      organization.country_name,
+      organization.kind_i18n,
+      organization.siren,
+      organization.phone,
+      organization.url,
+      organization.email,
+      organization.linkedin,
+      organization.twitter.present? ? "@#{organization.twitter}" : '',
+      organization.categories.join(', ')
+    ]
+
+    sheet.add_row infos, types: types
+  end
+end

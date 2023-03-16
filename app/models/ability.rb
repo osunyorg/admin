@@ -84,7 +84,11 @@ class Ability
     can :read, Administration::Qualiopi
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
-    can :manage, University::Person
+    can :manage, University::Person, university_id: @user.university_id
+    can :manage, University::Person::Category, university_id: @user.university_id
+    can :manage, University::Person::Involvement, university_id: @user.university_id
+    can :manage, University::Organization, university_id: @user.university_id
+    can :manage, University::Organization::Category, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id
     can :create, Communication::Block
     can :read, Communication::Website, university_id: @user.university_id
@@ -97,6 +101,13 @@ class Ability
     can :manage, Communication::Website::Imported::Website, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Page, university_id: @user.university_id
     can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
+    can [:read, :update], Communication::Extranet, university_id: @user.university_id
+    can :manage, Communication::Extranet::Post, university_id: @user.university_id
+    can :manage, Communication::Extranet::Post::Category, university_id: @user.university_id
+    can :manage, Communication::Extranet::Document, university_id: @user.university_id
+    can :manage, Communication::Extranet::Document::Category, university_id: @user.university_id
+    can :manage, Communication::Extranet::Document::Kind, university_id: @user.university_id
+    can :manage, Communication::Extranet::Connection, university_id: @user.university_id
     can :manage, Education::AcademicYear, university_id: @user.university_id
     can :manage, Education::Cohort, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
@@ -111,8 +122,6 @@ class Ability
     can :manage, Research::Laboratory::Axis, university_id: @user.university_id
     can :manage, Research::Thesis, university_id: @user.university_id
     can :manage, University::Role, university_id: @user.university_id
-    can :manage, University::Person::Involvement, university_id: @user.university_id
-    can :manage, University::Organization, university_id: @user.university_id
     can :read, User, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
   end

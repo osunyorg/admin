@@ -7,6 +7,10 @@ fr:
         country: Pays
         default_language: Langue par défaut
         has_sso: A un SSO ?
+        feature_administration: Administration
+        feature_communication: Communication
+        feature_education: Enseignement
+        feature_research: Recherche
         identifier: Identifiant
         invoice_amount: Montant de facturation
         invoice_date: Date de facturation
@@ -23,6 +27,34 @@ fr:
         sso_target_url: URL cible
         url: 'URL'
         zipcode: Code postal
+      university/organization:
+        address: Adresse
+        address_name: Nom de l'adresse
+        address_additional: Complément d'adresse
+        categories: Catégories
+        city: Ville
+        country: Pays
+        description: Personne morale liée à une université, une composante, un laboratoire, etc.
+        digital: Coordonnées numériques
+        email: Email
+        kind: Type
+        geolocation: Coordonnées géographiques
+        legal: Informations légales
+        linkedin: LinkedIn
+        logo: Logo sur fond clair (par défaut)
+        logo_on_dark_background: Logo sur fond sombre (optionnel)
+        long_name: Nom complet
+        map: Carte
+        name: Nom
+        phone: Téléphone
+        physical: Coordonnées physiques
+        siren: Numéro de SIREN
+        text: Texte
+        twitter: Twitter
+        url: Site Web
+        zipcode: Code postal
+      university/organization/category:
+        name: Nom
       university/person:
         abilities: Responsabilités
         address: Adresse
@@ -31,6 +63,7 @@ fr:
         author: Auteur·rice
         biography: Biographie
         birthdate: Anniversaire
+        categories: Catégories
         city: Ville
         communication_website_posts: Actualités
         contacts: Coordonnées
@@ -72,37 +105,20 @@ fr:
         url: Site web
         user: Utilisateur
         zipcode: Code postal
+      university/person/category:
+        name: Nom
       university/person/experience:
         description: Description
         edit: Modifier l'expérience
         from_year: Année de début
         new: Ajouter une expérience
         organization: Organisation
+        organization_name: Organisation
         to_year: Année de fin
       university/person/involvement:
         description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
-      university/organization:
-        address: Adresse
-        city: Ville
-        contact: Informations de contact
-        country: Pays
-        description: Personne morale liée à une université, une composante, un laboratoire, etc.
-        email: Email
-        kind: Type
-        legal: Informations légales
-        linkedin: LinkedIn
-        logo: Logo sur fond clair (par défaut)
-        logo_on_dark_background: Logo sur fond sombre (optionnel)
-        long_name: Nom complet
-        name: Nom
-        phone: Téléphone
-        siren: Numéro de SIREN
-        text: Texte
-        twitter: Twitter
-        url: Site Web
-        zipcode: Code postal
       university/role:
         description: Description
         people: Personnes
@@ -119,6 +135,9 @@ fr:
       university/person:
         one: Personne
         other: Personnes
+      university/person/category:
+        one: Catégorie
+        other: Catégories
       university/person/involvement:
         one: Implication
         other: Implications
@@ -131,6 +150,9 @@ fr:
       university/organization:
         one: Organisation
         other: Organisations
+      university/organization/category:
+        one: Catégorie
+        other: Catégories
       university/role:
         one: Rôle
         other: Rôles
@@ -140,9 +162,15 @@ fr:
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
       university_organization:
+        address: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
+        address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
+        address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
+        city: 'Ce champ est utilisé pour géolocaliser. Ex: Cenon'
+        country: 'Ce champ est utilisé pour géolocaliser. Ex: France'
         description: Si ce champ est vide le début du texte principal sera utilisé.
         logo: Ce logo doit contraster sur un fond clair (blanc ou gris pâle)
         logo_on_dark_background: Ce logo doit contraster sur un fond sombre (noir ou gris sombre).
+        zipcode: 'Ce champ est utilisé pour géolocaliser. Ex: 33150'
       university_person:
         description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.
         habilitation: "Détient une Habilitation à Diriger des Recherches (HDR)."
@@ -177,10 +205,6 @@ fr:
         import_btn: Importer des promotions
         import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
         title: Imports de promotions
-      experiences:
-        import_btn: Importer des expériences
-        import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
-        title: Imports d'expériences
     description:
       text: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions “collèges”, “facultés”, “instituts”, “départements”, “centres”, “sections”, “unités” ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
       source: Wikipedia
@@ -199,6 +223,10 @@ fr:
         no_organization_hint_html: "Si l'entreprise n'apparait pas dans la liste, vous pouvez la <a href=\"%{url}\">créer</a>"
         no_organization_hint_no_access_html: "Si l'entreprise n'apparait pas dans la liste, il faut demander à la créer"
         period: Période
+      experiences:
+        import_btn: Importer des expériences
+        import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
+        title: Imports d'expériences
       personal_data_warning: Attention ! Les informations renseignées ici sont susceptibles d'être visibles publiquement sur les sites web et les extranets vous concernant.
       taught_programs: Formations enseignées
     sso: SSO

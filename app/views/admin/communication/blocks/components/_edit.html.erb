@@ -19,6 +19,7 @@ placeholder ||= t "#{i18n_component}.placeholder", default: ''
 hint ||= t "#{i18n_component}.hint", default: ''
 none ||= t "#{i18n_component}.none", default: ''
 summernote_config ||= "mini-list"
+codemirror_mode ||= "htmlmixed"
 partial = "admin/communication/blocks/components/#{component.kind}/edit"
 
 local_assigns[:template] = template
@@ -31,5 +32,6 @@ local_assigns[:placeholder] = placeholder
 local_assigns[:hint] = hint
 local_assigns[:none] ||= t "#{i18n_component}.none", default: ''
 local_assigns[:summernote_config] ||= summernote_config
+local_assigns[:codemirror_mode] ||= codemirror_mode
 %>
 <%= render partial, **local_assigns %>

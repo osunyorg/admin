@@ -24,8 +24,6 @@ class Research::Hal::Publication < ApplicationRecord
   include WithGit
   include WithSlug
 
-  DOI_PREFIX = 'http://dx.doi.org/'.freeze
-
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
                           foreign_key: 'university_person_id',
@@ -77,8 +75,7 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   def doi_url
-    return unless doi.present?
-    "#{DOI_PREFIX}#{doi}"
+    Doi.url doi
   end
 
   def best_url

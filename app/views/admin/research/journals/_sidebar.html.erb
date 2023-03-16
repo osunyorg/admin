@@ -1,0 +1,43 @@
+<div class="row mt-2 website__sidebar">
+  <div class="col-lg-3 col-xl-2">
+    <ul class="list-unstyled" role="tablist">
+      <%
+      navigation = [
+        {
+          title: Research::Journal.model_name.human,
+          path: admin_research_journal_path(id: @journal),
+          icon: Icon::RESEARCH_JOURNAL,
+          ability: can?(:read, @journal)
+        },
+        {
+          title: Research::Journal::Volume.model_name.human(count: 2),
+          path: admin_research_journal_volumes_path(journal_id: @journal),
+          icon: Icon::RESEARCH_JOURNAL_VOLUME,
+          ability: can?(:read, @journal)
+        },
+        {
+          title: Research::Journal::Paper.model_name.human(count: 2),
+          path: admin_research_journal_papers_path(journal_id: @journal),
+          icon: Icon::RESEARCH_JOURNAL_PAPER,
+          ability: can?(:read, @journal)
+        }
+      ]
+      navigation.each_with_index do |object, index|
+        next unless object[:ability]
+        active = index.zero?  ? controller_name == "journals" && action_name == "show"
+                              : object[:path].in?(request.path)
+      %>
+        <li class="mb-3">
+          <a class="d-block py-1 <%= active ? 'text-black' : 'text-muted' %>" href="<%= object[:path] %>">
+            <i class="<%= object[:icon] %>" style="min-width: 30px"></i>
+            <%= object[:title].html_safe %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-lg-9 col-xl-10">
+    <%= yield %>
+  </div>
+
+</div>

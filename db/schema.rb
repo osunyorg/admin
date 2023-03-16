@@ -93,6 +93,87 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
+  create_table "communication_extranet_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "extranet_id", null: false
+    t.string "object_type"
+    t.uuid "object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_connections_on_extranet_id"
+    t.index ["object_type", "object_id"], name: "index_communication_extranet_connections_on_object"
+    t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
+  end
+
+  create_table "communication_extranet_document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["extranet_id"], name: "index_communication_extranet_document_categories_on_extranet_id"
+    t.index ["university_id"], name: "extranet_document_categories_universities"
+  end
+
+  create_table "communication_extranet_document_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["extranet_id"], name: "index_communication_extranet_document_kinds_on_extranet_id"
+    t.index ["university_id"], name: "extranet_document_kinds_universities"
+  end
+
+  create_table "communication_extranet_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "university_id", null: false
+    t.uuid "extranet_id", null: false
+    t.boolean "published"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "kind_id"
+    t.uuid "category_id"
+    t.index ["category_id"], name: "extranet_document_categories"
+    t.index ["extranet_id"], name: "index_communication_extranet_documents_on_extranet_id"
+    t.index ["kind_id"], name: "index_extranet_document_kinds"
+    t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
+  end
+
+  create_table "communication_extranet_post_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extranet_id"], name: "index_communication_extranet_post_categories_on_extranet_id"
+    t.index ["university_id"], name: "index_communication_extranet_post_categories_on_university_id"
+  end
+
+  create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.uuid "author_id"
+    t.uuid "extranet_id", null: false
+    t.uuid "university_id", null: false
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.string "slug"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "category_id"
+    t.index ["author_id"], name: "index_communication_extranet_posts_on_author_id"
+    t.index ["category_id"], name: "index_communication_extranet_posts_on_category_id"
+    t.index ["extranet_id"], name: "index_communication_extranet_posts_on_extranet_id"
+    t.index ["university_id"], name: "index_communication_extranet_posts_on_university_id"
+  end
+
   create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
@@ -157,18 +238,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.uuid "communication_website_category_id", null: false
     t.index ["communication_website_category_id", "communication_website_post_id"], name: "category_post"
     t.index ["communication_website_post_id", "communication_website_category_id"], name: "post_category"
-  end
-
-  create_table "communication_website_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.string "object_type", null: false
-    t.uuid "object_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["object_type", "object_id"], name: "index_communication_website_connections_on_object"
-    t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -359,7 +428,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -675,6 +744,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.text "meta_description"
     t.text "summary"
     t.uuid "kind_id"
+    t.date "received_at"
+    t.date "accepted_at"
+    t.string "doi"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
@@ -788,7 +860,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.jsonb "sso_mapping"
     t.string "sso_button_label"
     t.uuid "default_language_id", null: false
+    t.boolean "feature_education", default: true
+    t.boolean "feature_research", default: true
+    t.boolean "feature_communication", default: true
+    t.boolean "feature_administration", default: true
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
+  end
+
+  create_table "university_organization_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
 
   create_table "university_organizations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -815,7 +899,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.string "twitter"
     t.string "linkedin"
     t.string "mastodon"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address_name"
+    t.string "address_additional"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
+  end
+
+  create_table "university_organizations_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organization_id", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id"], name: "index_university_organizations_categories_on_category_id"
+    t.index ["organization_id"], name: "index_university_organizations_categories_on_organization_id"
   end
 
   create_table "university_people", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -857,6 +952,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
+  end
+
+  create_table "university_people_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id"], name: "index_university_people_categories_on_category_id"
+    t.index ["person_id"], name: "index_university_people_categories_on_person_id"
+  end
+
+  create_table "university_person_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end
 
   create_table "university_person_experiences", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -950,6 +1060,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_blocks", "universities"
+  add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_connections", "universities"
+  add_foreign_key "communication_extranet_document_categories", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_document_categories", "universities"
+  add_foreign_key "communication_extranet_document_kinds", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_document_kinds", "universities"
+  add_foreign_key "communication_extranet_documents", "communication_extranet_document_categories", column: "category_id"
+  add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
+  add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_documents", "universities"
+  add_foreign_key "communication_extranet_post_categories", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_post_categories", "universities"
+  add_foreign_key "communication_extranet_posts", "communication_extranet_post_categories", column: "category_id"
+  add_foreign_key "communication_extranet_posts", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_posts", "universities"
+  add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "original_id"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
@@ -957,8 +1083,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
   add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_categories", "languages"
   add_foreign_key "communication_website_categories", "universities"
-  add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
   add_foreign_key "communication_website_imported_authors", "universities"
@@ -1029,11 +1153,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_052540) do
   add_foreign_key "research_theses", "university_people", column: "author_id"
   add_foreign_key "research_theses", "university_people", column: "director_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
+  add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organizations", "universities"
+  add_foreign_key "university_organizations_categories", "university_organization_categories", column: "category_id"
+  add_foreign_key "university_organizations_categories", "university_organizations", column: "organization_id"
   add_foreign_key "university_people", "languages"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "university_people", column: "original_id"
   add_foreign_key "university_people", "users"
+  add_foreign_key "university_people_categories", "university_people", column: "person_id"
+  add_foreign_key "university_people_categories", "university_person_categories", column: "category_id"
+  add_foreign_key "university_person_categories", "universities"
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
   add_foreign_key "university_person_experiences", "university_people", column: "person_id"

@@ -5,6 +5,7 @@
         <th><%= University::Person.human_attribute_name('last_name') %></th>
         <th><%= University::Person.human_attribute_name('first_name') %></th>
         <th><%= University::Person.human_attribute_name('roles') %></th>
+        <th><%= University::Person::Experience.model_name.human(count: 2) %></th>
         <th></th>
         <th></th>
       </tr>
@@ -21,9 +22,10 @@
               </span>
             <% end %>
           </td>
-          <td class="p-0">
+          <td><%= link_to_if can?(:update, person), person.experiences.size, experiences_admin_university_person_path(person) %></td>
+          <td>
             <%= kamifusen_tag person.best_picture,
-                              width: 40 if person.best_picture.attached? %>
+                              width: 80 if person.best_picture.attached? %>
           </td>
           <td>
             <div class="btn-group" role="group">

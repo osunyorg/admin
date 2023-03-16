@@ -1,6 +1,7 @@
 ---
 title: >-
   <%= prepare_text_for_static @about.title %>
+<%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false, toc_present: true %>
 <%= render 'admin/application/static/permalink' %>
 <% if @about.kind %>
 paper_kind: >-
@@ -13,19 +14,23 @@ volumes:
   - "<%= @about.volume.path.delete_prefix('/') %>"
 <% end %>
 weight: <%= @about.position %>
-date: "<%= @about.published_at.iso8601 %>"
+date: "<%= @about.published_at&.to_date&.iso8601 %>"
+dates: 
+  published: "<%= @about.published_at&.to_date&.iso8601 %>"
+  accepted: "<%= @about.accepted_at&.to_date&.iso8601 %>"
+  received: "<%= @about.received_at&.to_date&.iso8601 %>"
 <% if @about.pdf.attached? %>
 pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
 keywords: >
-  <%= @about.keywords %>
+  <%= prepare_text_for_static @about.keywords %>
 researchers:
 <% @about.people.each do |person| %>
 - "<%= person.slug %>"
 <% end %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-abstract: "<%= @about.abstract %>"
-references: "<%= @about.references %>"
+abstract: >
+  <%= prepare_text_for_static @about.abstract %>
+<%= render 'admin/communication/blocks/static', about: @about %>
 ---
-<%= prepare_html_for_static @about.text, @about.university %>

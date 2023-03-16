@@ -1,0 +1,31 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th class="ps-0" width="60%"><%= Communication::Extranet::Post::Category.human_attribute_name('name') %></th>
+        <th><%= Communication::Extranet::Post::Category.human_attribute_name('quantity') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.each do |category| %>
+        <tr>
+          <td class="ps-0"><%= link_to category, admin_communication_extranet_post_category_path(extranet_id: category.extranet.id, id: category.id) %></td>
+          <td><%= category.posts.count %></td>
+          <td>
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                          edit_admin_communication_extranet_post_category_path(website_id: category.id, id: category.id),
+                          class: button_classes if can?(:update, category) %>
+              <%= link_to t('delete'),
+                          admin_communication_extranet_post_category_path(extranet_id: category.extranet.id, id: category.id),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger if can?(:destroy, category) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

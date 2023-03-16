@@ -1,12 +1,13 @@
 APPLICATION_ENV: development
-# Can be used when working on two incompatible branches (e.g. main & i18n)
-OSUNY_DEVELOPMENT_DBNAME:
 
 BUGSNAG_JAVASCRIPT_KEY:
 BUGSNAG_RUBY_KEY:
 
 MAIL_FROM_DEFAULT_ADDRESS:
 MAIL_FROM_DEFAULT_NAME:
+
+  # Can be used when working on two incompatible branches (e.g. main & i18n)
+OSUNY_DEVELOPMENT_DBNAME:
 
 OSUNY_STAGING_APP_NAME:
 OSUNY_STAGING_PG_ADDON_ID:

@@ -43,6 +43,7 @@ namespace :communication do
       member do
         get :static
         get :preview
+        post :duplicate
       end
     end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do
@@ -68,7 +69,33 @@ namespace :communication do
       post :duplicate
     end
   end
-  resources :extranets, controller: 'extranets'
+  resources :extranets, controller: 'extranets' do
+    resources :alumni, only: :index, controller: 'extranets/alumni'
+    resources :contacts, only: :index, controller: 'extranets/contacts' do
+      collection do
+        post :toggle
+        post :connect
+        post :disconnect
+      end
+    end
+    resources :posts, controller: 'extranets/posts' do
+      collection do
+        resources :categories, controller: 'extranets/posts/categories', as: 'post_categories'
+      end
+      member do
+        get :preview
+      end
+    end
+    # Automatic routes based on feature names
+    get 'library' => 'extranets/documents#index', as: :library
+    resources :documents, controller: 'extranets/documents' do
+      collection do
+        resources :categories, controller: 'extranets/documents/categories', as: 'document_categories'
+        resources :kinds, controller: 'extranets/documents/kinds', as: 'document_kinds'
+      end
+    end
+    resources :jobs, controller: 'extranets/jobs'
+  end
   resources :alumni do
     collection do
       resources :imports, only: [:index, :show, :new, :create]

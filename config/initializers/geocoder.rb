@@ -1,0 +1,1 @@
+Geocoder.configure(http_headers: { "User-Agent" => ENV["MAIL_FROM_DEFAULT_ADDRESS"] })

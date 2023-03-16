@@ -1,0 +1,37 @@
+<% content_for :title, @document %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <div class="row">
+    <div class="col-xl-8">
+      <% if @document.file.attached? %>
+        <%= link_to @document.file.filename, @document.file.url, target: :_blank %>
+      <% end %>
+    </div>
+    <div class="col-xl-4">
+      <%= osuny_panel t('metadata') do %>
+        <%= osuny_label Communication::Extranet::Document.human_attribute_name('published') %>
+        <p>
+          <%= t @document.published %><% if @document.published %>,
+            <%= l @document.published_at.to_date, format: :long %>
+          <% end %>
+        </p>
+        <% if @document.category %>
+          <%= osuny_label Communication::Extranet::Document::Category.model_name.human %>
+          <p><%= link_to @document.category, [:admin, @document.category] %></p>
+        <% end %>
+        <% if @document.kind %>
+          <%= osuny_label Communication::Extranet::Document::Kind.model_name.human %>
+          <p><%= link_to @document.kind, [:admin, @document.kind] %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @document %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @document %>
+<% end %>

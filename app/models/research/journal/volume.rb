@@ -31,12 +31,13 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include Sanitizable
-  include WithUniversity
-  include WithGit
   include WithBlobs
   include WithFeaturedImage
+  include WithGit
   include WithPermalink
+  include WithPublication
   include WithSlug
+  include WithUniversity
 
   has_summernote :text
 
@@ -45,14 +46,7 @@ class Research::Journal::Volume < ApplicationRecord
   has_many :websites, -> { distinct }, through: :journal
   has_many :people, -> { distinct }, through: :papers
 
-  before_validation :set_published_at, if: :published_changed?
-
-  scope :published, -> { where(published: true) }
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
-
-  def published?
-    published && published_at && published_at.to_date <= Date.today
-  end
 
   def for_website?(website)
     journal == website.about
@@ -90,10 +84,6 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   protected
-
-  def set_published_at
-    self.published_at = published? ? Time.zone.now : nil
-  end
 
   def explicit_blob_ids
     super.concat [featured_image&.blob_id]

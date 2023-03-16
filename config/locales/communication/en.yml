@@ -1,4 +1,6 @@
 en:
+  accessibility:
+    transcription: Transcription
   activemodel:
     models:
       communication: Communication
@@ -10,6 +12,22 @@ en:
       communication/extranet:
         one: Extranet
         other: Extranets
+      communication/extranet/document:
+        one: Document
+        other: Documents
+      communication/extranet/document/category:
+        one: Category
+        other: Categories
+      communication/extranet/document/kind:
+        one: Kind
+        other: Kinds
+      communication/extranet/post:
+        one: Post
+        other: Posts
+        all: All posts
+      communication/extranet/post/category:
+        one: Category
+        other: Categories
       communication/website:
         one: Website
         other: Websites
@@ -55,12 +73,19 @@ en:
         cookies_policy: Cookies policy
         description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
+        feature_alumni: Alumni
+        feature_contacts: Directory
+        feature_jobs: Job board
+        feature_library: Documents
+        feature_posts: News
         has_sso: Has SSO?
+        home_sentence: Sentence displayed on homepage
         host: Domain
         logo: Logo (.png, .jpg, .svg)
         name: Name
         privacy_policy: Privacy policy
         registration_contact: Contact mail for registrations problems
+        sass: Custom style
         sso_button_label: Sign in button's label
         sso_cert: Certificate
         sso_inherit_from_university: SSO inherited from University
@@ -68,6 +93,33 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         terms: Terms of service
+      communication/extranet/connection:
+        connected: Connected
+      communication/extranet/document:
+        name: Name
+        published: Published?
+        published_at: Publication date
+        category: Category
+        kind: Type
+      communication/extranet/document/category:
+        name: Name
+        quantity: Quantity of documents
+      communication/extranet/document/kind:
+        name: Name
+        quantity: Quantity of documents
+      communication/extranet/post:
+        author: Author
+        category: Category
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        featured_image_credit: Credit
+        published: Published?
+        published_at: Publication date
+        slug: Slug
+        title: Title
+      communication/extranet/post/category:
+        name: Name
+        quantity: Quantity of posts
       communication/website:
         about: About
         about_: Independent website
@@ -441,6 +493,13 @@ en:
                 title: Layout options
           partners:
             description: A list of organizations with logo, name and website.
+            layouts:
+              grid:
+                label: Grid
+                description: Square logos and a simple text below.
+              map:
+                label: Map
+                description: A geographic map, with a pin for every organization with a known location.
             edit:
               add_partner: Add organization
               alphabetical:

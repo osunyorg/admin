@@ -1,0 +1,36 @@
+<%= simple_form_for [:admin, post] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <%= osuny_panel t('content') do %>
+        <%= f.input :title %>
+        <%= render 'admin/application/summary/form', f: f, about: post %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= osuny_panel t('metadata') do %>
+        <% if can? :publish, post %>
+          <%= f.input :published %>
+          <%= f.input :published_at, html5: true, as: :date %>
+        <% end %>
+        <%= f.association :category,
+                          collection: @extranet.post_categories.ordered %>
+        <%= f.association :author,
+                          collection: @extranet.connected_people.ordered,
+                          label_method: :to_s_alphabetical %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: post.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#communication_extranet_post_title' }
+                    } %>
+      <% end %>
+      <%= render 'admin/application/featured_image/edit', about: @post, f: f %>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

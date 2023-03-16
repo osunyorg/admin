@@ -1,0 +1,84 @@
+<% content_for :title, @organization %>
+
+<div class="row">
+  <div class="col-md-8 order-2 order-md-1">
+    <div class="row">
+      <div class="col-md-9">
+        <% unless @organization.text.blank? %>
+          <div class="biography mb-5">
+            <%= sanitize @organization.text %>
+          </div>
+        <% end %>
+        <% if @current_experiences.any? %>
+          <div class="experiences mb-5">
+            <h3><%= t('extranet.contacts.organizations.experiences', count: @current_experiences.pluck(:person_id).uniq.size) %></h3>
+
+            <% @current_experiences.each do |experience| %>
+              <article class="experience mb-4">
+                <div class="row gx-3">
+                  <div class="col-md-3">
+                    <% if experience.person.best_picture.attached? %>
+                      <%= kamifusen_tag experience.person.best_picture, width: 400, class: 'img-fluid',
+                        sizes: {
+                            '(max-width: 576px)': '400px',
+                            '(max-width: 991px)': '200px'
+                        } %>
+                    <% else %>
+                      <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+                    <% end %>
+                  </div>
+                  <div class="col-md-9">
+                    <%= link_to [:contacts, experience.person], class: 'stretched-link' do %>
+                      <p>
+                        <b><%= experience.person.first_name %> <%= experience.person.last_name %></b><br>
+                        <span class="text-muted"><%= experience.description %></span>
+                      </p>
+                    <% end %>
+                  </div>
+              </article>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="offset-md-1 col-md-3 order-1 order-md-2">
+    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
+    <dl>
+      <dt><%= University::Organization.human_attribute_name(:address) %></dt>
+      <dd><%= sanitize @organization.full_address %></dd>
+      <% if @organization.phone.present? %>
+        <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
+        <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
+      <% end %>
+      <% if @organization.email.present? %>
+        <dt><%= University::Organization.human_attribute_name(:email) %></dt>
+        <dd><a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer"><%= @organization.email %></a></dd>
+      <% end %>
+      <% if @organization.url.present? %>
+        <dt><%= University::Organization.human_attribute_name(:url) %></dt>
+        <dd>
+          <a href="<%= social_website_to_url @organization.url %>" target="_blank" rel="noreferrer">
+            <%= social_website_to_s @organization.url %>
+          </a>
+        </dd>
+      <% end %>
+      <% if @organization.geolocated? %>
+        <%# Include map.js before call Leaflet (map helper) %>
+        <%= javascript_include_tag 'map' %>
+        <dt><%= University::Organization.human_attribute_name(:map) %></dt>
+        <dl><%= map(
+              center: {
+                latlng: @organization.latlong,
+                zoom: 15
+              },
+              markers: [
+                {
+                  latlng: @organization.latlong
+                }
+              ]
+          ) %></dl>
+      <% end %>
+    </dl>
+  </div>
+</div>

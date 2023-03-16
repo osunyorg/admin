@@ -1,0 +1,13 @@
+<% content_for :title, Education::Cohort.model_name.human(count: 2) %>
+<% content_for :header_right do %>
+  <p>
+    <%= @count %>
+    <%= Education::Cohort.model_name.human(count: @count).downcase %>
+  </p>
+<% end %>
+
+<% if current_extranet.should_show_years? %>
+  <%= render 'index_facets' %>
+<% else %>
+  <%= render 'index_cards' %>
+<% end %>

@@ -1,0 +1,9 @@
+<% content_for :title, @category %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @category %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @category %>
+<% end %>

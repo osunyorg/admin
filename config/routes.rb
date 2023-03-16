@@ -36,7 +36,9 @@ Rails.application.routes.draw do
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 
   draw 'api'
-  draw 'extranet'
   draw 'server'
-  # Root is in extranet
+  scope module: 'extranet' do
+    draw 'extranet'
+  end
+  root to: 'extranet/home#index'
 end

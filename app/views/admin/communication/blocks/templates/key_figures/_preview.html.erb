@@ -1,15 +1,34 @@
-<div class="top">
-  <div class="description">
-    <%= block_component_preview :description %>
+<%
+$class = "block block-key_figures"
+unless @block.title.blank?
+  $class += " block-with-title"
+end
+%>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.blank? && @block.template.description.blank? %>
+        <div class="top">
+          <% unless @block.title.blank? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% unless @block.template.description.blank? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <ul class="<%= @block.template.elements.count.even? ? "even-items" : "odd-items" %>">
+        <% @block.template.elements.each do |element| %>
+          <li>
+            <dl>
+              <dt><strong><%= block_component_preview :number, template: element %></strong><%= block_component_preview :unit, template: element %></dt>
+              <dd><%= block_component_preview :description, template: element %></dd>
+            </dl>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
-<ul>
-  <% @block.template.elements.each do |element| %>
-    <li>
-        <dl>
-            <dt><strong><%= block_component_preview :number, template: element %></strong><%= block_component_preview :unit, template: element %></dt>
-            <dd><%= block_component_preview :description, template: element %></dd>
-        </dl>
-    </li>
-  <% end %>
-</ul>
+</section>

@@ -1,0 +1,41 @@
+<% content_for :title, Communication::Extranet.human_attribute_name(:feature_contacts) %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <% action = link_to t('export'),
+                    admin_communication_extranet_contacts_path(extranet_id: @extranet.id, export: 'people', format: :xlsx),
+                    class: button_classes('ms-1') if can?(:show, University::Person) %>
+  <%= osuny_panel University::Person.model_name.human(count: 2), action: action do %>
+    <div class="table-responsive">
+      <table class="<%= table_classes%>">
+        <tbody>
+          <% @people.each do |person| %>
+            <tr>
+              <td><%= link_to person, [:admin, person] %></td>
+              <td><%= person.email %></td>
+              <td><%= render 'toggle', about: person %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @people, theme: 'bootstrap-5', param_name: :persons_page %>
+  <% end %>
+  <% action = link_to t('export'),
+                    admin_communication_extranet_contacts_path(extranet_id: @extranet.id, export: 'organizations', format: :xlsx),
+                    class: button_classes('ms-1') if can?(:show, University::Person) %>
+  <%= osuny_panel University::Organization.model_name.human(count: 2), action: action do %>
+    <div class="table-responsive">
+      <table class="<%= table_classes%>">
+        <tbody>
+          <% @organizations.each do |organization| %>
+            <tr>
+              <td><%= link_to organization, [:admin, organization] %></td>
+              <td><%= render 'toggle', about: organization %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @organizations, theme: 'bootstrap-5', param_name: :organizations_page %>
+  <% end %>
+<% end %>

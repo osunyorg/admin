@@ -39,6 +39,10 @@ class Communication::Website::Permalink::Volume < Communication::Website::Permal
 
   protected
 
+  def published?
+    about.published && about.published_at
+  end
+
   def substitutions
     {
       year: about.published_at.strftime("%Y"),

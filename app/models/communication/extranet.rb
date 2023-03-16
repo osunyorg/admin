@@ -45,8 +45,11 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include WithAbouts
+  include WithConnections
+  include WithFeatures
   include WithLegal
   include WithSso
+  include WithStyle
   include WithUniversity
 
   has_one_attached_deletable :logo
@@ -54,9 +57,16 @@ class Communication::Extranet < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
+  has_many :posts
+  has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
+  has_many :documents
+  has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
+  has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
+
   validates_presence_of :name, :host
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
+  validates_presence_of :about_type, :about_id, if: :feature_alumni
 
   before_validation :sanitize_fields
 
@@ -97,11 +107,19 @@ class Communication::Extranet < ApplicationRecord
   alias academic_years years
 
   def organizations
-    about&.alumni_organizations
+    if about.present? && about.respond_to?(:alumni_organizations)
+      about.alumni_organizations
+    else
+      connected_organizations
+    end
   end
 
   def experiences
-    about&.alumni_experiences
+    if about.present? && about.respond_to?(:alumni_experiences)
+      about.alumni_experiences
+    else
+      experiences_through_connections
+    end
   end
 
   def url

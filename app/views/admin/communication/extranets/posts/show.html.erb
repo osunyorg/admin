@@ -1,0 +1,51 @@
+<% content_for :title, @post %>
+
+<%= render 'admin/communication/extranets/sidebar' do %>
+  <div class="row">
+    <div class="col-xl-8">
+      <%= render 'admin/application/summary/show', about: @post %>
+      <%= render 'admin/communication/blocks/list', about: @post %>
+    </div>
+    <div class="col-xl-4">
+      <%
+      action = ''
+      action += link_to t('open'),
+                        posts_post_url(@post.slug, host: @post.extranet.url, extranet_id: nil),
+                        target: :_blank,
+                        class: 'btn btn-light btn-xs' if @post.published
+      %>
+      <%= osuny_panel t('metadata'), action: action do %>
+        <div class="row pure__row--small">
+          <div class="col-6">
+            <%= osuny_label Communication::Extranet::Post.human_attribute_name('published') %>
+            <p>
+              <%= t @post.published %><% if @post.published & @post.published_at %>,
+                <%= l @post.published_at.to_date, format: :long if @post.published_at %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <% if @post.category %>
+          <%= osuny_label Communication::Extranet::Post.human_attribute_name('category') %>
+          <p><%= link_to @post.category, [:admin, @post.category] %></p>
+        <% end %>
+        <% if @post.author %>
+          <%= osuny_label Communication::Extranet::Post.human_attribute_name('author') %>
+          <p><%= @post.author %></p>
+        <% end %>
+        <%= osuny_label Communication::Extranet::Post.human_attribute_name('slug') %>
+        <p><%= @post.slug %></p>
+      <% end %>
+      <%= render 'admin/application/featured_image/show', about: @post %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @post %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= preview_link %>
+  <%= edit_link @post %>
+<% end %>

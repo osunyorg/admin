@@ -1,0 +1,30 @@
+.posts-show header figure
+    display: inline-block
+    position: relative
+    figcaption
+        display: block
+        font-size: 1rem
+        left: 0
+        position: absolute
+        right: 0
+        text-align: right
+        z-index: 10
+        &::before
+            content: '©'
+            padding: 0.5rem
+            padding-right: 0
+            position: absolute
+            right: 0
+            top: 0
+        p
+            display: none
+            font-weight: 400
+            padding: 0.5rem
+            padding-right: 1rem
+        a
+            text-decoration: underline
+    &:hover figcaption p
+        display: block
+    @include media-breakpoint-down(md)
+        figcaption p 
+            display: block

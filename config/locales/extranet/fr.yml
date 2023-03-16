@@ -1,11 +1,24 @@
 fr:
   extranet:
+    features: Fonctionnalités
     account:
-      my: Mon compte
       edit: Modifier mon compte
       edit_personal_data: Modifier mon profil
+      experiences:
+        create_new_html: L'organisation <b>%{name}</b> n'existe pas, souhaitez-vous <a class='btn btn-primary' href='%{url}'>la créer</a> ?
+      my: Mon compte
       updated: Mise à jour effectuée
       logout: Déconnexion
+    contacts:
+      organizations:
+        experiences: Membres de cette organisation (%{count})
+      persons:
+        experiences: Organisations dont iel fait partie (%{count})
+      search:
+        home: Chercher dans l'annuaire
+        title: Recherche
+        placeholder: Entrez votre recherche ici
+        submit: Chercher
     data: Informations
     errors:
       email_not_allowed: n'est pas autorisé à accéder à cet extranet.
@@ -17,6 +30,10 @@ fr:
     home:
       recent_cohorts: Promotions récentes
       recent_experiences: Mouvements récents
+      welcome: Bienvenue !
+    library:
+      download: Télécharger
+      reset: Réinitialiser
     menu: Menu
     organization:
       experiences: Alumni dans cette organisation (%{count})
@@ -26,3 +43,6 @@ fr:
       edit: Modifier
       title: Mes données personnelles
       updated: Mise à jour des donnes personnelles effectuée !
+    posts:
+      home: Actualités récentes
+      read_post: Lire l'article

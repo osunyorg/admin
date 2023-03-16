@@ -86,6 +86,11 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     end
   end
 
+  def duplicate
+    redirect_to [:admin, @post.duplicate],
+                notice: t('admin.successfully_duplicated_html', model: @post.to_s)
+  end
+
   def destroy
     @post.destroy_and_sync
     redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)

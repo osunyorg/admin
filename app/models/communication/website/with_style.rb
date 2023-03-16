@@ -43,7 +43,10 @@ module Communication::Website::WithStyle
 
   def substitute_fonts_urls_in_style!
     @style.gsub! "src:url(../", "src:url(#{url}/assets/"
-    @style.gsub ",url(../", ",url(#{url}/assets/"
+    @style.gsub! "url(../", "url(#{url}/assets/"
+    @style.gsub! "url('../", "url('#{url}/assets/"
+    @style.gsub! "url(\"../", "url(\"#{url}/assets/"
+    @style
   end
 
   def style_outdated?

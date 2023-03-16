@@ -19,6 +19,23 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def authorize_extranet_access!
-    raise CanCan::AccessDenied if current_user.visitor? && about.alumni.find_by(id: current_user.person&.id).nil?
+    raise CanCan::AccessDenied unless user_is_authorized?
   end
+
+  def user_is_authorized?
+    user_is_more_than_visitor || user_is_alumnus || user_is_contact
+  end
+
+  def user_is_more_than_visitor
+    !current_user.visitor?
+  end
+
+  def user_is_alumnus
+    about.alumni.find_by(id: current_user.person&.id).present?
+  end
+
+  def user_is_contact
+    current_extranet.connected_people.find_by(id: current_user.person&.id).present?
+  end
+
 end

@@ -1,14 +1,41 @@
-<div class="chapter">
-  <div>
-    <%= block_component_preview :text %>
+<%
+$class = "block block-chapter"
+
+unless @block.title.blank?
+  $class += " block-with-title"
+end
+
+if @block.template.image[:id] #TODO comment vérifier proprement la présence de l'image?
+  $class += " block-chapter--with-image"
+end
+
+$class += " block-chapter--" + @block.template.layout
+
+%>
+
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <div class="chapter">
+        <div class="text">
+          <% unless @block.title.blank? %>
+            <div class="top">
+              <h2><%= @block.title %></h2>
+            </div>
+          <% end %>
+          <% unless @block.template.text.blank? %>
+            <div class="rich-text">
+              <%= block_component_preview :text %>
+            </div>
+          <% end %>
+          <% unless @block.template.notes.blank? %>
+            <div class="notes">
+              <%= block_component_preview :notes %>
+            </div>
+          <% end %>
+        </div>
+        <%= block_component_preview :image %>
+      </div>
+    </div>
   </div>
-  <div class="notes">
-    <%= block_component_preview :notes %>
-  </div>
-</div>
-<figure>
-    <%= block_component_preview :image %>
-    <figcaption>
-      <%= block_component_preview :credit %>
-    </figcaption>
-</figure>
+</section>

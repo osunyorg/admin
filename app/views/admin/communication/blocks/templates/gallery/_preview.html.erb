@@ -1,23 +1,49 @@
-<%= block_component_preview :description %>
-<%= block_component_preview :layout %>
-<div class="row">
-  <% @block.template.elements.each do |element| %>
-    <% next unless element.blob %>
-    <div class="col-6">
-      <article class="card">
-        <%= block_component_preview :image, template: element %>
-        <div class="card-body">
-          <div class="small">
-            <p class="mb-0">
-              <%= block_component_preview :alt, template: element %>
-            </p>
-            <%= block_component_preview :credit, template: element %>
-          </div>
-          <p class="mb-0">
-            <%= block_component_preview :text, template: element %>
-          </p>
+<%
+$class = "block block-gallery"
+if @block.title.present?
+  $class += " block-with-title"
+end
+
+$class += " block-gallery--" + @block.template.layout
+%>
+
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% if @block.title.present? || @block.template.description.present? %>
+        <div class="top">
+          <% if @block.title.present? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+          <% if @block.template.description.present? %>
+            <div class="description">
+              <p><%= block_component_preview :description %></p>
+            </div>
+          <% end %>
         </div>
-      </article>
+      <% end %>
+
+      <% if @block.template.layout ===  "carousel" %>
+        <% if !@block.template.elements.one? %>
+          <div class="splide" role="group" data-splide='{"arrows":true,"pagination":false,"autoWidth":true,"autoplay":false}'>
+            <div class="splide__track">
+              <div class="splide__list">
+        <% end %>
+        <% @block.template.elements.each do |element| %>
+          <%= block_component_preview :image, template: element %>
+        <% end %>
+        <% if !@block.template.elements.one? %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="gallery" role="group">
+          <% @block.template.elements.each do |element| %>
+            <%= block_component_preview :image, template: element %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+  </section>

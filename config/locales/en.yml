@@ -93,6 +93,10 @@ en:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
     duplicate: Duplicate
+    elements:
+      zero: No element
+      one: 1 element
+      other: "%{count} elements"
     infos: Informations
     inheritance:
       sentence_without_link: Value inherited
@@ -105,6 +109,7 @@ en:
       label: Background tasks pending
       hint: Those tasks precompute your data in order to minimize its carbon footprint. It creates a delay before your changes are online.
     password_hint: Leave blank if you do not wish to change the password.
+    seo: SEO
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
     successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."
@@ -172,6 +177,7 @@ en:
         finished: Finished
         finished_with_errors: Finished with errors
         pending: Pending
+  export: Export (xlsx)
   false: No
   featured_image:
     title: Image
@@ -184,6 +190,7 @@ en:
     remove: Remove image
   filters:
     attributes:
+      category: Filter by category
       date: Filter by date
       element: Filter by %{element}
       kind: Filter by kind

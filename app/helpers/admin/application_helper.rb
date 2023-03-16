@@ -52,8 +52,8 @@ module Admin::ApplicationHelper
 
   def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, &block)
     render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
-            locals: { 
-              title: title, 
+            locals: {
+              title: title,
               subtitle: subtitle,
               action: action,
               image: image
@@ -61,13 +61,18 @@ module Admin::ApplicationHelper
       capture(&block)
     end
   end
-  
+
   def osuny_label(title, classes: '')
     raw "<label class=\"form-label #{classes}\">#{title}</label>"
   end
 
   def if_appstack(string)
-    return '' if current_admin_theme != 'appstack' 
+    return '' if current_admin_theme != 'appstack'
+    " #{string}"
+  end
+
+  def if_pure(string)
+    return '' if current_admin_theme != 'pure'
     " #{string}"
   end
 
@@ -128,6 +133,10 @@ module Admin::ApplicationHelper
     text = code.to_s.dup
     text = indent text, depth
     raw text
+  end
+
+  def has_content?(html)
+    strip_tags(html.to_s).present?
   end
 
   def indent(text, depth)

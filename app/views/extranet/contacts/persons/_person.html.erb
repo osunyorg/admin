@@ -1,0 +1,22 @@
+<article class="person mb-4">
+  <div class="row gx-3">
+    <div class="col-3 col-md-12 mb-md-2">
+      <% if person.best_picture.attached? %>
+        <%= kamifusen_tag person.best_picture, width: 400, class: 'img-fluid',
+          sizes: {
+              '(max-width: 576px)': '400px',
+              '(max-width: 991px)': '200px'
+          } %>
+      <% else %>
+        <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+      <% end %>
+    </div>
+    <div class="col-9 col-md-12">
+      <%= link_to [:contacts, person], class: 'stretched-link' do %>
+        <p>
+          <b><%= person.first_name %> <%= person.last_name %></b><br>
+          <span class="text-muted"><%= person.summary %></span>
+        </p>
+      <% end %>
+    </div>
+</article>

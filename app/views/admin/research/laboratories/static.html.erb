@@ -8,5 +8,5 @@ zipcode: >
 city: >
   <%= @about.city %>
 country: >
-  <%= ISO3166::Country[@about.country].translations[@about.country.downcase] %>
+  <%= @about.country_common_name %>
 ---

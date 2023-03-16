@@ -1,0 +1,36 @@
+<% content_for :title, Communication::Extranet::Document.model_name.human(count: 2) %>
+
+<div class="row">
+  <div class="col-lg-3">
+    <%= render 'faceted_search/facets', facets: @facets, reset: t('extranet.library.reset') %>
+  </div>
+  <div class="col-lg-9">
+    <div class="row mt-n5 documents-list">
+      <% @documents.each do |document| %>
+        <div class="col-sm-6 col-xxl-4">
+          <article class="position-relative mt-5">
+            <div>
+              <i class="bi bi-file-earmark-text display-1"></i>
+              <% if document.file.attached? %>
+                <% file = document.file %>
+                <span>
+                  <%= file.filename.extension.upcase %>
+                  - <%= number_to_human_size file.byte_size %>
+                </span>
+              <% end %>
+            </div>
+            <p class="mb-3">
+              <b><%= document %></b><br>
+              <span class="text-muted"><%= l document.published_at.to_date %><span>
+            </p>
+            <%= link_to t('extranet.library.download'), 
+                        document.file.url,
+                        class: 'btn btn-primary stretched-link',
+                        target: :_blank if document.file.attached? %>
+          </article>
+        </div>
+      <% end %>
+    </div>
+    <%= paginate @documents, theme: 'bootstrap-5' %>
+  </div>
+</div>

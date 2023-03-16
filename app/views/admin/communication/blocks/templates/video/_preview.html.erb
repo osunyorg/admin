@@ -1,11 +1,33 @@
-<% if @block.template.video_title %>
-  <div class="top">
-    <h2><%= block_component_preview :video_title %></h2>
+<%
+$class = "block block-video"
+unless @block.title.blank?
+  $class += " block-with-title"
+end
+%>
+<section class="<%= $class %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.blank? %>
+        <div class="top">
+          <h2><%= @block.title %></h2>
+        </div>
+      <% end %>
+      <% if @block.template.url.present? %>
+        <div class="video">
+          <%= @block.template.video_iframe %>
+        </div>
+      <% end %>
+      <% if @block.template.video_title %>
+        <p><%= block_component_preview :video_title %></p>
+      <% end %>
+      <% unless @block.template.transcription.blank? %>
+        <div class="transcription">
+          <details>
+            <summary><%= t 'accessibility.transcription' %></summary>
+            <p><%= block_component_preview :transcription %></p>
+          </details>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-<% if @block.template.url %>
-  <div class="video">
-    <%= block_component_preview :url %>
-  </div>
-<% end %>
-<%= block_component_preview :transcription %>
+</section>

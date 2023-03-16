@@ -1,10 +1,36 @@
-<% content_for :title, "#{University::Person.model_name.human(count: 2)} (#{@people.total_count})" %>
+<% content_for :title, "#{University::Person.model_name.human(count: 2)}" %>
 
-<%= render 'filters', current_path: admin_university_people_path, filters: @filters if @filters.any?  %>
+<%
+action = ''
+action += link_to t('create'),
+                  new_admin_university_person_path(website_id: @website),
+                  class: button_classes if can?(:create, University::Person)
+subtitle = t('admin.elements', count: @people.total_count)
+%>
+<%= osuny_panel University::Person.model_name.human(count: 2), subtitle: subtitle, action: action do %>
+  <%= render 'filters', current_path: admin_university_people_path, filters: @filters if @filters.any?  %>
 
-<%= render 'admin/university/people/list', people: @people %>
-<%= paginate @people, theme: 'bootstrap-5' %>
+  <%= render 'admin/university/people/list', people: @people %>
+  <%= paginate @people, theme: 'bootstrap-5' %>
+<% end %>
 
-<% content_for :action_bar_right do %>
-  <%= create_link University::Person %>
+<%
+action = ''
+action += link_to t('create'),
+                  new_admin_university_person_category_path(website_id: @website),
+                  class: button_classes if can?(:create, University::Person::Category)
+subtitle = t('admin.elements', count: @categories.total_count)
+%>
+<%= osuny_panel University::Person::Category.model_name.human(count: 2), subtitle: subtitle, action: action do %>
+  <%= render 'admin/university/people/categories/list', categories: @categories %>
+  <%= paginate @categories, theme: 'bootstrap-5', param: :categories_page %>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('university.person.experiences.import_btn'),
+              new_admin_university_people_experiences_import_path,
+              class: button_classes if can? :create, University::Person::Experience %>
+  <%= link_to t('export'),
+              request.params.merge(format: "xlsx"),
+              class: button_classes %>
 <% end %>

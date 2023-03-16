@@ -1,11 +1,24 @@
 en:
   extranet:
+    features: Features
     account:
-      my: My account
       edit: Edit account
       edit_personal_data: Edit profile
+      experiences:
+        create_new_html: The organization *** doesn't exist, do you want to <a class='btn btn-primary' href='%{url}'>create it</a>?
+      my: My account
       updated: Updated
       logout: Log out
+    contacts:
+      organizations:
+        experiences: Members of this organization (%{count})
+      persons:
+        experiences: Organizations where they belong (%{count})
+      search:
+        home: Search in directory
+        title: Search
+        placeholder: Type your search here
+        submit: Search
     data: Data
     errors:
       email_not_allowed: is not authorized to access this extranet.
@@ -17,6 +30,10 @@ en:
     home:
       recent_cohorts: Recent cohorts
       recent_experiences: Recent experiences
+      welcome: Welcome!
+    library:
+      download: Download
+      reset: Reset
     menu: Menu
     organization:
       experiences: Alumni in this organization (%{count})
@@ -26,3 +43,6 @@ en:
       edit: Edit
       title: My personal data
       updated: Your personal data has been updated!
+    posts:
+      home: Recent posts
+      read_post: Read post

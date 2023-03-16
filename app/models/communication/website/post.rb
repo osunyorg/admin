@@ -42,6 +42,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithDependencies
+  include WithDuplication
   include WithFeaturedImage
   include WithGit
   include WithMenuItemTarget
