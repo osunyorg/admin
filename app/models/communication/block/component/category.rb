@@ -5,8 +5,8 @@ class Communication::Block::Component::Category < Communication::Block::Componen
     website.categories.find_by(id: data)
   end
 
-  def git_dependencies
-    [category, category&.best_featured_image&.blob]
+  def display_dependencies
+    [category]
   end
 
   def translate!

@@ -64,8 +64,4 @@ class University::Person::Author < University::Person
   def template_static
     "admin/university/people/authors/static"
   end
-
-  def for_website?(website)
-    website.has_authors? && website.authors.pluck(:id).include?(self.id)
-  end
 end

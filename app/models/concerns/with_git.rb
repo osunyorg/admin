@@ -1,7 +1,10 @@
 module WithGit
   extend ActiveSupport::Concern
-
+  
   included do
+    # WithGit a besoin de WithDependencies
+    include WithDependencies
+
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about,
@@ -73,38 +76,44 @@ module WithGit
     end
   end
 
+  # Deprecated
   def has_website_for_self?(website)
     websites_for_self.include?(website)
   end
-
+  
+  # Deprecated
   def git_dependencies(website = nil)
     [self]
   end
-
+  
+  # Deprecated
   def git_destroy_dependencies(website = nil)
     [self]
   end
-
+  
   protected
-
+  
+  # Deprecated
   def in_block_dependencies?(website)
     website.blocks_dependencies.include?(self)
   end
-
+  
+  # Deprecated
   def dependencies_through_blocks(website)
     # We select all blocks having this object as dependency
     blocks = website.blocks.select { |block| in? block.git_dependencies }
     # We map them to their parent object (program, page, etc.)
     blocks.map(&:about).uniq.compact
   end
-
+  
+  # Deprecated
   def websites_for_self
     if is_a? Communication::Website
       [self]
-    elsif respond_to?(:websites)
-      websites
     elsif respond_to?(:website)
       [website]
+    elsif respond_to?(:websites)
+      websites
     else
       []
     end

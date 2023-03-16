@@ -9,10 +9,6 @@ class Communication::Block::Component::Page < Communication::Block::Component::B
     [page]
   end
 
-  def git_dependencies
-    [page, page&.best_featured_image&.blob]
-  end
-
   def translate!
     return unless website && data.present?
     source_page = website.pages.find_by(id: data)

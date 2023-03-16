@@ -51,6 +51,7 @@ class Research::Journal::Paper < ApplicationRecord
   include WithPublication
   include WithSlug
   include WithUniversity
+  include WithWebsites
   
   has_summernote :text
   has_one_attached :pdf
@@ -63,15 +64,11 @@ class Research::Journal::Paper < ApplicationRecord
                           class_name: 'University::Person',
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
-  has_many :websites, -> { distinct }, through: :journal
+  has_many :communication_websites, -> { distinct }, through: :journal
 
   validates :title, presence: true
 
   scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
-
-  def for_website?(website)
-    journal == website.about
-  end
 
   def git_path(website)
     "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
@@ -85,16 +82,14 @@ class Research::Journal::Paper < ApplicationRecord
     "admin/research/journals/papers/static"
   end
 
-  def git_dependencies(website)
-    dependencies =  [self] +
-                    active_storage_blobs +
-                    git_block_dependencies +
-                    other_papers_in_the_volume +
-                    people +
-                    people.map(&:active_storage_blobs).flatten +
-                    people.map(&:researcher) +
-                    website.menus
-    dependencies.flatten.compact
+  def display_dependencies
+    active_storage_blobs +
+    blocks +
+    people.map(&:researcher)
+  end
+
+  def reference_dependencies
+    people
   end
 
   def doi_url

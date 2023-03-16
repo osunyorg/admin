@@ -67,6 +67,7 @@ class University::Person < ApplicationRecord
   include WithPermalink
   include WithResearch
   include WithTranslations
+  include WithWebsites
 
   LIST_OF_ROLES = [
     :administration,
@@ -188,24 +189,16 @@ class University::Person < ApplicationRecord
     end
   end
 
-  def websites
-    # FIXME: Sera corrigé avec les liens directs
-    university.communication_websites
-  end
-
   def git_path(website)
     "#{git_path_content_prefix(website)}persons/#{slug}.html" if for_website?(website)
   end
 
-  def git_dependencies(website)
-    dependencies = [self]
-    dependencies += active_storage_blobs
-    dependencies += git_block_dependencies
-    dependencies += [administrator, author, researcher, teacher]
-    dependencies += communication_website_posts.where(communication_website_id: website.id)
-    dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website)
-    dependencies
+  def display_dependencies
+    blocks +
+    active_storage_blobs
+    # TODO: Il faut pouvoir récupérer les blobs de la personne à partir d'une facette
+    # person.active_storage_blobs => [<#ActiveStorage::Blob>]
+    # person.author.active_storage_blobs => []
   end
 
   def administrator
@@ -222,14 +215,6 @@ class University::Person < ApplicationRecord
 
   def teacher
     @teacher ||= University::Person::Teacher.find(id)
-  end
-
-  def for_website?(website)
-    administrator.for_website?(website) ||
-    author.for_website?(website) ||
-    researcher.for_website?(website) ||
-    teacher.for_website?(website) ||
-    in_block_dependencies?(website)
   end
 
   def full_street_address

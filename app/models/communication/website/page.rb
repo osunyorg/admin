@@ -50,7 +50,6 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithDependencies
   include WithDuplication
   include WithFeaturedImage
   include WithGit
@@ -104,26 +103,6 @@ class Communication::Website::Page < ApplicationRecord
     blocks +
     menu_items +
     children
-  end
-  
-  # Deprecated
-  def git_dependencies(website)
-    dependencies = [self] +
-                    website.menus +
-                    descendants +
-                    active_storage_blobs +
-                    siblings +
-                    git_block_dependencies +
-                    type_git_dependencies
-    dependencies += [parent] if has_parent?
-    dependencies.flatten.compact
-  end
-
-  # Deprecated
-  def git_destroy_dependencies(website)
-    [self] +
-    descendants +
-    active_storage_blobs
   end
 
   def to_s

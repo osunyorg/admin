@@ -24,6 +24,7 @@ module Communication::Website::WithOldDependencies
 
   end
 
+  # Deprecated
   def blocks
     @blocks ||= begin
       blocks = Communication::Block.where(about_type: 'Communication::Website::Page', about_id: pages)
@@ -35,6 +36,7 @@ module Communication::Website::WithOldDependencies
     end
   end
 
+  # Deprecated
   def blocks_dependencies
     @blocks_dependencies ||= blocks.collect(&:git_dependencies).flatten.compact.uniq
   end

@@ -64,8 +64,4 @@ class University::Person::Alumnus < University::Person
   def git_path(website)
     # No alumni on websites
   end
-
-  def for_website?(website)
-    false
-  end
 end

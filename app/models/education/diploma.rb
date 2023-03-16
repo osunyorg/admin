@@ -29,6 +29,7 @@ class Education::Diploma < ApplicationRecord
   include WithPermalink
   include WithSlug
   include WithUniversity
+  include WithWebsites
 
   has_many :programs, dependent: :nullify
 
@@ -47,35 +48,8 @@ class Education::Diploma < ApplicationRecord
     doctor: 800
   }
 
-  def websites
-    @websites ||= university.websites.reject { |website|
-      !for_website?(website)
-    }
-  end
-
-  def programs_for_website(website)
-    website.education_programs.where(diploma: self)
-  end
-
-  def published_programs_for_website(website)
-    programs_for_website(website).published
-  end
-
-  # We need to send the diplomas only to the websites that need them
-  def for_website?(website)
-    published_programs_for_website(website).any?
-  end
-
   def git_path(website)
     "#{git_path_content_prefix(website)}diplomas/#{slug}/_index.html" if for_website?(website)
-  end
-
-  def git_dependencies(website)
-    website_programs = programs_for_website(website)
-
-    dependencies = [self]
-    dependencies += website_programs + website_programs.map(&:active_storage_blobs).flatten
-    dependencies
   end
 
   def to_s

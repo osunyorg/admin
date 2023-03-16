@@ -38,19 +38,16 @@ class Research::Journal::Volume < ApplicationRecord
   include WithPublication
   include WithSlug
   include WithUniversity
+  include WithWebsites
 
   has_summernote :text
 
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :papers, foreign_key: :research_journal_volume_id, dependent: :nullify
-  has_many :websites, -> { distinct }, through: :journal
+  has_many :communication_websites, -> { distinct }, through: :journal
   has_many :people, -> { distinct }, through: :papers
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
-
-  def for_website?(website)
-    journal == website.about
-  end
 
   def git_path(website)
     "#{git_path_content_prefix(website)}volumes#{path}/_index.html" if published_at
@@ -60,19 +57,10 @@ class Research::Journal::Volume < ApplicationRecord
     "admin/research/journals/volumes/static"
   end
 
-
-  def git_dependencies(website)
-    [self] +
+  def display_dependencies
     papers +
-    people +
-    people.map(&:active_storage_blobs).flatten +
     people.map(&:researcher) +
-    active_storage_blobs +
-    website.menus
-  end
-
-  def git_destroy_dependencies(website)
-    [self] + active_storage_blobs
+    active_storage_blobs
   end
 
   def path

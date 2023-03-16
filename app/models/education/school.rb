@@ -24,17 +24,19 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
+  include Aboutable
   include Sanitizable
+  include WithAlumni
   include WithCountry
   include WithGit
-  include Aboutable
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
-  include WithAlumni
+  include WithWebsites
 
   belongs_to  :university
 
-  has_many    :websites,
+  # 'websites' might override the same method defined in WithWebsites, so we use the full name
+  has_many    :communication_websites,
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
@@ -67,23 +69,11 @@ class Education::School < ApplicationRecord
     "data/school.yml"
   end
 
-  def git_dependencies(website)
-    dependencies = [self]
-    dependencies += programs +
-                    programs.map(&:active_storage_blobs).flatten +
-                    programs.map(&:git_block_dependencies).flatten
-    dependencies += diplomas +
-                    diplomas.map(&:git_block_dependencies).flatten
-    dependencies += teachers +
-                    teachers.map(&:teacher) +
-                    teachers.map(&:active_storage_blobs).flatten
-    dependencies += researchers +
-                    researchers.map(&:researcher) +
-                    researchers.map(&:active_storage_blobs).flatten
-    dependencies += administrators +
-                    administrators.map(&:administrator) +
-                    administrators.map(&:active_storage_blobs).flatten
-    dependencies
+  def display_dependencies
+    active_storage_blobs +
+    programs +
+    diplomas +
+    administrators.map(&:administrator)
   end
 
   #####################

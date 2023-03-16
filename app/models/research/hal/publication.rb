@@ -21,8 +21,9 @@
 #
 class Research::Hal::Publication < ApplicationRecord
   include Sanitizable
-  include WithGit
   include WithSlug
+  include WithGit
+  include WithWebsites
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',

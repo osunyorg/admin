@@ -52,19 +52,17 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     true
   end
 
+  def display_dependencies
+    super + 
+    [website.config_default_permalinks] +
+    website.categories +
+    website.posts
+  end
+
   protected
   
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}posts/_index.html"
-  end
-
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website.categories,
-      website.authors.map(&:author),
-      website.posts
-    ]
   end
 
 end

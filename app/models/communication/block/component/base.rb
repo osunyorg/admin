@@ -26,10 +26,6 @@ class Communication::Block::Component::Base
     self.class.name.demodulize.underscore
   end
 
-  def git_dependencies
-    []
-  end
-
   def website
     template.block.about&.website
   end

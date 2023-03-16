@@ -18,7 +18,4 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     [blob]
   end
 
-  def git_dependencies
-    [blob]
-  end
 end

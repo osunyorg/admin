@@ -8,10 +8,6 @@ class Communication::Block::Component::Person < Communication::Block::Component:
     [person]
   end
 
-  def git_dependencies
-    [person, person&.picture&.blob]
-  end
-
   def translate!
     return unless data.present?
     @data = person.find_or_translate!(template.language).id

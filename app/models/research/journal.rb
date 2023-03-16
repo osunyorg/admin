@@ -24,8 +24,9 @@ class Research::Journal < ApplicationRecord
   include Aboutable
   include WithUniversity
   include WithGit
+  include WithWebsites
 
-  has_many :websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
+  has_many :communication_websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
   has_many :published_volumes, -> { published }, class_name: 'Research::Journal::Volume', foreign_key: :research_journal_id, dependent: :destroy
   has_many :papers, foreign_key: :research_journal_id, dependent: :destroy
@@ -56,16 +57,10 @@ class Research::Journal < ApplicationRecord
     "data/journal.yml"
   end
 
-  def git_dependencies(website)
-    dependencies = [self]
-    dependencies += papers + papers.map(&:active_storage_blobs).flatten
-    dependencies += volumes + volumes.map(&:active_storage_blobs).flatten
-    dependencies += researchers + researchers.map(&:researcher) + researchers.map(&:active_storage_blobs).flatten
-    dependencies
-  end
-
-  def git_destroy_dependencies(website)
-    [self] + papers + volumes
+  def display_dependencies
+    volumes +
+    papers +
+    researchers.map(&:researcher)
   end
 
   #####################

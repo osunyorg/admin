@@ -8,14 +8,6 @@ class Communication::Block::Component::Organization < Communication::Block::Comp
     [organization]
   end
 
-  def git_dependencies
-    [
-      organization,
-      organization&.logo&.blob,
-      organization&.logo_on_dark_background&.blob
-    ]
-  end
-
   def translate!
     # TODO: Traduction des Organisations à faire
   end

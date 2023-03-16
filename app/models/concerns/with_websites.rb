@@ -9,6 +9,10 @@ module WithWebsites
     @websites ||= Communication::Website::Connection.websites_for self
   end
 
+  def for_website?(website)
+    Communication::Website::Connection.in_website(website).for_object(self).exists?
+  end
+
   protected
   
   def connect_to_websites

@@ -44,6 +44,12 @@
 #
 class Communication::Website::Page::Author < Communication::Website::Page
 
+  def display_dependencies
+    super + 
+    [website.config_default_permalinks] +
+    website&.authors&.map(&:author)
+  end
+  
   protected
 
   def current_git_path
@@ -54,11 +60,5 @@ class Communication::Website::Page::Author < Communication::Website::Page
     website.special_page(Communication::Website::Page::Person, language: language)
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website&.authors&.map(&:author)
-    ]
-  end
 
 end

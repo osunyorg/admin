@@ -7,10 +7,7 @@
       <%= render 'admin/application/summary/show', about: @page %>
       <%= render 'admin/communication/blocks/list', about: @page %>
       <%= render 'admin/communication/websites/pages/show/special_page', about: @page %>
-      <%= render 'admin/application/dependencies',
-                  dependencies: @page.dependencies,
-                  git_dependencies: @page.git_dependencies(@page.website),
-                  active_storage_blobs: @page.active_storage_blobs %>
+      <%= render 'admin/application/dependencies', about: @page %>
     </div>
     <div class="col-md-4">
       <%= render 'admin/application/a11y/widget', about: @page %>

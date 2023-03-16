@@ -9,15 +9,6 @@ class Communication::Block::Component::Post < Communication::Block::Component::B
     [post]
   end
 
-  def git_dependencies
-    [
-      post,
-      post&.author,
-      post&.author&.author,
-      post&.author&.picture&.blob
-    ]
-  end
-
   def translate!
     return unless website && data.present?
     source_post = website.posts.find_by(id: data)

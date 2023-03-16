@@ -1,5 +1,8 @@
 <%
+about ||= nil
 expanded ||= false
+dependencies ||= about&.dependencies
+active_storage_blobs ||= about&.active_storage_blobs
 %>
 <% if current_user.server_admin? %>
 <i  class="<%= Icon::SETTINGS %>"
@@ -24,29 +27,6 @@ expanded ||= false
                   <tr>
                       <td><%= dependency.to_s %></td>
                       <td><%= dependency.class %></td>
-                  </tr>
-              <% end %>
-          </tbody>
-      </table>
-    </div>
-    
-    
-    <h2 class="h5">git_dependencies</h2>
-    <div class="table-responsive">
-      <table class="<%= table_classes %>">
-          <thead>
-              <tr>
-                  <th>Id</th>
-                  <th>Class</th>
-                  <th>Name</th>
-              </tr>
-          </thead>
-          <tbody>
-              <% git_dependencies.each do |dependency| %>
-                  <tr>
-                      <td><%= dependency.id %></td>
-                      <td><%= dependency.class %></td>
-                      <td><%= dependency.to_s %></td>
                   </tr>
               <% end %>
           </tbody>

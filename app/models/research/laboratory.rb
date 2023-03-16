@@ -25,9 +25,10 @@ class Research::Laboratory < ApplicationRecord
   include Sanitizable
   include WithCountry
   include WithGit
+  include WithWebsites
 
   belongs_to  :university
-  has_many    :websites,
+  has_many    :communication_websites,
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify

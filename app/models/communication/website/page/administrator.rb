@@ -48,6 +48,12 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     website.about && website.about&.respond_to?(:administrators)
   end
 
+  def display_dependencies
+    super + 
+    [website.config_default_permalinks] +
+    website&.administrators&.map(&:administrator)
+  end
+  
   protected
 
   def current_git_path
@@ -58,11 +64,5 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     website.special_page(Communication::Website::Page::Person, language: language)
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website&.administrators&.map(&:administrator)
-    ]
-  end
 
 end

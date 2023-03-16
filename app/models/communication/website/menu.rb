@@ -29,7 +29,6 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   include Sanitizable
-  include WithDependencies
   include WithGit
   include WithTranslations
   include WithUniversity

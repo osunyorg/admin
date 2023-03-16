@@ -41,7 +41,6 @@ class Communication::Website::Post < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithDependencies
   include WithDuplication
   include WithFeaturedImage
   include WithGit
@@ -131,24 +130,6 @@ class Communication::Website::Post < ApplicationRecord
     blocks +
     menu_items +
     categories
-  end
-
-  def git_dependencies(website)
-    dependencies = [self] + website.menus
-    dependencies += categories
-    dependencies += active_storage_blobs
-    dependencies += git_block_dependencies
-    dependencies += university.communication_blocks.where(template_kind: :posts).includes(:about).map(&:about).uniq
-    if author.present?
-      dependencies += [author, author.author, translated_author, translated_author.author]
-      dependencies += author.active_storage_blobs
-      dependencies += translated_author.active_storage_blobs
-    end
-    dependencies
-  end
-
-  def git_destroy_dependencies(website)
-    [self] + explicit_active_storage_blobs
   end
 
   def url

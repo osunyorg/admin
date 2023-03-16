@@ -44,7 +44,6 @@ class Communication::Website::Category < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithDependencies
   include WithFeaturedImage
   include WithGit
   include WithMenuItemTarget
@@ -103,14 +102,6 @@ class Communication::Website::Category < ApplicationRecord
     children +
     posts +
     [parent]
-  end
-
-  def git_dependencies(website)
-    [self, parent].compact + siblings + descendants + active_storage_blobs + posts + website.menus
-  end
-
-  def git_destroy_dependencies(website)
-    [self] + descendants + active_storage_blobs
   end
 
   def update_children_paths

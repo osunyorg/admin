@@ -100,10 +100,6 @@ class Communication::Block < ApplicationRecord
     template.display_dependencies
   end
 
-  def git_dependencies
-    template.git_dependencies
-  end
-
   def last_ordered_element
     about.blocks.ordered.last
   end

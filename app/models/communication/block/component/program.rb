@@ -8,10 +8,6 @@ class Communication::Block::Component::Program < Communication::Block::Component
     [program]
   end
 
-  def git_dependencies
-    [program, program&.best_featured_image&.blob]
-  end
-
   def translate!
     # TODO: Traduction des Formations à faire
   end

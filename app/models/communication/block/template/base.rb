@@ -101,31 +101,7 @@ class Communication::Block::Template::Base
   end
 
   def display_dependencies
-    components +
-    elements
-  end
-
-  def git_dependencies
-    unless @git_dependencies
-      @git_dependencies = []
-      components.each do |component|
-        add_dependency component.git_dependencies
-      end
-      elements.each do |element|
-        add_dependency element.git_dependencies
-      end
-      add_custom_git_dependencies
-      @git_dependencies.compact!
-      @git_dependencies.uniq!
-    end
-    @git_dependencies
-  end
-
-  def active_storage_blobs
-    @active_storage_blobs ||= git_dependencies.select { |dependency|
-      # dependency.is_a? ActiveStorage::Blob misses some occurrences
-      dependency.class.name == 'ActiveStorage::Blob'
-    }.uniq
+    components + elements
   end
 
   def default_element(data = nil)
@@ -173,17 +149,6 @@ class Communication::Block::Template::Base
 
   def has_element_class?
     !self.class.element_class.nil?
-  end
-
-  def add_custom_git_dependencies
-  end
-
-  def add_dependency(dependency)
-    if dependency.is_a? Array
-      @git_dependencies += dependency
-    else
-      @git_dependencies += [dependency]
-    end
   end
 
   def components

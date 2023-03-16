@@ -48,6 +48,12 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     website.about && website.about&.respond_to?(:researchers)
   end
 
+  def display_dependencies
+    super + 
+    [website.config_default_permalinks] +
+    website.researchers&.map(&:researcher)
+  end
+
   protected
 
   def current_git_path
@@ -56,13 +62,6 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
 
   def default_parent
     website.special_page(Communication::Website::Page::Person, language: language)
-  end
-
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website&.researchers&.map(&:researcher)
-    ]
   end
 
 end

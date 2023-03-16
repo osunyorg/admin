@@ -44,7 +44,6 @@ class University::Organization < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithCountry
-  include WithDependencies
   include WithGeolocation
   include WithGit
   include WithPermalink
@@ -108,27 +107,8 @@ class University::Organization < ApplicationRecord
   }
 
   def display_dependencies
-    [
-      logo&.blob, 
-      logo_on_dark_background&.blob
-    ] +
+    active_storage_blobs +
     blocks
-  end
-
-  def git_dependencies(website)
-    dependencies = []
-    if for_website?(website)
-      dependencies << self
-      dependencies.concat active_storage_blobs
-      dependencies.concat git_block_dependencies
-    end
-    dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website)
-    dependencies
-  end
-
-  def for_website?(website)
-    in_block_dependencies?(website)
   end
 
   def git_path(website)

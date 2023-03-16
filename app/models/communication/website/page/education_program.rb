@@ -60,17 +60,16 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
     true
   end
 
+  def display_dependencies
+    super + 
+    [website.config_default_permalinks] +
+    website.education_programs
+  end
+
   protected
   
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}programs/_index.html"
-  end
-
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website.education_programs
-    ]
   end
 
 end

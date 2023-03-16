@@ -25,13 +25,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     !website.nil?
   end
 
-  def add_custom_git_dependencies
-    selected_pages.each do |page|
-      add_dependency page
-      add_dependency page.active_storage_blobs.to_a
-    end
-  end
-
   protected
 
   def selected_pages_selection
