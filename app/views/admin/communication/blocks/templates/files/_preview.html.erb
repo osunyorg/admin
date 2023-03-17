@@ -25,17 +25,14 @@ end
         <% @block.template.elements.each do |element| %>
           <% next unless element.blob %>
           <li>
-          <figure>
+            <figure>
               <a href="<%= element.blob.url %>" target="_blank" title="<%= element.title %>"><%= element.title %></a>
-              <% if document.file.attached? %>
-                <% file = document.file %>
                 <figcaption>
-                  <abbr title=""><%= file.filename.extension.upcase %></abbr>
-                  - <abbr title=""><%= number_to_human_size file.byte_size %></abbr>
+                  <abbr title=""><%= element.blob.filename.extension.upcase %></abbr>
+                  - <abbr title=""><%= number_to_human_size element.blob.byte_size %></abbr>
                 </figcaption>
-              <% end %>
+              </a>
             </figure>
-            </a>
           </li>
         <% end %>
       </ul>
