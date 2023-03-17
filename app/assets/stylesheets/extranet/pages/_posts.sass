@@ -1,29 +1,30 @@
 .posts-show header figure
     display: inline-block
     position: relative
+    &::after
+        bottom: 0
+        content: '©'
+        padding: 0.5rem
+        padding-right: 0
+        position: absolute
+        right: 0
+        transform: translateY(100%)
     figcaption
-        display: block
+        display: none
         font-size: 1rem
+        font-weight: 400
         left: 0
+        padding: 0.5rem
+        padding-right: 1.5rem
         position: absolute
         right: 0
         text-align: right
         z-index: 10
-        &::before
-            content: '©'
-            padding: 0.5rem
-            padding-right: 0
-            position: absolute
-            right: 0
-            top: 0
         p
-            display: none
-            font-weight: 400
-            padding: 0.5rem
-            padding-right: 1rem
+            margin-bottom: 0
         a
             text-decoration: underline
-    &:hover figcaption p
+    &:hover figcaption
         display: block
     @include media-breakpoint-down(md)
         figcaption p 
