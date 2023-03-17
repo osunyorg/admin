@@ -6,7 +6,9 @@
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
         <%= f.input :name %>
-        <%= f.input :file, as: :single_deletable_file %>
+        <%= f.input :file,
+                    as: :single_deletable_file,
+                    direct_upload: true %>
       <% end %>
     </div>
     <div class="col-md-4">
