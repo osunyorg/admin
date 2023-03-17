@@ -4,7 +4,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
                               through_association: :organization_categories
 
   def index
-    @categories = @organizations.ordered.page(params[:page])
+    @categories = @categories.ordered.page(params[:page])
     breadcrumb
   end
 
