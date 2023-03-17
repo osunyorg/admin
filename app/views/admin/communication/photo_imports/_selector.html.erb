@@ -3,6 +3,12 @@
 search = about.to_s
 # communication_website_page
 about_identifier = about.class.base_class.to_s.parameterize.underscore
+# input[name="communication_website_post[featured_image]"]
+about_featured_image_file = "input[name=\"#{about_identifier}[featured_image]\"]".html_safe
+# input[name="communication_website_post[featured_image_delete]"]
+about_featured_image_file_delete = "input[name=\"#{about_identifier}[featured_image_delete]\"]".html_safe
+# input[name="communication_website_post[featured_image_infos]"]
+about_featured_image_file_infos = "input[name=\"#{about_identifier}[featured_image_infos]\"]".html_safe
 # .communication_website_post_featured_image
 about_featured_image_image = ".#{about_identifier}_featured_image"
 # #communication_website_page_featured_image_alt
@@ -12,8 +18,8 @@ about_featured_image_credit = "##{about_identifier}_featured_image_credit"
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 # /admin/communication/photo_import.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
-unsplash_path = admin_communication_unsplash_path(website_id: nil, extranet_id: nil, lang: nil, format: :json)
-pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil, lang: nil, format: :json)
+unsplash_path = admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, lang: nil, format: :json)
+pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, lang: nil, format: :json)
 %>
 
 <div id="photo-import-app" v-cloak>
@@ -179,6 +185,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
           selected: null
         },
         targets: {
+          fileInput: document.querySelector('<% about_featured_image_image %> <%= about_featured_image_file %>'),
+          fileLabel: document.querySelector('<% about_featured_image_image %> .js-sdfi-deletable-file__label'),
+          fileDeleteInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_delete %>'),
+          fileInfosInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_infos %>'),
           image: document.querySelector('<%= about_featured_image_image %> img'),
           imageContainer: document.querySelector('<%= about_featured_image_image %> .sdfi-deletable-file__preview'),
           alt: document.querySelector('<%= about_featured_image_alt %>'),
@@ -264,6 +274,12 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
         this.select(image);
       },
       select(image) {
+        this.targets.fileInput.value = null;
+        this.targets.fileLabel.textContent = image.filename;
+        this.targets.fileDeleteInput.value = null;
+        this.targets.fileInfosInput.value = null;
+        // Refresh in case cropper replaces img
+        this.targets.image = document.querySelector('<%= about_featured_image_image %> img');
         if (!this.targets.image) {
           this.targets.image = document.createElement('img');
           this.targets.image.classList.add('img-fluid', 'img-thumbnail');
