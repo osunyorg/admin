@@ -1,6 +1,6 @@
 class Extranet::AccountController < Extranet::ApplicationController
   def show
-    # Superadmins don't have a person
+    # Admin or Superadmins can have NO person
     @person = current_user.person
     breadcrumb
   end
