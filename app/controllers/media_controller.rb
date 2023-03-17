@@ -2,7 +2,11 @@ class MediaController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
-    @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
+    begin
+      @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      raise ActiveRecord::RecordNotFound
+    end
     @size = @blob.byte_size
     if @blob.variable?
       variant_service = VariantService.compute(@blob, params[:filename_with_transformations], params[:format])
