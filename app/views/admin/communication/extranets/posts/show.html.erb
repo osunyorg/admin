@@ -24,6 +24,10 @@
               <% end %>
             </p>
           </div>
+          <div class="col-6">
+            <%= osuny_label Communication::Extranet::Post.human_attribute_name('pinned') %>
+            <p><%= t @post.pinned %></p>
+          </div>
         </div>
         <% if @post.category %>
           <%= osuny_label Communication::Extranet::Post.human_attribute_name('category') %>

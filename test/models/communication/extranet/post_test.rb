@@ -5,6 +5,7 @@
 #  id                    :uuid             not null, primary key
 #  featured_image_alt    :string
 #  featured_image_credit :text
+#  pinned                :boolean          default(FALSE)
 #  published             :boolean          default(FALSE)
 #  published_at          :datetime
 #  slug                  :string
