@@ -1,12 +1,9 @@
 class MediaController < ApplicationController
   skip_before_action :authenticate_user!
 
+  before_action :load_blob
+
   def show
-    begin
-      @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
-    rescue ActiveSupport::MessageVerifier::InvalidSignature
-      raise ActiveRecord::RecordNotFound
-    end
     @size = @blob.byte_size
     if @blob.variable?
       variant_service = VariantService.compute(@blob, params[:filename_with_transformations], params[:format])
@@ -23,5 +20,15 @@ class MediaController < ApplicationController
     end
     response.headers["Content-Length"] = "#{@size}"
     redirect_to blob_or_variant_url
+  end
+
+  protected
+
+  def load_blob
+    begin
+      @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end
