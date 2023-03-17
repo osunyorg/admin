@@ -31,11 +31,11 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def user_is_alumnus
-    about.alumni.find_by(id: current_user.person&.id).present?
+    current_extranet.feature_alumni? && about.alumni.find_by(id: current_user.person&.id).present?
   end
 
   def user_is_contact
-    current_extranet.connected_people.find_by(id: current_user.person&.id).present?
+    current_extranet.feature_contacts? && current_extranet.connected_people.find_by(id: current_user.person&.id).present?
   end
 
 end
