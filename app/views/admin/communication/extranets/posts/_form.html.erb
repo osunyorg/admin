@@ -12,7 +12,14 @@
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
         <% if can? :publish, post %>
-          <%= f.input :published %>
+          <div class="row pure__row--small">
+            <div class="col-6">
+              <%= f.input :published %>
+            </div>
+            <div class="col-6">
+              <%= f.input :pinned %>
+            </div>
+          </div>
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
         <%= f.association :category,
