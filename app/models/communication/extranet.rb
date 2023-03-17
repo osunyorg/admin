@@ -95,7 +95,13 @@ class Communication::Extranet < ApplicationRecord
   end
 
   def users
-    university.users.where(person: alumni)
+    if feature_alumni?
+      university.users.where(person: alumni)
+    elsif feature_contacts?
+      university.users.where(person: connected_people)
+    else
+      university.users.none
+    end
   end
 
   def cohorts
