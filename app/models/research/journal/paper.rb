@@ -51,7 +51,8 @@ class Research::Journal::Paper < ApplicationRecord
   include WithPublication
   include WithSlug
   include WithUniversity
-  
+
+  has_summernote :references
   has_summernote :text
   has_one_attached :pdf
 

@@ -2,6 +2,7 @@ module WithFeaturedImage
   extend ActiveSupport::Concern
 
   included do
+    has_summernote :featured_image_credit
     has_one_attached_deletable :featured_image
 
     validates :featured_image, size: { less_than: 5.megabytes }
