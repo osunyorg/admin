@@ -1,17 +1,17 @@
 <%
-$class = "block block-call_to_action"
+class_name = "block block-call_to_action"
 unless @block.title.blank?
-  $class += " block-with-title"
+  class_name += " block-with-title"
 end
 
-$image_class = "call_to_action--with" + (@block.template.image.empty? ? "out" : "") + "-image"
+image_class = "call_to_action--with" + (@block.template.image.empty? ? "out" : "") + "-image"
 
 %>
 
-<section class="block block-call_to_action">
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <div class="call_to_action <%= $image_class %>">
+      <div class="call_to_action <%= image_class %>">
         <div>
           <% unless @block.title.blank? %>
             <h2><%= @block.title %></h2>
