@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_16_153131) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_160229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -168,6 +168,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_153131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "category_id"
+    t.boolean "pinned", default: false
     t.index ["author_id"], name: "index_communication_extranet_posts_on_author_id"
     t.index ["category_id"], name: "index_communication_extranet_posts_on_category_id"
     t.index ["extranet_id"], name: "index_communication_extranet_posts_on_extranet_id"

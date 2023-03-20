@@ -47,7 +47,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def destroy
     @school.destroy_and_sync
-    redirect_to admin_university_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s)
+    redirect_to admin_education_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s)
   end
 
   private

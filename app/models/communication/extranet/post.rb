@@ -5,6 +5,7 @@
 #  id                    :uuid             not null, primary key
 #  featured_image_alt    :string
 #  featured_image_credit :text
+#  pinned                :boolean          default(FALSE)
 #  published             :boolean          default(FALSE)
 #  published_at          :datetime
 #  slug                  :string
@@ -45,6 +46,8 @@ class Communication::Extranet::Post < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
   validates :title, presence: true
+
+  scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
 
   def to_s
     "#{title}"

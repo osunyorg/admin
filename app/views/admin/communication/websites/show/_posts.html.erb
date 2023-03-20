@@ -1,11 +1,11 @@
 <%
 action = ''
-action += link_to t('communication.website.posts.new_curation'),
-                  new_admin_communication_website_post_curation_path(website_id: @website.id),
-                  class: button_classes if can?(:create, Communication::Website::Post)
 action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
-                  class: button_classes('ms-1') if can?(:create, Communication::Website::Post)
+                  class: button_classes if can?(:create, Communication::Website::Post)
+action += link_to t('communication.website.posts.new_curation'),
+                  new_admin_communication_website_post_curation_path(website_id: @website.id),
+                  class: button_classes('ms-2 btn-light') if can?(:create, Communication::Website::Post)
 subtitle = link_to t('communication.website.see_all', number: @all_posts.size), admin_communication_website_posts_path(website_id: @website)
 %>
 <%= osuny_panel t('communication.website.last_posts'),

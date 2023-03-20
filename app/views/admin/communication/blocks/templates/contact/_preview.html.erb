@@ -1,11 +1,11 @@
 <%
-$class = "block block-contact"
+class_name = "block block-contact"
 unless @block.title.blank?
-  $class += " block-with-title"
+  class_name += " block-with-title"
 end
 %>
 
-<section class="<%= $class %>">
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% unless @block.title.blank? && @block.template.description.blank? %>

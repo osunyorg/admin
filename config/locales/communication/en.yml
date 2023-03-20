@@ -113,6 +113,7 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
+        pinned: Pinned
         published: Published?
         published_at: Publication date
         slug: Slug

@@ -83,6 +83,8 @@ class Education::Program < ApplicationRecord
                                     :content,
                                     :results
 
+  has_summernote :presentation
+
   belongs_to :parent,
              class_name: 'Education::Program',
              optional: true

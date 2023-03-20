@@ -1,49 +1,60 @@
-<% if @block.data %>
+<%
+class_name = "block block-pages"
+unless @block.title.blank?
+  class_name += " block-with-title"
+end
+class_name += " block-pages--" + @block.template.layout
+%>
+<section class="<%= class_name %>" style="display: none;">
+  <div class="container">
+    <div class="block-content">
+      <% if @block.data %>
+        <% if @block.template.page %>
+          <%#= @block.template.page.slug %>
+        <% end %>
 
-<% if @block.template.page %>
-    <%= @block.template.page.slug %>
-  <% end %>
+        <% if @block.template.show_main_description %>
+          <p></p>
+        <% end %>
 
-  <% if @block.template.show_main_description %>
-    <p></p>
-  <% end %>
+        <% if @block.template.layout ===  "list" %>
+          
+          <ul>
+            <% @block.template.elements.each do |element| %>
+              <li>
+                <%#= element %>
+              </li>
+            <% end %>
+          </ul>
 
-  <% if @block.template.layout ===  "list" %>
-    
-    <ul>
-      <% @block.template.elements.each do |element| %>
-        <li>
-          <%= element %>
-        </li>
-      <% end %>
-    </ul>
+        <% elsif @block.template.layout ===  "cards" %>
 
-  <% elsif @block.template.layout ===  "cards" %>
+          <div class="cards">
+            <% @block.template.elements.each do |element| %>
+              <article class="card">
+                <%# <%= element %>
+                <% if @block.template.show_description %>
+                  <p><%#= element.summary %></p>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
 
-    <div class="cards">
-      <% @block.template.elements.each do |element| %>
-        <article class="card">
-          <%= element %>
-          <% if @block.template.show_description %>
-            <p><%#= element.summary %></p>
-          <% end %>
-        </article>
+        <% else %>
+
+          <div class="grid">
+            <% @block.template.elements.each do |element| %>
+              <article>
+                <%# <%= element %>
+                <% if @block.template.show_description %>
+                  <p><%#= element.summary %></p>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+        <% end %>
+
       <% end %>
     </div>
-
-  <% else %>
-
-    <div class="grid">
-      <% @block.template.elements.each do |element| %>
-        <article>
-          <%= element %>
-          <% if @block.template.show_description %>
-            <p><%#= element.summary %></p>
-          <% end %>
-        </article>
-      <% end %>
-    </div>
-
-  <% end %>
-  
-<% end %>
+  </div>
+</section>

@@ -9,7 +9,7 @@ class Extranet::Posts::PostsController < Extranet::Posts::ApplicationController
   end
 
   def show
-    @post = current_extranet.posts.find_by slug: params[:slug]
+    @post = current_extranet.posts.find_by! slug: params[:slug]
     breadcrumb
   end
 

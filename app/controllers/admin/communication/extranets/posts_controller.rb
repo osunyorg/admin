@@ -67,7 +67,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
     params.require(:communication_extranet_post)
     .permit(
       :title, :summary, :text,
-      :published, :published_at, :slug,
+      :published, :published_at, :pinned, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :author_id, :category_id
     )
