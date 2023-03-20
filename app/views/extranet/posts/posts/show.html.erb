@@ -2,9 +2,9 @@
 
 <% content_for :header_right do %>
   <% if @post.featured_image.attached? %>
-    <figure <% if !@post.featured_image_credit.blank? %>class="with-credit"<% end %>>
+    <figure <% if @post.featured_image_credit.present? %>class="with-credit"<% end %>>
       <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
-      <% if !@post.featured_image_credit.blank? %>
+      <% if @post.featured_image_credit.present? %>
         <figcaption tabindex="0">
             <%= sanitize @post.featured_image_credit %>
         </figcaption>
