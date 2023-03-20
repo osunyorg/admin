@@ -10,6 +10,7 @@
 #  longitude     :float
 #  name          :string
 #  phone         :string
+#  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

@@ -10,8 +10,14 @@
         <%= @school.zipcode %> <%= @school.city %><br>
         <%= @school.country %>
       </p>
-      <%= osuny_label Education::School.human_attribute_name('phone') %>
-      <p><%= @school.phone %></p>
+      <% if @school.phone.present? %>
+        <%= osuny_label Education::School.human_attribute_name('phone') %>
+        <p><%= @school.phone %></p>
+      <% end %>
+      <% if @school.url.present? %>
+        <%= osuny_label Education::School.human_attribute_name('url') %>
+        <p><%= link_to @school.url, @school.url, target: :_blank %></p>
+      <% end %>
     <% end %>
   </div>
 
