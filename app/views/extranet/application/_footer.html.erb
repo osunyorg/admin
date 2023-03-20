@@ -1,4 +1,7 @@
-<% hide_logo ||= false %>
+<% 
+hide_logo ||= false
+about = current_extranet.about
+%>
 
 <footer class="pt-5">
   <div class="container">
@@ -9,14 +12,17 @@
     <% end %>
     <div class="row justify-space-between">
       <div class="col-md-6">
-        <% if current_extranet.about.is_a?(Education::School) %>
+        <% if about.is_a?(Education::School) %>
           <address itemscope itemtype="https://schema.org/CollegeOrUniversity">
-            <span itemprop="name"><%= current_extranet.about.name %></span>
+            <span itemprop="name"><%= about.name %></span>
             <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-              <span itemprop="streetAddress"><%= current_extranet.about.address %></span><br>
-              <span itemprop="postalCode"><%= current_extranet.about.zipcode %></span>
-              <span itemprop="addressLocality"><%= current_extranet.about.city %></span><br>
+              <span itemprop="streetAddress"><%= about.address %></span><br>
+              <span itemprop="postalCode"><%= about.zipcode %></span>
+              <span itemprop="addressLocality"><%= about.city %></span><br>
             </div>
+            <% if about.url.present? %>
+              <a href="<%= social_website_to_url about.url %>" target="_blank" property="url"><%= social_website_to_s about.url %></a>
+            <% end %>
           </address>
         <% elsif current_extranet.about.is_a?(Education::Program) %>
           <div itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
