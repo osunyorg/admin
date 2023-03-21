@@ -1,24 +1,36 @@
 <% content_for :title, @page %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-
   <div class="row">
-    <div class="col-md-8">
-      <%= render 'admin/application/summary/show', about: @page %>
-      <%= render 'admin/communication/blocks/list', about: @page %>
-      <%= render 'admin/application/dependencies',
-                  git_dependencies: @page.git_dependencies(@page.website),
-                  active_storage_blobs: @page.active_storage_blobs %>
+    <div class="col-lg-7">
+      <%= osuny_panel Communication::Website::Page.human_attribute_name(:title) do %>
+        <p class="lead"><%= @page.title %></p>
+      <% end %>
     </div>
-    <div class="col-md-4">
-      <%= render 'admin/application/a11y/widget', about: @page %>
-      <%= render 'admin/application/i18n/widget', about: @page %>
-      <%= render 'admin/communication/websites/pages/show/metadata' %>
+    <div class="offset-lg-1 col-lg-4">
       <%= render 'admin/application/featured_image/show', about: @page %>
+    </div>
+  </div>
+  <hr class="mb-5">
+  <%= render 'admin/application/a11y/widget', about: @page, horizontal: true %>
+  <hr class="mb-5">
+  <div class="row">
+    <div class="col-lg-4">
+      <%= render 'admin/communication/websites/pages/show/metadata' %>
+      <%= render 'admin/application/i18n/widget', about: @page %>
+    </div>
+    <div class="col-lg-8">
+      <%= render 'admin/application/summary/show', about: @page %>
       <%= render 'admin/application/meta_description/show', about: @page %>
     </div>
   </div>
+  <hr class="mb-5">
+  <%= render 'admin/communication/blocks/list', about: @page %>
 <% end %>
+
+<%= render 'admin/application/dependencies',
+            git_dependencies: @page.git_dependencies(@page.website),
+            active_storage_blobs: @page.active_storage_blobs %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @page if @page.is_regular_page? %>

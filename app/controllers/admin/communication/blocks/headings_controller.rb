@@ -3,21 +3,8 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
                               through: :current_university,
                               through_association: :communication_block_headings
 
-  def reorder
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      @heading = current_university.communication_block_headings.find(id)
-      @heading.update position: index + 1
-    end
-    @heading.about.sync_with_git
-  end
-
   def new
     @heading.about = Polymorphic.find params, :about
-    breadcrumb
-  end
-
-  def show
     breadcrumb
   end
 

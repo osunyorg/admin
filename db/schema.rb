@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_082433) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_21_213542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_082433) do
     t.string "about_type", null: false
     t.uuid "about_id", null: false
     t.string "title"
-    t.integer "level", default: 1
+    t.integer "level", default: 2
     t.uuid "parent_id"
     t.integer "position"
     t.string "slug"

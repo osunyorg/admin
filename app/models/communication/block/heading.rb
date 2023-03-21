@@ -35,11 +35,23 @@ class Communication::Block::Heading < ApplicationRecord
   has_many    :children,
               class_name: 'Communication::Block::Heading',
               foreign_key: :parent_id
+  has_many    :blocks
+
+  DEFAULT_LEVEL = 2
   
-  scope :root, -> { where(level: 1) }
+  scope :root, -> { where(level: DEFAULT_LEVEL) }
   default_scope { order(:position) }
+
+  before_validation :compute_level
 
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def compute_level
+    self.level = parent ? parent.level + 1
+                        : DEFAULT_LEVEL
   end
 end

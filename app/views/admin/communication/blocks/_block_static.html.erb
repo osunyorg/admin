@@ -1,0 +1,11 @@
+<%
+template_path = "admin/communication/blocks/templates/#{@block.template_kind}/static"
+should_render_data = @block.data && @block.data.present?
+%>
+  - kind: block
+    template: <%= @block.template_kind %>
+    position: <%= @block.position %>
+    data:
+<%= render  template_path, 
+            block: @block, 
+            about: @block.about if should_render_data %>

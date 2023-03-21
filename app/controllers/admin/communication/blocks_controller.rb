@@ -5,9 +5,23 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def reorder
     ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      @block = current_university.communication_blocks.find(id)
-      @block.update position: index + 1
+    ids.each.with_index do |identifier, index|
+      parts = identifier.split('_')
+      kind = parts.first
+      id = parts.last
+      if kind == 'block'
+        @block = current_university.communication_blocks.find(id)
+        @block.heading = @heading
+        @block.position = index + 1
+        @block.save
+        @previous = nil
+      elsif kind == 'heading'
+        @heading = current_university.communication_block_headings.find(id)
+        @heading.position = index + 1
+        @heading.parent = @previous
+        @heading.save
+        @previous = @heading
+      end
     end
     @block.about.sync_with_git
   end

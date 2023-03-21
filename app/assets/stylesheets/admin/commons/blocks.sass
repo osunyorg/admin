@@ -1,7 +1,13 @@
 .blocks
     &__list
+        &__element
+            &:hover
+                .blocks__list__handle
+                    opacity: 1
         &__handle
+            opacity: 0
             width: 20px
+            transition: opacity 0.25s ease
         &__image
             width: 170px
             img

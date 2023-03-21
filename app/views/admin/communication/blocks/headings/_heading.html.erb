@@ -1,0 +1,12 @@
+<div data-id="heading_<%= heading.id %>" class="blocks__list__element mt-5">
+  <div style="padding-left: <%= (heading.level - 1) * 48 %>px">
+    <%= link_to heading, edit_admin_communication_heading_path(heading), class: 'h4' %>
+    <span class="ps-0 blocks__list__handle"><i class="<%= Icon::SORT %> handle"></i></span>
+  </div>
+</div>
+<% heading.blocks.each do |block| %>
+  <%= render 'admin/communication/blocks/block', block: block %>
+<% end %>
+<% heading.children.each do |child| %>
+  <%= render 'admin/communication/blocks/headings/heading', heading: child %>
+<% end %>

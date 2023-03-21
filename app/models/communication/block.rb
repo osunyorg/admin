@@ -36,6 +36,7 @@ class Communication::Block < ApplicationRecord
   FILE_MAX_SIZE = 100.megabytes
 
   belongs_to :about, polymorphic: true
+  belongs_to :heading, optional: true
 
   # Used to purge images when unattaching them
   # template_blobs would be a better name, because there are files
@@ -70,6 +71,7 @@ class Communication::Block < ApplicationRecord
   }
 
   scope :published, -> { where(published: true) }
+  scope :with_no_heading, -> { where(heading: nil) }
 
   before_save :attach_template_blobs
 

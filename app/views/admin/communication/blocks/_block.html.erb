@@ -1,0 +1,16 @@
+<div class="row" data-id="block_<%= block.id %>">
+  <div class="offset-lg-4 col-lg-8">
+    <article class="blocks__list__element mt-4 <%= 'draft' unless block.published? %>">
+      <div class="float-end">
+        <%= duplicate_link block %>
+        <%= edit_link block %>
+      </div>
+      <span class="small text-muted"><%= block.template_kind_i18n  %></span>
+      <span class="blocks__list__handle"><i class="<%= Icon::SORT %> handle"></i></span>
+      <div class="blocks__list__name">
+        <%= block.to_s.truncate(50) %><br>
+        <%= render 'admin/application/a11y/status', about: block unless block.accessible? %>
+      </div>
+    </article>
+  </div>
+</div>
