@@ -55,9 +55,11 @@ en:
         all: All posts
     attributes:
       communication/block:
-        name: Name
+        title: Title
         template: Kind of block
         published: Published?
+      communication/block/heading:
+        title: Title
       communication/extranet:
         about: About
         about_: Independent extranet
@@ -247,6 +249,8 @@ en:
           time_slot:
             from: From
             to: to
+        headings:
+          add: Add a title
         templates:
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.

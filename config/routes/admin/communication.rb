@@ -60,6 +60,7 @@ namespace :communication do
   end
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
+      resources :headings, controller: 'blocks/headings'
       post :reorder
     end
     member do

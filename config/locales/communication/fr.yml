@@ -58,6 +58,8 @@ fr:
         title: Titre
         template: Type de bloc
         published: Publié ?
+      communication/block/heading:
+        title: Titre
       communication/extranet:
         about: Sujet de l'extranet
         about_: Extranet indépendant
@@ -247,6 +249,8 @@ fr:
           time_slot:
             from: De
             to: à
+        headings:
+          add: Ajouter un titre
         templates:
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.

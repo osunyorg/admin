@@ -1,0 +1,14 @@
+<%
+url = heading.persisted?  ? admin_communication_heading_path(heading)
+                          : admin_communication_headings_path
+%>
+<%= simple_form_for [:admin, heading], url: url do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.input :title %>
+  <%= f.input :about_type, as: :hidden %>
+  <%= f.input :about_id, as: :hidden %>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

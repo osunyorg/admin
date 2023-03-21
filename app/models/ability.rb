@@ -43,6 +43,7 @@ class Ability
     can :manage, University::Person::Involvement, person_id: @user.person&.id
     can :read, University::Person::Involvement, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
     can :manage, Research::Journal
   end
 
@@ -57,7 +58,9 @@ class Ability
     can :read, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: managed_programs_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Education::Program', about_id: managed_programs_ids
     can :create, Communication::Block
+    can :create, Communication::Block::Heading
     can :manage, Research::Journal
   end
 
@@ -75,8 +78,11 @@ class Ability
     can :create, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, University::Organization, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
     can :create, Communication::Block
+    can :create, Communication::Block::Heading
     can :manage, Research::Journal
   end
 
@@ -90,7 +96,9 @@ class Ability
     can :manage, University::Organization, university_id: @user.university_id
     can :manage, University::Organization::Category, university_id: @user.university_id
     can :manage, Communication::Block, university_id: @user.university_id
+    can :manage, Communication::Block::Heading, university_id: @user.university_id
     can :create, Communication::Block
+    can :create, Communication::Block::Heading
     can :read, Communication::Website, university_id: @user.university_id
     can :analytics, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id

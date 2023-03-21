@@ -3,8 +3,16 @@ action = ''
 action += link_to t('admin.communication.blocks.add'),
                   new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
                   class: button_classes if can? :create, Communication::Block
+action += link_to t('admin.communication.blocks.headings.add'),
+                  new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
+                  class: button_classes('ms-2') if can? :create, Communication::Block::Heading
 %>
 <%= osuny_panel Communication::Block.model_name.human(count: 2), action: action do %>
+  <% if about.headings.any? %>
+    <% about.headings.root.each do |heading| %>
+      <%= link_to heading, edit_admin_communication_heading_path(heading) %>
+    <% end %>
+  <% end %>
   <% if about.blocks.any? %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">

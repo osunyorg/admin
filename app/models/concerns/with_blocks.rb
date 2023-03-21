@@ -3,6 +3,7 @@ module WithBlocks
 
   included do
     has_many :blocks, as: :about, class_name: 'Communication::Block', dependent: :destroy
+    has_many :headings, as: :about, class_name: 'Communication::Block::Heading', dependent: :destroy
   end
 
   def git_block_dependencies
