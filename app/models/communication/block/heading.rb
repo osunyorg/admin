@@ -35,7 +35,8 @@ class Communication::Block::Heading < ApplicationRecord
   has_many    :children,
               class_name: 'Communication::Block::Heading',
               foreign_key: :parent_id
-  has_many    :blocks
+  has_many    :blocks,
+              dependent: :nullify
 
   DEFAULT_LEVEL = 2
   
