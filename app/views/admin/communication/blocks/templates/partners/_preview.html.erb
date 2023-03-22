@@ -1,11 +1,10 @@
 <%
-  $class = "block block-partners"
+  class_name = "block block-partners"
   unless @block.title.blank?
-    $class += " block-with-title"
+    class_name += " block-with-title"
   end
-  $class += " block-partners--" + @block.template.layout
+  class_name += " block-partners--" + @block.template.layout
 %>
-
 
 <section class="<%= class_name %>">
   <div class="container">
@@ -42,11 +41,10 @@
             </article>
           <% end %>
         </div>
-
       <% else %>
         <div class="map" id="map">
           <% @block.template.elements.each do |element| %>
-            <article class="organization">
+            <article class="organization" data-latitude="<%= element.organization.latitude %>" data-longitude="<%= element.organization.longitude %>">
               <h3>
                 <% if element.best_url %>
                   <a href="<%= element.best_url %>" target="_blank">
@@ -63,6 +61,6 @@
           <% end %>
         </div>
       <% end %>
-      
+    </div>
   </div>
 </section>
