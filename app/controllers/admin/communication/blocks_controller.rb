@@ -42,6 +42,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def create
     @block.university = current_university
+    headings = @block.about.headings
+    @block.heading = headings.last if headings.any?
     if @block.save
       # No need to sync as content is empty
       redirect_to [:edit, :admin, @block],

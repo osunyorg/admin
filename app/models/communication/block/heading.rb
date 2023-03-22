@@ -41,7 +41,8 @@ class Communication::Block::Heading < ApplicationRecord
   DEFAULT_LEVEL = 2
   
   scope :root, -> { where(level: DEFAULT_LEVEL) }
-  default_scope { order(:position) }
+  scope :ordered, -> { order(:position) }
+  default_scope { ordered }
 
   before_validation :compute_level
 

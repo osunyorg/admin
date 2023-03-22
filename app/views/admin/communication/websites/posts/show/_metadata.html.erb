@@ -1,0 +1,15 @@
+<%= osuny_label t('metadata') %><br>
+<% if @post.published %>
+  Publié le <%= l @post.published_at.to_date %>
+  <% if @post.pinned %>
+    et mis en avant
+  <% end %>
+<% else %>
+  Brouillon
+<% end %>
+<% if @post.author %>
+  <br>par <%= @post.author %>
+<% end %>
+<% if @post.categories.any? %>
+  <br>dans <%= @post.categories.collect(&:to_s).join(', ') %>
+<% end %>

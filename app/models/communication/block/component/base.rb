@@ -1,5 +1,5 @@
 class Communication::Block::Component::Base
-  include Accessible
+  include WithAccessibility
 
   attr_reader :property, :template
 

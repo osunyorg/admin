@@ -1,4 +1,4 @@
-module Accessible
+module WithAccessibility
   extend ActiveSupport::Concern
 
   def accessible?

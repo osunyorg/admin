@@ -39,6 +39,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include Sanitizable
+  include WithAccessibility
   include WithBlobs
   include WithBlocks
   include WithDuplication
@@ -155,6 +156,10 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
 
   def slug_unavailable?(slug)
     self.class.unscoped

@@ -8,12 +8,14 @@ url = heading.persisted?  ? admin_communication_heading_path(heading)
   <%= f.input :title %>
   <%= f.input :about_type, as: :hidden %>
   <%= f.input :about_id, as: :hidden %>
-  <% content_for :action_bar_left do %>
-    <%= link_to t('delete'),
-                admin_communication_heading_path(heading), 
-                method: :delete,
-                data: { confirm: t('please_confirm') },
-                class: button_classes_danger if can? :destroy, heading %>
+  <% if heading.persisted?%>
+    <% content_for :action_bar_left do %>
+      <%= link_to t('delete'),
+                  admin_communication_heading_path(heading), 
+                  method: :delete,
+                  data: { confirm: t('please_confirm') },
+                  class: button_classes_danger if can? :destroy, heading %>
+    <% end %>
   <% end %>
   <% content_for :action_bar_right do %>
     <%= submit f %>

@@ -6,3 +6,7 @@
 <% @heading.blocks.published.ordered.each do |block| @block = block %>
 <%= render 'admin/communication/blocks/block_static' %>
 <% end %>
+<% children = @heading.children %>
+<% children.ordered.each do |heading| @heading = heading %>
+<%= render 'admin/communication/blocks/headings/heading_static' %>
+<% end %>

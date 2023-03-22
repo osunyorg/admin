@@ -27,8 +27,8 @@
 #  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
-  include Accessible
   include Sanitizable
+  include WithAccessibility
   include WithUniversity
   include WithPosition
 

@@ -46,8 +46,8 @@
 class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path)
 
-  include Accessible
   include Sanitizable
+  include WithAccessibility
   include WithBlobs
   include WithBlocks
   include WithDuplication
