@@ -1,48 +1,6 @@
-<%
-class_name = "block block-call_to_action"
-unless @block.title.blank?
-  class_name += " block-with-title"
-end
-
-image_class = "call_to_action--with" + (@block.template.image.empty? ? "out" : "") + "-image"
-
-%>
-
-<section class="<%= class_name %>">
-  <div class="container">
-    <div class="block-content">
-      <div class="call_to_action <%= image_class %>">
-        <div>
-          <% unless @block.title.blank? %>
-            <h2><%= @block.title %></h2>
-          <% end %>
-          <% if @block.template.text %>
-            <div class="description">
-              <%= block_component_preview :text %>
-            </div>
-          <% end %>
-          <% if @block.template.elements %>
-            <div class="actions" <% if @block.template.elements.count > 1 %>role="group"<% end %>>
-              <% @block.template.elements.each do |element| %>
-                <% if element.title %>
-                  <a href="<%= block_component_preview :url, template: element %>"
-                    <% if element.target_blank %>
-                      title="<%= block_component_preview :title, template: element %>"
-                      target="_blank"
-                    <% else %>
-                      title="<%= block_component_preview :title, template: element %>"
-                    <% end %>
-                    ><%= block_component_preview :title, template: element %></a>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <% component = @block.template.image_component %>
-        <% if component.blob %>
-          <%= kamifusen_tag component.blob, width: 600, class: 'img-fluid mb-1', alt: @block.template.alt %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</section>
+<p class="mb-1"><%= strip_tags(block_component_preview :text).truncate(250) %></p>
+<% @template.elements.each_with_index do |element, index| %>
+  <a class="btn <%= index.zero? ? 'btn-primary' : 'btn-light' %>">
+    <%= block_component_preview :title, template: element %>
+  </a>
+<% end %>

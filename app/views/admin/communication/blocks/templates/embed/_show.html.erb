@@ -1,0 +1,34 @@
+<%
+  class_name = "block block-embed" 
+  unless @block.title.blank?
+    class_name += " block-with-title"
+  end
+%>
+
+<section class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless @block.title.blank? %>
+        <div class="top">
+          <h2><%= @block.title %></h2>
+        </div>
+      <% end %>
+
+      <%= block_component_preview :code %>
+
+      <% unless @block.template.transcription.blank? %>
+        <div class="transcription">
+          <details>
+            <summary>Transcription</summary>
+            <p>
+              <%= block_component_preview :transcription %>
+            </p>
+          </details>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
+

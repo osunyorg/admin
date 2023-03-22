@@ -1,34 +1,5 @@
-<%
-  class_name = "block block-definitions"
-  unless @block.title.blank?
-    class_name += " block-with-title"
-  end
-%>
-
-<section class="<%= class_name %>">
-  <div class="container">
-    <div class="block-content">
-      <% unless @block.title.blank? && @block.template.description.blank? %>
-        <div class="top">
-          <% unless @block.title.blank? %>
-            <h2><%= @block.title %></h2>
-          <% end %>
-          <% unless @block.template.description.blank? %>
-            <div class="description">
-              <p><%= block_component_preview :description %></p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-      <div class="definitions">
-        <% @block.template.elements.each do |element| %>
-          <details itemscope itemtype="https://schema.org/DefinedTerm">
-            <summary itemprop="name">
-              <%= block_component_preview :title, template: element %>
-            </summary>
-            <p itemprop="description"><%= block_component_preview :description, template: element %></p>
-          </details>
-        <% end %>
-    </div>
-  </div>
-</section>
+<p>
+  <%= @block.template.elements.first(2).map { |element|
+    strip_tags(block_component_preview :title, template: element).strip
+  }.join(', ') %>...
+</p>

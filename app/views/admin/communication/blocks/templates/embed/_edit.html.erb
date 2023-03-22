@@ -3,13 +3,9 @@
     <p class="text-danger lead"><%= t '.warning' %></p>
   </div>
 </div>
-<div class="row pure__row--small">
-  <div class="col-md-6">
-    <%= block_component_edit :code %>
-  </div>
-  <div class="col-md-6">
-    <%= block_component_edit :transcription,
-          label: t('admin.communication.blocks.components.text.transcription.label'),
-          placeholder: t('admin.communication.blocks.components.text.transcription.placeholder') %>
-  </div>
+<div class="mb-4">
+  <%= block_component_edit :code %>
 </div>
+<%= block_component_edit :transcription,
+      label: t('admin.communication.blocks.components.text.transcription.label'),
+      placeholder: t('admin.communication.blocks.components.text.transcription.placeholder') %>
