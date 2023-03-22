@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-xl-8">
     <%= render 'admin/application/summary/show', about: @diploma %>
-    <%= render 'admin/communication/blocks/list', about: @diploma %>
+    <%= render 'admin/communication/blocks/index_edit', about: @diploma %>
     <%= osuny_panel Education::Diploma.human_attribute_name('programs') do %>
       <%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
     <% end %>

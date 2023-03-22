@@ -1,7 +1,15 @@
 <div data-id="heading_<%= heading.id %>" class="blocks__list__element mt-5">
   <div style="padding-left: <%= (heading.level - Communication::Block::Heading::DEFAULT_LEVEL) * 48 %>px">
-    <%= link_to heading, edit_admin_communication_heading_path(heading), class: 'h4' %>
-    <span class="ps-0 blocks__list__handle"><i class="<%= Icon::SORT %> handle"></i></span>
+    <span class="h4"><%= heading %></span>
+    <%= link_to t('edit'), 
+                edit_admin_communication_heading_path(heading), 
+                class: 'action ms-2' %>
+    <span class="blocks__list__handle blocks__list__element--hover">
+      <span class="handle">
+        <span class="small"><%= t 'organize' %></span>
+        <i class="<%= Icon::SORT %>"></i>
+      </span>
+    </span>
   </div>
 </div>
 <% heading.blocks.each do |block| %>

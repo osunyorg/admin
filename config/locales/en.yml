@@ -250,6 +250,7 @@ en:
     sign_out: Log out
   metadata: Metadata
   open: Open
+  organize: Organize
   please_confirm: Are you sure?
   please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
   preview:

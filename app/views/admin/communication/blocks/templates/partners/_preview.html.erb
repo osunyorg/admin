@@ -1,7 +1,7 @@
 <% @block.template.elements.each do |element| %>
   <span class="me-2">
     <% if element.best_logo %>
-      <%= image_tag element.best_logo, width: 90 %>
+      <%= image_tag element.best_logo, height: 90, class: 'bg-light p-2' %>
     <% else %>
       <%= element.best_name %>
     <% end %>

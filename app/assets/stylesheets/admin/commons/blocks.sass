@@ -1,13 +1,18 @@
 .blocks
     &__list
         &__element
+            &--hover
+                opacity: 0
+                transition: opacity 0.25s ease
             &:hover
-                .blocks__list__handle
+                .blocks__list__element--hover
                     opacity: 1
         &__handle
-            opacity: 0
-            width: 20px
-            transition: opacity 0.25s ease
+            margin-left: 10px
+            .fas // Icone
+                font-size: px2rem(13)
+            .handle
+                margin-right: 0
         &__image
             width: 170px
             img

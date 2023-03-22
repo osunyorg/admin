@@ -16,5 +16,5 @@
 <%= link_to @post.category, posts_category_path(slug: @post.category.slug) if @post.category %>
 
 </main>
-<%= render 'admin/communication/blocks/show', about: @post %>
+<%= render 'admin/communication/blocks/index_show', about: @post %>
 <main>

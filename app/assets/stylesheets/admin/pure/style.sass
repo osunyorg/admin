@@ -60,11 +60,20 @@ p
 a
     text-decoration: none
     text-decoration-thickness: 1px
-    text-underline-offset: 5px
+    text-underline-offset: 4px
     transition: text-decoration 0.5s, color 0.5s
-
     &:hover
         color: darken($primary, 10)
+
+.action
+    text-decoration: underline
+    text-decoration-thickness: 1px
+    text-decoration-color: rgba(0, 0, 0, 0.2)
+    text-underline-offset: 4px
+    transition: text-decoration 0.5s
+    font-size: px2rem(14)
+    &:hover
+        text-decoration-color: black
 
 .form-control:valid,
 .form-control.is-valid,

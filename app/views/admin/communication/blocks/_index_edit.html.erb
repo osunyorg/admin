@@ -11,12 +11,12 @@
     <div class="col-lg-4">
       <%= link_to t('admin.communication.blocks.headings.add'),
                   new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
-                  class: 'p-5 d-block bg-light text-center h4' if can? :create, Communication::Block::Heading%>
+                  class: 'py-5 px-2 d-block bg-light text-center h4' if can? :create, Communication::Block::Heading%>
     </div>
     <div class="col-lg-8">
       <%= link_to t('admin.communication.blocks.add'),
                   new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                  class: 'p-5 d-block bg-light text-center h4' if can? :create, Communication::Block%>
+                  class: 'py-5 px-2 d-block bg-light text-center h4' if can? :create, Communication::Block%>
     </div>
   </div>
 <% end %>
