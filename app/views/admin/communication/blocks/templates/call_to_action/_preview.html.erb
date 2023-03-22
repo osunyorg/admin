@@ -1,6 +1,6 @@
 <p class="mb-1"><%= strip_tags(block_component_preview :text).truncate(250) %></p>
 <% @template.elements.each_with_index do |element, index| %>
-  <a class="btn <%= index.zero? ? 'btn-primary' : 'btn-light' %>">
+  <a class="btn <%= 'btn-dark' if index.zero? %>">
     <%= block_component_preview :title, template: element %>
   </a>
 <% end %>
