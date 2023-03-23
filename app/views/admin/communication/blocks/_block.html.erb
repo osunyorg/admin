@@ -3,12 +3,6 @@
     <article class="blocks__list__element mt-5 <%= 'draft' unless block.published? %>">
       <div class="mb-1">
         <div class="float-end">
-          <span class="blocks__list__handle blocks__list__element--hover">
-            <span class="handle">
-              <span class="small"><%= t 'organize' %></span>
-              <i class="<%= Icon::SORT %>"></i>
-            </span>
-          </span>
           <span class="blocks__list__element--hover">
             <%= destroy_link block, html_classes: 'action text-danger ms-2' %>
             <%= duplicate_link block, html_classes: 'action ms-2' %>
@@ -16,10 +10,16 @@
           <%= edit_link block, html_classes: 'action ms-2' %>
         </div>
         <span class="small text-muted mb-2"><%= block.template_kind_i18n  %></span>
+        <span class="blocks__list__handle blocks__list__element--hover">
+          <span class="handle">
+            <span class="small"><%= t 'organize' %></span>
+            <i class="<%= Icon::SORT %>"></i>
+          </span>
+        </span>
       </div>
       <div class="blocks__list__preview">
         <% 
-        @block = block 
+        @block = block
         @template = @block.template
         %>
         <%= render "admin/communication/blocks/templates/#{@block.template_kind}/preview" %>
