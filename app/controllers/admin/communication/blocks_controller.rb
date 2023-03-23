@@ -84,13 +84,19 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   rescue
   end
 
+  def journal_id
+    params[:journal_id] || @block.about&.journal.id
+  rescue
+  end
+
   def about_path
     # La formation ou la page concernée
     path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
     path_method_options = { 
       id: @block.about_id, 
       website_id: website_id,
-      extranet_id: extranet_id 
+      extranet_id: extranet_id,
+      journal_id: journal_id
     }
     path_method_options[:lang] = @block.about.language.iso_code if @block.about.respond_to?(:language)
     public_send path_method, **path_method_options

@@ -1,16 +1,36 @@
-<% content_for :title, "#{University::Organization.model_name.human(count: 2)} (#{@organizations.total_count})" %>
+<% content_for :title, University::Organization.model_name.human(count: 2) %>
 
-<%= render 'filters', current_path: admin_university_organizations_path, filters: @filters if @filters.any?  %>
+<%
+action = ''
+action += link_to t('create'),
+                  new_admin_university_organization_path(website_id: @website),
+                  class: button_classes if can?(:create, University::Organization)
+subtitle = t('admin.elements', count: @organizations.total_count)
+%>
+<%= osuny_panel University::Organization.model_name.human(count: 2), subtitle: subtitle, action: action do %>
+  <%= render 'filters', current_path: admin_university_organizations_path, filters: @filters if @filters.any?  %>
 
-<%= render 'admin/university/organizations/list', organizations: @organizations %>
-<%= paginate @organizations, theme: 'bootstrap-5' %>
+  <%= render 'admin/university/organizations/list', organizations: @organizations %>
+  <%= paginate @organizations, theme: 'bootstrap-5' %>
+<% end %>
+
+<%
+action = ''
+action += link_to t('create'),
+                  new_admin_university_organization_category_path(website_id: @website),
+                  class: button_classes if can?(:create, University::Organization::Category)
+subtitle = t('admin.elements', count: @categories.total_count)
+%>
+<%= osuny_panel University::Organization::Category.model_name.human(count: 2), subtitle: subtitle, action: action do %>
+  <%= render 'admin/university/organizations/categories/list', categories: @categories %>
+  <%= paginate @categories, theme: 'bootstrap-5', param: :categories_page %>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('import_btn'),
               new_admin_university_organizations_import_path,
               class: button_classes if can? :create, University::Organization %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link University::Organization %>
+  <%= link_to t('export'),
+              request.params.merge(format: "xlsx"),
+              class: button_classes %>
 <% end %>

@@ -72,7 +72,7 @@
       <% end %>
     </div>
     <div class="col-xl-4">
-      <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
+      <%= osuny_panel t('metadata') do %>
         <%= f.input :slug,
                     as: :string,
                     input_html: organization.persisted? ? {} : {
@@ -81,7 +81,14 @@
                     } %>
         <%= f.input :active %>
       <% end %>
-      <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
+      <% if current_university.organization_categories.any? %>
+        <%= osuny_panel University::Organization.human_attribute_name('categories') do %>
+          <%= f.association :categories,
+                            as: :check_boxes,
+                            collection: current_university.organization_categories %>
+        <% end %>
+      <% end %>
+      <%= osuny_panel University::Organization.human_attribute_name('logos') do %>
         <%= f.input :logo,
                     as: :single_deletable_file,
                     input_html: { accept: '.jpg,.jpeg,.png,.svg' },

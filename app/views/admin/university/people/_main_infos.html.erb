@@ -80,6 +80,15 @@
           <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
         <% end %>
     <% end %>
+    <% if person.categories.any? %>
+      <%= osuny_panel University::Person.human_attribute_name('categories') do %>
+        <ul class="list-unstyled">
+          <% person.categories.ordered.each do |category| %>
+            <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
     <%= render 'admin/application/i18n/widget', about: person %>
     <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
       <% if person.best_picture_inherits_from_user? %>

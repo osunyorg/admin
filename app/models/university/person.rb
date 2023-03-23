@@ -82,6 +82,11 @@ class University::Person < ApplicationRecord
 
   belongs_to :user, optional: true
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'University::Person::Category',
+                          join_table: :university_people_categories,
+                          foreign_key: :person_id
+
   has_and_belongs_to_many :research_journal_papers,
                           class_name: 'Research::Journal::Paper',
                           join_table: :research_journal_papers_researchers,
@@ -136,6 +141,7 @@ class University::Person < ApplicationRecord
   scope :researchers,     -> { where(is_researcher: true) }
   scope :alumni,          -> { where(is_alumnus: true) }
   scope :for_role, -> (role) { where("is_#{role}": true) }
+  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
   scope :for_program, -> (program_id) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
       .where(education_programs: { id: program_id })

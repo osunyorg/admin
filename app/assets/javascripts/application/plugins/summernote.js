@@ -1,4 +1,4 @@
-/*global $, SummernoteAttachmentUpload */
+/*global $ */
 $(function () {
     'use strict';
 
@@ -37,11 +37,6 @@ $(function () {
 
 
     configs['full'] = {
-        popover: {
-            image: [
-                ['remove', ['removeMedia']]
-            ]
-        },
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'italic']],
@@ -60,31 +55,11 @@ $(function () {
             'h4'
         ],
         followingToolbar: true,
-        disableDragAndDrop: true,
-        callbacks: {
-            onImageUpload: function (files) {
-                var attachmentUpload = new SummernoteAttachmentUpload(this, files[0]);
-                attachmentUpload.start();
-            },
-            onMediaDelete: function (_, $editable) {
-                $.summernote.rails.cleanEmptyAttachments($editable);
-            },
-            onKeyup: function (e) {
-                var $editable = $(e.currentTarget);
-                if (e.keyCode === 8) {
-                    $.summernote.rails.cleanEmptyAttachments($editable);
-                }
-            }
-        }
+        disableDragAndDrop: true
     };
 
 
     configs['default'] = {
-        popover: {
-            image: [
-                ['remove', ['removeMedia']]
-            ]
-        },
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'italic']],
@@ -103,11 +78,6 @@ $(function () {
         followingToolbar: true,
         disableDragAndDrop: true
     };
-
-    $.extend($.summernote.lang['en-US'].image, {
-        dragImageHere: 'Drag file here',
-        dropImage: 'Drop file'
-    });
 
     $('[data-provider="summernote"]').each(function () {
         var config = $(this).attr('data-summernote-config'),

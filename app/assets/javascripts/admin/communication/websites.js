@@ -4,8 +4,8 @@ window.osuny.communication.websites = {
         'use strict';
         this.languagesCheckboxes = document.querySelectorAll('.js-languages input[type="checkbox"]');
         this.defaultLanguageSelect = document.querySelector('.js-default-language');
-        this.defaultLanguageOptions = this.defaultLanguageSelect.querySelectorAll('option');
         if (this.defaultLanguageSelect) {
+            this.defaultLanguageOptions = this.defaultLanguageSelect.querySelectorAll('option');
             this.initEvents();
             this.onChangeCheckbox();
         }

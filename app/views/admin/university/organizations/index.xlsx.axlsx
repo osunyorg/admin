@@ -14,10 +14,12 @@ wb.add_worksheet(name: "index") do |sheet|
     University::Organization.human_attribute_name('url'),
     University::Organization.human_attribute_name('email'),
     University::Organization.human_attribute_name('linkedin'),
-    University::Organization.human_attribute_name('twitter')
+    University::Organization.human_attribute_name('twitter'),
+    University::Organization.human_attribute_name('categories')
     ]
 
   types = [
+    :string,
     :string,
     :string,
     :string,
@@ -52,7 +54,8 @@ wb.add_worksheet(name: "index") do |sheet|
       organization.url,
       organization.email,
       organization.linkedin,
-      organization.twitter.present? ? "@#{organization.twitter}" : ''
+      organization.twitter.present? ? "@#{organization.twitter}" : '',
+      organization.categories.join(', ')
     ]
 
     sheet.add_row infos, types: types

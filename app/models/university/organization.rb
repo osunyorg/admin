@@ -54,6 +54,10 @@ class University::Organization < ApplicationRecord
 
   has_summernote :text
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'University::Organization::Category',
+                          join_table: :university_organizations_categories,
+                          foreign_key: :organization_id
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
@@ -70,6 +74,7 @@ class University::Organization < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :for_kind, -> (kind) { where(kind: kind) }
+  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
   scope :for_search_term, -> (term) {
     where("
       unaccent(university_organizations.address) ILIKE unaccent(:term) OR

@@ -6,4 +6,4 @@ json.results @search.photos do |photo|
   json.credit "Photo by <a href=\"#{photo.user.url}\">#{photo.user.name}</a> on <a href=\"https://www.pexels.com\">Pexels</a>"
   json.thumb photo.src['large']
   json.preview photo.src['large2x']
-end
+end if @search

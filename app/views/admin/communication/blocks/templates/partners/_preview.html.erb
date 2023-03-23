@@ -23,7 +23,7 @@
       <% end %>
 
       <% if @block.template.layout == "grid" %>
-        <div class="organizations">
+        <div class="organizations grid">
           <% @block.template.elements.each do |element| %>
             <article class="organization">
               <h3>
@@ -42,7 +42,7 @@
           <% end %>
         </div>
       <% else %>
-        <div class="map" id="map">
+        <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
           <% @block.template.elements.each do |element| %>
             <article class="organization" data-latitude="<%= element.organization.latitude %>" data-longitude="<%= element.organization.longitude %>">
               <h3>
@@ -64,3 +64,4 @@
     </div>
   </div>
 </section>
+

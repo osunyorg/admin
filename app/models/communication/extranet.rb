@@ -52,6 +52,11 @@ class Communication::Extranet < ApplicationRecord
   include WithStyle
   include WithUniversity
 
+  has_summernote :home_sentence
+  has_summernote :terms
+  has_summernote :privacy_policy
+  has_summernote :cookies_policy
+
   has_one_attached_deletable :logo
   has_one_attached_deletable :favicon do |attachable|
     attachable.variant :thumb, resize_to_limit: [228, 228]
@@ -94,7 +99,13 @@ class Communication::Extranet < ApplicationRecord
   end
 
   def users
-    university.users.where(person: alumni)
+    if feature_alumni?
+      university.users.where(person: alumni)
+    elsif feature_contacts?
+      university.users.where(person: connected_people)
+    else
+      university.users.none
+    end
   end
 
   def cohorts

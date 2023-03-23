@@ -4,11 +4,23 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                               through_association: :organizations
 
   has_scope :for_search_term
+  has_scope :for_category
   has_scope :for_kind
 
   def index
-    @organizations = apply_scopes(@organizations).ordered.page(params[:page])
-    breadcrumb
+    @organizations = apply_scopes(@organizations).ordered
+
+    respond_to do |format|
+      format.html {
+        @organizations = @organizations.page params[:page]
+        @categories = current_university.organization_categories.ordered.page(params[:categories_page])
+        breadcrumb
+      }
+      format.xlsx {
+        filename = "organizations-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+      }
+    end
   end
 
   def show
@@ -74,6 +86,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
             :url, :phone, :email, :linkedin, :twitter, :mastodon,
             :logo, :logo_delete, :logo_infos,
             :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+            category_ids: []
           )
   end
 end

@@ -82,6 +82,7 @@ fr:
         phone: Téléphone
         programs: Formations dispensées
         roles: Membres de l'équipe
+        url: Site Web
         websites: Sites Web associés
         zipcode: Code postal
       university/person/teacher:

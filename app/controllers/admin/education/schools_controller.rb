@@ -47,7 +47,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def destroy
     @school.destroy_and_sync
-    redirect_to admin_university_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s)
+    redirect_to admin_education_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s)
   end
 
   private
@@ -60,6 +60,6 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def school_params
     params.require(:education_school)
-          .permit(:university_id, :name, :address, :zipcode, :city, :country, :phone, :logo, :logo_delete, program_ids: [])
+          .permit(:university_id, :name, :address, :zipcode, :city, :country, :url, :phone, :logo, :logo_delete, program_ids: [])
   end
 end

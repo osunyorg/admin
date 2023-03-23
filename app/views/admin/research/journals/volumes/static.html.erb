@@ -1,6 +1,7 @@
 ---
 title: >-
   <%= prepare_text_for_static @about.title %>
+<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: false, toc_present: false %>
 <%= render 'admin/application/static/permalink' %>
 number: <%= @about.number %>
 issn: "<%= @about.journal.issn %>"

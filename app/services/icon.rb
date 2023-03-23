@@ -32,6 +32,8 @@ class Icon
   EDUCATION_FEEDBACKS = 'fas fa-comments'
 
   RESEARCH_JOURNAL = 'fas fa-newspaper'
+  RESEARCH_JOURNAL_VOLUME = 'fas fa-book'
+  RESEARCH_JOURNAL_PAPER = 'fas fa-file'
   RESEARCH_LABORATORY = 'fas fa-flask'
   RESEARCH_RESEARCHER = 'fas fa-microscope'
   RESEARCH_PUBLICATION = 'fas fa-book'

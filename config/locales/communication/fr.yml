@@ -90,6 +90,8 @@ fr:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         terms: Conditions d'utilisation
+      communication/extranet/connection:
+        connected: Connecté
       communication/extranet/document:
         name: Nom
         published: Publié ?
@@ -108,6 +110,7 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
+        pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication
         slug: Identifiant

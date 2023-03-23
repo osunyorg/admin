@@ -93,6 +93,10 @@ en:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
     duplicate: Duplicate
+    elements:
+      zero: No element
+      one: 1 element
+      other: "%{count} elements"
     infos: Informations
     inheritance:
       sentence_without_link: Value inherited
@@ -186,6 +190,7 @@ en:
     remove: Remove image
   filters:
     attributes:
+      category: Filter by category
       date: Filter by date
       element: Filter by %{element}
       kind: Filter by kind

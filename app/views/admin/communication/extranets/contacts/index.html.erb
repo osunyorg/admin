@@ -12,27 +12,7 @@
             <tr>
               <td><%= link_to person, [:admin, person] %></td>
               <td><%= person.email %></td>
-              <td>
-                <% if @extranet.connected?(person) %>
-                  <%= link_to 'Déconnecter',
-                                  disconnect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id,
-                                    objectId: person.id,
-                                    objectType: person.class
-                                  ),
-                                  class: button_classes_danger,
-                                  method: :post %>
-                <% else %>
-                  <%= link_to 'Connecter',
-                                  connect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id,
-                                    objectId: person.id,
-                                    objectType: person.class
-                                  ),
-                                  class: button_classes,
-                                  method: :post %>
-                <% end %>
-                </td>
+              <td><%= render 'toggle', about: person %></td>
             </tr>
           <% end %>
         </tbody>
@@ -50,27 +30,7 @@
           <% @organizations.each do |organization| %>
             <tr>
               <td><%= link_to organization, [:admin, organization] %></td>
-              <td>
-                <% if @extranet.connected?(organization) %>
-                  <%= link_to 'Déconnecter',
-                                  disconnect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id,
-                                    objectId: organization.id,
-                                    objectType: organization.class
-                                  ),
-                                  class: button_classes_danger,
-                                  method: :post %>
-                <% else %>
-                  <%= link_to 'Connecter',
-                                  connect_admin_communication_extranet_contacts_path(
-                                    extranet_id: @extranet.id,
-                                    objectId: organization.id,
-                                    objectType: organization.class
-                                  ),
-                                  class: button_classes,
-                                  method: :post %>
-                <% end %>
-                </td>
+              <td><%= render 'toggle', about: organization %></td>
             </tr>
           <% end %>
         </tbody>

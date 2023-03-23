@@ -1,13 +1,13 @@
 <%
-$class = "block block-gallery"
+class_name = "block block-gallery"
 if @block.title.present?
-  $class += " block-with-title"
+  class_name += " block-with-title"
 end
 
-$class += " block-gallery--" + @block.template.layout
+class_name += " block-gallery--" + @block.template.layout
 %>
 
-<section class="<%= $class %>">
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% if @block.title.present? || @block.template.description.present? %>

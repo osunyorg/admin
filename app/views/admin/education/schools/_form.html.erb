@@ -17,6 +17,7 @@
           </div>
         </div>
         <%= f.input :country, input_html: { class: 'form-select' } %>
+        <%= f.input :url %>
         <%= f.input :logo, 
                     as: :single_deletable_file,
                     input_html: { accept: '.jpg,.jpeg,.png,.svg' },
