@@ -1,14 +1,14 @@
 <%
-class_name = "block block-partners"
-unless @block.title.blank?
-  class_name += " block-with-title"
-end
-class_name += " block-partners--" + @block.template.layout
+  class_name = "block block-partners"
+  unless @block.title.blank?
+    class_name += " block-with-title"
+  end
+  class_name += " block-partners--" + @block.template.layout
 %>
+
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-
       <% unless @block.title.blank? && @block.template.description.blank? %>
         <div class="top">
           <% unless @block.title.blank? %>
@@ -22,25 +22,46 @@ class_name += " block-partners--" + @block.template.layout
         </div>
       <% end %>
 
-      <div class="grid organizations">
-        <% @block.template.elements.each do |element| %>
-          <article class="organization">
-            <h3>
-              <% if element.best_url %>
-                <a href="<%= element.best_url %>" target="_blank">
-              <% end %>
-              <%= element.best_name %>
-              <% if element.best_url%>
-                </a>
-              <% end %>
-            </h3>
-            <div class="media">
-              <%= kamifusen_tag element.best_logo, width: 600%>
-            </div>
-          </article>
-        <% end %>
-      </div>
-
+      <% if @block.template.layout == "grid" %>
+        <div class="organizations grid">
+          <% @block.template.elements.each do |element| %>
+            <article class="organization">
+              <h3>
+                <% if element.best_url %>
+                  <a href="<%= element.best_url %>" target="_blank">
+                <% end %>
+                <%= element.best_name %>
+                <% if element.best_url%>
+                  </a>
+                <% end %>
+              </h3>
+              <div class="media">
+                <%= kamifusen_tag element.best_logo, width: 600%>
+              </div>
+            </article>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
+          <% @block.template.elements.each do |element| %>
+            <article class="organization" data-latitude="<%= element.organization.latitude %>" data-longitude="<%= element.organization.longitude %>">
+              <h3>
+                <% if element.best_url %>
+                  <a href="<%= element.best_url %>" target="_blank">
+                <% end %>
+                <%= element.best_name %>
+                <% if element.best_url%>
+                  </a>
+                <% end %>
+              </h3>
+              <div class="media">
+                <%= kamifusen_tag element.best_logo, width: 600%>
+              </div>
+            </article>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
+
