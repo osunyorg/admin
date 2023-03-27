@@ -60,13 +60,14 @@ module Admin::ApplicationHelper
     raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
   end
 
-  def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, &block)
+  def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, small: false, &block)
     render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
             locals: {
               title: title,
               subtitle: subtitle,
               action: action,
-              image: image
+              image: image,
+              small: small
             } do
       capture(&block)
     end

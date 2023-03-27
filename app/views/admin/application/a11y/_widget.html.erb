@@ -1,7 +1,8 @@
 <%
 horizontal ||= false
+small ||= false
 %>
-<%= osuny_panel t('accessibility.label') do %>
+<%= osuny_panel t('accessibility.label'), small: true do %>
   <% if horizontal %>
     <div class="row"><div class="offset-lg-4 col-lg-8 pt-n4">
   <% end %>

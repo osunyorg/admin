@@ -1,4 +1,7 @@
-<%= osuny_panel t('featured_image.title') do %>
+<% 
+small ||= false 
+%>
+<%= osuny_panel t('featured_image.title'), small: small do %>
   <% image = about.best_featured_image.variable?  ? about.best_featured_image.variant(resize: '600')
                                                   : about.best_featured_image %>
   <%= image_tag image, class: 'img-fluid mb-2' %>

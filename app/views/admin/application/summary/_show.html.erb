@@ -1,3 +1,6 @@
-<%= osuny_panel t('admin.summary') do %>
+<%
+small ||= false 
+%>
+<%= osuny_panel t('admin.summary'), small: small do %>
   <p class="lead"><%= sanitize about.summary %></p>
 <% end unless about.summary.blank? %>
