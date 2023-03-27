@@ -54,6 +54,7 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }
   scope :not_current, -> { where(is_current: false) }
+  scope :not_root, -> { where.not(path: '/') }
 
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|

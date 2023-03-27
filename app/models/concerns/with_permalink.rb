@@ -9,7 +9,9 @@ module WithPermalink
   end
 
   def previous_permalinks_in_website(website)
-    permalinks.for_website(website).not_current
+    permalinks.for_website(website)
+              .not_current
+              .not_root
   end
 
   # Persisted in db or nil
