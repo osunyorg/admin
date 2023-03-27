@@ -1,29 +1,11 @@
 <% content_for :title, @page %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <div class="row">
-    <div class="col-lg-7">
-      <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
-        <p class="lead"><%= @page.title %></p>
-      <% end %>
-    </div>
-    <div class="offset-lg-1 col-lg-4">
-      <%= render 'admin/application/featured_image/show', about: @page, small: true %>
-    </div>
-  </div>
+  <%= render 'admin/communication/websites/pages/show/heading' %>
   <hr class="my-5">
   <%= render 'admin/application/a11y/widget', about: @page, horizontal: true, small: true %>
   <hr class="my-5">
-  <div class="row">
-    <div class="col-lg-4">
-      <%= render 'admin/communication/websites/pages/show/metadata' %>
-      <%= render 'admin/application/i18n/widget', about: @page, small: true %>
-    </div>
-    <div class="col-lg-8">
-      <%= render 'admin/application/summary/show', about: @page, small: true %>
-      <%= render 'admin/application/meta_description/show', about: @page, small: true %>
-    </div>
-  </div>
+  <%= render 'admin/communication/websites/pages/show/details' %>
   <%= render 'admin/communication/blocks/index_edit', about: @page %>
 <% end %>
 

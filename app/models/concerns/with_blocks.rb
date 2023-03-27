@@ -10,6 +10,19 @@ module WithBlocks
     blocks.collect &:git_dependencies
   end
 
+  def content
+    unless @content
+      @content = []
+      blocks.with_no_heading.published.ordered.each do |block|
+        @content << block
+      end
+      headings.ordered.each do |heading|
+        @content << heading
+      end
+    end
+    @content
+  end
+
   # Basic rule is: TOC if 2 titles or more
   def show_toc?
     blocks.published
