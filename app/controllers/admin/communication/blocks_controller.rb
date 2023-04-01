@@ -9,7 +9,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       @block = current_university.communication_blocks.find(id)
       @block.update position: index + 1
     end
-    @block.about.sync_with_git
+    @block.about.sync_with_git if @block.about.respond_to?(:sync_with_git)
   end
 
   def new
