@@ -3,8 +3,8 @@ module Communication::Website::WithConnections
 
   included do
     has_many  :connections
-    
-    before_save :clean_connections!
+
+    # before_save :clean_connections!
   end
 
   def clean_connections!
