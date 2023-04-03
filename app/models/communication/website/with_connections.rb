@@ -43,7 +43,10 @@ module Communication::Website::WithConnections
 
   def connect_object(indirect_object, direct_source)
     return unless persisted?
+    # On ne connecte pas les objets inexistants
     return if indirect_object.nil?
+    # On ne connecte pas les objets sans source
+    return if direct_source.nil?
     # On ne connecte pas le site à lui-même
     return if indirect_object.is_a?(Communication::Website)
     # On ne connecte pas les objets directs
@@ -51,7 +54,7 @@ module Communication::Website::WithConnections
     # puts "connect #{object} (#{object.class})"
     connection = connections.where( university: university, 
                                     indirect_object: indirect_object, 
-                                    direct_source: source)
+                                    direct_source: direct_source)
                             .first_or_create
     connection.touch if connection.persisted?
   end
