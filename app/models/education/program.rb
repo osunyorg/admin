@@ -150,6 +150,10 @@ class Education::Program < ApplicationRecord
   end
 
   def references
+    []
+  end
+
+  def references
     siblings +
     descendants
   end

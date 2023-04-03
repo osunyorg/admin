@@ -110,6 +110,10 @@ class University::Organization < ApplicationRecord
     blocks
   end
 
+  def references
+    []
+  end
+
   def git_path(website)
     "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
   end

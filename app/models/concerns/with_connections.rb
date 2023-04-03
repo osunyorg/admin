@@ -4,6 +4,7 @@ module WithConnections
 
   included do
     include WithDependencies
+    include WithGitFiles
     include WithReferences
 
     has_many :connections, as: :indirect_object, class_name: 'Communication::Website::Connection'
@@ -13,6 +14,10 @@ module WithConnections
 
     after_save :sync_connections
     after_touch :sync_connections
+  end
+
+  def for_website?(website)
+    Communication::Website::Connection.in_website(website).for_object(self).exists?
   end
 
   def direct_sources

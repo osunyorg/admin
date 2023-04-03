@@ -91,10 +91,14 @@ class Communication::Website < ApplicationRecord
 
   def dependencies
     pages +
-    posts + 
+    posts +
     categories +
     menus +
     [about]
+  end
+
+  def references
+    []
   end
 
   def best_language_for(iso_code)

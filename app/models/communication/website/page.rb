@@ -84,7 +84,7 @@ class Communication::Website::Page < ApplicationRecord
   has_many   :translations,
              class_name: 'Communication::Website::Page',
              foreign_key: :original_id
-             
+
   validates :title, presence: true
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
@@ -93,7 +93,7 @@ class Communication::Website::Page < ApplicationRecord
   def template_static
     "admin/communication/websites/pages/static"
   end
-  
+
   def menu_items
     Communication::Website::Menu::Item.where(website: website, kind: :page, about: self)
   end
@@ -101,8 +101,11 @@ class Communication::Website::Page < ApplicationRecord
   def dependencies
     active_storage_blobs +
     blocks +
-    menu_items +
     children
+  end
+
+  def references
+    menu_items
   end
 
   def to_s

@@ -98,9 +98,11 @@ class Communication::Website::Category < ApplicationRecord
   def dependencies
     active_storage_blobs +
     blocks +
-    children +
-    posts +
-    [parent]
+    children
+  end
+
+  def references
+    posts + [parent]
   end
 
   def update_children_paths

@@ -31,6 +31,10 @@ class Research::Journal::Paper::Kind < ApplicationRecord
 
   scope :ordered, -> { order(:title) }
 
+  def references
+    []
+  end
+
   def to_s
     "#{title}"
   end

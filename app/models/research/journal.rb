@@ -62,6 +62,10 @@ class Research::Journal < ApplicationRecord
     researchers.map(&:researcher)
   end
 
+  def references
+    []
+  end
+
   #####################
   # Aboutable methods #
   #####################

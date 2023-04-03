@@ -204,6 +204,10 @@ class University::Person < ApplicationRecord
     # person.author.active_storage_blobs => []
   end
 
+  def references
+    []
+  end
+
   def administrator
     @administrator ||= University::Person::Administrator.find(id)
   end

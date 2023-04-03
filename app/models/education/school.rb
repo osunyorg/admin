@@ -10,7 +10,6 @@
 #  longitude     :float
 #  name          :string
 #  phone         :string
-#  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -75,6 +74,10 @@ class Education::School < ApplicationRecord
     programs +
     diplomas +
     administrators.map(&:administrator)
+  end
+
+  def references
+    []
   end
 
   #####################
