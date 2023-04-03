@@ -174,9 +174,9 @@ class Communication::Website::Post < ApplicationRecord
   def update_authors_statuses!
     old_author = University::Person.find_by(id: author_id_before_last_save)
     if old_author && old_author.communication_website_posts.none?
-      old_author.update_and_sync(is_author: false)
+      old_author.update(is_author: false)
     end
-    author.update_and_sync(is_author: true) if author_id
+    author.update(is_author: true) if author_id
   end
 
   def translate_additional_data!(translation)

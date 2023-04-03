@@ -32,31 +32,27 @@ module WithGit
   end
 
   def sync_with_git
-    websites_for_self.each do |website|
-      next unless website.git_repository.valid?
-      Communication::Website::GitFile.sync website, self
-      recursive_dependencies.each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
-      references.each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
-      website.git_repository.sync!
+    return unless website_for_self.git_repository.valid?
+    Communication::Website::GitFile.sync website_for_self, self
+    recursive_dependencies.each do |object|
+      Communication::Website::GitFile.sync website_for_self, object
     end
+    references.each do |object|
+      Communication::Website::GitFile.sync website_for_self, object
+    end
+    website_for_self.git_repository.sync!
   end
   handle_asynchronously :sync_with_git, queue: 'default'
 
   def destroy_from_git
-    websites.each do |website|
-      next unless website.git_repository.valid?
-      Communication::Website::GitFile.sync website, self, destroy: true
-      # # FIXME
-      # dependencies = git_destroy_dependencies(website).to_a.flatten.uniq.compact
-      # dependencies.each do |object|
-      #   Communication::Website::GitFile.sync website, object, destroy: true
-      # end
-      website.git_repository.sync!
-    end
+    return unless website_for_self.git_repository.valid?
+    Communication::Website::GitFile.sync website_for_self, self, destroy: true
+    # # FIXME
+    # dependencies = git_destroy_dependencies(website).to_a.flatten.uniq.compact
+    # dependencies.each do |object|
+    #   Communication::Website::GitFile.sync website, object, destroy: true
+    # end
+    website_for_self.git_repository.sync!
   end
 
   def for_website?(website)
@@ -69,15 +65,7 @@ module WithGit
 
   protected
 
-  def websites_for_self
-    if is_a? Communication::Website
-      [self]
-    elsif respond_to?(:website)
-      [website]
-    elsif respond_to?(:websites)
-      websites
-    else
-      []
-    end
+  def website_for_self
+    is_a?(Communication::Website) ? self : website
   end
 end
