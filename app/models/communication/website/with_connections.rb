@@ -9,10 +9,11 @@ module Communication::Website::WithConnections
 
   def clean_connections!
     start = Time.now
-    connect self
+    connect self, self
     connections.reload.where('updated_at < ?', start).delete_all
   end
 
+  # Seulement des objets indirects
   def connect(object, source)
     connect_object object, source
     return unless object.respond_to?(:recursive_dependencies)
@@ -50,6 +51,8 @@ module Communication::Website::WithConnections
     return if object.nil?
     # On ne connecte pas le site à lui-même
     return if object.is_a?(Communication::Website)
+    # On ne connecte pas les objets directs
+    return if object.respond_to?(:website)
     # puts "connect #{object} (#{object.class})"
     connection = connections.where(university: university, object: object, source: source).first_or_create
     connection.touch if connection.persisted?
