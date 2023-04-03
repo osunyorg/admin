@@ -11,14 +11,14 @@
     <tbody>
       <% connections.each do |connection| %>
         <%
-        object = connection.object
+        object = connection.indirect_object
         object_name = object.to_s
         object_name = object.id if object.is_a?(ActiveStorage::Blob)
         begin
           object_link = url_for [:admin, object]
         rescue
         end
-        source = connection.source
+        source = connection.direct_source
         source_name = source.to_s
         begin
           source_link = url_for [:admin, source]
@@ -29,11 +29,11 @@
           <td><%= link_to connection, [:admin, connection] %></td>
           <td>
             <%= link_to_if object_link, object_name, object_link %><br>
-            <span class="small"><%= connection.object_type %></span>
+            <span class="small"><%= connection.indirect_object_type %></span>
           </td>
           <td>
             <%= link_to_if source_link, source_name, source_link %><br>
-            <span class="small"><%= connection.source_type %></span>
+            <span class="small"><%= connection.direct_source_type %></span>
           </td>
           <td><%= l connection.updated_at %></td>
         </tr>
