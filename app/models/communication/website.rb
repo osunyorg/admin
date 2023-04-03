@@ -107,6 +107,14 @@ class Communication::Website < ApplicationRecord
     languages.find_by(iso_code: iso_code) || default_language
   end
 
+  def website
+    self
+  end
+
+  def website_id
+    id
+  end
+
   protected
 
   def sanitize_fields
