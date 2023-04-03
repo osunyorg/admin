@@ -17,7 +17,7 @@ module WithConnections
   end
 
   def for_website?(website)
-    Communication::Website::Connection.in_website(website).for_object(self).exists?
+    website.has_connected_object?(self)
   end
 
   def direct_sources

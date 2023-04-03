@@ -3,7 +3,7 @@ module Communication::Website::WithConnections
 
   included do
     has_many  :connections
-    
+
     # before_save :clean_connections!
   end
 
@@ -11,6 +11,10 @@ module Communication::Website::WithConnections
     start = Time.now
     connect self, self
     connections.reload.where('updated_at < ?', start).delete_all
+  end
+
+  def has_connected_object?(indirect_object)
+    connections.for_object(indirect_object).exists?
   end
 
   def connect(indirect_object, direct_source)
@@ -22,7 +26,7 @@ module Communication::Website::WithConnections
   end
 
   def disconnect(indirect_object, direct_source)
-    connections.where(university: university, 
+    connections.where(university: university,
                       indirect_object: indirect_object,
                       direct_source: direct_source)
                 .delete_all
@@ -52,8 +56,8 @@ module Communication::Website::WithConnections
     # On ne connecte pas les objets directs
     return if indirect_object.respond_to?(:website)
     # puts "connect #{object} (#{object.class})"
-    connection = connections.where( university: university, 
-                                    indirect_object: indirect_object, 
+    connection = connections.where( university: university,
+                                    indirect_object: indirect_object,
                                     direct_source: direct_source)
                             .first_or_create
     connection.touch if connection.persisted?
