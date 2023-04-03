@@ -17,18 +17,20 @@ module Communication::Website::WithConnections
     connections.for_object(indirect_object).exists?
   end
 
-  def connect(indirect_object, direct_source)
-    connect_object indirect_object, direct_source
+  def connect(indirect_object, direct_source, direct_source_type: nil)
+    connect_object indirect_object, direct_source, direct_source_type: direct_source_type
     return unless indirect_object.respond_to?(:recursive_dependencies)
     indirect_object.recursive_dependencies.each do |dependency|
       connect_object dependency, direct_source
     end
   end
 
-  def disconnect(indirect_object, direct_source)
+  def disconnect(indirect_object, direct_source, direct_source_type: nil)
+    direct_source_type ||= direct_source.class.base_class.to_s
     connections.where(university: university,
                       indirect_object: indirect_object,
-                      direct_source: direct_source)
+                      direct_source_id: direct_source.id,
+                      direct_source_type: direct_source_type)
                 .delete_all
   end
 
@@ -45,7 +47,7 @@ module Communication::Website::WithConnections
 
   protected
 
-  def connect_object(indirect_object, direct_source)
+  def connect_object(indirect_object, direct_source, direct_source_type: nil)
     return unless persisted?
     # On ne connecte pas les objets inexistants
     return if indirect_object.nil?
@@ -56,9 +58,11 @@ module Communication::Website::WithConnections
     # On ne connecte pas les objets directs
     return if indirect_object.respond_to?(:website)
     # puts "connect #{object} (#{object.class})"
+    direct_source_type ||= direct_source.class.base_class.to_s
     connection = connections.where( university: university,
                                     indirect_object: indirect_object,
-                                    direct_source: direct_source)
+                                    direct_source_id: direct_source.id,
+                                    direct_source_type: direct_source_type)
                             .first_or_create
     connection.touch if connection.persisted?
   end

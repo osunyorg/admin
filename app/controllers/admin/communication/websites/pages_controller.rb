@@ -48,13 +48,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def connect
     load_object
-    @website.connect @object, @page
+    @website.connect @object, @page, direct_source_type: @page.class.to_s
     head :ok
   end
   
   def disconnect
     load_object
-    @website.disconnect @object, @page
+    @website.disconnect @object, @page, direct_source_type: @page.class.to_s
     redirect_back(fallback_location: [:admin, @object])
   end
 

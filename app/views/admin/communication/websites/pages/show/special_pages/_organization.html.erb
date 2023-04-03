@@ -1,5 +1,5 @@
 <%
-@organizations = @page.connected_organizations.ordered.page params[:page]
+@organizations = @page.explicitly_connected_organizations.ordered.page params[:page]
 %>
 <%= osuny_panel University::Organization.model_name.human(count: 2) do %>
   <%= simple_form_for :association, class_name: 'association' do |f| %>
