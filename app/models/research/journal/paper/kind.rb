@@ -23,7 +23,7 @@
 class Research::Journal::Paper::Kind < ApplicationRecord
   include Sanitizable
   include WithUniversity
-  include WithDependencies
+  include WithConnections
   include WithSlug
 
   belongs_to :journal, class_name: 'Research::Journal'

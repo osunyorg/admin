@@ -22,8 +22,8 @@
 class Research::Journal < ApplicationRecord
   include Sanitizable
   include Aboutable
+  include WithConnections
   include WithUniversity
-  include WithWebsites
 
   has_many :communication_websites, class_name: 'Communication::Website', as: :about, dependent: :nullify
   has_many :volumes, foreign_key: :research_journal_id, dependent: :destroy
@@ -56,7 +56,7 @@ class Research::Journal < ApplicationRecord
     "data/journal.yml"
   end
 
-  def display_dependencies
+  def dependencies
     volumes +
     papers +
     researchers.map(&:researcher)

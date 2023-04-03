@@ -32,12 +32,12 @@
 class Research::Journal::Volume < ApplicationRecord
   include Sanitizable
   include WithBlobs
+  include WithConnections
   include WithFeaturedImage
   include WithPermalink
   include WithPublication
   include WithSlug
   include WithUniversity
-  include WithWebsites
 
   has_summernote :text
 
@@ -56,7 +56,7 @@ class Research::Journal::Volume < ApplicationRecord
     "admin/research/journals/volumes/static"
   end
 
-  def display_dependencies
+  def dependencies
     papers +
     people.map(&:researcher) +
     active_storage_blobs

@@ -2,7 +2,7 @@ class Communication::Block::Template::Program < Communication::Block::Template::
 
   has_elements
 
-  def display_dependencies
+  def dependencies
     selected_programs
   end
 

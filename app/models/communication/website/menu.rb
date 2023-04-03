@@ -29,9 +29,9 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   include Sanitizable
+  include WithGit
   include WithTranslations
   include WithUniversity
-  include WithWebsites
 
   belongs_to :website, foreign_key: :communication_website_id
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
@@ -53,7 +53,7 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
-  def display_dependencies
+  def dependencies
     items
   end
 

@@ -43,12 +43,12 @@ class Communication::Website::Post < ApplicationRecord
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
   include WithTranslations
   include WithUniversity
-  include WithWebsites
 
   has_summernote :text # TODO: Remove text attribute
 
@@ -124,7 +124,7 @@ class Communication::Website::Post < ApplicationRecord
     Communication::Website::Menu::Item.where(website: website, kind: :post, about: self)
   end
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     blocks +
     menu_items +

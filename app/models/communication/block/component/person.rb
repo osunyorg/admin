@@ -4,7 +4,7 @@ class Communication::Block::Component::Person < Communication::Block::Component:
     template.block.university.people.find_by(id: data)
   end
 
-  def display_dependencies
+  def dependencies
     [person]
   end
 

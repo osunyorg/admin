@@ -25,10 +25,10 @@
 class Education::Diploma < ApplicationRecord
   include Sanitizable
   include WithBlocks
+  include WithConnections
   include WithPermalink
   include WithSlug
   include WithUniversity
-  include WithWebsites
 
   has_many :programs, dependent: :nullify
 

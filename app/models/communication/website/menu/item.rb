@@ -118,7 +118,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     }
   end
 
-  def display_dependencies
+  def dependencies
     [menu]
   end
 

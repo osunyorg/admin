@@ -2,8 +2,9 @@ module WithGit
   extend ActiveSupport::Concern
   
   included do
-    # WithGit a besoin de WithDependencies
+    # WithGit a besoin de WithDependencies et WithReferences
     include WithDependencies
+    include WithReferences
 
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
@@ -51,7 +52,10 @@ module WithGit
     websites_for_self.each do |website|
       next unless website.git_repository.valid?
       Communication::Website::GitFile.sync website, self
-      dependencies.each do |object|
+      recursive_dependencies.each do |object|
+        Communication::Website::GitFile.sync website, object
+      end
+      references.each do |object|
         Communication::Website::GitFile.sync website, object
       end
       website.git_repository.sync!

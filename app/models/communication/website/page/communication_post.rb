@@ -52,7 +52,7 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     true
   end
 
-  def display_dependencies
+  def dependencies
     super + 
     [website.config_default_permalinks] +
     website.categories +

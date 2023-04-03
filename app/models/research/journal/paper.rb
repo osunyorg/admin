@@ -45,12 +45,12 @@ class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
+  include WithConnections
   include WithPermalink
   include WithPosition
   include WithPublication
   include WithSlug
   include WithUniversity
-  include WithWebsites
 
   has_summernote :references
   has_summernote :text
@@ -82,13 +82,13 @@ class Research::Journal::Paper < ApplicationRecord
     "admin/research/journals/papers/static"
   end
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     blocks +
     people.map(&:researcher)
   end
 
-  def reference_dependencies
+  def references
     people
   end
 

@@ -31,7 +31,7 @@ class Education::School < ApplicationRecord
   include WithCountry
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
-  include WithWebsites
+  include WithConnections
 
   belongs_to  :university
 
@@ -69,7 +69,7 @@ class Education::School < ApplicationRecord
     "data/school.yml"
   end
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     programs +
     diplomas +

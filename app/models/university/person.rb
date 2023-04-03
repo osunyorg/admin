@@ -56,6 +56,7 @@ class University::Person < ApplicationRecord
   include Sanitizable
   include WithUniversity
   include WithBlobs
+  include WithConnections
   include WithCountry
   include WithEducation
   include WithExperiences
@@ -66,7 +67,6 @@ class University::Person < ApplicationRecord
   include WithPermalink
   include WithResearch
   include WithTranslations
-  include WithWebsites
 
   LIST_OF_ROLES = [
     :administration,
@@ -196,7 +196,7 @@ class University::Person < ApplicationRecord
     "#{git_path_content_prefix(website)}persons/#{slug}.html" if for_website?(website)
   end
 
-  def display_dependencies
+  def dependencies
     blocks +
     active_storage_blobs
     # TODO: Il faut pouvoir récupérer les blobs de la personne à partir d'une facette

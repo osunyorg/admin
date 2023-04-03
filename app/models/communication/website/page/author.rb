@@ -44,7 +44,7 @@
 #
 class Communication::Website::Page::Author < Communication::Website::Page
 
-  def display_dependencies
+  def dependencies
     super + 
     [website.config_default_permalinks] +
     website&.authors&.map(&:author)

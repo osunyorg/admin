@@ -5,7 +5,7 @@ class Communication::Block::Component::Category < Communication::Block::Componen
     website.categories.find_by(id: data)
   end
 
-  def display_dependencies
+  def dependencies
     [category]
   end
 

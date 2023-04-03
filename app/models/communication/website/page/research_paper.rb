@@ -48,7 +48,7 @@ class Communication::Website::Page::ResearchPaper < Communication::Website::Page
     website.about && website.about&.respond_to?(:papers)
   end
 
-  def display_dependencies
+  def dependencies
     super + 
     [website.config_default_permalinks] +
     website.research_papers

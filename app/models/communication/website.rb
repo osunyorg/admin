@@ -89,7 +89,7 @@ class Communication::Website < ApplicationRecord
     "data/website.yml"
   end
 
-  def display_dependencies
+  def dependencies
     pages +
     posts + 
     categories +

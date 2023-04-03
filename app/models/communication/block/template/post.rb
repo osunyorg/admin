@@ -10,7 +10,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     category_id_component.category
   end
 
-  def display_dependencies
+  def dependencies
     selected_posts
   end
 

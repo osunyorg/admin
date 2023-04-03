@@ -43,12 +43,12 @@ class University::Organization < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
+  include WithConnections
   include WithCountry
   include WithGeolocation
   include WithPermalink
   include WithSlug
   include WithUniversity
-  include WithWebsites
 
   attr_accessor :created_from_extranet
 
@@ -105,7 +105,7 @@ class University::Organization < ApplicationRecord
     government: 30
   }
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     blocks
   end

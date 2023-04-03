@@ -60,7 +60,7 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
     true
   end
 
-  def display_dependencies
+  def dependencies
     super + 
     [website.config_default_permalinks] +
     website.education_programs

@@ -48,7 +48,7 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     website.about && website.about&.respond_to?(:researchers)
   end
 
-  def display_dependencies
+  def dependencies
     super + 
     [website.config_default_permalinks] +
     website.researchers&.map(&:researcher)

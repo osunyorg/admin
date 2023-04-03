@@ -55,6 +55,7 @@ class Education::Program < ApplicationRecord
   include WithAlumni
   include WithBlobs
   include WithBlocks
+  include WithConnections
   include WithDiploma
   include WithFeaturedImage
   include WithInheritance
@@ -66,7 +67,6 @@ class Education::Program < ApplicationRecord
   include WithTeam
   include WithTree
   include WithUniversity
-  include WithWebsites
   include WithWebsitesCategories
 
   rich_text_areas_with_inheritance  :accessibility,
@@ -141,7 +141,7 @@ class Education::Program < ApplicationRecord
     "#{clean_path}_index.html"
   end
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     blocks +
     university_people_through_involvements.map(&:teacher)
@@ -149,7 +149,7 @@ class Education::Program < ApplicationRecord
     [diploma]
   end
 
-  def reference_dependencies
+  def references
     siblings +
     descendants
   end

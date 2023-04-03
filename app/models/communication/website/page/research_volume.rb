@@ -48,7 +48,7 @@ class Communication::Website::Page::ResearchVolume < Communication::Website::Pag
     website.about && website.about&.respond_to?(:volumes)
   end
 
-  def display_dependencies
+  def dependencies
     super + 
     [website.config_default_permalinks] +
     website.research_volumes

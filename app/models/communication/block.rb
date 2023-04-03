@@ -83,8 +83,8 @@ class Communication::Block < ApplicationRecord
     template.data
   end
 
-  def display_dependencies
-    template.display_dependencies
+  def dependencies
+    template.dependencies
   end
 
   def last_ordered_element

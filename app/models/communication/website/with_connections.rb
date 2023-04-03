@@ -13,15 +13,15 @@ module Communication::Website::WithConnections
     connections.reload.where('updated_at < ?', start).delete_all
   end
 
-  def connect(object, source = self)
+  def connect(object, source)
     connect_object object, source
-    return unless object.respond_to?(:dependencies)
-    object.dependencies.each do |dependency|
+    return unless object.respond_to?(:recursive_dependencies)
+    object.recursive_dependencies.each do |dependency|
       connect_object dependency, source
     end
   end
 
-  def disconnect(object, source = self)
+  def disconnect(object, source)
     connections.where(university: university, object: object, source: source).delete_all
   end
 

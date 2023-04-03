@@ -4,7 +4,7 @@ class Communication::Block::Component::Organization < Communication::Block::Comp
     template.block.university.organizations.find_by(id: data)
   end
 
-  def display_dependencies
+  def dependencies
     [organization]
   end
 

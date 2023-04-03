@@ -52,13 +52,13 @@ class Communication::Website::Page < ApplicationRecord
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithPermalink
   include WithType
   include WithTranslations
-  include WithWebsites
   # WithPath overwrite the git_path method defined in WithWebsites
   include WithPath
   include WithUniversity
@@ -98,7 +98,7 @@ class Communication::Website::Page < ApplicationRecord
     Communication::Website::Menu::Item.where(website: website, kind: :page, about: self)
   end
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     blocks +
     menu_items +

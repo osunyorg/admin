@@ -45,6 +45,7 @@ class Communication::Website::Category < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithFeaturedImage
+  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
@@ -52,7 +53,6 @@ class Communication::Website::Category < ApplicationRecord
   include WithTranslations
   include WithTree
   include WithUniversity
-  include WithWebsites
 
   has_one                 :imported_category,
                           class_name: 'Communication::Website::Imported::Category',
@@ -95,7 +95,7 @@ class Communication::Website::Category < ApplicationRecord
     "admin/communication/websites/categories/static"
   end
 
-  def display_dependencies
+  def dependencies
     active_storage_blobs +
     blocks +
     children +

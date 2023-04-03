@@ -21,8 +21,8 @@
 #
 class Research::Hal::Publication < ApplicationRecord
   include Sanitizable
+  include WithConnections
   include WithSlug
-  include WithWebsites
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
