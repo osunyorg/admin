@@ -22,7 +22,6 @@ module WithConnections
   protected
 
   def sync_connections
-    byebug
     sources.each do |source|
       # source.website.connect self, source
       byebug
