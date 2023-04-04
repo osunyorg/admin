@@ -38,12 +38,19 @@ class Communication::Block < ApplicationRecord
   # template_blobs would be a better name, because there are files
   has_many_attached :template_images
 
+  # Les numéros sont un peu en vrac
+  # Dans l'idée, pour le futur
+  # 1000 basic
+  # 2000 storytelling
+  # 3000 references
+  # 4000 utilities
   enum template_kind: {
     chapter: 50,
     image: 51,
     gallery: 300,
     video: 52,
     key_figures: 56,
+    features: 2010,
     datatable: 54,
     files: 55,
     embed: 53,
@@ -61,7 +68,7 @@ class Communication::Block < ApplicationRecord
 
   CATEGORIES = {
     basic: [:chapter, :image, :video, :datatable],
-    storytelling: [:key_figures, :gallery, :call_to_action, :testimonials, :timeline],
+    storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :organization_chart, :partners, :programs],
     utilities: [:files, :definitions, :embed, :contact]
   }
