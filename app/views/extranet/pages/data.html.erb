@@ -5,9 +5,14 @@
 
 <div class="row">
   <% @metrics.each do |metric| %>
-  <div class="col-md-3">
-    <p class="h1 mb-0"><%= metric[:value] %></p>
-    <p><%= metric[:name] %></p>
-  </div>
+    <% 
+    value = metric[:value]
+    next if value.zero?
+    name = metric[:name]
+    %>
+    <div class="col-md-3">
+      <p class="h1 mb-0"><%= value %></p>
+      <p><%= name %></p>
+    </div>
   <% end %>
 </div>
