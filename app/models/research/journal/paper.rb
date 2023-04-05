@@ -5,6 +5,7 @@
 #  id                         :uuid             not null, primary key
 #  abstract                   :text
 #  accepted_at                :date
+#  authors_list               :text
 #  doi                        :string
 #  keywords                   :text
 #  meta_description           :text

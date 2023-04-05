@@ -53,6 +53,7 @@ fr:
         title: Titre
       research/journal/paper:
         abstract: Extrait
+        authors_list: Liste des auteur·e·s
         doi: DOI
         keywords: Mots clés
         pdf: PDF
@@ -88,7 +89,7 @@ fr:
         text: Texte
       research/thesis:
         abstract: Résumé
-        author: Auteur·rice
+        author: Auteur·e
         completed: Complétée ?
         completed_at: Complétée le
         director: Directeur·rice
@@ -125,6 +126,7 @@ fr:
   simple_form:
     hints:
       research_journal_paper:
+        authors_list: Tapez la liste des auteurs si vous n'utilisez pas les cases à cocher “Auteur·e·s” ci-dessus
         doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
       research_journal_volume:
         cover: Fichier JPG ou PNG
