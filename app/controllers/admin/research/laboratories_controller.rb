@@ -8,7 +8,6 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   def index
     @laboratories = apply_scopes(@laboratories).ordered.page(params[:page])
     breadcrumb
-    add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
   end
 
   def show
@@ -50,6 +49,12 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   end
 
   protected
+
+  def breadcrumb
+    super
+    add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
+    breadcrumb_for @laboratory
+  end
 
   def laboratory_params
     params.require(:research_laboratory)
