@@ -62,6 +62,11 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
 
   private
 
+  # For Admin::Reorderable
+  def model
+    Research::Journal::Paper
+  end
+
   def breadcrumb
     super
     add_breadcrumb Research::Journal::Paper.model_name.human(count: 2), admin_research_journal_papers_path

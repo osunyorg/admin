@@ -69,7 +69,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   validates :title, presence: true
 
-  scope :ordered, -> { order(published_at: :desc, created_at: :desc) }
+  scope :ordered, -> { order(:position, published_at: :desc, created_at: :desc) }
 
   def for_website?(website)
     journal == website.about
