@@ -36,15 +36,12 @@ en:
         one: Thesis
         other: Theses
     attributes:
-      research/hal:
-        description: Publications et auteur·e·s dans la base de données HAL
       research/hal/author:
         docid: HAL identifier
         first_name: First name
         full_name: Full name
         last_name: Last name
       research/hal/publication:
-        description: Publications scientifiques importées automatiquement de HAL
         docid: Identifier
         doi_url: URL DOI
         publication_date: Publication date
@@ -52,7 +49,6 @@ en:
         url: URL
         hal_url: URL HAL
       research/journal:
-        description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
         title: Title
       research/journal/paper:
@@ -84,7 +80,6 @@ en:
         address: Address
         country: Country
         city: City
-        description: Structure de recherche hébergeant le travail des chercheur·e·s
         name: Name
         zipcode: Zipcode
       research/laboratory/axis:
@@ -96,7 +91,6 @@ en:
         author: Author
         completed: Completed?
         completed_at: Completed at
-        description: Production scientifique permettant d'obtenir le titre de Docteur·e
         director: Director
         laboratory: Laboratory
         started_at: Started at
@@ -109,7 +103,24 @@ en:
     description:
       text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
       source: Serge Haroche, Prix Nobel de physique 2012
+      parts:
+        hal:
+          description: Publications et auteur·e·s dans la base de données HAL
+        journal:
+          description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
+        laboratory:
+          description: Structure de recherche hébergeant le travail des chercheur·e·s
+        researcher:
+          description: Personne physique liée à une université, une composante, un laboratoire, etc.
+        thesis:
+          description: Production scientifique permettant d'obtenir le titre de Docteur·e
     hal:
+      description:
+        parts:
+          author:
+            description: Profils des chercheur·e·s dans la base de données HAL
+          publication:
+            description: Publications scientifiques importées automatiquement de HAL
       title: HAL
       select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
   simple_form:

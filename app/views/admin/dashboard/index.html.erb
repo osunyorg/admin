@@ -101,7 +101,9 @@
 <% if current_admin_theme == 'pure' %>
   <div class="row mt-5 pt-5">
     <div class="col-lg-2">
-      <%= image_tag "admin/university.jpg", class: 'img-fluid'%>
+      <%= link_to admin_university_root_path do %>
+        <%= image_tag "admin/university.jpg", class: 'img-fluid'%>
+      <% end %>
     </div>
     <div class="col-lg-4">
       <%= osuny_panel University.model_name.human do %>
