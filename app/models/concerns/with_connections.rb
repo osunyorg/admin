@@ -20,16 +20,30 @@ module WithConnections
   end
 
   def direct_sources
-    sources = connections.collect &:direct_source
-    references.each do |reference|
-      reference_is_a_direct_object = reference.respond_to?(:website_id)
-      sources += reference_is_a_direct_object ? [reference]
-                                              : reference.direct_sources
+    @direct_sources ||= begin
+      # On initialise les direct_sources avec les connexions existantes
+      direct_sources = direct_sources_from_existing_connections
+      # On boucle sur les références pour récupérer les direct sources manquantes
+      references.each do |reference|
+        direct_sources += direct_sources_from_reference(reference)
+      end
+      direct_sources.uniq
     end
-    sources
   end
 
   protected
+
+  def direct_sources_from_existing_connections
+    connections.collect &:direct_source
+  end
+
+  # Dans le cas d'un object
+  def direct_sources_from_reference(reference)
+    reference_is_a_direct_object = reference.respond_to?(:website_id)
+    reference_is_a_direct_object  ? [reference] # Récupération de la connexion directe
+                                  : reference.direct_sources # Récursivité sur les références
+  end
+  
 
   def sync_connections
     direct_sources.each do |direct_source|
