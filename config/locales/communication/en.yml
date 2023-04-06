@@ -370,6 +370,12 @@ en:
                 image:
                   label: Image (.png, .jpg, .svg)
                   remove: Remove image
+                alt:
+                  label: Alternative text
+                  placeholder: Enter text description
+                credit:
+                  label: Credit
+                  placeholder: Enter image's credit here
                 title:
                   label: Title
                   placeholder: Enter title here

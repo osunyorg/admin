@@ -8,8 +8,8 @@
   <div v-for="(element, index) in data.elements" class="col-lg-4 draggable-item <%= if_appstack 'list-group-item' %>">
     <div>
       <a class="btn ps-0 pt-0 dragHandle">
-        <i class="<%= Icon::DRAG %> handle"></i>
-      </a>
+        <i class="<%= Icon::DRAG %> pt-1 handle"></i>
+      </a>{{element.title}}
       <a  class="btn btn-sm text-danger float-end pe-0"
           v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
           title="<%= t '.remove_element' %>">
@@ -17,11 +17,13 @@
       </a>
     </div>
     <div>
-      <%= block_component_edit :image, template: @element %>
       <%= block_component_edit :title, template: @element %>
       <%= block_component_edit :description, template: @element %>
-    </div>
-    <div>
+      <%= block_component_edit :image, template: @element %>
+      <div v-show="element.image.id != ''">
+        <%= block_component_edit :alt, template: @element %>
+        <%= block_component_edit :credit, template: @element %>
+      </div>
     </div>
   </div>
 </draggable>
