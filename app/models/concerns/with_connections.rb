@@ -20,7 +20,13 @@ module WithConnections
   end
 
   def direct_sources
-    connections.collect &:direct_source
+    sources = connections.collect &:direct_source
+    references.each do |reference|
+      reference_is_a_direct_object = reference.respond_to?(:website_id)
+      sources += reference_is_a_direct_object ? [reference]
+                                              : reference.direct_sources
+    end
+    sources
   end
 
   protected
