@@ -58,6 +58,7 @@ class Education::Program < ApplicationRecord
   include WithConnections
   include WithDiploma
   include WithFeaturedImage
+  include WithGitFiles
   include WithInheritance
   include WithMenuItemTarget
   include WithPermalink

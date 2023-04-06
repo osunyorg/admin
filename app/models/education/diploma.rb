@@ -26,6 +26,7 @@ class Education::Diploma < ApplicationRecord
   include Sanitizable
   include WithBlocks
   include WithConnections
+  include WithGitFiles
   include WithPermalink
   include WithSlug
   include WithUniversity

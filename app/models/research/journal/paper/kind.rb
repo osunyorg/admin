@@ -22,10 +22,11 @@
 #
 class Research::Journal::Paper::Kind < ApplicationRecord
   include Sanitizable
-  include WithUniversity
   include WithConnections
+  include WithGitFiles
   include WithSlug
-
+  include WithUniversity
+  
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
 

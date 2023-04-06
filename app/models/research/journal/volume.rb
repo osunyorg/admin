@@ -34,6 +34,7 @@ class Research::Journal::Volume < ApplicationRecord
   include WithBlobs
   include WithConnections
   include WithFeaturedImage
+  include WithGitFiles
   include WithPermalink
   include WithPublication
   include WithSlug

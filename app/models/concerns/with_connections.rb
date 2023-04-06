@@ -1,10 +1,9 @@
-# Concerne exclusivement utilisé pour les objets indirects
+# Concern exclusivement utilisé pour les objets indirects
 module WithConnections
   extend ActiveSupport::Concern
 
   included do
     include WithDependencies
-    include WithGitFiles
     include WithReferences
 
     has_many :connections, as: :indirect_object, class_name: 'Communication::Website::Connection'

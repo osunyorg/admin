@@ -25,6 +25,7 @@
 #
 class Communication::Block < ApplicationRecord
   include Accessible
+  include WithConnections
   include WithDependencies
   include WithPosition
   include WithUniversity

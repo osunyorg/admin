@@ -47,6 +47,7 @@ class Research::Journal::Paper < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithConnections
+  include WithGitFiles
   include WithPermalink
   include WithPosition
   include WithPublication

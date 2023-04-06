@@ -1,4 +1,4 @@
-module Communication::Website::WithConnections
+module Communication::Website::WithConnectedObjects
   extend ActiveSupport::Concern
 
   included do

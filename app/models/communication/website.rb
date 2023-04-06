@@ -39,7 +39,7 @@ class Communication::Website < ApplicationRecord
   include WithUniversity
   include WithAbouts
   include WithConfigs
-  include WithConnections
+  include WithConnectedObjects
   include WithOldDependencies
   include WithGit
   include WithGitRepository

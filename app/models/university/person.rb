@@ -54,19 +54,20 @@
 #
 class University::Person < ApplicationRecord
   include Sanitizable
-  include WithUniversity
   include WithBlobs
+  include WithBlocks
   include WithConnections
   include WithCountry
   include WithEducation
   include WithExperiences
-  include WithSlug
-  include WithPicture
-  include WithRoles
-  include WithBlocks
+  include WithGitFiles
   include WithPermalink
+  include WithPicture
   include WithResearch
+  include WithRoles
+  include WithSlug
   include WithTranslations
+  include WithUniversity
 
   LIST_OF_ROLES = [
     :administration,
