@@ -25,6 +25,11 @@ module Communication::Website::WithConnections
     end
   end
 
+  def connect_and_sync(indirect_object, direct_source, direct_source_type: nil)
+    connect(indirect_object, direct_source, direct_source_type: direct_source_type)
+    direct_source.sync_with_git
+  end
+
   def disconnect(indirect_object, direct_source, direct_source_type: nil)
     direct_source_type ||= direct_source.class.base_class.to_s
     connections.where(university: university,
@@ -32,6 +37,11 @@ module Communication::Website::WithConnections
                       direct_source_id: direct_source.id,
                       direct_source_type: direct_source_type)
                 .delete_all
+  end
+
+  def disconnect_and_sync(indirect_object, direct_source, direct_source_type: nil)
+    disconnect(indirect_object, direct_source, direct_source_type: direct_source_type)
+    direct_source.sync_with_git
   end
 
   # TODO factoriser avec les extranets
