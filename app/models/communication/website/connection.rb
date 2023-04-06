@@ -26,7 +26,7 @@
 #
 class Communication::Website::Connection < ApplicationRecord
   belongs_to :university
-  belongs_to :website
+  belongs_to :website, class_name: "Communication::Website"
   belongs_to :indirect_object, polymorphic: true
   belongs_to :direct_source, polymorphic: true
 
