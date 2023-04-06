@@ -59,11 +59,15 @@
           <% end %>
           <% if @paper.people.any? %>
             <%= osuny_label Research::Journal::Paper.human_attribute_name('people') %>
-            <ul class="list-unstyled mb-0">
+            <ul class="list-unstyled">
               <% @paper.people.each do |person| %>
                 <li><%= link_to person, admin_research_researcher_path(person) %></li>
               <% end %>
             </ul>
+          <% end %>
+          <% if @paper.authors_list.present? %>
+            <%= osuny_label Research::Journal::Paper.human_attribute_name('authors_list') %>
+            <p><%= @paper.authors_list %></p>
           <% end %>
       <% end %>
       <%= render 'admin/application/meta_description/show', about: @paper %>

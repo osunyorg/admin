@@ -6,6 +6,7 @@
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
         <%= f.input :title, as: :text, input_html: { rows: 3 } %>
+        <%= f.input :summary %>
         <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
         <%= f.input :pdf %>
         <%= f.input :doi %>
@@ -41,6 +42,7 @@
                                                         .researchers
                                                         .ordered,
                           as: :check_boxes %>
+        <%= f.input :authors_list %>
         <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>
       <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: paper %>

@@ -68,7 +68,6 @@ fr:
         about_type: Type d'extranet
         color: Couleur
         cookies_policy: Politique de cookies
-        description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
         favicon: Favicon (.png)
         feature_alumni: Alumni
         feature_contacts: Annuaire
@@ -129,7 +128,6 @@ fr:
         access_token: Access token
         created_at: Création
         default_language: Langue par défaut
-        description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Provider Git
@@ -629,6 +627,11 @@ fr:
     description:
       text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
+      parts:
+        website:
+          description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
+        extranet:
+          description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
     website:

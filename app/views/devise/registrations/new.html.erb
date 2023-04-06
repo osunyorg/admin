@@ -6,7 +6,7 @@
   <%= f.error_notification %>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <%= f.input :email,
                   required: true,
                   input_html: { autocomplete: "email" } %>
@@ -22,7 +22,7 @@
                         label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") },
                         include_blank: :translate %>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <%= f.input :password,
                   as: :password_with_hints,
                   required: true,

@@ -10,11 +10,10 @@
     </thead>
     <tbody>
       <% papers.each do |paper| %>
-        <tr>
+        <tr class="<%= 'draft' unless paper.published? %>">
           <td>
             <%= link_to paper,
-                        admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
-                        class: "#{'draft' unless paper.published?}" %>
+                        admin_research_journal_paper_path(journal_id: paper.journal, id: paper) %>
           </td>
           <td><%= link_to paper.volume, admin_research_journal_volume_path(paper.volume) if paper.volume %></td>
           <td><%= l(paper.published_at.to_time, format: :date_with_explicit_month) if paper.published_at.present? %></td>

@@ -6,6 +6,12 @@ class Admin::Research::Laboratories::ApplicationController < Admin::Research::Ap
 
   protected
 
+  def breadcrumb
+    super
+    add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
+    add_breadcrumb @laboratory, [:admin, @laboratory]
+  end
+
   def default_url_options
     return {} unless params.has_key? :laboratory_id
     {

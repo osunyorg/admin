@@ -26,7 +26,8 @@ class Communication::Extranet::Document::Category < ApplicationRecord
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
-  has_many :documents
+  has_many :communication_extranet_documents, class_name: "Communication::Extranet::Document"
+  alias_attribute :documents, :communication_extranet_documents
 
   validates :name, presence: true
 

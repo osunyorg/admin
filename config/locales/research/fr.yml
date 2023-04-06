@@ -36,16 +36,12 @@ fr:
         one: Thèse
         other: Thèses
     attributes:
-      research/hal:
-        description: Publications et auteur·e·s dans la base de données HAL
       research/hal/author:
-        description: Profils des chercheur·e·s dans la base de données HAL
         docid: Identifiant HAL
         first_name: Prénom
         full_name: Nom complet
         last_name: Nom
       research/hal/publication:
-        description: Publications scientifiques importées automatiquement de HAL
         docid: Identifiant
         doi_url: URL DOI
         publication_date: Date de publication
@@ -53,11 +49,11 @@ fr:
         url: URL
         hal_url: URL HAL
       research/journal:
-        description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         issn: ISSN
         title: Titre
       research/journal/paper:
         abstract: Extrait
+        authors_list: Liste des auteur·e·s
         doi: DOI
         keywords: Mots clés
         pdf: PDF
@@ -85,7 +81,6 @@ fr:
         address: Adresse
         country: Pays
         city: Ville
-        description: Structure de recherche hébergeant le travail des chercheur·e·s
         name: Nom
         zipcode: Code postal
       research/laboratory/axis:
@@ -94,10 +89,9 @@ fr:
         text: Texte
       research/thesis:
         abstract: Résumé
-        author: Auteur·rice
+        author: Auteur·e
         completed: Complétée ?
         completed_at: Complétée le
-        description: Production scientifique permettant d'obtenir le titre de Docteur·e
         director: Directeur·rice
         laboratory: Laboratoire
         started_at: Commencée le
@@ -110,11 +104,29 @@ fr:
     description:
       text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
       source: Serge Haroche, Prix Nobel de physique 2012
+      parts:
+        hal:
+          description: Publications et auteur·e·s dans la base de données HAL
+        journal:
+          description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
+        laboratory:
+          description: Structure de recherche hébergeant le travail des chercheur·e·s
+        researcher:
+          description: Personne physique liée à une université, une composante, un laboratoire, etc.
+        thesis:
+          description: Production scientifique permettant d'obtenir le titre de Docteur·e
     hal:
+      description:
+        parts:
+          author:
+            description: Profils des chercheur·e·s dans la base de données HAL
+          publication:
+            description: Publications scientifiques importées automatiquement de HAL
       select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
   simple_form:
     hints:
       research_journal_paper:
+        authors_list: Tapez la liste des auteurs si vous n'utilisez pas les cases à cocher “Auteur·e·s” ci-dessus
         doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
       research_journal_volume:
         cover: Fichier JPG ou PNG

@@ -62,6 +62,11 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
 
   private
 
+  # For Admin::Reorderable
+  def model
+    Research::Journal::Paper
+  end
+
   def breadcrumb
     super
     add_breadcrumb Research::Journal::Paper.model_name.human(count: 2), admin_research_journal_papers_path
@@ -72,7 +77,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     params.require(:research_journal_paper)
           .permit(
             :title, :slug, :text, :published, :published_at, :received_at, :accepted_at,
-            :summary, :abstract, :meta_description, :doi,
+            :summary, :abstract, :meta_description, :doi, :authors_list,
             :pdf, :references, :keywords, :research_journal_volume_id, :kind_id, person_ids: [])
           .merge(university_id: current_university.id)
   end

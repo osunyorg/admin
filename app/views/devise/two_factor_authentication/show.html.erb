@@ -1,6 +1,8 @@
 <%= content_for :title, t('.title') %>
 
-<h4>
+<h4 class="mb-5"><%= t('.title') %></h4>
+
+<p>
   <% if resource.direct_otp %>
     <% if resource.direct_otp_delivery_method == 'mobile_phone' %>
       <%= t('devise.two_factor_authentication.enter_code_direct_otp_mobile_phone', phone: masked_phone(resource.mobile_phone)) %>
@@ -10,11 +12,11 @@
   <% else %>
     <%= t('devise.two_factor_authentication.enter_code_totp') %>
   <% end %>
-</h4>
+</p>
 
 <%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put, class: 'my-3' }) do |f| %>
-  <div class="row">
-    <div class="col-md-6">
+  <div class="row pure__row--small">
+    <div class="col-lg-6">
       <div class="form-inputs">
         <div class="form-group required mt-0">
           <%= text_field_tag :code,
@@ -25,7 +27,7 @@
                               autofocus: true,
                               autocomplete: 'off',
                               class: 'form-control string required'%>
-          <p class="mt-2 mb-0">
+          <p class="mt-2 mb-5">
             <% if resource.direct_otp %>
               <%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %>
             <% else %>
@@ -38,11 +40,11 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <%= link_to t('devise.shared.links.sign_out'),
                   destroy_user_session_path,
                   method: :delete,
-                  class: "btn btn-danger float-end" %>
+                  class: "btn btn-outline-danger" %>
       <%= f.button  :submit,
                     t('devise.two_factor_authentication.validate'),
                     class: "btn btn-primary" %>
