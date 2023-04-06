@@ -69,7 +69,7 @@ class Communication::Block < ApplicationRecord
 
   scope :published, -> { where(published: true) }
 
-  after_save :touch_about
+  after_save :sync_if_about_is_direct
   before_save :attach_template_blobs
 
   # When we set data from json, we pass it to the template.
@@ -138,8 +138,8 @@ class Communication::Block < ApplicationRecord
     "Communication::Block::Template::#{template_kind.classify}".constantize
   end
 
-  def touch_about
-    about.touch!
+  def sync_if_about_is_direct
+    about.save_and_sync if about.respond_to? :save_and_sync
   end
 
   # FIXME @sebou
