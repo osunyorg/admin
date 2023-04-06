@@ -69,6 +69,7 @@ class Communication::Block < ApplicationRecord
 
   scope :published, -> { where(published: true) }
 
+  after_save :touch_about
   before_save :attach_template_blobs
 
   # When we set data from json, we pass it to the template.
@@ -85,6 +86,10 @@ class Communication::Block < ApplicationRecord
 
   def dependencies
     template.dependencies
+  end
+
+  def references
+    [about]
   end
 
   def last_ordered_element
@@ -131,6 +136,10 @@ class Communication::Block < ApplicationRecord
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize
+  end
+
+  def touch_about
+    about.touch!
   end
 
   # FIXME @sebou
