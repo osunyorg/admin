@@ -361,6 +361,27 @@ en:
                 label: Iframe title (mandatory for accessibility)
                 placeholder: Enter the title
               warning: Beware, the code below is used as is, without any security filtering. Be extremely careful and never integrate possibly unreliable code.
+          features:
+            description: A list of features with images (often icons) and a description.
+            edit:
+              add_element: Add feature
+              remove_element: Remove feature
+              element:
+                image:
+                  label: Image (.png, .jpg, .svg)
+                  remove: Remove image
+                alt:
+                  label: Alternative text
+                  placeholder: Enter text description
+                credit:
+                  label: Credit
+                  placeholder: Enter image's credit here
+                title:
+                  label: Title
+                  placeholder: Enter title here
+                description:
+                  label: Text
+                  placeholder: Enter text here
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
@@ -706,6 +727,7 @@ en:
           datatable: Table
           definitions: Definitions
           embed: HTML embed
+          features: Features
           files: Files
           gallery: Gallery
           image: Image
