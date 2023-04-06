@@ -1,5 +1,5 @@
 class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
-  OPEN = "<div class=\"col-md-4 col-lg-3 mb-5\">"
+  OPEN = "<div class=\"col-sm-6 col-md-4 col-lg-3 mb-5\">"
   CLOSE = "</div>"
 
   attr_accessor :content, :index, :item

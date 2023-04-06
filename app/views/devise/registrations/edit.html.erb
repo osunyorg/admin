@@ -4,7 +4,7 @@
   <%= f.error_notification %>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-6">
       <%= f.input :email, required: true %>
       <%= f.input :first_name,
                   required: true,
@@ -13,15 +13,12 @@
       <%= f.input :last_name,
                   required: true,
                   input_html: { autocomplete: "last_name" } %>
-    </div>
-    <div class="col-md-4">
       <%= f.association :language,
                         include_blank: false,
                         label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>
-      <%= f.input :mobile_phone %>
       <%= f.input :admin_theme, include_blank: false %>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-6">
       <%= f.input :password,
                   as: :password_with_hints,
                   allow_password_uncloaking: true,
@@ -35,6 +32,7 @@
                   hint: t(".leave_blank_if_you_don_t_want_to_change_it"),
                   required: false,
                   input_html: { autocomplete: "new-password" } %>
+      <%= f.input :mobile_phone %>
       <%= f.input :picture,
                   as: :single_deletable_file,
                   input_html: { accept: '.jpg,.jpeg,.png,.svg' },
