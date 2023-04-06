@@ -10,7 +10,9 @@ action += link_to t('admin.communication.blocks.add'),
       <table class="<%= table_classes %>">
         <thead>
           <tr>
-            <th></th>
+            <% if can? :reorder, Communication::Block %>
+              <th></th>
+            <% end %>
             <th><%= Communication::Block.human_attribute_name :title %></th>
             <th><%= Communication::Block.human_attribute_name :template %></th>
             <th></th>

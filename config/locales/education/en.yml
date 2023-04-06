@@ -79,6 +79,7 @@ en:
         phone: Phone
         programs: Programs provided
         roles: Team Members
+        url: Website
         websites: Linked websites
         zipcode: Zipcode
   admin:
@@ -93,6 +94,17 @@ en:
     description: 
       text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
       source: Olivier Reboul, La philosophie de l'éducation, 2018
+      parts:
+        diploma:
+          description: Présentation des diplômes et de leurs caractéristiques
+        program:
+          description: Présentation exhaustive des formations, de leurs contenus, modalités pédagogiques et perspectives
+        teacher:
+          description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
+        school:
+          description: Présentation des écoles, de leurs coordonnées, enseignements, équipes et informations administratives
+        alumnus:
+          description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
     manage_programs: Manage programs
     manage_roles: Manage roles
     manage_teachers: Manage teachers

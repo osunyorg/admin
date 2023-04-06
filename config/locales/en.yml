@@ -46,7 +46,6 @@ en:
         summernote_locale: Summernote locale code
       user:
         admin_theme: Admin Theme
-        description: Personne utilisant Osuny, dotée d'un compte authentifié
         email: Email
         first_name: First name
         language: Favourite language

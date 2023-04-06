@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_03_101306) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -658,6 +658,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_101306) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "phone"
+    t.string "url"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
@@ -763,6 +764,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_101306) do
     t.date "received_at"
     t.date "accepted_at"
     t.string "doi"
+    t.text "authors_list"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"

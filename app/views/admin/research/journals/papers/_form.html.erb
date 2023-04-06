@@ -41,6 +41,7 @@
                                                         .researchers
                                                         .ordered,
                           as: :check_boxes %>
+        <%= f.input :authors_list %>
         <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>
       <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: paper %>

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  include WithErrors
-  include WithLocale
   include WithDomain
+  include WithErrors
+  include WithFeatures
+  include WithLocale
 
   before_action :ensure_university, :authenticate_user!
 

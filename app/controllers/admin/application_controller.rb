@@ -1,7 +1,6 @@
 class Admin::ApplicationController < ApplicationController
   layout 'admin/layouts/application'
 
-  include WithFeatures
   include Admin::Filterable
 
   def set_theme

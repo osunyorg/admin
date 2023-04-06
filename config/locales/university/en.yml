@@ -68,7 +68,6 @@ en:
         communication_website_posts: Posts
         contacts: Contact information
         country: Country
-        description: Personne physique liée à une université, une composante, un laboratoire, etc.
         education_programs: Programs
         email: Email
         essentials: Essentials
@@ -208,6 +207,13 @@ en:
     description:
       text: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions “collèges”, “facultés”, “instituts”, “départements”, “centres”, “sections”, “unités” ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
       source: Wikipedia
+      parts:
+        person:
+          description: Personne physique liée à une université, une composante, un laboratoire, etc.
+        organization:
+          description: Personne morale liée à une université, une composante, un laboratoire, etc.
+        user:
+          description: Personne utilisant Osuny, dotée d'un compte authentifié
     internal_key: Internal Key
     invoice_informations: Invoice informations
     manage_alumni: Manage alumni
