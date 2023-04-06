@@ -33,12 +33,14 @@ module WithGit
 
   def sync_with_git
     return unless website.git_repository.valid?
-    Communication::Website::GitFile.sync website, self
-    recursive_dependencies.each do |object|
-      Communication::Website::GitFile.sync website, object
-    end
-    references.each do |object|
-      Communication::Website::GitFile.sync website, object
+    if syncable?
+      Communication::Website::GitFile.sync website, self
+      recursive_dependencies(syncable_only: true).each do |object|
+        Communication::Website::GitFile.sync website, object
+      end
+      references.each do |object|
+        Communication::Website::GitFile.sync website, object
+      end
     end
     website.git_repository.sync!
   end

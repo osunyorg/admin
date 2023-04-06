@@ -13,12 +13,24 @@ module WithDependencies
     []
   end
 
-  def recursive_dependencies(array = [])
+  # Method is often overriden
+  def syncable?
+    if respond_to? :published_now?
+      published_now?
+    elsif respond_to? :published
+      published
+    else
+      true
+    end
+  end
+
+  def recursive_dependencies(array: [], syncable_only: false)
+    return array if syncable_only && !syncable?
     dependencies.each do |dependency|
       next if dependency.in?(array)
       array << dependency
       next unless dependency.respond_to?(:recursive_dependencies)
-      array = dependency.recursive_dependencies(array)
+      array = dependency.recursive_dependencies(array: array, syncable_only: syncable_only)
     end
     array
   end
