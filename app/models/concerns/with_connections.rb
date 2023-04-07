@@ -38,8 +38,8 @@ module WithConnections
   end
 
   def direct_sources_from_reference(reference)
-    reference.website_direct_object?  ? [reference] # Récupération de la connexion directe
-                                      : reference.direct_sources # Récursivité sur les références
+    reference.respond_to?(:website) ? [reference] # Récupération de la connexion directe
+                                    : reference.direct_sources # Récursivité sur les références
   end
   
 

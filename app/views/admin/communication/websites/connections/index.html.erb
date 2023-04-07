@@ -1,3 +1,36 @@
 <% content_for :title, Communication::Website::Connection.model_name.human(count: 2) %>
 <% content_for :title_right, @connections.count %>
-<%= render 'admin/communication/websites/connections/list', connections: @connections %>
+
+<div class="row">
+  <div class="col-xl-6">
+    <%= osuny_label 'Objets indirects' %>
+    <table class="table">
+      <tbody>
+        <% @connections.pluck(:indirect_object_type).uniq.each do |type| %>
+          <tr>
+            <td><%= type %></td>
+            <td><%= @connections.where(indirect_object_type: type).count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xl-6">
+    <%= osuny_label 'Sources directes' %>
+    <table class="table">
+      <tbody>
+        <% @connections.pluck(:direct_source_type).uniq.each do |type| %>
+          <tr>
+            <td><%= type %></td>
+            <td><%= @connections.where(direct_source_type: type).count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="mt-5">
+  <%= osuny_label 'Connexions détaillées' %>
+  <%= render 'admin/communication/websites/connections/list', connections: @connections %>
+</div>

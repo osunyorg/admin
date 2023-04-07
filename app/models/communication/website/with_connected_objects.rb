@@ -66,7 +66,7 @@ module Communication::Website::WithConnectedObjects
     # On ne connecte pas le site à lui-même
     return if indirect_object.is_a?(Communication::Website)
     # On ne connecte pas les objets directs
-    return if indirect_object.website_direct_object?
+    return if indirect_object.respond_to?(:website)
     # puts "connect #{object} (#{object.class})"
     direct_source_type ||= direct_source.class.base_class.to_s
     connection = connections.where( university: university,

@@ -32,6 +32,6 @@ module WithDependencies
       next unless dependency.respond_to?(:recursive_dependencies)
       array = dependency.recursive_dependencies(array: array, syncable_only: syncable_only)
     end
-    array
+    array.compact
   end
 end
