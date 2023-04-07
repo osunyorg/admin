@@ -40,10 +40,11 @@ class Communication::Website < ApplicationRecord
   include WithAbouts
   include WithConfigs
   include WithConnectedObjects
-  include WithOldDependencies
+  include WithDependencies
   include WithGit
   include WithGitRepository
   include WithImport
+  include WithOldDependencies
   include WithProgramCategories
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu

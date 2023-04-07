@@ -12,6 +12,8 @@ module WithConnections
     # has_many :sources, through: :connections
 
     after_save :sync_connections
+    # TODO: @arnaud pas ouf
+    after_save :sync_website_obsolete_dependencies
     after_touch :sync_connections
   end
 
@@ -41,12 +43,18 @@ module WithConnections
     reference.respond_to?(:website) ? [reference] # Récupération de la connexion directe
                                     : reference.direct_sources # Récursivité sur les références
   end
-  
+
 
   def sync_connections
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
       direct_source.save_and_sync
+    end
+  end
+
+  def sync_website_obsolete_dependencies
+    websites.each do |website|
+      website.sync_obsolete_dependencies
     end
   end
 end

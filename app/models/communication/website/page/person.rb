@@ -45,9 +45,10 @@
 class Communication::Website::Page::Person < Communication::Website::Page
 
   def dependencies
-    super + 
+    super +
     [website.config_default_permalinks] +
-    website.connected_people
+    # TODO: @arnaud ça te va ?
+    explicitly_connected_people
   end
 
   def explicitly_connected_people
@@ -56,7 +57,7 @@ class Communication::Website::Page::Person < Communication::Website::Page
   end
 
   protected
-  
+
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}persons/_index.html"
   end
