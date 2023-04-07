@@ -10,6 +10,7 @@ namespace :communication do
       get :style
       get :analytics
     end
+    resources :dependencies, controller: 'websites/dependencies', only: :index
     resources :connections, controller: 'websites/connections', only: [:index, :show]
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do

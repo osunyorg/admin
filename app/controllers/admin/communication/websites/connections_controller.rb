@@ -1,6 +1,6 @@
 class Admin::Communication::Websites::ConnectionsController < Admin::Communication::Websites::ApplicationController
   def index
-    @connections = @website.connections.ordered.page params[:page]
+    @connections = @website.connections.ordered
     breadcrumb
   end
 

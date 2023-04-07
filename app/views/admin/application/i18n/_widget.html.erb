@@ -1,6 +1,6 @@
 <% if about.available_languages.many? %>
   <%
-    route_args = about.respond_to?(:website)  ? [:admin, about.becomes(about.class.base_class)]
+    route_args = about.website_direct_object? ? [:admin, about.becomes(about.class.base_class)]
                                               : [:show_in_language, :admin, about.becomes(about.class.base_class)]
   %>
   <%= osuny_panel t('internationalization.label') do %>

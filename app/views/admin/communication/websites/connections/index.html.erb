@@ -1,5 +1,3 @@
 <% content_for :title, Communication::Website::Connection.model_name.human(count: 2) %>
-<% content_for :title_right, @connections.total_count %>
-
+<% content_for :title_right, @connections.count %>
 <%= render 'admin/communication/websites/connections/list', connections: @connections %>
-<%= paginate @connections, theme: 'bootstrap-5' %>

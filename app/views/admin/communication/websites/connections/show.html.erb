@@ -1,8 +1,8 @@
 <% content_for :title, @connection %>
 
-<%= osuny_label Communication::Website::Connection.human_attribute_name('object') %>
-<p><%= @connection.object %></p>
-<%= osuny_label Communication::Website::Connection.human_attribute_name('object_type') %>
-<p><%= @connection.object_type %></p>
-<%= osuny_label Communication::Website::Connection.human_attribute_name('object_id') %>
-<p><%= @connection.object_id %></p>
+<%= osuny_label Communication::Website::Connection.human_attribute_name('indirect_object') %>
+<p><%= @connection.indirect_object %></p>
+<%= osuny_label Communication::Website::Connection.human_attribute_name('indirect_object_type') %>
+<p><%= @connection.indirect_object_type %></p>
+<%= osuny_label Communication::Website::Connection.human_attribute_name('indirect_object_id') %>
+<p><%= @connection.indirect_object_id %></p>

@@ -147,14 +147,13 @@ fr:
         parent: Catégorie parente
         slug: Slug
       communication/website/connection:
+        direct_source: Source directe
+        direct_source_type: Type de la source
+        direct_source_id: Identifiant de la source
         id: Identifiant
-        object: Objet
-        object_type: Type de l'objet
-        object_id: Identifiant de l'objet
-        others: Autres connexions
-        source: Source
-        source_type: Type de la source
-        source_id: Identifiant de la source
+        indirect_object: Objet indirect
+        indirect_object_type: Type de l'objet
+        indirect_object_id: Identifiant de l'objet
         updated_at: Date de mise à jour
       communication/website/imported/category:
         original: Original
