@@ -22,7 +22,7 @@
           <%= sanitize @paper.references %>
         <% end %>
       <% end %>
-      <%= render 'admin/communication/blocks/index_edit', about: @paper %>
+      <%= render 'admin/communication/blocks/editor/editor', about: @paper %>
       <%= render 'admin/application/dependencies',
                   git_dependencies: @paper.git_dependencies(@paper.journal.websites.first),
                   active_storage_blobs: @paper.active_storage_blobs %>
