@@ -8,7 +8,7 @@
         <% end %>
         <% if @post.category %>
           <br>
-          Catégorie : <%= link_to @post.category, posts_category_path(slug: @post.category.slug), class: "link" %>
+          Dans : <%= link_to @post.category, posts_category_path(slug: @post.category.slug), class: "link" %>
         <% end %>
       </p>
     </div>
