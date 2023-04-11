@@ -54,9 +54,11 @@
                   </a>
                 <% end %>
               </h3>
-              <div class="media">
-                <%= kamifusen_tag element.best_logo, width: 600 %>
-              </div>
+              <% if element.best_logo.attached? %>
+                <div class="media">
+                  <%= kamifusen_tag element.best_logo, width: 600 %>
+                </div>
+              <% end %>
             </article>
           <% end %>
         </div>
