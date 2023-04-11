@@ -41,7 +41,7 @@
             </article>
           <% end %>
         </div>
-      <% else %>
+      <% else # Map %>
         <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
           <% @block.template.elements.each do |element| %>
             <article class="organization" data-latitude="<%= element.organization.latitude %>" data-longitude="<%= element.organization.longitude %>">
@@ -55,13 +55,19 @@
                 <% end %>
               </h3>
               <div class="media">
-                <%= kamifusen_tag element.best_logo, width: 600%>
+                <%= kamifusen_tag element.best_logo, width: 600 %>
               </div>
             </article>
           <% end %>
         </div>
+        <link   rel="stylesheet" 
+                href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+                integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+                crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+                integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+                crossorigin=""></script>
       <% end %>
     </div>
   </div>
 </section>
-
