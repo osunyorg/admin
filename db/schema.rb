@@ -782,6 +782,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_213542) do
     t.date "received_at"
     t.date "accepted_at"
     t.string "doi"
+    t.text "authors_list"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"

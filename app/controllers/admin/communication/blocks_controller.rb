@@ -23,7 +23,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
         @previous = @heading
       end
     end
-    @block.about.sync_with_git
+    sync_with_git_if_necessary
   end
 
   def new

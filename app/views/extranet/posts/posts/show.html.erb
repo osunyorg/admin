@@ -1,19 +1,26 @@
-<% content_for :title, @post %>
-
-<% content_for :header_right do %>
-  <% if @post.featured_image.attached? %>
-    <figure <% if @post.featured_image_credit.present? %>class="with-credit"<% end %>>
-      <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
-      <% if @post.featured_image_credit.present? %>
-        <figcaption tabindex="0">
-            <%= sanitize @post.featured_image_credit %>
-        </figcaption>
-      <% end %>
-    </figure>
-  <% end %>
+<% content_for :header do %>
+  <div class="header__info">
+    <h1><%= @post %></h1>
+    <% if @post.published_at %>
+      <p>Publié le <%= l @post.published_at.to_date, format: :long %></p>
+    <% end %>
+    <% if @post.category %>
+      <p>Catégorie : <%= link_to @post.category, posts_category_path(slug: @post.category.slug) %></p>
+    <% end %>
+  </div>
+  <div class="header__additional_data">
+    <% if @post.featured_image.attached? %>
+      <figure <% if @post.featured_image_credit.present? %>class="with-credit"<% end %>>
+        <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
+        <% if @post.featured_image_credit.present? %>
+          <figcaption tabindex="0">
+              <%= sanitize @post.featured_image_credit %>
+          </figcaption>
+        <% end %>
+      </figure>
+    <% end %>
+  </div>
 <% end %>
-
-<%= link_to @post.category, posts_category_path(slug: @post.category.slug) if @post.category %>
 
 </main>
 <%= render 'admin/communication/blocks/index_show', about: @post %>

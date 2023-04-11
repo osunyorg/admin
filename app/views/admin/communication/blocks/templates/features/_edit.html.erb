@@ -1,0 +1,35 @@
+<div class="row pure__row--small">
+  <div class="col-xl-6">
+    <%= block_component_edit :description %>
+  </div>
+</div>
+
+<%= block_component_add_element t('.add_element') %>
+<draggable :list="data.elements" handle=".dragHandle" class="mb-3 <%= if_appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
+    <div>
+      <a class="btn ps-0 pt-0 dragHandle"><i class="<%= Icon::DRAG %> handle"></i></a>{{element.title}}
+      <a  class="btn btn-sm text-danger float-end pe-0"
+          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          title="<%= t '.remove_element' %>">
+          <i class="<%= Icon::DELETE %>"></i>
+      </a>
+    </div>
+    <div class="row pure__row--small">
+      <div class="col-lg-4">
+        <%= block_component_edit :title, template: @element %>
+        <%= block_component_edit :description, template: @element, rows: 5 %>
+      </div>
+      <div class="col-lg-4">
+        <%= block_component_edit :image, template: @element %>
+      </div>
+      <div class="col-lg-4" v-show="element.image.id != ''">
+        <%= block_component_edit :alt, template: @element %>
+        <%= block_component_edit :credit, template: @element %>
+      </div>
+    </div>
+  </div>
+</draggable>
+<div v-show="data.elements.length > 2">
+  <%= block_component_add_element t('.add_element') %>
+</div>

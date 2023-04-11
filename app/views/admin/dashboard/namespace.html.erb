@@ -12,10 +12,12 @@
         class_name = part.first
         path = send part.last
         title = class_name.model_name.human(count: 2)
-        description = class_name.human_attribute_name('description')
-        # TODO
-        description = t 'administration.qualiopi.description' if class_name == Administration::Qualiopi
-        description = t 'activerecord.attributes.research/hal.description' if class_name == Research::Hal
+        # Exemples:
+        # administration.description.parts.qualiopi
+        # research.description.parts.researcher
+        # research.hal.description.parts.publication
+        key = "#{@namespace.to_s.underscore.gsub('/', '.')}.description.parts.#{class_name.to_s.demodulize.downcase}"
+        description = t "#{key}.description"
         %>
         <div class="col-lg-6 mt-5">
           <%= osuny_panel title do %>
@@ -30,8 +32,8 @@
     <div class="offset-lg-1 col-lg-4">
       <%= image_tag "admin/#{@namespace.to_s.underscore}.jpg", class: 'img-fluid pure__chapter__image'%>
       <p class="small text-lg-end mt-3">
-        Illustration de Virginia Frances Sterrett. 
-        Source : University of California Libraries, the Internet Archive.
+        Illustration de Virginia Frances Sterrett<br>
+        Source : University of California Libraries, the Internet Archive
       </p>
     </div>
   <% end %>

@@ -22,27 +22,34 @@ window.codemirrorManager = {
 
     createInstance: function (textarea) {
         'use strict';
-        var mode = textarea.getAttribute('data-codemirror-mode'),
+        var config = this.defaultConfig(),
+            mode = textarea.getAttribute('data-codemirror-mode'),
             indentationLevel = window.parseInt(textarea.getAttribute('data-codemirror-indentation'));
 
         if (isNaN(indentationLevel)) {
             indentationLevel = 2;
         }
+        config['mode'] = mode;
+        config['indentUnit'] = indentationLevel;
+        return CodeMirror.fromTextArea(textarea, config);
+    },
 
-        return CodeMirror.fromTextArea(textarea, {
+    defaultConfig: function () {
+        return {
             lineNumbers: true,
             matchBrackets: true,
             styleActiveLine: true,
-            indentUnit: indentationLevel,
-            viewportMargin: Infinity,
-            mode: mode
-        });
+            indentUnit: 2,
+            lineWrapping: true,
+            viewportMargin: Infinity
+        }
     },
 
     invoke: function () {
         'use strict';
         return {
-            init: this.init.bind(this)
+            init: this.init.bind(this),
+            defaultConfig: this.defaultConfig.bind(this)
         };
     }
 }.invoke();

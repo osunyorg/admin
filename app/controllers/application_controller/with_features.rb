@@ -1,4 +1,4 @@
-module Admin::ApplicationController::WithFeatures
+module ApplicationController::WithFeatures
   extend ActiveSupport::Concern
 
   included do

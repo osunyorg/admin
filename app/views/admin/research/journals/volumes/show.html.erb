@@ -21,7 +21,7 @@
               </thead>
               <tbody data-sortable data-sort-url="<%= reorder_admin_research_journal_papers_path(journal_id: @journal.id) %>">
                 <% @papers.each do |paper| %>
-                  <tr data-id="<%= paper.id %>">
+                  <tr data-id="<%= paper.id %>" class="<%= 'draft' unless paper.published? %>">
                     <% if can? :reorder, Research::Journal::Paper %>
                       <td><i class="<%= Icon::DRAG %> handle"></i></td>
                     <% end %>
