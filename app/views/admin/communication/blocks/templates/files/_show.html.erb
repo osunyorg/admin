@@ -1,6 +1,6 @@
 <%
 class_name = "block block-files"
-unless @block.title.blank?
+unless block.title.blank?
   class_name += " block-with-title"
 end
 %>
@@ -8,21 +8,21 @@ end
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.blank? && @block.template.description.blank? %>
+      <% unless block.title.blank? && block.template.description.blank? %>
         <div class="top">
-          <% unless @block.title.blank? %>
-            <h2><%= @block.title %></h2>
+          <% unless block.title.blank? %>
+            <h2><%= block.title %></h2>
           <% end %>
-          <% unless @block.template.description.blank? %>
+          <% unless block.template.description.blank? %>
             <div class="description">
-              <p><%= block_component_preview :description %></p>
+              <p><%= block_component_show block, :description %></p>
             </div>
           <% end %>
         </div>
       <% end %>
 
       <ul class="files">
-        <% @block.template.elements.each do |element| %>
+        <% block.template.elements.each do |element| %>
           <% next unless element.blob %>
           <li>
             <figure>

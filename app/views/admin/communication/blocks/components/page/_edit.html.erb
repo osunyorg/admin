@@ -1,5 +1,5 @@
 <%
-pages = collection_tree(@block.about&.website.pages.for_language(@block.language))
+pages = collection_tree(block.about&.website.pages.for_language(block.language))
 %>
 <% unless label.blank? %>
   <label  class="form-label"

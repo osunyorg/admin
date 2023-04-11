@@ -1,10 +1,10 @@
 <div class="row pure__row--small">
   <div class="col-xl-6">
-    <%= block_component_edit :description %>
+    <%= block_component_edit block, :description %>
   </div>
 </div>
 
-<%= block_component_add_element t('.add_file') %>
+<%= block_component_add_element block, t('.add_file') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small">
   <div v-for="(element, index) in data.elements" class="col-md-4">
@@ -22,8 +22,8 @@
         </div>
       </div>
       <div class="card-body">
-        <%= block_component_edit :title, template: @element %>
-        <%= block_component_edit :file, template: @element %>
+        <%= block_component_edit block, :title, template: @element %>
+        <%= block_component_edit block, :file, template: @element %>
       </div>
     </div>
   </div>

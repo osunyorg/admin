@@ -1,6 +1,6 @@
 <%
   class_name = "block block-embed" 
-  unless @block.title.blank?
+  unless block.title.blank?
     class_name += " block-with-title"
   end
 %>
@@ -8,20 +8,20 @@
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.blank? %>
+      <% unless block.title.blank? %>
         <div class="top">
-          <h2><%= @block.title %></h2>
+          <h2><%= block.title %></h2>
         </div>
       <% end %>
 
-      <%= block_component_preview :code %>
+      <%= block_component_show block, :code %>
 
-      <% unless @block.template.transcription.blank? %>
+      <% unless block.template.transcription.blank? %>
         <div class="transcription">
           <details>
             <summary>Transcription</summary>
             <p>
-              <%= block_component_preview :transcription %>
+              <%= block_component_show block, :transcription %>
             </p>
           </details>
         </div>

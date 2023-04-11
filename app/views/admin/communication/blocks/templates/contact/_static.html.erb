@@ -1,15 +1,15 @@
-<%= block_component_static :description %>
-<%= block_component_static :name %>
+<%= block_component_static block, :description %>
+<%= block_component_static block, :name %>
       address:
-<%= block_component_static :address, depth: 4 %>
-<%= block_component_static :zipcode, depth: 4 %>
-<%= block_component_static :city, depth: 4 %>
-<%= block_component_static :country, depth: 4 %>
-<%= block_component_static :phone_numbers %>
-<%= block_component_static :emails %>
+<%= block_component_static block, :address, depth: 4 %>
+<%= block_component_static block, :zipcode, depth: 4 %>
+<%= block_component_static block, :city, depth: 4 %>
+<%= block_component_static block, :country, depth: 4 %>
+<%= block_component_static block, :phone_numbers %>
+<%= block_component_static block, :emails %>
       timetable:
 <% block.template.elements.each do |element| %>
-<%= block_component_static :title, template: element, list: true, depth: 4 %>
-<%= block_component_static :time_slot_morning, template: element, depth: 5 %>
-<%= block_component_static :time_slot_afternoon, template: element, depth: 5 %>
+<%= block_component_static block, :title, template: element, list: true, depth: 4 %>
+<%= block_component_static block, :time_slot_morning, template: element, depth: 5 %>
+<%= block_component_static block, :time_slot_afternoon, template: element, depth: 5 %>
 <% end %>

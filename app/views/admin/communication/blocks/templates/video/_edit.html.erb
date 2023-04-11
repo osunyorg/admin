@@ -1,10 +1,10 @@
 <div class="row pure__row--small">
   <div class="col-md-6">
-    <%= block_component_edit :url %>
-    <%= block_component_edit :video_title %>
+    <%= block_component_edit block, :url %>
+    <%= block_component_edit block, :video_title %>
   </div>
   <div class="col-md-6">
-    <%= block_component_edit :transcription,
+    <%= block_component_edit block, :transcription,
             label: t('admin.communication.blocks.components.text.transcription.label'),
             placeholder: t('admin.communication.blocks.components.text.transcription.placeholder'), rows: 10 %>
   </div>

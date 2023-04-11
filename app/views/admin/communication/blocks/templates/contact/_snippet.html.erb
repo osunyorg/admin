@@ -1,0 +1,32 @@
+<address itemscope itemtype="https://schema.org/Organization" class="mb-0">
+  <%= strip_tags  block_component_snippet block, :name %>
+  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+    <span itemprop="streetAddress">
+      <%= strip_tags block_component_snippet block, :address %>
+    </span>
+    <span itemprop="addressLocality">
+      <%= strip_tags block_component_snippet block, :city %>
+    </span>
+    <span itemprop="postalCode">
+      <%= strip_tags block_component_snippet block, :zipcode %>
+    </span>
+    <span itemprop="addressCountry">
+      <%= strip_tags block_component_snippet block, :country %>
+    </span>
+  </span>
+  <% block.template.phone_numbers.each do |phone_number| %>
+    <%= phone_number %>
+  <% end %>
+  <% block.template.emails.each do |email| %>
+    <%= email %>
+  <% end %>
+</address>
+<ul class="list-unstyled">
+  <% block.template.elements.each do |element| %>
+    <li>
+      <span><%= block_component_snippet block, :title, template: element %></span>
+      <span><time datetime="<%= block_component_snippet block, :time_slot_morning, template: element %>"><%= block_component_snippet block, :time_slot_morning, template: element %></time></span>
+      <span><time datetime="<%= block_component_snippet block, :time_slot_afternoon, template: element %>"><%= block_component_snippet block, :time_slot_afternoon, template: element %></time></span>
+    </li>
+  <% end %>
+</ul>

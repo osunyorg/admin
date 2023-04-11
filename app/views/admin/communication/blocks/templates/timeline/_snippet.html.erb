@@ -1,0 +1,6 @@
+<p class="mb-0">
+  <%= block.template.elements.first(2).map { |element| 
+    (block_component_snippet block, :title, template: element).strip
+  }.join(', ')
+  %>...
+</p>

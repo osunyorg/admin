@@ -1,7 +1,7 @@
-<%= block_component_static :url %>
-<%= block_component_static :video_title %>
+<%= block_component_static block, :url %>
+<%= block_component_static block, :video_title %>
 <% if block.template.url.present? %>
       video_iframe: >-
         <%= block.template.video_iframe %>
 <% end %>
-<%= block_component_static :transcription %>
+<%= block_component_static block, :transcription %>

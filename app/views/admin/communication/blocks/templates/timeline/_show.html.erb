@@ -1,25 +1,25 @@
 <%
   class_name = "block block-timeline"
-  unless @block.title.blank?
+  unless block.title.blank?
     class_name += " block-with-title"
   end
-  class_name += " block-timeline--" + @block.template.layout
+  class_name += " block-timeline--" + block.template.layout
 %>
 
 <section class="<%= class_name %>">
   <div class="container">
-    <% if @block.template.layout == "vertical" %>
+    <% if block.template.layout == "vertical" %>
       <div class="block-content">
-        <% unless @block.title.blank? %>
+        <% unless block.title.blank? %>
           <div class="top">
-            <h2><%= @block.title %></h2>
+            <h2><%= block.title %></h2>
           </div>
         <% end %>
         <div class="events">
-          <% @block.template.elements.each do |element| %>
+          <% block.template.elements.each do |element| %>
             <article class="event">
               <h3 class="event-title">
-                <%= block_component_preview :title, template: element %>
+                <%= block_component_show block, :title, template: element %>
               </h3>
 
               <%# TODO: gérer les sauts de ligne %>
@@ -30,20 +30,20 @@
       </div>
     <% else %>
       <div class="timeline">
-        <% unless @block.title.blank? %>
-          <h2><%= @block.title %></h2>
+        <% unless block.title.blank? %>
+          <h2><%= block.title %></h2>
         <% end %>
         <div class="events">
           <ol>
-            <% @block.template.elements.each do |element| %>
+            <% block.template.elements.each do |element| %>
               <li class="event">
-                <p class="title"><%= block_component_preview :title, template: element %><p>
+                <p class="title"><%= block_component_show block, :title, template: element %><p>
                 <div class="line"></div>
-                <div class="description"><%= block_component_preview :text, template: element %></div>
+                <div class="description"><%= block_component_show block, :text, template: element %></div>
               </li>
             <% end %>
           </ol>
-          <% if !@block.template.elements.one? %>
+          <% if !block.template.elements.one? %>
             <div class="timeline-arrows">
               <button class="previous" disabled></button>
               <button class="next"></button>

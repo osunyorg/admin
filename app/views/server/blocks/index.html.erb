@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @templates.each do |template| %>
+      <% block.templates.each do |template| %>
         <tr>
           <td><%= link_to t("enums.communication.block.template_kind.#{template}"), server_block_path(template) %></td>
           <td><%= Communication::Block.send(template).count %></td>

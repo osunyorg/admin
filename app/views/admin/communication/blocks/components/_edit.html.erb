@@ -1,9 +1,9 @@
 <%
-template ||= @block.template
+template ||= block.template
 component = template.public_send "#{property}_component"
 i18n = "admin.communication.blocks.templates.#{template.kind}.edit"
-template ||= @block.template
-root_template = template == @block.template
+# Distinguish between explicit template and implicit template
+root_template = template == block.template
 if root_template
   model = 'data'
   dom_id = "'#{property}'"

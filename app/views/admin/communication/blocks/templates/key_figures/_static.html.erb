@@ -1,7 +1,7 @@
-<%= block_component_static :description %>
+<%= block_component_static block, :description %>
       figures:
 <% block.template.elements.each do |element| %>
-        - <%= block_component_static :number, template: element, depth: 0 %>
-<%= block_component_static :unit, template: element, depth: 5 %>
-<%= block_component_static :description, template: element, depth: 5 %>
+        - <%= block_component_static block, :number, template: element, depth: 0 %>
+<%= block_component_static block, :unit, template: element, depth: 5 %>
+<%= block_component_static block, :description, template: element, depth: 5 %>
 <% end %>

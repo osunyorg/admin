@@ -1,6 +1,6 @@
 <%
   class_name = "block block-definitions"
-  unless @block.title.blank?
+  unless block.title.blank?
     class_name += " block-with-title"
   end
 %>
@@ -8,25 +8,25 @@
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.blank? && @block.template.description.blank? %>
+      <% unless block.title.blank? && block.template.description.blank? %>
         <div class="top">
-          <% unless @block.title.blank? %>
-            <h2><%= @block.title %></h2>
+          <% unless block.title.blank? %>
+            <h2><%= block.title %></h2>
           <% end %>
-          <% unless @block.template.description.blank? %>
+          <% unless block.template.description.blank? %>
             <div class="description">
-              <p><%= block_component_preview :description %></p>
+              <p><%= block_component_show block, :description %></p>
             </div>
           <% end %>
         </div>
       <% end %>
       <div class="definitions">
-        <% @block.template.elements.each do |element| %>
+        <% block.template.elements.each do |element| %>
           <details itemscope itemtype="https://schema.org/DefinedTerm">
             <summary itemprop="name">
-              <%= block_component_preview :title, template: element %>
+              <%= block_component_show block, :title, template: element %>
             </summary>
-            <p itemprop="description"><%= block_component_preview :description, template: element %></p>
+            <p itemprop="description"><%= block_component_show block, :description, template: element %></p>
           </details>
         <% end %>
     </div>

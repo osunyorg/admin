@@ -1,9 +1,9 @@
-<%= block_component_static :description %>
-<%= block_component_static :with_link %>
-<%= block_component_static :with_photo %>
+<%= block_component_static block, :description %>
+<%= block_component_static block, :with_link %>
+<%= block_component_static block, :with_photo %>
       persons:
 <% block.template.elements.each do |element| %>
 <% next unless element.person %>
         - slug: "<%= element.person.slug %>"
-<%= block_component_static :role, template: element, depth: 5 %>
+<%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>

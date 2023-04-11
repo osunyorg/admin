@@ -1,13 +1,13 @@
-<%= block_component_edit :layout %>
+<%= block_component_edit block, :layout %>
 
 <div class="row pure__row--small">
   <div class="col-xl-6">
-    <%= block_component_edit :description %>
+    <%= block_component_edit block, :description %>
   </div>
   <div class="col-xl-6">
     <label class="form-label">&nbsp;</label>
-    <%= block_component_edit :with_link %>
-    <%= block_component_edit :alphabetical %>
+    <%= block_component_edit block, :with_link %>
+    <%= block_component_edit block, :alphabetical %>
   </div>
 </div>
 <draggable :list="data.elements" class="mb-3 <%= if_appstack 'list-group' %>" handle=".partnerHandle">
@@ -19,16 +19,16 @@
         </a>
       </div>
       <div class="flex-fill">
-        <%= block_component_edit :id, template: @element, label: '' %>
+        <%= block_component_edit block, :id, template: @element, label: '' %>
         <div class="row pure__row--small mt-n2"  v-if="!element.id">
           <div class="col-xl-4 col-md-6">
-            <%= block_component_edit :name, template: @element %>
+            <%= block_component_edit block, :name, template: @element %>
           </div>
           <div class="col-xl-4 col-md-6">
-            <%= block_component_edit :url, template: @element %>
+            <%= block_component_edit block, :url, template: @element %>
           </div>
           <div class="col-xl-4 col-md-6">
-            <%= block_component_edit :logo, template: @element %>
+            <%= block_component_edit block, :logo, template: @element %>
           </div>
         </div>
       </div>
@@ -42,4 +42,4 @@
     </div>
   </div>
 </draggable>
-<%= block_component_add_element t('.add_partner') %>
+<%= block_component_add_element block, t('.add_partner') %>

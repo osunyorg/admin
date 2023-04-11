@@ -4,8 +4,8 @@
   </div>
 </div>
 <div class="mb-4">
-  <%= block_component_edit :code %>
+  <%= block_component_edit block, :code %>
 </div>
-<%= block_component_edit :transcription,
+<%= block_component_edit block, :transcription,
       label: t('admin.communication.blocks.components.text.transcription.label'),
       placeholder: t('admin.communication.blocks.components.text.transcription.placeholder') %>

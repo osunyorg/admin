@@ -1,0 +1,12 @@
+<% block.template.elements.each do |element|
+  person = element.person
+  next if person.nil?
+  %>
+  <span class="me-2">
+    <% if person.best_picture.attached? %>
+      <%= image_tag person.best_picture.variant(resize: '180x180'), width: 90, class: 'img-fluid rounded-circle' %>
+    <% else %>
+      <%= element.person %>
+    <% end %>
+  </span>
+<% end %>

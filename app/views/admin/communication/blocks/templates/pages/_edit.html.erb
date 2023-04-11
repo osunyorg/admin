@@ -1,19 +1,19 @@
-<%= block_component_edit :layout %>
+<%= block_component_edit block, :layout %>
 
 <div class="row pure__row--small">
   <div class="col-lg-6">
     <div class="mb-5">
-      <%= block_component_edit :mode %>
+      <%= block_component_edit block, :mode %>
     </div>
 
     <div class="mb-5">
       <h2 class="h3"><%= t '.main_page.title' %></h2>
-      <%= block_component_edit :page_id %>
+      <%= block_component_edit block, :page_id %>
     </div>
 
     <div class="mb-4" v-if="data.mode == 'selection'">
       <h2 class="h3"><%= t '.selection.title' %></h2>
-      <%= block_component_add_element t('.selection.add') %>
+      <%= block_component_add_element block, t('.selection.add') %>
       <draggable :list="data.elements" handle=".dragHandle" class="<%= if_appstack 'list-group' %>">
         <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
           <div class="d-flex mb-n3">
@@ -23,7 +23,7 @@
               </a>
             </div>
             <div class="flex-fill">
-              <%= block_component_edit :id, template: @element %>
+              <%= block_component_edit block, :id, template: @element %>
             </div>
             <div>
               <a  class="btn btn-sm text-danger ms-3"
@@ -39,10 +39,10 @@
   </div>
   <div class="col-lg-6">
     <h2 class="h3"><%= t '.display.title' %></h2>
-    <%= block_component_edit :show_main_description %>
+    <%= block_component_edit block, :show_main_description %>
     <div v-show="data.layout != 'list'">
-      <%= block_component_edit :show_description %>
-      <%= block_component_edit :show_image %>
+      <%= block_component_edit block, :show_description %>
+      <%= block_component_edit block, :show_image %>
     </div>
   </div>
 </div>

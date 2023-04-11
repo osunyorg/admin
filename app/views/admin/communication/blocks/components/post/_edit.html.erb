@@ -1,4 +1,4 @@
-<% posts = @block.about&.website.posts.for_language(@block.language).ordered %>
+<% posts = block.about&.website.posts.for_language(block.language).ordered %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>

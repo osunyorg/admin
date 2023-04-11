@@ -20,6 +20,6 @@ categories:
 <%= render 'admin/application/featured_image/static' %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-<%= render 'admin/communication/blocks/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>

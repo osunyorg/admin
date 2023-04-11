@@ -15,5 +15,5 @@ level: <%= @about.level_i18n %>
 ects: <%= @about.ects %>
 duration: >
   <%= prepare_text_for_static @about.duration %>
-<%= render 'admin/communication/blocks/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

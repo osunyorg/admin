@@ -1,0 +1,5 @@
+<p class="mb-0">
+  <% block.template.elements.first(1).each do |element| %>
+    <%= block_component_snippet block, :text, template: element %>
+  <% end %>
+</p>

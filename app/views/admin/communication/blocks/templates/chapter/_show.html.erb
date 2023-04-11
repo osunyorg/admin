@@ -1,40 +1,32 @@
 <%
 class_name = "block block-chapter"
-
-unless @block.title.blank?
-  class_name += " block-with-title"
-end
-
-if @block.template.image[:id] #TODO comment vérifier proprement la présence de l'image?
-  class_name += " block-chapter--with-image"
-end
-
-class_name += " block-chapter--" + @block.template.layout
-
+class_name += " block-with-title" unless block.title.blank?
+#TODO comment vérifier proprement la présence de l'image?
+class_name += " block-chapter--with-image" if block.template.image[:id]
+class_name += " block-chapter--" + block.template.layout
 %>
-
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <div class="chapter">
         <div class="text">
-          <% unless @block.title.blank? %>
+          <% if block.title.present? %>
             <div class="top">
-              <h2><%= @block.title %></h2>
+              <h2><%= block.title %></h2>
             </div>
           <% end %>
-          <% unless @block.template.text.blank? %>
+          <% if block.template.text.present? %>
             <div class="rich-text">
-              <%= block_component_preview :text %>
+              <%= block_component_show block, :text %>
             </div>
           <% end %>
-          <% unless @block.template.notes.blank? %>
+          <% if block.template.notes.present? %>
             <div class="notes">
-              <%= block_component_preview :notes %>
+              <%= block_component_show block, :notes %>
             </div>
           <% end %>
         </div>
-        <%= block_component_preview :image %>
+        <%= block_component_show block, :image %>
       </div>
     </div>
   </div>

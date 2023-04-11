@@ -1,46 +1,46 @@
 <%
 class_name = "block block-gallery"
-if @block.title.present?
+if block.title.present?
   class_name += " block-with-title"
 end
 
-class_name += " block-gallery--" + @block.template.layout
+class_name += " block-gallery--" + block.template.layout
 %>
 
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <% if @block.title.present? || @block.template.description.present? %>
+      <% if block.title.present? || block.template.description.present? %>
         <div class="top">
-          <% if @block.title.present? %>
-            <h2><%= @block.title %></h2>
+          <% if block.title.present? %>
+            <h2><%= block.title %></h2>
           <% end %>
-          <% if @block.template.description.present? %>
+          <% if block.template.description.present? %>
             <div class="description">
-              <p><%= block_component_preview :description %></p>
+              <p><%= block_component_show block, :description %></p>
             </div>
           <% end %>
         </div>
       <% end %>
 
-      <% if @block.template.layout ===  "carousel" %>
-        <% if !@block.template.elements.one? %>
+      <% if block.template.layout ===  "carousel" %>
+        <% if !block.template.elements.one? %>
           <div class="splide" role="group" data-splide='{"arrows":true,"pagination":false,"autoWidth":true,"autoplay":false}'>
             <div class="splide__track">
               <div class="splide__list">
         <% end %>
-        <% @block.template.elements.each do |element| %>
-          <%= block_component_preview :image, template: element %>
+        <% block.template.elements.each do |element| %>
+          <%= block_component_show block, :image, template: element %>
         <% end %>
-        <% if !@block.template.elements.one? %>
+        <% if !block.template.elements.one? %>
               </div>
             </div>
           </div>
         <% end %>
       <% else %>
         <div class="gallery" role="group">
-          <% @block.template.elements.each do |element| %>
-            <%= block_component_preview :image, template: element %>
+          <% block.template.elements.each do |element| %>
+            <%= block_component_show block, :image, template: element %>
           <% end %>
         </div>
       <% end %>

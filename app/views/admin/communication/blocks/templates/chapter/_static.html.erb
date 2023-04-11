@@ -1,6 +1,6 @@
       layout: <%= block.template.layout %>
-<%= block_component_static :text %>
-<%= block_component_static :notes %>
-<%= block_component_static :image %>
-<%= block_component_static :alt %>
-<%= block_component_static :credit %>
+<%= block_component_static block, :text %>
+<%= block_component_static block, :notes %>
+<%= block_component_static block, :image %>
+<%= block_component_static block, :alt %>
+<%= block_component_static block, :credit %>

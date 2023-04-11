@@ -1,0 +1,6 @@
+<% about.blocks.with_no_heading.published.ordered.each do |block| %>
+  <%= render "admin/communication/blocks/templates/#{block.template_kind}/show", block: block %>
+<% end %>
+<% about.headings.root.each do |heading| %>
+  <%= render 'admin/communication/blocks/headings/show', heading: heading %>
+<% end %>

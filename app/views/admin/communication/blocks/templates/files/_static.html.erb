@@ -1,7 +1,7 @@
-<%= block_component_static :description %>
+<%= block_component_static block, :description %>
       files:
 <% block.template.elements.each do |element| %>
 <% next unless element.blob %>
-<%= block_component_static :file, template: element, depth: 4, list: true %>
-<%= block_component_static :title, template: element, depth: 5 %>
+<%= block_component_static block, :file, template: element, depth: 4, list: true %>
+<%= block_component_static block, :title, template: element, depth: 5 %>
 <% end %>

@@ -1,6 +1,6 @@
 <p class="small"><%= t('.title_disclaimer') %></p>
 
-<%= block_component_add_element t('.add_testimonial') %>
+<%= block_component_add_element block, t('.add_testimonial') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small <%= if_appstack 'list-group' %>">
   <div v-for="(element, index) in data.elements" class="<%= if_appstack 'list-group-item' %>">
@@ -13,14 +13,14 @@
       <div class="flex-fill">
         <div class="row pure__row--small mb-n3">
           <div class="col-lg-4">
-            <%= block_component_edit :text, template: @element %>
+            <%= block_component_edit block, :text, template: @element %>
           </div>
           <div class="col-lg-4">
-            <%= block_component_edit :author, template: @element %>
-            <%= block_component_edit :job, template: @element %>
+            <%= block_component_edit block, :author, template: @element %>
+            <%= block_component_edit block, :job, template: @element %>
           </div>
           <div class="col-lg-4">
-            <%= block_component_edit :photo, template: @element %>
+            <%= block_component_edit block, :photo, template: @element %>
           </div>
         </div>
       </div>

@@ -1,0 +1,5 @@
+<p>
+  <%= block.template.elements.first(2).map { |element|
+    strip_tags(block_component_snippet block, :title, template: element).strip
+  }.join(', ') %>...
+</p>

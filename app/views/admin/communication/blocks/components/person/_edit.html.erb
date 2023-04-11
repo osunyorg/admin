@@ -1,4 +1,4 @@
-<% people = current_university.people.for_language(@block.language).ordered %>
+<% people = current_university.people.for_language(block.language).ordered %>
 <% unless label.blank? %>
   <label  class="form-label"
           :for="<%= dom_id.html_safe %>">

@@ -1,21 +1,21 @@
 <%
 $class = "block block-posts"
-unless @block.title.blank?
+unless block.title.blank?
   $class += " block-with-title"
 end
-$class += " block-posts--" + @block.template.layout
+$class += " block-posts--" + block.template.layout
 %>
 <section class="<%= $class %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.blank? %>
+      <% unless block.title.blank? %>
         <div class="top">
-          <h2><%= @block.title %></h2>
+          <h2><%= block.title %></h2>
         </div>
       <% end %>
       <div class="list">
-        <% if @block.data %>
-          <% @block.template.selected_posts.each do |post| %>
+        <% if block.data %>
+          <% block.template.selected_posts.each do |post| %>
             <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
               <div class="post-content">
                 <a href="#"><%= post %></a>

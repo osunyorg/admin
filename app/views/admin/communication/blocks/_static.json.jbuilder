@@ -1,6 +1,6 @@
-json.content about.content do |block_or_heading|
-  if block_or_heading.is_a? Communication::Block
-    json.partial! 'admin/communication/blocks/block_static', block: block_or_heading
-  else
-  end
+json.kind 'block'
+json.position block.position
+json.template block.template_kind
+json.data do
+  json.partial! "admin/communication/blocks/templates/#{block.template_kind}/static", block: block
 end

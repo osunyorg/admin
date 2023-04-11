@@ -1,38 +1,38 @@
 <%
 class_name = "block block-datatable"
-unless @block.title.blank?
+unless block.title.blank?
   class_name += " block-with-title"
 end
 %>
 <section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <% unless @block.title.blank? && @block.template.description.blank? %>
+      <% unless block.title.blank? && block.template.description.blank? %>
         <div class="top">
-          <% unless @block.title.blank? %>
-            <h2><%= @block.title %></h2>
+          <% unless block.title.blank? %>
+            <h2><%= block.title %></h2>
           <% end %>
-          <% unless @block.template.description.blank? %>
+          <% unless block.template.description.blank? %>
             <div class="description">
-              <p><%= block_component_preview :description %></p>
+              <p><%= block_component_show block, :description %></p>
             </div>
           <% end %>
         </div>
       <% end %>
       <div class="table-responsive">
         <table>
-          <% unless @block.template.caption.blank? %>
-            <caption><%= block_component_preview :caption %></caption>
+          <% unless block.template.caption.blank? %>
+            <caption><%= block_component_show block, :caption %></caption>
           <% end %>
           <thead>
             <tr>
-              <%= block_component_preview :columns %>
+              <%= block_component_show block, :columns %>
             </tr>
           </thead>
           <tbody>
-            <% @block.template.elements.each do |row| %>
+            <% block.template.elements.each do |row| %>
               <tr>
-                <%= block_component_preview :cells, template: row %>
+                <%= block_component_show block, :cells, template: row %>
               </tr>
             <% end %>
           </tbody>

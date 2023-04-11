@@ -18,11 +18,7 @@
         </span>
       </div>
       <div class="blocks__list__preview">
-        <% 
-        @block = block
-        @template = @block.template
-        %>
-        <%= render "admin/communication/blocks/templates/#{@block.template_kind}/preview" %>
+        <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
       </div>
       <%= render 'admin/application/a11y/status', about: block unless block.accessible? %>
     </article>

@@ -1,9 +1,9 @@
-<%= block_component_static :description %>
+<%= block_component_static block, :description %>
       elements:
 <% block.template.elements.each do |element| %>
-<%= block_component_static :title, template: element, list: true, depth: 4 %>
-<%= block_component_static :description, template: element, depth: 5 %>
-<%= block_component_static :image, template: element, depth: 5 %>
-<%= block_component_static :alt, template: element, depth: 5 %>
-<%= block_component_static :credit, template: element, depth: 5 %>
+<%= block_component_static block, :title, template: element, list: true, depth: 4 %>
+<%= block_component_static block, :description, template: element, depth: 5 %>
+<%= block_component_static block, :image, template: element, depth: 5 %>
+<%= block_component_static block, :alt, template: element, depth: 5 %>
+<%= block_component_static block, :credit, template: element, depth: 5 %>
 <% end %>

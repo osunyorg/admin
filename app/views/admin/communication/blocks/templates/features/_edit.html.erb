@@ -1,10 +1,10 @@
 <div class="row pure__row--small">
   <div class="col-xl-6">
-    <%= block_component_edit :description %>
+    <%= block_component_edit block, :description %>
   </div>
 </div>
 
-<%= block_component_add_element t('.add_element') %>
+<%= block_component_add_element block, t('.add_element') %>
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3 <%= if_appstack 'list-group' %>">
   <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
     <div>
@@ -17,19 +17,19 @@
     </div>
     <div class="row pure__row--small">
       <div class="col-lg-4">
-        <%= block_component_edit :title, template: @element %>
-        <%= block_component_edit :description, template: @element, rows: 5 %>
+        <%= block_component_edit block, :title, template: @element %>
+        <%= block_component_edit block, :description, template: @element, rows: 5 %>
       </div>
       <div class="col-lg-4">
-        <%= block_component_edit :image, template: @element %>
+        <%= block_component_edit block, :image, template: @element %>
       </div>
       <div class="col-lg-4" v-show="element.image.id != ''">
-        <%= block_component_edit :alt, template: @element %>
-        <%= block_component_edit :credit, template: @element %>
+        <%= block_component_edit block, :alt, template: @element %>
+        <%= block_component_edit block, :credit, template: @element %>
       </div>
     </div>
   </div>
 </draggable>
 <div v-show="data.elements.length > 2">
-  <%= block_component_add_element t('.add_element') %>
+  <%= block_component_add_element block, t('.add_element') %>
 </div>
