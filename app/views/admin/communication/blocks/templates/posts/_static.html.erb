@@ -1,4 +1,6 @@
-<% if block.template.mode == 'category' && block.template.category %>
+<% if block.template.mode == 'all' %>
+      all: true
+<% elsif block.template.mode == 'category' && block.template.category %>
       category: "<%= block.template.category.path %>"
 <% end %>
       layout: <%= block.template.layout %>
