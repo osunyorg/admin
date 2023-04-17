@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: communication_blocks
+#
+#  id            :uuid             not null, primary key
+#  about_type    :string           indexed => [about_id]
+#  data          :jsonb
+#  position      :integer          default(0), not null
+#  published     :boolean          default(TRUE)
+#  template_kind :integer          default(NULL), not null
+#  title         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  about_id      :uuid             indexed => [about_type]
+#  heading_id    :uuid             indexed
+#  university_id :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_communication_blocks_on_heading_id     (heading_id)
+#  index_communication_blocks_on_university_id  (university_id)
+#  index_communication_website_blocks_on_about  (about_type,about_id)
+#
+# Foreign Keys
+#
+#  fk_rails_18291ef65f  (university_id => universities.id)
+#  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
+#
+
+olivia_in_noesya:
+  university: default_university
+  about: noesya (University::Organization)
+  data: { "elements": [ { "id": "53cbac40-e430-585a-965c-a7412a92f35a" } ] }
+  position: 1
+  template_kind: :organization_chart
+  published: true

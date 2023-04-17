@@ -6,15 +6,18 @@ module WithConnections
     include WithDependencies
     include WithReferences
 
-    has_many :connections, as: :indirect_object, class_name: 'Communication::Website::Connection'
-    has_many :websites, through: :connections
-    # Ce serait super, mais Rails ne sait pas faire ça avec un objet polymorphe
-    # has_many :sources, through: :connections
+    has_many  :connections, 
+              as: :indirect_object,
+              class_name: 'Communication::Website::Connection',
+              dependent: :destroy # When the indirect object disappears, the connections must disappear
+    has_many  :websites, 
+              through: :connections
+    # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
+    # has_many :direct_sources, through: :connections
 
-    after_save :sync_connections
-    # TODO: @arnaud pas ouf
-    after_save :sync_website_obsolete_dependencies
+    after_save  :sync_connections
     after_touch :sync_connections
+    after_save  :sync_obsolete_dependencies
   end
 
   def for_website?(website)
@@ -52,7 +55,8 @@ module WithConnections
     end
   end
 
-  def sync_website_obsolete_dependencies
+  def sync_obsolete_dependencies
+     # TODO: pas ouf de passer par le site, ce serait plus léger en calcul de faire une analyse plus étroite
     websites.each do |website|
       website.sync_obsolete_dependencies
     end

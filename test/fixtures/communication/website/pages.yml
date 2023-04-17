@@ -42,12 +42,32 @@
 #  fk_rails_304f57360f  (original_id => communication_website_pages.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
-page1:
+page_root:
   university: default_university
   website: website_with_github
-  title: Page 1
-  slug: page-1
+  title: Accueil
+  type: Communication::Website::Page::Home
+  slug: ''
   language: fr
   position: 1
   published: true
-  text: Lorem Ipsum
+  
+page_test:
+  university: default_university
+  website: website_with_github
+  title: Test
+  slug: 'test'
+  language: fr
+  position: 1
+  published: true
+  parent: page_root
+
+page_with_no_dependency:
+  university: default_university
+  website: website_with_github
+  title: Page with no dependency
+  slug: 'page-with-no-dependency'
+  language: fr
+  position: 2
+  published: true
+  parent: page_root

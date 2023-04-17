@@ -25,14 +25,14 @@
 #  fk_rails_bd1ac8383b  (university_id => universities.id)
 #
 
-one:
-  university: one
-  website: one
-  object: one
-  source: one
+# one:
+#   university: one
+#   website: one
+#   indirect_object: one
+#   direct_source: one
 
-two:
-  university: two
-  website: two
-  object: two
-  source: two
+# two:
+#   university: two
+#   website: two
+#   indirect_object: two
+#   direct_source: two

@@ -12,16 +12,19 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid             indexed => [about_type]
+#  heading_id    :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_communication_blocks_on_heading_id     (heading_id)
 #  index_communication_blocks_on_university_id  (university_id)
 #  index_communication_website_blocks_on_about  (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_18291ef65f  (university_id => universities.id)
+#  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
   include Accessible
@@ -71,6 +74,7 @@ class Communication::Block < ApplicationRecord
 
   after_save :sync_if_about_is_direct
   before_save :attach_template_blobs
+  before_validation :set_university_from_about, on: :create
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
@@ -129,6 +133,10 @@ class Communication::Block < ApplicationRecord
   end
 
   protected
+
+  def set_university_from_about
+    self.university_id = about.university_id
+  end
 
   def check_accessibility
     accessibility_merge template

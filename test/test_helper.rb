@@ -34,6 +34,22 @@ class ActiveSupport::TestCase
     @alumnus_person ||= university_people(:alumnus)
   end
 
+  def olivia
+    @olivia ||= university_people(:olivia)
+  end
+
+  def pa
+    @pa ||= university_people(:pa)
+  end
+
+  def arnaud
+    @arnaud ||= university_people(:arnaud)
+  end
+
+  def noesya
+    @noesya ||= university_organizations(:noesya)
+  end
+
   def admin
     @admin ||= users(:admin)
   end

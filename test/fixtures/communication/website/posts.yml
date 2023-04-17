@@ -53,3 +53,11 @@ test_post_2:
   language: fr
   published: true
   published_at: 2010-11-28 00:00:00
+test_post_3:
+  university: default_university
+  website: website_with_github
+  title: Test 3
+  slug: test-3
+  language: fr
+  published: false
+  published_at: 2010-11-28 00:00:00

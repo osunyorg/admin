@@ -58,6 +58,7 @@ module Communication::Website::WithConnectedObjects
   protected
 
   def connect_object(indirect_object, direct_source, direct_source_type: nil)
+    # byebug if indirect_object.is_a?(Communication::Block) && indirect_object.template_kind == 'organization_chart'
     return unless persisted?
     # On ne connecte pas les objets inexistants
     return if indirect_object.nil?

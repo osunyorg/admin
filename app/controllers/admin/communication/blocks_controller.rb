@@ -30,7 +30,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def create
-    @block.university = current_university
     if @block.save
       redirect_to [:edit, :admin, @block],
                   notice: t('admin.successfully_created_html', model: @block.to_s)
