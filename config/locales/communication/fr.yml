@@ -467,6 +467,7 @@ fr:
               cards:
                 label: Cartes
                 description: Des cartes côte à côte, de même hauteur, avec une couleur forte au survol. Ce format est idéal pour un petit nombre de pages.
+                more: En savoir plus
               grid:
                 label: Grille
                 description: Les pages sont présentées en grille, de gauche à droite puis de haut en bas.
