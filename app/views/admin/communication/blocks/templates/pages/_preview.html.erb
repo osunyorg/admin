@@ -15,7 +15,7 @@ class_name += " block-pages--" + @block.template.layout
             <% if @block.template.layout === "cards" || @block.template.layout === "list" %>
               <h2><%= link_to @block.template.page, @block.template.page.url %></h2>
             
-            <% elsif @block.template.layout === "grid" && @block.template.page %>
+            <% elsif @block.template.layout === "grid" && @block.template.page && @block.template.show_main_description %>
               <h2><%= link_to @block.title, @block.template.page.url %></h2>
               <p class="description"><%= @block.template.page.summary %></p>
 
