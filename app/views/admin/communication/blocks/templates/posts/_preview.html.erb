@@ -6,7 +6,6 @@ end
 class_name += " block-posts--" + @block.template.layout
 
 date_format = "%e %B %Y"
-highlight_post = @block.template.selected_posts.first
 %>
 <section class="<%= class_name %>">
   <div class="container">
@@ -55,7 +54,9 @@ highlight_post = @block.template.selected_posts.first
           <% end %>
         </div>
 
-      <% elsif @block.template.layout ===  "highlight" %>
+      <% elsif @block.template.layout ===  "highlight"
+        highlight_post = @block.template.selected_posts.first 
+      %>
         <div class="highlight">
           <div class="highlight-post">
               <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
