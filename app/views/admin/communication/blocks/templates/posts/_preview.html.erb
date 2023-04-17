@@ -1,11 +1,14 @@
 <%
-$class = "block block-posts"
+class_name = "block block-posts"
 unless @block.title.blank?
-  $class += " block-with-title"
+  class_name += " block-with-title"
 end
-$class += " block-posts--" + @block.template.layout
+class_name += " block-posts--" + @block.template.layout
+
+date_format = "%e %B %Y"
+highlight_post = @block.template.selected_posts.first
 %>
-<section class="<%= $class %>">
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% unless @block.title.blank? %>
@@ -13,26 +16,147 @@ $class += " block-posts--" + @block.template.layout
           <h2><%= @block.title %></h2>
         </div>
       <% end %>
-      <div class="list">
-        <% if @block.data %>
-          <% @block.template.selected_posts.each do |post| %>
-            <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-              <div class="post-content">
-                <a href="#"><%= post %></a>
-                <p itemprop="articleBody"><%= post.summary %></p>
-              </div>
-              <div class="post-meta">
-                <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= post.published_at.to_date %></time>
-              </div>
-              <% if post.best_featured_image.attached? %>
-                <div class="media">
-                  <%= kamifusen_tag post.best_featured_image %>
+
+      <% if @block.template.layout ===  "list" %>
+        <div class="list">
+          <% if @block.data %>
+            <% @block.template.selected_posts.each do |post|
+              next if post.nil?
+            %>
+              <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                <div class="post-content">
+                  <h3 itemprop="headline">
+                    <%= link_to post, post.url %>
+                  </h3>
+                  <% if !post.categories.empty? %>
+                    <ul class="post-categories">
+                      <% post.categories.each do |category| %>
+                        <%= link_to category, category.path %>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                  <p itemprop="articleBody"><%= post.summary %></p>
+                  <div class="post-meta">
+                    <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
+                    <% if post.author.present? %>
+                      <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
+                        <p itemprop="name"><%= post.author %></p>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
-              <% end %>
-            </article>
+                <div class="media">
+                  <% if post.best_featured_image.attached? %>
+                    <%= kamifusen_tag post.best_featured_image %>
+                  <% end %>
+                </div>
+              </article>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% elsif @block.template.layout ===  "highlight" %>
+        <div class="highlight">
+          <div class="highlight-post">
+              <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                <div class="post-content">
+                  <h3 itemprop="headline">
+                    <%= link_to highlight_post, highlight_post.url %>
+                  </h3>
+                  <% if !highlight_post.categories.empty? %>
+                    <ul class="post-categories">
+                      <% highlight_post.categories.each do |category| %>
+                        <%= link_to category, category.path %>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                  <p itemprop="articleBody"><%= highlight_post.summary %></p>
+                  <div class="post-meta">
+                    <time itemprop="datePublished" datetime="<%= highlight_post.published_at %>"><%= l(highlight_post.published_at, format: date_format) %></time>
+                    <% if highlight_post.author.present? %>
+                      <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
+                        <p itemprop="name"><%= highlight_post.author %></p>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="media">
+                  <% if highlight_post.best_featured_image.attached? %>
+                    <%= kamifusen_tag highlight_post.best_featured_image %>
+                  <% end %>
+                </div>
+              </article>
+            </div>
+            <div class="list">
+            <% if @block.data %>
+              <% @block.template.selected_posts.each do |post|
+                next if post.nil?
+              %>
+                <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                  <div class="post-content">
+                    <h3 itemprop="headline">
+                      <%= link_to post, post.url %>
+                    </h3>
+                    <% if !post.categories.empty? %>
+                      <ul class="post-categories">
+                        <% post.categories.each do |category| %>
+                          <%= link_to category, category.path %>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                    <p itemprop="articleBody"><%= post.summary %></p>
+                    <div class="post-meta">
+                      <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
+                      <% if post.author.present? %>
+                        <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
+                          <p itemprop="name"><%= post.author %></p>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </article>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      <% else %>
+        <div class="grid">
+          <% if @block.data %>
+            <% @block.template.selected_posts.each do |post|
+              next if post.nil?
+            %>
+              <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                <div class="post-content">
+                  <h3 itemprop="headline">
+                    <%= link_to post, post.url %>
+                  </h3>
+                  <% if !post.categories.empty? %>
+                    <ul class="post-categories">
+                      <% post.categories.each do |category| %>
+                        <%= link_to category, category.path %>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                  <p itemprop="articleBody"><%= post.summary %></p>
+                  <div class="post-meta">
+                    <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
+                    <% if post.author.present? %>
+                      <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
+                        <p itemprop="name"><%= post.author %></p>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="media">
+                  <% if post.best_featured_image.attached? %>
+                    <%= kamifusen_tag post.best_featured_image %>
+                  <% end %>
+                </div>
+              </article>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
