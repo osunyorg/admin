@@ -54,6 +54,7 @@ highlight_post = @block.template.selected_posts.first
             <% end %>
           <% end %>
         </div>
+
       <% elsif @block.template.layout ===  "highlight" %>
         <div class="highlight">
           <div class="highlight-post">
@@ -86,6 +87,7 @@ highlight_post = @block.template.selected_posts.first
                 </div>
               </article>
             </div>
+            
             <div class="list">
             <% if @block.data %>
               <% @block.template.selected_posts.each do |post|
