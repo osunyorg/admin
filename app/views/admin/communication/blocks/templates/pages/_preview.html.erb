@@ -41,7 +41,9 @@ class_name += " block-pages--" + @block.template.layout
             <% @block.template.selected_pages.each do |page|
               next if page.nil?
             %>
-            <li><%= link_to page, page.url %></li>
+            <li>
+              <a href="<%= page.url %>"><%= page %></a>
+            </li>
             <% end %>
           </ul>
 
@@ -52,7 +54,7 @@ class_name += " block-pages--" + @block.template.layout
             %>
               <article class="card">
                 <h3>
-                  <%= link_to page, page.url %>
+                  <a href="<%= page.url %>"><%= page %></a>
                 </h3>
                 <% if @block.template.show_description %>
                   <p><%= page.summary %></p>
@@ -78,7 +80,7 @@ class_name += " block-pages--" + @block.template.layout
             %>
               <article>
                 <h3>
-                  <%= link_to page, page.url %>  
+                  <a href="<%= page.url %>"><%= page %></a>
                 </h3>
                 <% if @block.template.show_description %>
                   <p><%= page.summary %></p>
