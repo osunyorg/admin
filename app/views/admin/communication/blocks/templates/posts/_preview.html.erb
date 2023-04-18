@@ -19,9 +19,7 @@ date_format = "%e %B %Y"
       <% if @block.template.layout ===  "list" %>
         <div class="list">
           <% if @block.data %>
-            <% @block.template.selected_posts.each do |post|
-              next if post.nil?
-            %>
+            <% @block.template.selected_posts.each do |post| %>
               <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                 <div class="post-content">
                   <h3 itemprop="headline">
@@ -54,43 +52,43 @@ date_format = "%e %B %Y"
           <% end %>
         </div>
 
-      <% elsif @block.template.layout ===  "highlight"
-        highlight_post = @block.template.selected_posts.first 
-      %>
-        <div class="highlight">
-          <div class="highlight-post">
-            <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-              <div class="post-content">
-                <h3 itemprop="headline">
-                  <%= link_to highlight_post, highlight_post.url %>
-                </h3>
-                <% if !highlight_post.categories.empty? %>
-                  <ul class="post-categories">
-                    <% highlight_post.categories.each do |category| %>
-                      <%= link_to category, category.path %>
+      <% elsif @block.template.layout ===  "highlight"%>
+        <% if @block.data
+          $highlight_post = @block.template.selected_posts.first 
+        %>
+          <div class="highlight">
+            <div class="highlight-post">
+              <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                <div class="post-content">
+                  <h3 itemprop="headline">
+                    <%= link_to $highlight_post, $highlight_post.url %>
+                  </h3>
+                  <% if !$highlight_post.categories.empty? %>
+                    <ul class="post-categories">
+                      <% $highlight_post.categories.each do |category| %>
+                        <%= link_to category, category.path %>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                  <p itemprop="articleBody"><%= $highlight_post.summary %></p>
+                  <div class="post-meta">
+                    <time itemprop="datePublished" datetime="<%= $highlight_post.published_at %>"><%= l($highlight_post.published_at, format: date_format) %></time>
+                    <% if $highlight_post.author.present? %>
+                      <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
+                        <p itemprop="name"><%= $highlight_post.author %></p>
+                      </div>
                     <% end %>
-                  </ul>
-                <% end %>
-                <p itemprop="articleBody"><%= highlight_post.summary %></p>
-                <div class="post-meta">
-                  <time itemprop="datePublished" datetime="<%= highlight_post.published_at %>"><%= l(highlight_post.published_at, format: date_format) %></time>
-                  <% if highlight_post.author.present? %>
-                    <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
-                      <p itemprop="name"><%= highlight_post.author %></p>
-                    </div>
+                  </div>
+                </div>
+                <div class="media">
+                  <% if $highlight_post.best_featured_image.attached? %>
+                    <%= kamifusen_tag $highlight_post.best_featured_image %>
                   <% end %>
                 </div>
-              </div>
-              <div class="media">
-                <% if highlight_post.best_featured_image.attached? %>
-                  <%= kamifusen_tag highlight_post.best_featured_image %>
-                <% end %>
-              </div>
-            </article>
-          </div>
-            
-          <div class="list">
-            <% if @block.data %>
+              </article>
+            </div>
+              
+            <div class="list">
               <% @block.template.selected_posts.each do |post|
                 next if post.nil?
               %>
@@ -118,10 +116,9 @@ date_format = "%e %B %Y"
                   </div>
                 </article>
               <% end %>
-            <% end %>
+            </div>
           </div>
-        </div>
-
+        <% end %>
       <% else %>
         <div class="grid">
           <% if @block.data %>
