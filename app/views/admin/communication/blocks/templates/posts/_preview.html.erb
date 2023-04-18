@@ -55,7 +55,7 @@ date_format = "%e %B %Y"
         </div>
 
       <% elsif @block.template.layout ===  "highlight"
-        highlight_post = @block.template.selected_posts.first 
+        highlight_post = @block.template.selected_posts[0] 
       %>
         <div class="highlight">
           <div class="highlight-post">
