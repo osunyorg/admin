@@ -50,7 +50,7 @@ class Communication::Website::ConnectionsTest < ActiveSupport::TestCase
 
     # On supprime le bloc qui contient PA : -1 (mais devrait être -2 parce que PA devrait être supprimé aussi, c'est le problème du saumon)
     # https://developers.osuny.org/docs/admin/communication/sites-web/dependencies/iteration-4/#olivia-et-le-saumon-de-schr%C3%B6dinger
-    assert_difference -> { Communication::Website::Connection.count } => -1 do
+    assert_difference -> { Communication::Website::Connection.count } => -2 do
       page.blocks.find_by(position: 2).destroy
     end
   end

@@ -15,9 +15,10 @@ module WithConnections
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
 
-    after_save  :sync_connections
-    after_touch :sync_connections
-    after_save  :sync_obsolete_dependencies
+    after_save    :sync_connections
+    after_touch   :sync_connections
+    after_save    :sync_obsolete_dependencies
+    after_destroy :destroy_obsolete_connections
   end
 
   def for_website?(website)
@@ -47,11 +48,17 @@ module WithConnections
                                     : reference.direct_sources # Récursivité sur les références
   end
 
-
   def sync_connections
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
       direct_source.save_and_sync
+    end
+  end
+
+  # La suppression d'un objet indirect déclenche le recalcul des connexions de tous les objets directs
+  def destroy_obsolete_connections
+    direct_sources.each do |direct_source|
+      # TODO
     end
   end
 
