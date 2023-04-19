@@ -467,6 +467,7 @@ en:
               cards:
                 label: Cards
                 description: Side by side cards, same height, strong color on rollover. Perfect for a small amount of pages.
+                more: Show more
               grid:
                 label: Grid
                 description: As a grid, left to right and top to bottom.
