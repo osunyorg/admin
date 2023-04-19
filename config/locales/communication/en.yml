@@ -541,6 +541,9 @@ en:
               list:
                 label: List
                 description: A list of posts with small images the same width.
+              alternate:
+                label: Alternate
+                description: Posts either on the left or on the right, composing a graphically light page.
             edit:
               add_post: Add post
               mode:

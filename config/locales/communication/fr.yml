@@ -541,6 +541,9 @@ fr:
               list:
                 label: Liste
                 description: Une liste d'articles avec de petites images à la même largeur.
+              alternate:
+                label: Alternance
+                description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.
             edit:
               add_post: Ajouter un article
               mode:
