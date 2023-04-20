@@ -30,9 +30,9 @@
 #  fk_rails_c83d5e9068  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithBlobs
-  include WithConnections
   include WithFeaturedImage
   include WithGitFiles
   include WithPermalink

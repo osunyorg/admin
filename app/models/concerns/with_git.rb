@@ -1,13 +1,6 @@
 module WithGit
   extend ActiveSupport::Concern
 
-  included do
-    # WithGit a besoin de ces 3 concerns
-    include WithDependencies
-    include WithGitFiles
-    include WithReferences
-  end
-
   def save_and_sync
     if save
       sync_with_git

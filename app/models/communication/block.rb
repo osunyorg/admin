@@ -28,7 +28,7 @@
 #
 class Communication::Block < ApplicationRecord
   include Accessible
-  include WithConnections
+  include AsIndirectObject
   include WithPosition
   include WithUniversity
   include Sanitizable

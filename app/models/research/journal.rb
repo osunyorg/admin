@@ -20,9 +20,9 @@
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
-  include Sanitizable
+  include AsIndirectObject
   include Aboutable
-  include WithConnections
+  include Sanitizable
   include WithGitFiles
   include WithUniversity
 

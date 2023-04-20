@@ -48,10 +48,20 @@ class Communication::Website::ConnectionsTest < ActiveSupport::TestCase
       page.blocks.second.update(published: false)
     end
 
-    # On supprime le bloc qui contient PA : -1 (mais devrait être -2 parce que PA devrait être supprimé aussi, c'est le problème du saumon)
-    # https://developers.osuny.org/docs/admin/communication/sites-web/dependencies/iteration-4/#olivia-et-le-saumon-de-schr%C3%B6dinger
+    # TODO Suppression d'objet direct
+
+    # TODO Désactivation d'objet direct
+
+    # Suppression d'objet indirect
+    # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
     assert_difference -> { Communication::Website::Connection.count } => -2 do
       page.blocks.find_by(position: 2).destroy
     end
+
+    # TODO Désactivation d'objet indirect
+
+
+    # TODO Suppression d'objet direct avec indirect connecté par 2 canaux (le problème du saumon)
+    # https://developers.osuny.org/docs/admin/communication/sites-web/dependencies/iteration-4/#olivia-et-le-saumon-de-schr%C3%B6dinger
   end
 end

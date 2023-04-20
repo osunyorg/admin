@@ -53,10 +53,10 @@
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithConnections
   include WithCountry
   include WithEducation
   include WithExperiences

@@ -2,15 +2,16 @@ module Communication::Website::WithConnectedObjects
   extend ActiveSupport::Concern
 
   included do
-    has_many  :connections
-
-    # before_save :clean_connections!
+    has_many :connections
   end
 
-  def clean_connections!
-    start = Time.now
-    connect self, self
-    connections.reload.where('updated_at < ?', start).delete_all
+  # Appelé par un objet avec des connexions lorsqu'il est destroyed
+  def destroy_obsolete_connections
+    up_to_date_dependencies = recursive_dependencies
+    connections.find_each do |connection|
+      connection_obsolete = !connection.indirect_object.in?(up_to_date_dependencies)
+      connection.destroy if connection_obsolete
+    end
   end
 
   def has_connected_object?(indirect_object)
@@ -58,16 +59,7 @@ module Communication::Website::WithConnectedObjects
   protected
 
   def connect_object(indirect_object, direct_source, direct_source_type: nil)
-    # byebug if indirect_object.is_a?(Communication::Block) && indirect_object.template_kind == 'organization_chart'
-    return unless persisted?
-    # On ne connecte pas les objets inexistants
-    return if indirect_object.nil?
-    # On ne connecte pas les objets sans source
-    return if direct_source.nil?
-    # On ne connecte pas le site à lui-même
-    return if indirect_object.is_a?(Communication::Website)
-    # On ne connecte pas les objets directs
-    return if indirect_object.respond_to?(:website)
+    return unless should_connect?(indirect_object, direct_source)
     # puts "connect #{object} (#{object.class})"
     direct_source_type ||= direct_source.class.base_class.to_s
     connection = connections.where( university: university,
@@ -76,5 +68,19 @@ module Communication::Website::WithConnectedObjects
                                     direct_source_type: direct_source_type)
                             .first_or_create
     connection.touch if connection.persisted?
+  end
+
+  def should_connect?(indirect_object, direct_source)
+    # Ce cas se produit quand on save un new website et qu'on ne passe pas un validateur
+    return false unless persisted?
+    # On ne connecte pas les objets inexistants
+    return false if indirect_object.nil?
+    # On ne connecte pas les objets sans source
+    return false if direct_source.nil?
+    # On ne connecte pas le site à lui-même
+    return false if indirect_object.is_a?(Communication::Website)
+    # On ne connecte pas les objets directs (en principe ça n'arrive pas)
+    return false if indirect_object.respond_to?(:is_direct_object?) && indirect_object.is_direct_object?
+    true
   end
 end

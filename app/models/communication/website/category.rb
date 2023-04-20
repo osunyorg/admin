@@ -41,11 +41,11 @@
 #  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Category < ApplicationRecord
+  include AsDirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition

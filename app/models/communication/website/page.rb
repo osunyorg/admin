@@ -47,12 +47,12 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path)
 
   include Accessible
+  include AsDirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPosition
   include WithTree

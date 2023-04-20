@@ -38,12 +38,12 @@
 #  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  include AsDirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method

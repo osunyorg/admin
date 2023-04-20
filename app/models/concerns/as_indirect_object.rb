@@ -1,24 +1,34 @@
-# Concern exclusivement utilisé pour les objets indirects
-module WithConnections
+# Ce concern ajoute les éléments nécessaires pour les objets indirects :
+# - connexions
+# - dépendances 
+# - références nécessaires
+module AsIndirectObject
   extend ActiveSupport::Concern
 
   included do
+    # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
     include WithDependencies
     include WithReferences
 
     has_many  :connections, 
               as: :indirect_object,
-              class_name: 'Communication::Website::Connection',
-              dependent: :destroy # When the indirect object disappears, the connections must disappear
+              class_name: 'Communication::Website::Connection'
+              # Pas dependent_destroy parce que le processus est plus sophistiqué, et est fait dans la méthode destroy
     has_many  :websites, 
               through: :connections
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
 
-    after_save    :sync_connections
-    after_touch   :sync_connections
-    after_save    :sync_obsolete_dependencies
-    after_destroy :destroy_obsolete_connections
+    after_save  :sync_connections
+    after_touch :sync_connections
+  end
+
+  def is_direct_object?
+    false
+  end
+
+  def is_indirect_object?
+    true
   end
 
   def for_website?(website)
@@ -37,6 +47,18 @@ module WithConnections
     end
   end
 
+  def destroy
+    self.transaction do
+      website_ids = websites.pluck(:id)
+      connections.destroy_all
+      super
+      Communication::Website.where(id: website_ids).each do |website|
+        website.destroy_obsolete_connections
+        website.save_and_sync
+      end
+    end
+  end
+
   protected
 
   def direct_sources_from_existing_connections
@@ -44,28 +66,14 @@ module WithConnections
   end
 
   def direct_sources_from_reference(reference)
-    reference.respond_to?(:website) ? [reference] # Récupération de la connexion directe
-                                    : reference.direct_sources # Récursivité sur les références
+    reference.is_direct_object? ? [reference] # Récupération de la connexion directe
+                                : reference.direct_sources # Récursivité sur les références
   end
 
   def sync_connections
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
       direct_source.save_and_sync
-    end
-  end
-
-  # La suppression d'un objet indirect déclenche le recalcul des connexions de tous les objets directs
-  def destroy_obsolete_connections
-    direct_sources.each do |direct_source|
-      # TODO
-    end
-  end
-
-  def sync_obsolete_dependencies
-     # TODO: pas ouf de passer par le site, ce serait plus léger en calcul de faire une analyse plus étroite
-    websites.each do |website|
-      website.sync_obsolete_dependencies
     end
   end
 end

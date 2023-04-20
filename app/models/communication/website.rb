@@ -36,7 +36,6 @@
 class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
-  include WithUniversity
   include WithAbouts
   include WithConfigs
   include WithConnectedObjects
@@ -46,10 +45,12 @@ class Communication::Website < ApplicationRecord
   include WithImport
   include WithOldDependencies
   include WithProgramCategories
+  include WithReferences
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithStyle
   include WithTheme
+  include WithUniversity
 
   enum git_provider: {
     github: 0,

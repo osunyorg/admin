@@ -23,9 +23,9 @@
 #  fk_rails_6cb2e9fa90  (university_id => universities.id)
 #
 class Education::Diploma < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithBlocks
-  include WithConnections
   include WithGitFiles
   include WithPermalink
   include WithSlug

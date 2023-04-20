@@ -16,7 +16,7 @@ module WithTranslations
 
   def available_languages
     @available_languages ||= begin
-      languages = respond_to?(:website) ? website.languages : Language.all
+      languages = is_direct_object? ? website.languages : Language.all
       languages.ordered
     end
   end

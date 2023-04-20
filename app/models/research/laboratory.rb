@@ -22,8 +22,8 @@
 #
 class Research::Laboratory < ApplicationRecord
   include Aboutable
+  include AsIndirectObject
   include Sanitizable
-  include WithConnections
   include WithCountry
   include WithGitFiles
 
