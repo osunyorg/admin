@@ -7,6 +7,7 @@ module Communication::Website::WithConnectedObjects
 
   # Appelé par un objet avec des connexions lorsqu'il est destroyed
   def destroy_obsolete_connections
+    # TODO: optimiser
     up_to_date_dependencies = recursive_dependencies
     connections.find_each do |connection|
       connection_obsolete = !connection.indirect_object.in?(up_to_date_dependencies)
