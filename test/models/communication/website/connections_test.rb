@@ -58,6 +58,8 @@ class Communication::Website::ConnectionsTest < ActiveSupport::TestCase
       page.blocks.find_by(position: 2).destroy
     end
 
+    # TODO Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
+
     # TODO Désactivation d'objet indirect
 
 
