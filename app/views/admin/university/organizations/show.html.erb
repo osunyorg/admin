@@ -104,12 +104,16 @@
 
     <%= osuny_panel t('university.organization.logo') do %>
       <% if @organization.logo.attached? %>
-        <%= osuny_label University::Organization.human_attribute_name('logo') %><br>
-        <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+        <div>
+          <%= osuny_label University::Organization.human_attribute_name('logo') %><br>
+          <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+        </div>
       <% end %>
       <% if @organization.logo_on_dark_background.attached? %>
-        <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %><br>
-        <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+        <div>
+          <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %><br>
+          <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+        </div>
       <% end %>
     <% end if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
 
