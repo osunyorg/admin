@@ -1,5 +1,5 @@
 # Ce concern ajoute les éléments nécessaires pour les objets directs :
-# - Dépendances
+# - Dépendances (avec et via synchro)
 # - Git
 # - GitFiles
 # - Références
@@ -8,10 +8,14 @@ module AsDirectObject
   extend ActiveSupport::Concern
 
   included do
-    include WithDependencies
+    include WithDependenciesSynchronization
     include WithGit
     include WithGitFiles
     include WithReferences
+
+    belongs_to :website,
+               class_name: 'Communication::Website',
+               foreign_key: :communication_website_id
 
     has_many  :connections, 
               as: :direct_source,

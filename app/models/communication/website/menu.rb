@@ -33,7 +33,6 @@ class Communication::Website::Menu < ApplicationRecord
   include WithTranslations
   include WithUniversity
 
-  belongs_to :website, foreign_key: :communication_website_id
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
 
   validates :title, :identifier, presence: true

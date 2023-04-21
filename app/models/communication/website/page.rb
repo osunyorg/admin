@@ -65,8 +65,6 @@ class Communication::Website::Page < ApplicationRecord
 
   has_summernote :text # TODO: Remove text attribute
 
-  belongs_to :website,
-             foreign_key: :communication_website_id
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true

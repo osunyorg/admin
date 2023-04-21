@@ -1,6 +1,6 @@
 # Ce concern ajoute les éléments nécessaires pour les objets indirects :
 # - connexions
-# - dépendances 
+# - dépendances (avec et via synchro)
 # - références nécessaires
 module AsIndirectObject
   extend ActiveSupport::Concern
@@ -8,6 +8,7 @@ module AsIndirectObject
   included do
     # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
     include WithDependencies
+    include WithDependenciesSynchronization
     include WithReferences
 
     has_many  :connections, 

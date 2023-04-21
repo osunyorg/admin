@@ -58,8 +58,6 @@ class Communication::Website::Category < ApplicationRecord
                           class_name: 'Communication::Website::Imported::Category',
                           dependent: :destroy
   belongs_to              :university
-  belongs_to              :website,
-                          foreign_key: :communication_website_id
   belongs_to              :parent,
                           class_name: 'Communication::Website::Category',
                           optional: true

@@ -40,8 +40,8 @@ module WithDependencies
     array.compact
   end
 
-  def recursive_dependencies_unsyncable
-    @recursive_dependencies_unsyncable ||= recursive_dependencies - recursive_dependencies(syncable_only: true)
+  def recursive_dependencies_syncable
+    @recursive_dependencies_syncable ||= recursive_dependencies(syncable_only: true)
   end
 
   protected

@@ -42,11 +42,6 @@ module WithGit
   def destroy_from_git
     return unless website.git_repository.valid?
     Communication::Website::GitFile.sync website, self, destroy: true
-    # # FIXME
-    # dependencies = git_destroy_dependencies(website).to_a.flatten.uniq.compact
-    # dependencies.each do |object|
-    #   Communication::Website::GitFile.sync website, object, destroy: true
-    # end
     website.git_repository.sync!
   end
 
