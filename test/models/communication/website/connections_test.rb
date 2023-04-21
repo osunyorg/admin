@@ -48,9 +48,9 @@ class Communication::Website::ConnectionsTest < ActiveSupport::TestCase
       page.blocks.second.update(published: false)
     end
 
-    # TODO Suppression d'objet direct
+    # TODO 1 Suppression d'objet direct
 
-    # TODO Désactivation d'objet direct
+    # TODO 2 Désactivation d'objet direct
 
     # Suppression d'objet indirect
     # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
@@ -58,12 +58,13 @@ class Communication::Website::ConnectionsTest < ActiveSupport::TestCase
       page.blocks.find_by(position: 2).destroy
     end
 
-    # TODO Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
+    # TODO 3 Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
 
-    # TODO Désactivation d'objet indirect
+    # TODO 4 Désactivation d'objet indirect
 
-
-    # TODO Suppression d'objet direct avec indirect connecté par 2 canaux (le problème du saumon)
+    # TODO 5 Suppression d'objet direct avec indirect connecté par 2 canaux (le problème du saumon)
     # https://developers.osuny.org/docs/admin/communication/sites-web/dependencies/iteration-4/#olivia-et-le-saumon-de-schr%C3%B6dinger
+
+    # TODO 6 Connexion d'un objet indirect au website directement (about)
   end
 end
