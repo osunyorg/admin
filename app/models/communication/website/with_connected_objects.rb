@@ -11,12 +11,19 @@ module Communication::Website::WithConnectedObjects
   # - par un objet avec des connexions lorsqu'il est destroyed
   # - par le website lui-même au changement du about
   def destroy_obsolete_connections
-    # TODO: optimiser
     up_to_date_dependencies = recursive_dependencies
+    deletable_connection_ids = []
     connections.find_each do |connection|
-      connection_obsolete = !connection.indirect_object.in?(up_to_date_dependencies)
-      connection.destroy if connection_obsolete
+      has_living_connection = up_to_date_dependencies.detect { |dependency|
+        dependency.class.name == connection.indirect_object_type &&
+        dependency.id == connection.indirect_object_id
+      }
+      deletable_connection_ids << connection.id unless has_living_connection
     end
+    # On utilise delete_all pour supprimer les connexions obsolètes en une unique requête DELETE FROM
+    # Cependant, on peut le faire car les connexions n'ont pas de callback.
+    # Dans le cas où on en rajoute au destroy, il faut repasser sur un appel de destroy sur chaque
+    connections.where(id: deletable_connection_ids).delete_all
   end
 
   def has_connected_object?(indirect_object)
