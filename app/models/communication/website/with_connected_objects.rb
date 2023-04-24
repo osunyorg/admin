@@ -3,6 +3,8 @@ module Communication::Website::WithConnectedObjects
 
   included do
     has_many :connections
+
+    after_save :connect_about, if: :saved_change_to_about_id?
   end
 
   # Appelé par un objet avec des connexions lorsqu'il est destroyed
@@ -59,6 +61,11 @@ module Communication::Website::WithConnectedObjects
 
   protected
 
+  def connect_about
+    self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
+    destroy_obsolete_connections
+  end
+
   def connect_object(indirect_object, direct_source, direct_source_type: nil)
     return unless should_connect?(indirect_object, direct_source)
     # puts "connect #{object} (#{object.class})"
@@ -81,7 +88,7 @@ module Communication::Website::WithConnectedObjects
     # On ne connecte pas le site à lui-même
     return false if indirect_object.is_a?(Communication::Website)
     # On ne connecte pas les objets directs (en principe ça n'arrive pas)
-    return false if indirect_object.respond_to?(:is_direct_object?) && indirect_object.is_direct_object?
+    return false if indirect_object.try(:is_direct_object?)
     true
   end
 end
