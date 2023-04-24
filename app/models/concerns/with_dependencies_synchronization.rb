@@ -7,7 +7,7 @@ module WithDependenciesSynchronization
     attr_accessor :dependencies_before_save
 
     before_save :compute_dependencies_before_save
-    after_save :cleanup_websites if :dependencies_missing_after_save?
+    after_save :cleanup_websites, if: :dependencies_missing_after_save?
     after_destroy :cleanup_websites
   end
 
@@ -18,6 +18,7 @@ module WithDependenciesSynchronization
   end
 
   def dependencies_missing_after_save?
+    # byebug 
     (@dependencies_before_save - recursive_dependencies_syncable).any?
   end
 
