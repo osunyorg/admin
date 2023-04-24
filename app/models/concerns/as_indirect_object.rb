@@ -7,15 +7,14 @@ module AsIndirectObject
 
   included do
     # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
-    include WithDependencies
     include WithDependenciesSynchronization
     include WithReferences
 
-    has_many  :connections, 
+    has_many  :connections,
               as: :indirect_object,
               class_name: 'Communication::Website::Connection'
               # Pas dependent_destroy parce que le processus est plus sophistiqué, et est fait dans la méthode destroy
-    has_many  :websites, 
+    has_many  :websites,
               through: :connections
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
@@ -52,11 +51,11 @@ module AsIndirectObject
     # On est obligés d'overwrite la méthode destroy pour éviter un problème d'œuf et de poule.
     # On a besoin que les websites puissent recalculer leurs recursive_dependencies
     # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
-    # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections` 
+    # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections`
     # on ne peut plus accéder aux websites (puisque l'objet est déjà détruit et ses connexions en cascades).
-    # Donc : 
-    # 1. on stocke les websites 
-    # 2. PUIS on détruit les connexions 
+    # Donc :
+    # 1. on stocke les websites
+    # 2. PUIS on détruit les connexions
     # 3. PUIS on détruit l'objet (la méthode destroy normale)
     # 4. PUIS on demande aux websites stockés de nettoyer leurs connexions
     self.transaction do
