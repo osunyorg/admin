@@ -15,7 +15,11 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   def test_change_block_dependencies
     page = communication_website_pages(:page_with_no_dependency)
 
-    # On ajoute un block "OrganizationChart" lié à Arnaud : 9 dépendances (4 composants du organization_chart + 1 élément du organization_chart (arnaud) + 3 éléments liés à arnaud + le block lui-même)
+    # On ajoute un block Personnes lié à Arnaud : 9 dépendances
+    # - le block Personnes (1)
+    # - 4 composants du template du block + 1 élément (5)
+    # - 2 composants de l'élément du template (2)
+    # - La personne en dépendance du composant Person (1)
     block = page.blocks.create(position: 1, published: true, template_kind: :organization_chart)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
