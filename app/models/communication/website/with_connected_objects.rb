@@ -7,7 +7,9 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
-  # Appelé par un objet avec des connexions lorsqu'il est destroyed
+  # Appelé
+  # - par un objet avec des connexions lorsqu'il est destroyed
+  # - par le website lui-même au changement du about
   def destroy_obsolete_connections
     # TODO: optimiser
     up_to_date_dependencies = recursive_dependencies
