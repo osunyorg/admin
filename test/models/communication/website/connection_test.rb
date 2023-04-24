@@ -97,11 +97,16 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     assert_equal 1, page.website.connections.where(indirect_object: noesya).count
   end
 
-  def test_connecting_indirect_to_website_directly
+  def test_connecting_and_disconnecting_indirect_to_website_directly
     # En connectant l'école au site, on crée une connexion pour ses 2 objets ainsi que les dépendances de l'école :
     # Ses formations (default_program) et ses diplômes (default_diploma) : donc 3 connexions au total
     assert_difference -> { Communication::Website::Connection.count } => 3 do
       website_with_github.update(about: default_school)
+    end
+
+    # En déconnectant l'école du site, on supprime les connexions créées précédemment
+    assert_difference -> { Communication::Website::Connection.count } => -3 do
+      website_with_github.update(about: nil)
     end
   end
 
