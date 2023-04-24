@@ -98,9 +98,11 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
   end
 
   def test_connecting_indirect_to_website_directly
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
-    # TODO 6 Connexion d'un objet indirect au website directement (about)
+    # En connectant l'école au site, on crée une connexion pour ses 2 objets ainsi que les dépendances de l'école :
+    # Ses formations (default_program) et ses diplômes (default_diploma) : donc 3 connexions au total
+    assert_difference -> { Communication::Website::Connection.count } => 3 do
+      website_with_github.update(about: default_school)
+    end
   end
 
   private

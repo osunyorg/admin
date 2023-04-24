@@ -26,6 +26,14 @@ class ActiveSupport::TestCase
     @default_extranet ||= communication_extranets(:default_extranet)
   end
 
+  def website_with_github
+    @website_with_github ||= communication_websites(:website_with_github)
+  end
+
+  def default_school
+    @default_school ||= education_schools(:default_school)
+  end
+
   def alumnus
     @alumnus ||= users(:alumnus)
   end
