@@ -2,7 +2,7 @@ require "test_helper"
 
 # rails test test/models/communication/website/connection_test.rb
 class Communication::Website::ConnectionTest < ActiveSupport::TestCase
-  test "unpublish indirect does nothing" do
+  def test_unpublish_indirect_does_nothing
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
 
@@ -12,7 +12,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     end
   end
 
-  test "unpublish direct does nothing" do
+  def test_unpublish_direct_does_nothing
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
 
@@ -22,7 +22,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     end
   end
 
-  test "deleting direct removes all its connections" do
+  def test_deleting_direct_removes_all_its_connections
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
 
@@ -32,7 +32,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     end
   end
 
-  test "deleting indirect removes all its connections" do
+  def test_deleting_indirect_removes_all_its_connections
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
 
@@ -42,26 +42,62 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     end
   end
 
-  test "deleting indirect with a dependency having 2 sources should keep a connection for this dependency somewhere else" do
+  def test_deleting_indirect_with_a_dependency_having_two_sources
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
-    # TODO 3 Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
+
+    # On ajoute noesya à PA via un block "Organisations"
+    assert_difference -> { Communication::Website::Connection.count } => 1 do
+      block = pa.blocks.create(position: 1, published: true, template_kind: :partners)
+      block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+      block.save
+    end
+
+    # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
+    # On supprime le bloc qui contient PA : -3 (parce que PA doit être supprimé aussi ainsi que son bloc Organisations mais pas Noesya, toujours connectée via le block 3)
+    assert_difference -> { Communication::Website::Connection.count } => -3 do
+      page.blocks.find_by(position: 2).destroy
+    end
   end
 
-  test "unpublish indirect ..." do
+  def test_unpublish_indirect_does_nothing
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
-    # TODO 4 Désactivation d'objet indirect
+
+    # On dépublie la page ayant un bloc chapitre : +0
+    assert_no_difference("Communication::Website::Connection.count") do
+      page.blocks.ordered.last.update(published: false)
+    end
   end
 
-  test "deleting direct with indirect dependency having 2 sources ..." do
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
-    # TODO 5 Suppression d'objet direct avec indirect connecté par 2 canaux (le problème du saumon)
+  def test_deleting_direct_with_indirect_dependency_having_two_sources
     # https://developers.osuny.org/docs/admin/communication/sites-web/dependencies/iteration-4/#olivia-et-le-saumon-de-schr%C3%B6dinger
+    page = communication_website_pages(:page_with_no_dependency)
+    setup_page_connections(page)
+
+    second_page = communication_website_pages(:page_test)
+    block = second_page.blocks.create(position: 1, published: true, template_kind: :partners)
+    block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+    block.save
+
+    # Noesya est connectée via les 2 pages, donc 2 connexions
+    assert_equal 2, page.website.connections.where(indirect_object: noesya).count
+
+    # On supprime la 2e page, donc ses 7 connexions à savoir :
+    # - Le block Organisations et Noesya (2)
+    # - Les 5 connexions via Noesya, à savoir :
+    #   - Le block Personnes avec Olivia et son block Organisations (3)
+    #     note : Pas Noesya car la connexion existe déjà plus haut
+    #   - Le block Personnes avec Arnaud (2)
+    assert_difference -> { Communication::Website::Connection.count } => -7 do
+      second_page.destroy
+    end
+
+    # Noesya est toujours connectée via la 1re page
+    assert_equal 1, page.website.connections.where(indirect_object: noesya).count
   end
 
-  test "connecting indirect to website directly" do
+  def test_connecting_indirect_to_website_directly
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
     # TODO 6 Connexion d'un objet indirect au website directement (about)
@@ -106,5 +142,19 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
+
+    # La page est donc comme ceci
+    # Page
+    # - Block Chapitre
+    # - Block Personnes
+    #   - PA
+    # - Block Organisations
+    #   - Noesya
+    #     - Block Personnes
+    #       - Olivia
+    #         - Block Organisations
+    #           - Noesya
+    #     - Block Personnes
+    #       - Arnaud
   end
 end
