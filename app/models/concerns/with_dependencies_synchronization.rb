@@ -9,9 +9,7 @@ module WithDependenciesSynchronization
     before_save :compute_dependencies_before_save
     after_save :cleanup_websites if :dependencies_missing_after_save?
     after_destroy :cleanup_websites
-
   end
-
 
   protected
 
@@ -24,9 +22,11 @@ module WithDependenciesSynchronization
   end
 
   def cleanup_websites
-    # TODO
+    if is_direct_object?
+      website.destroy_obsolete_git_files
+    else
+      websites.each(&:destroy_obsolete_git_files)
+    end
   end
-  
-
 
 end
