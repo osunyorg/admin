@@ -7,7 +7,7 @@ module AsIndirectObject
 
   included do
     # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
-    include WithDependenciesSynchronization
+    include WithDependencies
     include WithReferences
 
     has_many  :connections,
@@ -83,7 +83,7 @@ module AsIndirectObject
   def sync_connections
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
-      direct_source.save_and_sync
+      direct_source.sync_with_git
     end
   end
 end

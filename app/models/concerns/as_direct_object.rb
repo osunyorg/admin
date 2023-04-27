@@ -8,7 +8,7 @@ module AsDirectObject
   extend ActiveSupport::Concern
 
   included do
-    include WithDependenciesSynchronization
+    include WithDependencies
     include WithGit
     include WithGitFiles
     include WithReferences

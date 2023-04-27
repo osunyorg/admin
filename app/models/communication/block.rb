@@ -72,7 +72,6 @@ class Communication::Block < ApplicationRecord
 
   scope :published, -> { where(published: true) }
 
-  after_save :sync_if_about_is_direct
   before_save :attach_template_blobs
   before_validation :set_university_from_about, on: :create
 
@@ -144,10 +143,6 @@ class Communication::Block < ApplicationRecord
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize
-  end
-
-  def sync_if_about_is_direct
-    about.save_and_sync if about.respond_to? :save_and_sync
   end
 
   # FIXME @sebou

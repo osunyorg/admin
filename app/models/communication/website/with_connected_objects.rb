@@ -68,6 +68,14 @@ module Communication::Website::WithConnectedObjects
     University::Organization.where(id: ids)
   end
 
+  def is_direct_object?
+    true
+  end
+
+  def is_indirect_object?
+    false
+  end
+
   protected
 
   def connect_about
