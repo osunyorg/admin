@@ -2,8 +2,6 @@ require "test_helper"
 
 # rails test test/models/communication/website/dependency_test.rb
 class Communication::Website::DependencyTest < ActiveSupport::TestCase
-  include ActiveJob::TestHelper
-
   def test_page_dependencies
     # Rien : 0 dépendances
     page = communication_website_pages(:page_with_no_dependency)
@@ -35,12 +33,15 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"
     block.save
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site de la page
-    job = find_performable_method_job(:destroy_obsolete_git_files_without_delay, 
-                                      page.communication_website_id)
-    assert(job)
-
-    # Arnaud est remplacé par Olivia, le nombre de dépendances reste le même
+    assert(destroy_obsolete_git_files_job)
+    
     assert_equal 9, page.recursive_dependencies.count
+    
+    # Vérifie qu'on a bien une tâche de nettoyage si le block est supprimé
+    Delayed::Job.destroy_all
+    block.destroy
+    assert(destroy_obsolete_git_files_job)
+
   end
   
   def test_change_website_dependencies
@@ -48,19 +49,18 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     
     # On modifie l'about du website en ajoutant une école
     website_with_github.update(about: default_school)
-    job = find_performable_method_job(:destroy_obsolete_git_files_without_delay, website_with_github.id)
-    refute(job)
+    refute(destroy_obsolete_git_files_job)
     delta = website_with_github.recursive_dependencies.count - dependencies_before_count
     assert_equal 12, delta
     
     Delayed::Job.destroy_all
-
+    
     # On enlève l'about du website
     website_with_github.update(about: nil)
-
+    
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
-    job = find_performable_method_job(:destroy_obsolete_git_files_without_delay, website_with_github.id)
-    assert(job)
+    assert(destroy_obsolete_git_files_job)
+       
   end
 
   def test_change_menu_item_dependencies
@@ -73,9 +73,17 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     item.about = communication_website_pages(:page_with_no_dependency)
     item.save
     assert_equal 2, item.recursive_dependencies.count
+    
+    # Comme les menu items ne répondent pas à is_direct_object? du coup aucune tâche de nettoyage n'est ajoutée
+    item.destroy
+    refute(destroy_obsolete_git_files_job)
   end
 
   protected
+
+  def destroy_obsolete_git_files_job(website_id = website_with_github.id)
+    find_performable_method_job(:destroy_obsolete_git_files_without_delay, website_id)
+  end
 
   # On ne peut pas utiliser assert_enqueued_jobs sur les méthodes asynchrones gérées avec handle_asynchronously
   def find_performable_method_job(method, id)
