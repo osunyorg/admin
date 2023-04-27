@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: communication_website_menus
+#
+#  id                       :uuid             not null, primary key
+#  github_path              :text
+#  identifier               :string
+#  title                    :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  communication_website_id :uuid             not null, indexed
+#  language_id              :uuid             not null, indexed
+#  original_id              :uuid             indexed
+#  university_id            :uuid             not null, indexed
+#
+# Indexes
+#
+#  idx_comm_website_menus_on_communication_website_id  (communication_website_id)
+#  index_communication_website_menus_on_language_id    (language_id)
+#  index_communication_website_menus_on_original_id    (original_id)
+#  index_communication_website_menus_on_university_id  (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_2901ebb799  (original_id => communication_website_menus.id)
+#  fk_rails_4d43d36541  (language_id => languages.id)
+#  fk_rails_8d6227916e  (university_id => universities.id)
+#  fk_rails_dcc7198fc5  (communication_website_id => communication_websites.id)
+#
 primary_menu:
   university: default_university
   website: website_with_github
