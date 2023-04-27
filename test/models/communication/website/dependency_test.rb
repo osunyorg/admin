@@ -64,8 +64,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   end
 
   def test_change_menu_item_dependencies
-    website_with_github.save
-    menu = website_with_github.menus.first
+    menu = communication_website_menus(:primary_menu)
 
     item = menu.items.create(university: default_university, website: website_with_github, kind: :blank, title: 'Test')
     assert_equal 2, item.recursive_dependencies.count
