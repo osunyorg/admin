@@ -14,14 +14,14 @@
     <%= osuny_panel t('hello', name: current_user.first_name) do %>
       <% if current_admin_theme == 'appstack' %>
         <p>
-          Osuny a un nouveau thème pour l'administration, "Pure". <br>
-          Voulez-vous l'essayer ?
+          Osuny a un nouveau thème pour l'administration, "Pure".
+          Voulez-vous l'essayer ?
         </p>
         <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put %>
       <% else %>
         <p>
-          Vous utilisez le thème "Pure" pour l'administration. <br>
-          Voulez-vous revenir au thème "Appstack" ?
+          Vous utilisez le thème "Pure" pour l'administration.
+          Voulez-vous revenir au thème "Appstack" ?
         </p>
         <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
       <% end %>
@@ -143,9 +143,6 @@
           <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
         </li>
       <% end %>
-      <li class="list-inline-item">
-        <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
-      </li>
     </ul>
   </div>
 <% end %>

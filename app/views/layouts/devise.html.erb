@@ -12,29 +12,20 @@
   </head>
   <body class="<%= body_classes %>">
     <div class="container">
-      <div class="row">
-        <div class="col-sm-10 mx-auto">
-          <h1 class="my-5 py-5 text-center">
-            <%= link_to root_path do %>
-              <%= render 'logo' %>
-            <% end %>
-          </h1>
-          <div class="card">
-            <div class="card-body text-start">
-              <% unless notice.blank? %>
-                <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
-              <% end %>
-              <% unless alert.blank? %>
-                <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
-              <% end %>
-              <%= yield %>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1 class="my-5 py-5 text-center">
+        <%= link_to root_path do %>
+          <%= render 'logo' %>
+        <% end %>
+      </h1>
+      <% unless notice.blank? %>
+        <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
+      <% end %>
+      <% unless alert.blank? %>
+        <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
+      <% end %>
+      <%= yield %>
     </div>
     <%= render 'footer' %>
-    <%= render 'gdpr/cookie_consent' %>
     <%= render 'bugsnag' %>
     <%= render 'summernote_localization' %>
   </body>

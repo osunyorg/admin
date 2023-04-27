@@ -373,6 +373,27 @@ en:
                 label: Iframe title (mandatory for accessibility)
                 placeholder: Enter the title
               warning: Beware, the code below is used as is, without any security filtering. Be extremely careful and never integrate possibly unreliable code.
+          features:
+            description: A list of features with images (often icons) and a description.
+            edit:
+              add_element: Add feature
+              remove_element: Remove feature
+              element:
+                image:
+                  label: Image (.png, .jpg, .svg)
+                  remove: Remove image
+                alt:
+                  label: Alternative text
+                  placeholder: Enter text description
+                credit:
+                  label: Credit
+                  placeholder: Enter image's credit here
+                title:
+                  label: Title
+                  placeholder: Enter title here
+                description:
+                  label: Text
+                  placeholder: Enter text here
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
@@ -458,6 +479,7 @@ en:
               cards:
                 label: Cards
                 description: Side by side cards, same height, strong color on rollover. Perfect for a small amount of pages.
+                more: Show more
               grid:
                 label: Grid
                 description: As a grid, left to right and top to bottom.
@@ -532,6 +554,9 @@ en:
               list:
                 label: List
                 description: A list of posts with small images the same width.
+              alternate:
+                label: Alternate
+                description: Posts either on the left or on the right, composing a graphically light page.
             edit:
               add_post: Add post
               mode:
@@ -718,6 +743,7 @@ en:
           datatable: Table
           definitions: Definitions
           embed: HTML embed
+          features: Features
           files: Files
           gallery: Gallery
           image: Image

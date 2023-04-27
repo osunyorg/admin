@@ -373,6 +373,27 @@ fr:
                 label: Titre de l'iframe (nécessaire pour l'accessibilité)
                 placeholder: Entrer le titre
               warning: Attention, le code ci-dessous est intégré tel quel, sans filtrage de sécurité. N'intégrez jamais de code externe dont la fiabilité n'est pas certaine.
+          features:
+            description: Une liste de fonctionnalités avec des images, par exemple des icônes, et une description.
+            edit:
+              add_element: Ajouter une fonctionnalité
+              remove_element: Supprimer la fonctionnalité
+              element:
+                image:
+                  label: Image (.png, .jpg, .svg)
+                  remove: Enlever l'image
+                alt:
+                  label: Texte alternatif
+                  placeholder: Entrer la description textuelle
+                credit:
+                  label: Crédit
+                  placeholder: Entrer le crédit de l'image ici
+                title:
+                  label: Titre
+                  placeholder: Entrer le titre de la fonctionnalité
+                description:
+                  label: Texte
+                  placeholder: Entrer la description de la fonctionnalité
           files:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
@@ -458,6 +479,7 @@ fr:
               cards:
                 label: Cartes
                 description: Des cartes côte à côte, de même hauteur, avec une couleur forte au survol. Ce format est idéal pour un petit nombre de pages.
+                more: En savoir plus
               grid:
                 label: Grille
                 description: Les pages sont présentées en grille, de gauche à droite puis de haut en bas.
@@ -532,6 +554,9 @@ fr:
               list:
                 label: Liste
                 description: Une liste d'articles avec de petites images à la même largeur.
+              alternate:
+                label: Alternance
+                description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.
             edit:
               add_post: Ajouter un article
               mode:
@@ -718,6 +743,7 @@ fr:
           datatable: Tableau
           definitions: Définitions
           embed: Intégration HTML
+          features: Fonctionnalités
           files: Fichiers
           gallery: Galerie
           image: Image

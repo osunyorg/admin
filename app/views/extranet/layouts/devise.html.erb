@@ -24,12 +24,10 @@
               <%= link_to t('terms_of_service'), terms_path, rel: 'noreferrer' if current_extranet.has_terms? %>
               <%= link_to t('privacy_policy'), privacy_policy_path, rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
               <%= link_to t('cookies_policy'), cookies_policy_path, rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
-              <%= link_to t('cookies_consent_choice'), '', class: 'js-gdpr__cookie_consent__display_again' %>
           </footer>
         </div>
       </div>
     </main>
-    <%= render 'extranet/gdpr/cookie_consent' %>
     <%= render 'bugsnag' %>
     <%= javascript_include_tag 'extranet' %>
   </body>
