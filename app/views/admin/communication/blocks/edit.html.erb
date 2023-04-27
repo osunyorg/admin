@@ -21,7 +21,7 @@
             <%= f.input :published %>
           </div>
         </div>
-        <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
+        <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f, block: @block %>
       </div>
       <div class="col-xxl-3 col-lg-4">
         <%= render 'admin/application/a11y/widget', about: @block %>

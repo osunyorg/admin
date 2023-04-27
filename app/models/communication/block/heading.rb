@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  about_type    :string           not null, indexed => [about_id]
-#  level         :integer          default(1)
+#  level         :integer          default(2)
 #  position      :integer
 #  slug          :string
 #  title         :string
