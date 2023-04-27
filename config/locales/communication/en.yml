@@ -471,6 +471,7 @@ en:
               cards:
                 label: Cards
                 description: Side by side cards, same height, strong color on rollover. Perfect for a small amount of pages.
+                more: Show more
               grid:
                 label: Grid
                 description: As a grid, left to right and top to bottom.
@@ -545,6 +546,9 @@ en:
               list:
                 label: List
                 description: A list of posts with small images the same width.
+              alternate:
+                label: Alternate
+                description: Posts either on the left or on the right, composing a graphically light page.
             edit:
               add_post: Add post
               mode:

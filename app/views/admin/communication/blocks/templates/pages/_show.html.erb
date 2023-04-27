@@ -5,49 +5,90 @@ unless block.title.blank?
 end
 class_name += " block-pages--" + block.template.layout
 %>
-<section class="<%= class_name %>" style="display: none;">
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
-      <% if block.data %>
-        <% if block.template.page %>
-          <%#= block.template.page.slug %>
-        <% end %>
+      <% unless block.title.blank? %>
+        <div class="top">rail
+          <% unless block.title.blank? %>
 
-        <% if block.template.show_main_description %>
-          <p></p>
+            <% if block.template.layout === "cards" || block.template.layout === "list" %>
+              <h2><%= link_to block.template.page, block.template.page.url %></h2>
+            
+            <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
+              <h2><%= link_to block.title, block.template.page.url %></h2>
+              <p class="description"><%= block.template.page.summary %></p>
+
+            <% else %>
+              <h2><%= block.title %></h2>
+            <% end %>
+
+          <% end %>
+          <% if block.template.layout === "cards" && block.template.show_main_description && block.data %>
+            <div class="description">
+              <p><%= block.template.page.summary %></p>
+            </div>
+          <% end %>
+        </div>
+        <% if block.template.layout === "list" && block.template.show_main_description && block.data %> 
+          <p class="description"><%= block.template.page.summary %></p>
         <% end %>
+      <% end %>
+      <% if block.data %>
 
         <% if block.template.layout ===  "list" %>
-          
           <ul>
-            <% block.template.elements.each do |element| %>
-              <li>
-                <%#= element %>
-              </li>
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
+            <li><%= link_to page, page.url %></li>
             <% end %>
           </ul>
 
         <% elsif block.template.layout ===  "cards" %>
-
           <div class="cards">
-            <% block.template.elements.each do |element| %>
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
               <article class="card">
-                <%# <%= element %>
+                <h3>
+                  <%= link_to page, page.url %>
+                </h3>
                 <% if block.template.show_description %>
-                  <p><%#= element.summary %></p>
+                  <p><%= page.summary %></p>
+                <% end %>
+
+                <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %></p>
+
+                <% if block.template.show_image %>
+                  <div class="media" itemprop="image">
+                    <% if page.featured_image.attached? %>
+                      <%= kamifusen_tag page.featured_image %>
+                    <% end %>
+                  </div>
                 <% end %>
               </article>
             <% end %>
           </div>
 
         <% else %>
-
           <div class="grid">
-            <% block.template.elements.each do |element| %>
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
               <article>
-                <%# <%= element %>
+                <h3>
+                  <%= link_to page, page.url %>  
+                </h3>
                 <% if block.template.show_description %>
-                  <p><%#= element.summary %></p>
+                  <p><%= page.summary %></p>
+                <% end %>
+                <% if block.template.show_image %>
+                  <div class="media" itemprop="image">
+                    <% if page.featured_image.attached? %>
+                      <%= kamifusen_tag page.featured_image %>
+                    <% end %>
+                  </div>
                 <% end %>
               </article>
             <% end %>
