@@ -5,6 +5,7 @@
     <div class="col-xl-8">
       <%= render 'admin/application/summary/show', about: @post %>
       <%= render 'admin/communication/blocks/list', about: @post %>
+      <%= render 'admin/application/dependencies', about: @post %>
     </div>
     <div class="col-xl-4">
       <%= render 'admin/application/i18n/widget', about: @post %>
@@ -50,8 +51,6 @@
     </div>
   </div>
 <% end %>
-
-<%= render 'admin/application/dependencies', about: @post %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @post %>
