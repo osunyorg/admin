@@ -88,6 +88,8 @@ class Communication::Website < ApplicationRecord
   end
 
   def dependencies
+    # Le website est le SEUL cas d'auto-dépendance
+    [self] +
     configs +
     pages +
     posts +
