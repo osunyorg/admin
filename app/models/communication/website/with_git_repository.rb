@@ -15,10 +15,10 @@ module Communication::Website::WithGitRepository
   def destroy_obsolete_git_files
     website_git_files.find_each do |git_file|
       dependency = git_file.about
-      is_obsolete = !dependency.in?(recursive_dependencies_syncable)
+      # Here, dependency can be nil (object was previously destroyed)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable)
       if is_obsolete
-        # TODO git_file.destroy serait plus ActiveRecord
-        Communication::Website::GitFile.sync(self, dependency, destroy: true)
+        Communication::Website::GitFile.mark_for_destruction(self, git_file)
       end
     end
     self.git_repository.sync!

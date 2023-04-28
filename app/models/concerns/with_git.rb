@@ -23,11 +23,6 @@ module WithGit
     end
   end
 
-  def destroy_and_sync
-    destroy_from_git
-    destroy
-  end
-
   def sync_with_git
     return unless website.git_repository.valid?
     if syncable?
@@ -42,11 +37,5 @@ module WithGit
     website.git_repository.sync!
   end
   handle_asynchronously :sync_with_git, queue: 'default'
-
-  def destroy_from_git
-    return unless website.git_repository.valid?
-    Communication::Website::GitFile.sync website, self, destroy: true
-    website.git_repository.sync!
-  end
 
 end

@@ -47,28 +47,6 @@ module AsIndirectObject
     end
   end
 
-  def destroy
-    # On est obligés d'overwrite la méthode destroy pour éviter un problème d'œuf et de poule.
-    # On a besoin que les websites puissent recalculer leurs recursive_dependencies
-    # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
-    # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections`
-    # on ne peut plus accéder aux websites (puisque l'objet est déjà détruit et ses connexions en cascades).
-    # Donc :
-    # 1. on stocke les websites
-    # 2. PUIS on détruit les connexions
-    # 3. PUIS on détruit l'objet (la méthode destroy normale)
-    # 4. PUIS on demande aux websites stockés de nettoyer leurs connexions
-    self.transaction do
-      website_ids = websites.pluck(:id)
-      connections.destroy_all
-      super
-      Communication::Website.where(id: website_ids).each do |website|
-        website.destroy_obsolete_connections
-        website.save_and_sync
-      end
-    end
-  end
-
   protected
 
   def direct_sources_from_existing_connections

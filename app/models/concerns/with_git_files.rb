@@ -4,8 +4,7 @@ module WithGitFiles
   included do
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
-              as: :about,
-              dependent: :destroy
+              as: :about
   end
 
   def git_path(website)

@@ -11,10 +11,28 @@ module WithDependencies
     if self < ActiveRecord::Base
       before_save :snapshot_dependencies
       after_save :clean_websites_if_necessary
-      after_destroy :clean_websites
     end
   end
 
+  def destroy
+    # On est obligés d'overwrite la méthode destroy pour éviter un problème d'œuf et de poule.
+    # On a besoin que les websites puissent recalculer leurs recursive_dependencies
+    # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
+    # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections`
+    # on ne peut plus accéder aux websites (puisque l'objet est déjà détruit et ses connexions en cascades).
+    # Donc :
+    # 1. on stocke les websites
+    # 2. on laisse la méthode destroy normale faire son travail
+    # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files
+    self.transaction do
+      website_ids = websites_to_clean.pluck(:id)
+      super
+      clean_websites(Communication::Website.where(id: website_ids))
+      # TODO: Actuellement, on ne nettoie pas les références
+      # Exemple : Quand on supprime un auteur, il n'est pas nettoyé dans le static de ses anciens posts.
+      # Un save du website le fera en nocturne pour l'instant.
+    end
+  end
 
   # Cette méthode doit être définie dans chaque objet,
   # et renvoyer un tableau de ses références directes.
@@ -80,13 +98,13 @@ module WithDependencies
     # puts "  recursive_dependencies_syncable #{ reloaded_recursive_dependencies_syncable_filtered }"
     # puts "  missing_dependencies_after_save #{ missing_dependencies_after_save }"
     # puts
-    clean_websites if missing_dependencies_after_save.any?
+    clean_websites(websites_to_clean) if missing_dependencies_after_save.any?
   end
 
-  def clean_websites
+  def clean_websites(websites)
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
-    websites_to_clean.each do |website|
+    websites.each do |website|
       website.destroy_obsolete_connections
       website.destroy_obsolete_git_files
     end

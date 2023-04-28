@@ -40,7 +40,9 @@ Rails.application.config.to_prepare do
     extend ActiveSupport::Concern
 
     included do
-      has_many :git_files, class_name: "Communication::Website::GitFile", as: :about, dependent: :destroy
+      has_many  :git_files,
+                class_name: "Communication::Website::GitFile",
+                as: :about
     end
 
     def git_path(website)

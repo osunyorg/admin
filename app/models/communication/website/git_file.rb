@@ -28,7 +28,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   attr_accessor :will_be_destroyed
 
-  def self.sync(website, object, destroy: false)
+  def self.sync(website, object)
     # All exportable objects must respond to this method
     # WithGitFiles defines it
     # AsDirectObject includes WithGitFiles, therefore all direct objects are exportable
@@ -44,8 +44,6 @@ class Communication::Website::GitFile < ApplicationRecord
     analyze_if_blob object
     # The git file might exist or not
     git_file = where(website: website, about: object).first_or_create
-    # Mark for destruction if necessary
-    git_file.will_be_destroyed = destroy
     # It is very important to go through this specific instance of the website,
     # and not through each git_file.website, which would be different instances.
     # Otherwise, we get 1 instance of git_repository per git_file,
@@ -53,8 +51,15 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
+  # Simplified version of the sync method to simply delete an obsolete git_file
+  # Not an instance method because we need to share the website's instance, and thus pass it as an argument
+  def self.mark_for_destruction(website, git_file)
+    git_file.will_be_destroyed = true
+    website.git_repository.add_git_file git_file
+  end
+
   def path
-    @path ||= about.git_path(website)&.gsub(/\/+/, '/')
+    @path ||= about.nil? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
   end
 
   def to_s

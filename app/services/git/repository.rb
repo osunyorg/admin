@@ -10,7 +10,8 @@ class Git::Repository
     if git_files.empty?
       analyzer.git_file = git_file
       action = analyzer.should_destroy? ? "Destroy" : "Save"
-      @commit_message = "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
+      @commit_message = git_file.about.nil? ? "[#{ git_file.class.name }] #{ action } Git file"
+                                            : "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
     end
     git_files << git_file
   end
@@ -79,15 +80,13 @@ class Git::Repository
     git_files.each do |git_file|
       analyzer.git_file = git_file
       if analyzer.should_destroy?
-        path = nil
-        sha = nil
+        puts "Destroying #{git_file.previous_path}"
+        git_file.destroy
       else
         path = git_file.path
-        sha = computed_sha(git_file.to_s)
+        puts "Marking #{path}"
+        git_file.update previous_path: path, previous_sha: computed_sha(git_file.to_s)
       end
-      puts "Marking #{path}"
-      git_file.update previous_path: path,
-                      previous_sha: sha
     end
   end
 end

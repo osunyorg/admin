@@ -77,7 +77,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
   end
 
   def destroy
-    @category.destroy_and_sync
+    @category.destroy
     redirect_to admin_communication_website_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
   end
 

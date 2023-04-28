@@ -103,7 +103,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     if @page.is_special_page?
       redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.delete_special_page_notice'))
     else
-      @page.destroy_and_sync
+      @page.destroy
       redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
     end
   end
