@@ -36,6 +36,7 @@ class Communication::Website::GitFile < ApplicationRecord
     # Some objects need to declare that property:
     # - the website itself
     # - configs (which inherit from the website)
+    # - active storage blobs
     return unless object.try(:exportable_to_git?)
     # Permalinks must be calculated BEFORE renders
     manage_permalink object, website

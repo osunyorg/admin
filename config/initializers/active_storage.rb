@@ -46,6 +46,10 @@ Rails.application.config.to_prepare do
     def git_path(website)
       "data/media/#{id[0..1]}/#{id}.yml"
     end
+
+    def exportable_to_git?
+      true
+    end
   end
 
   ActiveStorage::Blob.include ActiveStorageGitPathStatic
