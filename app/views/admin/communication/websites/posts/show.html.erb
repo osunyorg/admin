@@ -51,6 +51,8 @@
   </div>
 <% end %>
 
+<%= render 'admin/application/dependencies', about: @post %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @post %>
   <%= duplicate_link @post %>
