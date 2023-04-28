@@ -82,6 +82,8 @@
     <% end %>
 
     <%= render 'admin/communication/blocks/list', about: @organization %>
+
+    <%= render 'admin/application/connections/list', about: @organization %>
   </div>
 
   <div class="col-md-4">
@@ -118,8 +120,6 @@
     <% end if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
 
     <%= render 'admin/application/meta_description/show', about: @organization %>
-
-    <%= render 'admin/application/connections/list', about: @organization %>
   </div>
 </div>
 
