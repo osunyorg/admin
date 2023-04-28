@@ -5,34 +5,24 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :description, as: :string %>
-        </div>
-      </div>
+    <div class="col-md-6">
+      <%= osuny_panel t('admin.infos') do %>
+        <%= f.input :description, as: :string %>
+      <% end %>
     </div>
-    <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= University::Person.model_name.human(count: 2) %></h5>
-        </div>
-        <div class="card-body">
-          <%= link_to_add_association t('add'), f, :involvements, class: "btn btn-primary mb-3", data: {
-                'association-insertion-method': 'append',
-                'association-insertion-node':   '#involvements'
-              } %>
+    <div class="col-md-6">
+      <%= osuny_panel University::Person.model_name.human(count: 2) do %>
+        <%= link_to_add_association t('add'), f, :involvements, class: "btn btn-primary mb-3", data: {
+              'association-insertion-method': 'append',
+              'association-insertion-node':   '#involvements'
+            } %>
 
-          <div class="mb-3" id="involvements" data-sortable="inputs">
-            <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
-              <%= render 'admin/education/programs/roles/involvement_fields', f: involvement_f, include_id: true %>
-            <% end %>
-          </div>
+        <div class="mb-3" id="involvements" data-sortable="inputs">
+          <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
+            <%= render 'admin/education/programs/roles/involvement_fields', f: involvement_f, include_id: true %>
+          <% end %>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 
