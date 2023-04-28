@@ -52,6 +52,10 @@ class Education::Diploma < ApplicationRecord
     "#{git_path_content_prefix(website)}diplomas/#{slug}/_index.html" if for_website?(website)
   end
 
+  def dependencies
+    programs
+  end
+
   def references
     []
   end

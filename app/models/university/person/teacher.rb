@@ -65,4 +65,12 @@ class University::Person::Teacher < University::Person
   def template_static
     "admin/university/people/teachers/static"
   end
+
+  def dependencies
+    [person]
+  end
+
+  def references
+    education_programs_as_teacher
+  end
 end

@@ -64,4 +64,12 @@ class University::Person::Researcher < University::Person
   def template_static
     "admin/university/people/researchers/static"
   end
+
+  def dependencies
+    [person]
+  end
+
+  def references
+    research_journal_papers
+  end
 end

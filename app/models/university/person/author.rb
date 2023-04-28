@@ -64,4 +64,12 @@ class University::Person::Author < University::Person
   def template_static
     "admin/university/people/authors/static"
   end
+
+  def dependencies
+    [person]
+  end
+
+  def references
+    communication_website_posts
+  end
 end
