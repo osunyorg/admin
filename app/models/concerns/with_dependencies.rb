@@ -56,13 +56,13 @@ module WithDependencies
   end
 
   protected
-  
+
   # Si l'objet est déjà là, on ne doit pas l'ajouter
   # Si l'objet n'est pas syncable, on ne doit pas l'ajouter non plus
   def dependency_should_be_added?(array, dependency, syncable_only)
     !dependency.in?(array) && dependency_should_be_synced?(dependency, syncable_only)
   end
-  
+
   # Si on n'est pas en syncable only on liste tout, sinon, il faut analyser
   def dependency_should_be_synced?(dependency, syncable_only)
     !syncable_only || (dependency.respond_to?(:syncable?) && dependency.syncable?)
@@ -84,13 +84,16 @@ module WithDependencies
   end
 
   def clean_websites
+    # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
-    
-    if is_direct_object?
+    websites_to_clean.each do |website|
+      website.destroy_obsolete_connections
       website.destroy_obsolete_git_files
-    elsif is_indirect_object?
-      websites.each(&:destroy_obsolete_git_files)
     end
+  end
+
+  def websites_to_clean
+    is_direct_object? ? [website] : websites
   end
 
   def missing_dependencies_after_save
