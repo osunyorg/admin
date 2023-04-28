@@ -54,7 +54,7 @@ class Communication::Website::Post < ApplicationRecord
 
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
-          dependent: :destroy  
+          dependent: :destroy
   belongs_to :author,
              class_name: 'University::Person',
              optional: true
@@ -124,7 +124,8 @@ class Communication::Website::Post < ApplicationRecord
   def dependencies
     active_storage_blobs +
     blocks +
-    categories
+    categories +
+    [author&.author]
   end
 
   def references

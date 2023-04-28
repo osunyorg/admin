@@ -17,11 +17,13 @@ module AsDirectObject
                class_name: 'Communication::Website',
                foreign_key: :communication_website_id
 
-    has_many  :connections, 
+    has_many  :connections,
               as: :direct_source,
               class_name: 'Communication::Website::Connection',
               dependent: :destroy # When the direct object disappears all connections with the object as a source must disappear
 
+    after_save  :sync_connections
+    after_touch :sync_connections
   end
 
   def is_direct_object?
@@ -30,5 +32,11 @@ module AsDirectObject
 
   def is_indirect_object?
     false
+  end
+
+  def sync_connections
+    dependencies.each do |dependency|
+      website.connect(dependency, self)
+    end
   end
 end

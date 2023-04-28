@@ -11,11 +11,11 @@ module Communication::Website::WithGitRepository
     @git_repository ||= Git::Repository.new self
   end
 
-  # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencie_syncable
+  # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
     website_git_files.find_each do |git_file|
       dependency = git_file.about
-      is_obsolete = !dependency.in?(recursive_dependencie_syncable)
+      is_obsolete = !dependency.in?(recursive_dependencies_syncable)
       if is_obsolete
         # TODO git_file.destroy serait plus ActiveRecord
         Communication::Website::GitFile.sync(self, dependency, destroy: true)

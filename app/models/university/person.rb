@@ -58,13 +58,14 @@ class University::Person < ApplicationRecord
   include WithBlobs
   include WithBlocks
   include WithCountry
+  # WithRoles included before WithEducation because needed for the latter
+  include WithRoles
   include WithEducation
   include WithExperiences
   include WithGitFiles
   include WithPermalink
   include WithPicture
   include WithResearch
-  include WithRoles
   include WithSlug
   include WithTranslations
   include WithUniversity
@@ -206,7 +207,11 @@ class University::Person < ApplicationRecord
   end
 
   def references
-    []
+    [administrator, author, researcher, teacher]
+  end
+
+  def person
+    @person ||= University::Person.find(id)
   end
 
   def administrator

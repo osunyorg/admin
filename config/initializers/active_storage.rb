@@ -47,6 +47,10 @@ Rails.application.config.to_prepare do
       "data/media/#{id[0..1]}/#{id}.yml"
     end
 
+    def syncable?
+      true
+    end
+
     def exportable_to_git?
       true
     end
