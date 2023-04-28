@@ -36,7 +36,6 @@
 class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
-  include WithUniversity
   include WithAbouts
   include WithConfigs
   include WithConnectedObjects
@@ -46,10 +45,12 @@ class Communication::Website < ApplicationRecord
   include WithImport
   include WithOldDependencies
   include WithProgramCategories
+  include WithReferences
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithStyle
   include WithTheme
+  include WithUniversity
 
   enum git_provider: {
     github: 0,
@@ -77,10 +78,6 @@ class Communication::Website < ApplicationRecord
       unaccent(communication_websites.url) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-
-  def self.save_and_sync_websites!
-    find_each &:save_and_sync
-  end
 
   def to_s
     "#{name}"

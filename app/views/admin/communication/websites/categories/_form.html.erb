@@ -4,37 +4,25 @@
 
   <div class="row">
     <div class="col-md-8">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('content') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :name %>
-          <%= render 'admin/application/summary/form', f: f, about: category %>
-        </div>
-      </div>
+      <%= osuny_panel t('content') do %>
+        <%= f.input :name %>
+        <%= render 'admin/application/summary/form', f: f, about: category %>
+      <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: category %>
     </div>
     <div class="col-md-4">
-      <div class="card flex-fill w-100">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%= t('metadata') %></h5>
-        </div>
-        <div class="card-body">
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: category.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#communication_website_category_name' }
-                      } %>
-          <%= f.association :parent,
-                            collection: collection_tree(@website.categories.for_language(current_website_language), category),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } %>
-          <ul>
-          </ul>
-        </div>
-      </div>
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: category.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#communication_website_category_name' }
+                    } %>
+        <%= f.association :parent,
+                          collection: collection_tree(@website.categories.for_language(current_website_language), category),
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] } %>
+      <% end %>
       <%= render 'admin/application/featured_image/edit', about: category, f: f %>
     </div>
   </div>

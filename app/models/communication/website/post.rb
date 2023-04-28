@@ -38,12 +38,12 @@
 #  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  include AsDirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
@@ -54,10 +54,7 @@ class Communication::Website::Post < ApplicationRecord
 
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
-          dependent: :destroy
-  belongs_to :website,
-             class_name: 'Communication::Website',
-             foreign_key: :communication_website_id
+          dependent: :destroy  
   belongs_to :author,
              class_name: 'University::Person',
              optional: true

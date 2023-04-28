@@ -41,11 +41,11 @@
 #  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Category < ApplicationRecord
+  include AsDirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
@@ -58,8 +58,6 @@ class Communication::Website::Category < ApplicationRecord
                           class_name: 'Communication::Website::Imported::Category',
                           dependent: :destroy
   belongs_to              :university
-  belongs_to              :website,
-                          foreign_key: :communication_website_id
   belongs_to              :parent,
                           class_name: 'Communication::Website::Category',
                           optional: true

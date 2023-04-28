@@ -43,10 +43,10 @@
 #  fk_rails_db4e38788c  (kind_id => research_journal_paper_kinds.id)
 #
 class Research::Journal::Paper < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithConnections
   include WithGitFiles
   include WithPermalink
   include WithPosition

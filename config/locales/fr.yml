@@ -201,8 +201,6 @@ fr:
     empty: Le dossier est vide
     open: Ouvrir le dossier
     close: Fermer le dossier
-  gdpr:
-    privacy_policy: https://osuny.org/politique-de-confidentialite
   hello: "Bonjour %{name} !"
   home: Accueil
   imports:

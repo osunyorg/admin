@@ -41,15 +41,15 @@ module Communication::Website::WithOldDependencies
   end
 
   def administrators
-    about&.administrators
+    has_administrators? ? about.administrators : University::Person.none
   end
 
   def researchers
-    about&.researchers
+    has_researchers? ? about.researchers : University::Person.none
   end
 
   def teachers
-    about&.teachers
+    has_teachers? ? about.teachers : University::Person.none
   end
 
   def people_in_blocks

@@ -40,10 +40,10 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
-  include WithConnections
   include WithCountry
   include WithGeolocation
   include WithGitFiles

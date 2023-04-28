@@ -42,7 +42,7 @@ context ||= :admin
     <div class="container-fluid">
       <div class="row">
         <%= render_navigation context: context, renderer: Osuny::SimpleNavigationRenderer %>
-        <div class="col-md-4 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-3">
           <% 
           if current_user.picture.attached? && current_user.picture.variable? 
             image = current_user.picture.variant(resize: '200x200')

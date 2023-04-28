@@ -1,18 +1,4 @@
-<% is_leaflet_needed = true; %>
-
 <% about.blocks.published.ordered.each do |block| %>
   <% @block = block %>
   <%= render "admin/communication/blocks/templates/#{@block.template_kind}/preview" %>
-  <% if block.template_kind == "partners" && block.data[:layout] == "map" %>
-    <% is_leaflet_needed = true; %>
-  <% end %>
-<% end %>
-
-<% if is_leaflet_needed %>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-        crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-          crossorigin=""></script>
 <% end %>

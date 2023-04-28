@@ -8,7 +8,6 @@
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
 //= require appstack/app
-//= require gdpr/cookie_consent
 //= require sortablejs/Sortable
 //= require summernote/summernote-bs5
 //= require slug/slug

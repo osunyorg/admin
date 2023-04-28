@@ -12,23 +12,20 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid             indexed => [about_type]
-#  heading_id    :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_blocks_on_heading_id     (heading_id)
 #  index_communication_blocks_on_university_id  (university_id)
 #  index_communication_website_blocks_on_about  (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_18291ef65f  (university_id => universities.id)
-#  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
   include Accessible
-  include WithConnections
+  include AsIndirectObject
   include WithPosition
   include WithUniversity
   include Sanitizable
@@ -42,12 +39,19 @@ class Communication::Block < ApplicationRecord
   # template_blobs would be a better name, because there are files
   has_many_attached :template_images
 
+  # Les numéros sont un peu en vrac
+  # Dans l'idée, pour le futur
+  # 1000 basic
+  # 2000 storytelling
+  # 3000 references
+  # 4000 utilities
   enum template_kind: {
     chapter: 50,
     image: 51,
     gallery: 300,
     video: 52,
     key_figures: 56,
+    features: 2010,
     datatable: 54,
     files: 55,
     embed: 53,
@@ -65,14 +69,13 @@ class Communication::Block < ApplicationRecord
 
   CATEGORIES = {
     basic: [:chapter, :image, :video, :datatable],
-    storytelling: [:key_figures, :gallery, :call_to_action, :testimonials, :timeline],
+    storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :organization_chart, :partners, :programs],
     utilities: [:files, :definitions, :embed, :contact]
   }
 
   scope :published, -> { where(published: true) }
 
-  after_save :sync_if_about_is_direct
   before_save :attach_template_blobs
   before_validation :set_university_from_about, on: :create
 
@@ -144,10 +147,6 @@ class Communication::Block < ApplicationRecord
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize
-  end
-
-  def sync_if_about_is_direct
-    about.save_and_sync if about.respond_to? :save_and_sync
   end
 
   # FIXME @sebou

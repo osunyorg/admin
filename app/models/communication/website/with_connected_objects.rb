@@ -2,15 +2,28 @@ module Communication::Website::WithConnectedObjects
   extend ActiveSupport::Concern
 
   included do
-    has_many  :connections
+    has_many :connections
 
-    # before_save :clean_connections!
+    after_save :connect_about, if: :saved_change_to_about_id?
   end
 
-  def clean_connections!
-    start = Time.now
-    connect self, self
-    connections.reload.where('updated_at < ?', start).delete_all
+  # Appelé
+  # - par un objet avec des connexions lorsqu'il est destroyed
+  # - par le website lui-même au changement du about
+  def destroy_obsolete_connections
+    up_to_date_dependencies = recursive_dependencies
+    deletable_connection_ids = []
+    connections.find_each do |connection|
+      has_living_connection = up_to_date_dependencies.detect { |dependency|
+        dependency.class.name == connection.indirect_object_type &&
+        dependency.id == connection.indirect_object_id
+      }
+      deletable_connection_ids << connection.id unless has_living_connection
+    end
+    # On utilise delete_all pour supprimer les connexions obsolètes en une unique requête DELETE FROM
+    # Cependant, on peut le faire car les connexions n'ont pas de callback.
+    # Dans le cas où on en rajoute au destroy, il faut repasser sur un appel de destroy sur chaque
+    connections.where(id: deletable_connection_ids).delete_all
   end
 
   def has_connected_object?(indirect_object)
@@ -55,19 +68,23 @@ module Communication::Website::WithConnectedObjects
     University::Organization.where(id: ids)
   end
 
+  def is_direct_object?
+    true
+  end
+
+  def is_indirect_object?
+    false
+  end
+
   protected
 
+  def connect_about
+    self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
+    destroy_obsolete_connections
+  end
+
   def connect_object(indirect_object, direct_source, direct_source_type: nil)
-    # byebug if indirect_object.is_a?(Communication::Block) && indirect_object.template_kind == 'organization_chart'
-    return unless persisted?
-    # On ne connecte pas les objets inexistants
-    return if indirect_object.nil?
-    # On ne connecte pas les objets sans source
-    return if direct_source.nil?
-    # On ne connecte pas le site à lui-même
-    return if indirect_object.is_a?(Communication::Website)
-    # On ne connecte pas les objets directs
-    return if indirect_object.respond_to?(:website)
+    return unless should_connect?(indirect_object, direct_source)
     # puts "connect #{object} (#{object.class})"
     direct_source_type ||= direct_source.class.base_class.to_s
     connection = connections.where( university: university,
@@ -76,5 +93,19 @@ module Communication::Website::WithConnectedObjects
                                     direct_source_type: direct_source_type)
                             .first_or_create
     connection.touch if connection.persisted?
+  end
+
+  def should_connect?(indirect_object, direct_source)
+    # Ce cas se produit quand on save un new website et qu'on ne passe pas un validateur
+    return false unless persisted?
+    # On ne connecte pas les objets inexistants
+    return false if indirect_object.nil?
+    # On ne connecte pas les objets sans source
+    return false if direct_source.nil?
+    # On ne connecte pas le site à lui-même
+    return false if indirect_object.is_a?(Communication::Website)
+    # On ne connecte pas les objets directs (en principe ça n'arrive pas)
+    return false if indirect_object.try(:is_direct_object?)
+    true
   end
 end

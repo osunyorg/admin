@@ -1,16 +1,27 @@
 <%
-$class = "block block-programs"
+class_name = "block block-programs"
 unless @block.title.blank?
-  $class += " block-with-title"
+  class_name += " block-with-title"
 end
 %>
-<section class="<%= $class %>" style="display: none;">
+
+<section class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
+      <% unless @block.title.blank? %>
+        <div class="top">
+          <% unless @block.title.blank? %>
+            <h2><%= @block.title %></h2>
+          <% end %>
+        </div>
+      <% end %>
       <ol class="programs">
-        <% @block.template.selected_programs.each do |program| %>
+        <% @block.template.elements.each do |element|
+          program = element.program
+          next if program.nil?
+        %>
           <li>
-            <%= program %></p>
+            <%= link_to program, [:admin, program] %>  
           </li>
         <% end %>
       </ol>

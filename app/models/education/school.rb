@@ -26,10 +26,10 @@
 #
 class Education::School < ApplicationRecord
   include Aboutable
+  include AsIndirectObject
   include Sanitizable
   include WithAlumni
   include WithBlobs
-  include WithConnections
   include WithCountry
   include WithGitFiles
   include WithPrograms # must come before WithAlumni and WithTeam

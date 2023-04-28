@@ -51,11 +51,11 @@
 #
 class Education::Program < ApplicationRecord
   include Aboutable
+  include AsIndirectObject
   include Sanitizable
   include WithAlumni
   include WithBlobs
   include WithBlocks
-  include WithConnections
   include WithDiploma
   include WithFeaturedImage
   include WithGitFiles
