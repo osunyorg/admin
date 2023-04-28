@@ -78,22 +78,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
   end
 
-  create_table "communication_block_headings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "about_type", null: false
-    t.uuid "about_id", null: false
-    t.string "title"
-    t.integer "level", default: 2
-    t.uuid "parent_id"
-    t.integer "position"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["about_type", "about_id"], name: "index_communication_block_headings_on_about"
-    t.index ["parent_id"], name: "index_communication_block_headings_on_parent_id"
-    t.index ["university_id"], name: "index_communication_block_headings_on_university_id"
-  end
-
   create_table "communication_blocks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "about_type"
@@ -105,9 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "heading_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
-    t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
@@ -221,6 +203,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
+    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -462,7 +445,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -1095,9 +1078,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
-  add_foreign_key "communication_block_headings", "communication_block_headings", column: "parent_id"
-  add_foreign_key "communication_block_headings", "universities"
-  add_foreign_key "communication_blocks", "communication_block_headings", column: "heading_id"
   add_foreign_key "communication_blocks", "universities"
   add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_connections", "universities"

@@ -12,19 +12,16 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid             indexed => [about_type]
-#  heading_id    :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_blocks_on_heading_id     (heading_id)
 #  index_communication_blocks_on_university_id  (university_id)
 #  index_communication_website_blocks_on_about  (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_18291ef65f  (university_id => universities.id)
-#  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 
 olivia_in_noesya:
