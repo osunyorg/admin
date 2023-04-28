@@ -24,4 +24,10 @@ module Communication::Website::WithGitRepository
     self.git_repository.sync!
   end
   handle_asynchronously :destroy_obsolete_git_files, queue: :default
+
+  # Le website devient data/website.yml
+  # Les configs héritent du modèle website et s'exportent en différents fichiers
+  def exportable_to_git?
+    true
+  end
 end

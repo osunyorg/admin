@@ -29,8 +29,14 @@ class Communication::Website::GitFile < ApplicationRecord
   attr_accessor :will_be_destroyed
 
   def self.sync(website, object, destroy: false)
-    # A dependency does not always have a GitFile (ex: Communication::Block)
-    return unless object.respond_to?(:git_files)
+    # All exportable objects must respond to this method
+    # WithGitFiles defines it
+    # AsDirectObject includes WithGitFiles, therefore all direct objects are exportable
+    # AsIndirectObject does not include it, but some indirect objects have it (Person, Organization...)
+    # Some objects need to declare that property:
+    # - the website itself
+    # - configs (which inherit from the website)
+    return unless object.try(:exportable_to_git?)
     # Permalinks must be calculated BEFORE renders
     manage_permalink object, website
     # Blobs need to be completely analyzed, which is async

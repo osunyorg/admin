@@ -1,3 +1,7 @@
+# Donne la capacité de se synchroniser avec Git lors d'une opération ActiveRecord
+# Utilisé par :
+# - website
+# - objets directs
 module WithGit
   extend ActiveSupport::Concern
 
@@ -45,13 +49,4 @@ module WithGit
     website.git_repository.sync!
   end
 
-  def for_website?(website)
-    website.id == website_id
-  end
-
-  protected
-
-  def website_for_self
-    is_a?(Communication::Website) ? self : website
-  end
 end

@@ -52,46 +52,12 @@ module Communication::Website::WithOldDependencies
     has_teachers? ? about.teachers : University::Person.none
   end
 
-  def people_in_blocks
-    @people_in_blocks ||= blocks_dependencies.reject { |dependency| !dependency.is_a? University::Person }
+  def people
+    connected_persons
   end
 
   def organizations
-    organizations_in_blocks
-  end
-
-  def organizations_in_blocks
-    @organizations_in_blocks ||= blocks_dependencies.reject { |dependency| !dependency.is_a? University::Organization }
-  end
-
-  def people_with_facets_in_blocks
-    @people_with_facets_in_blocks ||= blocks_dependencies.reject { |dependency| !dependency.class.to_s.start_with?('University::Person') }
-  end
-
-  def people
-    # TODO: Scoper aux langues du website dans le cas où une personne serait traduite dans + de langues
-    @people ||= begin
-      people = []
-      people += authors if has_authors?
-      people += teachers if has_teachers?
-      people += administrators if has_administrators?
-      people += researchers if has_researchers?
-      people += people_in_blocks if has_people_in_blocks?
-      people.uniq.compact
-    end
-  end
-
-  def people_with_facets
-    # TODO: Scoper aux langues du website dans le cas où une personne serait traduite dans + de langues
-    @people_with_facets ||= begin
-      people_with_facets = people
-      people_with_facets += authors.compact.map(&:author) if has_authors?
-      people_with_facets += teachers.compact.map(&:teacher) if has_teachers?
-      people_with_facets += administrators.compact.map(&:administrator) if has_administrators?
-      people_with_facets += researchers.compact.map(&:researcher) if has_researchers?
-      people_with_facets += people_with_facets_in_blocks if has_people_in_blocks?
-      people_with_facets.uniq.compact
-    end
+    connected_organizations
   end
 
   # Deprecated, needs refactor for performance
@@ -105,23 +71,15 @@ module Communication::Website::WithOldDependencies
   end
 
   def has_organizations?
-    has_organizations_in_blocks?
+    connected_organizations.any?
   end
 
   def has_authors?
     authors.compact.any?
   end
 
-  def has_people_in_blocks?
-    people_in_blocks.compact.any?
-  end
-
-  def has_organizations_in_blocks?
-    organizations_in_blocks.compact.any?
-  end
-
   def has_persons?
-    has_authors? || has_administrators? || has_researchers? || has_teachers? || has_people_in_blocks?
+    connected_people.any?
   end
 
   def has_administrators?

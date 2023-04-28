@@ -88,6 +88,7 @@ class Communication::Website < ApplicationRecord
   end
 
   def dependencies
+    configs +
     pages +
     posts +
     categories +
