@@ -4,7 +4,6 @@ window.osuny.contentEditor = {
 
     init: function () {
         'use strict';
-        $('.js-content-editor').on('click', '.js-content-editor-openzone', this.branchClicked.bind(this));
         this.initSortable();
     },
 
