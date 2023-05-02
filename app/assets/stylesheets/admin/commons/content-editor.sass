@@ -12,15 +12,15 @@
             &--hover
                 opacity: 0
                 transition: opacity 0.25s ease
+            // @alex @olivia désolé
+            // j'ai besoin de rendre visible le hover du heading mais pas tous les enfants pour autant
+            // @arnaud
             &:hover
                 > .content-editor__elements__element--hover,
                 > * > .content-editor__elements__element--hover,
                 > * > * > .content-editor__elements__element--hover,
                 > * > * > * > .content-editor__elements__element--hover,
-                > * > * > * > * > .content-editor__elements__element--hover,
-                // @alex @olivia désolé
-                // j'ai besoin de rendre visible le hover du heading mais pas tous les enfants pour autant
-                // @arnaud
+                > * > * > * > * > .content-editor__elements__element--hover
                     opacity: 1
         &__handle
             margin-left: 10px
