@@ -1,20 +1,28 @@
-<div data-id="heading_<%= heading.id %>" class="blocks__list__element mt-5">
+<div  class=" content-editor__elements__element
+              content-editor__elements__element--heading
+              js-content-editor-element
+              mt-5"
+      data-id="<%= heading.id %>"
+      data-level="<%= heading.level %>"
+      data-kind="heading">
   <div style="padding-left: <%= (heading.level - Communication::Block::Heading::DEFAULT_LEVEL) * 48 %>px">
     <span class="h4"><%= heading %></span>
-    <%= link_to t('edit'), 
-                edit_admin_communication_heading_path(heading), 
+    <%= link_to t('edit'),
+                edit_admin_communication_heading_path(heading),
                 class: 'action ms-2' %>
-    <span class="blocks__list__handle blocks__list__element--hover">
+    <span class="content-editor__elements__handle content-editor__elements__element--hover">
       <span class="handle">
         <span class="small"><%= t 'organize' %></span>
         <i class="<%= Icon::MOVE %>"></i>
       </span>
     </span>
   </div>
+  <div class="content-editor__elements js-content-editor-sortable-container">
+    <% heading.blocks.each do |block| %>
+      <%= render 'admin/communication/blocks/block', block: block %>
+    <% end %>
+    <% heading.children.each do |child| %>
+      <%= render 'admin/communication/blocks/headings/heading', heading: child %>
+    <% end %>
+  </div>
 </div>
-<% heading.blocks.each do |block| %>
-  <%= render 'admin/communication/blocks/block', block: block %>
-<% end %>
-<% heading.children.each do |child| %>
-  <%= render 'admin/communication/blocks/headings/heading', heading: child %>
-<% end %>

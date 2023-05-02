@@ -1,5 +1,9 @@
-.blocks
-    &__list
+.content-editor
+    &__elements
+        &__root
+            &--dragging
+                .content-editor__elements__element--block
+                    display: none
         &__element
             &--hover
                 opacity: 0
@@ -13,6 +17,7 @@
                 font-size: px2rem(13)
             .handle
                 margin-right: 0
+        // FIXME dead code?
         &__image
             width: 170px
             img

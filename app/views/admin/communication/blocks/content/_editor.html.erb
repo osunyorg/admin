@@ -1,6 +1,9 @@
-<div  class="js-content-editor" 
+<div  class="js-content-editor"
       data-sort-url="<%= reorder_admin_communication_blocks_path %>">
-  <div class="blocks">
+  <div  class=" content-editor__elements
+                content-editor__elements__root
+                js-content-editor-sortable-container"
+        id="content-editor-elements-root">
     <% about.blocks.with_no_heading.ordered.each do |block| %>
       <%= render 'admin/communication/blocks/block', block: block %>
     <% end %>
@@ -8,7 +11,7 @@
       <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
     <% end %>
   </div>
-  <div class="row mt-5">
+  <div class="content-editor__actions row mt-5">
     <div class="col-lg-4">
       <%= link_to t('admin.communication.blocks.headings.add'),
                   new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
