@@ -89,9 +89,9 @@ window.osuny.contentEditor = {
             url;
 
         if (kind === 'block') {
-            url = this.container.getAttribute('data-sort-blocks-url');
+            url = this.sortBlocksUrl;
         } else if (kind === 'heading') {
-            url = this.container.getAttribute('data-sort-headings-url');
+            url = this.sortHeadingsUrl;
         }
 
         if (to.id !== 'content-editor-elements-root') {
