@@ -50,8 +50,8 @@ window.osuny.contentEditor = {
                 animation: 150,
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
-                onChoose: this.onSortableChoose.bind(this),            
-                onUnchoose: this.onSortableUnchoose.bind(this),            
+                onChoose: this.onSortableChoose.bind(this),
+                onUnchoose: this.onSortableUnchoose.bind(this),
                 onStart: this.onSortableStart.bind(this),
                 onEnd: this.onSortableEnd.bind(this)
             });
@@ -72,6 +72,14 @@ window.osuny.contentEditor = {
             this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-block');
         } else if (kind === 'heading') {
             this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-heading');
+        }
+        if (event.to.id === 'content-editor-elements-root') {
+            // Dragged to root list
+            console.log('no parent');
+            console.log([...event.to.children].map(item => `${item.dataset.kind}-${item.dataset.id}`));
+        } else {
+            // Dragged to element's children list
+            console.log('parent id is: ', evt.to.parentNode.dataset.id);
         }
     },
 
@@ -112,7 +120,7 @@ window.osuny.contentEditor = {
         //     itemId: item.dataset.id
         // });
     },
-    
+
     onSortableUnchoose: function (event) {
         'use strict';
         this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging');
@@ -121,9 +129,9 @@ window.osuny.contentEditor = {
     },
 
 
-    debugTree: function () {
+    getElementById: function (id) {
         'use strict';
-        console.log('TODO Debug Tree');
+        return this.elements[id];
     },
 
     invoke: function () {
