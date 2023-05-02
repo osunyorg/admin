@@ -73,55 +73,45 @@ window.osuny.contentEditor = {
         } else if (kind === 'heading') {
             this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-heading');
         }
-        if (event.to.id === 'content-editor-elements-root') {
-            // Dragged to root list
-            console.log('no parent');
-            console.log([...event.to.children].map(item => `${item.dataset.kind}-${item.dataset.id}`));
-        } else {
-            // Dragged to element's children list
-            console.log('parent id is: ', evt.to.parentNode.dataset.id);
-        }
     },
 
     onSortableEnd: function (event) {
         'use strict';
         var item = event.item,
-            from = event.from,
+            kind = item.dataset.kind,
             to = event.to,
             ids = [],
-            parentId,
+            headingId = null,
+            child,
+            i,
             url;
 
-        console.log('end');
+        if (kind === 'block') {
+            url = this.container.getAttribute('data-sort-blocks-url');
+        } else if (kind === 'heading') {
+            url = this.container.getAttribute('data-sort-headings-url');
+        }
 
-        // // get list of ids
-        // $('> .js-content-editor-element', to).each(function () {
-        //     ids.push($(this).attr('data-id'));
-        // });
+        if (to.id !== 'content-editor-elements-root') {
+            // Dragged to heading's children list
+            headingId = event.to.parentNode.dataset.id;
+        }
 
-        // // as the "to" can be the root object where the data-sort-url is set we use "closest" and not "parents"
-        // url = $(to).closest('.js-content-editor-sortable')
-        //     .attr('data-sort-url');
-        // parentId = to.dataset.id;
+        for (i = 0; i < to.children.length; i += 1) {
+            child = to.children[i];
+            if (child.dataset.kind === kind) {
+                ids.push(child.dataset.id);
+            }
+        }
 
-        // // manage emptyness
-        // $(to).closest('.js-content-editor-element')
-        //     .removeClass('content-editor__element--empty');
-        // if ($('> .js-content-editor-element', from).length === 0) {
-        //     $(from).closest('.js-content-editor-element')
-        //         .addClass('content-editor__element--empty');
-        // }
-
-        // // call to application
-        // $.post(url, {
-        //     oldParentId: from.dataset.id,
-        //     parentId: parentId,
-        //     ids: ids,
-        //     itemId: item.dataset.id
-        // });
+        // call to application
+        $.post(url, {
+            heading: headingId,
+            ids: ids
+        });
     },
 
-    onSortableUnchoose: function (event) {
+    onSortableUnchoose: function () {
         'use strict';
         this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging');
         this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-block');
