@@ -55,7 +55,7 @@ fr:
         all: Toutes les actualités
     attributes:
       communication/block:
-        title: Titre
+        title: Intitulé
         template: Type de bloc
         published: Publié ?
       communication/block/heading:

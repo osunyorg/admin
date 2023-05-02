@@ -1,4 +1,6 @@
 //= require activestorage
+//= require popper
+//= require bootstrap-sprockets
 //= require jquery3
 //= require jquery_ujs
 //= require notyf/notyf.min
@@ -7,7 +9,7 @@
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
 // TODO remove appstack js
-//= require appstack/app
+// require appstack/app
 //= require sortablejs/Sortable
 //= require summernote/summernote-bs5
 //= require slug/slug
