@@ -5,6 +5,8 @@ window.osuny.contentEditor = {
     init: function () {
         'use strict';
         this.container = document.querySelector('.js-content-editor');
+        this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
+        this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
         if (this.container === null) {
             return;
         }
