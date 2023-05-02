@@ -3,12 +3,12 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
                               through: :current_university,
                               through_association: :communication_block_headings
   def reorder
-    parent = params[:heading]
+    parent_id = params[:heading]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       heading = current_university.communication_block_headings.find id
+      heading.parent_id = parent_id
       heading.position = index + 1
-      heading.parent = parent
       heading.save
     end
   end

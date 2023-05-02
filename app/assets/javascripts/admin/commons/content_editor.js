@@ -5,6 +5,8 @@ window.osuny.contentEditor = {
     init: function () {
         'use strict';
         this.container = document.querySelector('.js-content-editor');
+        this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
+        this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
         if (this.container === null) {
             return;
         }
@@ -113,9 +115,11 @@ window.osuny.contentEditor = {
 
     onSortableUnchoose: function () {
         'use strict';
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging');
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-block');
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-heading');
+        this.sortableRootContainer.classList.remove(
+            'content-editor__elements__root--dragging',
+            'content-editor__elements__root--dragging-block',
+            'content-editor__elements__root--dragging-heading'
+        );
     },
 
 
