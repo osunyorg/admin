@@ -50,7 +50,7 @@
       <% end %>
     </ul>
     <% if @website.languages.many? %>
-      <select class="form-control form-select mt-5"  onchange="if (this.value) window.location.href=this.value">
+      <select class="form-control form-select my-5"  onchange="if (this.value) window.location.href=this.value">
         <% @website.languages.each do |language| %>
           <%
           label = I18n.t(language.iso_code, scope: :languages)

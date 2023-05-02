@@ -33,7 +33,7 @@ module ApplicationController::WithDomain
     helper_method :current_mode
 
     def current_admin_theme
-      current_user.nil? ? 'appstack' : current_user.admin_theme
+      current_user.nil? ? 'pure' : current_user.admin_theme
     end
     helper_method :current_admin_theme
   end

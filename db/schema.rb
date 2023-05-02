@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_074432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1082,7 +1082,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_142031) do
     t.string "session_token"
     t.string "picture_url"
     t.string "direct_otp_delivery_method"
-    t.integer "admin_theme", default: 0
+    t.integer "admin_theme", default: 1
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email", "university_id"], name: "index_users_on_email_and_university_id", unique: true
     t.index ["encrypted_otp_secret_key"], name: "index_users_on_encrypted_otp_secret_key", unique: true
