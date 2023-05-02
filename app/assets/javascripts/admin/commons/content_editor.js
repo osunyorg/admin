@@ -50,6 +50,8 @@ window.osuny.contentEditor = {
                 animation: 150,
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
+                onChoose: this.onSortableChoose.bind(this),            
+                onUnchoose: this.onSortableUnchoose.bind(this),            
                 onStart: this.onSortableStart.bind(this),
                 onEnd: this.onSortableEnd.bind(this)
             });
@@ -57,23 +59,33 @@ window.osuny.contentEditor = {
         }
     },
 
-    onSortableStart: function (evt) {
+    onSortableChoose: function (event) {
         'use strict';
-        console.log('start');
-        this.sortableRootContainer.classList.add('content-editor__elements__root--dragging');
     },
 
-    onSortableEnd: function (evt) {
+    onSortableStart: function (event) {
         'use strict';
-        var item = evt.item,
-            from = evt.from,
-            to = evt.to,
+        var item = event.item,
+            kind = item.dataset.kind;
+        this.sortableRootContainer.classList.add('content-editor__elements__root--dragging');
+        if (kind === 'block') {
+            this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-block');
+        } else if (kind === 'heading') {
+            this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-heading');
+        }
+    },
+
+    onSortableEnd: function (event) {
+        'use strict';
+        var item = event.item,
+            from = event.from,
+            to = event.to,
             ids = [],
             parentId,
             url;
 
         console.log('end');
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging');
+
         // // get list of ids
         // $('> .js-content-editor-element', to).each(function () {
         //     ids.push($(this).attr('data-id'));
@@ -100,6 +112,14 @@ window.osuny.contentEditor = {
         //     itemId: item.dataset.id
         // });
     },
+    
+    onSortableUnchoose: function (event) {
+        'use strict';
+        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging');
+        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-block');
+        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-heading');
+    },
+
 
     debugTree: function () {
         'use strict';

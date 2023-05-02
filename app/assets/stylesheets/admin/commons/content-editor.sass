@@ -1,10 +1,14 @@
 .content-editor
     &__elements
         &__root
-            &--dragging
+            &--dragging-heading
                 .content-editor__elements__element--block
                     display: none
         &__element
+            &--heading
+                &.sortable-chosen
+                    .content-editor__elements
+                        display: none
             &--hover
                 opacity: 0
                 transition: opacity 0.25s ease
@@ -21,16 +25,6 @@
                 font-size: px2rem(13)
             .handle
                 margin-right: 0
-        // FIXME dead code?
-        &__image
-            width: 170px
-            img
-                width: 150px
-        &__buttons
-            width: 170px
 
-.sortable-ghost
-    opacity: 0.3
-.sortable-chosen
-    .content-editor__elements
-        display: none
+    .sortable-ghost
+        opacity: 0.3
