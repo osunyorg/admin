@@ -4,24 +4,13 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                               through_association: :communication_blocks
 
   def reorder
+    heading_id = params[:heading]
     ids = params[:ids] || []
-    ids.each.with_index do |identifier, index|
-      parts = identifier.split('_')
-      kind = parts.first
-      id = parts.last
-      if kind == 'block'
-        @block = current_university.communication_blocks.find(id)
-        @block.heading = @heading
-        @block.position = index + 1
-        @block.save
-        @previous = nil
-      elsif kind == 'heading'
-        @heading = current_university.communication_block_headings.find(id)
-        @heading.position = index + 1
-        @heading.parent = @previous
-        @heading.save
-        @previous = @heading
-      end
+    ids.each.with_index do |id, index|
+      block = current_university.communication_blocks.find(id)
+      block.position = index + 1
+      block.heading_id = heading_id
+      block.save
     end
     sync_with_git_if_necessary
   end

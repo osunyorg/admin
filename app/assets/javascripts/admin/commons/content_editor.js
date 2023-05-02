@@ -123,9 +123,11 @@ window.osuny.contentEditor = {
 
     onSortableUnchoose: function (event) {
         'use strict';
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging');
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-block');
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging-heading');
+        this.sortableRootContainer.classList.remove(
+            'content-editor__elements__root--dragging',
+            'content-editor__elements__root--dragging-block',
+            'content-editor__elements__root--dragging-heading'
+        );
     },
 
 
