@@ -46,6 +46,7 @@ window.osuny.contentEditor = {
         for (i = 0; i < sortableContainers.length; i += 1) {
             sortableInstance = new Sortable(sortableContainers[i], {
                 group: 'nested',
+                handle: '.content-editor__elements__handle',
                 animation: 150,
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
