@@ -9,7 +9,11 @@
                 opacity: 0
                 transition: opacity 0.25s ease
             &:hover
-                .content-editor__elements__element--hover
+                > .content-editor__elements__element--hover,
+                > * > .content-editor__elements__element--hover,
+                > * > * > .content-editor__elements__element--hover,
+                > * > * > * > .content-editor__elements__element--hover,
+                > * > * > * > * > .content-editor__elements__element--hover,
                     opacity: 1
         &__handle
             margin-left: 10px
@@ -24,3 +28,9 @@
                 width: 150px
         &__buttons
             width: 170px
+
+.sortable-ghost
+    opacity: 0.3
+.sortable-chosen
+    .content-editor__elements
+        display: none
