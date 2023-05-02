@@ -2,6 +2,16 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   load_and_authorize_resource class: Communication::Block::Heading,
                               through: :current_university,
                               through_association: :communication_block_headings
+  def reorder
+    parent = params[:heading]
+    ids = params[:ids] || []
+    ids.each.with_index do |id, index|
+      heading = current_university.communication_block_headings.find id
+      heading.position = index + 1
+      heading.parent = parent
+      heading.save
+    end
+  end
 
   def new
     @heading.about = Polymorphic.find params, :about
