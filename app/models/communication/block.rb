@@ -78,8 +78,9 @@ class Communication::Block < ApplicationRecord
   }
 
   scope :published, -> { where(published: true) }
-  scope :with_no_heading, -> { where(heading: nil) }
+  scope :without_heading, -> { where(heading: nil) }
 
+  before_validation :set_heading_from_about, on: :create
   before_save :attach_template_blobs
 
   # When we set data from json, we pass it to the template.
@@ -142,6 +143,10 @@ class Communication::Block < ApplicationRecord
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize
+  end
+
+  def set_heading_from_about
+    self.heading = about.headings.ordered.last
   end
 
   # FIXME @sebou

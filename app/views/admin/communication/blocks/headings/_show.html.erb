@@ -4,9 +4,9 @@ html_tag = "h#{heading.level}"
 <div class="container">
   <<%= html_tag %>><%= heading %></<%= html_tag %>>
 </div>
-<% heading.blocks.each do |block| %>
+<% heading.blocks.published.ordered.each do |block| %>
   <%= render "admin/communication/blocks/templates/#{block.template_kind}/show", block: block %>
 <% end %>
-<% heading.children.each do |child| %>
+<% heading.children.ordered.each do |child| %>
   <%= render 'admin/communication/blocks/headings/show', heading: child %>
 <% end %>

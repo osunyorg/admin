@@ -5,10 +5,10 @@
                 content-editor__elements__root
                 js-content-editor-sortable-container"
         id="content-editor-elements-root">
-    <% about.blocks.with_no_heading.ordered.each do |block| %>
+    <% about.blocks.without_heading.ordered.each do |block| %>
       <%= render 'admin/communication/blocks/block', block: block %>
     <% end %>
-    <% about.headings.root.each do |heading| %>
+    <% about.headings.root.ordered.each do |heading| %>
       <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
     <% end %>
   </div>

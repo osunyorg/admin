@@ -29,7 +29,7 @@ class Communication::Block::Heading < ApplicationRecord
   belongs_to  :university
   belongs_to  :about,
               polymorphic: true
-  belongs_to  :parent, 
+  belongs_to  :parent,
               class_name: 'Communication::Block::Heading',
               optional: true
   has_many    :children,
@@ -39,10 +39,9 @@ class Communication::Block::Heading < ApplicationRecord
               dependent: :nullify
 
   DEFAULT_LEVEL = 2
-  
+
   scope :root, -> { where(level: DEFAULT_LEVEL) }
   scope :ordered, -> { order(:position) }
-  default_scope { ordered }
 
   before_validation :compute_level
 

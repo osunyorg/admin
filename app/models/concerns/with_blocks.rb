@@ -13,7 +13,7 @@ module WithBlocks
   def content
     unless @content
       @content = []
-      blocks.with_no_heading.published.ordered.each do |block|
+      blocks.without_heading.published.ordered.each do |block|
         @content << block
       end
       headings.ordered.each do |heading|

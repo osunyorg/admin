@@ -6,7 +6,7 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
     parent_id = params[:heading]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      heading = current_university.communication_block_headings.find id
+      heading = current_university.communication_block_headings.find(id)
       heading.parent_id = parent_id
       heading.position = index + 1
       heading.save
@@ -23,7 +23,6 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   end
 
   def create
-    @heading.university = current_university
     if @heading.save
       sync_with_git_if_necessary
       redirect_to about_path,
@@ -58,7 +57,7 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
 
   def sync_with_git_if_necessary
     return unless @heading.about.respond_to?(:sync_with_git)
-    @heading.about.sync_with_git 
+    @heading.about.sync_with_git
   end
 
   # TODO factorize
@@ -80,8 +79,8 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   def about_path
     # La formation ou la page concernée
     path_method = "admin_#{@heading.about.class.base_class.to_s.parameterize.underscore}_path"
-    path_method_options = { 
-      id: @heading.about_id, 
+    path_method_options = {
+      id: @heading.about_id,
       website_id: website_id,
       extranet_id: extranet_id,
       journal_id: journal_id
@@ -104,5 +103,6 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   def heading_params
     params.require(:communication_block_heading)
           .permit(:about_id, :about_type, :title)
+          .merge(university_id: current_university.id)
   end
 end

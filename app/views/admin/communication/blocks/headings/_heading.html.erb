@@ -20,10 +20,10 @@
   </div>
   <div class="content-editor__elements
               js-content-editor-sortable-container">
-    <% heading.blocks.each do |block| %>
+    <% heading.blocks.ordered.each do |block| %>
       <%= render 'admin/communication/blocks/block', block: block %>
     <% end %>
-    <% heading.children.each do |child| %>
+    <% heading.children.ordered.each do |child| %>
       <%= render 'admin/communication/blocks/headings/heading', heading: child %>
     <% end %>
   </div>

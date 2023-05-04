@@ -32,15 +32,15 @@ class ContentMigration
       block.save
     end
   end
-  
+
   protected
 
   def about_types
-    Communication::Block.pluck(:about_type).uniq
+    Communication::Block.distinct.pluck(:about_type).uniq
   end
 
   def about_ids(about_type)
-    Communication::Block.where(about_type: about_type).pluck(:about_id).uniq
+    Communication::Block.distinct.where(about_type: about_type).pluck(:about_id).uniq
   end
 
   def migrate_objects(about_type)

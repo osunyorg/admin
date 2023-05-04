@@ -30,9 +30,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def create
-    @block.university = current_university
-    headings = @block.about.headings
-    @block.heading = headings.last if headings.any?
     if @block.save
       # No need to sync as content is empty
       redirect_to [:edit, :admin, @block],
@@ -116,5 +113,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def block_params
     params.require(:communication_block)
           .permit(:about_id, :about_type, :template_kind, :title, :data, :published)
+          .merge(university_id: current_university.id)
   end
 end

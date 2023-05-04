@@ -2,10 +2,10 @@
 @university = about.university
 %>
 content:
-<% about.blocks.with_no_heading.published.ordered.each do |block| %>
+<% about.blocks.without_heading.published.ordered.each do |block| %>
 <%= render 'admin/communication/blocks/static', block: block %>
 <% end %>
-<% about.headings.root.each do |heading| %>
+<% about.headings.root.ordered.each do |heading| %>
 <%= render 'admin/communication/blocks/headings/static', heading: heading %>
 <% end %>
 <% if about.blocks.any? %>
