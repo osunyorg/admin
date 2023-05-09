@@ -42,7 +42,7 @@ class Education::Diploma < ApplicationRecord
     first_year: 100,
     second_year: 200,
     third_year: 300,
-    fourth_year: 500,
+    fourth_year: 400,
     master: 500,
     doctor: 800
   }
