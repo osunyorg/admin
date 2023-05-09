@@ -52,6 +52,7 @@
 class Education::Program < ApplicationRecord
   include Aboutable
   include Sanitizable
+  include WithAccessibility
   include WithAlumni
   include WithBlobs
   include WithBlocks

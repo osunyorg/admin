@@ -1,0 +1,6 @@
+<%= osuny_label t('metadata') %>
+<p> 
+  <%= @program.published ? 'Publiée' : 'Brouillon' %>
+</p>
+
+<%= render 'admin/application/property/text', object: @program, property: :meta_description %>

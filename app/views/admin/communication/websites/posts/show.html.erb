@@ -3,12 +3,12 @@
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
     <div class="col-lg-7">
-      <%= osuny_panel Communication::Website::Post.human_attribute_name(:title) do %>
+      <%= osuny_panel Communication::Website::Post.human_attribute_name(:title), small: true do %>
         <p class="lead"><%= @post.title %></p>
       <% end %>
     </div>
     <div class="offset-lg-1 col-lg-4">
-      <%= render 'admin/application/featured_image/show', about: @post %>
+      <%= render 'admin/application/featured_image/show', about: @post, small: true %>
     </div>
   </div>
   <hr class="mb-5">
@@ -20,7 +20,7 @@
       <%= render 'admin/application/i18n/widget', about: @post, small: true %>
     </div>
     <div class="col-lg-8">
-      <%= render 'admin/application/summary/show', about: @post %>
+      <%= render 'admin/application/summary/show', about: @post, small: true %>
       <%= render 'admin/application/meta_description/show', about: @post %>
     </div>
   </div>

@@ -28,15 +28,15 @@
                   </tr>
                 <% end %>
                 <tr>
-                  <th>Formation initiale</th>
+                  <th><%= Education::Program.human_attribute_name('initial') %></th>
                   <td><%= t @program.initial %></td>
                 </tr>
                 <tr>
-                  <th>Formation continue</th>
+                  <th><%= Education::Program.human_attribute_name('continuing') %></th>
                   <td><%= t @program.continuing %></td>
                 </tr>
                 <tr>
-                  <th>Apprentissage</th>
+                  <th><%= Education::Program.human_attribute_name('apprenticeship') %></th>
                   <td><%= t @program.apprenticeship %></td>
                 </tr>
               </tbody>

@@ -1,6 +1,8 @@
+<% 
+# TODO i18n quand les phrases sont vraiment claires 
+# @pa t'affole pas, c'est pas encore le cas 
+%>
 <%= osuny_panel t('metadata'), small: true do %>
-  <% # TODO i18n quand c'est stable %>
-
   <% if @page.is_special_page? %>
     <% page_type = t("communication.website.pages.defaults.#{@page.type_key}.title") %>
     <% if page_type != @page.to_s %>

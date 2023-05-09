@@ -1,24 +1,16 @@
 <% include_id ||= false %>
-<div class="card nested-fields mb-2">
-  <div class="card-body">
-    <div class="row align-items-center">
-      <div class="col-1">
-        <i class="<%= Icon::DRAG %> handle"></i>
-      </div>
-      <div class="col-9">
-        <%= f.association :person,
-                          collection: @administration_people,
-                          label: false,
-                          include_blank: :translate,
-                          wrapper: false,
-                          required: true %>
-      </div>
-      <div class="col-2">
-        <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
-                                        f,
-                                        class: 'btn btn-sm btn-danger' %>
-      </div>
-    </div>
+<div class="nested-fields mb-2">
+  <div class="d-flex align-items-center">
+    <i class="<%= Icon::DRAG %> handle"></i>
+    <%= f.association :person,
+                      collection: @administration_people,
+                      label: false,
+                      include_blank: :translate,
+                      wrapper: false,
+                      required: true %>
+    <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                    f,
+                                    class: 'btn btn-sm text-danger' %>
   </div>
   <%= f.hidden_field :position, data: { 'sortable-input': '' } %>
   <%= f.hidden_field :id if include_id %>

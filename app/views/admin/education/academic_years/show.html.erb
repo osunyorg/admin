@@ -6,6 +6,6 @@
 <% end %>
 
 <% if @academic_year.people.any? %>
-  <h2><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
+  <h2 class="mt-5"><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
   <%= render 'admin/university/alumni/list', alumni: @academic_year.people.ordered %>
 <% end %>
