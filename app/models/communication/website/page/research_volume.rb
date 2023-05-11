@@ -49,13 +49,13 @@ class Communication::Website::Page::ResearchVolume < Communication::Website::Pag
   end
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website.research_volumes
   end
 
   protected
-  
+
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}volumes/_index.html"
   end

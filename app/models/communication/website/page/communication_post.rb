@@ -53,14 +53,14 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
   end
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website.categories +
     website.posts
   end
 
   protected
-  
+
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}posts/_index.html"
   end

@@ -49,8 +49,8 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
   end
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website.teachers&.map(&:teacher)
   end
 

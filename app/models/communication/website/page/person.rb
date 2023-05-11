@@ -46,7 +46,7 @@ class Communication::Website::Page::Person < Communication::Website::Page
 
   def dependencies
     super +
-    [website.config_default_permalinks] +
+    [website.config_default_languages] +
     # TODO: @arnaud ça te va ?
     explicitly_connected_people
   end

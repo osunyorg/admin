@@ -45,8 +45,8 @@
 class Communication::Website::Page::Organization < Communication::Website::Page
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website.connected_organizations
   end
 
@@ -56,7 +56,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
   end
 
   protected
-  
+
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}organizations/_index.html"
   end

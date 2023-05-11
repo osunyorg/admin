@@ -49,11 +49,11 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
   end
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website&.administrators&.map(&:administrator)
   end
-  
+
   protected
 
   def current_git_path

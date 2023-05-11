@@ -61,13 +61,13 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
   end
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website.education_diplomas
   end
 
   protected
-  
+
   def current_git_path
     @current_git_path ||= "#{git_path_prefix}diplomas/_index.html"
   end

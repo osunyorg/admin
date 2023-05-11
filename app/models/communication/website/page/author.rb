@@ -45,11 +45,11 @@
 class Communication::Website::Page::Author < Communication::Website::Page
 
   def dependencies
-    super + 
-    [website.config_default_permalinks] +
+    super +
+    [website.config_default_languages] +
     website&.authors&.map(&:author)
   end
-  
+
   protected
 
   def current_git_path
