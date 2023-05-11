@@ -23,57 +23,56 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     block = page.blocks.create(position: 1, published: true, template_kind: :organization_chart)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
-    
+
     page = page.reload
-    
+
     assert_equal 9, page.recursive_dependencies.count
-    
+
     # On modifie le target du block
     Delayed::Job.destroy_all
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"
     block.save
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site de la page
     assert(destroy_obsolete_git_files_job)
-    
+
     assert_equal 9, page.recursive_dependencies.count
-    
+
     # Vérifie qu'on a bien une tâche de nettoyage si le block est supprimé
     Delayed::Job.destroy_all
     block.destroy
     assert(destroy_obsolete_git_files_job)
 
   end
-  
+
   def test_change_website_dependencies
     dependencies_before_count = website_with_github.recursive_dependencies.count
-    
+
     # On modifie l'about du website en ajoutant une école
     website_with_github.update(about: default_school)
     refute(destroy_obsolete_git_files_job)
     delta = website_with_github.recursive_dependencies.count - dependencies_before_count
     assert_equal 12, delta
-    
+
     Delayed::Job.destroy_all
-    
+
     # On enlève l'about du website
     website_with_github.update(about: nil)
-    
+
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
     assert(destroy_obsolete_git_files_job)
-       
+
   end
 
+  # TODO : Utile?
   def test_change_menu_item_dependencies
     menu = communication_website_menus(:primary_menu)
 
     item = menu.items.create(university: default_university, website: website_with_github, kind: :blank, title: 'Test')
-    assert_equal 2, item.recursive_dependencies.count
-    
+
     item.kind = :page
     item.about = communication_website_pages(:page_with_no_dependency)
     item.save
-    assert_equal 2, item.recursive_dependencies.count
-    
+
     # Comme les menu items ne répondent pas à is_direct_object? du coup aucune tâche de nettoyage n'est ajoutée
     item.destroy
     refute(destroy_obsolete_git_files_job)

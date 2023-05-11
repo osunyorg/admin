@@ -53,7 +53,7 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def dependencies
-    items
+    []
   end
 
   def references

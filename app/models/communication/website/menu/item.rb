@@ -33,7 +33,6 @@
 #
 class Communication::Website::Menu::Item < ApplicationRecord
   include Sanitizable
-  include WithDependencies
   include WithPosition
   include WithTree
   include WithUniversity
@@ -116,10 +115,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'kind' => kind,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
-  end
-
-  def dependencies
-    [menu]
   end
 
   def has_about?
