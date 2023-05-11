@@ -51,7 +51,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     website_with_github.update(about: default_school)
     refute(destroy_obsolete_git_files_job)
     delta = website_with_github.recursive_dependencies.count - dependencies_before_count
-    assert_equal 12, delta
+    # En ajoutant l'école, on rajoute en dépendances :
+    # - L'école, et ses formations et diplômes en cascade (3)
+    # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program (2)
+    # - N'ayant pas été créés avant, le save du website va créer les 3 menus par défaut : primary, legal et social (3)
+    # Donc un total de 3 + 2 + 3 = 8 dépendances
+    assert_equal 8, delta
 
     Delayed::Job.destroy_all
 
