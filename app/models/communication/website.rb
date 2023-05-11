@@ -91,6 +91,8 @@ class Communication::Website < ApplicationRecord
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
     configs +
+    # TODO: Le nettoyage du multilingue ne se fait pas correctement
+    # quand on supprime une langue d'un site
     pages +
     posts +
     categories +
