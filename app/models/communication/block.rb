@@ -33,7 +33,11 @@ class Communication::Block < ApplicationRecord
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
 
-  belongs_to :about, polymorphic: true, touch: true
+  belongs_to :about, polymorphic: true
+
+  # We do not use the :touch option of the belongs_to association
+  # because we do not want to touch the about when destroying the block.
+  after_save :touch_about
 
   # Used to purge images when unattaching them
   # template_blobs would be a better name, because there are files
@@ -153,5 +157,9 @@ class Communication::Block < ApplicationRecord
   # Could not find or build blob: expected attachable, got #<ActiveStorage::Blob id: "f4c78657-5062-416b-806f-0b80fb66f9cd", key: "gri33wtop0igur8w3a646llel3sd", filename: "logo.svg", content_type: "image/svg+xml", metadata: {"identified"=>true, "width"=>709, "height"=>137, "analyzed"=>true}, service_name: "scaleway", byte_size: 4137, checksum: "aZqqTYabP5+72ZeddcZ/2Q==", created_at: "2022-05-05 12:17:33.941505000 +0200", university_id: "ebf2d273-ffc9-4d9f-a4ee-a2146913d617">
   def attach_template_blobs
     # self.template_images = template.active_storage_blobs
+  end
+
+  def touch_about
+    about.touch
   end
 end
