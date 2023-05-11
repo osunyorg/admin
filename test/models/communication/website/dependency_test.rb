@@ -39,7 +39,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     # Vérifie qu'on a bien
     # - une tâche pour resynchroniser la page
-    # - une tâche de nettoyage si le block est supprimé
+    # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
     Delayed::Job.destroy_all
     block.destroy
     assert(sync_with_git_job(page))
