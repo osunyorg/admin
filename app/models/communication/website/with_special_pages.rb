@@ -28,6 +28,12 @@ module Communication::Website::WithSpecialPages
   def translate_special_page(type, language)
     # Not found for given language, we create it from the page in default_language
     original_special_page = pages.where(type: type.to_s, language_id: default_language_id).first
-    original_special_page.translate!(language) if original_special_page.present?
+    return unless original_special_page.present?
+    translated_special_page = original_special_page.translate!(language)
+    # When we translate a new post, it will generate the permalink by looking for the posts special page
+    # It will try to find it, or translate it if not found
+    # At this moment, we need to sync the page with git (in case it's already published)
+    translated_special_page.sync_with_git
+    translated_special_page
   end
 end

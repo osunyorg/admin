@@ -103,6 +103,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def references
+    [parent] +
     menu_items
   end
 
