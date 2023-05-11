@@ -37,9 +37,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     assert_equal 9, page.recursive_dependencies.count
 
-    # Vérifie qu'on a bien une tâche de nettoyage si le block est supprimé
+    # Vérifie qu'on a bien
+    # - une tâche pour resynchroniser la page
+    # - une tâche de nettoyage si le block est supprimé
     Delayed::Job.destroy_all
     block.destroy
+    assert(sync_with_git_job(page))
     assert(destroy_obsolete_git_files_job)
 
   end
@@ -85,15 +88,19 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
   protected
 
-  def destroy_obsolete_git_files_job(website_id = website_with_github.id)
-    find_performable_method_job(:destroy_obsolete_git_files_without_delay, website_id)
+  def sync_with_git_job(object)
+    find_performable_method_job(:sync_with_git_without_delay, object)
+  end
+
+  def destroy_obsolete_git_files_job(website = website_with_github)
+    find_performable_method_job(:destroy_obsolete_git_files_without_delay, website)
   end
 
   # On ne peut pas utiliser assert_enqueued_jobs sur les méthodes asynchrones gérées avec handle_asynchronously
-  def find_performable_method_job(method, id)
+  def find_performable_method_job(method, object)
     Delayed::Job.all.detect { |job|
       job.payload_object.method_name == method &&
-        job.payload_object.object.id == id
+        job.payload_object.object == object
     }
   end
 end

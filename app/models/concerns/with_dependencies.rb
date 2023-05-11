@@ -20,13 +20,18 @@ module WithDependencies
     # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
     # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections`
     # on ne peut plus accéder aux websites (puisque l'objet est déjà détruit et ses connexions en cascades).
+    # Egalement, quand on supprime un objet indirect, il faut synchroniser ses anciennes sources directes pour supprimer toute référence éventuelle
     # Donc :
-    # 1. on stocke les websites
+    # 1. on stocke les websites (et les sources directes si nécessaire)
     # 2. on laisse la méthode destroy normale faire son travail
-    # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files
+    # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
     self.transaction do
+      snapshot_direct_sources = try(:direct_sources).to_a || []
       website_ids = websites_to_clean.pluck(:id)
       super
+      snapshot_direct_sources.each do |direct_source|
+        direct_source.sync_with_git
+      end
       clean_websites(Communication::Website.where(id: website_ids))
       # TODO: Actuellement, on ne nettoie pas les références
       # Exemple : Quand on supprime un auteur, il n'est pas nettoyé dans le static de ses anciens posts.

@@ -22,8 +22,8 @@ module AsDirectObject
               class_name: 'Communication::Website::Connection',
               dependent: :destroy # When the direct object disappears all connections with the object as a source must disappear
 
-    after_save  :sync_connections
-    after_touch :sync_connections
+    after_save  :connect_dependencies
+    after_touch :connect_dependencies
   end
 
   def is_direct_object?
@@ -34,7 +34,7 @@ module AsDirectObject
     false
   end
 
-  def sync_connections
+  def connect_dependencies
     dependencies.each do |dependency|
       website.connect(dependency, self)
     end
