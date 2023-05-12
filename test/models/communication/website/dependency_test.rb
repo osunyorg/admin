@@ -48,18 +48,19 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   end
 
   def test_change_website_dependencies
-    dependencies_before_count = website_with_github.recursive_dependencies.count
+    website_with_github.save
+    dependencies_before_count = website_with_github.reload.recursive_dependencies.count
 
     # On modifie l'about du website en ajoutant une école
     website_with_github.update(about: default_school)
     refute(destroy_obsolete_git_files_job)
-    delta = website_with_github.recursive_dependencies.count - dependencies_before_count
+    delta = website_with_github.reload.recursive_dependencies.count - dependencies_before_count
     # En ajoutant l'école, on rajoute en dépendances :
     # - L'école, et ses formations et diplômes en cascade (3)
     # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program (2)
-    # - N'ayant pas été créés avant, le save du website va créer les 3 menus par défaut : primary, legal et social (3)
-    # Donc un total de 3 + 2 + 3 = 8 dépendances
-    assert_equal 8, delta
+    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms" (5)
+    # Donc un total de 3 + 2 + 5 = 10 dépendances
+    assert_equal 10, delta
 
     Delayed::Job.destroy_all
 
@@ -68,23 +69,20 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
     assert(destroy_obsolete_git_files_job)
-
   end
 
-  # TODO multilingue: faire marcher ce test
-  # def test_change_website_dependencies_with_multilingual
-  #
-  #   dependencies_before_count = website_with_github.recursive_dependencies.count
-  #
-  #   # On crée une copie anglaise de la homepage
-  #   page_test_en = communication_website_pages(:page_root).dup
-  #   page_test_en.language = languages(:en)
-  #   page_test_en.save
-  #
-  #   # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
-  #   assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies.count
-  #
-  # end
+  def test_change_website_dependencies_with_multilingual
+    website_with_github.save
+    dependencies_before_count = website_with_github.recursive_dependencies.count
+
+    # On crée une copie anglaise de la homepage
+    page_test_en = communication_website_pages(:page_root).dup
+    page_test_en.language = languages(:en)
+    page_test_en.save
+
+    # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
+    assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies.count
+  end
 
   # TODO : Utile?
   def test_change_menu_item_dependencies

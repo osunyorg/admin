@@ -91,12 +91,10 @@ class Communication::Website < ApplicationRecord
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
     configs +
-    # TODO: Le nettoyage du multilingue ne se fait pas correctement
-    # quand on supprime une langue d'un site
-    pages +
-    posts +
-    categories +
-    menus +
+    pages.where(language_id: language_ids) +
+    posts.where(language_id: language_ids) +
+    categories.where(language_id: language_ids) +
+    menus.where(language_id: language_ids) +
     [about]
   end
 
