@@ -151,7 +151,9 @@ class Education::Program < ApplicationRecord
   end
 
   def references
-    descendants
+    references = schools + siblings + descendants
+    references << parent if parent.present?
+    references
   end
 
   def update_children_paths

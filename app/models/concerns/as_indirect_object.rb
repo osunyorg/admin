@@ -47,15 +47,15 @@ module AsIndirectObject
     end
   end
 
-  protected
-
   def direct_sources_from_existing_connections
     connections.collect &:direct_source
   end
 
+  protected
+
   def direct_sources_from_reference(reference)
     reference.is_direct_object? ? [reference] # Récupération de la connexion directe
-                                : reference.direct_sources # Récursivité sur les références
+                                : reference.direct_sources_from_existing_connections # Récupération via les connexions des références
   end
 
   def connect_and_sync_direct_sources
