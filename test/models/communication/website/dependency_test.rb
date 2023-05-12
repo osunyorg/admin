@@ -71,6 +71,21 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
   end
 
+  # TODO multilingue: faire marcher ce test
+  # def test_change_website_dependencies_with_multilingual
+  #
+  #   dependencies_before_count = website_with_github.recursive_dependencies.count
+  #
+  #   # On crée une copie anglaise de la homepage
+  #   page_test_en = communication_website_pages(:page_root).dup
+  #   page_test_en.language = languages(:en)
+  #   page_test_en.save
+  #
+  #   # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
+  #   assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies.count
+  #
+  # end
+
   # TODO : Utile?
   def test_change_menu_item_dependencies
     menu = communication_website_menus(:primary_menu)
@@ -85,6 +100,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     item.destroy
     refute(destroy_obsolete_git_files_job)
   end
+
 
   protected
 
