@@ -74,6 +74,7 @@ class Education::Diploma < ApplicationRecord
     website_programs = programs_for_website(website)
 
     dependencies = [self]
+    dependencies += git_block_dependencies
     dependencies += website_programs + website_programs.map(&:active_storage_blobs).flatten
     dependencies
   end
