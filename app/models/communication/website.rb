@@ -43,6 +43,7 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithImport
+  include WithLanguages
   include WithOldDependencies
   include WithProgramCategories
   include WithReferences
@@ -56,16 +57,6 @@ class Communication::Website < ApplicationRecord
     github: 0,
     gitlab: 1
   }
-
-  belongs_to :default_language, class_name: "Language"
-  has_and_belongs_to_many :languages,
-                          class_name: 'Language',
-                          join_table: 'communication_websites_languages',
-                          foreign_key: 'communication_website_id',
-                          association_foreign_key: 'language_id'
-
-  validates :languages, length: { minimum: 1 }
-  validate :languages_must_include_default_language
 
   before_validation :sanitize_fields
 
@@ -102,12 +93,6 @@ class Communication::Website < ApplicationRecord
     []
   end
 
-  def best_language_for(iso_code)
-    # We look for the language by the ISO code in the websites languages.
-    # If not found, we fallback to the default language.
-    languages.find_by(iso_code: iso_code) || default_language
-  end
-
   def website
     self
   end
@@ -125,9 +110,5 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
-  end
-
-  def languages_must_include_default_language
-    errors.add(:languages, :must_include_default) unless language_ids.include?(default_language_id)
   end
 end

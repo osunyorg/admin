@@ -5,6 +5,8 @@ module Communication::Website::WithGitRepository
     has_many :website_git_files,
              class_name: 'Communication::Website::GitFile',
              dependent: :destroy
+
+    after_save :destroy_obsolete_git_files, if: :should_clean_on_git?
   end
 
   def git_repository
@@ -29,5 +31,9 @@ module Communication::Website::WithGitRepository
   # Les configs héritent du modèle website et s'exportent en différents fichiers
   def exportable_to_git?
     true
+  end
+
+  def should_clean_on_git?
+    saved_change_to_about_id? || language_was_removed
   end
 end
