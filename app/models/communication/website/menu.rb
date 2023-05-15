@@ -52,10 +52,6 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
-  def dependencies
-    []
-  end
-
   def references
     []
   end
