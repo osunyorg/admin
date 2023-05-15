@@ -53,7 +53,7 @@ class Education::Diploma < ApplicationRecord
   end
 
   def dependencies
-    programs
+    blocks + programs
   end
 
   def references
