@@ -103,7 +103,9 @@ module WithDependencies
     # puts "  recursive_dependencies_syncable #{ reloaded_recursive_dependencies_syncable_filtered }"
     # puts "  missing_dependencies_after_save #{ missing_dependencies_after_save }"
     # puts
-    clean_websites(websites_to_clean) if missing_dependencies_after_save.any?
+    if missing_dependencies_after_save.any? || unpublished_by_last_save?
+      clean_websites(websites_to_clean)
+    end
   end
 
   def clean_websites(websites)
@@ -127,5 +129,14 @@ module WithDependencies
     reloaded_object = self.class.unscoped.find(id)
     reloaded_dependencies = reloaded_object.recursive_dependencies_syncable
     DependenciesFilter.filtered(reloaded_dependencies)
+  end
+
+  def unpublished_by_last_save?
+    return unless respond_to?(:published)
+    return true if saved_change_to_published? && !published?
+    if respond_to?(:published_at)
+      return saved_change_to_published_at? && published_at > Time.now
+    end
+    false
   end
 end
