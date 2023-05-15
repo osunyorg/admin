@@ -1,4 +1,4 @@
-module Communication::Website::WithOldDependencies
+module Communication::Website::WithAssociatedObjects
   extend ActiveSupport::Concern
 
   included do
@@ -51,16 +51,6 @@ module Communication::Website::WithOldDependencies
   def teachers
     has_teachers? ? about.teachers : University::Person.none
   end
-
-  def people
-    connected_persons
-  end
-
-  def organizations
-    connected_organizations
-  end
-
-  # Deprecated, needs refactor for performance
 
   def has_communication_posts?
     posts.published.any?

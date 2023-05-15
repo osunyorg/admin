@@ -37,6 +37,7 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include WithAbouts
+  include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithDependencies
@@ -44,7 +45,6 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithImport
   include WithLanguages
-  include WithOldDependencies
   include WithProgramCategories
   include WithReferences
   include WithSpecialPages

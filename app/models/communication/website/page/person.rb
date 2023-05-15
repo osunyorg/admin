@@ -47,7 +47,7 @@ class Communication::Website::Page::Person < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    explicitly_connected_people
+    website.connected_people
   end
 
   def explicitly_connected_people
