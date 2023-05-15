@@ -52,7 +52,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
   end
 
   def explicitly_connected_organizations
-    ids = website.connections.where(indirect_object_type: 'University::Organization', direct_source: self).pluck(:indirect_object_id)
+    ids = website.connections.where(indirect_object_type: 'University::Organization', direct_source_type: 'Communication::Website::Page::Organization', direct_source_id: self.id).pluck(:indirect_object_id)
     University::Organization.where(id: ids)
   end
 
