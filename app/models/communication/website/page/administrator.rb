@@ -51,7 +51,7 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website&.administrators&.map(&:administrator)
+    website.administrators.where(language_id: language_id).map(&:administrator)
   end
 
   protected

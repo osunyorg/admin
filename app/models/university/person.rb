@@ -181,7 +181,7 @@ class University::Person < ApplicationRecord
   end
 
   def to_s_with_mail
-    "#{to_s} (#{email})"
+    email.present? ? "#{to_s} (#{email})" : to_s
   end
 
   def to_s_alphabetical

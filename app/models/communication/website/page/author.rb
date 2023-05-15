@@ -47,7 +47,7 @@ class Communication::Website::Page::Author < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website&.authors&.map(&:author)
+    website.authors.where(language_id: language_id).map(&:author)
   end
 
   protected

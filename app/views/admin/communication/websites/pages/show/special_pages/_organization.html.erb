@@ -16,12 +16,12 @@
                 }
                 %>
   <% end %>
-  <table class="<%= table_classes%>">
+  <table class="<%= table_classes %>">
     <tbody>
       <% @organizations.each do |organization| %>
         <tr>
           <td><%= link_to organization, [:admin, organization] %></td>
-          <td><%= link_to 'Déconnecter', 
+          <td><%= link_to 'Déconnecter',
                           disconnect_admin_communication_website_page_path(@page, objectId: organization.id, objectType: organization.class),
                           class: button_classes_danger,
                           method: :post %></td>

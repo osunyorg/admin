@@ -48,6 +48,7 @@ class Communication::Website::Page::ResearchPaper < Communication::Website::Page
     website.about && website.about&.respond_to?(:papers)
   end
 
+  # TODO: Scope .where(language_id: language_id) when papers are translatable
   def dependencies
     super +
     [website.config_default_languages] +

@@ -55,8 +55,8 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
   def dependencies
     super +
     [website.config_default_languages] +
-    website.categories +
-    website.posts
+    website.categories.where(language_id: language_id) +
+    website.posts.where(language_id: language_id)
   end
 
   protected

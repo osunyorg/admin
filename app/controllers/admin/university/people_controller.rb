@@ -28,9 +28,9 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def search
     @term = params[:term].to_s
-    @people = current_university.people
-                                .for_search_term(@term)
-                                .ordered
+    language = Language.find_by(iso_code: params[:lang])
+    @people = current_university.people.for_search_term(@term).ordered
+    @people = @people.joins(:language).where(languages: { iso_code: language.iso_code }) if language.present?
   end
 
   def show

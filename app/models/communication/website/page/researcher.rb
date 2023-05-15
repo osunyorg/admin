@@ -51,7 +51,7 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.researchers&.map(&:researcher)
+    website.researchers.where(language_id: language_id).map(&:researcher)
   end
 
   protected
