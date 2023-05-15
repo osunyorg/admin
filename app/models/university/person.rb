@@ -201,9 +201,6 @@ class University::Person < ApplicationRecord
   def dependencies
     blocks +
     active_storage_blobs
-    # TODO: Il faut pouvoir récupérer les blobs de la personne à partir d'une facette
-    # person.active_storage_blobs => [<#ActiveStorage::Blob>]
-    # person.author.active_storage_blobs => []
   end
 
   def references

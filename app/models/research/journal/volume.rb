@@ -63,10 +63,6 @@ class Research::Journal::Volume < ApplicationRecord
     active_storage_blobs
   end
 
-  def references
-    []
-  end
-
   def path
     "/#{published_at&.year}-#{slug}" if published_at
   end
