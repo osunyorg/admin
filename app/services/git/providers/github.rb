@@ -1,4 +1,10 @@
 class Git::Providers::Github < Git::Providers::Abstract
+  BASE_URL = "https://github.com".freeze
+
+  def url
+    "#{BASE_URL}/#{repository}"
+  end
+
   def create_file(path, content)
     batch << {
       path: path,

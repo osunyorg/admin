@@ -5,6 +5,10 @@ class Git::Repository
     @website = website
   end
 
+  def url
+    provider.url
+  end
+
   def add_git_file(git_file)
     puts "Adding #{git_file.path}"
     if git_files.empty?
