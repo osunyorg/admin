@@ -26,15 +26,11 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   include WithGitFiles
   include WithSlug
   include WithUniversity
-  
+
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
 
   scope :ordered, -> { order(:title) }
-
-  def references
-    []
-  end
 
   def to_s
     "#{title}"

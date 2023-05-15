@@ -47,6 +47,10 @@ class Communication::Website::Configs::Base < Communication::Website
     raise NotImplementedError
   end
 
+  ######
+  # force dependencies & references to prevent multiple useless calls
+  ######
+
   def dependencies
     []
   end

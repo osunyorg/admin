@@ -52,10 +52,6 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
-  def references
-    []
-  end
-
   def translate_additional_data!(translation)
     items.root.ordered.each { |item| translate_menu_item!(item, translation) }
   end

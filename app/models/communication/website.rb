@@ -89,10 +89,6 @@ class Communication::Website < ApplicationRecord
     [about]
   end
 
-  def references
-    []
-  end
-
   def website
     self
   end

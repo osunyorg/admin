@@ -78,10 +78,6 @@ class Education::School < ApplicationRecord
     administrators.map(&:administrator)
   end
 
-  def references
-    []
-  end
-
   #####################
   # Aboutable methods #
   #####################

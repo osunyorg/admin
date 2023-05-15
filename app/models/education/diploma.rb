@@ -56,10 +56,6 @@ class Education::Diploma < ApplicationRecord
     blocks + programs
   end
 
-  def references
-    []
-  end
-
   def to_s
     "#{name}"
   end
