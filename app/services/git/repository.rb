@@ -12,10 +12,9 @@ class Git::Repository
   def add_git_file(git_file)
     puts "Adding #{git_file.path}"
     if git_files.empty?
+      # The first file gives the commit name
       analyzer.git_file = git_file
-      action = analyzer.should_destroy? ? "Destroy" : "Save"
-      @commit_message = git_file.about.nil? ? "[#{ git_file.class.name }] #{ action } Git file"
-                                            : "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
+      @commit_message = analyzer.commit_message
     end
     git_files << git_file
   end
