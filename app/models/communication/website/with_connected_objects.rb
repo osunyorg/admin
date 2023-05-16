@@ -98,15 +98,14 @@ module Communication::Website::WithConnectedObjects
 
   def should_connect?(indirect_object, direct_source)
     # Ce cas se produit quand on save un new website et qu'on ne passe pas un validateur
-    return false unless persisted?
+    persisted? &&
     # On ne connecte pas les objets inexistants
-    return false if indirect_object.nil?
+    indirect_object.present? &&
     # On ne connecte pas les objets sans source
-    return false if direct_source.nil?
+    direct_source.present? &&
     # On ne connecte pas le site à lui-même
-    return false if indirect_object.is_a?(Communication::Website)
+    !indirect_object.is_a?(Communication::Website) &&
     # On ne connecte pas les objets directs (en principe ça n'arrive pas)
-    return false if indirect_object.try(:is_direct_object?)
-    true
+    !indirect_object.try(:is_direct_object?)
   end
 end
