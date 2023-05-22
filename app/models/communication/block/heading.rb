@@ -26,6 +26,10 @@
 #  fk_rails_ae82723550  (university_id => universities.id)
 #
 class Communication::Block::Heading < ApplicationRecord
+  include Sanitizable
+  include WithPosition
+  include WithUniversity
+
   belongs_to  :university
   belongs_to  :about,
               polymorphic: true
@@ -40,8 +44,7 @@ class Communication::Block::Heading < ApplicationRecord
 
   DEFAULT_LEVEL = 2
 
-  scope :root, -> { where(level: DEFAULT_LEVEL) }
-  scope :ordered, -> { order(:position) }
+  scope :root, -> { where(parent_id: nil) }
 
   before_validation :compute_level
 
@@ -50,6 +53,10 @@ class Communication::Block::Heading < ApplicationRecord
   end
 
   protected
+
+  def last_ordered_element
+    about.headings.where(parent_id: self.parent_id).ordered.last
+  end
 
   def compute_level
     self.level = parent ? parent.level + 1

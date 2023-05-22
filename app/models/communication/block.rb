@@ -99,10 +99,6 @@ class Communication::Block < ApplicationRecord
     template.git_dependencies
   end
 
-  def last_ordered_element
-    about.blocks.ordered.last
-  end
-
   def template
     @template ||= template_class.new self, self.attributes['data']
   end
@@ -137,6 +133,10 @@ class Communication::Block < ApplicationRecord
 
   protected
 
+  def last_ordered_element
+    about.blocks.ordered.last
+  end
+
   def check_accessibility
     accessibility_merge template
   end
@@ -146,7 +146,8 @@ class Communication::Block < ApplicationRecord
   end
 
   def set_heading_from_about
-    self.heading = about.headings.ordered.last
+    # TODO: Ne gère que le 1er niveau actuellement
+    self.heading = about.headings.root.ordered.last
   end
 
   # FIXME @sebou

@@ -10,7 +10,7 @@ window.osuny.contentEditor = {
         }
         this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
         this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
-        
+
         this.initElements();
         this.initSortable();
     },
@@ -52,17 +52,13 @@ window.osuny.contentEditor = {
                 animation: 150,
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
-                onChoose: this.onSortableChoose.bind(this),
                 onUnchoose: this.onSortableUnchoose.bind(this),
                 onStart: this.onSortableStart.bind(this),
+                onMove: this.onSortableMove.bind(this),
                 onEnd: this.onSortableEnd.bind(this)
             });
             this.sortableInstances.push(sortableInstance);
         }
-    },
-
-    onSortableChoose: function (event) {
-        'use strict';
     },
 
     onSortableStart: function (event) {
@@ -75,6 +71,18 @@ window.osuny.contentEditor = {
         } else if (kind === 'heading') {
             this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-heading');
         }
+    },
+
+    onSortableMove: function (event) {
+        'use strict';
+        var draggedKind = event.dragged.dataset.kind,
+            relatedKind = event.related.dataset.kind;
+
+        if (draggedKind === 'block') {
+            // Prevent dragging a block after a heading, instead of inside
+            return relatedKind !== 'heading' || !event.willInsertAfter;
+        }
+        return true;
     },
 
     onSortableEnd: function (event) {
