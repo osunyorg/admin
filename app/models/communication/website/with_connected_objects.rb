@@ -69,6 +69,7 @@ module Communication::Website::WithConnectedObjects
     University::Organization.where(id: ids)
   end
 
+  # ensure the object "website" respond to both is_direct_object? and is_indirect_object? as website doesn't include neither as_direct_object nor as_indirect_object
   def is_direct_object?
     true
   end
