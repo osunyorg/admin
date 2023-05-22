@@ -28,12 +28,22 @@ class Communication::Website::GitFile < ApplicationRecord
 
   attr_accessor :will_be_destroyed
 
-  def self.sync(website, object, destroy: false)
+  def self.sync(website, object)
+    # All exportable objects must respond to this method
+    # WithGitFiles defines it
+    # AsDirectObject includes WithGitFiles, therefore all direct objects are exportable
+    # AsIndirectObject does not include it, but some indirect objects have it (Person, Organization...)
+    # Some objects need to declare that property:
+    # - the website itself
+    # - configs (which inherit from the website)
+    # - active storage blobs
+    return unless object.try(:exportable_to_git?)
     # Permalinks must be calculated BEFORE renders
-    object.manage_permalink_in_website(website) if Communication::Website::Permalink.supported_by?(object)
-    object.before_git_sync # Handle optional before-sync process
+    manage_permalink object, website
+    # Blobs need to be completely analyzed, which is async
+    analyze_if_blob object
+    # The git file might exist or not
     git_file = where(website: website, about: object).first_or_create
-    git_file.will_be_destroyed = destroy
     # It is very important to go through this specific instance of the website,
     # and not through each git_file.website, which would be different instances.
     # Otherwise, we get 1 instance of git_repository per git_file,
@@ -41,8 +51,15 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
+  # Simplified version of the sync method to simply delete an obsolete git_file
+  # Not an instance method because we need to share the website's instance, and thus pass it as an argument
+  def self.mark_for_destruction(website, git_file)
+    git_file.will_be_destroyed = true
+    website.git_repository.add_git_file git_file
+  end
+
   def path
-    @path ||= about.git_path(website)&.gsub(/\/+/, '/')
+    @path ||= about.nil? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
   end
 
   def to_s
@@ -50,6 +67,16 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
+
+  def self.manage_permalink(object, website)
+    return unless Communication::Website::Permalink.supported_by?(object)
+    object.manage_permalink_in_website(website)
+  end
+
+  def self.analyze_if_blob(object)
+    return unless object.is_a? ActiveStorage::Blob
+    object.analyze unless object.analyzed?
+  end
 
   def template_static
     if about.respond_to? :template_static

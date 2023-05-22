@@ -1,0 +1,10 @@
+<%
+object = connection.indirect_object
+object_name = object.to_s
+object_name = object.id if object.is_a?(ActiveStorage::Blob)
+begin
+  object_link = url_for [:admin, object]
+rescue
+end
+%>
+<%= link_to_if object_link, object_name, object_link %>

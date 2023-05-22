@@ -44,17 +44,22 @@
 #
 class Communication::Website::Page::Organization < Communication::Website::Page
 
-  protected
-  
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}organizations/_index.html"
+  # TODO: Scope .where(language_id: language_id) when organizations are translatable
+  def dependencies
+    super +
+    [website.config_default_languages] +
+    website.connected_organizations
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website.organizations
-    ]
+  def explicitly_connected_organizations
+    ids = website.connections.where(indirect_object_type: 'University::Organization', direct_source_type: 'Communication::Website::Page::Organization', direct_source_id: self.id).pluck(:indirect_object_id)
+    University::Organization.where(id: ids)
+  end
+
+  protected
+
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}organizations/_index.html"
   end
 
 end

@@ -1,5 +1,10 @@
 class Git::Providers::Gitlab < Git::Providers::Abstract
-  DEFAULT_ENDPOINT = 'https://gitlab.com/api/v4'
+  DEFAULT_ENDPOINT = 'https://gitlab.com/api/v4'.freeze
+
+  def url
+    base_url = endpoint.gsub("/api/v4", "")
+    "#{base_url}/#{repository}"
+  end
 
   def create_file(path, content)
     batch << {

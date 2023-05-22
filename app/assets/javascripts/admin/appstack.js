@@ -1,6 +1,7 @@
 //= require activestorage
 //= require jquery3
 //= require jquery_ujs
+//= require jquery-ui/widgets/autocomplete
 //= require notyf/notyf.min
 //= require simple_form_password_with_hints
 //= require simple_form_bs5_file_input
@@ -11,6 +12,7 @@
 //= require summernote/summernote-bs5
 //= require slug/slug
 //= require cocoon
+//= require autocomplete-rails
 //= require codemirror/lib/codemirror
 //= require_self
 //= require_tree ./commons

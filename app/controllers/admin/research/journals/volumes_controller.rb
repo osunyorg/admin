@@ -33,7 +33,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   def create
     @volume.add_photo_import params[:photo_import]
     @volume.assign_attributes(journal: @journal, university: current_university)
-    if @volume.save_and_sync
+    if @volume.save
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
     else
       breadcrumb
@@ -43,7 +43,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
 
   def update
     @volume.add_photo_import params[:photo_import]
-    if @volume.update_and_sync(volume_params)
+    if @volume.update(volume_params)
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
     else
       breadcrumb
@@ -53,7 +53,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def destroy
-    @volume.destroy_and_sync
+    @volume.destroy
     redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s)
   end
 

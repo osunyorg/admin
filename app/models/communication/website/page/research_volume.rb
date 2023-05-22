@@ -48,17 +48,17 @@ class Communication::Website::Page::ResearchVolume < Communication::Website::Pag
     website.about && website.about&.respond_to?(:volumes)
   end
 
-  protected
-  
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}volumes/_index.html"
+  # TODO: Scope .where(language_id: language_id) when volumes are translatable
+  def dependencies
+    super +
+    [website.config_default_languages] +
+    website.research_volumes
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website.research_volumes
-    ]
+  protected
+
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}volumes/_index.html"
   end
 
 end

@@ -35,6 +35,9 @@ en:
         one: Category
         other: Categories
         all: All categories
+      communication/website/connection:
+        one: Connection
+        other: Connections
       communication/website/imported/website:
         one: Imported website
         other: Imported websites
@@ -143,6 +146,15 @@ en:
         name: Name
         parent: Parent category
         slug: Slug
+      communication/website/connection:
+        direct_source: Direct source
+        direct_source_type: Direct source type
+        direct_source_id: Direct source identifier
+        id: Identifier
+        indirect_object: Indirect object
+        indirect_object_type: Indirect object type
+        indirect_object_id: Indirect object identifier
+        updated_at: Updated at
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:

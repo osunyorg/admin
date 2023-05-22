@@ -23,6 +23,13 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     end
   end
 
+  def search
+    @term = params[:term].to_s
+    @organizations = current_university.organizations
+                                        .search_by_siren_or_name(@term)
+                                        .ordered
+  end
+
   def show
     breadcrumb
   end
@@ -44,7 +51,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def create
     @organization.university = current_university
-    if @organization.save_and_sync()
+    if @organization.save
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s)
     else
@@ -54,7 +61,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def update
-    if @organization.update_and_sync(organization_params)
+    if @organization.update(organization_params)
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_updated_html', model: @organization.to_s)
     else
@@ -64,7 +71,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def destroy
-    @organization.destroy_and_sync
+    @organization.destroy
     redirect_to admin_university_organizations_url,
                 notice: t('admin.successfully_destroyed_html', model: @organization.to_s)
   end

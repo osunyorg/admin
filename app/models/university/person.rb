@@ -53,20 +53,22 @@
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
-  include WithUniversity
-  include WithGit
   include WithBlobs
+  include WithBlocks
   include WithCountry
+  # WithRoles included before WithEducation because needed for the latter
+  include WithRoles
   include WithEducation
   include WithExperiences
-  include WithSlug
-  include WithPicture
-  include WithRoles
-  include WithBlocks
+  include WithGitFiles
   include WithPermalink
+  include WithPicture
   include WithResearch
+  include WithSlug
   include WithTranslations
+  include WithUniversity
 
   LIST_OF_ROLES = [
     :administration,
@@ -178,6 +180,10 @@ class University::Person < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def to_s_with_mail
+    email.present? ? "#{to_s} (#{email})" : to_s
+  end
+
   def to_s_alphabetical
     "#{last_name} #{first_name}"
   end
@@ -188,24 +194,21 @@ class University::Person < ApplicationRecord
     end
   end
 
-  def websites
-    # FIXME: Sera corrigé avec les liens directs
-    university.communication_websites
-  end
-
   def git_path(website)
     "#{git_path_content_prefix(website)}persons/#{slug}.html" if for_website?(website)
   end
 
-  def git_dependencies(website)
-    dependencies = [self]
-    dependencies += active_storage_blobs
-    dependencies += git_block_dependencies
-    dependencies += [administrator, author, researcher, teacher]
-    dependencies += communication_website_posts.where(communication_website_id: website.id)
-    dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website)
-    dependencies
+  def dependencies
+    blocks +
+    active_storage_blobs
+  end
+
+  def references
+    [administrator, author, researcher, teacher]
+  end
+
+  def person
+    @person ||= University::Person.find(id)
   end
 
   def administrator
@@ -222,14 +225,6 @@ class University::Person < ApplicationRecord
 
   def teacher
     @teacher ||= University::Person::Teacher.find(id)
-  end
-
-  def for_website?(website)
-    administrator.for_website?(website) ||
-    author.for_website?(website) ||
-    researcher.for_website?(website) ||
-    teacher.for_website?(website) ||
-    in_block_dependencies?(website)
   end
 
   def full_street_address

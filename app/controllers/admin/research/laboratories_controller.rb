@@ -25,7 +25,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   end
 
   def create
-    if @laboratory.save_and_sync
+    if @laboratory.save
       redirect_to [:admin, @laboratory], notice: t('admin.successfully_created_html', model: @laboratory.to_s)
     else
       breadcrumb
@@ -34,7 +34,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   end
 
   def update
-    if @laboratory.update_and_sync(laboratory_params)
+    if @laboratory.update(laboratory_params)
       redirect_to [:admin, @laboratory], notice: t('admin.successfully_updated_html', model: @laboratory.to_s)
     else
       breadcrumb
@@ -44,7 +44,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   end
 
   def destroy
-    @laboratory.destroy_and_sync
+    @laboratory.destroy
     redirect_to admin_research_laboratories_url, notice: t('admin.successfully_destroyed_html', model: @laboratory.to_s)
   end
 

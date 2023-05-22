@@ -46,6 +46,18 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     render layout: 'admin/layouts/preview'
   end
 
+  def connect
+    load_object
+    @website.connect_and_sync @object, @page, direct_source_type: @page.class.to_s
+    head :ok
+  end
+
+  def disconnect
+    load_object
+    @website.disconnect_and_sync @object, @page, direct_source_type: @page.class.to_s
+    redirect_back(fallback_location: [:admin, @object])
+  end
+
   def new
     @page.website = @website
     breadcrumb
@@ -91,12 +103,18 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     if @page.is_special_page?
       redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.delete_special_page_notice'))
     else
-      @page.destroy_and_sync
+      @page.destroy
       redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
     end
   end
 
   protected
+
+  def load_object
+    object_type = params[:objectType]
+    object_id = params[:objectId]
+    @object = object_type.constantize.find object_id
+  end
 
   def breadcrumb
     super

@@ -14,4 +14,8 @@ class Communication::Block::Template::Partner < Communication::Block::Template::
     end
     @elements
   end
+
+  def organizations
+    @organizations ||= elements.collect(&:organization).compact.uniq
+  end
 end

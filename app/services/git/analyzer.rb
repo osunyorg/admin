@@ -29,7 +29,16 @@ class Git::Analyzer
     path.nil?
   end
 
+  def commit_message
+    git_file.about.nil? ? "[#{ git_file.class.name }] #{ action } Git file"
+                        : "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
+  end
+
   protected
+
+  def action
+    should_destroy? ? "Destroy" : "Save"
+  end
 
   def path
     git_file.path

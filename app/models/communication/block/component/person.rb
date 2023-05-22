@@ -4,8 +4,8 @@ class Communication::Block::Component::Person < Communication::Block::Component:
     template.block.university.people.find_by(id: data)
   end
 
-  def git_dependencies
-    [person, person&.picture&.blob]
+  def dependencies
+    [person]
   end
 
   def translate!

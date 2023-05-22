@@ -36,33 +36,27 @@
 class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
-  include WithUniversity
   include WithAbouts
+  include WithAssociatedObjects
   include WithConfigs
+  include WithConnectedObjects
   include WithDependencies
   include WithGit
   include WithGitRepository
   include WithImport
+  include WithLanguages
   include WithProgramCategories
+  include WithReferences
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithStyle
   include WithTheme
+  include WithUniversity
 
   enum git_provider: {
     github: 0,
     gitlab: 1
   }
-
-  belongs_to :default_language, class_name: "Language"
-  has_and_belongs_to_many :languages,
-                          class_name: 'Language',
-                          join_table: 'communication_websites_languages',
-                          foreign_key: 'communication_website_id',
-                          association_foreign_key: 'language_id'
-
-  validates :languages, length: { minimum: 1 }
-  validate :languages_must_include_default_language
 
   before_validation :sanitize_fields
 
@@ -84,27 +78,23 @@ class Communication::Website < ApplicationRecord
     "data/website.yml"
   end
 
-  def git_dependencies(website)
-    dependencies = [
-      self,
-      config_default_languages,
-      config_default_permalinks,
-      config_development_config,
-      config_production_config
-    ] + menus
-    dependencies += pages + pages.includes(parent: { featured_image_attachment: :blob }, featured_image_attachment: :blob).map(&:active_storage_blobs).flatten + pages.map(&:git_block_dependencies).flatten
-    dependencies += posts + posts.includes(featured_image_attachment: :blob).map(&:active_storage_blobs).flatten + posts.map(&:git_block_dependencies).flatten
-    dependencies += people_with_facets + people.map(&:active_storage_blobs).flatten + people.map(&:git_block_dependencies).flatten
-    dependencies += organizations_in_blocks + organizations_in_blocks.map(&:active_storage_blobs).flatten + organizations_in_blocks.map(&:git_block_dependencies).flatten
-    dependencies += categories + categories.map(&:git_block_dependencies).flatten
-    dependencies += about.git_dependencies(website) if about.present?
-    dependencies
+  def dependencies
+    # Le website est le SEUL cas d'auto-dépendance
+    [self] +
+    configs +
+    pages.where(language_id: language_ids) +
+    posts.where(language_id: language_ids) +
+    categories.where(language_id: language_ids) +
+    menus.where(language_id: language_ids) +
+    [about]
   end
 
-  def best_language_for(iso_code)
-    # We look for the language by the ISO code in the websites languages.
-    # If not found, we fallback to the default language.
-    languages.find_by(iso_code: iso_code) || default_language
+  def website
+    self
+  end
+
+  def website_id
+    id
   end
 
   protected
@@ -116,9 +106,5 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
-  end
-
-  def languages_must_include_default_language
-    errors.add(:languages, :must_include_default) unless language_ids.include?(default_language_id)
   end
 end

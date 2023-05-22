@@ -6,19 +6,12 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :category
 
-  def add_custom_git_dependencies
-    selected_posts.each do |post|
-      add_dependency post
-      add_dependency post.active_storage_blobs.to_a
-      if post.author.present?
-        add_dependency [post.author, post.author.author]
-        add_dependency post.author.active_storage_blobs.to_a
-      end
-    end
-  end
-
   def category
     category_id_component.category
+  end
+
+  def dependencies
+    selected_posts
   end
 
   def selected_posts

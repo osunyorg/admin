@@ -21,10 +21,11 @@
 #  fk_rails_8e6f992b9d  (university_id => universities.id)
 #
 class Research::Journal::Paper::Kind < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
-  include WithUniversity
-  include WithGit
+  include WithGitFiles
   include WithSlug
+  include WithUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers

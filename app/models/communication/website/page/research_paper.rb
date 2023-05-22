@@ -48,17 +48,17 @@ class Communication::Website::Page::ResearchPaper < Communication::Website::Page
     website.about && website.about&.respond_to?(:papers)
   end
 
-  protected
-  
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}papers/_index.html"
+  # TODO: Scope .where(language_id: language_id) when papers are translatable
+  def dependencies
+    super +
+    [website.config_default_languages] +
+    website.research_papers
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website.research_papers
-    ]
+  protected
+
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}papers/_index.html"
   end
 
 end

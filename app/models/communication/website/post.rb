@@ -38,12 +38,12 @@
 #  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  include AsDirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug # We override slug_unavailable? method
@@ -55,9 +55,6 @@ class Communication::Website::Post < ApplicationRecord
   has_one :imported_post,
           class_name: 'Communication::Website::Imported::Post',
           dependent: :destroy
-  belongs_to :website,
-             class_name: 'Communication::Website',
-             foreign_key: :communication_website_id
   belongs_to :author,
              class_name: 'University::Person',
              optional: true
@@ -120,22 +117,19 @@ class Communication::Website::Post < ApplicationRecord
     "admin/communication/websites/posts/static"
   end
 
-  def git_dependencies(website)
-    dependencies = [self] + website.menus
-    dependencies += categories
-    dependencies += active_storage_blobs
-    dependencies += git_block_dependencies
-    dependencies += university.communication_blocks.where(template_kind: :posts).includes(:about).map(&:about).uniq
-    if author.present?
-      dependencies += [author, author.author, translated_author, translated_author.author]
-      dependencies += author.active_storage_blobs
-      dependencies += translated_author.active_storage_blobs
-    end
-    dependencies
+  def menu_items
+    Communication::Website::Menu::Item.where(website: website, kind: :post, about: self)
   end
 
-  def git_destroy_dependencies(website)
-    [self] + explicit_active_storage_blobs
+  def dependencies
+    active_storage_blobs +
+    blocks +
+    categories +
+    [author&.author]
+  end
+
+  def references
+    menu_items
   end
 
   def url
@@ -178,9 +172,9 @@ class Communication::Website::Post < ApplicationRecord
   def update_authors_statuses!
     old_author = University::Person.find_by(id: author_id_before_last_save)
     if old_author && old_author.communication_website_posts.none?
-      old_author.update_and_sync(is_author: false)
+      old_author.update(is_author: false)
     end
-    author.update_and_sync(is_author: true) if author_id
+    author.update(is_author: true) if author_id
   end
 
   def translate_additional_data!(translation)

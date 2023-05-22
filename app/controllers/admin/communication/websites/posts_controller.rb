@@ -26,12 +26,11 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def publish
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)
-    if params[:published] == "true"
-      target_posts.update(published: true)
-    elsif params[:published] == "false"
-      target_posts.update(published: false)
+    is_published = params[:published] == "true"
+    target_posts.each do |post|
+      post.published = is_published
+      post.save_and_sync
     end
-    @website.sync_objects_with_git(target_posts) if target_posts.any?
     redirect_back fallback_location: admin_communication_website_posts_path,
                   notice: t('communication.website.posts.successful_batch_update')
   end
@@ -93,7 +92,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def destroy
-    @post.destroy_and_sync
+    @post.destroy
     redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)
   end
 

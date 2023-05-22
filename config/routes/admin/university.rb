@@ -16,6 +16,7 @@ namespace :university do
   end
   resources :people do
     collection do
+      get :search, defaults: { format: 'json' }
       resources :categories, controller: 'people/categories', as: 'person_categories'
     end
     member do
@@ -31,7 +32,8 @@ namespace :university do
     end
   end
   resources :organizations do
-    collection do
+    collection do 
+      get :search, defaults: { format: 'json' }
       resources :categories, controller: 'organizations/categories', as: 'organization_categories'
     end
     member do

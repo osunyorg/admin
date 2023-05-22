@@ -1,0 +1,21 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th>Objet</th>
+        <th>Classe / ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% dependencies.each do |dependency| %>
+        <tr>
+          <td><%= dependency %></td>
+          <td>
+            <%= dependency.class.to_s %><br>
+            <%= dependency.id if dependency.respond_to? :id %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

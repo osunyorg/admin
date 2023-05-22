@@ -33,7 +33,7 @@
 #  fk_rails_2b6d929310  (default_language_id => languages.id)
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
-class Communication::Website::Configs::DefaultPermalinks < Communication::Website
+class Communication::Website::Configs::DefaultPermalinks < Communication::Website::Configs::Base
 
   def self.polymorphic_name
     'Communication::Website::Configs::DefaultPermalinks'

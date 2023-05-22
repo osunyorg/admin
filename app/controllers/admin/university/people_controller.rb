@@ -24,7 +24,13 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
       }
     end
+  end
 
+  def search
+    @term = params[:term].to_s
+    language = Language.find_by(iso_code: params[:lang])
+    @people = current_university.people.for_search_term(@term).ordered
+    @people = @people.joins(:language).where(languages: { iso_code: language.iso_code }) if language.present?
   end
 
   def show
@@ -62,7 +68,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def create
     @person.language_id = current_university.default_language_id
-    if @person.save_and_sync
+    if @person.save
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_created_html', model: @person.to_s)
     else
@@ -72,7 +78,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def update
-    if @person.update_and_sync(person_params)
+    if @person.update(person_params)
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_updated_html', model: @person.to_s)
     else
@@ -83,7 +89,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def destroy
-    @person.destroy_and_sync
+    @person.destroy
     redirect_to admin_university_people_url,
                 notice: t('admin.successfully_destroyed_html', model: @person.to_s)
   end

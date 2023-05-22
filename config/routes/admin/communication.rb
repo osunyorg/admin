@@ -10,6 +10,8 @@ namespace :communication do
       get :style
       get :analytics
     end
+    resources :dependencies, controller: 'websites/dependencies', only: :index
+    resources :connections, controller: 'websites/connections', only: [:index, :show]
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder
@@ -20,6 +22,8 @@ namespace :communication do
         get :preview
         get "translate" => "websites/pages#translate", as: :translate
         post :duplicate
+        post :connect
+        post :disconnect
       end
     end
     resources :categories, controller: 'websites/categories', path: '/:lang/categories' do

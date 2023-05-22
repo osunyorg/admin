@@ -1,0 +1,33 @@
+<%
+@organizations = @page.explicitly_connected_organizations.ordered.page params[:page]
+%>
+<%= osuny_panel University::Organization.model_name.human(count: 2) do %>
+  <%= simple_form_for :association, class_name: 'association' do |f| %>
+    <%= f.input :name,
+                label: false,
+                as: :autocomplete,
+                url: search_admin_university_organizations_path(lang: nil, website_id: nil),
+                placeholder: t("university.organization.search"),
+                input_html: {
+                  data: {
+                    type: 'University::Organization',
+                    target: connect_admin_communication_website_page_path(@page)
+                  }
+                }
+                %>
+  <% end %>
+  <table class="<%= table_classes %>">
+    <tbody>
+      <% @organizations.each do |organization| %>
+        <tr>
+          <td><%= link_to organization, [:admin, organization] %></td>
+          <td><%= link_to 'Déconnecter',
+                          disconnect_admin_communication_website_page_path(@page, objectId: organization.id, objectType: organization.class),
+                          class: button_classes_danger,
+                          method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @organizations, theme: 'bootstrap-5' %>
+<% end %>

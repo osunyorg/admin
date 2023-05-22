@@ -64,3 +64,28 @@ alumnus:
   university: default_university
   user: alumnus
   language: fr
+
+olivia:
+  id: 53cbac40-e430-585a-965c-a7412a92f35a
+  email: olivia@noesya.coop
+  first_name: Olivia
+  last_name: Simonet
+  name: Olivia Simonet
+  university: default_university
+  language: fr
+
+pa:
+  email: pa@noesya.coop
+  first_name: Pierre-André
+  last_name: Boissinot
+  name: Pierre-André Boissinot
+  university: default_university
+  language: fr
+
+arnaud:
+  email: arnaud@noesya.coop
+  first_name: Arnaud
+  last_name: Levy
+  name: Arnaud Levy
+  university: default_university
+  language: fr

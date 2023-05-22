@@ -1,4 +1,4 @@
-module Communication::Extranet::WithConnections
+module Communication::Extranet::WithConnectedObjects
   extend ActiveSupport::Concern
 
   included do

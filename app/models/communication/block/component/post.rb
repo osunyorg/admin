@@ -5,13 +5,8 @@ class Communication::Block::Component::Post < Communication::Block::Component::B
     website.posts.published.find_by(id: data)
   end
 
-  def git_dependencies
-    [
-      post,
-      post&.author,
-      post&.author&.author,
-      post&.author&.picture&.blob
-    ]
+  def dependencies
+    [post]
   end
 
   def translate!

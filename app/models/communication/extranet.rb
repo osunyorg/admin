@@ -45,7 +45,7 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include WithAbouts
-  include WithConnections
+  include WithConnectedObjects
   include WithFeatures
   include WithLegal
   include WithSso
