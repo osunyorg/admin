@@ -12,31 +12,33 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  about_id      :uuid             indexed => [about_type]
-#  heading_id    :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_blocks_on_heading_id     (heading_id)
 #  index_communication_blocks_on_university_id  (university_id)
 #  index_communication_website_blocks_on_about  (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_18291ef65f  (university_id => universities.id)
-#  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
-  include Sanitizable
-  include WithAccessibility
-  include WithUniversity
+  include Accessible
+  include AsIndirectObject
   include WithPosition
+  include WithUniversity
+  include Sanitizable
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
 
   belongs_to :about, polymorphic: true
   belongs_to :heading, optional: true
+
+  # We do not use the :touch option of the belongs_to association
+  # because we do not want to touch the about when destroying the block.
+  after_save :touch_about
 
   # Used to purge images when unattaching them
   # template_blobs would be a better name, because there are files
@@ -82,6 +84,7 @@ class Communication::Block < ApplicationRecord
 
   before_validation :set_heading_from_about, on: :create
   before_save :attach_template_blobs
+  before_validation :set_university_from_about, on: :create
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
@@ -95,8 +98,12 @@ class Communication::Block < ApplicationRecord
     template.data
   end
 
-  def git_dependencies
-    template.git_dependencies
+  def dependencies
+    template.dependencies
+  end
+
+  def references
+    [about]
   end
 
   def template
@@ -137,6 +144,10 @@ class Communication::Block < ApplicationRecord
     about.blocks.ordered.last
   end
 
+  def set_university_from_about
+    self.university_id = about.university_id
+  end
+
   def check_accessibility
     accessibility_merge template
   end
@@ -154,5 +165,9 @@ class Communication::Block < ApplicationRecord
   # Could not find or build blob: expected attachable, got #<ActiveStorage::Blob id: "f4c78657-5062-416b-806f-0b80fb66f9cd", key: "gri33wtop0igur8w3a646llel3sd", filename: "logo.svg", content_type: "image/svg+xml", metadata: {"identified"=>true, "width"=>709, "height"=>137, "analyzed"=>true}, service_name: "scaleway", byte_size: 4137, checksum: "aZqqTYabP5+72ZeddcZ/2Q==", created_at: "2022-05-05 12:17:33.941505000 +0200", university_id: "ebf2d273-ffc9-4d9f-a4ee-a2146913d617">
   def attach_template_blobs
     # self.template_images = template.active_storage_blobs
+  end
+
+  def touch_about
+    about.touch
   end
 end

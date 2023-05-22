@@ -1,3 +1,4 @@
+# FIXME: les méthodes utilisant published_at doivent vérifier que l'attribut existe
 module WithPublication
   extend ActiveSupport::Concern
 

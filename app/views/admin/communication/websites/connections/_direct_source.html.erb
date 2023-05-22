@@ -1,0 +1,16 @@
+<%
+source = connection.direct_source
+source_name = source.to_s
+begin
+  case connection.direct_source_type
+  when 'Communication::Website::Page'
+    source_link = admin_communication_website_page_path(website_id: source.website.id, id: source.id, lang: current_language)
+  when 'Communication::Website::Post'
+    source_link = admin_communication_website_post_path(website_id: source.website.id, id: source.id, lang: current_language)
+  else
+    source_link = url_for [:admin, source]
+  end
+rescue
+end
+%>
+<%= link_to_if source_link, source_name, source_link %>

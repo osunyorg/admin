@@ -31,6 +31,8 @@ action += link_to t('university.manage_experiences'),
   <%= render 'admin/university/people/experiences/list', experiences: @person.experiences.ordered %>
 <% end %>
 
+<%= render 'admin/application/connections/list', about: @person %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
   <%= static_link static_admin_university_person_path(@person) %>

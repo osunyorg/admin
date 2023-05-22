@@ -78,7 +78,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def create
     @program.university = current_university
     @program.add_photo_import params[:photo_import]
-    if @program.save_and_sync
+    if @program.save
       redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s)
     else
       breadcrumb
@@ -88,7 +88,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def update
     @program.add_photo_import params[:photo_import]
-    if @program.update_and_sync(program_params)
+    if @program.update(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else
       breadcrumb
@@ -98,7 +98,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def destroy
-    @program.destroy_and_sync
+    @program.destroy
     redirect_to admin_education_programs_url, notice: t('admin.successfully_destroyed_html', model: @program.to_s)
   end
 

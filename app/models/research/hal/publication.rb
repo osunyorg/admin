@@ -20,8 +20,9 @@
 #  index_research_hal_publications_on_docid  (docid)
 #
 class Research::Hal::Publication < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
-  include WithGit
+  include WithGitFiles
   include WithSlug
 
   has_and_belongs_to_many :researchers,

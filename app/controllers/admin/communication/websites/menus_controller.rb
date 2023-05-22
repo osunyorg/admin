@@ -50,7 +50,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   end
 
   def destroy
-    @menu.destroy_and_sync
+    @menu.destroy
     redirect_to admin_communication_website_menus_url, notice: t('admin.successfully_destroyed_html', model: @menu.to_s)
   end
 

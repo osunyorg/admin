@@ -13,19 +13,16 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     page_id_component.page
   end
 
+  def dependencies
+    selected_pages
+  end
+
   def selected_pages
     @selected_pages ||= send "selected_pages_#{mode}"
   end
 
   def allowed_for_about?
     !website.nil?
-  end
-
-  def add_custom_git_dependencies
-    selected_pages.each do |page|
-      add_dependency page
-      add_dependency page.active_storage_blobs.to_a
-    end
   end
 
   protected

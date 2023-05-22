@@ -65,7 +65,11 @@ class University::Person::Author < University::Person
     "admin/university/people/authors/static"
   end
 
-  def for_website?(website)
-    website.has_authors? && website.authors.pluck(:id).include?(self.id)
+  def dependencies
+    [person]
+  end
+
+  def references
+    communication_website_posts
   end
 end

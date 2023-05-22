@@ -5,23 +5,36 @@ module Communication::Website::WithGitRepository
     has_many :website_git_files,
              class_name: 'Communication::Website::GitFile',
              dependent: :destroy
+
+    after_save :destroy_obsolete_git_files, if: :should_clean_on_git?
   end
 
   def git_repository
     @git_repository ||= Git::Repository.new self
   end
 
-  def sync_objects_with_git(objects)
-    touch
-    return unless git_repository.valid?
-    objects.each do |object|
-      next unless object.has_website_for_self?(self)
-      dependencies = object.git_dependencies(self).to_a.flatten.uniq.compact
-      dependencies.each do |dependency|
-        Communication::Website::GitFile.sync self, dependency
+  # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
+  def destroy_obsolete_git_files
+    website_git_files.find_each do |git_file|
+      dependency = git_file.about
+      # Here, dependency can be nil (object was previously destroyed)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable)
+      if is_obsolete
+        Communication::Website::GitFile.mark_for_destruction(self, git_file)
       end
     end
-    git_repository.sync!
+    self.git_repository.sync!
   end
-  handle_asynchronously :sync_objects_with_git, queue: 'default'
+  handle_asynchronously :destroy_obsolete_git_files, queue: :default
+
+  # Le website devient data/website.yml
+  # Les configs héritent du modèle website et s'exportent en différents fichiers
+  def exportable_to_git?
+    true
+  end
+
+  def should_clean_on_git?
+    # Clean website if about was present and changed OR a language was removed
+    (saved_change_to_about_id? && about_id_before_last_save.present?) || language_was_removed
+  end
 end

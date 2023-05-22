@@ -1,0 +1,20 @@
+<%= osuny_panel Communication::Website::Connection.model_name.human(count: 2) do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Communication::Website.model_name.human %></th>
+        <th><%= Communication::Website::Connection.human_attribute_name('direct_source_type') %></th>
+        <th><%= Communication::Website::Connection.human_attribute_name('direct_source') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% about.connections.each do |connection| %>
+        <tr>
+          <td><%= link_to connection.website, [:admin, connection.website] %></td>
+          <td><%= connection.direct_source_type.constantize.model_name.human unless connection.direct_source_type.nil? %></td>
+          <td><%= render 'admin/communication/websites/connections/direct_source', connection: connection %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end if about.websites.any? %>

@@ -46,26 +46,26 @@
 class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path)
 
+  include Accessible
+  include AsDirectObject
   include Sanitizable
   include WithAccessibility
   include WithBlobs
   include WithBlocks
   include WithDuplication
   include WithFeaturedImage
-  include WithGit
   include WithMenuItemTarget
   include WithPosition
   include WithTree
-  include WithPath
   include WithPermalink
   include WithType
   include WithTranslations
+  # WithPath overwrite the git_path method defined in WithWebsites
+  include WithPath
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
 
-  belongs_to :website,
-             foreign_key: :communication_website_id
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true
@@ -93,22 +93,19 @@ class Communication::Website::Page < ApplicationRecord
     "admin/communication/websites/pages/static"
   end
 
-  def git_dependencies(website)
-    dependencies = [self] +
-                    website.menus +
-                    descendants +
-                    active_storage_blobs +
-                    siblings +
-                    git_block_dependencies +
-                    type_git_dependencies
-    dependencies += [parent] if has_parent?
-    dependencies.flatten.compact
+  def menu_items
+    Communication::Website::Menu::Item.where(website: website, kind: :page, about: self)
   end
 
-  def git_destroy_dependencies(website)
-    [self] +
-    descendants +
-    active_storage_blobs
+  def dependencies
+    active_storage_blobs +
+    blocks +
+    children
+  end
+
+  def references
+    [parent] +
+    menu_items
   end
 
   def to_s

@@ -60,17 +60,17 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
     true
   end
 
-  protected
-  
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}programs/_index.html"
+  # TODO: Scope .where(language_id: language_id) when programs are translatable
+  def dependencies
+    super +
+    [website.config_default_languages] +
+    website.education_programs
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website.education_programs
-    ]
+  protected
+
+  def current_git_path
+    @current_git_path ||= "#{git_path_prefix}programs/_index.html"
   end
 
 end

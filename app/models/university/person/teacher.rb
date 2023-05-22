@@ -66,7 +66,11 @@ class University::Person::Teacher < University::Person
     "admin/university/people/teachers/static"
   end
 
-  def for_website?(website)
-    is_teacher && website.has_teachers? && website.teachers.pluck(:id).include?(self.id)
+  def dependencies
+    [person]
+  end
+
+  def references
+    education_programs_as_teacher
   end
 end

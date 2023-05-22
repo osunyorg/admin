@@ -12,6 +12,10 @@ class Git::Providers::Abstract
     repository.present? && access_token.present?
   end
 
+  def url
+    raise NotImplementedError
+  end
+
   def create_file(path, content)
     raise NotImplementedError
   end

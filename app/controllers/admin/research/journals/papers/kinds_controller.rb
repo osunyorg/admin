@@ -4,7 +4,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
   def index
     breadcrumb
   end
-  
+
   def show
     @papers = @kind.papers.page params[:page]
     breadcrumb
@@ -25,7 +25,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
     breadcrumb
     add_breadcrumb t('create')
   end
-  
+
   def edit
     breadcrumb
     add_breadcrumb @kind, admin_research_journal_kind_path(@kind)
@@ -37,7 +37,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
       journal: @journal,
       university: current_university
     )
-    if @kind.save_and_sync
+    if @kind.save
       redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_created_html', model: @paper_kind.to_s)
     else
       breadcrumb
@@ -47,7 +47,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
   end
 
   def update
-    if @kind.update_and_sync(kind_params)
+    if @kind.update(kind_params)
       redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_updated_html', model: @paper_kind.to_s)
     else
       breadcrumb
@@ -58,7 +58,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
   end
 
   def destroy
-    @kind.destroy_and_sync
+    @kind.destroy
     redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @paper_kind.to_s)
   end
 

@@ -10,6 +10,10 @@
                     @website.about,
                     [:admin, @website.about] unless @website.about.nil? %>)
   <% end %>
+  <% if @website.git_repository.valid? %>
+    <br>
+    <%= link_to @website.git_repository.url, @website.git_repository.url, target: :_blank %>
+  <% end %>
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>

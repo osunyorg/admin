@@ -219,7 +219,8 @@ en:
     manage_alumni: Manage alumni
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
-    organisation:
+    organization:
+      search: Search by name
       employees: Employees
       import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
       logo: Logo
@@ -234,6 +235,7 @@ en:
         import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
         title: Experiences imports
       personal_data_warning: Warning! The information provided below can be publicly visible on the websites and the extranets about you.
+      search: Search by name
       taught_programs: Taught programs
     sso: SSO
     sso_key: SSO Key

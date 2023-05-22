@@ -35,6 +35,9 @@ fr:
         one: Catégorie
         other: Catégories
         all: Toutes les catégories
+      communication/website/connection:
+        one: Connexion
+        other: Connexions
       communication/website/imported/website:
         one: Site importé
         other: Sites importés
@@ -145,6 +148,15 @@ fr:
         name: Nom
         parent: Catégorie parente
         slug: Slug
+      communication/website/connection:
+        direct_source: Source directe
+        direct_source_type: Type de la source
+        direct_source_id: Identifiant de la source
+        id: Identifiant
+        indirect_object: Objet indirect
+        indirect_object_type: Type de l'objet
+        indirect_object_id: Identifiant de l'objet
+        updated_at: Date de mise à jour
       communication/website/imported/category:
         original: Original
       communication/website/imported/medium:

@@ -4,8 +4,8 @@ class Communication::Block::Component::Program < Communication::Block::Component
     template.block.university.programs.find_by(id: data)
   end
 
-  def git_dependencies
-    [program, program&.best_featured_image&.blob]
+  def dependencies
+    [program]
   end
 
   def translate!

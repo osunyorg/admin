@@ -5,8 +5,8 @@ class Communication::Block::Component::Page < Communication::Block::Component::B
     website.pages.published.find_by(id: data)
   end
 
-  def git_dependencies
-    [page, page&.best_featured_image&.blob]
+  def dependencies
+    [page]
   end
 
   def translate!

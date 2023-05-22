@@ -91,10 +91,6 @@ module Communication::Website::Page::WithType
     website.special_page(Communication::Website::Page::Home, language: language)
   end
 
-  def type_git_dependencies
-    []
-  end
-
   def initialize_special_page
     i18n_key = "communication.website.pages.defaults.#{type_key}"
     self.title = I18n.t("#{i18n_key}.title")

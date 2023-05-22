@@ -6,7 +6,7 @@
                     class: button_classes('ms-1') if can?(:show, University::Person) %>
   <%= osuny_panel University::Person.model_name.human(count: 2), action: action do %>
     <div class="table-responsive">
-      <table class="<%= table_classes%>">
+      <table class="<%= table_classes %>">
         <tbody>
           <% @people.each do |person| %>
             <tr>
@@ -25,7 +25,7 @@
                     class: button_classes('ms-1') if can?(:show, University::Person) %>
   <%= osuny_panel University::Organization.model_name.human(count: 2), action: action do %>
     <div class="table-responsive">
-      <table class="<%= table_classes%>">
+      <table class="<%= table_classes %>">
         <tbody>
           <% @organizations.each do |organization| %>
             <tr>

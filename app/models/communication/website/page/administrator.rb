@@ -44,9 +44,14 @@
 #
 class Communication::Website::Page::Administrator < Communication::Website::Page
 
-
   def is_necessary_for_website?
     website.about && website.about&.respond_to?(:administrators)
+  end
+
+  def dependencies
+    super +
+    [website.config_default_languages] +
+    website.administrators.where(language_id: language_id).map(&:administrator)
   end
 
   protected
@@ -59,11 +64,5 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     website.special_page(Communication::Website::Page::Person, language: language)
   end
 
-  def type_git_dependencies
-    [
-      website.config_default_permalinks,
-      website&.administrators&.map(&:administrator)
-    ]
-  end
 
 end

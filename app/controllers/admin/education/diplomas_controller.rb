@@ -28,7 +28,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   def create
     @diploma.university = current_university
-    if @diploma.save_and_sync
+    if @diploma.save
       redirect_to [:admin, @diploma],
                   notice: t('admin.successfully_created_html', model: @diploma.to_s)
     else
@@ -38,7 +38,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   end
 
   def update
-    if @diploma.update_and_sync(diploma_params)
+    if @diploma.update(diploma_params)
       redirect_to [:admin, @diploma],
                   notice: t('admin.successfully_updated_html', model: @diploma.to_s)
     else
@@ -49,7 +49,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   end
 
   def destroy
-    @diploma.destroy_and_sync
+    @diploma.destroy
     redirect_to admin_education_diplomas_url,
                 notice: t('admin.successfully_destroyed_html', model: @diploma.to_s)
   end

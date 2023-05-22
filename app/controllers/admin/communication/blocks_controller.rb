@@ -12,7 +12,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       @block.heading_id = heading_id
       @block.save
     end
-    sync_with_git_if_necessary
   end
 
   def new
@@ -31,7 +30,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def create
     if @block.save
-      # No need to sync as content is empty
       redirect_to [:edit, :admin, @block],
                   notice: t('admin.successfully_created_html', model: @block.to_s)
     else
@@ -42,7 +40,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def update
     if @block.update(block_params)
-      sync_with_git_if_necessary
       redirect_to about_path,
                   notice: t('admin.successfully_updated_html', model: @block.to_s)
     else
@@ -60,17 +57,11 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def destroy
     path = about_path
     @block.destroy
-    sync_with_git_if_necessary
     redirect_to path,
                 notice: t('admin.successfully_destroyed_html', model: @block.to_s)
   end
 
   protected
-
-  def sync_with_git_if_necessary
-    return unless @block.about.respond_to?(:sync_with_git)
-    @block.about.sync_with_git
-  end
 
   def website_id
     params[:website_id] || @block.about&.website.id

@@ -121,9 +121,7 @@
   </div>
 </div>
 
-<% if @organization.experiences.any? %>
-  <h2><%= t('university.organization.employees') %></h2>
-
+<%= osuny_panel  t('university.organization.employees') do %>
   <div class="table-responsive">
     <table class="<%= table_classes %>">
       <thead>
@@ -150,7 +148,8 @@
       </tbody>
     </table>
   </div>
-<% end %>
+<% end if @organization.experiences.any? %>
+
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>

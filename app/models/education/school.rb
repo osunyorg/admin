@@ -25,17 +25,20 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
-  include Sanitizable
-  include WithCountry
-  include WithGit
   include Aboutable
+  include AsIndirectObject
+  include Sanitizable
+  include WithAlumni
+  include WithBlobs
+  include WithCountry
+  include WithGitFiles
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
-  include WithAlumni
 
   belongs_to  :university
 
-  has_many    :websites,
+  # 'websites' might override the same method defined in WithWebsites, so we use the full name
+  has_many    :communication_websites,
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
@@ -68,23 +71,11 @@ class Education::School < ApplicationRecord
     "data/school.yml"
   end
 
-  def git_dependencies(website)
-    dependencies = [self]
-    dependencies += programs +
-                    programs.map(&:active_storage_blobs).flatten +
-                    programs.map(&:git_block_dependencies).flatten
-    dependencies += diplomas +
-                    diplomas.map(&:git_block_dependencies).flatten
-    dependencies += teachers +
-                    teachers.map(&:teacher) +
-                    teachers.map(&:active_storage_blobs).flatten
-    dependencies += researchers +
-                    researchers.map(&:researcher) +
-                    researchers.map(&:active_storage_blobs).flatten
-    dependencies += administrators +
-                    administrators.map(&:administrator) +
-                    administrators.map(&:active_storage_blobs).flatten
-    dependencies
+  def dependencies
+    active_storage_blobs +
+    programs +
+    diplomas +
+    administrators.map(&:administrator)
   end
 
   #####################
@@ -97,5 +88,13 @@ class Education::School < ApplicationRecord
 
   def has_research_volumes?
     false
+  end
+
+  protected
+
+  def explicit_blob_ids
+    [
+      logo&.blob_id
+    ]
   end
 end

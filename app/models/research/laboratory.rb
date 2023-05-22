@@ -22,12 +22,13 @@
 #
 class Research::Laboratory < ApplicationRecord
   include Aboutable
+  include AsIndirectObject
   include Sanitizable
   include WithCountry
-  include WithGit
+  include WithGitFiles
 
   belongs_to  :university
-  has_many    :websites,
+  has_many    :communication_websites,
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify

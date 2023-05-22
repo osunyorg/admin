@@ -1,0 +1,23 @@
+<% content_for :title, 'Dépendances' %>
+<% content_for :title_right, @dependencies.count %>
+
+<div class="row">
+  <div class="col-xl-6">
+    <%= osuny_label 'Dépendances par type' %>
+    <table class="table">
+      <tbody>
+        <% @dependencies.collect(&:class).map{ |klass| klass.to_s }.uniq.sort.each do |dependency_class| %>
+          <tr>
+            <td><%= dependency_class %></td>
+            <td><%= @dependencies.count { |dependency| dependency.class.to_s == dependency_class } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xl-6">
+    <%= osuny_label 'Dépendances détaillées' %>
+    <%= render 'admin/communication/websites/dependencies/list', dependencies: @dependencies %>
+  </div>
+</div>
+

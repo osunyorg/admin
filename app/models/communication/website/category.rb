@@ -41,25 +41,23 @@
 #  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Category < ApplicationRecord
+  include AsDirectObject
   include Sanitizable
-  include WithUniversity
-  include WithGit
-  include WithFeaturedImage
   include WithBlobs
   include WithBlocks
+  include WithFeaturedImage
   include WithMenuItemTarget
-  include WithSlug # We override slug_unavailable? method
-  include WithTree
   include WithPermalink
   include WithPosition
+  include WithSlug # We override slug_unavailable? method
   include WithTranslations
+  include WithTree
+  include WithUniversity
 
   has_one                 :imported_category,
                           class_name: 'Communication::Website::Imported::Category',
                           dependent: :destroy
   belongs_to              :university
-  belongs_to              :website,
-                          foreign_key: :communication_website_id
   belongs_to              :parent,
                           class_name: 'Communication::Website::Category',
                           optional: true
@@ -95,12 +93,14 @@ class Communication::Website::Category < ApplicationRecord
     "admin/communication/websites/categories/static"
   end
 
-  def git_dependencies(website)
-    [self, parent].compact + siblings + descendants + git_block_dependencies + active_storage_blobs + posts + website.menus
+  def dependencies
+    active_storage_blobs +
+    blocks +
+    children
   end
 
-  def git_destroy_dependencies(website)
-    [self] + descendants + active_storage_blobs
+  def references
+    posts + [parent]
   end
 
   def update_children_paths

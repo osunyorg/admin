@@ -1,30 +1,32 @@
 <%
+about ||= nil
 expanded ||= false
+dependencies ||= about&.dependencies
+active_storage_blobs ||= about&.active_storage_blobs
 %>
 <% if current_user.server_admin? %>
-<i  class="<%= Icon::SETTINGS %> text-muted"
+<i  class="<%= Icon::SETTINGS %>"
+    style="opacity: 0.1"
     data-bs-toggle="collapse"
     data-bs-target="#dependencies"
     aria-expanded="<%= expanded %>"
     aria-controls="dependencies"></i>
 <div id="dependencies" class="collapse">
   <%= osuny_panel 'Dependencies', subtitle: 'Only for server admins' do %>
-    <h2 class="h5">git_dependencies</h2>
+    <h2 class="h5">dependencies</h2>
     <div class="table-responsive">
       <table class="<%= table_classes %>">
           <thead>
               <tr>
-                  <th>Id</th>
-                  <th>Class</th>
                   <th>Name</th>
+                  <th>Class</th>
               </tr>
           </thead>
           <tbody>
-              <% git_dependencies.each do |dependency| %>
+              <% dependencies.each do |dependency| %>
                   <tr>
-                      <td><%= dependency.id %></td>
-                      <td><%= dependency.class %></td>
                       <td><%= dependency.to_s %></td>
+                      <td><%= dependency.class %></td>
                   </tr>
               <% end %>
           </tbody>

@@ -40,12 +40,13 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithBlobs
   include WithBlocks
   include WithCountry
   include WithGeolocation
-  include WithGit
+  include WithGitFiles
   include WithPermalink
   include WithSlug
   include WithUniversity
@@ -105,24 +106,9 @@ class University::Organization < ApplicationRecord
     government: 30
   }
 
-  def git_dependencies(website)
-    dependencies = []
-    if for_website?(website)
-      dependencies << self
-      dependencies.concat active_storage_blobs
-      dependencies.concat git_block_dependencies
-    end
-    dependencies += website.menus.to_a
-    dependencies += dependencies_through_blocks(website)
-    dependencies
-  end
-
-  def websites
-    university.communication_websites
-  end
-
-  def for_website?(website)
-    in_block_dependencies?(website)
+  def dependencies
+    active_storage_blobs +
+    blocks
   end
 
   def git_path(website)

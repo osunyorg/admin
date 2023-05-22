@@ -51,6 +51,7 @@
 #
 class Education::Program < ApplicationRecord
   include Aboutable
+  include AsIndirectObject
   include Sanitizable
   include WithAccessibility
   include WithAlumni
@@ -58,7 +59,7 @@ class Education::Program < ApplicationRecord
   include WithBlocks
   include WithDiploma
   include WithFeaturedImage
-  include WithGit
+  include WithGitFiles
   include WithInheritance
   include WithMenuItemTarget
   include WithPermalink
@@ -68,7 +69,7 @@ class Education::Program < ApplicationRecord
   include WithTeam
   include WithTree
   include WithUniversity
-  include WithWebsites
+  include WithWebsitesCategories
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
@@ -142,42 +143,24 @@ class Education::Program < ApplicationRecord
     "#{clean_path}_index.html"
   end
 
-  def git_dependencies(website)
-    [self] +
-    siblings +
-    descendants +
+  def dependencies
     active_storage_blobs +
-    git_block_dependencies +
-    university_people_through_involvements +
-    university_people_through_involvements.map(&:active_storage_blobs).flatten +
+    blocks +
     university_people_through_involvements.map(&:teacher) +
-    university_people_through_role_involvements +
-    university_people_through_role_involvements.map(&:active_storage_blobs).flatten +
     university_people_through_role_involvements.map(&:administrator) +
-    website.menus +
     [diploma]
   end
 
-  def git_destroy_dependencies(website)
-    [self] +
-    explicit_active_storage_blobs
+  def references
+    references = schools + siblings + descendants
+    references << parent if parent.present?
+    references
   end
 
   def update_children_paths
     children.each do |child|
       child.update_column :path, child.generated_path
       child.update_children_paths
-    end
-  end
-
-  def for_website?(website)
-    case website.about
-    when Education::School
-      school_ids.include? website.about_id
-    when Education::Program
-      id == website.about_id || ancestors.map(&:id).include?(website.about_id)
-    else
-      false
     end
   end
 

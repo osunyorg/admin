@@ -3,6 +3,15 @@ module Communication::Website::WithConfigs
 
   included do
 
+    def configs
+      [
+        config_default_languages,
+        config_default_permalinks,
+        config_development_config,
+        config_production_config
+      ]
+    end
+
     def config_default_languages
       @config_default_languages ||= Communication::Website::Configs::DefaultLanguages.find(id)
     end

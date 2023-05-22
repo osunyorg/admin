@@ -1,5 +1,6 @@
 class Communication::Block::Component::Base
-  include WithAccessibility
+  include Accessible
+  include WithDependencies
 
   attr_reader :property, :template
 
@@ -25,15 +26,15 @@ class Communication::Block::Component::Base
     self.class.name.demodulize.underscore
   end
 
-  def git_dependencies
-    []
-  end
-
   def website
     template.block.about&.website
   end
 
   def translate!
     # By default, does nothing. Specific cases are handled in their own definitions. (example: post)
+  end
+
+  def to_s
+    self.class.to_s.demodulize
   end
 end
