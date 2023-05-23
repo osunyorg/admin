@@ -54,6 +54,8 @@ module AsIndirectObject
   protected
 
   def direct_sources_from_reference(reference)
+    # Early-return to ignore contexts without connections (ex: extranets)
+    return [] unless reference.respond_to?(:is_direct_object?)
     reference.is_direct_object? ? [reference] # Récupération de la connexion directe
                                 : reference.direct_sources_from_existing_connections # Récupération via les connexions des références
   end
