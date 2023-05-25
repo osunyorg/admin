@@ -107,6 +107,8 @@ module Communication::Website::WithConnectedObjects
     # On ne connecte pas le site à lui-même
     !indirect_object.is_a?(Communication::Website) &&
     # On ne connecte pas les objets directs (en principe ça n'arrive pas)
-    !indirect_object.try(:is_direct_object?)
+    !indirect_object.try(:is_direct_object?) &&
+    # On ne connecte pas des objets qui ne sont pas issus de modèles ActiveRecord (comme les composants des blocs)
+    indirect_object.is_a?(ActiveRecord::Base)
   end
 end
