@@ -27,9 +27,7 @@
   <%= render 'admin/communication/blocks/content/editor', about: @page %>
 <% end %>
 
-<%= render 'admin/application/dependencies',
-            git_dependencies: @page.git_dependencies(@page.website),
-            active_storage_blobs: @page.active_storage_blobs %>
+<%= render 'admin/application/dependencies', about: @page %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @page if @page.is_regular_page? %>
