@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
-#  admin_theme                   :integer          default("appstack")
+#  admin_theme                   :integer          default("pure")
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           indexed
 #  confirmed_at                  :datetime

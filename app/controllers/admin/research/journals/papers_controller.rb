@@ -78,7 +78,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
           .permit(
             :title, :slug, :text, :published, :published_at, :received_at, :accepted_at,
             :summary, :abstract, :meta_description, :doi, :authors_list,
-            :pdf, :references, :keywords, :research_journal_volume_id, :kind_id, person_ids: [])
+            :pdf, :bibliography, :keywords, :research_journal_volume_id, :kind_id, person_ids: [])
           .merge(university_id: current_university.id)
   end
 end

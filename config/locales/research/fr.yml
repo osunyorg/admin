@@ -53,34 +53,34 @@ fr:
         title: Titre
       research/journal/paper:
         abstract: Extrait
+        accepted_at: Accepté le
         authors_list: Liste des auteur·e·s
+        bibliography: Bibliographie
         doi: DOI
         keywords: Mots clés
-        pdf: PDF
-        published: Publié ?
-        published_at: Publié le
-        accepted_at: Accepté le
-        received_at: Reçu le
-        references: Références
         kind: Type de papier
+        pdf: PDF
         people: Auteur·e·s
+        published_at: Publié le
+        published: Publié ?
+        received_at: Reçu le
         text: Texte
         title: Titre
       research/journal/paper/kind:
         title: Titre
       research/journal/volume:
-        featured_image: Couverture
         featured_image_alt: Texte alternatif
+        featured_image: Couverture
         keywords: Mots clés
         number: Numéro
-        published: Publié ?
         published_at: Publié le
+        published: Publié ?
         text: Texte
         title: Titre
       research/laboratory:
         address: Adresse
-        country: Pays
         city: Ville
+        country: Pays
         name: Nom
         zipcode: Code postal
       research/laboratory/axis:

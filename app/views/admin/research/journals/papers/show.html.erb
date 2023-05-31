@@ -17,9 +17,9 @@
           <%= osuny_label Research::Journal::Paper.human_attribute_name('text') %>
           <%= sanitize @paper.text %>
         <% end %>
-        <% if has_content?(@paper.references)%>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('references') %>
-          <%= sanitize @paper.references %>
+        <% if has_content?(@paper.bibliography)%>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('bibliography') %>
+          <%= sanitize @paper.bibliography %>
         <% end %>
       <% end %>
       <%= render 'admin/communication/blocks/list', about: @paper %>
