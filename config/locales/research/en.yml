@@ -53,34 +53,34 @@ en:
         title: Title
       research/journal/paper:
         abstract: Abstract
+        accepted_at: Accepted at
         authors_list: Authors list
+        bibliography: Bibliography
         doi: DOI
         keywords: Keywords
-        pdf: PDF
-        published: Published?
-        published_at: Published at
-        accepted_at: Accepted at
-        received_at: Received at
-        bibliography: Bibliography
         kind: Kind of paper
+        pdf: PDF
         people: Authors
+        published_at: Published at
+        published: Published?
+        received_at: Received at
         text: Text
         title: Title
       research/journal/paper/kind:
         title: Title
       research/journal/volume:
-        featured_image: Cover
         featured_image_alt: Alt text
+        featured_image: Cover
         keywords: Keywords
         number: Number
-        published: Published?
         published_at: Published at
+        published: Published?
         text: Text
         title: Title
       research/laboratory:
         address: Address
-        country: Country
         city: City
+        country: Country
         name: Name
         zipcode: Zipcode
       research/laboratory/axis:
@@ -90,8 +90,8 @@ en:
       research/thesis:
         abstract: Abstract
         author: Author
-        completed: Completed?
         completed_at: Completed at
+        completed: Completed?
         director: Director
         laboratory: Laboratory
         started_at: Started at
