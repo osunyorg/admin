@@ -97,11 +97,9 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def dependencies
-    calculated_dependencies = active_storage_blobs
-    # children are used only if here is no block to display
-    if blocks.any?
-      calculated_dependencies += blocks
-    else
+    calculated_dependencies = active_storage_blobs + blocks
+    # children are used only if there is no block to display
+    unless blocks.published.any?
       calculated_dependencies += children
     end
     calculated_dependencies
