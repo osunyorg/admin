@@ -104,6 +104,7 @@ class Communication::Website::Page < ApplicationRecord
     else
       calculated_dependencies += children
     end
+    calculated_dependencies
   end
 
   def references
