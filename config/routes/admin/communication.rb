@@ -7,9 +7,10 @@ namespace :communication do
     member do
       get :import
       post :import
-      get :style
       get :analytics
     end
+    get 'style' => 'websites/preview#style', as: :style
+    get 'assets/*path' => 'websites/preview#assets'
     resources :dependencies, controller: 'websites/dependencies', only: :index
     resources :connections, controller: 'websites/connections', only: [:index, :show]
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do

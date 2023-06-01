@@ -15,10 +15,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     breadcrumb
   end
 
-  def style
-    render body: @website.preview_style, content_type: "text/css"
-  end
-
   def analytics
     breadcrumb
     add_breadcrumb t('communication.website.analytics')

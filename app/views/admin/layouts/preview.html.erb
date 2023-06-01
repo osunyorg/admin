@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><%= yield :title %></title>
     <% if @website %>
-      <link rel="stylesheet" media="all" href="<%= style_admin_communication_website_path @website.id, website_id: nil %>" />
+      <link rel="stylesheet" media="all" href="<%= admin_communication_website_style_path @website.id %>" />
     <% else %>
       <%= stylesheet_link_tag 'admin/pure', media: 'all' %>
     <% end %>
+    <style>
+    // En prévisualisation il n'y a pas de menu, donc pas besoin de laisser de la place au-dessus du hero
+    .hero {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    </style>
   </head>
   <body class="full-width">
     <header class="hero">
