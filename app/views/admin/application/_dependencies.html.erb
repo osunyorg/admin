@@ -2,7 +2,7 @@
 about ||= nil
 expanded ||= false
 dependencies ||= about&.dependencies
-active_storage_blobs ||= about&.active_storage_blobs
+active_storage_blobs ||= about.respond_to?(:active_storage_blobs) ? about&.active_storage_blobs : []
 %>
 <% if current_user.server_admin? %>
 <i  class="<%= Icon::SETTINGS %>"
