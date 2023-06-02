@@ -97,6 +97,22 @@ class Communication::Website < ApplicationRecord
     id
   end
 
+  # Override to follow direct objects
+  def sync_with_git
+    return unless website.git_repository.valid?
+    if syncable?
+      Communication::Website::GitFile.sync website, self
+      recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
+        Communication::Website::GitFile.sync website, object
+      end
+      references.each do |object|
+        Communication::Website::GitFile.sync website, object
+      end
+    end
+    website.git_repository.sync!
+  end
+  handle_asynchronously :sync_with_git, queue: 'default'
+
   protected
 
   def sanitize_fields
