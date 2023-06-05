@@ -105,7 +105,8 @@ class Communication::Website::Page < ApplicationRecord
 
   def references
     [parent] +
-    menu_items
+    menu_items +
+    abouts_with_page_block
   end
 
   def to_s
@@ -145,5 +146,9 @@ class Communication::Website::Page < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def abouts_with_page_block
+    website.blocks.pages.collect(&:about)
   end
 end
