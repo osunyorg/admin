@@ -1,5 +1,5 @@
 <%# TODO: Traduire les formations %>
-<% programs = current_university.programs.ordered %>
+<% programs = @block.template.available_programs %>
 <% if label.present? %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">
