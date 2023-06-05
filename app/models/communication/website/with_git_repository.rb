@@ -17,12 +17,7 @@ module Communication::Website::WithGitRepository
   def sync_indirect_object_with_git(indirect_object)
     return unless git_repository.valid?
     indirect_object.direct_sources.each do |direct_source|
-      next unless direct_source.syncable?
-      Communication::Website::GitFile.sync self, direct_source
-      direct_source.recursive_dependencies(syncable_only: true).each do |object|
-        Communication::Website::GitFile.sync self, object
-      end
-      # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
+      add_direct_source_to_sync(direct_source)
     end
     git_repository.sync!
   end
@@ -51,5 +46,16 @@ module Communication::Website::WithGitRepository
   def should_clean_on_git?
     # Clean website if about was present and changed OR a language was removed
     (saved_change_to_about_id? && about_id_before_last_save.present?) || language_was_removed
+  end
+
+  protected
+
+  def add_direct_source_to_sync(direct_source)
+    return unless direct_source.syncable?
+    Communication::Website::GitFile.sync self, direct_source
+    direct_source.recursive_dependencies(syncable_only: true).each do |object|
+      Communication::Website::GitFile.sync self, object
+    end
+    # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
   end
 end
