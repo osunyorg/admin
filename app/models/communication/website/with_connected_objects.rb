@@ -78,6 +78,7 @@ module Communication::Website::WithConnectedObjects
       direct_source.recursive_dependencies(syncable_only: true).each do |object|
         Communication::Website::GitFile.sync self, object
       end
+      # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
     end
     git_repository.sync!
   end
