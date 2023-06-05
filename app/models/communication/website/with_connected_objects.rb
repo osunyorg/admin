@@ -69,6 +69,20 @@ module Communication::Website::WithConnectedObjects
     University::Organization.where(id: ids)
   end
 
+  # Synchronisation optimale d'objet indirect
+  def sync_indirect_object_with_git(indirect_object)
+    return unless git_repository.valid?
+    indirect_object.direct_sources.each do |direct_source|
+      next unless direct_source.syncable?
+      Communication::Website::GitFile.sync self, direct_source
+      direct_source.recursive_dependencies(syncable_only: true).each do |object|
+        Communication::Website::GitFile.sync self, object
+      end
+    end
+    git_repository.sync!
+  end
+  handle_asynchronously :sync_indirect_object_with_git, queue: 'default'
+
   # ensure the object "website" respond to both is_direct_object? and is_indirect_object? as website doesn't include neither as_direct_object nor as_indirect_object
   def is_direct_object?
     true

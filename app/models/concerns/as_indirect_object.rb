@@ -63,7 +63,9 @@ module AsIndirectObject
   def connect_and_sync_direct_sources
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
-      direct_source.sync_with_git
+    end
+    websites.each do |website|
+      website.sync_indirect_object_with_git self
     end
   end
 end
