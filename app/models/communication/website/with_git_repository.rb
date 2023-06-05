@@ -13,6 +13,21 @@ module Communication::Website::WithGitRepository
     @git_repository ||= Git::Repository.new self
   end
 
+  # Synchronisation optimale d'objet indirect
+  def sync_indirect_object_with_git(indirect_object)
+    return unless git_repository.valid?
+    indirect_object.direct_sources.each do |direct_source|
+      next unless direct_source.syncable?
+      Communication::Website::GitFile.sync self, direct_source
+      direct_source.recursive_dependencies(syncable_only: true).each do |object|
+        Communication::Website::GitFile.sync self, object
+      end
+      # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
+    end
+    git_repository.sync!
+  end
+  handle_asynchronously :sync_indirect_object_with_git, queue: 'default'
+
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
     website_git_files.find_each do |git_file|
