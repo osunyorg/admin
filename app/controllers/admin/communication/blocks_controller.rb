@@ -7,8 +7,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       @block = current_university.communication_blocks.find(id)
-      @block.update position: index + 1
+      @block.update_column(:position, index + 1)
     end
+    @block.about.touch
   end
 
   def new
