@@ -129,7 +129,8 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def references
-    menu_items
+    menu_items +
+    abouts_with_post_block
   end
 
   def url
@@ -183,5 +184,9 @@ class Communication::Website::Post < ApplicationRecord
       translation.categories << translated_category
     end
     translation.update(author_id: author.find_or_translate!(translation.language).id) if author_id.present?
+  end
+
+  def abouts_with_post_block
+    website.blocks.posts.collect(&:about)
   end
 end
