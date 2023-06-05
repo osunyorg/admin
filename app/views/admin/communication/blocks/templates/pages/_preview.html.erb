@@ -13,7 +13,9 @@ class_name += " block-pages--" + @block.template.layout
           <% unless @block.title.blank? %>
 
             <% if @block.template.layout === "cards" || @block.template.layout === "list" %>
-              <h2><%= link_to @block.template.page, @block.template.page.url %></h2>
+              <% if @block.template.page %>
+                <h2><%= link_to @block.template.page, @block.template.page.url %></h2>
+              <% end %>
             
             <% elsif @block.template.layout === "grid" && @block.template.page && @block.template.show_main_description %>
               <h2><%= link_to @block.title, @block.template.page.url %></h2>
