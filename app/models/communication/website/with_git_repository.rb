@@ -25,6 +25,7 @@ module Communication::Website::WithGitRepository
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
+    return unless git_repository.valid?
     website_git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
