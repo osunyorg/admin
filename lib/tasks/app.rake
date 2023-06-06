@@ -9,7 +9,8 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     Communication::Website.find_each do |website|
-      MigrateWebsiteConnectionsJob.perform_later(website.id)
+      website.destroy_obsolete_git_files_without_delay
+      website.save_and_sync
     end
   end
 
