@@ -52,7 +52,7 @@ module Communication::Website::WithGitRepository
 
   def add_direct_source_to_sync(direct_source)
     # Ne pas traiter les sources d'autres sites
-    return unless direct_source.website_id == self.id
+    return unless direct_source.communication_website_id == self.id
     # Ne pas traiter les sources non synchronisables
     return unless direct_source.syncable?
     Communication::Website::GitFile.sync self, direct_source
