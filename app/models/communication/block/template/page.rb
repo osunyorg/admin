@@ -1,7 +1,7 @@
 class Communication::Block::Template::Page < Communication::Block::Template::Base
 
   has_elements
-  has_layouts [:grid, :list, :cards]
+  has_layouts [:grid, :list, :cards, :alternate]
   has_component :mode, :option, options: [:selection, :children]
   has_component :text, :rich_text
   has_component :page_id, :page
