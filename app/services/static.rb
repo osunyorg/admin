@@ -28,8 +28,18 @@ class Static
         website: website
       }
     )
+    code = remove_problematic_characters(code)
+    code
+  end
+
+  protected
+
+  def self.remove_problematic_characters(code)
     # We don't want &#39; in the frontmatters!
-    code = code.gsub "&#39\;", "'"
+    code = code.gsub("&#39\;", "'")
+    # /u2028 breaks Hugo rendering
+    # https://github.com/noesya/pixelis-rapportglobal2023/issues/1
+    code = code.remove("\u2028".encode('utf-8'))
     code
   end
 end
