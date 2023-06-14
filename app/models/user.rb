@@ -61,6 +61,8 @@ class User < ApplicationRecord
   include WithAdminTheme
   include WithAuthorship
   include WithAvatar
+  include WithFavorites
+  # FIXME y a-t-il des couplages temporels qui justifient l'ordre ci-dessous ?
   include WithRegistrationContext
   include WithUniversity
   include WithAuthentication

@@ -9,6 +9,7 @@
     <% end %>
   <% end %>
   <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
+  <%= render 'admin/application/favorites/widget', about: @journal %>
 <% end %>
 
 <%= render 'admin/research/journals/sidebar' do %>

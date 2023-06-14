@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_080634) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_14_062545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1048,6 +1048,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_080634) do
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end
 
+  create_table "user_favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "about_type", null: false
+    t.uuid "about_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_user_favorites_on_about"
+    t.index ["user_id"], name: "index_user_favorites_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "first_name"
@@ -1214,6 +1224,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_080634) do
   add_foreign_key "university_person_involvements", "universities"
   add_foreign_key "university_person_involvements", "university_people", column: "person_id"
   add_foreign_key "university_roles", "universities"
+  add_foreign_key "user_favorites", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end
