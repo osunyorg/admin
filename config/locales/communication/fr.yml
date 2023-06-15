@@ -490,6 +490,9 @@ fr:
               list:
                 label: Liste
                 description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
+              alternate:
+                label: Alternance
+                description: Une alternance très légère graphiquement de pages, rythmée entre la gauche et la droite.
             edit:
               mode:
                 label: Type de liste
@@ -583,6 +586,14 @@ fr:
             description: Une sélection de formations.
             edit:
               add: Ajouter une formation
+          sound: 
+            description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
+            edit:
+              file:
+                label: Fichier audio pour diffusion Web (.mp3, .m4a...)
+              title: 
+                label: Titre de l'enregistrement
+                placeholder: Entrer le titre
           testimonials:
             description: Un ou plusieurs témoignages, avec le texte, l'auteur, sa fonction et sa photo.
             edit:
@@ -757,6 +768,7 @@ fr:
           partners: Organisations
           posts: Actualités
           programs: Formations
+          sound: Son
           testimonials: Témoignages
           timeline: Frise chronologique
           video: Vidéo

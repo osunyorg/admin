@@ -50,3 +50,19 @@
         right: 0
         z-index: 100
         position: sticky
+
+nav[aria-label="breadcrumb"]
+    margin-left: calc(-1 * var(--bs-gutter-x))
+    margin-right: calc(-1 * var(--bs-gutter-x))
+    overflow-x: scroll
+    padding-left: var(--bs-gutter-x)
+    padding-right: var(--bs-gutter-x)
+    .breadcrumb
+        align-items: center
+        flex-wrap: nowrap
+        .breadcrumb-item
+            flex-shrink: 0
+            white-space: nowrap
+            &:last-of-type
+                padding-right: var(--bs-gutter-x)
+                

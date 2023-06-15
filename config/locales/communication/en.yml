@@ -490,6 +490,9 @@ en:
               list:
                 label: List
                 description: The main page's short description is used as a big text, and the pages are listed on the right.
+              alternate:
+                label: Alternate
+                description: Pages either on the left or on the right, composing a graphically light layout.
             edit:
               mode:
                 label: List kind
@@ -583,6 +586,14 @@ en:
             description: A selection of programs.
             edit:
               add: Add a program
+          sound: 
+            description: An audio recording with a text transcription for a proper accessibility.
+            edit:
+              file:
+                label: Audio file encoded for the Web (.mp3, .m4a...)
+              title: 
+                label: Recording title
+                placeholder: Enter the title
           testimonials:
             description: One or more testimonies
             edit:
@@ -757,6 +768,7 @@ en:
           partners: Organizations
           posts: Posts
           programs: Programs
+          sound: Sound
           testimonials: Testimonials
           timeline: Timeline
           video: Video

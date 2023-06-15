@@ -61,10 +61,10 @@ module WithDependencies
   # On ne liste pas les objets en cours de suppression
   # return array if respond_to?(:mark_for_destruction?) && mark_for_destruction
   # On renvoie l'array tel quel, non modifié, si on demande les contenus syncable_only et que le contenu ne l'est pas
-  def recursive_dependencies(array: [], syncable_only: false)
-    if dependency_should_be_synced?(self, syncable_only) 
+  def recursive_dependencies(array: [], syncable_only: false, follow_direct: false)
+    if dependency_should_be_synced?(self, syncable_only)
       dependencies.each do |dependency|
-        array = recursive_dependencies_add(array, dependency, syncable_only)
+        array = recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
       end
     end
     array.compact
@@ -74,15 +74,20 @@ module WithDependencies
     @recursive_dependencies_syncable ||= recursive_dependencies(syncable_only: true)
   end
 
+  def recursive_dependencies_syncable_following_direct
+    @recursive_dependencies_syncable_following_direct ||= recursive_dependencies(syncable_only: true, follow_direct: true)
+  end
+
   protected
 
-  def recursive_dependencies_add(array, dependency, syncable_only)
+  def recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
     # Si l'objet ne doit pas être ajouté on n'ajoute pas non plus ses dépendances récursives
     # C'est le fait de couper ici qui évite la boucle infinie
     return array unless dependency_should_be_added?(array, dependency, syncable_only)
     array << dependency
+    return array if !follow_direct && dependency.try(:is_direct_object?)
     return array unless dependency.respond_to?(:recursive_dependencies)
-    dependency.recursive_dependencies(array: array, syncable_only: syncable_only)
+    dependency.recursive_dependencies(array: array, syncable_only: syncable_only, follow_direct: follow_direct)
   end
 
   # Si l'objet est déjà là, on ne doit pas l'ajouter

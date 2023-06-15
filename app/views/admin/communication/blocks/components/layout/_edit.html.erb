@@ -35,7 +35,9 @@ layouts = template.class.layouts
                           v-model="data.layout"
                           value="<%= layout %>"
                           id="layout-<%= layout %>">
-                  <h3 class="h4"><%= name %></h3>
+                  <label for="layout-<%= layout %>">
+                    <b><%= name %></b>
+                  </label>
                 </div>
                 <p><%= description %></p>
               </div>

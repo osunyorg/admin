@@ -106,7 +106,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_074432) do
     t.string "title"
     t.boolean "published", default: true
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
+    t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
     t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
@@ -770,7 +772,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_074432) do
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id"
     t.text "abstract"
-    t.text "references"
+    t.text "bibliography"
     t.text "keywords"
     t.string "slug"
     t.boolean "published", default: false
@@ -1098,6 +1100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_074432) do
   add_foreign_key "communication_block_headings", "communication_block_headings", column: "parent_id"
   add_foreign_key "communication_block_headings", "universities"
   add_foreign_key "communication_blocks", "communication_block_headings", column: "heading_id"
+  add_foreign_key "communication_blocks", "communication_websites"
   add_foreign_key "communication_blocks", "universities"
   add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_connections", "universities"

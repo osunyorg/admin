@@ -22,6 +22,10 @@ dates:
 <% if @about.pdf.attached? %>
 pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
+<% if @about.bibliography %>
+bibliography: >
+  <%= prepare_html_for_static @about.bibliography, @about.university %>
+<% end %>
 keywords: >
   <%= prepare_text_for_static @about.keywords %>
 researchers:

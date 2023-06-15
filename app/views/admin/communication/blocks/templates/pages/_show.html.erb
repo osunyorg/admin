@@ -13,11 +13,13 @@ class_name += " block-pages--" + block.template.layout
           <% unless block.title.blank? %>
 
             <% if block.template.layout === "cards" || block.template.layout === "list" %>
-              <h2><%= link_to block.template.page, block.template.page.url %></h2>
+              <% if block.template.page %>
+                <h2><%= link_to block.template.page, block.template.page.url %></h2>
+              <% end %>
             
             <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
               <h2><%= link_to block.title, block.template.page.url %></h2>
-              <p class="description"><%= block.template.page.summary %></p>
+              <p class="description"><%= block.template.page&.summary %></p>
 
             <% else %>
               <h2><%= block.title %></h2>
@@ -26,12 +28,12 @@ class_name += " block-pages--" + block.template.layout
           <% end %>
           <% if block.template.layout === "cards" && block.template.show_main_description && block.data %>
             <div class="description">
-              <p><%= block.template.page.summary %></p>
+              <p><%= block.template.page&.summary %></p>
             </div>
           <% end %>
         </div>
         <% if block.template.layout === "list" && block.template.show_main_description && block.data %> 
-          <p class="description"><%= block.template.page.summary %></p>
+          <p class="description"><%= block.template.page&.summary %></p>
         <% end %>
       <% end %>
       <% if block.data %>

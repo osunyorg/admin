@@ -6,6 +6,7 @@
 #  abstract                   :text
 #  accepted_at                :date
 #  authors_list               :text
+#  bibliography               :text
 #  doi                        :string
 #  keywords                   :text
 #  meta_description           :text
@@ -13,7 +14,6 @@
 #  published                  :boolean          default(FALSE)
 #  published_at               :datetime
 #  received_at                :date
-#  references                 :text
 #  slug                       :string
 #  summary                    :text
 #  text                       :text
@@ -54,7 +54,7 @@ class Research::Journal::Paper < ApplicationRecord
   include WithSlug
   include WithUniversity
 
-  has_summernote :references
+  has_summernote :bibliography
   has_summernote :text
   has_one_attached :pdf
 

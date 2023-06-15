@@ -97,14 +97,16 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def dependencies
-    active_storage_blobs +
-    blocks +
-    children
+    calculated_dependencies = active_storage_blobs + blocks
+    # children are used only if there is no block to display
+    calculated_dependencies += children unless blocks.published.any?
+    calculated_dependencies
   end
 
   def references
     [parent] +
-    menu_items
+    menu_items +
+    abouts_with_page_block
   end
 
   def to_s
@@ -144,5 +146,9 @@ class Communication::Website::Page < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def abouts_with_page_block
+    website.blocks.pages.collect(&:about)
   end
 end

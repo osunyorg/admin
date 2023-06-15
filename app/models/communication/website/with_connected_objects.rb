@@ -11,7 +11,7 @@ module Communication::Website::WithConnectedObjects
   # - par un objet avec des connexions lorsqu'il est destroyed
   # - par le website lui-même au changement du about
   def destroy_obsolete_connections
-    up_to_date_dependencies = recursive_dependencies
+    up_to_date_dependencies = recursive_dependencies(follow_direct: true)
     deletable_connection_ids = []
     connections.find_each do |connection|
       has_living_connection = up_to_date_dependencies.detect { |dependency|

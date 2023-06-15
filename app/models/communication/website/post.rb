@@ -130,7 +130,8 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def references
-    menu_items
+    menu_items +
+    abouts_with_post_block
   end
 
   def url
@@ -188,5 +189,15 @@ class Communication::Website::Post < ApplicationRecord
       translation.categories << translated_category
     end
     translation.update(author_id: author.find_or_translate!(translation.language).id) if author_id.present?
+  end
+
+  def abouts_with_post_block
+    website.blocks.posts.collect(&:about)
+    # Potentiel gain de performance (25%)
+    # Méthode collect : X abouts = X requêtes
+    # Méthode ci-dessous : X abouts = 6 requêtes
+    # website.categories.where(id: website.blocks.posts.where(about_type: "Communication::Website::Category").distinct.pluck(:about_id)) +
+    # website.pages.where(id: website.blocks.posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
+    # website.posts.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
   end
 end

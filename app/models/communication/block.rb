@@ -2,26 +2,32 @@
 #
 # Table name: communication_blocks
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  data          :jsonb
-#  position      :integer          default(0), not null
-#  published     :boolean          default(TRUE)
-#  template_kind :integer          default(NULL), not null
-#  title         :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  university_id :uuid             not null, indexed
+#  id                       :uuid             not null, primary key
+#  about_type               :string           indexed => [about_id]
+#  data                     :jsonb
+#  position                 :integer          default(0), not null
+#  published                :boolean          default(TRUE)
+#  template_kind            :integer          default(NULL), not null
+#  title                    :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  about_id                 :uuid             indexed => [about_type]
+#  communication_website_id :uuid             indexed
+#  heading_id               :uuid             indexed
+#  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_blocks_on_university_id  (university_id)
-#  index_communication_website_blocks_on_about  (about_type,about_id)
+#  index_communication_blocks_on_communication_website_id  (communication_website_id)
+#  index_communication_blocks_on_heading_id                (heading_id)
+#  index_communication_blocks_on_university_id             (university_id)
+#  index_communication_website_blocks_on_about             (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_18291ef65f  (university_id => universities.id)
+#  fk_rails_80e5625874  (communication_website_id => communication_websites.id)
+#  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
   include AsIndirectObject
@@ -35,6 +41,10 @@ class Communication::Block < ApplicationRecord
 
   belongs_to :about, polymorphic: true
   belongs_to :heading, optional: true
+  belongs_to  :communication_website,
+              class_name: "Communication::Website",
+              optional: true
+  alias       :website :communication_website
 
   # We do not use the :touch option of the belongs_to association
   # because we do not want to touch the about when destroying the block.
@@ -55,6 +65,7 @@ class Communication::Block < ApplicationRecord
     image: 51,
     gallery: 300,
     video: 52,
+    sound: 1005,
     key_figures: 56,
     features: 2010,
     datatable: 54,
@@ -73,7 +84,7 @@ class Communication::Block < ApplicationRecord
   }
 
   CATEGORIES = {
-    basic: [:chapter, :image, :video, :datatable],
+    basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :organization_chart, :partners, :programs],
     utilities: [:files, :definitions, :embed, :contact]
@@ -84,7 +95,7 @@ class Communication::Block < ApplicationRecord
 
   before_validation :set_heading_from_about, on: :create
   before_save :attach_template_blobs
-  before_validation :set_university_from_about, on: :create
+  before_validation :set_university_and_website_from_about, on: :create
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
@@ -144,8 +155,10 @@ class Communication::Block < ApplicationRecord
     about.blocks.ordered.last
   end
 
-  def set_university_from_about
+  def set_university_and_website_from_about
+    # about always have an university_id but can have no communication_website_id
     self.university_id = about.university_id
+    self.communication_website_id = about.try(:communication_website_id)
   end
 
   def check_accessibility

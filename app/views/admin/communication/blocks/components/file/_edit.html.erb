@@ -16,7 +16,7 @@ remove = t 'admin.communication.blocks.components.file.input.remove'
             :id="<%= dom_id.html_safe %>">
   </div>
   <div v-if="<%= model %>.<%= property %>.id">
-    <p><b>{{ element.file.filename }}</b></p>
+    <p><b>{{ <%= model %>.<%= property %>.filename }}</b></p>
     <a  class="btn btn-sm text-danger"
         v-on:click="<%= model %>.<%= property %>={}">
         <i class="<%= Icon::DELETE %>"></i>

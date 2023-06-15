@@ -15,6 +15,7 @@ module AsIndirectObject
               class_name: 'Communication::Website::Connection'
               # Pas dependent_destroy parce que le processus est plus sophistiqué, et est fait dans la méthode destroy du WithDependencies
     has_many  :websites,
+              -> { distinct },
               through: :connections
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
@@ -63,7 +64,9 @@ module AsIndirectObject
   def connect_and_sync_direct_sources
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
-      direct_source.sync_with_git
+    end
+    websites.each do |website|
+      website.sync_indirect_object_with_git self
     end
   end
 end

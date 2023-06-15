@@ -9,9 +9,6 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     ContentMigration.run
-    Communication::Website.find_each do |website|
-      MigrateWebsiteConnectionsJob.perform_later(website.id)
-    end
   end
 
   namespace :websites do
