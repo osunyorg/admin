@@ -1,4 +1,3 @@
-/* global $ */
 window.osuny.communication.websites = {
     init: function () {
         'use strict';
@@ -14,7 +13,7 @@ window.osuny.communication.websites = {
     initEvents: function () {
         'use strict';
         var i;
-        for (i = 0 ; i < this.languagesCheckboxes.length ; i += 1) {
+        for (i = 0; i < this.languagesCheckboxes.length; i += 1) {
             this.languagesCheckboxes[i].addEventListener('change', this.onChangeCheckbox.bind(this));
         }
     },
@@ -26,13 +25,13 @@ window.osuny.communication.websites = {
             i;
 
         // Clean options
-        this.defaultLanguageSelect.innerHTML = "";
+        this.defaultLanguageSelect.innerHTML = '';
 
         // Re-hydrate options
         for (i = 0; i < this.defaultLanguageOptions.length; i += 1) {
             languageOption = this.defaultLanguageOptions[i];
-            languageCheckbox = document.querySelector('.js-languages input[type="checkbox"][value="' + languageOption.value + '"]')
-            if (languageOption.value === "" || languageCheckbox.checked) {
+            languageCheckbox = document.querySelector('.js-languages input[type="checkbox"][value="' + languageOption.value + '"]');
+            if (languageOption.value === '' || languageCheckbox.checked) {
                 this.defaultLanguageSelect.appendChild(languageOption);
             }
         }

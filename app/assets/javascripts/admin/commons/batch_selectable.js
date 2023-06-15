@@ -17,9 +17,14 @@ window.osuny.BatchSelectable.prototype.initEvents = function () {
     }
     if (this.actionsContainer !== null) {
         for (i = 0; i < this.selectSingleInputs.length; i += 1) {
-            this.selectSingleInputs[i].addEventListener('change', this.toggleActionsContainer.bind(this));
+            this.initSingleInputEvent(this.selectSingleInputs[i]);
         }
     }
+};
+
+window.osuny.BatchSelectable.prototype.initSingleInputEvent = function (input) {
+    'use strict';
+    input.addEventListener('change', this.toggleActionsContainer.bind(this));
 };
 
 window.osuny.BatchSelectable.prototype.toggleSingleInputs = function (event) {
