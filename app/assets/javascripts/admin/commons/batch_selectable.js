@@ -11,13 +11,15 @@ window.osuny.BatchSelectable = function BatchSelectable (element) {
 
 window.osuny.BatchSelectable.prototype.initEvents = function () {
     'use strict';
-    var i;
+    var selectSingleInput,
+        i;
     if (this.selectAllInput !== null) {
         this.selectAllInput.addEventListener('change', this.toggleSingleInputs.bind(this));
     }
     if (this.actionsContainer !== null) {
         for (i = 0; i < this.selectSingleInputs.length; i += 1) {
-            this.selectSingleInputs[i].addEventListener('change', this.toggleActionsContainer.bind(this));
+            selectSingleInput = this.selectSingleInputs[i];
+            selectSingleInput.addEventListener('change', this.toggleActionsContainer.bind(this));
         }
     }
 };
