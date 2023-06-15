@@ -22,7 +22,7 @@ window.osuny.contentEditor = {
             i;
 
         this.elements = [];
-        for (i = 0 ; i < elementsContainers.length ; i += 1) {
+        for (i = 0; i < elementsContainers.length; i += 1) {
             elementInstance = new window.osuny.contentEditor.Element(elementsContainers[i]);
             this.elements.push(elementInstance);
         }
