@@ -64,6 +64,7 @@ class Communication::Block < ApplicationRecord
     image: 51,
     gallery: 300,
     video: 52,
+    sound: 1005,
     key_figures: 56,
     features: 2010,
     datatable: 54,
@@ -82,7 +83,7 @@ class Communication::Block < ApplicationRecord
   }
 
   CATEGORIES = {
-    basic: [:chapter, :image, :video, :datatable],
+    basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :organization_chart, :partners, :programs],
     utilities: [:files, :definitions, :embed, :contact]

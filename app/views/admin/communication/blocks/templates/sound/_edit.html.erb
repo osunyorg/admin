@@ -1,0 +1,11 @@
+<div class="row pure__row--small">
+  <div class="col-md-6">
+    <%= block_component_edit :file %>
+    <%= block_component_edit :title %>
+  </div>
+  <div class="col-md-6">
+    <%= block_component_edit :transcription,
+            label: t('admin.communication.blocks.components.text.transcription.label'),
+            placeholder: t('admin.communication.blocks.components.text.transcription.placeholder'), rows: 10 %>
+  </div>
+</div>
