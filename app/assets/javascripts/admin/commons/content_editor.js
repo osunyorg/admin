@@ -89,18 +89,12 @@ window.osuny.contentEditor = {
         'use strict';
         var item = event.item,
             kind = item.dataset.kind,
+            url = this.getUrlFromKind(kind),
             to = event.to,
             ids = [],
             headingId = null,
             child,
-            i,
-            url;
-
-        if (kind === 'block') {
-            url = this.sortBlocksUrl;
-        } else if (kind === 'heading') {
-            url = this.sortHeadingsUrl;
-        }
+            i;
 
         if (to.id !== 'content-editor-elements-root') {
             // Dragged to heading's children list
@@ -126,6 +120,15 @@ window.osuny.contentEditor = {
         this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging', 'content-editor__elements__root--dragging-block', 'content-editor__elements__root--dragging-heading');
     },
 
+    getUrlFromKind: function (kind) {
+        'use strict';
+        if (kind === 'block') {
+            return this.sortBlocksUrl;
+        } else if (kind === 'heading') {
+            return this.sortHeadingsUrl;
+        }
+        return null;
+    },
 
     getElementById: function (id) {
         'use strict';
