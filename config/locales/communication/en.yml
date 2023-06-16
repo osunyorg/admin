@@ -532,16 +532,17 @@ en:
               element:
                 id:
                   label: Organization
-                  name:
-                    label: Nom
-                    placeholder: Enter organization's name
-                    url:
-                      label: Website
-                      logo_label: Logo
-                      placeholder: https://
-                      remove_logo: Remove logo
                   placeholder: Choose organization
                   unregistered: Unregistered organization
+                name:
+                  label: Nom
+                  placeholder: Enter organization's name
+                url:
+                  label: Website
+                  placeholder: https://
+                logo:
+                  label: Logo
+                  remove_logo: Remove logo
               remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
