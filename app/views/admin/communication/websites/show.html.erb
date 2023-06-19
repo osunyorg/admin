@@ -10,6 +10,7 @@
                     @website.about,
                     [:admin, @website.about] unless @website.about.nil? %>)
   <% end %>
+  <%= render 'admin/application/favorites/widget', about: @website %>
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>

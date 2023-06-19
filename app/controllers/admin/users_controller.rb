@@ -23,6 +23,19 @@ class Admin::UsersController < Admin::ApplicationController
     add_breadcrumb t('edit')
   end
 
+  def favorite
+    operation = params[:operation]
+    id = params[:about_id]
+    type = params[:about_type]
+    about = type.constantize.find id
+    if operation == 'add'
+      current_user.add_favorite(about)
+    else
+      current_user.remove_favorite(about)
+    end
+    redirect_back fallback_location: [:admin, about]
+  end
+
   def create
     # we don't want the confirmation mail to be send when the user is created from admin!
     @user.skip_confirmation!

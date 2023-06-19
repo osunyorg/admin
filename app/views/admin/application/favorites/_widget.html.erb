@@ -1,0 +1,22 @@
+<div>
+  <% if current_user.favorite?(about)%>
+    <%= link_to admin_favorite_path(
+                  operation: :remove, 
+                  about_id: about.id, 
+                  about_type: about.class.polymorphic_name
+                ), method: :put do %>
+      <%= t 'user.favorites.remove' %>
+      <i class="fas fa-star"></i>
+    <% end %>
+
+  <% else %>
+    <%= link_to admin_favorite_path(
+                  operation: :add, 
+                  about_id: about.id, 
+                  about_type: about.class.polymorphic_name
+                ), method: :put do %>
+      <%= t 'user.favorites.add' %>
+      <i class="fa-regular fa-star"></i>
+    <% end %>
+  <% end %>
+</div>
