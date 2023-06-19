@@ -1,3 +1,4 @@
 <% content_for :title, @page.title %>
+<% content_for :summary, @page.summary %>
 <% content_for :image, kamifusen_tag(@page.best_featured_image) if @page.best_featured_image.attached? %>
 <%= render 'admin/communication/blocks/content/show', about: @page %>
