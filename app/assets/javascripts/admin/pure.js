@@ -9,8 +9,6 @@
 //= require simple_form_bs5_file_input
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
-// TODO remove appstack js
-// require appstack/app
 //= require sortablejs/Sortable
 //= require summernote/summernote-bs5
 //= require slug/slug

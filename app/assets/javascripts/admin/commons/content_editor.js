@@ -37,14 +37,6 @@ window.osuny.contentEditor = {
         this.sortableRootContainer = document.getElementById('content-editor-elements-root');
         this.sortableInstances = [];
 
-        // var root = document.getElementById("content-editor-elements-root");
-
-        // onStart
-        // this.sortableRootContainer.classList.add("content-editor__elements__root--dragging")
-
-        // onEnd
-        // this.sortableRootContainer.classList.remove("content-editor__elements--root--dragging")
-
         for (i = 0; i < sortableContainers.length; i += 1) {
             sortableInstance = new Sortable(sortableContainers[i], {
                 group: 'nested',
