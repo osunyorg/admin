@@ -1,7 +1,7 @@
 <%
 @university = about.university
 %>
-content:
+contents:
 <% about.blocks.without_heading.published.ordered.each do |block| %>
 <%= render 'admin/communication/blocks/static', block: block %>
 <% end %>
