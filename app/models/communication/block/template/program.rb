@@ -10,4 +10,11 @@ class Communication::Block::Template::Program < Communication::Block::Template::
     @selected_programs ||= elements.map { |element| element.program }.compact
   end
 
+  def allowed_for_about?
+    !website.nil?
+  end
+
+  def available_programs
+    website.education_programs
+  end
 end

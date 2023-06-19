@@ -127,15 +127,15 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # En connectant l'école au site, on crée une connexion pour :
     # L'école, avec ses formations et ses diplômes en cascade, donc 3 connexions avec direct_source = website
     # En cascade, le save du website va créer les pages de liste des formations et des diplômes, qui ont elles aussi leurs dépendances
-    # La page des diplômes aura en dépendance les diplômes (default_diploma) et leurs formations en cascade (default_program), donc 2 connexions avec direct_source = page diplômes
+    # La page des diplômes aura en dépendance les diplômes (default_diploma), donc 1 connexion avec direct_source = page diplômes
     # La page des formations aura en dépendance les formations (default_program) et leurs diplômes en cascade (default_diploma), donc 2 connexions avec direct_source = page formations
-    # Donc un total de 3 + 2 + 2 = 7 connexions
-    assert_difference -> { Communication::Website::Connection.count } => 7 do
+    # Donc un total de 3 + 1 + 2 = 6 connexions
+    assert_difference -> { Communication::Website::Connection.count } => 6 do
       website_with_github.update(about: default_school)
     end
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
-    assert_difference -> { Communication::Website::Connection.count } => -7 do
+    assert_difference -> { Communication::Website::Connection.count } => -6 do
       website_with_github.update(about: nil)
     end
   end
