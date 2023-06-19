@@ -2,7 +2,7 @@ module User::WithFavorites
   extend ActiveSupport::Concern
 
   included do
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
   end
 
   def add_favorite(about)
