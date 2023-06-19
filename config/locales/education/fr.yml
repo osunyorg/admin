@@ -51,6 +51,8 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         initial: Formation initiale
+        is_published: Publiée
+        is_draft: Brouillon
         main_information: Informations essentielles
         name: Nom
         objectives: Objectifs
