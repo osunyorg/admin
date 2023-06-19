@@ -26,6 +26,7 @@
 #  fk_rails_ae82723550  (university_id => universities.id)
 #
 class Communication::Block::Heading < ApplicationRecord
+  include AsIndirectObject
   include Sanitizable
   include WithPosition
   include WithUniversity

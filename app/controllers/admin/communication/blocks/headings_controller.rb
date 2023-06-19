@@ -24,7 +24,6 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
 
   def create
     if @heading.save
-      sync_with_git_if_necessary
       redirect_to about_path,
                   notice: t('admin.successfully_created_html', model: @heading.to_s)
     else
@@ -35,7 +34,6 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
 
   def update
     if @heading.update(heading_params)
-      sync_with_git_if_necessary
       redirect_to about_path,
                   notice: t('admin.successfully_updated_html', model: @heading.to_s)
     else
@@ -48,17 +46,11 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   def destroy
     path = about_path
     @heading.destroy
-    sync_with_git_if_necessary
     redirect_to path,
                 notice: t('admin.successfully_destroyed_html', model: @heading.to_s)
   end
 
   protected
-
-  def sync_with_git_if_necessary
-    return unless @heading.about.respond_to?(:sync_with_git)
-    @heading.about.sync_with_git
-  end
 
   # TODO factorize
   def website_id
