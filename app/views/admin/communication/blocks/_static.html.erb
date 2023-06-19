@@ -4,6 +4,8 @@ should_render_data = block.data && block.data.present?
 %>
   - kind: block
     template: <%= block.template_kind %>
+    name: >
+      <%= prepare_text_for_static block.title %>
     position: <%= block.position %>
     data:
 <%= render  template_path, 
