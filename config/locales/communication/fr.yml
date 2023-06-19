@@ -532,16 +532,17 @@ fr:
               element:
                 id:
                   label: Organisation
-                  name:
-                    label: Nom
-                    placeholder: Entrer le nom du partenaire
-                    url:
-                      label: Site Web
-                      logo_label: Logo
-                      placeholder: https://
-                      remove_logo: Enlever le logo
                   placeholder: Choisir l'organisation
                   unregistered: Organisation non enregistrée
+                name:
+                  label: Nom
+                  placeholder: Entrer le nom du partenaire
+                url:
+                  label: Site Web
+                  placeholder: https://
+                logo:
+                  label: Logo
+                  remove_logo: Enlever le logo
               remove_partner: Enlever le partenaire
               with_link:
                 label: Avec des liens cliquables vers les pages des organisations?
