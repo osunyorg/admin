@@ -1,7 +1,8 @@
+# ContentMigration.new(university).migrate_all
 class ContentMigration
 
-  def self.run
-    ContentMigration.new.migrate_all
+  def initialize(university)
+    @university = university
   end
 
   def migrate_all
@@ -46,7 +47,7 @@ class ContentMigration
   def migrate_objects(about_type)
     about_ids(about_type).each do |about_id|
       object = about_type.constantize.find(about_id)
-      migrate(object)
+      migrate(object) if object.university == @university
     end
   end
 

@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    ContentMigration.run
+
   end
 
   namespace :websites do
