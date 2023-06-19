@@ -23,9 +23,7 @@
         <% end %>
       <% end %>
       <%= render 'admin/communication/blocks/content/editor', about: @paper %>
-      <%= render 'admin/application/dependencies',
-                  git_dependencies: @paper.git_dependencies(@paper.journal.websites.first),
-                  active_storage_blobs: @paper.active_storage_blobs %>
+      <%= render 'admin/application/dependencies', about: @paper %>
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
