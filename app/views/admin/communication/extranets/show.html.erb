@@ -8,6 +8,7 @@
   <% if @extranet.about %>
     (<%= link_to @extranet.about, [:admin, @extranet.about] unless @extranet.about.nil? %>)
   <% end %>
+  <%= render 'admin/application/favorites/widget', about: @extranet %>
 <% end %>
 
 <%= render 'admin/communication/extranets/sidebar' do %>

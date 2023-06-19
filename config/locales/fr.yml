@@ -93,6 +93,9 @@ fr:
       user:
         one: Utilisateur·rice
         other: Utilisateur·rice·s
+      user/favorite:
+        one: Favori
+        other: Favoris
   add: Ajouter
   add_field: Ajouter un champ
   admin:
@@ -306,6 +309,11 @@ fr:
       date_with_hour: "%d %B %Y %H:%M"
   today: Aujourd'hui
   true: Oui
+  user:
+    favorites:
+      add: Ajouter aux favoris
+      remove: Enlever des favoris
+      none: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web, extranets ou revues scientifiques auxquels vous accédez fréquemment !
   photo_import:
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche

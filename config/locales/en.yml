@@ -93,6 +93,9 @@ en:
       user:
         one: User
         other: Users
+      user/favorite:
+        one: Favorite
+        other: Favorites
   add: Add
   add_field: Add field
   admin:
@@ -306,6 +309,11 @@ en:
       date_with_hour: "%B %d, %Y %H:%M"
   today: Today
   true: Yes
+  user:
+    favorites:
+      add: Add to favorites
+      remove: Remove from favorites
+      none: You have no favorites yet. Feel free to add the websites, extranets or journals you often work on!
   photo_import:
     next: Next image
     nothing: No results for this search

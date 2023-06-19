@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       patch 'unlock' => 'users#unlock', on: :member
     end
     put 'theme' => 'application#set_theme', as: :set_theme
+    put 'favorite' => 'users#favorite', as: :favorite
     draw 'admin/administration'
     draw 'admin/communication'
     draw 'admin/education'
