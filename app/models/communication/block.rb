@@ -170,7 +170,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def set_heading_from_about
-    # TODO: Ne gère que le 1er niveau actuellement
+    # IMPROVEMENT: Ne gère que le 1er niveau actuellement
     self.heading = about.headings.root.ordered.last
   end
 
