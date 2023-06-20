@@ -1,5 +1,9 @@
-# ContentMigration.new(university).migrate_all
 class ContentMigration
+
+  def self.migrate(university_id)
+    university = University.find(university_id)
+    ContentMigration.new(university).migrate_all
+  end
 
   def initialize(university)
     @university = university
@@ -12,7 +16,7 @@ class ContentMigration
   end
 
   def migrate(object)
-    puts object
+    puts "----------------------[migration] #{object} - #{object.class} - #{object.id}"
     heading = nil
     heading_position = 0
     object.blocks.each do |block|
@@ -28,6 +32,7 @@ class ContentMigration
         block.title = ''
         block.save
       end
+      puts "----------------------[migration] block #{block.id} - #{block.template_kind}"
       # Add blocks to current heading
       block.heading = heading
       block.save

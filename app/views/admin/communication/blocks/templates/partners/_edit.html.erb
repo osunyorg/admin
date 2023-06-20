@@ -10,7 +10,7 @@
     <%= block_component_edit block, :alphabetical %>
   </div>
 </div>
-<%= block_component_add_element t('.add_partner') %>
+<%= block_component_add_element block, t('.add_partner') %>
 <draggable :list="data.elements" class="mb-3 <%= if_appstack 'list-group' %>" handle=".partnerHandle">
   <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
     <div class="d-flex mb-n3">
@@ -44,5 +44,5 @@
   </div>
 </draggable>
 <div v-show="data.elements.length > 2">
-  <%= block_component_add_element t('.add_partner') %>
+  <%= block_component_add_element block, t('.add_partner') %>
 </div>
