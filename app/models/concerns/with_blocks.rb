@@ -6,10 +6,6 @@ module WithBlocks
     has_many :headings, as: :about, class_name: 'Communication::Block::Heading', dependent: :destroy
   end
 
-  def git_block_dependencies
-    blocks.collect &:git_dependencies
-  end
-
   def content
     unless @content
       @content = []
