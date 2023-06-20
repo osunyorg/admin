@@ -15,7 +15,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def new
-    @block.about = Polymorphic.find params, :about
+    @block.about = PolymorphicObjectFinder.find params, :about
     breadcrumb
   end
 

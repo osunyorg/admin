@@ -14,7 +14,7 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   end
 
   def new
-    @heading.about = Polymorphic.find params, :about
+    @heading.about = PolymorphicObjectFinder.find params, :about
     breadcrumb
   end
 

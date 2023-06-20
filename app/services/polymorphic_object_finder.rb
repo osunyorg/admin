@@ -1,4 +1,4 @@
-class Polymorphic
+class PolymorphicObjectFinder
   # @block.about = Polymorphic.find params, :about
   # Rails uses ActiveRecord::Inheritance#polymorphic_name to hydrate the about_type.
   # Example: A Block for a Communication::Website::Page::Home will have about_type = "Communication::Website::Page"
