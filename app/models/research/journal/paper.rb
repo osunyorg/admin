@@ -91,7 +91,9 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   def references
-    people
+    references = people + [journal]
+    references << volume if volume.present?
+    references
   end
 
   def doi_url
