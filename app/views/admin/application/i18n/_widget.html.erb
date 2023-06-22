@@ -7,7 +7,7 @@
     <ol class="list-unstyled">
       <% about.available_languages.each do |language| %>
         <%
-        label = I18nData.languages(I18n.locale)[language.iso_code.to_s.upcase].titleize
+        label = language_name(language.iso_code)
         current = language.id == about.language_id
         %>
         <li><%= link_to_unless current, label, [*route_args, lang: language.iso_code] %></li>

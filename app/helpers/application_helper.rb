@@ -49,4 +49,9 @@ module ApplicationHelper
   def masked_phone(string)
     string.gsub(/(?<=.{3}).+(?=.{2})/, '*******')
   end
+
+  def language_name(iso_code)
+    I18nData.languages(I18n.locale)[iso_code.to_s.upcase].titleize
+  end
+
 end
