@@ -4,7 +4,7 @@ module Filters
       super
       add_search
       add :for_language,
-          ::Language.all.map { |l| { to_s: I18n.t("languages.#{l.iso_code}"), id: l.id } },
+          ::Language.available_for_interface.map { |l| { to_s: I18n.t("languages.#{l.iso_code}"), id: l.id } },
           I18n.t(
             'filters.attributes.element',
             element: Language.model_name.human.downcase
