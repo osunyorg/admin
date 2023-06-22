@@ -34,6 +34,7 @@ gem "hal_openscience", "~> 0.1"
 # gem "hal_openscience", path: "../hal_openscience"
 gem "has_scope", "~> 0.8.0"
 gem "hash_dot"
+gem "i18n_data", "~> 0.17.1"
 gem "image_processing"
 gem "jbuilder"
 gem "jquery-rails"
@@ -90,3 +91,4 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
