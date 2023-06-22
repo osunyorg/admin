@@ -12,6 +12,8 @@
 
   <%= @page.published ? 'Publiée' : 'Brouillon' %>
 
+  <%= render 'admin/application/i18n/inline', about: @page %>
+
   <% if @page.parent %>
     <br>
     Dans
@@ -40,3 +42,4 @@
     Pleine largeur
   <% end %>
 <% end %>
+
