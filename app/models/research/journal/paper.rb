@@ -66,7 +66,6 @@ class Research::Journal::Paper < ApplicationRecord
                           class_name: 'University::Person',
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
-  has_many :communication_websites, -> { distinct }, through: :journal
 
   validates :title, presence: true
 
