@@ -66,7 +66,6 @@ class Research::Journal::Paper < ApplicationRecord
                           class_name: 'University::Person',
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
-  has_many :communication_websites, -> { distinct }, through: :journal
 
   validates :title, presence: true
 
@@ -91,7 +90,9 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   def references
-    people
+    references = people + [journal]
+    references << volume if volume.present?
+    references
   end
 
   def doi_url
