@@ -44,7 +44,6 @@ class Research::Journal::Volume < ApplicationRecord
 
   belongs_to :journal, foreign_key: :research_journal_id
   has_many :papers, foreign_key: :research_journal_volume_id, dependent: :nullify
-  has_many :communication_websites, -> { distinct }, through: :journal
   has_many :people, -> { distinct }, through: :papers
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
@@ -61,6 +60,10 @@ class Research::Journal::Volume < ApplicationRecord
     papers +
     people.map(&:researcher) +
     active_storage_blobs
+  end
+
+  def references
+    [journal]
   end
 
   def path

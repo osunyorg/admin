@@ -5,10 +5,17 @@ class ContactDetails::Website < ContactDetails::Base
 
   def prepare_value
     super
-    @value = "#{PROTOCOL}#{@value}" unless @value.start_with? PROTOCOL
+    if @value.start_with?('http://')
+      # Do nothing, this is oldie
+    elsif !@value.start_with?(PROTOCOL)
+      # www.test.com -> https://www.test.com
+      @value = "#{PROTOCOL}#{@value}"
+    end
   end
 
   def prepare_label
     @label = @value.remove PROTOCOL
+    # Remove whatever//
+    @label = @label.split('//').last
   end
 end

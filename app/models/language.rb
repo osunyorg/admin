@@ -21,6 +21,7 @@ class Language < ApplicationRecord
   validates_presence_of :iso_code
   validates_uniqueness_of :iso_code
 
+  scope :available_for_interface, -> { where(iso_code: I18n.available_locales) }
   scope :ordered, -> { order(name: :asc) }
 
   def to_s

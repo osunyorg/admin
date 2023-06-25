@@ -15,6 +15,7 @@
                   input_html: { autocomplete: "last_name" } %>
       <%= f.association :language,
                         include_blank: false,
+                        collection: Language.available_for_interface,
                         label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>
       <%= f.input :admin_theme, include_blank: false %>
     </div>

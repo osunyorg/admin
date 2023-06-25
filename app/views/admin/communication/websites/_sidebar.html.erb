@@ -53,7 +53,7 @@
       <select class="form-control form-select my-5"  onchange="if (this.value) window.location.href=this.value">
         <% @website.languages.each do |language| %>
           <%
-          label = I18n.t(language.iso_code, scope: :languages)
+          label = language_name(language.iso_code)
           path = url_for request.params.merge(lang: language.iso_code)
           selected = current_website_language == language
           %>

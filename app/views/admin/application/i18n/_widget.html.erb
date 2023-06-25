@@ -10,7 +10,7 @@ small ||= false
     <ol class="list-unstyled">
       <% about.available_languages.each do |language| %>
         <%
-        label = t(language.iso_code, scope: :languages)
+        label = language_name(language.iso_code)
         current = language.id == about.language_id
         %>
         <li><%= link_to_unless current, label, [*route_args, lang: language.iso_code] %></li>

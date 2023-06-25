@@ -262,6 +262,8 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
+    i18n_data (0.17.1)
+      simple_po_parser (~> 1.1)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -475,6 +477,7 @@ GEM
     simple_form_password_with_hints (0.0.7)
       rails
       simple_form
+    simple_po_parser (1.1.6)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -589,6 +592,7 @@ DEPENDENCIES
   hal_openscience (~> 0.1)
   has_scope (~> 0.8.0)
   hash_dot
+  i18n_data (~> 0.17.1)
   image_processing
   jbuilder
   jquery-rails
