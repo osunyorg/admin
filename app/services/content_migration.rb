@@ -1,6 +1,8 @@
 class ContentMigration
 
   def self.migrate(university_id)
+    Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
+    Communication::Heading.skip_callback :save, :after, :connect_and_sync_direct_sources
     university = University.find(university_id)
     ContentMigration.new(university).migrate_all
   end
