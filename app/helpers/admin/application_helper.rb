@@ -38,7 +38,7 @@ module Admin::ApplicationHelper
   end
 
   def duplicate_link(object, html_classes: nil)
-    return unless can?(:update, object)
+    return unless can?(:create, object)
     html_classes = button_classes('btn-light') if html_classes.nil?
     link_to t('admin.duplicate'),
             [:duplicate, :admin, object],
