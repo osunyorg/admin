@@ -8,7 +8,7 @@ module ApplicationController::WithMaintenance
   protected
 
   def check_maintenance
-    if ENV['MAINTENANCE'] && (current_user&.role != 'server_admin')
+    if (ENV['MAINTENANCE'] == 'true') && !current_user&.server_admin?
       redirect_to '/maintenance' 
     end
   end
