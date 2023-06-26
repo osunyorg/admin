@@ -23,7 +23,7 @@ class ContentMigration
       # ignore blocks already inside headings
       next if block.heading.present?
       # Move title from block to heading
-      if block.title.present? && !block.call_to_action? # call to actions keep their title 
+      if block.title.present? && !block.call_to_action? # call to actions keep their title
         heading = object.headings.create(university: object.university)
         heading.title = block.title
         heading.position = heading_position
@@ -51,8 +51,8 @@ class ContentMigration
 
   def migrate_objects(about_type)
     about_ids(about_type).each do |about_id|
-      object = about_type.constantize.find(about_id)
-      migrate(object) if object.university == @university
+      object = about_type.constantize.find_by(id: about_id)
+      migrate(object) if object.present? && object.university == @university
     end
   end
 
