@@ -6,6 +6,7 @@ class ContentMigration
       Communication::Block::Heading.skip_callback :save, :after, :connect_and_sync_direct_sources
       university = University.find(university_id)
       ContentMigration.new(university).migrate_all
+      university.websites.each(&:save_and_sync)
     ensure
       Communication::Block.set_callback :save, :after, :connect_and_sync_direct_sources
       Communication::Block::Heading.set_callback :save, :after, :connect_and_sync_direct_sources
