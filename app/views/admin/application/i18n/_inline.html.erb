@@ -1,4 +1,5 @@
 <% if about.available_languages.many? %>
+  <% # TODO i18n %>
   <br>en <%= t(about.language.iso_code, scope: :languages) %>
 
   <%
