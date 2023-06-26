@@ -19,7 +19,7 @@ class ContentMigration
     puts "----------------------[migration] #{object} - #{object.class} - #{object.id}"
     heading = nil
     heading_position = 0
-    object.blocks.each do |block|
+    object.blocks.published.each do |block|
       # ignore blocks already inside headings
       next if block.heading.present?
       # Move title from block to heading
