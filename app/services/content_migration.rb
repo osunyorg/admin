@@ -1,10 +1,15 @@
 class ContentMigration
 
   def self.migrate(university_id)
-    Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
-    Communication::Block::Heading.skip_callback :save, :after, :connect_and_sync_direct_sources
-    university = University.find(university_id)
-    ContentMigration.new(university).migrate_all
+    begin
+      Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
+      Communication::Block::Heading.skip_callback :save, :after, :connect_and_sync_direct_sources
+      university = University.find(university_id)
+      ContentMigration.new(university).migrate_all
+    ensure
+      Communication::Block.set_callback :save, :after, :connect_and_sync_direct_sources
+      Communication::Block::Heading.set_callback :save, :after, :connect_and_sync_direct_sources
+    end
   end
 
   def initialize(university)
