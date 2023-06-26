@@ -53,6 +53,7 @@ class ContentMigration
     # these blocks keep their title
     !block.call_to_action? &&
     !block.post? &&
+    !block.program? &&
     !block.page?
   end
 
