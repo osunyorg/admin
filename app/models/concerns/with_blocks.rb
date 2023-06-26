@@ -6,17 +6,17 @@ module WithBlocks
     has_many :headings, as: :about, class_name: 'Communication::Block::Heading', dependent: :destroy
   end
 
-  def content
-    unless @content
-      @content = []
+  def contents
+    unless @contents
+      @contents = []
       blocks.without_heading.published.ordered.each do |block|
-        @content << block
+        @contents << block
       end
       headings.ordered.each do |heading|
-        @content << heading
+        @contents << heading
       end
     end
-    @content
+    @contents
   end
 
   # Basic rule is: TOC if 2 titles or more
