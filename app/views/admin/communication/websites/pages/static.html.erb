@@ -31,7 +31,5 @@ children:
 <%= render 'admin/application/summary/static' %>
 header_text: >-
   <%= prepare_html_for_static @about.header_text, @website.university %>
-legacy_text: >
-  <%= prepare_html_for_static @about.text, @about.university %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
