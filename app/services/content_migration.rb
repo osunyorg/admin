@@ -30,7 +30,7 @@ class ContentMigration
       # ignore blocks already inside headings
       next if block.heading.present?
       # Move title from block to heading
-      if block.title.present? && !block.call_to_action? # call to actions keep their title
+      if should_add_heading?(block)
         heading = object.headings.create(university: object.university)
         heading.title = block.title
         heading.position = heading_position
@@ -47,6 +47,14 @@ class ContentMigration
   end
 
   protected
+
+  def should_add_heading?(block)
+    block.title.present? && 
+    # these blocks keep their title
+    !block.call_to_action? &&
+    !block.post? &&
+    !block.page?
+  end
 
   def about_types
     Communication::Block.distinct.pluck(:about_type).uniq
