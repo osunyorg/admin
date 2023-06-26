@@ -12,7 +12,7 @@
     </div>
   </div>
   <%= osuny_separator %>
-  <%= render 'admin/application/a11y/widget', about: @page, horizontal: true, small: true %>
+  <%= render 'admin/application/a11y/widget', about: @page, horizontal: true %>
   <%= osuny_separator %>
   <div class="row">
     <div class="col-lg-4">
@@ -34,9 +34,9 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%= link_to  t('open'), 
-              @page.url, 
-              target: :_blank, 
+  <%= link_to  t('open'),
+              @page.url,
+              target: :_blank,
               class: 'btn btn-light btn-xs' if @page.published %>
   <%= preview_link %>
   <%= link_to t('edit'), edit_admin_communication_website_page_path(@page), class: button_classes %>
