@@ -1,123 +1,126 @@
 <% content_for :title, @program %>
 
 <div class="row">
-  <div class="col-lg-8 col-xxl-9">
-    <%= render 'admin/application/summary/show', about: @program %>
-    <%= render 'admin/education/programs/forms/part',
-                part: :essential,
-                collapsed: false do %>
-      <div class="row">
-        <div class="col-lg-6">
-          <%= osuny_label Education::Program.human_attribute_name('name') %>
-          <p><%= @program.name %></p>
-          <%= osuny_label Education::Program.human_attribute_name('diploma') %>
-          <p><%= link_to @program.diploma, [:admin, @program.diploma] if @program.diploma %></p>
-          <% if @program.schools.any? %>
-            <%= osuny_label Education::Program.human_attribute_name('schools') %>
-            <ul class="list-unstyled">
-              <% @program.schools.ordered.each do |school| %>
-                <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
-        <div class="col-lg-6">
-          <%= osuny_label Education::Program.human_attribute_name('short_name') %>
-          <p><%= @program.short_name %></p>
-          <%= osuny_label Education::Program.human_attribute_name('capacity') %>
-          <p><%= @program.capacity %></p>
-          <%= osuny_label Education::Program.human_attribute_name('initial') %>
-          <p><%= t @program.initial %></p>
-          <%= osuny_label Education::Program.human_attribute_name('continuing') %>
-          <p><%= t @program.continuing %></p>
-          <%= osuny_label Education::Program.human_attribute_name('apprenticeship') %>
-          <p><%= t @program.apprenticeship %></p>
-          <% if @program.downloadable_summary.attached? %>
-            <%= osuny_label Education::Program.human_attribute_name('downloadable_summary') %>
-            <p><%= link_to "#{@program.downloadable_summary.filename} (#{ number_to_human_size @program.downloadable_summary.blob.byte_size })",
-                            url_for(@program.downloadable_summary),
-                            target: :_blank %></p>
-          <% end %>
-        </div>
-      </div>
+  <div class="col-lg-8">
+    <%= osuny_panel Education::Program.human_attribute_name('name'), small: true do %>
+      <p class="lead"><%= @program.name %></p>
     <% end %>
-    <%= render 'admin/education/programs/forms/part', part: :presentation, collapsed: true do %>
-      <div class="row">
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :presentation %>
-        </div>
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :objectives %>
-        </div>
-      </div>
-    <% end %>
-    <%= render 'admin/communication/blocks/list', about: @program %>
-    <hr class="pure__separation">
-    <%= render 'admin/education/programs/forms/part', part: :pedagogy, collapsed: true do %>
-      <div class="row">
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :content %>
-        </div>
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :pedagogy %>
-          <%= render 'admin/application/property/text', object: @program, property: :evaluation %>
-        </div>
-      </div>
-      <%= render 'admin/education/programs/show/teachers', involvements: @teacher_involvements %>
-    <% end %>
-    <%= render 'admin/education/programs/forms/part', part: :results, collapsed: true do %>
-      <div class="row">
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :opportunities %>
-        </div>
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :results %>
-        </div>
-      </div>
-    <% end %>
-    <%= render 'admin/education/programs/forms/part', part: :admission, collapsed: true do %>
-      <div class="row">
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :prerequisites %>
-          <%= render 'admin/application/property/text', object: @program, property: :registration %>
-          <%= render 'admin/application/property/text', object: @program, property: :other %>
-        </div>
-        <div class="col-xxl-6">
-          <%= render 'admin/application/property/text', object: @program, property: :pricing %>
-          <%= render 'admin/application/property/text', object: @program, property: :accessibility %>
-          <%= render 'admin/application/property/text', object: @program, property: :contacts %>
-          <% if @program.registration_url.present? %>
-            <%= osuny_label Education::Program.human_attribute_name(:registration_url) %>
-            <p><%= link_to @program.registration_url, @program.registration_url, target: :_blank %></p>
-          <% end %>
-        </div>
-      </div>
-      <%= render 'admin/education/programs/show/roles', roles: @roles %>
-    <% end %>
-
-    <% if @program.children.any? %>
-      <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
-        <%= render 'admin/education/programs/list', programs: @program.children %>
-      <% end %>
-    <% end %>
-
-    <%= render 'admin/education/programs/show/cohorts' %>
   </div>
-  <div class="col-lg-4 col-xxl-3">
-    <%= render 'admin/education/programs/forms/part', part: :technical do %>
-      <%= osuny_label Education::Program.human_attribute_name('published') %>
-      <p><%= t @program.published %></p>
-      <%= osuny_label Education::Program.human_attribute_name('slug') %>
-      <p><%= @program.slug %></p>
-      <% if @program.parent %>
-        <%= osuny_label Education::Program.human_attribute_name('parent') %>
-        <p><%= link_to @program.parent, [:admin, @program.parent] %></p>
-      <% end %>
-    <% end %>
-    <%= render 'admin/application/featured_image/show', about: @program %>
-    <%= render 'admin/application/meta_description/show', about: @program %>
+  <div class="offset-lg-1 col-lg-3">
+    <%= render 'admin/application/featured_image/show', about: @program, small: true %>
   </div>
 </div>
+
+<%= osuny_separator %>
+<%= render 'admin/education/programs/show/details', program: @program %>
+
+<%= osuny_separator %>
+<%= render 'admin/application/a11y/widget', about: @program, horizontal: true %>
+
+<%= osuny_separator %>
+<div class="row mb-5">
+  <div class="col-lg-4">
+    <%= render 'admin/education/programs/show/metadata', program: @program %>
+  </div>
+  <div class="col-lg-8">
+    <%= render 'admin/application/summary/show', about: @program, small: true %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2 class="h4"><%= t("education.program.parts.presentation.label") %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= render 'admin/application/property/text', object: @program, property: :presentation %>
+    <%= render 'admin/application/property/text', object: @program, property: :objectives %>
+    <%= osuny_label 'Informations administratives' %>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('initial') %></th>
+          <td class="text-end"><%= t @program.initial %></td>
+        </tr>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('continuing') %></th>
+          <td class="text-end"><%= t @program.continuing %></td>
+        </tr>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('apprenticeship') %></th>
+          <td class="text-end"><%= t @program.apprenticeship %></td>
+        </tr>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('capacity') %></th>
+          <td class="text-end"><%= @program.capacity %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= render 'admin/communication/blocks/content/editor', about: @program %>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2 class="h4"><%= t("education.program.parts.pedagogy.label") %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= render 'admin/application/property/text', object: @program, property: :content %>
+    <%= render 'admin/application/property/text', object: @program, property: :pedagogy %>
+    <%= render 'admin/application/property/text', object: @program, property: :evaluation %>
+    <%= render 'admin/education/programs/show/teachers', involvements: @teacher_involvements %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2 class="h4"><%= t("education.program.parts.results.label") %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= render 'admin/application/property/text', object: @program, property: :opportunities %>
+    <%= render 'admin/application/property/text', object: @program, property: :results %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2 class="h4"><%= t("education.program.parts.admission.label") %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= render 'admin/application/property/text', object: @program, property: :prerequisites %>
+    <%= render 'admin/application/property/text', object: @program, property: :registration %>
+    <%= render 'admin/application/property/text', object: @program, property: :other %>
+    <%= render 'admin/application/property/text', object: @program, property: :pricing %>
+    <%= render 'admin/application/property/text', object: @program, property: :accessibility %>
+    <%= render 'admin/application/property/text', object: @program, property: :contacts %>
+    <% if @program.registration_url.present? %>
+      <%= osuny_label Education::Program.human_attribute_name(:registration_url) %>
+      <p><%= link_to @program.registration_url, @program.registration_url, target: :_blank %></p>
+    <% end %>
+    <%= render 'admin/education/programs/show/roles', roles: @roles %>
+  </div>
+</div>
+
+<% if @program.cohorts.any? %>
+  <div class="row">
+    <div class="col-lg-4">
+      <h2 class="h4"><%= Education::Cohort.model_name.human(count: 2) %></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8">
+      <%= render 'admin/education/programs/show/cohorts' %>
+    </div>
+  </div>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @program %>

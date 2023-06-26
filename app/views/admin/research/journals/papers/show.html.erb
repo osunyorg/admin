@@ -22,7 +22,7 @@
           <%= sanitize @paper.bibliography %>
         <% end %>
       <% end %>
-      <%= render 'admin/communication/blocks/list', about: @paper %>
+      <%= render 'admin/communication/blocks/content/editor', about: @paper %>
       <%= render 'admin/application/dependencies', about: @paper %>
     </div>
     <div class="col-md-4">

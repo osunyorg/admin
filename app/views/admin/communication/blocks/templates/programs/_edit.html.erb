@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="flex-fill mb-n3">
-      <%= block_component_edit :id, template: @element, label: false %>
+      <%= block_component_edit block, :id, template: @element, label: false %>
     </div>
     <div>
       <a  class="btn btn-sm text-danger ms-3"
@@ -17,4 +17,4 @@
     </div>
   </div>
 </draggable>
-<%= block_component_add_element t('.add') %>
+<%= block_component_add_element block, t('.add') %>

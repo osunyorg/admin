@@ -5,24 +5,21 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-6">
-      <%= osuny_panel t('admin.infos') do %>
-        <%= f.input :description, as: :string %>
-      <% end %>
+    <div class="col-lg-6">
+      <%= f.input :description, as: :string %>
     </div>
-    <div class="col-md-6">
-      <%= osuny_panel University::Person.model_name.human(count: 2) do %>
-        <%= link_to_add_association t('add'), f, :involvements, class: "btn btn-primary mb-3", data: {
-              'association-insertion-method': 'append',
-              'association-insertion-node':   '#involvements'
-            } %>
+    <div class="col-lg-6">
+      <%= osuny_label University::Person.model_name.human(count: 2) %><br>
+      <%= link_to_add_association t('add'), f, :involvements, class: button_classes, data: {
+            'association-insertion-method': 'append',
+            'association-insertion-node':   '#involvements'
+          } %>
 
-        <div class="mb-3" id="involvements" data-sortable="inputs">
-          <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
-            <%= render 'admin/education/programs/roles/involvement_fields', f: involvement_f, include_id: true %>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="mt-3" id="involvements" data-sortable="inputs">
+        <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
+          <%= render 'admin/education/programs/roles/involvement_fields', f: involvement_f, include_id: true %>
+        <% end %>
+      </div>
     </div>
   </div>
 

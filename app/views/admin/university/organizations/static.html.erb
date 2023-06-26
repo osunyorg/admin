@@ -52,6 +52,6 @@ logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-<%= render 'admin/communication/blocks/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text, @about.university %>

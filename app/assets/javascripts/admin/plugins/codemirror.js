@@ -35,6 +35,7 @@ window.codemirrorManager = {
     },
 
     defaultConfig: function () {
+        'use strict';
         return {
             lineNumbers: true,
             matchBrackets: true,

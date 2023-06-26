@@ -1,0 +1,33 @@
+<div  class=" content-editor__elements__element
+              content-editor__elements__element--block
+              js-content-editor-element"
+      data-id="<%= block.id %>"
+      data-kind="block">
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8">
+      <article class=" mt-5 <%= 'draft' unless block.published? %>">
+        <div class="mb-1">
+          <div class="float-end">
+            <span class="content-editor__elements__element--hover">
+              <%= destroy_link block, html_classes: 'action text-danger ms-2' %>
+              <%= duplicate_link block, html_classes: 'action ms-2' %>
+            </span>
+            <%= edit_link block, html_classes: 'action ms-2' %>
+          </div>
+          <span class="small text-muted mb-2"><%= block.template_kind_i18n  %></span>
+          <span class=" content-editor__elements__handle
+                        content-editor__elements__element--hover">
+            <span class="handle">
+              <span class="small"><%= t 'organize' %></span>
+              <i class="<%= Icon::SORT %>"></i>
+            </span>
+          </span>
+        </div>
+        <div class="content-editor__elements__preview">
+          <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
+        </div>
+        <%= render 'admin/application/a11y/status', about: block unless block.accessible? %>
+      </article>
+    </div>
+  </div>
+</div>

@@ -1,21 +1,21 @@
 <% content_for :title, @cohort %>
 
 <div class="row">
-  <div class="col-md-8">
-    <div class="card flex-fill w-100">
-      <div class="card-body">
-        <%= osuny_label Education::Cohort.human_attribute_name('school') %>
-        <p><%= link_to_if can?(:read, @cohort.school), @cohort.school, [:admin, @cohort.school] %></p>
-        <%= osuny_label Education::Cohort.human_attribute_name('program') %>
-        <p><%= link_to_if can?(:read, @cohort.program), @cohort.program, [:admin, @cohort.program] %></p>
-        <%= osuny_label Education::Cohort.human_attribute_name('year') %>
-        <p><%= link_to_if can?(:read, @cohort.academic_year), @cohort.academic_year, [:admin, @cohort.academic_year] %></p>
-      </div>
-    </div>
+  <div class="col-lg-4">
+    <%= osuny_label Education::Cohort.human_attribute_name('school') %>
+    <p><%= link_to_if can?(:read, @cohort.school), @cohort.school, [:admin, @cohort.school] %></p>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_label Education::Cohort.human_attribute_name('program') %>
+    <p><%= link_to_if can?(:read, @cohort.program), @cohort.program, [:admin, @cohort.program] %></p>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_label Education::Cohort.human_attribute_name('year') %>
+    <p><%= link_to_if can?(:read, @cohort.academic_year), @cohort.academic_year, [:admin, @cohort.academic_year] %></p>
   </div>
 </div>
 
 <% if @cohort.people.any? %>
-  <h2><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
+  <h2 class="mt-5"><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
   <%= render 'admin/university/alumni/list', alumni: @cohort.people.ordered %>
 <% end %>

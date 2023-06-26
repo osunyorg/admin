@@ -4,7 +4,7 @@ url: "<%= @about.current_permalink_in_website(@website)&.path %>"
 slug: "<%= forced_slug || @about.slug %>"
 <% end %>
 <%
-previous_permalinks = @about.previous_permalinks_in_website(@website).where.not(path: "/")
+previous_permalinks = @about.previous_permalinks_in_website(@website)
 if previous_permalinks.any?
 %>
 aliases:

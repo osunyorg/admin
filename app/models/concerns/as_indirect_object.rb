@@ -44,7 +44,7 @@ module AsIndirectObject
       references.each do |reference|
         direct_sources += direct_sources_from_reference(reference)
       end
-      direct_sources.uniq
+      direct_sources.uniq.compact
     end
   end
 

@@ -1,5 +1,5 @@
 <%
-template ||= @block.template
+template ||= block.template
 component = template.public_send "#{property}_component"
 value = template.public_send property
 depth ||= 3

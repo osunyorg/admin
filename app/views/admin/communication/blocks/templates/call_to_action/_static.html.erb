@@ -1,11 +1,11 @@
-<%= block_component_static :text %>
-<%= block_component_static :image %>
-<%= block_component_static :alt %>
-<%= block_component_static :credit %>
+<%= block_component_static block, :text %>
+<%= block_component_static block, :image %>
+<%= block_component_static block, :alt %>
+<%= block_component_static block, :credit %>
       buttons:
 <% block.template.elements.each do |element| %>
-<%= block_component_static :title, template: element, list: true, depth: 4 %>
-<%= block_component_static :url, template: element, depth: 5 %>
-<%= block_component_static :target_blank, template: element, depth: 5 %>
+<%= block_component_static block, :title, template: element, list: true, depth: 4 %>
+<%= block_component_static block, :url, template: element, depth: 5 %>
+<%= block_component_static block, :target_blank, template: element, depth: 5 %>
 
 <% end %>

@@ -14,16 +14,16 @@
     <%= osuny_panel t('hello', name: current_user.first_name) do %>
       <% if current_admin_theme == 'appstack' %>
         <p>
-          Osuny a un nouveau thème pour l'administration, "Pure".
-          Voulez-vous l'essayer ?
+          Vous utilisez l'ancien thème d'administration, "Appstack".
+          Voulez-vous utiliser le nouveau thème, "Pure" ?
+          <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put %>
         </p>
-        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put %>
       <% else %>
         <p>
           Vous utilisez le thème "Pure" pour l'administration.
-          Voulez-vous revenir au thème "Appstack" ?
+          Voulez-vous utiliser l'ancien thème, "Appstack" ?
+          <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
         </p>
-        <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
       <% end %>
     <% end %>
   </div>

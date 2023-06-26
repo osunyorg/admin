@@ -3,20 +3,12 @@
                                                  : admin_education_program_teacher_path(involvement, { program_id: @program.id }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="card flex-fill w-100">
-    <div class="card-header">
-      <h5 class="card-title mb-0"><%= t('admin.infos') %></h5>
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.association :person, collection: @available_people %>
     </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.association :person, collection: @available_people %>
-        </div>
-        <div class="col-md-6">
-          <%= f.input :description, as: :string %>
-        </div>
-      </div>
+    <div class="col-lg-6">
+      <%= f.input :description, as: :string %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

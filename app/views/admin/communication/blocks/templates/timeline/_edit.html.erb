@@ -1,5 +1,5 @@
-<%= block_component_edit :layout %>
-<%= block_component_add_element t('.add_event') %>
+<%= block_component_edit block, :layout %>
+<%= block_component_add_element block, t('.add_event') %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="<%= if_appstack 'list-group' %>">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
@@ -11,10 +11,10 @@
     <div class="flex-fill">
       <div class="row pure__row--small mb-n3">
         <div class="col-lg-5">
-          <%= block_component_edit :title, template: @element %>
+          <%= block_component_edit block, :title, template: @element %>
         </div>
         <div class="col-lg-7">
-          <%= block_component_edit :text, template: @element %>
+          <%= block_component_edit block, :text, template: @element %>
         </div>
       </div>
     </div>

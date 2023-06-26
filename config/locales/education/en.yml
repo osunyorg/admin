@@ -51,6 +51,8 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         initial: Initial training
+        is_published: Published
+        is_draft: Draft
         main_information: Main information
         name: Name
         objectives: Objectifs

@@ -137,7 +137,7 @@ fr:
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
-  cookies_policy_url: https://osuny.org/politique-de-cookies
+  cookies_policy_url: https://www.osuny.org/politique-de-sobriete/
   create: Créer
   date:
     formats:
@@ -257,6 +257,7 @@ fr:
     sign_out: Déconnexion
   metadata: Informations
   open: Ouvrir
+  organize: Organiser
   please_confirm: Est-ce que vous confirmez ?
   please_confirm_with_children: "ATTENTION : effacer cet élément supprimera aussi tous ses enfants. Est-ce que vous confirmez ?"
   preview:
@@ -266,7 +267,7 @@ fr:
     tablet: Tablette
     desktop: Ordinateur
   privacy_policy: Politique de confidentialité
-  privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  privacy_policy_url: https://www.osuny.org/politique-de-confidentialite/
   properties:
     text:
       missing: Texte manquant
@@ -301,7 +302,7 @@ fr:
   sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
   terms_of_service: Conditions d'utilisation
-  terms_of_service_url: https://osuny.org/conditions-d-utilisation
+  terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:
     formats:
       date_only: "%d/%m/%Y"

@@ -20,5 +20,10 @@ module University::WithCommunication
               class_name: 'Communication::Block',
               dependent: :destroy
     alias_attribute :blocks, :communication_blocks
+
+    has_many  :communication_block_headings,
+              class_name: 'Communication::Block::Heading',
+              dependent: :destroy
+    alias_attribute :headings, :communication_block_headings
   end
 end

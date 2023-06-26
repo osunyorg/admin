@@ -1,8 +1,12 @@
-<section class="pure__section flex-fill position-relative">
+<section class="pure__section flex-fill position-relative <%= classes %>">
   <%= image_tag image, class: 'img-fluid mb-3', loading: :lazy if image %>
   <div class="d-flex">
     <% if title %>
-      <h2 class="mb-3"><%= title %></h2>
+      <% if small %>
+        <%= osuny_label title %>
+      <% else %>
+        <h2 class="mb-3"><%= title %></h2>
+      <% end %>
     <% end %>
     <% if action %>
       <div class="ms-4"><%= raw action %></div>

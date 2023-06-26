@@ -1,0 +1,27 @@
+<div  class="js-content-editor mb-5"
+      data-sort-blocks-url="<%= reorder_admin_communication_blocks_path(lang: nil, website_id: nil, extranet_id: nil) %>"
+      data-sort-headings-url="<%= reorder_admin_communication_headings_path(lang: nil, website_id: nil, extranet_id: nil) %>">
+  <div  class=" content-editor__elements
+                content-editor__elements__root
+                js-content-editor-sortable-container"
+        id="content-editor-elements-root">
+    <% about.blocks.without_heading.ordered.each do |block| %>
+      <%= render 'admin/communication/blocks/block', block: block %>
+    <% end %>
+    <% about.headings.root.ordered.each do |heading| %>
+      <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
+    <% end %>
+  </div>
+  <div class="content-editor__actions row mt-5">
+    <div class="col-lg-4">
+      <%= link_to t('admin.communication.blocks.headings.add'),
+                  new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
+                  class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block::Heading %>
+    </div>
+    <div class="col-lg-8">
+      <%= link_to t('admin.communication.blocks.add'),
+                  new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
+                  class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block %>
+    </div>
+  </div>
+</div>

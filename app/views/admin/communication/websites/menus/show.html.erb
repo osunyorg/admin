@@ -1,23 +1,14 @@
 <% content_for :title, @menu %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <div class="row">
-    <div class="col-md-8">
-      <h2 class="h3">
-        <%= "#{Communication::Website::Menu::Item.model_name.human(count: 2)} (#{@root_items.size})" %>
-      </h2>
+  <%
+  action = ''
+  action += link_to t('create'),
+                    new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
+                    class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
+  <%= osuny_panel Communication::Website::Menu::Item.model_name.human(count: 2), action: action do %>
       <%= render 'admin/communication/websites/menus/items/list', items: @root_items if @items.any? %>
-      <%= link_to t('create'),
-                  new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
-                  class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
-    </div>
-    <div class="col-md-4">
-      <%= render 'admin/application/i18n/widget', about: @menu %>
-      <%= osuny_panel t('metadata') do %>
-        <%= osuny_label Communication::Website::Menu.human_attribute_name('identifier') %>
-        <p><%= @menu.identifier %></p>
-      <% end %>
-  </div>
+  <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>

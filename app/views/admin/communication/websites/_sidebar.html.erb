@@ -1,5 +1,5 @@
 <div class="row mt-2 website__sidebar">
-  <div class="col-lg-3 col-xl-2">
+  <div class="col-lg-3">
     <ul class="list-unstyled" role="tablist">
       <%
       navigation = [
@@ -50,7 +50,7 @@
       <% end %>
     </ul>
     <% if @website.languages.many? %>
-      <select class="form-control form-select mt-5"  onchange="if (this.value) window.location.href=this.value">
+      <select class="form-control form-select my-5"  onchange="if (this.value) window.location.href=this.value">
         <% @website.languages.each do |language| %>
           <%
           label = language_name(language.iso_code)
@@ -62,7 +62,7 @@
       </select>
     <% end %>
   </div>
-  <div class="col-lg-9 col-xl-10">
+  <div class="col-lg-9">
     <%= yield %>
   </div>
 

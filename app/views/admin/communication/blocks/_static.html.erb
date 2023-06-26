@@ -1,14 +1,13 @@
-<% if about.blocks.any? %>
-blocks:
-<% about.blocks.published.ordered.each do |block|
-  @block = block
-  @university = about.university
-  %>
-  - template: <%= block.template_kind %>
-    title: >-
-      <%= prepare_text_for_static block.title, 3 %>
+<%
+template_path = "admin/communication/blocks/templates/#{block.template_kind}/static"
+should_render_data = block.data && block.data.present?
+%>
+  - kind: block
+    template: <%= block.template_kind %>
+    title: >
+      <%= prepare_text_for_static block.title %>
     position: <%= block.position %>
     data:
-<%= render "admin/communication/blocks/templates/#{block.template_kind}/static",
-            block: block, about: about if block.data && block.data.present? %><% end %>
-<% end %>
+<%= render  template_path, 
+            block: block, 
+            about: block.about if should_render_data %>

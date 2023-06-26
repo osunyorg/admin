@@ -1,13 +1,16 @@
 <% include_id ||= false %>
-<div class="nested-fields d-flex mb-2">
-  <i class="<%= Icon::DRAG %> handle pt-2 pe-2"></i>
-  <div class="flex-grow-1">
+<div class="nested-fields mb-2">
+  <div class="d-flex align-items-center">
+    <i class="<%= Icon::DRAG %> handle"></i>
     <%= f.association :person,
                       collection: @administration_people,
                       label: false,
                       include_blank: :translate,
                       wrapper: false,
                       required: true %>
+    <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                    f,
+                                    class: 'btn btn-sm text-danger' %>
   </div>
   <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE } p-2\"></i>".html_safe,
                                   f,

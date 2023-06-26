@@ -1,23 +1,32 @@
 <% content_for :title, @page %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-
   <div class="row">
-    <div class="col-md-8">
-      <%= render 'admin/application/summary/show', about: @page %>
-      <%= render 'admin/communication/blocks/list', about: @page %>
-      <%= render 'admin/communication/websites/pages/show/special_page', about: @page %>
-      <%= render 'admin/application/dependencies', about: @page %>
+    <div class="col-lg-7">
+      <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
+        <p class="lead"><%= @page.title %></p>
+      <% end %>
     </div>
-    <div class="col-md-4">
-      <%= render 'admin/application/a11y/widget', about: @page %>
-      <%= render 'admin/application/i18n/widget', about: @page %>
-      <%= render 'admin/communication/websites/pages/show/metadata' %>
-      <%= render 'admin/application/featured_image/show', about: @page %>
-      <%= render 'admin/application/meta_description/show', about: @page %>
+    <div class="offset-lg-1 col-lg-4">
+      <%= render 'admin/application/featured_image/show', about: @page, small: true %>
     </div>
   </div>
+  <%= osuny_separator %>
+  <%= render 'admin/application/a11y/widget', about: @page, horizontal: true %>
+  <%= osuny_separator %>
+  <div class="row">
+    <div class="col-lg-4">
+      <%= render 'admin/communication/websites/pages/show/metadata' %>
+    </div>
+    <div class="col-lg-8">
+      <%= render 'admin/application/summary/show', about: @page, small: true %>
+      <%= render 'admin/application/meta_description/show', about: @page, small: true %>
+    </div>
+  </div>
+  <%= render 'admin/communication/blocks/content/editor', about: @page %>
 <% end %>
+
+<%= render 'admin/application/dependencies', about: @page %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @page if @page.is_regular_page? %>
@@ -25,6 +34,10 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <%= link_to  t('open'),
+              @page.url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if @page.published %>
   <%= preview_link %>
   <%= link_to t('edit'), edit_admin_communication_website_page_path(@page), class: button_classes %>
 <% end %>

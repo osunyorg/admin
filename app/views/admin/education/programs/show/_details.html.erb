@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-4">
+    <%= osuny_label Education::Program.human_attribute_name('diploma') %>
+    <p><%= link_to program.diploma, [:admin, program.diploma] if program.diploma %></p>
+    <% if program.schools.any? %>
+      <%= osuny_label Education::Program.human_attribute_name('schools') %>
+      <ul class="list-unstyled">
+        <% program.schools.ordered.each do |school| %>
+          <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="col-lg-8">
+    <%= osuny_label Education::Program.human_attribute_name('short_name') %>
+    <p><%= program.short_name %></p>
+    <% if program.downloadable_summary.attached? %>
+      <%= osuny_label Education::Program.human_attribute_name('downloadable_summary') %>
+      <p><%= link_to "#{program.downloadable_summary.filename} (#{ number_to_human_size program.downloadable_summary.blob.byte_size })",
+                      url_for(program.downloadable_summary),
+                      target: :_blank %></p>
+    <% end %>
+    <% if @program.parent %>
+      <%= osuny_label Education::Program.human_attribute_name('parent') %>
+      <p><%= link_to @program.parent, [:admin, @program.parent] %></p>
+    <% end %>
+    <% if @program.children.any? %>
+      <%= osuny_label Education::Program.model_name.human(count: 2) %>
+      <ul class="list-unstyled">
+        <% @program.children.each do |child| %>
+          <li><%= link_to child, [:admin, child] %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

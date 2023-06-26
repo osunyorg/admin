@@ -1,19 +1,19 @@
 <div class="row pure__row--small mb-5">
   <div class="col-md-6">
     <div class="summernote">
-      <%= block_component_edit :text,
+      <%= block_component_edit block, :text,
           label: t('admin.communication.blocks.components.text.label'),
           placeholder: t('admin.communication.blocks.components.text.placeholder') %>
     </div>
   </div>
   <div class="col-md-6">
-    <%= block_component_edit :image,
+    <%= block_component_edit block, :image,
           label: t('admin.communication.blocks.components.image.input.label'),
           remove: t('admin.communication.blocks.components.image.input.remove') %>
-    <%= block_component_edit :alt,
+    <%= block_component_edit block, :alt,
           label: t('admin.communication.blocks.components.image.alt.label'),
           placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-    <%= block_component_edit :credit,
+    <%= block_component_edit block, :credit,
           label: t('admin.communication.blocks.components.image.credit.label'),
           placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
           summernote_config: 'link' %>
@@ -31,14 +31,14 @@
     <div class="flex-fill">
       <div class="row pure__row--small mb-n3">
         <div class="col-lg-4">
-          <%= block_component_edit  :title, template: @element %>
+          <%= block_component_edit block,  :title, template: @element %>
         </div>
         <div class="col-lg-4">
-          <%= block_component_edit :url, template: @element %>
+          <%= block_component_edit block, :url, template: @element %>
         </div>
         <div class="col-lg-4">
           <label class="form-label d-none d-xl-block">&nbsp;</label>
-          <%= block_component_edit :target_blank, template: @element %>
+          <%= block_component_edit block, :target_blank, template: @element %>
         </div>
       </div>
     </div>
@@ -51,5 +51,5 @@
   </div>
 </draggable>
 <div class="mt-3">
-  <%= block_component_add_element t('.add_button') %>
+  <%= block_component_add_element block, t('.add_button') %>
 </div>

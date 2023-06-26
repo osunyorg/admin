@@ -1,16 +1,16 @@
 <div class="row pure__row--small">
   <div class="col-md-6">
-    <%= block_component_edit :image %>
+    <%= block_component_edit block, :image %>
   </div>
   <div class="col-md-6">
-    <%= block_component_edit :alt,
+    <%= block_component_edit block, :alt,
           label: t('admin.communication.blocks.components.image.alt.label'),
           placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-    <%= block_component_edit :credit,
+    <%= block_component_edit block, :credit,
           label: t('admin.communication.blocks.components.image.credit.label'),
           placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
           summernote_config: 'link' %>
-    <%= block_component_edit :text,
+    <%= block_component_edit block, :text,
           summernote_config: 'link' %>
   </div>
 </div>

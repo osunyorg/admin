@@ -1,9 +1,12 @@
+<%
+small ||= false 
+%>
 <% if about.available_languages.many? %>
   <%
     route_args = about.is_direct_object?  ? [:admin, about.becomes(about.class.base_class)]
                                           : [:show_in_language, :admin, about.becomes(about.class.base_class)]
   %>
-  <%= osuny_panel t('internationalization.label') do %>
+  <%= osuny_panel t('internationalization.label'), small: small do %>
     <ol class="list-unstyled">
       <% about.available_languages.each do |language| %>
         <%

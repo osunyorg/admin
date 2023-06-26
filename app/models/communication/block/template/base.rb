@@ -1,5 +1,5 @@
 class Communication::Block::Template::Base
-  include Accessible
+  include WithAccessibility
   include WithDependencies
 
   class_attribute :components_descriptions,

@@ -5,36 +5,46 @@ module Admin::ApplicationHelper
                 polymorphic_url_param(object, **options)
   end
 
-  def show_link(object, **options)
+  def show_link(object, html_classes: button_classes, **options)
     link_to_if  can?(:read, object),
                 options.delete(:label) || t('show'),
                 polymorphic_url_param(object, **options),
-                class: button_classes
+                class: html_classes
   end
 
-  def edit_link(object, **options)
+  def edit_link(object, html_classes: button_classes, **options)
     return unless can?(:update, object)
     link_to options.delete(:label) || t('edit'),
             polymorphic_url_param(object, prefix: :edit, **options),
-            class: button_classes
+            class: html_classes
   end
 
-  def destroy_link(object, **options)
+  def destroy_link(object, html_classes: button_classes_danger, **options)
     return unless can?(:destroy, object)
     link_to options.delete(:label) || t('delete'),
             polymorphic_url_param(object, **options),
             method: :delete,
             data: { confirm: options.delete(:confirm_message) || t('please_confirm') },
-            class: button_classes_danger
+            class: html_classes
   end
 
-  def create_link(object_class, **options)
+  def create_link(object_class, html_classes: button_classes, **options)
     return unless can?(:create, object_class)
     object_class_sym = object_class.name.underscore.gsub('/', '_').to_sym
 
     link_to options.delete(:label) || t('create'),
             polymorphic_url_param(object_class_sym, prefix: :new, **options),
-            class: button_classes
+            class: html_classes
+  end
+
+  def duplicate_link(object, html_classes: nil)
+    return unless can?(:create, object)
+    html_classes = button_classes('btn-light') if html_classes.nil?
+    link_to t('admin.duplicate'),
+            [:duplicate, :admin, object],
+            method: :post,
+            data: { confirm: t('please_confirm') },
+            class: html_classes
   end
 
   def preview_link
@@ -50,13 +60,15 @@ module Admin::ApplicationHelper
     raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
   end
 
-  def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, &block)
+  def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, small: false, classes: '', &block)
     render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
             locals: {
               title: title,
               subtitle: subtitle,
               action: action,
-              image: image
+              image: image,
+              small: small,
+              classes: classes
             } do
       capture(&block)
     end
@@ -64,6 +76,10 @@ module Admin::ApplicationHelper
 
   def osuny_label(title, classes: '')
     raw "<label class=\"form-label #{classes}\">#{title}</label>"
+  end
+
+  def osuny_separator
+    raw '<hr class="my-5">'
   end
 
   def if_appstack(string)
@@ -74,15 +90,6 @@ module Admin::ApplicationHelper
   def if_pure(string)
     return '' if current_admin_theme != 'pure'
     " #{string}"
-  end
-
-  def duplicate_link(object)
-    return unless can?(:update, object)
-    link_to t('admin.duplicate'),
-            [:duplicate, :admin, object],
-            method: :post,
-            data: { confirm: t('please_confirm') },
-            class: button_classes('btn-light')
   end
 
   def button_classes(additional = '', **options)

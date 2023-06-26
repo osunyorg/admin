@@ -1,59 +1,45 @@
-<%
-action = link_to t('open'), @page.url, target: :_blank, class: 'btn btn-light btn-xs'
+<% 
+# TODO i18n quand les phrases sont vraiment claires 
+# @pa t'affole pas, c'est pas encore le cas 
 %>
-<%= osuny_panel t('metadata'), action: action do %>
-  <%= osuny_label Communication::Website::Page.human_attribute_name('published') %>
-  <p><%= t @page.published %></p>
+<%= osuny_panel t('metadata'), small: true do %>
   <% if @page.is_special_page? %>
-    <%= osuny_label Communication::Website::Page.human_attribute_name('special_page') %>
-    <p><%= t("communication.website.pages.defaults.#{@page.type_key}.title") %></p>
+    <% page_type = t("communication.website.pages.defaults.#{@page.type_key}.title") %>
+    <% if page_type != @page.to_s %>
+      <%= page_type %><br>
+    <% end %>
   <% end %>
-  <% unless @page.slug.blank? %>
-    <%= osuny_label Communication::Website::Page.human_attribute_name('slug') %>
-    <p><%= @page.slug %></p>
-  <% end %>
-  <%= osuny_label Communication::Website::Page.human_attribute_name('path') %>
-  <p><%= @page.path %></p>
+
+  <%= @page.published ? 'Publiée' : 'Brouillon' %>
+
+  <%= render 'admin/application/i18n/inline', about: @page %>
 
   <% if @page.parent %>
-    <%= osuny_label Communication::Website::Page.human_attribute_name('parent') %>
-    <p><%= link_to_if can?(:read, @page.parent),
-                      @page.parent,
-                      admin_communication_website_page_path(
-                        website_id: @website.id,
-                        id: @page.parent.id
-                      ),
-                      class: "#{'draft' unless @page.parent.published?}" %></p>
+    <br>
+    Dans
+    <%= link_to_if  can?(:read, @page.parent),
+                    @page.parent,
+                    admin_communication_website_page_path(
+                      website_id: @website.id,
+                      id: @page.parent.id
+                    ) %>
   <% end %>
-
-  <% if can?(:edit, @website) && @page.best_bodyclass %>
-    <%= osuny_label Communication::Website::Page.human_attribute_name('bodyclass') %>
-    <p>
-      <%= @page.best_bodyclass %>
-      <% if @page.bodyclass.blank? %>
-        <br>
-        <span class="small text-muted">
-          <%= t 'admin.inheritance.sentence_without_link' %>
-        </span>
-      <% end %>
-    </p>
-  <% end %>
-
-  <%= osuny_label Communication::Website::Page.human_attribute_name('full_width') %>
-  <p><%= t @page.full_width %></p>
 
   <% if @page.children.any? %>
-    <%= osuny_label Communication::Website::Page.human_attribute_name('children') %>
-    <ul class="list-unstyled mb-0">
-      <% @page.children.ordered.each do |child| %>
-        <li>
-          <%= link_to_if can?(:read, child),
-                        child,
-                        admin_communication_website_page_path( website_id: @website.id, id: child.id),
-                        class: "#{'draft' unless child.published?}" %>
-        </li>
-      <% end %>
-    </ul>
+    <br>
+    <%= Communication::Website::Page.human_attribute_name('children') %> :
+    <%= raw @page.children.ordered.map { |child|
+          link_to_if  can?(:read, child),
+                      child,
+                      admin_communication_website_page_path( website_id: @website.id, id: child.id),
+                      class: "#{'draft' unless child.published?}" 
+
+    }.join(', ') %>
   <% end %>
 
+  <% if @page.full_width %>
+    <br>
+    Pleine largeur
+  <% end %>
 <% end %>
+

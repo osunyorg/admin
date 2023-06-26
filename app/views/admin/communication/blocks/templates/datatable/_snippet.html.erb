@@ -1,0 +1,19 @@
+<div class="table-responsive">
+  <table class="table table-sm">
+    <% unless block.template.caption.blank? %>
+      <caption><%= block_component_snippet block, :caption %></caption>
+    <% end %>
+    <thead>
+      <tr>
+        <%= block_component_snippet block, :columns %>
+      </tr>
+    </thead>
+    <tbody>
+      <% block.template.elements.first(1).each do |row| %>
+        <tr>
+          <%= block_component_snippet block, :cells, template: row %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

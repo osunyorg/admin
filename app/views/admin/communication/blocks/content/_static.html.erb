@@ -1,0 +1,21 @@
+<%
+@university = about.university
+%>
+contents:
+<% about.blocks.without_heading.published.ordered.each do |block| %>
+<%= render 'admin/communication/blocks/static', block: block %>
+<% end %>
+<% about.headings.root.ordered.each do |heading| %>
+<%= render 'admin/communication/blocks/headings/static', heading: heading %>
+<% end %>
+<% if about.blocks.any? %>
+blocks:
+<% about.blocks.published.ordered.each do |block| %>
+  - template: <%= block.template_kind %>
+    title: >-
+      <%= prepare_text_for_static block.title, 3 %>
+    position: <%= block.position %>
+    data:
+<%= render "admin/communication/blocks/templates/#{block.template_kind}/static",
+            block: block, about: about if block.data && block.data.present? %><% end %>
+<% end %>

@@ -16,7 +16,10 @@
         <% next if block.about.nil?%>
         <% url = "#{block.about.university.url }#{edit_admin_communication_block_path(block)}" %>
         <tr>
-          <td><%= truncate "#{block}" %></td>
+          <td>
+            <%= truncate "#{block}" %><br>
+            <small><%= block.id %></small>
+          </td>
           <td>
             <%= truncate "#{block.about}" %>
             <span class="badge bg-dark">

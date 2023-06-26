@@ -1,0 +1,6 @@
+<p class="mb-1"><%= block_component_snippet block, :text %></p>
+<% block.template.elements.each_with_index do |element, index| %>
+  <a class="btn disabled <%= index.zero? ? 'btn-dark' : 'btn-light' %>">
+    <%= block_component_snippet block, :title, template: element %>
+  </a>
+<% end %>

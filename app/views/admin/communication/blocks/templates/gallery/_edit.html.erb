@@ -1,10 +1,10 @@
 <div class="row pure__row--small">
   <div class="col-xl-6">
-    <%= block_component_edit :description %>
+    <%= block_component_edit block, :description %>
   </div>
 </div>
 
-<%= block_component_edit :layout %>
+<%= block_component_edit block, :layout %>
 
 <p>Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité</p>
 <draggable :list="data.elements" class="row pure__row--small">
@@ -35,26 +35,26 @@
     </div>
     <div class="row pure__row--small">
       <div class="col-lg-6">
-        <%= block_component_edit :image,
+        <%= block_component_edit block, :image,
               template: @element,
               label: t('admin.communication.blocks.components.image.input.label'),
               placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
       </div>
       <div class="col-lg-6">
-        <%= block_component_edit :alt,
+        <%= block_component_edit block, :alt,
               template: @element,
               label: t('admin.communication.blocks.components.image.alt.label'),
               placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-        <%= block_component_edit :credit,
+        <%= block_component_edit block, :credit,
               template: @element,
               label: t('admin.communication.blocks.components.image.credit.label'),
               placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
               summernote_config: 'link' %>
-        <%= block_component_edit :text,
+        <%= block_component_edit block, :text,
             template: @element %>
       </div>
     </div>
   <% end %>
 </div>
 
-<%= block_component_add_element t('.add_image') %>
+<%= block_component_add_element block, t('.add_image') %>

@@ -1,16 +1,23 @@
-<%= osuny_panel t('featured_image.title') do %>
-  <% image = about.best_featured_image.variable?  ? about.best_featured_image.variant(resize: '600')
-                                                  : about.best_featured_image %>
-  <%= image_tag image, class: 'img-fluid mb-2' %>
-  <% unless about.featured_image.attached? %>
-    <p class="small"><%= t('admin.inheritance.sentence_without_link').downcase %></p>
+<% 
+small ||= false 
+%>
+<%= osuny_panel t('featured_image.title'), small: small do %>
+  <% if about.best_featured_image.attached? %>
+    <% image = about.best_featured_image.variable?  ? about.best_featured_image.variant(resize: '600')
+                                                    : about.best_featured_image %>
+    <%= image_tag image, class: 'img-fluid mb-2' %>
+    <% unless about.best_featured_image.attached? %>
+      <p class="small"><%= t('admin.inheritance.sentence_without_link').downcase %></p>
+    <% end %>
+    <% if about.best_featured_image_alt %>
+      <p class="mb-0"><%= about.best_featured_image_alt %></p>
+    <% end %>
+    <% if about.best_featured_image_credit %>
+      <div class="small mb-0">
+        <%= sanitize about.best_featured_image_credit %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
   <% end %>
-  <% if about.best_featured_image_alt %>
-    <p class="mb-0"><%= about.best_featured_image_alt %></p>
-  <% end %>
-  <% if about.best_featured_image_credit %>
-    <div class="small mb-0">
-      <%= sanitize about.best_featured_image_credit %>
-    </div>
-  <% end %>
-<% end if about.best_featured_image.attached? %>
+<% end %>

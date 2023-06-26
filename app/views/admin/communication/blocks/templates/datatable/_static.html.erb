@@ -1,7 +1,7 @@
-<%= block_component_static :description %>
-<%= block_component_static :columns %>
+<%= block_component_static block, :description %>
+<%= block_component_static block, :columns %>
       rows:
 <% block.template.elements.each do |element| %>
-<%= block_component_static :cells, template: element, list: true, depth: 4 %>
+<%= block_component_static block, :cells, template: element, list: true, depth: 4 %>
 <% end %>
-<%= block_component_static :caption %>
+<%= block_component_static block, :caption %>

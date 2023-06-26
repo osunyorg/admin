@@ -1,0 +1,34 @@
+<%
+class_name = "block block-key_figures"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<section class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless block.title.blank? && block.template.description.blank? %>
+        <div class="top">
+          <% unless block.title.blank? %>
+            <h2><%= block.title %></h2>
+          <% end %>
+          <% unless block.template.description.blank? %>
+            <div class="description">
+              <p><%= block_component_show block, :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <ul class="<%= block.template.elements.count.even? ? "even-items" : "odd-items" %>">
+        <% block.template.elements.each do |element| %>
+          <li>
+            <dl>
+              <dt><strong><%= block_component_show block, :number, template: element %></strong><%= block_component_show block, :unit, template: element %></dt>
+              <dd><%= block_component_show block, :description, template: element %></dd>
+            </dl>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>

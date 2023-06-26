@@ -1,0 +1,69 @@
+<%
+  class_name = "block block-testimonials"
+  unless block.title.blank?
+    class_name += " block-with-title"
+  end
+  if !block.template.elements.one?
+    class_name += " with-carousel"
+  end
+%>
+
+<section class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <div class="testimonials">
+        <% if !block.template.elements.one? %>
+          <div class="splide"
+              data-splide='{
+                  "arrows":false,
+                  "autoplay":true,
+                  "pauseOnHover":false,
+                  "pauseOnFocus":true,
+                  "type":"loop",
+                  "autoHeight":true,
+                  "interval":8000
+                }'
+              >
+            <div class="splide__slider">
+              <div class="splide__track">
+                <div class="splide__list">
+        <% end %>
+
+        <% block.template.elements.each do |element| %>
+          <% element_blob = element.photo_component.blob %>
+          <figure <% if !block.template.elements.one? %> class="splide__slide" <% end %>>
+            <blockquote>
+              <p><%= block_component_show block, :text, template: element %></p>
+            </blockquote>
+            <figcaption>
+              <% if element_blob.present? %>
+                <div class="avatar">
+                  <%= kamifusen_tag element_blob, width: 600, class: 'img-fluid mb-1', alt: element.author %>
+                </div>
+              <% end %>
+              <p>
+                <% if element.author %>
+                  <span class="signature"><%= block_component_show block, :author, template: element %></span>
+                <% end %>
+                <% if element.job %>
+                  <span class="meta"><%= block_component_show block, :job, template: element %></span>
+                <% end %>
+              </p>
+            </figcaption>
+          </figure>
+        <% end %>
+        <% if !block.template.elements.one? %>
+                </div>
+              </div>
+            </div>
+
+            <div class="splide__autoplay is-active">
+              <button class="splide__play"></button>
+              <button class="splide__pause"></button>
+            </div>
+          </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</section>

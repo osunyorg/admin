@@ -30,8 +30,8 @@
 #  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
-  include Accessible
   include AsIndirectObject
+  include WithAccessibility
   include WithPosition
   include WithUniversity
   include Sanitizable
@@ -40,6 +40,7 @@ class Communication::Block < ApplicationRecord
   FILE_MAX_SIZE = 100.megabytes
 
   belongs_to :about, polymorphic: true
+  belongs_to :heading, optional: true
   belongs_to  :communication_website,
               class_name: "Communication::Website",
               optional: true
@@ -90,7 +91,9 @@ class Communication::Block < ApplicationRecord
   }
 
   scope :published, -> { where(published: true) }
+  scope :without_heading, -> { where(heading: nil) }
 
+  before_validation :set_heading_from_about, on: :create
   before_save :attach_template_blobs
   before_validation :set_university_and_website_from_about, on: :create
 
@@ -112,10 +115,6 @@ class Communication::Block < ApplicationRecord
 
   def references
     [about]
-  end
-
-  def last_ordered_element
-    about.blocks.ordered.last
   end
 
   def template
@@ -152,6 +151,10 @@ class Communication::Block < ApplicationRecord
 
   protected
 
+  def last_ordered_element
+    about.blocks.ordered.last
+  end
+
   def set_university_and_website_from_about
     # about always have an university_id but can have no communication_website_id
     self.university_id = about.university_id
@@ -164,6 +167,11 @@ class Communication::Block < ApplicationRecord
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize
+  end
+
+  def set_heading_from_about
+    # IMPROVEMENT: Ne gère que le 1er niveau actuellement
+    self.heading = about.headings.root.ordered.last
   end
 
   # FIXME @sebou

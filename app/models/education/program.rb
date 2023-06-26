@@ -53,6 +53,7 @@ class Education::Program < ApplicationRecord
   include Aboutable
   include AsIndirectObject
   include Sanitizable
+  include WithAccessibility
   include WithAlumni
   include WithBlobs
   include WithBlocks

@@ -58,9 +58,11 @@ fr:
         all: Toutes les actualités
     attributes:
       communication/block:
-        title: Titre
+        title: Nom
         template: Type de bloc
         published: Publié ?
+      communication/block/heading:
+        title: Titre
       communication/extranet:
         about: Sujet de l'extranet
         about_: Extranet indépendant
@@ -257,6 +259,8 @@ fr:
           time_slot:
             from: De
             to: à
+        headings:
+          add: Ajouter un titre
         templates:
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
@@ -668,6 +672,8 @@ fr:
           description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
+    summary:
+      none: Il n'y a pas encore de résumé
     website:
       analytics: Analytics
       git: Git

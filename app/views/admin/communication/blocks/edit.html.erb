@@ -21,7 +21,7 @@
             <%= f.input :published %>
           </div>
         </div>
-        <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f %>
+        <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f, block: @block %>
       </div>
       <div class="col-xxl-3 col-lg-4">
         <%= render 'admin/application/a11y/widget', about: @block %>
@@ -32,9 +32,7 @@
     </textarea>
     <% content_for :action_bar_left do %>
       <%= destroy_link @block %>
-      <%= link_to 'Dependencies',
-                  [:admin, @block],
-                  class: button_classes('btn-light') if current_user.server_admin? %>
+      <%= duplicate_link @block %>
     <% end %>
     <% content_for :action_bar_right do %>
       <%= submit f %>

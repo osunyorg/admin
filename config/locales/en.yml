@@ -137,7 +137,7 @@ en:
   content: Content
   cookies_consent_choice: Cookies consent choice
   cookies_policy: Cookies policy
-  cookies_policy_url: https://osuny.org/politique-de-cookies
+  cookies_policy_url: https://www.osuny.org/politique-de-sobriete/
   create: Create
   date:
     formats:
@@ -257,6 +257,7 @@ en:
     sign_out: Log out
   metadata: Metadata
   open: Open
+  organize: Organize
   please_confirm: Are you sure?
   please_confirm_with_children: "WARNING: deleting this element will also remove every child. Are you sure?"
   preview:
@@ -266,7 +267,7 @@ en:
     tablet: Tablet
     desktop: Desktop
   privacy_policy: Privacy policy
-  privacy_policy_url: https://osuny.org/politique-de-confidentialite
+  privacy_policy_url: https://www.osuny.org/politique-de-confidentialite/
   properties:
     text:
       missing: Missing text
@@ -301,7 +302,7 @@ en:
   sms_code: "%{code} is your authentication code on %{context} (valid %{duration})"
   static: Static file
   terms_of_service: Terms of service
-  terms_of_service_url: https://osuny.org/conditions-d-utilisation
+  terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:
     formats:
       date_only: "%m/%d/%Y"

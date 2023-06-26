@@ -1,0 +1,12 @@
+  - kind: heading
+    title: >-
+      <%= prepare_text_for_static heading.title, 3 %>
+    position: <%= heading.position %>
+    level: <%= heading.level %>
+<% heading.blocks.published.ordered.each do |block| %>
+<%= render 'admin/communication/blocks/static', block: block %>
+<% end %>
+<% children = heading.children %>
+<% children.ordered.each do |child| %>
+<%= render 'admin/communication/blocks/headings/static', heading: child %>
+<% end %>

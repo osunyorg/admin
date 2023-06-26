@@ -29,10 +29,10 @@
     margin-bottom: $spacing1
 
 .hero
-    padding-top: 150px
-    padding-bottom: 30px
     background-color: $color-background-alt
     margin-bottom: 30px
+    padding-bottom: 30px
+    padding-top: 150px
     @media (min-height: 800px)
         padding-top: 250px
 
@@ -60,11 +60,20 @@ p
 a
     text-decoration: none
     text-decoration-thickness: 1px
-    text-underline-offset: 5px
+    text-underline-offset: 4px
     transition: text-decoration 0.5s, color 0.5s
-
     &:hover
         color: darken($primary, 10)
+
+.action
+    font-size: px2rem(14)
+    text-decoration: underline
+    text-decoration-color: rgba(0, 0, 0, 0.2)
+    text-decoration-thickness: 1px
+    text-underline-offset: 4px
+    transition: text-decoration 0.5s
+    &:hover
+        text-decoration-color: black
 
 .form-control:valid,
 .form-control.is-valid,
@@ -93,19 +102,10 @@ p + .form-label
         border-color: $color-accent
         &, p, label
             color: $color-background
-        
 
 .list-group-item.active
     color: $color-accent
     font-weight: bold
-
-.commands
-    background: $color-commands
-    bottom: 0
-    left: 0
-    position: sticky
-    right: 0
-    z-index: 100
 
 .blocks
     &__category
@@ -139,5 +139,5 @@ p + .form-label
 footer
     min-height: 300px
     a
-        text-decoration: none
         color: white
+        text-decoration: none

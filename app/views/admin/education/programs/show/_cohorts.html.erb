@@ -1,30 +1,25 @@
-<% if @program.cohorts.any? %>
-  <%= osuny_panel Education::Cohort.model_name.human(count: 2),
-                  subtitle: "#{@program.alumni.count} #{University::Person::Alumnus.model_name.human(count: @program.alumni.count).downcase}" do %>
-    <div class="table-responsive">
-      <table class="<%= table_classes %>">
-        <thead>
-          <tr>
-            <th><%= Education::Cohort.human_attribute_name('year') %></th>
-            <th><%= Education::Cohort.human_attribute_name('school') %></th>
-            <th><%= Education::Cohort.human_attribute_name('alumni') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @program.cohorts.ordered.each do |cohort| %>
-            <tr>
-              <td>
-                <%= link_to [:admin, cohort] do %>
-                  <%= cohort.academic_year %>
-                  <%= cohort.name %>
-                <% end %>
-              </td>
-              <td><%= link_to_if can?(:read, cohort.school), cohort.school, [:admin, cohort.school] %></td>
-              <td><%= cohort.people.count %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-<% end %>
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Education::Cohort.human_attribute_name('year') %></th>
+        <th><%= Education::Cohort.human_attribute_name('school') %></th>
+        <th><%= Education::Cohort.human_attribute_name('alumni') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @program.cohorts.ordered.each do |cohort| %>
+        <tr>
+          <td>
+            <%= link_to [:admin, cohort] do %>
+              <%= cohort.academic_year %>
+              <%= cohort.name %>
+            <% end %>
+          </td>
+          <td><%= link_to_if can?(:read, cohort.school), cohort.school, [:admin, cohort.school] %></td>
+          <td><%= cohort.people.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

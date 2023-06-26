@@ -69,7 +69,7 @@
       <% end %>
     <% end unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? %>
 
-    <%= render 'admin/communication/blocks/list', about: person %>
+    <%= render 'admin/communication/blocks/content/editor', about: person %>
   </div>
   <div class="col-md-4 col-xl-3">
     <%= osuny_panel t('metadata') do %>

@@ -1,0 +1,5 @@
+<%= osuny_label t('metadata') %>
+<p><%= @program.published ? Education::Program.human_attribute_name('is_published') 
+                          : Education::Program.human_attribute_name('is_draft') %></p>
+
+<%= render 'admin/application/property/text', object: @program, property: :meta_description %>

@@ -4,20 +4,18 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                               through_association: :communication_blocks
 
   def reorder
+    heading_id = params[:heading]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       @block = current_university.communication_blocks.find(id)
-      @block.update_column(:position, index + 1)
+      @block.update_columns position: index + 1,
+                            heading_id: heading_id
     end
     @block.about.touch
   end
 
   def new
-    about_class = params[:about_type].constantize
-    about = about_class.find params[:about_id]
-    # Rails uses ActiveRecord::Inheritance#polymorphic_name to hydrate the about_type.
-    # Example: A Block for a Communication::Website::Page::Home will have about_type = "Communication::Website::Page"
-    @block.about = about
+    @block.about = PolymorphicObjectFinder.find params, :about
     breadcrumb
   end
 
@@ -83,8 +81,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def about_path
     # La formation ou la page concernée
     path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
-    path_method_options = { 
-      id: @block.about_id, 
+    path_method_options = {
+      id: @block.about_id,
       website_id: website_id,
       extranet_id: extranet_id,
       journal_id: journal_id
@@ -106,5 +104,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def block_params
     params.require(:communication_block)
           .permit(:about_id, :about_type, :template_kind, :title, :data, :published)
+          .merge(university_id: current_university.id)
   end
 end

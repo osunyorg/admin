@@ -87,6 +87,6 @@ publications:
     url: "<%= publication.best_url %>"
 <% end %>
 <% end %>
-<%= render 'admin/communication/blocks/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography, @about.university %>
