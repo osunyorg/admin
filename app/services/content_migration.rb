@@ -52,9 +52,9 @@ class ContentMigration
     block.title.present? && 
     # these blocks keep their title
     !block.call_to_action? &&
-    !block.post? &&
-    !block.program? &&
-    !block.page?
+    !block.posts? &&
+    !block.programs? &&
+    !block.pages?
   end
 
   def about_types
