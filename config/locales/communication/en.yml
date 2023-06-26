@@ -672,6 +672,8 @@ en:
           description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
+    summary:
+      none: No summary yet
     website:
       analytics: Analytics
       git: Git
