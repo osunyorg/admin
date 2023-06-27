@@ -1,7 +1,9 @@
-<%
-$color = about.accessible? ? 'text-success' : 'text-danger'
-%>
 <span class="small a11y__status">
-  <i class="a11y__status__icon lead fas fa-universal-access <%= $color %>"></i>
-  <%= t "accessibility.status.#{about.accessible?}" %>
+  <% if about.accessibility_errors.any? %>
+    <i class="fas fa-universal-access text-danger"></i>
+    <%= t "accessibility.status.false" %>
+  <% elsif about.accessibility_warnings.any? %>
+    <i class="fas fa-universal-access text-muted"></i>
+    <%= t "accessibility.status.warnings" %>
+  <% end %>
 </span>

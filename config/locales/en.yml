@@ -8,6 +8,7 @@ en:
     status:
       true: Accessible
       false: Not accessible
+      warnings: Needs checking
     warnings:
       one: '1 insight'
       other: '%{count} insights'

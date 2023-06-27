@@ -8,6 +8,7 @@ fr:
     status:
       true: Accessible
       false: Non accessible
+      warnings: À vérifier
     warnings:
       one: '1 information utile'
       other: '%{count} informations utiles'
