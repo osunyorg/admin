@@ -1,4 +1,4 @@
-<% block.template.elements.each do |element|
+<% block.template.elements.first(4).each do |element|
   person = element.person
   next if person.nil?
   %>

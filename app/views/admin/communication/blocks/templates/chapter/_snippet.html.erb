@@ -1,1 +1,10 @@
-<p class="mb-0"><%= block_component_snippet block, :text %></p>
+<p class="mb-0">
+  <% if block.title %>
+    <b><%= block.title %></b>
+  <% end %>
+  <% if block.template.text.present? %>
+    <%= block_component_snippet block, :text %>
+  <% else %>
+    <%= block_component_snippet block, :notes %>
+  <% end %>
+</p>
