@@ -26,7 +26,7 @@
         <div class="content-editor__elements__preview">
           <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
         </div>
-        <%= render 'admin/application/a11y/status', about: block unless block.accessible? %>
+        <%= render 'admin/application/a11y/status', about: block %>
       </article>
     </div>
   </div>

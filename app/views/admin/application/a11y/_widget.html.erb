@@ -7,15 +7,19 @@ action = "<i class=\"#{ Icon::A11Y } #{ if_appstack 'fa-2x' } h4 float-end #{ co
   <% if horizontal %>
     <div class="row"><div class="offset-lg-4 col-lg-8 mt-lg-n4">
   <% end %>
-  <% if about.accessibility_errors.any? %>
+  <% if about.accessibility_errors_grouped.any? %>
     <p class="text-danger">
       <i class="<%= Icon::A11Y %>"></i>
       <%= t('accessibility.errors', count: about.accessibility_errors.count) %>
     </p>
     <ol class="list-unstyled">
-      <% about.accessibility_errors.each do |key| %>
+      <% about.accessibility_errors_grouped.each do |key, quantity| %>
         <li>
-          <%= osuny_label t("#{key}.title"), classes: 'text-danger' %>
+          <%
+          label =  t("#{key}.title")
+          label += " (× #{quantity})" if quantity > 1
+          %>
+          <%= osuny_label label, classes: 'text-danger' %>
           <p><%= t "#{key}.text_html" %></p>
         </li>
       <% end %>
@@ -26,12 +30,16 @@ action = "<i class=\"#{ Icon::A11Y } #{ if_appstack 'fa-2x' } h4 float-end #{ co
       <%= t 'accessibility.errors', count: 0 %>
     </p>
   <% end %>
-  <% if about.accessibility_warnings.any? %>
+  <% if about.accessibility_warnings_grouped.keys.any? %>
     <%= osuny_label t('accessibility.warnings', count: about.accessibility_warnings.count) %>
     <ul class="list-unstyled">
-      <% about.accessibility_warnings.each do |key| %>
+      <% about.accessibility_warnings_grouped.each do |key, quantity| %>
       <li>
-        <%= osuny_label t("#{key}.title") %>
+        <%
+        label =  t("#{key}.title")
+        label += " (× #{quantity})" if quantity > 1
+        %>
+        <%= osuny_label label %>
         <p>
           <%= t "#{key}.text_html" %>
         </p>

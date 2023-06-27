@@ -26,11 +26,19 @@ module WithAccessibility
     @accessibility_errors
   end
 
+  def accessibility_errors_grouped
+    @accessibility_errors_grouped ||= accessibility_errors.tally
+  end
+
   def accessibility_warnings
     check_accessibility_if_necessary
     @accessibility_warnings
   end
 
+  def accessibility_warnings_grouped
+    @accessibility_warnings_grouped ||= accessibility_warnings.tally
+  end
+  
   protected
 
   def check_accessibility_if_necessary
