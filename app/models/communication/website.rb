@@ -62,6 +62,7 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
+  scope :for_production, -> (production) { where(in_production: production) }
   scope :for_theme_version, -> (version) { where(theme_version: version) }
   scope :for_search_term, -> (term) {
     where("
