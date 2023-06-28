@@ -25,6 +25,7 @@ namespace :communication do
         post :duplicate
         post :connect
         post :disconnect
+        post :generate
       end
     end
     resources :categories, controller: 'websites/categories', path: '/:lang/categories' do

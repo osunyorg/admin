@@ -1,0 +1,6 @@
+<% #if about.blocks.none? && about.headings.none? %>
+  <%= link_to 'Générer le modèle de déclaration', 
+              generate_admin_communication_website_page_path(about), 
+              method: :post,
+              class: button_classes %>
+<% #end %>
