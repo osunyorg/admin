@@ -25,6 +25,7 @@ namespace :communication do
         post :duplicate
         post :connect
         post :disconnect
+        post 'generate-from-template' => 'websites/pages#generate_from_template', as: :generate
       end
     end
     resources :categories, controller: 'websites/categories', path: '/:lang/categories' do

@@ -85,6 +85,9 @@ module Communication::Website::Page::WithType
     nil
   end
 
+  def generate_from_template
+  end
+
   protected
 
   def default_parent
@@ -98,6 +101,14 @@ module Communication::Website::Page::WithType
     self.parent = default_parent
     self.full_width = full_width_by_default?
     self.published = published_by_default?
+  end
+
+  def generate_heading(title)
+    headings.create(university: university, title: title)
+  end
+
+  def generate_block(heading, kind, data)
+    blocks.create(university: university, heading: heading, template_kind: kind, data: data.to_json)
   end
 
 end

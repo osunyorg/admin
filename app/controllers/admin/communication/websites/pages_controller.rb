@@ -58,6 +58,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     redirect_back(fallback_location: [:admin, @object])
   end
 
+  def generate_from_template
+    @page.generate_from_template
+    redirect_back(fallback_location: [:admin, @page])
+  end
+
   def new
     @page.website = @website
     breadcrumb

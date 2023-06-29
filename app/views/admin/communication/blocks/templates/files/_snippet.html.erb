@@ -1,6 +1,5 @@
 <ul class="list-unstyled">
   <% block.template.elements.first(2).each do |element| %>
-    <% next unless element.blob %>
     <li><%= element.title %></li>
   <% end %>
 </ul>
