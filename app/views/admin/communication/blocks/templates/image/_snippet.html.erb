@@ -1,6 +1,6 @@
-<% 
-blob = block.template.image_component.blob 
-object = blob.variable? ? blob.variant(resize: 'x180')
-                        : blob
+<%
+blob = block.template.image_component.blob
+object = blob&.variable?  ? blob.variant(resize: 'x180')
+                          : blob
 %>
-<%= image_tag object, height: 90, alt: '', class: 'me-2' if blob %>
+<%= image_tag object, height: 90, alt: '', class: 'me-2' if object %>
