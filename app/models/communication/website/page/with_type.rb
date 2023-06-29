@@ -85,6 +85,9 @@ module Communication::Website::Page::WithType
     nil
   end
 
+  def generate_from_template
+  end
+
   protected
 
   def default_parent

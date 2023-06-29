@@ -52,7 +52,7 @@ class Communication::Website::Page::Accessibility < Communication::Website::Page
     false
   end
 
-  def generate
+  def generate_from_template
     generate_declaration
     generate_results
     generate_conformity
