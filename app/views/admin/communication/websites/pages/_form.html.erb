@@ -18,24 +18,22 @@ url = page.new_record?  ? admin_communication_website_pages_path
       <%= render 'admin/application/meta_description/form', f: f, about: page %>
     </div>
     <div class="col-md-4">
-      <% unless page.is_home? %>
-        <%= osuny_panel t('metadata') do %>
-          <%= f.input :published if page.draftable? %>
-          <%= f.input :slug,
-                      as: :string,
-                      required: true,
-                      input_html: page.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#communication_website_page_title' }
-                      } unless page.is_home? %>
-          <%= f.association :parent,
-                            collection: collection_tree(@website.pages.for_language(current_website_language), page),
-                            include_blank: false,
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] } unless page.is_home? %>
-          <%= f.input :bodyclass if can?(:edit, @website) %>
-          <%= f.input :full_width if page.editable_width? %>
-        <% end %>
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :published if page.draftable? %>
+        <%= f.input :slug,
+                    as: :string,
+                    required: true,
+                    input_html: page.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#communication_website_page_title' }
+                    } unless page.is_home? %>
+        <%= f.association :parent,
+                          collection: collection_tree(@website.pages.for_language(current_website_language), page),
+                          include_blank: false,
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] } unless page.is_home? %>
+        <%= f.input :bodyclass if can?(:edit, @website) %>
+        <%= f.input :full_width if page.editable_width? %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
     </div>
