@@ -73,7 +73,7 @@ window.osuny.contentEditor = {
 
         if (draggedKind === 'block') {
             // Prevent dragging a block after a heading, instead of inside
-            return relatedKind !== 'heading' || (!event.willInsertAfter && event.related === firstHeading);
+            return relatedKind !== 'heading' || !event.willInsertAfter && event.related === firstHeading;
         }
         return true;
     },
