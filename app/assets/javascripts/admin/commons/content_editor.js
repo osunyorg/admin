@@ -68,11 +68,12 @@ window.osuny.contentEditor = {
     onSortableMove: function (event) {
         'use strict';
         var draggedKind = event.dragged.dataset.kind,
-            relatedKind = event.related.dataset.kind;
+            relatedKind = event.related.dataset.kind,
+            firstHeading = this.sortableRootContainer.querySelector('.js-content-editor-element[data-kind="heading"]');
 
         if (draggedKind === 'block') {
             // Prevent dragging a block after a heading, instead of inside
-            return relatedKind !== 'heading' || !event.willInsertAfter;
+            return relatedKind !== 'heading' || (!event.willInsertAfter && event.related === firstHeading);
         }
         return true;
     },
