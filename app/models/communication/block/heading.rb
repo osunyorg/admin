@@ -39,7 +39,8 @@ class Communication::Block::Heading < ApplicationRecord
               optional: true
   has_many    :children,
               class_name: 'Communication::Block::Heading',
-              foreign_key: :parent_id
+              foreign_key: :parent_id,
+              dependent: :nullify
   has_many    :blocks,
               dependent: :nullify
 
