@@ -121,11 +121,4 @@ class Communication::Website::Page::Accessibility < Communication::Website::Page
     })
   end
 
-  def generate_heading(title)
-    headings.create(university: university, title: title)
-  end
-
-  def generate_block(heading, kind, data)
-    blocks.create(university: university, heading: heading, template_kind: kind, data: data.to_json)
-  end
 end
