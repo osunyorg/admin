@@ -3,7 +3,7 @@ namespace :server do
   resources :languages
   resources :websites, only: :index do
     member do
-      post :sync_theme
+      post :sync_theme_version
       post :update_theme
     end
   end

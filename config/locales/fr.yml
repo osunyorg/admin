@@ -283,8 +283,9 @@ fr:
   server_admin:
     websites:
       buttons:
-        sync: Sync
-        update: Mettre à jour
+        theme:
+          sync: Sync
+          update: Mettre à jour
       update_theme_notice: Le thème de %{website} va être mis à jour dans quelques instants
   seo: SEO
   simple_form:

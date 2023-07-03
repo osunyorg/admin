@@ -1,5 +1,5 @@
 class Server::WebsitesController < Server::ApplicationController
-  before_action :load_website, only: [:sync_theme, :update_theme]
+  before_action :load_website, only: [:sync_theme_version, :update_theme]
 
   has_scope :for_theme_version
   has_scope :for_production
@@ -11,7 +11,7 @@ class Server::WebsitesController < Server::ApplicationController
     add_breadcrumb Communication::Website.model_name.human(count: 2), server_websites_path
   end
 
-  def sync_theme
+  def sync_theme_version
     @website.get_current_theme_version!
   end
 
