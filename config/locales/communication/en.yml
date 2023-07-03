@@ -674,9 +674,9 @@ en:
       post:
         metadata:
           and_pinned: and pinned
-          by: by 
+          by: by %{author}
           draft: Draft
-          published_on: Published on
+          published_on: Published on %{date}
     manage_authors: Manage authors
     number_of_posts: Nunber of posts
     summary:
