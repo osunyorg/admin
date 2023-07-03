@@ -49,6 +49,11 @@ module Communication::Website::WithGitRepository
     (saved_change_to_about_id? && about_id_before_last_save.present?) || language_was_removed
   end
 
+  def update_theme_version
+    git_repository.update_theme_version!
+  end
+  handle_asynchronously :update_theme_version, queue: :default
+
   protected
 
   def add_direct_source_to_sync(direct_source)

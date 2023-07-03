@@ -3,10 +3,14 @@ APPLICATION_ENV: development
 BUGSNAG_JAVASCRIPT_KEY:
 BUGSNAG_RUBY_KEY:
 
+GITHUB_WEBSITE_THEME_BRANCH:
+GITHUB_WEBSITE_THEME_PATH:
+GITHUB_WEBSITE_THEME_REPOSITORY:
+
 MAIL_FROM_DEFAULT_ADDRESS:
 MAIL_FROM_DEFAULT_NAME:
 
-  # Can be used when working on two incompatible branches (e.g. main & i18n)
+# Can be used when working on two incompatible branches (e.g. main & i18n)
 OSUNY_DEVELOPMENT_DBNAME:
 
 OSUNY_STAGING_APP_NAME:

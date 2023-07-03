@@ -283,7 +283,13 @@ fr:
   save: Enregistrer
   search: Rechercher
   select_language: Sélectionnez une langue
-  server: Serveur
+  server_admin:
+    websites:
+      buttons:
+        theme:
+          sync: Sync
+          update: Mettre à jour
+      update_theme_notice: Le thème de %{website} va être mis à jour dans quelques instants
   seo: SEO
   simple_form:
     error_notification:

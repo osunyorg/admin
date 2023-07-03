@@ -44,6 +44,16 @@ class Git::Providers::Github < Git::Providers::Abstract
     }
   end
 
+  def update_theme
+    previous_theme_sha = git_sha(ENV["GITHUB_WEBSITE_THEME_PATH"])
+    batch << {
+      path: ENV["GITHUB_WEBSITE_THEME_PATH"],
+      mode: '160000',
+      type: 'commit',
+      sha: current_theme_sha
+    } if previous_theme_sha != current_theme_sha
+  end
+
   def push(commit_message)
     return if !valid? || batch.empty?
     new_tree = client.create_tree repository, batch, base_tree: tree[:sha]
@@ -89,6 +99,10 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def branch_sha
     @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
+  end
+
+  def current_theme_sha
+    @current_theme_sha ||= client.branch(ENV["GITHUB_WEBSITE_THEME_REPOSITORY"], ENV["GITHUB_WEBSITE_THEME_BRANCH"])[:commit][:sha]
   end
 
   def tree_item_at_path(path)

@@ -5,10 +5,9 @@
         <th><%= Communication::Website.human_attribute_name('name') %></th>
         <th><%= Communication::Website.human_attribute_name('about') %></th>
         <th><%= Communication::Website.human_attribute_name('url') %></th>
-        <th><%= Communication::Website.human_attribute_name('theme_version') %></th>
         <th><%= University.model_name.human %></th>
         <th><%= Communication::Website.human_attribute_name('created_at') %></th>
-        <th width="160"></th>
+        <th><%= Communication::Website.human_attribute_name('theme_version') %></th>
       </tr>
     </thead>
     <tbody>
@@ -22,10 +21,13 @@
               <span class="badge bg-success">Prod</span>
             <% end %>
           </td>
-          <td class="js-version"><%= link_to website.theme_version, website.theme_version_url, target: :_blank if website.theme_version_url.present? %></td>
           <td><%= link_to website.university, [:server, website.university] %></td>
           <td><%= l website.created_at.to_date %></td>
-          <td><%= link_to "Sync version", refresh_server_website_path(website), method: :post, remote: true, class: button_classes if website.url.present? %></td>
+          <td>
+            <span class="js-version"><%= link_to website.theme_version, website.theme_version_url, target: :_blank if website.theme_version_url.present? %></span><br>
+            <%= link_to t('server_admin.websites.buttons.theme.sync'), sync_theme_version_server_website_path(website), method: :post, remote: true, class: button_classes if website.url.present? %>
+            <%= link_to t('server_admin.websites.buttons.theme.update'), update_theme_server_website_path(website), method: :post, remote: true, class: button_classes if website.url.present? && website.github? %>
+          </td>
         </tr>
       <% end %>
     </tbody>
