@@ -10,6 +10,7 @@ class Extranet::Posts::PostsController < Extranet::Posts::ApplicationController
 
   def show
     @post = current_extranet.posts.find_by! slug: params[:slug]
+    @disable_container = true
     breadcrumb
   end
 

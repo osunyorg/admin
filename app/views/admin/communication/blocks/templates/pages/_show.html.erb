@@ -5,24 +5,24 @@ unless block.title.blank?
 end
 class_name += " block-pages--" + block.template.layout
 %>
-<section class="<%= class_name %>">
+<div class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% unless block.title.blank? %>
-        <div class="top">rail
+        <div class="top">
           <% unless block.title.blank? %>
 
             <% if block.template.layout === "cards" || block.template.layout === "list" %>
               <% if block.template.page %>
-                <h2><%= link_to block.template.page, block.template.page.url %></h2>
+                <p class="block-title"><%= link_to block.template.page, block.template.page.url %></p>
               <% end %>
             
             <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
-              <h2><%= link_to block.title, block.template.page.url %></h2>
+              <p class="block-title"><%= link_to block.title, block.template.page.url %></p>
               <p class="description"><%= block.template.page&.summary %></p>
 
             <% else %>
-              <h2><%= block.title %></h2>
+              <p class="block-title"><%= block.title %></p>
             <% end %>
 
           <% end %>
@@ -100,4 +100,4 @@ class_name += " block-pages--" + block.template.layout
       <% end %>
     </div>
   </div>
-</section>
+</div>

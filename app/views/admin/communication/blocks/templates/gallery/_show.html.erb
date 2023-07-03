@@ -7,13 +7,13 @@ end
 class_name += " block-gallery--" + block.template.layout
 %>
 
-<section class="<%= class_name %>">
+<div class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% if block.title.present? || block.template.description.present? %>
         <div class="top">
           <% if block.title.present? %>
-            <h2><%= block.title %></h2>
+            <p class="block-title"><%= block.title %></p>
           <% end %>
           <% if block.template.description.present? %>
             <div class="description">
@@ -46,4 +46,4 @@ class_name += " block-gallery--" + block.template.layout
       <% end %>
     </div>
   </div>
-  </section>
+</div>

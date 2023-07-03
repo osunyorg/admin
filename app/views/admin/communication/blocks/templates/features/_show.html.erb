@@ -1,0 +1,33 @@
+<%
+class_name = "block block-features"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<div class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <div class="top">
+        <% unless block.title.blank? %>
+          <p class="block-title"><%= block.title %></p>
+        <% end %>
+        <% unless block.template.description.blank? %>
+          <div class="description">
+            <p><%= block_component_show block, :description %></p>
+          </div>
+        <% end %>
+      </div>
+      <ul>
+        <% block.template.elements.each do |element| %>
+          <li>
+            <div>
+              <h3><%= element.title %></h3>
+              <p><%= element.description %></p>
+            </div>
+            <%= block_component_show block, :image, template: element %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
