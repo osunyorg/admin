@@ -2,18 +2,16 @@
   <%= osuny_label t('metadata') %><br>
 
   <% if @post.published %>
-    <%= t 'communication.extranet.post.metadata.published_on' %>
-    <%= l @post.published_at.to_date, format: :long %>
+    <%= t('communication.extranet.post.metadata.published_on', date: l(@post.published_at.to_date, format: :long)) %>
     <% if @post.pinned %>
-      <%= t 'communication.extranet.post.metadata.and_pinned' %>
+      <%= t('communication.extranet.post.metadata.and_pinned') %>
     <% end %>
   <% else %>
-    <%= t 'communication.extranet.post.metadata.draft' %>
+    <%= t('communication.extranet.post.metadata.draft') %>
   <% end %>
 
   <% if @post.author %>
     <br>
-    <%= t 'communication.extranet.post.metadata.by' %>
-    <%= @post.author %>
+    <%= t('communication.extranet.post.metadata.by', author: @post.author) %>
   <% end %>
 </div>

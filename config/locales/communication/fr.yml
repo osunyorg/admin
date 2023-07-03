@@ -674,9 +674,9 @@ fr:
       post:
         metadata:
           and_pinned: et mis en avant
-          by: par 
+          by: par %{author}
           draft: Brouillon
-          published_on: Publié le
+          published_on: Publié le %{date}
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
     summary:
