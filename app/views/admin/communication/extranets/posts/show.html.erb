@@ -31,7 +31,7 @@
 
 <% content_for :action_bar_right do %>
   <%= link_to t('open'),
-              posts_post_url(@post.slug, host: @post.extranet.url, extranet_id: nil),
+              posts_post_url(date: @post.published_at.strftime('%Y-%m-%d'), slug: @post.slug, host: @post.extranet.url, extranet_id: nil),
               target: :_blank,
               class: 'btn btn-light btn-xs' if @post.published %>
   <%= preview_link %>
