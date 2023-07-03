@@ -12,7 +12,7 @@
       <div class="block-content">
         <% unless block.title.blank? %>
           <div class="top">
-            <p class="block-title"><%= block.title %></div>
+            <p class="block-title"><%= block.title %></p>
           </div>
         <% end %>
         <div class="events">
@@ -31,7 +31,7 @@
     <% else %>
       <div class="timeline">
         <% unless block.title.blank? %>
-          <h2><%= block.title %></h2>
+          <p class="block-title"><%= block.title %></p>
         <% end %>
         <div class="events">
           <ol>
@@ -50,6 +50,7 @@
             </div>
           <% end %>
         </div>
+      </div>
       <% end %>
   </div>
 </div>
