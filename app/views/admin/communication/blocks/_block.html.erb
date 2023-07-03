@@ -23,7 +23,8 @@
             </span>
           </span>
         </div>
-        <div class="content-editor__elements__preview">
+        <div class="content-editor__elements__preview
+                    content-editor__elements__preview--<%= block.template_kind %>">
           <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
         </div>
         <%= render 'admin/application/a11y/status', about: block %>
