@@ -17,7 +17,6 @@ class Server::WebsitesController < Server::ApplicationController
 
   def update_theme
     @website.update_theme_version
-    redirect_back(fallback_location: server_websites_path, notice: t('server_admin.websites.update_theme_notice', website: @website.to_s))
   end
 
   protected
