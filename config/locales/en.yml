@@ -130,7 +130,7 @@ en:
     users_alerts:
       already_confirmed: "Your account has already been confirmed."
       not_locked_html: '<i>%{model}</i> was not locked.'
-      pending_confirmation_html: "Your account has not been <b>confirmed</b> yet.<br>You have received an e-mail with a confirmation link. If you don't confirm, your account will stop working after <b>%{duration}</b>."
+      pending_confirmation_html: "Your account has not been <b>confirmed</b> yet.<br>You have received an e-mail with a confirmation link. If you don't confirm, your account will stop working after <b>%{duration}</b>. If you did not received the email check your spam folder or click on the following link."
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
     will_be_published_html: "<i>%{model}</i> will soon be published."
   batch_selectable:
@@ -158,6 +158,8 @@ en:
     passwords:
       new:
         send_me_reset_password_instructions: Reset my password
+    registrations:
+      signed_up: "Welcome! You have signed up successfully. You have received an e-mail with a confirmation link. If you don't confirm, your account will stop working after 1 day. If you did not received the email check your spam folder or click on the button \"I did not received the confirmation email\" on the authentication screen."
     sessions:
       signed_in: ''
     shared:
