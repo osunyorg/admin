@@ -12,19 +12,6 @@
 <div class="row mb-5">
   <div class="col-md-6 pb-4">
     <%= osuny_panel t('hello', name: current_user.first_name) do %>
-      <% if current_admin_theme == 'appstack' %>
-        <p>
-          Vous utilisez l'ancien thème d'administration, "Appstack".
-          Voulez-vous utiliser le nouveau thème, "Pure" ?
-          <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'pure'), method: :put %>
-        </p>
-      <% else %>
-        <p>
-          Vous utilisez le thème "Pure" pour l'administration.
-          Voulez-vous utiliser l'ancien thème, "Appstack" ?
-          <%= link_to 'Changer de thème', admin_set_theme_path(theme: 'appstack'), method: :put %>
-        </p>
-      <% end %>
     <% end %>
   </div>
   <div class="col-md-6 pb-4">
