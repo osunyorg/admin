@@ -8,7 +8,6 @@
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  full_width               :boolean          default(FALSE)
-#  github_path              :text
 #  header_text              :text
 #  kind                     :integer
 #  meta_description         :text
