@@ -25,7 +25,10 @@
           <td class="js-version"><%= link_to website.theme_version, website.theme_version_url, target: :_blank if website.theme_version_url.present? %></td>
           <td><%= link_to website.university, [:server, website.university] %></td>
           <td><%= l website.created_at.to_date %></td>
-          <td><%= link_to "Sync version", refresh_server_website_path(website), method: :post, remote: true, class: button_classes if website.url.present? %></td>
+          <td>
+            <%= link_to t('server_admin.websites.buttons.sync'), sync_theme_server_website_path(website), method: :post, remote: true, class: button_classes if website.url.present? %>
+            <%= link_to t('server_admin.websites.buttons.update'), update_theme_server_website_path(website), method: :post, class: button_classes if website.url.present? && website.github? %>
+          </td>
         </tr>
       <% end %>
     </tbody>

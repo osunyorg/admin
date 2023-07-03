@@ -279,8 +279,13 @@ en:
   reset: Reset
   save: Save
   search: Search
-  server: Server
   select_language: Select language
+  server_admin:
+    websites:
+      buttons:
+        sync: Sync
+        update: Update
+      update_theme_notice: The theme of %{website} will be updated in a moment
   seo: SEO
   simple_form:
     error_notification:
