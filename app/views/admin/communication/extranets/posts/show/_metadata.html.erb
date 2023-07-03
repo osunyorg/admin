@@ -1,17 +1,19 @@
-
 <div class="mb-4">
   <%= osuny_label t('metadata') %><br>
 
   <% if @post.published %>
-    Publié le <%= l @post.published_at.to_date %>
+    <%= t 'communication.extranet.post.metadata.published_on' %>
+    <%= l @post.published_at.to_date, format: :long %>
     <% if @post.pinned %>
-      et mis en avant
+      <%= t 'communication.extranet.post.metadata.and_pinned' %>
     <% end %>
   <% else %>
-    Brouillon
+    <%= t 'communication.extranet.post.metadata.draft' %>
   <% end %>
 
   <% if @post.author %>
-    <br>par <%= @post.author %>
+    <br>
+    <%= t 'communication.extranet.post.metadata.by' %>
+    <%= @post.author %>
   <% end %>
 </div>
