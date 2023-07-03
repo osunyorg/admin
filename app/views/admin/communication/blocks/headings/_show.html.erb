@@ -1,8 +1,8 @@
 <%
-html_tag = "h#{heading.level}"
+html_tag = "h#{heading.level}" #Not implemented yet in website
 %>
-<div class="container">
-  <<%= html_tag %>><%= heading %></<%= html_tag %>>
+<div class="heading">
+  <h2><%= heading %></h2>
 </div>
 <% heading.blocks.published.ordered.each do |block| %>
   <%= render "admin/communication/blocks/templates/#{block.template_kind}/show", block: block %>

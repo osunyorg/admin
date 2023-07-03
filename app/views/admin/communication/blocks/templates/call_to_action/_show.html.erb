@@ -8,13 +8,13 @@ image_class = "call_to_action--with" + (block.template.image.empty? ? "out" : ""
 
 %>
 
-<section class="<%= class_name %>">
+<div class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <div class="call_to_action <%= image_class %>">
         <div>
           <% unless block.title.blank? %>
-            <h2><%= block.title %></h2>
+            <p class="block-title"><%= block.title %></div>
           <% end %>
           <% if block.template.text %>
             <div class="description">
@@ -45,4 +45,4 @@ image_class = "call_to_action--with" + (block.template.image.empty? ? "out" : ""
       </div>
     </div>
   </div>
-</section>
+</div>
