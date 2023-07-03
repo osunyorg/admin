@@ -9,7 +9,6 @@ class Extranet::Posts::PostsController < Extranet::Posts::ApplicationController
   end
 
   def show
-    # TODO utiliser la date pour permettre des slugs identiques à dates différentes
     @post = current_extranet.posts.find_by! slug: params[:slug]
     breadcrumb
   end
