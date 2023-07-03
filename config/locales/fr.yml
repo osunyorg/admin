@@ -107,6 +107,9 @@ fr:
       zero: Aucun élément
       one: 1 élément
       other: "%{count} éléments"
+    i18n:
+      in: en %{lang}
+      switch_to: basculer en %{choices}
     infos: Informations
     inheritance:
       sentence_without_link: Valeur héritée

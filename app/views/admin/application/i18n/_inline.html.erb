@@ -1,6 +1,5 @@
 <% if about.available_languages.many? %>
-  <% # TODO i18n %>
-  <br>en <%= t(about.language.iso_code, scope: :languages) %>
+  <br> <%= t('admin.i18n.in', lang: language_name(about.language.iso_code).downcase) %>
 
   <%
     route_args = about.is_direct_object?  ? [:admin, about.becomes(about.class.base_class)]
@@ -9,9 +8,9 @@
   <%
     links = about.available_languages.map { |language|
       next if language.id == about.language_id
-      link_to t(language.iso_code, scope: :languages).downcase, 
+      link_to language_name(language.iso_code).downcase, 
                 [*route_args, lang: language.iso_code]
     }.compact
   %>
-  <br>(basculer en <%= links.to_sentence.html_safe %>)
+  <br>(<%= t('admin.i18n.switch_to', choices: links.to_sentence).html_safe %>)
 <% end %>
