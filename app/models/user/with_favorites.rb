@@ -3,6 +3,7 @@ module User::WithFavorites
 
   included do
     has_many :favorites, dependent: :destroy
+    after_save :autoset_favorites
   end
 
   def add_favorite(about)
@@ -21,5 +22,13 @@ module User::WithFavorites
 
   def favorites_for(about)
     favorites.where(about_id: about.id, about_type: about.class.polymorphic_name)
+  end
+
+  def autoset_favorites
+    if saved_change_to_role? && website_manager? && favorites.none?
+      websites_to_manage.each do |website|
+        add_favorite(website)
+      end
+    end
   end
 end
