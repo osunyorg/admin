@@ -14,11 +14,11 @@ class_name += " block-pages--" + block.template.layout
 
             <% if block.template.layout === "cards" || block.template.layout === "list" %>
               <% if block.template.page %>
-                <p class="block-title"><%= link_to block.template.page, block.template.page.url %></div>
+                <p class="block-title"><%= link_to block.template.page, block.template.page.url %></p>
               <% end %>
             
             <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
-              <p class="block-title"><%= link_to block.title, block.template.page.url %></div>
+              <p class="block-title"><%= link_to block.title, block.template.page.url %></p>
               <p class="description"><%= block.template.page&.summary %></p>
 
             <% else %>
