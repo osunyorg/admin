@@ -673,10 +673,10 @@ fr:
     extranet:
       post:
         metadata:
-          and_pinned: et mis en avant
+          and_pinned: et mise en avant
           by: par %{author}
           draft: Brouillon
-          published_on: Publié le %{date}
+          published_on: Publiée le %{date}
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités
     summary:
