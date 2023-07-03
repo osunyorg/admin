@@ -14,7 +14,7 @@ image_class = "call_to_action--with" + (block.template.image.empty? ? "out" : ""
       <div class="call_to_action <%= image_class %>">
         <div>
           <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></div>
+            <p class="block-title"><%= block.title %></p>
           <% end %>
           <% if block.template.text %>
             <div class="description">
