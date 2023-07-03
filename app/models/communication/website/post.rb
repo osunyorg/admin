@@ -5,7 +5,6 @@
 #  id                       :uuid             not null, primary key
 #  featured_image_alt       :string
 #  featured_image_credit    :text
-#  github_path              :text
 #  meta_description         :text
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)
