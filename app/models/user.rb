@@ -59,17 +59,16 @@ class User < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes.
   # The sanitization is handled in User::WithAuthentication's sanitize_fields method.
   include WithAdminTheme
+  include WithAuthentication
   include WithAuthorship
   include WithAvatar
   include WithFavorites
-  # FIXME y a-t-il des couplages temporels qui justifient l'ordre ci-dessous ?
-  include WithRegistrationContext
-  include WithUniversity
-  include WithAuthentication
   include WithOmniauth
   include WithPerson
+  include WithRegistrationContext
   include WithRoles
   include WithSyncBetweenUniversities
+  include WithUniversity
 
   belongs_to :language
 
