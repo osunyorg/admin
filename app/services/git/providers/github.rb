@@ -1,5 +1,8 @@
 class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
+  THEME_REPOSITORY = "noesya/osuny-hugo-theme-aaa".freeze
+  THEME_BRANCH = "main".freeze
+  THEME_PATH = "themes/osuny-hugo-theme-aaa".freeze
 
   def url
     "#{BASE_URL}/#{repository}"
@@ -42,6 +45,16 @@ class Git::Providers::Github < Git::Providers::Abstract
       type: file[:type],
       sha: nil
     }
+  end
+
+  def update_theme
+    previous_theme_sha = git_sha(THEME_PATH)
+    batch << {
+      path: THEME_PATH,
+      mode: '160000',
+      type: 'commit',
+      sha: current_theme_sha
+    } if previous_theme_sha != current_theme_sha
   end
 
   def push(commit_message)
@@ -89,6 +102,10 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def branch_sha
     @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
+  end
+
+  def current_theme_sha
+    @current_theme_sha ||= client.branch(THEME_REPOSITORY, THEME_BRANCH)[:commit][:sha]
   end
 
   def tree_item_at_path(path)

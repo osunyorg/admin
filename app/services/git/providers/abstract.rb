@@ -28,6 +28,10 @@ class Git::Providers::Abstract
     raise NotImplementedError
   end
 
+  def update_theme
+    raise NotImplementedError
+  end
+
   def push(commit_message)
     raise NotImplementedError
   end
