@@ -7,7 +7,7 @@
     <%= render 'application/notice' %>
     <%= render 'extranet/application/nav' %>
     <%= render 'extranet/application/header' %>
-    <main class="container">
+    <main<% unless @disable_container %> class="container"<% end %>>
       <%= yield %>
     </main>
     <%= render 'extranet/application/footer' %>
