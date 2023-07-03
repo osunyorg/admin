@@ -6,13 +6,13 @@
   class_name += " block-partners--" + block.template.layout
 %>
 
-<section class="<%= class_name %>">
+<div class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% unless block.title.blank? && block.template.description.blank? %>
         <div class="top">
           <% unless block.title.blank? %>
-            <h2><%= block.title %></h2>
+            <p class="block-title"><%= block.title %></div>
           <% end %>
           <% unless block.template.description.blank? %>
             <div class="description">
@@ -57,4 +57,4 @@
       </div>
     </div>
   </div>
-</section>
+</div>

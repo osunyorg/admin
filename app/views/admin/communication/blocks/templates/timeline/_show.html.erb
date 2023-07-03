@@ -6,13 +6,13 @@
   class_name += " block-timeline--" + block.template.layout
 %>
 
-<section class="<%= class_name %>">
+<div class="<%= class_name %>">
   <div class="container">
     <% if block.template.layout == "vertical" %>
       <div class="block-content">
         <% unless block.title.blank? %>
           <div class="top">
-            <h2><%= block.title %></h2>
+            <p class="block-title"><%= block.title %></div>
           </div>
         <% end %>
         <div class="events">
@@ -52,4 +52,4 @@
         </div>
       <% end %>
   </div>
-</section>
+</div>

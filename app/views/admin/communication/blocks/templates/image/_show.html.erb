@@ -5,12 +5,12 @@ unless block.title.blank?
   class_name += " block-with-title"
 end
 %>
-<section class="<%= class_name %>">
+<div class="<%= class_name %>">
   <div class="container">
     <div class="block-content">
       <% unless block.title.blank? %>
         <div class="top">
-          <h2><%= block.title %></h2>
+          <p class="block-title"><%= block.title %></div>
         </div>
       <% end %>
       <% if block.template.image %>
@@ -18,4 +18,4 @@ end
       <% end %>
     </div>
   </div>
-</section>
+</div>
