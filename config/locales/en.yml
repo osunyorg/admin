@@ -107,6 +107,9 @@ en:
       zero: No element
       one: 1 element
       other: "%{count} elements"
+    i18n:
+      in: in %{lang}
+      switch_to: switch to %{choices}
     infos: Informations
     inheritance:
       sentence_without_link: Value inherited

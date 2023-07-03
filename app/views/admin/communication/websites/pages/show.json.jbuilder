@@ -22,7 +22,7 @@ end if @page.featured_image.attached?
 language = @page.language
 json.language do
   json.extract! language, :id, :name, :iso_code, :summernote_locale
-  json.label t(language.iso_code, scope: :languages)
+  json.label language_name(language.iso_code)
 end
 
 original = @page.original
