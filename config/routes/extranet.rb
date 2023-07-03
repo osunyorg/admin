@@ -27,7 +27,7 @@ namespace :posts do
   get 'categories' => 'categories#index', as: :categories
   get 'categories/:slug' => 'categories#show', as: :category
   # Categories before slug !
-  get ':slug' => 'posts#show', as: :post
+  get ':date/:slug' => 'posts#show', as: :post
   root to: 'posts#index'
 end
 namespace :library do

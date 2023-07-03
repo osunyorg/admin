@@ -34,8 +34,9 @@
 #
 class Communication::Extranet::Post < ApplicationRecord
   include Sanitizable
-  include WithFeaturedImage
+  include WithAccessibility
   include WithBlocks
+  include WithFeaturedImage
   include WithPublication
   include WithPermalink
   include WithSlug
