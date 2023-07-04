@@ -133,6 +133,7 @@ fr:
         access_token: Access token
         created_at: Création
         default_language: Langue par défaut
+        deployment_status_badge: Badge de statut du déploiement
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Provider Git
@@ -816,6 +817,7 @@ fr:
         host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
       communication_website:
+        deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'

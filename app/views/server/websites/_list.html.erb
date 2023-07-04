@@ -3,8 +3,9 @@
     <thead>
       <tr>
         <th><%= Communication::Website.human_attribute_name('name') %></th>
-        <th><%= Communication::Website.human_attribute_name('url') %></th>
         <th><%= Communication::Website.human_attribute_name('admin') %></th>
+        <th><%= Communication::Website.human_attribute_name('url') %></th>
+        <th><%= Communication::Website.human_attribute_name('status') %></th>
         <th><%= University.model_name.human %></th>
         <th><%= Communication::Website.human_attribute_name('theme_version') %></th>
         <th></th>
@@ -21,6 +22,7 @@
               <span class="badge bg-success">Prod</span>
             <% end %>
           </td>
+          <td><%= image_tag website.deployment_status_badge, alt: '' if website.deployment_status_badge.present? %></td>
           <td><%= link_to website.university, [:server, website.university] %></td>
           <td>
             <span class="js-version">
