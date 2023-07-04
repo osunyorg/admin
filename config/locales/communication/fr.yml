@@ -133,6 +133,7 @@ fr:
         access_token: Access token
         created_at: Création
         default_language: Langue par défaut
+        deployment_status_badge: Badge de statut du déploiement
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Provider Git

@@ -75,7 +75,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def website_params
     attribute_names = [
       :name, :url, :repository, :access_token, :about_type, :about_id, :in_production,
-      :git_provider, :git_endpoint, :git_branch, :plausible_url, language_ids: []
+      :git_provider, :git_endpoint, :git_branch, :plausible_url, :deployment_status_badge, language_ids: []
     ]
     # For now, default language can't be changed, too many implications, especially around special pages.
     attribute_names << :default_language_id unless @website&.persisted?

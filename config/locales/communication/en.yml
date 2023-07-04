@@ -133,6 +133,7 @@ en:
         access_token: Access token
         created_at: Creation
         default_language: Default language
+        deployment_status_badge: Deployment status badge
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
