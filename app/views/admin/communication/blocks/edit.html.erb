@@ -99,9 +99,10 @@
         return this.getFileUrl(data.signed_id, "image_1024x.jpg");
       },
       handleSummernotes() {
-        var $summernoteElements = $('.summernote-vue');
+        var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
 
         $summernoteElements.each(function(index){
+          $summernoteElements.get(index).classList.add('is-initialized');
           this.initSummernote($summernoteElements.get(index));
         }.bind(this));
       },
@@ -139,6 +140,9 @@
           element.dispatchEvent(new Event('input'));
         });
       }
+    },
+    updated: function() {
+      this.handleSummernotes();
     },
     mounted: function() {
       this.handleSummernotes();
