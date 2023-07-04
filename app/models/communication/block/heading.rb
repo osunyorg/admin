@@ -50,6 +50,10 @@ class Communication::Block::Heading < ApplicationRecord
 
   before_validation :compute_level
 
+  def references
+    [about]
+  end
+
   def to_s
     "#{title}"
   end
