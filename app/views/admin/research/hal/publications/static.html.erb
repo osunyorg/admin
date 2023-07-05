@@ -7,6 +7,8 @@ abstract: >-
   <%= prepare_html_for_static @about.abstract, @website.university %>
 citation_full: >-
   <%= prepare_html_for_static @about.citation_full, @website.university %>
+authors: >-
+  <%= @about.authors.ordered.join(', ') %>
 ref: >-
   <%= sanitize @about.ref %>
 url:
