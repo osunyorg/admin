@@ -38,6 +38,7 @@ namespace :university do
     end
     member do
       get :static
+      get "/translations/:lang" => "organizations#in_language", as: :show_in_language
     end
   end
   root to: 'dashboard#index'
