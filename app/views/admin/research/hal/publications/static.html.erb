@@ -4,9 +4,9 @@ date: "<%= @about.publication_date&.iso8601 %>"
 slug: "<%= @about.slug %>"
 docid: "<%= @about.docid %>"
 abstract: >-
-  <%= prepare_html_for_static @about.abstract, current_university %>
+  <%= prepare_html_for_static @about.abstract, @website.university %>
 citation_full: >-
-  <%= prepare_html_for_static @about.citation_full, current_university %>
+  <%= prepare_html_for_static @about.citation_full, @website.university %>
 ref: >-
   <%= sanitize @about.ref %>
 url:

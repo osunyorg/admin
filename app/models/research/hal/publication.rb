@@ -87,7 +87,11 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   def template_static
-    "admin/research/publications/static"
+    "admin/research/hal/publications/static"
+  end
+
+  def git_path(website)
+    "#{git_path_content_prefix(website)}publications/#{created_at.year}/#{slug}.html" if for_website?(website)
   end
 
   def doi_url

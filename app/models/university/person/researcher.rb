@@ -66,7 +66,8 @@ class University::Person::Researcher < University::Person
   end
 
   def dependencies
-    [person]
+    [person] +
+    research_hal_publications
   end
 
   def references
