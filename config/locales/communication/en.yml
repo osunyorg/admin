@@ -738,6 +738,9 @@ en:
           privacy_policy:
             slug: privacy-policy
             title: Privacy policy
+          research_hal_publication:
+            slug: publications
+            title: HAL publications
           research_paper:
             slug: papers
             title: Papers

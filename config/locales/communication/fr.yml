@@ -738,6 +738,9 @@ fr:
           privacy_policy:
             slug: politique-de-confidentialite
             title: Politique de confidentialité
+          research_hal_publication:
+            slug: publications
+            title: Publications HAL
           research_paper:
             slug: papiers
             title: Papiers
