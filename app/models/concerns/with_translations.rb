@@ -94,6 +94,8 @@ module WithTranslations
       filename: public_send(attachment_name).filename.to_s,
       content_type: public_send(attachment_name).content_type
     )
+  rescue
+    # Missing attachment
   end
 
   def translate_additional_data!(translation)
