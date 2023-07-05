@@ -1,5 +1,9 @@
 class Communication::Website::Page::ResearchHalPublication < Communication::Website::Page
 
+  def is_necessary_for_website?
+    website.connected_hal_publications.any?
+  end
+
   def editable_width?
     false
   end
