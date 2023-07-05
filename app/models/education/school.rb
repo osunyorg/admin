@@ -75,7 +75,8 @@ class Education::School < ApplicationRecord
     active_storage_blobs +
     programs +
     diplomas +
-    administrators.map(&:administrator)
+    administrators.map(&:administrator) +
+    researchers.map(&:researcher)
   end
 
   #####################

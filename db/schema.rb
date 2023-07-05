@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_04_113222) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_073214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -738,6 +738,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_113222) do
     t.date "publication_date"
     t.string "doi"
     t.string "slug"
+    t.text "citation_full"
+    t.boolean "open_access"
+    t.text "abstract"
+    t.string "journal_title"
+    t.text "file"
     t.index ["docid"], name: "index_research_hal_publications_on_docid"
   end
 

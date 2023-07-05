@@ -3,10 +3,15 @@
 # Table name: research_hal_publications
 #
 #  id               :uuid             not null, primary key
+#  abstract         :text
+#  citation_full    :text
 #  data             :jsonb
 #  docid            :string           indexed
 #  doi              :string
+#  file             :text
 #  hal_url          :string
+#  journal_title    :string
+#  open_access      :boolean
 #  publication_date :date
 #  ref              :string
 #  slug             :string
@@ -43,10 +48,15 @@ class Research::Hal::Publication < ApplicationRecord
       'docid',
       'title_s',
       'citationRef_s',
+      'citationFull_s',
       'uri_s',
       'doiId_s',
       'publicationDate_tdate',
       'linkExtUrl_s',
+      'abstract_s',
+      'openAccess_bool',
+      'journalTitle_s',
+      'files_s'
       # '*',
     ]
     publications = []
@@ -63,16 +73,25 @@ class Research::Hal::Publication < ApplicationRecord
     puts "HAL sync publication #{doc.docid}"
     publication.title = Osuny::Sanitizer.sanitize doc.title_s.first, 'string'
     publication.ref = doc.attributes['citationRef_s']
+    publication.citation_full = doc.attributes['citationFull_s']
+    publication.abstract = doc.attributes['abstract_s']&.first
     publication.hal_url = doc.attributes['uri_s']
     publication.doi = doc.attributes['doiId_s']
     publication.publication_date = doc.attributes['publicationDate_tdate']
     publication.url = doc.attributes['linkExtUrl_s']
+    publication.open_access = doc.attributes['openAccess_bool']
+    publication.journal_title = doc.attributes['journalTitle_s']
+    publication.file = doc.attributes['files_s']&.first
     publication.save
     publication
   end
 
   def template_static
-    "admin/research/publications/static"
+    "admin/research/hal/publications/static"
+  end
+
+  def git_path(website)
+    "#{git_path_content_prefix(website)}publications/#{created_at.year}/#{slug}.html" if for_website?(website)
   end
 
   def doi_url

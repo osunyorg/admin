@@ -1,8 +1,10 @@
 <article class="mb-4 d-flex align-items-center position-relative">
-  <div style="width: 80px">
-    <%= kamifusen_tag researcher.best_picture, width: 80, class: 'img-circle' if researcher.best_picture.attached? %>
-  </div>
-  <div class="ms-3">
+  <% if researcher.best_picture.attached? %>
+    <div class="me-3" style="width: 80px">
+      <%= kamifusen_tag researcher.best_picture, width: 80, class: 'img-circle' %>
+    </div>
+  <% end %>
+  <div>
     <%= link_to researcher, admin_research_researcher_path(researcher), class: 'stretched-link' %>
   </div>
 </article>
