@@ -8,7 +8,9 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   has_scope :for_kind
 
   def index
-    @organizations = apply_scopes(@organizations).ordered
+    @organizations = apply_scopes(@organizations)
+                      .for_language_id(current_university.default_language_id)
+                      .ordered
 
     respond_to do |format|
       format.html {
