@@ -141,8 +141,8 @@ class Communication::Block < ApplicationRecord
     translation.about = about_translation
     translation.template.translate!
     translation.data = translation.template.data
-    translation.save
     translation.heading_id = heading_id
+    translation.save
   end
 
   def to_s
