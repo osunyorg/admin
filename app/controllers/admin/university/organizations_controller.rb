@@ -27,10 +27,14 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def search
     @term = params[:term].to_s
+    language = Language.find_by(iso_code: params[:lang])
     @organizations = current_university.organizations
-                                        .for_language_id(current_university.default_language_id)
                                         .search_by_siren_or_name(@term)
                                         .ordered
+    @organizations = @organizations.joins(:language)
+                                    .where(languages: { 
+                                      iso_code: language.iso_code 
+                                    }) if language.present?
   end
 
   def show
