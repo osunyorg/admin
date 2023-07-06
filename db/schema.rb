@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_073214) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_103400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -944,6 +944,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_073214) do
     t.float "longitude"
     t.string "address_name"
     t.string "address_additional"
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_organizations_on_language_id"
+    t.index ["original_id"], name: "index_university_organizations_on_original_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -1211,7 +1215,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_073214) do
   add_foreign_key "research_theses", "university_people", column: "director_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_organization_categories", "universities"
+  add_foreign_key "university_organizations", "languages"
   add_foreign_key "university_organizations", "universities"
+  add_foreign_key "university_organizations", "university_organizations", column: "original_id"
   add_foreign_key "university_organizations_categories", "university_organization_categories", column: "category_id"
   add_foreign_key "university_organizations_categories", "university_organizations", column: "organization_id"
   add_foreign_key "university_people", "languages"

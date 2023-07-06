@@ -3,7 +3,7 @@ module Filters
     def initialize(user)
       super
       add :for_alumni_organization,
-          user.university.organizations.ordered,
+          user.university.organizations.for_language_id(current_university.default_language_id).ordered,
           I18n.t(
             'filters.attributes.element',
             element: University::Organization.model_name.human.downcase

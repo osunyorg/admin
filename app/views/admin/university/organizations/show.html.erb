@@ -18,20 +18,26 @@
           ].each do |property| %>
           <% value = @organization.send property %>
           <% next if value.blank? %>
-          <div class="col-xxl-6">
+          <div class="col-md-4">
             <%= osuny_label University::Organization.human_attribute_name(property) %>
-            <p><%= value %></p>
+          </div>
+          <div class="col-md-8">
+              <p><%= value %></p>
           </div>
         <% end %>
         <% if @organization.country.present? %>
-          <div class="col-xxl-6">
+          <div class="col-md-4">
             <%= osuny_label University::Organization.human_attribute_name('country') %>
+          </div>
+          <div class="col-md-8">
             <p><%= @organization.country_name %></p>
           </div>
         <% end %>
         <% if @organization.geolocated? %>
-          <div class="col-xxl-6">
+          <div class="col-md-4">
             <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
+          </div>
+          <div class="col-md-8">
             <p><%= @organization.geo_point.to_s %></p>
           </div>
         <% end %>
@@ -40,9 +46,11 @@
     <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
       <div class="row pure__row--small">
         <% unless @organization.url.blank? %>
-          <div class="col-xxl-6">
+          <div class="col-md-4">
             <%= osuny_label University::Organization.human_attribute_name('url') %>
-            <p><%= link_to  @organization.url,
+          </div>
+          <div class="col-md-8">
+              <p><%= link_to  @organization.url,
                             @organization.url,
                             target: :_blank %></p>
           </div>
@@ -56,8 +64,10 @@
             ].each do |property| %>
           <% value = @organization.send property %>
           <% next if value.blank? %>
-          <div class="col-xxl-6">
+          <div class="col-md-4">
             <%= osuny_label University::Organization.human_attribute_name(property) %>
+          </div>
+          <div class="col-md-8">
             <p><%= value %></p>
           </div>
         <% end %>
@@ -66,20 +76,28 @@
 
     <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
       <div class="row pure__row--small">
-        <div class="col-xxl-6">
+        <div class="col-md-4">
           <%= osuny_label University::Organization.human_attribute_name('long_name') %>
+        </div>
+        <div class="col-md-8">
           <p><%= @organization.long_name %></p>
         </div>
-        <div class="col-xxl-6">
+        <div class="col-md-4">
           <%= osuny_label University::Organization.human_attribute_name('kind') %>
+        </div>
+        <div class="col-md-8">
           <p><%= @organization.kind_i18n %></p>
         </div>
-        <div class="col-xxl-6">
+        <div class="col-md-4">
           <%= osuny_label University::Organization.human_attribute_name('siren') %>
+        </div>
+        <div class="col-md-8">
           <p><%= @organization.siren %></p>
         </div>
       </div>
     <% end %>
+
+    <%= osuny_separator %>
 
     <%= render 'admin/communication/blocks/content/editor', about: @organization %>
   </div>
@@ -91,6 +109,8 @@
       <%= osuny_label University::Organization.human_attribute_name('active') %>
       <p><%= t @organization.active %></>
     <% end %>
+
+    <%= render 'admin/application/i18n/widget', about: @organization %>
 
     <% if @organization.categories.any? %>
       <%= osuny_panel University::Organization.human_attribute_name('categories') do %>
