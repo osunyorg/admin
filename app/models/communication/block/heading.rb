@@ -54,6 +54,21 @@ class Communication::Block::Heading < ApplicationRecord
     [about]
   end
 
+  def translate!(about_translation, parent_id = nil)
+    translation = self.dup
+    translation.about = about_translation
+    translation.parent_id = parent_id
+    translation.save
+    # then translate blocks
+    blocks.ordered.each do |block|
+      block.translate!(about_translation, translation.id)
+    end
+    # and then children
+    children.ordered.each do |child|
+      child.translate!(about_translation, translation.id)
+    end
+  end
+
   def to_s
     "#{title}"
   end
