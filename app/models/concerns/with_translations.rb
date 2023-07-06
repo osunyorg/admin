@@ -82,12 +82,12 @@ module WithTranslations
   end
 
   def translate_contents!(translation)
-    headings.root.ordered.each do |heading|
-      heading.translate!(translation)
-    end
-
     blocks.without_heading.ordered.each do |block|
       block.translate!(translation)
+    end
+
+    headings.root.ordered.each do |heading|
+      heading.translate!(translation)
     end
   end
 

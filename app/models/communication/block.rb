@@ -141,8 +141,8 @@ class Communication::Block < ApplicationRecord
     translation.about = about_translation
     translation.template.translate!
     translation.data = translation.template.data
-    translation.heading_id = heading_id
     translation.save
+    translation.heading_id = heading_id
   end
 
   def to_s
@@ -172,7 +172,7 @@ class Communication::Block < ApplicationRecord
 
   def set_heading_from_about
     # IMPROVEMENT: Ne gère que le 1er niveau actuellement
-    self.heading = about.headings.root.ordered.last
+    self.heading ||= about.headings.root.ordered.last
   end
 
   # FIXME @sebou
