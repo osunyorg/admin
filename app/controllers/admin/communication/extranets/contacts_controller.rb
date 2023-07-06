@@ -2,8 +2,14 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
   def index
     respond_to do |format|
       format.html {
-        @people = current_university.people.ordered.page params[:persons_page]
-        @organizations = current_university.organizations.ordered.page params[:organizations_page]
+        @people = current_university.people
+                                    .for_language_id(current_university.default_language_id)
+                                    .ordered
+                                    .page(params[:persons_page])
+        @organizations = current_university.organizations
+                                           .for_language_id(current_university.default_language_id)
+                                           .ordered
+                                           .page(params[:organizations_page])
       }
       format.xlsx {
         # params[export] can be "people" oe "organizations"

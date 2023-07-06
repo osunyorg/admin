@@ -28,6 +28,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def search
     @term = params[:term].to_s
     @organizations = current_university.organizations
+                                        .for_language_id(current_university.default_language_id)
                                         .search_by_siren_or_name(@term)
                                         .ordered
   end

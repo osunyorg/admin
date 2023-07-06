@@ -1,7 +1,10 @@
 class Communication::Block::Component::Organization < Communication::Block::Component::Base
 
   def organization
-    template.block.university.organizations.find_by(id: data)
+    template.block
+            .university
+            .organizations
+            .find_by(id: data)
   end
 
   def dependencies
@@ -9,7 +12,8 @@ class Communication::Block::Component::Organization < Communication::Block::Comp
   end
 
   def translate!
-    # TODO: Traduction des Organisations à faire
+    return unless data.present?
+    @data = organization.find_or_translate!(template.language).id
   end
 
 end

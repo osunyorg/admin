@@ -51,19 +51,23 @@ module Importers
         # Search by SIREN+NIC, then SIREN, then name, or create it with everything
         if @company_siren.present? && @company_nic.present?
           obj = @university.organizations
-                                   .find_by siren: @company_siren,
-                                            nic: @company_nic
+                            .for_language_id(current_university.default_language_id)
+                            .find_by siren: @company_siren,
+                                    nic: @company_nic
         elsif @company_siren.present?
           obj = @university.organizations
-                                   .find_by siren: @company_siren
+                            .for_language_id(current_university.default_language_id)
+                            .find_by siren: @company_siren
         end
         obj ||= @university.organizations
-                                   .find_by name: @company_name
+                            .for_language_id(current_university.default_language_id)
+                            .find_by name: @company_name
         obj ||= @university.organizations
-                                   .where( name: @company_name,
-                                           siren: @company_siren,
-                                           nic: @company_nic)
-                                   .first_or_create
+                            .for_language_id(current_university.default_language_id)
+                            .where( name: @company_name,
+                                    siren: @company_siren,
+                                    nic: @company_nic)
+                            .first_or_create
         obj
       end
     end
