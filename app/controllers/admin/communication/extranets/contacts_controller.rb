@@ -11,22 +11,7 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
                                            .ordered
                                            .page(params[:organizations_page])
       }
-      format.xlsx {
-        # params[export] can be "people" oe "organizations"
-        export = params['export']
-        case params['export']
-        when 'people'
-          @people = @extranet.connected_people.ordered
-        when 'organizations'
-          @organizations = @extranet.connected_organizations.ordered
-        else
-          raise ActionController::RoutingError.new('Not Found')
-        end
-
-        filename = "#{export}-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
-        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
-        render "admin/university/#{export}/index"
-      }
+      format.xlsx { export }
     end
 
 
@@ -54,12 +39,28 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
     head :ok
   end
 
-
   protected
 
   def load_object
     object_type = params[:objectType]
     object_id = params[:objectId]
     @object = object_type.constantize.find object_id
+  end
+
+  def export
+    # params[export] can be "people" or "organizations"
+    export = params['export']
+    case params['export']
+    when 'people'
+      @people = @extranet.connected_people.ordered
+    when 'organizations'
+      @organizations = @extranet.connected_organizations.ordered
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
+    filename = "#{export}-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+    response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+    render "admin/university/#{export}/index"
   end
 end
