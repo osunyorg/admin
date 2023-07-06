@@ -14,8 +14,9 @@ module Communication::Website::WithConnectedObjects
     menus.find_each(&:connect_dependencies)
     connect(about, self) if about.present?
     destroy_obsolete_connections
-    sync_with_git
-    destroy_obsolete_git_files
+    # In the same job
+    sync_with_git_without_delay
+    destroy_obsolete_git_files_without_delay
   end
   handle_asynchronously :rebuild_connections_and_git_files, queue: :low_priority
 
