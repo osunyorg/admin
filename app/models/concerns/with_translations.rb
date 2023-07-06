@@ -67,7 +67,7 @@ module WithTranslations
     # Handle featured image if object has one
     translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
     translation.save
-    # Handle headings blocks if object has any
+    # Handle headings & blocks if object has any
     translate_contents!(translation) if respond_to?(:contents)
     translate_additional_data!(translation)
 
