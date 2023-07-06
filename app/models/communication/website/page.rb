@@ -91,10 +91,6 @@ class Communication::Website::Page < ApplicationRecord
     "admin/communication/websites/pages/static"
   end
 
-  def menu_items
-    Communication::Website::Menu::Item.where(website: website, kind: :page, about: self)
-  end
-
   def dependencies
     calculated_dependencies = active_storage_blobs + blocks
     # children are used only if there is no block to display
