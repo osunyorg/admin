@@ -9,7 +9,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def index
     @organizations = apply_scopes(@organizations)
-                      .for_language_id(current_university.default_language_id)
                       .ordered
 
     respond_to do |format|
