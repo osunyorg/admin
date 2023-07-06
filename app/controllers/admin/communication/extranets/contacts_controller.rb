@@ -1,22 +1,29 @@
 class Admin::Communication::Extranets::ContactsController < Admin::Communication::Extranets::ApplicationController
   def index
-    respond_to do |format|
-      format.html {
-        @people = current_university.people
-                                    .for_language_id(current_university.default_language_id)
-                                    .ordered
-                                    .page(params[:persons_page])
-        @organizations = current_university.organizations
-                                           .for_language_id(current_university.default_language_id)
-                                           .ordered
-                                           .page(params[:organizations_page])
-      }
-      format.xlsx { export }
-    end
-
-
+    @people = current_university.people
+                                .for_language_id(current_university.default_language_id)
+                                .ordered
+                                .page(params[:persons_page])
+    @organizations = current_university.organizations
+                                        .for_language_id(current_university.default_language_id)
+                                        .ordered
+                                        .page(params[:organizations_page])
     breadcrumb
     add_breadcrumb Communication::Extranet.human_attribute_name(:feature_contacts)
+  end
+
+  def export_people
+    @people = @extranet.connected_people.ordered
+    filename = "people-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+    response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+    render "admin/university/people/index"
+  end
+
+  def export_organizations
+    @organizations = @extranet.connected_organizations.ordered
+    filename = "organizations-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+    response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+    render "admin/university/organizations/index"
   end
 
   def connect
@@ -45,22 +52,5 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
     object_type = params[:objectType]
     object_id = params[:objectId]
     @object = object_type.constantize.find object_id
-  end
-
-  def export
-    # params[export] can be "people" or "organizations"
-    export = params['export']
-    case params['export']
-    when 'people'
-      @people = @extranet.connected_people.ordered
-    when 'organizations'
-      @organizations = @extranet.connected_organizations.ordered
-    else
-      raise ActionController::RoutingError.new('Not Found')
-    end
-
-    filename = "#{export}-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
-    response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
-    render "admin/university/#{export}/index"
   end
 end
