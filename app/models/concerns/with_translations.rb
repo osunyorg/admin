@@ -67,8 +67,8 @@ module WithTranslations
     # Handle featured image if object has one
     translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
     translation.save
-    # Handle blocks if object has any
-    translate_blocks!(translation) if respond_to?(:blocks)
+    # Handle headings & blocks if object has any
+    translate_contents!(translation) if respond_to?(:contents)
     translate_additional_data!(translation)
 
     translation
@@ -81,9 +81,13 @@ module WithTranslations
     parent.find_or_translate!(language)
   end
 
-  def translate_blocks!(translation)
-    blocks.ordered.each do |block|
+  def translate_contents!(translation)
+    blocks.without_heading.ordered.each do |block|
       block.translate!(translation)
+    end
+
+    headings.root.ordered.each do |heading|
+      heading.translate!(translation)
     end
   end
 
