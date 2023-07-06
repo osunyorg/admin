@@ -8,7 +8,7 @@ namespace :auto do
   desc 'Resave every website to enable publications in the future'
   task save_and_sync_websites: :environment do
     Communication::Website.find_each do |website|
-      website.save
+      website.save_and_sync
     end
   end
 
