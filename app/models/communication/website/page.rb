@@ -104,7 +104,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def references
     [parent] +
-    menu_items +
+    website.menus +
     abouts_with_page_block
   end
 
