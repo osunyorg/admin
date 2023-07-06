@@ -50,8 +50,10 @@ default_organization:
   name: Organisation de test
   active: true
   university: default_university
+  language: fr
 
 noesya:
   name: noesya
   active: true
   university: default_university
+  language: fr
