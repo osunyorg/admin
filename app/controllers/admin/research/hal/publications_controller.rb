@@ -12,7 +12,7 @@ class Admin::Research::Hal::PublicationsController < Admin::Research::Hal::Appli
 
   def static
     @about = @publication
-    @website = @publication.websites&.first
+    @website = @publication.websites&.first || current_university.websites.first
     render layout: false
   end
 

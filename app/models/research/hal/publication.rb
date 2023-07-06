@@ -91,7 +91,7 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}publications/#{created_at.year}/#{slug}.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}publications/#{publication_date.year}/#{slug}.html" if for_website?(website)
   end
 
   def doi_url
