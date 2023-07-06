@@ -53,7 +53,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
     @item.menu = @menu
     @item.website = @website
     if @item.save
-      redirect_to admin_communication_website_menu_path(@menu),
+      redirect_to redirect_path(@item),
                   notice: t('admin.successfully_created_html', model: @item.to_s)
     else
       breadcrumb
@@ -63,7 +63,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
 
   def update
     if @item.update(item_params)
-      redirect_to admin_communication_website_menu_path(@menu),
+      redirect_to redirect_path(@item),
                   notice: t('admin.successfully_updated_html', model: @item.to_s)
     else
       breadcrumb
@@ -79,6 +79,11 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   end
 
   protected
+
+  def redirect_path(item)
+    item.parent.nil?  ? admin_communication_website_menu_path(item.menu)
+                      : admin_communication_website_menu_item_path(id: item.parent)
+  end
 
   def breadcrumb
     super
