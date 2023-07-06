@@ -13,14 +13,18 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
   end
 
   def export_people
-    @people = @extranet.connected_people.ordered
+    @people = @extranet.connected_people
+                       .for_language_id(current_university.default_language_id)
+                       .ordered
     filename = "people-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
     render "admin/university/people/index"
   end
 
   def export_organizations
-    @organizations = @extranet.connected_organizations.ordered
+    @organizations = @extranet.connected_organizations
+                              .for_language_id(current_university.default_language_id)
+                              .ordered
     filename = "organizations-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
     render "admin/university/organizations/index"
