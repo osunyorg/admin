@@ -136,11 +136,12 @@ class Communication::Block < ApplicationRecord
     block
   end
 
-  def translate!(about_translation)
+  def translate!(about_translation, heading_id = nil)
     translation = self.dup
     translation.about = about_translation
     translation.template.translate!
     translation.data = translation.template.data
+    translation.heading_id = heading_id
     translation.save
   end
 
