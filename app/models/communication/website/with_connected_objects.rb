@@ -7,6 +7,18 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
+  def rebuild_connections_and_git_files
+    pages.find_each(&:connect_dependencies)
+    posts.find_each(&:connect_dependencies)
+    categories.find_each(&:connect_dependencies)
+    menus.find_each(&:connect_dependencies)
+    connect(about, self) if about.present?
+    destroy_obsolete_connections
+    sync_with_git
+    destroy_obsolete_git_files
+  end
+  handle_asynchronously :rebuild_connections_and_git_files, queue: :low_priority
+
   # Appelé
   # - par un objet avec des connexions lorsqu'il est destroyed
   # - par le website lui-même au changement du about
