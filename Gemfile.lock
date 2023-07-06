@@ -102,13 +102,13 @@ GEM
     autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.782.0)
+    aws-partitions (1.783.0)
     aws-sdk-core (3.176.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.68.0)
+    aws-sdk-kms (1.69.0)
       aws-sdk-core (~> 3, >= 3.176.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.127.0)
@@ -197,7 +197,7 @@ GEM
     faceted_search (3.6.2)
       font-awesome-sass
       rails (>= 5.2.0)
-    faraday (2.7.9)
+    faraday (2.7.10)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-cookie_jar (0.0.7)
@@ -238,7 +238,7 @@ GEM
       i18n (>= 0.8)
       sugar-high (~> 0.7.2)
       sweetloader (~> 0.1.6)
-    geocoder (1.8.1)
+    geocoder (1.8.2)
     gitlab (4.19.0)
       httparty (~> 0.20)
       terminal-table (>= 1.5.1)
@@ -343,11 +343,11 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.2-arm64-darwin)
+    nokogiri (1.15.3-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.2-x86_64-darwin)
+    nokogiri (1.15.3-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.2-x86_64-linux)
+    nokogiri (1.15.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -635,7 +635,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.1.3p185
+   ruby 3.1.4p223
 
 BUNDLED WITH
    2.3.26
