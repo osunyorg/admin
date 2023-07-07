@@ -18,7 +18,7 @@ url:
   raw: "<%= @about.url %>"
   file: "<%= @about.file %>"
 researchers:
-<% @about.researchers.each do |researcher| %>
+<% @about.researchers.in_university(current_university).each do |researcher| %>
   - <%= researcher.slug %>
 <% end %>
 ---
