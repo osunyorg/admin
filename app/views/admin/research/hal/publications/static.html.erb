@@ -12,11 +12,15 @@ authors: >-
   <%= @about.authors.ordered.join(', ') %>
 ref: >-
   <%= sanitize @about.ref %>
-url:
-  hal: "<%= @about.hal_url %>"
-  doi: "<%= @about.doi_url %>"
-  raw: "<%= @about.url %>"
-  file: "<%= @about.file %>"
+links:
+  - label: "HAL"
+    url: "<%= @about.hal_url %>"
+  - label: "DOI"
+    url: "<%= @about.doi_url %>"
+  - label: "URL"
+    url: "<%= @about.url %>"
+  - label: "PDF"
+    url: "<%= @about.file %>"
 researchers:
 <% @about.researchers.in_university(@website.university).each do |researcher| %>
   - <%= researcher.slug %>
