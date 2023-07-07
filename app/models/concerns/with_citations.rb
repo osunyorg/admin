@@ -17,7 +17,7 @@ module WithCitations
 
   def citation_for(style, website: nil, locale: nil)
     citeproc = to_citeproc(website: website)
-    processor = CiteProc::Processor.new style: style, format: 'text', locale: locale
+    processor = CiteProc::Processor.new style: style, format: 'html', locale: locale
     processor.import([citeproc])
     processor.render(:bibliography, id: citeproc["id"]).first
   end

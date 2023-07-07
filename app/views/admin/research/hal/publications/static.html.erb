@@ -25,4 +25,14 @@ researchers:
 <% @about.researchers.in_university(@website.university).each do |researcher| %>
   - <%= researcher.slug %>
 <% end %>
+citations:
+  - label: "APA"
+    content: >-
+      <%= prepare_html_for_static @about.citation_apa, @website.university %>
+  - label: "MLA"
+    content: >-
+      <%= prepare_html_for_static @about.citation_mla, @website.university %>
+  - label: "ISO 690"
+    content: >-
+      <%= prepare_html_for_static @about.citation_iso690, @website.university %>
 ---
