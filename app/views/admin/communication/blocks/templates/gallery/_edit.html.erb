@@ -6,6 +6,19 @@
 
 <%= block_component_edit block, :layout %>
 
+
+<p>Envoyer plusieurs images</p>
+<div class="row pure__row--small">
+  <input  class="form-control"
+        type="file"
+        accept="image/*"
+        @change="onMultipleFileImageChange( $event, 'image' )"
+        data-size-limit="<%= Communication::Block::IMAGE_MAX_SIZE %>"
+        multiple>
+</div>
+
+<hr class="my-5">
+
 <p>Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité</p>
 <draggable :list="data.elements" class="row pure__row--small">
   <div v-for="(element, index) in data.elements" class="col-xxl-1 col-lg-2 col-4">

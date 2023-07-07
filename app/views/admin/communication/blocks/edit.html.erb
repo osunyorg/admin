@@ -62,6 +62,19 @@
     },
     methods: {
       // TODO : create a uploader vue3 component
+      onMultipleFileImageChange(event, key) {
+        var files = event.target.files || event.dataTransfer.files;
+        if (!files.length)
+          return;
+
+        var index = 0;
+        for(var i = 0; i < files.length; i += 1) {
+          index = this.data.elements.length;
+          this.data.elements.push(JSON.parse(JSON.stringify(this.defaultElement)));
+          this.data.elements[index].text = `image n ${index}`;
+          this.uploadFile(event.target, files[i], this.data.elements[index], key);
+        }
+      },
       onFileImageChange(event, object, key) {
         var files = event.target.files || event.dataTransfer.files;
         if (!files.length)
