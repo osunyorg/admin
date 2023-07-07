@@ -15,8 +15,11 @@ gem "breadcrumbs_on_rails"
 gem "bugsnag"
 gem "cancancan", "3.3.0"
 gem "caxlsx_rails", "~> 0.6.3"
+gem "citeproc", "~> 1.0"
+gem "citeproc-ruby", "~> 2.0"
 gem "cocoon", "~> 1.2"
 gem "country_select"
+gem "csl-styles", "~> 2.0"
 gem "curation"#, path: "../../arnaudlevy/curation"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
@@ -91,4 +94,3 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-

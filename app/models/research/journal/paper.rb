@@ -47,6 +47,7 @@ class Research::Journal::Paper < ApplicationRecord
   include Sanitizable
   include WithBlobs
   include WithBlocks
+  include WithCitations
   include WithGitFiles
   include WithPermalink
   include WithPosition
@@ -104,6 +105,23 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   protected
+
+  def citeproc_for_website(website)
+    {
+      "title" => title,
+      "author" => people.map { |person|
+        { "family" => person.last_name, "given" => person.first_name }
+      },
+      "URL" => website.url + Communication::Website::Permalink.for_object(self, website).computed_path,
+      "container-title" => journal.title,
+      "publisher" => university.name,
+      "keywords" => keywords,
+      "pdf" => pdf.attached? ? pdf.url : nil,
+      "month-numeric" => published_at.present? ? published_at.month.to_s : nil,
+      "issued" => published_at.present? ? { "date-parts" => [[published_at.year, published_at.month]] } : nil,
+      "id" => id
+    }
+  end
 
   def other_papers_in_the_volume
     return [] if volume.nil?
