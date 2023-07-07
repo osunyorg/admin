@@ -33,7 +33,7 @@ class Communication::Website::Permalink::Publication < Communication::Website::P
   end
 
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::ResearchHalPublication, language: language).slug_with_ancestors}/:year/:slug/"
+    "/#{website.special_page(Communication::Website::Page::ResearchHalPublication, language: language).slug_with_ancestors}/:year-:slug/"
   end
 
   protected
