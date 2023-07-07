@@ -113,8 +113,10 @@ class Research::Journal::Paper < ApplicationRecord
         { "family" => person.last_name, "given" => person.first_name }
       },
       "URL" => website.url + Communication::Website::Permalink.for_object(self, website).computed_path,
+      "DOI" => doi.present? ? doi : nil,
       "container-title" => journal.title,
-      "publisher" => university.name,
+      "volume" => volume&.number,
+      # "publisher" => university.name,
       "keywords" => keywords,
       "pdf" => pdf.attached? ? pdf.url : nil,
       "month-numeric" => published_at.present? ? published_at.month.to_s : nil,
