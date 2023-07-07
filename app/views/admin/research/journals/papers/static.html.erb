@@ -6,7 +6,7 @@ title: >-
 <% if @about.kind %>
 paper_kind: >-
   <%= prepare_text_for_static @about.kind %>
-paper_kinds: 
+paper_kinds:
   - "<%= @about.kind.slug %>"
 <% end %>
 <% if @about.volume && @about.volume.path %>
@@ -15,7 +15,7 @@ volumes:
 <% end %>
 weight: <%= @about.position %>
 date: "<%= @about.published_at&.to_date&.iso8601 %>"
-dates: 
+dates:
   published: "<%= @about.published_at&.to_date&.iso8601 %>"
   accepted: "<%= @about.accepted_at&.to_date&.iso8601 %>"
   received: "<%= @about.received_at&.to_date&.iso8601 %>"
@@ -38,5 +38,15 @@ authors_list: >
 <%= render 'admin/application/summary/static' %>
 abstract: >
   <%= prepare_text_for_static @about.abstract %>
+citations:
+  - label: "APA"
+    content: >-
+      <%= prepare_html_for_static @about.citation_apa(website: @website), @website.university %>
+  - label: "MLA"
+    content: >-
+      <%= prepare_html_for_static @about.citation_mla(website: @website), @website.university %>
+  - label: "ISO 690"
+    content: >-
+      <%= prepare_html_for_static @about.citation_iso690(website: @website), @website.university %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
