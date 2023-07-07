@@ -116,7 +116,6 @@ class Research::Journal::Paper < ApplicationRecord
       "DOI" => doi.present? ? doi : nil,
       "container-title" => journal.title,
       "volume" => volume&.number,
-      # "publisher" => university.name,
       "keywords" => keywords,
       "pdf" => pdf.attached? ? pdf.url : nil,
       "month-numeric" => published_at.present? ? published_at.month.to_s : nil,

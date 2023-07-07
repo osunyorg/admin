@@ -117,8 +117,6 @@ class Research::Hal::Publication < ApplicationRecord
       },
       "URL" => hal_url,
       "container-title" => journal_title,
-      # "publisher" => university.name,
-      # "keywords" => keywords,
       "pdf" => file,
       "month-numeric" => publication_date.present? ? publication_date.month.to_s : nil,
       "issued" => publication_date.present? ? { "date-parts" => [[publication_date.year, publication_date.month]] } : nil,
