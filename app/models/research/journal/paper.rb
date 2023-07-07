@@ -107,21 +107,24 @@ class Research::Journal::Paper < ApplicationRecord
   protected
 
   def to_citeproc(website: nil)
-    {
+    citeproc = {
       "title" => title,
       "author" => people.map { |person|
         { "family" => person.last_name, "given" => person.first_name }
       },
       "URL" => website.url + Communication::Website::Permalink.for_object(self, website).computed_path,
-      "DOI" => doi.present? ? doi : nil,
       "container-title" => journal.title,
       "volume" => volume&.number,
       "keywords" => keywords,
       "pdf" => pdf.attached? ? pdf.url : nil,
-      "month-numeric" => published_at.present? ? published_at.month.to_s : nil,
-      "issued" => published_at.present? ? { "date-parts" => [[published_at.year, published_at.month]] } : nil,
       "id" => id
     }
+    citeproc["DOI"] = doi if doi.present?
+    if published_at.present?
+      citeproc["month-numeric"] = published_at.month.to_s
+      citeproc["issued"] = { "date-parts" => [[published_at.year, published_at.month]] }
+    end
+    citeproc
   end
 
   def other_papers_in_the_volume
