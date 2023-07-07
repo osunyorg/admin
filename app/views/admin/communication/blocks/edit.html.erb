@@ -71,7 +71,6 @@
         for(var i = 0; i < files.length; i += 1) {
           index = this.data.elements.length;
           this.data.elements.push(JSON.parse(JSON.stringify(this.defaultElement)));
-          this.data.elements[index].text = `image n ${index}`;
           this.uploadFile(event.target, files[i], this.data.elements[index], key);
         }
       },
