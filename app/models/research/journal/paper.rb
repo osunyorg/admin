@@ -106,7 +106,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   protected
 
-  def citeproc_for_website(website)
+  def to_citeproc(website: nil)
     {
       "title" => title,
       "author" => people.map { |person|

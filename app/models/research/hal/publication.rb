@@ -27,6 +27,7 @@
 class Research::Hal::Publication < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
+  include WithCitations
   include WithGitFiles
   include WithSlug
 
@@ -107,6 +108,23 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   protected
+
+  def to_citeproc(website: nil)
+    {
+      "title" => title,
+      "author" => authors.map { |author|
+        { "family" => author.last_name, "given" => author.first_name }
+      },
+      "URL" => hal_url,
+      "container-title" => journal_title,
+      # "publisher" => university.name,
+      # "keywords" => keywords,
+      "pdf" => file,
+      "month-numeric" => publication_date.present? ? publication_date.month.to_s : nil,
+      "issued" => publication_date.present? ? { "date-parts" => [[publication_date.year, publication_date.month]] } : nil,
+      "id" => docid
+    }
+  end
 
   def slug_unavailable?(slug)
     self.class.unscoped
