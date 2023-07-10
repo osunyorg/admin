@@ -5,7 +5,3 @@
 <%= render 'admin/education/teachers/list', teachers: @teachers %>
 
 <%= paginate @teachers, theme: 'bootstrap-5' %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('education.manage_teachers'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
-<% end %>

@@ -216,7 +216,6 @@ en:
           description: Personne utilisant Osuny, dotée d'un compte authentifié
     internal_key: Internal Key
     invoice_informations: Invoice informations
-    manage_alumni: Manage alumni
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
     organization:
