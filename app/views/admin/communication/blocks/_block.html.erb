@@ -15,13 +15,15 @@
             <%= edit_link block, html_classes: 'action ms-2' %>
           </div>
           <span class="small text-muted kind mb-2"><%= block.template_kind_i18n  %></span>
-          <span class=" content-editor__elements__handle
-                        content-editor__elements__element--hover">
-            <span class="handle">
-              <span class="small"><%= t 'organize' %></span>
-              <i class="<%= Icon::SORT %>"></i>
+          <% if can?(:update, block) %>
+            <span class=" content-editor__elements__handle
+                          content-editor__elements__element--hover">
+              <span class="handle">
+                <span class="small"><%= t 'organize' %></span>
+                <i class="<%= Icon::SORT %>"></i>
+              </span>
             </span>
-          </span>
+          <% end %>
         </div>
         <div class="content-editor__elements__preview
                     content-editor__elements__preview--<%= block.template_kind %>">
