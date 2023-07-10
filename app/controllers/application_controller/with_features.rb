@@ -29,6 +29,13 @@ module ApplicationController::WithFeatures
         can?(:read, Administration::Qualiopi::Criterion)
     end
     helper_method :feature_administration?
+    
+    def feature_settings?
+      can?(:read, University::Person) || 
+      can?(:read, University::Organization) || 
+      can?(:read, User)
+    end
+    helper_method :feature_settings?
 
   end
 
