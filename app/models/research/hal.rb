@@ -7,9 +7,11 @@ module Research::Hal
   end
 
   def self.update_from_api!
+    # TODO suspendre les mises à jour des objets indirects
     Research::Hal::Author.find_each do |author|
       author.import_research_hal_publications!
     end
+    # TODO remettre la mise à jour des objects indirects
   end
 
   def self.parts
