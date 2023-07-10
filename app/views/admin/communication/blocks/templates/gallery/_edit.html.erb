@@ -6,16 +6,14 @@
 
 <%= block_component_edit block, :layout %>
 
-
 <p>Envoyer plusieurs images</p>
-<div class="row pure__row--small">
-  <input  class="form-control"
-        type="file"
-        accept="image/*"
-        @change="onMultipleFileImageChange( $event, 'image' )"
-        data-size-limit="<%= Communication::Block::IMAGE_MAX_SIZE %>"
-        multiple>
-</div>
+
+<input  class="form-control"
+      type="file"
+      accept="image/*"
+      @change="onMultipleFileImageChange( $event, 'image' )"
+      data-size-limit="<%= Communication::Block::IMAGE_MAX_SIZE %>"
+      multiple>
 
 <hr class="my-5">
 
