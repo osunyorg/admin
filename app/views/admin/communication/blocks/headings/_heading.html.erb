@@ -10,13 +10,15 @@
     <%= link_to t('edit'),
                 edit_admin_communication_heading_path(heading),
                 class: 'action ms-2' %>
-    <span class=" content-editor__elements__handle
-                  content-editor__elements__element--hover">
-      <span class="handle">
-        <span class="small"><%= t 'organize' %></span>
-        <i class="<%= Icon::SORT %>"></i>
+    <% if can?(:update, heading) %>
+      <span class=" content-editor__elements__handle
+                    content-editor__elements__element--hover">
+        <span class="handle">
+          <span class="small"><%= t 'organize' %></span>
+          <i class="<%= Icon::SORT %>"></i>
+        </span>
       </span>
-    </span>
+    <% end %>
   </div>
   <div class="content-editor__elements
               js-content-editor-sortable-container">
