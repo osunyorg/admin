@@ -2,14 +2,18 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   load_and_authorize_resource class: Communication::Block::Heading,
                               through: :current_university,
                               through_association: :communication_block_headings
+
   def reorder
     parent_id = params[:heading]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      heading = current_university.communication_block_headings.find(id)
-      heading.parent_id = parent_id
-      heading.position = index + 1
-      heading.save
+      @heading = current_university.communication_block_headings.find(id)
+      @heading.update_columns position: index + 1,
+                              parent_id: parent_id
+    end
+    if @heading.about&.respond_to?(:is_direct_object?)
+      @heading.about.is_direct_object?  ? @heading.about.sync_with_git
+                                        : @heading.about.touch # Sync indirect object's direct sources through after_touch
     end
   end
 
