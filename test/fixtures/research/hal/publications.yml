@@ -3,10 +3,15 @@
 # Table name: research_hal_publications
 #
 #  id               :uuid             not null, primary key
+#  abstract         :text
+#  citation_full    :text
 #  data             :jsonb
 #  docid            :string           indexed
 #  doi              :string
+#  file             :text
 #  hal_url          :string
+#  journal_title    :string
+#  open_access      :boolean
 #  publication_date :date
 #  ref              :string
 #  slug             :string

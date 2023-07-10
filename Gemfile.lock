@@ -102,17 +102,17 @@ GEM
     autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.782.0)
-    aws-sdk-core (3.176.1)
+    aws-partitions (1.785.0)
+    aws-sdk-core (3.177.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.68.0)
-      aws-sdk-core (~> 3, >= 3.176.0)
+    aws-sdk-kms (1.70.0)
+      aws-sdk-core (~> 3, >= 3.177.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.127.0)
-      aws-sdk-core (~> 3, >= 3.176.0)
+    aws-sdk-s3 (1.128.0)
+      aws-sdk-core (~> 3, >= 3.177.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
     aws-sigv4 (1.6.0)
@@ -152,6 +152,11 @@ GEM
     caxlsx_rails (0.6.3)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
+    citeproc (1.0.10)
+      namae (~> 1.0)
+    citeproc-ruby (2.0.0)
+      citeproc (~> 1.0, >= 1.0.9)
+      csl (~> 2.0)
     cocoon (1.2.15)
     concurrent-ruby (1.2.2)
     countries (5.5.0)
@@ -161,6 +166,11 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    csl (2.0.0)
+      namae (~> 1.0)
+      rexml
+    csl-styles (2.0.1)
+      csl (~> 2.0)
     curation (1.10)
       htmlentities
       metainspector (~> 5.12)
@@ -197,7 +207,7 @@ GEM
     faceted_search (3.6.2)
       font-awesome-sass
       rails (>= 5.2.0)
-    faraday (2.7.9)
+    faraday (2.7.10)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-cookie_jar (0.0.7)
@@ -238,7 +248,7 @@ GEM
       i18n (>= 0.8)
       sugar-high (~> 0.7.2)
       sweetloader (~> 0.1.6)
-    geocoder (1.8.1)
+    geocoder (1.8.2)
     gitlab (4.19.0)
       httparty (~> 0.20)
       terminal-table (>= 1.5.1)
@@ -330,6 +340,7 @@ GEM
     multipart-post (2.3.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
+    namae (1.1.1)
     nesty (1.0.2)
     net-http (0.3.2)
       uri
@@ -343,11 +354,11 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.2-arm64-darwin)
+    nokogiri (1.15.3-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.2-x86_64-darwin)
+    nokogiri (1.15.3-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.2-x86_64-linux)
+    nokogiri (1.15.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -445,7 +456,7 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sanitize (6.0.1)
+    sanitize (6.0.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     sassc (2.4.0)
@@ -575,8 +586,11 @@ DEPENDENCIES
   cancancan (= 3.3.0)
   capybara (>= 3.26)
   caxlsx_rails (~> 0.6.3)
+  citeproc (~> 1.0)
+  citeproc-ruby (~> 2.0)
   cocoon (~> 1.2)
   country_select
+  csl-styles (~> 2.0)
   curation
   delayed_job_active_record
   delayed_job_web
@@ -635,7 +649,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.1.3p185
+   ruby 3.1.4p223
 
 BUNDLED WITH
    2.3.26

@@ -10,7 +10,9 @@ hint = can?(:create, University::Organization) ?  t('university.person.experienc
         <div class="row flex-fill">
           <div class="col-md-6 col-xxl-4">
             <%= f.association :organization,
-                              collection: current_university.organizations.ordered,
+                              collection: current_university.organizations
+                                                            .for_language_id(current_university.default_language_id)
+                                                            .ordered,
                               include_blank: t('simple_form.include_blanks.defaults.organization'),
                               hint: hint,
                               required: true,

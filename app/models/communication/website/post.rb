@@ -117,10 +117,6 @@ class Communication::Website::Post < ApplicationRecord
     "admin/communication/websites/posts/static"
   end
 
-  def menu_items
-    Communication::Website::Menu::Item.where(website: website, kind: :post, about: self)
-  end
-
   def dependencies
     active_storage_blobs +
     blocks +
@@ -129,7 +125,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def references
-    menu_items +
+    menus +
     abouts_with_post_block
   end
 

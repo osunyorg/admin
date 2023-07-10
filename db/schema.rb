@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_103400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -105,8 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "heading_id"
     t.uuid "communication_website_id"
+    t.uuid "heading_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
     t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
@@ -223,6 +223,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
+    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -461,7 +462,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -519,6 +520,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
     t.boolean "in_production", default: false
     t.uuid "default_language_id", null: false
     t.string "theme_version", default: "NA"
+    t.text "deployment_status_badge"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -737,6 +739,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
     t.date "publication_date"
     t.string "doi"
     t.string "slug"
+    t.text "citation_full"
+    t.boolean "open_access"
+    t.text "abstract"
+    t.string "journal_title"
+    t.text "file"
     t.index ["docid"], name: "index_research_hal_publications_on_docid"
   end
 
@@ -937,6 +944,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
     t.float "longitude"
     t.string "address_name"
     t.string "address_additional"
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_organizations_on_language_id"
+    t.index ["original_id"], name: "index_university_organizations_on_original_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -1204,7 +1215,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_142438) do
   add_foreign_key "research_theses", "university_people", column: "director_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_organization_categories", "universities"
+  add_foreign_key "university_organizations", "languages"
   add_foreign_key "university_organizations", "universities"
+  add_foreign_key "university_organizations", "university_organizations", column: "original_id"
   add_foreign_key "university_organizations_categories", "university_organization_categories", column: "category_id"
   add_foreign_key "university_organizations_categories", "university_organizations", column: "organization_id"
   add_foreign_key "university_people", "languages"

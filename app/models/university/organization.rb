@@ -29,15 +29,21 @@
 #  zipcode            :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  language_id        :uuid             indexed
+#  original_id        :uuid             indexed
 #  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_university_organizations_on_language_id    (language_id)
+#  index_university_organizations_on_original_id    (original_id)
 #  index_university_organizations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_35fcd198e0  (university_id => universities.id)
+#  fk_rails_3a9208fa29  (language_id => languages.id)
+#  fk_rails_5af11ea0cc  (original_id => university_organizations.id)
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
@@ -49,6 +55,7 @@ class University::Organization < ApplicationRecord
   include WithGitFiles
   include WithPermalink
   include WithSlug
+  include WithTranslations
   include WithUniversity
 
   attr_accessor :created_from_extranet
@@ -67,7 +74,7 @@ class University::Organization < ApplicationRecord
   has_one_attached_deletable :logo_on_dark_background
 
   validates_presence_of :name
-  validates_uniqueness_of :name, scope: :university_id
+  validates_uniqueness_of :name, scope: [:university_id, :language_id]
   validates :logo, size: { less_than: 1.megabytes }
   validates :logo_on_dark_background, size: { less_than: 1.megabytes }
   # Organization can be created from extranet with only their name. Be careful for future validators.

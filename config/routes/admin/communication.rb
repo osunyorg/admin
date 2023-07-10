@@ -81,6 +81,8 @@ namespace :communication do
     resources :alumni, only: :index, controller: 'extranets/alumni'
     resources :contacts, only: :index, controller: 'extranets/contacts' do
       collection do
+        get :export_people
+        get :export_organizations
         post :toggle
         post :connect
         post :disconnect

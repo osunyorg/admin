@@ -7,6 +7,19 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
+  def rebuild_connections_and_git_files
+    pages.find_each(&:connect_dependencies)
+    posts.find_each(&:connect_dependencies)
+    categories.find_each(&:connect_dependencies)
+    menus.find_each(&:connect_dependencies)
+    connect(about, self) if about.present?
+    destroy_obsolete_connections
+    # In the same job
+    sync_with_git_without_delay
+    destroy_obsolete_git_files_without_delay
+  end
+  handle_asynchronously :rebuild_connections_and_git_files, queue: :low_priority
+
   # Appelé
   # - par un objet avec des connexions lorsqu'il est destroyed
   # - par le website lui-même au changement du about
@@ -67,6 +80,11 @@ module Communication::Website::WithConnectedObjects
   def connected_organizations
     ids = connections.where(indirect_object_type: 'University::Organization').pluck(:indirect_object_id)
     University::Organization.where(id: ids)
+  end
+
+  def connected_hal_publications
+    ids = connections.where(indirect_object_type: 'Research::Hal::Publication').pluck(:indirect_object_id)
+    Research::Hal::Publication.where(id: ids)
   end
 
   # ensure the object "website" respond to both is_direct_object? and is_indirect_object? as website doesn't include neither as_direct_object nor as_indirect_object

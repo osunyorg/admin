@@ -2,8 +2,20 @@
 
 <div class="row">
   <div class="col-lg-8">
-    <p class="lead mb-4"><%= sanitize @publication.ref %></p>
+    <% if @publication.abstract.present? %>
+      <p class="lead mb-5">
+        <%= sanitize @publication.abstract %>
+      </p>
+    <% end %>
     <div class="row">
+      <div class="col-lg-6">
+        <%= osuny_label Research::Hal::Publication.human_attribute_name('citation_full') %>
+        <p><%= sanitize @publication.citation_full %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Hal::Publication.human_attribute_name('ref') %>
+        <p><%= sanitize @publication.ref %></p>
+      </div>
       <div class="col-lg-6">
         <%= osuny_label Research::Hal::Publication.human_attribute_name('docid') %>
         <p><%= @publication.docid %></p>
@@ -11,6 +23,10 @@
       <div class="col-lg-6">
         <%= osuny_label Research::Hal::Publication.human_attribute_name('publication_date') %>
         <p><%= l @publication.publication_date %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Hal::Publication.human_attribute_name('open_access') %>
+        <p><%= t @publication.open_access %></p>
       </div>
     </div>
   </div>
@@ -35,7 +51,7 @@
   </div>
 </div>
 
-<% [:url, :hal_url, :doi_url].each do |key| %>
+<% [:url, :hal_url, :doi_url, :file].each do |key| %>
   <% value = @publication.send key %>
   <% next if value.blank? %>
   <%= osuny_label Research::Hal::Publication.human_attribute_name(key) %>
