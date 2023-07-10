@@ -35,7 +35,7 @@
     <div class="col-lg-6">
       <%= f.input :title %>
       <%= f.association :parent,
-                        collection: collection_tree(@item.menu.items),
+                        collection: collection_tree(@item.menu.items, @item),
                         label_method: ->(p) { sanitize p[:label] },
                         value_method: ->(p) { p[:id] } %>
 
