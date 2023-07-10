@@ -36,11 +36,11 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if old_parent_id
       old_parent = current_university.education_programs.find(old_parent_id)
       old_parent.set_websites_categories
-      old_parent.sync_with_git
+      old_parent.touch
     end
     program = current_university.education_programs.find(params[:itemId])
     program.set_websites_categories
-    program.sync_with_git
+    program.touch
   end
 
   def children

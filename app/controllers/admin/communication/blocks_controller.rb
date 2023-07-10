@@ -11,7 +11,10 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       @block.update_columns position: index + 1,
                             heading_id: heading_id
     end
-    @block.about.touch
+    if @block.about&.respond_to?(:is_direct_object?)
+      @block.about.is_direct_object?  ? @block.about.sync_with_git
+                                      : @block.about.touch # Sync indirect object's direct sources through after_touch
+    end
   end
 
   def new

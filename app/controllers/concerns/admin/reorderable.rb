@@ -8,7 +8,10 @@ module Admin::Reorderable
       object = model.find_by(id: id)
       object.update_column(:position, index + 1) unless object.nil?
     end
-    first_object.sync_with_git if first_object&.respond_to?(:sync_with_git)
+    if first_object&.respond_to?(:is_direct_object?)
+      first_object.is_direct_object?  ? first_object.sync_with_git
+                                      : first_object.touch # Sync indirect object's direct sources through after_touch
+    end
     # Used to add extra code
     yield first_object if block_given?
   end

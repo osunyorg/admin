@@ -99,7 +99,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def references
-    posts + [parent] + website.menus
+    posts + [parent] + siblings + website.menus
   end
 
   def update_children_paths
