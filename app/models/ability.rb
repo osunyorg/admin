@@ -6,16 +6,9 @@ class Ability
   def initialize(user)
     @user = user ||= User.new # guest user (not logged in)
     send @user.role.to_sym
-    common_abilities
   end
 
   protected
-
-  def common_abilities
-    can :read, Research::Hal
-    can :read, Research::Hal::Publication
-    can :read, Research::Hal::Author
-  end
 
   def visitor
   end
