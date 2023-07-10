@@ -14,30 +14,33 @@ class Ability
   end
 
   def contributor
-    managed_websites_ids = @user.websites_to_manage.pluck(:communication_website_id)
-    can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
-    can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids, author_id: @user.person&.id
+    author
     cannot :publish, Communication::Website::Post
-    can :manage, Research::Journal
   end
-
+  
   def author
     managed_websites_ids = @user.websites_to_manage.pluck(:communication_website_id)
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: Communication::Website::Post.where(university_id: @user.university_id, author_id: @user.person&.id).pluck(:id)
+    can :create, Communication::Block
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: Communication::Website::Post.where(university_id: @user.university_id, author_id: @user.person&.id).pluck(:id)
+    can :create, Communication::Block::Heading
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids, author_id: @user.person&.id
-    can :manage, Research::Journal
   end
 
   def teacher
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id, user_id: @user.id).pluck(:id)
+    can :create, Communication::Block
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id, user_id: @user.id).pluck(:id)
+    can :create, Communication::Block::Heading
+    can [:read, :children], Education::Program, university_id: @user.university_id
     can :manage, University::Person, user_id: @user.id
     cannot :create, University::Person
-    can [:read, :children], Education::Program, university_id: @user.university_id
-    can :read, University::Role, university_id: @user.university_id
     can :manage, University::Person::Involvement, person_id: @user.person&.id
     can :read, University::Person::Involvement, university_id: @user.university_id
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Education::Program', about_id: Education::Program.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Research::Journal
+    can :read, University::Role, university_id: @user.university_id
   end
 
   def program_manager
