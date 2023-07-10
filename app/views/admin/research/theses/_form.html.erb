@@ -14,9 +14,15 @@
       <%= f.association :laboratory,
                         collection: current_university.research_laboratories.ordered %>
       <%= f.association :author,
-                        collection: current_university.people.researchers.ordered %>
+                        collection: current_university.people
+                                                      .for_language_id(current_university.default_language_id)
+                                                      .researchers
+                                                      .ordered %>
       <%= f.association :director,
-                        collection: current_university.people.researchers.ordered %>
+                        collection: current_university.people
+                                                      .for_language_id(current_university.default_language_id)
+                                                      .with_habilitation
+                                                      .ordered %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

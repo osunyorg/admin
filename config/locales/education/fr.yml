@@ -109,7 +109,6 @@ fr:
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
     manage_programs: Gérer les formations
     manage_roles: Gérer les rôles
-    manage_teachers: Gérer les enseignants·es
     number_of_programs: Nombre de formations
     program:
       parts:

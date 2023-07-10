@@ -137,11 +137,12 @@ class University::Person < ApplicationRecord
 
   before_validation :sanitize_email, :prepare_name
 
-  scope :ordered,         -> { order(:last_name, :first_name) }
-  scope :administration,  -> { where(is_administration: true) }
-  scope :teachers,        -> { where(is_teacher: true) }
-  scope :researchers,     -> { where(is_researcher: true) }
-  scope :alumni,          -> { where(is_alumnus: true) }
+  scope :ordered,           -> { order(:last_name, :first_name) }
+  scope :administration,    -> { where(is_administration: true) }
+  scope :teachers,          -> { where(is_teacher: true) }
+  scope :researchers,       -> { where(is_researcher: true) }
+  scope :alumni,            -> { where(is_alumnus: true) }
+  scope :with_habilitation, -> { where(habilitation: true) }
   scope :for_role, -> (role) { where("is_#{role}": true) }
   scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
   scope :for_program, -> (program_id) {

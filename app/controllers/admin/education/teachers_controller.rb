@@ -1,5 +1,7 @@
 class Admin::Education::TeachersController < Admin::Education::ApplicationController
-  before_action :load_teacher, only: [:show, :edit, :update]
+  load_and_authorize_resource class: University::Person::Teacher,
+                              through: :current_university,
+                              through_association: :people
 
   has_scope :for_search_term
   has_scope :for_program
@@ -45,14 +47,6 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
     super
     add_breadcrumb University::Person::Teacher.model_name.human(count: 2), admin_education_teachers_path
     add_breadcrumb @teacher, admin_education_teacher_path(@teacher) if @teacher
-  end
-
-  def load_teacher
-    @teacher = current_university.people
-                                 .for_language_id(current_university.default_language_id)
-                                 .teachers
-                                 .accessible_by(current_ability)
-                                 .find(params[:id])
   end
 
   def teacher_params

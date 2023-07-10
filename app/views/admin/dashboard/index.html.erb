@@ -40,7 +40,7 @@
 <% end %>
 </div>
 
-<% if current_admin_theme == 'pure' %>
+<% if current_admin_theme == 'pure' && feature_settings? %>
   <div class="row mt-5 pt-5">
     <div class="col-lg-2">
       <%= link_to admin_university_root_path do %>
@@ -57,6 +57,7 @@
       <ul class="list-unstyled mt-4">
       <% University.parts.each do |part| %>
         <%
+        next unless can? :read, part.first
         class_name = part.first
         path = send part.last
         title = class_name.model_name.human(count: 2)
