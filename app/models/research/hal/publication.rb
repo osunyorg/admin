@@ -29,6 +29,7 @@ class Research::Hal::Publication < ApplicationRecord
   include Sanitizable
   include WithCitations
   include WithGitFiles
+  include WithPermalink
   include WithSlug
 
   has_and_belongs_to_many :researchers,

@@ -2,7 +2,7 @@
 title: >-
   <%= @about.title %>
 date: "<%= @about.publication_date&.iso8601 %>"
-slug: "<%= @about.slug %>"
+<%= render 'admin/application/static/permalink' %>
 docid: "<%= @about.docid %>"
 abstract: >-
   <%= prepare_html_for_static @about.abstract, @website.university %>
