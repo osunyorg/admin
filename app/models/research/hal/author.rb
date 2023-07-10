@@ -76,12 +76,10 @@ class Research::Hal::Author < ApplicationRecord
 
   def connect_researcher(researcher)
     researchers << researcher
-    researcher.import_research_hal_publications!
   end
 
   def disconnect_researcher(researcher)
     researchers.delete researcher
-    researcher.import_research_hal_publications!
   end
 
   def to_s

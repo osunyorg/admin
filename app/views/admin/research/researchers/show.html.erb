@@ -45,7 +45,10 @@
 <% end %>
 
 <%= osuny_panel Research::Hal::Publication.model_name.human(count: 2) do %>
-  <p><%= "#{@researcher.hal_publications.count} #{Research::Hal::Publication.model_name.human(count: @researcher.hal_publications.count).downcase}" %> 
+  <p>
+    <%= "#{@researcher.hal_publications.count} #{Research::Hal::Publication.model_name.human(count: @researcher.hal_publications.count).downcase}" %>.
+    Les publications sont mises à jour automatiquement, chaque nuit.
+  </p>
   <div class="table-responsive">
     <%= render 'admin/research/hal/publications/list', publications: @researcher.hal_publications.ordered %>
   </div>
