@@ -21,7 +21,7 @@
       <%= f.association :director,
                         collection: current_university.people
                                                       .for_language_id(current_university.default_language_id)
-                                                      .accredited
+                                                      .with_habilitation
                                                       .ordered %>
     </div>
   </div>
