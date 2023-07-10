@@ -3,7 +3,6 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <%= f.input :parent_id, as: :hidden, wrapper: false %>
   <%= f.input :kind,
               as: :hidden,
               input_html: {
@@ -35,6 +34,11 @@
   <div class="row pure__row--small">
     <div class="col-lg-6">
       <%= f.input :title %>
+      <%= f.association :parent,
+                        collection: collection_tree(@item.menu.items),
+                        label_method: ->(p) { sanitize p[:label] },
+                        value_method: ->(p) { p[:id] } %>
+
     </div>
     <div class="col-lg-6">
       <div data-kind-if="url">
