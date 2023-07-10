@@ -89,7 +89,6 @@ class Ability
     can :manage, University::Person::Category, university_id: @user.university_id
     can :manage, University::Person::Experience, university_id: @user.university_id
     can :manage, University::Person::Involvement, university_id: @user.university_id
-    can :manage, Research::Journal
   end
 
   def admin
