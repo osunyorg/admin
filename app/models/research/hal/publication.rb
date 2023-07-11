@@ -4,6 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  abstract         :text
+#  authors_citeproc :json
 #  authors_list     :text
 #  citation_full    :text
 #  data             :jsonb
