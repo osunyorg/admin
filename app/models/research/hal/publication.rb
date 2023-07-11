@@ -60,7 +60,9 @@ class Research::Hal::Publication < ApplicationRecord
       'abstract_s',
       'openAccess_bool',
       'journalTitle_s',
-      'authLastNameFirstName_s',
+      'authFullName_s',
+      'authLastName_s',
+      'authFirstName_s',
       'files_s'
       # '*',
     ]
@@ -87,7 +89,14 @@ class Research::Hal::Publication < ApplicationRecord
     publication.open_access = doc.attributes['openAccess_bool']
     publication.journal_title = doc.attributes['journalTitle_s']
     publication.file = doc.attributes['files_s']&.first
-    publication.authors_list = doc.attributes['authLastNameFirstName_s'].join(', ')
+    publication.authors_list = doc.attributes['authFullName_s'].join(', ')
+    publication.authors_citeproc = []
+    doc.attributes['authLastName_s'].each_with_index do |last_name, index|
+      publication.authors_citeproc << {
+        "family" => last_name, 
+        "given" => doc.attributes['authFirstName_s'][index]
+      }
+    end
     publication.save
     publication
   end
@@ -117,9 +126,7 @@ class Research::Hal::Publication < ApplicationRecord
   def to_citeproc(website: nil)
     {
       "title" => title,
-      "author" => authors.map { |author|
-        { "family" => author.last_name, "given" => author.first_name }
-      },
+      "author" => authors_citeproc,
       "URL" => hal_url,
       "container-title" => journal_title,
       "pdf" => file,
