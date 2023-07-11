@@ -22,7 +22,12 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def sync_with_hal
-    @researcher.import_research_hal_publications!
+    begin
+      Research::Hal.pause_git_sync
+      @researcher.import_research_hal_publications!
+    ensure
+      Research::Hal.unpause_git_sync
+    end
     redirect_to admin_research_researcher_path(@researcher)
   end
 
