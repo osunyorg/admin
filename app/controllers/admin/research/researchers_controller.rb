@@ -21,6 +21,11 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     add_breadcrumb @researcher
   end
 
+  def sync_with_hal
+    @researcher.import_research_hal_publications!
+    redirect_to admin_research_researcher_path(@researcher)
+  end
+
   def update
     [
       :hal_doc_identifier,
@@ -29,7 +34,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     ].each do |key|
       @researcher.update_column key, params[key] if params.has_key?(key)
     end
-    @researcher.import_research_hal_publications!
     redirect_to admin_research_researcher_path(@researcher)
   end
 

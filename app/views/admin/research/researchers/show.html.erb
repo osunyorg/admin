@@ -55,5 +55,9 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <%= link_to t('research.hal.sync'), 
+              sync_with_hal_admin_research_researcher_path(@researcher), 
+              method: :post, 
+              class: button_classes %>
   <%= edit_link @researcher %>
 <% end %>

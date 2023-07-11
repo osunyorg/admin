@@ -4,6 +4,7 @@
 #
 #  id               :uuid             not null, primary key
 #  abstract         :text
+#  authors_list     :text
 #  citation_full    :text
 #  data             :jsonb
 #  docid            :string           indexed
@@ -45,6 +46,7 @@ class Research::Hal::Publication < ApplicationRecord
 
   scope :ordered, -> { order(publication_date: :desc)}
 
+  # https://api.archives-ouvertes.fr/search/?q=03713859&fl=*
   def self.import_from_hal_for_author(author)
     fields = [
       'docid',
@@ -58,6 +60,7 @@ class Research::Hal::Publication < ApplicationRecord
       'abstract_s',
       'openAccess_bool',
       'journalTitle_s',
+      'authLastNameFirstName_s',
       'files_s'
       # '*',
     ]
@@ -84,6 +87,7 @@ class Research::Hal::Publication < ApplicationRecord
     publication.open_access = doc.attributes['openAccess_bool']
     publication.journal_title = doc.attributes['journalTitle_s']
     publication.file = doc.attributes['files_s']&.first
+    publication.authors_list = doc.attributes['authLastNameFirstName_s'].join(', ')
     publication.save
     publication
   end

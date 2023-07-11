@@ -31,6 +31,9 @@
     </div>
   </div>
   <div class="col-lg-4">
+    <%= osuny_panel Research::Hal::Publication.human_attribute_name('authors_list') do %>
+    <p><%= @publication.authors_list %></p>
+    <% end %>
     <%= osuny_panel University::Person::Researcher.model_name.human(count: 2) do %>
       <% @publication.researchers.in_university(current_university).each do |researcher| %>
         <%= render 'admin/university/people/researchers/researcher', researcher: researcher %>

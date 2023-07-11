@@ -9,8 +9,8 @@ fr:
         one: Chercheur·e
         other: Chercheur·e·s
       research/hal/author:
-        one: Auteur·e
-        other: Auteur·e·s
+        one: Auteur·e HAL
+        other: Auteur·e·s HAL
       research/hal/publication:
         one: Publication
         other: Publications
@@ -42,6 +42,7 @@ fr:
         full_name: Nom complet
         last_name: Nom
       research/hal/publication:
+        authors_list: Liste des auteur·e·s
         docid: Identifiant
         doi_url: URL DOI
         publication_date: Date de publication
@@ -123,6 +124,7 @@ fr:
           publication:
             description: Publications scientifiques importées automatiquement de HAL
       select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
+      sync: Synchroniser les publications HAL
   simple_form:
     hints:
       research_journal_paper:

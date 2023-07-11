@@ -1,5 +1,9 @@
 namespace :research do
-  resources :researchers, only: [:index, :show, :update]
+  resources :researchers, only: [:index, :show, :update] do 
+    member do
+      post 'sync-with-hal' => 'researchers#sync_with_hal', as: :sync_with_hal
+    end
+  end
   namespace :hal do
     resources :authors, only: [:index, :show, :destroy] do
       member do
