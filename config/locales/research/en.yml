@@ -9,8 +9,8 @@ en:
         one: Researcher
         other: Researchers
       research/hal/author:
-        one: Author
-        other: Authors
+        one: HAL author
+        other: HAL authors
       research/hal/publication:
         one: Publication
         other: Publications
@@ -42,6 +42,7 @@ en:
         full_name: Full name
         last_name: Last name
       research/hal/publication:
+        authors_list: Authors list
         docid: Identifier
         doi_url: URL DOI
         publication_date: Publication date
@@ -124,6 +125,7 @@ en:
             description: Publications scientifiques importées automatiquement de HAL
       title: HAL
       select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
+      sync: Synchronize HAL publications
   simple_form:
     hints:
       research_journal_paper:
