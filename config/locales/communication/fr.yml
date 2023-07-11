@@ -130,17 +130,18 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
-        access_token: Access token
+        access_token: Jeton d'accès
         created_at: Création
         default_language: Langue par défaut
         deployment_status_badge: Badge de statut du déploiement
         git_branch: Branche
         git_endpoint: Point d'accès Git
-        git_provider: Provider Git
+        git_provider: Fournisseur Git
         in_production: Site en production
         languages: Langues
         name: Nom
-        repository: Repository
+        plausible_url: Tableau de bord Plausible
+        repository: Référentiel
         url: URL
       communication/website/category:
         children: Catégories enfants
@@ -820,10 +821,13 @@ fr:
         host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
       communication_website:
+        access_token: Votre clé d'accès Github ou Gitlab confidentielle. Laisser le champ vide vide pour ne pas le modifier.
         deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
+        plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
+        repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
