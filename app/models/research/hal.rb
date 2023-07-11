@@ -25,8 +25,15 @@ module Research::Hal
     Research::Hal::Publication.set_callback :save, :after, :connect_and_sync_direct_sources
   end
 
-  def self.clear_queue
-    # TODO
+  def self.clear_queue!
+    ids = []
+    Delayed::Job.find_each do |job|
+      if  job.payload_object.method_name == :sync_indirect_object_with_git_without_delay &&
+          job.payload_object.args.first.is_a?(Research::Hal::Publication)
+        ids << job.id
+      end
+    end
+    Delayed::Job.where(id: ids).destroy_all
   end
 
   def self.parts
