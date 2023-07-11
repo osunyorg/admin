@@ -8,13 +8,25 @@ module Research::Hal
 
   def self.update_from_api!
     begin
-      Research::Hal::Publication.skip_callback :save, :after, :connect_and_sync_direct_sources
+      pause_git_sync
       Research::Hal::Author.find_each do |author|
         author.import_research_hal_publications!
       end
     ensure
-      Research::Hal::Publication.set_callback :save, :after, :connect_and_sync_direct_sources
+      unpause_git_sync
     end
+  end
+
+  def self.pause_git_sync
+    Research::Hal::Publication.skip_callback :save, :after, :connect_and_sync_direct_sources
+  end
+
+  def self.unpause_git_sync
+    Research::Hal::Publication.set_callback :save, :after, :connect_and_sync_direct_sources
+  end
+
+  def self.clear_queue
+    # TODO
   end
 
   def self.parts
