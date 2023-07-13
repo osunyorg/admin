@@ -22,7 +22,11 @@
               <%= f.input :deployment_status_badge, as: :string %>
             </div>
             <div class="col-xl-6">
-              <%= f.input :access_token, as: :password %>
+              <%= f.input :access_token, 
+                          as: :password, 
+                          placeholder: masked_string(f.object.access_token), 
+                          hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe
+                          %>
               <%= f.input :repository %>
               <%= f.input :git_branch %>
             </div>
