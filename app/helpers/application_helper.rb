@@ -51,7 +51,9 @@ module ApplicationHelper
   end
 
   def masked_string(string)
-    string.gsub(/.+(?=.{5})/, '•' * (string.length - 5))
+    string = string.to_s # in case it was nil
+    mask_length = [(string.length - 5), 0].max
+    string.to_s.gsub(/.+(?=.{5})/, '•' * mask_length)
   end
 
   def language_name(iso_code)
