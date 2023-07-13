@@ -16,7 +16,7 @@ module Communication::Website::WithSpecialPages
 
   def create_missing_special_pages
     Communication::Website::Page::TYPES.each do |page_class|
-      # Special pages have an before_validation (:on_create) callback to preset title, slug, ...
+      # Special pages have a before_validation (:on_create) callback to preset title, slug, ...
       page = page_class.where(website: self, university: university, language_id: default_language_id).first_or_initialize
       next if page.persisted? # No resave
       next unless page.is_necessary_for_website? # No useless pages
@@ -31,7 +31,7 @@ module Communication::Website::WithSpecialPages
   end
 
   def create_special_page(type, language)
-    # Special pages have an before_validation (:on_create) callback to preset title, slug, ...
+    # Special pages have a before_validation (:on_create) callback to preset title, slug, ...
     page = pages.where(type: type.to_s, language_id: language.id, university_id: university_id).first_or_initialize
     page.save_and_sync
   end
