@@ -34,9 +34,9 @@
                           hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
                           input_html: {
                             autocomplete: 'access_token',
-                            role: 'presentation'
+                            role: 'presentation',
+                            value: ''
                           }
-                          value: ''
                           %>
               <%= f.input :repository %>
               <%= f.input :git_branch %>
