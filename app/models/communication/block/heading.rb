@@ -54,6 +54,12 @@ class Communication::Block::Heading < ApplicationRecord
     [about]
   end
 
+  def duplicate
+    heading = self.dup
+    heading.save
+    heading
+  end
+
   def translate!(about_translation, parent_id = nil)
     translation = self.dup
     translation.about = about_translation
