@@ -332,19 +332,25 @@ fr:
                   label: Matin (si nécessaire)
                 time_slot_afternoon:
                   label: Après-midi (ou jour complet)
-              name:
-                label: Nom (personne, établissement...)
-                placeholder: Entrer le texte
-              zipcode:
-                label: Code postal
-                placeholder: Entrer le code postal
+              information:
+                label: Informations complémentaires
               mails:
                 label: Mails
                 placeholder: Entrer le mail
+              name:
+                label: Nom (personne, établissement...)
+                placeholder: Entrer le texte
               phones:
                 label: Téléphones
                 placeholder: Entrer le numéro
               slots: Horaires
+              url:
+                label: URL
+                placeholder: https://...
+              website: Site Web
+              zipcode:
+                label: Code postal
+                placeholder: Entrer le code postal
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:

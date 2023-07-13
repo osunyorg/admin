@@ -26,6 +26,9 @@ end
           <% unless block.template.name.blank? %>
             <p><%= block_component_show block, :name %></p>
           <% end %>
+          <% if block.template.information.present? %>
+            <%= block_component_show block, :information %>
+          <% end %>
           <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
             <span itemprop="streetAddress">
               <%= block_component_show block, :address %>
@@ -41,6 +44,13 @@ end
             </span>
           </div>
 
+          <% if block.template.url.present? %>
+            <% url = block.template.url %>
+            <a href="<%= social_website_to_url url %>" target="_blank" rel="noreferrer">
+              <%= social_website_to_s url %>
+            </a>
+          <% end %>
+
           <p>
             <% block.template.phone_numbers.each do |phone_number| %>
               <a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a><br>
@@ -54,7 +64,9 @@ end
           <% block.template.elements.each do |element| %>
             <li>
               <span><%= block_component_show block, :title, template: element %></span>
-              <span><time datetime="<%= block_component_show block, :time_slot_morning, template: element %>"><%= block_component_show block, :time_slot_morning, template: element %></time></span>
+              <% if element.time_slot_morning['to'].present? %>
+                <span><time datetime="<%= block_component_show block, :time_slot_morning, template: element %>"><%= block_component_show block, :time_slot_morning, template: element %></time></span>
+              <% end %>
               <span><time datetime="<%= block_component_show block, :time_slot_afternoon, template: element %>"><%= block_component_show block, :time_slot_afternoon, template: element %></time></span>
             </li>
           <% end %>

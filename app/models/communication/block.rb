@@ -87,7 +87,7 @@ class Communication::Block < ApplicationRecord
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :organization_chart, :partners, :programs],
-    utilities: [:files, :definitions, :embed, :contact]
+    utilities: [:files, :definitions, :contact, :embed]
   }
 
   scope :published, -> { where(published: true) }
