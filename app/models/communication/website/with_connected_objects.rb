@@ -15,6 +15,8 @@ module Communication::Website::WithConnectedObjects
     connect(about, self) if about.present?
     destroy_obsolete_connections
     # In the same job
+    create_missing_special_pages
+    initialize_menus
     sync_with_git_without_delay
     destroy_obsolete_git_files_without_delay
   end
