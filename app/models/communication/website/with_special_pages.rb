@@ -9,7 +9,7 @@ module Communication::Website::WithSpecialPages
   def special_page(type, language: default_language)
     page = find_special_page(type, language)
     # If not found, create if default language, else translate
-    page ||= language == default_language ? create_special_page(type, language)
+    page ||= language == default_language ? create_default_special_page(type)
                                           : translate_special_page(type, language)
     page
   end
@@ -30,9 +30,9 @@ module Communication::Website::WithSpecialPages
     pages.where(type: type.to_s, language_id: language.id).first
   end
 
-  def create_special_page(type, language)
+  def create_default_special_page(type)
     # Special pages have a before_validation (:on_create) callback to preset title, slug, ...
-    page = pages.where(type: type.to_s, language_id: language.id, university_id: university_id).first_or_initialize
+    page = pages.where(type: type.to_s, language_id: default_language_id, university_id: university_id).first_or_initialize
     page.save_and_sync
   end
 
