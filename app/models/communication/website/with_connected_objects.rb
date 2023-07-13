@@ -7,7 +7,7 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
-  def rebuild_connections_and_git_files
+  def clean_and_rebuild
     pages.find_each(&:connect_dependencies)
     posts.find_each(&:connect_dependencies)
     categories.find_each(&:connect_dependencies)
@@ -20,7 +20,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_without_delay
     destroy_obsolete_git_files_without_delay
   end
-  handle_asynchronously :rebuild_connections_and_git_files, queue: :low_priority
+  handle_asynchronously :clean_and_rebuild, queue: :low_priority
 
   # Appelé
   # - par un objet avec des connexions lorsqu'il est destroyed
