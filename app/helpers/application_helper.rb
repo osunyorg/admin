@@ -50,6 +50,12 @@ module ApplicationHelper
     string.gsub(/(?<=.{3}).+(?=.{2})/, '*******')
   end
 
+  def masked_string(string)
+    string = string.to_s # in case it was nil
+    mask_length = [(string.length - 5), 0].max
+    string.to_s.gsub(/.+(?=.{5})/, '•' * mask_length)
+  end
+
   def language_name(iso_code)
     I18nData.languages(I18n.locale)[iso_code.to_s.upcase].titleize
   end
