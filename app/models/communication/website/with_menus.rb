@@ -61,8 +61,6 @@ module Communication::Website::WithMenus
     has_research_papers?
   end
 
-  protected
-
   def initialize_menus
     find_or_create_menu 'primary'
     find_or_create_menu 'social'
@@ -71,6 +69,8 @@ module Communication::Website::WithMenus
       fill_legal_menu(menu)
     end
   end
+
+  protected
 
   def find_or_create_menu(identifier)
     menu = menus.where(identifier: identifier, university: university, language: default_language).first_or_initialize do |menu|

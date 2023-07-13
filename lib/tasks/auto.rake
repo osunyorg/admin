@@ -2,13 +2,15 @@ namespace :auto do
 
   desc 'Update publications from HAL for all researchers'
   task update_hal: :environment do
-    Research::Hal.update_from_api!
+    # Research::Hal.update_from_api! is synchronous, we use a job for that
+    Research::Hal::UpdateJob.perform_later
   end
 
-  desc 'Resave every website to enable publications in the future'
-  task save_and_sync_websites: :environment do
+  desc 'Clean and rebuild every website to enable publications in the future'
+  task clean_and_rebuild_websites: :environment do
     Communication::Website.find_each do |website|
-      website.rebuild_connections_and_git_files
+      # Communication::Website#clean_and_rebuild is asynchronous, no need for a intermediate job
+      website.clean_and_rebuild
     end
   end
 
