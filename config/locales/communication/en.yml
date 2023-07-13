@@ -821,7 +821,7 @@ en:
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
       communication_website:
-        access_token: Your Github or Gitlab confidential access token. Leave blank if you want it unchanged.
+        access_token: Your Github or Gitlab confidential access token. Leave the field blank if you don't want to change the token.
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
