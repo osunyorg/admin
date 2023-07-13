@@ -22,7 +22,7 @@
               <%= f.input :deployment_status_badge, 
                           as: :string, 
                           input_html: {
-                            autocomplete: 'off',
+                            autocomplete: 'deployment_status_badge',
                             role: 'presentation'
                           }
                           %>
@@ -33,7 +33,7 @@
                           placeholder: masked_string(f.object.access_token), 
                           hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
                           input_html: {
-                            autocomplete: 'off',
+                            autocomplete: 'access_token',
                             role: 'presentation'
                           }
                           %>
