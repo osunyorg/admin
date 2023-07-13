@@ -29,25 +29,25 @@ module WithDuplication
   end
 
   def duplicate_block(instance, block, heading_id = nil)
-    b = block.duplicate
-    b.about = instance
-    b.position = block.position
-    b.heading_id = heading_id
-    b.save
+    duplicated_block = block.duplicate
+    duplicated_block.about = instance
+    duplicated_block.position = block.position
+    duplicated_block.heading_id = heading_id
+    duplicated_block.save
   end
 
   def duplicate_heading(instance, heading, parent_id = nil)
-    h = heading.duplicate
-    h.about = instance
-    h.position = heading.position
-    h.parent_id = parent_id
-    h.save
+    duplicated_heading = heading.duplicate
+    duplicated_heading.about = instance
+    duplicated_heading.position = heading.position
+    duplicated_heading.parent_id = parent_id
+    duplicated_heading.save
 
     heading.blocks.ordered.each do |block|
-      duplicate_block(instance, block, h.id)
+      duplicate_block(instance, block, duplicated_heading.id)
     end
     heading.children.ordered.each do |child|
-      duplicate_heading(instance, child, h.id)
+      duplicate_heading(instance, child, duplicated_heading.id)
     end
   end
 
