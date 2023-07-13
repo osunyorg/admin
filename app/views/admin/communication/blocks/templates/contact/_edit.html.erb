@@ -1,12 +1,13 @@
 <div class="row pure__row--small">
-  <div class="col-xl-6">
+  <div class="col-xxl-6">
     <%= block_component_edit block, :description %>
   </div>
 </div>
 <div class="row pure__row--small mb-4">
-  <div class="col-xl-6">
+  <div class="col-xxl-6">
     <%= osuny_panel t('.contacts') do %>
       <%= block_component_edit block, :name %>
+      <%= block_component_edit block, :information %>
       <%= block_component_edit block, :address %>
       <div class="row pure__row--small">
         <div class="col-md-4">
@@ -19,7 +20,10 @@
       <%= block_component_edit block, :country %>
     <% end %>
   </div>
-  <div class="col-xl-6">
+  <div class="col-xxl-6">
+    <%= osuny_panel t('.website') do %>
+      <%= block_component_edit block, :url %>
+    <% end %>
     <% 
     action = "<a class=\"#{ button_classes }\" v-on:click=\"data.phone_numbers.push('')\">#{ t('.add') }</a>"
     placeholder = t '.phones.placeholder'
@@ -68,13 +72,13 @@
     </div>
     <div class="flex-fill">
       <div class="row pure__row--small mb-n3">
-        <div class="col-xl-4">
+        <div class="col-xxl-4">
           <%= block_component_edit block, :title, template: @element %>
         </div>
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xxl-4 col-md-6">
           <%= block_component_edit block, :time_slot_morning, template: @element %>
         </div>
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xxl-4 col-md-6">
           <%= block_component_edit block, :time_slot_afternoon, template: @element %>
         </div>
       </div>

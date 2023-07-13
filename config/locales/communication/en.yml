@@ -332,12 +332,14 @@ en:
                   label: Morning (if necessary)
                 time_slot_afternoon:
                   label: Afternoon (or full day)
+              information:
+                label: Additional data
+              mails:
+                label: Mails
+                placeholder: Enter the mail
               name:
                 label: Name (person, organization...)
                 placeholder: Enter the text
-              zipcode:
-                label: Zipcode
-                placeholder: Enter the zipcode
               mails:
                 label: Mails
                 placeholder: Enter the mail
@@ -345,6 +347,13 @@ en:
                 label: Telephone numbers
                 placeholder: Enter the number
               slots: Opening times
+              url:
+                label: URL
+                placeholder: https://...
+              website: Website
+              zipcode:
+                label: Zipcode
+                placeholder: Enter the zipcode
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:
