@@ -25,6 +25,8 @@
               <%= f.input :access_token, 
                           as: :password, 
                           placeholder: masked_string(f.object.access_token), 
+                          autocomplete: 'off',
+                          role: 'presentation',
                           hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe
                           %>
               <%= f.input :repository %>

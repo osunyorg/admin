@@ -53,6 +53,7 @@ module ApplicationHelper
   def masked_string(string)
     string = string.to_s # in case it was nil
     mask_length = [(string.length - 5), 0].max
+    mask_length = 30 if mask_length > 30
     string.to_s.gsub(/.+(?=.{5})/, '•' * mask_length)
   end
 
