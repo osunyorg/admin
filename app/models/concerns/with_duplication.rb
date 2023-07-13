@@ -40,6 +40,7 @@ module WithDuplication
     h = heading.duplicate
     h.about = instance
     h.position = heading.position
+    h.parent_id = parent_id
     h.save
 
     heading.blocks.ordered.each do |block|
