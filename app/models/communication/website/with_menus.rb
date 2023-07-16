@@ -64,9 +64,13 @@ module Communication::Website::WithMenus
   def initialize_menus
     find_or_create_menu 'primary'
     find_or_create_menu 'social'
-    find_or_create_menu('legal') do |menu|
-      # Only executed after menu creation
-      fill_legal_menu(menu)
+    find_or_create_menu 'legal'
+    generate_automatic_menus
+  end
+
+  def generate_automatic_menus
+    menus.automatic.find_each do |menu|
+      menu.generate_automatically
     end
   end
 
@@ -76,24 +80,6 @@ module Communication::Website::WithMenus
     menu = menus.where(identifier: identifier, university: university, language: default_language).first_or_initialize do |menu|
       menu.title = I18n.t("communication.website.menus.default_title.#{identifier}")
     end
-    unless menu.persisted?
-      menu.save
-      yield(menu) if block_given?
-    end
-    menu
-  end
-
-  def fill_legal_menu(menu)
-    [
-      Communication::Website::Page::LegalTerm,
-      Communication::Website::Page::PrivacyPolicy,
-      Communication::Website::Page::Accessibility,
-      Communication::Website::Page::Sitemap
-    ].each do |page_class|
-      page = special_page(page_class, language: menu.language)
-      menu.items.where(kind: 'page', about: page, university: university, website: self).first_or_create do |item|
-        item.title = page.title
-      end
-    end
+    menu.save unless menu.persisted?
   end
 end
