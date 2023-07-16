@@ -30,6 +30,7 @@
 class Communication::Website::Menu < ApplicationRecord
   include AsDirectObject
   include Sanitizable
+  include WithAutomatism
   include WithTranslations
   include WithUniversity
 
