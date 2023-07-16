@@ -7,11 +7,11 @@ module Communication::Website::Menu::WithAutomatism
 
   def generate_automatically
     begin
-      suspend_git_sync
+      pause_git_sync
       clear_items
       create_items
     ensure
-      reactivate_git_sync
+      unpause_git_sync
     end
   end
 
@@ -21,7 +21,7 @@ module Communication::Website::Menu::WithAutomatism
 
   protected
   
-  def suspend_git_sync
+  def pause_git_sync
     # TODO
   end
 
@@ -53,7 +53,7 @@ module Communication::Website::Menu::WithAutomatism
     create_items_for_children_of(page, item)
   end
 
-  def reactivate_git_sync
+  def unpause_git_sync
     # TODO
   end
 end
