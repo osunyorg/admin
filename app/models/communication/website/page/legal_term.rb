@@ -50,5 +50,9 @@ class Communication::Website::Page::LegalTerm < Communication::Website::Page
   def is_listed_among_children?
     false
   end
+
+  def default_menu_identifier
+    'legal'
+  end
   
 end

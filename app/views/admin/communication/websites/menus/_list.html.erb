@@ -5,6 +5,7 @@
         <th><%= Communication::Website::Menu.human_attribute_name('title') %></th>
         <th><%= Communication::Website::Menu.human_attribute_name('items') %></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -12,6 +13,13 @@
         <tr>
           <td><%= link_to menu, admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id) %></td>
           <td><%= menu.items.count %></td>
+          <td>
+            <% if menu.automatic %>
+              <span class="badge bg-success">
+                <%= Communication::Website::Menu.human_attribute_name('automatic') %>
+              </span>
+            <% end %>
+          </td>
           <td>
             <div class="btn-group" role="group">
               <%= link_to t('edit'),

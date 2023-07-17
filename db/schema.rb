@@ -425,6 +425,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_17_160238) do
     t.datetime "updated_at", null: false
     t.uuid "original_id"
     t.uuid "language_id", null: false
+    t.boolean "automatic", default: true
     t.index ["communication_website_id"], name: "idx_comm_website_menus_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_menus_on_language_id"
     t.index ["original_id"], name: "index_communication_website_menus_on_original_id"

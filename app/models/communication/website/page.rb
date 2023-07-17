@@ -48,6 +48,7 @@ class Communication::Website::Page < ApplicationRecord
   include AsDirectObject
   include Sanitizable
   include WithAccessibility
+  include WithAutomaticMenus
   include WithBlobs
   include WithBlocks
   include WithDuplication

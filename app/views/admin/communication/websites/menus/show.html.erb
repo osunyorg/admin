@@ -7,7 +7,15 @@
                     new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
                     class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
   <%= osuny_panel Communication::Website::Menu::Item.model_name.human(count: 2), action: action do %>
-      <%= render 'admin/communication/websites/menus/items/list', items: @root_items if @items.any? %>
+    <% if @menu.automatic %>
+      <div class="p-3 mb-2 border border-success">
+        <span class="badge bg-success">
+          <%= Communication::Website::Menu.human_attribute_name('automatic') %>
+        </span>
+        <p class="mt-2 mb-0"><%= sanitize t('communication.website.menus.automatic') %></p>
+      </div>
+    <% end %>
+    <%= render 'admin/communication/websites/menus/items/list', items: @root_items if @items.any? %>
   <% end %>
 <% end %>
 

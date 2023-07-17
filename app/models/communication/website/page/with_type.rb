@@ -86,6 +86,10 @@ module Communication::Website::Page::WithType
     nil
   end
 
+  def default_menu_identifier
+    'primary'
+  end
+
   def generate_from_template
   end
 
