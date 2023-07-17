@@ -11,7 +11,7 @@
           <% ['subject_fr', 'content_fr', 'subject_en', 'content_en'].each do |variable| %>
             <tr>
               <td><%= EmergencyMessage.human_attribute_name(variable) %></td>
-              <td class="text-end"><%= @emergency_message.public_send variable %></td>
+              <td class="text-end"><%= sanitize @emergency_message.public_send variable %></td>
             </tr>
           <% end %>
         </table>
