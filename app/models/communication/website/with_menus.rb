@@ -65,11 +65,11 @@ module Communication::Website::WithMenus
     find_or_create_menu 'primary'
     find_or_create_menu 'social'
     find_or_create_menu 'legal'
-    generate_automatic_menus
+    generate_automatic_menus(default_language)
   end
 
-  def generate_automatic_menus
-    menus.automatic.find_each do |menu|
+  def generate_automatic_menus(language)
+    menus.automatic.for_language(language).find_each do |menu|
       menu.generate_automatically
     end
   end

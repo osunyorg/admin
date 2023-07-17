@@ -24,7 +24,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     end
     old_parent_page.sync_with_git
     parent_page.sync_with_git
-    @website.generate_automatic_menus
+    @website.generate_automatic_menus(parent_page.language)
   end
 
   def children
