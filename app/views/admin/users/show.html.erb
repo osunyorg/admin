@@ -11,10 +11,10 @@
           <td><%= User.human_attribute_name('email') %></td>
           <td class="text-end"><%= link_to @user.email, "mailto:#{@user.email}" %></td>
         </tr>
-        <% ['first_name', 'last_name', 'mobile_phone'].each do |variable| %>
+        <% ['first_name', 'last_name', 'mobile_phone'].each do |attribute| %>
           <tr>
-            <td><%= User.human_attribute_name(variable) %></td>
-            <td class="text-end"><%= @user.public_send variable %></td>
+            <td><%= User.human_attribute_name(attribute) %></td>
+            <td class="text-end"><%= @user.public_send attribute %></td>
           </tr>
         <% end %>
         <tr>

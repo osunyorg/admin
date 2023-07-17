@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_050520) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_160238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -105,8 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_050520) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "heading_id"
     t.uuid "communication_website_id"
+    t.uuid "heading_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
     t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
@@ -223,6 +223,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_050520) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
+    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -462,7 +463,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_050520) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -678,6 +679,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_050520) do
     t.string "phone"
     t.string "url"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
+  end
+
+  create_table "emergency_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id"
+    t.string "name"
+    t.string "role"
+    t.string "subject_fr"
+    t.string "subject_en"
+    t.text "content_fr"
+    t.text "content_en"
+    t.datetime "delivered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "delivered_count"
+    t.index ["university_id"], name: "index_emergency_messages_on_university_id", where: "(university_id IS NOT NULL)"
   end
 
   create_table "imports", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1194,6 +1210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_050520) do
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
+  add_foreign_key "emergency_messages", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"

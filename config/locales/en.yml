@@ -43,6 +43,15 @@ en:
             text_html: The video has no text transcription for blind people, or for users with a low bitrate connection who could not read the video properly. Please add a text transcription.
   activerecord:
     attributes:
+      emergency_message:
+        content_en: Message (en)
+        content_fr: Message (fr)
+        delivered_at: Delivered at
+        name: Name
+        role: Target role
+        subject_en: Subject (en)
+        subject_fr: Subject (fr)
+        university: Target university
       import:
         date: Date
         file: File
@@ -75,6 +84,9 @@ en:
         websites_to_manage: Websites managed
     errors:
       models:
+        emergency_message:
+          one: Emergency message
+          other: Emergency messages
         import:
           attributes:
             file:
@@ -284,6 +296,17 @@ en:
   search: Search
   select_language: Select language
   server_admin:
+    emergency_messages:
+      all_universities: All
+      all_roles: All
+      content: Content
+      deliver: Send
+      delivered: Your message has been sent
+      filters: Filters
+      target: Target
+      users: 
+        one: "%{count} user"
+        other: "%{count} users"
     websites:
       buttons:
         theme:
@@ -295,6 +318,9 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     hints:
+      emergency_message:
+        role: Leave blank to send to all roles
+        university: Leave blank to send to all universities
       import:
         file: .xlsx file only
       language:

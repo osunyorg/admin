@@ -1,0 +1,40 @@
+<% content_for :title, EmergencyMessage.model_name.human(count: 2) %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= EmergencyMessage.human_attribute_name('name') %></th>
+        <th><%= EmergencyMessage.human_attribute_name('delivered_at') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @emergency_messages.each do |emergency_message| %>
+        <tr>
+          <td><%= link_to emergency_message, [:server, emergency_message] %></td>
+          <td><%= l emergency_message.delivered_at if emergency_message.delivered? %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <% unless emergency_message.delivered? %>
+                <%= link_to t('edit'),
+                          edit_server_emergency_message_path(emergency_message),
+                          class: button_classes %>
+                <%= link_to t('delete'),
+                          server_emergency_message_path(emergency_message),
+                          method: :delete,
+                          data: { confirm: t('please_confirm') },
+                          class: button_classes_danger %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('create'), new_server_emergency_message_path, class: button_classes %>
+<% end %>

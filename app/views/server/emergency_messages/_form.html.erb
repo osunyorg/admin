@@ -1,0 +1,40 @@
+<%= simple_form_for [:server, emergency_message] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :name %>
+    </div>
+  </div>
+
+    <h2 class="mt-4"><%= t('server_admin.emergency_messages.content') %></h2>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :subject_fr %>
+        <%= f.input :content_fr, 
+                    as: :summernote, 
+                    input_html: {
+                      data: { 'summernote-config' => 'mini' }
+                    } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :subject_en %>
+        <%= f.input :content_en, 
+                    as: :summernote, input_html: {
+                      data: { 'summernote-config' => 'mini' }
+                    } %>
+      </div>
+    </div>
+
+    <h2 class="mt-4"><%= t('server_admin.emergency_messages.filters') %></h2>
+    <div class="col-md-4">
+      <%= f.association :university %>
+      <%= f.input :role, collection: current_user.managed_roles, label_method: lambda { |k| t("activerecord.attributes.user.roles.#{k}")} %>
+    </div>
+  </div>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

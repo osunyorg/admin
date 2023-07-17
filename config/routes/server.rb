@@ -10,5 +10,10 @@ namespace :server do
   resources :blocks, only: [:index, :show] do
     post :resave, on: :member
   end
+  resources :emergency_messages do
+    member do
+      post :deliver
+    end
+  end
   root to: 'dashboard#index'
 end
