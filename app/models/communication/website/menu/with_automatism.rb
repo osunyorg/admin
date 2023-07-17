@@ -33,8 +33,7 @@ module Communication::Website::Menu::WithAutomatism
 
   def create_items
     home = website.pages.where(language_id: language_id).root.first
-    return unless home
-    create_items_for_children_of(home)
+    create_items_for_children_of(home) if home
   end
 
   def create_items_for_children_of(page, parent_item = nil)
