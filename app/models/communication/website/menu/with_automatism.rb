@@ -1,7 +1,7 @@
 module Communication::Website::Menu::WithAutomatism
   extend ActiveSupport::Concern
 
-  included do 
+  included do
     scope :automatic, -> { where(automatic: true) }
   end
 
@@ -20,13 +20,14 @@ module Communication::Website::Menu::WithAutomatism
   end
 
   protected
-  
+
   def pause_git_sync
-    # TODO
+    Communication::Website::Menu.skip_callback :save, :after, :connect_dependencies
+    Communication::Website::Menu.skip_callback :touch, :after, :connect_dependencies
   end
 
   def clear_items
-    # TODO est-ce bien de ne pas gérer les dépendances avec un destroy? Effet de bord?
+    # We don't use the destroy method to prevent items' callbacks
     items.delete_all
   end
 
@@ -54,6 +55,6 @@ module Communication::Website::Menu::WithAutomatism
   end
 
   def unpause_git_sync
-    # TODO
+    Communication::Website::Menu.set_callback :save, :after, :connect_dependencies
   end
 end
