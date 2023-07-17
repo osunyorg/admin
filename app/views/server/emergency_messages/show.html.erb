@@ -38,7 +38,6 @@
             <% count = @emergency_message.delivered? ? @emergency_message.delivered_count : @emergency_message.target.size %>
             <td class="text-end"><%= t('server_admin.emergency_messages.users', count: count) %></td>
           </tr>
-
         </table>
       </div>
     </div>

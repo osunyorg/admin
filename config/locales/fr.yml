@@ -304,7 +304,9 @@ fr:
       delivered: Votre message a bien été envoyé
       filters: Filtres
       target: Cible
-      users: "%{count} utilisateurs"
+      users: 
+        one: "%{count} utilisateur"
+        other: "%{count} utilisateurs"
     websites:
       buttons:
         theme:
