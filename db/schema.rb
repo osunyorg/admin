@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_073707) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_132026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -680,6 +680,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_073707) do
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
+  create_table "emergency_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id"
+    t.string "name"
+    t.string "role"
+    t.string "subject_fr"
+    t.string "subject_en"
+    t.text "content_fr"
+    t.text "content_en"
+    t.datetime "delivered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_emergency_messages_on_university_id", where: "(university_id IS NOT NULL)"
+  end
+
   create_table "imports", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number_of_lines"
     t.jsonb "processing_errors"
@@ -1194,6 +1208,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_073707) do
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_schools", "universities"
+  add_foreign_key "emergency_messages", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"

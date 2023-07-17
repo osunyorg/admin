@@ -43,6 +43,15 @@ fr:
             text_html: La vidéo n'est pas accompagnée d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
   activerecord:
     attributes:
+      emergency_message:
+        content_en: Message (en)
+        content_fr: Message (fr)
+        delivered_at: Date d'envoi
+        name: Nom
+        role: Rôle de destination
+        subject_en: Sujet (en)
+        subject_fr: Sujet (fr)
+        university: Université de destination
       import:
         date: Date
         file: Fichier
@@ -85,6 +94,9 @@ fr:
             password:
               password_strength: ne répond pas aux critères de sécurité
     models:
+      emergency_message:
+        one: Message d'urgence
+        other: Messages d'urgence
       import:
         one: Import
         other: Imports
@@ -284,6 +296,13 @@ fr:
   search: Rechercher
   select_language: Sélectionnez une langue
   server_admin:
+    emergency_messages:
+      all_universities: Toutes
+      all_roles: Tous
+      content: Contenu
+      deliver: Envoyer
+      delivered: Votre message a bien été envoyé
+      filters: Filtres
     websites:
       buttons:
         theme:
@@ -295,6 +314,9 @@ fr:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
+      emergency_message:
+        role: Laisser vide pour envoyer à tous les rôle
+        university: Laisser vide pour envoyer à toutes les universités
       import:
         file: Fichier .xlsx uniquement
       language:

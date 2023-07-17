@@ -1,0 +1,52 @@
+<% content_for :title, @emergency_message %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title"><%= t('server_admin.emergency_messages.content') %></h2>
+      </div>
+      <div class="table-responsive">
+        <table class="<%= table_classes %>">
+          <% ['subject_fr', 'content_fr', 'subject_en', 'content_en'].each do |variable| %>
+            <tr>
+              <td><%= EmergencyMessage.human_attribute_name(variable) %></td>
+              <td class="text-end"><%= @emergency_message.public_send variable %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title"><%= t('server_admin.emergency_messages.filters') %></h2>
+      </div>
+      <div class="table-responsive">
+        <table class="<%= table_classes %>">
+          <tr>
+            <td><%= EmergencyMessage.human_attribute_name(:university) %></td>
+            <td class="text-end"><%= @emergency_message.university.present? ? link_to(@emergency_message.university, server_university_path(@emergency_message.university)) : t('server_admin.emergency_messages.all_universities') %></td>
+          </tr>
+          <tr>
+            <td><%= EmergencyMessage.human_attribute_name(:role) %></td>
+            <td class="text-end"><%= @emergency_message.role.present? ? t("activerecord.attributes.user.roles.#{@emergency_message.role}") : t('server_admin.emergency_messages.all_roles') %></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :action_bar_right do %>
+  <% unless @emergency_message.delivered? %>
+    <%= link_to t('edit'), edit_server_emergency_message_path(@emergency_message), class: button_classes %>
+    <%= link_to t('server_admin.emergency_messages.deliver'), 
+                deliver_server_emergency_message_path(@emergency_message), 
+                method: :post,
+                data: { confirm: t('please_confirm') },
+                class: button_classes %>
+  <% end %>
+<% end %>
