@@ -8,10 +8,10 @@
       </div>
       <div class="table-responsive">
         <table class="<%= table_classes %>">
-          <% ['subject_fr', 'content_fr', 'subject_en', 'content_en'].each do |variable| %>
+          <% ['subject_fr', 'content_fr', 'subject_en', 'content_en'].each do |attribute| %>
             <tr>
-              <td><%= EmergencyMessage.human_attribute_name(variable) %></td>
-              <td class="text-end"><%= sanitize @emergency_message.public_send variable %></td>
+              <td><%= EmergencyMessage.human_attribute_name(attribute) %></td>
+              <td class="text-end"><%= sanitize @emergency_message.public_send attribute %></td>
             </tr>
           <% end %>
         </table>

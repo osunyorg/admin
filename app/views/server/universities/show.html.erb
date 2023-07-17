@@ -9,10 +9,10 @@
             <td><%= t('activerecord.attributes.university.url') %></td>
             <td class="text-end"><%= link_to @university.url, @university.url, target: :_blank %></td>
           </tr>
-          <% ['address', 'zipcode', 'city', 'country', 'private'].each do |variable| %>
+          <% ['address', 'zipcode', 'city', 'country', 'private'].each do |attribute| %>
             <tr>
-              <td><%= University.human_attribute_name(variable) %></td>
-              <td class="text-end"><%= @university.public_send variable %></td>
+              <td><%= University.human_attribute_name(attribute) %></td>
+              <td class="text-end"><%= @university.public_send attribute %></td>
             </tr>
           <% end %>
           <% unless @university.invoice_amount.blank? %>
