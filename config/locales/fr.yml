@@ -315,7 +315,7 @@ fr:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
       emergency_message:
-        role: Laisser vide pour envoyer à tous les rôle
+        role: Laisser vide pour envoyer à tous les rôles
         university: Laisser vide pour envoyer à toutes les universités
       import:
         file: Fichier .xlsx uniquement

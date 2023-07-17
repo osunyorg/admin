@@ -49,8 +49,8 @@ en:
         delivered_at: Delivered at
         name: Name
         role: Target role
-        subject_en: Subjet (en)
-        subject_fr: Subjet (fr)
+        subject_en: Subject (en)
+        subject_fr: Subject (fr)
         university: Target university
       import:
         date: Date
