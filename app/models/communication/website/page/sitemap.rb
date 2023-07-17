@@ -67,4 +67,8 @@ class Communication::Website::Page::Sitemap < Communication::Website::Page
     'sitemap'
   end
 
+  def default_menu_identifier
+    'legal'
+  end
+
 end

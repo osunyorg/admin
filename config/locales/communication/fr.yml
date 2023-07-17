@@ -164,6 +164,7 @@ fr:
       communication/website/imported/medium:
         filename: Nom du fichier
       communication/website/menu:
+        automatic: Automatique
         identifier: Identifiant
         items: Éléments
         title: Titre
@@ -706,6 +707,7 @@ fr:
       last_pages: Dernières pages
       last_posts: Dernières actualités
       menus:
+        automatic: Ce menu se constitue automatiquement. <br>Cela signifie qu'il reflète l'arborescence du site. <br>Dès que vous souhaiterez le modifier, en créant un élément, l'automatisme s'arrêtera.
         default_title:
           legal: Informations légales
           primary: Menu principal

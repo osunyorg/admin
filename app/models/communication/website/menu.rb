@@ -3,6 +3,7 @@
 # Table name: communication_website_menus
 #
 #  id                       :uuid             not null, primary key
+#  automatic                :boolean          default(TRUE)
 #  identifier               :string
 #  title                    :string
 #  created_at               :datetime         not null
@@ -29,6 +30,7 @@
 class Communication::Website::Menu < ApplicationRecord
   include AsDirectObject
   include Sanitizable
+  include WithAutomatism
   include WithTranslations
   include WithUniversity
 

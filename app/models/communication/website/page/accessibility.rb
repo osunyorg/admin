@@ -51,6 +51,10 @@ class Communication::Website::Page::Accessibility < Communication::Website::Page
     false
   end
 
+  def default_menu_identifier
+    'legal'
+  end
+
   def generate_from_template
     generate_declaration
     generate_results

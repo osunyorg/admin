@@ -50,6 +50,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   end
 
   def create
+    @menu.stop_automatism!
     @item.menu = @menu
     @item.website = @website
     if @item.save
@@ -62,6 +63,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   end
 
   def update
+    @menu.stop_automatism!
     if @item.update(item_params)
       redirect_to redirect_path(@item),
                   notice: t('admin.successfully_updated_html', model: @item.to_s)

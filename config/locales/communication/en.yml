@@ -164,6 +164,7 @@ en:
       communication/website/imported/medium:
         filename: Filename
       communication/website/menu:
+        automatic: Automatic
         identifier: Identifier
         items: Items
         title: Title
@@ -709,6 +710,7 @@ en:
       last_pages: Last pages
       last_posts: Last posts
       menus:
+        automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
           legal: Legal
           primary: Main menu
