@@ -2,17 +2,18 @@
 #
 # Table name: emergency_messages
 #
-#  id            :uuid             not null, primary key
-#  content_en    :text
-#  content_fr    :text
-#  delivered_at  :datetime
-#  name          :string
-#  role          :string
-#  subject_en    :string
-#  subject_fr    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  university_id :uuid             indexed
+#  id              :uuid             not null, primary key
+#  content_en      :text
+#  content_fr      :text
+#  delivered_at    :datetime
+#  delivered_count :integer
+#  name            :string
+#  role            :string
+#  subject_en      :string
+#  subject_fr      :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  university_id   :uuid             indexed
 #
 # Indexes
 #
@@ -37,7 +38,7 @@ class EmergencyMessage < ApplicationRecord
     users_en.each do |user|
       NotificationMailer.emergency_message(self, user, 'en').deliver_later
     end
-    update(delivered_at: Time.now)
+    update(delivered_at: Time.now, delivered_count: target.size)
   end
 
   def delivered?
@@ -47,8 +48,6 @@ class EmergencyMessage < ApplicationRecord
   def to_s
     "#{name}"
   end
-
-  private
 
   def target
     users = User.all

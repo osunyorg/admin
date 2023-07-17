@@ -33,6 +33,11 @@
             <td><%= EmergencyMessage.human_attribute_name(:role) %></td>
             <td class="text-end"><%= @emergency_message.role.present? ? t("activerecord.attributes.user.roles.#{@emergency_message.role}") : t('server_admin.emergency_messages.all_roles') %></td>
           </tr>
+          <tr>
+            <td><%= t('server_admin.emergency_messages.target') %></td>
+            <% count = @emergency_message.delivered? ? @emergency_message.delivered_count : @emergency_message.target.size %>
+            <td class="text-end"><%= t('server_admin.emergency_messages.users', count: count) %></td>
+          </tr>
 
         </table>
       </div>

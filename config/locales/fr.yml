@@ -303,6 +303,8 @@ fr:
       deliver: Envoyer
       delivered: Votre message a bien été envoyé
       filters: Filtres
+      target: Cible
+      users: "%{count} utilisateurs"
     websites:
       buttons:
         theme:
