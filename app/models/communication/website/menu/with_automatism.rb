@@ -56,5 +56,6 @@ module Communication::Website::Menu::WithAutomatism
 
   def unpause_git_sync
     Communication::Website::Menu.set_callback :save, :after, :connect_dependencies
+    Communication::Website::Menu.set_callback :touch, :after, :connect_dependencies
   end
 end
