@@ -28,11 +28,14 @@ class EmergencyMessage < ApplicationRecord
   validates :name, :subject_fr, :subject_en, :content_fr, :content_en, presence: true
 
   def deliver!
-    ['fr', 'en'].each do |lang|
-      users = target.where(language_id: Language.find_by(iso_code: lang).id)
-      users.each do |user|
-        NotificationMailer.emergency_message(self, user, lang).deliver_later
-      end
+    users_fr = target.where(language_id: Language.find_by(iso_code: 'fr').id)
+    users_fr.each do |user|
+      NotificationMailer.emergency_message(self, user, 'fr').deliver_later
+    end
+    # other users fallback to :en
+    users_en = target.where.not(language_id: Language.find_by(iso_code: 'fr').id)
+    users_en.each do |user|
+      NotificationMailer.emergency_message(self, user, 'en').deliver_later
     end
     update(delivered_at: Time.now)
   end
