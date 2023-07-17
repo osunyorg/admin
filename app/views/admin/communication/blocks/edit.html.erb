@@ -126,7 +126,12 @@
         }.bind(this));
       },
       initSummernote(element) {
-        var config = element.getAttribute('data-summernote-config') || 'default';
+        var config = element.getAttribute('data-summernote-config') || 'default',
+          onChangeCallback = function(content) {
+              element.value = content;
+              element.dispatchEvent(new Event('input'))
+          };
+
         $(element).summernote({
           lang: '<%= current_language.summernote_locale unless current_language.summernote_locale.blank? %>',
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
@@ -134,10 +139,8 @@
           disableDragAndDrop: true,
           codemirror: window.codemirrorManager.defaultConfig(),
           callbacks: {
-            onChange: function(contents, $editable) {
-              element.value = contents;
-              element.dispatchEvent(new Event('input'));
-            }.bind(this)
+            onChange: onChangeCallback,
+            onChangeCodeview: onChangeCallback
           }
         });
       },
