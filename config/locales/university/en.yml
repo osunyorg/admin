@@ -7,10 +7,7 @@ en:
         country: Country
         default_language: Default language
         has_sso: Has SSO?
-        feature_administration: Administration
-        feature_communication: Communication
-        feature_education: Education
-        feature_research: Research
+        is_really_a_university: Is really a university
         identifier: Identifier
         invoice_amount: Invoice amount
         invoice_date: Invoice date
@@ -34,7 +31,6 @@ en:
         categories: Categories
         city: City
         country: Country
-        description: Personne morale liée à une université, une composante, un laboratoire, etc.
         digital: Digital contact
         email: Email
         geolocation: Geographical coordinates
@@ -210,10 +206,13 @@ en:
       parts:
         person:
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
+          description_non_university: Personne physique, pas nécessairement liée à un compte utilisateur d'Osuny
         organization:
           description: Personne morale liée à une université, une composante, un laboratoire, etc.
+          description_non_university: Personne morale, qu'il s'agisse d'une organisation publique, d'une organisation non gouvernementale (association par exemple) ou d'une entreprise
         user:
           description: Personne utilisant Osuny, dotée d'un compte authentifié
+          description_non_university: Personne utilisant Osuny, dotée d'un compte authentifié
     internal_key: Internal Key
     invoice_informations: Invoice informations
     manage_cohorts: Manage cohorts

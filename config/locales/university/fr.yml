@@ -7,10 +7,7 @@ fr:
         country: Pays
         default_language: Langue par défaut
         has_sso: A un SSO ?
-        feature_administration: Administration
-        feature_communication: Communication
-        feature_education: Enseignement
-        feature_research: Recherche
+        is_really_a_university: Réellement une université
         identifier: Identifiant
         invoice_amount: Montant de facturation
         invoice_date: Date de facturation
@@ -209,10 +206,13 @@ fr:
       parts:
         person:
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
+          description_non_university: Personne physique, pas nécessairement liée à un compte utilisateur d'Osuny
         organization:
           description: Personne morale liée à une université, une composante, un laboratoire, etc.
+          description_non_university: Personne morale, qu'il s'agisse d'une organisation publique, d'une organisation non gouvernementale (association par exemple) ou d'une entreprise
         user:
           description: Personne utilisant Osuny, dotée d'un compte authentifié
+          description_non_university: Personne utilisant Osuny, dotée d'un compte authentifié
     internal_key: Clé interne
     invoice_informations: Données de facturation
     manage_cohorts: Gérer les promotions

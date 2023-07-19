@@ -64,7 +64,7 @@ class Server::UniversitiesController < Server::ApplicationController
       :private, :identifier, :logo, :logo_delete, :sms_sender_name,
       :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label,
       :invoice_date, :invoice_amount, 
-      :feature_administration, :feature_communication, :feature_education, :feature_research
+      :is_really_a_university
     )
   end
 end
