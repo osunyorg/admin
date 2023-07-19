@@ -16,7 +16,7 @@ filters.each { |filter| should_be_open = true if params.has_key?(filter[:scope_n
       <i class="<%= Icon::FILTERS %>"></i>
     </a>
   <% end %>
-  <div class="collapse filters__content <%= (!collapsable || should_be_open) ? 'show' : '' %>" id="collapseFilters">
+  <div class="collapse filters__content mt-2 mt-md-0 <%= (!collapsable || should_be_open) ? 'show' : '' %>" id="collapseFilters">
     <%= form_tag current_path, method: :get, class: 'do-not-unlock' do |f| %>
       <% filters.each do |filter| %>
         <div class="filters__content__filter">
