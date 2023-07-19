@@ -87,7 +87,18 @@ class Communication::Website::Page < ApplicationRecord
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
+  scope :ordered, -> { order(:title) }
 
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(communication_website_pages.meta_description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_pages.summary) ILIKE unaccent(:term) OR
+      unaccent(communication_website_pages.title) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_published, -> (published) { where(published: published == 'true') }
+  scope :for_full_width, -> (full_width) { where(full_width: full_width == 'true') }
+  
   def template_static
     "admin/communication/websites/pages/static"
   end

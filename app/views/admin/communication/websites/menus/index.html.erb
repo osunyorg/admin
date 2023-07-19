@@ -1,4 +1,4 @@
-<% content_for :title, "#{Communication::Website::Menu.model_name.human(count: 2)}" %>
+<% content_for :title, Communication::Website::Menu.model_name.human(count: 2) %>
 
 <% content_for :title_right do %>
   <%= @menus.count %>
@@ -6,12 +6,8 @@
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'admin/communication/websites/menus/list', menus: @menus %>
-  <% if @menus.total_pages > 1 %>
-    <%= paginate @menus, theme: 'bootstrap-5' %>
+  <% osuny_panel  Communication::Website::Menu.model_name.human(count: 2), 
+                  action: create_link(Communication::Website::Menu) do %>
+    <%= render 'admin/communication/websites/menus/list', menus: @menus %>
   <% end %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Menu %>
 <% end %>

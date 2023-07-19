@@ -31,6 +31,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @page if @page.is_regular_page? %>
+  <%= duplicate_link @page if @page.is_regular_page? %>
   <%= static_link static_admin_communication_website_page_path(@page) %>
 <% end %>
 

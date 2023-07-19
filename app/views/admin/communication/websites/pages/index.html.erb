@@ -1,35 +1,31 @@
 <% content_for :title, t('admin.communication.website.pages.structure') %>
 
 <% content_for :title_right do %>
-  <%= @pages.size %>
-  <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
+  <%= @pages.total_count %>
+  <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <ul class="list-unstyled treeview">
-    <li class="treeview__element treeview__element--opened treeview__element--loaded" data-id="<%= @homepage.id %>" data-parent="">
-      <div class="d-flex align-items-center treeview__label border-bottom p-1">
-        <div class="d-inline-block p-2 ps-0" style="width: 22px">
-          <span class="close_btn text-primary">
-            <i class="close_btn--with_children <%= Icon::FOLDER_OPENED_FULL %>"></i>
-          </span>
-        </div>
-        <%= link_to @homepage,
-                    admin_communication_website_page_path(website_id: @homepage.website.id, id: @homepage.id)
-                    %>
-        <div class="btn-group ms-auto" role="group">
-          <%= link_to t('edit'), edit_admin_communication_website_page_path(@homepage), class: button_classes %>
-        </div>
-      </div>
-      <ul class="list-unstyled ms-4 treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"
-          data-id="<%= @homepage.id %>"
-          data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
-        <%= render 'treebranch', pages: @first_level_pages %>
-      </ul>
-    </li>
-  </ul>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Page %>
+  <% osuny_panel  t('admin.communication.website.pages.structure'), 
+                  action: create_link(Communication::Website::Page) do %>
+    <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page">
+          <i class="fas fa-list"></i>
+          <%= t('admin.communication.website.pages.as_list') %>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= tree_admin_communication_website_pages_path %>">
+          <i class="fas fa-sitemap"></i>
+          <%= t('admin.communication.website.pages.as_tree') %>
+        </a>
+      </li>
+    </ul>
+    <div class="position-relative mt-2">
+      <%= render 'filters', current_path: admin_communication_website_pages_path, filters: @filters %>
+      <%= render 'admin/communication/websites/pages/list', pages: @pages %>
+      <%= paginate @pages, theme: 'bootstrap-5' %>
+    </div>
+  <% end %>
 <% end %>

@@ -1,8 +1,8 @@
 <%
-  hide_author ||= false
-  hide_category ||= false
-  hide_buttons ||= false
-  selectable ||= false
+hide_author ||= false
+hide_category ||= false
+hide_buttons ||= false
+selectable ||= false
 %>
 <% if selectable %>
   <input type="hidden" name="ids[]" value="">
@@ -11,38 +11,34 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <% if selectable %>
-          <th class="ps-0">
-            <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } %>
-          </th>
-        <% end %>
-        <th class="ps-0" width="60%"><%= Communication::Website::Post.human_attribute_name('title') %></th>
+        <th class="ps-0" width="60%">
+          <%= Communication::Website::Post.human_attribute_name('title') %>
+          <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
+        </th>
+        <th class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
         <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
-        <th<% unless hide_buttons %> colspan="2"<% end %> class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
       </tr>
     </thead>
     <tbody>
       <% posts.each do |post| %>
         <tr <% unless post.published? %>class="draft"<% end %>>
-          <% if selectable %>
-            <td class="ps-0">
-              <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %>
-            </td>
-          <% end %>
-          <td class="ps-0"><%= link_to post,
-                          admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                          class: "#{'draft' unless post.published?}" %></td>
-          <td><%= image_tag post.featured_image.representation(resize: '200x'),
-                                            width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          <td class="ps-0">
+            <%= link_to post,
+                        admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                        class: "#{'draft' unless post.published?}" %>
+            <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } if selectable %>
+          </td>
           <td class="ps-3 small">
-            <%= l post.published_at, format: :date_with_explicit_month if post.published_at %><br>
+            <% if post.published_at %>
+              <%= l post.published_at, format: :date_with_explicit_month %><br>
+            <% end %>
             <% if !hide_author && post.author %>
-              <%= link_to post.author, admin_communication_website_author_path(website_id: post.website.id, id: post.author.id) %><br>
+              <%= post.author %><br>
             <% end %>
             <% unless hide_category %>
               <ul class="list-unstyled mb-0">
                 <% post.categories.each do |category| %>
-                  <li><%= link_to_if can?(:read, category), category, admin_communication_website_category_path(website_id: post.website.id, id: category.id), class: 'small' %></li>
+                  <li><span class="badge bg-dark"><%= category %></span></li>
                 <% end %>
               </ul>
             <% end %>
@@ -50,20 +46,8 @@
               <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
             <% end %>
           </td>
-          <% unless hide_buttons %>
-            <td>
-              <div class="btn-group" role="group">
-                <%= link_to t('edit'),
-                            edit_admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                            class: button_classes if can?(:update, post) %>
-                <%= link_to t('delete'),
-                            admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                            method: :delete,
-                            data: { confirm: t('please_confirm') },
-                            class: button_classes_danger if can?(:destroy, post) %>
-              </div>
-            </td>
-          <% end %>
+          <td><%= image_tag post.featured_image.representation(resize: '200x'),
+                            width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
         </tr>
       <% end %>
     </tbody>
