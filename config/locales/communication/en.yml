@@ -249,8 +249,9 @@ en:
               remove: Remove file
           image:
             input:
-              label: Image (.png, .jpg, .svg)
+              label: Image
               remove: Remove image
+              hint: 5 Mo max, .png, .jpg, .svg
             alt:
               label: Alternative text
               placeholder: Enter alternative text
@@ -396,8 +397,9 @@ en:
               remove_element: Remove feature
               element:
                 image:
-                  label: Image (.png, .jpg, .svg)
+                  label: Image
                   remove: Remove image
+                  hint: 5 Mo max, .png, .jpg, .svg
                 alt:
                   label: Alternative text
                   placeholder: Enter text description
@@ -433,6 +435,7 @@ en:
                 label: Carousel
                 description: Images are big, with a previous / next navigation and a constant height.
             edit:
+              add_image: Add an image
               description:
                 label: Description
               element:
@@ -445,8 +448,10 @@ en:
                 credit:
                   label: Credit
                   placeholder: Enter image's credit here
-              add_image: Add image
+              move_images: Move images below to define the order
               remove_image: Remove image
+              send_and_edit_images: Send the images and enter the text below
+              send_multiple_images: Send multiple images
           image:
             description: An image with its alternative description, a credit and a text.
             edit:
