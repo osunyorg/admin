@@ -844,5 +844,6 @@ en:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
         text: This field is deprecated, content will not be displayed on the website.
+        header_text: By default, this text replaces the title. On some sites, it is displayed in addition.
       communication_website_post:
         text: This field is deprecated, content will not be displayed on the website.
