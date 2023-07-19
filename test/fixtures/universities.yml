@@ -6,15 +6,12 @@
 #  address                    :string
 #  city                       :string
 #  country                    :string
-#  feature_administration     :boolean          default(TRUE)
-#  feature_communication      :boolean          default(TRUE)
-#  feature_education          :boolean          default(TRUE)
-#  feature_research           :boolean          default(TRUE)
 #  has_sso                    :boolean          default(FALSE)
 #  identifier                 :string
 #  invoice_amount             :string
 #  invoice_date               :date
 #  invoice_date_yday          :integer
+#  is_really_a_university     :boolean          default(TRUE)
 #  mail_from_address          :string
 #  mail_from_name             :string
 #  name                       :string
