@@ -669,6 +669,7 @@ fr:
           as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
           full_width_status: Pleine largeur
+          show: Voir la page
           structure: Pages
           published_status: État de publication
         post:

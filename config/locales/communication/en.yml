@@ -672,6 +672,7 @@ en:
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
           full_width_status: Full width
+          show: Show page
           structure: Pages
           published_status: Publication status
         post:
