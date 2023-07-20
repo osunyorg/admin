@@ -1,7 +1,7 @@
 <%
-label = t 'admin.communication.blocks.components.image.input.label'
-remove = t 'admin.communication.blocks.components.image.input.remove'
-hint = t 'admin.communication.blocks.components.image.input.hint'
+label = t('admin.communication.blocks.components.image.input.label')
+remove = t('admin.communication.blocks.components.image.input.remove')
+hint = t('admin.communication.blocks.components.image.input.hint')
 %>
 <div class="mb-3">
   <div v-if="!<%= model %>.<%= property %>.id">
@@ -26,9 +26,7 @@ hint = t 'admin.communication.blocks.components.image.input.hint'
       <i class="<%= Icon::DELETE %>"></i>
     <%= remove %>
   </a>
-  <% if hint.present? %>
-    <div v-if="!<%= model %>.<%= property %>.id" class="form-text">
-      <%= hint %>
-    </div>
-  <% end %>
+  <div v-if="!<%= model %>.<%= property %>.id" class="form-text">
+    <%= hint %>
+  </div>
 </div>
