@@ -23,11 +23,12 @@
               <%= image_tag page.featured_image.representation(resize: '200x'), width: 100 %>
             <% end %>
           </td>
-          <td>
+          <td class="small">
+            <% if page.is_special_page? %>
+              <p class="mb-0"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></p>
+            <% end %>
             <% if page.full_width %>
-              <span class="badge bg-light text-black">
-                <%= Communication::Website::Page.human_attribute_name('full_width') %>
-              </span>
+              <p class="mb-0"><%= Communication::Website::Page.human_attribute_name('full_width') %></p>
             <% end %>
           </td>
         </tr>
