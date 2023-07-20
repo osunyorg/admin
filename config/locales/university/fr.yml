@@ -154,6 +154,7 @@ fr:
   simple_form:
     hints:
       university:
+        is_really_a_university: Décocher cette case masque les 5 royaumes.
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
       university_organization:

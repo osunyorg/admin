@@ -154,6 +154,7 @@ en:
   simple_form:
     hints:
       university:
+        is_really_a_university: Uncheck this to hide the 5 realms.
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
       university_organization:
