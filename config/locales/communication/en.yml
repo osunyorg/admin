@@ -682,8 +682,8 @@ en:
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
         extranet:
-          description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
-          description_non_university: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
+          description: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
+          description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
     extranet:
       post:
         metadata:
