@@ -103,26 +103,26 @@ en:
       source: HAL.science
   research:
     description:
-      text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
+      text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. Fundamental research creates the knowledge base from which applications are born and, conversely, technological advances provide the increasingly sophisticated investigative tools that lead to a deepening of our fundamental knowledge.
       source: Serge Haroche, Prix Nobel de physique 2012
       parts:
         hal:
-          description: Publications et auteur·e·s dans la base de données HAL
+          description: Publications and authors in the HAL database
         journal:
-          description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
+          description: Open access journals allowing researchers to contribute to research
         laboratory:
-          description: Structure de recherche hébergeant le travail des chercheur·e·s
+          description: Research structure hosting the work of researchers
         researcher:
-          description: Personne physique liée à une université, une composante, un laboratoire, etc.
+          description: Individual linked to a university, department, laboratory, etc.
         thesis:
-          description: Production scientifique permettant d'obtenir le titre de Docteur·e
+          description: Scientific production leading to the title of Doctor
     hal:
       description:
         parts:
           author:
-            description: Profils des chercheur·e·s dans la base de données HAL
+            description: Profiles of researchers in the HAL database
           publication:
-            description: Publications scientifiques importées automatiquement de HAL
+            description: Scientific publications automatically imported from HAL
       title: HAL
       select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
       sync: Synchronize HAL publications

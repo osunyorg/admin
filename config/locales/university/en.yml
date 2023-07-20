@@ -7,10 +7,7 @@ en:
         country: Country
         default_language: Default language
         has_sso: Has SSO?
-        feature_administration: Administration
-        feature_communication: Communication
-        feature_education: Education
-        feature_research: Research
+        is_really_a_university: Is really a university
         identifier: Identifier
         invoice_amount: Invoice amount
         invoice_date: Invoice date
@@ -34,7 +31,6 @@ en:
         categories: Categories
         city: City
         country: Country
-        description: Personne morale liée à une université, une composante, un laboratoire, etc.
         digital: Digital contact
         email: Email
         geolocation: Geographical coordinates
@@ -158,6 +154,7 @@ en:
   simple_form:
     hints:
       university:
+        is_really_a_university: Uncheck this to hide the 5 realms.
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
       university_organization:
@@ -205,15 +202,18 @@ en:
         import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
         title: Cohorts imports
     description:
-      text: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions “collèges”, “facultés”, “instituts”, “départements”, “centres”, “sections”, “unités” ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
+      text: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
       source: Wikipedia
       parts:
         person:
-          description: Personne physique liée à une université, une composante, un laboratoire, etc.
+          description: Physical person linked to a university, component, laboratory, etc.
+          description_non_university: Person, not necessarily linked to an Osuny user account
         organization:
-          description: Personne morale liée à une université, une composante, un laboratoire, etc.
+          description: Legal entity linked to a university, component, laboratory, etc.
+          description_non_university: Legal entity, whether a public organisation, a non-governmental organisation (e.g. an association) or a company
         user:
-          description: Personne utilisant Osuny, dotée d'un compte authentifié
+          description: Person using Osuny, with an authenticated account
+          description_non_university: Person using Osuny, with an authenticated account
     internal_key: Internal Key
     invoice_informations: Invoice informations
     manage_cohorts: Manage cohorts

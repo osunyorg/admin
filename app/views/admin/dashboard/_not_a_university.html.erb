@@ -1,0 +1,37 @@
+<div class="row mt-5 pt-5">
+  <% Communication.parts.each do |part| %>
+    <%
+    next unless can? :read, part.first
+    class_name = part.first
+    path = send part.last
+    title = class_name.model_name.human(count: 2)
+    key = "communication.description.parts.#{class_name.to_s.demodulize.downcase}.description_non_university"
+    description = t key
+    %>
+    <div class="col-lg-4">
+      <%= osuny_panel title do %>
+        <p><%= description.truncate 180 %></p>
+        <%= link_to t('show'), path, class: 'stretched-link' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row mt-5 pt-5">
+  <% University.parts.each do |part| %>
+    <%
+    next unless can? :read, part.first
+    class_name = part.first
+    path = send part.last
+    title = class_name.model_name.human(count: 2)
+    key = "university.description.parts.#{class_name.to_s.demodulize.downcase}.description_non_university"
+    description = t key
+    %>
+    <div class="col-lg-4">
+      <%= osuny_panel title do %>
+        <p><%= description.truncate 180 %></p>
+        <%= link_to t('show'), path, class: 'stretched-link' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

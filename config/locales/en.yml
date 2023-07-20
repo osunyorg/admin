@@ -128,7 +128,7 @@ en:
       sentence_html: Value inherited from %{link}
       status: Inherited value
     meta_description:
-      hint: Plain text without HTML, dedicated to SEO
+      hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
     pending_tasks:
       label: Background tasks pending
@@ -141,7 +141,9 @@ en:
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
-    summary: Summary
+    summary: 
+      label: Summary
+      hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
     users_alerts:
       already_confirmed: "Your account has already been confirmed."
       not_locked_html: '<i>%{model}</i> was not locked.'

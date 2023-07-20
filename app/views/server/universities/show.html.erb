@@ -1,33 +1,42 @@
 <% content_for :title, @university %>
+<% content_for :title_right do %>
+  <%= link_to @university.url, @university.url, target: :_blank %>
+<% end %>
 
 <div class="row">
-  <div class="col-xl-8">
-    <%= osuny_panel t('admin.infos') do %>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
+  <div class="col-xl-6">
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <% ['private', 'is_really_a_university'].each do |attribute| %>
           <tr>
-            <td><%= t('activerecord.attributes.university.url') %></td>
-            <td class="text-end"><%= link_to @university.url, @university.url, target: :_blank %></td>
+            <td><%= University.human_attribute_name(attribute) %></td>
+            <td class="text-end"><%= t @university.public_send attribute %></td>
           </tr>
-          <% ['address', 'zipcode', 'city', 'country', 'private'].each do |attribute| %>
-            <tr>
-              <td><%= University.human_attribute_name(attribute) %></td>
-              <td class="text-end"><%= @university.public_send attribute %></td>
-            </tr>
-          <% end %>
-          <% unless @university.invoice_amount.blank? %>
-            <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
-              <td><%= t('activerecord.attributes.university.invoice_date') %></td>
-              <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
-            </tr>
-            <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
-              <td><%= t('activerecord.attributes.university.invoice_amount') %></td>
-              <td class="text-end"><%= @university.invoice_amount %>€</td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    <% end %>
+        <% end %>
+        <% unless @university.invoice_amount.blank? %>
+          <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
+            <td><%= t('activerecord.attributes.university.invoice_date') %></td>
+            <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
+          </tr>
+          <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
+            <td><%= t('activerecord.attributes.university.invoice_amount') %></td>
+            <td class="text-end"><%= @university.invoice_amount %>€</td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <% ['address', 'zipcode', 'city', 'country'].each do |attribute| %>
+          <tr>
+            <td><%= University.human_attribute_name(attribute) %></td>
+            <td class="text-end"><%= @university.public_send attribute %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>
 

@@ -249,8 +249,9 @@ en:
               remove: Remove file
           image:
             input:
-              label: Image (.png, .jpg, .svg)
+              label: Image
               remove: Remove image
+              hint: 5 MB max, .png, .jpg, .svg
             alt:
               label: Alternative text
               placeholder: Enter alternative text
@@ -396,8 +397,9 @@ en:
               remove_element: Remove feature
               element:
                 image:
-                  label: Image (.png, .jpg, .svg)
+                  label: Image
                   remove: Remove image
+                  hint: 5 MB max, .png, .jpg, .svg
                 alt:
                   label: Alternative text
                   placeholder: Enter text description
@@ -433,6 +435,7 @@ en:
                 label: Carousel
                 description: Images are big, with a previous / next navigation and a constant height.
             edit:
+              add_image: Add an image
               description:
                 label: Description
               element:
@@ -445,8 +448,10 @@ en:
                 credit:
                   label: Credit
                   placeholder: Enter image's credit here
-              add_image: Add image
+              move_images: Move images below to define the order
               remove_image: Remove image
+              send_and_edit_images: Send the images and enter the text below
+              send_multiple_images: Send multiple images
           image:
             description: An image with its alternative description, a credit and a text.
             edit:
@@ -679,13 +684,15 @@ en:
       choose_template: Choose the kind of block to add
       choose: Choose
     description:
-      text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      text: To communicate is to share; and sharing is the act that constitutes us. If we believe that this act is impossible, we reject any human project.
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
       parts:
         website:
-          description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
+          description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
+          description_non_university: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
         extranet:
-          description: Espaces d'échanges sécurisés dédiés aux personnes authentifiées
+          description: Secure exchange areas dedicated to authenticated users
+          description_non_university: Secure exchange areas dedicated to authenticated users
     extranet:
       post:
         metadata:
@@ -848,5 +855,6 @@ en:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
         text: This field is deprecated, content will not be displayed on the website.
+        header_text: By default, this text replaces the title. On some sites, it is displayed in addition.
       communication_website_post:
         text: This field is deprecated, content will not be displayed on the website.

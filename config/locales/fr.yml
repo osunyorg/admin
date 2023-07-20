@@ -128,7 +128,7 @@ fr:
       sentence_html: Valeur héritée de %{link}
       status: Valeur héritée
     meta_description:
-      hint: Texte simple, dédié au SEO
+      hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Meta description
     pending_tasks:
       label: Tâches en cours de traitement
@@ -141,7 +141,9 @@ fr:
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
-    summary: Résumé
+    summary: 
+      label: Résumé
+      hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
