@@ -5,7 +5,7 @@
                   class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
         <%= render 'admin/application/tree/folder' %>
       <% end %>
-      <%= page %>
+      <span class="leaf-title"><%= page %></span>
       <%= render 'admin/application/tree/sort' unless page.is_home? %>
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone small ps-2', remote: true do %>
