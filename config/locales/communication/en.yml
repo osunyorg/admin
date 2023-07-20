@@ -675,15 +675,15 @@ en:
       choose_template: Choose the kind of block to add
       choose: Choose
     description:
-      text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      text: To communicate is to share; and sharing is the act that constitutes us. If we believe that this act is impossible, we reject any human project.
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
       parts:
         website:
-          description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
-          description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
+          description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
+          description_non_university: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
         extranet:
-          description: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
-          description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
+          description: Secure exchange areas dedicated to authenticated users
+          description_non_university: Secure exchange areas dedicated to authenticated users
     extranet:
       post:
         metadata:
