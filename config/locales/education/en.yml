@@ -94,19 +94,19 @@ en:
           title: Programs treeview
   education:
     description: 
-      text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
+      text: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
       source: Olivier Reboul, La philosophie de l'éducation, 2018
       parts:
         diploma:
-          description: Présentation des diplômes et de leurs caractéristiques
+          description: Presentation of diplomas and their characteristics
         program:
-          description: Présentation exhaustive des formations, de leurs contenus, modalités pédagogiques et perspectives
+          description: Comprehensive presentation of the courses, their content, teaching methods and prospects
         teacher:
-          description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
+          description: Presentation of the teachers, with their biographies and their teaching in the various courses
         school:
-          description: Présentation des écoles, de leurs coordonnées, enseignements, équipes et informations administratives
+          description: Presentation of the schools, their contact details, courses, teams and administrative information
         alumnus:
-          description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
+          description: Presentation of the students who have studied in the various courses.
     manage_programs: Manage programs
     manage_roles: Manage roles
     number_of_programs: Number of programs

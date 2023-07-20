@@ -4,13 +4,13 @@ module ApplicationController::WithFeatures
   included do
 
     def feature_education?
-      current_university.feature_education &&
+      current_university.is_really_a_university &&
       can?(:read, Education::Program)
     end
     helper_method :feature_education?
     
     def feature_research?
-      current_university.feature_research && (
+      current_university.is_really_a_university && (
         can?(:read, Research::Journal) ||
         can?(:read, Research::Hal::Publication) ||
         can?(:read, Research::Laboratory)
@@ -19,13 +19,12 @@ module ApplicationController::WithFeatures
     helper_method :feature_research?
     
     def feature_communication?
-      current_university.feature_communication &&
       can?(:read, Communication::Website)
     end
     helper_method :feature_communication?
 
     def feature_administration?
-      current_university.feature_administration &&
+      current_university.is_really_a_university &&
         can?(:read, Administration::Qualiopi::Criterion)
     end
     helper_method :feature_administration?

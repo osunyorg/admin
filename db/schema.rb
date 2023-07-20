@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_17_160238) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_073528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -918,10 +918,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_17_160238) do
     t.jsonb "sso_mapping"
     t.string "sso_button_label"
     t.uuid "default_language_id", null: false
-    t.boolean "feature_education", default: true
-    t.boolean "feature_research", default: true
-    t.boolean "feature_communication", default: true
-    t.boolean "feature_administration", default: true
+    t.boolean "is_really_a_university", default: true
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
   end
 

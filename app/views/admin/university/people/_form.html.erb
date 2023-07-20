@@ -87,7 +87,7 @@
             <%= f.input :habilitation %>
           </div>
         </div>
-      <% end %>
+      <% end if current_university.is_really_a_university %>
     </div>
     <div class="col-lg-4">
       <%= osuny_panel t('metadata') do %>

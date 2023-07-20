@@ -7,6 +7,7 @@
       <%= f.input :name %>
       <%= f.input :identifier %>
       <%= f.association :default_language, include_blank: false %>
+      <%= f.input :is_really_a_university %>
       <%= f.input :private %>
       <%= f.input :sms_sender_name,
                   maxlength: 11 %>
@@ -29,10 +30,6 @@
                   input_html: { accept: '.jpg,.jpeg,.png,.svg' },
                   preview: false,
                   direct_upload: true %>
-      <%= f.input :feature_education %>
-      <%= f.input :feature_research %>
-      <%= f.input :feature_communication %>
-      <%= f.input :feature_administration %>
     </div>
   </div>
 
