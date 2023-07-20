@@ -665,8 +665,13 @@ fr:
                 placeholder: Entrer le titre de la vidéo
       website:
         pages:
+          as_list: Voir en liste
+          as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
-          structure: Arborescence
+          full_width_status: Pleine largeur
+          show: Voir la page
+          structure: Pages
+          published_status: État de publication
         post:
           pinned_status: Mise en avant
   communication:

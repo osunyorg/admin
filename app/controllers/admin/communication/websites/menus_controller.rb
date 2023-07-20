@@ -4,7 +4,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   include Admin::Translatable
 
   def index
-    @menus = @menus.for_language(current_website_language).ordered.page(params[:page])
+    @menus = @menus.for_language(current_website_language).ordered
     breadcrumb
   end
 
