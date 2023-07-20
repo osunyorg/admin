@@ -1,9 +1,11 @@
 .filters
     &__button
         min-width: 100px
-        position: absolute
-        right: 0
-        top: 0
+        @media (min-width: 768px)
+            position: absolute
+            right: 0
+            top: 0
     &__content
         padding-bottom: 30px
-        padding-right: 200px
+        @media (min-width: 768px)
+            padding-right: 200px
