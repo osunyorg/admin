@@ -27,11 +27,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       program = current_university.education_programs.find(id)
-      program.update(
-        parent_id: parent_id,
-        position: index + 1,
-        skip_websites_categories_callback: true
-      )
+      program.update_columns  parent_id: parent_id,
+                              position: index + 1
     end
     if old_parent_id
       old_parent = current_university.education_programs.find(old_parent_id)
