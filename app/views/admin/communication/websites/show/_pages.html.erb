@@ -8,5 +8,30 @@ subtitle = link_to t('communication.website.see_all', number: @all_pages.count),
 <%= osuny_panel t('communication.website.last_pages'),
                 subtitle: subtitle,
                 action: action do %>
-  <%= render 'admin/communication/websites/pages/list', pages: @pages, hide_buttons: true %>
+  <div class="table-responsive">
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
+          <th class="ps-0"><%= Communication::Website::Page.human_attribute_name('title') %></th>
+          <th width="100"><%= Communication::Website::Page.human_attribute_name('featured_image') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pages.each do |page| %>
+          <tr class="<%= 'draft' unless page.published? %>">
+            <td class="ps-0">
+              <%= link_to page,
+                          admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                          class: "#{'draft' unless page.published?}" %>
+            </td>
+            <td>
+              <% if page.featured_image.attached? && page.featured_image.representable? %>
+                <%= image_tag page.featured_image.representation(resize: '200x'), width: 100 %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>

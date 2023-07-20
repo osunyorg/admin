@@ -16,6 +16,7 @@ namespace :communication do
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder
+        get :tree
       end
       member do
         get :children
