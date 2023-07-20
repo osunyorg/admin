@@ -1,5 +1,5 @@
 module Filters
-  class Admin::Communication::Website::Pages < Filters::Base
+  class Admin::Communication::Websites::Pages < Filters::Base
     def initialize(user)
       super(user)
       add_search

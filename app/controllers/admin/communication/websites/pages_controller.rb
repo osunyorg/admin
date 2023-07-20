@@ -9,7 +9,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   has_scope :for_full_width
 
   def index
-    @filters = ::Filters::Admin::Communication::Website::Pages.new(current_user).list
     @pages = apply_scopes(@pages).for_language(current_website_language)
                                  .ordered
                                  .page(params[:page])
