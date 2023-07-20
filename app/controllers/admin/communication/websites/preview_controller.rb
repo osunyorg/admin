@@ -7,7 +7,7 @@ class Admin::Communication::Websites::PreviewController < Admin::Communication::
   def assets
     path = request.path.partition('/assets').last
     url = "#{@website.url}/assets#{path}"
-    data = URI.open(url).read
+    data = URI(url).open.read
     render  body: data, 
             content_type: request.format.to_s
   end
