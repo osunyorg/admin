@@ -75,6 +75,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   end
 
   def destroy
+    @menu.stop_automatism!
     @item.destroy
     redirect_to admin_communication_website_menu_path(@menu),
                 notice: t('admin.successfully_destroyed_html', model: @item.to_s)
