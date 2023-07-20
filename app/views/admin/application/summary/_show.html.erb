@@ -1,7 +1,7 @@
 <%
 small ||= false 
 %>
-<%= osuny_panel t('admin.summary'), small: small do %>
+<%= osuny_panel t('admin.summary.label'), small: small do %>
   <% if about.summary.present? %>
     <p class="lead"><%= sanitize about.summary %></p>
   <% else %>

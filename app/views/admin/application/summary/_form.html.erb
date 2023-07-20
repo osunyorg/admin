@@ -1,5 +1,6 @@
 <%= f.input :summary,
-            label: t('admin.summary'),
+            label: t('admin.summary.label'),
+            hint: t('admin.summary.hint'),
             input_html: {
               value: about.summary&.gsub('&amp;', '&')
             } %>

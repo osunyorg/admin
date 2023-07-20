@@ -182,7 +182,7 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
-        header_text: Titre affiché dans le header
+        header_text: Titre affiché en haut de page
         parent: Page parente
         path: Chemin
         published: Publié ?
@@ -249,8 +249,9 @@ fr:
               remove: Enlever le fichier
           image:
             input:
-              label: Image (.png, .jpg, .svg)
+              label: Image
               remove: Enlever l'image
+              hint: 5 Mo max, .png, .jpg, .svg
             alt:
               label: Texte alternatif
               placeholder: Entrer la description textuelle
@@ -393,8 +394,9 @@ fr:
               remove_element: Supprimer la fonctionnalité
               element:
                 image:
-                  label: Image (.png, .jpg, .svg)
+                  label: Image
                   remove: Enlever l'image
+                  hint: 5 Mo max, .png, .jpg, .svg
                 alt:
                   label: Texte alternatif
                   placeholder: Entrer la description textuelle
@@ -430,6 +432,7 @@ fr:
                 label: Carrousel
                 description: Les images sont présentées en grand, toutes de la même hauteur.
             edit:
+              add_image: Ajouter une image
               description:
                 label: Description
               element:
@@ -442,8 +445,10 @@ fr:
                 credit:
                   label: Crédit
                   placeholder: Entrer le crédit de l'image ici
-              add_image: Ajouter une image
+              move_images: Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité
               remove_image: Enlever l'image
+              send_and_edit_images: Envoyer les images et saisir les textes ci-dessous
+              send_multiple_images: Envoyer plusieurs images
           image:
             description: Une image avec sa description alternative accessible, son texte et son crédit.
             edit:
@@ -841,5 +846,6 @@ fr:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
+        header_text: Par défaut, ce texte remplace le titre. Dans certains sites, il s'affiche en plus.
       communication_website_post:
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
