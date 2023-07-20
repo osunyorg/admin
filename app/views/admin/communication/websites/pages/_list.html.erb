@@ -14,7 +14,7 @@
             <%= link_to page,
                         admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                         class: "#{'draft' unless page.published?}" %>
-            <p class="small text-muted mb-0"><%= page.ancestors.join(' / ')%></p>
+            <p class="small text-muted mb-0"><%= page.ancestors[1..-1].join(' / ') %></p>
           </td>
           <td>
             <% if page.featured_image.attached? && page.featured_image.representable? %>

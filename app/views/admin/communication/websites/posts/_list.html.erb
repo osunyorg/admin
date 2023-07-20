@@ -7,14 +7,16 @@ selectable ||= false
 <% if selectable %>
   <input type="hidden" name="ids[]" value="">
 <% end %>
-<div class="table-responsive">
+<div class="table-responsive <%= 'table-selectable' if selectable %>">
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th class="ps-0" width="60%">
-          <%= Communication::Website::Post.human_attribute_name('title') %>
-          <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
-        </th>
+        <% if selectable %>
+          <th class="border-0">
+            <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
+          </th>
+        <% end %>
+        <th class="ps-0" width="60%"><%= Communication::Website::Post.human_attribute_name('title') %></th>
         <th class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
         <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
       </tr>
@@ -22,11 +24,13 @@ selectable ||= false
     <tbody>
       <% posts.each do |post| %>
         <tr <% unless post.published? %>class="draft"<% end %>>
+          <% if selectable %>
+            <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
+          <% end %>
           <td class="ps-0">
             <%= link_to post,
                         admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                         class: "#{'draft' unless post.published?}" %>
-            <%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } if selectable %>
           </td>
           <td class="ps-3 small">
             <% if post.published_at %>
@@ -38,12 +42,12 @@ selectable ||= false
             <% unless hide_category %>
               <ul class="list-unstyled mb-0">
                 <% post.categories.each do |category| %>
-                  <li><span class="badge bg-dark"><%= category %></span></li>
+                  <li><%= category %></li>
                 <% end %>
               </ul>
             <% end %>
             <% if post.pinned %>
-              <span class="badge bg-success"><%= Communication::Website::Post.human_attribute_name('pinned') %></span>
+              <%= Communication::Website::Post.human_attribute_name('pinned') %>
             <% end %>
           </td>
           <td><%= image_tag post.featured_image.representation(resize: '200x'),
