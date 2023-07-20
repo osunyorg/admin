@@ -251,7 +251,7 @@ en:
             input:
               label: Image
               remove: Remove image
-              hint: 5 Mo max, .png, .jpg, .svg
+              hint: 5 MB max, .png, .jpg, .svg
             alt:
               label: Alternative text
               placeholder: Enter alternative text
@@ -399,7 +399,7 @@ en:
                 image:
                   label: Image
                   remove: Remove image
-                  hint: 5 Mo max, .png, .jpg, .svg
+                  hint: 5 MB max, .png, .jpg, .svg
                 alt:
                   label: Alternative text
                   placeholder: Enter text description
