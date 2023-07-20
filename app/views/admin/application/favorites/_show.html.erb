@@ -8,7 +8,7 @@
       <% next unless can?(:read, about) %>
       <div class="col-md-6 col-xl-4 d-flex">
         <%= osuny_panel about do %>
-          <p class="small"><%= about.class.model_name.human %></p>
+          <p class="small mt-n2 mb-1"><%= about.class.model_name.human %></p>
           <%= link_to t('show'), 
                       [:admin, about], 
                       class: 'stretched-link' %>
