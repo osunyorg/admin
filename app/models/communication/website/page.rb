@@ -87,7 +87,7 @@ class Communication::Website::Page < ApplicationRecord
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
-  scope :ordered, -> { order(:title) }
+  scope :ordered_by_title, -> { order(:title) }
 
   scope :for_search_term, -> (term) {
     where("
