@@ -8,8 +8,8 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       @heading = current_university.communication_block_headings.find(id)
-      @heading.update_columns position: index + 1,
-                              parent_id: parent_id
+      @heading.update_columns parent_id: parent_id,
+                              position: index + 1
     end
     if @heading.about&.respond_to?(:is_direct_object?)
       @heading.about.is_direct_object?  ? @heading.about.sync_with_git

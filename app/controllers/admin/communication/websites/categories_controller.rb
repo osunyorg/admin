@@ -16,10 +16,8 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       category = @website.categories.find(id)
-      category.update(
-        parent_id: parent_id,
-        position: index + 1
-      )
+      category.update_columns parent_id: parent_id,
+                              position: index + 1
     end
     if old_parent_id
       old_parent = @website.categories.find(old_parent_id)

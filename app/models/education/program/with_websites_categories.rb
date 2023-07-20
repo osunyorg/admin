@@ -2,10 +2,7 @@ module Education::Program::WithWebsitesCategories
   extend ActiveSupport::Concern
 
   included do
-    attr_accessor :skip_websites_categories_callback
-
-    after_save_commit :set_websites_categories,
-                      unless: :skip_websites_categories_callback
+    after_save_commit :set_websites_categories
 
     has_many   :website_categories,
                class_name: 'Communication::Website::Category',

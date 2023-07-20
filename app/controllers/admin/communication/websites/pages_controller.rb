@@ -10,7 +10,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def index
     @pages = apply_scopes(@pages).for_language(current_website_language)
-                                 .ordered
+                                 .ordered_by_title
                                  .page(params[:page])
     breadcrumb
   end
@@ -28,13 +28,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
-      page.update(
-        parent_id: parent_page.id,
-        position: index + 1
-      )
+      page.update_columns parent_id: parent_page.id,
+                          position: index + 1
     end
     old_parent_page.sync_with_git
-    parent_page.sync_with_git
+    parent_page.sync_with_git if parent_page != old_parent_page
     @website.generate_automatic_menus(parent_page.language)
   end
 
