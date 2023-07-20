@@ -5,7 +5,7 @@
                   class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
         <%= render 'admin/application/tree/folder' %>
       <% end %>
-      <%= link_to_if can?(:read, item), item, admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id) %>
+      <%= item %>
       <%= render 'admin/application/tree/sort' %>
       <%= link_to children_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
                   class: 'js-treeview-openzone small ps-2', remote: true do %>
@@ -13,14 +13,12 @@
         <span class="close_text"><%= t 'folder.close' %></span>
       <% end %>
       <div class="btn-group ms-auto" role="group">
+        <%= link_to t('show'),
+                    admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
+                    class: 'ps-3' %>
         <%= link_to t('edit'),
                     edit_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
-                    class: button_classes if can?(:edit, item) %>
-        <%= link_to t('delete'),
-                    admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
-                    method: :delete,
-                    data: { confirm: t('please_confirm') },
-                    class: button_classes_danger if can?(:destroy, item) %>
+                    class: 'ps-3' %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, item) %> ms-4" data-id="<%= item.id %>">
