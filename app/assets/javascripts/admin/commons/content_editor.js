@@ -11,85 +11,53 @@ window.osuny.contentEditor = {
         this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
         this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
 
-        this.initElements();
         this.initSortable();
-    },
-
-    initElements: function () {
-        'use strict';
-        var elementsContainers = this.container.querySelectorAll('.js-content-editor-element'),
-            elementInstance,
-            i;
-
-        this.elements = [];
-        for (i = 0; i < elementsContainers.length; i += 1) {
-            elementInstance = new window.osuny.contentEditor.Element(elementsContainers[i]);
-            this.elements.push(elementInstance);
-        }
     },
 
     initSortable: function () {
         'use strict';
         var sortableContainers = this.container.querySelectorAll('.js-content-editor-sortable-container'),
-            sortableInstance,
             i;
 
-        this.sortableRootContainer = document.getElementById('content-editor-elements-root');
-        this.sortableInstances = [];
-
         for (i = 0; i < sortableContainers.length; i += 1) {
-            sortableInstance = new Sortable(sortableContainers[i], {
+            new Sortable(sortableContainers[i], {
                 handle: '.content-editor__elements__handle',
                 fallbackOnBody: false,
                 onEnd: this.onSortableEnd.bind(this)
             });
-            this.sortableInstances.push(sortableInstance);
         }
     },
 
     onSortableEnd: function (event) {
         'use strict';
-        var item = event.item,
-            kind = item.dataset.kind,
-            url = this.getUrlFromKind(kind),
+        var url,
             to = event.to,
             ids = [],
             headingId = null,
             child,
             i;
-
-        if (to.id !== 'content-editor-elements-root') {
-            // Dragged to heading's children list
-            headingId = event.to.parentNode.dataset.id;
-        }
-
-        for (i = 0; i < to.children.length; i += 1) {
-            child = to.children[i];
-            if (child.dataset.kind === kind) {
+        if (event.from.classList.contains('content-editor--write')) {
+            // Mode écriture du contenu
+            url = this.sortBlocksUrl;
+            for (i = 0; i < to.children.length; i += 1) {
+                child = to.children[i];
+                // Nous utilisons une route déjà existante, dédiée aux blocs, 
+                // pour gérer à la fois des blocs et des headings.
+                // Ca manque d'élégance.
+                ids.push({
+                    id: child.dataset.id,
+                    kind: child.dataset.kind
+                });
+            }
+            $.post(this.sortBlocksUrl, { ids: ids });
+        } else if (event.from.classList.contains('content-editor--organize')) {
+            // Mode organisation du plan
+            for (i = 0; i < to.children.length; i += 1) {
+                child = to.children[i];
                 ids.push(child.dataset.id);
             }
+            $.post(this.sortHeadingsUrl, { ids: ids });
         }
-
-        // call to application
-        $.post(url, {
-            heading: headingId,
-            ids: ids
-        });
-    },
-
-    getUrlFromKind: function (kind) {
-        'use strict';
-        if (kind === 'block') {
-            return this.sortBlocksUrl;
-        } else if (kind === 'heading') {
-            return this.sortHeadingsUrl;
-        }
-        return null;
-    },
-
-    getElementById: function (id) {
-        'use strict';
-        return this.elements[id];
     },
 
     invoke: function () {

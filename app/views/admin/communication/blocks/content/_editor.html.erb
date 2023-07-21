@@ -39,10 +39,10 @@
         </div>
       </div>
       <div  class=" content-editor__elements
+                    content-editor--write
                     content-editor__elements__root
                     js-content-editor-sortable-container"
-            id="content-editor-elements-root"
-            v-show="mode == 'content'">
+            id="content-editor-elements-root">
         <% about.blocks.without_heading.ordered.each do |block| %>
           <%= render 'admin/communication/blocks/block', block: block %>
         <% end %>
@@ -73,9 +73,14 @@
           <p class="text-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
         </div>
       </div>
+
+      <div  class=" content-editor__elements
+                    content-editor--organize
+                    js-content-editor-sortable-container">
         <% about.headings.root.ordered.each do |heading| %>
           <%= render 'admin/communication/blocks/headings/heading', heading: heading, hide_blocks: true %>
         <% end %>
+      </div>
     </div>
   </div>
 
