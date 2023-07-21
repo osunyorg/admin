@@ -14,27 +14,25 @@
 
   <%= render 'admin/application/i18n/inline', about: @page %>
 
-  <% if @page.parent %>
-    <br>
-    Dans
+  <% if @page.parent && !@page.parent.is_home? %>
+    dans
     <%= link_to_if  can?(:read, @page.parent),
                     @page.parent,
                     admin_communication_website_page_path(
                       website_id: @website.id,
                       id: @page.parent.id
-                    ) %>
+                    ) %>.
   <% end %>
 
   <% if @page.children.any? %>
-    <br>
-    <%= Communication::Website::Page.human_attribute_name('children') %> :
+    avec comme pages enfants :
     <%= raw @page.children.ordered.map { |child|
           link_to_if  can?(:read, child),
                       child,
                       admin_communication_website_page_path( website_id: @website.id, id: child.id),
                       class: "#{'draft' unless child.published?}" 
 
-    }.join(', ') %>
+    }.join(', ') %>.
   <% end %>
 
   <% if @page.full_width %>

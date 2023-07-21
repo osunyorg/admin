@@ -1,5 +1,5 @@
 <% if about.available_languages.many? %>
-  <br> <%= t('admin.i18n.in', lang: language_name(about.language.iso_code).downcase) %>
+  <%= t('admin.i18n.in', lang: language_name(about.language.iso_code).downcase) %>
 
   <%
     route_args = about.is_direct_object?  ? [:admin, about.becomes(about.class.base_class)]
@@ -12,5 +12,5 @@
                 [*route_args, lang: language.iso_code]
     }.compact
   %>
-  <br>(<%= t('admin.i18n.switch_to', choices: links.to_sentence).html_safe %>)
+  (<%= t('admin.i18n.switch_to', choices: links.to_sentence).html_safe %>)
 <% end %>
