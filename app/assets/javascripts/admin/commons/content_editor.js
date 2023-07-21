@@ -38,7 +38,7 @@ window.osuny.contentEditor = {
     },
 
     // Mode écriture du contenu
-    sortModeWrite(to) {
+    sortModeWrite: function (to) {
         'use strict';
         var ids = [],
             child,
@@ -57,7 +57,7 @@ window.osuny.contentEditor = {
     },
 
     // Mode organisation du plan
-    sortModeOrganize(to) {
+    sortModeOrganize: function (to) {
         'use strict';
         var ids = [],
             child,
