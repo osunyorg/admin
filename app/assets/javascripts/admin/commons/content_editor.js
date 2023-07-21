@@ -39,43 +39,12 @@ window.osuny.contentEditor = {
 
         for (i = 0; i < sortableContainers.length; i += 1) {
             sortableInstance = new Sortable(sortableContainers[i], {
-                group: 'nested',
                 handle: '.content-editor__elements__handle',
-                animation: 150,
-                fallbackOnBody: true,
-                swapThreshold: 0.65,
-                onUnchoose: this.onSortableUnchoose.bind(this),
-                onStart: this.onSortableStart.bind(this),
-                onMove: this.onSortableMove.bind(this),
+                fallbackOnBody: false,
                 onEnd: this.onSortableEnd.bind(this)
             });
             this.sortableInstances.push(sortableInstance);
         }
-    },
-
-    onSortableStart: function (event) {
-        'use strict';
-        var item = event.item,
-            kind = item.dataset.kind;
-        this.sortableRootContainer.classList.add('content-editor__elements__root--dragging');
-        if (kind === 'block') {
-            this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-block');
-        } else if (kind === 'heading') {
-            this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-heading');
-        }
-    },
-
-    onSortableMove: function (event) {
-        'use strict';
-        var draggedKind = event.dragged.dataset.kind,
-            relatedKind = event.related.dataset.kind,
-            firstHeading = this.sortableRootContainer.querySelector('.js-content-editor-element[data-kind="heading"]');
-
-        if (draggedKind === 'block') {
-            // Prevent dragging a block after a heading, instead of inside
-            return relatedKind !== 'heading' || !event.willInsertAfter && event.related === firstHeading;
-        }
-        return true;
     },
 
     onSortableEnd: function (event) {
@@ -106,13 +75,6 @@ window.osuny.contentEditor = {
             heading: headingId,
             ids: ids
         });
-    },
-
-    onSortableUnchoose: function () {
-        'use strict';
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging',
-            'content-editor__elements__root--dragging-block',
-            'content-editor__elements__root--dragging-heading');
     },
 
     getUrlFromKind: function (kind) {

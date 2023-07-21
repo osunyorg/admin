@@ -1,3 +1,6 @@
+<%
+hide_blocks ||= false
+%>
 <div  class=" content-editor__elements__element
               content-editor__elements__element--heading
               js-content-editor-element
@@ -20,13 +23,10 @@
       </span>
     <% end %>
   </div>
-  <div class="content-editor__elements
-              js-content-editor-sortable-container">
-    <% heading.blocks.ordered.each do |block| %>
-      <%= render 'admin/communication/blocks/block', block: block %>
-    <% end %>
-    <% heading.children.ordered.each do |child| %>
-      <%= render 'admin/communication/blocks/headings/heading', heading: child %>
-    <% end %>
-  </div>
 </div>
+<% heading.blocks.ordered.each do |block| %>
+  <%= render 'admin/communication/blocks/block', block: block %>
+<% end unless hide_blocks %>
+<% heading.children.ordered.each do |child| %>
+  <%= render 'admin/communication/blocks/headings/heading', heading: child %>
+<% end %>
