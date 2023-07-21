@@ -86,8 +86,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def sync_after_reorder
-    return unless @block
-    return unless @block.about&.respond_to?(:is_direct_object?)
+    return unless @block && @block.about&.respond_to?(:is_direct_object?)
     @block.about.is_direct_object?  ? @block.about.sync_with_git
                                     : @block.about.touch # Sync indirect object's direct sources through after_touch
   end
