@@ -30,34 +30,43 @@ window.osuny.contentEditor = {
 
     onSortableEnd: function (event) {
         'use strict';
-        var url,
-            to = event.to,
-            ids = [],
-            headingId = null,
+        if (event.from.classList.contains('content-editor--write')) {
+            this.sortModeWrite(event.to);
+        } else if (event.from.classList.contains('content-editor--organize')) {
+            this.sortModeOrganize(event.to);
+        }
+    },
+
+    // Mode écriture du contenu
+    sortModeWrite(to) {
+        'use strict';
+        var ids = [],
             child,
             i;
-        if (event.from.classList.contains('content-editor--write')) {
-            // Mode écriture du contenu
-            url = this.sortBlocksUrl;
-            for (i = 0; i < to.children.length; i += 1) {
-                child = to.children[i];
-                // Nous utilisons une route déjà existante, dédiée aux blocs, 
-                // pour gérer à la fois des blocs et des headings.
-                // Ca manque d'élégance.
-                ids.push({
-                    id: child.dataset.id,
-                    kind: child.dataset.kind
-                });
-            }
-            $.post(this.sortBlocksUrl, { ids: ids });
-        } else if (event.from.classList.contains('content-editor--organize')) {
-            // Mode organisation du plan
-            for (i = 0; i < to.children.length; i += 1) {
-                child = to.children[i];
-                ids.push(child.dataset.id);
-            }
-            $.post(this.sortHeadingsUrl, { ids: ids });
+        for (i = 0; i < to.children.length; i += 1) {
+            child = to.children[i];
+            // Nous utilisons une route déjà existante, dédiée aux blocs,
+            // pour gérer à la fois des blocs et des headings.
+            // Ca manque d'élégance.
+            ids.push({
+                id: child.dataset.id,
+                kind: child.dataset.kind
+            });
         }
+        $.post(this.sortBlocksUrl, { ids: ids });
+    },
+
+    // Mode organisation du plan
+    sortModeOrganize(to) {
+        'use strict';
+        var ids = [],
+            child,
+            i;
+        for (i = 0; i < to.children.length; i += 1) {
+            child = to.children[i];
+            ids.push(child.dataset.id);
+        }
+        $.post(this.sortHeadingsUrl, { ids: ids });
     },
 
     invoke: function () {
