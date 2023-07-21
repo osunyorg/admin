@@ -15,10 +15,15 @@
       <div class="btn-group ms-auto" role="group">
         <%= link_to t('show'),
                     admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
-                    class: 'ps-3' %>
+                    class: 'action ps-3' %>
         <%= link_to t('edit'),
                     edit_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
-                    class: 'ps-3' %>
+                    class: 'action ps-3' %>
+        <%= link_to t('delete'),
+                    admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
+                    method: :delete,
+                    data: { confirm: t('please_confirm') },
+                    class: 'action text-danger ps-3' %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, item) %> ms-4" data-id="<%= item.id %>">
