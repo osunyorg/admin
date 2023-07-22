@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_073528) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_054450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -909,7 +909,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_073528) do
     t.string "sms_sender_name"
     t.date "invoice_date"
     t.integer "invoice_date_yday"
-    t.string "invoice_amount"
     t.boolean "has_sso", default: false
     t.integer "sso_provider", default: 0
     t.string "sso_target_url"
@@ -919,6 +918,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_073528) do
     t.string "sso_button_label"
     t.uuid "default_language_id", null: false
     t.boolean "is_really_a_university", default: true
+    t.float "contribution_amount"
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
   end
 

@@ -5,10 +5,10 @@
 #  id                         :uuid             not null, primary key
 #  address                    :string
 #  city                       :string
+#  contribution_amount        :float
 #  country                    :string
 #  has_sso                    :boolean          default(FALSE)
 #  identifier                 :string
-#  invoice_amount             :string
 #  invoice_date               :date
 #  invoice_date_yday          :integer
 #  is_really_a_university     :boolean          default(TRUE)

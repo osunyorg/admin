@@ -4,13 +4,13 @@ en:
       university:
         address: Address
         city: City
+        contribution_amount: Amount
         country: Country
         default_language: Default language
         has_sso: Has SSO?
         is_really_a_university: Is really a university
         identifier: Identifier
-        invoice_amount: Invoice amount
-        invoice_date: Invoice date
+        invoice_date: Contribution date
         logo: Logo
         name: Name
         private: Private
@@ -201,6 +201,10 @@ en:
         import_btn: Import cohorts
         import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
         title: Cohorts imports
+    contributing: 
+      one: contributing university
+      other: contributing universities
+    contributions_total: Contributions (total)
     description:
       text: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
       source: Wikipedia
