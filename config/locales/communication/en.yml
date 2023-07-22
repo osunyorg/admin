@@ -782,6 +782,7 @@ en:
             title: Teachers
       posts:
         new_curation: New curation
+        none: No posts yet.
         published: Published
         successful_batch_update: Posts have been updated succesfully
         unpublished: Unpublished

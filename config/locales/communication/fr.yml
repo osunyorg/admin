@@ -779,6 +779,7 @@ fr:
             title: Équipe pédagogique
       posts:
         new_curation: Nouvelle curation
+        none: Il n'y a pas encore d'actualités.
         published: Publiée
         successful_batch_update: Les actualités ont bien été mises à jour
         unpublished: Non publiée
