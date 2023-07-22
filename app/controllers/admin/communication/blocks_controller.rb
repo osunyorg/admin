@@ -71,6 +71,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     @object[:kind] == 'heading' ? reorder_heading
                                 : reorder_block
   end
+
   def reorder_heading
     @heading = current_university.communication_block_headings.find(@id)
     @heading.update_columns position: @index_heading

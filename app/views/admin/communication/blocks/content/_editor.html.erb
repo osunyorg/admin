@@ -1,8 +1,13 @@
+<%
+mode_expert = about.headings.many?
+%>
 <div  class="js-content-editor mb-5"
       data-sort-blocks-url="<%= reorder_admin_communication_blocks_path(lang: nil, website_id: nil, extranet_id: nil) %>"
       data-sort-headings-url="<%= reorder_admin_communication_headings_path(lang: nil, website_id: nil, extranet_id: nil) %>">
+
+  <% if mode_expert %>
   <ul class="nav nav-tabs justify-content-md-end">
-    <li class="nav-item">
+    <li class="nav-item small">
       <a  class="nav-link active" 
           id="mode-content-tab"
           data-bs-toggle="tab" 
@@ -14,7 +19,7 @@
         Écrire le contenu
       </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item small">
       <a  class="nav-link"
           id="mode-structure-tab"
           data-bs-toggle="tab" 
@@ -27,17 +32,20 @@
       </a>
     </li>
   </ul>
+  <% end %>
   <div class="tab-content">
     <div  class="tab-pane fade show active" 
           id="mode-content" 
           role="tabpanel" 
           aria-labelledby="mode-content-tab" 
           tabindex="0">
-      <div class="row">
-        <div class="offset-xl-6 col-xl-6">
-          <p class="text-end text-muted small mt-2">Dans le mode "Écrire le contenu", vous pouvez déplacer les blocs et les titres où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.</p>
+      <% if mode_expert %>
+        <div class="row">
+          <div class="offset-xl-6 col-xl-6">
+            <p class="text-lg-end text-muted small mt-2">Dans le mode "Écrire le contenu", vous pouvez déplacer les blocs et les titres où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.</p>
+          </div>
         </div>
-      </div>
+      <% end %>
       <div  class=" content-editor__elements
                     content-editor--write
                     content-editor__elements__root
@@ -70,7 +78,7 @@
           tabindex="1">
       <div class="row">
         <div class="offset-xl-6 col-xl-6">
-          <p class="text-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
+          <p class="text-lg-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
         </div>
       </div>
 
