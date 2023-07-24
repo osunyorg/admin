@@ -34,7 +34,7 @@ mode_expert = about.headings.many?
     </ul>
   <% end %>
   <div class="tab-content">
-    <div  class="tab-pane fade show active" 
+    <div  class="tab-pane show active" 
           id="mode-write" 
           data-source="<%= admin_communication_contents_write_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
           data-target="#mode-write-container"
@@ -54,7 +54,7 @@ mode_expert = about.headings.many?
         <%= render 'admin/communication/contents/write', about: about %>
       </div>
     </div>
-    <div  class="tab-pane fade" 
+    <div  class="tab-pane" 
           id="mode-structure" 
           data-source="<%= admin_communication_contents_structure_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
           data-target="#mode-structure-container"
