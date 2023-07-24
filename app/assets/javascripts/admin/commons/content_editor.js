@@ -20,7 +20,7 @@ window.osuny.contentEditor = {
         'use strict';
         var tabs = document.querySelectorAll('[data-bs-toggle="tab"]'),
             i;
-        for (i = 0; i < tabs.length; i++) {
+        for (i = 0; i < tabs.length; i += 1) {
             tabs[i].addEventListener('shown.bs.tab', this.tabChanged.bind(this));
         }
     },
@@ -53,7 +53,8 @@ window.osuny.contentEditor = {
         this.xhr.send();
     },
 
-    tabLoaded: function (event) {
+    tabLoaded: function () {
+        'use strict';
         if (this.xhr.readyState === XMLHttpRequest.DONE) {
             if (this.xhr.status === 200) {
                 this.target.innerHTML = this.xhr.responseText;
