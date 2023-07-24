@@ -3,35 +3,37 @@ mode_expert = about.headings.many?
 %>
 <div  class="js-content-editor mb-5"
       data-sort-blocks-url="<%= reorder_admin_communication_blocks_path(lang: nil, website_id: nil, extranet_id: nil) %>"
-      data-sort-headings-url="<%= reorder_admin_communication_headings_path(lang: nil, website_id: nil, extranet_id: nil) %>">
-
+      data-sort-headings-url="<%= reorder_admin_communication_headings_path(lang: nil, website_id: nil, extranet_id: nil) %>"
+      data-mode-write="<%= admin_communication_contents_write_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
+      data-mode-structure="<%= admin_communication_contents_structure_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
+      >
   <% if mode_expert %>
-  <ul class="nav nav-tabs justify-content-md-end">
-    <li class="nav-item small">
-      <a  class="nav-link active" 
-          id="mode-write-tab"
-          data-bs-toggle="tab" 
-          data-bs-target="#mode-write" 
-          type="button" 
-          role="tab" 
-          aria-controls="mode-write" 
-          aria-selected="true">
-        Écrire le contenu
-      </a>
-    </li>
-    <li class="nav-item small">
-      <a  class="nav-link"
-          id="mode-structure-tab"
-          data-bs-toggle="tab" 
-          data-bs-target="#mode-structure" 
-          type="button" 
-          role="tab" 
-          aria-controls="mode-structure" 
-          aria-selected="false">
-        Organiser le plan
-      </a>
-    </li>
-  </ul>
+    <ul class="nav nav-tabs justify-content-md-end">
+      <li class="nav-item small">
+        <a  class="nav-link active" 
+            id="mode-write-tab"
+            data-bs-toggle="tab" 
+            data-bs-target="#mode-write" 
+            type="button" 
+            role="tab" 
+            aria-controls="mode-write" 
+            aria-selected="true">
+          Écrire le contenu
+        </a>
+      </li>
+      <li class="nav-item small">
+        <a  class="nav-link"
+            id="mode-structure-tab"
+            data-bs-toggle="tab" 
+            data-bs-target="#mode-structure" 
+            type="button" 
+            role="tab" 
+            aria-controls="mode-structure" 
+            aria-selected="false">
+          Organiser le plan
+        </a>
+      </li>
+    </ul>
   <% end %>
   <div class="tab-content">
     <div  class="tab-pane fade show active" 
@@ -46,7 +48,9 @@ mode_expert = about.headings.many?
           </div>
         </div>
       <% end %>
-      <%= render 'admin/communication/contents/write', about: about %>
+      <div class="inner">
+        <%= render 'admin/communication/contents/write', about: about %>
+      </div>
     </div>
     <div  class="tab-pane fade" 
           id="mode-structure" 
@@ -58,7 +62,9 @@ mode_expert = about.headings.many?
           <p class="text-lg-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
         </div>
       </div>
-      <%= render 'admin/communication/contents/structure', about: about %>
+      <div class="inner">
+        <%= render 'admin/communication/contents/structure', about: about %>
+      </div>
     </div>
   </div>
 

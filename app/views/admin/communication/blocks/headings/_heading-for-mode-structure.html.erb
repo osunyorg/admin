@@ -1,0 +1,20 @@
+<div  class=" content-editor__elements__element
+              content-editor__elements__element--heading
+              content-editor__elements__element--mode-structure
+              js-content-editor-element
+              mt-3"
+      data-id="<%= heading.id %>"
+      data-level="<%= heading.level %>"
+      data-kind="heading">
+  <div  class="content-editor__elements__handle"
+        style="padding-left: <%= (heading.level - Communication::Block::Heading::DEFAULT_LEVEL) * 48 %>px">
+    <span class="h4"><%= heading %></span>
+    <i class="<%= Icon::SORT %>"></i>
+    <p class="small text-muted">
+      <%= t('admin.communication.contents.blocks.quantity', count: heading.blocks.count) %>
+    </p>
+  </div>
+</div>
+<% heading.children.ordered.each do |child| %>
+  <%= render 'admin/communication/blocks/headings/heading', heading: child %>
+<% end %>

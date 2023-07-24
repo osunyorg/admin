@@ -663,6 +663,12 @@ fr:
               video_title:
                 label: Titre de la vidéo
                 placeholder: Entrer le titre de la vidéo
+      contents:
+        blocks:
+          quantity:
+            zero: Aucun bloc
+            one: 1 bloc
+            other: "%{count} blocs"
       website:
         pages:
           as_list: Voir en liste

@@ -2,6 +2,6 @@
               content-editor--organize
               js-content-editor-sortable-container">
   <% about.headings.root.ordered.each do |heading| %>
-    <%= render 'admin/communication/blocks/headings/heading', heading: heading, hide_blocks: true %>
+    <%= render 'admin/communication/blocks/headings/heading-for-mode-structure', heading: heading %>
   <% end %>
 </div>

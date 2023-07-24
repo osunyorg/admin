@@ -666,6 +666,12 @@ en:
               video_title:
                 label: Video title
                 placeholder: Enter video title
+      contents:
+        blocks:
+          quantity:
+            zero: No block
+            one: 1 block
+            other: "%{count} blocks"
       website:
         pages:
           as_list: See as a list

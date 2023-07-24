@@ -1,6 +1,3 @@
-<%
-hide_blocks ||= false
-%>
 <div  class=" content-editor__elements__element
               content-editor__elements__element--heading
               js-content-editor-element
@@ -12,12 +9,12 @@ hide_blocks ||= false
     <span class="h4"><%= heading %></span>
     <%= link_to t('edit'),
                 edit_admin_communication_heading_path(heading),
-                class: 'action ms-2' %>
+                class: 'action ms-2'%>
     <% if can?(:update, heading) %>
       <span class=" content-editor__elements__handle
                     content-editor__elements__element--hover">
         <span class="handle">
-          <span class="small"><%= t 'organize' %></span>
+          <span class="small"><%= t 'move' %></span>
           <i class="<%= Icon::SORT %>"></i>
         </span>
       </span>
@@ -26,7 +23,7 @@ hide_blocks ||= false
 </div>
 <% heading.blocks.ordered.each do |block| %>
   <%= render 'admin/communication/blocks/block', block: block %>
-<% end unless hide_blocks %>
+<% end %>
 <% heading.children.ordered.each do |child| %>
   <%= render 'admin/communication/blocks/headings/heading', heading: child %>
 <% end %>
