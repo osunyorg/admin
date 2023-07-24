@@ -9,12 +9,12 @@ mode_expert = about.headings.many?
   <ul class="nav nav-tabs justify-content-md-end">
     <li class="nav-item small">
       <a  class="nav-link active" 
-          id="mode-content-tab"
+          id="mode-write-tab"
           data-bs-toggle="tab" 
-          data-bs-target="#mode-content" 
+          data-bs-target="#mode-write" 
           type="button" 
           role="tab" 
-          aria-controls="mode-content" 
+          aria-controls="mode-write" 
           aria-selected="true">
         Écrire le contenu
       </a>
@@ -35,9 +35,9 @@ mode_expert = about.headings.many?
   <% end %>
   <div class="tab-content">
     <div  class="tab-pane fade show active" 
-          id="mode-content" 
+          id="mode-write" 
           role="tabpanel" 
-          aria-labelledby="mode-content-tab" 
+          aria-labelledby="mode-write-tab" 
           tabindex="0">
       <% if mode_expert %>
         <div class="row">
@@ -46,30 +46,7 @@ mode_expert = about.headings.many?
           </div>
         </div>
       <% end %>
-      <div  class=" content-editor__elements
-                    content-editor--write
-                    content-editor__elements__root
-                    js-content-editor-sortable-container"
-            id="content-editor-elements-root">
-        <% about.blocks.without_heading.ordered.each do |block| %>
-          <%= render 'admin/communication/blocks/block', block: block %>
-        <% end %>
-        <% about.headings.root.ordered.each do |heading| %>
-          <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
-        <% end %>
-      </div>
-      <div class="content-editor__actions row mt-5">
-        <div class="col-lg-4">
-          <%= link_to t('admin.communication.blocks.headings.add'),
-                      new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
-                      class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block::Heading %>
-        </div>
-        <div class="col-lg-8">
-          <%= link_to t('admin.communication.blocks.add'),
-                      new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                      class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block %>
-        </div>
-      </div>
+      <%= render 'admin/communication/contents/write', about: about %>
     </div>
     <div  class="tab-pane fade" 
           id="mode-structure" 
@@ -81,14 +58,7 @@ mode_expert = about.headings.many?
           <p class="text-lg-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
         </div>
       </div>
-
-      <div  class=" content-editor__elements
-                    content-editor--organize
-                    js-content-editor-sortable-container">
-        <% about.headings.root.ordered.each do |heading| %>
-          <%= render 'admin/communication/blocks/headings/heading', heading: heading, hide_blocks: true %>
-        <% end %>
-      </div>
+      <%= render 'admin/communication/contents/structure', about: about %>
     </div>
   </div>
 
