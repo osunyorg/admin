@@ -63,7 +63,7 @@ class Server::UniversitiesController < Server::ApplicationController
       :address, :zipcode, :city, :country,
       :private, :identifier, :logo, :logo_delete, :sms_sender_name,
       :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label,
-      :invoice_date, :invoice_amount, 
+      :invoice_date, :contribution_amount, 
       :is_really_a_university
     )
   end

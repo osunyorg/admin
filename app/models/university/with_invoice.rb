@@ -5,7 +5,7 @@ module University::WithInvoice
 
     before_save :denormalize_invoice_date
 
-    scope :invoiced, -> { where.not(invoice_amount: nil) }
+    scope :contributing, -> { where.not(contribution_amount: [nil, 0.0]) }
 
     def invoice_proximity
       if next_invoice_in_days < 30

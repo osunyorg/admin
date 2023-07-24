@@ -5,10 +5,10 @@
 #  id                         :uuid             not null, primary key
 #  address                    :string
 #  city                       :string
+#  contribution_amount        :float
 #  country                    :string
 #  has_sso                    :boolean          default(FALSE)
 #  identifier                 :string
-#  invoice_amount             :string
 #  invoice_date               :date
 #  invoice_date_yday          :integer
 #  is_really_a_university     :boolean          default(TRUE)
@@ -96,7 +96,6 @@ class University < ApplicationRecord
     self.city = Osuny::Sanitizer.sanitize(self.city, 'string')
     self.country = Osuny::Sanitizer.sanitize(self.country, 'string')
     self.identifier = Osuny::Sanitizer.sanitize(self.identifier, 'string')
-    self.invoice_amount = Osuny::Sanitizer.sanitize(self.invoice_amount, 'string')
     self.mail_from_address = Osuny::Sanitizer.sanitize(self.mail_from_address, 'string')
     self.mail_from_name = Osuny::Sanitizer.sanitize(self.mail_from_name, 'string')
     self.name = Osuny::Sanitizer.sanitize(self.name, 'string')

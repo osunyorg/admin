@@ -1,5 +1,10 @@
 <% content_for :title, "#{ @universities.count} #{University.model_name.human(count:  @universities.count).downcase}" %>
 
+<p>
+  <%= University.contributing.count %>
+  <%= t('university.contributing', count: University.contributing.count) %>
+</p>
+
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
@@ -9,7 +14,7 @@
         <th><%= University.human_attribute_name('is_really_a_university') %></th>
         <th><%= University.human_attribute_name('public_or_private') %></th>
         <th><%= University.human_attribute_name('invoice_date') %></th>
-        <th><%= University.human_attribute_name('invoice_amount') %></th>
+        <th><%= University.human_attribute_name('contribution_amount') %></th>
         <th></th>
       </tr>
     </thead>
@@ -20,12 +25,16 @@
           <td><%= link_to university.url, university.url, target: :_blank %></td>
           <td><%= t university.is_really_a_university %></td>
           <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
-          <% if university.invoice_amount.blank? %>
+          <% if university.contribution_amount.blank? %>
             <td></td>
             <td></td>
           <% else %>
-            <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= l university.invoice_date, format: "%d %B" unless university.invoice_amount.blank? %></td>
-            <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>"><%= university.invoice_amount %></td>
+            <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>">
+              <%= l university.invoice_date, format: "%d %B" %>
+            </td>
+            <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>">
+              <%= number_to_currency university.contribution_amount, precision: 0 %>
+            </td>
           <% end %>
           <td class="text-end">
             <div class="btn-group" role="group">
@@ -42,6 +51,12 @@
         </tr>
       <% end %>
     </tbody>
+    <tfoot>
+      <tr>
+        <th class="text-start" colspan="5"><%= t('university.contributions_total') %></th>
+        <td class="text-start" colspan="2"><%= number_to_currency University.sum(:contribution_amount), precision: 0 %></td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 

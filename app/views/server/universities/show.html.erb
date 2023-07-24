@@ -13,14 +13,14 @@
             <td class="text-end"><%= t @university.public_send attribute %></td>
           </tr>
         <% end %>
-        <% unless @university.invoice_amount.blank? %>
+        <% unless @university.contribution_amount.blank? %>
           <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
             <td><%= t('activerecord.attributes.university.invoice_date') %></td>
             <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
           </tr>
           <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
-            <td><%= t('activerecord.attributes.university.invoice_amount') %></td>
-            <td class="text-end"><%= @university.invoice_amount %>€</td>
+            <td><%= t('activerecord.attributes.university.contribution_amount') %></td>
+            <td class="text-end"><%= number_to_currency @university.contribution_amount, precision: 0 %></td>
           </tr>
         <% end %>
       </table>
