@@ -16,7 +16,7 @@ mode_expert = about.headings.many?
             role="tab" 
             aria-controls="mode-write" 
             aria-selected="true">
-          Écrire le contenu
+          <%= t('admin.communication.contents.modes.write.tab') %>
         </a>
       </li>
       <li class="nav-item small">
@@ -28,7 +28,7 @@ mode_expert = about.headings.many?
             role="tab" 
             aria-controls="mode-structure" 
             aria-selected="false">
-          Organiser le plan
+          <%= t('admin.communication.contents.modes.structure.tab') %>
         </a>
       </li>
     </ul>
@@ -44,7 +44,9 @@ mode_expert = about.headings.many?
       <% if mode_expert %>
         <div class="row">
           <div class="offset-xl-6 col-xl-6">
-            <p class="text-lg-end text-muted small mt-2">Dans le mode "Écrire le contenu", vous pouvez déplacer les blocs et les titres où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.</p>
+            <p class="text-lg-end text-muted small mt-2">
+              <%= t('admin.communication.contents.modes.write.description') %>
+            </p>
           </div>
         </div>
       <% end %>
@@ -61,7 +63,9 @@ mode_expert = about.headings.many?
           tabindex="1">
       <div class="row">
         <div class="offset-xl-6 col-xl-6">
-          <p class="text-lg-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
+          <p class="text-lg-end text-muted small mt-2">
+            <%= t('admin.communication.contents.modes.structure.description') %>
+          </p>
         </div>
       </div>
       <div id="mode-structure-container"></div>
