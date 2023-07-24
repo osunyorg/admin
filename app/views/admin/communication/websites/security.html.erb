@@ -1,7 +1,7 @@
 <% content_for :title, t('communication.website.security') %>
 
 <%= osuny_panel "CSP" do %>
-  <ul>
+  <ul class="list-unstyled">
     <% @website.external_domains.each do |domain| %>
       <li><%= domain %></li>
     <% end %>
