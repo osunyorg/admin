@@ -44,13 +44,22 @@ window.osuny.contentEditor = {
         var tab = event.target,
             id = tab.getAttribute('data-bs-target'),
             div = this.container.querySelector(id),
-            source = div.dataset.source,
-            target = this.container.querySelector(div.dataset.target),
-            request;
-        // target.innerHTML = '';
-        // console.log(source);
-        // console.log(target);
-        // TODO load
+            source = div.dataset.source;
+        this.target = this.container.querySelector(div.dataset.target);
+        this.target.innerHTML = '';
+        this.xhr = new XMLHttpRequest();
+        this.xhr.open('GET', source, true);
+        this.xhr.onreadystatechange = this.tabLoaded.bind(this);
+        this.xhr.send();
+    },
+
+    tabLoaded: function (event) {
+        if (this.xhr.readyState === XMLHttpRequest.DONE) {
+            if (this.xhr.status === 200) {
+                this.target.innerHTML = this.xhr.responseText;
+                this.initSortable();
+            }
+        }
     },
 
     onSortableEnd: function (event) {
