@@ -1,2 +1,6 @@
 title: >
   <%= @about.to_s %>
+external_domains:
+<% @website.external_domains.each do |domain| %>
+  - "<%= domain %>"
+<% end %>

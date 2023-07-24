@@ -5,9 +5,11 @@ namespace :communication do
   end
   resources :websites do
     member do
-      get :import
       post :import
+      get :import
       get :analytics
+      get :security
+      get :static
     end
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'

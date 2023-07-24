@@ -785,6 +785,7 @@ en:
         published: Published
         successful_batch_update: Posts have been updated succesfully
         unpublished: Unpublished
+      security: Security
       see_all: See the full list (%{number} elements)
   enums:
     communication:

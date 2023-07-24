@@ -7,21 +7,14 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     breadcrumb
   end
 
-  def show
-    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
-    @pages = @all_pages.recent
-    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
-    @posts = @all_posts.recent
-    breadcrumb
-  end
-
   def analytics
     breadcrumb
     add_breadcrumb t('communication.website.analytics')
   end
 
-  def new
+  def security
     breadcrumb
+    add_breadcrumb t('communication.website.security')
   end
 
   def import
@@ -38,6 +31,23 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @imported_media_total_size = @imported_website.media.joins(file_attachment: :blob).sum(:byte_size)
     breadcrumb
     add_breadcrumb Communication::Website::Imported::Website.model_name.human
+  end
+
+  def show
+    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
+    @pages = @all_pages.recent
+    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
+    @posts = @all_posts.recent
+    breadcrumb
+  end
+
+  def static
+    @about = @website
+    render layout: false
+  end
+
+  def new
+    breadcrumb
   end
 
   def edit
