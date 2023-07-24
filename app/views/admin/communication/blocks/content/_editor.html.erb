@@ -48,7 +48,9 @@ mode_expert = about.headings.many?
           </div>
         </div>
       <% end %>
-      <div id="mode-write-container"></div>
+      <div id="mode-write-container">
+        <%= render 'admin/communication/contents/write', about: about %>
+      </div>
     </div>
     <div  class="tab-pane fade" 
           id="mode-structure" 
@@ -62,9 +64,7 @@ mode_expert = about.headings.many?
           <p class="text-lg-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
         </div>
       </div>
-      <div id="mode-structure-container">
-        <%= render 'admin/communication/contents/structure', about: about %>
-      </div>
+      <div id="mode-structure-container"></div>
     </div>
   </div>
 
