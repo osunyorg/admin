@@ -10,8 +10,19 @@ window.osuny.contentEditor = {
         }
         this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
         this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
-
+        this.modeWriteContainer = this.container.querySelector('#mode-write-container');
+        this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
+        this.initTabs();
         this.initSortable();
+    },
+
+    initTabs: function () {
+        'use strict';
+        var tabs = document.querySelectorAll('[data-bs-toggle="tab"]'),
+            i;
+        for (i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener('shown.bs.tab', this.tabChanged.bind(this));
+        }
     },
 
     initSortable: function () {
@@ -26,6 +37,20 @@ window.osuny.contentEditor = {
                 onEnd: this.onSortableEnd.bind(this)
             });
         }
+    },
+
+    tabChanged: function (event) {
+        'use strict';
+        var tab = event.target,
+            id = tab.getAttribute('data-bs-target'),
+            div = this.container.querySelector(id),
+            source = div.dataset.source,
+            target = this.container.querySelector(div.dataset.target),
+            request;
+        // target.innerHTML = '';
+        // console.log(source);
+        // console.log(target);
+        // TODO load
     },
 
     onSortableEnd: function (event) {

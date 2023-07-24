@@ -4,8 +4,6 @@ mode_expert = about.headings.many?
 <div  class="js-content-editor mb-5"
       data-sort-blocks-url="<%= reorder_admin_communication_blocks_path(lang: nil, website_id: nil, extranet_id: nil) %>"
       data-sort-headings-url="<%= reorder_admin_communication_headings_path(lang: nil, website_id: nil, extranet_id: nil) %>"
-      data-mode-write="<%= admin_communication_contents_write_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
-      data-mode-structure="<%= admin_communication_contents_structure_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
       >
   <% if mode_expert %>
     <ul class="nav nav-tabs justify-content-md-end">
@@ -38,8 +36,10 @@ mode_expert = about.headings.many?
   <div class="tab-content">
     <div  class="tab-pane fade show active" 
           id="mode-write" 
+          data-source="<%= admin_communication_contents_write_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
+          data-target="#mode-write-container"
           role="tabpanel" 
-          aria-labelledby="mode-write-tab" 
+          aria-labelledby="mode-write-tab"
           tabindex="0">
       <% if mode_expert %>
         <div class="row">
@@ -48,12 +48,14 @@ mode_expert = about.headings.many?
           </div>
         </div>
       <% end %>
-      <div class="inner">
+      <div id="mode-write-container">
         <%= render 'admin/communication/contents/write', about: about %>
       </div>
     </div>
     <div  class="tab-pane fade" 
           id="mode-structure" 
+          data-source="<%= admin_communication_contents_structure_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
+          data-target="#mode-structure-container"
           role="tabpanel" 
           aria-labelledby="profile-tab" 
           tabindex="1">
@@ -62,7 +64,7 @@ mode_expert = about.headings.many?
           <p class="text-lg-end text-muted small mt-2">Dans le mode "Organiser le plan", vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.</p>
         </div>
       </div>
-      <div class="inner">
+      <div id="mode-structure-container">
         <%= render 'admin/communication/contents/structure', about: about %>
       </div>
     </div>
