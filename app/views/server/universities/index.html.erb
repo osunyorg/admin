@@ -30,7 +30,7 @@
             <td></td>
           <% else %>
             <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>">
-              <%= l university.invoice_date, format: "%d %B" unless university.contribution_amount.blank? %>
+              <%= l university.invoice_date, format: "%d %B" %>
             </td>
             <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>">
               <%= number_to_currency university.contribution_amount, precision: 0 %>
