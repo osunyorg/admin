@@ -782,6 +782,7 @@ fr:
         published: Publiée
         successful_batch_update: Les actualités ont bien été mises à jour
         unpublished: Non publiée
+      security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
   enums:
     communication:

@@ -50,6 +50,7 @@ class Communication::Website < ApplicationRecord
   include WithReferences
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithSecurity
   include WithStyle
   include WithTheme
   include WithUniversity

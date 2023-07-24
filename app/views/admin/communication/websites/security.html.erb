@@ -1,0 +1,9 @@
+<% content_for :title, t('communication.website.security') %>
+
+<%= osuny_panel "CSP" do %>
+  <ul>
+    <% @website.external_domains.each do |domain| %>
+      <li><%= domain %></li>
+    <% end %>
+  </ul>
+<% end %>
