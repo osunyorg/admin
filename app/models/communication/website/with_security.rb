@@ -42,6 +42,7 @@ module Communication::Website::WithSecurity
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|
         url = CGI.unescapeHTML(url)
         url =  ActionController::Base.helpers.strip_tags(url)
+        url = URI::Parser.new.escape(url)
         host = URI.parse(url).host
         list << host
       end
