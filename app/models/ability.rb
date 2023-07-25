@@ -98,6 +98,7 @@ class Ability
     admin_communication
     admin_communication_extranet
     admin_administration
+    can :manage, Import, university_id: @user.university_id
   end
 
   def admin_university
