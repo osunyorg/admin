@@ -40,7 +40,9 @@ module Communication::Website::WithSecurity
       code = block.template.code
       # https://stackoverflow.com/questions/25095176/extracting-all-urls-from-a-page-using-ruby
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|
-        list << URI.parse(url).host
+        url = CGI.unescapeHTML(url)
+        host = URI.parse(url).host
+        list << host
       end
     end
     list
