@@ -41,6 +41,7 @@ module Communication::Website::WithSecurity
       # https://stackoverflow.com/questions/25095176/extracting-all-urls-from-a-page-using-ruby
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|
         url = CGI.unescapeHTML(url)
+        url =  ActionController::Base.helpers.strip_tags(url)
         host = URI.parse(url).host
         list << host
       end
