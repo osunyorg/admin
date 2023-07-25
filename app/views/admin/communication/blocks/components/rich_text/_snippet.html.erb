@@ -1,1 +1,2 @@
-<%= strip_tags(value.html_safe).truncate(250) %>
+<%= strip_tags(value.html_safe).gsub("&amp;", "&")
+                               .truncate(250) %>
