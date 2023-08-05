@@ -12,8 +12,17 @@ end
           <p class="block-title"><%= block.title %></p>
         </div>
       <% end %>
-      <div><%= render 'admin/communication/blocks/templates/license/creative_commons/icons', block: block %></div>
-      <p><%= render 'admin/communication/blocks/templates/license/creative_commons/name', block: block %></p>
+      <div class="creative_commons__icons">
+        <%= render 'admin/communication/blocks/templates/license/creative_commons/icons', block: block %>
+      </div>
+      <p class="creative_commons__name">
+        <a href="<%= render 'admin/communication/blocks/templates/license/creative_commons/url', block: block %>" target="_blank" rel="noreferrer">
+          <%= render 'admin/communication/blocks/templates/license/creative_commons/name', block: block %>
+        </a>
+      </p>
+      <p class="creative_commons__full_name">
+        <%= render 'admin/communication/blocks/templates/license/creative_commons/full_name', block: block %>
+      </p>
     </div>
   </div>
 </div>
