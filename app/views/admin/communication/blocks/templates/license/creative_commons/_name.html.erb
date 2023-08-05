@@ -1,0 +1,11 @@
+<%
+attribution     ||= block.template.creative_commons_attribution
+commercial_use  ||= block.template.creative_commons_commercial_use
+derivatives     ||= block.template.creative_commons_derivatives
+sharing         ||= block.template.creative_commons_sharing
+%>
+<% if attribution == 'false' %>CC0 1.0 Universal
+<% else %>CC BY<%  if commercial_use == 'false' %>-NC<% end %><% 
+        if derivatives == 'false' %>-ND<% end %><%
+        if derivatives == 'true' && sharing == 'false' %>-SA<% end %> 4.0
+<% end %>

@@ -473,6 +473,31 @@ en:
                   label: Description
                   placeholder: Enter description here
               remove_key: Remove key figure
+          license:
+            description: A legal license explained, like Creative Commons.
+            creative_commons:
+              about_html: Use the <a href="https://creativecommons.org" target="_blank" rel="noreferrer">Creative Commons</a> to share your work. The license chooser is based on <a href="https://chooser-beta.creativecommons.org"target="_blank" rel="noreferrer">chooser-beta.creativecommons.org.org</a>.
+            edit:
+              creative_commons_attribution:
+                label: Do you want attribution for your work?
+                options:
+                  true: Yes. Anyone using my work must include proper attribution.
+                  false: No. Anyone can use my work, even without giving me attribution.
+              creative_commons_commercial_use:
+                label: Do you want to allow others to use your work commercially?
+                options:
+                  true: Yes. Others can use my work, even for commercial purposes.
+                  false: No. Others can not use my work for commercial purposes.
+              creative_commons_derivatives:
+                label: Do you want to allow others to remix, adapt, or build upon your work?
+                options:
+                  true: Yes. Others can remix, adapt, or build upon my work.
+                  false: No. Others may only use my work in unadapted form.
+              creative_commons_sharing:
+                label: Do you want to allow others to share adaptations of your work under any terms?
+                options:
+                  true: Yes. Others can share adaptations of my work under any terms.
+                  false: No. Others must use the same CC license if they adapt my work.
           organization_chart:
             description: People and their jobs.
             edit:
@@ -816,6 +841,7 @@ en:
           gallery: Gallery
           image: Image
           key_figures: Key figures
+          license: License
           organization_chart: People
           pages: Pages
           partners: Organizations

@@ -1,0 +1,19 @@
+<%
+class_name = "block block-license"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<div class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless block.title.blank? %>
+        <div class="top">
+          <p class="block-title"><%= block.title %></p>
+        </div>
+      <% end %>
+      <div><%= render 'admin/communication/blocks/templates/license/creative_commons/icons', block: block %></div>
+      <p><%= render 'admin/communication/blocks/templates/license/creative_commons/name', block: block %></p>
+    </div>
+  </div>
+</div>

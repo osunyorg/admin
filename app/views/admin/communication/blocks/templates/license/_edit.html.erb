@@ -1,28 +1,52 @@
+<%= block_component_edit block, :type %>
 
-<%= block_component_edit block, :kind %>
-
-<div v-show="data.kind == 'creative_commons'">
+<div v-show="data.type == 'creative_commons'">
+  <div class="mb-5">
+    <div class="mb-2">
+      <%= image_tag 'communication/blocks/templates/license/creative_commons/cc.svg', width: 40, class: 'me-1' %>
+      <span v-show="data.creative_commons_attribution == 'false'">
+        <%= image_tag 'communication/blocks/templates/license/creative_commons/zero.svg', width: 40, class: 'me-1' %>
+      </span>
+      <span v-show="data.creative_commons_attribution == 'true'">
+        <%= image_tag 'communication/blocks/templates/license/creative_commons/by.svg', width: 40, class: 'me-1' %>
+        <span v-show="data.creative_commons_commercial_use == 'false'">
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/nc.svg', width: 40, class: 'me-1' %>
+        </span>
+        <span v-show="data.creative_commons_derivatives == 'false'">
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/nd.svg', width: 40, class: 'me-1' %>
+        </span>
+        <span v-show="data.creative_commons_derivatives == 'true' && data.creative_commons_sharing == 'false'">
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/sa.svg', width: 40, class: 'me-1' %>
+        </span>
+      </span>
+      
+    </div>
+    <p class="lead">
+      <span v-show="data.creative_commons_attribution == 'false'">CC0 1.0 Universal</span>
+      <span v-show="data.creative_commons_attribution == 'true'">
+        CC 
+        BY<span v-show="data.creative_commons_commercial_use == 'false'">-NC</span
+          ><span v-show="data.creative_commons_derivatives == 'false'">-ND</span
+          ><span v-show="data.creative_commons_derivatives == 'true' && data.creative_commons_sharing == 'false'">-SA</span>
+        4.0
+      </span>
+    </p>
+  </div>
   <div class="mb-5">
     <%= t('admin.communication.blocks.templates.license.creative_commons.about_html') %>
   </div>
-  <div class="row pure__row--small">
-    <% t('admin.communication.blocks.templates.license.creative_commons.questions').each do |question| %>
-      <div class="col-lg-6 mb-5">
-        <p><%= question[:label] %></p>
-        <% question[:answers].each do |answer| %>
-          <div class="form-check">
-            <input  class="form-check-input"
-                    type="radio"
-                    name="question-<%= question[:key] %>"
-                    v-model="data.creative_commons.<%= question[:key] %>"
-                    value="<%= answer[:key] %>"
-                    id="question-<%= question[:key] %>-<%= answer[:key] %>">
-            <label for="question-<%= question[:key] %>-<%= answer[:key] %>">
-              <%= answer[:label] %>
-            </label>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+  <div class="mb-5">
+    <%= block_component_edit block, :creative_commons_attribution %>
+  </div>
+  <div v-show="data.creative_commons_attribution == 'true'">
+    <div class="mb-5">
+      <%= block_component_edit block, :creative_commons_commercial_use %>
+    </div>
+    <div class="mb-5">
+      <%= block_component_edit block, :creative_commons_derivatives %>
+    </div>
+    <div class="mb-5" v-show="data.creative_commons_derivatives == 'true'">
+      <%= block_component_edit block, :creative_commons_sharing %>
+    </div>
   </div>
 </div>
