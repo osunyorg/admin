@@ -10,124 +10,98 @@ window.osuny.contentEditor = {
         }
         this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
         this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
-
-        this.initElements();
+        this.modeWriteContainer = this.container.querySelector('#mode-write-container');
+        this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
+        this.initTabs();
         this.initSortable();
     },
 
-    initElements: function () {
+    initTabs: function () {
         'use strict';
-        var elementsContainers = this.container.querySelectorAll('.js-content-editor-element'),
-            elementInstance,
+        var tabs = document.querySelectorAll('[data-bs-toggle="tab"]'),
             i;
-
-        this.elements = [];
-        for (i = 0; i < elementsContainers.length; i += 1) {
-            elementInstance = new window.osuny.contentEditor.Element(elementsContainers[i]);
-            this.elements.push(elementInstance);
+        for (i = 0; i < tabs.length; i += 1) {
+            tabs[i].addEventListener('shown.bs.tab', this.tabChanged.bind(this));
         }
     },
 
     initSortable: function () {
         'use strict';
         var sortableContainers = this.container.querySelectorAll('.js-content-editor-sortable-container'),
-            sortableInstance,
             i;
 
-        this.sortableRootContainer = document.getElementById('content-editor-elements-root');
-        this.sortableInstances = [];
-
         for (i = 0; i < sortableContainers.length; i += 1) {
-            sortableInstance = new Sortable(sortableContainers[i], {
-                group: 'nested',
+            new Sortable(sortableContainers[i], {
                 handle: '.content-editor__elements__handle',
-                animation: 150,
-                fallbackOnBody: true,
-                swapThreshold: 0.65,
-                onUnchoose: this.onSortableUnchoose.bind(this),
-                onStart: this.onSortableStart.bind(this),
-                onMove: this.onSortableMove.bind(this),
+                fallbackOnBody: false,
                 onEnd: this.onSortableEnd.bind(this)
             });
-            this.sortableInstances.push(sortableInstance);
         }
     },
 
-    onSortableStart: function (event) {
+    tabChanged: function (event) {
         'use strict';
-        var item = event.item,
-            kind = item.dataset.kind;
-        this.sortableRootContainer.classList.add('content-editor__elements__root--dragging');
-        if (kind === 'block') {
-            this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-block');
-        } else if (kind === 'heading') {
-            this.sortableRootContainer.classList.add('content-editor__elements__root--dragging-heading');
-        }
+        var tab = event.target,
+            id = tab.getAttribute('data-bs-target'),
+            div = this.container.querySelector(id),
+            source = div.dataset.source;
+        this.target = this.container.querySelector(div.dataset.target);
+        this.target.innerHTML = '';
+        this.xhr = new XMLHttpRequest();
+        this.xhr.open('GET', source, true);
+        this.xhr.onreadystatechange = this.tabLoaded.bind(this);
+        this.xhr.send();
     },
 
-    onSortableMove: function (event) {
+    tabLoaded: function () {
         'use strict';
-        var draggedKind = event.dragged.dataset.kind,
-            relatedKind = event.related.dataset.kind,
-            firstHeading = this.sortableRootContainer.querySelector('.js-content-editor-element[data-kind="heading"]');
-
-        if (draggedKind === 'block') {
-            // Prevent dragging a block after a heading, instead of inside
-            return relatedKind !== 'heading' || !event.willInsertAfter && event.related === firstHeading;
+        if (this.xhr.readyState === XMLHttpRequest.DONE) {
+            if (this.xhr.status === 200) {
+                this.target.innerHTML = this.xhr.responseText;
+                this.initSortable();
+            }
         }
-        return true;
     },
 
     onSortableEnd: function (event) {
         'use strict';
-        var item = event.item,
-            kind = item.dataset.kind,
-            url = this.getUrlFromKind(kind),
-            to = event.to,
-            ids = [],
-            headingId = null,
+        if (event.from.classList.contains('content-editor--write')) {
+            this.sortModeWrite(event.to);
+        } else if (event.from.classList.contains('content-editor--organize')) {
+            this.sortModeOrganize(event.to);
+        }
+    },
+
+    // Mode écriture du contenu
+    sortModeWrite: function (to) {
+        'use strict';
+        var ids = [],
             child,
             i;
-
-        if (to.id !== 'content-editor-elements-root') {
-            // Dragged to heading's children list
-            headingId = event.to.parentNode.dataset.id;
-        }
-
         for (i = 0; i < to.children.length; i += 1) {
             child = to.children[i];
-            if (child.dataset.kind === kind) {
-                ids.push(child.dataset.id);
-            }
+            // Nous utilisons une route déjà existante, dédiée aux blocs,
+            // pour gérer à la fois des blocs et des headings.
+            // Ca manque d'élégance.
+            ids.push({
+                id: child.dataset.id,
+                kind: child.dataset.kind
+            });
         }
-
-        // call to application
-        $.post(url, {
-            heading: headingId,
-            ids: ids
-        });
+        $.post(this.sortBlocksUrl, { ids: ids });
     },
 
-    onSortableUnchoose: function () {
+    // Mode organisation du plan
+    sortModeOrganize: function (to) {
         'use strict';
-        this.sortableRootContainer.classList.remove('content-editor__elements__root--dragging',
-            'content-editor__elements__root--dragging-block',
-            'content-editor__elements__root--dragging-heading');
-    },
-
-    getUrlFromKind: function (kind) {
-        'use strict';
-        if (kind === 'block') {
-            return this.sortBlocksUrl;
-        } else if (kind === 'heading') {
-            return this.sortHeadingsUrl;
+        var ids = [],
+            child,
+            i;
+        for (i = 0; i < to.children.length; i += 1) {
+            child = to.children[i];
+            ids.push(child.dataset.id);
         }
-        return null;
-    },
-
-    getElementById: function (id) {
-        'use strict';
-        return this.elements[id];
+        $.post(this.sortHeadingsUrl, { ids: ids });
     },
 
     invoke: function () {

@@ -9,6 +9,8 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
     ids.each.with_index do |id, index|
       @heading = current_university.communication_block_headings.find(id)
       @heading.update_columns parent_id: parent_id,
+                              parent_id: nil,
+                              level: Communication::Block::Heading::DEFAULT_LEVEL,
                               position: index + 1
     end
     if @heading.about&.respond_to?(:is_direct_object?)

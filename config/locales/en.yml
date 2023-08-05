@@ -276,6 +276,7 @@ en:
     server_admin: Admin server
     sign_out: Log out
   metadata: Metadata
+  move: Move
   open: Open
   organize: Organize
   please_confirm: Are you sure?

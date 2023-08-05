@@ -6,7 +6,12 @@ action += link_to t('create'),
 action += link_to t('communication.website.posts.new_curation'),
                   new_admin_communication_website_post_curation_path(website_id: @website.id),
                   class: button_classes('ms-2 btn-light') if can?(:create, Communication::Website::Post)
-subtitle = link_to t('communication.website.see_all', number: @all_posts.size), admin_communication_website_posts_path(website_id: @website)
+          
+subtitle = ''
+if @all_posts.any? 
+  subtitle = link_to  t('communication.website.see_all', number: @all_posts.size), 
+                      admin_communication_website_posts_path(website_id: @website)
+end
 %>
 <%= osuny_panel t('communication.website.last_posts'),
                 subtitle: subtitle,

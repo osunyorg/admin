@@ -67,6 +67,10 @@ namespace :communication do
       end
     end
   end
+  scope "/contents/:about_type/:about_id", as: :contents, controller: 'contents' do
+    get :write
+    get :structure
+  end
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
       resources :headings, controller: 'blocks/headings', except: [:index, :show] do

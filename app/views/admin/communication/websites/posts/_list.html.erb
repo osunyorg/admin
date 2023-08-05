@@ -4,56 +4,60 @@ hide_category ||= false
 hide_buttons ||= false
 selectable ||= false
 %>
-<% if selectable %>
-  <input type="hidden" name="ids[]" value="">
-<% end %>
-<div class="table-responsive <%= 'table-selectable' if selectable %>">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <% if selectable %>
-          <th class="border-0">
-            <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
-          </th>
-        <% end %>
-        <th class="ps-0" width="60%"><%= Communication::Website::Post.human_attribute_name('title') %></th>
-        <th class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
-        <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% posts.each do |post| %>
-        <tr <% unless post.published? %>class="draft"<% end %>>
+<% if posts.none? %>
+  <p><%= t('communication.website.posts.none') %></p>
+<% else %>
+  <% if selectable %>
+    <input type="hidden" name="ids[]" value="">
+  <% end %>
+  <div class="table-responsive <%= 'table-selectable' if selectable %>">
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
           <% if selectable %>
-            <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
+            <th class="border-0">
+              <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
+            </th>
           <% end %>
-          <td class="ps-0">
-            <%= link_to post,
-                        admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                        class: "#{'draft' unless post.published?}" %>
-          </td>
-          <td class="ps-3 small">
-            <% if post.published_at %>
-              <%= l post.published_at, format: :date_with_explicit_month %><br>
-            <% end %>
-            <% if !hide_author && post.author %>
-              <%= post.author %><br>
-            <% end %>
-            <% unless hide_category %>
-              <ul class="list-unstyled mb-0">
-                <% post.categories.each do |category| %>
-                  <li><%= category %></li>
-                <% end %>
-              </ul>
-            <% end %>
-            <% if post.pinned %>
-              <%= Communication::Website::Post.human_attribute_name('pinned') %>
-            <% end %>
-          </td>
-          <td><%= image_tag post.featured_image.representation(resize: '200x'),
-                            width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          <th class="ps-0" width="60%"><%= Communication::Website::Post.human_attribute_name('title') %></th>
+          <th class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
+          <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% posts.each do |post| %>
+          <tr <% unless post.published? %>class="draft"<% end %>>
+            <% if selectable %>
+              <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
+            <% end %>
+            <td class="ps-0">
+              <%= link_to post,
+                          admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                          class: "#{'draft' unless post.published?}" %>
+            </td>
+            <td class="ps-3 small">
+              <% if post.published_at %>
+                <%= l post.published_at, format: :date_with_explicit_month %><br>
+              <% end %>
+              <% if !hide_author && post.author %>
+                <%= post.author %><br>
+              <% end %>
+              <% unless hide_category %>
+                <ul class="list-unstyled mb-0">
+                  <% post.categories.each do |category| %>
+                    <li><%= category %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+              <% if post.pinned %>
+                <%= Communication::Website::Post.human_attribute_name('pinned') %>
+              <% end %>
+            </td>
+            <td><%= image_tag post.featured_image.representation(resize: '200x'),
+                              width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

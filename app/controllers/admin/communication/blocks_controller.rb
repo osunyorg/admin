@@ -4,17 +4,17 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                               through_association: :communication_blocks
 
   def reorder
-    heading_id = params[:heading]
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      @block = current_university.communication_blocks.find(id)
-      @block.update_columns position: index + 1,
-                            heading_id: heading_id
+    # Cette action est très étrange, elle ne met pas en ordre les blocs seuls.
+    # En fait, elle met en ordre dans le mode "Ecrire le contenu", à la fois les headings et les blocks.
+    @ids = params[:ids] || []
+    @index_block = 0
+    @index_heading = 0
+    @heading = nil
+    @ids.values.each do |object|
+      @object = object
+      reorder_object
     end
-    if @block.about&.respond_to?(:is_direct_object?)
-      @block.about.is_direct_object?  ? @block.about.sync_with_git
-                                      : @block.about.touch # Sync indirect object's direct sources through after_touch
-    end
+    sync_after_reorder
   end
 
   def new
@@ -65,6 +65,32 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   protected
+
+  def reorder_object
+    @id = @object[:id]
+    @object[:kind] == 'heading' ? reorder_heading
+                                : reorder_block
+  end
+
+  def reorder_heading
+    @heading = current_university.communication_block_headings.find(@id)
+    @heading.update_columns position: @index_heading
+    @index_block = 0
+    @index_heading += 1
+  end
+
+  def reorder_block
+    @block = current_university.communication_blocks.find(@id)
+    @block.update_columns position: @index_block,
+                          heading_id: @heading&.id
+    @index_block += 1
+  end
+
+  def sync_after_reorder
+    return unless @block && @block.about&.respond_to?(:is_direct_object?)
+    @block.about.is_direct_object?  ? @block.about.sync_with_git
+                                    : @block.about.touch # Sync indirect object's direct sources through after_touch
+  end
 
   def website_id
     params[:website_id] || @block.about&.website.id

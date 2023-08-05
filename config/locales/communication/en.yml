@@ -666,6 +666,19 @@ en:
               video_title:
                 label: Video title
                 placeholder: Enter video title
+      contents:
+        blocks:
+          quantity:
+            zero: No block
+            one: 1 block
+            other: "%{count} blocks"
+        modes:
+          write:
+            tab: Write content
+            description: In “Write content” mode, you can move blocks and headings anywhere you like, independently of each other. For example, you can move a heading higher up in the document without it taking its blocks with it.
+          structure:
+            tab: Organize structure
+            description: In “Organize structure” mode, you do not see the blocks, only the titles. When you move a title, all the blocks follow. This is the ideal mode for organising long documents.
       website:
         pages:
           as_list: See as a list
@@ -782,6 +795,7 @@ en:
             title: Teachers
       posts:
         new_curation: New curation
+        none: No posts yet.
         published: Published
         successful_batch_update: Posts have been updated succesfully
         unpublished: Unpublished
