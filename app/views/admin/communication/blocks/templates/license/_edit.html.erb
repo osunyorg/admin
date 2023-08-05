@@ -1,0 +1,28 @@
+
+<%= block_component_edit block, :kind %>
+
+<div v-show="data.kind == 'creative_commons'">
+  <div class="mb-5">
+    <%= t('admin.communication.blocks.templates.license.creative_commons.about_html') %>
+  </div>
+  <div class="row pure__row--small">
+    <% t('admin.communication.blocks.templates.license.creative_commons.questions').each do |question| %>
+      <div class="col-lg-6 mb-5">
+        <p><%= question[:label] %></p>
+        <% question[:answers].each do |answer| %>
+          <div class="form-check">
+            <input  class="form-check-input"
+                    type="radio"
+                    name="question-<%= question[:key] %>"
+                    v-model="data.creative_commons.<%= question[:key] %>"
+                    value="<%= answer[:key] %>"
+                    id="question-<%= question[:key] %>-<%= answer[:key] %>">
+            <label for="question-<%= question[:key] %>-<%= answer[:key] %>">
+              <%= answer[:label] %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
