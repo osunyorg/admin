@@ -5,14 +5,14 @@ commercial_use  ||= block.template.creative_commons_commercial_use
 derivatives     ||= block.template.creative_commons_derivatives
 sharing         ||= block.template.creative_commons_sharing
 %>
-<%= image_tag 'communication/blocks/templates/license/creative_commons/cc.svg', width: icon_width, class: 'me-1' %>
+<%= image_tag 'communication/blocks/templates/license/creative_commons/icons/cc.svg', width: icon_width, class: 'me-1' %>
 <% if attribution == 'false' %>
-  <%= image_tag 'communication/blocks/templates/license/creative_commons/zero.svg', width: icon_width, class: 'me-1' %>
+  <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/zero.svg', width: icon_width, class: 'me-1' %>
 <% else %>
-  <%= image_tag 'communication/blocks/templates/license/creative_commons/by.svg', width: icon_width, class: 'me-1' %>
-  <%= image_tag 'communication/blocks/templates/license/creative_commons/nc.svg', width: icon_width, class: 'me-1' if commercial_use == 'false' %>
-  <%= image_tag 'communication/blocks/templates/license/creative_commons/nd.svg', width: icon_width, class: 'me-1' if derivatives == 'false' %>
+  <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/by.svg', width: icon_width, class: 'me-1' %>
+  <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/nc.svg', width: icon_width, class: 'me-1' if commercial_use == 'false' %>
+  <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/nd.svg', width: icon_width, class: 'me-1' if derivatives == 'false' %>
   <% if derivatives == 'true' && sharing == 'false' %>
-    <%= image_tag 'communication/blocks/templates/license/creative_commons/sa.svg', width: icon_width, class: 'me-1' %>
+    <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/sa.svg', width: icon_width, class: 'me-1' %>
   <% end %>
 <% end %>

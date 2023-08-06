@@ -3,20 +3,20 @@
 <div v-show="data.type == 'creative_commons'">
   <div class="mb-5">
     <div class="mb-2">
-      <%= image_tag 'communication/blocks/templates/license/creative_commons/cc.svg', width: 40, class: 'me-1' %>
+      <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/cc.svg', width: 40, class: 'me-1' %>
       <span v-show="data.creative_commons_attribution == 'false'">
-        <%= image_tag 'communication/blocks/templates/license/creative_commons/zero.svg', width: 40, class: 'me-1' %>
+        <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/zero.svg', width: 40, class: 'me-1' %>
       </span>
       <span v-show="data.creative_commons_attribution == 'true'">
-        <%= image_tag 'communication/blocks/templates/license/creative_commons/by.svg', width: 40, class: 'me-1' %>
+        <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/by.svg', width: 40, class: 'me-1' %>
         <span v-show="data.creative_commons_commercial_use == 'false'">
-          <%= image_tag 'communication/blocks/templates/license/creative_commons/nc.svg', width: 40, class: 'me-1' %>
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/nc.svg', width: 40, class: 'me-1' %>
         </span>
         <span v-show="data.creative_commons_derivatives == 'false'">
-          <%= image_tag 'communication/blocks/templates/license/creative_commons/nd.svg', width: 40, class: 'me-1' %>
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/nd.svg', width: 40, class: 'me-1' %>
         </span>
         <span v-show="data.creative_commons_derivatives == 'true' && data.creative_commons_sharing == 'false'">
-          <%= image_tag 'communication/blocks/templates/license/creative_commons/sa.svg', width: 40, class: 'me-1' %>
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/sa.svg', width: 40, class: 'me-1' %>
         </span>
       </span>
       
