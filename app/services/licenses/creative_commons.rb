@@ -26,8 +26,8 @@ class Licenses::CreativeCommons
   end
 
   def label
-    @label ||= attribution  ? 'CC0 1.0 Universal'
-                            : label_with_attribution
+    @label ||= attribution  ? label_with_attribution
+                            : 'CC0 1.0 Universal'
   end
 
   def to_s
@@ -35,16 +35,8 @@ class Licenses::CreativeCommons
   end
 
   def icons
-    @icons = ['cc']
-    if !attribution
-      @icons << 'zero'
-    else
-      @icons << 'by'
-      @icons << 'nc' if !commercial_use
-      @icons << 'nd' if !derivatives
-      @icons << 'sa' if derivatives && !sharing
-    end
-    @icons
+    @icons ||= attribution  ? icons_with_attribution
+                            : icons_without_attribution
   end
 
   protected
@@ -64,6 +56,18 @@ class Licenses::CreativeCommons
     label += '-SA' if derivatives && !sharing
     label += ' 4.0'
     label
+  end
+
+  def icons_with_attribution
+    icons = ['cc', 'by']
+    icons << 'nc' if !commercial_use
+    icons << 'nd' if !derivatives
+    icons << 'sa' if derivatives && !sharing
+    icons
+  end
+
+  def icons_without_attribution
+    ['cc', 'zero']
   end
 
 end
