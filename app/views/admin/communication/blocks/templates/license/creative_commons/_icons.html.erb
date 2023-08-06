@@ -4,7 +4,15 @@ attribution     ||= block.template.creative_commons_attribution
 commercial_use  ||= block.template.creative_commons_commercial_use
 derivatives     ||= block.template.creative_commons_derivatives
 sharing         ||= block.template.creative_commons_sharing
+
+cc = Licenses::CreativeCommons.create_from_block(block) 
+
 %>
+<% cc.icons.each do |icon| %>
+  <%= image_tag "communication/blocks/templates/license/creative_commons/icons/#{icon}.svg",
+                width: icon_width, 
+                class: 'me-1' %>
+<% end %>
 <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/cc.svg', width: icon_width, class: 'me-1' %>
 <% if attribution == 'false' %>
   <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/zero.svg', width: icon_width, class: 'me-1' %>

@@ -498,6 +498,8 @@ en:
                 options:
                   true: Yes. Others can share adaptations of my work under any terms.
                   false: No. Others must use the same CC license if they adapt my work.
+              description:
+                label: Description
           organization_chart:
             description: People and their jobs.
             edit:
