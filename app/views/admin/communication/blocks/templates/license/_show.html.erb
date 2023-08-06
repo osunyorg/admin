@@ -3,6 +3,7 @@ class_name = "block block-license"
 unless block.title.blank?
   class_name += " block-with-title"
 end
+cc = Licenses::CreativeCommons.create_from_block(block) 
 %>
 <div class="<%= class_name %>">
   <div class="container">
@@ -12,7 +13,7 @@ end
           <p class="block-title"><%= block.title %></p>
         </div>
       <% end %>
-      <a href="<%= render 'admin/communication/blocks/templates/license/creative_commons/url', block: block %>" target="_blank" rel="noreferrer">
+      <a href="<%= cc.url %>" target="_blank" rel="noreferrer">
         <%= render 'admin/communication/blocks/templates/license/creative_commons/badge', block: block %>
       </a>
     </div>
