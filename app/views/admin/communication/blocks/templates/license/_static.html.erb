@@ -7,9 +7,10 @@ cc = Licenses::CreativeCommons.create_from_block(block)
         commercial_use: <%= block.template.creative_commons_commercial_use %>
         derivatives: <%= block.template.creative_commons_derivatives %>
         sharing: <%= block.template.creative_commons_sharing %>
-        short_name: >-
-          <%= cc.short_name %>
-        long_name: >-
-          <%= cc.long_name %>
+        icons: <%= raw cc.icons %>
+        identifier: >-
+          <%= cc.identifier %>
+        label: >-
+          <%= cc.to_s %>
         url: >-
           <%= cc.url -%>

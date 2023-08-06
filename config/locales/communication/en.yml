@@ -474,7 +474,7 @@ en:
                   placeholder: Enter description here
               remove_key: Remove key figure
           license:
-            description: A legal license explained, like Creative Commons.
+            description: A  Creative Commons legal license with a link to the official reference.
             creative_commons:
               about_html: Use the <a href="https://creativecommons.org" target="_blank" rel="noreferrer">Creative Commons</a> to share your work. The license chooser is based on <a href="https://chooser-beta.creativecommons.org"target="_blank" rel="noreferrer">chooser-beta.creativecommons.org.org</a>.
             edit:

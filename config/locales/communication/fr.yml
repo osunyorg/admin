@@ -471,7 +471,7 @@ fr:
                   label: Description
                   placeholder: Entrer la description
           license:
-            description: Une licence juridique de type Creative Commons, avec son explication.
+            description: Une licence juridique de type Creative Commons, avec sa référence.
             creative_commons:
               about_html: Utilisez les licences <a href="https://creativecommons.org" target="_blank" rel="noreferrer">Creative Commons</a> pour partager votre travail. Le sélecteur de licence est basé sur <a href="https://chooser-beta.creativecommons.org"target="_blank" rel="noreferrer">chooser-beta.creativecommons.org.org</a>
             edit:

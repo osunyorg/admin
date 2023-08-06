@@ -2,4 +2,4 @@
 cc = Licenses::CreativeCommons.create_from_block(block) 
 %>
 <%= render 'admin/communication/blocks/templates/license/creative_commons/icons', block: block %>
-<%= cc.short_name %>
+<%= cc.to_s %>

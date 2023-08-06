@@ -15,79 +15,55 @@ class Licenses::CreativeCommons
     @sharing = sharing == 'true'
   end
 
-  def badge
-    unless @badge
-      @badge = 'cc-zero'
-      if attribution
-        @badge = 'by'
-        @badge += '-nc' unless commercial_use
-        if !derivatives
-          @badge += '-nd'
-        elsif !sharing
-          @badge += '-sa'
-        end
-      end
-    end
-    @badge
+  def identifier
+    @identifier ||= attribution ? identifier_with_attribution
+                                : 'cc-zero'
   end
 
   def url
-    unless @url
-      if attribution
-        @url = 'https://creativecommons.org/licenses/by'
-        @url += '-nc' unless commercial_use
-        @url += '-nd' unless derivatives
-        if derivatives && !sharing
-          @url += '-sa'
-        end
-        @url += '/4.0/'
-      else
-        @url = 'https://creativecommons.org/publicdomain/zero/1.0/'
-      end
-    end
-    @url
+    @url ||= attribution  ? "https://creativecommons.org/licenses/#{identifier}/4.0/"
+                          : 'https://creativecommons.org/publicdomain/zero/1.0/'
   end
 
-  def short_name
-    unless @short_name
-      if attribution
-        @short_name = 'CC BY'
-        @short_name += '-NC' if !commercial_use
-        @short_name += '-ND' if !derivatives
-        @short_name += '-SA' if derivatives && !sharing
-        @short_name += ' 4.0'
-      else
-        @short_name = 'CC0 1.0 Universal'
-      end
-    end
-    @short_name
-  end
-
-  def long_name
-    unless @long_name
-      if attribution
-        @long_name = 'Attribution'
-        @long_name += '-NonCommercial' if !commercial_use
-        @long_name += '-NoDerivatives' if !derivatives
-        @long_name += '-ShareAlike' if derivatives && !sharing
-        @long_name += ' 4.0 International'
-      else
-        @long_name = 'CC0 1.0 Universal'
-      end
-    end
-    @long_name
-  end
-
-  def name
-    short_name
+  def label
+    @label ||= attribution  ? 'CC0 1.0 Universal'
+                            : label_with_attribution
   end
 
   def to_s
-    "#{name}"
+    "#{label}"
   end
 
   def icons
-    ['cc']
+    @icons = ['cc']
+    if !attribution
+      @icons << 'zero'
+    else
+      @icons << 'by'
+      @icons << 'nc' if !commercial_use
+      @icons << 'nd' if !derivatives
+      @icons << 'sa' if derivatives && !sharing
+    end
+    @icons
+  end
+
+  protected
+
+  def identifier_with_attribution
+    identifier = 'by'
+    identifier += '-nc' if !commercial_use
+    identifier += '-nd' if !derivatives
+    identifier += '-sa' if derivatives && !sharing
+    identifier
+  end
+
+  def label_with_attribution
+    label = 'CC BY'
+    label += '-NC' if !commercial_use
+    label += '-ND' if !derivatives
+    label += '-SA' if derivatives && !sharing
+    label += ' 4.0'
+    label
   end
 
 end
