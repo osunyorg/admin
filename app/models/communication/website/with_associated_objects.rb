@@ -21,12 +21,28 @@ module Communication::Website::WithAssociatedObjects
     has_many    :permalinks,
                 class_name: "Communication::Website::Permalink",
                 dependent: :destroy
-                
+
     has_many    :communication_blocks,
                 class_name: "Communication::Block",
                 foreign_key: :communication_website_id
     alias       :blocks :communication_blocks
 
+  end
+
+  def blocks_from_education
+    Communication::Block.where(about: education_programs).or(
+      Communication::Block.where(about: education_diplomas)
+    )
+  end
+
+  def blocks_from_research
+    Communication::Block.where(about: research_papers)
+  end
+
+  def blocks_from_university
+    Communication::Block.where(about: connected_people).or(
+      Communication::Block.where(about: connected_organizations)
+    )
   end
 
   def education_diplomas
