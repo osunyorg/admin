@@ -5,7 +5,10 @@ module Communication::Website::WithSecurity
     list = external_domains_default
     list.concat external_domains_plausible
     list.concat external_domains_from_blocks_video
-    list.concat external_domains_from_blocks_embed
+    list.concat external_domains_from_blocks_embed(blocks)
+    list.concat external_domains_from_blocks_embed(blocks_from_education)
+    list.concat external_domains_from_blocks_embed(blocks_from_research)
+    list.concat external_domains_from_blocks_embed(blocks_from_university)
     list.uniq.compact
   end
 
@@ -34,14 +37,14 @@ module Communication::Website::WithSecurity
     list
   end
 
-  def external_domains_from_blocks_embed
+  def external_domains_from_blocks_embed(blocks)
     list = []
-    blocks.where(template_kind: :embed).each do |block|
+    blocks.where(template_kind: :embed).published.each do |block|
       code = block.template.code
       # https://stackoverflow.com/questions/25095176/extracting-all-urls-from-a-page-using-ruby
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|
         url = CGI.unescapeHTML(url)
-        url =  ActionController::Base.helpers.strip_tags(url)
+        url = ActionController::Base.helpers.strip_tags(url)
         url = URI::Parser.new.escape(url)
         host = URI.parse(url).host
         list << host
