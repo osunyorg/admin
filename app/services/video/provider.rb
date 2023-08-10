@@ -2,7 +2,8 @@ class Video::Provider
   PROVIDERS = [
     Vimeo,
     Youtube,
-    Dailymotion
+    Dailymotion,
+    Peertube
   ]
 
   def self.find(video_url)
