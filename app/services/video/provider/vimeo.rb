@@ -1,7 +1,6 @@
 class Video::Provider::Vimeo < Video::Provider::Default
   DOMAINS = ['vimeo.com']
 
-  # "https://vimeo.com/248482251"
   def identifier
     video_url.chomp('/').split('/').last
   end
