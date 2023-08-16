@@ -1,7 +1,6 @@
 class Video::Provider::Peertube < Video::Provider::Default
-  DOMAINS = ['peertube.fr', 'peertude.my.noesya.coop']
+  DOMAINS = ['peertube.fr']
 
-  # "https://peertube.fr/w/1i848Qvi7Q3ytW2uPY8AxG"
   def identifier
     video_url.split('/w/').last
   end
@@ -13,5 +12,15 @@ class Video::Provider::Peertube < Video::Provider::Default
   # https://docs.joinpeertube.org/support/doc/api/embeds#quick-start
   def iframe_url
     "#{host}/videos/embed/#{identifier}"
+  end
+
+  def correct?
+    url_in_domains? || url_looks_like_peertube?
+  end
+
+  protected
+
+  def url_looks_like_peertube?
+    "/w/".in?(video_url) || "/videos/watch/".in?(video_url)
   end
 end

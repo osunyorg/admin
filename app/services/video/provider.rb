@@ -3,19 +3,14 @@ class Video::Provider
     Vimeo,
     Youtube,
     Dailymotion,
-    Peertube
+    Peertube # Comes last because detection is less reliable
   ]
 
   def self.find(video_url)
-    PROVIDERS.each do |provider|
-      return provider.new(video_url) if url_in_domains?(video_url, provider::DOMAINS)
+    PROVIDERS.each do |provider_class|
+      provider = provider_class.new(video_url)
+      return provider if provider.correct?
     end
     Default.new(video_url)
-  end
-
-  protected
-
-  def self.url_in_domains?(url, domains)
-    domains.any? { |domain| url.include? domain }
   end
 end
