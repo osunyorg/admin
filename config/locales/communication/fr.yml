@@ -470,6 +470,33 @@ fr:
                 description:
                   label: Description
                   placeholder: Entrer la description
+          license:
+            description: Une licence juridique de type Creative Commons, avec sa référence.
+            creative_commons:
+              about_html: Utilisez les licences <a href="https://creativecommons.org" target="_blank" rel="noreferrer">Creative Commons</a> pour partager votre travail. Le sélecteur de licence est basé sur <a href="https://chooser-beta.creativecommons.org"target="_blank" rel="noreferrer">chooser-beta.creativecommons.org.org</a>
+            edit:
+              creative_commons_attribution:
+                label: Souhaitez-vous que votre travail vous soit attribué ?
+                options:
+                  true: Oui. Toute personne qui utilise mon œuvre doit l'attribuer de manière appropriée.
+                  false: Non. N'importe qui peut utiliser mon travail, même sans m'en attribuer la paternité.
+              creative_commons_commercial_use:
+                label: Souhaitez-vous autoriser d'autres personnes à utiliser votre œuvre à des fins commerciales ?
+                options:
+                  true: Oui. D'autres personnes peuvent utiliser mon travail, même à des fins commerciales.
+                  false: Non. Personne ne peut utiliser mon travail à des fins commerciales.
+              creative_commons_derivatives:
+                label: Souhaitez-vous autoriser d'autres personnes à remixer, adapter ou développer votre œuvre ?
+                options:
+                  true: Oui. D'autres personnes peuvent remixer, adapter ou développer mon travail.
+                  false: Non. D'autres personnes ne peuvent utiliser mon travail que sous une forme non adaptée.
+              creative_commons_sharing:
+                label: Souhaitez-vous autoriser d'autres personnes à partager des adaptations de votre œuvre, quelles qu'en soient les conditions ?
+                options:
+                  true: Oui. D'autres personnes peuvent partager des adaptations de mon œuvre dans n'importe quelles conditions.
+                  false: Non. Les autres doivent utiliser la même licence CC s'ils adaptent mon œuvre.
+              description:
+                label: Description
           organization_chart:
             description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
             edit:
@@ -813,6 +840,7 @@ fr:
           gallery: Galerie
           image: Image
           key_figures: Chiffres-clés
+          license: Licence
           organization_chart: Personnes
           pages: Pages
           partners: Organisations

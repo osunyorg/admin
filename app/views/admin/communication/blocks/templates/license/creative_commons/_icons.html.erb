@@ -1,0 +1,8 @@
+<%
+icon_width      ||= 40
+cc = Licenses::CreativeCommons.create_from_block(block)
+%>
+<% cc.icons.each do |icon| %>
+  <% svg = "communication/blocks/templates/license/creative_commons/icons/#{icon}.svg" %>
+  <%= image_tag svg, width: icon_width, class: 'me-1' %>
+<% end %>

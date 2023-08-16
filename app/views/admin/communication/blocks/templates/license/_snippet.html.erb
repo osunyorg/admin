@@ -1,0 +1,5 @@
+<%
+cc = Licenses::CreativeCommons.create_from_block(block) 
+%>
+<%= render 'admin/communication/blocks/templates/license/creative_commons/icons', block: block %>
+<%= cc.to_s %>

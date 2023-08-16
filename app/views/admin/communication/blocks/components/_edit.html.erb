@@ -34,4 +34,4 @@ local_assigns[:none] ||= t "#{i18n_component}.none", default: ''
 local_assigns[:summernote_config] ||= summernote_config
 local_assigns[:codemirror_mode] ||= codemirror_mode
 %>
-<%= render partial, **local_assigns %>
+<%= render partial, **local_assigns -%>

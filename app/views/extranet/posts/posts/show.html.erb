@@ -1,6 +1,18 @@
 <% content_for :header do %>
+  <% 
+  if @post.featured_image.attached?
+    image_classes = 'col-md-3 offset-2'
+    image_width = 400
+    width, height = @post.featured_image.metadata.values_at('width', 'height')
+    ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
+    if ratio && ratio > 1
+      image_classes = 'col-md-5'
+      image_width = 700
+    end
+  end
+  %>
   <div class="row">
-    <div class="header__info col-md-8">
+    <div class="header__info col-md-7">
       <h1><%= @post %></h1>
       <p class="small">
         <% if @post.published_at %>
@@ -12,18 +24,18 @@
         <% end %>
       </p>
     </div>
-    <div class="col-md-4">
-      <% if @post.featured_image.attached? %>
+    <% if @post.featured_image.attached? %>
+      <div class="<%= image_classes %>">
         <figure class="<% if @post.featured_image_credit.present? %>with-credit<% end %>">
-          <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: 300 %>
+          <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: image_width %>
           <% if @post.featured_image_credit.present? %>
             <figcaption tabindex="0">
                 <%= sanitize @post.featured_image_credit %>
             </figcaption>
           <% end %>
         </figure>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

@@ -1,7 +1,7 @@
 <fieldset class="mb-3">
-  <legend class="h4"><%= label%></legend>
+  <legend class="col-form-label"><%= label %></legend>
   <% component.options.each do |option| %>
-    <div class="form-check form-check-inline">
+    <div class="form-check">
       <input  class="form-check-input"
               type="radio"
               name="<%= model %>.<%= property %>"

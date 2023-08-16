@@ -1,0 +1,8 @@
+<% 
+cc = Licenses::CreativeCommons.create_from_block(block) 
+path = "communication/blocks/templates/license/creative_commons/badges/#{cc.identifier}.svg"
+%>
+<%= image_tag path, 
+              alt: cc.identifier, 
+              border: 0, 
+              width: 88 %>

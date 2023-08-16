@@ -1,0 +1,58 @@
+<div class="row pure__row--small">
+  <div class="col-xl-6">
+    <%= block_component_edit block, :description %>
+  </div>
+</div>
+
+<%= block_component_edit block, :type %>
+
+<div v-show="data.type == 'creative_commons'">
+  <div class="mb-5">
+    <div class="mb-2">
+      <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/cc.svg', width: 40, class: 'me-1' %>
+      <span v-show="data.creative_commons_attribution == 'false'">
+        <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/zero.svg', width: 40, class: 'me-1' %>
+      </span>
+      <span v-show="data.creative_commons_attribution == 'true'">
+        <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/by.svg', width: 40, class: 'me-1' %>
+        <span v-show="data.creative_commons_commercial_use == 'false'">
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/nc.svg', width: 40, class: 'me-1' %>
+        </span>
+        <span v-show="data.creative_commons_derivatives == 'false'">
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/nd.svg', width: 40, class: 'me-1' %>
+        </span>
+        <span v-show="data.creative_commons_derivatives == 'true' && data.creative_commons_sharing == 'false'">
+          <%= image_tag 'communication/blocks/templates/license/creative_commons/icons/sa.svg', width: 40, class: 'me-1' %>
+        </span>
+      </span>
+      
+    </div>
+    <p class="lead">
+      <span v-show="data.creative_commons_attribution == 'false'">CC0 1.0 Universal</span>
+      <span v-show="data.creative_commons_attribution == 'true'">
+        CC 
+        BY<span v-show="data.creative_commons_commercial_use == 'false'">-NC</span
+          ><span v-show="data.creative_commons_derivatives == 'false'">-ND</span
+          ><span v-show="data.creative_commons_derivatives == 'true' && data.creative_commons_sharing == 'false'">-SA</span>
+        4.0
+      </span>
+    </p>
+  </div>
+  <div class="mb-5">
+    <%= t('admin.communication.blocks.templates.license.creative_commons.about_html') %>
+  </div>
+  <div class="mb-5">
+    <%= block_component_edit block, :creative_commons_attribution %>
+  </div>
+  <div v-show="data.creative_commons_attribution == 'true'">
+    <div class="mb-5">
+      <%= block_component_edit block, :creative_commons_commercial_use %>
+    </div>
+    <div class="mb-5">
+      <%= block_component_edit block, :creative_commons_derivatives %>
+    </div>
+    <div class="mb-5" v-show="data.creative_commons_derivatives == 'true'">
+      <%= block_component_edit block, :creative_commons_sharing %>
+    </div>
+  </div>
+</div>
