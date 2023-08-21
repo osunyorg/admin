@@ -33,8 +33,7 @@ module Communication::Website::WithSecurity
     blocks.where(template_kind: :video).each do |block|
       video_url = block.template.url
       next unless video_url.present?
-      video_iframe_url = Video::Provider.find(video_url).iframe_url
-      list << URI.parse(video_iframe_url).host
+      list << Video::Provider.find(video_url).iframe_host
     end
     list
   end
