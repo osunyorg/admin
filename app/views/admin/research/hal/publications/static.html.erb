@@ -32,7 +32,15 @@ citations:
   - label: "MLA"
     content: >-
       <%= prepare_html_for_static @about.citation_mla, @website.university %>
+  - label: "Chicago"
+    content: >-
+      <%= prepare_html_for_static @about.citation_chicago, @website.university %>
+  - label: "Harvard"
+    content: >-
+      <%= prepare_html_for_static @about.citation_harvard, @website.university %>
+  <% if @website.default_language.iso_code == "fr" %>
   - label: "ISO 690"
     content: >-
       <%= prepare_html_for_static @about.citation_iso690, @website.university %>
+  <% end %>
 ---

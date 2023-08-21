@@ -13,6 +13,14 @@ module WithCitations
     citation_for("modern-language-association", website: website, locale: locale)
   end
 
+  def citation_chicago(website: nil, locale: nil)
+    citation_for("chicago-author-date", website: website, locale: locale)
+  end
+
+  def citation_harvard(website: nil, locale: nil)
+    citation_for("harvard-cite-them-right", website: website, locale: locale)
+  end
+
   protected
 
   def citation_for(style, website: nil, locale: nil)
