@@ -1,6 +1,6 @@
 class Video::Provider::Default
   DOMAINS = []
-  
+
   attr_reader :video_url
 
   include ActionView::Helpers::TagHelper
@@ -15,6 +15,10 @@ class Video::Provider::Default
 
   def iframe_url
     video_url
+  end
+
+  def csp_domain
+    URI.parse(iframe_url).host
   end
 
   def iframe_tag(**iframe_options)
@@ -36,8 +40,8 @@ class Video::Provider::Default
   protected
 
   def url_in_domains?
-    self.class::DOMAINS.any? do |domain| 
-      video_url.include?(domain) 
+    self.class::DOMAINS.any? do |domain|
+      video_url.include?(domain)
     end
   end
 end

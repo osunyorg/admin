@@ -32,7 +32,8 @@ module Communication::Website::WithSecurity
     list = []
     blocks.where(template_kind: :video).each do |block|
       video_url = block.template.url
-      list << URI.parse(video_url).host if url.present?
+      next unless video_url.present?
+      list << Video::Provider.find(video_url).csp_domain
     end
     list
   end
