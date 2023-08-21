@@ -17,7 +17,7 @@ class Video::Provider::Default
     video_url
   end
 
-  def iframe_host
+  def csp_domain
     URI.parse(iframe_url).host
   end
 
