@@ -4,7 +4,9 @@ class Api::Osuny::RootController < Api::ApplicationController
   end
 
   def theme_released
-    # TODO check security
-    # TODO autoupdate
+    render_forbidden unless params[:secret_key].present? && params[:secret_key] == ENV['OSUNY_API_AUTOUPDATE_THEME_KEY']
+    Communication::Website.with_automatic_update.find_each do |website|
+      website.update_theme_version
+    end
   end
 end
