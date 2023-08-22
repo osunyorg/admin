@@ -3,6 +3,7 @@ class Server::WebsitesController < Server::ApplicationController
 
   has_scope :for_theme_version
   has_scope :for_production
+  has_scope :for_update
   has_scope :for_search_term
 
   def index

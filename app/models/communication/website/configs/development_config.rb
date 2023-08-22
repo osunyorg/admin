@@ -5,6 +5,7 @@
 #  id                      :uuid             not null, primary key
 #  about_type              :string           indexed => [about_id]
 #  access_token            :string
+#  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
 #  git_branch              :string
 #  git_endpoint            :string

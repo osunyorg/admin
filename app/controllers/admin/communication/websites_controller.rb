@@ -85,7 +85,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def website_params
     attribute_names = [
       :name, :url, :repository, :about_type, :about_id, :in_production,
-      :git_provider, :git_endpoint, :git_branch, :plausible_url, :deployment_status_badge, language_ids: []
+      :git_provider, :git_endpoint, :git_branch, :plausible_url, 
+      :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
     # For now, default language can't be changed, too many implications, especially around special pages.

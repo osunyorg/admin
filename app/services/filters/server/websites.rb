@@ -9,6 +9,9 @@ module Filters
       add :for_production,
           [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }],
           'Filtrer par état de production'
+      add :for_update,
+          [{ to_s: 'Automatique', id: 'true' }, { to_s: 'Manuelle', id: 'false' }],
+          'Filtrer par mode de mise à jour'
     end
   end
 end
