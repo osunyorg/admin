@@ -1,17 +1,21 @@
 <% content_for :title, 'API' %>
 
-<h2>Lhéo</h2>
-
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-6 mb-5">
+    <h2>Osuny</h2>
     <p>
-      Lhéo est un <a href="http://lheo.gouv.fr/" target="_blank" rel="
-      ">
-        Langage Harmonisé d'Échange d'informations sur l'Offre de formation.
-      </a>. L'API Osuny Lhéo met à disposition toute l'offre de formation à ce format.
+      L'API Osuny permet d'interagir avec une instance.
+      L'implémentation est très rudimentaire, n'hésitez pas à ouvrir <a href="https://github.com/noesya/osuny/issues" target="_blank" rel="noreferrer">une issue sur Github</a> pour signaler un manque.
     </p>
+    <%= link_to 'API', api_osuny_path, class: 'btn btn-primary' %>
   </div>
-  <div class="col-lg-6">
-    <%= link_to 'Accéder à l\'API Lhéo', api_lheo_path, class: 'btn btn-primary' %>
+  <div class="col-lg-6 mb-5">
+    <h2>LHÉO</h2>
+    <p>
+      LHÉO est le <a href="http://lheo.gouv.fr/" target="_blank" rel="noreferrer">Langage Harmonisé d'Échange d'informations sur l'Offre de formation.</a>. 
+      L'API Osuny LHÉO met à disposition toute l'offre de formation à ce format.
+      L'implémentation est incomplète, n'hésitez pas à ouvrir <a href="https://github.com/noesya/osuny/issues" target="_blank" rel="noreferrer">une issue sur Github</a> pour signaler un manque.
+    </p>
+    <%= link_to 'API', api_lheo_path, class: 'btn btn-primary' %>
   </div>
 </div>
