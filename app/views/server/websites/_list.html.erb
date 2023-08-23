@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <th><%= Communication::Website.human_attribute_name('name') %></th>
-        <th><%= Communication::Website.human_attribute_name('admin') %></th>
         <th><%= Communication::Website.human_attribute_name('url') %></th>
         <th><%= Communication::Website.human_attribute_name('status') %></th>
         <th><%= University.model_name.human %></th>
@@ -14,13 +13,18 @@
     <tbody>
       <% websites.ordered.each do |website| %>
         <tr id="website-<%= website.id %>">
-          <td><%= website.name %></td>
-          <td><%= link_to 'Admin', admin_communication_website_url(website, host: website.university.url), target: :_blank %></td>
           <td>
-            <%= link_to website.url, website.url, target: :_blank if website.url.present? %>
+            <%= website.name %>
             <% if website.in_production %>
               <span class="badge bg-success">Prod</span>
             <% end %>
+          </td>
+          <td>
+            <%= link_to website.url, website.url, target: :_blank if website.url.present? %>
+            <%= link_to 'Admin', 
+                        admin_communication_website_url(website, host: website.university.url), 
+                        target: :_blank,
+                        class: 'btn btn-xs btn-light' %>
           </td>
           <td><%= image_tag website.deployment_status_badge, alt: '' if website.deployment_status_badge.present? %></td>
           <td><%= link_to website.university, [:server, website.university] %></td>

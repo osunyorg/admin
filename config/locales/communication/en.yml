@@ -130,6 +130,7 @@ en:
         about_Research::Journal: Journal website
         about_Research::Laboratory: Laboratory website
         about_type: About
+        autoupdate_theme: Automatically update Osuny theme
         access_token: Access token
         created_at: Creation
         default_language: Default language

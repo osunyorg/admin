@@ -130,6 +130,7 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
+        autoupdate_theme: Mise à jour automatique du thème Osuny
         access_token: Jeton d'accès
         created_at: Création
         default_language: Langue par défaut

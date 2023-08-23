@@ -1,5 +1,10 @@
 module Communication::Website::WithTheme
   extend ActiveSupport::Concern
+  
+  included do
+    scope :with_automatic_update, -> { where(autoupdate_theme: true) }
+    scope :with_manual_update, -> { where(autoupdate_theme: false) }
+  end
 
   def get_current_theme_version!
     self.update_column :theme_version, current_theme_version

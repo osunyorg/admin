@@ -5,6 +5,7 @@
 #  id                      :uuid             not null, primary key
 #  about_type              :string           indexed => [about_id]
 #  access_token            :string
+#  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
 #  git_branch              :string
 #  git_endpoint            :string
@@ -72,6 +73,7 @@ class Communication::Website < ApplicationRecord
       unaccent(communication_websites.url) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+  scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
 
   def to_s
     "#{name}"
