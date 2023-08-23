@@ -5,6 +5,10 @@ namespace :api do
     get 'communication' => 'communication#index'
     namespace :communication do
       get 'websites' => 'websites#index'
+    end
+    get 'server' => 'server#index'
+    namespace :server do
+      get 'websites' => 'websites#index'
       post 'websites/theme-released' => 'websites#theme_released'
     end
   end
