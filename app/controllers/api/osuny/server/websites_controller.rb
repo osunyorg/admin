@@ -1,4 +1,5 @@
 class Api::Osuny::Server::WebsitesController < Api::ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:theme_released]
 
   def index
     @websites = Communication::Website.in_production
