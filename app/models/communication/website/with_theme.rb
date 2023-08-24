@@ -12,7 +12,6 @@ module Communication::Website::WithTheme
     end
   end
 
-
   def get_current_theme_version!
     self.update_column :theme_version, current_theme_version
   end
