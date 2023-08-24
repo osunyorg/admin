@@ -50,6 +50,7 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
+    return unless git_repository.valid?
     git_repository.update_theme_version!
   end
   handle_asynchronously :update_theme_version, queue: :default
