@@ -1,0 +1,18 @@
+<div class="table-responsive">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th><%= Research::Laboratory.human_attribute_name('name') %></th>
+        <th><%= Research::Laboratory.human_attribute_name('address') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% laboratories.each do |laboratory| %>
+        <tr>
+          <td><%= link_to laboratory, admin_research_laboratory_path(laboratory) %></td>
+          <td><%= laboratory.full_address %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

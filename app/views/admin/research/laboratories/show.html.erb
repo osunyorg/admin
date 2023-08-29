@@ -1,15 +1,24 @@
 <% content_for :title, @laboratory %>
 
-<%
-action = link_to    t('create'),
-                    new_admin_research_laboratory_axis_path(laboratory_id: @laboratory),
-                    class: button_classes
-subtitle = link_to  t('communication.website.see_all', number: @axes.count),
-                    admin_research_laboratory_axes_path(laboratory_id: @laboratory)
-%>
-<%= osuny_panel Research::Laboratory::Axis.model_name.human(count: 2), action: action, subtitle: subtitle do %>
-  <%= render 'admin/research/laboratories/axes/list', axes: @axes %>
-<% end %>
+<div class="row">
+  <div class="col-lg-6">
+    <%
+    action = link_to    t('create'),
+                        new_admin_research_laboratory_axis_path(laboratory_id: @laboratory),
+                        class: button_classes
+    subtitle = link_to  t('communication.website.see_all', number: @axes.count),
+                        admin_research_laboratory_axes_path(laboratory_id: @laboratory)
+    %>
+    <%= osuny_panel Research::Laboratory::Axis.model_name.human(count: 2), action: action, subtitle: subtitle do %>
+      <%= render 'admin/research/laboratories/axes/list', axes: @axes %>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <%= osuny_panel University::Person::Researcher.model_name.human(count: 2) do %>
+      <%= render 'admin/university/people/researchers/list', researchers: @laboratory.researchers %>
+    <% end %>
+  </div>
+</div>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @laboratory %>

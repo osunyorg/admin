@@ -31,6 +31,10 @@ action += link_to t('university.manage_experiences'),
   <%= render 'admin/university/people/experiences/list', experiences: @person.experiences.ordered %>
 <% end %>
 
+<%= osuny_panel Research::Laboratory.model_name.human(count: 2) do %>
+  <%= render 'admin/research/laboratories/list', laboratories: @person.laboratories.ordered %>
+<% end if @person.laboratories.any? %>
+
 <%= render 'admin/application/connections/list', about: @person %>
 
 <% content_for :action_bar_left do %>

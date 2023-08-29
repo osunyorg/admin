@@ -25,6 +25,12 @@ module University::Person::WithResearch
                             foreign_key: 'director_id',
                             dependent: :nullify
 
+    has_and_belongs_to_many :research_laboratories,
+                            class_name: 'Research::Laboratory',
+                            foreign_key: 'research_laboratory_id',
+                            association_foreign_key: 'university_person_id'
+    alias :laboratories :research_laboratories
+
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
 

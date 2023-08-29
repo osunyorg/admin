@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="<%= table_classes %>">
+  <table class="<%= table_classes(with_actions: false) %>">
     <thead>
       <tr>
         <th><%= University::Person::Experience.human_attribute_name('description') %></th>
