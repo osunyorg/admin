@@ -5,8 +5,13 @@ module WithTranslations
     attr_accessor :newly_translated
 
     belongs_to  :language
-    belongs_to  :original, class_name: base_class.to_s, optional: true
-    has_many    :translations, class_name: base_class.to_s, foreign_key: :original_id, dependent: :nullify
+    belongs_to  :original, 
+                class_name: base_class.to_s, 
+                optional: true
+    has_many    :translations, 
+                class_name: base_class.to_s, 
+                foreign_key: :original_id, 
+                dependent: :nullify
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself

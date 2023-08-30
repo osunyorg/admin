@@ -20,8 +20,8 @@ module University::Person::WithEducation
 
     has_and_belongs_to_many       :cohorts,
                                   class_name: '::Education::Cohort',
-                                  foreign_key: 'university_person_id',
-                                  association_foreign_key: 'education_cohort_id'
+                                  foreign_key: :university_person_id,
+                                  association_foreign_key: :education_cohort_id
 
     accepts_nested_attributes_for :cohorts,
                                   reject_if: :all_blank,
@@ -30,13 +30,13 @@ module University::Person::WithEducation
     # Dénormalisation des liens via cohorts, pour la recherche par facettes
     has_and_belongs_to_many       :diploma_years,
                                   class_name: 'Education::AcademicYear',
-                                  foreign_key: 'university_person_id',
-                                  association_foreign_key: 'education_academic_year_id'
+                                  foreign_key: :university_person_id,
+                                  association_foreign_key: :education_academic_year_id
 
     has_and_belongs_to_many       :diploma_programs,
                                   class_name: 'Education::Program',
-                                  foreign_key: 'university_person_id',
-                                  association_foreign_key: 'education_program_id'
+                                  foreign_key: :university_person_id,
+                                  association_foreign_key: :education_program_id
 
     before_validation :find_cohorts
     validates_associated :cohorts

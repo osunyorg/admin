@@ -34,13 +34,13 @@ class Research::Laboratory < ApplicationRecord
               dependent: :nullify
   has_many    :axes,
               class_name: 'Research::Laboratory::Axis',
-              foreign_key: 'research_laboratory_id',
+              foreign_key: :research_laboratory_id,
               dependent: :destroy
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person::Researcher',
-                          foreign_key: 'university_person_id',
-                          association_foreign_key: 'research_laboratory_id'
+                          foreign_key: :university_person_id,
+                          association_foreign_key: :research_laboratory_id
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
