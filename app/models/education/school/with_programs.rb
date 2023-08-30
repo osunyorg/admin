@@ -4,7 +4,7 @@ module Education::School::WithPrograms
   included do
     has_and_belongs_to_many :programs,
                             class_name: 'Education::Program',
-                            join_table: 'education_programs_schools',
+                            join_table: :education_programs_schools,
                             foreign_key: :education_school_id,
                             association_foreign_key: :education_program_id
 
@@ -12,7 +12,7 @@ module Education::School::WithPrograms
     has_and_belongs_to_many :published_programs,
                             -> { published },
                             class_name: 'Education::Program',
-                            join_table: 'education_programs_schools',
+                            join_table: :education_programs_schools,
                             foreign_key: :education_school_id,
                             association_foreign_key: :education_program_id
 
