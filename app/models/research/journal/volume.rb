@@ -47,7 +47,8 @@ class Research::Journal::Volume < ApplicationRecord
   has_many    :papers, 
               foreign_key: :research_journal_volume_id, 
               dependent: :nullify
-  has_many    :people, -> { distinct }, 
+  has_many    :people, 
+              -> { distinct }, 
               through: :papers
 
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
