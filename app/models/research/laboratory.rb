@@ -37,6 +37,11 @@ class Research::Laboratory < ApplicationRecord
               foreign_key: :research_laboratory_id,
               dependent: :destroy
 
+  has_and_belongs_to_many :researchers,
+                          class_name: 'University::Person::Researcher',
+                          foreign_key: :university_person_id,
+                          association_foreign_key: :research_laboratory_id
+
   validates :name, :address, :city, :zipcode, :country, presence: true
 
   scope :ordered, -> { order(:name) }
@@ -62,13 +67,17 @@ class Research::Laboratory < ApplicationRecord
     "data/laboratory.yml"
   end
 
+  def dependencies
+    axes +
+    researchers.map(&:researcher)
+  end
+
   def has_administrators?
     false
   end
 
   def has_researchers?
-    # TODO: Ajouter les researchers quand ils existeront
-    false
+    researchers.any?
   end
 
   def has_teachers?

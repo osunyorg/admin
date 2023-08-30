@@ -21,11 +21,11 @@ class Research::Hal::Author < ApplicationRecord
 
   has_and_belongs_to_many :publications,
                           foreign_key: 'research_hal_publication_id',
-                          association_foreign_key: 'research_hal_author_id'
+                          association_foreign_key: :research_hal_author_id
   has_and_belongs_to_many :university_person_researchers,
                           class_name: 'University::Person',
-                          foreign_key: 'university_person_id',
-                          association_foreign_key: 'research_hal_author_id'
+                          foreign_key: :university_person_id,
+                          association_foreign_key: :research_hal_author_id
   alias :researchers :university_person_researchers
 
   scope :ordered, -> { order(:last_name, :first_name, :docid)}

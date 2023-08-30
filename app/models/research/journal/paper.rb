@@ -59,10 +59,16 @@ class Research::Journal::Paper < ApplicationRecord
   has_summernote :text
   has_one_attached :pdf
 
-  belongs_to :journal, foreign_key: :research_journal_id
-  belongs_to :volume, foreign_key: :research_journal_volume_id, optional: true
-  belongs_to :kind, class_name: 'Research::Journal::Paper::Kind', optional: true
-  belongs_to :updated_by, class_name: 'User'
+  belongs_to  :journal, 
+              foreign_key: :research_journal_id
+  belongs_to  :volume, 
+              foreign_key: :research_journal_volume_id, 
+              optional: true
+  belongs_to  :kind, 
+              class_name: 'Research::Journal::Paper::Kind', 
+              optional: true
+  belongs_to  :updated_by, 
+              class_name: 'User'
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
                           join_table: :research_journal_papers_researchers,

@@ -24,8 +24,8 @@ module Education::Program::WithAlumni
     # Dénormalisation des alumni pour le faceted search
     has_and_belongs_to_many :university_people,
                class_name: 'University::Person',
-               foreign_key: 'education_program_id',
-               association_foreign_key: 'university_person_id'
+               foreign_key: :education_program_id,
+               association_foreign_key: :university_person_id
 
     # NOTE: Find a fix for wrong table name on WHERE clause
     #   SELECT "education_academic_years".*

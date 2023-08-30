@@ -43,8 +43,8 @@ class Education::Cohort < ApplicationRecord
 
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
-                          foreign_key: 'education_cohort_id',
-                          association_foreign_key: 'university_person_id'
+                          foreign_key: :education_cohort_id,
+                          association_foreign_key: :university_person_id
 
   validates_associated :school, :academic_year, :program
   validates :year, presence: true

@@ -60,9 +60,9 @@ class Communication::Website::Post < ApplicationRecord
              optional: true
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Category',
-                          join_table: 'communication_website_categories_posts',
-                          foreign_key: 'communication_website_post_id',
-                          association_foreign_key: 'communication_website_category_id'
+                          join_table: :communication_website_categories_posts,
+                          foreign_key: :communication_website_post_id,
+                          association_foreign_key: :communication_website_category_id
 
   validates :title, presence: true
 

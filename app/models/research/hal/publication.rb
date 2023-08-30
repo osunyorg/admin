@@ -36,12 +36,12 @@ class Research::Hal::Publication < ApplicationRecord
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
-                          foreign_key: 'university_person_id',
-                          association_foreign_key: 'research_hal_publication_id'
+                          foreign_key: :university_person_id,
+                          association_foreign_key: :research_hal_publication_id
 
   has_and_belongs_to_many :authors,
-                          foreign_key: 'research_hal_author_id',
-                          association_foreign_key: 'research_hal_publication_id'
+                          foreign_key: :research_hal_author_id,
+                          association_foreign_key: :research_hal_publication_id
 
   validates_presence_of :docid
 

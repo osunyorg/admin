@@ -88,6 +88,10 @@
           </div>
         </div>
       <% end if current_university.is_really_a_university %>
+
+      <%= f.association :research_laboratories, 
+                        collection: current_university.research_laboratories,
+                        as: :check_boxes if person.is_researcher %>
     </div>
     <div class="col-lg-4">
       <%= osuny_panel t('metadata') do %>

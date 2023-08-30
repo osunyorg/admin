@@ -7,9 +7,9 @@ module Communication::Website::WithLanguages
     belongs_to :default_language, class_name: "Language"
     has_and_belongs_to_many :languages,
                             class_name: 'Language',
-                            join_table: 'communication_websites_languages',
-                            foreign_key: 'communication_website_id',
-                            association_foreign_key: 'language_id',
+                            join_table: :communication_websites_languages,
+                            foreign_key: :communication_website_id,
+                            association_foreign_key: :language_id,
                             after_remove: :flag_languages_change
 
     validates :languages, length: { minimum: 1 }

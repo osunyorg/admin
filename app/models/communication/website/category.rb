@@ -72,9 +72,9 @@ class Communication::Website::Category < ApplicationRecord
                           dependent: :destroy
   has_and_belongs_to_many :posts,
                           class_name: 'Communication::Website::Post',
-                          join_table: 'communication_website_categories_posts',
-                          foreign_key: 'communication_website_category_id',
-                          association_foreign_key: 'communication_website_post_id'
+                          join_table: :communication_website_categories_posts,
+                          foreign_key: :communication_website_category_id,
+                          association_foreign_key: :communication_website_post_id
 
   validates :name, presence: true
 
