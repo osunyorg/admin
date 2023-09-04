@@ -1,5 +1,5 @@
 class Git::Providers::Abstract
-  attr_reader :git_repository; :endpoint, :branch, :access_token, :repository
+  attr_reader :git_repository, :endpoint, :branch, :access_token, :repository
 
   def initialize(git_repository)
     @git_repository = git_repository
