@@ -38,6 +38,16 @@ module Communication::Website::WithGitRepository
   end
   handle_asynchronously :destroy_obsolete_git_files, queue: :default
 
+  def invalidate_access_token!
+    # Nullify the expired token
+    update_column :access_token, nil
+    # Notify admins and website managers managing this website.
+    users_to_notify = university.users.admin + university.users.website_manager.where(id: manager_ids)
+    users_to_notify.each do |user|
+      NotificationMailer.website_invalid_access_token(self, user).deliver_later
+    end
+  end
+
   # Le website devient data/website.yml
   # Les configs héritent du modèle website et s'exportent en différents fichiers
   def exportable_to_git?

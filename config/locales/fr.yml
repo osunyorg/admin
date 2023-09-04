@@ -141,7 +141,7 @@ fr:
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
-    summary: 
+    summary:
       label: Résumé
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
     users_alerts:
@@ -269,6 +269,10 @@ fr:
         text_line_3_html: "Nombre de lignes traitées : %{number}."
         text_error_msg: "Ligne %{line} : %{error}"
         text_errors_title: "Des erreurs sont survenues :"
+      website_invalid_access_token:
+        subject: Jeton d'accès expiré pour « %{website} »
+        text_line_1_html: Le jeton d'accès utilisé pour le site « %{website} » a expiré et ne permet plus la mise à jour du site.
+        text_line_2_html: Pour résoudre ce problème, veuillez renseigner un nouveau jeton d'accès en cliquant <a href=\"%{url}\">ici</a>.
     yours: Cordialement.
   menu:
     admin: Admin
@@ -307,7 +311,7 @@ fr:
       delivered: Votre message a bien été envoyé
       filters: Filtres
       target: Cible
-      users: 
+      users:
         one: "%{count} utilisateur"
         other: "%{count} utilisateurs"
     websites:

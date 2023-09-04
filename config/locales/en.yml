@@ -141,7 +141,7 @@ en:
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
-    summary: 
+    summary:
       label: Summary
       hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
     users_alerts:
@@ -269,6 +269,10 @@ en:
         text_line_3_html: "Number of lines in the file: %{number}."
         text_error_msg: "Line %{line}: %{error}"
         text_errors_title: "Some errors have occured:"
+      website_invalid_access_token:
+        subject: "Expired access token for \"%{website}\""
+        text_line_1_html: "The access token used for the website \"%{website}\" has expired and does not allow the website to be updated anymore."
+        text_line_2_html: "To solve this issue, please fill in a new access token by clicking <a href=\"%{url}\">here</a>."
     yours: Yours.
   menu:
     admin: Admin
@@ -307,7 +311,7 @@ en:
       delivered: Your message has been sent
       filters: Filters
       target: Target
-      users: 
+      users:
         one: "%{count} user"
         other: "%{count} users"
     websites:
