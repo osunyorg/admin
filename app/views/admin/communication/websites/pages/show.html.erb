@@ -41,5 +41,6 @@
               target: :_blank,
               class: 'btn btn-light btn-xs' if @page.published %>
   <%= preview_link %>
-  <%= link_to t('edit'), edit_admin_communication_website_page_path(@page), class: button_classes %>
+  <%= edit_link @page %>
+  <%= publish_link @page %>
 <% end %>

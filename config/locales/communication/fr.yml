@@ -715,6 +715,9 @@ fr:
           published_status: État de publication
         post:
           pinned_status: Mise en avant
+        publish: 
+          button: Publier
+          notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
   communication:
     authors:
       one: Auteur·rice

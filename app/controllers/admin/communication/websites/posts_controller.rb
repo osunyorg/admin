@@ -23,7 +23,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     breadcrumb
   end
 
-  def publish
+  def publish_batch
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)
     is_published = params[:published] == "true"
@@ -33,6 +33,13 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     end
     redirect_back fallback_location: admin_communication_website_posts_path,
                   notice: t('communication.website.posts.successful_batch_update')
+  end
+
+  def publish
+    @post.published = true
+    @post.save_and_sync
+    redirect_back fallback_location: admin_communication_website_post_path(@post),
+                  notice: t('admin.communication.website.publish.notice')
   end
 
   def show

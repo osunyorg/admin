@@ -55,6 +55,14 @@ module Admin::ApplicationHelper
                   aria-controls=\"preview\">#{ t 'preview.button'}</button>"
   end
 
+  def publish_link(object)
+    return if object.published
+    link_to t('admin.communication.website.publish.button'),
+            [:publish, :admin, object],
+            method: :post,
+            class: button_classes
+  end
+
   def static_link(path)
     return unless current_user.server_admin?
     raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
