@@ -718,6 +718,9 @@ en:
           published_status: Publication status
         post:
           pinned_status: Pinned status
+        publish: 
+          button: Publish
+          notice: Publication in progress, it should take a few minutes to be online.
   communication:
     authors:
       one: Author

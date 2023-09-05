@@ -47,6 +47,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     add_breadcrumb(@page, admin_communication_website_page_path(@page))
   end
 
+  def publish
+    @page.published = true
+    @page.save_and_sync
+    redirect_back fallback_location: admin_communication_website_page_path(@page),
+                  notice: t('admin.communication.website.publish.notice')
+  end
+
   def static
     @about = @page
     render layout: false

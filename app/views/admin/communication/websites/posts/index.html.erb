@@ -14,7 +14,7 @@
   %>
   <%= osuny_panel Communication::Website::Post.model_name.human(count: 2), action: action do %>
     <div data-batch-selectable class="mb-5">
-      <%= form_tag publish_admin_communication_website_posts_path do %>
+      <%= form_tag publish_batch_admin_communication_website_posts_path do %>
         <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
         <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
         <%= paginate @posts, theme: 'bootstrap-5' %>
