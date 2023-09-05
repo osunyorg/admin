@@ -150,7 +150,13 @@ fr:
         repository: Référentiel
         url: URL
       communication/website/agenda/event:
+        dates: Dates
+        featured_image: Image à la une
+        from_day: Jour de début
+        from_hour: Heure de début
         title: Titre
+        to_day: Jour de fin
+        to_hour: Heure de fin
       communication/website/category:
         children: Catégories enfants
         featured_image: Image à la une

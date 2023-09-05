@@ -150,7 +150,13 @@ en:
         repository: Repository
         url: URL
       communication/website/agenda/event:
+        dates: Dates
+        featured_image: Featured image
+        from_day: From day
+        from_hour: From hour
         title: Title
+        to_day: To day
+        to_hour: To hour
       communication/website/category:
         children: Children categories
         featured_image: Featured image

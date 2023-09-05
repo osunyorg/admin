@@ -6,7 +6,8 @@
       <thead>
         <tr>
           <th class="ps-0" style="min-width: 250px"><%= Communication::Website::Agenda::Event.human_attribute_name('title') %></th>
-          <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
+          <th><%= Communication::Website::Agenda::Event.human_attribute_name('dates') %></th>
+          <th><%= Communication::Website::Agenda::Event.human_attribute_name('featured_image') %></th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,9 @@
               <%= link_to event,
                           admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id),
                           class: "#{'draft' unless event.published?}" %>
+            </td>
+            <td>
+              
             </td>
             <td><%= image_tag event.featured_image.representation(resize: '200x'),
                               width: 100 if event.featured_image.attached? && event.featured_image.representable? %></td>
