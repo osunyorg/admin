@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_112141) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_124209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -233,7 +233,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_112141) do
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.uuid "language_id", null: false
-    t.uuid "original_id", null: false
+    t.uuid "original_id"
     t.boolean "published", default: false
     t.date "from_day"
     t.time "from_hour"
@@ -242,7 +242,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_112141) do
     t.text "featured_image_alt"
     t.text "featured_image_credit"
     t.text "meta_description"
-    t.uuid "parent_id", null: false
+    t.uuid "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"

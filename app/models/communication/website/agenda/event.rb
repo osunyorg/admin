@@ -17,8 +17,8 @@
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
 #  language_id              :uuid             not null, indexed
-#  original_id              :uuid             not null, indexed
-#  parent_id                :uuid             not null, indexed
+#  original_id              :uuid             indexed
+#  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
@@ -51,7 +51,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithTranslations
   include WithUniversity
 
-  belongs_to :parent
+  belongs_to  :parent,
+              class_name: 'Communication::Website::Agenda::Event'
 
   scope :ordered, -> { order(from_day: :desc) }
 end

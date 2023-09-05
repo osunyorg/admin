@@ -17,8 +17,8 @@
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
 #  language_id              :uuid             not null, indexed
-#  original_id              :uuid             not null, indexed
-#  parent_id                :uuid             not null, indexed
+#  original_id              :uuid             indexed
+#  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
