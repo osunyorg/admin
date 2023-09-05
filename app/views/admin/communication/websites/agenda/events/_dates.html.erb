@@ -1,0 +1,9 @@
+<i class="fas fa-play-circle"></i>
+<%= l event.from_day %>
+<%= l event.from_hour, format: "%H:%M" if event.from_hour %>
+<% if event.to_day%>
+  <br>
+  <i class="fas fa-stop-circle"></i>
+  <%= l event.to_day %>
+  <%= l event.to_hour, format: "%H:%M" if event.to_hour %>
+<% end %>

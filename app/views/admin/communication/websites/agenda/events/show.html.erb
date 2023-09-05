@@ -5,13 +5,7 @@
     <div class="col-lg-7">
       <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name(:title), small: true do %>
         <p class="lead"><%= @event.title %></p>
-        <p>
-          <%= l @event.from_day %>
-          <%= l @event.from_hour, format: "%H:%M" if @event.from_hour %>
-          <br>
-          → <%= l @event.to_day %>
-          <%= l @event.to_hour, format: "%H:%M" if @event.to_hour %>
-        </p>
+        <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event %></p>
       <% end %>
     </div>
     <div class="offset-lg-1 col-lg-4">
@@ -41,7 +35,7 @@
 <% content_for :action_bar_left do %>
   <%= destroy_link @event %>
   <%= duplicate_link @event %>
-  <%= static_link static_admin_communication_website_post_path(@event) %>
+  <%= static_link static_admin_communication_website_agenda_event_path(@event) %>
 <% end %>
 
 <% content_for :action_bar_right do %>
