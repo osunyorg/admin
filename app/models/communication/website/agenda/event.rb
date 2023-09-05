@@ -9,6 +9,7 @@
 #  from_hour                :time
 #  meta_description         :text
 #  published                :boolean          default(FALSE)
+#  slug                     :text
 #  summary                  :text
 #  title                    :string
 #  to_day                   :date
@@ -52,7 +53,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithUniversity
 
   belongs_to  :parent,
-              class_name: 'Communication::Website::Agenda::Event'
+              class_name: 'Communication::Website::Agenda::Event',
+              optional: true
 
   scope :ordered, -> { order(from_day: :desc) }
+
+  def to_s
+    "#{title}"
+  end
 end

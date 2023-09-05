@@ -55,7 +55,13 @@ namespace :communication do
       end
     end
     namespace :agenda do
-      resources :events, controller: '/admin/communication/websites/agenda/events', path: '/:lang/events'
+      resources :events, controller: '/admin/communication/websites/agenda/events', path: '/:lang/events' do
+        member do
+          get :static
+          post :duplicate
+          post :publish
+        end
+      end
     end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do
       member do

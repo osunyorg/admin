@@ -9,6 +9,7 @@
 #  from_hour                :time
 #  meta_description         :text
 #  published                :boolean          default(FALSE)
+#  slug                     :text
 #  summary                  :text
 #  title                    :string
 #  to_day                   :date

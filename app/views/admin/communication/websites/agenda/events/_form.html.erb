@@ -1,0 +1,33 @@
+<%= simple_form_for [:admin, event] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <%= osuny_panel t('content') do %>
+        <%= f.input :title %>
+        <%= render 'admin/application/summary/form', f: f, about: event %>
+      <% end %>
+      <div class="row pure__row--small">
+        <div class="col-md-6">
+          <%= render 'admin/application/meta_description/form', f: f, about: event %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <%= osuny_panel t('metadata') do %>
+        <%= f.input :published if can? :publish, event %>
+        <%= f.input :slug,
+                    as: :string,
+                    input_html: event.persisted? ? {} : {
+                      class: 'js-slug-input',
+                      data: { source: '#communication_website_agenda_event_title' }
+                    } %>
+      <% end %>
+      <%= render 'admin/application/featured_image/edit', about: event, f: f %>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>
