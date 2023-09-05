@@ -9,6 +9,7 @@ module Communication::Website::Page::WithType
       Communication::Website::Page::Home,
       # Global objects
       Communication::Website::Page::CommunicationPost,
+      Communication::Website::Page::CommunicationAgenda,
       Communication::Website::Page::Person,
       Communication::Website::Page::Organization,
       # Education

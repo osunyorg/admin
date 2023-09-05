@@ -795,6 +795,9 @@ fr:
           communication_post:
             slug: actualites
             title: Actualités
+          communication_agenda:
+            slug: agenda
+            title: Agenda
           education_diploma:
             slug: diplomes
             title: "Diplômes"

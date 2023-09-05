@@ -798,6 +798,9 @@ en:
           communication_post:
             slug: posts
             title: Posts
+          communication_agenda:
+            slug: agenda
+            title: Agenda
           education_diploma:
             slug: diplomas
             title: Diplomas

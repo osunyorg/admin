@@ -58,6 +58,21 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   scope :ordered, -> { order(from_day: :desc) }
 
+  validates_presence_of :from_day
+
+  def git_path(website)
+    return unless website.id == communication_website_id && published
+    "#{git_path_content_prefix(website)}events/#{static_path}.html"
+  end
+
+  def static_path
+    "#{from_day.year}/#{from_day.strftime "%Y-%m-%d"}-#{slug}"
+  end
+
+  def template_static
+    "admin/communication/websites/agenda/events/static"
+  end
+
   def to_s
     "#{title}"
   end

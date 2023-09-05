@@ -91,6 +91,7 @@ class Communication::Website < ApplicationRecord
     configs +
     pages.where(language_id: language_ids) +
     posts.where(language_id: language_ids) +
+    events.where(language_id: language_ids) +
     categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
     [about]
