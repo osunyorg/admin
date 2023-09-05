@@ -31,6 +31,9 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/agenda/event:
+        one: Événement
+        other: Événements
       communication/website/category:
         one: Catégorie
         other: Catégories
@@ -135,6 +138,8 @@ fr:
         created_at: Création
         default_language: Langue par défaut
         deployment_status_badge: Badge de statut du déploiement
+        feature_posts: Site avec des actualités
+        feature_agenda: Site avec un agenda
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Fournisseur Git
@@ -144,6 +149,8 @@ fr:
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         url: URL
+      communication/website/agenda/event:
+        title: Titre
       communication/website/category:
         children: Catégories enfants
         featured_image: Image à la une

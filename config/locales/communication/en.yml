@@ -31,6 +31,9 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/agenda/event:
+        one: Event
+        other: Events
       communication/website/category:
         one: Category
         other: Categories
@@ -135,6 +138,8 @@ en:
         created_at: Creation
         default_language: Default language
         deployment_status_badge: Deployment status badge
+        feature_posts: Website with posts
+        feature_agenda: Website with agenda
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -144,6 +149,8 @@ en:
         plausible_url: Plausible dashboard URL
         repository: Repository
         url: URL
+      communication/website/agenda/event:
+        title: Title
       communication/website/category:
         children: Children categories
         featured_image: Featured image

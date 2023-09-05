@@ -9,6 +9,7 @@ class Icon
   COMMUNICATION_WEBSITE_PAGE = 'fas fa-file'
   COMMUNICATION_WEBSITE_PAGES = 'fas fa-sitemap'
   COMMUNICATION_WEBSITE_MENUS = 'fas fa-bars'
+  COMMUNICATION_WEBSITE_AGENDA = 'fas fa-calendar'
   COMMUNICATION_WEBSITE_ANALYTICS = 'fas fa-chart-pie'
   COMMUNICATION_WEBSITE_PREVIEW_MOBILE = 'fas fa-mobile-alt'
   COMMUNICATION_WEBSITE_PREVIEW_TABLET = 'fas fa-tablet-alt'

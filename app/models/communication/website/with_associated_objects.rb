@@ -26,7 +26,11 @@ module Communication::Website::WithAssociatedObjects
                 class_name: "Communication::Block",
                 foreign_key: :communication_website_id
     alias       :blocks :communication_blocks
-
+    
+    has_many    :agenda_events,
+                class_name: "Communication::Website::Agenda::Event",
+                foreign_key: :communication_website_id
+    alias       :events :agenda_events
   end
 
   def blocks_from_education

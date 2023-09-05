@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_141647) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_112141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -225,6 +225,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_141647) do
     t.text "css"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
+  end
+
+  create_table "communication_website_agenda_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "summary"
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "original_id", null: false
+    t.boolean "published", default: false
+    t.date "from_day"
+    t.time "from_hour"
+    t.date "to_day"
+    t.time "to_hour"
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.uuid "parent_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
+    t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
+    t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
+    t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
+    t.index ["university_id"], name: "index_communication_website_agenda_events_on_university_id"
   end
 
   create_table "communication_website_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -522,6 +547,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_141647) do
     t.string "theme_version", default: "NA"
     t.text "deployment_status_badge"
     t.boolean "autoupdate_theme", default: true
+    t.boolean "feature_posts", default: true
+    t.boolean "feature_agenda", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -1158,6 +1185,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_141647) do
   add_foreign_key "communication_extranet_posts", "universities"
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "original_id"
+  add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "parent_id"
+  add_foreign_key "communication_website_agenda_events", "communication_websites"
+  add_foreign_key "communication_website_agenda_events", "languages"
+  add_foreign_key "communication_website_agenda_events", "universities"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "original_id"
   add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
   add_foreign_key "communication_website_categories", "communication_websites"

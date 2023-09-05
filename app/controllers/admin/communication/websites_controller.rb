@@ -86,6 +86,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     attribute_names = [
       :name, :url, :repository, :about_type, :about_id, :in_production,
       :git_provider, :git_endpoint, :git_branch, :plausible_url, 
+      :feature_posts, :feature_agenda,
       :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
