@@ -19,8 +19,8 @@ selectable ||= false
               <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
             </th>
           <% end %>
-          <th class="ps-0" width="60%"><%= Communication::Website::Post.human_attribute_name('title') %></th>
-          <th class="ps-3"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
+          <th class="ps-0" style="min-width: 250px"><%= Communication::Website::Post.human_attribute_name('title') %></th>
+          <th class="ps-3" style="min-width: 200px"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
           <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
         </tr>
       </thead>
