@@ -30,12 +30,9 @@
               <i class="close_btn--with_children <%= Icon::FOLDER_OPENED_FULL %>"></i>
             </span>
           </div>
-          <%= @homepage %>
+          <%= link_to @homepage, admin_communication_website_page_path(@homepage) %>
           <div class="ms-auto align-items-center" role="group">
             <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.home.title") %></span>
-          </div>
-          <div class="btn-group">
-            <%= link_to t('admin.communication.website.pages.show'), admin_communication_website_page_path(@homepage), class: 'action' %>
           </div>
         </div>
         <ul class="list-unstyled ms-4 treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"
