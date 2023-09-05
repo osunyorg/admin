@@ -57,6 +57,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               optional: true
 
   scope :ordered, -> { order(from_day: :desc) }
+  scope :recent, -> { order(from_day: :desc).limit(5) }
 
   validates_presence_of :from_day
 

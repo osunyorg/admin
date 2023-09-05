@@ -776,6 +776,7 @@ en:
         refresh: Refresh import
         show: Show import
         pending: Import in progress
+      last_events: Last events
       last_pages: Last pages
       last_posts: Last posts
       menus:

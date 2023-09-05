@@ -38,6 +38,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @pages = @all_pages.recent
     @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
     @posts = @all_posts.recent
+    @all_events = @website.events.accessible_by(current_ability).for_language(current_website_language)
+    @events = @all_events.recent
     breadcrumb
   end
 

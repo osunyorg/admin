@@ -15,6 +15,7 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <%= render 'admin/communication/websites/show/posts' if can?(:read, Communication::Website::Post) && @website.feature_posts %>
+  <%= render 'admin/communication/websites/show/events' if can?(:read, Communication::Website::Agenda::Event) && @website.feature_agenda %>
   <%= render 'admin/communication/websites/show/pages' if can?(:read, Communication::Website::Page) %>
   <%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
 <% end %>

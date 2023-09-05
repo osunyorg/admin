@@ -1,0 +1,17 @@
+<%
+action = ''
+action += link_to t('create'),
+                  new_admin_communication_website_agenda_event_path(website_id: @website),
+                  class: button_classes if can?(:create, Communication::Website::Agenda::Event)
+subtitle = ''
+if @all_events.any? 
+  subtitle = link_to  t('communication.website.see_all', number: @all_events.size), 
+                      admin_communication_website_agenda_events_path(website_id: @website)
+end
+%>
+<%= osuny_panel t('communication.website.last_events'),
+                subtitle: subtitle,
+                action: action do %>
+  <%= render 'admin/communication/websites/agenda/events/list',
+              events: @events %>
+<% end %>
