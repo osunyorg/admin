@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_ability
+    @current_ability ||= Ability.for(current_user)
+  end
+
   def ensure_university
     render_forbidden unless current_university
   end
