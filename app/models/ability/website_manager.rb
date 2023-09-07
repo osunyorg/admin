@@ -25,4 +25,14 @@ class Ability::WebsiteManager < Ability
     can :manage, University::Person::Experience, university_id: @user.university_id
     can :manage, University::Person::Involvement, university_id: @user.university_id
   end
+
+  protected
+
+  def managed_pages_ids
+    @managed_pages_ids ||= Communication::Website::Page.where(communication_website_id: managed_websites_ids).pluck(:id)
+  end
+
+  def managed_posts_ids
+    @managed_posts_ids ||= Communication::Website::Post.where(communication_website_id: managed_websites_ids).pluck(:id)
+  end
 end

@@ -19,4 +19,10 @@ class Ability::ProgramManager < Ability
     can :manage, University::Person::Involvement, target_type: "Education::Program", target_id: managed_programs_ids
     can :manage, University::Role, target_type: "Education::Program", target_id: managed_programs_ids
   end
+
+  protected
+
+  def managed_programs_ids
+    @managed_programs_ids ||= @user.programs_to_manage.pluck(:education_program_id)
+  end
 end
