@@ -36,7 +36,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @event.website = @website
     @event.add_photo_import params[:photo_import]
     if @event.save_and_sync
-      redirect_to admin_communication_website_agenda_event_path(@event), notice: t('admin.successfully_created_html', model: @event.to_s)
+      redirect_to admin_communication_website_agenda_event_path(@event), 
+                  notice: t('admin.successfully_created_html', model: @event.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -46,7 +47,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def update
     @event.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
-      redirect_to admin_communication_website_agenda_event_path(@event), notice: t('admin.successfully_updated_html', model: @event.to_s)
+      redirect_to admin_communication_website_agenda_event_path(@event), 
+                  notice: t('admin.successfully_updated_html', model: @event.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -61,7 +63,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def destroy
     @event.destroy
-    redirect_to admin_communication_website_agenda_events_url, notice: t('admin.successfully_destroyed_html', model: @event.to_s)
+    redirect_to admin_communication_website_agenda_events_url, 
+                notice: t('admin.successfully_destroyed_html', model: @event.to_s)
   end
   protected
 
