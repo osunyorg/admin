@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_141601) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_085800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -580,6 +580,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_141601) do
     t.string "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "signature"
+    t.text "args"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
