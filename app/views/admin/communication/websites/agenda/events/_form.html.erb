@@ -11,12 +11,20 @@
       <div class="row pure__row--small">
         <div class="col-md-6">
           <%= f.input :from_day, html5: true %>
-          <%= f.input :from_hour, html5: true %>
         </div>
         <div class="col-md-6">
+          <%= f.input :from_hour, html5: true %>
+        </div>
+      </div>
+      <div class="row pure__row--small">
+        <div class="col-md-6">
           <%= f.input :to_day, html5: true %>
+        </div>
+        <div class="col-md-6">
           <%= f.input :to_hour, html5: true %>
         </div>
+      </div>
+      <div class="row pure__row--small">
         <div class="col-md-6">
           <%= render 'admin/application/meta_description/form', f: f, about: event %>
         </div>
