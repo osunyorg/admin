@@ -99,6 +99,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     "admin/communication/websites/agenda/events/static"
   end
 
+  def dependencies
+    active_storage_blobs +
+    blocks
+  end
+
   def to_s
     "#{title}"
   end
