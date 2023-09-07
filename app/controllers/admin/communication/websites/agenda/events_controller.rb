@@ -24,7 +24,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def new
-    @event.website = @website
     breadcrumb
   end
 
@@ -39,7 +38,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event), notice: t('admin.successfully_created_html', model: @event.to_s)
     else
-      byebug
       breadcrumb
       render :new, status: :unprocessable_entity
     end
