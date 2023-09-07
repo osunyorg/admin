@@ -1,6 +1,11 @@
 ---
 title: "<%= @about.title %>"
 dates:
+  status: "<%= @about.status %>"
+  archive: <%= @about.archive? %>
+  computed:
+    short: "Du 14 au 16 juin 2023"
+    long: "Du mercredi 14 au vendredi 16 juin 2023"
   from:
     day: <%= @about.from_day %>
 <% if @about.from_hour %>

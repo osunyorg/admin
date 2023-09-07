@@ -62,6 +62,34 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   validates_presence_of :from_day
 
+  STATUS_FUTURE = 'future'
+  STATUS_PRESENT = 'present'
+  STATUS_ARCHIVE = 'archive'
+
+  def status
+    if future?
+      STATUS_FUTURE
+    elsif present?
+      STATUS_PRESENT
+    else
+      STATUS_ARCHIVE
+    end
+  end
+
+  def future?
+    from_day > Date.today
+  end
+
+  def present?
+    to_day.present? ? (from_day >= Date.today && to_day <= Date.today)
+                    : from_day == Date.today
+  end
+
+  def archive?
+    to_day.present? ? to_day < Date.today
+                    : from_day < Date.today
+  end
+
   def git_path(website)
     return unless website.id == communication_website_id && published
     "#{git_path_content_prefix(website)}events/#{from_day.year}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
