@@ -8,7 +8,7 @@ class Ability
   end
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+    @user ||= User.new # guest user (not logged in)
   end
 
   protected
