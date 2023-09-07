@@ -50,6 +50,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithPermalink
   include WithSlug
   include WithTranslations
+  include WithTree
   include WithUniversity
 
   belongs_to  :parent,
