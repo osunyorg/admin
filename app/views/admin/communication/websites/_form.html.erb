@@ -7,10 +7,16 @@
       <%= osuny_panel t('metadata') do %>
         <%= f.input :name %>
         <%= f.input :url %>
+        <%= f.input :in_production %>
         <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
+      <% end %>
+      <%= osuny_panel Communication::Website.human_attribute_name('features') do %>
+        <%= f.input :feature_posts %>
+        <%= f.input :feature_agenda %>
+      <% end %>
+      <%= osuny_panel Language.model_name.human(count: 2) do %>
         <%= f.association :languages, as: :check_boxes, required: true, wrapper_html: { class: "js-languages" }, label_method: lambda { |l| language_name(l.iso_code) } %>
         <%= f.association :default_language, include_blank: t('simple_form.include_blanks.defaults.language'), input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
-        <%= f.input :in_production %>
       <% end %>
     </div>
     <div class="col-xl-8">

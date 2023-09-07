@@ -31,6 +31,9 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/agenda/event:
+        one: Événement
+        other: Événements
       communication/website/category:
         one: Catégorie
         other: Catégories
@@ -135,6 +138,9 @@ fr:
         created_at: Création
         default_language: Langue par défaut
         deployment_status_badge: Badge de statut du déploiement
+        features: Fonctionnalités
+        feature_posts: Actualités
+        feature_agenda: Agenda
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Fournisseur Git
@@ -144,6 +150,14 @@ fr:
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         url: URL
+      communication/website/agenda/event:
+        dates: Dates
+        featured_image: Image à la une
+        from_day: Jour de début
+        from_hour: Heure de début
+        title: Titre
+        to_day: Jour de fin
+        to_hour: Heure de fin
       communication/website/category:
         children: Catégories enfants
         featured_image: Image à la une
@@ -760,6 +774,7 @@ fr:
         refresh: Relancer l'import
         show: Voir l'import
         pending: Import en cours
+      last_events: Derniers événements
       last_pages: Dernières pages
       last_posts: Dernières actualités
       menus:
@@ -782,6 +797,9 @@ fr:
           communication_post:
             slug: actualites
             title: Actualités
+          communication_agenda:
+            slug: agenda
+            title: Agenda
           education_diploma:
             slug: diplomes
             title: "Diplômes"

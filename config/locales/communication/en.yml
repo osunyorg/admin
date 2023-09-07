@@ -31,6 +31,9 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/agenda/event:
+        one: Event
+        other: Events
       communication/website/category:
         one: Category
         other: Categories
@@ -135,6 +138,9 @@ en:
         created_at: Creation
         default_language: Default language
         deployment_status_badge: Deployment status badge
+        features: Features
+        feature_posts: Posts
+        feature_agenda: Agenda
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -144,6 +150,14 @@ en:
         plausible_url: Plausible dashboard URL
         repository: Repository
         url: URL
+      communication/website/agenda/event:
+        dates: Dates
+        featured_image: Featured image
+        from_day: From day
+        from_hour: From hour
+        title: Title
+        to_day: To day
+        to_hour: To hour
       communication/website/category:
         children: Children categories
         featured_image: Featured image
@@ -763,6 +777,7 @@ en:
         refresh: Refresh import
         show: Show import
         pending: Import in progress
+      last_events: Last events
       last_pages: Last pages
       last_posts: Last posts
       menus:
@@ -785,6 +800,9 @@ en:
           communication_post:
             slug: posts
             title: Posts
+          communication_agenda:
+            slug: agenda
+            title: Agenda
           education_diploma:
             slug: diplomas
             title: Diplomas
