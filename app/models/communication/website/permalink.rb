@@ -28,6 +28,7 @@ class Communication::Website::Permalink < ApplicationRecord
     "Communication::Website::Category" => Communication::Website::Permalink::Category,
     "Communication::Website::Page" => Communication::Website::Permalink::Page,
     "Communication::Website::Post" => Communication::Website::Permalink::Post,
+    "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
     "Education::Diploma" => Communication::Website::Permalink::Diploma,
     "Education::Program" => Communication::Website::Permalink::Program,
     "Research::Journal::Paper" => Communication::Website::Permalink::Paper,

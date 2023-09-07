@@ -24,7 +24,7 @@ namespace :communication do
         get :children
         get :static
         get :preview
-        get "translate" => "websites/pages#translate", as: :translate
+        get 'translate' => "websites/pages#translate", as: :translate
         post :duplicate
         post :publish
         post :connect
@@ -52,6 +52,15 @@ namespace :communication do
         get :preview
         post :duplicate
         post :publish
+      end
+    end
+    namespace :agenda do
+      resources :events, controller: '/admin/communication/websites/agenda/events', path: '/:lang/events' do
+        member do
+          get :static
+          post :duplicate
+          post :publish
+        end
       end
     end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do

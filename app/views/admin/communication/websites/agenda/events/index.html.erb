@@ -1,0 +1,18 @@
+<% content_for :title, Communication::Website::Agenda::Event.model_name.human(count: 2) %>
+
+
+<% content_for :title_right do %>
+  <%= @events.total_count %>
+  <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
+<% end %>
+
+<%= render 'admin/communication/websites/sidebar' do %>
+  <% 
+  title = Communication::Website::Agenda::Event.model_name.human(count: 2)
+  action = create_link Communication::Website::Agenda::Event 
+  %>
+  <%= osuny_panel title, action: action do %>
+    <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
+    <%= paginate @events, theme: 'bootstrap-5' %>
+  <% end %>
+<% end %>

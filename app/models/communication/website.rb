@@ -7,6 +7,8 @@
 #  access_token            :string
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
+#  feature_agenda          :boolean          default(FALSE)
+#  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
 #  git_endpoint            :string
 #  git_provider            :integer          default("github")
@@ -89,6 +91,7 @@ class Communication::Website < ApplicationRecord
     configs +
     pages.where(language_id: language_ids) +
     posts.where(language_id: language_ids) +
+    events.where(language_id: language_ids) +
     categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
     [about]

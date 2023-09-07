@@ -4,11 +4,13 @@ class Ability::WebsiteManager < Ability
     super
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
     can :create, Communication::Block
     can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
     can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
     can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
     can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
     can :create, Communication::Block::Heading
@@ -35,4 +37,9 @@ class Ability::WebsiteManager < Ability
   def managed_posts_ids
     @managed_posts_ids ||= Communication::Website::Post.where(communication_website_id: managed_websites_ids).pluck(:id)
   end
+
+  def managed_events_ids
+    @managed_events_ids ||= Communication::Website::Agenda::Event.where(communication_website_id: managed_websites_ids).pluck(:id)
+  end
+
 end
