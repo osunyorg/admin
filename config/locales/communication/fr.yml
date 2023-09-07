@@ -719,6 +719,9 @@ fr:
             tab: Organiser le plan
             description: Dans le mode “Organiser le plan”, vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.
       website:
+        agenda:
+          events:
+            none: Pas encore d'événements
         pages:
           as_list: Voir en liste
           as_tree: Organiser l'arborescence
