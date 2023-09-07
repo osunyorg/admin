@@ -138,8 +138,9 @@ en:
         created_at: Creation
         default_language: Default language
         deployment_status_badge: Deployment status badge
-        feature_posts: Website with posts
-        feature_agenda: Website with agenda
+        features: Features
+        feature_posts: Posts
+        feature_agenda: Agenda
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider

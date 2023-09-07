@@ -7,8 +7,10 @@
       <%= osuny_panel t('metadata') do %>
         <%= f.input :name %>
         <%= f.input :url %>
-        <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
         <%= f.input :in_production %>
+        <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
+      <% end %>
+      <%= osuny_panel Communication::Website.human_attribute_name('features') do %>
         <%= f.input :feature_posts %>
         <%= f.input :feature_agenda %>
       <% end %>
