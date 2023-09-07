@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <% events.each do |event| %>
-          <tr <% unless event.published? %>class="draft"<% end %>>
+          <tr class="<% 'draft' unless event.published? %>">
             <td class="ps-0">
               <%= link_to event,
                           admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id),

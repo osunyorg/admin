@@ -8,6 +8,7 @@
         <%= f.input :title %>
         <%= render 'admin/application/summary/form', f: f, about: event %>
       <% end %>
+      <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>
       <div class="row pure__row--small">
         <div class="col-md-6">
           <%= f.input :from_day, html5: true %>
@@ -24,11 +25,8 @@
           <%= f.input :to_hour, html5: true %>
         </div>
       </div>
-      <div class="row pure__row--small">
-        <div class="col-md-6">
-          <%= render 'admin/application/meta_description/form', f: f, about: event %>
-        </div>
-      </div>
+      <% end %>
+      <%= render 'admin/application/meta_description/form', f: f, about: event %>
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
