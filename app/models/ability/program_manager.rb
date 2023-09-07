@@ -20,7 +20,8 @@ class Ability::ProgramManager < Ability
     cannot :create, Education::Program
     can :manage, University::Person, university_id: @user.university_id
     can :manage, University::Person::Involvement, target_type: "Education::Program", target_id: managed_programs_ids
-    can :manage, University::Role, target_type: "Education::Program", target_id: managed_programs_ids  end
+    can :manage, University::Role, target_type: "Education::Program", target_id: managed_programs_ids
+  end
 
   protected
 
