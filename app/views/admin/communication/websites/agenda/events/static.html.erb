@@ -12,7 +12,7 @@ dates:
     hour: <%= @about.from_hour.strftime "%H:%M" %>
 <% end %>
   to:
-    day: <%= @about.to_day %>
+    day: <%= @about.to_day || @about.from_day%>
 <% if @about.to_hour %>
     hour: <%= @about.to_hour.strftime "%H:%M" %>
 <% end %>
