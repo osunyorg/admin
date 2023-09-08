@@ -41,5 +41,10 @@
               target: :_blank,
               class: 'btn btn-light btn-xs' if @page.published %>
   <%= preview_link %>
-  <%= link_to t('edit'), edit_admin_communication_website_page_path(@page), class: button_classes %>
+  <%= link_to t('edit'), 
+              edit_admin_communication_website_page_path(@page), 
+              class: button_classes 
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path 
+              %>
+  <%= publish_link @page %>
 <% end %>

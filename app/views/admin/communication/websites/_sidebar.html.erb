@@ -2,32 +2,41 @@
   <div class="col-lg-3">
     <ul class="list-unstyled" role="tablist">
       <%
-      navigation = [
-        {
-          title: Communication::Website.model_name.human,
-          path: admin_communication_website_path(id: @website, website_id: nil),
-          icon: Icon::COMMUNICATION_WEBSITE_HOME,
-          ability: can?(:read, @website)
-        },
-        {
-          title: Communication::Website::Post.model_name.human(count: 2),
-          path: admin_communication_website_posts_path(website_id: @website),
-          icon: Icon::COMMUNICATION_WEBSITE_POST,
-          ability: can?(:read, Communication::Website::Post)
-        },
-        {
-          title: t('admin.communication.website.pages.structure'),
-          path: admin_communication_website_pages_path(website_id: @website),
-          icon: Icon::COMMUNICATION_WEBSITE_PAGES,
-          ability: can?(:read, Communication::Website::Page)
-        },
-        {
-          title: Communication::Website::Menu.model_name.human(count: 2),
-          path: admin_communication_website_menus_path(website_id: @website),
-          icon: Icon::COMMUNICATION_WEBSITE_MENUS,
-          ability: can?(:read, Communication::Website::Category)
-        }
-      ]
+      navigation = []
+      navigation << {
+        title: Communication::Website.model_name.human,
+        path: admin_communication_website_path(id: @website, website_id: nil),
+        icon: Icon::COMMUNICATION_WEBSITE_HOME,
+        ability: can?(:read, @website)
+      }
+      
+      navigation << {
+        title: Communication::Website::Post.model_name.human(count: 2),
+        path: admin_communication_website_posts_path(website_id: @website),
+        icon: Icon::COMMUNICATION_WEBSITE_POST,
+        ability: can?(:read, Communication::Website::Post)
+      } if @website.feature_posts
+
+      navigation << {
+        title: Communication::Website::Agenda.model_name.human(count: 2),
+        path: admin_communication_website_agenda_events_path(website_id: @website),
+        icon: Icon::COMMUNICATION_WEBSITE_AGENDA,
+        ability: can?(:read, Communication::Website::Agenda::Event)
+      } if @website.feature_agenda
+
+      navigation << {
+        title: t('admin.communication.website.pages.structure'),
+        path: admin_communication_website_pages_path(website_id: @website),
+        icon: Icon::COMMUNICATION_WEBSITE_PAGES,
+        ability: can?(:read, Communication::Website::Page)
+      }
+
+      navigation << {
+        title: Communication::Website::Menu.model_name.human(count: 2),
+        path: admin_communication_website_menus_path(website_id: @website),
+        icon: Icon::COMMUNICATION_WEBSITE_MENUS,
+        ability: can?(:read, Communication::Website::Category)
+      }
 
       navigation << {
         title: t('communication.website.analytics'),

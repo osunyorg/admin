@@ -24,8 +24,9 @@ namespace :communication do
         get :children
         get :static
         get :preview
-        get "translate" => "websites/pages#translate", as: :translate
+        get 'translate' => "websites/pages#translate", as: :translate
         post :duplicate
+        post :publish
         post :connect
         post :disconnect
         post 'generate-from-template' => 'websites/pages#generate_from_template', as: :generate
@@ -44,12 +45,22 @@ namespace :communication do
     resources :posts, controller: 'websites/posts', path: '/:lang/posts' do
       collection do
         resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
-        post :publish
+        post :publish_batch
       end
       member do
         get :static
         get :preview
         post :duplicate
+        post :publish
+      end
+    end
+    namespace :agenda do
+      resources :events, controller: '/admin/communication/websites/agenda/events', path: '/:lang/events' do
+        member do
+          get :static
+          post :duplicate
+          post :publish
+        end
       end
     end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do

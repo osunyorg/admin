@@ -75,6 +75,10 @@ class Communication::Block::Heading < ApplicationRecord
     end
   end
 
+  def full_text
+    to_s
+  end
+
   def to_s
     "#{title}"
   end

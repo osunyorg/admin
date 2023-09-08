@@ -1,0 +1,21 @@
+---
+title: "<%= @about.title %>"
+dates:
+  from:
+    day: <%= @about.from_day %>
+<% if @about.from_hour %>
+    hour: <%= @about.from_hour.strftime "%H:%M" %>
+<% end %>
+  to:
+    day: <%= @about.to_day %>
+<% if @about.to_hour %>
+    hour: <%= @about.to_hour.strftime "%H:%M" %>
+<% end %>
+<%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
+<%= render 'admin/application/i18n/static' %>
+<%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
+---

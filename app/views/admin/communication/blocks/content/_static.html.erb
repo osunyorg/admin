@@ -1,6 +1,11 @@
 <%
 @university = about.university
+I18n.locale = about.language.iso_code if about.respond_to?(:language)
 %>
+contents_reading_time:
+  seconds: <%= about.contents_full_text.reading_time %>
+  text: >-
+    <%= distance_of_time_in_words(0, about.contents_full_text.reading_time) %>
 contents:
 <% about.blocks.without_heading.published.ordered.each do |block| %>
 <%= render 'admin/communication/blocks/static', block: block %>

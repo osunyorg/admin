@@ -5,7 +5,9 @@
                   class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
         <%= render 'admin/application/tree/folder' %>
       <% end %>
-      <span class="leaf-title"><%= page %></span>
+      <span class="leaf-title">
+        <%= link_to page, admin_communication_website_page_path(page) %>
+      </span>
       <%= render 'admin/application/tree/sort' unless page.is_home? %>
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone small ps-2', remote: true do %>
@@ -14,11 +16,8 @@
       <% end %>
       <div class="ms-auto align-items-center" role="group">
         <% if page.is_special_page? %>
-          <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></span>
+          <span class="show-on-hover"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></span>
         <% end %>
-      </div>
-      <div class="btn-group">
-        <%= link_to t('admin.communication.website.pages.show'), admin_communication_website_page_path(page), class: 'action' %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, page) %> ms-4" data-id="<%= page.id %>">

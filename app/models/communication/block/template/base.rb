@@ -126,6 +126,21 @@ class Communication::Block::Template::Base
     hash
   end
 
+  def full_text
+    unless @full_text
+      @full_text = ''
+      components.each do |component|
+        @full_text += "#{component.full_text}\r"
+      end
+      if has_element_class?
+        elements.each do |element|
+          @full_text += "#{element.full_text}\r"
+        end
+      end
+    end
+    @full_text
+  end
+
   def to_s
     self.class.to_s.demodulize
   end

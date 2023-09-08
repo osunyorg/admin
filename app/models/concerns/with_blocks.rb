@@ -14,9 +14,14 @@ module WithBlocks
       end
       headings.ordered.each do |heading|
         @contents << heading
+        @contents.concat heading.blocks
       end
     end
     @contents
+  end
+
+  def contents_full_text
+    @contents_full_text ||= contents.collect(&:full_text).join("\r")
   end
 
   # Basic rule is: TOC if 2 titles or more
