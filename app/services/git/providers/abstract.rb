@@ -1,11 +1,12 @@
 class Git::Providers::Abstract
-  attr_reader :endpoint, :branch, :access_token, :repository
+  attr_reader :git_repository, :endpoint, :branch, :access_token, :repository
 
-  def initialize(endpoint, branch, access_token, repository)
-    @endpoint = endpoint
-    @branch = branch
-    @access_token = access_token
-    @repository = repository
+  def initialize(git_repository)
+    @git_repository = git_repository
+    @endpoint = git_repository.website.git_endpoint
+    @branch = git_repository.website.git_branch
+    @access_token = git_repository.website.access_token
+    @repository = git_repository.website.repository
   end
 
   def valid?
