@@ -1,14 +1,14 @@
-class NotificationMailerPreview < ActionMailer::Preview
+class NotificationMailerPreview < BaseMailerPreview
   def import
-    NotificationMailer.import(Import.last)
+    NotificationMailer.import(organizations_import)
   end
 
-  # def emergency_message
-  #   NotificationMailer.emergency_message(EmergencyMessage.last, User.last, 'fr')
-  # end
+  def emergency_message
+    NotificationMailer.emergency_message(sample_emergency_message, user, 'fr')
+  end
 
-  # def website_invalid_access_token
-  #   NotificationMailer.website_invalid_access_token(Communication::Website.last, User.last)
-  # end
+  def website_invalid_access_token
+    NotificationMailer.website_invalid_access_token(website, user)
+  end
 
 end

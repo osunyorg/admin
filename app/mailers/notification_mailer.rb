@@ -23,8 +23,8 @@ class NotificationMailer < ApplicationMailer
 
   def website_invalid_access_token(website, user)
     @website = website
-    @url = edit_admin_communication_website_path(website)
-    merge_with_university_infos(user.university, {})
+    merge_with_university_infos(@website.university, {})
+    @url = edit_admin_communication_website_url(@website)
     I18n.locale = user.language.iso_code
     subject = t('mailers.notifications.website_invalid_access_token.subject', website: website)
     mail(from: user.university.mail_from[:full], to: user.email, subject: subject)
