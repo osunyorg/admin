@@ -30,6 +30,10 @@ class ActiveSupport::TestCase
     @website_with_github ||= communication_websites(:website_with_github)
   end
 
+  def website_with_gitlab
+    @website_with_gitlab ||= communication_websites(:website_with_gitlab)
+  end
+
   def default_school
     @default_school ||= education_schools(:default_school)
   end

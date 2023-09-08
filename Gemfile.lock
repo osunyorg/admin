@@ -182,7 +182,7 @@ GEM
     delayed_job_active_record (4.1.7)
       activerecord (>= 3.0, < 8.0)
       delayed_job (>= 3.0, < 5)
-    delayed_job_prevent_duplicate (0.1.1)
+    delayed_job_prevent_duplicate (0.1.3)
       delayed_job (>= 3.0, < 5)
     delayed_job_web (1.4.4)
       activerecord (> 3.0.0)
