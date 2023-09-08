@@ -17,6 +17,12 @@ GIT
       randexp
       rotp (>= 4.0.0)
 
+PATH
+  remote: ../delayed_job_prevent_duplicate
+  specs:
+    delayed_job_prevent_duplicate (0.1.0)
+      delayed_job (>= 3.0, < 5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -181,8 +187,6 @@ GEM
       activesupport (>= 3.0, < 8.0)
     delayed_job_active_record (4.1.7)
       activerecord (>= 3.0, < 8.0)
-      delayed_job (>= 3.0, < 5)
-    delayed_job_prevent_duplicate (0.1.0)
       delayed_job (>= 3.0, < 5)
     delayed_job_web (1.4.4)
       activerecord (> 3.0.0)
@@ -601,7 +605,7 @@ DEPENDENCIES
   csl-styles (~> 2.0)
   curation
   delayed_job_active_record
-  delayed_job_prevent_duplicate
+  delayed_job_prevent_duplicate!
   delayed_job_web
   devise
   devise-i18n
