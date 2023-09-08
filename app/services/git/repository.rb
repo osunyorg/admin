@@ -48,10 +48,7 @@ class Git::Repository
   protected
 
   def provider
-    @provider ||= provider_class.new  website&.git_endpoint,
-                                      website&.git_branch,
-                                      website&.access_token,
-                                      website&.repository
+    @provider ||= provider_class.new self
   end
 
   def provider_class

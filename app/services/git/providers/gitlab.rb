@@ -63,6 +63,17 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     sha
   end
 
+  def valid?
+    return false unless super
+    begin
+      client.project(repository)
+      true
+    rescue Gitlab::Error::Unauthorized
+      git_repository.website.invalidate_access_token!
+      false
+    end
+  end
+
   def branch
     super.present?  ? super
                     : 'main'
@@ -76,7 +87,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def client
-    @client ||= Gitlab.client(
+    @client ||= Gitlab.client(
       endpoint: endpoint,
       private_token: access_token
     )

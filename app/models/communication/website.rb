@@ -49,6 +49,7 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithImport
   include WithLanguages
+  include WithManagers
   include WithProgramCategories
   include WithReferences
   include WithSpecialPages

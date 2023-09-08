@@ -86,6 +86,17 @@ class Git::Providers::Github < Git::Providers::Abstract
     nil
   end
 
+  def valid?
+    return false unless super
+    begin
+      client.repository(repository)
+      true
+    rescue Octokit::Unauthorized
+      git_repository.website.invalidate_access_token!
+      false
+    end
+  end
+
   protected
 
   def client
