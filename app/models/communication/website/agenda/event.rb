@@ -90,6 +90,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                     : from_day < Date.today
   end
 
+  # Un événement demain aura une distance de 1, comme un événement hier
+  # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
+  def distance_in_days
+    (Date.today - from_day).to_i.abs
+  end
+
   def git_path(website)
     return unless website.id == communication_website_id && published
     "#{git_path_content_prefix(website)}events/#{from_day.year}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"

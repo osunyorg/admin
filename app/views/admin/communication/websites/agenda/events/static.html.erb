@@ -16,6 +16,7 @@ dates:
 <% if @about.to_hour %>
     hour: <%= @about.to_hour.strftime "%H:%M" %>
 <% end %>
+weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
 <%= render 'admin/application/i18n/static' %>
