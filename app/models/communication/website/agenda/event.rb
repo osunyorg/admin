@@ -60,7 +60,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :ordered, -> { order(from_day: :desc, from_hour: :desc) }
   scope :recent, -> { ordered.limit(5) }
 
-  validates_presence_of :from_day
+  validates_presence_of :from_day, :title
+  validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
 
   STATUS_FUTURE = 'future'
   STATUS_PRESENT = 'present'
@@ -115,5 +116,16 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def to_day_after_from_day
+    errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
+  end
+
+  def to_hour_after_from_hour_on_same_day
+    return if from_day != to_day
+    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour < from_hour
   end
 end

@@ -233,6 +233,12 @@ en:
             languages:
               must_include_default: must include at least the default language
               too_short: must include at least one
+        communication/website/agenda/event:
+          attributes:
+            to_day:
+              too_soon: must be after "from day"
+            to_hour:
+              too_soon: must be after "from hour"
   admin:
     communication:
       blocks:
