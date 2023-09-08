@@ -155,6 +155,7 @@ en:
         featured_image: Featured image
         from_day: From day
         from_hour: From hour
+        published: Published
         title: Title
         to_day: To day
         to_hour: To hour
@@ -806,6 +807,9 @@ en:
           communication_agenda:
             slug: agenda
             title: Agenda
+          communication_agenda_archive:
+            slug: archives
+            title: Archives
           education_diploma:
             slug: diplomas
             title: Diplomas

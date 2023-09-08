@@ -155,6 +155,7 @@ fr:
         featured_image: Image à la une
         from_day: Jour de début
         from_hour: Heure de début
+        published: Publié
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
@@ -803,6 +804,9 @@ fr:
           communication_agenda:
             slug: agenda
             title: Agenda
+          communication_agenda_archive:
+            slug: archives
+            title: Archives
           education_diploma:
             slug: diplomes
             title: "Diplômes"

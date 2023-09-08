@@ -98,7 +98,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def git_path(website)
     return unless website.id == communication_website_id && published
-    "#{git_path_content_prefix(website)}events/#{from_day.year}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path = "#{git_path_content_prefix(website)}events/"
+    path += "archives/#{from_day.year}/" if archive?
+    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path
   end
 
   def template_static
