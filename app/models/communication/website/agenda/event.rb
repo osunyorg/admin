@@ -128,4 +128,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     return if from_day != to_day
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour < from_hour
   end
+
+  def explicit_blob_ids
+    super.concat [featured_image&.blob_id]
+  end
 end
