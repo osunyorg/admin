@@ -182,6 +182,8 @@ GEM
     delayed_job_active_record (4.1.7)
       activerecord (>= 3.0, < 8.0)
       delayed_job (>= 3.0, < 5)
+    delayed_job_prevent_duplicate (0.1.1)
+      delayed_job (>= 3.0, < 5)
     delayed_job_web (1.4.4)
       activerecord (> 3.0.0)
       delayed_job (> 2.0.3)
@@ -335,7 +337,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
-    minitest (5.19.0)
+    minitest (5.20.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
@@ -599,6 +601,7 @@ DEPENDENCIES
   csl-styles (~> 2.0)
   curation
   delayed_job_active_record
+  delayed_job_prevent_duplicate
   delayed_job_web
   devise
   devise-i18n
