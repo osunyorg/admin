@@ -4,4 +4,8 @@ class Communication::Block::Component::String < Communication::Block::Component:
     @data = Osuny::Sanitizer.sanitize value, 'string'
   end
 
+  def full_text
+    data
+  end
+
 end

@@ -6,4 +6,8 @@ class Communication::Block::Component::RichText < Communication::Block::Componen
     @data = value
   end
 
+  def full_text
+    ActionController::Base.helpers.strip_tags data
+  end
+
 end

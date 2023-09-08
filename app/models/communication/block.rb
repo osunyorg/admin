@@ -146,6 +146,10 @@ class Communication::Block < ApplicationRecord
     translation.save
   end
 
+  def full_text
+    template.full_text
+  end
+
   def to_s
     title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"
