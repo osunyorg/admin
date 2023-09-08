@@ -60,18 +60,72 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :ordered, -> { order(from_day: :desc, from_hour: :desc) }
   scope :recent, -> { ordered.limit(5) }
 
-  validates_presence_of :from_day
+  validates_presence_of :from_day, :title
+  validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
+
+  STATUS_FUTURE = 'future'
+  STATUS_PRESENT = 'present'
+  STATUS_ARCHIVE = 'archive'
+
+  def status
+    if future?
+      STATUS_FUTURE
+    elsif present?
+      STATUS_PRESENT
+    else
+      STATUS_ARCHIVE
+    end
+  end
+
+  def future?
+    from_day > Date.today
+  end
+
+  def present?
+    to_day.present? ? (from_day >= Date.today && to_day <= Date.today)
+                    : from_day == Date.today
+  end
+
+  def archive?
+    to_day.present? ? to_day < Date.today
+                    : from_day < Date.today
+  end
+
+  # Un événement demain aura une distance de 1, comme un événement hier
+  # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
+  def distance_in_days
+    (Date.today - from_day).to_i.abs
+  end
 
   def git_path(website)
     return unless website.id == communication_website_id && published
-    "#{git_path_content_prefix(website)}events/#{from_day.year}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path = "#{git_path_content_prefix(website)}events/"
+    path += "archives/#{from_day.year}/" if archive?
+    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path
   end
 
   def template_static
     "admin/communication/websites/agenda/events/static"
   end
 
+  def dependencies
+    active_storage_blobs +
+    blocks
+  end
+
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def to_day_after_from_day
+    errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
+  end
+
+  def to_hour_after_from_hour_on_same_day
+    return if from_day != to_day
+    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour < from_hour
   end
 end

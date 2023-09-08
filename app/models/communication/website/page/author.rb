@@ -58,6 +58,4 @@ class Communication::Website::Page::Author < Communication::Website::Page
   def default_parent
     website.special_page(Communication::Website::Page::Person, language: language)
   end
-
-
 end

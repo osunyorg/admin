@@ -10,6 +10,7 @@ module Communication::Website::Page::WithType
       # Global objects
       Communication::Website::Page::CommunicationPost,
       Communication::Website::Page::CommunicationAgenda,
+      Communication::Website::Page::CommunicationAgendaArchive,
       Communication::Website::Page::Person,
       Communication::Website::Page::Organization,
       # Education
