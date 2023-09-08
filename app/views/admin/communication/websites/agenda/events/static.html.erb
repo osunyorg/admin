@@ -4,8 +4,10 @@ dates:
   status: "<%= @about.status %>"
   archive: <%= @about.archive? %>
   computed:
-    short: <%= date_range_i18n(@about.from_day, @about.to_day) %>
-    long: <%= date_range_i18n(@about.from_day, @about.to_day, :long) %>
+    short: >-
+      <%= date_range_i18n(@about.from_day, @about.to_day) %>
+    long: >-
+      <%= date_range_i18n(@about.from_day, @about.to_day, :long) %>
   from:
     day: <%= @about.from_day %>
 <% if @about.from_hour %>
