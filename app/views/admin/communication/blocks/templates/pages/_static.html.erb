@@ -7,6 +7,23 @@
       layout: <%= block.template.layout %>
       pages:
 <% block.template.selected_pages.each do |element| %>
-        - page: <%= element.path %>
-          slug: <%= element.path %>
+        - page: "<%= element.path %>"
+          data:
+            title: >-
+              <%= prepare_text_for_static element.title %>
+            summary: >-
+              <%= prepare_text_for_static element.summary, 7 %>
+            url: "<%= element.path %>"
+            bodyclass: >-
+              <%= prepare_text_for_static element.bodyclass, 7 %>
+<% if element.best_featured_image.attached?%>
+            image:
+              id: "<%= element.best_featured_image.id %>"
+              alt: >-
+                <%= prepare_text_for_static element.best_featured_image_alt, 7 %>
+              credit: >-
+                <%= prepare_html_for_static element.best_featured_image_credit, @website.university %>
+<% end %>
+
+
 <% end %>
