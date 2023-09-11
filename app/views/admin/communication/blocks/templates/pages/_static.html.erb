@@ -15,6 +15,7 @@
             <%= prepare_text_for_static element.title %>
           summary: >-
             <%= prepare_text_for_static element.summary, 6 %>
+          slug: "<%= element.slug %>"
           path: "<%= element.path %>"
           url: "<%= element.current_permalink_in_website(@website)&.path %>"
           bodyclass: >-

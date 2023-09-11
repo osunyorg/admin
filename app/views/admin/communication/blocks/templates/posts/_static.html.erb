@@ -14,6 +14,7 @@
             <%= prepare_text_for_static element.title %>
           summary: >-
             <%= prepare_text_for_static element.summary, 6 %>
+          slug: "<%= element.slug %>"
           path: "<%= element.path %>"
           url: "<%= element.current_permalink_in_website(@website)&.path %>"
 <% if element.best_featured_image.attached? %>
@@ -28,6 +29,7 @@
 <% element.categories.each do |category| %>
             - title: >-
                 <%= prepare_text_for_static category.name, 8 %>
+              slug: "<%= category.slug %>"
               path: "<%= category.path %>"
               url: "<%= category.current_permalink_in_website(@website)&.path %>"
 <% end %>
@@ -35,7 +37,7 @@
           author:
             name: >-  
               <%= prepare_text_for_static element.author.name, 7 %>
-            path: "<%= element.author.slug %>"
+            slug: "<%= element.author.slug %>"
             url: "<%= element.author.current_permalink_in_website(@website)&.path %>"
 <% end %>
 <% end %>

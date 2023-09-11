@@ -18,7 +18,7 @@
             <%= prepare_text_for_static element.name %>
 <% if element.organization %>
           kind: "osuny"
-          path: "<%= element.organization.slug %>"
+          slug: "<%= element.organization.slug %>"
           url: "<%= element.organization.current_permalink_in_website(@website)&.path %>"
           logo:
 <% if element.organization.logo.attached? %>
