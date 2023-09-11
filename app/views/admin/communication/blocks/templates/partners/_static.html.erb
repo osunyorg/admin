@@ -12,3 +12,29 @@
           logo: "<%= element.logo_component.blob&.id %>"
 <% end %>
 <% end %>
+      elements:
+<% block.template.elements.each do |element| %>
+        - title: >-
+            <%= prepare_text_for_static element.name %>
+<% if element.organization %>
+          kind: "osuny"
+          path: "<%= element.organization.slug %>"
+          url: "<%= element.organization.current_permalink_in_website(@website)&.path %>"
+          logo:
+<% if element.organization.logo.attached? %>
+            light_background: 
+              id: "<%= element.organization.logo.blob.id %>"
+<% end %>
+<% if element.organization.logo_on_dark_background.attached? %>
+            dark_background: 
+              id: "<%= element.organization.logo_on_dark_background.blob.id %>"
+<% end %>
+<% else %>
+          kind: "external"
+          url: "<%= element.url %>"
+<% if element.logo_component.blob %>
+          logo: 
+            id: "<%= element.logo_component.blob&.id %>"
+<% end %>
+<% end %>
+<% end %>
