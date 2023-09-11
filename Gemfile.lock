@@ -277,7 +277,9 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n_data (0.17.1)
       simple_po_parser (~> 1.1)
-    i18n_date_range (0.1.0)
+    i18n_date_range (0.2.1)
+      rails
+      rails-i18n
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -618,7 +620,7 @@ DEPENDENCIES
   has_scope (~> 0.8.0)
   hash_dot
   i18n_data (~> 0.17.1)
-  i18n_date_range (~> 0.1.0)
+  i18n_date_range
   image_processing
   jbuilder
   jquery-rails
