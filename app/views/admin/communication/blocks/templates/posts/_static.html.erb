@@ -8,3 +8,34 @@
 <% block.template.selected_posts.each do |post| %>
         - "<%= post.static_path %>"
 <% end %>
+      elements:
+<% block.template.selected_posts.each do |element| %>
+        - title: >-
+            <%= prepare_text_for_static element.title %>
+          summary: >-
+            <%= prepare_text_for_static element.summary, 6 %>
+          path: "<%= element.path %>"
+          url: "<%= element.current_permalink_in_website(@website)&.path %>"
+<% if element.best_featured_image.attached? %>
+          image:
+            id: "<%= element.best_featured_image.id %>"
+            alt: >-
+              <%= prepare_text_for_static element.best_featured_image_alt, 7 %>
+            credit: >-
+              <%= prepare_html_for_static element.best_featured_image_credit, @website.university %>
+<% end %>
+          categories:
+<% element.categories.each do |category| %>
+            - title: >-
+                <%= prepare_text_for_static category.name, 8 %>
+              path: "<%= category.path %>"
+              url: "<%= category.current_permalink_in_website(@website)&.path %>"
+<% end %>
+<% if element.author %>
+          author:
+            name: >-  
+              <%= prepare_text_for_static element.author.name, 7 %>
+            path: "<%= element.author.slug %>"
+            url: "<%= element.author.current_permalink_in_website(@website)&.path %>"
+<% end %>
+<% end %>
