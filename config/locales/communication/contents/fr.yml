@@ -51,6 +51,12 @@ fr:
         headings:
           add: Ajouter un titre
         templates:
+          agenda: 
+            description: Une liste d'événements à venir.
+            edit:
+              events_quantity:
+                label: Quantité d'événements à afficher
+                placeholder: Entrer la quantité
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
             edit:
@@ -492,6 +498,7 @@ fr:
     communication:
       block:
         template_kind:
+          agenda: Agenda
           call_to_action: Appel à actions
           chapter: Chapitre
           contact: Contact

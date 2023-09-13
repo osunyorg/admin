@@ -1,23 +1,6 @@
 ---
 title: "<%= @about.title %>"
-dates:
-  status: "<%= @about.status %>"
-  archive: <%= @about.archive? %>
-  computed:
-    short: >-
-      <%= date_range_i18n(@about.from_day, @about.to_day) %>
-    long: >-
-      <%= date_range_i18n(@about.from_day, @about.to_day, :long) %>
-  from:
-    day: <%= @about.from_day %>
-<% if @about.from_hour %>
-    hour: <%= @about.from_hour.strftime "%H:%M" %>
-<% end %>
-  to:
-    day: <%= @about.to_day || @about.from_day %>
-<% if @about.to_hour %>
-    hour: <%= @about.to_hour.strftime "%H:%M" %>
-<% end %>
+<%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
 weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
