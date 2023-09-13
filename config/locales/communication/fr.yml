@@ -149,6 +149,15 @@ fr:
         name: Nom
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
+        social: Réseaux sociaux
+        social_facebook: "Facebook (privatif, appartient à Meta)"
+        social_instagram: "Instagram (privatif, appartient à Meta)"
+        social_linkedin: "LinkedIn (privatif, appartient à Microsoft)"
+        social_mastodon: Mastodon (libre)
+        social_peertube: Peertube (libre)
+        social_vimeo: "Vimeo (privatif)"
+        social_x: "X, ex-Twitter (privatif)"
+        social_youtube: "Youtube (privatif, appartient à Google)"
         url: URL
       communication/website/agenda/event:
         dates: Dates

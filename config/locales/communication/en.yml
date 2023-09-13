@@ -149,6 +149,15 @@ en:
         name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
+        social: Social media
+        social_facebook: "Facebook (private, belongs to Meta)"
+        social_instagram: "Instagram (private, belongs to Meta)"
+        social_linkedin: "LinkedIn (private, belongs to Microsoft)"
+        social_mastodon: Mastodon (free)
+        social_peertube: Peertube (free)
+        social_vimeo: "Vimeo (private)"
+        social_x: "X, ex-Twitter (private)"
+        social_youtube: "Youtube (private, belongs to Google)"
         url: URL
       communication/website/agenda/event:
         dates: Dates
