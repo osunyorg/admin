@@ -82,13 +82,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def present?
-    to_day.present? ? (from_day >= Date.today && to_day <= Date.today)
+    to_day.present? ? (Date.today >= from_day && Date.today <= to_day)
                     : from_day == Date.today
   end
 
   def archive?
-    to_day.present? ? to_day < Date.today
-                    : from_day < Date.today
+    status == STATUS_ARCHIVE
   end
 
   # Un événement demain aura une distance de 1, comme un événement hier
