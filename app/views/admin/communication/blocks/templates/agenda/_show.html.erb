@@ -1,0 +1,45 @@
+<%
+class_name = "block block-agenda"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<div class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless block.title.blank? && block.template.description.blank? %>
+        <div class="top">
+          <% unless block.title.blank? %>
+            <p class="block-title"><%= block.title %></p>
+          <% end %>
+          <% unless block.template.description.blank? %>
+            <div class="description">
+              <p><%= block_component_show block, :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <div>
+        <% if block.data %>
+          <% block.template.selected_events.each do |event|
+            next if event.nil?
+          %>
+            <article class="event">
+                <h3><%= link_to event, '#' %></h3>
+                <p><%= event.summary %></p>
+                <div class="event-meta">
+                  <%= date_range_i18n(event.from_day, event.to_day) %>
+                </div>
+              </div>
+              <div class="media">
+                <% if event.best_featured_image.attached? %>
+                  <%= kamifusen_tag event.best_featured_image %>
+                <% end %>
+              </div>
+            </article>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

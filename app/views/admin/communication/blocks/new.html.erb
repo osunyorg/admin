@@ -1,4 +1,4 @@
-<% content_for :title, t('communication.block.choose_template') %>
+<% content_for :title, t('admin.communication.blocks.choose.title') %>
 
 <% Communication::Block::CATEGORIES.each do |category, kinds| %>
   <section class="blocks">
@@ -25,7 +25,7 @@
                   <%= f.input :about_type, as: :hidden %>
                   <%= f.input :about_id, as: :hidden %>
                   <%= f.input :template_kind, as: :hidden %>
-                  <%= f.submit t('communication.block.choose'), class: button_classes('stretched-link') %>
+                  <%= f.submit t('admin.communication.blocks.choose.button'), class: button_classes('stretched-link') %>
                 <% end %>
             </div>
           </div>

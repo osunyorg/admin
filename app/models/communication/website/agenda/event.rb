@@ -59,6 +59,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   scope :ordered, -> { order(from_day: :desc, from_hour: :desc) }
   scope :recent, -> { ordered.limit(5) }
+  scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
 
   validates_presence_of :from_day, :title
   validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day

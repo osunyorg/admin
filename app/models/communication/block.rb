@@ -61,33 +61,34 @@ class Communication::Block < ApplicationRecord
   # 3000 references
   # 4000 utilities
   enum template_kind: {
-    chapter: 50,
-    image: 51,
-    gallery: 300,
-    video: 52,
-    sound: 1005,
-    key_figures: 56,
-    features: 2010,
-    datatable: 54,
-    files: 55,
-    embed: 53,
+    agenda: 3100,
     call_to_action: 900,
-    testimonials: 400,
-    timeline: 700,
+    chapter: 50,
+    contact: 57,
+    datatable: 54,
     definitions: 800,
+    embed: 53,
+    features: 2010,
+    files: 55,
+    gallery: 300,
+    image: 51,
+    key_figures: 56,
+    license: 4040,
     organization_chart: 100,
+    pages: 600,
     partners: 200,
     posts: 500,
-    pages: 600,
-    contact: 57,
     programs: 58,
-    license: 4040
+    sound: 1005,
+    testimonials: 400,
+    timeline: 700,
+    video: 52,
   }
 
   CATEGORIES = {
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :organization_chart, :partners, :programs],
+    references: [:pages, :posts, :organization_chart, :partners, :agenda, :programs],
     utilities: [:files, :definitions, :contact, :license, :embed]
   }
 

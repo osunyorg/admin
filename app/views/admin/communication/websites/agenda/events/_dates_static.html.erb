@@ -1,0 +1,22 @@
+<%
+depth ||= 0
+indentation = '  ' * depth
+%>
+<%= indentation %>dates:
+<%= indentation %>  status: "<%= event.status %>"
+<%= indentation %>  archive: <%= event.archive? %>
+<%= indentation %>  computed:
+<%= indentation %>    short: >-
+<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day) %>
+<%= indentation %>    long: >-
+<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day, :long) %>
+<%= indentation %>  from:
+<%= indentation %>    day: <%= event.from_day %>
+<% if event.from_hour %>
+<%= indentation %>    hour: <%= event.from_hour.strftime "%H:%M" %>
+<% end %>
+<%= indentation %>  to:
+<%= indentation %>    day: <%= event.to_day || event.from_day %>
+<% if event.to_hour %>
+<%= indentation %>    hour: <%= event.to_hour.strftime "%H:%M" %>
+<% end %>

@@ -124,7 +124,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     short_breadcrumb
     add_breadcrumb @block.about, about_path
     if @block.new_record?
-      add_breadcrumb t('communication.block.choose_template')
+      add_breadcrumb t('admin.communication.blocks.choose.title')
     else
       add_breadcrumb @block
     end

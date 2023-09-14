@@ -11,7 +11,7 @@ class Communication::Block::Template::Program < Communication::Block::Template::
   end
 
   def allowed_for_about?
-    !website.nil?
+    website.present? && website.programs.any?
   end
 
   def available_programs
