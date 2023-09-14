@@ -4,3 +4,12 @@ external_domains:
 <% @website.external_domains.each do |domain| %>
   - "<%= domain %>"
 <% end %>
+social:
+<% 
+[:mastodon, :peertube, :x, :linkedin, :youtube, :vimeo, :instagram, :facebook, :tiktok].each do |network| 
+  value = @website.send "social_#{network}"
+  next if value.blank?
+%>
+  <%= network %>: >-
+    <%= value %>
+<% end %>

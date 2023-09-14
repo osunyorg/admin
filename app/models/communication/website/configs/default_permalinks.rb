@@ -16,6 +16,15 @@
 #  name                    :string
 #  plausible_url           :string
 #  repository              :string
+#  social_facebook         :string
+#  social_instagram        :string
+#  social_linkedin         :string
+#  social_mastodon         :string
+#  social_peertube         :string
+#  social_tiktok           :string
+#  social_vimeo            :string
+#  social_x                :string
+#  social_youtube          :string
 #  style                   :text
 #  style_updated_at        :date
 #  theme_version           :string           default("NA")

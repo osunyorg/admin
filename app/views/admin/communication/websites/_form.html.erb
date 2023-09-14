@@ -19,39 +19,46 @@
         <%= f.association :default_language, include_blank: t('simple_form.include_blanks.defaults.language'), input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
       <% end %>
     </div>
-    <div class="col-xl-8">
+    <div class="col-xl-4">
       <%= osuny_panel t('communication.website.git') do %>
-          <div class="row">
-            <div class="col-xl-6">
-              <%= f.input :autoupdate_theme %>
-              <%= f.input :git_provider, include_blank: false %>
-              <%= f.input :git_endpoint %>
-              <%= f.input :deployment_status_badge, 
-                          as: :string, 
-                          input_html: {
-                            autocomplete: 'deployment_status_badge',
-                            role: 'presentation'
-                          }
-                          %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :access_token, 
-                          as: :string, 
-                          placeholder: masked_string(f.object.access_token), 
-                          hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
-                          input_html: {
-                            autocomplete: 'access_token',
-                            role: 'presentation',
-                            value: ''
-                          }
-                          %>
-              <%= f.input :repository %>
-              <%= f.input :git_branch %>
-            </div>
-          </div>
+        <%= f.input :autoupdate_theme %>
+        <%= f.input :git_provider, include_blank: false %>
+        <%= f.input :git_endpoint %>
+        <%= f.input :deployment_status_badge, 
+                    as: :string, 
+                    input_html: {
+                      autocomplete: 'deployment_status_badge',
+                      role: 'presentation'
+                    }
+                    %>
+        <%= f.input :access_token, 
+                    as: :string, 
+                    placeholder: masked_string(f.object.access_token), 
+                    hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
+                    input_html: {
+                      autocomplete: 'access_token',
+                      role: 'presentation',
+                      value: ''
+                    }
+                    %>
+        <%= f.input :repository %>
+        <%= f.input :git_branch %>
       <% end %>
       <%= osuny_panel t('communication.website.analytics') do %>
         <%= f.input :plausible_url %>
+      <% end %>
+    </div>
+    <div class="col-xl-4">
+      <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
+        <%= f.input :social_mastodon %>
+        <%= f.input :social_peertube %>
+        <%= f.input :social_x %>
+        <%= f.input :social_linkedin %>
+        <%= f.input :social_youtube %>
+        <%= f.input :social_vimeo %>
+        <%= f.input :social_instagram %>
+        <%= f.input :social_facebook %>
+        <%= f.input :social_tiktok %>
       <% end %>
     </div>
   </div>
