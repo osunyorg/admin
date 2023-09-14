@@ -21,6 +21,7 @@
 #  social_linkedin         :string
 #  social_mastodon         :string
 #  social_peertube         :string
+#  social_tiktok           :string
 #  social_vimeo            :string
 #  social_x                :string
 #  social_youtube          :string
