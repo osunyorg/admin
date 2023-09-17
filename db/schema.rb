@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_14_101635) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_17_145029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -969,6 +969,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_101635) do
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
   end
 
+  create_table "university_apps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "university_id", null: false
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_university_apps_on_university_id"
+  end
+
   create_table "university_organization_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
@@ -1281,6 +1290,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_101635) do
   add_foreign_key "research_theses", "university_people", column: "author_id"
   add_foreign_key "research_theses", "university_people", column: "director_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
+  add_foreign_key "university_apps", "universities"
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organizations", "languages"
   add_foreign_key "university_organizations", "universities"

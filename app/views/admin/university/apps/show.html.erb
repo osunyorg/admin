@@ -1,0 +1,7 @@
+<% content_for :title, @app %>
+
+<%= @app.token %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @app %>
+<% end %>

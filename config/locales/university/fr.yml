@@ -24,6 +24,9 @@ fr:
         sso_target_url: URL cible
         url: 'URL'
         zipcode: Code postal
+      university/app:
+        name: Nom
+        token: Jeton secret
       university/organization:
         address: Adresse
         address_name: Nom de l'adresse
@@ -128,6 +131,9 @@ fr:
       university:
         one: Université
         other: Universités
+      university/app:
+        one: App
+        other: Apps
       university/person:
         one: Personne
         other: Personnes

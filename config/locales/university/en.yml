@@ -24,6 +24,9 @@ en:
         sso_target_url: Target URL
         url: URL
         zipcode: Zipcode
+      university/app:
+        name: Name
+        token: Secret token
       university/organization:
         address: Address
         address_name: Address name
@@ -128,6 +131,9 @@ en:
       university:
         one: University
         other: Universities
+      university/app:
+        one: App
+        other: Apps
       university/person:
         one: Person
         other: People

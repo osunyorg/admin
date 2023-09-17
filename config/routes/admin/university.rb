@@ -8,6 +8,7 @@ namespace :university do
       resources :imports, only: [:index, :show, :new, :create]
     end
   end
+  resources :apps
   resources :alumni, only: [:index, :show] do
     member do
       get 'cohorts' => 'alumni/cohorts#edit'
