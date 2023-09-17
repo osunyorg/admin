@@ -5,6 +5,9 @@ namespace :api do
     get 'communication' => 'communication#index'
     namespace :communication do
       get 'websites' => 'websites#index'
+      namespace :websites do
+        post ':website_id/posts' => 'posts#create'
+      end
     end
     get 'server' => 'server#index'
     namespace :server do

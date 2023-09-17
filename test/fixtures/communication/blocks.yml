@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  about_type               :string           indexed => [about_id]
 #  data                     :jsonb
+#  migration_identifier     :string
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(TRUE)
 #  template_kind            :integer          default(NULL), not null
