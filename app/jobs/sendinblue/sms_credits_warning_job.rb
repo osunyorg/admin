@@ -3,7 +3,8 @@ class Sendinblue::SmsCreditsWarningJob < ApplicationJob
 
   def perform
     return unless ENV['APPLICATION_ENV'] == 'production'
-    if Sendinblue.SmsService.low?
+    if Sendinblue::SmsService.low?
+      sms_credits = Sendinblue::SmsService.sms_credits
       # this message is sent to server_admins only, and server_admins are duplicated between all universities.
       # so we take the first university
       NotificationMailer.low_sms_credits(University.first, sms_credits).deliver_later

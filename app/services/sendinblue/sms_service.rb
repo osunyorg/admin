@@ -4,10 +4,13 @@ module Sendinblue
     SMS_CREDITS_LIMIT = 500
     
     def self.low?
+      sms_credits.present? && sms_credits < SMS_CREDITS_LIMIT  
+    end
+
+    def self.sms_credits
       api_instance = SibApiV3Sdk::AccountApi.new
       result = api_instance.get_account
-      sms_credits = result.plan.detect { |plan| plan.type == 'sms' }&.credits
-      sms_credits.present? && sms_credits < SMS_CREDITS_LIMIT  
+      result.plan.detect { |plan| plan.type == 'sms' }&.credits
     end
 
     def self.send_mfa_code(user, code)
