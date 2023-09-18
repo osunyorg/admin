@@ -4,19 +4,39 @@ module Sendinblue
     SMS_CREDITS_LIMIT = 500
     
     def self.low?
-      sms_credits.present? && sms_credits < SMS_CREDITS_LIMIT  
+      instance.low?
     end
 
     def self.sms_credits
-      api_instance = SibApiV3Sdk::AccountApi.new
-      result = api_instance.get_account
-      result.plan.detect { |plan| plan.type == 'sms' }&.credits
+      instance.sms_credits
     end
 
     def self.send_mfa_code(user, code)
       duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
       message = I18n.t('sms_code', code: code, context: user.registration_context, duration: duration)
       self.send_message(user, message)
+    end
+
+    def self.instance
+      @instance ||= new
+    end
+
+    def sms_credits
+      @sms_credits ||= plan.detect { |plan| plan.type == 'sms' }&.credits
+    end
+
+    def low?
+      sms_credits.present? && sms_credits < SMS_CREDITS_LIMIT  
+    end
+
+    protected
+
+    def plan
+      @plan ||= account_api.get_account.plan
+    end
+
+    def account_api
+      @account_api ||= SibApiV3Sdk::AccountApi.new
     end
 
     private
