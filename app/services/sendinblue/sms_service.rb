@@ -18,7 +18,19 @@ module Sendinblue
     end
 
     private
+<<<<<<< HEAD
     
+=======
+
+    def plan
+      @plan ||= account_api.get_account.plan
+    end
+
+    def account_api
+      @account_api ||= SibApiV3Sdk::AccountApi.new
+    end
+
+>>>>>>> 0ee9c064d968ee8f3586d530aec44d49aeef33af
     def self.send_message(user, message)
       sender_name = user.university.sms_sender_name
       sender_name ||= DEFAULT_SENDER_NAME
