@@ -3,22 +3,10 @@ module Sendinblue
     DEFAULT_SENDER_NAME = 'Osuny'.freeze
     SMS_CREDITS_LIMIT = 500
     
-    def self.low?
-      instance.low?
-    end
-
-    def self.sms_credits
-      instance.sms_credits
-    end
-
     def self.send_mfa_code(user, code)
       duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
       message = I18n.t('sms_code', code: code, context: user.registration_context, duration: duration)
       self.send_message(user, message)
-    end
-
-    def self.instance
-      @@instance ||= new
     end
 
     def sms_credits
