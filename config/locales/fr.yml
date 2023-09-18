@@ -156,6 +156,7 @@ fr:
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
   cookies_policy_url: https://www.osuny.org/politique-de-sobriete/
+  copy_of: Copie de %{title}
   create: Créer
   date:
     formats:
@@ -269,6 +270,10 @@ fr:
         text_line_3_html: "Nombre de lignes traitées : %{number}."
         text_error_msg: "Ligne %{line} : %{error}"
         text_errors_title: "Des erreurs sont survenues :"
+      low_sms_credits: 
+        body_1_html: "Attention, vos crédits SMS sont bas : %{credits} crédits restants !"
+        body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
+        subject: "Osuny - Credits SMS bas (%{credits})"
       website_invalid_access_token:
         subject: Jeton d'accès expiré pour « %{website} »
         text_line_1_html: Le jeton d'accès utilisé pour le site « %{website} » a expiré et ne permet plus la mise à jour du site.

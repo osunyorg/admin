@@ -156,6 +156,7 @@ en:
   cookies_consent_choice: Cookies consent choice
   cookies_policy: Cookies policy
   cookies_policy_url: https://www.osuny.org/politique-de-sobriete/
+  copy_of: Copy of %{title}
   create: Create
   date:
     formats:
@@ -269,6 +270,10 @@ en:
         text_line_3_html: "Number of lines in the file: %{number}."
         text_error_msg: "Line %{line}: %{error}"
         text_errors_title: "Some errors have occured:"
+      low_sms_credits: 
+        body_1_html: "Warning, your SMS credits are low: %{credits} credits remaining!"
+        body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to refull."
+        subject: "Osuny - Low SMS Credits (%{credits})"
       website_invalid_access_token:
         subject: "Expired access token for \"%{website}\""
         text_line_1_html: "The access token used for the website \"%{website}\" has expired and does not allow the website to be updated anymore."
