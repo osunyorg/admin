@@ -18,7 +18,7 @@ module Sendinblue
     end
 
     def self.instance
-      @instance ||= new
+      @@instance ||= new
     end
 
     def sms_credits
