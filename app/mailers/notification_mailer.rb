@@ -29,5 +29,13 @@ class NotificationMailer < ApplicationMailer
     subject = t('mailers.notifications.website_invalid_access_token.subject', website: website)
     mail(from: user.university.mail_from[:full], to: user.email, subject: subject)
   end
+  
+  def low_sms_credits(university, credits)
+    merge_with_university_infos(university, {})
+    @credits = credits.to_i
+    mails = university.users.server_admin.pluck(:email)
+    subject = t('mailers.notifications.low_sms_credits.subject', credits: @credits)
+    mail(from: university.mail_from[:full], to: mails, subject: subject)
+  end
 
 end
