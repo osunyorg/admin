@@ -17,7 +17,7 @@ module Sendinblue
       sms_credits.present? && sms_credits < SMS_CREDITS_LIMIT  
     end
 
-    protected
+    private
 
     def plan
       @plan ||= account_api.get_account.plan
@@ -26,8 +26,6 @@ module Sendinblue
     def account_api
       @account_api ||= SibApiV3Sdk::AccountApi.new
     end
-
-    private
 
     def self.send_message(user, message)
       sender_name = user.university.sms_sender_name
