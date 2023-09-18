@@ -3,8 +3,9 @@
 # Table name: university_apps
 #
 #  id            :uuid             not null, primary key
+#  access_key    :string
 #  name          :string
-#  token         :string
+#  secret_key    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed

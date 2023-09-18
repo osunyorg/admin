@@ -3,8 +3,9 @@
 # Table name: university_apps
 #
 #  id            :uuid             not null, primary key
+#  access_key    :string
 #  name          :string
-#  token         :string
+#  secret_key    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed
@@ -22,7 +23,7 @@ class University::App < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
 
-  before_validation :generate_token
+  before_validation :generate
 
   def to_s
     "#{name}"
@@ -30,7 +31,8 @@ class University::App < ApplicationRecord
 
   protected
 
-  def generate_token
-    self.token = SecureRandom.uuid if self.token.blank?
+  def generate
+    self.access_key = SecureRandom.uuid if self.access_key.blank?
+    self.secret_key = SecureRandom.uuid if self.secret_key.blank?
   end
 end

@@ -1,6 +1,15 @@
 <% content_for :title, @app %>
 
-<%= @app.token %>
+<div class="row">
+  <div class="col-lg-6">
+    <%= osuny_label University::App.human_attribute_name('access_key') %>
+    <input type="string" value="<%= @app.access_key %>" class="form-control" disabled>
+  </div>
+  <div class="col-lg-6">
+    <%= osuny_label University::App.human_attribute_name('secret_key') %>
+    <input type="string" value="<%= @app.secret_key %>" class="form-control" disabled>
+  </div>
+</div>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @app %>
