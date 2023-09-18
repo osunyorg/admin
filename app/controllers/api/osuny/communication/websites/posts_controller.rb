@@ -1,7 +1,7 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:import]
 
-  def create
+  def import
     verify_app_token
     create_post
     import_blocks
