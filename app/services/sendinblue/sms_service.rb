@@ -17,29 +17,19 @@ module Sendinblue
       sms_credits.present? && sms_credits < SMS_CREDITS_LIMIT  
     end
 
-    protected
-
-    def plan
-      @plan ||= account_api.get_account.plan
-    end
-
-    def account_api
-      @account_api ||= SibApiV3Sdk::AccountApi.new
-    end
-
     private
-
+    
     def self.send_message(user, message)
       sender_name = user.university.sms_sender_name
       sender_name ||= DEFAULT_SENDER_NAME
-
+      
       api_instance = SibApiV3Sdk::TransactionalSMSApi.new
       send_transac_sms = SibApiV3Sdk::SendTransacSms.new(
         sender: sender_name,
         recipient: user.mobile_phone,
         content: message
       )
-
+      
       begin
         # Send SMS message to a mobile number
         result = api_instance.send_transac_sms(send_transac_sms)
@@ -47,6 +37,14 @@ module Sendinblue
       rescue SibApiV3Sdk::ApiError => e
         puts "Exception when calling TransactionalSMSApi->send_transac_sms: #{e}"
       end
+    end
+
+    def plan
+      @plan ||= account_api.get_account.plan
+    end
+
+    def account_api
+      @account_api ||= SibApiV3Sdk::AccountApi.new
     end
   end
 end
