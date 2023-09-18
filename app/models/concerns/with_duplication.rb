@@ -12,6 +12,7 @@ module WithDuplication
 
   def duplicate_instance
     instance = self.dup
+    # note: fragile. It only works because every duplicate objects currently has a "title" property.
     instance.title = I18n.t('copy_of', title: self.title)
     instance.published = false if respond_to?(:published)
     instance.published_at = nil if respond_to?(:published_at)
