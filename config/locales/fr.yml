@@ -156,6 +156,7 @@ fr:
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
   cookies_policy_url: https://www.osuny.org/politique-de-sobriete/
+  copy_of: Copie de %{title}
   create: Créer
   date:
     formats:

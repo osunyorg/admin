@@ -12,6 +12,7 @@ module WithDuplication
 
   def duplicate_instance
     instance = self.dup
+    instance.title = I18n.t('copy_of', title: self.title)
     instance.published = false if respond_to?(:published)
     instance.published_at = nil if respond_to?(:published_at)
     instance.save
