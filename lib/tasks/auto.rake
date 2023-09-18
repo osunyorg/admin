@@ -14,4 +14,9 @@ namespace :auto do
     end
   end
 
+  desc 'Check SMS credits on SiB'
+  task sib_sms_credits: :environment do
+    Sendinblue::SmsCreditsWarningJob.perform_later
+  end
+
 end
