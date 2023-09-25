@@ -30,6 +30,12 @@ class University::App < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
 
+  def display_token!
+    return false if token_was_displayed?
+    update(token_was_displayed: true)
+    true
+  end
+
   def regenerate_token!
     update(token: nil, token_was_displayed: false)
   end

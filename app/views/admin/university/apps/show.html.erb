@@ -1,9 +1,13 @@
 <% content_for :title, @app %>
 
+<% if @should_display_token %>
+  <p class="text-danger"><%= t('university.apps.token_display_notice') %></p>
+<% end %>
+
 <div class="row">
   <div class="col-lg-6">
     <%= osuny_label University::App.human_attribute_name('token') %>
-    <input type="string" value="<%= @app.token %>" class="form-control" disabled>
+    <input type="string" value="<%= @should_display_token ? @app.token : masked_string(@app.token) %>" class="form-control" disabled>
   </div>
 </div>
 

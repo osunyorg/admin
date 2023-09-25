@@ -9,6 +9,7 @@ class Admin::University::AppsController < Admin::University::ApplicationControll
   end
 
   def show
+    @should_display_token = @app.display_token!
     breadcrumb
   end
 
