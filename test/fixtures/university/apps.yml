@@ -28,4 +28,4 @@ one:
 two:
   name: MyString
   university: two
-  token: MyString
+  token: MyOtherString
