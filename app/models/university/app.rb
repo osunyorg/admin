@@ -32,7 +32,7 @@ class University::App < ApplicationRecord
 
   def display_token!
     return false if token_was_displayed?
-    update(token_was_displayed: true)
+    toggle!(:token_was_displayed)
     true
   end
 
