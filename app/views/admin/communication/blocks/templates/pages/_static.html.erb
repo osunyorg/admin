@@ -8,6 +8,7 @@
       pages:
 <% block.template.selected_pages.each do |element| %>
         - page: "<%= element.path %>"
+          slug: "<%= element.path %>"
 <% end %>
       elements:
 <% block.template.selected_pages.each do |element| %>
