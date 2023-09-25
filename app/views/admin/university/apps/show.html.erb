@@ -11,6 +11,14 @@
   </div>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= link_to t('university.apps.regenerate_token'),
+              [:regenerate_token, :admin, @app],
+              method: :post,
+              data: { confirm: t('please_confirm') },
+              class: 'btn btn-warning btn-xs' %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= edit_link @app %>
 <% end %>
