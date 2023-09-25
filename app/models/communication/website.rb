@@ -7,6 +7,7 @@
 #  access_token            :string
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
+#  deuxfleurs_hosting      :boolean          default(FALSE)
 #  feature_agenda          :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
@@ -33,6 +34,7 @@
 #  updated_at              :datetime         not null
 #  about_id                :uuid             indexed => [about_type]
 #  default_language_id     :uuid             not null, indexed
+#  deuxfleurs_id           :string
 #  university_id           :uuid             not null, indexed
 #
 # Indexes
@@ -54,6 +56,7 @@ class Communication::Website < ApplicationRecord
   include WithConfigs
   include WithConnectedObjects
   include WithDependencies
+  include WithDeuxfleurs
   include WithGit
   include WithGitRepository
   include WithImport

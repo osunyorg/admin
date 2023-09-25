@@ -138,6 +138,8 @@ en:
         created_at: Creation
         default_language: Default language
         deployment_status_badge: Deployment status badge
+        deuxfleurs_hosting: Hébergement avec Deuxfleurs
+        deuxfleurs_id: Identifiant Deuxfleurs
         features: Features
         feature_posts: Posts
         feature_agenda: Agenda
@@ -296,6 +298,7 @@ en:
     website:
       analytics: Analytics
       git: Git
+      hosting: Hosting
       imported:
         from: Imported from
         launch: Launch import
