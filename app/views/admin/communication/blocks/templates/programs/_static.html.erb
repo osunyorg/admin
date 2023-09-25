@@ -3,3 +3,30 @@
 <% next unless element.program %>
         - path: "<%= element.program.path %>"
 <% end %>
+      elements:
+<% block.template.elements.each do |element| %>
+<% program = element.program %>
+<% next unless program %>
+        - title: >-
+            <%= prepare_text_for_static element.program.name %>
+          summary: >-
+            <%= prepare_text_for_static element.program.summary, 6 %>
+          slug: "<%= program.slug %>"
+          path: "<%= program.path %>"
+          url: "<%= program.current_permalink_in_website(@website)&.path %>"
+<% if program.best_featured_image.attached? %>
+          image:
+            id: "<%= program.best_featured_image.blob.id %>"
+            alt: >-
+              <%= prepare_text_for_static program.best_featured_image_alt, 7 %>
+            credit: >-
+              <%= prepare_html_for_static program.best_featured_image_credit, @website.university %>
+<% end %>
+<% diploma = program.diploma %>
+<% if diploma.present? %>
+          diploma:
+            - title: >-
+                <%= prepare_text_for_static diploma.name %>
+              slug: "<%= diploma.slug %>"
+              url: "<%= diploma.current_permalink_in_website(@website)&.path %>"<% end %>
+<% end %>
