@@ -10,7 +10,7 @@
 <%= render 'admin/communication/websites/agenda/events/dates_static', event: element, depth: 5 %>
 <% if element.best_featured_image.attached? %>
           image:
-            id: "<%= element.best_featured_image.id %>"
+            id: "<%= element.best_featured_image.blob.id %>"
             alt: >-
               <%= prepare_text_for_static element.best_featured_image_alt, 7 %>
             credit: >-
