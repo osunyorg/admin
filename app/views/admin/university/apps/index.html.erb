@@ -1,0 +1,14 @@
+<% content_for :title, University::App.model_name.human(count: 2) %>
+
+<%
+action = ''
+action += link_to t('create'),
+                  new_admin_university_app_path,
+                  class: button_classes if can?(:create, University::App)
+subtitle = t('admin.elements', count: @apps.total_count)
+%>
+<%= osuny_panel University::App.model_name.human(count: 2), subtitle: subtitle, action: action do %>
+  <%= render 'filters', current_path: admin_university_apps_path, filters: @filters if @filters.any?  %>
+  <%= render 'admin/university/apps/list', apps: @apps %>
+  <%= paginate @apps, theme: 'bootstrap-5' %>
+<% end %>

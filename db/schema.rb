@@ -976,10 +976,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_144224) do
   create_table "university_apps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "university_id", null: false
-    t.string "secret_key"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "access_key"
+    t.boolean "token_was_displayed", default: false
+    t.index ["token"], name: "index_university_apps_on_token", unique: true
     t.index ["university_id"], name: "index_university_apps_on_university_id"
   end
 

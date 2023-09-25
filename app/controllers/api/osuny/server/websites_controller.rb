@@ -1,4 +1,4 @@
-class Api::Osuny::Server::WebsitesController < Api::ApplicationController
+class Api::Osuny::Server::WebsitesController < Api::Osuny::ApplicationController
   skip_before_action :verify_authenticity_token, only: [:theme_released]
 
   def index

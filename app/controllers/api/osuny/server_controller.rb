@@ -1,4 +1,4 @@
-class Api::Osuny::ServerController < Api::ApplicationController
+class Api::Osuny::ServerController < Api::Osuny::ApplicationController
   def index
   end
 end
