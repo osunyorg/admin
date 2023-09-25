@@ -99,7 +99,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def references
-    posts + [parent] + siblings + website.menus
+    posts + [parent] + siblings + website.menus + abouts_with_post_block
   end
 
   def update_children_paths
@@ -140,5 +140,16 @@ class Communication::Website::Category < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  # Same as the Post object
+  def abouts_with_post_block
+    website.blocks.posts.collect(&:about)
+    # Potentiel gain de performance (25%)
+    # Méthode collect : X abouts = X requêtes
+    # Méthode ci-dessous : X abouts = 6 requêtes
+    # website.categories.where(id: website.blocks.posts.where(about_type: "Communication::Website::Category").distinct.pluck(:about_id)) +
+    # website.pages.where(id: website.blocks.posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
+    # website.posts.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
   end
 end
