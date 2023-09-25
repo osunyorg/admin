@@ -22,9 +22,11 @@
 one:
   name: MyString
   university: one
-  token: MyString
+  access_key: MyString
+  secret_key: MyString
 
 two:
   name: MyString
   university: two
-  token: MyString
+  access_key: MyString
+  secret_key: MyString
