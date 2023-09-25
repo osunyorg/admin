@@ -56,6 +56,7 @@ class University < ApplicationRecord
   # We use after_destroy to let the attachment go first
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
+  has_many :apps, dependent: :destroy
   belongs_to :default_language, class_name: "Language"
 
   validates_presence_of :name

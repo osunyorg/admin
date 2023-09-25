@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= University::App.human_attribute_name('name') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% apps.each do |app| %>
+        <tr>
+          <td><%= link_to app, admin_university_app_path(app) %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link app %>
+              <%= destroy_link app %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

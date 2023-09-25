@@ -6,6 +6,7 @@
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  meta_description         :text
+#  migration_identifier     :string
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
