@@ -4,8 +4,8 @@ module Communication::Website::WithDeuxfleurs
   attr_reader :deuxfleurs_first_load
 
   included do
-    before_save :deuxfleurs_setup
-    after_commit :deuxfleurs_preload
+    before_save :deuxfleurs_setup, if: :deuxfleurs_hosting
+    after_commit :deuxfleurs_preload, if: :deuxfleurs_hosting
   end
 
   protected
@@ -15,7 +15,6 @@ module Communication::Website::WithDeuxfleurs
   end
 
   def deuxfleurs_setup
-    return unless deuxfleurs_hosting
     return if deuxfleurs_setup_done?
     self.deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_host)
     self.url = deuxfleurs_default_url
@@ -23,7 +22,8 @@ module Communication::Website::WithDeuxfleurs
   end
 
   def deuxfleurs_preload
-    deuxfleurs_first_load_to_generate_certificate if deuxfleurs_first_load
+    return unless deuxfleurs_first_load
+    deuxfleurs_first_load_to_generate_certificate
   end
  
   def deuxfleurs_host
