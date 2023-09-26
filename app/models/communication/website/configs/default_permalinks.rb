@@ -7,6 +7,8 @@
 #  access_token            :string
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
+#  deuxfleurs_hosting      :boolean          default(FALSE)
+#  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
