@@ -44,9 +44,6 @@
         <%= f.input :repository %>
         <%= f.input :git_branch %>
       <% end %>
-      <%= osuny_panel t('communication.website.analytics') do %>
-        <%= f.input :plausible_url %>
-      <% end %>
     </div>
     <div class="col-xl-4">
       <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
