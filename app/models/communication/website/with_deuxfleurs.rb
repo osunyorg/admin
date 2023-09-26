@@ -5,7 +5,7 @@ module Communication::Website::WithDeuxfleurs
 
   included do
     before_save :deuxfleurs_setup, if: :deuxfleurs_hosting
-    after_commit :deuxfleurs_preload, if: :deuxfleurs_hosting
+    after_save_commit :deuxfleurs_preload, if: :deuxfleurs_hosting
   end
 
   protected
