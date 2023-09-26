@@ -11,12 +11,13 @@ module Communication::Website::WithDeuxfleurs
   protected
 
   def deuxfleurs_setup_done?
-    deuxfleurs_id.present?
+    deuxfleurs_identifier.present?
   end
 
   def deuxfleurs_setup
+    return unless deuxfleurs_hosting
     return if deuxfleurs_setup_done?
-    self.deuxfleurs_id = deuxfleurs.create_bucket(deuxfleurs_host)
+    self.deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_host)
     self.url = deuxfleurs_default_url
     @deuxfleurs_first_load = true
   end

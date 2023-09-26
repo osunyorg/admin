@@ -8,6 +8,7 @@
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
 #  deuxfleurs_hosting      :boolean          default(FALSE)
+#  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
@@ -34,7 +35,6 @@
 #  updated_at              :datetime         not null
 #  about_id                :uuid             indexed => [about_type]
 #  default_language_id     :uuid             not null, indexed
-#  deuxfleurs_id           :string
 #  university_id           :uuid             not null, indexed
 #
 # Indexes

@@ -11,5 +11,5 @@ defaultContentLanguageInSubdir: <%= @website.languages.many? %>
 deployment:
   targets:
     - name: "production"
-      URL: "s3://#{@website.deuxfleurs_id}?endpoint=garage.deuxfleurs.fr&s3ForcePathStyle=true&region=garage"
+      URL: "s3://#{@website.deuxfleurs_identifier}?endpoint=garage.deuxfleurs.fr&s3ForcePathStyle=true&region=garage"
 <% end %>
