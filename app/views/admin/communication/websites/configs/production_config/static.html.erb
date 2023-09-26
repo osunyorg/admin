@@ -6,6 +6,13 @@ baseURL: <%= @website.url %>
 defaultContentLanguage: <%= @website.default_language.iso_code %>
 defaultContentLanguageInSubdir: <%= @website.languages.many? %>
 
+## CACHE
+deployment:
+  matchers:
+    - pattern: "^.+\\.(woff2|woff|svg|ttf|eot|png|jpg|jpeg|gif|webp|js|css)$"
+      cacheControl: "max-age=31536000, no-transform, public"
+      gzip: true
+
 <% if @website.deuxfleurs_hosting %>
 ## DEUXFLEURS
 deployment:
