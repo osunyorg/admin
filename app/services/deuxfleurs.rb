@@ -3,7 +3,7 @@ class Deuxfleurs
   def create_bucket(host)
     response = client.post("website/#{host}")
     data = JSON.parse response.body
-    data['vhost']['name']
+    data.dig('vhost', 'name')
   end
 
   def default_url_for(host)
