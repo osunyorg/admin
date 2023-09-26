@@ -612,6 +612,7 @@ DEPENDENCIES
   devise-i18n
   enum_help
   faceted_search
+  faraday
   figaro
   font-awesome-sass
   front_matter_parser

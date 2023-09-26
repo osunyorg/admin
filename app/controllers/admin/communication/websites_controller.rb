@@ -89,6 +89,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :name, :url, :repository, :about_type, :about_id, :in_production,
       :git_provider, :git_endpoint, :git_branch, :plausible_url, 
       :feature_posts, :feature_agenda,
+      :deuxfleurs_hosting,
       :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok,
       :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]

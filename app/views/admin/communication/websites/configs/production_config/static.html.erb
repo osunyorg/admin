@@ -5,3 +5,11 @@ baseURL: <%= @website.url %>
 ## LANGUAGE
 defaultContentLanguage: <%= @website.default_language.iso_code %>
 defaultContentLanguageInSubdir: <%= @website.languages.many? %>
+
+<% if @website.deuxfleurs_hosting %>
+## DEUXFLEURS
+deployment:
+  targets:
+    - name: "production"
+      URL: "s3://#{@website.deuxfleurs_identifier}?endpoint=garage.deuxfleurs.fr&s3ForcePathStyle=true&region=garage"
+<% end %>
