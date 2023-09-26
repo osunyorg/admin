@@ -17,7 +17,7 @@
         <%= f.input :feature_agenda %>
       <% end %>
       <%= osuny_panel t('communication.website.hosting') do %>
-        <%= f.input :deuxfleurs_hosting %>
+        <%= f.input :deuxfleurs_hosting, hint: website.deuxfleurs_id %>
       <% end %>
       <%= osuny_panel t('communication.website.analytics') do %>
         <%= f.input :plausible_url %>

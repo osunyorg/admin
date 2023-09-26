@@ -1,17 +1,26 @@
 class Deuxfleurs
 
   def create_bucket(host)
-    result = client.create_bucket bucket: host
-    result
+    response = client.post("website/#{host}")
+    data = JSON.parse response.body
+    data['vhost']['name']
+  end
+
+  def default_url_for(host)
+    "https://#{host}.web.deuxfleurs.fr"
   end
 
   protected
 
   def client
-    @client ||= Aws::S3::Client.new access_key_id: ENV['DEUXFLEURS_ACCESS_KEY'], 
-                                    secret_access_key: ENV['DEUXFLEURS_SECRET'],
-                                    region: 'garage',
-                                    endpoint: 'https://garage.deuxfleurs.fr'
+    unless @client
+      @client = Faraday.new url: 'https://guichet.deuxfleurs.fr/api/unstable/'
+      @client.request :authorization, 
+                      :basic, 
+                      ENV['DEUXFLEURS_USER'], 
+                      ENV['DEUXFLEURS_PASSWORD']
+    end
+    @client
   end
 
 end
