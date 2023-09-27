@@ -54,6 +54,17 @@ class Git::Providers::Github < Git::Providers::Abstract
     } if previous_theme_sha != current_theme_sha
   end
 
+  def init_from_template(name)
+    client.create_repository_from_template(
+      'noesya/osuny-hugo-template-aaa',
+      name,
+      {
+        owner: 'noesya',
+        private: false
+      }
+    )
+  end
+
   def push(commit_message)
     return if !valid? || batch.empty?
     new_tree = client.create_tree repository, batch, base_tree: tree[:sha]
