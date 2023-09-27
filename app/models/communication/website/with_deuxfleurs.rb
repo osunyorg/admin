@@ -1,11 +1,8 @@
 module Communication::Website::WithDeuxfleurs
   extend ActiveSupport::Concern
 
-  attr_reader :deuxfleurs_first_load
-
   included do
-    before_save :deuxfleurs_setup, if: :deuxfleurs_hosting
-    after_save_commit :deuxfleurs_preload, if: :deuxfleurs_hosting
+    after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
   end
 
   protected
@@ -16,18 +13,34 @@ module Communication::Website::WithDeuxfleurs
 
   def deuxfleurs_setup
     return if deuxfleurs_setup_done?
-    self.deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_host)
-    self.url = deuxfleurs_default_url
-    @deuxfleurs_first_load = true
+    deuxfleurs_create_website
+    deuxfleurs_create_github_repository
+  end
+  handle_asynchronously :deuxfleurs_setup
+
+  def deuxfleurs_create_website
+    deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_default_identifier)
+    update_columns  deuxfleurs_identifier: deuxfleurs_identifier,
+                    url: deuxfleurs_default_url
+    deuxfleurs_first_load_to_generate_certificate
+  endcd 
+
+  def deuxfleurs_create_github_repository
+    # TODO create repo at  template 
+    update_columns  repository: deuxfleurs_default_github_repository,
+                    deployment_status_badge: deuxfleurs_default_badge_url
   end
 
-  def deuxfleurs_preload
-    return unless deuxfleurs_first_load
-    deuxfleurs_first_load_to_generate_certificate
-  end
- 
-  def deuxfleurs_host
+  def deuxfleurs_default_identifier
     "#{university.identifier}-#{to_s.parameterize}"
+  end
+
+  def deuxfleurs_default_github_repository
+    "noesya/#{deuxfleurs_default_identifier}"
+  end
+
+  def deuxfleurs_default_badge_url
+    "https://github.com/#{deuxfleurs_default_github_repository}/actions/workflows/deuxfleurs.yml/badge.svg"
   end
 
   def deuxfleurs_first_load_to_generate_certificate
