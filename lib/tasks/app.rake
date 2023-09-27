@@ -8,7 +8,12 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-
+    {
+      '7e153490-6230-479f-828c-072156fa7844' => 'www.aliceetlescryptotrolls.org'
+    }.each do |id, identifier|
+      Communication::Website.find(id).update_columns  deuxfleurs_hosting: true,
+                                                      deuxfleurs_identifier: identifier
+    end
   end
 
   namespace :websites do
