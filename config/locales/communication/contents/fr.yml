@@ -53,6 +53,13 @@ fr:
         templates:
           agenda: 
             description: Une liste d'événements à venir.
+            layouts:
+              grid:
+                label: Grille
+                description: Les événements sont présentées en grille, avec les images toutes de la même taille.
+              list:
+                label: Liste
+                description: Une liste d'événements avec de petites images à la même largeur.
             edit:
               events_quantity:
                 label: Quantité d'événements à afficher

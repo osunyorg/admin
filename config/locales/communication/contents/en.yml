@@ -53,6 +53,13 @@ en:
         templates:
           agenda: 
             description: A list of upcoming events.
+            layouts:
+              grid:
+                label: Grid
+                description: Events are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+              list:
+                label: List
+                description: A list of posts with small images the same width.
             edit:
               events_quantity:
                 label: Quantity of events to show

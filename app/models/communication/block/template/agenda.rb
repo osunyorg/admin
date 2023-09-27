@@ -1,5 +1,7 @@
 class Communication::Block::Template::Agenda < Communication::Block::Template::Base
 
+  has_layouts [:grid, :list]
+
   has_component :description, :rich_text
   has_component :events_quantity, :number, options: 3
 
