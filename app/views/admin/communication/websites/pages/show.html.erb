@@ -46,5 +46,10 @@
               class: button_classes 
               # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path 
               %>
-  <%= publish_link @page %>
+  <%= link_to t('admin.communication.website.publish.button'), 
+              publish_admin_communication_website_page_path(@page), 
+              class: button_classes,
+              method: :post unless @page.published
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path               
+              %>
 <% end %>
