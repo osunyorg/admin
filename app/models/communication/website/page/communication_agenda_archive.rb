@@ -54,6 +54,11 @@ class Communication::Website::Page::CommunicationAgendaArchive < Communication::
     website.feature_agenda
   end
 
+  # Not listed in any menu because it makes "Agenda" unclickable (opens submenu)
+  def default_menu_identifier
+    ''
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +

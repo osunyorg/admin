@@ -53,6 +53,11 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     website.administrators.where(language_id: language_id).map(&:administrator)
   end
 
+  # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
+  def default_menu_identifier
+    ''
+  end
+
   protected
 
   def current_git_path
