@@ -47,6 +47,11 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
     website.about && website.about&.respond_to?(:teachers)
   end
 
+  # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
+  def default_menu_identifier
+    ''
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +

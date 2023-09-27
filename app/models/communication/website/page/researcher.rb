@@ -53,6 +53,11 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     website.researchers.where(language_id: language_id).map(&:researcher)
   end
 
+  # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
+  def default_menu_identifier
+    ''
+  end
+
   protected
 
   def current_git_path

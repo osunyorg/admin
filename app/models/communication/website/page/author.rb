@@ -49,6 +49,11 @@ class Communication::Website::Page::Author < Communication::Website::Page
     website.authors.where(language_id: language_id).map(&:author)
   end
 
+  # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
+  def default_menu_identifier
+    ''
+  end
+
   protected
 
   def current_git_path
