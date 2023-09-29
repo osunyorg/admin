@@ -7,15 +7,15 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <%
-  action = create_link Communication::Website::Post 
+  action = create_link Communication::Website::Post
   action += link_to t('communication.website.posts.new_curation'),
                     new_admin_communication_website_post_curation_path(website_id: @website.id),
                     class: button_classes('ms-2 btn-light') if can?(:create, Communication::Website::Post)
   %>
   <%= osuny_panel Communication::Website::Post.model_name.human(count: 2), action: action do %>
     <div data-batch-selectable class="mb-5">
+      <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
       <%= form_tag publish_batch_admin_communication_website_posts_path do %>
-        <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
         <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
         <%= paginate @posts, theme: 'bootstrap-5' %>
         <div>
