@@ -1,4 +1,4 @@
-class Communication::Block::Template::Partner < Communication::Block::Template::Base
+class Communication::Block::Template::Organization < Communication::Block::Template::Base
 
   has_elements
   has_layouts [:grid, :map]

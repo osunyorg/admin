@@ -1,4 +1,4 @@
-class Communication::Block::Template::OrganizationChart < Communication::Block::Template::Base
+class Communication::Block::Template::Person < Communication::Block::Template::Base
 
   has_elements
   has_component :description, :rich_text

@@ -1,4 +1,4 @@
-class Communication::Block::Template::Partner::Element < Communication::Block::Template::Base
+class Communication::Block::Template::Organization::Element < Communication::Block::Template::Base
 
   has_component :id, :organization
   has_component :name, :string

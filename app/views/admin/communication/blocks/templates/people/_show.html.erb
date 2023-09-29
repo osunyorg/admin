@@ -1,5 +1,5 @@
 <%
-class_name = "block block-organization_chart"
+class_name = "block block-people"
 unless block.title.blank?
   class_name += " block-with-title"
 end
@@ -29,7 +29,7 @@ end
             <div class="description">
               <h3 class="name" itemprop="name">
                 <% if block.template.with_link %>
-                  <%= link_to person, [:admin, person] %>    
+                  <%= link_to person, [:admin, person] %>
                 <% else %>
                   <%= element.person %>
                 <% end %>

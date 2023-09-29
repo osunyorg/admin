@@ -1,9 +1,9 @@
 <%
-  class_name = "block block-partners"
+  class_name = "block block-organizations"
   unless block.title.blank?
     class_name += " block-with-title"
   end
-  class_name += " block-partners--" + block.template.layout
+  class_name += " block-organizations--" + block.template.layout
 %>
 
 <div class="<%= class_name %>">
@@ -26,7 +26,7 @@
         <div class="organizations grid">
       <% else # Map %>
         <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
-          <link   rel="stylesheet" 
+          <link   rel="stylesheet"
                   href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
                   integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
                   crossorigin=""/>
