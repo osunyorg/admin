@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_26_101310) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_27_095534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -561,7 +561,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_26_101310) do
     t.string "social_instagram"
     t.string "social_facebook"
     t.string "social_tiktok"
-    t.boolean "deuxfleurs_hosting", default: false
+    t.boolean "deuxfleurs_hosting", default: true
     t.string "deuxfleurs_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"

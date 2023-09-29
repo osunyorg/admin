@@ -7,7 +7,7 @@
 #  access_token            :string
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
-#  deuxfleurs_hosting      :boolean          default(FALSE)
+#  deuxfleurs_hosting      :boolean          default(TRUE)
 #  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)

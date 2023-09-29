@@ -48,18 +48,18 @@
 #  fk_rails_2b6d929310  (default_language_id => languages.id)
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
-class Communication::Website::Configs::DefaultPermalinks < Communication::Website::Configs::Base
+class Communication::Website::Configs::DeuxfleursWorkflow < Communication::Website::Configs::Base
 
   def self.polymorphic_name
-    'Communication::Website::Configs::DefaultPermalinks'
+    'Communication::Website::Configs::DeuxfleursWorkflow'
   end
 
   def git_path(website)
-    "config/_default/permalinks.yaml"
+    ".github/workflows/deuxfleurs.yml"
   end
 
   def template_static
-    "admin/communication/websites/configs/default_permalinks/static"
+    "admin/communication/websites/configs/deuxfleurs_workflow/static"
   end
 
 end
