@@ -152,7 +152,9 @@ en:
         plausible_url: Plausible dashboard URL
         repository: Repository
         social: Social media
+        social_email: "Email"
         social_facebook: "Facebook (private, belongs to Meta)"
+        social_github: "Github (private, belongs to Microsoft)"
         social_instagram: "Instagram (private, belongs to Meta)"
         social_linkedin: "LinkedIn (private, belongs to Microsoft)"
         social_mastodon: Mastodon (free)

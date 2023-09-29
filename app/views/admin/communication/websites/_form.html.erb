@@ -59,9 +59,11 @@
     </div>
     <div class="col-xl-4">
       <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
+        <%= f.input :social_email %>
         <%= f.input :social_mastodon %>
         <%= f.input :social_peertube %>
         <%= f.input :social_x %>
+        <%= f.input :social_github %>
         <%= f.input :social_linkedin %>
         <%= f.input :social_youtube %>
         <%= f.input :social_vimeo %>
