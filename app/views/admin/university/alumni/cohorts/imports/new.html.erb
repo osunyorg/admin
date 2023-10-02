@@ -21,6 +21,10 @@
       <% content_for :action_bar_right do %>
         <%= submit f %>
       <% end %>
+
+      <small>
+        <%= t('imports.example_file_html', link: asset_url('alumni-example.xlsx')) %>
+      </small>
     <% end %>
 
   </div>
