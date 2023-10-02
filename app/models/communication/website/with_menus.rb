@@ -63,9 +63,9 @@ module Communication::Website::WithMenus
 
   def initialize_menus
     # default_language menu has to be created first, to be a reference for other languages
-    initialize_menus_for_language(default_language)
+    find_or_create_menus_for_language(default_language)
     languages_except_default.each do |language|
-      initialize_menus_for_language(language)
+      find_or_create_menus_for_language(language)
     end
     languages.each do |language|
       generate_automatic_menus(language)
@@ -80,7 +80,7 @@ module Communication::Website::WithMenus
 
   protected
 
-  def initialize_menus_for_language(language)
+  def find_or_create_menus_for_language(language)
     find_or_create_menu 'primary', language
     find_or_create_menu 'social', language
     find_or_create_menu 'legal', language
