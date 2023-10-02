@@ -87,19 +87,20 @@ module Communication::Website::WithMenus
   end
 
   def find_or_create_menu(identifier, language)
-    menu = menus_for_language(language).where(identifier: identifier).first_or_initialize do |menu|
+    menu = menus_for_language(identifier, language).first_or_initialize do |menu|
       menu.title = I18n.t("communication.website.menus.default_title.#{identifier}", locale: language.iso_code)
       menu.original_id = original_menu(identifier).id if language.id != default_language_id
     end
     menu.save unless menu.persisted?
   end
 
-  def menus_for_language(language)
-    menus.where(university: university, language: language)
+  def menus_for_language(identifier, language)
+    # university is needed for the initialize part
+    menus.where(university: university, identifier: identifier, language: language)
   end
 
   def original_menu(identifier)
-    menus_for_language(default_language).where(identifier: identifier).first
+    menus_for_language(identifier, default_language).first
   end
 
 end
