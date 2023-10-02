@@ -152,7 +152,9 @@ fr:
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         social: Réseaux sociaux
+        social_email: "Adresse email"
         social_facebook: "Facebook (privatif, appartient à Meta)"
+        social_github: "Github (privatif, appartient à Microsoft)"
         social_instagram: "Instagram (privatif, appartient à Meta)"
         social_linkedin: "LinkedIn (privatif, appartient à Microsoft)"
         social_mastodon: Mastodon (libre)

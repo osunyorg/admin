@@ -90,7 +90,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :git_provider, :git_endpoint, :git_branch, :plausible_url, 
       :feature_posts, :feature_agenda,
       :deuxfleurs_hosting,
-      :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok,
+      :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,
       :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?

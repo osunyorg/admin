@@ -18,7 +18,9 @@
 #  name                    :string
 #  plausible_url           :string
 #  repository              :string
+#  social_email            :string
 #  social_facebook         :string
+#  social_github           :string
 #  social_instagram        :string
 #  social_linkedin         :string
 #  social_mastodon         :string
