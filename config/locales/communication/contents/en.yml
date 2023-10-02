@@ -51,7 +51,7 @@ en:
         headings:
           add: Add a title
         templates:
-          agenda: 
+          agenda:
             description: A list of upcoming events.
             edit:
               events_quantity:
@@ -288,27 +288,38 @@ en:
                   false: No. Others must use the same CC license if they adapt my work.
               description:
                 label: Description
-          organization_chart:
-            description: People and their jobs.
+          organizations:
+            description: A list of organizations with logo, name and website.
+            layouts:
+              grid:
+                label: Grid
+                description: Square logos and a simple text below.
+              map:
+                label: Map
+                description: A geographic map, with a pin for every organization with a known location.
             edit:
-              add_person: Add person
-              drag_title: Drag and drop to organize persons
-              delete_title: Remove person
+              add_partner: Add organization
               alphabetical:
                 label: Alphabetical order
               description:
                 label: Description
-              with_link:
-                label: With clickable link to each person's page?
-              with_photo:
-                label: With a portrait for each person?
               element:
-                person:
-                  label: Person
-                  placeholder: Select the person
-              role:
-                label: Role
-                placeholder: Enter person's role
+                id:
+                  label: Organization
+                  placeholder: Choose organization
+                  unregistered: Unregistered organization
+                name:
+                  label: Nom
+                  placeholder: Enter organization's name
+                url:
+                  label: Website
+                  placeholder: https://
+                logo:
+                  label: Logo
+                  remove_logo: Remove logo
+              remove_partner: Remove organization
+              with_link:
+                label: With clickable link to each organization's page?
           pages:
             description: A highlight of some pages, with multiple layout options.
             layouts:
@@ -350,38 +361,27 @@ en:
                 title: Selected pages
               display:
                 title: Layout options
-          partners:
-            description: A list of organizations with logo, name and website.
-            layouts:
-              grid:
-                label: Grid
-                description: Square logos and a simple text below.
-              map:
-                label: Map
-                description: A geographic map, with a pin for every organization with a known location.
+          people:
+            description: People and their jobs.
             edit:
-              add_partner: Add organization
+              add_person: Add person
+              drag_title: Drag and drop to organize persons
+              delete_title: Remove person
               alphabetical:
                 label: Alphabetical order
               description:
                 label: Description
-              element:
-                id:
-                  label: Organization
-                  placeholder: Choose organization
-                  unregistered: Unregistered organization
-                name:
-                  label: Nom
-                  placeholder: Enter organization's name
-                url:
-                  label: Website
-                  placeholder: https://
-                logo:
-                  label: Logo
-                  remove_logo: Remove logo
-              remove_partner: Remove organization
               with_link:
-                label: With clickable link to each organization's page?
+                label: With clickable link to each person's page?
+              with_photo:
+                label: With a portrait for each person?
+              element:
+                person:
+                  label: Person
+                  placeholder: Select the person
+              role:
+                label: Role
+                placeholder: Enter person's role
           posts:
             description: A list of highlighted news.
             layouts:
@@ -419,12 +419,12 @@ en:
             description: A selection of programs.
             edit:
               add: Add a program
-          sound: 
+          sound:
             description: An audio recording with a text transcription for a proper accessibility.
             edit:
               file:
                 label: Audio file encoded for the Web (.mp3, .m4a...)
-              title: 
+              title:
                 label: Recording title
                 placeholder: Enter the title
           testimonials:
@@ -511,9 +511,9 @@ en:
           image: Image
           key_figures: Key figures
           license: License
-          organization_chart: People
+          organizations: Organizations
           pages: Pages
-          partners: Organizations
+          people: People
           posts: Posts
           programs: Programs
           sound: Sound

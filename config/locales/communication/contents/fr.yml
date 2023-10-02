@@ -51,7 +51,7 @@ fr:
         headings:
           add: Ajouter un titre
         templates:
-          agenda: 
+          agenda:
             description: Une liste d'événements à venir.
             edit:
               events_quantity:
@@ -288,27 +288,38 @@ fr:
                   false: Non. Les autres doivent utiliser la même licence CC s'ils adaptent mon œuvre.
               description:
                 label: Description
-          organization_chart:
-            description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
+          organizations:
+            description: Une liste d'organisations, avec leur logo, leur site et leur nom.
+            layouts:
+              grid:
+                label: Grille
+                description: Une série de logos carrés, avec le nom de chaque organisation.
+              map:
+                label: Carte
+                description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
             edit:
-              add_person: Ajouter une personne
-              drag_title: Glisser-déposer pour organiser les personnes
-              delete_title: Enlever la personne
+              add_partner: Ajouter une organisation
               alphabetical:
                 label: Ordre alphabétique
-              with_link:
-                label: Avec des liens cliquables vers les pages des personnes ?
-              with_photo:
-                label: Avec un portrait de chaque personne ?
               description:
                 label: Description
               element:
                 id:
-                  label: Personne
-                  placeholder: Choisir la personne
-                role:
-                  label: Rôle
-                  placeholder: Indiquer le rôle de la personne
+                  label: Organisation
+                  placeholder: Choisir l'organisation
+                  unregistered: Organisation non enregistrée
+                name:
+                  label: Nom
+                  placeholder: Entrer le nom du partenaire
+                url:
+                  label: Site Web
+                  placeholder: https://
+                logo:
+                  label: Logo
+                  remove_logo: Enlever le logo
+              remove_partner: Enlever le partenaire
+              with_link:
+                label: Avec des liens cliquables vers les pages des organisations?
           pages:
             description: Une mise en avant d'une sélection de pages, avec plusieurs options d'affichage.
             layouts:
@@ -350,38 +361,27 @@ fr:
                 title: Pages sélectionnées
               display:
                 title: Options d'affichage
-          partners:
-            description: Une liste d'organisations, avec leur logo, leur site et leur nom.
-            layouts:
-              grid:
-                label: Grille
-                description: Une série de logos carrés, avec le nom de chaque organisation.
-              map:
-                label: Carte
-                description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
+          people:
+            description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
             edit:
-              add_partner: Ajouter une organisation
+              add_person: Ajouter une personne
+              drag_title: Glisser-déposer pour organiser les personnes
+              delete_title: Enlever la personne
               alphabetical:
                 label: Ordre alphabétique
+              with_link:
+                label: Avec des liens cliquables vers les pages des personnes ?
+              with_photo:
+                label: Avec un portrait de chaque personne ?
               description:
                 label: Description
               element:
                 id:
-                  label: Organisation
-                  placeholder: Choisir l'organisation
-                  unregistered: Organisation non enregistrée
-                name:
-                  label: Nom
-                  placeholder: Entrer le nom du partenaire
-                url:
-                  label: Site Web
-                  placeholder: https://
-                logo:
-                  label: Logo
-                  remove_logo: Enlever le logo
-              remove_partner: Enlever le partenaire
-              with_link:
-                label: Avec des liens cliquables vers les pages des organisations?
+                  label: Personne
+                  placeholder: Choisir la personne
+                role:
+                  label: Rôle
+                  placeholder: Indiquer le rôle de la personne
           posts:
             description: Une liste d'actualités mises en avant.
             layouts:
@@ -419,12 +419,12 @@ fr:
             description: Une sélection de formations.
             edit:
               add: Ajouter une formation
-          sound: 
+          sound:
             description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
             edit:
               file:
                 label: Fichier audio pour diffusion Web (.mp3, .m4a...)
-              title: 
+              title:
                 label: Titre de l'enregistrement
                 placeholder: Entrer le titre
           testimonials:
@@ -511,9 +511,9 @@ fr:
           image: Image
           key_figures: Chiffres-clés
           license: Licence
-          organization_chart: Personnes
+          organizations: Organisations
           pages: Pages
-          partners: Organisations
+          people: Personnes
           posts: Actualités
           programs: Formations
           sound: Son
