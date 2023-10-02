@@ -17,6 +17,10 @@ module Communication::Website::WithLanguages
 
   end
 
+  def languages_except_default
+    languages.where.not(id: default_language_id)
+  end
+
   def best_language_for(iso_code)
     # We look for the language by the ISO code in the websites languages.
     # If not found, we fallback to the default language.
