@@ -31,7 +31,7 @@ jobs:
         extended: true
 
     - name: Compilation du site
-      run: hugo
+      run: yarn build
 
     - name: Déploiement Garage
       run: hugo deploy --force --maxDeletes -1
