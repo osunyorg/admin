@@ -13,6 +13,10 @@ module Communication::Website::WithGitRepository
     @git_repository ||= Git::Repository.new self
   end
 
+  def repository_url
+    "https://github.com/#{repository}"
+  end
+
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
     return unless git_repository.valid?
