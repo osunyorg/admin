@@ -14,7 +14,7 @@ module Communication::Website::WithGitRepository
   end
 
   def repository_url
-    "https://github.com/#{repository}"
+    git_repository.url
   end
 
   # Synchronisation optimale d'objet indirect
