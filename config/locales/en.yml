@@ -226,8 +226,8 @@ en:
       kind: Filter by kind
       role: Filter by role
     buttons:
-      expand: Filter table
-      submit: Filter
+      expand: Search
+      submit: Search
   folder:
     empty: Folder is empty
     open: Open folder

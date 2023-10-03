@@ -226,8 +226,8 @@ fr:
       kind: Filtrer par type
       role: Filtrer par rôle
     buttons:
-      expand: Filtrer le tableau
-      submit: Filtrer
+      expand: Recherche
+      submit: Chercher
   folder:
     empty: Le dossier est vide
     open: Ouvrir le dossier
