@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_29_153351) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_070935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -105,8 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_153351) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -224,7 +224,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_153351) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
-    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -315,114 +314,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_153351) do
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
-  create_table "communication_website_imported_authors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.uuid "author_id"
-    t.string "name"
-    t.text "description"
-    t.string "slug"
-    t.string "identifier"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "idx_communication_website_imported_auth_on_author"
-    t.index ["university_id"], name: "idx_communication_website_imported_auth_on_university"
-    t.index ["website_id"], name: "idx_communication_website_imported_auth_on_website"
-  end
-
-  create_table "communication_website_imported_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.uuid "category_id"
-    t.string "name"
-    t.text "description"
-    t.string "identifier"
-    t.string "slug"
-    t.string "url"
-    t.string "parent"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.jsonb "data"
-    t.index ["category_id"], name: "idx_communication_website_imported_cat_on_category"
-    t.index ["university_id"], name: "idx_communication_website_imported_cat_on_university"
-    t.index ["website_id"], name: "idx_communication_website_imported_cat_on_website"
-  end
-
-  create_table "communication_website_imported_media", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.string "identifier"
-    t.jsonb "data"
-    t.text "file_url"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.string "filename"
-    t.string "mime_type"
-    t.text "variant_urls", default: [], array: true
-    t.index ["university_id"], name: "index_communication_website_imported_media_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_imported_media_on_website_id"
-  end
-
-  create_table "communication_website_imported_pages", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.uuid "page_id"
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "title"
-    t.text "content"
-    t.text "path"
-    t.text "url"
-    t.string "identifier"
-    t.text "excerpt"
-    t.string "parent"
-    t.text "slug"
-    t.jsonb "data"
-    t.uuid "featured_medium_id"
-    t.index ["featured_medium_id"], name: "idx_communication_website_imported_pages_on_featured_medium_id"
-    t.index ["identifier"], name: "index_communication_website_imported_pages_on_identifier"
-    t.index ["page_id"], name: "index_communication_website_imported_pages_on_page_id"
-    t.index ["university_id"], name: "index_communication_website_imported_pages_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_imported_pages_on_website_id"
-  end
-
-  create_table "communication_website_imported_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.uuid "post_id"
-    t.integer "status", default: 0
-    t.string "title"
-    t.text "excerpt"
-    t.text "content"
-    t.text "path"
-    t.text "url"
-    t.datetime "published_at", precision: nil
-    t.string "identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "slug"
-    t.jsonb "data"
-    t.uuid "featured_medium_id"
-    t.string "author"
-    t.jsonb "categories"
-    t.index ["featured_medium_id"], name: "idx_communication_website_imported_posts_on_featured_medium_id"
-    t.index ["post_id"], name: "index_communication_website_imported_posts_on_post_id"
-    t.index ["university_id"], name: "index_communication_website_imported_posts_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_imported_posts_on_website_id"
-  end
-
-  create_table "communication_website_imported_websites", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "website_id", null: false
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["university_id"], name: "index_communication_website_imported_websites_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_imported_websites_on_website_id"
-  end
-
   create_table "communication_website_menu_items", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
@@ -490,7 +381,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_153351) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -1229,24 +1120,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_153351) do
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_authors", "communication_website_imported_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_authors", "universities"
-  add_foreign_key "communication_website_imported_authors", "university_people", column: "author_id"
-  add_foreign_key "communication_website_imported_categories", "communication_website_categories", column: "category_id"
-  add_foreign_key "communication_website_imported_categories", "communication_website_imported_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_categories", "universities"
-  add_foreign_key "communication_website_imported_media", "communication_website_imported_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_media", "universities"
-  add_foreign_key "communication_website_imported_pages", "communication_website_imported_media", column: "featured_medium_id"
-  add_foreign_key "communication_website_imported_pages", "communication_website_imported_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_pages", "communication_website_pages", column: "page_id"
-  add_foreign_key "communication_website_imported_pages", "universities"
-  add_foreign_key "communication_website_imported_posts", "communication_website_imported_media", column: "featured_medium_id"
-  add_foreign_key "communication_website_imported_posts", "communication_website_imported_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_posts", "communication_website_posts", column: "post_id"
-  add_foreign_key "communication_website_imported_posts", "universities"
-  add_foreign_key "communication_website_imported_websites", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_imported_websites", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"
