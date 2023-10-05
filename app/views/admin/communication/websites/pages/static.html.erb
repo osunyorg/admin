@@ -1,7 +1,13 @@
 ---
 title: >
   <%= @about.title %>
-breadcrumb_title: "<%= @about.breadcrumb_title.blank? ? @about.title : @about.breadcrumb_title  %>"
+breadcrumb_title: "<%= @about.best_title  %>"
+breadcrumbs:
+<% @about.ancestors.each do |page| %>
+  - title: "<%= page.best_title %>"
+    path: "<%= page.path %>"
+<% end %>
+  - title: "<%= @about.best_title %>"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design' %>
 <% if @about.static_layout %>
