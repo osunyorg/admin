@@ -61,9 +61,18 @@ en:
                 label: List
                 description: A list of posts with small images the same width.
             edit:
-              events_quantity:
+              description:
+                label: Description
+              quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
+              time:
+                label: Which events?
+                options:
+                  future_or_present: Now and in the future
+                  future: In the future, not started yet
+                  present: Running now
+                  archive: Past, archives
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
             edit:
