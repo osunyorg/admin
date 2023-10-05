@@ -26,15 +26,15 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     # (not very elegant though)
     case time
     when 'future_or_present'
-      return events.future_or_present
+      events.future_or_present
     when 'future'
-      return events.future
+      events.future
     when 'present'
-      return events.present
+      events.present
     when 'archive'
-      return events.archive
+      events.archive
     else
-      return events
+      events
     end
   end
 
