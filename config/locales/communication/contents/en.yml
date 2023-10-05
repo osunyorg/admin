@@ -377,7 +377,7 @@ en:
                 title: Selected pages
               display:
                 title: Layout options
-          people:
+          persons:
             description: People and their jobs.
             edit:
               add_person: Add person
@@ -529,7 +529,7 @@ en:
           license: License
           organizations: Organizations
           pages: Pages
-          people: People
+          persons: People
           posts: Posts
           programs: Programs
           sound: Sound
