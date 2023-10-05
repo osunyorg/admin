@@ -7,21 +7,26 @@ module Communication::Website::WithDeuxfleurs
 
   protected
 
-  def deuxfleurs_setup_done?
-    deuxfleurs_identifier.present?
-  end
-
+  # 4 options:
+  # 1. no deuxfleurs hosting at all -> do nothing
+  # 2. no repo, deuxfleurs hosting : we need to create both
+  # 3. repo exists, deuxfleurs hosting : only create deuxfleurs hosting
+  # 4. both exists, deuxfleurs hosting needs to change identifier (Waiting for API possibility)
   def deuxfleurs_setup
-    return if deuxfleurs_setup_done?
-    deuxfleurs_create_website
-    deuxfleurs_generate_certificate
-    deuxfleurs_create_github_repository
-    sleep 30
-    save
+    return unless deuxfleurs_hosting?
+    if repository.blank?
+      deuxfleurs_create_github_repository
+    end
+    if deuxfleurs_identifier.blank?
+      deuxfleurs_create_bucket
+      deuxfleurs_generate_certificate
+      sleep 30
+      save
+    end
   end
   handle_asynchronously :deuxfleurs_setup
 
-  def deuxfleurs_create_website
+  def deuxfleurs_create_bucket
     deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_default_identifier)
     update_columns  deuxfleurs_identifier: deuxfleurs_identifier,
                     url: deuxfleurs_default_url
