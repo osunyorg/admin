@@ -377,7 +377,7 @@ fr:
                 title: Pages sélectionnées
               display:
                 title: Options d'affichage
-          people:
+          persons:
             description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
             edit:
               add_person: Ajouter une personne
@@ -529,7 +529,7 @@ fr:
           license: Licence
           organizations: Organisations
           pages: Pages
-          people: Personnes
+          persons: Personnes
           posts: Actualités
           programs: Formations
           sound: Son
