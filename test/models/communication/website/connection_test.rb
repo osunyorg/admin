@@ -154,7 +154,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On connecte PA via un block "Personnes" : +2
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = page.blocks.create(position: 2, published: true, template_kind: :people)
+      block = page.blocks.create(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
       block.save
     end
@@ -168,7 +168,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On ajoute Arnaud à noesya via un block "Personnes" : +2
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = noesya.blocks.create(position: 2, published: true, template_kind: :people)
+      block = noesya.blocks.create(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
       block.save
     end
