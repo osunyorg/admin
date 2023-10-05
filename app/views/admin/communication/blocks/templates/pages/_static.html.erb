@@ -8,6 +8,7 @@
       pages:
 <% block.template.selected_pages.each do |element| %>
         - path: "<%= element.path %>"
+          page: "<%= element.path %>"
           slug: "<%= element.slug %>"
           file: "<%= element.git_path(@website) %>"
           external: false
