@@ -1,6 +1,14 @@
 ---
 title: "<%= @about.title %>"
 <%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
+breadcrumbs:
+<% @website.special_page(Communication::Website::Page::CommunicationAgenda)
+           .ancestors_and_self
+           .each do |page| %>
+  - title: "<%= page.best_title %>"
+    path: "<%= page.path %>"
+<% end %>
+  - title: "<%= @about.title %>"
 weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
