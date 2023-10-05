@@ -27,7 +27,7 @@ children:
 @about.children.published.ordered.each do |child|
   next unless child.is_listed_among_children?
 %>
-  - <%= child.path %>
+  - "<%= child.git_path(@website) %>"
 <% end %>
 <% end %>
 <%= render 'admin/application/meta_description/static' %>
