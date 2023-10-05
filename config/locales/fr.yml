@@ -226,8 +226,8 @@ fr:
       kind: Filtrer par type
       role: Filtrer par rôle
     buttons:
-      expand: Filtrer le tableau
-      submit: Filtrer
+      expand: Recherche
+      submit: Chercher
   folder:
     empty: Le dossier est vide
     open: Ouvrir le dossier
@@ -237,6 +237,7 @@ fr:
   imports:
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
+    example_file_html: Télécharger un <a href="%{link}" target="_blank">fichier d'exemple</a>
     hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"

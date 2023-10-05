@@ -39,6 +39,14 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     }
   end
 
+  def update_theme
+    raise NotImplementedError
+  end
+
+  def init_from_template(name)
+    raise NotImplementedError
+  end
+
   def push(commit_message)
     return if !valid? || batch.empty?
     client.create_commit  repository,

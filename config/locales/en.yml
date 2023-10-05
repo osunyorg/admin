@@ -226,8 +226,8 @@ en:
       kind: Filter by kind
       role: Filter by role
     buttons:
-      expand: Filter table
-      submit: Filter
+      expand: Search
+      submit: Search
   folder:
     empty: Folder is empty
     open: Open folder
@@ -237,6 +237,7 @@ en:
   imports:
     error_msg: "Line %{line}: %{error}"
     errors: Errors
+    example_file_html: Download an <a href="%{link}" target="_blank">example file</a>
     hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8.<br>Fields marked with an asterisk are mandatory."
     initiated_by: "Initiated by:"
     number_of_lines: "Number of lines in the file:"

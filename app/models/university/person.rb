@@ -99,11 +99,6 @@ class University::Person < ApplicationRecord
                           foreign_key: :author_id,
                           dependent: :nullify
 
-  has_many                :communication_website_imported_authors,
-                          class_name: "Communication::Website::Imported::Author",
-                          foreign_key: :author_id,
-                          dependent: :destroy
-
   has_many                :involvements,
                           class_name: 'University::Person::Involvement',
                           dependent: :destroy

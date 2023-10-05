@@ -1,7 +1,7 @@
       layout: <%= block.template.layout %>
 <%= block_component_static block, :description %>
 <%= block_component_static block, :with_link %>
-      partners:
+      organizations:
 <% block.template.elements.each do |element| %>
 <% next if element.best_name.blank? %>
 <% if element.organization %>
@@ -22,18 +22,18 @@
           url: "<%= element.organization.current_permalink_in_website(@website)&.path %>"
           logo:
 <% if element.organization.logo.attached? %>
-            light_background: 
+            light_background:
               id: "<%= element.organization.logo.blob.id %>"
 <% end %>
 <% if element.organization.logo_on_dark_background.attached? %>
-            dark_background: 
+            dark_background:
               id: "<%= element.organization.logo_on_dark_background.blob.id %>"
 <% end %>
 <% else %>
           kind: "external"
           url: "<%= element.url %>"
 <% if element.logo_component.blob %>
-          logo: 
+          logo:
             id: "<%= element.logo_component.blob&.id %>"
 <% end %>
 <% end %>

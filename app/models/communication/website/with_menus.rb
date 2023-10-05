@@ -62,10 +62,14 @@ module Communication::Website::WithMenus
   end
 
   def initialize_menus
-    find_or_create_menu 'primary'
-    find_or_create_menu 'social'
-    find_or_create_menu 'legal'
-    generate_automatic_menus(default_language)
+    # default_language menu has to be created first, to be a reference for other languages
+    create_default_menus(default_language)
+    languages_except_default.each do |language|
+      create_default_menus(language)
+    end
+    languages.each do |language|
+      generate_automatic_menus(language)
+    end
   end
 
   def generate_automatic_menus(language)
@@ -76,10 +80,38 @@ module Communication::Website::WithMenus
 
   protected
 
-  def find_or_create_menu(identifier)
-    menu = menus.where(identifier: identifier, university: university, language: default_language).first_or_initialize do |menu|
-      menu.title = I18n.t("communication.website.menus.default_title.#{identifier}")
-    end
-    menu.save unless menu.persisted?
+  def create_default_menus(language)
+    create_default_menu 'primary', language
+    create_default_menu 'social', language
+    create_default_menu 'legal', language
   end
+
+  def create_default_menu(identifier, language)
+    menus.where(
+            university: university, 
+            identifier: identifier, 
+            language: language
+          )
+          .first_or_create do |menu|
+      menu.title = menu_title(identifier, language)
+      menu.original_id = menu_original_id(identifier, language)
+    end
+  end
+
+  def menu_title(identifier, language)
+    I18n.t(
+      "communication.website.menus.default_title.#{identifier}", 
+      locale: language.iso_code
+    )
+  end
+
+  def menu_original_id(identifier, language)
+    return nil if language.id == default_language_id
+    menus.where(
+            identifier: identifier, 
+            language_id: default_language_id
+          )
+          .first.id
+  end
+
 end

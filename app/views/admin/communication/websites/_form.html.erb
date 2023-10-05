@@ -25,8 +25,15 @@
     </div>
     <div class="col-xl-4">
       <%= osuny_panel Language.model_name.human(count: 2) do %>
-        <%= f.association :languages, as: :check_boxes, required: true, wrapper_html: { class: "js-languages" }, label_method: lambda { |l| language_name(l.iso_code) } %>
-        <%= f.association :default_language, include_blank: t('simple_form.include_blanks.defaults.language'), input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
+        <%= f.association :languages, 
+                          as: :check_boxes, 
+                          required: true, 
+                          wrapper_html: { class: "js-languages" }, 
+                          label_method: lambda { |l| language_name(l.iso_code) } %>
+        <%= f.association :default_language, 
+                          include_blank: t('simple_form.include_blanks.defaults.language'), 
+                          label_method: lambda { |l| language_name(l.iso_code) }, 
+                          input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
       <% end %>
     </div>
   </div>
@@ -59,9 +66,11 @@
     </div>
     <div class="col-xl-4">
       <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
+        <%= f.input :social_email %>
         <%= f.input :social_mastodon %>
         <%= f.input :social_peertube %>
         <%= f.input :social_x %>
+        <%= f.input :social_github %>
         <%= f.input :social_linkedin %>
         <%= f.input :social_youtube %>
         <%= f.input :social_vimeo %>

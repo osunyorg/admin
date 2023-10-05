@@ -50,30 +50,18 @@
 #  fk_rails_2b6d929310  (default_language_id => languages.id)
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
-class Communication::Website::Configs::Base < Communication::Website
+class Communication::Website::Configs::DeuxfleursWorkflow < Communication::Website::Configs::Base
 
   def self.polymorphic_name
-    raise NotImplementedError
+    'Communication::Website::Configs::DeuxfleursWorkflow'
   end
 
   def git_path(website)
-    raise NotImplementedError
+    ".github/workflows/deuxfleurs.yml"
   end
 
   def template_static
-    raise NotImplementedError
-  end
-
-  ######
-  # force dependencies & references to prevent multiple useless calls
-  ######
-
-  def dependencies
-    []
-  end
-
-  def references
-    []
+    "admin/communication/websites/configs/deuxfleurs_workflow/static"
   end
 
 end

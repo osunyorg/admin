@@ -1,0 +1,40 @@
+name: deuxfleurs
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build_and_deploy:
+    name: Compilation du site Hugo et déploiement Deux fleurs
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Récupération des données
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Installation de Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'yarn'
+
+    - name: Installation des dépendances JavaScript
+      run: yarn install
+
+    - name: Installation de Hugo
+      uses: peaceiris/actions-hugo@v2.6.0
+      with:
+        hugo-version: 'latest'
+        extended: true
+
+    - name: Compilation du site
+      run: yarn build
+
+    - name: Déploiement Garage
+      run: hugo deploy --force --maxDeletes -1
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.DEUXFLEURS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DEUXFLEURS_SECRET }}

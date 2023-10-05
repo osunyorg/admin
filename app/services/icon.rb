@@ -73,7 +73,7 @@ class Icon
   DRAG = 'fas fa-bars'
   DELETE = 'fas fa-times'
   FILE = 'fas fa-file'
-  FILTERS = 'fas fa-filter'
+  FILTERS = 'fas fa-search'
   MOVE = 'fas fa-arrows-alt'
   SETTINGS = 'fas fa-gear'
   SORT = 'fas fa-sort'

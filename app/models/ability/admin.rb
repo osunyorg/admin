@@ -56,9 +56,6 @@ class Ability::Admin < Ability
     # Le risque de faussse manip est grand.
     cannot :destroy, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Category, university_id: @user.university_id
-    can :manage, Communication::Website::Imported::Website, university_id: @user.university_id
-    can :manage, Communication::Website::Imported::Page, university_id: @user.university_id
-    can :manage, Communication::Website::Imported::Post, university_id: @user.university_id
     can :manage, Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id

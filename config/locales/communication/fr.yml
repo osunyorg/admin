@@ -41,9 +41,6 @@ fr:
       communication/website/connection:
         one: Connexion
         other: Connexions
-      communication/website/imported/website:
-        one: Site importé
-        other: Sites importés
       communication/website/menu:
         one: Menu
         other: Menus
@@ -152,7 +149,9 @@ fr:
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         social: Réseaux sociaux
+        social_email: "Adresse email"
         social_facebook: "Facebook (privatif, appartient à Meta)"
+        social_github: "Github (privatif, appartient à Microsoft)"
         social_instagram: "Instagram (privatif, appartient à Meta)"
         social_linkedin: "LinkedIn (privatif, appartient à Microsoft)"
         social_mastodon: Mastodon (libre)
@@ -187,10 +186,6 @@ fr:
         indirect_object_type: Type de l'objet
         indirect_object_id: Identifiant de l'objet
         updated_at: Date de mise à jour
-      communication/website/imported/category:
-        original: Original
-      communication/website/imported/medium:
-        filename: Nom du fichier
       communication/website/menu:
         automatic: Automatique
         identifier: Identifiant
@@ -299,17 +294,6 @@ fr:
       analytics: Analytics
       git: Git
       hosting: Hébergement
-      imported:
-        from: Importé depuis
-        launch: Importer le site
-        launched: Importation en cours
-        original_url: URL originale
-        media:
-          file_size: Taille du fichier
-          not_imported_yet: Non importé pour le moment
-        refresh: Relancer l'import
-        show: Voir l'import
-        pending: Import en cours
       last_events: Derniers événements
       last_pages: Dernières pages
       last_posts: Dernières actualités

@@ -22,18 +22,6 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @website %>
-  <% if can? :read, Communication::Website::Imported::Website %>
-    <% if @website.imported? %>
-      <%= link_to t('communication.website.imported.show'),
-                  import_admin_communication_website_path,
-                  class: button_classes %>
-    <% else %>
-      <%= link_to t('communication.website.imported.launch'),
-                  import_admin_communication_website_path,
-                  method: :post,
-                  class: button_classes %>
-    <% end %>
-  <% end %>
   <%= static_link static_admin_communication_website_path(@website) %>
 <% end %>
 

@@ -17,22 +17,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     add_breadcrumb t('communication.website.security')
   end
 
-  def import
-    if request.post?
-      @website.import!
-      flash[:notice] = t('communication.website.imported.launched')
-    end
-    @imported_website = @website.imported_website
-    @imported_pages = @imported_website.pages.page params[:pages_page]
-    @imported_posts = @imported_website.posts.page params[:posts_page]
-    @imported_authors = @imported_website.authors.page params[:authors_page]
-    @imported_categories = @imported_website.categories
-    @imported_media = @imported_website.media.includes(file_attachment: :blob ).page params[:media_page]
-    @imported_media_total_size = @imported_website.media.joins(file_attachment: :blob).sum(:byte_size)
-    breadcrumb
-    add_breadcrumb Communication::Website::Imported::Website.model_name.human
-  end
-
   def show
     @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
     @pages = @all_pages.recent
@@ -90,7 +74,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :git_provider, :git_endpoint, :git_branch, :plausible_url, 
       :feature_posts, :feature_agenda,
       :deuxfleurs_hosting,
-      :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok,
+      :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,
       :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
