@@ -12,21 +12,5 @@
 <% end %>
       elements:
 <% block.template.selected_pages.each do |element| %>
-        - title: >-
-            <%= prepare_text_for_static element.title %>
-          summary: >-
-            <%= prepare_text_for_static element.summary, 6 %>
-          slug: "<%= element.slug %>"
-          path: "<%= element.path %>"
-          url: "<%= element.current_permalink_in_website(@website)&.path %>"
-          bodyclass: >-
-            <%= prepare_text_for_static element.bodyclass, 6 %>
-<% if element.best_featured_image.attached? %>
-          image:
-            id: "<%= element.best_featured_image.blob.id %>"
-            alt: >-
-              <%= prepare_text_for_static element.best_featured_image_alt, 7 %>
-            credit: >-
-              <%= prepare_html_for_static element.best_featured_image_credit, @website.university %>
-<% end %>
+<%= render 'admin/communication/blocks/components/page/static', element: element, depth: 4 %>
 <% end %>

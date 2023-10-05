@@ -1,1 +1,21 @@
-<%= indentation %><%= property %>: <%= value %>
+<%
+depth ||= 4
+indentation = '  ' * depth
+%>
+<%= indentation %>- title: >-
+<%= indentation %>    <%= prepare_text_for_static element.title %>
+<%= indentation %>  summary: >-
+<%= indentation %>    <%= prepare_text_for_static element.summary %>
+<%= indentation %>  slug: "<%= element.slug %>"
+<%= indentation %>  path: "<%= element.path %>"
+<%= indentation %>  url: "<%= element.current_permalink_in_website(@website)&.path %>"
+<%= indentation %>  bodyclass: >-
+<%= indentation %>    <%= prepare_text_for_static element.bodyclass %>
+<% if element.best_featured_image.attached? %>
+<%= indentation %>  image:
+<%= indentation %>    id: "<%= element.best_featured_image.blob.id %>"
+<%= indentation %>    alt: >-
+<%= indentation %>      <%= prepare_text_for_static element.best_featured_image_alt %>
+<%= indentation %>    credit: >-
+<%= indentation %>      <%= prepare_html_for_static element.best_featured_image_credit, @website.university %>
+<% end %>
