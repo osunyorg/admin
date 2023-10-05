@@ -53,9 +53,6 @@ class Communication::Website::Post < ApplicationRecord
 
   has_summernote :text # TODO: Remove text attribute
 
-  has_one :imported_post,
-          class_name: 'Communication::Website::Imported::Post',
-          dependent: :destroy
   belongs_to :author,
              class_name: 'University::Person',
              optional: true

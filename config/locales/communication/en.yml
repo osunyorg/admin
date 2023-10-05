@@ -41,9 +41,6 @@ en:
       communication/website/connection:
         one: Connection
         other: Connections
-      communication/website/imported/website:
-        one: Imported website
-        other: Imported websites
       communication/website/menu:
         one: Menu
         other: Menus
@@ -189,10 +186,6 @@ en:
         indirect_object_type: Indirect object type
         indirect_object_id: Indirect object identifier
         updated_at: Updated at
-      communication/website/imported/category:
-        original: Original
-      communication/website/imported/medium:
-        filename: Filename
       communication/website/menu:
         automatic: Automatic
         identifier: Identifier
@@ -301,17 +294,6 @@ en:
       analytics: Analytics
       git: Git
       hosting: Hosting
-      imported:
-        from: Imported from
-        launch: Launch import
-        launched: Import in progress
-        original_url: Original URL
-        media:
-          file_size: File size
-          not_imported_yet: Not imported yet
-        refresh: Refresh import
-        show: Show import
-        pending: Import in progress
       last_events: Last events
       last_pages: Last pages
       last_posts: Last posts

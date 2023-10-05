@@ -61,7 +61,6 @@ class Communication::Website < ApplicationRecord
   include WithDeuxfleurs
   include WithGit
   include WithGitRepository
-  include WithImport
   include WithLanguages
   include WithManagers
   include WithProgramCategories

@@ -53,9 +53,6 @@ class Communication::Website::Category < ApplicationRecord
   include WithTree
   include WithUniversity
 
-  has_one                 :imported_category,
-                          class_name: 'Communication::Website::Imported::Category',
-                          dependent: :destroy
   belongs_to              :university
   belongs_to              :parent,
                           class_name: 'Communication::Website::Category',
@@ -63,9 +60,6 @@ class Communication::Website::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_one                 :imported_category,
-                          class_name: 'Communication::Website::Imported::Category',
-                          dependent: :destroy
   has_many                :children,
                           class_name: 'Communication::Website::Category',
                           foreign_key: :parent_id,
