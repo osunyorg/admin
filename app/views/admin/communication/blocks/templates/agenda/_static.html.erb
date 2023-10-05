@@ -1,20 +1,7 @@
       layout: <%= block.template.layout %>
 <%= block_component_static block, :description %>
-      elements:
+      events:
 <% block.template.selected_events.each do |element| %>
-        - title: >-
-            <%= prepare_text_for_static element.to_s %>
-          summary: >-
-            <%= prepare_text_for_static element.summary, 6 %>
-          slug: "<%= element.slug %>"
-          url: "<%= element.current_permalink_in_website(@website)&.path %>"
-<%= render 'admin/communication/websites/agenda/events/dates_static', event: element, depth: 5 %>
-<% if element.best_featured_image.attached? %>
-          image:
-            id: "<%= element.best_featured_image.blob.id %>"
-            alt: >-
-              <%= prepare_text_for_static element.best_featured_image_alt, 7 %>
-            credit: >-
-              <%= prepare_html_for_static element.best_featured_image_credit, @website.university %>
-<% end %>
+        - path: "<%= element.current_permalink_in_website(@website)&.path %>"
+          file: "<%= element.git_path(@website) %>"
 <% end %>
