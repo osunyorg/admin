@@ -53,10 +53,26 @@ fr:
         templates:
           agenda:
             description: Une liste d'événements à venir.
+            layouts:
+              grid:
+                label: Grille
+                description: Les événements sont présentées en grille, avec les images toutes de la même taille.
+              list:
+                label: Liste
+                description: Une liste d'événements avec de petites images à la même largeur.
             edit:
-              events_quantity:
+              description:
+                label: Description
+              quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
+              time:
+                label: Quels événements afficher ?
+                options:
+                  future_or_present: En cours et à venir
+                  future: À venir, pas encore en cours
+                  present: En cours en ce moment
+                  archive: Terminés, archivés
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
             edit:
