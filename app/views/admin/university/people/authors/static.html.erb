@@ -7,7 +7,7 @@ breadcrumbs:
     path: "<%= page.path %>"
 <% end %>
   - title: "<%= @about.to_s %>"
-    path: "<%= @about.person.path %>"
+    path: "<%= @about.person.current_permalink_in_website(@website)&.path %>"
   - title: "Actualités"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
