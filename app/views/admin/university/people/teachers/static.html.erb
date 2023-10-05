@@ -1,9 +1,14 @@
 ---
 title: >
   Enseignements de <%= @about.to_s %>
-<%= render 'admin/application/static/breadcrumbs', 
-            pages: @website.special_page(Communication::Website::Page::Teacher).ancestors_and_self,
-            current: @about %>
+breadcrumbs:
+<% @website.special_page(Communication::Website::Page::Person).ancestors_and_self.each do |page| %>
+  - title: "<%= page.best_title %>"
+    path: "<%= page.path %>"
+<% end %>
+  - title: "<%= current.to_s %>"
+    path: "<%= @about.person.path %>"
+  - title: "Enseignements"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 person: >
