@@ -279,7 +279,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n_data (0.17.1)
       simple_po_parser (~> 1.1)
-    i18n_date_range (0.2.1)
+    i18n_date_range (0.2.2)
       rails
       rails-i18n
     image_processing (1.12.2)
