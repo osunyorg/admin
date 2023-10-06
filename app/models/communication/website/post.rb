@@ -10,7 +10,7 @@
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
-#  slug                     :text             indexed
+#  slug                     :string           indexed
 #  summary                  :text
 #  text                     :text
 #  title                    :string

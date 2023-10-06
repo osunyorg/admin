@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_145240) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_06_145950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -252,7 +252,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_145240) do
     t.uuid "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "slug"
+    t.string "slug"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
@@ -413,7 +413,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_145240) do
     t.datetime "published_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "slug"
+    t.string "slug"
     t.uuid "author_id"
     t.boolean "pinned", default: false
     t.string "featured_image_alt"
