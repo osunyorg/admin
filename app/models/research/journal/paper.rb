@@ -14,7 +14,7 @@
 #  published                  :boolean          default(FALSE)
 #  published_at               :datetime
 #  received_at                :date
-#  slug                       :string
+#  slug                       :string           indexed
 #  summary                    :text
 #  text                       :text
 #  title                      :string
@@ -31,6 +31,7 @@
 #  index_research_journal_papers_on_kind_id                     (kind_id)
 #  index_research_journal_papers_on_research_journal_id         (research_journal_id)
 #  index_research_journal_papers_on_research_journal_volume_id  (research_journal_volume_id)
+#  index_research_journal_papers_on_slug                        (slug)
 #  index_research_journal_papers_on_university_id               (university_id)
 #  index_research_journal_papers_on_updated_by_id               (updated_by_id)
 #

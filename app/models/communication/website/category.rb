@@ -10,7 +10,7 @@
 #  name                     :string
 #  path                     :string
 #  position                 :integer
-#  slug                     :string
+#  slug                     :string           indexed
 #  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -28,6 +28,7 @@
 #  index_communication_website_categories_on_original_id            (original_id)
 #  index_communication_website_categories_on_parent_id              (parent_id)
 #  index_communication_website_categories_on_program_id             (program_id)
+#  index_communication_website_categories_on_slug                   (slug)
 #  index_communication_website_categories_on_university_id          (university_id)
 #
 # Foreign Keys

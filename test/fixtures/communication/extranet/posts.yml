@@ -8,7 +8,7 @@
 #  pinned                :boolean          default(FALSE)
 #  published             :boolean          default(FALSE)
 #  published_at          :datetime
-#  slug                  :string
+#  slug                  :string           indexed
 #  summary               :text
 #  title                 :string
 #  created_at            :datetime         not null
@@ -23,6 +23,7 @@
 #  index_communication_extranet_posts_on_author_id      (author_id)
 #  index_communication_extranet_posts_on_category_id    (category_id)
 #  index_communication_extranet_posts_on_extranet_id    (extranet_id)
+#  index_communication_extranet_posts_on_slug           (slug)
 #  index_communication_extranet_posts_on_university_id  (university_id)
 #
 # Foreign Keys

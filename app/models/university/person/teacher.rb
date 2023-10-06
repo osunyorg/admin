@@ -25,7 +25,7 @@
 #  phone_mobile       :string
 #  phone_personal     :string
 #  phone_professional :string
-#  slug               :string
+#  slug               :string           indexed
 #  summary            :text
 #  tenure             :boolean          default(FALSE)
 #  twitter            :string
@@ -42,6 +42,7 @@
 #
 #  index_university_people_on_language_id    (language_id)
 #  index_university_people_on_original_id    (original_id)
+#  index_university_people_on_slug           (slug)
 #  index_university_people_on_university_id  (university_id)
 #  index_university_people_on_user_id        (user_id)
 #
