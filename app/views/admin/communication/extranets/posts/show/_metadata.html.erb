@@ -2,7 +2,7 @@
   <%= osuny_label t('metadata') %><br>
 
   <% if @post.published %>
-    <%= t('communication.extranet.post.metadata.published_on', date: l(@post.published_at.to_date, format: :long)) %>
+    <%= t('communication.extranet.post.metadata.published_on', date: l(@post.published_at, format: :date_with_explicit_month)) %>
     <% if @post.pinned %>
       <%= t('communication.extranet.post.metadata.and_pinned') %>
     <% end %>
