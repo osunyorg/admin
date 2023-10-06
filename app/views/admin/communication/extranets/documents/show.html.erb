@@ -12,7 +12,7 @@
         <%= osuny_label Communication::Extranet::Document.human_attribute_name('published') %>
         <p>
           <%= t @document.published %><% if @document.published %>,
-            <%= l @document.published_at.to_date, format: :long %>
+            <%= l @document.published_at, format: :date_with_explicit_month %>
           <% end %>
         </p>
         <% if @document.category %>

@@ -1,0 +1,10 @@
+<%= block_component_static block, :description %>
+<%= block_component_static block, :with_link %>
+<%= block_component_static block, :with_photo %>
+      persons:
+<% block.template.elements.each do |element| %>
+<% next unless element.person %>
+        - slug: "<%= element.person.slug %>"
+          external: false
+<%= block_component_static block, :role, template: element, depth: 5 %>
+<% end %>

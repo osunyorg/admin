@@ -27,7 +27,7 @@
                     <%= '—' if experience.description.present? && experience.organization.present? %>
                     <%= experience.organization %>
                   </p>
-                  <small><%= l experience.created_at.to_date, format: :long %></small>
+                  <small><%= l experience.created_at, format: :date_with_explicit_month %></small>
                 </div>
                 <% if experience.organization.present? %>
                   <% if experience.organization.logo.attached? %>

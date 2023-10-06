@@ -53,10 +53,26 @@ en:
         templates:
           agenda:
             description: A list of upcoming events.
+            layouts:
+              grid:
+                label: Grid
+                description: Events are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+              list:
+                label: List
+                description: A list of posts with small images the same width.
             edit:
-              events_quantity:
+              description:
+                label: Description
+              quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
+              time:
+                label: Which events?
+                options:
+                  future_or_present: Now and in the future
+                  future: In the future, not started yet
+                  present: Running now
+                  archive: Past, archives
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
             edit:
@@ -361,7 +377,7 @@ en:
                 title: Selected pages
               display:
                 title: Layout options
-          people:
+          persons:
             description: People and their jobs.
             edit:
               add_person: Add person
@@ -513,7 +529,7 @@ en:
           license: License
           organizations: Organizations
           pages: Pages
-          people: People
+          persons: People
           posts: Posts
           programs: Programs
           sound: Sound

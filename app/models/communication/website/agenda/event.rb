@@ -57,10 +57,17 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               class_name: 'Communication::Website::Agenda::Event',
               optional: true
 
-  scope :ordered, -> { order(from_day: :desc, from_hour: :desc) }
-  scope :recent, -> { ordered.limit(5) }
+  scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
+  scope :ordered_asc, -> { order(:from_day, :from_hour) }
+  scope :ordered, -> { ordered_asc }
+  scope :recent, -> { order(:updated_at).limit(5) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
+  scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
+  scope :future_or_present, -> { where('from_day >= :today', today: Date.today).ordered_asc }
+  scope :present, -> { where('(from_day >= :today AND to_day IS NULL) OR (from_day >= :today AND to_day <= :today)', today: Date.today).ordered_asc }
+  scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
+  scope :past, -> { archive }
 
   validates_presence_of :from_day, :title
   validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day

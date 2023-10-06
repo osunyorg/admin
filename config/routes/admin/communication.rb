@@ -5,8 +5,6 @@ namespace :communication do
   end
   resources :websites do
     member do
-      post :import
-      get :import
       get :analytics
       get :security
       get :static
