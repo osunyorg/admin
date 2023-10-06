@@ -21,7 +21,7 @@ class Education::AcademicYear < ApplicationRecord
 
   has_many  :education_cohorts,
             class_name: 'Education::Cohort'
-  alias_attribute :cohorts, :education_cohorts
+  alias_method :cohorts, :education_cohorts
 
   # Dénormalisation des alumni pour le faceted search
   has_and_belongs_to_many   :university_people,
