@@ -90,6 +90,11 @@ class Communication::Website < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
+  scope :updatable_theme, -> {
+    where.not(repository: [nil, '']).
+    where.not(access_token: [nil, '']).
+    where.not(url: [nil, ''])
+  }
 
   def to_s
     "#{name}"
