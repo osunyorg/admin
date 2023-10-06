@@ -29,6 +29,8 @@ module Osuny
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks templates))
 
+    config.active_support.cache_format_version = 7.1
+
     config.time_zone = 'Europe/Paris'
 
     config.active_job.queue_adapter = :delayed_job
