@@ -3,7 +3,7 @@
 # Table name: research_journal_paper_kinds
 #
 #  id            :uuid             not null, primary key
-#  slug          :string
+#  slug          :string           indexed
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -13,6 +13,7 @@
 # Indexes
 #
 #  index_research_journal_paper_kinds_on_journal_id     (journal_id)
+#  index_research_journal_paper_kinds_on_slug           (slug)
 #  index_research_journal_paper_kinds_on_university_id  (university_id)
 #
 # Foreign Keys

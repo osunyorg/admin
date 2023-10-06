@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_06_145240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.datetime "updated_at", null: false
     t.index ["about_type", "about_id"], name: "index_communication_block_headings_on_about"
     t.index ["parent_id"], name: "index_communication_block_headings_on_parent_id"
+    t.index ["slug"], name: "index_communication_block_headings_on_slug"
     t.index ["university_id"], name: "index_communication_block_headings_on_university_id"
   end
 
@@ -134,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["extranet_id"], name: "index_communication_extranet_document_categories_on_extranet_id"
+    t.index ["slug"], name: "index_communication_extranet_document_categories_on_slug"
     t.index ["university_id"], name: "extranet_document_categories_universities"
   end
 
@@ -145,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["extranet_id"], name: "index_communication_extranet_document_kinds_on_extranet_id"
+    t.index ["slug"], name: "index_communication_extranet_document_kinds_on_slug"
     t.index ["university_id"], name: "extranet_document_kinds_universities"
   end
 
@@ -172,6 +175,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["extranet_id"], name: "index_communication_extranet_post_categories_on_extranet_id"
+    t.index ["slug"], name: "index_communication_extranet_post_categories_on_slug"
     t.index ["university_id"], name: "index_communication_extranet_post_categories_on_university_id"
   end
 
@@ -193,6 +197,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.index ["author_id"], name: "index_communication_extranet_posts_on_author_id"
     t.index ["category_id"], name: "index_communication_extranet_posts_on_category_id"
     t.index ["extranet_id"], name: "index_communication_extranet_posts_on_extranet_id"
+    t.index ["slug"], name: "index_communication_extranet_posts_on_slug"
     t.index ["university_id"], name: "index_communication_extranet_posts_on_university_id"
   end
 
@@ -252,6 +257,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
+    t.index ["slug"], name: "index_communication_website_agenda_events_on_slug"
     t.index ["university_id"], name: "index_communication_website_agenda_events_on_university_id"
   end
 
@@ -278,6 +284,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.index ["original_id"], name: "index_communication_website_categories_on_original_id"
     t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_categories_on_program_id"
+    t.index ["slug"], name: "index_communication_website_categories_on_slug"
     t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
   end
 
@@ -379,6 +386,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["original_id"], name: "index_communication_website_pages_on_original_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
+    t.index ["slug"], name: "index_communication_website_pages_on_slug"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
@@ -419,6 +427,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_posts_on_language_id"
     t.index ["original_id"], name: "index_communication_website_posts_on_original_id"
+    t.index ["slug"], name: "index_communication_website_posts_on_slug"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
 
@@ -540,6 +549,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.integer "ects"
     t.text "duration"
     t.text "summary"
+    t.index ["slug"], name: "index_education_diplomas_on_slug"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
@@ -580,6 +590,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.text "summary"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
+    t.index ["slug"], name: "index_education_programs_on_slug"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
 
@@ -701,6 +712,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.text "authors_list"
     t.json "authors_citeproc"
     t.index ["docid"], name: "index_research_hal_publications_on_docid"
+    t.index ["slug"], name: "index_research_hal_publications_on_slug"
   end
 
   create_table "research_hal_publications_university_people", id: false, force: :cascade do |t|
@@ -718,6 +730,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["journal_id"], name: "index_research_journal_paper_kinds_on_journal_id"
+    t.index ["slug"], name: "index_research_journal_paper_kinds_on_slug"
     t.index ["university_id"], name: "index_research_journal_paper_kinds_on_university_id"
   end
 
@@ -747,6 +760,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
+    t.index ["slug"], name: "index_research_journal_papers_on_slug"
     t.index ["university_id"], name: "index_research_journal_papers_on_university_id"
     t.index ["updated_by_id"], name: "index_research_journal_papers_on_updated_by_id"
   end
@@ -775,6 +789,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.text "featured_image_credit"
     t.text "summary"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
+    t.index ["slug"], name: "index_research_journal_volumes_on_slug"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
 
@@ -919,6 +934,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.uuid "original_id"
     t.index ["language_id"], name: "index_university_organizations_on_language_id"
     t.index ["original_id"], name: "index_university_organizations_on_original_id"
+    t.index ["slug"], name: "index_university_organizations_on_slug"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -966,6 +982,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_090819) do
     t.uuid "original_id"
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
+    t.index ["slug"], name: "index_university_people_on_slug"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end

@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  name          :string
-#  slug          :string
+#  slug          :string           indexed
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  extranet_id   :uuid             not null, indexed
@@ -14,6 +14,7 @@
 #
 #  extranet_document_categories_universities                        (university_id)
 #  index_communication_extranet_document_categories_on_extranet_id  (extranet_id)
+#  index_communication_extranet_document_categories_on_slug         (slug)
 #
 # Foreign Keys
 #

@@ -6,7 +6,7 @@
 #  about_type    :string           not null, indexed => [about_id]
 #  level         :integer          default(2)
 #  position      :integer
-#  slug          :string
+#  slug          :string           indexed
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -18,6 +18,7 @@
 #
 #  index_communication_block_headings_on_about          (about_type,about_id)
 #  index_communication_block_headings_on_parent_id      (parent_id)
+#  index_communication_block_headings_on_slug           (slug)
 #  index_communication_block_headings_on_university_id  (university_id)
 #
 # Foreign Keys

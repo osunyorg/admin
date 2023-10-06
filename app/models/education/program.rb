@@ -30,7 +30,7 @@
 #  registration_url      :string
 #  results               :text
 #  short_name            :string
-#  slug                  :string
+#  slug                  :string           indexed
 #  summary               :text
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
@@ -42,6 +42,7 @@
 #
 #  index_education_programs_on_diploma_id     (diploma_id)
 #  index_education_programs_on_parent_id      (parent_id)
+#  index_education_programs_on_slug           (slug)
 #  index_education_programs_on_university_id  (university_id)
 #
 # Foreign Keys

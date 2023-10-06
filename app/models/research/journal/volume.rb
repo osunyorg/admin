@@ -10,7 +10,7 @@
 #  number                :integer
 #  published             :boolean          default(FALSE)
 #  published_at          :datetime
-#  slug                  :string
+#  slug                  :string           indexed
 #  summary               :text
 #  text                  :text
 #  title                 :string
@@ -22,6 +22,7 @@
 # Indexes
 #
 #  index_research_journal_volumes_on_research_journal_id  (research_journal_id)
+#  index_research_journal_volumes_on_slug                 (slug)
 #  index_research_journal_volumes_on_university_id        (university_id)
 #
 # Foreign Keys
