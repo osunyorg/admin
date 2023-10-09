@@ -101,7 +101,7 @@ module Importers
     def add_picture_if_possible!(person)
       return if @photo.nil?
       return if @person.picture.attached?
-      return unless @photo.end_with?('.jpg') || @photo.end_with?('.png')
+      return unless @photo.end_with?('.jpg') || @photo.end_with?('.png') || @photo.end_with?('.svg')
       begin
         file = URI.open @photo
         filename = File.basename @photo

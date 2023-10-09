@@ -18,8 +18,7 @@
                           class: "#{'draft' unless volume.published?}" %>
             </td>
             <td><%= volume.number %></td>
-            <td><%= image_tag volume.featured_image.variant(resize: 'x200'),
-                              height: 100 if volume.featured_image.attached? %></td>
+            <td><%= kamifusen_tag volume.featured_image, height: 100 if volume.featured_image.attached? %></td>
             <td><%= l(volume.published_at.to_time, format: :date_with_explicit_month) if volume.published_at.present? %></td>
             <td class="text-end">
               <div class="btn-group" role="group">

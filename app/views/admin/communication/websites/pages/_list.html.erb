@@ -19,8 +19,8 @@
             <% end %>
           </td>
           <td>
-            <% if page.featured_image.attached? && page.featured_image.representable? %>
-              <%= image_tag page.featured_image.representation(resize: '200x'), width: 100 %>
+            <% if page.featured_image.attached? %>
+              <%= kamifusen_tag page.featured_image, width: 100 %>
             <% end %>
           </td>
           <td class="small">

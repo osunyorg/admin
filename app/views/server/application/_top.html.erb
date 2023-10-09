@@ -17,8 +17,8 @@
       </li>
       <li>
         <a class="nav-link nav-link--last js-user-button" href="#">
-          <% if current_user.picture.attached? && current_user.picture.variable? %>
-            <%= image_tag current_user.picture.variant(resize: '80x80'), class: 'avatar img-fluid rounded-circle' %>
+          <% if current_user.picture.attached? %>
+            <%= kamifusen_tag current_user.picture, widht: 40, class: 'avatar img-fluid rounded-circle' %>
           <% else %>
             <%= image_tag 'avatar.jpg', class: 'avatar img-fluid rounded-circle' %>
           <% end %>
