@@ -1,5 +1,5 @@
 <section class="pure__section flex-fill position-relative <%= classes %>">
-  <%= kamifusen_tag image, class: 'img-fluid mb-3', loading: :lazy if image %>
+  <%= image_tag image, class: 'img-fluid mb-3', loading: :lazy if image %>
   <div class="d-lg-flex me-4 <%= 'mb-3' if small %>">
     <% if title %>
       <% if small %>

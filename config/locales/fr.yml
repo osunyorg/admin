@@ -161,6 +161,7 @@ fr:
   date:
     formats:
       birthday: "%d %B"
+  default_images_hint: "5 Mo max, %{formats}"
   delete: Supprimer
   devise:
     failure:

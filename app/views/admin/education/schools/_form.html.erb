@@ -20,7 +20,7 @@
         <%= f.input :url %>
         <%= f.input :logo, 
                     as: :single_deletable_file,
-                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     direct_upload: true %>
       <% end %>

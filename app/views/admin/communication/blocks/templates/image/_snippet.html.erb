@@ -1,6 +1,2 @@
-<%
-blob = block.template.image_component.blob
-object = blob&.representable?  ? blob.representation(resize: 'x180')
-                               : blob
-%>
-<%= kamifusen_tag object, height: 90, alt: '', class: 'me-2' if object %>
+<% blob = block.template.image_component.blob %>
+<%= kamifusen_tag blob, height: 90, alt: '', class: 'me-2' if blob %>

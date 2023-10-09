@@ -20,7 +20,7 @@
             </td>
             <td class="small"><%= render 'admin/communication/websites/agenda/events/dates', event: event %></td>
             <td>
-              <%= kamifusen_tag event.featured_image, width: 200 if event.featured_image.attached? %>
+              <%= kamifusen_tag event.featured_image, width: 100 if event.featured_image.attached? %>
             </td>
           </tr>
         <% end %>

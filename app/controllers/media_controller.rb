@@ -5,7 +5,7 @@ class MediaController < ApplicationController
 
   def show
     @size = @blob.byte_size
-    if @blob.representable?
+    if @blob.variable?
       variant_service = VariantService.compute(@blob, params[:filename_with_transformations], params[:format])
       transformations = variant_service.transformations
       if transformations.empty?

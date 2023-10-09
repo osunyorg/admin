@@ -131,5 +131,3 @@ en:
       research_journal_paper:
         authors_list: Type the authors list directly in this field if you don't want to use the checkboxes above
         doi: "You can type the DOI identifier without https://, for example “10.19182/perspective/31918”"
-      research_journal_volume:
-        cover: JPG or PNG file
