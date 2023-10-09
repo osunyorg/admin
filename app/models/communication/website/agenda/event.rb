@@ -9,7 +9,7 @@
 #  from_hour                :time
 #  meta_description         :text
 #  published                :boolean          default(FALSE)
-#  slug                     :text
+#  slug                     :string           indexed
 #  summary                  :text
 #  title                    :string
 #  to_day                   :date
@@ -28,6 +28,7 @@
 #  index_communication_website_agenda_events_on_language_id    (language_id)
 #  index_communication_website_agenda_events_on_original_id    (original_id)
 #  index_communication_website_agenda_events_on_parent_id      (parent_id)
+#  index_communication_website_agenda_events_on_slug           (slug)
 #  index_communication_website_agenda_events_on_university_id  (university_id)
 #
 # Foreign Keys

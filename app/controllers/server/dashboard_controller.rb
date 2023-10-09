@@ -10,6 +10,7 @@ class Server::DashboardController < Server::ApplicationController
         path: server_websites_path
       }
     ]
+    @websites = Communication::Website.updatable_theme.ordered
     breadcrumb
   end
 end

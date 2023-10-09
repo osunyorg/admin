@@ -16,7 +16,7 @@
 #  open_access      :boolean
 #  publication_date :date
 #  ref              :string
-#  slug             :string
+#  slug             :string           indexed
 #  title            :string
 #  url              :string
 #  created_at       :datetime         not null
@@ -25,6 +25,7 @@
 # Indexes
 #
 #  index_research_hal_publications_on_docid  (docid)
+#  index_research_hal_publications_on_slug   (slug)
 #
 
 default_publication:

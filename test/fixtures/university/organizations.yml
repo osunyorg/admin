@@ -21,7 +21,7 @@
 #  nic                :string
 #  phone              :string
 #  siren              :string
-#  slug               :string
+#  slug               :string           indexed
 #  summary            :text
 #  text               :text
 #  twitter            :string
@@ -37,6 +37,7 @@
 #
 #  index_university_organizations_on_language_id    (language_id)
 #  index_university_organizations_on_original_id    (original_id)
+#  index_university_organizations_on_slug           (slug)
 #  index_university_organizations_on_university_id  (university_id)
 #
 # Foreign Keys

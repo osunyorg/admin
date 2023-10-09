@@ -12,6 +12,10 @@ module Filters
       add :for_update,
           [{ to_s: 'Automatique', id: 'true' }, { to_s: 'Manuelle', id: 'false' }],
           'Filtrer par mode de mise à jour'
+      add :for_updatable_theme,
+          [{ to_s: 'Mise à jour automatique possible', id: 'true' }],
+          'Filtrer par capacité de mise à jour automatique'
+
     end
   end
 end

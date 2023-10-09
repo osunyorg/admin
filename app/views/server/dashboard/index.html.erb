@@ -9,3 +9,7 @@
     </div>
   <% end %>
 </div>
+
+<%= osuny_panel 'Monitoring' do %>
+  <%= render 'server/websites/list', websites: @websites %>
+<% end %>
