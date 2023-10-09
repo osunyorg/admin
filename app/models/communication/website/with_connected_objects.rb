@@ -30,7 +30,7 @@ module Communication::Website::WithConnectedObjects
     up_to_date_dependencies = recursive_dependencies(follow_direct: true)
     deletable_connection_ids = []
     connections.find_each do |connection|
-      has_living_connection = up_to_date_dependencies.detect { |dependency|
+      has_li093138ving_connection = up_to_date_dependencies.detect { |dependency|
         dependency.class.name == connection.indirect_object_type &&
         dependency.id == connection.indirect_object_id
       }
@@ -40,6 +40,8 @@ module Communication::Website::WithConnectedObjects
     # Cependant, on peut le faire car les connexions n'ont pas de callback.
     # Dans le cas où on en rajoute au destroy, il faut repasser sur un appel de destroy sur chaque
     connections.where(id: deletable_connection_ids).delete_all
+    # On traite ensuite chaque connexion, pour vérifier qu'elle encore pertinente
+    connections.reload.find_each &:destroy_if_obsolete
   end
 
   def has_connected_object?(indirect_object)
