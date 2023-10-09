@@ -30,7 +30,7 @@ module Communication::Website::WithConnectedObjects
     up_to_date_dependencies = recursive_dependencies(follow_direct: true)
     deletable_connection_ids = []
     connections.find_each do |connection|
-      has_li093138ving_connection = up_to_date_dependencies.detect { |dependency|
+      has_living_connection = up_to_date_dependencies.detect { |dependency|
         dependency.class.name == connection.indirect_object_type &&
         dependency.id == connection.indirect_object_id
       }
