@@ -23,11 +23,11 @@
 #
 
 one:
-  extranet: one
-  university: one
-  name: MyString
+  extranet: default_extranet
+  university: default_university
+  name: First category
 
 two:
-  extranet: two
-  university: two
-  name: MyString
+  extranet: default_extranet
+  university: default_university
+  name: Second category

@@ -22,10 +22,10 @@
 
 one:
   name: MyString
-  university: one
+  university: default_university
   token: MyString
 
 two:
   name: MyString
-  university: two
+  university: default_university
   token: MyOtherString
