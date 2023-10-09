@@ -5,6 +5,7 @@ class Server::WebsitesController < Server::ApplicationController
   has_scope :for_production
   has_scope :for_update
   has_scope :for_search_term
+  has_scope :for_updatable_theme
 
   def index
     @websites = apply_scopes(Communication::Website.all).ordered
