@@ -39,7 +39,7 @@
         <%= f.input :default_image,
                     as: :single_deletable_file,
                     direct_upload: true,
-                    hint: t('default_images_hint', formats: default_images_formats_accepted),
+                    hint: default_images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted },
                     preview: true %>
       <% end %>
