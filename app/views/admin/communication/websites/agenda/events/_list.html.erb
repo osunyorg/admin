@@ -19,8 +19,9 @@
                           class: "#{'draft' unless event.published?}" %>
             </td>
             <td class="small"><%= render 'admin/communication/websites/agenda/events/dates', event: event %></td>
-            <td><%= image_tag event.featured_image.representation(resize: '200x'),
-                              width: 100 if event.featured_image.attached? && event.featured_image.representable? %></td>
+            <td>
+              <%= kamifusen_tag event.featured_image, width: 100 if event.featured_image.attached? %>
+            </td>
           </tr>
         <% end %>
       </tbody>

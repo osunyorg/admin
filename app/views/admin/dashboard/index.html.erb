@@ -2,7 +2,7 @@
 
 <% content_for :title_right do %>
   <% if current_university.logo.attached? %>
-    <%= image_tag current_university.logo, width: 120 %>
+    <%= kamifusen_tag current_university.logo, width: 120 %>
   <% else %>
     <%= current_university %>
   <% end %>

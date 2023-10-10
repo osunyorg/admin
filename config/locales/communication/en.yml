@@ -73,7 +73,7 @@ en:
         about_type: About
         color: Couleur
         cookies_policy: Cookies policy
-        favicon: Favicon (.png)
+        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Directory
         feature_jobs: Job board
@@ -82,7 +82,7 @@ en:
         has_sso: Has SSO?
         home_sentence: Sentence displayed on homepage
         host: Domain
-        logo: Logo (.png, .jpg, .svg)
+        logo: Logo
         name: Name
         privacy_policy: Privacy policy
         registration_contact: Contact mail for registrations problems
@@ -403,6 +403,7 @@ en:
   simple_form:
     hints:
       communication_extranet:
+        favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
       communication_website:

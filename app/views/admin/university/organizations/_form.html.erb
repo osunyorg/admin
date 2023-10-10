@@ -91,13 +91,13 @@
       <%= osuny_panel University::Organization.human_attribute_name('logos') do %>
         <%= f.input :logo,
                     as: :single_deletable_file,
-                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     resize: false,
                     direct_upload: true %>
         <%= f.input :logo_on_dark_background,
                     as: :single_deletable_file,
-                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     resize: false,
                     direct_upload: true %>

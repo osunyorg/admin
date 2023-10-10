@@ -15,7 +15,8 @@
       <%= osuny_panel t('look_feel') do %>
         <%= f.input :logo,
                     as: :single_deletable_file,
-                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    hint: t('default_images_hint', formats: default_images_formats_accepted),
+                    input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     direct_upload: true %>
         <%= f.input :favicon,
