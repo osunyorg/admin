@@ -1,7 +1,7 @@
 <%
 label = t('admin.communication.blocks.components.image.input.label')
 remove = t('admin.communication.blocks.components.image.input.remove')
-hint = t('default_images_hint', formats: default_images_formats_accepted)
+hint = default_images_formats_accepted_hints
 %>
 <div class="mb-3">
   <div v-if="!<%= model %>.<%= property %>.id">

@@ -65,4 +65,8 @@ module ApplicationHelper
     Rails.application.config.default_images_formats.join(', ')
   end
 
+  def default_images_formats_accepted_hints
+    t('default_images_hint', formats: default_images_formats_accepted)
+  end
+
 end
