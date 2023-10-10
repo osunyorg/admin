@@ -21,6 +21,18 @@ class Video::Provider::Default
     URI.parse(iframe_url).host
   end
 
+  def identifier
+    ''
+  end
+
+  def poster
+    ''
+  end
+
+  def embed
+    iframe_url
+  end
+
   def iframe_tag(**iframe_options)
     content_tag(:iframe, nil, default_iframe_options.merge(iframe_options))
   end
