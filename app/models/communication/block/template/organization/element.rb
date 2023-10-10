@@ -17,7 +17,7 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
     organization ? organization.url : url
   end
 
-  def best_logo
+  def best_logo_blob
     organization ? organization.logo.blob : logo_component.blob
   end
 
