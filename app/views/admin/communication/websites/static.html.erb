@@ -1,5 +1,9 @@
 title: >
   <%= @about.to_s %>
+<% if @website.default_image.attached? %>
+default_image:
+  id: <%= @website.default_image.blob&.id %>
+<% end %>
 external_domains:
 <% @website.external_domains.each do |domain| %>
   - "<%= domain %>"

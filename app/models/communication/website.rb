@@ -77,6 +77,9 @@ class Communication::Website < ApplicationRecord
     gitlab: 1
   }
 
+  has_one_attached_deletable :default_image
+  validates :default_image, size: { less_than: 5.megabytes }
+
   before_validation :sanitize_fields
 
   scope :ordered, -> { order(:name) }
@@ -114,7 +117,8 @@ class Communication::Website < ApplicationRecord
     events.where(language_id: language_ids) +
     categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
-    [about]
+    [about] +
+    [default_image&.blob]
   end
 
   def website

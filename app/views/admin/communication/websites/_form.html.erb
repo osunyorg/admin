@@ -35,6 +35,14 @@
                           label_method: lambda { |l| language_name(l.iso_code) }, 
                           input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
       <% end %>
+      <%= osuny_panel Communication::Website.human_attribute_name('appearance') do %>
+        <%= f.input :default_image,
+                    as: :single_deletable_file,
+                    direct_upload: true,
+                    hint: '5 Mo max, .jpg, .jpeg, .png, .svg',
+                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    preview: true %>
+      <% end %>
     </div>
   </div>
   <div class="row">
