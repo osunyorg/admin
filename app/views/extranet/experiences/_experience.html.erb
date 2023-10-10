@@ -20,7 +20,7 @@ edit ||= false
             <%= kamifusen_tag experience.organization.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
           <% end %>
         <% else %>
-          <p class="text-end><%= link_to experience.organization, organization_path(experience.organization) %></p>
+          <p class="text-end"><%= link_to experience.organization, organization_path(experience.organization) %></p>
         <% end %>
       <div>
     <% end %>

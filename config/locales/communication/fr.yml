@@ -73,7 +73,7 @@ fr:
         about_type: Type d'extranet
         color: Couleur
         cookies_policy: Politique de cookies
-        favicon: Favicon (.png)
+        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Annuaire
         feature_jobs: Offres d'emploi
@@ -82,7 +82,7 @@ fr:
         has_sso: A un SSO ?
         home_sentence: Phrase affichée sur la home
         host: Domaine
-        logo: Logo (.png, .jpg, .svg)
+        logo: Logo
         name: Nom
         privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
@@ -405,6 +405,7 @@ fr:
   simple_form:
     hints:
       communication_extranet:
+        favicon: 'Fichier .png uniquement'
         host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
       communication_website:
