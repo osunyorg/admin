@@ -130,9 +130,11 @@ en:
         about_Research::Journal: Journal website
         about_Research::Laboratory: Laboratory website
         about_type: About
+        appearance: Appearance
         autoupdate_theme: Automatically update Osuny theme
         access_token: Access token
         created_at: Creation
+        default_image: Default image
         default_language: Default language
         deployment_status_badge: Deployment status badge
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
