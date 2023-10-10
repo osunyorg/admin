@@ -162,7 +162,7 @@ en:
     formats:
       birthday: "%B %d"
   delete: Delete
-  default_images_hint: "5 Mb max, %{formats}"
+  default_images_hint: "5 MB max, %{formats}"
   devise:
     failure:
       invalid: "Invalid email or password."
