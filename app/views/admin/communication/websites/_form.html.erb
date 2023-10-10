@@ -39,8 +39,8 @@
         <%= f.input :default_image,
                     as: :single_deletable_file,
                     direct_upload: true,
-                    hint: '5 Mo max, .jpg, .jpeg, .png, .svg',
-                    input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                    hint: t('default_images_hint', formats: default_images_formats_accepted),
+                    input_html: { accept: default_images_formats_accepted },
                     preview: true %>
       <% end %>
     </div>
