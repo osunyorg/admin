@@ -25,4 +25,9 @@ class Video::Provider::Peertube < Video::Provider::Default
   def url_looks_like_peertube?
     "/w/".in?(video_url) || "/videos/watch/".in?(video_url)
   end
+
+  # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
+  def embed_with_defaults
+    "#{iframe_url}?autoplay=1"
+  end
 end
