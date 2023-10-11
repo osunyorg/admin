@@ -51,7 +51,7 @@ class Video::Provider::Default
 
   def default_iframe_options
     {
-      class: (platform == :default ? nil : platform),
+      class: platform,
       loading: 'lazy',
       src: iframe_url
     }
