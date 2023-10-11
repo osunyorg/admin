@@ -18,14 +18,14 @@ class Video::Provider::Default
   end
 
   def csp_domains
-    [video_host]
+    [host]
   end
 
   def identifier
     ''
   end
 
-  def video_host
+  def host
     URI.parse(iframe_url).host
   end
 
