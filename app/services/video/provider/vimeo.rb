@@ -25,6 +25,6 @@ class Video::Provider::Vimeo < Video::Provider::Default
 
   # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
   def embed_with_defaults
-    "#{iframe_url}?autoplay=1"
+    "#{iframe_url}?autoplay=1&quality=360p"
   end
 end
