@@ -17,12 +17,16 @@ class Video::Provider::Default
     video_url
   end
 
-  def csp_domain
-    URI.parse(iframe_url).host
+  def csp_domains
+    [host]
   end
 
   def identifier
     ''
+  end
+
+  def host
+    URI.parse(iframe_url).host
   end
 
   def poster
