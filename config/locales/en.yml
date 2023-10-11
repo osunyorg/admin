@@ -310,6 +310,7 @@ en:
   search: Search
   select_language: Select language
   server_admin:
+    dashboard: Server administration
     emergency_messages:
       all_universities: All
       all_roles: All

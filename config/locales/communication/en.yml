@@ -163,6 +163,7 @@ en:
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
         url: URL
+        university: University
       communication/website/agenda/event:
         dates: Dates
         featured_image: Featured image

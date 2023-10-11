@@ -1,0 +1,17 @@
+<% content_for :title, @website %>
+
+<p>
+  Université : 
+  <%= link_to @website.university, server_university_path(@website.university) %>
+</p>
+
+<%= @website.pages.count %> pages<br>
+<%= @website.posts.count %> actualités<br>
+<%= @website.events.count %> événements<br>
+<%= @website.connections.count %> connexions (<%= link_to 'détail', admin_communication_website_connections_path(@website) %>)<br>
+<%= @website.recursive_dependencies.count %> dépendances (<%= link_to 'détail', admin_communication_website_dependencies_path(@website) %>)<br>
+
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('edit'), edit_server_website_path(@website), class: button_classes %>
+<% end %>

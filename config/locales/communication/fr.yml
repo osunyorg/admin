@@ -162,6 +162,7 @@ fr:
         social_vimeo: "Vimeo (privatif)"
         social_x: "X, ex-Twitter (privatif)"
         social_youtube: "Youtube (privatif, appartient à Google)"
+        university: Université
         url: URL
       communication/website/agenda/event:
         dates: Dates
