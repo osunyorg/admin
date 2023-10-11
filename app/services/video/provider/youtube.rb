@@ -7,8 +7,8 @@ class Video::Provider::Youtube < Video::Provider::Default
   ]
 
   def identifier
-    video_url.include?('youtu.be')  ? video_url.split('youtu.be/').last
-                                    : video_url.split('v=').last
+    video_url.include?('youtu.be')  ? identifier_path
+                                    : identifier_param
   end
 
   def csp_domains
@@ -28,5 +28,17 @@ class Video::Provider::Youtube < Video::Provider::Default
   # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
   def embed_with_defaults
     "#{iframe_url}?autoplay=1&modestbranding=1&rel=0"
+  end
+
+  protected
+
+  def identifier_path
+    video_url.split('youtu.be/').last
+  end
+
+  def identifier_param
+    uri = URI(video_url)
+    params = CGI::parse(uri.query)
+    params['v'].first
   end
 end

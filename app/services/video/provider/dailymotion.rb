@@ -2,7 +2,8 @@ class Video::Provider::Dailymotion < Video::Provider::Default
   DOMAINS = [
     'dailymotion.com', 
     'www.dailymotion.com', 
-    'dai.ly'
+    'dai.ly',
+    '*.dmcdn.net'
   ]
 
   def identifier
@@ -22,5 +23,10 @@ class Video::Provider::Dailymotion < Video::Provider::Default
   # https://developer.dailymotion.com/player#player-parameters
   def iframe_url
     "https://www.dailymotion.com/embed/video/#{identifier}"
+  end
+
+  # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
+  def embed_with_defaults
+    "#{iframe_url}?autoplay=1&quality=380"
   end
 end
