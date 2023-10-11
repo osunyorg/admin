@@ -1,5 +1,7 @@
 class Video::Provider::Peertube < Video::Provider::Default
-  DOMAINS = ['peertube.fr']
+  DOMAINS = [
+    'peertube.fr'
+  ]
 
   def identifier
     video_url.split('/w/').last

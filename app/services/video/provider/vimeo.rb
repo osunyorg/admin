@@ -1,5 +1,9 @@
 class Video::Provider::Vimeo < Video::Provider::Default
-  DOMAINS = ['vimeo.com']
+  DOMAINS = [
+    'vimeo.com',
+    'player.vimeo.com',
+    'vumbnail.com'
+  ]
 
   def identifier
     video_url.chomp('/').split('/').last

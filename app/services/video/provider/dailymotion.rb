@@ -1,5 +1,8 @@
 class Video::Provider::Dailymotion < Video::Provider::Default
-  DOMAINS = ['dailymotion.com', 'dai.ly']
+  DOMAINS = [
+    'dailymotion.com', 
+    'dai.ly'
+  ]
 
   def identifier
     video_url.include?('dai.ly')  ? video_url.split('dai.ly/').last
