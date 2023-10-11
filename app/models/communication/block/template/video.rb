@@ -5,10 +5,30 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
   has_component :transcription, :text
 
   def video_iframe
-    Video::Provider.find(url).iframe_tag(title: video_title)
+    video_provider.iframe_tag(title: video_title)
+  end
+
+  def video_platform
+    video_provider.platform
+  end
+
+  def video_identifier
+    video_provider.identifier
+  end
+
+  def video_poster
+    video_provider.poster
+  end
+
+  def video_embed
+    video_provider.embed
   end
 
   protected
+
+  def video_provider
+    @video_provider ||= Video::Provider.find(url)
+  end
 
   def check_accessibility
     super
