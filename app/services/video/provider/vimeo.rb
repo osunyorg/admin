@@ -5,6 +5,10 @@ class Video::Provider::Vimeo < Video::Provider::Default
     video_url.chomp('/').split('/').last
   end
 
+  def csp_domains
+    DOMAINS
+  end
+
   # https://vumbnail.com/621585396.jpg
   def poster
     "https://vumbnail.com/#{identifier}.jpg"

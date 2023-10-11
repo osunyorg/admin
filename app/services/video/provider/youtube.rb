@@ -1,9 +1,18 @@
 class Video::Provider::Youtube < Video::Provider::Default
-  DOMAINS = ['youtube.com', 'youtu.be']
+  DOMAINS = [
+    'youtube.com', 
+    'www.youtube.com', 
+    'img.youtube.com', 
+    'youtu.be', 
+  ]
 
   def identifier
     video_url.include?('youtu.be')  ? video_url.split('youtu.be/').last
                                     : video_url.split('v=').last
+  end
+
+  def csp_domains
+    DOMAINS
   end
 
   # https://img.youtube.com/vi/XEEUOiTgJL0/hqdefault.jpg

@@ -6,6 +6,10 @@ class Video::Provider::Dailymotion < Video::Provider::Default
                                   : video_url.split('video/').last
   end
 
+  def csp_domains
+    DOMAINS
+  end
+
   # https://www.dailymotion.com/thumbnail/video/x8lyp39
   def poster
     "https://www.dailymotion.com/thumbnail/video/#{identifier}"
