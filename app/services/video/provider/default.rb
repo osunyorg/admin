@@ -37,6 +37,10 @@ class Video::Provider::Default
     iframe_url
   end
 
+  def embed_with_defaults
+    embed
+  end
+
   def iframe_tag(**iframe_options)
     content_tag(:iframe, nil, default_iframe_options.merge(iframe_options))
   end
