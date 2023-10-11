@@ -22,4 +22,9 @@ class Video::Provider::Vimeo < Video::Provider::Default
   def iframe_url
     "https://player.vimeo.com/video/#{identifier}"
   end
+
+  # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
+  def embed_with_defaults
+    "#{iframe_url}?autoplay=1"
+  end
 end
