@@ -24,4 +24,9 @@ class Video::Provider::Youtube < Video::Provider::Default
   def iframe_url
     "https://www.youtube.com/embed/#{identifier}"
   end
+
+  # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
+  def embed_with_defaults
+    "#{iframe}?autoplay=1"
+  end
 end

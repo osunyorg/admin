@@ -24,6 +24,10 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     video_provider.embed
   end
 
+  def video_embed_with_defaults
+    video_provider.embed_with_defaults
+  end
+
   protected
 
   def video_provider

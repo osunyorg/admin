@@ -1,6 +1,7 @@
 class Video::Provider::Dailymotion < Video::Provider::Default
   DOMAINS = [
     'dailymotion.com', 
+    'www.dailymotion.com', 
     'dai.ly'
   ]
 
