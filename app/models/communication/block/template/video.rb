@@ -5,7 +5,12 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
   has_component :transcription, :text
 
   def video_iframe
-    video_provider.iframe_tag(title: video_title)
+    video_provider.iframe_tag(title: video_iframe_title)
+  end
+
+  def video_iframe_title
+    video_title.blank?  ? 'Video'
+                        : video_title
   end
 
   def video_platform
@@ -22,6 +27,10 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
 
   def video_embed
     video_provider.embed
+  end
+
+  def video_embed_with_defaults
+    video_provider.embed_with_defaults
   end
 
   protected
