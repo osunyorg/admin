@@ -38,7 +38,18 @@ class Communication::Website::Connection < ApplicationRecord
     for_object(object).distinct(:website).collect(&:website).uniq
   end
 
+  def destroy_if_obsolete
+    destroy if obsolete?
+  end
+  handle_asynchronously :destroy_if_obsolete, queue: :low_priority
+
   def to_s
     "#{id.split('-').first}"
+  end
+
+  protected
+
+  def obsolete?
+    !indirect_object.in?(direct_source.recursive_dependencies)
   end
 end

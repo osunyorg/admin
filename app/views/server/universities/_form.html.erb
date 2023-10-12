@@ -27,7 +27,7 @@
     <div class="col-md-4">
       <%= f.input :logo,
                   as: :single_deletable_file,
-                  input_html: { accept: '.jpg,.jpeg,.png,.svg' },
+                  input_html: { accept: default_images_formats_accepted },
                   preview: false,
                   direct_upload: true %>
     </div>

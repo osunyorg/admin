@@ -43,15 +43,12 @@ context ||= :admin
       <div class="row">
         <%= render_navigation context: context, renderer: Osuny::SimpleNavigationRenderer %>
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <% 
-          if current_user.picture.attached? && current_user.picture.variable? 
-            image = current_user.picture.variant(resize: '200x200')
-          else
-            image = 'avatar.jpg'
-          end
-          %>
           <%= link_to admin_user_path(current_user) do %>
-            <%= image_tag image, class: 'image', loading: :lazy %>
+            <% if current_user.picture.attached? %>
+              <%= kamifusen_tag current_user.picture, width: 100, height: 100, class: 'image' %>
+            <% else %>
+              <%= image_tag 'avatar.jpg', class: 'image', loading: :lazy %>
+            <% end %>
           <% end %>
           <h2><%= link_to current_user.to_s, admin_user_path(current_user) %></h2>
           <ul>

@@ -1,10 +1,4 @@
 <% block.template.elements.first(4).each do |element| %>
-  <%
-  component = element.image_component
-  blob = component.blob
-  next unless blob
-  image = blob.variable?  ? blob.variant(resize: 'x180')
-                          : blob
-  %>
-  <%= image_tag image, height: 90, alt: '', class: 'me-2' %>
+  <% blob = element.image_component.blob %>
+  <%= kamifusen_tag blob, height: 90, alt: '', class: 'me-2' if blob %>
 <% end %>

@@ -130,5 +130,3 @@ fr:
       research_journal_paper:
         authors_list: Tapez la liste des auteurs si vous n'utilisez pas les cases à cocher “Auteur·e·s” ci-dessus
         doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
-      research_journal_volume:
-        cover: Fichier JPG ou PNG

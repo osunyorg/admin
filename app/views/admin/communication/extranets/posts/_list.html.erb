@@ -14,11 +14,12 @@
           <td class="ps-0"><%= link_to post,
                           admin_communication_extranet_post_path(extranet_id: post.extranet.id, id: post.id),
                           class: "#{'draft' unless post.published?}" %></td>
-          <td><%= image_tag post.featured_image.representation(resize: '200x'),
-                                            width: 100 if post.featured_image.attached? && post.featured_image.representable? %></td>
+          <td>
+            <%= kamifusen_tag post.featured_image, width: 100 if post.featured_image.attached? %>
+          </td>
           <td class="ps-3 small">
-            <%= t post.published %>, 
-            <%= l post.published_at, format: :date_with_explicit_month if post.published_at %><br>
+            <%= t(post.published) %>, 
+            <%= l(post.published_at, format: :date_with_explicit_month) if post.published_at %><br>
             <%= post.author %>
           </td>
           <td>

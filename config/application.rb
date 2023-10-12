@@ -68,6 +68,7 @@ module Osuny
     ]
 
     config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'
+    config.default_images_formats = ['.jpg', '.jpeg', '.png', '.svg']
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

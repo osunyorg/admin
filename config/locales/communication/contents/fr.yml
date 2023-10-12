@@ -33,7 +33,6 @@ fr:
             input:
               label: Image
               remove: Enlever l'image
-              hint: 5 Mo max, .png, .jpg, .svg
             alt:
               label: Texte alternatif
               placeholder: Entrer la description textuelle
@@ -203,7 +202,6 @@ fr:
                 image:
                   label: Image
                   remove: Enlever l'image
-                  hint: 5 Mo max, .png, .jpg, .svg
                 alt:
                   label: Texte alternatif
                   placeholder: Entrer la description textuelle
