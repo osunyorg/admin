@@ -2,7 +2,7 @@
 
 <%= osuny_panel "CSP" do %>
   <ul class="list-unstyled">
-    <% @website.external_domains.each do |domain| %>
+    <% @website.allowed_domains.each do |domain| %>
       <li><%= domain %></li>
     <% end %>
   </ul>

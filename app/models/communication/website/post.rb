@@ -120,7 +120,8 @@ class Communication::Website::Post < ApplicationRecord
     active_storage_blobs +
     blocks +
     categories +
-    [author&.author]
+    [author&.author] +
+    [website.config_default_content_security_policy]
   end
 
   def references

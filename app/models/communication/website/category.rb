@@ -90,11 +90,16 @@ class Communication::Website::Category < ApplicationRecord
   def dependencies
     active_storage_blobs +
     blocks +
-    children
+    children +
+    [website.config_default_content_security_policy]
   end
 
   def references
-    posts + [parent] + siblings + website.menus + abouts_with_post_block
+    posts +
+    [parent] +
+    siblings +
+    website.menus +
+    abouts_with_post_block
   end
 
   def update_children_paths

@@ -1,35 +1,39 @@
 module Communication::Website::WithSecurity
   extend ActiveSupport::Concern
 
-  def external_domains
-    list = external_domains_default
-    list.concat external_domains_plausible
-    list.concat external_domains_from_blocks_video
-    list.concat external_domains_from_blocks_embed(blocks)
-    list.concat external_domains_from_blocks_embed(blocks_from_education)
-    list.concat external_domains_from_blocks_embed(blocks_from_research)
-    list.concat external_domains_from_blocks_embed(blocks_from_university)
+  def allowed_domains
+    list = allowed_domains_default
+    list.concat allowed_domains_plausible
+    list.concat allowed_domains_from_all_blocks_video
+    list.concat allowed_domains_from_all_blocks_embed
     list.uniq.compact
   end
 
   protected
 
-  def external_domains_default
+  def allowed_domains_default
     [
       'osuny-1b4da.kxcdn.com',      # KeyCDN for assets resize
       '*.osuny.org',                # Osuny for assets resize
       'osuny.s3.fr-par.scw.cloud',  # Scaleway for direct assets
-      'tile.openstreetmap.org'      # Open Street Map default tiles 
+      'tile.openstreetmap.org'      # Open Street Map default tiles
     ]
   end
 
-  def external_domains_plausible
+  def allowed_domains_plausible
     list = []
     list << URI.parse(plausible_url).host if plausible_url.present?
     list
   end
 
-  def external_domains_from_blocks_video
+  def allowed_domains_from_all_blocks_video
+    allowed_domains_from_blocks_video(blocks) +
+    allowed_domains_from_blocks_video(blocks_from_education) +
+    allowed_domains_from_blocks_video(blocks_from_research) +
+    allowed_domains_from_blocks_video(blocks_from_university)
+  end
+
+  def allowed_domains_from_blocks_video(blocks)
     list = []
     blocks.where(template_kind: :video).each do |block|
       video_url = block.template.url
@@ -39,7 +43,14 @@ module Communication::Website::WithSecurity
     list
   end
 
-  def external_domains_from_blocks_embed(blocks)
+  def allowed_domains_from_all_blocks_embed
+    allowed_domains_from_blocks_embed(blocks) +
+    allowed_domains_from_blocks_embed(blocks_from_education) +
+    allowed_domains_from_blocks_embed(blocks_from_research) +
+    allowed_domains_from_blocks_embed(blocks_from_university)
+  end
+
+  def allowed_domains_from_blocks_embed(blocks)
     list = []
     blocks.where(template_kind: :embed).published.each do |block|
       code = block.template.code

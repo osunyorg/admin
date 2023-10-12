@@ -96,13 +96,14 @@ class Communication::Website::Page < ApplicationRecord
   }
   scope :for_published, -> (published) { where(published: published == 'true') }
   scope :for_full_width, -> (full_width) { where(full_width: full_width == 'true') }
-  
+
   def template_static
     "admin/communication/websites/pages/static"
   end
 
   def dependencies
     calculated_dependencies = active_storage_blobs + blocks
+    calculated_dependencies += [website.config_default_content_security_policy]
     # children are used only if there is no block to display
     calculated_dependencies += children unless blocks.published.any?
     calculated_dependencies
