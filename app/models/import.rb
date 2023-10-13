@@ -10,7 +10,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  university_id     :uuid             not null, indexed
-#  user_id           :uuid             not null, indexed
+#  user_id           :uuid             indexed
 #
 # Indexes
 #
@@ -24,10 +24,9 @@
 #
 class Import < ApplicationRecord
   belongs_to :university
-  belongs_to :user
+  belongs_to :user, optional: true
 
   has_one_attached_deletable :file
-
 
   enum kind: { organizations: 0, alumni_cohorts: 1, people_experiences: 2 }, _prefix: :kind
   enum status: { pending: 0, finished: 1, finished_with_errors: 2 }

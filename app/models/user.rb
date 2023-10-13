@@ -72,6 +72,7 @@ class User < ApplicationRecord
 
   belongs_to :language
   has_many :university_people, class_name: 'University::Person', dependent: :nullify
+  has_many :imports, class_name: 'Import', dependent: :nullify
 
   scope :ordered, -> { order(:last_name, :first_name) }
   scope :for_language, -> (language_id) { where(language_id: language_id) }

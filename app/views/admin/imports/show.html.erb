@@ -2,7 +2,14 @@
 
 <div class="row">
   <div class="col-md-6">
-    <p><%= t('imports.initiated_by') %> <%= link_to_if can?(:read, @import.user), @import.user, [:admin, @import.user] %></p>
+    <p>
+      <%= t('imports.initiated_by') %> 
+      <% if @import.user %>
+        <%= link_to_if can?(:read, @import.user), @import.user, [:admin, @import.user] %>
+      <% else %>
+        <%= t('imports.deleted_user') %> 
+      <% end %>
+    </p>
     <% if @import.file.attached? %>
       <p><%= link_to t('download_with_size', size: number_to_human_size(@import.file.byte_size)), url_for(@import.file), class: button_classes  %></p>
     <% end %>
