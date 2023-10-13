@@ -16,11 +16,11 @@ module Communication::Website::WithSecurity
 
   def external_domains_default
     [
-      'osuny-1b4da.kxcdn.com',      # KeyCDN for assets resize
+      ENV['KEYCDN_HOST'],           # KeyCDN for assets resize
       '*.osuny.org',                # Osuny for assets resize
       'osuny.s3.fr-par.scw.cloud',  # Scaleway for direct assets
-      'tile.openstreetmap.org'      # Open Street Map default tiles 
-    ]
+      'tile.openstreetmap.org'      # Open Street Map default tiles
+    ].compact
   end
 
   def external_domains_plausible
