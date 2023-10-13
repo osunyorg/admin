@@ -284,7 +284,7 @@ en:
       website_invalid_access_token:
         subject: "Expired access token for \"%{website}\""
         text_line_1_html: "The access token used for the website \"%{website}\" has expired and does not allow the website to be updated anymore."
-        text_line_2_html: "To solve this issue, please fill in a new access token by clicking <a href=\"%{url}\">here</a>."
+        text_line_2_html: "To solve this issue, please fill in a new access token by clicking <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">here</a>."
     yours: Yours.
   menu:
     admin: Admin
