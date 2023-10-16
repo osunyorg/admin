@@ -394,8 +394,9 @@ GEM
       time
       uri
     orm_adapter (0.5.0)
-    orthotypo (0.5.1)
+    orthotypo (0.6.0)
       htmlentities
+      nokogiri
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
