@@ -1,11 +1,9 @@
 ---
-title: >-
-  <%= prepare_text_for_static @about.title %>
+title: "<%= prepare_text_for_static @about.title %>"
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false, toc_present: true %>
 <%= render 'admin/application/static/permalink' %>
 <% if @about.kind %>
-paper_kind: >-
-  <%= prepare_text_for_static @about.kind %>
+paper_kind: "<%= prepare_text_for_static @about.kind %>"
 paper_kinds:
   - "<%= @about.kind.slug %>"
 <% end %>
@@ -24,7 +22,7 @@ pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
 <% if @about.bibliography %>
 bibliography: >
-  <%= prepare_html_for_static @about.bibliography, @about.university %>
+  <%= prepare_html_for_static @about.bibliography %>
 <% end %>
 keywords: >
   <%= prepare_text_for_static @about.keywords %>
@@ -32,8 +30,7 @@ researchers:
 <% @about.people.each do |person| %>
 - "<%= person.slug %>"
 <% end %>
-authors_list: >
-  <%= prepare_text_for_static @about.authors_list %>
+authors_list: "<%= prepare_text_for_static @about.authors_list %>"
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 abstract: >
@@ -41,20 +38,20 @@ abstract: >
 citations:
   - label: "APA"
     content: >-
-      <%= prepare_html_for_static @about.citation_apa(website: @website), @website.university %>
+      <%= prepare_html_for_static @about.citation_apa(website: @website) %>
   - label: "MLA"
     content: >-
-      <%= prepare_html_for_static @about.citation_mla(website: @website), @website.university %>
+      <%= prepare_html_for_static @about.citation_mla(website: @website) %>
   - label: "Chicago"
     content: >-
-      <%= prepare_html_for_static @about.citation_chicago(website: @website), @website.university %>
+      <%= prepare_html_for_static @about.citation_chicago(website: @website) %>
   - label: "Harvard"
     content: >-
-      <%= prepare_html_for_static @about.citation_harvard(website: @website), @website.university %>
+      <%= prepare_html_for_static @about.citation_harvard(website: @website) %>
   <% if @website.default_language.iso_code == "fr" %>
   - label: "ISO 690"
     content: >-
-      <%= prepare_html_for_static @about.citation_iso690(website: @website), @website.university %>
+      <%= prepare_html_for_static @about.citation_iso690(website: @website) %>
   <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

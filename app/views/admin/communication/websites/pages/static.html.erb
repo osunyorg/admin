@@ -1,6 +1,6 @@
 ---
-title: "<%= @about.title %>"
-breadcrumb_title: "<%= @about.best_title  %>"
+title: "<%= prepare_text_for_static @about.title %>"
+breadcrumb_title: "<%= prepare_text_for_static @about.best_title %>"
 <%= render 'admin/application/static/breadcrumbs', 
             pages: @about.ancestors,
             current: @about %>
@@ -33,6 +33,6 @@ children:
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 header_text: >-
-  <%= prepare_html_for_static @about.header_text, @website.university %>
+  <%= prepare_html_for_static @about.header_text %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

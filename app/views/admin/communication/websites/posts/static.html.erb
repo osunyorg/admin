@@ -1,5 +1,5 @@
 ---
-title: "<%= @about.title %>"
+title: "<%= prepare_text_for_static @about.title %>"
 date: "<%= @about.published_at&.iso8601 %>"
 <%= render 'admin/application/static/breadcrumbs', 
             pages: @website.special_page(Communication::Website::Page::CommunicationPost).ancestors_and_self,
@@ -25,4 +25,4 @@ categories:
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
-<%= prepare_html_for_static @about.text, @about.university %>
+<%= prepare_html_for_static @about.text %>

@@ -129,25 +129,17 @@ module Admin::ApplicationHelper
                 form: form.options.dig(:html, :id)
   end
 
-  def prepare_html_for_static(html, university)
-    text = html.to_s.strip.dup
-    text = sanitize text
-    text.gsub! "\r", ''
-    text.gsub! "\n", ' '
-    text.gsub! "/rails/active_storage", "#{university.url}/rails/active_storage"
-    sanitize text
+  def prepare_html_for_static(text)
+    university = current_university || @website&.university || @about&.university
+    Static::Html.new(text, about: @about, university: university).prepared
   end
 
-  def prepare_text_for_static(text, depth = 1)
-    text = strip_tags text.to_s.strip.dup
-    text = indent text, depth
-    CGI.unescapeHTML text
+  def prepare_text_for_static(text, depth: 1)
+    Static::Text.new(text, depth: depth, about: @about).prepared
   end
 
-  def prepare_code_for_static(code, depth = 1)
-    text = code.to_s.dup
-    text = indent text, depth
-    raw text
+  def prepare_code_for_static(text, depth: 1, about: nil)
+    Static::Code.new(text, depth: depth, about: @about).prepared
   end
 
   def has_content?(html)

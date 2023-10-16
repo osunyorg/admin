@@ -1,17 +1,12 @@
 ---
 <% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
-name: >
-  <%= @about.name %>
-address: >
-  <%= @about.address %>
-zipcode: >
-  <%= @about.zipcode %>
-city: >
-  <%= @about.city %>
-country: >
-  <%= @about.country_common_name %>
-phone: >
-  <%= @about.phone %>
+name: "<%= prepare_text_for_static @about.name %>"
+address: >-
+  <%= prepare_text_for_static @about.address %>
+zipcode: "<%= prepare_text_for_static @about.zipcode %>"
+city: "<%= prepare_text_for_static @about.city %>"
+country: "<%= prepare_text_for_static @about.country_common_name %>"
+phone: "<%= prepare_text_for_static @about.phone %>"
 <% if administrator_involvements.any? %>
 administrators:
 <% administrator_involvements.each do |involvement| %>
@@ -25,7 +20,7 @@ administrators_description:
 roles:
 <% @about.university_roles.ordered.each do |role| %>
   - title: >
-      <%= role.to_s %>
+      <%= prepare_text_for_static role.to_s %>
     persons:
     <% role.involvements.includes(:person).ordered.each do |involvement| %>
       - "<%= involvement.person.slug %>"

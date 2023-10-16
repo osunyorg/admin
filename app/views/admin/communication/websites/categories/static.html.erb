@@ -1,5 +1,5 @@
 ---
-title: "<%= @about.name %>"
+title: "<%= prepare_text_for_static @about.name %>"
 <%= render 'admin/application/static/permalink', forced_slug: @about.slug_with_ancestors_slugs %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <% if @about.parent %>

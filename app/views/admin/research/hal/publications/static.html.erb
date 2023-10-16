@@ -5,9 +5,9 @@ date: "<%= @about.publication_date&.iso8601 %>"
 <%= render 'admin/application/static/permalink' %>
 docid: "<%= @about.docid %>"
 abstract: >-
-  <%= prepare_html_for_static @about.abstract, @website.university %>
+  <%= prepare_html_for_static @about.abstract %>
 citation_full: >-
-  <%= prepare_html_for_static @about.citation_full, @website.university %>
+  <%= prepare_html_for_static @about.citation_full %>
 authors_list: >-
   <%= @about.authors_list %>
 ref: >-
@@ -28,19 +28,19 @@ researchers:
 citations:
   - label: "APA"
     content: >-
-      <%= prepare_html_for_static @about.citation_apa, @website.university %>
+      <%= prepare_html_for_static @about.citation_apa %>
   - label: "MLA"
     content: >-
-      <%= prepare_html_for_static @about.citation_mla, @website.university %>
+      <%= prepare_html_for_static @about.citation_mla %>
   - label: "Chicago"
     content: >-
-      <%= prepare_html_for_static @about.citation_chicago, @website.university %>
+      <%= prepare_html_for_static @about.citation_chicago %>
   - label: "Harvard"
     content: >-
-      <%= prepare_html_for_static @about.citation_harvard, @website.university %>
+      <%= prepare_html_for_static @about.citation_harvard %>
   <% if @website.default_language.iso_code == "fr" %>
   - label: "ISO 690"
     content: >-
-      <%= prepare_html_for_static @about.citation_iso690, @website.university %>
+      <%= prepare_html_for_static @about.citation_iso690 %>
   <% end %>
 ---

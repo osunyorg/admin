@@ -1,6 +1,5 @@
 ---
-title: >-
-  <%= prepare_text_for_static @about.title %>
+title: "<%= prepare_text_for_static @about.title %>"
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: false, toc_present: false %>
 <%= render 'admin/application/static/permalink' %>
 number: <%= @about.number %>
@@ -12,4 +11,4 @@ date: "<%= @about.published_at.iso8601 %>"
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 ---
-<%= prepare_html_for_static @about.text, @about.university %>
+<%= prepare_html_for_static @about.text %>

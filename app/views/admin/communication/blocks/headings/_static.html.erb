@@ -1,6 +1,5 @@
   - kind: heading
-    title: >-
-      <%= prepare_text_for_static heading.title %>
+    title: "<%= prepare_text_for_static heading.title %>"
     position: <%= heading.position %>
     level: <%= heading.level %>
 <% heading.blocks.published.ordered.each do |block| %>

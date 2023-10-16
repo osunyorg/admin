@@ -103,7 +103,7 @@ GEM
     autoprefixer-rails (10.4.15.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.834.0)
+    aws-partitions (1.835.0)
     aws-sdk-core (3.185.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -180,7 +180,7 @@ GEM
     date (3.3.3)
     delayed_job (4.1.11)
       activesupport (>= 3.0, < 8.0)
-    delayed_job_active_record (4.1.7)
+    delayed_job_active_record (4.1.8)
       activerecord (>= 3.0, < 8.0)
       delayed_job (>= 3.0, < 5)
     delayed_job_prevent_duplicate (0.1.4)
@@ -394,6 +394,8 @@ GEM
       time
       uri
     orm_adapter (0.5.0)
+    orthotypo (0.5.1)
+      htmlentities
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
@@ -637,6 +639,7 @@ DEPENDENCIES
   octokit
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth-saml (~> 2.0)
+  orthotypo
   pexels (~> 0.5.0)
   pg (~> 1.1)
   puma

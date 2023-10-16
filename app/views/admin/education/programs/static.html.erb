@@ -7,8 +7,7 @@ administrator_involvements = @about.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name
 %>
-title: >
-  <%= @about.name %>
+title: "<%= prepare_text_for_static @about.name %>"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true, toc_present: true %>
 <% if @about.downloadable_summary.attached? %>
@@ -81,7 +80,7 @@ apprenticeship: <%= @about.apprenticeship %>
   :results
 ].each do |property| %>
 <%= property.to_s %>: >
-  <%= prepare_html_for_static @about.send("best_#{property}"), @about.university %>
+  <%= prepare_html_for_static @about.send("best_#{property}") %>
 <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
