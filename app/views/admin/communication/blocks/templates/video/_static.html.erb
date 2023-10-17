@@ -3,5 +3,17 @@
 <% if block.template.url.present? %>
       video_iframe: >-
         <%= block.template.video_iframe %>
+      video: 
+        platform: "<%= block.template.video_platform %>"
+        identifier: "<%= block.template.video_identifier %>"
+        title: "<%= block.template.video_iframe_title %>"
+        poster: >-
+          <%= block.template.video_poster %>
+        embed: >-
+          <%= block.template.video_embed %>
+        embed_with_defaults: >-
+          <%= block.template.video_embed_with_defaults %>
+        iframe: >-
+          <%= block.template.video_iframe %>
 <% end %>
 <%= block_component_static block, :transcription %>

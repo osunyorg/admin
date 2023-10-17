@@ -6,6 +6,8 @@ module User::WithRegistrationContext
 
     validate :extranet_access, on: :create, if: -> { registration_context.is_a?(Communication::Extranet) }
 
+    after_create :send_notification_to_admins, unless: -> { registration_context.is_a?(Communication::Extranet) }
+
     private
 
     def extranet_access
@@ -28,6 +30,10 @@ module User::WithRegistrationContext
 
     def user_is_contact?
       registration_context.has_feature?(:contacts) && registration_context.connected_people.where(email: email).any?
+    end
+
+    def send_notification_to_admins
+      NotificationMailer.new_registration(university, self).deliver_later
     end
 
   end
