@@ -27,10 +27,6 @@ class Server::WebsitesController < Server::ApplicationController
 
   def update
     @website.update(website_params)
-    @website.recursive_dependencies.each do |dependency|
-      next unless dependency.respond_to?(:university_id)
-      dependency.update_column :university_id, @website.university_id
-    end
     redirect_to server_website_path(@website), notice: t('admin.successfully_updated_html', model: @website.to_s)
   end
 

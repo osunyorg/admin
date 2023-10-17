@@ -81,6 +81,7 @@ class Communication::Website < ApplicationRecord
   validates :default_image, size: { less_than: 5.megabytes }
 
   before_validation :sanitize_fields
+  after_save :manage_university_change
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
@@ -154,5 +155,22 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def manage_university_change
+    if saved_change_to_university_id?
+      recursive_dependencies.each do |dependency|
+        reconnect_dependency dependency
+      end
+    end
+  end
+  
+  def reconnect_dependency(dependency)
+    return unless dependency.respond_to?(:university_id)
+    # vérifier par les connexions qu'un objet indirect n'est pas utilisé dans un autre website
+    return if dependency.connections.where.not(website: self).any?
+    # il faut si l'objet est une person déconnecter le user éventuellement associé.
+    dependency.update_column :user_id, nil if dependency.is_a? University::Person
+    dependency.update_column :university_id, university_id
   end
 end
