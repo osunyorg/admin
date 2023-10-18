@@ -1,7 +1,6 @@
 class Static::Text < Static::Default
 
   def prepared
-    byebug if @about.nil?
     unless @prepared
       @prepared = @text.to_s.strip.dup
       @prepared = @prepared.ortho(locale: locale)
