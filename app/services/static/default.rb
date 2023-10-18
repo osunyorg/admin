@@ -13,7 +13,7 @@ class Static::Default
 
   protected
 
-  def ortho_locale
+  def locale
     return if @about.nil?
     return unless @about.respond_to?(:language)
     @about.language&.iso_code
