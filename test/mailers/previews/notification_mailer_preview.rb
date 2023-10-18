@@ -23,5 +23,10 @@ class NotificationMailerPreview < BaseMailerPreview
     NotificationMailer.low_sms_credits(university, credits)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/notification_mailer/new_registration
+  def new_registration
+    NotificationMailer.new_registration(university, user)
+  end
+
 
 end

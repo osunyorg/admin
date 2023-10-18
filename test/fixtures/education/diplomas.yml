@@ -8,7 +8,7 @@
 #  level         :integer          default("not_applicable")
 #  name          :string
 #  short_name    :string
-#  slug          :string
+#  slug          :string           indexed
 #  summary       :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -16,6 +16,7 @@
 #
 # Indexes
 #
+#  index_education_diplomas_on_slug           (slug)
 #  index_education_diplomas_on_university_id  (university_id)
 #
 # Foreign Keys

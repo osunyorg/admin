@@ -34,7 +34,17 @@ class NotificationMailer < ApplicationMailer
     merge_with_university_infos(university, {})
     @credits = credits.to_i
     mails = university.users.server_admin.pluck(:email)
+    I18n.locale = university.default_language.iso_code
     subject = t('mailers.notifications.low_sms_credits.subject', credits: @credits)
+    mail(from: university.mail_from[:full], to: mails, subject: subject)
+  end
+  
+  def new_registration(university, user)
+    merge_with_university_infos(university, {})
+    @user = user
+    mails = university.users.where.not(id: @user.id).where(role: [:server_admin, :admin]).pluck(:email)
+    I18n.locale = university.default_language.iso_code
+    subject = t('mailers.notifications.new_registration.subject', mail: @user.email)
     mail(from: university.mail_from[:full], to: mails, subject: subject)
   end
 

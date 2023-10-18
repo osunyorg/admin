@@ -25,7 +25,7 @@
 #  phone_mobile       :string
 #  phone_personal     :string
 #  phone_professional :string
-#  slug               :string
+#  slug               :string           indexed
 #  summary            :text
 #  tenure             :boolean          default(FALSE)
 #  twitter            :string
@@ -42,6 +42,7 @@
 #
 #  index_university_people_on_language_id    (language_id)
 #  index_university_people_on_original_id    (original_id)
+#  index_university_people_on_slug           (slug)
 #  index_university_people_on_university_id  (university_id)
 #  index_university_people_on_user_id        (user_id)
 #
@@ -98,11 +99,6 @@ class University::Person < ApplicationRecord
                           class_name: 'Communication::Website::Post',
                           foreign_key: :author_id,
                           dependent: :nullify
-
-  has_many                :communication_website_imported_authors,
-                          class_name: "Communication::Website::Imported::Author",
-                          foreign_key: :author_id,
-                          dependent: :destroy
 
   has_many                :involvements,
                           class_name: 'University::Person::Involvement',

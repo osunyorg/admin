@@ -16,7 +16,7 @@
       <h1><%= @post %></h1>
       <p class="small">
         <% if @post.published_at %>
-          Publié le <%= l @post.published_at.to_date, format: :long %>
+          Publié le <%= l @post.published_at, format: :date_with_explicit_month %>
         <% end %>
         <% if @post.category %>
           <br>

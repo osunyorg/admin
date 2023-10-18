@@ -10,7 +10,7 @@
 #  pinned                   :boolean          default(FALSE)
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
-#  slug                     :text
+#  slug                     :string           indexed
 #  summary                  :text
 #  text                     :text
 #  title                    :string
@@ -28,6 +28,7 @@
 #  index_communication_website_posts_on_communication_website_id  (communication_website_id)
 #  index_communication_website_posts_on_language_id               (language_id)
 #  index_communication_website_posts_on_original_id               (original_id)
+#  index_communication_website_posts_on_slug                      (slug)
 #  index_communication_website_posts_on_university_id             (university_id)
 #
 # Foreign Keys
@@ -53,9 +54,6 @@ class Communication::Website::Post < ApplicationRecord
 
   has_summernote :text # TODO: Remove text attribute
 
-  has_one :imported_post,
-          class_name: 'Communication::Website::Imported::Post',
-          dependent: :destroy
   belongs_to :author,
              class_name: 'University::Person',
              optional: true

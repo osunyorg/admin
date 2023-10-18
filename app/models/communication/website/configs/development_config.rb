@@ -7,6 +7,8 @@
 #  access_token            :string
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
+#  deuxfleurs_hosting      :boolean          default(TRUE)
+#  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
@@ -16,7 +18,9 @@
 #  name                    :string
 #  plausible_url           :string
 #  repository              :string
+#  social_email            :string
 #  social_facebook         :string
+#  social_github           :string
 #  social_instagram        :string
 #  social_linkedin         :string
 #  social_mastodon         :string

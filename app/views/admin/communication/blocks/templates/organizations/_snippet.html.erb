@@ -1,0 +1,9 @@
+<% block.template.elements.first(3).each do |element| %>
+  <div class="me-2 bg-light p-2">
+    <% if element.best_logo_blob %>
+      <%= kamifusen_tag element.best_logo_blob %>
+    <% else %>
+      <p><%= element.best_name %></p>
+    <% end %>
+  </div>
+<% end %>

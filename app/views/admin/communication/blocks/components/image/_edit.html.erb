@@ -1,7 +1,7 @@
 <%
 label = t('admin.communication.blocks.components.image.input.label')
 remove = t('admin.communication.blocks.components.image.input.remove')
-hint = t('admin.communication.blocks.components.image.input.hint')
+hint = default_images_formats_accepted_hint
 %>
 <div class="mb-3">
   <div v-if="!<%= model %>.<%= property %>.id">
@@ -11,7 +11,7 @@ hint = t('admin.communication.blocks.components.image.input.hint')
     </label>
     <input  class="form-control"
             type="file"
-            accept="image/*"
+            accept="<%= default_images_formats_accepted %>"
             @change="onFileImageChange( $event, <%= model %>, '<%= property %>' )"
             data-size-limit="<%= Communication::Block::IMAGE_MAX_SIZE %>"
             :id="<%= dom_id.html_safe %>"

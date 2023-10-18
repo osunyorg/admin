@@ -1,13 +1,13 @@
 <div class="table-responsive">
-  <table class="<%= table_classes %>">
+  <table class="<%= table_classes %> table-hover">
     <thead>
       <tr>
         <th><%= Communication::Website.human_attribute_name('name') %></th>
-        <th><%= Communication::Website.human_attribute_name('url') %></th>
-        <th><%= Communication::Website.human_attribute_name('status') %></th>
         <th><%= University.model_name.human %></th>
-        <th><%= Communication::Website.human_attribute_name('theme_version') %></th>
-        <th></th>
+        <th>Back-office</th>
+        <th colspan="2">Référentiel Git</th>
+        <th colspan="2">Site</th>
+        <th>
       </tr>
     </thead>
     <tbody>
@@ -19,34 +19,37 @@
               <span class="badge bg-success">Prod</span>
             <% end %>
           </td>
+          <td><%= link_to website.university, 
+                          [:server, website.university] %></td>
+          <td><%= link_to 'Admin', 
+                          admin_communication_website_url(website, host: website.university.url), 
+                          target: :_blank,
+                          class: 'btn btn-xs btn-light' %></td>
+          <td><%= link_to 'Référentiel', 
+                          website.repository_url, 
+                          target: :_blank,
+                          class: 'btn btn-xs btn-light' if website.repository.present? %></td>
+          <td><%= image_tag website.deployment_status_badge, 
+                            alt: '' if website.deployment_status_badge.present? %></td>
+          <td><%= link_to 'Site', 
+                          website.url, 
+                          target: :_blank,
+                          class: 'btn btn-xs btn-light' if website.url.present? %></td>
           <td>
-            <%= link_to website.url, website.url, target: :_blank if website.url.present? %>
-            <%= link_to 'Admin', 
-                        admin_communication_website_url(website, host: website.university.url), 
-                        target: :_blank,
-                        class: 'btn btn-xs btn-light' %>
+            <% if website.url.present? %>
+              <span class="js-version">
+                <%= link_to website.theme_version, 
+                            sync_theme_version_server_website_path(website), 
+                            method: :post, 
+                            remote: true if website.theme_version_url.present? %>
+              </span>
+            <% end %>
           </td>
-          <td><%= image_tag website.deployment_status_badge, alt: '' if website.deployment_status_badge.present? %></td>
-          <td><%= link_to website.university, [:server, website.university] %></td>
-          <td>
-            <span class="js-version">
-              <%= link_to website.theme_version, 
-                          website.theme_version_url, 
-                          target: :_blank if website.theme_version_url.present? %>
-            </span>
-          </td>
-          <td>
-            <%= link_to t('server_admin.websites.buttons.theme.sync'), 
-                        sync_theme_version_server_website_path(website), 
-                        method: :post, 
-                        remote: true, 
-                        class: button_classes if website.url.present? %>
-            <%= link_to t('server_admin.websites.buttons.theme.update'), 
-                        update_theme_server_website_path(website), 
-                        method: :post, 
-                        remote: true, 
-                        class: button_classes if website.url.present? && website.github? %>
-          </td>
+          <td><%= link_to t('server_admin.websites.buttons.theme.update'), 
+                          update_theme_server_website_path(website), 
+                          method: :post, 
+                          remote: true, 
+                          class: button_classes if website.url.present? && website.github? %></td>
         </tr>
       <% end %>
     </tbody>

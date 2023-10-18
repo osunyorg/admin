@@ -17,8 +17,28 @@ class Video::Provider::Default
     video_url
   end
 
-  def csp_domain
+  def csp_domains
+    [host]
+  end
+
+  def identifier
+    ''
+  end
+
+  def host
     URI.parse(iframe_url).host
+  end
+
+  def poster
+    ''
+  end
+
+  def embed
+    iframe_url
+  end
+
+  def embed_with_defaults
+    embed
   end
 
   def iframe_tag(**iframe_options)
@@ -31,7 +51,7 @@ class Video::Provider::Default
 
   def default_iframe_options
     {
-      class: (platform == :default ? nil : platform),
+      class: platform,
       loading: 'lazy',
       src: iframe_url
     }

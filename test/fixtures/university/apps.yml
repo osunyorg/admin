@@ -2,16 +2,17 @@
 #
 # Table name: university_apps
 #
-#  id            :uuid             not null, primary key
-#  access_key    :string
-#  name          :string
-#  secret_key    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  university_id :uuid             not null, indexed
+#  id                  :uuid             not null, primary key
+#  name                :string
+#  token               :string           indexed
+#  token_was_displayed :boolean          default(FALSE)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  university_id       :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_university_apps_on_token          (token) UNIQUE
 #  index_university_apps_on_university_id  (university_id)
 #
 # Foreign Keys
@@ -22,11 +23,9 @@
 one:
   name: MyString
   university: one
-  access_key: MyString
-  secret_key: MyString
+  token: MyString
 
 two:
   name: MyString
   university: two
-  access_key: MyString
-  secret_key: MyString
+  token: MyOtherString

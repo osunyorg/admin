@@ -161,6 +161,7 @@ fr:
   date:
     formats:
       birthday: "%d %B"
+  default_images_hint: "5 Mo max, %{formats}"
   delete: Supprimer
   devise:
     failure:
@@ -226,8 +227,8 @@ fr:
       kind: Filtrer par type
       role: Filtrer par rôle
     buttons:
-      expand: Filtrer le tableau
-      submit: Filtrer
+      expand: Recherche
+      submit: Chercher
   folder:
     empty: Le dossier est vide
     open: Ouvrir le dossier
@@ -235,8 +236,10 @@ fr:
   hello: "Bonjour %{name} !"
   home: Accueil
   imports:
+    deleted_user: Utilisateur supprimé
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
+    example_file_html: Télécharger un <a href="%{link}" target="_blank">fichier d'exemple</a>
     hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"
@@ -274,10 +277,14 @@ fr:
         body_1_html: "Attention, vos crédits SMS sont bas : %{credits} crédits restants !"
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
         subject: "Osuny - Credits SMS bas (%{credits})"
+      new_registration:
+        body_1_html: "Un nouvel utilisateur (%{username}) vient de s'enregistrer."
+        body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour voir son compte."
+        subject: "Un nouvel utilisateur vient de s'inscrire : %{mail}"
       website_invalid_access_token:
         subject: Jeton d'accès expiré pour « %{website} »
         text_line_1_html: Le jeton d'accès utilisé pour le site « %{website} » a expiré et ne permet plus la mise à jour du site.
-        text_line_2_html: Pour résoudre ce problème, veuillez renseigner un nouveau jeton d'accès en cliquant <a href=\"%{url}\">ici</a>.
+        text_line_2_html: "Pour résoudre ce problème, veuillez renseigner un nouveau jeton d'accès en cliquant <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a>."
     yours: Cordialement.
   menu:
     admin: Admin

@@ -8,7 +8,9 @@ namespace :university do
       resources :imports, only: [:index, :show, :new, :create]
     end
   end
-  resources :apps
+  resources :apps do
+    post :regenerate_token, on: :member
+  end
   resources :alumni, only: [:index, :show] do
     member do
       get 'cohorts' => 'alumni/cohorts#edit'
@@ -33,7 +35,7 @@ namespace :university do
     end
   end
   resources :organizations do
-    collection do 
+    collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'organizations/categories', as: 'organization_categories'
     end

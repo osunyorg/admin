@@ -13,7 +13,7 @@
 #  meta_description         :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
-#  slug                     :string
+#  slug                     :string           indexed
 #  summary                  :text
 #  text                     :text
 #  title                    :string
@@ -32,6 +32,7 @@
 #  index_communication_website_pages_on_language_id               (language_id)
 #  index_communication_website_pages_on_original_id               (original_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
+#  index_communication_website_pages_on_slug                      (slug)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
 # Foreign Keys
@@ -72,9 +73,6 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              optional: true
   belongs_to :language
-  has_one    :imported_page,
-             class_name: 'Communication::Website::Imported::Page',
-             dependent: :nullify
   has_many   :children,
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
@@ -115,6 +113,10 @@ class Communication::Website::Page < ApplicationRecord
     siblings +
     website.menus +
     abouts_with_page_block
+  end
+
+  def best_title
+    breadcrumb_title.blank? ? title : breadcrumb_title
   end
 
   def to_s

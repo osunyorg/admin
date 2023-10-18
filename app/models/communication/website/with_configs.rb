@@ -8,8 +8,9 @@ module Communication::Website::WithConfigs
         config_default_languages,
         config_default_permalinks,
         config_development_config,
-        config_production_config
-      ]
+        config_production_config,
+        config_deuxfleurs_workflow
+      ].compact
     end
 
     def config_default_languages
@@ -26,6 +27,11 @@ module Communication::Website::WithConfigs
 
     def config_production_config
       @config_production_config ||= Communication::Website::Configs::ProductionConfig.find(id)
+    end
+
+    def config_deuxfleurs_workflow
+      return unless deuxfleurs_hosting
+      @config_deuxfleurs_workflow ||= Communication::Website::Configs::DeuxfleursWorkflow.find(id)
     end
 
   end

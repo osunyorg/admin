@@ -13,7 +13,7 @@
 #  meta_description         :text
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
-#  slug                     :string
+#  slug                     :string           indexed
 #  summary                  :text
 #  text                     :text
 #  title                    :string
@@ -32,6 +32,7 @@
 #  index_communication_website_pages_on_language_id               (language_id)
 #  index_communication_website_pages_on_original_id               (original_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
+#  index_communication_website_pages_on_slug                      (slug)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
 # Foreign Keys
@@ -45,6 +46,11 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
 
   def is_necessary_for_website?
     website.about && website.about&.respond_to?(:teachers)
+  end
+
+  # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
+  def default_menu_identifier
+    ''
   end
 
   def dependencies

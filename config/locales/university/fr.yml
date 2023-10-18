@@ -208,7 +208,11 @@ fr:
         import_btn: Importer des promotions
         import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
         title: Imports de promotions
-    contributing: 
+    apps:
+      regenerate_token: Regénérer le jeton
+      token_display_notice: Assurez-vous de stocker votre jeton secret de manière sécurisée. Vous ne pourrez pas le revoir !
+      token_successfully_regenerated: Le jeton a bien été regénéré.
+    contributing:
       one: université contributrice
       other: universités contributrices
     contributions_total: Contributions (total)

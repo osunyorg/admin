@@ -162,6 +162,7 @@ en:
     formats:
       birthday: "%B %d"
   delete: Delete
+  default_images_hint: "5 MB max, %{formats}"
   devise:
     failure:
       invalid: "Invalid email or password."
@@ -226,8 +227,8 @@ en:
       kind: Filter by kind
       role: Filter by role
     buttons:
-      expand: Filter table
-      submit: Filter
+      expand: Search
+      submit: Search
   folder:
     empty: Folder is empty
     open: Open folder
@@ -235,8 +236,10 @@ en:
   hello: "Hello %{name}!"
   home: Home
   imports:
+    deleted_user: Deleted user
     error_msg: "Line %{line}: %{error}"
     errors: Errors
+    example_file_html: Download an <a href="%{link}" target="_blank">example file</a>
     hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8.<br>Fields marked with an asterisk are mandatory."
     initiated_by: "Initiated by:"
     number_of_lines: "Number of lines in the file:"
@@ -274,10 +277,14 @@ en:
         body_1_html: "Warning, your SMS credits are low: %{credits} credits remaining!"
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to refull."
         subject: "Osuny - Low SMS Credits (%{credits})"
+      new_registration:
+        body_1_html: "A new user (%{username}) just registered."
+        body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to see the account."
+        subject: "A new user just registered: %{mail}"
       website_invalid_access_token:
         subject: "Expired access token for \"%{website}\""
         text_line_1_html: "The access token used for the website \"%{website}\" has expired and does not allow the website to be updated anymore."
-        text_line_2_html: "To solve this issue, please fill in a new access token by clicking <a href=\"%{url}\">here</a>."
+        text_line_2_html: "To solve this issue, please fill in a new access token by clicking <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">here</a>."
     yours: Yours.
   menu:
     admin: Admin

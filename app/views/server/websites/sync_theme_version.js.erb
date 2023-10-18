@@ -1,2 +1,2 @@
 var version = document.querySelector('#website-<%= @website.id %> .js-version');
-version.innerHTML = "<%= j link_to @website.theme_version, @website.theme_version_url, target: '_blank' if @website.theme_version_url.present? %>";
+version.innerHTML = "<%= j @website.theme_version if @website.theme_version_url.present? %>";

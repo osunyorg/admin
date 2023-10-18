@@ -9,6 +9,7 @@ class Admin::University::AppsController < Admin::University::ApplicationControll
   end
 
   def show
+    @should_display_token = @app.display_token!
     breadcrumb
   end
 
@@ -45,6 +46,11 @@ class Admin::University::AppsController < Admin::University::ApplicationControll
     @app.destroy
     redirect_to admin_university_apps_url,
                 notice: t('admin.successfully_destroyed_html', model: @app.to_s)
+  end
+
+  def regenerate_token
+    @app.regenerate_token!
+    redirect_to admin_university_app_path(@app), notice: t('university.apps.token_successfully_regenerated')
   end
 
   protected

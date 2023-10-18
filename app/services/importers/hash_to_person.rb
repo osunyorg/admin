@@ -101,7 +101,7 @@ module Importers
     def add_picture_if_possible!(person)
       return if @photo.nil?
       return if @person.picture.attached?
-      return unless @photo.end_with?('.jpg') || @photo.end_with?('.png')
+      return unless @photo.end_with?(*Rails.application.config.default_images_formats)
       begin
         file = URI.open @photo
         filename = File.basename @photo

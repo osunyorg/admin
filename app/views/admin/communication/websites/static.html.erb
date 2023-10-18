@@ -1,12 +1,28 @@
 title: >
   <%= @about.to_s %>
+<% if @website.default_image.attached? %>
+default_image:
+  id: <%= @website.default_image.blob&.id %>
+<% end %>
 external_domains:
 <% @website.external_domains.each do |domain| %>
   - "<%= domain %>"
 <% end %>
 social:
 <% 
-[:mastodon, :peertube, :x, :linkedin, :youtube, :vimeo, :instagram, :facebook, :tiktok].each do |network| 
+[
+  :email, 
+  :mastodon, 
+  :peertube, 
+  :x, 
+  :github, 
+  :linkedin, 
+  :youtube, 
+  :vimeo, 
+  :instagram, 
+  :facebook, 
+  :tiktok
+].each do |network| 
   value = @website.send "social_#{network}"
   next if value.blank?
 %>

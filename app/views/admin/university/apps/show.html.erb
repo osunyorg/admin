@@ -1,15 +1,23 @@
 <% content_for :title, @app %>
 
+<% if @should_display_token %>
+  <p class="text-danger"><%= t('university.apps.token_display_notice') %></p>
+<% end %>
+
 <div class="row">
   <div class="col-lg-6">
-    <%= osuny_label University::App.human_attribute_name('access_key') %>
-    <input type="string" value="<%= @app.access_key %>" class="form-control" disabled>
-  </div>
-  <div class="col-lg-6">
-    <%= osuny_label University::App.human_attribute_name('secret_key') %>
-    <input type="string" value="<%= @app.secret_key %>" class="form-control" disabled>
+    <%= osuny_label University::App.human_attribute_name('token') %>
+    <input type="string" value="<%= @should_display_token ? @app.token : masked_string(@app.token) %>" class="form-control" disabled>
   </div>
 </div>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('university.apps.regenerate_token'),
+              [:regenerate_token, :admin, @app],
+              method: :post,
+              data: { confirm: t('please_confirm') },
+              class: 'btn btn-warning btn-xs' %>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @app %>

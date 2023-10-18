@@ -208,7 +208,11 @@ en:
         import_btn: Import cohorts
         import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
         title: Cohorts imports
-    contributing: 
+    apps:
+      regenerate_token: Regenerate token
+      token_display_notice: Make sure to store your token somewhere safe. You won’t be able to see it again!
+      token_successfully_regenerated: The token was successfully regenerated.
+    contributing:
       one: contributing university
       other: contributing universities
     contributions_total: Contributions (total)

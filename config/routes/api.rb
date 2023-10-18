@@ -9,9 +9,7 @@ namespace :api do
         post ':website_id/posts/import' => 'posts#import'
       end
     end
-    get 'server' => 'server#index'
     namespace :server do
-      get 'websites' => 'websites#index'
       post 'websites/theme-released' => 'websites#theme_released'
     end
   end

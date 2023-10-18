@@ -36,5 +36,5 @@ olivia_in_noesya:
   about: noesya (University::Organization)
   data: { "elements": [ { "id": "53cbac40-e430-585a-965c-a7412a92f35a" } ] }
   position: 1
-  template_kind: :organization_chart
+  template_kind: :persons
   published: true

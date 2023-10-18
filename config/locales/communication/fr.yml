@@ -41,9 +41,6 @@ fr:
       communication/website/connection:
         one: Connexion
         other: Connexions
-      communication/website/imported/website:
-        one: Site importé
-        other: Sites importés
       communication/website/menu:
         one: Menu
         other: Menus
@@ -76,7 +73,7 @@ fr:
         about_type: Type d'extranet
         color: Couleur
         cookies_policy: Politique de cookies
-        favicon: Favicon (.png)
+        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Annuaire
         feature_jobs: Offres d'emploi
@@ -85,7 +82,7 @@ fr:
         has_sso: A un SSO ?
         home_sentence: Phrase affichée sur la home
         host: Domaine
-        logo: Logo (.png, .jpg, .svg)
+        logo: Logo
         name: Nom
         privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
@@ -133,11 +130,15 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
+        appearance: Apparence
         autoupdate_theme: Mise à jour automatique du thème Osuny
         access_token: Jeton d'accès
         created_at: Création
+        default_image: Image par défaut
         default_language: Langue par défaut
         deployment_status_badge: Badge de statut du déploiement
+        deuxfleurs_hosting: Hébergement avec Deuxfleurs
+        deuxfleurs_identifier: Identifiant Deuxfleurs
         features: Fonctionnalités
         feature_posts: Actualités
         feature_agenda: Agenda
@@ -150,7 +151,9 @@ fr:
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         social: Réseaux sociaux
+        social_email: "Adresse email"
         social_facebook: "Facebook (privatif, appartient à Meta)"
+        social_github: "Github (privatif, appartient à Microsoft)"
         social_instagram: "Instagram (privatif, appartient à Meta)"
         social_linkedin: "LinkedIn (privatif, appartient à Microsoft)"
         social_mastodon: Mastodon (libre)
@@ -185,10 +188,6 @@ fr:
         indirect_object_type: Type de l'objet
         indirect_object_id: Identifiant de l'objet
         updated_at: Date de mise à jour
-      communication/website/imported/category:
-        original: Original
-      communication/website/imported/medium:
-        filename: Nom du fichier
       communication/website/menu:
         automatic: Automatique
         identifier: Identifiant
@@ -296,17 +295,7 @@ fr:
     website:
       analytics: Analytics
       git: Git
-      imported:
-        from: Importé depuis
-        launch: Importer le site
-        launched: Importation en cours
-        original_url: URL originale
-        media:
-          file_size: Taille du fichier
-          not_imported_yet: Non importé pour le moment
-        refresh: Relancer l'import
-        show: Voir l'import
-        pending: Import en cours
+      hosting: Hébergement
       last_events: Derniers événements
       last_pages: Dernières pages
       last_posts: Dernières actualités
@@ -416,6 +405,7 @@ fr:
   simple_form:
     hints:
       communication_extranet:
+        favicon: 'Fichier .png uniquement'
         host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
       communication_website:

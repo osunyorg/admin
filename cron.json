@@ -7,6 +7,10 @@
     {
       "command": "0 3 * * * rails auto:clean_and_rebuild_websites",
       "size": "XL"
+    },
+    {
+      "command": "0 1 * * * rails auto:sib_sms_credits",
+      "size": "S"
     }
   ]
 }

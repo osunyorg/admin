@@ -1,0 +1,52 @@
+<%
+class_name = "block block-persons"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<div class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless block.title.blank? && block.template.description.blank? %>
+        <div class="top">
+          <% unless block.title.blank? %>
+            <p class="block-title"><%= block.title %></p>
+          <% end %>
+          <% unless block.template.description.blank? %>
+            <div class="description">
+              <p><%= block_component_show block, :description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="persons">
+        <% block.template.elements.each do |element|
+          person = element.person
+          next if person.nil?
+          %>
+          <article class="person" itemscope itemtype="https://schema.org/Person">
+            <div class="description">
+              <h3 class="name" itemprop="name">
+                <% if block.template.with_link %>
+                  <%= link_to person, [:admin, person] %>
+                <% else %>
+                  <%= element.person %>
+                <% end %>
+              </h3>
+              <p itemprop="jobTitle"><%= element.role %></p>
+            </div>
+            <% if block.template.with_photo %>
+              <div class="avatar" itemprop="image">
+                <% if person.best_picture.attached? %>
+                  <%= kamifusen_tag person.best_picture, class: 'img-fluid rounded-circle' %>
+                <% end %>
+              </div>
+            <% end %>
+          </article>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

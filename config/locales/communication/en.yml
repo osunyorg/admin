@@ -41,9 +41,6 @@ en:
       communication/website/connection:
         one: Connection
         other: Connections
-      communication/website/imported/website:
-        one: Imported website
-        other: Imported websites
       communication/website/menu:
         one: Menu
         other: Menus
@@ -76,7 +73,7 @@ en:
         about_type: About
         color: Couleur
         cookies_policy: Cookies policy
-        favicon: Favicon (.png)
+        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Directory
         feature_jobs: Job board
@@ -85,7 +82,7 @@ en:
         has_sso: Has SSO?
         home_sentence: Sentence displayed on homepage
         host: Domain
-        logo: Logo (.png, .jpg, .svg)
+        logo: Logo
         name: Name
         privacy_policy: Privacy policy
         registration_contact: Contact mail for registrations problems
@@ -133,11 +130,15 @@ en:
         about_Research::Journal: Journal website
         about_Research::Laboratory: Laboratory website
         about_type: About
+        appearance: Appearance
         autoupdate_theme: Automatically update Osuny theme
         access_token: Access token
         created_at: Creation
+        default_image: Default image
         default_language: Default language
         deployment_status_badge: Deployment status badge
+        deuxfleurs_hosting: Hébergement avec Deuxfleurs
+        deuxfleurs_identifier: Identifiant Deuxfleurs
         features: Features
         feature_posts: Posts
         feature_agenda: Agenda
@@ -150,7 +151,9 @@ en:
         plausible_url: Plausible dashboard URL
         repository: Repository
         social: Social media
+        social_email: "Email"
         social_facebook: "Facebook (private, belongs to Meta)"
+        social_github: "Github (private, belongs to Microsoft)"
         social_instagram: "Instagram (private, belongs to Meta)"
         social_linkedin: "LinkedIn (private, belongs to Microsoft)"
         social_mastodon: Mastodon (free)
@@ -185,10 +188,6 @@ en:
         indirect_object_type: Indirect object type
         indirect_object_id: Indirect object identifier
         updated_at: Updated at
-      communication/website/imported/category:
-        original: Original
-      communication/website/imported/medium:
-        filename: Filename
       communication/website/menu:
         automatic: Automatic
         identifier: Identifier
@@ -296,17 +295,7 @@ en:
     website:
       analytics: Analytics
       git: Git
-      imported:
-        from: Imported from
-        launch: Launch import
-        launched: Import in progress
-        original_url: Original URL
-        media:
-          file_size: File size
-          not_imported_yet: Not imported yet
-        refresh: Refresh import
-        show: Show import
-        pending: Import in progress
+      hosting: Hosting
       last_events: Last events
       last_pages: Last pages
       last_posts: Last posts
@@ -416,6 +405,7 @@ en:
   simple_form:
     hints:
       communication_extranet:
+        favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
       communication_website:

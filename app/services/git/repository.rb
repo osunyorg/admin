@@ -45,6 +45,10 @@ class Git::Repository
     provider.valid?
   end
 
+  def init_from_template(name)
+    provider.init_from_template(name)
+  end
+
   protected
 
   def provider

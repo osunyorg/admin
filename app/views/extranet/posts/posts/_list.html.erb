@@ -2,7 +2,7 @@
   <% posts.each do |post| %>
     <article class="col-lg-4">
       <div class="position-relative mt-5">
-        <% if post.featured_image.attached? && post.featured_image.representable? %>
+        <% if post.featured_image.attached? %>
           <%= kamifusen_tag post.featured_image, width: 800, height: 500, class: 'img-fluid' %>
         <% end %>
         <p class="mt-2">

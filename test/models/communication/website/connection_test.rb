@@ -74,7 +74,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On ajoute noesya à PA via un block "Organisations"
     assert_difference -> { Communication::Website::Connection.count } => 1 do
-      block = pa.blocks.create(position: 1, published: true, template_kind: :partners)
+      block = pa.blocks.create(position: 1, published: true, template_kind: :organizations)
       block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
@@ -102,7 +102,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     setup_page_connections(page)
 
     second_page = communication_website_pages(:page_test)
-    block = second_page.blocks.create(position: 1, published: true, template_kind: :partners)
+    block = second_page.blocks.create(position: 1, published: true, template_kind: :organizations)
     block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save
 
@@ -154,28 +154,28 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On connecte PA via un block "Personnes" : +2
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = page.blocks.create(position: 2, published: true, template_kind: :organization_chart)
+      block = page.blocks.create(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
       block.save
     end
 
     # On ajoute noesya via un block "Organisations" : +4 parce que noesya a un block "Personnes" avec Olivia
     assert_difference -> { Communication::Website::Connection.count } => 4 do
-      block = page.blocks.create(position: 3, published: true, template_kind: :partners)
+      block = page.blocks.create(position: 3, published: true, template_kind: :organizations)
       block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
 
     # On ajoute Arnaud à noesya via un block "Personnes" : +2
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = noesya.blocks.create(position: 2, published: true, template_kind: :organization_chart)
+      block = noesya.blocks.create(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
       block.save
     end
 
     # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
     assert_difference -> { Communication::Website::Connection.count } => 1 do
-      block = olivia.blocks.create(position: 1, published: true, template_kind: :partners)
+      block = olivia.blocks.create(position: 1, published: true, template_kind: :organizations)
       block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end

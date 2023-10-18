@@ -10,7 +10,7 @@
 #  name                     :string
 #  path                     :string
 #  position                 :integer
-#  slug                     :string
+#  slug                     :string           indexed
 #  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -28,6 +28,7 @@
 #  index_communication_website_categories_on_original_id            (original_id)
 #  index_communication_website_categories_on_parent_id              (parent_id)
 #  index_communication_website_categories_on_program_id             (program_id)
+#  index_communication_website_categories_on_slug                   (slug)
 #  index_communication_website_categories_on_university_id          (university_id)
 #
 # Foreign Keys
@@ -53,9 +54,6 @@ class Communication::Website::Category < ApplicationRecord
   include WithTree
   include WithUniversity
 
-  has_one                 :imported_category,
-                          class_name: 'Communication::Website::Imported::Category',
-                          dependent: :destroy
   belongs_to              :university
   belongs_to              :parent,
                           class_name: 'Communication::Website::Category',
@@ -63,9 +61,6 @@ class Communication::Website::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_one                 :imported_category,
-                          class_name: 'Communication::Website::Imported::Category',
-                          dependent: :destroy
   has_many                :children,
                           class_name: 'Communication::Website::Category',
                           foreign_key: :parent_id,
@@ -99,7 +94,7 @@ class Communication::Website::Category < ApplicationRecord
   end
 
   def references
-    posts + [parent] + siblings + website.menus
+    posts + [parent] + siblings + website.menus + abouts_with_post_block
   end
 
   def update_children_paths
@@ -140,5 +135,16 @@ class Communication::Website::Category < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  # Same as the Post object
+  def abouts_with_post_block
+    website.blocks.posts.collect(&:about)
+    # Potentiel gain de performance (25%)
+    # Méthode collect : X abouts = X requêtes
+    # Méthode ci-dessous : X abouts = 6 requêtes
+    # website.categories.where(id: website.blocks.posts.where(about_type: "Communication::Website::Category").distinct.pluck(:about_id)) +
+    # website.pages.where(id: website.blocks.posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
+    # website.posts.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
   end
 end

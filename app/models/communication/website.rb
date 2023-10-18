@@ -7,6 +7,8 @@
 #  access_token            :string
 #  autoupdate_theme        :boolean          default(TRUE)
 #  deployment_status_badge :text
+#  deuxfleurs_hosting      :boolean          default(TRUE)
+#  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
@@ -16,7 +18,9 @@
 #  name                    :string
 #  plausible_url           :string
 #  repository              :string
+#  social_email            :string
 #  social_facebook         :string
+#  social_github           :string
 #  social_instagram        :string
 #  social_linkedin         :string
 #  social_mastodon         :string
@@ -54,9 +58,9 @@ class Communication::Website < ApplicationRecord
   include WithConfigs
   include WithConnectedObjects
   include WithDependencies
+  include WithDeuxfleurs
   include WithGit
   include WithGitRepository
-  include WithImport
   include WithLanguages
   include WithManagers
   include WithProgramCategories
@@ -73,6 +77,9 @@ class Communication::Website < ApplicationRecord
     gitlab: 1
   }
 
+  has_one_attached_deletable :default_image
+  validates :default_image, size: { less_than: 5.megabytes }
+
   before_validation :sanitize_fields
 
   scope :ordered, -> { order(:name) }
@@ -86,6 +93,12 @@ class Communication::Website < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
+  scope :for_updatable_theme, -> (status) { updatable_theme if status == 'true' }
+  scope :updatable_theme, -> {
+    where.not(repository: [nil, '']).
+    where.not(access_token: [nil, '']).
+    where.not(url: [nil, ''])
+  }
 
   def to_s
     "#{name}"
@@ -104,7 +117,8 @@ class Communication::Website < ApplicationRecord
     events.where(language_id: language_ids) +
     categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
-    [about]
+    [about] +
+    [default_image&.blob]
   end
 
   def website
