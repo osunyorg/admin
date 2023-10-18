@@ -35,8 +35,19 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Applica
   end
 
   def import_categories
-    categories.each do |category|
-      byebug
+    categories.each do |c|
+      data = c.to_unsafe_hash
+      if data.has_key? 'name'
+        category = website.categories.where(
+          university: current_university,
+          website: website,
+          name: data['name'],
+          language: website.default_language
+        ).first_or_create
+      end
+      next if category.nil?
+      next if category.in?(post.categories)
+      post.categories << category
     end
   end
 
