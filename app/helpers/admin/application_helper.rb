@@ -138,7 +138,7 @@ module Admin::ApplicationHelper
     Static::Text.new(text, depth: depth, about: @about).prepared
   end
 
-  def prepare_code_for_static(text, depth: 1, about: nil)
+  def prepare_code_for_static(text, depth: 1)
     Static::Code.new(text, depth: depth, about: @about).prepared
   end
 
