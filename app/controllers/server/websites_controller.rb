@@ -26,7 +26,8 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def update
-    @website.update(website_params)
+    university_id = params.dig(:communication_website, :university_id)
+    @website.move_to_university(university_id) if university_id
     redirect_to server_website_path(@website), notice: t('admin.successfully_updated_html', model: @website.to_s)
   end
 
@@ -39,9 +40,5 @@ class Server::WebsitesController < Server::ApplicationController
 
   def load_website
     @website = Communication::Website.find params[:id]
-  end
-
-  def website_params
-    params.require(:communication_website).permit(:university_id)
   end
 end
