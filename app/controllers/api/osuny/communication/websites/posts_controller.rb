@@ -5,6 +5,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Applica
     verify_app_token
     create_post
     import_blocks
+    import_categories
     render json: :ok
   end
 
@@ -14,16 +15,6 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Applica
     post.language = website.default_language
     post.update post_params
     post.save
-  end
-
-  def post
-    @post ||= website.posts
-                  .where(
-                    university: current_university,
-                    website: website,
-                    migration_identifier: migration_identifier
-                  )
-                  .first_or_initialize
   end
 
   def import_blocks
@@ -43,13 +34,29 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Applica
     end
   end
 
+  def import_categories
+    categories.each do |category|
+      byebug
+    end
+  end
+
+  def post
+    @post ||= website.posts.where(
+                                    university: current_university,
+                                    website: website,
+                                    migration_identifier: migration_identifier
+                                  )
+                                  .first_or_initialize
+  end
+
   def blocks
     return [] unless params[:post].has_key?(:blocks)
     @blocks ||= params[:post][:blocks]
   end
 
-  def website
-    @website ||= current_university.websites.find params[:website_id]
+  def categories
+    return [] unless params[:post].has_key?(:categories)
+    @categories ||= params[:post][:categories]
   end
 
   def migration_identifier

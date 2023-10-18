@@ -1,4 +1,5 @@
 class Api::Osuny::ApplicationController < Api::ApplicationController
+
   protected
 
   def verify_app_token
@@ -6,4 +7,9 @@ class Api::Osuny::ApplicationController < Api::ApplicationController
                                           secret_key: params[:secret_key])
     raise_403_unless app
   end
+
+  def website
+    @website ||= current_university.websites.find params[:website_id]
+  end
+
 end
