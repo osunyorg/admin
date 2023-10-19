@@ -3,8 +3,7 @@ class Importers::Api::Osuny::Communication::Website::Post < Importers::Api::Osun
   protected
 
   def import
-    object.update post_params
-    object.save
+    import_params
     import_blocks
     import_categories
   end
@@ -16,6 +15,14 @@ class Importers::Api::Osuny::Communication::Website::Post < Importers::Api::Osun
       migration_identifier: migration_identifier,
       language: language
     ).first_or_initialize
+  end
+
+  def import_params
+    object.title = Importers::Cleaner.clean_string params[:title]
+    object.summary = Importers::Cleaner.html_to_string params[:summary]
+    object.published_at = params[:published_at]
+    object.created_at = object.published_at
+    object.save
   end
 
   def import_categories
@@ -40,11 +47,5 @@ class Importers::Api::Osuny::Communication::Website::Post < Importers::Api::Osun
   def categories
     return [] unless params.has_key?(:categories)
     @categories ||= params[:categories]
-  end
-
-  def post_params
-    ActionController::Parameters.new({ post: params })
-      .require(:post)
-      .permit(:title, :language, :meta_description, :summary)
   end
 end

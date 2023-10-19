@@ -3,10 +3,15 @@ class Importers::Api::Osuny::Communication::Website::Page < Importers::Api::Osun
   protected
 
   def import
-    object.parent = parent
-    object.update page_params
-    object.save
+    import_params
     import_blocks
+  end
+
+  def import_params
+    object.title = Importers::Cleaner.clean_string params[:title]
+    object.summary = Importers::Cleaner.html_to_string params[:summary]
+    object.parent = parent
+    object.save
   end
 
   def home_page
