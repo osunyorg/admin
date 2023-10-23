@@ -17,6 +17,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     add_breadcrumb t('communication.website.security')
   end
 
+  def production
+    @website.in_production = true
+    breadcrumb
+    add_breadcrumb t('communication.website.golive.title')
+  end
+
   def show
     @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
     @pages = @all_pages.recent
@@ -73,7 +79,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :name, :url, :repository, :about_type, :about_id, :in_production,
       :git_provider, :git_endpoint, :git_branch, :plausible_url, 
       :feature_posts, :feature_agenda,
-      :deuxfleurs_hosting, :default_image, :default_image_delete,
+      :deuxfleurs_hosting, :deuxfleurs_identifier, :default_image, :default_image_delete,
       :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,
       :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]

@@ -8,6 +8,7 @@ namespace :communication do
       get :analytics
       get :security
       get :static
+      get :production
     end
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'
