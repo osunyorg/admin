@@ -5,7 +5,7 @@ module User::WithSyncBetweenUniversities
     attr_accessor :skip_server_admin_sync
 
     after_save :sync_between_universities, if: Proc.new { |user| user.server_admin? && !user.skip_server_admin_sync }
-    after_destroy :remove_from_all_universities, if: Proc.new { |user| user.server_admin? }
+    after_destroy :remove_from_all_universities, if: Proc.new { |user| user.server_admin? && !user.skip_server_admin_sync }
 
     def self.synchronize_server_admin_users(source_university, target_university)
       source_university.users.server_admin.each do |user|
@@ -51,7 +51,10 @@ module User::WithSyncBetweenUniversities
 
   def remove_from_all_universities
     # As a "server_admin" is synced between universities, any removal destroys the accounts of the concerned user in every university
-    User.where(email: email, role: :server_admin).destroy_all
+    User.where(email: email, role: :server_admin).each do |user|
+      user.skip_server_admin_sync = true
+      user.destroy
+    end
   end
 
 end
