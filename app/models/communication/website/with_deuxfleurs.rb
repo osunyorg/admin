@@ -2,6 +2,7 @@ module Communication::Website::WithDeuxfleurs
   extend ActiveSupport::Concern
 
   included do
+    before_save :deuxfleurs_golive, if: :deuxfleurs_hosting
     after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
   end
 
@@ -25,6 +26,17 @@ module Communication::Website::WithDeuxfleurs
     end
   end
   handle_asynchronously :deuxfleurs_setup
+
+  def deuxfleurs_golive
+    return unless in_production_changed? && in_production
+    # https://www.test.com -> www.test.com
+    new_identifier = URI(url).host
+    if deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
+      self.deuxfleurs_identifier = new_identifier
+    else
+      errors.add :url
+    end
+  end
 
   def deuxfleurs_create_bucket
     deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_default_identifier)
