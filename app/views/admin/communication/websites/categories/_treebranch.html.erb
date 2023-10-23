@@ -13,8 +13,17 @@
         <span class="close_text"><%= t 'folder.close' %></span>
       <% end %>
       <div class="btn-group ms-auto" role="group">
-        <%= edit_link category %>
-        <%= destroy_link category %>
+        <%= link_to t('show'),
+                    admin_communication_website_category_path(website_id: @website.id, id: category.id),
+                    class: 'action ps-3' %>
+        <%= link_to t('edit'),
+                    edit_admin_communication_website_category_path(website_id: @website.id, id: category.id),
+                    class: 'action ps-3' %>
+        <%= link_to t('delete'),
+                    admin_communication_website_category_path(website_id: @website.id, id: category.id),
+                    method: :delete,
+                    data: { confirm: t('please_confirm') },
+                    class: 'action text-danger ps-3' %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= category.id %>">
