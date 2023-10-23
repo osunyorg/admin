@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_13_090313) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_18_182341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -381,6 +381,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_13_090313) do
     t.boolean "full_width", default: false
     t.string "type"
     t.uuid "original_id"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["original_id"], name: "index_communication_website_pages_on_original_id"

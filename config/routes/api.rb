@@ -7,6 +7,7 @@ namespace :api do
       get 'websites' => 'websites#index'
       namespace :websites do
         post ':website_id/posts/import' => 'posts#import'
+        post ':website_id/pages/import' => 'pages#import'
       end
     end
     namespace :server do
