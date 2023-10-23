@@ -4,7 +4,7 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
   end
 
   def create
-    @curator = Curator.new @website, current_user, current_website_language, curation_params[:url]
+    @curator = Importers::Curator.new @website, current_user, current_website_language, curation_params[:url]
     if @curator.valid?
       redirect_to [:admin, @curator.post],
                   notice: t('admin.successfully_created_html', model: @curator.post.to_s)

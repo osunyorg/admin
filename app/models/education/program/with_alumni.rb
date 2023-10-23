@@ -4,22 +4,22 @@ module Education::Program::WithAlumni
   included do
     has_many   :education_cohorts,
                class_name: 'Education::Cohort'
-               alias_attribute :cohorts, :education_cohorts
+               alias_method :cohorts, :education_cohorts
 
     has_many   :alumni,
                through: :education_cohorts,
                source: :people
-               alias_attribute :university_person_alumni, :alumni
+               alias_method :university_person_alumni, :alumni
 
     has_many   :alumni_experiences, -> { distinct },
                through: :alumni,
                source: :experiences
-               alias_attribute :university_person_experiences, :alumni_experiences
+               alias_method :university_person_experiences, :alumni_experiences
 
     has_many   :alumni_organizations, -> { distinct },
                through: :alumni_experiences,
                source: :organization
-               alias_attribute :university_person_alumni_organizations, :alumni_organizations
+               alias_method :university_person_alumni_organizations, :alumni_organizations
 
     # Dénormalisation des alumni pour le faceted search
     has_and_belongs_to_many :university_people,
@@ -38,7 +38,7 @@ module Education::Program::WithAlumni
     #            class_name: 'Education::AcademicYear',
     #            through: :education_cohorts,
     #            source: :education_academic_year
-    #            alias_attribute :education_academic_years, :academic_years
+    #            alias_method :education_academic_years, :academic_years
 
     def academic_years
       Education::AcademicYear.where(id: education_cohorts.pluck(:academic_year_id))

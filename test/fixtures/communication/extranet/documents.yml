@@ -30,14 +30,14 @@
 
 one:
   name: MyString
-  university: one
-  extranet: one
+  university: default_university
+  extranet: default_extranet
   published: false
   published_at: 2023-03-08 16:55:05
 
 two:
   name: MyString
-  university: two
-  extranet: two
+  university: default_university
+  extranet: default_extranet
   published: false
   published_at: 2023-03-08 16:55:05
