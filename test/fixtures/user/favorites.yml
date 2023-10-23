@@ -20,11 +20,9 @@
 #
 
 one:
-  user: one
-  about: one
-  about_type: About
+  user: admin
+  about: website_with_github (Communication::Website)
 
 two:
-  user: two
-  about: two
-  about_type: About
+  user: admin
+  about: website_with_gitlab (Communication::Website)

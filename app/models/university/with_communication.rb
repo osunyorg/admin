@@ -5,12 +5,12 @@ module University::WithCommunication
     has_many  :communication_extranets,
               class_name: 'Communication::Extranet',
               dependent: :destroy
-    alias_attribute :extranets, :communication_extranets
+    alias_method :extranets, :communication_extranets
 
     has_many  :communication_websites,
               class_name: 'Communication::Website',
               dependent: :destroy
-    alias_attribute :websites, :communication_websites
+    alias_method :websites, :communication_websites
 
     has_many  :communication_website_posts,
               class_name: 'Communication::Website::Post',
@@ -19,11 +19,11 @@ module University::WithCommunication
     has_many  :communication_blocks,
               class_name: 'Communication::Block',
               dependent: :destroy
-    alias_attribute :blocks, :communication_blocks
+    alias_method :blocks, :communication_blocks
 
     has_many  :communication_block_headings,
               class_name: 'Communication::Block::Heading',
               dependent: :destroy
-    alias_attribute :headings, :communication_block_headings
+    alias_method :headings, :communication_block_headings
   end
 end

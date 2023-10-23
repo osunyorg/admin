@@ -31,15 +31,15 @@ class Education::Cohort < ApplicationRecord
 
   belongs_to  :school,
               class_name: 'Education::School'
-  alias_attribute :education_school, :school
+  alias_method :education_school, :school
 
   belongs_to  :program,
               class_name: 'Education::Program'
-  alias_attribute :education_program, :program
+  alias_method :education_program, :program
 
   belongs_to  :academic_year,
               class_name: 'Education::AcademicYear'
-  alias_attribute :education_academic_year, :academic_year
+  alias_method :education_academic_year, :academic_year
 
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
