@@ -1,4 +1,4 @@
-<%= content_for :title, t('.title') %>
+<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.name : 'Osuny') %>
 
 <h2 class="mb-4"><%= t(".sign_up") %></h2>
 

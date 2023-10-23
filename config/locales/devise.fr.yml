@@ -12,10 +12,10 @@ fr:
       edit:
         title: Modification de votre compte
       new: 
-        title: Inscription sur Osuny
+        title: "Inscription - %{title}"
     sessions:
       new:
-        title: Bienvenue sur Osuny
+        title: "Bienvenue - %{title}"
     two_factor_authentication:
       max_login_attempts_reached:
         title: Maximum d'essais atteint

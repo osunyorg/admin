@@ -12,10 +12,10 @@ en:
       edit:
         title: Account edition
       new: 
-        title: Register on Osuny
+        title: "Register - %{title}"
     sessions:
       new:
-        title: Welcome to Osuny
+        title: "Welcome - %{title}"
     two_factor_authentication:
       max_login_attempts_reached:
         title: Maximul login attemps reached
