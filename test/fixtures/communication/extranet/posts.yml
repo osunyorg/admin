@@ -38,9 +38,9 @@ one:
   title: MyString
   published: false
   published_at: 2023-03-07 15:57:51
-  author: one
-  extranet: one
-  university: one
+  author: pa
+  extranet: default_extranet
+  university: default_university
   featured_image_alt: MyString
   featured_image_credit: MyText
   slug: MyString
@@ -50,9 +50,9 @@ two:
   title: MyString
   published: false
   published_at: 2023-03-07 15:57:51
-  author: two
-  extranet: two
-  university: two
+  author: pa
+  extranet: default_extranet
+  university: default_university
   featured_image_alt: MyString
   featured_image_credit: MyText
   slug: MyString

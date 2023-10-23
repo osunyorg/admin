@@ -19,7 +19,7 @@ module Education::School::WithPrograms
     has_many :diplomas, -> { distinct },
              through: :programs,
              source: :diploma
-             alias_attribute :education_diplomas, :diplomas
+             alias_method :education_diplomas, :diplomas
 
   end
 

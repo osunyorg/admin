@@ -25,11 +25,11 @@
 one:
   name: MyString
   slug: MyString
-  extranet: one
-  university: one
+  extranet: default_extranet
+  university: default_university
 
 two:
   name: MyString
   slug: MyString
-  extranet: two
-  university: two
+  extranet: default_extranet
+  university: default_university
