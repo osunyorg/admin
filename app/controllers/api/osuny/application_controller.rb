@@ -7,8 +7,4 @@ class Api::Osuny::ApplicationController < Api::ApplicationController
     raise_403_unless @app
   end
 
-  def website
-    @website ||= current_university.websites.find params[:website_id]
-  end
-
 end

@@ -1,4 +1,4 @@
-class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::ApplicationController
+class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
   skip_before_action :verify_authenticity_token, only: :import
   before_action :verify_app_token, only: :import
 
