@@ -1,0 +1,11 @@
+<% content_for :title, @website %>
+<%= simple_form_for @website, url: server_website_path(@website) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= f.association :university, include_blank: false %>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>
