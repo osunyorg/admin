@@ -59,6 +59,9 @@ fr:
               list:
                 label: Liste
                 description: Une liste d'événements avec de petites images à la même largeur.
+              large:
+                label: Grand
+                description: Chaque événement est présenté en majesté, sur toute la largeur disponible avec une grande image. 
             edit:
               description:
                 label: Description

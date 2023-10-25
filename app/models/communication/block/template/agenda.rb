@@ -1,6 +1,13 @@
 class Communication::Block::Template::Agenda < Communication::Block::Template::Base
 
-  has_layouts [:grid, :list]
+  AUTHORIZED_SCOPES = [
+    'future_or_present',
+    'future',
+    'present',
+    'archive'
+  ]
+
+  has_layouts [:grid, :list, :large]
 
   has_component :description, :rich_text
   has_component :quantity, :number, options: 3
@@ -17,25 +24,9 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   protected
 
   def events_with_time_scope
-    events = block.about&.website
-                          .events
-                          .for_language(block.language)
-                          .published
-                          .limit(quantity)
-    # Whitelist for security
-    # (not very elegant though)
-    case time
-    when 'future_or_present'
-      events.future_or_present
-    when 'future'
-      events.future
-    when 'present'
-      events.present
-    when 'archive'
-      events.archive
-    else
-      events
-    end
+    events = website.events.for_language(block.language).published
+    events = events.send(time) if time.in? AUTHORIZED_SCOPES
+    events = events.limit(quantity)
   end
 
 end
