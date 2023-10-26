@@ -296,6 +296,9 @@ en:
     website:
       analytics: Analytics
       git: Git
+      golive: 
+        title: Go live
+        button: Go live
       hosting: Hosting
       last_events: Last events
       last_pages: Last pages

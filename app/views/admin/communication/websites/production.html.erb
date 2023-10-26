@@ -1,0 +1,18 @@
+<% content_for :title, t('communication.website.golive.title') %>
+
+<%= simple_form_for [:admin, @website] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= f.input :in_production, as: :hidden %>
+
+  <div class="row">
+    <div class="col-xl-6">
+      <%= f.input :url %>
+    </div>
+  </div>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

@@ -17,6 +17,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     add_breadcrumb t('communication.website.security')
   end
 
+  def production
+    @website.in_production = true
+    breadcrumb
+    add_breadcrumb t('communication.website.golive.title')
+  end
+
   def show
     @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
     @pages = @all_pages.recent

@@ -296,6 +296,9 @@ fr:
     website:
       analytics: Analytics
       git: Git
+      golive: 
+        title: Mise en production
+        button: Mettre en production
       hosting: Hébergement
       last_events: Derniers événements
       last_pages: Dernières pages
