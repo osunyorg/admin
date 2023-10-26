@@ -50,6 +50,7 @@ class Communication::Website::Permalink < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   validates :about_id, :about_type, :path, presence: true
+  validate :no_double_path
 
   before_validation :set_university, on: :create
 
@@ -116,6 +117,10 @@ class Communication::Website::Permalink < ApplicationRecord
     end
   end
 
+  def to_s
+    "#{path}"
+  end
+
   protected
 
   def self.required_kinds_in_website(website)
@@ -151,6 +156,12 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def set_university
     self.university_id = website.university_id
+  end
+
+  def no_double_path
+    if Communication::Website::Permalink.where(about: about, path: path).any?
+      errors.add(:path, :uniqueness)
+    end
   end
 
 end

@@ -218,6 +218,8 @@ fr:
         text: Texte principal de la page
         title: Titre
         website: Site Web
+      communication/website/permalink:
+        path: Chemin
       communication/website/post:
         author: Auteur·rice
         category: Catégorie
@@ -268,6 +270,12 @@ fr:
         publish: 
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
+        redirects:
+          button: Gérer les redirections
+          title: Gérer les redirections
+          current_path: Chemin actuel
+          previous_paths: Redirections (anciens chemins)
+          add_path: Ajouter une redirection
   communication:
     authors:
       one: Auteur·rice
