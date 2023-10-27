@@ -1,44 +1,39 @@
-<% 
-# TODO i18n quand les phrases sont vraiment claires 
-# @pa t'affole pas, c'est pas encore le cas 
-%>
 <%= osuny_panel t('metadata'), small: true do %>
   <p>
-  <% if @page.is_special_page? %>
-    <% page_type = t("communication.website.pages.defaults.#{@page.type_key}.title") %>
-    <% if page_type != @page.to_s %>
-      <%= page_type %><br>
+    <% if @page.is_special_page? %>
+      <% page_type = t("communication.website.pages.defaults.#{@page.type_key}.title") %>
+      <% if page_type != @page.to_s %>
+        <%= page_type %><br>
+      <% end %>
     <% end %>
-  <% end %>
 
-  <%= @page.published ? 'Publiée' : 'Brouillon' %>
+    <%= @page.published ? t('admin.communication.website.pages.published')
+                        : t('admin.communication.website.pages.draft') %>
 
-  <%= render 'admin/application/i18n/inline', about: @page %>
+    <%= render 'admin/application/i18n/inline', about: @page %>
 
-  <% if @page.parent && !@page.parent.is_home? %>
-    dans
-    “<%= link_to_if  can?(:read, @page.parent),
-                    @page.parent,
-                    admin_communication_website_page_path(
-                      website_id: @website.id,
-                      id: @page.parent.id
-                    ) %>”
-  <% end %>
+    <%= t('admin.communication.website.pages.in_full_width') if @page.full_width %>
 
-  <% if @page.children.any? %>
-    avec comme pages enfants :
-    <%= raw @page.children.ordered.map { |child|
-          link_to_if  can?(:read, child),
-                      child,
-                      admin_communication_website_page_path( website_id: @website.id, id: child.id),
-                      class: "#{'draft' unless child.published?}" 
+    <% if @page.parent && !@page.parent.is_home? %>
+      <%= t('admin.communication.website.pages.in') %>
+      “<%= link_to_if  can?(:read, @page.parent),
+                      @page.parent,
+                      admin_communication_website_page_path(
+                        website_id: @website.id,
+                        id: @page.parent.id
+                      ) %>”
+    <% end %>
 
-    }.join(', ') %>
-  <% end %>
+    <% if @page.children.any? %>
+      <%= t('admin.communication.website.pages.with_children') %>
+      <%= raw @page.children.ordered.map { |child|
+            link_to_if  can?(:read, child),
+                        child,
+                        admin_communication_website_page_path( website_id: @website.id, id: child.id),
+                        class: "#{'draft' unless child.published?}" 
 
-  <% if @page.full_width %>
-    en pleine largeur
-  <% end %>
+      }.join(', ') %>
+    <% end %>
   </p>
   
   <%= render 'admin/application/permalinks/redirects', about: @page %>

@@ -261,12 +261,22 @@ en:
           as_list: See as a list
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
+          draft: Draft
           full_width_status: Full width
+          in: in
+          in_full_width: full width
           show: Show page
           structure: Pages
+          published: Published
           published_status: Publication status
-        post:
+          with_children: "with children:"
+        posts:
+          and_pinned: and pinned
+          by: by %{author}
+          draft: Draft
+          in: in %{categories}
           pinned_status: Pinned status
+          published_on: Published on %{date}
         publish: 
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.
