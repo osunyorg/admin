@@ -28,9 +28,9 @@ module Importers
     protected
 
     def extract_variables
-      @school_id = @hash[17].to_s.strip
-      @program_id = @hash[18].to_s.strip
-      @year = @hash[19].to_s.strip.to_i
+      @school_id = @hash[18].to_s.strip
+      @program_id = @hash[19].to_s.strip
+      @year = @hash[20].to_s.strip.to_i
     end
 
     def school

@@ -5,10 +5,10 @@
     <p>
       <%= t('imports.hint_html') %>
       <br>
-      <%= t('university.person.experiences.import_hint_html') %>
+      <%= t('university.person.import_hint_html') %>
     </p>
     <%= simple_form_for @import,
-                        url: admin_university_people_experiences_imports_path do |f| %>
+                        url: admin_university_people_imports_path do |f| %>
 
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -99,30 +99,6 @@
           <tr>
             <th>social_mastodon</th>
             <td>https://mastodon.social/@stephanedupond</td>
-          </tr>
-          <tr>
-            <th>company_name</th>
-            <td>Le Monde</td>
-          </tr>
-          <tr>
-            <th>company_siren</th>
-            <td>433891850</td>
-          </tr>
-          <tr>
-            <th>company_nic</th>
-            <td>00052</td>
-          </tr>
-          <tr>
-            <th>experience_job</th>
-            <td>Journaliste</td>
-          </tr>
-          <tr>
-            <th>experience_from</th>
-            <td>2018</td>
-          </tr>
-          <tr>
-            <th>experience_to</th>
-            <td>2021</td>
           </tr>
         </tbody>
       </table>

@@ -48,6 +48,7 @@ module Importers
       @biography = @hash[14].to_s.strip
       @social_twitter = @hash[15].to_s.strip
       @social_linkedin = @hash[16].to_s.strip
+      @social_mastodon = @hash[17].to_s.strip
     end
 
     def build_person
@@ -76,6 +77,7 @@ module Importers
       person.biography = @biography
       person.twitter = @social_twitter
       person.linkedin = @social_linkedin
+      person.mastodon = @social_mastodon
       person.slug = person.to_s.parameterize.dasherize
       person.language_id = @university.default_language_id
       person

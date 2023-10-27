@@ -17,6 +17,12 @@ namespace :university do
       patch 'cohorts' => 'alumni/cohorts#update'
     end
   end
+  namespace :people do
+    resources :imports, only: [:index, :show, :new, :create]
+    namespace :experiences do
+      resources :imports, only: [:index, :show, :new, :create]
+    end
+  end
   resources :people do
     collection do
       get :search, defaults: { format: 'json' }
@@ -29,11 +35,7 @@ namespace :university do
       patch 'experiences' => 'people/experiences#update'
     end
   end
-  namespace :people do
-    namespace :experiences do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
-  end
+  
   resources :organizations do
     collection do
       get :search, defaults: { format: 'json' }
