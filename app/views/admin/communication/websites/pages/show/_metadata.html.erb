@@ -3,6 +3,7 @@
 # @pa t'affole pas, c'est pas encore le cas 
 %>
 <%= osuny_panel t('metadata'), small: true do %>
+  <p>
   <% if @page.is_special_page? %>
     <% page_type = t("communication.website.pages.defaults.#{@page.type_key}.title") %>
     <% if page_type != @page.to_s %>
@@ -16,12 +17,12 @@
 
   <% if @page.parent && !@page.parent.is_home? %>
     dans
-    <%= link_to_if  can?(:read, @page.parent),
+    “<%= link_to_if  can?(:read, @page.parent),
                     @page.parent,
                     admin_communication_website_page_path(
                       website_id: @website.id,
                       id: @page.parent.id
-                    ) %>.
+                    ) %>”
   <% end %>
 
   <% if @page.children.any? %>
@@ -32,12 +33,13 @@
                       admin_communication_website_page_path( website_id: @website.id, id: child.id),
                       class: "#{'draft' unless child.published?}" 
 
-    }.join(', ') %>.
+    }.join(', ') %>
   <% end %>
 
   <% if @page.full_width %>
-    <br>
-    Pleine largeur
+    en pleine largeur
   <% end %>
+  </p>
+  
+  <%= render 'admin/application/permalinks/redirects', about: @page %>
 <% end %>
-

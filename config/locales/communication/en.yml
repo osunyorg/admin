@@ -218,6 +218,8 @@ en:
         text: Main page text
         title: Title
         website: Website
+      communication/website/permalink:
+        path: Path
       communication/website/post:
         author: Author
         category: Category
@@ -268,6 +270,12 @@ en:
         publish: 
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.
+        redirects:
+          button: Manage redirects
+          title: Manage redirects
+          current_path: Current path
+          previous_paths: Redirects (old paths)
+          add_path: Add a redirect
   communication:
     authors:
       one: Author

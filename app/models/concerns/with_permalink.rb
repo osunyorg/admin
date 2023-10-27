@@ -29,4 +29,13 @@ module WithPermalink
     new_permalink_in_website(website).save_if_needed
   end
 
+  def add_redirection(path)
+    clean_path = Communication::Website::Permalink.clean_path(path)
+    Communication::Website::Permalink.create(
+      website: website,
+      about: self,
+      is_current: false,
+      path: clean_path
+    )
+  end
 end

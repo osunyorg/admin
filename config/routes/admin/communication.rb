@@ -14,6 +14,7 @@ namespace :communication do
     get 'assets/*path' => 'websites/preview#assets'
     resources :dependencies, controller: 'websites/dependencies', only: :index
     resources :connections, controller: 'websites/connections', only: [:index, :show]
+    resources :permalinks, controller: 'websites/permalinks', only: :create
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder
