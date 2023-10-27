@@ -274,7 +274,7 @@ en:
           and_pinned: and pinned
           by: by %{author}
           draft: Draft
-          in: in
+          in: in %{categories}
           pinned_status: Pinned status
           published_on: Published on %{date}
         publish: 

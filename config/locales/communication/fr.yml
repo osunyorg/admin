@@ -274,7 +274,7 @@ fr:
           and_pinned: et mis en avant
           by: par %{author}
           draft: Brouillon
-          in: dans
+          in: dans %{categories}
           pinned_status: Mise en avant
           published_on: Publiée le %{date}
         publish: 
