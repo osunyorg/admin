@@ -1,0 +1,38 @@
+<p>
+  <a class="action" data-bs-toggle="offcanvas" href="#offcanvasRedirects" role="button" aria-controls="offcanvasRedirects">
+    <%= t('admin.communication.website.redirects.button') %>
+  </a>
+</p>
+<div class="offcanvas offcanvas-end offcanvas__redirections" tabindex="-1" id="offcanvasRedirects" aria-labelledby="Redirections">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title"><%= t('admin.communication.website.redirects.title') %></h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <%= osuny_panel t('admin.communication.website.redirects.current_path'), small: true do %>
+      <p class="lead">
+      <%= @page.current_permalink_in_website(@website) %>
+      </p>
+    <% end %>
+    <%= osuny_panel t('admin.communication.website.redirects.previous_paths'), small: true do %>
+      <table id="previous-permalinks" class="table border-top">
+        <tbody>        
+          <% @page.previous_permalinks_in_website(@website).each do |link| %>
+            <tr>
+              <td><%= link.to_s %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= simple_form_for Communication::Website::Permalink.new, 
+                          url:  admin_communication_website_permalinks_path(
+                                  about_type: about.class, 
+                                  about_id: about.id
+                                ),
+                          remote: true do |f| %>
+        <%= f.input :path, label: t('admin.communication.website.redirects.add_path') %>
+        <%= f.button :submit, t('add'), class: button_classes %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

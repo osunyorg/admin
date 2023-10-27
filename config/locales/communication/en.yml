@@ -163,6 +163,7 @@ en:
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
         url: URL
+        university: University
       communication/website/agenda/event:
         dates: Dates
         featured_image: Featured image
@@ -217,6 +218,8 @@ en:
         text: Main page text
         title: Title
         website: Website
+      communication/website/permalink:
+        path: Path
       communication/website/post:
         author: Author
         category: Category
@@ -267,6 +270,12 @@ en:
         publish: 
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.
+        redirects:
+          button: Manage redirects
+          title: Manage redirects
+          current_path: Current path
+          previous_paths: Redirects (old paths)
+          add_path: Add a redirect
   communication:
     authors:
       one: Author
@@ -295,6 +304,9 @@ en:
     website:
       analytics: Analytics
       git: Git
+      golive: 
+        title: Go live
+        button: Go live
       hosting: Hosting
       last_events: Last events
       last_pages: Last pages
@@ -417,6 +429,7 @@ en:
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
         repository: As organization/name, for example noesya/bordeauxmontaigne-iut
+        university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.

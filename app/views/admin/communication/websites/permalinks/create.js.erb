@@ -1,0 +1,7 @@
+document.getElementById('previous-permalinks')
+        .getElementsByTagName('tbody')[0]
+        .insertRow()
+        .insertCell()
+        .appendChild(
+          document.createTextNode('<%= @permalink.path %>')
+        )

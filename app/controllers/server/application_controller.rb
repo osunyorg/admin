@@ -12,7 +12,7 @@ class Server::ApplicationController < ApplicationController
   end
 
   def breadcrumb
-    add_breadcrumb t('admin.dashboard'), :server_root_path
+    add_breadcrumb t('server_admin.dashboard'), :server_root_path
   end
 
   def ensure_user_if_server_admin

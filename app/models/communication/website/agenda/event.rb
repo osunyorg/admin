@@ -64,9 +64,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :recent, -> { order(:updated_at).limit(5) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
+
   scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
   scope :future_or_present, -> { where('from_day >= :today', today: Date.today).ordered_asc }
-  scope :present, -> { where('(from_day >= :today AND to_day IS NULL) OR (from_day >= :today AND to_day <= :today)', today: Date.today).ordered_asc }
+  scope :present, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
   scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
   scope :past, -> { archive }
 
@@ -124,6 +125,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     [website.config_default_content_security_policy]
   end
 
+  def references
+    menus +
+    abouts_with_agenda_block
+  end
+
   def to_s
     "#{title}"
   end
@@ -141,5 +147,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [featured_image&.blob_id]
+  end
+
+  def abouts_with_agenda_block
+    website.blocks.agenda.collect(&:about)
   end
 end

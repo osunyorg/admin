@@ -236,6 +236,7 @@ fr:
   hello: "Bonjour %{name} !"
   home: Accueil
   imports:
+    deleted_user: Utilisateur supprimé
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
     example_file_html: Télécharger un <a href="%{link}" target="_blank">fichier d'exemple</a>
@@ -276,10 +277,14 @@ fr:
         body_1_html: "Attention, vos crédits SMS sont bas : %{credits} crédits restants !"
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
         subject: "Osuny - Credits SMS bas (%{credits})"
+      new_registration:
+        body_1_html: "Un nouvel utilisateur (%{username}) vient de s'enregistrer."
+        body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour voir son compte."
+        subject: "Un nouvel utilisateur vient de s'inscrire : %{mail}"
       website_invalid_access_token:
         subject: Jeton d'accès expiré pour « %{website} »
         text_line_1_html: Le jeton d'accès utilisé pour le site « %{website} » a expiré et ne permet plus la mise à jour du site.
-        text_line_2_html: Pour résoudre ce problème, veuillez renseigner un nouveau jeton d'accès en cliquant <a href=\"%{url}\">ici</a>.
+        text_line_2_html: "Pour résoudre ce problème, veuillez renseigner un nouveau jeton d'accès en cliquant <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a>."
     yours: Cordialement.
   menu:
     admin: Admin
@@ -310,6 +315,7 @@ fr:
   search: Rechercher
   select_language: Sélectionnez une langue
   server_admin:
+    dashboard: Administration du serveur
     emergency_messages:
       all_universities: Toutes
       all_roles: Tous

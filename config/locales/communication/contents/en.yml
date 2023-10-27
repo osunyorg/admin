@@ -58,7 +58,10 @@ en:
                 description: Events are presented as a grid, from left to right and top to bottom, with constant size cropped images.
               list:
                 label: List
-                description: A list of posts with small images the same width.
+                description: A list of events with dates, small images, all the same width.
+              large:
+                label: Grand
+                description: Each event is presented in majesty, across the full width available, with a large image.
             edit:
               description:
                 label: Description

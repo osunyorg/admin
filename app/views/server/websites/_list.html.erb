@@ -14,7 +14,7 @@
       <% websites.ordered.each do |website| %>
         <tr id="website-<%= website.id %>">
           <td>
-            <%= website.name %>
+            <%= link_to website.name, server_website_path(website) %>
             <% if website.in_production %>
               <span class="badge bg-success">Prod</span>
             <% end %>

@@ -11,6 +11,7 @@
 #  header_text              :text
 #  kind                     :integer
 #  meta_description         :text
+#  migration_identifier     :string
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
 #  slug                     :string           indexed
