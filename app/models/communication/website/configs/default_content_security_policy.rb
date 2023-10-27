@@ -57,7 +57,7 @@ class Communication::Website::Configs::DefaultContentSecurityPolicy < Communicat
   end
 
   def git_path(website)
-    "config/_default/content_security_policy.yaml"
+    "data/content_security_policy.yaml"
   end
 
   def template_static
