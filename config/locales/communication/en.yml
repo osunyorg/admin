@@ -261,11 +261,20 @@ en:
           as_list: See as a list
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
+          draft: Draft
           full_width_status: Full width
+          in: in
+          in_full_width: full width
           show: Show page
           structure: Pages
+          published: Published
           published_status: Publication status
+          published_on: Published on
         post:
+          and_pinned: and pinned
+          by: by
+          draft: Draft
+          in: in
           pinned_status: Pinned status
         publish: 
           button: Publish

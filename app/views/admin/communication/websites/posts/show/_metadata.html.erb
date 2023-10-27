@@ -1,29 +1,24 @@
-<% 
-# TODO i18n quand les phrases sont vraiment claires 
-# @pa t'affole pas, c'est pas encore le cas 
-%>
 <%= osuny_panel t('metadata'), small: true do %>
   <p>
     <% if @post.published %>
-      Publié le <%= l @post.published_at.to_date %>
-      <% if @post.pinned %>
-        et mis en avant
-      <% end %>
+      <%= t('admin.communication.website.pages.published_on') %>
+      <%= l @post.published_at.to_date %>
+      <%= t('admin.communication.website.pages.and_pinned') if @post.pinned %>
     <% else %>
-      Brouillon
+      <%= t('admin.communication.website.pages.draft') %>
     <% end %>
-
+      
     <% if @post.author %>
-      <br>par <%= @post.author %>
+      <%= t('admin.communication.website.posts.by') %>
+      <%= @post.author %>
     <% end %>
-
-    <% if @post.categories.any? %>
-      <br>dans <%= @post.categories.collect(&:to_s).join(', ') %>
-    <% end %>
-
     <%= render 'admin/application/i18n/inline', about: @post %>
+      
+    <% if @post.categories.any? %>
+      <%= t('admin.communication.website.posts.in') %>
+      <%= @post.categories.collect(&:to_s).join(', ') %>
+    <% end %>
   </p>
 
   <%= render 'admin/application/permalinks/redirects', about: @post %>
-
 <% end %>

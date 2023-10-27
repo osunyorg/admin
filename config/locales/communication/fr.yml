@@ -261,12 +261,22 @@ fr:
           as_list: Voir en liste
           as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
+          draft: Brouillon
           full_width_status: Pleine largeur
+          in: dans
+          in_full_width: en pleine largeur
           show: Voir la page
           structure: Pages
+          published: Publiée
           published_status: État de publication
-        post:
+          with_children: "avec comme pages enfants :"
+        posts:
+          and_pinned: et mis en avant
+          by: par
+          draft: Brouillon
+          in: dans
           pinned_status: Mise en avant
+          published_on: Publiée le
         publish: 
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
