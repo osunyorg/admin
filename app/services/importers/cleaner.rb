@@ -54,7 +54,7 @@ module Importers
   
     def self.remove_control_chars(string)
       # Control chars & LSEP are invisible or hard to detect
-      string = string.delete("", "&#8232;", "&#x2028;", "")
+      string = string.delete(" ", "&#8232;", "&#x2028;", "")
       string = string.gsub /\u2028/, ''
       string
     end
