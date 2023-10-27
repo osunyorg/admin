@@ -270,7 +270,7 @@ en:
           published: Published
           published_status: Publication status
           with_children: "with children:"
-        post:
+        posts:
           and_pinned: and pinned
           by: by %{author}
           draft: Draft
