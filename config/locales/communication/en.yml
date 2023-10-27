@@ -269,13 +269,14 @@ en:
           structure: Pages
           published: Published
           published_status: Publication status
-          published_on: Published on %{date}
+          with_children: "with children:"
         post:
           and_pinned: and pinned
-          by: by
+          by: by %{author}
           draft: Draft
           in: in
           pinned_status: Pinned status
+          published_on: Published on %{date}
         publish: 
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.

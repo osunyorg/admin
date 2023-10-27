@@ -7,10 +7,8 @@
       <%= t('admin.communication.website.posts.draft') %>
     <% end %>
       
-    <% if @post.author %>
-      <%= t('admin.communication.website.posts.by') %>
-      <%= @post.author %>
-    <% end %>
+    <%= t('admin.communication.website.posts.by', author: @post.author) if @post.author %>
+
     <%= render 'admin/application/i18n/inline', about: @post %>
       
     <% if @post.categories.any? %>

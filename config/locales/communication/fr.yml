@@ -272,7 +272,7 @@ fr:
           with_children: "avec comme pages enfants :"
         posts:
           and_pinned: et mis en avant
-          by: par
+          by: par %{author}
           draft: Brouillon
           in: dans
           pinned_status: Mise en avant
