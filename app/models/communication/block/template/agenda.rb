@@ -17,6 +17,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     @selected_events ||= events_with_time_scope
   end
 
+  def dependencies
+    selected_events
+  end
+
   def allowed_for_about?
     website.present?
   end
