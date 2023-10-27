@@ -15,7 +15,7 @@
       </p>
     <% end %>
     <%= osuny_panel t('admin.communication.website.redirects.previous_paths'), small: true do %>
-      <table class="table border-top">
+      <table id="previous-permalinks" class="table border-top">
         <tbody>        
           <% @page.previous_permalinks_in_website(@website).each do |link| %>
             <tr>
@@ -31,7 +31,7 @@
                                 ),
                           remote: true do |f| %>
         <%= f.input :path, label: t('admin.communication.website.redirects.add_path') %>
-        <%= submit f %>
+        <%= f.button :submit, t('add'), class: button_classes %>
       <% end %>
     <% end %>
   </div>
