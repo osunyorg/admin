@@ -7,7 +7,6 @@ Rails.application.config.to_prepare do
     after_save :denormalize_university_id_for_blob
 
     def denormalize_university_id_for_blob
-      return if self.blob.university_id.present?
       university_id = case self.record.class.name
       when 'University'
           self.record.id
