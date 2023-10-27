@@ -124,6 +124,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     blocks
   end
 
+  def references
+    menus +
+    abouts_with_agenda_block
+  end
+
   def to_s
     "#{title}"
   end
@@ -141,5 +146,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [featured_image&.blob_id]
+  end
+
+  def abouts_with_agenda_block
+    website.blocks.agenda.collect(&:about)
   end
 end
