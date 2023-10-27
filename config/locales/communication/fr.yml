@@ -276,7 +276,7 @@ fr:
           draft: Brouillon
           in: dans
           pinned_status: Mise en avant
-          published_on: Publiée le
+          published_on: Publiée le %{date}
         publish: 
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.

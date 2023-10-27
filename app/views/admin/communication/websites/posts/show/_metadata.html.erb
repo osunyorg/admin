@@ -1,11 +1,10 @@
 <%= osuny_panel t('metadata'), small: true do %>
   <p>
     <% if @post.published %>
-      <%= t('admin.communication.website.pages.published_on') %>
-      <%= l @post.published_at.to_date %>
-      <%= t('admin.communication.website.pages.and_pinned') if @post.pinned %>
+      <%= t('admin.communication.website.posts.published_on', date: l(@post.published_at.to_date)) %>
+      <%= t('admin.communication.website.posts.and_pinned') if @post.pinned %>
     <% else %>
-      <%= t('admin.communication.website.pages.draft') %>
+      <%= t('admin.communication.website.posts.draft') %>
     <% end %>
       
     <% if @post.author %>

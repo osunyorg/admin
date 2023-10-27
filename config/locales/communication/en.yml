@@ -269,7 +269,7 @@ en:
           structure: Pages
           published: Published
           published_status: Publication status
-          published_on: Published on
+          published_on: Published on %{date}
         post:
           and_pinned: and pinned
           by: by
