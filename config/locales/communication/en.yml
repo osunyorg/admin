@@ -171,6 +171,7 @@ en:
         from_day: From day
         from_hour: From hour
         published: Published
+        subtitle: Subtitle
         title: Title
         to_day: To day
         to_hour: To hour

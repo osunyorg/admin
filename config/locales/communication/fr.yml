@@ -171,6 +171,7 @@ fr:
         from_day: Jour de début
         from_hour: Heure de début
         published: Publié
+        subtitle: Sous-titre
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
