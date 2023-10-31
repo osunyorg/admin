@@ -165,6 +165,7 @@ fr:
         university: Université
         url: URL
       communication/website/agenda/event:
+        categories: Catégories
         dates: Dates
         featured_image: Image à la une
         from_day: Jour de début
@@ -257,6 +258,7 @@ fr:
         agenda:
           events:
             none: Pas encore d'événements
+            draft: Brouillon
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas. C'est aussi l'image de partage par défaut."
         editorial: 
           label: Éditorial

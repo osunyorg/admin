@@ -59,6 +59,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               class_name: 'Communication::Website::Agenda::Event',
               optional: true
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'Communication::Website::Category',
+                          join_table: :communication_website_agenda_events_categories,
+                          foreign_key: :communication_website_agenda_event_id,
+                          association_foreign_key: :communication_website_category_id
+
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
   scope :ordered, -> { ordered_asc }

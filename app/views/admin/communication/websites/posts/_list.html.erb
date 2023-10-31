@@ -42,13 +42,7 @@ selectable ||= false
               <% if !hide_author && post.author %>
                 <%= post.author %><br>
               <% end %>
-              <% unless hide_category %>
-                <ul class="list-unstyled mb-0">
-                  <% post.categories.each do |category| %>
-                    <li><%= category %></li>
-                  <% end %>
-                </ul>
-              <% end %>
+              <%= render 'admin/communication/websites/categories/inline', about: post unless hide_category %>
               <% if post.pinned %>
                 <%= Communication::Website::Post.human_attribute_name('pinned') %>
               <% end %>

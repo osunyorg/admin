@@ -1,0 +1,6 @@
+<% if @about.categories.any? %>
+categories:
+  <% @about.categories.each do |category| %>
+  - "<%= category.slug_with_ancestors_slugs %>"
+  <% end %>
+<% end %>

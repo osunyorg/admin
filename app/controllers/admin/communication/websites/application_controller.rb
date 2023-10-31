@@ -25,4 +25,8 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
     end
     options
   end
+
+  def load_categories
+    @categories = @website.categories.for_language(current_website_language)
+  end
 end

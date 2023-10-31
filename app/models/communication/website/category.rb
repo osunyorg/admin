@@ -70,6 +70,11 @@ class Communication::Website::Category < ApplicationRecord
                           join_table: :communication_website_categories_posts,
                           foreign_key: :communication_website_category_id,
                           association_foreign_key: :communication_website_post_id
+  has_and_belongs_to_many :events,
+                          class_name: 'Communication::Website::Agenda::Event',
+                          join_table: :communication_website_agenda_events_categories,
+                          foreign_key: :communication_website_category_id,
+                          association_foreign_key: :communication_website_agenda_event_id
 
   validates :name, presence: true
 

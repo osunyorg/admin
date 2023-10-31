@@ -20,12 +20,7 @@
   <hr class="mb-5">
   <div class="row">
     <div class="col-lg-4">
-      <div class="mb-4">
-        <%= osuny_label t('metadata') %><br>
-        <% # TODO i18n après Violenn %>
-        <%= @event.published ? 'Publié' : 'Brouillon' %>
-        <%= render 'admin/application/i18n/inline', about: @event %>
-      </div>
+      <%= render 'admin/communication/websites/agenda/events/show/metadata' %>
     </div>
     <div class="col-lg-8">
       <%= render 'admin/application/summary/show', about: @event, small: true %>

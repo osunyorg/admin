@@ -165,6 +165,7 @@ en:
         url: URL
         university: University
       communication/website/agenda/event:
+        categories: Categories
         dates: Dates
         featured_image: Featured image
         from_day: From day
@@ -256,6 +257,7 @@ en:
       website:
         agenda:
           events:
+            draft: Draft
             none: No event yet
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
         editorial: 
