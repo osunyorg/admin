@@ -30,7 +30,8 @@ layouts = template.class.layouts
           <div class="col-lg-4">
             <%= image_tag "communication/blocks/templates/#{template.kind}/#{layout}.png",
                           alt: name,
-                          class: 'layout__image img-fluid border' %>
+                          class: 'layout__image img-fluid border',
+                          loading: 'lazy' %>
           </div>
           <div class="col-lg-8 d-lg-flex flex-column justify-content-center">
             <div class="p-4 p-lg-0 p-lg-e5">
