@@ -39,6 +39,9 @@ fr:
             credit:
               label: Crédit
               placeholder: Entrer le crédit
+          layouts:
+            label: Mise en page
+            button: Choisir la mise en page
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
           time_slot:

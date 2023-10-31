@@ -39,6 +39,9 @@ en:
             credit:
               label: Credit
               placeholder: Enter credit
+          layouts:
+            label: Layout
+            button: Choose the layout
           link:
               target_blank: Open in new window
           time_slot:
