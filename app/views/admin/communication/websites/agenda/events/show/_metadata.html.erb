@@ -1,4 +1,4 @@
-<div class="mb-4">
+<%= osuny_panel t('metadata'), small: true do %>
   <%= osuny_label t('metadata') %><br>
   
   <%= @event.published  ? Communication::Website::Agenda::Event.human_attribute_name(:published)
@@ -12,4 +12,4 @@
           categories: @event.categories.collect(&:to_s).join(', ')
         ) %>
   <% end %>
-</div>
+<% end %>
