@@ -1,8 +1,12 @@
 .edit_communication_block
     #layouts
         .layout
+            label
+                cursor: pointer
+            &:hover
+                background: #eeeeee
             &--selected
-                background: $color-accent
+                background: $color-accent !important
                 *
                     color: white
                 .layout__image
