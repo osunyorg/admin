@@ -257,6 +257,16 @@ en:
         agenda:
           events:
             none: No event yet
+        default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
+        editorial: 
+          label: Editorial
+          description: Everything related to content
+        technical:
+          label: Technical
+          description: Everything related to technical settings
+        social:
+          free: Libres
+          private: Privatifs
         pages:
           as_list: See as a list
           as_tree: Organize structure

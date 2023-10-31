@@ -3,89 +3,121 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-xl-4">
-      <%= osuny_panel t('metadata') do %>
-        <%= f.input :name %>
-        <%= f.input :url %>
-        <%= f.input :in_production %>
-        <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
-      <% end %>
+    <div class="col-lg-4">
+      <%= f.input :name %>
     </div>
-    <div class="col-xl-4">
-      <%= osuny_panel Communication::Website.human_attribute_name('features') do %>
-        <%= f.input :feature_posts %>
-        <%= f.input :feature_agenda %>
-      <% end %>
-      <%= osuny_panel t('communication.website.hosting') do %>
-        <%= f.input :deuxfleurs_hosting, hint: website.deuxfleurs_identifier %>
-      <% end %>
-      <%= osuny_panel t('communication.website.analytics') do %>
-        <%= f.input :plausible_url %>
-      <% end %>
-    </div>
-    <div class="col-xl-4">
-      <%= osuny_panel Language.model_name.human(count: 2) do %>
-        <%= f.association :languages, 
-                          as: :check_boxes, 
-                          required: true, 
-                          wrapper_html: { class: "js-languages" }, 
-                          label_method: lambda { |l| language_name(l.iso_code) } %>
-        <%= f.association :default_language, 
-                          include_blank: t('simple_form.include_blanks.defaults.language'), 
-                          label_method: lambda { |l| language_name(l.iso_code) }, 
-                          input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
-      <% end %>
-      <%= osuny_panel Communication::Website.human_attribute_name('appearance') do %>
-        <%= f.input :default_image,
-                    as: :single_deletable_file,
-                    direct_upload: true,
-                    hint: default_images_formats_accepted_hint,
-                    input_html: { accept: default_images_formats_accepted },
-                    preview: true %>
-      <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-4">
-      <%= osuny_panel t('communication.website.git') do %>
-        <%= f.input :autoupdate_theme %>
-        <%= f.input :git_provider, include_blank: false %>
-        <%= f.input :git_endpoint %>
-        <%= f.input :access_token, 
-                    as: :string, 
-                    placeholder: masked_string(f.object.access_token), 
-                    hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
-                    input_html: {
-                      autocomplete: 'access_token',
-                      role: 'presentation',
-                      value: ''
-                    }
-                    %>
-        <%= f.input :repository %>
-        <%= f.input :git_branch %>
-        <%= f.input :deployment_status_badge, 
-                    as: :string, 
-                    input_html: {
-                      autocomplete: 'deployment_status_badge',
-                      role: 'presentation'
-                    }
-                    %>
-      <% end %>
-    </div>
-    <div class="col-xl-4">
-      <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
-        <%= f.input :social_email %>
-        <%= f.input :social_mastodon %>
-        <%= f.input :social_peertube %>
-        <%= f.input :social_x %>
-        <%= f.input :social_github %>
-        <%= f.input :social_linkedin %>
-        <%= f.input :social_youtube %>
-        <%= f.input :social_vimeo %>
-        <%= f.input :social_instagram %>
-        <%= f.input :social_facebook %>
-        <%= f.input :social_tiktok %>
-      <% end %>
+    <div class="col-lg-8">
+      <section>
+        <p class="float-end blocks__category__description"><%= t "admin.communication.website.editorial.description" %></p>
+        <h2 class="h3 category blocks__category__title"><%= t "admin.communication.website.editorial.label" %></h2>
+        <%= osuny_panel Communication::Website.human_attribute_name('features') do %>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= f.input :feature_posts %>
+            </div>
+            <div class="col-lg-6">
+              <%= f.input :feature_agenda %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= osuny_panel Language.model_name.human(count: 2) do %>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= f.association :languages, 
+                                as: :check_boxes, 
+                                required: true, 
+                                wrapper_html: { class: "js-languages" }, 
+                                label_method: lambda { |l| language_name(l.iso_code) } %>
+            </div>
+            <div class="col-lg-6">
+              <%= f.association :default_language, 
+                                include_blank: t('simple_form.include_blanks.defaults.language'), 
+                                label_method: lambda { |l| language_name(l.iso_code) }, 
+                                input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= osuny_panel Communication::Website.human_attribute_name('appearance') do %>
+          <div class="row">
+            <div class="col-lg-6">
+              <p class="form-text">
+                <%= t('admin.communication.website.default_image') %>
+              </p>
+              <%= f.input :default_image,
+                          as: :single_deletable_file,
+                          direct_upload: true,
+                          hint: default_images_formats_accepted_hint,
+                          input_html: { accept: default_images_formats_accepted },
+                          preview: 300 %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
+          <div class="row">
+            <div class="col-lg-6">
+              <p><%= t('admin.communication.website.social.free') %></p>
+              <%= f.input :social_email %>
+              <%= f.input :social_mastodon %>
+              <%= f.input :social_peertube %>
+            </div>
+            <div class="col-lg-6">
+              <p><%= t('admin.communication.website.social.private') %></p>
+              <%= f.input :social_x %>
+              <%= f.input :social_github %>
+              <%= f.input :social_linkedin %>
+              <%= f.input :social_youtube %>
+              <%= f.input :social_vimeo %>
+              <%= f.input :social_instagram %>
+              <%= f.input :social_facebook %>
+              <%= f.input :social_tiktok %>
+            </div>
+          </div>
+        <% end %>
+      </section>
+      
+      <section>
+        <p class="float-end blocks__category__description"><%= t "admin.communication.website.technical.description" %></p>
+        <h2 class="h3 category blocks__category__title"><%= t "admin.communication.website.technical.label" %></h2>
+
+        <%= osuny_panel t('metadata') do %>
+          <%= f.input :url %>
+          <%= f.input :in_production %>
+          <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
+        <% end %>
+
+        <%= osuny_panel t('communication.website.hosting') do %>
+          <%= f.input :deuxfleurs_hosting, hint: website.deuxfleurs_identifier %>
+          <%= f.input :autoupdate_theme %>
+          <%= f.input :plausible_url %>
+        <% end %>
+
+        <%= osuny_panel t('communication.website.git') do %>
+          <%= f.input :git_provider, include_blank: false %>
+          <%= f.input :git_endpoint %>
+          <%= f.input :access_token, 
+                      as: :string, 
+                      placeholder: masked_string(f.object.access_token), 
+                      hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
+                      input_html: {
+                        autocomplete: 'access_token',
+                        role: 'presentation',
+                        value: ''
+                      }
+                      %>
+          <%= f.input :repository %>
+          <%= f.input :git_branch %>
+          <%= f.input :deployment_status_badge, 
+                      as: :string, 
+                      input_html: {
+                        autocomplete: 'deployment_status_badge',
+                        role: 'presentation'
+                      }
+                      %>
+        <% end %>
+      </section>
     </div>
   </div>
   <% content_for :action_bar_right do %>
