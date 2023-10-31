@@ -5,6 +5,9 @@
     <div class="col-lg-7">
       <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name(:title), small: true do %>
         <p class="lead"><%= @event.title %></p>
+        <% if @event.subtitle.present? %>
+          <p class="mt-n3 text-muted"><%= @event.subtitle %></p>
+        <% end %>
         <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event %></p>
       <% end %>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_31_102713) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -252,6 +252,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_102713) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.string "subtitle"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"

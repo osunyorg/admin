@@ -6,6 +6,7 @@
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
         <%= f.input :title %>
+        <%= f.input :subtitle %>
         <%= render 'admin/application/summary/form', f: f, about: event %>
       <% end %>
       <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>

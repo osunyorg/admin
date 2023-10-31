@@ -81,7 +81,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
-      :title, :meta_description, :summary, :published, :slug,
+      :title, :subtitle, :meta_description, :summary, :published, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :from_day, :from_hour, :to_day, :to_hour, 
       category_ids: []
