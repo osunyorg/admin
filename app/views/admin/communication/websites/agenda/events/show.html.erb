@@ -37,6 +37,10 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <%= link_to t('open'),
+              @event.url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if @event.url %>
   <%= edit_link @event %>
   <%= publish_link @event %>
 <% end %>
