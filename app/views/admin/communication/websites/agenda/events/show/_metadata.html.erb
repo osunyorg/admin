@@ -1,0 +1,15 @@
+<div class="mb-4">
+  <%= osuny_label t('metadata') %><br>
+  
+  <%= @event.published  ? Communication::Website::Agenda::Event.human_attribute_name(:published)
+                        : t('admin.communication.website.agenda.events.draft') %>
+
+  <%= render 'admin/application/i18n/inline', about: @event %>
+
+  <% if @event.categories.any? %>
+    <%= t(
+          'admin.communication.website.posts.in', 
+          categories: @event.categories.collect(&:to_s).join(', ')
+        ) %>
+  <% end %>
+</div>

@@ -2,8 +2,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event, 
                               through: :website
 
+  before_action :load_categories, only: [:new, :edit]
+
   def index
     @events = apply_scopes(@events).for_language(current_website_language).ordered.page params[:page]
+    @root_categories = @website.categories.for_language(current_website_language).root.ordered
     breadcrumb
   end
 
@@ -80,7 +83,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     .permit(
       :title, :meta_description, :summary, :published, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :from_day, :from_hour, :to_day, :to_hour
+      :from_day, :from_hour, :to_day, :to_hour, 
+      category_ids: []
     )
     .merge(
       university_id: current_university.id,
