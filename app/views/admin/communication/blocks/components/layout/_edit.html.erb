@@ -2,7 +2,9 @@
 layouts = template.class.layouts
 %>
 <p>
-  Mise en page
+  <span class="form-label pe-2">
+    <%= t('admin.communication.blocks.components.layouts.label') %>
+  </span>
   <% layouts.each do |layout| %>
     <strong v-show="data.layout == '<%= layout %>'">
       <%= t "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}.label" %>
@@ -10,46 +12,40 @@ layouts = template.class.layouts
   <% end %>
   <a  data-bs-toggle="collapse"
       href="#layouts"
-      class="ms-4 btn btn-light">
-    Choisir la mise en page
+      class="ms-4 action">
+      <%= t('admin.communication.blocks.components.layouts.button') %>
   </a>
 </p>
 
-<div class="row pure__row--small collapse" id="layouts">
+<div class="collapse mb-5" id="layouts">
   <% layouts.each do |layout| %>
     <%
     i18n = "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}"
     name = t "#{i18n}.label"
     description = t "#{i18n}.description"
     %>
-    <div class="col-xxl-6">
-      <div class="card mb-4">
-        <label for="layout-<%= layout %>">
-          <div class="row pure__row--small">
-            <div class="col-8 col-xxl-6">
-              <div class="card-body">
-                <div class="form-check">
-                  <input  class="form-check-input"
-                          type="radio"
-                          name="layout"
-                          v-model="data.layout"
-                          value="<%= layout %>"
-                          id="layout-<%= layout %>">
-                  <label for="layout-<%= layout %>">
-                    <b><%= name %></b>
-                  </label>
-                </div>
-                <p><%= description %></p>
-              </div>
-            </div>
-            <div class="col-4 col-xxl-6">
-              <%= image_tag "communication/blocks/templates/#{template.kind}/#{layout}.png",
-                            alt: name,
-                            class: 'img-fluid' %>
+    <div class="mb-4" v-bind:class="{ 'layout--selected': data.layout == '<%= layout %>' }">
+      <label for="layout-<%= layout %>">
+        <div class="row">
+          <div class="col-lg-4">
+            <%= image_tag "communication/blocks/templates/#{template.kind}/#{layout}.png",
+                          alt: name,
+                          class: 'layout__image img-fluid border' %>
+          </div>
+          <div class="col-lg-8 d-lg-flex flex-column justify-content-center">
+            <div class="p-4 p-lg-0 p-lg-e5">
+              <input  class="form-check-input d-none"
+                      type="radio"
+                      name="layout"
+                      v-model="data.layout"
+                      value="<%= layout %>"
+                      id="layout-<%= layout %>">
+              <h3><%= name %></h3>
+              <p><%= description %></p>
             </div>
           </div>
-        </label>
-      </div>
+        </div>
+      </label>
     </div>
   <% end %>
 </div>
