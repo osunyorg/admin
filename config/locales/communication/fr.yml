@@ -162,13 +162,16 @@ fr:
         social_vimeo: "Vimeo (privatif)"
         social_x: "X, ex-Twitter (privatif)"
         social_youtube: "Youtube (privatif, appartient à Google)"
+        university: Université
         url: URL
       communication/website/agenda/event:
+        categories: Catégories
         dates: Dates
         featured_image: Image à la une
         from_day: Jour de début
         from_hour: Heure de début
         published: Publié
+        subtitle: Sous-titre
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
@@ -217,6 +220,8 @@ fr:
         text: Texte principal de la page
         title: Titre
         website: Site Web
+      communication/website/permalink:
+        path: Chemin
       communication/website/post:
         author: Auteur·rice
         category: Catégorie
@@ -254,19 +259,46 @@ fr:
         agenda:
           events:
             none: Pas encore d'événements
+            draft: Brouillon
+        default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas. C'est aussi l'image de partage par défaut."
+        editorial: 
+          label: Éditorial
+          description: Tout ce qui est lié au contenu
+        technical:
+          label: Technique
+          description: Tout ce qui est lié aux réglages techniques
+        social:
+          free: Libres
+          private: Privatifs
         pages:
           as_list: Voir en liste
           as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
+          draft: Brouillon
           full_width_status: Pleine largeur
+          in: dans
+          in_full_width: en pleine largeur
           show: Voir la page
           structure: Pages
+          published: Publiée
           published_status: État de publication
-        post:
+          with_children: "avec comme pages enfants :"
+        posts:
+          and_pinned: et mis en avant
+          by: par %{author}
+          draft: Brouillon
+          in: dans %{categories}
           pinned_status: Mise en avant
+          published_on: Publiée le %{date}
         publish: 
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
+        redirects:
+          button: Gérer les redirections
+          title: Gérer les redirections
+          current_path: Chemin actuel
+          previous_paths: Redirections (anciens chemins)
+          add_path: Ajouter une redirection
   communication:
     authors:
       one: Auteur·rice
@@ -295,6 +327,9 @@ fr:
     website:
       analytics: Analytics
       git: Git
+      golive: 
+        title: Mise en production
+        button: Mettre en production
       hosting: Hébergement
       last_events: Derniers événements
       last_pages: Dernières pages
@@ -412,11 +447,14 @@ fr:
         access_token_with_existing: Votre jeton d'accès Github ou Gitlab confidentiel.<br>Laisser le champ vide pour ne pas le modifier.
         access_token_without_existing: Votre jeton d'accès Github ou Gitlab confidentiel.
         deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
+        feature_posts: Pour publier des actualités, comme un média
+        feature_agenda: Pour partager des événements
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
         plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
         repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut
+        university: Attention, le changement d'université va déconnecter les personnes et organisations qui sont utilisées dans d'autres sites, et déconnecter les personnes des utilisateurs ou utilisatrices.
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.

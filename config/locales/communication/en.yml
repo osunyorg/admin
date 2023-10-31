@@ -163,12 +163,15 @@ en:
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
         url: URL
+        university: University
       communication/website/agenda/event:
+        categories: Categories
         dates: Dates
         featured_image: Featured image
         from_day: From day
         from_hour: From hour
         published: Published
+        subtitle: Subtitle
         title: Title
         to_day: To day
         to_hour: To hour
@@ -217,6 +220,8 @@ en:
         text: Main page text
         title: Title
         website: Website
+      communication/website/permalink:
+        path: Path
       communication/website/post:
         author: Author
         category: Category
@@ -253,20 +258,47 @@ en:
       website:
         agenda:
           events:
+            draft: Draft
             none: No event yet
+        default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
+        editorial: 
+          label: Editorial
+          description: Everything related to content
+        technical:
+          label: Technical
+          description: Everything related to technical settings
+        social:
+          free: Libres
+          private: Privatifs
         pages:
           as_list: See as a list
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
+          draft: Draft
           full_width_status: Full width
+          in: in
+          in_full_width: full width
           show: Show page
           structure: Pages
+          published: Published
           published_status: Publication status
-        post:
+          with_children: "with children:"
+        posts:
+          and_pinned: and pinned
+          by: by %{author}
+          draft: Draft
+          in: in %{categories}
           pinned_status: Pinned status
+          published_on: Published on %{date}
         publish: 
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.
+        redirects:
+          button: Manage redirects
+          title: Manage redirects
+          current_path: Current path
+          previous_paths: Redirects (old paths)
+          add_path: Add a redirect
   communication:
     authors:
       one: Author
@@ -295,6 +327,9 @@ en:
     website:
       analytics: Analytics
       git: Git
+      golive: 
+        title: Go live
+        button: Go live
       hosting: Hosting
       last_events: Last events
       last_pages: Last pages
@@ -417,6 +452,7 @@ en:
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
         repository: As organization/name, for example noesya/bordeauxmontaigne-iut
+        university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.

@@ -2,6 +2,9 @@
 title: "<%= prepare_text_for_static @about.name %>"
 <%= render 'admin/application/static/permalink', forced_slug: @about.slug_with_ancestors_slugs %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+<%= render 'admin/application/static/breadcrumbs', 
+            pages: @website.special_page(Communication::Website::Page::CommunicationPost).ancestors_and_self,
+            current: @about %>
 <% if @about.parent %>
 parent: "<%= @about.parent.path %>"
 <% end %>

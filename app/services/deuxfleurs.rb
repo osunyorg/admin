@@ -6,6 +6,12 @@ class Deuxfleurs
     data.dig('vhost', 'name')
   end
 
+  def rename_bucket(host, new_identifier)
+    params = "{ \"vhost\": \"#{new_identifier}\" }"
+    response = client.patch("website/#{host}", params)
+    response.status == 200
+  end
+
   def default_url_for(host)
     "https://#{host}.web.deuxfleurs.fr"
   end

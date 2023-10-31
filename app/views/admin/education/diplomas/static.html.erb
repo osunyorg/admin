@@ -2,6 +2,9 @@
 title: "<%= prepare_text_for_static @about.name %>"
 <%= render 'admin/application/static/permalink' if @website %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+<%= render 'admin/application/static/breadcrumbs', 
+            pages: @website.special_page(Communication::Website::Page::EducationDiploma).ancestors_and_self,
+            current: @about %>
 <% if @website 
   @programs = @website.education_programs.where(diploma: @about).root.ordered %>
 programs:

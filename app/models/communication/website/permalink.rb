@@ -92,6 +92,17 @@ class Communication::Website::Permalink < ApplicationRecord
     raise NotImplementedError
   end
 
+  def self.clean_path(path)
+    clean_path = path.dup
+    # Remove eventual host
+    clean_path = URI(clean_path).path
+    # Leading slash for absolute path
+    clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
+    # Trailing slash for coherence
+    clean_path = "#{clean_path}/" unless clean_path.end_with?('/')
+    clean_path
+  end
+
   def pattern
     language = about.respond_to?(:language) ? about.language : website.default_language
     self.class.pattern_in_website(website, language)
@@ -114,6 +125,10 @@ class Communication::Website::Permalink < ApplicationRecord
       existing_permalinks_for_path.find_each(&:destroy)
       current_permalink&.update(is_current: false)
     end
+  end
+
+  def to_s
+    "#{path}"
   end
 
   protected
@@ -152,5 +167,4 @@ class Communication::Website::Permalink < ApplicationRecord
   def set_university
     self.university_id = website.university_id
   end
-
 end

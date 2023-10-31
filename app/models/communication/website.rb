@@ -145,6 +145,14 @@ class Communication::Website < ApplicationRecord
   end
   handle_asynchronously :sync_with_git, queue: 'default'
 
+  def move_to_university(new_university_id)
+    return if self.university_id == new_university_id
+    update_column :university_id, new_university_id
+    recursive_dependencies_syncable_following_direct.each do |dependency|
+      reconnect_dependency dependency, new_university_id
+    end
+  end
+
   protected
 
   def sanitize_fields
@@ -154,5 +162,28 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def reconnect_dependency(dependency, new_university_id)
+    # puts
+    # puts "reconnect dependency #{dependency} - #{dependency.class}"
+    unless dependency.respond_to?(:university_id)
+      # puts "no university"
+      return
+    end
+    # puts "  respond to university_id"
+    # vérifier par les connexions qu'un objet indirect n'est pas utilisé dans un autre website
+    if dependency.respond_to?(:connections) && dependency.connections.where.not(website: self).any?
+      # puts "other connection found, not moving"
+      return
+    end 
+    # puts "  no other connection"
+    # il faut si l'objet est une person déconnecter le user éventuellement associé.
+    if dependency.is_a? University::Person
+      # puts "person, disconnecting from user"
+      dependency.update_column :user_id, nil
+    end
+    # puts "connecting to #{new_university_id}"
+    dependency.update_column :university_id, new_university_id
   end
 end

@@ -1,5 +1,6 @@
 ---
 title: "<%= prepare_text_for_static @about.title %>"
+subtitle: "<%= prepare_text_for_static @about.subtitle %>"
 <%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
 <%= render 'admin/application/static/breadcrumbs', 
             pages: @website.special_page(Communication::Website::Page::CommunicationAgenda).ancestors_and_self,
@@ -11,5 +12,6 @@ weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/featured_image/static' %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
+<%= render 'admin/communication/websites/categories/static_about' %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

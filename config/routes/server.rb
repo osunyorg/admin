@@ -1,7 +1,7 @@
 namespace :server do
   resources :universities
   resources :languages
-  resources :websites, only: :index do
+  resources :websites do
     member do
       post :sync_theme_version
       post :update_theme

@@ -4,7 +4,7 @@ Rails.application.config.to_prepare do
 
   # Hook ActiveStorage::Attachment to add brand_id to attachments records
   ActiveStorage::Attachment.class_eval do
-    after_save :denormalize_university_id_for_blob, unless: :university_id
+    after_save :denormalize_university_id_for_blob
 
     def denormalize_university_id_for_blob
       university_id = case self.record.class.name

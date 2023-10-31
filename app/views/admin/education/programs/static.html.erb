@@ -10,6 +10,9 @@ administrator_involvements = @about.involvements_through_roles
 title: "<%= prepare_text_for_static @about.name %>"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true, toc_present: true %>
+<%= render 'admin/application/static/breadcrumbs', 
+            pages: @website.special_page(Communication::Website::Page::EducationProgram).ancestors_and_self,
+            current: @about %>
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
