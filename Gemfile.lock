@@ -111,8 +111,8 @@ GEM
     autoprefixer-rails (10.4.15.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.843.0)
-    aws-sdk-core (3.185.1)
+    aws-partitions (1.844.0)
+    aws-sdk-core (3.186.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -290,7 +290,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n_data (0.17.1)
       simple_po_parser (~> 1.1)
-    i18n_date_range (1.0.3)
+    i18n_date_range (2.0.0)
       rails
       rails-i18n
     image_processing (1.12.2)
@@ -421,7 +421,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
-    racc (1.7.1)
+    racc (1.7.2)
     rack (2.2.8)
     rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
