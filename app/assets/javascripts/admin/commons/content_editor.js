@@ -14,6 +14,7 @@ window.osuny.contentEditor = {
         this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
         this.initTabs();
         this.initSortable();
+        this.initBlockCopyPaste();
     },
 
     initTabs: function () {
@@ -102,6 +103,28 @@ window.osuny.contentEditor = {
             ids.push(child.dataset.id);
         }
         $.post(this.sortHeadingsUrl, { ids: ids });
+    },
+
+    initBlockCopyPaste: function () {
+        'use strict';
+        var i;
+        this.blockCopyButtons = document.querySelectorAll('.content-editor__block__copy');        
+        for (i = 0; i < this.blockCopyButtons.length; i += 1) {
+            this.blockCopyButtons[i].addEventListener('click', this.blockCopy.bind(this));
+        }
+    },
+
+    blockCopy: function (event) {
+        'use strict';
+        var blockId = event.target.dataset.blockId;
+        event.preventDefault();
+        document.cookie = 'osuny-content-editor-block-copy=' + blockId;
+        // TODO show paste button
+    },
+
+    blockPaste: function () {
+        'use strict';
+        
     },
 
     invoke: function () {
