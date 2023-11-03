@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.4"
 
-# Infrastructure
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_storage_validations", "~> 1.0"
 gem "angularjs-rails"
@@ -41,7 +40,7 @@ gem "has_scope", "~> 0.8.0"
 gem "hash_dot"
 gem "i18n_data", "~> 0.17.1"
 gem "i18n_date_range"
-# gem "i18n_date_range", path: "../i18n_date_range"
+# gem "i18n_date_range", path: "../../noesya/i18n_date_range"
 gem "image_processing"
 gem "jbuilder"
 gem "jquery-rails"
