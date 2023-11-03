@@ -107,10 +107,10 @@ window.osuny.contentEditor = {
 
     initBlockCopyPaste: function () {
         'use strict';
-        var i;
-        this.blockCopyButtons = document.querySelectorAll('.content-editor__block__copy');        
-        for (i = 0; i < this.blockCopyButtons.length; i += 1) {
-            this.blockCopyButtons[i].addEventListener('click', this.blockCopy.bind(this));
+        var buttons = document.querySelectorAll('.content-editor__block__copy'),
+            i;
+        for (i = 0; i < buttons.length; i += 1) {
+            buttons[i].addEventListener('click', this.blockCopy.bind(this));
         }
     },
 
@@ -119,12 +119,6 @@ window.osuny.contentEditor = {
         var blockId = event.target.dataset.blockId;
         event.preventDefault();
         document.cookie = 'osuny-content-editor-block-copy=' + blockId;
-        // TODO show paste button
-    },
-
-    blockPaste: function () {
-        'use strict';
-        
     },
 
     invoke: function () {
