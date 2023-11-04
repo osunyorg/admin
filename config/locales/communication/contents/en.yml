@@ -503,6 +503,7 @@ en:
                 placeholder: Enter video title
       contents:
         blocks:
+          paste: Paste block
           quantity:
             zero: No block
             one: 1 block

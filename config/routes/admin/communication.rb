@@ -93,6 +93,7 @@ namespace :communication do
     end
     member do
       post :duplicate
+      post :paste
     end
   end
   resources :extranets, controller: 'extranets' do

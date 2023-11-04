@@ -107,7 +107,7 @@ window.osuny.contentEditor = {
 
     initBlockCopyPaste: function () {
         'use strict';
-        var buttons = document.querySelectorAll('.content-editor__block__copy'),
+        var buttons = document.querySelectorAll('.js-block__copy'),
             i;
         for (i = 0; i < buttons.length; i += 1) {
             buttons[i].addEventListener('click', this.blockCopy.bind(this));
@@ -118,7 +118,11 @@ window.osuny.contentEditor = {
         'use strict';
         var blockId = event.target.dataset.blockId;
         event.preventDefault();
-        document.cookie = 'osuny-content-editor-block-copy=' + blockId;
+        document.cookie = 'osuny-content-editor-block-copy=' + blockId + ';path=/admin';
+        event.target.classList.add('text-success');
+        setTimeout(function () {
+            event.target.classList.remove('text-success');
+        }, 1000)
     },
 
     invoke: function () {

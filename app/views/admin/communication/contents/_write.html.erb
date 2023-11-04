@@ -10,6 +10,7 @@
     <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
   <% end %>
 </div>
+<%= render "admin/communication/blocks/paste_block", about: about %>
 <div class="content-editor__actions row mt-5">
   <div class="col-lg-4">
     <%= link_to t('admin.communication.blocks.headings.add'),
@@ -19,8 +20,6 @@
   <div class="col-lg-8">
     <%= link_to t('admin.communication.blocks.add'),
                 new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                class: 'py-5 px-2 mb-3 d-block bg-light text-center border h4' if can? :create, Communication::Block %>
-
-    <%= render "admin/communication/blocks/paste_block", about: about %>
+                class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block %>
   </div>
 </div>

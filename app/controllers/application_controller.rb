@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_block_copy_cookie
-    block_id = cookies['osuny-content-editor-block-copy']
+    block_id = cookies[Communication::Block::BLOCK_COPY_COOKIE]
     return if block_id.nil?
     @block_copied = Communication::Block.find block_id
   end

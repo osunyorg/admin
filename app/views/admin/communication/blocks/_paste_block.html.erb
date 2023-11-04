@@ -1,6 +1,25 @@
 <% if @block_copied.present? %>
-  <a href="#" class="py-5 px-2 d-block bg-light text-center border h4">
-    Coller une copie du bloc
-    “<%= @block_copied.to_s %>”
-  </a>
+  <div class="row mt-5">
+    <div class="offset-lg-4 col-lg-8">
+      <div class="position-relative py-4 px-2 d-block bg-light text-center border">
+        <p class="mb-1">
+          <%= link_to paste_admin_communication_block_path(
+                        @block_copied,
+                        about_id: about.id, 
+                        about_type: about.class.polymorphic_name
+                      ), 
+                      method: :post, 
+                      class: 'stretched-link text-black' do %>
+            <i class="<%= Icon::PASTE %>"></i>
+            <b><%= t('admin.communication.contents.blocks.paste') %></b>
+          <% end %>
+        </p>
+        <p class="small mb-0">
+          <%= @block_copied.about %>
+          <i class="<%= Icon::ARROW_RIGHT %>"></i>
+          <%= about %>
+        </p>
+      </div>
+    </div>
+  </div>
 <% end %>

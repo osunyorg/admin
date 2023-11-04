@@ -503,6 +503,7 @@ fr:
                 placeholder: Entrer le titre de la vidéo
       contents:
         blocks:
+          paste: Coller le bloc
           quantity:
             zero: Aucun bloc
             one: 1 bloc
