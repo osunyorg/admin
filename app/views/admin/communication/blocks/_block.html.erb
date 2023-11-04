@@ -10,7 +10,9 @@
         <div class="mb-1">
           <div class="float-end">
             <span class="content-editor__elements__element--hover">
-              <a href="#" class="action js-block__copy" data-block-id="<%= block.id %>">Copier le bloc</a>
+              <a href="#" class="action js-block__copy" data-block-id="<%= block.id %>">
+                <%= t('admin.communication.contents.blocks.copy') %>
+              </a>
               <%= destroy_link block, html_classes: 'action text-danger ms-2' %>
               <%= duplicate_link block, html_classes: 'action ms-2' %>
             </span>
