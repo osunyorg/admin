@@ -19,11 +19,7 @@ window.osuny.contentEditor = {
 
     initTabs: function () {
         'use strict';
-        var tabs = document.querySelectorAll('[data-bs-toggle="tab"]'),
-            i;
-        for (i = 0; i < tabs.length; i += 1) {
-            tabs[i].addEventListener('shown.bs.tab', this.tabChanged.bind(this));
-        }
+        this.addListeners('[data-bs-toggle="tab"]', 'shown.bs.tab', this.tabChanged);
     },
 
     initSortable: function () {
@@ -107,11 +103,7 @@ window.osuny.contentEditor = {
 
     initBlockCopyPaste: function () {
         'use strict';
-        var buttons = document.querySelectorAll('.js-block__copy'),
-            i;
-        for (i = 0; i < buttons.length; i += 1) {
-            buttons[i].addEventListener('click', this.blockCopy.bind(this));
-        }
+        this.addListeners('.js-block__copy', 'click', this.blockCopy);
     },
 
     blockCopy: function (event) {
@@ -123,6 +115,15 @@ window.osuny.contentEditor = {
         setTimeout(function () {
             event.target.classList.remove('text-success');
         }, 1000)
+    },
+
+    addListeners: function (selector, event, action) {
+        'use strict';
+        var elements = document.querySelectorAll(selector),
+            i;
+        for (i = 0; i < elements.length; i += 1) {
+            elements[i].addEventListener(event, action.bind(this));
+        }
     },
 
     invoke: function () {

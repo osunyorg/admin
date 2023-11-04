@@ -61,7 +61,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     about = PolymorphicObjectFinder.find(params, :about)
     @block = @block.paste(about)
     cookies.delete(Communication::Block::BLOCK_COPY_COOKIE, path: '/admin')
-    redirect_to about_path,
+    redirect_to about_path + "#block-#{@block.id}",
                 notice: t('admin.successfully_duplicated_html', model: @block.to_s)
   end
 
