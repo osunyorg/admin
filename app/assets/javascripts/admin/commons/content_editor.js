@@ -114,7 +114,7 @@ window.osuny.contentEditor = {
         event.target.classList.add('text-success');
         setTimeout(function () {
             event.target.classList.remove('text-success');
-        }, 1000)
+        }, 1000);
     },
 
     addListeners: function (selector, event, action) {
