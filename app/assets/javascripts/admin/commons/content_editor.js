@@ -12,14 +12,9 @@ window.osuny.contentEditor = {
         this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
         this.modeWriteContainer = this.container.querySelector('#mode-write-container');
         this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
-        this.initTabs();
-        this.initSortable();
-        this.initBlockCopyPaste();
-    },
-
-    initTabs: function () {
-        'use strict';
         this.addListeners('[data-bs-toggle="tab"]', 'shown.bs.tab', this.tabChanged);
+        this.addListeners('.js-block__copy', 'click', this.blockCopy);
+        this.initSortable();
     },
 
     initSortable: function () {
@@ -99,11 +94,6 @@ window.osuny.contentEditor = {
             ids.push(child.dataset.id);
         }
         $.post(this.sortHeadingsUrl, { ids: ids });
-    },
-
-    initBlockCopyPaste: function () {
-        'use strict';
-        this.addListeners('.js-block__copy', 'click', this.blockCopy);
     },
 
     blockCopy: function (event) {
