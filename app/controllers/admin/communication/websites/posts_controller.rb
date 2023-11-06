@@ -129,8 +129,4 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def load_filters
     @filters = ::Filters::Admin::Communication::Website::Posts.new(current_user, @website).list
   end
-
-  def load_categories
-    @categories = @website.categories.for_language(current_website_language)
-  end
 end

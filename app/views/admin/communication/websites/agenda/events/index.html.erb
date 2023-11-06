@@ -15,4 +15,7 @@
     <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
     <%= paginate @events, theme: 'bootstrap-5' %>
   <% end %>
+  
+  <%= render 'admin/communication/websites/categories/panel', root_categories: @root_categories %>
 <% end %>
+

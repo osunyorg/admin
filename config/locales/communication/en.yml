@@ -165,11 +165,13 @@ en:
         url: URL
         university: University
       communication/website/agenda/event:
+        categories: Categories
         dates: Dates
         featured_image: Featured image
         from_day: From day
         from_hour: From hour
         published: Published
+        subtitle: Subtitle
         title: Title
         to_day: To day
         to_hour: To hour
@@ -256,17 +258,38 @@ en:
       website:
         agenda:
           events:
+            draft: Draft
             none: No event yet
+        default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
+        editorial: 
+          label: Editorial
+          description: Everything related to content
+        technical:
+          label: Technical
+          description: Everything related to technical settings
+        social:
+          free: Libres
+          private: Privatifs
         pages:
           as_list: See as a list
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
+          draft: Draft
           full_width_status: Full width
+          in: in
+          in_full_width: full width
           show: Show page
           structure: Pages
+          published: Published
           published_status: Publication status
-        post:
+          with_children: "with children:"
+        posts:
+          and_pinned: and pinned
+          by: by %{author}
+          draft: Draft
+          in: in %{categories}
           pinned_status: Pinned status
+          published_on: Published on %{date}
         publish: 
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.

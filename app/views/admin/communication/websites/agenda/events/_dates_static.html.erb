@@ -7,9 +7,14 @@ indentation = '  ' * depth
 <%= indentation %>  archive: <%= event.archive? %>
 <%= indentation %>  computed:
 <%= indentation %>    short: >-
-<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day) %>
+<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day, format: :short) %>
 <%= indentation %>    long: >-
-<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day, :long) %>
+<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day, format: :long) %>
+<%= indentation %>    two_lines:
+<%= indentation %>      short: >-
+<%= indentation %>        <%= date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines) %>
+<%= indentation %>      long: >-
+<%= indentation %>        <%= date_range_i18n(event.from_day, event.to_day, format: :long, layout: :two_lines) %>
 <%= indentation %>  from:
 <%= indentation %>    day: <%= event.from_day %>
 <% if event.from_hour %>

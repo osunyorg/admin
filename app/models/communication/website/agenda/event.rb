@@ -10,6 +10,7 @@
 #  meta_description         :text
 #  published                :boolean          default(FALSE)
 #  slug                     :string           indexed
+#  subtitle                 :string
 #  summary                  :text
 #  title                    :string
 #  to_day                   :date
@@ -57,6 +58,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
               optional: true
+
+  has_and_belongs_to_many :categories,
+                          class_name: 'Communication::Website::Category',
+                          join_table: :communication_website_agenda_events_categories,
+                          foreign_key: :communication_website_agenda_event_id,
+                          association_foreign_key: :communication_website_category_id
 
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
@@ -128,6 +135,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   def references
     menus +
     abouts_with_agenda_block
+  end
+
+  def url
+    return unless published
+    return if website.url.blank?
+    return if website.special_page(Communication::Website::Page::CommunicationAgenda)&.path.blank?
+    return if current_permalink_in_website(website).blank?
+    "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
   def to_s

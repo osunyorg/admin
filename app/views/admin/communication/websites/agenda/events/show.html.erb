@@ -5,6 +5,9 @@
     <div class="col-lg-7">
       <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name(:title), small: true do %>
         <p class="lead"><%= @event.title %></p>
+        <% if @event.subtitle.present? %>
+          <p class="mt-n3 text-muted"><%= @event.subtitle %></p>
+        <% end %>
         <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event %></p>
       <% end %>
     </div>
@@ -17,12 +20,7 @@
   <hr class="mb-5">
   <div class="row">
     <div class="col-lg-4">
-      <div class="mb-4">
-        <%= osuny_label t('metadata') %><br>
-        <% # TODO i18n après Violenn %>
-        <%= @event.published ? 'Publié' : 'Brouillon' %>
-        <%= render 'admin/application/i18n/inline', about: @event %>
-      </div>
+      <%= render 'admin/communication/websites/agenda/events/show/metadata' %>
     </div>
     <div class="col-lg-8">
       <%= render 'admin/application/summary/show', about: @event, small: true %>
@@ -39,6 +37,10 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <%= link_to t('open'),
+              @event.url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if @event.url %>
   <%= edit_link @event %>
   <%= publish_link @event %>
 <% end %>

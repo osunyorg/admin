@@ -12,7 +12,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :description, :rich_text
   has_component :quantity, :number, options: 3
   has_component :time, :option, options: [:future_or_present, :future, :present, :archive]
-
+  has_component :show_category, :boolean
+  has_component :show_summary, :boolean
+  has_component :show_status, :boolean
+  
   def selected_events
     @selected_events ||= events_with_time_scope
   end

@@ -10,6 +10,7 @@
 #  meta_description         :text
 #  published                :boolean          default(FALSE)
 #  slug                     :string           indexed
+#  subtitle                 :string
 #  summary                  :text
 #  title                    :string
 #  to_day                   :date

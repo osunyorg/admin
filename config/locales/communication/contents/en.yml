@@ -39,6 +39,9 @@ en:
             credit:
               label: Credit
               placeholder: Enter credit
+          layouts:
+            label: Layout
+            button: Choose the layout
           link:
               target_blank: Open in new window
           time_slot:
@@ -68,6 +71,12 @@ en:
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
+              show_category:
+                label: Show events' categories
+              show_summary:
+                label: Show events' summaries
+              show_status:
+                label: Show events' status (present, future...)
               time:
                 label: Which events?
                 options:

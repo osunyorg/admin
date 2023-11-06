@@ -39,6 +39,9 @@ fr:
             credit:
               label: Crédit
               placeholder: Entrer le crédit
+          layouts:
+            label: Mise en page
+            button: Choisir la mise en page
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
           time_slot:
@@ -68,6 +71,12 @@ fr:
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
+              show_category:
+                label: Afficher les catégories des événements
+              show_summary:
+                label: Afficher le résumé des événements
+              show_status:
+                label: Afficher le statut des événements (en cours, à venir...)
               time:
                 label: Quels événements afficher ?
                 options:

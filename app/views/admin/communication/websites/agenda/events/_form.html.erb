@@ -6,6 +6,7 @@
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
         <%= f.input :title %>
+        <%= f.input :subtitle %>
         <%= render 'admin/application/summary/form', f: f, about: event %>
       <% end %>
       <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>
@@ -26,7 +27,17 @@
         </div>
       </div>
       <% end %>
+      <% if @categories.any? %>
+        <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
+          <%= f.association :categories,
+                            label_text: false,
+                            as: :check_boxes,
+                            collection: collection_tree_for_checkboxes(@categories) %>
+        <% end %>
+      <% end %>
+
       <%= render 'admin/application/meta_description/form', f: f, about: event %>
+      
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
