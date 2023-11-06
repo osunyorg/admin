@@ -4,9 +4,17 @@
   <div class="col-xl-6">
     <%= block_component_edit block, :description %>
   </div>
-  <div class="col-xl-6">
-    <%= block_component_edit block, :quantity %>
-  </div>
 </div>
 
-<%= block_component_edit block, :time %>
+
+<div class="row pure__row--small">
+  <div class="col-xl-6">
+    <%= block_component_edit block, :quantity %>
+    <%= block_component_edit block, :show_summary %>
+    <%= block_component_edit block, :show_category %>
+    <%= block_component_edit block, :show_status %>
+  </div>
+  <div class="col-xl-6">
+    <%= block_component_edit block, :time %>
+  </div>
+</div>
