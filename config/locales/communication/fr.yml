@@ -255,6 +255,8 @@ fr:
               too_soon: doit être après l'heure de début
   admin:
     communication:
+      block:
+        copied: Le bloc a bien été copié dans le presse-papier.
       website:
         agenda:
           events:

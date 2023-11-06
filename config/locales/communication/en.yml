@@ -255,6 +255,8 @@ en:
               too_soon: must be after "from hour"
   admin:
     communication:
+      block:
+        copied: The block has been copied to clipboard!
       website:
         agenda:
           events:
