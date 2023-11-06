@@ -7,6 +7,7 @@ should_render_data = block.data && block.data.present?
     title: >-
       <%= prepare_text_for_static block.title %>
     position: <%= block.position %>
+    heading_level: <%= block.heading_level %>
     data:
 <%= render  template_path, 
             block: block, 
