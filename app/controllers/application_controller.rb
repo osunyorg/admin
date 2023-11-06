@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include WithLocale
   include WithMaintenance
 
-  before_action :ensure_university, :authenticate_user!, :load_block_copy_cookie
+  before_action :ensure_university, :authenticate_user!
 
   def breadcrumb
     add_breadcrumb t('home'), root_path
@@ -19,13 +19,5 @@ class ApplicationController < ActionController::Base
 
   def ensure_university
     render_forbidden unless current_university
-  end
-
-  def load_block_copy_cookie
-    block_id = cookies[Communication::Block::BLOCK_COPY_COOKIE]
-    return if block_id.nil?
-    @block_copied = current_university.communication_blocks.find block_id
-  rescue
-    # If the block doesn't exist anymore
   end
 end

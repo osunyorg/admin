@@ -57,6 +57,14 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                 notice: t('admin.successfully_duplicated_html', model: @block.to_s)
   end
 
+  def copy
+    return unless request.xhr?
+    cookies.signed[Communication::Block::BLOCK_COPY_COOKIE] = {
+      value: params[:id],
+      path: '/admin' 
+    }
+  end
+
   def paste
     about = PolymorphicObjectFinder.find(params, :about)
     @block = @block.paste(about)

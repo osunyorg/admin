@@ -13,7 +13,6 @@ window.osuny.contentEditor = {
         this.modeWriteContainer = this.container.querySelector('#mode-write-container');
         this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
         this.addListeners('[data-bs-toggle="tab"]', 'shown.bs.tab', this.tabChanged);
-        this.addListeners('.js-block__copy', 'click', this.blockCopy);
         this.initSortable();
     },
 
@@ -94,17 +93,6 @@ window.osuny.contentEditor = {
             ids.push(child.dataset.id);
         }
         $.post(this.sortHeadingsUrl, { ids: ids });
-    },
-
-    blockCopy: function (event) {
-        'use strict';
-        var blockId = event.target.dataset.blockId;
-        event.preventDefault();
-        document.cookie = 'osuny-content-editor-block-copy=' + blockId + ';path=/admin';
-        event.target.classList.add('text-success');
-        setTimeout(function () {
-            event.target.classList.remove('text-success');
-        }, 1000);
     },
 
     addListeners: function (selector, event, action) {
