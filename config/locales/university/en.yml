@@ -158,6 +158,13 @@ en:
       university/role:
         one: Role
         other: Roles
+  enums:
+    university:
+      organization:
+        kind:
+          company: Company
+          non_profit: Association
+          government: Government
   simple_form:
     hints:
       university:
@@ -195,13 +202,6 @@ en:
         organization: Select organization
         school: Select school
         year: Select year
-  enums:
-    university:
-      organization:
-        kind:
-          company: Company
-          non_profit: Association
-          government: Government
   university:
     alumni:
       cohorts:
@@ -248,6 +248,8 @@ en:
         import_btn: Import experiences
         import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
         title: Experiences imports
+      import_btn: Import people
+      import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
       personal_data_warning: Warning! The information provided below can be publicly visible on the websites and the extranets about you.
       search: Search by name
       taught_programs: Taught programs
