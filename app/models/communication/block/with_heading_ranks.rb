@@ -15,7 +15,7 @@ module Communication::Block::WithHeadingRanks
   end
 
   def heading_children?
-    template.respond_to?(:elements) && template.elements.any?
+    template.children && template.children.any?
   end
 
   protected

@@ -141,6 +141,10 @@ class Communication::Block::Template::Base
     @full_text
   end
 
+  def children
+    false
+  end
+
   def to_s
     self.class.to_s.demodulize
   end
