@@ -229,6 +229,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
+    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -398,7 +399,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false

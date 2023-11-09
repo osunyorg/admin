@@ -1,5 +1,5 @@
 module Importers
-  class Person < Base
+  class People < Base
 
     protected
 
@@ -9,5 +9,4 @@ module Importers
     end
 
   end
-  
 end
