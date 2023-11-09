@@ -40,6 +40,7 @@ class Communication::Block < ApplicationRecord
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
+  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
 
   belongs_to :about, polymorphic: true
   belongs_to :heading, optional: true
@@ -136,6 +137,14 @@ class Communication::Block < ApplicationRecord
 
   def duplicate
     block = self.dup
+    block.save
+    block
+  end
+
+  def paste(about)
+    block = self.dup
+    block.about = about
+    block.heading = nil
     block.save
     block
   end

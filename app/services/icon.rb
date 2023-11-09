@@ -78,6 +78,7 @@ class Icon
   SETTINGS = 'fas fa-gear'
   SORT = 'fas fa-sort'
   WARNING = 'fas fa-exclamation-circle'
+  PASTE = 'fas fa-paste'
 
   def self.icon_for(class_name)
     # University::Person::Teacher -> UNIVERSITY_PERSON_TEACHER

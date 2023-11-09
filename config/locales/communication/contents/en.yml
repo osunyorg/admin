@@ -509,6 +509,8 @@ en:
                 placeholder: Enter video title
       contents:
         blocks:
+          copy: Copy block
+          paste: Paste block
           quantity:
             zero: No block
             one: 1 block
