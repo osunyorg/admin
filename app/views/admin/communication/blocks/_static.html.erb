@@ -8,9 +8,9 @@ should_render_data = block.data && block.data.present?
       <%= prepare_text_for_static block.title %>
     position: <%= block.position %>
     ranks:
-      self: <%= block.heading_level_self %>
-<% if block.has_children? %>
-      children: <%= block.heading_level_children %>
+      self: <%= block.heading_rank_self %>
+<% if block.heading_children? %>
+      children: <%= block.heading_rank_children %>
 <% end %>
     data:
 <%= render  template_path, 
