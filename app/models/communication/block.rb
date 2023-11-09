@@ -153,9 +153,19 @@ class Communication::Block < ApplicationRecord
     template.full_text
   end
 
-  def heading_level
-    heading.present?  ? heading.level + 1
-                      : DEFAULT_HEADING_LEVEL
+  def heading_level_self
+    title.present?  ? heading_level_base
+                    : false
+  end
+
+  def heading_level_children
+    return false unless has_children?
+    heading_level_self  ? heading_level_self + 1
+                        : heading_level_base
+  end
+
+  def has_children?
+    template.respond_to?(:elements) && template.elements.any?
   end
 
   def to_s
@@ -164,6 +174,11 @@ class Communication::Block < ApplicationRecord
   end
 
   protected
+
+  def heading_level_base
+    heading.present?  ? heading.level + 1
+                      : DEFAULT_HEADING_LEVEL
+  end
 
   def last_ordered_element
     about.blocks.where(heading_id: heading_id).ordered.last
