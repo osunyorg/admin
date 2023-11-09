@@ -33,13 +33,13 @@
 class Communication::Block < ApplicationRecord
   include AsIndirectObject
   include WithAccessibility
+  include WithHeadingRanks
   include WithPosition
   include WithUniversity
   include Sanitizable
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
-  DEFAULT_HEADING_LEVEL = 2 # h1 is the page title
 
   belongs_to :about, polymorphic: true
   belongs_to :heading, optional: true
@@ -151,11 +151,6 @@ class Communication::Block < ApplicationRecord
 
   def full_text
     template.full_text
-  end
-
-  def heading_level
-    heading.present?  ? heading.level + 1
-                      : DEFAULT_HEADING_LEVEL
   end
 
   def to_s
