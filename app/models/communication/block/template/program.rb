@@ -17,4 +17,8 @@ class Communication::Block::Template::Program < Communication::Block::Template::
   def available_programs
     website.education_programs
   end
+  
+  def children
+    selected_programs
+  end
 end

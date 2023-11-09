@@ -14,4 +14,8 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
     end
     @elements
   end
+  
+  def children
+    elements
+  end
 end

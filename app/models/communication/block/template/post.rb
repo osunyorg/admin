@@ -21,6 +21,10 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def allowed_for_about?
     !website.nil?
   end
+  
+  def children
+    selected_posts
+  end
 
   protected
 

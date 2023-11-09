@@ -27,6 +27,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def allowed_for_about?
     website.present?
   end
+  
+  def children
+    selected_events
+  end
 
   protected
 
