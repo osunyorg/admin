@@ -67,6 +67,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def paste
     about = PolymorphicObjectFinder.find(params, :about)
+    # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.paste(about)
     cookies.delete(Communication::Block::BLOCK_COPY_COOKIE, path: '/admin')
     redirect_to about_path + "#block-#{@block.id}",
