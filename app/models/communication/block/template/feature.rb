@@ -3,4 +3,8 @@ class Communication::Block::Template::Feature < Communication::Block::Template::
   has_elements
   has_component :description, :rich_text
 
+  
+  def children
+    elements
+  end
 end
