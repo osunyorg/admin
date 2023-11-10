@@ -25,7 +25,7 @@ module Communication::Website::WithDeuxfleurs
       save
     end
   end
-  handle_asynchronously :deuxfleurs_setup
+  handle_asynchronously :deuxfleurs_setup, queue: :default
 
   def deuxfleurs_golive
     return unless in_production_changed? && in_production

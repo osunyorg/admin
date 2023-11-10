@@ -143,7 +143,7 @@ class Communication::Website < ApplicationRecord
     end
     website.git_repository.sync!
   end
-  handle_asynchronously :sync_with_git, queue: 'default'
+  handle_asynchronously :sync_with_git, queue: :default
 
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
