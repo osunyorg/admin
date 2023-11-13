@@ -23,7 +23,9 @@
     </div>    
   </div>
   <div class="col-xl-6 mb-5">
-    <%= block_component_edit block, :time %>
+    <div v-if="data.mode != 'selection'">
+      <%= block_component_edit block, :time %>
+    </div>
   </div>
 </div>
 

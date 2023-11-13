@@ -71,6 +71,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :recent, -> { order(:updated_at).limit(5) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
+  
+  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
 
   scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
   scope :future_or_present, -> { where('from_day <= :today', today: Date.today).ordered_asc }
