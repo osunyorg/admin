@@ -25,7 +25,11 @@
                 </p>
               <% end %>
             </td>
-            <td class="small"><%= render 'admin/communication/websites/agenda/events/dates', event: event %></td>
+            <td class="small">
+              <%= render 'admin/communication/websites/agenda/events/dates', event: event %>
+              <br>
+              <%= t("activerecord.attributes.communication/website/agenda/event.status_#{event.status}") %>
+            </td>
             <td class="small"><%= render 'admin/communication/websites/categories/inline', about: event %></td>
             <td>
               <%= kamifusen_tag event.featured_image, width: 100 if event.featured_image.attached? %>

@@ -73,7 +73,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :draft, -> { where(published: false) }
 
   scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
-  scope :future_or_present, -> { where('from_day >= :today', today: Date.today).ordered_asc }
+  scope :future_or_present, -> { where('from_day <= :today', today: Date.today).ordered_asc }
   scope :present, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
   scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
   scope :past, -> { archive }
@@ -101,11 +101,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def present?
     to_day.present? ? (Date.today >= from_day && Date.today <= to_day)
-                    : from_day == Date.today
+                    : from_day <= Date.today # Les événements sans date de fin restent actifs
   end
 
   def archive?
-    status == STATUS_ARCHIVE
+    to_day.present? ? to_day < Date.today
+                    : false # Les événements sans date de fin restent actifs
   end
 
   # Un événement demain aura une distance de 1, comme un événement hier

@@ -1,5 +1,9 @@
       layout: <%= block.template.layout %>
 <%= block_component_static block, :description %>
+      mode: <%= block.template.mode %>
+<% if block.template.mode == 'category' && block.template.category %>
+      category: "<%= block.template.category.path %>"
+<% end %>
       show_summary: <%= block.template.show_summary %>
       show_category: <%= block.template.show_category %>
       show_status: <%= block.template.show_status %>
