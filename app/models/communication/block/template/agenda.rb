@@ -43,6 +43,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def base_events
     events = website.events.for_language(block.language).published
     events = events.send(time) if time.in? AUTHORIZED_SCOPES
+    events
   end
 
   def selected_events_all
