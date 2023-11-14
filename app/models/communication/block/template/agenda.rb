@@ -6,18 +6,24 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     'present',
     'archive'
   ]
-
+  
+  has_elements
   has_layouts [:grid, :list, :large]
-
+  has_component :mode, :option, options: [:all, :category, :selection]
+  has_component :category_id, :category
   has_component :description, :rich_text
   has_component :quantity, :number, options: 3
   has_component :time, :option, options: [:future_or_present, :future, :present, :archive]
   has_component :show_category, :boolean
   has_component :show_summary, :boolean
   has_component :show_status, :boolean
-  
+
   def selected_events
-    @selected_events ||= events_with_time_scope
+    @selected_events ||= send "selected_events_#{mode}"
+  end
+
+  def category
+    category_id_component.category
   end
 
   def dependencies
@@ -34,10 +40,25 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   protected
 
-  def events_with_time_scope
+  def base_events
     events = website.events.for_language(block.language).published
     events = events.send(time) if time.in? AUTHORIZED_SCOPES
+  end
+
+  def selected_events_all
+    events = base_events.limit(quantity)
+  end
+
+  def selected_events_category
+    events = base_events
+    events = events.for_category(category) if category
     events = events.limit(quantity)
+  end
+
+  def selected_events_selection
+    elements.map { |element|
+      element.event
+    }.compact
   end
 
 end

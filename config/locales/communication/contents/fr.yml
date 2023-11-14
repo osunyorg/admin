@@ -66,11 +66,27 @@ fr:
                 label: Grand
                 description: Chaque événement est présenté en majesté, sur toute la largeur disponible avec une grande image. 
             edit:
+              add_event: Ajouter un événement
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
               description:
                 label: Description
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir l'événement
+              mode:
+                label: Quels événements afficher ?
+                options:
+                  all: Tous les événements, peu importe la catégorie
+                  category: Une catégorie spécifique d'événements
+                  selection: Une sélection d'événements
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
+              show:
+                label: Paramètres d'affichage
               show_category:
                 label: Afficher les catégories des événements
               show_summary:
@@ -78,7 +94,7 @@ fr:
               show_status:
                 label: Afficher le statut des événements (en cours, à venir...)
               time:
-                label: Quels événements afficher ?
+                label: Quelles dates d'événements afficher ?
                 options:
                   future_or_present: En cours et à venir
                   future: À venir, pas encore en cours
