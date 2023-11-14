@@ -5,7 +5,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   before_action :load_categories, only: [:new, :edit]
 
   def index
-    @events = apply_scopes(@events).for_language(current_website_language).ordered.page params[:page]
+    @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
     @root_categories = @website.categories.for_language(current_website_language).root.ordered
     breadcrumb
   end
