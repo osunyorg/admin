@@ -1,54 +1,48 @@
 <div class="row">
   <div class="col-md-8 col-xl-9">
-    <%= render 'admin/application/summary/show', about: person %>
-    <%= osuny_panel t('content') do %>
-      <div class="row pure__row--small">
-        <% unless person.gender.blank? %>
-          <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('gender') %>
-            <p><%= t("activerecord.attributes.university/person.genders.#{person.gender}") %></p>
+    <div class="row">
+      <div class="col-lg-4">
+        <%= osuny_panel t('content'), small: true do %>
+          <div class="row pure__row--small">
+            <% unless person.gender.blank? %>
+              <%= osuny_label University::Person.human_attribute_name('gender') %>
+              <p><%= t("activerecord.attributes.university/person.genders.#{person.gender}") %></p>
+            <% end %>
+            <% unless person.email.blank? %>
+              <%= osuny_label University::Person.human_attribute_name('email') %>
+              <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
+            <% end %>
+            <% ['phone_mobile', 'phone_personal', 'phone_professional'].each do |phone| %>
+              <% unless person[phone].blank? %>
+                <%= osuny_label University::Person.human_attribute_name(phone) %>
+                <p><%= link_to person[phone], "tel:#{person[phone]}", target: '_blank' %></p>
+              <% end %>
+            <% end %>
+            <% unless person.birthdate.blank? %>
+              <%= osuny_label University::Person.human_attribute_name('birthdate') %>
+              <p><%= l(person.birthdate, format: :birthday) %></p>
+            <% end %>
+            <% [:address, :zipcode, :city].each do |property| %>
+              <% value = person.send property %>
+              <% next if value.blank? %>
+              <%= osuny_label University::Person.human_attribute_name(property) %>
+              <p><%= value %></p>
+            <% end %>
+            <% if person.country.present? %>
+              <%= osuny_label University::Person.human_attribute_name(:country) %>
+              <p><%= person.country_name %></p>
+            <% end %>
           </div>
-        <% end %>
-        <% unless person.email.blank? %>
-          <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('email') %>
-            <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
-          </div>
-        <% end %>
-        <% ['phone_mobile', 'phone_personal', 'phone_professional'].each do |phone| %>
-          <% unless person[phone].blank? %>
-            <div class="col-md-6">
-              <%= osuny_label University::Person.human_attribute_name(phone) %>
-              <p><%= link_to person[phone], "tel:#{person[phone]}", target: '_blank' %></p>
-            </div>
-          <% end %>
-        <% end %>
-        <% unless person.birthdate.blank? %>
-          <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('birthdate') %>
-            <p><%= l(person.birthdate, format: :birthday) %></p>
-           </div>
-        <% end %>
-        <% [:address, :zipcode, :city].each do |property| %>
-          <% value = person.send property %>
-          <% next if value.blank? %>
-          <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name(property) %>
-            <p><%= value %></p>
-          </div>
-        <% end %>
-        <% if person.country.present? %>
-          <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name(:country) %>
-            <p><%= person.country_name %></p>
-          </div>
+        <% end %>      
+      </div>
+      <div class="col-lg-8">
+        <%= render 'admin/application/summary/show', about: person, small: true %>
+        <% unless person.biography.blank? %>
+          <%= osuny_label University::Person.human_attribute_name('biography') %>
+          <%= sanitize person.biography %>
         <% end %>
       </div>
-      <% unless person.biography.blank? %>
-        <%= osuny_label University::Person.human_attribute_name('biography') %>
-        <%= sanitize person.biography %>
-      <% end %>
-    <% end %>
+    </div>
 
     <%= osuny_panel University::Person.human_attribute_name('socials') do %>
       <% unless person.url.blank? %>
@@ -72,6 +66,16 @@
     <%= render 'admin/communication/blocks/content/editor', about: person %>
   </div>
   <div class="col-md-4 col-xl-3">
+    <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
+      <% if person.best_picture_inherits_from_user? %>
+        <p>
+          <span class="small text-muted">
+            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
+          </span>
+        </p>
+      <% end %>
+      <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
+    <% end if person.best_picture.attached? %>
     <%= osuny_panel t('metadata') do %>
         <%= osuny_label University::Person.human_attribute_name('slug') %>
         <p><%= person.slug %></p>
@@ -90,16 +94,6 @@
       <% end %>
     <% end %>
     <%= render 'admin/application/i18n/widget', about: person %>
-    <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
-      <% if person.best_picture_inherits_from_user? %>
-        <p>
-          <span class="small text-muted">
-            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
-          </span>
-        </p>
-      <% end %>
-      <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
-    <% end if person.best_picture.attached? %>
 
     <%= render 'admin/application/meta_description/show', about: person %>
   </div>
