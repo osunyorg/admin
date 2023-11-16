@@ -131,7 +131,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    blocks
+    blocks +
+    [website.config_default_content_security_policy]
   end
 
   def references

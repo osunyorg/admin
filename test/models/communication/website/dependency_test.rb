@@ -5,11 +5,11 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   def test_page_dependencies
     # Rien : 0 dépendances
     page = communication_website_pages(:page_with_no_dependency)
-    assert_equal 0, page.recursive_dependencies.count
+    assert_equal 1, page.recursive_dependencies.count
 
     #  On ajoute un block "Chapitre" : 7 dépendances (les 6 composants du chapitre + le block lui même)
     page.blocks.create(position: 1, published: true, template_kind: :chapter)
-    assert_equal 7, page.recursive_dependencies.count
+    assert_equal 8, page.recursive_dependencies.count
   end
 
   def test_change_block_dependencies
@@ -26,7 +26,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     page = page.reload
 
-    assert_equal 9, page.recursive_dependencies.count
+    assert_equal 10, page.recursive_dependencies.count
 
     # On modifie le target du block
     Delayed::Job.destroy_all
@@ -35,7 +35,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site de la page
     assert(destroy_obsolete_git_files_job)
 
-    assert_equal 9, page.recursive_dependencies.count
+    assert_equal 10, page.recursive_dependencies.count
 
     # Vérifie qu'on a bien
     # - une tâche pour resynchroniser la page
