@@ -1,4 +1,4 @@
-<%= osuny_panel t('seo') do %>
+<%= osuny_panel t('seo'), small: true do %>
   <%= osuny_label t('admin.meta_description.label') %>
   <p><%= sanitize about.meta_description %></p>
 <% end unless about.meta_description.blank? %>

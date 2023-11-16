@@ -1,8 +1,49 @@
 <div class="row">
-  <div class="col-md-8 col-xl-9">
-    <%= render 'admin/application/summary/show', about: person %>
-    <%= osuny_panel t('content') do %>
-      <div class="row pure__row--small">
+  <div class="col-md-4">
+
+    <%= osuny_panel t('activerecord.attributes.university/person.picture'), small: true do %>
+      <%= kamifusen_tag person.best_picture, class: 'img-fluid col-4 col-md-8' %>
+      <% if person.best_picture_inherits_from_user? %>
+        <p>
+          <span class="small text-muted">
+            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
+          </span>
+        </p>
+      <% end %>
+    <% end if person.best_picture.attached? %>
+
+    <% if person.categories.any? %>
+      <%= osuny_panel University::Person.human_attribute_name('categories'), small: true do %>
+        <ul class="list-unstyled">
+          <% person.categories.ordered.each do |category| %>
+            <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <%= render 'admin/application/i18n/widget', about: person, small: true %>
+
+    <%= render 'admin/application/meta_description/show', about: person %>
+  </div>
+  <div class="col-md-8">
+
+    <%= render 'admin/application/summary/show', about: person, small: true %>
+
+    <% unless person.biography.blank? %>
+      <%= osuny_panel University::Person.human_attribute_name('biography'), small: true do %>
+        <%= sanitize person.biography %>
+      <% end %>
+    <% end %>
+
+    <%= osuny_panel University::Person.human_attribute_name('contacts'), small: true do %>
+      <div class="row">
+        <% if person.user.present? %>
+          <div class="col-md-6">
+            <%= osuny_label University::Person.human_attribute_name('user') %>
+            <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
+          </div>
+        <% end %>
         <% unless person.gender.blank? %>
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name('gender') %>
@@ -27,7 +68,7 @@
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name('birthdate') %>
             <p><%= l(person.birthdate, format: :birthday) %></p>
-           </div>
+          </div>
         <% end %>
         <% [:address, :zipcode, :city].each do |property| %>
           <% value = person.send property %>
@@ -44,63 +85,38 @@
           </div>
         <% end %>
       </div>
-      <% unless person.biography.blank? %>
-        <%= osuny_label University::Person.human_attribute_name('biography') %>
-        <%= sanitize person.biography %>
-      <% end %>
     <% end %>
 
-    <%= osuny_panel University::Person.human_attribute_name('socials') do %>
-      <% unless person.url.blank? %>
-        <%= osuny_label University::Person.human_attribute_name('url') %>
-        <p><%= link_to person.url, person.url, target: '_blank' %></p>
-      <% end %>
-      <% unless person.linkedin.blank? %>
-        <%= osuny_label University::Person.human_attribute_name('linkedin') %>
-        <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
-      <% end %>
-      <% unless person.twitter.blank? %>
-        <%= osuny_label University::Person.human_attribute_name('twitter') %>
-        <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
-      <% end %>
-      <% unless person.mastodon.blank? %>
-        <%= osuny_label University::Person.human_attribute_name('mastodon') %>
-        <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
-      <% end %>
-    <% end unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? %>
-
-    <%= render 'admin/communication/blocks/content/editor', about: person %>
-  </div>
-  <div class="col-md-4 col-xl-3">
-    <%= osuny_panel t('metadata') do %>
-        <%= osuny_label University::Person.human_attribute_name('slug') %>
-        <p><%= person.slug %></p>
-        <% if person.user.present? %>
-          <%= osuny_label University::Person.human_attribute_name('user') %>
-          <p><%= link_to_if can?(:read, person.user), person.user, admin_user_path(person.user) %></p>
+    <%= osuny_panel University::Person.human_attribute_name('socials'), small: true do %>
+      <div class="row">
+        <% unless person.url.blank? %>
+          <div class="col-md-6">
+            <%= osuny_label University::Person.human_attribute_name('url') %>
+            <p><%= link_to person.url, person.url, target: '_blank' %></p>
+          </div>
         <% end %>
-    <% end %>
-    <% if person.categories.any? %>
-      <%= osuny_panel University::Person.human_attribute_name('categories') do %>
-        <ul class="list-unstyled">
-          <% person.categories.ordered.each do |category| %>
-            <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    <% end %>
-    <%= render 'admin/application/i18n/widget', about: person %>
-    <%= osuny_panel t('activerecord.attributes.university/person.picture') do %>
-      <% if person.best_picture_inherits_from_user? %>
-        <p>
-          <span class="small text-muted">
-            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
-          </span>
-        </p>
-      <% end %>
-      <%= kamifusen_tag person.best_picture, class: 'img-fluid' %>
-    <% end if person.best_picture.attached? %>
+        <% unless person.linkedin.blank? %>
+          <div class="col-md-6">
+            <%= osuny_label University::Person.human_attribute_name('linkedin') %>
+            <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
+          </div>
+        <% end %>
+        <% unless person.twitter.blank? %>
+          <div class="col-md-6">
+            <%= osuny_label University::Person.human_attribute_name('twitter') %>
+            <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
+          </div>
+        <% end %>
+        <% unless person.mastodon.blank? %>
+          <div class="col-md-6">
+            <%= osuny_label University::Person.human_attribute_name('mastodon') %>
+            <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? && person.mastodon.blank? %>
 
-    <%= render 'admin/application/meta_description/show', about: person %>
   </div>
 </div>
+
+<%= render 'admin/communication/blocks/content/editor', about: person %>
