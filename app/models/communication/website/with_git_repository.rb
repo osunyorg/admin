@@ -25,7 +25,7 @@ module Communication::Website::WithGitRepository
     end
     git_repository.sync!
   end
-  handle_asynchronously :sync_indirect_object_with_git, queue: 'default'
+  handle_asynchronously :sync_indirect_object_with_git, queue: :default
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
@@ -40,7 +40,7 @@ module Communication::Website::WithGitRepository
     end
     self.git_repository.sync!
   end
-  handle_asynchronously :destroy_obsolete_git_files, queue: :default
+  handle_asynchronously :destroy_obsolete_git_files, queue: :cleanup
 
   def invalidate_access_token!
     # Nullify the expired token

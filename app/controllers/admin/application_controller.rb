@@ -1,6 +1,8 @@
 class Admin::ApplicationController < ApplicationController
   layout 'admin/layouts/application'
 
+  before_action :load_block_copy_cookie
+
   include Admin::Filterable
 
   def set_theme
@@ -27,5 +29,12 @@ class Admin::ApplicationController < ApplicationController
                       : add_breadcrumb(t('create'))
   end
 
+  def load_block_copy_cookie
+    block_id = cookies.signed[Communication::Block::BLOCK_COPY_COOKIE]
+    return if block_id.nil?
+    @block_copied = current_university.communication_blocks.find block_id
+  rescue
+    # If the block doesn't exist anymore
+  end
 
 end

@@ -21,7 +21,7 @@ module Communication::Website::WithConnectedObjects
     destroy_obsolete_git_files_without_delay
     get_current_theme_version!
   end
-  handle_asynchronously :clean_and_rebuild, queue: :low_priority
+  handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
   # Appelé
   # - par un objet avec des connexions lorsqu'il est destroyed

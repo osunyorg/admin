@@ -66,11 +66,27 @@ en:
                 label: Grand
                 description: Each event is presented in majesty, across the full width available, with a large image.
             edit:
+              add_event: Add an event
+              category_id:
+                label: Category
+                placeholder: Select a category
               description:
                 label: Description
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose event
+              mode:
+                label: Which events should be presented?
+                options:
+                  all: All events, regardless of category
+                  category: A specific category of events
+                  selection: A selection of events
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
+              show:
+                label: Display settings
               show_category:
                 label: Show events' categories
               show_summary:
@@ -78,7 +94,7 @@ en:
               show_status:
                 label: Show events' status (present, future...)
               time:
-                label: Which events?
+                label: What event dates should be displayed?
                 options:
                   future_or_present: Now and in the future
                   future: In the future, not started yet
@@ -509,6 +525,8 @@ en:
                 placeholder: Enter video title
       contents:
         blocks:
+          copy: Copy block
+          paste: Paste block
           quantity:
             zero: No block
             one: 1 block

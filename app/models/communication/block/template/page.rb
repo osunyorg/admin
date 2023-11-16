@@ -24,6 +24,15 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   def allowed_for_about?
     !website.nil?
   end
+  
+  def children
+    selected_pages
+  end
+
+  def heading_title
+    block.title.present?  ? block.title
+                          : page&.title
+  end
 
   protected
 

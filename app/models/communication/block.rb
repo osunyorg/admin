@@ -33,13 +33,14 @@
 class Communication::Block < ApplicationRecord
   include AsIndirectObject
   include WithAccessibility
+  include WithHeadingRanks
   include WithPosition
   include WithUniversity
   include Sanitizable
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
-  DEFAULT_HEADING_LEVEL = 2 # h1 is the page title
+  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
 
   belongs_to :about, polymorphic: true
   belongs_to :heading, optional: true
@@ -140,6 +141,14 @@ class Communication::Block < ApplicationRecord
     block
   end
 
+  def paste(about)
+    block = self.dup
+    block.about = about
+    block.heading = nil
+    block.save
+    block
+  end
+
   def translate!(about_translation, heading_id = nil)
     translation = self.dup
     translation.about = about_translation
@@ -151,11 +160,6 @@ class Communication::Block < ApplicationRecord
 
   def full_text
     template.full_text
-  end
-
-  def heading_level
-    heading.present?  ? heading.level + 1
-                      : DEFAULT_HEADING_LEVEL
   end
 
   def to_s

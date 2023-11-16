@@ -36,6 +36,6 @@ module WithGit
     end
     website.git_repository.sync!
   end
-  handle_asynchronously :sync_with_git, queue: 'default'
+  handle_asynchronously :sync_with_git, queue: :default
 
 end

@@ -171,6 +171,9 @@ en:
         from_day: From day
         from_hour: From hour
         published: Published
+        status_present: Running now
+        status_future: In the future
+        status_archive: Archive
         subtitle: Subtitle
         title: Title
         to_day: To day
@@ -255,6 +258,8 @@ en:
               too_soon: must be after "from hour"
   admin:
     communication:
+      block:
+        copied: The block has been copied to clipboard!
       website:
         agenda:
           events:
