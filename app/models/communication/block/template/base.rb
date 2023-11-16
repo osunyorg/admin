@@ -108,10 +108,6 @@ class Communication::Block::Template::Base
     accessibility_merge_array elements
   end
 
-  def has_element_class?
-    !self.class.element_class.nil?
-  end
-
   def website
     about&.try(:website)
   end

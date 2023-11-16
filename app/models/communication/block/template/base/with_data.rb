@@ -8,8 +8,9 @@ module Communication::Block::Template::Base::WithData
       next unless json.has_key? component.property
       component.data = json[component.property]
     end
-    return unless has_element_class? # Template is not supposed to have elements at all
-    return unless json.has_key?('elements') # Template has no element yet
+    # Template is not supposed to have elements at all
+    # Template has no element yet
+    return unless has_element_class? || json.has_key?('elements') 
     # Objects are initialized from the database,
     # then data from the form replaces data from the db.
     # We need to reset elements, otherwise it's never deleted.
@@ -59,6 +60,10 @@ module Communication::Block::Template::Base::WithData
   end
 
   protected
+
+  def has_element_class?
+    !self.class.element_class.nil?
+  end
 
   def json_from(value)
     if value.is_a? String
