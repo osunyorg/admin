@@ -145,6 +145,10 @@ class Communication::Block::Template::Base
     false
   end
 
+  def heading_title
+    block.title
+  end
+
   def to_s
     self.class.to_s.demodulize
   end
