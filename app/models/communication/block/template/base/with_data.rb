@@ -8,15 +8,7 @@ module Communication::Block::Template::Base::WithData
       next unless json.has_key? component.property
       component.data = json[component.property]
     end
-    return unless has_element_class? # Template is not supposed to have elements at all
-    return unless json.has_key?('elements') # Template has no element yet
-    # Objects are initialized from the database,
-    # then data from the form replaces data from the db.
-    # We need to reset elements, otherwise it's never deleted.
-    @elements = []
-    json['elements'].each do |json|
-      @elements << default_element(json)
-    end
+    initialize_elements json
   end
 
   # Reads the data from the components
@@ -62,6 +54,18 @@ module Communication::Block::Template::Base::WithData
 
   def has_element_class?
     !self.class.element_class.nil?
+  end
+
+  def initialize_elements(json)
+    return unless has_element_class? # Template is not supposed to have elements at all
+    return unless json.has_key?('elements') # Template has no element yet
+    # Objects are initialized from the database,
+    # then data from the form replaces data from the db.
+    # We need to reset elements, otherwise it's never deleted.
+    @elements = []
+    json['elements'].each do |json|
+      @elements << default_element(json)
+    end
   end
 
   def json_from(value)
