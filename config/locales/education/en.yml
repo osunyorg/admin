@@ -109,6 +109,7 @@ en:
           description: Presentation of the students who have studied in the various courses.
     manage_programs: Manage programs
     manage_roles: Manage roles
+    manage_teachers: Manage teachers
     number_of_programs: Number of programs
     program:
       parts:
