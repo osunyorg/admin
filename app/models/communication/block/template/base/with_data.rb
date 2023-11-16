@@ -3,13 +3,7 @@ module Communication::Block::Template::Base::WithData
 
   # Transforms raw json into ruby objects, based on components
   def data=(value)
-    if value.is_a? String
-      json = JSON.parse(value)
-    elsif value.is_a? Hash
-      json = value
-    else
-      json = default_data
-    end
+    json = json_from value
     components.each do |component|
       next unless json.has_key? component.property
       component.data = json[component.property]
@@ -65,6 +59,16 @@ module Communication::Block::Template::Base::WithData
   end
 
   protected
+
+  def json_from(value)
+    if value.is_a? String
+      JSON.parse(value)
+    elsif value.is_a? Hash
+      value
+    else
+      default_data
+    end
+  end
 
   def components
     return [] if self.class.components_descriptions.nil?
