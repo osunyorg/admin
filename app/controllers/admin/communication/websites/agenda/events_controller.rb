@@ -2,7 +2,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event, 
                               through: :website
 
-  before_action :load_categories, only: [:new, :edit]
+  before_action :load_categories, only: [:new, :edit, :create, :update]
 
   def index
     @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
