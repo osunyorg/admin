@@ -1,12 +1,4 @@
-<%
-action = ''
-if !current_user.program_manager? || current_user.programs_to_manage.pluck(:education_program_id).include?(@program.id)
-action += link_to t('education.manage_teachers'),
-                  admin_education_program_teachers_path(program_id: @program.id),
-                  class: 'action' if can?(:update, University::Person::Involvement)
-end
-%>
-<%= osuny_panel Education::Program.human_attribute_name('teachers'), action: action, classes: 'mt-5' do %>
+<%= osuny_panel t('education.teachings'), classes: 'mt-5' do %>
   <% if @teacher_involvements.any? %>
     <div class="table-responsive">
       <table class="<%= table_classes %>">

@@ -137,6 +137,7 @@ fr:
       other: Rôles
     schools:
       manage_roles: Gérer l'équipe
+    teachings: Enseignements
   enums:
     education:
       diploma:
