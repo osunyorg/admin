@@ -6,7 +6,6 @@ should_render_data = block.data && block.data.present?
     template: <%= block.template_kind %>
     title: >-
       <%= prepare_text_for_static block.template.heading_title %>
-    position: <%= block.position %>
     ranks:
       self: <%= block.heading_rank_self %>
 <% if block.heading_children? %>
