@@ -1,4 +1,4 @@
-module AsBacklinkable
+module Backlinkable
   extend ActiveSupport::Concern
 
   def backlinks_pages(website)

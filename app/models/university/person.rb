@@ -55,6 +55,7 @@
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
+  include Backlinkable
   include Sanitizable
   include WithBlobs
   include WithBlocks

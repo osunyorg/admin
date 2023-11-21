@@ -47,8 +47,8 @@
 #  fk_rails_5af11ea0cc  (original_id => university_organizations.id)
 #
 class University::Organization < ApplicationRecord
-  include AsBacklinkable
   include AsIndirectObject
+  include Backlinkable
   include Sanitizable
   include WithBlobs
   include WithBlocks
