@@ -442,6 +442,9 @@ en:
               alternate:
                 label: Alternate
                 description: Posts either on the left or on the right, composing a graphically light page.
+              large:
+                label: Grand
+                description: Each post is presented in majesty, across the full width available, with a large image.
             edit:
               add_post: Add post
               mode:

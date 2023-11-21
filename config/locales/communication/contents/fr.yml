@@ -442,6 +442,9 @@ fr:
               alternate:
                 label: Alternance
                 description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.
+              large:
+                label: Grand
+                description: Chaque actualité est présentée en majesté, sur toute la largeur disponible avec une grande image. 
             edit:
               add_post: Ajouter un article
               mode:
