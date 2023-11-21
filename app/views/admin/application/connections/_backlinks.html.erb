@@ -1,0 +1,19 @@
+backlinks:
+  current_website:
+    id: <%= @website.id %>
+    name: "<%= @website %>"
+    pages:
+<% @about.backlinks_pages(@website).each do |element| %>
+      - path: "<%= element.path %>"
+        file: "<%= element.git_path(@website) %>"
+<% end %>
+    posts:
+<% @about.backlinks_posts(@website).each do |element| %>
+      - path: "<%= element.static_path %>"
+        file: "<%= element.git_path(@website) %>"
+<% end %>
+    events:
+<% @about.backlinks_agenda_events(@website).each do |element| %>
+      - path: "<%= element.current_permalink_in_website(@website)&.path %>"
+        file: "<%= element.git_path(@website) %>"
+<% end %>

@@ -170,6 +170,7 @@
   </div>
 <% end if @organization.experiences.any? %>
 
+<%= render 'admin/application/connections/list', about: @organization %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>

@@ -48,6 +48,7 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
+  include Backlinkable
   include Sanitizable
   include WithBlobs
   include WithBlocks
