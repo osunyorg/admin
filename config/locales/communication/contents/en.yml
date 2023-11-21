@@ -378,6 +378,9 @@ en:
               alternate:
                 label: Alternate
                 description: Pages either on the left or on the right, composing a graphically light layout.
+              large:
+                label: Grand
+                description: Each page is presented in majesty, across the full width available, with a large image.
             edit:
               mode:
                 label: List kind

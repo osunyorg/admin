@@ -378,6 +378,9 @@ fr:
               alternate:
                 label: Alternance
                 description: Une alternance très légère graphiquement de pages, rythmée entre la gauche et la droite.
+              large:
+                label: Grand
+                description: Chaque page est présentée en majesté, sur toute la largeur disponible avec une grande image. 
             edit:
               mode:
                 label: Type de liste
