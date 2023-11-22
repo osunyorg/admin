@@ -6,10 +6,7 @@ module Backlinkable
       Communication::Website::Page,
       website
     )
-    .collect(&:direct_source)
-    .compact
     .reject { |page| page.is_special_page? }
-    .reject { |page| !page.published? }
   end
 
   def backlinks_posts(website)
@@ -17,9 +14,6 @@ module Backlinkable
       Communication::Website::Post,
       website
     )
-    .collect(&:direct_source)
-    .compact
-    .reject { |page| !page.published? }
   end
 
   def backlinks_agenda_events(website)
@@ -27,17 +21,19 @@ module Backlinkable
       Communication::Website::Agenda::Event,
       website
     )
-    .collect(&:direct_source)
-    .compact
-    .reject { |event| !event.published? }
   end
 
   protected
 
   def backlinks(kind, website)
-    connections.where(
-      direct_source_type: kind.to_s,
-      website_id: website.id
-    )
+    connections
+      .where(
+        direct_source_type: kind.to_s,
+        website_id: website.id
+      )
+      .collect(&:direct_source)
+      .compact
+      .select { |source| source.published? }
+      .select { |source| source.language == language }
   end
 end
