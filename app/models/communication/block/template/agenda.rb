@@ -1,19 +1,19 @@
 class Communication::Block::Template::Agenda < Communication::Block::Template::Base
 
   AUTHORIZED_SCOPES = [
-    'future_or_present',
+    'future_or_current',
     'future',
-    'present',
+    'current',
     'archive'
   ]
-  
+
   has_elements
   has_layouts [:grid, :list, :large]
   has_component :mode, :option, options: [:all, :category, :selection]
   has_component :category_id, :category
   has_component :description, :rich_text
   has_component :quantity, :number, options: 3
-  has_component :time, :option, options: [:future_or_present, :future, :present, :archive]
+  has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :show_category, :boolean
   has_component :show_summary, :boolean
   has_component :show_status, :boolean
@@ -33,7 +33,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def allowed_for_about?
     website.present?
   end
-  
+
   def children
     selected_events
   end
