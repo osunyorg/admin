@@ -171,7 +171,7 @@ fr:
         from_day: Jour de début
         from_hour: Heure de début
         published: Publié
-        status_present: En cours
+        status_current: En cours
         status_future: À venir
         status_archive: Archive
         subtitle: Sous-titre
@@ -263,10 +263,10 @@ fr:
       website:
         agenda:
           events:
-            none: Pas encore d'événements
             draft: Brouillon
+            none: Pas encore d'événements
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas. C'est aussi l'image de partage par défaut."
-        editorial: 
+        editorial:
           label: Éditorial
           description: Tout ce qui est lié au contenu
         technical:
@@ -295,7 +295,7 @@ fr:
           in: dans %{categories}
           pinned_status: Mise en avant
           published_on: Publiée le %{date}
-        publish: 
+        publish:
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
         redirects:
@@ -332,7 +332,7 @@ fr:
     website:
       analytics: Analytics
       git: Git
-      golive: 
+      golive:
         title: Mise en production
         button: Mettre en production
       hosting: Hébergement

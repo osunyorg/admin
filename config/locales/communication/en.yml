@@ -162,8 +162,8 @@ en:
         social_vimeo: "Vimeo (private)"
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
-        url: URL
         university: University
+        url: URL
       communication/website/agenda/event:
         categories: Categories
         dates: Dates
@@ -171,7 +171,7 @@ en:
         from_day: From day
         from_hour: From hour
         published: Published
-        status_present: Running now
+        status_current: Running now
         status_future: In the future
         status_archive: Archive
         subtitle: Subtitle
@@ -266,7 +266,7 @@ en:
             draft: Draft
             none: No event yet
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
-        editorial: 
+        editorial:
           label: Editorial
           description: Everything related to content
         technical:
@@ -295,7 +295,7 @@ en:
           in: in %{categories}
           pinned_status: Pinned status
           published_on: Published on %{date}
-        publish: 
+        publish:
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.
         redirects:
@@ -332,7 +332,7 @@ en:
     website:
       analytics: Analytics
       git: Git
-      golive: 
+      golive:
         title: Go live
         button: Go live
       hosting: Hosting
@@ -452,6 +452,8 @@ en:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token.
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
+        feature_posts: To publish posts, like a media
+        feature_agenda: To share events
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
