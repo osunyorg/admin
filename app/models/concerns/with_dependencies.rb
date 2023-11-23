@@ -117,6 +117,7 @@ module WithDependencies
       clean_websites(websites_to_clean)
     end
   end
+  handle_asynchronously :clean_websites_if_necessary, queue: :default
 
   def clean_websites(websites)
     # Les objets directs et les objets indirects (et les websites) répondent !
