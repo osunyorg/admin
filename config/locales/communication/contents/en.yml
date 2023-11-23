@@ -92,13 +92,13 @@ en:
               show_summary:
                 label: Show events' summaries
               show_status:
-                label: Show events' status (present, future...)
+                label: Show events' status (current, future...)
               time:
                 label: What event dates should be displayed?
                 options:
-                  future_or_present: Now and in the future
+                  future_or_current: Now and in the future
                   future: In the future, not started yet
-                  present: Running now
+                  current: Running now
                   archive: Past, archives
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
