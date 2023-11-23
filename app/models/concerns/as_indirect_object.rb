@@ -69,4 +69,5 @@ module AsIndirectObject
       website.sync_indirect_object_with_git self
     end
   end
+
 end
