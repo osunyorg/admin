@@ -71,12 +71,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :recent, -> { order(:updated_at).limit(5) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
-  
+
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
 
   scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
-  scope :future_or_present, -> { where('from_day <= :today', today: Date.today).ordered_asc }
-  scope :present, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
+  scope :future_or_current, -> { where('from_day <= :today', today: Date.today).ordered_asc }
+  scope :current, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
   scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
   scope :past, -> { archive }
 
@@ -84,14 +84,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
 
   STATUS_FUTURE = 'future'
-  STATUS_PRESENT = 'present'
+  STATUS_CURRENT = 'current'
   STATUS_ARCHIVE = 'archive'
 
   def status
     if future?
       STATUS_FUTURE
-    elsif present?
-      STATUS_PRESENT
+    elsif current?
+      STATUS_CURRENT
     else
       STATUS_ARCHIVE
     end
@@ -101,7 +101,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     from_day > Date.today
   end
 
-  def present?
+  def current?
     to_day.present? ? (Date.today >= from_day && Date.today <= to_day)
                     : from_day <= Date.today # Les événements sans date de fin restent actifs
   end
