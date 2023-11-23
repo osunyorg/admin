@@ -56,7 +56,7 @@ module Admin::ApplicationHelper
   end
 
   def publish_link(object)
-    return if object.published
+    return if object.published || !can?(:publish, object)
     link_to t('admin.communication.website.publish.button'),
             [:publish, :admin, object],
             method: :post,
