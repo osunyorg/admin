@@ -58,7 +58,7 @@ en:
         all: All posts
     attributes:
       communication/block:
-        title: Name
+        title: Name (optional)
         template: Kind of block
         published: Published?
       communication/block/heading:
