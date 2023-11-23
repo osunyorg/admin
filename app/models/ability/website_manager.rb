@@ -2,18 +2,7 @@ class Ability::WebsiteManager < Ability
 
   def initialize(user)
     super
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
-    can :create, Communication::Block
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
-    can :create, Communication::Block::Heading
+    manage_blocks
     can [:read, :analytics], Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
@@ -41,6 +30,21 @@ class Ability::WebsiteManager < Ability
 
   def managed_events_ids
     @managed_events_ids ||= Communication::Website::Agenda::Event.where(communication_website_id: managed_websites_ids).pluck(:id)
+  end
+
+  def manage_blocks
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
+    can :create, Communication::Block
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
+    can :create, Communication::Block::Heading
   end
 
 end
