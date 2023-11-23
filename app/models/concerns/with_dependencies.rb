@@ -32,7 +32,7 @@ module WithDependencies
       snapshot_direct_sources.each do |direct_source|
         direct_source.sync_with_git
       end
-      clean_websites(Communication::Website.where(id: website_ids))
+      clean_websites(website_ids)
       # TODO: Actuellement, on ne nettoie pas les références
       # Exemple : Quand on supprime un auteur, il n'est pas nettoyé dans le static de ses anciens posts.
       # Un save du website le fera en nocturne pour l'instant.
@@ -114,18 +114,14 @@ module WithDependencies
     # puts "  missing_dependencies_after_save #{ missing_dependencies_after_save }"
     # puts
     if missing_dependencies_after_save.any? || unpublished_by_last_save?
-      clean_websites(websites_to_clean)
+      clean_websites(websites_to_clean.pluck(:id))
     end
   end
-  handle_asynchronously :clean_websites_if_necessary, queue: :default
-
-  def clean_websites(websites)
+  
+  def clean_websites(websites_ids)
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
-    websites.each do |website|
-      website.destroy_obsolete_connections
-      website.destroy_obsolete_git_files
-    end
+    Communication::CleanWebsitesJob.perform_later(websites_ids)
   end
 
   def websites_to_clean
