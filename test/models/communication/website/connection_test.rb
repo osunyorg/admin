@@ -28,6 +28,8 @@ require "test_helper"
 
 # rails test test/models/communication/website/connection_test.rb
 class Communication::Website::ConnectionTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   def test_unpublish_indirect_does_nothing
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
@@ -64,7 +66,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
     assert_difference -> { Communication::Website::Connection.count } => -2 do
-      page.blocks.find_by(position: 2).destroy
+      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+        page.blocks.find_by(position: 2).destroy
+      end
+      perform_enqueued_jobs
     end
   end
 
@@ -82,7 +87,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
     # On supprime le bloc qui contient PA : -3 (parce que PA doit être supprimé aussi ainsi que son bloc Organisations mais pas Noesya, toujours connectée via le block 3)
     assert_difference -> { Communication::Website::Connection.count } => -3 do
-      page.blocks.find_by(position: 2).destroy
+      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+        page.blocks.find_by(position: 2).destroy
+      end
+      perform_enqueued_jobs
     end
   end
 
@@ -136,7 +144,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
     assert_difference -> { Communication::Website::Connection.count } => -6 do
-      website_with_github.update(about: nil)
+      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+        website_with_github.update(about: nil)   
+      end
+      perform_enqueued_jobs
     end
   end
 
