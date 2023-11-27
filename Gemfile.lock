@@ -8,9 +8,9 @@ GIT
 
 GIT
   remote: https://github.com/noesya/two_factor_authentication.git
-  revision: 852a0ea0b1c755fdf52a423aea0538e7013773b1
+  revision: 16fb01e5731c2b08ef0885134e5e0bdec2ed87ff
   specs:
-    two_factor_authentication (4.1.0)
+    two_factor_authentication (4.1.1)
       devise
       encryptor
       rails (>= 3.1.1)
@@ -69,7 +69,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_storage_validations (1.1.1)
+    active_storage_validations (1.1.3)
       activejob (>= 5.2.0)
       activemodel (>= 5.2.0)
       activestorage (>= 5.2.0)
@@ -109,26 +109,26 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.15.0)
+    autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
-    aws-eventstream (1.2.0)
-    aws-partitions (1.844.0)
-    aws-sdk-core (3.186.0)
+    aws-eventstream (1.3.0)
+    aws-partitions (1.857.0)
+    aws-sdk-core (3.188.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.72.0)
-      aws-sdk-core (~> 3, >= 3.184.0)
+    aws-sdk-kms (1.73.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.136.0)
-      aws-sdk-core (~> 3, >= 3.181.0)
+    aws-sdk-s3 (1.140.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
-    aws-sigv4 (1.6.1)
+    aws-sigv4 (1.7.0)
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     bigdecimal (3.1.4)
     bindex (0.8.1)
     bootsnap (1.17.0)
@@ -183,10 +183,11 @@ GEM
       rexml
     csl-styles (2.0.1)
       csl (~> 2.0)
-    curation (1.11)
+    curation (2.0.2)
       htmlentities
       metainspector
       nokogiri
+      rails-html-sanitizer
     date (3.3.4)
     delayed_job (4.1.11)
       activesupport (>= 3.0, < 8.0)
@@ -209,8 +210,7 @@ GEM
     devise-i18n (1.12.0)
       devise (>= 4.9.0)
     docile (1.4.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
+    domain_name (0.6.20231109)
     drb (2.2.0)
       ruby2_keywords
     encryptor (3.0.0)
@@ -223,7 +223,7 @@ GEM
     faceted_search (3.6.2)
       font-awesome-sass
       rails (>= 5.2.0)
-    faraday (2.7.11)
+    faraday (2.7.12)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -298,7 +298,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     io-console (0.6.0)
-    irb (1.9.0)
+    irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -367,9 +367,9 @@ GEM
     mutex_m (0.2.0)
     namae (1.1.1)
     nesty (1.0.2)
-    net-http (0.3.2)
+    net-http (0.4.0)
       uri
-    net-imap (0.4.5)
+    net-imap (0.4.6)
       date
       net-protocol
     net-pop (0.1.2)
@@ -378,7 +378,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.6.0)
+    nio4r (2.6.1)
     nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-darwin)
@@ -405,7 +405,7 @@ GEM
     omniauth-saml (2.1.0)
       omniauth (~> 2.0)
       ruby-saml (~> 1.12)
-    open-uri (0.3.0)
+    open-uri (0.4.0)
       stringio
       time
       uri
@@ -419,7 +419,7 @@ GEM
     popper_js (2.11.8)
     psych (5.1.1.1)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
     racc (1.7.3)
@@ -546,7 +546,7 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    spring (4.1.1)
+    spring (4.1.3)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -563,23 +563,20 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.3.0)
     tilt (2.3.0)
-    time (0.2.2)
+    time (0.3.0)
       date
     timeout (0.4.1)
-    typhoeus (1.4.0)
+    typhoeus (1.4.1)
       ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unaccent (0.4.0)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.8.2)
     unicode-display_width (2.5.0)
     unsplash (3.1.1)
       faraday-multipart (~> 1.0.4)
       httparty (~> 0.20)
       oauth2 (>= 2.0.8)
-    uri (0.12.2)
+    uri (0.13.0)
     vcr (6.2.0)
     version_gem (1.1.3)
     warden (1.2.9)
