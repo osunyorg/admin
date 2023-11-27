@@ -17,16 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    # to prevent cognitive complexity (the bottom block should be in an if condition where password present)
-    # Password not provided when user from sso
-    params[:user][:password] ||= ''
-
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-    else
-      resource.reset_password(params[:user][:password], params[:user][:password])
-    end
-
     super do |resource|
       # Re-set I18n.locale in case of language change.
       I18n.locale = resource.language.iso_code.to_sym
@@ -40,7 +30,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_resource(resource, params)
-    resource.update(params)
+    if params[:password].blank?
+      params.delete(:current_password)
+      resource.update_without_password(params)
+    else
+      resource.update_with_password(params)
+    end
   end
 
   def configure_sign_up_params
