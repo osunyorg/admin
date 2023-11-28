@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_160407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -106,8 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -229,9 +229,29 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
-    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
+  end
+
+  create_table "communication_website_agenda_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "path"
+    t.integer "position"
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "slug"
+    t.text "summary"
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
+    t.index ["language_id"], name: "index_communication_website_agenda_categories_on_language_id"
+    t.index ["original_id"], name: "index_communication_website_agenda_categories_on_original_id"
+    t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
   create_table "communication_website_agenda_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -264,9 +284,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
 
   create_table "communication_website_agenda_events_categories", id: false, force: :cascade do |t|
     t.uuid "communication_website_agenda_event_id", null: false
-    t.uuid "communication_website_category_id", null: false
-    t.index ["communication_website_agenda_event_id", "communication_website_category_id"], name: "event_category"
-    t.index ["communication_website_category_id", "communication_website_agenda_event_id"], name: "category_event"
+    t.uuid "communication_website_agenda_category_id", null: false
+    t.index ["communication_website_agenda_category_id", "communication_website_agenda_event_id"], name: "category_event"
+    t.index ["communication_website_agenda_event_id", "communication_website_agenda_category_id"], name: "event_category"
   end
 
   create_table "communication_website_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -399,7 +419,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -1133,6 +1153,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_104523) do
   add_foreign_key "communication_extranet_posts", "universities"
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "original_id"
+  add_foreign_key "communication_website_agenda_categories", "communication_websites"
+  add_foreign_key "communication_website_agenda_categories", "languages"
+  add_foreign_key "communication_website_agenda_categories", "universities"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "original_id"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "parent_id"
   add_foreign_key "communication_website_agenda_events", "communication_websites"

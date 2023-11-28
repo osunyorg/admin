@@ -54,12 +54,20 @@ namespace :communication do
         post :publish
       end
     end
-    namespace :agenda do
-      resources :events, controller: '/admin/communication/websites/agenda/events', path: '/:lang/events' do
+    namespace :agenda, path: '/:lang/agenda' do
+      resources :events, controller: '/admin/communication/websites/agenda/events' do
         member do
           get :static
           post :duplicate
           post :publish
+        end
+      end
+      resources :categories, controller: '/admin/communication/websites/agenda/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :static
         end
       end
     end

@@ -31,6 +31,9 @@ en:
       communication/website:
         one: Website
         other: Websites
+      communication/website/agenda/category:
+        one: Category
+        other: Categories
       communication/website/agenda/event:
         one: Event
         other: Events
@@ -164,6 +167,11 @@ en:
         social_youtube: "Youtube (private, belongs to Google)"
         university: University
         url: URL
+      communication/website/agenda/category:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
       communication/website/agenda/event:
         categories: Categories
         dates: Dates
