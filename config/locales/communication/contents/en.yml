@@ -82,6 +82,7 @@ en:
                   all: All events, regardless of category
                   category: A specific category of events
                   selection: A selection of events
+                  categories: A list of all events' categories
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
@@ -453,6 +454,7 @@ en:
                   all: All posts
                   category: A specific category
                   selection: A selection of posts
+                  categories: A list of all posts' categories
               posts_quantity:
                 label: Quantity
                 placeholder: Enter quantity
