@@ -17,7 +17,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     if @website.nil?
       render plain: "Pas de site Web lié au journal"
     else
-      render layout: false
+      render layout: false, content_type: "text/plain; charset=utf-8"
     end
   end
 

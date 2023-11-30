@@ -14,7 +14,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def static
     @about = @diploma
     @website = @diploma.websites&.first
-    render layout: false
+    render layout: false, content_type: "text/plain; charset=utf-8"
   end
 
   def new

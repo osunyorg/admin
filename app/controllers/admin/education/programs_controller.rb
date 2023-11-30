@@ -55,7 +55,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def static
     @about = @program
     @website = @program.websites&.first
-    render layout: false
+    render layout: false, content_type: "text/plain; charset=utf-8"
   end
 
   def preview

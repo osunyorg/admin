@@ -54,7 +54,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def static
     @about = @person
     @website = @person.websites&.first
-    render layout: false
+    render layout: false, content_type: "text/plain; charset=utf-8"
   end
 
   def new

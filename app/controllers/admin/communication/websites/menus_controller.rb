@@ -16,7 +16,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
 
   def static
     @about = @menu
-    render layout: false
+    render layout: false, content_type: "text/plain; charset=utf-8"
   end
 
   def new
