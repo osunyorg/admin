@@ -13,8 +13,8 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   end
 
   def reorder
-    parent_id = params[:parentId].blank? ? nil : params[:parentId]
-    old_parent_id = params[:oldParentId].blank? ? nil : params[:oldParentId]
+    parent_id = params.dig(:parentId)
+    old_parent_id = params.dig(:oldParentId)
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       category = @website.post_categories.find(id)

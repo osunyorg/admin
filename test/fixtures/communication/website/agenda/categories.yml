@@ -35,28 +35,26 @@
 
 one:
   name: MyString
-  path: MyString
+  path: 'my-string'
   position: 1
   featured_image_alt: MyString
   featured_image_credit: MyText
   meta_description: MyText
   slug: MyString
   summary: MyText
-  communication_website: one
-  language: one
-  original: one
-  university: one
+  language: fr
+  university: default_university
+  website: website_with_github
 
 two:
   name: MyString
-  path: MyString
-  position: 1
+  path: 'my-string'
+  position: 2
   featured_image_alt: MyString
   featured_image_credit: MyText
   meta_description: MyText
   slug: MyString
   summary: MyText
-  communication_website: two
-  language: two
-  original: two
-  university: two
+  language: fr
+  university: default_university
+  website: website_with_github
