@@ -68,6 +68,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   protected
+
   def breadcrumb
     super
     add_breadcrumb  Communication::Website::Agenda::Category.model_name.human(count: 2),
