@@ -82,6 +82,7 @@ fr:
                   all: Tous les événements, peu importe la catégorie
                   category: Une catégorie spécifique d'événements
                   selection: Une sélection d'événements
+                  categories: La liste des catégories d'événements
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
@@ -453,6 +454,7 @@ fr:
                   all: Toutes les actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
+                  categories: La liste des catégories d'actualités
               posts_quantity:
                 label: Quantité d'articles
                 placeholder: Entrer la quantité

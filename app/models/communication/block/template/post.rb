@@ -8,7 +8,12 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     :alternate,
     :large
   ]
-  has_component :mode, :option, options: [:all, :category, :selection]
+  has_component :mode, :option, options: [
+    :all, 
+    :category, 
+    :selection,
+    :categories
+  ]
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :category
 
@@ -59,6 +64,10 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     elements.map { |element|
       post(element.id)
     }.compact
+  end
+
+  def selected_posts_categories
+    []
   end
 
   def post(id)

@@ -8,8 +8,17 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   ]
 
   has_elements
-  has_layouts [:grid, :list, :large]
-  has_component :mode, :option, options: [:all, :category, :selection]
+  has_layouts [
+    :grid,
+    :list,
+    :large
+  ]
+  has_component :mode, :option, options: [
+    :all, 
+    :category, 
+    :selection,
+    :categories
+  ]
   has_component :category_id, :category
   has_component :description, :rich_text
   has_component :quantity, :number, options: 3
@@ -60,6 +69,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     elements.map { |element|
       element.event
     }.compact
+  end
+
+  def selected_events_categories
+    []
   end
 
 end
