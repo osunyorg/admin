@@ -21,6 +21,6 @@ class Osuny::Sanitizer
     while output != Loofah.fragment(output).text(encode_special_chars: false)
       output = Loofah.fragment(output).text(encode_special_chars: false)
     end
-    output
+    output.gsub("\r\n", "").gsub("\n", "")
   end
 end
