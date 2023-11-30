@@ -31,7 +31,6 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   def new
-    @category.website = @website
     breadcrumb
   end
 
