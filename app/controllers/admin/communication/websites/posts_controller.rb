@@ -53,7 +53,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def static
     @about = @post
-    render layout: false, content_type: "text/plain; charset=utf-8"
+    render_as_plain_text
   end
 
   def new

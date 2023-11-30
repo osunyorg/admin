@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
     add_breadcrumb t('home'), root_path
   end
 
+  protected
+
+  def render_as_plain_text
+    render layout: false, content_type: "text/plain; charset=utf-8"
+  end
+
   private
 
   def current_ability

@@ -56,7 +56,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def static
     @about = @organization
     @website = @organization.websites&.first
-    render layout: false, content_type: "text/plain; charset=utf-8"
+    render_as_plain_text
   end
 
   def new

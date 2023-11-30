@@ -35,7 +35,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def static
     @about = @website
-    render layout: false, content_type: "text/plain; charset=utf-8"
+    render_as_plain_text
   end
 
   def new

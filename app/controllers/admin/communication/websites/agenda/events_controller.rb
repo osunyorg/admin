@@ -23,7 +23,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def static
     @about = @event
-    render layout: false, content_type: "text/plain; charset=utf-8"
+    render_as_plain_text
   end
 
   def new
