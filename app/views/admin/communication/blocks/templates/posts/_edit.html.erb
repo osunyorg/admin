@@ -1,14 +1,13 @@
-<%= block_component_edit block, :layout %>
-
-<div class="mb-3">
-  <%= block_component_edit block, :mode %>
-  <div class="row pure__row--small">
-    <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
-      <%= block_component_edit block, :posts_quantity %>
-    </div>
-    <div v-if="data.mode === 'category'" class="col-lg-9">
-      <%= block_component_edit block, :category_id %>
-    </div>
+<%= block_component_edit block, :mode %>
+<div v-if="data.mode !== 'categories'">
+  <%= block_component_edit block, :layout %>
+</div>
+<div class="row pure__row--small">
+  <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
+    <%= block_component_edit block, :posts_quantity %>
+  </div>
+  <div v-if="data.mode === 'category'" class="col-lg-9">
+    <%= block_component_edit block, :category_id %>
   </div>
 </div>
 <div v-if="data.mode === 'selection'">
