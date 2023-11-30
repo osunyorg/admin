@@ -78,6 +78,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb_for @event
   end
 
+  def load_categories
+    @categories = @website.agenda_categories.for_language(current_website_language)
+  end
+
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(

@@ -28,11 +28,11 @@
       </div>
       <% end %>
       <% if @categories.any? %>
-        <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
+        <%= osuny_panel t('activerecord.attributes.communication/website/agenda/event.categories') do %>
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: collection_tree_for_checkboxes(@categories) %>
+                            collection: @categories %>
         <% end %>
       <% end %>
 

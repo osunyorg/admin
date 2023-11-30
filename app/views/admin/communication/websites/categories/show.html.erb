@@ -2,15 +2,10 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <%= render 'admin/application/summary/show', about: @category %>
-      <%= render 'admin/communication/blocks/content/editor', about: @category %>
-    </div>
-    <div class="col-md-4">
       <%= render 'admin/application/i18n/widget', about: @category %>
       <%= osuny_panel t('metadata') do %>
-        <%= osuny_label Communication::Website::Category.human_attribute_name('slug') %>
-        <p><%= @category.slug %></p>
         <% if @category.parent %>
           <%= osuny_label Communication::Website::Category.human_attribute_name('parent') %>
           <p><%= link_to_if can?(:read, @category.parent),
@@ -33,11 +28,14 @@
             <% end %>
           </ul>
         <% end %>
-      <% end %>
+      <% end if @category.parent.present? || @category.children.any? %>
+    </div>
+    <div class="col-lg-4">
       <%= render 'admin/application/featured_image/show', about: @category %>
       <%= render 'admin/application/meta_description/show', about: @category %>
     </div>
   </div>
+  <%= render 'admin/communication/blocks/content/editor', about: @category %>
   <% if @posts.total_count > 0 %>
     <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
                     subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>

@@ -2,32 +2,28 @@
 
 <%= render 'admin/communication/websites/sidebar' do %>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <%= render 'admin/application/summary/show', about: @category %>
-      <%= render 'admin/communication/blocks/content/editor', about: @category %>
-    </div>
-    <div class="col-md-4">
       <%= render 'admin/application/i18n/widget', about: @category %>
-      <%= osuny_panel t('metadata') do %>
-        <%= osuny_label Communication::Website::Category.human_attribute_name('slug') %>
-        <p><%= @category.slug %></p>
-      <% end %>
+    </div>
+    <div class="col-lg-4">
       <%= render 'admin/application/featured_image/show', about: @category %>
       <%= render 'admin/application/meta_description/show', about: @category %>
     </div>
   </div>
+  <%= render 'admin/communication/blocks/content/editor', about: @category %>
   <% if @events.total_count > 0 %>
     <%= osuny_panel Communication::Website::Agenda::Event.model_name.human(count: 2),
-                    subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>
-      <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_category: true %>
-      <%= paginate @posts, theme: 'bootstrap-5' %>
+                    subtitle: "#{@events.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }" do %>
+      <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>
+      <%= paginate @events, theme: 'bootstrap-5' %>
     <% end %>
   <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>
-  <%= static_link static_admin_communication_website_category_path(@category) %>
+  <%= static_link static_admin_communication_website_agenda_category_path(@category) %>
 <% end %>
 
 <% content_for :action_bar_right do %>
