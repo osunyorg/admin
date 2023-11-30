@@ -1,12 +1,12 @@
 class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Communication::Websites::Agenda::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Agenda::Category, 
+  load_and_authorize_resource class: 'Communication::Website::Agenda::Category', 
                               through: :website,
                               through_association: :agenda_categories
 
   include Admin::Translatable
 
   def index
-    @categories = @website.agenda_categories.for_language(current_website_language).ordered
+    @categories = @categories.for_language(current_website_language).ordered
     breadcrumb
   end
 
