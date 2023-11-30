@@ -2,8 +2,8 @@
   <h2><%= heading %></h2>
 </div>
 <% heading.blocks.published.ordered.each do |block| %>
-  <%= render "admin/communication/blocks/templates/#{block.template_kind}/show", block: block %>
+  <%= render "admin/communication/blocks/templates/#{block.template_kind}/show", block: block, strip_javascript: strip_javascript %>
 <% end %>
 <% heading.children.ordered.each do |child| %>
-  <%= render 'admin/communication/blocks/headings/show', heading: child %>
+  <%= render 'admin/communication/blocks/headings/show', heading: child, strip_javascript: strip_javascript %>
 <% end %>

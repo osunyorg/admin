@@ -19,12 +19,9 @@ en:
             label: Utility blocks
             description: Purely practical and technical features
         components:
-          text:
-            label: Text
-            placeholder: Enter text
-            transcription:
-              label: Text transcript
-              placeholder: Enter text transcript
+          code:
+            preview:
+              sanitized_notice: For security reasons, the content has been filtered. Scripts will not be loaded and/or executed, and the apparence may be altered.
           file:
             input:
               label: File
@@ -40,10 +37,16 @@ en:
               label: Credit
               placeholder: Enter credit
           layouts:
-            label: Layout
             button: Choose the layout
+            label: Layout
           link:
-              target_blank: Open in new window
+            target_blank: Open in new window
+          text:
+            label: Text
+            placeholder: Enter text
+            transcription:
+              label: Text transcript
+              placeholder: Enter text transcript
           time_slot:
             from: From
             to: to
