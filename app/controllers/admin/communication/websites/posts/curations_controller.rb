@@ -1,4 +1,4 @@
-class Admin::Communication::Websites::Posts::CurationsController < Admin::Communication::Websites::ApplicationController
+class Admin::Communication::Websites::Posts::CurationsController < Admin::Communication::Websites::Posts::ApplicationController
   def new
     breadcrumb
   end
@@ -20,8 +20,6 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Post.model_name.human(count: 2),
-                    admin_communication_website_posts_path
     add_breadcrumb  t('communication.website.posts.new_curation')
   end
 

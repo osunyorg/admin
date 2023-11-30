@@ -35,7 +35,7 @@
         title: Communication::Website::Menu.model_name.human(count: 2),
         path: admin_communication_website_menus_path(website_id: @website),
         icon: Icon::COMMUNICATION_WEBSITE_MENUS,
-        ability: can?(:read, Communication::Website::Category)
+        ability: can?(:read, Communication::Website::Post::Category)
       }
 
       navigation << {

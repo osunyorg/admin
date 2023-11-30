@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_28_160407) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_132952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -289,33 +289,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_160407) do
     t.index ["communication_website_agenda_event_id", "communication_website_agenda_category_id"], name: "event_category"
   end
 
-  create_table "communication_website_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.uuid "communication_website_id", null: false
-    t.string "name"
-    t.text "meta_description"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "slug"
-    t.uuid "parent_id"
-    t.uuid "program_id"
-    t.boolean "is_programs_root", default: false
-    t.string "path"
-    t.string "featured_image_alt"
-    t.text "summary"
-    t.text "featured_image_credit"
-    t.uuid "original_id"
-    t.uuid "language_id", null: false
-    t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
-    t.index ["language_id"], name: "index_communication_website_categories_on_language_id"
-    t.index ["original_id"], name: "index_communication_website_categories_on_original_id"
-    t.index ["parent_id"], name: "index_communication_website_categories_on_parent_id"
-    t.index ["program_id"], name: "index_communication_website_categories_on_program_id"
-    t.index ["slug"], name: "index_communication_website_categories_on_slug"
-    t.index ["university_id"], name: "index_communication_website_categories_on_university_id"
-  end
-
   create_table "communication_website_categories_posts", id: false, force: :cascade do |t|
     t.uuid "communication_website_post_id", null: false
     t.uuid "communication_website_category_id", null: false
@@ -431,6 +404,33 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_160407) do
     t.index ["about_type", "about_id"], name: "index_communication_website_permalinks_on_about"
     t.index ["university_id"], name: "index_communication_website_permalinks_on_university_id"
     t.index ["website_id"], name: "index_communication_website_permalinks_on_website_id"
+  end
+
+  create_table "communication_website_post_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "name"
+    t.text "meta_description"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.uuid "parent_id"
+    t.uuid "program_id"
+    t.boolean "is_programs_root", default: false
+    t.string "path"
+    t.string "featured_image_alt"
+    t.text "summary"
+    t.text "featured_image_credit"
+    t.uuid "original_id"
+    t.uuid "language_id", null: false
+    t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
+    t.index ["language_id"], name: "index_communication_website_post_categories_on_language_id"
+    t.index ["original_id"], name: "index_communication_website_post_categories_on_original_id"
+    t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
+    t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
+    t.index ["slug"], name: "index_communication_website_post_categories_on_slug"
+    t.index ["university_id"], name: "index_communication_website_post_categories_on_university_id"
   end
 
   create_table "communication_website_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1162,12 +1162,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_160407) do
   add_foreign_key "communication_website_agenda_events", "communication_websites"
   add_foreign_key "communication_website_agenda_events", "languages"
   add_foreign_key "communication_website_agenda_events", "universities"
-  add_foreign_key "communication_website_categories", "communication_website_categories", column: "original_id"
-  add_foreign_key "communication_website_categories", "communication_website_categories", column: "parent_id"
-  add_foreign_key "communication_website_categories", "communication_websites"
-  add_foreign_key "communication_website_categories", "education_programs", column: "program_id"
-  add_foreign_key "communication_website_categories", "languages"
-  add_foreign_key "communication_website_categories", "universities"
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
@@ -1185,6 +1179,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_160407) do
   add_foreign_key "communication_website_pages", "universities"
   add_foreign_key "communication_website_permalinks", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_permalinks", "universities"
+  add_foreign_key "communication_website_post_categories", "communication_website_post_categories", column: "original_id"
+  add_foreign_key "communication_website_post_categories", "communication_website_post_categories", column: "parent_id"
+  add_foreign_key "communication_website_post_categories", "communication_websites"
+  add_foreign_key "communication_website_post_categories", "education_programs", column: "program_id"
+  add_foreign_key "communication_website_post_categories", "languages"
+  add_foreign_key "communication_website_post_categories", "universities"
   add_foreign_key "communication_website_posts", "communication_website_posts", column: "original_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"

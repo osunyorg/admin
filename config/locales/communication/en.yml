@@ -37,7 +37,7 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
-      communication/website/category:
+      communication/website/post/category:
         one: Category
         other: Categories
         all: All categories
@@ -186,7 +186,7 @@ en:
         title: Title
         to_day: To day
         to_hour: To hour
-      communication/website/category:
+      communication/website/post/category:
         children: Children categories
         featured_image: Featured image
         featured_image_alt: Alt text

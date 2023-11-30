@@ -32,16 +32,18 @@ namespace :communication do
         post 'generate-from-template' => 'websites/pages#generate_from_template', as: :generate
       end
     end
-    resources :categories, controller: 'websites/categories', path: '/:lang/categories' do
-      collection do
-        post :reorder
-      end
-      member do
-        get :children
-        get :static
-      end
+    namespace :post, path: '' do
+      resources :categories, controller: '/admin/communication/websites/posts/categories', path: '/:lang/posts/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+          get :static
+        end
+      end  
+      resources :authors, controller: '/admin/communication/websites/posts/authors', path: '/:lang/authors', only: [:index, :show]
     end
-    resources :authors, controller: 'websites/authors', path: '/:lang/authors', only: [:index, :show]
     resources :posts, controller: 'websites/posts', path: '/:lang/posts' do
       collection do
         resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]

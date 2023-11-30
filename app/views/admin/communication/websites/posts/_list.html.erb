@@ -42,7 +42,7 @@ selectable ||= false
               <% if !hide_author && post.author %>
                 <%= post.author %><br>
               <% end %>
-              <%= render 'admin/communication/websites/categories/inline', about: post unless hide_category %>
+              <%= render 'admin/communication/websites/posts/categories/inline', about: post unless hide_category %>
               <% if post.pinned %>
                 <%= Communication::Website::Post.human_attribute_name('pinned') %>
               <% end %>

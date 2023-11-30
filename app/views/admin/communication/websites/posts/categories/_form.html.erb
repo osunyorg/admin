@@ -16,10 +16,10 @@
                     as: :string,
                     input_html: category.persisted? ? {} : {
                       class: 'js-slug-input',
-                      data: { source: '#communication_website_category_name' }
+                      data: { source: '#communication_website_post_category_name' }
                     } %>
         <%= f.association :parent,
-                          collection: collection_tree(@website.categories.for_language(current_website_language), category),
+                          collection: collection_tree(@website.post_categories.for_language(current_website_language), category),
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
       <% end %>

@@ -37,7 +37,7 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
-      communication/website/category:
+      communication/website/post/category:
         one: Catégorie
         other: Catégories
         all: Toutes les catégories
@@ -186,7 +186,7 @@ fr:
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
-      communication/website/category:
+      communication/website/post/category:
         children: Catégories enfants
         featured_image: Image à la une
         featured_image_alt: Texte alternatif

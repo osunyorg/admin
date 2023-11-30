@@ -11,8 +11,8 @@
     <tbody>
       <% authors.each do |author| %>
         <tr>
-          <td><%= link_to author.last_name, admin_communication_website_author_path(website_id: @website.id, id: author.id) %></td>
-          <td><%= link_to author.first_name, admin_communication_website_author_path(website_id: @website.id, id: author.id) %></td>
+          <td><%= link_to author.last_name, admin_communication_website_post_author_path(website_id: @website.id, id: author.id) %></td>
+          <td><%= link_to author.first_name, admin_communication_website_post_author_path(website_id: @website.id, id: author.id) %></td>
           <td><%= author.communication_website_posts.count %></td>
           <td></td>
         </tr>

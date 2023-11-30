@@ -5,7 +5,8 @@ class Ability::WebsiteManager < Ability
     manage_blocks
     can [:read, :analytics], Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
-    can :manage, Communication::Website::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
+    can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
+    can :manage, Communication::Website::Post::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can [:read, :update, :reorder], Communication::Website::Menu, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id, website_id: managed_websites_ids
     can :create, Communication::Website::Menu::Item, university_id: @user.university_id

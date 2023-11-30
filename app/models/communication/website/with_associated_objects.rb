@@ -13,8 +13,8 @@ module Communication::Website::WithAssociatedObjects
 
     has_many    :authors, -> { distinct }, through: :posts
 
-    has_many    :categories,
-                class_name: 'Communication::Website::Category',
+    has_many    :post_categories,
+                class_name: 'Communication::Website::Post::Category',
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 

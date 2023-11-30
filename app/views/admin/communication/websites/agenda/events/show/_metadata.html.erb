@@ -1,6 +1,4 @@
 <%= osuny_panel t('metadata'), small: true do %>
-  <%= osuny_label t('metadata') %><br>
-  
   <%= @event.published  ? Communication::Website::Agenda::Event.human_attribute_name(:published)
                         : t('admin.communication.website.agenda.events.draft') %>
 

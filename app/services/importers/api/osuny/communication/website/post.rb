@@ -35,7 +35,7 @@ class Importers::Api::Osuny::Communication::Website::Post < Importers::Api::Osun
 
   def find_or_create_category(data)
     if data.has_key? 'name'
-      website.categories.where(
+      website.post_categories.where(
         university: university,
         website: website,
         name: data['name'],
