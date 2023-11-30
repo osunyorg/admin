@@ -2,11 +2,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event, 
                               through: :website
 
-  before_action :load_categories, only: [:new, :edit, :create, :update]
+  before_action :load_categories
 
   def index
     @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
-    @categories = @website.agenda_categories.for_language(current_website_language).ordered
+    @categories = @categories.for_language(current_website_language).ordered
     breadcrumb
   end
 
