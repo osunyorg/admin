@@ -17,11 +17,13 @@ module Communication::Website::WithDeuxfleurs
     return unless deuxfleurs_hosting?
     if repository.blank?
       deuxfleurs_create_github_repository
+      sleep 10
     end
     if deuxfleurs_identifier.blank?
       deuxfleurs_create_bucket
+      sleep 10
       deuxfleurs_generate_certificate
-      sleep 30
+      sleep 10
       save
     end
   end
@@ -52,11 +54,15 @@ module Communication::Website::WithDeuxfleurs
   end
 
   def deuxfleurs_default_identifier
-    "#{university.identifier}-#{to_s.parameterize}"
+    "#{to_s.parameterize}.#{university.identifier}.osuny.site"
+  end
+
+  def deuxfleurs_default_url
+    "https://#{deuxfleurs_default_identifier}"
   end
 
   def deuxfleurs_default_github_repository
-    "noesya/#{deuxfleurs_default_identifier}"
+    "noesya/#{university.identifier}-#{to_s.parameterize}"
   end
 
   def deuxfleurs_default_badge_url
@@ -68,10 +74,6 @@ module Communication::Website::WithDeuxfleurs
   rescue
     # The certificate is not there yet, it is supposed to fail
     # This first call will generate it
-  end
-
-  def deuxfleurs_default_url
-    deuxfleurs.default_url_for(deuxfleurs_default_identifier)
   end
 
   def deuxfleurs
