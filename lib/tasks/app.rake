@@ -12,6 +12,7 @@ namespace :app do
     Communication::Block.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
     Communication::Block::Heading.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
     ActiveStorage::Attachment.where(record_type: "Communication::Website::Category").update_all(record_type: "Communication::Website::Post::Category")
+    Communication::Website::Permalink.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
   end
 
   namespace :websites do
