@@ -35,7 +35,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def static
     @about = @website
-    render layout: false
+    render_as_plain_text
   end
 
   def new
@@ -77,7 +77,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def website_params
     attribute_names = [
       :name, :url, :repository, :about_type, :about_id, :in_production,
-      :git_provider, :git_endpoint, :git_branch, :plausible_url, 
+      :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda,
       :deuxfleurs_hosting, :default_image, :default_image_delete,
       :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,

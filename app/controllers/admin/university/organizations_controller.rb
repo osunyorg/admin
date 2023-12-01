@@ -32,8 +32,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                                         .search_by_siren_or_name(@term)
                                         .ordered
     @organizations = @organizations.joins(:language)
-                                    .where(languages: { 
-                                      iso_code: language.iso_code 
+                                    .where(languages: {
+                                      iso_code: language.iso_code
                                     }) if language.present?
   end
 
@@ -56,7 +56,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def static
     @about = @organization
     @website = @organization.websites&.first
-    render layout: false
+    render_as_plain_text
   end
 
   def new

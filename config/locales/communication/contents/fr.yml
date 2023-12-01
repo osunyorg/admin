@@ -19,12 +19,9 @@ fr:
             label: Blocs techniques
             description: Des fonctionnalités pratiques, purement utilitaires
         components:
-          text:
-            label: Texte
-            placeholder: Entrer le texte
-            transcription:
-              label: Transcription textuelle du contenu
-              placeholder: Entrer ici la transcription
+          code:
+            preview:
+              sanitized_notice: Pour des raisons de sécurité, le contenu a été filtré. Les scripts ne sont pas chargés et/ou exécutés, et l'apparence peut être alterée.
           file:
             input:
               label: Fichier
@@ -40,10 +37,16 @@ fr:
               label: Crédit
               placeholder: Entrer le crédit
           layouts:
-            label: Mise en page
             button: Choisir la mise en page
+            label: Mise en page
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
+          text:
+            label: Texte
+            placeholder: Entrer le texte
+            transcription:
+              label: Transcription textuelle du contenu
+              placeholder: Entrer ici la transcription
           time_slot:
             from: De
             to: à

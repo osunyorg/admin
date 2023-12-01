@@ -1,5 +1,5 @@
 <%
-  class_name = "block block-embed" 
+  class_name = "block block-embed"
   unless block.title.blank?
     class_name += " block-with-title"
   end
@@ -14,7 +14,7 @@
         </div>
       <% end %>
 
-      <%= block_component_show block, :code %>
+      <%= block_component_show block, :code, strip_javascript: strip_javascript %>
 
       <% unless block.template.transcription.blank? %>
         <div class="transcription">
@@ -29,6 +29,3 @@
     </div>
   </div>
 </div>
-
-
-

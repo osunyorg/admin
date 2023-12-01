@@ -50,19 +50,27 @@ module Communication::Website::WithDeuxfleurs
     update_columns  access_token: ENV['GITHUB_ACCESS_TOKEN'],
                     repository: deuxfleurs_default_github_repository,
                     deployment_status_badge: deuxfleurs_default_badge_url
-    git_repository.init_from_template(deuxfleurs_default_identifier)
+    git_repository.init_from_template(deuxfleurs_default_github_repository_name)
   end
 
+  # cartographie.agit.osuny.site
   def deuxfleurs_default_identifier
     "#{to_s.parameterize}.#{university.identifier}.osuny.site"
   end
 
+  # https://cartographie.agit.osuny.site
   def deuxfleurs_default_url
     "https://#{deuxfleurs_default_identifier}"
   end
 
+  # agit-cartographie
+  def deuxfleurs_default_github_repository_name
+    "#{university.identifier}-#{to_s.parameterize}"
+  end
+
+  # noesya/agit-cartographie
   def deuxfleurs_default_github_repository
-    "noesya/#{university.identifier}-#{to_s.parameterize}"
+    "noesya/#{deuxfleurs_default_github_repository_name}"
   end
 
   def deuxfleurs_default_badge_url
