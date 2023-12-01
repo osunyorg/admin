@@ -27,7 +27,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
 
   def static
     @about = @category
-    render layout: false
+    render_as_plain_text
   end
 
   def new
