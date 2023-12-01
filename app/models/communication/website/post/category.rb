@@ -84,7 +84,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/websites/categories/static"
+    "admin/communication/websites/posts/categories/static"
   end
 
   def dependencies

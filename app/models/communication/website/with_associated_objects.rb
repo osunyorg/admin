@@ -87,7 +87,7 @@ module Communication::Website::WithAssociatedObjects
   end
 
   def has_communication_categories?
-    categories.any?
+    post_categories.any? || agenda_categories.any?
   end
 
   def has_organizations?
