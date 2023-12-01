@@ -39,7 +39,7 @@ class Admin::Communication::Websites::CategoriesController < Admin::Communicatio
 
   def static
     @about = @category
-    render layout: false
+    render_as_plain_text
   end
 
   def new

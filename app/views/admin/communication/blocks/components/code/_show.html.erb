@@ -1,1 +1,14 @@
-<%= value.html_safe %>
+<%
+unsanitized_value = value.html_safe
+sanitized_value = sanitize(value) if strip_javascript
+%>
+
+<% if strip_javascript %>
+  <%= sanitized_value %>
+
+  <% if sanitized_value != unsanitized_value %>
+    <p><small><em><%= t('admin.communication.blocks.components.code.preview.sanitized_notice') %></em></small></p>
+  <% end %>
+<% else %>
+  <%= unsanitized_value %>
+<% end %>

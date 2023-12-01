@@ -54,7 +54,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def static
     @about = @person
     @website = @person.websites&.first
-    render layout: false
+    render_as_plain_text
   end
 
   def new

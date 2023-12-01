@@ -56,7 +56,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def static
     @about = @page
-    render layout: false
+    render_as_plain_text
   end
 
   def preview

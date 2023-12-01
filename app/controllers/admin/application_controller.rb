@@ -1,6 +1,7 @@
 class Admin::ApplicationController < ApplicationController
   layout 'admin/layouts/application'
 
+  before_action :redirect_if_context_is_not_an_university!
   before_action :load_block_copy_cookie
 
   include Admin::Filterable
@@ -35,6 +36,13 @@ class Admin::ApplicationController < ApplicationController
     @block_copied = current_university.communication_blocks.find block_id
   rescue
     # If the block doesn't exist anymore
+  end
+
+  private
+
+  def redirect_if_context_is_not_an_university!
+    # Currently (Nov 2023), context can be: an extranet, an university (admin) or none.
+    redirect_to root_path unless current_context.is_a?(University)
   end
 
 end
