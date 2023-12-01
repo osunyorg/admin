@@ -1,6 +1,6 @@
 <% if @about.categories.any? %>
-categories:
-  <% @about.categories.each do |category| %>
+events_categories:
+  <% @about.agenda_categories.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
   <% end %>
 <% end %>

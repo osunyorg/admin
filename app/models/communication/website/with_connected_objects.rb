@@ -10,7 +10,8 @@ module Communication::Website::WithConnectedObjects
   def clean_and_rebuild
     pages.find_each(&:connect_dependencies)
     posts.find_each(&:connect_dependencies)
-    categories.find_each(&:connect_dependencies)
+    post_categories.find_each(&:connect_dependencies)
+    agenda_categories.find_each(&:connect_dependencies)
     menus.find_each(&:connect_dependencies)
     connect(about, self) if about.present?
     destroy_obsolete_connections

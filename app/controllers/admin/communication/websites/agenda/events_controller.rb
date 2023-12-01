@@ -2,11 +2,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event,
                               through: :website
 
-  before_action :load_categories, only: [:new, :edit, :create, :update]
+  before_action :load_categories
 
   def index
     @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
-    @root_categories = @website.categories.for_language(current_website_language).root.ordered
     breadcrumb
   end
 
@@ -76,6 +75,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     add_breadcrumb  Communication::Website::Agenda::Event.model_name.human(count: 2),
                     admin_communication_website_agenda_events_path
     breadcrumb_for @event
+  end
+
+  def load_categories
+    @categories = @website.agenda_categories.for_language(current_website_language).ordered
   end
 
   def event_params

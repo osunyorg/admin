@@ -40,11 +40,11 @@ function hideAbout() {
 <% elsif @kind == 'category' %>
     <%
         options = ['<option value="" label=" "></option>']
-        collection_tree(@website.categories.for_language(current_website_language)).each do |category|
+        collection_tree(@website.post_categories.for_language(current_website_language)).each do |category|
             options << "<option value=\"#{category[:id]}\">#{category[:label]}</option>"
         end
     %>
-    displayAbout('Communication::Website::Category', "<%= j(raw(options.join(''))) %>");
+    displayAbout('Communication::Website::Post::Category', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'post' %>
     <%
     options = ['<option value="" label=" "></option>']

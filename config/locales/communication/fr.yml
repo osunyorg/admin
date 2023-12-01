@@ -31,10 +31,13 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/agenda/category:
+        one: Catégorie
+        other: Catégories
       communication/website/agenda/event:
         one: Événement
         other: Événements
-      communication/website/category:
+      communication/website/post/category:
         one: Catégorie
         other: Catégories
         all: Toutes les catégories
@@ -164,6 +167,11 @@ fr:
         social_youtube: "Youtube (privatif, appartient à Google)"
         university: Université
         url: URL
+      communication/website/agenda/category:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        slug: Slug
       communication/website/agenda/event:
         categories: Catégories
         dates: Dates
@@ -178,7 +186,7 @@ fr:
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
-      communication/website/category:
+      communication/website/post/category:
         children: Catégories enfants
         featured_image: Image à la une
         featured_image_alt: Texte alternatif

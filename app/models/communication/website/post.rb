@@ -58,7 +58,7 @@ class Communication::Website::Post < ApplicationRecord
              class_name: 'University::Person',
              optional: true
   has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Category',
+                          class_name: 'Communication::Website::Post::Category',
                           join_table: :communication_website_categories_posts,
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :communication_website_category_id
@@ -191,7 +191,7 @@ class Communication::Website::Post < ApplicationRecord
     # Potentiel gain de performance (25%)
     # Méthode collect : X abouts = X requêtes
     # Méthode ci-dessous : X abouts = 6 requêtes
-    # website.categories.where(id: website.blocks.posts.where(about_type: "Communication::Website::Category").distinct.pluck(:about_id)) +
+    # website.post_categories.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post::Category").distinct.pluck(:about_id)) +
     # website.pages.where(id: website.blocks.posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
     # website.posts.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
   end
