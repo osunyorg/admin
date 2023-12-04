@@ -15,11 +15,11 @@ authors:
 <% end %>
 <% if @about.categories.any? %>
 categories:
-  <% @about.categories.each do |category| %>
+<% @about.categories.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
 <% end %>
 posts_categories:
-  <% @about.categories.each do |category| %>
+<% @about.categories.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
 <% end %>
 <% end %>
