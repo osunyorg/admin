@@ -51,13 +51,12 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           foreign_key: :communication_website_agenda_category_id,
                           association_foreign_key: :communication_website_agenda_event_id
 
-
   def to_s
     "#{name}"
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}events_categories/#{slug_with_ancestors_slugs}/_index.html"
+    "#{git_path_content_prefix(website)}events_categories/#{slug}/_index.html"
   end
 
   def template_static
