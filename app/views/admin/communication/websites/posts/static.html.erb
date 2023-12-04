@@ -17,7 +17,11 @@ authors:
 categories:
   <% @about.categories.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
-  <% end %>
+<% end %>
+posts_categories:
+  <% @about.categories.each do |category| %>
+  - "<%= category.slug_with_ancestors_slugs %>"
+<% end %>
 <% end %>
 <%= render 'admin/application/i18n/static' %>
 <%= render 'admin/application/featured_image/static' %>
