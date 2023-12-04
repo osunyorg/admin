@@ -57,6 +57,10 @@ class Communication::Extranet::Post < ApplicationRecord
 
   protected
 
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
+
   def slug_unavailable?(slug)
     self.class.unscoped
               .where(extranet_id: self.extranet_id, slug: slug)

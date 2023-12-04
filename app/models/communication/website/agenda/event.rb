@@ -154,6 +154,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   protected
 
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
+
   def to_day_after_from_day
     errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
   end
