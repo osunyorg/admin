@@ -18,7 +18,7 @@ namespace :communication do
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder
-        get :tree
+        get 'list' => 'websites/pages#index_list'
       end
       member do
         get :children

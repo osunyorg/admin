@@ -9,16 +9,17 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   has_scope :for_full_width
 
   def index
-    @pages = apply_scopes(@pages).for_language(current_website_language)
-                                 .ordered_by_title
-                                 .page(params[:page])
-    breadcrumb
-  end
-
-  def tree
     @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
     @pages = @website.pages.for_language(current_website_language)
+    breadcrumb
+  end
+
+  def index_list
+    @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
+    @pages = apply_scopes(@pages).for_language(current_website_language)
+                                 .ordered_by_title
+                                 .page(params[:page])
     breadcrumb
   end
 
