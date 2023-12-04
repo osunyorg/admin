@@ -10,4 +10,13 @@
     <% Communication::Website::Permalink.config_in_website(@website, language).each do |key, value| %>
     <%= key %>: <%= value %>
     <% end %>
+  taxonomies:
+    administrator: administrators
+    author: authors
+    category: categories
+    posts_category: posts_categories
+    events_category: events_categories
+    diploma: diplomas
+    researcher: researchers
+    teacher: teachers
 <% end %>
