@@ -44,6 +44,7 @@ class Communication::Extranet < ApplicationRecord
   self.filter_attributes += [:sso_cert]
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
+  include Favoritable
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
