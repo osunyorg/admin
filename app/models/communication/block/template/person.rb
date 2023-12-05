@@ -16,6 +16,6 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   end
   
   def children
-    elements
+    elements.collect(&:person).compact
   end
 end
