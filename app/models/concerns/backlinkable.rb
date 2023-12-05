@@ -27,14 +27,14 @@ module Backlinkable
 
   def backlinks(kind, website)
     backlinks_blocks(website).published.map { |block|
-      # Correct kind
-      next unless block.about.is_a?(kind)
-      # Mentioning self
-      next unless self.in?(block.template.children)
-      # About published
-      next unless block.about.published?
-      block.about
+      block.about if backlink_in_block?(block, kind)
     }.compact
+  end
+
+  def backlink_in_block?(block, kind)
+    block.about.is_a?(kind) && # Correct kind
+    self.in?(block.template.children) && # Mentioning self
+    block.about.published? # About published
   end
 
   def backlinks_blocks(website)
