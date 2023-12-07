@@ -25,4 +25,8 @@ class Communication::Extranet::Connection < ApplicationRecord
   belongs_to :university
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :object, polymorphic: true
+
+  def self.connectable_model_names
+    ["University::Organization", "University::Person"]
+  end
 end

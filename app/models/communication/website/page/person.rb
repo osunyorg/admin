@@ -56,6 +56,10 @@ class Communication::Website::Page::Person < Communication::Website::Page
     University::Person.where(id: ids)
   end
 
+  def connectable_model_names
+    ["University::Person"]
+  end
+
   protected
 
   def current_git_path

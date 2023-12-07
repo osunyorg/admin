@@ -142,6 +142,10 @@ class Communication::Website::Page < ApplicationRecord
               .where.not(id: id)
   end
 
+  def connectable_model_names
+    []
+  end
+
   protected
 
   def check_accessibility

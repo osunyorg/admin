@@ -20,7 +20,7 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   end
 
   def new
-    @heading.about = PolymorphicObjectFinder.find params, :about
+    @heading.about = PolymorphicObjectFinder.find(params, :about, current_university, whitelist: model_names_with_blocks)
     breadcrumb
   end
 

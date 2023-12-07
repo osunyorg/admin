@@ -18,7 +18,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def new
-    @block.about = PolymorphicObjectFinder.find params, :about
+    @block.about = PolymorphicObjectFinder.find(params, :about, current_university, whitelist: model_names_with_blocks)
     breadcrumb
   end
 
@@ -61,12 +61,12 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     return unless request.xhr?
     cookies.signed[Communication::Block::BLOCK_COPY_COOKIE] = {
       value: params[:id],
-      path: '/admin' 
+      path: '/admin'
     }
   end
 
   def paste
-    about = PolymorphicObjectFinder.find(params, :about)
+    about = PolymorphicObjectFinder.find(params, :about, current_university, whitelist: model_names_with_blocks)
     # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.paste(about)
     cookies.delete(Communication::Block::BLOCK_COPY_COOKIE, path: '/admin')
