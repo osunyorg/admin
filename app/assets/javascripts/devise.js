@@ -9,6 +9,5 @@
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
 //= require_self
-//= require_tree ./admin/plugins
 
 window.osuny = {};
