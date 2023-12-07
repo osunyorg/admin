@@ -61,7 +61,7 @@ alumnus:
   email: alumnus@osuny.org
   first_name: Alumnus
   last_name: Osuny
-  role: user
+  role: visitor
   language: fr
   university: default_university
 

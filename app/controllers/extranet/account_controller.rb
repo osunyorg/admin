@@ -11,28 +11,39 @@ class Extranet::AccountController < Extranet::ApplicationController
   end
 
   def update
-    manage_password
-    current_user.update user_params
-    redirect_to account_path, notice: t('extranet.account.updated')
+    if update_user(user_params)
+      bypass_sign_in current_user, scope: :user if sign_in_after_change_password?
+      redirect_to account_path, notice: t('extranet.account.updated')
+    else
+      breadcrumb
+      add_breadcrumb t('extranet.account.edit')
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   protected
 
-  def manage_password
-    # to prevent cognitive complexity (the bottom block should be in an if condition where password present)
-    # Password not provided when user from sso
-    params[:user][:password] ||= ''
-
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
+  def update_user(params)
+    if params[:password].blank?
+      params.delete(:current_password)
+      current_user.update_without_password(params)
     else
-      current_user.reset_password(params[:user][:password], params[:user][:password])
+      current_user.update_with_password(params)
     end
   end
 
   def user_params
     params.require(:user)
-          .permit(:first_name, :last_name, :email, :mobile_phone, :language_id, :password, :picture, :picture_infos, :picture_delete)
+          .permit(
+            :first_name, :last_name, :email, :mobile_phone, :language_id,
+            :current_password, :password, :password_confirmation,
+            :picture, :picture_infos, :picture_delete
+          )
+  end
+
+  def sign_in_after_change_password?
+    return true if user_params[:password].blank?
+    Devise.sign_in_after_change_password
   end
 
   def breadcrumb
