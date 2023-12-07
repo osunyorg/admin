@@ -11,7 +11,7 @@ class Extranet::AccountController < Extranet::ApplicationController
   end
 
   def update
-    if update_user(current_user, user_params)
+    if update_user(user_params)
       bypass_sign_in current_user, scope: :user if sign_in_after_change_password?
       redirect_to account_path, notice: t('extranet.account.updated')
     else
@@ -23,12 +23,12 @@ class Extranet::AccountController < Extranet::ApplicationController
 
   protected
 
-  def update_user(user, params)
+  def update_user(params)
     if params[:password].blank?
       params.delete(:current_password)
-      user.update_without_password(params)
+      current_user.update_without_password(params)
     else
-      user.update_with_password(params)
+      current_user.update_with_password(params)
     end
   end
 
