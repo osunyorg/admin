@@ -103,8 +103,8 @@ module Communication::Website::Page::WithType
 
   def initialize_special_page
     i18n_key = "communication.website.pages.defaults.#{type_key}"
-    self.title = I18n.t("#{i18n_key}.title")
-    self.slug = I18n.t("#{i18n_key}.slug")
+    self.title = I18n.t("#{i18n_key}.title", locale: language.iso_code)
+    self.slug = I18n.t("#{i18n_key}.slug", locale: language.iso_code)
     self.parent = default_parent
     self.full_width = full_width_by_default?
     self.published = published_by_default?
