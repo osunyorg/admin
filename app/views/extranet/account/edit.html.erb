@@ -22,9 +22,23 @@
     <div class="col-lg-6">
       <%= f.input :email %>
       <%= f.input :mobile_phone %>
+    </div>
+  </div>
+
+  <h3 class="mt-5 mb-4"><%= t("devise.passwords.edit.new") %></h3>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :current_password,
+                  as: :password,
+                  input_html: { autocomplete: "current-password" } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
       <%= f.input :password,
                   as: :password_with_hints,
-                  hint: t('admin.password_hint'),
                   allow_password_uncloaking: true,
                   validators: {
                     length: Devise.password_length.first,
@@ -33,9 +47,19 @@
                     numeric_char: true,
                     special_char: Rails.application.config.allowed_special_chars
                   },
+                  label: t('devise.passwords.edit.new_password'),
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :password_confirmation,
+                  as: :password_with_sync,
+                  allow_password_uncloaking: true,
+                  compare_with_field: :password,
                   input_html: { autocomplete: "new-password" } %>
     </div>
   </div>
+
   <%= submit f %>
 
   <% if current_user.visitor? %>
