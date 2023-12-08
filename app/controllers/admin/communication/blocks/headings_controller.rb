@@ -20,7 +20,12 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   end
 
   def new
-    @heading.about = PolymorphicObjectFinder.find params, :about
+    @heading.about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university,
+      only: Communication::Block::Heading.permitted_about_types
+    )
     breadcrumb
   end
 

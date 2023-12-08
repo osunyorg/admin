@@ -40,10 +40,10 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
+  include Contentful
   include Sanitizable
   include WithAccessibility
   include WithBlobs
-  include WithBlocks
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
@@ -118,7 +118,7 @@ class Communication::Website::Post < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    blocks +
+    contents_dependencies +
     categories +
     [author&.author] +
     [website.config_default_content_security_policy]

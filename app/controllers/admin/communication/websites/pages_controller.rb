@@ -134,9 +134,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   protected
 
   def load_object
-    object_type = params[:objectType]
-    object_id = params[:objectId]
-    @object = object_type.constantize.find object_id
+    @object = PolymorphicObjectFinder.find(
+      params,
+      key: :object,
+      university: current_university,
+      only: [@page.class.direct_connection_permitted_about_type]
+    )
   end
 
   def breadcrumb
