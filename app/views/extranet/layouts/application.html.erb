@@ -4,7 +4,7 @@
     <%= render 'extranet/application/head' %>
     <% if content_for?(:leaflet_required) %>
       <%= stylesheet_link_tag 'leaflet', media: 'all' %>
-      <%= javascript_include_tag 'leaflet' %>%
+      <%= javascript_include_tag 'leaflet' %>
     <% end %>
   </head>
   <body class="extranet <%= body_classes %> full-width">
