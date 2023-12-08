@@ -48,11 +48,11 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path)
 
   include AsDirectObject
+  include Contentful
   include Sanitizable
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs
-  include WithBlocks
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
@@ -103,7 +103,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def dependencies
-    calculated_dependencies = active_storage_blobs + blocks
+    calculated_dependencies = active_storage_blobs + contents_dependencies
     calculated_dependencies += [website.config_default_content_security_policy]
     # children are used only if there is no block to display
     calculated_dependencies += children unless blocks.published.any?

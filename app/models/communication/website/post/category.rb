@@ -42,9 +42,9 @@
 #
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
+  include Contentful
   include Sanitizable
   include WithBlobs
-  include WithBlocks
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
@@ -89,7 +89,7 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    blocks +
+    contents_dependencies +
     children +
     [website.config_default_content_security_policy]
   end

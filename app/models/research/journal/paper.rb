@@ -47,7 +47,7 @@ class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
   include WithBlobs
-  include WithBlocks
+  include Contentful
   include WithCitations
   include WithGitFiles
   include WithPermalink
@@ -93,7 +93,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    blocks +
+    contents_dependencies +
     people.map(&:researcher)
   end
 
