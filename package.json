@@ -5,6 +5,7 @@
     "codemirror": "5",
     "cropperjs": "^1.5.12",
     "jquery-cropper": "^1.0.1",
+    "leaflet": "^1.9.4",
     "notyf": "^3.10.0",
     "slug": "^5.1.0",
     "sortablejs": "^1.14.0",
