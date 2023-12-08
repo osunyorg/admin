@@ -38,13 +38,6 @@ module Backlinkable
   end
 
   def backlinks_blocks(website)
-    case self.class.to_s
-    when 'University::Organization'
-      website.blocks.organizations
-    when 'University::Person'
-      website.blocks.persons
-    else
-      raise "#{self.class} should map to the correct kind of blocks"
-    end
+    raise NotImplementedError
   end
 end
