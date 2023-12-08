@@ -1,0 +1,65 @@
+<% content_for :title, "Gestion des versions" %>
+
+<p><%= @websites.in_production.count %> en production</p>
+
+<%= render  'admin/application/filters',
+            current_path: manage_versions_server_websites_path,
+            filters: @filters if @filters.any? %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %> table-hover">
+    <thead>
+      <tr>
+        <th><%= Communication::Website.human_attribute_name('name') %></th>
+        <th><%= University.model_name.human %></th>
+        <th colspan="2">Référentiel Git</th>
+        <th>Version</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @websites.ordered.each do |website| %>
+        <tr id="website-<%= website.id %>">
+          <td>
+            <%= link_to website.name, server_website_path(website) %>
+            <% if website.in_production %>
+              <span class="badge bg-success">Prod</span>
+            <% end %>
+          </td>
+          <td><%= link_to website.university,
+                          [:server, website.university] %></td>
+          <td><%= link_to 'Référentiel',
+                          website.repository_url,
+                          target: :_blank,
+                          class: 'btn btn-xs btn-light' if website.repository.present? %></td>
+          <td><%= image_tag website.deployment_status_badge,
+                            alt: '' if website.deployment_status_badge.present? %></td>
+          <td>
+            <span class="js-version">
+              <%= website.theme_version %>
+            </span>
+          </td>
+          <td>
+            <%= link_to t('server_admin.websites.buttons.theme.sync'),
+                        sync_theme_version_server_website_path(website),
+                        method: :post,
+                        remote: true,
+                        class: button_classes if website.url.present? && website.theme_version_url.present? %>
+            <%= link_to t('server_admin.websites.buttons.theme.update'),
+                        update_theme_server_website_path(website),
+                        method: :post,
+                        remote: true,
+                        class: button_classes if website.url.present? && website.github? %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% content_for :action_bar_left do %>
+  <%= link_to "Tout mettre à jour",
+              update_all_themes_server_websites_path(current_scopes),
+              method: :post,
+              class: button_classes %>
+<% end %>

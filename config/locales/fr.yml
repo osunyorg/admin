@@ -273,7 +273,7 @@ fr:
         text_line_3_html: "Nombre de lignes traitées : %{number}."
         text_error_msg: "Ligne %{line} : %{error}"
         text_errors_title: "Des erreurs sont survenues :"
-      low_sms_credits: 
+      low_sms_credits:
         body_1_html: "Attention, vos crédits SMS sont bas : %{credits} crédits restants !"
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
         subject: "Osuny - Credits SMS bas (%{credits})"
@@ -330,8 +330,10 @@ fr:
     websites:
       buttons:
         theme:
-          sync: Sync
-          update: Mettre à jour
+          sync: Synchroniser la version
+          update: Mettre à jour le thème
+      sync_theme_version_notice: La version du thème de %{website} a été synchronisée
+      update_all_themes_notice: Tous les thèmes vont être mis à jour. Cela peut prendre quelques minutes.
       update_theme_notice: Le thème de %{website} va être mis à jour dans quelques instants
   seo: SEO
   simple_form:
