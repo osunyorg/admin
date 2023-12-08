@@ -21,7 +21,12 @@ class Admin::UsersController < Admin::ApplicationController
 
   def favorite
     operation = params[:operation]
-    about = PolymorphicObjectFinder.find(params, :about, current_university, only: User::Favorite.permitted_about_types)
+    about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university,
+      only: User::Favorite.permitted_about_types
+    )
     if operation == 'add'
       current_user.add_favorite(about)
     else
