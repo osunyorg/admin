@@ -6,29 +6,21 @@
 
 Rails.application.configure do
 
-  style_urls = %w[
-  ]
-  img_urls = %w[
-  ]
-  script_urls = %w[
+  style_urls = %w()
+  img_urls = %w()
+  script_urls = %w(
     https://example.osuny.org/js/
     https://plausible.io
     https//d2wy8f7a9ursnm.cloudfront.net/v7/
-  ]
+  )
   script_urls << "https://cdn.jsdelivr.net/npm/summernote@#{SummernoteRails::Rails::VERSION.split('.').take(3).join('.')}/dist/lang/"
   
-  font_urls = %w[
-  ]
-  media_urls = %w[
-  ]
-  frame_urls = %w[
-  ]
-  child_urls = %w[
-  ]
-  connect_urls = %w[
-  ]
-  form_action_urls = %w[
-  ]
+  font_urls = %w()
+  media_urls = %w()
+  frame_urls = %w()
+  child_urls = %w()
+  connect_urls = %w()
+  form_action_urls = %w()
 
   defaults = %i[self https]
 
@@ -43,7 +35,7 @@ Rails.application.configure do
     policy.object_src  :none
     # We specify :unsafe_inline for browsers which not support nonce.
     # Unsafe eval is required for Vue scripts
-    policy.script_src  :self, :unsafe_inline, :unsafe_eval, *script_urls
+    policy.script_src  :self, :unsafe_eval, *script_urls
     policy.style_src   :self, :unsafe_inline, *style_urls
     # If you are using webpack-dev-server then specify webpack-dev-server host
     # policy.connect_src :self, :https, "http://localhost:3035", "ws://localhost:3035" if Rails.env.development?
