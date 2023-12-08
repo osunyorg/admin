@@ -75,7 +75,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
 
   scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
-  scope :future_or_current, -> { where('from_day <= :today', today: Date.today).ordered_asc }
+  scope :future_or_current, -> { where('from_day >= :today', today: Date.today).ordered_asc }
   scope :current, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
   scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
   scope :past, -> { archive }

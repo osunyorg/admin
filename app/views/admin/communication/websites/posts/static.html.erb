@@ -14,10 +14,6 @@ authors:
   - "<%= @about.translated_author.slug %>"
 <% end %>
 <% if @about.categories.any? %>
-categories:
-<% @about.categories.each do |category| %>
-  - "<%= category.slug_with_ancestors_slugs %>"
-<% end %>
 posts_categories:
 <% @about.categories.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
