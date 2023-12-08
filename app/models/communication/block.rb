@@ -103,7 +103,7 @@ class Communication::Block < ApplicationRecord
   before_validation :set_university_and_website_from_about, on: :create
 
   def self.permitted_about_types
-    ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithBlocks) }.map(&:name)
+    ApplicationRecord.model_names_with_concern(WithBlocks)
   end
 
   # When we set data from json, we pass it to the template.

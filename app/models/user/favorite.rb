@@ -23,6 +23,6 @@ class User::Favorite < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   def self.permitted_about_types
-    ApplicationRecord.descendants.select { |model| model.included_modules.include?(Favoritable) }.map(&:name)
+    ApplicationRecord.model_names_with_concern(Favoritable)
   end
 end

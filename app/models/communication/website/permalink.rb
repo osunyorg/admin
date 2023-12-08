@@ -105,7 +105,7 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def self.permitted_about_types
-    ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithPermalink) }.map(&:name)
+    ApplicationRecord.model_names_with_concern(WithPermalink)
   end
 
   def pattern
