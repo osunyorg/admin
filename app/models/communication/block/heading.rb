@@ -52,7 +52,7 @@ class Communication::Block::Heading < ApplicationRecord
   before_validation :compute_level
 
   def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(WithBlocks)
+    ApplicationRecord.model_names_with_concern(Contentful)
   end
 
   def references
