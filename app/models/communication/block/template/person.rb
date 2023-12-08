@@ -14,8 +14,12 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
     end
     @elements
   end
+
+  def people
+    @people ||= elements.collect(&:person).compact.uniq
+  end
   
   def children
-    elements
+    people
   end
 end

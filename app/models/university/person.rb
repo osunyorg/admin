@@ -232,6 +232,10 @@ class University::Person < ApplicationRecord
 
   protected
 
+  def backlinks_blocks(website)
+    website.blocks.persons
+  end
+
   def explicit_blob_ids
     [picture&.blob_id]
   end

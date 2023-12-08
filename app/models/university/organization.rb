@@ -130,6 +130,10 @@ class University::Organization < ApplicationRecord
 
   protected
 
+  def backlinks_blocks(website)
+    website.blocks.organizations
+  end
+
   def explicit_blob_ids
     [
       logo&.blob_id,

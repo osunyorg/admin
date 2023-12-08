@@ -26,14 +26,18 @@ module Backlinkable
   protected
 
   def backlinks(kind, website)
-    connections
-      .where(
-        direct_source_type: kind.to_s,
-        website_id: website.id
-      )
-      .collect(&:direct_source)
-      .compact
-      .select { |source| source.published? }
-      .select { |source| source.language == language }
+    backlinks_blocks(website).published.map { |block|
+      block.about if backlink_in_block?(block, kind)
+    }.compact
+  end
+
+  def backlink_in_block?(block, kind)
+    block.about.is_a?(kind) && # Correct kind
+    self.in?(block.template.children) && # Mentioning self
+    block.about.published? # About published
+  end
+
+  def backlinks_blocks(website)
+    raise NotImplementedError
   end
 end
