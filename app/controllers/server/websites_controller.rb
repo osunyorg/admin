@@ -19,7 +19,6 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def update_all_themes
-    load_filters
     @websites.find_each do |website|
       website.clean_and_rebuild
     end
