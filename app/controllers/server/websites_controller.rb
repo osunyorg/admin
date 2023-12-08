@@ -22,6 +22,7 @@ class Server::WebsitesController < Server::ApplicationController
     @websites.find_each do |website|
       website.clean_and_rebuild
     end
+    redirect_back(fallback_location: manage_versions_server_websites_path, notice: t('server_admin.websites.update_all_themes_notice'))
   end
 
   def sync_theme_version
