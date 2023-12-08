@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_132952) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_08_123041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -106,8 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_132952) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -118,12 +118,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_132952) do
   create_table "communication_extranet_connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "extranet_id", null: false
-    t.string "object_type"
-    t.uuid "object_id"
+    t.string "about_type"
+    t.uuid "about_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_communication_extranet_connections_on_object"
     t.index ["extranet_id"], name: "index_communication_extranet_connections_on_extranet_id"
-    t.index ["object_type", "object_id"], name: "index_communication_extranet_connections_on_object"
     t.index ["university_id"], name: "index_communication_extranet_connections_on_university_id"
   end
 
@@ -229,7 +229,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_132952) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
-    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -393,7 +392,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_132952) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
