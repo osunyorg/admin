@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: communication_website_categories
+# Table name: communication_website_post_categories
 #
 #  id                       :uuid             not null, primary key
 #  featured_image_alt       :string
@@ -24,18 +24,18 @@
 # Indexes
 #
 #  idx_communication_website_post_cats_on_communication_website_id  (communication_website_id)
-#  index_communication_website_categories_on_language_id            (language_id)
-#  index_communication_website_categories_on_original_id            (original_id)
-#  index_communication_website_categories_on_parent_id              (parent_id)
-#  index_communication_website_categories_on_program_id             (program_id)
-#  index_communication_website_categories_on_slug                   (slug)
-#  index_communication_website_categories_on_university_id          (university_id)
+#  index_communication_website_post_categories_on_language_id       (language_id)
+#  index_communication_website_post_categories_on_original_id       (original_id)
+#  index_communication_website_post_categories_on_parent_id         (parent_id)
+#  index_communication_website_post_categories_on_program_id        (program_id)
+#  index_communication_website_post_categories_on_slug              (slug)
+#  index_communication_website_post_categories_on_university_id     (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_3186d8e327  (language_id => languages.id)
-#  fk_rails_52bd5968c9  (original_id => communication_website_categories.id)
-#  fk_rails_86a9ce3cea  (parent_id => communication_website_categories.id)
+#  fk_rails_52bd5968c9  (original_id => communication_website_post_categories.id)
+#  fk_rails_86a9ce3cea  (parent_id => communication_website_post_categories.id)
 #  fk_rails_9d4210dc43  (university_id => universities.id)
 #  fk_rails_c7c9f7ddc7  (communication_website_id => communication_websites.id)
 #  fk_rails_e58348b119  (program_id => education_programs.id)
