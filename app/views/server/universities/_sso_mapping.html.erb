@@ -74,7 +74,7 @@ end
 
 </div>
 
-<script nonce=<%= request.content_security_policy_nonce %>>
+<script nonce="<%= request.content_security_policy_nonce %>">
   var app = Vue.createApp({
     components: {
       draggable: VueDraggableNext.VueDraggableNext,

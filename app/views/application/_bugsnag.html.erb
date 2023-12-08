@@ -1,6 +1,6 @@
 <% unless Rails.env.development? %>
   <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
-  <script type="text/javascript" nonce=<%= request.content_security_policy_nonce %>>
+  <script type="text/javascript" nonce="<%= request.content_security_policy_nonce %>">
     Bugsnag.start({
       apiKey: "<%= j ENV['BUGSNAG_JAVASCRIPT_KEY'] %>",
       releaseStage: "<%= j ENV['APPLICATION_ENV'] %>"

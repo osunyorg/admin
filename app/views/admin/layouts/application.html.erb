@@ -6,7 +6,7 @@
     <title><%= content_for?(:title) ? raw("#{yield(:title)} ∙ Osuny") : 'Osuny' %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <script nonce=<%= request.content_security_policy_nonce %>>
+    <script nonce="<%= request.content_security_policy_nonce %>">
     // Avoid opening menu on load
     </script>
     <%= stylesheet_link_tag "admin/#{current_admin_theme}", media: 'all' %>
