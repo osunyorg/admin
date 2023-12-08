@@ -1,4 +1,5 @@
 class Server::WebsitesController < Server::ApplicationController
+  before_action :load_websites, only: [:index, :manage_versions, :update_all_themes]
   before_action :load_website, except: [:index, :manage_versions, :update_all_themes]
 
   has_scope :for_theme_version
@@ -8,20 +9,17 @@ class Server::WebsitesController < Server::ApplicationController
   has_scope :for_updatable_theme
 
   def index
-    @websites = apply_scopes(Communication::Website.all).ordered
     breadcrumb
   end
 
   def manage_versions
     load_filters
-    @websites = apply_scopes(Communication::Website.all).ordered
     breadcrumb
     add_breadcrumb "Gestion des versions"
   end
 
   def update_all_themes
     load_filters
-    @websites = apply_scopes(Communication::Website.all).ordered
     @websites.find_each do |website|
       website.clean_and_rebuild
     end
@@ -51,6 +49,10 @@ class Server::WebsitesController < Server::ApplicationController
   def breadcrumb
     super
     add_breadcrumb Communication::Website.model_name.human(count: 2), server_websites_path
+  end
+
+  def load_websites
+    @websites = apply_scopes(Communication::Website.all).ordered
   end
 
   def load_website
