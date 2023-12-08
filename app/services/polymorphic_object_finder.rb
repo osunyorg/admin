@@ -10,7 +10,7 @@ class PolymorphicObjectFinder
   def self.find(params, key:, university:, only: [])
     key_id = "#{key}_id".to_sym
     key_type = "#{key}_type".to_sym
-    model_name = self.find_model_name(params, key_type, only)
+    model_name = self.safe_model_name(params, key_type, only)
     return if model_name.nil?
 
     model = model_name.constantize
@@ -20,12 +20,10 @@ class PolymorphicObjectFinder
 
   private
 
-  def self.find_model_name(params, key_type, only)
-    if only.any?
-      # Whitelist user input
-      only.detect { |item| item == params[key_type] }
-    else
-      params[key_type]
-    end
+  # Whitelist user input
+  def self.safe_model_name(params, key_type, only)
+    only.detect { |item|
+      item == params[key_type]
+    }
   end
 end
