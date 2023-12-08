@@ -34,9 +34,9 @@
 #
 class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
+  include Contentful
   include Sanitizable
   include WithBlobs
-  include WithBlocks
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink

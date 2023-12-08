@@ -25,8 +25,8 @@
 #
 class Education::Diploma < ApplicationRecord
   include AsIndirectObject
+  include Contentful
   include Sanitizable
-  include WithBlocks
   include WithGitFiles
   include WithPermalink
   include WithSlug
