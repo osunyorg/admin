@@ -2,6 +2,10 @@ namespace :server do
   resources :universities
   resources :languages
   resources :websites do
+    collection do
+      get :manage_versions
+      post :update_all_themes
+    end
     member do
       post :sync_theme_version
       post :update_theme
