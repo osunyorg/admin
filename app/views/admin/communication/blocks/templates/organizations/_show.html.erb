@@ -25,14 +25,8 @@
       <% if block.template.layout == "grid" %>
         <div class="organizations grid">
       <% else # Map %>
+        <% content_for :leaflet_required, true %>
         <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
-          <link   rel="stylesheet"
-                  href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-                  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-                  crossorigin=""/>
-          <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-                  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-                  crossorigin=""></script>
       <% end %>
         <% block.template.elements.each do |element| %>
           <article  class="organization"
