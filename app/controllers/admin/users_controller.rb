@@ -21,8 +21,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def favorite
     operation = params[:operation]
-    favoritable_model_names = ApplicationRecord.descendants.select { |model| model.included_modules.include?(Favoritable) }.map(&:name)
-    about = PolymorphicObjectFinder.find(params, :about, current_university, whitelist: favoritable_model_names)
+    about = PolymorphicObjectFinder.find(params, :about, current_university, only: User::Favorite.permitted_about_types)
     if operation == 'add'
       current_user.add_favorite(about)
     else

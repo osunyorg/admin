@@ -53,6 +53,6 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
   protected
 
   def load_object
-    @object = PolymorphicObjectFinder.find(params, :object, current_university, whitelist: Communication::Extranet::Connection.connectable_model_names)
+    @object = PolymorphicObjectFinder.find(params, :object, current_university, only: Communication::Extranet::Connection.permitted_object_types)
   end
 end

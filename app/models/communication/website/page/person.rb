@@ -56,8 +56,8 @@ class Communication::Website::Page::Person < Communication::Website::Page
     University::Person.where(id: ids)
   end
 
-  def connectable_model_names
-    ["University::Person"]
+  def self.direct_connection_permitted_about_type
+    "University::Person"
   end
 
   protected

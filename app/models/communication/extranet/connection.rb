@@ -26,7 +26,7 @@ class Communication::Extranet::Connection < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :object, polymorphic: true
 
-  def self.connectable_model_names
+  def self.permitted_object_types
     ["University::Organization", "University::Person"]
   end
 end

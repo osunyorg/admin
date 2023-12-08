@@ -51,6 +51,10 @@ class Communication::Block::Heading < ApplicationRecord
 
   before_validation :compute_level
 
+  def self.permitted_about_types
+    ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithBlocks) }.map(&:name)
+  end
+
   def references
     [about]
   end

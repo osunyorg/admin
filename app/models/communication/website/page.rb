@@ -142,8 +142,8 @@ class Communication::Website::Page < ApplicationRecord
               .where.not(id: id)
   end
 
-  def connectable_model_names
-    []
+  def self.direct_connection_permitted_about_type
+    nil
   end
 
   protected

@@ -104,6 +104,10 @@ class Communication::Website::Permalink < ApplicationRecord
     clean_path
   end
 
+  def self.permitted_about_types
+    ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithPermalink) }.map(&:name)
+  end
+
   def pattern
     language = about.respond_to?(:language) ? about.language : website.default_language
     self.class.pattern_in_website(website, language)

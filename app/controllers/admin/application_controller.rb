@@ -38,10 +38,6 @@ class Admin::ApplicationController < ApplicationController
     # If the block doesn't exist anymore
   end
 
-  def model_names_with_blocks
-    @model_names_with_blocks ||= ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithBlocks) }.map(&:name)
-  end
-
   private
 
   def redirect_if_context_is_not_an_university!

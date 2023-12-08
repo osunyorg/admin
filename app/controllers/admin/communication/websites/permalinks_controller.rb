@@ -2,8 +2,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
 
   def create
     @path = params['communication_website_permalink']['path']
-    model_names_with_permalinks = ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithPermalink) }.map(&:name)
-    @about = PolymorphicObjectFinder.find(params, :about, current_university, whitelist: model_names_with_permalinks)
+    @about = PolymorphicObjectFinder.find(params, :about, current_university, only: Communication::Website::Permalink.permitted_about_types)
     @permalink = @about.add_redirection(@path)
   end
 end

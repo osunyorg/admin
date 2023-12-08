@@ -102,6 +102,10 @@ class Communication::Block < ApplicationRecord
   before_save :attach_template_blobs
   before_validation :set_university_and_website_from_about, on: :create
 
+  def self.permitted_about_types
+    ApplicationRecord.descendants.select { |model| model.included_modules.include?(WithBlocks) }.map(&:name)
+  end
+
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
   def data=(value)

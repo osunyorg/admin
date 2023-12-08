@@ -57,8 +57,8 @@ class Communication::Website::Page::Organization < Communication::Website::Page
     University::Organization.where(id: ids)
   end
 
-  def connectable_model_names
-    ["University::Organization"]
+  def self.direct_connection_permitted_about_type
+    "University::Organization"
   end
 
   protected
