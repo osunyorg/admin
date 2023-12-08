@@ -1,4 +1,5 @@
 /*global $, jQuery */
+/* This allow ujs requests to automatically inject nonce */
 $(function () {
     'use strict';
     $.ajaxSetup({
