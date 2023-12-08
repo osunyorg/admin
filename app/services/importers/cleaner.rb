@@ -9,6 +9,7 @@ module Importers
     end
 
     def self.clean_string(string)
+      string = string.to_s
       string = string.gsub('&nbsp;', ' ')
       string = string.gsub('&amp;', '&')
       string = ActionView::Base.full_sanitizer.sanitize string
