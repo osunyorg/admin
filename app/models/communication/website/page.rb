@@ -48,11 +48,11 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path)
 
   include AsDirectObject
+  include Contentful
   include Sanitizable
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs
-  include WithBlocks
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
@@ -103,7 +103,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def dependencies
-    calculated_dependencies = active_storage_blobs + blocks
+    calculated_dependencies = active_storage_blobs + contents_dependencies
     calculated_dependencies += [website.config_default_content_security_policy]
     # children are used only if there is no block to display
     calculated_dependencies += children unless blocks.published.any?
@@ -140,6 +140,12 @@ class Communication::Website::Page < ApplicationRecord
     self.class.unscoped
               .where(parent: parent, university: university, website: website)
               .where.not(id: id)
+  end
+
+  # Some special pages can override this method to allow explicit direct connections
+  # Example: The Communication::Website::Page::Person special page allows to connect University::Person records directly.
+  def self.direct_connection_permitted_about_type
+    nil
   end
 
   protected

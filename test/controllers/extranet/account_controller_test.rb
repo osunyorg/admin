@@ -22,6 +22,6 @@ class Extranet::AccountControllerTest < ActionDispatch::IntegrationTest
 
   def test_update_password
     patch account_path, params: { user: { password: "NewPassw0rd!" } }
-    assert_redirected_to(account_path)
+    assert_response(:unprocessable_entity)
   end
 end

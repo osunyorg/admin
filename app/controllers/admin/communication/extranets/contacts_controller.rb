@@ -53,8 +53,11 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
   protected
 
   def load_object
-    object_type = params[:objectType]
-    object_id = params[:objectId]
-    @object = object_type.constantize.find object_id
+    @object = PolymorphicObjectFinder.find(
+      params,
+      key: :object,
+      university: current_university,
+      only: Communication::Extranet::Connection.permitted_about_types
+    )
   end
 end

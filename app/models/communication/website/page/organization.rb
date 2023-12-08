@@ -57,6 +57,10 @@ class Communication::Website::Page::Organization < Communication::Website::Page
     University::Organization.where(id: ids)
   end
 
+  def self.direct_connection_permitted_about_type
+    "University::Organization"
+  end
+
   protected
 
   def current_git_path

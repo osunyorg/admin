@@ -56,9 +56,9 @@
 class University::Person < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
+  include Contentful
   include Sanitizable
   include WithBlobs
-  include WithBlocks
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter
   include WithRoles
@@ -197,7 +197,7 @@ class University::Person < ApplicationRecord
   end
 
   def dependencies
-    blocks +
+    contents_dependencies +
     active_storage_blobs
   end
 

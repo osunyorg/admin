@@ -13,8 +13,12 @@ class Admin::Communication::ContentsController < Admin::Communication::Applicati
   protected
 
   def load_about
-    @about = PolymorphicObjectFinder.find(params, :about)
-    raise_403_unless @about.university == current_university
+    @about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university,
+      only: Communication::Block.permitted_about_types
+    )
     raise_403_unless can?(:edit, @about)
   end
 end

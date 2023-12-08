@@ -1,9 +1,15 @@
 <% content_for :title, "#{@websites.count} #{Communication::Website.model_name.human(count: @websites.count).downcase}" %>
 
-<p><%= Communication::Website.in_production.count %> en production</p>
+<p><%= @websites.in_production.count %> en production</p>
 
 <%= render  'admin/application/filters',
             current_path: server_websites_path,
             filters: @filters if @filters.any? %>
 
 <%= render 'server/websites/list', websites: @websites %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to "Gestion des versions",
+              manage_versions_server_websites_path,
+              class: button_classes %>
+<% end %>
