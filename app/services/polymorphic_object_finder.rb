@@ -6,7 +6,7 @@ class PolymorphicObjectFinder
     key_id = "#{key}_id".to_sym
     key_type = "#{key}_type".to_sym
     model_name = only.any? ? only.detect { |item| item == params[key_type] } : params[key_type]
-    return unless model_name.nil?
+    return if model_name.nil?
     model = model.constantize
     id = params[key_id]
     model.where(university: university).find(id)
