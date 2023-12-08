@@ -157,7 +157,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
 <%# Include vue.js before call Vue.createApp %>
 <%= javascript_include_tag 'vue' %>
 
-<script>
+<script nonce=<%= request.content_security_policy_nonce %>>
   var app = Vue.createApp({
     data() {
       return {

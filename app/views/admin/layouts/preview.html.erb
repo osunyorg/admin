@@ -18,6 +18,10 @@
       padding-top: 0;
     }
     </style>
+    <% if content_for?(:leaflet_required) %>
+      <%= stylesheet_link_tag 'leaflet', media: 'all' %>
+      <%= javascript_include_tag 'leaflet' %>%
+    <% end %>
   </head>
   <body class="full-width">
     <header class="hero <%= 'hero--with-image hero--image-square' if yield(:image).present? %>">
@@ -40,4 +44,5 @@
     </main>
   </body>
   <script src="https://example.osuny.org/js/preview.js"></script>
+  
 </html>
