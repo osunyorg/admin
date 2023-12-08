@@ -1,4 +1,4 @@
-module WithBlocks
+module Contentful
   extend ActiveSupport::Concern
 
   included do
@@ -22,6 +22,10 @@ module WithBlocks
 
   def contents_full_text
     @contents_full_text ||= contents.collect(&:full_text).join("\r")
+  end
+
+  def contents_dependencies
+    blocks + headings
   end
 
   # Basic rule is: TOC if 2 titles or more

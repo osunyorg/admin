@@ -34,9 +34,9 @@
 #  fk_rails_86cc935add  (author_id => university_people.id)
 #
 class Communication::Extranet::Post < ApplicationRecord
+  include Contentful
   include Sanitizable
   include WithAccessibility
-  include WithBlocks
   include WithFeaturedImage
   include WithPublication
   include WithPermalink
