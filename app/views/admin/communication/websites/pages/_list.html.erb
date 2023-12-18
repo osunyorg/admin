@@ -19,9 +19,7 @@
             <% end %>
           </td>
           <td>
-            <% if page.featured_image.attached? %>
-              <%= kamifusen_tag page.featured_image, width: 100 %>
-            <% end %>
+            <%= kamifusen_tag page.featured_image, width: 100 if page.featured_image.attached? %>
           </td>
           <td class="small">
             <% if page.is_special_page? %>

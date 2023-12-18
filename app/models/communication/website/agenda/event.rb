@@ -42,10 +42,10 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
+  include Contentful
   include Sanitizable
   include WithAccessibility
   include WithBlobs
-  include WithBlocks
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
@@ -60,10 +60,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               optional: true
 
   has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Category',
+                          class_name: 'Communication::Website::Agenda::Category',
                           join_table: :communication_website_agenda_events_categories,
                           foreign_key: :communication_website_agenda_event_id,
-                          association_foreign_key: :communication_website_category_id
+                          association_foreign_key: :communication_website_agenda_category_id
 
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
@@ -72,9 +72,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
 
+  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
+
   scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
-  scope :future_or_present, -> { where('from_day >= :today', today: Date.today).ordered_asc }
-  scope :present, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
+  scope :future_or_current, -> { where('from_day >= :today', today: Date.today).ordered_asc }
+  scope :current, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
   scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
   scope :past, -> { archive }
 
@@ -82,14 +84,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
 
   STATUS_FUTURE = 'future'
-  STATUS_PRESENT = 'present'
+  STATUS_CURRENT = 'current'
   STATUS_ARCHIVE = 'archive'
 
   def status
     if future?
       STATUS_FUTURE
-    elsif present?
-      STATUS_PRESENT
+    elsif current?
+      STATUS_CURRENT
     else
       STATUS_ARCHIVE
     end
@@ -99,13 +101,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     from_day > Date.today
   end
 
-  def present?
+  def current?
     to_day.present? ? (Date.today >= from_day && Date.today <= to_day)
-                    : from_day == Date.today
+                    : from_day <= Date.today # Les événements sans date de fin restent actifs
   end
 
   def archive?
-    status == STATUS_ARCHIVE
+    to_day.present? ? to_day < Date.today
+                    : false # Les événements sans date de fin restent actifs
   end
 
   # Un événement demain aura une distance de 1, comme un événement hier
@@ -128,7 +131,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    blocks
+    contents_dependencies +
+    [website.config_default_content_security_policy]
   end
 
   def references
@@ -149,6 +153,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
 
   def to_day_after_from_day
     errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day

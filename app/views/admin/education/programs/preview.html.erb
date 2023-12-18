@@ -1,9 +1,9 @@
 <% content_for :title, @program.name %>
 <% content_for :image, kamifusen_tag(@program.best_featured_image) if @program.best_featured_image.attached? %>
 <div class="container">
-  <p class="lead" itemprop="abstract">
-    <%= @program.presentation %>
-  </p>
+  <div class="lead" itemprop="abstract">
+    <%= sanitize @program.presentation %>
+  </div>
 </div>
 <section id="presentation">
   <div class="container">
@@ -13,7 +13,7 @@
       </div>
       <div>
         <div class="subpart">
-          <%= @program.objectives %>
+          <%= sanitize @program.objectives %>
         </div>
         <div class="subpart">
           <h3>Informations administratives</h3>
@@ -21,7 +21,7 @@
             <table class="<%= table_classes %> table-infos">
               <caption>Informations administratives</caption>
               <tbody>
-                <% if @program.diploma%>
+                <% if @program.diploma %>
                   <tr>
                     <th>Crédits ECTS</th>
                     <td><%= @program.diploma.ects %></td>
@@ -49,7 +49,7 @@
 </section>
 
 <div class="blocks">
-  <%= render 'admin/communication/blocks/content/show', about: @program %>
+  <%= render 'admin/communication/blocks/content/show', about: @program, strip_javascript: true %>
 </div>
 
 <section id="pedagogy">
@@ -61,15 +61,15 @@
       <div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('content') %></h3>
-          <%= @program.content %>
+          <%= sanitize @program.content %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('pedagogy') %></h3>
-          <%= @program.pedagogy %>
+          <%= sanitize @program.pedagogy %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('evaluation') %></h3>
-          <%= @program.evaluation %>
+          <%= sanitize @program.evaluation %>
         </div>
         <div class="subpart">
           <h3>Enseignants·es</h3>
@@ -101,9 +101,9 @@
     <div>
     <div class="subpart">
       <h3><%= Education::Program.human_attribute_name('opportunities') %></h3>
-      <%= @program.opportunities %>
+      <%= sanitize @program.opportunities %>
       <h3><%= Education::Program.human_attribute_name('results') %></h3>
-      <%= @program.results %>
+      <%= sanitize @program.results %>
     </div>
   </div>
 </section>
@@ -117,23 +117,23 @@
       <div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('prerequisites') %></h3>
-          <%= @program.prerequisites %>
+          <%= sanitize @program.prerequisites %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('pricing') %></h3>
-          <%= @program.pricing %>
+          <%= sanitize @program.pricing %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('registration') %></h3>
-          <%= @program.registration %>
+          <%= sanitize @program.registration %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('accessibility') %></h3>
-          <%= @program.accessibility %>
+          <%= sanitize @program.accessibility %>
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('other') %></h3>
-          <%= @program.other %>
+          <%= sanitize @program.other %>
         </div>
         <div class="subpart">
           <h3>Rôles</h3>
@@ -149,7 +149,7 @@
         </div>
         <div class="subpart">
           <h3><%= Education::Program.human_attribute_name('contacts') %></h3>
-          <%= @program.contacts %>
+          <%= sanitize @program.contacts %>
         </div>
       </div>
     </div>

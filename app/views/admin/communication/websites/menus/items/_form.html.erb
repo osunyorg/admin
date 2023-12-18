@@ -54,7 +54,7 @@
             elsif item.kind_program?
               about_collection = collection_tree @website.education_programs
             elsif item.kind_category?
-              about_collection = collection_tree @website.categories.for_language(current_website_language)
+              about_collection = collection_tree @website.post_categories.for_language(current_website_language)
             elsif item.kind_post?
               about_collection = collection @website.posts.for_language(current_website_language)
             elsif item.kind_volume?

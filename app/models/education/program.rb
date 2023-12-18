@@ -53,11 +53,11 @@
 class Education::Program < ApplicationRecord
   include Aboutable
   include AsIndirectObject
+  include Contentful
   include Sanitizable
   include WithAccessibility
   include WithAlumni
   include WithBlobs
-  include WithBlocks
   include WithDiploma
   include WithFeaturedImage
   include WithGitFiles
@@ -146,7 +146,7 @@ class Education::Program < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    blocks +
+    contents_dependencies +
     university_people_through_involvements.map(&:teacher) +
     university_people_through_role_involvements.map(&:administrator) +
     [diploma]
@@ -199,6 +199,10 @@ class Education::Program < ApplicationRecord
   end
 
   protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
 
   def last_ordered_element
     university.education_programs.where(parent_id: parent_id).ordered.last

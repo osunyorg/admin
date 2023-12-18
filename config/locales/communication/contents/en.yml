@@ -19,12 +19,9 @@ en:
             label: Utility blocks
             description: Purely practical and technical features
         components:
-          text:
-            label: Text
-            placeholder: Enter text
-            transcription:
-              label: Text transcript
-              placeholder: Enter text transcript
+          code:
+            preview:
+              sanitized_notice: For security reasons, the content has been filtered. Scripts will not be loaded and/or executed, and the apparence may be altered.
           file:
             input:
               label: File
@@ -39,8 +36,17 @@ en:
             credit:
               label: Credit
               placeholder: Enter credit
+          layouts:
+            button: Choose the layout
+            label: Layout
           link:
-              target_blank: Open in new window
+            target_blank: Open in new window
+          text:
+            label: Text
+            placeholder: Enter text
+            transcription:
+              label: Text transcript
+              placeholder: Enter text transcript
           time_slot:
             from: From
             to: to
@@ -63,17 +69,40 @@ en:
                 label: Grand
                 description: Each event is presented in majesty, across the full width available, with a large image.
             edit:
+              add_event: Add an event
+              category_id:
+                label: Category
+                placeholder: Select a category
               description:
                 label: Description
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose event
+              mode:
+                label: Which events should be presented?
+                options:
+                  all: All events, regardless of category
+                  category: A specific category of events
+                  selection: A selection of events
+                  categories: A list of all events' categories
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
+              show:
+                label: Display settings
+              show_category:
+                label: Show events' categories
+              show_summary:
+                label: Show events' summaries
+              show_status:
+                label: Show events' status (current, future...)
               time:
-                label: Which events?
+                label: What event dates should be displayed?
                 options:
-                  future_or_present: Now and in the future
+                  future_or_current: Now and in the future
                   future: In the future, not started yet
-                  present: Running now
+                  current: Running now
                   archive: Past, archives
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
@@ -353,6 +382,9 @@ en:
               alternate:
                 label: Alternate
                 description: Pages either on the left or on the right, composing a graphically light layout.
+              large:
+                label: Grand
+                description: Each page is presented in majesty, across the full width available, with a large image.
             edit:
               mode:
                 label: List kind
@@ -414,6 +446,9 @@ en:
               alternate:
                 label: Alternate
                 description: Posts either on the left or on the right, composing a graphically light page.
+              large:
+                label: Grand
+                description: Each post is presented in majesty, across the full width available, with a large image.
             edit:
               add_post: Add post
               mode:
@@ -422,6 +457,7 @@ en:
                   all: All posts
                   category: A specific category
                   selection: A selection of posts
+                  categories: A list of all posts' categories
               posts_quantity:
                 label: Quantity
                 placeholder: Enter quantity
@@ -500,6 +536,8 @@ en:
                 placeholder: Enter video title
       contents:
         blocks:
+          copy: Copy block
+          paste: Paste block
           quantity:
             zero: No block
             one: 1 block

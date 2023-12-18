@@ -10,7 +10,8 @@ module Communication::Website::WithConnectedObjects
   def clean_and_rebuild
     pages.find_each(&:connect_dependencies)
     posts.find_each(&:connect_dependencies)
-    categories.find_each(&:connect_dependencies)
+    post_categories.find_each(&:connect_dependencies)
+    agenda_categories.find_each(&:connect_dependencies)
     menus.find_each(&:connect_dependencies)
     connect(about, self) if about.present?
     destroy_obsolete_connections
@@ -21,7 +22,7 @@ module Communication::Website::WithConnectedObjects
     destroy_obsolete_git_files_without_delay
     get_current_theme_version!
   end
-  handle_asynchronously :clean_and_rebuild, queue: :low_priority
+  handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
   # Appelé
   # - par un objet avec des connexions lorsqu'il est destroyed

@@ -25,10 +25,11 @@
 #
 class Communication::Website::Permalink < ApplicationRecord
   MAPPING = {
-    "Communication::Website::Category" => Communication::Website::Permalink::Category,
+    "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
     "Communication::Website::Page" => Communication::Website::Permalink::Page,
     "Communication::Website::Post" => Communication::Website::Permalink::Post,
     "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
+    "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
     "Education::Diploma" => Communication::Website::Permalink::Diploma,
     "Education::Program" => Communication::Website::Permalink::Program,
     "Research::Journal::Paper" => Communication::Website::Permalink::Paper,
@@ -103,6 +104,10 @@ class Communication::Website::Permalink < ApplicationRecord
     clean_path
   end
 
+  def self.permitted_about_types
+    ApplicationRecord.model_names_with_concern(WithPermalink)
+  end
+
   def pattern
     language = about.respond_to?(:language) ? about.language : website.default_language
     self.class.pattern_in_website(website, language)
@@ -154,6 +159,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Can be overwritten
   def published?
+    # TODO probleme si pas for_website?, par exemple pour les objets directs
     about.for_website?(website)
   end
 

@@ -31,10 +31,13 @@ fr:
       communication/website:
         one: Site Web
         other: Sites Web
+      communication/website/agenda/category:
+        one: Catégorie
+        other: Catégories
       communication/website/agenda/event:
         one: Événement
         other: Événements
-      communication/website/category:
+      communication/website/post/category:
         one: Catégorie
         other: Catégories
         all: Toutes les catégories
@@ -58,7 +61,7 @@ fr:
         all: Toutes les actualités
     attributes:
       communication/block:
-        title: Nom
+        title: Nom (facultatif)
         template: Type de bloc
         published: Publié ?
       communication/block/heading:
@@ -164,6 +167,11 @@ fr:
         social_youtube: "Youtube (privatif, appartient à Google)"
         university: Université
         url: URL
+      communication/website/agenda/category:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        slug: Slug
       communication/website/agenda/event:
         categories: Catégories
         dates: Dates
@@ -171,11 +179,14 @@ fr:
         from_day: Jour de début
         from_hour: Heure de début
         published: Publié
+        status_current: En cours
+        status_future: À venir
+        status_archive: Archive
         subtitle: Sous-titre
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
-      communication/website/category:
+      communication/website/post/category:
         children: Catégories enfants
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -255,13 +266,15 @@ fr:
               too_soon: doit être après l'heure de début
   admin:
     communication:
+      block:
+        copied: Le bloc a bien été copié dans le presse-papier.
       website:
         agenda:
           events:
-            none: Pas encore d'événements
             draft: Brouillon
+            none: Pas encore d'événements
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas. C'est aussi l'image de partage par défaut."
-        editorial: 
+        editorial:
           label: Éditorial
           description: Tout ce qui est lié au contenu
         technical:
@@ -290,7 +303,7 @@ fr:
           in: dans %{categories}
           pinned_status: Mise en avant
           published_on: Publiée le %{date}
-        publish: 
+        publish:
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
         redirects:
@@ -327,7 +340,7 @@ fr:
     website:
       analytics: Analytics
       git: Git
-      golive: 
+      golive:
         title: Mise en production
         button: Mettre en production
       hosting: Hébergement

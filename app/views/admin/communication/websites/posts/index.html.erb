@@ -39,10 +39,10 @@
       <% end %>
     </div>
   <% end %>
-  <%= render 'admin/communication/websites/categories/panel', root_categories: @root_categories %>
+  <%= render 'admin/communication/websites/posts/categories/panel', root_categories: @root_categories %>
   <% if @authors.any? %>
     <%= osuny_panel t('communication.authors', count: 2) do %>
-      <%= render 'admin/communication/websites/authors/list', authors: @authors %>
+      <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
       <% if @authors.total_pages > 1 %>
         <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
       <% end %>

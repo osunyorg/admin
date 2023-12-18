@@ -53,6 +53,7 @@
 class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
+  include Favoritable
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
@@ -114,8 +115,9 @@ class Communication::Website < ApplicationRecord
     configs +
     pages.where(language_id: language_ids) +
     posts.where(language_id: language_ids) +
+    post_categories.where(language_id: language_ids) +
     events.where(language_id: language_ids) +
-    categories.where(language_id: language_ids) +
+    agenda_categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
     [about] +
     [default_image&.blob]
@@ -143,7 +145,7 @@ class Communication::Website < ApplicationRecord
     end
     website.git_repository.sync!
   end
-  handle_asynchronously :sync_with_git, queue: 'default'
+  handle_asynchronously :sync_with_git, queue: :default
 
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
@@ -176,7 +178,7 @@ class Communication::Website < ApplicationRecord
     if dependency.respond_to?(:connections) && dependency.connections.where.not(website: self).any?
       # puts "other connection found, not moving"
       return
-    end 
+    end
     # puts "  no other connection"
     # il faut si l'objet est une person déconnecter le user éventuellement associé.
     if dependency.is_a? University::Person

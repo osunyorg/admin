@@ -9,16 +9,17 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   has_scope :for_full_width
 
   def index
-    @pages = apply_scopes(@pages).for_language(current_website_language)
-                                 .ordered_by_title
-                                 .page(params[:page])
-    breadcrumb
-  end
-
-  def tree
     @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
     @first_level_pages = @homepage.children.ordered
     @pages = @website.pages.for_language(current_website_language)
+    breadcrumb
+  end
+
+  def index_list
+    @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
+    @pages = apply_scopes(@pages).for_language(current_website_language)
+                                 .ordered_by_title
+                                 .page(params[:page])
     breadcrumb
   end
 
@@ -56,7 +57,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def static
     @about = @page
-    render layout: false
+    render_as_plain_text
   end
 
   def preview
@@ -133,9 +134,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   protected
 
   def load_object
-    object_type = params[:objectType]
-    object_id = params[:objectId]
-    @object = object_type.constantize.find object_id
+    @object = PolymorphicObjectFinder.find(
+      params,
+      key: :object,
+      university: current_university,
+      only: [@page.class.direct_connection_permitted_about_type]
+    )
   end
 
   def breadcrumb

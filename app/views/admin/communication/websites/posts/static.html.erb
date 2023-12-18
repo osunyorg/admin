@@ -13,7 +13,12 @@ weight: 1
 authors:
   - "<%= @about.translated_author.slug %>"
 <% end %>
-<%= render 'admin/communication/websites/categories/static_about' %>
+<% if @about.categories.any? %>
+posts_categories:
+<% @about.categories.each do |category| %>
+  - "<%= category.slug_with_ancestors_slugs %>"
+<% end %>
+<% end %>
 <%= render 'admin/application/i18n/static' %>
 <%= render 'admin/application/featured_image/static' %>
 <%= render 'admin/application/meta_description/static' %>

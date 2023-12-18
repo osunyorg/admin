@@ -19,12 +19,9 @@ fr:
             label: Blocs techniques
             description: Des fonctionnalités pratiques, purement utilitaires
         components:
-          text:
-            label: Texte
-            placeholder: Entrer le texte
-            transcription:
-              label: Transcription textuelle du contenu
-              placeholder: Entrer ici la transcription
+          code:
+            preview:
+              sanitized_notice: Pour des raisons de sécurité, le contenu a été filtré. Les scripts ne sont pas chargés et/ou exécutés, et l'apparence peut être alterée.
           file:
             input:
               label: Fichier
@@ -39,8 +36,17 @@ fr:
             credit:
               label: Crédit
               placeholder: Entrer le crédit
+          layouts:
+            button: Choisir la mise en page
+            label: Mise en page
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
+          text:
+            label: Texte
+            placeholder: Entrer le texte
+            transcription:
+              label: Transcription textuelle du contenu
+              placeholder: Entrer ici la transcription
           time_slot:
             from: De
             to: à
@@ -61,19 +67,42 @@ fr:
                 description: Une liste d'événements avec de petites images à la même largeur.
               large:
                 label: Grand
-                description: Chaque événement est présenté en majesté, sur toute la largeur disponible avec une grande image. 
+                description: Chaque événement est présenté en majesté, sur toute la largeur disponible avec une grande image.
             edit:
+              add_event: Ajouter un événement
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
               description:
                 label: Description
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir l'événement
+              mode:
+                label: Quels événements afficher ?
+                options:
+                  all: Tous les événements, peu importe la catégorie
+                  category: Une catégorie spécifique d'événements
+                  selection: Une sélection d'événements
+                  categories: La liste des catégories d'événements
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
+              show:
+                label: Paramètres d'affichage
+              show_category:
+                label: Afficher les catégories des événements
+              show_summary:
+                label: Afficher le résumé des événements
+              show_status:
+                label: Afficher le statut des événements (en cours, à venir...)
               time:
-                label: Quels événements afficher ?
+                label: Quelles dates d'événements afficher ?
                 options:
-                  future_or_present: En cours et à venir
+                  future_or_current: En cours et à venir
                   future: À venir, pas encore en cours
-                  present: En cours en ce moment
+                  current: En cours en ce moment
                   archive: Terminés, archivés
           call_to_action:
             description: Un titre, un texte, un visuel et 3 boutons pour inviter les personnes à agir.
@@ -353,6 +382,9 @@ fr:
               alternate:
                 label: Alternance
                 description: Une alternance très légère graphiquement de pages, rythmée entre la gauche et la droite.
+              large:
+                label: Grand
+                description: Chaque page est présentée en majesté, sur toute la largeur disponible avec une grande image.
             edit:
               mode:
                 label: Type de liste
@@ -414,6 +446,9 @@ fr:
               alternate:
                 label: Alternance
                 description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.
+              large:
+                label: Grand
+                description: Chaque actualité est présentée en majesté, sur toute la largeur disponible avec une grande image.
             edit:
               add_post: Ajouter un article
               mode:
@@ -422,6 +457,7 @@ fr:
                   all: Toutes les actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
+                  categories: La liste des catégories d'actualités
               posts_quantity:
                 label: Quantité d'articles
                 placeholder: Entrer la quantité
@@ -500,6 +536,8 @@ fr:
                 placeholder: Entrer le titre de la vidéo
       contents:
         blocks:
+          copy: Copier le bloc
+          paste: Coller le bloc
           quantity:
             zero: Aucun bloc
             one: 1 bloc

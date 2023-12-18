@@ -18,7 +18,12 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def new
-    @block.about = PolymorphicObjectFinder.find params, :about
+    @block.about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university,
+      only: Communication::Block.permitted_about_types
+    )
     breadcrumb
   end
 
@@ -54,6 +59,28 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def duplicate
     redirect_to [:edit, :admin, @block.duplicate],
+                notice: t('admin.successfully_duplicated_html', model: @block.to_s)
+  end
+
+  def copy
+    return unless request.xhr?
+    cookies.signed[Communication::Block::BLOCK_COPY_COOKIE] = {
+      value: params[:id],
+      path: '/admin'
+    }
+  end
+
+  def paste
+    about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university,
+      only: Communication::Block.permitted_about_types
+    )
+    # On réattribue à @block pour bénéficier du calcul dans about_path
+    @block = @block.paste(about)
+    cookies.delete(Communication::Block::BLOCK_COPY_COOKIE, path: '/admin')
+    redirect_to about_path + "#block-#{@block.id}",
                 notice: t('admin.successfully_duplicated_html', model: @block.to_s)
   end
 

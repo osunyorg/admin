@@ -2,7 +2,7 @@ class Communication::Block::Component::Category < Communication::Block::Componen
 
   def category
     return unless website
-    website.categories.find_by(id: data)
+    website.post_categories.find_by(id: data)
   end
 
   def dependencies

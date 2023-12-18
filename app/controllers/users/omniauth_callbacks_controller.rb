@@ -21,6 +21,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env['omniauth.strategy'].options[:idp_sso_target_url] = current_context.sso_target_url
     request.env['omniauth.strategy'].options[:idp_cert] = current_context.sso_cert
     request.env['omniauth.strategy'].options[:name_identifier_format] = current_context.sso_name_identifier_format
+    request.env['omniauth.strategy'].options[:security] ||= {}
+    request.env['omniauth.strategy'].options[:security][:want_assertions_signed] = true
 
     render plain: "Omniauth SAML setup phase.", status: 404
   end

@@ -48,9 +48,10 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
+  include Contentful
+  include Backlinkable
   include Sanitizable
   include WithBlobs
-  include WithBlocks
   include WithCountry
   include WithGeolocation
   include WithGitFiles
@@ -128,6 +129,10 @@ class University::Organization < ApplicationRecord
   end
 
   protected
+
+  def backlinks_blocks(website)
+    website.blocks.organizations
+  end
 
   def explicit_blob_ids
     [

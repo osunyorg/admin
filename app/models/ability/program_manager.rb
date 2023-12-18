@@ -2,19 +2,19 @@ class Ability::ProgramManager < Ability
 
   def initialize(user)
     super
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: Communication::Website::Post.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event'
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program', about_id: managed_programs_ids
     can :create, Communication::Block
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: Communication::Website::Post.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event'
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_events_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
     can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Education::Program', about_id: managed_programs_ids
     can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
     can :create, Communication::Block::Heading
     can :read, Communication::Website, university_id: @user.university_id
-    can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id
+    can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Education::Program, id: managed_programs_ids
     can [:read, :children], Education::Program, university_id: @user.university_id
     cannot :create, Education::Program
@@ -28,4 +28,13 @@ class Ability::ProgramManager < Ability
   def managed_programs_ids
     @managed_programs_ids ||= @user.programs_to_manage.pluck(:education_program_id)
   end
+
+  def managed_posts_ids
+    @managed_posts_ids ||= Communication::Website::Post.where(university_id: @user.university_id).pluck(:id)
+  end
+
+  def managed_events_ids
+    @managed_events_ids ||= Communication::Website::Agenda::Event.where(university_id: @user.university_id).pluck(:id)
+  end
+  
 end

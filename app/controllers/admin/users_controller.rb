@@ -14,10 +14,6 @@ class Admin::UsersController < Admin::ApplicationController
     breadcrumb
   end
 
-  def new
-    breadcrumb
-  end
-
   def edit
     breadcrumb
     add_breadcrumb t('edit')
@@ -25,9 +21,12 @@ class Admin::UsersController < Admin::ApplicationController
 
   def favorite
     operation = params[:operation]
-    id = params[:about_id]
-    type = params[:about_type]
-    about = type.constantize.find id
+    about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university,
+      only: User::Favorite.permitted_about_types
+    )
     if operation == 'add'
       current_user.add_favorite(about)
     else
@@ -36,22 +35,9 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_back fallback_location: [:admin, about]
   end
 
-  def create
-    # we don't want the confirmation mail to be send when the user is created from admin!
-    @user.skip_confirmation!
-    @user.modified_by = current_user
-    if @user.save
-      redirect_to [:admin, @user], notice: t('admin.successfully_created_html', model: @user.to_s)
-    else
-      breadcrumb
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   def update
     @user.modified_by = current_user
     @user.skip_reconfirmation!
-    manage_password
     if @user.update(user_params)
       redirect_to [:admin, @user], notice: t('admin.successfully_updated_html', model: @user.to_s)
     else
@@ -92,19 +78,8 @@ class Admin::UsersController < Admin::ApplicationController
 
   def user_params
     params.require(:user)
-          .permit(:email, :first_name, :last_name, :role, :password, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone, programs_to_manage_ids: [], websites_to_manage_ids: [])
+          .permit(:email, :first_name, :last_name, :role, :language_id, :picture, :picture_delete, :picture_infos, :mobile_phone, programs_to_manage_ids: [], websites_to_manage_ids: [])
           .merge(university_id: current_university.id)
   end
 
-  def manage_password
-    # to prevent cognitive complexity (the bottom block should be in an if condition where password present)
-    # Password not provided when user from sso
-    params[:user][:password] ||= ''
-
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-    else
-      @user.reset_password(params[:user][:password], params[:user][:password])
-    end
-  end
 end

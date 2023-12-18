@@ -21,4 +21,8 @@
 class User::Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :about, polymorphic: true
+
+  def self.permitted_about_types
+    ApplicationRecord.model_names_with_concern(Favoritable)
+  end
 end

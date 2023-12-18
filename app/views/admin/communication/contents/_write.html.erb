@@ -10,6 +10,7 @@
     <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
   <% end %>
 </div>
+<%= render "admin/communication/blocks/paste_block", about: about %>
 <div class="content-editor__actions row mt-5">
   <div class="col-lg-4">
     <%= link_to t('admin.communication.blocks.headings.add'),

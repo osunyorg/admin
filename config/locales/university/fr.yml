@@ -158,6 +158,13 @@ fr:
       university/role:
         one: Rôle
         other: Rôles
+  enums:
+    university:
+      organization:
+        kind:
+          company: Entreprise
+          non_profit: Association
+          government: Structure gouvernementale
   simple_form:
     hints:
       university:
@@ -195,13 +202,6 @@ fr:
         organization: Sélectionnez une organisation
         school: Sélectionnez une école
         year: Sélectionnez une année
-  enums:
-    university:
-      organization:
-        kind:
-          company: Entreprise
-          non_profit: Association
-          government: Structure gouvernementale
   university:
     alumni:
       cohorts:
@@ -248,6 +248,8 @@ fr:
         import_btn: Importer des expériences
         import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
         title: Imports d'expériences
+      import_btn: Importer des personnes
+      import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
       search: Rechercher par nom de personne
       personal_data_warning: Attention ! Les informations renseignées ici sont susceptibles d'être visibles publiquement sur les sites web et les extranets vous concernant.
       taught_programs: Formations enseignées

@@ -7,6 +7,7 @@ module OneLogin
       def create(settings, params = {})
         self.old_create(settings, params)
         @login_url = GOOGLE_ACCOUNT_CHOOSER_URL + CGI.escape(@login_url) if @login_url.starts_with?("https://accounts.google.com")
+        @login_url
       end
     end
   end

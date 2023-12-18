@@ -16,7 +16,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
 
   def static
     @about = @menu
-    render layout: false
+    render_as_plain_text
   end
 
   def new

@@ -1,7 +1,13 @@
 class Communication::Block::Template::Page < Communication::Block::Template::Base
 
   has_elements
-  has_layouts [:grid, :list, :cards, :alternate]
+  has_layouts [
+    :grid, 
+    :list, 
+    :cards, 
+    :alternate,
+    :large
+  ]
   has_component :mode, :option, options: [:selection, :children]
   has_component :text, :rich_text
   has_component :page_id, :page
@@ -23,6 +29,15 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   def allowed_for_about?
     !website.nil?
+  end
+  
+  def children
+    selected_pages
+  end
+
+  def heading_title
+    block.title.present?  ? block.title
+                          : page&.title
   end
 
   protected

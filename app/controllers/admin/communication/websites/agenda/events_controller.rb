@@ -1,12 +1,11 @@
 class Admin::Communication::Websites::Agenda::EventsController < Admin::Communication::Websites::Agenda::ApplicationController
-  load_and_authorize_resource class: Communication::Website::Agenda::Event, 
+  load_and_authorize_resource class: Communication::Website::Agenda::Event,
                               through: :website
 
-  before_action :load_categories, only: [:new, :edit]
+  before_action :load_categories
 
   def index
-    @events = apply_scopes(@events).for_language(current_website_language).ordered.page params[:page]
-    @root_categories = @website.categories.for_language(current_website_language).root.ordered
+    @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
     breadcrumb
   end
 
@@ -23,7 +22,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def static
     @about = @event
-    render layout: false
+    render_as_plain_text
   end
 
   def new
@@ -39,7 +38,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @event.website = @website
     @event.add_photo_import params[:photo_import]
     if @event.save_and_sync
-      redirect_to admin_communication_website_agenda_event_path(@event), 
+      redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s)
     else
       breadcrumb
@@ -50,7 +49,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def update
     @event.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
-      redirect_to admin_communication_website_agenda_event_path(@event), 
+      redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s)
     else
       breadcrumb
@@ -66,7 +65,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def destroy
     @event.destroy
-    redirect_to admin_communication_website_agenda_events_url, 
+    redirect_to admin_communication_website_agenda_events_url,
                 notice: t('admin.successfully_destroyed_html', model: @event.to_s)
   end
   protected
@@ -78,12 +77,16 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb_for @event
   end
 
+  def load_categories
+    @categories = @website.agenda_categories.for_language(current_website_language).ordered
+  end
+
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
       :title, :subtitle, :meta_description, :summary, :published, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :from_day, :from_hour, :to_day, :to_hour, 
+      :from_day, :from_hour, :to_day, :to_hour,
       category_ids: []
     )
     .merge(

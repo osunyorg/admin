@@ -12,10 +12,6 @@ class Deuxfleurs
     response.status == 200
   end
 
-  def default_url_for(host)
-    "https://#{host}.web.deuxfleurs.fr"
-  end
-
   protected
 
   def client

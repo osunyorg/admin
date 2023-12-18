@@ -1,8 +1,19 @@
 class Communication::Block::Template::Post < Communication::Block::Template::Base
 
   has_elements
-  has_layouts [:grid, :list, :highlight, :alternate]
-  has_component :mode, :option, options: [:all, :category, :selection]
+  has_layouts [
+    :grid,
+    :list,
+    :highlight,
+    :alternate,
+    :large
+  ]
+  has_component :mode, :option, options: [
+    :all, 
+    :category, 
+    :selection,
+    :categories
+  ]
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :category
 
@@ -20,6 +31,10 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   def allowed_for_about?
     !website.nil?
+  end
+  
+  def children
+    selected_posts
   end
 
   protected
@@ -49,6 +64,10 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     elements.map { |element|
       post(element.id)
     }.compact
+  end
+
+  def selected_posts_categories
+    []
   end
 
   def post(id)

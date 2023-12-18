@@ -4,8 +4,13 @@ should_render_data = block.data && block.data.present?
 %>
   - kind: block
     template: <%= block.template_kind %>
-    title: "<%= prepare_text_for_static block.title %>"
-    position: <%= block.position %>
+    title: >-
+      <%= prepare_text_for_static block.template.heading_title %>
+    ranks:
+      self: <%= block.heading_rank_self %>
+<% if block.heading_children? %>
+      children: <%= block.heading_rank_children %>
+<% end %>
     data:
 <%= render  template_path, 
             block: block, 

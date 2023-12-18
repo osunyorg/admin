@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users do
+    resources :users, except: [:new, :create] do
       post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
       patch 'unlock' => 'users#unlock', on: :member
     end

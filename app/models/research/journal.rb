@@ -22,38 +22,39 @@
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Aboutable
+  include Favoritable
   include Sanitizable
   include WithGitFiles
   include WithUniversity
 
-  has_many  :communication_websites, 
-            class_name: 'Communication::Website', 
-            as: :about, 
+  has_many  :communication_websites,
+            class_name: 'Communication::Website',
+            as: :about,
             dependent: :nullify
-  has_many  :volumes, 
-            foreign_key: :research_journal_id, 
+  has_many  :volumes,
+            foreign_key: :research_journal_id,
             dependent: :destroy
-  has_many  :published_volumes, 
-            -> { published }, 
-            class_name: 'Research::Journal::Volume', 
-            foreign_key: :research_journal_id, 
+  has_many  :published_volumes,
+            -> { published },
+            class_name: 'Research::Journal::Volume',
+            foreign_key: :research_journal_id,
             dependent: :destroy
-  has_many  :papers, 
-            foreign_key: :research_journal_id, 
+  has_many  :papers,
+            foreign_key: :research_journal_id,
             dependent: :destroy
-  has_many  :published_papers, 
-            -> { published }, 
-            class_name: 'Research::Journal::Paper', 
-            foreign_key: :research_journal_id, 
+  has_many  :published_papers,
+            -> { published },
+            class_name: 'Research::Journal::Paper',
+            foreign_key: :research_journal_id,
             dependent: :destroy
-  has_many  :people, 
-            -> { distinct }, 
+  has_many  :people,
+            -> { distinct },
             through: :papers
-  has_many  :people_through_published_papers, 
-            -> { distinct }, 
-            through: :published_papers, 
+  has_many  :people_through_published_papers,
+            -> { distinct },
+            through: :published_papers,
             source: :people
-  has_many  :kinds, 
+  has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
   scope :ordered, -> { order(:title) }

@@ -5,7 +5,7 @@ module Education::Program::WithWebsitesCategories
     after_save_commit :set_websites_categories
 
     has_many   :website_categories,
-               class_name: 'Communication::Website::Category',
+               class_name: 'Communication::Website::Post::Category',
                dependent: :destroy
   end
 

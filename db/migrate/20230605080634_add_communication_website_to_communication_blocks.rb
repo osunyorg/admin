@@ -13,7 +13,7 @@ class AddCommunicationWebsiteToCommunicationBlocks < ActiveRecord::Migration[7.0
       .update_all("communication_website_id = (SELECT communication_website_id FROM communication_website_pages WHERE id = about_id)")
 
     Communication::Block
-      .where(about_type: "Communication::Website::Category")
+      .where(about_type: "Communication::Website::Post::Category")
       .update_all("communication_website_id = (SELECT communication_website_id FROM communication_website_categories WHERE id = about_id)")
   end
 end

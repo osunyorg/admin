@@ -5,12 +5,17 @@ module Communication::Website::WithConfigs
 
     def configs
       [
+        config_default_content_security_policy,
         config_default_languages,
         config_default_permalinks,
         config_development_config,
         config_production_config,
         config_deuxfleurs_workflow
       ].compact
+    end
+
+    def config_default_content_security_policy
+      @config_default_content_security_policy ||= Communication::Website::Configs::DefaultContentSecurityPolicy.find(id)
     end
 
     def config_default_languages

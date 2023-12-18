@@ -27,6 +27,9 @@ subtitle = t('admin.elements', count: @categories.total_count)
 <% end %>
 
 <% content_for :action_bar_left do %>
+  <%= link_to t('university.person.import_btn'),
+              new_admin_university_people_import_path,
+              class: button_classes if can? :create, University::Person %>
   <%= link_to t('university.person.experiences.import_btn'),
               new_admin_university_people_experiences_import_path,
               class: button_classes if can? :create, University::Person::Experience %>

@@ -33,12 +33,14 @@
 class Communication::Block < ApplicationRecord
   include AsIndirectObject
   include WithAccessibility
+  include WithHeadingRanks
   include WithPosition
   include WithUniversity
   include Sanitizable
 
   IMAGE_MAX_SIZE = 5.megabytes
   FILE_MAX_SIZE = 100.megabytes
+  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
 
   belongs_to :about, polymorphic: true
   belongs_to :heading, optional: true
@@ -100,6 +102,10 @@ class Communication::Block < ApplicationRecord
   before_save :attach_template_blobs
   before_validation :set_university_and_website_from_about, on: :create
 
+  def self.permitted_about_types
+    ApplicationRecord.model_names_with_concern(Contentful)
+  end
+
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
   def data=(value)
@@ -135,6 +141,14 @@ class Communication::Block < ApplicationRecord
 
   def duplicate
     block = self.dup
+    block.save
+    block
+  end
+
+  def paste(about)
+    block = self.dup
+    block.about = about
+    block.heading = nil
     block.save
     block
   end
