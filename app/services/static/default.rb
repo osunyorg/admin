@@ -1,4 +1,5 @@
 class Static::Default
+  include ActionView::Helpers
 
   def initialize(text, depth: 1, about: nil, university: nil)
     @text = text

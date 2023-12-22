@@ -4,7 +4,7 @@ class Static::Code < Static::Default
     unless @prepared
       @prepared = @text.to_s.dup
       @prepared = indent @prepared
-      @prepared = ActionController::Base.helpers.raw @prepared
+      @prepared = raw @prepared
     end
     @prepared
   end
