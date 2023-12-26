@@ -69,33 +69,39 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
           </div>
-          <div class="modal-body">
+          <div class="modal-body overflow-x-hidden">
             <div class="row">
               <div class="col-md-6">
+                <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
+                  <%= t 'photo_import.nothing' %>
+                </p>
                 <div class="photo_import__unsplash photo_import__unsplash__results row pure__row--small" ref="results">
-                  <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
-                    <%= t 'photo_import.nothing' %>
-                  </p>
-                  <div v-for="image in unsplash.data.results"  class="col-6 col-lg-4">
+                  <div v-for="image in unsplash.data.results" class="col-6 col-lg-4">
                     <img  :src="image.thumb"
                           :alt="image.alt"
                           v-on:click="selectUnsplash(image)"
                           class="img-fluid img-thumbnail mb-3">
                   </div>
                 </div>
+                <p class="small text-muted" v-if="unsplash.data.total_pages">
+                  {{unsplash.page}} / {{unsplash.data.total_pages }}
+                </p>
               </div>
               <div class="col-md-6">
+                <p v-if="pexels.data.results.length === 0 || !pexels.data" >
+                  <%= t 'photo_import.nothing' %>
+                </p>
                 <div class="photo_import__pexels photo_import__pexels__results row pure__row--small" ref="results">
-                  <p v-if="pexels.data.results.length === 0 || !pexels.data" >
-                    <%= t 'photo_import.nothing' %>
-                  </p>
-                  <div v-for="image in pexels.data.results"  class="col-6 col-lg-4">
+                  <div v-for="image in pexels.data.results" class="col-6 col-lg-4">
                     <img  :src="image.thumb"
                           :alt="image.alt"
                           v-on:click="selectPexels(image)"
                           class="img-fluid img-thumbnail mb-3">
                   </div>
                 </div>
+                <p class="small text-muted" v-if="pexels.data.total_pages">
+                  {{pexels.page}} / {{pexels.data.total_pages }}
+                </p>
               </div>
             </div>
           </div>
@@ -165,7 +171,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
           per_page: 12,
           lang: '<%= lang %>',
         },
-        query: '<%= search || "" %>',
+        query: <%= search.to_json.html_safe %>,
         unsplash: {
           url: '<%= unsplash_path %>',
           page: 1,
@@ -204,7 +210,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
 
       modalElement.addEventListener('show.bs.modal', function (){
         this.isOpened = true;
-        this.research()
+        this.research();
       }.bind(this));
 
       modalElement.addEventListener('hide.bs.modal', function() {
