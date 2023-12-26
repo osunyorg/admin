@@ -337,6 +337,10 @@ GEM
     leaflet-rails (1.9.4)
       actionpack (>= 4.2.0)
       railties (>= 4.2.0)
+    libretranslate (0.1.0)
+      json
+      net-http
+      open-uri
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -664,6 +668,7 @@ DEPENDENCIES
   kamifusen
   kaminari
   leaflet-rails
+  libretranslate
   listen (~> 3.3)
   mini_magick
   octokit
