@@ -49,10 +49,10 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
       <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <div class="col-auto">
+            <div class="col-auto d-none d-lg-block">
               <h5 class="modal-title"><%= t 'photo_import.title' %></h5>
             </div>
-            <div class="col-auto d-flex flex-fill mx-5">
+            <div class="col-auto d-flex flex-fill mx-lg-5">
               <input  type="text"
                       name="search"
                       placeholder="<%= t 'photo_import.placeholder' %>"
@@ -69,35 +69,32 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
           </div>
-          <div class="modal-body overflow-x-hidden">
+          <div class="modal-body overflow-x-hidden" id="results">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
                   <%= t 'photo_import.nothing' %>
                 </p>
-                <div class="photo_import__unsplash photo_import__unsplash__results row pure__row--small" ref="results">
-                  <div v-for="image in unsplash.data.results" class="col-6 col-lg-4">
-                    <img  :src="image.thumb"
-                          :alt="image.alt"
-                          v-on:click="selectUnsplash(image)"
-                          class="img-fluid img-thumbnail mb-3">
-                  </div>
+                <div class="photo_import__results photo_import__unsplash photo_import__unsplash__results" ref="results">
+                  <img  :src="image.thumb"
+                        :alt="image.alt"
+                        v-for="image in unsplash.data.results" class="photo_import__results__result"
+                        v-on:click="selectUnsplash(image)">
                 </div>
                 <p class="small text-muted" v-if="unsplash.data.total_pages">
                   {{unsplash.page}} / {{unsplash.data.total_pages }}
                 </p>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <p v-if="pexels.data.results.length === 0 || !pexels.data" >
                   <%= t 'photo_import.nothing' %>
                 </p>
-                <div class="photo_import__pexels photo_import__pexels__results row pure__row--small" ref="results">
-                  <div v-for="image in pexels.data.results" class="col-6 col-lg-4">
-                    <img  :src="image.thumb"
-                          :alt="image.alt"
-                          v-on:click="selectPexels(image)"
-                          class="img-fluid img-thumbnail mb-3">
-                  </div>
+                <div class="photo_import__results photo_import__pexels photo_import__pexels__results" ref="results">
+                  <img  :src="image.thumb"
+                        :alt="image.alt"
+                        v-for="image in pexels.data.results"
+                        v-on:click="selectPexels(image)"
+                        class="photo_import__results__result">
                 </div>
                 <p class="small text-muted" v-if="pexels.data.total_pages">
                   {{pexels.page}} / {{pexels.data.total_pages }}
@@ -107,7 +104,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
           </div>
           <div class="modal-footer d-block">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <div class="row photo_import__unsplash photo_import__unsplash__nav">
                   <div class="col-lg-5">
                     <a  href="#"
@@ -129,7 +126,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <div class="row photo_import__pexels photo_import__pexels__nav">
                   <div class="col-lg-5">
                     <a  href="#"
@@ -264,6 +261,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
         xmlHttp.onreadystatechange = function() {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             source.data = JSON.parse(xmlHttp.responseText);
+            document.getElementById('results').scrollTop = 0;
           }
         }.bind(this);
         xmlHttp.open("GET", url, false);
