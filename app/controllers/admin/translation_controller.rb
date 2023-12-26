@@ -1,9 +1,9 @@
 class Admin::TranslationController < Admin::ApplicationController
   def translate
     @target = translation_params[:target]
-    # @response = LibreTranslate.translate  text: translation_params[:text],
-    #                                       from: translation_params[:from],
-    #                                       to: translation_params[:to]
+    # @response = LibreTranslate.translate  translation_params[:text],
+    #                                       source: translation_params[:from],
+    #                                       target: translation_params[:to]
     @response = {
       'translatedText' => 'test'
     }
