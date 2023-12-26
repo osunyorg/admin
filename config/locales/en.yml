@@ -144,6 +144,8 @@ en:
     summary:
       label: Summary
       hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
+    translation:
+      done: Translation done!
     users_alerts:
       already_confirmed: "Your account has already been confirmed."
       not_locked_html: '<i>%{model}</i> was not locked.'
