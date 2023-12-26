@@ -239,7 +239,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
       },
       searchUnsplash() {
         var url = this.unsplash.url
-                      + '?query=' + this.query
+                      + '?query=' + encodeURIComponent(this.query)
                       + '&page=' + this.unsplash.page
                       + '&per_page=' + this.parameters.per_page
                       + '&lang=' + this.parameters.lang
@@ -247,7 +247,7 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
       },
       searchPexels() {
         var url = this.pexels.url
-                    + '?query=' + this.query
+                    + '?query=' + encodeURIComponent(this.query)
                     + '&page=' + this.pexels.page
                     + '&per_page=' + this.parameters.per_page
                     + '&lang=' + this.parameters.lang
