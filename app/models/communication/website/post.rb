@@ -48,6 +48,7 @@ class Communication::Website::Post < ApplicationRecord
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
+  include WithPublication
   include WithSlug # We override slug_unavailable? method
   include WithTranslations
   include WithUniversity

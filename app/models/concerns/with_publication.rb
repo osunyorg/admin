@@ -1,4 +1,6 @@
-# FIXME: les méthodes utilisant published_at doivent vérifier que l'attribut existe
+# L'objet doit avoir 2 attributs :
+# - published:boolean
+# - published_at:datetime
 module WithPublication
   extend ActiveSupport::Concern
 
