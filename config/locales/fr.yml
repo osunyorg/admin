@@ -144,6 +144,8 @@ fr:
     summary:
       label: Résumé
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
+    translation: 
+      done: Traduction effectuée !
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."

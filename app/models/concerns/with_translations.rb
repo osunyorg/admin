@@ -46,6 +46,10 @@ module WithTranslations
     @original_object ||= (self.original || self)
   end
 
+  def is_a_translation?
+    self.original.present?
+  end
+
   def original_with_translations
     original_object.translations + [original_object]
   end

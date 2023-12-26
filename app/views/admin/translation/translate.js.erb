@@ -1,0 +1,13 @@
+document.getElementById("<%= @target %>").value = "<%= @response['translatedText'] %>";
+notyf = new Notyf();
+notyf.open({
+    type: 'success',
+    position: {
+        x: 'center',
+        y: 'bottom'
+    },
+    message: "<%= t('admin.translation.done') %>",
+    duration: 9000,
+    ripple: true,
+    dismissible: true
+});

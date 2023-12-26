@@ -5,6 +5,16 @@
   <div class="row">
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
+        <%= link_to 'Traduire', 
+                    admin_translate_path(
+                      text: post.title, 
+                      from: post.original.language.iso_code, 
+                      to: post.language.iso_code,
+                      target: 'communication_website_post_title'
+                    ), 
+                    method: :post, 
+                    class: 'action float-end',
+                    remote: true if post.is_a_translation? %>
         <%= f.input :title %>
         <%= render 'admin/application/summary/form', f: f, about: post %>
         <%= f.input :text, as: :summernote if strip_tags(post.text).present? %>
