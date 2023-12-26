@@ -13,6 +13,7 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def manage_versions
+    @websites = @websites.with_repository.with_url
     load_filters
     breadcrumb
     add_breadcrumb "Gestion des versions"
