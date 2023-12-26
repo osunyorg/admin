@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
       patch 'unlock' => 'users#unlock', on: :member
     end
-    post 'translate/:from/:to' => 'translation#translate', as: :translate
+    post 'translate/:to' => 'translation#translate', as: :translate
     put 'theme' => 'application#set_theme', as: :set_theme
     put 'favorite' => 'users#favorite', as: :favorite
     draw 'admin/administration'
@@ -33,7 +33,6 @@ Rails.application.routes.draw do
     draw 'admin/university'
     root to: 'dashboard#index'
   end
-
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 

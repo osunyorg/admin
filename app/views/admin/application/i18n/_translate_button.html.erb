@@ -1,7 +1,6 @@
 <% if about.is_a_translation? %>
   <%
-  path = admin_translate_path from: about.original.language.iso_code, 
-                              to: about.language.iso_code,
+  path = admin_translate_path to: about.language.iso_code,
                               lang: nil,
                               website_id: nil
   %>

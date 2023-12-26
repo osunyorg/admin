@@ -4,7 +4,7 @@ class Admin::TranslationController < Admin::ApplicationController
   def translate
     @target = translation_params[:target]
     @response = LibreTranslate.translate  translation_params[:text],
-                                          source: translation_params[:from],
+                                          source: 'auto',
                                           target: translation_params[:to]
     render json: @response
   end
