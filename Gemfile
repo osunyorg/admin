@@ -48,7 +48,7 @@ gem "jquery-ui-rails", git: "https://github.com/jquery-ui-rails/jquery-ui-rails.
 gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
 gem "leaflet-rails"
-gem "libretranslate"
+gem "libretranslate"#, path: "../libretranslate"
 gem "mini_magick"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
