@@ -17,11 +17,11 @@ module WithPublication
   end
 
   def published_in_the_future?
-    published && published_at > Time.now
+    published && published_at.present? && published_at > Time.now
   end
 
   def published_now?
-    published && published_at <= Time.now
+    published && published_at.present? && published_at <= Time.now
   end
 
   protected

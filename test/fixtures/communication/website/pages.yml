@@ -53,6 +53,7 @@ page_root:
   language: fr
   position: 1
   published: true
+  published_at: 2010-11-28 00:00:00
   
 page_test:
   university: default_university
@@ -62,6 +63,7 @@ page_test:
   language: fr
   position: 1
   published: true
+  published_at: 2010-11-28 00:00:00
   parent: page_root
 
 page_with_no_dependency:
@@ -72,4 +74,5 @@ page_with_no_dependency:
   language: fr
   position: 2
   published: true
+  published_at: 2010-11-28 00:00:00
   parent: page_root
