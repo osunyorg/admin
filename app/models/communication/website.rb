@@ -95,10 +95,13 @@ class Communication::Website < ApplicationRecord
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
   scope :for_updatable_theme, -> (status) { updatable_theme if status == 'true' }
+  scope :with_repository, -> { where.not(repository: [nil, '']) }
+  scope :with_url, -> { where.not(url: [nil, '']) }
+  scope :with_access_token, -> { where.not(access_token: [nil, '']) }
   scope :updatable_theme, -> {
-    where.not(repository: [nil, '']).
-    where.not(access_token: [nil, '']).
-    where.not(url: [nil, ''])
+    with_repository.
+    with_url.
+    with_access_token
   }
 
   def to_s
