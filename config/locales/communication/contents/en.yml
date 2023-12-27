@@ -86,6 +86,9 @@ en:
                   category: A specific category of events
                   selection: A selection of events
                   categories: A list of all events' categories
+              no_event_message:
+                label: Sentence to be displayed if there is no event
+                placeholder: Enter the desired sentence
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity

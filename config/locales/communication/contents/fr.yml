@@ -86,6 +86,9 @@ fr:
                   category: Une catégorie spécifique d'événements
                   selection: Une sélection d'événements
                   categories: La liste des catégories d'événements
+              no_event_message:
+                label: Phrase à afficher s'il n'y a aucun événement
+                placeholder: Entrer la phrase souhaitée
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
