@@ -5,11 +5,7 @@
     <div class="col-lg-7">
       <%= osuny_panel Communication::Website::Post.human_attribute_name(:title), small: true do %>
         <p class="lead mb-1"><%= @post.title %></p>
-        <% if @post.draft? %>
-          <span class="badge bg-secondary">
-            <%= t('admin.communication.website.posts.draft') %>
-          </span>
-        <% end %>
+        <%= render 'admin/application/property/publication', about: @post %>
       <% end %>
     </div>
     <div class="offset-lg-1 col-lg-4">

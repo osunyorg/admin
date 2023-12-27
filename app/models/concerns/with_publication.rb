@@ -13,7 +13,7 @@ module WithPublication
   end
 
   def draft?
-    !published || published_in_the_future?
+    !published
   end
 
   def published_in_the_future?
