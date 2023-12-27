@@ -8,10 +8,11 @@
   <% end %>
   <input  :id="<%= dom_id.html_safe %>"
           class="form-control"
+          data-translatable="true"
           v-model="<%= model %>.<%= property %>"
           placeholder="<%= placeholder %>"
           type="text" />
-  <% if hint %>
+  <% if hint.present? %>
     <div class="form-text"><%= hint %></div>
   <% end %>
 </div>

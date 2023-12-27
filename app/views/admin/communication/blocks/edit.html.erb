@@ -14,7 +14,8 @@
       <div class="col-xxl-9 col-lg-8">
         <div class="row pure__row--small">
           <div class="col-lg-6">
-            <%= f.input :title %>
+            <%= f.input :title, 
+                        input_html: { data: { translatable: true } } %>
           </div>
           <div class="col-lg-6">
             <label class="form-label d-none d-lg-block">&nbsp;</label>

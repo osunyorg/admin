@@ -145,7 +145,7 @@ fr:
       label: Résumé
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
     translation: 
-      button: Traduire automatiquement
+      button: Traduire avec LibreTranslate
       done: Traduction effectuée ! Merci de relire avant d'enregistrer.
       running: Traduction en cours
     users_alerts:

@@ -10,4 +10,7 @@
             v-model="<%= model %>.<%= property %>"
             data-summernote-config="<%= summernote_config %>"
             placeholder="<%= placeholder %>"></textarea>
+  <% if hint.present? %>
+    <div class="form-text"><%= hint %></div>
+  <% end %>    
 </div>

@@ -28,15 +28,19 @@ window.osuny.translation = {
     translate: function (field) {
         var text = field.value, 
             xhr = new XMLHttpRequest();
+        console.log(field);
         xhr.open("POST", this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (this.readyState != 4) return;
             if (this.status == 200) {
-                var data = JSON.parse(this.responseText);
-                field.value = data.translatedText;
-                console.log(data);
-
+                var data = JSON.parse(this.responseText),
+                    translatedText = data.translatedText;
+                if (field.classList.contains('summernote-vue')) {
+                    $(field).summernote('code', translatedText);
+                } else {
+                    field.value = translatedText;
+                }
             }
         };
         xhr.send(JSON.stringify({
