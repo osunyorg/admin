@@ -7,6 +7,7 @@ window.osuny.translation = {
         this.loader = document.querySelector('.js-translation-loader');
         this.done = document.querySelector('.js-translation-done');
         this.start.addEventListener('click', this.run.bind(this));
+        this.csrfToken = document.querySelector('[name="csrf-token"]').content;
         this.url = this.component.dataset.translationUrl;
     },
 
@@ -39,8 +40,9 @@ window.osuny.translation = {
             translatedText;
         xhr.open('POST', this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
         xhr.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
+            if (this.readyState === 4 && this.status === 200 && this.responseText !== '') {
                 data = JSON.parse(this.responseText);
                 translatedText = data.translatedText;
                 that.translateField(field, translatedText);

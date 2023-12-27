@@ -1,6 +1,4 @@
 class Admin::TranslationController < Admin::ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def translate
     @text = translation_params[:text].to_s
     head :ok and return if @text.blank?
