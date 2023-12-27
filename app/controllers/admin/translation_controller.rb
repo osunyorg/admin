@@ -1,6 +1,6 @@
 class Admin::TranslationController < Admin::ApplicationController
   def translate
-    @text = translation_params[:text].to_s
+    @text = translation_params[:text].to_s.strip
     head :ok and return if @text.blank?
     @target = translation_params[:target]
     @response = LibreTranslate.translate(
