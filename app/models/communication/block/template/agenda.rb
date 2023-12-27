@@ -48,6 +48,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     selected_events
   end
 
+  def empty?
+    selected_events.none? && no_event_message.blank? && mode != 'categories'
+  end
+
   protected
 
   def base_events

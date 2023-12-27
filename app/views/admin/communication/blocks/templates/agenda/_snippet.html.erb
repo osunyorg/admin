@@ -1,7 +1,11 @@
 <p class="mb-0">
   <% if block.template.mode == 'categories' %>
-    TODO...
+    <%= @website.agenda_categories.first(2).collect(&:to_s).join(', ') %>...
   <% else %>
-    <%= block.template.selected_events.first(2).collect(&:to_s).join(', ') %>...
+    <% if block.template.selected_events.any? %>
+      <%= block.template.selected_events.first(2).collect(&:to_s).join(', ') %>...
+    <% else %>
+      <%= block.template.no_event_message %>
+    <% end %>
   <% end %>
 </p>

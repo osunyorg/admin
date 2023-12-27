@@ -162,6 +162,10 @@ class Communication::Block < ApplicationRecord
     translation.save
   end
 
+  def empty?
+    template.empty?
+  end
+
   def full_text
     template.full_text
   end
