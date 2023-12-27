@@ -14,7 +14,8 @@
       <div class="col-xxl-9 col-lg-8">
         <div class="row pure__row--small">
           <div class="col-lg-6">
-            <%= f.input :title %>
+            <%= f.input :title, 
+                        input_html: { data: { translatable: true } } %>
           </div>
           <div class="col-lg-6">
             <label class="form-label d-none d-lg-block">&nbsp;</label>
@@ -33,6 +34,7 @@
     <% content_for :action_bar_left do %>
       <%= destroy_link @block %>
       <%= duplicate_link @block %>
+      <%= render 'admin/application/i18n/translate_button', about: @block %>
     <% end %>
     <% content_for :action_bar_right do %>
       <%= submit f %>

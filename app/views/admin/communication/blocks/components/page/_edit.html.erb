@@ -19,8 +19,6 @@ pages = collection_tree(block.about&.website.pages.for_language(block.language))
     </option>
   <% end %>
 </select>
-<% unless hint.blank? %>
-  <div class="form-text">
-    <%= hint %>
-  </div>
+<% if hint.present? %>
+  <div class="form-text"><%= hint %></div>
 <% end %>

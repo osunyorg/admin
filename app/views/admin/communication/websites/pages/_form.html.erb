@@ -9,10 +9,10 @@ url = page.new_record?  ? admin_communication_website_pages_path
   <div class="row">
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
-        <%= f.input :title %>
-        <%= f.input :breadcrumb_title %>
+        <%= f.input :title, input_html: { data: { translatable: true } } %>
+        <%= f.input :breadcrumb_title, input_html: { data: { translatable: true } } %>
         <%= render 'admin/application/summary/form', f: f, about: page %>
-        <%= f.input :header_text, as: :string %>
+        <%= f.input :header_text, as: :string, input_html: { data: { translatable: true } } %>
         <%= f.input :text, as: :summernote if strip_tags(page.text).present? %>
       <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: page %>
@@ -38,6 +38,11 @@ url = page.new_record?  ? admin_communication_website_pages_path
       <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
     </div>
   </div>
+
+  <% content_for :action_bar_left do %>
+    <%= render 'admin/application/i18n/translate_button', about: @page %>
+  <% end %>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>
