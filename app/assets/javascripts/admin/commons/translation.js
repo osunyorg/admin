@@ -7,7 +7,6 @@ window.osuny.translation = {
         this.done = document.querySelector('.js-translation-done');
         this.start.addEventListener('click', this.run.bind(this));
         this.url = this.component.dataset.translationUrl;
-        this.translatableFields = document.querySelectorAll('[data-translatable]');
     },
     
     run: function () {
@@ -17,6 +16,7 @@ window.osuny.translation = {
     },
 
     translateAllFields: function () {
+        this.translatableFields = document.querySelectorAll('[data-translatable]');
         for (var i = 0; i < this.translatableFields.length; i++) {
             var field = this.translatableFields[i];
             this.translate(field);
@@ -26,10 +26,8 @@ window.osuny.translation = {
     },
 
     translate: function (field) {
-        console.log(field);
         var text = field.value, 
             xhr = new XMLHttpRequest();
-        console.log(text);
         xhr.open("POST", this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
@@ -37,6 +35,8 @@ window.osuny.translation = {
             if (this.status == 200) {
                 var data = JSON.parse(this.responseText);
                 field.value = data.translatedText;
+                console.log(data);
+
             }
         };
         xhr.send(JSON.stringify({
