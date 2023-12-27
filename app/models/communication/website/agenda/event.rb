@@ -176,7 +176,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
       # Pas de fin
       nil
     elsif to_day.nil? && to_hour.present?
-      # Heure de fin, donc on se base sur le jour de début
+      # Heure de fin sans jour de fin, donc on se base sur le jour de début
       date_and_time(from_day, to_hour)
     elsif to_day.present? && to_hour.nil?
       # Jour de fin seul
