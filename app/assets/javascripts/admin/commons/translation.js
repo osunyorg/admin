@@ -10,12 +10,14 @@ window.osuny.translation = {
     },
     
     run: function () {
+        'use strict';
         this.start.hidden = true;
         this.loader.hidden = false;
         setTimeout(this.translateAllFields.bind(this), 100);
     },
 
     translateAllFields: function () {
+        'use strict';
         this.translatableFields = document.querySelectorAll('[data-translatable]');
         for (var i = 0; i < this.translatableFields.length; i++) {
             var field = this.translatableFields[i];
@@ -26,6 +28,7 @@ window.osuny.translation = {
     },
 
     translate: function (field) {
+        'use strict';
         var text = field.value, 
             xhr = new XMLHttpRequest(),
             that = this;
@@ -44,6 +47,7 @@ window.osuny.translation = {
     },
 
     translateField: function(field, text) {
+        'use strict';
         if (field.classList.contains('summernote-vue')) {
             $(field).summernote('code', text);
         } else {
