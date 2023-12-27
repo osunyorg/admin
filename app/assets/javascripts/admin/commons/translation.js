@@ -9,7 +9,7 @@ window.osuny.translation = {
         this.start.addEventListener('click', this.run.bind(this));
         this.url = this.component.dataset.translationUrl;
     },
-    
+
     run: function () {
         'use strict';
         this.start.hidden = true;
@@ -34,13 +34,15 @@ window.osuny.translation = {
         'use strict';
         var text = field.value,
             xhr = new XMLHttpRequest(),
-            that = this;
+            that = this,
+            data,
+            translatedText;
         xhr.open('POST', this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                var data = JSON.parse(this.responseText),
-                    translatedText = data.translatedText;
+                data = JSON.parse(this.responseText);
+                translatedText = data.translatedText;
                 that.translateField(field, translatedText);
             }
         };
