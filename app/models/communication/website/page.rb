@@ -14,6 +14,7 @@
 #  migration_identifier     :string
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
+#  published_at             :datetime
 #  slug                     :string           indexed
 #  summary                  :text
 #  text                     :text
@@ -56,13 +57,13 @@ class Communication::Website::Page < ApplicationRecord
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithPosition
-  include WithTree
+  include WithPublication
+  include WithPosition # Scope :ordered must override WithPublication
   include WithPermalink
-  include WithType
   include WithTranslations
-  # WithPath overwrite the git_path method defined in WithWebsites
-  include WithPath
+  include WithTree
+  include WithType
+  include WithPath # WithPath overwrites the git_path method defined in WithWebsites
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
