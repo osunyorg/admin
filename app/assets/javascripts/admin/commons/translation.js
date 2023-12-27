@@ -41,12 +41,12 @@ window.osuny.translation = {
                 var data = JSON.parse(this.responseText),
                     translatedText = data.translatedText;
                 that.translateField(field, translatedText);
-            };
+            }
         };
         xhr.send(JSON.stringify({ text: text }));
     },
 
-    translateField: function(field, text) {
+    translateField: function (field, text) {
         'use strict';
         if (field.classList.contains('summernote-vue')) {
             $(field).summernote('code', text);
