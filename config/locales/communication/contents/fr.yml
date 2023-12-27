@@ -53,6 +53,7 @@ fr:
         choose:
           title: Choisir le type de bloc à ajouter
           button: Choisir
+        empty: Ce bloc est vide et n'apparaitra pas
         headings:
           add: Ajouter un titre
         templates:

@@ -87,6 +87,10 @@ class Communication::Block::Template::Base
     block.title
   end
 
+  def empty?
+    false
+  end
+
   def to_s
     self.class.to_s.demodulize
   end

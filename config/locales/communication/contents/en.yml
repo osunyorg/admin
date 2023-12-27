@@ -53,6 +53,7 @@ en:
         choose:
           title: Choose the kind of block to add
           button: Choose
+        empty: This block is empty and will not appear
         headings:
           add: Add a title
         templates:
