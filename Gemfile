@@ -13,6 +13,7 @@ gem "bootstrap5-kaminari-views"
 gem "breadcrumbs_on_rails"
 gem "bugsnag"
 # Lock précis parce que @sebouchu a identifié un problème
+# (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
 gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
 gem "citeproc", "~> 1"
