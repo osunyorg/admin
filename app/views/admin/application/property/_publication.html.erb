@@ -1,0 +1,14 @@
+<%
+object ||= about
+# admin.communication.website.posts
+i18n_key = "admin.#{object.class.to_s.pluralize.downcase.gsub('::', '.')}"
+%>
+<% if object.draft? %>
+  <span class="badge bg-secondary">
+    <%= t("#{i18n_key}.draft") %>
+  </span>
+<% elsif object.published_in_the_future? %>
+  <span class="badge bg-secondary">
+    <%= t("#{i18n_key}.planned_on", date: l(object.published_at.to_date)) %>
+  </span>
+<% end %>

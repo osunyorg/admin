@@ -302,6 +302,7 @@ fr:
           draft: Brouillon
           in: dans %{categories}
           pinned_status: Mise en avant
+          planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
         publish:
           button: Publier
@@ -332,6 +333,7 @@ fr:
           and_pinned: et mise en avant
           by: par %{author}
           draft: Brouillon
+          planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
     manage_authors: Gérer les auteur·rice·s
     number_of_posts: Nombre d'actualités

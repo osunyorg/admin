@@ -302,6 +302,7 @@ en:
           draft: Draft
           in: in %{categories}
           pinned_status: Pinned status
+          planned_on: Publication planned on %{date}
           published_on: Published on %{date}
         publish:
           button: Publish
@@ -332,6 +333,7 @@ en:
           and_pinned: and pinned
           by: by %{author}
           draft: Draft
+          planned_on: Publication planned on %{date}
           published_on: Published on %{date}
     manage_authors: Manage authors
     number_of_posts: Nunber of posts

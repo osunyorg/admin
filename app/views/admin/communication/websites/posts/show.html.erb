@@ -4,7 +4,8 @@
   <div class="row">
     <div class="col-lg-7">
       <%= osuny_panel Communication::Website::Post.human_attribute_name(:title), small: true do %>
-        <p class="lead"><%= @post.title %></p>
+        <p class="lead mb-1"><%= @post.title %></p>
+        <%= render 'admin/application/property/publication', about: @post %>
       <% end %>
     </div>
     <div class="offset-lg-1 col-lg-4">

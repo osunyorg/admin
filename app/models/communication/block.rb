@@ -35,6 +35,7 @@ class Communication::Block < ApplicationRecord
   include WithAccessibility
   include WithHeadingRanks
   include WithPosition
+  include WithTemplate
   include WithUniversity
   include Sanitizable
 
@@ -42,8 +43,7 @@ class Communication::Block < ApplicationRecord
   FILE_MAX_SIZE = 100.megabytes
   BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
 
-  belongs_to :about, polymorphic: true
-  belongs_to :heading, optional: true
+  belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,
               class_name: "Communication::Website",
               optional: true
@@ -52,10 +52,6 @@ class Communication::Block < ApplicationRecord
   # We do not use the :touch option of the belongs_to association
   # because we do not want to touch the about when destroying the block.
   after_save :touch_about
-
-  # Used to purge images when unattaching them
-  # template_blobs would be a better name, because there are files
-  has_many_attached :template_images
 
   # Les numéros sont un peu en vrac
   # Dans l'idée, pour le futur
@@ -98,8 +94,6 @@ class Communication::Block < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :without_heading, -> { where(heading: nil) }
 
-  before_validation :set_heading_from_about, on: :create
-  before_save :attach_template_blobs
   before_validation :set_university_and_website_from_about, on: :create
 
   def self.permitted_about_types
@@ -126,14 +120,6 @@ class Communication::Block < ApplicationRecord
     [about]
   end
 
-  def template
-    @template ||= template_class.new self, self.attributes['data']
-  end
-
-  def template_reset!
-    @template = nil
-  end
-
   def language
     return @language if defined?(@language)
     @language ||= about.respond_to?(:language) ? about.language : about.university.default_language
@@ -151,6 +137,10 @@ class Communication::Block < ApplicationRecord
     block.heading = nil
     block.save
     block
+  end
+
+  def is_a_translation?
+    about.is_a_translation?
   end
 
   def translate!(about_translation, heading_id = nil)
@@ -189,21 +179,6 @@ class Communication::Block < ApplicationRecord
 
   def check_accessibility
     accessibility_merge template
-  end
-
-  def template_class
-    "Communication::Block::Template::#{template_kind.classify}".constantize
-  end
-
-  def set_heading_from_about
-    # IMPROVEMENT: Ne gère que le 1er niveau actuellement
-    self.heading ||= about.headings.root.ordered.last
-  end
-
-  # FIXME @sebou
-  # Could not find or build blob: expected attachable, got #<ActiveStorage::Blob id: "f4c78657-5062-416b-806f-0b80fb66f9cd", key: "gri33wtop0igur8w3a646llel3sd", filename: "logo.svg", content_type: "image/svg+xml", metadata: {"identified"=>true, "width"=>709, "height"=>137, "analyzed"=>true}, service_name: "scaleway", byte_size: 4137, checksum: "aZqqTYabP5+72ZeddcZ/2Q==", created_at: "2022-05-05 12:17:33.941505000 +0200", university_id: "ebf2d273-ffc9-4d9f-a4ee-a2146913d617">
-  def attach_template_blobs
-    # self.template_images = template.active_storage_blobs
   end
 
   def touch_about

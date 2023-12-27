@@ -3,6 +3,8 @@
               label: t('admin.meta_description.label'),
               hint: t('admin.meta_description.hint'),
               input_html: {
+                data: { translatable: true },
+                rows: 3,
                 value: about.meta_description&.gsub('&amp;', '&')
               } %>
 <% end %>

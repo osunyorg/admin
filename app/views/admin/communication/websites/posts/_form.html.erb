@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
-        <%= f.input :title %>
+        <%= f.input :title, input_html: { data: { translatable: true } } %>
         <%= render 'admin/application/summary/form', f: f, about: post %>
         <%= f.input :text, as: :summernote if strip_tags(post.text).present? %>
       <% end %>
@@ -20,10 +20,8 @@
             <% end %>
           </div>
         <% end %>
-        <div class="col-md-6">
-          <%= render 'admin/application/meta_description/form', f: f, about: post %>
-        </div>
       </div>
+      <%= render 'admin/application/meta_description/form', f: f, about: post %>
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
@@ -51,6 +49,12 @@
       <%= render 'admin/application/featured_image/edit', about: @post, f: f %>
     </div>
   </div>
+
+
+  <% content_for :action_bar_left do %>
+    <%= render 'admin/application/i18n/translate_button', about: @post %>
+  <% end %>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>

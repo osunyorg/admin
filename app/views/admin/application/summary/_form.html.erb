@@ -2,5 +2,6 @@
             label: t('admin.summary.label'),
             hint: t('admin.summary.hint'),
             input_html: {
+              data: { translatable: true },
               value: about.summary&.gsub('&amp;', '&')
             } %>
