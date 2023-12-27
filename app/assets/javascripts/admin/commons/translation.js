@@ -1,3 +1,4 @@
+/* global $ */
 window.osuny.translation = {
     init: function () {
         'use strict';
