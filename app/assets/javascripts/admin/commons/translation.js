@@ -26,8 +26,10 @@ window.osuny.translation = {
     },
 
     translate: function (field) {
+        console.log(field);
         var text = field.value, 
             xhr = new XMLHttpRequest();
+        console.log(text);
         xhr.open("POST", this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {

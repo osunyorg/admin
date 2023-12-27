@@ -33,6 +33,7 @@
     <% content_for :action_bar_left do %>
       <%= destroy_link @block %>
       <%= duplicate_link @block %>
+      <%= render 'admin/application/i18n/translate_button', about: @block %>
     <% end %>
     <% content_for :action_bar_right do %>
       <%= submit f %>

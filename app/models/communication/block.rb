@@ -153,6 +153,10 @@ class Communication::Block < ApplicationRecord
     block
   end
 
+  def is_a_translation?
+    about.is_a_translation?
+  end
+
   def translate!(about_translation, heading_id = nil)
     translation = self.dup
     translation.about = about_translation
