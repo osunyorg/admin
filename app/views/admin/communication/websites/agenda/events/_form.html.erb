@@ -52,6 +52,11 @@
       <%= render 'admin/application/featured_image/edit', about: event, f: f %>
     </div>
   </div>
+
+  <% content_for :action_bar_left do %>
+    <%= render 'admin/application/i18n/translate_button', about: event %>
+  <% end %>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>
