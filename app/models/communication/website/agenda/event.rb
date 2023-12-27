@@ -148,11 +148,48 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
+  def to_ics
+    event = Icalendar::Event.new
+    event.dtstart = from_datetime
+    event.dtend  = to_datetime if to_datetime.present?
+    event.summary = "#{title} #{subtitle}"
+    event.description = "#{summary}\n\n#{url}"
+    calendar = Icalendar::Calendar.new
+    calendar.prodid = 'icalendar-osuny'
+    calendar.add_event(event)
+    calendar.to_ical
+  end
+
   def to_s
     "#{title}"
   end
 
   protected
+
+  def from_datetime
+    from_hour.nil?  ? from_day
+                    : date_and_time(from_day, from_hour)
+  end
+
+  def to_datetime
+    if to_day.nil? && to_hour.nil?
+      # Pas de fin
+      nil
+    elsif to_day.nil? && to_hour.present?
+      # Heure de fin, donc on se base sur le jour de début
+      date_and_time(from_day, to_hour)
+    elsif to_day.present? && to_hour.nil?
+      # Jour de fin seul
+      to_day
+    elsif to_day.present? && to_hour.nil?
+      # Jour et heure de fin
+      date_and_time(to_day, to_hour)
+    end
+  end
+
+  def date_and_time(date, time)
+    DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone)
+  end
 
   def check_accessibility
     accessibility_merge_array blocks

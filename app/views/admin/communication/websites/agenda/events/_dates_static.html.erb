@@ -25,3 +25,6 @@ indentation = '  ' * depth
 <% if event.to_hour %>
 <%= indentation %>    hour: <%= event.to_hour.strftime "%H:%M" %>
 <% end %>
+<%= indentation %>  files:
+<%= indentation %>    ics: >-
+<%= indentation %>      <%= prepare_text_for_static event.to_ics, depth + 3 %>
