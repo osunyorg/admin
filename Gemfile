@@ -5,6 +5,7 @@ ruby "3.1.4"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_storage_validations", "~> 1"
+gem "add_to_calendar"
 gem "angularjs-rails"
 gem "aws-sdk-s3"
 gem "bootstrap"
