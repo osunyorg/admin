@@ -52,6 +52,7 @@ window.osuny.translation = {
             $(field).summernote('code', text);
         } else {
             field.value = text;
+            // https://stackoverflow.com/questions/56348513/how-to-change-v-model-value-from-js
             field.dispatchEvent(new Event('input'));
         }
     },
