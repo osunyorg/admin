@@ -31,14 +31,13 @@ window.osuny.translation = {
 
     translate: function (field) {
         'use strict';
-        var text = field.value, 
+        var text = field.value,
             xhr = new XMLHttpRequest(),
             that = this;
-        xhr.open("POST", this.url, false);
+        xhr.open('POST', this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
-            if (this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 var data = JSON.parse(this.responseText),
                 translatedText = data.translatedText;
                 that.translateField(field, translatedText);
