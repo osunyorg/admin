@@ -38,6 +38,9 @@ end
               </div>
             </article>
           <% end %>
+          <% if block.template.selected_events.empty? %>
+            <p><%= block.template.no_event_message %></p>
+          <% end %>
         <% end %>
       </div>
     </div>

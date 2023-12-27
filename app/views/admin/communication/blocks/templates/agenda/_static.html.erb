@@ -1,13 +1,13 @@
 <%= block_component_static block, :mode %>
 <%= block_component_static block, :layout %>
 <%= block_component_static block, :description %>
+<%= block_component_static block, :no_event_message %>
+<%= block_component_static block, :show_summary %>
+<%= block_component_static block, :show_category %>
+<%= block_component_static block, :show_status %>
 <% if block.template.mode == 'category' && block.template.category %>
       category: "<%= block.template.category.path %>"
 <% end %>
-      show_summary: <%= block.template.show_summary %>
-      show_category: <%= block.template.show_category %>
-      show_status: <%= block.template.show_status %>
-
       events:
 <% block.template.selected_events.each do |element| %>
         - path: "<%= element.current_permalink_in_website(@website)&.path %>"
