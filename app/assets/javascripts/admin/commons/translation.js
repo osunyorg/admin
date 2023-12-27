@@ -6,9 +6,9 @@ window.osuny.translation = {
         this.start = document.querySelector('.js-translation-start');
         this.loader = document.querySelector('.js-translation-loader');
         this.done = document.querySelector('.js-translation-done');
-        this.start.addEventListener('click', this.run.bind(this));
         this.csrfToken = document.querySelector('[name="csrf-token"]').content;
         this.url = this.component.dataset.translationUrl;
+        this.start.addEventListener('click', this.run.bind(this));
     },
 
     run: function () {
