@@ -39,7 +39,7 @@ window.osuny.translation = {
         xhr.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var data = JSON.parse(this.responseText),
-                translatedText = data.translatedText;
+                    translatedText = data.translatedText;
                 that.translateField(field, translatedText);
             };
         };
