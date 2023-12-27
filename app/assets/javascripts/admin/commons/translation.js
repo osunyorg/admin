@@ -18,9 +18,11 @@ window.osuny.translation = {
 
     translateAllFields: function () {
         'use strict';
+        var i,
+            field;
         this.translatableFields = document.querySelectorAll('[data-translatable]');
-        for (var i = 0; i < this.translatableFields.length; i++) {
-            var field = this.translatableFields[i];
+        for (i = 0; i < this.translatableFields.length; i += 1) {
+            field = this.translatableFields[i];
             this.translate(field);
         }
         this.loader.hidden = true;
@@ -32,7 +34,6 @@ window.osuny.translation = {
         var text = field.value, 
             xhr = new XMLHttpRequest(),
             that = this;
-        console.log(field);
         xhr.open("POST", this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
