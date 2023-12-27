@@ -12,7 +12,8 @@ gem "bootsnap", "~> 1", require: false
 gem "bootstrap5-kaminari-views"
 gem "breadcrumbs_on_rails"
 gem "bugsnag"
-gem "cancancan", "~> 3"
+# Lock précis parce que @sebouchu a identifié un problème
+gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
 gem "citeproc", "~> 1"
 gem "citeproc-ruby", "~> 2"
