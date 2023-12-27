@@ -2,16 +2,18 @@ class Admin::TranslationController < Admin::ApplicationController
   skip_before_action :verify_authenticity_token
 
   def translate
-    @target = translation_params[:target]
-    @response = LibreTranslate.translate  translation_params[:text],
+    @text = translation_params[:text].to_s
+    head :ok and return if @text.blank?
+    @to = translation_params[:to]
+    @response = LibreTranslate.translate  @text,
                                           source: 'auto',
-                                          target: translation_params[:to]
+                                          target: @to
     render json: @response
   end
 
   protected
 
   def translation_params
-    params.permit(:text, :from, :to, :target)
+    params.permit(:text, :to)
   end
 end
