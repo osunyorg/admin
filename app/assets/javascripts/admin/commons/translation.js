@@ -52,6 +52,7 @@ window.osuny.translation = {
             $(field).summernote('code', text);
         } else {
             field.value = text;
+            field.dispatchEvent(new Event('input'));
         }
     },
 
