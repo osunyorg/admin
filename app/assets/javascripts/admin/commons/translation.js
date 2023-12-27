@@ -27,7 +27,8 @@ window.osuny.translation = {
 
     translate: function (field) {
         var text = field.value, 
-            xhr = new XMLHttpRequest();
+            xhr = new XMLHttpRequest(),
+            that = this;
         console.log(field);
         xhr.open("POST", this.url, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -35,17 +36,19 @@ window.osuny.translation = {
             if (this.readyState != 4) return;
             if (this.status == 200) {
                 var data = JSON.parse(this.responseText),
-                    translatedText = data.translatedText;
-                if (field.classList.contains('summernote-vue')) {
-                    $(field).summernote('code', translatedText);
-                } else {
-                    field.value = translatedText;
-                }
-            }
+                translatedText = data.translatedText;
+                that.translateField(field, translatedText);
+            };
         };
-        xhr.send(JSON.stringify({
-            text: text
-        }));
+        xhr.send(JSON.stringify({ text: text }));
+    },
+
+    translateField: function(field, text) {
+        if (field.classList.contains('summernote-vue')) {
+            $(field).summernote('code', text);
+        } else {
+            field.value = text;
+        }
     },
 
     invoke: function () {
