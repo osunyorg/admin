@@ -25,6 +25,9 @@ indentation = '  ' * depth
 <% if event.to_hour %>
 <%= indentation %>    hour: <%= event.to_hour.strftime "%H:%M" %>
 <% end %>
-<%= indentation %>  files:
-<%= indentation %>    ics: >-
-<%= indentation %>      <%= prepare_text_for_static event.to_ics, depth + 3 %>
+<%= indentation %>  add_to_calendar:
+<%= indentation %>    google: "<%= @event.cal.google_url %>"
+<%= indentation %>    yahoo: "<%= @event.cal.yahoo_url %>"
+<%= indentation %>    office: "<%= @event.cal.office365_url %>"
+<%= indentation %>    outlook: "<%= @event.cal.outlook_com_url %>"
+<%= indentation %>    ical: "<%= @event.cal.ical_url %>"
