@@ -172,18 +172,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def to_time
-    if to_day.nil? && to_hour.nil?
-      # Pas de fin
-      nil
-    elsif to_day.nil? && to_hour.present?
-      # Heure de fin, donc on se base sur le jour de début
-      date_and_time(from_day, to_hour)
-    elsif to_day.present? && to_hour.nil?
-      # Jour de fin seul
-      to_day.to_time
-    elsif to_day.present? && to_hour.nil?
-      # Jour et heure de fin
-      date_and_time(to_day, to_hour)
+    if to_day.nil?
+      to_hour.nil?  ? nil # Pas de fin, ni jour ni heure
+                    : date_and_time(from_day, to_hour) # Heure de fin, donc on se base sur le jour de début
+    elsif to_day.present?
+      to_hour.nil?  ? to_day.to_time # Jour de fin seul
+                    : date_and_time(to_day, to_hour) # Jour et heure de fin
     end
   end
 
