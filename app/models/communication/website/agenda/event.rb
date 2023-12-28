@@ -188,7 +188,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def date_and_time(date, time)
-    Time.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone)
+    # FIXME la timezone est Europe/Paris pour tout
+    Time.new  date.year,
+              date.month,
+              date.day,
+              time.hour,
+              time.min,
+              time.sec,
+              Time.zone
   end
 
   def check_accessibility
