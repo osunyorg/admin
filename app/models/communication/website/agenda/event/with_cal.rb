@@ -2,7 +2,6 @@ module Communication::Website::Agenda::Event::WithCal
   extend ActiveSupport::Concern
 
   def cal
-    raise "Event '#{id}' in website '#{website}' in university '#{university}' has same from start and end" if cal_from_time == cal_to_time
     @cal ||= AddToCalendar::URLs.new(
       start_datetime: cal_from_time, 
       end_datetime: cal_to_time,
@@ -37,7 +36,7 @@ module Communication::Website::Agenda::Event::WithCal
   end
 
   def cal_to_time_with_end_day
-    to_hour.nil?  ? to_day.to_time + 1.hour # Jour de fin seul, on ajoute 1 heure pour éviter les événements sans durée
+    to_hour.nil?  ? cal_from_time + 1.hour # Jour de fin seul, on ajoute 1 heure pour éviter les événements sans durée
                   : date_and_time(to_day, to_hour) # Jour et heure de fin
   end
 
