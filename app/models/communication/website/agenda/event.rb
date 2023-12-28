@@ -83,6 +83,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   validates_presence_of :from_day, :title
   validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
 
+  before_validation :set_to_day
+
   STATUS_FUTURE = 'future'
   STATUS_CURRENT = 'current'
   STATUS_ARCHIVE = 'archive'
@@ -217,5 +219,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def abouts_with_agenda_block
     website.blocks.agenda.collect(&:about)
+  end
+
+  def set_to_day
+    self.to_day = self.from_day if self.to_day.nil?
   end
 end
