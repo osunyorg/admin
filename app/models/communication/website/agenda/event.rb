@@ -46,11 +46,13 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Sanitizable
   include WithAccessibility
   include WithBlobs
+  include WithCal
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
   include WithSlug
+  include WithTime
   include WithTranslations
   include WithTree
   include WithUniversity
@@ -73,49 +75,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :draft, -> { where(published: false) }
 
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
-
-  scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
-  scope :future_or_current, -> { where('from_day >= :today', today: Date.today).ordered_asc }
-  scope :current, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
-  scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
-  scope :past, -> { archive }
-
-  validates_presence_of :from_day, :title
-  validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
-
-  STATUS_FUTURE = 'future'
-  STATUS_CURRENT = 'current'
-  STATUS_ARCHIVE = 'archive'
-
-  def status
-    if future?
-      STATUS_FUTURE
-    elsif current?
-      STATUS_CURRENT
-    else
-      STATUS_ARCHIVE
-    end
-  end
-
-  def future?
-    from_day > Date.today
-  end
-
-  def current?
-    to_day.present? ? (Date.today >= from_day && Date.today <= to_day)
-                    : from_day <= Date.today # Les événements sans date de fin restent actifs
-  end
-
-  def archive?
-    to_day.present? ? to_day < Date.today
-                    : false # Les événements sans date de fin restent actifs
-  end
-
-  # Un événement demain aura une distance de 1, comme un événement hier
-  # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
-  def distance_in_days
-    (Date.today - from_day).to_i.abs
-  end
 
   def git_path(website)
     return unless website.id == communication_website_id && published
@@ -148,67 +107,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
-  def cal
-    @cal ||= AddToCalendar::URLs.new(
-      start_datetime: from_time, 
-      end_datetime: to_time,
-      timezone: 'Europe/Paris',
-      title: "#{title} #{subtitle}",
-      url: url,
-      description: summary,
-      all_day: (from_hour.nil? && to_hour.nil?)
-    )
-  end
-
   def to_s
     "#{title}"
   end
 
   protected
 
-  def from_time
-    from_hour.nil?  ? from_day.to_time
-                    : date_and_time(from_day, from_hour)
-  end
-
-  def to_time
-    if to_day.nil? && to_hour.nil?
-      # Pas de fin
-      nil
-    elsif to_day.nil? && to_hour.present?
-      # Heure de fin sans jour de fin, donc on se base sur le jour de début
-      date_and_time(from_day, to_hour)
-    elsif to_day.present? && to_hour.nil?
-      # Jour de fin seul
-      to_day.to_time
-    elsif to_day.present? && to_hour.nil?
-      # Jour et heure de fin
-      date_and_time(to_day, to_hour)
-    end
-  end
-
-  def date_and_time(date, time)
-    # FIXME la timezone est Europe/Paris pour tout
-    Time.new  date.year,
-              date.month,
-              date.day,
-              time.hour,
-              time.min,
-              time.sec,
-              Time.zone
-  end
-
   def check_accessibility
     accessibility_merge_array blocks
-  end
-
-  def to_day_after_from_day
-    errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
-  end
-
-  def to_hour_after_from_hour_on_same_day
-    return if from_day != to_day
-    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour < from_hour
   end
 
   def explicit_blob_ids

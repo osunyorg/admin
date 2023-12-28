@@ -1,9 +1,23 @@
-<i class="fas fa-play-circle"></i>
-<%= l(event.from_day) %>
-<%= l(event.from_hour, format: :time_only) if event.from_hour %>
-<% if event.to_day %>
-  <br>
-  <i class="fas fa-stop-circle"></i>
-  <%= l(event.to_day) %>
-  <%= l(event.to_hour, format: :time_only) if event.to_hour %>
+<%
+detailed = local_assigns.dig(:detailed)
+day_format = detailed ? :full
+                      : :default
+%>
+<% if event.same_day? %>
+  <%= l(event.from_day, format: day_format).upcase_first %>
+  <% if event.from_hour %>
+    <br>
+    <%= l(event.from_hour, format: :time_only) %>
+    <% if event.to_hour %>
+      - <%= l(event.to_hour, format: :time_only) %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= l(event.from_day, format: day_format).upcase_first %>
+  <%= l(event.from_hour, format: :time_only) if event.from_hour %>
+  <% if event.to_day %>
+    <br>
+    <%= l(event.to_day, format: day_format).upcase_first %>
+    <%= l(event.to_hour, format: :time_only) if event.to_hour %>
+  <% end %>
 <% end %>
