@@ -36,7 +36,7 @@ module Communication::Website::Agenda::Event::WithCal
   end
 
   def cal_to_time_with_end_day
-    to_hour.nil?  ? cal_from_time + 1.hour # Jour de fin seul, on ajoute 1 heure pour éviter les événements sans durée
+    to_hour.nil?  ? date_and_time(to_day, from_hour + 1.hour) # Jour de fin seul, on ajoute 1 heure pour éviter les événements sans durée
                   : date_and_time(to_day, to_hour) # Jour et heure de fin
   end
 
