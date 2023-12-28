@@ -64,6 +64,6 @@ module Communication::Website::Agenda::Event::WithTime
 
   def to_hour_after_from_hour_on_same_day
     return if from_day != to_day
-    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour < from_hour
+    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 end
