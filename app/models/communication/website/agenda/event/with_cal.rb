@@ -2,6 +2,7 @@ module Communication::Website::Agenda::Event::WithCal
   extend ActiveSupport::Concern
 
   def cal
+    raise "Event '#{id}' in website '#{website}' in university '#{university}' has same from start and end" if cal_from_time == cal_to_time
     @cal ||= AddToCalendar::URLs.new(
       start_datetime: cal_from_time, 
       end_datetime: cal_to_time,
