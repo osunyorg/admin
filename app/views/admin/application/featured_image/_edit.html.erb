@@ -9,13 +9,21 @@
               resize: true %>
   <%= f.input :featured_image_alt,
               label: t('featured_image.alt.label'),
-              hint: t('featured_image.alt.hint') %>
+              hint: t('featured_image.alt.hint'), 
+              input_html: { 
+                data: {
+                  translatable: true
+                } 
+              } %>
   <%= f.input :featured_image_credit,
               as: :summernote,
               label: t('featured_image.credit.label'),
               hint: t('featured_image.credit.hint'),
               input_html: {
-                data: { 'summernote-config' => 'link' }
+                data: {
+                  translatable: true,
+                  'summernote-config' => 'link' 
+                }
               } %>
   <%= render 'admin/communication/photo_imports/selector', about: about, f:f %>
 <% end %>

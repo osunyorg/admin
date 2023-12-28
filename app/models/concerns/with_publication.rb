@@ -1,4 +1,6 @@
-# FIXME: les méthodes utilisant published_at doivent vérifier que l'attribut existe
+# L'objet doit avoir 2 attributs :
+# - published:boolean
+# - published_at:datetime
 module WithPublication
   extend ActiveSupport::Concern
 
@@ -11,15 +13,15 @@ module WithPublication
   end
 
   def draft?
-    !published || published_in_the_future?
+    !published
   end
 
   def published_in_the_future?
-    published && published_at > Time.now
+    published && published_at.present? && published_at > Time.now
   end
 
   def published_now?
-    published && published_at <= Time.now
+    published && published_at.present? && published_at <= Time.now
   end
 
   protected

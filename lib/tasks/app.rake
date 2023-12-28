@@ -22,7 +22,7 @@ namespace :app do
     task refresh_tokens: :environment do
       options = {}
       option_parser = OptionParser.new
-      option_parser.banner = "Usage: rake app:websites:refresh_tokens -- --old ghp_oldtoken --new ghp_newtoken"
+      option_parser.banner = "Usage: rake app:websites:refresh_tokens -- --old=ghp_oldtoken --new=ghp_newtoken"
       option_parser.on("-o OLDTOKEN", "--old OLDTOKEN") do |old_access_token|
         options[:old_access_token] = old_access_token
       end

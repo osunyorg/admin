@@ -26,6 +26,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :show_category, :boolean
   has_component :show_summary, :boolean
   has_component :show_status, :boolean
+  has_component :no_event_message, :string
 
   def selected_events
     @selected_events ||= send "selected_events_#{mode}"
@@ -45,6 +46,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   def children
     selected_events
+  end
+
+  def empty?
+    selected_events.none? && no_event_message.blank? && mode != 'categories'
   end
 
   protected

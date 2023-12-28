@@ -3,7 +3,7 @@ class Communication::Block::Template::Feature::Element < Communication::Block::T
   has_component :title, :string
   has_component :description, :text
   has_component :image, :image
-  has_component :alt, :string
+  has_component :alt, :text
   has_component :credit, :rich_text
 
 end
