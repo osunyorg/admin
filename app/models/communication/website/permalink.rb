@@ -25,9 +25,9 @@
 #
 class Communication::Website::Permalink < ApplicationRecord
   MAPPING = {
-    "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
     "Communication::Website::Page" => Communication::Website::Permalink::Page,
     "Communication::Website::Post" => Communication::Website::Permalink::Post,
+    "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
     "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
     "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
     "Education::Diploma" => Communication::Website::Permalink::Diploma,

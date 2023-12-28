@@ -29,7 +29,7 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
   end
 
   def self.static_config_key
-    :categories
+    :posts_categories
   end
 
   # /actualites/:slug/
