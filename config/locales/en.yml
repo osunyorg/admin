@@ -165,6 +165,7 @@ en:
   date:
     formats:
       birthday: "%B %d"
+      full: "%A %-d %B %Y"
   delete: Delete
   default_images_hint: "5 MB max, %{formats}"
   devise:

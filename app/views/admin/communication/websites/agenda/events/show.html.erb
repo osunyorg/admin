@@ -8,7 +8,7 @@
         <% if @event.subtitle.present? %>
           <p class="mt-n3 text-muted"><%= @event.subtitle %></p>
         <% end %>
-        <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event %></p>
+        <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event, detailed: true %></p>
       <% end %>
     </div>
     <div class="offset-lg-1 col-lg-4">
