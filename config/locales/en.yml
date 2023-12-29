@@ -337,8 +337,8 @@ en:
         theme:
           sync: Sync version
           update: Update theme
+      clean_and_rebuild_all_websites_notice: All themes will be updated. This can take a few minutes.
       sync_theme_version_notice: The theme's version of %{website} has been synced
-      update_all_themes_notice: All themes will be updated. This can take a few minutes.
       update_theme_notice: The theme of %{website} will be updated in a moment
   seo: SEO
   simple_form:

@@ -44,7 +44,7 @@
                         sync_theme_version_server_website_path(website),
                         method: :post,
                         remote: true,
-                        class: button_classes if website.url.present? && website.theme_version_url.present? %>
+                        class: "#{button_classes} js-sync-theme-version" if website.url.present? && website.theme_version_url.present? %>
             <%= link_to t('server_admin.websites.buttons.theme.update'),
                         update_theme_server_website_path(website),
                         method: :post,
@@ -58,8 +58,11 @@
 </div>
 
 <% content_for :action_bar_left do %>
+  <%= link_to "Synchroniser toutes les versions de thème",
+              "#",
+              class: "#{button_classes} js-sync-all-theme-versions" %>
   <%= link_to "Tout mettre à jour",
-              update_all_themes_server_websites_path(current_scopes),
+              clean_and_rebuild_all_websites_server_websites_path(current_scopes),
               method: :post,
               class: button_classes %>
 <% end %>

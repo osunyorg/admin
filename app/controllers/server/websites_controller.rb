@@ -1,6 +1,6 @@
 class Server::WebsitesController < Server::ApplicationController
-  before_action :load_websites, only: [:index, :manage_versions, :update_all_themes]
-  before_action :load_website, except: [:index, :manage_versions, :update_all_themes]
+  before_action :load_websites, only: [:index, :manage_versions, :clean_and_rebuild_all_websites]
+  before_action :load_website, except: [:index, :manage_versions, :clean_and_rebuild_all_websites]
 
   has_scope :for_theme_version
   has_scope :for_production
@@ -19,11 +19,11 @@ class Server::WebsitesController < Server::ApplicationController
     add_breadcrumb "Gestion des versions"
   end
 
-  def update_all_themes
+  def clean_and_rebuild_all_websites
     @websites.find_each do |website|
       website.clean_and_rebuild
     end
-    redirect_back(fallback_location: manage_versions_server_websites_path, notice: t('server_admin.websites.update_all_themes_notice'))
+    redirect_back(fallback_location: manage_versions_server_websites_path, notice: t('server_admin.websites.clean_and_rebuild_all_websites_notice'))
   end
 
   def sync_theme_version
