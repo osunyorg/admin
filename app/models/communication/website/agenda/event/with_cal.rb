@@ -3,7 +3,7 @@ module Communication::Website::Agenda::Event::WithCal
 
   def cal
     @cal ||= AddToCalendar::URLs.new(
-      start_datetime: cal_from_time, 
+      start_datetime: cal_from_time,
       end_datetime: cal_to_time,
       timezone: timezone.name,
       all_day: cal_all_day,
@@ -21,6 +21,9 @@ module Communication::Website::Agenda::Event::WithCal
   end
 
   def cal_to_time
+    # Si all_day == true et qu'on ne transmet pas de date de fin, l'événement sera considéré comme un événement d'une journée
+    # On peut donc early return selon ces conditions
+    return if cal_all_day && from_day == to_day
     to_day.nil? ? cal_to_time_with_no_end_day
                 : cal_to_time_with_end_day
   end
@@ -37,7 +40,7 @@ module Communication::Website::Agenda::Event::WithCal
 
   def cal_to_time_with_end_day
     # Soit on a 1 heure de fin, et tout est simple
-    cal_end_time = to_hour 
+    cal_end_time = to_hour
     # Soit on n'en a pas, mais on a 1 heure de début, donc on ajoute 1 heure pour éviter les événements sans durée
     cal_end_time ||= from_hour + 1.hour if from_hour
     # Si rien n'a marché, on a nil
