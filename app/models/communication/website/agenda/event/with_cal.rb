@@ -36,8 +36,13 @@ module Communication::Website::Agenda::Event::WithCal
   end
 
   def cal_to_time_with_end_day
-    to_hour.nil?  ? date_and_time(to_day, from_hour + 1.hour) # Jour de fin seul, on ajoute 1 heure pour éviter les événements sans durée
-                  : date_and_time(to_day, to_hour) # Jour et heure de fin
+    # Soit on a 1 heure de fin, et tout est simple
+    cal_end_time = to_hour 
+    # Soit on n'en a pas, mais on a 1 heure de début, donc on ajoute 1 heure pour éviter les événements sans durée
+    cal_end_time ||= from_hour + 1.hour if from_hour
+    # Si rien n'a marché, on a nil
+    cal_end_time.nil? ? to_day.to_time # Il n'y a ni heure de fin ni heure de début
+                      : date_and_time(to_day, cal_end_time) # Il y a bien une heure de fin
   end
 
   def timezone
