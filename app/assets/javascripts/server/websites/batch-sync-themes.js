@@ -19,7 +19,7 @@ window.osuny.websites.batchSyncThemes = {
         'use strict';
         return {
             init: this.init.bind(this)
-        }
+        };
     }
 }.invoke();
 
@@ -28,4 +28,4 @@ window.addEventListener('DOMContentLoaded', function () {
     if (document.body.classList.contains('websites-manage_versions')) {
         window.osuny.websites.batchSyncThemes.init();
     }
-})
+});
