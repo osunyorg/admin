@@ -12,6 +12,7 @@
 #  slug                     :string           indexed
 #  subtitle                 :string
 #  summary                  :text
+#  time_zone                :string
 #  title                    :string
 #  to_day                   :date
 #  to_hour                  :time

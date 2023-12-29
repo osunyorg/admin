@@ -183,6 +183,7 @@ fr:
         status_future: À venir
         status_archive: Archive
         subtitle: Sous-titre
+        time_zone: Fuseau horaire
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
@@ -273,6 +274,7 @@ fr:
           events:
             draft: Brouillon
             none: Pas encore d'événements
+            formatted_time_zone: "Fuseau horaire : %{time_zone}"
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas. C'est aussi l'image de partage par défaut."
         editorial:
           label: Éditorial

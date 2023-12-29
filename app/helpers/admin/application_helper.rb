@@ -205,6 +205,19 @@ module Admin::ApplicationHelper
     }
   end
 
+  def time_zones_for_select
+    # Collection items are like ["(GMT+01:00) Paris", "Europe/Paris"]
+    # Label specifies the UTC offset
+    # Value is in tz database format
+    time_zones = ActiveSupport::TimeZone.all.sort
+    time_zones.map { |time_zone|
+      [
+        time_zone.to_s,
+        time_zone.tzinfo.name
+      ]
+    }
+  end
+
   private
 
   def polymorphic_url_param(object_or_class, **options)
