@@ -139,6 +139,7 @@ en:
         created_at: Creation
         default_image: Default image
         default_language: Default language
+        default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs

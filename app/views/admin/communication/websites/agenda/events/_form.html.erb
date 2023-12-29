@@ -28,7 +28,7 @@
         </div>
         <%= f.input :time_zone,
                     collection: time_zones_for_select,
-                    selected: f.object.time_zone || Time.zone.name %>
+                    selected: f.object.time_zone || @website.default_time_zone %>
       <% end %>
       <% if @categories.any? %>
         <%= osuny_panel t('activerecord.attributes.communication/website/agenda/event.categories') do %>
