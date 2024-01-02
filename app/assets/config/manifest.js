@@ -3,8 +3,6 @@
 //= link_tree ../fonts
 //= link_directory ../stylesheets .css
 //= link_directory ../javascripts .js
+//= link_directory ../stylesheets/admin .css
+//= link_directory ../javascripts/admin .js
 //= link vue.js
-//= link admin/appstack.css
-//= link admin/pure.css
-//= link admin/appstack.js
-//= link admin/pure.js

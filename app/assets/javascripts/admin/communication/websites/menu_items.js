@@ -1,5 +1,5 @@
 /* global $ */
-window.osuny.communication.menuItems = {
+window.osuny.communication.websites.menuItems = {
     init: function () {
         'use strict';
         var i,
@@ -74,6 +74,6 @@ window.osuny.communication.menuItems = {
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
     if (window.osuny.isInControllerForm('items')) {
-        window.osuny.communication.menuItems.init();
+        window.osuny.communication.websites.menuItems.init();
     }
 });

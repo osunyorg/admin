@@ -1,4 +1,4 @@
-window.osuny.communication.websites = {
+window.osuny.communication.websites.form = {
     init: function () {
         'use strict';
         this.languagesCheckboxes = document.querySelectorAll('.js-languages input[type="checkbox"]');
@@ -48,6 +48,6 @@ window.osuny.communication.websites = {
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
     if (window.osuny.isInControllerForm('websites')) {
-        window.osuny.communication.websites.init();
+        window.osuny.communication.websites.form.init();
     }
 });
