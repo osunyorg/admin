@@ -139,6 +139,7 @@ en:
         created_at: Creation
         default_image: Default image
         default_language: Default language
+        default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
@@ -183,6 +184,7 @@ en:
         status_future: In the future
         status_archive: Archive
         subtitle: Subtitle
+        time_zone: Time zone
         title: Title
         to_day: To day
         to_hour: To hour
@@ -273,6 +275,7 @@ en:
           events:
             draft: Draft
             none: No event yet
+            formatted_time_zone: "Time zone: %{time_zone}"
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
         editorial:
           label: Editorial

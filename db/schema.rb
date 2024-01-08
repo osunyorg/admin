@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_29_154550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -274,6 +274,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "subtitle"
+    t.string "time_zone"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
@@ -497,6 +498,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.string "deuxfleurs_identifier"
     t.string "social_email"
     t.string "social_github"
+    t.string "default_time_zone"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"

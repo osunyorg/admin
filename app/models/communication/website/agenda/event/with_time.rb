@@ -5,13 +5,14 @@ module Communication::Website::Agenda::Event::WithTime
     STATUS_FUTURE = 'future'
     STATUS_CURRENT = 'current'
     STATUS_ARCHIVE = 'archive'
-    
+
     scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
     scope :future_or_current, -> { where('from_day >= :today', today: Date.today).ordered_asc }
     scope :current, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
     scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
     scope :past, -> { archive }
 
+    before_validation :set_time_zone
     before_validation :set_to_day
 
     validates_presence_of :from_day, :title
@@ -51,8 +52,12 @@ module Communication::Website::Agenda::Event::WithTime
   def distance_in_days
     (Date.today - from_day).to_i.abs
   end
-  
+
   protected
+
+  def set_time_zone
+    self.time_zone = Time.zone.name if self.time_zone.nil?
+  end
 
   def set_to_day
     self.to_day = self.from_day if self.to_day.nil?
