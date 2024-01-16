@@ -75,7 +75,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
 
-  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
+  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_agenda_categories: { id: category_id }).distinct }
 
   def git_path(website)
     return unless website.id == communication_website_id && published

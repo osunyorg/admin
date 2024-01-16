@@ -1,8 +1,8 @@
-class Communication::Block::Component::Category < Communication::Block::Component::Base
+class Communication::Block::Component::AgendaCategory < Communication::Block::Component::Base
 
   def category
     return unless website
-    website.post_categories.find_by(id: data)
+    website.agenda_categories.find_by(id: data)
   end
 
   def dependencies

@@ -19,7 +19,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     :selection,
     :categories
   ]
-  has_component :category_id, :category
+  has_component :category_id, :agenda_category
   has_component :description, :rich_text
   has_component :quantity, :number, options: 3
   has_component :time, :option, options: AUTHORIZED_SCOPES
