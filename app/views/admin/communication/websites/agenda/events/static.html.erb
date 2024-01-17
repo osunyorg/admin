@@ -14,7 +14,7 @@ weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/summary/static' %>
 <% if @about.categories.any? %>
 events_categories:
-<% @about.categories.each do |category| %>
+<% @about.categories.ordered.each do |category| %>
   - "<%= category.slug %>"
 <% end %>
 <% end %>

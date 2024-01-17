@@ -15,7 +15,7 @@ authors:
 <% end %>
 <% if @about.categories.any? %>
 posts_categories:
-<% @about.categories.each do |category| %>
+<% @about.categories.ordered.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
 <% end %>
 <% end %>
