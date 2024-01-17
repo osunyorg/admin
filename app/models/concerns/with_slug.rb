@@ -34,6 +34,7 @@ module WithSlug
                 .exists?
     end
 
+    # FIXME `respond_to?(:parent)` sert à quoi ?
     def make_path
       return unless respond_to?(:path) && respond_to?(:parent)
       self.path = generated_path
