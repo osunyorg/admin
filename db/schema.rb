@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_29_154550) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -248,9 +248,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_154550) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "parent_id"
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_categories_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_categories_on_original_id"
+    t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
@@ -1157,6 +1159,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_154550) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "original_id"
+  add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
   add_foreign_key "communication_website_agenda_categories", "languages"
   add_foreign_key "communication_website_agenda_categories", "universities"
