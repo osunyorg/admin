@@ -63,6 +63,17 @@ class Communication::Website::Agenda::Category < ApplicationRecord
     "admin/communication/websites/agenda/categories/static"
   end
 
+  def dependencies
+    active_storage_blobs +
+    contents_dependencies +
+    [website.config_default_content_security_policy]
+  end
+
+  def references
+    events +
+    website.menus
+  end
+
   protected
 
   def slug_unavailable?(slug)
