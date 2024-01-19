@@ -6,7 +6,9 @@
 
 Rails.application.configure do
 
-  style_urls = %w()
+  style_urls = %w(
+    https://example.osuny.org/assets/css/
+  )
   img_urls = %w()
   script_urls = %w(
     https://example.osuny.org/js/

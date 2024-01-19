@@ -4,4 +4,7 @@ class Communication::Block::Template::Gallery < Communication::Block::Template::
   has_layouts [:grid, :carousel]
   has_component :description, :rich_text
 
+  def empty?
+    elements.none?
+  end
 end

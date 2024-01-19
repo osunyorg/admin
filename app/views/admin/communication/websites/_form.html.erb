@@ -24,16 +24,16 @@
         <%= osuny_panel Language.model_name.human(count: 2) do %>
           <div class="row">
             <div class="col-lg-6">
-              <%= f.association :languages, 
-                                as: :check_boxes, 
-                                required: true, 
-                                wrapper_html: { class: "js-languages" }, 
+              <%= f.association :languages,
+                                as: :check_boxes,
+                                required: true,
+                                wrapper_html: { class: "js-languages" },
                                 label_method: lambda { |l| language_name(l.iso_code) } %>
             </div>
             <div class="col-lg-6">
-              <%= f.association :default_language, 
-                                include_blank: t('simple_form.include_blanks.defaults.language'), 
-                                label_method: lambda { |l| language_name(l.iso_code) }, 
+              <%= f.association :default_language,
+                                include_blank: t('simple_form.include_blanks.defaults.language'),
+                                label_method: lambda { |l| language_name(l.iso_code) },
                                 input_html: (@website.persisted? ? { disabled: true } : { class: "js-default-language" }) %>
             </div>
           </div>
@@ -51,6 +51,17 @@
                           hint: default_images_formats_accepted_hint,
                           input_html: { accept: default_images_formats_accepted },
                           preview: 300 %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= osuny_panel Communication::Website.human_attribute_name('feature_agenda') do %>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= f.input :default_time_zone,
+                          collection: time_zones_for_select,
+                          include_blank: false,
+                          selected: f.object.default_time_zone || Time.zone.name %>
             </div>
           </div>
         <% end %>
@@ -77,7 +88,7 @@
           </div>
         <% end %>
       </section>
-      
+
       <section>
         <p class="float-end blocks__category__description"><%= t "admin.communication.website.technical.description" %></p>
         <h2 class="h3 category blocks__category__title"><%= t "admin.communication.website.technical.label" %></h2>
@@ -97,9 +108,9 @@
         <%= osuny_panel t('communication.website.git') do %>
           <%= f.input :git_provider, include_blank: false %>
           <%= f.input :git_endpoint %>
-          <%= f.input :access_token, 
-                      as: :string, 
-                      placeholder: masked_string(f.object.access_token), 
+          <%= f.input :access_token,
+                      as: :string,
+                      placeholder: masked_string(f.object.access_token),
                       hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
                       input_html: {
                         autocomplete: 'access_token',
@@ -109,8 +120,8 @@
                       %>
           <%= f.input :repository %>
           <%= f.input :git_branch %>
-          <%= f.input :deployment_status_badge, 
-                      as: :string, 
+          <%= f.input :deployment_status_badge,
+                      as: :string,
                       input_html: {
                         autocomplete: 'deployment_status_badge',
                         role: 'presentation'

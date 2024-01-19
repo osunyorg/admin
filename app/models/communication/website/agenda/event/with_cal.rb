@@ -5,7 +5,7 @@ module Communication::Website::Agenda::Event::WithCal
     @cal ||= AddToCalendar::URLs.new(
       start_datetime: cal_from_time,
       end_datetime: cal_to_time,
-      timezone: timezone.name,
+      timezone: time_zone,
       all_day: cal_all_day,
       title: "#{title} #{subtitle}",
       url: url,
@@ -48,11 +48,6 @@ module Communication::Website::Agenda::Event::WithCal
                       : date_and_time(to_day, cal_end_time) # Il y a bien une heure de fin
   end
 
-  def timezone
-    # FIXME la timezone est Europe/Paris pour tout
-    Time.zone
-  end
-
   def date_and_time(date, time)
     Time.new  date.year,
               date.month,
@@ -60,7 +55,7 @@ module Communication::Website::Agenda::Event::WithCal
               time.hour,
               time.min,
               time.sec,
-              timezone
+              ActiveSupport::TimeZone[time_zone]
   end
 
 end

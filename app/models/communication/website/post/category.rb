@@ -54,7 +54,6 @@ class Communication::Website::Post::Category < ApplicationRecord
   include WithTree
   include WithUniversity
 
-  belongs_to              :university
   belongs_to              :parent,
                           class_name: 'Communication::Website::Post::Category',
                           optional: true

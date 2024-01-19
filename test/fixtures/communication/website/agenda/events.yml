@@ -12,6 +12,7 @@
 #  slug                     :string           indexed
 #  subtitle                 :string
 #  summary                  :text
+#  time_zone                :string
 #  title                    :string
 #  to_day                   :date
 #  to_hour                  :time
@@ -52,6 +53,7 @@ one:
   from_hour: 2023-09-05 13:13:30
   to_day: 2023-09-05
   to_hour: 2023-09-05 13:13:30
+  time_zone: Europe/Paris
   featured_image_alt: MyText
   featured_image_credit: MyText
   meta_description: MyText
@@ -67,6 +69,7 @@ two:
   from_hour: 2023-09-05 13:13:30
   to_day: 2023-09-05
   to_hour: 2023-09-05 13:13:30
+  time_zone: Europe/Paris
   featured_image_alt: MyText
   featured_image_credit: MyText
   meta_description: MyText

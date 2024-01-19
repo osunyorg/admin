@@ -15,7 +15,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     :categories
   ]
   has_component :posts_quantity, :number, options: 3
-  has_component :category_id, :category
+  has_component :category_id, :post_category
 
   def category
     category_id_component.category
