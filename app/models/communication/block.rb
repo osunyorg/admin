@@ -140,7 +140,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def is_a_translation?
-    about.is_a_translation?
+    about.respond_to?(:is_a_translation?) && about.is_a_translation?
   end
 
   def translate!(about_translation, heading_id = nil)
