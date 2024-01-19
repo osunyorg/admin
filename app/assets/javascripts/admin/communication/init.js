@@ -1,6 +1,5 @@
 //= require_self
-//= require ./menu_items
 //= require ./preview
-//= require ./websites
+//= require ./websites/init
 
 window.osuny.communication = {};
