@@ -14,7 +14,6 @@
 #  migration_identifier     :string
 #  position                 :integer          default(0), not null
 #  published                :boolean          default(FALSE)
-#  published_at             :datetime
 #  slug                     :string           indexed
 #  summary                  :text
 #  text                     :text

@@ -4,12 +4,10 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
                               through_association: :communication_block_headings
 
   def reorder
-    parent_id = params[:heading]
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       @heading = current_university.communication_block_headings.find(id)
-      @heading.update_columns parent_id: parent_id,
-                              parent_id: nil,
+      @heading.update_columns parent_id: nil,
                               level: Communication::Block::Heading::DEFAULT_LEVEL,
                               position: index + 1
     end
