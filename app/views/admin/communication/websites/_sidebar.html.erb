@@ -9,7 +9,7 @@
         icon: Icon::COMMUNICATION_WEBSITE_HOME,
         ability: can?(:read, @website)
       }
-      
+
       navigation << {
         title: Communication::Website::Post.model_name.human(count: 2),
         path: admin_communication_website_posts_path(website_id: @website),
@@ -59,16 +59,19 @@
       <% end %>
     </ul>
     <% if @website.languages.many? %>
-      <select class="form-control form-select my-5"  onchange="if (this.value) window.location.href=this.value">
-        <% @website.languages.each do |language| %>
-          <%
-          label = language_name(language.iso_code)
-          path = url_for request.params.merge(lang: language.iso_code)
-          selected = current_website_language == language
-          %>
-          <option value="<%= path %>"<% if selected %> selected="selected"<% end %>><%= label %></option>
-        <% end %>
-      </select>
+      <%
+      languages_options = @website.languages.map { |language|
+        [
+          language_name(language.iso_code),
+          url_for(request.params.merge(lang: language.iso_code))
+        ]
+      }
+      selected_option = url_for(request.params.merge(lang: current_website_language.iso_code))
+      %>
+      <%= select_tag  nil,
+                      options_for_select(languages_options, selected_option),
+                      class: "form-control form-select my-5",
+                      id: "js-website-lang-switch" %>
     <% end %>
   </div>
   <div class="col-lg-9">
