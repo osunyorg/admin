@@ -1,19 +1,25 @@
 <% if about.is_a_translation? %>
-  <span id="translation-button" 
-        data-translation-url="<%= admin_translate_path target: about.language.iso_code %>"> 
-    <a class="btn btn-light btn-xs js-translation-start">
-      <%= t('admin.translation.button') %>
-    </a>
-    <span class="spinner-border spinner-border-sm js-translation-loader"
-          role="status" 
-          hidden>
-      <span class="sr-only">
-        <%= t('admin.translation.running') %>
+  <% if about.original.language.supported_by_libretranslate? && about.language.supported_by_libretranslate? %>
+    <span id="translation-button"
+          data-translation-url="<%= admin_translate_path target: about.language.iso_code %>">
+      <a class="btn btn-light btn-xs js-translation-start">
+        <%= t('admin.translation.button') %>
+      </a>
+      <span class="spinner-border spinner-border-sm js-translation-loader"
+            role="status"
+            hidden>
+        <span class="sr-only">
+          <%= t('admin.translation.running') %>
+        </span>
+      </span>
+      <span class="js-translation-done small"
+            hidden>
+        <%= t('admin.translation.done') %>
       </span>
     </span>
-    <span class="js-translation-done small" 
-          hidden>
-      <%= t('admin.translation.done') %>
-    </span>
-  </span>
+  <% else %>
+    <a class="btn btn-light btn-xs disabled" disabled>
+      <%= t('admin.translation.unavailable_button') %>
+    </a>
+  <% end %>
 <% end %>
