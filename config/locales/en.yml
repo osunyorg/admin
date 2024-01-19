@@ -148,6 +148,7 @@ en:
       button: Translate with LibreTranslate
       done: Translation done! Please proof read before you save.
       running: Currently translating
+      unavailable_button: Automatic translation unavailable
     users_alerts:
       already_confirmed: "Your account has already been confirmed."
       not_locked_html: '<i>%{model}</i> was not locked.'

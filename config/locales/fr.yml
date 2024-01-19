@@ -148,6 +148,7 @@ fr:
       button: Traduire avec LibreTranslate
       done: Traduction effectuée ! Merci de relire avant d'enregistrer.
       running: Traduction en cours
+      unavailable_button: Traduction automatique indisponible
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."

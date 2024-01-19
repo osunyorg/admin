@@ -10,6 +10,13 @@
 #  updated_at        :datetime         not null
 #
 class Language < ApplicationRecord
+  AVAILABLE_IN_LIBRETRANSLATE = [
+    "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "eo", "es",
+    "et", "fa", "fi", "fr", "ga", "he", "hi", "hu", "id", "it", "ja", "ko",
+    "lt", "lv", "ms", "nb", "nl", "pl", "pt", "ro", "ru", "sk", "sl", "sq",
+    "sr", "sv", "th", "tl", "tr", "uk", "ur", "vi", "zh", "zt"
+  ].freeze
+
   include Sanitizable
 
   has_many :users
@@ -23,6 +30,10 @@ class Language < ApplicationRecord
 
   scope :available_for_interface, -> { where(iso_code: I18n.available_locales) }
   scope :ordered, -> { order(name: :asc) }
+
+  def supported_by_libretranslate?
+    AVAILABLE_IN_LIBRETRANSLATE.include?(iso_code)
+  end
 
   def to_s
     "#{name}"
