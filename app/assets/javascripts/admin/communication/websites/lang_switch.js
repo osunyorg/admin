@@ -1,4 +1,3 @@
-/* global $ */
 window.osuny.communication.websites.langSwitch = {
     init: function () {
         'use strict';
