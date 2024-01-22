@@ -47,7 +47,7 @@ module WithTranslations
   end
 
   def original_language
-    @original_object.language
+    @original_language ||= original_object.language
   end
 
   def is_a_translation?
