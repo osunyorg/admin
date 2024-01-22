@@ -3,18 +3,18 @@
 # Table name: communication_website_localizations
 #
 #  id                       :uuid             not null, primary key
-#  email                    :string
-#  facebook                 :string
-#  github                   :string
-#  instagram                :string
-#  linkedin                 :string
-#  mastodon                 :string
 #  name                     :string
-#  peertube                 :string
-#  tiktok                   :string
-#  vimeo                    :string
-#  x                        :string
-#  youtube                  :string
+#  social_email             :string
+#  social_facebook          :string
+#  social_github            :string
+#  social_instagram         :string
+#  social_linkedin          :string
+#  social_mastodon          :string
+#  social_peertube          :string
+#  social_tiktok            :string
+#  social_vimeo             :string
+#  social_x                 :string
+#  social_youtube           :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -40,11 +40,27 @@ class Communication::Website::Localization < ApplicationRecord
 
   belongs_to :language
 
+  validates :language_id, uniqueness: { scope: :communication_website_id }
+
   before_validation :set_university_id
+
+  # Localization is not directly exportable to git
+  # Whereas the languages config in the dependencies is exportable to git
+  def exportable_to_git?
+    false
+  end
+
+  def dependencies
+    [website.config_default_languages]
+  end
+
+  def to_s
+    name.present? ? "#{name}" : website.to_s
+  end
 
   private
 
   def set_university_id
-    self.university_id = communication_website.university_id
+    self.university_id = website.university_id
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_132556) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_144217) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -331,17 +331,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_132556) do
     t.uuid "language_id", null: false
     t.uuid "university_id", null: false
     t.string "name"
-    t.string "email"
-    t.string "mastodon"
-    t.string "peertube"
-    t.string "x"
-    t.string "github"
-    t.string "linkedin"
-    t.string "youtube"
-    t.string "vimeo"
-    t.string "instagram"
-    t.string "facebook"
-    t.string "tiktok"
+    t.string "social_email"
+    t.string "social_mastodon"
+    t.string "social_peertube"
+    t.string "social_x"
+    t.string "social_github"
+    t.string "social_linkedin"
+    t.string "social_youtube"
+    t.string "social_vimeo"
+    t.string "social_instagram"
+    t.string "social_facebook"
+    t.string "social_tiktok"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_ed4630e334"

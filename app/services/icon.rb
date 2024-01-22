@@ -5,6 +5,7 @@ class Icon
   COMMUNICATION_EXTRANET = 'fas fa-project-diagram'
   COMMUNICATION_WEBSITE = 'fas fa-sitemap'
   COMMUNICATION_WEBSITE_HOME = 'fas fa-home'
+  COMMUNICATION_WEBSITE_LOCALIZATIONS = 'fas fa-globe'
   COMMUNICATION_WEBSITE_POST = 'fas fa-newspaper'
   COMMUNICATION_WEBSITE_PAGE = 'fas fa-file'
   COMMUNICATION_WEBSITE_PAGES = 'fas fa-sitemap'
@@ -60,7 +61,7 @@ class Icon
 
   OSUNY_USER = 'fas fa-user'
   USER = OSUNY_USER
-  
+
   ADD = 'fas fa-plus'
   ARROW_RIGHT = 'fas fa-arrow-right'
   A11Y = 'fas fa-universal-access'

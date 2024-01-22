@@ -11,7 +11,9 @@ module Communication::Website::WithLanguages
                             foreign_key: :communication_website_id,
                             association_foreign_key: :language_id,
                             after_remove: :flag_languages_change
-    has_many :localizations, dependent: :destroy
+    has_many  :localizations,
+              foreign_key: :communication_website_id,
+              dependent: :destroy
 
     validates :languages, length: { minimum: 1 }
     validate :languages_must_include_default_language
@@ -33,6 +35,11 @@ module Communication::Website::WithLanguages
     localization = localizations.find_by(language_id: language.id)
     localization ||= self
     localization
+  end
+
+  def find_or_create_localization_for(language)
+    return self if language.id == default_language_id
+    localizations.find_or_create_by(language_id: language.id)
   end
 
   protected
