@@ -40,9 +40,7 @@
   <div class="col-lg-6">
     <h2 class="h3"><%= t '.display.title' %></h2>
     <%= block_component_edit block, :show_main_description %>
-    <div v-show="data.layout != 'list'">
-      <%= block_component_edit block, :show_description %>
-      <%= block_component_edit block, :show_image %>
-    </div>
+    <%= block_component_edit block, :show_description %>
+    <%= block_component_edit block, :show_image %>
   </div>
 </div>
