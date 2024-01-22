@@ -125,6 +125,14 @@ class Communication::Block < ApplicationRecord
     @language ||= about.respond_to?(:language) ? about.language : about.university.default_language
   end
 
+  def is_a_translation?
+    about.respond_to?(:is_a_translation?) && about.is_a_translation?
+  end
+
+  def original_language
+    about.try(:original_language)
+  end
+
   def duplicate
     block = self.dup
     block.save
@@ -137,10 +145,6 @@ class Communication::Block < ApplicationRecord
     block.heading = nil
     block.save
     block
-  end
-
-  def is_a_translation?
-    about.respond_to?(:is_a_translation?) && about.is_a_translation?
   end
 
   def translate!(about_translation, heading_id = nil)

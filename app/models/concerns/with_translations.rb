@@ -5,12 +5,12 @@ module WithTranslations
     attr_accessor :newly_translated
 
     belongs_to  :language
-    belongs_to  :original, 
-                class_name: base_class.to_s, 
+    belongs_to  :original,
+                class_name: base_class.to_s,
                 optional: true
-    has_many    :translations, 
-                class_name: base_class.to_s, 
-                foreign_key: :original_id, 
+    has_many    :translations,
+                class_name: base_class.to_s,
+                foreign_key: :original_id,
                 dependent: :nullify
 
     scope :for_language, -> (language) { for_language_id(language.id) }
@@ -44,6 +44,10 @@ module WithTranslations
 
   def original_object
     @original_object ||= (self.original || self)
+  end
+
+  def original_language
+    @original_object.language
   end
 
   def is_a_translation?
