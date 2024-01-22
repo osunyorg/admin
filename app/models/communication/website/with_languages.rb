@@ -11,6 +11,7 @@ module Communication::Website::WithLanguages
                             foreign_key: :communication_website_id,
                             association_foreign_key: :language_id,
                             after_remove: :flag_languages_change
+    has_many :localizations, dependent: :destroy
 
     validates :languages, length: { minimum: 1 }
     validate :languages_must_include_default_language
@@ -25,6 +26,13 @@ module Communication::Website::WithLanguages
     # We look for the language by the ISO code in the websites languages.
     # If not found, we fallback to the default language.
     languages.find_by(iso_code: iso_code) || default_language
+  end
+
+  def localization_for(language)
+    return self if language.id == default_language_id
+    localization = localizations.find_by(language_id: language.id)
+    localization ||= self
+    localization
   end
 
   protected

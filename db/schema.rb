@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_132556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -106,8 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -229,7 +229,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
     t.text "home_sentence"
     t.text "sass"
     t.text "css"
-    t.boolean "allow_experiences_modification", default: true
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
@@ -327,6 +326,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
+  create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "email"
+    t.string "mastodon"
+    t.string "peertube"
+    t.string "x"
+    t.string "github"
+    t.string "linkedin"
+    t.string "youtube"
+    t.string "vimeo"
+    t.string "instagram"
+    t.string "facebook"
+    t.string "tiktok"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_ed4630e334"
+    t.index ["language_id"], name: "index_communication_website_localizations_on_language_id"
+    t.index ["university_id"], name: "index_communication_website_localizations_on_university_id"
+  end
+
   create_table "communication_website_menu_items", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
@@ -397,7 +419,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -1172,6 +1194,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_17_145932) do
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_localizations", "communication_websites"
+  add_foreign_key "communication_website_localizations", "languages"
+  add_foreign_key "communication_website_localizations", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"
