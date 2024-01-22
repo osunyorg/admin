@@ -57,12 +57,12 @@ class Communication::Website::Page < ApplicationRecord
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
+  include WithType # WithType can set default publication status, so must be included before WithPublication
   include WithPublication
   include WithPosition # Scope :ordered must override WithPublication
   include WithPermalink
   include WithTranslations
   include WithTree
-  include WithType
   include WithPath # WithPath overwrites the git_path method defined in WithWebsites
   include WithUniversity
 

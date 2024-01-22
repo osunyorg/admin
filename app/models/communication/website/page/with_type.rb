@@ -108,6 +108,7 @@ module Communication::Website::Page::WithType
     self.parent = default_parent
     self.full_width = full_width_by_default?
     self.published = published_by_default?
+    self.published_at = Time.now if self.published
   end
 
   def generate_heading(title)
