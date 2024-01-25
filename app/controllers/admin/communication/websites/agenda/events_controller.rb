@@ -2,6 +2,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event,
                               through: :website
 
+  include Admin::Translatable
+
   before_action :load_categories
 
   def index
