@@ -4,12 +4,62 @@ $(function () {
 
     var configs = [];
 
+    var cleanHtmlElementAttributes = function(elmt, allowedAttributes) {
+        var children = elmt.children,
+            i,
+            j;
+        for (i = 0; i < children.length; i++) {
+            var child = children[i];
+            for (j = child.attributes.length; j-- > 0;) {
+                if ($.inArray(child.attributes[j].name, allowedAttributes) < 0) {
+                    child.removeAttributeNode(child.attributes[j]);
+                }
+            }
+            
+            if (child.children.length) {
+                cleanHtmlElementAttributes(child, allowedAttributes);
+            }
+        }
+    };
+
+    var cleanHtmlAttributes = function(html, allowedAttributes) {
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        cleanHtmlElementAttributes(div, allowedAttributes);
+        return div.innerHTML;
+    };
+
+    var cleanHtmlTags = function(html, allowedTags) {
+        var allowedTagsRegex = allowedTags.map(function(e) { return '(?!' + e + ')' }).join(''),
+            tagStripper = new RegExp('<\/?' + allowedTagsRegex + '\\w*\\b[^>]*>', 'ig');
+
+        return html.replace(tagStripper, '');
+    };
+
+    var cleanHtml = function(allowedTags, allowedAttributes, e) {
+        var text = e.originalEvent.clipboardData.getData('text/plain'),
+            html = e.originalEvent.clipboardData.getData('text/html');
+
+        e.preventDefault();
+        if (html) {
+            html = html.toString();
+            html = cleanHtmlTags(html, allowedTags);
+            html = cleanHtmlAttributes(html, allowedAttributes);
+            document.execCommand('insertHTML', false, html);
+        } else {
+            document.execCommand('insertText', false, text);
+        }
+    };
+
     configs['link'] = {
         toolbar: [
             ['insert', ['link', 'unlink']]
         ],
         followingToolbar: true,
-        disableDragAndDrop: true
+        disableDragAndDrop: true,
+        callbacks: {
+            onPaste: cleanHtml.bind(this, ['a'], ['href', 'target'])
+        }
     };
 
     configs['mini'] = {
