@@ -1,6 +1,4 @@
 class Admin::Communication::Websites::LocalizationsController < Admin::Communication::Websites::ApplicationController
-  skip_before_action :load_filters
-
   before_action :load_localization
 
   def show
