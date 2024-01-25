@@ -55,6 +55,7 @@ class Ability::Admin < Ability
     # Est-ce bien raisonnable de laisser supprimer un site ?
     # Le risque de faussse manip est grand.
     cannot :destroy, Communication::Website, university_id: @user.university_id
+    can :manage, Communication::Website::Localization, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id
     can :manage, Communication::Website::Post::Category, university_id: @user.university_id
@@ -63,7 +64,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
   end
-  
+
   def admin_communication_extranet
     can [:read, :update], Communication::Extranet, university_id: @user.university_id
     can :manage, Communication::Extranet::Connection, university_id: @user.university_id
