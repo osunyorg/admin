@@ -5,7 +5,7 @@
   localization = @website.localization_for(language)
 %>
 <%= language.iso_code %>:
-  title: <%= localization %>
+  title: <%= localization.computed_name %>
   contentDir: content/<%= language.iso_code %>
   languageCode: <%= language.iso_code %>
   languageName: <%= language.name %>
@@ -24,12 +24,12 @@
       :instagram,
       :facebook,
       :tiktok
-      ].each do |network|
-      value = localization.public_send "social_#{network}"
-      value = @website.public_send "social_#{network}" if value.blank?
+      ].each do |social_element|
+      value = localization.public_send "social_#{social_element}"
+      value = @website.public_send "social_#{social_element}" if value.blank?
       next if value.blank?
       -%>
-      <%= network %>: >-
+      <%= social_element %>: >-
         <%= value %>
       <%- end -%>
   permalinks:

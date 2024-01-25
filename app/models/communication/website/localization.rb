@@ -42,7 +42,7 @@ class Communication::Website::Localization < ApplicationRecord
 
   validates :language_id, uniqueness: { scope: :communication_website_id }
 
-  before_validation :set_university_id
+  before_validation :set_university_id, on: :create
 
   # Localization is not directly exportable to git
   # Whereas the languages config in the dependencies is exportable to git
@@ -54,7 +54,7 @@ class Communication::Website::Localization < ApplicationRecord
     [website.config_default_languages]
   end
 
-  def to_s
+  def computed_name
     name.present? ? "#{name}" : website.to_s
   end
 
