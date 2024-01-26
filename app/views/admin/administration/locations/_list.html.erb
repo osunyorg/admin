@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th><%= Administration::Location.human_attribute_name('name') %></th>
+        <th><%= Administration::Location.human_attribute_name('address') %></th>
         <th></th>
       </tr>
     </thead>
@@ -10,6 +11,7 @@
       <% locations.ordered.each do |location| %>
         <tr>
           <td><%= link_to location, [:admin, location] %></td>
+          <td><%= location.full_street_address %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= edit_link location %>
