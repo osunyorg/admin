@@ -56,7 +56,7 @@ class University::Organization < ApplicationRecord
   include WithGeolocation
   include WithGitFiles
   include WithPermalink
-  include WithSlug
+  include Sluggable
   include WithTranslations
   include WithUniversity
 

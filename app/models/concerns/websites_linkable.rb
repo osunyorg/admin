@@ -34,4 +34,8 @@ module WebsitesLinkable
   def has_research_volumes?
     raise NotImplementedError
   end
+
+  def has_administration_locations?
+    raise NotImplementedError
+  end
 end

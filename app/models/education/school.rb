@@ -75,12 +75,13 @@ class Education::School < ApplicationRecord
     active_storage_blobs +
     programs +
     diplomas +
+    locations +
     administrators.map(&:administrator) +
     researchers.map(&:researcher)
   end
 
   #####################
-  # WebsitesLinkable methods #
+  # WebsitesLinkable methods
   #####################
 
   def has_research_papers?

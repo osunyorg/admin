@@ -20,6 +20,8 @@ module Communication::Website::Page::WithType
       Communication::Website::Page::ResearchVolume,
       Communication::Website::Page::ResearchPaper,
       Communication::Website::Page::ResearchHalPublication,
+      # Administration
+      Communication::Website::Page::AdministrationLocation,
       # People facets
       Communication::Website::Page::Administrator,
       Communication::Website::Page::Author,

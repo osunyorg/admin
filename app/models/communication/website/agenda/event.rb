@@ -52,7 +52,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
-  include WithSlug
+  include Sluggable
   include WithTime
   include WithTranslations
   include WithTree

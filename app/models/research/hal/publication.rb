@@ -33,7 +33,7 @@ class Research::Hal::Publication < ApplicationRecord
   include WithCitations
   include WithGitFiles
   include WithPermalink
-  include WithSlug
+  include Sluggable
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',

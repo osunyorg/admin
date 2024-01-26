@@ -29,7 +29,7 @@ class Education::Diploma < ApplicationRecord
   include Sanitizable
   include WithGitFiles
   include WithPermalink
-  include WithSlug
+  include Sluggable
   include WithUniversity
 
   has_many :programs, dependent: :nullify

@@ -38,7 +38,7 @@ class Research::Journal::Volume < ApplicationRecord
   include WithGitFiles
   include WithPermalink
   include WithPublication
-  include WithSlug
+  include Sluggable
   include WithUniversity
 
   has_summernote :text

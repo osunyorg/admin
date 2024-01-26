@@ -53,7 +53,7 @@ class Research::Journal::Paper < ApplicationRecord
   include WithPermalink
   include WithPosition
   include WithPublication
-  include WithSlug
+  include Sluggable
   include WithUniversity
 
   has_summernote :bibliography

@@ -68,7 +68,7 @@ class University::Person < ApplicationRecord
   include WithPermalink
   include WithPicture
   include WithResearch
-  include WithSlug
+  include Sluggable
   include WithTranslations
   include WithUniversity
 

@@ -10,6 +10,7 @@
 #  longitude     :float
 #  name          :string
 #  phone         :string
+#  slug          :string
 #  summary       :text
 #  url           :string
 #  zipcode       :string
@@ -29,11 +30,13 @@ class Administration::Location < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
   include Contentful
+  include Sluggable
+  include WebsitesLinkable
   include WithBlobs
   include WithCountry
-  include WebsitesLinkable
   include WithGitFiles
   include WithGeolocation
+  include WithPermalink
   include WithUniversity
 
   has_and_belongs_to_many :schools,
@@ -52,5 +55,20 @@ class Administration::Location < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  def git_path(website)
+    "#{git_path_content_prefix(website)}locations/#{slug}/_index.html" if for_website?(website)
+  end
+
+  def dependencies
+    active_storage_blobs +
+    contents_dependencies +
+    programs +
+    schools
+  end
+
+  def references
+    []
   end
 end

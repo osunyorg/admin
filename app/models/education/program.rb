@@ -67,7 +67,7 @@ class Education::Program < ApplicationRecord
   include WithPermalink
   include WithPosition
   include WithSchools
-  include WithSlug
+  include Sluggable
   include WithTeam
   include WithTree
   include WithUniversity
@@ -148,6 +148,7 @@ class Education::Program < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies +
+    locations +
     university_people_through_involvements.map(&:teacher) +
     university_people_through_role_involvements.map(&:administrator) +
     [diploma]

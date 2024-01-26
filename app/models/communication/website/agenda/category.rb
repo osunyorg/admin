@@ -44,7 +44,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
-  include WithSlug
+  include Sluggable
   include WithTranslations
   include WithUniversity
 

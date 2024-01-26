@@ -40,7 +40,7 @@ class Communication::Extranet::Post < ApplicationRecord
   include WithFeaturedImage
   include WithPublication
   include WithPermalink
-  include WithSlug
+  include Sluggable
   include WithUniversity
 
   belongs_to :author, class_name: 'University::Person', optional: true

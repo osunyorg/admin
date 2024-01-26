@@ -58,6 +58,8 @@
 
 <%= render 'admin/communication/blocks/content/editor', about: @location %>
 
+<%= render 'admin/application/connections/list', about: @location %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @location %>
   <%= static_link static_admin_administration_location_path(@location) %>

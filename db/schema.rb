@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_26_090606) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_26_112021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_090606) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["university_id"], name: "index_administration_locations_on_university_id"
   end
 
