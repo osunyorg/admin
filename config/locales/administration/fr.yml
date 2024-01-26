@@ -20,7 +20,10 @@ fr:
         country: Pays
         name: Nom
         phone: Téléphone
+        programs: Formations dispensées
+        schools: Écoles
         url: Site Web
+        websites: Sites Web associés
         zipcode: Code postal
       administration/qualiopi/criterion:
         number: Numéro

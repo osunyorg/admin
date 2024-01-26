@@ -53,6 +53,7 @@ en:
         initial: Initial training
         is_published: Published
         is_draft: Draft
+        locations: Campus
         main_information: Main information
         name: Name
         objectives: Objectifs
@@ -77,6 +78,7 @@ en:
         administrators: Administrators
         city: City
         country: Country
+        locations: Campus
         name: Name
         phone: Phone
         programs: Programs provided

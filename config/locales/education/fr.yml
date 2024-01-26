@@ -53,6 +53,7 @@ fr:
         initial: Formation initiale
         is_published: Publiée
         is_draft: Brouillon
+        locations: Campus
         main_information: Informations essentielles
         name: Nom
         objectives: Objectifs
@@ -77,6 +78,7 @@ fr:
         administrators: Équipe administrative
         city: Ville
         country: Pays
+        locations: Campus
         name: Nom
         phone: Téléphone
         programs: Formations dispensées

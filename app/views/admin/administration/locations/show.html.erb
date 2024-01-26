@@ -1,21 +1,60 @@
 <% content_for :title, @location %>
 
-<%= osuny_panel t('metadata') do %>
-  <%= osuny_label Education::School.human_attribute_name('address') %>
-  <p>
-    <%= @location.address %><br>
-    <%= @location.zipcode %> <%= @location.city %><br>
-    <%= @location.country %>
-  </p>
-  <% if @location.phone.present? %>
-    <%= osuny_label Education::School.human_attribute_name('phone') %>
-    <p><%= @location.phone %></p>
+<div class="row">
+  <div class="col-lg-4">
+    <%= osuny_panel t('metadata') do %>
+      <%= osuny_label Education::School.human_attribute_name('address') %>
+      <p>
+        <%= @location.address %><br>
+        <%= @location.zipcode %> <%= @location.city %><br>
+        <%= @location.country %>
+      </p>
+      <% if @location.phone.present? %>
+        <%= osuny_label Education::School.human_attribute_name('phone') %>
+        <p><%= @location.phone %></p>
+      <% end %>
+      <% if @location.url.present? %>
+        <%= osuny_label Administration::Location.human_attribute_name('url') %>
+        <p><%= link_to @location.url, @location.url, target: :_blank %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <% if @location.schools.any? %>
+    <div class="col-lg-4">
+      <%= osuny_panel Administration::Location.human_attribute_name('schools') do %>
+        <ul class="list-unstyled">
+          <% @location.schools.ordered.each do |school| %>
+            <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
   <% end %>
-  <% if @location.url.present? %>
-    <%= osuny_label Education::School.human_attribute_name('url') %>
-    <p><%= link_to @location.url, @location.url, target: :_blank %></p>
+
+  <% if @location.programs.any? %>
+    <div class="col-lg-4">
+      <%= osuny_panel Administration::Location.human_attribute_name('programs') do %>
+        <ul class="list-unstyled">
+          <% @location.programs.ordered.each do |program| %>
+            <li><%= link_to_if can?(:read, program), program, [:admin, program] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+
+  <% if @location.websites.any? %>
+    <div class="col-lg-4">
+      <%= osuny_panel Administration::Location.human_attribute_name('websites') do %>
+        <ul class="list-unstyled">
+          <% @location.websites.each do |website| %>
+            <li><%= link_to website, [:admin, website] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <%= render 'admin/communication/blocks/content/editor', about: @location %>
 

@@ -25,13 +25,14 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
-  include Websitable
+  include WebsitesLinkable
   include AsIndirectObject
   include Sanitizable
   include WithAlumni
   include WithBlobs
   include WithCountry
   include WithGitFiles
+  include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
   include WithUniversity
@@ -79,7 +80,7 @@ class Education::School < ApplicationRecord
   end
 
   #####################
-  # Websitable methods #
+  # WebsitesLinkable methods #
   #####################
 
   def has_research_papers?

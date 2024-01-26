@@ -63,6 +63,6 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
 
   def location_params
     params.require(:administration_location)
-          .permit(:name, :address, :zipcode, :city, :country, :url, :phone)
+          .permit(:name, :address, :zipcode, :city, :country, :url, :phone, school_ids: [], program_ids: [])
   end
 end

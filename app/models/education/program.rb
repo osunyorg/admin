@@ -51,7 +51,7 @@
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
-  include Websitable
+  include WebsitesLinkable
   include AsIndirectObject
   include Contentful
   include Sanitizable
@@ -62,6 +62,7 @@ class Education::Program < ApplicationRecord
   include WithFeaturedImage
   include WithGitFiles
   include WithInheritance
+  include WithLocations
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
@@ -166,7 +167,7 @@ class Education::Program < ApplicationRecord
   end
 
   #####################
-  # Websitable methods #
+  # WebsitesLinkable methods #
   #####################
   def has_administrators?
     university_people_through_role_involvements.any? ||

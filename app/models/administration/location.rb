@@ -31,10 +31,20 @@ class Administration::Location < ApplicationRecord
   include Contentful
   include WithBlobs
   include WithCountry
-  include Websitable
+  include WebsitesLinkable
   include WithGitFiles
   include WithGeolocation
   include WithUniversity
+
+  has_and_belongs_to_many :schools,
+                          class_name: 'Education::School',
+                          foreign_key: :education_school_id,
+                          association_foreign_key: :administration_location_id
+  has_and_belongs_to_many :programs,
+                          class_name: 'Education::Program',
+                          foreign_key: :education_program_id,
+                          association_foreign_key: :administration_location_id
+
 
   scope :ordered, -> { order(:name) }
 

@@ -21,7 +21,7 @@
 #
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
-  include Websitable
+  include WebsitesLinkable
   include Favoritable
   include Sanitizable
   include WithGitFiles
@@ -86,7 +86,7 @@ class Research::Journal < ApplicationRecord
   end
 
   #####################
-  # Websitable methods #
+  # WebsitesLinkable methods #
   #####################
   def has_administrators?
     false

@@ -4,7 +4,7 @@
 # https://mmibordeaux.com about a program
 # https://www.degrowthjournal.org about a journal
 # hthttps://mica.u-bordeaux-montaigne.fr about a laboratory
-module Websitable
+module WebsitesLinkable
   extend ActiveSupport::Concern
 
   def has_administrators?

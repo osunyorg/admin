@@ -20,7 +20,10 @@ en:
         country: Country
         name: Name
         phone: Telephone
+        programs: Programs
+        schools: Schools
         url: Website
+        websites: Linked websites
         zipcode: Zipcode
       administration/qualiopi/criterion:
         number: Number
