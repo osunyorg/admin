@@ -5,7 +5,6 @@ window.summernoteManager = {
     init: function () {
         'use strict';
         this.setConfigs();
-        console.log(this);
         this.initEditors();
         this.monkeyPatchDropdownButtons();
     },
@@ -31,7 +30,10 @@ window.summernoteManager = {
                 ['view', ['codeview']]
             ],
             followingToolbar: true,
-            disableDragAndDrop: true
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'a'], ['href', 'target'])
+            }
         });
 
         this.setConfig('mini-list', {
@@ -43,29 +45,10 @@ window.summernoteManager = {
                 ['view', ['codeview']]
             ],
             followingToolbar: true,
-            disableDragAndDrop: true
-        });
-
-        this.setConfig('full', {
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic']],
-                ['position', ['superscript', 'subscript']],
-                ['para', ['ul', 'ol']],
-                ['table', ['table']],
-                ['insert', ['link', 'unlink', 'picture', 'video']],
-                ['view', ['codeview']]
-            ],
-            styleTags: [
-                'p',
-                'blockquote',
-                'pre',
-                'h2',
-                'h3',
-                'h4'
-            ],
-            followingToolbar: true,
-            disableDragAndDrop: true
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], ['href', 'target'])
+            }
         });
 
         this.setConfig('default', {
@@ -85,7 +68,10 @@ window.summernoteManager = {
                 'h4'
             ],
             followingToolbar: true,
-            disableDragAndDrop: true
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'], ['href', 'target'])
+            }
         });
 
         window.SUMMERNOTE_CONFIGS = this.configs;
@@ -130,12 +116,25 @@ window.summernoteManager = {
         event.preventDefault();
         if (html) {
             html = html.toString();
+            html = this.cleanHtml(html);
             html = this.sanitizeTags(html, allowedTags);
             html = this.sanitizeAttributes(html, allowedAttributes);
             document.execCommand('insertHTML', false, html);
         } else {
             document.execCommand('insertText', false, text);
         }
+    },
+
+    cleanHtml: function (html) {
+        'use strict';
+        var htmlModified = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '')
+            .replace(/<!--[\s\S]*?-->/g, '')
+            .replace(/( class=(")?Mso[a-zA-Z]+(")?)/g, ' ')
+            .replace(/[\u2018\u2019\u201A]/g, '\'')
+            .replace(/[\u201C\u201D\u201E]/g, '"')
+            .replace(/\u2026/g, '...')
+            .replace(/[\u2013\u2014]/g, '-');
+        return htmlModified;
     },
 
     sanitizeTags: function (html, allowedTags) {
