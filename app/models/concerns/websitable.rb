@@ -1,4 +1,10 @@
-module Aboutable
+# Means there might be a website about this object
+# https://iut-perigueux.u-bordeaux.fr about a location
+# https://www.iut.u-bordeaux-montaigne.fr about a school
+# https://mmibordeaux.com about a program
+# https://www.degrowthjournal.org about a journal
+# hthttps://mica.u-bordeaux-montaigne.fr about a laboratory
+module Websitable
   extend ActiveSupport::Concern
 
   def has_administrators?

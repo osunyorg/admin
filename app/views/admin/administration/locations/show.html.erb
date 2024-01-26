@@ -1,0 +1,29 @@
+<% content_for :title, @location %>
+
+<%= osuny_panel t('metadata') do %>
+  <%= osuny_label Education::School.human_attribute_name('address') %>
+  <p>
+    <%= @location.address %><br>
+    <%= @location.zipcode %> <%= @location.city %><br>
+    <%= @location.country %>
+  </p>
+  <% if @location.phone.present? %>
+    <%= osuny_label Education::School.human_attribute_name('phone') %>
+    <p><%= @location.phone %></p>
+  <% end %>
+  <% if @location.url.present? %>
+    <%= osuny_label Education::School.human_attribute_name('url') %>
+    <p><%= link_to @location.url, @location.url, target: :_blank %></p>
+  <% end %>
+<% end %>
+
+<%= render 'admin/communication/blocks/content/editor', about: @location %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @location %>
+  <%= static_link static_admin_administration_location_path(@location) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @location %>
+<% end %>

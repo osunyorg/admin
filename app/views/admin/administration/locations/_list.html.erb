@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Administration::Location.human_attribute_name('name') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% locations.ordered.each do |location| %>
+        <tr>
+          <td><%= link_to location, [:admin, location] %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= edit_link location %>
+              <%= destroy_link location %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

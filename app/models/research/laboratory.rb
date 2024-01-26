@@ -21,7 +21,7 @@
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
-  include Aboutable
+  include Websitable
   include AsIndirectObject
   include Sanitizable
   include WithCountry

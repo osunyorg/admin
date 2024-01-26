@@ -4,6 +4,9 @@ fr:
       administration/qualiopi: Qualiopi
   activerecord:
     models:
+      administration/location:
+        one: Site
+        other: Campus
       administration/qualiopi/criterion:
         one: Critère
         other: Critères
@@ -11,6 +14,14 @@ fr:
         one: Indicateur
         other: Indicateurs
     attributes:
+      administration/location:
+        address: Adresse
+        city: Ville
+        country: Pays
+        name: Nom
+        phone: Téléphone
+        url: Site Web
+        zipcode: Code postal
       administration/qualiopi/criterion:
         number: Numéro
         name: Nom
@@ -30,5 +41,7 @@ fr:
       text: L'administration, sous ses multiples formes, se définit principalement par ses activités au service de l'intérêt général. L'administration agit dans l'intérêt général et respecte le principe de légalité. Elle est tenue à l'obligation de neutralité et au respect du principe de laïcité. Elle se conforme au principe d'égalité et garantit à chacun un traitement impartial.
       source: Code des relations entre le public et l'administration
       parts:
+        location: 
+          description: Gestion des différents sites (physiques) de formation et de recherche
         qualiopi:
           description: Aide à la vérification de la conformité de l'offre de formation avec la norme Qualiopi

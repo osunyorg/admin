@@ -25,7 +25,7 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
-  include Aboutable
+  include Websitable
   include AsIndirectObject
   include Sanitizable
   include WithAlumni
@@ -34,8 +34,7 @@ class Education::School < ApplicationRecord
   include WithGitFiles
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithTeam
-
-  belongs_to  :university
+  include WithUniversity
 
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,
@@ -80,7 +79,7 @@ class Education::School < ApplicationRecord
   end
 
   #####################
-  # Aboutable methods #
+  # Websitable methods #
   #####################
 
   def has_research_papers?
