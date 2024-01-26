@@ -2,54 +2,53 @@
 $(function () {
     'use strict';
 
-    var configs = [];
+    var configs = [],
+        cleanHtmlElementAttributes = function (elmt, allowedAttributes) {
+            var children = elmt.children,
+                child,
+                i,
+                j;
+            for (i = 0; i < children.length; i += 1) {
+                child = children[i];
+                for (j = child.attributes.length - 1; j >= 0; j -= 1) {
+                    if ($.inArray(child.attributes[j].name, allowedAttributes) < 0) {
+                        child.removeAttributeNode(child.attributes[j]);
+                    }
+                }
 
-    var cleanHtmlElementAttributes = function(elmt, allowedAttributes) {
-        var children = elmt.children,
-            i,
-            j;
-        for (i = 0; i < children.length; i++) {
-            var child = children[i];
-            for (j = child.attributes.length; j-- > 0;) {
-                if ($.inArray(child.attributes[j].name, allowedAttributes) < 0) {
-                    child.removeAttributeNode(child.attributes[j]);
+                if (child.children.length) {
+                    cleanHtmlElementAttributes(child, allowedAttributes);
                 }
             }
-            
-            if (child.children.length) {
-                cleanHtmlElementAttributes(child, allowedAttributes);
+        },
+        cleanHtmlAttributes = function (html, allowedAttributes) {
+            var div = document.createElement('div');
+            div.innerHTML = html;
+            cleanHtmlElementAttributes(div, allowedAttributes);
+            return div.innerHTML;
+        },
+        cleanHtmlTags = function (html, allowedTags) {
+            var allowedTagsRegex = allowedTags.map(function (e) {
+                    return '(?!' + e + ')';
+                }).join(''),
+                tagStripper = new RegExp('</?' + allowedTagsRegex + '\\w*\\b[^>]*>', 'ig');
+
+            return html.replace(tagStripper, '');
+        },
+        cleanHtml = function (allowedTags, allowedAttributes, e) {
+            var text = e.originalEvent.clipboardData.getData('text/plain'),
+                html = e.originalEvent.clipboardData.getData('text/html');
+
+            e.preventDefault();
+            if (html) {
+                html = html.toString();
+                html = cleanHtmlTags(html, allowedTags);
+                html = cleanHtmlAttributes(html, allowedAttributes);
+                document.execCommand('insertHTML', false, html);
+            } else {
+                document.execCommand('insertText', false, text);
             }
-        }
-    };
-
-    var cleanHtmlAttributes = function(html, allowedAttributes) {
-        var div = document.createElement('div');
-        div.innerHTML = html;
-        cleanHtmlElementAttributes(div, allowedAttributes);
-        return div.innerHTML;
-    };
-
-    var cleanHtmlTags = function(html, allowedTags) {
-        var allowedTagsRegex = allowedTags.map(function(e) { return '(?!' + e + ')' }).join(''),
-            tagStripper = new RegExp('<\/?' + allowedTagsRegex + '\\w*\\b[^>]*>', 'ig');
-
-        return html.replace(tagStripper, '');
-    };
-
-    var cleanHtml = function(allowedTags, allowedAttributes, e) {
-        var text = e.originalEvent.clipboardData.getData('text/plain'),
-            html = e.originalEvent.clipboardData.getData('text/html');
-
-        e.preventDefault();
-        if (html) {
-            html = html.toString();
-            html = cleanHtmlTags(html, allowedTags);
-            html = cleanHtmlAttributes(html, allowedAttributes);
-            document.execCommand('insertHTML', false, html);
-        } else {
-            document.execCommand('insertText', false, text);
-        }
-    };
+        };
 
     configs['link'] = {
         toolbar: [
@@ -84,7 +83,6 @@ $(function () {
         followingToolbar: true,
         disableDragAndDrop: true
     };
-
 
     configs['full'] = {
         toolbar: [
@@ -141,8 +139,9 @@ $(function () {
     });
 
     // https://github.com/summernote/summernote/issues/4170
-    $("button[data-toggle='dropdown']").each(function (index) {
-        $(this).removeAttr("data-toggle").attr("data-bs-toggle", "dropdown");
+    $('button[data-toggle="dropdown"]').each(function () {
+        $(this).removeAttr('data-toggle')
+            .attr('data-bs-toggle', 'dropdown');
     });
 
     window.SUMMERNOTE_CONFIGS = configs;
