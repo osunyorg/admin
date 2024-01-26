@@ -71,4 +71,9 @@ class Administration::Location < ApplicationRecord
   def references
     []
   end
+
+  # Un site n'a pas de site dépendant
+  def has_administration_locations?
+    false
+  end
 end

@@ -107,6 +107,10 @@ class Research::Journal < ApplicationRecord
   def has_education_diplomas?
     false
   end
+  
+  def has_administration_locations?
+    false
+  end
 
   def has_research_papers?
     published_papers.published.any?
