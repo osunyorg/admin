@@ -167,7 +167,6 @@ fr:
     formats:
       birthday: "%d %B"
       full: "%A %-d %B %Y"
-  default_images_hint: "5 Mo max, %{formats}"
   delete: Supprimer
   devise:
     failure:
@@ -225,6 +224,8 @@ fr:
       label: Crédit
       hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
     remove: Supprimer l'image
+  file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
+  file_hint_without_formats: "%{filesize} max."
   filters:
     attributes:
       category: Filtrer par catégorie

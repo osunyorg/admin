@@ -1,6 +1,8 @@
 <%
-label = t 'admin.communication.blocks.components.file.input.label'
-remove = t 'admin.communication.blocks.components.file.input.remove'
+label = t('admin.communication.blocks.components.file.input.label')
+remove = t('admin.communication.blocks.components.file.input.remove')
+hint = file_hint if hint.blank?
+accept ||= '*'
 %>
 <div class="mb-3">
   <div v-if="!<%= model %>.<%= property %>.id">
@@ -10,9 +12,9 @@ remove = t 'admin.communication.blocks.components.file.input.remove'
     </label>
     <input  class="form-control"
             type="file"
-            accept="*"
+            accept="<%= accept %>"
             @change="onFileImageChange( $event, <%= model %>, '<%= property %>' )"
-            data-size-limit="<%= Communication::Block::FILE_MAX_SIZE %>"
+            data-size-limit="<%= Rails.application.config.default_file_max_size %>"
             :id="<%= dom_id.html_safe %>">
   </div>
   <div v-if="<%= model %>.<%= property %>.id">
@@ -22,5 +24,8 @@ remove = t 'admin.communication.blocks.components.file.input.remove'
         <i class="<%= Icon::DELETE %>"></i>
       <%= remove %>
     </a>
+  </div>
+  <div v-if="<%= hint.present? %> && !<%= model %>.<%= property %>.id" class="form-text">
+    <%= hint %>
   </div>
 </div>
