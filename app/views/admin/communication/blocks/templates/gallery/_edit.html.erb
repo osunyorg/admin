@@ -8,12 +8,16 @@
 
 <p><%= t('.send_multiple_images') %></p>
 
-<input  class="form-control mb-2"
+<input  class="form-control"
         type="file"
-        accept="image/*"
+        accept="<%= default_images_formats_accepted %>"
         @change="onMultipleFileImageChange( $event, 'image' )"
         data-size-limit="<%= Communication::Block::IMAGE_MAX_SIZE %>"
         multiple>
+
+<div class="form-text mb-2">
+    <%= images_formats_accepted_hint %>
+</div>
 
 <hr class="my-5">
 
