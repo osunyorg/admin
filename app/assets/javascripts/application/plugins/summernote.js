@@ -127,15 +127,21 @@ window.summernoteManager = {
 
     cleanHtml: function (html) {
         'use strict';
-        // remove all html comments, microsoft attributes, ensure regular quote, double quote, ellipsis, hyphen
-        var htmlModified = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '')
-            .replace(/<!--[\s\S]*?-->/g, '')
-            .replace(/( class=(")?Mso[a-zA-Z]+(")?)/g, ' ')
-            .replace(/[\u2018\u2019\u201A]/g, '\'')
-            .replace(/[\u201C\u201D\u201E]/g, '"')
-            .replace(/\u2026/g, '...')
-            .replace(/[\u2013\u2014]/g, '-');
-        return htmlModified;
+        // remove allMicrosoft Office tag
+        html = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '');
+        // remove all html comments
+        html = html.replace(/<!--[\s\S]*?-->/g, '');
+        // remove all microsoft attributes,
+        html = html.replace(/( class=(")?Mso[a-zA-Z]+(")?)/g, ' ');
+        // ensure regular quote
+        html = html.replace(/[\u2018\u2019\u201A]/g, '\'');
+        // ensure regular double quote
+        html = html.replace(/[\u201C\u201D\u201E]/g, '"');
+        // ensure regular ellipsis
+        html = html.replace(/\u2026/g, '...');
+        // ensure regular hyphen
+        html = html.replace(/[\u2013\u2014]/g, '-');
+        return html;
     },
 
     sanitizeTags: function (html, allowedTags) {
