@@ -127,6 +127,7 @@ window.summernoteManager = {
 
     cleanHtml: function (html) {
         'use strict';
+        // remove all html comments, microsoft attributes, ensure regular quote, double quote, ellipsis, hyphen
         var htmlModified = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '')
             .replace(/<!--[\s\S]*?-->/g, '')
             .replace(/( class=(")?Mso[a-zA-Z]+(")?)/g, ' ')
