@@ -1,7 +1,7 @@
 <%
 label = t('admin.communication.blocks.components.file.input.label')
 remove = t('admin.communication.blocks.components.file.input.remove')
-hint = default_file_hint if hint.blank?
+hint = file_hint if hint.blank?
 accept ||= '*'
 %>
 <div class="mb-3">
