@@ -3,9 +3,11 @@
 <%
 @website.languages.each do |language|
   localization = @website.localization_for(language)
+  title = localization.respond_to?(:computed_name)  ? localization.computed_name
+                                                    : localization.to_s
 %>
 <%= language.iso_code %>:
-  title: <%= localization.computed_name %>
+  title: <%= title %>
   contentDir: content/<%= language.iso_code %>
   languageCode: <%= language.iso_code %>
   languageName: <%= language.name %>
