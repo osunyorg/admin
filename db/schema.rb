@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_144217) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1037,6 +1037,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_144217) do
     t.string "mastodon"
     t.uuid "language_id", null: false
     t.uuid "original_id"
+    t.text "picture_credit"
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["slug"], name: "index_university_people_on_slug"
