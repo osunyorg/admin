@@ -109,7 +109,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       :phone_mobile, :phone_professional, :phone_personal,
       :address, :zipcode, :city, :country,
       :meta_description, :summary,
-      :biography,  :picture, :picture_delete, :picture_infos,
+      :biography,  :picture, :picture_delete, :picture_infos, :picture_credit,
       :habilitation, :tenure, :url, :linkedin, :twitter, :mastodon,
       :is_researcher, :is_teacher, :is_administration, :is_alumnus, :user_id,
       research_laboratory_ids: [], category_ids: []
