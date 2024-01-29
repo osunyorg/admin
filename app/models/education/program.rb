@@ -51,10 +51,11 @@
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
-  include WebsitesLinkable
   include AsIndirectObject
   include Contentful
   include Sanitizable
+  include Sluggable
+  include WebsitesLinkable
   include WithAccessibility
   include WithAlumni
   include WithBlobs
@@ -67,7 +68,6 @@ class Education::Program < ApplicationRecord
   include WithPermalink
   include WithPosition
   include WithSchools
-  include Sluggable
   include WithTeam
   include WithTree
   include WithUniversity

@@ -45,6 +45,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Sanitizable
+  include Sluggable
   include WithAccessibility
   include WithBlobs
   include WithCal
@@ -52,7 +53,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
-  include Sluggable
   include WithTime
   include WithTranslations
   include WithTree

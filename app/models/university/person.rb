@@ -58,6 +58,7 @@ class University::Person < ApplicationRecord
   include Backlinkable
   include Contentful
   include Sanitizable
+  include Sluggable
   include WithBlobs
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter
@@ -68,7 +69,6 @@ class University::Person < ApplicationRecord
   include WithPermalink
   include WithPicture
   include WithResearch
-  include Sluggable
   include WithTranslations
   include WithUniversity
 

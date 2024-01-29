@@ -39,15 +39,15 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Sanitizable
+  include Sluggable
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
-  include Sluggable
   include WithTranslations
   include WithUniversity
-
+  
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',
                           optional: true

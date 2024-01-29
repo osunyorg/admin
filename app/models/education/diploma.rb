@@ -27,9 +27,9 @@ class Education::Diploma < ApplicationRecord
   include AsIndirectObject
   include Contentful
   include Sanitizable
+  include Sluggable
   include WithGitFiles
   include WithPermalink
-  include Sluggable
   include WithUniversity
 
   has_many :programs, dependent: :nullify

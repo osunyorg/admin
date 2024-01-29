@@ -25,9 +25,9 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
-  include WebsitesLinkable
   include AsIndirectObject
   include Sanitizable
+  include WebsitesLinkable
   include WithAlumni
   include WithBlobs
   include WithCountry

@@ -21,9 +21,9 @@
 #
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
-  include WebsitesLinkable
   include Favoritable
   include Sanitizable
+  include WebsitesLinkable
   include WithGitFiles
   include WithUniversity
 

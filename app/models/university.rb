@@ -41,12 +41,12 @@ class University < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include WithAdministration
-  include WithPeopleAndOrganizations
   include WithCommunication
   include WithCountry
   include WithEducation
   include WithIdentifier
   include WithInvoice
+  include WithPeopleAndOrganizations
   include WithResearch
   include WithSso
   include WithUsers

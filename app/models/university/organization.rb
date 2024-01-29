@@ -51,12 +51,12 @@ class University::Organization < ApplicationRecord
   include Contentful
   include Backlinkable
   include Sanitizable
+  include Sluggable
   include WithBlobs
   include WithCountry
   include WithGeolocation
   include WithGitFiles
   include WithPermalink
-  include Sluggable
   include WithTranslations
   include WithUniversity
 
