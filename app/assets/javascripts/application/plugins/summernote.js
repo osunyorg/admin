@@ -1,99 +1,196 @@
 /*global $ */
-$(function () {
-    'use strict';
+window.summernoteManager = {
+    configs: {},
 
-    var configs = [];
+    init: function () {
+        'use strict';
+        this.setConfigs();
+        this.initEditors();
+        this.monkeyPatchDropdownButtons();
+    },
 
-    configs['link'] = {
-        toolbar: [
-            ['insert', ['link', 'unlink']]
-        ],
-        followingToolbar: true,
-        disableDragAndDrop: true
-    };
+    setConfigs: function () {
+        'use strict';
+        this.setConfig('link', {
+            toolbar: [
+                ['insert', ['link', 'unlink']]
+            ],
+            followingToolbar: true,
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['a'], ['href', 'target'])
+            }
+        });
 
-    configs['mini'] = {
-        toolbar: [
-            ['font', ['bold', 'italic']],
-            ['position', ['superscript']],
-            ['insert', ['link', 'unlink']],
-            ['view', ['codeview']]
-        ],
-        followingToolbar: true,
-        disableDragAndDrop: true
-    };
+        this.setConfig('mini', {
+            toolbar: [
+                ['font', ['bold', 'italic']],
+                ['position', ['superscript']],
+                ['insert', ['link', 'unlink']],
+                ['view', ['codeview']]
+            ],
+            followingToolbar: true,
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'a'], ['href', 'target'])
+            }
+        });
 
-    configs['mini-list'] = {
-        toolbar: [
-            ['font', ['bold', 'italic']],
-            ['position', ['superscript']],
-            ['para', ['ul', 'ol']],
-            ['insert', ['link', 'unlink']],
-            ['view', ['codeview']]
-        ],
-        followingToolbar: true,
-        disableDragAndDrop: true
-    };
+        this.setConfig('mini-list', {
+            toolbar: [
+                ['font', ['bold', 'italic']],
+                ['position', ['superscript']],
+                ['para', ['ul', 'ol']],
+                ['insert', ['link', 'unlink']],
+                ['view', ['codeview']]
+            ],
+            followingToolbar: true,
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], ['href', 'target'])
+            }
+        });
 
+        this.setConfig('default', {
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic']],
+                ['position', ['superscript', 'subscript']],
+                ['para', ['ul', 'ol']],
+                ['view', ['codeview']]
+            ],
+            styleTags: [
+                'p',
+                'blockquote',
+                'pre',
+                'h2',
+                'h3',
+                'h4'
+            ],
+            followingToolbar: true,
+            disableDragAndDrop: true,
+            callbacks: {
+                onPaste: this.pasteSanitizedClipboardContent.bind(this, ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'], ['href', 'target'])
+            }
+        });
 
-    configs['full'] = {
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic']],
-            ['position', ['superscript', 'subscript']],
-            ['para', ['ul', 'ol']],
-            ['table', ['table']],
-            ['insert', ['link', 'unlink', 'picture', 'video']],
-            ['view', ['codeview']]
-        ],
-        styleTags: [
-            'p',
-            'blockquote',
-            'pre',
-            'h2',
-            'h3',
-            'h4'
-        ],
-        followingToolbar: true,
-        disableDragAndDrop: true
-    };
+        window.SUMMERNOTE_CONFIGS = this.configs;
+    },
 
+    setConfig: function (key, data) {
+        'use strict';
+        this.configs[key] = data;
+    },
 
-    configs['default'] = {
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic']],
-            ['position', ['superscript', 'subscript']],
-            ['para', ['ul', 'ol']],
-            ['view', ['codeview']]
-        ],
-        styleTags: [
-            'p',
-            'blockquote',
-            'pre',
-            'h2',
-            'h3',
-            'h4'
-        ],
-        followingToolbar: true,
-        disableDragAndDrop: true
-    };
+    initEditors: function () {
+        'use strict';
+        $('[data-provider="summernote"]').each(this.initEditor.bind(this));
+    },
 
-    $('[data-provider="summernote"]').each(function () {
-        var config = $(this).attr('data-summernote-config'),
+    initEditor: function (_, element) {
+        'use strict';
+        var config = $(element).attr('data-summernote-config'),
             locale = $('#summernote-locale').data('locale'),
             options = {};
         config = config || 'default';
-        options = configs[config];
+        options = this.configs[config];
         // if locale is undefined, summernote use default (en-US)
         options['lang'] = locale;
-        $(this).summernote(options);
-    });
+        $(element).summernote(options);
+    },
 
-    // https://github.com/summernote/summernote/issues/4170
-    $("button[data-toggle='dropdown']").each(function (index) {
-        $(this).removeAttr("data-toggle").attr("data-bs-toggle", "dropdown");
-    });
+    monkeyPatchDropdownButtons: function () {
+        'use strict';
+        // https://github.com/summernote/summernote/issues/4170
+        $('button[data-toggle="dropdown"]').each(function () {
+            $(this).removeAttr('data-toggle')
+                .attr('data-bs-toggle', 'dropdown');
+        });
+    },
 
-    window.SUMMERNOTE_CONFIGS = configs;
+    pasteSanitizedClipboardContent: function (allowedTags, allowedAttributes, event) {
+        'use strict';
+        var text = event.originalEvent.clipboardData.getData('text/plain'),
+            html = event.originalEvent.clipboardData.getData('text/html');
+
+        event.preventDefault();
+        if (html) {
+            html = html.toString();
+            html = this.cleanHtml(html);
+            html = this.sanitizeTags(html, allowedTags);
+            html = this.sanitizeAttributes(html, allowedAttributes);
+            document.execCommand('insertHTML', false, html);
+        } else {
+            document.execCommand('insertText', false, text);
+        }
+    },
+
+    cleanHtml: function (html) {
+        'use strict';
+        // remove allMicrosoft Office tag
+        html = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '');
+        // remove all html comments
+        html = html.replace(/<!--[\s\S]*?-->/g, '');
+        // remove all microsoft attributes,
+        html = html.replace(/( class=(")?Mso[a-zA-Z]+(")?)/g, ' ');
+        // ensure regular quote
+        html = html.replace(/[\u2018\u2019\u201A]/g, '\'');
+        // ensure regular double quote
+        html = html.replace(/[\u201C\u201D\u201E]/g, '"');
+        // ensure regular ellipsis
+        html = html.replace(/\u2026/g, '...');
+        // ensure regular hyphen
+        html = html.replace(/[\u2013\u2014]/g, '-');
+        return html;
+    },
+
+    sanitizeTags: function (html, allowedTags) {
+        'use strict';
+        var allowedTagsRegex = allowedTags.map(function (e) {
+                return '(?!' + e + ')';
+            }).join(''),
+            tagStripper = new RegExp('</?' + allowedTagsRegex + '\\w*\\b[^>]*>', 'ig');
+
+        return html.replace(tagStripper, '');
+    },
+
+    sanitizeAttributes: function (html, allowedAttributes) {
+        'use strict';
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        this.sanitizeElementAttributes(div, allowedAttributes);
+        return div.innerHTML;
+    },
+
+    sanitizeElementAttributes: function (elmt, allowedAttributes) {
+        'use strict';
+        var children = elmt.children,
+            child,
+            i,
+            j;
+        for (i = 0; i < children.length; i += 1) {
+            child = children[i];
+            for (j = child.attributes.length - 1; j >= 0; j -= 1) {
+                if ($.inArray(child.attributes[j].name, allowedAttributes) < 0) {
+                    child.removeAttributeNode(child.attributes[j]);
+                }
+            }
+
+            if (child.children.length) {
+                this.sanitizeElementAttributes(child, allowedAttributes);
+            }
+        }
+    },
+
+    invoke: function () {
+        'use strict';
+        return {
+            init: this.init.bind(this)
+        };
+    }
+};
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+    window.summernoteManager.init();
 });
