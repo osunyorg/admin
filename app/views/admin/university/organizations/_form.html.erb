@@ -101,6 +101,15 @@
                     preview: 200,
                     resize: false,
                     direct_upload: true %>
+        <%= f.input :logo_credit,
+                    as: :summernote,
+                    hint: t('featured_image.credit.hint'),
+                    input_html: {
+                      data: {
+                        translatable: true,
+                        'summernote-config' => 'link' 
+                      }
+                    } %>
       <% end %>
       <%= render 'admin/application/meta_description/form', f: f, about: organization %>
     </div>

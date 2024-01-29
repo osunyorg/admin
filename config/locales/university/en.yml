@@ -41,6 +41,7 @@ en:
         legal: Legal information
         linkedin: LinkedIn
         logo: Logo for light backgrounds (default)
+        logo_credit: Credit
         logo_on_dark_background: Logo for dark backgrounds (optional)
         long_name: Long name
         map: Map
@@ -92,6 +93,7 @@ en:
         phone_personal: Personal phone
         phone_professional: Professional phone
         picture: Profile picture
+        picture_credit: Credit
         research_journal_papers: Papiers
         research_laboratories: Research laboratories
         researcher: Researcher

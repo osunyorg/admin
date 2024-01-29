@@ -13,6 +13,7 @@
 #  kind               :integer          default("company")
 #  latitude           :float
 #  linkedin           :string
+#  logo_credit        :text
 #  long_name          :string
 #  longitude          :float
 #  mastodon           :string

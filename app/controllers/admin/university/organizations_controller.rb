@@ -110,8 +110,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
             :name, :long_name, :slug, :meta_description, :summary, :active, :siren, :kind,
             :address, :address_name, :address_additional, :zipcode, :city, :country, :text,
             :url, :phone, :email, :linkedin, :twitter, :mastodon,
-            :logo, :logo_delete, :logo_infos,
-            :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+            :logo, :logo_delete, :logo_infos, :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos, :logo_credit,
             category_ids: []
           )
   end
