@@ -280,6 +280,9 @@ en:
         editorial:
           label: Editorial
           description: Everything related to content
+        localizations:
+          fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
+          title: Internationalization
         technical:
           label: Technical
           description: Everything related to technical settings

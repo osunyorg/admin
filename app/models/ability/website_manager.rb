@@ -4,6 +4,7 @@ class Ability::WebsiteManager < Ability
     super
     manage_blocks
     can [:read, :analytics], Communication::Website, university_id: @user.university_id, id: managed_websites_ids
+    can :manage, Communication::Website::Localization, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Post::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids

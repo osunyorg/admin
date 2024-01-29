@@ -280,6 +280,9 @@ fr:
         editorial:
           label: Éditorial
           description: Tout ce qui est lié au contenu
+        localizations:
+          fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
+          title: Internationalisation
         technical:
           label: Technique
           description: Tout ce qui est lié aux réglages techniques
