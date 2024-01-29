@@ -14,7 +14,7 @@ accept ||= '*'
             type="file"
             accept="<%= accept %>"
             @change="onFileImageChange( $event, <%= model %>, '<%= property %>' )"
-            data-size-limit="<%= Rails.application.config.default_files_size_max %>"
+            data-size-limit="<%= Rails.application.config.default_file_max_size %>"
             :id="<%= dom_id.html_safe %>">
   </div>
   <div v-if="<%= model %>.<%= property %>.id">
