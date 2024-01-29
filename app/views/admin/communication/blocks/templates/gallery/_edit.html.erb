@@ -12,7 +12,7 @@
         type="file"
         accept="<%= default_images_formats_accepted %>"
         @change="onMultipleFileImageChange( $event, 'image' )"
-        data-size-limit="<%= Communication::Block::IMAGE_MAX_SIZE %>"
+        data-size-limit="<%= Rails.application.config.default_images_size_max %>"
         multiple>
 
 <div class="form-text mb-2">

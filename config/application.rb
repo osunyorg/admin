@@ -70,6 +70,10 @@ module Osuny
     ]
 
     config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'
+
+    # FILES
+    config.default_files_size_max = 100.megabytes
+    config.default_images_size_max = 5.megabytes
     config.default_images_formats = ['.jpg', '.jpeg', '.png', '.svg']
     config.default_audio_formats = ['.mp3']
 
