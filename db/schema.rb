@@ -967,7 +967,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
     t.string "address_additional"
     t.uuid "language_id"
     t.uuid "original_id"
-    t.text "logo_credit"
     t.index ["language_id"], name: "index_university_organizations_on_language_id"
     t.index ["original_id"], name: "index_university_organizations_on_original_id"
     t.index ["slug"], name: "index_university_organizations_on_slug"
