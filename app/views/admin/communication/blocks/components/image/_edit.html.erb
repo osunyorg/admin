@@ -13,7 +13,7 @@ hint = images_formats_accepted_hint
             type="file"
             accept="<%= default_images_formats_accepted %>"
             @change="onFileImageChange( $event, <%= model %>, '<%= property %>' )"
-            data-size-limit="<%= Rails.application.config.default_images_size_max %>"
+            data-size-limit="<%= Rails.application.config.default_image_max_size %>"
             :id="<%= dom_id.html_safe %>"
             >
   </div>

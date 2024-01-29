@@ -84,7 +84,7 @@
       },
       uploadFile(input, file, object, key) {
         var size = Math.round(file.size / 1024 / 1024),
-            sizeLimit = <%= Rails.application.config.default_images_size_max %>,
+            sizeLimit = <%= Rails.application.config.default_image_max_size %>,
             sizeLimitMo = 0,
             controller;
         if (input.hasAttribute('data-size-limit')) {

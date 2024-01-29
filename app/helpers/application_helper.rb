@@ -69,7 +69,7 @@ module ApplicationHelper
     Rails.application.config.default_audio_formats.join(', ')
   end
 
-  def file_hint(filesize: number_to_human_size(Rails.application.config.default_files_size_max), formats: [])
+  def file_hint(filesize: number_to_human_size(Rails.application.config.default_file_max_size), formats: [])
     if formats.empty?
       t('file_hint_without_formats', filesize: filesize)
     else
@@ -78,7 +78,7 @@ module ApplicationHelper
   end
 
   def images_formats_accepted_hint(formats: default_images_formats_accepted)
-    file_hint(filesize: number_to_human_size(Rails.application.config.default_images_size_max), formats: formats)
+    file_hint(filesize: number_to_human_size(Rails.application.config.default_image_max_size), formats: formats)
   end
   
   def audio_formats_accepted_hint(formats: default_audio_formats_accepted)
