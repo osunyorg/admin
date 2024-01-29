@@ -2,9 +2,9 @@
 title: >-
   <%= @about.title %>
 date: "<%= @about.publication_date&.iso8601 %>"
-<%= render 'admin/application/static/breadcrumbs', 
+<%= render 'admin/application/static/breadcrumbs',
             pages: @website.special_page(Communication::Website::Page::ResearchHalPublication).ancestors_and_self,
-            current: @about %>
+            current_title: @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
 docid: "<%= @about.docid %>"
 abstract: >-
