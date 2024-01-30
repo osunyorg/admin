@@ -48,8 +48,8 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
-  include Contentful
   include Backlinkable
+  include Contentful
   include Sanitizable
   include Sluggable
   include WithBlobs

@@ -6,7 +6,18 @@ title: >
 <% if @website %>
 <%= render 'admin/application/static/breadcrumbs', 
             pages: @website.special_page(Communication::Website::Page::AdministrationLocation).ancestors_and_self,
-            current: @about %>
+            current_title: @about.to_s %>
 <% end %>
+contact_details:
+<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
+  geolocation:
+    latitude: <%= @about.latitude %>
+    longitude: <%= @about.longitude %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
