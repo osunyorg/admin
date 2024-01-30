@@ -25,10 +25,16 @@
   </div>
   <div class="row">
     <div class="col-lg-4">
-      <%= f.association :schools, as: :check_boxes %>
+      <%= f.association :schools, 
+                        as: :check_boxes,
+                        collection: current_university.education_schools.ordered %>
     </div>
     <div class="col-lg-4">
-      <%= f.association :programs, as: :check_boxes %>
+      <%= f.association :programs,
+                        as: :check_boxes,
+                        collection: collection_tree(current_university.education_programs),
+                        label_method: ->(p) { sanitize p[:label] },
+                        value_method: ->(p) { p[:id] } %>
     </div>
   </div>
   <% content_for :action_bar_right do %>
