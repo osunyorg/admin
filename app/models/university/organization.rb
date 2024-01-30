@@ -48,15 +48,15 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
-  include Contentful
   include Backlinkable
+  include Contentful
   include Sanitizable
+  include Sluggable
   include WithBlobs
   include WithCountry
   include WithGeolocation
   include WithGitFiles
   include WithPermalink
-  include WithSlug
   include WithTranslations
   include WithUniversity
 

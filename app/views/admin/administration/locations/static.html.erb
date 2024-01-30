@@ -1,0 +1,39 @@
+---
+title: >
+  <%= prepare_text_for_static @about.name %>
+<%= render 'admin/application/static/permalink' if @website %>
+<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+<% if @website %>
+<%= render 'admin/application/static/breadcrumbs', 
+            pages: @website.special_page(Communication::Website::Page::AdministrationLocation).ancestors_and_self,
+            current_title: @about.to_s %>
+<% end %>
+contact_details:
+<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
+  geolocation:
+    latitude: <%= @about.latitude %>
+    longitude: <%= @about.longitude %>
+programs:
+<% @about.programs.each do |program| %>
+  - <%= program.path %>
+<% end %>
+diplomas:
+<% @about.diplomas.each do |diploma| %>
+  - name: >
+      <%= diploma.to_s %>
+    path: <%= diploma.slug %>
+    programs: <% @programs = @about.education_programs.where(diploma: diploma).root.ordered %>
+<%= render 'admin/education/programs/static_list', 
+            diploma: diploma, 
+            programs: @programs,
+            all_programs: @about.programs,
+            depth: 4 %>
+<% end %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
+---

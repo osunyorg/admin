@@ -366,6 +366,9 @@ fr:
           accessibility:
             slug: accessibilite
             title: Accessibilité
+          administration_location:
+            slug: campus
+            title: Campus
           administrator:
             slug: equipe-administrative
             title: Équipe administrative

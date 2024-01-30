@@ -40,12 +40,13 @@ class University < ApplicationRecord
   self.filter_attributes += [:sso_cert]
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
-  include WithPeopleAndOrganizations
+  include WithAdministration
   include WithCommunication
   include WithCountry
   include WithEducation
   include WithIdentifier
   include WithInvoice
+  include WithPeopleAndOrganizations
   include WithResearch
   include WithSso
   include WithUsers

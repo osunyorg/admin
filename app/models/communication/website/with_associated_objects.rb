@@ -62,6 +62,10 @@ module Communication::Website::WithAssociatedObjects
     has_education_programs? ? about.published_programs : Education::Program.none
   end
 
+  def administration_locations
+    has_administration_locations? ? about.administration_locations : Administration::Location.none
+  end
+
   def research_volumes
     has_research_volumes? ? about.published_volumes : Research::Journal::Volume.none
   end
@@ -120,6 +124,10 @@ module Communication::Website::WithAssociatedObjects
 
   def has_education_programs?
     about && about.has_education_programs?
+  end
+
+  def has_administration_locations?
+    about && about.has_administration_locations?
   end
 
   def has_research_papers?

@@ -21,9 +21,9 @@
 #
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
-  include Aboutable
   include Favoritable
   include Sanitizable
+  include WebsitesLinkable
   include WithGitFiles
   include WithUniversity
 
@@ -86,7 +86,7 @@ class Research::Journal < ApplicationRecord
   end
 
   #####################
-  # Aboutable methods #
+  # WebsitesLinkable methods #
   #####################
   def has_administrators?
     false
@@ -105,6 +105,10 @@ class Research::Journal < ApplicationRecord
   end
 
   def has_education_diplomas?
+    false
+  end
+  
+  def has_administration_locations?
     false
   end
 

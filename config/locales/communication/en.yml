@@ -366,6 +366,9 @@ en:
           accessibility:
             slug: accessibility
             title: Accessibility
+          administration_location:
+            slug: campus
+            title: Campus
           administrator:
             slug: administrators
             title: Administrators

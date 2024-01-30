@@ -8,6 +8,7 @@ module Administration
 
   def self.parts
     [
+      [Administration::Location, :admin_administration_locations_path],
       [Administration::Qualiopi, :admin_administration_qualiopi_criterions_path],
     ]
   end

@@ -35,6 +35,18 @@
     </div>
   <% end %>
 
+  <% if @school.locations.any? %>
+    <div class="col-lg-4">
+      <%= osuny_panel Education::School.human_attribute_name('locations') do %>
+        <ul class="list-unstyled">
+          <% @school.locations.ordered.each do |location| %>
+            <li><%= link_to_if can?(:read, location), location, [:admin, location] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+
   <% if @school.websites.any? %>
     <div class="col-xxl-4">
       <%= osuny_panel Education::School.human_attribute_name('websites') do %>

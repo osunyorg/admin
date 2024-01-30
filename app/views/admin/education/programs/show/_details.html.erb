@@ -10,6 +10,14 @@
         <% end %>
       </ul>
     <% end %>
+    <% if program.locations.any? %>
+      <%= osuny_label Education::Program.human_attribute_name('locations') %>
+      <ul class="list-unstyled">
+        <% program.locations.ordered.each do |location| %>
+          <li><%= link_to_if can?(:read, location), location, [:admin, location] %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
   <div class="col-lg-8">
     <%= osuny_label Education::Program.human_attribute_name('short_name') %>

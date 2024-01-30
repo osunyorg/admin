@@ -21,9 +21,9 @@
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
-  include Aboutable
   include AsIndirectObject
   include Sanitizable
+  include WebsitesLinkable
   include WithCountry
   include WithGitFiles
 
@@ -89,6 +89,11 @@ class Research::Laboratory < ApplicationRecord
   end
 
   def has_education_diplomas?
+    false
+  end
+
+  # TODO en fait un laboratoire peut avoir des locations mais il faut le coder
+  def has_administration_locations?
     false
   end
 

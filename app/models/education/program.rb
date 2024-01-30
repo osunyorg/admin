@@ -51,10 +51,11 @@
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
-  include Aboutable
   include AsIndirectObject
   include Contentful
   include Sanitizable
+  include Sluggable
+  include WebsitesLinkable
   include WithAccessibility
   include WithAlumni
   include WithBlobs
@@ -62,11 +63,11 @@ class Education::Program < ApplicationRecord
   include WithFeaturedImage
   include WithGitFiles
   include WithInheritance
+  include WithLocations
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
   include WithSchools
-  include WithSlug
   include WithTeam
   include WithTree
   include WithUniversity
@@ -147,6 +148,7 @@ class Education::Program < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies +
+    locations +
     university_people_through_involvements.map(&:teacher) +
     university_people_through_role_involvements.map(&:administrator) +
     [diploma]
@@ -166,7 +168,7 @@ class Education::Program < ApplicationRecord
   end
 
   #####################
-  # Aboutable methods #
+  # WebsitesLinkable methods #
   #####################
   def has_administrators?
     university_people_through_role_involvements.any? ||

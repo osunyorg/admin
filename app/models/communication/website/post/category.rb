@@ -44,12 +44,12 @@ class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Sanitizable
+  include Sluggable # We override slug_unavailable? method
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPermalink
   include WithPosition
-  include WithSlug # We override slug_unavailable? method
   include WithTranslations
   include WithTree
   include WithUniversity

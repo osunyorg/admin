@@ -47,6 +47,7 @@ class Icon
   RESEARCH_HAL = RESEARCH_PUBLICATION
 
   ADMINISTRATION_CAMPUS = 'fas fa-map-marker-alt'
+  ADMINISTRATION_LOCATION = 'fas fa-map-marker-alt'
   ADMINISTRATION_ADMISSIONS = 'fas fa-door-open'
   ADMINISTRATION_INTERNSHIPS = 'fas fa-hands-helping'
   ADMINISTRATION_STATISTICS = 'fas fa-chart-bar'

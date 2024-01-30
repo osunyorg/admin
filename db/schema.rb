@@ -56,6 +56,38 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "administration_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.text "summary"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "phone"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["university_id"], name: "index_administration_locations_on_university_id"
+  end
+
+  create_table "administration_locations_education_programs", id: false, force: :cascade do |t|
+    t.uuid "administration_location_id", null: false
+    t.uuid "education_program_id", null: false
+    t.index ["administration_location_id", "education_program_id"], name: "index_location_program"
+    t.index ["education_program_id", "administration_location_id"], name: "index_program_location"
+  end
+
+  create_table "administration_locations_education_schools", id: false, force: :cascade do |t|
+    t.uuid "administration_location_id", null: false
+    t.uuid "education_school_id", null: false
+    t.index ["administration_location_id", "education_school_id"], name: "index_location_school"
+    t.index ["education_school_id", "administration_location_id"], name: "index_school_location"
+  end
+
   create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number"
     t.text "name"
@@ -106,8 +138,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -419,7 +451,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -1159,6 +1191,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "administration_locations", "universities"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_block_headings", "communication_block_headings", column: "parent_id"
   add_foreign_key "communication_block_headings", "universities"
