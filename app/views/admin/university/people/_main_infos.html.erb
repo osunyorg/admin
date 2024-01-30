@@ -10,6 +10,11 @@
           </span>
         </p>
       <% end %>
+      <% if person.picture_credit.present? %>
+        <div class="small mb-0">
+          <%= sanitize person.picture_credit %>
+        </div>
+      <% end %>
     <% end if person.best_picture.attached? %>
 
     <% if person.categories.any? %>

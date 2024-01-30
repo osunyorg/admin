@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_26_112021) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_29_100647) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -356,6 +356,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_112021) do
     t.string "previous_sha"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
+  end
+
+  create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "social_email"
+    t.string "social_mastodon"
+    t.string "social_peertube"
+    t.string "social_x"
+    t.string "social_github"
+    t.string "social_linkedin"
+    t.string "social_youtube"
+    t.string "social_vimeo"
+    t.string "social_instagram"
+    t.string "social_facebook"
+    t.string "social_tiktok"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_ed4630e334"
+    t.index ["language_id"], name: "index_communication_website_localizations_on_language_id"
+    t.index ["university_id"], name: "index_communication_website_localizations_on_university_id"
   end
 
   create_table "communication_website_menu_items", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1046,6 +1069,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_112021) do
     t.string "mastodon"
     t.uuid "language_id", null: false
     t.uuid "original_id"
+    t.text "picture_credit"
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["slug"], name: "index_university_people_on_slug"
@@ -1204,6 +1228,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_112021) do
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_localizations", "communication_websites"
+  add_foreign_key "communication_website_localizations", "languages"
+  add_foreign_key "communication_website_localizations", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"

@@ -39,6 +39,13 @@
       }
 
       navigation << {
+        title: t('admin.communication.website.localizations.title'),
+        path: admin_communication_website_localization_path(website_id: @website),
+        icon: Icon::COMMUNICATION_WEBSITE_LOCALIZATIONS,
+        ability: can?(:read, Communication::Website::Localization)
+      } if @website.languages.many?
+
+      navigation << {
         title: t('communication.website.analytics'),
         path: analytics_admin_communication_website_path(@website.id, website_id: nil),
         icon: Icon::COMMUNICATION_WEBSITE_ANALYTICS,

@@ -15,12 +15,13 @@
       <%= osuny_panel t('look_feel') do %>
         <%= f.input :logo,
                     as: :single_deletable_file,
-                    hint: default_images_formats_accepted_hint,
+                    hint: images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     direct_upload: true %>
         <%= f.input :favicon,
                     as: :single_deletable_file,
+                    hint: images_formats_accepted_hint('.png')
                     input_html: { accept: '.png' },
                     preview: 100,
                     direct_upload: true %>

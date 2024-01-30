@@ -18,10 +18,10 @@ social:
   :instagram,
   :facebook,
   :tiktok
-].each do |network|
-  value = @website.send "social_#{network}"
+].each do |social_element|
+  value = @website.send "social_#{social_element}"
   next if value.blank?
 %>
-  <%= network %>: >-
+  <%= social_element %>: >-
     <%= value %>
 <% end %>

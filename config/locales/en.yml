@@ -168,7 +168,6 @@ en:
       birthday: "%B %d"
       full: "%A %-d %B %Y"
   delete: Delete
-  default_images_hint: "5 MB max, %{formats}"
   devise:
     failure:
       invalid: "Invalid email or password."
@@ -225,6 +224,8 @@ en:
       label: Credit
       hint: The credit must be present according to copyright or copyleft licenses.
     remove: Remove image
+  file_hint_with_formats: "%{formats} files only. %{filesize} max."
+  file_hint_without_formats: "%{filesize} max"
   filters:
     attributes:
       category: Filter by category

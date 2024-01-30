@@ -39,8 +39,6 @@ class Communication::Block < ApplicationRecord
   include WithUniversity
   include Sanitizable
 
-  IMAGE_MAX_SIZE = 5.megabytes
-  FILE_MAX_SIZE = 100.megabytes
   BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
 
   belongs_to  :about, polymorphic: true

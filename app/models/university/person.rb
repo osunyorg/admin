@@ -25,6 +25,7 @@
 #  phone_mobile       :string
 #  phone_personal     :string
 #  phone_professional :string
+#  picture_credit     :text
 #  slug               :string           indexed
 #  summary            :text
 #  tenure             :boolean          default(FALSE)

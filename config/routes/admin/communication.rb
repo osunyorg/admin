@@ -41,7 +41,7 @@ namespace :communication do
           get :children
           get :static
         end
-      end  
+      end
       resources :authors, controller: '/admin/communication/websites/posts/authors', path: '/:lang/authors', only: [:index, :show]
     end
     resources :posts, controller: 'websites/posts', path: '/:lang/posts' do
@@ -87,6 +87,7 @@ namespace :communication do
         end
       end
     end
+    resource :localization, controller: 'websites/localizations', path: '/:lang/localization', only: [:show, :update]
   end
   scope "/contents/:about_type/:about_id", as: :contents, controller: 'contents' do
     get :write
