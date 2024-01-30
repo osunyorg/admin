@@ -9,7 +9,7 @@ indentation = ' ' * depth
 <% 
 children = program.children.where(diploma: diploma)
 # Limit to a global list of programs, for example on a location
-children = children.where(id: all_programs) if all_programs
+children = children.where(id: all_programs) if local_assigns[:all_programs]
 %>
 <% if children.any? %>
 <%= indentation %>  children: 
