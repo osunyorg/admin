@@ -16,6 +16,8 @@ en:
     attributes:
       administration/location:
         address: Address
+        address_additional: Additional address
+        address_name: Address name
         city: City
         country: Country
         name: Name
@@ -48,3 +50,12 @@ en:
           description: Management of the various (physical) education and research sites
         qualiopi:
           description: Help in checking the conformity of the training offer with the Qualiopi standard
+  simple_form:
+    hints:
+      administration_location:
+        address: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+        address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'
+        address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
+        city: 'This field is used for geolocation. Ex: Cenon'
+        country: 'This field is used for geolocation. Ex: France'
+        zipcode: 'This field is used for geolocation. Ex: 33150'

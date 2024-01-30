@@ -33,11 +33,12 @@ kind:
 website: >
   <%= prepare_text_for_static @about.url %>
 contact_details:
+<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
 <%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin %>
 <%= render 'admin/application/static/contact_detail', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter %>

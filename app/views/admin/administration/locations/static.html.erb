@@ -9,7 +9,9 @@ title: >
             current_title: @about.to_s %>
 <% end %>
 contact_details:
+<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
