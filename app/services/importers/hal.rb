@@ -1,5 +1,5 @@
 module Importers
-  class HAL
+  class Hal
 
     # https://api.archives-ouvertes.fr/search/?q=03713859&fl=*
     def self.import_publications_for_author(author)
