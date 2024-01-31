@@ -68,7 +68,7 @@ class Research::Hal::Author < ApplicationRecord
     publications.clear
     # Do not overuse the API if no researcher is concerned
     return if researchers.none?
-    Research::Hal::Publication.import_from_hal_for_author(self).each do |publication|
+    Importers::Hal.import_publications_for_author(self).each do |publication|
       publications << publication
     end
     publications
