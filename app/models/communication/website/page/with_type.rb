@@ -19,7 +19,7 @@ module Communication::Website::Page::WithType
       # Research
       Communication::Website::Page::ResearchVolume,
       Communication::Website::Page::ResearchPaper,
-      Communication::Website::Page::ResearchHalPublication,
+      Communication::Website::Page::ResearchPublication,
       # Administration
       Communication::Website::Page::AdministrationLocation,
       # People facets
