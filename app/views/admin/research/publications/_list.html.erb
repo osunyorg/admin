@@ -1,0 +1,30 @@
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Research::Publication.human_attribute_name('title') %></th>
+        <th><%= Research::Publication.human_attribute_name('publication_date') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @publications.each do |publication| %>
+        <tr>
+          <td>
+            <%= link_to publication, [:admin, publication] %><br>
+            <small><%= publication.authors_list %></small>
+          </td>
+          <td><%= l publication.publication_date %></td>
+          <td class="text-end">
+            <% if publication.editable? %>
+              <div class="btn-group" role="group">
+                <%= edit_link publication %>
+                <%= destroy_link publication %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

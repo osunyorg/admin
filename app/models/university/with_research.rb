@@ -4,6 +4,7 @@ module University::WithResearch
   included do
     has_many :research_journals, class_name: 'Research::Journal', dependent: :destroy
     has_many :research_laboratories, class_name: 'Research::Laboratory', dependent: :destroy
+    has_many :research_publications, class_name: 'Research::Publication', dependent: :destroy
     has_many :research_theses, class_name: 'Research::Thesis', dependent: :destroy
   end
 end

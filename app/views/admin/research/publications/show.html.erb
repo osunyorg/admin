@@ -1,5 +1,6 @@
 <% content_for :title, @publication %>
 
+
 <div class="row">
   <div class="col-lg-8">
     <% if @publication.abstract.present? %>
@@ -61,14 +62,11 @@
   <p><%= link_to value, value, target: :_blank %></p>
 <% end %>
 
+
 <% content_for :action_bar_left do %>
-  <% if current_user.server_admin? %>
-    <%= link_to t('delete'),
-                admin_research_hal_publication_path(@publication),
-                method: :delete,
-                class: button_classes_danger %>
-    <%= link_to t('static'),
-                static_admin_research_hal_publication_path(@publication),
-                class: button_classes('btn-light') %>
-  <% end %>
+  <%= destroy_link @publication if @publication.editable? %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @publication if @publication.editable? %>
 <% end %>

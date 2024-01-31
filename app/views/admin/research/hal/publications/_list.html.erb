@@ -2,8 +2,8 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Research::Hal::Publication.human_attribute_name('title') %></th>
-        <th width="150"><%= Research::Hal::Publication.human_attribute_name('publication_date') %></th>
+        <th><%= Research::Publication.human_attribute_name('title') %></th>
+        <th width="150"><%= Research::Publication.human_attribute_name('publication_date') %></th>
         <th width="200"><%= University::Person::Researcher.model_name.human(count: 2) %></th>
       </tr>
     </thead>

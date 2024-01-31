@@ -2,7 +2,7 @@ class Admin::Research::Hal::PublicationsController < Admin::Research::Hal::Appli
   before_action :load_publication, except: :index
 
   def index
-    @publications = Research::Hal::Publication.ordered.page(params[:page])
+    @publications = Research::Publication.hal.ordered.page(params[:page])
     breadcrumb
   end
 
@@ -24,12 +24,12 @@ class Admin::Research::Hal::PublicationsController < Admin::Research::Hal::Appli
   protected
 
   def load_publication
-    @publication = Research::Hal::Publication.find params[:id]
+    @publication = Research::Publication.find params[:id]
   end
 
   def breadcrumb
     super
-    add_breadcrumb Research::Hal::Publication.model_name.human(count: 2),
+    add_breadcrumb Research::Publication.model_name.human(count: 2),
                    admin_research_hal_publications_path
     breadcrumb_for @publication
   end

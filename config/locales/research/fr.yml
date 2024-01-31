@@ -11,9 +11,6 @@ fr:
       research/hal/author:
         one: Auteur·e HAL
         other: Auteur·e·s HAL
-      research/hal/publication:
-        one: Publication
-        other: Publications
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -32,6 +29,9 @@ fr:
       research/laboratory/axis:
         one: Axe
         other: Axes
+      research/publication:
+        one: Publication
+        other: Publications
       research/thesis:
         one: Thèse
         other: Thèses
@@ -41,14 +41,6 @@ fr:
         first_name: Prénom
         full_name: Nom complet
         last_name: Nom
-      research/hal/publication:
-        authors_list: Liste des auteur·e·s
-        docid: Identifiant
-        doi_url: URL DOI
-        publication_date: Date de publication
-        title: Titre
-        url: URL
-        hal_url: URL HAL
       research/journal:
         issn: ISSN
         title: Titre
@@ -88,6 +80,14 @@ fr:
         name: Nom
         short_name: Nom court
         text: Texte
+      research/publication:
+        authors_list: Liste des auteur·e·s
+        docid: Identifiant
+        doi_url: URL DOI
+        publication_date: Date de publication
+        title: Titre
+        url: URL
+        hal_url: URL HAL
       research/thesis:
         abstract: Résumé
         author: Auteur·e
@@ -112,6 +112,8 @@ fr:
           description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
         laboratory:
           description: Structure de recherche hébergeant le travail des chercheur·e·s
+        publication:
+          description: Publications scientifiques produites par les chercheur·e·s
         researcher:
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
         thesis:

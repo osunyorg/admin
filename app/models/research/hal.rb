@@ -39,7 +39,7 @@ module Research::Hal
 
   def self.parts
     [
-      [Research::Hal::Publication, :admin_research_hal_publications_path],
+      [Research::Publication, :admin_research_hal_publications_path],
       [Research::Hal::Author, :admin_research_hal_authors_path],
     ]
   end

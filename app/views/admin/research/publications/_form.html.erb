@@ -1,0 +1,13 @@
+<%= simple_form_for [:admin, publication] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :title %>
+    </div>
+  </div>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

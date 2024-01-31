@@ -4,6 +4,11 @@ namespace :research do
       post 'sync-with-hal' => 'researchers#sync_with_hal', as: :sync_with_hal
     end
   end
+  resources :publications do
+    member do
+      get :static
+    end
+  end
   namespace :hal do
     resources :authors, only: [:index, :show, :destroy] do
       member do

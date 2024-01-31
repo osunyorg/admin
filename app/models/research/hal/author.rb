@@ -20,7 +20,7 @@ class Research::Hal::Author < ApplicationRecord
   include Sanitizable
 
   has_and_belongs_to_many :publications,
-                          foreign_key: 'research_hal_publication_id',
+                          foreign_key: 'research_publication_id',
                           association_foreign_key: :research_hal_author_id
   has_and_belongs_to_many :university_person_researchers,
                           class_name: 'University::Person',
@@ -47,7 +47,7 @@ class Research::Hal::Author < ApplicationRecord
   end
 
   def self.create_from(doc)
-    author = where(docid: doc.docid).first_or_create
+    author = where(docid: doc.hal_docid).first_or_create
     author.form_identifier = doc.form_i
     author.person_identifier = doc&.person_i if doc.attributes.has_key?(:person_i)
     author.first_name = doc.firstName_s

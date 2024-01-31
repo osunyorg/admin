@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<%= osuny_panel Research::Hal::Publication.model_name.human(count: 2), subtitle: @author.publications.count do %>
+<%= osuny_panel Research::Publication.model_name.human(count: 2), subtitle: @author.publications.count do %>
   <%= render 'admin/research/hal/publications/list', publications: @author.publications.ordered %>
 <% end %>
 

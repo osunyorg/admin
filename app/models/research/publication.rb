@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: research_hal_publications
+# Table name: research_publications
 #
 #  id               :uuid             not null, primary key
 #  abstract         :text
@@ -8,15 +8,16 @@
 #  authors_list     :text
 #  citation_full    :text
 #  data             :jsonb
-#  docid            :string           indexed
 #  doi              :string
 #  file             :text
+#  hal_docid        :string           indexed
 #  hal_url          :string
 #  journal_title    :string
 #  open_access      :boolean
 #  publication_date :date
 #  ref              :string
 #  slug             :string           indexed
+#  source           :integer          default("osuny")
 #  title            :string
 #  url              :string
 #  created_at       :datetime         not null
@@ -24,10 +25,10 @@
 #
 # Indexes
 #
-#  index_research_hal_publications_on_docid  (docid)
-#  index_research_hal_publications_on_slug   (slug)
+#  index_research_publications_on_hal_docid  (hal_docid)
+#  index_research_publications_on_slug       (slug)
 #
-class Research::Hal::Publication < ApplicationRecord
+class Research::Publication < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
   include Sluggable
@@ -38,15 +39,25 @@ class Research::Hal::Publication < ApplicationRecord
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
                           foreign_key: :university_person_id,
-                          association_foreign_key: :research_hal_publication_id
+                          association_foreign_key: :research_publication_id
 
   has_and_belongs_to_many :authors,
+                          class_name: 'Research::Hal::Author',
                           foreign_key: :research_hal_author_id,
-                          association_foreign_key: :research_hal_publication_id
+                          association_foreign_key: :research_publication_id
 
   validates_presence_of :docid
 
   scope :ordered, -> { order(publication_date: :desc)}
+
+  enum source: {
+    osuny: 0,
+    hal: 1
+  }
+
+  def editable?
+    source == :osuny
+  end
 
   # https://api.archives-ouvertes.fr/search/?q=03713859&fl=*
   def self.import_from_hal_for_author(author)
@@ -78,7 +89,7 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   def self.create_from(doc)
-    publication = where(docid: doc.docid).first_or_create
+    publication = where(hal_docid: doc.docid).first_or_create
     puts "HAL sync publication #{doc.docid}"
     publication.title = Osuny::Sanitizer.sanitize doc.title_s.first, 'string'
     publication.ref = doc.attributes['citationRef_s']
@@ -104,7 +115,7 @@ class Research::Hal::Publication < ApplicationRecord
   end
 
   def template_static
-    "admin/research/hal/publications/static"
+    "admin/research/publications/static"
   end
 
   def git_path(website)
