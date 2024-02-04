@@ -7,7 +7,7 @@
     <div class="col-lg-4 col-xl-3">
       <div class=" position-relative mb-5">
         <div class="ratio bg-light" style="--bs-aspect-ratio: 62.5%">
-          <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded' if website.screenshot.attached? %>
+          <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded border' if website.screenshot.attached? %>
         </div>
         <h2 class="p strong mt-2 mb-0"><%= website %></h2>
         <%= link_to t('show'), [:admin, website], class: 'stretched-link pull-end' %>
