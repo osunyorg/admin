@@ -21,6 +21,7 @@ class Screenshot
         url: url,
         screenshot: true,
         meta: false,
+        waitUntil: 'load',
         device: 'Macbook Pro 15'
       }
     })
