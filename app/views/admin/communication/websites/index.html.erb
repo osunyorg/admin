@@ -9,8 +9,10 @@
         <div class="ratio bg-light" style="--bs-aspect-ratio: 62.5%">
           <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded border' if website.screenshot.attached? %>
         </div>
-        <h2 class="p strong mt-2 mb-0"><%= website %></h2>
-        <%= link_to t('show'), [:admin, website], class: 'stretched-link pull-end' %>
+        <p class="strong mt-2 mb-0">
+          <%= website %>
+          <%= link_to t('show'), [:admin, website], class: 'float-end action stretched-link' %>
+        </p>
       </div>
     </div>
   <% end %>
