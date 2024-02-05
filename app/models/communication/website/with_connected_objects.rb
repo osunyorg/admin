@@ -21,6 +21,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_without_delay
     destroy_obsolete_git_files_without_delay
     get_current_theme_version!
+    screenshot!
   end
   handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
@@ -88,9 +89,9 @@ module Communication::Website::WithConnectedObjects
     University::Organization.where(id: ids)
   end
 
-  def connected_publications
-    ids = connections.where(indirect_object_type: 'Research::Publication').pluck(:indirect_object_id)
-    Research::Publication.where(id: ids)
+  def connected_hal_publications
+    ids = connections.where(indirect_object_type: 'Research::Hal::Publication').pluck(:indirect_object_id)
+    Research::Hal::Publication.where(id: ids)
   end
 
   # ensure the object "website" respond to both is_direct_object? and is_indirect_object? as website doesn't include neither as_direct_object nor as_indirect_object
