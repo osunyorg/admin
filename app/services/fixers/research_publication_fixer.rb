@@ -57,7 +57,7 @@ class Fixers::ResearchPublicationFixer
     ## Current permalinks
 
     Communication::Website::Permalink.where(about_type: "Research::Hal::Publication", is_current: true).find_each do |permalink|
-      already_migrated_permalink = Communication::Website::GitFile.find_by(
+      already_migrated_permalink = Communication::Website::Permalink.find_by(
         about_type: "Research::Publication",
         about_id: permalink.about_id,
         website_id: permalink.website_id,
