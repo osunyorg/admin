@@ -55,6 +55,8 @@ class Research::Publication < ApplicationRecord
 
   validates_presence_of :title, :publication_date
 
+  before_validation :generate_authors_citeproc
+
   def editable?
     source == 'osuny'
   end
@@ -92,6 +94,16 @@ class Research::Publication < ApplicationRecord
       "issued" => publication_date.present? ? { "date-parts" => [[publication_date.year, publication_date.month]] } : nil,
       "id" => (hal_docid || id)
     }
+  end
+
+  def generate_authors_citeproc
+    return if hal?
+    self.authors_citeproc = researchers.map do |researcher|
+      {
+        "family" => researcher.last_name, 
+        "given" => researcher.first_name
+      }
+    end
   end
 
   def slug_unavailable?(slug)
