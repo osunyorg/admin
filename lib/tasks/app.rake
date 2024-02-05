@@ -8,13 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    ActiveStorage::Attachment.where(record_type: "Communication::Website::Category").update_all(record_type: "Communication::Website::Post::Category")
-    Communication::Block.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
-    Communication::Block::Heading.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
-    Communication::Website::Connection.where(direct_source_type: "Communication::Website::Category").update_all(direct_source_type: "Communication::Website::Post::Category")
-    Communication::Website::GitFile.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
-    Communication::Website::Menu::Item.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
-    Communication::Website::Permalink.where(about_type: "Communication::Website::Category").update_all(about_type: "Communication::Website::Post::Category")
+    Fixers::ResearchPublicationFixer.run
   end
 
   namespace :websites do
