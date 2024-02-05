@@ -1,0 +1,8 @@
+<% content_for :title, Research::Publication.model_name.human(count: 2) %>
+<%= render 'filters', current_path: admin_research_publications_path, filters: @filters if @filters.any?  %>
+<%= render 'admin/research/publications/list', publications: @publications %>
+<%= paginate @publications, theme: 'bootstrap-5' %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Research::Publication %>
+<% end %>

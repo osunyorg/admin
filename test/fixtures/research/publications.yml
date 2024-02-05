@@ -1,5 +1,5 @@
 default_publication:
-  docid: MyString
+  hal_docid: MyString
   data:
   title: MyString
   url: MyString

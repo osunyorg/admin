@@ -11,9 +11,6 @@ en:
       research/hal/author:
         one: HAL author
         other: HAL authors
-      research/hal/publication:
-        one: Publication
-        other: Publications
       research/journal:
         one: Journal
         other: Journals
@@ -32,6 +29,9 @@ en:
       research/laboratory/axis:
         one: Axis
         other: Axes
+      research/publication:
+        one: Publication
+        other: Publications
       research/thesis:
         one: Thesis
         other: Theses
@@ -41,14 +41,8 @@ en:
         first_name: First name
         full_name: Full name
         last_name: Last name
-      research/hal/publication:
-        authors_list: Authors list
-        docid: Identifier
-        doi_url: URL DOI
-        publication_date: Publication date
-        title: Title
-        url: URL
-        hal_url: URL HAL
+        publications: Publications imported from HAL
+        researcher: Researchers in Osuny
       research/journal:
         issn: ISSN
         title: Title
@@ -88,6 +82,19 @@ en:
         name: Name
         short_name: Short name
         text: Text
+      research/publication:
+        abstract: Abstract
+        authors_list: Authors list
+        docid: Identifier
+        doi: DOI
+        doi_url: URL DOI
+        hal_url: URL HAL
+        journal_title: In...
+        open_access: Open access
+        publication_date: Publication date
+        title: Title
+        url: URL
+        urls: Web URLs
       research/thesis:
         abstract: Abstract
         author: Author
@@ -97,11 +104,28 @@ en:
         laboratory: Laboratory
         started_at: Started at
         title: Title
+  enums:
+    research:
+      publication:
+        source:
+          hal: HAL
+          osuny: Osuny
   research/hal:
     description: 
       text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
       source: HAL.science
   research:
+    citations:
+      apa:
+        label: APA
+      mla: 
+        label: MLA
+      chicago: 
+        label: Chicago
+      harvard: 
+        label: Harvard
+      iso690: 
+        label: ISO 690
     description:
       text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. Fundamental research creates the knowledge base from which applications are born and, conversely, technological advances provide the increasingly sophisticated investigative tools that lead to a deepening of our fundamental knowledge.
       source: Serge Haroche, Prix Nobel de physique 2012
@@ -112,6 +136,8 @@ en:
           description: Open access journals allowing researchers to contribute to research
         laboratory:
           description: Research structure hosting the work of researchers
+        publication:
+          description: Scientific publications produced by researchers
         researcher:
           description: Individual linked to a university, department, laboratory, etc.
         thesis:

@@ -1,7 +1,7 @@
-class Communication::Website::Page::ResearchHalPublication < Communication::Website::Page
+class Communication::Website::Page::ResearchPublication < Communication::Website::Page
 
   def is_necessary_for_website?
-    website.connected_hal_publications.any?
+    website.connected_publications.any?
   end
 
   def editable_width?
@@ -15,7 +15,7 @@ class Communication::Website::Page::ResearchHalPublication < Communication::Webs
   def dependencies
     super +
     [website.config_default_languages] +
-    website.connected_hal_publications
+    website.connected_publications
   end
 
   protected

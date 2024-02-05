@@ -20,7 +20,7 @@ class Research::Hal::Author < ApplicationRecord
   include Sanitizable
 
   has_and_belongs_to_many :publications,
-                          foreign_key: 'research_hal_publication_id',
+                          foreign_key: 'research_publication_id',
                           association_foreign_key: :research_hal_author_id
   has_and_belongs_to_many :university_person_researchers,
                           class_name: 'University::Person',
@@ -68,7 +68,7 @@ class Research::Hal::Author < ApplicationRecord
     publications.clear
     # Do not overuse the API if no researcher is concerned
     return if researchers.none?
-    Research::Hal::Publication.import_from_hal_for_author(self).each do |publication|
+    Importers::Hal.import_publications_for_author(self).each do |publication|
       publications << publication
     end
     publications
