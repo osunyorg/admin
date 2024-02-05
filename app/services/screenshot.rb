@@ -25,7 +25,7 @@ class Screenshot
         device: 'Macbook Pro 15'
       },
       headers: {
-        x-api-key: ENV['MICROLINK_API_KEY']
+        'x-api-key' => ENV['MICROLINK_API_KEY']
       }
     })
     data = JSON.parse(response.body)
