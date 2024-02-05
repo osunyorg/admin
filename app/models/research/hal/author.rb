@@ -47,7 +47,7 @@ class Research::Hal::Author < ApplicationRecord
   end
 
   def self.create_from(doc)
-    author = where(docid: doc.hal_docid).first_or_create
+    author = where(docid: doc.docid).first_or_create
     author.form_identifier = doc.form_i
     author.person_identifier = doc&.person_i if doc.attributes.has_key?(:person_i)
     author.first_name = doc.firstName_s

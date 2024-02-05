@@ -18,11 +18,11 @@ module Research::Hal
   end
 
   def self.pause_git_sync
-    Research::Hal::Publication.skip_callback :save, :after, :connect_and_sync_direct_sources
+    Research::Publication.skip_callback :save, :after, :connect_and_sync_direct_sources
   end
 
   def self.unpause_git_sync
-    Research::Hal::Publication.set_callback :save, :after, :connect_and_sync_direct_sources
+    Research::Publication.set_callback :save, :after, :connect_and_sync_direct_sources
   end
 
   def self.clear_queue!
@@ -30,7 +30,7 @@ module Research::Hal
     Delayed::Job.find_each do |job|
       next unless job.public_respond_to?(:payload_object)
       if  job.payload_object.method_name == :sync_indirect_object_with_git_without_delay &&
-          job.payload_object.args.first.is_a?(Research::Hal::Publication)
+          job.payload_object.args.first.is_a?(Research::Publication)
         ids << job.id
       end
     end
@@ -39,7 +39,6 @@ module Research::Hal
 
   def self.parts
     [
-      [Research::Publication, :admin_research_hal_publications_path],
       [Research::Hal::Author, :admin_research_hal_authors_path],
     ]
   end

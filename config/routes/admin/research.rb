@@ -16,11 +16,6 @@ namespace :research do
         delete 'researchers/:researcher_id' => 'authors#disconnect_researcher'
       end
     end
-    resources :publications, only: [:index, :show, :destroy] do
-      member do
-        get :static
-      end
-    end
     root to: 'dashboard#index'
   end
   resources :journals do

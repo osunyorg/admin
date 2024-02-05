@@ -46,8 +46,6 @@ class Research::Publication < ApplicationRecord
                           foreign_key: :research_hal_author_id,
                           association_foreign_key: :research_publication_id
 
-  validates_presence_of :docid
-
   scope :ordered, -> { order(publication_date: :desc)}
 
   enum source: {
@@ -55,8 +53,10 @@ class Research::Publication < ApplicationRecord
     hal: 1
   }
 
+  validates_presence_of :title, :publication_date
+
   def editable?
-    source == :osuny
+    source == 'osuny'
   end
 
   def template_static
@@ -90,7 +90,7 @@ class Research::Publication < ApplicationRecord
       "pdf" => file,
       "month-numeric" => publication_date.present? ? publication_date.month.to_s : nil,
       "issued" => publication_date.present? ? { "date-parts" => [[publication_date.year, publication_date.month]] } : nil,
-      "id" => docid
+      "id" => (hal_docid || id)
     }
   end
 

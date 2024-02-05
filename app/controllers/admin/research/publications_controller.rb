@@ -12,6 +12,12 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
     breadcrumb
   end
 
+  def static
+    @about = @publication
+    @website = @publication.websites&.first || current_university.websites.first
+    render_as_plain_text
+  end
+
   def new
     breadcrumb
   end
@@ -55,6 +61,6 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
 
   def publication_params
     params.require(:research_publication)
-          .permit(:title)
+          .permit(:title, :publication_date, :abstract, :authors_list, :doi, :ref, :journal_title, :url, :open_access, :citation_full, researcher_ids: [])
   end
 end

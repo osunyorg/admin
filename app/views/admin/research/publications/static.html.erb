@@ -1,10 +1,14 @@
+<%
+special_page = @website.special_page(Communication::Website::Page::ResearchPublication)
+pages = special_page.ancestors_and_self if special_page
+%>
 ---
 title: >-
   <%= @about.title %>
 date: "<%= @about.publication_date&.iso8601 %>"
 <%= render 'admin/application/static/breadcrumbs',
-            pages: @website.special_page(Communication::Website::Page::ResearchPublication).ancestors_and_self,
-            current_title: @about.to_s %>
+            pages: pages,
+            current_title: @about.to_s if pages %>
 <%= render 'admin/application/static/permalink' %>
 hal:
   docid: "<%= @about.hal_docid %>"
@@ -31,21 +35,14 @@ researchers:
   - <%= researcher.slug %>
 <% end %>
 citations:
-  - label: "APA"
+<% 
+Citations::FORMATS.each do |format| 
+  citation = @about.public_send("citation_#{format}")
+  next if (@website.default_language.iso_code == "fr" && format == 'iso690') 
+%>
+  - label: "<%= t("research.citations.#{format}.label") %>"
+    format: "<%= format %>"
     content: >-
-      <%= prepare_html_for_static @about.citation_apa, @website.university %>
-  - label: "MLA"
-    content: >-
-      <%= prepare_html_for_static @about.citation_mla, @website.university %>
-  - label: "Chicago"
-    content: >-
-      <%= prepare_html_for_static @about.citation_chicago, @website.university %>
-  - label: "Harvard"
-    content: >-
-      <%= prepare_html_for_static @about.citation_harvard, @website.university %>
-  <% if @website.default_language.iso_code == "fr" %>
-  - label: "ISO 690"
-    content: >-
-      <%= prepare_html_for_static @about.citation_iso690, @website.university %>
-  <% end %>
+      <%= prepare_html_for_static citation, @website.university %>
+<% end %>
 ---

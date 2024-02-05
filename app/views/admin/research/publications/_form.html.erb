@@ -1,12 +1,26 @@
 <%= simple_form_for [:admin, publication] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-8">
       <%= f.input :title %>
+      <%= f.input :abstract, input_html: { rows: 12 } %>
+      <%= f.input :citation_full, as: :summernote %>
+      <%= f.input :ref, as: :text %>
+      <%= f.input :authors_list, as: :string %>
+      <%= f.input :url %>
+      </div>
+      <div class="col-lg-4">
+      <%= f.input :publication_date, html5: true %>
+      <%= f.input :doi %>
+      <%= f.input :journal_title %>
+      <%= f.input :open_access %>
+      <%= f.association :researchers, 
+                        as: :check_boxes, 
+                        collection: current_university.university_people.researchers.ordered %>
     </div>
   </div>
+
   <% content_for :action_bar_right do %>
     <%= submit f %>
   <% end %>
