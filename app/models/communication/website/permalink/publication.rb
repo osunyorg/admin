@@ -1,6 +1,6 @@
 class Communication::Website::Permalink::Publication < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.connected_hal_publications.any?
+    website.connected_publications.any?
   end
 
   def self.static_config_key
