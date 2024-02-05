@@ -36,7 +36,7 @@ class Ability::Admin < Ability
 
   def admin_research
     can :manage, Research::Hal::Author
-    can :manage, Research::Hal::Publication
+    can :manage, Research::Publication
     can :manage, Research::Journal, university_id: @user.university_id
     can :manage, Research::Journal::Paper, university_id: @user.university_id
     can :manage, Research::Journal::Paper::Kind, university_id: @user.university_id

@@ -12,7 +12,7 @@ module ApplicationController::WithFeatures
     def feature_research?
       current_university.is_really_a_university && (
         can?(:read, Research::Journal) ||
-        can?(:read, Research::Hal::Publication) ||
+        can?(:read, Research::Publication) ||
         can?(:read, Research::Laboratory)
       )
     end

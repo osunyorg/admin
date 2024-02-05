@@ -35,7 +35,7 @@ class Communication::Website::Permalink < ApplicationRecord
     "Education::Program" => Communication::Website::Permalink::Program,
     "Research::Journal::Paper" => Communication::Website::Permalink::Paper,
     "Research::Journal::Volume" => Communication::Website::Permalink::Volume,
-    "Research::Hal::Publication" => Communication::Website::Permalink::Publication,
+    "Research::Publication" => Communication::Website::Permalink::Publication,
     "University::Organization" => Communication::Website::Permalink::Organization,
     "University::Person" => Communication::Website::Permalink::Person,
     "University::Person::Administrator" => Communication::Website::Permalink::Administrator,
