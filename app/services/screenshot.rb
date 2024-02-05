@@ -23,6 +23,9 @@ class Screenshot
         meta: false,
         waitUntil: 'load',
         device: 'Macbook Pro 15'
+      },
+      headers: {
+        'x-api-key' => ENV['MICROLINK_API_KEY']
       }
     })
     data = JSON.parse(response.body)

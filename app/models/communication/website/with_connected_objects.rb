@@ -21,6 +21,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_without_delay
     destroy_obsolete_git_files_without_delay
     get_current_theme_version!
+    screenshot!
   end
   handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
