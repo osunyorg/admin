@@ -73,5 +73,10 @@ class Fixers::ResearchPublicationFixer
 
     Communication::Website::Permalink.where(id: permalink_ids_to_destroy).destroy_all
     Communication::Website::Permalink.where(id: permalink_ids_to_update).update_all(about_type: "Research::Publication")
+
+    # Special pages
+
+    Communication::Website::Page.where(     type: 'Communication::Website::Page::ResearchHalPublication')
+                                .update_all(type: 'Communication::Website::Page::ResearchPublication')
   end
 end
