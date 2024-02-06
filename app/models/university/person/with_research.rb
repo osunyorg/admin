@@ -34,7 +34,7 @@ module University::Person::WithResearch
   end
 
   def import_research_hal_publications!
-    publications.clear
+    publications.hal.clear
     hal_authors.each do |author|
       # TODO manage same researcher in different universities
       publications.concat author.import_research_hal_publications!
