@@ -30,23 +30,3 @@
 <% else %>
   <%= render 'admin/dashboard/not_a_university' %>
 <% end %>
-
-<% if current_admin_theme == 'appstack' %>
-  <div class="small mt-5">
-    <ul class="list-inline">
-      <li class="list-inline-item">
-        <%= link_to 'API', api_root_path %>
-      </li>
-      <%
-      [
-      :terms_of_service,
-      :privacy_policy,
-      :cookies_policy
-      ].each do |term| %>
-        <li class="list-inline-item">
-          <%= link_to t("#{term}"), t("#{term}_url"), target: '_blank', rel: 'noreferrer' %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
