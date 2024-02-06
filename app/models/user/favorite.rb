@@ -22,6 +22,9 @@ class User::Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :about, polymorphic: true
 
+  scope :websites, -> { where(about_type: 'Communication::Website') }
+  scope :except_websites, -> { where.not(about_type: 'Communication::Website') }
+
   def self.permitted_about_types
     ApplicationRecord.model_names_with_concern(Favoritable)
   end

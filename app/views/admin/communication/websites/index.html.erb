@@ -1,23 +1,10 @@
 <% content_for :title, "#{Communication::Website.model_name.human(count: 2)} (#{@websites.total_count})" %>
 
 <%= render 'filters', current_path: admin_communication_websites_path, filters: @filters if @filters.any?  %>
-
-<div class="row pt-5">
-  <% @websites.each do |website| %>
-    <div class="col-lg-4 col-xl-3">
-      <div class=" position-relative mb-5">
-        <div class="ratio bg-light" style="--bs-aspect-ratio: 62.5%">
-          <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded border' if website.screenshot.attached? %>
-        </div>
-        <p class="strong mt-2 mb-0">
-          <%= website %>
-          <%= link_to t('show'), [:admin, website], class: 'float-end action stretched-link' %>
-        </p>
-      </div>
-    </div>
-  <% end %>
+<div class="pt-5">
+  <%= render 'admin/communication/websites/list', websites: @websites %>
+  <%= paginate @websites, theme: 'bootstrap-5' %>
 </div>
-<%= paginate @websites, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website %>
