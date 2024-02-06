@@ -72,7 +72,7 @@
     <% Citations::FORMATS.each do |format| %>
       <div class="col-lg-4">
         <%= osuny_label t("research.citations.#{format}.label") %>
-        <p><%= sanitize @publication.public_send("citation_#{format}") %></p>
+        <p class="overflow-hidden"><%= sanitize @publication.public_send("citation_#{format}") %></p>
       </div>
     <% end %>
   </div>

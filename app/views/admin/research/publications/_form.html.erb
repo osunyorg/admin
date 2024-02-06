@@ -17,7 +17,10 @@
       <%= f.input :open_access %>
       <%= f.association :researchers, 
                         as: :check_boxes, 
-                        collection: current_university.university_people.researchers.ordered %>
+                        collection: current_university.university_people
+                                                      .researchers
+                                                      .for_language(current_language)
+                                                      .ordered %>
     </div>
   </div>
 
