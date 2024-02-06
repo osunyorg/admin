@@ -1,4 +1,7 @@
 class Screenshot
+  PUBLIC_API = 'https://api.microlink.io'.freeze
+  PRO_API = 'https://pro.microlink.io'.freeze
+
   # https://microlink.io/docs/api/getting-started/overview
   # https://api.microlink.io/?url=https://www.noesya.coop&screenshot=true&meta=false&device=Macbook%20Pro%2015
   # {
@@ -16,13 +19,16 @@ class Screenshot
   #   }
   # }
   def self.capture(url)
-    response = HTTParty.get('https://api.microlink.io', {
+    response = HTTParty.get(PRO_API, {
       query: {
         url: url,
         screenshot: true,
         meta: false,
         waitUntil: 'load',
         device: 'Macbook Pro 15'
+      },
+      headers: {
+        'x-api-key' => ENV['MICROLINK_API_KEY']
       }
     })
     data = JSON.parse(response.body)

@@ -59,8 +59,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def update
     if @website.update_and_sync(website_params)
-      # TODO better place, background job once w week?
-      @website.screenshot!
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s)
     else
       breadcrumb

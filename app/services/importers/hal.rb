@@ -33,6 +33,7 @@ module Importers
     def self.create_publication_from(doc)
       publication = Research::Publication.where(hal_docid: doc.docid).first_or_create
       puts "HAL sync publication #{doc.docid}"
+      publication.source = :hal
       publication.title = Osuny::Sanitizer.sanitize doc.title_s.first, 'string'
       publication.ref = doc.attributes['citationRef_s']
       publication.citation_full = doc.attributes['citationFull_s']
