@@ -39,6 +39,9 @@ namespace :research do
     end
   end
   resources :laboratories do
+    member do
+      get :static
+    end
     resources :axes, controller: 'laboratories/axes' do
       collection do
         post :reorder

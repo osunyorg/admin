@@ -1,12 +1,16 @@
 ---
 name: >
-  <%= @about.name %>
+  <%= prepare_text_for_static @about.name %>
+address_name: >
+  <%= prepare_text_for_static @about.address_name %>
 address: >
-  <%= @about.address %>
+  <%= prepare_text_for_static @about.address %>
+address_additional: >
+  <%= prepare_text_for_static @about.address_additional %>
 zipcode: >
-  <%= @about.zipcode %>
+  <%= prepare_text_for_static @about.zipcode %>
 city: >
-  <%= @about.city %>
+  <%= prepare_text_for_static @about.city %>
 country: >
   <%= @about.country_common_name %>
 ---

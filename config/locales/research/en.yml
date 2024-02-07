@@ -74,6 +74,8 @@ en:
         title: Title
       research/laboratory:
         address: Address
+        address_additional: Additional address
+        address_name: Address name
         city: City
         country: Country
         name: Name
@@ -157,3 +159,10 @@ en:
       research_journal_paper:
         authors_list: Type the authors list directly in this field if you don't want to use the checkboxes above
         doi: "You can type the DOI identifier without https://, for example “10.19182/perspective/31918”"
+      research_laboratory:
+        address: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+        address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'
+        address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
+        city: 'This field is used for geolocation. Ex: Cenon'
+        country: 'This field is used for geolocation. Ex: France'
+        zipcode: 'This field is used for geolocation. Ex: 33150'
