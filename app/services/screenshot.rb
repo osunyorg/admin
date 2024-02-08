@@ -31,7 +31,11 @@ class Screenshot
         'x-api-key' => ENV['MICROLINK_API_KEY']
       }
     })
-    data = JSON.parse(response.body)
-    data.dig('data', 'screenshot', 'url')
+    begin
+      data = JSON.parse(response.body)
+      data.dig('data', 'screenshot', 'url')
+    rescue
+      # In case of service unavailable, we get here because it's not json
+    end
   end
 end
