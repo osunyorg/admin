@@ -54,8 +54,8 @@ fr:
     hints:
       administration_location:
         address: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
-        address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
         address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
+        address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
         city: 'Ce champ est utilisé pour géolocaliser. Ex: Cenon'
         country: 'Ce champ est utilisé pour géolocaliser. Ex: France'
         zipcode: 'Ce champ est utilisé pour géolocaliser. Ex: 33150'
