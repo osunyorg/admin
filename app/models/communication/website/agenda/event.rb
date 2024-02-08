@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_events
 #
 #  id                       :uuid             not null, primary key
+#  add_to_calendar_urls     :jsonb
 #  featured_image_alt       :text
 #  featured_image_credit    :text
 #  from_day                 :date

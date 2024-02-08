@@ -1,6 +1,10 @@
 module Communication::Website::Agenda::Event::WithCal
   extend ActiveSupport::Concern
 
+  included do
+    before_save :set_add_to_calendar_urls
+  end
+
   def cal
     @cal ||= AddToCalendar::URLs.new(
       start_datetime: cal_from_time,
@@ -14,6 +18,16 @@ module Communication::Website::Agenda::Event::WithCal
   end
 
   protected
+
+  def set_add_to_calendar_urls
+    self.add_to_calendar_urls = {
+      google: cal.google_url,
+      yahoo: cal.yahoo_url,
+      office: cal.office365_url,
+      outlook: cal.outlook_com_url,
+      ical: cal.ical_url
+    }
+  end
 
   def cal_from_time
     from_hour.nil?  ? from_day.to_time
