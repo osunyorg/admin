@@ -56,7 +56,7 @@ module Communication::Website::Agenda::Event::WithTime
   protected
 
   def set_time_zone
-    self.time_zone = Time.zone.name if self.time_zone.nil?
+    self.time_zone = website.default_time_zone if self.time_zone.blank?
   end
 
   def set_to_day
