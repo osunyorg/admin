@@ -2,15 +2,17 @@
 #
 # Table name: research_laboratories
 #
-#  id            :uuid             not null, primary key
-#  address       :string
-#  city          :string
-#  country       :string
-#  name          :string
-#  zipcode       :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  university_id :uuid             not null, indexed
+#  id                 :uuid             not null, primary key
+#  address            :string
+#  address_additional :string
+#  address_name       :string
+#  city               :string
+#  country            :string
+#  name               :string
+#  zipcode            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  university_id      :uuid             not null, indexed
 #
 # Indexes
 #

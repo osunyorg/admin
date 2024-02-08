@@ -15,6 +15,11 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
     breadcrumb
   end
 
+  def static
+    @about = @laboratory
+    render_as_plain_text
+  end
+
   def new
     breadcrumb
   end
@@ -58,7 +63,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
 
   def laboratory_params
     params.require(:research_laboratory)
-          .permit(:name, :address, :zipcode, :city, :country)
+          .permit(:name, :address, :address_name, :address_additional, :zipcode, :city, :country)
           .merge(university_id: current_university.id)
   end
 end

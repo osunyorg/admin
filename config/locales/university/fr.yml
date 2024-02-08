@@ -29,8 +29,8 @@ fr:
         token: Jeton secret
       university/organization:
         address: Adresse
-        address_name: Nom de l'adresse
         address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
         categories: Catégories
         city: Ville
         country: Pays

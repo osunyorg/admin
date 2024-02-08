@@ -29,8 +29,8 @@ en:
         token: Secret token
       university/organization:
         address: Address
-        address_name: Address name
         address_additional: Additional address
+        address_name: Address name
         categories: Categories
         city: City
         country: Country
