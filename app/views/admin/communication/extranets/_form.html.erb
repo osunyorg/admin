@@ -21,7 +21,7 @@
                     direct_upload: true %>
         <%= f.input :favicon,
                     as: :single_deletable_file,
-                    hint: images_formats_accepted_hint('.png')
+                    hint: images_formats_accepted_hint('.png'),
                     input_html: { accept: '.png' },
                     preview: 100,
                     direct_upload: true %>
