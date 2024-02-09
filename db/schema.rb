@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_09_102931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -77,17 +77,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
   end
 
   create_table "administration_locations_education_programs", id: false, force: :cascade do |t|
-    t.uuid "administration_location_id", null: false
     t.uuid "education_program_id", null: false
-    t.index ["administration_location_id", "education_program_id"], name: "index_location_program"
-    t.index ["education_program_id", "administration_location_id"], name: "index_program_location"
+    t.uuid "administration_location_id", null: false
+    t.index ["administration_location_id", "education_program_id"], name: "index_program_location"
+    t.index ["education_program_id", "administration_location_id"], name: "index_location_program"
   end
 
   create_table "administration_locations_education_schools", id: false, force: :cascade do |t|
-    t.uuid "administration_location_id", null: false
     t.uuid "education_school_id", null: false
-    t.index ["administration_location_id", "education_school_id"], name: "index_location_school"
-    t.index ["education_school_id", "administration_location_id"], name: "index_school_location"
+    t.uuid "administration_location_id", null: false
+    t.index ["administration_location_id", "education_school_id"], name: "index_school_location"
+    t.index ["education_school_id", "administration_location_id"], name: "index_location_school"
   end
 
   create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -771,17 +771,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
   end
 
   create_table "research_hal_authors_publications", id: false, force: :cascade do |t|
-    t.uuid "research_hal_author_id", null: false
     t.uuid "research_publication_id", null: false
-    t.index ["research_hal_author_id", "research_publication_id"], name: "hal_author_publication"
-    t.index ["research_publication_id", "research_hal_author_id"], name: "hal_publication_author"
+    t.uuid "research_hal_author_id", null: false
+    t.index ["research_hal_author_id", "research_publication_id"], name: "hal_publication_author"
+    t.index ["research_publication_id", "research_hal_author_id"], name: "hal_author_publication"
   end
 
   create_table "research_hal_authors_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_hal_author_id", null: false
     t.uuid "university_person_id", null: false
-    t.index ["research_hal_author_id", "university_person_id"], name: "hal_author_person"
-    t.index ["university_person_id", "research_hal_author_id"], name: "hal_person_author"
+    t.uuid "research_hal_author_id", null: false
+    t.index ["research_hal_author_id", "university_person_id"], name: "hal_person_author"
+    t.index ["university_person_id", "research_hal_author_id"], name: "hal_author_person"
   end
 
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -881,10 +881,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
   end
 
   create_table "research_laboratories_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_laboratory_id", null: false
     t.uuid "university_person_id", null: false
-    t.index ["research_laboratory_id", "university_person_id"], name: "laboratory_person"
-    t.index ["university_person_id", "research_laboratory_id"], name: "person_laboratory"
+    t.uuid "research_laboratory_id", null: false
+    t.index ["research_laboratory_id", "university_person_id"], name: "person_laboratory"
+    t.index ["university_person_id", "research_laboratory_id"], name: "laboratory_person"
   end
 
   create_table "research_laboratory_axes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -926,10 +926,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
   end
 
   create_table "research_publications_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_publication_id", null: false
     t.uuid "university_person_id", null: false
-    t.index ["research_publication_id", "university_person_id"], name: "index_publication_person"
-    t.index ["university_person_id", "research_publication_id"], name: "index_person_publication"
+    t.uuid "research_publication_id", null: false
+    t.index ["research_publication_id", "university_person_id"], name: "index_person_publication"
+    t.index ["university_person_id", "research_publication_id"], name: "index_publication_person"
   end
 
   create_table "research_theses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
