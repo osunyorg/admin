@@ -3,7 +3,7 @@ en:
     blocks:
       about: About
       blocks_saved:
-        one: "1 block re-saved"
+        one: "%{count} block re-saved"
         other: "%{count} blocks re-saved"
       data: Data
       open: Open
@@ -27,7 +27,7 @@ en:
     see_list: See the list
     universities:
       contributing:
-        one: 1 contributing university
+        one: "%{count} contributing university"
         other: "%{count} contributing universities"
       contributions_total: Contributions (total)
       invoice_informations: Invoice informations

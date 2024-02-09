@@ -3,7 +3,7 @@ fr:
     blocks:
       about: Sujet
       blocks_saved:
-        one: "1 bloc re-sauvé"
+        one: "%{count} bloc re-sauvé"
         other: "%{count} blocs re-sauvés"
       data: Données
       open: Ouvrir
@@ -27,7 +27,7 @@ fr:
     see_list: Voir la liste
     universities:
       contributing:
-        one: 1 université contributrice
+        one: "%{count} université contributrice"
         other: "%{count} universités contributrices"
       contributions_total: Contributions (total)
       invoice_informations: Données de facturation
