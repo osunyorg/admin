@@ -70,6 +70,7 @@ fr:
         person: Personne
         mobile_phone: Téléphone portable
         picture: Photo de profil
+        picture_url: Url de la photo de profil
         programs_to_manage: Formation(s) gérée(s)
         role: Rôle
         roles:
@@ -332,7 +333,7 @@ fr:
       import:
         file: Fichier .xlsx uniquement
       language:
-        iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
+        iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">Wikipédia</a>)
         name: Nom dans la langue (= "Français", "Deutsch", ...)
         summernote_locale: 'Nom de la locale de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
       user:

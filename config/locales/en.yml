@@ -70,6 +70,7 @@ en:
         person: Person
         mobile_phone: Mobile phone
         picture: Profile picture
+        picture_url: Profile picture Url
         programs_to_manage: Program(s) managed
         role: Role
         roles:
@@ -332,7 +333,7 @@ en:
       import:
         file: .xlsx file only
       language:
-        iso_code: ISO 639-1 code (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
+        iso_code: ISO 639-1 code (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">Wikipedia</a>)
         name: Name in the language (= "Français", "Deutsch", ...)
         summernote_locale: 'Name of summernote locale (fr-FR / en-US). Check here and ensure locale is available: <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">summernote repo</a>'
       user:
