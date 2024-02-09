@@ -111,8 +111,19 @@
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
           </div>
           <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing_initial %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing_continuing %>
+          </div>
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing_apprenticeship %>
+          </div>
+          <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
-            <%= f.input :registration_url %>
+          </div>
+          <div class="col-xxl-6">
+              <%= f.input :registration_url %>
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>

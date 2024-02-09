@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_09_135241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -680,6 +680,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_131753) do
     t.boolean "apprenticeship"
     t.string "registration_url"
     t.text "summary"
+    t.text "pricing_continuing"
+    t.text "pricing_apprenticeship"
+    t.text "pricing_initial"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["slug"], name: "index_education_programs_on_slug"
