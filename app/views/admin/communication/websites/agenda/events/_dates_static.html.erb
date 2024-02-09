@@ -26,8 +26,8 @@ indentation = '  ' * depth
 <%= indentation %>    hour: <%= event.to_hour.strftime "%H:%M" %>
 <% end %>
 <%= indentation %>  add_to_calendar:
-<%= indentation %>    google: "<%= event.add_to_calendar_urls['google'].html_safe %>"
-<%= indentation %>    yahoo: "<%= event.add_to_calendar_urls['yahoo'].html_safe %>"
-<%= indentation %>    office: "<%= event.add_to_calendar_urls['office'].html_safe %>"
-<%= indentation %>    outlook: "<%= event.add_to_calendar_urls['outlook'].html_safe %>"
-<%= indentation %>    ical: "<%= event.add_to_calendar_urls['ical'].html_safe %>"
+<%= indentation %>    google: "<%= event.cal_google_url.html_safe %>"
+<%= indentation %>    yahoo: "<%= event.cal_yahoo_url.html_safe %>"
+<%= indentation %>    office: "<%= event.cal_office_url.html_safe %>"
+<%= indentation %>    outlook: "<%= event.cal_outlook_url.html_safe %>"
+<%= indentation %>    ical: "<%= event.cal_ical_url.html_safe %>"

@@ -17,15 +17,36 @@ module Communication::Website::Agenda::Event::WithCal
     )
   end
 
+  def cal_google_url
+    add_to_calendar_urls['google']
+  end
+
+  def cal_yahoo_url
+    add_to_calendar_urls['yahoo']
+  end
+
+  def cal_office_url
+    add_to_calendar_urls['office']
+  end
+
+  def cal_outlook_url
+    add_to_calendar_urls['outlook']
+  end
+
+  def cal_ical_url
+    add_to_calendar_urls['ical']
+  end
+
+
   protected
 
   def set_add_to_calendar_urls
     self.add_to_calendar_urls = {
-      google: cal.google_url,
-      yahoo: cal.yahoo_url,
-      office: cal.office365_url,
-      outlook: cal.outlook_com_url,
-      ical: cal.ical_url
+      'google' => cal.google_url,
+      'yahoo' => cal.yahoo_url,
+      'office' => cal.office365_url,
+      'outlook' => cal.outlook_com_url,
+      'ical' => cal.ical_url
     }
   end
 
