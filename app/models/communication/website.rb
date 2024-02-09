@@ -88,7 +88,6 @@ class Communication::Website < ApplicationRecord
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
   scope :for_production, -> (production) { where(in_production: production) }
-  scope :for_theme_version, -> (version) { where(theme_version: version) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_websites.name) ILIKE unaccent(:term) OR
@@ -96,15 +95,8 @@ class Communication::Website < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
-  scope :for_updatable_theme, -> (status) { updatable_theme if status == 'true' }
-  scope :with_repository, -> { where.not(repository: [nil, '']) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
-  scope :updatable_theme, -> {
-    with_repository.
-    with_url.
-    with_access_token
-  }
 
   def to_s
     "#{name}"

@@ -321,27 +321,6 @@ en:
   save: Save
   search: Search
   select_language: Select language
-  server_admin:
-    dashboard: Server administration
-    emergency_messages:
-      all_universities: All
-      all_roles: All
-      content: Content
-      deliver: Send
-      delivered: Your message has been sent
-      filters: Filters
-      target: Target
-      users:
-        one: "%{count} user"
-        other: "%{count} users"
-    websites:
-      buttons:
-        theme:
-          sync: Sync version
-          update: Update theme
-      clean_and_rebuild_all_websites_notice: All themes will be updated. This can take a few minutes.
-      sync_theme_version_notice: The theme's version of %{website} has been synced
-      update_theme_notice: The theme of %{website} will be updated in a moment
   seo: SEO
   simple_form:
     error_notification:

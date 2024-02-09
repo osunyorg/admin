@@ -4,43 +4,60 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Communication::Block.human_attribute_name('name') %></th>
-        <th><%= Communication::Block.human_attribute_name('about') %></th>
-        <th><%= Communication::Block.human_attribute_name('data') %></th>
-        <th><%= Communication::Block.human_attribute_name('university') %></th>
-        <th><%= Communication::Block.human_attribute_name('url') %></th>
+        <th><%= t('server_admin.blocks.title') %></th>
+        <th><%= t('server_admin.blocks.about') %></th>
+        <th><%= t('server_admin.blocks.data') %></th>
+        <th><%= University.model_name.human %></th>
+        <th><%= t('server_admin.blocks.url') %></th>
       </tr>
     </thead>
     <tbody>
       <% @blocks.each do |block| %>
-        <% next if block.about.nil?%>
-        <% url = "#{block.about.university.url }#{edit_admin_communication_block_path(block)}" %>
         <tr>
           <td>
             <%= truncate "#{block}" %><br>
             <small><%= block.id %></small>
           </td>
           <td>
-            <%= truncate "#{block.about}" %>
-            <span class="badge bg-dark">
-              <%= block.about.class.model_name.human %>
-            </span>
+            <% if block.about.present? %>
+              <%= truncate "#{block.about}" %>
+              <span class="badge bg-dark">
+                <%= block.about.class.model_name.human %>
+              </span>
+            <% end %>
+          </td>
+          <td class="pe-3" width="600">
+            <%= link_to t('server_admin.blocks.see'), 
+                        "#collpase-#{block.id}", 
+                        class: 'btn btn-xs btn-light', 
+                        role: 'button', 
+                        'data-bs-toggle': 'collapse', 
+                        'aria-expanded': 'false', 
+                        'aria-controls': "collpase-#{block.id}" %>
+            <div class="collapse" id="collpase-<%= block.id %>">
+              <textarea rows="10" class="form-control"><%= block.data %></textarea>
+            </div>
           </td>
           <td>
-            <textarea rows="1" class="form-control"><%= block.data %></textarea>
+            <%= link_to block.university, [:server, block.university] %>
           </td>
-          <td><%= block.about.university %></td>
-          <td><%= link_to 'Open',
-                          url,
-                          target: :_blank %></td>
+          <td>
+            <% url = "#{block.university.url }#{edit_admin_communication_block_path(block)}" %>
+            <%= link_to t('server_admin.blocks.open'),
+                        url,
+                        target: :_blank %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
+<%= paginate @blocks, theme: 'bootstrap-5' %>
+
+
 <% content_for :action_bar_right do %>
-  <%= link_to t('resave'),
+  <%= link_to t('server_admin.blocks.resave'),
               resave_server_block_path(@template),
               method: :post,
               class: button_classes %>

@@ -124,7 +124,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def current_theme_sha
-    @current_theme_sha ||= client.branch(ENV["GITHUB_WEBSITE_THEME_REPOSITORY"], ENV["GITHUB_WEBSITE_THEME_BRANCH"])[:commit][:sha]
+    @current_theme_sha ||= Osuny::ThemeInfo.getCurrentSha
   end
 
   def tree_item_at_path(path)

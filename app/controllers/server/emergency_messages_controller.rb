@@ -1,8 +1,9 @@
 class Server::EmergencyMessagesController < Server::ApplicationController
+  
   load_and_authorize_resource
 
   def index
-    @emergency_messages = @emergency_messages.reorder(created_at: :desc)
+    @emergency_messages = @emergency_messages.ordered.page(params[:page])
     breadcrumb
   end
 

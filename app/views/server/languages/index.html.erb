@@ -20,10 +20,10 @@
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
-                        edit_server_language_path(language),
+                        [:edit, :server, language],
                         class: button_classes %>
               <%= link_to t('delete'),
-                        server_language_path(language),
+                        [:server, language],
                         method: :delete,
                         data: { confirm: t('please_confirm') },
                         class: button_classes_danger %>
@@ -34,6 +34,8 @@
     </tbody>
   </table>
 </div>
+
+<%= paginate @languages, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'), new_server_language_path, class: button_classes %>

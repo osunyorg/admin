@@ -1,0 +1,69 @@
+fr:
+  server_admin:
+    blocks:
+      about: Sujet
+      blocks_saved:
+        one: "1 bloc re-sauvé"
+        other: "%{count} blocs re-sauvés"
+      data: Données
+      open: Ouvrir
+      quantity: Quantité
+      resave: Forcer le save de ces blocks
+      see: Voir
+      title: Nom
+      url: URL
+    dashboard: Administration du serveur
+    emergency_messages:
+      all_universities: Toutes
+      all_roles: Tous
+      content: Contenu
+      deliver: Envoyer
+      delivered: Votre message a bien été envoyé
+      filters: Filtres
+      target: Cible
+      users:
+        one: "%{count} utilisateur"
+        other: "%{count} utilisateurs"
+    see_list: Voir la liste
+    universities:
+      contributing:
+        one: 1 université contributrice
+        other: "%{count} universités contributrices"
+      contributions_total: Contributions (total)
+      invoice_informations: Données de facturation
+    websites:
+      admin: Admin
+      autoupdate_theme:
+        false: Manuelle
+        true: Automatique
+      back_office: Back office
+      buttons:
+        theme:
+          sync: Synchroniser la version
+          update: Mettre à jour le thème
+      clean_and_rebuild_all_websites_notice: Tous les thèmes vont être mis à jour. Cela peut prendre quelques minutes.
+      connections_count: "%{count} connexions"
+      details: détail
+      events_count: "%{count} événements"      
+      force_clean_and_rebuild: Forcer le clean&rebuild de tous les sites
+      git_repo: 
+        full: Référentiel Git
+        short: Référentiel
+        status: Statut
+      in_production: "%{count} en production"
+      manage_versions: Gérer les versions
+      outdated: Ces sites ne sont pas à jour
+      pages_count: "%{count} pages"
+      posts_count: "%{count} actualités"
+      production: En prod
+      production_status: État de production
+      recursive_dependencies_count: "%{count} dépendances"
+      sync_theme_version_notice: La version du thème de %{website} a été synchronisée
+      theme_version: Version du thème
+      university_html: "Université : %{university}"
+      update_all_themes: Synchroniser toutes les versions de thème
+      update_mode: Mode de mise à jour
+      updatable_theme_filter:
+        element: Capacité de mise à jour automatique
+        value: Mise à jour automatique possible
+      update_theme_notice: Le thème de %{website} va être mis à jour dans quelques instants
