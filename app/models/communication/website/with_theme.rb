@@ -8,11 +8,7 @@ module Communication::Website::WithTheme
     scope :for_theme_version, -> (version) { where(theme_version: version) }
     scope :for_older_theme_version, -> (version) { where.not(theme_version: version) }
     scope :for_updatable_theme, -> (status) { updatable_theme if status == 'true' }
-    scope :updatable_theme, -> {
-      with_repository.
-      with_url.
-      with_access_token
-    }
+    scope :updatable_theme, -> { with_repository.with_url.with_access_token }
 
     def self.autoupdate_websites
       Communication::Website.with_automatic_update.find_each do |website|
