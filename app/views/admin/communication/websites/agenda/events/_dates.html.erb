@@ -21,7 +21,7 @@ day_format = detailed ? :full
     <%= l(event.to_hour, format: :time_only) if event.to_hour %>
   <% end %>
 <% end %>
-<% unless event.from_hour.nil? && event.to_hour.nil? || event.time_zone == @website.default_time_zone %>
+<% if event.has_hours? && event.has_specific_time_zone? %>
   <br>
   <%= t('admin.communication.website.agenda.events.formatted_time_zone', time_zone: event.time_zone) %>
 <% end %>

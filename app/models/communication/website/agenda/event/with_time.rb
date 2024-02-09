@@ -47,6 +47,14 @@ module Communication::Website::Agenda::Event::WithTime
     from_day == to_day
   end
 
+  def has_hours?
+    from_hour.present? || to_hour.present?
+  end
+
+  def has_specific_time_zone?
+    time_zone != website.default_time_zone
+  end
+
   # Un événement demain aura une distance de 1, comme un événement hier
   # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
   def distance_in_days
