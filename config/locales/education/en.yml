@@ -62,7 +62,10 @@ en:
         pedagogy: Méthodes mobilisées
         prerequisites: Prérequis
         presentation: In brief
-        pricing: Tarifs
+        pricing: Costs
+        pricing_initial: Costs for initial training
+        pricing_continuing: Costs for continuous training
+        pricing_apprenticeship: Costs for apprenticeship
         published: Published?
         registration: Modalités et délais d’accès
         registration_url: Registration link (URL)

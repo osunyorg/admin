@@ -99,6 +99,9 @@
     <%= render 'admin/application/property/text', object: @program, property: :registration %>
     <%= render 'admin/application/property/text', object: @program, property: :other %>
     <%= render 'admin/application/property/text', object: @program, property: :pricing %>
+    <%= render 'admin/application/property/text', object: @program, property: :pricing_initial %>
+    <%= render 'admin/application/property/text', object: @program, property: :pricing_continuing %>
+    <%= render 'admin/application/property/text', object: @program, property: :pricing_apprenticeship %>
     <%= render 'admin/application/property/text', object: @program, property: :accessibility %>
     <%= render 'admin/application/property/text', object: @program, property: :contacts %>
     <% if @program.registration_url.present? %>
