@@ -124,7 +124,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def current_theme_sha
-    @current_theme_sha ||= Osuny::ThemeInfo.getCurrentSha
+    @current_theme_sha ||= Osuny::ThemeInfo.get_current_sha
   end
 
   def tree_item_at_path(path)
