@@ -112,7 +112,8 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :name, :short_name, :slug, :capacity, :continuing, :initial, :apprenticeship, :meta_description, :summary, :published,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
-      :evaluation, :accessibility, :pricing, :contacts, :opportunities, :results, :other,  :main_information,
+      :evaluation, :accessibility, :contacts, :opportunities, :results, :other,  :main_information,
+      :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial,  
       :downloadable_summary, :downloadable_summary_delete,
       :parent_id, :diploma_id, school_ids: [],
       university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
