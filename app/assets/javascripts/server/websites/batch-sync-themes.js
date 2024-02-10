@@ -25,7 +25,7 @@ window.osuny.websites.batchSyncThemes = {
 
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    if (document.body.classList.contains('websites-manage_versions')) {
+    if (document.body.classList.contains('websites-index')) {
         window.osuny.websites.batchSyncThemes.init();
     }
 });

@@ -1,8 +1,9 @@
 class Server::UniversitiesController < Server::ApplicationController
+
   load_and_authorize_resource
 
   def index
-    @universities = @universities.ordered
+    @universities = @universities.ordered.page(params[:page])
     breadcrumb
   end
 
@@ -67,4 +68,5 @@ class Server::UniversitiesController < Server::ApplicationController
       :is_really_a_university
     )
   end
+  
 end

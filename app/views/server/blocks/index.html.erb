@@ -4,8 +4,8 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Communication::Block.human_attribute_name('name') %></th>
-        <th><%= Communication::Block.human_attribute_name('quantity') %></th>
+        <th><%= t('server_admin.blocks.title') %></th>
+        <th><%= t('server_admin.blocks.quantity') %></th>
       </tr>
     </thead>
     <tbody>
@@ -18,3 +18,5 @@
     </tbody>
   </table>
 </div>
+
+<%= paginate @templates, theme: 'bootstrap-5' %>

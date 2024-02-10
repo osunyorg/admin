@@ -46,9 +46,9 @@
 
 <% content_for :action_bar_right do %>
   <% unless @emergency_message.delivered? %>
-    <%= link_to t('edit'), edit_server_emergency_message_path(@emergency_message), class: button_classes %>
+    <%= link_to t('edit'), [:edit, :server, @emergency_message], class: button_classes %>
     <%= link_to t('server_admin.emergency_messages.deliver'), 
-                deliver_server_emergency_message_path(@emergency_message), 
+                 [:deliver, :server, @emergency_message], 
                 method: :post,
                 data: { confirm: t('please_confirm') },
                 class: button_classes %>

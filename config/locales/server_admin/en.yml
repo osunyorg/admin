@@ -1,0 +1,69 @@
+en:
+  server_admin:
+    blocks:
+      about: About
+      blocks_saved:
+        one: "%{count} block re-saved"
+        other: "%{count} blocks re-saved"
+      data: Data
+      open: Open
+      quantity: Quantity
+      resave: Force those blocks re-save
+      see: See
+      title: Name
+      url: URL
+    dashboard: Server administration
+    emergency_messages:
+      all_universities: All
+      all_roles: All
+      content: Content
+      deliver: Send
+      delivered: Your message has been sent
+      filters: Filters
+      target: Target
+      users:
+        one: "%{count} user"
+        other: "%{count} users"
+    see_list: See the list
+    universities:
+      contributing:
+        one: "%{count} contributing university"
+        other: "%{count} contributing universities"
+      contributions_total: Contributions (total)
+      invoice_informations: Invoice informations
+    websites:
+      admin: Admin
+      autoupdate_theme:
+        false: Manual
+        true: Auto
+      back_office: Back office
+      buttons:
+        theme:
+          sync: Sync version
+          update: Update theme
+      clean_and_rebuild_all_websites_notice: All themes will be updated. This can take a few minutes.
+      connections_count: "%{count} connexions"
+      details: detail
+      events_count: "%{count} events"      
+      force_clean_and_rebuild: Force clean&rebuild of every websites
+      git_repo: 
+        full: Git Repository
+        short: Repository
+        status: Status
+      in_production: "%{count} in production"
+      manage_versions: Manage versions
+      outdated: Those websites are outdated
+      pages_count: "%{count} pages"
+      posts_count: "%{count} posts"
+      production: In production
+      production_status: Production status
+      recursive_dependencies_count: "%{count} dependencies"
+      sync_theme_version_notice: The theme's version of %{website} has been synced
+      theme_version: Theme version
+      university_html: "University: %{university}"
+      update_all_themes: Sync all themes versions
+      update_mode: Update mode
+      updatable_theme_filter:
+        element: Auto-update capability
+        value: Available
+      update_theme_notice: The theme of %{website} will be updated in a moment

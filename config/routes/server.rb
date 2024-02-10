@@ -3,7 +3,6 @@ namespace :server do
   resources :languages
   resources :websites do
     collection do
-      get :manage_versions
       post :clean_and_rebuild_all_websites
     end
     member do

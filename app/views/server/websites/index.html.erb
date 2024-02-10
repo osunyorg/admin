@@ -1,6 +1,6 @@
 <% content_for :title, "#{@websites.count} #{Communication::Website.model_name.human(count: @websites.count).downcase}" %>
 
-<p><%= @websites.in_production.count %> en production</p>
+<p><%= t('server_admin.websites.in_production', count: @websites.in_production.count) %></p>
 
 <%= render  'admin/application/filters',
             current_path: server_websites_path,
@@ -8,8 +8,14 @@
 
 <%= render 'server/websites/list', websites: @websites %>
 
+<%= paginate @websites, theme: 'bootstrap-5' %>
+
 <% content_for :action_bar_left do %>
-  <%= link_to "Gestion des versions",
-              manage_versions_server_websites_path,
+  <%= link_to t('server_admin.websites.update_all_themes'),
+              "#",
+              class: "#{button_classes} js-sync-all-theme-versions" %>
+  <%= link_to t('server_admin.websites.force_clean_and_rebuild'),
+              clean_and_rebuild_all_websites_server_websites_path(current_scopes),
+              method: :post,
               class: button_classes %>
 <% end %>
