@@ -1,46 +1,83 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= University::Person.human_attribute_name('last_name') %></th>
-        <th><%= University::Person.human_attribute_name('first_name') %></th>
-        <th><%= University::Person.human_attribute_name('roles') %></th>
-        <th><%= University::Person::Experience.model_name.human(count: 2) %></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" 
+            id="grid-tab" 
+            data-bs-toggle="tab" 
+            data-bs-target="#grid-tab-pane" 
+            type="button" 
+            role="tab" 
+            aria-controls="grid-tab-pane" 
+            aria-selected="true">
+            <i class="bi bi-grid-3x2-gap-fill"></i>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" 
+            id="list-tab" 
+            data-bs-toggle="tab" 
+            data-bs-target="#list-tab-pane" 
+            type="button" 
+            role="tab" 
+            aria-controls="tab-tab-pane" 
+            aria-selected="false">
+            <i class="bi bi-list"></i>    
+    </button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab" tabindex="0">
+    <div class="row">
       <% people.each do |person| %>
-        <tr>
-          <td><%= link_to person.last_name, admin_university_person_path(person) %></td>
-          <td><%= link_to person.first_name, admin_university_person_path(person) %></td>
-          <td>
-            <% person.roles.each do |role| %>
-              <span class="badge bg-secondary">
-                <%= t "activerecord.attributes.university/person.#{role}" %>
-              </span>
+        <div class="col-sm-6 col-lg-3">
+          <div class="position-relative mt-5">
+            <% if person.best_picture.attached? %>
+              <%= kamifusen_tag person.best_picture,
+                                width: 60, 
+                                class: 'rounded-circle d-block' %>
+            <% else %>
+              <div class="bg-light rounded-circle" style="width: 60px; height: 60px"></div>
             <% end %>
-          </td>
-          <td><%= link_to_if can?(:update, person), person.experiences.size, experiences_admin_university_person_path(person) %></td>
-          <td>
-            <%= kamifusen_tag person.best_picture,
-                              width: 80 if person.best_picture.attached? %>
-          </td>
-          <td>
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                        edit_admin_university_person_path(person),
-                        class: button_classes if can?(:update, person) %>
-              <%= link_to t('delete'),
-                        admin_university_person_path(person),
-                        method: :delete,
-                        data: { confirm: t('please_confirm') },
-                        class: button_classes_danger if can?(:destroy, person) %>
-            </div>
-          </td>
-        </tr>
+            <p class="mt-2 mb-0"><%= person%></p>
+            <p class="small text-muted mb-0"><%= person.summary %></p>
+            <%= link_to t('show'), admin_university_person_path(person), class: 'action stretched-link' %>
+          </div>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
+  <div class="tab-pane" id="list-tab-pane" role="tabpanel" aria-labelledby="list-tab" tabindex="0">
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <thead>
+          <tr>
+            <th><%= University::Person.human_attribute_name('name') %></th>
+            <th><%= t('admin.summary.label') %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% people.each do |person| %>
+            <tr>
+              <td>
+                <%= link_to person, admin_university_person_path(person) %>
+              </td>
+              <td><%= person.summary %></td>
+              <td>
+                <%= kamifusen_tag person.best_picture,
+                                  width: 60, class: 'rounded-circle' if person.best_picture.attached? %>
+              </td>
+              <td>
+                <div class="btn-group" role="group">
+                  <%= link_to t('edit'),
+                            edit_admin_university_person_path(person),
+                            class: button_classes if can?(:update, person) %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
