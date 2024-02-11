@@ -1,27 +1,74 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= University::Organization.human_attribute_name('name') %></th>
-        <th><%= University::Organization.human_attribute_name('kind') %></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" 
+            id="grid-tab" 
+            data-bs-toggle="tab" 
+            data-bs-target="#grid-tab-pane" 
+            type="button" 
+            role="tab" 
+            aria-controls="grid-tab-pane" 
+            aria-selected="true">
+            <i class="bi bi-grid-3x2-gap-fill"></i>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" 
+            id="list-tab" 
+            data-bs-toggle="tab" 
+            data-bs-target="#list-tab-pane" 
+            type="button" 
+            role="tab" 
+            aria-controls="tab-tab-pane" 
+            aria-selected="false">
+            <i class="bi bi-list"></i>    
+    </button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab" tabindex="0">
+    <div class="row">
       <% organizations.each do |organization| %>
-        <tr>
-          <td><%= link_to organization, admin_university_organization_path(organization) %></td>
-          <td><span class="badge bg-secondary"><%= organization.kind_i18n %></span></td>
-          <td><%= kamifusen_tag organization.logo, width: 40 if organization.logo.attached? %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link organization %>
-              <%= destroy_link organization %>
-            </div>
-          </td>
-        </tr>
+        <div class="col-sm-6 col-lg-3">
+          <div class="position-relative mt-5">
+            <% if organization.logo.attached? %>
+              <%= kamifusen_tag organization.logo,
+                                width: 60, 
+                                class: 'd-block' %>
+            <% else %>
+              <div class="bg-light" style="width: 60px; height: 60px"></div>
+            <% end %>
+            <p class="mt-2 mb-0"><%= organization %></p>
+            <p class="small text-muted mb-0"><%= organization.summary %></p>
+            <%= link_to t('show'), admin_university_organization_path(organization), class: 'action stretched-link' %>
+          </div>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
+  <div class="tab-pane" id="list-tab-pane" role="tabpanel" aria-labelledby="list-tab" tabindex="0">
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <thead>
+          <tr>
+            <th><%= University::Organization.human_attribute_name('name') %></th>
+            <th><%= t('admin.summary.label') %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% organizations.each do |organization| %>
+            <tr>
+              <td><%= link_to organization, admin_university_organization_path(organization) %></td>
+              <td><%= organization.summary %></td>
+              <td><%= kamifusen_tag organization.logo, width: 40 if organization.logo.attached? %></td>
+              <td class="text-end">
+                <%= edit_link organization %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
