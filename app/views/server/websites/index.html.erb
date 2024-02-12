@@ -1,6 +1,6 @@
 <% content_for :title, "#{@websites.total_count} #{Communication::Website.model_name.human(count: @websites.total_count).downcase}" %>
 
-<p><%= t('server_admin.websites.in_production', count: @websites.in_production.count) %></p>
+<p><%= t('server_admin.websites.in_production', count: Communication::Website.in_production.count) %></p>
 
 <%= render  'admin/application/filters',
             current_path: server_websites_path,
