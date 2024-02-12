@@ -5,60 +5,6 @@ fr:
     models:
       communication: Communication
   activerecord:
-    models:
-      communication/block:
-        one: Bloc de contenu
-        other: Blocs de contenu
-      communication/extranet:
-        one: Extranet
-        other: Extranets
-      communication/extranet/document:
-        one: Document
-        other: Documents
-      communication/extranet/document/category:
-        one: Catégorie
-        other: Catégories
-      communication/extranet/document/kind:
-        one: Type
-        other: Types
-      communication/extranet/post:
-        one: Actualité
-        other: Actualités
-        all: Toutes les actualités
-      communication/extranet/post/category:
-        one: Catégorie
-        other: Catégories
-      communication/website:
-        one: Site Web
-        other: Sites Web
-      communication/website/agenda/category:
-        one: Catégorie
-        other: Catégories
-      communication/website/agenda/event:
-        one: Événement
-        other: Événements
-      communication/website/post/category:
-        one: Catégorie
-        other: Catégories
-        all: Toutes les catégories
-      communication/website/connection:
-        one: Connexion
-        other: Connexions
-      communication/website/menu:
-        one: Menu
-        other: Menus
-        all: Tous les menus
-      communication/website/menu/item:
-        one: Élément
-        other: Éléments
-      communication/website/page:
-        one: Page
-        other: Pages
-        all: Toutes les pages
-      communication/website/post:
-        one: Actualité
-        other: Actualités
-        all: Toutes les actualités
     attributes:
       communication/block:
         title: Nom (facultatif)
@@ -266,6 +212,60 @@ fr:
               too_soon: doit être après jour de début
             to_hour:
               too_soon: doit être après l'heure de début
+    models:
+      communication/block:
+        one: Bloc de contenu
+        other: Blocs de contenu
+      communication/extranet:
+        one: Extranet
+        other: Extranets
+      communication/extranet/document:
+        one: Document
+        other: Documents
+      communication/extranet/document/category:
+        one: Catégorie
+        other: Catégories
+      communication/extranet/document/kind:
+        one: Type
+        other: Types
+      communication/extranet/post:
+        one: Actualité
+        other: Actualités
+        all: Toutes les actualités
+      communication/extranet/post/category:
+        one: Catégorie
+        other: Catégories
+      communication/website:
+        one: Site Web
+        other: Sites Web
+      communication/website/agenda/category:
+        one: Catégorie
+        other: Catégories
+      communication/website/agenda/event:
+        one: Événement
+        other: Événements
+      communication/website/post/category:
+        one: Catégorie
+        other: Catégories
+        all: Toutes les catégories
+      communication/website/connection:
+        one: Connexion
+        other: Connexions
+      communication/website/menu:
+        one: Menu
+        other: Menus
+        all: Tous les menus
+      communication/website/menu/item:
+        one: Élément
+        other: Éléments
+      communication/website/page:
+        one: Page
+        other: Pages
+        all: Toutes les pages
+      communication/website/post:
+        one: Actualité
+        other: Actualités
+        all: Toutes les actualités
   admin:
     communication:
       block:
@@ -431,6 +431,10 @@ fr:
         unpublished: Non publiée
       security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
+  curation:
+    error: Erreur lors de la curation, veillez à utiliser une URL valide
+    label: URL de l'article à importer
+    placeholder: https://...
   enums:
     communication:
       website:
@@ -457,10 +461,6 @@ fr:
               persons: Équipe
               teachers: Équipe pédagogique
               url: URL
-  curation:
-    error: Erreur lors de la curation, veillez à utiliser une URL valide
-    label: URL de l'article à importer
-    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

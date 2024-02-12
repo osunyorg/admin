@@ -7,6 +7,9 @@ module Communication::Website::WithGitRepository
              dependent: :destroy
 
     after_save :destroy_obsolete_git_files, if: :should_clean_on_git?
+
+    scope :with_repository, -> { where.not(repository: [nil, '']) }
+
   end
 
   def git_repository

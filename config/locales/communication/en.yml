@@ -5,60 +5,6 @@ en:
     models:
       communication: Communication
   activerecord:
-    models:
-      communication/block:
-        one: Content block
-        other: Content blocks
-      communication/extranet:
-        one: Extranet
-        other: Extranets
-      communication/extranet/document:
-        one: Document
-        other: Documents
-      communication/extranet/document/category:
-        one: Category
-        other: Categories
-      communication/extranet/document/kind:
-        one: Kind
-        other: Kinds
-      communication/extranet/post:
-        one: Post
-        other: Posts
-        all: All posts
-      communication/extranet/post/category:
-        one: Category
-        other: Categories
-      communication/website:
-        one: Website
-        other: Websites
-      communication/website/agenda/category:
-        one: Category
-        other: Categories
-      communication/website/agenda/event:
-        one: Event
-        other: Events
-      communication/website/post/category:
-        one: Category
-        other: Categories
-        all: All categories
-      communication/website/connection:
-        one: Connection
-        other: Connections
-      communication/website/menu:
-        one: Menu
-        other: Menus
-        all: All menus
-      communication/website/menu/item:
-        one: Item
-        other: Items
-      communication/website/page:
-        one: Page
-        other: Pages
-        all: All pages
-      communication/website/post:
-        one: Post
-        other: Posts
-        all: All posts
     attributes:
       communication/block:
         title: Name (optional)
@@ -266,6 +212,60 @@ en:
               too_soon: must be after "from day"
             to_hour:
               too_soon: must be after "from hour"
+    models:
+      communication/block:
+        one: Content block
+        other: Content blocks
+      communication/extranet:
+        one: Extranet
+        other: Extranets
+      communication/extranet/document:
+        one: Document
+        other: Documents
+      communication/extranet/document/category:
+        one: Category
+        other: Categories
+      communication/extranet/document/kind:
+        one: Kind
+        other: Kinds
+      communication/extranet/post:
+        one: Post
+        other: Posts
+        all: All posts
+      communication/extranet/post/category:
+        one: Category
+        other: Categories
+      communication/website:
+        one: Website
+        other: Websites
+      communication/website/agenda/category:
+        one: Category
+        other: Categories
+      communication/website/agenda/event:
+        one: Event
+        other: Events
+      communication/website/post/category:
+        one: Category
+        other: Categories
+        all: All categories
+      communication/website/connection:
+        one: Connection
+        other: Connections
+      communication/website/menu:
+        one: Menu
+        other: Menus
+        all: All menus
+      communication/website/menu/item:
+        one: Item
+        other: Items
+      communication/website/page:
+        one: Page
+        other: Pages
+        all: All pages
+      communication/website/post:
+        one: Post
+        other: Posts
+        all: All posts
   admin:
     communication:
       block:
@@ -431,6 +431,10 @@ en:
         unpublished: Unpublished
       security: Security
       see_all: See the full list (%{number} elements)
+  curation:
+    error: Import error, be sure to use a valid URL
+    label: URL of the post to import
+    placeholder: https://...
   enums:
     communication:
       website:
@@ -457,10 +461,6 @@ en:
               persons: Staff
               teachers: Educational staff
               url: URL
-  curation:
-    error: Import error, be sure to use a valid URL
-    label: URL of the post to import
-    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

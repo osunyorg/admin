@@ -2,41 +2,44 @@
 #
 # Table name: education_programs
 #
-#  id                    :uuid             not null, primary key
-#  accessibility         :text
-#  apprenticeship        :boolean
-#  capacity              :integer
-#  contacts              :text
-#  content               :text
-#  continuing            :boolean
-#  duration              :text
-#  evaluation            :text
-#  featured_image_alt    :string
-#  featured_image_credit :text
-#  initial               :boolean
-#  meta_description      :text
-#  name                  :string
-#  objectives            :text
-#  opportunities         :text
-#  other                 :text
-#  path                  :string
-#  pedagogy              :text
-#  position              :integer          default(0)
-#  prerequisites         :text
-#  presentation          :text
-#  pricing               :text
-#  published             :boolean          default(FALSE)
-#  registration          :text
-#  registration_url      :string
-#  results               :text
-#  short_name            :string
-#  slug                  :string           indexed
-#  summary               :text
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  diploma_id            :uuid             indexed
-#  parent_id             :uuid             indexed
-#  university_id         :uuid             not null, indexed
+#  id                     :uuid             not null, primary key
+#  accessibility          :text
+#  apprenticeship         :boolean
+#  capacity               :integer
+#  contacts               :text
+#  content                :text
+#  continuing             :boolean
+#  duration               :text
+#  evaluation             :text
+#  featured_image_alt     :string
+#  featured_image_credit  :text
+#  initial                :boolean
+#  meta_description       :text
+#  name                   :string
+#  objectives             :text
+#  opportunities          :text
+#  other                  :text
+#  path                   :string
+#  pedagogy               :text
+#  position               :integer          default(0)
+#  prerequisites          :text
+#  presentation           :text
+#  pricing                :text
+#  pricing_apprenticeship :text
+#  pricing_continuing     :text
+#  pricing_initial        :text
+#  published              :boolean          default(FALSE)
+#  registration           :text
+#  registration_url       :string
+#  results                :text
+#  short_name             :string
+#  slug                   :string           indexed
+#  summary                :text
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  diploma_id             :uuid             indexed
+#  parent_id              :uuid             indexed
+#  university_id          :uuid             not null, indexed
 #
 # Indexes
 #
@@ -83,6 +86,9 @@ class Education::Program < ApplicationRecord
                                     :pedagogy,
                                     :prerequisites,
                                     :pricing,
+                                    :pricing_apprenticeship,
+                                    :pricing_continuing,
+                                    :pricing_initial,
                                     :registration,
                                     :content,
                                     :results
