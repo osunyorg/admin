@@ -1,4 +1,4 @@
-<% content_for :title, Communication::Block.model_name.human(count: 2) %>
+<% content_for :title, "#{@templates.total_count} #{Communication::Block.model_name.human(count: @templates.total_count).downcase}" %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">

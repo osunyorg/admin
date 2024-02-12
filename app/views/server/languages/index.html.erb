@@ -1,4 +1,4 @@
-<% content_for :title, Language.model_name.human(count: 2) %>
+<% content_for :title, "#{@languages.total_count} #{Language.model_name.human(count: @languages.total_count).downcase}" %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">

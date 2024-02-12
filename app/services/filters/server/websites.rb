@@ -17,7 +17,7 @@ module Filters
             'filters.attributes.element',
             element: I18n.t('server_admin.websites.theme_version').downcase
           )
-          add :for_production,
+      add :for_production,
           [
             { to_s: I18n.t('true'), id: 'true' }, 
             { to_s: I18n.t('false'), id: 'false' }
