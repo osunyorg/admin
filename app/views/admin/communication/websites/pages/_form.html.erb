@@ -13,8 +13,11 @@ url = page.new_record?  ? admin_communication_website_pages_path
         <%= f.input :breadcrumb_title, input_html: { data: { translatable: true } } %>
         <%= render 'admin/application/summary/form', f: f, about: page %>
         <%= f.input :header_text, as: :string, input_html: { data: { translatable: true } } %>
-        <%= f.input :header_cta %>
-        <div class="d-none js-header-cta-fields">
+        <%= f.input :header_cta, input_html: { data: { 'conditional': true }, id: 'header_cta' } %>
+        <div class="d-none"
+             data-conditional-source="header_cta"
+             data-conditional-value="true"
+             >
           <%= f.input :header_cta_label %>
           <%= f.input :header_cta_url %>
         </div>
