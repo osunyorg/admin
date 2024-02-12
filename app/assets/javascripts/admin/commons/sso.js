@@ -11,6 +11,7 @@ window.osuny.sso = {
         'use strict';
         var value = this.hasSsoInput.checked,
             i;
+            console.log(value);
         for (i = 0; i < this.ssoFields.length; i += 1) {
             if (value) {
                 this.ssoFields[i].classList.remove('d-none');

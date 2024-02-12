@@ -152,7 +152,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     params.require(:communication_website_page)
           .permit(
             :communication_website_id, :title, :breadcrumb_title, :bodyclass,
-            :meta_description, :summary, :header_text, :text, :slug, :published, :full_width,
+            :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published, :full_width,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             :parent_id
           )

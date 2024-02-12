@@ -8,6 +8,9 @@
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  full_width               :boolean          default(FALSE)
+#  header_cta               :boolean          default(FALSE)
+#  header_cta_label         :string
+#  header_cta_url           :string
 #  header_text              :text
 #  kind                     :integer
 #  meta_description         :text
@@ -84,6 +87,7 @@ class Communication::Website::Page < ApplicationRecord
              foreign_key: :original_id
 
   validates :title, presence: true
+  validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
   scope :recent, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
