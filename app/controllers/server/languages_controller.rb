@@ -1,7 +1,9 @@
 class Server::LanguagesController < Server::ApplicationController
+
   load_and_authorize_resource
 
   def index
+    @languages = @languages.ordered.page(params[:page])
     breadcrumb
   end
 
@@ -59,4 +61,5 @@ class Server::LanguagesController < Server::ApplicationController
   def language_params
     params.require(:language).permit(:name, :iso_code, :summernote_locale)
   end
+  
 end

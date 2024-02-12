@@ -1,19 +1,21 @@
 class Server::BlocksController < Server::ApplicationController
+  
   before_action :load_template, except: [:index]
 
   def index
-    @templates = Communication::Block.template_kinds.keys
+    @templates = Kaminari.paginate_array(Communication::Block.template_kinds.keys.sort_by { |k| t("enums.communication.block.template_kind.#{k}") }).page(params[:page])
     breadcrumb
   end
 
   def show
+    @blocks = @blocks.page(params[:page])
     breadcrumb
     add_breadcrumb t("enums.communication.block.template_kind.#{@template}")
   end
 
   def resave
-    @blocks.find_each &:save
-    redirect_to server_block_path(@template), notice: "#{@blocks.count} blocks saved"
+    @blocks.find_each(&:save)
+    redirect_back fallback_location: server_block_path(@template), notice: t('server_admin.blocks.blocks_saved', count: @blocks.count)
   end
 
   protected
@@ -27,4 +29,5 @@ class Server::BlocksController < Server::ApplicationController
     super
     add_breadcrumb Communication::Block.model_name.human(count: 2), server_blocks_path
   end
+  
 end
