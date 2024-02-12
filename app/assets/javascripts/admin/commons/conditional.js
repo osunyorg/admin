@@ -23,7 +23,6 @@ window.osuny.conditional = {
             activeTargets = document.querySelectorAll('[data-conditional-source="' + source + '"][data-conditional-value="' + value + '"]'),
             i,
             target;
-            console.log(value);
         for (i = 0; i < allTargets.length; i += 1) {
             target = allTargets[i];
             this.hide(target);
