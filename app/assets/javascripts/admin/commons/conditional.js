@@ -55,7 +55,7 @@ window.osuny.conditional = {
 
     getValue: function (element) {
         'use strict';
-        if (element.type == 'checkbox') {
+        if (element.type === 'checkbox') {
             return element.checked;
         } else {
             return element.value;
