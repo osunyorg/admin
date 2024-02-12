@@ -29,11 +29,12 @@
             <%= link_to Communication::Website.human_attribute_name('url'),
                         website.url,
                         target: :_blank,
-                        class: 'action' if website.url.present? %></td>
+                        class: 'action' if website.url.present? %>
             <%= link_to t('server_admin.websites.git_repo.short'),
                         website.repository_url,
                         target: :_blank,
-                        class: 'action' if website.repository.present? %></td>
+                        class: 'action' if website.repository.present? %>
+          </td>
           <td><%= image_tag website.deployment_status_badge,
                             alt: '' if website.deployment_status_badge.present? %></td>
           <td class="js-version">
