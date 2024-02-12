@@ -232,9 +232,9 @@ fr:
         one: Type
         other: Types
       communication/extranet/post:
+        all: Toutes les actualités
         one: Actualité
         other: Actualités
-        all: Toutes les actualités
       communication/extranet/post/category:
         one: Catégorie
         other: Catégories
@@ -251,24 +251,24 @@ fr:
         one: Connexion
         other: Connexions
       communication/website/menu:
+        all: Tous les menus
         one: Menu
         other: Menus
-        all: Tous les menus
       communication/website/menu/item:
         one: Élément
         other: Éléments
       communication/website/page:
+        all: Toutes les pages
         one: Page
         other: Pages
-        all: Toutes les pages
       communication/website/post:
+        all: Toutes les actualités
         one: Actualité
         other: Actualités
-        all: Toutes les actualités
       communication/website/post/category:
+        all: Toutes les catégories
         one: Catégorie
         other: Catégories
-        all: Toutes les catégories
   admin:
     communication:
       block:

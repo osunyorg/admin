@@ -232,9 +232,9 @@ en:
         one: Kind
         other: Kinds
       communication/extranet/post:
+        all: All posts
         one: Post
         other: Posts
-        all: All posts
       communication/extranet/post/category:
         one: Category
         other: Categories
@@ -251,24 +251,24 @@ en:
         one: Connection
         other: Connections
       communication/website/menu:
+        all: All menus
         one: Menu
         other: Menus
-        all: All menus
       communication/website/menu/item:
         one: Item
         other: Items
       communication/website/page:
+        all: All pages
         one: Page
         other: Pages
-        all: All pages
       communication/website/post:
+        all: All posts
         one: Post
         other: Posts
-        all: All posts
       communication/website/post/category:
+        all: All categories
         one: Category
         other: Categories
-        all: All categories
   admin:
     communication:
       block:
