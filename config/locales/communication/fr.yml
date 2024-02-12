@@ -134,13 +134,6 @@ fr:
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
-      communication/website/post/category:
-        children: Catégories enfants
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        parent: Catégorie parente
-        slug: Slug
       communication/website/connection:
         direct_source: Source directe
         direct_source_type: Type de la source
@@ -169,6 +162,9 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
+        header_cta: Afficher un bouton d'action dans le header
+        header_cta_label: Texte du bouton d'action
+        header_cta_url: URL du bouton d'action
         header_text: Titre affiché en haut de page
         parent: Page parente
         path: Chemin
@@ -195,6 +191,13 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+      communication/website/post/category:
+        children: Catégories enfants
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        parent: Catégorie parente
+        slug: Slug
     errors:
       models:
         communication/extranet:
@@ -229,9 +232,9 @@ fr:
         one: Type
         other: Types
       communication/extranet/post:
+        all: Toutes les actualités
         one: Actualité
         other: Actualités
-        all: Toutes les actualités
       communication/extranet/post/category:
         one: Catégorie
         other: Catégories
@@ -244,28 +247,28 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
-      communication/website/post/category:
-        one: Catégorie
-        other: Catégories
-        all: Toutes les catégories
       communication/website/connection:
         one: Connexion
         other: Connexions
       communication/website/menu:
+        all: Tous les menus
         one: Menu
         other: Menus
-        all: Tous les menus
       communication/website/menu/item:
         one: Élément
         other: Éléments
       communication/website/page:
+        all: Toutes les pages
         one: Page
         other: Pages
-        all: Toutes les pages
       communication/website/post:
+        all: Toutes les actualités
         one: Actualité
         other: Actualités
-        all: Toutes les actualités
+      communication/website/post/category:
+        all: Toutes les catégories
+        one: Catégorie
+        other: Catégories
   admin:
     communication:
       block:

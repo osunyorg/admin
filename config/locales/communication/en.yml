@@ -134,13 +134,6 @@ en:
         title: Title
         to_day: To day
         to_hour: To hour
-      communication/website/post/category:
-        children: Children categories
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        parent: Parent category
-        slug: Slug
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type
@@ -169,6 +162,9 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         full_width: Full width
+        header_cta: Display call to action into header
+        header_cta_label: Call to action label
+        header_cta_url: Call to cation target
         header_text: Title displayed in header
         parent: Parent page
         path: Path
@@ -195,6 +191,13 @@ en:
         text: Text
         title: Title
         website: Website
+      communication/website/post/category:
+        children: Children categories
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        parent: Parent category
+        slug: Slug
     errors:
       models:
         communication/extranet:
@@ -229,9 +232,9 @@ en:
         one: Kind
         other: Kinds
       communication/extranet/post:
+        all: All posts
         one: Post
         other: Posts
-        all: All posts
       communication/extranet/post/category:
         one: Category
         other: Categories
@@ -244,28 +247,28 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
-      communication/website/post/category:
-        one: Category
-        other: Categories
-        all: All categories
       communication/website/connection:
         one: Connection
         other: Connections
       communication/website/menu:
+        all: All menus
         one: Menu
         other: Menus
-        all: All menus
       communication/website/menu/item:
         one: Item
         other: Items
       communication/website/page:
+        all: All pages
         one: Page
         other: Pages
-        all: All pages
       communication/website/post:
+        all: All posts
         one: Post
         other: Posts
-        all: All posts
+      communication/website/post/category:
+        all: All categories
+        one: Category
+        other: Categories
   admin:
     communication:
       block:

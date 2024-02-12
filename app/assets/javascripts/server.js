@@ -9,7 +9,7 @@
 //= require summernote/summernote-bs5
 //= require_self
 //= require ./admin/commons/nav
-//= require ./admin/commons/sso
+//= require ./admin/commons/conditional
 //= require_tree ./application/plugins
 //= require ./admin/plugins/sortable
 //= require_tree ./server
