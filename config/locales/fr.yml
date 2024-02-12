@@ -297,7 +297,7 @@ fr:
   menu:
     admin: Admin
     profile: Profil
-    server_admin: Admin serveur
+    server_admin: Administration du serveur
     sign_out: Déconnexion
   metadata: Informations
   move: Déplacer

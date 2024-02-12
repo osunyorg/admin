@@ -29,8 +29,16 @@ en:
       contributing:
         one: "%{count} contributing university"
         other: "%{count} contributing universities"
+      contribution_filter:
+        false: Do not contribute
+        title: Contribution status
+        true: Contributes
       contributions_total: Contributions (total)
       invoice_informations: Invoice informations
+      university_kind_filter:
+        private: Private
+        public: Public
+        title: University kind
     websites:
       admin: Admin
       autoupdate_theme:

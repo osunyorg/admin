@@ -68,6 +68,11 @@ class University < ApplicationRecord
   after_destroy :destroy_remaining_blobs
 
   scope :ordered, -> { order(:name) }
+  scope :for_search_term, -> (term) { where("unaccent(universities.name) ILIKE unaccent(:term)", term: "%#{sanitize_sql_like(term)}%") }
+  scope :for_real_university, -> (status) { where(is_really_a_university: status) }
+  scope :for_contribution, -> (status) { status == 'true' ? contributing : not_contributing }
+  scope :for_university_kind, -> (status) { where(private: status == 'private') }
+
 
   def self.parts
     [

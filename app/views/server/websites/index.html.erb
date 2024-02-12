@@ -1,4 +1,4 @@
-<% content_for :title, "#{@websites.count} #{Communication::Website.model_name.human(count: @websites.count).downcase}" %>
+<% content_for :title, "#{@websites.total_count} #{Communication::Website.model_name.human(count: @websites.total_count).downcase}" %>
 
 <p><%= t('server_admin.websites.in_production', count: @websites.in_production.count) %></p>
 

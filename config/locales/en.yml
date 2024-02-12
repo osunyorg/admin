@@ -297,7 +297,7 @@ en:
   menu:
     admin: Admin
     profile: Profile
-    server_admin: Admin server
+    server_admin: Server administration
     sign_out: Log out
   metadata: Metadata
   move: Move
