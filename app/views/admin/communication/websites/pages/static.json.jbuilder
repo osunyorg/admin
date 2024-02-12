@@ -22,4 +22,9 @@ json.children @about.children
 json.partial! 'admin/application/meta_description/static'
 json.partial! 'admin/application/summary/static'
 json.header_text @about.header_text
+json.header_cta do
+  json.display @about.header_cta
+  json.label @about.header_cta_label
+  json.target @about.header_cta_url
+end
 json.partial! 'admin/communication/blocks/content/static', about: @about
