@@ -29,8 +29,16 @@ fr:
       contributing:
         one: "%{count} université contributrice"
         other: "%{count} universités contributrices"
+      contribution_filter:
+        false: Ne contribue pas
+        title: État de contribution
+        true: Contribue
       contributions_total: Contributions (total)
       invoice_informations: Données de facturation
+      university_kind_filter:
+        private: Privée
+        public: Publique
+        title: Type d'université
     websites:
       admin: Admin
       autoupdate_theme:
