@@ -38,13 +38,13 @@ class Research::Publication < ApplicationRecord
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
-                          foreign_key: :university_person_id,
-                          association_foreign_key: :research_publication_id
+                          foreign_key: :research_publication_id,
+                          association_foreign_key: :university_person_id
 
   has_and_belongs_to_many :authors,
                           class_name: 'Research::Hal::Author',
-                          foreign_key: :research_hal_author_id,
-                          association_foreign_key: :research_publication_id
+                          foreign_key: :research_publication_id,
+                          association_foreign_key: :research_hal_author_id
 
   scope :ordered, -> { order(publication_date: :desc)}
 
@@ -100,7 +100,7 @@ class Research::Publication < ApplicationRecord
     return if hal?
     self.authors_citeproc = researchers.map do |researcher|
       {
-        "family" => researcher.last_name, 
+        "family" => researcher.last_name,
         "given" => researcher.first_name
       }
     end

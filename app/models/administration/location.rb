@@ -43,20 +43,20 @@ class Administration::Location < ApplicationRecord
 
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
-                          foreign_key: :education_school_id,
-                          association_foreign_key: :administration_location_id
+                          foreign_key: :administration_location_id,
+                          association_foreign_key: :education_school_id
                           alias_method :education_schools, :schools
   has_and_belongs_to_many :programs,
                           class_name: 'Education::Program',
-                          foreign_key: :education_program_id,
-                          association_foreign_key: :administration_location_id
+                          foreign_key: :administration_location_id,
+                          association_foreign_key: :education_program_id
                           alias_method :education_programs, :programs
-  has_many                :diplomas, 
+  has_many                :diplomas,
                           -> { distinct },
                           through: :programs,
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
-             
+
 
   scope :ordered, -> { order(:name) }
 

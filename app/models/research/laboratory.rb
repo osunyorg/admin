@@ -41,8 +41,8 @@ class Research::Laboratory < ApplicationRecord
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person::Researcher',
-                          foreign_key: :university_person_id,
-                          association_foreign_key: :research_laboratory_id
+                          foreign_key: :research_laboratory_id,
+                          association_foreign_key: :university_person_id
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
