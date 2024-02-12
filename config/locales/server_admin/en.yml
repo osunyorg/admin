@@ -30,7 +30,7 @@ en:
         one: "%{count} contributing university"
         other: "%{count} contributing universities"
       contribution_filter:
-        false: Do not contribute
+        false: Does not contribute
         title: Contribution status
         true: Contributes
       contributions_total: Contributions (total)
