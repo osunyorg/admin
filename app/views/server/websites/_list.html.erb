@@ -4,10 +4,7 @@
       <tr>
         <th><%= Communication::Website.human_attribute_name('name') %></th>
         <th><%= University.model_name.human %></th>
-        <th><%= t('server_admin.websites.back_office') %></th>
         <th><%= Communication::Website.human_attribute_name('url') %></th>
-        <th><%= t('server_admin.websites.git_repo.full') %></th>
-        <th><%= t('server_admin.websites.update_mode') %></th>
         <th><%= t('server_admin.websites.git_repo.status') %></th>
         <th><%= t('server_admin.websites.theme_version') %></th>
         <th></th>
@@ -24,37 +21,35 @@
           </td>
           <td><%= link_to website.university,
                           [:server, website.university] %></td>
-          <td><%= link_to t('server_admin.websites.admin'),
-                          admin_communication_website_url(website, host: website.university.url),
-                          target: :_blank,
-                          class: 'btn btn-xs btn-light' %></td>
-          <td><%= link_to Communication::Website.human_attribute_name('url'),
-                          website.url,
-                          target: :_blank,
-                          class: 'btn btn-xs btn-light' if website.url.present? %></td>
-          <td><%= link_to t('server_admin.websites.git_repo.short'),
-                          website.repository_url,
-                          target: :_blank,
-                          class: 'btn btn-xs btn-light' if website.repository.present? %></td>
-          <td><%= t("server_admin.websites.autoupdate_theme.#{website.autoupdate_theme?}") %></td>
+          <td>
+            <%= link_to t('server_admin.websites.admin'),
+                        admin_communication_website_url(website, host: website.university.url),
+                        target: :_blank,
+                        class: 'action' %>
+            <%= link_to Communication::Website.human_attribute_name('url'),
+                        website.url,
+                        target: :_blank,
+                        class: 'action' if website.url.present? %></td>
+            <%= link_to t('server_admin.websites.git_repo.short'),
+                        website.repository_url,
+                        target: :_blank,
+                        class: 'action' if website.repository.present? %></td>
           <td><%= image_tag website.deployment_status_badge,
                             alt: '' if website.deployment_status_badge.present? %></td>
           <td class="js-version">
             <%= website.theme_version %>
+            <%= link_to t('server_admin.websites.buttons.theme.sync'),
+                        sync_theme_version_server_website_path(website),
+                        method: :post,
+                        remote: true,
+                        class: "action js-sync-theme-version" if website.theme_updatable? %>
           </td>
           <td>
-            <% if website.url.present? %>
-              <%= link_to t('server_admin.websites.buttons.theme.sync'),
-                          sync_theme_version_server_website_path(website),
-                          method: :post,
-                          remote: true,
-                          class: "#{button_classes} js-sync-theme-version" if website.theme_updatable? %>
-              <%= link_to t('server_admin.websites.buttons.theme.update'),
-                          update_theme_server_website_path(website),
-                          method: :post,
-                          remote: true,
-                          class: button_classes if website.github? %>
-            <% end %>
+            <%= link_to t('server_admin.websites.buttons.theme.update'),
+                        update_theme_server_website_path(website),
+                        method: :post,
+                        remote: true,
+                        class: button_classes if website.github? && website.url.present? %>
           </td>
         </tr>
       <% end %>

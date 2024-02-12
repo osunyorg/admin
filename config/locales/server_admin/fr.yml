@@ -39,7 +39,7 @@ fr:
       back_office: Back office
       buttons:
         theme:
-          sync: Synchroniser la version
+          sync: Synchroniser
           update: Mettre à jour le thème
       clean_and_rebuild_all_websites_notice: Tous les thèmes vont être mis à jour. Cela peut prendre quelques minutes.
       connections_count: "%{count} connexions"
