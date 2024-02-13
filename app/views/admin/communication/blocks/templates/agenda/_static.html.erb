@@ -5,6 +5,7 @@
 <%= block_component_static block, :show_summary %>
 <%= block_component_static block, :show_category %>
 <%= block_component_static block, :show_status %>
+      title_link: "<%= block.template.title_link %>"
 <% if block.template.mode == 'category' && block.template.category %>
       category: "<%= block.template.category.path %>"
 <% end %>

@@ -52,7 +52,25 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     selected_events.none? && no_event_message.blank? && mode != 'categories'
   end
 
+  def title_link
+    return link_to_events_archive if time == 'archive'
+    return link_to_category if mode == 'category' && category.present?  
+    link_to_events
+  end
+
   protected
+
+  def link_to_events
+    website.special_page(Communication::Website::Page::CommunicationAgenda).path
+  end
+
+  def link_to_events_archive
+    website.special_page(Communication::Website::Page::CommunicationAgendaArchive).path
+  end
+
+  def link_to_category
+    category.current_permalink_in_website(website)&.path
+  end
 
   def base_events
     events = website.events.for_language(block.language).published
