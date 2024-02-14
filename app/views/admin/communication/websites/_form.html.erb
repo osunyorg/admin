@@ -51,6 +51,12 @@
                           hint: images_formats_accepted_hint,
                           input_html: { accept: default_images_formats_accepted },
                           preview: 300 %>
+              <%= f.input :default_shared_image,
+                          as: :single_deletable_file,
+                          direct_upload: true,
+                          hint: images_formats_accepted_hint,
+                          input_html: { accept: default_images_formats_accepted },
+                          preview: 300 %>
             </div>
           </div>
         <% end %>
