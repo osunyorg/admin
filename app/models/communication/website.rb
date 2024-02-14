@@ -83,6 +83,9 @@ class Communication::Website < ApplicationRecord
   has_one_attached_deletable :default_image
   validates :default_image, size: { less_than: 5.megabytes }
 
+  has_one_attached_deletable :default_shared_image
+  validates :default_shared_image, size: { less_than: 5.megabytes }
+
   before_validation :sanitize_fields
 
   scope :ordered, -> { order(:name) }
