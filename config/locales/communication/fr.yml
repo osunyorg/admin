@@ -281,7 +281,7 @@ fr:
             none: Pas encore d'événements
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas."
-        default_shared_image: "Image de partage par défaut."
+        default_shared_image: "Image de partage par défaut, 1200 pixels de large est une bonne base car les réseaux ont des standards différents."
         editorial:
           label: Éditorial
           description: Tout ce qui est lié au contenu

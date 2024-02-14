@@ -7,7 +7,7 @@ default:
 <% end %>
 <% if @website.default_shared_image.attached? %>
   shared_image:
-    id: <%= @website.default_image.blob&.id %>
+    id: <%= @website.default_shared_image.blob&.id %>
 <% end %>
 social:
 <%
