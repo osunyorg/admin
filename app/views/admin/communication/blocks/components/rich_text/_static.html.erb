@@ -1,7 +1,7 @@
 <% if list %>
 <%= indentation %>- <%= property %>: >-
-<%= indentation %>    <%= prepare_html_for_static value, @university, depth + 2 %>
+<%= indentation %>    <%= prepare_html_for_static value %>
 <% else %>
 <%= indentation %><%= property %>: >-
-<%= indentation %>  <%= prepare_html_for_static value, @university %>
+<%= indentation %>  <%= prepare_html_for_static value %>
 <% end %>

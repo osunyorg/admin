@@ -14,9 +14,9 @@ hal:
   docid: "<%= @about.hal_docid %>"
   url: "<%= @about.hal_url %>"
 abstract: >-
-  <%= prepare_html_for_static @about.abstract, @website.university %>
+  <%= prepare_html_for_static @about.abstract %>
 citation_full: >-
-  <%= prepare_html_for_static @about.citation_full, @website.university %>
+  <%= prepare_html_for_static @about.citation_full %>
 authors_list: >-
   <%= @about.authors_list %>
 ref: >-
@@ -43,6 +43,6 @@ Citations::FORMATS.each do |format|
   - label: "<%= t("research.citations.#{format}.label") %>"
     format: "<%= format %>"
     content: >-
-      <%= prepare_html_for_static citation, @website.university %>
+      <%= prepare_html_for_static citation %>
 <% end %>
 ---

@@ -56,6 +56,7 @@ gem "mini_magick"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
+gem "orthotypo"#, path: '../../noesya/orthotypo'
 gem "pexels", "~> 0"
 gem "pg", "~> 1"
 gem "puma"

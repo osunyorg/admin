@@ -1,7 +1,6 @@
 ---
-title: >
-  <%= @about.to_s %>
-<%= render 'admin/application/static/breadcrumbs',
+title: "<%= prepare_text_for_static @about.to_s %>"
+<%= render 'admin/application/static/breadcrumbs', 
             pages: @website.special_page(Communication::Website::Page::Organization).ancestors_and_self,
             current_title: @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
@@ -59,4 +58,4 @@ logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <%= render 'admin/application/connections/backlinks' %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
-<%= prepare_html_for_static @about.text, @about.university %>
+<%= prepare_html_for_static @about.text %>
