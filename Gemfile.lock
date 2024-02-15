@@ -426,7 +426,7 @@ GEM
       time
       uri
     orm_adapter (0.5.0)
-    orthotypo (1.0.1)
+    orthotypo (1.0.2)
       htmlentities
       nokogiri
     parser (3.3.0.5)
@@ -434,7 +434,7 @@ GEM
       racc
     pexels (0.5.0)
       requests (~> 1.0.2)
-    pg (1.5.4)
+    pg (1.5.5)
     popper_js (2.11.8)
     psych (5.1.2)
       stringio
