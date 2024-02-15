@@ -9,7 +9,7 @@ class Static::Text < Static::Default
       @prepared = CGI.unescapeHTML @prepared
       @prepared = @prepared.ortho(locale: locale)
       @prepared = indent @prepared
-      @prepared = raw @prepared
+      @prepared = sanitize @prepared
     end
     @prepared
   end
