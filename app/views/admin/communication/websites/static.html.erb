@@ -1,8 +1,13 @@
 title: >
   <%= @about.to_s %>
+default:
 <% if @website.default_image.attached? %>
-default_image:
-  id: <%= @website.default_image.blob&.id %>
+  image:
+    id: <%= @website.default_image.blob&.id %>
+<% end %>
+<% if @website.default_shared_image.attached? %>
+  shared_image:
+    id: <%= @website.default_shared_image.blob&.id %>
 <% end %>
 social:
 <%

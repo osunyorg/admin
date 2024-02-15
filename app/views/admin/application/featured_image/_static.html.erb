@@ -5,6 +5,6 @@ if best_featured_image&.attached?
 image:
   id: "<%= best_featured_image.blob.id %>"
   alt: "<%= @about.best_featured_image_alt %>"
-  credit: >
-    <%= prepare_html_for_static @about.best_featured_image_credit, @about.university %>
+  credit: >-
+    <%= prepare_html_for_static @about.best_featured_image_credit %>
 <% end %>

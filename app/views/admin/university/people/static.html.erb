@@ -41,7 +41,7 @@ contact_details:
 <% if @about.best_picture.attached? %>
 image: "<%= @about.best_picture.blob.id %>"
 credit: >-
-  <%= prepare_html_for_static @about.picture_credit, @about.university %>
+  <%= prepare_html_for_static @about.picture_credit %>
 <% end %>
 roles:
 <% if @about.author.for_website?(@website) %>
@@ -86,4 +86,4 @@ administrative_missions:
 <%= render 'admin/application/connections/backlinks' %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
-<%= prepare_html_for_static @about.biography, @about.university %>
+<%= prepare_html_for_static @about.biography %>

@@ -7,7 +7,8 @@
                                                     : localization.to_s
 %>
 <%= language.iso_code %>:
-  title: <%= title %>
+  title: >-
+    <%= title %>
   contentDir: content/<%= language.iso_code %>
   languageCode: <%= language.iso_code %>
   languageName: <%= language.name %>
@@ -41,9 +42,10 @@
   taxonomies:
     administrator: administrators
     author: authors
-    posts_category: posts_categories
-    events_category: events_categories
     diploma: diplomas
+    events_category: events_categories
+    posts_category: posts_categories
     researcher: researchers
     teacher: teachers
+    volume: volumes
 <% end %>

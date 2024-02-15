@@ -1,7 +1,7 @@
 ---
-title: "<%= @about.title %>"
-breadcrumb_title: "<%= @about.best_title  %>"
-<%= render 'admin/application/static/breadcrumbs',
+title: "<%= prepare_text_for_static @about.title %>"
+breadcrumb_title: "<%= prepare_text_for_static @about.best_title %>"
+<%= render 'admin/application/static/breadcrumbs', 
             pages: @about.ancestors,
             current_title: @about.best_title %>
 <%= render 'admin/application/static/permalink' %>
@@ -33,10 +33,10 @@ children:
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 header_text: >-
-  <%= prepare_html_for_static @about.header_text, @website.university %>
+  <%= prepare_html_for_static @about.header_text %>
 header_cta:
   display: <%= @about.header_cta %>
-  label: <%= @about.header_cta_label %>
+  label: <%= prepare_text_for_static @about.header_cta_label %>
   target: <%= @about.header_cta_url %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
