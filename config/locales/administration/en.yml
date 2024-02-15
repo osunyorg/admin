@@ -4,6 +4,9 @@ en:
       administration/qualiopi: Qualiopi
   activerecord:
     models:
+      administration/location:
+        one: Location
+        other: Campus
       administration/qualiopi/criterion:
         one: Criterion
         other: Criterions
@@ -11,6 +14,19 @@ en:
         one: Indicator
         other: Indicators
     attributes:
+      administration/location:
+        address: Address
+        address_additional: Additional address
+        address_name: Address name
+        city: City
+        country: Country
+        name: Name
+        phone: Telephone
+        programs: Programs
+        schools: Schools
+        url: Website
+        websites: Linked websites
+        zipcode: Zipcode
       administration/qualiopi/criterion:
         number: Number
         name: Name
@@ -30,5 +46,16 @@ en:
       text: Administration, in its many forms, is defined primarily by its activities in the service of the general interest. It acts in the general interest and respects the principle of legality. It is bound by the obligation of neutrality and respect for the principle of secularism. It complies with the principle of equality and guarantees everyone impartial treatment.
       source: Code des relations entre le public et l'administration
       parts:
+        location: 
+          description: Management of the various (physical) education and research sites
         qualiopi:
           description: Help in checking the conformity of the training offer with the Qualiopi standard
+  simple_form:
+    hints:
+      administration_location:
+        address: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+        address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
+        address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'
+        city: 'This field is used for geolocation. Ex: Cenon'
+        country: 'This field is used for geolocation. Ex: France'
+        zipcode: 'This field is used for geolocation. Ex: 33150'

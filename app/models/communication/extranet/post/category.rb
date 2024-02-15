@@ -22,7 +22,7 @@
 #  fk_rails_e53c2a25fc  (extranet_id => communication_extranets.id)
 #
 class Communication::Extranet::Post::Category < ApplicationRecord
-  include WithSlug
+  include Sluggable
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'

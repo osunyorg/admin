@@ -5,60 +5,6 @@ fr:
     models:
       communication: Communication
   activerecord:
-    models:
-      communication/block:
-        one: Bloc de contenu
-        other: Blocs de contenu
-      communication/extranet:
-        one: Extranet
-        other: Extranets
-      communication/extranet/document:
-        one: Document
-        other: Documents
-      communication/extranet/document/category:
-        one: Catégorie
-        other: Catégories
-      communication/extranet/document/kind:
-        one: Type
-        other: Types
-      communication/extranet/post:
-        one: Actualité
-        other: Actualités
-        all: Toutes les actualités
-      communication/extranet/post/category:
-        one: Catégorie
-        other: Catégories
-      communication/website:
-        one: Site Web
-        other: Sites Web
-      communication/website/agenda/category:
-        one: Catégorie
-        other: Catégories
-      communication/website/agenda/event:
-        one: Événement
-        other: Événements
-      communication/website/post/category:
-        one: Catégorie
-        other: Catégories
-        all: Toutes les catégories
-      communication/website/connection:
-        one: Connexion
-        other: Connexions
-      communication/website/menu:
-        one: Menu
-        other: Menus
-        all: Tous les menus
-      communication/website/menu/item:
-        one: Élément
-        other: Éléments
-      communication/website/page:
-        one: Page
-        other: Pages
-        all: Toutes les pages
-      communication/website/post:
-        one: Actualité
-        other: Actualités
-        all: Toutes les actualités
     attributes:
       communication/block:
         title: Nom (facultatif)
@@ -139,6 +85,8 @@ fr:
         created_at: Création
         default_image: Image par défaut
         default_language: Langue par défaut
+        default_shared_image: Image de partage par défaut
+        default_time_zone: Fuseau horaire par défaut
         deployment_status_badge: Badge de statut du déploiement
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
@@ -183,16 +131,10 @@ fr:
         status_future: À venir
         status_archive: Archive
         subtitle: Sous-titre
+        time_zone: Fuseau horaire
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
-      communication/website/post/category:
-        children: Catégories enfants
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        parent: Catégorie parente
-        slug: Slug
       communication/website/connection:
         direct_source: Source directe
         direct_source_type: Type de la source
@@ -221,6 +163,9 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         full_width: Pleine largeur
+        header_cta: Afficher un bouton d'action dans le header
+        header_cta_label: Texte du bouton d'action
+        header_cta_url: URL du bouton d'action
         header_text: Titre affiché en haut de page
         parent: Page parente
         path: Chemin
@@ -247,6 +192,13 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
+      communication/website/post/category:
+        children: Catégories enfants
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        parent: Catégorie parente
+        slug: Slug
     errors:
       models:
         communication/extranet:
@@ -264,6 +216,60 @@ fr:
               too_soon: doit être après jour de début
             to_hour:
               too_soon: doit être après l'heure de début
+    models:
+      communication/block:
+        one: Bloc de contenu
+        other: Blocs de contenu
+      communication/extranet:
+        one: Extranet
+        other: Extranets
+      communication/extranet/document:
+        one: Document
+        other: Documents
+      communication/extranet/document/category:
+        one: Catégorie
+        other: Catégories
+      communication/extranet/document/kind:
+        one: Type
+        other: Types
+      communication/extranet/post:
+        all: Toutes les actualités
+        one: Actualité
+        other: Actualités
+      communication/extranet/post/category:
+        one: Catégorie
+        other: Catégories
+      communication/website:
+        one: Site Web
+        other: Sites Web
+      communication/website/agenda/category:
+        one: Catégorie
+        other: Catégories
+      communication/website/agenda/event:
+        one: Événement
+        other: Événements
+      communication/website/connection:
+        one: Connexion
+        other: Connexions
+      communication/website/menu:
+        all: Tous les menus
+        one: Menu
+        other: Menus
+      communication/website/menu/item:
+        one: Élément
+        other: Éléments
+      communication/website/page:
+        all: Toutes les pages
+        one: Page
+        other: Pages
+      communication/website/post:
+        all: Toutes les actualités
+        one: Actualité
+        other: Actualités
+      communication/website/post/category:
+        all: Toutes les catégories
+        one: Catégorie
+        other: Catégories
   admin:
     communication:
       block:
@@ -273,10 +279,15 @@ fr:
           events:
             draft: Brouillon
             none: Pas encore d'événements
-        default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas. C'est aussi l'image de partage par défaut."
+            formatted_time_zone: "Fuseau horaire : %{time_zone}"
+        default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas."
+        default_shared_image: "Image de partage par défaut, 1200 pixels de large est une bonne base car les réseaux ont des standards différents."
         editorial:
           label: Éditorial
           description: Tout ce qui est lié au contenu
+        localizations:
+          fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
+          title: Internationalisation
         technical:
           label: Technique
           description: Tout ce qui est lié aux réglages techniques
@@ -360,6 +371,9 @@ fr:
           accessibility:
             slug: accessibilite
             title: Accessibilité
+          administration_location:
+            slug: campus
+            title: Campus
           administrator:
             slug: equipe-administrative
             title: Équipe administrative
@@ -396,7 +410,7 @@ fr:
           privacy_policy:
             slug: politique-de-confidentialite
             title: Politique de confidentialité
-          research_hal_publication:
+          research_publication:
             slug: publications
             title: Publications HAL
           research_paper:
@@ -422,6 +436,10 @@ fr:
         unpublished: Non publiée
       security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
+  curation:
+    error: Erreur lors de la curation, veillez à utiliser une URL valide
+    label: URL de l'article à importer
+    placeholder: https://...
   enums:
     communication:
       website:
@@ -448,10 +466,6 @@ fr:
               persons: Équipe
               teachers: Équipe pédagogique
               url: URL
-  curation:
-    error: Erreur lors de la curation, veillez à utiliser une URL valide
-    label: URL de l'article à importer
-    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

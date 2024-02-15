@@ -19,7 +19,9 @@ module Communication::Website::Page::WithType
       # Research
       Communication::Website::Page::ResearchVolume,
       Communication::Website::Page::ResearchPaper,
-      Communication::Website::Page::ResearchHalPublication,
+      Communication::Website::Page::ResearchPublication,
+      # Administration
+      Communication::Website::Page::AdministrationLocation,
       # People facets
       Communication::Website::Page::Administrator,
       Communication::Website::Page::Author,
@@ -108,6 +110,7 @@ module Communication::Website::Page::WithType
     self.parent = default_parent
     self.full_width = full_width_by_default?
     self.published = published_by_default?
+    # note: published_at will be set by WithPublication concern
   end
 
   def generate_heading(title)

@@ -42,6 +42,7 @@ class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Sanitizable
+  include Sluggable # We override slug_unavailable? method
   include WithAccessibility
   include WithBlobs
   include WithDuplication
@@ -49,7 +50,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithPermalink
   include WithPublication
-  include WithSlug # We override slug_unavailable? method
   include WithTranslations
   include WithUniversity
 
@@ -84,7 +84,7 @@ class Communication::Website::Post < ApplicationRecord
   scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
-  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_categories: { id: category_id }).distinct }
+  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
   scope :for_pinned, -> (pinned) { where(pinned: pinned == 'true') }
   scope :for_search_term, -> (term) {
     where("

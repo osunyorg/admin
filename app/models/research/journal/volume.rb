@@ -33,12 +33,12 @@
 class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
+  include Sluggable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
   include WithPermalink
   include WithPublication
-  include WithSlug
   include WithUniversity
 
   has_summernote :text

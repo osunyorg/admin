@@ -1,22 +1,3 @@
-# == Schema Information
-#
-# Table name: research_hal_authors
-#
-#  id                :uuid             not null, primary key
-#  docid             :string           indexed
-#  first_name        :string
-#  form_identifier   :string
-#  full_name         :string
-#  last_name         :string
-#  person_identifier :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#
-# Indexes
-#
-#  index_research_hal_authors_on_docid  (docid)
-#
-
 one:
   docid: MyString
   form_identifier: MyString

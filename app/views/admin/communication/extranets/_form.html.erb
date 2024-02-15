@@ -15,12 +15,13 @@
       <%= osuny_panel t('look_feel') do %>
         <%= f.input :logo,
                     as: :single_deletable_file,
-                    hint: default_images_formats_accepted_hint,
+                    hint: images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     direct_upload: true %>
         <%= f.input :favicon,
                     as: :single_deletable_file,
+                    hint: images_formats_accepted_hint(formats: '.png'),
                     input_html: { accept: '.png' },
                     preview: 100,
                     direct_upload: true %>
@@ -60,18 +61,26 @@
     <%= osuny_panel t('university.sso') do %>
       <div class="row">
         <div class="col-xl-6">
-          <%= f.input :has_sso %>
-          <div class="sso-inputs">
+          <%= f.input :has_sso, input_html: { data: { 'conditional': true }, id: 'has_sso' } %>
+          <div class="d-none" 
+               data-conditional-source="has_sso"
+               data-conditional-value="true"
+               >
             <%= f.input :sso_target_url, required: true %>
             <%= f.input :sso_cert, required: true %>
             <%= f.input :sso_name_identifier_format, required: true %>
             <%= f.input :sso_button_label %>
           </div>
         </div>
-        <div class="col-xl-6 sso-inputs">
-          <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
-          <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-          <%= render 'server/universities/sso_mapping', object: extranet %>
+        <div class="col-xl-6">
+          <div class="d-none" 
+               data-conditional-source="has_sso"
+               data-conditional-value="true"
+               >
+            <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+            <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+            <%= render 'server/universities/sso_mapping', object: extranet %>
+          </div>
         </div>
       </div>
     <% end %>

@@ -24,8 +24,8 @@
 class Research::Journal::Paper::Kind < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
+  include Sluggable
   include WithGitFiles
-  include WithSlug
   include WithUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'

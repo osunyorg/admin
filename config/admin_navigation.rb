@@ -43,7 +43,6 @@ SimpleNavigation::Configuration.run do |navigation|
       if feature_administration?
         primary.item :administration, Administration.model_name.human, admin_administration_root_path, { kind: :header, image: 'admin/administration-thumb.jpg' }
         load_from_parts Administration, primary
-        primary.item :administration_campus, 'Campus', nil, { icon: Icon::ADMINISTRATION_CAMPUS }
         primary.item :administration_admissions, 'Admissions', nil, { icon: Icon::ADMINISTRATION_ADMISSIONS }
         primary.item :administration_internship, 'Stages', nil, { icon: Icon::ADMINISTRATION_INTERNSHIPS }
         primary.item :administration_statistics, 'Statistiques', nil, { icon: Icon::ADMINISTRATION_STATISTICS }

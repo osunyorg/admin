@@ -1,8 +1,14 @@
 class Server::UniversitiesController < Server::ApplicationController
+
   load_and_authorize_resource
 
+  has_scope :for_search_term
+  has_scope :for_real_university
+  has_scope :for_contribution
+  has_scope :for_university_kind
+
   def index
-    @universities = @universities.ordered
+    @universities = apply_scopes(@universities).ordered.page(params[:page])
     breadcrumb
   end
 
@@ -67,4 +73,5 @@ class Server::UniversitiesController < Server::ApplicationController
       :is_really_a_university
     )
   end
+  
 end

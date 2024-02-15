@@ -1,0 +1,88 @@
+<% content_for :title, @publication %>
+
+
+<div class="row mb-5">
+  <div class="col-lg-8">
+    <% if @publication.abstract.present? %>
+      <p class="lead mb-5">
+        <%= sanitize @publication.abstract %>
+      </p>
+    <% end %>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= osuny_label Research::Publication.human_attribute_name('citation_full') %>
+        <p><%= sanitize @publication.citation_full %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Publication.human_attribute_name('ref') %>
+        <p><%= sanitize @publication.ref %></p>
+      </div>
+      <% if @publication.publication_date %>
+        <div class="col-lg-6">
+          <%= osuny_label Research::Publication.human_attribute_name('publication_date') %>
+          <p><%= l @publication.publication_date %></p>
+        </div>
+      <% end %>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Publication.human_attribute_name('open_access') %>
+        <p><%= t @publication.open_access %></p>
+      </div>
+      <% if @publication.hal? %>
+        <div class="col-lg-6">
+          <%= osuny_label Research::Publication.human_attribute_name('docid') %>
+          <p><%= @publication.hal_docid %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_panel Research::Publication.human_attribute_name('authors_list') do %>
+     <p><%= @publication.authors_list %></p>
+    <% end %>
+    <%= osuny_panel University::Person::Researcher.model_name.human(count: 2) do %>
+      <% @publication.researchers.in_university(current_university).each do |researcher| %>
+        <%= render 'admin/university/people/researchers/researcher', researcher: researcher %>
+      <% end %>
+    <% end %>
+    <%= osuny_panel Research::Hal::Author.model_name.human(count: 2) do %>
+      <ul class="list-unstyled">
+        <% @publication.authors.each do |author| %>
+          <li>
+            <%= link_to [:admin, author] do %>
+              <%= author %>
+              (<%= author.docid %>)
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end if @publication.hal? %>
+    <%= osuny_panel Research::Publication.human_attribute_name('urls') do %>
+      <% [:url, :hal_url, :doi_url, :file].each do |key| %>
+        <% value = @publication.send key %>
+        <% next if value.blank? %>
+        <%= osuny_label Research::Publication.human_attribute_name(key) %>
+        <p><%= link_to value, value, target: :_blank %></p>
+      <% end %>    
+    <% end %>    
+  </div>
+</div>
+
+<%= osuny_panel Research::Publication.human_attribute_name('citations') do %>
+  <div class="row">
+    <% Citations::FORMATS.each do |format| %>
+      <div class="col-lg-4">
+        <%= osuny_label t("research.citations.#{format}.label") %>
+        <p class="overflow-hidden"><%= sanitize @publication.public_send("citation_#{format}") %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @publication if @publication.editable? %>
+  <%= static_link static_admin_research_publication_path(@publication) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @publication if @publication.editable? %>
+<% end %>

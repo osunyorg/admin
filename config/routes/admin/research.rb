@@ -4,16 +4,16 @@ namespace :research do
       post 'sync-with-hal' => 'researchers#sync_with_hal', as: :sync_with_hal
     end
   end
+  resources :publications do
+    member do
+      get :static
+    end
+  end
   namespace :hal do
     resources :authors, only: [:index, :show, :destroy] do
       member do
         post 'researchers/:researcher_id' => 'authors#connect_researcher', as: :researcher
         delete 'researchers/:researcher_id' => 'authors#disconnect_researcher'
-      end
-    end
-    resources :publications, only: [:index, :show, :destroy] do
-      member do
-        get :static
       end
     end
     root to: 'dashboard#index'
@@ -39,6 +39,9 @@ namespace :research do
     end
   end
   resources :laboratories do
+    member do
+      get :static
+    end
     resources :axes, controller: 'laboratories/axes' do
       collection do
         post :reorder

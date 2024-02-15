@@ -36,25 +36,33 @@
   <h3 class="mt-5"><%= t('university.sso') %></h3>
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :has_sso %>
-      <div class="sso-inputs">
+      <%= f.input :has_sso, input_html: { data: { 'conditional': true }, id: 'has_sso' } %>
+      <div class="d-none" 
+           data-conditional-source="has_sso"
+           data-conditional-value="true"
+           >
         <%= f.input :sso_target_url, required: true %>
         <%= f.input :sso_cert, required: true %>
         <%= f.input :sso_name_identifier_format, required: true %>
         <%= f.input :sso_button_label %>
       </div>
     </div>
-    <div class="col-md-6 sso-inputs">
-      <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
-      <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-      <%= render 'sso_mapping', object: university %>
+    <div class="col-md-6">
+      <div class="d-none" 
+           data-conditional-source="has_sso"
+           data-conditional-value="true"
+           >
+        <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+        <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+        <%= render 'sso_mapping', object: university %>
+      </div>
     </div>
   </div>
 
-  <h3 class="mt-5"><%= t('university.invoice_informations') %></h3>
+  <h3 class="mt-5"><%= t('server_admin.universities.invoice_informations') %></h3>
   <div class="row">
     <div class="col-md-4">
-      <%= f.input :invoice_date %>
+      <%= f.input :invoice_date, html5: true %>
     </div>
     <div class="col-md-4">
       <%= f.input :contribution_amount %>

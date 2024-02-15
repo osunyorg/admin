@@ -70,7 +70,12 @@ module Osuny
     ]
 
     config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'
+
+    # FILES
+    config.default_file_max_size = 100.megabytes
+    config.default_image_max_size = 5.megabytes
     config.default_images_formats = ['.jpg', '.jpeg', '.png', '.svg']
+    config.default_audio_formats = ['.mp3']
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

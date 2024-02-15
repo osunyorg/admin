@@ -2,15 +2,17 @@
 #
 # Table name: research_laboratories
 #
-#  id            :uuid             not null, primary key
-#  address       :string
-#  city          :string
-#  country       :string
-#  name          :string
-#  zipcode       :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  university_id :uuid             not null, indexed
+#  id                 :uuid             not null, primary key
+#  address            :string
+#  address_additional :string
+#  address_name       :string
+#  city               :string
+#  country            :string
+#  name               :string
+#  zipcode            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
@@ -21,9 +23,9 @@
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
-  include Aboutable
   include AsIndirectObject
   include Sanitizable
+  include WebsitesLinkable
   include WithCountry
   include WithGitFiles
 
@@ -39,8 +41,8 @@ class Research::Laboratory < ApplicationRecord
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person::Researcher',
-                          foreign_key: :university_person_id,
-                          association_foreign_key: :research_laboratory_id
+                          foreign_key: :research_laboratory_id,
+                          association_foreign_key: :university_person_id
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
@@ -89,6 +91,11 @@ class Research::Laboratory < ApplicationRecord
   end
 
   def has_education_diplomas?
+    false
+  end
+
+  # TODO en fait un laboratoire peut avoir des locations mais il faut le coder
+  def has_administration_locations?
     false
   end
 

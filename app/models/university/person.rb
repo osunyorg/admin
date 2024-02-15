@@ -25,6 +25,7 @@
 #  phone_mobile       :string
 #  phone_personal     :string
 #  phone_professional :string
+#  picture_credit     :text
 #  slug               :string           indexed
 #  summary            :text
 #  tenure             :boolean          default(FALSE)
@@ -58,6 +59,7 @@ class University::Person < ApplicationRecord
   include Backlinkable
   include Contentful
   include Sanitizable
+  include Sluggable
   include WithBlobs
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter
@@ -68,7 +70,6 @@ class University::Person < ApplicationRecord
   include WithPermalink
   include WithPicture
   include WithResearch
-  include WithSlug
   include WithTranslations
   include WithUniversity
 

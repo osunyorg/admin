@@ -5,11 +5,11 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.selected_class = 'active'
   navigation.items do |primary|
     primary.item  :dashboard,
-                  t('dashboard'),
+                  t('admin.dashboard'),
                   server_root_path,
                   { kind: :header, highlights_on: %r{server$} }
     primary.item  :server,
-                  t('server'),
+                  t('menu.server_admin'),
                   nil,
                   { kind: :header }
     primary.item  :universities,

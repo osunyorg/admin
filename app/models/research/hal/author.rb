@@ -20,12 +20,12 @@ class Research::Hal::Author < ApplicationRecord
   include Sanitizable
 
   has_and_belongs_to_many :publications,
-                          foreign_key: 'research_hal_publication_id',
-                          association_foreign_key: :research_hal_author_id
+                          foreign_key: :research_hal_author_id,
+                          association_foreign_key: :research_publication_id
   has_and_belongs_to_many :university_person_researchers,
                           class_name: 'University::Person',
-                          foreign_key: :university_person_id,
-                          association_foreign_key: :research_hal_author_id
+                          foreign_key: :research_hal_author_id,
+                          association_foreign_key: :university_person_id
   alias :researchers :university_person_researchers
 
   scope :ordered, -> { order(:last_name, :first_name, :docid)}
@@ -65,10 +65,11 @@ class Research::Hal::Author < ApplicationRecord
   end
 
   def import_research_hal_publications!
+    # HAL author has only HAL publications
     publications.clear
     # Do not overuse the API if no researcher is concerned
     return if researchers.none?
-    Research::Hal::Publication.import_from_hal_for_author(self).each do |publication|
+    Importers::Hal.import_publications_for_author(self).each do |publication|
       publications << publication
     end
     publications

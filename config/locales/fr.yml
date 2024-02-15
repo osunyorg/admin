@@ -70,6 +70,7 @@ fr:
         person: Personne
         mobile_phone: Téléphone portable
         picture: Photo de profil
+        picture_url: Url de la photo de profil
         programs_to_manage: Formation(s) gérée(s)
         role: Rôle
         roles:
@@ -144,10 +145,11 @@ fr:
     summary:
       label: Résumé
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
-    translation: 
+    translation:
       button: Traduire avec LibreTranslate
       done: Traduction effectuée ! Merci de relire avant d'enregistrer.
       running: Traduction en cours
+      unavailable_button: Traduction automatique indisponible
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
@@ -165,7 +167,7 @@ fr:
   date:
     formats:
       birthday: "%d %B"
-  default_images_hint: "5 Mo max, %{formats}"
+      full: "%A %-d %B %Y"
   delete: Supprimer
   devise:
     failure:
@@ -223,6 +225,8 @@ fr:
       label: Crédit
       hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
     remove: Supprimer l'image
+  file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
+  file_hint_without_formats: "%{filesize} max."
   filters:
     attributes:
       category: Filtrer par catégorie
@@ -293,7 +297,7 @@ fr:
   menu:
     admin: Admin
     profile: Profil
-    server_admin: Admin serveur
+    server_admin: Administration du serveur
     sign_out: Déconnexion
   metadata: Informations
   move: Déplacer
@@ -318,27 +322,6 @@ fr:
   save: Enregistrer
   search: Rechercher
   select_language: Sélectionnez une langue
-  server_admin:
-    dashboard: Administration du serveur
-    emergency_messages:
-      all_universities: Toutes
-      all_roles: Tous
-      content: Contenu
-      deliver: Envoyer
-      delivered: Votre message a bien été envoyé
-      filters: Filtres
-      target: Cible
-      users:
-        one: "%{count} utilisateur"
-        other: "%{count} utilisateurs"
-    websites:
-      buttons:
-        theme:
-          sync: Synchroniser la version
-          update: Mettre à jour le thème
-      sync_theme_version_notice: La version du thème de %{website} a été synchronisée
-      update_all_themes_notice: Tous les thèmes vont être mis à jour. Cela peut prendre quelques minutes.
-      update_theme_notice: Le thème de %{website} va être mis à jour dans quelques instants
   seo: SEO
   simple_form:
     error_notification:
@@ -350,7 +333,7 @@ fr:
       import:
         file: Fichier .xlsx uniquement
       language:
-        iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">WikiPedia</a>)
+        iso_code: Code ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">Wikipédia</a>)
         name: Nom dans la langue (= "Français", "Deutsch", ...)
         summernote_locale: 'Nom de la locale de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
       user:

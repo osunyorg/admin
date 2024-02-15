@@ -3,7 +3,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   has_scope :for_about_type
 
   def index
-    @websites = apply_scopes(@websites).ordered.page(params[:page])
+    @websites = apply_scopes(@websites).ordered.page(params[:page]).per(24)
     breadcrumb
   end
 
@@ -79,7 +79,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :name, :url, :repository, :about_type, :about_id, :in_production,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda,
-      :deuxfleurs_hosting, :default_image, :default_image_delete,
+      :default_time_zone,
+      :deuxfleurs_hosting, :default_image, :default_image_delete, :default_shared_image, :default_shared_image_delete,
       :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,
       :deployment_status_badge, :autoupdate_theme, language_ids: []
     ]

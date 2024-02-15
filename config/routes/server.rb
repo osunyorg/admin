@@ -3,8 +3,7 @@ namespace :server do
   resources :languages
   resources :websites do
     collection do
-      get :manage_versions
-      post :update_all_themes
+      post :clean_and_rebuild_all_websites
     end
     member do
       post :sync_theme_version

@@ -1,9 +1,9 @@
 ---
 title: "<%= prepare_text_for_static @about.title %>"
 date: "<%= @about.published_at&.iso8601 %>"
-<%= render 'admin/application/static/breadcrumbs', 
+<%= render 'admin/application/static/breadcrumbs',
             pages: @website.special_page(Communication::Website::Page::CommunicationPost).ancestors_and_self,
-            current: @about %>
+            current_title: @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
 <% if @about.pinned %>
@@ -15,7 +15,7 @@ authors:
 <% end %>
 <% if @about.categories.any? %>
 posts_categories:
-<% @about.categories.each do |category| %>
+<% @about.categories.ordered.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
 <% end %>
 <% end %>

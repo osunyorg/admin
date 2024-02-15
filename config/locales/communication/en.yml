@@ -5,60 +5,6 @@ en:
     models:
       communication: Communication
   activerecord:
-    models:
-      communication/block:
-        one: Content block
-        other: Content blocks
-      communication/extranet:
-        one: Extranet
-        other: Extranets
-      communication/extranet/document:
-        one: Document
-        other: Documents
-      communication/extranet/document/category:
-        one: Category
-        other: Categories
-      communication/extranet/document/kind:
-        one: Kind
-        other: Kinds
-      communication/extranet/post:
-        one: Post
-        other: Posts
-        all: All posts
-      communication/extranet/post/category:
-        one: Category
-        other: Categories
-      communication/website:
-        one: Website
-        other: Websites
-      communication/website/agenda/category:
-        one: Category
-        other: Categories
-      communication/website/agenda/event:
-        one: Event
-        other: Events
-      communication/website/post/category:
-        one: Category
-        other: Categories
-        all: All categories
-      communication/website/connection:
-        one: Connection
-        other: Connections
-      communication/website/menu:
-        one: Menu
-        other: Menus
-        all: All menus
-      communication/website/menu/item:
-        one: Item
-        other: Items
-      communication/website/page:
-        one: Page
-        other: Pages
-        all: All pages
-      communication/website/post:
-        one: Post
-        other: Posts
-        all: All posts
     attributes:
       communication/block:
         title: Name (optional)
@@ -139,6 +85,8 @@ en:
         created_at: Creation
         default_image: Default image
         default_language: Default language
+        default_shared_image: Default shared image
+        default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
@@ -183,16 +131,10 @@ en:
         status_future: In the future
         status_archive: Archive
         subtitle: Subtitle
+        time_zone: Time zone
         title: Title
         to_day: To day
         to_hour: To hour
-      communication/website/post/category:
-        children: Children categories
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        parent: Parent category
-        slug: Slug
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type
@@ -221,6 +163,9 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         full_width: Full width
+        header_cta: Display call to action into header
+        header_cta_label: Call to action label
+        header_cta_url: Call to cation target
         header_text: Title displayed in header
         parent: Parent page
         path: Path
@@ -247,6 +192,13 @@ en:
         text: Text
         title: Title
         website: Website
+      communication/website/post/category:
+        children: Children categories
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        parent: Parent category
+        slug: Slug
     errors:
       models:
         communication/extranet:
@@ -264,6 +216,60 @@ en:
               too_soon: must be after "from day"
             to_hour:
               too_soon: must be after "from hour"
+    models:
+      communication/block:
+        one: Content block
+        other: Content blocks
+      communication/extranet:
+        one: Extranet
+        other: Extranets
+      communication/extranet/document:
+        one: Document
+        other: Documents
+      communication/extranet/document/category:
+        one: Category
+        other: Categories
+      communication/extranet/document/kind:
+        one: Kind
+        other: Kinds
+      communication/extranet/post:
+        all: All posts
+        one: Post
+        other: Posts
+      communication/extranet/post/category:
+        one: Category
+        other: Categories
+      communication/website:
+        one: Website
+        other: Websites
+      communication/website/agenda/category:
+        one: Category
+        other: Categories
+      communication/website/agenda/event:
+        one: Event
+        other: Events
+      communication/website/connection:
+        one: Connection
+        other: Connections
+      communication/website/menu:
+        all: All menus
+        one: Menu
+        other: Menus
+      communication/website/menu/item:
+        one: Item
+        other: Items
+      communication/website/page:
+        all: All pages
+        one: Page
+        other: Pages
+      communication/website/post:
+        all: All posts
+        one: Post
+        other: Posts
+      communication/website/post/category:
+        all: All categories
+        one: Category
+        other: Categories
   admin:
     communication:
       block:
@@ -273,10 +279,15 @@ en:
           events:
             draft: Draft
             none: No event yet
-        default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases. It is also the default sharing image."
+            formatted_time_zone: "Time zone: %{time_zone}"
+        default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases."
+        default_shared_image: "The default sharing image, 1200 pixels wide, is a good base because the networks have different standards."
         editorial:
           label: Editorial
           description: Everything related to content
+        localizations:
+          fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
+          title: Internationalization
         technical:
           label: Technical
           description: Everything related to technical settings
@@ -360,6 +371,9 @@ en:
           accessibility:
             slug: accessibility
             title: Accessibility
+          administration_location:
+            slug: campus
+            title: Campus
           administrator:
             slug: administrators
             title: Administrators
@@ -396,7 +410,7 @@ en:
           privacy_policy:
             slug: privacy-policy
             title: Privacy policy
-          research_hal_publication:
+          research_publication:
             slug: publications
             title: HAL publications
           research_paper:
@@ -422,6 +436,10 @@ en:
         unpublished: Unpublished
       security: Security
       see_all: See the full list (%{number} elements)
+  curation:
+    error: Import error, be sure to use a valid URL
+    label: URL of the post to import
+    placeholder: https://...
   enums:
     communication:
       website:
@@ -448,10 +466,6 @@ en:
               persons: Staff
               teachers: Educational staff
               url: URL
-  curation:
-    error: Import error, be sure to use a valid URL
-    label: URL of the post to import
-    placeholder: https://...
   simple_form:
     hints:
       communication_extranet:

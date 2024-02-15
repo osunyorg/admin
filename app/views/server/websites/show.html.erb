@@ -1,17 +1,20 @@
 <% content_for :title, @website %>
 
 <p>
-  Université : 
-  <%= link_to @website.university, server_university_path(@website.university) %>
+  <%= t('server_admin.websites.university_html', university: link_to(@website.university, server_university_path(@website.university))) %>
 </p>
 
-<%= @website.pages.count %> pages<br>
-<%= @website.posts.count %> actualités<br>
-<%= @website.events.count %> événements<br>
-<%= @website.connections.count %> connexions 
-  (<%= link_to 'détail', admin_communication_website_connections_url(@website, host: @website.university.url), target: :_blank %>)<br>
-<%= @website.recursive_dependencies.count %> dépendances 
-  (<%= link_to 'détail', admin_communication_website_dependencies_url(@website, host: @website.university.url), target: :_blank %>)<br>
+<%= t('server_admin.websites.pages_count', count: @website.pages.count) %>
+<br>
+<%= t('server_admin.websites.posts_count', count: @website.posts.count) %>
+<br>
+<%= t('server_admin.websites.events_count', count: @website.events.count) %>
+<br>
+<%= t('server_admin.websites.connections_count', count: @website.connections.count) %>
+  (<%= link_to t('server_admin.websites.details'), admin_communication_website_connections_url(@website, host: @website.university.url), target: :_blank %>)
+<br>
+<%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies.count) %>
+  (<%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, host: @website.university.url), target: :_blank %>)
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_website_path(@website), class: button_classes %>

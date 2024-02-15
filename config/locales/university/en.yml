@@ -29,8 +29,8 @@ en:
         token: Secret token
       university/organization:
         address: Address
-        address_name: Address name
         address_additional: Additional address
+        address_name: Address name
         categories: Categories
         city: City
         country: Country
@@ -92,6 +92,7 @@ en:
         phone_personal: Personal phone
         phone_professional: Professional phone
         picture: Profile picture
+        picture_credit: Credit
         research_journal_papers: Papiers
         research_laboratories: Research laboratories
         researcher: Researcher
@@ -212,10 +213,6 @@ en:
       regenerate_token: Regenerate token
       token_display_notice: Make sure to store your token somewhere safe. You won’t be able to see it again!
       token_successfully_regenerated: The token was successfully regenerated.
-    contributing:
-      one: contributing university
-      other: contributing universities
-    contributions_total: Contributions (total)
     description:
       text: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
       source: Wikipedia
@@ -230,7 +227,6 @@ en:
           description: Person using Osuny, with an authenticated account
           description_non_university: Person using Osuny, with an authenticated account
     internal_key: Internal Key
-    invoice_informations: Invoice informations
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
     organization:

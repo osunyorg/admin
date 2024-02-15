@@ -64,9 +64,25 @@ module ApplicationHelper
   def default_images_formats_accepted
     Rails.application.config.default_images_formats.join(', ')
   end
+  
+  def default_audio_formats_accepted
+    Rails.application.config.default_audio_formats.join(', ')
+  end
 
-  def default_images_formats_accepted_hint
-    t('default_images_hint', formats: default_images_formats_accepted)
+  def file_hint(filesize: number_to_human_size(Rails.application.config.default_file_max_size), formats: [])
+    if formats.empty?
+      t('file_hint_without_formats', filesize: filesize)
+    else
+      t('file_hint_with_formats', filesize: filesize, formats: formats)
+    end
+  end
+
+  def images_formats_accepted_hint(formats: default_images_formats_accepted)
+    file_hint(filesize: number_to_human_size(Rails.application.config.default_image_max_size), formats: formats)
+  end
+  
+  def audio_formats_accepted_hint(formats: default_audio_formats_accepted)
+    file_hint(formats: formats)
   end
 
 end

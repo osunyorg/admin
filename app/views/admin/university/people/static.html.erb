@@ -3,9 +3,9 @@ title: >-
   <%= @about.to_s %>
 linkTitle: >-
   <%= @about.to_s_alphabetical %>
-<%= render 'admin/application/static/breadcrumbs', 
+<%= render 'admin/application/static/breadcrumbs',
             pages: @website.special_page(Communication::Website::Page::Person).ancestors_and_self,
-            current: @about %>
+            current_title: @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
@@ -40,6 +40,8 @@ contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
 <% if @about.best_picture.attached? %>
 image: "<%= @about.best_picture.blob.id %>"
+credit: >-
+  <%= prepare_html_for_static @about.picture_credit %>
 <% end %>
 roles:
 <% if @about.author.for_website?(@website) %>

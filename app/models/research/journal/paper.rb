@@ -45,15 +45,15 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
-  include Sanitizable
-  include WithBlobs
   include Contentful
+  include Sanitizable
+  include Sluggable
+  include WithBlobs
   include WithCitations
   include WithGitFiles
   include WithPermalink
   include WithPosition
   include WithPublication
-  include WithSlug
   include WithUniversity
 
   has_summernote :bibliography

@@ -3,7 +3,7 @@ title: "<%= prepare_text_for_static @about.title %>"
 breadcrumb_title: "<%= prepare_text_for_static @about.best_title %>"
 <%= render 'admin/application/static/breadcrumbs', 
             pages: @about.ancestors,
-            current: @about %>
+            current_title: @about.best_title %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design' %>
 <% if @about.static_layout %>
@@ -34,5 +34,9 @@ children:
 <%= render 'admin/application/summary/static' %>
 header_text: >-
   <%= prepare_html_for_static @about.header_text %>
+header_cta:
+  display: <%= @about.header_cta %>
+  label: <%= prepare_text_for_static @about.header_cta_label %>
+  target: <%= @about.header_cta_url %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

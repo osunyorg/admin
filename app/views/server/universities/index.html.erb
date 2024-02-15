@@ -1,9 +1,12 @@
-<% content_for :title, "#{ @universities.count} #{University.model_name.human(count:  @universities.count).downcase}" %>
+<% content_for :title, "#{@universities.total_count} #{University.model_name.human(count: @universities.total_count).downcase}" %>
 
 <p>
-  <%= University.contributing.count %>
-  <%= t('university.contributing', count: University.contributing.count) %>
+  <%= t('server_admin.universities.contributing', count: University.contributing.count) %>
 </p>
+
+<%= render  'admin/application/filters',
+            current_path: server_universities_path,
+            filters: @filters if @filters.any? %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
@@ -23,26 +26,29 @@
         <tr>
           <td><%= link_to university, [:server, university] %></td>
           <td><%= link_to university.url, university.url, target: :_blank %></td>
-          <td><%= t university.is_really_a_university %></td>
-          <td><%= university.private ? University.human_attribute_name('private') : University.human_attribute_name('public') %></td>
-          <% if university.contribution_amount.blank? %>
+          <td><%= t(university.is_really_a_university?) %></td>
+          <td>
+            <%= university.private ? University.human_attribute_name('private') : 
+                                     University.human_attribute_name('public') %>
+          </td>
+          <% if university.contribution_amount.to_i.zero? %>
             <td></td>
             <td></td>
           <% else %>
             <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>">
-              <%= l university.invoice_date, format: "%d %B" if university.invoice_date %>
+              <%= l(university.invoice_date, format: "%d %B") if university.invoice_date %>
             </td>
             <td class="<%= university.invoice_proximity.blank? ? '' : "table-#{university.invoice_proximity}" %>">
-              <%= number_to_currency university.contribution_amount, precision: 0 %>
+              <%= number_to_currency university.contribution_amount, precision: 0, locale: :fr %>
             </td>
           <% end %>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= link_to t('edit'),
-                        edit_server_university_path(university),
+                        [:edit, :server, university],
                         class: button_classes %>
               <%= link_to t('delete'),
-                        server_university_path(university),
+                        [:server, university],
                         method: :delete,
                         data: { confirm: t('please_confirm') },
                         class: button_classes_danger %>
@@ -53,12 +59,14 @@
     </tbody>
     <tfoot>
       <tr>
-        <th class="text-start" colspan="5"><%= t('university.contributions_total') %></th>
-        <td class="text-start" colspan="2"><%= number_to_currency University.sum(:contribution_amount), precision: 0 %></td>
+        <th class="text-start" colspan="5"><%= t('server_admin.universities.contributions_total') %></th>
+        <td class="text-start" colspan="2"><%= number_to_currency University.sum(:contribution_amount), precision: 0, locale: :fr %></td>
       </tr>
     </tfoot>
   </table>
 </div>
+
+<%= paginate @universities, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'), new_server_university_path, class: button_classes %>

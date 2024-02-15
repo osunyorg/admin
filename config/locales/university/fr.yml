@@ -29,8 +29,8 @@ fr:
         token: Jeton secret
       university/organization:
         address: Adresse
-        address_name: Nom de l'adresse
         address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
         categories: Catégories
         city: Ville
         country: Pays
@@ -92,6 +92,7 @@ fr:
         phone_personal: Téléphone personnel
         phone_professional: Téléphone professionnel
         picture: Photo de profil
+        picture_credit: Crédit
         research_journal_papers: Papiers
         research_laboratories: Laboratoires de recherche
         researcher: Chercheur·e
@@ -212,13 +213,9 @@ fr:
       regenerate_token: Regénérer le jeton
       token_display_notice: Assurez-vous de stocker votre jeton secret de manière sécurisée. Vous ne pourrez pas le revoir !
       token_successfully_regenerated: Le jeton a bien été regénéré.
-    contributing:
-      one: université contributrice
-      other: universités contributrices
-    contributions_total: Contributions (total)
     description:
       text: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions “collèges”, “facultés”, “instituts”, “départements”, “centres”, “sections”, “unités” ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
-      source: Wikipedia
+      source: Wikipédia
       parts:
         person:
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
@@ -230,7 +227,6 @@ fr:
           description: Personne utilisant Osuny, dotée d'un compte authentifié
           description_non_university: Personne utilisant Osuny, dotée d'un compte authentifié
     internal_key: Clé interne
-    invoice_informations: Données de facturation
     manage_cohorts: Gérer les promotions
     manage_experiences: Gérer les expériences professionnelles
     organization:

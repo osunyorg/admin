@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_12_105952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -54,6 +54,40 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "administration_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.text "summary"
+    t.string "address"
+    t.string "zipcode"
+    t.string "city"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "phone"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.string "address_additional"
+    t.string "address_name"
+    t.index ["university_id"], name: "index_administration_locations_on_university_id"
+  end
+
+  create_table "administration_locations_education_programs", id: false, force: :cascade do |t|
+    t.uuid "education_program_id", null: false
+    t.uuid "administration_location_id", null: false
+    t.index ["administration_location_id", "education_program_id"], name: "index_program_location"
+    t.index ["education_program_id", "administration_location_id"], name: "index_location_program"
+  end
+
+  create_table "administration_locations_education_schools", id: false, force: :cascade do |t|
+    t.uuid "education_school_id", null: false
+    t.uuid "administration_location_id", null: false
+    t.index ["administration_location_id", "education_school_id"], name: "index_school_location"
+    t.index ["education_school_id", "administration_location_id"], name: "index_location_school"
   end
 
   create_table "administration_qualiopi_criterions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -248,9 +282,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "parent_id"
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_categories_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_categories_on_original_id"
+    t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
@@ -274,6 +310,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "subtitle"
+    t.string "time_zone"
+    t.jsonb "add_to_calendar_urls"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
@@ -321,6 +359,29 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.string "previous_sha"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
+  end
+
+  create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "university_id", null: false
+    t.string "name"
+    t.string "social_email"
+    t.string "social_mastodon"
+    t.string "social_peertube"
+    t.string "social_x"
+    t.string "social_github"
+    t.string "social_linkedin"
+    t.string "social_youtube"
+    t.string "social_vimeo"
+    t.string "social_instagram"
+    t.string "social_facebook"
+    t.string "social_tiktok"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_ed4630e334"
+    t.index ["language_id"], name: "index_communication_website_localizations_on_language_id"
+    t.index ["university_id"], name: "index_communication_website_localizations_on_university_id"
   end
 
   create_table "communication_website_menu_items", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -385,6 +446,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.uuid "original_id"
     t.string "migration_identifier"
     t.datetime "published_at"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_url"
+    t.string "header_cta_label"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_pages_on_language_id"
     t.index ["original_id"], name: "index_communication_website_pages_on_original_id"
@@ -497,6 +561,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.string "deuxfleurs_identifier"
     t.string "social_email"
     t.string "social_github"
+    t.string "default_time_zone"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -618,6 +683,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.boolean "apprenticeship"
     t.string "registration_url"
     t.text "summary"
+    t.text "pricing_continuing"
+    t.text "pricing_apprenticeship"
+    t.text "pricing_initial"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["slug"], name: "index_education_programs_on_slug"
@@ -709,47 +777,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
   end
 
   create_table "research_hal_authors_publications", id: false, force: :cascade do |t|
+    t.uuid "research_publication_id", null: false
     t.uuid "research_hal_author_id", null: false
-    t.uuid "research_hal_publication_id", null: false
-    t.index ["research_hal_author_id", "research_hal_publication_id"], name: "hal_author_publication"
-    t.index ["research_hal_publication_id", "research_hal_author_id"], name: "hal_publication_author"
+    t.index ["research_hal_author_id", "research_publication_id"], name: "hal_publication_author"
+    t.index ["research_publication_id", "research_hal_author_id"], name: "hal_author_publication"
   end
 
   create_table "research_hal_authors_university_people", id: false, force: :cascade do |t|
+    t.uuid "university_person_id", null: false
     t.uuid "research_hal_author_id", null: false
-    t.uuid "university_person_id", null: false
-    t.index ["research_hal_author_id", "university_person_id"], name: "hal_author_person"
-    t.index ["university_person_id", "research_hal_author_id"], name: "hal_person_author"
-  end
-
-  create_table "research_hal_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "docid"
-    t.jsonb "data"
-    t.string "title"
-    t.string "url"
-    t.string "ref"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "hal_url"
-    t.date "publication_date"
-    t.string "doi"
-    t.string "slug"
-    t.text "citation_full"
-    t.boolean "open_access"
-    t.text "abstract"
-    t.string "journal_title"
-    t.text "file"
-    t.text "authors_list"
-    t.json "authors_citeproc"
-    t.index ["docid"], name: "index_research_hal_publications_on_docid"
-    t.index ["slug"], name: "index_research_hal_publications_on_slug"
-  end
-
-  create_table "research_hal_publications_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_hal_publication_id", null: false
-    t.uuid "university_person_id", null: false
-    t.index ["research_hal_publication_id", "university_person_id"], name: "index_publication_person"
-    t.index ["university_person_id", "research_hal_publication_id"], name: "index_person_publication"
+    t.index ["research_hal_author_id", "university_person_id"], name: "hal_person_author"
+    t.index ["university_person_id", "research_hal_author_id"], name: "hal_author_person"
   end
 
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -843,14 +881,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address_name"
+    t.string "address_additional"
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
   create_table "research_laboratories_university_people", id: false, force: :cascade do |t|
-    t.uuid "research_laboratory_id", null: false
     t.uuid "university_person_id", null: false
-    t.index ["research_laboratory_id", "university_person_id"], name: "laboratory_person"
-    t.index ["university_person_id", "research_laboratory_id"], name: "person_laboratory"
+    t.uuid "research_laboratory_id", null: false
+    t.index ["research_laboratory_id", "university_person_id"], name: "person_laboratory"
+    t.index ["university_person_id", "research_laboratory_id"], name: "laboratory_person"
   end
 
   create_table "research_laboratory_axes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -865,6 +905,37 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.text "text"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
+  end
+
+  create_table "research_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "hal_docid"
+    t.jsonb "data"
+    t.string "title"
+    t.string "url"
+    t.string "ref"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "hal_url"
+    t.date "publication_date"
+    t.string "doi"
+    t.string "slug"
+    t.text "citation_full"
+    t.boolean "open_access"
+    t.text "abstract"
+    t.string "journal_title"
+    t.text "file"
+    t.text "authors_list"
+    t.json "authors_citeproc"
+    t.integer "source", default: 0
+    t.index ["hal_docid"], name: "index_research_publications_on_hal_docid"
+    t.index ["slug"], name: "index_research_publications_on_slug"
+  end
+
+  create_table "research_publications_university_people", id: false, force: :cascade do |t|
+    t.uuid "university_person_id", null: false
+    t.uuid "research_publication_id", null: false
+    t.index ["research_publication_id", "university_person_id"], name: "index_person_publication"
+    t.index ["university_person_id", "research_publication_id"], name: "index_publication_person"
   end
 
   create_table "research_theses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1010,6 +1081,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
     t.string "mastodon"
     t.uuid "language_id", null: false
     t.uuid "original_id"
+    t.text "picture_credit"
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["slug"], name: "index_university_people_on_slug"
@@ -1131,6 +1203,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "administration_locations", "universities"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
   add_foreign_key "communication_block_headings", "communication_block_headings", column: "parent_id"
   add_foreign_key "communication_block_headings", "universities"
@@ -1155,6 +1228,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "original_id"
+  add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
   add_foreign_key "communication_website_agenda_categories", "languages"
   add_foreign_key "communication_website_agenda_categories", "universities"
@@ -1166,6 +1240,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_094553) do
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_localizations", "communication_websites"
+  add_foreign_key "communication_website_localizations", "languages"
+  add_foreign_key "communication_website_localizations", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"

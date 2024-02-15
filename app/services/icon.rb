@@ -5,6 +5,7 @@ class Icon
   COMMUNICATION_EXTRANET = 'fas fa-project-diagram'
   COMMUNICATION_WEBSITE = 'fas fa-sitemap'
   COMMUNICATION_WEBSITE_HOME = 'fas fa-home'
+  COMMUNICATION_WEBSITE_LOCALIZATIONS = 'fas fa-globe'
   COMMUNICATION_WEBSITE_POST = 'fas fa-newspaper'
   COMMUNICATION_WEBSITE_PAGE = 'fas fa-file'
   COMMUNICATION_WEBSITE_PAGES = 'fas fa-sitemap'
@@ -42,10 +43,10 @@ class Icon
   RESEARCH_WATCH = 'fas fa-eye'
   UNIVERSITY_PERSON_RESEARCHER = RESEARCH_RESEARCHER
   RESEARCH_THESIS = RESEARCH_THESE
-  RESEARCH_HAL_PUBLICATION = RESEARCH_PUBLICATION
   RESEARCH_HAL = RESEARCH_PUBLICATION
 
   ADMINISTRATION_CAMPUS = 'fas fa-map-marker-alt'
+  ADMINISTRATION_LOCATION = 'fas fa-map-marker-alt'
   ADMINISTRATION_ADMISSIONS = 'fas fa-door-open'
   ADMINISTRATION_INTERNSHIPS = 'fas fa-hands-helping'
   ADMINISTRATION_STATISTICS = 'fas fa-chart-bar'
@@ -60,7 +61,7 @@ class Icon
 
   OSUNY_USER = 'fas fa-user'
   USER = OSUNY_USER
-  
+
   ADD = 'fas fa-plus'
   ARROW_RIGHT = 'fas fa-arrow-right'
   A11Y = 'fas fa-universal-access'

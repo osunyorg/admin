@@ -53,6 +53,7 @@ fr:
         initial: Formation initiale
         is_published: Publiée
         is_draft: Brouillon
+        locations: Campus
         main_information: Informations essentielles
         name: Nom
         objectives: Objectifs
@@ -61,7 +62,10 @@ fr:
         pedagogy: Méthodes mobilisées
         prerequisites: Prérequis
         presentation: En bref
-        pricing: Tarifs
+        pricing: Coûts
+        pricing_initial: Coûts de la formation initiale
+        pricing_continuing: Coûts de la formation continue
+        pricing_apprenticeship: Coûts de l'apprentissage
         published: Publiée ?
         registration: Modalités et délais d’accès
         registration_url: Lien d'inscription (URL)
@@ -77,6 +81,7 @@ fr:
         administrators: Équipe administrative
         city: Ville
         country: Pays
+        locations: Campus
         name: Nom
         phone: Téléphone
         programs: Formations dispensées
