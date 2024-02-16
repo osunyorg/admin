@@ -3,8 +3,7 @@ special_page = @website.special_page(Communication::Website::Page::ResearchPubli
 pages = special_page.ancestors_and_self if special_page
 %>
 ---
-title: >-
-  <%= @about.title %>
+<%= render 'admin/application/static/title' %>
 date: "<%= @about.publication_date&.iso8601 %>"
 <%= render 'admin/application/static/breadcrumbs',
             pages: pages,
