@@ -4,7 +4,8 @@ class Static::Html < Static::Default
     unless @prepared
       @prepared = @text.to_s.strip.dup
       @prepared.gsub! "\r", ''
-      @prepared.gsub! "\n", ''
+      # if no whitespace in the next line html in static won't be on one line
+      @prepared.gsub! "\n", ' '
       @prepared = clean_empty_paragraphs_at_beginning_and_end @prepared
       @prepared = @prepared.ortho(locale: locale)
       # TODO ça ne doit plus être utile depuis un siècle
