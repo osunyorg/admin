@@ -1,6 +1,5 @@
 ---
-title: >-
-  <%= @about.to_s %>
+<%= render 'admin/application/static/title' %>
 linkTitle: >-
   <%= @about.to_s_alphabetical %>
 <%= render 'admin/application/static/breadcrumbs',
@@ -11,15 +10,15 @@ linkTitle: >-
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/i18n/static' %>
-first_name: >
+first_name: >-
   <%= @about.first_name %>
-last_name: >
+last_name: >-
   <%= @about.last_name %>
-phone: >
+phone: >-
   <%= @about.phone_mobile %>
-email: >
+email: >-
   <%= @about.email %>
-twitter: >
+twitter: >-
   <%= @about.twitter %>
 linkedin: >-
   <%= @about.linkedin %>
@@ -64,9 +63,9 @@ teachings:
   - description: >
       <%= involvement.description %>
     program:
-      title: >
+      title: >-
         <%= target.to_s %>
-      url: >
+      url: >-
         <%= target.current_permalink_in_website(@website)&.path %>
 <% end %>
 <% end %>
@@ -77,9 +76,9 @@ administrative_missions:
   - description: >
       <%= role.to_s %>
     target:
-      title: >
+      title: >-
         <%= target.to_s %>
-      url: >
+      url: >-
         <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
 <% end %>
 <% end %>

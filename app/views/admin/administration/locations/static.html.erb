@@ -1,7 +1,6 @@
 ---
-title: >
-  <%= prepare_text_for_static @about.name %>
-<%= render 'admin/application/static/permalink' if @website %>
+<%= render 'admin/application/static/title' %>
+<%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <% if @website %>
 <%= render 'admin/application/static/breadcrumbs', 
