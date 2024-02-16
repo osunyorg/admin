@@ -49,7 +49,9 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def empty?
-    selected_events.none? && no_event_message.blank? && mode != 'categories'
+    selected_events.none? && 
+    no_event_message.blank? && 
+    mode != 'categories'
   end
 
   protected

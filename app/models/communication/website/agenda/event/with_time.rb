@@ -6,10 +6,22 @@ module Communication::Website::Agenda::Event::WithTime
     STATUS_CURRENT = 'current'
     STATUS_ARCHIVE = 'archive'
 
-    scope :future, -> { where('from_day > :today', today: Date.today).ordered_asc }
-    scope :future_or_current, -> { where('from_day >= :today', today: Date.today).ordered_asc }
-    scope :current, -> { where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today).ordered_asc }
-    scope :archive, -> { where('to_day < :today', today: Date.today).ordered_desc }
+    scope :future, -> { 
+      where('from_day > :today', today: Date.today)
+      .ordered_asc 
+    }
+    scope :current, -> { 
+      where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today)
+      .ordered_asc
+    }
+    scope :future_or_current, -> { 
+      future.or(current)
+      .ordered_asc 
+    }
+    scope :archive, -> { 
+      where('to_day < :today', today: Date.today)
+      .ordered_desc 
+    }
     scope :past, -> { archive }
 
     before_validation :set_time_zone
