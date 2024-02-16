@@ -40,8 +40,10 @@ fr:
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprentissage
+        bodyclass: Classe CSS spécifique
         capacity: Capacité
         contacts: Contacts
+        content: Contenus de la formation
         continuing: Formation continue
         diploma: Diplôme
         duration: Durée
@@ -69,13 +71,13 @@ fr:
         published: Publiée ?
         registration: Modalités et délais d’accès
         registration_url: Lien d'inscription (URL)
+        results: Indicateurs de résultats
         roles: Rôles
         schools: Écoles proposant cette formation
         short_name: Nom abrégé
         teachers: Enseignant·e·s
         team: Équipe
-        content: Contenus de la formation
-        results: Indicateurs de résultats
+        url: Site Web
       education/school:
         address: Adresse
         administrators: Équipe administrative

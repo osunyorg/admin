@@ -109,7 +109,9 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def program_params
     params.require(:education_program).permit(
-      :name, :short_name, :slug, :capacity, :continuing, :initial, :apprenticeship, :meta_description, :summary, :published,
+      :name, :short_name, :slug, :url, :bodyclass,
+      :meta_description, :summary, :published,
+      :capacity, :continuing, :initial, :apprenticeship,       
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
       :evaluation, :accessibility, :contacts, :opportunities, :results, :other,  :main_information,
