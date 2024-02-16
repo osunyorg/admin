@@ -1,24 +1,49 @@
 <% content_for :title, @location %>
 
+
 <div class="row">
-  <div class="col-lg-4">
-    <%= osuny_panel t('metadata') do %>
-      <%= osuny_label Education::School.human_attribute_name('address') %>
-      <p>
-        <%= @location.address %><br>
-        <%= @location.zipcode %> <%= @location.city %><br>
-        <%= @location.country %>
-      </p>
-      <% if @location.phone.present? %>
-        <%= osuny_label Education::School.human_attribute_name('phone') %>
-        <p><%= @location.phone %></p>
-      <% end %>
-      <% if @location.url.present? %>
-        <%= osuny_label Administration::Location.human_attribute_name('url') %>
-        <p><%= link_to @location.url, @location.url, target: :_blank %></p>
-      <% end %>
+  <div class="col-lg-7">
+    <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
+      <p class="lead mb-1"><%= @location.name %></p>
+      <p><%= @location.summary %></p>
     <% end %>
   </div>
+  <div class="offset-lg-1 col-lg-4">
+    <%= render 'admin/application/featured_image/show', about: @location, small: true %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <%= osuny_label Education::School.human_attribute_name('address') %>
+    <p>
+      <% if @location.address_name.present? %>
+      <%= @location.address_name %><br>
+      <% end %>
+      <% if @location.address.present? %>
+        <%= @location.address %><br>
+      <% end %>
+      <% if @location.address_additional.present? %>
+        <%= @location.address_additional %><br>
+      <% end %>
+      <%= @location.zipcode %> <%= @location.city %> <%= @location.country %>
+    </p>
+  </div>
+  <% if @location.phone.present? %>
+    <div class="col-lg-4">
+      <%= osuny_label Education::School.human_attribute_name('phone') %>
+      <p><%= @location.phone %></p>
+    </div>
+  <% end %>
+  <% if @location.url.present? %>
+    <div class="col-lg-4">
+      <%= osuny_label Administration::Location.human_attribute_name('url') %>
+      <p><%= link_to @location.url, @location.url, target: :_blank %></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="row mt-5">
   <% if @location.schools.any? %>
     <div class="col-lg-4">
       <%= osuny_panel Administration::Location.human_attribute_name('schools') do %>

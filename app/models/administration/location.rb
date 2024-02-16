@@ -2,23 +2,25 @@
 #
 # Table name: administration_locations
 #
-#  id                 :uuid             not null, primary key
-#  address            :string
-#  address_additional :string
-#  address_name       :string
-#  city               :string
-#  country            :string
-#  latitude           :float
-#  longitude          :float
-#  name               :string
-#  phone              :string
-#  slug               :string
-#  summary            :text
-#  url                :string
-#  zipcode            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  university_id      :uuid             not null, indexed
+#  id                    :uuid             not null, primary key
+#  address               :string
+#  address_additional    :string
+#  address_name          :string
+#  city                  :string
+#  country               :string
+#  featured_image_alt    :text
+#  featured_image_credit :text
+#  latitude              :float
+#  longitude             :float
+#  name                  :string
+#  phone                 :string
+#  slug                  :string
+#  summary               :text
+#  url                   :string
+#  zipcode               :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
@@ -36,6 +38,7 @@ class Administration::Location < ApplicationRecord
   include WebsitesLinkable
   include WithBlobs
   include WithCountry
+  include WithFeaturedImage
   include WithGitFiles
   include WithGeolocation
   include WithPermalink
@@ -57,6 +60,7 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
+  has_one_attached_deletable :featured_image
 
   scope :ordered, -> { order(:name) }
 
