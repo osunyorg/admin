@@ -5,6 +5,7 @@
 #  id                     :uuid             not null, primary key
 #  accessibility          :text
 #  apprenticeship         :boolean
+#  bodyclass              :string
 #  capacity               :integer
 #  contacts               :text
 #  content                :text
@@ -35,6 +36,7 @@
 #  short_name             :string
 #  slug                   :string           indexed
 #  summary                :text
+#  url                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  diploma_id             :uuid             indexed

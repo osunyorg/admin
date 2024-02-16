@@ -16,7 +16,10 @@ administrator_involvements = @about.involvements_through_roles
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
-registration_url: >
+bodyclass: <%= @about.bodyclass %>
+url: >-
+  <%= @about.url %>
+registration_url: >-
   <%= @about.registration_url %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
@@ -85,7 +88,7 @@ apprenticeship: <%= @about.apprenticeship %>
   :registration,
   :results
 ].each do |property| %>
-<%= property.to_s %>: >
+<%= property.to_s %>: >-
   <%= prepare_html_for_static @about.send("best_#{property}") %>
 <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
