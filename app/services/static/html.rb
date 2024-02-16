@@ -9,6 +9,7 @@ class Static::Html < Static::Default
       @prepared = @prepared.ortho(locale: locale)
       # TODO ça ne doit plus être utile depuis un siècle
       @prepared.gsub! "/rails/active_storage", "#{@university.url}/rails/active_storage"      
+      @prepared.gsub! "\n", ''
       @prepared = sanitize @prepared
     end
     @prepared
