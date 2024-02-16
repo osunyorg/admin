@@ -140,7 +140,7 @@ class Communication::Website::Page < ApplicationRecord
     unless @best_bodyclass
       @best_bodyclass = bodyclass
       ancestors.each do |ancestor|
-        @best_bodyclass = " ancestor-#{ancestor.bodyclass}" if ancestor.bodyclass.present?
+        @best_bodyclass += " ancestor-#{ancestor.bodyclass}" if ancestor.bodyclass.present?
       end
       @best_bodyclass.strip!
     end
