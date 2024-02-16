@@ -60,8 +60,6 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
-  has_one_attached_deletable :featured_image
-
   scope :ordered, -> { order(:name) }
 
   validates :name, :address, :city, :zipcode, :country, presence: true

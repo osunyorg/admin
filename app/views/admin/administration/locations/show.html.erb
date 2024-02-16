@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
+    <%= osuny_panel Administration::Location.human_attribute_name(:name), small: true do %>
       <p class="lead mb-1"><%= @location.name %></p>
       <p><%= @location.summary %></p>
     <% end %>
@@ -15,7 +15,7 @@
 
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_label Education::School.human_attribute_name('address') %>
+    <%= osuny_label Administration::Location.human_attribute_name('address') %>
     <p>
       <% if @location.address_name.present? %>
       <%= @location.address_name %><br>
@@ -31,7 +31,7 @@
   </div>
   <% if @location.phone.present? %>
     <div class="col-lg-4">
-      <%= osuny_label Education::School.human_attribute_name('phone') %>
+      <%= osuny_label Administration::Location.human_attribute_name('phone') %>
       <p><%= @location.phone %></p>
     </div>
   <% end %>
