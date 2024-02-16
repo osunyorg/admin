@@ -138,11 +138,11 @@ class Communication::Website::Page < ApplicationRecord
 
   def best_bodyclass
     unless @best_bodyclass
-      @best_bodyclass = bodyclass
+      bodyclasses = [bodyclass]
       ancestors.each do |ancestor|
-        @best_bodyclass += " ancestor-#{ancestor.bodyclass}" if ancestor.bodyclass.present?
+        bodyclasses << "ancestor-#{ancestor.bodyclass}" if ancestor.bodyclass.present?
       end
-      @best_bodyclass.strip!
+      @best_bodyclass = bodyclasses.compact_blank.join(' ').strip
     end
     @best_bodyclass
   end
