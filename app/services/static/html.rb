@@ -8,6 +8,7 @@ class Static::Html < Static::Default
       @prepared = clean_empty_paragraphs_at_beginning_and_end @prepared
       @prepared.gsub! "\n", ' '
       @prepared = @prepared.ortho(locale: locale)
+      # TODO ça ne doit plus être utile depuis un siècle
       @prepared.gsub! "/rails/active_storage", "#{@university.url}/rails/active_storage"      
       @prepared = sanitize @prepared
     end
