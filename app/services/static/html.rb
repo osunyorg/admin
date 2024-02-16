@@ -32,7 +32,8 @@ class Static::Html < Static::Default
       end
     end
     
-    ps.slice(first_text .. last_text).to_html
+    new_text = ps.slice(first_text .. last_text)
+    new_text.nil? ? '' : new_text.to_html
   end
 
 end
