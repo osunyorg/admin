@@ -4,7 +4,7 @@ class Static::Html < Static::Default
     unless @prepared
       @prepared = @text.to_s.strip.dup
       @prepared.gsub! "\r", ''
-      @prepared.gsub! "\n", ' '
+      @prepared.gsub! "\n", ''
       @prepared = clean_empty_paragraphs_at_beginning_and_end @prepared
       @prepared.gsub! "\n", ' '
       @prepared = @prepared.ortho(locale: locale)
@@ -26,7 +26,7 @@ class Static::Html < Static::Default
     last_text = 0
     
     ps.each_with_index do |p, i|
-      if not p.at_xpath('child::text()').text.strip.empty?  #then found some text
+      unless p.at_xpath('child::text()').nil? || p.at_xpath('child::text()').text.strip.empty?  #then found some text
         first_text = i if first_text == -1
         last_text = i 
       end
