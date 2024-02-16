@@ -23,13 +23,11 @@ class Static::Html < Static::Default
 
     doc = Nokogiri::HTML::DocumentFragment.parse(text)
 
-    return text unless doc.children.any?
-
-    while(doc.children.first.name == 'p' && doc.children.first.text.strip == '')
+    while(doc.children.any? && doc.children.first.name == 'p' && doc.children.first.text.strip == '')
       doc.children.first.remove
     end
 
-    while(doc.children.last.name == 'p' && doc.children.last.text.strip == '')
+    while(doc.children.any? && doc.children.last.name == 'p' && doc.children.last.text.strip == '')
       doc.children.last.remove
     end
 
