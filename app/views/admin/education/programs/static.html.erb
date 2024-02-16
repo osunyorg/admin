@@ -16,7 +16,8 @@ administrator_involvements = @about.involvements_through_roles
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
-bodyclass: <%= @about.bodyclass %>
+bodyclass: >-
+  <%= @about.bodyclass %>
 url: >-
   <%= @about.url %>
 registration_url: >-

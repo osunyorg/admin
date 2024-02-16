@@ -137,8 +137,14 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def best_bodyclass
-    return bodyclass if bodyclass.present?
-    parent&.best_bodyclass unless is_home? || parent&.is_home?
+    unless @best_bodyclass
+      @best_bodyclass = bodyclass
+      ancestors.each do |ancestor|
+        @best_bodyclass = " ancestor-#{ancestor.bodyclass}" if ancestor.bodyclass.present?
+      end
+      @best_bodyclass.strip!
+    end
+    @best_bodyclass
   end
 
   def siblings
