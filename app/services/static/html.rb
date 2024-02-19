@@ -10,7 +10,7 @@ class Static::Html < Static::Default
       @prepared = @prepared.ortho(locale: locale)
       # TODO ça ne doit plus être utile depuis un siècle
       @prepared.gsub! "/rails/active_storage", "#{@university.url}/rails/active_storage"  
-      # TODO: I think the next gsub is useless (PAB)    
+      # TODO: clean_empty_paragraphs_at_beginning_and_end re-send \n  (PAB)    
       @prepared.gsub! "\n", ''
       @prepared = sanitize @prepared
     end
