@@ -39,7 +39,7 @@ fr:
         private: Privée
         public: Publique
         title: Type d'université
-      users_count: Utilisateur·rice·s (sauf admins serveurs)
+      users_count: Utilisateur·rice·s (sauf admins serveur)
     websites:
       admin: Admin
       autoupdate_theme:
