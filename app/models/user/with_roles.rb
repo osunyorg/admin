@@ -26,7 +26,6 @@ module User::WithRoles
                             association_foreign_key: :communication_website_id
 
     scope :for_role, -> (role) { where(role: role) }
-    scope :except_server_admins, -> { where.not(role: :server_admin) }
 
     before_validation :set_default_role, on: :create
     before_validation :check_modifier_role

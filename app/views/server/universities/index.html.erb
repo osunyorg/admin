@@ -30,7 +30,7 @@
             <%= university.private ? University.human_attribute_name('private') : 
                                      University.human_attribute_name('public') %>
           </td>
-          <td><%= link_to university.users.except_server_admins.count, "#{university.url}/admin/users", target: :_blank %></td>
+          <td><%= link_to university.users.not_server_admin.count, "#{university.url}/admin/users", target: :_blank %></td>
           <% if university.contribution_amount.to_i.zero? %>
             <td></td>
             <td></td>
