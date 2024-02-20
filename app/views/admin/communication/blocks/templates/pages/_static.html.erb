@@ -5,8 +5,7 @@ if block.template.page
       page: 
         path: "<%= page.path %>"
         slug: "<%= page.slug %>"
-        file: "<%= page.git_path(@website) %>"
-        file_relative: "<%= page.git_path_relative %>"
+        file: "<%= page.git_path_relative %>"
 <% end %>
       show_main_description: <%= block.template.show_main_description %>
       show_descriptions: <%= block.template.show_description %>
@@ -16,7 +15,6 @@ if block.template.page
 <% block.template.selected_pages.each do |element| %>
         - path: "<%= element.path %>"
           slug: "<%= element.slug %>"
-          file: "<%= element.git_path(@website) %>"
-          file_relative: "<%= element.git_path_relative %>"
+          file: "<%= element.git_path_relative %>"
           external: false
 <% end %>
