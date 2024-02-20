@@ -24,6 +24,10 @@ module Communication::Website::Page::WithPath
     current_git_path
   end
 
+  def git_path_relative
+    "pages/#{slug_with_ancestors}/_index.html".gsub('//', '/')
+  end
+
   def url
     return unless published
     return if website.url.blank?
@@ -35,7 +39,7 @@ module Communication::Website::Page::WithPath
   protected
 
   def current_git_path
-    @current_git_path ||= "#{git_path_prefix}pages/#{slug_with_ancestors}/_index.html"
+    @current_git_path ||= git_path_prefix + git_path_relative
   end
 
   def git_path_prefix
