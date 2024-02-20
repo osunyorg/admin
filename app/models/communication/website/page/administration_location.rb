@@ -22,10 +22,7 @@ class Communication::Website::Page::AdministrationLocation < Communication::Webs
     website.administration_locations
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}locations/_index.html"
+  def git_path_relative
+    'locations/_index.html'
   end
-
 end
