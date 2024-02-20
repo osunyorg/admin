@@ -23,10 +23,7 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
     website.education_diplomas
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}diplomas/_index.html"
+  def git_path_relative
+    'diplomas/_index.html'
   end
-
 end

@@ -24,8 +24,10 @@ module Communication::Website::Page::WithPath
     current_git_path
   end
 
+  # pages/_index.html
+  # pages/page-de-test/_index.html
   def git_path_relative
-    "pages/#{slug_with_ancestors}/_index.html".gsub('//', '/')
+    ['pages', slug_with_ancestors, '_index.html'].compact_blank.join('/')
   end
 
   def url
