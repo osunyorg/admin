@@ -83,6 +83,10 @@ class Administration::Location < ApplicationRecord
     []
   end
 
+  def explicit_blob_ids
+    super.concat [featured_image&.blob_id]
+  end
+
   # WebsitesLinkable
 
   def has_administrators?
