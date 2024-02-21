@@ -129,6 +129,10 @@ en:
               credit:
                 label: Credit
                 placeholder: Enter image's credit here
+          campus:
+            description: A selection of locations on a campus.
+            edit:
+              add: Add a location
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
             layouts:
@@ -568,6 +572,7 @@ en:
         template_kind:
           agenda: Agenda
           call_to_action: Call to action
+          campus: Campus
           chapter: Chapter
           contact: Contact
           datatable: Table

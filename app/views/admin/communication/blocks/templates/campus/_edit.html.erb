@@ -1,0 +1,20 @@
+<draggable :list="data.elements" handle=".dragHandle" class="mb-3 <%= if_appstack 'list-group' %>">
+  <div v-for="(element, index) in data.elements" class="d-flex draggable-item <%= if_appstack 'list-group-item' %>">
+    <div>
+      <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+        <i class="<%= Icon::DRAG %> handle"></i>
+      </a>
+    </div>
+    <div class="flex-fill mb-n3">
+      <%= block_component_edit block, :id, template: @element, label: false %>
+    </div>
+    <div>
+      <a  class="btn btn-sm text-danger ms-3"
+          v-on:click="data.elements.splice(data.elements.indexOf(page), 1)"
+          title="Supprimer">
+          <i class="<%= Icon::DELETE %>"></i>
+      </a>
+    </div>
+  </div>
+</draggable>
+<%= block_component_add_element block, t('.add') %>

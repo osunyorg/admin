@@ -1,0 +1,6 @@
+      layout: <%= block.template.layout %>
+      programs:
+<% block.template.elements.each do |element| %>
+<% next unless element.program %>
+        - path: "<%= element.program.path %>"
+<% end %>
