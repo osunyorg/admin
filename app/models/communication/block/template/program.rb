@@ -1,6 +1,7 @@
 class Communication::Block::Template::Program < Communication::Block::Template::Base
 
   has_elements
+  has_layouts [:list, :grid]
 
   def dependencies
     selected_programs

@@ -476,6 +476,13 @@ fr:
             description: Une sélection de formations.
             edit:
               add: Ajouter une formation
+            layouts:
+              grid:
+                label: Grille
+                description: Les formations sont présentées en grille, avec les images toutes de la même taille.
+              list:
+                label: Liste
+                description: Une liste de formations, les unes au dessus des autres.
           sound:
             description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
             edit:
