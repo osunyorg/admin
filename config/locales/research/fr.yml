@@ -94,6 +94,7 @@ fr:
         journal_title: Dans...
         open_access: Accès ouvert (open access)
         publication_date: Date de publication
+        slug: Identifiant
         title: Titre
         url: URL
         urls: Adresses Web
@@ -113,20 +114,20 @@ fr:
           hal: HAL
           osuny: Osuny
   research/hal:
-    description: 
+    description:
       text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
       source: HAL.science
   research:
     citations:
       apa:
         label: APA
-      mla: 
+      mla:
         label: MLA
-      chicago: 
+      chicago:
         label: Chicago
-      harvard: 
+      harvard:
         label: Harvard
-      iso690: 
+      iso690:
         label: ISO 690
     description:
       text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.

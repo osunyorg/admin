@@ -9,14 +9,17 @@
       <%= f.input :ref, as: :text %>
       <%= f.input :authors_list, as: :string %>
       <%= f.input :url %>
-      </div>
-      <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4">
+      <%= render  "admin/application/slug/form",
+                  f: f,
+                  source: '#research_publication_title' %>
       <%= f.input :publication_date, html5: true %>
       <%= f.input :doi %>
       <%= f.input :journal_title %>
       <%= f.input :open_access %>
-      <%= f.association :researchers, 
-                        as: :check_boxes, 
+      <%= f.association :researchers,
+                        as: :check_boxes,
                         collection: current_university.university_people
                                                       .researchers
                                                       .for_language(current_language)
