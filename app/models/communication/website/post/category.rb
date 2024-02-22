@@ -45,6 +45,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   include Contentful
   include Sanitizable
   include Sluggable # We override slug_unavailable? method
+  include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
@@ -72,8 +73,6 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   validates :name, presence: true
 
-  after_save :update_children_paths, if: :saved_change_to_path?
-
   def to_s
     "#{name}"
   end
@@ -99,13 +98,6 @@ class Communication::Website::Post::Category < ApplicationRecord
     siblings +
     website.menus +
     abouts_with_post_block
-  end
-
-  def update_children_paths
-    children.each do |child|
-      child.update_column :path, child.generated_path
-      child.update_children_paths
-    end
   end
 
   def siblings
