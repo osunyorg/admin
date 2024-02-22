@@ -1,11 +1,6 @@
 module Communication::Website::Page::WithPath
   extend ActiveSupport::Concern
 
-  included do
-    before_validation :set_slug
-    validate :validate_slug
-  end
-
   def path
     path = ''
     if website.languages.many?
@@ -15,6 +10,7 @@ module Communication::Website::Page::WithPath
     path.gsub(/\/+/, '/')
   end
 
+  # FIXME @arnaud : Should it be moved to Sluggable? To discuss
   def slug_with_ancestors
     (ancestors.map(&:slug) << slug).reject(&:blank?).join('/')
   end
@@ -46,41 +42,6 @@ module Communication::Website::Page::WithPath
 
   def git_path_prefix
     @git_path_prefix ||= git_path_content_prefix(website)
-  end
-
-  def set_slug
-    self.slug = to_s.parameterize if self.slug.blank?
-    current_slug = self.slug
-    n = 0
-    while slug_unavailable?(self.slug)
-      n += 1
-      self.slug = [current_slug, n].join('-')
-    end
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
-
-  def validate_slug
-    slug_must_be_present
-    slug_must_be_unique
-    slug_must_have_proper_format
-  end
-
-  def slug_must_be_present
-    errors.add(:slug, :absent) if slug.blank?
-  end
-
-  def slug_must_be_unique
-    errors.add(:slug, :taken) if slug_unavailable?(slug)
-  end
-
-  def slug_must_have_proper_format
-    errors.add(:slug, I18n.t('slug_error')) unless /\A[a-z0-9\-]+\z/.match?(slug)
   end
 
 end

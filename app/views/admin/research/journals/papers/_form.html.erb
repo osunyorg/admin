@@ -24,12 +24,9 @@
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: paper.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#research_journal_paper_title' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#research_journal_paper_title' %>
         <%= f.association :volume, collection: @journal.volumes, label: Research::Journal::Volume.model_name.human %>
         <%= f.input :published %>
         <%= f.input :published_at, html5: true, as: :date %>

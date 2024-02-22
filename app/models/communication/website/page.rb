@@ -49,11 +49,13 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  # FIXME: Remove legacy column from db
   self.ignored_columns = %w(path)
 
   include AsDirectObject
   include Contentful
   include Sanitizable
+  include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs
@@ -66,7 +68,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithPermalink
   include WithTranslations
   include WithTree
-  include WithPath # WithPath overwrites the git_path method defined in WithWebsites
+  include WithPath # Must be included after Sluggable. WithPath overwrites the git_path method defined in WithWebsites
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
@@ -154,6 +156,13 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+              .where.not(id: self.id)
+              .exists?
+  end
 
   def check_accessibility
     accessibility_merge_array blocks

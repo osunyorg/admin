@@ -3,7 +3,7 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="row">
     <div class="col-lg-8">
-      <%= osuny_panel t('metadata') do %>
+      <%= osuny_panel t('content') do %>
         <%= f.input :name %>
         <div class="row">
           <div class="col-lg-6">
@@ -20,6 +20,13 @@
           </div>
         </div>
         <%= render 'admin/application/summary/form', f: f, about: diploma %>
+      <% end %>
+    </div>
+    <div class="col-lg-4">
+      <%= osuny_panel t('metadata') do %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#education_diploma_name' %>
       <% end %>
     </div>
   </div>
