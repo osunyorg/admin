@@ -7,11 +7,10 @@
       <%= f.input :title %>
     </div>
     <div class="col-md-4">
-      <%= f.input :identifier,
-          input_html: menu.persisted? ? {} : {
-            class: 'js-slug-input',
-            data: { source: '#communication_website_menu_title' }
-          } if can?(:create, menu) %>
+      <%= render  "admin/application/slug/form",
+                  f: f,
+                  attribute: :identifier,
+                  source: '#communication_website_menu_title' if can?(:create, menu) %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

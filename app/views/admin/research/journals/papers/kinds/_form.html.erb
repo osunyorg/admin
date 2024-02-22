@@ -14,12 +14,9 @@ url = kind.new_record?  ? admin_research_journal_kinds_path
     </div>
     <div class="col-xl-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: kind.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#research_journal_paper_kind_title' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#research_journal_paper_kind_title' %>
       <% end %>
     </div>
   </div>

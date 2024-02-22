@@ -13,12 +13,9 @@
     </div>
     <div class="col-xl-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: volume.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#research_journal_volume_title' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#research_journal_volume_title' %>
         <%= f.input :number %>
         <%= f.input :published %>
         <%= f.input :published_at, html5: true %>

@@ -13,7 +13,8 @@ module Sluggable
     before_validation :check_slug, :make_path
 
     def check_slug
-      self.slug = generated_slug if self.slug.blank?
+      self.slug = to_s.parameterize if self.slug.blank?
+      adjust_slug_length
       current_slug = self.slug
       n = 0
       while slug_unavailable?(self.slug)
@@ -28,14 +29,12 @@ module Sluggable
 
     protected
 
-    def generated_slug
-      # "My very long and detailed blog post" => "my-very-long-and-detailed-first-blog-post"
-      generated_slug = to_s.parameterize
+    def adjust_slug_length
+      return unless self.slug.length > SLUG_MAX_LENGTH
       # "my-very-long-and-detailed-first-blog-post" => "my-very-long-and-detailed-first-"
-      generated_slug = generated_slug[0, SLUG_MAX_LENGTH]
+      self.slug = self.slug[0, SLUG_MAX_LENGTH]
       # "my-very-long-and-detailed-first-" => "my-very-long-and-detailed-first"
-      generated_slug.chop! if generated_slug.ends_with?('-')
-      generated_slug
+      self.slug.chop! if self.slug.ends_with?('-')
     end
 
     def slug_unavailable?(slug)
