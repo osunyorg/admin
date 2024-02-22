@@ -54,8 +54,8 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include Contentful
-  include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
   include Sanitizable
+  include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs
