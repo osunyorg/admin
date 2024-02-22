@@ -10,6 +10,7 @@
       <%= render  "admin/application/slug/form",
                   f: f,
                   attribute: :identifier,
+                  max_length: Communication::Website::Menu::IDENTIFIER_MAX_LENGTH,
                   source: '#communication_website_menu_title' if can?(:create, menu) %>
     </div>
   </div>

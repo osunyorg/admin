@@ -1,11 +1,12 @@
 <%
 object ||= f.object
 attribute ||= :slug
+max_length ||= object.class::SLUG_MAX_LENGTH
 %>
 <%= f.input attribute,
             as: :string,
             input_html: object.persisted? ? {} : {
               class: 'js-slug-input',
-              maxlength: object.class::SLUG_MAX_LENGTH,
+              maxlength: max_length,
               data: { source: source }
             } %>

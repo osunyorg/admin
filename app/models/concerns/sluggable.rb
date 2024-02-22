@@ -6,13 +6,13 @@ module Sluggable
     # Source: https://askubuntu.com/questions/166764/how-long-can-file-names-be/166767#166767
     SLUG_MAX_LENGTH = 100
 
-    validates :slug, presence: true
-    validate :slug_must_be_unique
-    validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }
+    validates :slug, presence: true, unless: :skip_slug_validation?
+    validate :slug_must_be_unique, unless: :skip_slug_validation?
+    validates :slug, format: { with: /\A[a-z0-9\-]+\z/, message: I18n.t('slug_error') }, unless: :skip_slug_validation?
 
-    before_validation :check_slug, :make_path
+    before_validation :set_slug
 
-    def check_slug
+    def set_slug
       self.slug = to_s.parameterize if self.slug.blank?
       adjust_slug_length
       current_slug = self.slug
@@ -21,10 +21,6 @@ module Sluggable
         n += 1
         self.slug = [current_slug, n].join('-')
       end
-    end
-
-    def generated_path
-      "#{parent.nil? ? '/' : parent.path}#{slug}/".gsub(/\/+/, '/')
     end
 
     protected
@@ -47,14 +43,12 @@ module Sluggable
                 .exists?
     end
 
-    # FIXME `respond_to?(:parent)` sert à quoi ?
-    def make_path
-      return unless respond_to?(:path) && respond_to?(:parent)
-      self.path = generated_path
-    end
-
     def slug_must_be_unique
       errors.add(:slug, :taken) if slug_unavailable?(slug)
+    end
+
+    def skip_slug_validation?
+      false
     end
   end
 end
