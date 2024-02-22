@@ -2,9 +2,9 @@ module Sluggable
   extend ActiveSupport::Concern
 
   included do
-    # Filenames uses 255 bytes so should have 255 characters max. To be safe, we limit to 200.
+    # Filenames uses 255 bytes so should have 255 characters max. To be safe, we limit to 100.
     # Source: https://askubuntu.com/questions/166764/how-long-can-file-names-be/166767#166767
-    SLUG_MAX_LENGTH = 200
+    SLUG_MAX_LENGTH = 100
 
     validates :slug, presence: true
     validate :slug_must_be_unique
