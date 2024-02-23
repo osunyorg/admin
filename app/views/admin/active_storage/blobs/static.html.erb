@@ -1,8 +1,10 @@
-<%- cache @about do -%>
+<%-
+university = University.find_by(id: @about.university_id)
+cache [@about, university] do
+-%>
 <%
 width, height = @about.metadata.values_at('width', 'height')
 ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
-university = University.find_by(id: @about.university_id)
 base_url = university&.url || ""
 media_endpoint_path = medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)
 %>
