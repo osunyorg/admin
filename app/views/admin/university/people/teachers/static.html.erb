@@ -1,3 +1,4 @@
+<%- cache @about do -%>
 ---
 title: >-
   Enseignements de <%= @about.to_s %>
@@ -21,3 +22,4 @@ last_name: >
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 ---
+<%- end -%>

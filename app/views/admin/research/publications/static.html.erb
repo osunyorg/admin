@@ -1,3 +1,4 @@
+<%- cache @about do -%>
 <%
 special_page = @website.special_page(Communication::Website::Page::ResearchPublication)
 pages = special_page.ancestors_and_self if special_page
@@ -34,10 +35,10 @@ researchers:
   - <%= researcher.slug %>
 <% end %>
 citations:
-<% 
-Citations::FORMATS.each do |format| 
+<%
+Citations::FORMATS.each do |format|
   citation = @about.public_send("citation_#{format}")
-  next if (@website.default_language.iso_code == "fr" && format == 'iso690') 
+  next if (@website.default_language.iso_code == "fr" && format == 'iso690')
 %>
   - label: "<%= t("research.citations.#{format}.label") %>"
     format: "<%= format %>"
@@ -45,3 +46,4 @@ Citations::FORMATS.each do |format|
       <%= prepare_html_for_static citation %>
 <% end %>
 ---
+<%- end -%>

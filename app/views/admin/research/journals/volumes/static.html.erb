@@ -1,3 +1,4 @@
+<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: false, toc_present: false %>
@@ -16,3 +17,4 @@ date: "<%= @about.published_at.iso8601 %>"
 <%= render 'admin/application/summary/static' %>
 ---
 <%= prepare_html_for_static @about.text %>
+<%- end -%>

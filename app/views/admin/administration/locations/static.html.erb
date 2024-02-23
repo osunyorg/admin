@@ -1,10 +1,11 @@
+<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @website %>
-<%= render 'admin/application/static/breadcrumbs', 
+<%= render 'admin/application/static/breadcrumbs',
             pages: @website.special_page(Communication::Website::Page::AdministrationLocation).ancestors_and_self,
             current_title: @about.to_s %>
 <% end %>
@@ -31,11 +32,12 @@ diplomas:
       <%= diploma.to_s %>
     path: <%= diploma.slug %>
     programs: <% @programs = @about.education_programs.where(diploma: diploma).root.ordered %>
-<%= render 'admin/education/programs/static_list', 
-            diploma: diploma, 
+<%= render 'admin/education/programs/static_list',
+            diploma: diploma,
             programs: @programs,
             all_programs: @about.programs,
             depth: 4 %>
 <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
+<%- end -%>

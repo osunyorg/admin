@@ -1,3 +1,4 @@
+<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 linkTitle: >-
@@ -86,3 +87,4 @@ administrative_missions:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography %>
+<%- end -%>

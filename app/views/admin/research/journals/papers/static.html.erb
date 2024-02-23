@@ -1,3 +1,4 @@
+<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false, toc_present: true %>
@@ -59,3 +60,4 @@ citations:
   <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
+<%- end -%>

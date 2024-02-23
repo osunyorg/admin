@@ -1,3 +1,4 @@
+<%- cache @website do -%>
 <%= render 'admin/application/static/title' %>
 default:
 <% if @website.default_image.attached? %>
@@ -29,3 +30,4 @@ social:
   <%= social_element %>: >-
     <%= value %>
 <% end %>
+<%- end -%>

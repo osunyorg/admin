@@ -1,3 +1,4 @@
+<%- cache @about do -%>
 <%
 title = @about.title
 items = @about.items
@@ -5,9 +6,10 @@ items = @about.items
               .ordered
               .map(&:to_static_hash)
               .compact
-hash = { 
+hash = {
   'title' => title,
   'items' => items
 }
 %>
 <%= raw hash.to_yaml %>
+<%- end -%>
