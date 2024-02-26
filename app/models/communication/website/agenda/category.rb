@@ -52,6 +52,10 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',
                           optional: true
+  has_many                :children,
+                          class_name: 'Communication::Website::Agenda::Category',
+                          foreign_key: :parent_id,
+                          dependent: :destroy
   has_and_belongs_to_many :events,
                           class_name: 'Communication::Website::Agenda::Event',
                           join_table: :communication_website_agenda_events_categories,

@@ -10,6 +10,7 @@ module Pathable
     end
 
     def update_children_paths
+      return unless respond_to?(:children)
       children.each do |child|
         child.update_column :path, child.generated_path
         child.update_children_paths
