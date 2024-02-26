@@ -46,12 +46,9 @@
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
         <%= f.input :published if can? :publish, event %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: event.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#communication_website_agenda_event_title' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#communication_website_agenda_event_title' %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: event, f: f %>
     </div>

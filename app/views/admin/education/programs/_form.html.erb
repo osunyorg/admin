@@ -146,12 +146,9 @@
     <div class="col-lg-4 col-xxl-3">
       <%= render 'admin/education/programs/forms/part', part: :technical do %>
         <%= f.input :published %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: program.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#education_program_name' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#education_program_name' %>
         <%= f.association :parent,
                           collection: collection_tree(current_university.education_programs, program),
                           label_method: ->(p) { sanitize p[:label] },
