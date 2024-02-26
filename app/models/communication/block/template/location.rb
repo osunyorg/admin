@@ -1,4 +1,4 @@
-class Communication::Block::Template::Campu < Communication::Block::Template::Base
+class Communication::Block::Template::Location < Communication::Block::Template::Base
 
   has_elements
 

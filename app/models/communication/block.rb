@@ -60,7 +60,7 @@ class Communication::Block < ApplicationRecord
   enum template_kind: {
     agenda: 3100,
     call_to_action: 900,
-    campus: 3200,
+    locations: 3200,
     chapter: 50,
     contact: 57,
     datatable: 54,
@@ -86,7 +86,7 @@ class Communication::Block < ApplicationRecord
   CATEGORIES = {
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :campus],
+    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations],
     utilities: [:files, :definitions, :contact, :license, :embed]
   }
 

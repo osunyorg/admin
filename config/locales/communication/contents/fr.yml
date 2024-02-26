@@ -129,10 +129,6 @@ fr:
               credit:
                 label: Crédit
                 placeholder: Entrer le crédit de l'image ici
-          campus:
-            description: Une sélection de sites dans des campus.
-            edit:
-              add: Ajouter un site
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             layouts:
@@ -342,6 +338,10 @@ fr:
                   false: Non. Les autres doivent utiliser la même licence CC s'ils adaptent mon œuvre.
               description:
                 label: Description
+          locations:
+            description: Une sélection de sites dans des campus.
+            edit:
+              add: Ajouter un site
           organizations:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             layouts:
@@ -570,7 +570,7 @@ fr:
         template_kind:
           agenda: Agenda
           call_to_action: Appel à actions
-          campus: Campus
+          locations: Campus
           chapter: Chapitre
           contact: Contact
           datatable: Tableau
