@@ -488,8 +488,6 @@ en:
                 label: List
                 description: A list of programs, one above the other.
           sound:
-            description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
-          sound:
             description: An audio recording with a text transcription for a proper accessibility.
             edit:
               file:
