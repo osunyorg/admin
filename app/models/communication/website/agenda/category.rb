@@ -83,8 +83,9 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   end
 
   def references
-    events +
-    website.menus
+    references = events + website.menus
+    references << parent if parent.present?
+    references
   end
 
   protected
