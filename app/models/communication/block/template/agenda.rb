@@ -61,11 +61,11 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   protected
 
   def link_to_events
-    website.special_page(Communication::Website::Page::CommunicationAgenda).path
+    website.special_page(Communication::Website::Page::CommunicationAgenda, language: block.language).path
   end
 
   def link_to_events_archive
-    website.special_page(Communication::Website::Page::CommunicationAgendaArchive).path
+    website.special_page(Communication::Website::Page::CommunicationAgendaArchive, language: block.language).path
   end
 
   def link_to_category

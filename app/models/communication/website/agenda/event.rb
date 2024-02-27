@@ -76,7 +76,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
 
-  # FIXME @sebouchu
   scope :for_category, -> (category_id) { 
     joins(:categories)
     .where(
