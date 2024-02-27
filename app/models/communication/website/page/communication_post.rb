@@ -15,10 +15,7 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     website.posts.where(language_id: language_id)
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}posts/_index.html"
+  def git_path_relative
+    'posts/_index.html'
   end
-
 end

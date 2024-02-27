@@ -14,8 +14,8 @@
       <tr>
         <th><%= University.human_attribute_name('name') %></th>
         <th><%= University.human_attribute_name('url') %></th>
-        <th><%= University.human_attribute_name('is_really_a_university') %></th>
         <th><%= University.human_attribute_name('public_or_private') %></th>
+        <th><%= User.model_name.human(count: 2) %></th>
         <th><%= University.human_attribute_name('invoice_date') %></th>
         <th><%= University.human_attribute_name('contribution_amount') %></th>
         <th></th>
@@ -26,11 +26,11 @@
         <tr>
           <td><%= link_to university, [:server, university] %></td>
           <td><%= link_to university.url, university.url, target: :_blank %></td>
-          <td><%= t(university.is_really_a_university?) %></td>
           <td>
             <%= university.private ? University.human_attribute_name('private') : 
                                      University.human_attribute_name('public') %>
           </td>
+          <td><%= link_to university.users.not_server_admin.count, "#{university.url}/admin/users", target: :_blank %></td>
           <% if university.contribution_amount.to_i.zero? %>
             <td></td>
             <td></td>

@@ -28,6 +28,8 @@
 #  fk_rails_dcc7198fc5  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Menu < ApplicationRecord
+  IDENTIFIER_MAX_LENGTH = 100
+
   include AsDirectObject
   include Sanitizable
   include WithAutomatism
@@ -37,7 +39,8 @@ class Communication::Website::Menu < ApplicationRecord
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
 
   validates :title, :identifier, presence: true
-  validates :identifier, uniqueness: { scope: [:communication_website_id, :language_id] }
+  validates :identifier,  length: { maximum: IDENTIFIER_MAX_LENGTH },
+                          uniqueness: { scope: [:communication_website_id, :language_id] }
 
   scope :ordered, -> { order(created_at: :asc) }
 

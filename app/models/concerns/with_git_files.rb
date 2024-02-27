@@ -11,6 +11,10 @@ module WithGitFiles
     raise NotImplementedError
   end
 
+  def git_path_relative
+    raise NotImplementedError
+  end
+
   def exportable_to_git?
     true
   end

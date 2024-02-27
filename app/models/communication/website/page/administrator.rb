@@ -15,15 +15,13 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     ''
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}administrators/_index.html"
+  def git_path_relative
+    'administrators/_index.html'
   end
+
+  protected
 
   def default_parent
     website.special_page(Communication::Website::Page::Person, language: language)
   end
-
-
 end

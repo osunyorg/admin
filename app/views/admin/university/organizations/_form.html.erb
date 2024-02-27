@@ -73,12 +73,9 @@
     </div>
     <div class="col-xl-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: organization.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#university_organization_name' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#university_organization_name' %>
         <%= f.input :active %>
       <% end %>
       <% if current_university.organization_categories.any? %>

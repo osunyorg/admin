@@ -63,6 +63,7 @@ fr:
         summernote_locale: Nom de la locale Summernote
       user:
         admin_theme: Thème de l'administration
+        current_sign_in_at: Dernière connexion
         email: Email
         first_name: Prénom
         language: Langue préférée
