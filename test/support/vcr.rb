@@ -8,4 +8,7 @@ VCR.configure do |c|
   c.filter_sensitive_data('<TEST_GITHUB_REPOSITORY>') { ENV['TEST_GITHUB_REPOSITORY'] }
   c.filter_sensitive_data('<TEST_GITLAB_TOKEN>') { ENV['TEST_GITLAB_TOKEN'] }
   c.filter_sensitive_data('<TEST_GITLAB_REPOSITORY>') { ENV['TEST_GITLAB_REPOSITORY'] }
+  c.filter_sensitive_data('<Authorization-REDACTED>') do |interaction|
+    interaction.request.headers['Authorization'].try(:first)
+  end
 end

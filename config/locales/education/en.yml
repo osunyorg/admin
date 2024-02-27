@@ -37,11 +37,14 @@ en:
         name: Name
         programs: Programs
         short_name: Short name
+        slug: Slug
       education/program:
         accessibility: Accessibilité
         apprenticeship: Apprenticeship
+        bodyclass: Specific CSS class
         capacity: Capacity
         contacts: Contacts
+        content: Program's content
         continuing: Continuing training
         diploma: Diploma
         duration: Duration
@@ -69,13 +72,14 @@ en:
         published: Published?
         registration: Modalités et délais d’accès
         registration_url: Registration link (URL)
+        results: Results' indicator
         roles: Roles
         schools: Schools with this formation
         short_name: Short name
+        slug: Slug
         teachers: Teachers
         team: Team
-        content: Program's content
-        results: Results' indicator
+        url: Website
       education/school:
         address: Address
         administrators: Administrators
@@ -98,7 +102,7 @@ en:
         tree:
           title: Programs treeview
   education:
-    description: 
+    description:
       text: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
       source: Olivier Reboul, La philosophie de l'éducation, 2018
       parts:

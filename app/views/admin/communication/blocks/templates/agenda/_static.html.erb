@@ -12,5 +12,5 @@
       events:
 <% block.template.selected_events.each do |element| %>
         - path: "<%= element.current_permalink_in_website(@website)&.path %>"
-          file: "<%= element.git_path(@website) %>"
+          file: "<%= element.git_path_relative %>"
 <% end %>

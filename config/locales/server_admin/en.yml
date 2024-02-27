@@ -39,6 +39,7 @@ en:
         private: Private
         public: Public
         title: University kind
+      users_count: Users (except server admins)
     websites:
       admin: Admin
       autoupdate_theme:

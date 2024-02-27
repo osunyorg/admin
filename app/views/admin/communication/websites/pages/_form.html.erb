@@ -28,13 +28,9 @@ url = page.new_record?  ? admin_communication_website_pages_path
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
         <%= f.input :published if page.draftable? %>
-        <%= f.input :slug,
-                    as: :string,
-                    required: true,
-                    input_html: page.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#communication_website_page_title' }
-                    } unless page.is_home? %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#communication_website_page_title' unless page.is_home? %>
         <%= f.association :parent,
                           collection: collection_tree(@website.pages.for_language(current_website_language), page),
                           include_blank: false,

@@ -39,7 +39,8 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Sanitizable
-  include Sluggable
+  include Sluggable # We override slug_unavailable? method
+  include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
@@ -47,10 +48,14 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include WithPosition
   include WithTranslations
   include WithUniversity
-  
+
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',
                           optional: true
+  has_many                :children,
+                          class_name: 'Communication::Website::Agenda::Category',
+                          foreign_key: :parent_id,
+                          dependent: :destroy
   has_and_belongs_to_many :events,
                           class_name: 'Communication::Website::Agenda::Event',
                           join_table: :communication_website_agenda_events_categories,
@@ -78,8 +83,9 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   end
 
   def references
-    events +
-    website.menus
+    references = events + website.menus
+    references << parent if parent.present?
+    references
   end
 
   protected

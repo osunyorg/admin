@@ -22,7 +22,7 @@ class Communication::Website::Page::Home < Communication::Website::Page
     self.slug = ''
   end
 
-  def validate_slug
+  def skip_slug_validation?
     true
   end
 

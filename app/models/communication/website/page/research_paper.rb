@@ -11,10 +11,7 @@ class Communication::Website::Page::ResearchPaper < Communication::Website::Page
     website.research_papers
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}papers/_index.html"
+  def git_path_relative
+    'papers/_index.html'
   end
-
 end

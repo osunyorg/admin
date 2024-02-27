@@ -1,3 +1,4 @@
+<% if @website %>
 url: "<%= @about.current_permalink_in_website(@website)&.path %>"
 <% if @about.respond_to?(:slug) && @about.slug.present? %>
 <% forced_slug ||= nil %>
@@ -10,5 +11,6 @@ if previous_permalinks.any?
 aliases:
 <% previous_permalinks.each do |permalink| %>
   - <%= permalink.path %>
+<% end %>
 <% end %>
 <% end %>

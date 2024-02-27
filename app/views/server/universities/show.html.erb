@@ -10,13 +10,18 @@
         <% ['private', 'is_really_a_university'].each do |attribute| %>
           <tr>
             <td><%= University.human_attribute_name(attribute) %></td>
-            <td class="text-end"><%= t @university.public_send attribute %></td>
+            <td class="text-end"><%= t(@university.public_send attribute) %></td>
           </tr>
         <% end %>
+        <tr>
+          <td><%= t('server_admin.universities.users_count') %></td>
+          <td class="text-end"><%= link_to @university.users.not_server_admin.count, "#{@university.url}/admin/users", target: :_blank %></td>
+        </tr>
+
         <% unless @university.contribution_amount.to_i.zero? %>
           <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
             <td><%= University.human_attribute_name('invoice_date') %></td>
-            <td class="text-end"><%= l @university.invoice_date, format: "%d %B" %></td>
+            <td class="text-end"><%= l(@university.invoice_date, format: "%d %B") %></td>
           </tr>
           <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
             <td><%= University.human_attribute_name('contribution_amount') %></td>

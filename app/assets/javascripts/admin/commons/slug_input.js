@@ -34,9 +34,12 @@ window.osuny.slugInput = {
 
     onSourceChange: function (sourceInputs, slugInput) {
         'use strict';
-        var values = [],
+        var maxLength = slugInput.maxLength,
+            generatedSlug,
+            values = [],
             value,
             i;
+
         for (i = 0; i < sourceInputs.length; i += 1) {
             value = sourceInputs[i].value.trim();
             if (value !== '') {
@@ -44,7 +47,14 @@ window.osuny.slugInput = {
             }
         }
 
-        slugInput.value = window.slug(values.join(' '));
+        generatedSlug = window.slug(values.join(' '));
+        if (generatedSlug.length > maxLength) {
+            generatedSlug = generatedSlug.slice(0, maxLength);
+        }
+        if (generatedSlug[generatedSlug.length - 1] === '-') {
+            generatedSlug = generatedSlug.slice(0, -1);
+        }
+        slugInput.value = generatedSlug;
     },
 
     invoke: function () {

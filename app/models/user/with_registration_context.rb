@@ -33,6 +33,7 @@ module User::WithRegistrationContext
     end
 
     def send_notification_to_admins
+      return if server_admin? # ignore server admins to prevent spam during account replication wetween universities
       NotificationMailer.new_registration(university, self).deliver_later
     end
 

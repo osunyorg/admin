@@ -23,11 +23,12 @@
                               collection: current_university.education_schools.ordered %>
           </div>
           <div class="col-lg-6">
-            <%= f.input :capacity %>
+            <%= f.input :url %>
             <legend class="col-form-label pt-0 mb-1"><%= t('education.program.registration_scheme') %></legend>
             <div class="mb-n3"><%= f.input :initial %></div>
             <div class="mb-n3"><%= f.input :continuing %></div>
             <div><%= f.input :apprenticeship %></div>
+            <%= f.input :capacity %>
             <%= f.input :downloadable_summary %>
           </div>
         </div>
@@ -55,6 +56,8 @@
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pedagogy %>
+          </div>
+          <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :evaluation %>
           </div>
         </div>
@@ -105,9 +108,6 @@
       <%= render 'admin/education/programs/forms/part', part: :admission do %>
         <div class="row">
           <div class="col-xxl-6">
-            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
-          </div>
-          <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing %>
           </div>
           <div class="col-xxl-6">
@@ -119,11 +119,17 @@
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :pricing_apprenticeship %>
           </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :prerequisites %>
+          </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :registration %>
           </div>
           <div class="col-xxl-6">
-              <%= f.input :registration_url %>
+            <%= f.input :registration_url %>
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :accessibility %>
@@ -140,16 +146,14 @@
     <div class="col-lg-4 col-xxl-3">
       <%= render 'admin/education/programs/forms/part', part: :technical do %>
         <%= f.input :published %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: program.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#education_program_name' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#education_program_name' %>
         <%= f.association :parent,
                           collection: collection_tree(current_university.education_programs, program),
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
+        <%= f.input :bodyclass %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: program, f: f %>
       <%= render 'admin/application/meta_description/form', f: f, about: program %>

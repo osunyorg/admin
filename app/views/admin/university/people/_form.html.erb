@@ -89,18 +89,15 @@
         </div>
       <% end if current_university.is_really_a_university %>
 
-      <%= f.association :research_laboratories, 
+      <%= f.association :research_laboratories,
                         collection: current_university.research_laboratories,
                         as: :check_boxes if person.is_researcher %>
     </div>
     <div class="col-lg-4">
       <%= osuny_panel t('metadata') do %>
-          <%= f.input :slug,
-                      as: :string,
-                      input_html: person.persisted? ? {} : {
-                        class: 'js-slug-input',
-                        data: { source: '#university_person_first_name, #university_person_last_name' }
-                      } %>
+          <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#university_person_first_name, #university_person_last_name' %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
       <% end %>
       <% if current_university.person_categories.any? %>
@@ -124,7 +121,7 @@
               input_html: {
                 data: {
                   translatable: true,
-                  'summernote-config' => 'link' 
+                  'summernote-config' => 'link'
                 }
               } %>
       <% end %>
