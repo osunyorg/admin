@@ -60,7 +60,6 @@ class Communication::Block < ApplicationRecord
   enum template_kind: {
     agenda: 3100,
     call_to_action: 900,
-    locations: 3200,
     chapter: 50,
     contact: 57,
     datatable: 54,
@@ -72,6 +71,7 @@ class Communication::Block < ApplicationRecord
     image: 51,
     key_figures: 56,
     license: 4040,
+    locations: 3200,
     organizations: 200,
     pages: 600,
     persons: 100,

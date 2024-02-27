@@ -11,7 +11,7 @@ class Communication::Block::Template::Location < Communication::Block::Template:
   end
 
   def allowed_for_about?
-    website.present? && website.administration_locations.any?
+    website.present? && available_locations.any?
   end
 
   def available_locations
