@@ -57,6 +57,9 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',
                           optional: true
+  belongs_to              :program,
+                          class_name: 'Education::Program',
+                          optional: true
   has_many                :children,
                           class_name: 'Communication::Website::Agenda::Category',
                           foreign_key: :parent_id,
