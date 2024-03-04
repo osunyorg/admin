@@ -34,7 +34,7 @@
     <% end %>
     <% if @program.duration %>
       <%= osuny_label Education::Program.human_attribute_name('duration') %>
-      <%= sanitize @program.duration %>
+      <p><%= @program.duration %></p>
     <% end %>
     <% if @program.children.any? %>
       <%= osuny_label Education::Program.model_name.human(count: 2) %>
