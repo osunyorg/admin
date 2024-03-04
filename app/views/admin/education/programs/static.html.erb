@@ -35,6 +35,8 @@ parent:
 <%= render 'admin/application/featured_image/static' %>
 related_category: "<%= @website.post_categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
+duration: >
+  <%= prepare_text_for_static @about.duration %>
 teachers:
 <% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
