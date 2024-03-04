@@ -96,6 +96,10 @@ class Communication::Website::Agenda::Category < ApplicationRecord
     references
   end
 
+  def siblings
+    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+  end
+
   protected
 
   def last_ordered_element
