@@ -44,7 +44,7 @@ class Communication::Website::Permalink < ApplicationRecord
     "University::Person::Teacher" => Communication::Website::Permalink::Teacher
   }
 
-  attr_accessor :should_sync_about
+  attr_accessor :force_sync_about
 
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
@@ -56,7 +56,9 @@ class Communication::Website::Permalink < ApplicationRecord
   validates :about_id, :about_type, :path, presence: true
 
   before_validation :set_university, on: :create
-  after_commit :sync_about, on: [:create, :destroy], if: :should_sync_about
+  # We should not sync the about object whenever we do something with the permalink
+  # so we have an attribute accessor to force-sync the about, for example in the WithPermalink concern
+  after_commit :sync_about, on: [:create, :destroy], if: :force_sync_about
 
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }

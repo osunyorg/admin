@@ -31,17 +31,21 @@ module WithPermalink
 
   def add_redirection(path)
     clean_path = Communication::Website::Permalink.clean_path(path)
+    # Permalink creation does not trigger its about's sync
+    # so we need to pass the force_sync_about attribute accessor.
     Communication::Website::Permalink.create(
       website: website,
       about: self,
       is_current: false,
       path: clean_path,
-      should_sync_about: true
+      force_sync_about: true
     )
   end
 
   def remove_redirection(permalink)
-    permalink.should_sync_about = true
+    # Permalink removal does not trigger its about's sync
+    # so we need to pass the force_sync_about attribute accessor.
+    permalink.force_sync_about = true
     permalink.destroy
   end
 end
