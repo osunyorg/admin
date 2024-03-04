@@ -35,16 +35,13 @@ module WithPermalink
       website: website,
       about: self,
       is_current: false,
-      path: clean_path
+      path: clean_path,
+      should_sync_about: true
     )
-    # Force-sync
-    is_direct_object? ? sync_with_git : touch
-    permalink
   end
 
   def remove_redirection(permalink)
+    permalink.should_sync_about = true
     permalink.destroy
-    # Force-sync
-    is_direct_object? ? sync_with_git : touch
   end
 end

@@ -44,6 +44,8 @@ class Communication::Website::Permalink < ApplicationRecord
     "University::Person::Teacher" => Communication::Website::Permalink::Teacher
   }
 
+  attr_accessor :should_sync_about
+
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
 
@@ -54,6 +56,7 @@ class Communication::Website::Permalink < ApplicationRecord
   validates :about_id, :about_type, :path, presence: true
 
   before_validation :set_university, on: :create
+  after_commit :sync_about, on: [:create, :destroy], if: :should_sync_about
 
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }
@@ -173,5 +176,10 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def set_university
     self.university_id = website.university_id
+  end
+
+  def sync_about
+    return unless about.persisted?
+    about.is_direct_object? ? about.sync_with_git : about.touch
   end
 end
