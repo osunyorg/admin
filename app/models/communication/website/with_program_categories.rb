@@ -18,13 +18,12 @@ module Communication::Website::WithProgramCategories
   protected
 
   def set_root_programs_categories_for!(objects)
-    programs_root_category = objects.for_language_id(default_language_id).where(is_programs_root: true).first_or_create(
+    objects.for_language_id(default_language_id).where(is_programs_root: true).first_or_create(
       name: 'Offre de formation',
       slug: 'offre-de-formation',
       is_programs_root: true,
       university_id: university.id
     )
-    programs_root_category
   end
 
   def set_programs_categories_at_level_for!(objects, parent_category, programs)
