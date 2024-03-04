@@ -56,7 +56,7 @@ class Communication::Website::Permalink < ApplicationRecord
   validates :about_id, :about_type, :path, presence: true
 
   before_validation :set_university, on: :create
-  # We should not sync the about object whenever we do something with the permalink
+  # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the WithPermalink concern
   after_commit :sync_about, on: [:create, :destroy], if: :force_sync_about
 
