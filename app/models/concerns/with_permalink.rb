@@ -31,11 +31,20 @@ module WithPermalink
 
   def add_redirection(path)
     clean_path = Communication::Website::Permalink.clean_path(path)
-    Communication::Website::Permalink.create(
+    permalink = Communication::Website::Permalink.create(
       website: website,
       about: self,
       is_current: false,
       path: clean_path
     )
+    # Force-sync
+    is_direct_object? ? sync_with_git : touch
+    permalink
+  end
+
+  def remove_redirection(permalink)
+    permalink.destroy
+    # Force-sync
+    is_direct_object? ? sync_with_git : touch
   end
 end
