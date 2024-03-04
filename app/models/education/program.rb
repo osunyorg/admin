@@ -10,7 +10,7 @@
 #  contacts               :text
 #  content                :text
 #  continuing             :boolean
-#  duration               :text
+#  duration               :string
 #  evaluation             :text
 #  featured_image_alt     :string
 #  featured_image_credit  :text
@@ -81,7 +81,6 @@ class Education::Program < ApplicationRecord
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
-                                    :duration,
                                     :evaluation,
                                     :objectives,
                                     :opportunities,
