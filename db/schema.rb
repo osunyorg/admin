@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_094436) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_172916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -142,8 +142,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_094436) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "heading_id"
     t.uuid "communication_website_id"
+    t.uuid "heading_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -285,6 +285,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_094436) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
+    t.boolean "is_programs_root", default: false
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_categories_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_categories_on_original_id"
@@ -459,7 +460,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_094436) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
