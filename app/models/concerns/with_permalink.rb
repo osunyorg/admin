@@ -31,7 +31,7 @@ module WithPermalink
 
   def add_redirection(path)
     clean_path = Communication::Website::Permalink.clean_path(path)
-    permalink = Communication::Website::Permalink.create(
+    Communication::Website::Permalink.create(
       website: website,
       about: self,
       is_current: false,
