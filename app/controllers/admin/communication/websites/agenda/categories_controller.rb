@@ -6,15 +6,21 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   include Admin::Translatable
 
   def index
-    @categories = @categories.for_language(current_website_language).ordered
+    @root_categories = categories.root.ordered
     breadcrumb
   end
 
   def reorder
+    parent_id = params.dig(:parentId)
+    old_parent_id = params.dig(:oldParentId)
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       category = categories.find(id)
       category.update_column :position, index + 1
+    end
+    if old_parent_id.present?
+      old_parent = categories.find(old_parent_id)
+      old_parent.sync_with_git
     end
     @category = @website.agenda_categories.find(params[:itemId])
     @category.sync_with_git # Will sync siblings

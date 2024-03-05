@@ -8,7 +8,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
-    @categories = @website.post_categories.for_language(current_website_language).ordered
+    @categories = categories.ordered
     breadcrumb
   end
 
@@ -17,21 +17,24 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
     old_parent_id = params.dig(:oldParentId)
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      category = @website.post_categories.find(id)
+      category = categories.find(id)
       category.update_columns parent_id: parent_id,
                               position: index + 1
     end
-    if old_parent_id
-      old_parent = @website.post_categories.find(old_parent_id)
+    if old_parent_id.present?
+      old_parent = categories.find(old_parent_id)
       old_parent.sync_with_git
     end
-    @website.post_categories.find(params[:itemId]).sync_with_git # Will sync siblings
+    @category = categories.find(params[:itemId])
+    @category.sync_with_git # Will sync siblings
   end
 
   def children
     return unless request.xhr?
-    @category = @website.post_categories.for_language(current_website_language).find(params[:id])
+    @kind = Communication::Website::Post::Category
+    @category = categories.find(params[:id])
     @children = @category.children.ordered
+    render 'admin/application/categories/children'
   end
 
   def show
@@ -84,7 +87,11 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   protected
 
   def get_root_categories
-    @root_categories = @website.post_categories.root.for_language(current_website_language).ordered
+    @root_categories = categories.root.ordered
+  end
+
+  def categories
+    @website.post_categories.for_language(current_website_language)
   end
 
   def breadcrumb

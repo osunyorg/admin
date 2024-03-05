@@ -55,6 +55,15 @@ namespace :communication do
         post :duplicate
         post :publish
       end
+      resources :categories, controller: '/admin/communication/websites/posts/categories', path: '/:lang/posts/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+          get :static
+        end
+      end
     end
     namespace :agenda, path: '/:lang/agenda' do
       resources :events, controller: '/admin/communication/websites/agenda/events' do
