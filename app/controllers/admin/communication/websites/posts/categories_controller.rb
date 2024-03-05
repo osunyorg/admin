@@ -25,8 +25,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
       old_parent = categories.find(old_parent_id)
       old_parent.sync_with_git
     end
-    @category = categories.find(params[:itemId])
-    @category.sync_with_git # Will sync siblings
+    categories.find(params[:itemId])y.sync_with_git # Will sync siblings
   end
 
   def children

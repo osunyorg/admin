@@ -22,8 +22,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
       old_parent = categories.find(old_parent_id)
       old_parent.sync_with_git
     end
-    @category = @website.agenda_categories.find(params[:itemId])
-    @category.sync_with_git # Will sync siblings
+    categories.find(params[:itemId]).sync_with_git # Will sync siblings
   end
 
   def children
