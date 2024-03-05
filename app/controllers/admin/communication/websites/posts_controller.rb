@@ -134,6 +134,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def load_categories
-    @root_categories = @website.post_categories.for_language(current_website_language)
+    @categories = @website.post_categories
+                          .for_language(current_website_language)
   end
 end

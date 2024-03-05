@@ -7,7 +7,13 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   before_action :load_categories
 
   def index
-    @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
+    @events = apply_scopes(@events).for_language(current_website_language)
+                                  .ordered_desc
+                                  .page(params[:page])
+    @root_categories = @website.agenda_categories
+                               .for_language(current_website_language)
+                               .root
+                               .ordered
     breadcrumb
   end
 
@@ -80,10 +86,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def load_categories
-    @root_categories = @website.agenda_categories
-                               .for_language(current_website_language)
-                               .root
-                               .ordered
+    @categories = @website.agenda_categories
+                          .for_language(current_website_language)
   end
 
   def event_params
