@@ -13,11 +13,19 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   def reorder
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
-      category = @website.post_categories.find(id)
+      category = categories.find(id)
       category.update_column :position, index + 1
     end
     @category = @website.agenda_categories.find(params[:itemId])
     @category.sync_with_git # Will sync siblings
+  end
+
+  def children
+    return unless request.xhr?
+    @kind = Communication::Website::Agenda::Category
+    @category = categories.find(params[:id])
+    @children = @category.children.ordered
+    render 'admin/application/categories/children'
   end
 
   def show
@@ -67,6 +75,11 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   protected
+
+  def categories
+    @website.agenda_categories
+            .for_language(current_website_language)
+  end
 
   def breadcrumb
     super

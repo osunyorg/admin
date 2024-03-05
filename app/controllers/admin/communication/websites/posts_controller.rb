@@ -19,7 +19,10 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                                 .accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
-    @root_categories = @website.post_categories.for_language(current_website_language).root.ordered
+    @root_categories = @website.post_categories
+                               .for_language(current_website_language)
+                               .root
+                               .ordered
     breadcrumb
   end
 
@@ -131,6 +134,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def load_categories
-    @categories = @website.post_categories.for_language(current_website_language)
+    @root_categories = @website.post_categories.for_language(current_website_language)
   end
 end

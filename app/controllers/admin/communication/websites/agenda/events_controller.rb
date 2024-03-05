@@ -80,7 +80,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def load_categories
-    @categories = @website.agenda_categories.for_language(current_website_language).ordered
+    @root_categories = @website.agenda_categories
+                               .for_language(current_website_language)
+                               .root
+                               .ordered
   end
 
   def event_params
