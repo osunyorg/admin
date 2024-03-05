@@ -4,33 +4,16 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
                               through_association: :agenda_categories
 
   include Admin::Translatable
+  include Admin::Categorizable
 
   def index
     @root_categories = categories.root.ordered
     breadcrumb
   end
 
-  def reorder
-    parent_id = params.dig(:parentId)
-    old_parent_id = params.dig(:oldParentId)
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      category = categories.find(id)
-      category.update_column :position, index + 1
-    end
-    if old_parent_id.present?
-      old_parent = categories.find(old_parent_id)
-      old_parent.sync_with_git
-    end
-    categories.find(params[:itemId]).sync_with_git # Will sync siblings
-  end
-
   def children
-    return unless request.xhr?
     @kind = Communication::Website::Agenda::Category
-    @category = categories.find(params[:id])
-    @children = @category.children.ordered
-    render 'admin/application/categories/children'
+    super
   end
 
   def show
@@ -80,12 +63,10 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   protected
-
   def categories
     @website.agenda_categories
             .for_language(current_website_language)
   end
-
   def breadcrumb
     super
     add_breadcrumb  Communication::Website::Agenda::Category.model_name.human(count: 2),

@@ -4,6 +4,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                               through_association: :post_categories
 
   include Admin::Translatable
+  include Admin::Categorizable
 
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
@@ -12,28 +13,9 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
     breadcrumb
   end
 
-  def reorder
-    parent_id = params.dig(:parentId)
-    old_parent_id = params.dig(:oldParentId)
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      category = categories.find(id)
-      category.update_columns parent_id: parent_id,
-                              position: index + 1
-    end
-    if old_parent_id.present?
-      old_parent = categories.find(old_parent_id)
-      old_parent.sync_with_git
-    end
-    categories.find(params[:itemId])y.sync_with_git # Will sync siblings
-  end
-
   def children
-    return unless request.xhr?
     @kind = Communication::Website::Post::Category
-    @category = categories.find(params[:id])
-    @children = @category.children.ordered
-    render 'admin/application/categories/children'
+    super
   end
 
   def show
