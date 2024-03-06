@@ -10,10 +10,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @events = apply_scopes(@events).for_language(current_website_language)
                                   .ordered_desc
                                   .page(params[:page])
-    @root_categories = @website.agenda_categories
-                               .for_language(current_website_language)
-                               .root
-                               .ordered
+    @root_categories = @categories.root
+                                  .ordered
     breadcrumb
   end
 
