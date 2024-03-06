@@ -7,7 +7,8 @@ module Admin::Categorizable
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       category = categories.find(id)
-      category.update_column :position, index + 1
+      category.update_columns parent_id: parent_id,
+                              position: index + 1
     end
     if old_parent_id.present?
       old_parent = categories.find(old_parent_id)
