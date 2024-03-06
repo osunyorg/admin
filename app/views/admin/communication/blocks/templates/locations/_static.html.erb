@@ -1,0 +1,5 @@
+      locations:
+<% block.template.elements.each do |element| %>
+<% next unless element.location %>
+        - slug: "<%= element.location.slug %>"
+<% end %>

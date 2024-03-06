@@ -338,6 +338,10 @@ en:
                   false: No. Others must use the same CC license if they adapt my work.
               description:
                 label: Description
+          locations:
+            description: A selection of locations on a campus.
+            edit:
+              add: Add a location
           organizations:
             description: A list of organizations with logo, name and website.
             layouts:
@@ -476,6 +480,13 @@ en:
             description: A selection of programs.
             edit:
               add: Add a program
+            layouts:
+              grid:
+                label: Grid
+                description: Programs are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+              list:
+                label: List
+                description: A list of programs, one above the other.
           sound:
             description: An audio recording with a text transcription for a proper accessibility.
             edit:
@@ -570,6 +581,7 @@ en:
           image: Image
           key_figures: Key figures
           license: License
+          locations: Campus
           organizations: Organizations
           pages: Pages
           persons: People

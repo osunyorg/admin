@@ -12,12 +12,9 @@
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: category.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#communication_website_post_category_name' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#communication_website_post_category_name' %>
         <%= f.association :parent,
                           collection: collection_tree(@website.post_categories.for_language(current_website_language), category),
                           label_method: ->(p) { sanitize p[:label] },

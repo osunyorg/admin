@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_125958) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_172916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -285,10 +285,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_125958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
+    t.boolean "is_programs_root", default: false
+    t.uuid "program_id"
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_categories_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_categories_on_original_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
+    t.index ["program_id"], name: "index_communication_website_agenda_categories_on_program_id"
     t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
@@ -666,7 +669,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_125958) do
     t.string "featured_image_alt"
     t.text "accessibility"
     t.text "contacts"
-    t.text "duration"
+    t.string "duration"
     t.text "evaluation"
     t.text "objectives"
     t.text "opportunities"
@@ -1234,6 +1237,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_125958) do
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "original_id"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
+  add_foreign_key "communication_website_agenda_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_agenda_categories", "languages"
   add_foreign_key "communication_website_agenda_categories", "universities"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "original_id"

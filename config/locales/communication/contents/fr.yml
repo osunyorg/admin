@@ -338,6 +338,10 @@ fr:
                   false: Non. Les autres doivent utiliser la même licence CC s'ils adaptent mon œuvre.
               description:
                 label: Description
+          locations:
+            description: Une sélection de sites dans des campus.
+            edit:
+              add: Ajouter un site
           organizations:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             layouts:
@@ -476,6 +480,13 @@ fr:
             description: Une sélection de formations.
             edit:
               add: Ajouter une formation
+            layouts:
+              grid:
+                label: Grille
+                description: Les formations sont présentées en grille, avec les images toutes de la même taille.
+              list:
+                label: Liste
+                description: Une liste de formations, les unes au dessus des autres.
           sound:
             description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
             edit:
@@ -559,6 +570,7 @@ fr:
         template_kind:
           agenda: Agenda
           call_to_action: Appel à actions
+          locations: Campus
           chapter: Chapitre
           contact: Contact
           datatable: Tableau

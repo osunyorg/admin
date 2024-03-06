@@ -16,17 +16,15 @@
     <% end %>
     <%= osuny_panel t('admin.communication.website.redirects.previous_paths'), small: true do %>
       <table id="previous-permalinks" class="table border-top">
-        <tbody>        
-          <% about.previous_permalinks_in_website(@website).each do |link| %>
-            <tr>
-              <td><%= link.to_s %></td>
-            </tr>
+        <tbody>
+          <% about.previous_permalinks_in_website(@website).each do |permalink| %>
+            <%= render 'admin/communication/websites/permalinks/permalink', permalink: permalink %>
           <% end %>
         </tbody>
       </table>
-      <%= simple_form_for Communication::Website::Permalink.new, 
+      <%= simple_form_for Communication::Website::Permalink.new,
                           url:  admin_communication_website_permalinks_path(
-                                  about_type: about.class, 
+                                  about_type: about.class,
                                   about_id: about.id
                                 ),
                           remote: true do |f| %>

@@ -1,7 +1,2 @@
-document.getElementById('previous-permalinks')
-        .getElementsByTagName('tbody')[0]
-        .insertRow()
-        .insertCell()
-        .appendChild(
-          document.createTextNode('<%= @permalink.path %>')
-        )
+$('#previous-permalinks tbody')
+  .append("<%= escape_javascript(render 'admin/communication/websites/permalinks/permalink', permalink: @permalink) %>");

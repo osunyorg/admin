@@ -3,7 +3,8 @@
     <%= @website.agenda_categories.first(2).collect(&:to_s).join(', ') %>...
   <% else %>
     <% if block.template.selected_events.any? %>
-      <%= block.template.selected_events.first(2).collect(&:to_s).join(', ') %>...
+      <%= block.template.selected_events.first(2).collect(&:to_s).join(', ') %>
+      <%= '...' if block.template.selected_events.count > 2 %>
     <% else %>
       <%= block.template.no_event_message %>
     <% end %>

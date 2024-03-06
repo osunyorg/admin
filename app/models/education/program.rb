@@ -10,7 +10,7 @@
 #  contacts               :text
 #  content                :text
 #  continuing             :boolean
-#  duration               :text
+#  duration               :string
 #  evaluation             :text
 #  featured_image_alt     :string
 #  featured_image_credit  :text
@@ -60,6 +60,7 @@ class Education::Program < ApplicationRecord
   include Contentful
   include Sanitizable
   include Sluggable
+  include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
   include WithAccessibility
   include WithAlumni
@@ -80,7 +81,6 @@ class Education::Program < ApplicationRecord
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
-                                    :duration,
                                     :evaluation,
                                     :objectives,
                                     :opportunities,
@@ -110,8 +110,6 @@ class Education::Program < ApplicationRecord
 
   validates_presence_of :name
   validates :downloadable_summary, size: { less_than: 50.megabytes }
-
-  after_save :update_children_paths, if: :saved_change_to_path?
 
   scope :published, -> { where(published: true) }
   scope :ordered_by_name, -> { order(:name) }
@@ -166,13 +164,6 @@ class Education::Program < ApplicationRecord
     references = schools + siblings + descendants
     references << parent if parent.present?
     references
-  end
-
-  def update_children_paths
-    children.each do |child|
-      child.update_column :path, child.generated_path
-      child.update_children_paths
-    end
   end
 
   #####################

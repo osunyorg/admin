@@ -16,9 +16,8 @@ administrator_involvements = @about.involvements_through_roles
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
-bodyclass: >-
-  <%= @about.bodyclass %>
-url: >-
+bodyclass: <%= @about.bodyclass %>
+website_url: >-
   <%= @about.url %>
 registration_url: >-
   <%= @about.registration_url %>
@@ -36,6 +35,8 @@ parent:
 <%= render 'admin/application/featured_image/static' %>
 related_category: "<%= @website.post_categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
+duration: >
+  <%= prepare_text_for_static @about.duration %>
 teachers:
 <% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"

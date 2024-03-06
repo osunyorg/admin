@@ -23,12 +23,9 @@
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: location.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#administration_location_name' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#administration_location_name' %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: location, f: f %>
     </div>
@@ -42,7 +39,7 @@
                         value_method: ->(p) { p[:id] } %>
     </div>
     <div class="col-md-4">
-      <%= f.association :schools, 
+      <%= f.association :schools,
                         as: :check_boxes,
                         collection: current_university.education_schools.ordered %>
     </div>

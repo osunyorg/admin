@@ -26,9 +26,7 @@ class Communication::Website::Page::CommunicationAgendaArchive < Communication::
     website.special_page(Communication::Website::Page::CommunicationAgenda, language: language)
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}events/archives/_index.html"
+  def git_path_relative
+    'events/archives/_index.html'
   end
 end

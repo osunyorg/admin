@@ -39,12 +39,9 @@
         <%= f.association :author,
                             collection: current_university.people.for_language(current_website_language).ordered,
                             label_method: :to_s_alphabetical %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: post.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#communication_website_post_title' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#communication_website_post_title' %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: @post, f: f %>
     </div>

@@ -16,10 +16,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
     "University::Organization"
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}organizations/_index.html"
+  def git_path_relative
+    'organizations/_index.html'
   end
-
 end

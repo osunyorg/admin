@@ -4,11 +4,15 @@ class Static::Html < Static::Default
     unless @prepared
       @prepared = @text.to_s.strip.dup
       @prepared.gsub! "\r", ''
+      # if no whitespace in the next line html in static won't be on one line
       @prepared.gsub! "\n", ' '
       @prepared = clean_empty_paragraphs_at_beginning_and_end @prepared
-      @prepared.gsub! "\n", ' '
       @prepared = @prepared.ortho(locale: locale)
-      @prepared.gsub! "/rails/active_storage", "#{@university.url}/rails/active_storage"      
+      # TODO ça ne doit plus être utile depuis un siècle
+      @prepared.gsub! "/rails/active_storage", "#{@university.url}/rails/active_storage"  
+      # clean_empty_paragraphs_at_beginning_and_end re-send \n, because of Nokogiri. 
+      # Can be changed with a weird hack (Nokogiri(format: 0)) but a gsub is easiest (PAB)    
+      @prepared.gsub! "\n", ''
       @prepared = sanitize @prepared
     end
     @prepared
@@ -17,22 +21,21 @@ class Static::Html < Static::Default
   private
 
   # based on https://stackoverflow.com/questions/17479135/how-do-i-trim-the-head-and-tail-of-empty-tags-in-html
+  # and https://stackoverflow.com/questions/16417292/how-do-i-remove-white-space-between-html-nodes
   def clean_empty_paragraphs_at_beginning_and_end(text)
     return text unless text.present?
-    doc = Nokogiri::HTML(text)
-    ps = doc.xpath '/html/body/p'
-    
-    first_text = -1
-    last_text = 0
-    
-    ps.each_with_index do |p, i|
-      if not p.at_xpath('child::text()').text.strip.empty?  #then found some text
-        first_text = i if first_text == -1
-        last_text = i 
-      end
+
+    doc = Nokogiri::HTML::DocumentFragment.parse(text)
+
+    while(doc.children.any? && doc.children.first.name == 'p' && doc.children.first.text.strip == '')
+      doc.children.first.remove
     end
-    
-    ps.slice(first_text .. last_text).to_html
+
+    while(doc.children.any? && doc.children.last.name == 'p' && doc.children.last.text.strip == '')
+      doc.children.last.remove
+    end
+
+    doc.to_html
   end
 
 end

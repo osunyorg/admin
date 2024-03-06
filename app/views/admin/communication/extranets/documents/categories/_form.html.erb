@@ -10,12 +10,9 @@
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :slug,
-                    as: :string,
-                    input_html: category.persisted? ? {} : {
-                      class: 'js-slug-input',
-                      data: { source: '#communication_extranet_document_category_name' }
-                    } %>
+        <%= render  "admin/application/slug/form",
+                    f: f,
+                    source: '#communication_extranet_document_category_name' %>
       <% end %>
     </div>
   </div>

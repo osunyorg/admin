@@ -13,4 +13,5 @@
 //= require autocomplete-rails
 //= require_tree ./application/plugins
 //= require_tree ./extranet
+//= require osuny-hugo-theme/script
 //= require_self

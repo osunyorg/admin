@@ -5,11 +5,12 @@
 <%= block_component_static block, :show_summary %>
 <%= block_component_static block, :show_category %>
 <%= block_component_static block, :show_status %>
+      title_link: "<%= block.template.title_link %>"
 <% if block.template.mode == 'category' && block.template.category %>
       category: "<%= block.template.category.path %>"
 <% end %>
       events:
 <% block.template.selected_events.each do |element| %>
         - path: "<%= element.current_permalink_in_website(@website)&.path %>"
-          file: "<%= element.git_path(@website) %>"
+          file: "<%= element.git_path_relative %>"
 <% end %>
