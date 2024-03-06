@@ -162,7 +162,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def inherited_bodyclass
     bodyclass.present?  ? bodyclass
-                        : parent.inherited_bodyclass
+                        : parent&.inherited_bodyclass
   end
 
   def slug_unavailable?(slug)
