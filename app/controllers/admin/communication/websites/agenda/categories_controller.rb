@@ -4,20 +4,12 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
                               through_association: :agenda_categories
 
   include Admin::Translatable
+  include Admin::Categorizable
 
   def index
-    @categories = @categories.for_language(current_website_language).ordered
+    @root_categories = categories.root
+    @categories_class = categories_class
     breadcrumb
-  end
-
-  def reorder
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      category = @website.post_categories.find(id)
-      category.update_column :position, index + 1
-    end
-    @category = @website.agenda_categories.find(params[:itemId])
-    @category.sync_with_git # Will sync siblings
   end
 
   def show
@@ -67,6 +59,10 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   protected
+
+  def categories_class
+    Communication::Website::Agenda::Category
+  end
 
   def breadcrumb
     super

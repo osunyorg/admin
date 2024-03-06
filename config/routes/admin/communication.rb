@@ -69,6 +69,7 @@ namespace :communication do
           post :reorder
         end
         member do
+          get :children
           get :static
         end
       end

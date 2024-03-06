@@ -4,10 +4,12 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   include Admin::Translatable
 
-  before_action :load_categories
-
   def index
-    @events = apply_scopes(@events).for_language(current_website_language).ordered_desc.page params[:page]
+    @events = apply_scopes(@events).for_language(current_website_language)
+                                  .ordered_desc
+                                  .page(params[:page])
+    @root_categories = categories.root
+    @categories_class = Communication::Website::Agenda::Category
     breadcrumb
   end
 
@@ -28,10 +30,12 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
@@ -43,6 +47,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s)
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -54,6 +59,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s)
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -79,8 +85,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb_for @event
   end
 
-  def load_categories
-    @categories = @website.agenda_categories.for_language(current_website_language).ordered
+  def categories
+    @website.agenda_categories
+            .for_language(current_website_language)
+            .ordered
   end
 
   def event_params
