@@ -40,25 +40,25 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def create
-    @categories = categories
     @event.website = @website
     @event.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s)
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    @categories = categories
     @event.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s)
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
