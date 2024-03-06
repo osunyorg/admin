@@ -1,19 +1,19 @@
 <%
 # communication_website_agenda_category
-kind_as_path = kind.to_s.parameterize.underscore
+categories_class_path = categories_class.to_s.parameterize.underscore
 %>
 <% categories.each do |category| %>
   <%
   # children_admin_communication_website_post_category_path
-  children_path = send  "children_admin_#{kind_as_path}_path", 
+  children_path = send  "children_admin_#{categories_class_path}_path", 
                         website_id: category.website.id, 
                         id: category.id
   # admin_communication_website_post_category_path
-  show_path = send  "admin_#{kind_as_path}_path", 
+  show_path = send  "admin_#{categories_class_path}_path", 
                     website_id: @website.id, 
                     id: category.id
   # edit_admin_communication_website_post_category_path
-  edit_path = send  "edit_admin_#{kind_as_path}_path", 
+  edit_path = send  "edit_admin_#{categories_class_path}_path", 
                     website_id: @website.id, 
                     id: category.id
   %>

@@ -20,6 +20,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                                 .ordered
                                 .page(params[:authors_page])
     @root_categories = categories.root
+    @categories_class = Communication::Website::Post::Category
     breadcrumb
   end
 

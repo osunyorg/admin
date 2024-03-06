@@ -8,6 +8,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
 
   def index
     @root_categories = categories.root
+    @categories_class = categories_class
     breadcrumb
   end
 

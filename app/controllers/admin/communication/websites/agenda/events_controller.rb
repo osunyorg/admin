@@ -9,6 +9,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
                                   .ordered_desc
                                   .page(params[:page])
     @root_categories = categories.root
+    @categories_class = Communication::Website::Agenda::Category
     breadcrumb
   end
 

@@ -19,7 +19,7 @@ module Admin::Categorizable
 
   def children
     return unless request.xhr?
-    @kind = categories_class
+    @categories_class = categories_class
     @category = categories.find(params[:id])
     @children = @category.children.ordered
     render 'admin/application/categories/children'
