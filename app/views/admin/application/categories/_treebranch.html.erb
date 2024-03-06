@@ -1,7 +1,9 @@
+<%
+# communication_website_agenda_category
+kind_as_path = kind.to_s.parameterize.underscore
+%>
 <% categories.each do |category| %>
   <%
-  # communication_website_agenda_category
-  kind_as_path = kind.to_s.parameterize.underscore
   # children_admin_communication_website_post_category_path
   children_path = send  "children_admin_#{kind_as_path}_path", 
                         website_id: category.website.id, 

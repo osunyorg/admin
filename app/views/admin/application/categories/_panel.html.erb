@@ -6,15 +6,15 @@ action = create_link kind
 # Catégories
 title = kind.model_name.human(count: 2)
 # communication_website_agenda_categories
-kind_as_path = kind.to_s.parameterize.underscore.pluralize
+kind_as_path = kind.model_name.route_key
 # reorder_admin_communication_website_post_categories_path
 order_path = "reorder_admin_#{kind_as_path}_path"
 %>
-<% if visible  %>
+<% if visible %>
   <%= osuny_panel title, action: action do %>
     <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
         data-id=""
-        data-sort-url="<%= send order_path %>">
+        data-sort-url="<%= public_send order_path %>">
       <%= render 'admin/application/categories/treebranch',
                   categories: root_categories,
                   kind: kind %>

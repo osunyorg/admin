@@ -6,7 +6,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   include Admin::Translatable
 
   before_action :load_filters, only: :index
-  before_action :load_categories, only: [:new, :edit]
+  before_action :load_categories
 
   has_scope :for_search_term
   has_scope :for_author
@@ -19,10 +19,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                                 .accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
-    @root_categories = @website.post_categories
-                               .for_language(current_website_language)
-                               .root
-                               .ordered
+    @root_categories = @categories.root
     breadcrumb
   end
 
@@ -136,5 +133,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def load_categories
     @categories = @website.post_categories
                           .for_language(current_website_language)
+                          .ordered
   end
 end
