@@ -20,7 +20,8 @@ has:
 position: <%= @about.position %>
 weight: <%= @about.position %>
 <%= render 'admin/application/i18n/static' %>
-bodyclass: <%= @about.best_bodyclass %>
+bodyclass: >-
+  <%= @about.best_bodyclass %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @about.children.published.any? %>
 children:

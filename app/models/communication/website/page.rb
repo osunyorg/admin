@@ -139,8 +139,11 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def best_bodyclass
-    return bodyclass if bodyclass.present?
-    parent&.best_bodyclass unless is_home? || parent&.is_home?
+    if bodyclass.present?
+      bodyclass
+    elsif inherited_bodyclass
+      "ancestor-#{inherited_bodyclass}"
+    end
   end
 
   def siblings
@@ -156,6 +159,11 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def inherited_bodyclass
+    bodyclass.present?  ? bodyclass
+                        : parent&.inherited_bodyclass
+  end
 
   def slug_unavailable?(slug)
     self.class.unscoped
