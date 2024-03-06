@@ -7,7 +7,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   include Admin::Categorizable
 
   def index
-    @root_categories = categories.root.ordered
+    @root_categories = categories.root
     breadcrumb
   end
 

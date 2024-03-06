@@ -9,7 +9,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
 
   def index
-    @categories = categories.ordered
+    @categories = categories
     breadcrumb
   end
 
