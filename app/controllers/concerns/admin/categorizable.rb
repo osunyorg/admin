@@ -18,8 +18,7 @@ module Admin::Categorizable
 
   def children
     return unless request.xhr?
-    raise "@kind doit être défini dans le controller" unless @kind
-    # @kind = Communication::Website::Agenda::Category
+    @kind = categories_kind
     @category = categories.find(params[:id])
     @children = @category.children.ordered
     render 'admin/application/categories/children'
@@ -29,5 +28,10 @@ module Admin::Categorizable
 
   def categories
     raise "La méthode doit être implémentée, et définir les catégories pertinentes dans ce contexte"
+  end
+
+  # Communication::Website::Agenda::Category
+  def categories_kind
+    raise "@kind doit être défini dans le controller"
   end
 end

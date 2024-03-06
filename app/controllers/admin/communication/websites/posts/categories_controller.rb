@@ -13,11 +13,6 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
     breadcrumb
   end
 
-  def children
-    @kind = Communication::Website::Post::Category
-    super
-  end
-
   def show
     @posts = @category.posts.ordered.page(params[:page])
     breadcrumb
@@ -73,6 +68,10 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
 
   def categories
     @website.post_categories.for_language(current_website_language)
+  end
+
+  def categories_kind
+    Communication::Website::Post::Category
   end
 
   def breadcrumb

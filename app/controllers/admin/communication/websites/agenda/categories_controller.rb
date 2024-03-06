@@ -11,11 +11,6 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
     breadcrumb
   end
 
-  def children
-    @kind = Communication::Website::Agenda::Category
-    super
-  end
-
   def show
     @events = @category.events.ordered.page(params[:page])
     breadcrumb
@@ -63,10 +58,16 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   protected
+
   def categories
     @website.agenda_categories
             .for_language(current_website_language)
   end
+
+  def categories_kind
+    Communication::Website::Agenda::Category
+  end
+
   def breadcrumb
     super
     add_breadcrumb  Communication::Website::Agenda::Category.model_name.human(count: 2),
