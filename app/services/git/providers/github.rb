@@ -56,10 +56,10 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def init_from_template(name)
     client.create_repository_from_template(
-      'noesya/osuny-hugo-template-aaa',
+      'osunyorg/template',
       name,
       {
-        owner: 'noesya',
+        owner: 'osunyorg',
         private: false
       }
     )
