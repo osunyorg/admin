@@ -11,7 +11,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
                                   .ordered_desc
                                   .page(params[:page])
     @root_categories = @categories.root
-                                  .ordered
     breadcrumb
   end
 
@@ -86,6 +85,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def load_categories
     @categories = @website.agenda_categories
                           .for_language(current_website_language)
+                          .ordered
   end
 
   def event_params
