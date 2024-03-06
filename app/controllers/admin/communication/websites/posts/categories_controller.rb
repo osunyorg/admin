@@ -6,10 +6,8 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   include Admin::Translatable
   include Admin::Categorizable
 
-  before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
-
   def index
-    @categories = categories
+    @root_categories = categories.root
     breadcrumb
   end
 
