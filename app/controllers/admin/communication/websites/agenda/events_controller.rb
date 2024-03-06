@@ -4,13 +4,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   include Admin::Translatable
 
-  before_action :load_categories
-
   def index
     @events = apply_scopes(@events).for_language(current_website_language)
                                   .ordered_desc
                                   .page(params[:page])
-    @root_categories = @categories.root
+    @root_categories = categories.root
     breadcrumb
   end
 
@@ -31,15 +29,18 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
 
   def create
+    @categories = categories
     @event.website = @website
     @event.add_photo_import params[:photo_import]
     if @event.save_and_sync
@@ -52,6 +53,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def update
+    @categories = categories
     @event.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
@@ -82,10 +84,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb_for @event
   end
 
-  def load_categories
-    @categories = @website.agenda_categories
-                          .for_language(current_website_language)
-                          .ordered
+  def categories
+    @website.agenda_categories
+            .for_language(current_website_language)
+            .ordered
   end
 
   def event_params

@@ -1,12 +1,12 @@
 class Admin::Communication::Websites::PostsController < Admin::Communication::Websites::ApplicationController
   skip_before_action :load_filters
 
-  load_and_authorize_resource class: Communication::Website::Post, through: :website
+  load_and_authorize_resource class: Communication::Website::Post, 
+                              through: :website
 
   include Admin::Translatable
 
   before_action :load_filters, only: :index
-  before_action :load_categories
 
   has_scope :for_search_term
   has_scope :for_author
@@ -19,7 +19,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                                 .accessible_by(current_ability)
                                 .ordered
                                 .page(params[:authors_page])
-    @root_categories = @categories.root
+    @root_categories = categories.root
     breadcrumb
   end
 
@@ -57,6 +57,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def new
+    @categories = categories
     @post.website = @website
     if current_user.person.present?
       @post.author_id = current_user.person.find_or_translate!(current_website_language).id
@@ -65,11 +66,13 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
 
   def create
+    @categories = categories
     @post.website = @website
     @post.add_photo_import params[:photo_import]
     if @post.save_and_sync
@@ -82,6 +85,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def update
+    @categories = categories
     @post.add_photo_import params[:photo_import]
     if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
@@ -130,9 +134,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @filters = ::Filters::Admin::Communication::Website::Posts.new(current_user, @website).list
   end
 
-  def load_categories
-    @categories = @website.post_categories
-                          .for_language(current_website_language)
-                          .ordered
+  def categories
+    @website.post_categories
+            .for_language(current_website_language)
+            .ordered
   end
 end
