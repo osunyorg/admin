@@ -72,25 +72,23 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def create
-    @categories = categories
     @post.website = @website
     @post.add_photo_import params[:photo_import]
     if @post.save_and_sync
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
-      load_categories
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    @categories = categories
     @post.add_photo_import params[:photo_import]
     if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else
-      load_categories
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
