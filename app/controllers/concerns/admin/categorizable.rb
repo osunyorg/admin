@@ -28,11 +28,11 @@ module Admin::Categorizable
   protected
 
   def categories
-    raise "La méthode doit être implémentée, et définir les catégories pertinentes dans ce contexte"
+    raise NoMethodError.new("La méthode doit être implémentée, et définir les catégories pertinentes dans ce contexte")
   end
 
   # Communication::Website::Agenda::Category
   def categories_kind
-    raise "@kind doit être défini dans le controller"
+    raise NoMethodError.new("@kind doit être défini dans le controller")
   end
 end
