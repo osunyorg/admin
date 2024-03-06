@@ -35,6 +35,6 @@ module Admin::Categorizable
 
   # Communication::Website::Agenda::Category
   def categories_class
-    raise NoMethodError.new("@kind doit être défini dans le controller")
+    raise NoMethodError.new("categories_class doit être défini dans le controller, par exemple Communication::Website::Agenda::Category")
   end
 end
