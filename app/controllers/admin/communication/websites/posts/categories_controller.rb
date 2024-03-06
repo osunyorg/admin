@@ -66,11 +66,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
     @root_categories = categories.root.ordered
   end
 
-  def categories
-    @website.post_categories.for_language(current_website_language)
-  end
-
-  def categories_kind
+  def categories_class
     Communication::Website::Post::Category
   end
 

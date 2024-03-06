@@ -59,12 +59,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
 
   protected
 
-  def categories
-    @website.agenda_categories
-            .for_language(current_website_language)
-  end
-
-  def categories_kind
+  def categories_class
     Communication::Website::Agenda::Category
   end
 

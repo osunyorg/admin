@@ -19,7 +19,7 @@ module Admin::Categorizable
 
   def children
     return unless request.xhr?
-    @kind = categories_kind
+    @kind = categories_class
     @category = categories.find(params[:id])
     @children = @category.children.ordered
     render 'admin/application/categories/children'
@@ -28,11 +28,13 @@ module Admin::Categorizable
   protected
 
   def categories
-    raise NoMethodError.new("La méthode doit être implémentée, et définir les catégories pertinentes dans ce contexte")
+    categories_class.where(communication_website_id: @website.id)
+                   .for_language(current_website_language)
+                   .ordered
   end
 
   # Communication::Website::Agenda::Category
-  def categories_kind
+  def categories_class
     raise NoMethodError.new("@kind doit être défini dans le controller")
   end
 end
