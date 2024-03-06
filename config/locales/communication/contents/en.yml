@@ -442,21 +442,24 @@ en:
           posts:
             description: A list of highlighted news.
             layouts:
-              highlight:
-                label: Highlighted
-                description: The first post is big and has an image, the next ones are smaller with no image.
-              grid:
-                label: Grid
-                description: A grid of posts, with all images the same size.
-              list:
-                label: List
-                description: A list of posts with small images the same width.
               alternate:
                 label: Alternate
                 description: Posts either on the left or on the right, composing a graphically light page.
+              carousel: 
+                label: Carousel
+                description: A list of swipable posts overflowing on the right side of the screen.
+              grid:
+                label: Grid
+                description: A grid of posts, with all images the same size.
+              highlight:
+                label: Highlighted
+                description: The first post is big and has an image, the next ones are smaller with no image.
               large:
                 label: Grand
                 description: Each post is presented in majesty, across the full width available, with a large image.
+              list:
+                label: List
+                description: A list of posts with small images the same width.
             edit:
               add_post: Add post
               mode:
