@@ -63,7 +63,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   protected
 
   def get_root_categories
-    @root_categories = categories.root.ordered
+    @root_categories = categories.root
   end
 
   def categories_class
