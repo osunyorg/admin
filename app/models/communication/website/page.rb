@@ -139,14 +139,11 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def best_bodyclass
-    unless @best_bodyclass
-      bodyclasses = [bodyclass]
-      ancestors.each do |ancestor|
-        bodyclasses << "ancestor-#{ancestor.bodyclass}" if ancestor.bodyclass.present?
-      end
-      @best_bodyclass = bodyclasses.compact_blank.join(' ').strip
+    if bodyclass.present?
+      bodyclass
+    elsif inherited_bodyclass
+      "ancestor-#{inherited_bodyclass}"
     end
-    @best_bodyclass
   end
 
   def siblings
@@ -162,6 +159,11 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def inherited_bodyclass
+    bodyclass.present?  ? bodyclass
+                        : parent.inherited_bodyclass
+  end
 
   def slug_unavailable?(slug)
     self.class.unscoped
