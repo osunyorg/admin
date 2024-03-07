@@ -4,6 +4,9 @@ fr:
   activemodel:
     models:
       communication: Communication
+      communication/website/portfolio: 
+        one: Portfolio
+        other: Portfolio
   activerecord:
     attributes:
       communication/block:

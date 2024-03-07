@@ -25,6 +25,13 @@
       } if @website.feature_agenda
 
       navigation << {
+        title: Communication::Website::Portfolio.model_name.human(count: 2),
+        path: admin_communication_website_portfolio_projects_path(website_id: @website),
+        icon: Icon::COMMUNICATION_WEBSITE_PORTFOLIO,
+        ability: can?(:read, Communication::Website::Portfolio::Project)
+      } if @website.feature_portfolio
+
+      navigation << {
         title: t('admin.communication.website.pages.structure'),
         path: admin_communication_website_pages_path(website_id: @website),
         icon: Icon::COMMUNICATION_WEBSITE_PAGES,
