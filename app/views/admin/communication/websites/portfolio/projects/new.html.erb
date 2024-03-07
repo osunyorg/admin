@@ -1,0 +1,5 @@
+<% content_for :title, Communication::Website::Agenda::Event.model_name.human %>
+
+<%= render 'admin/communication/websites/sidebar' do %>
+  <%= render 'form', event: @event %>
+<% end %>

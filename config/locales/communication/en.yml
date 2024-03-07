@@ -139,6 +139,16 @@ en:
         title: Title
         to_day: To day
         to_hour: To hour
+      communication/website/portfolio/category:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
+      communication/website/portfolio/project:
+        categories: Categories
+        featured_image: Featured image
+        published: Published
+        title: Title
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type
@@ -252,6 +262,12 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/portfolio/category:
+        one: Category
+        other: Categories
+      communication/website/portfolio/project:
+        one: Project
+        other: Projects
       communication/website/connection:
         one: Connection
         other: Connections
@@ -311,6 +327,9 @@ en:
           published: Published
           published_status: Publication status
           with_children: "with children:"
+        portfolio:
+          projects: 
+            none: No project yet
         posts:
           and_pinned: and pinned
           by: by %{author}
