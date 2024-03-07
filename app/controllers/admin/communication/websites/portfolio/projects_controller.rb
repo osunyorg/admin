@@ -94,7 +94,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   def project_params
     params.require(:communication_website_portfolio_project)
     .permit(
-      :title, :meta_description, :summary, :published, :slug,
+      :title, :meta_description, :summary, :published, :slug, :year,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       category_ids: []
     )

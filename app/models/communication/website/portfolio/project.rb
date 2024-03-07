@@ -46,5 +46,68 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include WithTranslations
   include WithUniversity
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'Communication::Website::Portfolio::Category',
+                          join_table: :communication_website_portfolio_categories_projects,
+                          foreign_key: :communication_website_portfolio_project_id,
+                          association_foreign_key: :communication_website_portfolio_category_id
+
+  validates :title, :year, presence: true
+
   scope :ordered, -> { order(year: :desc, title: :asc) }
+  scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
+
+  def git_path(website)
+    return unless website.id == communication_website_id && published
+    git_path_content_prefix(website) + git_path_relative
+  end
+
+  def git_path_relative
+    path = "projects/"
+    path += "#{year}-#{slug}.html"
+    path
+  end
+
+  def template_static
+    "admin/communication/websites/agenda/events/static"
+  end
+
+  def dependencies
+    active_storage_blobs +
+    contents_dependencies +
+    [website.config_default_content_security_policy]
+  end
+
+  def references
+    menus +
+    abouts_with_agenda_block
+  end
+
+  def url
+    return unless published
+    return if website.url.blank?
+    return if website.special_page(Communication::Website::Page::CommunicationAgenda)&.path.blank?
+    return if current_permalink_in_website(website).blank?
+    "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
+  end
+
+  def to_s
+    "#{title}"
+  end
+
+  protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
+
+  def explicit_blob_ids
+    super.concat [featured_image&.blob_id]
+  end
+
+  def abouts_with_agenda_block
+    website.blocks.agenda.collect(&:about)
+  end
+
 end

@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  slug: MyString
+  featured_image_alt: MyText
+  featured_image_credit: MyText
+  meta_description: MyText
+  is_programs_root: false
+  path: MyString
+  position: 1
+  summary: MyText
+  communication_website: one
+  language: one
+  original: one
+  parent: one
+  university: one
+
+two:
+  name: MyString
+  slug: MyString
+  featured_image_alt: MyText
+  featured_image_credit: MyText
+  meta_description: MyText
+  is_programs_root: false
+  path: MyString
+  position: 1
+  summary: MyText
+  communication_website: two
+  language: two
+  original: two
+  parent: two
+  university: two

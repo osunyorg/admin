@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, event] do |f| %>
+<%= simple_form_for [:admin, project] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -6,33 +6,10 @@
     <div class="col-md-8">
       <%= osuny_panel t('content') do %>
         <%= f.input :title %>
-        <%= f.input :subtitle %>
-        <%= render 'admin/application/summary/form', f: f, about: event %>
-      <% end %>
-      <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>
-        <div class="row pure__row--small">
-          <div class="col-md-6">
-            <%= f.input :from_day, html5: true %>
-          </div>
-          <div class="col-md-6">
-            <%= f.input :from_hour, html5: true %>
-          </div>
-        </div>
-        <div class="row pure__row--small">
-          <div class="col-md-6">
-            <%= f.input :to_day, html5: true %>
-          </div>
-          <div class="col-md-6">
-            <%= f.input :to_hour, html5: true %>
-          </div>
-        </div>
-        <%= f.input :time_zone,
-                    collection: time_zones_for_select,
-                    include_blank: false,
-                    selected: f.object.time_zone || @website.default_time_zone %>
+        <%= render 'admin/application/summary/form', f: f, about: project %>
       <% end %>
       <% if @categories.any? %>
-        <%= osuny_panel t('activerecord.attributes.communication/website/agenda/event.categories') do %>
+        <%= osuny_panel t('activerecord.attributes.communication/website/portfolio/project.categories') do %>
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
@@ -40,22 +17,23 @@
         <% end %>
       <% end %>
 
-      <%= render 'admin/application/meta_description/form', f: f, about: event %>
+      <%= render 'admin/application/meta_description/form', f: f, about: project %>
 
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
-        <%= f.input :published if can? :publish, event %>
+        <%= f.input :published if can? :publish, project %>
+        <%= f.input :year %>
         <%= render  "admin/application/slug/form",
                     f: f,
-                    source: '#communication_website_agenda_event_title' %>
+                    source: '#communication_website_agenda_project_title' %>
       <% end %>
-      <%= render 'admin/application/featured_image/edit', about: event, f: f %>
+      <%= render 'admin/application/featured_image/edit', about: project, f: f %>
     </div>
   </div>
 
   <% content_for :action_bar_left do %>
-    <%= render 'admin/application/i18n/translate_button', about: event %>
+    <%= render 'admin/application/i18n/translate_button', about: project %>
   <% end %>
 
   <% content_for :action_bar_right do %>

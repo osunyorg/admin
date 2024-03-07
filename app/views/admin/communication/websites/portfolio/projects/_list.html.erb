@@ -14,17 +14,12 @@
         <% projects.each do |project| %>
           <tr class="<%= 'draft' unless project.published? %>">
             <td>
-              <p class="mb-0">
-                <%= link_to project,
-                            admin_communication_website_portfolio_project_path(website_id: project.website.id, id: project.id) %>
-              </p>
-              <% if project.subtitle.present? %>
-                <p class="mb-0 text-muted">
-                  <%= project.subtitle %>
-                </p>
-              <% end %>
+              <%= link_to project,
+                          admin_communication_website_portfolio_project_path(website_id: project.website.id, id: project.id) %>
             </td>
-            <td class="small"><%= render 'admin/communication/websites/portfolio/categories/inline', about: project %></td>
+            <td class="small">
+              <%= render 'admin/communication/websites/portfolio/categories/inline', about: project %>
+            </td>
             <td>
               <%= kamifusen_tag project.featured_image, width: 100 if project.featured_image.attached? %>
             </td>

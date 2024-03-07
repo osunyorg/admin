@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_07_054140) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_065916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -474,6 +474,37 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_054140) do
     t.index ["about_type", "about_id"], name: "index_communication_website_permalinks_on_about"
     t.index ["university_id"], name: "index_communication_website_permalinks_on_university_id"
     t.index ["website_id"], name: "index_communication_website_permalinks_on_website_id"
+  end
+
+  create_table "communication_website_portfolio_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.boolean "is_programs_root", default: false
+    t.string "path"
+    t.integer "position"
+    t.text "summary"
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
+    t.uuid "parent_id"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
+    t.index ["language_id"], name: "idx_on_language_id_6e6ffc92a8"
+    t.index ["original_id"], name: "idx_on_original_id_4cbc9f1290"
+    t.index ["parent_id"], name: "index_communication_website_portfolio_categories_on_parent_id"
+    t.index ["university_id"], name: "idx_on_university_id_a07cc0a296"
+  end
+
+  create_table "communication_website_portfolio_categories_projects", id: false, force: :cascade do |t|
+    t.uuid "communication_website_portfolio_category_id", null: false
+    t.uuid "communication_website_portfolio_project_id", null: false
+    t.index ["communication_website_portfolio_category_id", "communication_website_portfolio_project_id"], name: "idx_on_communication_website_portfolio_category_id__77417ffc96"
+    t.index ["communication_website_portfolio_project_id", "communication_website_portfolio_category_id"], name: "idx_on_communication_website_portfolio_project_id_c_8ffd53123b"
   end
 
   create_table "communication_website_portfolio_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1287,6 +1318,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_054140) do
   add_foreign_key "communication_website_pages", "universities"
   add_foreign_key "communication_website_permalinks", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_permalinks", "universities"
+  add_foreign_key "communication_website_portfolio_categories", "communication_website_portfolio_categories", column: "original_id"
+  add_foreign_key "communication_website_portfolio_categories", "communication_website_portfolio_categories", column: "parent_id"
+  add_foreign_key "communication_website_portfolio_categories", "communication_websites"
+  add_foreign_key "communication_website_portfolio_categories", "languages"
+  add_foreign_key "communication_website_portfolio_categories", "universities"
   add_foreign_key "communication_website_portfolio_projects", "communication_website_portfolio_projects", column: "original_id"
   add_foreign_key "communication_website_portfolio_projects", "communication_websites"
   add_foreign_key "communication_website_portfolio_projects", "languages"
