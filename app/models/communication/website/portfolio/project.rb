@@ -45,4 +45,6 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include WithPermalink
   include WithTranslations
   include WithUniversity
+
+  scope :ordered, -> { order(year: :desc, title: :asc) }
 end
