@@ -11,6 +11,7 @@
 #  deuxfleurs_hosting      :boolean          default(TRUE)
 #  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
+#  feature_portfolio       :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
 #  git_endpoint            :string

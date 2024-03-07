@@ -91,8 +91,9 @@ en:
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         features: Features
-        feature_posts: Posts
         feature_agenda: Agenda
+        feature_portfolio: Portfolio
+        feature_posts: Posts
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -478,6 +479,7 @@ en:
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_posts: To publish posts, like a media
         feature_agenda: To share events
+        feature_portfolio: To showcase projects
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
