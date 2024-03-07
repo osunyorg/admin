@@ -1,7 +1,7 @@
 class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::Communication::Websites::Portfolio::ApplicationController
   load_and_authorize_resource class: 'Communication::Website::Portfolio::Category', 
                               through: :website,
-                              through_association: :agenda_categories
+                              through_association: :portfolio_categories
 
   include Admin::Translatable
   include Admin::Categorizable
@@ -35,7 +35,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
     @category.website = @website
     @category.add_photo_import params[:photo_import]
     if @category.save_and_sync
-      redirect_to admin_communication_website_agenda_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
+      redirect_to admin_communication_website_portfolio_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -45,7 +45,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
   def update
     @category.add_photo_import params[:photo_import]
     if @category.update_and_sync(category_params)
-      redirect_to admin_communication_website_agenda_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
+      redirect_to admin_communication_website_portfolio_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -55,7 +55,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
 
   def destroy
     @category.destroy
-    redirect_to admin_communication_website_agenda_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+    redirect_to admin_communication_website_portfolio_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
   end
 
   protected

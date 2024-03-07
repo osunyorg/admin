@@ -8,8 +8,8 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     @projects = apply_scopes(@projects).for_language(current_website_language)
                                      .ordered
                                      .page(params[:page])
-    # @root_categories = categories.root
-    # @categories_class = Communication::Website::Portfolio::Category
+    @root_categories = categories.root
+    @categories_class = Communication::Website::Portfolio::Category
     breadcrumb
   end
 
@@ -80,8 +80,6 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Portfolio::Project.model_name.human(count: 2),
-                    admin_communication_website_portfolio_projects_path
     breadcrumb_for @project
   end
 

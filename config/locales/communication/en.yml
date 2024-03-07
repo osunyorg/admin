@@ -412,6 +412,9 @@ en:
           communication_agenda_archive:
             slug: archives
             title: Archives
+          communication_portfolio:
+            slug: projects
+            title: Projects
           education_diploma:
             slug: diplomas
             title: Diplomas
