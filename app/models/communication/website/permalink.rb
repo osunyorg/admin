@@ -30,6 +30,8 @@ class Communication::Website::Permalink < ApplicationRecord
     "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
     "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
     "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
+    "Communication::Website::Portfolio::Project" => Communication::Website::Permalink::Portfolio::Project,
+    "Communication::Website::Portfolio::Category" => Communication::Website::Permalink::Portfolio::Category,
     "Administration::Location" => Communication::Website::Permalink::Location,
     "Education::Diploma" => Communication::Website::Permalink::Diploma,
     "Education::Program" => Communication::Website::Permalink::Program,
