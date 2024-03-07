@@ -1,7 +1,7 @@
 class Communication::Website::Permalink::Author < Communication::Website::Permalink
   def self.required_in_config?(website)
-    # website might have authors but no communication_posts (if a post unpublished exists)
-    website.has_authors? && website.has_communication_posts?
+    # website might have authors but no posts (if a post unpublished exists)
+    website.has_authors? && website.has_blog_posts?
   end
 
   def self.static_config_key
