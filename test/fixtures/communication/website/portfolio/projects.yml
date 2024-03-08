@@ -1,29 +1,25 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  title: MyString
-  slug: MyString
+  title: My string
+  slug: "my-string"
   featured_image_alt: MyText
   featured_image_credit: MyText
-  year: 1
+  year: 2020
   meta_description: MyText
-  published: false
+  published: true
   summary: MyText
-  communication_website: one
-  language: one
-  original: one
-  university: one
+  university: default_university
+  website: website_with_github
+  language: fr
 
 two:
-  title: MyString
-  slug: MyString
+  title: My string
+  slug: "my-string"
   featured_image_alt: MyText
   featured_image_credit: MyText
-  year: 1
+  year: 2020
   meta_description: MyText
-  published: false
+  published: true
   summary: MyText
-  communication_website: two
-  language: two
-  original: two
-  university: two
+  university: default_university
+  website: website_with_github
+  language: fr
