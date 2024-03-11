@@ -1,0 +1,25 @@
+one:
+  title: My string
+  slug: "my-string"
+  featured_image_alt: MyText
+  featured_image_credit: MyText
+  year: 2020
+  meta_description: MyText
+  published: true
+  summary: MyText
+  university: default_university
+  website: website_with_github
+  language: fr
+
+two:
+  title: My string
+  slug: "my-string"
+  featured_image_alt: MyText
+  featured_image_credit: MyText
+  year: 2020
+  meta_description: MyText
+  published: true
+  summary: MyText
+  university: default_university
+  website: website_with_github
+  language: fr

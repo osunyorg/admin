@@ -1,0 +1,14 @@
+---
+<%= render 'admin/application/static/title' %>
+<%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+<%= render 'admin/application/static/breadcrumbs',
+            pages: @website.special_page(Communication::Website::Page::CommunicationPortfolio).ancestors_and_self,
+            current_title: @about.to_s %>
+position: <%= @about.position %>
+<%= render 'admin/application/i18n/static' %>
+<%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/summary/static' %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
+---

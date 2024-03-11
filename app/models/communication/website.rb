@@ -11,6 +11,7 @@
 #  deuxfleurs_hosting      :boolean          default(TRUE)
 #  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
+#  feature_portfolio       :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
 #  git_endpoint            :string
@@ -55,6 +56,9 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
+  include FeatureAgenda
+  include FeatureBlog
+  include FeaturePortfolio
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs

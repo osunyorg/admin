@@ -11,6 +11,7 @@ module Communication::Website::Page::WithType
       Communication::Website::Page::CommunicationPost,
       Communication::Website::Page::CommunicationAgenda,
       Communication::Website::Page::CommunicationAgendaArchive,
+      Communication::Website::Page::CommunicationPortfolio,
       Communication::Website::Page::Person,
       Communication::Website::Page::Organization,
       # Education

@@ -1,0 +1,42 @@
+<% content_for :title, @project %>
+
+<%= render 'admin/communication/websites/sidebar' do %>
+  <div class="row">
+    <div class="col-lg-7">
+      <%= osuny_panel Communication::Website::Portfolio::Project.human_attribute_name(:title), small: true do %>
+        <p class="lead"><%= @project.title %></p>
+      <% end %>
+    </div>
+    <div class="offset-lg-1 col-lg-4">
+      <%= render 'admin/application/featured_image/show', about: @project, small: true %>
+    </div>
+  </div>
+  <hr class="mb-5">
+  <%= render 'admin/application/a11y/widget', about: @project, horizontal: true %>
+  <hr class="mb-5">
+  <div class="row">
+    <div class="col-lg-4">
+      <%= render 'admin/communication/websites/portfolio/projects/show/metadata' %>
+    </div>
+    <div class="col-lg-8">
+      <%= render 'admin/application/summary/show', about: @project, small: true %>
+      <%= render 'admin/application/meta_description/show', about: @project %>
+    </div>
+  </div>
+  <%= render 'admin/communication/blocks/content/editor', about: @project %>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @project %>
+  <%= duplicate_link @project %>
+  <%= static_link static_admin_communication_website_portfolio_project_path(@project) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('open'),
+              @project.url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if @project.url %>
+  <%= edit_link @project %>
+  <%= publish_link @project %>
+<% end %>

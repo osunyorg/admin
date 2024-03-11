@@ -74,6 +74,24 @@ namespace :communication do
         end
       end
     end
+    namespace :portfolio, path: '/:lang/portfolio' do
+      resources :projects, controller: '/admin/communication/websites/portfolio/projects' do
+        member do
+          get :static
+          post :duplicate
+          post :publish
+        end
+      end
+      resources :categories, controller: '/admin/communication/websites/portfolio/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+          get :static
+        end
+      end
+    end
     resources :menus, controller: 'websites/menus', path: '/:lang/menus' do
       member do
         get :static

@@ -1,0 +1,31 @@
+<% if projects.none? %>
+  <p><%= t('admin.communication.website.portfolio.projects.none') %></p>
+<% else %>
+  <div class="table-responsive">
+    <table class="<%= table_classes %>">
+      <thead>
+        <tr>
+          <th class="ps-0" style="min-width: 250px"><%= Communication::Website::Portfolio::Project.human_attribute_name('title') %></th>
+          <th><%= Communication::Website::Portfolio::Project.human_attribute_name('categories') %></th>
+          <th><%= Communication::Website::Portfolio::Project.human_attribute_name('featured_image') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% projects.each do |project| %>
+          <tr class="<%= 'draft' unless project.published? %>">
+            <td>
+              <%= link_to project,
+                          admin_communication_website_portfolio_project_path(website_id: project.website.id, id: project.id) %>
+            </td>
+            <td class="small">
+              <%= render 'admin/communication/websites/portfolio/categories/inline', about: project %>
+            </td>
+            <td>
+              <%= kamifusen_tag project.featured_image, width: 100 if project.featured_image.attached? %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
