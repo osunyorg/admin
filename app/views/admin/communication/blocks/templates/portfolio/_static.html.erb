@@ -1,5 +1,6 @@
       layout: <%= block.template.layout %>
       projects:
 <% block.template.selected_projects.each do |project| %>
-        - "<%= project.static_path %>"
+        - slug: "<%= project.slug %>"
+          file: "<%= project.git_path_relative %>"
 <% end %>

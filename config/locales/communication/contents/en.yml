@@ -454,6 +454,10 @@ en:
               list:
                 label: List
                 description: A list of projects, one below the other.
+            edit:
+              projects_quantity:
+                label: Quantity of projects
+                placeholder: Enter quantity
           posts:
             description: A list of highlighted news.
             layouts:

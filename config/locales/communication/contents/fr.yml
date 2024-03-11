@@ -454,6 +454,10 @@ fr:
               list:
                 label: Liste
                 description: Une liste de projets, les uns au-dessous des autres.
+            edit:
+              projects_quantity:
+                label: Quantité de projets
+                placeholder: Entrer la quantité
           posts:
             description: Une liste d'actualités mises en avant.
             layouts:
