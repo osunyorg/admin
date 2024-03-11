@@ -76,6 +76,7 @@ class Communication::Block < ApplicationRecord
     pages: 600,
     persons: 100,
     posts: 500,
+    portfolio: 3101,
     programs: 58,
     sound: 1005,
     testimonials: 400,
