@@ -439,6 +439,21 @@ fr:
                 role:
                   label: Rôle
                   placeholder: Indiquer le rôle de la personne
+          portfolio:
+            description: Une liste de projets classés par année.
+            layouts: 
+              alternate:
+                label: Alternance
+                description: Une alternance très légère graphiquement de projets entre la gauche et la droite de la page.
+              grid:
+                label: Grille
+                description: Une grille avec toutes les images à la même taille.
+              large:
+                label: Grand
+                description: Chaque projet est présenté en majesté, sur toute la largeur disponible avec une grande image.
+              list:
+                label: Liste
+                description: Une liste de projets, les uns au-dessous des autres.
           posts:
             description: Une liste d'actualités mises en avant.
             layouts:
@@ -589,6 +604,7 @@ fr:
           pages: Pages
           persons: Personnes
           posts: Actualités
+          portfolio: Portfolio
           programs: Formations
           sound: Son
           testimonials: Témoignages

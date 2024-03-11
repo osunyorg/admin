@@ -87,7 +87,7 @@ class Communication::Block < ApplicationRecord
   CATEGORIES = {
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations],
+    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :portfolio],
     utilities: [:files, :definitions, :contact, :license, :embed]
   }
 

@@ -439,6 +439,21 @@ en:
               role:
                 label: Role
                 placeholder: Enter person's role
+          portfolio:
+            description: A list of projects sorted by year.
+            layouts: 
+              alternate:
+                label: Alternate
+                description: A very light graphic alternation of projects between the left and right of the page.
+              grid:
+                label: Grid
+                description: A grid with all the images at the same size.
+              large:
+                label: Grand
+                description: Each project is presented in its full glory, using the full available width and a large image.
+              list:
+                label: List
+                description: A list of projects, one below the other.
           posts:
             description: A list of highlighted news.
             layouts:
@@ -588,6 +603,7 @@ en:
           organizations: Organizations
           pages: Pages
           persons: People
+          portfolio: Portfolio
           posts: Posts
           programs: Programs
           sound: Sound
