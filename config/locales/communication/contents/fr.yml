@@ -455,9 +455,24 @@ fr:
                 label: Liste
                 description: Une liste de projets, les uns au-dessous des autres.
             edit:
+              add: Ajouter un projet
+              mode:
+                label: Quel projets afficher ?
+                options:
+                  all: Tous les projets
+                  category: Une catégorie spécifique
+                  selection: Une sélection de projets
+                  categories: La liste des catégories de projets
               projects_quantity:
                 label: Quantité de projets
                 placeholder: Entrer la quantité
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir le projet
           posts:
             description: Une liste d'actualités mises en avant.
             layouts:

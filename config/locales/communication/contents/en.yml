@@ -455,9 +455,24 @@ en:
                 label: List
                 description: A list of projects, one below the other.
             edit:
+              add: Add project
+              mode:
+                label: Which projects shall we show?
+                options:
+                  all: All projects
+                  category: A specific category
+                  selection: A selection of projects
+                  categories: A list of all projects' categories
               projects_quantity:
                 label: Quantity of projects
                 placeholder: Enter quantity
+              category_id:
+                label: Category
+                placeholder: Select category
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose project
           posts:
             description: A list of highlighted news.
             layouts:
