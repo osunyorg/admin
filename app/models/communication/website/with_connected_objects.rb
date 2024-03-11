@@ -11,7 +11,10 @@ module Communication::Website::WithConnectedObjects
     pages.find_each(&:connect_dependencies)
     posts.find_each(&:connect_dependencies)
     post_categories.find_each(&:connect_dependencies)
+    events.find_each(&:connect_dependencies)
     agenda_categories.find_each(&:connect_dependencies)
+    projects.find_each(&:connect_dependencies)
+    portfolio_categories.find_each(&:connect_dependencies)
     menus.find_each(&:connect_dependencies)
     connect(about, self) if about.present?
     destroy_obsolete_connections
