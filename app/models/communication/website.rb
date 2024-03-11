@@ -122,6 +122,8 @@ class Communication::Website < ApplicationRecord
     post_categories.where(language_id: language_ids) +
     events.where(language_id: language_ids) +
     agenda_categories.where(language_id: language_ids) +
+    projects.where(language_id: language_ids) +
+    portfolio_categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
     [about] +
     [default_image&.blob]
