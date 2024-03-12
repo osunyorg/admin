@@ -64,13 +64,11 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   end
 
   def git_path_relative
-    path = "projects/"
-    path += "#{year}-#{slug}.html"
-    path
+    "projects/#{year}-#{slug}.html"
   end
 
   def template_static
-    "admin/communication/websites/agenda/events/static"
+    "admin/communication/websites/portfolio/projects/static"
   end
 
   def dependencies
