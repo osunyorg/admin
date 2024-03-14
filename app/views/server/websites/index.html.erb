@@ -1,4 +1,4 @@
-<% content_for :title, "#{@websites.total_count} #{Communication::Website.model_name.human(count: @websites.total_count).downcase}" %>
+<% content_for :title, "#{@websites.count} #{Communication::Website.model_name.human(count: @websites.count).downcase}" %>
 
 <p><%= t('server_admin.websites.in_production', count: Communication::Website.in_production.count) %></p>
 
@@ -7,8 +7,6 @@
             filters: @filters if @filters.any? %>
 
 <%= render 'server/websites/list', websites: @websites %>
-
-<%= paginate @websites, theme: 'bootstrap-5' %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('server_admin.websites.update_all_themes'),
