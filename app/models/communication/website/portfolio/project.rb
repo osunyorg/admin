@@ -79,7 +79,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
 
   def references
     menus +
-    abouts_with_agenda_block
+    abouts_with_portfolio_block
   end
 
   def url
@@ -104,8 +104,8 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     super.concat [featured_image&.blob_id]
   end
 
-  def abouts_with_agenda_block
-    website.blocks.agenda.collect(&:about)
+  def abouts_with_portfolio_block
+    website.blocks.portfolio.collect(&:about)
   end
 
 end
