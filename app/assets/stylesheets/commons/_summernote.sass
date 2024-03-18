@@ -1,7 +1,9 @@
 .summernote
     color: black
     .note-editor
+        max-width: 1000px
         .note-editing-area
+            background: white
             .note-editable
                 min-height: 50px
                 *
@@ -9,8 +11,8 @@
                 &, 
                 p, 
                 div
-                    font-size: px2rem(18)
-                    line-height: 160%
+                    font-size: px2rem(20)
+                    line-height: px2rem(30)
                 p
                     &:last-of-type
                         margin-bottom: 0
@@ -21,17 +23,16 @@
                 video
                     height: auto
                     max-width: 100%
+                > h2:first-of-type
+                    margin-top: 0
                 note
-                    background: #000000
+                    border: 1px solid #AAAAAA
                     border-radius: 4px
-                    color: #FFFFFF
+                    display: inline
                     font-size: 14px
-                    padding: 2px 4px
                     margin-left: 2px
-                    a
-                        color: #a8bbff
-                        &::after
-                            filter: invert(1)
+                    padding: 2px 4px
+                    vertical-align: 2px
     b
         color: black
         font-weight: bold
@@ -48,10 +49,6 @@
         padding-left: 1rem
     h2
         margin-top: 2rem
-    .note-editable > h2:first-of-type
-        margin-top: 0
-    .note-editing-area
-        background: white
     .sn-checkbox-open-in-new-window
         label
             padding: 0

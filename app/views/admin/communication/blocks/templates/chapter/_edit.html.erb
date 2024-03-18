@@ -7,15 +7,15 @@
 <div class="row pure__row--small mb-4">
   <div class="col-xxl-6">
     <%= block_component_edit block, :image %>
-    <%= block_component_edit block, :credit,
-          label: t('admin.communication.blocks.components.image.credit.label'),
-          placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-          summernote_config: 'link' %>
   </div>
   <div class="col-xxl-6">
     <%= block_component_edit block, :alt,
           label: t('admin.communication.blocks.components.image.alt.label'),
           placeholder: t('admin.communication.blocks.components.image.alt.placeholder'),
           hint: t('featured_image.alt.hint') %>
+    <%= block_component_edit block, :credit,
+          label: t('admin.communication.blocks.components.image.credit.label'),
+          placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
+          summernote_config: 'link' %>
   </div>
 </div>
