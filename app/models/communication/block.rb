@@ -76,7 +76,7 @@ class Communication::Block < ApplicationRecord
     pages: 600,
     persons: 100,
     posts: 500,
-    portfolio: 3101,
+    projects: 3101,
     programs: 58,
     sound: 1005,
     testimonials: 400,
@@ -87,7 +87,7 @@ class Communication::Block < ApplicationRecord
   CATEGORIES = {
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :portfolio],
+    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects],
     utilities: [:files, :definitions, :contact, :license, :embed]
   }
 
