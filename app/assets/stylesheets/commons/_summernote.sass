@@ -5,23 +5,38 @@
             .note-editable
                 min-height: 50px
                 *
-                    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif
-                &, p, div
-                    font-size: 1rem
+                    font-family: $font-family-sans-serif
+                &, 
+                p, 
+                div
+                    font-size: px2rem(18)
+                    line-height: 160%
+                p
+                    &:last-of-type
+                        margin-bottom: 0
                 sup
                     top: inherit
                     padding-left: 2px
+                img,
+                video
+                    height: auto
+                    max-width: 100%
+                note
+                    background: #000000
+                    border-radius: 4px
+                    color: #FFFFFF
+                    font-size: 14px
+                    padding: 2px 4px
+                    margin-left: 2px
+                    a
+                        color: #a8bbff
+                        &::after
+                            filter: invert(1)
     b
         color: black
         font-weight: bold
     .note-btn.dropdown-toggle:after
         margin-left: 10px
-    .note-editable
-        img, video
-            height: auto
-            max-width: 100%
-        p:last-of-type
-            margin-bottom: 0
     button
         background: transparent
         border: none
