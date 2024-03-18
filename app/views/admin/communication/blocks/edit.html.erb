@@ -142,7 +142,16 @@
           codemirror: window.codemirrorManager.defaultConfig(),
           callbacks: {
             onChange: onChangeCallback,
-            onChangeCodeview: onChangeCallback
+            onChangeCodeview: onChangeCallback,
+            onBlur: function (e) {
+              var editor = $(this).parent().children('.note-editor');
+              setTimeout(function () {
+                editor.removeClass('note-editor--focus');
+              }, 1000);
+            },
+            onFocus: function (e) {
+              $(this).parent().children('.note-editor').addClass('note-editor--focus');
+            }
           }
         });
       },

@@ -1,7 +1,15 @@
 .summernote
     color: black
     .note-editor
-        max-width: 1000px
+        background: white
+        .note-toolbar
+            opacity: 0
+            transition: opacity 0.25s
+            pointer-events: none
+        &--focus
+            .note-toolbar
+                pointer-events: auto
+                opacity: 1
         .note-editing-area
             background: white
             .note-editable
@@ -13,6 +21,9 @@
                 div
                     font-size: px2rem(20)
                     line-height: px2rem(30)
+                    @include media-breakpoint-down(md)
+                        font-size: px2rem(16)
+                        line-height: px2rem(24)
                 p
                     &:last-of-type
                         margin-bottom: 0
