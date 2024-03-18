@@ -1,7 +1,24 @@
 /*global $ */
 window.summernoteManager = {
     configs: {},
-
+    note: function (context) {
+        var ui = $.summernote.ui;
+        
+        // create button
+        var button = ui.button({
+            contents: '<i class="fa-regular fa-note-sticky"/>',
+            tooltip: 'Transformer en note',
+            click: function () {
+                var text = context.invoke('editor.getSelectedText');
+                console.log(text);
+                var note = '<note>' + text + '</note>';
+                var $node = $(note);
+                context.invoke('editor.insertNode', $node[0]);
+            }
+        });
+        
+        return button.render();   // return button as jquery object
+    },
     init: function () {
         'use strict';
         this.setConfigs();
@@ -36,6 +53,19 @@ window.summernoteManager = {
                 ['position', ['superscript']],
                 ['para', ['ul', 'ol']],
                 ['insert', ['link', 'unlink']],
+                ['view', ['codeview']]
+            ],
+            null,
+            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], 
+            ['href', 'target']
+        );
+
+        this.setConfig('mini-list-with-notes', 
+            [
+                ['font', ['bold', 'italic']],
+                ['position', ['superscript']],
+                ['para', ['ul', 'ol']],
+                ['insert', ['link', 'unlink', 'note']],
                 ['view', ['codeview']]
             ],
             null,

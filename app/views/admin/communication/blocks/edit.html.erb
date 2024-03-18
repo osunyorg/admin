@@ -140,6 +140,9 @@
           followingToolbar: true,
           disableDragAndDrop: true,
           codemirror: window.codemirrorManager.defaultConfig(),
+          buttons: {
+            note: window.summernoteManager.note
+          },
           callbacks: {
             onChange: onChangeCallback,
             onChangeCodeview: onChangeCallback,
