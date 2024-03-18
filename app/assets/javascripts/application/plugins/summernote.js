@@ -10,7 +10,6 @@ window.summernoteManager = {
             tooltip: 'Transformer en note',
             click: function () {
                 var text = context.invoke('editor.getSelectedText');
-                console.log(text);
                 var note = '<note>' + text + '</note>';
                 var $node = $(note);
                 context.invoke('editor.insertNode', $node[0]);
