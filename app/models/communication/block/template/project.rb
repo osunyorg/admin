@@ -1,4 +1,4 @@
-class Communication::Block::Template::Portfolio < Communication::Block::Template::Base
+class Communication::Block::Template::Project < Communication::Block::Template::Base
 
   has_elements
   has_layouts [

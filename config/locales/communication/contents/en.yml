@@ -440,40 +440,6 @@ en:
                 label: With clickable link to each person's page?
               with_photo:
                 label: With a portrait for each person?
-          portfolio:
-            description: A list of projects sorted by year.
-            edit:
-              add: Add project
-              category_id:
-                label: Category
-                placeholder: Select category
-              element:
-                id:
-                  label: ''
-                  placeholder: Choose project
-              mode:
-                label: Which projects shall we show?
-                options:
-                  all: All projects
-                  categories: A list of all projects' categories
-                  category: A specific category
-                  selection: A selection of projects
-              projects_quantity:
-                label: Quantity of projects
-                placeholder: Enter quantity
-            layouts:
-              alternate:
-                description: A very light graphic alternation of projects between the left and right of the page.
-                label: Alternate
-              grid:
-                description: A grid with all the images at the same size.
-                label: Grid
-              large:
-                description: Each project is presented in its full glory, using the full available width and a large image.
-                label: Grand
-              list:
-                description: A list of projects, one below the other.
-                label: List
           posts:
             description: A list of highlighted news.
             edit:
@@ -524,6 +490,40 @@ en:
                 label: Grid
               list:
                 description: A list of programs, one above the other.
+                label: List
+          projects:
+            description: A list of projects sorted by year.
+            edit:
+              add: Add project
+              category_id:
+                label: Category
+                placeholder: Select category
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose project
+              mode:
+                label: Which projects shall we show?
+                options:
+                  all: All projects
+                  categories: A list of all projects' categories
+                  category: A specific category
+                  selection: A selection of projects
+              projects_quantity:
+                label: Quantity of projects
+                placeholder: Enter quantity
+            layouts:
+              alternate:
+                description: A very light graphic alternation of projects between the left and right of the page.
+                label: Alternate
+              grid:
+                description: A grid with all the images at the same size.
+                label: Grid
+              large:
+                description: Each project is presented in its full glory, using the full available width and a large image.
+                label: Grand
+              list:
+                description: A list of projects, one below the other.
                 label: List
           sound:
             description: An audio recording with a text transcription for a proper accessibility.
@@ -621,9 +621,9 @@ en:
           organizations: Organizations
           pages: Pages
           persons: People
-          portfolio: Portfolio
           posts: Posts
           programs: Programs
+          projects: Projects
           sound: Sound
           testimonials: Testimonials
           timeline: Timeline
