@@ -30,7 +30,9 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @posts = @all_posts.recent
     @all_events = @website.events.accessible_by(current_ability).for_language(current_website_language)
     @events = @all_events.recent
-    breadcrumb
+    @all_projects = @website.projects.accessible_by(current_ability).for_language(current_website_language)
+    @projects = @all_projects.recent
+   breadcrumb
   end
 
   def static
