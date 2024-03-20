@@ -142,7 +142,11 @@ class Communication::Website::Page < ApplicationRecord
     if bodyclass.present?
       bodyclass
     elsif inherited_bodyclass
-      "ancestor-#{inherited_bodyclass}"
+      inherited_bodyclass.split(' ')
+                          .map { |bodyclass|
+                            "ancestor-#{bodyclass}"
+                          }
+                          .join(' ')
     end
   end
 
