@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= yield :title %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag 'favicon.png' %>
+  </head>
+  <body class="bg-black text-white">
+    <nav class="navbar navbar-light">
+      <div class="container justify-content-center">
+        <a class="navbar-brand" href="/">
+          <%= image_tag 'osuny-white.svg', class: 'img-fluid', alt: 'Osuny', width: 100 %>
+        </a>
+      </div>
+    </nav>
+    <main class="container mt-5 pt-5">
+      <%= yield %>
+    </main>
+  </body>
+</html>
