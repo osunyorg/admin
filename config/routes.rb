@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  constraints host: ENV['OSUNY_SHOWCASE'] do
+    get '/' => 'showcase/home#index'
+  end
+
   authenticated :user, -> user { user.server_admin? } do
     match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
   end
