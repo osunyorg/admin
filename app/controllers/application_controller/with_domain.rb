@@ -2,10 +2,6 @@ module ApplicationController::WithDomain
   extend ActiveSupport::Concern
 
   included do
-    def is_showcase?
-      request.host == ENV['OSUNY_SHOWCASE']
-    end
-
     def current_extranet
       @current_extranet ||= Communication::Extranet.with_host(request.host)
     end
@@ -32,9 +28,7 @@ module ApplicationController::WithDomain
     helper_method :current_context
 
     def current_mode
-      return 'showcase' if is_showcase?
-      return 'extranet' if current_extranet.present?
-      'university'
+      current_extranet.present? ? 'extranet' : 'university'
     end
     helper_method :current_mode
 
