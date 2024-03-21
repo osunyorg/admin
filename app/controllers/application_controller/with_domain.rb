@@ -28,7 +28,8 @@ module ApplicationController::WithDomain
     helper_method :current_context
 
     def current_mode
-      current_extranet.present? ? 'extranet' : 'university'
+      current_extranet.present? ? 'extranet'
+                                : 'university'
     end
     helper_method :current_mode
 
