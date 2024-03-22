@@ -101,6 +101,7 @@ en:
         git_endpoint: Git endpoint
         git_provider: Git provider
         in_production: Production
+        in_showcase: In showcase
         languages: Languages
         name: Name
         plausible_url: Plausible dashboard URL

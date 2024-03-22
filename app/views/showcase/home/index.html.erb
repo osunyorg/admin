@@ -9,11 +9,10 @@
 
 <div class="row mt-5">
   <% @websites.each do |website| %>
-    <div class="col-lg-6 mb-5">
+    <div class="col-lg-6 mb-5 pb-5">
       <% if website.screenshot.attached? %>
         <%= link_to website.url, target: :_blank do %>
           <%= kamifusen_tag website.screenshot, 
-                            width: 800, 
                             class: 'img-fluid mb-1' %>
         <% end %>
       <% end %>
@@ -35,14 +34,15 @@
                         class: 'text-white' %>
           </p>
         </div>
-        <div class="col-3 col-lg-2">
-          <% if website.university.logo.attached? %>
-            <div class="bg-white ratio ratio-1x1">
-              <%= image_tag website.university.logo, class: 'img-fluid p-3' %>
+        <% if website.university.logo.attached? %>
+          <div class="col-3 col-lg-2">
+            <div class="bg-dark ratio ratio-1x1 mb-3">
+              <%= image_tag website.university.logo, 
+                            class: 'img-fluid p-3',
+                            style: 'filter: saturate(0) invert(1)' %>
             </div>
-          <% end %>
-
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
