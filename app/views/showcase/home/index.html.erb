@@ -17,21 +17,33 @@
                             class: 'img-fluid mb-1' %>
         <% end %>
       <% end %>
-      <h2 class="h6"><%= website %></h2>
-      <p class="small mb-1">
-        <i class="bi bi-compass-fill me-2"></i>
-        <%= link_to social_website_to_s(website.url), 
-                    website.url, 
-                    target: :_blank, 
-                    class: 'text-white' %>
-      </p>
-      <p class="small">
-        <i class="bi bi-github me-2"></i>
-        <%= link_to social_website_to_s(website.repository_url), 
-                    website.url, 
-                    target: :_blank, 
-                    class: 'text-white' %>
-      </p>
+      <div class="row">
+        <div class="col-lg-10">
+          <h2 class="h6"><%= website %></h2>
+          <p class="small mb-1">
+            <i class="bi bi-compass-fill me-2"></i>
+            <%= link_to social_website_to_s(website.url), 
+                        website.url, 
+                        target: :_blank, 
+                        class: 'text-white' %>
+          </p>
+          <p class="small">
+            <i class="bi bi-github me-2"></i>
+            <%= link_to social_website_to_s(website.repository_url), 
+                        website.url, 
+                        target: :_blank, 
+                        class: 'text-white' %>
+          </p>
+        </div>
+        <div class="col-3 col-lg-2">
+          <% if website.university.logo.attached? %>
+            <div class="bg-white ratio ratio-1x1">
+              <%= image_tag website.university.logo, class: 'img-fluid p-3' %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
