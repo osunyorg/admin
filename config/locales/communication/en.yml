@@ -150,6 +150,7 @@ en:
         featured_image: Featured image
         published: Published
         title: Title
+        year: Year
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type

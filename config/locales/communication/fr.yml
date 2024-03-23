@@ -150,6 +150,7 @@ fr:
         featured_image: Image à la une
         published: Publié
         title: Titre
+        year: Année
       communication/website/connection:
         direct_source: Source directe
         direct_source_type: Type de la source
