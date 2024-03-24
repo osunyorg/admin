@@ -17,6 +17,7 @@
 #  git_endpoint            :string
 #  git_provider            :integer          default("github")
 #  in_production           :boolean          default(FALSE)
+#  in_showcase             :boolean          default(TRUE)
 #  name                    :string
 #  plausible_url           :string
 #  repository              :string
@@ -94,6 +95,7 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
+  scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
     where("
