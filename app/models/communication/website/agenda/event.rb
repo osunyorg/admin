@@ -74,16 +74,16 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :ordered, -> { ordered_asc }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
-  scope :recent, -> { published.future_or_current.limit(5) }
-  
-  scope :for_category, -> (category_id) { 
+  scope :recent, -> { published.future_or_current.order(:updated_at).limit(5) }
+
+  scope :for_category, -> (category_id) {
     joins(:categories)
     .where(
-      communication_website_agenda_categories: { 
-        id: category_id 
+      communication_website_agenda_categories: {
+        id: category_id
       }
     )
-    .distinct 
+    .distinct
   }
 
   def git_path(website)
