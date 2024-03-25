@@ -72,9 +72,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
   scope :ordered, -> { ordered_asc }
-  scope :latest, -> { order(:updated_at).limit(5) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
+  scope :latest, -> { published.future_or_current.order(:updated_at).limit(5) }
 
   scope :for_category, -> (category_id) {
     joins(:categories)

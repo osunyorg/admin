@@ -82,7 +82,7 @@ class Communication::Website::Post < ApplicationRecord
     ")
   }
   scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
-  scope :latest, -> { order(published_at: :desc).limit(5) }
+  scope :latest, -> { published.order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
   scope :for_pinned, -> (pinned) { where(pinned: pinned == 'true') }

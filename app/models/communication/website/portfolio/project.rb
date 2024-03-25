@@ -57,7 +57,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   scope :ordered, -> { order(year: :desc, title: :asc) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
-  scope :latest, -> { order(updated_at: :desc).limit(5) }
+  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
   def git_path(website)
     return unless website.id == communication_website_id && published
