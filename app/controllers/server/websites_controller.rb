@@ -10,7 +10,7 @@ class Server::WebsitesController < Server::ApplicationController
   has_scope :for_updatable_theme
 
   def index
-    @websites = @websites.ordered.page(params[:page]).per(100)
+    @websites = @websites.ordered.page(params[:page]).per(500)
     breadcrumb
   end
 
