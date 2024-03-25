@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_22_091632) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_140715) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -623,6 +624,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_091632) do
     t.boolean "in_showcase", default: true
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
+    t.index ["name"], name: "index_communication_websites_on_name", opclass: :gin_trgm_ops, using: :gin
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
   end
 
@@ -1043,6 +1045,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_091632) do
     t.boolean "is_really_a_university", default: true
     t.float "contribution_amount"
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
+    t.index ["name"], name: "index_universities_on_name", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "university_apps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
