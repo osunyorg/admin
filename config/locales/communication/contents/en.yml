@@ -293,7 +293,7 @@ en:
                 label: Grid
               large:
                 description: The images are presented one after the other, using the full width for horizontals and a large width for verticals.
-                label: Grand
+                label: Large
           image:
             description: An image with its alternative description, a credit and a text.
             edit:
