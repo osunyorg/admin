@@ -99,7 +99,7 @@ class Communication::Website < ApplicationRecord
   scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
-    left_joins(:university)
+    joins(:university)
     .where("
       unaccent(universities.name) % unaccent(:term) OR
       unaccent(communication_websites.name) % unaccent(:term) OR
