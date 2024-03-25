@@ -385,6 +385,7 @@ en:
       last_events: Last events
       last_pages: Last pages
       last_posts: Last posts
+      last_projects: Last projects
       menus:
         automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
