@@ -101,6 +101,7 @@ en:
         git_endpoint: Git endpoint
         git_provider: Git provider
         in_production: Production
+        in_showcase: In showcase
         languages: Languages
         name: Name
         plausible_url: Plausible dashboard URL
@@ -149,6 +150,7 @@ en:
         featured_image: Featured image
         published: Published
         title: Title
+        year: Year
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type

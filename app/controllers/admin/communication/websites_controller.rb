@@ -76,7 +76,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def website_params
     attribute_names = [
-      :name, :url, :repository, :about_type, :about_id, :in_production,
+      :name, :url, :repository, :about_type, :about_id, :in_production, :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio,
       :default_time_zone,

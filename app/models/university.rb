@@ -14,7 +14,7 @@
 #  is_really_a_university     :boolean          default(TRUE)
 #  mail_from_address          :string
 #  mail_from_name             :string
-#  name                       :string
+#  name                       :string           indexed
 #  private                    :boolean
 #  sms_sender_name            :string
 #  sso_button_label           :string
@@ -31,6 +31,7 @@
 # Indexes
 #
 #  index_universities_on_default_language_id  (default_language_id)
+#  index_universities_on_name                 (name) USING gin
 #
 # Foreign Keys
 #
