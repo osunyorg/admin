@@ -500,7 +500,7 @@ en:
         sso_button_label: "Default: Sign in via SSO"
       communication_website:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
-        access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website unless you have your own access token.
+        access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_posts: To publish posts, like a media
         feature_agenda: To share events
@@ -510,7 +510,7 @@ en:
         in_production: Do not tick this box until the site is on a dedicated domain or sub-domain (not *.osuny.site).
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
-        repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website unless you have your own repository.
+        repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website with Deuxfleurs.
         university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
         url: Leave this field empty when you create your site with Deuxfleurs, it will be filled in automatically.
       communication_website_page:
