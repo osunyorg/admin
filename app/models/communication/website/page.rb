@@ -91,7 +91,7 @@ class Communication::Website::Page < ApplicationRecord
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
-  scope :recent, -> { order(updated_at: :desc).limit(5) }
+  scope :latest, -> { order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
   scope :ordered_by_title, -> { order(:title) }
 
