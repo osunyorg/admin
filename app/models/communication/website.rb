@@ -105,7 +105,7 @@ class Communication::Website < ApplicationRecord
       unaccent(universities.name) % unaccent(:term) OR
       unaccent(communication_websites.name) % unaccent(:term) OR
       unaccent(communication_websites.url) % unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%").order(Arel.sql("similarity(communication_websites.name, '#{quoted_term}') DESC, similarity(universities.name, '#{quoted_term}') DESC"))
+    ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
