@@ -18,7 +18,7 @@
 #  git_provider            :integer          default("github")
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
-#  name                    :string
+#  name                    :string           indexed
 #  plausible_url           :string
 #  repository              :string
 #  social_email            :string
@@ -46,6 +46,7 @@
 #
 #  index_communication_websites_on_about                (about_type,about_id)
 #  index_communication_websites_on_default_language_id  (default_language_id)
+#  index_communication_websites_on_name                 (name) USING gin
 #  index_communication_websites_on_university_id        (university_id)
 #
 # Foreign Keys
@@ -98,10 +99,13 @@ class Communication::Website < ApplicationRecord
   scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
-    where("
-      unaccent(communication_websites.name) ILIKE unaccent(:term) OR
-      unaccent(communication_websites.url) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+    quoted_term = ActiveRecord::Base.connection.quote_string(term)
+    left_joins(:university)
+    .where("
+      unaccent(universities.name) % unaccent(:term) OR
+      unaccent(communication_websites.name) % unaccent(:term) OR
+      unaccent(communication_websites.url) % unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%").order(Arel.sql("similarity(communication_websites.name, '#{quoted_term}') DESC, similarity(universities.name, '#{quoted_term}') DESC"))
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
