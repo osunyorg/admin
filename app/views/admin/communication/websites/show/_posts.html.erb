@@ -1,4 +1,5 @@
 <%
+title = t('communication.website.last_posts')
 action = ''
 action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),
@@ -13,9 +14,7 @@ if @all_posts.any?
                       admin_communication_website_posts_path(website_id: @website)
 end
 %>
-<%= osuny_panel t('communication.website.last_posts'),
-                subtitle: subtitle,
-                action: action do %>
+<%= osuny_panel title, subtitle: subtitle, action: action do %>
   <%= render 'admin/communication/websites/posts/list',
               posts: @posts,
               hide_author: true,

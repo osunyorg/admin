@@ -30,7 +30,9 @@
             <div><%= f.input :apprenticeship %></div>
             <%= f.input :capacity %>
             <%= f.input :duration %>
-            <%= f.input :downloadable_summary %>
+            <%= f.input :downloadable_summary,
+                        as: :single_deletable_file,
+                        direct_upload: true %>
           </div>
         </div>
       <% end %>

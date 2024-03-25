@@ -91,7 +91,7 @@ class Communication::Website::Page < ApplicationRecord
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
-  scope :recent, -> { published.order(updated_at: :desc).limit(5) }
+  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
   scope :ordered_by_title, -> { order(:title) }
 
@@ -142,7 +142,11 @@ class Communication::Website::Page < ApplicationRecord
     if bodyclass.present?
       bodyclass
     elsif inherited_bodyclass
-      "ancestor-#{inherited_bodyclass}"
+      inherited_bodyclass.split(' ')
+                          .map { |bodyclass|
+                            "ancestor-#{bodyclass}"
+                          }
+                          .join(' ')
     end
   end
 
