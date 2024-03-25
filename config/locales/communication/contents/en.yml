@@ -105,7 +105,7 @@ en:
                 label: Grid
               large:
                 description: Each event is presented in majesty, across the full width available, with a large image.
-                label: Grand
+                label: Large
               list:
                 description: A list of events with dates, small images, all the same width.
                 label: List
