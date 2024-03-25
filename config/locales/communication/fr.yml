@@ -101,6 +101,7 @@ fr:
         git_endpoint: Point d'accès Git
         git_provider: Fournisseur Git
         in_production: Site en production
+        in_showcase: Dans le showcase
         languages: Langues
         name: Nom
         plausible_url: Tableau de bord Plausible
@@ -149,6 +150,7 @@ fr:
         featured_image: Image à la une
         published: Publié
         title: Titre
+        year: Année
       communication/website/connection:
         direct_source: Source directe
         direct_source_type: Type de la source
