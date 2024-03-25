@@ -1,3 +1,4 @@
+---
 en:
   admin:
     communication:
@@ -7,17 +8,20 @@ en:
           file_is_too_big: File is too big!
         categories:
           basic:
-            label: Basic blocks
             description: Essential bricks to build your page
-          storytelling:
-            label: Storytelling blocks
-            description: Advanced tools to organize and showcase your content
+            label: Basic blocks
           references:
-            label: List blocks
             description: Lists of other objects, to present and connect
+            label: List blocks
+          storytelling:
+            description: Advanced tools to organize and showcase your content
+            label: Storytelling blocks
           utilities:
-            label: Utility blocks
             description: Purely practical and technical features
+            label: Utility blocks
+        choose:
+          button: Choose
+          title: Choose the kind of block to add
         components:
           code:
             preview:
@@ -27,15 +31,15 @@ en:
               label: File
               remove: Remove file
           image:
-            input:
-              label: Image
-              remove: Remove image
             alt:
               label: Alternative text
               placeholder: Enter alternative text
             credit:
               label: Credit
               placeholder: Enter credit
+            input:
+              label: Image
+              remove: Remove image
           layouts:
             button: Choose the layout
             label: Layout
@@ -50,25 +54,12 @@ en:
           time_slot:
             from: From
             to: to
-        choose:
-          title: Choose the kind of block to add
-          button: Choose
         empty: This block is empty and will not appear
         headings:
           add: Add a title
         templates:
           agenda:
             description: A list of upcoming events.
-            layouts:
-              grid:
-                label: Grid
-                description: Events are presented as a grid, from left to right and top to bottom, with constant size cropped images.
-              list:
-                label: List
-                description: A list of events with dates, small images, all the same width.
-              large:
-                label: Grand
-                description: Each event is presented in majesty, across the full width available, with a large image.
             edit:
               add_event: Add an event
               category_id:
@@ -84,9 +75,9 @@ en:
                 label: Which events should be presented?
                 options:
                   all: All events, regardless of category
+                  categories: A list of all events' categories
                   category: A specific category of events
                   selection: A selection of events
-                  categories: A list of all events' categories
               no_event_message:
                 label: Sentence to be displayed if there is no event
                 placeholder: Enter the desired sentence
@@ -97,50 +88,50 @@ en:
                 label: Display settings
               show_category:
                 label: Show events' categories
-              show_summary:
-                label: Show events' summaries
               show_status:
                 label: Show events' status (current, future...)
+              show_summary:
+                label: Show events' summaries
               time:
                 label: What event dates should be displayed?
                 options:
-                  future_or_current: Now and in the future
-                  future: In the future, not started yet
-                  current: Running now
                   archive: Past, archives
+                  current: Running now
+                  future: In the future, not started yet
+                  future_or_current: Now and in the future
+            layouts:
+              grid:
+                description: Events are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+                label: Grid
+              large:
+                description: Each event is presented in majesty, across the full width available, with a large image.
+                label: Grand
+              list:
+                description: A list of events with dates, small images, all the same width.
+                label: List
           call_to_action:
             description: A title, a text, an optional image and up to 3 call to action buttons.
             edit:
               add_button: Add button
-              remove_button: Remove button
-              text:
-                label: Text
-                placeholder: Enter text here
+              buttons: Action buttons
+              credit:
+                label: Credit
+                placeholder: Enter image's credit here
               element:
+                target_blank:
+                  label: Open in new window
                 title:
                   label: Text
                   placeholder: Enter the button text here
                 url:
                   label: Link
                   placeholder: Enter the URL with "https://..."
-                target_blank:
-                  label: Open in new window
-              buttons: Action buttons
-              credit:
-                label: Credit
-                placeholder: Enter image's credit here
+              remove_button: Remove button
+              text:
+                label: Text
+                placeholder: Enter text here
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
-            layouts:
-              no_background:
-                label: Simple
-                description: A title, a text, possibly some notes and and an image.
-              alt_background:
-                label: Subtle highlight
-                description: A chapter on a light background.
-              accent_background:
-                label: Strong highlight
-                description: A chapter on a strong background, like a call to action.
             edit:
               image:
                 label: Chapter illustration
@@ -150,6 +141,16 @@ en:
               text:
                 label: Text
                 placeholder: Enter text
+            layouts:
+              accent_background:
+                description: A chapter on a strong background, like a call to action.
+                label: Strong highlight
+              alt_background:
+                description: A chapter on a light background.
+                label: Subtle highlight
+              no_background:
+                description: A title, a text, possibly some notes and and an image.
+                label: Simple
           contact:
             description: Contact information and opening time, so anyone can get in touch.
             edit:
@@ -169,13 +170,13 @@ en:
                 label: Description
                 placeholder: Enter description here
               element:
+                time_slot_afternoon:
+                  label: Afternoon (or full day)
+                time_slot_morning:
+                  label: Morning (if necessary)
                 title:
                   label: Day
                   placeholder: Enter the day or period
-                time_slot_morning:
-                  label: Morning (if necessary)
-                time_slot_afternoon:
-                  label: Afternoon (or full day)
               information:
                 label: Additional data
               mails:
@@ -209,22 +210,22 @@ en:
             description: A list of terms and definitions. We could call it a dictionary.
             edit:
               add_definition: Add definition
-              remove_definition: Delete definition
               description:
                 label: Description
               element:
-                title:
-                  label: Title
-                  placeholder: Enter title here
                 description:
                   label: Text
                   placeholder: Enter text here
+                title:
+                  label: Title
+                  placeholder: Enter title here
+              remove_definition: Delete definition
           embed:
             description: HTML raw code, so you can integrate maps or iframe components.
             edit:
               code:
-                label: Code
                 code_placeholder: Enter code
+                label: Code
               iframe_title:
                 label: Iframe title (mandatory for accessibility)
                 placeholder: Enter the title
@@ -233,23 +234,23 @@ en:
             description: A list of features with images (often icons) and a description.
             edit:
               add_element: Add feature
-              remove_element: Remove feature
               element:
-                image:
-                  label: Image
-                  remove: Remove image
                 alt:
                   label: Alternative text
                   placeholder: Enter text description
                 credit:
                   label: Credit
                   placeholder: Enter image's credit here
-                title:
-                  label: Title
-                  placeholder: Enter title here
                 description:
                   label: Text
                   placeholder: Enter text here
+                image:
+                  label: Image
+                  remove: Remove image
+                title:
+                  label: Title
+                  placeholder: Enter title here
+              remove_element: Remove feature
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
@@ -265,31 +266,31 @@ en:
               remove_file: Remove a file
           gallery:
             description: A gallery of images, with an accessible description, a text and a credit for each image.
-            layouts:
-              grid:
-                label: Grid
-                description: Images are presented as a grid, from left to right and top to bottom, with constant width.
-              carousel:
-                label: Carousel
-                description: Images are big, with a previous / next navigation and a constant height.
             edit:
               add_image: Add an image
               description:
                 label: Description
               element:
-                text:
-                  label: Text
-                  placeholder: Enter text
                 alt:
                   label: Alternative text
                   placeholder: Enter text description
                 credit:
                   label: Credit
                   placeholder: Enter image's credit here
+                text:
+                  label: Text
+                  placeholder: Enter text
               move_images: Move images below to define the order
               remove_image: Remove image
               send_and_edit_images: Send the images and enter the text below
               send_multiple_images: Send multiple images
+            layouts:
+              carousel:
+                description: Images are big, with a previous / next navigation and a constant height.
+                label: Carousel
+              grid:
+                description: Images are presented as a grid, from left to right and top to bottom, with constant width.
+                label: Grid
           image:
             description: An image with its alternative description, a credit and a text.
             edit:
@@ -301,41 +302,41 @@ en:
             edit:
               add_key: Add key figure
               element:
-                unit:
-                  label: Unit
-                  placeholder: Enter unit here
-                number:
-                  label: Number
-                  placeholder: Enter key figure's value here
                 description:
                   label: Description
                   placeholder: Enter description here
+                number:
+                  label: Number
+                  placeholder: Enter key figure's value here
+                unit:
+                  label: Unit
+                  placeholder: Enter unit here
               remove_key: Remove key figure
           license:
-            description: A  Creative Commons legal license with a link to the official reference.
             creative_commons:
               about_html: Use the <a href="https://creativecommons.org" target="_blank" rel="noreferrer">Creative Commons</a> to share your work. The license chooser is based on <a href="https://chooser-beta.creativecommons.org"target="_blank" rel="noreferrer">chooser-beta.creativecommons.org.org</a>.
+            description: A  Creative Commons legal license with a link to the official reference.
             edit:
               creative_commons_attribution:
                 label: Do you want attribution for your work?
                 options:
-                  true: Yes. Anyone using my work must include proper attribution.
-                  false: No. Anyone can use my work, even without giving me attribution.
+                  'false': No. Anyone can use my work, even without giving me attribution.
+                  'true': Yes. Anyone using my work must include proper attribution.
               creative_commons_commercial_use:
                 label: Do you want to allow others to use your work commercially?
                 options:
-                  true: Yes. Others can use my work, even for commercial purposes.
-                  false: No. Others can not use my work for commercial purposes.
+                  'false': No. Others can not use my work for commercial purposes.
+                  'true': Yes. Others can use my work, even for commercial purposes.
               creative_commons_derivatives:
                 label: Do you want to allow others to remix, adapt, or build upon your work?
                 options:
-                  true: Yes. Others can remix, adapt, or build upon my work.
-                  false: No. Others may only use my work in unadapted form.
+                  'false': No. Others may only use my work in unadapted form.
+                  'true': Yes. Others can remix, adapt, or build upon my work.
               creative_commons_sharing:
                 label: Do you want to allow others to share adaptations of your work under any terms?
                 options:
-                  true: Yes. Others can share adaptations of my work under any terms.
-                  false: No. Others must use the same CC license if they adapt my work.
+                  'false': No. Others must use the same CC license if they adapt my work.
+                  'true': Yes. Others can share adaptations of my work under any terms.
               description:
                 label: Description
           locations:
@@ -344,13 +345,6 @@ en:
               add: Add a location
           organizations:
             description: A list of organizations with logo, name and website.
-            layouts:
-              grid:
-                label: Grid
-                description: Square logos and a simple text below.
-              map:
-                label: Map
-                description: A geographic map, with a pin for every organization with a known location.
             edit:
               add_partner: Add organization
               alphabetical:
@@ -362,76 +356,79 @@ en:
                   label: Organization
                   placeholder: Choose organization
                   unregistered: Unregistered organization
+                logo:
+                  label: Logo
+                  remove_logo: Remove logo
                 name:
                   label: Nom
                   placeholder: Enter organization's name
                 url:
                   label: Website
                   placeholder: https://
-                logo:
-                  label: Logo
-                  remove_logo: Remove logo
               remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
+            layouts:
+              grid:
+                description: Square logos and a simple text below.
+                label: Grid
+              map:
+                description: A geographic map, with a pin for every organization with a known location.
+                label: Map
           pages:
             description: A highlight of some pages, with multiple layout options.
-            layouts:
-              cards:
-                label: Cards
-                description: Side by side cards, same height, strong color on rollover. Perfect for a small amount of pages.
-                more: Show more
-              grid:
-                label: Grid
-                description: As a grid, left to right and top to bottom.
-              list:
-                label: List
-                description: The main page's short description is used as a big text, and the pages are listed on the right.
-              alternate:
-                label: Alternate
-                description: Pages either on the left or on the right, composing a graphically light layout.
-              large:
-                label: Grand
-                description: Each page is presented in majesty, across the full width available, with a large image.
             edit:
+              display:
+                title: Layout options
+              main_page:
+                title: Main page
               mode:
                 label: List kind
                 options:
                   children: Main page and children
                   selection: A specific selection of pages
-              show_main_description:
-                label: Show main page short description
-              show_description:
-                label: Show pages short descriptions
-              show_image:
-                label: Show pages images
-              main_page:
-                title: Main page
               page_id:
-                label: Select the main page
                 hint: This page will set the title and main link of the block on the website. If you select a page and fill no title above, the page title will be used. If you set a title, it will replace the main page's title.
+                label: Select the main page
                 none: No page selected
               selection:
                 add: Select a page
                 label: Page
                 none: No page
                 title: Selected pages
-              display:
-                title: Layout options
+              show_description:
+                label: Show pages short descriptions
+              show_image:
+                label: Show pages images
+              show_main_description:
+                label: Show main page short description
+            layouts:
+              alternate:
+                description: Pages either on the left or on the right, composing a graphically light layout.
+                label: Alternate
+              cards:
+                description: Side by side cards, same height, strong color on rollover. Perfect for a small amount of pages.
+                label: Cards
+                more: Show more
+              grid:
+                description: As a grid, left to right and top to bottom.
+                label: Grid
+              large:
+                description: Each page is presented in majesty, across the full width available, with a large image.
+                label: Grand
+              list:
+                description: The main page's short description is used as a big text, and the pages are listed on the right.
+                label: List
           persons:
             description: People and their jobs.
             edit:
               add_person: Add person
-              drag_title: Drag and drop to organize persons
-              delete_title: Remove person
               alphabetical:
                 label: Alphabetical order
+              delete_title: Remove person
               description:
                 label: Description
-              with_link:
-                label: With clickable link to each person's page?
-              with_photo:
-                label: With a portrait for each person?
+              drag_title: Drag and drop to organize persons
               element:
                 person:
                   label: Person
@@ -439,39 +436,14 @@ en:
               role:
                 label: Role
                 placeholder: Enter person's role
+              with_link:
+                label: With clickable link to each person's page?
+              with_photo:
+                label: With a portrait for each person?
           posts:
             description: A list of highlighted news.
-            layouts:
-              alternate:
-                label: Alternate
-                description: Posts either on the left or on the right, composing a graphically light page.
-              carousel: 
-                label: Carousel
-                description: A list of swipable posts overflowing on the right side of the screen.
-              grid:
-                label: Grid
-                description: A grid of posts, with all images the same size.
-              highlight:
-                label: Highlighted
-                description: The first post is big and has an image, the next ones are smaller with no image.
-              large:
-                label: Grand
-                description: Each post is presented in majesty, across the full width available, with a large image.
-              list:
-                label: List
-                description: A list of posts with small images the same width.
             edit:
               add_post: Add post
-              mode:
-                label: Which posts shall we show?
-                options:
-                  all: All posts
-                  category: A specific category
-                  selection: A selection of posts
-                  categories: A list of all posts' categories
-              posts_quantity:
-                label: Quantity
-                placeholder: Enter quantity
               category_id:
                 label: Category
                 placeholder: Select category
@@ -479,17 +451,80 @@ en:
                 id:
                   label: ''
                   placeholder: Choose post
+              mode:
+                label: Which posts shall we show?
+                options:
+                  all: All posts
+                  categories: A list of all posts' categories
+                  category: A specific category
+                  selection: A selection of posts
+              posts_quantity:
+                label: Quantity
+                placeholder: Enter quantity
+            layouts:
+              alternate:
+                description: Posts either on the left or on the right, composing a graphically light page.
+                label: Alternate
+              carousel:
+                description: A list of swipable posts overflowing on the right side of the screen.
+                label: Carousel
+              grid:
+                description: A grid of posts, with all images the same size.
+                label: Grid
+              highlight:
+                description: The first post is big and has an image, the next ones are smaller with no image.
+                label: Highlighted
+              large:
+                description: Each post is presented in majesty, across the full width available, with a large image.
+                label: Grand
+              list:
+                description: A list of posts with small images the same width.
+                label: List
           programs:
             description: A selection of programs.
             edit:
               add: Add a program
             layouts:
               grid:
-                label: Grid
                 description: Programs are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+                label: Grid
               list:
-                label: List
                 description: A list of programs, one above the other.
+                label: List
+          projects:
+            description: A list of projects sorted by year.
+            edit:
+              add: Add project
+              category_id:
+                label: Category
+                placeholder: Select category
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose project
+              mode:
+                label: Which projects shall we show?
+                options:
+                  all: All projects
+                  categories: A list of all projects' categories
+                  category: A specific category
+                  selection: A selection of projects
+              projects_quantity:
+                label: Quantity of projects
+                placeholder: Enter quantity
+            layouts:
+              alternate:
+                description: A very light graphic alternation of projects between the left and right of the page.
+                label: Alternate
+              grid:
+                description: A grid with all the images at the same size.
+                label: Grid
+              large:
+                description: Each project is presented in its full glory, using the full available width and a large image.
+                label: Grand
+              list:
+                description: A list of projects, one below the other.
+                label: List
           sound:
             description: An audio recording with a text transcription for a proper accessibility.
             edit:
@@ -502,12 +537,7 @@ en:
             description: One or more testimonies
             edit:
               add_testimonial: Add testimonial
-              remove_testimonial: Remove testimonial
-              title_disclaimer: The title above won't show on the website. Nevertheless, it will appear and be clickable in the table of contents if there's one on the page.
               element:
-                text:
-                  label: Text
-                  placeholder: Enter testimonial's text
                 author:
                   label: Author of the text
                   placeholder: Enter authors' name
@@ -517,38 +547,41 @@ en:
                 photo:
                   label: Photo
                   remove_photo: Remove photo
+                text:
+                  label: Text
+                  placeholder: Enter testimonial's text
+              remove_testimonial: Remove testimonial
+              title_disclaimer: The title above won't show on the website. Nevertheless, it will appear and be clickable in the table of contents if there's one on the page.
           timeline:
             description: A list of events with their description, on a timeline.
-            layouts:
-              horizontal:
-                label: Horizontal
-                description: Events are shown left to right, and can be browsed with arrows.
-              vertical:
-                label: Vertical
-                description: Events are shown vertically, along the page.
             edit:
               add_event: Add event
-              remove_event: Delete event
               description:
                 label: Description
                 placeholder: Enter description
               element:
-                title:
-                  label: Title
-                  placeholder: Enter title here
                 text:
                   label: Text
                   placeholder: Enter text here
+                title:
+                  label: Title
+                  placeholder: Enter title here
+              remove_event: Delete event
+            layouts:
+              horizontal:
+                description: Events are shown left to right, and can be browsed with arrows.
+                label: Horizontal
+              vertical:
+                description: Events are shown vertically, along the page.
+                label: Vertical
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
               url:
+                hint: |
+                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
                 label: Video url
                 placeholder: Enter video's url
-                hint: >
-                  Ex:
-                  https://vimeo.com/732180675,
-                  https://www.youtube.com/watch?v=lAYhfCPelO0
               video_title:
                 label: Video title
                 placeholder: Enter video title
@@ -557,16 +590,16 @@ en:
           copy: Copy block
           paste: Paste block
           quantity:
-            zero: No block
             one: 1 block
-            other: "%{count} blocks"
+            other: '%{count} blocks'
+            zero: No block
         modes:
-          write:
-            tab: Write content
-            description: In “Write content” mode, you can move blocks and headings anywhere you like, independently of each other. For example, you can move a heading higher up in the document without it taking its blocks with it.
           structure:
-            tab: Organize structure
             description: In “Organize structure” mode, you do not see the blocks, only the titles. When you move a title, all the blocks follow. This is the ideal mode for organising long documents.
+            tab: Organize structure
+          write:
+            description: In “Write content” mode, you can move blocks and headings anywhere you like, independently of each other. For example, you can move a heading higher up in the document without it taking its blocks with it.
+            tab: Write content
   enums:
     communication:
       block:
@@ -590,6 +623,7 @@ en:
           persons: People
           posts: Posts
           programs: Programs
+          projects: Projects
           sound: Sound
           testimonials: Testimonials
           timeline: Timeline

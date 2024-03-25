@@ -20,7 +20,7 @@ class Communication::Website::Permalink::Portfolio::Project < Communication::Web
 
   def substitutions
     {
-      year: about.from_day.strftime("%Y"),
+      year: about.year,
       slug: about.slug
     }
   end

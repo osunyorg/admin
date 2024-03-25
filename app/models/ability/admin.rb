@@ -58,6 +58,8 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Localization, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id
+    can :manage, Communication::Website::Portfolio::Category, university_id: @user.university_id
+    can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id
     can :manage, Communication::Website::Post::Category, university_id: @user.university_id
     can :manage, Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id

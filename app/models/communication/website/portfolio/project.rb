@@ -57,6 +57,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   scope :ordered, -> { order(year: :desc, title: :asc) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
+  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
   def git_path(website)
     return unless website.id == communication_website_id && published
@@ -64,13 +65,11 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   end
 
   def git_path_relative
-    path = "projects/"
-    path += "#{year}-#{slug}.html"
-    path
+    "projects/#{year}-#{slug}.html"
   end
 
   def template_static
-    "admin/communication/websites/agenda/events/static"
+    "admin/communication/websites/portfolio/projects/static"
   end
 
   def dependencies
@@ -81,7 +80,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
 
   def references
     menus +
-    abouts_with_agenda_block
+    abouts_with_projects_block
   end
 
   def url
@@ -106,8 +105,8 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     super.concat [featured_image&.blob_id]
   end
 
-  def abouts_with_agenda_block
-    website.blocks.agenda.collect(&:about)
+  def abouts_with_projects_block
+    website.blocks.projects.collect(&:about)
   end
 
 end
