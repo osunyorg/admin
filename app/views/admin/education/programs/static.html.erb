@@ -73,10 +73,15 @@ locations:
   - path: <%= location.current_permalink_in_website(@website)&.path %>
     slug: <%= location.slug %>
 <% end %>
+apprenticeship: <%= @about.apprenticeship %>
 capacity: <%= @about.capacity %>
 continuing: <%= @about.continuing %>
 initial: <%= @about.initial %>
-apprenticeship: <%= @about.apprenticeship %>
+certifications:
+  qualiopi: 
+    certified: <%= @about.qualiopi_certified %>
+    text: >-
+      <%= prepare_html_for_static @about.qualiopi_text %>
 <%
 [
   :accessibility,
