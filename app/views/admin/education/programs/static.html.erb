@@ -68,6 +68,11 @@ roles:
 <% else %>
 roles: []
 <% end %>
+locations:
+<% @about.locations.each do |location| %>
+  - path: <%= location.current_permalink_in_website(@website)&.path %>
+    slug: <%= location.slug %>
+<% end %>
 capacity: <%= @about.capacity %>
 continuing: <%= @about.continuing %>
 initial: <%= @about.initial %>
