@@ -30,6 +30,7 @@
 #  pricing_continuing     :text
 #  pricing_initial        :text
 #  published              :boolean          default(FALSE)
+#  qualiopi               :boolean          default(FALSE)
 #  registration           :text
 #  registration_url       :string
 #  results                :text
