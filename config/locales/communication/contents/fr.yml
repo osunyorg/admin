@@ -440,40 +440,6 @@ fr:
                 label: "Avec des liens cliquables vers les pages des personnes\_?"
               with_photo:
                 label: "Avec un portrait de chaque personne\_?"
-          portfolio:
-            description: Une liste de projets classés par année.
-            edit:
-              add: Ajouter un projet
-              category_id:
-                label: Catégorie
-                placeholder: Sélectionner une catégorie
-              element:
-                id:
-                  label: ''
-                  placeholder: Choisir le projet
-              mode:
-                label: Quel projets afficher ?
-                options:
-                  all: Tous les projets
-                  categories: La liste des catégories de projets
-                  category: Une catégorie spécifique
-                  selection: Une sélection de projets
-              projects_quantity:
-                label: Quantité de projets
-                placeholder: Entrer la quantité
-            layouts:
-              alternate:
-                description: Une alternance très légère graphiquement de projets entre la gauche et la droite de la page.
-                label: Alternance
-              grid:
-                description: Une grille avec toutes les images à la même taille.
-                label: Grille
-              large:
-                description: Chaque projet est présenté en majesté, sur toute la largeur disponible avec une grande image.
-                label: Grand
-              list:
-                description: Une liste de projets, les uns au-dessous des autres.
-                label: Liste
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
@@ -524,6 +490,40 @@ fr:
                 label: Grille
               list:
                 description: Une liste de formations, les unes au dessus des autres.
+                label: Liste
+          projects:
+            description: Une liste de projets classés par année.
+            edit:
+              add: Ajouter un projet
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir le projet
+              mode:
+                label: Quel projets afficher ?
+                options:
+                  all: Tous les projets
+                  categories: La liste des catégories de projets
+                  category: Une catégorie spécifique
+                  selection: Une sélection de projets
+              projects_quantity:
+                label: Quantité de projets
+                placeholder: Entrer la quantité
+            layouts:
+              alternate:
+                description: Une alternance très légère graphiquement de projets entre la gauche et la droite de la page.
+                label: Alternance
+              grid:
+                description: Une grille avec toutes les images à la même taille.
+                label: Grille
+              large:
+                description: Chaque projet est présenté en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
+              list:
+                description: Une liste de projets, les uns au-dessous des autres.
                 label: Liste
           sound:
             description: Un enregistrement audio, avec sa transcription pour l'accessibilité.
@@ -621,9 +621,9 @@ fr:
           organizations: Organisations
           pages: Pages
           persons: Personnes
-          portfolio: Portfolio
           posts: Actualités
           programs: Formations
+          projects: Projets
           sound: Son
           testimonials: Témoignages
           timeline: Frise chronologique
