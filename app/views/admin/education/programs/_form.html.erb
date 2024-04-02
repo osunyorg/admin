@@ -33,7 +33,6 @@
             <%= f.input :downloadable_summary,
                         as: :single_deletable_file,
                         direct_upload: true %>
-            <%= f.input :qualiopi %>
           </div>
         </div>
       <% end %>
@@ -143,6 +142,21 @@
           </div>
           <div class="col-xxl-6">
             <%= render 'admin/education/programs/forms/input_with_inheritance', f: f, property: :contacts %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render 'admin/education/programs/forms/part', part: :certification do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= f.input :qualiopi_certified %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :qualiopi_text,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'link' }
+                      } %>
           </div>
         </div>
       <% end %>

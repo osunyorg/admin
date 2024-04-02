@@ -77,7 +77,9 @@ capacity: <%= @about.capacity %>
 continuing: <%= @about.continuing %>
 initial: <%= @about.initial %>
 qualiopi: 
-  certified: <%= @about.qualiopi %>
+  certified: <%= @about.qualiopi_certified %>
+  text: >-
+    <%= prepare_html_for_static @about.qualiopi_text %>
 apprenticeship: <%= @about.apprenticeship %>
 <%
 [

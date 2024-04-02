@@ -112,6 +112,19 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-lg-4">
+    <h2 class="h4"><%= t("education.program.parts.certification.label") %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= osuny_label Education::Program.human_attribute_name(:qualiopi_certified) %>
+    <p><%= t @program.qualiopi_certified %></p>
+    <%= render 'admin/application/property/text', object: @program, property: :qualiopi_text %>
+  </div>
+</div>
+
 <% if @program.cohorts.any? %>
   <div class="row">
     <div class="col-lg-4">
