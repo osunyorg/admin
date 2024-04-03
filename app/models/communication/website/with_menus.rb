@@ -61,6 +61,10 @@ module Communication::Website::WithMenus
     has_research_papers?
   end
 
+  def menu_item_kind_location?
+    has_administration_locations?
+  end
+
   def initialize_menus
     # default_language menu has to be created first, to be a reference for other languages
     create_default_menus(default_language)

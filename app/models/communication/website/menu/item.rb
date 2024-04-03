@@ -57,7 +57,8 @@ class Communication::Website::Menu::Item < ApplicationRecord
     category: 41,
     post: 42,
     volume: 61,
-    paper: 63
+    paper: 63,
+    location: 70
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -68,14 +69,15 @@ class Communication::Website::Menu::Item < ApplicationRecord
   def self.icon_for(kind)
     icons = {
       'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
-      'diploma' => Icon::EDUCATION_DIPLOMA,
-      'post' => Icon::COMMUNICATION_WEBSITE_POST,
       'category' => Icon::COMMUNICATION_WEBSITE_POST,
+      'diploma' => Icon::EDUCATION_DIPLOMA,
       'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
-      'program' => Icon::EDUCATION_PROGRAM,
       'paper' => Icon::RESEARCH_LABORATORY,
-      'volume' => Icon::RESEARCH_LABORATORY,
+      'post' => Icon::COMMUNICATION_WEBSITE_POST,
+      'program' => Icon::EDUCATION_PROGRAM,
+      'location' => Icon::ADMINISTRATION_CAMPUS,
       'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
+      'volume' => Icon::RESEARCH_LABORATORY,
     }
     icons[kind] if icons.has_key? kind
   end
@@ -118,13 +120,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def has_about?
-    kind_page? ||
-    kind_diploma? ||
-    kind_program? ||
     kind_category? ||
+    kind_diploma? ||
+    kind_location? ||
+    kind_page? ||
+    kind_paper? ||
+    kind_program? ||
     kind_post? ||
-    kind_volume? ||
-    kind_paper?
+    kind_volume?
   end
 
   def sync_menu
