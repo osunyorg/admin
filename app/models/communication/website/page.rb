@@ -140,7 +140,7 @@ class Communication::Website::Page < ApplicationRecord
 
   def best_bodyclass
     if bodyclass.present?
-      bodyclass
+      "page-#{bodyclass}"
     elsif inherited_bodyclass
       inherited_bodyclass.split(' ')
                           .map { |bodyclass|
