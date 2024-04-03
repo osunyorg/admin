@@ -140,13 +140,9 @@ class Communication::Website::Page < ApplicationRecord
 
   def best_bodyclass
     if bodyclass.present?
-      "page-#{bodyclass}"
+      add_prefix_to_bodyclass(bodyclass, 'page')
     elsif inherited_bodyclass
-      inherited_bodyclass.split(' ')
-                          .map { |bodyclass|
-                            "ancestor-#{bodyclass}"
-                          }
-                          .join(' ')
+      add_prefix_to_bodyclass(inherited_bodyclass, 'ancestor')
     end
   end
 
@@ -163,6 +159,12 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  def add_prefix_to_bodyclass(bodyclasses, prefix)
+    bodyclasses.split(' ')
+               .map { |bodyclass| "#{prefix}-#{bodyclass}" }
+               .join(' ')
+  end
 
   def inherited_bodyclass
     bodyclass.present?  ? bodyclass
