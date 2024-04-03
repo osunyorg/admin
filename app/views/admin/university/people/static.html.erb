@@ -83,6 +83,11 @@ administrative_missions:
 <% end %>
 <% end %>
 <%= render 'admin/application/connections/backlinks' %>
+persons_categories: 
+<% @about.categories.each do |category| %>
+  - slug: "<%= category.slug %>"
+    path: "<%= category.current_permalink_in_website(@website)&.path %>"
+<% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography %>
