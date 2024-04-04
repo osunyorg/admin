@@ -310,6 +310,8 @@ fr:
         localizations:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
+        permalinks:
+          creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         technical:
           label: Technique
           description: Tout ce qui est lié aux réglages techniques
@@ -522,5 +524,7 @@ fr:
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
         header_text: Par défaut, ce texte remplace le titre. Dans certains sites, il s'affiche en plus.
+      communication_website_permalink:
+        path: "Doit être un chemin d'URL. Exemple : /ancien/chemin"
       communication_website_post:
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.

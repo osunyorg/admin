@@ -110,6 +110,8 @@ class Communication::Website::Permalink < ApplicationRecord
     # Trailing slash for coherence
     clean_path = "#{clean_path}/" unless clean_path.end_with?('/')
     clean_path
+  rescue URI::InvalidURIError
+    nil
   end
 
   def self.permitted_about_types
