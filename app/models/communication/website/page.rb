@@ -138,16 +138,14 @@ class Communication::Website::Page < ApplicationRecord
     parent&.best_featured_image_source
   end
 
+  # La page actuelle a les bodyclass classe1 et classe2 ("classe1 classe2")
+  # Les différents ancêtres ont les classes home, bodyclass et secondclass
+  # -> "page-classe1 page-classe2 ancestor-home ancestor-bodyclass ancestor-secondclass"
   def best_bodyclass
-    if bodyclass.present?
-      bodyclass
-    elsif inherited_bodyclass
-      inherited_bodyclass.split(' ')
-                          .map { |bodyclass|
-                            "ancestor-#{bodyclass}"
-                          }
-                          .join(' ')
-    end
+    classes = []
+    classes += add_prefix_to_classes(bodyclass.split(' '), 'page') unless bodyclass.blank?
+    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') unless ancestor_classes.blank?
+    classes.join(' ')
   end
 
   def siblings
@@ -164,9 +162,18 @@ class Communication::Website::Page < ApplicationRecord
 
   protected
 
-  def inherited_bodyclass
-    bodyclass.present?  ? bodyclass
-                        : parent&.inherited_bodyclass
+  # ["class1", "class2"], "page" -> ["page-class1", "page-class2"]
+  def add_prefix_to_classes(classes, prefix)
+    classes.map { |single_class| "#{prefix}-#{single_class}" }
+  end
+
+  # ["class1", "class2", "class3 class4"] -> ["class1", "class2", "class3", "class4"]
+  def ancestor_classes
+    @ancestor_classes ||= ancestors.pluck(:bodyclass)
+                                   .compact_blank
+                                   .join(' ')
+                                   .split(' ')
+                                   .compact_blank
   end
 
   def slug_unavailable?(slug)
