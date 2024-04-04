@@ -30,6 +30,8 @@
 #  pricing_continuing     :text
 #  pricing_initial        :text
 #  published              :boolean          default(FALSE)
+#  qualiopi_certified     :boolean          default(FALSE)
+#  qualiopi_text          :text
 #  registration           :text
 #  registration_url       :string
 #  results                :text
@@ -103,10 +105,11 @@ class Education::Program < ApplicationRecord
 
   has_many   :children,
              class_name: 'Education::Program',
-             foreign_key: :parent_id,
-             dependent: :destroy
+             foreign_key: :parent_id
 
   has_one_attached_deletable :downloadable_summary
+
+  before_destroy :move_children
 
   validates_presence_of :name
   validates :downloadable_summary, size: { less_than: 50.megabytes }
@@ -215,5 +218,9 @@ class Education::Program < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def move_children
+    children.update(parent_id: parent_id)
   end
 end

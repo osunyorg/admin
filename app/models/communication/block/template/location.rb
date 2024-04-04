@@ -17,4 +17,8 @@ class Communication::Block::Template::Location < Communication::Block::Template:
   def available_locations
     website.administration_locations
   end
+  
+  def children
+    selected_locations
+  end
 end
