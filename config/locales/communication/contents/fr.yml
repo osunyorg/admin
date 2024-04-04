@@ -346,6 +346,13 @@ fr:
             description: Une sélection de sites dans des campus.
             edit:
               add: Ajouter un site
+            layouts:
+              grid:
+                description: Les sites sont présentées en grille, de gauche à droite puis de haut en bas.
+                label: Grille
+              list:
+                description: Les sites sont présentés en liste, avec une image à gauche et le résumé à droite.
+                label: Liste
           organizations:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
