@@ -73,7 +73,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def destroy
     @project.destroy
-    redirect_to admin_communication_website_portolio_projects_url,
+    redirect_to admin_communication_website_portfolio_projects_url,
                 notice: t('admin.successfully_destroyed_html', model: @project.to_s)
   end
   protected
