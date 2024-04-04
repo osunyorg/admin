@@ -70,6 +70,8 @@ fr:
         pricing_continuing: Coûts de la formation continue
         pricing_apprenticeship: Coûts de l'apprentissage
         published: Publiée ?
+        qualiopi_certified: Formation certifiée Qualiopi
+        qualiopi_text: Détails de la certification
         registration: Modalités et délais d’accès
         registration_url: Lien d'inscription (URL)
         results: Indicateurs de résultats
@@ -140,6 +142,9 @@ fr:
         admission:
           label: Admission
           hint: Modalités administratives d'accès à la formation.
+        certification:
+          label: Certification
+          hint: Certification légale Qualiopi
       registration_scheme: Régime d'inscription
     roles:
       one: Rôle
