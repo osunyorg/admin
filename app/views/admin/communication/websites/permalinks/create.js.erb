@@ -1,2 +1,17 @@
+<%- if @permalink.valid? -%>
 $('#previous-permalinks tbody')
   .append("<%= escape_javascript(render 'admin/communication/websites/permalinks/permalink', permalink: @permalink) %>");
+<%- else -%>
+notyf = new Notyf();
+notyf.open({
+    type: 'error',
+    position: {
+        x: 'center',
+        y: 'bottom'
+    },
+    message: "<%= t('admin.communication.website.permalinks.creation_error') %>",
+    duration: 9000,
+    ripple: true,
+    dismissible: true
+});
+<%- end -%>
