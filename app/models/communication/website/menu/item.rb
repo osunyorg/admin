@@ -50,7 +50,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     'program' => Icon::EDUCATION_PROGRAM,
     'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
     'volume' => Icon::RESEARCH_LABORATORY
-  }
+  }.freeze
 
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :menu, class_name: 'Communication::Website::Menu'
