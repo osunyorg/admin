@@ -478,23 +478,24 @@ en:
               administrators: Administration staff
               authors: Editorial staff
               blank: Title
+              category: News category
               diploma: Specific diploma
               diplomas: Diplomas index
-              posts: News index
-              post: Specific news
-              category: News category
+              location: Location (campus)
               organizations: Third parties index
               page: Specific Page
-              program: Specific program
-              programs: Programs index
               paper: Specific research paper
               papers: Research papers index
-              volume: Specific research volume
-              volumes: Research volumes index
-              researchers: Research staff
               persons: Staff
+              post: Specific news
+              posts: News index
+              program: Specific program
+              programs: Programs index
+              researchers: Research staff
               teachers: Educational staff
               url: URL
+              volume: Specific research volume
+              volumes: Research volumes index
   simple_form:
     hints:
       communication_extranet:

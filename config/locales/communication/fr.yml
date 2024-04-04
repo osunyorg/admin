@@ -478,23 +478,24 @@ fr:
               administrators: Équipe administrative
               authors: Équipe éditoriale
               blank: Titre intermédiaire
+              category: Catégorie d'actualités
               diploma: Diplôme spécifique
               diplomas: Liste des diplômes
-              posts: Liste des actualités
-              post: Actualité spécifique
-              category: Catégorie d'actualités
+              location: Site (campus)
               organizations: Liste des tierces parties
               page: Page spécifique
-              program: Formation spécifique
-              programs: Liste des formations
               paper: Papier spécifique
               papers: Liste des papiers
-              volume: Volume spécifique
-              volumes: Liste des volumes
-              researchers: Équipe de recherche
               persons: Équipe
+              post: Actualité spécifique
+              posts: Liste des actualités
+              program: Formation spécifique
+              programs: Liste des formations
+              researchers: Équipe de recherche
               teachers: Équipe pédagogique
               url: URL
+              volume: Volume spécifique
+              volumes: Liste des volumes
   simple_form:
     hints:
       communication_extranet:
