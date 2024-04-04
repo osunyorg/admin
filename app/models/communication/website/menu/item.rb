@@ -71,11 +71,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
       'category' => Icon::COMMUNICATION_WEBSITE_POST,
       'diploma' => Icon::EDUCATION_DIPLOMA,
+      'location' => Icon::ADMINISTRATION_CAMPUS,
       'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
       'paper' => Icon::RESEARCH_LABORATORY,
       'post' => Icon::COMMUNICATION_WEBSITE_POST,
       'program' => Icon::EDUCATION_PROGRAM,
-      'location' => Icon::ADMINISTRATION_CAMPUS,
       'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
       'volume' => Icon::RESEARCH_LABORATORY,
     }
