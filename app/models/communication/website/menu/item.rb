@@ -39,6 +39,19 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   attr_accessor :skip_publication_callback
 
+  ICONS = {
+    'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
+    'category' => Icon::COMMUNICATION_WEBSITE_POST,
+    'diploma' => Icon::EDUCATION_DIPLOMA,
+    'location' => Icon::ADMINISTRATION_CAMPUS,
+    'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
+    'paper' => Icon::RESEARCH_LABORATORY,
+    'post' => Icon::COMMUNICATION_WEBSITE_POST,
+    'program' => Icon::EDUCATION_PROGRAM,
+    'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
+    'volume' => Icon::RESEARCH_LABORATORY
+  }.freeze
+
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :menu, class_name: 'Communication::Website::Menu'
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
@@ -67,19 +80,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   after_commit :sync_menu
 
   def self.icon_for(kind)
-    icons = {
-      'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
-      'category' => Icon::COMMUNICATION_WEBSITE_POST,
-      'diploma' => Icon::EDUCATION_DIPLOMA,
-      'location' => Icon::ADMINISTRATION_CAMPUS,
-      'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
-      'paper' => Icon::RESEARCH_LABORATORY,
-      'post' => Icon::COMMUNICATION_WEBSITE_POST,
-      'program' => Icon::EDUCATION_PROGRAM,
-      'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
-      'volume' => Icon::RESEARCH_LABORATORY,
-    }
-    icons[kind] if icons.has_key? kind
+    ICONS[kind] if ICONS.has_key? kind
   end
 
   def to_s
