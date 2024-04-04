@@ -125,8 +125,8 @@ class Communication::Website::Menu::Item < ApplicationRecord
     kind_location? ||
     kind_page? ||
     kind_paper? ||
-    kind_program? ||
     kind_post? ||
+    kind_program? ||
     kind_volume?
   end
 
