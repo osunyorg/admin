@@ -8,8 +8,10 @@ module Communication::Website::Menu::WithAutomatism
   def generate_automatically
     begin
       pause_git_sync
-      clear_items
-      create_items
+      transaction do
+        clear_items
+        create_items
+      end
     ensure
       unpause_git_sync
     end

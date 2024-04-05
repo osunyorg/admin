@@ -5,9 +5,9 @@ Bugsnag.configure do |config|
   config.meta_data_filters += ['access_token', 'sso_cert']
 
   config.add_on_error(proc do |event|
-    next unless event.metadata.key?(:active_job)
-    job_name = event.metadata.dig(:active_job, :job_name)
-    next unless job_name == "ActiveStorage::AnalyzeJob"
+    next unless event.metadata.key?(:job)
+    job_class = event.metadata.dig(:job, :active_job, "job_class")
+    next unless job_class == "ActiveStorage::AnalyzeJob"
     ignored_error_classes = [
       "ActiveStorage::FileNotFoundError",
       "Aws::S3::Errors::NoSuchKey",
