@@ -152,7 +152,7 @@ GEM
       rails (>= 3.1)
     breadcrumbs_on_rails (4.1.0)
       railties (>= 5.0)
-    bugsnag (6.26.3)
+    bugsnag (6.26.4)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
