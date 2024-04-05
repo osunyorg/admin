@@ -41,7 +41,7 @@ contact_details:
 image: 
   id: "<%= @about.best_picture.blob.id %>"
   alt: ""
-  credit: 
+  credit: >-
     <%= prepare_html_for_static @about.picture_credit %>
 <% end %>
 roles:
