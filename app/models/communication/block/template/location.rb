@@ -1,6 +1,10 @@
 class Communication::Block::Template::Location < Communication::Block::Template::Base
 
   has_elements
+  has_layouts [
+    :grid, 
+    :list
+  ]
 
   def dependencies
     selected_locations

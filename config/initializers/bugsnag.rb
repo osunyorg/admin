@@ -3,4 +3,19 @@ Bugsnag.configure do |config|
   config.release_stage = ENV['APPLICATION_ENV']
   config.notify_release_stages = ['production', 'staging']
   config.meta_data_filters += ['access_token', 'sso_cert']
+
+  config.add_on_error(proc do |event|
+    next unless event.metadata.key?(:job)
+    job_class = event.metadata.dig(:job, :active_job, "job_class")
+    next unless job_class == "ActiveStorage::AnalyzeJob"
+    ignored_error_classes = [
+      "ActiveStorage::FileNotFoundError",
+      "Aws::S3::Errors::NoSuchKey",
+      "Aws::S3::Errors::NotFound",
+      "MiniMagick::Error"
+    ]
+    error_class = event.exceptions.first[:errorClass]
+    next unless ignored_error_classes.include?(error_class)
+    false
+  end)
 end
