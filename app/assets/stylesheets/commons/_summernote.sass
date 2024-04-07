@@ -3,13 +3,11 @@
     .note-editor
         background: white
         .note-toolbar
-            opacity: 0
-            transition: opacity 0.25s
-            pointer-events: none
+            height: 0
+            transition: height 0.25s
         &--focus
             .note-toolbar
-                pointer-events: auto
-                opacity: 1
+                height: auto
         .note-editing-area
             background: white
             .note-editable
