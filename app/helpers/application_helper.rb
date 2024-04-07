@@ -87,7 +87,7 @@ module ApplicationHelper
 
   def prepare_notes(text)
     @notes ||= Osuny::Notes.new
-    @notes.prepare text
+    @notes.prepare(text)
   end
 
 end
