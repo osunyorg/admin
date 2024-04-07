@@ -346,6 +346,13 @@ en:
             description: A selection of locations on a campus.
             edit:
               add: Add a location
+            layouts:
+              grid:
+                description: Locations are shown as a grid, left to right and top to bottom.
+                label: Grid
+              list:
+                description: Locations are shown as a list, with images on the left and summary on the right.
+                label: List
           organizations:
             description: A list of organizations with logo, name and website.
             edit:
