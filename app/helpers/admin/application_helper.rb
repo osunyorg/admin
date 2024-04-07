@@ -131,7 +131,9 @@ module Admin::ApplicationHelper
 
   def prepare_html_for_static(text)
     university = current_university || @website&.university || @about&.university
-    Static::Html.new(text, about: @about, university: university).prepared
+    html = Static::Html.new(text, about: @about, university: university).prepared
+    # We need an index for the whole page
+    prepare_notes html
   end
 
   def prepare_text_for_static(text, depth: 1)

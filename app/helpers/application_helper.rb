@@ -86,18 +86,8 @@ module ApplicationHelper
   end
 
   def prepare_notes(text)
-    @current_note ||= 0
-    parts = text.split('<note>')
-    # Take what's before the first, event if it's empty
-    text_clean = parts.shift
-    parts.each do |part| 
-      @current_note += 1
-      text_clean += '<span class="note">'
-      text_clean += "<span class=\"note__call\">#{@current_note}</span>"
-      text_clean += "<span class=\"note__content\">#{part}</span>"
-    end
-    text_clean.gsub!('</note>', '</span>')
-    text_clean.html_safe
+    @notes ||= Osuny::Notes.new
+    @notes.prepare text
   end
 
 end
