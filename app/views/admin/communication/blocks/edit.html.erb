@@ -150,7 +150,9 @@
               var editor = $(this).parent().children('.note-editor');
               editor.addClass('note-editor--defocusing');
               setTimeout(function () {
-                if (editor.hasClass('note-editor--defocusing')) {
+                var defocusing = editor.hasClass('note-editor--defocusing'),
+                    codeview = editor.hasClass('codeview');
+                if (defocusing && !codeview) {
                   editor.removeClass('note-editor--focus');
                 }
               }, 1000);
