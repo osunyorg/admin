@@ -19,6 +19,7 @@
 #
 class University::Person::Category < ApplicationRecord
   include AsIndirectObject
+  include Contentful
   include Sluggable
   include WithPermalink
   include WithUniversity
