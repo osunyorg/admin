@@ -2,6 +2,7 @@
 window.summernoteManager = {
     configs: {},
     note: function (context) {
+        'use strict';
         var ui = $.summernote.ui,
             button;
         button = ui.button({
@@ -28,11 +29,10 @@ window.summernoteManager = {
         'use strict';
         this.setConfig('link',
             {
-                toolbar: ['insert', ['link', 'unlink']],
+                toolbar: ['insert', ['link', 'unlink']]
             },
             ['a'],
-            ['href', 'target']
-        );
+            ['href', 'target']);
 
         this.setConfig('mini',
             {
@@ -44,8 +44,7 @@ window.summernoteManager = {
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a'],
-            ['href', 'target']
-        );
+            ['href', 'target']);
 
         this.setConfig('mini-list',
             {
@@ -58,8 +57,7 @@ window.summernoteManager = {
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
-            ['href', 'target']
-        );
+            ['href', 'target']);
 
         this.setConfig('mini-list-with-notes',
             {
@@ -72,8 +70,7 @@ window.summernoteManager = {
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
-            ['href', 'target']
-        );
+            ['href', 'target']);
 
         this.setConfig('default',
             {
@@ -94,8 +91,7 @@ window.summernoteManager = {
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'],
-            ['href', 'target']
-        );
+            ['href', 'target']);
 
         window.SUMMERNOTE_CONFIGS = this.configs;
     },
