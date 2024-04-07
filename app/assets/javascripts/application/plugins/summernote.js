@@ -2,21 +2,20 @@
 window.summernoteManager = {
     configs: {},
     note: function (context) {
-        var ui = $.summernote.ui;
-        
-        // create button
-        var button = ui.button({
+        var ui = $.summernote.ui,
+            button;
+        button = ui.button({
             contents: '<i class="fa-regular fa-note-sticky"/>',
             tooltip: 'Transformer en note',
             click: function () {
-                var text = context.invoke('editor.getSelectedText');
-                var note = '<note>' + text + '</note>';
-                var $node = $(note);
+                var text = context.invoke('editor.getSelectedText'),
+                    note = '<note>' + text + '</note>',
+                    $node = $(note);
                 context.invoke('editor.insertNode', $node[0]);
             }
         });
-        
-        return button.render();   // return button as jquery object
+        // return button as jquery object
+        return button.render();
     },
     init: function () {
         'use strict';
@@ -27,85 +26,88 @@ window.summernoteManager = {
 
     setConfigs: function () {
         'use strict';
-        this.setConfig('link', 
-            ['insert', ['link', 'unlink']],
-            null,
+        this.setConfig('link',
+            {
+                toolbar: ['insert', ['link', 'unlink']],
+            },
             ['a'],
             ['href', 'target']
         );
 
         this.setConfig('mini',
-            [
-                ['font', ['bold', 'italic']],
-                ['position', ['superscript']],
-                ['insert', ['link', 'unlink']],
-                ['view', ['codeview']]
-            ],
-            null,
-            ['b', 'strong', 'i', 'em', 'sup', 'a'], 
+            {
+                toolbar: [
+                    ['font', ['bold', 'italic']],
+                    ['position', ['superscript']],
+                    ['insert', ['link', 'unlink']],
+                    ['view', ['codeview']]
+                ]
+            },
+            ['b', 'strong', 'i', 'em', 'sup', 'a'],
             ['href', 'target']
         );
 
-        this.setConfig('mini-list', 
-            [
-                ['font', ['bold', 'italic']],
-                ['position', ['superscript']],
-                ['para', ['ul', 'ol']],
-                ['insert', ['link', 'unlink']],
-                ['view', ['codeview']]
-            ],
-            null,
-            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], 
+        this.setConfig('mini-list',
+            {
+                toolbar: [
+                    ['font', ['bold', 'italic']],
+                    ['position', ['superscript']],
+                    ['para', ['ul', 'ol']],
+                    ['insert', ['link', 'unlink']],
+                    ['view', ['codeview']]
+                ]
+            },
+            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
             ['href', 'target']
         );
 
-        this.setConfig('mini-list-with-notes', 
-            [
-                ['font', ['bold', 'italic']],
-                ['position', ['superscript']],
-                ['para', ['ul', 'ol']],
-                ['insert', ['link', 'unlink', 'note']],
-                ['view', ['codeview']]
-            ],
-            null,
-            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'], 
+        this.setConfig('mini-list-with-notes',
+            {
+                toolbar: [
+                    ['font', ['bold', 'italic']],
+                    ['position', ['superscript']],
+                    ['para', ['ul', 'ol']],
+                    ['insert', ['link', 'unlink', 'note']],
+                    ['view', ['codeview']]
+                ]
+            },
+            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
             ['href', 'target']
         );
 
-        this.setConfig('default', 
-            [
-                ['style', ['style']],
-                ['font', ['bold', 'italic']],
-                ['position', ['superscript', 'subscript']],
-                ['para', ['ul', 'ol']],
-                ['view', ['codeview']]
-            ],
-            [
-                'p',
-                'blockquote',
-                'pre',
-                'h2',
-                'h3',
-                'h4'
-            ],
-            ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'], 
+        this.setConfig('default',
+            {
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic']],
+                    ['position', ['superscript', 'subscript']],
+                    ['para', ['ul', 'ol']],
+                    ['view', ['codeview']]
+                ],
+                styleTags: [
+                    'p',
+                    'blockquote',
+                    'pre',
+                    'h2',
+                    'h3',
+                    'h4'
+                ]
+            },
+            ['b', 'strong', 'i', 'em', 'sup', 'sub', 'a', 'ul', 'ol', 'li', 'p', 'blockquote', 'pre', 'h2', 'h3', 'h4'],
             ['href', 'target']
         );
 
         window.SUMMERNOTE_CONFIGS = this.configs;
     },
 
-    setConfig: function (key, toolbar, styleTags, tags, attributes) {
+    setConfig: function (key, config, tags, attributes) {
         'use strict';
-        this.configs[key] = {
-            toolbar: toolbar,
-            styleTags: styleTags,
-            followingToolbar: true,
-            disableDragAndDrop: true,
-            callbacks: {
-                onPaste: this.pasteSanitizedClipboardContent.bind(this, tags, attributes)
-            }
+        config.followingToolbar = true;
+        config.disableDragAndDrop = true;
+        config.callbacks = {
+            onPaste: this.pasteSanitizedClipboardContent.bind(this, tags, attributes)
         };
+        this.configs[key] = config;
     },
 
     initEditors: function () {
