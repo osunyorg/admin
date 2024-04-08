@@ -20,6 +20,7 @@ class Ability::WebsiteManager < Ability
     can :manage, University::Person::Category, university_id: @user.university_id
     can :manage, University::Person::Experience, university_id: @user.university_id
     can :manage, University::Person::Involvement, university_id: @user.university_id
+    can :manage, User::Favorite, user_id: @user
   end
 
   protected

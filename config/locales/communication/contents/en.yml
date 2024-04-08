@@ -105,7 +105,7 @@ en:
                 label: Grid
               large:
                 description: Each event is presented in majesty, across the full width available, with a large image.
-                label: Grand
+                label: Large
               list:
                 description: A list of events with dates, small images, all the same width.
                 label: List
@@ -291,6 +291,9 @@ en:
               grid:
                 description: Images are presented as a grid, from left to right and top to bottom, with constant width.
                 label: Grid
+              large:
+                description: The images are presented one after the other, using the full width for horizontals and a large width for verticals.
+                label: Large
           image:
             description: An image with its alternative description, a credit and a text.
             edit:
@@ -343,6 +346,13 @@ en:
             description: A selection of locations on a campus.
             edit:
               add: Add a location
+            layouts:
+              grid:
+                description: Locations are shown as a grid, left to right and top to bottom.
+                label: Grid
+              list:
+                description: Locations are shown as a list, with images on the left and summary on the right.
+                label: List
           organizations:
             description: A list of organizations with logo, name and website.
             edit:
