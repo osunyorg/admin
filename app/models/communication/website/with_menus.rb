@@ -17,14 +17,6 @@ module Communication::Website::WithMenus
     end
   end
 
-  def menu_item_kind_programs?
-    has_education_programs?
-  end
-
-  def menu_item_kind_program?
-    has_education_programs?
-  end
-
   def menu_item_kind_diploma?
     has_education_diplomas?
   end
@@ -33,32 +25,32 @@ module Communication::Website::WithMenus
     has_education_diplomas?
   end
 
-  def menu_item_kind_administrators?
-    has_administrators?
+  def menu_item_kind_location?
+    has_administration_locations?
   end
 
-  def menu_item_kind_researchers?
-    has_researchers?
-  end
-
-  def menu_item_kind_teachers?
-    has_teachers?
-  end
-
-  def menu_item_kind_volumes?
-    has_research_volumes?
-  end
-
-  def menu_item_kind_volume?
-    has_research_volumes?
+  def menu_item_kind_paper?
+    has_research_papers?
   end
 
   def menu_item_kind_papers?
     has_research_papers?
   end
 
-  def menu_item_kind_paper?
-    has_research_papers?
+  def menu_item_kind_program?
+    has_education_programs?
+  end
+
+  def menu_item_kind_programs?
+    has_education_programs?
+  end
+
+  def menu_item_kind_volume?
+    has_research_volumes?
+  end
+
+  def menu_item_kind_volumes?
+    has_research_volumes?
   end
 
   def initialize_menus

@@ -131,7 +131,8 @@ class Communication::Website < ApplicationRecord
     portfolio_categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
     [about] +
-    [default_image&.blob]
+    [default_image&.blob] +
+    [default_shared_image&.blob]
   end
 
   def website

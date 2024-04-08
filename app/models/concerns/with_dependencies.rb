@@ -117,7 +117,7 @@ module WithDependencies
       clean_websites(websites_to_clean.pluck(:id))
     end
   end
-  
+
   def clean_websites(websites_ids)
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
@@ -142,7 +142,7 @@ module WithDependencies
     return unless respond_to?(:published)
     return true if saved_change_to_published? && !published?
     if respond_to?(:published_at)
-      return saved_change_to_published_at? && published_at > Time.now
+      return saved_change_to_published_at? && (published_at.nil? || published_at > Time.now)
     end
     false
   end
