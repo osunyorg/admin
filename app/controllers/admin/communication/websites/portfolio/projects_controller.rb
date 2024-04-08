@@ -4,6 +4,11 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   include Admin::Translatable
 
+  before_action :load_filters, only: :index
+
+  has_scope :for_search_term
+  has_scope :for_category
+
   def index
     @projects = apply_scopes(@projects).for_language(current_website_language)
                                      .ordered
@@ -87,6 +92,10 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     @website.portfolio_categories
             .for_language(current_website_language)
             .ordered
+  end
+
+  def load_filters
+    @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(current_user, @website).list
   end
 
   def project_params

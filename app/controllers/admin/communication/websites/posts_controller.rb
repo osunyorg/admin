@@ -14,7 +14,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).for_language(current_website_language).ordered.page params[:page]
+    @posts = apply_scopes(@posts).for_language(current_website_language)
+                                 .ordered
+                                 .page(params[:page])
     @authors =  @website.authors.for_language(current_website_language)
                                 .accessible_by(current_ability)
                                 .ordered
