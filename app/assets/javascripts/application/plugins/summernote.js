@@ -6,8 +6,8 @@ window.summernoteManager = {
         var ui = $.summernote.ui,
             button;
         button = ui.button({
-            contents: '<i class="fa-regular fa-note-sticky"/>',
-            tooltip: 'Transformer en note',
+            contents: '<i class="fas fa-note-sticky"/>',
+            tooltip: 'Note',
             click: function () {
                 var text = context.invoke('editor.getSelectedText'),
                     note = '<note>' + text + '</note>',
