@@ -132,6 +132,33 @@
           onChangeCallback = function(content) {
               element.value = content;
               element.dispatchEvent(new Event('input'))
+          },
+          onFocusCallback = function() {
+            $(this).parent().children('.note-editor').removeClass('note-editor--defocusing');
+            $(this).parent().children('.note-editor').addClass('note-editor--focus');
+          },
+          onBlurCallback = function() {
+            var editor = $(this).parent().children('.note-editor');
+            editor.addClass('note-editor--defocusing');
+            setTimeout(function () {
+              var defocusing = editor.hasClass('note-editor--defocusing'),
+                  codeview = editor.hasClass('codeview');
+              if (defocusing && !codeview) {
+                editor.removeClass('note-editor--focus');
+              }
+            }, 1000);
+
+          },
+          onCursorCallback = function(event) {
+            // TODO vérifier si on est dans une note correctement, là ça ne marche pas si on se balade au clavier
+            var node = event.target.nodeName,
+                $editor = $(this).parent().children('.note-editor'),
+                $buttonNote = $editor.find('.note-btn-note');
+            if (node === 'NOTE') {
+              $buttonNote.addClass('active');
+            } else {
+              $buttonNote.removeClass('active');
+            }
           };
 
         $(element).summernote({
@@ -139,6 +166,7 @@
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
           followingToolbar: true,
           disableDragAndDrop: true,
+          placeholder: '...',
           codemirror: window.codemirrorManager.defaultConfig(),
           buttons: {
             note: window.summernoteManager.note
@@ -146,21 +174,10 @@
           callbacks: {
             onChange: onChangeCallback,
             onChangeCodeview: onChangeCallback,
-            onBlur: function (e) {
-              var editor = $(this).parent().children('.note-editor');
-              editor.addClass('note-editor--defocusing');
-              setTimeout(function () {
-                var defocusing = editor.hasClass('note-editor--defocusing'),
-                    codeview = editor.hasClass('codeview');
-                if (defocusing && !codeview) {
-                  editor.removeClass('note-editor--focus');
-                }
-              }, 1000);
-            },
-            onFocus: function (e) {
-              $(this).parent().children('.note-editor').removeClass('note-editor--defocusing');
-              $(this).parent().children('.note-editor').addClass('note-editor--focus');
-            }
+            onBlur: onBlurCallback,
+            onFocus: onFocusCallback,
+            onMousedown: onCursorCallback,
+            onKeydown: onCursorCallback
           }
         });
       },

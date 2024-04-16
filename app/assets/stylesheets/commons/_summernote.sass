@@ -2,12 +2,23 @@
     color: black
     .note-editor
         background: white
+        position: relative
         .note-toolbar
-            height: 0
-            transition: height 0.25s
+            transition: opacity 0.25s
+            opacity: 0
+            pointer-events: none
+            .note-btn
+                margin-right: 8px
+                border-radius: 3px
+                &.active
+                    background: black
+                    color: white !important
+                &.dropdown-toggle:after
+                    margin-left: 10px
         &--focus
             .note-toolbar
-                height: auto
+                opacity: 1
+                pointer-events: auto
         .note-editing-area
             background: white
             .note-editable
@@ -38,17 +49,17 @@
                 note
                     background: #000000
                     border-radius: 4px
-                    color: white
                     display: inline
                     font-size: 14px
                     margin-left: 2px
                     padding: 2px 4px
                     vertical-align: 2px
+                    &,
+                    *
+                        color: white
     b
         color: black
         font-weight: bold
-    .note-btn.dropdown-toggle:after
-        margin-left: 10px
     button
         background: transparent
         border: none
@@ -76,9 +87,9 @@
     .note-popover .popover-content,
     .note-editor .note-toolbar
         background: white
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+        border: none
         border-radius: 3px
-        padding: 0
+        padding: 10px 0 0 10px
     .note-popover .popover-content > .note-btn-group,
     .note-editor .note-toolbar > .note-btn-group
         margin-right: 0

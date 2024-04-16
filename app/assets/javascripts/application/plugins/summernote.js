@@ -8,11 +8,17 @@ window.summernoteManager = {
         button = ui.button({
             contents: '<i class="fas fa-note-sticky"/>',
             tooltip: 'Note',
+            className: 'note-btn-note',
             click: function () {
                 var text = context.invoke('editor.getSelectedText'),
-                    note = '<note>' + text + '</note>',
-                    $node = $(note);
-                context.invoke('editor.insertNode', $node[0]);
+                    // TODO find if it's a note or not
+                    isANote = false,
+                    note = '<note>' + text + '</note>';
+                if (isANote) {
+                    // TODO remove note
+                } else {
+                    context.invoke('editor.pasteHTML', note);
+                }
             }
         });
         // return button as jquery object
