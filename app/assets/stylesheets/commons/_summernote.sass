@@ -57,6 +57,11 @@
                     &,
                     *
                         color: white
+                    a
+                        text-decoration: solid
+                        text-underline-offset: auto
+                        &[target="_blank"]::after
+                            filter: invert(1)
     b
         color: black
         font-weight: bold
