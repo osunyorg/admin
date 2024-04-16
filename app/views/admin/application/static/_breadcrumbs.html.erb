@@ -1,8 +1,14 @@
 breadcrumbs:
-<% pages.each do |page| %>
+<% 
+pages.each do |page| 
+  title = page.to_s
+  title = page.best_title if page.respond_to?(:best_title)
+  path = page.path
+  path = page.current_permalink_in_website(@website)&.path if page.respond_to?(:current_permalink_in_website) && @website
+%>
   - title: >-
-      <%= page.best_title %>
-    path: "<%= page.path %>"
+      <%= title %>
+    path: "<%= path %>"
 <% end %>
   - title: >-
       <%= current_title %>

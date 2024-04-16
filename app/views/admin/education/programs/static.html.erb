@@ -1,5 +1,8 @@
 ---
 <%
+special_page = @website.special_page(Communication::Website::Page::EducationProgram)
+pages = special_page.ancestors_and_self + @about.ancestors if special_page
+
 teacher_involvements = @about.university_person_involvements
                              .includes(:person)
                              .ordered_by_name
@@ -11,7 +14,7 @@ administrator_involvements = @about.involvements_through_roles
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true, toc_present: true %>
 <%= render 'admin/application/static/breadcrumbs',
-            pages: @website.special_page(Communication::Website::Page::EducationProgram).ancestors_and_self,
+            pages: pages,
             current_title: @about.to_s %>
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
