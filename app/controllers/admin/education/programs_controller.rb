@@ -113,6 +113,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
       :meta_description, :summary, :published,
       :capacity, :continuing, :initial, :apprenticeship, 
       :qualiopi_certified, :qualiopi_text,
+      :logo, :logo_delete, 
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
       :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
       :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,

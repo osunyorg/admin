@@ -11,4 +11,12 @@ class Communication::Website::Permalink::Program < Communication::Website::Perma
   def self.pattern_in_website(website, language)
     "/#{website.special_page(Communication::Website::Page::EducationProgram, language: language).slug_with_ancestors}/:slug/"
   end
+
+  protected
+
+  def substitutions
+    {
+      slug: about.path
+    }
+  end
 end
