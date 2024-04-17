@@ -57,6 +57,7 @@ fr:
         is_published: Publiée
         is_draft: Brouillon
         locations: Campus
+        logo: Logo de la formation
         main_information: Informations essentielles
         name: Nom
         objectives: Objectifs
