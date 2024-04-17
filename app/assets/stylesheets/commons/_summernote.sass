@@ -3,13 +3,23 @@
     .note-editor
         background: white
         position: relative
+        &.note-frame,
+        &.note-airframe
+            border: none
         .note-toolbar
             opacity: 0
             pointer-events: none
             transition: opacity 0.25s
             .note-btn
                 border-radius: 3px
+                font-size: 12px
+                line-height: 100%
                 margin-right: 8px
+                padding-left: 0.4rem
+                padding-right: 0.4rem
+                padding-top: 3px
+                i // Icône trop haut
+                    transform: translateY(1px)
                 &.active
                     background: black
                     color: white !important
@@ -22,8 +32,11 @@
         .note-editing-area
             background: white
             .note-editable
-                min-height: 50px
-                padding-top: 5px
+                border: 1px solid #00000032
+                border-radius: 3px
+                min-height: 30px
+                padding: 8px
+                padding-top: 2px // Compensation de la hauteur des lignes
                 *
                     font-family: $font-family-sans-serif
                 &, 
@@ -94,15 +107,10 @@
         background: white
         border: none
         border-radius: 3px
-        padding: 10px 0 0 10px
-    .note-popover .popover-content > .note-btn-group,
-    .note-editor .note-toolbar > .note-btn-group
-        margin-right: 0
-        margin-top: 0
-    .note-btn-group
-        .note-btn
-            font-size: 12px
-            padding-left: 0.4rem
-            padding-right: 0.4rem
+        line-height: 100%
+        padding: 5px 0
+        > .note-btn-group
+            margin-right: 0
+            margin-top: 0
     .note-link-popover
         display: none !important

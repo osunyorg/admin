@@ -7,16 +7,17 @@ window.summernoteManager = {
             button;
         button = ui.button({
             contents: '<i class="fas fa-note-sticky"/>',
-            tooltip: 'Note',
+            tooltip: 'Note (beta)',
             className: 'note-btn-note',
             click: function () {
                 var text = context.invoke('editor.getSelectedText'),
                     // TODO find if it's a note or not
                     isANote = false,
-                    note = '<note>' + text + '</note>';
+                    note;
                 if (isANote) {
                     // TODO remove note
                 } else {
+                    note = '<note>' + text + '</note>';
                     context.invoke('editor.pasteHTML', note);
                 }
             }
