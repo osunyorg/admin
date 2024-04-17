@@ -108,11 +108,13 @@ class Education::Program < ApplicationRecord
              foreign_key: :parent_id
 
   has_one_attached_deletable :downloadable_summary
+  has_one_attached_deletable :logo
 
   before_destroy :move_children
 
   validates_presence_of :name
   validates :downloadable_summary, size: { less_than: 50.megabytes }
+  validates :logo, size: { less_than: 5.megabytes }
 
   scope :published, -> { where(published: true) }
   scope :ordered_by_name, -> { order(:name) }
@@ -213,7 +215,11 @@ class Education::Program < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id, downloadable_summary&.blob_id]
+    super.concat [
+      featured_image&.blob_id, 
+      downloadable_summary&.blob_id, 
+      logo&.blob_id
+    ]
   end
 
   def inherited_blob_ids

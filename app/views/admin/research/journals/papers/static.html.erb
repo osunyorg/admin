@@ -32,7 +32,7 @@ keywords: >
   <%= prepare_text_for_static @about.keywords %>
 researchers:
 <% @about.people.each do |person| %>
-- "<%= person.slug %>"
+  - "<%= person.slug %>"
 <% end %>
 authors_list: "<%= prepare_text_for_static @about.authors_list %>"
 <%= render 'admin/application/meta_description/static' %>

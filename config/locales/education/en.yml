@@ -57,6 +57,7 @@ en:
         is_published: Published
         is_draft: Draft
         locations: Campus
+        logo: Program logo
         main_information: Main information
         name: Name
         objectives: Objectifs
