@@ -172,6 +172,11 @@
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
         <%= f.input :bodyclass %>
+        <%= f.input :logo,
+                    as: :single_deletable_file,
+                    hint: images_formats_accepted_hint,
+                    input_html: { accept: default_images_formats_accepted }
+                    %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: program, f: f %>
       <%= render 'admin/application/meta_description/form', f: f, about: program %>
