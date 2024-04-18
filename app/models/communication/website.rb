@@ -18,6 +18,7 @@
 #  git_provider            :integer          default("github")
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
+#  locked_at               :datetime
 #  name                    :string           indexed
 #  plausible_url           :string
 #  repository              :string
@@ -70,6 +71,7 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithLanguages
+  include WithLock
   include WithManagers
   include WithProgramCategories
   include WithReferences
@@ -146,16 +148,18 @@ class Communication::Website < ApplicationRecord
   # Override to follow direct objects
   def sync_with_git
     return unless website.git_repository.valid?
-    if syncable?
-      Communication::Website::GitFile.sync website, self
-      recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
-      references.each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
+    begin
+      website.lock!
+    rescue
+      # Website already locked, we reenqueue the job
+      sync_with_git
+      return
     end
-    website.git_repository.sync!
+    begin
+      sync_with_git_safely if syncable?
+    ensure
+      website.unlock!
+    end
   end
   handle_asynchronously :sync_with_git, queue: :default
 
@@ -176,6 +180,17 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def sync_with_git_safely
+    Communication::Website::GitFile.sync website, self
+    recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    references.each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    website.git_repository.sync!
   end
 
   def reconnect_dependency(dependency, new_university_id)
