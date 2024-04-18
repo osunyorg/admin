@@ -4,6 +4,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   include Admin::Translatable
 
+  # Allow to override the default load_filters from Admin::Filterable
   before_action :load_filters, only: :index
 
   has_scope :for_search_term
