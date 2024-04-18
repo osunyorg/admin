@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_02_133217) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_122003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1066,6 +1066,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_133217) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
 
@@ -1167,6 +1168,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_133217) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end
 

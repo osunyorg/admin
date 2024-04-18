@@ -199,6 +199,7 @@ class University::Person < ApplicationRecord
 
   def dependencies
     contents_dependencies +
+    categories +
     active_storage_blobs
   end
 

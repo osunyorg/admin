@@ -117,6 +117,7 @@ class University::Organization < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
+    categories +
     blocks
   end
 

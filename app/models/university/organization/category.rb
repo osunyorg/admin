@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  name          :string
+#  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed
@@ -17,6 +18,10 @@
 #  fk_rails_f610c7eb13  (university_id => universities.id)
 #
 class University::Organization::Category < ApplicationRecord
+  include AsIndirectObject
+  include Contentful
+  include Sluggable
+  include WithPermalink
   include WithUniversity
 
   has_and_belongs_to_many :organizations,
