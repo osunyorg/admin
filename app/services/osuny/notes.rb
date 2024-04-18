@@ -21,7 +21,7 @@ module Osuny
       @text_with_notes = @parts.shift
       # For each note, replace <note> and </note>
       @parts.each do |part|
-        @text_with_notes << build_note(part)
+        @text_with_notes += build_note(part)
         @index += 1
       end
     end

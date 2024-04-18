@@ -1,7 +1,7 @@
 /*global $ */
 window.summernoteManager = {
     configs: {},
-    note: function (context) {
+    noteButton: function (context) {
         'use strict';
         var ui = $.summernote.ui,
             button;
@@ -76,7 +76,7 @@ window.summernoteManager = {
                     ['view', ['codeview']]
                 ]
             },
-            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
+            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
             ['href', 'target']);
 
         this.setConfig('default',
