@@ -112,7 +112,7 @@ module Communication::Website::WithGitRepository
         Communication::Website::GitFile.mark_for_destruction(self, git_file)
       end
     end
-    self.git_repository.sync!
+    git_repository.sync!
   end
 
   def add_direct_source_to_sync(direct_source)
