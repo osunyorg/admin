@@ -149,7 +149,7 @@ class Communication::Website < ApplicationRecord
   def sync_with_git
     return unless website.git_repository.valid? && syncable?
     begin
-      website.lock!
+      website.lock_for_background_jobs!
     rescue
       # Website already locked, we reenqueue the job
       sync_with_git
@@ -158,7 +158,7 @@ class Communication::Website < ApplicationRecord
     begin
       sync_with_git_safely
     ensure
-      website.unlock!
+      website.unlock_for_background_jobs!
     end
   end
   handle_asynchronously :sync_with_git, queue: :default
