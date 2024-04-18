@@ -122,8 +122,8 @@ module Communication::Website::WithConnectedObjects
     # In the same job
     create_missing_special_pages
     initialize_menus
-    sync_with_git_without_delay
-    destroy_obsolete_git_files_without_delay
+    sync_with_git_safely
+    destroy_obsolete_git_files_safely
     get_current_theme_version!
     screenshot!
   end
