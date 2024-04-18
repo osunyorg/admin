@@ -83,7 +83,7 @@ module Communication::Website::WithGitRepository
       # Website already locked, we reenqueue the job
       update_theme_version
       return
-    rescue
+    else
       lock_for_background_jobs!
     end
     begin
