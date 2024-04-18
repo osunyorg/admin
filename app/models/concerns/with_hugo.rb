@@ -11,9 +11,9 @@ module WithHugo
 
   def hugo_ancestors(website)
     ancestors = []
+    ancestors.concat hugo_ancestors_for_special_page(website)
     # Certains objets ont des ancêtres, il faut les lister
     ancestors.concat self.ancestors if respond_to?(:ancestors)
-    ancestors.concat hugo_ancestors_for_special_page(website)
     ancestors.compact
   end
 
@@ -23,7 +23,7 @@ module WithHugo
 
   protected
 
-  # Si on est sur une page, on est remonté à la page racine, donc le travail est fait.
+  # Si on est sur une page, pas d'ancêtres à chercher, le breadcrumb va se construire avec les parents.
   # Sinon, les objets ont une "page spéciale", (agenda, actualités, offre de formation...)
   # Cette page a aussi des ancêtres, qu'il faut récupérer avec ancestors_and_self
   def hugo_ancestors_for_special_page(website)
