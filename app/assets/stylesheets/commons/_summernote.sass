@@ -7,10 +7,9 @@
         &.note-airframe
             border: none
         .note-toolbar
-            opacity: 0
-            pointer-events: none
-            transition: opacity 0.25s
             .note-btn
+                background: transparent
+                border: none
                 border-radius: 3px
                 font-size: 12px
                 line-height: 100%
@@ -18,31 +17,29 @@
                 padding-left: 0.4rem
                 padding-right: 0.4rem
                 padding-top: 3px
-                i // Icône trop haut
-                    transform: translateY(1px)
+                &.note-btn-note
+                    i // Icône trop haute
+                        transform: translateY(1px)
                 &.active
                     background: black
                     color: white !important
                 &.dropdown-toggle:after
                     margin-left: 10px
-        &--focus
-            .note-toolbar
-                opacity: 1
-                pointer-events: auto
         .note-editing-area
             background: white
+            border-radius: 3px
             .note-editable
                 border: 1px solid rgba(0, 0, 0, 0.3)
                 border-radius: 3px
-                min-height: 30px
+                min-height: 80px
                 padding: 8px
-                padding-top: 2px // Compensation de la hauteur des lignes
+                padding-top: 5px // Compensation de la hauteur des lignes
                 *
                     font-family: $font-family-sans-serif
                 &, 
                 p, 
                 div
-                    font-size: px2rem(20)
+                    font-size: px2rem(18)
                     line-height: px2rem(30)
                     @include media-breakpoint-down(md)
                         font-size: px2rem(16)
@@ -78,17 +75,6 @@
     b
         color: black
         font-weight: bold
-    button
-        background: transparent
-        border: none
-        &.active
-            color: #666666 !important
-    blockquote
-        border-left: 2px solid lightgray
-        font-size: 1.275rem
-        padding-left: 1rem
-    h2
-        margin-top: 2rem
     .sn-checkbox-open-in-new-window
         label
             padding: 0
@@ -100,13 +86,10 @@
         display: none
     .note-modal-footer
         height: 52px
-    .note-editing-area
-        border-radius: 3px
     .note-popover .popover-content,
     .note-editor .note-toolbar
         background: white
         border: none
-        border-radius: 3px
         line-height: 100%
         padding: 5px 0
         > .note-btn-group

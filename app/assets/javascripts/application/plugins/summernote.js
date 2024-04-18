@@ -36,7 +36,9 @@ window.summernoteManager = {
         'use strict';
         this.setConfig('link',
             {
-                toolbar: ['insert', ['link', 'unlink']]
+                toolbar: [
+                    ['insert', ['link', 'unlink']]
+                ]
             },
             ['a'],
             ['href', 'target']);
