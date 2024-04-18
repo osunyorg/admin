@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><%= yield :title %></title>
+    <title><%= @title %></title>
     <% if @website %>
       <link rel="stylesheet" media="all" href="<%= admin_communication_website_style_path @website.id %>" />
     <% else %>
@@ -24,15 +24,29 @@
     <% end %>
   </head>
   <body class="full-width">
-    <header class="hero <%= 'hero--with-image hero--image-square' if yield(:image).present? %>">
+    <%
+    classes = 'hero'
+    if @image.present? && @image.attached?
+      classes += ' hero--with-image'
+      # TODO ratio
+      classes += ' hero--image-square'
+    end
+    %>
+    <header class="<%= classes %>">
       <div class="container">
         <div class="content">
-          <hgroup>
-            <h1><%= yield :title %></h1>
-            <p class="lead"><%= yield :summary %></p>
-          </hgroup>
+          <div class="hero-text">
+            <% if @summary.present? %>
+              <hgroup>
+                <h1><%= @title %></h1>
+                <p class="lead"><%= @summary %></p>
+              </hgroup>          
+            <% else %>
+              <h1><%= @title %></h1>
+            <% end %>
+          </div>
           <figure>
-            <%= yield :image %>
+            <%= kamifusen_tag @image if @image.present? && @image.attached? %>
           </figure>
         </div>
       </div>
