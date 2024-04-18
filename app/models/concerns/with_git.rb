@@ -24,7 +24,7 @@ module WithGit
   end
 
   def sync_with_git
-    return unless website.git_repository.valid? && syncable?
+    return unless should_sync_with_git?
     if website.locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       sync_with_git
@@ -41,6 +41,10 @@ module WithGit
   handle_asynchronously :sync_with_git, queue: :default
 
   protected
+
+  def should_sync_with_git?
+    website.git_repository.valid? && syncable?
+  end
 
   def sync_with_git_safely
     Communication::Website::GitFile.sync website, self
