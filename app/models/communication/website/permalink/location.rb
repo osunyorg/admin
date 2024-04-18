@@ -9,6 +9,10 @@ class Communication::Website::Permalink::Location < Communication::Website::Perm
 
   # /campus/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::AdministrationLocation, language: language).slug_with_ancestors}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/:slug/"
+  end
+
+  def special_page_type
+    Communication::Website::Page::AdministrationLocation
   end
 end

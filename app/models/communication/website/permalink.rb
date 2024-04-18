@@ -142,6 +142,22 @@ class Communication::Website::Permalink < ApplicationRecord
     end
   end
 
+  # Méthode pour accéder facilement à la page spéciale,
+  # qui s'appuie sur le `special_page_type` de chaque Permalink
+  def special_page(website, language)
+    website.special_page(special_page_type, language: language)
+  end
+
+  # Méthode d'utilité pour récupérer le slug
+  def slug_with_ancestors(website, language)
+    special_page(website, language).slug_with_ancestors
+  end
+
+  # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
+  def special_page_type
+    nil
+  end
+
   def to_s
     "#{path}"
   end

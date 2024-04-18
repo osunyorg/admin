@@ -9,7 +9,31 @@ module WithHugo
     )
   end
 
+  def hugo_ancestors(website)
+    ancestors = []
+    # Certains objets ont des ancêtres, il faut les lister
+    ancestors.concat self.ancestors if respond_to?(:ancestors)
+    ancestors.concat hugo_ancestors_for_special_page(website)
+    ancestors.compact
+  end
+
+  def hugo_ancestors_and_self(website)
+    hugo_ancestors(website) + [self]
+  end
+
   protected
+
+  # Si on est sur une page, on est remonté à la page racine, donc le travail est fait.
+  # Sinon, les objets ont une "page spéciale", (agenda, actualités, offre de formation...)
+  # Cette page a aussi des ancêtres, qu'il faut récupérer avec ancestors_and_self
+  def hugo_ancestors_for_special_page(website)
+    return [] if is_a?(Communication::Website::Page)
+    permalink = Communication::Website::Permalink.for_object(self, website)
+    return [] unless permalink
+    special_page = permalink.special_page(website, language)
+    return [] unless special_page
+    special_page.ancestors_and_self 
+  end
 
   def hugo_path_in_website(website)
     "#{current_permalink_in_website(website)&.path}"

@@ -10,6 +10,10 @@ class Communication::Website::Permalink::Teacher < Communication::Website::Perma
   # /equipe/:slug/programs/
   # FIXME
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::Person, language: language).slug_with_ancestors}/:slug/programs/"
+    "/#{slug_with_ancestors(website, language)}/:slug/programs/"
+  end
+
+  def special_page_type
+    Communication::Website::Page::Person
   end
 end
