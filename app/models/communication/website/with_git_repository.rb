@@ -26,6 +26,7 @@ module Communication::Website::WithGitRepository
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       sync_indirect_object_with_git(indirect_object)
+      return
     else
       lock_for_background_jobs!
     end
