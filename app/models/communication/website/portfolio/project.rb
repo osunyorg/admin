@@ -59,6 +59,17 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   scope :draft, -> { where(published: false) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
+  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_portfolio_categories: { id: category_id }).distinct }
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(communication_website_portfolio_projects.meta_description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_portfolio_projects.summary) ILIKE unaccent(:term) OR
+      unaccent(communication_website_portfolio_projects.title) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
+
+
   def git_path(website)
     return unless website.id == communication_website_id && published
     git_path_content_prefix(website) + git_path_relative
