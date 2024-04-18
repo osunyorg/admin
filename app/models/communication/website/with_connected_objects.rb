@@ -8,6 +8,7 @@ module Communication::Website::WithConnectedObjects
   end
 
   def clean_and_rebuild
+    return unless git_repository.valid?
     # On force le déverrouillage pour faire un nettoyage
     unlock_for_background_jobs!
     lock_for_background_jobs!
