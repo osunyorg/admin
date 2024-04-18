@@ -7,19 +7,24 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
-  def direct_objects
-    pages +
-    posts + 
-    post_categories +
-    events +
-    agenda_categories +
-    projects + 
-    portfolio_categories +
-    menus
+  def direct_objects_association_names
+    [
+      :pages,
+      :posts,
+      :post_categories,
+      :events,
+      :agenda_categories,
+      :projects,
+      :portfolio_categories,
+      :menus
+    ]
   end
 
   def clean_and_rebuild
-    direct_objects.find_each(&:connect_dependencies)
+    direct_objects_association_names.each do |association_name|
+      # We use find_each to avoid loading all the objects in memory
+      public_send(association_name).find_each(&:connect_dependencies)
+    end
     connect(about, self) if about.present?
     destroy_obsolete_connections
     # In the same job
