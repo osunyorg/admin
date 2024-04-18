@@ -140,7 +140,11 @@ namespace :communication do
     end
     resources :posts, controller: 'extranets/posts' do
       collection do
-        resources :categories, controller: 'extranets/posts/categories', as: 'post_categories'
+        resources :categories, controller: 'extranets/posts/categories', as: 'post_categories' do
+          member do
+            get :preview
+          end
+        end
       end
       member do
         get :preview
