@@ -33,7 +33,6 @@ module WithGit
       return
     end
     begin
-      byebug
       sync_with_git_safely if syncable?
     ensure
       website.unlock_for_background_jobs!
