@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_122003) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_135933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -143,8 +143,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_122003) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -463,7 +463,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_122003) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -622,6 +622,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_122003) do
     t.string "default_time_zone"
     t.boolean "feature_portfolio", default: false
     t.boolean "in_showcase", default: true
+    t.datetime "locked_at"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["name"], name: "index_communication_websites_on_name", opclass: :gin_trgm_ops, using: :gin
