@@ -6,7 +6,7 @@
 <% end %>
 
 <%= render 'admin/communication/websites/sidebar' do %>
-  <% osuny_panel  t('admin.communication.website.pages.structure'), 
+  <% osuny_panel  t('admin.communication.website.pages.structure'),
                   action: create_link(Communication::Website::Page) do %>
     <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
       <li class="nav-item">
@@ -23,7 +23,7 @@
       </li>
     </ul>
     <div class="position-relative mt-2">
-      <%= render 'filters', current_path: admin_communication_website_pages_path, filters: @filters %>
+      <%= render 'filters', current_path: list_admin_communication_website_pages_path, filters: @filters %>
       <%= render 'admin/communication/websites/pages/list', pages: @pages %>
       <%= paginate @pages, theme: 'bootstrap-5' %>
     </div>
