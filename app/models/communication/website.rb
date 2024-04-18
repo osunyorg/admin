@@ -147,7 +147,7 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    return unless website.git_repository.valid?
+    return unless website.git_repository.valid? && syncable?
     begin
       website.lock!
     rescue
@@ -156,7 +156,7 @@ class Communication::Website < ApplicationRecord
       return
     end
     begin
-      sync_with_git_safely if syncable?
+      sync_with_git_safely
     ensure
       website.unlock!
     end
