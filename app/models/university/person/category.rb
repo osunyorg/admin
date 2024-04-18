@@ -18,6 +18,10 @@
 #  fk_rails_134ac9c0b6  (university_id => universities.id)
 #
 class University::Person::Category < ApplicationRecord
+  include AsIndirectObject
+  include Contentful
+  include Sluggable
+  include WithPermalink
   include WithUniversity
 
   has_and_belongs_to_many :people,
