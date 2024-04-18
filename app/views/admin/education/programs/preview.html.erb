@@ -1,5 +1,7 @@
-<% content_for :title, @program.name %>
-<% content_for :image, kamifusen_tag(@program.best_featured_image) if @program.best_featured_image.attached? %>
+<% 
+@title = @program.name
+@image = @program.best_featured_image 
+%>
 <div class="container">
   <div class="lead" itemprop="abstract">
     <%= sanitize @program.presentation %>
