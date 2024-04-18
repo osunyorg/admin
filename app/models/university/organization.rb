@@ -50,13 +50,13 @@ class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithBlobs
   include WithCountry
   include WithGeolocation
   include WithGitFiles
-  include WithPermalink
   include WithTranslations
   include WithUniversity
 

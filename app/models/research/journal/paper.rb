@@ -52,12 +52,12 @@
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithBlobs
   include WithCitations
   include WithGitFiles
-  include WithPermalink
   include WithPosition
   include WithPublication
   include WithTranslations

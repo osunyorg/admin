@@ -32,10 +32,10 @@
 class Education::Diploma < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithGitFiles
-  include WithPermalink
   include WithTranslations
   include WithUniversity
 

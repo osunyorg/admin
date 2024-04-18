@@ -35,6 +35,7 @@
 class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithAccessibility
@@ -42,7 +43,6 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithPermalink
   include WithTranslations
   include WithUniversity
 

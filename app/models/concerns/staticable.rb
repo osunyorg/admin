@@ -1,4 +1,4 @@
-module WithHugo
+module Staticable
   extend ActiveSupport::Concern
 
   def hugo(website)

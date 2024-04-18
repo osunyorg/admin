@@ -41,6 +41,7 @@
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method
   include WithAccessibility
@@ -48,7 +49,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithPermalink
   include WithPublication
   include WithTranslations
   include WithUniversity

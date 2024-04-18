@@ -39,6 +39,7 @@
 class Administration::Location < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WebsitesLinkable
@@ -48,7 +49,6 @@ class Administration::Location < ApplicationRecord
   include WithGitFiles
   include WithGeolocation
   include WithTranslations
-  include WithPermalink
   include WithUniversity
 
   has_and_belongs_to_many :schools,
