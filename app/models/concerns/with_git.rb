@@ -24,16 +24,16 @@ module WithGit
   end
 
   def sync_with_git
-    return unless website.git_repository.valid?
-    begin
-      website.lock_for_background_jobs!
-    rescue
+    return unless website.git_repository.valid? && syncable?
+    if website.locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       sync_with_git
       return
+    else
+      website.lock_for_background_jobs!
     end
     begin
-      sync_with_git_safely if syncable?
+      sync_with_git_safely
     ensure
       website.unlock_for_background_jobs!
     end

@@ -2,16 +2,16 @@ module Communication::Website::WithLock
   extend ActiveSupport::Concern
 
   included do
+    # TODO use this to kill a task
     LOCK_MAX_DURATION = 2.hours
   end
 
-  def locked?
+  def locked_for_background_jobs?
     reload
-    locked_at.present? && locked_at > LOCK_MAX_DURATION.ago
+    locked_at.present?
   end
 
   def lock_for_background_jobs!
-    raise if locked?
     update_column :locked_at, Time.zone.now
   end
 

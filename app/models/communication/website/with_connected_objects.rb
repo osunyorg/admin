@@ -8,13 +8,9 @@ module Communication::Website::WithConnectedObjects
   end
 
   def clean_and_rebuild
-    begin
-      lock_for_background_jobs!
-    rescue
-      # Website already locked, we reenqueue the job
-      clean_and_rebuild
-      return
-    end
+    # On force le déverrouillage pour faire un nettoyage
+    unlock_for_background_jobs!
+    lock_for_background_jobs!
     begin
       clean_and_rebuild_safely
     ensure

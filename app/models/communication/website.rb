@@ -147,18 +147,18 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    return unless website.git_repository.valid? && syncable?
-    begin
-      website.lock_for_background_jobs!
-    rescue
-      # Website already locked, we reenqueue the job
+    return unless git_repository.valid? && syncable?
+    if locked_for_background_jobs?
+      # Reenqueue
       sync_with_git
       return
+    else
+      lock_for_background_jobs!
     end
     begin
       sync_with_git_safely
     ensure
-      website.unlock_for_background_jobs!
+      unlock_for_background_jobs!
     end
   end
   handle_asynchronously :sync_with_git, queue: :default
