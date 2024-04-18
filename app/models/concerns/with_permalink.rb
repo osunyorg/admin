@@ -2,6 +2,8 @@ module WithPermalink
   extend ActiveSupport::Concern
 
   included do
+    include WithHugo
+
     has_many  :permalinks,
               class_name: "Communication::Website::Permalink",
               as: :about,
