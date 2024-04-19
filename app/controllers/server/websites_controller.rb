@@ -30,6 +30,7 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def show
+    @layouts = @website.git_file_layouts.ordered
     breadcrumb
   end
 

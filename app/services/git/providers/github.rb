@@ -108,6 +108,10 @@ class Git::Providers::Github < Git::Providers::Abstract
     end
   end
 
+  def files_in_the_repository
+    @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
+  end
+
   protected
 
   def client

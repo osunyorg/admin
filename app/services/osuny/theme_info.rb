@@ -2,6 +2,7 @@ class Osuny::ThemeInfo
 
   def self.get_current_version
     client.releases(ENV["GITHUB_WEBSITE_THEME_REPOSITORY"]).first[:tag_name]
+  rescue
   end
 
   def self.get_current_sha

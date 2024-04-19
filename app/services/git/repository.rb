@@ -49,6 +49,10 @@ class Git::Repository
     provider.init_from_template(name)
   end
 
+  def files_in_the_repository
+    provider.files_in_the_repository
+  end
+
   protected
 
   def provider
