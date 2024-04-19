@@ -131,7 +131,10 @@ module Admin::ApplicationHelper
 
   def prepare_html_for_static(text)
     university = current_university || @website&.university || @about&.university
-    Static::Html.new(text, about: @about, university: university).prepared
+    html = Static::Html.new(text, about: @about, university: university).prepared
+    # Les notes vont de 1 à n sur la page, il faut donc que l'index soit pour toute la page (tout le fichier static).
+    # C'est pour cela qu'on passe par le helper, ce qui garde @index.
+    prepare_notes html
   end
 
   def prepare_text_for_static(text, depth: 1)
