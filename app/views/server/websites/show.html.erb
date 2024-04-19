@@ -16,6 +16,23 @@
 <%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies.count) %>
   (<%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, host: @website.university.url), target: :_blank %>)
 
+<div class="table-responsive">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th>Site</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @layouts.each do |layout| %>
+        <tr>
+          <td><%= link_to layout.git_url, layout.git_url, target: :_blank %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_website_path(@website), class: button_classes %>
 <% end %>

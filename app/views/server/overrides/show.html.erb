@@ -1,0 +1,22 @@
+<%= content_for :title, @path %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>URL</th>
+        <th>Fichier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @layouts.each do |layout| %>
+        <tr>
+          <td><%= link_to layout.website, server_website_path(layout.website) %></td>
+          <td><%= link_to layout.website.url, layout.website.url, target: :_blank %></td>
+          <td><%= link_to layout.git_url, layout.git_url, target: :_blank %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

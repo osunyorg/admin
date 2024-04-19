@@ -1,0 +1,20 @@
+<%= content_for :title, 'Surcouches' %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th>Fichier</th>
+        <th>Nombre de sites</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @overrides.each do |override| %>
+        <tr>
+          <td><%= link_to override, server_override_path(path: override) %></td>
+          <td><%= Communication::Website::GitFile::Layout.count_websites(override) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

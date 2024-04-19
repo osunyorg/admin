@@ -28,6 +28,14 @@ class Communication::Website::GitFile::Layout < ApplicationRecord
 
   scope :ordered, -> { order(:path) }
 
+  def self.overrides
+    pluck(:path).compact.uniq.sort
+  end
+
+  def self.count_websites(override)
+    where(path: override).count
+  end
+
   def git_url
     "https://github.com/#{website.repository}/blob/main/#{path}"
   end

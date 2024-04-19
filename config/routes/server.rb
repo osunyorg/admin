@@ -18,5 +18,7 @@ namespace :server do
       post :deliver
     end
   end
+  get 'overrides' => 'overrides#index'
+  get 'overrides/show' => 'overrides#show', as: :override
   root to: 'dashboard#index'
 end
