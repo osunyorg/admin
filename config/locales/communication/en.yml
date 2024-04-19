@@ -264,6 +264,12 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/git_file/layout:
+        one: HTML overlay
+        other: HTML overlays
+      communication/website/git_file/orphan:
+        one: Orphan file
+        other: Orphan files
       communication/website/portfolio/category:
         one: Category
         other: Categories
@@ -307,6 +313,11 @@ en:
         editorial:
           label: Editorial
           description: Everything related to content
+        git_file:
+          analysis: 
+            launch: Launch analysis
+            launched: Analysis launched
+            title: Git analysis
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
@@ -500,6 +511,10 @@ en:
               volumes: Research volumes index
   notes:
     label: Read note %{index}
+  server:
+    overrides:
+      file: File
+      websites: Websites
   simple_form:
     hints:
       communication_extranet:
