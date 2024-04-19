@@ -9,7 +9,11 @@ class Communication::Website::Permalink::Agenda::Category < Communication::Websi
 
   # /agenda/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::CommunicationAgenda, language: language).slug_with_ancestors}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/:slug/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::CommunicationAgenda
   end
 
   protected

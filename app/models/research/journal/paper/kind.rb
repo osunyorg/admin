@@ -32,6 +32,7 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   include Sanitizable
   include Sluggable
   include WithGitFiles
+  include WithTranslations
   include WithUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'

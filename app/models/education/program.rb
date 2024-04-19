@@ -66,6 +66,7 @@
 class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
@@ -79,10 +80,10 @@ class Education::Program < ApplicationRecord
   include WithInheritance
   include WithLocations
   include WithMenuItemTarget
-  include WithPermalink
   include WithPosition
   include WithSchools
   include WithTeam
+  include WithTranslations
   include WithTree
   include WithUniversity
   include WithWebsitesCategories
