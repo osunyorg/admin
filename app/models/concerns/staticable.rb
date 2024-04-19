@@ -31,10 +31,14 @@ module Staticable
     return [] if is_a?(Communication::Website::Page)
     permalink = Communication::Website::Permalink.for_object(self, website)
     return [] unless permalink
-    special_page_language = respond_to?(:language) ? language : website.default_language
-    special_page = permalink.special_page(website, special_page_language)
+    special_page = permalink.special_page(website, hugo_language_fallback(website))
     return [] unless special_page
     special_page.ancestors_and_self
+  end
+
+  # Les publications n'ont pas de language, et on ne veut pas de vilain crash ni d'algo moche
+  def hugo_language_fallback(website)
+    respond_to?(:language) ? language : website.default_language
   end
 
   def hugo_permalink_in_website(website)
