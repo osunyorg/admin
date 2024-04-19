@@ -10,13 +10,13 @@ webpages.each do |webpage|
   # parce qu'il faut prendre le titre dédié au breadcrumb.
   title = webpage.best_title if webpage.respond_to?(:best_title)
   hugo = webpage.hugo(@website)
-  path = hugo.path
+  permalink = hugo.permalink
   last = webpage == webpages.last
 %>
   - title: >-
       <%= title %>
 <% unless last %>
-    path: "<%= path %>"
+    path: "<%= permalink %>"
 <% end %>
 <% end %>
 <% end %>

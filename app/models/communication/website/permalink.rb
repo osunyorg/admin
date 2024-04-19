@@ -118,7 +118,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
   def special_page_type
-    nil
+    raise NoMethodError
   end
 
   def to_s
