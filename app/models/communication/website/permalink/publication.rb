@@ -11,7 +11,7 @@ class Communication::Website::Permalink::Publication < Communication::Website::P
     "/#{slug_with_ancestors(website, language)}/:year-:slug/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::ResearchPublication
   end
 

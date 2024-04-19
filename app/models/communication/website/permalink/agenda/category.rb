@@ -12,7 +12,7 @@ class Communication::Website::Permalink::Agenda::Category < Communication::Websi
     "/#{slug_with_ancestors(website, language)}/:slug/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::CommunicationAgenda
   end
 

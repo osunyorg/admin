@@ -31,9 +31,10 @@ module Staticable
     return [] if is_a?(Communication::Website::Page)
     permalink = Communication::Website::Permalink.for_object(self, website)
     return [] unless permalink
-    special_page = permalink.special_page(website, language)
+    special_page_language = respond_to?(:language) ? language : website.default_language
+    special_page = permalink.special_page(website, special_page_language)
     return [] unless special_page
-    special_page.ancestors_and_self 
+    special_page.ancestors_and_self
   end
 
   def hugo_permalink_in_website(website)
@@ -43,7 +44,7 @@ module Staticable
   def hugo_path_in_website(website)
     respond_to?(:path) ? path : slug
   end
-  
+
   def hugo_file_in_website(website)
     git_path(website)
   end

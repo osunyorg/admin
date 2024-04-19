@@ -99,12 +99,6 @@ class Communication::Website::Post < ApplicationRecord
     published && published_at && published_at.to_date <= Date.today
   end
 
-  # Is it used?
-  def path
-    # used in menu_item#static_target
-    "/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
-  end
-
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
     git_path_content_prefix(website) + git_path_relative

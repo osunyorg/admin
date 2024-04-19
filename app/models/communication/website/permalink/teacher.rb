@@ -13,7 +13,7 @@ class Communication::Website::Permalink::Teacher < Communication::Website::Perma
     "/#{slug_with_ancestors(website, language)}/:slug/programs/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::Person
   end
 end

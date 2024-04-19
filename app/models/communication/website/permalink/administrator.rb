@@ -12,7 +12,7 @@ class Communication::Website::Permalink::Administrator < Communication::Website:
     "/#{slug_with_ancestors(website, language)}/:slug/roles/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::Person
   end
 end

@@ -49,7 +49,7 @@ class Communication::Website::Permalink < ApplicationRecord
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
       [
-        permalink_class.static_config_key, 
+        permalink_class.static_config_key,
         permalink_class.pattern_in_website(website, language)
       ]
     }.to_h
@@ -81,6 +81,22 @@ class Communication::Website::Permalink < ApplicationRecord
     ApplicationRecord.model_names_with_concern(Permalinkable)
   end
 
+  # Méthode pour accéder facilement à la page spéciale,
+  # qui s'appuie sur le `special_page_type` de chaque Permalink
+  def self.special_page(website, language)
+    website.special_page(self.special_page_type, language: language)
+  end
+
+  # Méthode d'utilité pour récupérer le slug
+  def self.slug_with_ancestors(website, language)
+    self.special_page(website, language).slug_with_ancestors
+  end
+
+  # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
+  def self.special_page_type
+    raise NoMethodError
+  end
+
   def pattern
     language = about.respond_to?(:language) ? about.language : website.default_language
     self.class.pattern_in_website(website, language)
@@ -105,20 +121,8 @@ class Communication::Website::Permalink < ApplicationRecord
     end
   end
 
-  # Méthode pour accéder facilement à la page spéciale,
-  # qui s'appuie sur le `special_page_type` de chaque Permalink
   def special_page(website, language)
-    website.special_page(special_page_type, language: language)
-  end
-
-  # Méthode d'utilité pour récupérer le slug
-  def slug_with_ancestors(website, language)
-    special_page(website, language).slug_with_ancestors
-  end
-
-  # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
-  def special_page_type
-    raise NoMethodError
+    self.class.special_page(website, language)
   end
 
   def to_s

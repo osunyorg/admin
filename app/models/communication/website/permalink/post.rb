@@ -12,7 +12,7 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
     "/#{slug_with_ancestors(website, language)}/:year-:month-:day-:slug/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::CommunicationPost
   end
 

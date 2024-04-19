@@ -12,7 +12,7 @@ class Communication::Website::Permalink::Diploma < Communication::Website::Perma
     "/#{slug_with_ancestors(website, language)}/:slug/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::EducationDiploma
   end
 end

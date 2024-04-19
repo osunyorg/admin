@@ -20,8 +20,8 @@
 class University::Organization::Category < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sluggable
-  include WithPermalink
   include WithUniversity
 
   has_and_belongs_to_many :organizations,

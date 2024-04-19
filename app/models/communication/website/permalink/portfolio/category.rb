@@ -12,7 +12,7 @@ class Communication::Website::Permalink::Portfolio::Category < Communication::We
     "/#{slug_with_ancestors(website, language)}/:slug/"
   end
 
-  def special_page_type
+  def self.special_page_type
     Communication::Website::Page::CommunicationPortfolio
   end
 
