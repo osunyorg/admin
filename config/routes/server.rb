@@ -7,6 +7,7 @@ namespace :server do
     end
     member do
       post :sync_theme_version
+      post :analyse
       post :update_theme
     end
   end

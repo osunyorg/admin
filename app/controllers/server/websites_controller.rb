@@ -34,6 +34,12 @@ class Server::WebsitesController < Server::ApplicationController
     breadcrumb
   end
 
+  def analyse
+    Git::OrphanAndLayoutAnalyzer.new(@website).launch
+    redirect_back fallback_location: server_communication_website_path(@website), 
+                  notice: t('admin.communication.website.git_file.analysis.launched')
+  end
+
   def edit
     breadcrumb
     add_breadcrumb t('edit')

@@ -16,6 +16,7 @@ class Admin::Communication::Websites::GitAnalysisController < Admin::Communicati
 
   def launch
     Git::OrphanAndLayoutAnalyzer.new(@website).launch
-    redirect_back fallback_location: admin_communication_website_path, notice: t('admin.communication.website.git_file.analysis.launched')
+    redirect_back fallback_location: admin_communication_website_path(@website), 
+                  notice: t('admin.communication.website.git_file.analysis.launched')
   end
 end

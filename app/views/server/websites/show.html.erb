@@ -1,38 +1,80 @@
 <% content_for :title, @website %>
 
-<p>
-  <%= t('server_admin.websites.university_html', university: link_to(@website.university, server_university_path(@website.university))) %>
-</p>
+<% content_for :title_right do %>
+  <%= link_to @website.university, server_university_path(@website.university) %>
+<% end %>
 
-<%= t('server_admin.websites.pages_count', count: @website.pages.count) %>
-<br>
-<%= t('server_admin.websites.posts_count', count: @website.posts.count) %>
-<br>
-<%= t('server_admin.websites.events_count', count: @website.events.count) %>
-<br>
-<%= t('server_admin.websites.connections_count', count: @website.connections.count) %>
-  (<%= link_to t('server_admin.websites.details'), admin_communication_website_connections_url(@website, host: @website.university.url), target: :_blank %>)
-<br>
-<%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies.count) %>
-  (<%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, host: @website.university.url), target: :_blank %>)
-
-<div class="table-responsive">
-  <table class="<%= table_classes(with_actions: false) %>">
-    <thead>
-      <tr>
-        <th>Site</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @layouts.each do |layout| %>
-        <tr>
-          <td><%= link_to layout.git_url, layout.git_url, target: :_blank %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-xl-4">
+    <div class="card">
+      <div class="card-body">
+        <%= t('server_admin.websites.pages_count', count: @website.pages.count) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="card">
+      <div class="card-body">
+        <%= t('server_admin.websites.posts_count', count: @website.posts.count) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <div class="card">
+      <div class="card-body">
+        <%= t('server_admin.websites.events_count', count: @website.events.count) %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-body">
+        <%= t('server_admin.websites.connections_count', count: @website.connections.count) %><br>
+        <%= link_to t('server_admin.websites.details'), admin_communication_website_connections_url(@website, host: @website.university.url), target: :_blank %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-body">
+        <%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies.count) %><br>
+        <%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, host: @website.university.url), target: :_blank %>
+      </div>
+    </div>
+  </div>
 </div>
 
+<% if  @website.git_files_analysed_at %>
+  <div>
+    Analyse le <%= l @website.git_files_analysed_at %>
+
+    <div class="table-responsive">
+      <table class="<%= table_classes(with_actions: false) %>">
+        <thead>
+          <tr>
+            <th>Site</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @layouts.each do |layout| %>
+            <tr>
+              <td><%= link_to layout.git_url, layout.git_url, target: :_blank %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
 <% content_for :action_bar_right do %>
-  <%= link_to t('edit'), edit_server_website_path(@website), class: button_classes %>
+  <%= link_to 'Analyser', 
+              analyse_server_website_path(@website),
+              method: :post, 
+              class: button_classes %>
+  <%= link_to 'Changer d\'université', 
+              edit_server_website_path(@website), 
+              class: button_classes %>
 <% end %>
