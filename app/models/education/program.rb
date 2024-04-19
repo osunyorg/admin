@@ -42,12 +42,16 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  diploma_id             :uuid             indexed
+#  language_id            :uuid             not null, indexed
+#  original_id            :uuid             indexed
 #  parent_id              :uuid             indexed
 #  university_id          :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_education_programs_on_diploma_id     (diploma_id)
+#  index_education_programs_on_language_id    (language_id)
+#  index_education_programs_on_original_id    (original_id)
 #  index_education_programs_on_parent_id      (parent_id)
 #  index_education_programs_on_slug           (slug)
 #  index_education_programs_on_university_id  (university_id)
@@ -55,6 +59,8 @@
 # Foreign Keys
 #
 #  fk_rails_08b351087c  (university_id => universities.id)
+#  fk_rails_2c27955cee  (original_id => education_programs.id)
+#  fk_rails_e2f027eb9e  (language_id => languages.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord

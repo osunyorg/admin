@@ -20,14 +20,20 @@
 #  zipcode               :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  language_id           :uuid             not null, indexed
+#  original_id           :uuid             indexed
 #  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_administration_locations_on_language_id    (language_id)
+#  index_administration_locations_on_original_id    (original_id)
 #  index_administration_locations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_2ba052f7a2  (original_id => administration_locations.id)
+#  fk_rails_5951e4a1ea  (language_id => languages.id)
 #  fk_rails_bfeca0e4b1  (university_id => universities.id)
 #
 class Administration::Location < ApplicationRecord

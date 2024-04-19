@@ -1,0 +1,8 @@
+<% content_for :title, 'Analyse Git' %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to 'Lancer une analyse', 
+              git_analysis_admin_communication_website_path(lang: nil, website_id: nil), 
+              class: button_classes, 
+              method: :post %>
+<% end %>

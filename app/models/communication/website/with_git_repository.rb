@@ -2,9 +2,22 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
-    has_many :website_git_files,
-             class_name: 'Communication::Website::GitFile',
-             dependent: :destroy
+    has_many  :website_git_files,
+              class_name: 'Communication::Website::GitFile',
+              dependent: :destroy
+              alias_method :git_files, :website_git_files
+
+    has_many  :website_git_file_orphans,
+              foreign_key: :communication_website_id,
+              class_name: 'Communication::Website::GitFile::Orphan',
+              dependent: :destroy
+              alias_method :git_file_orphans, :website_git_file_orphans
+
+    has_many  :website_git_file_layouts,
+              foreign_key: :communication_website_id,
+              class_name: 'Communication::Website::GitFile::Layout',
+              dependent: :destroy
+              alias_method :git_file_layouts, :website_git_file_layouts
 
     after_save :destroy_obsolete_git_files, if: :should_clean_on_git?
 
