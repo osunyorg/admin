@@ -47,26 +47,23 @@
 </div>
 
 <% if  @website.git_files_analysed_at %>
-  <div>
-    Analyse le <%= l @website.git_files_analysed_at %>
-
-    <div class="table-responsive">
-      <table class="<%= table_classes(with_actions: false) %>">
-        <thead>
+  <div class="table-responsive">
+    <table class="<%= table_classes(with_actions: false) %>">
+      <thead>
+        <tr>
+          <th><%= Communication::Website::GitFile::Layout.model_name.human %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @layouts.each do |layout| %>
           <tr>
-            <th>Site</th>
+            <td><%= link_to layout.path, layout.git_url, target: :_blank %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @layouts.each do |layout| %>
-            <tr>
-              <td><%= link_to layout.git_url, layout.git_url, target: :_blank %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+  <p>Analyse le <%= l @website.git_files_analysed_at %></p>
 <% end %>
 
 <% content_for :action_bar_right do %>
