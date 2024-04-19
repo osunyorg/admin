@@ -498,6 +498,8 @@ en:
               url: URL
               volume: Specific research volume
               volumes: Research volumes index
+  notes:
+    label: Read note %{index}
   simple_form:
     hints:
       communication_extranet:
