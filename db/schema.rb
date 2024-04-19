@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_18_135933) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_19_055931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -359,6 +359,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_135933) do
     t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
   end
 
+  create_table "communication_website_git_file_layouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "path"
+    t.uuid "communication_website_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_eb9ee4bc34"
+    t.index ["university_id"], name: "index_communication_website_git_file_layouts_on_university_id"
+  end
+
+  create_table "communication_website_git_file_orphans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "path"
+    t.uuid "communication_website_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_18bd864000"
+    t.index ["university_id"], name: "index_communication_website_git_file_orphans_on_university_id"
+  end
+
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "previous_path"
     t.string "about_type", null: false
@@ -627,6 +647,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_135933) do
     t.boolean "feature_portfolio", default: false
     t.boolean "in_showcase", default: true
     t.datetime "locked_at"
+    t.datetime "git_files_analysed_at"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["name"], name: "index_communication_websites_on_name", opclass: :gin_trgm_ops, using: :gin
@@ -1335,6 +1356,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_135933) do
   add_foreign_key "communication_website_agenda_events", "universities"
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
+  add_foreign_key "communication_website_git_file_layouts", "communication_websites"
+  add_foreign_key "communication_website_git_file_layouts", "universities"
+  add_foreign_key "communication_website_git_file_orphans", "communication_websites"
+  add_foreign_key "communication_website_git_file_orphans", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_localizations", "communication_websites"
   add_foreign_key "communication_website_localizations", "languages"

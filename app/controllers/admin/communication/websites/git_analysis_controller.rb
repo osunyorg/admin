@@ -9,8 +9,8 @@ class Admin::Communication::Websites::GitAnalysisController < Admin::Communicati
 
   def index
     # byebug
-    @orphans = @website.git_file_orphans
-    @layouts = @website.git_file_layouts
+    @orphans = @website.git_file_orphans.ordered
+    @layouts = @website.git_file_layouts.ordered
     breadcrumb
     add_breadcrumb 'Analyse Git'
   end

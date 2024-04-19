@@ -22,5 +22,13 @@
 class Communication::Website::GitFile::Orphan < ApplicationRecord
   include WithUniversity
 
-  belongs_to :website, class_name: 'Communication::Website'
+  belongs_to  :website, 
+              class_name: 'Communication::Website',
+              foreign_key: :communication_website_id
+
+  scope :ordered, -> { order(:path) }
+
+  def git_url
+    "https://github.com/#{website.repository}/blob/main/#{path}"
+  end
 end

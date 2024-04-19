@@ -8,6 +8,7 @@
 class Git::OrphanAndLayoutAnalyzer
   CONTENT_PATH = 'content/'
   LAYOUT_PATH = 'layouts/'
+  SUFFIX = '.html'
 
   attr_reader :website
 
@@ -19,7 +20,9 @@ class Git::OrphanAndLayoutAnalyzer
     return unless repository.valid?
     website.git_file_orphans.destroy_all
     website.git_file_layouts.destroy_all
-    files_in_the_repository.each { |path| analyse(path) }
+    files_in_the_repository.each do |path| 
+      analyse(path)
+    end
     website.update_column :git_files_analysed_at, Time.now
   end
   # handle_asynchronously :launch, queue: :default
@@ -40,15 +43,31 @@ class Git::OrphanAndLayoutAnalyzer
   end
 
   def analyse_content(path)
-    website.git_file_orphans.create(path: path) unless path.in?(website_git_files)
+    # Il y a un git file, ce fichier n'est pas orphelin
+    return if path.in?(website_git_files)
+    return unless path.end_with?(SUFFIX)
+    Communication::Website::GitFile::Orphan.create(
+      path: path,
+      website: website,
+      university: website.university
+    )
   end
 
   def analyse_layout(path)
-    website.git_file_layouts.create(path: path)
+    return unless path.end_with?(SUFFIX)
+    Communication::Website::GitFile::Layout.create(
+      path: path,
+      website: website,
+      university: website.university
+    )
   end
 
   # Les objets git_files de la base de données, pas les vrais sur Github!
   def website_git_files
-    @website_git_files ||= website.git_files.map { |git_file| git_file.path }
+    @website_git_files ||= website.git_files.map do |git_file|
+      git_file.path
+    rescue
+      ''
+    end
   end
 end

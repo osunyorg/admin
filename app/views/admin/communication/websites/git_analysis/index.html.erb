@@ -1,5 +1,46 @@
 <% content_for :title, 'Analyse Git' %>
 
+<div class="table-responsive mb-5">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th>Fichiers orphelins</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orphans.each do |orphan| %>
+        <tr>
+          <td><%= link_to orphan.path,
+                          orphan.git_url, 
+                          target: :_blank, 
+                          classes: button_classes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th>Surcouches HTML</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @layouts.each do |layout| %>
+        <tr>
+          <td><%= link_to layout.path,
+                          layout.git_url, 
+                          target: :_blank, 
+                          classes: button_classes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
 <% content_for :action_bar_right do %>
   <%= link_to 'Lancer une analyse', 
               git_analysis_admin_communication_website_path(lang: nil, website_id: nil), 
