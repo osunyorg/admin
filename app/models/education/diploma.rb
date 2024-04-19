@@ -12,24 +12,31 @@
 #  summary       :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  language_id   :uuid             not null, indexed
+#  original_id   :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_education_diplomas_on_language_id    (language_id)
+#  index_education_diplomas_on_original_id    (original_id)
 #  index_education_diplomas_on_slug           (slug)
 #  index_education_diplomas_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_2ed1656a72  (language_id => languages.id)
 #  fk_rails_6cb2e9fa90  (university_id => universities.id)
+#  fk_rails_cdb894fcd9  (original_id => education_diplomas.id)
 #
 class Education::Diploma < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithGitFiles
-  include WithPermalink
+  include WithTranslations
   include WithUniversity
 
   has_many :programs, dependent: :nullify

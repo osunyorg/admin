@@ -3,36 +3,92 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><%= yield :title %></title>
+    <title><%= @title %></title>
     <% if @website %>
       <link rel="stylesheet" media="all" href="<%= admin_communication_website_style_path @website.id %>" />
     <% else %>
       <%= stylesheet_link_tag 'admin/pure', media: 'all' %>
     <% end %>
     <style>
-    /* 
+    /*
     En prévisualisation il n'y a pas de menu, donc pas besoin de laisser de la place au-dessus du hero
     */
     .hero {
       margin-top: 0;
       padding-top: 0;
     }
+    .note {
+      position: relative;
+    }
+    .note__call {
+      background: #CCCCCC;
+      border-radius: 4px;
+      color: #000000;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px 6px;
+      margin-left: 2px;
+    }
+    .note__content {
+      display: none;
+      background: #CCCCCC;
+      border-radius: 4px;
+      position: absolute;
+      width: 450px;
+      padding: 10px;
+      top: 6px;
+      right: -5px;
+      font-size: 16px;
+      line-height: 140%;
+    }
+    .note--visible .note__content {
+      display: block;
+    }
+    .note__content,
+    .note__content * {
+      color: #000000;
+    }
     </style>
+    <script nonce="<%= request.content_security_policy_nonce %>">
+      var notes = document.getElementsByClassName("note"),
+          note,
+          i;
+      for (i = 0; i < notes.length; i += 1) {
+        note = notes[i];
+        note.addEventListener('click', function () {
+          note.classList.add('note--visible');
+        });
+      }
+    </script>
     <% if content_for?(:leaflet_required) %>
       <%= stylesheet_link_tag 'leaflet', media: 'all' %>
       <%= javascript_include_tag 'leaflet' %>
     <% end %>
   </head>
   <body class="full-width">
-    <header class="hero <%= 'hero--with-image hero--image-square' if yield(:image).present? %>">
+    <%
+    classes = 'hero'
+    if @image.present? && @image.attached?
+      classes += ' hero--with-image'
+      # TODO ratio
+      classes += ' hero--image-square'
+    end
+    %>
+    <header class="<%= classes %>">
       <div class="container">
         <div class="content">
-          <hgroup>
-            <h1><%= yield :title %></h1>
-            <p class="lead"><%= yield :summary %></p>
-          </hgroup>
+          <div class="hero-text">
+            <% if @summary.present? %>
+              <hgroup>
+                <h1><%= @title %></h1>
+                <p class="lead"><%= @summary %></p>
+              </hgroup>          
+            <% else %>
+              <h1><%= @title %></h1>
+            <% end %>
+          </div>
           <figure>
-            <%= yield :image %>
+            <%= kamifusen_tag @image if @image.present? && @image.attached? %>
           </figure>
         </div>
       </div>

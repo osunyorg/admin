@@ -1,42 +1,79 @@
 .summernote
     color: black
     .note-editor
+        background: white
+        position: relative
+        &.note-frame,
+        &.note-airframe
+            border: none
+        .note-toolbar
+            .note-btn
+                background: transparent
+                border: none
+                border-radius: 3px
+                font-size: 12px
+                line-height: 100%
+                margin-right: 8px
+                padding-left: 0.4rem
+                padding-right: 0.4rem
+                padding-top: 3px
+                &.note-btn-note
+                    i // Icône trop haute
+                        transform: translateY(1px)
+                &.active
+                    background: black
+                    color: white !important
+                &.dropdown-toggle:after
+                    margin-left: 10px
         .note-editing-area
+            background: white
+            border-radius: 3px
             .note-editable
-                min-height: 50px
+                border: 1px solid rgba(0, 0, 0, 0.3)
+                border-radius: 3px
+                min-height: 80px
+                padding: 8px
+                padding-top: 5px // Compensation de la hauteur des lignes
                 *
-                    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif
-                &, p, div
-                    font-size: 1rem
+                    font-family: $font-family-sans-serif
+                &, 
+                p, 
+                div
+                    font-size: px2rem(16)
+                    line-height: 180%
+                    @include media-breakpoint-up(md)
+                        font-size: px2rem(18)
+                p
+                    &:last-of-type
+                        margin-bottom: 0
                 sup
                     top: inherit
                     padding-left: 2px
+                img,
+                video
+                    height: auto
+                    max-width: 100%
+                > h2:first-of-type
+                    margin-top: 0
+                note
+                    background: #000000
+                    border-radius: 4px
+                    display: inline
+                    font-size: 14px
+                    margin-left: 2px
+                    padding: 2px 4px
+                    vertical-align: 2px
+                    &,
+                    *
+                        color: white
+                    a
+                        text-decoration: solid
+                        text-underline-offset: auto
+                        &[target="_blank"]::after
+                            filter: invert(1)
     b
         color: black
         font-weight: bold
-    .note-btn.dropdown-toggle:after
-        margin-left: 10px
-    .note-editable
-        img, video
-            height: auto
-            max-width: 100%
-        p:last-of-type
-            margin-bottom: 0
-    button
-        background: transparent
-        border: none
-        &.active
-            color: #666666 !important
-    blockquote
-        border-left: 2px solid lightgray
-        font-size: 1.275rem
-        padding-left: 1rem
-    h2
-        margin-top: 2rem
-    .note-editable > h2:first-of-type
-        margin-top: 0
-    .note-editing-area
-        background: white
     .sn-checkbox-open-in-new-window
         label
             padding: 0
@@ -48,22 +85,14 @@
         display: none
     .note-modal-footer
         height: 52px
-    .note-editing-area
-        border-radius: 3px
     .note-popover .popover-content,
     .note-editor .note-toolbar
         background: white
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05)
-        border-radius: 3px
-        padding: 0
-    .note-popover .popover-content > .note-btn-group,
-    .note-editor .note-toolbar > .note-btn-group
-        margin-right: 0
-        margin-top: 0
-    .note-btn-group
-        .note-btn
-            font-size: 12px
-            padding-left: 0.4rem
-            padding-right: 0.4rem
+        border: none
+        line-height: 100%
+        padding: 5px 0
+        > .note-btn-group
+            margin-right: 0
+            margin-top: 0
     .note-link-popover
         display: none !important

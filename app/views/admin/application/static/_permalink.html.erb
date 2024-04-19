@@ -13,4 +13,14 @@ aliases:
   - <%= permalink.path %>
 <% end %>
 <% end %>
+<% 
+if @about.respond_to?(:hugo)
+  hugo = @about.hugo(@website)
+%>
+hugo:
+  permalink: "<%= hugo.permalink %>"
+  file: "<%= hugo.file %>"
+  path: "<%= hugo.path %>"
+  slug: "<%= hugo.slug %>"
+<% end %>
 <% end %>

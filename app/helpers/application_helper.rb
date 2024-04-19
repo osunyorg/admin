@@ -85,4 +85,9 @@ module ApplicationHelper
     file_hint(formats: formats)
   end
 
+  def prepare_notes(text)
+    @notes ||= Osuny::Notes.new
+    @notes.prepare(text)
+  end
+
 end

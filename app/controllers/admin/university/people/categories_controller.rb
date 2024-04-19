@@ -12,6 +12,12 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
     breadcrumb
   end
 
+  def static
+    @about = @category
+    @website = @category.websites&.first
+    render_as_plain_text
+  end
+
   def new
     breadcrumb
   end

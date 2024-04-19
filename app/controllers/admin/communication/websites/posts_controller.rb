@@ -1,11 +1,10 @@
 class Admin::Communication::Websites::PostsController < Admin::Communication::Websites::ApplicationController
-  skip_before_action :load_filters
-
-  load_and_authorize_resource class: Communication::Website::Post, 
+  load_and_authorize_resource class: Communication::Website::Post,
                               through: :website
 
   include Admin::Translatable
 
+  # Allow to override the default load_filters from Admin::Filterable
   before_action :load_filters, only: :index
 
   has_scope :for_search_term
@@ -14,7 +13,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).for_language(current_website_language).ordered.page params[:page]
+    @posts = apply_scopes(@posts).for_language(current_website_language)
+                                 .ordered
+                                 .page(params[:page])
     @authors =  @website.authors.for_language(current_website_language)
                                 .accessible_by(current_ability)
                                 .ordered

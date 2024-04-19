@@ -2,13 +2,11 @@
 <%= render 'admin/application/static/title' %>
 linkTitle: >-
   <%= @about.to_s_alphabetical %>
-<%= render 'admin/application/static/breadcrumbs',
-            pages: @website.special_page(Communication::Website::Page::Person).ancestors_and_self,
-            current_title: @about.to_s %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/breadcrumbs' %>
+<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/i18n/static' %>
 first_name: >-
   <%= @about.first_name %>
@@ -85,6 +83,13 @@ administrative_missions:
 <% end %>
 <% end %>
 <%= render 'admin/application/connections/backlinks' %>
+<% if @about.categories.any? %>
+persons_categories: 
+<% @about.categories.each do |category| %>
+  - slug: "<%= category.slug %>"
+    path: "<%= category.current_permalink_in_website(@website)&.path %>"
+<% end %>
+<% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography %>

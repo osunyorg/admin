@@ -498,6 +498,8 @@ fr:
               url: URL
               volume: Volume spécifique
               volumes: Liste des volumes
+  notes:
+    label: Lire la note %{index}
   simple_form:
     hints:
       communication_extranet:

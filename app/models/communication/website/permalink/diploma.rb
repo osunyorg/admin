@@ -9,6 +9,10 @@ class Communication::Website::Permalink::Diploma < Communication::Website::Perma
 
   # /diplomes/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::EducationDiploma, language: language).slug_with_ancestors}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/:slug/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::EducationDiploma
   end
 end

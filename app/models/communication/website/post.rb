@@ -41,6 +41,7 @@
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method
   include WithAccessibility
@@ -48,7 +49,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithPermalink
   include WithPublication
   include WithTranslations
   include WithUniversity
@@ -97,12 +97,6 @@ class Communication::Website::Post < ApplicationRecord
 
   def published?
     published && published_at && published_at.to_date <= Date.today
-  end
-
-  # Is it used?
-  def path
-    # used in menu_item#static_target
-    "/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
   end
 
   def git_path(website)

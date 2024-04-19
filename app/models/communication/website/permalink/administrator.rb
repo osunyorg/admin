@@ -9,6 +9,10 @@ class Communication::Website::Permalink::Administrator < Communication::Website:
 
   # /equipe/:slug/roles/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::Person, language: language).slug_with_ancestors}/:slug/roles/"
+    "/#{slug_with_ancestors(website, language)}/:slug/roles/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::Person
   end
 end

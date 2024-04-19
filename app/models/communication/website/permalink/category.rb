@@ -14,7 +14,11 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   # /actualites/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug_with_ancestors}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/:slug/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::CommunicationPost
   end
 
   protected
