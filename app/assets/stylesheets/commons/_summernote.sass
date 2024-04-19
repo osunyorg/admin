@@ -39,11 +39,10 @@
                 &, 
                 p, 
                 div
-                    font-size: px2rem(18)
-                    line-height: px2rem(30)
-                    @include media-breakpoint-down(md)
-                        font-size: px2rem(16)
-                        line-height: px2rem(24)
+                    font-size: px2rem(16)
+                    line-height: 180%
+                    @include media-breakpoint-up(md)
+                        font-size: px2rem(18)
                 p
                     &:last-of-type
                         margin-bottom: 0
