@@ -29,6 +29,6 @@ class Communication::Website::GitFile::Orphan < ApplicationRecord
   scope :ordered, -> { order(:path) }
 
   def git_url
-    "#{website.git_repository.url}/blob/#{website.git_repository.branch}/#{path}"
+    "#{website.git_repository.url}/blob/main/#{path}"
   end
 end
