@@ -37,6 +37,6 @@ class Communication::Website::GitFile::Layout < ApplicationRecord
   end
 
   def git_url
-    "https://github.com/#{website.repository}/blob/main/#{path}"
+    "#{website.git_repository.url}/blob/#{website.git_repository.branch}/#{path}"
   end
 end
