@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  constraints host: ENV['OSUNY_SHOWCASE'] do
+  constraints host: ENV['OSUNY_SHOWCASE_DOMAIN'] do
     get '/' => 'showcase/home#index'
   end
-  constraints host: ENV['OSUNY_TRANSPARENCY'] do
+  constraints host: ENV['OSUNY_TRANSPARENCY_DOMAIN'] do
     get '/' => 'transparency/home#index'
   end
 
