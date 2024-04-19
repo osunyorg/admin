@@ -60,15 +60,6 @@ module Osuny
     # Need for +repage, because of https://github.com/rails/rails/commit/b2ab8dd3a4a184f3115e72b55c237c7b66405bd9
     config.active_storage.supported_image_processing_methods = ["+"]
 
-    # TEMP TODO: Corriger le problème des nbsp avec le sanitizer HTML5
-    config.action_view.sanitizer_vendor = Rails::HTML4::Sanitizer
-    config.action_view.sanitized_allowed_tags = [
-      "a", "b", "br", "em", "i", "img", "li", "ol", "p", "strong", "sub", "sup", "ul", "note"
-    ]
-    config.action_view.sanitized_allowed_attributes = [
-      "href", "target", "title"
-    ]
-
     config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'
 
     # FILES
