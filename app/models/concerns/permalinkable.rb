@@ -1,7 +1,9 @@
-module WithPermalink
+module Permalinkable
   extend ActiveSupport::Concern
 
   included do
+    include Staticable
+
     has_many  :permalinks,
               class_name: "Communication::Website::Permalink",
               as: :about,

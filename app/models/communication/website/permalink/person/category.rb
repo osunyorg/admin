@@ -9,7 +9,11 @@ class Communication::Website::Permalink::Person::Category < Communication::Websi
 
   # /equipe/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::Person, language: language).slug_with_ancestors}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/:slug/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::Person
   end
 
   protected
