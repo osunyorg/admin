@@ -4,7 +4,7 @@
   <table class="<%= table_classes(with_actions: false) %>">
     <thead>
       <tr>
-        <th>Fichiers orphelins</th>
+        <th><%= Communication::Website::GitFile::Orphan.model_name.human(count: 2) %></th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
   <table class="<%= table_classes(with_actions: false) %>">
     <thead>
       <tr>
-        <th>Surcouches HTML</th>
+        <th><%= Communication::Website::GitFile::Layout.model_name.human(count: 2) %></th>
       </tr>
     </thead>
     <tbody>
@@ -42,7 +42,7 @@
 
 
 <% content_for :action_bar_right do %>
-  <%= link_to 'Lancer une analyse', 
+  <%= link_to t('admin.communication.website.git_file.analysis.title'), 
               git_analysis_admin_communication_website_path(lang: nil, website_id: nil), 
               class: button_classes, 
               method: :post %>

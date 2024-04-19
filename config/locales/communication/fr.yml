@@ -264,6 +264,12 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/git_file/layout:
+        one: Surcouche HTML
+        other: Surcouches HTML
+      communication/website/git_file/orphan:
+        one: Fichier orphelin
+        other: Fichiers orphelins
       communication/website/portfolio/category:
         one: Catégorie
         other: Catégories
@@ -307,6 +313,11 @@ fr:
         editorial:
           label: Éditorial
           description: Tout ce qui est lié au contenu
+        git_file:
+          analysis: 
+            launch: Lancer une analyse
+            launched: Analyse lancée
+            title: Analyse Git
         localizations:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation

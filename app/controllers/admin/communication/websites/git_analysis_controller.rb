@@ -8,15 +8,14 @@ class Admin::Communication::Websites::GitAnalysisController < Admin::Communicati
                               through_association: :communication_websites
 
   def index
-    # byebug
     @orphans = @website.git_file_orphans.ordered
     @layouts = @website.git_file_layouts.ordered
     breadcrumb
-    add_breadcrumb 'Analyse Git'
+    add_breadcrumb t('admin.communication.website.git_file.analysis.title')
   end
 
   def launch
     Git::OrphanAndLayoutAnalyzer.new(@website).launch
-    redirect_back fallback_location: admin_communication_website_path, notice: 'Analyse lancée'
+    redirect_back fallback_location: admin_communication_website_path, notice: t('admin.communication.website.git_file.analysis.launched')
   end
 end
