@@ -25,7 +25,7 @@ SimpleNavigation::Configuration.run do |navigation|
                   Communication::Block.model_name.human(count: 2),
                   server_blocks_path
     primary.item  :layouts,
-                  'Surcouches',
+                  Communication::Website::GitFile::Layout.model_name.human(count: 2),
                   server_overrides_path
     primary.item  :emergency_messages,
                   EmergencyMessage.model_name.human(count: 2),

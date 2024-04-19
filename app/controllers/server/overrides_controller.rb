@@ -16,7 +16,7 @@ class Server::OverridesController < Server::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb 'Surcouches', server_overrides_path
+    add_breadcrumb Communication::Website::GitFile::Layout.model_name.human(count: 2), server_overrides_path
   end
 
 end

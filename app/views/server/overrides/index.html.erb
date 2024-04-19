@@ -1,11 +1,11 @@
-<%= content_for :title, 'Surcouches' %>
+<%= content_for :title, Communication::Website::GitFile::Layout.model_name.human(count: 2) %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th>Fichier</th>
-        <th>Nombre de sites</th>
+        <th><%= t('server.overrides.file') %></th>
+        <th><%= t('server.overrides.websites') %></th>
       </tr>
     </thead>
     <tbody>
