@@ -9,6 +9,7 @@ namespace :server do
       post :sync_theme_version
       post :analyse
       post :update_theme
+      post :unlock_for_background_jobs
     end
   end
   resources :blocks, only: [:index, :show] do

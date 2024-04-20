@@ -103,6 +103,7 @@ en:
         in_production: Production
         in_showcase: In showcase
         languages: Languages
+        locked_at: Locked for background jobs at
         name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
@@ -314,7 +315,7 @@ en:
           label: Editorial
           description: Everything related to content
         git_file:
-          analysis: 
+          analysis:
             launch: Launch analysis
             launched: Analysis launched
             title: Git analysis
