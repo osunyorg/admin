@@ -35,13 +35,9 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    if locked_for_background_jobs?
-      raise Communication::Website::LockedError.new("Website is locked for background jobs")
-    else
-      return unless git_repository.valid?
-      lock_for_background_jobs!
-    end
+    lock_for_background_jobs_or_raise!
     begin
+      return unless git_repository.valid?
       sync_indirect_object_with_git_safely(indirect_object)
     ensure
       unlock_for_background_jobs!
@@ -51,13 +47,9 @@ module Communication::Website::WithGitRepository
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
-    if locked_for_background_jobs?
-      raise Communication::Website::LockedError.new("Website is locked for background jobs")
-    else
-      return unless git_repository.valid?
-      lock_for_background_jobs!
-    end
+    lock_for_background_jobs_or_raise!
     begin
+      return unless git_repository.valid?
       destroy_obsolete_git_files_safely
     ensure
       unlock_for_background_jobs!
@@ -87,13 +79,9 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
-    if locked_for_background_jobs?
-      raise Communication::Website::LockedError.new("Website is locked for background jobs")
-    else
-      return unless git_repository.valid?
-      lock_for_background_jobs!
-    end
+    lock_for_background_jobs_or_raise!
     begin
+      return unless git_repository.valid?
       git_repository.update_theme_version!
     ensure
       unlock_for_background_jobs!
