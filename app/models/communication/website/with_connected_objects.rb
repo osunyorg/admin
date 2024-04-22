@@ -8,20 +8,15 @@ module Communication::Website::WithConnectedObjects
   end
 
   def clean_and_rebuild
-    pages.find_each(&:connect_dependencies)
-    posts.find_each(&:connect_dependencies)
-    post_categories.find_each(&:connect_dependencies)
-    agenda_categories.find_each(&:connect_dependencies)
-    menus.find_each(&:connect_dependencies)
-    connect(about, self) if about.present?
-    destroy_obsolete_connections
-    # In the same job
-    create_missing_special_pages
-    initialize_menus
-    sync_with_git_without_delay
-    destroy_obsolete_git_files_without_delay
-    get_current_theme_version!
-    screenshot!
+    return unless git_repository.valid?
+    # On force le déverrouillage pour faire un nettoyage
+    unlock_for_background_jobs!
+    lock_for_background_jobs!
+    begin
+      clean_and_rebuild_safely
+    ensure
+      unlock_for_background_jobs!
+    end
   end
   handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
@@ -104,6 +99,35 @@ module Communication::Website::WithConnectedObjects
   end
 
   protected
+
+  def direct_objects_association_names
+    [
+      :pages,
+      :posts,
+      :post_categories,
+      :events,
+      :agenda_categories,
+      :projects,
+      :portfolio_categories,
+      :menus
+    ]
+  end
+
+  def clean_and_rebuild_safely
+    direct_objects_association_names.each do |association_name|
+      # We use find_each to avoid loading all the objects in memory
+      public_send(association_name).find_each(&:connect_dependencies)
+    end
+    connect(about, self) if about.present?
+    destroy_obsolete_connections
+    # In the same job
+    create_missing_special_pages
+    initialize_menus
+    sync_with_git_safely
+    destroy_obsolete_git_files_safely
+    get_current_theme_version!
+    screenshot!
+  end
 
   def connect_about
     self.connect(about, self) if about.present? && about.try(:is_indirect_object?)

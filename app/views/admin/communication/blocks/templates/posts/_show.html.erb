@@ -54,7 +54,7 @@ date_format = "%e %B %Y"
 
       <% elsif block.template.layout ===  "highlight"%>
         <% if block.data
-          $highlight_post = block.template.selected_posts.first 
+          $highlight_post = block.template.selected_posts.first
         %>
           <div class="highlight">
             <div class="highlight-post">
@@ -87,7 +87,7 @@ date_format = "%e %B %Y"
                 </div>
               </article>
             </div>
-              
+
             <div class="list">
               <% block.template.selected_posts.each do |post|
                 next if post.nil?
@@ -128,7 +128,7 @@ date_format = "%e %B %Y"
               <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                 <div class="post-content">
                   <h3 itemprop="headline">
-                    <%= link_to post, post.url %>
+                    <%= link_to_if post.url.present?, post, post.url %>
                   </h3>
                   <% if !post.categories.empty? %>
                     <ul class="post-categories">

@@ -40,6 +40,6 @@ module WithGeolocation
   end
 
   def full_street_address_changed?
-    address_changed? || zipcode_changed? || city_changed?
+    address_changed? || zipcode_changed? || city_changed? || country_changed?
   end
 end

@@ -58,6 +58,7 @@ class University::Person < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithBlobs
@@ -67,7 +68,6 @@ class University::Person < ApplicationRecord
   include WithEducation
   include WithExperiences
   include WithGitFiles
-  include WithPermalink
   include WithPicture
   include WithResearch
   include WithTranslations
@@ -199,6 +199,7 @@ class University::Person < ApplicationRecord
 
   def dependencies
     contents_dependencies +
+    categories +
     active_storage_blobs
   end
 

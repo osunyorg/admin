@@ -4,8 +4,12 @@ module Education::Program::WithWebsitesCategories
   included do
     after_save_commit :set_websites_categories
 
-    has_many   :website_categories,
+    has_many   :website_post_categories,
                class_name: 'Communication::Website::Post::Category',
+               dependent: :destroy
+
+    has_many   :website_agenda_categories,
+               class_name: 'Communication::Website::Agenda::Category',
                dependent: :destroy
   end
 

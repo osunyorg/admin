@@ -39,6 +39,19 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   attr_accessor :skip_publication_callback
 
+  ICONS = {
+    'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
+    'category' => Icon::COMMUNICATION_WEBSITE_POST,
+    'diploma' => Icon::EDUCATION_DIPLOMA,
+    'location' => Icon::ADMINISTRATION_CAMPUS,
+    'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
+    'paper' => Icon::RESEARCH_LABORATORY,
+    'post' => Icon::COMMUNICATION_WEBSITE_POST,
+    'program' => Icon::EDUCATION_PROGRAM,
+    'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
+    'volume' => Icon::RESEARCH_LABORATORY
+  }.freeze
+
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :menu, class_name: 'Communication::Website::Menu'
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
@@ -57,7 +70,8 @@ class Communication::Website::Menu::Item < ApplicationRecord
     category: 41,
     post: 42,
     volume: 61,
-    paper: 63
+    paper: 63,
+    location: 70
   }, _prefix: :kind
 
   validates :title, presence: true
@@ -66,18 +80,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   after_commit :sync_menu
 
   def self.icon_for(kind)
-    icons = {
-      'blank' => Icon::COMMUNICATION_WEBSITE_MENU_BLANK,
-      'diploma' => Icon::EDUCATION_DIPLOMA,
-      'post' => Icon::COMMUNICATION_WEBSITE_POST,
-      'category' => Icon::COMMUNICATION_WEBSITE_POST,
-      'page' => Icon::COMMUNICATION_WEBSITE_PAGE,
-      'program' => Icon::EDUCATION_PROGRAM,
-      'paper' => Icon::RESEARCH_LABORATORY,
-      'volume' => Icon::RESEARCH_LABORATORY,
-      'url' => Icon::COMMUNICATION_WEBSITE_MENU_URL,
-    }
-    icons[kind] if icons.has_key? kind
+    ICONS[kind] if ICONS.has_key? kind
   end
 
   def to_s
@@ -118,13 +121,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def has_about?
-    kind_page? ||
-    kind_diploma? ||
-    kind_program? ||
     kind_category? ||
+    kind_diploma? ||
+    kind_location? ||
+    kind_page? ||
+    kind_paper? ||
     kind_post? ||
-    kind_volume? ||
-    kind_paper?
+    kind_program? ||
+    kind_volume?
   end
 
   def sync_menu

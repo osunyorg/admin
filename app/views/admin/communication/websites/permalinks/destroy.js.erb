@@ -1,0 +1,7 @@
+var tbody = document.getElementById('previous-permalinks')
+              .getElementsByTagName('tbody')[0],
+    tr = tbody.querySelector('tr[data-id="<%= @permalink.id %>"]');
+
+if (tr) {
+  tbody.removeChild(tr);
+}

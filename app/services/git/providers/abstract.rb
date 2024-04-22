@@ -45,6 +45,10 @@ class Git::Providers::Abstract
     raise NotImplementedError
   end
 
+  def files_in_the_repository
+    []
+  end
+
   protected
 
   def batch

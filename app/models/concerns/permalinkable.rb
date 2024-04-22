@@ -1,7 +1,9 @@
-module WithPermalink
+module Permalinkable
   extend ActiveSupport::Concern
 
   included do
+    include Staticable
+
     has_many  :permalinks,
               class_name: "Communication::Website::Permalink",
               as: :about,
@@ -31,11 +33,21 @@ module WithPermalink
 
   def add_redirection(path)
     clean_path = Communication::Website::Permalink.clean_path(path)
+    # Permalink creation does not trigger its about's sync
+    # so we need to pass the force_sync_about attribute accessor.
     Communication::Website::Permalink.create(
       website: website,
       about: self,
       is_current: false,
-      path: clean_path
+      path: clean_path,
+      force_sync_about: true
     )
+  end
+
+  def remove_redirection(permalink)
+    # Permalink removal does not trigger its about's sync
+    # so we need to pass the force_sync_about attribute accessor.
+    permalink.force_sync_about = true
+    permalink.destroy
   end
 end

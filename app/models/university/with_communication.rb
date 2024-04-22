@@ -16,6 +16,14 @@ module University::WithCommunication
               class_name: 'Communication::Website::Post',
               dependent: :destroy
 
+    has_many  :communication_website_events,
+              class_name: 'Communication::Website::Agenda::Event',
+              dependent: :destroy
+
+    has_many  :communication_website_projects,
+              class_name: 'Communication::Website::Portfolio::Project',
+              dependent: :destroy
+
     has_many  :communication_blocks,
               class_name: 'Communication::Block',
               dependent: :destroy

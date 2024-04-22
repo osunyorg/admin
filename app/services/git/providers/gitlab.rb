@@ -87,6 +87,11 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
                     : 'main'
   end
 
+  # TODO
+  def files_in_the_repository
+    super
+  end
+
   protected
 
   def endpoint

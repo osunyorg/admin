@@ -181,7 +181,7 @@ module WithDependencies
     return unless respond_to?(:published)
     return true if saved_change_to_published? && !published?
     if respond_to?(:published_at)
-      return saved_change_to_published_at? && published_at > Time.now
+      return saved_change_to_published_at? && (published_at.nil? || published_at > Time.now)
     end
     false
   end

@@ -4,7 +4,8 @@
 
 <%= render  'admin/application/filters',
             current_path: server_websites_path,
-            filters: @filters if @filters.any? %>
+            filters: @filters,
+            collapsable: false if @filters.any? %>
 
 <%= render 'server/websites/list', websites: @websites %>
 

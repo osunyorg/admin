@@ -11,6 +11,7 @@ class Ability::Author < Ability
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids, author_id: @user.person&.id
+    can :manage, User::Favorite, user_id: @user
   end
 
   protected

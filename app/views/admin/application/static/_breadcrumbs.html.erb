@@ -1,8 +1,22 @@
+<% 
+if @website
+  webpages = @about.hugo_ancestors_and_self(@website)
+%>
 breadcrumbs:
-<% pages.each do |page| %>
+<%
+webpages.each do |webpage| 
+  title = webpage.to_s
+  # Les pages (Communication::Website::Page) ont une gymnastique un peu spéciale, 
+  # parce qu'il faut prendre le titre dédié au breadcrumb.
+  title = webpage.best_title if webpage.respond_to?(:best_title)
+  hugo = webpage.hugo(@website)
+  permalink = hugo.permalink
+  last = webpage == webpages.last
+%>
   - title: >-
-      <%= page.best_title %>
-    path: "<%= page.path %>"
+      <%= title %>
+<% unless last %>
+    path: "<%= permalink %>"
 <% end %>
-  - title: >-
-      <%= current_title %>
+<% end %>
+<% end %>

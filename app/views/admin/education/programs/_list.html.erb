@@ -40,7 +40,7 @@
               <%= link_to t('delete'),
                           admin_education_program_path(program),
                           method: :delete,
-                          data: { confirm: program.children.any? ? t('please_confirm_with_children') : t('please_confirm') },
+                          data: { confirm: t('please_confirm') },
                           class: button_classes_danger if can?(:destroy, program) %>
             </div>
           </td>

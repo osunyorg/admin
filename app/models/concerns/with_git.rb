@@ -24,18 +24,36 @@ module WithGit
   end
 
   def sync_with_git
-    return unless website.git_repository.valid?
-    if syncable?
-      Communication::Website::GitFile.sync website, self
-      recursive_dependencies(syncable_only: true).each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
-      references.each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
+    return unless should_sync_with_git?
+    if website.locked_for_background_jobs?
+      # Website already locked, we reenqueue the job
+      sync_with_git
+      return
+    else
+      website.lock_for_background_jobs!
     end
-    website.git_repository.sync!
+    begin
+      sync_with_git_safely
+    ensure
+      website.unlock_for_background_jobs!
+    end
   end
   handle_asynchronously :sync_with_git, queue: :default
 
+  protected
+
+  def should_sync_with_git?
+    website.git_repository.valid? && syncable?
+  end
+
+  def sync_with_git_safely
+    Communication::Website::GitFile.sync website, self
+    recursive_dependencies(syncable_only: true).each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    references.each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    website.git_repository.sync!
+  end
 end

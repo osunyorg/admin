@@ -27,7 +27,7 @@ module ApplicationController::WithErrors
     end
 
     def handle_unverified_request
-      redirect_back(fallback_location: root_path, alert: t('inactivity_alert'))
+      redirect_back(fallback_location: '/', alert: t('inactivity_alert'))
     end
 
     def render_not_found

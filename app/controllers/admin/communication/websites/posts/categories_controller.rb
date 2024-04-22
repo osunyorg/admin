@@ -4,34 +4,12 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                               through_association: :post_categories
 
   include Admin::Translatable
-
-  before_action :get_root_categories, only: [:index, :new, :create, :edit, :update]
+  include Admin::Categorizable
 
   def index
-    @categories = @website.post_categories.for_language(current_website_language).ordered
+    @root_categories = categories.root
+    @categories_class = categories_class
     breadcrumb
-  end
-
-  def reorder
-    parent_id = params.dig(:parentId)
-    old_parent_id = params.dig(:oldParentId)
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      category = @website.post_categories.find(id)
-      category.update_columns parent_id: parent_id,
-                              position: index + 1
-    end
-    if old_parent_id
-      old_parent = @website.post_categories.find(old_parent_id)
-      old_parent.sync_with_git
-    end
-    @website.post_categories.find(params[:itemId]).sync_with_git # Will sync siblings
-  end
-
-  def children
-    return unless request.xhr?
-    @category = @website.post_categories.for_language(current_website_language).find(params[:id])
-    @children = @category.children.ordered
   end
 
   def show
@@ -84,7 +62,11 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   protected
 
   def get_root_categories
-    @root_categories = @website.post_categories.root.for_language(current_website_language).ordered
+    @root_categories = categories.root
+  end
+
+  def categories_class
+    Communication::Website::Post::Category
   end
 
   def breadcrumb

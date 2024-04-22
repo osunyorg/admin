@@ -56,10 +56,10 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def init_from_template(name)
     client.create_repository_from_template(
-      'noesya/osuny-hugo-template-aaa',
+      'osunyorg/template',
       name,
       {
-        owner: 'noesya',
+        owner: 'osunyorg',
         private: false
       }
     )
@@ -106,6 +106,10 @@ class Git::Providers::Github < Git::Providers::Abstract
       git_repository.website.invalidate_access_token!
       false
     end
+  end
+
+  def files_in_the_repository
+    @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
   end
 
   protected

@@ -1,3 +1,4 @@
+# Analyzer est utilisé pour envoyer les fichiers vers les référentiels Git
 class Git::Analyzer
   attr_accessor :git_file
   attr_reader :repository

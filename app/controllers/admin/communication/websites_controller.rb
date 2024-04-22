@@ -25,11 +25,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def show
     @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
-    @pages = @all_pages.recent
+    @pages = @all_pages.latest
     @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
-    @posts = @all_posts.recent
+    @posts = @all_posts.latest
     @all_events = @website.events.accessible_by(current_ability).for_language(current_website_language)
-    @events = @all_events.recent
+    @events = @all_events.latest
+    @all_projects = @website.projects.accessible_by(current_ability).for_language(current_website_language)
+    @projects = @all_projects.latest
     breadcrumb
   end
 
@@ -76,9 +78,9 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def website_params
     attribute_names = [
-      :name, :url, :repository, :about_type, :about_id, :in_production,
+      :name, :url, :repository, :about_type, :about_id, :in_production, :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
-      :feature_posts, :feature_agenda,
+      :feature_posts, :feature_agenda, :feature_portfolio,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_shared_image, :default_shared_image_delete,
       :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,

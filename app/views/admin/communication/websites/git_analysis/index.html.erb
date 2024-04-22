@@ -1,0 +1,49 @@
+<% content_for :title, t('admin.communication.website.git_file.analysis.title') %>
+
+<div class="table-responsive mb-5">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::GitFile::Orphan.model_name.human(count: 2) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orphans.each do |orphan| %>
+        <tr>
+          <td><%= link_to orphan.path,
+                          orphan.git_url, 
+                          target: :_blank, 
+                          classes: button_classes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::GitFile::Layout.model_name.human(count: 2) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @layouts.each do |layout| %>
+        <tr>
+          <td><%= link_to layout.path,
+                          layout.git_url, 
+                          target: :_blank, 
+                          classes: button_classes %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('admin.communication.website.git_file.analysis.title'), 
+              git_analysis_admin_communication_website_path(lang: nil, website_id: nil), 
+              class: button_classes, 
+              method: :post %>
+<% end %>

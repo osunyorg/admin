@@ -61,6 +61,8 @@
               about_collection = collection @website.research_volumes
             elsif item.kind_paper?
               about_collection = collection @website.research_papers
+            elsif item.kind_location?
+              about_collection = collection @website.administration_locations
             end
           else
             about_collection = []

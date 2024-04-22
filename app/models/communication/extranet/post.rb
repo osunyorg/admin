@@ -35,12 +35,12 @@
 #
 class Communication::Extranet::Post < ApplicationRecord
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithAccessibility
   include WithFeaturedImage
   include WithPublication
-  include WithPermalink
   include WithUniversity
 
   belongs_to :author, class_name: 'University::Person', optional: true

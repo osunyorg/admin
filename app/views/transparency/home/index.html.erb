@@ -1,0 +1,64 @@
+<% content_for :title, 'Transparence' %>
+
+<h1 class="text-center">Transparence</h1>
+
+<h2 class="mt-5 h4 text-center mb-4">Contributions annuelles</h2>
+<div class="table-responsive">
+  <table class="<%= table_classes %> table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Organisation contributrice</th>
+        <th>Contribution annuelle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @universities.each do |university| %>
+        <tr>
+          <td><%= university %></td>
+          <td><%= number_to_currency university.contribution_amount, precision: 0, locale: :fr  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th><%= t('server_admin.universities.contributions_total') %></th>
+        <td><%= number_to_currency @contributions_total, precision: 0, locale: :fr %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<h2 class="mt-5 h4 text-center mb-4">Coûts de fonctionnement annuels</h2>
+<p class="text-center">Les coût sont remis à jour à la main, ils ne sont pas très précis.</p>
+<div class="table-responsive">
+  <table class="<%= table_classes %> table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Organisation</th>
+        <th>Nature</th>
+        <th>Coût annuel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @costs.each do |cost| %>
+        <tr>
+          <td><%= cost.first %></td>
+          <td><%= cost.second %></td>
+          <td><%= number_to_currency cost.last, precision: 0, locale: :fr  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">Coûts (total)</th>
+        <td><%= number_to_currency @costs_total, precision: 0, locale: :fr  %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<h2 class="mt-5 h4 text-center mb-4">Balance annuelle</h2>
+<p class="text-center">Tant que la SCIC Osuny n'est pas en place, noesya utilise l'excédent pour payer une part de la maintenance et des développements.</p>
+<p class="display-1 text-center">
+  <%= number_to_currency @balance, precision: 0, locale: :fr  %>
+</p>

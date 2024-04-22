@@ -1,0 +1,11 @@
+<tr data-id="<%= permalink.id %>">
+  <td><%= permalink.to_s %></td>
+  <td>
+    <%= link_to t('delete'),
+        [:admin, permalink],
+        method: :delete,
+        remote: true,
+        data: { confirm: t('please_confirm') },
+        class: button_classes_danger %>
+  </td>
+</tr>

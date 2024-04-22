@@ -53,9 +53,9 @@ fr:
       clean_and_rebuild_all_websites_notice: Tous les thèmes vont être mis à jour. Cela peut prendre quelques minutes.
       connections_count: "%{count} connexions"
       details: détail
-      events_count: "%{count} événements"      
+      events_count: "%{count} événements"
       force_clean_and_rebuild: Forcer le clean&rebuild de tous les sites
-      git_repo: 
+      git_repo:
         full: Référentiel Git
         short: Référentiel
         status: Statut
@@ -70,6 +70,8 @@ fr:
       sync_theme_version_notice: La version du thème de %{website} a été synchronisée
       theme_version: Version du thème
       university_html: "Université : %{university}"
+      unlock_for_background_jobs_btn: Déverrouiller pour les background jobs
+      unlock_for_background_jobs_notice: Le site est déverrouillé pour les background jobs.
       update_all_themes: Synchroniser toutes les versions de thème
       update_mode: Mode de mise à jour
       updatable_theme_filter:

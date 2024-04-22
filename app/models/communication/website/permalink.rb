@@ -24,26 +24,9 @@
 #  fk_rails_f389ba7d45  (website_id => communication_websites.id)
 #
 class Communication::Website::Permalink < ApplicationRecord
-  MAPPING = {
-    "Communication::Website::Page" => Communication::Website::Permalink::Page,
-    "Communication::Website::Post" => Communication::Website::Permalink::Post,
-    "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
-    "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
-    "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
-    "Administration::Location" => Communication::Website::Permalink::Location,
-    "Education::Diploma" => Communication::Website::Permalink::Diploma,
-    "Education::Program" => Communication::Website::Permalink::Program,
-    "Research::Journal::Paper" => Communication::Website::Permalink::Paper,
-    "Research::Journal::Volume" => Communication::Website::Permalink::Volume,
-    "Research::Publication" => Communication::Website::Permalink::Publication,
-    "University::Organization" => Communication::Website::Permalink::Organization,
-    "University::Person" => Communication::Website::Permalink::Person,
-    "University::Person::Administrator" => Communication::Website::Permalink::Administrator,
-    "University::Person::Author" => Communication::Website::Permalink::Author,
-    "University::Person::Researcher" => Communication::Website::Permalink::Researcher,
-    "University::Person::Teacher" => Communication::Website::Permalink::Teacher
-  }
+  attr_accessor :force_sync_about
 
+  include WithMapping
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
 
@@ -54,6 +37,9 @@ class Communication::Website::Permalink < ApplicationRecord
   validates :about_id, :about_type, :path, presence: true
 
   before_validation :set_university, on: :create
+  # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
+  # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
+  after_commit :sync_about, on: [:create, :destroy], if: :force_sync_about
 
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }
@@ -62,32 +48,16 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
-      [permalink_class.static_config_key, permalink_class.pattern_in_website(website, language)]
+      [
+        permalink_class.static_config_key,
+        permalink_class.pattern_in_website(website, language)
+      ]
     }.to_h
-  end
-
-  def self.for_object(object, website)
-    lookup_key = self.lookup_key_for_object(object)
-    permalink_class = MAPPING[lookup_key]
-    raise ArgumentError.new("Permalinks do not handle an object of type #{object.class.to_s}") if permalink_class.nil?
-    permalink_class.new(website: website, about: object)
   end
 
   # Can be overwritten
   def self.required_in_config?(website)
     false
-  end
-
-  def self.lookup_key_for_object(object)
-    lookup_key = object.class.to_s
-    # Special pages are defined as STI classes (e.g. Communication::Website::Page::Home) but permalinks are handled the same way.
-    lookup_key = "Communication::Website::Page" if lookup_key.starts_with?("Communication::Website::Page")
-    lookup_key
-  end
-
-  def self.supported_by?(object)
-    lookup_key = self.lookup_key_for_object(object)
-    MAPPING.keys.include?(lookup_key)
   end
 
   def self.pattern_in_website(website, language)
@@ -103,10 +73,28 @@ class Communication::Website::Permalink < ApplicationRecord
     # Trailing slash for coherence
     clean_path = "#{clean_path}/" unless clean_path.end_with?('/')
     clean_path
+  rescue URI::InvalidURIError
+    nil
   end
 
   def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(WithPermalink)
+    ApplicationRecord.model_names_with_concern(Permalinkable)
+  end
+
+  # Méthode pour accéder facilement à la page spéciale,
+  # qui s'appuie sur le `special_page_type` de chaque Permalink
+  def self.special_page(website, language)
+    website.special_page(self.special_page_type, language: language)
+  end
+
+  # Méthode d'utilité pour récupérer le slug
+  def self.slug_with_ancestors(website, language)
+    self.special_page(website, language).slug_with_ancestors
+  end
+
+  # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
+  def self.special_page_type
+    raise NoMethodError
   end
 
   def pattern
@@ -133,17 +121,15 @@ class Communication::Website::Permalink < ApplicationRecord
     end
   end
 
+  def special_page(website, language)
+    self.class.special_page(website, language)
+  end
+
   def to_s
     "#{path}"
   end
 
   protected
-
-  def self.required_kinds_in_website(website)
-    MAPPING.values.select { |permalink_class|
-      permalink_class.required_in_config?(website)
-    }
-  end
 
   # Can be overwritten (Page for example)
   def published_path
@@ -173,5 +159,10 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def set_university
     self.university_id = website.university_id
+  end
+
+  def sync_about
+    return unless about.persisted?
+    about.is_direct_object? ? about.sync_with_git : about.touch
   end
 end

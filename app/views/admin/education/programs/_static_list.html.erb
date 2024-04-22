@@ -6,6 +6,7 @@ indentation = ' ' * depth
 <%= indentation %>- label: >
 <%= indentation %>    <%= program.to_s %>
 <%= indentation %>  path: "<%= program.current_permalink_in_website(@website)&.path %>"
+<%= indentation %>  slug: "<%= program.path %>"
 <% 
 children = program.children.where(diploma: diploma)
 # Limit to a global list of programs, for example on a location

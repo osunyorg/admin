@@ -1,0 +1,20 @@
+<%= content_for :title, Communication::Website::GitFile::Layout.model_name.human(count: 2) %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= t('server.overrides.file') %></th>
+        <th><%= t('server.overrides.websites') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @overrides.each do |override| %>
+        <tr>
+          <td><%= link_to override, server_override_path(path: override) %></td>
+          <td><%= Communication::Website::GitFile::Layout.count_websites(override) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

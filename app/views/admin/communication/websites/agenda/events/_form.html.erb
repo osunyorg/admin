@@ -36,7 +36,7 @@
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: @categories %>
+                            collection: collection_tree_for_checkboxes(@categories) %>
         <% end %>
       <% end %>
 

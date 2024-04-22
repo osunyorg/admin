@@ -69,6 +69,14 @@ function hideAbout() {
     end
     %>
     displayAbout('Research::Journal::Paper', "<%= j(raw(options.join(''))) %>");
+<% elsif @kind == 'location' %>
+    <%
+    options = ['<option value="" label=" "></option>']
+    @website.administration_locations.ordered.each do |location|
+        options << "<option value=\"#{location.id}\">#{location.to_s}</option>"
+    end
+    %>
+    displayAbout('Administration::Location', "<%= j(raw(options.join(''))) %>");
 <% else %>
     $('.js-url-field').addClass('d-none');
     hideAbout();

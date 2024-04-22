@@ -1,0 +1,16 @@
+<%
+title = t('communication.website.last_projects')
+action = ''
+action += link_to t('create'),
+                  new_admin_communication_website_portfolio_project_path(website_id: @website),
+                  class: button_classes if can?(:create, Communication::Website::Portfolio::Project)
+subtitle = ''
+if @all_projects.any? 
+  subtitle = link_to  t('communication.website.see_all', number: @all_projects.size), 
+                      admin_communication_website_portfolio_projects_path(website_id: @website)
+end
+%>
+<%= osuny_panel title, subtitle: subtitle, action: action do %>
+  <%= render 'admin/communication/websites/portfolio/projects/list',
+              projects: @projects %>
+<% end %>

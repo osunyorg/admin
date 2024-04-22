@@ -71,10 +71,12 @@ class Communication::Block < ApplicationRecord
     image: 51,
     key_figures: 56,
     license: 4040,
+    locations: 3200,
     organizations: 200,
     pages: 600,
     persons: 100,
     posts: 500,
+    projects: 3101,
     programs: 58,
     sound: 1005,
     testimonials: 400,
@@ -85,7 +87,7 @@ class Communication::Block < ApplicationRecord
   CATEGORIES = {
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :persons, :organizations, :agenda, :programs],
+    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects],
     utilities: [:files, :definitions, :contact, :license, :embed]
   }
 

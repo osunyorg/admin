@@ -1,0 +1,27 @@
+one:
+  name: MyString
+  slug: MyString
+  featured_image_alt: MyText
+  featured_image_credit: MyText
+  meta_description: MyText
+  is_programs_root: false
+  path: MyString
+  position: 1
+  summary: MyText
+  university: default_university
+  website: website_with_github
+  language: fr
+
+two:
+  name: MyString
+  slug: MyString
+  featured_image_alt: MyText
+  featured_image_credit: MyText
+  meta_description: MyText
+  is_programs_root: false
+  path: MyString
+  position: 1
+  summary: MyText
+  university: default_university
+  website: website_with_github
+  language: fr

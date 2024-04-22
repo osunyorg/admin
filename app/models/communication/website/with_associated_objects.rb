@@ -2,24 +2,7 @@ module Communication::Website::WithAssociatedObjects
   extend ActiveSupport::Concern
 
   included do
-
     has_many    :pages,
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
-    has_many    :posts,
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
-    has_many    :authors, -> { distinct }, through: :posts
-
-    has_many    :post_categories,
-                class_name: 'Communication::Website::Post::Category',
-                foreign_key: :communication_website_id,
-                dependent: :destroy
-
-    has_many    :agenda_categories,
-                class_name: 'Communication::Website::Agenda::Category',
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
@@ -31,11 +14,6 @@ module Communication::Website::WithAssociatedObjects
                 class_name: "Communication::Block",
                 foreign_key: :communication_website_id
     alias       :blocks :communication_blocks
-    
-    has_many    :agenda_events,
-                class_name: "Communication::Website::Agenda::Event",
-                foreign_key: :communication_website_id
-    alias       :events :agenda_events
   end
 
   def blocks_from_education
@@ -84,14 +62,6 @@ module Communication::Website::WithAssociatedObjects
 
   def teachers
     has_teachers? ? about.teachers : University::Person.none
-  end
-
-  def has_communication_posts?
-    posts.published.any?
-  end
-
-  def has_communication_categories?
-    post_categories.any? || agenda_categories.any?
   end
 
   def has_organizations?

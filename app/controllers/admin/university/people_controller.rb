@@ -16,7 +16,9 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     respond_to do |format|
       format.html {
         @people = @people.page params[:page]
-        @categories = current_university.person_categories.ordered.page(params[:categories_page])
+        @categories = current_university.person_categories
+                                        .ordered
+                                        .page(params[:categories_page])
         breadcrumb
       }
       format.xlsx {
@@ -34,8 +36,14 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def show
-    @teacher_involvements = @person.involvements_as_teacher.includes(:target).ordered_by_date.page(params[:programs_page])
-    @administrator_involvements = @person.involvements_as_administrator.includes(:target).ordered_by_date.page(params[:roles_page])
+    @teacher_involvements = @person.involvements_as_teacher
+                                   .includes(:target)
+                                   .ordered_by_date
+                                   .page(params[:programs_page])
+    @administrator_involvements = @person.involvements_as_administrator
+                                         .includes(:target)
+                                         .ordered_by_date
+                                         .page(params[:roles_page])
     breadcrumb
   end
 

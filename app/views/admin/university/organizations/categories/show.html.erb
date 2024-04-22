@@ -2,6 +2,7 @@
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>
+  <%= static_link static_admin_university_organization_category_path(@category) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

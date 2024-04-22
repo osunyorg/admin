@@ -34,6 +34,7 @@ module Communication::Website::WithSpecialPages
     # Special pages have a before_validation (:on_create) callback to preset title, slug, ...
     page = pages.where(type: type.to_s, language_id: default_language_id, university_id: university_id).first_or_initialize
     page.save_and_sync
+    page
   end
 
   def translate_special_page(type, language)

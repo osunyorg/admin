@@ -6,7 +6,8 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     :list,
     :highlight,
     :alternate,
-    :large
+    :large,
+    :carousel
   ]
   has_component :mode, :option, options: [
     :all, 

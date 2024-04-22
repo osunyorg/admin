@@ -2,13 +2,11 @@
 <%= render 'admin/application/static/title' %>
 subtitle: >-
   <%= prepare_text_for_static @about.subtitle %>
-<%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
-<%= render 'admin/application/static/breadcrumbs',
-            pages: @website.special_page(Communication::Website::Page::CommunicationAgenda).ancestors_and_self,
-            current_title: @about.to_s %>
-weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
+<%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
+weight: <%= @about.distance_in_days %>
 <%= render 'admin/application/i18n/static' %>
 <%= render 'admin/application/featured_image/static' %>
 <%= render 'admin/application/meta_description/static' %>

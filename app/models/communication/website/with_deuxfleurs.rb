@@ -70,7 +70,7 @@ module Communication::Website::WithDeuxfleurs
 
   # noesya/agit-cartographie
   def deuxfleurs_default_github_repository
-    "noesya/#{deuxfleurs_default_github_repository_name}"
+    "osunyorg/#{deuxfleurs_default_github_repository_name}"
   end
 
   def deuxfleurs_default_badge_url

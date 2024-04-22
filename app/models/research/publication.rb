@@ -30,11 +30,11 @@
 #
 class Research::Publication < ApplicationRecord
   include AsIndirectObject
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include WithCitations
   include WithGitFiles
-  include WithPermalink
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',

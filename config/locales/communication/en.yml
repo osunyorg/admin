@@ -4,6 +4,9 @@ en:
   activemodel:
     models:
       communication: Communication
+      communication/website/portfolio:
+        one: Portfolio
+        other: Portfolio
   activerecord:
     attributes:
       communication/block:
@@ -91,13 +94,16 @@ en:
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         features: Features
-        feature_posts: Posts
         feature_agenda: Agenda
+        feature_portfolio: Portfolio
+        feature_posts: Posts
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
         in_production: Production
+        in_showcase: In showcase
         languages: Languages
+        locked_at: Locked for background jobs at
         name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
@@ -135,6 +141,17 @@ en:
         title: Title
         to_day: To day
         to_hour: To hour
+      communication/website/portfolio/category:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
+      communication/website/portfolio/project:
+        categories: Categories
+        featured_image: Featured image
+        published: Published
+        title: Title
+        year: Year
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type
@@ -248,6 +265,18 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/git_file/layout:
+        one: HTML overlay
+        other: HTML overlays
+      communication/website/git_file/orphan:
+        one: Orphan file
+        other: Orphan files
+      communication/website/portfolio/category:
+        one: Category
+        other: Categories
+      communication/website/portfolio/project:
+        one: Project
+        other: Projects
       communication/website/connection:
         one: Connection
         other: Connections
@@ -285,9 +314,16 @@ en:
         editorial:
           label: Editorial
           description: Everything related to content
+        git_file:
+          analysis:
+            launch: Launch analysis
+            launched: Analysis launched
+            title: Git analysis
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
+        permalinks:
+          creation_error: "Error during the creation. Does the given path have the correct format?"
         technical:
           label: Technical
           description: Everything related to technical settings
@@ -307,6 +343,9 @@ en:
           published: Published
           published_status: Publication status
           with_children: "with children:"
+        portfolio:
+          projects:
+            none: No project yet
         posts:
           and_pinned: and pinned
           by: by %{author}
@@ -360,6 +399,7 @@ en:
       last_events: Last events
       last_pages: Last pages
       last_posts: Last posts
+      last_projects: Last projects
       menus:
         automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
@@ -389,6 +429,9 @@ en:
           communication_agenda_archive:
             slug: archives
             title: Archives
+          communication_portfolio:
+            slug: projects
+            title: Projects
           education_diploma:
             slug: diplomas
             title: Diplomas
@@ -449,23 +492,30 @@ en:
               administrators: Administration staff
               authors: Editorial staff
               blank: Title
+              category: News category
               diploma: Specific diploma
               diplomas: Diplomas index
-              posts: News index
-              post: Specific news
-              category: News category
+              location: Location (campus)
               organizations: Third parties index
               page: Specific Page
-              program: Specific program
-              programs: Programs index
               paper: Specific research paper
               papers: Research papers index
-              volume: Specific research volume
-              volumes: Research volumes index
-              researchers: Research staff
               persons: Staff
+              post: Specific news
+              posts: News index
+              program: Specific program
+              programs: Programs index
+              researchers: Research staff
               teachers: Educational staff
               url: URL
+              volume: Specific research volume
+              volumes: Research volumes index
+  notes:
+    label: Read note %{index}
+  server:
+    overrides:
+      file: File
+      websites: Websites
   simple_form:
     hints:
       communication_extranet:
@@ -474,20 +524,25 @@ en:
         sso_button_label: "Default: Sign in via SSO"
       communication_website:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
-        access_token_without_existing: Your Github or Gitlab confidential access token.
+        access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_posts: To publish posts, like a media
         feature_agenda: To share events
+        feature_portfolio: To showcase projects
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
+        in_production: Do not tick this box until the site is on a dedicated domain or sub-domain (not *.osuny.site).
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
-        repository: As organization/name, for example noesya/bordeauxmontaigne-iut
+        repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website with Deuxfleurs.
         university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
+        url: Leave this field empty when you create your website with Deuxfleurs, it will be filled in automatically.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
         text: This field is deprecated, content will not be displayed on the website.
         header_text: By default, this text replaces the title. On some sites, it is displayed in addition.
+      communication_website_permalink:
+        path: "Must be an URL path. Example: /old/path"
       communication_website_post:
         text: This field is deprecated, content will not be displayed on the website.

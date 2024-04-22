@@ -9,7 +9,7 @@ module Communication::Website::WithScreenshot
     return if url.blank?
     screenshot_url = Screenshot.capture(url)
     return if screenshot_url.blank?
-    downloaded_image = URI.open(screenshot_url)
+    downloaded_image = URI(screenshot_url).open
     self.screenshot.attach  io: downloaded_image, 
                             filename: "screenshot.png"
   end
