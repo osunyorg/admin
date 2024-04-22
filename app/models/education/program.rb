@@ -211,6 +211,10 @@ class Education::Program < ApplicationRecord
     false
   end
 
+  def published_programs
+    [self]
+  end
+
   protected
 
   def check_accessibility
