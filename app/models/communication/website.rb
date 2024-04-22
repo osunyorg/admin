@@ -148,12 +148,13 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    return unless should_sync_with_git?
     if locked_for_background_jobs?
       # Reenqueue
-      sync_with_git
+      delay(run_at: 1.minute.from_now, queue: :default)
+        .sync_with_git_without_delay
       return
     else
+      return unless should_sync_with_git?
       lock_for_background_jobs!
     end
     begin
