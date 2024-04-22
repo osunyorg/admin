@@ -5,11 +5,6 @@
 <%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/featured_image/static' %>
-<% if @website %>
-<%= render 'admin/application/static/breadcrumbs',
-            pages: @website.special_page(Communication::Website::Page::AdministrationLocation).ancestors_and_self,
-            current_title: @about.to_s %>
-<% end %>
 contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
