@@ -2,8 +2,6 @@ module Communication::Website::WithLock
   extend ActiveSupport::Concern
 
   included do
-    class LockedError < StandardError; end
-
     # TODO use this to kill a task
     LOCK_MAX_DURATION = 2.hours
   end

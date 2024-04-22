@@ -6,8 +6,6 @@ Bugsnag.configure do |config|
 
   config.add_on_error(proc do |event|
     next unless event.metadata.key?(:job)
-    error_class = event.exceptions.first[:errorClass]
-    return false if error_class == "Communication::Website::LockedError"
     job_class = event.metadata.dig(:job, :active_job, "job_class")
     next unless job_class == "ActiveStorage::AnalyzeJob"
     ignored_error_classes = [
@@ -16,6 +14,7 @@ Bugsnag.configure do |config|
       "Aws::S3::Errors::NotFound",
       "MiniMagick::Error"
     ]
+    error_class = event.exceptions.first[:errorClass]
     next unless ignored_error_classes.include?(error_class)
     false
   end)
