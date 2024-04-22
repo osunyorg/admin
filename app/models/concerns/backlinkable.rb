@@ -39,11 +39,14 @@ module Backlinkable
   end
 
   def published_backlinks_object_ids(website, kind)
+    # Memoize to avoid multiple queries for the same website and kind
     @published_backlinks_object_ids ||= {}
-    @published_backlinks_object_ids[website.id] ||= kind.safe_constantize.published.where(communication_website_id: website.id).pluck(:id)
+    @published_backlinks_object_ids[website.id] ||= {}
+    @published_backlinks_object_ids[website.id][kind] ||= kind.safe_constantize.published.where(communication_website_id: website.id).pluck(:id)
   end
 
   def published_backlinks_blocks(website)
+    # Memoize to avoid multiple queries for the same website
     @published_backlinks_blocks ||= {}
     @published_backlinks_blocks[website.id] ||= backlinks_blocks(website).published
   end
