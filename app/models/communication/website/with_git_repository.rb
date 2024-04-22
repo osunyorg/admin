@@ -37,7 +37,8 @@ module Communication::Website::WithGitRepository
   def sync_indirect_object_with_git(indirect_object)
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      sync_indirect_object_with_git(indirect_object)
+      delay(run_at: 1.minute.from_now, queue: :default)
+        .sync_indirect_object_with_git_without_delay(indirect_object)
       return
     else
       return unless git_repository.valid?
@@ -55,7 +56,8 @@ module Communication::Website::WithGitRepository
   def destroy_obsolete_git_files
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      destroy_obsolete_git_files
+      delay(run_at: 1.minute.from_now, queue: :cleanup)
+        .destroy_obsolete_git_files_without_delay
       return
     else
       return unless git_repository.valid?
@@ -93,7 +95,8 @@ module Communication::Website::WithGitRepository
   def update_theme_version
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      update_theme_version
+      delay(run_at: 1.minute.from_now, queue: :default)
+        .update_theme_version_without_delay
       return
     else
       return unless git_repository.valid?

@@ -26,7 +26,8 @@ module WithGit
   def sync_with_git
     if website.locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      sync_with_git
+      delay(run_at: 1.minute.from_now, queue: :default)
+        .sync_with_git_without_delay
       return
     else
       return unless should_sync_with_git?
