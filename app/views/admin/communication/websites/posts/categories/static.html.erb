@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink', forced_slug: @about.slug_with_ancestors_slugs %>
@@ -20,4 +19,3 @@ position: <%= @about.position %>
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
-<%- end -%>

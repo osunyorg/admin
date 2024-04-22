@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' if @website %>
@@ -18,4 +17,3 @@ duration: >
   <%= prepare_text_for_static @about.duration %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
-<%- end -%>

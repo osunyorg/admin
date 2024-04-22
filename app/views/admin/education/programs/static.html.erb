@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%
 teacher_involvements = @about.university_person_involvements
@@ -81,7 +80,7 @@ capacity: <%= @about.capacity %>
 continuing: <%= @about.continuing %>
 initial: <%= @about.initial %>
 certifications:
-  qualiopi: 
+  qualiopi:
     certified: <%= @about.qualiopi_certified %>
     text: >-
       <%= prepare_html_for_static @about.qualiopi_text %>
@@ -108,4 +107,3 @@ certifications:
 <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
-<%- end -%>

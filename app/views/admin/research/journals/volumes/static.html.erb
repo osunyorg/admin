@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
@@ -14,4 +13,3 @@ date: "<%= @about.published_at.iso8601 %>"
 <%= render 'admin/application/summary/static' %>
 ---
 <%= prepare_html_for_static @about.text %>
-<%- end -%>

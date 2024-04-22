@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 date: "<%= @about.published_at&.iso8601 %>"
@@ -25,4 +24,3 @@ posts_categories:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text %>
-<%- end -%>

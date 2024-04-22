@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
@@ -65,4 +64,3 @@ organizations_categories:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text %>
-<%- end -%>

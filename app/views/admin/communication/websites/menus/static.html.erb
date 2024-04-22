@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 <%
 title = @about.title
 items = @about.items
@@ -12,4 +11,3 @@ hash = {
 }
 %>
 <%= raw hash.to_yaml %>
-<%- end -%>

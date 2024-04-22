@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
 name: "<%= prepare_text_for_static @about.name %>"
@@ -31,4 +30,3 @@ roles:
 roles: []
 <% end %>
 ---
-<%- end -%>

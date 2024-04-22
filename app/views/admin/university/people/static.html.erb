@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 linkTitle: >-
@@ -37,7 +36,7 @@ contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :phone_personal, data: @about.phone_personal, kind: ContactDetails::Phone %>
 <%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
 <% if @about.best_picture.attached? %>
-image: 
+image:
   id: "<%= @about.best_picture.blob.id %>"
   alt: ""
   credit: >-
@@ -85,7 +84,7 @@ administrative_missions:
 <% end %>
 <%= render 'admin/application/connections/backlinks' %>
 <% if @about.categories.any? %>
-persons_categories: 
+persons_categories:
 <% @about.categories.each do |category| %>
   - slug: "<%= category.slug %>"
     path: "<%= category.current_permalink_in_website(@website)&.path %>"
@@ -94,4 +93,3 @@ persons_categories:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography %>
-<%- end -%>

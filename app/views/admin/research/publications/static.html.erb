@@ -1,4 +1,3 @@
-<%- cache @about do -%>
 ---
 <%= render 'admin/application/static/title' %>
 date: "<%= @about.publication_date&.iso8601 %>"
@@ -41,4 +40,3 @@ Citations::FORMATS.each do |format|
       <%= prepare_html_for_static citation %>
 <% end %>
 ---
-<%- end -%>
