@@ -24,9 +24,13 @@ module WithGit
   end
 
   def sync_with_git
-    website.lock_for_background_jobs_or_raise!
-    begin
+    if website.locked_for_background_jobs?
+      raise Communication::Website::LockedError.new("Website is locked for background jobs")
+    else
       return unless should_sync_with_git?
+      website.lock_for_background_jobs!
+    end
+    begin
       sync_with_git_safely
     ensure
       website.unlock_for_background_jobs!
