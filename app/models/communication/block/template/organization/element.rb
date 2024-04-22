@@ -9,6 +9,10 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
     id_component.organization
   end
 
+  def organization_id
+    id_component.data
+  end
+
   def best_name
     organization ? organization.name : name
   end
