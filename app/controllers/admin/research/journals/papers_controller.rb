@@ -34,6 +34,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     @paper.assign_attributes(
       journal: @journal,
       university: current_university,
+      language_id: current_university.default_language_id,
       updated_by: current_user
     )
     if @paper.save
