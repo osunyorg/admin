@@ -35,12 +35,12 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    return unless git_repository.valid?
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       sync_indirect_object_with_git(indirect_object)
       return
     else
+      return unless git_repository.valid?
       lock_for_background_jobs!
     end
     begin
@@ -53,12 +53,12 @@ module Communication::Website::WithGitRepository
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
-    return unless git_repository.valid?
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       destroy_obsolete_git_files
       return
     else
+      return unless git_repository.valid?
       lock_for_background_jobs!
     end
     begin
@@ -91,12 +91,12 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
-    return unless git_repository.valid?
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       update_theme_version
       return
     else
+      return unless git_repository.valid?
       lock_for_background_jobs!
     end
     begin

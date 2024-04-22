@@ -24,12 +24,12 @@ module WithGit
   end
 
   def sync_with_git
-    return unless should_sync_with_git?
     if website.locked_for_background_jobs?
       # Website already locked, we reenqueue the job
       sync_with_git
       return
     else
+      return unless should_sync_with_git?
       website.lock_for_background_jobs!
     end
     begin
