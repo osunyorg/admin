@@ -27,8 +27,8 @@ diplomas:
       <%= diploma.to_s %>
     path: <%= diploma.slug %>
     programs: <% @programs = @about.education_programs.where(diploma: diploma).root.ordered %>
-<%= render 'admin/education/programs/static_list', 
-            diploma: diploma, 
+<%= render 'admin/education/programs/static_list',
+            diploma: diploma,
             programs: @programs,
             all_programs: @about.programs,
             depth: 4 %>

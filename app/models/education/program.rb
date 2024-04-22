@@ -211,6 +211,10 @@ class Education::Program < ApplicationRecord
     false
   end
 
+  def published_programs
+    Education::Program.where(id: id)
+  end
+
   protected
 
   def check_accessibility

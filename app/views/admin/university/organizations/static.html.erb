@@ -55,7 +55,7 @@ logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/connections/backlinks' %>
 <% if @about.categories.any? %>
-organizations_categories: 
+organizations_categories:
 <% @about.categories.each do |category| %>
   - slug: "<%= category.slug %>"
     path: "<%= category.current_permalink_in_website(@website)&.path %>"

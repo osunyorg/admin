@@ -18,8 +18,16 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   def organizations
     @organizations ||= elements.collect(&:organization).compact.uniq
   end
-  
+
+  def organization_ids
+    @organization_ids ||= @elements.collect(&:organization_id).compact.uniq
+  end
+
   def children
     organizations
+  end
+
+  def children_ids
+    organization_ids
   end
 end

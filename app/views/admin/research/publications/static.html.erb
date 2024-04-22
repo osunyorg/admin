@@ -29,10 +29,10 @@ researchers:
   - <%= researcher.slug %>
 <% end %>
 citations:
-<% 
-Citations::FORMATS.each do |format| 
+<%
+Citations::FORMATS.each do |format|
   citation = @about.public_send("citation_#{format}")
-  next if (@website.default_language.iso_code == "fr" && format == 'iso690') 
+  next if (@website.default_language.iso_code == "fr" && format == 'iso690')
 %>
   - label: "<%= t("research.citations.#{format}.label") %>"
     format: "<%= format %>"

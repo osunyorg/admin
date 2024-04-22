@@ -18,8 +18,16 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def people
     @people ||= elements.collect(&:person).compact.uniq
   end
-  
+
+  def person_ids
+    @person_ids ||= @elements.collect(&:person_id).compact.uniq
+  end
+
   def children
     people
+  end
+
+  def children_ids
+    person_ids
   end
 end

@@ -6,4 +6,8 @@ class Communication::Block::Template::Person::Element < Communication::Block::Te
   def person
     id_component.person
   end
+
+  def person_id
+    id_component.data
+  end
 end
