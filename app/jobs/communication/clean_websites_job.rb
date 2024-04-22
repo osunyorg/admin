@@ -1,5 +1,5 @@
 class Communication::CleanWebsitesJob < ApplicationJob
-  queue_as :default
+  queue_as :long_cleanup
 
   def perform(websites_ids)
     websites = Communication::Website.where(id: websites_ids)
