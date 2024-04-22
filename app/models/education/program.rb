@@ -212,7 +212,7 @@ class Education::Program < ApplicationRecord
   end
 
   def published_programs
-    [self]
+    Education::Program.where(id: id)
   end
 
   protected
