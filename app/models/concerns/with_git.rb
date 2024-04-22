@@ -25,9 +25,7 @@ module WithGit
 
   def sync_with_git
     if website.locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      sync_with_git
-      return
+      raise Communication::Website::LockedError.new("Website is locked for background jobs")
     else
       return unless should_sync_with_git?
       website.lock_for_background_jobs!

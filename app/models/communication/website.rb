@@ -149,9 +149,7 @@ class Communication::Website < ApplicationRecord
   # Override to follow direct objects
   def sync_with_git
     if locked_for_background_jobs?
-      # Reenqueue
-      sync_with_git
-      return
+      raise Communication::Website::LockedError.new("Website is locked for background jobs")
     else
       return unless should_sync_with_git?
       lock_for_background_jobs!
