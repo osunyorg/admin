@@ -2,9 +2,22 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
-    has_many :website_git_files,
-             class_name: 'Communication::Website::GitFile',
-             dependent: :destroy
+    has_many  :website_git_files,
+              class_name: 'Communication::Website::GitFile',
+              dependent: :destroy
+              alias_method :git_files, :website_git_files
+
+    has_many  :website_git_file_orphans,
+              foreign_key: :communication_website_id,
+              class_name: 'Communication::Website::GitFile::Orphan',
+              dependent: :destroy
+              alias_method :git_file_orphans, :website_git_file_orphans
+
+    has_many  :website_git_file_layouts,
+              foreign_key: :communication_website_id,
+              class_name: 'Communication::Website::GitFile::Layout',
+              dependent: :destroy
+              alias_method :git_file_layouts, :website_git_file_layouts
 
     after_save :destroy_obsolete_git_files, if: :should_clean_on_git?
 
@@ -23,25 +36,36 @@ module Communication::Website::WithGitRepository
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
     return unless git_repository.valid?
-    indirect_object.direct_sources.each do |direct_source|
-      add_direct_source_to_sync(direct_source)
+    if locked_for_background_jobs?
+      # Website already locked, we reenqueue the job
+      sync_indirect_object_with_git(indirect_object)
+      return
+    else
+      lock_for_background_jobs!
     end
-    git_repository.sync!
+    begin
+      sync_indirect_object_with_git_safely(indirect_object)
+    ensure
+      unlock_for_background_jobs!
+    end
   end
   handle_asynchronously :sync_indirect_object_with_git, queue: :default
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
     return unless git_repository.valid?
-    website_git_files.find_each do |git_file|
-      dependency = git_file.about
-      # Here, dependency can be nil (object was previously destroyed)
-      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
-      if is_obsolete
-        Communication::Website::GitFile.mark_for_destruction(self, git_file)
-      end
+    if locked_for_background_jobs?
+      # Website already locked, we reenqueue the job
+      destroy_obsolete_git_files
+      return
+    else
+      lock_for_background_jobs!
     end
-    self.git_repository.sync!
+    begin
+      destroy_obsolete_git_files_safely
+    ensure
+      unlock_for_background_jobs!
+    end
   end
   handle_asynchronously :destroy_obsolete_git_files, queue: :cleanup
 
@@ -68,11 +92,41 @@ module Communication::Website::WithGitRepository
 
   def update_theme_version
     return unless git_repository.valid?
-    git_repository.update_theme_version!
+    if locked_for_background_jobs?
+      # Website already locked, we reenqueue the job
+      update_theme_version
+      return
+    else
+      lock_for_background_jobs!
+    end
+    begin
+      git_repository.update_theme_version!
+    ensure
+      unlock_for_background_jobs!
+    end
   end
   handle_asynchronously :update_theme_version, queue: :default
 
   protected
+
+  def sync_indirect_object_with_git_safely(indirect_object)
+    indirect_object.direct_sources.each do |direct_source|
+      add_direct_source_to_sync(direct_source)
+    end
+    git_repository.sync!
+  end
+
+  def destroy_obsolete_git_files_safely
+    website_git_files.find_each do |git_file|
+      dependency = git_file.about
+      # Here, dependency can be nil (object was previously destroyed)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
+      if is_obsolete
+        Communication::Website::GitFile.mark_for_destruction(self, git_file)
+      end
+    end
+    git_repository.sync!
+  end
 
   def add_direct_source_to_sync(direct_source)
     # Ne pas traiter les sources d'autres sites

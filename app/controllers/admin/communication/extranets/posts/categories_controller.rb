@@ -11,6 +11,12 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
     breadcrumb
   end
 
+  def preview
+    # TODO faire une preview dans le bon contexte
+    render layout: 'admin/layouts/preview'
+  end
+
+
   def new
     breadcrumb
   end

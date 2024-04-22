@@ -3,10 +3,8 @@
 <%= render 'admin/application/static/title' %>
 breadcrumb_title: >-
   <%= prepare_text_for_static @about.best_title %>
-<%= render 'admin/application/static/breadcrumbs',
-            pages: @about.ancestors,
-            current_title: @about.best_title %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design' %>
 <% if @about.static_layout %>
 layout: <%= @about.static_layout %>
@@ -21,7 +19,8 @@ has:
 position: <%= @about.position %>
 weight: <%= @about.position %>
 <%= render 'admin/application/i18n/static' %>
-bodyclass: <%= @about.best_bodyclass %>
+bodyclass: >-
+  <%= @about.best_bodyclass %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @about.children.published.any? %>
 children:

@@ -10,10 +10,8 @@ administrator_involvements = @about.involvements_through_roles
 %>
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true, toc_present: true %>
-<%= render 'admin/application/static/breadcrumbs',
-            pages: @website.special_page(Communication::Website::Page::EducationProgram).ancestors_and_self,
-            current_title: @about.to_s %>
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
@@ -34,8 +32,14 @@ parent:
   url: <%= @about.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
 <%= render 'admin/application/featured_image/static' %>
+<% if @about.logo.attached? %>
+logo:
+  id: "<%= @about.logo.blob.id %>"
+<% end %>
 related_category: "<%= @website.post_categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
+duration: >
+  <%= prepare_text_for_static @about.duration %>
 teachers:
 <% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
@@ -67,10 +71,20 @@ roles:
 <% else %>
 roles: []
 <% end %>
+locations:
+<% @about.locations.each do |location| %>
+  - path: <%= location.current_permalink_in_website(@website)&.path %>
+    slug: <%= location.slug %>
+<% end %>
+apprenticeship: <%= @about.apprenticeship %>
 capacity: <%= @about.capacity %>
 continuing: <%= @about.continuing %>
 initial: <%= @about.initial %>
-apprenticeship: <%= @about.apprenticeship %>
+certifications:
+  qualiopi: 
+    certified: <%= @about.qualiopi_certified %>
+    text: >-
+      <%= prepare_html_for_static @about.qualiopi_text %>
 <%
 [
   :accessibility,

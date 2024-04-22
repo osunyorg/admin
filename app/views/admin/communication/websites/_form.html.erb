@@ -18,6 +18,9 @@
             <div class="col-lg-6">
               <%= f.input :feature_agenda %>
             </div>
+            <div class="col-lg-6">
+              <%= f.input :feature_portfolio %>
+            </div>
           </div>
         <% end %>
 
@@ -102,6 +105,7 @@
         <%= osuny_panel t('metadata') do %>
           <%= f.input :url %>
           <%= f.input :in_production %>
+          <%= f.input :in_showcase, hint: link_to('Voir le showcase', "https://#{ENV['OSUNY_SHOWCASE']}", target: :_blank) %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
         <% end %>
 

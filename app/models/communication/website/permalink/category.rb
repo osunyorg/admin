@@ -1,6 +1,11 @@
+# Ce modèle concerne les catégories de posts, qui n'ont pas de namespace
+# Il pourrait y avoir un namespace, par exemple Blog.
+# Si c'était le cas, le modèle devrait être nommé :
+# Communication::Website::Permalink::Blog::Category
+# Et il faudrait migrer en conséquence
 class Communication::Website::Permalink::Category < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.has_communication_posts? && website.has_communication_categories?
+    website.has_blog_posts? && website.has_blog_categories?
   end
 
   def self.static_config_key
@@ -9,7 +14,11 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   # /actualites/:slug/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug_with_ancestors}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/:slug/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::CommunicationPost
   end
 
   protected

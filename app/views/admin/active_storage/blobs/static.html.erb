@@ -5,6 +5,11 @@ cache [@about, university] do
 <%
 width, height = @about.metadata.values_at('width', 'height')
 ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
+format = 'square'
+if ratio.present?
+  format = 'landscape' if ratio > 1
+  format = 'portrait' if ratio < 1
+end
 base_url = university&.url || ""
 media_endpoint_path = medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)
 %>
@@ -15,6 +20,7 @@ media_endpoint_path = medium_path(signed_id: @about.signed_id, filename_with_tra
   "width" => width,
   "height" => height,
   "ratio" => ratio,
+  "format" => format,
   "url" => "#{base_url}#{media_endpoint_path}",
   "direct_url" => @about.url
 }.compact.to_yaml) %>

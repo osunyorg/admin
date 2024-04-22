@@ -72,9 +72,10 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # En ajoutant l'école, on rajoute en dépendances :
     # - L'école, ses formations, diplômes et sites en cascade (4)
     # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program (2)
+    # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program (2)
     # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms" (5)
     # Donc un total de 3 + 2 + 5 = 10 dépendances
-    assert_equal 11, delta
+    assert_equal 13, delta
 
     Delayed::Job.destroy_all
 

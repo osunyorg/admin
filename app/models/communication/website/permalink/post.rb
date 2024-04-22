@@ -1,6 +1,6 @@
 class Communication::Website::Permalink::Post < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.has_communication_posts?
+    website.has_blog_posts?
   end
 
   def self.static_config_key
@@ -9,7 +9,11 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
 
   # /actualites/2022-10-21-un-article/
   def self.pattern_in_website(website, language)
-    "/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug_with_ancestors}/:year-:month-:day-:slug/"
+    "/#{slug_with_ancestors(website, language)}/:year-:month-:day-:slug/"
+  end
+
+  def self.special_page_type
+    Communication::Website::Page::CommunicationPost
   end
 
   protected

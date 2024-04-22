@@ -10,7 +10,7 @@
 #  contacts               :text
 #  content                :text
 #  continuing             :boolean
-#  duration               :text
+#  duration               :string
 #  evaluation             :text
 #  featured_image_alt     :string
 #  featured_image_credit  :text
@@ -30,6 +30,8 @@
 #  pricing_continuing     :text
 #  pricing_initial        :text
 #  published              :boolean          default(FALSE)
+#  qualiopi_certified     :boolean          default(FALSE)
+#  qualiopi_text          :text
 #  registration           :text
 #  registration_url       :string
 #  results                :text
@@ -40,12 +42,16 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  diploma_id             :uuid             indexed
+#  language_id            :uuid             not null, indexed
+#  original_id            :uuid             indexed
 #  parent_id              :uuid             indexed
 #  university_id          :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_education_programs_on_diploma_id     (diploma_id)
+#  index_education_programs_on_language_id    (language_id)
+#  index_education_programs_on_original_id    (original_id)
 #  index_education_programs_on_parent_id      (parent_id)
 #  index_education_programs_on_slug           (slug)
 #  index_education_programs_on_university_id  (university_id)
@@ -53,11 +59,14 @@
 # Foreign Keys
 #
 #  fk_rails_08b351087c  (university_id => universities.id)
+#  fk_rails_2c27955cee  (original_id => education_programs.id)
+#  fk_rails_e2f027eb9e  (language_id => languages.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
@@ -71,17 +80,16 @@ class Education::Program < ApplicationRecord
   include WithInheritance
   include WithLocations
   include WithMenuItemTarget
-  include WithPermalink
   include WithPosition
   include WithSchools
   include WithTeam
+  include WithTranslations
   include WithTree
   include WithUniversity
   include WithWebsitesCategories
 
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
-                                    :duration,
                                     :evaluation,
                                     :objectives,
                                     :opportunities,
@@ -104,13 +112,16 @@ class Education::Program < ApplicationRecord
 
   has_many   :children,
              class_name: 'Education::Program',
-             foreign_key: :parent_id,
-             dependent: :destroy
+             foreign_key: :parent_id
 
   has_one_attached_deletable :downloadable_summary
+  has_one_attached_deletable :logo
+
+  before_destroy :move_children
 
   validates_presence_of :name
   validates :downloadable_summary, size: { less_than: 50.megabytes }
+  validates :logo, size: { less_than: 5.megabytes }
 
   scope :published, -> { where(published: true) }
   scope :ordered_by_name, -> { order(:name) }
@@ -211,10 +222,18 @@ class Education::Program < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id, downloadable_summary&.blob_id]
+    super.concat [
+      featured_image&.blob_id, 
+      downloadable_summary&.blob_id, 
+      logo&.blob_id
+    ]
   end
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def move_children
+    children.update(parent_id: parent_id)
   end
 end

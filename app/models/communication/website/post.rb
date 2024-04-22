@@ -41,6 +41,7 @@
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method
   include WithAccessibility
@@ -48,7 +49,6 @@ class Communication::Website::Post < ApplicationRecord
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithPermalink
   include WithPublication
   include WithTranslations
   include WithUniversity
@@ -82,7 +82,7 @@ class Communication::Website::Post < ApplicationRecord
     ")
   }
   scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
-  scope :recent, -> { order(published_at: :desc).limit(5) }
+  scope :latest, -> { published.order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
   scope :for_pinned, -> (pinned) { where(pinned: pinned == 'true') }
@@ -97,12 +97,6 @@ class Communication::Website::Post < ApplicationRecord
 
   def published?
     published && published_at && published_at.to_date <= Date.today
-  end
-
-  # Is it used?
-  def path
-    # used in menu_item#static_target
-    "/#{published_at.strftime "%Y/%m/%d"}/#{slug}"
   end
 
   def git_path(website)

@@ -54,6 +54,7 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include Contentful
+  include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
   include WithAccessibility
@@ -65,7 +66,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithType # WithType can set default publication status, so must be included before WithPublication
   include WithPublication
   include WithPosition # Scope :ordered must override WithPublication
-  include WithPermalink
   include WithTranslations
   include WithTree
   include WithPath # Must be included after Sluggable. WithPath overwrites the git_path method defined in WithWebsites
@@ -91,7 +91,7 @@ class Communication::Website::Page < ApplicationRecord
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
-  scope :recent, -> { order(updated_at: :desc).limit(5) }
+  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
   scope :published, -> { where(published: true) }
   scope :ordered_by_title, -> { order(:title) }
 
@@ -138,9 +138,14 @@ class Communication::Website::Page < ApplicationRecord
     parent&.best_featured_image_source
   end
 
+  # La page actuelle a les bodyclass classe1 et classe2 ("classe1 classe2")
+  # Les différents ancêtres ont les classes home, bodyclass et secondclass
+  # -> "page-classe1 page-classe2 ancestor-home ancestor-bodyclass ancestor-secondclass"
   def best_bodyclass
-    return bodyclass if bodyclass.present?
-    parent&.best_bodyclass unless is_home? || parent&.is_home?
+    classes = []
+    classes += add_prefix_to_classes(bodyclass.split(' '), 'page') unless bodyclass.blank?
+    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') unless ancestor_classes.blank?
+    classes.join(' ')
   end
 
   def siblings
@@ -156,6 +161,20 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
+
+  # ["class1", "class2"], "page" -> ["page-class1", "page-class2"]
+  def add_prefix_to_classes(classes, prefix)
+    classes.map { |single_class| "#{prefix}-#{single_class}" }
+  end
+
+  # ["class1", "class2", "class3 class4"] -> ["class1", "class2", "class3", "class4"]
+  def ancestor_classes
+    @ancestor_classes ||= ancestors.pluck(:bodyclass)
+                                   .compact_blank
+                                   .join(' ')
+                                   .split(' ')
+                                   .compact_blank
+  end
 
   def slug_unavailable?(slug)
     self.class.unscoped

@@ -9,12 +9,16 @@ namespace :communication do
       get :security
       get :static
       get :production
+      scope 'git-analysis' do 
+        get '' => 'websites/git_analysis#index', as: :git_analysis
+        post '' => 'websites/git_analysis#launch'
+      end
     end
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'
     resources :dependencies, controller: 'websites/dependencies', only: :index
     resources :connections, controller: 'websites/connections', only: [:index, :show]
-    resources :permalinks, controller: 'websites/permalinks', only: :create
+    resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
         post :reorder
@@ -69,6 +73,25 @@ namespace :communication do
           post :reorder
         end
         member do
+          get :children
+          get :static
+        end
+      end
+    end
+    namespace :portfolio, path: '/:lang/portfolio' do
+      resources :projects, controller: '/admin/communication/websites/portfolio/projects' do
+        member do
+          get :static
+          post :duplicate
+          post :publish
+        end
+      end
+      resources :categories, controller: '/admin/communication/websites/portfolio/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
           get :static
         end
       end
@@ -121,7 +144,11 @@ namespace :communication do
     end
     resources :posts, controller: 'extranets/posts' do
       collection do
-        resources :categories, controller: 'extranets/posts/categories', as: 'post_categories'
+        resources :categories, controller: 'extranets/posts/categories', as: 'post_categories' do
+          member do
+            get :preview
+          end
+        end
       end
       member do
         get :preview

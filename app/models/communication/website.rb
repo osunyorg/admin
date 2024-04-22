@@ -11,12 +11,16 @@
 #  deuxfleurs_hosting      :boolean          default(TRUE)
 #  deuxfleurs_identifier   :string
 #  feature_agenda          :boolean          default(FALSE)
+#  feature_portfolio       :boolean          default(FALSE)
 #  feature_posts           :boolean          default(TRUE)
 #  git_branch              :string
 #  git_endpoint            :string
+#  git_files_analysed_at   :datetime
 #  git_provider            :integer          default("github")
 #  in_production           :boolean          default(FALSE)
-#  name                    :string
+#  in_showcase             :boolean          default(TRUE)
+#  locked_at               :datetime
+#  name                    :string           indexed
 #  plausible_url           :string
 #  repository              :string
 #  social_email            :string
@@ -44,6 +48,7 @@
 #
 #  index_communication_websites_on_about                (about_type,about_id)
 #  index_communication_websites_on_default_language_id  (default_language_id)
+#  index_communication_websites_on_name                 (name) USING gin
 #  index_communication_websites_on_university_id        (university_id)
 #
 # Foreign Keys
@@ -55,6 +60,9 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
+  include FeatureAgenda
+  include FeatureBlog
+  include FeaturePortfolio
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
@@ -64,6 +72,7 @@ class Communication::Website < ApplicationRecord
   include WithGit
   include WithGitRepository
   include WithLanguages
+  include WithLock
   include WithManagers
   include WithProgramCategories
   include WithReferences
@@ -90,11 +99,14 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
+  scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
-    where("
-      unaccent(communication_websites.name) ILIKE unaccent(:term) OR
-      unaccent(communication_websites.url) ILIKE unaccent(:term)
+    joins(:university)
+    .where("
+      unaccent(universities.name) % unaccent(:term) OR
+      unaccent(communication_websites.name) % unaccent(:term) OR
+      unaccent(communication_websites.url) % unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
@@ -118,9 +130,12 @@ class Communication::Website < ApplicationRecord
     post_categories.where(language_id: language_ids) +
     events.where(language_id: language_ids) +
     agenda_categories.where(language_id: language_ids) +
+    projects.where(language_id: language_ids) +
+    portfolio_categories.where(language_id: language_ids) +
     menus.where(language_id: language_ids) +
     [about] +
-    [default_image&.blob]
+    [default_image&.blob] +
+    [default_shared_image&.blob]
   end
 
   def website
@@ -133,17 +148,19 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    return unless website.git_repository.valid?
-    if syncable?
-      Communication::Website::GitFile.sync website, self
-      recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
-      references.each do |object|
-        Communication::Website::GitFile.sync website, object
-      end
+    return unless should_sync_with_git?
+    if locked_for_background_jobs?
+      # Reenqueue
+      sync_with_git
+      return
+    else
+      lock_for_background_jobs!
     end
-    website.git_repository.sync!
+    begin
+      sync_with_git_safely
+    ensure
+      unlock_for_background_jobs!
+    end
   end
   handle_asynchronously :sync_with_git, queue: :default
 
@@ -164,6 +181,17 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def sync_with_git_safely
+    Communication::Website::GitFile.sync website, self
+    recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    references.each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    website.git_repository.sync!
   end
 
   def reconnect_dependency(dependency, new_university_id)

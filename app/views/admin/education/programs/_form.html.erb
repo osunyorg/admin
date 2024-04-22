@@ -29,7 +29,10 @@
             <div class="mb-n3"><%= f.input :continuing %></div>
             <div><%= f.input :apprenticeship %></div>
             <%= f.input :capacity %>
-            <%= f.input :downloadable_summary %>
+            <%= f.input :duration %>
+            <%= f.input :downloadable_summary,
+                        as: :single_deletable_file,
+                        direct_upload: true %>
           </div>
         </div>
       <% end %>
@@ -142,6 +145,21 @@
           </div>
         </div>
       <% end %>
+
+      <%= render 'admin/education/programs/forms/part', part: :certification do %>
+        <div class="row">
+          <div class="col-xxl-6">
+            <%= f.input :qualiopi_certified %>
+          </div>
+          <div class="col-xxl-6">
+            <%= f.input :qualiopi_text,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'link' }
+                      } %>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="col-lg-4 col-xxl-3">
       <%= render 'admin/education/programs/forms/part', part: :technical do %>
@@ -154,6 +172,11 @@
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
         <%= f.input :bodyclass %>
+        <%= f.input :logo,
+                    as: :single_deletable_file,
+                    hint: images_formats_accepted_hint,
+                    input_html: { accept: default_images_formats_accepted }
+                    %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: program, f: f %>
       <%= render 'admin/application/meta_description/form', f: f, about: program %>

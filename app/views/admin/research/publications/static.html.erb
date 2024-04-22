@@ -1,15 +1,10 @@
 <%- cache @about do -%>
-<%
-special_page = @website.special_page(Communication::Website::Page::ResearchPublication)
-pages = special_page.ancestors_and_self if special_page
-%>
 ---
 <%= render 'admin/application/static/title' %>
 date: "<%= @about.publication_date&.iso8601 %>"
-<%= render 'admin/application/static/breadcrumbs',
-            pages: pages,
-            current_title: @about.to_s if pages %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/breadcrumbs' %>
+<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: false, toc_present: false %>
 hal:
   docid: "<%= @about.hal_docid %>"
   url: "<%= @about.hal_url %>"

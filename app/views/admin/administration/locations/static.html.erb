@@ -2,6 +2,7 @@
 ---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
+<%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @website %>
@@ -38,6 +39,7 @@ diplomas:
             all_programs: @about.programs,
             depth: 4 %>
 <% end %>
+<%= render 'admin/application/summary/static' %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%- end -%>

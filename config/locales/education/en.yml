@@ -57,6 +57,7 @@ en:
         is_published: Published
         is_draft: Draft
         locations: Campus
+        logo: Program logo
         main_information: Main information
         name: Name
         objectives: Objectifs
@@ -70,6 +71,8 @@ en:
         pricing_continuing: Costs for continuous training
         pricing_apprenticeship: Costs for apprenticeship
         published: Published?
+        qualiopi_certified: Qualiopi certified program
+        qualiopi_text: Certification details
         registration: Modalités et délais d’accès
         registration_url: Registration link (URL)
         results: Results' indicator
@@ -140,6 +143,9 @@ en:
         admission:
           label: Admission
           hint: How to register.
+        certification:
+          label: Certification
+          hint: Qualiopi legal certification
       registration_scheme: Registration scheme
     roles:
       one: Role
