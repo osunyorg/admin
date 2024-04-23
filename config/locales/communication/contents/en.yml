@@ -359,6 +359,8 @@ en:
               add_partner: Add organization
               alphabetical:
                 label: Alphabetical order
+              category_id:
+                label: Category
               description:
                 label: Description
               element:
@@ -375,6 +377,12 @@ en:
                 url:
                   label: Website
                   placeholder: https://
+              mode:
+                label: Which organizations?
+                options:
+                  category: A specific category
+                  selection: Selected organizations
+              options: Display options
               remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?

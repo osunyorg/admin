@@ -359,6 +359,8 @@ fr:
               add_partner: Ajouter une organisation
               alphabetical:
                 label: Ordre alphabétique
+              category_id:
+                label: Catégorie
               description:
                 label: Description
               element:
@@ -375,6 +377,12 @@ fr:
                 url:
                   label: Site Web
                   placeholder: https://
+              mode:
+                label: Quelles organisations afficher ?
+                options:
+                  category: Une catégorie spécifique
+                  selection: Une sélection d'organisations
+              options: Options d'affichage
               remove_partner: Enlever le partenaire
               with_link:
                 label: Avec des liens cliquables vers les pages des organisations?

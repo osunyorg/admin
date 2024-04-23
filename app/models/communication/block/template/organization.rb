@@ -32,8 +32,8 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
     @organization_ids ||= @elements.collect(&:organization_id).compact.uniq
   end
 
-  def selected_organizations
-    @selected_organizations ||= send "selected_organizations_#{mode}"
+  def selected_elements
+    @selected_elements ||= send "selected_elements_#{mode}"
   end
 
   def children
@@ -46,18 +46,22 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
 
   protected
 
-  def selected_organizations_selection
-    elements.map { |element|
-      post(element.id)
-    }.compact
+  def selected_elements_selection
+    elements
   end
 
-  def selected_organizations_category
+  def selected_elements_category
     return [] unless category
-    university.organizations.joins(:categories)
-                            .where(categories: {id: category.id } )
-                            .distinct
-                            .ordered
-
+    organizations = university.organizations
+                              .joins(:categories)
+                              .where(categories: {id: category.id } )
+                              .distinct
+                              .ordered
+    organizations.map do |organization|
+      # On simule un élément pour l'organisation, afin d'unifier les accès
+      Communication::Block::Template::Organization::Element.new(block, {
+        'id' => organization.id
+      })
+    end
   end
 end
