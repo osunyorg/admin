@@ -443,6 +443,8 @@ en:
               add_person: Add person
               alphabetical:
                 label: Alphabetical order
+              category_id:
+                label: Category
               delete_title: Remove person
               description:
                 label: Description
@@ -451,9 +453,15 @@ en:
                 person:
                   label: Person
                   placeholder: Select the person
-              role:
-                label: Role
-                placeholder: Enter person's role
+                role:
+                  label: Role
+                  placeholder: Enter person's role
+              mode:
+                label: Which persons shall we show?
+                options:
+                  category: A specific category
+                  selection: A selection of persons
+              options: Display options
               with_link:
                 label: With clickable link to each person's page?
               with_photo:
