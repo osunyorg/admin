@@ -2,7 +2,11 @@
 <%= block_component_static block, :description %>
 <%= block_component_static block, :with_link %>
       organizations:
-<% block.template.elements.each do |element| %>
+<% block.template.selected_organizations.each do |element_or_organization| %>
+<% if element_or_organization.is_a?(University::Organization) %>
+<% organization = element_or_organization %>
+        - slug: "<%= organization.slug %>"
+<% else %>
 <% next if element.best_name.blank? %>
 <% if element.organization %>
         - slug: "<%= element.organization.slug %>"
@@ -12,5 +16,6 @@
 <%= block_component_static block, :url, template: element, depth: 5 %>
           external: true
           logo: "<%= element.logo_component.blob&.id %>"
+<% end %>
 <% end %>
 <% end %>

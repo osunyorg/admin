@@ -1,6 +1,11 @@
 class Communication::Block::Template::Person < Communication::Block::Template::Base
 
   has_elements
+  has_component :mode, :option, options: [
+    :selection,
+    :category
+  ]
+  has_component :category_id, :person_category
   has_component :description, :rich_text
   has_component :with_link, :boolean
   has_component :with_photo, :boolean
