@@ -9,6 +9,7 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     # Fixers::ResearchPublicationFixer.run
+    
     english = Language.find_by(iso_code: 'en')
     journal = Research::Journal.find('fd73fb72-a07c-4a34-bb98-615be9667bfc')
     journal.volumes.each do |volume|
