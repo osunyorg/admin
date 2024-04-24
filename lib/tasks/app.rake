@@ -14,7 +14,7 @@ namespace :app do
     journal.volumes.each do |volume|
       volume.update_column :language_id, english.id
     end
-    journal.paper.each do |paper|
+    journal.papers.each do |paper|
       paper.update_column :language_id, english.id
     end
     journal.kinds.each do |kind|
