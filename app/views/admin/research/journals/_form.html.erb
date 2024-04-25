@@ -8,8 +8,8 @@
       <%= render 'admin/application/i18n/form', f: f unless journal.persisted? %>
       <%= render 'admin/application/summary/form', f: f, about: journal %>
       <%= f.input :issn %>
-      </div>
-      <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
       <%= render 'admin/application/meta_description/form', f: f, about: journal %>
     </div>
   </div>
