@@ -38,6 +38,8 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
 
+  validates :title, presence: true
+
   scope :ordered, -> { order(:title) }
 
   def to_s
