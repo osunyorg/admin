@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_055931) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_084700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -147,8 +147,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_055931) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -487,7 +487,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_055931) do
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
 
-  create_table "communication_website_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "website_id", null: false
     t.string "about_type", null: false
@@ -980,6 +980,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_055931) do
     t.datetime "updated_at", null: false
     t.string "issn"
     t.text "summary"
+    t.uuid "language_id", null: false
+    t.index ["language_id"], name: "index_research_journals_on_language_id"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
 
@@ -1432,6 +1434,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_055931) do
   add_foreign_key "research_journal_volumes", "research_journal_volumes", column: "original_id"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
+  add_foreign_key "research_journals", "languages"
   add_foreign_key "research_journals", "universities"
   add_foreign_key "research_laboratories", "universities"
   add_foreign_key "research_laboratory_axes", "research_laboratories"

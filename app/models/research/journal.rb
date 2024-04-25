@@ -25,6 +25,7 @@ class Research::Journal < ApplicationRecord
   include Sanitizable
   include WebsitesLinkable
   include WithGitFiles
+  include WithTranslations
   include WithUniversity
 
   has_many  :communication_websites,

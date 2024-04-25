@@ -35,7 +35,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     @volume.assign_attributes(
       journal: @journal, 
       university: current_university,
-      language_id: current_university.default_language_id
+      language_id: @journal.language_id
     )
     if @volume.save
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
