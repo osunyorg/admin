@@ -2,7 +2,9 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   load_and_authorize_resource class: Research::Journal::Volume, through: :journal
 
   def index
-    @volumes = @volumes.ordered
+    @volumes = @volumes.for_language_id(@journal.language_id)
+                       .ordered
+                       .page(params[:page])
     breadcrumb
   end
 
