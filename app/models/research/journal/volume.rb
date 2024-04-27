@@ -59,6 +59,8 @@ class Research::Journal::Volume < ApplicationRecord
               -> { distinct }, 
               through: :papers
 
+  validates :title, presence: true
+
   scope :ordered, -> { order(number: :desc, published_at: :desc) }
 
   def git_path(website)
