@@ -44,6 +44,8 @@ class Static
     code = code.gsub("\u0092".encode('utf-8'), "'")
     # Same operation with the problematic character itself
     code = code.gsub("", "'")
+    # /u0094
+    code = code.remove("\u0094".encode('utf-8'))
     code
   end
 end
