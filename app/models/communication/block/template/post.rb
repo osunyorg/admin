@@ -23,6 +23,13 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   has_component :hide_author, :boolean
   has_component :hide_date, :boolean
 
+  has_component :option_author,       :boolean, default: false
+  has_component :option_categories,   :boolean, default: false
+  has_component :option_date,         :boolean, default: false
+  has_component :option_image,        :boolean, default: true
+  has_component :option_reading_time, :boolean, default: false
+  has_component :option_summary,      :boolean, default: true
+
   def category
     category_id_component.category
   end

@@ -2,6 +2,8 @@ module Communication::Block::WithTemplate
   extend ActiveSupport::Concern
 
   included do
+    OPTION_PREFIX = 'option_'.freeze
+
     # Used to purge images when unattaching them
     # template_blobs would be a better name, because there are files
     has_many_attached :template_images
@@ -15,6 +17,17 @@ module Communication::Block::WithTemplate
 
   def template_reset!
     @template = nil
+  end
+
+  def options
+    options = {}
+    template.components_descriptions.map do |desc|
+      property = desc[:property].to_s
+      next unless property.start_with?(OPTION_PREFIX)
+      property_without_prefix = property.remove(OPTION_PREFIX)
+      options[property_without_prefix] = template.send(property)
+    end
+    options
   end
 
   protected

@@ -25,7 +25,7 @@ class Communication::Block::Template::Base
     has_component :layout, :layout
   end
 
-  def self.has_component(property, kind, options: nil)
+  def self.has_component(property, kind, options: nil, default: nil)
     self.components_descriptions ||= []
     self.components_descriptions << {
       property: property,

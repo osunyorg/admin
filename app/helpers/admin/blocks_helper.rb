@@ -33,4 +33,9 @@ module Admin::BlocksHelper
             block: block,
             label: label
   end
+
+  def block_options(block)
+    render 'admin/application/static/block_options',
+            block: block
+  end
 end
