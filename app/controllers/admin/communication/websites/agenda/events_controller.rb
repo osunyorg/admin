@@ -4,6 +4,12 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   include Admin::Translatable
 
+  # Allow to override the default load_filters from Admin::Filterable
+  before_action :load_filters, only: :index
+
+  has_scope :for_search_term
+  has_scope :for_category
+
   def index
     @events = apply_scopes(@events).for_language(current_website_language)
                                   .ordered_desc
@@ -89,6 +95,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @website.agenda_categories
             .for_language(current_website_language)
             .ordered
+  end
+
+  def load_filters
+    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(current_user, @website).list
   end
 
   def event_params

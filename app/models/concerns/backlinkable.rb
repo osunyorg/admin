@@ -23,6 +23,13 @@ module Backlinkable
     )
   end
 
+  def backlinks_portfolio_projects(website)
+    backlinks(
+      "Communication::Website::Portfolio::Project",
+      website
+    )
+  end
+
   protected
 
   def backlinks(kind, website)
