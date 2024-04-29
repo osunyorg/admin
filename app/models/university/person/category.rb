@@ -29,10 +29,22 @@ class University::Person::Category < ApplicationRecord
                           join_table: :university_people_categories,
                           foreign_key: :category_id
 
+  validates :name, presence: true
+
   scope :ordered, -> { order(:name) }
 
   def to_s
     "#{name}"
   end
+
+  def dependencies
+    contents_dependencies +
+    [website.config_default_content_security_policy]
+  end
+
+  def references
+    people
+  end
+
 
 end
