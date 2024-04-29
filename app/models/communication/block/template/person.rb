@@ -6,6 +6,9 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   has_component :with_photo, :boolean
   has_component :alphabetical, :boolean
 
+  has_component :option_image,        :boolean, default: true
+  has_component :option_summary,      :boolean, default: true
+
   def elements
     if alphabetical
       @elements.sort_by! do |element|

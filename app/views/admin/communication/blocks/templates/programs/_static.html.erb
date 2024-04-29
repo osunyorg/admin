@@ -1,4 +1,5 @@
       layout: <%= block.template.layout %>
+<%= block_options block %>
       programs:
 <% block.template.elements.each do |element| %>
 <% next unless element.program %>

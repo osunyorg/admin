@@ -15,6 +15,9 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   has_component :show_description, :boolean
   has_component :show_image, :boolean
 
+  has_component :option_image,        :boolean, default: true
+  has_component :option_summary,      :boolean, default: true
+
   def page
     page_id_component.page
   end

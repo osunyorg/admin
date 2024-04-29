@@ -28,6 +28,12 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :show_status, :boolean
   has_component :no_event_message, :string
 
+  has_component :option_categories,   :boolean, default: false
+  has_component :option_dates,        :boolean, default: true
+  has_component :option_image,        :boolean, default: true
+  has_component :option_subtitle,     :boolean, default: true
+  has_component :option_summary,      :boolean, default: true
+
   def selected_events
     @selected_events ||= send "selected_events_#{mode}"
   end
