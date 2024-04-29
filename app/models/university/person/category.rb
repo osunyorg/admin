@@ -38,8 +38,7 @@ class University::Person::Category < ApplicationRecord
   end
 
   def dependencies
-    contents_dependencies +
-    [website.config_default_content_security_policy]
+    contents_dependencies
   end
 
   def references
