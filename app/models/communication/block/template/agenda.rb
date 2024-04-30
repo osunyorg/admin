@@ -33,6 +33,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :option_image,        :boolean, default: true
   has_component :option_subtitle,     :boolean, default: true
   has_component :option_summary,      :boolean, default: true
+  has_component :option_status,       :boolean, default: false
 
   def selected_events
     @selected_events ||= send "selected_events_#{mode}"

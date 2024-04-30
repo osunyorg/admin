@@ -133,6 +133,7 @@ fr:
         from_day: Jour de début
         from_hour: Heure de début
         published: Publié
+        status: Statut
         status_current: En cours
         status_future: À venir
         status_archive: Archive
@@ -199,12 +200,14 @@ fr:
         author: Auteur·rice
         category: Catégorie
         categories: Catégories
+        date: Date
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
         pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication
+        reading_time: Temps de lecture
         slug: Identifiant
         text: Texte
         title: Titre

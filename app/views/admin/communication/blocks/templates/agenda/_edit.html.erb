@@ -1,6 +1,15 @@
-<div class="row pure__row--small">
+<div class="row pure__row--small mb-5">
   <div class="col-xl-6">
     <%= block_component_edit block, :description %>
+  </div>
+  <div class="col-xl-6" v-if="data.mode !== 'categories'">
+    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+    <%= block_component_edit block, :option_image, label: Communication::Website::Agenda::Event.human_attribute_name(:featured_image) %>
+    <%= block_component_edit block, :option_subtitle, label: Communication::Website::Agenda::Event.human_attribute_name(:subtitle) %>
+    <%= block_component_edit block, :option_summary, label: t('admin.summary.label')%>
+    <%= block_component_edit block, :option_dates, label: Communication::Website::Agenda::Event.human_attribute_name(:dates) %>
+    <%= block_component_edit block, :option_categories, label: Communication::Website::Agenda::Event.human_attribute_name(:categories) %>
+    <%= block_component_edit block, :option_status, label: Communication::Website::Agenda::Event.human_attribute_name(:status) %>
   </div>
 </div>
 
@@ -51,14 +60,5 @@
       </div>
     </draggable>
   </div>
-
-  <div class="row pure__row--small">
-    <div class="col-xl-6">
-      <%= osuny_label t('admin.communication.blocks.templates.agenda.edit.show.label') %>
-      <%= block_component_edit block, :show_summary %>
-      <%= block_component_edit block, :show_category %>
-      <%= block_component_edit block, :show_status %>
-      <%= block_component_edit block, :no_event_message %>
-    </div>
-  </div>
+  <%= block_component_edit block, :no_event_message %>
 </div>

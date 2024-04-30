@@ -3,12 +3,13 @@
     <%= block_component_edit block, :mode %>
   </div>
   <div class="col-lg-6">
-    <%= osuny_label t('.display.title') %>
-    <%= block_component_edit block, :hide_image %>
-    <%= block_component_edit block, :hide_summary %>
-    <%= block_component_edit block, :hide_category %>
-    <%= block_component_edit block, :hide_author %>
-    <%= block_component_edit block, :hide_date %>
+    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+    <%= block_component_edit block, :option_image, label: Communication::Website::Post.human_attribute_name(:featured_image) %>
+    <%= block_component_edit block, :option_summary, label: t('admin.summary.label')%>
+    <%= block_component_edit block, :option_author, label: Communication::Website::Post.human_attribute_name(:author) %>
+    <%= block_component_edit block, :option_date, label: Communication::Website::Post.human_attribute_name(:date) %>
+    <%= block_component_edit block, :option_categories, label: Communication::Website::Post.human_attribute_name(:categories) %>
+    <%= block_component_edit block, :option_reading_time, label: Communication::Website::Post.human_attribute_name(:reading_time) %>
   </div>
 </div>
 <div v-if="data.mode !== 'categories'">
@@ -39,4 +40,7 @@
       </a>
     </div>
   </draggable>
+</div>
+<div v-show="data.elements.length > 2">
+  <%= block_component_add_element block, t('.add_post') %>
 </div>

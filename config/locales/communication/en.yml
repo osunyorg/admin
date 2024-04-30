@@ -133,6 +133,7 @@ en:
         from_day: From day
         from_hour: From hour
         published: Published
+        status: Status
         status_current: Running now
         status_future: In the future
         status_archive: Archive
@@ -199,12 +200,14 @@ en:
         author: Author
         category: Category
         categories: Categories
+        date: Date
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
         pinned: Pinned
         published: Published?
         published_at: Publication date
+        reading_time: Reading time
         slug: Slug
         text: Text
         title: Title

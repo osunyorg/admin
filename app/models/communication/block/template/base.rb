@@ -30,7 +30,8 @@ class Communication::Block::Template::Base
     self.components_descriptions << {
       property: property,
       kind: kind,
-      options: options
+      options: options,
+      default: default
     }
     class_eval <<-CODE, __FILE__, __LINE__ + 1
 
@@ -104,7 +105,8 @@ class Communication::Block::Template::Base
     component_class = "Communication::Block::Component::#{hash[:kind].to_s.classify}".constantize
     component_class.new hash[:property],
                         self,
-                        hash[:options]
+                        options: hash[:options],
+                        default: hash[:default]
   end
 
   def check_accessibility

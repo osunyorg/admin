@@ -1,7 +1,13 @@
 class Communication::Block::Component::Boolean < Communication::Block::Component::Base
 
   def default_data
-    false
+    @default.nil? ? false 
+                  : @default
+  end
+
+  def data
+    @data.nil?  ? default_data
+                : @data
   end
 
   def data=(value)

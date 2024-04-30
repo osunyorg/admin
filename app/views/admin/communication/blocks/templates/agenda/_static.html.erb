@@ -1,4 +1,5 @@
 <%= block_component_static block, :mode %>
+<%= block_options block %>
 <%= block_component_static block, :layout %>
 <%= block_component_static block, :description %>
 <%= block_component_static block, :no_event_message %>
@@ -9,7 +10,6 @@
 <% if block.template.mode == 'category' && block.template.category %>
       category: "<%= block.template.category.path %>"
 <% end %>
-<%= block_options block %>
       events:
 <% block.template.selected_events.each do |element| %>
         - path: "<%= element.current_permalink_in_website(@website)&.path %>"

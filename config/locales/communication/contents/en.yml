@@ -54,6 +54,8 @@ en:
           time_slot:
             from: From
             to: to
+        display_options:
+          title: Display options
         empty: This block is empty and will not appear
         headings:
           add: Add a title
@@ -84,8 +86,6 @@ en:
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
-              show:
-                label: Display settings
               show_category:
                 label: Show events' categories
               show_status:
@@ -95,7 +95,7 @@ en:
               time:
                 label: What event dates should be displayed?
                 options:
-                  archive: Past, archives
+                  archive: Past (archives)
                   current: Running now
                   future: In the future, not started yet
                   future_or_current: Now and in the future
@@ -356,7 +356,7 @@ en:
           organizations:
             description: A list of organizations with logo, name and website.
             edit:
-              add_partner: Add organization
+              add_organization: Add organization
               alphabetical:
                 label: Alphabetical order
               description:
@@ -375,6 +375,8 @@ en:
                 url:
                   label: Website
                   placeholder: https://
+              option_logo:
+                label: Logo
               remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
@@ -388,8 +390,6 @@ en:
           pages:
             description: A highlight of some pages, with multiple layout options.
             edit:
-              display:
-                title: Layout options
               main_page:
                 title: Main page
               mode:
@@ -402,7 +402,7 @@ en:
                 label: Select the main page
                 none: No page selected
               selection:
-                add: Select a page
+                add: Add a page
                 label: Page
                 none: No page
                 title: Selected pages
@@ -411,7 +411,7 @@ en:
               show_image:
                 label: Show pages images
               show_main_description:
-                label: Show main page short description
+                label: Show main page summary
             layouts:
               alternate:
                 description: Pages either on the left or on the right, composing a graphically light layout.
@@ -447,7 +447,7 @@ en:
                 label: Role
                 placeholder: Enter person's role
               with_link:
-                label: With clickable link to each person's page?
+                label: Clickable link to person's page
               with_photo:
                 label: With a portrait for each person?
           posts:
@@ -457,8 +457,6 @@ en:
               category_id:
                 label: Category
                 placeholder: Select category
-              display:
-                title: Layout options
               element:
                 id:
                   label: ''
