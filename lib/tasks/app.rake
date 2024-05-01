@@ -8,10 +8,37 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
+    Communication::Block.agenda.find_each do |block|
+      template = block.template
+      template.option_categories    = template.show_category
+      template.option_summary       = template.show_description
+      template.option_status        = template.show_status
+      block.save
+    end
+    Communication::Block.organizations.find_each do |block|
+      template = block.template
+      template.option_link          = template.with_link
+      block.save
+    end
     Communication::Block.pages.find_each do |block|
       template = block.template
-      template.option_image = template.show_image
-      template.option_summary = template.show_description
+      template.option_image         = template.show_image
+      template.option_summary       = template.show_description
+      block.save
+    end
+    Communication::Block.persons.find_each do |block|
+      template = block.template
+      template.option_image         = template.with_photo
+      template.option_link          = template.with_link
+      block.save
+    end
+    Communication::Block.posts.find_each do |block|
+      template = block.template    
+      template.option_author        = !template.hide_author
+      template.option_categories    = !template.hide_category
+      template.option_date          = !template.hide_date
+      template.option_image         = !template.hide_image
+      template.option_summary       = !template.hide_summary
       block.save
     end
   end

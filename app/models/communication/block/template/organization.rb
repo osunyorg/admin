@@ -3,8 +3,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_elements
   has_layouts [:grid, :map]
   has_component :description, :rich_text
-  has_component :with_link, :boolean
   has_component :alphabetical, :boolean
+  
+  # Deprecated
+  has_component :with_link, :boolean
+  # end
 
   has_component :option_link,         :boolean, default: true
   has_component :option_logo,         :boolean, default: true
