@@ -12,8 +12,11 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   has_component :text, :rich_text
   has_component :page_id, :page
   has_component :show_main_description, :boolean
+
+  # Deprecated
   has_component :show_description, :boolean
   has_component :show_image, :boolean
+  # end
 
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true

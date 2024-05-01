@@ -8,18 +8,11 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    # Fixers::ResearchPublicationFixer.run
-    
-    english = Language.find_by(iso_code: 'en')
-    journal = Research::Journal.find('fd73fb72-a07c-4a34-bb98-615be9667bfc')
-    journal.volumes.each do |volume|
-      volume.update_column :language_id, english.id
-    end
-    journal.papers.each do |paper|
-      paper.update_column :language_id, english.id
-    end
-    journal.kinds.each do |kind|
-      kind.update_column :language_id, english.id
+    Communication::Block.pages.find_each do |block|
+      template = block.template
+      template.option_image = template.show_image
+      template.option_summary = template.show_description
+      block.save
     end
   end
 
