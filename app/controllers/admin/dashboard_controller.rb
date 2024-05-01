@@ -5,7 +5,8 @@ class Admin::DashboardController < Admin::ApplicationController
     @namespaces << Research if feature_research?
     @namespaces << Communication if feature_communication?
     @namespaces << Administration if feature_administration?
-    @background_tasks_count = Delayed::Job.where.not(queue: 'cleanup').length
+    # higher priorities are negatives. Default is priority 0
+    @background_tasks_count = Delayed::Job.where('priority <= 0').length
     breadcrumb
   end
 end
