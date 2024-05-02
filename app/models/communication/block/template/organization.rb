@@ -20,6 +20,10 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
     @elements
   end
 
+  def dependencies
+    organizations
+  end
+
   def category
     category_id_component.category
   end

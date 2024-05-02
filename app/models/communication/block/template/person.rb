@@ -20,6 +20,10 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
     @elements
   end
 
+  def dependencies
+    persons
+  end
+
   def selected_elements
     @selected_elements ||= send "selected_elements_#{mode}"
   end
