@@ -84,7 +84,8 @@ class Research::Journal::Paper < ApplicationRecord
 
   validates :title, presence: true
 
-  scope :ordered, -> { order(:position, published_at: :desc, created_at: :desc) }
+  scope :ordered, -> { order(published_at: :desc) }
+  scope :ordered_by_position, -> { order(:position) }
 
   def git_path(website)
     "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
