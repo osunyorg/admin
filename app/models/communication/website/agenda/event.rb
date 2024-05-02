@@ -85,7 +85,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     )
     .distinct
   }
-
+  scope :for_search_term, -> (term) {
+    where("
+      unaccent(communication_website_agenda_events.meta_description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_events.summary) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_events.title) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_events.subtitle) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
   def git_path(website)
     return unless website.id == communication_website_id && published
     git_path_content_prefix(website) + git_path_relative

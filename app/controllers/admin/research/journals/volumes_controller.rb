@@ -2,12 +2,14 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   load_and_authorize_resource class: Research::Journal::Volume, through: :journal
 
   def index
-    @volumes = @volumes.ordered
+    @volumes = @volumes.for_language_id(@journal.language_id)
+                       .ordered
+                       .page(params[:page])
     breadcrumb
   end
 
   def show
-    @papers = @volume.papers.ordered
+    @papers = @volume.papers.ordered_by_position
     breadcrumb
   end
 
@@ -32,7 +34,11 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
 
   def create
     @volume.add_photo_import params[:photo_import]
-    @volume.assign_attributes(journal: @journal, university: current_university)
+    @volume.assign_attributes(
+      journal: @journal, 
+      university: current_university,
+      language_id: @journal.language_id
+    )
     if @volume.save
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
     else

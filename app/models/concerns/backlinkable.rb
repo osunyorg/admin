@@ -3,7 +3,7 @@ module Backlinkable
 
   def backlinks_pages(website)
     backlinks(
-      Communication::Website::Page,
+      "Communication::Website::Page",
       website
     )
     .reject { |page| page.is_special_page? }
@@ -11,14 +11,21 @@ module Backlinkable
 
   def backlinks_posts(website)
     backlinks(
-      Communication::Website::Post,
+      "Communication::Website::Post",
       website
     )
   end
 
   def backlinks_agenda_events(website)
     backlinks(
-      Communication::Website::Agenda::Event,
+      "Communication::Website::Agenda::Event",
+      website
+    )
+  end
+
+  def backlinks_portfolio_projects(website)
+    backlinks(
+      "Communication::Website::Portfolio::Project",
       website
     )
   end
@@ -26,15 +33,29 @@ module Backlinkable
   protected
 
   def backlinks(kind, website)
-    backlinks_blocks(website).published.map { |block|
-      block.about if backlink_in_block?(block, kind)
+    backlinks_object_ids = published_backlinks_blocks(website).map { |block|
+      block.about_id if backlink_in_block?(block, kind, website)
     }.compact
+    kind.safe_constantize.published.where(communication_website_id: website.id, id: backlinks_object_ids)
   end
 
-  def backlink_in_block?(block, kind)
-    block.about.is_a?(kind) && # Correct kind
-    self.in?(block.template.children) && # Mentioning self
-    block.about.published? # About published
+  def backlink_in_block?(block, kind, website)
+    block.about_type == kind && # Correct kind
+    block.about_id.in?(published_backlinks_object_ids(website, kind)) && # About published
+    self.id.in?(block.template.children_ids) # Mentioning self
+  end
+
+  def published_backlinks_object_ids(website, kind)
+    # Memoize to avoid multiple queries for the same website and kind
+    @published_backlinks_object_ids ||= {}
+    @published_backlinks_object_ids[website.id] ||= {}
+    @published_backlinks_object_ids[website.id][kind] ||= kind.safe_constantize.published.where(communication_website_id: website.id).pluck(:id)
+  end
+
+  def published_backlinks_blocks(website)
+    # Memoize to avoid multiple queries for the same website
+    @published_backlinks_blocks ||= {}
+    @published_backlinks_blocks[website.id] ||= backlinks_blocks(website).published
   end
 
   def backlinks_blocks(website)

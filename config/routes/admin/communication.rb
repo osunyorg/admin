@@ -9,6 +9,10 @@ namespace :communication do
       get :security
       get :static
       get :production
+      scope 'git-analysis' do 
+        get '' => 'websites/git_analysis#index', as: :git_analysis
+        post '' => 'websites/git_analysis#launch'
+      end
     end
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'

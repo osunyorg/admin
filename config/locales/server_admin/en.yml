@@ -53,9 +53,9 @@ en:
       clean_and_rebuild_all_websites_notice: All themes will be updated. This can take a few minutes.
       connections_count: "%{count} connexions"
       details: detail
-      events_count: "%{count} events"      
+      events_count: "%{count} events"
       force_clean_and_rebuild: Force clean&rebuild of every websites
-      git_repo: 
+      git_repo:
         full: Git Repository
         short: Repository
         status: Status
@@ -70,6 +70,8 @@ en:
       sync_theme_version_notice: The theme's version of %{website} has been synced
       theme_version: Theme version
       university_html: "University: %{university}"
+      unlock_for_background_jobs_btn: Unlock for background jobs
+      unlock_for_background_jobs_notice: The website is unlocked for background jobs.
       update_all_themes: Sync all themes versions
       update_mode: Update mode
       updatable_theme_filter:

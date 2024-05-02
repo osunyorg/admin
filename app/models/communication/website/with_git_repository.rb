@@ -2,9 +2,22 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
-    has_many :website_git_files,
-             class_name: 'Communication::Website::GitFile',
-             dependent: :destroy
+    has_many  :website_git_files,
+              class_name: 'Communication::Website::GitFile',
+              dependent: :destroy
+              alias_method :git_files, :website_git_files
+
+    has_many  :website_git_file_orphans,
+              foreign_key: :communication_website_id,
+              class_name: 'Communication::Website::GitFile::Orphan',
+              dependent: :destroy
+              alias_method :git_file_orphans, :website_git_file_orphans
+
+    has_many  :website_git_file_layouts,
+              foreign_key: :communication_website_id,
+              class_name: 'Communication::Website::GitFile::Layout',
+              dependent: :destroy
+              alias_method :git_file_layouts, :website_git_file_layouts
 
     after_save :destroy_obsolete_git_files, if: :should_clean_on_git?
 
@@ -22,12 +35,13 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    return unless git_repository.valid?
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      sync_indirect_object_with_git(indirect_object)
+      delay(run_at: 1.minute.from_now, queue: :default)
+        .sync_indirect_object_with_git_without_delay(indirect_object)
       return
     else
+      return unless git_repository.valid?
       lock_for_background_jobs!
     end
     begin
@@ -40,12 +54,13 @@ module Communication::Website::WithGitRepository
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
-    return unless git_repository.valid?
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      destroy_obsolete_git_files
+      delay(run_at: 1.minute.from_now, queue: :cleanup)
+        .destroy_obsolete_git_files_without_delay
       return
     else
+      return unless git_repository.valid?
       lock_for_background_jobs!
     end
     begin
@@ -78,12 +93,13 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
-    return unless git_repository.valid?
     if locked_for_background_jobs?
       # Website already locked, we reenqueue the job
-      update_theme_version
+      delay(run_at: 1.minute.from_now, queue: :default)
+        .update_theme_version_without_delay
       return
     else
+      return unless git_repository.valid?
       lock_for_background_jobs!
     end
     begin

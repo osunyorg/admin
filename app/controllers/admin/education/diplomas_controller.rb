@@ -28,6 +28,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   def create
     @diploma.university = current_university
+    @diploma.language_id = current_university.default_language_id
     if @diploma.save
       redirect_to [:admin, @diploma],
                   notice: t('admin.successfully_created_html', model: @diploma.to_s)

@@ -29,8 +29,20 @@ class Server::WebsitesController < Server::ApplicationController
     @website.update_theme_version
   end
 
+  def unlock_for_background_jobs
+    @website.unlock_for_background_jobs!
+    redirect_back(fallback_location: server_website_path(@website), notice: t('server_admin.websites.unlock_for_background_jobs_notice'))
+  end
+
   def show
+    @layouts = @website.git_file_layouts.ordered
     breadcrumb
+  end
+
+  def analyse
+    Git::OrphanAndLayoutAnalyzer.new(@website).launch
+    redirect_back fallback_location: server_website_path(@website),
+                  notice: t('admin.communication.website.git_file.analysis.launched')
   end
 
   def edit

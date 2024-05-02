@@ -9,14 +9,17 @@
 #  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  language_id      :uuid             not null, indexed
 #  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_research_journals_on_language_id    (language_id)
 #  index_research_journals_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_7d3b3f3e79  (language_id => languages.id)
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
@@ -25,6 +28,7 @@ class Research::Journal < ApplicationRecord
   include Sanitizable
   include WebsitesLinkable
   include WithGitFiles
+  include WithTranslations
   include WithUniversity
 
   has_many  :communication_websites,
