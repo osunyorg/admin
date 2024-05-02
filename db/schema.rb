@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_084700) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_02_140949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1115,6 +1115,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_084700) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_organization_categories_on_language_id"
+    t.index ["original_id"], name: "index_university_organization_categories_on_original_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
 
@@ -1217,6 +1221,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_084700) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_person_categories_on_language_id"
+    t.index ["original_id"], name: "index_university_person_categories_on_original_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end
 
@@ -1445,7 +1453,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_084700) do
   add_foreign_key "research_theses", "university_people", column: "director_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
+  add_foreign_key "university_organization_categories", "languages"
   add_foreign_key "university_organization_categories", "universities"
+  add_foreign_key "university_organization_categories", "university_organization_categories", column: "original_id"
   add_foreign_key "university_organizations", "languages"
   add_foreign_key "university_organizations", "universities"
   add_foreign_key "university_organizations", "university_organizations", column: "original_id"
@@ -1457,7 +1467,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_084700) do
   add_foreign_key "university_people", "users"
   add_foreign_key "university_people_categories", "university_people", column: "person_id"
   add_foreign_key "university_people_categories", "university_person_categories", column: "category_id"
+  add_foreign_key "university_person_categories", "languages"
   add_foreign_key "university_person_categories", "universities"
+  add_foreign_key "university_person_categories", "university_person_categories", column: "original_id"
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
   add_foreign_key "university_person_experiences", "university_people", column: "person_id"

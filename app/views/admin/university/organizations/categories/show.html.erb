@@ -1,5 +1,7 @@
 <% content_for :title, @category %>
 
+<%= render 'admin/application/i18n/widget', about: @category, small: true %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>
   <%= static_link static_admin_university_organization_category_path(@category) %>
