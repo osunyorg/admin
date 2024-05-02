@@ -78,6 +78,27 @@ module WithDependencies
     @recursive_dependencies_syncable_following_direct ||= recursive_dependencies(syncable_only: true, follow_direct: true)
   end
 
+  def recursive_dependencies_include?(object, array: [], syncable_only: false, follow_direct: false)
+    # On s'arrête si la dépendance n'est pas synchronisable en mode syncable_only
+    return false unless dependency_should_be_synced?(self, syncable_only)
+    dependencies.each do |dependency|
+      # On passe à la dépendance suivante si elle a déjà été traitée, ou si elle n'est pas synchronisable en mode syncable_only
+      next unless dependency_should_be_added?(array, dependency, syncable_only)
+      # Si la dépendance est l'objet recherché, on renvoie true
+      return true if dependency == object
+      # Si on ne doit pas suivre les objets directs et que la dépendance en est une, on passe à la dépendance suivante
+      next if !follow_direct && dependency.try(:is_direct_object?)
+      # Si la dépendance n'a pas de méthode pour les dépendances récursives, on passe à la dépendance suivante
+      next unless dependency.respond_to?(:recursive_dependencies)
+      # On stocke la dépendance dans l'array pour la noter comme traitée et éviter les boucles infinies
+      array << dependency
+      # On appelle la méthode récursivement pour rechercher l'objet dans les dépendances de la dépendance
+      return true if dependency.recursive_dependencies_include?(object, array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+    end
+    # Si on arrive ici, c'est que l'objet n'a pas été trouvé dans les dépendances récursives
+    false
+  end
+
   protected
 
   def recursive_dependencies_add(array, dependency, syncable_only, follow_direct)

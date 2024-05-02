@@ -123,6 +123,7 @@ module Communication::Website::WithGitRepository
     website_git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
+      # We don't use recursive_dependencies_include? as recursive_dependencies_syncable_following_direct is loaded once (TODO: is it better?)
       is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
       if is_obsolete
         Communication::Website::GitFile.mark_for_destruction(self, git_file)

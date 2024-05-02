@@ -50,6 +50,6 @@ class Communication::Website::Connection < ApplicationRecord
   protected
 
   def obsolete?
-    !indirect_object.in?(direct_source.recursive_dependencies)
+    !direct_source.recursive_dependencies_include?(indirect_object)
   end
 end
