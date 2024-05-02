@@ -61,7 +61,7 @@ class Research::Journal::Volume < ApplicationRecord
 
   validates :title, presence: true
 
-  scope :ordered, -> { order(number: :desc, published_at: :desc) }
+  scope :ordered, -> { order(published_at: :desc, number: :desc) }
 
   def git_path(website)
     "#{git_path_content_prefix(website)}volumes#{path}/_index.html" if published_at
