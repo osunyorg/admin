@@ -11,6 +11,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def show
+    @organizations = @category.organizations.ordered.page(params[:page])
     breadcrumb
   end
 

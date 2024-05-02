@@ -11,6 +11,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   def show
+    @people = @category.people.ordered.page(params[:page])
     breadcrumb
   end
 

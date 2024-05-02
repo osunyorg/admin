@@ -1,6 +1,19 @@
 <% content_for :title, @category %>
 
-<%= render 'admin/application/i18n/widget', about: @category, small: true %>
+<div class="row">
+  <div class="col-lg-8">
+    <% if @organizations.total_count > 0 %>
+      <%= osuny_panel University::Organization.model_name.human(count: 2),
+                      subtitle: "#{@organizations.total_count} #{University::Organization.model_name.human(count: @organizations.total_count).downcase }" do %>
+        <%= render 'admin/university/organizations/list', organizations: @organizations %>
+        <%= paginate @organizations, theme: 'bootstrap-5' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-lg-4">
+    <%= render 'admin/application/i18n/widget', about: @category %>
+  </div>
+</div>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>
