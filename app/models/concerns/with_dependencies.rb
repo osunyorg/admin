@@ -82,14 +82,8 @@ module WithDependencies
     # On s'arrête si la dépendance n'est pas synchronisable en mode syncable_only
     return false unless dependency_should_be_synced?(self, syncable_only)
     dependencies.each do |dependency|
-      # On passe à la dépendance suivante si elle a déjà été traitée, ou si elle n'est pas synchronisable en mode syncable_only
-      next unless dependency_should_be_added?(array, dependency, syncable_only)
-      # Si la dépendance est l'objet recherché, on renvoie true
-      return true if dependency == object
-      # Sinon on note la dépendance comme déjà traitée
-      array << dependency
-      # On appelle la méthode récursivement pour rechercher l'objet dans les dépendances de la dépendance
-      return true if can_search_in_dependency?(dependency, follow_direct) && dependency.recursive_dependencies_include?(object, array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+      array, return_value = recursive_dependencies_search(object, array, dependency, syncable_only, follow_direct)
+      return true if return_value == true
     end
     # Si on arrive ici, c'est que l'objet n'a pas été trouvé dans les dépendances récursives
     false
@@ -104,6 +98,23 @@ module WithDependencies
     array << dependency
     return array unless can_search_in_dependency?(dependency, follow_direct)
     dependency.recursive_dependencies(array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+  end
+
+  def recursive_dependencies_search(object, array, dependency, syncable_only, follow_direct)
+    result = [array, false]
+    # On passe à la dépendance suivante si elle a déjà été traitée, ou si elle n'est pas synchronisable en mode syncable_only
+    return result unless dependency_should_be_added?(array, dependency, syncable_only)
+    # Si la dépendance est l'objet recherché, on renvoie true
+    if dependency == object
+      result[1] = true
+      return result
+    end
+    # Sinon on note la dépendance comme déjà traitée
+    array << dependency
+    return result unless can_search_in_dependency?(dependency, follow_direct)
+    # On appelle la méthode récursivement pour rechercher l'objet dans les dépendances de la dépendance
+    result[1] = dependency.recursive_dependencies_include?(object, array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+    result
   end
 
   def can_search_in_dependency?(dependency, follow_direct)
