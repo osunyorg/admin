@@ -88,10 +88,8 @@ module WithDependencies
       return true if dependency == object
       # Sinon on note la dépendance comme déjà traitée
       array << dependency
-      # On vérifie qu'on peut vérifier dans la dépendance
-      next unless can_search_in_dependency?(dependency, follow_direct)
       # On appelle la méthode récursivement pour rechercher l'objet dans les dépendances de la dépendance
-      return true if dependency.recursive_dependencies_include?(object, array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+      return true if can_search_in_dependency?(dependency, follow_direct) && dependency.recursive_dependencies_include?(object, array: array, syncable_only: syncable_only, follow_direct: follow_direct)
     end
     # Si on arrive ici, c'est que l'objet n'a pas été trouvé dans les dépendances récursives
     false
