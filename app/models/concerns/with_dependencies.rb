@@ -86,12 +86,10 @@ module WithDependencies
       next unless dependency_should_be_added?(array, dependency, syncable_only)
       # Si la dépendance est l'objet recherché, on renvoie true
       return true if dependency == object
-      # Si on ne doit pas suivre les objets directs et que la dépendance en est une, on passe à la dépendance suivante
-      next if !follow_direct && dependency.try(:is_direct_object?)
-      # Si la dépendance n'a pas de méthode pour les dépendances récursives, on passe à la dépendance suivante
-      next unless dependency.respond_to?(:recursive_dependencies)
-      # On stocke la dépendance dans l'array pour la noter comme traitée et éviter les boucles infinies
+      # Sinon on note la dépendance comme déjà traitée
       array << dependency
+      # On vérifie qu'on peut vérifier dans la dépendance
+      next unless can_search_in_dependency?(dependency, follow_direct)
       # On appelle la méthode récursivement pour rechercher l'objet dans les dépendances de la dépendance
       return true if dependency.recursive_dependencies_include?(object, array: array, syncable_only: syncable_only, follow_direct: follow_direct)
     end
@@ -106,9 +104,16 @@ module WithDependencies
     # C'est le fait de couper ici qui évite la boucle infinie
     return array unless dependency_should_be_added?(array, dependency, syncable_only)
     array << dependency
-    return array if !follow_direct && dependency.try(:is_direct_object?)
-    return array unless dependency.respond_to?(:recursive_dependencies)
+    return array unless can_search_in_dependency?(dependency, follow_direct)
     dependency.recursive_dependencies(array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+  end
+
+  def can_search_in_dependency?(dependency, follow_direct)
+    # Si on ne doit pas suivre les objets directs et que la dépendance en est une, on passe à la dépendance suivante
+    return false if !follow_direct && dependency.try(:is_direct_object?)
+    # Si la dépendance n'a pas de méthode pour les dépendances récursives, on passe à la dépendance suivante
+    return false unless dependency.respond_to?(:recursive_dependencies)
+    true
   end
 
   # Si l'objet est déjà là, on ne doit pas l'ajouter
