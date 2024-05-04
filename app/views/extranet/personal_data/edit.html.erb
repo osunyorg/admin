@@ -14,7 +14,7 @@
       <%= f.input :birthdate, discard_year: true, include_blank: true %>
     </div>
     <div class="col-md-8">
-      <%= f.input :biography, 
+      <%= f.input :biography,
                   as: :summernote,
                   input_html: {
                     data: { 'summernote-config' => 'mini' }
@@ -29,11 +29,15 @@
   <div class="row">
     <div class="col-md-4">
       <%= f.input :phone_mobile %>
+      <%= f.input :phone_mobile_visibility, include_blank: false %>
       <%= f.input :phone_professional %>
+      <%= f.input :phone_professional_visibility, include_blank: false %>
       <%= f.input :phone_personal %>
+      <%= f.input :phone_personal_visibility, include_blank: false %>
     </div>
     <div class="col-md-8">
       <%= f.input :address %>
+      <%= f.input :address_visibility, include_blank: false %>
       <div class="row">
         <div class="col-md-4">
           <%= f.input :zipcode %>
@@ -62,9 +66,11 @@
     </div>
     <div class="col-md-6">
       <%= f.input :linkedin %>
+      <%= f.input :linkedin_visibility, include_blank: false %>
     </div>
     <div class="col-md-6">
       <%= f.input :twitter %>
+      <%= f.input :twitter_visibility, include_blank: false %>
     </div>
   </div>
 

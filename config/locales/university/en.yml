@@ -57,6 +57,7 @@ en:
       university/person:
         abilities: Abilities
         address: Address
+        address_visibility: Address visibility
         administration: Administrative staff
         alumnus: Alumnus
         author: Author
@@ -69,6 +70,7 @@ en:
         country: Country
         education_programs: Programs
         email: Email
+        email_visibility: Email visibility
         essentials: Essentials
         first_name: First name
         gender: Gender
@@ -87,10 +89,16 @@ en:
         is_teacher: Teacher
         last_name: Last name
         linkedin: LinkedIn URL
+        linkedin_visibility: LinkedIn URL visibility
+        mastodon: Mastodon username
+        mastodon_visibility: Mastodon username visibility
         name: Name
         phone_mobile: Mobile phone
+        phone_mobile_visibility: Mobile phone visibility
         phone_personal: Personal phone
+        phone_personal_visibility: Personal phone visibility
         phone_professional: Professional phone
+        phone_professional_visibility: Professional phone visibility
         picture: Profile picture
         picture_credit: Credit
         research_journal_papers: Papiers
@@ -102,6 +110,7 @@ en:
         teacher: Teacher
         tenure: Has tenure?
         twitter: Twitter username
+        twitter_visibility: Twitter username visibility
         url: Website
         user: User
         zipcode: Zipcode
@@ -191,6 +200,7 @@ en:
         is_researcher: "Writes papers for journals."
         is_teacher: "Teaches in Schools."
         linkedin: "Example: https://www.linkedin.com/in/osuny"
+        personal_data_visibility: "If public, will be visible on websites and extranets. If restricted, will be visible on extranets only."
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
       university_person_experience:
@@ -246,6 +256,10 @@ en:
         title: Experiences imports
       import_btn: Import people
       import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
+      personal_data_visibilities:
+        private: Private
+        public: Public
+        restricted: Restricted
       personal_data_warning: Warning! The information provided below can be publicly visible on the websites and the extranets about you.
       search: Search by name
       taught_programs: Taught programs

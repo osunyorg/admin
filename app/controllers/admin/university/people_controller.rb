@@ -113,12 +113,13 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def person_params
     params.require(:university_person).permit(
-      :slug, :first_name, :last_name, :email, :gender, :birthdate,
-      :phone_mobile, :phone_professional, :phone_personal,
-      :address, :zipcode, :city, :country,
+      :slug, :first_name, :last_name, :email, :email_visibility, :gender, :birthdate,
+      :phone_mobile, :phone_mobile_visibility, :phone_professional, :phone_professional_visibility, :phone_personal, :phone_personal_visibility,
+      :address, :zipcode, :city, :country, :address_visibility,
       :meta_description, :summary,
       :biography,  :picture, :picture_delete, :picture_infos, :picture_credit,
-      :habilitation, :tenure, :url, :linkedin, :twitter, :mastodon,
+      :habilitation, :tenure, :url,
+      :linkedin, :linkedin_visibility, :twitter, :twitter_visibility, :mastodon, :mastodon_visibility,
       :is_researcher, :is_teacher, :is_administration, :is_alumnus, :user_id,
       research_laboratory_ids: [], category_ids: []
     ).merge(university_id: current_university.id)

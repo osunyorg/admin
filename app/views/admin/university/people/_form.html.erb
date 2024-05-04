@@ -33,15 +33,19 @@
         <div class="row pure__row--small">
           <div class="col-xxl-6">
             <%= f.input :email %>
+            <%= f.input :email_visibility, **personal_data_visibility_input_options %>
           </div>
           <div class="col-xxl-6">
             <%= f.input :phone_mobile %>
+            <%= f.input :phone_mobile_visibility, **personal_data_visibility_input_options %>
           </div>
           <div class="col-xxl-6">
             <%= f.input :phone_professional %>
+            <%= f.input :phone_professional_visibility, **personal_data_visibility_input_options %>
           </div>
           <div class="col-xxl-6">
             <%= f.input :phone_personal %>
+            <%= f.input :phone_personal_visibility, **personal_data_visibility_input_options %>
           </div>
           <div class="col-xxl-6">
             <%= f.input :address %>
@@ -55,6 +59,9 @@
           <div class="col-xxl-6">
             <%= f.input :country, input_html: { class: 'form-select' } %>
           </div>
+          <div class="col-xxl-6">
+            <%= f.input :address_visibility, **personal_data_visibility_input_options %>
+          </div>
         </div>
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('socials') do %>
@@ -65,12 +72,15 @@
           </div>
           <div class="col-xxl-6">
             <%= f.input :linkedin %>
+            <%= f.input :linkedin_visibility, **personal_data_visibility_input_options %>
           </div>
           <div class="col-xxl-6">
             <%= f.input :twitter %>
+            <%= f.input :twitter_visibility, **personal_data_visibility_input_options %>
           </div>
           <div class="col-xxl-6">
             <%= f.input :mastodon %>
+            <%= f.input :mastodon_visibility, **personal_data_visibility_input_options %>
           </div>
         </div>
       <% end %>
