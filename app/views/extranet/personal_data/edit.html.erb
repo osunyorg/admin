@@ -27,39 +27,33 @@
   </h2>
 
   <div class="row">
-    <div class="col-xl-6">
+    <div class="col-md-4">
       <%= f.input :phone_mobile %>
-    </div>
-    <div class="col-xl-6">
       <%= f.input :phone_mobile_visibility, **personal_data_visibility_input_options %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-6">
       <%= f.input :phone_professional %>
-    </div>
-    <div class="col-xl-6">
       <%= f.input :phone_professional_visibility, **personal_data_visibility_input_options %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-6">
       <%= f.input :phone_personal %>
-    </div>
-    <div class="col-xl-6">
       <%= f.input :phone_personal_visibility, **personal_data_visibility_input_options %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-6">
+    <div class="col-md-8">
       <%= f.input :address %>
-      <%= f.input :zipcode %>
-      <%= f.input :city %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :zipcode %>
+        </div>
+        <div class="col-md-8">
+          <%= f.input :city %>
+        </div>
+      </div>
       <%= f.input :country, input_html: { class: 'form-select' } %>
-    </div>
-    <div class="col-xl-6">
       <%= f.input :address_visibility, **personal_data_visibility_input_options %>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    </div>
+  </div>
+  <div class="row">
   </div>
 
   <h2 class="h5 mt-5">
@@ -67,23 +61,15 @@
   </h2>
 
   <div class="row">
-    <div class="col-xl-6">
+    <div class="col-md-4">
       <%= f.input :url %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-6">
+    <div class="col-md-4">
       <%= f.input :linkedin %>
-    </div>
-    <div class="col-xl-6">
       <%= f.input :linkedin_visibility, **personal_data_visibility_input_options %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-6">
+    <div class="col-md-4">
       <%= f.input :twitter %>
-    </div>
-    <div class="col-xl-6">
       <%= f.input :twitter_visibility, **personal_data_visibility_input_options %>
     </div>
   </div>
