@@ -200,6 +200,7 @@ en:
         is_researcher: "Writes papers for journals."
         is_teacher: "Teaches in Schools."
         linkedin: "Example: https://www.linkedin.com/in/osuny"
+        mastodon: "Example: @osuny"
         personal_data_visibility: "If public, will be visible on websites and extranets. If restricted, will be visible on extranets only."
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"

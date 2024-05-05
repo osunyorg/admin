@@ -200,6 +200,7 @@ fr:
         is_researcher: "Écrit des papiers dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
+        mastodon: "Exemple: @osuny"
         personal_data_visibility: "Si public, sera visible sur les sites web et les extranets. Si restreint, sera visible uniquement sur les extranets."
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
