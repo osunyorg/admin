@@ -58,6 +58,7 @@
         <% unless person.email.blank? %>
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name('email') %>
+            <%= personal_attribute_visibility_tag(person.email_visibility) %>
             <p><%= link_to person.email, "mailto:#{person.email}", target: '_blank' %></p>
           </div>
         <% end %>
@@ -65,6 +66,7 @@
           <% unless person[phone].blank? %>
             <div class="col-md-6">
               <%= osuny_label University::Person.human_attribute_name(phone) %>
+              <%= personal_attribute_visibility_tag(person["#{phone}_visibility"]) %>
               <p><%= link_to person[phone], "tel:#{person[phone]}", target: '_blank' %></p>
             </div>
           <% end %>
@@ -80,6 +82,7 @@
           <% next if value.blank? %>
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name(property) %>
+            <%= personal_attribute_visibility_tag(person.address_visibility) if property == :address %>
             <p><%= value %></p>
           </div>
         <% end %>
@@ -103,18 +106,21 @@
         <% unless person.linkedin.blank? %>
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name('linkedin') %>
+            <%= personal_attribute_visibility_tag(person.linkedin_visibility) %>
             <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
           </div>
         <% end %>
         <% unless person.twitter.blank? %>
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name('twitter') %>
+            <%= personal_attribute_visibility_tag(person.twitter_visibility) %>
             <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
           </div>
         <% end %>
         <% unless person.mastodon.blank? %>
           <div class="col-md-6">
             <%= osuny_label University::Person.human_attribute_name('mastodon') %>
+            <%= personal_attribute_visibility_tag(person.mastodon_visibility) %>
             <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
           </div>
         <% end %>

@@ -6,18 +6,18 @@
     <div class="col-lg-8">
       <%= osuny_panel University::Person.human_attribute_name('essentials') do %>
         <div class="row pure__row--small">
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
             <%= f.input :first_name %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
             <%= f.input :last_name %>
           </div>
         </div>
         <div class="row pure__row--small">
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
             <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
             <%= f.input :birthdate, discard_year: true, include_blank: true %>
           </div>
         </div>
@@ -30,58 +30,90 @@
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
         <p><em><%= t("university.person.personal_data_warning") %></em></p>
-        <div class="row pure__row--small">
-          <div class="col-xxl-6">
-            <%= f.input :email %>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
+          <%= f.input :email %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
+            <%= f.input :email_visibility, **personal_data_visibility_input_options %>
+          </div>
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :phone_mobile %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
+              <%= f.input :phone_mobile_visibility, **personal_data_visibility_input_options %>
+          </div>
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :phone_professional %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
+            <%= f.input :phone_professional_visibility, **personal_data_visibility_input_options %>
+          </div>
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :phone_personal %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
+              <%= f.input :phone_personal_visibility, **personal_data_visibility_input_options %>
+          </div>
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :address %>
-          </div>
-          <div class="col-xxl-6">
             <%= f.input :zipcode %>
-          </div>
-          <div class="col-xxl-6">
             <%= f.input :city %>
-          </div>
-          <div class="col-xxl-6">
             <%= f.input :country, input_html: { class: 'form-select' } %>
+          </div>
+          <div class="col-xl-6">
+            <%= f.input :address_visibility, **personal_data_visibility_input_options %>
           </div>
         </div>
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('socials') do %>
         <p><em><%= t("university.person.personal_data_warning") %></em></p>
-        <div class="row pure__row--small">
-          <div class="col-xxl-6">
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
            <%= f.input :url %>
           </div>
-          <div class="col-xxl-6">
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :linkedin %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
+            <%= f.input :linkedin_visibility, **personal_data_visibility_input_options %>
+          </div>
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :twitter %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
+            <%= f.input :twitter_visibility, **personal_data_visibility_input_options %>
+          </div>
+        </div>
+        <div class="row pure__row--small mb-4">
+          <div class="col-xl-6">
             <%= f.input :mastodon %>
+          </div>
+          <div class="col-xl-6">
+            <%= f.input :mastodon_visibility, **personal_data_visibility_input_options %>
           </div>
         </div>
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('abilities') do %>
         <div class="row pure__row--small">
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
             <%= f.input :is_teacher %>
             <%= f.input :is_administration %>
             <%= f.input :is_alumnus %>
           </div>
-          <div class="col-xxl-6">
+          <div class="col-xl-6">
             <%= f.input :tenure %>
             <%= f.input :is_researcher %>
             <%= f.input :habilitation %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_02_140949) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_124317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1201,6 +1201,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_140949) do
     t.uuid "language_id", null: false
     t.uuid "original_id"
     t.text "picture_credit"
+    t.integer "address_visibility", default: 0
+    t.integer "linkedin_visibility", default: 0
+    t.integer "twitter_visibility", default: 0
+    t.integer "mastodon_visibility", default: 0
+    t.integer "phone_mobile_visibility", default: 0
+    t.integer "phone_professional_visibility", default: 0
+    t.integer "phone_personal_visibility", default: 0
+    t.integer "email_visibility", default: 0
     t.index ["language_id"], name: "index_university_people_on_language_id"
     t.index ["original_id"], name: "index_university_people_on_original_id"
     t.index ["slug"], name: "index_university_people_on_slug"
