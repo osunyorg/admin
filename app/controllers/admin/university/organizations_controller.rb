@@ -16,6 +16,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
       format.html {
         @organizations = @organizations.page params[:page]
         @categories = current_university.organization_categories
+                                        .for_language_id(current_university.default_language_id)
                                         .ordered
                                         .page(params[:categories_page])
         breadcrumb
@@ -62,6 +63,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def new
+    @organization.language_id = current_university.default_language_id
     breadcrumb
   end
 

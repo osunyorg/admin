@@ -95,16 +95,17 @@
     </div>
     <div class="col-lg-4">
       <%= osuny_panel t('metadata') do %>
-          <%= render  "admin/application/slug/form",
-                    f: f,
-                    source: '#university_person_first_name, #university_person_last_name' %>
-          <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
-      <% end %>
-      <% if current_university.person_categories.any? %>
-        <%= osuny_panel University::Person.human_attribute_name('categories') do %>
+        <%= render  "admin/application/slug/form",
+                  f: f,
+                  source: '#university_person_first_name, #university_person_last_name' %>
+        <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
+        <%
+        categories = current_university.person_categories.for_language_id(person.language_id)
+        if categories.any?
+        %>
           <%= f.association :categories,
                             as: :check_boxes,
-                            collection: current_university.person_categories %>
+                            collection: categories %>
         <% end %>
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('picture') do %>

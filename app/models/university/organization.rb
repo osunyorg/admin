@@ -66,8 +66,7 @@ class University::Organization < ApplicationRecord
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Organization::Category',
-                          join_table: :university_organizations_categories,
-                          foreign_key: :organization_id
+                          join_table: :university_organizations_categories
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
@@ -130,6 +129,15 @@ class University::Organization < ApplicationRecord
   end
 
   protected
+
+  def translate_additional_data!(translation)
+    translate_attachment(translation, :logo) if logo.attached?
+    translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
+    categories.each do |category|
+      translated_category = category.find_or_translate!(translation.language)
+      translation.categories << translated_category
+    end
+  end
 
   def backlinks_blocks(website)
     website.blocks.organizations
