@@ -29,7 +29,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   end
 
   def persons
-    @persons ||= selected_elements.collect(&:person)
+    @persons ||= selected_elements.collect(&:person).compact.uniq
   end
   alias people persons
 
