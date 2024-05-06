@@ -99,6 +99,20 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { class: 'form-text' }
   end
 
+  # vertical input for inline radio buttons and check boxes with wrapper around items
+  config.wrappers :vertical_collection_inline_with_items_wrapper, item_wrapper_class: 'form-check form-check-inline', item_label_class: 'form-check-label', tag: 'fieldset', class: 'mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :legend_tag, tag: 'legend', class: 'form-label pt-0' do |ba|
+      ba.use :label_text
+    end
+    b.wrapper :items_wrapper_tag, tag: 'div', class: 'form-check-items' do |ba|
+      ba.use :input, class: 'form-check-input', error_class: 'is-invalid', valid_class: 'is-valid'
+    end
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
   # vertical file input
   config.wrappers :vertical_file, class: 'mb-3' do |b|
     b.use :html5

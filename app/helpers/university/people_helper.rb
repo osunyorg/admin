@@ -3,7 +3,7 @@ module University::PeopleHelper
   def personal_data_visibility_input_options
     {
       as: :radio_buttons,
-      wrapper: :vertical_collection_inline,
+      wrapper: :vertical_collection_inline_with_items_wrapper,
       wrapper_html: { class: "visibility_radio_buttons" },
       label_method: -> (option) { t("university.person.personal_data_visibilities.#{option[1]}") },
       hint: t('simple_form.hints.university_person.personal_data_visibility')
