@@ -89,8 +89,7 @@ class University::Person < ApplicationRecord
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
-                          join_table: :university_people_categories,
-                          foreign_key: :person_id
+                          join_table: :university_people_categories
 
   has_and_belongs_to_many :research_journal_papers,
                           class_name: 'Research::Journal::Paper',
@@ -256,5 +255,9 @@ class University::Person < ApplicationRecord
 
   def translate_additional_data!(translation)
     translate_attachment(translation, :picture) if picture.attached?
+    categories.each do |category|
+      translated_category = category.find_or_translate!(translation.language)
+      translation.categories << translated_category
+    end
   end
 end

@@ -2,15 +2,14 @@
 <%= block_component_static block, :description %>
 <%= block_component_static block, :with_link %>
       organizations:
-<% block.template.elements.each do |element| %>
-<% next if element.best_name.blank? %>
+<% block.template.selected_elements.each do |element| %>
 <% if element.organization %>
         - slug: "<%= element.organization.slug %>"
-          external: false
 <% else %>
+<% next if element.best_name.blank? %>
 <%= block_component_static block, :name, template: element, depth: 4, list: true %>
 <%= block_component_static block, :url, template: element, depth: 5 %>
-          external: true
           logo: "<%= element.logo_component.blob&.id %>"
+          external: true
 <% end %>
 <% end %>

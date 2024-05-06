@@ -30,6 +30,7 @@ parent:
     <%= @about.parent.name %>
   url: <%= @about.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
+<%= render 'admin/application/i18n/static' %>
 <%= render 'admin/application/featured_image/static' %>
 <% if @about.logo.attached? %>
 logo:
