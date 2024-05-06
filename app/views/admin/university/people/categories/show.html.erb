@@ -1,5 +1,20 @@
 <% content_for :title, @category %>
 
+<div class="row">
+  <div class="col-lg-8">
+    <% if @people.total_count > 0 %>
+      <%= osuny_panel University::Person.model_name.human(count: 2),
+                      subtitle: "#{@people.total_count} #{University::Person.model_name.human(count: @people.total_count).downcase }" do %>
+        <%= render 'admin/university/people/list', people: @people %>
+        <%= paginate @people, theme: 'bootstrap-5' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-lg-4">
+    <%= render 'admin/application/i18n/widget', about: @category %>
+  </div>
+</div>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>
   <%= static_link static_admin_university_person_category_path(@category) %>

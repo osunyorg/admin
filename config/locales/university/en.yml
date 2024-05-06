@@ -53,6 +53,7 @@ en:
         url: Website
         zipcode: Zipcode
       university/organization/category:
+        language: Language
         name: Name
       university/person:
         abilities: Abilities
@@ -115,6 +116,7 @@ en:
         user: User
         zipcode: Zipcode
       university/person/category:
+        language: Language
         name: Name
       university/person/experience:
         description: Description

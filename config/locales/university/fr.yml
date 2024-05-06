@@ -53,6 +53,7 @@ fr:
         url: Site Web
         zipcode: Code postal
       university/organization/category:
+        language: Langue
         name: Nom
       university/person:
         abilities: Responsabilités
@@ -115,6 +116,7 @@ fr:
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
+        language: Langue
         name: Nom
       university/person/experience:
         description: Description
