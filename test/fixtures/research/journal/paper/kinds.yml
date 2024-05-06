@@ -3,9 +3,11 @@ one:
   journal: default_journal
   title: Articles
   slug: articles
+  language: fr
 
 two:
   university: default_university
   journal: default_journal
   title: Recensions
   slug: recensions
+  language: fr

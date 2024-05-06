@@ -5,3 +5,4 @@ default_program:
   schools:
     - default_school
   university: default_university
+  language: fr
