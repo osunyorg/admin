@@ -1,9 +1,9 @@
-<p>
+<p class="text-end">
   <%= @websites.count %>
   <%= Communication::Website.model_name.human(count: @websites.count).downcase %>
 </p>
 
-<div class="row mt-5">
+<div class="row">
   <% @websites.each do |website| %>
     <div class="col-lg-6 mb-5 pb-5">
       <% if website.screenshot.attached? %>
