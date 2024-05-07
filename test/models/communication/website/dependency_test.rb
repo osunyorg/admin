@@ -22,13 +22,13 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - 4 composants du template du block + 1 élément (5)
     # - 2 composants de l'élément du template (2)
     # - la personne en dépendance du composant Person (1)
+    # - La content security policy
     block = page.blocks.create(position: 1, published: true, template_kind: :persons)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
 
     page = page.reload
-
-    assert_equal 10, page.recursive_dependencies.count
+    assert_equal 3, page.recursive_dependencies.count
 
     # On modifie le target du block
     Delayed::Job.destroy_all
@@ -43,7 +43,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site de la page
     assert(destroy_obsolete_git_files_job)
 
-    assert_equal 10, page.recursive_dependencies.count
+    assert_equal 3, page.recursive_dependencies.count
 
     # Vérifie qu'on a bien
     # - une tâche pour resynchroniser la page
@@ -55,7 +55,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     end
 
     perform_enqueued_jobs
-    
+
     assert(sync_with_git_job(page))
     assert(destroy_obsolete_git_files_job)
 

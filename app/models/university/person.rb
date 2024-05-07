@@ -2,42 +2,50 @@
 #
 # Table name: university_people
 #
-#  id                 :uuid             not null, primary key
-#  address            :string
-#  biography          :text
-#  birthdate          :date
-#  city               :string
-#  country            :string
-#  email              :string
-#  first_name         :string
-#  gender             :integer
-#  habilitation       :boolean          default(FALSE)
-#  is_administration  :boolean
-#  is_alumnus         :boolean          default(FALSE)
-#  is_author          :boolean
-#  is_researcher      :boolean
-#  is_teacher         :boolean
-#  last_name          :string
-#  linkedin           :string
-#  mastodon           :string
-#  meta_description   :text
-#  name               :string
-#  phone_mobile       :string
-#  phone_personal     :string
-#  phone_professional :string
-#  picture_credit     :text
-#  slug               :string           indexed
-#  summary            :text
-#  tenure             :boolean          default(FALSE)
-#  twitter            :string
-#  url                :string
-#  zipcode            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  language_id        :uuid             not null, indexed
-#  original_id        :uuid             indexed
-#  university_id      :uuid             not null, indexed
-#  user_id            :uuid             indexed
+#  id                            :uuid             not null, primary key
+#  address                       :string
+#  address_visibility            :integer          default("private")
+#  biography                     :text
+#  birthdate                     :date
+#  city                          :string
+#  country                       :string
+#  email                         :string
+#  email_visibility              :integer          default("private")
+#  first_name                    :string
+#  gender                        :integer
+#  habilitation                  :boolean          default(FALSE)
+#  is_administration             :boolean
+#  is_alumnus                    :boolean          default(FALSE)
+#  is_author                     :boolean
+#  is_researcher                 :boolean
+#  is_teacher                    :boolean
+#  last_name                     :string
+#  linkedin                      :string
+#  linkedin_visibility           :integer          default("private")
+#  mastodon                      :string
+#  mastodon_visibility           :integer          default("private")
+#  meta_description              :text
+#  name                          :string
+#  phone_mobile                  :string
+#  phone_mobile_visibility       :integer          default("private")
+#  phone_personal                :string
+#  phone_personal_visibility     :integer          default("private")
+#  phone_professional            :string
+#  phone_professional_visibility :integer          default("private")
+#  picture_credit                :text
+#  slug                          :string           indexed
+#  summary                       :text
+#  tenure                        :boolean          default(FALSE)
+#  twitter                       :string
+#  twitter_visibility            :integer          default("private")
+#  url                           :string
+#  zipcode                       :string
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  language_id                   :uuid             not null, indexed
+#  original_id                   :uuid             indexed
+#  university_id                 :uuid             not null, indexed
+#  user_id                       :uuid             indexed
 #
 # Indexes
 #
@@ -68,6 +76,7 @@ class University::Person < ApplicationRecord
   include WithEducation
   include WithExperiences
   include WithGitFiles
+  include WithPersonalData
   include WithPicture
   include WithResearch
   include WithTranslations
@@ -89,8 +98,7 @@ class University::Person < ApplicationRecord
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
-                          join_table: :university_people_categories,
-                          foreign_key: :person_id
+                          join_table: :university_people_categories
 
   has_and_belongs_to_many :research_journal_papers,
                           class_name: 'Research::Journal::Paper',
@@ -256,5 +264,9 @@ class University::Person < ApplicationRecord
 
   def translate_additional_data!(translation)
     translate_attachment(translation, :picture) if picture.attached?
+    categories.each do |category|
+      translated_category = category.find_or_translate!(translation.language)
+      translation.categories << translated_category
+    end
   end
 end

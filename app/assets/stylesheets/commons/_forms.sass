@@ -17,3 +17,49 @@ textarea.form-control
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif
     font-size: 1rem
     color: black
+
+.visibility_radio_buttons
+    .form-check-items
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
+        position: relative
+        .form-check-inline
+            margin-right: 0
+            padding-left: 0
+            text-align: center
+            .form-check-input
+                border-color: var(--bs-gray-400)
+                border-width: 3px
+                float: none
+                margin-left: 0
+                &:checked
+                    border-width: 0
+                    --bs-form-check-bg-image: none
+                &.is-valid ~ .form-check-label
+                    color: inherit
+            .form-check-label
+                display: block
+            &:nth-of-type(1)
+                text-align: left
+                &::after
+                    border-top: 3px solid var(--bs-gray-400)
+                    content: ""
+                    display: block
+                    left: 8px
+                    position: absolute
+                    top: 11px
+                    width: calc(100% - 16px)
+                    z-index: -1
+                .form-check-input
+                    &:checked
+                        background-color: var(--bs-red)
+            &:nth-of-type(2)
+                .form-check-input
+                    &:checked
+                        background-color: var(--bs-orange)
+            &:nth-of-type(3)
+                text-align: right
+                .form-check-input
+                    &:checked
+                        background-color: var(--bs-green)

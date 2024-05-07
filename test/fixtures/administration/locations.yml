@@ -11,6 +11,7 @@ one:
   phone: MyString
   url: MyString
   zipcode: MyString
+  language: fr
 
 two:
   name: MyString
@@ -23,3 +24,4 @@ two:
   phone: MyString
   url: MyString
   zipcode: MyString
+  language: fr

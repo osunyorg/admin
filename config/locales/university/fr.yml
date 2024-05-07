@@ -53,10 +53,12 @@ fr:
         url: Site Web
         zipcode: Code postal
       university/organization/category:
+        language: Langue
         name: Nom
       university/person:
         abilities: Responsabilités
         address: Adresse
+        address_visibility: Visibilité de l'adresse
         administration: Personnel administratif
         alumnus: Alumnus
         author: Auteur·rice
@@ -69,6 +71,7 @@ fr:
         country: Pays
         education_programs: Formations
         email: Email
+        email_visibility: Visibilité de l'email
         essentials: Informations essentielles
         first_name: Prénom
         gender: Genre
@@ -87,10 +90,16 @@ fr:
         is_teacher: Enseignant·e
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
+        linkedin_visibility: Visibilité de l'URL LinkedIn
+        mastodon: Mastodon (nom d'utilisateur)
+        mastodon_visibility: Visibilité du nom d'utilisateur Mastodon
         name: Nom
         phone_mobile: Téléphone mobile
+        phone_mobile_visibility: Visibilité du téléphone mobile
         phone_personal: Téléphone personnel
+        phone_personal_visibility: Visibilité du téléphone personnel
         phone_professional: Téléphone professionnel
+        phone_professional_visibility: Visibilité du téléphone professionnel
         picture: Photo de profil
         picture_credit: Crédit
         research_journal_papers: Papiers
@@ -102,10 +111,12 @@ fr:
         teacher: Enseignant·e
         tenure: Titulaire ?
         twitter: Twitter (nom d'utilisateur)
+        twitter_visibility: Visibilité du nom d'utilisateur Twitter
         url: Site web
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
+        language: Langue
         name: Nom
       university/person/experience:
         description: Description
@@ -191,6 +202,8 @@ fr:
         is_researcher: "Écrit des papiers dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
+        mastodon: "Exemple: @osuny"
+        personal_data_visibility: "Privé : visible uniquement en admin. Restreint : visible sur les extranets. Public : visible sur les sites web."
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
       university_person_experience:
@@ -246,8 +259,12 @@ fr:
         title: Imports d'expériences
       import_btn: Importer des personnes
       import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caratères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
-      search: Rechercher par nom de personne
+      personal_data_visibilities:
+        private: Privé
+        public: Public
+        restricted: Restreint
       personal_data_warning: Attention ! Les informations renseignées ici sont susceptibles d'être visibles publiquement sur les sites web et les extranets vous concernant.
+      search: Rechercher par nom de personne
       taught_programs: Formations enseignées
     sso: SSO
     sso_key: Clé sur le SSO
