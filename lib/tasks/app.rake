@@ -11,7 +11,7 @@ namespace :app do
     Communication::Block.agenda.find_each do |block|
       template = block.template
       template.option_categories    = template.show_category
-      template.option_summary       = template.show_description
+      template.option_summary       = template.show_summary
       template.option_status        = template.show_status
       block.save
     end
