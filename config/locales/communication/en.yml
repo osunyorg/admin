@@ -101,12 +101,14 @@ en:
         git_endpoint: Git endpoint
         git_provider: Git provider
         in_production: Production
-        in_showcase: In showcase
+        in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at
         name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
+        showcase_highlight: Highlighted in showcase
+        showcase_tags: Tags
         social: Social media
         social_email: "Email"
         social_facebook: "Facebook (private, belongs to Meta)"
@@ -152,6 +154,9 @@ en:
         published: Published
         title: Title
         year: Year
+      communication/website/showcase/tag:
+        name: Name
+        websites: Websites
       communication/website/connection:
         direct_source: Direct source
         direct_source_type: Direct source type
@@ -265,6 +270,9 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/connection:
+        one: Connection
+        other: Connections
       communication/website/git_file/layout:
         one: HTML overlay
         other: HTML overlays
@@ -277,9 +285,9 @@ en:
       communication/website/portfolio/project:
         one: Project
         other: Projects
-      communication/website/connection:
-        one: Connection
-        other: Connections
+      communication/website/showcase/tag:
+        one: Tag
+        other: Tags
       communication/website/menu:
         all: All menus
         one: Menu

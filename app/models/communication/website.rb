@@ -23,6 +23,7 @@
 #  name                    :string           indexed
 #  plausible_url           :string
 #  repository              :string
+#  showcase_highlight      :boolean          default(FALSE)
 #  social_email            :string
 #  social_facebook         :string
 #  social_github           :string
@@ -80,6 +81,7 @@ class Communication::Website < ApplicationRecord
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
   include WithSecurity
+  include WithShowcase
   include WithStyle
   include WithTheme
   include WithUniversity
@@ -99,7 +101,6 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
-  scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
     joins(:university)

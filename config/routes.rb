@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   constraints host: ENV['OSUNY_SHOWCASE'] do
+    get ':tag' => 'showcase/home#tag', as: :showcase_tag
     get '/' => 'showcase/home#index'
   end
   constraints host: ENV['OSUNY_TRANSPARENCY'] do
