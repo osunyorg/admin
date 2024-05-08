@@ -1,4 +1,4 @@
-module Communication::Website::FeatureAgenda
+module Communication::Website::WithFeatureAgenda
   extend ActiveSupport::Concern
 
   included do

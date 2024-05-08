@@ -61,15 +61,15 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
-  include FeatureAgenda
-  include FeatureBlog
-  include FeaturePortfolio
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithDependencies
   include WithDeuxfleurs
+  include WithFeatureAgenda
+  include WithFeaturePosts
+  include WithFeaturePortfolio
   include WithGit
   include WithGitRepository
   include WithLanguages

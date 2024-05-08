@@ -1,4 +1,4 @@
-module Communication::Website::FeaturePortfolio
+module Communication::Website::WithFeaturePortfolio
   extend ActiveSupport::Concern
 
   included do

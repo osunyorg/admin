@@ -1,4 +1,4 @@
-module Communication::Website::FeatureBlog
+module Communication::Website::WithFeaturePosts
   extend ActiveSupport::Concern
 
   included do
@@ -14,7 +14,6 @@ module Communication::Website::FeatureBlog
                 dependent: :destroy    
 
     scope :with_feature_posts, -> { where(feature_posts: true) }
-    scope :with_feature_blog, -> { with_feature_posts }
   end
 
   def has_blog_posts?
