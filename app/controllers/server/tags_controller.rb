@@ -32,7 +32,7 @@ class Server::TagsController < Server::ApplicationController
 
   def update
     if @tag.update(tag_params)
-      redirect_to server_tag_path(@tag), notice: t('admin.successfully_updated_html', model: @university.to_s)
+      redirect_to server_tag_path(@tag), notice: t('admin.successfully_updated_html', model: @tag.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
