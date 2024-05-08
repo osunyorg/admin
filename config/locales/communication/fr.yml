@@ -100,6 +100,7 @@ fr:
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Fournisseur Git
+        highlighted_in_showcase: Mis en avant dans le showcase
         in_production: Site en production
         in_showcase: Présenter le site dans le showcase
         languages: Langues
@@ -107,7 +108,6 @@ fr:
         name: Nom
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
-        showcase_highlight: Mis en avant dans le showcase
         showcase_tags: Mots-clés
         social: Réseaux sociaux
         social_email: "Adresse email"

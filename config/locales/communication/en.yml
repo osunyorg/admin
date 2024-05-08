@@ -100,6 +100,7 @@ en:
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
+        highlighted_in_showcase: Highlighted in showcase
         in_production: Production
         in_showcase: List website in showcase
         languages: Languages
@@ -107,7 +108,6 @@ en:
         name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
-        showcase_highlight: Highlighted in showcase
         showcase_tags: Tags
         social: Social media
         social_email: "Email"

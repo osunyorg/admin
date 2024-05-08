@@ -17,13 +17,13 @@
 #  git_endpoint            :string
 #  git_files_analysed_at   :datetime
 #  git_provider            :integer          default("github")
+#  highlighted_in_showcase :boolean          default(FALSE)
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
 #  locked_at               :datetime
 #  name                    :string           indexed
 #  plausible_url           :string
 #  repository              :string
-#  showcase_highlight      :boolean          default(FALSE)
 #  social_email            :string
 #  social_facebook         :string
 #  social_github           :string
