@@ -22,13 +22,4 @@ class Communication::Website::Showcase::Tag < ApplicationRecord
   def to_s
     "#{name}"
   end
-
-  protected
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
 end
