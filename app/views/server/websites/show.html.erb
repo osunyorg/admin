@@ -1,16 +1,14 @@
 <% content_for :title, @website %>
 
+<% content_for :title_left do %>
+  <%= simple_form_for @website, url: server_website_path(@website) do |f| %>
+    <%= f.input :showcase_highlight, wrapper: :custom_boolean_switch %>
+  <% end %>
+<% end %>
+
 <% content_for :title_right do %>
   <%= link_to @website.university, server_university_path(@website.university) %><br>
 <% end %>
-
-<div class="mb-5">
-  <%= simple_form_for @website, 
-                      url: server_website_path(@website) do |f| %>
-    <%= f.input :showcase_highlight, wrapper: :custom_boolean_switch %>
-    <%= submit f %>
-  <% end %>
-</div>
 
 <div class="row">
   <div class="col-xl-4">
