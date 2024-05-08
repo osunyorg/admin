@@ -7,7 +7,7 @@ class Showcase::HomeController < Showcase::ApplicationController
   end
 
   def tag
-    @tag = Communication::Website::Showcase::Tag.find_by(slug: params[:tag])
+    @tag = Communication::Website::Showcase::Tag.find_by!(slug: params[:tag])
     @websites = @tag.websites.in_showcase
                              .page(params[:page])
   end
