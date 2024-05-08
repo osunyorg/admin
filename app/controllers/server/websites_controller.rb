@@ -51,10 +51,14 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def update
-    @website.update(website_params)
-    university_id = params.dig(:communication_website, :university_id)
-    @website.move_to_university(university_id) if university_id
-    redirect_to server_website_path(@website), notice: t('admin.successfully_updated_html', model: @website.to_s)
+    if params[:context] == 'showcase_highlight'
+      should_highlight = params.dig(:communication_website, :highlighted_in_showcase) == '1'
+      @website.update(highlighted_in_showcase: should_highlight)
+    else
+      university_id = params.dig(:communication_website, :university_id)
+      @website.move_to_university(university_id) if university_id
+      redirect_to server_website_path(@website), notice: t('admin.successfully_updated_html', model: @website.to_s)
+    end
   end
 
   protected
@@ -65,11 +69,6 @@ class Server::WebsitesController < Server::ApplicationController
     if @website
       add_breadcrumb @website, server_website_path(@website)
     end
-  end
-
-  def website_params
-    params.require(:communication_website)
-          .permit(:highlighted_in_showcase)
   end
 
   def load_websites
