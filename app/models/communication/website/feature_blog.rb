@@ -11,7 +11,10 @@ module Communication::Website::FeatureBlog
     has_many    :post_categories,
                 class_name: 'Communication::Website::Post::Category',
                 foreign_key: :communication_website_id,
-                dependent: :destroy
+                dependent: :destroy    
+
+    scope :with_feature_posts, -> { where(feature_posts: true) }
+    scope :with_feature_blog, -> { with_feature_posts }
   end
 
   def has_blog_posts?

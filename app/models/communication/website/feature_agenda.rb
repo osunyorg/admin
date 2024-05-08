@@ -11,6 +11,8 @@ module Communication::Website::FeatureAgenda
                 class_name: 'Communication::Website::Agenda::Category',
                 foreign_key: :communication_website_id,
                 dependent: :destroy
+
+    scope :with_feature_agenda, -> { where(feature_agenda: true) }
   end
 
   def has_agenda_events?
