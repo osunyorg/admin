@@ -69,7 +69,7 @@ class Server::WebsitesController < Server::ApplicationController
 
   def website_params
     params.require(:communication_website)
-          .permit(:showcase_highlight)
+          .permit(:highlighted_in_showcase)
   end
 
   def load_websites
