@@ -19,7 +19,7 @@ class Showcase::HomeController < Showcase::ApplicationController
       }
     ]
     @websites = Communication::Website.in_showcase
-                                      .page(params[:page]).per(1)
+                                      .page(params[:page])
   end
 
   def tag
