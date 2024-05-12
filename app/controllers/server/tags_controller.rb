@@ -54,6 +54,7 @@ class Server::TagsController < Server::ApplicationController
   end
 
   def tag_params
-    params.require(:communication_website_showcase_tag).permit(:name)
+    params.require(:communication_website_showcase_tag)
+          .permit(:name, website_ids: [])
   end
 end
