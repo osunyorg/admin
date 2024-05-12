@@ -2,6 +2,7 @@ class Server::TagsController < Server::ApplicationController
   load_and_authorize_resource class: Communication::Website::Showcase::Tag
 
   def index
+    @tags = @tags.ordered
     breadcrumb
   end
 
