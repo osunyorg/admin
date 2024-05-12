@@ -1,0 +1,46 @@
+<p class="text-end">
+  <%= @websites.count %>
+  <%= Communication::Website.model_name.human(count: @websites.count).downcase %>
+</p>
+
+<div class="row">
+  <% @websites.each do |website| %>
+    <div class="col-lg-6 mb-5 pb-5">
+      <% if website.screenshot.attached? %>
+        <%= link_to website.url, target: :_blank do %>
+          <%= kamifusen_tag website.screenshot, 
+                            class: 'img-fluid border-dark mb-1' %>
+        <% end %>
+      <% end %>
+      <div class="row">
+        <div class="col-lg-10">
+          <h2 class="h6"><%= website %></h2>
+          <p class="small mb-1">
+            <i class="bi bi-compass-fill me-2"></i>
+            <%= link_to social_website_to_s(website.url), 
+                        website.url, 
+                        target: :_blank, 
+                        class: 'text-white' %>
+          </p>
+          <p class="small">
+            <i class="bi bi-github me-2"></i>
+            <%= link_to social_website_to_s(website.repository_url), 
+                        website.repository_url, 
+                        target: :_blank, 
+                        class: 'text-white' %>
+          </p>
+        </div>
+        <% if website.university.logo.attached? %>
+          <div class="col-3 col-lg-2">
+            <div class="bg-dark ratio ratio-1x1 mb-3">
+              <%= image_tag website.university.logo, 
+                            class: 'img-fluid p-3',
+                            style: 'filter: saturate(0) invert(1)' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= paginate @websites, theme: 'bootstrap-5' %>

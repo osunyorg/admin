@@ -1,7 +1,22 @@
 <% content_for :title, @website %>
 
+<% content_for :title_left do %>
+  <%= simple_form_for @website, url: server_website_path(@website) do |f| %>
+    <%= f.input :highlighted_in_showcase,
+                wrapper: :custom_boolean_switch,
+                input_html: {
+                  data: {
+                    remote: true,
+                    method: :patch,
+                    params: "context=showcase_highlight",
+                    url: server_website_path(@website)
+                  }
+                } %>
+  <% end %>
+<% end %>
+
 <% content_for :title_right do %>
-  <%= link_to @website.university, server_university_path(@website.university) %>
+  <%= link_to @website.university, server_university_path(@website.university) %><br>
 <% end %>
 
 <div class="row">

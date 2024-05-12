@@ -1,4 +1,4 @@
-module Communication::Website::FeatureBlog
+module Communication::Website::WithFeaturePosts
   extend ActiveSupport::Concern
 
   included do
@@ -11,7 +11,9 @@ module Communication::Website::FeatureBlog
     has_many    :post_categories,
                 class_name: 'Communication::Website::Post::Category',
                 foreign_key: :communication_website_id,
-                dependent: :destroy
+                dependent: :destroy    
+
+    scope :with_feature_posts, -> { where(feature_posts: true) }
   end
 
   def has_blog_posts?
