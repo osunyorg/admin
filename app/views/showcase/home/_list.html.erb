@@ -1,6 +1,6 @@
 <p class="text-end">
   <%= @websites.count %>
-  <%= Communication::Website.model_name.human(count: @websites.count).downcase %>
+  <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>
 </p>
 
 <div class="row">
