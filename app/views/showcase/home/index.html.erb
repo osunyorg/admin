@@ -6,7 +6,7 @@
   <p class="small text-uppercase">Thèmes</p>
   <% @tags.each do |tag| %>
     <% next if tag.websites.none? %>
-    <%= link_to "#{tag} <span class=\"badge bg-dark text-light rounded-pill\">#{tag.websites.count}</span>".html_safe, 
+    <%= link_to "#{tag} <span class=\"badge bg-dark text-light rounded-pill\">#{tag.websites.in_production.count}</span>".html_safe, 
                 showcase_tag_path(tag.slug), 
                 class: 'btn btn-outline-light rounded-pill mb-2 me-2 px-4 py-3' %>
   <% end %>

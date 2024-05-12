@@ -22,13 +22,16 @@
                         target: :_blank, 
                         class: 'text-white' %>
           </p>
-          <p class="small">
+          <p class="small mb-2">
             <i class="bi bi-github me-2"></i>
             <%= link_to social_website_to_s(website.repository_url), 
                         website.repository_url, 
                         target: :_blank, 
                         class: 'text-white' %>
           </p>
+          <% website.showcase_tags.each do |tag| %>
+            <%= link_to tag, showcase_tag_path(tag.slug), class: 'btn btn-sm btn-outline-light rounded-pill' %>
+          <% end %>  
         </div>
         <% if website.university.logo.attached? %>
           <div class="col-3 col-lg-2">
