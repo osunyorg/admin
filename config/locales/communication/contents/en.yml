@@ -385,7 +385,7 @@ en:
               option_logo:
                 label: Logo
               options: Display options
-              remove_partner: Remove organization
+              remove_organization: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
             layouts:

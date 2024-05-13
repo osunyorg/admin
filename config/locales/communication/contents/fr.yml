@@ -385,7 +385,7 @@ fr:
               option_logo:
                 label: Logo
               options: Options d'affichage
-              remove_partner: Enlever l'organisation
+              remove_organization: Enlever l'organisation
               with_link:
                 label: Avec des liens cliquables vers les pages des organisations?
             layouts:
