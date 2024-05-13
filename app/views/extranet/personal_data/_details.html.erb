@@ -1,7 +1,10 @@
 <dl>
   <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
     <% next if person.public_send(attribute_name).blank? %>
-    <dt><%= University::Person.human_attribute_name(attribute_name) %></dt>
+    <dt>
+      <%= University::Person.human_attribute_name(attribute_name) %>
+      <%= personal_attribute_visibility_tag(person.public_send("#{attribute_name}_visibility")) %>
+    </dt>
     <dd>
       <a href="tel:<%= person.public_send(attribute_name) %>" target="_blank" rel="noreferrer">
         <%= person.public_send(attribute_name) %>
@@ -9,7 +12,10 @@
     </dd>
   <% end %>
   <% if person.email.present? %>
-    <dt><%= University::Person.human_attribute_name(:email) %></dt>
+    <dt>
+      <%= University::Person.human_attribute_name(:email) %>
+      <%= personal_attribute_visibility_tag(person.email_visibility) %>
+    </dt>
     <dd>
       <a href="mailto:<%= person.email %>" target="_blank" rel="noreferrer">
         <%= person.email %>
@@ -17,7 +23,10 @@
     </dd>
   <% end %>
   <% if person.full_street_address.present? %>
-    <dt><%= University::Person.human_attribute_name("address") %></dt>
+    <dt>
+      <%= University::Person.human_attribute_name("address") %>
+      <%= personal_attribute_visibility_tag(person.address_visibility) %>
+    </dt>
     <dd>
       <%= person.address %>
       <% if person.address.present? && (person.city.present? || person.zipcode.present?) %><br><% end %>
@@ -34,7 +43,10 @@
     </dd>
   <% end %>
   <% if person.linkedin.present? %>
-    <dt><%= University::Person.human_attribute_name(:linkedin) %></dt>
+    <dt>
+      <%= University::Person.human_attribute_name(:linkedin) %>
+      <%= personal_attribute_visibility_tag(person.linkedin_visibility) %>
+    </dt>
     <dd>
       <a href="<%= social_linkedin_to_url person.linkedin %>" target="_blank" rel="noreferrer">
         <%= social_linkedin_to_s person.linkedin %>
@@ -42,7 +54,10 @@
     </dd>
   <% end %>
   <% if person.twitter.present? %>
-    <dt><%= University::Person.human_attribute_name(:twitter) %></dt>
+    <dt>
+      <%= University::Person.human_attribute_name(:twitter) %>
+      <%= personal_attribute_visibility_tag(person.twitter_visibility) %>
+    </dt>
     <dd>
       <a href="<%= social_twitter_to_url person.twitter %>" target="_blank" rel="noreferrer">
         <%= social_twitter_to_s person.twitter %>

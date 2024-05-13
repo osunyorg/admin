@@ -10,9 +10,9 @@ fr:
   activerecord:
     attributes:
       communication/block:
-        title: Nom (facultatif)
-        template: Type de bloc
         published: Publié ?
+        template: Type de bloc
+        title: Nom (facultatif)
       communication/block/heading:
         title: Titre
       communication/extranet:
@@ -49,11 +49,11 @@ fr:
       communication/extranet/connection:
         connected: Connecté
       communication/extranet/document:
+        category: Catégorie
+        kind: Type
         name: Nom
         published: Publié ?
         published_at: Date de publication
-        category: Catégorie
-        kind: Type
       communication/extranet/document/category:
         name: Nom
         quantity: Quantité de documents
@@ -82,9 +82,9 @@ fr:
         about_Research::Journal: Site de revue scientifique
         about_Research::Laboratory: Site de laboratoire
         about_type: Type de site
+        access_token: Jeton d'accès
         appearance: Apparence
         autoupdate_theme: Mise à jour automatique du thème Osuny
-        access_token: Jeton d'accès
         created_at: Création
         default_image: Image par défaut
         default_language: Langue par défaut
@@ -93,20 +93,22 @@ fr:
         deployment_status_badge: Badge de statut du déploiement
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
-        features: Fonctionnalités
         feature_agenda: Agenda
         feature_portfolio: Portfolio
         feature_posts: Actualités
+        features: Fonctionnalités
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Fournisseur Git
+        highlighted_in_showcase: Mis en avant dans le showcase
         in_production: Site en production
-        in_showcase: Dans le showcase
+        in_showcase: Présenter le site dans le showcase
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
         name: Nom
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
+        showcase_tags: Mots-clés
         social: Réseaux sociaux
         social_email: "Adresse email"
         social_facebook: "Facebook (privatif, appartient à Meta)"
@@ -134,33 +136,22 @@ fr:
         from_hour: Heure de début
         published: Publié
         status: Statut
+        status_archive: Archive
         status_current: En cours
         status_future: À venir
-        status_archive: Archive
         subtitle: Sous-titre
         time_zone: Fuseau horaire
         title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
-      communication/website/portfolio/category:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
-      communication/website/portfolio/project:
-        categories: Catégories
-        featured_image: Image à la une
-        published: Publié
-        title: Titre
-        year: Année
       communication/website/connection:
         direct_source: Source directe
-        direct_source_type: Type de la source
         direct_source_id: Identifiant de la source
+        direct_source_type: Type de la source
         id: Identifiant
         indirect_object: Objet indirect
-        indirect_object_type: Type de l'objet
         indirect_object_id: Identifiant de l'objet
+        indirect_object_type: Type de l'objet
         updated_at: Date de mise à jour
       communication/website/menu:
         automatic: Automatique
@@ -196,10 +187,21 @@ fr:
         website: Site Web
       communication/website/permalink:
         path: Chemin
+      communication/website/portfolio/category:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        slug: Slug
+      communication/website/portfolio/project:
+        categories: Catégories
+        featured_image: Image à la une
+        published: Publié
+        title: Titre
+        year: Année
       communication/website/post:
         author: Auteur·rice
-        category: Catégorie
         categories: Catégories
+        category: Catégorie
         date: Date
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -219,6 +221,9 @@ fr:
         name: Nom
         parent: Catégorie parente
         slug: Slug
+      communication/website/showcase/tag:
+        name: Nom
+        websites: Sites Web
     errors:
       models:
         communication/extranet:
@@ -268,21 +273,15 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/connection:
+        one: Connexion
+        other: Connexions
       communication/website/git_file/layout:
         one: Surcouche HTML
         other: Surcouches HTML
       communication/website/git_file/orphan:
         one: Fichier orphelin
         other: Fichiers orphelins
-      communication/website/portfolio/category:
-        one: Catégorie
-        other: Catégories
-      communication/website/portfolio/project:
-        one: Projet
-        other: Projets
-      communication/website/connection:
-        one: Connexion
-        other: Connexions
       communication/website/menu:
         all: Tous les menus
         one: Menu
@@ -294,6 +293,12 @@ fr:
         all: Toutes les pages
         one: Page
         other: Pages
+      communication/website/portfolio/category:
+        one: Catégorie
+        other: Catégories
+      communication/website/portfolio/project:
+        one: Projet
+        other: Projets
       communication/website/post:
         all: Toutes les actualités
         one: Actualité
@@ -302,6 +307,9 @@ fr:
         all: Toutes les catégories
         one: Catégorie
         other: Catégories
+      communication/website/showcase/tag:
+        one: Mot-clé
+        other: Mot-clés
   admin:
     communication:
       block:
@@ -310,13 +318,13 @@ fr:
         agenda:
           events:
             draft: Brouillon
-            none: Pas encore d'événements
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
+            none: Pas encore d'événements
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas."
         default_shared_image: "Image de partage par défaut, 1200 pixels de large est une bonne base car les réseaux ont des standards différents."
         editorial:
-          label: Éditorial
           description: Tout ce qui est lié au contenu
+          label: Éditorial
         git_file:
           analysis:
             launch: Lancer une analyse
@@ -325,14 +333,6 @@ fr:
         localizations:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
-        permalinks:
-          creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
-        technical:
-          label: Technique
-          description: Tout ce qui est lié aux réglages techniques
-        social:
-          free: Libres
-          private: Privatifs
         pages:
           as_list: Voir en liste
           as_tree: Organiser l'arborescence
@@ -341,11 +341,13 @@ fr:
           full_width_status: Pleine largeur
           in: dans
           in_full_width: en pleine largeur
-          show: Voir la page
-          structure: Pages
           published: Publiée
           published_status: État de publication
+          show: Voir la page
+          structure: Pages
           with_children: "avec comme pages enfants :"
+        permalinks:
+          creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:
           projects:
             none: Pas encore de projet
@@ -361,25 +363,32 @@ fr:
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
         redirects:
+          add_path: Ajouter une redirection
           button: Gérer les redirections
-          title: Gérer les redirections
           current_path: Chemin actuel
           previous_paths: Redirections (anciens chemins)
-          add_path: Ajouter une redirection
+          title: Gérer les redirections
+        see_showcase: Voir le showcase
+        social:
+          free: Libres
+          private: Privatifs
+        technical:
+          description: Tout ce qui est lié aux réglages techniques
+          label: Technique
   communication:
     authors:
       one: Auteur·rice
       other: Auteur·rice·s
     description:
-      text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
-      source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
       parts:
-        website:
-          description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
-          description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
         extranet:
           description: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
           description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
+        website:
+          description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
+          description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
+      source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
+      text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
     extranet:
       post:
         metadata:
@@ -396,8 +405,8 @@ fr:
       analytics: Analytics
       git: Git
       golive:
-        title: Mise en production
         button: Mettre en production
+        title: Mise en production
       hosting: Hébergement
       last_events: Derniers événements
       last_pages: Dernières pages
@@ -423,9 +432,6 @@ fr:
           author:
             slug: equipe-editoriale
             title: Équipe éditoriale
-          communication_post:
-            slug: actualites
-            title: Actualités
           communication_agenda:
             slug: agenda
             title: Agenda
@@ -435,6 +441,9 @@ fr:
           communication_portfolio:
             slug: projets
             title: Projets
+          communication_post:
+            slug: actualites
+            title: Actualités
           education_diploma:
             slug: diplomes
             title: "Diplômes"
@@ -456,12 +465,12 @@ fr:
           privacy_policy:
             slug: politique-de-confidentialite
             title: Politique de confidentialité
-          research_publication:
-            slug: publications
-            title: Publications HAL
           research_paper:
             slug: papiers
             title: Papiers
+          research_publication:
+            slug: publications
+            title: Publications HAL
           research_volume:
             slug: volumes
             title: Volumes
@@ -529,9 +538,9 @@ fr:
         access_token_with_existing: Votre jeton d'accès Github ou Gitlab confidentiel.<br>Laisser le champ vide pour ne pas le modifier.
         access_token_without_existing: Votre jeton d'accès Github ou Gitlab confidentiel, à laisser vide lors de la création d'un site avec Deuxfleurs.
         deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
-        feature_posts: Pour publier des actualités, comme un média
         feature_agenda: Pour partager des événements
         feature_portfolio: Pour présenter des projets
+        feature_posts: Pour publier des actualités, comme un média
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         in_production: Ne cochez pas cette case tant que le site n'est pas sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
@@ -543,8 +552,8 @@ fr:
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.
-        text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
         header_text: Par défaut, ce texte remplace le titre. Dans certains sites, il s'affiche en plus.
+        text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
       communication_website_permalink:
         path: "Doit être un chemin d'URL. Exemple : /ancien/chemin"
       communication_website_post:

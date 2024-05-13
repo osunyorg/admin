@@ -3,9 +3,11 @@
 <%= block_component_static block, :with_photo %>
 <%= block_options_static block %>
       persons:
-<% block.template.elements.each do |element| %>
-<% next unless element.person %>
-        - slug: "<%= element.person.slug %>"
-          external: false
+<% 
+block.template.selected_elements.each do |element|
+  person = element.person
+  next if person.nil?
+%>
+        - slug: "<%= person.slug %>"
 <%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>

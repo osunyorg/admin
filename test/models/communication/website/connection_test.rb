@@ -110,8 +110,8 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     setup_page_connections(page)
 
     second_page = communication_website_pages(:page_test)
-    block = second_page.blocks.create(position: 1, published: true, template_kind: :organizations)
-    block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+    block = second_page.blocks.new(position: 1, published: true, template_kind: :organizations)
+    block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save
 
     # Noesya est connectée via les 2 pages, donc 2 connexions
@@ -145,7 +145,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
     assert_difference -> { Communication::Website::Connection.count } => -6 do
       assert_enqueued_with(job: Communication::CleanWebsitesJob) do
-        website_with_github.update(about: nil)   
+        website_with_github.update(about: nil)
       end
       perform_enqueued_jobs
     end
@@ -163,31 +163,31 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       page.blocks.create(position: 1, published: true, template_kind: :chapter)
     end
 
-    # On connecte PA via un block "Personnes" : +2
+    # On connecte PA via un block "Personnes" : +2 (bloc, personne)
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = page.blocks.create(position: 2, published: true, template_kind: :persons)
-      block.data = "{ \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
+      block = page.blocks.new(position: 2, published: true, template_kind: :persons)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
       block.save
     end
 
     # On ajoute noesya via un block "Organisations" : +4 parce que noesya a un block "Personnes" avec Olivia
     assert_difference -> { Communication::Website::Connection.count } => 4 do
-      block = page.blocks.create(position: 3, published: true, template_kind: :organizations)
-      block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+      block = page.blocks.new(position: 3, published: true, template_kind: :organizations)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
 
     # On ajoute Arnaud à noesya via un block "Personnes" : +2
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = noesya.blocks.create(position: 2, published: true, template_kind: :persons)
-      block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
+      block = noesya.blocks.new(position: 2, published: true, template_kind: :persons)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
       block.save
     end
 
     # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
     assert_difference -> { Communication::Website::Connection.count } => 1 do
-      block = olivia.blocks.create(position: 1, published: true, template_kind: :organizations)
-      block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+      block = olivia.blocks.new(position: 1, published: true, template_kind: :organizations)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
 

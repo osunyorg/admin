@@ -27,9 +27,10 @@ class Extranet::PersonalDataController < Extranet::ApplicationController
     params.require(:university_person)
           .permit(
             :gender, :birthdate, :summary, :biography,
-            :phone_mobile, :phone_professional, :phone_personal,
-            :address, :zipcode, :city, :country,
-            :url, :linkedin, :twitter
+            :phone_mobile, :phone_mobile_visibility, :phone_professional, :phone_professional_visibility, :phone_personal, :phone_personal_visibility,
+            :address, :zipcode, :city, :country, :address_visibility,
+            :url,
+            :linkedin, :linkedin_visibility, :twitter, :twitter_visibility, :mastodon, :mastodon_visibility
           )
   end
 

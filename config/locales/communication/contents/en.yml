@@ -359,6 +359,8 @@ en:
               add_organization: Add organization
               alphabetical:
                 label: Alphabetical order
+              category_id:
+                label: Category
               description:
                 label: Description
               element:
@@ -375,8 +377,14 @@ en:
                 url:
                   label: Website
                   placeholder: https://
+              mode:
+                label: Which organizations?
+                options:
+                  category: A specific category
+                  selection: Selected organizations
               option_logo:
                 label: Logo
+              options: Display options
               remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
@@ -435,6 +443,8 @@ en:
               add_person: Add person
               alphabetical:
                 label: Alphabetical order
+              category_id:
+                label: Category
               delete_title: Remove person
               description:
                 label: Description
@@ -443,9 +453,15 @@ en:
                 person:
                   label: Person
                   placeholder: Select the person
-              role:
-                label: Role
-                placeholder: Enter person's role
+                role:
+                  label: Role
+                  placeholder: Enter person's role
+              mode:
+                label: Which persons shall we show?
+                options:
+                  category: A specific category
+                  selection: A selection of persons
+              options: Display options
               with_link:
                 label: Clickable link to person's page
               with_photo:
@@ -461,16 +477,6 @@ en:
                 id:
                   label: ''
                   placeholder: Choose post
-              mode:
-                label: Which posts shall we show?
-                options:
-                  all: All posts
-                  categories: A list of all posts' categories
-                  category: A specific category
-                  selection: A selection of posts
-              posts_quantity:
-                label: Quantity
-                placeholder: Enter quantity
               hide_author:
                 label: Hide author
               hide_category:
@@ -481,6 +487,16 @@ en:
                 label: Hide image
               hide_summary:
                 label: Hide summary
+              mode:
+                label: Which posts shall we show?
+                options:
+                  all: All posts
+                  categories: A list of all posts' categories
+                  category: A specific category
+                  selection: A selection of posts
+              posts_quantity:
+                label: Quantity
+                placeholder: Enter quantity
             layouts:
               alternate:
                 description: Posts either on the left or on the right, composing a graphically light page.
