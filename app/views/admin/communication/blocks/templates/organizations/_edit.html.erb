@@ -25,7 +25,7 @@
 <div v-if="data.mode === 'selection'">
   <div><%= osuny_label University::Organization.model_name.human(count: 2) %></div>
   <%= block_component_add_element block, t('.add_organization') %>
-  <draggable :list="data.elements" class="my-3 <%= if_appstack 'list-group' %>" handle=".partnerHandle">
+  <draggable :list="data.elements" class="mb-3 <%= if_appstack 'list-group' %>" handle=".partnerHandle">
     <div v-for="(element, index) in data.elements" class="draggable-item <%= if_appstack 'list-group-item' %>">
       <div class="d-flex border-top pt-3 mt-n3">
         <div>
