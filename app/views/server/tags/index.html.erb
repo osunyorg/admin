@@ -1,0 +1,37 @@
+<% content_for :title, Communication::Website::Showcase::Tag.model_name.human(count: 2) %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Showcase::Tag.human_attribute_name('name') %></th>
+        <th><%= Communication::Website::Showcase::Tag.human_attribute_name('websites') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr>
+          <td><%= link_to tag, server_tag_path(tag) %></td>
+          <td><%= tag.websites.count %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                        edit_server_tag_path(tag),
+                        class: button_classes %>
+              <%= link_to t('delete'),
+                        server_tag_path(tag),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% content_for :action_bar_right do %>
+  <%= link_to t('create'), new_server_tag_path, class: button_classes %>
+<% end %>

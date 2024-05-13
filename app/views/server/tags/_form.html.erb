@@ -1,0 +1,10 @@
+<%= simple_form_for tag, url: tag.new_record? ? server_tags_path : server_tag_path(tag) do |f| %>
+  <%= f.input :name %>
+  <%= f.association :websites, 
+                    as: :check_boxes, 
+                    collection: Communication::Website.ordered,
+                    label_method: -> (website) { "#{website} — #{website.university}" } %>
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

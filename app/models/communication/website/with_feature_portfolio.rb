@@ -1,4 +1,4 @@
-module Communication::Website::FeaturePortfolio
+module Communication::Website::WithFeaturePortfolio
   extend ActiveSupport::Concern
 
   included do
@@ -12,6 +12,8 @@ module Communication::Website::FeaturePortfolio
                 foreign_key: :communication_website_id,
                 dependent: :destroy
                 alias :projects_categories :portfolio_categories
+
+    scope :with_feature_portfolio, -> { where(feature_portfolio: true) }
   end
 
   def has_portfolio_projects?

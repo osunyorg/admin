@@ -17,6 +17,7 @@
 #  git_endpoint            :string
 #  git_files_analysed_at   :datetime
 #  git_provider            :integer          default("github")
+#  highlighted_in_showcase :boolean          default(FALSE)
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
 #  locked_at               :datetime
@@ -60,15 +61,15 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
-  include FeatureAgenda
-  include FeatureBlog
-  include FeaturePortfolio
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithDependencies
   include WithDeuxfleurs
+  include WithFeatureAgenda
+  include WithFeaturePosts
+  include WithFeaturePortfolio
   include WithGit
   include WithGitRepository
   include WithLanguages
@@ -80,6 +81,7 @@ class Communication::Website < ApplicationRecord
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
   include WithSecurity
+  include WithShowcase
   include WithStyle
   include WithTheme
   include WithUniversity
@@ -99,7 +101,6 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
-  scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
     joins(:university)
