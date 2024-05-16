@@ -29,11 +29,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   end
 
   def organizations
-    @organizations ||= elements.collect(&:organization).compact.uniq
+    @organizations ||= selected_elements.collect(&:organization).compact.uniq
   end
 
   def organization_ids
-    @organization_ids ||= @elements.collect(&:organization_id).compact.uniq
+    @organization_ids ||= organizations.collect(&:id)
   end
 
   def selected_elements
