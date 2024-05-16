@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Communication::Website::Heading.find_each do |heading|
+    Communication::Block::Heading.where(slug: nil).find_each do |heading|
       heading.set_slug
       heading.update_column :slug, heading.slug
     end
