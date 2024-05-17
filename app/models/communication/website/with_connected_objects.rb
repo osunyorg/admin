@@ -24,11 +24,13 @@ module Communication::Website::WithConnectedObjects
   def delete_obsolete_connections
     # On ne liste pas toutes les connexions du website, 
     # mais juste les connexions pour lesquelles le site est la source.
-    connections = connections.where(direct_source: self)
+    connections_as_direct_source = connections.where(direct_source: self)
     # On prend l'about et ses dépendances récursives
     # On ne prend pas toutes les dépendances parce qu'on s'intéresse uniquement à la connexion via about
-    dependencies = about_dependencies
-    Communication::Website::Connection.delete_useless_connections(connections, dependencies)
+    Communication::Website::Connection.delete_useless_connections(
+      connections_as_direct_source, 
+      about_dependencies
+    )
   end
 
   # Le site fait son ménage de printemps
