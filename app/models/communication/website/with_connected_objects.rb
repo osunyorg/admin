@@ -24,7 +24,6 @@ module Communication::Website::WithConnectedObjects
   def delete_obsolete_connections
     # On prend l'about et ses dépendances récursives
     # On ne prend pas toutes les dépendances parce qu'on s'intéresse uniquement à la connexion via about
-    about_dependencies = [about] + about.recursive_dependencies
     Communication::Website::Connection.delete_useless_connections(self, about_dependencies)
   end
 
@@ -145,7 +144,7 @@ module Communication::Website::WithConnectedObjects
       public_send(association_name).find_each(&:connect_dependencies)
     end
     connect(about, self) if about.present?
-    destroy_obsolete_connections
+    delete_obsolete_connections_for_self_and_direct_sources
     # In the same job
     create_missing_special_pages
     initialize_menus
@@ -157,7 +156,12 @@ module Communication::Website::WithConnectedObjects
 
   def connect_about
     self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
-    destroy_obsolete_connections
+    delete_obsolete_connections
+  end
+
+  def about_dependencies
+    about.present?  ? [about] + about.recursive_dependencies
+                    : []
   end
 
   def connect_object(indirect_object, direct_source, direct_source_type: nil)

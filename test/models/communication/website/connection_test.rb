@@ -66,7 +66,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
     assert_difference -> { Communication::Website::Connection.count } => -2 do
-      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+      assert_enqueued_with(job: Communication::CleanWebsiteJob, args: [page.communication_website_id]) do
         page.blocks.find_by(position: 2).destroy
       end
       perform_enqueued_jobs
@@ -87,7 +87,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
     # On supprime le bloc qui contient PA : -3 (parce que PA doit être supprimé aussi ainsi que son bloc Organisations mais pas Noesya, toujours connectée via le block 3)
     assert_difference -> { Communication::Website::Connection.count } => -3 do
-      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+      assert_enqueued_with(job: Communication::CleanWebsiteJob, args: [page.communication_website_id]) do
         page.blocks.find_by(position: 2).destroy
       end
       perform_enqueued_jobs
@@ -144,10 +144,23 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
     assert_difference -> { Communication::Website::Connection.count } => -6 do
-      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+      assert_enqueued_with(job: Communication::CleanWebsiteJob, args: [website_with_github.id]) do
         website_with_github.update(about: nil)
       end
       perform_enqueued_jobs
+    end
+  end
+
+  def test_delete_obsolete_connections_stays_in_scope
+    website_with_github.update(about: default_school)
+    page = communication_website_pages(:page_with_no_dependency)
+    setup_page_connections(page)
+    program = education_programs(:default_program)
+    # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
+    assert_difference -> { Communication::Website::Connection.count } => 1 do
+      block = page.blocks.new(position: 3, published: true, template_kind: :programs)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{program.id}\" } ] }"
+      block.save
     end
   end
 
