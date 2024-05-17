@@ -39,7 +39,9 @@ module Communication::Website::WithConnectedObjects
   # - par le website lui-même au changement du about
   def delete_obsolete_connections_for_self_and_direct_sources
     direct_source_ids_per_type_through_connections.each do |direct_source_type, direct_source_ids|
+      # On récupère une liste d'objets directs d'une même classe
       direct_sources = direct_source_type.safe_constantize.where(id: direct_source_ids)
+      # On exécute en synchrone pour chaque objet
       direct_sources.find_each(&:delete_obsolete_connections)
     end
   end
