@@ -342,6 +342,23 @@ fr:
                   'true': Oui. D'autres personnes peuvent partager des adaptations de mon œuvre dans n'importe quelles conditions.
               description:
                 label: Description
+          links:
+            description: Une liste de liens externes, par exemple vers des services, des réseaux sociaux ou des ressources.
+            edit:
+              add: Ajouter un lien
+              description:
+                label: Description
+              element:
+                description:
+                  label: Description
+                  placeholder: Entrer la description du lien
+                url:
+                  label: URL
+                  placeholder: 'https://'
+                title:
+                  label: Titre
+                  placeholder: Entrer le titre du lien
+              remove: Enlever le lien
           locations:
             description: Une sélection de sites dans des campus.
             edit:
@@ -655,6 +672,7 @@ fr:
           image: Image
           key_figures: Chiffres-clés
           license: Licence
+          links: Liens
           locations: Campus
           organizations: Organisations
           pages: Pages
