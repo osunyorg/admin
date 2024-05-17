@@ -26,8 +26,9 @@ module Communication::Website::WithConnectedObjects
       # On ne liste pas toutes les connexions du website, 
       # mais juste les connexions pour lesquelles le site est la source.
       connections.where(direct_source: self), 
-      # On prend l'about et ses dépendances récursives
-      # On ne prend pas toutes les dépendances parce qu'on s'intéresse uniquement à la connexion via about
+      # On prend l'about et ses dépendances récursives.
+      # On ne prend pas toutes les dépendances parce qu'on s'intéresse 
+      # uniquement à la connexion via about.
       about_dependencies
     )
   end
