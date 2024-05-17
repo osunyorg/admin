@@ -34,7 +34,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     Delayed::Job.destroy_all
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"
     # On vérifie qu'on enqueue le job qui clean les websites
-    assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+    assert_enqueued_with(job: Communication::CleanWebsiteJob) do
       block.save
     end
 
@@ -50,7 +50,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
     Delayed::Job.destroy_all
 
-    assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+    assert_enqueued_with(job: Communication::CleanWebsiteJob) do
       block.destroy
     end
 

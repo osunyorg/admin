@@ -20,25 +20,30 @@ module Communication::Website::WithConnectedObjects
   end
   handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
+  # Le site fait le ménage de ses connexions directes uniquement
+  def delete_obsolete_connections
+    Communication::Website::Connection.delete_useless_connections(
+      # On ne liste pas toutes les connexions du website, 
+      # mais juste les connexions pour lesquelles le site est la source.
+      connections.where(direct_source: self), 
+      # On prend l'about et ses dépendances récursives.
+      # On ne prend pas toutes les dépendances parce qu'on s'intéresse 
+      # uniquement à la connexion via about.
+      about_dependencies
+    )
+  end
+
+  # Le site fait son ménage de printemps
   # Appelé
   # - par un objet avec des connexions lorsqu'il est destroyed
   # - par le website lui-même au changement du about
-  def destroy_obsolete_connections
-    up_to_date_dependencies = recursive_dependencies(follow_direct: true)
-    deletable_connection_ids = []
-    connections.find_each do |connection|
-      has_living_connection = up_to_date_dependencies.detect { |dependency|
-        dependency.class.name == connection.indirect_object_type &&
-        dependency.id == connection.indirect_object_id
-      }
-      deletable_connection_ids << connection.id unless has_living_connection
+  def delete_obsolete_connections_for_self_and_direct_sources
+    direct_source_ids_per_type_through_connections.each do |direct_source_type, direct_source_ids|
+      # On récupère une liste d'objets directs d'une même classe
+      direct_sources = direct_source_type.safe_constantize.where(id: direct_source_ids)
+      # On exécute en synchrone pour chaque objet
+      direct_sources.find_each(&:delete_obsolete_connections)
     end
-    # On utilise delete_all pour supprimer les connexions obsolètes en une unique requête DELETE FROM
-    # Cependant, on peut le faire car les connexions n'ont pas de callback.
-    # Dans le cas où on en rajoute au destroy, il faut repasser sur un appel de destroy sur chaque
-    connections.where(id: deletable_connection_ids).delete_all
-    # On traite ensuite chaque connexion, pour vérifier qu'elle encore pertinente
-    connections.reload.find_each &:destroy_if_obsolete
   end
 
   def has_connected_object?(indirect_object)
@@ -119,7 +124,7 @@ module Communication::Website::WithConnectedObjects
       public_send(association_name).find_each(&:connect_dependencies)
     end
     connect(about, self) if about.present?
-    destroy_obsolete_connections
+    delete_obsolete_connections_for_self_and_direct_sources
     # In the same job
     create_missing_special_pages
     initialize_menus
@@ -131,7 +136,12 @@ module Communication::Website::WithConnectedObjects
 
   def connect_about
     self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
-    destroy_obsolete_connections
+    delay(queue: :long_cleanup).delete_obsolete_connections
+  end
+
+  def about_dependencies
+    about.present?  ? [about] + about.recursive_dependencies
+                    : []
   end
 
   def connect_object(indirect_object, direct_source, direct_source_type: nil)
@@ -159,5 +169,19 @@ module Communication::Website::WithConnectedObjects
     !indirect_object.try(:is_direct_object?) &&
     # On ne connecte pas des objets qui ne sont pas issus de modèles ActiveRecord (comme les composants des blocs)
     indirect_object.is_a?(ActiveRecord::Base)
+  end
+
+  # On passe par les connexions pour éviter d'analyser des objets directs qui n'ont pas d'objets indirects du tout
+  # Le website lui même est inclus dans le retour (s'il a un about qui déclenche des connexions)
+  def direct_source_ids_per_type_through_connections
+    # {
+    #  'Communication::Website::Post': ['ID1', 'ID2', ...],
+    #  'Communication::Website::Page': ['ID1', 'ID2', ...],
+    #  'Communication::Website': ['ID1'],
+    #  ...
+    # }
+    connections.group(:direct_source_type)
+               .pluck(:direct_source_type, Arel.sql('array_agg(DISTINCT direct_source_id)'))
+               .to_h
   end
 end
