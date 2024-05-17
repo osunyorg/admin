@@ -22,13 +22,13 @@ module Communication::Website::WithConnectedObjects
 
   # Le site fait le ménage de ses connexions directes uniquement
   def delete_obsolete_connections
-    # On ne liste pas toutes les connexions du website, 
+    # On ne liste pas toutes les connexions du website,
     # mais juste les connexions pour lesquelles le site est la source.
     connections_as_direct_source = connections.where(direct_source: self)
     # On prend l'about et ses dépendances récursives
     # On ne prend pas toutes les dépendances parce qu'on s'intéresse uniquement à la connexion via about
     Communication::Website::Connection.delete_useless_connections(
-      connections_as_direct_source, 
+      connections_as_direct_source,
       about_dependencies
     )
   end
@@ -43,34 +43,6 @@ module Communication::Website::WithConnectedObjects
       direct_sources.find_each(&:delete_obsolete_connections)
     end
   end
-
-
-
-  # # Appelé
-  # # - par un objet avec des connexions lorsqu'il est destroyed
-  # # - par le website lui-même au changement du about
-  # def destroy_obsolete_connections
-  #   up_to_date_dependencies = recursive_dependencies(follow_direct: true)
-  #   deletable_connection_ids = []
-  #   connections.find_each do |connection|
-  #     has_living_connection = up_to_date_dependencies.detect { |dependency|
-  #       dependency.class.name == connection.indirect_object_type &&
-  #       dependency.id == connection.indirect_object_id
-  #     }
-  #     deletable_connection_ids << connection.id unless has_living_connection
-  #   end
-  #   # On utilise delete_all pour supprimer les connexions obsolètes en une unique requête DELETE FROM
-  #   # Cependant, on peut le faire car les connexions n'ont pas de callback.
-  #   # Dans le cas où on en rajoute au destroy, il faut repasser sur un appel de destroy sur chaque
-  #   connections.where(id: deletable_connection_ids).delete_all
-  #   # On traite ensuite chaque objet direct, pour vérifier que ses connexions sont encore pertinentes dans leur contexte
-  #   direct_objects_association_names.each do |association_name|
-  #     connected_ids = connections.where(direct_source_type: association_name).pluck(:direct_source_id)
-  #     association_name.where(id: connected_ids).each do |direct_source_id|
-  #     # We use find_each to avoid loading all the objects in memory
-  #     public_send(association_name).find_each(&:destroy_obsolete_connections)
-  #   end
-  # end
 
   def has_connected_object?(indirect_object)
     connections.for_object(indirect_object).exists?
@@ -162,7 +134,7 @@ module Communication::Website::WithConnectedObjects
 
   def connect_about
     self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
-    delete_obsolete_connections
+    delay(queue: :long_cleanup).delete_obsolete_connections
   end
 
   def about_dependencies
