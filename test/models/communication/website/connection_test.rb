@@ -156,11 +156,14 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     page = communication_website_pages(:page_with_no_dependency)
     setup_page_connections(page)
     program = education_programs(:default_program)
-    # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
-    assert_difference -> { Communication::Website::Connection.count } => 1 do
+    # On connecte une formation à la page : +3 (bloc, formation, diplôme)
+    assert_difference -> { Communication::Website::Connection.count } => 3 do
       block = page.blocks.new(position: 3, published: true, template_kind: :programs)
-      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{program.id}\" } ] }"
+      block.data = "{ \"elements\": [ { \"id\": \"#{program.id}\" } ] }"
       block.save
+    end
+    assert_no_difference('Communication::Website::Connection.count') do
+      website_with_github.reload.delete_obsolete_connections_for_self_and_direct_sources
     end
   end
 
