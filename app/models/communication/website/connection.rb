@@ -38,15 +38,15 @@ class Communication::Website::Connection < ApplicationRecord
     for_object(object).distinct(:website).collect(&:website).uniq
   end
 
-  def self.delete_useless_connections(direct_object, dependencies)
+  def self.delete_useless_connections(connections, dependencies)
     deletable_connection_ids = []
-    direct_object.connections.find_each do |connection|
+    connections.find_each do |connection|
       deletable_connection_ids << connection.id if connection.obsolete_in?(dependencies)
     end
     # On utilise delete_all pour supprimer les connexions obsolètes en une unique requête DELETE FROM
     # Cependant, on peut le faire car les connexions n'ont pas de callback.
     # Dans le cas où on en rajoute au destroy, il faut repasser sur un appel de destroy sur chaque
-    direct_object.connections.where(id: deletable_connection_ids).delete_all
+    connections.where(id: deletable_connection_ids).delete_all
   end
 
   def to_s
