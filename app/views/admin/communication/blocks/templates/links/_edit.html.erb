@@ -1,0 +1,32 @@
+<div class="row pure__row--small">
+  <div class="col-xl-6">
+    <%= block_component_edit block, :description %>
+  </div>
+</div>
+
+<%= block_component_add_element block, t('.add') %>
+
+<draggable :list="data.elements" handle=".dragHandle" class="row pure__row--small">
+  <div v-for="(element, index) in data.elements" class="col-lg-4">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <a class="btn ps-0 pt-0 dragHandle">
+          <i class="<%= Icon::DRAG %> handle"></i>
+        </a>
+        {{ element.title }}
+        <div class="float-end">
+          <a  class="btn btn-sm text-danger"
+              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+              title="<%= t '.remove' %>">
+              <i class="<%= Icon::DELETE %>"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <%= block_component_edit block, :title, template: @element %>
+        <%= block_component_edit block, :description, template: @element %>
+        <%= block_component_edit block, :url, template: @element %>
+      </div>
+    </div>
+  </div>
+</draggable>

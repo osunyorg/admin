@@ -71,6 +71,7 @@ class Communication::Block < ApplicationRecord
     image: 51,
     key_figures: 56,
     license: 4040,
+    links: 4050,
     locations: 3200,
     organizations: 200,
     pages: 600,
@@ -88,7 +89,7 @@ class Communication::Block < ApplicationRecord
     basic: [:chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects],
-    utilities: [:files, :definitions, :contact, :license, :embed]
+    utilities: [:files, :definitions, :contact, :links, :license, :embed]
   }
 
   scope :published, -> { where(published: true) }

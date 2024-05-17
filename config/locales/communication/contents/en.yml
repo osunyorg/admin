@@ -342,6 +342,22 @@ en:
                   'true': Yes. Others can share adaptations of my work under any terms.
               description:
                 label: Description
+          links:
+            description: A list of external links, for example to services, social networks or resources.
+            edit:
+              add: Add a link
+              description:
+                label: Description
+              element:
+                description:
+                  label: Description
+                  placeholder: Enter link description
+                url:
+                  label: URL
+                  placeholder: 'https://'
+                title:
+                  label: Title
+                  placeholder: Enter link title
           locations:
             description: A selection of locations on a campus.
             edit:
@@ -655,6 +671,7 @@ en:
           image: Image
           key_figures: Key figures
           license: License
+          links: Links
           locations: Campus
           organizations: Organizations
           pages: Pages
