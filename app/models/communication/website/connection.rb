@@ -41,7 +41,6 @@ class Communication::Website::Connection < ApplicationRecord
   def destroy_if_obsolete
     destroy if obsolete?
   end
-  handle_asynchronously :destroy_if_obsolete, queue: :cleanup
 
   def to_s
     "#{id.split('-').first}"
