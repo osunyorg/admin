@@ -50,7 +50,7 @@ module Communication::Website::WithGitRepository
       unlock_for_background_jobs!
     end
   end
-  handle_asynchronously :sync_indirect_object_with_git, queue: :default
+  # FIXME handle_asynchronously :sync_indirect_object_with_git, queue: :default
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
@@ -69,7 +69,7 @@ module Communication::Website::WithGitRepository
       unlock_for_background_jobs!
     end
   end
-  handle_asynchronously :destroy_obsolete_git_files, queue: :cleanup
+  # FIXME handle_asynchronously :destroy_obsolete_git_files, queue: :cleanup
 
   def invalidate_access_token!
     # Nullify the expired token
@@ -108,7 +108,7 @@ module Communication::Website::WithGitRepository
       unlock_for_background_jobs!
     end
   end
-  handle_asynchronously :update_theme_version, queue: :default
+  # FIXME handle_asynchronously :update_theme_version, queue: :default
 
   protected
 

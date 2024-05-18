@@ -6,7 +6,8 @@ class Admin::DashboardController < Admin::ApplicationController
     @namespaces << Communication if feature_communication?
     @namespaces << Administration if feature_administration?
     # higher priorities are negatives. Default is priority 0
-    @background_tasks_count = Delayed::Job.where('priority <= 0').length
+    # FIXME
+    @background_tasks_count = 0
     breadcrumb
   end
 end

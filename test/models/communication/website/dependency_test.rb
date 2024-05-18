@@ -129,7 +129,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     find_performable_method_job(:destroy_obsolete_git_files_without_delay, website)
   end
 
-  # On ne peut pas utiliser assert_enqueued_jobs sur les méthodes asynchrones gérées avec handle_asynchronously
+  # FIXME On ne peut pas utiliser assert_enqueued_jobs sur les méthodes asynchrones gérées avec handle_asynchronously
   def find_performable_method_job(method, object)
     Delayed::Job.all.detect { |job|
       job.payload_object.method_name == method &&

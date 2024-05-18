@@ -18,7 +18,7 @@ module Communication::Website::WithConnectedObjects
       unlock_for_background_jobs!
     end
   end
-  handle_asynchronously :clean_and_rebuild, queue: :cleanup
+  # FIXME handle_asynchronously :clean_and_rebuild, queue: :cleanup
 
   # Le site fait le ménage de ses connexions directes uniquement
   def delete_obsolete_connections

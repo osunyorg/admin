@@ -1,4 +1,6 @@
-class Communication::CleanWebsiteJob < ApplicationJob
+class Communication::Website::CleanJob < ApplicationJob
+  self.good_job_labels = ['website']
+
   queue_as :long_cleanup
 
   def perform(website_id)

@@ -39,7 +39,7 @@ module WithGit
       website.unlock_for_background_jobs!
     end
   end
-  handle_asynchronously :sync_with_git, queue: :default
+  # FIXME handle_asynchronously :sync_with_git, queue: :default
 
   protected
 

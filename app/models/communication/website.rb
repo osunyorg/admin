@@ -16,7 +16,7 @@
 #  git_branch              :string
 #  git_endpoint            :string
 #  git_files_analysed_at   :datetime
-#  git_provider            :integer          default("github")
+#  git_provider            :integer          default(0)
 #  highlighted_in_showcase :boolean          default(FALSE)
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
@@ -164,7 +164,7 @@ class Communication::Website < ApplicationRecord
       unlock_for_background_jobs!
     end
   end
-  handle_asynchronously :sync_with_git, queue: :default
+  # FIXME handle_asynchronously :sync_with_git, queue: :default
 
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
