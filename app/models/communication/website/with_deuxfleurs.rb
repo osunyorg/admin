@@ -15,6 +15,11 @@ module Communication::Website::WithDeuxfleurs
   # 4. both exists, deuxfleurs hosting needs to change identifier (Waiting for API possibility)
   def deuxfleurs_setup
     return unless deuxfleurs_hosting?
+    Communication::Website::Deuxfleurs::SetupJob.perform_later(id)
+  end
+
+  # Appelé par Communication::Website::Deuxfleurs::SetupJob
+  def deuxfleurs_setup_safely
     if repository.blank?
       deuxfleurs_create_github_repository
       sleep 10
@@ -27,7 +32,6 @@ module Communication::Website::WithDeuxfleurs
       save
     end
   end
-  # FIXME handle_asynchronously :deuxfleurs_setup, queue: :default
 
   def deuxfleurs_golive
     return unless in_production_changed? && in_production
