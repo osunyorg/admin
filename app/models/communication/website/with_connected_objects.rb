@@ -7,18 +7,28 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
+  # Appelé uniquement en asynchrone par Communication::Website::CleanAndRebuildJob
   def clean_and_rebuild
-    return unless git_repository.valid?
-    # On force le déverrouillage pour faire un nettoyage
-    unlock_for_background_jobs!
-    lock_for_background_jobs!
-    begin
-      clean_and_rebuild_safely
-    ensure
-      unlock_for_background_jobs!
+    direct_objects_association_names.each do |association_name|
+      # We use find_each to avoid loading all the objects in memory
+      public_send(association_name).find_each(&:connect_dependencies)
     end
+    connect(about, self) if about.present?
+    delete_obsolete_connections_for_self_and_direct_sources
+    # In the same job
+    create_missing_special_pages
+    initialize_menus
+    sync_with_git_safely
+    destroy_obsolete_git_files_safely
+    get_current_theme_version!
+    screenshot!
   end
-  # FIXME handle_asynchronously :clean_and_rebuild, queue: :cleanup
+  
+  # Appelé uniquement en asynchrone par Communication::Website::CleanJob
+  def clean 
+    delete_obsolete_connections_for_self_and_direct_sources
+    destroy_obsolete_git_files
+  end
 
   # Le site fait le ménage de ses connexions directes uniquement
   def delete_obsolete_connections
@@ -39,6 +49,7 @@ module Communication::Website::WithConnectedObjects
   # - par le website lui-même au changement du about
   def delete_obsolete_connections_for_self_and_direct_sources
     direct_source_ids_per_type_through_connections.each do |direct_source_type, direct_source_ids|
+      next if direct_source_type.nil?
       # On récupère une liste d'objets directs d'une même classe
       direct_sources = direct_source_type.safe_constantize.where(id: direct_source_ids)
       # On exécute en synchrone pour chaque objet
@@ -118,25 +129,9 @@ module Communication::Website::WithConnectedObjects
     ]
   end
 
-  def clean_and_rebuild_safely
-    direct_objects_association_names.each do |association_name|
-      # We use find_each to avoid loading all the objects in memory
-      public_send(association_name).find_each(&:connect_dependencies)
-    end
-    connect(about, self) if about.present?
-    delete_obsolete_connections_for_self_and_direct_sources
-    # In the same job
-    create_missing_special_pages
-    initialize_menus
-    sync_with_git_safely
-    destroy_obsolete_git_files_safely
-    get_current_theme_version!
-    screenshot!
-  end
-
   def connect_about
     self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
-    delay(queue: :long_cleanup).delete_obsolete_connections
+    delay(queue: :elephant).delete_obsolete_connections
   end
 
   def about_dependencies
