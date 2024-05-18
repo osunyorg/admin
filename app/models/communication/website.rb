@@ -149,22 +149,20 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    if locked_for_background_jobs?
-      # Reenqueue
-      delay(run_at: 1.minute.from_now, queue: :default)
-        .sync_with_git_without_delay
-      return
-    else
-      return unless should_sync_with_git?
-      lock_for_background_jobs!
-    end
-    begin
-      sync_with_git_safely
-    ensure
-      unlock_for_background_jobs!
-    end
+    Communication::Website::SyncWithGitJob.perform_later
   end
-  # FIXME handle_asynchronously :sync_with_git, queue: :default
+
+  # Appelé en asynchrone par Communication::Website::SyncWithGitJob
+  def sync_with_git_safely
+    Communication::Website::GitFile.sync website, self
+    recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    references.each do |object|
+      Communication::Website::GitFile.sync website, object
+    end
+    git_repository.sync!
+  end
 
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
@@ -183,17 +181,6 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
-  end
-
-  def sync_with_git_safely
-    Communication::Website::GitFile.sync website, self
-    recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-      Communication::Website::GitFile.sync website, object
-    end
-    references.each do |object|
-      Communication::Website::GitFile.sync website, object
-    end
-    website.git_repository.sync!
   end
 
   def reconnect_dependency(dependency, new_university_id)
