@@ -29,6 +29,7 @@ module Research::Hal
     ids = []
     Delayed::Job.find_each do |job|
       next unless job.public_respond_to?(:payload_object)
+      # FIXME sync_indirect_object_with_git_without_delay
       if  job.payload_object.method_name == :sync_indirect_object_with_git_without_delay &&
           job.payload_object.args.first.is_a?(Research::Publication)
         ids << job.id

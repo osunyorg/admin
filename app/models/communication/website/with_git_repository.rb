@@ -35,10 +35,6 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website, indirect_object)
-  end
-
-  def sync_indirect_object_with_git_safely(indirect_object)
     indirect_object.direct_sources.each do |direct_source|
       add_direct_source_to_sync(direct_source)
     end
