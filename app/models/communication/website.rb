@@ -16,7 +16,7 @@
 #  git_branch              :string
 #  git_endpoint            :string
 #  git_files_analysed_at   :datetime
-#  git_provider            :integer          default(0)
+#  git_provider            :integer          default("github")
 #  highlighted_in_showcase :boolean          default(FALSE)
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
