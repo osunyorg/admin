@@ -10,6 +10,8 @@ class RemoveDelayedJob < ActiveRecord::Migration[7.1]
       table.datetime :failed_at                        # Set when all retries have failed (actually, by default, the record is deleted instead)
       table.string :locked_by                          # Who is working on this object (if locked)
       table.string :queue                              # The name of the queue this job is in
+      table.string :signature
+      table.text :args
       table.timestamps null: true
     end
   end
