@@ -53,11 +53,11 @@ class University::Organization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithBlobs
   include WithCountry
   include WithGeolocation
   include WithGitFiles
-  include WithTranslations
   include WithUniversity
 
   attr_accessor :created_from_extranet

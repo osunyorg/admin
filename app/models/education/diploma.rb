@@ -35,8 +35,8 @@ class Education::Diploma < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithGitFiles
-  include WithTranslations
   include WithUniversity
 
   has_many :programs, dependent: :nullify

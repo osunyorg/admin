@@ -48,6 +48,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithAccessibility
   include WithBlobs
   include WithCal
@@ -55,7 +56,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithTime
-  include WithTranslations
   include WithTree
   include WithUniversity
 
