@@ -4,25 +4,44 @@ window.summernoteManager = {
     noteButton: function (context) {
         'use strict';
         var ui = $.summernote.ui,
-            button;
-        button = ui.button({
-            contents: '<i class="fas fa-note-sticky"/>',
-            tooltip: 'Note (beta)',
-            className: 'note-btn-note',
-            click: function () {
-                var text = context.invoke('editor.getSelectedText'),
-                    // TODO find if it's a note or not
-                    isANote = false,
-                    note;
-                if (isANote) {
-                    // TODO remove note
-                } else {
-                    note = '<note>' + text + '</note>';
-                    context.invoke('editor.pasteHTML', note);
+            button = ui.button({
+                contents: '<i class="fas fa-note-sticky" />',
+                tooltip: 'Note (beta)',
+                className: 'note-btn-note',
+                click: function () {
+                    var text = context.invoke('editor.getSelectedText'),
+                        // TODO find if it's a note or not
+                        isANote = false,
+                        note;
+                    if (isANote) {
+                        // TODO remove note
+                    } else {
+                        note = '<note>' + text + '</note>';
+                        context.invoke('editor.pasteHTML', note);
+                    }
                 }
-            }
-        });
-        // return button as jquery object
+            });
+        return button.render();
+    },
+    checkButton: function (context) {
+        'use strict';
+        var ui = $.summernote.ui,
+            button = ui.button({
+                contents: '<i class="fas fa-magic" />',
+                tooltip: 'Correction (beta)',
+                className: 'note-btn-check',
+                click: function () {
+                    'use strict';
+                    $.post('/admin/check',
+                        {
+                            text: context.code(),
+                            language: 'fr'
+                        }
+                    ).done(function (data) {
+                        console.log(data);
+                    });
+                }
+            });
         return button.render();
     },
     init: function () {
@@ -49,7 +68,7 @@ window.summernoteManager = {
                     ['font', ['bold', 'italic']],
                     ['position', ['superscript']],
                     ['insert', ['link', 'unlink']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a'],
@@ -62,7 +81,7 @@ window.summernoteManager = {
                     ['position', ['superscript']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
@@ -75,7 +94,7 @@ window.summernoteManager = {
                     ['position', ['superscript']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink', 'note']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
@@ -88,7 +107,7 @@ window.summernoteManager = {
                     ['font', ['bold', 'italic']],
                     ['position', ['superscript', 'subscript']],
                     ['para', ['ul', 'ol']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ],
                 styleTags: [
                     'p',
@@ -213,13 +232,6 @@ window.summernoteManager = {
                 this.sanitizeElementAttributes(child, allowedAttributes);
             }
         }
-    },
-
-    invoke: function () {
-        'use strict';
-        return {
-            init: this.init.bind(this)
-        };
     }
 };
 
