@@ -41,6 +41,11 @@ namespace :app do
       template.option_summary       = !template.hide_summary
       block.save
     end
+    # Headings (pas de lien avec les options)
+    Communication::Block::Heading.where(slug: nil).find_each do |heading|
+      heading.set_slug
+      heading.update_column :slug, heading.slug
+    end
   end
 
   namespace :websites do
