@@ -39,6 +39,7 @@ window.summernoteManager = {
                         }
                     ).done(function (data) {
                         console.log(data);
+                        context.invoke('code', data)
                     });
                 }
             });

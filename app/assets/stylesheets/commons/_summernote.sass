@@ -71,6 +71,42 @@
                         text-underline-offset: auto
                         &[target="_blank"]::after
                             filter: invert(1)
+                .languagetool
+                    text-decoration: 2px underline black
+                    text-underline-offset: 3px
+                    position: relative
+                    &__TYPO
+                        text-decoration-color: red
+                    &__MISC
+                        text-decoration-color: orange
+                    &__CAT_TOURS_CRITIQUES
+                        text-decoration-color: purple
+                    &__suggestion
+                        background: white
+                        color: black
+                        border: 1px solid #cccccc
+                        border-radius: 4px
+                        display: block
+                        font-size: px2rem(16)
+                        left: 0
+                        line-height: 120%
+                        position: absolute
+                        text-decoration: none
+                        top: 25px
+                        padding: 10px
+                        width: 300px
+                        z-index: 999
+                        &__replacements
+                            display: block
+                            margin-top: 10px
+                        &__replacement
+                            background: blue
+                            border-radius: 4px
+                            color: white
+                            padding: 2px 4px
+                            margin-right: 4px
+                            font-size: px2rem(14)
+
     b
         color: black
         font-weight: bold

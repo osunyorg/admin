@@ -15,11 +15,11 @@ class Admin::TranslationController < Admin::ApplicationController
 
   # TODO check abilities (no visitor should use this)
   def check
-    response = LanguageTool.check(
+    osuny_language_tool = Osuny::LanguageTool.new(
       params[:text],
       params[:language]
     )
-    render json: response
+    render plain: osuny_language_tool.html_with_suggestions
   end
 
   protected
