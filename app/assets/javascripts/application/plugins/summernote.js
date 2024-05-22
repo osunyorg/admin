@@ -31,16 +31,13 @@ window.summernoteManager = {
                 tooltip: 'Correction (beta)',
                 className: 'note-btn-check',
                 click: function () {
-                    'use strict';
                     $.post('/admin/check',
                         {
                             text: context.code(),
                             language: 'fr'
-                        }
-                    ).done(function (data) {
-                        console.log(data);
-                        context.invoke('code', data)
-                    });
+                        }).done(function (data) {
+                            context.invoke('code', data)
+                        });
                 }
             });
         return button.render();
