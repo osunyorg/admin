@@ -31,7 +31,7 @@ window.summernoteManager = {
                 tooltip: 'Correction (beta)',
                 className: 'note-btn-check',
                 click: function () {
-                    $.post('/admin/check',{
+                    $.post('/admin/check', {
                         text: context.code(),
                         language: 'fr'
                     }).done(function (data) {
