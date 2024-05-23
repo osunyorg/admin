@@ -2,8 +2,6 @@
 class Osuny::LanguageTool
   attr_reader :text, :language
 
-  ENDPOINT = 'https://api.languagetoolplus.com'.freeze
-
   def initialize(text, language)
     @text = text
     @language = language
@@ -17,30 +15,26 @@ class Osuny::LanguageTool
 
   protected
 
-  def check
-    @check ||= JSON.parse(check_response.body)
+  def api_response
+    @api_response ||= api.check text: text, language: language
   end
 
-  def check_response
-    # LanguageTool::API.new.check text: text, language: language
-    @check_response ||= connection.post(
-      '/v2/check', 
-      {
-        text: text,
-        language: language
-      }
+  def api
+    @api ||= LanguageTool::API.new(
+      username: ENV['LANGUAGE_TOOL_USERNAME'],
+      api_key: ENV['LANGUAGE_TOOL_API_KEY']
     )
   end
 
   def matches
-    @matches ||= check['matches']
+    @matches ||= api_response.matches
   end
 
   def replace_matches
     text_replaced = text
     matches.reverse.each do |match|
-      offset = match['offset']
-      length = match['length']
+      offset = match.offset
+      length = match.length
       text_before_replacement = text_replaced[offset, length]
       replacement = prepare_match(text_before_replacement, match)
       text_replaced.slice! offset, length
@@ -50,10 +44,10 @@ class Osuny::LanguageTool
   end
 
   def prepare_match(text_before_replacement, match)
-    category = match['rule']['category']['id']
+    category = match.rule.category.id
     puts category
-    message = match['message']
-    replacements = match['replacements']
+    message = match.message
+    replacements = match.replacements
     # Les classes seront supprimées à la sauvegarde
     html = "<span class=\"languagetool languagetool__#{category}\">"
     html += text_before_replacement
@@ -62,22 +56,12 @@ class Osuny::LanguageTool
     html += "<span class=\"languagetool__suggestion__message\">#{message}</span>"
     html += "<span class=\"languagetool__suggestion__replacements\">"
     replacements.each do |replacement|
-      html += "<span class=\"languagetool__suggestion__replacement\">#{replacement['value']}</span>"
+      html += "<span class=\"languagetool__suggestion__replacement\">#{replacement}</span>"
     end
     html += "</span>"
     # html += match.to_s
     html += "</languagetoolsuggestion>"
     html += "</span>"
     html
-  end
-
-  def connection
-    @connection ||= Faraday.new(
-      url: ENDPOINT,
-      params: {
-        username: ENV['LANGUAGE_TOOL_USERNAME'],
-        apiKey: ENV['LANGUAGE_TOOL_API_KEY']
-      }
-    )
   end
 end
