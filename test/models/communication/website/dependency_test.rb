@@ -31,34 +31,34 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_equal 3, page.recursive_dependencies.count
 
     # On modifie le target du block
-    Delayed::Job.destroy_all
+    GoodJob::Job.destroy_all
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"
     # On vérifie qu'on enqueue le job qui clean les websites
-    assert_enqueued_with(job: Communication::CleanWebsiteJob) do
+    assert_enqueued_with(job: Communication::Website::CleanJob) do
       block.save
     end
 
-    perform_enqueued_jobs
-
-    # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site de la page
-    assert(destroy_obsolete_git_files_job)
+    # On vérifie qu'on enqueue le job qui destroy les obsolete git files
+    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
+    end
 
     assert_equal 3, page.recursive_dependencies.count
 
     # Vérifie qu'on a bien
     # - une tâche pour resynchroniser la page
     # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
-    Delayed::Job.destroy_all
+    GoodJob::Job.destroy_all
 
-    assert_enqueued_with(job: Communication::CleanWebsiteJob) do
-      block.destroy
+    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page]) do
+      assert_enqueued_with(job: Communication::Website::CleanJob) do
+        block.destroy
+      end
     end
 
-    perform_enqueued_jobs
-
-    assert(sync_with_git_job(page))
-    assert(destroy_obsolete_git_files_job)
-
+    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
+    end
   end
 
   def test_change_website_dependencies
@@ -66,8 +66,10 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     dependencies_before_count = website_with_github.reload.recursive_dependencies.count
 
     # On modifie l'about du website en ajoutant une école
-    website_with_github.update(about: default_school)
-    refute(destroy_obsolete_git_files_job)
+    # On vérifie que le job de destroy obsolete git files n'est pas enqueued
+    assert_no_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
+      website_with_github.update(about: default_school)
+    end
     delta = website_with_github.reload.recursive_dependencies.count - dependencies_before_count
     # En ajoutant l'école, on rajoute en dépendances :
     # - L'école, ses formations, diplômes et sites en cascade (4)
@@ -77,13 +79,13 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # Donc un total de 3 + 2 + 5 = 10 dépendances
     assert_equal 13, delta
 
-    Delayed::Job.destroy_all
+    GoodJob::Job.destroy_all
 
     # On enlève l'about du website
-    website_with_github.update(about: nil)
-
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
-    assert(destroy_obsolete_git_files_job)
+    assert_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
+      website_with_github.update(about: nil)
+    end
   end
 
   def test_change_website_dependencies_with_multilingual
@@ -110,30 +112,9 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     item.save
 
     # Comme les menu items ne répondent pas à is_direct_object? du coup aucune tâche de nettoyage n'est ajoutée
-    item.destroy
-    refute(destroy_obsolete_git_files_job)
+    assert_no_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
+      item.destroy
+    end
   end
 
-
-  protected
-
-  def sync_with_git_job(object)
-    find_performable_method_job(:sync_with_git_without_delay, object)
-  end
-
-  def clean_websites_job(object)
-    find_performable_method_job(:clean_websites_without_delay, object)
-  end
-
-  def destroy_obsolete_git_files_job(website = website_with_github)
-    find_performable_method_job(:destroy_obsolete_git_files_without_delay, website)
-  end
-
-  # FIXME On ne peut pas utiliser assert_enqueued_jobs sur les méthodes asynchrones gérées avec handle_asynchronously
-  def find_performable_method_job(method, object)
-    Delayed::Job.all.detect { |job|
-      job.payload_object.method_name == method &&
-        job.payload_object.object == object
-    }
-  end
 end
