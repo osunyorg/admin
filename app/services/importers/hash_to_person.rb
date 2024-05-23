@@ -12,7 +12,9 @@ module Importers
     end
 
     def valid?
-      if country_not_found?
+      if @first_name.blank? && @last_name.blank? && @email.blank?
+        @error = "An email or a name is necessary"
+      elsif country_not_found?
         @error = "Country #{@country} not found"
       elsif !person.valid?
         @error = "Unable to create the person: #{person.errors.full_messages}"
@@ -60,6 +62,9 @@ module Importers
         person = @university.people
                            .where(first_name: @first_name, last_name: @last_name)
                            .first_or_initialize
+      else
+        # No mail, no name, nothing
+        return
       end
       person.first_name = @first_name
       person.last_name = @last_name

@@ -1,6 +1,6 @@
 <% content_for :title, @import.to_s %>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-md-6">
     <p>
       <%= t('imports.initiated_by') %> 
@@ -22,13 +22,23 @@
     <% if @import.pending? && @import.user == current_user %>
       <p><%= t('imports.still_pending') %></p>
     <% end %>
-    <% if @import.finished_with_errors? %>
-      <h3><%= t('imports.errors') %></h3>
-      <ul>
-        <% @import.processing_errors.each do |obj| %>
-          <li><%= t('imports.error_msg', line: obj['line'], error: obj['error']) %></li>
-        <% end %>
-      </ul>
-    <% end %>
   </div>
 </div>
+
+<% if @import.finished_with_errors? %>
+  <h2><%= t('imports.errors') %></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ligne</th>
+        <th>Erreur</th>
+      </tr>
+    </thead>
+  <% @import.processing_errors.each do |obj| %>
+    <tr>
+      <td><span class="badge text-bg-danger"><%=  obj['line'] %></span></td>
+      <td><%= obj['error'] %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
