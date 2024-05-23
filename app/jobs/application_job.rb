@@ -52,6 +52,23 @@ class ApplicationJob < ActiveJob::Base
     #
     # Note: Arguments passed to #perform_later can be accessed through Active Job's `arguments` method
     # which is an array containing positional arguments and, optionally, a kwarg hash.
-    key: -> { "#{self.class.name}-#{queue_name}-#{arguments.first}-#{arguments.last[:version]}" } #  MyJob.perform_later("Alice", version: 'v2') => "MyJob-default-Alice-v2"
+    key: -> { "#{self.class.name}-#{queue_name}-#{stringify_arguments(arguments)}" }
   )
+
+
+
+  private
+
+  def stringify_arguments(arguments)
+    serialize_arguments(arguments).join('|')
+  end
+
+  def serialize_arguments(arguments)
+    arguments.map { |argument|
+      argument.is_a?(ActiveRecord::Base)  ? argument.to_global_id.to_s
+                                          : argument.to_json
+    }
+  end
+
+
 end

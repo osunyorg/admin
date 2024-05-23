@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -148,8 +147,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "communication_website_id"
     t.uuid "heading_id"
+    t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
@@ -465,10 +464,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.boolean "published", default: false
     t.string "featured_image_alt"
     t.text "text"
+    t.text "summary"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
-    t.text "summary"
     t.string "bodyclass"
     t.uuid "language_id", null: false
     t.text "featured_image_credit"
