@@ -83,7 +83,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     # On enlève l'about du website
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
-    assert_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
+    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
       website_with_github.update(about: nil)
     end
   end

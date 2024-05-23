@@ -6,8 +6,6 @@ module Communication::Website::WithDeuxfleurs
     after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
   end
 
-  protected
-
   # 4 options:
   # 1. no deuxfleurs hosting at all -> do nothing
   # 2. no repo, deuxfleurs hosting : we need to create both
@@ -32,6 +30,8 @@ module Communication::Website::WithDeuxfleurs
       save
     end
   end
+
+  protected
 
   def deuxfleurs_golive
     return unless in_production_changed? && in_production
