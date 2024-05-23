@@ -1,4 +1,6 @@
 class ApplicationJob < ActiveJob::Base
+  retry_on StandardError, wait: :exponentially_longer, attempts: Float::INFINITY
+
   # https://github.com/bensheldon/good_job?tab=readme-ov-file#labelled-jobs
   include GoodJob::ActiveJobExtensions::Labels
 
