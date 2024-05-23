@@ -58,14 +58,14 @@ class ApplicationJob < ActiveJob::Base
   private
 
   def digest_arguments(arguments)
-    Digest::MD5.hexdigest(stringify_arguments(arguments))
+    Digest::MD5.hexdigest(stringify_arguments_for_digest(arguments))
   end
 
-  def stringify_arguments(arguments)
-    serialize_arguments(arguments).join('|')
+  def stringify_arguments_for_digest(arguments)
+    prepare_arguments_for_digest(arguments).join('|')
   end
 
-  def serialize_arguments(arguments)
+  def prepare_arguments_for_digest(arguments)
     arguments.map { |argument|
       argument.is_a?(ActiveRecord::Base)  ? argument.to_global_id.to_s
                                           : argument.to_json
