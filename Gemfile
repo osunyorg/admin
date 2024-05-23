@@ -51,6 +51,7 @@ gem "jquery-ui-rails", git: "https://github.com/jquery-ui-rails/jquery-ui-rails.
 gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
 # gem "languagetool", path: "../../noesya/languagetool-ruby"
+gem "languagetool", git: "https://github.com/noesya/languagetool-ruby.git"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
 gem "mini_magick"

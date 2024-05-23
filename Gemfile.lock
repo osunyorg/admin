@@ -7,6 +7,13 @@ GIT
       railties (>= 3.2.16)
 
 GIT
+  remote: https://github.com/noesya/languagetool-ruby.git
+  revision: 8124286d6ab71ef66c3158fd65f2a561b66e6f18
+  specs:
+    languagetool (1.2.0)
+      rest-client
+
+GIT
   remote: https://github.com/noesya/summernote-rails.git
   revision: 32fd182c929cdcacaa6e3bd3569871bd025fa669
   specs:
@@ -295,6 +302,7 @@ GEM
     hashdiff (1.1.0)
     hashie (5.0.0)
     htmlentities (4.3.4)
+    http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     httparty (0.22.0)
@@ -373,6 +381,9 @@ GEM
       fastimage (~> 2.2)
       nesty (~> 1.0)
       nokogiri (~> 1.13)
+    mime-types (3.5.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2024.0507)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.23.1)
@@ -397,7 +408,10 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
+    netrc (0.11.0)
     nio4r (2.7.3)
+    nokogiri (1.16.5-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.5-x86_64-darwin)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -508,6 +522,11 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rexml (3.2.8)
       strscan (>= 3.0.9)
     roo (2.10.1)
@@ -634,6 +653,7 @@ GEM
     zlib (2.1.1)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-darwin-23
 
 DEPENDENCIES
@@ -683,6 +703,7 @@ DEPENDENCIES
   jquery-ui-rails!
   kamifusen
   kaminari
+  languagetool!
   leaflet-rails
   libretranslate
   listen (~> 3.3)
