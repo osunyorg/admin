@@ -149,7 +149,7 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    Communication::Website::SyncWithGitJob.perform_later
+    Communication::Website::SyncWithGitJob.perform_later(id)
   end
 
   # Appelé en asynchrone par Communication::Website::SyncWithGitJob

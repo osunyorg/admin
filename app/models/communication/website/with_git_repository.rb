@@ -43,7 +43,7 @@ module Communication::Website::WithGitRepository
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
-    Communication::Website::DestroyObsoleteGitFilesJob.perform_later(website.id)
+    Communication::Website::DestroyObsoleteGitFilesJob.perform_later(id)
   end
 
   def destroy_obsolete_git_files_safely

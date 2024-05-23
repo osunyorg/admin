@@ -23,9 +23,9 @@ module Communication::Website::WithConnectedObjects
     get_current_theme_version!
     screenshot!
   end
-  
+
   # Appelé uniquement en asynchrone par Communication::Website::CleanJob
-  def clean 
+  def clean
     delete_obsolete_connections_for_self_and_direct_sources
     destroy_obsolete_git_files
   end
@@ -33,11 +33,11 @@ module Communication::Website::WithConnectedObjects
   # Le site fait le ménage de ses connexions directes uniquement
   def delete_obsolete_connections
     Communication::Website::Connection.delete_useless_connections(
-      # On ne liste pas toutes les connexions du website, 
+      # On ne liste pas toutes les connexions du website,
       # mais juste les connexions pour lesquelles le site est la source.
-      connections.where(direct_source: self), 
+      connections.where(direct_source: self),
       # On prend l'about et ses dépendances récursives.
-      # On ne prend pas toutes les dépendances parce qu'on s'intéresse 
+      # On ne prend pas toutes les dépendances parce qu'on s'intéresse
       # uniquement à la connexion via about.
       about_dependencies
     )
@@ -131,7 +131,7 @@ module Communication::Website::WithConnectedObjects
 
   def connect_about
     self.connect(about, self) if about.present? && about.try(:is_indirect_object?)
-    delay(queue: :elephant).delete_obsolete_connections
+    Communication::Website::DeleteObsoleteConnectionsJob.perform_later(id)
   end
 
   def about_dependencies
