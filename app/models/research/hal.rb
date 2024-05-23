@@ -28,12 +28,12 @@ module Research::Hal
   def self.clear_queue!
     ids = []
     GoodJob::Job.find_each do |job|
-      job_class = GoodJob::Job.first.serialized_params["job_class"]
-      publication_arg = GoodJob::Job.first.serialized_params["arguments"].detect { |arg|
-        arg["_aj_globalid"].include?("Research::Publication")
-      }
+      job_class = job.job_class
+      job_arguments = job.serialized_params["arguments"]
+      indirect_object_gid = job_arguments.last["_aj_globalid"].to_s
 
-      if job_class == "Communication::Website::IndirectObject::SyncWithGitJob" && publication_arg.present?
+      if job_class == "Communication::Website::IndirectObject::SyncWithGitJob" &&
+         indirect_object_gid.include?("Research::Publication")
         ids << job.id
       end
     end
