@@ -18,6 +18,7 @@ module Communication::Website::WithDeuxfleurs
 
   # Appelé par Communication::Website::Deuxfleurs::SetupJob
   def deuxfleurs_setup_safely
+    return unless deuxfleurs_hosting?
     if repository.blank?
       deuxfleurs_create_github_repository
       sleep 10
