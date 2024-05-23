@@ -52,12 +52,14 @@ class ApplicationJob < ActiveJob::Base
     #
     # Note: Arguments passed to #perform_later can be accessed through Active Job's `arguments` method
     # which is an array containing positional arguments and, optionally, a kwarg hash.
-    key: -> { "#{self.class.name}-#{queue_name}-#{stringify_arguments(arguments)}" }
+    key: -> { "#{self.class.name}-#{queue_name}-#{digest_arguments(arguments)}" }
   )
 
-
-
   private
+
+  def digest_arguments(arguments)
+    Digest::MD5.hexdigest(stringify_arguments(arguments))
+  end
 
   def stringify_arguments(arguments)
     serialize_arguments(arguments).join('|')

@@ -1,7 +1,7 @@
 class Communication::Website::BaseJob < ApplicationJob
   self.good_job_labels = ['website']
 
-  queue_as :elephant
+  queue_as :high_priority
 
   attr_accessor :website_id
 
@@ -16,7 +16,7 @@ class Communication::Website::BaseJob < ApplicationJob
   protected
 
   def execute
-    raise NotImplementedError 
+    raise NotImplementedError
   end
 
   def website
