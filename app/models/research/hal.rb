@@ -27,15 +27,17 @@ module Research::Hal
 
   def self.clear_queue!
     ids = []
-    Delayed::Job.find_each do |job|
-      next unless job.public_respond_to?(:payload_object)
-      # FIXME sync_indirect_object_with_git_without_delay
-      if  job.payload_object.method_name == :sync_indirect_object_with_git_without_delay &&
-          job.payload_object.args.first.is_a?(Research::Publication)
+    GoodJob::Job.find_each do |job|
+      job_class = GoodJob::Job.first.serialized_params["job_class"]
+      publication_arg = GoodJob::Job.first.serialized_params["arguments"].detect { |arg|
+        arg["_aj_globalid"].include?("Research::Publication")
+      }
+
+      if job_class == "Communication::Website::IndirectObject::SyncWithGitJob" && publication_arg.present?
         ids << job.id
       end
     end
-    Delayed::Job.where(id: ids).destroy_all
+    GoodJob::Job.where(id: ids).destroy_all
   end
 
   def self.parts
