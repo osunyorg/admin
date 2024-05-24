@@ -1,5 +1,5 @@
 web: bundle exec puma -C config/puma.rb
 worker: bundle exec good_job start --queues="default"
 miceworker: bundle exec good_job start --queues="mice"
-elephantworker: bundle exec good_job start --queues="elephant"
+elephantworker: bundle exec good_job start --queues="elephant" --max-threads=1
 postdeploy: rails db:migrate && rails db:seed
