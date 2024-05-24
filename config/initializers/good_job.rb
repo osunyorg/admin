@@ -4,7 +4,7 @@ Rails.application.configure do
   # config.good_job.retry_on_unhandled_error = false
   # config.good_job.on_thread_error = -> (exception) { Rails.error.report(exception) }
   # config.good_job.execution_mode = :async
-  config.good_job.queues = 'high_priority:1; default,low_priority:1; high_priority,default,low_priority:1'
+  config.good_job.queues = 'default,mice:1; default,mice,elephant:1; elephant:1'
   # config.good_job.max_threads = 5
   # config.good_job.poll_interval = 30 # seconds
   # config.good_job.shutdown_timeout = 25 # seconds

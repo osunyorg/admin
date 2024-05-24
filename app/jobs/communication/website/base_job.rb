@@ -1,7 +1,7 @@
 class Communication::Website::BaseJob < ApplicationJob
   self.good_job_labels = ['website']
 
-  queue_as :high_priority
+  queue_as :elephant
 
   attr_accessor :website_id
 
