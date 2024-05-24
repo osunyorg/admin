@@ -24,30 +24,11 @@ module WithGit
   end
 
   def sync_with_git
-    if website.locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      delay(run_at: 1.minute.from_now, queue: :default)
-        .sync_with_git_without_delay
-      return
-    else
-      return unless should_sync_with_git?
-      website.lock_for_background_jobs!
-    end
-    begin
-      sync_with_git_safely
-    ensure
-      website.unlock_for_background_jobs!
-    end
-  end
-  handle_asynchronously :sync_with_git, queue: :default
-
-  protected
-
-  def should_sync_with_git?
-    website.git_repository.valid? && syncable?
+    Communication::Website::DirectObject::SyncWithGitJob.perform_later(self)
   end
 
   def sync_with_git_safely
+    return unless should_sync_with_git?
     Communication::Website::GitFile.sync website, self
     recursive_dependencies(syncable_only: true).each do |object|
       Communication::Website::GitFile.sync website, object
@@ -56,5 +37,11 @@ module WithGit
       Communication::Website::GitFile.sync website, object
     end
     website.git_repository.sync!
+  end
+
+  protected
+
+  def should_sync_with_git?
+    website.git_repository.valid? && syncable?
   end
 end
