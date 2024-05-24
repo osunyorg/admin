@@ -28,7 +28,7 @@ end
                 <h3><%= link_to event, '#' %></h3>
                 <p><%= event.summary %></p>
                 <div class="event-meta">
-                  <%= date_range_i18n(event.from_day, event.to_day) %>
+                  <%= date_range_i18n(event.from_day, event.to_day, locale: block.about.language.iso_code) %>
                 </div>
               </div>
               <div class="media">
