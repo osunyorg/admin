@@ -66,10 +66,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
     assert_difference -> { Communication::Website::Connection.count } => -2 do
-      assert_enqueued_with(job: Communication::CleanWebsiteJob, args: [page.communication_website_id]) do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page.communication_website_id]) do
         page.blocks.find_by(position: 2).destroy
       end
-      perform_enqueued_jobs
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
@@ -87,10 +87,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
     # On supprime le bloc qui contient PA : -3 (parce que PA doit être supprimé aussi ainsi que son bloc Organisations mais pas Noesya, toujours connectée via le block 3)
     assert_difference -> { Communication::Website::Connection.count } => -3 do
-      assert_enqueued_with(job: Communication::CleanWebsiteJob, args: [page.communication_website_id]) do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page.communication_website_id]) do
         page.blocks.find_by(position: 2).destroy
       end
-      perform_enqueued_jobs
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
@@ -144,7 +144,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
     assert_difference -> { Communication::Website::Connection.count } => -6 do
-      assert_enqueued_with(job: Communication::CleanWebsiteJob, args: [website_with_github.id]) do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [website_with_github.id]) do
         website_with_github.update(about: nil)
       end
       perform_enqueued_jobs
