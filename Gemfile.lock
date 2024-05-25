@@ -7,6 +7,18 @@ GIT
       railties (>= 3.2.16)
 
 GIT
+  remote: https://github.com/noesya/good_job.git
+  revision: 8007e168d82874b6052e8480e490dd8cbd5d70f3
+  specs:
+    good_job (3.29.2)
+      activejob (>= 6.0.0)
+      activerecord (>= 6.0.0)
+      concurrent-ruby (>= 1.0.2)
+      fugit (>= 1.1)
+      railties (>= 6.0.0)
+      thor (>= 0.14.1)
+
+GIT
   remote: https://github.com/noesya/summernote-rails.git
   revision: 32fd182c929cdcacaa6e3bd3569871bd025fa669
   specs:
@@ -274,13 +286,6 @@ GEM
       terminal-table (>= 1.5.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    good_job (3.28.3)
-      activejob (>= 6.0.0)
-      activerecord (>= 6.0.0)
-      concurrent-ruby (>= 1.0.2)
-      fugit (>= 1.1)
-      railties (>= 6.0.0)
-      thor (>= 0.14.1)
     hal_openscience (0.1.0)
       json
       net-http
@@ -664,7 +669,7 @@ DEPENDENCIES
   geo_point
   geocoder (~> 1)
   gitlab
-  good_job (~> 3)
+  good_job (~> 3)!
   hal_openscience (~> 0)
   has_scope (~> 0)
   hash_dot
