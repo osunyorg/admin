@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   authenticated :user, -> user { user.server_admin? } do
-    mount GoodJob::Engine => 'jobs'
+    mount GoodJob::Engine => 'background'
   end
 
   devise_for :users, controllers: {
