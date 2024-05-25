@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   authenticated :user, -> user { user.server_admin? } do
     mount GoodJob::Engine => 'background'
+    mount PgHero::Engine => 'database'
   end
 
   devise_for :users, controllers: {

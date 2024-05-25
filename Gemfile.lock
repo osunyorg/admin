@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/noesya/good_job.git
-  revision: 72cf6118e46410afc609fe59417eaea6715ce067
+  revision: ef4822fc56f7ccef56109377dd58994bda80cbe6
   specs:
     good_job (3.29.3)
       activejob (>= 6.0.0)
@@ -289,6 +289,15 @@ GEM
       terminal-table (>= 1.5.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.27.0-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.0-x86_64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.0-x86_64-linux)
+      bigdecimal
+      rake (>= 13)
     hal_openscience (0.1.0)
       json
       net-http
@@ -442,6 +451,10 @@ GEM
     pexels (0.5.0)
       requests (~> 1.0.2)
     pg (1.5.6)
+    pg_query (5.1.0)
+      google-protobuf (>= 3.22.3)
+    pghero (3.5.0)
+      activerecord (>= 6)
     popper_js (2.11.8)
     psych (5.1.2)
       stringio
@@ -698,6 +711,8 @@ DEPENDENCIES
   orthotypo
   pexels (~> 0)
   pg (~> 1)
+  pg_query
+  pghero
   puma
   rack-mini-profiler (~> 2.0)
   rails (~> 7.1.0)

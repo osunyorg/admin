@@ -59,6 +59,8 @@ gem "omniauth-saml", "~> 2"
 gem "orthotypo"#, path: '../../noesya/orthotypo'
 gem "pexels", "~> 0"
 gem "pg", "~> 1"
+gem "pghero"
+gem "pg_query"
 gem "puma"
 gem "rails", "~> 7.1.0"
 gem "rails-autocomplete", "~> 2"
