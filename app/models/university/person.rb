@@ -69,6 +69,7 @@ class University::Person < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithBlobs
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter
@@ -79,7 +80,6 @@ class University::Person < ApplicationRecord
   include WithPersonalData
   include WithPicture
   include WithResearch
-  include WithTranslations
   include WithUniversity
 
   LIST_OF_ROLES = [

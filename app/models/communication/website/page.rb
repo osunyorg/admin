@@ -57,6 +57,7 @@ class Communication::Website::Page < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
+  include Translatable
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs
@@ -66,7 +67,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithType # WithType can set default publication status, so must be included before WithPublication
   include WithPublication
   include WithPosition # Scope :ordered must override WithPublication
-  include WithTranslations
   include WithTree
   include WithPath # Must be included after Sluggable. WithPath overwrites the git_path method defined in WithWebsites
   include WithUniversity

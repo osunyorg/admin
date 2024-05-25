@@ -1,4 +1,4 @@
-module WithTranslations
+module Translatable
   extend ActiveSupport::Concern
 
   included do
