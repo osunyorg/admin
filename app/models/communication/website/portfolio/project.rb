@@ -38,12 +38,12 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithAccessibility
   include WithBlobs
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithTranslations
   include WithUniversity
 
   has_and_belongs_to_many :categories,

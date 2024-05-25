@@ -98,7 +98,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(current_user, @website).list
+    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(
+        current_user, 
+        @website, 
+        current_website_language
+      ).list
   end
 
   def event_params

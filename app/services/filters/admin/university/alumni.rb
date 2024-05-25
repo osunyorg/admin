@@ -2,6 +2,7 @@ module Filters
   class Admin::University::Alumni < Filters::Base
     def initialize(user)
       super
+      add_search
       add :for_alumni_organization,
           user.university.organizations.for_language_id(user.university.default_language_id).ordered,
           I18n.t(
@@ -22,7 +23,6 @@ module Filters
             'filters.attributes.element',
             element: Education::AcademicYear.model_name.human.downcase
           )
-      add_search
     end
   end
 end
