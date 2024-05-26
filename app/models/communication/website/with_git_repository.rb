@@ -47,6 +47,7 @@ module Communication::Website::WithGitRepository
   end
 
   def destroy_obsolete_git_files_safely
+    return unless should_sync_with_git?
     website_git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
