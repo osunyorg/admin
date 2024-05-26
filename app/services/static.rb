@@ -46,6 +46,9 @@ class Static
     code = code.gsub("", "'")
     # /u0094
     code = code.remove("\u0094".encode('utf-8'))
+    # /u008d
+    # https://github.com/osunyorg/lacriee-site/actions/runs/9242403369
+    code = code.remove("\u008d".encode('utf-8'))
     code
   end
 end
