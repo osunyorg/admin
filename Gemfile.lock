@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/noesya/good_job.git
-  revision: ef4822fc56f7ccef56109377dd58994bda80cbe6
+  revision: e8a47d98b84dce78664139f35eb966cd0e06a0a8
   specs:
     good_job (3.29.3)
       activejob (>= 6.0.0)
@@ -639,7 +639,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.14)
+    zeitwerk (2.6.15)
     zlib (2.1.1)
 
 PLATFORMS
