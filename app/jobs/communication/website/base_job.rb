@@ -3,6 +3,8 @@ class Communication::Website::BaseJob < ApplicationJob
 
   queue_as :elephant
 
+  discard_on ActiveJob::DeserializationError
+
   attr_accessor :website_id
 
   def perform(website_id)
