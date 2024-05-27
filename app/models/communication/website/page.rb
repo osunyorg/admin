@@ -209,6 +209,8 @@ class Communication::Website::Page < ApplicationRecord
     descendants_and_self.each do |page|
       if page.type == 'Communication::Website::Page::Person'
         website.connected_people.each(&:touch)
+      elsif page.type == 'Communication::Website::Page::Organization'
+        website.connected_organizations.each(&:touch)
       end
     end
   end

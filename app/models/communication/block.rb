@@ -192,7 +192,7 @@ class Communication::Block < ApplicationRecord
 
   # if a block changed we need to touch the old targets (for example persons previously connected), and the new connected ones
   def touch_targets
-    if persons?
+    if persons? || organizations?
       dependencies.each(&:touch)
       # TODO: @arnaud help!
       # I need to touch the old dependencies

@@ -1,4 +1,6 @@
+<% version = 1 %>
 ---
+<% cache [@about, @website.id, version] do %>
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/breadcrumbs' %>
@@ -65,3 +67,4 @@ organizations_categories:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text %>
+<% end %>
