@@ -160,7 +160,9 @@ module WithDependencies
   def clean_websites(websites_ids)
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
-    Communication::CleanWebsitesJob.perform_later(websites_ids)
+    websites_ids.each do |website_id|
+      Communication::Website::CleanJob.perform_later(website_id)
+    end
   end
 
   def websites_to_clean

@@ -22,7 +22,7 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
   end
 
   def best_logo_blob
-    organization ? organization.logo.blob : logo_component.blob
+    organization ? organization.logo&.blob : logo_component.blob
   end
 
 end

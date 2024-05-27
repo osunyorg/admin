@@ -13,6 +13,7 @@ one:
   featured_image_alt: MyText
   featured_image_credit: MyText
   meta_description: MyText
+  language: fr
 
 two:
   title: MyString
@@ -29,3 +30,4 @@ two:
   featured_image_alt: MyText
   featured_image_credit: MyText
   meta_description: MyText
+  language: fr

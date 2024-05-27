@@ -44,13 +44,13 @@ class Communication::Website::Post < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method
+  include Translatable
   include WithAccessibility
   include WithBlobs
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPublication
-  include WithTranslations
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute

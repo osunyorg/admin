@@ -8,7 +8,10 @@
       <%= link_to website, [:admin, website] %><br>
     <% end %>
   <% end %>
-  <% if @journal.issn %><%= Research::Journal.human_attribute_name('issn') %> <%= @journal.issn %><% end %>
+  <% if @journal.issn.present? %>
+    <%= Research::Journal.human_attribute_name('issn') %>
+    <%= @journal.issn %>
+  <% end %>
   <%= render 'admin/application/favorites/widget', about: @journal %>
 <% end %>
 

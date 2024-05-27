@@ -27,6 +27,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
 
   def create
     @location.university = current_university
+    @location.language_id = current_university.default_language_id
     if @location.save
       redirect_to [:admin, @location],
                   notice: t('admin.successfully_created_html', model: @location.to_s)

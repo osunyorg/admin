@@ -12,7 +12,11 @@
         <tr>
           <td><%= link_to connection.website, [:admin, connection.website] %></td>
           <td><%= connection.direct_source_type.constantize.model_name.human unless connection.direct_source_type.nil? %></td>
-          <td><%= render 'admin/communication/websites/connections/direct_source', connection: connection %></td>
+          <td>
+            <%= render 'admin/communication/websites/connections/direct_source',
+                          source: connection.direct_source,
+                          type: connection.direct_source_type %>
+          </td>
         </tr>
       <% end %>
     </tbody>

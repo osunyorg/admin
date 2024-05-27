@@ -12,7 +12,7 @@ class Communication::Block::Component::Organization < Communication::Block::Comp
   end
 
   def translate!
-    return unless data.present?
+    return unless organization.present?
     @data = organization.find_or_translate!(template.language).id
   end
 

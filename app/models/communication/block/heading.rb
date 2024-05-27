@@ -29,6 +29,7 @@
 class Communication::Block::Heading < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
+  include Sluggable
   include WithPosition
   include WithUniversity
 
@@ -89,6 +90,13 @@ class Communication::Block::Heading < ApplicationRecord
   end
 
   protected
+
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(slug: slug, about_type: about_type, about_id: about_id)
+              .where.not(id: self.id)
+              .exists?
+  end
 
   def last_ordered_element
     about.headings.where(parent_id: self.parent_id).ordered.last

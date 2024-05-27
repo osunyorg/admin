@@ -1,7 +1,9 @@
 one:
   name: MyString
   university: default_university
+  language: fr
 
 two:
   name: MyString
   university: default_university
+  language: fr

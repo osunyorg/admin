@@ -26,7 +26,8 @@ end
           <% next unless element.blob %>
           <li>
             <figure>
-              <a href="<%= element.blob.url %>" target="_blank" title="<%= element.title %>"><%= element.title %></a>
+              <a href="<%= element.blob.url %>" target="_blank" title="<%= element.title %>">
+                <%= element.title %>
                 <figcaption>
                   <abbr title=""><%= element.blob.filename.extension.upcase %></abbr>
                   - <abbr title=""><%= number_to_human_size element.blob.byte_size %></abbr>

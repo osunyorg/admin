@@ -4,12 +4,27 @@ class Admin::University::Organizations::CategoriesController < Admin::University
                               through_association: :organization_categories
 
   def index
-    @categories = @categories.ordered.page(params[:page])
+    @categories =  @categories.for_language_id(current_university.default_language_id)
+                              .ordered
+                              .page(params[:page])
     breadcrumb
   end
 
   def show
+    @organizations = @category.organizations.ordered.page(params[:page])
     breadcrumb
+  end
+
+  def in_language
+    language = Language.find_by!(iso_code: params[:lang])
+    translation = @category.find_or_translate!(language)
+    if translation.newly_translated
+      # There's an attribute accessor named "newly_translated" that we set to true
+      # when we just created the translation. We use it to redirect to the form instead of the show.
+      redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
+    else
+      redirect_to [:admin, translation.becomes(translation.class.base_class)]
+    end
   end
 
   def static
@@ -28,6 +43,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def create
+    @category.language_id = current_university.default_language_id
     if @category.save
       redirect_to admin_university_organization_category_path(@category),
                   notice: t('admin.successfully_created_html', model: @category.to_s)

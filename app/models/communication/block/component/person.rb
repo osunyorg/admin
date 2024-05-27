@@ -12,7 +12,7 @@ class Communication::Block::Component::Person < Communication::Block::Component:
   end
 
   def translate!
-    return unless data.present?
+    return unless person.present?
     @data = person.find_or_translate!(template.language).id
   end
 

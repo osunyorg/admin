@@ -29,6 +29,7 @@ namespace :university do
       resources :categories, controller: 'people/categories', as: 'person_categories' do
         member do
           get :static
+          get "/translations/:lang" => "people/categories#in_language", as: :show_in_language
         end
       end
     end
@@ -39,13 +40,14 @@ namespace :university do
       patch 'experiences' => 'people/experiences#update'
     end
   end
-  
+
   resources :organizations do
     collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'organizations/categories', as: 'organization_categories' do
         member do
           get :static
+          get "/translations/:lang" => "organizations/categories#in_language", as: :show_in_language
         end
       end
     end

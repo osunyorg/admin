@@ -56,7 +56,7 @@ fr:
         date: Date
         file: Fichier
         number_of_lines: Nombre de lignes
-        status: Status
+        status: Statut
       language:
         iso_code: Code Iso
         name: Nom
@@ -252,7 +252,7 @@ fr:
     hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"
-    status: "Status :"
+    status: "Statut :"
     still_pending: "Votre import est toujours en cours de traitement. Vous recevrez un email dès qu'il est prêt."
   import_btn: Importer
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"

@@ -45,6 +45,7 @@ fr:
         researcher: Chercheur·e dans Osuny
       research/journal:
         issn: ISSN
+        language: Langue
         title: Titre
       research/journal/paper:
         abstract: Extrait

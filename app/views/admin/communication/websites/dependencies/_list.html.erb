@@ -2,18 +2,17 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
+        <th>Classe</th>
         <th>Objet</th>
-        <th>Classe / ID</th>
+        <th>ID</th>
       </tr>
     </thead>
     <tbody>
       <% dependencies.each do |dependency| %>
         <tr>
+          <td><%= dependency.class.to_s %></td>
           <td><%= dependency %></td>
-          <td>
-            <%= dependency.class.to_s %><br>
-            <%= dependency.id if dependency.respond_to? :id %>
-          </td>
+          <td><%= dependency.id if dependency.respond_to? :id %></td>
         </tr>
       <% end %>
     </tbody>

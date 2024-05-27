@@ -45,6 +45,7 @@ en:
         researcher: Researchers in Osuny
       research/journal:
         issn: ISSN
+        language: Language
         title: Title
       research/journal/paper:
         abstract: Abstract

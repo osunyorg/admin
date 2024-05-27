@@ -32,8 +32,8 @@ class Communication::Website::Menu < ApplicationRecord
 
   include AsDirectObject
   include Sanitizable
+  include Translatable
   include WithAutomatism
-  include WithTranslations
   include WithUniversity
 
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy

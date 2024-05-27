@@ -28,7 +28,7 @@
         <% content_for :leaflet_required, true %>
         <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
       <% end %>
-        <% block.template.elements.each do |element| %>
+        <% block.template.selected_elements.each do |element| %>
           <article  class="organization"
                     data-latitude="<%= element.organization&.latitude %>"
                     data-longitude="<%= element.organization&.longitude %>">

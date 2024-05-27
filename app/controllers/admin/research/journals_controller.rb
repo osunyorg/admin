@@ -60,7 +60,7 @@ class Admin::Research::JournalsController < Admin::Research::ApplicationControll
 
   def journal_params
     params.require(:research_journal)
-          .permit(:title, :meta_description, :summary, :issn)
+          .permit(:title, :meta_description, :summary, :issn, :language_id)
           .merge(university_id: current_university.id)
   end
 end

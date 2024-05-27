@@ -25,7 +25,6 @@ class Git::OrphanAndLayoutAnalyzer
     end
     website.update_column :git_files_analysed_at, Time.now
   end
-  # handle_asynchronously :launch, queue: :default
 
   protected
 

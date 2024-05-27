@@ -342,6 +342,22 @@ en:
                   'true': Yes. Others can share adaptations of my work under any terms.
               description:
                 label: Description
+          links:
+            description: A list of external links, for example to services, social networks or resources.
+            edit:
+              add: Add a link
+              description:
+                label: Description
+              element:
+                description:
+                  label: Description
+                  placeholder: Enter link description
+                url:
+                  label: URL
+                  placeholder: 'https://'
+                title:
+                  label: Title
+                  placeholder: Enter link title
           locations:
             description: A selection of locations on a campus.
             edit:
@@ -359,6 +375,8 @@ en:
               add_partner: Add organization
               alphabetical:
                 label: Alphabetical order
+              category_id:
+                label: Category
               description:
                 label: Description
               element:
@@ -375,6 +393,12 @@ en:
                 url:
                   label: Website
                   placeholder: https://
+              mode:
+                label: Which organizations?
+                options:
+                  category: A specific category
+                  selection: Selected organizations
+              options: Display options
               remove_partner: Remove organization
               with_link:
                 label: With clickable link to each organization's page?
@@ -435,6 +459,8 @@ en:
               add_person: Add person
               alphabetical:
                 label: Alphabetical order
+              category_id:
+                label: Category
               delete_title: Remove person
               description:
                 label: Description
@@ -443,9 +469,15 @@ en:
                 person:
                   label: Person
                   placeholder: Select the person
-              role:
-                label: Role
-                placeholder: Enter person's role
+                role:
+                  label: Role
+                  placeholder: Enter person's role
+              mode:
+                label: Which persons shall we show?
+                options:
+                  category: A specific category
+                  selection: A selection of persons
+              options: Display options
               with_link:
                 label: With clickable link to each person's page?
               with_photo:
@@ -457,6 +489,8 @@ en:
               category_id:
                 label: Category
                 placeholder: Select category
+              display:
+                title: Layout options
               element:
                 id:
                   label: ''
@@ -471,6 +505,16 @@ en:
               posts_quantity:
                 label: Quantity
                 placeholder: Enter quantity
+              hide_author:
+                label: Hide author
+              hide_category:
+                label: Hide categories
+              hide_date:
+                label: Hide date
+              hide_image:
+                label: Hide image
+              hide_summary:
+                label: Hide summary
             layouts:
               alternate:
                 description: Posts either on the left or on the right, composing a graphically light page.
@@ -627,6 +671,7 @@ en:
           image: Image
           key_figures: Key figures
           license: License
+          links: Links
           locations: Campus
           organizations: Organizations
           pages: Pages

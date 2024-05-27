@@ -35,7 +35,8 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
   def create
     @kind.assign_attributes(
       journal: @journal,
-      university: current_university
+      university: current_university,
+      language_id: @journal.language_id
     )
     if @kind.save
       redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_created_html', model: @paper_kind.to_s)

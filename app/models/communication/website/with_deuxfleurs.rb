@@ -6,14 +6,18 @@ module Communication::Website::WithDeuxfleurs
     after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
   end
 
-  protected
-
   # 4 options:
   # 1. no deuxfleurs hosting at all -> do nothing
   # 2. no repo, deuxfleurs hosting : we need to create both
   # 3. repo exists, deuxfleurs hosting : only create deuxfleurs hosting
   # 4. both exists, deuxfleurs hosting needs to change identifier (Waiting for API possibility)
   def deuxfleurs_setup
+    return unless deuxfleurs_hosting?
+    Communication::Website::Deuxfleurs::SetupJob.perform_later(id)
+  end
+
+  # Appelé par Communication::Website::Deuxfleurs::SetupJob
+  def deuxfleurs_setup_safely
     return unless deuxfleurs_hosting?
     if repository.blank?
       deuxfleurs_create_github_repository
@@ -27,7 +31,8 @@ module Communication::Website::WithDeuxfleurs
       save
     end
   end
-  handle_asynchronously :deuxfleurs_setup, queue: :default
+
+  protected
 
   def deuxfleurs_golive
     return unless in_production_changed? && in_production

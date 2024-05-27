@@ -17,6 +17,7 @@
 #  git_endpoint            :string
 #  git_files_analysed_at   :datetime
 #  git_provider            :integer          default("github")
+#  highlighted_in_showcase :boolean          default(FALSE)
 #  in_production           :boolean          default(FALSE)
 #  in_showcase             :boolean          default(TRUE)
 #  locked_at               :datetime
@@ -60,15 +61,15 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
-  include FeatureAgenda
-  include FeatureBlog
-  include FeaturePortfolio
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithDependencies
   include WithDeuxfleurs
+  include WithFeatureAgenda
+  include WithFeaturePosts
+  include WithFeaturePortfolio
   include WithGit
   include WithGitRepository
   include WithLanguages
@@ -80,6 +81,7 @@ class Communication::Website < ApplicationRecord
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
   include WithSecurity
+  include WithShowcase
   include WithStyle
   include WithTheme
   include WithUniversity
@@ -99,7 +101,6 @@ class Communication::Website < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
-  scope :in_showcase, -> { in_production.where(in_showcase: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {
     joins(:university)
@@ -148,21 +149,17 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
-    return unless should_sync_with_git?
-    if locked_for_background_jobs?
-      # Reenqueue
-      sync_with_git
-      return
-    else
-      lock_for_background_jobs!
-    end
-    begin
-      sync_with_git_safely
-    ensure
-      unlock_for_background_jobs!
-    end
+    Communication::Website::SyncWithGitJob.perform_later(id)
   end
-  handle_asynchronously :sync_with_git, queue: :default
+
+  # Appelé en asynchrone par Communication::Website::SyncWithGitJob
+  def sync_with_git_safely
+    Communication::Website::GitFile.sync website, self
+    dependencies_with_static_file.each do |dependency_global_id|
+      Communication::Website::GitFile.sync website, GlobalID::Locator.locate(dependency_global_id)
+    end
+    website.git_repository.sync!
+  end
 
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
@@ -181,14 +178,6 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
-  end
-
-  def sync_with_git_safely
-    Communication::Website::GitFile.sync website, self
-    dependencies_with_static_file.each do |dependency_global_id|
-      Communication::Website::GitFile.sync website, GlobalID::Locator.locate(dependency_global_id)
-    end
-    website.git_repository.sync!
   end
 
   def reconnect_dependency(dependency, new_university_id)

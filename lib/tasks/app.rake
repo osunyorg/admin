@@ -8,7 +8,10 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Fixers::ResearchPublicationFixer.run
+    Communication::Block::Heading.where(slug: nil).find_each do |heading|
+      heading.set_slug
+      heading.update_column :slug, heading.slug
+    end
   end
 
   namespace :websites do

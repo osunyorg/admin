@@ -40,6 +40,15 @@ class Static
     # /u2028 breaks Hugo rendering
     # https://github.com/noesya/pixelis-rapportglobal2023/issues/1
     code = code.remove("\u2028".encode('utf-8'))
+    # /u0092 also breaks everything, should be an apostrophe
+    code = code.gsub("\u0092".encode('utf-8'), "'")
+    # Same operation with the problematic character itself
+    code = code.gsub("", "'")
+    # /u0094
+    code = code.remove("\u0094".encode('utf-8'))
+    # /u008d
+    # https://github.com/osunyorg/lacriee-site/actions/runs/9242403369
+    code = code.remove("\u008d".encode('utf-8'))
     code
   end
 end

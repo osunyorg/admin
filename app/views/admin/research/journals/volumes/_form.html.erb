@@ -18,7 +18,7 @@
                     source: '#research_journal_volume_title' %>
         <%= f.input :number %>
         <%= f.input :published %>
-        <%= f.input :published_at, html5: true %>
+        <%= f.input :published_at, html5: true, as: :date %>
         <%= f.input :keywords %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: volume, f: f %>

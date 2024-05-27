@@ -46,12 +46,12 @@ class Communication::Website::Post::Category < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method
+  include Translatable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPosition
-  include WithTranslations
   include WithTree
   include WithUniversity
 

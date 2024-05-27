@@ -1,27 +1,10 @@
 <%
 detailed = local_assigns.dig(:detailed)
-day_format = detailed ? :full
-                      : :default
+day_format = detailed ? :long
+                      : :short
 %>
-<% if event.same_day? %>
-  <%= l(event.from_day, format: day_format).upcase_first %>
-  <% if event.from_hour %>
-    <br>
-    <%= l(event.from_hour, format: :time_only) %>
-    <% if event.to_hour %>
-      - <%= l(event.to_hour, format: :time_only) %>
-    <% end %>
-  <% end %>
-<% else %>
-  <%= l(event.from_day, format: day_format).upcase_first %>
-  <%= l(event.from_hour, format: :time_only) if event.from_hour %>
-  <% if event.to_day %>
-    <br>
-    <%= l(event.to_day, format: day_format).upcase_first %>
-    <%= l(event.to_hour, format: :time_only) if event.to_hour %>
-  <% end %>
-<% end %>
-<% if event.has_hours? && event.has_specific_time_zone? %>
-  <br>
-  <%= t('admin.communication.website.agenda.events.formatted_time_zone', time_zone: event.time_zone) %>
-<% end %>
+<%= date_range_i18n event.from_day, 
+                    event.to_day,
+                    format: day_format,
+                    layout: :two_lines, 
+                    locale: event.language.iso_code %>

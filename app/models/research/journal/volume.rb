@@ -41,11 +41,11 @@ class Research::Journal::Volume < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
   include WithPublication
-  include WithTranslations
   include WithUniversity
 
   has_summernote :text
@@ -59,7 +59,9 @@ class Research::Journal::Volume < ApplicationRecord
               -> { distinct }, 
               through: :papers
 
-  scope :ordered, -> { order(number: :desc, published_at: :desc) }
+  validates :title, presence: true
+
+  scope :ordered, -> { order(published_at: :desc, number: :desc) }
 
   def git_path(website)
     "#{git_path_content_prefix(website)}volumes#{path}/_index.html" if published_at

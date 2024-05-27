@@ -1,6 +1,5 @@
 <%
 begin
-  object = connection.indirect_object
   object_name = object.to_s
   object_name = object.id if object.is_a?(ActiveStorage::Blob)
   object_link = url_for [:admin, object]

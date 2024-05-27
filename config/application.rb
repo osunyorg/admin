@@ -33,7 +33,7 @@ module Osuny
 
     config.time_zone = 'Europe/Paris'
 
-    config.active_job.queue_adapter = :delayed_job
+    config.active_job.queue_adapter = :good_job
 
     config.active_storage.service_urls_expire_in = 1.hour
     config.active_storage.variant_processor = :mini_magick

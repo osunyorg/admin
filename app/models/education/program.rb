@@ -69,6 +69,7 @@ class Education::Program < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
   include WithAccessibility
@@ -83,7 +84,6 @@ class Education::Program < ApplicationRecord
   include WithPosition
   include WithSchools
   include WithTeam
-  include WithTranslations
   include WithTree
   include WithUniversity
   include WithWebsitesCategories

@@ -73,7 +73,7 @@ class Import < ApplicationRecord
   end
 
   def queue_for_processing
-    "Importers::#{kind.camelize}".constantize.delay(queue: 'imports', priority: 100).execute(self)
+    Importer::ExecuteJob.perform_later(self)
   end
 
   def send_mail_to_creator

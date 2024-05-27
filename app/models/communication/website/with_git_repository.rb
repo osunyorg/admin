@@ -35,39 +35,34 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    return unless git_repository.valid?
-    if locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      sync_indirect_object_with_git(indirect_object)
-      return
-    else
-      lock_for_background_jobs!
+    all_dependencies = []
+    indirect_object.direct_sources.each do |direct_source|
+      all_dependencies = add_direct_source_to_sync(direct_source, array: all_dependencies)
     end
-    begin
-      sync_indirect_object_with_git_safely(indirect_object)
-    ensure
-      unlock_for_background_jobs!
+    all_dependencies.each do |dependency|
+      Communication::Website::GitFile.sync self, dependency
     end
+
+    git_repository.sync!
   end
-  handle_asynchronously :sync_indirect_object_with_git, queue: :default
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
-    return unless git_repository.valid?
-    if locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      destroy_obsolete_git_files
-      return
-    else
-      lock_for_background_jobs!
-    end
-    begin
-      destroy_obsolete_git_files_safely
-    ensure
-      unlock_for_background_jobs!
-    end
+    Communication::Website::DestroyObsoleteGitFilesJob.perform_later(id)
   end
-  handle_asynchronously :destroy_obsolete_git_files, queue: :cleanup
+
+  def destroy_obsolete_git_files_safely
+    return unless should_sync_with_git?
+    website_git_files.find_each do |git_file|
+      dependency = git_file.about
+      # Here, dependency can be nil (object was previously destroyed)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
+      if is_obsolete
+        Communication::Website::GitFile.mark_for_destruction(self, git_file)
+      end
+    end
+    git_repository.sync!
+  end
 
   def invalidate_access_token!
     # Nullify the expired token
@@ -91,52 +86,27 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
-    return unless git_repository.valid?
-    if locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      update_theme_version
-      return
-    else
-      lock_for_background_jobs!
-    end
-    begin
-      git_repository.update_theme_version!
-    ensure
-      unlock_for_background_jobs!
-    end
+    Communication::Website::UpdateThemeVersionJob.perform_later(id)
   end
-  handle_asynchronously :update_theme_version, queue: :default
+
+  def update_theme_version_safely
+    git_repository.update_theme_version!
+  end
 
   protected
 
-  def sync_indirect_object_with_git_safely(indirect_object)
-    indirect_object.direct_sources.each do |direct_source|
-      add_direct_source_to_sync(direct_source)
-    end
-    git_repository.sync!
-  end
-
-  def destroy_obsolete_git_files_safely
-    website_git_files.find_each do |git_file|
-      dependency = git_file.about
-      # Here, dependency can be nil (object was previously destroyed)
-      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
-      if is_obsolete
-        Communication::Website::GitFile.mark_for_destruction(self, git_file)
-      end
-    end
-    git_repository.sync!
-  end
-
-  def add_direct_source_to_sync(direct_source)
+  def add_direct_source_to_sync(direct_source, array: [])
     # Ne pas traiter les sources d'autres sites
-    return unless direct_source.website.id == self.id
+    return array unless direct_source.website.id == self.id
     # Ne pas traiter les sources non synchronisables
-    return unless direct_source.syncable?
-    Communication::Website::GitFile.sync self, direct_source
-    direct_source.recursive_dependencies(syncable_only: true).each do |object|
-      Communication::Website::GitFile.sync self, object
-    end
+    return array unless direct_source.syncable?
+    # Ne pas traiter si la source directe est déjà dans le tableau de dépendances
+    return array if array.include?(direct_source)
+    array << direct_source
+    # On passe le tableau de dépendances à la méthode recursive_dependencies
+    # pour qu'il soit capable d'early return en cas de doublon
+    array += direct_source.recursive_dependencies(array: array, syncable_only: true)
     # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
+    array
   end
 end

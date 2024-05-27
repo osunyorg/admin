@@ -16,7 +16,7 @@ class Server::WebsitesController < Server::ApplicationController
 
   def clean_and_rebuild_all_websites
     @websites.find_each do |website|
-      website.clean_and_rebuild
+      Communication::Website::CleanAndRebuildJob.perform_later(website.id)
     end
     redirect_back(fallback_location: server_websites_path, notice: t('server_admin.websites.clean_and_rebuild_all_websites_notice'))
   end
@@ -51,9 +51,14 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def update
-    university_id = params.dig(:communication_website, :university_id)
-    @website.move_to_university(university_id) if university_id
-    redirect_to server_website_path(@website), notice: t('admin.successfully_updated_html', model: @website.to_s)
+    if params[:context] == 'showcase_highlight'
+      should_highlight = params.dig(:communication_website, :highlighted_in_showcase) == '1'
+      @website.update(highlighted_in_showcase: should_highlight)
+    else
+      university_id = params.dig(:communication_website, :university_id)
+      @website.move_to_university(university_id) if university_id
+      redirect_to server_website_path(@website), notice: t('admin.successfully_updated_html', model: @website.to_s)
+    end
   end
 
   protected

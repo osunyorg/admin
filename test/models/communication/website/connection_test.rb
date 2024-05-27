@@ -66,10 +66,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
     assert_difference -> { Communication::Website::Connection.count } => -2 do
-      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page.communication_website_id]) do
         page.blocks.find_by(position: 2).destroy
       end
-      perform_enqueued_jobs
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
@@ -87,10 +87,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
     # On supprime le bloc qui contient PA : -3 (parce que PA doit être supprimé aussi ainsi que son bloc Organisations mais pas Noesya, toujours connectée via le block 3)
     assert_difference -> { Communication::Website::Connection.count } => -3 do
-      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page.communication_website_id]) do
         page.blocks.find_by(position: 2).destroy
       end
-      perform_enqueued_jobs
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
@@ -110,8 +110,8 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     setup_page_connections(page)
 
     second_page = communication_website_pages(:page_test)
-    block = second_page.blocks.create(position: 1, published: true, template_kind: :organizations)
-    block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+    block = second_page.blocks.new(position: 1, published: true, template_kind: :organizations)
+    block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save
 
     # Noesya est connectée via les 2 pages, donc 2 connexions
@@ -144,10 +144,26 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
     assert_difference -> { Communication::Website::Connection.count } => -6 do
-      assert_enqueued_with(job: Communication::CleanWebsitesJob) do
-        website_with_github.update(about: nil)   
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [website_with_github.id]) do
+        website_with_github.update(about: nil)
       end
       perform_enqueued_jobs
+    end
+  end
+
+  def test_delete_obsolete_connections_stays_in_scope
+    website_with_github.update(about: default_school)
+    page = communication_website_pages(:page_with_no_dependency)
+    setup_page_connections(page)
+    program = education_programs(:default_program)
+    # On connecte une formation à la page : +3 (bloc, formation, diplôme)
+    assert_difference -> { Communication::Website::Connection.count } => 3 do
+      block = page.blocks.new(position: 3, published: true, template_kind: :programs)
+      block.data = "{ \"elements\": [ { \"id\": \"#{program.id}\" } ] }"
+      block.save
+    end
+    assert_no_difference('Communication::Website::Connection.count') do
+      website_with_github.reload.delete_obsolete_connections_for_self_and_direct_sources
     end
   end
 
@@ -163,31 +179,31 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       page.blocks.create(position: 1, published: true, template_kind: :chapter)
     end
 
-    # On connecte PA via un block "Personnes" : +2
+    # On connecte PA via un block "Personnes" : +2 (bloc, personne)
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = page.blocks.create(position: 2, published: true, template_kind: :persons)
-      block.data = "{ \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
+      block = page.blocks.new(position: 2, published: true, template_kind: :persons)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
       block.save
     end
 
     # On ajoute noesya via un block "Organisations" : +4 parce que noesya a un block "Personnes" avec Olivia
     assert_difference -> { Communication::Website::Connection.count } => 4 do
-      block = page.blocks.create(position: 3, published: true, template_kind: :organizations)
-      block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+      block = page.blocks.new(position: 3, published: true, template_kind: :organizations)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
 
     # On ajoute Arnaud à noesya via un block "Personnes" : +2
     assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = noesya.blocks.create(position: 2, published: true, template_kind: :persons)
-      block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
+      block = noesya.blocks.new(position: 2, published: true, template_kind: :persons)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
       block.save
     end
 
     # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
     assert_difference -> { Communication::Website::Connection.count } => 1 do
-      block = olivia.blocks.create(position: 1, published: true, template_kind: :organizations)
-      block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
+      block = olivia.blocks.new(position: 1, published: true, template_kind: :organizations)
+      block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
     end
 

@@ -22,7 +22,12 @@
             <%= link_to program, [:admin, program] %>
           </td>
           <% checks.each do |check| %>
-            <% valid = !program.public_send("best_#{check}").blank? %>
+            <%
+            method = program.respond_to?("best_#{check}") ? "best_#{check}"
+                                                          : "#{check}"
+            value = program.public_send(method)
+            valid = value.present?
+            %>
             <td>
               <% if valid %>
                 <span class="<%= Icon::CHECK_OK %> text-success"></span>

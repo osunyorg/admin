@@ -1,6 +1,7 @@
 namespace :server do
   resources :universities
   resources :languages
+  resources :tags
   resources :websites do
     collection do
       post :clean_and_rebuild_all_websites

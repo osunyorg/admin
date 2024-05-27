@@ -105,8 +105,12 @@
         <%= osuny_panel t('metadata') do %>
           <%= f.input :url %>
           <%= f.input :in_production %>
-          <%= f.input :in_showcase, hint: link_to('Voir le showcase', "https://#{ENV['OSUNY_SHOWCASE']}", target: :_blank) %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
+        <% end %>
+
+        <%= osuny_panel t('communication.website.showcase') do %>
+          <%= f.input :in_showcase, hint: link_to(t('admin.communication.website.see_showcase'), "https://#{ENV['OSUNY_SHOWCASE']}", target: :_blank) %>
+          <%= f.association :showcase_tags, as: :check_boxes %>
         <% end %>
 
         <%= osuny_panel t('communication.website.hosting') do %>

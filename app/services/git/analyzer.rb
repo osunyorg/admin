@@ -45,10 +45,6 @@ class Git::Analyzer
     git_file.path
   end
 
-  def sha
-    git_file.sha
-  end
-
   def computed_sha
     repository.computed_sha(git_file.to_s)
   end

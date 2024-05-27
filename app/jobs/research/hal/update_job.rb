@@ -1,5 +1,5 @@
 class Research::Hal::UpdateJob < ApplicationJob
-  queue_as :low_priority
+  queue_as :elephant
 
   def perform
     Research::Hal.update_from_api!

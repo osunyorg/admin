@@ -9,6 +9,7 @@ website_with_github:
   languages: [fr]
   default_language: fr
   default_time_zone: Europe/Paris
+  deuxfleurs_hosting: false
 
 website_with_gitlab:
   university: default_university
@@ -21,3 +22,4 @@ website_with_gitlab:
   languages: [fr, en]
   default_language: fr
   default_time_zone: Europe/Paris
+  deuxfleurs_hosting: false

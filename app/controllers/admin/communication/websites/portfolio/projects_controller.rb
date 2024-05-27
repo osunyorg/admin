@@ -96,7 +96,11 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(current_user, @website).list
+    @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(
+        current_user, 
+        @website, 
+        current_website_language
+      ).list
   end
 
   def project_params
