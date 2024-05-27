@@ -153,6 +153,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
           .permit(
             :communication_website_id, :title, :breadcrumb_title, :bodyclass,
             :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published, :full_width,
+            :shared_image, :shared_image_delete,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             :parent_id
           )

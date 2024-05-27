@@ -43,6 +43,7 @@ class Communication::Website::Post < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable # We override slug_unavailable? method
   include Translatable
   include WithAccessibility
@@ -163,7 +164,10 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [
+      featured_image&.blob_id,
+      shared_image&.blob_id
+    ]
   end
 
   def inherited_blob_ids

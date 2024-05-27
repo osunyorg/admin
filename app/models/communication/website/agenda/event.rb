@@ -47,6 +47,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable
   include Translatable
   include WithAccessibility
@@ -139,7 +140,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [
+      featured_image&.blob_id,
+      shared_image&.blob_id
+    ]
   end
 
   def abouts_with_agenda_block
