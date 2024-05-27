@@ -206,9 +206,12 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def touch_elements_if_special_page_in_hierarchy
+    # We do not call touch as we don't want to trigger the sync on the connected objects
     descendants_and_self.each do |page|
       if page.type == 'Communication::Website::Page::Person'
-        website.connected_people.each(&:touch)
+        website.connected_people.update_all(updated_at: Time.zone.now)
+      elsif page.type == 'Communication::Website::Page::Organization'
+        website.connected_organizations.update_all(updated_at: Time.zone.now)
       end
     end
   end
