@@ -47,12 +47,7 @@ module Communication::Website::WithGitRepository
       # On passe le tableau de dépendances à la méthode recursive_dependencies
       # pour qu'il soit capable d'early return en cas de doublon
       all_dependencies += direct_source.recursive_dependencies(array: all_dependencies, syncable_only: true)
-      # Communication::Website::GitFile.sync self, direct_source
-      # direct_source.recursive_dependencies(syncable_only: true).each do |object|
-      #   Communication::Website::GitFile.sync self, object
-      # end
       # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
-      # On ne synchronise pas les références de l'objet dir
     end
     all_dependencies.each do |dependency|
       Communication::Website::GitFile.sync self, dependency
