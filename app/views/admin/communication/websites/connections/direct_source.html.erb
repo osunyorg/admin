@@ -1,0 +1,29 @@
+<% content_for :title, @direct_source_type %>
+<% content_for :title_right, @connections.count %>
+
+<h2>Sources</h2>
+<div class="table-responsive mb-5">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Connection.human_attribute_name('direct_source') %></th>
+        <th>Language</th>
+        <th>Connexions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @direct_sources.each do |source| %>
+        <tr>
+          <td><%= render 'admin/communication/websites/connections/direct_source',
+                          source: source, 
+                          type: @direct_source_type %></td>
+          <td><%= source&.language %>
+          <td><%= @connections.where(direct_source_type: @direct_source_type, direct_source_id: source.id).count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<h2>Détail des connexions</h2>
+<%= render 'admin/communication/websites/connections/list', connections: @connections %>
