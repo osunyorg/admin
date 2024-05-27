@@ -155,7 +155,6 @@ class Communication::Website < ApplicationRecord
   # Appelé en asynchrone par Communication::Website::SyncWithGitJob
   def sync_with_git_safely
     return unless should_sync_with_git?
-    Communication::Website::GitFile.sync website, self
     dependencies_with_static_file.each do |dependency_global_id|
       Communication::Website::GitFile.sync website, GlobalID::Locator.locate(dependency_global_id)
     end
