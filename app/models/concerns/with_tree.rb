@@ -27,6 +27,10 @@ module WithTree
                     : []
     end
 
+    def descendants_and_self
+      [self] + descendants
+    end
+
     def siblings
       self.class.unscoped.where(parent: parent, university: university).where.not(id: id).ordered
     end

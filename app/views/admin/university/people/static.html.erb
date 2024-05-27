@@ -1,4 +1,7 @@
+<% version = 1 %>
 ---
+<% cache [@about, @website.id, version] do %>
+<%byebug%>
 <%= render 'admin/application/static/title' %>
 linkTitle: >-
   <%= @about.to_s_alphabetical %>
@@ -103,3 +106,4 @@ persons_categories:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.biography %>
+<% end %>
