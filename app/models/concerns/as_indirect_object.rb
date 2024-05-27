@@ -52,10 +52,10 @@ module AsIndirectObject
     connections.collect &:direct_source
   end
 
-  def direct_sources_with_dependencies
+  def direct_sources_with_dependencies_for_website(website)
     dependencies = []
     direct_sources.each do |direct_source|
-      dependencies = add_direct_source_to_dependencies(direct_source, array: dependencies)
+      dependencies = add_direct_source_to_dependencies(direct_source, website, array: dependencies)
     end
     dependencies
   end
@@ -78,9 +78,9 @@ module AsIndirectObject
     end
   end
 
-  def add_direct_source_to_dependencies(direct_source, array: [])
+  def add_direct_source_to_dependencies(direct_source, website, array: [])
     # Ne pas traiter les sources d'autres sites
-    return array unless direct_source.website.id == self.id
+    return array unless direct_source.website.id == website.id
     # Ne pas traiter les sources non synchronisables
     return array unless direct_source.syncable?
     # Ne pas traiter si la source directe est déjà dans le tableau de dépendances
