@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/noesya/good_job.git
-  revision: 18d7db33ed73d8c548223f244fcb6553e82266c3
+  revision: 1ce88fda305c65e8ccdce2169c7659272cc0abb9
   specs:
     good_job (3.29.3)
       activejob (>= 6.0.0)
