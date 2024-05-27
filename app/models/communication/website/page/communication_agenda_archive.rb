@@ -19,7 +19,7 @@ class Communication::Website::Page::CommunicationAgendaArchive < Communication::
   def dependencies
     super +
     [website.config_default_languages] +
-    website.events
+    website.events.where(language_id: language_id)
   end
 
   def default_parent

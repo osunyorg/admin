@@ -19,7 +19,7 @@ class Communication::Website::Page::AdministrationLocation < Communication::Webs
   def dependencies
     super +
     [website.config_default_languages] +
-    website.administration_locations
+    website.administration_locations.where(language_id: language_id)
   end
 
   def git_path_relative

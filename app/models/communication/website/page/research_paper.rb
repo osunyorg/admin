@@ -8,7 +8,7 @@ class Communication::Website::Page::ResearchPaper < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.research_papers
+    website.research_papers.where(language_id: language_id)
   end
 
   def git_path_relative
