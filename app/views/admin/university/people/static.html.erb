@@ -1,7 +1,6 @@
 <% version = 1 %>
 ---
 <% cache [@about, @website.id, version] do %>
-<%byebug%>
 <%= render 'admin/application/static/title' %>
 linkTitle: >-
   <%= @about.to_s_alphabetical %>
