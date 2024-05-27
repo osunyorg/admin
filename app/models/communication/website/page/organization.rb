@@ -4,7 +4,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.connected_organizations
+    website.connected_organizations.where(language_id: language_id)
   end
 
   def explicitly_connected_organizations

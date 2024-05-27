@@ -20,7 +20,7 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
   def dependencies
     super +
     [website.config_default_languages] +
-    website.education_diplomas
+    website.education_diplomas.where(language_id: language_id)
   end
 
   def git_path_relative
