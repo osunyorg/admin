@@ -159,9 +159,6 @@ class Communication::Website < ApplicationRecord
     recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
       Communication::Website::GitFile.sync website, object
     end
-    references.each do |object|
-      Communication::Website::GitFile.sync website, object
-    end
     git_repository.sync!
   end
 
