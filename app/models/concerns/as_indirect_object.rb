@@ -88,7 +88,7 @@ module AsIndirectObject
     array << direct_source
     # On passe le tableau de dépendances à la méthode recursive_dependencies
     # pour qu'il soit capable d'early return en cas de doublon
-    array += direct_source.recursive_dependencies(array: array, syncable_only: true)
+    array = direct_source.recursive_dependencies(array: array, syncable_only: true)
     # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
     array
   end
