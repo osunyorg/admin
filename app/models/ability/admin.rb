@@ -79,6 +79,7 @@ class Ability::Admin < Ability
   end
 
   def admin_administration
+    can :manage, Administration::Location
     can :read, Administration::Qualiopi
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
