@@ -4,6 +4,6 @@
 <%= block_component_static block, :title, template: element, depth: 4, list: true %>
 <%= block_component_static block, :description, template: element, depth: 5 %>
 <%= block_component_static block, :url, template: element, depth: 5 %>
-          external: <%= !(element.url.starts_with?('/') || element.url.starts_with?(@website.url)) %>
+          external: <%= !(element.url.start_with?('/') || element.url.start_with?(@website.url)) %>
 <%= block_component_static block, :image, template: element, depth: 5 %>
 <% end %>
