@@ -4,5 +4,4 @@ class Communication::Block::Template::Link::Element < Communication::Block::Temp
   has_component :description, :text
   has_component :url, :string
   has_component :image, :image
-  
 end
