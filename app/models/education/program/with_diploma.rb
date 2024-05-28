@@ -7,9 +7,9 @@ module Education::Program::WithDiploma
       optional: true
   end
 
-  # Used by website 
+  # Used by website
   # https://github.com/noesya/osuny/issues/1529
   def diplomas
-    [diploma]
+    Education::Diploma.where(id: diploma_id)
   end
 end
