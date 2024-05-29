@@ -40,6 +40,14 @@ class University::Person::Category < ApplicationRecord
 
   scope :ordered, -> { order(:name) }
 
+  def git_path(website)
+    git_path_content_prefix(website) + git_path_relative
+  end
+
+  def git_path_relative
+    "persons_categories/#{slug}/_index.html"
+  end
+
   def to_s
     "#{name}"
   end
