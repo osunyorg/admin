@@ -29,6 +29,7 @@ class University::Organization::Category < ApplicationRecord
   include Permalinkable
   include Sluggable
   include Translatable
+  include WithGitFiles
   include WithUniversity
 
   has_and_belongs_to_many :organizations,
