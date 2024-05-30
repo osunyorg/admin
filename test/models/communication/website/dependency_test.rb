@@ -50,7 +50,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
     GoodJob::Job.destroy_all
 
-    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page]) do
+    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page.communication_website_id, direct_object: page]) do
       assert_enqueued_with(job: Communication::Website::CleanJob) do
         block.destroy
       end

@@ -27,15 +27,12 @@ module Research::Hal
 
   def self.clear_queue!
     ids = []
-    GoodJob::Job.find_each do |job|
-      job_class = job.job_class
+    indirect_object_sync_job_class = "Communication::Website::IndirectObject::SyncWithGitJob"
+    GoodJob::Job.queued.where(job_class: indirect_object_sync_job_class).find_each do |job|
       job_arguments = job.serialized_params["arguments"]
-      indirect_object_gid = job_arguments.last["_aj_globalid"].to_s
-
-      if job_class == "Communication::Website::IndirectObject::SyncWithGitJob" &&
-         indirect_object_gid.include?("Research::Publication")
-        ids << job.id
-      end
+      job_options_argument = job_arguments.last
+      indirect_object_gid = job_options_argument.dig("indirect_object", "_aj_globalid").to_s
+      ids << job.id if indirect_object_gid.include?("Research::Publication")
     end
     GoodJob::Job.where(id: ids).destroy_all
   end

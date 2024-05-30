@@ -10,10 +10,11 @@ class Communication::Website::BaseJob < ApplicationJob
   # Retry the job after 1 minute if it is interrupted, to prevent queue from being blocked
   retry_on GoodJob::InterruptError, wait: 1.minute, attempts: Float::INFINITY
 
-  attr_accessor :website_id
+  attr_accessor :website_id, :options
 
-  def perform(website_id)
+  def perform(website_id, options = {})
     @website_id = website_id
+    @options = options
     # Website might be deleted in between
     return unless website.present?
     # TODO manage lock / unlock
