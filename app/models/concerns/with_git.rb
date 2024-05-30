@@ -24,7 +24,7 @@ module WithGit
   end
 
   def sync_with_git
-    Communication::Website::DirectObject::SyncWithGitJob.perform_later(self)
+    Communication::Website::DirectObject::SyncWithGitJob.perform_later(website.id, direct_object: self)
   end
 
   def sync_with_git_safely
