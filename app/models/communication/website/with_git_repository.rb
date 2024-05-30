@@ -35,8 +35,8 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    indirect_object.direct_sources.each do |direct_source|
-      add_direct_source_to_sync(direct_source)
+    indirect_object.direct_sources_with_dependencies_for_website(self).each do |dependency|
+      Communication::Website::GitFile.sync self, dependency
     end
     git_repository.sync!
   end
@@ -88,17 +88,4 @@ module Communication::Website::WithGitRepository
     git_repository.update_theme_version!
   end
 
-  protected
-
-  def add_direct_source_to_sync(direct_source)
-    # Ne pas traiter les sources d'autres sites
-    return unless direct_source.website.id == self.id
-    # Ne pas traiter les sources non synchronisables
-    return unless direct_source.syncable?
-    Communication::Website::GitFile.sync self, direct_source
-    direct_source.recursive_dependencies(syncable_only: true).each do |object|
-      Communication::Website::GitFile.sync self, object
-    end
-    # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
-  end
 end

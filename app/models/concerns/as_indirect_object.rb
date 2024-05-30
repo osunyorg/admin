@@ -52,6 +52,14 @@ module AsIndirectObject
     connections.collect &:direct_source
   end
 
+  def direct_sources_with_dependencies_for_website(website)
+    dependencies = []
+    direct_sources.each do |direct_source|
+      dependencies = add_direct_source_to_dependencies(direct_source, website, array: dependencies)
+    end
+    dependencies
+  end
+
   protected
 
   def direct_sources_from_reference(reference)
@@ -66,8 +74,23 @@ module AsIndirectObject
       direct_source.website.connect self, direct_source
     end
     websites.each do |website|
-      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website, self)
+      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
     end
+  end
+
+  def add_direct_source_to_dependencies(direct_source, website, array: [])
+    # Ne pas traiter les sources d'autres sites
+    return array unless direct_source.website.id == website.id
+    # Ne pas traiter les sources non synchronisables
+    return array unless direct_source.syncable?
+    # Ne pas traiter si la source directe est déjà dans le tableau de dépendances
+    return array if array.include?(direct_source)
+    array << direct_source
+    # On passe le tableau de dépendances à la méthode recursive_dependencies
+    # pour qu'il soit capable d'early return en cas de doublon
+    array = direct_source.recursive_dependencies(array: array, syncable_only: true)
+    # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
+    array
   end
 
 end

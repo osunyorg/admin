@@ -5,13 +5,13 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   def test_page_dependencies
-    # Rien : 0 dépendances
+    # Par défaut, 1 dépendance (la configuration CSP du site)
     page = communication_website_pages(:page_with_no_dependency)
     assert_equal 1, page.recursive_dependencies.count
 
-    #  On ajoute un block "Chapitre" : 7 dépendances (les 6 composants du chapitre + le block lui même)
+    #  On ajoute un block "Chapitre" : +1 dépendance (le block)
     page.blocks.create(position: 1, published: true, template_kind: :chapter)
-    assert_equal 8, page.recursive_dependencies.count
+    assert_equal 2, page.recursive_dependencies.count
   end
 
   def test_change_block_dependencies
@@ -50,7 +50,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
     GoodJob::Job.destroy_all
 
-    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page]) do
+    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page.communication_website_id, direct_object: page]) do
       assert_enqueued_with(job: Communication::Website::CleanJob) do
         block.destroy
       end

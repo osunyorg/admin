@@ -10,6 +10,7 @@ class Git::Repository
   end
 
   def add_git_file(git_file)
+    return if git_files.include?(git_file)
     puts "Adding #{git_file.path}"
     if git_files.empty?
       # The first file gives the commit name

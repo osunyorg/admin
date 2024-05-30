@@ -24,7 +24,7 @@ class Git::Providers::Github < Git::Providers::Abstract
       mode: file[:mode],
       type: file[:type],
       sha: nil
-    }
+    } unless path_to_check == path
     batch << {
       path: path,
       mode: file[:mode],

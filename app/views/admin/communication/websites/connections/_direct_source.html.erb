@@ -1,8 +1,7 @@
 <%
-source = connection.direct_source
 source_name = source.to_s
 begin
-  case connection.direct_source_type
+  case type
   when 'Communication::Website::Page'
     source_link = admin_communication_website_page_path(website_id: source.website.id, id: source.id, lang: current_language)
   when 'Communication::Website::Post'

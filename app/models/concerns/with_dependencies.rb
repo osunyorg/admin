@@ -84,7 +84,7 @@ module WithDependencies
     # Si l'objet ne doit pas être ajouté on n'ajoute pas non plus ses dépendances récursives
     # C'est le fait de couper ici qui évite la boucle infinie
     return array unless dependency_should_be_added?(array, dependency, syncable_only)
-    array << dependency
+    array << dependency if dependency.is_a?(ActiveRecord::Base)
     return array if !follow_direct && dependency.try(:is_direct_object?)
     return array unless dependency.respond_to?(:recursive_dependencies)
     dependency.recursive_dependencies(array: array, syncable_only: syncable_only, follow_direct: follow_direct)
