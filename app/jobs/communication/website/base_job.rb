@@ -9,8 +9,8 @@ class Communication::Website::BaseJob < ApplicationJob
 
   # Retry the job after 1 minute if it is interrupted, to prevent queue from being blocked
   retry_on GoodJob::InterruptError, wait: 1.minute, attempts: Float::INFINITY
-  # Retry the job after 5 seconds when the website was locked.
-  retry_on Communication::Website::LockError, wait: 5.seconds, attempts: Float::INFINITY
+  # Retry the job after 30 seconds when the website was locked.
+  retry_on Communication::Website::LockError, wait: 30.seconds, attempts: Float::INFINITY
 
   attr_accessor :website_id, :options
 
