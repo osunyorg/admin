@@ -1,0 +1,29 @@
+<% content_for :title, @indirect_object_type %>
+<% content_for :title_right, @connections.count %>
+
+<h2>Objets</h2>
+<div class="table-responsive mb-5">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::Connection.human_attribute_name('indirect_object') %></th>
+        <th>Language</th>
+        <th>Connexions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @indirect_objects.each do |indirect_object| %>
+        <tr>
+          <td><%= render 'admin/communication/websites/connections/indirect_object',
+                          object: indirect_object, 
+                          type: @indirect_object_type %></td>
+          <td><%= indirect_object&.language %>
+          <td><%= @connections.where(indirect_object_type: @indirect_object_type, indirect_object_id: indirect_object.id).count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<h2>Détail des connexions</h2>
+<%= render 'admin/communication/websites/connections/list', connections: @connections %>

@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   end
 
   authenticated :user, -> user { user.server_admin? } do
-    match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
+    mount GoodJob::Engine => 'background'
+    mount PgHero::Engine => 'database'
   end
 
   devise_for :users, controllers: {

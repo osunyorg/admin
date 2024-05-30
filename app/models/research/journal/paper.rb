@@ -55,12 +55,12 @@ class Research::Journal::Paper < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithBlobs
   include WithCitations
   include WithGitFiles
   include WithPosition
   include WithPublication
-  include WithTranslations
   include WithUniversity
 
   has_summernote :bibliography

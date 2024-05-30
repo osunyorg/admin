@@ -3,7 +3,7 @@ class Communication::Website::Page::Person < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.connected_people
+    website.connected_people.where(language_id: language_id)
   end
 
   def explicitly_connected_people

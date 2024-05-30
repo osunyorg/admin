@@ -35,41 +35,29 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    if locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      delay(run_at: 1.minute.from_now, queue: :default)
-        .sync_indirect_object_with_git_without_delay(indirect_object)
-      return
-    else
-      return unless git_repository.valid?
-      lock_for_background_jobs!
+    indirect_object.direct_sources_with_dependencies_for_website(self).each do |dependency|
+      Communication::Website::GitFile.sync self, dependency
     end
-    begin
-      sync_indirect_object_with_git_safely(indirect_object)
-    ensure
-      unlock_for_background_jobs!
-    end
+    git_repository.sync!
   end
-  handle_asynchronously :sync_indirect_object_with_git, queue: :default
 
   # Supprimer tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
   def destroy_obsolete_git_files
-    if locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      delay(run_at: 1.minute.from_now, queue: :cleanup)
-        .destroy_obsolete_git_files_without_delay
-      return
-    else
-      return unless git_repository.valid?
-      lock_for_background_jobs!
-    end
-    begin
-      destroy_obsolete_git_files_safely
-    ensure
-      unlock_for_background_jobs!
-    end
+    Communication::Website::DestroyObsoleteGitFilesJob.perform_later(id)
   end
-  handle_asynchronously :destroy_obsolete_git_files, queue: :cleanup
+
+  def destroy_obsolete_git_files_safely
+    return unless should_sync_with_git?
+    website_git_files.find_each do |git_file|
+      dependency = git_file.about
+      # Here, dependency can be nil (object was previously destroyed)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
+      if is_obsolete
+        Communication::Website::GitFile.mark_for_destruction(self, git_file)
+      end
+    end
+    git_repository.sync!
+  end
 
   def invalidate_access_token!
     # Nullify the expired token
@@ -93,53 +81,11 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
-    if locked_for_background_jobs?
-      # Website already locked, we reenqueue the job
-      delay(run_at: 1.minute.from_now, queue: :default)
-        .update_theme_version_without_delay
-      return
-    else
-      return unless git_repository.valid?
-      lock_for_background_jobs!
-    end
-    begin
-      git_repository.update_theme_version!
-    ensure
-      unlock_for_background_jobs!
-    end
-  end
-  handle_asynchronously :update_theme_version, queue: :default
-
-  protected
-
-  def sync_indirect_object_with_git_safely(indirect_object)
-    indirect_object.direct_sources.each do |direct_source|
-      add_direct_source_to_sync(direct_source)
-    end
-    git_repository.sync!
+    Communication::Website::UpdateThemeVersionJob.perform_later(id)
   end
 
-  def destroy_obsolete_git_files_safely
-    website_git_files.find_each do |git_file|
-      dependency = git_file.about
-      # Here, dependency can be nil (object was previously destroyed)
-      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
-      if is_obsolete
-        Communication::Website::GitFile.mark_for_destruction(self, git_file)
-      end
-    end
-    git_repository.sync!
+  def update_theme_version_safely
+    git_repository.update_theme_version!
   end
 
-  def add_direct_source_to_sync(direct_source)
-    # Ne pas traiter les sources d'autres sites
-    return unless direct_source.website.id == self.id
-    # Ne pas traiter les sources non synchronisables
-    return unless direct_source.syncable?
-    Communication::Website::GitFile.sync self, direct_source
-    direct_source.recursive_dependencies(syncable_only: true).each do |object|
-      Communication::Website::GitFile.sync self, object
-    end
-    # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
-  end
 end
