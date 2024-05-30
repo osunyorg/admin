@@ -19,11 +19,8 @@ class Communication::Website::BaseJob < ApplicationJob
     @options = options
     # Website might be deleted in between
     return unless website.present?
-    # Skip website lock if specified
-    skip_website_lock = options.fetch(:skip_website_lock, false)
-    if website.locked_for_background_jobs? && !skip_website_lock
-      raise Communication::Website::LockError.new("Interrupted because of website lock.")
-    end
+    # Raise if website is locked to retry later
+    raise Communication::Website::LockError.new("Interrupted because of website lock.") if website.locked_for_background_jobs?
     # We lock the website to prevent race conditions
     website.lock_for_background_jobs!
     begin
