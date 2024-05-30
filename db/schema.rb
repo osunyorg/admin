@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.string "record_type", null: false
     t.uuid "record_id", null: false
     t.uuid "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -44,8 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
     t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
@@ -464,10 +464,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.boolean "published", default: false
     t.string "featured_image_alt"
     t.text "text"
-    t.text "summary"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
+    t.text "summary"
     t.string "bodyclass"
     t.uuid "language_id", null: false
     t.text "featured_image_credit"
@@ -586,7 +586,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.string "title"
     t.text "meta_description"
     t.boolean "published", default: false
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
@@ -687,9 +687,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
     t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: nil
+    t.datetime "locked_at", precision: nil
+    t.datetime "failed_at", precision: nil
     t.string "locked_by"
     t.string "queue"
     t.datetime "created_at"
@@ -1002,7 +1002,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
 
   create_table "research_journal_papers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
@@ -1047,7 +1047,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.uuid "research_journal_id", null: false
     t.string "title"
     t.integer "number"
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "meta_description"
@@ -1390,20 +1390,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "language_id"
@@ -1413,8 +1413,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.string "encrypted_otp_secret_key_iv"
     t.string "encrypted_otp_secret_key_salt"
     t.string "direct_otp"
-    t.datetime "direct_otp_sent_at"
-    t.datetime "totp_timestamp"
+    t.datetime "direct_otp_sent_at", precision: nil
+    t.datetime "totp_timestamp", precision: nil
     t.string "session_token"
     t.string "picture_url"
     t.string "direct_otp_delivery_method"
