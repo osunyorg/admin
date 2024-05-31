@@ -1,5 +1,6 @@
 class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
+  COMMIT_BATCH_SIZE = 250
 
   def url
     "#{BASE_URL}/#{repository}"
@@ -67,14 +68,27 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def push(commit_message)
     return if !valid? || batch.empty?
-    new_tree = client.create_tree repository, batch, base_tree: tree[:sha]
-    commit = client.create_commit repository, commit_message, new_tree[:sha], branch_sha
+    commit = create_commit_from_batch(batch, commit_message)
     client.update_branch repository, default_branch, commit[:sha]
     # The repo changed, invalidate the tree
     @tree = nil
     @tree_items_by_path = nil
     #
     true
+  end
+
+  def create_commit_from_batch(batch, commit_message)
+    base_tree_sha = tree[:sha]
+    base_commit_sha = branch_sha
+    commit = nil
+    batch.each_slice(COMMIT_BATCH_SIZE) do |sub_batch|
+      puts "Creating commit with #{sub_batch.size} files."
+      new_tree = client.create_tree repository, sub_batch, base_tree: base_tree_sha
+      commit = client.create_commit repository, commit_message, new_tree[:sha], base_commit_sha
+      base_tree_sha = new_tree[:sha]
+      base_commit_sha = commit[:sha]
+    end
+    commit
   end
 
   def computed_sha(string)
