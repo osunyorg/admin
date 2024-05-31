@@ -1,3 +1,5 @@
+body
+    background-color: $color-bg
 h1,
 h2
     font-family: $font-family-serif
@@ -29,12 +31,12 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1
     margin-bottom: $spacing1
 
 .hero
-    background-color: $color-background-alt
     margin-bottom: 30px
+    min-height: 300px
     padding-bottom: 30px
-    padding-top: 150px
-    @media (min-height: 800px)
-        padding-top: 250px
+    .breadcrumb
+        *
+            color: $color-text-alt !important
 
 main
     min-height: 70vh

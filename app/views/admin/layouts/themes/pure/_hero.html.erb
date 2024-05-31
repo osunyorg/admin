@@ -1,6 +1,7 @@
 <div class="hero">
   <div class="container-fluid">
-    <div class="d-xl-flex">
+    <%= render_breadcrumbs builder: Osuny::BreadcrumbsOnRailsBuilder %>
+    <div class="d-xl-flex mt-5">
       <h1><%= yield :title %></h1>
       <div class="ms-xl-auto text-xl-end mt-2">
         <%= yield :title_right %>
@@ -11,6 +12,5 @@
         <%= yield :title_left %>
       </div>
     <% end %>
-    <%= render_breadcrumbs builder: Osuny::BreadcrumbsOnRailsBuilder %>
   </div>
 </div>
