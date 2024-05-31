@@ -108,6 +108,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     .permit(
       :title, :meta_description, :summary, :published, :slug, :year,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :shared_image, :shared_image_delete,
       category_ids: []
     )
     .merge(
