@@ -8,9 +8,8 @@ module Communication::Website::WithLock
 
   def locked_for_background_jobs?(executing_job_id)
     reload
-    locked_at.present? && # Not locked if locked_at is nil
-    locked_by_job_id != executing_job_id && # If the website was locked by the same job, we can continue
-    GoodJob::Job.running.find_by(id: locked_by_job_id).present? # Check if the locking job is still running (to handle SIGKILL and hard shutdowns)
+    # Website is locked if locked_at is present and the job which locked it is not the current job
+    locked_at.present? && locked_by_job_id != executing_job_id
   end
 
   def lock_for_background_jobs!(job_id)
