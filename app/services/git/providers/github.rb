@@ -84,7 +84,8 @@ class Git::Providers::Github < Git::Providers::Abstract
     commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).round
     batch.each_slice(COMMIT_BATCH_SIZE).with_index do |sub_batch, i|
       puts "Creating commit with #{sub_batch.size} files."
-      sub_commit_message = "#{commit_message} (#{i+1}/#{commits_count})"
+      sub_commit_message = commit_message
+      sub_commit_message += " (#{i+1}/#{commits_count})" if commits_count > 1
       new_tree = client.create_tree repository, sub_batch, base_tree: base_tree_sha
       commit = client.create_commit repository, sub_commit_message, new_tree[:sha], base_commit_sha
       base_tree_sha = new_tree[:sha]
