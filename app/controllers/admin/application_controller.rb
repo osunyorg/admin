@@ -11,6 +11,11 @@ class Admin::ApplicationController < ApplicationController
     redirect_to admin_root_path
   end
 
+  def background_tasks_count
+    @background_tasks_count ||= GoodJob::Job.where(finished_at: nil).count
+  end
+  helper_method :background_tasks_count
+
   protected
 
   def breadcrumb
