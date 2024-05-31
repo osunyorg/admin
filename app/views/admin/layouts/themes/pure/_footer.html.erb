@@ -10,12 +10,11 @@
         <p class="text-white"><%= t('admin.pending_tasks.text_html') %></p>
       </div>
     </div>
-
-    <div class="d-flex justify-content-between mt-5 pt-5">
+    <div class="d-md-flex justify-content-between mt-5 pt-5">
       <%= link_to 'https://www.osuny.org', target: :_blank, class: 'text-white-50' do %>
         <%= t('admin.footer.signature') %>
       <% end %>
-      <ul class="list-inline">
+      <ul class="list-unstyled d-md-flex">
         <%
           [
             ['Aide à la contribution', 'https://support.osuny.org'],
@@ -25,7 +24,7 @@
             ['Statut', 'https://status.osuny.org'],
           ].each do |item| 
         %>
-          <li class="list-inline-item">
+          <li>
             <%= link_to item.first, item.last, target: :_blank, class: 'text-white-50' %>
           </li>
         <% end %>

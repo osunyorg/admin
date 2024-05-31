@@ -43,11 +43,10 @@ main
     position: relative
 
 .container-fluid
-    padding-left: $grid-gutter-width
-    padding-right: $grid-gutter-width
+    padding-left: var(--bs-gutter-x)
+    padding-right: var(--bs-gutter-x)
     @media (max-width: 768px)
-        padding-left: 1.5rem
-        padding-right: 1.5rem
+        --bs-gutter-x: 1.5rem
         
 p
     color: $color-text
