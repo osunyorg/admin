@@ -81,7 +81,7 @@ class Git::Providers::Github < Git::Providers::Abstract
     base_tree_sha = tree[:sha]
     base_commit_sha = branch_sha
     commit = nil
-    commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).round
+    commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).ceil
     batch.each_slice(COMMIT_BATCH_SIZE).with_index do |sub_batch, i|
       sub_commit_message = commit_message
       sub_commit_message += " (#{i+1}/#{commits_count})" if commits_count > 1
