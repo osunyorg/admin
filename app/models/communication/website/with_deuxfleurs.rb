@@ -13,6 +13,7 @@ module Communication::Website::WithDeuxfleurs
   # 4. both exists, deuxfleurs hosting needs to change identifier (Waiting for API possibility)
   def deuxfleurs_setup
     return unless deuxfleurs_hosting?
+    return if deuxfleurs_setup_done?
     Communication::Website::Deuxfleurs::SetupJob.perform_later(id)
   end
 
@@ -33,6 +34,10 @@ module Communication::Website::WithDeuxfleurs
   end
 
   protected
+
+  def deuxfleurs_setup_done?
+    deuxfleurs_hosting? && repository.present? && deuxfleurs_identifier.present?
+  end
 
   def deuxfleurs_golive
     return unless in_production_changed? && in_production

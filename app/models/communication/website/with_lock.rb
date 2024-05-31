@@ -6,16 +6,23 @@ module Communication::Website::WithLock
     LOCK_MAX_DURATION = 2.hours
   end
 
-  def locked_for_background_jobs?
+  def locked_for_background_jobs?(executing_job_id)
     reload
-    locked_at.present?
+    # Website is locked if locked_at is present and the job which locked it is not the current job
+    locked_at.present? && locked_by_job_id != executing_job_id
   end
 
-  def lock_for_background_jobs!
-    update_column :locked_at, Time.zone.now
+  def lock_for_background_jobs!(job_id)
+    update_columns(
+      locked_at: Time.zone.now,
+      locked_by_job_id: job_id
+    )
   end
 
   def unlock_for_background_jobs!
-    update_column :locked_at, nil
+    update_columns(
+      locked_at: nil,
+      locked_by_job_id: nil
+    )
   end
 end

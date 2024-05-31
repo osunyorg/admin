@@ -21,6 +21,7 @@ weight: <%= @about.position %>
 bodyclass: >-
   <%= @about.best_bodyclass %>
 <%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/shared_image/static' %>
 <% if @about.children.published.any? %>
 children:
 <%

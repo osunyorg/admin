@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_31_082129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -663,6 +663,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
     t.datetime "locked_at"
     t.datetime "git_files_analysed_at"
     t.boolean "highlighted_in_showcase", default: false
+    t.uuid "locked_by_job_id"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["name"], name: "index_communication_websites_on_name", opclass: :gin_trgm_ops, using: :gin
