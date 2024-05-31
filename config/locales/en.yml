@@ -121,6 +121,8 @@ en:
       zero: No element
       one: 1 element
       other: "%{count} elements"
+    footer:
+      signature: Osuny, a public interest digital common
     i18n:
       in: in %{lang}
       switch_to: switch to %{choices}
@@ -133,8 +135,9 @@ en:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
     pending_tasks:
-      label: Background tasks pending
-      hint: Those tasks precompute your data in order to minimize its carbon footprint. It creates a delay before your changes are online.
+      tasks: Background tasks pending
+      text_html: "Osuny can help you achieve digital sobriety.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
+      what_is_it: What is it?
     password_hint: Leave blank if you do not wish to change the password.
     seo: SEO
     successfully_created_html: "<i>%{model}</i> was successfully created."

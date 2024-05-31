@@ -1,6 +1,12 @@
 <div class="hero">
   <div class="container-fluid">
-    <%= render_breadcrumbs builder: Osuny::BreadcrumbsOnRailsBuilder %>
+    <% if controller_name == 'dashboard' && action_name == 'index' %>
+      <div class="welcome py-4">
+        <%= t('hello', name: current_user.first_name) %>
+      </div>
+    <% else %>
+      <%= render_breadcrumbs builder: Osuny::BreadcrumbsOnRailsBuilder %>
+    <% end %>
     <div class="d-xl-flex mt-5">
       <h1><%= yield :title %></h1>
       <div class="ms-xl-auto text-xl-end mt-2">
