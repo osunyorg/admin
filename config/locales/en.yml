@@ -320,6 +320,8 @@ en:
   remove: Remove
   reset: Reset
   save: Save
+  shared_image:
+    title: Shared image
   search: Search
   select_language: Select language
   seo: SEO

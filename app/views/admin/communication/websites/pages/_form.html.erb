@@ -40,6 +40,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
         <%= f.input :full_width if page.editable_width? %>
       <% end %>
       <%= render 'admin/application/featured_image/edit', about: @page, f: f %>
+      <%= render 'admin/application/shared_image/edit', about: @page, f: f %>
     </div>
   </div>
 

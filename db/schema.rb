@@ -664,6 +664,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_065216) do
     t.datetime "locked_at"
     t.datetime "git_files_analysed_at"
     t.boolean "highlighted_in_showcase", default: false
+    t.uuid "locked_by_job_id"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["name"], name: "index_communication_websites_on_name", opclass: :gin_trgm_ops, using: :gin
