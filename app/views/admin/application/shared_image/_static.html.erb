@@ -1,0 +1,7 @@
+<%
+shared_image = @about.shared_image
+if shared_image&.attached?
+%>
+shared_image:
+  id: "<%= shared_image.blob.id %>"
+<% end %>

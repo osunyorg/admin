@@ -110,6 +110,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     .permit(
       :title, :subtitle, :meta_description, :summary, :published, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :shared_image, :shared_image_delete,
       :from_day, :from_hour, :to_day, :to_hour, :time_zone,
       category_ids: []
     )

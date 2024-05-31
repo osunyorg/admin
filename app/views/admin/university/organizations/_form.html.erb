@@ -100,6 +100,7 @@
                     resize: false,
                     direct_upload: true %>
       <% end %>
+      <%= render 'admin/application/shared_image/edit', about: organization, f: f %>
       <%= render 'admin/application/meta_description/form', f: f, about: organization %>
     </div>
   </div>
