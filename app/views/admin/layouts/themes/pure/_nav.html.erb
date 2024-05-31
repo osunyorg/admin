@@ -41,7 +41,7 @@ context ||= :admin
   <div class="menu-content">
     <div class="container-fluid py-2">
       <div class="row">
-        <%= render_navigation context: context, renderer: Osuny::SimpleNavigationRenderer %>
+        <%= render_navigation context: context %>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <%= link_to admin_user_path(current_user) do %>
             <% if current_user.picture.attached? %>

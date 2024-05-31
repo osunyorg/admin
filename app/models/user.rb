@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
-#  admin_theme                   :integer          default("pure")
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           indexed
 #  confirmed_at                  :datetime
@@ -58,7 +57,6 @@
 class User < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes.
   # The sanitization is handled in User::WithAuthentication's sanitize_fields method.
-  include WithAdminTheme
   include WithAuthentication
   include WithAuthorship
   include WithAvatar
