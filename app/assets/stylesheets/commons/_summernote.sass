@@ -33,16 +33,16 @@
                 border-radius: 3px
                 min-height: 80px
                 padding: 8px
-                padding-top: 5px // Compensation de la hauteur des lignes
+                padding-top: 0 // Compensation de la hauteur des lignes
                 *
-                    font-family: $font-family-sans-serif
+                    font-family: $font-family-serif
                 &, 
                 p, 
                 div
-                    font-size: px2rem(16)
+                    font-size: $font-size-base
                     line-height: 180%
-                    @include media-breakpoint-up(md)
-                        font-size: px2rem(18)
+                    @include media-breakpoint-up(lg)
+                        font-size: $font-size-lg
                 p
                     &:last-of-type
                         margin-bottom: 0
