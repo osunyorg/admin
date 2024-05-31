@@ -20,7 +20,7 @@ class Communication::Website::BaseJob < ApplicationJob
     # Website might be deleted in between
     return unless website.present?
     # Raise if website is locked to retry later
-    raise Communication::Website::LockError.new("Interrupted because of website lock.") if website.locked_for_background_jobs?
+    raise Communication::Website::LockError.new("Interrupted because of website lock.") if website.locked_for_background_jobs?(job_id)
     # We lock the website to prevent race conditions
     website.lock_for_background_jobs!(job_id)
     begin
