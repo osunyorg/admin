@@ -81,17 +81,21 @@ class Git::Providers::Github < Git::Providers::Abstract
     base_tree_sha = tree[:sha]
     base_commit_sha = branch_sha
     commit = nil
-    commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).round
+    commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).ceil
     batch.each_slice(COMMIT_BATCH_SIZE).with_index do |sub_batch, i|
-      puts "Creating commit with #{sub_batch.size} files."
       sub_commit_message = commit_message
       sub_commit_message += " (#{i+1}/#{commits_count})" if commits_count > 1
-      new_tree = client.create_tree repository, sub_batch, base_tree: base_tree_sha
-      commit = client.create_commit repository, sub_commit_message, new_tree[:sha], base_commit_sha
-      base_tree_sha = new_tree[:sha]
+      commit = create_sub_commit(sub_batch, sub_commit_message, base_tree_sha, base_commit_sha)
+      base_tree_sha = commit[:tree][:sha]
       base_commit_sha = commit[:sha]
     end
     commit
+  end
+
+  def create_sub_commit(sub_batch, sub_commit_message, base_tree_sha, base_commit_sha)
+    puts "Creating commit with #{sub_batch.size} files."
+    new_tree = client.create_tree repository, sub_batch, base_tree: base_tree_sha
+    client.create_commit repository, sub_commit_message, new_tree[:sha], base_commit_sha
   end
 
   def computed_sha(string)
