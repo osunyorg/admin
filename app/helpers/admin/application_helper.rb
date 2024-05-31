@@ -69,7 +69,7 @@ module Admin::ApplicationHelper
   end
 
   def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, small: false, classes: '', &block)
-    render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
+    render  layout: "admin/layouts/themes/pure/panel",
             locals: {
               title: title,
               subtitle: subtitle,
@@ -88,16 +88,6 @@ module Admin::ApplicationHelper
 
   def osuny_separator
     raw '<hr class="my-5">'
-  end
-
-  def if_appstack(string)
-    return '' if current_admin_theme != 'appstack'
-    " #{string}"
-  end
-
-  def if_pure(string)
-    return '' if current_admin_theme != 'pure'
-    " #{string}"
   end
 
   def button_classes(additional = '', **options)

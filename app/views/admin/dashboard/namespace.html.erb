@@ -29,13 +29,11 @@
       <% end %>
     </div>
   </div>
-  <% if current_admin_theme == 'pure' %>
-    <div class="offset-lg-1 col-lg-4">
-      <%= image_tag "admin/#{@namespace.to_s.underscore}.jpg", class: 'img-fluid pure__chapter__image'%>
-      <p class="small text-lg-end mt-3">
-        Illustration de Virginia Frances Sterrett<br>
-        Source : University of California Libraries, the Internet Archive
-      </p>
-    </div>
-  <% end %>
+  <div class="offset-lg-1 col-lg-4">
+    <%= image_tag "admin/#{@namespace.to_s.underscore}.jpg", class: 'img-fluid pure__chapter__image'%>
+    <p class="small text-lg-end mt-3">
+      Illustration de Virginia Frances Sterrett<br>
+      Source : University of California Libraries, the Internet Archive
+    </p>
+  </div>
 </div>
