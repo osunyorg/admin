@@ -85,6 +85,7 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version_safely
+    return unless should_sync_with_git?
     git_repository.update_theme_version!
   end
 
