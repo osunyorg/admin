@@ -2,7 +2,7 @@
 context ||= :admin
 %>
 <nav class="navbar navbar-main navbar-dark bg-black" aria-label="Navigation">
-  <div class="container-fluid py-3">
+  <div class="container-fluid py-2">
     <%= link_to admin_root_path, class: 'navbar-brand' do %>
       <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
     <% end %>
@@ -21,7 +21,7 @@ context ||= :admin
 </nav>
 <div class="collapse" id="menu">
   <div class="navbar">
-    <div class="container-fluid py-3">
+    <div class="container-fluid py-2">
       <%= link_to admin_root_path, class: 'navbar-brand' do %>
         <%= image_tag 'osuny-white.svg', class: 'img-fluid', width: 100 %>
       <% end %>
@@ -39,7 +39,7 @@ context ||= :admin
    </div>
   </div>
   <div class="menu-content">
-    <div class="container-fluid py-3">
+    <div class="container-fluid py-2">
       <div class="row">
         <%= render_navigation context: context, renderer: Osuny::SimpleNavigationRenderer %>
         <div class="col-sm-6 col-md-4 col-lg-3">
