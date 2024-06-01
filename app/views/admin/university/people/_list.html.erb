@@ -38,9 +38,8 @@
               <%= image_tag 'avatar-neutral.png', class: 'card-img-top' %>
             <% end %>
             <div class="card-body">
-              <p><%= person %></p>
-              <p class="small text-muted mb-0"><%= person.summary %></p>
-              <%= link_to t('show'), admin_university_person_path(person), class: 'action stretched-link' %>
+              <p class="mb-0"><%= link_to person, admin_university_person_path(person), class: 'text-black stretched-link'  %></p>
+              <p class="small text-muted mb-0"><%= sanitize person.summary %></p>
             </div>
           </div>
         </div>
@@ -64,7 +63,7 @@
               <td>
                 <%= link_to person, admin_university_person_path(person) %>
               </td>
-              <td><%= person.summary %></td>
+              <td><%= sanitize person.summary %></td>
               <td>
                 <%= kamifusen_tag person.best_picture,
                                   width: 60, class: 'rounded-circle' if person.best_picture.attached? %>
