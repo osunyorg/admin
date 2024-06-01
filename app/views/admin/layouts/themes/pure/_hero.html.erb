@@ -1,6 +1,6 @@
 <div class="hero">
   <div class="container-fluid">
-    <% if controller_name == 'dashboard' && action_name == 'index' %>
+    <% if breadcrumbs.one? %>
       <div class="welcome py-4">
         <%= t('hello', name: current_user.first_name) %>
       </div>

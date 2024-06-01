@@ -1,0 +1,59 @@
+.draft
+    td
+        opacity: 0.5
+        &:last-of-type // Buttons
+            opacity: 1
+.handle
+    cursor: move
+
+.a11y
+    &__status
+        &__icon 
+            vertical-align: sub
+
+.lead
+    &--example
+        color: #999999
+
+.pure
+    &__section
+        margin-bottom: $spacing3
+        h2
+            font-family: $font-family-sans-serif
+    &__row--small
+        margin-left: calc(-.5 * #{$spacing1})
+        margin-right: calc(-.5 * #{$spacing1})
+        > *
+            padding-left: calc(.5 * #{$spacing1})
+            padding-right: calc(.5 * #{$spacing1})
+    &__chapter
+        &__image
+            @media (min-width: 992px)
+                margin-top: -200px
+
+.dashboard-index
+    .pure__section
+        .float-end
+            // No icon in cards
+            display: none
+
+.draggable-item
+    margin-bottom: $spacing1
+
+section:first-of-type
+    .category
+        margin-top: 0 !important
+
+p + .form-label
+    margin-top: $spacing0
+
+.list-group-item.active
+    color: $color-accent
+    font-weight: bold
+
+.sdfi-deletable-file__preview
+    margin-top: 10px
+
+.handle
+    margin-right: 10px
+    margin-top: 5px

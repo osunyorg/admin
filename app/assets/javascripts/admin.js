@@ -16,10 +16,10 @@
 //= require autocomplete-rails
 //= require codemirror/lib/codemirror
 //= require_self
-//= require_tree ./commons
-//= require_tree ../application/plugins
-//= require_tree ./plugins
-//= require_tree ./utils
-//= require ./communication/init
+//= require_tree ./admin/commons
+//= require_tree ./application/plugins
+//= require_tree ./admin/plugins
+//= require_tree ./admin/utils
+//= require admin/communication/init
 
 window.osuny = {};

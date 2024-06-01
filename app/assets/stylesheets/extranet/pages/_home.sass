@@ -36,7 +36,7 @@
                 li
                     @include make-row
                     border-bottom: 0
-                    margin-bottom: px2rem(16)
+                    margin-bottom: pxToRem(16)
                     > div
                         @include make-col-ready
                         &:nth-child(1)
@@ -51,7 +51,7 @@
             border-top: solid 1px $light-border-color
             display: flex
             justify-content: space-between
-            padding: px2rem(20) 0
+            padding: pxToRem(20) 0
             position: relative
             a
                 @extend .stretched-link
