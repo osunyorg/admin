@@ -379,8 +379,8 @@ en:
   validate: Validate
   views:
     pagination:
-      first: "&laquo; First"
-      last: "Last &raquo;"
-      previous: "&lsaquo; Previous"
-      next: "Next &rsaquo;"
+      first: "First"
+      last: "Last"
+      previous: "Previous"
+      next: "Next"
       truncate: "&hellip;"
