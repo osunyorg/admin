@@ -1,0 +1,37 @@
+h1,
+h2
+    font-family: $font-family-serif
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1
+    font-weight: normal
+
+p
+    color: $color-text
+
+.category
+    border-bottom: 1px solid $color-border
+    font-family: $font-family-sans-serif
+    font-size: $h5-font-size
+    font-weight: normal
+    margin-bottom: $spacing1
+    margin-top: $spacing3 !important
+    padding-bottom: $spacing0
+    text-transform: uppercase
+
+a
+    text-decoration: none
+    text-decoration-thickness: 1px
+    text-underline-offset: 4px
+    transition: text-decoration 0.5s, color 0.5s
+    &:hover
+        color: darken($primary, 10)
+
+.action
+    font-size: pxToRem(14)
+    text-decoration: underline
+    text-decoration-color: rgba(0, 0, 0, 0.2)
+    text-decoration-thickness: 1px
+    text-underline-offset: 4px
+    transition: text-decoration 0.5s
+    &:hover
+        text-decoration-color: black

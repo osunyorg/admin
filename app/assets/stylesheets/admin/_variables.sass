@@ -1,4 +1,5 @@
 $color-bg: #FFFCF0
+$color-white: #FFFFFF
 
 // MAIN COLORS
 $color-accent: #0038FF
@@ -13,13 +14,13 @@ $color-commands: transparentize($color-background-alt, 0.1)
 $color-valid: #BEDABE
 
 // Spacing
-$spacing0: px2rem(12)
-$spacing1: px2rem(24)
-$spacing2: px2rem(48)
-$spacing3: px2rem(64)
-$spacing4: px2rem(128)
-$spacing5: px2rem(256)
-$spacing-section-y: px2rem(36)
+$spacing0: pxToRem(12)
+$spacing1: pxToRem(24)
+$spacing2: pxToRem(48)
+$spacing3: pxToRem(64)
+$spacing4: pxToRem(128)
+$spacing5: pxToRem(256)
+$spacing-section-y: pxToRem(36)
 
 // Bootstrap
 
@@ -29,25 +30,21 @@ $color-background-alt: #F5F5F5
 $font-family-serif: "Adelphe", serif
 $font-family-sans-serif: "InclusiveSans", sans-serif
 
-// //
-// $form-font-size: px2rem(16)
-// $form-font
-
-$border-radius: 2px
+$border-radius: 3px
 $border-radius-sm: $border-radius
 $border-radius-lg: $border-radius
 $border-radius-xl: $border-radius
 $border-radius-2xl: $border-radius
 
 $card-border-width: 0
-$card-cap-bg: $color-background-alt
+$card-cap-bg: $color-background
 $card-cap-padding-y: $spacing0
-$card-bg: $color-background-alt
+$card-bg: $color-white
 
 $transition-collapse: height 0
 
-$h2-font-size: px2rem(20)
-$h5-font-size: px2rem(14)
+$h2-font-size: pxToRem(20)
+$h5-font-size: pxToRem(14)
 
 $table-cell-padding-x: 0
 $table-cell-padding-x-sm: 0
@@ -67,3 +64,6 @@ $list-group-active-bg: $color-background
 $list-group-active-border-color: $color-accent
 
 $enable-negative-margins: true
+
+$grid-gutter-width: 2rem
+

@@ -15,7 +15,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
     respond_to do |format|
       format.html {
-        @people = @people.page params[:page]
+        @people = @people.page(params[:page]).per(24)
         @categories = current_university.person_categories
                                         .for_language_id(current_university.default_language_id)
                                         .ordered
