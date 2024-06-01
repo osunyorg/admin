@@ -69,7 +69,7 @@ module Admin::ApplicationHelper
   end
 
   def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, small: false, classes: '', &block)
-    render  layout: "admin/layouts/themes/pure/panel",
+    render  layout: "admin/application/components/panel",
             locals: {
               title: title,
               subtitle: subtitle,

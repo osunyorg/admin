@@ -81,7 +81,7 @@
             <% if @summary.present? %>
               <hgroup>
                 <h1><%= @title %></h1>
-                <p class="lead"><%= @summary %></p>
+                <p class="lead"><%= sanitize @summary %></p>
               </hgroup>          
             <% else %>
               <h1><%= @title %></h1>

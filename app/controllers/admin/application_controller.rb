@@ -16,6 +16,11 @@ class Admin::ApplicationController < ApplicationController
   end
   helper_method :background_tasks_count
 
+  def current_subnav_context
+    nil
+  end
+  helper_method :current_subnav_context
+
   protected
 
   def breadcrumb

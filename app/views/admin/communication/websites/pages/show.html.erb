@@ -1,32 +1,30 @@
 <% content_for :title, @page %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <div class="row">
-    <div class="col-lg-7">
-      <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
-        <p class="lead mb-1"><%= @page.title %></p>
-        <%= render 'admin/application/property/publication', about: @page %>
-      <% end %>
-    </div>
-    <div class="offset-lg-1 col-lg-4">
-      <%= render 'admin/application/featured_image/show', about: @page, small: true %>
-    </div>
+<div class="row">
+  <div class="col-lg-7">
+    <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
+      <p class="lead mb-1"><%= @page.title %></p>
+      <%= render 'admin/application/property/publication', about: @page %>
+    <% end %>
   </div>
-  <%= osuny_separator %>
-  <%= render 'admin/application/a11y/widget', about: @page, horizontal: true %>
-  <%= osuny_separator %>
-  <div class="row">
-    <div class="col-lg-4">
-      <%= render 'admin/communication/websites/pages/show/metadata' %>
-    </div>
-    <div class="col-lg-8">
-      <%= render 'admin/application/summary/show', about: @page, small: true %>
-      <%= render 'admin/application/meta_description/show', about: @page, small: true %>
-    </div>
+  <div class="offset-lg-1 col-lg-4">
+    <%= render 'admin/application/featured_image/show', about: @page, small: true %>
   </div>
-  <%= render 'admin/communication/blocks/content/editor', about: @page %>
-  <%= render 'admin/communication/websites/pages/show/special_page', about: @page %>
-<% end %>
+</div>
+<%= osuny_separator %>
+<%= render 'admin/application/a11y/widget', about: @page, horizontal: true %>
+<%= osuny_separator %>
+<div class="row">
+  <div class="col-lg-4">
+    <%= render 'admin/communication/websites/pages/show/metadata' %>
+  </div>
+  <div class="col-lg-8">
+    <%= render 'admin/application/summary/show', about: @page, small: true %>
+    <%= render 'admin/application/meta_description/show', about: @page, small: true %>
+  </div>
+</div>
+<%= render 'admin/communication/blocks/content/editor', about: @page %>
+<%= render 'admin/communication/websites/pages/show/special_page', about: @page %>
 
 <%= render 'admin/application/dependencies', about: @page %>
 

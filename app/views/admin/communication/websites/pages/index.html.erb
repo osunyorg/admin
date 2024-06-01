@@ -5,42 +5,42 @@
   <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
 <% end %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <% osuny_panel  t('admin.communication.website.pages.structure'), 
-                  action: create_link(Communication::Website::Page) do %>
-    <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page">
-          <i class="fas fa-sitemap"></i>
-          <%= t('admin.communication.website.pages.as_tree') %>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= list_admin_communication_website_pages_path %>">
-          <i class="fas fa-list"></i>
-          <%= t('admin.communication.website.pages.as_list') %>
-        </a>
-      </li>
-    </ul>
-    <ul class="list-unstyled treeview">
-      <li class="treeview__element treeview__element--opened treeview__element--loaded" data-id="<%= @homepage.id %>" data-parent="">
-        <div class="d-flex align-items-center treeview__label border-bottom p-1">
-          <div class="d-inline-block p-2 ps-0" style="width: 22px">
-            <span class="close_btn text-primary">
-              <i class="close_btn--with_children <%= Icon::FOLDER_OPENED_FULL %>"></i>
-            </span>
-          </div>
-          <%= link_to @homepage, admin_communication_website_page_path(@homepage) %>
-          <div class="ms-auto align-items-center" role="group">
-            <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.home.title") %></span>
-          </div>
+<%= osuny_panel  t('admin.communication.website.pages.structure'), 
+                action: create_link(Communication::Website::Page) do %>
+  <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page">
+        <i class="fas fa-sitemap"></i>
+        <%= t('admin.communication.website.pages.as_tree') %>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= list_admin_communication_website_pages_path %>">
+        <i class="fas fa-list"></i>
+        <%= t('admin.communication.website.pages.as_list') %>
+      </a>
+    </li>
+  </ul>
+  <ul class="list-unstyled treeview">
+    <li class="treeview__element treeview__element--opened treeview__element--loaded" data-id="<%= @homepage.id %>" data-parent="">
+      <div class="d-flex align-items-center treeview__label border-bottom p-1">
+        <div class="d-inline-block p-2 ps-0" style="width: 22px">
+          <span class="close_btn text-primary">
+            <i class="close_btn--with_children <%= Icon::FOLDER_OPENED_FULL %>"></i>
+          </span>
         </div>
-        <ul class="list-unstyled ms-4 treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"
-            data-id="<%= @homepage.id %>"
-            data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
-          <%= render 'treebranch', pages: @first_level_pages %>
-        </ul>
-      </li>
-    </ul>
-  <% end %>
+        <%= link_to @homepage, admin_communication_website_page_path(@homepage) %>
+        <div class="ms-auto align-items-center" role="group">
+          <span class="me-3 show-on-hover"><%= t("communication.website.pages.defaults.home.title") %></span>
+        </div>
+      </div>
+      <ul class="list-unstyled ms-4 treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"
+          data-id="<%= @homepage.id %>"
+          data-sort-url="<%= reorder_admin_communication_website_pages_path %>">
+        <%= render 'treebranch', pages: @first_level_pages %>
+      </ul>
+    </li>
+  </ul>
 <% end %>
+
+<%= render 'admin/communication/websites/language_switcher' %>

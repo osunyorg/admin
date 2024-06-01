@@ -1,32 +1,32 @@
 <% content_for :title, @item %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <div class="row">
-    <div class="col-xl-8">
-      <%
-      action = link_to  t('create'),
-                        new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
-                        class: button_classes if can?(:create, Communication::Website::Menu::Item)
-      %>
-      <%= osuny_panel Communication::Website::Menu::Item.human_attribute_name('children'), action: action do %>
-        <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
-      <% end %>
-    </div>
-    <div class="col-xl-4">
-      <%= osuny_panel t('metadata') do %>
-        <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('kind') %>
-        <p><%= @item.kind_i18n %></p>
-        <% if @item.kind_url? %>
-          <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('url') %>
-          <p><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></p>
-        <% elsif @item.has_about? %>
-          <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('about') %>
-          <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %></p>
-        <% end %>
-      <% end %>
-    </div>
+<div class="row">
+  <div class="col-xl-8">
+    <%
+    action = link_to  t('create'),
+                      new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
+                      class: button_classes if can?(:create, Communication::Website::Menu::Item)
+    %>
+    <%= osuny_panel Communication::Website::Menu::Item.human_attribute_name('children'), action: action do %>
+      <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-xl-4">
+    <%= osuny_panel t('metadata') do %>
+      <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('kind') %>
+      <p><%= @item.kind_i18n %></p>
+      <% if @item.kind_url? %>
+        <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('url') %>
+        <p><%= link_to @item.url, @item.url, target: '_blank' unless @item.url.blank? %></p>
+      <% elsif @item.has_about? %>
+        <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('about') %>
+        <p><%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %></p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'admin/communication/websites/language_switcher' %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('delete'),

@@ -1,0 +1,19 @@
+<% if @website.languages.many? %>
+  <%
+  languages_options = @website.languages.map { |language|
+    [
+      language_name(language.iso_code),
+      url_for(request.params.merge(lang: language.iso_code))
+    ]
+  }
+  selected_option = url_for(request.params.merge(lang: current_website_language.iso_code))
+  %>
+  <div class="row">
+    <div class="col-lg-4">
+      <%= select_tag  nil,
+                      options_for_select(languages_options, selected_option),
+                      class: "form-control form-select my-5",
+                      id: "js-website-lang-switch" %>
+    </div>
+  </div>
+<% end %>

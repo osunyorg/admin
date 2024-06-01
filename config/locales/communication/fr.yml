@@ -369,6 +369,9 @@ fr:
         social:
           free: Libres
           private: Privatifs
+        subnav:
+          structure: Arborescence
+          summary: Résumé
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique

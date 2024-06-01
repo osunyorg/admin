@@ -4,40 +4,39 @@
   <%= language_name(current_website_language.iso_code) %>
 <% end %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <%= simple_form_for [:admin, @localization], as: :communication_website_localization, url: admin_communication_website_localization_path do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for [:admin, @localization], as: :communication_website_localization, url: admin_communication_website_localization_path do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <%= osuny_panel t('content') do %>
-      <%= localization_input f, :name, @website %>
-    <% end %>
-
-    <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
-      <div class="row">
-        <div class="col-lg-6">
-          <p><%= t('admin.communication.website.social.free') %></p>
-          <%= localization_input f, :social_email, @website %>
-          <%= localization_input f, :social_mastodon, @website %>
-          <%= localization_input f, :social_peertube, @website %>
-        </div>
-        <div class="col-lg-6">
-          <p><%= t('admin.communication.website.social.private') %></p>
-          <%= localization_input f, :social_x, @website %>
-          <%= localization_input f, :social_github, @website %>
-          <%= localization_input f, :social_linkedin, @website %>
-          <%= localization_input f, :social_youtube, @website %>
-          <%= localization_input f, :social_vimeo, @website %>
-          <%= localization_input f, :social_instagram, @website %>
-          <%= localization_input f, :social_facebook, @website %>
-          <%= localization_input f, :social_tiktok, @website %>
-        </div>
-      </div>
-    <% end %>
-
-    <% content_for :action_bar_right do %>
-      <%= submit f %>
-    <% end %>
+  <%= osuny_panel t('content') do %>
+    <%= localization_input f, :name, @website %>
   <% end %>
 
+  <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
+    <div class="row">
+      <div class="col-lg-6">
+        <p><%= t('admin.communication.website.social.free') %></p>
+        <%= localization_input f, :social_email, @website %>
+        <%= localization_input f, :social_mastodon, @website %>
+        <%= localization_input f, :social_peertube, @website %>
+      </div>
+      <div class="col-lg-6">
+        <p><%= t('admin.communication.website.social.private') %></p>
+        <%= localization_input f, :social_x, @website %>
+        <%= localization_input f, :social_github, @website %>
+        <%= localization_input f, :social_linkedin, @website %>
+        <%= localization_input f, :social_youtube, @website %>
+        <%= localization_input f, :social_vimeo, @website %>
+        <%= localization_input f, :social_instagram, @website %>
+        <%= localization_input f, :social_facebook, @website %>
+        <%= localization_input f, :social_tiktok, @website %>
+      </div>
+    </div>
+  <% end %>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
 <% end %>
+
+<%= render 'admin/communication/websites/language_switcher' %>

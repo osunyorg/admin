@@ -369,6 +369,9 @@ en:
         social:
           free: Libres
           private: Privatifs
+        subnav:
+          structure: Structure
+          summary: Summary
         technical:
           description: Everything related to technical settings
           label: Technical
