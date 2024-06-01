@@ -40,7 +40,7 @@
     <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
                     subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>
       <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_category: true %>
-      <%= paginate @posts, theme: 'bootstrap-5' %>
+      <%= paginate @posts %>
     <% end %>
   <% end %>
 <% end %>

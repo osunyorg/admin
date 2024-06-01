@@ -35,7 +35,7 @@
   </table>
 </div>
 
-<%= paginate @languages, theme: 'bootstrap-5' %>
+<%= paginate @languages %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'), new_server_language_path, class: button_classes %>

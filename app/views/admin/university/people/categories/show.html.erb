@@ -6,7 +6,7 @@
       <%= osuny_panel University::Person.model_name.human(count: 2),
                       subtitle: "#{@people.total_count} #{University::Person.model_name.human(count: @people.total_count).downcase }" do %>
         <%= render 'admin/university/people/list', people: @people %>
-        <%= paginate @people, theme: 'bootstrap-5' %>
+        <%= paginate @people %>
       <% end %>
     <% end %>
   </div>
