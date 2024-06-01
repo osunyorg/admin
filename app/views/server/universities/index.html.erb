@@ -66,7 +66,7 @@
   </table>
 </div>
 
-<%= paginate @universities, theme: 'bootstrap-5' %>
+<%= paginate @universities %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'), new_server_university_path, class: button_classes %>

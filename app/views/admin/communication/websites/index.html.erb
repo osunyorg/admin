@@ -3,7 +3,7 @@
 <%= render 'filters', current_path: admin_communication_websites_path, filters: @filters if @filters.any?  %>
 <div class="pt-5">
   <%= render 'admin/communication/websites/list', websites: @websites %>
-  <%= paginate @websites, theme: 'bootstrap-5' %>
+  <%= paginate @websites %>
 </div>
 
 <% content_for :action_bar_right do %>

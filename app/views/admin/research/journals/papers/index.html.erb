@@ -2,7 +2,7 @@
 
 <%= render 'admin/research/journals/sidebar' do %>
   <%= render 'admin/research/journals/papers/list', papers: @papers %>
-  <%= paginate @papers, theme: 'bootstrap-5' %>
+  <%= paginate @papers %>
 <% end %>
 
 <% content_for :action_bar_right do %>

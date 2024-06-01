@@ -9,7 +9,7 @@
 
 <%= render 'server/websites/list', websites: @websites %>
 
-<%= paginate @websites, theme: 'bootstrap-5' %>
+<%= paginate @websites %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('server_admin.websites.update_all_themes'),

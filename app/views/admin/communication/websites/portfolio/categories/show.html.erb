@@ -19,7 +19,7 @@
     %>
     <%= osuny_panel title, subtitle: subtitle do %>
       <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects, hide_category: true %>
-      <%= paginate @projects, theme: 'bootstrap-5' %>
+      <%= paginate @projects %>
     <% end %>
   <% end %>
 <% end %>
