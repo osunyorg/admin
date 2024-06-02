@@ -4,7 +4,7 @@ size = large ? 300 : 100
 <div class="osuny__thumbnail 
             osuny__thumbnail--<%= large ? 'large' : 'small' %>
             osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>">
-  <% if image.attached? %>
+  <% if image && image.attached? %>
     <% image_square = image.variable? ? image.variant(resize_to_fill: [size, size, gravity: 'center'])
                                       : image %>
     <%= image_tag image_square, class: 'img-fluid', loading: 'lazy' %>
