@@ -12,7 +12,7 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   helper_method :current_website_language
 
   def current_subnav_context
-    'navigation/admin/communication/website' if @website
+    'navigation/admin/communication/website' if @website && @website.persisted?
   end
 
   def breadcrumb
