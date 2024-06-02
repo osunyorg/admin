@@ -7,7 +7,8 @@ action += link_to t('create'),
 %>
 <%= osuny_panel title, action: action do %>
   <%= render 'admin/communication/websites/portfolio/projects/list',
-              projects: @projects %>
+              projects: @projects, 
+              small: true %>
   <%= link_to t('communication.website.see_all', number: @all_projects.size), 
               admin_communication_website_portfolio_projects_path(website_id: @website) if @all_projects.any? %>
 <% end %>

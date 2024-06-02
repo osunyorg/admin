@@ -7,7 +7,8 @@ action += link_to t('create'),
 %>
 <%= osuny_panel title, action: action do %>
   <%= render 'admin/communication/websites/agenda/events/list',
-              events: @events %>  
+              events: @events,
+              small: true %>  
   <%= link_to t('communication.website.see_all', number: @all_events.size), 
               admin_communication_website_agenda_events_path(website_id: @website) if @all_events.any? %>
 <% end %>

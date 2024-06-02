@@ -32,6 +32,7 @@ selectable ||= false
               <div class="card card--horizontal <%= 'draft' unless post.published? %>">
                 <%= osuny_thumbnail post.featured_image, initials: post.initials %>
                 <div class="card-body">
+                  <%= osuny_published post unless small %>
                   <%= link_to post,
                               admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                               class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>

@@ -1,3 +1,6 @@
+<%
+small ||= false
+%>
 <% if projects.none? %>
   <p><%= t('admin.communication.website.portfolio.projects.none') %></p>
 <% else %>
@@ -7,6 +10,7 @@
         <div class="card card--horizontal">
           <%= osuny_thumbnail project.featured_image, initials: project.initials %>
           <div class="card-body">
+            <%= osuny_published project unless small %>
             <%= link_to project,
                         admin_communication_website_portfolio_project_path(website_id: project.website.id, id: project.id),
                         class: 'stretched-link text-black' %>

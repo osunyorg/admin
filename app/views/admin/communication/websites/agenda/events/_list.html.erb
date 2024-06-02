@@ -1,3 +1,6 @@
+<%
+small ||= false
+%>
 <% if events.none? %>
   <p><%= t('admin.communication.website.agenda.events.none') %></p>
 <% else %>
@@ -7,6 +10,7 @@
         <div class="card card--horizontal">
           <%= osuny_thumbnail event.featured_image, initials: event.initials %>
           <div class="card-body">
+            <%= osuny_published event unless small %>
             <%= link_to event,
                         admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id),
                         class: "stretched-link text-black" %>

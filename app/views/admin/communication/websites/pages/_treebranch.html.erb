@@ -13,6 +13,7 @@
       <% end %>
       <div class="card-body">
         <span class="leaf-title">
+          <%= osuny_published page %>
           <%= link_to page, admin_communication_website_page_path(page), class: 'text-black' %>
           <% if page.children.any? %>
             <span class="text-muted">(<%= page.children.count %>)</span>
