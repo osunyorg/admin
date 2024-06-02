@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
 
   navigation.items do |primary|
-    primary.item  :innernav_posts,
+    primary.item  :feature_nav_posts,
                   Communication::Website::Post.model_name.human(count: 2),
                   admin_communication_website_posts_path(website_id: @website.id),
                   highlights_on: lambda { 

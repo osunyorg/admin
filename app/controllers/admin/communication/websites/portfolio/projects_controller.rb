@@ -14,8 +14,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     @projects = apply_scopes(@projects).for_language(current_website_language)
                                      .ordered
                                      .page(params[:page])
-    @root_categories = categories.root
-    @categories_class = Communication::Website::Portfolio::Category
+    @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb
   end
 
