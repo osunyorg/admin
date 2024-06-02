@@ -37,7 +37,7 @@ selectable ||= false
                               admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                               class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer d-none d-lg-block">
                   <% if !hide_buttons && post.pinned %>
                     <%= Communication::Website::Post.human_attribute_name('pinned') %>
                   <% end %>
