@@ -29,8 +29,8 @@ selectable ||= false
               <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
             <% end %>
             <td>
-              <div class="card card--horizontal <%= 'draft' unless post.published? %>">
-                <%= osuny_thumbnail post.featured_image, initials: post.initials %>
+              <div class="card card--horizontal">
+                <%= osuny_thumbnail post %>
                 <div class="card-body">
                   <%= osuny_published post unless small %>
                   <%= link_to post,

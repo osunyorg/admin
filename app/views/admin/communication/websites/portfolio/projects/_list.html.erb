@@ -8,7 +8,7 @@ small ||= false
     <% projects.each do |project| %>
       <div>
         <div class="card card--horizontal">
-          <%= osuny_thumbnail project.featured_image, initials: project.initials %>
+          <%= osuny_thumbnail project %>
           <div class="card-body">
             <%= osuny_published project unless small %>
             <%= link_to project,

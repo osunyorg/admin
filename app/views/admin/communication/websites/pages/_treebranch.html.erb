@@ -9,7 +9,7 @@
     <div class="card card--horizontal treeview__label">
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone d-inline-block', remote: true do %>
-        <%= osuny_thumbnail page.featured_image, initials: page.initials %>
+        <%= osuny_thumbnail page %>
       <% end %>
       <div class="card-body">
         <span class="leaf-title">

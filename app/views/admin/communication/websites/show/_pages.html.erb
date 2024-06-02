@@ -6,11 +6,11 @@ action += link_to t('create'),
 %>
 <%= osuny_panel t('communication.website.last_pages'),
                 action: action do %>
-  <div class="row g-3 mb-3">
+  <div class="row g-2 mb-3">
     <% @pages.each do |page| %>
       <div class="<%= 'col-lg-6 col-xxl-4' if large %>">
         <div class="card card--horizontal">
-          <%= osuny_thumbnail page.featured_image, initials: page.initials %>
+          <%= osuny_thumbnail page %>
           <div class="card-body">
             <%= link_to page,
                         admin_communication_website_page_path(website_id: page.website.id, id: page.id),

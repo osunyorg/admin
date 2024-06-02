@@ -8,7 +8,7 @@ small ||= false
     <% events.each do |event| %>
       <div>
         <div class="card card--horizontal">
-          <%= osuny_thumbnail event.featured_image, initials: event.initials %>
+          <%= osuny_thumbnail event %>
           <div class="card-body">
             <%= osuny_published event unless small %>
             <%= link_to event,

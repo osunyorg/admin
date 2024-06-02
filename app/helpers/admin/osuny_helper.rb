@@ -22,11 +22,11 @@ module Admin::OsunyHelper
     raw '<hr class="my-5">'
   end
 
-  def osuny_thumbnail(image, initials: nil, large: false, cropped: true)
+  def osuny_thumbnail(object, large: false, cropped: true)
     render  partial: "admin/application/components/thumbnail",
             locals: {
-              image: image,
-              initials: initials,
+              image: object.featured_image,
+              initials: object.initials,
               large: large,
               cropped: cropped
             }
