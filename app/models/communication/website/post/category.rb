@@ -43,6 +43,7 @@
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Sluggable # We override slug_unavailable? method

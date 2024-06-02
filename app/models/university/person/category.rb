@@ -26,6 +26,7 @@
 class University::Person::Category < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sluggable
   include Translatable

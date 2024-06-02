@@ -23,6 +23,7 @@
 #
 class Communication::Extranet::Post::Category < ApplicationRecord
   include Contentful
+  include Initials
   include Sluggable
   include WithUniversity
 

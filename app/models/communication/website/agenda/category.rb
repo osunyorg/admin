@@ -42,6 +42,7 @@
 class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Translatable
