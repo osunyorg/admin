@@ -366,13 +366,11 @@ fr:
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
-        settings: Réglages
         social:
           free: Libres
           private: Privatifs
         subnav:
           structure: Arborescence
-          summary: Résumé
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique

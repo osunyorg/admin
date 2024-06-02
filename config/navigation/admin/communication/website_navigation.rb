@@ -6,7 +6,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :subnav_summary,
-                  t('admin.communication.website.subnav.summary'), 
+                  t('admin.subnav.summary'), 
                   admin_communication_website_path(id: @website, website_id: nil),
                   highlights_on: lambda { 
                     controller_name == "websites" && action_name == "show" 
@@ -41,7 +41,7 @@ SimpleNavigation::Configuration.run do |navigation|
                   t('communication.website.analytics'),
                   analytics_admin_communication_website_path(id: @website.id, website_id: nil) if @website.plausible_url.present?
     primary.item  :subnav_settings,
-                  t('admin.communication.website.settings'),
+                  t('admin.subnav.settings'),
                   edit_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
   end
 end

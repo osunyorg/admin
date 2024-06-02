@@ -140,6 +140,9 @@ en:
       what_is_it: What is it?
     password_hint: Leave blank if you do not wish to change the password.
     seo: SEO
+    subnav:
+      settings: Settings
+      summary: Summary
     successfully_created_html: "<i>%{model}</i> was successfully created."
     successfully_destroyed_html: "<i>%{model}</i> was successfully destroyed."
     successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."

@@ -4,6 +4,10 @@ class Admin::Communication::Extranets::ApplicationController < Admin::Communicat
                               through: :current_university,
                               through_association: :communication_extranets
 
+  def current_subnav_context
+    'navigation/admin/communication/extranet' if @extranet && @extranet.persisted?
+  end
+
   protected
 
   def breadcrumb

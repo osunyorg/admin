@@ -1,4 +1,4 @@
-class Admin::Communication::ExtranetsController < Admin::Communication::ApplicationController
+class Admin::Communication::ExtranetsController < Admin::Communication::Extranets::ApplicationController
   load_and_authorize_resource class: Communication::Extranet,
                               through: :current_university,
                               through_association: :communication_extranets
@@ -21,7 +21,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
 
   def edit
     breadcrumb
-    add_breadcrumb t('edit')
+    add_breadcrumb t('admin.subnav.settings')
   end
 
   def create
@@ -50,12 +50,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Applicat
   end
 
   protected
-
-  def breadcrumb
-    super
-    add_breadcrumb Communication::Extranet.model_name.human(count: 2), admin_communication_extranets_path
-    breadcrumb_for @extranet
-  end
 
   def extranet_params
     allowed_params = [
