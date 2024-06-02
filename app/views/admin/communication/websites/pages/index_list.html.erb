@@ -7,8 +7,7 @@
 
 <%= osuny_panel  t('admin.communication.website.pages.structure'),
                 action: create_link(Communication::Website::Page) do %>
-  <%= render 'filters', current_path: list_admin_communication_website_pages_path, filters: @filters %>
-  <ul class="nav nav-tabs justify-content-md-end">
+  <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
     <li class="nav-item">
       <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
         <i class="fas fa-sitemap"></i>
@@ -23,6 +22,8 @@
     </li>
   </ul>
   <div class="position-relative mt-2">
+    <p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
+    <%= render 'filters', current_path: list_admin_communication_website_pages_path, filters: @filters %>
     <%= render 'admin/communication/websites/pages/list', pages: @pages %>
     <%= paginate @pages %>
   </div>

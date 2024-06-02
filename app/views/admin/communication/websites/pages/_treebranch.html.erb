@@ -1,32 +1,49 @@
 <% pages.each do |page| %>
-  <li class="treeview__element js-treeview-element <%= 'treeview__element--draft' unless page.published %> <%= 'treeview__element--empty' unless page.has_children? %>" data-id="<%= page.id %>" data-parent="<%= page.parent_id %>">
-    <div class="d-flex align-items-center treeview__label border-bottom p-1">
+  <li class=" treeview__element 
+              js-treeview-element
+              mb-2 
+              <%= 'treeview__element--draft' unless page.published %>
+              <%= 'treeview__element--empty' unless page.has_children? %>"
+      data-id="<%= page.id %>"
+      data-parent="<%= page.parent_id %>">
+    <div class="card card--horizontal treeview__label">
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                  class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
-        <%= render 'admin/application/tree/folder' %>
+                  class: 'js-treeview-openzone d-inline-block', remote: true do %>
+        <%= osuny_thumbnail page.featured_image, initials: page.initials %>
       <% end %>
-      <span class="leaf-title">
-        <%= link_to page, admin_communication_website_page_path(page) %>
-      </span>
-      <%= render 'admin/application/tree/sort' unless page.is_home? %>
-      <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                  class: 'js-treeview-openzone small ps-2', remote: true do %>
-        <span class="open_text"><%= t 'folder.open' %></span>
-        <span class="close_text"><%= t 'folder.close' %></span>
-      <% end %>
-      <div class="ms-auto align-items-center" role="group">
+      <div class="card-body">
+        <span class="leaf-title">
+          <%= link_to page, admin_communication_website_page_path(page), class: 'text-black' %>
+          <% if page.children.any? %>
+            <span class="text-muted">(<%= page.children.count %>)</span>
+          <% end %>
+        </span>
+        <span class="show-on-hover">
+          <%= render 'admin/application/tree/sort' unless page.is_home? %>
+          <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                      class: 'js-treeview-openzone small ps-2', remote: true do %>
+            <span class="open_text"><%= t 'folder.open' %></span>
+            <span class="close_text"><%= t 'folder.close' %></span>
+          <% end %>
+        </span>
+      </div>
+      <div class="card-footer">
         <% if page.is_special_page? %>
           <span class="show-on-hover"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></span>
         <% end %>
       </div>
     </div>
-    <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, page) %> ms-4" data-id="<%= page.id %>">
+    <ul class=" list-unstyled 
+                treeview__children 
+                js-treeview-children 
+                mt-2
+                <%= 'js-treeview-sortable-container' if can?(:reorder, page) %>" data-id="<%= page.id %>">
       <li class="treeview__empty">
-        <div class="d-flex align-items-center treeview__label border-bottom p-1">
+        <div class="d-flex align-items-center treeview__label py-1">
           <span class="p-2 ps-0"><%= t('folder.empty') %></span>
         </div>
       </li>
-      <li class="treeview__loading border-bottom p-1"><%= t('loading') %></li>
+      <li class="treeview__loading p-1"><%= t('loading') %></li>
     </ul>
   </li>
 <% end %>

@@ -1,4 +1,7 @@
 .treeview
+    ul
+        margin-left: 74px
+        margin-top: 5px
     &__element
         a:not(.action)
             text-decoration: none
@@ -6,6 +9,7 @@
             display: none
 
         & > .treeview__label
+            .close_text,
             & > a .close_btn,
             & > a .close_text
                 display: none
@@ -14,6 +18,7 @@
                 .close_btn--without_children
                     display: none
 
+            .open_text,
             & > a .open_btn,
             & > a .open_text
                 display: inline
@@ -39,9 +44,11 @@
 
         &--opened
             & > .treeview__label
+                .close_text,
                 & > a .close_btn,
                 & > a .close_text
                     display: inline
+                .open_text,
                 & > a .open_btn,
                 & > a .open_text
                     display: none
