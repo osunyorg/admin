@@ -1,4 +1,7 @@
-<div class="row g-2">
+<%
+small ||= false
+%>
+<div class="row g-2 mb-2">
   <% pages.each do |page| %>
     <div>
       <div class="card card--horizontal">
@@ -9,8 +12,12 @@
                       class: "stretched-link #{ page.published? ? 'text-black' : 'text-muted' }" %>
         </div>
         <div class="card-footer text-muted">
-          <%= t("communication.website.pages.defaults.#{page.type_key}.title") if page.is_special_page? %>
-          <%= Communication::Website::Page.human_attribute_name('full_width') if page.full_width %>
+          <% if small %>
+            <%= l page.updated_at.to_date, format: :short %>
+          <% else %>
+            <%= t("communication.website.pages.defaults.#{page.type_key}.title") if page.is_special_page? %>
+            <%= Communication::Website::Page.human_attribute_name('full_width') if page.full_width %>
+          <% end %>
         </div>
       </div>
     </div>

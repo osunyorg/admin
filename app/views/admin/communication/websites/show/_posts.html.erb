@@ -10,7 +10,6 @@ action += link_to t('communication.website.posts.new_curation'),
 %>
 <%= osuny_panel title, action: action do %>
   <%= render 'admin/communication/websites/posts/list', posts: @posts, small: true %>
-
   <%= link_to t('communication.website.see_all', number: @all_posts.size), 
               admin_communication_website_posts_path(website_id: @website) if @all_posts.any?  %>
 <% end %>
