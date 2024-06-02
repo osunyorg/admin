@@ -50,6 +50,7 @@ class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Shareable

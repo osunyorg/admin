@@ -90,6 +90,16 @@ module Admin::ApplicationHelper
     raw '<hr class="my-5">'
   end
 
+  def osuny_thumbnail(image, initials: nil, large: false, cropped: true)
+    render  partial: "admin/application/components/thumbnail",
+            locals: {
+              image: image,
+              initials: initials,
+              large: large,
+              cropped: cropped
+            }
+  end
+
   def button_classes(additional = '', **options)
     classes = "btn btn-primary btn-xs #{additional}"
     classes += ' disabled' if options[:disabled]

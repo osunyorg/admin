@@ -1,0 +1,14 @@
+<%
+width = large ? 300 : 100
+%>
+<div class="osuny__thumbnail osuny__thumbnail--<%= large ? 'large' : 'small' %> osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>">
+  <% if image.attached? %>
+    <%= kamifusen_tag image,
+                      width: width, 
+                      class: 'img-fluid' %>
+  <% else %>
+    <span class="osuny__thumbnail__initials">
+      <%= initials %>
+    </span>
+  <% end %>
+</div>

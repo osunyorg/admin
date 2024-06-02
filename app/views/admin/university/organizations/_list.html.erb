@@ -26,20 +26,20 @@
 </ul>
 <div class="tab-content mb-4" id="myTabContent">
   <div class="tab-pane show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab" tabindex="0">
-    <div class="row">
+    <div class="row mt-1 g-3">
       <% organizations.each do |organization| %>
-        <div class="col-sm-6 col-lg-3">
-          <div class="position-relative mt-5">
-            <% if organization.logo.attached? %>
-              <%= kamifusen_tag organization.logo,
-                                width: 60, 
-                                class: 'd-block' %>
-            <% else %>
-              <div class="bg-light" style="width: 60px; height: 60px"></div>
-            <% end %>
-            <p class="mt-2 mb-0"><%= organization %></p>
-            <p class="small text-muted mb-0"><%= organization.summary %></p>
-            <%= link_to t('show'), admin_university_organization_path(organization), class: 'action stretched-link' %>
+        <div class="col-6 col-lg-3 col-xxl-2">
+          <div class="card mb-0">
+            <%= osuny_thumbnail organization.logo, 
+                                initials: organization.initials, 
+                                large: true,
+                                cropped: false %>
+            <div class="card-body">
+              <p class="mb-0"><%= link_to organization, 
+                                          admin_university_organization_path(organization), 
+                                          class: 'text-black stretched-link'  %></p>
+              <p class="small text-muted mb-0"><%= sanitize organization.summary %></p>
+            </div>
           </div>
         </div>
       <% end %>

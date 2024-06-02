@@ -30,15 +30,13 @@
       <% people.each do |person| %>
         <div class="col-6 col-lg-3 col-xxl-2">
           <div class="card mb-0">
-            <% if person.best_picture.attached? %>
-              <%= kamifusen_tag person.best_picture,
-                                width: 240, 
-                                class: 'card-img-top img-fluid' %>
-            <% else %>
-              <%= image_tag 'avatar-neutral.png', class: 'card-img-top' %>
-            <% end %>
+            <%= osuny_thumbnail person.best_picture, 
+                                initials: person.initials, 
+                                large: true %>
             <div class="card-body">
-              <p class="mb-0"><%= link_to person, admin_university_person_path(person), class: 'text-black stretched-link'  %></p>
+              <p class="mb-0"><%= link_to person,
+                                          admin_university_person_path(person),
+                                          class: 'text-black stretched-link'  %></p>
               <p class="small text-muted mb-0"><%= sanitize person.summary %></p>
             </div>
           </div>

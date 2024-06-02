@@ -1,0 +1,18 @@
+.osuny__thumbnail
+    align-items: center
+    aspect-ratio: 1
+    background: $color-bg-soft
+    display: flex
+    justify-content: center
+    overflow: hidden
+    &__initials
+        color: #CCCCCC
+        display: block
+        font-family: $font-family-serif
+        font-size: pxToRem(30)
+    &--large
+        .osuny__thumbnail__initials
+            font-size: pxToRem(40)
+    &--uncropped
+        picture
+            padding: 20%
