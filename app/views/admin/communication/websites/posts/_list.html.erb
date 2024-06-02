@@ -1,7 +1,8 @@
 <%
+small ||= false
 hide_author ||= false
-hide_category ||= false
 hide_buttons ||= false
+hide_pinned ||= false
 selectable ||= false
 %>
 <% if posts.none? %>
@@ -11,7 +12,7 @@ selectable ||= false
     <input type="hidden" name="ids[]" value="">
   <% end %>
   <div class="table-responsive <%= 'table-selectable' if selectable %>">
-    <table class="<%= table_classes %>">
+    <table class="table table-borderless table-sm">
       <thead>
         <tr>
           <% if selectable %>
@@ -19,35 +20,41 @@ selectable ||= false
               <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
             </th>
           <% end %>
-          <th class="ps-0" style="min-width: 250px"><%= Communication::Website::Post.human_attribute_name('title') %></th>
-          <th class="ps-3" style="min-width: 200px"><%= Communication::Website::Post.human_attribute_name('meta') %></th>
-          <th><%= Communication::Website::Post.human_attribute_name('featured_image') %></th>
         </tr>
       </thead>
       <tbody>
         <% posts.each do |post| %>
-          <tr <% unless post.published? %>class="draft"<% end %>>
+          <tr>
             <% if selectable %>
               <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
             <% end %>
-            <td class="ps-0">
-              <%= link_to post,
-                          admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                          class: "#{'draft' unless post.published?}" %>
+            <td>
+              <div class="card card--horizontal <%= 'draft' unless post.published? %>">
+                <%= osuny_thumbnail post.featured_image, 
+                                    initials: post.initials %>
+                <div class="card-body">
+                  <%= link_to post,
+                              admin_communication_website_post_path(website_id: post.website.id, id: post.id),
+                              class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>
+                </div>
+                <div class="card-footer">
+                  <% if !hide_buttons && post.pinned %>
+                    <%= Communication::Website::Post.human_attribute_name('pinned') %>
+                  <% end %>
+                  <% if !hide_author && post.author %>
+                    <span class="ms-3">
+                      <%= post.author %>
+                    </span>
+                  <% end %>
+                  <% if post.published_at %>
+                    <span class="ms-3">
+                      <%= small ? l(post.published_at.to_date, format: :short)
+                                : l(post.published_at, format: :date_with_explicit_month) %>
+                    </span>
+                  <% end %>
+                </div>
+              </div>
             </td>
-            <td class="ps-3 small">
-              <% if post.published_at %>
-                <%= l post.published_at, format: :date_with_explicit_month %><br>
-              <% end %>
-              <% if !hide_author && post.author %>
-                <%= post.author %><br>
-              <% end %>
-              <%= render 'admin/communication/websites/posts/categories/inline', about: post unless hide_category %>
-              <% if post.pinned %>
-                <%= Communication::Website::Post.human_attribute_name('pinned') %>
-              <% end %>
-            </td>
-            <td><%= kamifusen_tag post.featured_image, width: 100 if post.featured_image.attached? %></td>
           </tr>
         <% end %>
       </tbody>

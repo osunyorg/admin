@@ -1,82 +1,17 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" 
-            id="grid-tab" 
-            data-bs-toggle="tab" 
-            data-bs-target="#grid-tab-pane" 
-            type="button" 
-            role="tab" 
-            aria-controls="grid-tab-pane" 
-            aria-selected="true">
-            <i class="bi bi-grid-3x2-gap-fill"></i>
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" 
-            id="list-tab" 
-            data-bs-toggle="tab" 
-            data-bs-target="#list-tab-pane" 
-            type="button" 
-            role="tab" 
-            aria-controls="tab-tab-pane" 
-            aria-selected="false">
-            <i class="bi bi-list"></i>    
-    </button>
-  </li>
-</ul>
-<div class="tab-content py-3">
-  <div class="tab-pane show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab" tabindex="0">
-    <div class="row g-3">
-      <% people.each do |person| %>
-        <div class="col-6 col-lg-3 col-xxl-2">
-          <div class="card mb-0">
-            <%= osuny_thumbnail person.best_picture, 
-                                initials: person.initials, 
-                                large: true %>
-            <div class="card-body">
-              <p class="mb-0"><%= link_to person,
-                                          admin_university_person_path(person),
-                                          class: 'text-black stretched-link'  %></p>
-              <p class="small text-muted mb-0"><%= sanitize person.summary %></p>
-            </div>
-          </div>
+<div class="row g-3">
+  <% people.each do |person| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="card mb-0">
+        <%= osuny_thumbnail person.best_picture, 
+                            initials: person.initials, 
+                            large: true %>
+        <div class="card-body">
+          <p class="mb-0"><%= link_to person,
+                                      admin_university_person_path(person),
+                                      class: 'text-black stretched-link'  %></p>
+          <p class="small text-muted mb-0"><%= sanitize person.summary %></p>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div class="tab-pane" id="list-tab-pane" role="tabpanel" aria-labelledby="list-tab" tabindex="0">
-    <div class="table-responsive">
-      <table class="<%= table_classes %>">
-        <thead>
-          <tr>
-            <th><%= University::Person.human_attribute_name('name') %></th>
-            <th><%= t('admin.summary.label') %></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% people.each do |person| %>
-            <tr>
-              <td>
-                <%= link_to person, admin_university_person_path(person) %>
-              </td>
-              <td><%= sanitize person.summary %></td>
-              <td>
-                <%= kamifusen_tag person.best_picture,
-                                  width: 60, class: 'rounded-circle' if person.best_picture.attached? %>
-              </td>
-              <td>
-                <div class="btn-group" role="group">
-                  <%= link_to t('edit'),
-                            edit_admin_university_person_path(person),
-                            class: button_classes if can?(:update, person) %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <% end %>
 </div>
