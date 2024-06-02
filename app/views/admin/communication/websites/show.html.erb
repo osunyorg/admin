@@ -35,7 +35,7 @@ number_of_panels = 0
     </div>
   <% end %>
   <div class="col-lg-<%= number_of_panels.even? ? 12 : 6 %>">
-    <%= render 'admin/communication/websites/show/pages' if can?(:read, Communication::Website::Page) %>
+    <%= render 'admin/communication/websites/show/pages', large: number_of_panels.even? if can?(:read, Communication::Website::Page) %>
   </div>
 </div>
 

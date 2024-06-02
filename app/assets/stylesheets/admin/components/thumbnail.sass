@@ -4,6 +4,8 @@
     background: $color-bg-soft
     display: flex
     justify-content: center
+    max-height: 100px
+    max-width: 100px
     overflow: hidden
     &__initials
         color: #CCCCCC
@@ -11,8 +13,9 @@
         font-family: $font-family-serif
         font-size: pxToRem(30)
     &--large
+        max-height: 300px
+        max-width: 300px
         .osuny__thumbnail__initials
             font-size: pxToRem(40)
     &--uncropped
-        picture
-            padding: 20%
+        padding: 20%
