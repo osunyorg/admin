@@ -1,42 +1,27 @@
 <% if events.none? %>
   <p><%= t('admin.communication.website.agenda.events.none') %></p>
 <% else %>
-  <div class="table-responsive">
-    <table class="<%= table_classes %>">
-      <thead>
-        <tr>
-          <th class="ps-0" style="min-width: 250px"><%= Communication::Website::Agenda::Event.human_attribute_name('title') %></th>
-          <th><%= Communication::Website::Agenda::Event.human_attribute_name('dates') %></th>
-          <th><%= Communication::Website::Agenda::Event.human_attribute_name('categories') %></th>
-          <th><%= Communication::Website::Agenda::Event.human_attribute_name('featured_image') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% events.each do |event| %>
-          <tr class="<%= 'draft' unless event.published? %>">
-            <td>
-              <p class="mb-0">
-                <%= link_to event,
-                            admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id) %>
-              </p>
-              <% if event.subtitle.present? %>
-                <p class="mb-0 text-muted">
-                  <%= event.subtitle %>
-                </p>
-              <% end %>
-            </td>
-            <td class="small">
-              <%= render 'admin/communication/websites/agenda/events/dates', event: event %>
+  <div class="row g-2 mb-3">
+    <% events.each do |event| %>
+      <div>
+        <div class="card card--horizontal">
+          <%= osuny_thumbnail event.featured_image, initials: event.initials %>
+          <div class="card-body">
+            <%= link_to event,
+                        admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id),
+                        class: "stretched-link text-black" %>
+            <% if event.subtitle.present? %>
               <br>
-              <%= t("activerecord.attributes.communication/website/agenda/event.status_#{event.status}") %>
-            </td>
-            <td class="small"><%= render 'admin/communication/websites/agenda/categories/inline', about: event %></td>
-            <td>
-              <%= kamifusen_tag event.featured_image, width: 100 if event.featured_image.attached? %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              <span class="text-muted">
+                <%= event.subtitle %>
+              </span>
+            <% end %>
+          </div>
+          <div class="card-footer text-end text-muted">
+            <%= render 'admin/communication/websites/agenda/events/dates', event: event %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>

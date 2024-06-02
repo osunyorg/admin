@@ -30,8 +30,7 @@ selectable ||= false
             <% end %>
             <td>
               <div class="card card--horizontal <%= 'draft' unless post.published? %>">
-                <%= osuny_thumbnail post.featured_image, 
-                                    initials: post.initials %>
+                <%= osuny_thumbnail post.featured_image, initials: post.initials %>
                 <div class="card-body">
                   <%= link_to post,
                               admin_communication_website_post_path(website_id: post.website.id, id: post.id),

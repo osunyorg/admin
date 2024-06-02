@@ -45,6 +45,7 @@
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Shareable

@@ -35,6 +35,7 @@
 class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Shareable
