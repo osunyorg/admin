@@ -38,10 +38,10 @@ selectable ||= false
                               class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>
                 </div>
                 <div class="card-footer d-none d-lg-block">
-                  <% if !hide_buttons && post.pinned %>
+                  <% if !hide_buttons && post.pinned && !small %>
                     <%= Communication::Website::Post.human_attribute_name('pinned') %>
                   <% end %>
-                  <% if !hide_author && post.author %>
+                  <% if !hide_author && post.author && !small %>
                     <span class="ms-3">
                       <%= post.author %>
                     </span>
