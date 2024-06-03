@@ -3,6 +3,7 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
 
   def show
     breadcrumb
+    @feature_nav = 'navigation/admin/communication/website/settings'
   end
 
   def update

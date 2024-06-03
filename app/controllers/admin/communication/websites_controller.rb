@@ -47,6 +47,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def edit
     breadcrumb
     add_breadcrumb t('admin.subnav.settings')
+    @feature_nav = 'navigation/admin/communication/website/settings'
   end
 
   def create

@@ -34,14 +34,15 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_menus,
                   Communication::Website::Menu.model_name.human(count: 2),
                   admin_communication_website_menus_path(website_id: @website.id) if can?(:read, Communication::Website::Menu)
-    primary.item  :subnav_localizations,
-                  t('admin.communication.website.localizations.title'),
-                  admin_communication_website_localization_path(website_id: @website.id) if can?(:read, Communication::Website::Localization)
     primary.item  :subnav_analytics,
                   t('communication.website.analytics'),
                   analytics_admin_communication_website_path(id: @website.id, website_id: nil) if @website.plausible_url.present?
     primary.item  :subnav_settings,
                   t('admin.subnav.settings'),
-                  edit_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
+                  edit_admin_communication_website_path(id: @website.id, website_id: nil),
+                  highlights_on: lambda { 
+                    controller_name == 'websites' && action_name == 'edit' ||
+                    controller_name == 'localizations'
+                  } if can?(:edit, @website)
   end
 end
