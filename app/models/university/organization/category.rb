@@ -48,6 +48,10 @@ class University::Organization::Category < ApplicationRecord
     "organizations_categories/#{slug}/_index.html"
   end
 
+  def template_static
+    "admin/university/organizations/categories/static"
+  end
+
   def to_s
     "#{name}"
   end
