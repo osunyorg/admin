@@ -74,7 +74,7 @@ module AsIndirectObject
       direct_source.website.connect self, direct_source
     end
     websites.each do |website|
-      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website, self)
+      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
     end
   end
 

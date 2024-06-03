@@ -1,0 +1,23 @@
+.card
+    box-shadow: 0px 2px 4px 0px rgba(16, 15, 15, 0.05)
+    height: 100%
+    margin-bottom: $spacing1
+    overflow: hidden
+    transition: box-shadow 0.3s ease-in-out
+    &:hover
+        box-shadow: 4px 6px 8px 0 rgba(16, 15, 15, 0.1)
+    .card-title
+        font-size: pxToRem(18)
+        font-weight: bold
+        small
+            font-weight: normal
+    .table
+        margin-bottom: 0
+        th,
+        td
+            padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x)
+    &.kind--selected
+        background: $color-accent
+        border-color: $color-accent
+        &, p, label
+            color: $color-background

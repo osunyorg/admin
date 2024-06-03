@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     add_breadcrumb t('home'), root_path
   end
 
+  def background_tasks_count
+    @background_tasks_count ||= GoodJob::Job.where(finished_at: nil).count
+  end
+  helper_method :background_tasks_count
+
   protected
 
   def render_as_plain_text

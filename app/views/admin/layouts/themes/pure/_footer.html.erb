@@ -1,28 +1,34 @@
-<footer class="bg-black py-5">
+<footer class="bg-black text-white py-5">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
-        <%= link_to 'https://www.osuny.org', target: :_blank do %>
-          <%= image_tag 'osuny-white.svg', width: 100 %>
+    <div class="row my-5 pb-5">
+      <div class="offset-lg-1 col-lg-5 pb-4 backgroundTasks__count">
+        <p class="text-white"><%= t('admin.pending_tasks.tasks') %></p>
+        <div class="display-5 text-serif"><%= background_tasks_count %></div>
+      </div>
+      <div class="col-lg-5 pb-4">
+        <p class="text-white-50 text-uppercase"><%= t('admin.pending_tasks.what_is_it') %></p>
+        <p class="text-white"><%= t('admin.pending_tasks.text_html') %></p>
+      </div>
+    </div>
+    <div class="d-md-flex justify-content-between mt-5 pt-5">
+      <%= link_to 'https://www.osuny.org', target: :_blank, class: 'text-white-50' do %>
+        <%= t('admin.footer.signature') %>
+      <% end %>
+      <ul class="list-unstyled d-md-flex">
+        <%
+          [
+            ['Aide à la contribution', 'https://support.osuny.org'],
+            ['Aide au code', 'https://developers.osuny.org'],
+            ['Site d\'exemple', 'https://example.osuny.org'],
+            ['Thème Figma', 'https://www.figma.com/community/file/1176490763864113451'],
+            ['Statut', 'https://status.osuny.org'],
+          ].each do |item| 
+        %>
+          <li>
+            <%= link_to item.first, item.last, target: :_blank, class: 'text-white-50' %>
+          </li>
         <% end %>
-      </div>
-      <div class="col-md-9 text-md-end small">
-        <ul class="list-inline">
-          <%
-            [
-              ['Aide à la contribution', 'https://support.osuny.org'],
-              ['Aide au code', 'https://developers.osuny.org'],
-              ['Site d\'exemple', 'https://example.osuny.org'],
-              ['Thème Figma', 'https://www.figma.com/community/file/1176490763864113451'],
-              ['Statut', 'https://status.osuny.org'],
-            ].each do |item| 
-          %>
-            <li class="list-inline-item">
-              <%= link_to item.first, item.last, target: :_blank %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+      </ul>
     </div>
   </div>
 </footer>

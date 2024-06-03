@@ -24,22 +24,23 @@
     </button>
   </li>
 </ul>
-<div class="tab-content mb-4" id="myTabContent">
+<div class="tab-content" id="myTabContent">
   <div class="tab-pane show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab" tabindex="0">
-    <div class="row">
+    <div class="row mt-1 g-3">
       <% people.each do |person| %>
-        <div class="col-sm-6 col-lg-3">
-          <div class="position-relative mt-5">
+        <div class="col-6 col-lg-3 col-xxl-2">
+          <div class="card mb-0">
             <% if person.best_picture.attached? %>
               <%= kamifusen_tag person.best_picture,
-                                width: 60, 
-                                class: 'rounded-circle d-block' %>
+                                width: 240, 
+                                class: 'card-img-top img-fluid' %>
             <% else %>
-              <div class="bg-light rounded-circle" style="width: 60px; height: 60px"></div>
+              <%= image_tag 'avatar-neutral.png', class: 'card-img-top' %>
             <% end %>
-            <p class="mt-2 mb-0"><%= person %></p>
-            <p class="small text-muted mb-0"><%= person.summary %></p>
-            <%= link_to t('show'), admin_university_person_path(person), class: 'action stretched-link' %>
+            <div class="card-body">
+              <p class="mb-0"><%= link_to person, admin_university_person_path(person), class: 'text-black stretched-link'  %></p>
+              <p class="small text-muted mb-0"><%= sanitize person.summary %></p>
+            </div>
           </div>
         </div>
       <% end %>
@@ -62,7 +63,7 @@
               <td>
                 <%= link_to person, admin_university_person_path(person) %>
               </td>
-              <td><%= person.summary %></td>
+              <td><%= sanitize person.summary %></td>
               <td>
                 <%= kamifusen_tag person.best_picture,
                                   width: 60, class: 'rounded-circle' if person.best_picture.attached? %>

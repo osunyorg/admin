@@ -1,7 +1,14 @@
 <div class="hero">
   <div class="container-fluid">
-    <div class="d-xl-flex">
-      <h1><%= yield :title %></h1>
+    <% if breadcrumbs.one? %>
+      <div class="welcome py-4">
+        <%= t('hello', name: current_user.first_name) %>
+      </div>
+    <% else %>
+      <%= render_breadcrumbs builder: Osuny::BreadcrumbsOnRailsBuilder %>
+    <% end %>
+    <div class="d-xl-flex mt-5">
+      <h1 class="mb-4"><%= yield :title %></h1>
       <div class="ms-xl-auto text-xl-end mt-2">
         <%= yield :title_right %>
       </div>
@@ -11,6 +18,5 @@
         <%= yield :title_left %>
       </div>
     <% end %>
-    <%= render_breadcrumbs builder: Osuny::BreadcrumbsOnRailsBuilder %>
   </div>
 </div>

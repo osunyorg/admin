@@ -17,7 +17,7 @@
       <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
       <%= form_tag publish_batch_admin_communication_website_posts_path do %>
         <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
-        <%= paginate @posts, theme: 'bootstrap-5' %>
+        <%= paginate @posts %>
         <div>
           <div data-batch-selectable-role="actions-container">
             <div class="d-flex align-items-center">
@@ -48,7 +48,7 @@
     <%= osuny_panel t('communication.authors', count: 2) do %>
       <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
       <% if @authors.total_pages > 1 %>
-        <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
+        <%= paginate @authors, param_name: :authors_page %>
       <% end %>
     <% end %>
   <% end %>

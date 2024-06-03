@@ -1,5 +1,5 @@
 SimpleNavigation::Configuration.run do |navigation|
-  navigation.renderer = ::Appstack::SimpleNavigationRenderer
+  navigation.renderer = ::Osuny::SimpleNavigationRenderer
   navigation.auto_highlight = true
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
@@ -17,10 +17,6 @@ SimpleNavigation::Configuration.run do |navigation|
 
   if current_university.is_really_a_university
     navigation.items do |primary|
-      if current_admin_theme == 'appstack'
-        primary.item  :dashboard, t('admin.dashboard'), admin_root_path,  { icon: Icon::DASHBOARD, highlights_on: /admin$/ }
-      end
-
       if feature_education?
         primary.item :education, Education.model_name.human, admin_education_root_path, { kind: :header, image: 'admin/education-thumb.jpg' }
         load_from_parts Education, primary

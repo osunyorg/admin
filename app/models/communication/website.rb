@@ -43,6 +43,7 @@
 #  updated_at              :datetime         not null
 #  about_id                :uuid             indexed => [about_type]
 #  default_language_id     :uuid             not null, indexed
+#  locked_by_job_id        :uuid
 #  university_id           :uuid             not null, indexed
 #
 # Indexes

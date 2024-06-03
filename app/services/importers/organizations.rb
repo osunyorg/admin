@@ -59,7 +59,7 @@ module Importers
 
     def organization
       unless @organization
-        @organization = University::Organization.where(university_id: @university.id, name: organization_name).first_or_initialize
+        @organization = University::Organization.where(university_id: @university.id, language_id: @university.default_language_id, name: organization_name).first_or_initialize
         @organization.long_name = @long_name
         @organization.kind = @kind.to_sym
         @organization.siren = @siren

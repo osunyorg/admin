@@ -83,7 +83,7 @@
 
 <% if @website.locked_at.present? %>
   <div class="alert alert-warning">
-    <p><%= Communication::Website.human_attribute_name(:locked_at) %> : <%= l(@website.locked_at, format: :long) %></p>
+    <p><%= Communication::Website.human_attribute_name(:locked_at) %> : <%= l(@website.locked_at, format: :long) %> (<%= @website.locked_by_job_id %>)</p>
     <%= link_to t('server_admin.websites.unlock_for_background_jobs_btn'), unlock_for_background_jobs_server_website_path(@website), method: :post, class: "btn btn-primary" %>
   </div>
 <% end %>

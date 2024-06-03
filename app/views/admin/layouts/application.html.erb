@@ -9,8 +9,24 @@
     <script nonce="<%= request.content_security_policy_nonce %>">
     // Avoid opening menu on load
     </script>
-    <%= stylesheet_link_tag "admin/#{current_admin_theme}", media: 'all' %>
+    <%= stylesheet_link_tag "admin", media: 'all' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-  <%= render "admin/layouts/themes/#{current_admin_theme}" %>
+  <body class="<%= body_classes %>">
+  <%= render "admin/layouts/themes/pure/nav" %>
+  <%= render "admin/layouts/themes/pure/hero" %>
+  <%= render 'application/notice' %>
+  <main class="container-fluid">
+    <%= render "admin/layouts/themes/pure/user_unconfirmed" %>
+    <div class="position-relative">
+      <%= yield %>
+    </div>
+    <%= render 'admin/application/preview' if @preview %>
+  </main>
+  <%= render "admin/layouts/themes/pure/commands" %>
+  <%= render "admin/layouts/themes/pure/footer" %>
+  <%= javascript_include_tag 'admin' %>
+  <%= render 'bugsnag' %>
+  <%= render 'summernote_localization' %>
+</body>
 </html>

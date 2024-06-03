@@ -3,7 +3,7 @@
 <%= render 'admin/communication/websites/sidebar' do %>
   <%= render 'filters', current_path: admin_communication_website_post_authors_path, filters: @filters if @filters.any?  %>
   <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
-  <%= paginate @authors, theme: 'bootstrap-5' %>
+  <%= paginate @authors %>
 <% end %>
 
 <% content_for :action_bar_right do %>

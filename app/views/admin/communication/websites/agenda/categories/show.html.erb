@@ -16,7 +16,7 @@
     <%= osuny_panel Communication::Website::Agenda::Event.model_name.human(count: 2),
                     subtitle: "#{@events.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }" do %>
       <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>
-      <%= paginate @events, theme: 'bootstrap-5' %>
+      <%= paginate @events %>
     <% end %>
   <% end %>
 <% end %>
