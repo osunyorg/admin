@@ -13,7 +13,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
   end
 
   # For implicit connections, direct_source_type is "Communication::Website::Page"
-  # Whereas for explicit, it will be ""Communication::Website::Page::Organization"
+  # Whereas for explicit, it will be "Communication::Website::Page::Organization"
   def explicitly_connected_organizations
     ids = website.connections.where(
             indirect_object_type: 'University::Organization',
