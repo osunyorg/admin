@@ -14,7 +14,6 @@ SimpleNavigation::Configuration.run do |navigation|
     Communication::Extranet::FEATURES.each do |feature|
       next unless @extranet.has_feature? feature
       property = "feature_#{feature}"
-      constant = "COMMUNICATION_EXTRANET_#{feature.upcase}"
       primary.item  property.to_sym,
                     Communication::Extranet.human_attribute_name(property),
                     url_for([:admin, @extranet, feature])

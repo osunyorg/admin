@@ -4,6 +4,10 @@ hide_author ||= false
 hide_buttons ||= false
 hide_pinned ||= false
 selectable ||= false
+if small
+  hide_author = true
+  hide_buttons = true
+end
 %>
 <% if posts.none? %>
   <p><%= t('communication.website.posts.none') %></p>
@@ -38,10 +42,10 @@ selectable ||= false
                               class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>
                 </div>
                 <div class="card-footer d-none d-lg-block">
-                  <% if !hide_buttons && post.pinned && !small %>
+                  <% if !hide_buttons && post.pinned %>
                     <%= Communication::Website::Post.human_attribute_name('pinned') %>
                   <% end %>
-                  <% if !hide_author && post.author && !small %>
+                  <% if !hide_author && post.author %>
                     <span class="ms-3">
                       <%= post.author %>
                     </span>

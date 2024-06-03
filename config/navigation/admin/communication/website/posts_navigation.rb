@@ -10,10 +10,10 @@ SimpleNavigation::Configuration.run do |navigation|
                   highlights_on: lambda { 
                     controller_name == "posts" && action_name == "index" 
                   }
-    primary.item  :innernav_categories,
+    primary.item  :feature_nav_categories,
                   Communication::Website::Post::Category.model_name.human(count: 2),
                   admin_communication_website_post_categories_path(website_id: @website.id)
-    primary.item  :innernav_authors,
+    primary.item  :feature_nav_authors,
                   t('communication.authors', count: 2),
                   admin_communication_website_post_authors_path(website_id: @website.id)
   end
