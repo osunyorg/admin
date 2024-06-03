@@ -24,7 +24,7 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
 
   def breadcrumb
     super
-    add_breadcrumb  helpers.language_name(current_website_language.iso_code)
+    add_breadcrumb t('admin.subnav.settings')
     add_breadcrumb  t('admin.communication.website.localizations.title')
   end
 
