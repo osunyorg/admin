@@ -49,6 +49,10 @@ class University::Person::Category < ApplicationRecord
     "persons_categories/#{slug}/_index.html"
   end
 
+  def template_static
+    "admin/university/people/categories/static"
+  end
+
   def to_s
     "#{name}"
   end
