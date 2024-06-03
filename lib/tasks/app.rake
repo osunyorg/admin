@@ -12,6 +12,9 @@ namespace :app do
       heading.set_slug
       heading.update_column :slug, heading.slug
     end
+    # Les blobs ne sont plus connectés
+    # https://github.com/osunyorg/admin/pull/1979
+    Communication::Website::Connection.where(indirect_object_type: "ActiveStorage::Blob").delete_all
   end
 
   namespace :websites do
