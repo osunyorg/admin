@@ -73,9 +73,10 @@ module Communication::Website::WithConnectedObjects
       direct_source,
       direct_source_type: direct_source_type
     ) if should_connect?(indirect_object, direct_source)
+    return unless should_connect_recursive_dependencies?(indirect_object)
     indirect_object.recursive_dependencies.each do |dependency|
       connect_object dependency, direct_source
-    end if should_connect_recursive_dependencies?(indirect_object)
+    end
   end
 
   def connect_and_sync(indirect_object, direct_source, direct_source_type: nil)
