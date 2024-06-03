@@ -14,7 +14,11 @@ class Communication::Website::Page::ResearchPublication < Communication::Website
 
   def dependencies
     super +
-    [website.config_default_languages] +
+    [website.config_default_languages]
+  end
+
+  # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
+  def references
     website.connected_publications
   end
 

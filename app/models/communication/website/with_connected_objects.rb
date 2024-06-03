@@ -2,6 +2,11 @@ module Communication::Website::WithConnectedObjects
   extend ActiveSupport::Concern
 
   included do
+    CONNECTIONS_BLACKLIST = [
+      # Les blobs ne sont jamais modifiés, donc on n'a aucun besoin de savoir à quoi ils sont connectés
+      'ActiveStorage::Blob'
+    ].freeze
+
     has_many :connections
 
     after_save :connect_about, if: :saved_change_to_about_id?
@@ -62,11 +67,15 @@ module Communication::Website::WithConnectedObjects
   end
 
   def connect(indirect_object, direct_source, direct_source_type: nil)
-    connect_object indirect_object, direct_source, direct_source_type: direct_source_type
-    return unless indirect_object.respond_to?(:recursive_dependencies)
+    # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
+    connect_object(
+      indirect_object,
+      direct_source,
+      direct_source_type: direct_source_type
+    ) if should_connect?(indirect_object, direct_source)
     indirect_object.recursive_dependencies.each do |dependency|
       connect_object dependency, direct_source
-    end
+    end if should_connect_recursive_dependencies?(indirect_object)
   end
 
   def connect_and_sync(indirect_object, direct_source, direct_source_type: nil)
@@ -163,7 +172,18 @@ module Communication::Website::WithConnectedObjects
     # On ne connecte pas les objets directs (en principe ça n'arrive pas)
     !indirect_object.try(:is_direct_object?) &&
     # On ne connecte pas des objets qui ne sont pas issus de modèles ActiveRecord (comme les composants des blocs)
-    indirect_object.is_a?(ActiveRecord::Base)
+    indirect_object.is_a?(ActiveRecord::Base) &&
+    # On ne connecte pas certains types d'objets, listés dans une black list
+    !indirect_object.class.to_s.in?(CONNECTIONS_BLACKLIST)
+  end
+
+  def should_connect_recursive_dependencies?(indirect_object)
+    # On ne suit pas les objets inexistants
+    indirect_object.present? &&
+    # On ne suit pas les objets qui n'ont pas de dépendances
+    indirect_object.respond_to?(:recursive_dependencies) &&
+    # On ne suit pas les objets directs
+    !indirect_object.try(:is_direct_object?)
   end
 
   # On passe par les connexions pour éviter d'analyser des objets directs qui n'ont pas d'objets indirects du tout
