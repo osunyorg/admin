@@ -14,7 +14,7 @@
     <div class="mb-4" v-if="data.mode == 'selection'">
       <h2 class="h4"><%= t '.selection.title' %></h2>
       <%= block_component_add_element block, t('.selection.add') %>
-      <draggable :list="data.elements" handle=".dragHandle"">
+      <draggable :list="data.elements" handle=".dragHandle">
         <div v-for="(element, index) in data.elements" class="draggable-item">
           <div class="d-flex mb-n3">
             <div>
