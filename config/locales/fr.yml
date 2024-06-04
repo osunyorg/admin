@@ -140,6 +140,9 @@ fr:
       what_is_it: Qu'est-ce que c'est ?
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     seo: SEO
+    subnav:
+      settings: Réglages
+      summary: Résumé
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
     successfully_duplicated_html: "<i>%{model}</i> a bien été dupliqué(e)."

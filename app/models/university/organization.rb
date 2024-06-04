@@ -50,6 +50,7 @@ class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Shareable
@@ -74,6 +75,8 @@ class University::Organization < ApplicationRecord
 
   has_one_attached_deletable :logo
   has_one_attached_deletable :logo_on_dark_background
+
+  alias :featured_image :logo
 
   validates_presence_of :name
   validates_uniqueness_of :name, scope: [:university_id, :language_id]

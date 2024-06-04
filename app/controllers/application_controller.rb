@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :background_tasks_count
 
+  def current_subnav_context
+    nil
+  end
+  helper_method :current_subnav_context
+
   protected
 
   def render_as_plain_text

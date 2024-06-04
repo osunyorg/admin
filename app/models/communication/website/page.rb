@@ -54,6 +54,7 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
   include Shareable

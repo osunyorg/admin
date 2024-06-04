@@ -1,9 +1,7 @@
 <% content_for :title, Research::Journal::Paper.model_name.human(count: 2) %>
 
-<%= render 'admin/research/journals/sidebar' do %>
-  <%= render 'admin/research/journals/papers/list', papers: @papers %>
-  <%= paginate @papers %>
-<% end %>
+<%= render 'admin/research/journals/papers/list', papers: @papers %>
+<%= paginate @papers %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Journal::Paper %>

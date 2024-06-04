@@ -144,7 +144,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def breadcrumb
     super
-    add_breadcrumb  t('admin.communication.website.pages.structure'),
+    add_breadcrumb  t('admin.communication.website.subnav.structure'),
                     admin_communication_website_pages_path
   end
 

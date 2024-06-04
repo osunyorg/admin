@@ -9,6 +9,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
   def index
     @root_categories = categories.root
     @categories_class = categories_class
+    @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb
   end
 

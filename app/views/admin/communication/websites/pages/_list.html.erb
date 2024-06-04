@@ -1,36 +1,26 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th class="ps-0"><%= Communication::Website::Page.human_attribute_name('title') %></th>
-        <th width="100"><%= Communication::Website::Page.human_attribute_name('featured_image') %></th>
-        <th width="200"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% pages.each do |page| %>
-        <tr class="<%= 'draft' unless page.published? %>">
-          <td class="ps-0">
-            <%= link_to page,
-                        admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                        class: "#{'draft' unless page.published?}" %>
-            <% if page.ancestors.many? %>
-              <p class="small text-muted mb-0"><%= page.ancestors.join(' / ') %></p>
-            <% end %>
-          </td>
-          <td>
-            <%= kamifusen_tag page.featured_image, width: 100 if page.featured_image.attached? %>
-          </td>
-          <td class="small">
-            <% if page.is_special_page? %>
-              <p class="mb-0"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></p>
-            <% end %>
-            <% if page.full_width %>
-              <p class="mb-0"><%= Communication::Website::Page.human_attribute_name('full_width') %></p>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<%
+small ||= false
+%>
+<div class="row g-2 mb-2">
+  <% pages.each do |page| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail page %>
+        <div class="card-body">
+          <%= osuny_published page %>
+          <%= link_to page,
+                      admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                      class: "stretched-link text-black" %>
+        </div>
+        <div class="card-footer text-muted">
+          <% if small %>
+            <%= l page.updated_at.to_date, format: :short %>
+          <% else %>
+            <%= t("communication.website.pages.defaults.#{page.type_key}.title") if page.is_special_page? %>
+            <%= Communication::Website::Page.human_attribute_name('full_width') if page.full_width %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

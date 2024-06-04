@@ -1,5 +1,3 @@
 <% content_for :title, Communication::Website::Page.model_name.human %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'form', page: @page %>
-<% end %>
+<%= render 'form', page: @page %>

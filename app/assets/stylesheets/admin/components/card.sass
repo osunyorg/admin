@@ -4,6 +4,13 @@
     margin-bottom: $spacing1
     overflow: hidden
     transition: box-shadow 0.3s ease-in-out
+    &--horizontal
+        align-items: center
+        flex-direction: row
+        margin-bottom: 0
+        .osuny__thumbnail
+            height: 70px
+            width: 70px
     &:hover
         box-shadow: 4px 6px 8px 0 rgba(16, 15, 15, 0.1)
     .card-title
@@ -11,6 +18,9 @@
         font-weight: bold
         small
             font-weight: normal
+    .card-body,
+    .card-footer
+        line-height: 120%
     .table
         margin-bottom: 0
         th,

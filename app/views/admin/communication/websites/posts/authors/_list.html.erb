@@ -1,22 +1,17 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= University::Person.human_attribute_name('last_name') %></th>
-        <th><%= University::Person.human_attribute_name('first_name') %></th>
-        <th><%= t('communication.number_of_posts') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% authors.each do |author| %>
-        <tr>
-          <td><%= link_to author.last_name, admin_communication_website_post_author_path(website_id: @website.id, id: author.id) %></td>
-          <td><%= link_to author.first_name, admin_communication_website_post_author_path(website_id: @website.id, id: author.id) %></td>
-          <td><%= author.communication_website_posts.count %></td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% authors.each do |author| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail author %>
+        <div class="card-body">
+          <%= link_to author, 
+                      admin_communication_website_post_author_path(website_id: @website.id, id: author.id),
+                      class: 'text-black' %>
+        </div>
+        <div class="card-footer">
+          <%= author.communication_website_posts.count %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
