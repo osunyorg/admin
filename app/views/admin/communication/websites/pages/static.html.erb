@@ -39,7 +39,6 @@ header_cta:
   display: <%= @about.header_cta %>
   label: >-
     <%= prepare_text_for_static @about.header_cta_label %>
-  target: >-
-    <%= @about.header_cta_url %>
+  target: "<%= @about.header_cta_url %>"
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
