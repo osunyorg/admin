@@ -49,7 +49,7 @@ class Communication::Block < ApplicationRecord
 
   # We do not use the :touch option of the belongs_to association
   # because we do not want to touch the about when destroying the block.
-  after_save :touch_about, :touch_targets
+  after_save :touch_about#, :touch_targets # FIXME
 
   # Les numéros sont un peu en vrac
   # Dans l'idée, pour le futur
@@ -190,7 +190,9 @@ class Communication::Block < ApplicationRecord
     about.touch
   end
 
+  # Invalidation des caches des personnes pour les backlinks
   # if a block changed we need to touch the old targets (for example persons previously connected), and the new connected ones
+  # FIXME
   def touch_targets
     if persons? || organizations?
       dependencies.each(&:touch)
