@@ -4,8 +4,7 @@ window.summernoteManager = {
     noteButton: function (context) {
         'use strict';
         var ui = $.summernote.ui,
-            button;
-        button = ui.button({
+            button = ui.button({
             contents: '<i class="fas fa-note-sticky"/>',
             tooltip: 'Note (beta)',
             className: 'note-btn-note',
@@ -23,6 +22,18 @@ window.summernoteManager = {
             }
         });
         // return button as jquery object
+        return button.render();
+    },
+    checkButton: function (context) {
+        'use strict';
+        var ui = $.summernote.ui,
+            button = ui.button({
+                contents: '<i class="fas fa-magic" />',
+                tooltip: 'Correction LanguageTool (beta)',
+                className: 'note-btn-languagetool',
+                click: function () {
+                }
+            });
         return button.render();
     },
     init: function () {
@@ -49,7 +60,7 @@ window.summernoteManager = {
                     ['font', ['bold', 'italic']],
                     ['position', ['superscript']],
                     ['insert', ['link', 'unlink']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a'],
@@ -62,7 +73,7 @@ window.summernoteManager = {
                     ['position', ['superscript']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
@@ -75,7 +86,7 @@ window.summernoteManager = {
                     ['position', ['superscript']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink', 'note']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
@@ -88,7 +99,7 @@ window.summernoteManager = {
                     ['font', ['bold', 'italic']],
                     ['position', ['superscript', 'subscript']],
                     ['para', ['ul', 'ol']],
-                    ['view', ['codeview']]
+                    ['view', ['check', 'codeview']]
                 ],
                 styleTags: [
                     'p',
@@ -213,13 +224,6 @@ window.summernoteManager = {
                 this.sanitizeElementAttributes(child, allowedAttributes);
             }
         }
-    },
-
-    invoke: function () {
-        'use strict';
-        return {
-            init: this.init.bind(this)
-        };
     }
 };
 
