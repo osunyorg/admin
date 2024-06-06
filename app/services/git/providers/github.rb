@@ -99,7 +99,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def previous_sha(git_file)
-    git_sha(path) || git_file.previous_sha
+    git_sha(git_file.previous_path) || git_file.previous_sha
   end
 
   def computed_sha(string)
