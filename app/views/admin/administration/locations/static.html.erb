@@ -24,7 +24,7 @@ programs:
 <% end %>
 diplomas:
 <% @about.diplomas.each do |diploma| %>
-  - name: >
+  - name: >-
       <%= diploma.to_s %>
     path: <%= diploma.slug %>
     programs: <% @programs = @about.education_programs.where(diploma: diploma).root.ordered %>

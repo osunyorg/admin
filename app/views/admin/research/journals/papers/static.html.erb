@@ -22,10 +22,10 @@ dates:
 pdf: "<%= @about.pdf.blob_id %>"
 <% end %>
 <% if @about.bibliography %>
-bibliography: >
+bibliography: >-
   <%= prepare_html_for_static @about.bibliography %>
 <% end %>
-keywords: >
+keywords: >-
   <%= prepare_text_for_static @about.keywords %>
 researchers:
 <% @about.people.each do |person| %>
@@ -34,7 +34,7 @@ researchers:
 authors_list: "<%= prepare_text_for_static @about.authors_list %>"
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-abstract: >
+abstract: >-
   <%= prepare_text_for_static @about.abstract %>
 citations:
   - label: "APA"
