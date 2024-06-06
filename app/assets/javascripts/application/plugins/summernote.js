@@ -24,18 +24,6 @@ window.summernoteManager = {
         // return button as jquery object
         return button.render();
     },
-    checkButton: function (context) {
-        'use strict';
-        var ui = $.summernote.ui,
-            button = ui.button({
-                contents: '<i class="fas fa-magic" />',
-                tooltip: 'Correction LanguageTool (beta)',
-                className: 'note-btn-languagetool',
-                click: function () {
-                }
-            });
-        return button.render();
-    },
     init: function () {
         'use strict';
         this.setConfigs();
@@ -60,7 +48,7 @@ window.summernoteManager = {
                     ['font', ['bold', 'italic']],
                     ['position', ['superscript']],
                     ['insert', ['link', 'unlink']],
-                    ['view', ['check', 'codeview']]
+                    ['view', ['codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a'],
@@ -73,7 +61,7 @@ window.summernoteManager = {
                     ['position', ['superscript']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink']],
-                    ['view', ['check', 'codeview']]
+                    ['view', ['codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li'],
@@ -86,7 +74,7 @@ window.summernoteManager = {
                     ['position', ['superscript']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink', 'note']],
-                    ['view', ['check', 'codeview']]
+                    ['view', ['codeview']]
                 ]
             },
             ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
@@ -99,7 +87,7 @@ window.summernoteManager = {
                     ['font', ['bold', 'italic']],
                     ['position', ['superscript', 'subscript']],
                     ['para', ['ul', 'ol']],
-                    ['view', ['check', 'codeview']]
+                    ['view', ['codeview']]
                 ],
                 styleTags: [
                     'p',
