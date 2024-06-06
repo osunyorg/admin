@@ -7,7 +7,7 @@ class Communication::Website::Permalink::Person::Category < Communication::Websi
     :persons_categories
   end
 
-  # /equipe/:slug/
+  # /equipe/categories/:slug/
   def self.pattern_in_website(website, language)
     "/#{slug_with_ancestors(website, language)}/categories/:slug/"
   end

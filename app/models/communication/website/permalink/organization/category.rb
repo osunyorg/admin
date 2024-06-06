@@ -7,7 +7,7 @@ class Communication::Website::Permalink::Organization::Category < Communication:
     :organizations_categories
   end
 
-  # /organisations/:slug/
+  # /organisations/categories/:slug/
   def self.pattern_in_website(website, language)
     "/#{slug_with_ancestors(website, language)}/categories/:slug/"
   end
