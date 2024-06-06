@@ -21,8 +21,11 @@ class Osuny::LanguageTool
 
   def api
     @api ||= LanguageTool::API.new(
-      username: ENV['LANGUAGE_TOOL_USERNAME'],
-      api_key: ENV['LANGUAGE_TOOL_API_KEY']
+      base_uri: 'https://api.languagetoolplus.com/v2',
+      common_query_params: {
+        username: ENV['LANGUAGE_TOOL_USERNAME'],
+        api_key: ENV['LANGUAGE_TOOL_API_KEY']
+      }
     )
   end
 
