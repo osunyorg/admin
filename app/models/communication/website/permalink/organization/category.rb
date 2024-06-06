@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Organization::Category < Communication:
 
   # /organisations/:slug/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:slug/"
+    "/#{slug_with_ancestors(website, language)}/categories/:slug/"
   end
 
   def self.special_page_type
