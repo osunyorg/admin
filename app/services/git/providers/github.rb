@@ -98,6 +98,10 @@ class Git::Providers::Github < Git::Providers::Abstract
     client.create_commit repository, sub_commit_message, new_tree[:sha], base_commit_sha
   end
 
+  def previous_sha(git_file)
+    git_sha(path) || git_file.previous_sha
+  end
+
   def computed_sha(string)
     # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
     # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html
@@ -107,15 +111,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   def git_sha(path)
     return if path.nil?
     # Try to find in stored tree to avoid multiple queries
-    return tree_item_at_path(path)&.dig(:sha)
-    begin
-      # The fast way, with no query, does not work.
-      # Let's query the API.
-      content = client.content repository, path: path
-      return content[:sha]
-    rescue
-    end
-    nil
+    tree_item_at_path(path)&.dig(:sha)
   end
 
   def valid?

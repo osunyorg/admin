@@ -58,7 +58,7 @@ class Git::Analyzer
   end
 
   def previous_sha
-    git_file.previous_sha
+    repository.previous_sha(git_file)
   end
 
   def exists_on_git?
@@ -74,5 +74,5 @@ class Git::Analyzer
     git_file.previous_path == git_file.path &&                  # at the same place
     repository.git_sha(git_file.path) == git_file.previous_sha  # with the same content
   end
-  
+
 end

@@ -56,6 +56,10 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     true
   end
 
+  def previous_sha(git_file)
+    git_sha(git_file.previous_path) || git_file.previous_sha
+  end
+
   def computed_sha(string)
     OpenSSL::Digest::SHA256.hexdigest string
   end

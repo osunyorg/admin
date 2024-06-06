@@ -37,6 +37,10 @@ class Git::Providers::Abstract
     raise NotImplementedError
   end
 
+  def previous_sha(git_file)
+    raise NotImplemetedError
+  end
+
   def computed_sha(string)
     raise NotImplementedError
   end
