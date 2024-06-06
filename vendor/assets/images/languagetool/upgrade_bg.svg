@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="350px" height="158px" viewBox="0 0 350 158" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <rect id="path-1" x="0" y="0" width="350" height="160"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle">
+            <g id="Group-2">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Rectangle" fill="#45A8FC" xlink:href="#path-1"></use>
+                <ellipse id="Oval" fill="#2E8AF1" mask="url(#mask-2)" cx="306" cy="818" rx="818" ry="818"></ellipse>
+                <ellipse id="Oval" fill="#1B78EE" mask="url(#mask-2)" cx="28" cy="475" rx="378" ry="378"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>
