@@ -68,7 +68,9 @@ class Education::Program < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable
+  include Translatable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
   include WithAccessibility
@@ -83,7 +85,6 @@ class Education::Program < ApplicationRecord
   include WithPosition
   include WithSchools
   include WithTeam
-  include WithTranslations
   include WithTree
   include WithUniversity
   include WithWebsitesCategories
@@ -227,7 +228,8 @@ class Education::Program < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id, 
+      featured_image&.blob_id,
+      shared_image&.blob_id, 
       downloadable_summary&.blob_id, 
       logo&.blob_id
     ]

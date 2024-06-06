@@ -1,18 +1,34 @@
 <% items.each do |item| %>
-  <li class="treeview__element js-treeview-element <%= 'treeview__element--empty' unless item.has_children? %>" data-id="<%= item.id %>" data-parent="<%= item.parent_id %>">
-    <div class="d-flex align-items-center treeview__label border-bottom p-1">
-      <%= link_to children_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
-                  class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
-        <%= render 'admin/application/tree/folder' %>
+  <li class=" treeview__element 
+              js-treeview-element 
+              <%= 'treeview__element--empty' unless item.has_children? %>"
+      data-id="<%= item.id %>"
+      data-parent="<%= item.parent_id %>">
+    <div class="card card--horizontal treeview__label mb-2">
+      <%= link_to children_admin_communication_website_menu_item_path(
+                    website_id: item.website.id, 
+                    menu_id: item.menu.id, 
+                    id: item.id
+                  ),
+                  class: 'js-treeview-openzone d-inline-block', 
+                  remote: true do %>
+        <%= osuny_thumbnail item %>
       <% end %>
-      <%= item %>
-      <%= render 'admin/application/tree/sort' %>
-      <%= link_to children_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
-                  class: 'js-treeview-openzone small ps-2', remote: true do %>
-        <span class="open_text"><%= t 'folder.open' %></span>
-        <span class="close_text"><%= t 'folder.close' %></span>
-      <% end %>
-      <div class="btn-group ms-auto" role="group">
+      <div class="card-body">
+        <%= item %>
+        <% if item.children.any? %>
+          <span class="text-muted">(<%= item.children.count %>)</span>
+        <% end %>
+        <span class="show-on-hover">
+          <%= render 'admin/application/tree/sort' %>
+          <%= link_to children_admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
+                      class: 'js-treeview-openzone small ps-2', remote: true do %>
+            <span class="open_text"><%= t 'folder.open' %></span>
+            <span class="close_text"><%= t 'folder.close' %></span>
+          <% end %>
+        </span>
+      </div>
+      <div class="card-footer">
         <%= link_to t('show'),
                     admin_communication_website_menu_item_path(website_id: item.website.id, menu_id: item.menu.id, id: item.id),
                     class: 'action ps-3' %>
@@ -26,13 +42,17 @@
                     class: 'action text-danger ps-3' %>
       </div>
     </div>
-    <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, item) %> ms-4" data-id="<%= item.id %>">
+    <ul class=" list-unstyled 
+                treeview__children 
+                js-treeview-children 
+                <%= 'js-treeview-sortable-container' if can?(:reorder, item) %>" 
+        data-id="<%= item.id %>">
       <li class="treeview__empty">
-        <div class="d-flex align-items-center treeview__label border-bottom p-1">
+        <div class="d-flex align-items-center treeview__label p-1">
           <span class="p-2 ps-0"><%= t('folder.empty') %></span>
         </div>
       </li>
-      <li class="treeview__loading border-bottom p-1"><%= t('loading') %></li>
+      <li class="treeview__loading p-1"><%= t('loading') %></li>
     </ul>
   </li>
 <% end %>

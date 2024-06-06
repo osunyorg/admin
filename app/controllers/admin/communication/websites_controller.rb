@@ -2,6 +2,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   has_scope :for_search_term
   has_scope :for_about_type
 
+  before_action :set_feature_nav, only: [:edit, :update]
+
   def index
     @websites = apply_scopes(@websites).ordered.page(params[:page]).per(24)
     breadcrumb
@@ -46,7 +48,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def edit
     breadcrumb
-    add_breadcrumb t('edit')
+    add_breadcrumb t('admin.subnav.settings')
   end
 
   def create
@@ -75,6 +77,10 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   protected
+
+  def set_feature_nav
+    @feature_nav = 'navigation/admin/communication/website/settings'
+  end
 
   def website_params
     attribute_names = [

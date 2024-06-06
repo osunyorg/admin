@@ -69,6 +69,7 @@ class University::Person < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithBlobs
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter
@@ -79,7 +80,6 @@ class University::Person < ApplicationRecord
   include WithPersonalData
   include WithPicture
   include WithResearch
-  include WithTranslations
   include WithUniversity
 
   LIST_OF_ROLES = [
@@ -193,6 +193,10 @@ class University::Person < ApplicationRecord
 
   def to_s_alphabetical
     "#{last_name} #{first_name}"
+  end
+
+  def initials
+    "#{first_name.to_s.first}#{last_name.to_s.first}"
   end
 
   def roles

@@ -14,8 +14,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     @projects = apply_scopes(@projects).for_language(current_website_language)
                                      .ordered
                                      .page(params[:page])
-    @root_categories = categories.root
-    @categories_class = Communication::Website::Portfolio::Category
+    @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb
   end
 
@@ -96,7 +95,11 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(current_user, @website).list
+    @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(
+        current_user, 
+        @website, 
+        current_website_language
+      ).list
   end
 
   def project_params
@@ -104,6 +107,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     .permit(
       :title, :meta_description, :summary, :published, :slug, :year,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :shared_image, :shared_image_delete,
       category_ids: []
     )
     .merge(

@@ -42,15 +42,16 @@
 class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
+  include Translatable
   include Sluggable # We override slug_unavailable? method
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithPosition
-  include WithTranslations
   include WithTree
   include WithUniversity
 

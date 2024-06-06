@@ -11,6 +11,16 @@ class ApplicationController < ActionController::Base
     add_breadcrumb t('home'), root_path
   end
 
+  def background_tasks_count
+    @background_tasks_count ||= GoodJob::Job.where(finished_at: nil).count
+  end
+  helper_method :background_tasks_count
+
+  def current_subnav_context
+    nil
+  end
+  helper_method :current_subnav_context
+
   protected
 
   def render_as_plain_text

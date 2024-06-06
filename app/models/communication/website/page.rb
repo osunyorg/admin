@@ -54,9 +54,12 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
+  include Translatable
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs
@@ -66,7 +69,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithType # WithType can set default publication status, so must be included before WithPublication
   include WithPublication
   include WithPosition # Scope :ordered must override WithPublication
-  include WithTranslations
   include WithTree
   include WithPath # Must be included after Sluggable. WithPath overwrites the git_path method defined in WithWebsites
   include WithUniversity
@@ -87,6 +89,8 @@ class Communication::Website::Page < ApplicationRecord
   has_many   :translations,
              class_name: 'Communication::Website::Page',
              foreign_key: :original_id
+
+  after_save :touch_elements_if_special_page_in_hierarchy
 
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
@@ -192,7 +196,10 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [
+      featured_image&.blob_id,
+      shared_image&.blob_id
+    ]
   end
 
   def inherited_blob_ids
@@ -201,5 +208,16 @@ class Communication::Website::Page < ApplicationRecord
 
   def abouts_with_page_block
     website.blocks.pages.collect(&:about)
+  end
+
+  def touch_elements_if_special_page_in_hierarchy
+    # We do not call touch as we don't want to trigger the sync on the connected objects
+    descendants_and_self.each do |page|
+      if page.type == 'Communication::Website::Page::Person'
+        website.connected_people.update_all(updated_at: Time.zone.now)
+      elsif page.type == 'Communication::Website::Page::Organization'
+        website.connected_organizations.update_all(updated_at: Time.zone.now)
+      end
+    end
   end
 end

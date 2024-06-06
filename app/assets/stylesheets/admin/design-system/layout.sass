@@ -1,0 +1,13 @@
+body
+    background-color: $color-bg
+
+.container-fluid
+    padding-left: var(--bs-gutter-x)
+    padding-right: var(--bs-gutter-x)
+    @media (min-width: 768px)
+        #{--bs-gutter-x}: 4rem
+
+main
+    min-height: 70vh
+    padding-bottom: pxToRem(100)
+    position: relative

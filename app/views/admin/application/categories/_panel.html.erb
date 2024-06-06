@@ -12,7 +12,12 @@ order_path = "reorder_admin_#{categories_class_path}_path"
 %>
 <% if visible %>
   <%= osuny_panel title, action: action do %>
-    <ul class="list-unstyled treeview treeview--sortable js-treeview js-treeview-sortable js-treeview-sortable-container"
+    <ul class=" list-unstyled 
+                treeview 
+                treeview--sortable 
+                js-treeview 
+                js-treeview-sortable 
+                js-treeview-sortable-container"
         data-id=""
         data-sort-url="<%= public_send order_path %>">
       <%= render 'admin/application/categories/treebranch',

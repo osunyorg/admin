@@ -11,22 +11,20 @@
   <%= render 'admin/application/favorites/widget', about: @extranet %>
 <% end %>
 
-<%= render 'admin/communication/extranets/sidebar' do %>
-  <div class="row">
-    <% Communication::Extranet::FEATURES.each do |feature| %>
-      <%
-      property = "feature_#{feature}"
-      active = @extranet.has_feature? feature
-      next unless active
-      %>
-      <div class="col-lg-3">
-        <%= osuny_panel Communication::Extranet.human_attribute_name property do %>
-          <%= link_to t('show'), [:admin, @extranet, feature], class: 'stretched-link' %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<div class="row">
+  <% Communication::Extranet::FEATURES.each do |feature| %>
+    <%
+    property = "feature_#{feature}"
+    active = @extranet.has_feature? feature
+    next unless active
+    %>
+    <div class="col-lg-3">
+      <%= osuny_panel Communication::Extranet.human_attribute_name property do %>
+        <%= link_to t('show'), [:admin, @extranet, feature], class: 'stretched-link' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @extranet %>

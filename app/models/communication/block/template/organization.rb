@@ -21,7 +21,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   end
 
   def dependencies
-    organizations
+    selected_elements
   end
 
   def category

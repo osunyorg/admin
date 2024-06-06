@@ -4,11 +4,17 @@
       <%= render 'logo' %>
     </a>
     <% if user_signed_in? %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle menu">
+      <button class="navbar-toggler" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#menu" 
+              aria-controls="menu" 
+              aria-expanded="false" 
+              aria-label="Toggle menu">
         <%= t('extranet.menu') %> <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="menu">
-        <%= render_navigation context: :extranet %>
+        <%= render_navigation context: 'navigation/extranet' %>
         <ul class="navbar-nav navbar-nav__account">
           <li class="nav-item dropdown<%= ' active' if '/account'.in?(request.path) %>">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

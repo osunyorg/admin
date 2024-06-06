@@ -121,6 +121,8 @@ fr:
       zero: Aucun élément
       one: 1 élément
       other: "%{count} éléments"
+    footer:
+      signature: Osuny, un commun numérique d’intérêt général
     i18n:
       in: en %{lang}
       switch_to: basculer en %{choices}
@@ -133,10 +135,14 @@ fr:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Meta description
     pending_tasks:
-      label: Tâches en cours de traitement
-      hint: L'exécution de ces tâches contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être. Cela peut générer un délai avant que vos modifications ne soient visibles.
+      tasks: Tâches en cours de traitement
+      text_html: "Osuny vous accompagne dans la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites internets."
+      what_is_it: Qu'est-ce que c'est ?
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     seo: SEO
+    subnav:
+      settings: Réglages
+      summary: Résumé
     successfully_created_html: "<i>%{model}</i> a bien été créé(e)."
     successfully_destroyed_html: "<i>%{model}</i> a bien été détruit(e)."
     successfully_duplicated_html: "<i>%{model}</i> a bien été dupliqué(e)."
@@ -320,6 +326,8 @@ fr:
   remove: Retirer
   reset: Réinitialiser
   save: Enregistrer
+  shared_image:
+    title: Image de partage
   search: Rechercher
   select_language: Sélectionnez une langue
   seo: SEO
@@ -374,8 +382,8 @@ fr:
   validate: Valider
   views:
     pagination:
-      first: "&laquo; Premier"
-      last: "Dernier &raquo;"
-      previous: "&lsaquo; Précédent"
-      next: "Suivant &rsaquo;"
+      first: "Premier"
+      last: "Dernier"
+      previous: "Précédent"
+      next: "Suivant"
       truncate: "&hellip;"

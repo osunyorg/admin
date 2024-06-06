@@ -5,52 +5,38 @@
   <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
 <% end %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <%
-  action = create_link Communication::Website::Post
-  action += link_to t('communication.website.posts.new_curation'),
-                    new_admin_communication_website_post_curation_path(website_id: @website.id),
-                    class: button_classes('ms-2 btn-light') if can?(:create, Communication::Website::Post)
-  %>
-  <%= osuny_panel Communication::Website::Post.model_name.human(count: 2), action: action do %>
-    <div data-batch-selectable class="mb-5">
-      <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
-      <%= form_tag publish_batch_admin_communication_website_posts_path do %>
-        <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
-        <%= paginate @posts, theme: 'bootstrap-5' %>
-        <div>
-          <div data-batch-selectable-role="actions-container">
-            <div class="d-flex align-items-center">
-              <div class="col-auto me-3">
-                <%= t('batch_selectable.title') %>
-              </div>
-              <div class="col-auto me-3">
-                <select name="published" class="form-select">
-                  <option value="false"><%= t('communication.website.posts.unpublished') %></option>
-                  <option value="true"><%= t('communication.website.posts.published') %></option>
-                </select>
-              </div>
-              <div class="col-auto me-3">
-                <%= submit_tag t("save"), class: "btn btn-primary" %>
-              </div>
+<%
+action = create_link Communication::Website::Post
+action += link_to t('communication.website.posts.new_curation'),
+                  new_admin_communication_website_post_curation_path(website_id: @website.id),
+                  class: button_classes('ms-2 btn-light') if can?(:create, Communication::Website::Post)
+%>
+<%= osuny_panel Communication::Website::Post.model_name.human(count: 2), action: action do %>
+  <div data-batch-selectable class="mb-5">
+    <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
+    <%= form_tag publish_batch_admin_communication_website_posts_path do %>
+      <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
+      <%= paginate @posts %>
+      <div>
+        <div data-batch-selectable-role="actions-container">
+          <div class="d-flex align-items-center">
+            <div class="col-auto me-3">
+              <%= t('batch_selectable.title') %>
+            </div>
+            <div class="col-auto me-3">
+              <select name="published" class="form-select">
+                <option value="false"><%= t('communication.website.posts.unpublished') %></option>
+                <option value="true"><%= t('communication.website.posts.published') %></option>
+              </select>
+            </div>
+            <div class="col-auto me-3">
+              <%= submit_tag t("save"), class: "btn btn-primary" %>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
-  <% end %>
-
-  <%= render 'admin/application/categories/panel', 
-              root_categories: @root_categories, 
-              categories_class: @categories_class %>
-
-  <% if @authors.any? %>
-    <%= osuny_panel t('communication.authors', count: 2) do %>
-      <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
-      <% if @authors.total_pages > 1 %>
-        <%= paginate @authors, theme: 'bootstrap-5', param_name: :authors_page %>
-      <% end %>
+      </div>
     <% end %>
-  <% end %>
-
+  </div>
 <% end %>
+
+<%= render 'admin/communication/websites/language_switcher' %>

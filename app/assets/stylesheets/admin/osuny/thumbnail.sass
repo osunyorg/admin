@@ -1,0 +1,22 @@
+.osuny__thumbnail
+    align-items: center
+    aspect-ratio: 1
+    background: $color-bg-soft
+    display: flex
+    justify-content: center
+    max-height: 100px
+    max-width: 100px
+    overflow: hidden
+    @include media-breakpoint-down(md)
+        display: none
+    &__initials
+        color: #CCCCCC
+        display: block
+        font-family: $font-family-serif
+        font-size: pxToRem(40)
+        user-select: none
+    &--large
+        max-height: 300px
+        max-width: 300px
+    &--uncropped
+        padding: 20%

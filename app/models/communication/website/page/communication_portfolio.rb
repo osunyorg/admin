@@ -15,7 +15,7 @@ class Communication::Website::Page::CommunicationPortfolio < Communication::Webs
   def dependencies
     super +
     [website.config_default_languages] +
-    website.projects
+    website.projects.where(language_id: language_id)
   end
 
   def git_path_relative

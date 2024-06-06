@@ -2,22 +2,22 @@
     font-display: swap
     font-family: 'Basier Square'
     font-style: normal
-    font-weight: 400
-    src: asset-url("Basier-Square/basiersquare-regular-webfont.woff2") format("woff2"), asset-url("Basier-Square/basiersquare-regular-webfont.woff") format("woff")
+    font-weight: normal
+    src: asset-url("basier-square/basiersquare-regular-webfont.woff2") format("woff2"), asset-url("basier-square/basiersquare-regular-webfont.woff") format("woff")
 
 @font-face
     font-display: swap
     font-family: 'Basier Square'
     font-style: normal
-    font-weight: 700
-    src: asset-url("Basier-Square/basiersquare-semibold-webfont.woff2") format("woff2"), asset-url("Basier-Square/basiersquare-semibold-webfont.woff") format("woff")
+    font-weight: bold
+    src: asset-url("basier-square/basiersquare-semibold-webfont.woff2") format("woff2"), asset-url("basier-square/basiersquare-semibold-webfont.woff") format("woff")
 
 h1
     margin-top: 20px
     font-weight: 700
     line-height: 125%
     @include media-breakpoint-down(md)
-        font-size: px2rem(30)
+        font-size: pxToRem(30)
     a
         color: $active-color
         transition: text-decoration 0.5s, color 0.5s

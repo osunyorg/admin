@@ -1,26 +1,24 @@
 <% content_for :title, @category %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <div class="row">
-    <div class="col-lg-8">
-      <%= render 'admin/application/summary/show', about: @category %>
-      <%= render 'admin/application/i18n/widget', about: @category %>
-    </div>
-    <div class="col-lg-4">
-      <%= render 'admin/application/featured_image/show', about: @category %>
-      <%= render 'admin/application/meta_description/show', about: @category %>
-    </div>
+<div class="row">
+  <div class="col-lg-8">
+    <%= render 'admin/application/summary/show', about: @category %>
+    <%= render 'admin/application/i18n/widget', about: @category %>
   </div>
-  <%= render 'admin/communication/blocks/content/editor', about: @category %>
-  <% if @projects.total_count > 0 %>
-    <%
-    title = Communication::Website::Portfolio::Project.model_name.human(count: 2)
-    subtitle = "#{@projects.total_count} #{Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase }"
-    %>
-    <%= osuny_panel title, subtitle: subtitle do %>
-      <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects, hide_category: true %>
-      <%= paginate @projects, theme: 'bootstrap-5' %>
-    <% end %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/featured_image/show', about: @category %>
+    <%= render 'admin/application/meta_description/show', about: @category %>
+  </div>
+</div>
+<%= render 'admin/communication/blocks/content/editor', about: @category %>
+<% if @projects.total_count > 0 %>
+  <%
+  title = Communication::Website::Portfolio::Project.model_name.human(count: 2)
+  subtitle = "#{@projects.total_count} #{Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase }"
+  %>
+  <%= osuny_panel title, subtitle: subtitle do %>
+    <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects, hide_category: true %>
+    <%= paginate @projects %>
   <% end %>
 <% end %>
 

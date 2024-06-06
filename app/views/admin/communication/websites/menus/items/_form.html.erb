@@ -15,7 +15,7 @@
       <%= Communication::Website::Menu::Item.human_attribute_name('kind') %>
       <abbr title="required">*</abbr>
     </label>
-    <div class="row pure__row--small">
+    <div class="row g-3 mb-4">
       <% @website.menu_item_kinds.keys.each do |kind| %>
         <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
           <div class="card kind" data-kind="<%= kind %>">

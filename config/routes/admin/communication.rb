@@ -17,7 +17,12 @@ namespace :communication do
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'
     resources :dependencies, controller: 'websites/dependencies', only: :index
-    resources :connections, controller: 'websites/connections', only: [:index, :show]
+    resources :connections, controller: 'websites/connections', only: [:index, :show] do
+      collection do
+        get 'indirect_object/:type' => 'websites/connections#indirect_object', as: :indirect_object
+        get 'direct_source/:type' => 'websites/connections#direct_source', as: :direct_source
+      end
+    end
     resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
     resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
       collection do
@@ -77,6 +82,7 @@ namespace :communication do
           get :static
         end
       end
+      root to: '/admin/communication/websites/agenda/events#index'
     end
     namespace :portfolio, path: '/:lang/portfolio' do
       resources :projects, controller: '/admin/communication/websites/portfolio/projects' do

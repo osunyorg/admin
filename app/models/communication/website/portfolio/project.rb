@@ -35,15 +35,17 @@
 class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable
+  include Translatable
   include WithAccessibility
   include WithBlobs
   include WithDuplication
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithTranslations
   include WithUniversity
 
   has_and_belongs_to_many :categories,
@@ -119,7 +121,10 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [
+      featured_image&.blob_id,
+      shared_image&.blob_id
+    ]
   end
 
   def abouts_with_projects_block

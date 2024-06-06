@@ -45,9 +45,12 @@
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable
+  include Translatable
   include WithAccessibility
   include WithBlobs
   include WithCal
@@ -55,7 +58,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithFeaturedImage
   include WithMenuItemTarget
   include WithTime
-  include WithTranslations
   include WithTree
   include WithUniversity
 
@@ -139,7 +141,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [
+      featured_image&.blob_id,
+      shared_image&.blob_id
+    ]
   end
 
   def abouts_with_agenda_block

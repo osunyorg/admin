@@ -14,8 +14,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @events = apply_scopes(@events).for_language(current_website_language)
                                   .ordered_desc
                                   .page(params[:page])
-    @root_categories = categories.root
-    @categories_class = Communication::Website::Agenda::Category
+    @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
 
@@ -98,7 +97,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(current_user, @website).list
+    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(
+        current_user, 
+        @website, 
+        current_website_language
+      ).list
   end
 
   def event_params
@@ -106,6 +109,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     .permit(
       :title, :subtitle, :meta_description, :summary, :published, :slug,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :shared_image, :shared_image_delete,
       :from_day, :from_hour, :to_day, :to_hour, :time_zone,
       category_ids: []
     )

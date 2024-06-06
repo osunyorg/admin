@@ -1,4 +1,6 @@
+<% version = 1 %>
 ---
+<% cache [@about, @website.id, version] do %>
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/breadcrumbs' %>
@@ -53,6 +55,7 @@ logo: "<%= @about.logo.blob.id %>"
 logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
 <%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/shared_image/static' %>
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/connections/backlinks' %>
 <% if @about.categories.any? %>
@@ -65,3 +68,4 @@ organizations_categories:
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
 <%= prepare_html_for_static @about.text %>
+<% end %>

@@ -41,11 +41,11 @@ class Research::Journal::Volume < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
+  include Translatable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
   include WithPublication
-  include WithTranslations
   include WithUniversity
 
   has_summernote :text

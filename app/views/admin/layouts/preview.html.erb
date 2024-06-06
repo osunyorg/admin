@@ -7,7 +7,7 @@
     <% if @website %>
       <link rel="stylesheet" media="all" href="<%= admin_communication_website_style_path @website.id %>" />
     <% else %>
-      <%= stylesheet_link_tag 'admin/pure', media: 'all' %>
+      <%= stylesheet_link_tag 'admin', media: 'all' %>
     <% end %>
     <style>
     /*
@@ -81,7 +81,7 @@
             <% if @summary.present? %>
               <hgroup>
                 <h1><%= @title %></h1>
-                <p class="lead"><%= @summary %></p>
+                <p class="lead"><%= sanitize @summary %></p>
               </hgroup>          
             <% else %>
               <h1><%= @title %></h1>

@@ -6,6 +6,10 @@ class Admin::Research::Journals::ApplicationController < Admin::Research::Applic
 
   protected
 
+  def current_subnav_context
+    'navigation/admin/research/journal' if @journal && @journal.persisted?
+  end
+
   def breadcrumb
     super
     add_breadcrumb Research::Journal.model_name.human(count: 2), admin_research_journals_path

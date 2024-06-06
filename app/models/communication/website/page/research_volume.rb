@@ -4,11 +4,10 @@ class Communication::Website::Page::ResearchVolume < Communication::Website::Pag
     website.about && website.about&.respond_to?(:volumes)
   end
 
-  # TODO: Scope .where(language_id: language_id) when volumes are translatable
   def dependencies
     super +
     [website.config_default_languages] +
-    website.research_volumes
+    website.research_volumes.where(language_id: language_id)
   end
 
   def git_path_relative

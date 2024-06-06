@@ -26,9 +26,9 @@ class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
   include Sanitizable
+  include Translatable
   include WebsitesLinkable
   include WithGitFiles
-  include WithTranslations
   include WithUniversity
 
   has_many  :communication_websites,

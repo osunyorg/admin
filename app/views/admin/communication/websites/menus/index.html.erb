@@ -5,9 +5,9 @@
   <%= Communication::Website::Menu.model_name.human(count: @menus.count).downcase %>
 <% end %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <% osuny_panel  Communication::Website::Menu.model_name.human(count: 2), 
-                  action: create_link(Communication::Website::Menu) do %>
-    <%= render 'admin/communication/websites/menus/list', menus: @menus %>
-  <% end %>
+<%= osuny_panel  Communication::Website::Menu.model_name.human(count: 2), 
+                action: create_link(Communication::Website::Menu) do %>
+  <%= render 'admin/communication/websites/menus/list', menus: @menus %>
 <% end %>
+
+<%= render 'admin/communication/websites/language_switcher' %>

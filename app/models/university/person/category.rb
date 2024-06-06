@@ -26,9 +26,11 @@
 class University::Person::Category < ApplicationRecord
   include AsIndirectObject
   include Contentful
+  include Initials
   include Permalinkable
   include Sluggable
-  include WithTranslations
+  include Translatable
+  include WithGitFiles
   include WithUniversity
 
   has_and_belongs_to_many :people,
@@ -38,6 +40,18 @@ class University::Person::Category < ApplicationRecord
   validates :name, presence: true
 
   scope :ordered, -> { order(:name) }
+
+  def git_path(website)
+    git_path_content_prefix(website) + git_path_relative
+  end
+
+  def git_path_relative
+    "persons_categories/#{slug}/_index.html"
+  end
+
+  def template_static
+    "admin/university/people/categories/static"
+  end
 
   def to_s
     "#{name}"
