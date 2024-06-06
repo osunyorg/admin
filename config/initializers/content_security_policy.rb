@@ -8,12 +8,14 @@ Rails.application.configure do
 
   style_urls = %w(
     https://example.osuny.org/assets/css/
+    https://languagetoolplus.com
   )
   img_urls = %w()
   script_urls = %w(
     https://example.osuny.org/js/
     https://plausible.io
     https://d2wy8f7a9ursnm.cloudfront.net/v7/
+    https://languagetoolplus.com
   )
   script_urls << "https://cdn.jsdelivr.net/npm/summernote@#{SummernoteRails::Rails::VERSION.split('.').take(3).join('.')}/dist/lang/"
   
