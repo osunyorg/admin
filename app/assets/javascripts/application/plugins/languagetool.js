@@ -1,3 +1,4 @@
+/*global LTAssistant */
 document.initLanguageTool = function () {
     'use strict';
     var contentApp = document.getElementById('app'),
@@ -11,6 +12,6 @@ document.initLanguageTool = function () {
                 premium: true
             },
             apiServerUrl: 'https://api.languagetoolplus.com/v2'
-        }
+        };
     new LTAssistant(options);
 };
