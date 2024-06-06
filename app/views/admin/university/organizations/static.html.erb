@@ -26,11 +26,11 @@ kind:
 ].each do |key|
   value = @about.public_send key
 %>
-<%= key %>: >
+<%= key %>: >-
   <%= prepare_text_for_static value %>
 <% end %>
 <% # url is a reserved keyword for Hugo %>
-website: >
+website: >-
   <%= prepare_text_for_static @about.url %>
 contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
