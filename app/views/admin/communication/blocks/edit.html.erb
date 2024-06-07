@@ -2,7 +2,11 @@
 <% content_for :title_right do %>
   <%= t "enums.communication.block.template_kind.#{@block.template_kind}" %>
 <% end %>
-<div id="app" v-cloak>
+<div  id="app" 
+      v-cloak 
+      data-languagetool-locale="<%= I18n.locale %>" 
+      data-languagetool-email="<%= ENV['LANGUAGE_TOOL_USERNAME'] %>"
+      data-languagetool-token="<%= ENV['LANGUAGE_TOOL_ADD_ON_TOKEN'] %>">
   <div class="spinner-border text-primary" role="status">
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
@@ -199,6 +203,8 @@
       this.handleSummernotes();
       // Use Timeout to prevent display issues
       setTimeout(this.handleCodemirrors.bind(this), 0);
+      // LanguageTool
+      document.initLanguageTool();
     }
   });
 
