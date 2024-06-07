@@ -1,19 +1,19 @@
-<% 
+<%
 depth ||= 2
-indentation = ' ' * depth 
+indentation = ' ' * depth
 %>
 <% programs.ordered_by_name.each do |program| %>
-<%= indentation %>- label: >
+<%= indentation %>- label: >-
 <%= indentation %>    <%= program.to_s %>
 <%= indentation %>  path: "<%= program.current_permalink_in_website(@website)&.path %>"
 <%= indentation %>  slug: "<%= program.path %>"
-<% 
+<%
 children = program.children.where(diploma: diploma)
 # Limit to a global list of programs, for example on a location
 children = children.where(id: all_programs) if local_assigns[:all_programs]
 %>
 <% if children.any? %>
-<%= indentation %>  children: 
+<%= indentation %>  children:
 <%= render 'admin/education/programs/static_list', diploma: diploma, programs: children, depth: depth + 4 %>
 <% end %>
 <% end %>

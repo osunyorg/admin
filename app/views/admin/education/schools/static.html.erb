@@ -14,12 +14,12 @@ administrators:
 <% end %>
 administrators_description:
 <% administrator_involvements.each do |involvement| %>
-  "<%= involvement.person.slug %>": >
+  "<%= involvement.person.slug %>": >-
     <%= involvement.target.to_s %>
 <% end %>
 roles:
 <% @about.university_roles.ordered.each do |role| %>
-  - title: >
+  - title: >-
       <%= prepare_text_for_static role.to_s %>
     persons:
     <% role.involvements.includes(:person).ordered.each do |involvement| %>
