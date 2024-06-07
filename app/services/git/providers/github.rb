@@ -107,15 +107,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   def git_sha(path)
     return if path.nil?
     # Try to find in stored tree to avoid multiple queries
-    return tree_item_at_path(path)&.dig(:sha)
-    begin
-      # The fast way, with no query, does not work.
-      # Let's query the API.
-      content = client.content repository, path: path
-      return content[:sha]
-    rescue
-    end
-    nil
+    tree_item_at_path(path)&.dig(:sha)
   end
 
   def valid?

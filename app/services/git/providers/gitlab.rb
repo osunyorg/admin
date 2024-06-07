@@ -61,6 +61,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   # https://gitlab.com/gitlab-org/gitlab/-/issues/23504
+  # TODO : Il faudrait, comme sur GitHub, stocker le tree pour éviter N requêtes pour N objets.
   def git_sha(path)
     begin
       file = find path
