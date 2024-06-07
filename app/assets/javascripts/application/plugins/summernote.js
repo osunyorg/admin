@@ -4,24 +4,23 @@ window.summernoteManager = {
     noteButton: function (context) {
         'use strict';
         var ui = $.summernote.ui,
-            button;
-        button = ui.button({
-            contents: '<i class="fas fa-note-sticky"/>',
-            tooltip: 'Note (beta)',
-            className: 'note-btn-note',
-            click: function () {
-                var text = context.invoke('editor.getSelectedText'),
-                    // TODO find if it's a note or not
-                    isANote = false,
-                    note;
-                if (isANote) {
-                    // TODO remove note
-                } else {
-                    note = '<note>' + text + '</note>';
-                    context.invoke('editor.pasteHTML', note);
+            button = ui.button({
+                contents: '<i class="fas fa-note-sticky"/>',
+                tooltip: 'Note (beta)',
+                className: 'note-btn-note',
+                click: function () {
+                    var text = context.invoke('editor.getSelectedText'),
+                        // TODO find if it's a note or not
+                        isANote = false,
+                        note;
+                    if (isANote) {
+                        // TODO remove note
+                    } else {
+                        note = '<note>' + text + '</note>';
+                        context.invoke('editor.pasteHTML', note);
+                    }
                 }
-            }
-        });
+            });
         // return button as jquery object
         return button.render();
     },
@@ -213,13 +212,6 @@ window.summernoteManager = {
                 this.sanitizeElementAttributes(child, allowedAttributes);
             }
         }
-    },
-
-    invoke: function () {
-        'use strict';
-        return {
-            init: this.init.bind(this)
-        };
     }
 };
 
