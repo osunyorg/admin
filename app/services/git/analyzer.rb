@@ -72,7 +72,7 @@ class Git::Analyzer
   def synchronized_with_git?
     exists_on_git? &&                                           # File exists
     git_file.previous_path == git_file.path &&                  # at the same place
-    repository.git_sha(git_file.path) == git_file.previous_sha  # with the same content
+    repository.git_sha(git_file.path) == previous_sha  # with the same content
   end
 
 end

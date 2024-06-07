@@ -57,7 +57,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def previous_sha(git_file)
-    git_sha(git_file.previous_path) || git_file.previous_sha
+    git_sha(git_file.previous_path)
   end
 
   def computed_sha(string)
@@ -65,6 +65,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   # https://gitlab.com/gitlab-org/gitlab/-/issues/23504
+  # TODO : Il faudrait, comme sur GitHub, stocker le tree pour éviter N requêtes pour N objets.
   def git_sha(path)
     begin
       file = find path
